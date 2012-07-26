@@ -1,1 +1,1 @@
-## The CICM Library.
+## The CICM spatialisation Library.
