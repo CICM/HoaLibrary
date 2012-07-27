@@ -76,8 +76,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 507.0, 300.0, 54.0, 20.0 ],
-					"text" : "Volume"
+					"patching_rect" : [ 507.0, 300.0, 78.0, 20.0 ],
+					"text" : "delayTime"
 				}
 
 			}
@@ -127,7 +127,7 @@
 					"fontsize" : 11.595187,
 					"id" : "obj-13",
 					"maxclass" : "flonum",
-					"maximum" : 1.0,
+					"maximum" : 5000.0,
 					"minimum" : 0.0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
@@ -216,11 +216,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-57",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 75.0, 330.0, 247.875, 20.0 ],
-					"text" : "hoa.ordermixer~ 7"
+					"text" : "hoa.predelay~ 7"
 				}
 
 			}
@@ -1949,7 +1949,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 497.75, 6.0, 315.0, 33.0 ],
-					"text" : "hoa.ordermixer~ by Julien Colafrancesco & Pierre Guillot\n© 2012 CICM / Universite Paris 8"
+					"text" : "hoa.predelay~ by Julien Colafrancesco & Pierre Guillot\n© 2012 CICM / Universite Paris 8"
 				}
 
 			}
@@ -1964,7 +1964,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 6.0, 485.0, 30.0 ],
-					"text" : "hoa.ordermixer~",
+					"text" : "hoa.predelay~",
 					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
 					"varname" : "autohelp_top_title"
 				}
@@ -1980,7 +1980,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 6.0, 36.0, 503.0, 21.0 ],
-					"text" : "A high order ambisonic order mixer",
+					"text" : "A high order ambisonic predelay",
 					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
 					"varname" : "autohelp_top_digest"
 				}
@@ -2023,7 +2023,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-57", 0 ],
+					"destination" : [ "obj-57", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-18", 0 ]
@@ -2032,7 +2032,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-57", 0 ],
+					"destination" : [ "obj-57", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-5", 0 ]
@@ -2374,15 +2374,15 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.ordermixer~.maxpat",
-				"bootpath" : "\\Users\\Pierre\\Documents\\GitHub\\CICM-Library\\hoa.library\\hoa.ordermixer~",
+				"name" : "hoa.predelay~.maxpat",
+				"bootpath" : "\\Users\\Pierre\\Documents\\GitHub\\CICM-Library\\hoa.library\\hoa.predelay~",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.mixer.maxpat",
-				"bootpath" : "\\Users\\Pierre\\Documents\\GitHub\\CICM-Library\\hoa.library\\hoa.ordermixer~",
+				"name" : "hoa.pdelay.maxpat",
+				"bootpath" : "\\Users\\Pierre\\Documents\\GitHub\\CICM-Library\\hoa.library\\hoa.predelay~",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
