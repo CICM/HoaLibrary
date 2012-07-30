@@ -23,15 +23,11 @@
 class AmbisonicEncode {
 	
 private:
-	int			m_order;
-	double		sourceTheta;
-	double		*ambiCoeffs;
-	double		*sourceAmbiCoeffs;
+	int m_order;
+	double sourceTheta;
+	std::vector<double>* ambiCoeffs;
+	std::vector<double>* sourceAmbiCoeffs;
 
-
-	
-
-	
 public:
 	AmbisonicEncode(int order);
 	

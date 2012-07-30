@@ -27,8 +27,8 @@ extern "C" {
 
 typedef struct _HoaEncode 
 {
-	t_pxobject					ob;			
-	AmbisonicEncode*			AmbiEncoder;
+	t_pxobject					f_ob;			
+	AmbisonicEncode				*f_ambiEncoder;
 	
 	int							f_n;
 	int							f_sr;
@@ -65,7 +65,7 @@ int main(void)
 
 	t_class *c;
 	
-	c = class_new("hoa.encoder~", (method)HoaEncode_new, (method)HoaEncode_free, (long)sizeof(t_HoaEncode), 0L, A_GIMME, 0);
+	c = class_new("hoa.encoder~", (method)HoaEncode_new, (method)dsp_free, (long)sizeof(t_HoaEncode), 0L, A_GIMME, 0);
 	
 	class_addmethod(c, (method)HoaEncode_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)HoaEncode_int,		"int",		A_LONG, 0);
@@ -98,7 +98,7 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_inputNumber = x->f_order + 2;
 		x->f_outputNumber = x->f_harmonics;
 		
-		x->AmbiEncoder = new AmbisonicEncode(x->f_order);
+		x->f_ambiEncoder = new AmbisonicEncode(x->f_order);
 		
 		dsp_setup((t_pxobject *)x, 2);	
 		for (int i = 0; i < x->f_outputNumber; i++) 
@@ -110,12 +110,12 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaEncode_float(t_HoaEncode *x, double f)
 {
-	x->AmbiEncoder->computeCoefs(f);
+	x->f_ambiEncoder->computeCoefs(f);
 }
 
 void HoaEncode_int(t_HoaEncode *x, long n)
 {
-	x->AmbiEncoder->computeCoefs(n);
+	x->f_ambiEncoder->computeCoefs(n);
 }
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -136,7 +136,7 @@ void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long num
 	{
 		for (int j = 0; j < x->f_inputNumber - 1; j++)
 		
-		x->f_computedOuput = x->AmbiEncoder->process(ins[0][i], ins[1][i]);
+		x->f_computedOuput = x->f_ambiEncoder->process(ins[0][i], ins[1][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
 			outs[j][i] = x->f_computedOuput[j];
@@ -147,7 +147,7 @@ void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, lo
 {
 	for (int i = 0; i < sampleframes; i++) 
 	{
-		x->f_computedOuput = x->AmbiEncoder->process(ins[0][i]);
+		x->f_computedOuput = x->f_ambiEncoder->process(ins[0][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
 			outs[j][i] = x->f_computedOuput[j];
@@ -163,7 +163,7 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 	x->f_n	= (int)sp[0]->s_n;
 	x->f_sr	= (int)sp[0]->s_sr;
 	
-	pointer_count = 2 + x->f_outputNumber + 2;
+	pointer_count = x->f_outputNumber + 4;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -173,7 +173,6 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 	sigvec[1] = (t_int *)sp[0]->s_n;
 	for(i = 2; i < pointer_count; i++)
 		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-
 	if(count[1])
 		dsp_addv(HoaEncode_perform, pointer_count, (void **)sigvec);
 	else
@@ -190,13 +189,13 @@ t_int *HoaEncode_perform(t_int *w)
 	
 	for (int i = 0; i < n; i++) 
 	{		
-		x->f_computedOuput = x->AmbiEncoder->process(signals[0][i], signals[1][i]);
+		x->f_computedOuput = x->f_ambiEncoder->process(signals[0][i], signals[1][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
 			signals[j+2][i] = x->f_computedOuput[j];
 	}
 	
-	return (w + x->f_outputNumber + 2 + 3);
+	return (w + x->f_outputNumber + 5);
 }
 
 t_int *HoaEncode_performOffset(t_int *w)
@@ -207,21 +206,21 @@ t_int *HoaEncode_performOffset(t_int *w)
 	
 	for (int i = 0; i < n; i++) 
 	{		
-		x->f_computedOuput = x->AmbiEncoder->process(signals[0][i]);
+		x->f_computedOuput = x->f_ambiEncoder->process(signals[0][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
 			signals[j+2][i] = x->f_computedOuput[j];
 	}
 	
-	return (w + x->f_outputNumber + 2 + 3);
+	return (w + x->f_outputNumber + 5);
 }
 
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) 
 	{
-		if(a < x->f_inputNumber - 1)
-			sprintf(s,"(Signal) Order %i dependant signal", (int)a);
+		if(a == 0)
+			sprintf(s,"(Signal) Input signal");
 		else 
 			sprintf(s,"(Signal or float) Azimuth");
 	} 

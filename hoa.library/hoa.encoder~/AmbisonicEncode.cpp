@@ -12,7 +12,6 @@
 AmbisonicEncode::AmbisonicEncode(int order)
 {	
 	m_order = order;
-	ambiCoeffs = new double
 	ambiCoeffs = new std::vector<double>(order*2+1,0);
 	sourceAmbiCoeffs = new std::vector<double>(order*2+1,0);
 }

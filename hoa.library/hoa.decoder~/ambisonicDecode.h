@@ -40,7 +40,8 @@ private:
 public:
 	
 	ambisonicDecode(int channelNumber, int order);
-	std::vector<double>* process(const double* encodedSignals);
+	std::vector<double>* process();
+	void record(double harmonic, int index);
 
 };
 

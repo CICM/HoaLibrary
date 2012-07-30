@@ -55,18 +55,16 @@ m_order(order), m_channelNumber(channelNumber)
 	outputVector = new boost::numeric::ublas::matrix<double,row_major,std::vector<double> >(channelNumber,1);
 }
 
-std::vector<double>*  ambisonicDecode::process(const double* encodedSignals)
+std::vector<double>*  ambisonicDecode::process()
 {
-	for (int i = 0; i < 2*m_order+1; i++) 
-	{
-		(*sourceMatrix)(i,0) = encodedSignals[i];
-	}
-	
 	*outputVector = prod(*pseudoInvertedSpkrsMatrix, *sourceMatrix);
 	
 	//std::cout << *m << std::endl;
 	
 	return dynamic_cast<std::vector<double>* > (&(outputVector->data()));
-	
-	
+}
+
+void ambisonicDecode::record(double harmonic, int index)
+{
+	(*sourceMatrix)(index,0) = harmonic;
 }
