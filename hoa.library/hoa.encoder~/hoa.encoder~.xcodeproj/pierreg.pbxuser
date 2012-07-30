@@ -27,19 +27,29 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 365345314;
-			PBXWorkspaceStateSaveDate = 365345314;
+			PBXPerProjectTemplateStateSaveDate = 365345518;
+			PBXWorkspaceStateSaveDate = 365345518;
 		};
 		perUserProjectItems = {
+			0E64A4E415C6BAF400F85BF4 /* PBXTextBookmark */ = 0E64A4E415C6BAF400F85BF4 /* PBXTextBookmark */;
 			0E91E45B15BEC76A00452428 /* PBXTextBookmark */ = 0E91E45B15BEC76A00452428 /* PBXTextBookmark */;
 			0E96985515BEE79E00863F12 /* PBXTextBookmark */ = 0E96985515BEE79E00863F12 /* PBXTextBookmark */;
 			0E9765DA15C6B703002420D2 /* PBXTextBookmark */ = 0E9765DA15C6B703002420D2 /* PBXTextBookmark */;
-			0E9765DC15C6B703002420D2 /* PBXTextBookmark */ = 0E9765DC15C6B703002420D2 /* PBXTextBookmark */;
 			0E97660315C6BA2F002420D2 /* PBXTextBookmark */ = 0E97660315C6BA2F002420D2 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 0E91E3DF15BEAA7300452428 /* Source Control */;
 		userBuildSettings = {
 		};
+	};
+	0E64A4E415C6BAF400F85BF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22CF119A0EE9A8250054F513 /* hoa.encoder~.c */;
+		name = "hoa.encoder~.c: 63";
+		rLen = 4;
+		rLoc = 2071;
+		rType = 0;
+		vrLen = 890;
+		vrLoc = 3415;
 	};
 	0E91E3DF15BEAA7300452428 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -91,16 +101,6 @@
 		rType = 0;
 		vrLen = 1178;
 		vrLoc = 3957;
-	};
-	0E9765DC15C6B703002420D2 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 22CF119A0EE9A8250054F513 /* hoa.encoder~.c */;
-		name = "hoa.encoder~.c: 63";
-		rLen = 4;
-		rLoc = 2071;
-		rType = 0;
-		vrLen = 966;
-		vrLoc = 3415;
 	};
 	0E97660315C6BA2F002420D2 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
