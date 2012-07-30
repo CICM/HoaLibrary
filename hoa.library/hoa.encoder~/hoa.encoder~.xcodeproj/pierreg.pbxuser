@@ -1,0 +1,139 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Deployment;
+		activeTarget = 2FBBEAD608F335360078DB84 /* max-external */;
+		codeSenseManager = 0E91E3E015BEAA7300452428 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					993,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 365345314;
+			PBXWorkspaceStateSaveDate = 365345314;
+		};
+		perUserProjectItems = {
+			0E91E45B15BEC76A00452428 /* PBXTextBookmark */ = 0E91E45B15BEC76A00452428 /* PBXTextBookmark */;
+			0E96985515BEE79E00863F12 /* PBXTextBookmark */ = 0E96985515BEE79E00863F12 /* PBXTextBookmark */;
+			0E9765DA15C6B703002420D2 /* PBXTextBookmark */ = 0E9765DA15C6B703002420D2 /* PBXTextBookmark */;
+			0E9765DC15C6B703002420D2 /* PBXTextBookmark */ = 0E9765DC15C6B703002420D2 /* PBXTextBookmark */;
+			0E97660315C6BA2F002420D2 /* PBXTextBookmark */ = 0E97660315C6BA2F002420D2 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 0E91E3DF15BEAA7300452428 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	0E91E3DF15BEAA7300452428 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	0E91E3E015BEAA7300452428 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	0E91E45B15BEC76A00452428 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E0674E614DDA54E00C91AB7 /* AmbisonicEncode.h */;
+		name = "AmbisonicEncode.h: 40";
+		rLen = 0;
+		rLoc = 729;
+		rType = 0;
+		vrLen = 601;
+		vrLoc = 181;
+	};
+	0E96985415BEE79E00863F12 /* huygens~.c */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.c;
+		name = "huygens~.c";
+		path = "/Users/pierreg/Documents/SDKs/MaxSDK-5.1.7/examples/wfs/huygens~.c";
+		sourceTree = "<absolute>";
+	};
+	0E96985515BEE79E00863F12 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */;
+		name = "AmbisonicEncode.cpp: 18";
+		rLen = 0;
+		rLoc = 355;
+		rType = 0;
+		vrLen = 788;
+		vrLoc = 0;
+	};
+	0E9765DA15C6B703002420D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E96985415BEE79E00863F12 /* huygens~.c */;
+		name = "huygens~.c: 130";
+		rLen = 116;
+		rLoc = 4910;
+		rType = 0;
+		vrLen = 1178;
+		vrLoc = 3957;
+	};
+	0E9765DC15C6B703002420D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22CF119A0EE9A8250054F513 /* hoa.encoder~.c */;
+		name = "hoa.encoder~.c: 63";
+		rLen = 4;
+		rLoc = 2071;
+		rType = 0;
+		vrLen = 966;
+		vrLoc = 3415;
+	};
+	0E97660315C6BA2F002420D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 22CF119A0EE9A8250054F513 /* hoa.encoder~.c */;
+		name = "hoa.encoder~.c: 63";
+		rLen = 4;
+		rLoc = 2071;
+		rType = 0;
+		vrLen = 890;
+		vrLoc = 3415;
+	};
+	22CF119A0EE9A8250054F513 /* hoa.encoder~.c */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1188, 3211}}";
+			sepNavSelRange = "{2071, 4}";
+			sepNavVisRange = "{3415, 890}";
+		};
+	};
+	2FBBEAD608F335360078DB84 /* max-external */ = {
+		activeExec = 0;
+	};
+	4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 754}}";
+			sepNavSelRange = "{355, 0}";
+			sepNavVisRange = "{0, 788}";
+		};
+	};
+	4E0674E614DDA54E00C91AB7 /* AmbisonicEncode.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 598}}";
+			sepNavSelRange = "{729, 0}";
+			sepNavVisRange = "{181, 601}";
+		};
+	};
+}
