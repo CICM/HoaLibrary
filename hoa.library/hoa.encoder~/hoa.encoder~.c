@@ -29,7 +29,6 @@ typedef struct _HoaEncode
 {
 	t_pxobject					ob;			
 	AmbisonicEncode*			AmbiEncoder;
-	double						*f_vector;
 	
 	int							f_n;
 	int							f_sr;
@@ -38,6 +37,7 @@ typedef struct _HoaEncode
 	long						f_outputNumber;
 	long						f_order;
 	long						f_harmonics;
+	std::vector<double>			f_computedOuput;
 
 } t_HoaEncode;
 
@@ -94,13 +94,13 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 			x->f_order = atom_getlong(argv);
 		if(x->f_order < 1) x->f_order = 1;
 		x->f_harmonics = 2 * x->f_order + 1;
+		
 		x->f_inputNumber = x->f_order + 2;
 		x->f_outputNumber = x->f_harmonics;
 		
 		x->AmbiEncoder = new AmbisonicEncode(x->f_order);
-		x->f_vector = (double *)getbytes(x->f_inputNumber * sizeof(double));
 		
-		dsp_setup((t_pxobject *)x, x->f_inputNumber);	
+		dsp_setup((t_pxobject *)x, 2);	
 		for (int i = 0; i < x->f_outputNumber; i++) 
 			outlet_new(x, "signal");
 		
@@ -132,33 +132,25 @@ void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double sampl
 
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	std::vector<double> ComputedOuput;
-	
 	for (int i = 0; i < sampleframes; i++) 
 	{
 		for (int j = 0; j < x->f_inputNumber - 1; j++)
-			x->f_vector[j] = ins[j][i];
 		
-		ComputedOuput = x->AmbiEncoder->process(x->f_vector, ins[numins - 1][i]);
+		x->f_computedOuput = x->AmbiEncoder->process(ins[0][i], ins[1][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
-			outs[j][i] = ComputedOuput[j];
+			outs[j][i] = x->f_computedOuput[j];
 	}
 }
 
 void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	std::vector<double> ComputedOuput;
-	
 	for (int i = 0; i < sampleframes; i++) 
 	{
-		for (int j = 0; j < x->f_inputNumber - 1; j++)
-			x->f_vector[j] = ins[j][i];
-		
-		ComputedOuput = x->AmbiEncoder->process(x->f_vector);
+		x->f_computedOuput = x->AmbiEncoder->process(ins[0][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
-			outs[j][i] = ComputedOuput[j];
+			outs[j][i] = x->f_computedOuput[j];
 	}
 }
 
@@ -171,7 +163,7 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 	x->f_n	= (int)sp[0]->s_n;
 	x->f_sr	= (int)sp[0]->s_sr;
 	
-	pointer_count = x->f_inputNumber + x->f_outputNumber + 2;
+	pointer_count = 2 + x->f_outputNumber + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -182,7 +174,7 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 	for(i = 2; i < pointer_count; i++)
 		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
 
-	if(count[x->f_inputNumber - 1])
+	if(count[1])
 		dsp_addv(HoaEncode_perform, pointer_count, (void **)sigvec);
 	else
 		dsp_addv(HoaEncode_performOffset, pointer_count, (void **)sigvec);
@@ -196,20 +188,15 @@ t_int *HoaEncode_perform(t_int *w)
 	int			n			= (int)(w[2]);
 	t_float		**signals	= (t_float **)w+3;
 	
-	std::vector<double> ComputedOuput;
-	
 	for (int i = 0; i < n; i++) 
-	{
-		for (int j = 0; j < x->f_inputNumber - 1; j++)
-			x->f_vector[j] = signals[j][i];
-		
-		ComputedOuput = x->AmbiEncoder->process(x->f_vector, signals[x->f_inputNumber - 1][i]);
+	{		
+		x->f_computedOuput = x->AmbiEncoder->process(signals[0][i], signals[1][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
-			signals[j+x->f_inputNumber][i] = ComputedOuput[j];
+			signals[j+2][i] = x->f_computedOuput[j];
 	}
 	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
+	return (w + x->f_outputNumber + 2 + 3);
 }
 
 t_int *HoaEncode_performOffset(t_int *w)
@@ -218,20 +205,15 @@ t_int *HoaEncode_performOffset(t_int *w)
 	int			n			= (int)(w[2]);
 	t_float		**signals	= (t_float **)w+3;
 	
-	std::vector<double> ComputedOuput;
-	
 	for (int i = 0; i < n; i++) 
-	{
-		for (int j = 0; j < x->f_inputNumber - 1; j++)
-			x->f_vector[j] = signals[j][i];
-		
-		ComputedOuput = x->AmbiEncoder->process(x->f_vector);
+	{		
+		x->f_computedOuput = x->AmbiEncoder->process(signals[0][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
-			signals[j+x->f_inputNumber][i] = ComputedOuput[j];
+			signals[j+2][i] = x->f_computedOuput[j];
 	}
 	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
+	return (w + x->f_outputNumber + 2 + 3);
 }
 
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
@@ -253,6 +235,5 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 void HoaEncode_free(t_HoaEncode *x) 
 {
 	dsp_free((t_pxobject *)x);
-	freebytes(x->f_vector, x->f_inputNumber * sizeof(double));
 }
 
