@@ -167,4 +167,4 @@ pip-log.txt
 *.rb
 *.mxe
 *.mxo
-sdk-build
+#sdk-build
