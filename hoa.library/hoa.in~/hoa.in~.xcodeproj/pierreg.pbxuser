@@ -44,14 +44,14 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 365421864;
-			PBXWorkspaceStateSaveDate = 365421864;
+			PBXPerProjectTemplateStateSaveDate = 365421587;
+			PBXWorkspaceStateSaveDate = 365421587;
 		};
 		perUserProjectItems = {
-			0E6C268B15C7E4CA0090858D = 0E6C268B15C7E4CA0090858D /* PBXTextBookmark */;
-			0E9765DA15C6B703002420D2 = 0E9765DA15C6B703002420D2 /* PBXTextBookmark */;
-			0E99954615C7E19400F54C0D = 0E99954615C7E19400F54C0D /* PBXTextBookmark */;
-			0E99955515C7E40E00F54C0D = 0E99955515C7E40E00F54C0D /* PBXTextBookmark */;
+			0E6C268B15C7E4CA0090858D /* PBXTextBookmark */ = 0E6C268B15C7E4CA0090858D /* PBXTextBookmark */;
+			0E9765DA15C6B703002420D2 /* PBXTextBookmark */ = 0E9765DA15C6B703002420D2 /* PBXTextBookmark */;
+			0E99954615C7E19400F54C0D /* PBXTextBookmark */ = 0E99954615C7E19400F54C0D /* PBXTextBookmark */;
+			0E99955515C7E40E00F54C0D /* PBXTextBookmark */ = 0E99955515C7E40E00F54C0D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 0E91E3DF15BEAA7300452428 /* Source Control */;
 		userBuildSettings = {
@@ -99,12 +99,6 @@
 		vrLoc = 3957;
 	};
 	0E9994DA15C7CFD500F54C0D /* hoa.in~.c */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.c.c;
-		name = "hoa.in~.c";
-		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug~/hoa.in~.c";
-		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1171, 1586}}";
 			sepNavSelRange = "{2486, 0}";
@@ -112,12 +106,6 @@
 		};
 	};
 	0E9994DB15C7CFD500F54C0D /* hoa.in~.h */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.c.h;
-		name = "hoa.in~.h";
-		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug~/hoa.in~.h";
-		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1171, 546}}";
 			sepNavSelRange = "{917, 0}";
