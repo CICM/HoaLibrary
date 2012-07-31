@@ -44,6 +44,13 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	
 	if (x = (t_plug *)object_alloc((t_class *)plug_class)) 
 	{
+		if(atom_gettype(argv) == A_LONG)
+			x->f_order = atom_getlong(argv);
+		if(x->f_order < 1)
+			x->f_order = 1;
+		
+		x->f_harmonics = 2 * x->f_order + 1;
+		
 		outlet_new((t_pxobject *)x, "signal");
 		dsp_setup((t_pxobject *)x, 1);
 		attr_args_process(x, argc, argv);
@@ -103,3 +110,45 @@ void plug_assist(t_plug *x, void *b, long m, long a, char *s)
 	}
 }
 
+void delayObj_dblclick(t_delayObj *x)
+{
+	if (x->f_patcher) 
+		object_method(x->f_patcher, gensym("vis"));
+	else 
+	{
+		t_dictionary *d = dictionary_new();
+		char	parsebuf[256];
+		t_atom	a;
+		long	ac = 0;
+		t_atom	*av = NULL;
+		long	size;
+		t_atom msg[4], rv;
+		size = x->f_harmonics * 70;
+		
+		sprintf(parsebuf,"@defrect 0 0 %ld 200 @title hoa.delay~ @enablehscroll 0 @enablevscroll 0 @presentation 1 @toolbarid \"\"", size);
+		atom_setparse(&ac,&av,parsebuf);
+		attr_args_dictionary(d,ac,av);
+		atom_setobj(&a,d);
+		sysmem_freeptr(av); 
+		x->f_patcher = (t_object *)object_new_typed(CLASS_NOBOX,gensym("jpatcher"),1, &a);
+		freeobject((t_object *)d);
+		
+		object_method(x->f_patcher,gensym("vis"));
+		/*
+		 x->f_ui = newobject_sprintf(x->f_patcher, "@maxclass delay_ui @patching_rect 0 0 %ld 200 @oncolor %.2f %.2f %.2f %.2f @offcolor %.2f %.2f %.2f %.2f",
+		 size, x->f_oncolor.red, x->f_oncolor.green, x->f_oncolor.blue, x->f_oncolor.alpha, x->f_offcolor.red, x->f_offcolor.green, x->f_offcolor.blue, x->f_offcolor.alpha);
+		 
+		 */
+		x->f_ui = newobject_sprintf(x->f_patcher, "@maxclass flonum @patching_rect 10 10 50 20 @presentation 1");
+		
+		/*
+		 atom_setobj(msg, x->f_ui); 
+		 atom_setlong(msg + 1, 0); 
+		 atom_setobj(msg + 2, x); 
+		 atom_setlong(msg + 3, 0);
+		 object_method_typed(x->f_patcher, gensym("connect"), 4, msg, &rv);
+		 */
+		object_attach_byptr_register(x, x->f_ui, CLASS_BOX);
+		object_attach_byptr_register(x, x->f_patcher, CLASS_NOBOX);
+	}
+}

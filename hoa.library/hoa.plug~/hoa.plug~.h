@@ -25,6 +25,13 @@
 typedef struct  _plug
 {
 	t_pxobject	f_ob;
+	
+	int			f_order;
+	int			f_harmonics;
+	
+	t_object	*f_patcher;
+	t_object	*f_ui;
+	
 
 } t_plug;
 
