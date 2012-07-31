@@ -48,24 +48,127 @@
 			PBXWorkspaceStateSaveDate = 365421864;
 		};
 		perUserProjectItems = {
-			0E6C268B15C7E4CA0090858D = 0E6C268B15C7E4CA0090858D /* PBXTextBookmark */;
-			0E9765DA15C6B703002420D2 = 0E9765DA15C6B703002420D2 /* PBXTextBookmark */;
-			0E99954615C7E19400F54C0D = 0E99954615C7E19400F54C0D /* PBXTextBookmark */;
-			0E99955515C7E40E00F54C0D = 0E99955515C7E40E00F54C0D /* PBXTextBookmark */;
+			0E6C26A615C7EBF30090858D /* PBXTextBookmark */ = 0E6C26A615C7EBF30090858D /* PBXTextBookmark */;
+			0E6C26A815C7EBF30090858D /* PBXTextBookmark */ = 0E6C26A815C7EBF30090858D /* PBXTextBookmark */;
+			0E6C26AA15C7EBF30090858D /* PBXTextBookmark */ = 0E6C26AA15C7EBF30090858D /* PBXTextBookmark */;
+			0E6C26AB15C7EBF30090858D /* PBXTextBookmark */ = 0E6C26AB15C7EBF30090858D /* PBXTextBookmark */;
+			0E6C26AD15C7EBF30090858D /* PBXTextBookmark */ = 0E6C26AD15C7EBF30090858D /* PBXTextBookmark */;
+			0E6C26AE15C7EBF30090858D /* PBXBookmark */ = 0E6C26AE15C7EBF30090858D /* PBXBookmark */;
+			0E6C26B015C7EBF30090858D /* PlistBookmark */ = 0E6C26B015C7EBF30090858D /* PlistBookmark */;
+			0E9765DA15C6B703002420D2 /* PBXTextBookmark */ = 0E9765DA15C6B703002420D2 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 0E91E3DF15BEAA7300452428 /* Source Control */;
 		userBuildSettings = {
 		};
 	};
-	0E6C268B15C7E4CA0090858D /* PBXTextBookmark */ = {
+	0E6C269215C7E5350090858D /* hoa.plug~.c */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 2002}}";
+			sepNavSelRange = "{1571, 0}";
+			sepNavVisRange = "{1320, 551}";
+		};
+	};
+	0E6C269315C7E5350090858D /* hoa.plug~.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 637}}";
+			sepNavSelRange = "{989, 0}";
+			sepNavVisRange = "{848, 672}";
+		};
+	};
+	0E6C26A615C7EBF30090858D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
-		name = "hoa.in~.c: 98";
-		rLen = 0;
-		rLoc = 2486;
+		fRef = 0E6C26A715C7EBF30090858D /* ext_obex.h */;
+		name = "ext_obex.h: 448";
+		rLen = 88;
+		rLoc = 17633;
 		rType = 0;
-		vrLen = 528;
-		vrLoc = 2017;
+		vrLen = 1398;
+		vrLoc = 16432;
+	};
+	0E6C26A715C7EBF30090858D /* ext_obex.h */ = {
+		isa = PBXFileReference;
+		name = ext_obex.h;
+		path = "/Users/pierreg/Documents/SDKs/MaxSDK-5.1.7/c74support/max-includes/ext_obex.h";
+		sourceTree = "<absolute>";
+	};
+	0E6C26A815C7EBF30090858D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E6C26A915C7EBF30090858D /* hoa.delay~.h */;
+		name = "hoa.delay~.h: 32";
+		rLen = 77;
+		rLoc = 972;
+		rType = 0;
+		vrLen = 515;
+		vrLoc = 810;
+	};
+	0E6C26A915C7EBF30090858D /* hoa.delay~.h */ = {
+		isa = PBXFileReference;
+		name = "hoa.delay~.h";
+		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.delay~/hoa.delay~.h";
+		sourceTree = "<absolute>";
+	};
+	0E6C26AA15C7EBF30090858D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E6C269315C7E5350090858D /* hoa.plug~.h */;
+		name = "hoa.plug~.h: 34";
+		rLen = 0;
+		rLoc = 989;
+		rType = 0;
+		vrLen = 672;
+		vrLoc = 848;
+	};
+	0E6C26AB15C7EBF30090858D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E6C26AC15C7EBF30090858D /* hoa.delay~.c */;
+		name = "hoa.delay~.c: 63";
+		rLen = 150;
+		rLoc = 1804;
+		rType = 0;
+		vrLen = 530;
+		vrLoc = 1593;
+	};
+	0E6C26AC15C7EBF30090858D /* hoa.delay~.c */ = {
+		isa = PBXFileReference;
+		name = "hoa.delay~.c";
+		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.delay~/hoa.delay~.c";
+		sourceTree = "<absolute>";
+	};
+	0E6C26AD15C7EBF30090858D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E6C269215C7E5350090858D /* hoa.plug~.c */;
+		name = "hoa.plug~.c: 51";
+		rLen = 0;
+		rLoc = 1571;
+		rType = 0;
+		vrLen = 551;
+		vrLoc = 1320;
+	};
+	0E6C26AE15C7EBF30090858D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 0E6C26AF15C7EBF30090858D /* Info.plist */;
+	};
+	0E6C26AF15C7EBF30090858D /* Info.plist */ = {
+		isa = PBXFileReference;
+		name = Info.plist;
+		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/Info.plist";
+		sourceTree = "<absolute>";
+	};
+	0E6C26B015C7EBF30090858D /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 0E6C26B115C7EBF30090858D /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	0E6C26B115C7EBF30090858D /* Info.plist */ = {
+		isa = PBXFileReference;
+		name = Info.plist;
+		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/Info.plist";
+		sourceTree = "<absolute>";
 	};
 	0E91E3DF15BEAA7300452428 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -97,52 +200,6 @@
 		rType = 0;
 		vrLen = 1178;
 		vrLoc = 3957;
-	};
-	0E9994DA15C7CFD500F54C0D /* hoa.in~.c */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.c.c;
-		name = "hoa.in~.c";
-		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug~/hoa.in~.c";
-		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 1586}}";
-			sepNavSelRange = "{2486, 0}";
-			sepNavVisRange = "{2017, 528}";
-		};
-	};
-	0E9994DB15C7CFD500F54C0D /* hoa.in~.h */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.c.h;
-		name = "hoa.in~.h";
-		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug~/hoa.in~.h";
-		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 546}}";
-			sepNavSelRange = "{917, 0}";
-			sepNavVisRange = "{531, 874}";
-		};
-	};
-	0E99954615C7E19400F54C0D /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 0E9994DB15C7CFD500F54C0D /* hoa.in~.h */;
-		name = "hoa.in~.h: 30";
-		rLen = 0;
-		rLoc = 917;
-		rType = 0;
-		vrLen = 874;
-		vrLoc = 531;
-	};
-	0E99955515C7E40E00F54C0D /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
-		name = "hoa.in~.c: 43";
-		rLen = 5;
-		rLoc = 1367;
-		rType = 0;
-		vrLen = 812;
-		vrLoc = 838;
 	};
 	22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {
 		uiCtxt = {
