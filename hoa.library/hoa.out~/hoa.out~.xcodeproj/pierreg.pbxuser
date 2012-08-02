@@ -1,0 +1,235 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Deployment;
+		activeTarget = 2FBBEAD608F335360078DB84 /* max-external */;
+		addToTargets = (
+			2FBBEAD608F335360078DB84 /* max-external */,
+		);
+		codeSenseManager = 0E91E3E015BEAA7300452428 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					881,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					993,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 365513750;
+			PBXWorkspaceStateSaveDate = 365513750;
+		};
+		perUserProjectItems = {
+			0E6C268B15C7E4CA0090858D = 0E6C268B15C7E4CA0090858D /* PBXTextBookmark */;
+			0E6C28F115C825E40090858D = 0E6C28F115C825E40090858D /* PBXTextBookmark */;
+			0E8ED9F015C94217004F23FF = 0E8ED9F015C94217004F23FF /* PBXTextBookmark */;
+			0E8ED9F615C943C8004F23FF = 0E8ED9F615C943C8004F23FF /* PBXTextBookmark */;
+			0E8ED9F715C943C8004F23FF = 0E8ED9F715C943C8004F23FF /* PBXTextBookmark */;
+			0E8EDA0015C943DC004F23FF = 0E8EDA0015C943DC004F23FF /* PBXTextBookmark */;
+			0E8EDA1115C9457F004F23FF = 0E8EDA1115C9457F004F23FF /* PBXTextBookmark */;
+			0E8EDA1215C9457F004F23FF = 0E8EDA1215C9457F004F23FF /* PBXTextBookmark */;
+			0E8EDA1315C9457F004F23FF = 0E8EDA1315C9457F004F23FF /* PBXTextBookmark */;
+			0E9765DA15C6B703002420D2 = 0E9765DA15C6B703002420D2 /* PBXTextBookmark */;
+			0E99954615C7E19400F54C0D = 0E99954615C7E19400F54C0D /* PBXTextBookmark */;
+		};
+		sourceControlManager = 0E91E3DF15BEAA7300452428 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	0E6C268B15C7E4CA0090858D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 98";
+		rLen = 0;
+		rLoc = 2490;
+		rType = 0;
+		vrLen = 528;
+		vrLoc = 2017;
+	};
+	0E6C28F115C825E40090858D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 98";
+		rLen = 0;
+		rLoc = 2490;
+		rType = 0;
+		vrLen = 633;
+		vrLoc = 1912;
+	};
+	0E8ED9F015C94217004F23FF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 98";
+		rLen = 0;
+		rLoc = 2490;
+		rType = 0;
+		vrLen = 632;
+		vrLoc = 1912;
+	};
+	0E8ED9F615C943C8004F23FF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 98";
+		rLen = 0;
+		rLoc = 2490;
+		rType = 0;
+		vrLen = 632;
+		vrLoc = 1912;
+	};
+	0E8ED9F715C943C8004F23FF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 57";
+		rLen = 0;
+		rLoc = 1614;
+		rType = 0;
+		vrLen = 550;
+		vrLoc = 1375;
+	};
+	0E8EDA0015C943DC004F23FF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 57";
+		rLen = 0;
+		rLoc = 1614;
+		rType = 0;
+		vrLen = 550;
+		vrLoc = 1375;
+	};
+	0E8EDA1115C9457F004F23FF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DB15C7CFD500F54C0D /* hoa.in~.h */;
+		name = "hoa.in~.h: 30";
+		rLen = 0;
+		rLoc = 937;
+		rType = 0;
+		vrLen = 894;
+		vrLoc = 531;
+	};
+	0E8EDA1215C9457F004F23FF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 58";
+		rLen = 0;
+		rLoc = 1614;
+		rType = 0;
+		vrLen = 550;
+		vrLoc = 1375;
+	};
+	0E8EDA1315C9457F004F23FF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DA15C7CFD500F54C0D /* hoa.in~.c */;
+		name = "hoa.in~.c: 59";
+		rLen = 0;
+		rLoc = 1650;
+		rType = 0;
+		vrLen = 549;
+		vrLoc = 1375;
+	};
+	0E91E3DF15BEAA7300452428 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	0E91E3E015BEAA7300452428 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	0E96985415BEE79E00863F12 /* huygens~.c */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.c;
+		name = "huygens~.c";
+		path = "/Users/pierreg/Documents/SDKs/MaxSDK-5.1.7/examples/wfs/huygens~.c";
+		sourceTree = "<absolute>";
+	};
+	0E9765DA15C6B703002420D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E96985415BEE79E00863F12 /* huygens~.c */;
+		name = "huygens~.c: 130";
+		rLen = 116;
+		rLoc = 4910;
+		rType = 0;
+		vrLen = 1178;
+		vrLoc = 3957;
+	};
+	0E9994DA15C7CFD500F54C0D /* hoa.in~.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = "hoa.in~.c";
+		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.out~/hoa.in~.c";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 1352}}";
+			sepNavSelRange = "{1666, 0}";
+			sepNavVisRange = "{1375, 549}";
+		};
+	};
+	0E9994DB15C7CFD500F54C0D /* hoa.in~.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = "hoa.in~.h";
+		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.out~/hoa.in~.h";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 546}}";
+			sepNavSelRange = "{937, 0}";
+			sepNavVisRange = "{531, 894}";
+		};
+	};
+	0E99954615C7E19400F54C0D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9994DB15C7CFD500F54C0D /* hoa.in~.h */;
+		name = "hoa.in~.h: 30";
+		rLen = 0;
+		rLoc = 937;
+		rType = 0;
+		vrLen = 874;
+		vrLoc = 531;
+	};
+	22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {978, 624}}";
+			sepNavSelRange = "{439, 0}";
+			sepNavVisRange = "{200, 1048}";
+			sepNavWindowFrame = "{{84, 252}, {750, 558}}";
+		};
+	};
+	2FBBEAD608F335360078DB84 /* max-external */ = {
+		activeExec = 0;
+	};
+}

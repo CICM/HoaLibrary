@@ -32,7 +32,6 @@
 typedef struct  _in
 {
 	t_pxobject	f_ob;
-	t_object	*f_dsp;
 	t_sample	*f_vector;
 } t_in;
 
@@ -45,8 +44,7 @@ typedef struct  _plug
 	
 	t_object	*f_mypatcher;
 	
-	t_patcher	**f_patchers;
-	t_method_object		**f_methods;
+	t_object	**f_patchers;
 	t_object	**f_ins;
 	t_object	**f_instilde;
 	t_object	**f_outstilde;
@@ -74,7 +72,7 @@ void post_containers(t_plug *x);
 void plug_patchers(t_plug *x, t_symbol *s);
 void plug_read(t_plug *x, t_symbol *s, t_dictionary *d);
 void plug_getinput(t_plug *x, t_object *patcher, int index);
-void whosyourdaddy_bang(t_plug *x);
+
 
 void plug_bang(t_plug *x);
 void plug_int(t_plug *x, long n);

@@ -323,12 +323,12 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0E99953B15C7E0DA00F54C0D</string>
+										<string>0E8EDAB615C96EFA004F23FF</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
 											<string>0E99951915C7DC7F00F54C0D</string>
-											<string>0E99951A15C7DC7F00F54C0D</string>
+											<string>0E99953B15C7E0DA00F54C0D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -340,14 +340,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1232, 435}}</string>
+								<string>{{0, 0}, {1232, 427}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 145 1440 733 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>435pt</string>
+							<string>427pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -360,14 +360,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 440}, {1232, 252}}</string>
+								<string>{{0, 432}, {1232, 260}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 145 1440 733 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>252pt</string>
+							<string>260pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -386,9 +386,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0E99951C15C7DC7F00F54C0D</string>
+				<string>0E8EDAB715C96EFA004F23FF</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0E99951D15C7DC7F00F54C0D</string>
+				<string>0E8EDAB815C96EFA004F23FF</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -526,8 +526,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.in/hoa.in.xcodeproj</string>
 		<string>0E91E3DD15BEAA7300452428</string>
+		<string>/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.in/hoa.in.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 145 1440 733 0 0 1440 878 </string>
@@ -551,7 +551,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.in.c</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -568,8 +568,6 @@
 							<string>241pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -609,7 +607,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0E91E3DD15BEAA7300452428</string>
-				<string>0E99951815C7DC7700F54C0D</string>
+				<string>0E8EDAB915C96EFA004F23FF</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -622,7 +620,7 @@
 			<key>WindowToolGUID</key>
 			<string>0E91E3DD15BEAA7300452428</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

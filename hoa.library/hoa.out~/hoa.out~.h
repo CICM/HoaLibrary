@@ -22,21 +22,20 @@
 #include "ext_common.h"
 #include "z_dsp.h"
 
-typedef struct  _in
+typedef struct  _out
 {
 	t_pxobject	f_ob;
-	t_object	*f_dsp;
 	t_sample	*f_vector;
-} t_in;
+} t_out;
 
-void *in_class;
+void *out_class;
 
-void *in_new(t_symbol *s, int argc, t_atom *argv);
-void in_free(t_in *x);
-void in_assist(t_in *x, void *b, long m, long a, char *s);
+void *out_new(t_symbol *s, int argc, t_atom *argv);
+void out_free(t_out *x);
+void out_assist(t_out *x, void *b, long m, long a, char *s);
 
-void in_dsp64(t_in *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void in_perform64(t_in *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void out_dsp64(t_out *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void out_perform64(t_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void in_dsp(t_in *x, t_signal **sp, short *count);
-t_int *in_perform(t_int *w);
+void out_dsp(t_out *x, t_signal **sp, short *count);
+t_int *out_perform(t_int *w);
