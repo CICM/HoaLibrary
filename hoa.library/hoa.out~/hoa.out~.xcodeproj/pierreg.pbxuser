@@ -44,8 +44,8 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 365513750;
-			PBXWorkspaceStateSaveDate = 365513750;
+			PBXPerProjectTemplateStateSaveDate = 365605738;
+			PBXWorkspaceStateSaveDate = 365605738;
 		};
 		perUserProjectItems = {
 			0E6C268B15C7E4CA0090858D = 0E6C268B15C7E4CA0090858D /* PBXTextBookmark */;
@@ -154,6 +154,13 @@
 		vrLen = 549;
 		vrLoc = 1375;
 	};
+	0E8EDA2315C94C20004F23FF /* hoa.out~.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 611}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 939}";
+		};
+	};
 	0E91E3DF15BEAA7300452428 /* Source Control */ = {
 		isa = PBXSourceControlManager;
 		fallbackIsa = XCSourceControlManager;
@@ -192,11 +199,6 @@
 		name = "hoa.in~.c";
 		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.out~/hoa.in~.c";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 1352}}";
-			sepNavSelRange = "{1666, 0}";
-			sepNavVisRange = "{1375, 549}";
-		};
 	};
 	0E9994DB15C7CFD500F54C0D /* hoa.in~.h */ = {
 		isa = PBXFileReference;
@@ -205,11 +207,6 @@
 		name = "hoa.in~.h";
 		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.out~/hoa.in~.h";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 546}}";
-			sepNavSelRange = "{937, 0}";
-			sepNavVisRange = "{531, 894}";
-		};
 	};
 	0E99954615C7E19400F54C0D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

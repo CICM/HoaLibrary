@@ -111,54 +111,51 @@ void post_containers(t_plug *x)
 {
 	t_max_err err;
 	err = object_obex_lookup(x, gensym("#P"), (t_object **)&x->f_mypatcher);
+	object_attach_byptr_register(x, x->f_mypatcher, CLASS_NOBOX);
 }
 
 void plug_patchers(t_plug *x, t_symbol *s)
 {
 	// Un patcher a 181 methods arfff //
 	int i;
-	t_class *patcherclass;
-	t_messlist *methodlist;
+	t_dictionary *d = dictionary_new();
+	t_atom	a;
 	
-	whosyourdaddy_bang(x);
+	long filetype = 'JSON';
+	long outtype; 
+	char filename[512]; 
+	short path;
 	
-	x->f_methods = (t_method_object **)getbytes(x->f_harmonics * sizeof(t_method_object *));
-	patcherclass = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
-	x->f_methods[0] = class_getmethod_object(patcherclass, gensym("free"));
-	methodlist = method_object_getmesslist(x->f_methods[0]);
-	//post("methode name: %s", method_object_getname(x->f_methods[0]));
-	//post("methode name: %s", methodlist->m_sym[0]);
-	
-	//char name[512];
 	x->f_patchers = (t_patcher **)getbytes(x->f_harmonics * sizeof(t_patcher *));
 	x->f_ins = (t_object **)getbytes(x->f_harmonics * sizeof(t_object *));
 	x->f_instilde = (t_object **)getbytes(x->f_harmonics * sizeof(t_object *));
 	x->f_outstilde = (t_object **)getbytes(x->f_harmonics * sizeof(t_object *));
-
+	
+	strcpy(filename, s->s_name);
+	if(locatefile_extended(filename, &path, &outtype, &filetype, 1)) 
+	{
+		object_error((t_object *)x, "%s: not found", s->s_name); 
+		return;
+	}
+	dictionary_read(filename, path, &d);
+	atom_setobj(&a,d);
 	for(i = 0; i < x->f_harmonics; i++)
 	{
-		x->f_patchers[i] = (t_patcher *)object_new(gensym("jpatcher"),  CLASS_NOBOX);
-		//x->f_patchers[i] = (t_patcher *)newinstance(gensym("volume~"), 0, NULL);
+		x->f_patchers[i] = (t_patcher *)object_new_typed(CLASS_NOBOX, gensym("jpatcher"), 1, &a);
 		object_attach_byptr_register(x, x->f_patchers[i], CLASS_NOBOX);
-		//object_attach_byptr_register(x->f_mypatcher, x->f_patchers[i], CLASS_NOBOX);
-		object_obex_storeflags(x->f_patchers[i], gensym("#P"), (t_object *)x, OBJ_FLAG_REF);
+		object_attach_byptr_register(x->f_patchers[i], x->f_mypatcher, CLASS_NOBOX);
 		plug_getinput(x, x->f_patchers[i], i);
-		
-		object_method(x->f_patchers[i],  gensym("settitle"), gensym("volume"));
+		dsp_patcher(x->f_patchers[i]);
+		dsp_setpatcher(x->f_patchers[i]);
+		object_method(x->f_patchers[i],  gensym("settitle"), gensym("volume nono"));
 	}
-	
-	for(i = 0; i < 181; i++)
-	{
-		//post("methodes name: %s", x->f_patchers[0]->o_messlist[i].m_sym[0]);
-		//post("methodes name2: %s", x->f_patchers[0]->o_messlist[i].m_sym[1]);
+	freeobject((t_object *)d);
 
-		//post("methodes name3: %s", x->f_patchers[0]->o_messlist[i].m_sym[2]);
-	}
 }
 
 t_max_err plug_notify(t_plug *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
-	
+	post("message %s", msg->s_name);
 	if (msg == gensym("free")) 
 	{
 		if (sender == x->f_patchers[0])
@@ -222,7 +219,6 @@ void plug_anything(t_plug *x, t_symbol *s, long argc, t_atom *argv)
 
 void plug_dsp(t_plug *x, t_signal **sp, short *count)
 {
-	t_dspchain *mydspChain;
 	t_in *cibleIn = (t_in *)x->f_instilde[0];
 	t_in *cibleOut = (t_in *)x->f_outstilde[0];
 	x->f_vectorIn = (t_sample *)getbytes(sp[0]->s_n * sizeof(t_sample *));
@@ -282,73 +278,5 @@ void plug_perform64(t_plug *x, t_object *dsp64, double **ins, long numins, doubl
 	{ 
 		x->f_vectorIn[i] = ins[0][i];	
 		outs[0][i] = x->f_vectorOut[i];
-	}
-}
-
-void whosyourdaddy_bang(t_plug *x)
-{
-	t_object *jp;
-	t_object *jbx;
-	t_object *o;
-	t_max_err err;
-	
-	// get the object's parent patcher
-	err = object_obex_lookup(x, gensym("#P"), (t_object **)&jp);
-	if (err != MAX_ERR_NONE)
-		return;
-	else {
-		post("daddy");
-	}
-
-	
-	// some kind of patcher in a box
-	if (jbx = jpatcher_get_box(jp)) 
-	{
-		t_symbol *filepath = object_attr_getsym((t_object *)jp, gensym("filepath"));
-		
-		//		post("object_classname(jbx): %s, object_classname(o): %s, filepath: %s", object_classname(jbx)->s_name, object_classname(jbox_get_object(jbx))->s_name, filepath->s_name);
-		if (object_classname(jbx) == gensym("bpatcher")) 
-		{
-			post("bpatcher");
-		}
-		else 
-		{
-			if (filepath && filepath != gensym("")) 
-			{
-				post("abstraction");
-			} 
-			else 
-			{
-				post("subpatcher");
-			}
-		}
-	} 
-	else 
-	{
-		t_object *p2;
-		t_object *target;
-		t_object *nextbox;
-		method m;
-		
-		object_method(jp, gensym("getassoc"), &target);
-		if (target) 
-		{
-			if (m = zgetfn(target, gensym("parentpatcher")))
-				(*m)(target, &p2);
-			if (p2) 
-			{
-				nextbox = jpatcher_get_firstobject(p2);
-				while (nextbox) 
-				{
-					o = jbox_get_object(nextbox);
-					if (o == target) 
-					{
-						post("%s", object_classname(o)->s_name);
-						return;
-					}
-					nextbox = jbox_get_nextobject(nextbox);
-				}
-			}
-		}
 	}
 }

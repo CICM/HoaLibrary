@@ -44,11 +44,12 @@ void *out_new(t_symbol *s, int argc, t_atom *argv)
 	
 	if (x = (t_out*)object_alloc((t_class *)out_class)) 
 	{
-		outlet_new((t_pxobject *)x, "signal");
+		//outlet_new((t_pxobject *)x, "signal");
 		dsp_setup((t_pxobject *)x, 1);
 		attr_args_process(x, argc, argv);
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
+		x->f_vector = NULL;
 	}
 	
 	return x;
@@ -56,7 +57,8 @@ void *out_new(t_symbol *s, int argc, t_atom *argv)
 
 void out_dsp(t_out*x, t_signal **sp, short *count)
 {
-	dsp_add(out_perform, 3, sp[0]->s_vec, x->f_vector, sp[0]->s_n);
+	if(x->f_vector != NULL)
+		dsp_add(out_perform, 3, sp[0]->s_vec, x->f_vector, sp[0]->s_n);
 }
 
 t_int *out_perform(t_int *w)

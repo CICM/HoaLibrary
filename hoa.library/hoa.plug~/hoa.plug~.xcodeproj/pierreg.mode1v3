@@ -197,7 +197,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>0EB54F2415CAAF36005DC9C9</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>hoa.plug~.c</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>0EB54F2515CAAF36005DC9C9</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>hoa.plug~.c</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>0EB54F7B15CAB318005DC9C9</string>
+						<key>history</key>
+						<array>
+							<string>0EB54F2615CAAF36005DC9C9</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {750, 461}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>38 350 750 502 0 0 1440 878 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -326,7 +367,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0EB54F0A15CAADBB005DC9C9</string>
+										<string>0EB54F7A15CAB318005DC9C9</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
@@ -365,13 +406,14 @@
 											<string>0EDA77B815C9813100208793</string>
 											<string>0EDA77E215CA7EEB00208793</string>
 											<string>0EDA77E315CA7EEB00208793</string>
-											<string>0EDA788C15CA8CBE00208793</string>
 											<string>0EB54EBD15CAA2A0005DC9C9</string>
 											<string>0EB54EC815CAA471005DC9C9</string>
 											<string>0EB54EF315CAA9DF005DC9C9</string>
-											<string>0EB54EF715CAAA0C005DC9C9</string>
-											<string>0EB54F0015CAAD98005DC9C9</string>
-											<string>0EB54F0115CAAD98005DC9C9</string>
+											<string>0EB54F0D15CAAE4A005DC9C9</string>
+											<string>0EB54F0E15CAAE4A005DC9C9</string>
+											<string>0EB54F2015CAAF36005DC9C9</string>
+											<string>0EB54F7815CAB318005DC9C9</string>
+											<string>0EB54F7915CAB318005DC9C9</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -570,6 +612,7 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>0E91E3DD15BEAA7300452428</string>
+		<string>0EB54F2415CAAF36005DC9C9</string>
 		<string>/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug~/hoa.plug~.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

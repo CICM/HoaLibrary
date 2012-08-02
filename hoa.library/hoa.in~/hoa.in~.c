@@ -45,7 +45,7 @@ void *in_new(t_symbol *s, int argc, t_atom *argv)
 	if (x = (t_in *)object_alloc((t_class *)in_class)) 
 	{
 		outlet_new((t_pxobject *)x, "signal");
-		dsp_setup((t_pxobject *)x, 1);
+		dsp_setup((t_pxobject *)x, 0);
 		attr_args_process(x, argc, argv);
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -57,10 +57,8 @@ void *in_new(t_symbol *s, int argc, t_atom *argv)
 
 void in_dsp(t_in *x, t_signal **sp, short *count)
 {
-	post("dsp input %i", sys_getdspobjdspstate((t_object *)x)); 
-	//object_method(gensym("dsp")->s_thing, gensym("start"));
 	if (x->f_vector != NULL)
-		dsp_add(in_perform, 3, x->f_vector, sp[1]->s_vec, sp[0]->s_n);
+		dsp_add(in_perform, 3, x->f_vector, sp[0]->s_vec, sp[0]->s_n);
 }
 
 t_int *in_perform(t_int *w)
