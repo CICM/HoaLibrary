@@ -57,8 +57,9 @@ void *out_new(t_symbol *s, int argc, t_atom *argv)
 
 void out_dsp(t_out*x, t_signal **sp, short *count)
 {
-	if(x->f_vector != NULL)
-		dsp_add(out_perform, 3, sp[0]->s_vec, x->f_vector, sp[0]->s_n);
+	x->f_vector = (t_sample *)getbytes(sp[0]->s_n * sizeof(t_sample *));
+	dsp_add(out_perform, 3, sp[0]->s_vec, x->f_vector, sp[0]->s_n);
+	post("out_dsp");
 }
 
 t_int *out_perform(t_int *w)
@@ -70,7 +71,7 @@ t_int *out_perform(t_int *w)
 	
 	for(i = 0; i < sampleframes; i++)
 	{ 
-		out[i] = in[i] * 0.01;
+		out[i] = in[i];
 	}
 	
 	return w + 4;
@@ -78,7 +79,8 @@ t_int *out_perform(t_int *w)
 
 void out_dsp64(t_out*x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	object_method(dsp64, gensym("dsp_add64"), x, out_perform64, 0, NULL);
+	if(x->f_vector != NULL)
+		object_method(dsp64, gensym("dsp_add64"), x, out_perform64, 0, NULL);
 }
 
 void out_perform64(t_out*x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
