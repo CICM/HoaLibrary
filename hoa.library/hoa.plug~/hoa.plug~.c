@@ -124,26 +124,9 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	return x;
 }			
 
-<<<<<<< HEAD
 void plug_dblclick(t_object *x)
 {	
 	t_object *box, *obj;
-=======
-void plug_dsp(t_plug *x, t_signal **sp, short *count)
-{
-	t_dspchain *myDspChain;
-	myDspChain = dspchain_get();
-	myDspChain->
-	dsp_add(plug_perform, 3, sp[0]->s_vec, sp[1]->s_vec, sp[0]->s_n);
-}
-
-t_plugt *plug_perform(t_plugt *w)
-{
-	t_sample *in = (t_sample *)(w[1]);
-	t_sample *out = (t_sample *)(w[2]);
-    int sampleframes = (int)(w[3]);
-	int i;
->>>>>>> Useless
 	
 	if(jpatcher_get_title(x) == gensym("hoa.plug~"))
 	{

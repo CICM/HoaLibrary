@@ -35,11 +35,6 @@ typedef struct  _plug
 {
 	t_object	f_ob;
 	
-<<<<<<< HEAD
-=======
-	t_dspchain	*f_myDspChain;
-
->>>>>>> Useless
 } t_plug;
 
 void *plug_class;
