@@ -28,7 +28,6 @@
 #include "jgraphics.h"
 #include "indexmap.h"
 #include "jdataview.h"
-#include "ext_strings.h"
 
 method dblclickpatcher;
 
