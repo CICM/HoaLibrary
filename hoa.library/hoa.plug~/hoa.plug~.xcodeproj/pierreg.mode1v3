@@ -326,7 +326,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0E9A062115D00446005E91C0</string>
+										<string>0E998F3115D104A900E4CAD1</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
@@ -338,7 +338,6 @@
 											<string>0E6C28A615C81FF80090858D</string>
 											<string>0E6C28A715C81FF80090858D</string>
 											<string>0E6C28AE15C820CA0090858D</string>
-											<string>0E6C28DB15C824400090858D</string>
 											<string>0E8ED8C515C92703004F23FF</string>
 											<string>0E8ED8C815C92703004F23FF</string>
 											<string>0E8ED8CA15C92703004F23FF</string>
@@ -354,7 +353,6 @@
 											<string>0EDA77B715C9813100208793</string>
 											<string>0EDA77B815C9813100208793</string>
 											<string>0EDA77E315CA7EEB00208793</string>
-											<string>0EB54F2015CAAF36005DC9C9</string>
 											<string>0E4F829715CD305900E1B652</string>
 											<string>0E9B132015CE013200EE21B3</string>
 											<string>0E9B132215CE013200EE21B3</string>
@@ -364,7 +362,6 @@
 											<string>0E9B132715CE013200EE21B3</string>
 											<string>0E9B132915CE013200EE21B3</string>
 											<string>0E9B132B15CE013200EE21B3</string>
-											<string>0E87812A15CF29A800927392</string>
 											<string>0E87812D15CF29A800927392</string>
 											<string>0E9A03AC15CFB68E005E91C0</string>
 											<string>0E9A03AE15CFB68E005E91C0</string>
@@ -375,13 +372,13 @@
 											<string>0E9A059915CFE61A005E91C0</string>
 											<string>0E9A059B15CFE61A005E91C0</string>
 											<string>0E9A059C15CFE61A005E91C0</string>
-											<string>0E9A05B715CFEA48005E91C0</string>
-											<string>0E9A05C715CFEBFC005E91C0</string>
-											<string>0E9A05DE15CFED42005E91C0</string>
 											<string>0E9A05F115CFEE8A005E91C0</string>
-											<string>0E9A060215CFEF18005E91C0</string>
-											<string>0E9A061F15D00446005E91C0</string>
-											<string>0E9A062015D00446005E91C0</string>
+											<string>0E2681AE15D0174800567B03</string>
+											<string>0E2681AF15D0174800567B03</string>
+											<string>0E2681B115D0174800567B03</string>
+											<string>0E2681B215D0174800567B03</string>
+											<string>0E998F2F15D104A900E4CAD1</string>
+											<string>0E998F3015D104A900E4CAD1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -393,14 +390,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1232, 531}}</string>
+								<string>{{0, 0}, {1232, 522}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 160 1440 717 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>531pt</string>
+							<string>522pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -413,14 +410,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 536}, {1232, 140}}</string>
+								<string>{{0, 527}, {1232, 149}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 160 1440 717 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>140pt</string>
+							<string>149pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -439,9 +436,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0E9A039715CFB463005E91C0</string>
+				<string>0E998F3215D104A900E4CAD1</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0E9A039815CFB463005E91C0</string>
+				<string>0E998F3315D104A900E4CAD1</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -580,7 +577,7 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>0E91E3DD15BEAA7300452428</string>
-		<string>/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug3~/hoa.plug~.xcodeproj</string>
+		<string>/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug~/hoa.plug~.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 160 1440 717 0 0 1440 878 </string>
@@ -662,7 +659,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0E91E3DD15BEAA7300452428</string>
-				<string>0E9A039915CFB463005E91C0</string>
+				<string>0E998F3415D104A900E4CAD1</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -675,7 +672,7 @@
 			<key>WindowToolGUID</key>
 			<string>0E91E3DD15BEAA7300452428</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

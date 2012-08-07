@@ -55,6 +55,11 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	//method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
 	//method_object_setmethod(object_getmethod_object(x, gensym("assist")), (method)plug_assist);
 	
+
+	t_class *patcherClass = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
+	for(i = 0; i < 1; i++)
+		post("mess : %s", patcherClass->c_newmess[i].m_sym->s_name);
+
 	order = 1;
 	if(atom_gettype(argv) == A_LONG)
 		order = atom_getlong(argv);
@@ -156,9 +161,7 @@ void plug_dblclick(t_object *x)
 
 void plug_assist(t_object *x, void *b, long m, long a, char *s)
 {
-	//t_plug *z = (t_plug *)object_alloc((t_class *)plug_class);
-	//x = (t_object *)z;
-	//t_class *patcherClass = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
+	
 	//t_class *patcherClass = (t_class *)x->o_messlist[-1];
 	//post("name : %s", x->o_messlist[0].m_sym->s_name);
 	//post("type : %s", x->o_messlist[0].m_type);
