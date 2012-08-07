@@ -48,12 +48,10 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	
 	t_object *x = (t_object *)object_new(CLASS_NOBOX, gensym("jpatcher"), 0, NULL);
 	jpatcher_set_title(x, gensym("hoa.plug~"));
-	//object_unregister(x);
-	//object_register(CLASS_NOBOX, gensym("hoa.plug~"), x);
-	//post("fontname %s", (t_symbol *)jbox_get_varname(x)->s_name);
+	//x->o_messlist[-1];
 
-	//method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
-	//method_object_setmethod(object_getmethod_object(x, gensym("assist")), (method)plug_assist);
+	method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
+	method_object_setmethod(object_getmethod_object(x, gensym("assist")), (method)plug_assist);
 	
 
 	t_class *patcherClass = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));

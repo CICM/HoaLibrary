@@ -30,15 +30,15 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 365350601;
-			PBXWorkspaceStateSaveDate = 365350601;
+			PBXPerProjectTemplateStateSaveDate = 366022983;
+			PBXWorkspaceStateSaveDate = 366022983;
 		};
 		perUserProjectItems = {
+			0E27C88015D112E000EF7719 /* PBXTextBookmark */ = 0E27C88015D112E000EF7719 /* PBXTextBookmark */;
+			0E27C88115D112E000EF7719 /* PBXTextBookmark */ = 0E27C88115D112E000EF7719 /* PBXTextBookmark */;
+			0E27C88215D112E000EF7719 /* PBXTextBookmark */ = 0E27C88215D112E000EF7719 /* PBXTextBookmark */;
+			0E27C88315D112E000EF7719 /* PBXTextBookmark */ = 0E27C88315D112E000EF7719 /* PBXTextBookmark */;
 			0E64A5AC15C6D27700F85BF4 /* PBXTextBookmark */ = 0E64A5AC15C6D27700F85BF4 /* PBXTextBookmark */;
-			0E64A5DD15C6DAC200F85BF4 /* PBXTextBookmark */ = 0E64A5DD15C6DAC200F85BF4 /* PBXTextBookmark */;
-			0E64A5DE15C6DAC200F85BF4 /* PBXTextBookmark */ = 0E64A5DE15C6DAC200F85BF4 /* PBXTextBookmark */;
-			0E64A5DF15C6DAC200F85BF4 /* PBXTextBookmark */ = 0E64A5DF15C6DAC200F85BF4 /* PBXTextBookmark */;
-			0E64A5E015C6DAC200F85BF4 /* PBXTextBookmark */ = 0E64A5E015C6DAC200F85BF4 /* PBXTextBookmark */;
 			0E96982715BEE1C300863F12 /* PBXTextBookmark */ = 0E96982715BEE1C300863F12 /* PBXTextBookmark */;
 			0E96984F15BEE78A00863F12 /* PBXTextBookmark */ = 0E96984F15BEE78A00863F12 /* PBXTextBookmark */;
 			0EA9FD2D15BFEA7700FB9BD9 /* PBXTextBookmark */ = 0EA9FD2D15BFEA7700FB9BD9 /* PBXTextBookmark */;
@@ -47,11 +47,51 @@
 		userBuildSettings = {
 		};
 	};
+	0E27C88015D112E000EF7719 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */;
+		name = "ambisonicDecode.h: 43";
+		rLen = 0;
+		rLoc = 912;
+		rType = 0;
+		vrLen = 755;
+		vrLoc = 211;
+	};
+	0E27C88115D112E000EF7719 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
+		name = "ambisonicDecode.cpp: 50";
+		rLen = 0;
+		rLoc = 1143;
+		rType = 0;
+		vrLen = 977;
+		vrLoc = 738;
+	};
+	0E27C88215D112E000EF7719 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */;
+		name = "hoa.decoder~.c: 27";
+		rLen = 0;
+		rLoc = 905;
+		rType = 0;
+		vrLen = 848;
+		vrLoc = 4196;
+	};
+	0E27C88315D112E000EF7719 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */;
+		name = "hoa.decoder~.c: 157";
+		rLen = 30;
+		rLoc = 4510;
+		rType = 0;
+		vrLen = 924;
+		vrLoc = 4058;
+	};
 	0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1139, 2223}}";
-			sepNavSelRange = "{3492, 0}";
-			sepNavVisRange = "{3060, 450}";
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 2431}}";
+			sepNavSelRange = "{4510, 30}";
+			sepNavVisRange = "{4058, 924}";
 		};
 	};
 	0E64A5AC15C6D27700F85BF4 /* PBXTextBookmark */ = {
@@ -63,46 +103,6 @@
 		rType = 0;
 		vrLen = 757;
 		vrLoc = 144;
-	};
-	0E64A5DD15C6DAC200F85BF4 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */;
-		name = "ambisonicDecode.h: 43";
-		rLen = 0;
-		rLoc = 912;
-		rType = 0;
-		vrLen = 755;
-		vrLoc = 211;
-	};
-	0E64A5DE15C6DAC200F85BF4 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
-		name = "ambisonicDecode.cpp: 50";
-		rLen = 0;
-		rLoc = 1143;
-		rType = 0;
-		vrLen = 977;
-		vrLoc = 738;
-	};
-	0E64A5DF15C6DAC200F85BF4 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */;
-		name = "hoa.decoder~.c: 136";
-		rLen = 0;
-		rLoc = 4057;
-		rType = 0;
-		vrLen = 835;
-		vrLoc = 4278;
-	};
-	0E64A5E015C6DAC200F85BF4 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */;
-		name = "hoa.decoder~.c: 27";
-		rLen = 0;
-		rLoc = 905;
-		rType = 0;
-		vrLen = 861;
-		vrLoc = 542;
 	};
 	0E91E48315BECC2E00452428 /* Source Control */ = {
 		isa = PBXSourceControlManager;
