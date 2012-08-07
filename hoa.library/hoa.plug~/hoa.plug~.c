@@ -48,12 +48,8 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	
 	t_object *x = (t_object *)object_new(CLASS_NOBOX, gensym("jpatcher"), 0, NULL);
 	jpatcher_set_title(x, gensym("hoa.plug~"));
-	//object_unregister(x);
-	//object_register(CLASS_NOBOX, gensym("hoa.plug~"), x);
-	//post("fontname %s", (t_symbol *)jbox_get_varname(x)->s_name);
-
-	//method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
-	//method_object_setmethod(object_getmethod_object(x, gensym("assist")), (method)plug_assist);
+	method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
+	method_object_setmethod(object_getmethod_object(x, gensym("assist")), (method)plug_assist);
 	
 	order = 1;
 	if(atom_gettype(argv) == A_LONG)
@@ -62,7 +58,7 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 		order = 1;
 	harmonics = 2 * order + 1;
 	
-	patchname = gensym("patcher");
+	patchname = gensym("p");
 	if(atom_gettype(argv+1) == A_SYM)
 		patchname = atom_getsym(argv+1);
 	
@@ -83,7 +79,7 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 		patchs = (t_object **)getbytes(harmonics * sizeof(t_object *));
 		outlets = (t_object **)getbytes(harmonics * sizeof(t_object *));
 		
-		inlets[0] = newobject_sprintf(x, "@maxclass newobj @text inlet @comment Signal @patching_rect 0 100 20 20 ");
+		inlets[0] = newobject_sprintf(x, "@maxclass newobj @text inlet @patching_rect 0 100 20 20 @comment Anything");
 		
 		for(i = 0; i < harmonics; i++)
 		{
@@ -95,7 +91,7 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 			object_method_typed(x, gensym("connect"), 4, msg, &rv);
 			atom_setobj(msg, patchs[i]);
 			atom_setlong(msg + 1, 0);
-			outlets[i] = newobject_sprintf(x, "@maxclass outlet @comment Harmonic %i @patching_rect %i 300 20 20 ",(i - (harmonics / 2)), (i * 50));
+			outlets[i] = newobject_sprintf(x, "@maxclass newobj @text outlet @patching_rect %i 300 20 20 @comment Harmonic",(i * 50));
 			atom_setobj(msg + 2, outlets[i]);
 			atom_setlong(msg + 3, 0);
 			object_method_typed(x, gensym("connect"), 4, msg, &rv);
@@ -128,9 +124,26 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	return x;
 }			
 
+<<<<<<< HEAD
 void plug_dblclick(t_object *x)
 {	
 	t_object *box, *obj;
+=======
+void plug_dsp(t_plug *x, t_signal **sp, short *count)
+{
+	t_dspchain *myDspChain;
+	myDspChain = dspchain_get();
+	myDspChain->
+	dsp_add(plug_perform, 3, sp[0]->s_vec, sp[1]->s_vec, sp[0]->s_n);
+}
+
+t_plugt *plug_perform(t_plugt *w)
+{
+	t_sample *in = (t_sample *)(w[1]);
+	t_sample *out = (t_sample *)(w[2]);
+    int sampleframes = (int)(w[3]);
+	int i;
+>>>>>>> Useless
 	
 	if(jpatcher_get_title(x) == gensym("hoa.plug~"))
 	{
