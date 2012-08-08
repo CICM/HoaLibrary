@@ -168,4 +168,6 @@ pip-log.txt
 *.mxe
 *.mxo
 *.mode1V3
+*.pbxuser
+pierreg
 #sdk-build
