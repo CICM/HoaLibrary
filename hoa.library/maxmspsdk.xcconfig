@@ -31,9 +31,7 @@ INFOPLIST_FILE = $(SRCROOT)/../Info.plist
 // Per architecture and deployment settings
 SDKROOT = /Developer/SDKs/MacOSX10.5.sdk
 
-GCC_VERSION = 4.0
 // The above line can be specialized as follows provided you are using Xcode 3 or higher
-//	GCC_VERSION[arch=i386] = 4.0
 //	GCC_VERSION[arch=ppc] = 4.0
 
 MACOSX_DEPLOYMENT_TARGET = 10.5
