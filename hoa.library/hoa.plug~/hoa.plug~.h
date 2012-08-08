@@ -17,19 +17,7 @@
 *
 */
 
-#include "ext.h"
-#include "ext_obex.h"
-#include "ext_common.h"
-#include "jpatcher_api.h"
-#include "ext_wind.h"
-#include "z_dsp.h"
-#include "ext_symobject.h"
-#include "ext_database.h"
-#include "jgraphics.h"
-#include "indexmap.h"
-#include "jdataview.h"
-
-method dblclickpatcher;
+#include "hoa.plug_script.h"
 
 typedef struct  _plug
 {
@@ -39,8 +27,11 @@ typedef struct  _plug
 
 void *plug_class;
 void *patcher_class;
+method dblclickpatcher;
 
 void *plug_new(t_symbol *s, int argc, t_atom *argv);
+void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
+void plug_router(t_object *x, t_object *inlet, t_object *patch, int index);
 
 void plug_dblclick(t_object *x);
-void plug_assist(t_object *x, void *b, long m, long a, char *s);
+void plug_load(t_object *x);

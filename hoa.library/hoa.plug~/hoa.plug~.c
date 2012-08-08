@@ -20,14 +20,19 @@
 
 int main(void)
 {
-	t_class *c;
-	
-	c = class_new("hoa.plug~", (method)plug_new, (method)NULL, (short)sizeof(t_plug *), 0L, A_GIMME, 0);	
+	t_class *plug;
+	t_class *patcher;
 
-	dblclickpatcher = class_method(class_findbyname(CLASS_NOBOX, gensym("jpatcher")), gensym("dblclick"));
-	class_dspinit(c);
-	class_register(CLASS_BOX, c);
-	plug_class = c;
+	plug = class_new("hoa.plug~", (method)plug_new, (method)NULL, (short)sizeof(t_plug), 0L, A_GIMME, 0);
+	
+	class_register(CLASS_BOX, plug);
+	plug_class = plug;
+	
+	plug_script_init();
+	
+	patcher = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
+	dblclickpatcher = class_method(patcher, gensym("dblclick"));
+	class_addmethod(patcher, (method)plug_load, "load");
 	
 	post("hoa.plug~ by Pierre Guillot & Julien Colafransceco",0);
 	post("Copyright (C) 2012, Universite Paris 8");
@@ -43,13 +48,8 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	t_object **outlets;
 	t_object **patchs;
 	
-	t_atom msg[4];
-	t_atom rv;
-	
-	t_object *x = (t_object *)object_new(CLASS_NOBOX, gensym("jpatcher"), 0, NULL);
-	jpatcher_set_title(x, gensym("hoa.plug~"));
-	method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
-	method_object_setmethod(object_getmethod_object(x, gensym("assist")), (method)plug_assist);
+	t_object *x;
+	char	args[512];
 	
 	order = 1;
 	if(atom_gettype(argv) == A_LONG)
@@ -73,28 +73,39 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 			mode = 0;
 	}
 
+	x = (t_object *)object_new(CLASS_NOBOX, gensym("jpatcher"), 0, NULL);
+	jpatcher_set_title(x, gensym("hoa.plug~"));
+	
+	//method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
+
 	if (mode == 0)
 	{
 		inlets = (t_object **)getbytes(1 * sizeof(t_object *));
 		patchs = (t_object **)getbytes(harmonics * sizeof(t_object *));
 		outlets = (t_object **)getbytes(harmonics * sizeof(t_object *));
 		
-		inlets[0] = newobject_sprintf(x, "@maxclass newobj @text inlet @patching_rect 0 100 20 20 @comment Anything");
+		inlets[0] = newobject_sprintf(x, "@maxclass inlet @comment Signal @patching_rect 0 0 20 20");
 		
 		for(i = 0; i < harmonics; i++)
 		{
-			atom_setobj(msg, inlets[0]);
-			atom_setlong(msg + 1, 0);
-			patchs[i] = newobject_sprintf(x, "@maxclass newobj @text %s @patching_rect %i 200 20 20", patchname->s_name, (i * 50));
+			
+			
+			patchs[i] = newobject_sprintf(x, "@maxclass newobj @text \"%s %i %i %i\" @patching_rect %i 400 20 20", patchname->s_name, (i - harmonics / 2), i, abs((i - harmonics / 2)),  (i * 50));
+			sprintf(args, "%s (%i)", patchname->s_name, (i - harmonics / 2));
+			jpatcher_set_title(patchs[i], gensym(args));
+			
+			plug_router(x, inlets[0], patchs[i], i);
+			//plug_connect(x, inlets[0], 0, routes[i], 0);
+			/*
+			atom_setobj(msg, route[0]);
+			atom_setlong(msg + 1, 3);
 			atom_setobj(msg + 2, patchs[i]);
 			atom_setlong(msg + 3, 0);
 			object_method_typed(x, gensym("connect"), 4, msg, &rv);
-			atom_setobj(msg, patchs[i]);
-			atom_setlong(msg + 1, 0);
-			outlets[i] = newobject_sprintf(x, "@maxclass newobj @text outlet @patching_rect %i 300 20 20 @comment Harmonic",(i * 50));
-			atom_setobj(msg + 2, outlets[i]);
-			atom_setlong(msg + 3, 0);
-			object_method_typed(x, gensym("connect"), 4, msg, &rv);
+			*/
+			sprintf(args, "Harmonic %i", (i - harmonics / 2));
+			outlets[i] = newobject_sprintf(x, "@maxclass outlet @comment \"%s \" @patching_rect %i 500 20 20 ", args, (i * 50));
+			plug_connect(x, patchs[0], 0, outlets[0], 0);
 		}
 	}
 	else if (mode == 1)
@@ -102,32 +113,68 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 		inlets = (t_object **)getbytes(harmonics * sizeof(t_object *));
 		patchs = (t_object **)getbytes(harmonics * sizeof(t_object *));
 		outlets = (t_object **)getbytes(harmonics * sizeof(t_object *));
-		
+		/*
 		for(i = 0; i < harmonics; i++)
 		{
-			inlets[i] = newobject_sprintf(x, "@maxclass newobj @text inlet @patching_rect 0 100 20 20 @comment Anything");
+			sprintf(args, "Harmonic %i", (i - harmonics / 2));
+			inlets[i] = newobject_sprintf(x, "@maxclass inlet  @comment \"%s \" @patching_rect %i 100 20 20", args, (i * 50));
 			atom_setobj(msg, inlets[i]);
 			atom_setlong(msg + 1, 0);
-			patchs[i] = newobject_sprintf(x, "@maxclass newobj @text %s @patching_rect %i 200 20 20", patchname->s_name, (i * 50));
+			patchs[i] = newobject_sprintf(x, "@maxclass newobj @text \"%s %i\" @patching_rect %i 200 20 20", patchname->s_name, (i - harmonics / 2), (i * 50));
+			sprintf(args, "%s (%i)", patchname->s_name, (i - harmonics / 2));
+			jpatcher_set_title(patchs[i], gensym(args));
 			atom_setobj(msg + 2, patchs[i]);
 			atom_setlong(msg + 3, 0);
 			object_method_typed(x, gensym("connect"), 4, msg, &rv);
 			atom_setobj(msg, patchs[i]);
 			atom_setlong(msg + 1, 0);
-			outlets[i] = newobject_sprintf(x, "@maxclass newobj @text outlet @patching_rect %i 300 20 20 @comment Harmonic",(i * 50));
+			sprintf(args, "Harmonic %i", (i - harmonics / 2));
+			outlets[i] = newobject_sprintf(x, "@maxclass outlet @comment \"%s \" @patching_rect %i 300 20 20 ", args, (i * 50));
 			atom_setobj(msg + 2, outlets[i]);
 			atom_setlong(msg + 3, 0);
 			object_method_typed(x, gensym("connect"), 4, msg, &rv);
-		}
+		}*/
 	}
-
-	return x;
+		return x;
+	
 }			
+
+void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet)
+{
+	t_atom msg[4];
+	t_atom rv;
+	
+	atom_setobj(msg, send);
+	atom_setlong(msg + 1, outlet);
+	atom_setobj(msg + 2, receive);
+	atom_setlong(msg + 3, inlet);
+	object_method_typed(x, gensym("connect"), 4, msg, &rv);
+}
+
+void plug_router(t_object *x, t_object *inlet, t_object *patch, int index)
+{
+	t_object *route;
+	t_object *routo[2];
+	t_object *sel;
+	t_object *signal;
+	
+
+	route = newobject_sprintf(x, "@maxclass newobj @text \"route mute open target signal\" @patching_rect %i 50 20 20", (index * 50));
+	plug_connect(x, inlet, 0, route, 0);
+	routo[0] = newobject_sprintf(x, "@maxclass newobj @text \"route %i\" @patching_rect %i 100 20 20", index, (index * 50));
+	plug_connect(x, route, 0, routo[0], 0);
+	routo[1] = newobject_sprintf(x, "@maxclass newobj @text \"route %i\" @patching_rect %i 100 20 20", index, (index * 50));
+	plug_connect(x, route, 1, routo[1], 0);
+	sel = newobject_sprintf(x, "@maxclass newobj @text \"sel 0 %i\" @patching_rect %i 100 20 20", index, (index * 50));
+	plug_connect(x, route, 2, sel, 0);
+	signal = newobject_sprintf(x, "@maxclass message @text signal @patching_rect %i 150 20 20", (index * 50));
+	plug_connect(x, route, 3, signal, 0);
+	
+}
 
 void plug_dblclick(t_object *x)
 {	
 	t_object *box, *obj;
-	
 	if(jpatcher_get_title(x) == gensym("hoa.plug~"))
 	{
 		for (box = jpatcher_get_firstobject(x); box; box = jbox_get_nextobject(box)) 
@@ -147,30 +194,23 @@ void plug_dblclick(t_object *x)
 		object_method(x, gensym("vis"));
 		method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
 	}
-
 }
 
-void plug_assist(t_object *x, void *b, long m, long a, char *s)
-{
-	//t_plug *z = (t_plug *)object_alloc((t_class *)plug_class);
-	//x = (t_object *)z;
-	//t_class *patcherClass = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
-	//t_class *patcherClass = (t_class *)x->o_messlist[-1];
-	//post("name : %s", x->o_messlist[0].m_sym->s_name);
-	//post("type : %s", x->o_messlist[0].m_type);
-	//object_method(x, gensym("classname"), gensym("hoa."));
-	//patcherClass->c_sym = gensym("hoa.plug~");
+void plug_load(t_object *x)
+{	
+	t_object *box, *obj;
 	if(jpatcher_get_title(x) == gensym("hoa.plug~"))
 	{
-		if (m == ASSIST_INLET) 
-		{
-			sprintf(s,"Dummy");
-		}
-		else 
-		{
-			sprintf(gensym("hoa.plug~ :")->s_name,"(Signal) Output signal");
+		for (box = jpatcher_get_firstobject(x); box; box = jbox_get_nextobject(box)) 
+		{		
+			obj = jbox_get_object(box);
+			
+			if(object_classname(obj) == gensym("jpatcher"))
+			{
+				object_free(obj);
+				return;
+			}
 		}
 	}
-	//patcherClass->c_sym = gensym("jpatcher");
 }
 

@@ -303,12 +303,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.encoder~.c</string>
+								<string>AmbisonicEncode.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -316,17 +318,17 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>hoa.encoder~.c</string>
+										<string>AmbisonicEncode.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0E6C26A215C7E65B0090858D</string>
+										<string>0EF90AC215D126EE005E043F</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
-											<string>0E64A5D715C6DABA00F85BF4</string>
 											<string>0E9994FD15C7D8DC00F54C0D</string>
-											<string>0E9994FF15C7D8DC00F54C0D</string>
+											<string>0EF90AC015D126EE005E043F</string>
+											<string>0EF90AC115D126EE005E043F</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -338,18 +340,16 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1232, 427}}</string>
+								<string>{{0, 0}, {1232, 419}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 145 1440 733 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>427pt</string>
+							<string>419pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -360,14 +360,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 432}, {1232, 260}}</string>
+								<string>{{0, 424}, {1232, 268}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 145 1440 733 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>260pt</string>
+							<string>268pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -386,9 +386,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0E6C26A315C7E65B0090858D</string>
+				<string>0EF90AC315D126EE005E043F</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0E6C26A415C7E65B0090858D</string>
+				<string>0EF90AC415D126EE005E043F</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -527,7 +527,6 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>0E91E3DD15BEAA7300452428</string>
-		<string>/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.encoder~/hoa.encoder~.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 145 1440 733 0 0 1440 878 </string>
@@ -607,7 +606,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0E91E3DD15BEAA7300452428</string>
-				<string>0E6C26A515C7E65B0090858D</string>
+				<string>0EF90AC515D126EE005E043F</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
