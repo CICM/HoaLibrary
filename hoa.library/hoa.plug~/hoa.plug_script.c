@@ -33,7 +33,7 @@ void plug_script_init()
 	class_addmethod(c, (method)plug_script_dsp64,				"dsp64",		A_CANT,	0);
 	class_addmethod(c, (method)plug_script_dsp,					"dsp",			A_CANT,	0);
 	
-	class_addmethod(c, (method)plug_script_open,				"open",			A_GIMME, 0);
+	//class_addmethod(c, (method)plug_script_open,				"open",			A_GIMME, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
@@ -50,7 +50,10 @@ void *plug_script_new(t_symbol *s, int argc, t_atom *argv)
 	
 	if (x = (t_plug_script *)object_alloc((t_class *)plug_script_class)) 
 	{
-		x->f_outlet = outlet_new((t_pxobject *)x, "signal");
+		x->f_outlet = outlet_new((t_object *)x, NULL);
+		x->f_outlet = intout((t_object *)x);
+		x->f_outlet = outlet_new((t_object *)x, NULL);
+		outlet_new((t_pxobject *)x, "signal");
 		dsp_setup((t_pxobject *)x, 1);
 		attr_args_process(x, argc, argv);
 	}

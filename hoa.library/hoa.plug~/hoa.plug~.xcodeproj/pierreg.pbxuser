@@ -86,6 +86,11 @@
 			0E97D76115D2632F002C1DD0 /* PBXTextBookmark */ = 0E97D76115D2632F002C1DD0 /* PBXTextBookmark */;
 			0E97D76215D2632F002C1DD0 /* PBXTextBookmark */ = 0E97D76215D2632F002C1DD0 /* PBXTextBookmark */;
 			0E97D76315D2632F002C1DD0 /* PBXTextBookmark */ = 0E97D76315D2632F002C1DD0 /* PBXTextBookmark */;
+			0E97D76815D26471002C1DD0 /* PBXTextBookmark */ = 0E97D76815D26471002C1DD0 /* PBXTextBookmark */;
+			0E97D76915D26471002C1DD0 /* PBXTextBookmark */ = 0E97D76915D26471002C1DD0 /* PBXTextBookmark */;
+			0E97D76A15D26471002C1DD0 /* PBXTextBookmark */ = 0E97D76A15D26471002C1DD0 /* PBXTextBookmark */;
+			0E97D76B15D26471002C1DD0 /* XCBuildMessageTextBookmark */ = 0E97D76B15D26471002C1DD0 /* XCBuildMessageTextBookmark */;
+			0E97D76C15D26471002C1DD0 /* PBXTextBookmark */ = 0E97D76C15D26471002C1DD0 /* PBXTextBookmark */;
 			0E9A03AC15CFB68E005E91C0 = 0E9A03AC15CFB68E005E91C0 /* PBXTextBookmark */;
 			0E9A03AE15CFB68E005E91C0 = 0E9A03AE15CFB68E005E91C0 /* PBXTextBookmark */;
 			0E9A03AF15CFB68E005E91C0 = 0E9A03AF15CFB68E005E91C0 /* PBXTextBookmark */;
@@ -127,9 +132,9 @@
 		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.plug~/hoa.plug~.c";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 2860}}";
-			sepNavSelRange = "{806, 0}";
-			sepNavVisRange = "{302, 1036}";
+			sepNavIntBoundsRect = "{{0, 0}, {922, 2860}}";
+			sepNavSelRange = "{858, 0}";
+			sepNavVisRange = "{807, 620}";
 		};
 	};
 	0E4F829715CD305900E1B652 /* PBXTextBookmark */ = {
@@ -229,9 +234,9 @@
 		path = "/Users/pierreg/Documents/SDKs/MaxSDK-5.1.7/c74support/max-includes/ext_proto.h";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 27963}}";
-			sepNavSelRange = "{22315, 46}";
-			sepNavVisRange = "{21733, 1278}";
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 28236}}";
+			sepNavSelRange = "{23317, 23}";
+			sepNavVisRange = "{24491, 1213}";
 		};
 	};
 	0E6C27F115C8130B0090858D /* commonsyms.c */ = {
@@ -692,7 +697,7 @@
 		fRef = 0E9F7C3515D23EAA006B285D /* hoa.plug_script.c */;
 		name = "hoa.plug_script.c: 51";
 		rLen = 0;
-		rLoc = 1967;
+		rLoc = 2092;
 		rType = 0;
 		vrLen = 555;
 		vrLoc = 2001;
@@ -762,7 +767,7 @@
 		fRef = 0E9F7C3515D23EAA006B285D /* hoa.plug_script.c */;
 		name = "hoa.plug_script.c: 87";
 		rLen = 0;
-		rLoc = 2692;
+		rLoc = 2817;
 		rType = 0;
 		vrLen = 769;
 		vrLoc = 2340;
@@ -772,10 +777,59 @@
 		fRef = 0E9F7C3515D23EAA006B285D /* hoa.plug_script.c */;
 		name = "hoa.plug_script.c: 82";
 		rLen = 4;
-		rLoc = 2537;
+		rLoc = 2662;
 		rType = 0;
 		vrLen = 732;
 		vrLoc = 2167;
+	};
+	0E97D76815D26471002C1DD0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E6C278415C80EBF0090858D /* ext_proto.h */;
+		name = "ext_proto.h: 709";
+		rLen = 23;
+		rLoc = 23317;
+		rType = 0;
+		vrLen = 1213;
+		vrLoc = 24491;
+	};
+	0E97D76915D26471002C1DD0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E4F821315CD1E2100E1B652 /* hoa.plug~.c */;
+		name = "hoa.plug~.c: 19";
+		rLen = 0;
+		rLoc = 806;
+		rType = 0;
+		vrLen = 1035;
+		vrLoc = 302;
+	};
+	0E97D76A15D26471002C1DD0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9F7C3415D23EAA006B285D /* hoa.plug_script.h */;
+		name = "hoa.plug_script.h: 50";
+		rLen = 0;
+		rLoc = 1816;
+		rType = 0;
+		vrLen = 1166;
+		vrLoc = 968;
+	};
+	0E97D76B15D26471002C1DD0 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'plug_script_open' was not declared in this scope";
+		fRef = 0E9F7C3515D23EAA006B285D /* hoa.plug_script.c */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 35;
+		rType = 1;
+	};
+	0E97D76C15D26471002C1DD0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0E9F7C3515D23EAA006B285D /* hoa.plug_script.c */;
+		name = "hoa.plug_script.c: 36";
+		rLen = 0;
+		rLoc = 1518;
+		rType = 0;
+		vrLen = 1124;
+		vrLoc = 829;
 	};
 	0E9A03A515CFB5DE005E91C0 /* jpatcher_syms.c */ = {
 		uiCtxt = {
@@ -1047,9 +1101,9 @@
 	};
 	0E9F7C3515D23EAA006B285D /* hoa.plug_script.c */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 1716}}";
-			sepNavSelRange = "{2537, 4}";
-			sepNavVisRange = "{2167, 732}";
+			sepNavIntBoundsRect = "{{0, 0}, {1171, 1456}}";
+			sepNavSelRange = "{1518, 0}";
+			sepNavVisRange = "{829, 1124}";
 		};
 	};
 	0E9F7C4015D24D02006B285D /* PBXTextBookmark */ = {

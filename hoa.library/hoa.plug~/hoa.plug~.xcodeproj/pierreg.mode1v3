@@ -326,7 +326,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0E97D76315D2632F002C1DD0</string>
+										<string>0E97D76C15D26471002C1DD0</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
@@ -374,12 +374,12 @@
 											<string>0E9F7BB615D18C49006B285D</string>
 											<string>0E9F7BB815D18C49006B285D</string>
 											<string>0E9F7C4015D24D02006B285D</string>
-											<string>0E97D72215D25DC1002C1DD0</string>
 											<string>0E97D72315D25DC1002C1DD0</string>
 											<string>0E97D75F15D2632F002C1DD0</string>
-											<string>0E97D76015D2632F002C1DD0</string>
-											<string>0E97D76115D2632F002C1DD0</string>
-											<string>0E97D76215D2632F002C1DD0</string>
+											<string>0E97D76815D26471002C1DD0</string>
+											<string>0E97D76915D26471002C1DD0</string>
+											<string>0E97D76A15D26471002C1DD0</string>
+											<string>0E97D76B15D26471002C1DD0</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -602,7 +602,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.plug~.c</string>
+								<string>hoa.plug_script.c</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
