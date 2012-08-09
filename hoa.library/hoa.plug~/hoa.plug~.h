@@ -95,6 +95,6 @@ void plug_patch(t_object *patcher, t_symbol *s, int *ninlet, int *noutlet, t_obj
 void plug_script(t_object *patcher, t_symbol *s, int index, int order, t_object *script, int mode);
 void plug_outlet(t_object *patcher, t_object **outlets, int noutlet, t_object *patch, int index, int order);
 void plug_inlet(t_object *patcher, t_object **inlets, int nInlet, int mode, int index, int order, t_object *plug_script);
-void plug_routo(t_object *patcher, t_object *router, t_object *prependO, t_object *prependM, t_object *prependT, int mode, int nInlets, t_object *script, t_object **inlets, int index);
+void plug_routo(t_object *patcher, t_object **router, int mode, int nInlets, t_object *script, t_object **inlets, int index);
 void plug_routons(t_object *x, int order, t_symbol *s, int mode);
 #endif
