@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef DEF_HOA_PLUG
-#define DEF_HOA_PLUG
+#ifndef DEF_HOA.PLUG_SCRIPT
+#define DEF_HOA.PLUG_SCRIPT
 
 #include "ext.h"
 #include "ext_obex.h"
@@ -34,25 +34,25 @@
 typedef struct  _plug_script
 {
 	t_pxobject	f_ob;
-	
-	t_object	*f_patcher;
-	t_object	*f_patcherview;
-	
-	int			f_inlet[10];
-	t_object	**f_object;
-	int			f_count;
-	int			f_harmonics;
-	int			f_gate;
-	
-} t_connect;
+	void		*f_outlet;
+} t_plug_script;
 
+void *plug_script_class;
+void plug_script_init();
+void *plug_script_new(t_symbol *s, int argc, t_atom *argv);
+void plug_script_free(t_plug_script *x);
+void plug_script_assist(t_plug_script *x, void *b, long m, long a, char *s);
 
-void *connect_class;
+void plug_script_dsp64(t_plug_script *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void plug_script_perform64(t_plug_script *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void *connect_new(long n);
-void connect_free(t_connect *x);
-void connect_bang(t_connect *x);
-void connect_connect(t_connect *x, t_object *send, int outlet, t_object *receive, int inlet);
-void connect_attach(t_connect *x);
-void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void plug_script_dsp(t_plug_script *x, t_signal **sp, short *count);
+t_int *plug_script_perform(t_int *w);
+
+void plug_script_bang(t_plug_script *x);
+void plug_script_int(t_plug_script *x, long n);
+void plug_script_float(t_plug_script *x, double f);
+void plug_script_list(t_plug_script *x, t_symbol *s, long argc, t_atom *argv);
+void plug_script_anything(t_plug_script *x, t_symbol *s, long argc, t_atom *argv);
+
 #endif

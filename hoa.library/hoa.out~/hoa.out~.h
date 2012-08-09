@@ -17,21 +17,25 @@
 *
 */
 
-#include "hoa.plug_script.h"
+#include "ext.h"
+#include "ext_obex.h"
+#include "ext_common.h"
+#include "z_dsp.h"
 
-typedef struct  _plug
+typedef struct  _out
 {
-	t_object	f_ob;
-	
-} t_plug;
+	t_pxobject	f_ob;
+	t_sample	*f_vector;
+} t_out;
 
-void *plug_class;
-void *patcher_class;
-method dblclickpatcher;
+void *out_class;
 
-void *plug_new(t_symbol *s, int argc, t_atom *argv);
-void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
-void plug_router(t_object *x, t_object *inlet, t_object *patch, int index);
+void *out_new(t_symbol *s, int argc, t_atom *argv);
+void out_free(t_out *x);
+void out_assist(t_out *x, void *b, long m, long a, char *s);
 
-void plug_dblclick(t_object *x);
-void plug_load(t_object *x);
+void out_dsp64(t_out *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void out_perform64(t_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+
+void out_dsp(t_out *x, t_signal **sp, short *count);
+t_int *out_perform(t_int *w);
