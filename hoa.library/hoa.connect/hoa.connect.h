@@ -40,18 +40,13 @@ typedef struct  _connect
 	
 	t_object	*f_patcher;
 	t_object	*f_patcherview;
+	t_object	*f_newpatch;
 	
-	int			f_inlet[10];
 	t_object	*f_object[100];
-	int			f_count;
+	int			f_index[100];
 	int			f_inc;
 	int			f_harmonics;
-	int			f_gate;
-	
-	t_object	*f_mouseState;
-	t_object	*f_me;
-	t_object	*f_newpatch;
-	t_object	*f_out;
+	int			f_output;
 	
 	t_rect		f_jr;
 } t_connect;
@@ -72,11 +67,12 @@ void *in_new();
 void in_list(t_in *x, t_symbol *s, long argc, t_atom *argv);
 
 
+
+void *connect_new(t_symbol *s, long argc, t_atom *argv);
 void connect_getinput(t_connect *x);
-void *connect_new(long n);
 void connect_free(t_connect *x);
 void connect_bang(t_connect *x);
-void connect_connect(t_connect *x, t_object *send, int outlet, t_object *receive, int inlet);
+void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
 void connect_attach(t_connect *x);
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void connect_list(t_connect *x, t_symbol *s, long argc, t_atom *argv);
