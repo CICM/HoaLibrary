@@ -271,7 +271,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
+									<integer>5</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
@@ -314,7 +314,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.plug_script.c</string>
+								<string>hoa.plug~.c</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -322,17 +322,15 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>hoa.plug_script.c</string>
+										<string>hoa.plug~.c</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0E97D76C15D26471002C1DD0</string>
+										<string>0EED287315D3C4C80011B442</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
-											<string>0E6C26AB15C7EBF30090858D</string>
 											<string>0E6C26CC15C7F0230090858D</string>
-											<string>0E6C26EE15C7F2DA0090858D</string>
 											<string>0E6C281715C814670090858D</string>
 											<string>0E6C285115C816CE0090858D</string>
 											<string>0E6C28A615C81FF80090858D</string>
@@ -365,21 +363,19 @@
 											<string>0E9A03AC15CFB68E005E91C0</string>
 											<string>0E9A03AE15CFB68E005E91C0</string>
 											<string>0E9A03AF15CFB68E005E91C0</string>
-											<string>0E9A03B215CFB68E005E91C0</string>
-											<string>0E9A03E315CFBDA6005E91C0</string>
 											<string>0E9A059915CFE61A005E91C0</string>
-											<string>0E9A059C15CFE61A005E91C0</string>
 											<string>0E9A05F115CFEE8A005E91C0</string>
-											<string>0ECA744315D17F2700A8E094</string>
 											<string>0E9F7BB615D18C49006B285D</string>
-											<string>0E9F7BB815D18C49006B285D</string>
-											<string>0E9F7C4015D24D02006B285D</string>
-											<string>0E97D72315D25DC1002C1DD0</string>
-											<string>0E97D75F15D2632F002C1DD0</string>
-											<string>0E97D76815D26471002C1DD0</string>
-											<string>0E97D76915D26471002C1DD0</string>
-											<string>0E97D76A15D26471002C1DD0</string>
-											<string>0E97D76B15D26471002C1DD0</string>
+											<string>0E97D89715D29D46002C1DD0</string>
+											<string>0E97D92015D2B273002C1DD0</string>
+											<string>0E92EC7315D2EB4700498C89</string>
+											<string>0E91D73B15D2F3C800358F12</string>
+											<string>0E91D82015D3075100358F12</string>
+											<string>0E7C685415D32977000491CE</string>
+											<string>0E7C685515D32977000491CE</string>
+											<string>0EC22E0315D3BDAA000A956E</string>
+											<string>0EED286115D3C2640011B442</string>
+											<string>0EED286315D3C2640011B442</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -391,14 +387,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1232, 486}}</string>
+								<string>{{0, 0}, {1232, 434}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 160 1440 717 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>486pt</string>
+							<string>434pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -411,14 +407,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 491}, {1232, 185}}</string>
+								<string>{{0, 439}, {1232, 237}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 160 1440 717 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>185pt</string>
+							<string>237pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -437,9 +433,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0E97D72915D25DC1002C1DD0</string>
+				<string>0EED282515D3BDC00011B442</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0E97D72A15D25DC1002C1DD0</string>
+				<string>0EED282615D3BDC00011B442</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -602,7 +598,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.plug_script.c</string>
+								<string>hoa.plug~.c</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -660,7 +656,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0E91E3DD15BEAA7300452428</string>
-				<string>0E97D72115D25DAB002C1DD0</string>
+				<string>0EED282715D3BDC00011B442</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -673,7 +669,7 @@
 			<key>WindowToolGUID</key>
 			<string>0E91E3DD15BEAA7300452428</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
