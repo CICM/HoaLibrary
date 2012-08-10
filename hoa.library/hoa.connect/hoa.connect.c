@@ -105,7 +105,7 @@ void connect_bang(t_connect *x)
 	t_object *box, *obj, *jb, *o, *var;
 	
 	t_rect jr;
-	int i, j, k;
+	int i, j, k, go;
 
 	t_atom *av = NULL;
 	long ac = 0;
@@ -121,7 +121,7 @@ void connect_bang(t_connect *x)
 		//post(" patcher %i", patchY);
 		freebytes(av, sizeof(t_atom) * ac);
 	}
-	
+	go = 0;
 	x->f_inc = 0;
 	for (box = jpatcher_get_firstobject(x->f_patcher); box; box = jbox_get_nextobject(box)) 
 	{		
@@ -146,11 +146,16 @@ void connect_bang(t_connect *x)
 				{
 					if(jr.x + jr.width + patchX > x->f_jr.x && jr.y + jr.height + patchY > x->f_jr.y && jr.x + patchX < x->f_jr.width && jr.y + patchY<  x->f_jr.height)
 					{
-						x->f_index[x->f_inc] = jr.x;
-						x->f_object[x->f_inc++] = box;
+						go = 1;
 					}
 				}
 				jb = jbox_get_nextobject(jb);
+			}
+			if(go)
+			{
+				x->f_index[x->f_inc] = jr.x;
+				x->f_object[x->f_inc++] = box;
+				go = 0;
 			}
 		}
 	}
