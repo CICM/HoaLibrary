@@ -46,7 +46,8 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 	t_object *x;
 	
 	x = (t_object *)object_new(CLASS_NOBOX, gensym("jpatcher"), 0, NULL);
-	//method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
+	jpatcher_set_title(x, gensym("hoa.plug~"));
+	method_object_setmethod(object_getmethod_object(x, gensym("dblclick")), (method)plug_dblclick);
 	
 	order = 1;
 	if(atom_gettype(argv) == A_LONG)
@@ -322,7 +323,7 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode)
 {
 	int i, j, k, ninlet = 0, noutlet = 0;
 	t_object *firstPatch, *jb, *o;
-	t_object  **inlets, **scripts, **patchs, **outlets, *router[4];
+	t_object  **inlets, **scripts, **pcontr, **patchs, **outlets, *router[4];
 	char name[512];
 
 	firstPatch = newobject_sprintf(x, "@maxclass newobj @text %s @patching_rect 0 0 20 20",	s->s_name);
@@ -383,6 +384,7 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode)
 	}
 	else 
 	{
+		/*
 		router[0] = newobject_sprintf(x, "@maxclass newobj @text \"route open mute target\" @patching_rect 0 50 20 20");
 		router[1] = newobject_sprintf(x, "@maxclass newobj @text \"prepend open\" @patching_rect 0 100 20 20");
 		router[2] = newobject_sprintf(x, "@maxclass newobj @text \"prepend mute\" @patching_rect 0 150 20 20");
@@ -390,22 +392,46 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode)
 		plug_connect(x, router[0], 0, router[1], 0);
 		plug_connect(x, router[0], 1, router[2], 0);
 		plug_connect(x, router[0], 2, router[3], 0);
-
+		*/
 		inlets = (t_object **)getbytes(ninlet * sizeof(t_object *));
-		scripts = (t_object **)getbytes(ninlet * sizeof(t_object *));
 		for(i = 0; i < ninlet; i++)
 		{
-			inlets[i] = plug_inlet(x, i, order, i);
-			scripts[i] = plug_script(x, i, order, i);
-			plug_connect(x, inlets[i], 0, scripts[i], 0);
+			inlets[i] = plug_inlet(x, i, order, 1);
+			//plug_connect(x, inlets[i], 0, router[0], 0);
 		}
+		
+		scripts = (t_object **)getbytes((order * 2 + 1) * ninlet * sizeof(t_object *));
+		pcontr = (t_object **)getbytes((order * 2 + 1) * ninlet * sizeof(t_object *));
+		for(i = 0; i < (order * 2 + 1) * ninlet; i++)
+		{
+			scripts[i] = plug_script(x, i, order, ninlet);
+			pcontr[i] = plug_pcontr(x, i, order, ninlet);
+			plug_connect(x, scripts[i], 2, pcontr[i], 0);
+			plug_connect(x, inlets[i % ninlet], 0, scripts[i], 0);
+			//for(j = 1; j < 4; j++)
+				//plug_connect(x, router[j], 0, scripts[i], 0);
+		}
+		
 		patchs = (t_object **)getbytes((order * 2 + 1) * sizeof(t_object *));
 		for(i = 0; i < (order * 2 + 1); i++)
 		{
-			patchs[i] = newobject_sprintf(x, "@maxclass newobj @text \"%s %i %i\" @patching_rect %i 400 20 20", s->s_name, plug_harmonic(i, order), i,  i * 50);
+			patchs[i] = plug_patch(x, s, i, order);
 			sprintf(name, "%s (%i)", s->s_name,  plug_harmonic(i, order));
 			jpatcher_set_title(patchs[i], gensym(name));
+			for(j = 0; j < ninlet; j++)
+			{
+				plug_connect(x, scripts[i * ninlet +j], 0, patchs[i], j);
+				plug_connect(x, scripts[i * ninlet +j], 1, patchs[i], j);
+				plug_connect(x, pcontr[i * ninlet +j], 0, patchs[i], j);
+			}
 			
+		}
+		
+		outlets = (t_object **)getbytes((order * 2 + 1) * noutlet * sizeof(t_object *));
+		for(i = 0; i < (order * 2 + 1) * noutlet; i++)
+		{
+			outlets[i] = plug_outlet(x, i, order, noutlet);
+			plug_connect(x, patchs[int(i /noutlet)], i % noutlet, outlets[i], 0);
 		}
 			
 	}

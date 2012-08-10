@@ -38,6 +38,8 @@ typedef struct _HoaEncode
 	long						f_order;
 	long						f_harmonics;
 	std::vector<double>			f_computedOuput;
+	
+	int							f_mode;
 
 } t_HoaEncode;
 
@@ -89,18 +91,25 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 	
 	if (x = (t_HoaEncode *)object_alloc((t_class*)HoaEncode_class)) 
 	{
+		x->f_mode = 0;
 		x->f_order = 1;
 		if(argv[0].a_type == A_LONG)
 			x->f_order = atom_getlong(argv);
 		if(x->f_order < 1) x->f_order = 1;
 		x->f_harmonics = 2 * x->f_order + 1;
-		
+		if (atom_gettype(argv+1)) 
+		{
+			if(atom_getsym(argv+1) == gensym("split")
+			   x->f_mode = 1;
+		}
 		x->f_inputNumber = x->f_order + 2;
 		x->f_outputNumber = x->f_harmonics;
 		
-		x->f_ambiEncoder = new AmbisonicEncode(x->f_order);
-		
-		dsp_setup((t_pxobject *)x, 2);	
+		x->f_ambiEncoder = new AmbisonicEncode(x->f_order + 2);
+		if(x->f_mode)
+			dsp_setup((t_pxobject *)x, x->f_order);
+		else
+			   dsp_setup((t_pxobject *)x, 2);	
 		for (int i = 0; i < x->f_outputNumber; i++) 
 			outlet_new(x, "signal");
 		
