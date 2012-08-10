@@ -34,20 +34,11 @@
 typedef struct  _plug_script
 {
 	t_pxobject	f_ob;
-	t_object	*f_myBox;
 	void		*f_outany;
 	void		*f_outcontr;
 	void		*f_outsignal;
 
 	int			f_gate;
-	
-	t_object	*f_parentPatcher;
-	t_object	*f_patcherview;
-	t_object	*f_hoaPatcher;
-	t_object	**f_other;
-	t_symbol	*f_patchName;
-	int			f_order;
-	int			f_mode;
 	int			f_index;
 	
 } t_plug_script;
@@ -68,7 +59,7 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode);
 void plug_dblclick(t_object *x);
 
 void plug_script_init();
-void *plug_script_new(t_symbol *s, int argc, t_atom *argv);
+void *plug_script_new(long n);
 void plug_script_free(t_plug_script *x);
 void plug_script_assist(t_plug_script *x, void *b, long m, long a, char *s);
 
@@ -90,11 +81,11 @@ void plug_script_load(t_plug_script *x, t_symbol *s);
 
 int plug_harmonic(int index, int order);
 void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
-void plug_defer(t_object *x, t_symbol *s, short argc, t_atom *argv);
-void plug_patch(t_object *patcher, t_symbol *s, int *ninlet, int *noutlet, t_object *patch, int index, int order, t_object *script);
-void plug_script(t_object *patcher, t_symbol *s, int index, int order, t_object *script, int mode);
-void plug_outlet(t_object *patcher, t_object **outlets, int noutlet, t_object *patch, int index, int order);
-void plug_inlet(t_object *patcher, t_object **inlets, int nInlet, int mode, int index, int order, t_object *plug_script);
-void plug_routo(t_object *patcher, t_object **router, int mode, int nInlets, t_object *script, t_object **inlets, int index);
-void plug_routons(t_object *x, int order, t_symbol *s, int mode);
+t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order);
+t_object *plug_script(t_object *patcher, int index, int order, int ninlet);
+t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet);
+t_object *plug_inlet(t_object *patcher, int index, int order, int ninlet);
+t_object *plug_pcontr(t_object *patcher, int index, int order, int ninlet);
+
+
 #endif
