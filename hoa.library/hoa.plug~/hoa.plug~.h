@@ -40,7 +40,10 @@ typedef struct  _plug_script
 
 	int			f_gate;
 	int			f_index;
-	
+	int			f_mode;
+	int			f_order;
+	int			f_inlet;
+	int			f_outlet;
 } t_plug_script;
 
 typedef struct  _plug
@@ -59,7 +62,7 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode);
 void plug_dblclick(t_object *x);
 
 void plug_script_init();
-void *plug_script_new(long n);
+void *plug_script_new(t_symbol *s, int argc, t_atom *argv);
 void plug_script_free(t_plug_script *x);
 void plug_script_assist(t_plug_script *x, void *b, long m, long a, char *s);
 
@@ -81,10 +84,10 @@ void plug_script_load(t_plug_script *x, t_symbol *s);
 
 int plug_harmonic(int index, int order);
 void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
-t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order);
-t_object *plug_script(t_object *patcher, int index, int order, int ninlet);
-t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet);
-t_object *plug_inlet(t_object *patcher, int index, int order, int ninlet);
+t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int mode);
+t_object *plug_script(t_object *patcher, int index, int order, int ninlet, int noutlet, int mode);
+t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet, int mode);
+t_object *plug_inlet(t_object *patcher, int index, int order, int ninlet, int mode);
 t_object *plug_pcontr(t_object *patcher, int index, int order, int ninlet);
 
 
