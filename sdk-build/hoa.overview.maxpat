@@ -27,6 +27,32 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"handoff" : "",
+					"id" : "obj-43",
+					"maxclass" : "ubutton",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "bang", "bang", "", "int" ],
+					"patching_rect" : [ 285.0, 180.0, 175.0, 20.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-18",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 285.0, 180.0, 175.0, 20.0 ],
+					"text" : "hoa.grain~ 4"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"handoff" : "",
 					"id" : "obj-6",
 					"maxclass" : "ubutton",
 					"numinlets" : 1,
@@ -178,13 +204,13 @@
 ,
 					"patching_rect" : [ 299.0, 333.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p see_also"
@@ -210,7 +236,7 @@
 					"fontsize" : 11.595187,
 					"hidden" : 1,
 					"id" : "obj-57",
-					"items" : [ "(Objects:)", ",", "hoa.delay~" ],
+					"items" : [ "(Objects:)", ",", "hoa.delay~", ",", "hoa.grain~" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -254,18 +280,6 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
 					"patching_rect" : [ 510.0, 195.0, 175.0, 20.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"handoff" : "",
-					"id" : "obj-43",
-					"maxclass" : "ubutton",
-					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 510.0, 165.0, 175.0, 20.0 ]
 				}
 
 			}
@@ -591,8 +605,9 @@
 					"fontsize" : 12.0,
 					"id" : "obj-8",
 					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
+					"numinlets" : 10,
+					"numoutlets" : 9,
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 30.0, 210.0, 175.0, 20.0 ],
 					"text" : "hoa.rotate~ 4"
 				}
@@ -739,13 +754,13 @@
 ,
 					"patching_rect" : [ 83.0, 391.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p see_also"
