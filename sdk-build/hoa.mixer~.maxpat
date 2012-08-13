@@ -470,7 +470,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-14", 0 ],
 					"hidden" : 0,
-					"midpoints" : [ 84.5, 172.0, 324.5, 172.0 ],
+					"midpoints" : [ 84.5, 195.0, 324.5, 195.0 ],
 					"source" : [ "obj-22", 0 ]
 				}
 
