@@ -27,6 +27,32 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"handoff" : "",
+					"id" : "obj-42",
+					"maxclass" : "ubutton",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "bang", "bang", "", "int" ],
+					"patching_rect" : [ 285.0, 210.0, 175.0, 20.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-30",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 285.0, 210.0, 175.0, 20.0 ],
+					"text" : "hoa.mixer~ 4"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"handoff" : "",
 					"id" : "obj-43",
 					"maxclass" : "ubutton",
 					"numinlets" : 1,
@@ -204,13 +230,13 @@
 ,
 					"patching_rect" : [ 299.0, 333.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontface" : 0,
-						"fontsize" : 12.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : ""
+						"globalpatchername" : "",
+						"fontface" : 0,
+						"fontsize" : 12.0
 					}
 ,
 					"text" : "p see_also"
@@ -236,7 +262,7 @@
 					"fontsize" : 11.595187,
 					"hidden" : 1,
 					"id" : "obj-57",
-					"items" : [ "(Objects:)", ",", "hoa.delay~", ",", "hoa.grain~" ],
+					"items" : [ "(Objects:)", ",", "hoa.delay~", ",", "hoa.grain~", ",", "hoa.mixer~" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -268,18 +294,6 @@
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
 					"patching_rect" : [ 507.0, 230.0, 175.0, 20.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"handoff" : "",
-					"id" : "obj-42",
-					"maxclass" : "ubutton",
-					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 510.0, 195.0, 175.0, 20.0 ]
 				}
 
 			}
@@ -754,13 +768,13 @@
 ,
 					"patching_rect" : [ 83.0, 391.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontface" : 0,
-						"fontsize" : 12.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : ""
+						"globalpatchername" : "",
+						"fontface" : 0,
+						"fontsize" : 12.0
 					}
 ,
 					"text" : "p see_also"
