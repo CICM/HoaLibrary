@@ -186,11 +186,13 @@
 					Developer/usr/lib,
 				);
 				OTHER_LDFLAGS = (
-					"-lgsl",
+					libgsl.a,
+					"-static",
 					"-lcblas",
 					"-latlas",
 					"-lm",
 				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;
 			};
@@ -209,11 +211,13 @@
 					Developer/usr/lib,
 				);
 				OTHER_LDFLAGS = (
-					"-lgsl",
+					libgsl.a,
+					"-static",
 					"-lcblas",
 					"-latlas",
 					"-lm",
 				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;
 			};
@@ -242,6 +246,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					/Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					/usr/local/lib/libgsl.a,
+					"-lcblas",
+					"-latlas",
+					"-lm",
 				);
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = i386;
@@ -274,6 +284,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
 					/Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					/usr/local/lib/libgsl.a,
+					"-lcblas",
+					"-latlas",
+					"-lm",
 				);
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = i386;

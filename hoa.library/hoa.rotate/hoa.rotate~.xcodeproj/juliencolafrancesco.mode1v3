@@ -273,9 +273,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
-									<integer>2</integer>
-									<integer>0</integer>
+									<integer>10</integer>
+									<integer>9</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -298,7 +297,7 @@
 							<real>225</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>90 55 1187 723 0 0 1280 778 </string>
+						<string>61 55 1187 723 0 0 1280 778 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -316,7 +315,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.rotate~.c</string>
+								<string>ambisonicRotate.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -324,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>hoa.rotate~.c</string>
+										<string>ambisonicRotate.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>4E61802915D9135400FF9D29</string>
+										<string>4E6180B315D91C8C00FF9D29</string>
 										<key>history</key>
 										<array>
 											<string>4E55B26B14A738370095F784</string>
@@ -341,9 +340,8 @@
 											<string>4E796F6B15BEAE4000BCE9E1</string>
 											<string>4EBAEA8315C7CFBA00BB54B7</string>
 											<string>4EBAEA8415C7CFBA00BB54B7</string>
-											<string>4EBAEA8515C7CFBA00BB54B7</string>
+											<string>4E6180B215D91C8C00FF9D29</string>
 											<string>4EBB580015C7E788009B5784</string>
-											<string>4EBB580115C7E788009B5784</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -355,14 +353,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {940, 677}}</string>
+								<string>{{0, 0}, {940, 474}}</string>
 								<key>RubberWindowFrame</key>
-								<string>90 55 1187 723 0 0 1280 778 </string>
+								<string>61 55 1187 723 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>677pt</string>
+							<string>474pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -375,14 +373,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 682}, {940, 0}}</string>
+								<string>{{0, 479}, {940, 203}}</string>
 								<key>RubberWindowFrame</key>
-								<string>90 55 1187 723 0 0 1280 778 </string>
+								<string>61 55 1187 723 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>0pt</string>
+							<string>203pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -401,9 +399,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>4E61802A15D9135400FF9D29</string>
+				<string>4E61808F15D91A4000FF9D29</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>4E61802B15D9135400FF9D29</string>
+				<string>4E61809015D91A4000FF9D29</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -558,7 +556,7 @@
 		<string>/Users/juliencolafrancesco/developpement/CICM-Library/hoa.library/hoa.rotate/hoa.rotate~.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>90 55 1187 723 0 0 1280 778 </string>
+	<string>61 55 1187 723 0 0 1280 778 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -635,7 +633,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>4E55B21514A736330095F784</string>
-				<string>4E61802C15D9135400FF9D29</string>
+				<string>4E61809115D91A4000FF9D29</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

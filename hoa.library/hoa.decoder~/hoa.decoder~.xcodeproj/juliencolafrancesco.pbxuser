@@ -107,14 +107,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 366548448;
-			PBXWorkspaceStateSaveDate = 366548448;
+			PBXPerProjectTemplateStateSaveDate = 366550127;
+			PBXWorkspaceStateSaveDate = 366550127;
 		};
 		perUserProjectItems = {
 			4E1764AC1555CB690006A689 /* PBXTextBookmark */ = 4E1764AC1555CB690006A689 /* PBXTextBookmark */;
 			4E55B26B14A738370095F784 /* PBXTextBookmark */ = 4E55B26B14A738370095F784 /* PBXTextBookmark */;
-			4E61803515D9136700FF9D29 /* PBXTextBookmark */ = 4E61803515D9136700FF9D29 /* PBXTextBookmark */;
 			4E61804E15D915E600FF9D29 /* PBXTextBookmark */ = 4E61804E15D915E600FF9D29 /* PBXTextBookmark */;
+			4E6180A215D91C7600FF9D29 /* PBXTextBookmark */ = 4E6180A215D91C7600FF9D29 /* PBXTextBookmark */;
 			4E796F6515BEAE4000BCE9E1 /* PBXTextBookmark */ = 4E796F6515BEAE4000BCE9E1 /* PBXTextBookmark */;
 			4E796F6715BEAE4000BCE9E1 /* PBXTextBookmark */ = 4E796F6715BEAE4000BCE9E1 /* PBXTextBookmark */;
 			4E796F6915BEAE4000BCE9E1 /* PBXTextBookmark */ = 4E796F6915BEAE4000BCE9E1 /* PBXTextBookmark */;
@@ -179,16 +179,6 @@
 		vrLen = 981;
 		vrLoc = 0;
 	};
-	4E61803515D9136700FF9D29 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
-		name = "ambisonicDecode.cpp: 22";
-		rLen = 0;
-		rLoc = 428;
-		rType = 0;
-		vrLen = 1172;
-		vrLoc = 0;
-	};
 	4E61804E15D915E600FF9D29 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
@@ -197,6 +187,16 @@
 		rLoc = 428;
 		rType = 0;
 		vrLen = 1174;
+		vrLoc = 0;
+	};
+	4E6180A215D91C7600FF9D29 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
+		name = "ambisonicDecode.cpp: 20";
+		rLen = 0;
+		rLoc = 423;
+		rType = 0;
+		vrLen = 1172;
 		vrLoc = 0;
 	};
 	4E796F6515BEAE4000BCE9E1 /* PBXTextBookmark */ = {
@@ -322,9 +322,9 @@
 	};
 	4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {782, 923}}";
-			sepNavSelRange = "{428, 0}";
-			sepNavVisRange = "{0, 1174}";
+			sepNavIntBoundsRect = "{{0, 0}, {782, 975}}";
+			sepNavSelRange = "{423, 0}";
+			sepNavVisRange = "{0, 1172}";
 		};
 	};
 	4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */ = {
