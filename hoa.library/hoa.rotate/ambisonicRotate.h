@@ -28,6 +28,7 @@ private:
 	double m_tmpCos;
 	int m_tmpNegativeBIndex;
 	int m_tmpPositiveBIndex;
+	int* m_harmonicsIndex;
 	
 	double* m_output;
 public:
@@ -35,30 +36,32 @@ public:
 	ambisonicRotate(int anOrder){
 		m_order = anOrder;
 		m_numberOfSphericalComponents = 2*m_order+1;
+		m_harmonicsIndex = new int[2*m_order+1];
 		m_output = new double[m_numberOfSphericalComponents]; 
+		
+		m_harmonicsIndex[0] = 0;
+		for(int i = 1; i < 2*m_order+1; i++)
+		{
+			m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+			if (i%2 == 1) 
+				m_harmonicsIndex[i] = - m_harmonicsIndex[i];
+		}
 	}
 	
-	double* process(double* encodedSignals, double aTheta){
-		
+
+	double* process(double* encodedSignals, double aTheta)
+	{
 		m_tmpOrderTheta  = aTheta;
-		m_tmpPositiveBIndex = m_order;
-		m_tmpNegativeBIndex = m_order;
-		m_output[m_order] = encodedSignals[m_order];
-		while (m_tmpNegativeBIndex>0) {
-			m_tmpPositiveBIndex++;
-			m_tmpNegativeBIndex--;
-			m_tmpCos = cos(m_tmpOrderTheta);
-			//m_tmpSin = sqrt(1-m_tmpCos*m_tmpCos);
+		m_output[0] = encodedSignals[0];
+		for (int i = 1; i <= m_order; i++) {
 			m_tmpSin = sin(m_tmpOrderTheta);
-			
-			m_output[m_tmpPositiveBIndex] = m_tmpCos*encodedSignals[m_tmpPositiveBIndex] - m_tmpSin*encodedSignals[m_tmpNegativeBIndex];
-			m_output[m_tmpNegativeBIndex] = m_tmpSin*encodedSignals[m_tmpPositiveBIndex] + m_tmpCos*encodedSignals[m_tmpNegativeBIndex];
+			m_tmpCos = cos(m_tmpOrderTheta);
+			m_output[2*i]   = m_tmpCos*encodedSignals[2*i] - m_tmpSin*encodedSignals[2*i-1];
+			m_output[2*i-1] = m_tmpSin*encodedSignals[2*i] + m_tmpCos*encodedSignals[2*i-1];
 			
 			m_tmpOrderTheta += aTheta;
 		}
-		
 		return m_output;
-		
 	}
 	
 };

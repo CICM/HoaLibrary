@@ -170,10 +170,21 @@ t_int *HoaDecode_perform(t_int *w)
 
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 {
-	if (m == ASSIST_INLET)
-		sprintf(s,"(Signal) Ambisonic encoded signal");
-	else 
-		sprintf(s,"(Signal) Signal for speaker %i", (int)a);			
+	long harmonicIndex = 0;
+	if (a != x->f_inputNumber-1 || m != ASSIST_INLET)
+	{
+		if (a == 0)
+			harmonicIndex = 0;
+		else {
+			harmonicIndex = (int)floor((a-1)/2) + 1;
+			if (a%2 == 1) 
+				harmonicIndex = - harmonicIndex;
+		}
+		sprintf(s,"(Signal) Spherical harmonic %i dependant signal", (int)harmonicIndex); 
+	}
+	else
+		sprintf(s,"Rotation value (rad)"); 
+
 }
 
 
