@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -273,7 +275,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {186, 674}}</string>
+							<string>{{0, 0}, {186, 667}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -285,14 +287,14 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {203, 692}}</string>
+						<string>{{0, 0}, {203, 685}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>0 145 1440 733 0 0 1440 878 </string>
+						<string>0 152 1440 726 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -303,8 +305,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -319,10 +319,6 @@
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
 										<string>hoaDecode~.c</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>0EA9FD4E15C1962E00FB9BD9</string>
 										<key>history</key>
 										<array>
 											<string>0E96982715BEE1C300863F12</string>
@@ -331,7 +327,6 @@
 											<string>0EA9FD2E15BFEA7700FB9BD9</string>
 											<string>0EA9FD2F15BFEA7700FB9BD9</string>
 											<string>0EA9FD3015BFEA7700FB9BD9</string>
-											<string>0EA9FD2915BFEA5B00FB9BD9</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -343,14 +338,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1232, 494}}</string>
+								<string>{{0, 0}, {1232, 489}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 145 1440 733 0 0 1440 878 </string>
+								<string>0 152 1440 726 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>494pt</string>
+							<string>489pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -363,14 +358,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 499}, {1232, 193}}</string>
+								<string>{{0, 494}, {1232, 191}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 145 1440 733 0 0 1440 878 </string>
+								<string>0 152 1440 726 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>193pt</string>
+							<string>191pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -389,9 +384,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0EA9FD0715BFE7E900FB9BD9</string>
+				<string>0E3C79E315D9187100FD84F6</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0EA9FD0815BFE7E900FB9BD9</string>
+				<string>0E3C79E415D9187100FD84F6</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -530,10 +525,10 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>0E91E4EE15BEDCD700452428</string>
-		<string>/Users/pierreg/Documents/SDKs/MaxSDK-5.1.7/examples/HoaDecode/Hoa.Decoder~.xcodeproj</string>
+		<string>/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.rotate/hoa.rotate~.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>0 145 1440 733 0 0 1440 878 </string>
+	<string>0 152 1440 726 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -554,7 +549,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoaDecode~.c</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -571,8 +566,6 @@
 							<string>218pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -612,7 +605,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0E91E4EE15BEDCD700452428</string>
-				<string>0EA9FD0415BFE7B600FB9BD9</string>
+				<string>0E3C79E515D9187100FD84F6</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

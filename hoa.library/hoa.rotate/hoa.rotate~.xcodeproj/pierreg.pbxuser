@@ -30,18 +30,16 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 365348859;
-			PBXWorkspaceStateSaveDate = 365348859;
+			PBXPerProjectTemplateStateSaveDate = 366549108;
+			PBXWorkspaceStateSaveDate = 366549108;
 		};
 		perUserProjectItems = {
 			0E96982715BEE1C300863F12 = 0E96982715BEE1C300863F12 /* PBXTextBookmark */;
 			0E96984F15BEE78A00863F12 = 0E96984F15BEE78A00863F12 /* PBXTextBookmark */;
-			0EA9FD2915BFEA5B00FB9BD9 = 0EA9FD2915BFEA5B00FB9BD9 /* PBXTextBookmark */;
 			0EA9FD2D15BFEA7700FB9BD9 = 0EA9FD2D15BFEA7700FB9BD9 /* PBXTextBookmark */;
 			0EA9FD2E15BFEA7700FB9BD9 = 0EA9FD2E15BFEA7700FB9BD9 /* PBXTextBookmark */;
 			0EA9FD2F15BFEA7700FB9BD9 = 0EA9FD2F15BFEA7700FB9BD9 /* PBXTextBookmark */;
 			0EA9FD3015BFEA7700FB9BD9 = 0EA9FD3015BFEA7700FB9BD9 /* PBXTextBookmark */;
-			0EA9FD4E15C1962E00FB9BD9 = 0EA9FD4E15C1962E00FB9BD9 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 0E91E48315BECC2E00452428 /* Source Control */;
 		userBuildSettings = {
@@ -102,14 +100,6 @@
 		path = "/Users/pierreg/Documents/SDKs/MaxSDK-5.1.7/examples/HoaDecode/../../c74support/msp-includes/z_dsp.h";
 		sourceTree = "<absolute>";
 	};
-	0EA9FD2915BFEA5B00FB9BD9 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		comments = "No match for 'operator=' in 'ComputedOuput = x->_HoaDecode::f_ambisonicDecoder-> ambisonicDecode::process(((const double*)x->_HoaDecode::f_vector))'";
-		fRef = 22CF119A0EE9A8250054F513 /* HoaDecode~.c */;
-		rLen = 1;
-		rLoc = 98;
-		rType = 1;
-	};
 	0EA9FD2D15BFEA7700FB9BD9 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 0EA9FD1715BFE87700FB9BD9 /* z_dsp.h */;
@@ -149,29 +139,6 @@
 		rType = 0;
 		vrLen = 668;
 		vrLoc = 0;
-	};
-	0EA9FD4E15C1962E00FB9BD9 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 22CF119A0EE9A8250054F513 /* HoaDecode~.c */;
-		name = "hoaDecode~.c: 15";
-		rLen = 0;
-		rLoc = 200;
-		rType = 0;
-		vrLen = 1053;
-		vrLoc = 128;
-	};
-	22CF119A0EE9A8250054F513 /* HoaDecode~.c */ = {
-		isa = PBXFileReference;
-		fileEncoding = 4;
-		lastKnownFileType = sourcecode.c.c;
-		name = "HoaDecode~.c";
-		path = "/Users/pierreg/Documents/GitHub/CICM-Library/hoa.library/hoa.decoder~/hoaDecode~.c";
-		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171, 2392}}";
-			sepNavSelRange = "{200, 0}";
-			sepNavVisRange = "{128, 1053}";
-		};
 	};
 	2FBBEAD608F335360078DB84 /* max-external */ = {
 		activeExec = 0;
