@@ -165,6 +165,7 @@ pip-log.txt
 .DS_Store
 
 *.rb
+*.mxo -crlf -diff -merge
 *.mxe
 *.mode1V3
 *.pbxuser
