@@ -42,10 +42,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-14",
 					"maxclass" : "newobj",
-					"numinlets" : 6,
+					"numinlets" : 9,
 					"numoutlets" : 0,
 					"patching_rect" : [ 30.0, 300.0, 175.0, 20.0 ],
-					"text" : "hoa.dac~ 0:5"
+					"text" : "hoa.dac~ 1:9"
 				}
 
 			}
@@ -178,13 +178,13 @@
 ,
 					"patching_rect" : [ 299.0, 333.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"globalpatchername" : "",
-						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
-						"default_fontsize" : 12.0
+						"default_fontsize" : 12.0,
+						"globalpatchername" : "",
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0
 					}
 ,
 					"text" : "p see_also"
@@ -739,13 +739,13 @@
 ,
 					"patching_rect" : [ 83.0, 391.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"globalpatchername" : "",
-						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
-						"default_fontsize" : 12.0
+						"default_fontsize" : 12.0,
+						"globalpatchername" : "",
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0
 					}
 ,
 					"text" : "p see_also"
