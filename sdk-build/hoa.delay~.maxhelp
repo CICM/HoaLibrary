@@ -28,6 +28,34 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"id" : "obj-13",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 390.0, 270.0, 32.5, 18.0 ],
+					"text" : "stop"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-7",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 300.0, 270.0, 72.0, 18.0 ],
+					"text" : "startwindow"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
 					"id" : "obj-4",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -139,7 +167,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 510.0, 60.0, 69.0, 20.0 ],
+					"patching_rect" : [ 413.0, 64.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
@@ -163,7 +191,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 244.0, 135.0, 42.0, 20.0 ],
+					"patching_rect" : [ 246.0, 137.0, 42.0, 20.0 ],
 					"text" : "sig~ 0"
 				}
 
@@ -218,19 +246,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 90.0, 74.0, 20.0 ],
+					"patching_rect" : [ 413.0, 94.0, 74.0, 20.0 ],
 					"text" : "hoa.connect"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-37",
-					"maxclass" : "ezadc~",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "signal" ],
-					"patching_rect" : [ 345.0, 90.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -242,8 +259,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 300.0, 235.0, 20.0 ],
-					"text" : "dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
+					"patching_rect" : [ 30.0, 312.0, 234.5, 20.0 ],
+					"text" : "hoa.dac~ 1:16"
 				}
 
 			}
@@ -339,6 +356,15 @@
 			}
  ],
 		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-12", 15 ],
+					"hidden" : 0,
+					"midpoints" : [ 399.5, 309.0, 255.0, 309.0 ],
+					"source" : [ "obj-13", 0 ]
+				}
+
+			}
+, 			{
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-8", 14 ],
@@ -662,6 +688,15 @@
 					"hidden" : 0,
 					"midpoints" : [  ],
 					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-12", 15 ],
+					"hidden" : 0,
+					"midpoints" : [ 309.5, 309.0, 255.0, 309.0 ],
+					"source" : [ "obj-7", 0 ]
 				}
 
 			}
