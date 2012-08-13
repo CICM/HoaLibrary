@@ -7,9 +7,9 @@
 			"revision" : 9
 		}
 ,
-		"rect" : [ 121.0, 75.0, 804.0, 584.0 ],
+		"rect" : [ 162.0, 120.0, 911.0, 613.0 ],
 		"bglocked" : 0,
-		"defrect" : [ 121.0, 75.0, 804.0, 584.0 ],
+		"defrect" : [ 162.0, 120.0, 911.0, 613.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -32,7 +32,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 44.0, 488.0, 161.0, 20.0 ],
+					"patching_rect" : [ 70.0, 491.0, 161.0, 20.0 ],
 					"text" : "I'm not a hoa but I'm a friend."
 				}
 
@@ -46,7 +46,7 @@
 					"numinlets" : 15,
 					"numoutlets" : 16,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 45.0, 405.0, 221.5, 20.0 ],
+					"patching_rect" : [ 130.0, 386.0, 221.5, 20.0 ],
 					"text" : "hoa.decoder~ 7 16"
 				}
 
@@ -60,8 +60,8 @@
 					"numinlets" : 15,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 317.0, 323.0, 208.0, 20.0 ],
-					"text" : "hoa.plug~ 7 nothing~ post"
+					"patching_rect" : [ 265.0, 311.0, 208.0, 20.0 ],
+					"text" : "hoa.plug~ 7 hoa.nothing~ post"
 				}
 
 			}
@@ -74,7 +74,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 537.0, 153.0, 70.0, 20.0 ],
+					"patching_rect" : [ 525.0, 60.0, 70.0, 20.0 ],
 					"text" : "loadmess 0"
 				}
 
@@ -88,7 +88,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 537.0, 179.0, 43.0, 20.0 ],
+					"patching_rect" : [ 525.0, 86.0, 43.0, 20.0 ],
 					"text" : "js lock"
 				}
 
@@ -102,7 +102,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 386.0, 393.0, 32.5, 20.0 ],
+					"patching_rect" : [ 385.0, 386.0, 32.5, 20.0 ],
 					"text" : "*~"
 				}
 
@@ -115,7 +115,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 433.0, 392.0, 78.0, 20.0 ],
+					"patching_rect" : [ 428.0, 388.0, 78.0, 20.0 ],
 					"text" : "Me neither..."
 				}
 
@@ -129,7 +129,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 88.0, 313.0, 32.5, 20.0 ],
+					"patching_rect" : [ 83.0, 309.0, 32.5, 20.0 ],
 					"text" : "+~"
 				}
 
@@ -142,7 +142,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 124.0, 311.0, 137.0, 20.0 ],
+					"patching_rect" : [ 115.0, 311.0, 137.0, 20.0 ],
 					"text" : "Damned I'm not a hoa !"
 				}
 
@@ -156,7 +156,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 145.0, 194.0, 122.0, 33.0 ],
+					"patching_rect" : [ 140.0, 190.0, 122.0, 33.0 ],
 					"text" : "Select the objects then send me a bang."
 				}
 
@@ -168,7 +168,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 35.0, 169.0, 20.0, 20.0 ]
+					"patching_rect" : [ 30.0, 165.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -181,7 +181,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 35.0, 139.0, 41.0, 20.0 ],
+					"patching_rect" : [ 30.0, 135.0, 41.0, 20.0 ],
 					"text" : "sel 32"
 				}
 
@@ -195,7 +195,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 4,
 					"outlettype" : [ "int", "int", "int", "int" ],
-					"patching_rect" : [ 35.0, 109.0, 59.5, 20.0 ],
+					"patching_rect" : [ 30.0, 105.0, 59.5, 20.0 ],
 					"text" : "key"
 				}
 
@@ -208,7 +208,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 35.0, 199.0, 99.0, 20.0 ],
+					"patching_rect" : [ 30.0, 195.0, 99.0, 20.0 ],
 					"text" : "hoa.connect 7 16"
 				}
 
@@ -221,7 +221,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 249.0, 489.0, 235.0, 20.0 ],
+					"patching_rect" : [ 235.0, 491.0, 235.0, 20.0 ],
 					"text" : "dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
 				}
 
@@ -235,7 +235,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 35.0, 244.0, 208.0, 20.0 ],
+					"patching_rect" : [ 30.0, 240.0, 208.0, 20.0 ],
 					"text" : "hoa.encoder~ 7"
 				}
 
@@ -308,7 +308,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 20.0, 192.0, 270.0, 36.0 ]
+					"patching_rect" : [ 15.0, 188.0, 270.0, 36.0 ]
 				}
 
 			}
@@ -336,7 +336,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 78.0, 139.0, 199.0, 20.0 ],
+					"patching_rect" : [ 73.0, 135.0, 199.0, 20.0 ],
 					"text" : "Spacebar to bang the hoas."
 				}
 
@@ -399,6 +399,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -408,6 +409,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 1 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -417,6 +419,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 2 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -426,6 +429,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 3 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -435,6 +439,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 4 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -444,6 +449,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 5 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -453,6 +459,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 6 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -462,6 +469,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 7 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -471,6 +479,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 8 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -480,6 +489,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 9 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -489,6 +499,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 10 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -498,6 +509,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 11 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -507,6 +519,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 12 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -516,6 +529,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 13 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -525,6 +539,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 14 ],
 					"hidden" : 0,
 					"midpoints" : [  ],

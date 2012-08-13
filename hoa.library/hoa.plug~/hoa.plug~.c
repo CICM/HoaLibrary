@@ -143,12 +143,17 @@ void *plug_script_new(t_symbol *s, int argc, t_atom *argv)
 		x->f_order = 1;
 		x->f_index = 0;
 		x->f_mode = 0;
+		x->f_connected = 0;
 		if(atom_gettype(argv) == A_LONG)
 			x->f_index = atom_getlong(argv);
 		if(atom_gettype(argv+1) == A_LONG)
 			x->f_order = atom_getlong(argv+1);
 		if(atom_gettype(argv+2) == A_LONG)
 			x->f_mode = atom_getlong(argv+2);
+		if(atom_gettype(argv+3) == A_LONG)
+			x->f_inlet = atom_getlong(argv+1);
+		if(atom_gettype(argv+4) == A_LONG)
+			x->f_outlet = atom_getlong(argv+2);
 		
 	}
 	
@@ -499,8 +504,8 @@ t_object *plug_script(t_object *patcher, int index, int order, int ninlet, int n
 	last = index;
 	index %= ninlet;
 	if (mode == 2)
-		return newobject_sprintf(patcher, "@maxclass newobj @text \"hoa.plug_script %i %i %i %i %i %i\" @patching_rect %i 300 20 20", 
-								 last, order, order, mode, ninlet, noutlet, harm * 100 + (index * 100) / ninlet);
+		return newobject_sprintf(patcher, "@maxclass newobj @text \"hoa.plug_script %i %i %i %i %i\" @patching_rect %i 300 20 20", 
+								 last, order, mode, ninlet, noutlet, harm * 100 + (index * 100) / ninlet);
 	else
 		return newobject_sprintf(patcher, "@maxclass newobj @text \"hoa.plug_script %i %i %i %i %i\" @patching_rect %i 300 20 20", 
 								 plug_harmonic(harm, order), order, mode, ninlet, noutlet, harm * 100 + (index * 100) / ninlet);

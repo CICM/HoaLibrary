@@ -102,36 +102,39 @@ void connect_getinput(t_connect *x)
 
 void connect_bang(t_connect *x)
 {
-	t_object *box, *obj, *jb, *o, *var;
+	t_object *box, *obj, *jb, *o;
 	
 	t_rect jr;
-	int i, j, k, go;
-
+	int i, j, go;
 	t_atom *av = NULL;
 	long ac = 0;
 	
 	int patchX = 0, patchY = 0;
-	
 	object_attr_getvalueof(x->f_patcherview, gensym("rect"), &ac, &av);
 	if (ac && av) 
 	{
 		patchX = atom_getfloat(av);
-		//post(" patcher %i", patchX);
 		patchY = atom_getfloat(av+1);
-		//post(" patcher %i", patchY);
 		freebytes(av, sizeof(t_atom) * ac);
 	}
 	go = 0;
 	x->f_inc = 0;
-	for (box = jpatcher_get_firstobject(x->f_patcher); box; box = jbox_get_nextobject(box)) 
+	for (box = jpatcher_get_firstobject(x->f_patcher); box && x->f_inc < 100; box = jbox_get_nextobject(box)) 
 	{		
 		obj = jbox_get_object(box);
 		if(object_classname(obj) == gensym("hoa.decoder~") || object_classname(obj) == gensym("hoa.encoder~") || object_classname(obj) == gensym("hoa.rotate~") || object_classname(obj) == gensym("dac~"))
 		{
 			jbox_get_patching_rect(box, &jr);
-			if(jr.x + jr.width + patchX > x->f_jr.x && jr.y + jr.height + patchY > x->f_jr.y && jr.x + patchX < x->f_jr.width && jr.y + patchY<  x->f_jr.height)
+			if(validCondition(jr, x->f_jr, patchX, patchY))
 			{
 				x->f_index[x->f_inc] = jr.y;
+				for(i = 0; i < x->f_inc; i++)
+				{
+					if (x->f_index[x->f_inc] == x->f_index[i]) 
+					{
+						x->f_index[x->f_inc]++;
+					}
+				}
 				x->f_object[x->f_inc++] = box;
 			}
 		}
@@ -144,8 +147,24 @@ void connect_bang(t_connect *x)
 				jbox_get_patching_rect(box, &jr);
 				if(object_classname(o) == gensym("hoa.plug_script"))
 				{
-					if(jr.x + jr.width + patchX > x->f_jr.x && jr.y + jr.height + patchY > x->f_jr.y && jr.x + patchX < x->f_jr.width && jr.y + patchY<  x->f_jr.height)
+					if(validCondition(jr, x->f_jr, patchX, patchY))
 					{
+						if(((t_plug_script *)o)->f_mode == 0)
+						{
+							x->f_inlet[x->f_inc]	= ((t_plug_script *)o)->f_inlet;
+							x->f_outlet[x->f_inc]	= (((t_plug_script *)o)->f_order * 2 + 1 ) * ((t_plug_script *)o)->f_outlet;
+						}
+						else if (((t_plug_script *)o)->f_mode = 2)
+						{
+							x->f_inlet[x->f_inc]	= ((t_plug_script *)o)->f_inlet;
+							x->f_outlet[x->f_inc]	= ((t_plug_script *)o)->f_order * ((t_plug_script *)o)->f_outlet;
+						}
+						else 
+						{
+							x->f_inlet[x->f_inc]	= (((t_plug_script *)o)->f_order * 2 + 1 ) * ((t_plug_script *)o)->f_inlet;
+							x->f_outlet[x->f_inc]	= (((t_plug_script *)o)->f_order * 2 + 1 ) * ((t_plug_script *)o)->f_outlet;
+						}
+						x->f_connected[x->f_inc]= ((t_plug_script *)o)->f_connected++;
 						go = 1;
 					}
 				}
@@ -153,48 +172,53 @@ void connect_bang(t_connect *x)
 			}
 			if(go)
 			{
-				x->f_index[x->f_inc] = jr.x;
+				x->f_index[x->f_inc] = jr.y;
+				for(i = 0; i < x->f_inc; i++)
+				{
+					if (x->f_index[x->f_inc] == x->f_index[i]) 
+					{
+						x->f_index[x->f_inc]++;
+					}
+				}
 				x->f_object[x->f_inc++] = box;
 				go = 0;
 			}
 		}
 	}
-	// Trier de haut en bas //
-	for(i = 0; i < x->f_inc; i++)
-	{
-		for(j = 0; j < x->f_inc - 1; j++)
-		{
-			if (x->f_index[j] > x->f_index[j+1]) 
-			{
-				k = x->f_index[j];
-				x->f_index[j] = x->f_index[j+1];
-				x->f_index[j+1] = k;
-				
-				var = x->f_object[j];
-				x->f_object[j] = x->f_object[j+1];
-				x->f_object[j+1] = var;
-			}
-		}
-	}
+	
+	ordonnerTableau(x->f_index, x->f_object, x->f_inc);
 	for(i = 1; i < x->f_inc; i++)
 	{
-		k = x->f_harmonics;
-		if(object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~"))
+		
+		if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~"))
 		{
-			k++;
+			for(j = 0; j < x->f_output; j++)
+			{
+				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+			}
 		}
-		for(j = 0; j < k; j++)
+		else if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("jpatcher"))
 		{
-			connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+			for(j = 0; j < x->f_harmonics; j++)
+			{
+				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+			}
 		}
+		else
+		{
+			for(j = 0; j < x->f_harmonics; j++)
+			{
+				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+			}
+		}
+		
 	}
+	color_patchline(x);
 }
 
-void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet)
+void color_patchline(t_connect *x)
 {
-	//t_object *line;
-	t_atom msg[4];
-	t_atom rv;
+	t_object *line, *obj, *patcher;
 	t_jrgba rouge, bleu;
 	
 	bleu.red = rouge.blue = 0;
@@ -202,14 +226,32 @@ void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive,
 	bleu.blue = rouge.red = 1;
 	bleu.alpha = rouge.alpha =1;
 	
+	object_obex_lookup(x, gensym("#P"), &patcher);
+	for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line)) 
+	{
+		obj = jbox_get_object(jpatchline_get_box1(line));
+						   
+		if (validConditionColor(obj))
+		{ 
+			if (jpatchline_get_inletnum(line) % 2 == 1 || jpatchline_get_inletnum(line) == 0) 
+				jpatchline_set_color(line, &bleu);
+			else
+				jpatchline_set_color(line, &rouge);			
+		}
+	}
+}
+
+void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet)
+{
+	t_atom msg[4];
+	t_atom rv;
+
 	atom_setobj(msg, send);
 	atom_setlong(msg + 1, outlet);
 	atom_setobj(msg + 2, receive);
 	atom_setlong(msg + 3, inlet);
-	object_method_typed(x , gensym("connect"), 4, msg, &rv);
-	
-	//jpatchline_set_color(line, &bleu);
 
+	object_method_typed(x , gensym("connect"), 4, msg, &rv);
 }
 
 void connect_attach(t_connect *x)
@@ -245,6 +287,80 @@ void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void
 	}
 
 }
+
+int validCondition(t_rect jr, t_rect f_jr, int patchX, int patchY)
+{
+	if(jr.x + jr.width + patchX >= f_jr.x && jr.y + jr.height + patchY >= f_jr.y && jr.x + patchX <= f_jr.width && jr.y + patchY <=  f_jr.height)
+		return 1;
+	else
+		return 0;
+}
+
+int validConditionColor(t_object *obj)
+{
+	t_object *jb, *o;
+	
+	if(object_classname(obj) == gensym("hoa.encoder~") || object_classname(obj) == gensym("hoa.rotate~"))
+		return 1;
+	else if (object_classname(obj) == gensym("jpatcher"))
+	{
+		jb = jpatcher_get_firstobject(obj);
+		while(jb) 
+		{
+			o = jbox_get_object(jb);
+			if(object_classname(o) == gensym("hoa.plug_script"))
+			{
+				return 1;
+			}
+			jb = jbox_get_nextobject(jb);
+		}
+		
+	}		
+	
+	return 0;
+}
+
+void ordonnerTableau(int *positions, t_object **objects, int size) 
+{ 
+	long i, j, k; 
+	t_object *newObject[100];
+	int newPosition[100];
+	
+	for(i = 0; i < size; i++)
+	{
+		newPosition[i] = positions[i];
+	}
+	
+	for(i = 1; i < size; i++) 
+	{ 
+		for(j = 0; j < size - 1; j++) 
+		{ 
+			if(newPosition[j] > newPosition[j+1]) 
+			{ 
+				k = newPosition[j] - newPosition[j+1]; 
+				newPosition[j] -= k; 
+				newPosition[j+1] += k; 
+			} 
+		} 
+	}
+	
+	for(i = 0; i < size; i++)
+	{
+		for(j = 0; j < size; j++)
+		{
+			if (positions[j] == newPosition[i]) 
+			{
+				newObject[i] = objects[j];
+			}
+		}
+	}
+	for(i = 0; i < size; i++)
+	{
+		objects[i] = newObject[i];
+	}
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

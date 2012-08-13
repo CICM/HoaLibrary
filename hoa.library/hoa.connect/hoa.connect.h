@@ -30,6 +30,7 @@
 #include "jgraphics.h"
 #include "indexmap.h"
 #include "jdataview.h"
+#include "hoa.structure.h"
 
 int xPos;
 int yPos;
@@ -44,6 +45,12 @@ typedef struct  _connect
 	
 	t_object	*f_object[100];
 	int			f_index[100];
+	int			f_mode[100];
+	int			f_order[100];
+	int			f_inlet[100];
+	int			f_outlet[100];
+	int			f_connected[100];
+	
 	int			f_inc;
 	int			f_harmonics;
 	int			f_output;
@@ -76,4 +83,10 @@ void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive,
 void connect_attach(t_connect *x);
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void connect_list(t_connect *x, t_symbol *s, long argc, t_atom *argv);
+void ordonnerTableau(int *positions, t_object **objects, int size);
+int validCondition(t_rect jr, t_rect f_jr, int patchX, int patchY);
+
+void color_patchline(t_connect *x);
+int validConditionColor(t_object *obj);
+
 #endif

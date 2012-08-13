@@ -44,6 +44,7 @@ typedef struct  _plug_script
 	int			f_order;
 	int			f_inlet;
 	int			f_outlet;
+	int			f_connected;
 } t_plug_script;
 
 typedef struct  _plug
