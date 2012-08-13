@@ -52,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				54266BCE05E6E9780000000C /* MaxAPI.framework */,
-				22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -63,6 +62,7 @@
 				4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */,
 				4E0674E614DDA54E00C91AB7 /* AmbisonicEncode.h */,
 				22CF119A0EE9A8250054F513 /* hoa.encoder~.c */,
+				22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */,
 			);
 			name = Source;
 			sourceTree = "<group>";

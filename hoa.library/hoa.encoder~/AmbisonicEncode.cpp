@@ -14,28 +14,47 @@ AmbisonicEncode::AmbisonicEncode(int order)
 	m_order = order;
 	ambiCoeffs = new std::vector<double>(order*2+1,0);
 	sourceAmbiCoeffs = new std::vector<double>(order*2+1,0);
+	m_harmonicsIndex = new int[2*m_order+1];
+	
+	m_harmonicsIndex[0] = 0;
+	for(int i = 1; i < 2*m_order+1; i++)
+	{
+		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+		if (i%2 == 1) 
+			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
+	}
 }
 
 void AmbisonicEncode::computeCoefs(double aTheta)
 {
-	for (int i = -m_order; i<= m_order; i++) 
+	for (int i = 0; i< m_order*2+1; i++) 
 	{
-		if (i < 0) 
+		if (m_harmonicsIndex[i] < 0) 
 		{
-			(*ambiCoeffs)[i+m_order] = sin(-i * aTheta);
+			(*ambiCoeffs)[i] = sin(abs(m_harmonicsIndex[i]) * aTheta);
 		}
 		else 
 		{
-			(*ambiCoeffs)[i+m_order] = cos(i * aTheta);	
+			(*ambiCoeffs)[i] = cos(abs(m_harmonicsIndex[i]) * aTheta);	
 		}
 	}
 }
 
 const std::vector<double>& AmbisonicEncode::process(double aSample)
 {
-	for (int i = -m_order; i<= m_order; i++) 
+	for (int i = 0; i< 2*m_order+1; i++) 
 	{
-		(*sourceAmbiCoeffs)[i+m_order] = (*ambiCoeffs)[i+m_order] * aSample;
+		(*sourceAmbiCoeffs)[i] = (*ambiCoeffs)[i] * aSample;
+	}
+	
+	return *(sourceAmbiCoeffs);
+}
+
+const std::vector<double>& AmbisonicEncode::process(double* aSample)
+{
+	for (int i = 0; i< 2*m_order+1; i++) 
+	{
+		(*sourceAmbiCoeffs)[i] = (*ambiCoeffs)[i] * aSample[abs(m_harmonicsIndex[i])];
 	}
 	
 	return *(sourceAmbiCoeffs);
@@ -44,14 +63,14 @@ const std::vector<double>& AmbisonicEncode::process(double aSample)
 const std::vector<double>& AmbisonicEncode::process(double aSample, double aTheta)
 {
 	
-	computeCoefs(aTheta);
-
-	for (int i = -m_order; i<= m_order; i++) 
-	{
-		(*sourceAmbiCoeffs)[i+m_order] = (*ambiCoeffs)[i+m_order] * aSample;
-	}
+	computeCoefs(aTheta);	
+	return process(aSample);
+}
+const std::vector<double>& AmbisonicEncode::process(double* aSample, double aTheta)
+{
 	
-	return *(sourceAmbiCoeffs);
+	computeCoefs(aTheta);	
+	return process(aSample);
 }
 
 
