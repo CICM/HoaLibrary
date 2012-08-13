@@ -45,6 +45,7 @@ typedef struct _HoaDecode
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv);
 void HoaDecode_free(t_HoaDecode *x);
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s);
+void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv);
 void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count);
 t_int *HoaDecode_perform(t_int *w);
 
@@ -63,6 +64,7 @@ int main(void)
 	class_addmethod(c, (method)HoaDecode_dsp,		"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaDecode_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaDecode_assist,	"assist",	A_CANT, 0);
+	class_addmethod(c, (method)HoaDecode_scheme,	"scheme",	A_GIMME, 0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -86,11 +88,12 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 			x->f_order			= atom_getlong(argv);
 		if(atom_gettype(argv+1) == A_LONG)
 			x->f_outputNumber	= atom_getlong(argv+1);
+		
 		x->f_inputNumber		= x->f_order * 2 + 1;
 		
 		x->f_ambisonicDecoder	= new ambisonicDecode(x->f_outputNumber, x->f_order);
 		
-		dsp_setup((t_pxobject *)x, x->f_inputNumber);	
+		dsp_setup((t_pxobject *)x, x->f_inputNumber);
 		for (int i = 0; i < x->f_outputNumber; i++)
 			outlet_new(x, "signal");		
 	}
@@ -170,11 +173,41 @@ t_int *HoaDecode_perform(t_int *w)
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
-		sprintf(s,"(Signal) Spherical harmonic %i dependant signal", (int)(a - (x->f_inputNumber - 1) / 2));
+	{
+		long harmonicIndex = 0;
+		if (a == 0)
+			harmonicIndex = 0;
+		else {
+			harmonicIndex = (int)floor((a-1)/2) + 1;
+			if (a%2 == 1) 
+				harmonicIndex = - harmonicIndex;
+		}
+		sprintf(s,"(Signal) Spherical harmonic %i dependant signal", harmonicIndex);
+	}
 	else 
 		sprintf(s,"(Signal) Signal for speaker %i", (int)a);			
 }
 
+void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
+{
+	double value[argc];
+	for(int i = 0; i < argc; i++)
+	{
+		
+		if(atom_gettype(argv+i) == A_FLOAT)
+		{
+			value[i] = atom_getfloat(argv+i) * 3.14159265 / 180 ;
+			post(" scheme %i, %f", i, atom_getfloat(argv+i));
+		}
+		else if (atom_gettype(argv+i) == A_LONG)
+		{
+			value[i] = (float)atom_getlong(argv+i) * 3.14159265 / 180 ;
+			post(" scheme %i, %f", i, (float)atom_getlong(argv+i));
+		}
+		
+	}
+	x->f_ambisonicDecoder->setSpkrsAngles(value, (int)argc);
+}
 
 void HoaDecode_free(t_HoaDecode *x)
 {

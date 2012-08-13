@@ -74,7 +74,7 @@ gsl_matrix* pinvFromSVD(gsl_matrix* U, gsl_matrix* V, gsl_vector* S)
 void SingularValueRegularization(gsl_matrix** U, gsl_matrix** V, gsl_vector** S)
 {
 	int numberOfSingValues;
-	numberOfSingValues = numberOfSingularValues(*S, 0.01);
+	numberOfSingValues = numberOfSingularValues(*S, 1);
 	
 	resizeVector(S, numberOfSingValues);
 	resizeMatrix(U, (*U)->size1, numberOfSingValues);

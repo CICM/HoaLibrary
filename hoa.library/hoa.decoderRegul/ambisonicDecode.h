@@ -19,7 +19,9 @@
 #include <iostream>
 #include <math.h>
 #include "gslMatrix.h"
+#include <gsl/gsl_sf.h>
 #include <vector>
+#include <string>
 
 
 class ambisonicDecode{
@@ -29,18 +31,22 @@ private:
 	int m_numberOfComponents;
 	int m_channelNumber;	
 	double *spkrsAngles;
+	int *m_harmonicsIndex;
+	std::vector<double> m_optimId; // "basic", "maxre" or "inphase"
+	
 	gsl_vector_view input_vec;
 	gsl_matrix* m_regularizedDecod_mat;
 	gsl_vector* m_output_vec;
+	gsl_vector* m_optimisation;
 	
-
 public:
-	
 	ambisonicDecode(int channelNumber, int order);
-	//std::vector<ouble>* process();
-//	void record(double harmonic, int index);
+	void computePseudoInverse();
+	void computeMaxReOptim();
+	void computeInPhaseOptim();
+	void setOptimMethod(char* anOptimId);
+	void setSpkrsAngles(double* someSpkrsAngles, int size);
 	double*  process(double* input);
-
 };
 
 
