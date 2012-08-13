@@ -328,7 +328,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>4EBB580115C7E788009B5784</string>
+										<string>4E61802915D9135400FF9D29</string>
 										<key>history</key>
 										<array>
 											<string>4E55B26B14A738370095F784</string>
@@ -343,7 +343,7 @@
 											<string>4EBAEA8415C7CFBA00BB54B7</string>
 											<string>4EBAEA8515C7CFBA00BB54B7</string>
 											<string>4EBB580015C7E788009B5784</string>
-											<string>4EBB57FB15C7D715009B5784</string>
+											<string>4EBB580115C7E788009B5784</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -401,9 +401,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>4EBB57EF15C7CFEB009B5784</string>
+				<string>4E61802A15D9135400FF9D29</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>4EBB57F015C7CFEB009B5784</string>
+				<string>4E61802B15D9135400FF9D29</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -555,7 +555,7 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>4E55B21514A736330095F784</string>
-		<string>/Users/juliencolafrancesco/developpement/CICM-Library/hoa.library/hoa.rotate~/hoa.rotate~.xcodeproj</string>
+		<string>/Users/juliencolafrancesco/developpement/CICM-Library/hoa.library/hoa.rotate/hoa.rotate~.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>90 55 1187 723 0 0 1280 778 </string>
@@ -635,7 +635,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>4E55B21514A736330095F784</string>
-				<string>4EBB57F115C7CFEB009B5784</string>
+				<string>4E61802C15D9135400FF9D29</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
