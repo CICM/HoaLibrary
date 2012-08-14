@@ -273,7 +273,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>5</integer>
+									<integer>3</integer>
 									<integer>2</integer>
 									<integer>0</integer>
 								</array>
@@ -316,7 +316,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.encoder~.c</string>
+								<string>AmbisonicEncode.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -324,11 +324,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>hoa.encoder~.c</string>
+										<string>AmbisonicEncode.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>4E6180AE15D91C8A00FF9D29</string>
+										<string>4E6181B615DA6FA900FF9D29</string>
 										<key>history</key>
 										<array>
 											<string>4E55B26B14A738370095F784</string>
@@ -336,9 +336,11 @@
 											<string>4E91FAB314A7CB4200E19817</string>
 											<string>4E4E395914DDA6D500C1D751</string>
 											<string>4E4279E915D533A400B5E99C</string>
-											<string>4E4279EC15D533A400B5E99C</string>
-											<string>4EEB0F7515D9086200BFFDA9</string>
-											<string>4E61806C15D9171D00FF9D29</string>
+											<string>4E61818115DA64A600FF9D29</string>
+											<string>4E61818315DA64A600FF9D29</string>
+											<string>4E61818615DA64A600FF9D29</string>
+											<string>4E6181B015DA6DF800FF9D29</string>
+											<string>4E6181B115DA6DF800FF9D29</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -396,9 +398,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>4E6180AF15D91C8A00FF9D29</string>
+				<string>4E61814315DA4D1000FF9D29</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>4E6180B015D91C8A00FF9D29</string>
+				<string>4E61814415DA4D1000FF9D29</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -536,7 +538,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>4E55B21514A736330095F784</string>
 		<string>/Users/juliencolafrancesco/developpement/CICM-Library/hoa.library/hoa.encoder~/hoa.encoder~.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -561,7 +562,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>AmbisonicEncode.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -578,6 +579,8 @@
 							<string>440pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -617,7 +620,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>4E55B21514A736330095F784</string>
-				<string>4E6180B115D91C8A00FF9D29</string>
+				<string>4E61814515DA4D1000FF9D29</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -630,7 +633,7 @@
 			<key>WindowToolGUID</key>
 			<string>4E55B21514A736330095F784</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

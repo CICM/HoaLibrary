@@ -13,12 +13,11 @@
 #undef	check
 
 
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/io.hpp>
-#include <boost/numeric/ublas/lu.hpp>
+
 #include "math.h"
 #include <complex>
 #include <stdio.h>
+#include <vector>
 
 class AmbisonicEncode {
 	
@@ -28,6 +27,9 @@ private:
 	int *m_harmonicsIndex;
 	std::vector<double>* ambiCoeffs;
 	std::vector<double>* sourceAmbiCoeffs;
+	long m_nbOfCirclePoints;
+	double* m_cosLookUp;
+	double* m_sinLookUp;
 	
 
 public:
