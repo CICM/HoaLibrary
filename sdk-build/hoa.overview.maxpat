@@ -27,6 +27,32 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"handoff" : "",
+					"id" : "obj-15",
+					"maxclass" : "ubutton",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "bang", "bang", "", "int" ],
+					"patching_rect" : [ 285.0, 270.0, 175.0, 20.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-1",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 285.0, 270.0, 175.0, 20.0 ],
+					"text" : "hoa.stochdelay~ 4"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"handoff" : "",
 					"id" : "obj-41",
 					"maxclass" : "ubutton",
 					"numinlets" : 1,
@@ -241,13 +267,13 @@
 ,
 					"patching_rect" : [ 299.0, 483.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontname" : "Arial",
-						"fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"globalpatchername" : "",
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0
 					}
 ,
 					"text" : "p see_also"
@@ -273,7 +299,7 @@
 					"fontsize" : 11.595187,
 					"hidden" : 1,
 					"id" : "obj-57",
-					"items" : [ "(Objects:)", ",", "hoa.delay~", ",", "hoa.grain~", ",", "hoa.mixer~", ",", "hoa.fracorder~" ],
+					"items" : [ "(Objects:)", ",", "hoa.delay~", ",", "hoa.grain~", ",", "hoa.mixer~", ",", "hoa.fracorder~", ",", "hoa.stochdelay~" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -281,18 +307,6 @@
 					"patching_rect" : [ 285.0, 450.0, 179.0, 20.0 ],
 					"types" : [  ],
 					"varname" : "autohelp_see_menu[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"handoff" : "",
-					"id" : "obj-15",
-					"maxclass" : "ubutton",
-					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 405.0, 285.0, 175.0, 20.0 ]
 				}
 
 			}
@@ -714,13 +728,13 @@
 ,
 					"patching_rect" : [ 83.0, 466.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontname" : "Arial",
-						"fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"globalpatchername" : "",
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0
 					}
 ,
 					"text" : "p see_also"

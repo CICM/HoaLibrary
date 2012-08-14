@@ -2638,7 +2638,7 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -5063,7 +5063,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-28", 0 ],
 					"hidden" : 0,
-					"midpoints" : [ 369.5, 156.0, 312.0, 156.0, 312.0, 162.0, 309.5, 162.0 ],
+					"midpoints" : [ 369.5, 162.0, 312.0, 162.0, 312.0, 162.0, 309.5, 162.0 ],
 					"source" : [ "obj-25", 0 ]
 				}
 
@@ -5097,9 +5097,9 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-35", 0 ],
+					"destination" : [ "obj-35", 1 ],
 					"hidden" : 0,
-					"midpoints" : [ 309.5, 210.0, 39.5, 210.0 ],
+					"midpoints" : [ 309.5, 210.0, 281.5, 210.0 ],
 					"source" : [ "obj-28", 0 ]
 				}
 
@@ -5557,11 +5557,7 @@
 				}
 
 			}
- ],
-		"parameters" : 		{
-
-		}
-
+ ]
 	}
 
 }
