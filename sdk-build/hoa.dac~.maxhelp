@@ -521,13 +521,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 630.0, 225.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
 										"fontname" : "Arial",
-										"default_fontsize" : 12.0,
 										"globalpatchername" : "",
+										"default_fontsize" : 12.0,
 										"fontface" : 0,
-										"fontsize" : 12.0
+										"fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial"
 									}
 ,
 									"text" : "p attrArgs"
@@ -1016,7 +1016,7 @@
 										"enablehscroll" : 1,
 										"enablevscroll" : 1,
 										"devicewidth" : 0.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1]",
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1]",
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -1270,13 +1270,13 @@
 ,
 									"patching_rect" : [ 60.0, 147.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"default_fontface" : 0,
-										"default_fontname" : "Arial",
 										"fontname" : "Arial",
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1]",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1]",
 										"fontface" : 0,
-										"fontsize" : 12.0
+										"fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial"
 									}
 ,
 									"text" : "p manageDisplay"
@@ -1968,6 +1968,7 @@
 													"presentation_rect" : [ 45.0, 3.0, 128.0, 16.702478 ],
 													"saved_attribute_attributes" : 													{
 														"valueof" : 														{
+															"parameter_modmax" : 127.0,
 															"parameter_longname" : "live.tab[3]",
 															"parameter_modmin" : 0.0,
 															"parameter_linknames" : 0,
@@ -1978,18 +1979,17 @@
 															"parameter_defer" : 0,
 															"parameter_speedlim" : 1.0,
 															"parameter_steps" : 0,
+															"parameter_invisible" : 0,
 															"parameter_enum" : [ "sine", "saw", "square", "random" ],
 															"parameter_exponent" : 1.0,
-															"parameter_invisible" : 0,
-															"parameter_unitstyle" : 0,
 															"parameter_annotation_name" : "",
+															"parameter_unitstyle" : 0,
 															"parameter_mmax" : 127.0,
 															"parameter_mmin" : 0.0,
 															"parameter_initial" : [ 0.0 ],
 															"parameter_type" : 2,
 															"parameter_initial_enable" : 0,
-															"parameter_shortname" : "live.tab[1]",
-															"parameter_modmax" : 127.0
+															"parameter_shortname" : "live.tab[1]"
 														}
 
 													}
@@ -2552,13 +2552,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"default_fontface" : 0,
-														"default_fontname" : "Arial",
 														"fontname" : "Arial",
-														"default_fontsize" : 12.0,
 														"globalpatchername" : "",
+														"default_fontsize" : 12.0,
 														"fontface" : 0,
-														"fontsize" : 12.0
+														"fontsize" : 12.0,
+														"default_fontface" : 0,
+														"default_fontname" : "Arial"
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -2965,6 +2965,7 @@
 									"presentation_rect" : [ 174.0, 5.0, 36.0, 68.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_modmax" : 127.0,
 											"parameter_longname" : "[5]",
 											"parameter_modmin" : 0.0,
 											"parameter_linknames" : 0,
@@ -2975,17 +2976,16 @@
 											"parameter_defer" : 0,
 											"parameter_speedlim" : 1.0,
 											"parameter_steps" : 0,
-											"parameter_exponent" : 1.0,
 											"parameter_invisible" : 0,
-											"parameter_unitstyle" : 4,
+											"parameter_exponent" : 1.0,
 											"parameter_annotation_name" : "",
+											"parameter_unitstyle" : 4,
 											"parameter_mmax" : 6.0,
 											"parameter_mmin" : -70.0,
 											"parameter_initial" : [ -30.0 ],
 											"parameter_type" : 0,
 											"parameter_initial_enable" : 1,
-											"parameter_shortname" : "Level",
-											"parameter_modmax" : 127.0
+											"parameter_shortname" : "Level"
 										}
 
 									}
@@ -3014,6 +3014,7 @@
 									"presentation_rect" : [ 178.0, 69.0, 37.0, 15.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_modmax" : 127.0,
 											"parameter_longname" : "[8]",
 											"parameter_modmin" : 0.0,
 											"parameter_linknames" : 0,
@@ -3024,16 +3025,15 @@
 											"parameter_defer" : 0,
 											"parameter_speedlim" : 1.0,
 											"parameter_steps" : 0,
-											"parameter_exponent" : 1.0,
 											"parameter_invisible" : 0,
-											"parameter_unitstyle" : 4,
+											"parameter_exponent" : 1.0,
 											"parameter_annotation_name" : "",
+											"parameter_unitstyle" : 4,
 											"parameter_mmax" : 6.0,
 											"parameter_mmin" : -70.0,
 											"parameter_type" : 0,
 											"parameter_initial_enable" : 0,
-											"parameter_shortname" : "[2]",
-											"parameter_modmax" : 127.0
+											"parameter_shortname" : "[2]"
 										}
 
 									}
@@ -3369,13 +3369,13 @@
 ,
 					"patching_rect" : [ 300.0, 90.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
 						"fontname" : "Arial",
-						"default_fontsize" : 12.0,
 						"globalpatchername" : "",
+						"default_fontsize" : 12.0,
 						"fontface" : 0,
-						"fontsize" : 12.0
+						"fontsize" : 12.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial"
 					}
 ,
 					"text" : "p spaceBar"
@@ -3423,7 +3423,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 36.0, 485.0, 21.0 ],
-					"text" : "A high order ambisonics digital to audio converter",
+					"text" : "A high order ambisonicsaudio output",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"varname" : "autohelp_top_digest"
 				}
@@ -3819,9 +3819,9 @@
 			}
  ],
 		"parameters" : 		{
+			"obj-6::obj-32" : [ "[8]", "[2]", 0 ],
 			"obj-6::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-6::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
-			"obj-6::obj-32" : [ "[8]", "[2]", 0 ]
+			"obj-6::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ]
 		}
 
 	}
