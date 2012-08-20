@@ -521,13 +521,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 630.0, 225.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"default_fontsize" : 12.0,
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0
 									}
 ,
 									"text" : "p attrArgs"
@@ -1270,13 +1270,13 @@
 ,
 									"patching_rect" : [ 60.0, 147.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1]",
-										"default_fontsize" : 12.0,
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0
 									}
 ,
 									"text" : "p manageDisplay"
@@ -1968,7 +1968,6 @@
 													"presentation_rect" : [ 45.0, 3.0, 128.0, 16.702478 ],
 													"saved_attribute_attributes" : 													{
 														"valueof" : 														{
-															"parameter_modmax" : 127.0,
 															"parameter_longname" : "live.tab[3]",
 															"parameter_modmin" : 0.0,
 															"parameter_linknames" : 0,
@@ -1989,7 +1988,8 @@
 															"parameter_initial" : [ 0.0 ],
 															"parameter_type" : 2,
 															"parameter_initial_enable" : 0,
-															"parameter_shortname" : "live.tab[1]"
+															"parameter_shortname" : "live.tab[1]",
+															"parameter_modmax" : 127.0
 														}
 
 													}
@@ -2552,13 +2552,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"fontname" : "Arial",
 														"globalpatchername" : "",
-														"default_fontsize" : 12.0,
 														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
-														"default_fontname" : "Arial"
+														"default_fontname" : "Arial",
+														"fontname" : "Arial",
+														"default_fontsize" : 12.0
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -2965,7 +2965,6 @@
 									"presentation_rect" : [ 174.0, 5.0, 36.0, 68.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_modmax" : 127.0,
 											"parameter_longname" : "[5]",
 											"parameter_modmin" : 0.0,
 											"parameter_linknames" : 0,
@@ -2985,7 +2984,8 @@
 											"parameter_initial" : [ -30.0 ],
 											"parameter_type" : 0,
 											"parameter_initial_enable" : 1,
-											"parameter_shortname" : "Level"
+											"parameter_shortname" : "Level",
+											"parameter_modmax" : 127.0
 										}
 
 									}
@@ -3014,7 +3014,6 @@
 									"presentation_rect" : [ 178.0, 69.0, 37.0, 15.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_modmax" : 127.0,
 											"parameter_longname" : "[8]",
 											"parameter_modmin" : 0.0,
 											"parameter_linknames" : 0,
@@ -3033,7 +3032,8 @@
 											"parameter_mmin" : -70.0,
 											"parameter_type" : 0,
 											"parameter_initial_enable" : 0,
-											"parameter_shortname" : "[2]"
+											"parameter_shortname" : "[2]",
+											"parameter_modmax" : 127.0
 										}
 
 									}
@@ -3369,13 +3369,13 @@
 ,
 					"patching_rect" : [ 300.0, 90.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontname" : "Arial",
 						"globalpatchername" : "",
-						"default_fontsize" : 12.0,
 						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"default_fontname" : "Arial"
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0
 					}
 ,
 					"text" : "p spaceBar"
@@ -3387,12 +3387,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-59",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 15.0, 272.0, 33.0 ],
-					"text" : "hoa.plug~ by Pierre Guillot & Julien Colafrancesco\n© 2012 CICM / Universite Paris 8"
+					"patching_rect" : [ 510.0, 15.0, 272.0, 46.0 ],
+					"text" : "hoa.dac~ \nBy Pierre Guillot & Julien Colafrancesco\n© 2012 CICM / Universite Paris 8"
 				}
 
 			}
@@ -3820,8 +3820,8 @@
  ],
 		"parameters" : 		{
 			"obj-6::obj-32" : [ "[8]", "[2]", 0 ],
-			"obj-6::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-6::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ]
+			"obj-6::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
+			"obj-6::obj-35" : [ "[5]", "Level", 0 ]
 		}
 
 	}
