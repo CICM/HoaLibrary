@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <vector>
 
+#define M_2PI 2*M_PI
+
 class AmbisonicEncode {
 	
 private:

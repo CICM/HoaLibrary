@@ -40,17 +40,17 @@ void AmbisonicEncode::computeCoefs(double aTheta)
 {
 
 	
-//	for (int i = 0; i< m_order*2+1; i++) 
-//	{
-//		if (m_harmonicsIndex[i] < 0) 
-//		{
-//			(*ambiCoeffs)[i] = sin(abs(m_harmonicsIndex[i]) * aTheta);
-//		}
-//		else 
-//		{
-//			(*ambiCoeffs)[i] = cos(abs(m_harmonicsIndex[i]) * aTheta);	
-//		}
-//	}
+	for (int i = 0; i< m_order*2+1; i++) 
+	{
+		if (m_harmonicsIndex[i] < 0) 
+		{
+			(*ambiCoeffs)[i] = sin(abs(m_harmonicsIndex[i]) * aTheta);
+		}
+		else 
+		{
+			(*ambiCoeffs)[i] = cos(abs(m_harmonicsIndex[i]) * aTheta);	
+		}
+	}
 }
 
 const std::vector<double>& AmbisonicEncode::process(double aSample)
@@ -93,7 +93,11 @@ const std::vector<double>& AmbisonicEncode::process(double aSample, double aThet
 	(*sourceAmbiCoeffs)[0] = aSample;
 	int  tmpIndex = 2;
 	long tmpAngle;
-	double angleFactor = m_nbOfCirclePoints/(2*M_PI);
+	if (aTheta < 0) {
+		aTheta = aTheta + ( -floor(aTheta/M_2PI)) * M_2PI;
+	}
+	double angleFactor = aTheta*m_nbOfCirclePoints/(M_2PI);
+	
 	for (int i = 1; i <= m_order; i++) {
 		
 //		(*sourceAmbiCoeffs)[tmpIndex]   = cos(i*aTheta);
@@ -101,9 +105,10 @@ const std::vector<double>& AmbisonicEncode::process(double aSample, double aThet
 //		(*sourceAmbiCoeffs)[tmpIndex]  *= aSample;
 //		(*sourceAmbiCoeffs)[tmpIndex]   = aSample * cos(i*aTheta);
 //		(*sourceAmbiCoeffs)[tmpIndex-1] = aSample * sin(i*aTheta);
-		tmpAngle = (long)(i*aTheta*angleFactor)%(m_nbOfCirclePoints-1);
-		(*sourceAmbiCoeffs)[tmpIndex]   = aSample * m_cosLookUp[tmpAngle];
+		tmpAngle = (long)(i*angleFactor)%(m_nbOfCirclePoints-1);
 		(*sourceAmbiCoeffs)[tmpIndex-1] = aSample * m_sinLookUp[tmpAngle];
+		(*sourceAmbiCoeffs)[tmpIndex]   = aSample * m_cosLookUp[tmpAngle];
+
 		tmpIndex += 2;
 	}
 	
