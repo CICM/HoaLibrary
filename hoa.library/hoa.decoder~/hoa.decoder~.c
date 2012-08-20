@@ -57,7 +57,7 @@ int main(void)
 
 	t_class *c;
 	
-	c = class_new("hoa.decoder~", (method)HoaDecode_new, (method)dsp_free, (long)sizeof(t_HoaDecode), 0L, A_GIMME, 0);
+	c = class_new("hoa.decoderOld~", (method)HoaDecode_new, (method)dsp_free, (long)sizeof(t_HoaDecode), 0L, A_GIMME, 0);
 	
 	class_addmethod(c, (method)HoaDecode_dsp,		"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaDecode_dsp64,		"dsp64",	A_CANT, 0);

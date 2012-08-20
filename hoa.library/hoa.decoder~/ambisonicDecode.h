@@ -28,8 +28,9 @@ class ambisonicDecode{
 	
 private:
 	int m_order;
-	int m_channelNumber;	
-	
+	int m_channelNumber;
+	int m_numberOfComponents;
+	int *m_harmonicsIndex;
 	double *spkrsAngles;
 	
 	boost::numeric::ublas::matrix<double> *m;

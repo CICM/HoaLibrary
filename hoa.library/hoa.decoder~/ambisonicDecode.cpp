@@ -10,8 +10,17 @@
 #include "ambisonicDecode.h"
 
 ambisonicDecode::ambisonicDecode(int channelNumber,int order): 
-m_order(order), m_channelNumber(channelNumber)
+m_order(order), m_channelNumber(channelNumber), m_numberOfComponents(order*2+1)
 {
+	
+	m_harmonicsIndex = new int[m_numberOfComponents];
+	m_harmonicsIndex[0] = 0;
+	for(int i = 1; i < m_numberOfComponents; i++)
+	{
+		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+		if (i%2 == 1) 
+			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
+	}
 	
 	spkrsAngles = new double[channelNumber];
 	for(int i = 0; i < channelNumber; i++)
@@ -23,21 +32,31 @@ m_order(order), m_channelNumber(channelNumber)
 	// Creation et initialisation de la matrice de reencodage
 	m = new boost::numeric::ublas::matrix<double>(2*order+1,channelNumber);
 	
-	for (int i = 0; i < channelNumber; i++){
-		
-		for (int j=-m_order; j <= m_order; j++) {
-
-			if (j<0) {
-				
-				(*m)(j+order,i) = sin(abs(j)*spkrsAngles[i]);
-
-			}
-			else {
-				(*m)(j+order,i) = cos(abs(j)*spkrsAngles[i]);
-
-			}
+	for (int i = 0; i < m_channelNumber; i++){
+		for (int j=0; j < m_numberOfComponents; j++) {
+			
+			if (m_harmonicsIndex[j]<0)
+				(*m)(j,i) = sin(abs(m_harmonicsIndex[j])*spkrsAngles[i]);
+			else 
+				(*m)(j,i) = cos(abs(m_harmonicsIndex[j])*spkrsAngles[i]);
 		}
 	}
+	
+//	for (int i = 0; i < channelNumber; i++){
+//		
+//		for (int j=-m_order; j <= m_order; j++) {
+//
+//			if (j<0) {
+//				
+//				(*m)(j+order,i) = sin(abs(j)*spkrsAngles[i]);
+//
+//			}
+//			else {
+//				(*m)(j+order,i) = cos(abs(j)*spkrsAngles[i]);
+//
+//			}
+//		}
+//	}
 	
 	// Calcul de la pseudoInverse 
 	matrix<double> MMtrans(2*order+1,2*order+1);

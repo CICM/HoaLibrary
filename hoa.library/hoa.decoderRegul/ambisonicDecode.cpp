@@ -31,7 +31,7 @@ m_order(order), m_numberOfComponents(order*2+1), m_channelNumber(channelNumber)
 		spkrsAngles[i] = (2*PI/channelNumber)*i;
 	}
 	computePseudoInverse();
-//	computeMaxReOptim();
+	computeMaxReOptim();
 
 }
 
@@ -51,7 +51,7 @@ void ambisonicDecode::computeMaxReOptim()
 {
 	for (int i = 0; i < m_numberOfComponents; i++) 
 	{
-		if (i = 0) 
+		if (i == 0) 
 			gsl_vector_set(m_optimisation, i, 1);
 		else 
 			gsl_vector_set(m_optimisation,i,cos(abs(i) * PI / (2*m_order+2)));
