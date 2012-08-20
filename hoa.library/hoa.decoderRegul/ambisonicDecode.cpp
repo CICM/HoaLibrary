@@ -10,11 +10,11 @@
 #include "ambisonicDecode.h"
 
 ambisonicDecode::ambisonicDecode(int channelNumber,int order): 
-m_order(order), m_numberOfComponents(order*2+1), m_channelNumber(channelNumber)
+m_order(order), m_numberOfComponents(order*2+1), m_channelNumber(channelNumber), m_optimId("basic")
 {
 	spkrsAngles = new double[m_channelNumber];
 	m_output_vec = gsl_vector_alloc (m_channelNumber);
-	m_optimisation = gsl_vector_alloc (m_numberOfComponents);
+	m_optimVector   = gsl_vector_alloc (m_numberOfComponents);
 	m_harmonicsIndex = new int[m_numberOfComponents];
 	
 	m_harmonicsIndex[0] = 0;
@@ -39,11 +39,10 @@ void ambisonicDecode::computeInPhaseOptim()
 {
 	for (int i = 0; i < m_numberOfComponents; i++) 
 	{
-		if (i = 0) 
-			gsl_vector_set(m_optimisation, i, 1);
+		if (i == 0) 
+			gsl_vector_set(m_optimVector, i, 1);
 		else 
-			gsl_vector_set(m_optimisation, i, 
-						   pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(i)) * gsl_sf_fact(m_order-abs(i)) ) );
+			gsl_vector_set(m_optimVector, i, pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_harmonicsIndex[i])) * gsl_sf_fact(m_order-abs(m_harmonicsIndex[i])) ) );
 	}
 }
 
@@ -52,15 +51,31 @@ void ambisonicDecode::computeMaxReOptim()
 	for (int i = 0; i < m_numberOfComponents; i++) 
 	{
 		if (i == 0) 
-			gsl_vector_set(m_optimisation, i, 1);
+			gsl_vector_set(m_optimVector, i, 1);
 		else 
-			gsl_vector_set(m_optimisation,i,cos(abs(i) * PI / (2*m_order+2)));
+			gsl_vector_set(m_optimVector,i,cos(abs(m_harmonicsIndex[i]) * PI / (2*m_order+2)));
 	}
 
 }
 
-void ambisonicDecode::setOptimMethod(char* anOptimId)
+void ambisonicDecode::setOptimMethod(std::string anOptimId)
 {
+
+	
+	if(anOptimId == "maxRe" || anOptimId == "inPhase")
+	{
+		m_optimId = anOptimId;
+		if(anOptimId == "maxRe")
+			computeMaxReOptim();
+		else
+			computeInPhaseOptim();
+	}
+	else {
+		m_optimId = "basic";
+	}
+
+
+
 
 }
 void ambisonicDecode::computePseudoInverse()
@@ -89,8 +104,11 @@ void ambisonicDecode::setSpkrsAngles(double* someSpkrsAngles, int size)
 }
 double*  ambisonicDecode::process(double* input)
 {
-	input_vec = gsl_vector_view_array(input, m_numberOfComponents);
-	
+	gsl_vector_view input_vec = gsl_vector_view_array(input, m_numberOfComponents);
+	if (m_optimId == "maxRe" || m_optimId == "inPhase") {
+		gsl_vector_mul(&input_vec.vector, m_optimVector);
+	}
+
 	gsl_blas_dgemv(CblasNoTrans,1.0, m_regularizedDecod_mat, &input_vec.vector, 0.0,m_output_vec);
 	return m_output_vec->data;
 }

@@ -46,6 +46,7 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv);
 void HoaDecode_free(t_HoaDecode *x);
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s);
 void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv);
+void HoaDecode_decoderOptim(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv);
 void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count);
 t_int *HoaDecode_perform(t_int *w);
 
@@ -65,6 +66,7 @@ int main(void)
 	class_addmethod(c, (method)HoaDecode_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaDecode_assist,	"assist",	A_CANT, 0);
 	class_addmethod(c, (method)HoaDecode_scheme,	"scheme",	A_GIMME, 0);
+	class_addmethod(c, (method)HoaDecode_decoderOptim,	"decoderOptim",	A_GIMME, 0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -207,6 +209,15 @@ void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
 		
 	}
 	x->f_ambisonicDecoder->setSpkrsAngles(value, (int)argc);
+}
+
+void HoaDecode_decoderOptim(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_SYM)
+	{
+		std::string decodingId = atom_getsym(argv)->s_name;
+		x->f_ambisonicDecoder->setOptimMethod(decodingId);
+	}
 }
 
 void HoaDecode_free(t_HoaDecode *x)

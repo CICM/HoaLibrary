@@ -29,22 +29,23 @@ class ambisonicDecode{
 private:
 	int m_order;
 	int m_numberOfComponents;
-	int m_channelNumber;	
+	int m_channelNumber;
+	std::string m_optimId;
+	
 	double *spkrsAngles;
 	int *m_harmonicsIndex;
-	std::vector<double> m_optimId; // "basic", "maxre" or "inphase"
 	
-	gsl_vector_view input_vec;
+	//gsl_vector_view input_vec;
 	gsl_matrix* m_regularizedDecod_mat;
 	gsl_vector* m_output_vec;
-	gsl_vector* m_optimisation;
+	gsl_vector* m_optimVector;
 	
 public:
 	ambisonicDecode(int channelNumber, int order);
 	void computePseudoInverse();
 	void computeMaxReOptim();
 	void computeInPhaseOptim();
-	void setOptimMethod(char* anOptimId);
+	void setOptimMethod(std::string anOptimId);
 	void setSpkrsAngles(double* someSpkrsAngles, int size);
 	double*  process(double* input);
 };
