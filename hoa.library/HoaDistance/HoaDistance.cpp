@@ -14,7 +14,7 @@
 HoaDistance::HoaDistance(int order, double speakersDistance, double sourceDistance):
 m_order(order), m_speakersDistance(speakersDistance), m_sourceDistance(sourceDistance), m_theta(0)
 {
-	m_fftSize = 1024;
+	m_fftSize = 2048;
 	m_fftHalfSize = m_fftSize/2+1;
 	m_sampleRate = 44100;
 	

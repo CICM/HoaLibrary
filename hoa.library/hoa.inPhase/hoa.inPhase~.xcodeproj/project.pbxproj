@@ -7,22 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E64A53815C6C80B00F85BF4 /* hoa.decoder~.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */; };
+		0E64A53815C6C80B00F85BF4 /* hoa.rotate~.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E64A53715C6C80B00F85BF4 /* hoa.rotate~.c */; };
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		4EB5E0E014DEF21200ADF62A /* ambisonicDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */; };
-		4EB5E0E114DEF21200ADF62A /* ambisonicDecode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */; };
-		4EB5E0E214DEF21200ADF62A /* matrixInverse.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EB5E0DF14DEF21200ADF62A /* matrixInverse.h */; };
+		4EBAEA6015C6CC6800BB54B7 /* ambisonicRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EBAEA5F15C6CC6800BB54B7 /* ambisonicRotate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.decoder~.c"; sourceTree = "<group>"; };
+		0E64A53715C6C80B00F85BF4 /* hoa.rotate~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.rotate~.c"; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2FBBEAE508F335360078DB84 /* hoa.decoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.decoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicDecode.cpp; sourceTree = "<group>"; };
-		4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicDecode.h; sourceTree = "<group>"; };
-		4EB5E0DF14DEF21200ADF62A /* matrixInverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrixInverse.h; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.inPhase~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.inPhase~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EBAEA5F15C6CC6800BB54B7 /* ambisonicRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicRotate.h; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -62,10 +58,8 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0E64A53715C6C80B00F85BF4 /* hoa.decoder~.c */,
-				4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */,
-				4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */,
-				4EB5E0DF14DEF21200ADF62A /* matrixInverse.h */,
+				0E64A53715C6C80B00F85BF4 /* hoa.rotate~.c */,
+				4EBAEA5F15C6CC6800BB54B7 /* ambisonicRotate.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -73,7 +67,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.decoder~.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.inPhase~.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,8 +79,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EB5E0E114DEF21200ADF62A /* ambisonicDecode.h in Headers */,
-				4EB5E0E214DEF21200ADF62A /* matrixInverse.h in Headers */,
+				4EBAEA6015C6CC6800BB54B7 /* ambisonicRotate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,7 +102,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.decoder~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.inPhase~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -117,7 +110,7 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.decoder~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.inPhase~" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -161,8 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EB5E0E014DEF21200ADF62A /* ambisonicDecode.cpp in Sources */,
-				0E64A53815C6C80B00F85BF4 /* hoa.decoder~.c in Sources */,
+				0E64A53815C6C80B00F85BF4 /* hoa.rotate~.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +223,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.decoder~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.inPhase~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,
