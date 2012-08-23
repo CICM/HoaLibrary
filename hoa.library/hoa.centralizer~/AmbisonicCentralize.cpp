@@ -68,7 +68,7 @@ const std::vector<double>& AmbisonicCentralize::process(double* aSample)
 {
 	for (int i = 0; i< 2*m_order+1; i++) 
 	{
-		(*sourceAmbiCoeffs)[i] = (*ambiCoeffs)[i] * aSample[abs(m_harmonicsIndex[i])];
+		(*sourceAmbiCoeffs)[i] = (*ambiCoeffs)[i] * aSample[abs(i)] ;
 	}
 	
 	return *(sourceAmbiCoeffs);
@@ -76,20 +76,23 @@ const std::vector<double>& AmbisonicCentralize::process(double* aSample)
 
 const std::vector<double>& AmbisonicCentralize::process(double* aSample, double aRatio, double aTheta)
 {
+	if(aRatio < 0.) aRatio = 0.;
+	else if(aRatio > 1.) aRatio = 1.;
 	
-	for (int i = 0; i< 2*m_order+1; i++) 
-	{
-		weightSources[i] = 0.;
-		for (int j = 0; j< 2*m_order+1; j++) 
-		{
-			if (j == i) 
-				weightSources[i] += aSample[j];
-			else
-				weightSources[i] += aSample[j] * aRatio;
-		}
-	}
-	computeCoefs(aTheta);	
-	return process(weightSources);
+	double invRatio = 1.- aRatio;
+	double volume = 1. / (1. + aRatio);
+	int harmonics = 2 * m_order + 1;
+	
+	computeCoefs(aTheta);
+	
+	weightSources[0] = 0.;
+	for (int i = 0; i < harmonics; i++) 
+		weightSources[0] += aSample[i] * volume;
+	
+	for (int i = 0; i < harmonics; i++) 
+		(*sourceAmbiCoeffs)[i] = (*ambiCoeffs)[i] * weightSources[0] * aRatio + aSample[i] * invRatio;
+	
+	return *(sourceAmbiCoeffs);
 }
 
 
