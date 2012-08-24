@@ -30,7 +30,7 @@ ambisonicDiscretise::ambisonicDiscretise(int nMicrophones,int order): m_order(or
 
 void ambisonicDiscretise::computeInPhaseOptim()
 {
-	for (int i = 0; i < m_numberOfComponents; i++) 
+	for (int i = 0; i < m_nHarmonics; i++) 
 	{
 		if (i == 0) 
 			gsl_vector_set(m_optimVector, i, 1);
@@ -41,7 +41,7 @@ void ambisonicDiscretise::computeInPhaseOptim()
 
 void ambisonicDiscretise::computeMaxReOptim()
 {
-	for (int i = 0; i < m_numberOfComponents; i++) 
+	for (int i = 0; i < m_nHarmonics; i++) 
 	{
 		if (i == 0) 
 			gsl_vector_set(m_optimVector, i, 1);
@@ -76,7 +76,7 @@ void ambisonicDiscretise::computeMicrophones()
 	
 	for (int i = 0; i < m_nMicrophones; i++)
 	{
-		aTheta = ((double)i / (double)m_nMicrophones) * TWOPI;
+		aTheta = ((double)i / (double)m_nMicrophones) * PI * 2.;
 		for (int j = 0; j < m_nHarmonics; j++) 
 		{
 			aIndex = (int)((j - 1) / 2) + 1;

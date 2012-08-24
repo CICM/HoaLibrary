@@ -24,13 +24,13 @@ extern "C"
 	#include "z_dsp.h"
 }
 
-#include "ambisonicDisretise.h"
+#include "ambisonicDiscretise.h"
 
 
 typedef struct _HoaDiscretise
 {
 	t_pxobject					f_ob;			
-	ambisonicDecode				*f_ambisonicDiscretiser;
+	ambisonicDiscretise			*f_ambisonicDiscretiser;
 
 	int							f_n;
 	int							f_sr;
