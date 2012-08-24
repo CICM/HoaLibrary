@@ -81,7 +81,7 @@ int main(void)
 void *HoaDiscretise_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaDiscretise *x = NULL;
-	
+
 	if (x = (t_HoaDiscretise *)object_alloc((t_class*)HoaDiscretise_class)) 
 	{
 		x->f_order = 1;
@@ -100,7 +100,7 @@ void *HoaDiscretise_new(t_symbol *s, long argc, t_atom *argv)
 		
 		dsp_setup((t_pxobject *)x, x->f_inputNumber);
 		for (int i = 0; i < x->f_outputNumber; i++)
-			outlet_new(x, "signal");		
+			outlet_new(x, "signal");
 	}
 	return (x);
 }

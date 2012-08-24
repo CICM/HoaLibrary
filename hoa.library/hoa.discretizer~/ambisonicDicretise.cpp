@@ -79,7 +79,7 @@ void ambisonicDiscretise::computeMicrophones()
 		aTheta = ((double)i / (double)m_nMicrophones) * PI * 2.;
 		for (int j = 0; j < m_nHarmonics; j++) 
 		{
-			aIndex = (int)((j - 1) / 2) + 1;
+			aIndex = (int)((((double)j - 1.) / 2.) + 1.);
 			if (j % 2 == 1)
 				aIndex = -aIndex;
 			
@@ -93,12 +93,15 @@ void ambisonicDiscretise::computeMicrophones()
 
 double*  ambisonicDiscretise::process(double* input)
 {
+	input[0] /= 2. * (double)(m_order + 1);
+	for(int i = 1; i < m_nHarmonics; i++)
+		input[i] /= (double)(m_order + 1);
 	gsl_vector_view input_vec = gsl_vector_view_array(input, m_nHarmonics);
 	
-	if (m_optimId == "maxRe" || m_optimId == "inPhase") 
-		gsl_vector_mul(&input_vec.vector, m_optimVector);
+//	if (m_optimId == "maxRe" || m_optimId == "inPhase") 
+//		gsl_vector_mul(&input_vec.vector, m_optimVector);
 
-	gsl_blas_dgemv(CblasNoTrans, 1.0, m_microphones_mat, &input_vec.vector, 0.0, m_output_vec);
+	gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_mat, &input_vec.vector, 0.0, m_output_vec);
 	return m_output_vec->data;
 }
 

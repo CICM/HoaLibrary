@@ -27,11 +27,11 @@ m_order(order), m_numberOfComponents(order*2+1), m_channelNumber(channelNumber),
 	}
 
 	
-	for(int i = 0; i < channelNumber; i++)
+	for(int i = 0; i < m_channelNumber; i++)
 	{
-		spkrsAngles[i] = (2*PI/channelNumber)*i;
+		spkrsAngles[i] = (2. * PI / (double)m_channelNumber) * (double)i;
 		if(spkrsAngles[i] > PI)
-			spkrsAngles[i] -= 2*PI;
+			spkrsAngles[i] -= 2. * PI;
 	}
 	computeMicMatrix();
 
@@ -48,10 +48,10 @@ void ambisonicDecode::computeMicMatrix()
 		gsl_matrix_set(recompMicCoefs, micIndex, 0, 1);
 		for (int orderIndex = 1; orderIndex <= m_order; orderIndex++) 
 		{
-			//gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2 -1, sin(orderIndex*spkrsAngles[micIndex]*m_fishEyeFactor));
-			//gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2   , cos(orderIndex*spkrsAngles[micIndex]*m_fishEyeFactor));
-			gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2 -1, 1);
-			gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2   , 1);
+			gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2 -1, sin(orderIndex*spkrsAngles[micIndex]*m_fishEyeFactor));
+			gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2   , cos(orderIndex*spkrsAngles[micIndex]*m_fishEyeFactor));
+//			gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2 -1, 1);
+//			gsl_matrix_set(recompMicCoefs, micIndex, orderIndex * 2   , 1);
 		}
 	}
 }

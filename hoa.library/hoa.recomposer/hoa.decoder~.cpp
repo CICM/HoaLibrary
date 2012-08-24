@@ -81,11 +81,12 @@ int main(void)
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaDecode *x = NULL;
-	
+	float angle;
 	if (x = (t_HoaDecode *)object_alloc((t_class*)HoaDecode_class)) 
 	{
 		x->f_order = 1;
 		x->f_outputNumber = 4;
+		x->f_inputNumber = 3;
 		if(atom_gettype(argv) == A_LONG)
 			x->f_order			= atom_getlong(argv);
 		if(atom_gettype(argv+1) == A_LONG)
@@ -93,11 +94,11 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->f_outputNumber		= x->f_order * 2 + 1;
 		
-		x->f_ambisonicDecoder	= new ambisonicDecode(x->f_outputNumber, x->f_order);
+		x->f_ambisonicDecoder	= new ambisonicDecode(x->f_inputNumber - 1, x->f_order);
 		
 		dsp_setup((t_pxobject *)x, x->f_inputNumber);
 		for (int i = 0; i < x->f_outputNumber; i++)
-			outlet_new(x, "signal");		
+			outlet_new(x, "signal");
 	}
 	return (x);
 }
