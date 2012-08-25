@@ -39,7 +39,7 @@ for (var j = -orderNumber; j <= orderNumber; j++)
     harmonicsBasis[j+orderNumber] = new Array(numberOfAngularStep);
     for(var i = 0; i < numberOfAngularStep; i++)
     {
-        post((j+orderNumber) + "\n")
+       // post((j+orderNumber) + "\n")
         if(j < 0)
           harmonicsBasis[j+orderNumber][i] = Math.sin(Math.abs(j)*angularSteps[i]);
         else if (j == 0)
