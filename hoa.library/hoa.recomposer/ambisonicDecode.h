@@ -31,8 +31,10 @@ private:
 	int m_numberOfComponents;
 	int m_channelNumber;
 	double m_fishEyeFactor;
+	long m_nbOfSampledMatrix;
 
 	gsl_matrix* recompMicCoefs;
+	gsl_matrix** m_recompMicCoefsSet;
 	gsl_vector* m_output_vec;
 	
 	double *spkrsAngles;
@@ -42,9 +44,9 @@ private:
 	
 public:
 	ambisonicDecode(int channelNumber, int order);
-	void SetFishEyeFactor(double aFishEyeFactor);
-	void computeMicMatrix();
-	double*  process(double* input);
+	void computeMicMatrix(gsl_matrix* resMatrix, double aFishFactor);
+	void computeMicMatrixSet();
+	double*  process(double* input, double aFishEyeFactor);
 	~ambisonicDecode()
 	{
 		gsl_matrix_free(recompMicCoefs);

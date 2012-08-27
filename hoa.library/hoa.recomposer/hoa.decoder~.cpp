@@ -164,8 +164,11 @@ t_int *HoaDecode_perform(t_int *w)
 		for (int j = 0; j < x->f_inputNumber-1; j++)
 			x->f_insig[j] = signals[j][i];
 		
-		x->f_ambisonicDecoder->SetFishEyeFactor(signals[x->f_inputNumber][i]);
-		x->f_outsig = x->f_ambisonicDecoder->process(x->f_insig);
+//		x->f_ambisonicDecoder->SetFishEyeFactor(signals[x->f_inputNumber][i]);
+//		x->f_outsig = x->f_ambisonicDecoder->process(x->f_insig);
+		
+
+		x->f_outsig = x->f_ambisonicDecoder->process(x->f_insig, signals[x->f_inputNumber][i]);
 		
 		for (int j = 0; j < x->f_outputNumber; j++) 
 			signals[j+x->f_inputNumber][i] = x->f_outsig[j];
