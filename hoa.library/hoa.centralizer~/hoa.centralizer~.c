@@ -105,6 +105,7 @@ void *HoaCentralize_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_inputNumber);
 		for (int i = 0; i < x->f_outputNumber; i++) 
 			outlet_new(x, "signal");
+		//x->f_ob.z_misc != Z_NO_INPLACE;
 		
 	}
 	return (x);
@@ -164,6 +165,10 @@ void HoaCentralize_dsp(t_HoaCentralize *x, t_signal **sp, short *count)
 	x->f_n	= (int)sp[0]->s_n;
 	x->f_sr	= (int)sp[0]->s_sr;
 
+	for(i = 0; i < x->f_inputNumber; i++)
+		post("adress %i %p", i, (void *)sp[i]->s_vec);
+	
+	
 	pointer_count = x->f_outputNumber + x->f_inputNumber + 2;
 	x->f_inputSig = (double *)getbytes(x->f_harmonics * sizeof(double));
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
@@ -178,6 +183,7 @@ void HoaCentralize_dsp(t_HoaCentralize *x, t_signal **sp, short *count)
 	dsp_addv(HoaCentralize_perform, pointer_count, (void **)sigvec);
 
 	free(sigvec);
+	
 }
 
 t_int *HoaCentralize_perform(t_int *w)
