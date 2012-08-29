@@ -9,26 +9,26 @@
 
 #include "ambisonicDecode.h"
 
-ambisonicDecode::ambisonicDecode(int channelNumber,int order): 
-m_order(order), m_numberOfComponents(order*2+1), m_channelNumber(channelNumber), m_optimId("basic")
+ambisonicDecode::ambisonicDecode(int channels,int order): m_order(order), m_harmonics(order*2+1), m_channels(channelNumber), m_optimId("basic")
 {
-	spkrsAngles = new double[m_channelNumber];
-	m_output_vec = gsl_vector_alloc (m_channelNumber);
-	m_optimVector   = gsl_vector_alloc (m_numberOfComponents);
-	m_harmonicsIndex = new int[m_numberOfComponents];
+	m_spkrsAngles		= new double[m_channels];
+	m_harmonicsIndex	= new int[m_harmonics];
+	
+	m_output_vec		= gsl_vector_alloc (m_channelNumber);
+	m_optimVector		= gsl_vector_alloc (m_numberOfComponents);
 	
 	m_harmonicsIndex[0] = 0;
 	for(int i = 1; i < m_numberOfComponents; i++)
 	{
 		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
-		if (i%2 == 1) 
+		if (i % 2 == 1) 
 			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
 	}
 
 	
 	for(int i = 0; i < channelNumber; i++)
 	{
-		spkrsAngles[i] = (2*PI/channelNumber)*i;
+		m_spkrsAngles[i] = (2. * PI / (double)m_channels) * (double)i;
 	}
 	computePseudoInverse();
 	computeMaxReOptim();
@@ -37,7 +37,7 @@ m_order(order), m_numberOfComponents(order*2+1), m_channelNumber(channelNumber),
 
 void ambisonicDecode::computeInPhaseOptim()
 {
-	for (int i = 0; i < m_numberOfComponents; i++) 
+	for (int i = 0; i < m_harmonics; i++) 
 	{
 		if (i == 0) 
 			gsl_vector_set(m_optimVector, i, 1);
@@ -48,7 +48,7 @@ void ambisonicDecode::computeInPhaseOptim()
 
 void ambisonicDecode::computeMaxReOptim()
 {
-	for (int i = 0; i < m_numberOfComponents; i++) 
+	for (int i = 0; i < m_harmonics; i++) 
 	{
 		if (i == 0) 
 			gsl_vector_set(m_optimVector, i, 1);
@@ -80,14 +80,16 @@ void ambisonicDecode::setOptimMethod(std::string anOptimId)
 }
 void ambisonicDecode::computePseudoInverse()
 {
-	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_numberOfComponents,m_channelNumber); 
+	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_harmonics, m_channels); 
 	
-	for (int i = 0; i < m_channelNumber; i++){
-		for (int j=0; j < m_numberOfComponents; j++) {
-			if (m_harmonicsIndex[j]<0)
-				gsl_matrix_set(reencod_Mat,j,i,sin(abs(m_harmonicsIndex[j])*spkrsAngles[i]));
+	for (int i = 0; i < m_channels; i++)
+	{
+		for (int j=0; j < m_harmonics; j++) 
+		{
+			if (m_harmonicsIndex[j] < 0)
+				gsl_matrix_set(reencod_Mat,j,i,sin(abs(m_harmonicsIndex[j]) * m_spkrsAngles[i]));
 			else 
-				gsl_matrix_set(reencod_Mat,j,i,cos(abs(m_harmonicsIndex[j])*spkrsAngles[i]));
+				gsl_matrix_set(reencod_Mat,j,i,cos(abs(m_harmonicsIndex[j]) * m_spkrsAngles[i]));
 		}
 	}
 	m_regularizedDecod_mat = GenericSvdPseudoInverse(reencod_Mat);
@@ -96,15 +98,15 @@ void ambisonicDecode::computePseudoInverse()
 
 void ambisonicDecode::setSpkrsAngles(double* someSpkrsAngles, int size)
 {
-	if (size > m_channelNumber) 
-		size = m_channelNumber;
+	if (size > m_channels) 
+		size = m_channels;
 	
-	memcpy(spkrsAngles, someSpkrsAngles, sizeof(double)*size);
+	memcpy(m_spkrsAngles, someSpkrsAngles, sizeof(double)*size);
 	computePseudoInverse();
 }
 double*  ambisonicDecode::process(double* input)
 {
-	gsl_vector_view input_vec = gsl_vector_view_array(input, m_numberOfComponents);
+	gsl_vector_view input_vec = gsl_vector_view_array(input, m_harmonics);
 	if (m_optimId == "maxRe" || m_optimId == "inPhase") {
 		gsl_vector_mul(&input_vec.vector, m_optimVector);
 	}
