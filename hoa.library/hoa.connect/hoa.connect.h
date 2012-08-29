@@ -32,16 +32,12 @@
 #include "jdataview.h"
 #include "hoa.structure.h"
 
-int xPos;
-int yPos;
-
 typedef struct  _connect
 {
-	t_pxobject	f_ob;
+	t_object	f_ob;
 	
 	t_object	*f_patcher;
 	t_object	*f_patcherview;
-	t_object	*f_newpatch;
 	
 	t_object	*f_object[100];
 	int			f_index[100];
@@ -60,23 +56,8 @@ typedef struct  _connect
 
 void *connect_class;
 
-typedef struct  _in
-{
-	t_object	f_ob;
-	t_object	*f_connect;
-	long			f_num;
-} t_in;
-
-void *in_class;
-
-void init(void);
-void *in_new();
-void in_list(t_in *x, t_symbol *s, long argc, t_atom *argv);
-
-
-
 void *connect_new(t_symbol *s, long argc, t_atom *argv);
-void connect_getinput(t_connect *x);
+
 void connect_free(t_connect *x);
 void connect_bang(t_connect *x);
 void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
@@ -84,7 +65,9 @@ void connect_attach(t_connect *x);
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void connect_list(t_connect *x, t_symbol *s, long argc, t_atom *argv);
 void ordonnerTableau(int *positions, t_object **objects, int size);
-int validCondition(t_rect jr, t_rect f_jr, int patchX, int patchY);
+
+int validPos(t_rect jr, t_rect f_jr, int patchX, int patchY);
+int validName(t_object *box);
 
 void color_patchline(t_connect *x);
 int validConditionColor(t_object *obj);

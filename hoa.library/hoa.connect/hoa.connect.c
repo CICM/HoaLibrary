@@ -21,25 +21,19 @@
 int main(void)
 {
 	t_class *c;
-	init();
+
 	c = class_new("hoa.connect", (method)connect_new, (method)connect_free, (short)sizeof(t_connect), 0L, A_GIMME, 0);
 	
 	class_addmethod(c, (method)connect_notify,				"notify",		A_CANT, 0);
 	class_addmethod(c, (method)connect_bang,				"bang",			A_CANT,	0);
 	
 	class_register(CLASS_BOX, c);
-	connect_class = c;
-	
-	post("hoa.connect by Pierre Guillot & Julien Colafransceco",0);
-	post("Copyright (C) 2012, Universite Paris 8");
-
-	
+	connect_class = c;	
 }
 
 void *connect_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_connect *x = NULL;
-	t_object *tog, *met, *pak, *mou, *out;
 
 	if (x = (t_connect *)object_alloc((t_class *)connect_class)) 
 	{	
@@ -55,22 +49,7 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 		
 		object_obex_lookup(x, gensym("#P"), &x->f_patcher);
 		defer_low(x, (method)connect_attach, NULL, 0, NULL);
-		
-		x->f_newpatch = (t_object *)object_new_typed(CLASS_NOBOX, gensym("jpatcher"), 0, NULL);
-		
-		tog = newobject_sprintf(x->f_newpatch, "@maxclass toggle @patching_rect 0 0 20 20");
-		met = newobject_sprintf(x->f_newpatch, "@maxclass newobj @text \"metro 20\" @patching_rect 0 50 100 20");
-		mou =  newobject_sprintf(x->f_newpatch, "@maxclass newobj @text mousestate @patching_rect 0 100 100 20");
-		pak = newobject_sprintf(x->f_newpatch, "@maxclass newobj @text \"pak 0 0\" @patching_rect 0 150 100 20");
-		out = newobject_sprintf(x->f_newpatch, "@maxclass newobj @text zorglub @patching_rect 0 200 100 20");
-		
-		connect_connect(x->f_newpatch , tog, 0, met, 0);
-		connect_connect(x->f_newpatch , met, 0, mou, 0);
-		connect_connect(x->f_newpatch , mou, 1, pak, 0);
-		connect_connect(x->f_newpatch , mou, 2, pak, 1);
-		connect_connect(x->f_newpatch , pak, 0, out, 0);
 	
-		connect_getinput(x);
 		x->f_inc = 0;
 		x->f_jr.x = 0;
 		x->f_jr.y = 0;
@@ -87,27 +66,15 @@ void connect_free(t_connect *x)
 		object_detach_byptr(x, x->f_patcherview);
 }
 
-void connect_getinput(t_connect *x)
-{
-	t_object *box, *obj;
-	for (box = jpatcher_get_firstobject(x->f_newpatch); box; box = jbox_get_nextobject(box)) 
-	{		
-		obj = jbox_get_object(box);
-		if(object_classname(obj) == gensym("mousestate"))
-			object_method(obj, gensym("mode"), 0);
-		if(object_classname(obj) == gensym("toggle"))
-			object_method(obj, gensym("int"), 1);
-	}
-}
-
 void connect_bang(t_connect *x)
 {
-	t_object *box, *obj, *jb, *o;
+	t_object *box;
 	
 	t_rect jr;
-	int i, j, go;
+	int i, j;
 	t_atom *av = NULL;
 	long ac = 0;
+
 	
 	int patchX = 0, patchY = 0;
 	object_attr_getvalueof(x->f_patcherview, gensym("rect"), &ac, &av);
@@ -117,81 +84,37 @@ void connect_bang(t_connect *x)
 		patchY = atom_getfloat(av+1);
 		freebytes(av, sizeof(t_atom) * ac);
 	}
-	go = 0;
+ 
 	x->f_inc = 0;
 	for (box = jpatcher_get_firstobject(x->f_patcher); box && x->f_inc < 100; box = jbox_get_nextobject(box)) 
-	{		
-		obj = jbox_get_object(box);
-		if(object_classname(obj) == gensym("hoa.decoder~") || object_classname(obj) == gensym("hoa.encoder~") || object_classname(obj) == gensym("hoa.rotate~") || object_classname(obj) == gensym("dac~"))
+	{	
+		jbox_get_patching_rect(box, &jr);
+		if(validName(box) && validPos(jr, x->f_jr, patchX, patchY))
 		{
-			jbox_get_patching_rect(box, &jr);
-			if(validCondition(jr, x->f_jr, patchX, patchY))
+			x->f_index[x->f_inc] = jr.y;
+			for(i = 0; i < x->f_inc; i++)
 			{
-				x->f_index[x->f_inc] = jr.y;
-				for(i = 0; i < x->f_inc; i++)
+				if (x->f_index[x->f_inc] == x->f_index[i]) 
 				{
-					if (x->f_index[x->f_inc] == x->f_index[i]) 
-					{
-						x->f_index[x->f_inc]++;
-					}
+					x->f_index[x->f_inc]++;
 				}
-				x->f_object[x->f_inc++] = box;
 			}
+			x->f_object[x->f_inc++] = box;
 		}
-		else if (object_classname(obj) == gensym("jpatcher"))
-		{
-			jb = jpatcher_get_firstobject(obj);
-			while(jb) 
-			{
-				o = jbox_get_object(jb);
-				jbox_get_patching_rect(box, &jr);
-				if(object_classname(o) == gensym("hoa.plug_script"))
-				{
-					if(validCondition(jr, x->f_jr, patchX, patchY))
-					{
-						if(((t_plug_script *)o)->f_mode == 0)
-						{
-							x->f_inlet[x->f_inc]	= ((t_plug_script *)o)->f_inlet;
-							x->f_outlet[x->f_inc]	= (((t_plug_script *)o)->f_order * 2 + 1 ) * ((t_plug_script *)o)->f_outlet;
-						}
-						else if (((t_plug_script *)o)->f_mode = 2)
-						{
-							x->f_inlet[x->f_inc]	= ((t_plug_script *)o)->f_inlet;
-							x->f_outlet[x->f_inc]	= ((t_plug_script *)o)->f_order * ((t_plug_script *)o)->f_outlet;
-						}
-						else 
-						{
-							x->f_inlet[x->f_inc]	= (((t_plug_script *)o)->f_order * 2 + 1 ) * ((t_plug_script *)o)->f_inlet;
-							x->f_outlet[x->f_inc]	= (((t_plug_script *)o)->f_order * 2 + 1 ) * ((t_plug_script *)o)->f_outlet;
-						}
-						x->f_connected[x->f_inc]= ((t_plug_script *)o)->f_connected++;
-						go = 1;
-					}
-				}
-				jb = jbox_get_nextobject(jb);
-			}
-			if(go)
-			{
-				x->f_index[x->f_inc] = jr.y;
-				for(i = 0; i < x->f_inc; i++)
-				{
-					if (x->f_index[x->f_inc] == x->f_index[i]) 
-					{
-						x->f_index[x->f_inc]++;
-					}
-				}
-				x->f_object[x->f_inc++] = box;
-				go = 0;
-			}
-		}
+	
 	}
 	
 	ordonnerTableau(x->f_index, x->f_object, x->f_inc);
 	for(i = 1; i < x->f_inc; i++)
 	{
-		
 		if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~"))
 		{
+			//for(j = 0; j < 30; j++)
+//			{
+//				if((jbox_get_object(x->f_object[i -1]))->o_inlet[j] != NULL))
+//				   k++;
+//			}
+//			post("inlet %i", k);
 			for(j = 0; j < x->f_output; j++)
 			{
 				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
@@ -233,7 +156,7 @@ void color_patchline(t_connect *x)
 						   
 		if (validConditionColor(obj))
 		{ 
-			if (jpatchline_get_inletnum(line) % 2 == 1 || jpatchline_get_inletnum(line) == 0) 
+			if (jpatchline_get_inletnum(line) % 2 == 1) 
 				jpatchline_set_color(line, &bleu);
 			else
 				jpatchline_set_color(line, &rouge);			
@@ -262,13 +185,17 @@ void connect_attach(t_connect *x)
 
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {	
+	int xPos, yPos;
+	
 	if (msg == gensym("startdrag"))
 	{
+		jmouse_getposition_global(&xPos, &yPos);
 		x->f_jr.x = xPos;
 		x->f_jr.y = yPos;
 	}
 	else if (msg == gensym("enddrag"))
 	{
+		jmouse_getposition_global(&xPos, &yPos);
 		if(xPos < x->f_jr.x)
 		{
 			x->f_jr.width = x->f_jr.x;
@@ -288,9 +215,58 @@ void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void
 
 }
 
-int validCondition(t_rect jr, t_rect f_jr, int patchX, int patchY)
+int validPos(t_rect jr, t_rect f_jr, int patchX, int patchY)
 {
 	if(jr.x + jr.width + patchX >= f_jr.x && jr.y + jr.height + patchY >= f_jr.y && jr.x + patchX <= f_jr.width && jr.y + patchY <=  f_jr.height)
+		return 1;
+	else
+		return 0;
+}
+
+int validName(t_object *box)
+{
+	int i;
+	t_object *jb, *o, *obj;
+	char objName[] = "nop.";
+	
+	obj = jbox_get_object(box);
+	
+	if(object_classname(obj) == gensym("jpatcher"))
+	{
+		if(strlen(jpatcher_get_name(obj)->s_name) >= 4)
+		{
+			for(i = 0; i < 4; i++)
+			{
+				objName[i] = jpatcher_get_name(obj)->s_name[i];
+			}
+		}
+		else 
+		{
+			jb = jpatcher_get_firstobject(obj);
+			while(jb) 
+			{
+				o = jbox_get_object(jb);
+				if(object_classname(o) == gensym("hoa.plug_script"))
+				{
+					strcpy(objName, "hoa.");
+				}
+				jb = jbox_get_nextobject(jb);
+			}
+		}			
+	}
+	else if (object_classname(obj) == gensym("dac~"))
+	{
+		strcpy(objName, "hoa.");
+	}
+	else if (strlen(object_classname(obj)->s_name) >= 4) 
+	{
+		for(i = 0; i < 4; i++)
+		{
+			objName[i] = object_classname(obj)->s_name[i];
+		}
+	}
+	
+	if(strcmp(objName, "hoa.") == 0)
 		return 1;
 	else
 		return 0;
@@ -360,33 +336,5 @@ void ordonnerTableau(int *positions, t_object **objects, int size)
 	}
 }
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void init(void)
-{
-	t_class *c;
-	
-	c = class_new("zorglub", (method)in_new, (method)NULL, (short)sizeof(t_in), 0L, NULL, 0);
-	class_addmethod(c, (method)in_list,				"list",			A_GIMME, 0);
-
-	class_register(CLASS_BOX, c);
-	in_class = c;
-}
-
-void *in_new()
-{
-	t_in *x = (t_in *)object_alloc((t_class *)in_class);	
-	return x;
-}			
-
-void in_list(t_in *x, t_symbol *s, long argc, t_atom *argv)
-{
-	xPos = atom_getlong(argv);
-	yPos = atom_getlong(argv+1);
-}
 
 

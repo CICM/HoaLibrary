@@ -7,13 +7,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>hoa.viewer</string>
+	<string>hoa.binaural~</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cycling74.hoa.viewer</string>
+	<string>com.cycling74.hoa.binaural~</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
-	<string>hoa.viewer 5.1.7, Copyright 2010 Cycling '74</string>
+	<string>hoa.binaural~ 5.1.7, Copyright 2010 Cycling '74</string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
 	<key>CFBundleShortVersionString</key>

@@ -71,7 +71,7 @@ int main()
 {
 	t_class *c;
 
-	c = class_new("hoa.viewer", (method)descriptor_new, (method)descriptor_free, (short)sizeof(t_descriptor), 0L, A_GIMME, 0);
+	c = class_new("hoa.scope", (method)descriptor_new, (method)descriptor_free, (short)sizeof(t_descriptor), 0L, A_GIMME, 0);
 
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
@@ -123,8 +123,6 @@ int main()
 	
 	class_register(CLASS_BOX, c);
 	descriptor_class = c;
-
-	post("hoa.descriptor by Pierre Guillot",0);
 	
 	return 0;
 }
