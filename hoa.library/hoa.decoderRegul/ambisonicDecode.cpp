@@ -9,16 +9,16 @@
 
 #include "ambisonicDecode.h"
 
-ambisonicDecode::ambisonicDecode(int channels,int order): m_order(order), m_harmonics(order*2+1), m_channels(channelNumber), m_optimId("basic")
+ambisonicDecode::ambisonicDecode(int channels,int order): m_order(order), m_harmonics(order*2+1), m_channels(channels), m_optimId("basic")
 {
 	m_spkrsAngles		= new double[m_channels];
 	m_harmonicsIndex	= new int[m_harmonics];
 	
-	m_output_vec		= gsl_vector_alloc (m_channelNumber);
-	m_optimVector		= gsl_vector_alloc (m_numberOfComponents);
+	m_output_vec		= gsl_vector_alloc (channels);
+	m_optimVector		= gsl_vector_alloc (m_harmonics);
 	
 	m_harmonicsIndex[0] = 0;
-	for(int i = 1; i < m_numberOfComponents; i++)
+	for(int i = 1; i < m_harmonics; i++)
 	{
 		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
 		if (i % 2 == 1) 
@@ -26,7 +26,7 @@ ambisonicDecode::ambisonicDecode(int channels,int order): m_order(order), m_harm
 	}
 
 	
-	for(int i = 0; i < channelNumber; i++)
+	for(int i = 0; i < channels; i++)
 	{
 		m_spkrsAngles[i] = (2. * PI / (double)m_channels) * (double)i;
 	}
