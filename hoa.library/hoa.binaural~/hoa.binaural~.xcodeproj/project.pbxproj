@@ -169,6 +169,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = /Developer/usr/local/boost_1_48_0;
+				OTHER_LDFLAGS = (
+					libgsl.a,
+					"-static",
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
 			};
 			name = Development;
 		};
@@ -191,12 +198,14 @@
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
 					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				VALID_ARCHS = i386;
 			};
 			name = Development;
 		};

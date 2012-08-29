@@ -31,7 +31,7 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aVectorSize)
 	else
 		m_order = 35;
 	
-	m_harmonics = 2 * order + 1;
+	m_harmonics = 2 * m_order + 1;
 	m_response_size = 200;
 	
 	responseInit();
@@ -42,7 +42,7 @@ void AmbisonicBinaural::responseInit()
 	gsl_matrix* m_respo_matrix = gsl_matrix_calloc(m_response_size, m_harmonics);
 }
 
-void AmbisonicBinaural::matrixInit(aVectorSize)
+void AmbisonicBinaural::matrixInit(int aVectorSize)
 {
 	if(aVectorSize != m_vector_size)
 	{		
@@ -60,7 +60,8 @@ void AmbisonicBinaural::matrixInit(aVectorSize)
 
 double *AmbisonicBinaural::process(double* aSample)
 {	
-	return *result;
+	double result;
+	return &result;
 }
 
 AmbisonicBinaural::~AmbisonicBinaural()

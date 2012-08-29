@@ -26,6 +26,8 @@
 #include <complex>
 #include <stdio.h>
 #include <vector>
+#include <gsl/gsl_blas.h>
+#include <gsl/gsl_linalg.h>
 
 #define M_2PI 2*M_PI
 
@@ -41,14 +43,16 @@ private:
 	gsl_matrix* m_input_matrix;
 	gsl_matrix* m_respo_matrix;
 	gsl_matrix* m_outnew_matrix;
-	gsl_matrix* m_outold_maxtrix;
+	gsl_matrix* m_outold_matrix;
 	
 	double		m_result[2];
 	
 public:
 	
-	AmbisonicBinaural(int order);
-	const std::vector<double>& process(double* aSample);
+	AmbisonicBinaural(int aOrder, int aVectorSize);
+	void responseInit();
+	void matrixInit(int aVectorSize);
+	double* process(double* aSample);
 	~AmbisonicBinaural();
 	
 };
