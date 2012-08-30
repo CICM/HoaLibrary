@@ -58,8 +58,18 @@ void AmbisonicBinaural::matrixInit(int aVectorSize)
 	}
 }
 
-double *AmbisonicBinaural::process(double* aSample)
+double *AmbisonicBinaural::process(double** aSample)
 {	
+	for (int i = 0; i < m_channels; i++)
+	{
+		for (int j=0; j < m_harmonics; j++) 
+		{
+			if (m_harmonicsIndex[j] < 0)
+				gsl_matrix_set(reencod_Mat,j,i,sin(abs(m_harmonicsIndex[j]) * m_spkrsAngles[i]));
+			else 
+				gsl_matrix_set(reencod_Mat,j,i,cos(abs(m_harmonicsIndex[j]) * m_spkrsAngles[i]));
+		}
+	}
 	double result;
 	return &result;
 }
