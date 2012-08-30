@@ -23,12 +23,12 @@ extern "C" {
 #include "z_dsp.h"
 }
 
-//#include <AmbisonicBinaural.h>
+#include <AmbisonicBinaural.h>
 
 typedef struct _HoaBinaural 
 {
 	t_pxobject					f_ob;			
-	//AmbisonicBinaural			*f_ambiBinaural;
+	AmbisonicBinaural			*f_ambiBinaural;
 	
 	int							f_n;
 	int							f_sr;
@@ -37,7 +37,6 @@ typedef struct _HoaBinaural
 	long						f_outputNumber;
 	long						f_order;
 	long						f_harmonics;
-	//std::vector<double>			f_computedOuput;
 	
 	double						*f_inputSig;
 } t_HoaBinaural;
@@ -88,6 +87,9 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 	
 	if (x = (t_HoaBinaural *)object_alloc((t_class *)HoaBinaural_class)) 
 	{
+		x->f_sr = sys_getsr();
+		x->f_n	= sys_getblksize();
+		
 		x->f_order = 4;
 		if(argv[0].a_type == A_LONG)
 			x->f_order = atom_getlong(argv);
@@ -104,7 +106,7 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_inputNumber = x->f_harmonics;
 		x->f_outputNumber = 2;
 		
-		//x->f_ambiBinaural = new AmbisonicBinaural(x->f_order);
+		x->f_ambiBinaural = new AmbisonicBinaural(x->f_order, x->f_sr, x->f_n);
 		
 		dsp_setup((t_pxobject *)x, x->f_inputNumber);
 		for (int i = 0; i < x->f_outputNumber; i++) 
@@ -151,16 +153,13 @@ void HoaBinaural_dsp64(t_HoaBinaural *x, t_object *dsp64, short *count, double s
 {
 	x->f_n	= maxvectorsize;
 	x->f_sr	= samplerate;
-	
+	x->f_ambiBinaural->matrixInit(x->f_n);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaBinaural_perform64, 0, NULL);
 }
 
 void HoaBinaural_perform64(t_HoaBinaural *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	for (int i = 0; i < sampleframes; i++) 
-	{
-		;
-	}
+	x->f_ambiBinaural->process(ins);
 }
 
 void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
@@ -171,6 +170,8 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 	
 	x->f_n	= (int)sp[0]->s_n;
 	x->f_sr	= (int)sp[0]->s_sr;
+	
+	x->f_ambiBinaural->matrixInit(x->f_n);
 	
 	pointer_count = x->f_outputNumber + x->f_inputNumber + 2;
 	x->f_inputSig = (double *)getbytes(x->f_harmonics * sizeof(double));
@@ -192,13 +193,9 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 t_int *HoaBinaural_perform(t_int *w)
 {
 	t_HoaBinaural *x			= (t_HoaBinaural *)(w[1]);
-	int			n			= (int)(w[2]);
-	//t_float		**signals	= (t_float **)w+3;
+	t_float		**signals	= (t_float **)w+3;
 	
-	for (int i = 0; i < n; i++) 
-	{	
-		;
-	}
+	x->f_ambiBinaural->process(signals);
 	
 	return (w + x->f_outputNumber + x->f_inputNumber + 3);
 }
