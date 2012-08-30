@@ -193,7 +193,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/c74support/msp-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -205,6 +205,12 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					/usr/local/lib/libgsl.a,
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
 				VALID_ARCHS = i386;
 			};
 			name = Development;
