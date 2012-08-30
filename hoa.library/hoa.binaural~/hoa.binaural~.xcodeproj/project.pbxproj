@@ -206,7 +206,11 @@
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = (
+<<<<<<< HEAD
 					/usr/local/lib/libgsl.a,
+=======
+					libgsl.a,
+>>>>>>> binaural update
 					"-lcblas",
 					"-latlas",
 					"-lm",
