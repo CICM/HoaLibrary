@@ -72,7 +72,7 @@ int main(void)
 	class_addmethod(c, (method)HoaBinaural_dsp,			"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaBinaural_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaBinaural_assist,		"assist",	A_CANT, 0);
-	class_addmethod(c, (method)HoaBinaural_open,		"open",		A_DEFSYM, 0);
+	//class_addmethod(c, (method)HoaBinaural_open,		"open",		A_DEFSYM, 0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -86,10 +86,7 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 	t_HoaBinaural *x = NULL;
 	
 	if (x = (t_HoaBinaural *)object_alloc((t_class *)HoaBinaural_class)) 
-	{
-		x->f_sr = sys_getsr();
-		x->f_n	= sys_getblksize();
-		
+	{		
 		x->f_order = 4;
 		if(argv[0].a_type == A_LONG)
 			x->f_order = atom_getlong(argv);
@@ -106,6 +103,8 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_inputNumber = x->f_harmonics;
 		x->f_outputNumber = 2;
 		
+		x->f_sr = sys_getsr();
+		x->f_n	= sys_getblksize();
 		x->f_ambiBinaural = new AmbisonicBinaural(x->f_order, x->f_sr, x->f_n);
 		
 		dsp_setup((t_pxobject *)x, x->f_inputNumber);
@@ -153,7 +152,7 @@ void HoaBinaural_dsp64(t_HoaBinaural *x, t_object *dsp64, short *count, double s
 {
 	x->f_n	= maxvectorsize;
 	x->f_sr	= samplerate;
-	x->f_ambiBinaural->matrixInit(x->f_n);
+	x->f_ambiBinaural->matrixResize(x->f_n);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaBinaural_perform64, 0, NULL);
 }
 
@@ -171,7 +170,7 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 	x->f_n	= (int)sp[0]->s_n;
 	x->f_sr	= (int)sp[0]->s_sr;
 	
-	x->f_ambiBinaural->matrixInit(x->f_n);
+	x->f_ambiBinaural->matrixResize(x->f_n);
 	
 	pointer_count = x->f_outputNumber + x->f_inputNumber + 2;
 	x->f_inputSig = (double *)getbytes(x->f_harmonics * sizeof(double));
@@ -229,5 +228,6 @@ void HoaBinaural_assist(t_HoaBinaural *x, void *b, long m, long a, char *s)
 void HoaBinaural_free(t_HoaBinaural *x) 
 {
 	dsp_free((t_pxobject *)x);
+	free(x->f_ambiBinaural);
 }
 

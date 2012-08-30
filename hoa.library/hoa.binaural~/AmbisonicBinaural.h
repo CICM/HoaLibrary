@@ -40,6 +40,7 @@ private:
 	long		m_response_size;
 	long		m_vector_size;
 	long		m_sampling_rate;
+	std::string m_optimMode;
 	
 	gsl_matrix	*m_input_matrix;
 	gsl_matrix	*m_impluse_response_matrix;
@@ -69,8 +70,9 @@ private:
 public:
 	
 	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize);
-	void responseInit();
-	void matrixInit(int aVectorSize);
+	void	responseInit();
+	void	matrixInit(int aVectorSize);
+	void	matrixResize(int aVectorSize);
 	
 	void	recordInputMatrix(double **aSample);
 	void	recordInputMatrix(float	**aSample);
