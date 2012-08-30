@@ -64,7 +64,6 @@ private:
 	gsl_vector_view m_responseSize_end_right;
 	
 	double		*m_result[2];
-	float		*m_resultFloat[2];
 	
 public:
 	
@@ -74,8 +73,8 @@ public:
 	
 	void	recordInputMatrix(double **aSample);
 	void	recordInputMatrix(float	**aSample);
-	double	**process(double **aSample);
-	float	**process(float **aSample);
+	double	*process(double **aSample);
+	double	*process(float **aSample);
 	~AmbisonicBinaural();
 	
 };
