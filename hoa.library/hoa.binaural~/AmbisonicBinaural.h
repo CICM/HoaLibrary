@@ -41,11 +41,29 @@ private:
 	long		m_vector_size;
 	long		m_sampling_rate;
 	
-	gsl_matrix* m_input_matrix;
-	gsl_matrix* m_impluse_response_matrix;
-	gsl_matrix* m_result_matrix;
+	gsl_matrix	*m_input_matrix;
+	gsl_matrix	*m_impluse_response_matrix;
 	
-	double		m_result[2];
+	gsl_matrix	*m_result_matrix;
+	
+	gsl_vector_view *m_result_vector_view_left;
+	gsl_vector_view *m_result_vector_view_right;
+	
+	gsl_vector	*m_linear_vector_left;
+	gsl_vector	*m_linear_vector_right;
+	
+	gsl_vector_view *m_linear_vector_view_left;
+	gsl_vector_view *m_linear_vector_view_right;
+	
+	gsl_vector_view m_vectorSize_end_left;
+	gsl_vector_view m_responseSize_begin_left;
+	gsl_vector_view m_responseSize_end_left;
+	
+	gsl_vector_view m_vectorSize_end_right;
+	gsl_vector_view m_responseSize_begin_right;
+	gsl_vector_view m_responseSize_end_right;
+	
+	double		*m_result[2];
 	
 public:
 	
