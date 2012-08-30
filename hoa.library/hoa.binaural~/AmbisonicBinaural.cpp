@@ -19,12 +19,9 @@
 
 #include "AmbisonicBinaural.h"
 
-AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize)
+AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aVectorSize)
 {	
-	m_vector_size = 0;
-	m_sampling_rate = 0;
 	m_order = aOrder;
-	
 	if(m_order < 8)
 		m_order = 4;
 	else if(m_order < 17 && m_order >= 8)
@@ -38,12 +35,11 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_response_size = 200;
 	
 	responseInit();
-	matrixInit(aVectorSize);
 }
 
 void AmbisonicBinaural::responseInit()
 {
-	gsl_matrix	*m_impluse_response_matrix = gsl_matrix_calloc(m_response_size * 2, m_harmonics);
+	gsl_matrix* m_respo_matrix = gsl_matrix_calloc(m_response_size, m_harmonics);
 }
 
 void AmbisonicBinaural::matrixInit(int aVectorSize)
@@ -53,54 +49,26 @@ void AmbisonicBinaural::matrixInit(int aVectorSize)
 		m_vector_size = aVectorSize;
 		
 		gsl_matrix_free(m_input_matrix);
-		gsl_matrix_free(m_result_matrix);	
+		gsl_matrix_free(m_outnew_matrix);
+		gsl_matrix_free(m_outold_matrix);
+	
 		
-		gsl_matrix	*m_input_matrix = gsl_matrix_calloc(m_harmonics, m_vector_size);
-		gsl_matrix	*m_result_matrix = gsl_matrix_calloc(m_response_size * 2, m_vector_size);
+		gsl_matrix* m_input_matrix = gsl_matrix_calloc(m_harmonics, m_vector_size);
+		gsl_matrix* m_outnew_matrix = gsl_matrix_calloc(m_response_size, m_vector_size);
+		gsl_matrix* m_outold_matrix = gsl_matrix_calloc(m_response_size, m_vector_size);
 	}
 }
 
-void AmbisonicBinaural::recordInputMatrix(double **aSample)
-{
-	for (int j = 0; j < m_harmonics; j++)
-	{
-		for (int i = 0; i < m_vector_size; i++)
-		{
-			gsl_matrix_set(m_input_matrix, j, i, aSample[j][i]);
-		}
-	}
-}
-
-void AmbisonicBinaural::recordInputMatrix(float **aSample)
-{
-	for (int j = 0; j < m_harmonics; j++)
-	{
-		for (int i = 0; i < m_vector_size; i++)
-		{
-			gsl_matrix_set(m_input_matrix, j, i, (double)aSample[j][i]);
-		}
-	}
-}
-
-double *AmbisonicBinaural::process(float **aSample)
+double *AmbisonicBinaural::process(double* aSample)
 {	
-	recordInputMatrix(aSample);
-	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
-	
-	return m_result;
-}
-
-double *AmbisonicBinaural::process(double **aSample)
-{	
-	recordInputMatrix(aSample);
-	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
-	
-	return m_result;
+	double result;
+	return &result;
 }
 
 AmbisonicBinaural::~AmbisonicBinaural()
 {
 	gsl_matrix_free(m_input_matrix);
-	gsl_matrix_free(m_impluse_response_matrix);
-	gsl_matrix_free(m_result_matrix);
+	gsl_matrix_free(m_respo_matrix);
+	gsl_matrix_free(m_outnew_matrix);
+	gsl_matrix_free(m_outold_matrix);
 }
