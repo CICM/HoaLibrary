@@ -30,13 +30,13 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 368008528;
-			PBXWorkspaceStateSaveDate = 368008528;
+			PBXPerProjectTemplateStateSaveDate = 368007969;
+			PBXWorkspaceStateSaveDate = 368007969;
 		};
 		perUserProjectItems = {
 			0E45E9CF15EF5B6A007051A8 /* PBXTextBookmark */ = 0E45E9CF15EF5B6A007051A8 /* PBXTextBookmark */;
+			0E45E9D015EF5B6A007051A8 /* PBXTextBookmark */ = 0E45E9D015EF5B6A007051A8 /* PBXTextBookmark */;
 			0E45E9D115EF5B6A007051A8 /* PBXTextBookmark */ = 0E45E9D115EF5B6A007051A8 /* PBXTextBookmark */;
-			0E45E9E715EF5D57007051A8 /* PBXTextBookmark */ = 0E45E9E715EF5D57007051A8 /* PBXTextBookmark */;
 			0EEC405215EE5542008755B6 /* PBXTextBookmark */ = 0EEC405215EE5542008755B6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 0E91E48315BECC2E00452428 /* Source Control */;
@@ -53,6 +53,16 @@
 		vrLen = 504;
 		vrLoc = 139;
 	};
+	0E45E9D015EF5B6A007051A8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
+		name = "ambisonicDecode.cpp: 21";
+		rLen = 0;
+		rLoc = 560;
+		rType = 0;
+		vrLen = 820;
+		vrLoc = 3;
+	};
 	0E45E9D115EF5B6A007051A8 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
@@ -62,16 +72,6 @@
 		rType = 0;
 		vrLen = 676;
 		vrLoc = 1536;
-	};
-	0E45E9E715EF5D57007051A8 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
-		name = "ambisonicDecode.cpp: 75";
-		rLen = 0;
-		rLoc = 1684;
-		rType = 0;
-		vrLen = 673;
-		vrLoc = 1539;
 	};
 	0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */ = {
 		uiCtxt = {
@@ -109,9 +109,9 @@
 	};
 	4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1244, 1638}}";
-			sepNavSelRange = "{1684, 0}";
-			sepNavVisRange = "{1539, 673}";
+			sepNavIntBoundsRect = "{{0, 0}, {1244, 1586}}";
+			sepNavSelRange = "{1812, 298}";
+			sepNavVisRange = "{1536, 676}";
 		};
 	};
 	4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */ = {
