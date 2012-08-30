@@ -124,16 +124,16 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 367944797;
-			PBXWorkspaceStateSaveDate = 367944797;
+			PBXPerProjectTemplateStateSaveDate = 367943907;
+			PBXWorkspaceStateSaveDate = 367943907;
 		};
 		perUserProjectItems = {
 			4E081BD215E50B7100FF6A39 /* PBXTextBookmark */ = 4E081BD215E50B7100FF6A39 /* PBXTextBookmark */;
 			4E6C1BBC15EE62E600832E31 /* PBXTextBookmark */ = 4E6C1BBC15EE62E600832E31 /* PBXTextBookmark */;
 			4E6C1BBD15EE62E600832E31 /* PBXTextBookmark */ = 4E6C1BBD15EE62E600832E31 /* PBXTextBookmark */;
 			4E6C1BBE15EE62E600832E31 /* PBXTextBookmark */ = 4E6C1BBE15EE62E600832E31 /* PBXTextBookmark */;
+			4E6C1BBF15EE62E600832E31 /* PBXTextBookmark */ = 4E6C1BBF15EE62E600832E31 /* PBXTextBookmark */;
 			4E6C1BC015EE62E600832E31 /* PBXTextBookmark */ = 4E6C1BC015EE62E600832E31 /* PBXTextBookmark */;
-			4E6C1BFE15EE647500832E31 /* PBXTextBookmark */ = 4E6C1BFE15EE647500832E31 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 4E55B21714A736330095F784 /* Source Control */;
 		userBuildSettings = {
@@ -141,9 +141,9 @@
 	};
 	0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1146, 2912}}";
-			sepNavSelRange = "{2740, 0}";
-			sepNavVisRange = "{2471, 784}";
+			sepNavIntBoundsRect = "{{0, 0}, {1146, 2730}}";
+			sepNavSelRange = "{2978, 0}";
+			sepNavVisRange = "{2439, 816}";
 		};
 	};
 	22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {
@@ -218,7 +218,7 @@
 		vrLen = 907;
 		vrLoc = 31;
 	};
-	4E6C1BC015EE62E600832E31 /* PBXTextBookmark */ = {
+	4E6C1BBF15EE62E600832E31 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */;
 		name = "hoa.decoder~.cpp: 91";
@@ -228,15 +228,15 @@
 		vrLen = 816;
 		vrLoc = 2439;
 	};
-	4E6C1BFE15EE647500832E31 /* PBXTextBookmark */ = {
+	4E6C1BC015EE62E600832E31 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */;
-		name = "hoa.decoder~.cpp: 84";
+		name = "hoa.decoder~.cpp: 91";
 		rLen = 0;
-		rLoc = 2740;
+		rLoc = 2978;
 		rType = 0;
-		vrLen = 784;
-		vrLoc = 2471;
+		vrLen = 816;
+		vrLoc = 2439;
 	};
 	4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */ = {
 		uiCtxt = {
