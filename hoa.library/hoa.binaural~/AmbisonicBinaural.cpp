@@ -52,6 +52,7 @@ void AmbisonicBinaural::matrixInit(int aVectorSize)
 		gsl_matrix_free(m_outnew_matrix);
 		gsl_matrix_free(m_outold_matrix);
 	
+		
 		gsl_matrix* m_input_matrix = gsl_matrix_calloc(m_harmonics, m_vector_size);
 		gsl_matrix* m_outnew_matrix = gsl_matrix_calloc(m_response_size, m_vector_size);
 		gsl_matrix* m_outold_matrix = gsl_matrix_calloc(m_response_size, m_vector_size);

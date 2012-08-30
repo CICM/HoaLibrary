@@ -168,7 +168,7 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /Developer/usr/local/boost_1_48_0;
+				HEADER_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					libgsl.a,
 					"-static",
