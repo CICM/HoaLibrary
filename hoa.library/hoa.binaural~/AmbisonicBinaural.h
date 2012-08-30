@@ -28,6 +28,9 @@
 #include <vector>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
+#include "fileLoader.h"
+#include <sstream>
+#include <ambisonicDecode.h> 
 
 #define M_2PI 2*M_PI
 
@@ -40,25 +43,58 @@ private:
 	long		m_response_size;
 	long		m_vector_size;
 	long		m_sampling_rate;
+	long		m_nbOfBinauralPointsInDatabase;
+	long		m_nbOfActiveBinauralPoints;
+	std::string m_optimMode;
 	
-	gsl_matrix* m_input_matrix;
-	gsl_matrix* m_impluse_response_matrix;
-	gsl_matrix* m_result_matrix;
+	double*		m_angleListInDegree;
+	double**	m_impulsesL;
+	double**	m_impulsesR;
 	
-	double		m_result[2];
+	ambisonicDecode* m_decoder;
+
+	gsl_matrix	*m_input_matrix;
+	gsl_matrix	*m_impluse_response_matrix;
+	
+	gsl_matrix	*m_result_matrix;
+	
+	gsl_vector_view *m_result_vector_view_left;
+	gsl_vector_view *m_result_vector_view_right;
+	
+	gsl_vector	*m_linear_vector_left;
+	gsl_vector	*m_linear_vector_right;
+	
+	gsl_vector_view *m_linear_vector_view_left;
+	gsl_vector_view *m_linear_vector_view_right;
+	
+	gsl_vector_view m_vectorSize_end_left;
+	gsl_vector_view m_responseSize_begin_left;
+	gsl_vector_view m_responseSize_end_left;
+	
+	gsl_vector_view m_vectorSize_end_right;
+	gsl_vector_view m_responseSize_begin_right;
+	gsl_vector_view m_responseSize_end_right;
+	
+	double		*m_result[2];
+	float		*m_resultFloat[2];
 	
 public:
 	
 	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize);
-	void responseInit();
-	void matrixInit(int aVectorSize);
+	void	computeNbOfActiveBinauralPoints();
+	void	loadImpulses();
+	void	responseInit();
+	
+	void	matrixInit(int aVectorSize);
+	void	matrixResize(int aVectorSize);
 	
 	void	recordInputMatrix(double **aSample);
 	void	recordInputMatrix(float	**aSample);
-	double	*process(double **aSample);
-	double	*process(float **aSample);
+	std::string intToString(int aValue);
+	double	**process(double **aSample);
+	float	**process(float **aSample);
 	~AmbisonicBinaural();
-	
+
 };
 
 #endif

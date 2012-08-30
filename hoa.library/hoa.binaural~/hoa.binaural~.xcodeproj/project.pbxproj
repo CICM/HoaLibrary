@@ -14,6 +14,10 @@
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
 		4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */; };
 		4E8FAEFB15D016DD00A9EA47 /* gslMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */; };
+		4EF5EDF515EF72FC00DC3523 /* fileLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5EDF315EF72FC00DC3523 /* fileLoader.c */; };
+		4EF5EDF615EF72FC00DC3523 /* fileLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF5EDF415EF72FC00DC3523 /* fileLoader.h */; };
+		4EF5EE2C15EF787700DC3523 /* ambisonicDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5EE2A15EF787700DC3523 /* ambisonicDecode.cpp */; };
+		4EF5EE2D15EF787700DC3523 /* ambisonicDecode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF5EE2B15EF787700DC3523 /* ambisonicDecode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,10 @@
 		2FBBEAE508F335360078DB84 /* hoa.binaural~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.binaural~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = gslMatrix.h; sourceTree = "<group>"; };
 		4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gslMatrix.c; sourceTree = "<group>"; };
+		4EF5EDF315EF72FC00DC3523 /* fileLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fileLoader.c; sourceTree = "<group>"; };
+		4EF5EDF415EF72FC00DC3523 /* fileLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileLoader.h; sourceTree = "<group>"; };
+		4EF5EE2A15EF787700DC3523 /* ambisonicDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicDecode.cpp; sourceTree = "<group>"; };
+		4EF5EE2B15EF787700DC3523 /* ambisonicDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicDecode.h; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -64,11 +72,15 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */,
 				0E42D10815EF60D400EB89AB /* hoa.binaural~.c */,
-				0E42D10A15EF60DB00EB89AB /* AmbisonicBinaural.cpp */,
 				0E42D10B15EF60DB00EB89AB /* AmbisonicBinaural.h */,
+				0E42D10A15EF60DB00EB89AB /* AmbisonicBinaural.cpp */,
+				4EF5EE2B15EF787700DC3523 /* ambisonicDecode.h */,
+				4EF5EE2A15EF787700DC3523 /* ambisonicDecode.cpp */,
+				4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */,
 				4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */,
+				4EF5EDF415EF72FC00DC3523 /* fileLoader.h */,
+				4EF5EDF315EF72FC00DC3523 /* fileLoader.c */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -90,6 +102,8 @@
 			files = (
 				4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */,
 				0E42D10D15EF60DB00EB89AB /* AmbisonicBinaural.h in Headers */,
+				4EF5EDF615EF72FC00DC3523 /* fileLoader.h in Headers */,
+				4EF5EE2D15EF787700DC3523 /* ambisonicDecode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +181,8 @@
 				4E8FAEFB15D016DD00A9EA47 /* gslMatrix.c in Sources */,
 				0E42D10915EF60D400EB89AB /* hoa.binaural~.c in Sources */,
 				0E42D10C15EF60DB00EB89AB /* AmbisonicBinaural.cpp in Sources */,
+				4EF5EDF515EF72FC00DC3523 /* fileLoader.c in Sources */,
+				4EF5EE2C15EF787700DC3523 /* ambisonicDecode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
