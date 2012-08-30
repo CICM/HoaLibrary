@@ -205,6 +205,12 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					/usr/local/lib/libgsl.a,
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
 				VALID_ARCHS = i386;
 			};
 			name = Development;
