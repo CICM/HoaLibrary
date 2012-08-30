@@ -30,38 +30,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 367943633;
-			PBXWorkspaceStateSaveDate = 367943633;
-		};
-		perUserProjectItems = {
-			0E3B4C7215EE5FEC003C94A2 /* PBXTextBookmark */ = 0E3B4C7215EE5FEC003C94A2 /* PBXTextBookmark */;
-			0E3B4C7315EE5FEC003C94A2 /* PBXTextBookmark */ = 0E3B4C7315EE5FEC003C94A2 /* PBXTextBookmark */;
-			0EEC405215EE5542008755B6 /* PBXTextBookmark */ = 0EEC405215EE5542008755B6 /* PBXTextBookmark */;
-			0EEC407315EE5DFB008755B6 /* PBXTextBookmark */ = 0EEC407315EE5DFB008755B6 /* PBXTextBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 368028421;
+			PBXWorkspaceStateSaveDate = 368028421;
 		};
 		sourceControlManager = 0E91E48315BECC2E00452428 /* Source Control */;
 		userBuildSettings = {
 		};
-	};
-	0E3B4C7215EE5FEC003C94A2 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 4EB5E0DE14DEF21200ADF62A /* ambisonicDecode.h */;
-		name = "ambisonicDecode.h: 40";
-		rLen = 0;
-		rLoc = 656;
-		rType = 0;
-		vrLen = 546;
-		vrLoc = 415;
-	};
-	0E3B4C7315EE5FEC003C94A2 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
-		name = "ambisonicDecode.cpp: 21";
-		rLen = 0;
-		rLoc = 560;
-		rType = 0;
-		vrLen = 842;
-		vrLoc = 3;
 	};
 	0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */ = {
 		uiCtxt = {
@@ -83,26 +57,6 @@
 	0E91E48415BECC2E00452428 /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
-	};
-	0EEC405215EE5542008755B6 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */;
-		name = "hoa.decoder~.cpp: 2";
-		rLen = 1;
-		rLoc = 4;
-		rType = 0;
-		vrLen = 1451;
-		vrLoc = 1110;
-	};
-	0EEC407315EE5DFB008755B6 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */;
-		name = "ambisonicDecode.cpp: 29";
-		rLen = 0;
-		rLoc = 720;
-		rType = 0;
-		vrLen = 854;
-		vrLoc = 3;
 	};
 	2FBBEAD608F335360078DB84 /* max-external */ = {
 		activeExec = 0;
