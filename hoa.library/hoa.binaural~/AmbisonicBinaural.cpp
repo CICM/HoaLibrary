@@ -25,6 +25,15 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_sampling_rate = 0;
 	m_order = aOrder;
 	
+	if(m_order < 8)
+		m_order = 4;
+	else if(m_order < 17 && m_order >= 8)
+		m_order = 8;
+	else if(m_order < 35 && m_order >= 17)
+		m_order = 17;
+	else
+		m_order = 35;
+	
 	m_harmonics = 2 * m_order + 1;
 	m_response_size = 200;
 	
@@ -38,45 +47,6 @@ void AmbisonicBinaural::responseInit()
 }
 
 void AmbisonicBinaural::matrixInit(int aVectorSize)
-{
-		m_vector_size = aVectorSize;
-	
-		m_input_matrix = gsl_matrix_calloc(m_harmonics, m_vector_size);
-		m_result_matrix = gsl_matrix_calloc(m_response_size * 2, m_vector_size);
-	
-		m_linear_vector_left = gsl_vector_calloc(m_vector_size + m_response_size - 1);
-		m_linear_vector_right = gsl_vector_calloc(m_vector_size + m_response_size - 1);
-		
-		m_result_vector_view_left = new gsl_vector_view[m_vector_size];
-		m_result_vector_view_right = new gsl_vector_view[m_vector_size];
-		m_linear_vector_view_left = new gsl_vector_view[m_vector_size];
-		m_linear_vector_view_right = new gsl_vector_view[m_vector_size];
-		
-		for (int j = 0; j < m_vector_size; j++)
-		{
-			m_result_vector_view_left[j]	= gsl_vector_subvector(&(gsl_matrix_column(m_result_matrix, j)).vector, 0, 200);
-			m_result_vector_view_right[j]	= gsl_vector_subvector(&(gsl_matrix_column(m_result_matrix, j)).vector, 200, 200);
-			
-			m_linear_vector_view_left[j]	= gsl_vector_subvector(m_linear_vector_left, j, 200);
-			m_linear_vector_view_right[j]	= gsl_vector_subvector(m_linear_vector_right, j, 200);
-		}
-		
-		m_vectorSize_end_left = gsl_vector_subvector(m_linear_vector_left, m_response_size - 1, m_vector_size);
-		m_responseSize_begin_left = gsl_vector_subvector(m_linear_vector_left, 0, m_response_size - 1);
-		m_responseSize_end_left = gsl_vector_subvector(m_linear_vector_left, m_vector_size, m_response_size - 1);
-		
-		m_vectorSize_end_right = gsl_vector_subvector(m_linear_vector_right, m_response_size - 1, m_vector_size);
-		m_responseSize_begin_right = gsl_vector_subvector(m_linear_vector_right, 0, m_response_size - 1);
-		m_responseSize_end_right = gsl_vector_subvector(m_linear_vector_right, m_vector_size, m_response_size - 1);
-		
-		m_result[0] = new double[m_vector_size];
-		m_result[1] = new double[m_vector_size];
-		
-		m_resultFloat[0] = new float[m_vector_size];
-		m_resultFloat[1] = new float[m_vector_size];
-}
-
-void AmbisonicBinaural::matrixResize(int aVectorSize)
 {
 	if(aVectorSize != m_vector_size)
 	{		
