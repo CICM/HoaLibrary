@@ -27,16 +27,8 @@ extern "C" {
 
 typedef struct _HoaBinaural 
 {
-	t_pxobject					f_ob;			
-	AmbisonicBinaural			*f_ambiBinaural;
-	
-	int							f_n;
-	int							f_sr;
-	
-	long						f_inputNumber;
-	long						f_outputNumber;
-	long						f_order;
-	long						f_harmonics;
+	t_pxobject			f_ob;			
+	AmbisonicBinaural	*f_ambiBinaural;
 
 } t_HoaBinaural;
 
@@ -44,12 +36,8 @@ typedef struct _HoaBinaural
 void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv);
 void HoaBinaural_free(t_HoaBinaural *x);
 void HoaBinaural_assist(t_HoaBinaural *x, void *b, long m, long a, char *s);
+void HoaBinaural_optim(t_HoaBinaural *x, t_symbol *s, long argc, t_atom *argv);
 
-void HoaBinaural_float(t_HoaBinaural *x, double f);
-void HoaBinaural_int(t_HoaBinaural *x, long n);
-void HoaBinaural_open(t_HoaBinaural *x);
-void HoaBinaural_doopen(t_HoaBinaural *x);
-;
 void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count);
 t_int *HoaBinaural_perform(t_int *w);
 
@@ -66,12 +54,10 @@ int main(void)
 	
 	c = class_new("hoa.binaural~", (method)HoaBinaural_new, (method)HoaBinaural_free, (long)sizeof(t_HoaBinaural), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaBinaural_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)HoaBinaural_int,			"int",		A_LONG, 0);
-	class_addmethod(c, (method)HoaBinaural_dsp,			"dsp",		A_CANT, 0);
-	class_addmethod(c, (method)HoaBinaural_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaBinaural_assist,		"assist",	A_CANT, 0);
-	//class_addmethod(c, (method)HoaBinaural_open,		"open",		A_DEFSYM, 0);
+	class_addmethod(c, (method)HoaBinaural_dsp,			"dsp",		A_CANT,		0);
+	class_addmethod(c, (method)HoaBinaural_dsp64,		"dsp64",	A_CANT,		0);
+	class_addmethod(c, (method)HoaBinaural_assist,		"assist",	A_CANT,		0);
+	class_addmethod(c, (method)HoaBinaural_optim,		"optim",	A_GIMME,	0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -83,74 +69,25 @@ int main(void)
 void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaBinaural *x = NULL;
-	
+	int order = 4;;
 	if (x = (t_HoaBinaural *)object_alloc((t_class *)HoaBinaural_class)) 
 	{		
-		x->f_order = 4;
 		if(argv[0].a_type == A_LONG)
-			x->f_order = atom_getlong(argv);
-	
-		if(x->f_order >= 35)
-		{
-			x->f_order = 35;
-			post("hoa.binaural~ : Maximum order avaible is 35");
-		}
+			order = atom_getlong(argv);
 		
-		x->f_harmonics = 2 * x->f_order + 1;
+		x->f_ambiBinaural = new AmbisonicBinaural(order, sys_getsr(), sys_getblksize());
 		
-			
-		x->f_inputNumber = x->f_harmonics;
-		x->f_outputNumber = 2;
-		
-		x->f_sr = sys_getsr();
-		x->f_n	= sys_getblksize();
-		x->f_ambiBinaural = new AmbisonicBinaural(x->f_order, x->f_sr, x->f_n);
-		
-		dsp_setup((t_pxobject *)x, x->f_inputNumber);
-		for (int i = 0; i < x->f_outputNumber; i++) 
+		dsp_setup((t_pxobject *)x, x->f_ambiBinaural->getParameters("numberOfInputs"));
+		for (int i = 0; i < x->f_ambiBinaural->getParameters("numberOfOutputs"); i++) 
 			outlet_new(x, "signal");
 		
 	}
 	return (x);
 }
 
-void HoaBinaural_float(t_HoaBinaural *x, double f)
-{
-	;
-}
-
-void HoaBinaural_int(t_HoaBinaural *x, long n)
-{
-	;
-}
-
-void HoaBinaural_open(t_HoaBinaural *x)
-{
-	defer((t_object *)x, (method)HoaBinaural_doopen, 0, 0, NULL);
-}
-
-void HoaBinaural_doopen(t_HoaBinaural *x)
-{
-	char filename[MAX_PATH_CHARS];
-	char file[MAX_PATH_CHARS];
-	short path;
-	long type;
-
-
-	filename[0] = 0;
-	open_dialog(filename, &path, &type, 0L, 0);
-	path_topotentialname(path, filename, file, false);
-	path_nameconform(file, filename, PATH_STYLE_MAX_PLAT, PATH_TYPE_BOOT);
-	
-	post("file %s", file);
-	post("filename %s", filename);
-}
-
 void HoaBinaural_dsp64(t_HoaBinaural *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_n	= maxvectorsize;
-	x->f_sr	= samplerate;
-	x->f_ambiBinaural->matrixResize(x->f_n);
+	x->f_ambiBinaural->matrixResize(maxvectorsize);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaBinaural_perform64, 0, NULL);
 }
 
@@ -165,12 +102,9 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
-	x->f_n	= (int)sp[0]->s_n;
-	x->f_sr	= (int)sp[0]->s_sr;
+	x->f_ambiBinaural->matrixResize(sp[0]->s_n);
 	
-	x->f_ambiBinaural->matrixResize(x->f_n);
-	
-	pointer_count = x->f_outputNumber + x->f_inputNumber + 2;
+	pointer_count = x->f_ambiBinaural->getParameters("numberOfOutputs") + x->f_ambiBinaural->getParameters("numberOfInputs") + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -191,26 +125,34 @@ t_int *HoaBinaural_perform(t_int *w)
 {
 	t_HoaBinaural *x	= (t_HoaBinaural *)(w[1]);
 	t_float		**ins	= (t_float **)w+3;
-	t_float		**outs	= ins+x->f_inputNumber;
+	t_float		**outs	= (t_float **)w+3+x->f_ambiBinaural->getParameters("numberOfInputs");
 	
 	x->f_ambiBinaural->process(ins, outs);
 
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
+	return (w + x->f_ambiBinaural->getParameters("numberOfOutputs") + x->f_ambiBinaural->getParameters("numberOfInputs") + 3);
 }
 
+void HoaBinaural_optim(t_HoaBinaural *x, t_symbol *s, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_SYM)
+	{
+		std::string optimMode = atom_getsym(argv)->s_name;
+		x->f_ambiBinaural->setOptimMode(optimMode);
+	}
+}
 
 void HoaBinaural_assist(t_HoaBinaural *x, void *b, long m, long a, char *s)
 {
-	
+	int harmonicIndex = 0;
 	if (m == ASSIST_INLET) 
 	{
-		int harmonicIndex = 0;
 		if (a == 0)
 			harmonicIndex = 0;
-		else {
-			harmonicIndex = (int)floor((a-1)/2) + 1;
-			if (a%2 == 1) 
-				harmonicIndex = - harmonicIndex;
+		else 
+		{
+			harmonicIndex = ((a - 1) / 2) + 1;
+			if (a % 2 == 1) 
+				harmonicIndex = -harmonicIndex;
 		}
 		sprintf(s,"(Signal) Harmonic %i", harmonicIndex);
 	} 

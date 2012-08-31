@@ -47,7 +47,16 @@ private:
 	long		m_maximumNumberOfVirtualSpeakers;
 	long		m_numberOfVirtualSpeakers;
 	std::string m_optimMode;
+=======
+	long		m_nbOfBinauralPointsInDatabase;
+	long		m_nbOfActiveBinauralPoints;
+	long		m_number_of_inputs;
+	long		m_number_of_outputs;
+>>>>>>> 0c3c62bbf24c0f7e123348af41b8377cb624573a
 	
+	std::string m_optimMode;
+	int*		m_harmonicsIndex;
+	double*		m_optimVector;
 	double*		m_angleListInDegree;
 	double**	m_impulsesL;
 	double**	m_impulsesR;
@@ -80,11 +89,23 @@ public:
 	
 	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize);
 	void	computeNbOfVirtualSpeaker();
+=======
+	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSizen, std::string anOptimMode = "basic" );
+	int		getParameters(std::string aParameter) const;
+	
+	void	setOptimMode(std::string anOptim);
+	void	computeBasicOptim();
+	void	computeInPhaseOptim();
+	void	computeReOptim();
+	
+	void	computeNbOfActiveBinauralPoints();
+>>>>>>> 0c3c62bbf24c0f7e123348af41b8377cb624573a
 	void	loadImpulses();
 	void	responseInit();
 	void	printBasis(double *basisArray, int size);
 	void matrixResize(int aVectorSize, std::string aMode = "resize");
 	std::string intToString(int aValue);
+	
 	void free();
 	~AmbisonicBinaural();
 	
@@ -96,7 +117,7 @@ public:
 		{
 			for (int j = 0; j < m_vector_size; j++)
 			{
-				gsl_matrix_set(m_input_matrix, i, j, aInputs[i][j]);
+				gsl_matrix_set(m_input_matrix, i, j, aInputs[i][j] * m_optimVector[i]);
 			}
 		}
 		

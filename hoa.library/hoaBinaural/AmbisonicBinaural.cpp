@@ -19,10 +19,10 @@
 
 #include "AmbisonicBinaural.h"
 
-AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize)
+AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode)
 {	
 	m_vector_size = 0;
-	m_sampling_rate = 0;
+	m_sampling_rate = aSamplingRate;
 	m_order = aOrder;	
 	m_maximumNumberOfVirtualSpeakers = 72;
 	m_numberOfHarmonics = 2 * m_order + 1;
@@ -30,16 +30,52 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	
 	if (m_order > 35) 
 		m_order = 35;
+	else if (m_order < 1)
+		m_order = 1;
 	
+	m_number_of_inputs = 2 * m_order + 1;
+	m_number_of_outputs = 2;
+	
+<<<<<<< HEAD
 	computeNbOfVirtualSpeaker();
 	m_impulsesL = new double*[m_numberOfVirtualSpeakers];
 	m_impulsesR = new double*[m_numberOfVirtualSpeakers];
 	m_angleListInDegree = new double[m_numberOfVirtualSpeakers];
 	m_decoder = new ambisonicDecode(m_numberOfVirtualSpeakers, m_order);
 
+	m_harmonicsIndex	= new int[m_harmonics];
+	m_harmonicsIndex[0] = 0;
+	for(int i = 1; i < m_harmonics; i++)
+	{
+		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+		if (i % 2 == 1) 
+			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
+	}
+	
+	m_optimVector = new double[m_harmonics];
+	setOptimMode(anOptimMode );
+	
 	loadImpulses();
 	responseInit();
 	matrixResize(aVectorSize, "Intialization");
+}
+
+int	AmbisonicBinaural::getParameters(std::string aParameter) const
+{
+	int value = 0;
+
+	if (aParameter == "order") 
+		value = m_order;
+	else if (aParameter == "samplingRate") 
+		value =  m_sampling_rate;
+	else if (aParameter == "vectorSize") 
+		value =  m_vector_size;
+	else if (aParameter == "numberOfInputs") 
+		value =  m_number_of_inputs;
+	else if (aParameter == "numberOfOutputs") 
+		value =  m_number_of_outputs;
+	
+	return value;
 }
 
 std::string AmbisonicBinaural::intToString(int aValue)
@@ -68,6 +104,10 @@ void AmbisonicBinaural::loadImpulses()
 	std::string preFilePath = "/Users/juliencolafrancesco/Desktop/hrtfDatabase/";
 	
 	for(int i = 0; i < m_numberOfVirtualSpeakers; i++)
+=======
+	std::string preFilePath = "/Users/pierreg/Desktop/hrtfDatabase/";
+	for(int i = 0; i < m_nbOfActiveBinauralPoints; i++)
+>>>>>>> 0c3c62bbf24c0f7e123348af41b8377cb624573a
 	{
 		m_angleListInDegree[i] = (5*72/m_numberOfVirtualSpeakers)*i;
 		leftFilePath  = preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
@@ -155,7 +195,50 @@ void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 	}
 }
 
+void AmbisonicBinaural::setOptimMode(std::string anOptim)
+{
+	if(anOptim != m_optimMode)
+	{
+		if(anOptim == "inPhase")
+			computeInPhaseOptim();
+		else if(anOptim == "maxRe")
+			computeReOptim();
+		else
+			computeBasicOptim();
+	}
+}
 
+void AmbisonicBinaural::computeBasicOptim()
+{
+	m_optimMode = "basic"; 
+	for (int i = 0; i < m_harmonics; i++) 
+		m_optimVector[i] = 1.;
+}
+
+void AmbisonicBinaural::computeInPhaseOptim()
+{
+	m_optimMode = "inPhase"; 
+	for (int i = 0; i < m_harmonics; i++) 
+	{
+		if (i == 0) 
+			m_optimVector[i] = 1.;
+		else 
+			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_harmonicsIndex[i])) * gsl_sf_fact(m_order-abs(m_harmonicsIndex[i])));
+	}
+}
+
+void AmbisonicBinaural::computeReOptim()
+{
+	m_optimMode = "maxRe";
+	for (int i = 0; i < m_harmonics; i++) 
+	{
+		if (i == 0) 
+			m_optimVector[i] = 1.;
+		else 
+			m_optimVector[i] = cos(abs(m_harmonicsIndex[i]) * PI / (2*m_order+2));
+	}
+	
+}
 
 void AmbisonicBinaural::free()
 {
@@ -175,4 +258,5 @@ AmbisonicBinaural::~AmbisonicBinaural()
 {
 	free();
 	gsl_matrix_free(m_impluse_response_matrix);
+	delete m_optimVector;
 }
