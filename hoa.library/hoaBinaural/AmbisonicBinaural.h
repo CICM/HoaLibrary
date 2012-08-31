@@ -51,6 +51,9 @@ private:
 	long		m_sampling_rate;
 	long		m_nbOfBinauralPointsInDatabase;
 	long		m_nbOfActiveBinauralPoints;
+	long		m_number_of_inputs;
+	long		m_number_of_outputs;
+	
 	std::string m_optimMode;
 	
 	double*		m_angleListInDegree;
@@ -84,12 +87,15 @@ private:
 public:
 	
 	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize);
+	int		getParameters(std::string aParameter) const;
+	
 	void	computeNbOfActiveBinauralPoints();
 	void	loadImpulses();
 	void	responseInit();
 	void	printBasis(double *basisArray, int size);
 	void matrixResize(int aVectorSize, std::string aMode = "resize");
 	std::string intToString(int aValue);
+	
 	void free();
 	~AmbisonicBinaural();
 	

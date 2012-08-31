@@ -22,7 +22,7 @@
 AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize)
 {	
 	m_vector_size = 0;
-	m_sampling_rate = 0;
+	m_sampling_rate = aSamplingRate;
 	m_order = aOrder;	
 	m_nbOfBinauralPointsInDatabase = 72;
 	m_harmonics = 2 * m_order + 1;
@@ -30,6 +30,11 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	
 	if (m_order > 35) 
 		m_order = 35;
+	else if (m_order < 1)
+		m_order = 1;
+	
+	m_number_of_inputs = 2 * m_order + 1;
+	m_number_of_outputs = 2;
 	
 	computeNbOfActiveBinauralPoints();
 	m_impulsesL = new double*[m_nbOfActiveBinauralPoints];
@@ -40,6 +45,24 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	loadImpulses();
 	responseInit();
 	matrixResize(aVectorSize, "Intialization");
+}
+
+int	AmbisonicBinaural::getParameters(std::string aParameter) const
+{
+	int value = 0;
+
+	if (aParameter == "order") 
+		value = m_order;
+	else if (aParameter == "samplingRate") 
+		value =  m_sampling_rate;
+	else if (aParameter == "vectorSize") 
+		value =  m_vector_size;
+	else if (aParameter == "numberOfInputs") 
+		value =  m_number_of_inputs;
+	else if (aParameter == "numberOfOutputs") 
+		value =  m_number_of_outputs;
+	
+	return value;
 }
 
 std::string AmbisonicBinaural::intToString(int aValue)
@@ -69,7 +92,7 @@ void AmbisonicBinaural::loadImpulses()
 	}
 	std::string leftFilePath;
 	std::string rightFilePath;
-	std::string preFilePath = "/Users/juliencolafrancesco/Desktop/hrtfDatabase/";
+	std::string preFilePath = "/Users/pierreg/Desktop/hrtfDatabase/";
 	for(int i = 0; i < m_nbOfActiveBinauralPoints; i++)
 	{
 		leftFilePath  = preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
