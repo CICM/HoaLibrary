@@ -106,7 +106,7 @@ public:
 		}
 		
 		/* Matricial Multiplication */
-		gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
+		gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 0., m_result_matrix);
 		
 		/* Write On The Tempory Vectors And The Outputs Vectors */
 		for (int j = 0; j < m_vector_size; j++)
@@ -116,7 +116,7 @@ public:
 			aOutputs[0][j] = gsl_vector_get(m_linear_vector_left, j);
 			aOutputs[1][j] = gsl_vector_get(m_linear_vector_right, j);
 		}
-		
+	
 		/* Reorder The Tempory Vectors */
 		gsl_blas_dcopy(&m_responseSize_end_left.vector, &m_responseSize_begin_left.vector);
 		gsl_blas_dcopy(&m_responseSize_end_right.vector, &m_responseSize_begin_right.vector);
