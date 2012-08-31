@@ -36,7 +36,7 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 
 	loadImpulses();
 	responseInit();
-	matrixInit(aVectorSize);
+	matrixInit(aVectorSize, "Intialization");
 }
 
 std::string AmbisonicBinaural::intToString(int aValue)
@@ -114,72 +114,26 @@ void AmbisonicBinaural::responseInit()
 	}
 }
 
-void AmbisonicBinaural::matrixInit(int aVectorSize)
-{
-	m_vector_size = aVectorSize;
-	
-	m_input_matrix = gsl_matrix_calloc(m_harmonics, m_vector_size);
-	m_result_matrix = gsl_matrix_calloc(m_response_size * 2, m_vector_size);
-	
-	m_linear_vector_left = gsl_vector_calloc(m_vector_size + m_response_size - 1);
-	m_linear_vector_right = gsl_vector_calloc(m_vector_size + m_response_size - 1);
-	
-	m_result_vector_view_left = new gsl_vector_view[m_vector_size];
-	m_result_vector_view_right = new gsl_vector_view[m_vector_size];
-	m_linear_vector_view_left = new gsl_vector_view[m_vector_size];
-	m_linear_vector_view_right = new gsl_vector_view[m_vector_size];
-	
-	for (int j = 0; j < m_vector_size; j++)
-	{
-		m_result_vector_view_left[j]	= gsl_vector_subvector(&(gsl_matrix_column(m_result_matrix, j)).vector, 0, 200);
-		m_result_vector_view_right[j]	= gsl_vector_subvector(&(gsl_matrix_column(m_result_matrix, j)).vector, 200, 200);
-		
-		m_linear_vector_view_left[j]	= gsl_vector_subvector(m_linear_vector_left, j, 200);
-		m_linear_vector_view_right[j]	= gsl_vector_subvector(m_linear_vector_right, j, 200);
-	}
-	
-	m_vectorSize_end_left = gsl_vector_subvector(m_linear_vector_left, m_response_size - 1, m_vector_size);
-	m_responseSize_begin_left = gsl_vector_subvector(m_linear_vector_left, 0, m_response_size - 1);
-	m_responseSize_end_left = gsl_vector_subvector(m_linear_vector_left, m_vector_size, m_response_size - 1);
-	
-	m_vectorSize_end_right = gsl_vector_subvector(m_linear_vector_right, m_response_size - 1, m_vector_size);
-	m_responseSize_begin_right = gsl_vector_subvector(m_linear_vector_right, 0, m_response_size - 1);
-	m_responseSize_end_right = gsl_vector_subvector(m_linear_vector_right, m_vector_size, m_response_size - 1);
-	
-	m_result[0] = new double[m_vector_size];
-	m_result[1] = new double[m_vector_size];
-	
-	m_resultFloat[0] = new float[m_vector_size];
-	m_resultFloat[1] = new float[m_vector_size];
-}
 
-void AmbisonicBinaural::matrixResize(int aVectorSize)
+void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 {
 	if(aVectorSize != m_vector_size)
-	{		
+	{	
+		if(aMode == "resize")
+			free();
+		
 		m_vector_size = aVectorSize;
 		
-		gsl_matrix_free(m_input_matrix);
-		gsl_matrix_free(m_result_matrix);	
-		
-		m_input_matrix = gsl_matrix_calloc(m_harmonics, m_vector_size);
+		m_input_matrix	= gsl_matrix_calloc(m_harmonics, m_vector_size);
 		m_result_matrix = gsl_matrix_calloc(m_response_size * 2, m_vector_size);
 		
-		gsl_vector_free(m_linear_vector_left);
-		gsl_vector_free(m_linear_vector_right);
+		m_linear_vector_left	= gsl_vector_calloc(m_vector_size + m_response_size - 1);
+		m_linear_vector_right	= gsl_vector_calloc(m_vector_size + m_response_size - 1);
 		
-		m_linear_vector_left = gsl_vector_calloc(m_vector_size + m_response_size - 1);
-		m_linear_vector_right = gsl_vector_calloc(m_vector_size + m_response_size - 1);
-		
-		delete m_result_vector_view_left;
-		delete m_result_vector_view_right;
-		delete m_linear_vector_view_left;
-		delete m_linear_vector_view_right;
-		
-		m_result_vector_view_left = new gsl_vector_view[m_vector_size];
-		m_result_vector_view_right = new gsl_vector_view[m_vector_size];
-		m_linear_vector_view_left = new gsl_vector_view[m_vector_size];
-		m_linear_vector_view_right = new gsl_vector_view[m_vector_size];
+		m_result_vector_view_left	= new gsl_vector_view[m_vector_size];
+		m_result_vector_view_right	= new gsl_vector_view[m_vector_size];
+		m_linear_vector_view_left	= new gsl_vector_view[m_vector_size];
+		m_linear_vector_view_right	= new gsl_vector_view[m_vector_size];
 		
 		for (int j = 0; j < m_vector_size; j++)
 		{
@@ -198,23 +152,12 @@ void AmbisonicBinaural::matrixResize(int aVectorSize)
 		m_responseSize_begin_right = gsl_vector_subvector(m_linear_vector_right, 0, m_response_size - 1);
 		m_responseSize_end_right = gsl_vector_subvector(m_linear_vector_right, m_vector_size, m_response_size - 1);
 		
-		delete m_result[0];
-		delete m_result[1];
-		
-		m_result[0] = new double[m_vector_size];
-		m_result[1] = new double[m_vector_size];
-		
-		delete m_resultFloat[0];
-		delete m_resultFloat[1];
-		
-		m_resultFloat[0] = new float[m_vector_size];
-		m_resultFloat[1] = new float[m_vector_size];
 	}
 }
 
-
-void AmbisonicBinaural::recordInputMatrix(double **aSample)
-{
+template<typename Type> void AmbisonicBinaural::process(Type **aInputs, Type **aOutputs)
+{	
+	/* Record Inputs vectors In The Matrix */
 	for (int i = 0; i < m_harmonics; i++)
 	{
 		for (int j = 0; j < m_vector_size; j++)
@@ -222,63 +165,29 @@ void AmbisonicBinaural::recordInputMatrix(double **aSample)
 			gsl_matrix_set(m_input_matrix, i, j, aSample[i][j]);
 		}
 	}
-}
-
-void AmbisonicBinaural::recordInputMatrix(float **aSample)
-{
-	for (int i = 0; i < m_harmonics; i++)
-	{
-		for (int j = 0; j < m_vector_size; j++)
-		{
-			gsl_matrix_set(m_input_matrix, i, j, aSample[i][j]);
-		}
-	}
-}
-
-float **AmbisonicBinaural::process(float **aSample)
-{	
-	recordInputMatrix(aSample);
+	
+	/* Matricial Multiplication */
 	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
 	
+	/* Write On The Tempory Vectors And The Outputs Vectors */
 	for (int j = 0; j < m_vector_size; j++)
 	{
 		gsl_blas_daxpy(1., &m_result_vector_view_left[j].vector, &m_linear_vector_view_left[j].vector);
 		gsl_blas_daxpy(1., &m_result_vector_view_right[j].vector, &m_linear_vector_view_right[j].vector);
-		m_resultFloat[0][j] = gsl_vector_get(m_linear_vector_left, j);
-		m_resultFloat[1][j] = gsl_vector_get(m_linear_vector_right, j);
+		aOutputs[0][j] = gsl_vector_get(m_linear_vector_left, j);
+		aOutputs[1][j] = gsl_vector_get(m_linear_vector_right, j);
 	}
+	
+	/* Reorder The Tempory Vectors */
 	gsl_blas_dcopy(&m_responseSize_end_left.vector, &m_responseSize_begin_left.vector);
 	gsl_blas_dcopy(&m_responseSize_end_right.vector, &m_responseSize_begin_right.vector);
 	gsl_vector_set_zero(&m_vectorSize_end_left.vector);
 	gsl_vector_set_zero(&m_vectorSize_end_right.vector);
-	
-	return m_resultFloat;
 }
 
-double **AmbisonicBinaural::process(double **aSample)
-{	
-	recordInputMatrix(aSample);
-	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
-	
-	for (int j = 0; j < m_vector_size; j++)
-	{
-		gsl_blas_daxpy(1., &m_result_vector_view_left[j].vector, &m_linear_vector_view_left[j].vector);
-		gsl_blas_daxpy(1., &m_result_vector_view_right[j].vector, &m_linear_vector_view_right[j].vector);
-		m_result[0][j] = gsl_vector_get(m_linear_vector_left, j);
-		m_result[1][j] = gsl_vector_get(m_linear_vector_right, j);
-	}
-	gsl_blas_dcopy(&m_responseSize_end_left.vector, &m_responseSize_begin_left.vector);
-	gsl_blas_dcopy(&m_responseSize_end_right.vector, &m_responseSize_begin_right.vector);
-	gsl_vector_set_zero(&m_vectorSize_end_left.vector);
-	gsl_vector_set_zero(&m_vectorSize_end_right.vector);
-	
-	return m_result;
-}
-
-AmbisonicBinaural::~AmbisonicBinaural()
+void AmbisonicBinaural::free()
 {
 	gsl_matrix_free(m_input_matrix);
-	gsl_matrix_free(m_impluse_response_matrix);
 	gsl_matrix_free(m_result_matrix);
 	
 	gsl_vector_free(m_linear_vector_left);
@@ -288,10 +197,10 @@ AmbisonicBinaural::~AmbisonicBinaural()
 	delete m_result_vector_view_right;
 	delete m_linear_vector_view_left;
 	delete m_linear_vector_view_right;
-	
-	delete m_result[0];
-	delete m_result[1];
-	
-	delete m_resultFloat[0];
-	delete m_resultFloat[1];
+}
+
+AmbisonicBinaural::~AmbisonicBinaural()
+{
+	free();
+	gsl_matrix_free(m_impluse_response_matrix);
 }

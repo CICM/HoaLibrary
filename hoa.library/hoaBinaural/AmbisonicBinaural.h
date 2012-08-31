@@ -75,9 +75,6 @@ private:
 	gsl_vector_view m_responseSize_begin_right;
 	gsl_vector_view m_responseSize_end_right;
 	
-	double		*m_result[2];
-	float		*m_resultFloat[2];
-	
 public:
 	
 	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize);
@@ -85,14 +82,13 @@ public:
 	void	loadImpulses();
 	void	responseInit();
 	
-	void	matrixInit(int aVectorSize);
-	void	matrixResize(int aVectorSize);
+	void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode = "resize")
 	
-	void	recordInputMatrix(double **aSample);
-	void	recordInputMatrix(float	**aSample);
 	std::string intToString(int aValue);
-	double	**process(double **aSample);
-	float	**process(float **aSample);
+	template<typename Type>	void recordInputMatrix(Type **aInputs);
+	template<typename Type> void process(Type **aInputs, Type **aOutputs);
+	
+	void free();
 	~AmbisonicBinaural();
 
 };

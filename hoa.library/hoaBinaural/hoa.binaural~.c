@@ -110,7 +110,6 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_inputNumber);
 		for (int i = 0; i < x->f_outputNumber; i++) 
 			outlet_new(x, "signal");
-	
 		
 	}
 	return (x);
@@ -158,7 +157,7 @@ void HoaBinaural_dsp64(t_HoaBinaural *x, t_object *dsp64, short *count, double s
 
 void HoaBinaural_perform64(t_HoaBinaural *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	outs = x->f_ambiBinaural->process(ins);
+	x->f_ambiBinaural->process(ins, outs);
 }
 
 void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
@@ -194,7 +193,8 @@ t_int *HoaBinaural_perform(t_int *w)
 	t_HoaBinaural *x	= (t_HoaBinaural *)(w[1]);
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= ins+x->f_inputNumber;
-	outs = x->f_ambiBinaural->process(ins);
+	
+	x->f_ambiBinaural->process(ins, outs);
 
 	return (w + x->f_outputNumber + x->f_inputNumber + 3);
 }
