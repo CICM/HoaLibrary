@@ -89,7 +89,7 @@ public:
 	void	responseInit();
 	void	printBasis(double *basisArray, int size);
 	
-	void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode = "resize")
+	void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode = "resize");
 	
 	std::string intToString(int aValue);
 	template<typename Type>	void recordInputMatrix(Type **aInputs);

@@ -36,7 +36,7 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 
 	loadImpulses();
 	responseInit();
-	matrixInit(aVectorSize, "Intialization");
+	matrixResize(aVectorSize, "Intialization");
 }
 
 std::string AmbisonicBinaural::intToString(int aValue)
@@ -162,7 +162,7 @@ template<typename Type> void AmbisonicBinaural::process(Type **aInputs, Type **a
 	{
 		for (int j = 0; j < m_vector_size; j++)
 		{
-			gsl_matrix_set(m_input_matrix, i, j, aSample[i][j]);
+			gsl_matrix_set(m_input_matrix, i, j, aInputs[i][j]);
 		}
 	}
 	
