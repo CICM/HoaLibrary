@@ -36,23 +36,22 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_number_of_inputs = 2 * m_order + 1;
 	m_number_of_outputs = 2;
 	
-<<<<<<< HEAD
 	computeNbOfVirtualSpeaker();
 	m_impulsesL = new double*[m_numberOfVirtualSpeakers];
 	m_impulsesR = new double*[m_numberOfVirtualSpeakers];
 	m_angleListInDegree = new double[m_numberOfVirtualSpeakers];
 	m_decoder = new ambisonicDecode(m_numberOfVirtualSpeakers, m_order);
 
-	m_harmonicsIndex	= new int[m_harmonics];
+	m_harmonicsIndex	= new int[m_numberOfHarmonics];
 	m_harmonicsIndex[0] = 0;
-	for(int i = 1; i < m_harmonics; i++)
+	for(int i = 1; i < m_numberOfHarmonics; i++)
 	{
 		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
 		if (i % 2 == 1) 
 			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
 	}
 	
-	m_optimVector = new double[m_harmonics];
+	m_optimVector = new double[m_numberOfHarmonics];
 	setOptimMode(anOptimMode );
 	
 	loadImpulses();
@@ -104,10 +103,6 @@ void AmbisonicBinaural::loadImpulses()
 	std::string preFilePath = "/Users/juliencolafrancesco/Desktop/hrtfDatabase/";
 	
 	for(int i = 0; i < m_numberOfVirtualSpeakers; i++)
-=======
-	std::string preFilePath = "/Users/pierreg/Desktop/hrtfDatabase/";
-	for(int i = 0; i < m_nbOfActiveBinauralPoints; i++)
->>>>>>> 0c3c62bbf24c0f7e123348af41b8377cb624573a
 	{
 		m_angleListInDegree[i] = (5*72/m_numberOfVirtualSpeakers)*i;
 		leftFilePath  = preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
@@ -211,14 +206,14 @@ void AmbisonicBinaural::setOptimMode(std::string anOptim)
 void AmbisonicBinaural::computeBasicOptim()
 {
 	m_optimMode = "basic"; 
-	for (int i = 0; i < m_harmonics; i++) 
+	for (int i = 0; i < m_numberOfHarmonics; i++) 
 		m_optimVector[i] = 1.;
 }
 
 void AmbisonicBinaural::computeInPhaseOptim()
 {
 	m_optimMode = "inPhase"; 
-	for (int i = 0; i < m_harmonics; i++) 
+	for (int i = 0; i < m_numberOfHarmonics; i++) 
 	{
 		if (i == 0) 
 			m_optimVector[i] = 1.;
@@ -230,7 +225,7 @@ void AmbisonicBinaural::computeInPhaseOptim()
 void AmbisonicBinaural::computeReOptim()
 {
 	m_optimMode = "maxRe";
-	for (int i = 0; i < m_harmonics; i++) 
+	for (int i = 0; i < m_numberOfHarmonics; i++) 
 	{
 		if (i == 0) 
 			m_optimVector[i] = 1.;

@@ -41,7 +41,7 @@ double* Read_Wav (char *wave_file)
 	fread(&Subchunk2ID, 4, 1, file);  
 	fread(&Subchunk2Size, 4, 1, file);
 	
-	data = new short[(int)(Subchunk2Size + 1) / (int)Blockalign];
+	dataShort = new short[(int)(Subchunk2Size + 1) / (int)Blockalign];
 	dataDouble = new double[(int)(Subchunk2Size + 1) / (int)Blockalign];
 
 	
