@@ -38,7 +38,7 @@ typedef struct _HoaBinaural
 	long						f_order;
 	long						f_harmonics;
 	
-	double						*f_inputSig;
+	float						**f_inputSig;
 } t_HoaBinaural;
 
 
@@ -173,7 +173,7 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 	x->f_ambiBinaural->matrixResize(x->f_n);
 	
 	pointer_count = x->f_outputNumber + x->f_inputNumber + 2;
-	x->f_inputSig = (double *)getbytes(x->f_harmonics * sizeof(double));
+
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
 		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
@@ -192,10 +192,16 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 t_int *HoaBinaural_perform(t_int *w)
 {
 	t_HoaBinaural *x	= (t_HoaBinaural *)(w[1]);
+	t_int			n	= (t_int)(w[2]);
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= ins+x->f_inputNumber;
-	outs = x->f_ambiBinaural->process(ins);
+	x->f_inputSig = x->f_ambiBinaural->process(ins);
 
+	while (n--) {
+		outs[0][n] = x->f_inputSig[0][n];
+		outs[1][n] = x->f_inputSig[1][n];
+	}
+	
 	return (w + x->f_outputNumber + x->f_inputNumber + 3);
 }
 

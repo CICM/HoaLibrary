@@ -32,6 +32,12 @@
 #include <sstream>
 #include <ambisonicDecode.h> 
 
+extern "C" {
+	#include "ext.h"
+	#include "ext_obex.h"
+	#include "z_dsp.h"
+}
+
 #define M_2PI 2*M_PI
 
 class AmbisonicBinaural 
@@ -84,6 +90,7 @@ public:
 	void	computeNbOfActiveBinauralPoints();
 	void	loadImpulses();
 	void	responseInit();
+	void	printBasis(double *basisArray, int size);
 	
 	void	matrixInit(int aVectorSize);
 	void	matrixResize(int aVectorSize);

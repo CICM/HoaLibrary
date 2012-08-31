@@ -13,9 +13,13 @@ double* Read_Wav (char *wave_file, double* datas)
 	
     if (file == NULL) 
 	{  
-        printf("nerreur: fichier  %s  introuvablen", wave_file);  
+        post("nerreur: fichier  %s  introuvablen", wave_file);  
         exit(0);  
-    }  
+    }
+	else {
+		post("loading %s ", wave_file);
+	}
+
 
     fread(&son->RIFF.ChunkID, 4, 1, file);  
     fread(&son->RIFF.ChunkSize, 4, 1, file);  

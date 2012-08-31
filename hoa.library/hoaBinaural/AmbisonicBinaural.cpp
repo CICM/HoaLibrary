@@ -34,6 +34,8 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_angleListInDegree = new double[m_nbOfActiveBinauralPoints];
 	m_decoder = new ambisonicDecode(m_nbOfActiveBinauralPoints, m_order);
 
+	post("number of virtual speakers = % i" ,m_nbOfActiveBinauralPoints );
+	
 	loadImpulses();
 	responseInit();
 	matrixInit(aVectorSize);
@@ -71,8 +73,6 @@ void AmbisonicBinaural::loadImpulses()
 	{
 		leftFilePath  = preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
 		rightFilePath = preFilePath + "right" + intToString(m_angleListInDegree[i]) + ".wav";
-//		m_impulsesL[i] = Read_Wav("/Users/juliencolafrancesco/Desktop/hrtfDatabase/left300.wav", m_impulsesL[i]);
-//		m_impulsesR[i] = Read_Wav("/Users/juliencolafrancesco/Desktop/hrtfDatabase/left300.wav", m_impulsesR[i]);
 		m_impulsesL[i] = Read_Wav(const_cast<char*>(leftFilePath.c_str()) , m_impulsesL[i]);
 		m_impulsesR[i] = Read_Wav(const_cast<char*>(rightFilePath.c_str()), m_impulsesR[i]);
 	}
@@ -97,6 +97,7 @@ void AmbisonicBinaural::responseInit()
 			tmp_ambisonicBasis[i-1] = 0;
 			tmp_ambisonicBasis[i]= 1;
 		}
+		printBasis(tmp_ambisonicBasis, 2*m_order+1);
 		tmp_outputGains = m_decoder->process(tmp_ambisonicBasis);
 		
 		for(int sampleIndex = 0; sampleIndex < 200; sampleIndex++)
@@ -112,6 +113,16 @@ void AmbisonicBinaural::responseInit()
 			gsl_matrix_set(m_impluse_response_matrix, sampleIndex+200 , i, tmpValueR);
 		}
 	}
+}
+
+void AmbisonicBinaural::printBasis(double *basisArray, int size)
+{
+	post("vector ");
+	for (int i = 0; i < size; i++)
+	{
+		post(" %f ", basisArray[i]);
+	}
+	post(" ");
 }
 
 void AmbisonicBinaural::matrixInit(int aVectorSize)
@@ -228,6 +239,7 @@ void AmbisonicBinaural::recordInputMatrix(float **aSample)
 {
 	for (int i = 0; i < m_harmonics; i++)
 	{
+		post("otherside 0 %f", aSample[i][0]);
 		for (int j = 0; j < m_vector_size; j++)
 		{
 			gsl_matrix_set(m_input_matrix, i, j, aSample[i][j]);
@@ -238,7 +250,10 @@ void AmbisonicBinaural::recordInputMatrix(float **aSample)
 float **AmbisonicBinaural::process(float **aSample)
 {	
 	recordInputMatrix(aSample);
-	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
+	post("darkside 0 %f", aSample[0][1]);
+	post("darkside 1 %f", aSample[1][1]);
+	post("darkside 2 %f", aSample[2][1]);
+	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 0.0, m_result_matrix);
 	
 	for (int j = 0; j < m_vector_size; j++)
 	{
@@ -247,6 +262,8 @@ float **AmbisonicBinaural::process(float **aSample)
 		m_resultFloat[0][j] = gsl_vector_get(m_linear_vector_left, j);
 		m_resultFloat[1][j] = gsl_vector_get(m_linear_vector_right, j);
 	}
+	post("darkresult 0 %f", m_resultFloat[0][0]);
+	post("darkresult 1 %f", m_resultFloat[1][0]);
 	gsl_blas_dcopy(&m_responseSize_end_left.vector, &m_responseSize_begin_left.vector);
 	gsl_blas_dcopy(&m_responseSize_end_right.vector, &m_responseSize_begin_right.vector);
 	gsl_vector_set_zero(&m_vectorSize_end_left.vector);
@@ -258,7 +275,7 @@ float **AmbisonicBinaural::process(float **aSample)
 double **AmbisonicBinaural::process(double **aSample)
 {	
 	recordInputMatrix(aSample);
-	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
+	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 0.0, m_result_matrix);
 	
 	for (int j = 0; j < m_vector_size; j++)
 	{
