@@ -37,8 +37,7 @@ typedef struct _HoaBinaural
 	long						f_outputNumber;
 	long						f_order;
 	long						f_harmonics;
-	
-	double						*f_inputSig;
+
 } t_HoaBinaural;
 
 
