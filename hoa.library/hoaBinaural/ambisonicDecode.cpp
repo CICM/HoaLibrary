@@ -74,9 +74,6 @@ void ambisonicDecode::setOptimMethod(std::string anOptimId)
 		m_optimId = "basic";
 	}
 
-
-
-
 }
 void ambisonicDecode::computePseudoInverse()
 {

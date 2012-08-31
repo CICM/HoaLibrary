@@ -19,7 +19,7 @@
 
 #include "AmbisonicBinaural.h"
 
-AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize)
+AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode)
 {	
 	m_vector_size = 0;
 	m_sampling_rate = aSamplingRate;
@@ -37,11 +37,24 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_number_of_outputs = 2;
 	
 	computeNbOfActiveBinauralPoints();
+	
 	m_impulsesL = new double*[m_nbOfActiveBinauralPoints];
 	m_impulsesR = new double*[m_nbOfActiveBinauralPoints];
 	m_angleListInDegree = new double[m_nbOfActiveBinauralPoints];
 	m_decoder = new ambisonicDecode(m_nbOfActiveBinauralPoints, m_order);
 
+	m_harmonicsIndex	= new int[m_harmonics];
+	m_harmonicsIndex[0] = 0;
+	for(int i = 1; i < m_harmonics; i++)
+	{
+		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+		if (i % 2 == 1) 
+			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
+	}
+	
+	m_optimVector = new double[m_harmonics];
+	setOptimMode(anOptimMode );
+	
 	loadImpulses();
 	responseInit();
 	matrixResize(aVectorSize, "Intialization");
@@ -181,7 +194,50 @@ void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 	}
 }
 
+void AmbisonicBinaural::setOptimMode(std::string anOptim)
+{
+	if(anOptim != m_optimMode)
+	{
+		if(anOptim == "inPhase")
+			computeInPhaseOptim();
+		else if(anOptim == "maxRe")
+			computeReOptim();
+		else
+			computeBasicOptim();
+	}
+}
 
+void AmbisonicBinaural::computeBasicOptim()
+{
+	m_optimMode = "basic"; 
+	for (int i = 0; i < m_harmonics; i++) 
+		m_optimVector[i] = 1.;
+}
+
+void AmbisonicBinaural::computeInPhaseOptim()
+{
+	m_optimMode = "inPhase"; 
+	for (int i = 0; i < m_harmonics; i++) 
+	{
+		if (i == 0) 
+			m_optimVector[i] = 1.;
+		else 
+			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_harmonicsIndex[i])) * gsl_sf_fact(m_order-abs(m_harmonicsIndex[i])));
+	}
+}
+
+void AmbisonicBinaural::computeReOptim()
+{
+	m_optimMode = "maxRe";
+	for (int i = 0; i < m_harmonics; i++) 
+	{
+		if (i == 0) 
+			m_optimVector[i] = 1.;
+		else 
+			m_optimVector[i] = cos(abs(m_harmonicsIndex[i]) * PI / (2*m_order+2));
+	}
+	
+}
 
 void AmbisonicBinaural::free()
 {
@@ -201,4 +257,5 @@ AmbisonicBinaural::~AmbisonicBinaural()
 {
 	free();
 	gsl_matrix_free(m_impluse_response_matrix);
+	delete m_optimVector;
 }

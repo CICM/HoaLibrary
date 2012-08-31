@@ -55,7 +55,8 @@ private:
 	long		m_number_of_outputs;
 	
 	std::string m_optimMode;
-	
+	int*		m_harmonicsIndex;
+	double*		m_optimVector;
 	double*		m_angleListInDegree;
 	double**	m_impulsesL;
 	double**	m_impulsesR;
@@ -86,8 +87,13 @@ private:
 	
 public:
 	
-	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize);
+	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSizen, std::string anOptimMode = "basic" );
 	int		getParameters(std::string aParameter) const;
+	
+	void	setOptimMode(std::string anOptim);
+	void	computeBasicOptim();
+	void	computeInPhaseOptim();
+	void	computeReOptim();
 	
 	void	computeNbOfActiveBinauralPoints();
 	void	loadImpulses();
@@ -107,7 +113,7 @@ public:
 		{
 			for (int j = 0; j < m_vector_size; j++)
 			{
-				gsl_matrix_set(m_input_matrix, i, j, aInputs[i][j]);
+				gsl_matrix_set(m_input_matrix, i, j, aInputs[i][j] * m_optimVector[i]);
 			}
 		}
 		

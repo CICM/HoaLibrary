@@ -36,6 +36,7 @@ typedef struct _HoaBinaural
 void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv);
 void HoaBinaural_free(t_HoaBinaural *x);
 void HoaBinaural_assist(t_HoaBinaural *x, void *b, long m, long a, char *s);
+void HoaBinaural_optim(t_HoaBinaural *x, t_symbol *s, long argc, t_atom *argv);
 
 void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count);
 t_int *HoaBinaural_perform(t_int *w);
@@ -53,9 +54,10 @@ int main(void)
 	
 	c = class_new("hoa.binaural~", (method)HoaBinaural_new, (method)HoaBinaural_free, (long)sizeof(t_HoaBinaural), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaBinaural_dsp,			"dsp",		A_CANT, 0);
-	class_addmethod(c, (method)HoaBinaural_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaBinaural_assist,		"assist",	A_CANT, 0);
+	class_addmethod(c, (method)HoaBinaural_dsp,			"dsp",		A_CANT,		0);
+	class_addmethod(c, (method)HoaBinaural_dsp64,		"dsp64",	A_CANT,		0);
+	class_addmethod(c, (method)HoaBinaural_assist,		"assist",	A_CANT,		0);
+	class_addmethod(c, (method)HoaBinaural_optim,		"optim",	A_GIMME,	0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -130,6 +132,14 @@ t_int *HoaBinaural_perform(t_int *w)
 	return (w + x->f_ambiBinaural->getParameters("numberOfOutputs") + x->f_ambiBinaural->getParameters("numberOfInputs") + 3);
 }
 
+void HoaBinaural_optim(t_HoaBinaural *x, t_symbol *s, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_SYM)
+	{
+		std::string optimMode = atom_getsym(argv)->s_name;
+		x->f_ambiBinaural->setOptimMode(optimMode);
+	}
+}
 
 void HoaBinaural_assist(t_HoaBinaural *x, void *b, long m, long a, char *s)
 {
