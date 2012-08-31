@@ -171,7 +171,7 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 	x->f_ambiBinaural->matrixResize(x->f_n);
 	
 	pointer_count = x->f_outputNumber + x->f_inputNumber + 2;
-	x->f_inputSig = (double *)getbytes(x->f_harmonics * sizeof(double));
+	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
 		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
