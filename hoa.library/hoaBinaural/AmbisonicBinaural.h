@@ -32,11 +32,6 @@
 #include <sstream>
 #include <ambisonicDecode.h> 
 
-extern "C" {
-	#include "ext.h"
-	#include "ext_obex.h"
-	#include "z_dsp.h"
-}
 
 #define M_2PI 2*M_PI
 
@@ -45,12 +40,12 @@ class AmbisonicBinaural
 	
 private:
 	int			m_order;
-	long		m_harmonics;
+	long		m_numberOfHarmonics;
 	long		m_response_size;
 	long		m_vector_size;
 	long		m_sampling_rate;
-	long		m_nbOfBinauralPointsInDatabase;
-	long		m_nbOfActiveBinauralPoints;
+	long		m_maximumNumberOfVirtualSpeakers;
+	long		m_numberOfVirtualSpeakers;
 	std::string m_optimMode;
 	
 	double*		m_angleListInDegree;
@@ -84,7 +79,7 @@ private:
 public:
 	
 	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize);
-	void	computeNbOfActiveBinauralPoints();
+	void	computeNbOfVirtualSpeaker();
 	void	loadImpulses();
 	void	responseInit();
 	void	printBasis(double *basisArray, int size);
@@ -97,7 +92,7 @@ public:
 	template<typename Type> void process(Type** aInputs, Type** aOutputs)
 	{	
 		/* Record Inputs vectors In The Matrix */
-		for (int i = 0; i < m_harmonics; i++)
+		for (int i = 0; i < m_numberOfHarmonics; i++)
 		{
 			for (int j = 0; j < m_vector_size; j++)
 			{

@@ -24,18 +24,18 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_vector_size = 0;
 	m_sampling_rate = 0;
 	m_order = aOrder;	
-	m_nbOfBinauralPointsInDatabase = 72;
-	m_harmonics = 2 * m_order + 1;
+	m_maximumNumberOfVirtualSpeakers = 72;
+	m_numberOfHarmonics = 2 * m_order + 1;
 	m_response_size = 200;
 	
 	if (m_order > 35) 
 		m_order = 35;
 	
-	computeNbOfActiveBinauralPoints();
-	m_impulsesL = new double*[m_nbOfActiveBinauralPoints];
-	m_impulsesR = new double*[m_nbOfActiveBinauralPoints];
-	m_angleListInDegree = new double[m_nbOfActiveBinauralPoints];
-	m_decoder = new ambisonicDecode(m_nbOfActiveBinauralPoints, m_order);
+	computeNbOfVirtualSpeaker();
+	m_impulsesL = new double*[m_numberOfVirtualSpeakers];
+	m_impulsesR = new double*[m_numberOfVirtualSpeakers];
+	m_angleListInDegree = new double[m_numberOfVirtualSpeakers];
+	m_decoder = new ambisonicDecode(m_numberOfVirtualSpeakers, m_order);
 
 	loadImpulses();
 	responseInit();
@@ -48,57 +48,54 @@ std::string AmbisonicBinaural::intToString(int aValue)
 	oss << aValue;
 	return oss.str();
 }
-void AmbisonicBinaural::computeNbOfActiveBinauralPoints()
+void AmbisonicBinaural::computeNbOfVirtualSpeaker()
 {
 	int possiblesConfigurations[10] = {3, 4, 6, 8, 9, 12, 18, 24, 36, 72};
-	m_nbOfActiveBinauralPoints = possiblesConfigurations[0];
+	m_numberOfVirtualSpeakers = possiblesConfigurations[0];
 	for (int i = 0; i < 10; i++)
 	{
-		if (possiblesConfigurations[i] > m_order * 2 + 1) 
+		if (possiblesConfigurations[i] > m_numberOfHarmonics) 
 		{
-			m_nbOfActiveBinauralPoints = possiblesConfigurations[i];
+			m_numberOfVirtualSpeakers = possiblesConfigurations[i];
 			break;
 		}
 	}
 }
 void AmbisonicBinaural::loadImpulses()
 {
-	for(int i = 0; i < m_nbOfActiveBinauralPoints; i++)
-	{
-		m_angleListInDegree[i] = (5*72/m_nbOfActiveBinauralPoints)*i;
-	}
 	std::string leftFilePath;
 	std::string rightFilePath;
 	std::string preFilePath = "/Users/juliencolafrancesco/Desktop/hrtfDatabase/";
-	for(int i = 0; i < m_nbOfActiveBinauralPoints; i++)
+	
+	for(int i = 0; i < m_numberOfVirtualSpeakers; i++)
 	{
+		m_angleListInDegree[i] = (5*72/m_numberOfVirtualSpeakers)*i;
 		leftFilePath  = preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
 		rightFilePath = preFilePath + "right" + intToString(m_angleListInDegree[i]) + ".wav";
-//		m_impulsesL[i] = Read_Wav("/Users/juliencolafrancesco/Desktop/hrtfDatabase/left300.wav", m_impulsesL[i]);
-//		m_impulsesR[i] = Read_Wav("/Users/juliencolafrancesco/Desktop/hrtfDatabase/left300.wav", m_impulsesR[i]);
-		m_impulsesL[i] = Read_Wav(const_cast<char*>(leftFilePath.c_str()) , m_impulsesL[i]);
-		m_impulsesR[i] = Read_Wav(const_cast<char*>(rightFilePath.c_str()), m_impulsesR[i]);
+		m_impulsesL[i] = Read_Wav(const_cast<char*>(leftFilePath.c_str()) );
+		m_impulsesR[i] = Read_Wav(const_cast<char*>(rightFilePath.c_str()));
 	}
+
 }
 
 void AmbisonicBinaural::responseInit()
 {
-	m_impluse_response_matrix = gsl_matrix_calloc(m_response_size * 2, m_harmonics);
+	m_impluse_response_matrix = gsl_matrix_calloc(m_response_size * 2, m_numberOfHarmonics);
 	
 	double* tmp_outputGains;
-	double* tmp_ambisonicBasis = new double[2*m_order+1];
-	memset(tmp_ambisonicBasis, 0, (2*m_order+1) * sizeof(double));
+	double* tmp_ambisonicBasis = new double[m_numberOfHarmonics];
+	memset(tmp_ambisonicBasis, 0, (m_numberOfHarmonics) * sizeof(double));
 	
 	double tmpValueL;
 	double tmpValueR;
 	
 	tmp_ambisonicBasis[0]=1;
-	for(int i = 0; i < 2*m_order+1; i++)
+	for(int harmonicIndex = 0; harmonicIndex < m_numberOfHarmonics; harmonicIndex++)
 	{
-		if(i != 0)
+		if(harmonicIndex != 0)
 		{
-			tmp_ambisonicBasis[i-1] = 0;
-			tmp_ambisonicBasis[i]= 1;
+			tmp_ambisonicBasis[harmonicIndex-1] = 0;
+			tmp_ambisonicBasis[harmonicIndex]= 1;
 		}
 		tmp_outputGains = m_decoder->process(tmp_ambisonicBasis);
 		
@@ -106,13 +103,13 @@ void AmbisonicBinaural::responseInit()
 		{
 			tmpValueL = 0;
 			tmpValueR = 0;
-			for (int binauPointIndex = 0; binauPointIndex < m_nbOfActiveBinauralPoints; binauPointIndex++)
+			for (int virtualSpeakerIndex = 0; virtualSpeakerIndex < m_numberOfVirtualSpeakers; virtualSpeakerIndex++)
 			{
-				tmpValueL += tmp_outputGains[binauPointIndex] * m_impulsesL[binauPointIndex][sampleIndex];
-				tmpValueR += tmp_outputGains[binauPointIndex] * m_impulsesR[binauPointIndex][sampleIndex];
+				tmpValueL += tmp_outputGains[virtualSpeakerIndex] * m_impulsesL[virtualSpeakerIndex][sampleIndex];
+				tmpValueR += tmp_outputGains[virtualSpeakerIndex] * m_impulsesR[virtualSpeakerIndex][sampleIndex];
 			}
-			gsl_matrix_set(m_impluse_response_matrix, sampleIndex	  , i, tmpValueL);
-			gsl_matrix_set(m_impluse_response_matrix, sampleIndex+200 , i, tmpValueR);
+			gsl_matrix_set(m_impluse_response_matrix, sampleIndex	  , harmonicIndex, tmpValueL);
+			gsl_matrix_set(m_impluse_response_matrix, sampleIndex+200 , harmonicIndex, tmpValueR);
 		}
 	}
 }
@@ -127,7 +124,7 @@ void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 		
 		m_vector_size = aVectorSize;
 		
-		m_input_matrix	= gsl_matrix_calloc(m_harmonics, m_vector_size);
+		m_input_matrix	= gsl_matrix_calloc(m_numberOfHarmonics, m_vector_size);
 		m_result_matrix = gsl_matrix_calloc(m_response_size * 2, m_vector_size);
 		
 		m_linear_vector_left	= gsl_vector_calloc(m_vector_size + m_response_size - 1);
