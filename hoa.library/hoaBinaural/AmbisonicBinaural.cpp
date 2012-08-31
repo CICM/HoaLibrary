@@ -23,10 +23,13 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 {	
 	m_vector_size = 0;
 	m_sampling_rate = 0;
-	m_order = aOrder;
+	m_order = aOrder;	
 	m_nbOfBinauralPointsInDatabase = 72;
 	m_harmonics = 2 * m_order + 1;
 	m_response_size = 200;
+	
+	if (m_order > 35) 
+		m_order = 35;
 	
 	computeNbOfActiveBinauralPoints();
 	m_impulsesL = new double*[m_nbOfActiveBinauralPoints];
@@ -155,35 +158,7 @@ void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 	}
 }
 
-template<typename Type> void AmbisonicBinaural::process(Type **aInputs, Type **aOutputs)
-{	
-	/* Record Inputs vectors In The Matrix */
-	for (int i = 0; i < m_harmonics; i++)
-	{
-		for (int j = 0; j < m_vector_size; j++)
-		{
-			gsl_matrix_set(m_input_matrix, i, j, aInputs[i][j]);
-		}
-	}
-	
-	/* Matricial Multiplication */
-	gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., m_impluse_response_matrix, m_input_matrix, 1., m_result_matrix);
-	
-	/* Write On The Tempory Vectors And The Outputs Vectors */
-	for (int j = 0; j < m_vector_size; j++)
-	{
-		gsl_blas_daxpy(1., &m_result_vector_view_left[j].vector, &m_linear_vector_view_left[j].vector);
-		gsl_blas_daxpy(1., &m_result_vector_view_right[j].vector, &m_linear_vector_view_right[j].vector);
-		aOutputs[0][j] = gsl_vector_get(m_linear_vector_left, j);
-		aOutputs[1][j] = gsl_vector_get(m_linear_vector_right, j);
-	}
-	
-	/* Reorder The Tempory Vectors */
-	gsl_blas_dcopy(&m_responseSize_end_left.vector, &m_responseSize_begin_left.vector);
-	gsl_blas_dcopy(&m_responseSize_end_right.vector, &m_responseSize_begin_right.vector);
-	gsl_vector_set_zero(&m_vectorSize_end_left.vector);
-	gsl_vector_set_zero(&m_vectorSize_end_right.vector);
-}
+
 
 void AmbisonicBinaural::free()
 {
