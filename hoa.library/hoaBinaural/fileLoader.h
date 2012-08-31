@@ -4,6 +4,12 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
+extern "C" {
+#include "ext.h"
+#include "ext_obex.h"
+#include "z_dsp.h"
+}
+
 
 double* Read_Wav (char *wave_file, double* datas);
 //typedef unsigned long word;  
