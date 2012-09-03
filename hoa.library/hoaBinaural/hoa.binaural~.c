@@ -69,7 +69,7 @@ int main(void)
 void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaBinaural *x = NULL;
-	int order = 4;;
+	int order = 4;
 	if (x = (t_HoaBinaural *)object_alloc((t_class *)HoaBinaural_class)) 
 	{		
 		if(argv[0].a_type == A_LONG)

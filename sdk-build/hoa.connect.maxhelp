@@ -341,34 +341,6 @@
 				}
 
 			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bgoncolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bgovercolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bgoveroncolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bordercolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"fontface" : 3,
-					"fontlink" : 1,
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"id" : "obj-6",
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"patching_rect" : [ 450.920868, 22.0, 49.079121, 14.666666 ],
-					"presentation_rect" : [ 0.0, 0.0, 49.079121, 14.666666 ],
-					"spacing_x" : 0.0,
-					"spacing_y" : 0.0,
-					"textcolor" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"textoncolor" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"textovercolor" : [ 0.4, 0.5, 0.65, 1.0 ],
-					"underline" : 1,
-					"varname" : "autohelp_top_ref"
-				}
-
-			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -399,7 +371,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],

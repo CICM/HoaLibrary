@@ -99,7 +99,7 @@ public:
 	void	loadImpulses();
 	void	responseInit();
 	void	printBasis(double *basisArray, int size);
-	void matrixResize(int aVectorSize, std::string aMode = "resize");
+	void	matrixResize(int aVectorSize, std::string aMode = "resize");
 	std::string intToString(int aValue);
 	
 	void free();
