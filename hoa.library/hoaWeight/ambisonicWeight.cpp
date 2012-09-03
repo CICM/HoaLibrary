@@ -119,7 +119,6 @@ void ambisonicWeight::computeReOptim()
 		else 
 			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * PI / (double)(2 * m_order + 2));
 	}
-	
 }
 
 void ambisonicWeight::computeInPhaseOptim()

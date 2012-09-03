@@ -87,7 +87,7 @@ private:
 	
 public:
 	
-	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSizen, std::string anOptimMode = "basic" );
+	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode = "basic" );
 	int		getParameters(std::string aParameter) const;
 	
 	void	setOptimMode(std::string anOptim);
