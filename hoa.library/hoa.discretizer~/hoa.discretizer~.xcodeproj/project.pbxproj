@@ -8,25 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		0E9B6EE415E65C5900FC3F5C /* hoa.discretizer~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B6EE315E65C5900FC3F5C /* hoa.discretizer~.cpp */; };
-		0E9B6F1315E783F500FC3F5C /* ambisonicDisretise.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E9B6F1215E783F500FC3F5C /* ambisonicDisretise.h */; };
+		0ECB4FD515F4BB6C0008737D /* ambisonicDiscretise.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ECB4FD415F4BB6C0008737D /* ambisonicDiscretise.h */; };
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
 		4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */; };
 		4E8FAEFB15D016DD00A9EA47 /* gslMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */; };
 		4EB5E0E014DEF21200ADF62A /* ambisonicDicretise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDicretise.cpp */; };
-		4EB5E0E114DEF21200ADF62A /* ambisonicDiscretise.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EB5E0DE14DEF21200ADF62A /* ambisonicDiscretise.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0E9B6EE315E65C5900FC3F5C /* hoa.discretizer~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.discretizer~.cpp"; sourceTree = "<group>"; };
-		0E9B6F1215E783F500FC3F5C /* ambisonicDisretise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicDisretise.h; sourceTree = "<group>"; };
+		0ECB4FD415F4BB6C0008737D /* ambisonicDiscretise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicDiscretise.h; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* hoa.discretizer~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.discretizer~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = gslMatrix.h; sourceTree = "<group>"; };
 		4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gslMatrix.c; sourceTree = "<group>"; };
 		4EB5E0DD14DEF21200ADF62A /* ambisonicDicretise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicDicretise.cpp; sourceTree = "<group>"; };
-		4EB5E0DE14DEF21200ADF62A /* ambisonicDiscretise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicDiscretise.h; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -68,9 +66,8 @@
 			children = (
 				0E9B6EE315E65C5900FC3F5C /* hoa.discretizer~.cpp */,
 				4EB5E0DD14DEF21200ADF62A /* ambisonicDicretise.cpp */,
-				4EB5E0DE14DEF21200ADF62A /* ambisonicDiscretise.h */,
-				0E9B6F1215E783F500FC3F5C /* ambisonicDisretise.h */,
 				4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */,
+				0ECB4FD415F4BB6C0008737D /* ambisonicDiscretise.h */,
 				4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */,
 			);
 			name = Source;
@@ -91,9 +88,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EB5E0E114DEF21200ADF62A /* ambisonicDiscretise.h in Headers */,
 				4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */,
-				0E9B6F1315E783F500FC3F5C /* ambisonicDisretise.h in Headers */,
+				0ECB4FD515F4BB6C0008737D /* ambisonicDiscretise.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

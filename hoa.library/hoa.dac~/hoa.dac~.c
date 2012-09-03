@@ -20,12 +20,6 @@
 #include "ext_obex.h"
 #include "ext_common.h"
 
-typedef struct  _dac
-{
-	t_object	f_ob;
-	
-} t_dac;
-
 void *dac_class;
 
 void *dac_new(t_symbol *s, int argc, t_atom *argv);
@@ -34,15 +28,10 @@ int main(void)
 {
 	t_class *c;
 
-	c = class_new("hoa.dac~", (method)dac_new, (method)NULL, (short)sizeof(t_dac), 0L, A_GIMME, 0);
+	c = class_new("hoa.dac~", (method)dac_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
 	
 	class_register(CLASS_BOX, c);
-	dac_class = c;
-
-	
-	post("hoa.dac~ by Pierre Guillot & Julien Colafransceco",0);
-	post("Copyright (C) 2012, Universite Paris 8");
-	
+	dac_class = c;	
 }
 
 void *dac_new(t_symbol *s, int argc, t_atom *argv)
@@ -51,24 +40,53 @@ void *dac_new(t_symbol *s, int argc, t_atom *argv)
 	t_object *x;
 	t_atom channels[10000];
 	int min, max;
+	int direction;
 	count = 0;
 	for(i = 0; i < argc; i++)
 	{
 		if(atom_gettype(argv+i) == A_SYM)
 		{
+			direction = 1;
 			min = atoi(atom_getsym(argv+i)->s_name);
 			if (min < 10)
-				max = atoi(atom_getsym(argv+i)->s_name+2);
-			else if (min < 100)
-				max = atoi(atom_getsym(argv+i)->s_name+3);
-			else if (min < 1000)
-				max = atoi(atom_getsym(argv+i)->s_name+4);
-			else
-				max = atoi(atom_getsym(argv+i)->s_name+5);
-			for(j = min; j <= max; j++)
 			{
-				atom_setlong(channels+count++, j);
+				max = atoi(atom_getsym(argv+i)->s_name+2);
+				if (atom_getsym(argv+i)->s_name[1] == '/') 
+					direction = 0;
 			}
+			else if (min < 100)
+			{
+				max = atoi(atom_getsym(argv+i)->s_name+3);
+				if (atom_getsym(argv+i)->s_name[2] == '/') 
+					direction = 0;
+			}
+			else if (min < 1000)
+			{
+				max = atoi(atom_getsym(argv+i)->s_name+4);
+				if (atom_getsym(argv+i)->s_name[3] == '/') 
+					direction = 0;
+			}
+			else
+			{
+				max = atoi(atom_getsym(argv+i)->s_name+5);
+				if (atom_getsym(argv+i)->s_name[4] == '/') 
+					direction = 0;
+			}
+			if (direction) 
+			{
+				for(j = min; j <= max; j++)
+				{
+					atom_setlong(channels+count++, j);
+				}
+			}
+			else 
+			{
+				for(j = max; j >= min; j--)
+				{
+					atom_setlong(channels+count++, j);
+				}
+			}
+
 		}	
 		else if(atom_gettype(argv+i) == A_LONG)
 		{

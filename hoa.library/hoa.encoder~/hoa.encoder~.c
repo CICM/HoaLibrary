@@ -337,23 +337,28 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 	
 	if (m == ASSIST_INLET) 
 	{
-		if(a == 0)
-			sprintf(s,"(Signal) Input signal");
-		else 
-			sprintf(s,"(Signal or float) Azimuth");
+		if(x->f_mode)
+			sprintf(s,"(Signal) Order signal %ld", a);
+		else
+		{
+			if(a == 0)
+				sprintf(s,"(Signal) Input signal");
+			else 
+				sprintf(s,"(Signal or float) Azimuth");
+		}
 	} 
 	else 
 	{
 		long harmonicIndex = 0;
 		if (a == 0)
 			harmonicIndex = 0;
-		else {
-			harmonicIndex = (int)floor((a-1)/2) + 1;
-			if (a%2 == 1) 
+		else 
+		{
+			harmonicIndex = floor((a - 1) / 2) + 1;
+			if (a % 2 == 1) 
 				harmonicIndex = - harmonicIndex;
 		}
-
-		sprintf(s,"(Signal) Spherical harmonic %i dependant signal", harmonicIndex); 			
+		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex); 			
 	}
 }
 
