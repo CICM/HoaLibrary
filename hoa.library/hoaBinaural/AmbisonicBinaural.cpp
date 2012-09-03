@@ -17,15 +17,15 @@
  *
  */
 
-#include "AmbisonicBinaural.h"
+#include "ambisonicBinaural.h"
 
-AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode)
+ambisonicBinaural::ambisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode)
 {	
 	m_vector_size = 0;
 	m_sampling_rate = aSamplingRate;
 	m_order = aOrder;	
 	m_nbOfBinauralPointsInDatabase = 72;
-	m_harmonics = 2 * m_order + 1;
+	m_number_of_harmonics = 2 * m_order + 1;
 	m_response_size = 200;
 	
 	if (m_order > 35) 
@@ -43,16 +43,16 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_angleListInDegree = new double[m_nbOfActiveBinauralPoints];
 	m_decoder = new ambisonicDecode(m_nbOfActiveBinauralPoints, m_order);
 
-	m_harmonicsIndex	= new int[m_harmonics];
-	m_harmonicsIndex[0] = 0;
-	for(int i = 1; i < m_harmonics; i++)
+	m_index_of_harmonics	= new int[m_number_of_harmonics];
+	m_index_of_harmonics[0] = 0;
+	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
-		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+		m_index_of_harmonics[i] = (int)floor((i-1)/2) + 1;
 		if (i % 2 == 1) 
-			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
+			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
 	}
 	
-	m_optimVector = new double[m_harmonics];
+	m_optimVector = new double[m_number_of_harmonics];
 	setOptimMode(anOptimMode );
 	
 	loadImpulses();
@@ -60,7 +60,7 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	matrixResize(aVectorSize, "Intialization");
 }
 
-int	AmbisonicBinaural::getParameters(std::string aParameter) const
+int	ambisonicBinaural::getParameters(std::string aParameter) const
 {
 	int value = 0;
 
@@ -78,13 +78,13 @@ int	AmbisonicBinaural::getParameters(std::string aParameter) const
 	return value;
 }
 
-std::string AmbisonicBinaural::intToString(int aValue)
+std::string ambisonicBinaural::intToString(int aValue)
 {
 	std::ostringstream oss;
 	oss << aValue;
 	return oss.str();
 }
-void AmbisonicBinaural::computeNbOfActiveBinauralPoints()
+void ambisonicBinaural::computeNbOfActiveBinauralPoints()
 {
 	int possiblesConfigurations[10] = {3, 4, 6, 8, 9, 12, 18, 24, 36, 72};
 	m_nbOfActiveBinauralPoints = possiblesConfigurations[0];
@@ -97,7 +97,7 @@ void AmbisonicBinaural::computeNbOfActiveBinauralPoints()
 		}
 	}
 }
-void AmbisonicBinaural::loadImpulses()
+void ambisonicBinaural::loadImpulses()
 {
 	for(int i = 0; i < m_nbOfActiveBinauralPoints; i++)
 	{
@@ -117,9 +117,9 @@ void AmbisonicBinaural::loadImpulses()
 	}
 }
 
-void AmbisonicBinaural::responseInit()
+void ambisonicBinaural::responseInit()
 {
-	m_impluse_response_matrix = gsl_matrix_calloc(m_response_size * 2, m_harmonics);
+	m_impluse_response_matrix = gsl_matrix_calloc(m_response_size * 2, m_number_of_harmonics);
 	
 	double* tmp_outputGains;
 	double* tmp_ambisonicBasis = new double[2*m_order+1];
@@ -154,7 +154,7 @@ void AmbisonicBinaural::responseInit()
 }
 
 
-void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
+void ambisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 {
 	if(aVectorSize != m_vector_size)
 	{	
@@ -163,7 +163,7 @@ void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 		
 		m_vector_size = aVectorSize;
 		
-		m_input_matrix	= gsl_matrix_calloc(m_harmonics, m_vector_size);
+		m_input_matrix	= gsl_matrix_calloc(m_number_of_harmonics, m_vector_size);
 		m_result_matrix = gsl_matrix_calloc(m_response_size * 2, m_vector_size);
 		
 		m_linear_vector_left	= gsl_vector_calloc(m_vector_size + m_response_size - 1);
@@ -194,7 +194,7 @@ void AmbisonicBinaural::matrixResize(int aVectorSize, std::string aMode)
 	}
 }
 
-void AmbisonicBinaural::setOptimMode(std::string anOptim)
+void ambisonicBinaural::setOptimMode(std::string anOptim)
 {
 	if(anOptim != m_optimMode)
 	{
@@ -207,39 +207,39 @@ void AmbisonicBinaural::setOptimMode(std::string anOptim)
 	}
 }
 
-void AmbisonicBinaural::computeBasicOptim()
+void ambisonicBinaural::computeBasicOptim()
 {
 	m_optimMode = "basic"; 
-	for (int i = 0; i < m_harmonics; i++) 
+	for (int i = 0; i < m_number_of_harmonics; i++) 
 		m_optimVector[i] = 1.;
 }
 
-void AmbisonicBinaural::computeInPhaseOptim()
+void ambisonicBinaural::computeInPhaseOptim()
 {
 	m_optimMode = "inPhase"; 
-	for (int i = 0; i < m_harmonics; i++) 
+	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
 		if (i == 0) 
 			m_optimVector[i] = 1.;
 		else 
-			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_harmonicsIndex[i])) * gsl_sf_fact(m_order-abs(m_harmonicsIndex[i])));
+			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
 	}
 }
 
-void AmbisonicBinaural::computeReOptim()
+void ambisonicBinaural::computeReOptim()
 {
 	m_optimMode = "maxRe";
-	for (int i = 0; i < m_harmonics; i++) 
+	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
 		if (i == 0) 
 			m_optimVector[i] = 1.;
 		else 
-			m_optimVector[i] = cos(abs(m_harmonicsIndex[i]) * PI / (2*m_order+2));
+			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * PI / (2*m_order+2));
 	}
 	
 }
 
-void AmbisonicBinaural::free()
+void ambisonicBinaural::free()
 {
 	gsl_matrix_free(m_input_matrix);
 	gsl_matrix_free(m_result_matrix);
@@ -253,7 +253,7 @@ void AmbisonicBinaural::free()
 	delete m_linear_vector_view_right;
 }
 
-AmbisonicBinaural::~AmbisonicBinaural()
+ambisonicBinaural::~ambisonicBinaural()
 {
 	free();
 	gsl_matrix_free(m_impluse_response_matrix);

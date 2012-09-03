@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
@@ -16,9 +17,8 @@
  *
  */
 
-
-#ifndef define DEF_AMBISONICDECODE
-#define DEF_AMBISONICDECODE
+#ifndef define DEF_AMBISONICDISCRETISE
+#define DEF_AMBISONICDISCRETISE
 
 #ifndef PI
 #define PI 3.1415926535897932384626433832795
@@ -33,42 +33,39 @@
 #include <string>
 
 
-class ambisonicDecode
+class ambisonicProjector
 {
 	
 private:
-	int m_order;
-	int m_number_of_harmonics;
-	int m_number_of_inputs;
-	int m_number_of_outputs;
-	int	m_sampling_rate;
-	int	m_vector_size;
+	int			m_order;
+	int			m_number_of_harmonics;
+	int			m_number_of_outputs;
+	int			m_number_of_inputs;
+	int			m_vector_size;
+	
 	std::string m_optimMode;
 	
-	double		*m_speakers_angles;
-	int			*m_index_of_harmonics;
+	int*		m_index_of_harmonics;
 	
-	gsl_matrix	*m_decoder_matrix;
-	gsl_vector	*m_input_vector;
-	gsl_vector	*m_output_vector;
-	double		*m_optimVector;
+	gsl_matrix* m_microphones_matrix;
+	gsl_vector* m_input_vector;
+	gsl_vector* m_output_vector;
+	double*		m_optimVector;
 	
 public:
-	ambisonicDecode(int anOrder, int aNumberOfChannels = 0, int aVectorSize = 0, std::string anOptimMode = "basic");
+	ambisonicProjector(int anOrder, int aNumberOfMicrophones = 0, int aVectorSize = 0, std::string anOptimMode = "basic");
+	int		getParameters(std::string aParameter) const;
 	
-	int	 getParameters(std::string aParameter) const;
-	void computeIndex();
-	void computeAngles();
-	void setVectorSize(int aVectorSize);
-	void setOptimMode(std::string anOptim);
-	void computeBasicOptim();
-	void computeReOptim();
-	void computeInPhaseOptim();
+	void	computeMicrophones();
+	void	computeIndex();
 	
-	void computePseudoInverse();
-	void setSpkrsAngles(double* someSpkrsAngles, int size);
-
-	~ambisonicDecode();
+	void	setOptimMode(std::string anOptim);
+	void	computeBasicOptim();
+	void	computeReOptim();
+	void	computeInPhaseOptim();
+	
+	void	setVectorSize(int aVectorSize);
+	~ambisonicProjector();
 	
 	/* Perform */
 	template<typename Type> void process(Type** aInputs, Type** aOutputs)
@@ -78,15 +75,13 @@ public:
 			for(int j = 0; j < m_number_of_harmonics; j++)
 				gsl_vector_set(m_input_vector, j, aInputs[j][i] * m_optimVector[j]);
 			
-			gsl_blas_dgemv(CblasNoTrans,1.0, m_decoder_matrix, m_input_vector, 0.0, m_output_vector);
+			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
 			
-			for(int j = 0; j < m_number_of_outputs; j++)
+			for(int j = 0; j < m_number_of_harmonics; j++)
 				aOutputs[j][i] = gsl_vector_get(m_output_vector, j);			
 		}
-	}
+	}	
 };
-
-
 
 #endif
 

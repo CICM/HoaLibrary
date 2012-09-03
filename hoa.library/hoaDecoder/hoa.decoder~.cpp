@@ -28,11 +28,11 @@ extern "C"
 
 typedef struct _HoaDecode 
 {
-	t_pxobject					f_ob;			
-	ambisonicDecode				*f_ambisonicDecoder;
+	t_pxobject				f_ob;			
+	ambisonicDecode			*f_ambisonicDecoder;
 
-	double						*f_insig;
-	double						*f_outsig;
+	int						f_ninput;
+	int						f_noutput;
 
 } t_HoaDecode;
 
@@ -81,7 +81,7 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv+1) == A_LONG)
 			outputs	= atom_getlong(argv+1);
 		
-		x->f_ambisonicDecoder	= new ambisonicDecode(order, sys_getsr(), sys_getblksize(), outputs);
+		x->f_ambisonicDecoder	= new ambisonicDecode(order, outputs, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambisonicDecoder->getParameters("numberOfInputs"));
 		for (int i = 0; i < x->f_ambisonicDecoder->getParameters("numberOfOutputs"); i++) 
@@ -92,23 +92,12 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaDecode_dsp64(t_HoaDecode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_insig = (double *)getbytes(x->f_ambisonicDecoder->getParameters("numberOfInputs") * sizeof(double));
-	x->f_outsig = (double *)getbytes(x->f_ambisonicDecoder->getParameters("numberOfOutputs") * sizeof(double));
 	object_method(dsp64, gensym("dsp_add64"), x, HoaDecode_perform64, 0, NULL);
 }
 
 void HoaDecode_perform64(t_HoaDecode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	for (int i = 0; i < sampleframes; i++) 
-	{
-		for (int j = 0; j < numins; j++)
-			x->f_insig[j] = ins[j][i];
-		
-		x->f_ambisonicDecoder->process(x->f_insig);
-		
-		for (int j = 0; j < x->f_ambisonicDecoder->getParameters("numberOfOutputs"); j++) 
-			outs[j][i] = x->f_outsig[j];
-	}
+	x->f_ambisonicDecoder->process(ins, outs);
 }
 
 void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count)
@@ -117,8 +106,8 @@ void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 
-	x->f_insig = (double *)getbytes(x->f_ambisonicDecoder->getParameters("numberOfInputs") * sizeof(double));
-	x->f_outsig = (double *)getbytes(x->f_ambisonicDecoder->getParameters("numberOfOutputs") * sizeof(double));
+	x->f_ninput = x->f_ambisonicDecoder->getParameters("numberOfInputs");
+	x->f_noutput = x->f_ambisonicDecoder->getParameters("numberOfOutputs");
 	pointer_count = x->f_ambisonicDecoder->getParameters("numberOfInputs") + x->f_ambisonicDecoder->getParameters("numberOfOutputs") + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
@@ -138,22 +127,11 @@ void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count)
 t_int *HoaDecode_perform(t_int *w)
 {
 	t_HoaDecode *x			= (t_HoaDecode *)(w[1]);	
-	int			n			= (int)(w[2]);
-	t_float		**signals	= (t_float **)w+3;
+	t_float		**ins	= (t_float **)w+3;
+	t_float		**outs	= (t_float **)w+3+x->f_ninput;
 	
-	for (int i = 0; i < n; i++) 
-	{
-		
-		for (int j = 0; j < x->f_ambisonicDecoder->getParameters("numberOfInputs"); j++)
-			x->f_insig[j] = signals[j][i];
-		
-		x->f_outsig = x->f_ambisonicDecoder->process(x->f_insig);
-		
-		for (int j = 0; j < x->f_ambisonicDecoder->getParameters("numberOfOutputs"); j++) 
-			signals[j+x->f_ambisonicDecoder->getParameters("numberOfInputs")][i] = x->f_outsig[j];
-	}
-	
-	return (w + x->f_ambisonicDecoder->getParameters("numberOfOutputs") + x->f_ambisonicDecoder->getParameters("numberOfInputs") + 3);
+	x->f_ambisonicDecoder->process(ins, outs);
+	return (w + x->f_ninput + x->f_noutput + 3);
 }
 
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
@@ -161,9 +139,8 @@ void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 	if (m == ASSIST_INLET)
 	{
 		long harmonicIndex = 0;
-		if (a == 0)
-			harmonicIndex = 0;
-		else 
+	
+		if (a != 0) 
 		{
 			harmonicIndex = floor((a - 1) / 2) + 1;
 			if (a % 2 == 1) 

@@ -1,4 +1,5 @@
 /*
+ *
  * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
@@ -16,40 +17,31 @@
  *
  */
 
+#include "ambisonicProjector.h"
 
-#include "ambisonicDecode.h"
-
-ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorSize, std::string anOptimMode)
+ambisonicProjector::ambisonicProjector(int anOrder, int aNumberOfMicrophones, int aVectorSize, std::string anOptimMode)
 {
 	m_order					= anOrder;
 	m_number_of_harmonics	= m_order * 2 + 1;
+	m_number_of_outputs		= aNumberOfMicrophones;
 	m_number_of_inputs		= m_number_of_harmonics;
-	m_number_of_outputs		= aNumberOfChannels;
 	
-	if(m_number_of_outputs < m_number_of_harmonics)
-		m_number_of_outputs = m_number_of_harmonics;
-	
-	m_input_vector		= gsl_vector_alloc (m_number_of_harmonics);
-	m_output_vector		= gsl_vector_alloc (m_number_of_outputs);
-	m_optimVector		= new double[m_number_of_harmonics];
-	
-	setVectorSize(aVectorSize);
+	m_output_vector	= gsl_vector_alloc (m_number_of_outputs);
+	m_input_vector	= gsl_vector_alloc (m_number_of_harmonics);
+	m_optimVector   = new double[m_number_of_harmonics];
+
 	computeIndex();
-	computeAngles();
+	computeMicrophones();
+	setVectorSize(aVectorSize);
 	setOptimMode(anOptimMode);
-	computePseudoInverse();
 }
 
-int	ambisonicDecode::getParameters(std::string aParameter) const
+int	ambisonicProjector::getParameters(std::string aParameter) const
 {
 	int value = 0;
 	
 	if (aParameter == "order") 
 		value = m_order;
-	else if (aParameter == "samplingRate") 
-		value =  m_sampling_rate;
-	else if (aParameter == "vectorSize") 
-		value =  m_vector_size;
 	else if (aParameter == "numberOfInputs") 
 		value =  m_number_of_inputs;
 	else if (aParameter == "numberOfOutputs") 
@@ -58,7 +50,7 @@ int	ambisonicDecode::getParameters(std::string aParameter) const
 	return value;
 }
 
-void ambisonicDecode::computeIndex()
+void ambisonicProjector::computeIndex()
 {
 	m_index_of_harmonics	= new int[m_number_of_harmonics ];
 	m_index_of_harmonics[0] = 0;
@@ -70,16 +62,31 @@ void ambisonicDecode::computeIndex()
 	}
 }
 
-void ambisonicDecode::computeAngles()
+void ambisonicProjector::computeMicrophones()
 {
-	m_speakers_angles		= new double[m_number_of_outputs];
-	for(int i = 0; i < m_number_of_harmonics; i++)
+	m_microphones_matrix = gsl_matrix_alloc(m_number_of_harmonics, m_number_of_outputs); 
+	double aTheta;
+	int aIndex;
+	
+	for (int i = 0; i < m_number_of_outputs; i++)
 	{
-		m_speakers_angles[i] = (2. * PI / (double)m_number_of_harmonics) * (double)i;
+		aTheta = ((double)i / (double)m_number_of_outputs) * PI * 2.;
+		for (int j = 0; j < m_number_of_harmonics; j++) 
+		{
+			aIndex = (int)((((double)j - 1.) / 2.) + 1.);
+			if (j % 2 == 1)
+				aIndex = -aIndex;
+			
+			if (aIndex < 0)
+				gsl_matrix_set(m_microphones_matrix, j, i,sin((double)abs(aIndex) * aTheta));
+			else 
+				gsl_matrix_set(m_microphones_matrix, j, i,cos((double)abs(aIndex) * aTheta));
+		}
 	}
 }
 
-void ambisonicDecode::setOptimMode(std::string anOptim)
+
+void ambisonicProjector::setOptimMode(std::string anOptim)
 {
 	if(anOptim != m_optimMode)
 	{
@@ -92,14 +99,14 @@ void ambisonicDecode::setOptimMode(std::string anOptim)
 	}
 }
 
-void ambisonicDecode::computeBasicOptim()
+void ambisonicProjector::computeBasicOptim()
 {
 	m_optimMode = "basic"; 
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 		m_optimVector[i] = 1.;
 }
 
-void ambisonicDecode::computeInPhaseOptim()
+void ambisonicProjector::computeInPhaseOptim()
 {
 	m_optimMode = "inPhase"; 
 	for (int i = 0; i < m_number_of_harmonics; i++) 
@@ -111,7 +118,7 @@ void ambisonicDecode::computeInPhaseOptim()
 	}
 }
 
-void ambisonicDecode::computeReOptim()
+void ambisonicProjector::computeReOptim()
 {
 	m_optimMode = "maxRe";
 	for (int i = 0; i < m_number_of_harmonics; i++) 
@@ -124,45 +131,18 @@ void ambisonicDecode::computeReOptim()
 	
 }
 
-
-void ambisonicDecode::computePseudoInverse()
-{
-	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_number_of_harmonics , m_number_of_outputs); 
-	
-	for (int i = 0; i < m_number_of_outputs; i++)
-	{
-		for (int j=0; j < m_number_of_harmonics ; j++) 
-		{
-			if (m_index_of_harmonics[j] < 0)
-				gsl_matrix_set(reencod_Mat,j,i,sin(abs(m_index_of_harmonics[j]) * m_speakers_angles[i]));
-			else 
-				gsl_matrix_set(reencod_Mat,j,i,cos(abs(m_index_of_harmonics[j]) * m_speakers_angles[i]));
-		}
-	}
-	m_decoder_matrix = GenericSvdPseudoInverse(reencod_Mat);
-	gsl_matrix_free(reencod_Mat);
-}
-
-void ambisonicDecode::setSpkrsAngles(double* someSpkrsAngles, int size)
-{
-	if (size > m_number_of_outputs) 
-		size = m_number_of_outputs;
-	
-	memcpy(m_speakers_angles, someSpkrsAngles, sizeof(double)*size);
-	computePseudoInverse();
-}
-
-void ambisonicDecode::setVectorSize(int aVectorSize)
+void ambisonicProjector::setVectorSize(int aVectorSize)
 {
 	m_vector_size = aVectorSize;
 }
 
-ambisonicDecode::~ambisonicDecode()
+ambisonicProjector::~ambisonicProjector()
 {
-	gsl_matrix_free(m_decoder_matrix);
-	delete m_output_vector;
+	gsl_matrix_free(m_microphones_matrix);
+	gsl_vector_free(m_input_vector);
+	gsl_vector_free(m_output_vector);
+	delete m_optimVector;
 	delete m_index_of_harmonics;
-	delete m_speakers_angles;
 	delete m_optimVector;
 }
 

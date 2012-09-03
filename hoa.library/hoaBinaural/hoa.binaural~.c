@@ -23,12 +23,12 @@ extern "C" {
 #include "z_dsp.h"
 }
 
-#include <AmbisonicBinaural.h>
+#include <ambisonicBinaural.h>
 
 typedef struct _HoaBinaural 
 {
 	t_pxobject			f_ob;			
-	AmbisonicBinaural	*f_ambiBinaural;
+	ambisonicBinaural	*f_ambiBinaural;
 
 } t_HoaBinaural;
 
@@ -75,7 +75,7 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 		if(argv[0].a_type == A_LONG)
 			order = atom_getlong(argv);
 		
-		x->f_ambiBinaural = new AmbisonicBinaural(order, sys_getsr(), sys_getblksize());
+		x->f_ambiBinaural = new ambisonicBinaural(order, sys_getsr(), sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiBinaural->getParameters("numberOfInputs"));
 		for (int i = 0; i < x->f_ambiBinaural->getParameters("numberOfOutputs"); i++) 

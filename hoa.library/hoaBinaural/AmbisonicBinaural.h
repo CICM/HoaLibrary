@@ -40,12 +40,12 @@ extern "C" {
 
 #define M_2PI 2*M_PI
 
-class AmbisonicBinaural 
+class ambisonicBinaural 
 {
 	
 private:
 	int			m_order;
-	long		m_harmonics;
+	long		m_number_of_harmonics;
 	long		m_response_size;
 	long		m_vector_size;
 	long		m_sampling_rate;
@@ -55,7 +55,7 @@ private:
 	long		m_number_of_outputs;
 	
 	std::string m_optimMode;
-	int*		m_harmonicsIndex;
+	int*		m_index_of_harmonics;
 	double*		m_optimVector;
 	double*		m_angleListInDegree;
 	double**	m_impulsesL;
@@ -87,7 +87,7 @@ private:
 	
 public:
 	
-	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode = "basic" );
+	ambisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode = "basic" );
 	int		getParameters(std::string aParameter) const;
 	
 	void	setOptimMode(std::string anOptim);
@@ -103,13 +103,13 @@ public:
 	std::string intToString(int aValue);
 	
 	void free();
-	~AmbisonicBinaural();
+	~ambisonicBinaural();
 	
 	/* Perform Method */
 	template<typename Type> void process(Type** aInputs, Type** aOutputs)
 	{	
 		/* Record Inputs vectors In The Matrix */
-		for (int i = 0; i < m_harmonics; i++)
+		for (int i = 0; i < m_number_of_harmonics; i++)
 		{
 			for (int j = 0; j < m_vector_size; j++)
 			{
