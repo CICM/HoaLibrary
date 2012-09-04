@@ -70,7 +70,19 @@ public:
 
 	~ambisonicDecode();
 	
-	/* Perform */
+	/* Perform sample by sample */
+	template<typename Type> void process(Type* aInputs, Type* aOutputs)
+	{	
+		for(int j = 0; j < m_number_of_harmonics; j++)
+			gsl_vector_set(m_input_vector, j, aInputs[j] * m_optimVector[j]);
+		
+		gsl_blas_dgemv(CblasNoTrans,1.0, m_decoder_matrix, m_input_vector, 0.0, m_output_vector);
+		
+		for(int j = 0; j < m_number_of_outputs; j++)
+			aOutputs[j] = gsl_vector_get(m_output_vector, j);
+	}
+	
+	/* Perform block sample */
 	template<typename Type> void process(Type** aInputs, Type** aOutputs)
 	{	
 		for(int i = 0; i < m_vector_size; i++)

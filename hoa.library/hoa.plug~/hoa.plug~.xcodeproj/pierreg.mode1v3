@@ -326,7 +326,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0E3C798415D8FCEB00FD84F6</string>
+										<string>0ED93BC515F5407400ED8590</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
@@ -375,7 +375,7 @@
 											<string>0ECCDAEE15D66152001766CF</string>
 											<string>0ECCDAEF15D66152001766CF</string>
 											<string>0ECCDB6615D700E3001766CF</string>
-											<string>0ECCDB6815D700E3001766CF</string>
+											<string>0E3C798415D8FCEB00FD84F6</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -387,14 +387,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1232, 368}}</string>
+								<string>{{0, 0}, {1232, 359}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 160 1440 717 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>368pt</string>
+							<string>359pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -407,14 +407,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 373}, {1232, 303}}</string>
+								<string>{{0, 364}, {1232, 312}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 160 1440 717 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>303pt</string>
+							<string>312pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -433,9 +433,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0E3C798515D8FCEB00FD84F6</string>
+				<string>0ED93BC615F5407400ED8590</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0E3C798615D8FCEB00FD84F6</string>
+				<string>0ED93BC715F5407400ED8590</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -615,6 +615,8 @@
 							<string>352pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -654,7 +656,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0E91E3DD15BEAA7300452428</string>
-				<string>0E3C798715D8FCEB00FD84F6</string>
+				<string>0ED93BC415F5407200ED8590</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

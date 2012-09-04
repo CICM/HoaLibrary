@@ -30,6 +30,9 @@ typedef struct _HoaWeight
 {
 	t_pxobject					f_ob;			
 	ambisonicWeight				*f_ambisonicWeight;
+	
+	int						f_ninput;
+	int						f_noutput;
 } t_HoaWeight;
 
 void *HoaWeight_new(t_symbol *s, long argc, t_atom *argv);
@@ -73,7 +76,7 @@ void *HoaWeight_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		
-		x->f_ambisonicWeight	= new ambisonicWeight(order, sys_getsr(), sys_getblksize());
+		x->f_ambisonicWeight	= new ambisonicWeight(order, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambisonicWeight->getParameters("numberOfInputs"));
 		for (int i = 0; i < x->f_ambisonicWeight->getParameters("numberOfOutputs"); i++) 
@@ -98,6 +101,8 @@ void HoaWeight_dsp(t_HoaWeight *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
+	x->f_ninput = x->f_ambisonicWeight->getParameters("numberOfInputs");
+	x->f_noutput = x->f_ambisonicWeight->getParameters("numberOfOutputs");
 	pointer_count = x->f_ambisonicWeight->getParameters("numberOfInputs") + x->f_ambisonicWeight->getParameters("numberOfOutputs") + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
@@ -118,11 +123,10 @@ t_int *HoaWeight_perform(t_int *w)
 {
 	t_HoaWeight *x			= (t_HoaWeight *)(w[1]);	
 	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_ambisonicWeight->getParameters("numberOfInputs");
-
-	x->f_ambisonicWeight->process(ins, outs);
+	t_float		**outs		= (t_float **)w+3+x->f_ninput;
 	
-	return (w + x->f_ambisonicWeight->getParameters("numberOfInputs") + x->f_ambisonicWeight->getParameters("numberOfOutputs") + 3);
+	x->f_ambisonicWeight->process(ins, outs);
+	return (w + x->f_ninput + x->f_noutput + 3);
 }
 
 void HoaWeight_assist(t_HoaWeight *x, void *b, long m, long a, char *s)

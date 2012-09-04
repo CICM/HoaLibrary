@@ -33,9 +33,6 @@ int main(void)
 	patcher = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
 	dblclickpatcher = class_method(patcher, gensym("dblclick"));
 	
-	post("hoa.plug~ by Pierre Guillot & Julien Colafransceco",0);
-	post("Copyright (C) 2012, Universite Paris 8");
-	
 }
 
 void *plug_new(t_symbol *s, int argc, t_atom *argv)

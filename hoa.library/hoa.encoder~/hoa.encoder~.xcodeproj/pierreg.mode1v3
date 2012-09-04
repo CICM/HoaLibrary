@@ -308,7 +308,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>hoa.encoder~.c</string>
+								<string>AmbisonicEncode.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -316,17 +316,17 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>hoa.encoder~.c</string>
+										<string>AmbisonicEncode.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0ECB500115F4BF4B0008737D</string>
+										<string>0E626F1D15F613BB00B3CB17</string>
 										<key>history</key>
 										<array>
 											<string>0E9765DA15C6B703002420D2</string>
-											<string>0EEBF7EF15DA4D9000613E47</string>
-											<string>0ECB4FFF15F4BF4B0008737D</string>
-											<string>0ECB500015F4BF4B0008737D</string>
+											<string>0E626F1B15F613BB00B3CB17</string>
+											<string>0E626F1C15F613BB00B3CB17</string>
+											<string>0E626EF915F6131F00B3CB17</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -338,14 +338,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1232, 383}}</string>
+								<string>{{0, 0}, {1232, 577}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 148 1440 730 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>383pt</string>
+							<string>577pt</string>
 						</dict>
 						<dict>
 							<key>BecomeActive</key>
@@ -360,14 +360,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 388}, {1232, 301}}</string>
+								<string>{{0, 582}, {1232, 107}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 148 1440 730 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>301pt</string>
+							<string>107pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -386,9 +386,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>0ECB500215F4BF4B0008737D</string>
+				<string>0E626F1715F6133900B3CB17</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>0ECB500315F4BF4B0008737D</string>
+				<string>0E626F1815F6133900B3CB17</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -568,6 +568,8 @@
 							<string>241pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -607,7 +609,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>0E91E3DD15BEAA7300452428</string>
-				<string>0ECB500415F4BF4B0008737D</string>
+				<string>0E626F0F15F6133100B3CB17</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

@@ -40,7 +40,6 @@ private:
 	int			m_number_of_harmonics;
 	int			m_number_of_outputs;
 	int			m_number_of_inputs;
-	int			m_sampling_rate;
 	int			m_vector_size;
 	
 	int*		m_index_of_harmonics;
@@ -56,7 +55,7 @@ private:
 	
 	
 public:
-	ambisonicWeight(int anOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode = "basic" );
+	ambisonicWeight(int anOrder, int aVectorSize = 0, std::string anOptimMode = "basic" );
 	int		getParameters(std::string aParameter) const;
 	void	computeIndex();
 	void	computeAngles();

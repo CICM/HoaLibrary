@@ -18,23 +18,22 @@
 
 #include "ambisonicWeight.h"
 
-ambisonicWeight::ambisonicWeight(int anOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode)
+ambisonicWeight::ambisonicWeight(int anOrder, int aVectorSize, std::string anOptimMode)
 {
 	m_order					= anOrder;
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_outputs		= m_number_of_harmonics;
 	m_number_of_inputs		= m_number_of_harmonics;
-	m_sampling_rate			= aSamplingRate;
 	m_vector_size			= aVectorSize;
 	
 	m_speakers_angles		= new double[m_order];
 	m_index_of_harmonics	= new int[m_number_of_harmonics];
 	m_optimVector			=  new double[m_number_of_harmonics];
 
-	m_input_vector				= gsl_vector_alloc(m_number_of_harmonics * m_number_of_harmonics);
-	m_input_vector_view			= new gsl_vector_view[m_number_of_harmonics];
-	m_output_vector				= gsl_vector_alloc(m_number_of_harmonics * m_number_of_harmonics);
-	m_output_vector_view		= new gsl_vector_view[m_number_of_harmonics];
+	m_input_vector			= gsl_vector_alloc(m_number_of_harmonics * m_number_of_harmonics);
+	m_input_vector_view		= new gsl_vector_view[m_number_of_harmonics];
+	m_output_vector			= gsl_vector_alloc(m_number_of_harmonics * m_number_of_harmonics);
+	m_output_vector_view	= new gsl_vector_view[m_number_of_harmonics];
 	
 	gsl_vector_set_zero(m_input_vector);
 	gsl_vector_set_zero(m_output_vector);
@@ -57,8 +56,6 @@ int	ambisonicWeight::getParameters(std::string aParameter) const
 	
 	if (aParameter == "order") 
 		value = m_order;
-	else if (aParameter == "samplingRate") 
-		value =  m_sampling_rate;
 	else if (aParameter == "vectorSize") 
 		value =  m_vector_size;
 	else if (aParameter == "numberOfInputs") 
@@ -137,8 +134,8 @@ void ambisonicWeight::computePseudoInverse()
 {
 	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_number_of_harmonics, m_number_of_harmonics); 
 	//gsl_matrix* decode_Mat;
-	//m_decoder_matrix		= gsl_matrix_alloc(m_number_of_harmonics * m_number_of_harmonics, m_number_of_harmonics);
-	
+//	m_decoder_matrix		= gsl_matrix_alloc(m_number_of_harmonics * m_number_of_harmonics, m_number_of_harmonics);
+//	
 	for (int i = 0; i < m_number_of_harmonics; i++)
 	{
 		for (int j = 0; j < m_number_of_harmonics; j++) 
@@ -151,19 +148,18 @@ void ambisonicWeight::computePseudoInverse()
 	}
 	
 	m_decoder_matrix = GenericSvdPseudoInverse(reencod_Mat);
-	/*
-	for (int i = 0; i < m_number_of_harmonics; i++)
-	{
-		for (int j = 0; j < m_number_of_harmonics; j++) 
-		{
-			for (int k = 0; k < m_number_of_harmonics; k++) 
-			{
-				gsl_matrix_set(m_decoder_matrix, j + i * m_number_of_harmonics, k , gsl_matrix_get(decode_Mat, j, k));
-			}
-		}
-	}
-	gsl_matrix_free(decode_Mat);
-	 */
+	
+	//for (int i = 0; i < m_number_of_harmonics; i++)
+//	{
+//		for (int j = 0; j < m_number_of_harmonics; j++) 
+//		{
+//			for (int k = 0; k < m_number_of_harmonics; k++) 
+//			{
+//				gsl_matrix_set(m_decoder_matrix, j + i * m_number_of_harmonics, k , gsl_matrix_get(decode_Mat, j, k));
+//			}
+//		}
+//	}
+//	gsl_matrix_free(decode_Mat);
 	gsl_matrix_free(reencod_Mat);
 }
 
