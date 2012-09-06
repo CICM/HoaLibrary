@@ -135,6 +135,7 @@ t_int *HoaDecode_perform(t_int *w)
 	t_float		**outs	= (t_float **)w+3+x->f_ninput;
 	
 	x->f_ambisonicDecoder->process(ins, outs);
+	
 	return (w + x->f_ninput + x->f_noutput + 3);
 }
 

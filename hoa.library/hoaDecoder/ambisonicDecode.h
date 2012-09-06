@@ -93,7 +93,7 @@ public:
 			gsl_blas_dgemv(CblasNoTrans,1.0, m_decoder_matrix, m_input_vector, 0.0, m_output_vector);
 			
 			for(int j = 0; j < m_number_of_outputs; j++)
-				aOutputs[j][i] = gsl_vector_get(m_output_vector, j);			
+				aOutputs[j][i] = gsl_vector_get(m_output_vector, j);
 		}
 	}
 };

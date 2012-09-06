@@ -173,7 +173,7 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 		sigvec[1] = (t_int *)sp[0]->s_n;
 		for(i = 2; i < pointer_count; i++)
 			sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-		if(count[1])
+		if(count[x->f_inputNumber-1])
 			dsp_addv(HoaEncode_performVec, pointer_count, (void **)sigvec);
 		else
 			dsp_addv(HoaEncode_performOffsetVec, pointer_count, (void **)sigvec);
@@ -192,7 +192,7 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 		sigvec[1] = (t_int *)sp[0]->s_n;
 		for(i = 2; i < pointer_count; i++)
 			sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-		if(count[1])
+		if(count[x->f_inputNumber - 1])
 			dsp_addv(HoaEncode_perform, pointer_count, (void **)sigvec);
 		else
 			dsp_addv(HoaEncode_performOffset, pointer_count, (void **)sigvec);
@@ -240,7 +240,7 @@ t_int *HoaEncode_performOffsetVec(t_int *w)
 	t_HoaEncode *x			= (t_HoaEncode *)(w[1]);
 	t_float		**ins		= (t_float **)w+3;
 	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
+
 	x->f_ambiEncoder->process(ins, outs);
 	
 	return (w + x->f_outputNumber + x->f_inputNumber + 3);

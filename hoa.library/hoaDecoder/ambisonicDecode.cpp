@@ -127,11 +127,11 @@ void ambisonicDecode::computeReOptim()
 
 void ambisonicDecode::computePseudoInverse()
 {
-	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_number_of_harmonics , m_number_of_outputs); 
+	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_number_of_harmonics, m_number_of_outputs); 
 	
 	for (int i = 0; i < m_number_of_outputs; i++)
 	{
-		for (int j=0; j < m_number_of_harmonics ; j++) 
+		for (int j = 0; j < m_number_of_harmonics ; j++) 
 		{
 			if (m_index_of_harmonics[j] < 0)
 				gsl_matrix_set(reencod_Mat,j,i,sin(abs(m_index_of_harmonics[j]) * m_speakers_angles[i]));

@@ -30,7 +30,7 @@
 #include <vector>
 
 #define M_2PI 2*M_PI
-#define NUMBEROFCIRCLEPOINTS 360000
+#define NUMBEROFCIRCLEPOINTS 100000
 
 class AmbisonicEncode 
 {
@@ -59,30 +59,30 @@ public:
 	~AmbisonicEncode();
 	
 	/* Perform sample by sample - Basic Mode */
-	//template<typename Type> void process(Type anInput, Type* anOutputs, Type aTheta)
-//	{
-//		computeCoefs(aTheta);
-//		return process(anInput, anOutputs);
-//	}
-//	
-//	template<typename Type> void process(Type anInput, Type* anOutputs)
-//	{
-//		for (int i = 0; i < m_number_of_harmonics; i++) 
-//			anOutputs[i] = m_ambiCoeffs[i] * anInput;
-//	}
-//	
-//	/* Perform sample by sample - Split Mode */
-//	template<typename Type> void process(Type* anInputs, Type* anOutputs, Type aTheta)
-//	{
-//		computeCoefs(aTheta);	
-//		return process(anInputs, anOutputs);
-//	}
-//	
-//	template<typename Type> void process(Type* anInputs, Type* anOutputs)
-//	{
-//		for (int i = 0; i< m_number_of_harmonics; i++) 
-//			anOutputs[i] = m_ambiCoeffs[i] * anInputs[m_index_of_harmonics[i]];
-//	}
+	template<typename Type> void process(Type anInput, Type* anOutputs, Type aTheta)
+	{
+		computeCoefs(aTheta);
+		return process(anInput, anOutputs);
+	}
+	
+	template<typename Type> void process(Type anInput, Type* anOutputs)
+	{
+		for (int i = 0; i < m_number_of_harmonics; i++) 
+			anOutputs[i] = m_ambiCoeffs[i] * anInput;
+	}
+	
+	/* Perform sample by sample - Split Mode */
+	template<typename Type> void process(Type* anInputs, Type* anOutputs, Type aTheta)
+	{
+		computeCoefs(aTheta);	
+		return process(anInputs, anOutputs);
+	}
+	
+	template<typename Type> void process(Type* anInputs, Type* anOutputs)
+	{
+		for (int i = 0; i< m_number_of_harmonics; i++) 
+			anOutputs[i] = m_ambiCoeffs[i] * anInputs[m_index_of_harmonics[i]];
+	}
 
 	/* Perform sample block - Basic Mode */
 	template<typename Type> void process(Type* anInput, Type** anOutputs, Type* aTheta)
@@ -90,8 +90,8 @@ public:
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			computeCoefs(aTheta[i]);
-			for (int j = 0; j < m_number_of_harmonics; j++) 
-				anOutputs[j][i] = m_ambiCoeffs[j] * anInput[i];
+			for (int j = 0; j < m_number_of_harmonics; j++)
+				anOutputs[j][i] = anInput[i] * m_ambiCoeffs[j];
 		}
 	}
 	
@@ -100,7 +100,7 @@ public:
 		for(int i  = 0; i < m_vector_size; i++)
 		{
 			for (int j = 0; j < m_number_of_harmonics; j++) 
-				anOutputs[j][i] = m_ambiCoeffs[j] * anInput[i];
+				anOutputs[j][i] = anInput[i] * m_ambiCoeffs[j];
 		}
 	}
 	
@@ -111,7 +111,7 @@ public:
 		{
 			computeCoefs(aTheta[i]);
 			for (int j = 0; j < m_number_of_harmonics; j++) 
-				anOutputs[j][i] = m_ambiCoeffs[j] * anInputs[m_index_of_harmonics[j]][i];
+				anOutputs[j][i] = anInputs[abs(m_index_of_harmonics[j])][i] * m_ambiCoeffs[j];
 		}
 	}
 	
@@ -120,7 +120,7 @@ public:
 		for(int i  = 0; i < m_vector_size; i++)
 		{
 			for (int j = 0; j < m_number_of_harmonics; j++) 
-				anOutputs[j][i] = m_ambiCoeffs[j] * anInputs[m_index_of_harmonics[j]][i];
+				anOutputs[j][i] = anInputs[abs(m_index_of_harmonics[j])][i] * m_ambiCoeffs[j];
 		}
 	}
 	

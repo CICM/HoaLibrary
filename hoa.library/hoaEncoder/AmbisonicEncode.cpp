@@ -38,8 +38,8 @@ AmbisonicEncode::AmbisonicEncode(int anOrder, std::string aMode, int aVectorSize
 	
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++) 
 	{
-		m_cosLookUp[i] = cos((double)i * 2. * M_PI / (double)NUMBEROFCIRCLEPOINTS);
-		m_sinLookUp[i] = sin((double)i * 2. * M_PI / (double)NUMBEROFCIRCLEPOINTS);
+		m_cosLookUp[i] = cos((double)i * M_2PI / (double)NUMBEROFCIRCLEPOINTS);
+		m_sinLookUp[i] = sin((double)i * M_2PI / (double)NUMBEROFCIRCLEPOINTS);
 	}
 	computeCoefs(0.);
 	setVectorSize(aVectorSize);
@@ -82,10 +82,9 @@ void AmbisonicEncode::computeCoefs(double aTheta)
 	int  tmpIndex = 2;
 	long tmpAngle;
 	if (aTheta < 0) 
-	{
-		aTheta = aTheta +  ( -floor(aTheta/M_2PI)) * M_2PI;
-	}
-	double angleFactor = aTheta * NUMBEROFCIRCLEPOINTS / M_2PI;
+		aTheta = aTheta + ( -floor(aTheta/M_2PI)) * M_2PI;
+
+	double angleFactor = aTheta*NUMBEROFCIRCLEPOINTS/(M_2PI);
 	
 	for (int i = 1; i <= m_order; i++) 
 	{
@@ -95,6 +94,7 @@ void AmbisonicEncode::computeCoefs(double aTheta)
 		
 		tmpIndex += 2;
 	}
+	
 }
 
 void AmbisonicEncode::setVectorSize(int aVectorSize)
