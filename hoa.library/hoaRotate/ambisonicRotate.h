@@ -66,8 +66,8 @@ public:
 		anOutput[0] = anInput[0];
 		for (int i = 1; i < m_order; i++)
 		{
-			anOutput[2*i]	= m_harmonicCos[i] * anInput[2*i] - m_harmonicSin[i] * anInput[2*i-1];
-			anOutput[2*i-1] = m_harmonicCos[i] * anInput[2*i] - m_harmonicSin[i] * anInput[2*i-1];
+			anOutput[2*i]	= m_harmonicCos[i-1] * anInput[2*i] - m_harmonicSin[i-1] * anInput[2*i-1];
+			anOutput[2*i-1]	= m_harmonicSin[i-1] * anInput[2*i] + m_harmonicCos[i-1] * anInput[2*i-1];
 		}
 	}
 	
@@ -80,8 +80,8 @@ public:
 			anOutput[0][j] = anInput[0][j];
 			for (int i = 1; i <= m_order; i++)
 			{
-				anOutput[2*i][j]	= m_harmonicCos[j] * anInput[2*i][j] - m_harmonicSin[i] * anInput[2*i-1][j];
-				anOutput[2*i-1][j]	= m_harmonicSin[j] * anInput[2*i][j] + m_harmonicCos[i] * anInput[2*i-1][j];
+				anOutput[2*i][j]	= m_harmonicCos[i-1] * anInput[2*i][j] - m_harmonicSin[i-1] * anInput[2*i-1][j];
+				anOutput[2*i-1][j]	= m_harmonicSin[i-1] * anInput[2*i][j] + m_harmonicCos[i-1] * anInput[2*i-1][j];
 			}
 		}
 	}
@@ -93,8 +93,8 @@ public:
 			anOutput[0][j] = anInput[0][j];
 			for (int i = 1; i <= m_order; i++)
 			{
-				anOutput[2*i][j]	= m_harmonicCos[j] * anInput[2*i][j] - m_harmonicSin[i] * anInput[2*i-1][j];
-				anOutput[2*i-1][j]	= m_harmonicSin[j] * anInput[2*i][j] + m_harmonicCos[i] * anInput[2*i-1][j];
+				anOutput[2*i][j]	= m_harmonicCos[i-1] * anInput[2*i][j] - m_harmonicSin[i-1] * anInput[2*i-1][j];
+				anOutput[2*i-1][j]	= m_harmonicSin[i-1] * anInput[2*i][j] + m_harmonicCos[i-1] * anInput[2*i-1][j];
 			}
 		}
 	}
