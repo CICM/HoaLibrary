@@ -114,6 +114,7 @@ void HoaEncode_int(t_HoaEncode *x, long n)
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiEncoder->setVectorSize(maxvectorsize);
+	x->f_inputNumber = x->f_ambiEncoder->getParameters("numberOfInputs");
 	if(x->f_ambiEncoder->getParameters("mode"))
 	{
 		if(count[x->f_inputNumber - 1])
