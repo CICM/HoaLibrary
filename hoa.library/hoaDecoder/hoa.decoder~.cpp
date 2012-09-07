@@ -190,6 +190,6 @@ void HoaDecode_optim(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
 void HoaDecode_free(t_HoaDecode *x)
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_ambisonicDecoder);
+	delete(x->f_ambisonicDecoder);
 }
 

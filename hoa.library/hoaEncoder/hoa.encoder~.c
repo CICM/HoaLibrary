@@ -281,6 +281,6 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 void HoaEncode_free(t_HoaEncode *x) 
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_ambiEncoder);
+	delete(x->f_ambiEncoder);
 }
 

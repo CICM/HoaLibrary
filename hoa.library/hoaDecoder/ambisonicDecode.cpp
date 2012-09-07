@@ -73,9 +73,9 @@ void ambisonicDecode::computeIndex()
 void ambisonicDecode::computeAngles()
 {
 	m_speakers_angles		= new double[m_number_of_outputs];
-	for(int i = 0; i < m_number_of_harmonics; i++)
+	for(int i = 0; i < m_number_of_outputs; i++)
 	{
-		m_speakers_angles[i] = (2. * PI / (double)m_number_of_harmonics) * (double)i;
+		m_speakers_angles[i] = (2. * PI / (double)m_number_of_outputs) * (double)i;
 	}
 }
 

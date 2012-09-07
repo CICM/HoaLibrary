@@ -30,7 +30,7 @@
 #include <vector>
 
 #define M_2PI 2*M_PI
-#define NUMBEROFCIRCLEPOINTS 100000
+#define NUMBEROFCIRCLEPOINTS 360000
 
 class AmbisonicEncode 
 {
