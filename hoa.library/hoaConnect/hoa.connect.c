@@ -212,7 +212,6 @@ void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void
 		else
 			x->f_jr.height = yPos;
 	}
-
 }
 
 int validPos(t_rect jr, t_rect f_jr, int patchX, int patchY)

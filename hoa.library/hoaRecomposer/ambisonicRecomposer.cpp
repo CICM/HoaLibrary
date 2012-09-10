@@ -76,10 +76,10 @@ void ambisonicRecomposer::computeIndex()
 
 void ambisonicRecomposer::computeAngles()
 {
-	m_speakers_angles		= new double[m_number_of_outputs];
-	for(int i = 0; i < m_number_of_outputs; i++)
+	m_speakers_angles		= new double[m_number_of_inputs];
+	for(int i = 0; i < m_number_of_inputs; i++)
 	{
-		m_speakers_angles[i] = (2. * PI / (double)m_number_of_outputs) * (double)i;
+		m_speakers_angles[i] = (2. * PI / (double)m_number_of_inputs) * (double)i;
 		if(m_speakers_angles[i] > PI)
 			m_speakers_angles[i] -= 2. * PI;
 	}
@@ -87,7 +87,7 @@ void ambisonicRecomposer::computeAngles()
 
 void ambisonicRecomposer::computeMicMatrix(gsl_matrix* resMatrix, double aFishFactor)
 {
-	for (int micIndex = 0; micIndex < m_number_of_outputs; micIndex++)
+	for (int micIndex = 0; micIndex < m_number_of_inputs; micIndex++)
 	{
 		gsl_matrix_set(resMatrix, micIndex, 0, 1);
 		for (int orderIndex = 1; orderIndex <= m_order; orderIndex++) 

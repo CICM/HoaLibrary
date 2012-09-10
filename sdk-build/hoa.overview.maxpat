@@ -29,27 +29,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"hidden" : 1,
-					"id" : "obj-33",
+					"id" : "obj-47",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 330.0, 555.0, 32.5, 18.0 ],
+					"patching_rect" : [ 0.0, 480.0, 32.5, 18.0 ],
 					"text" : "11"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"handoff" : "",
-					"hltcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"id" : "obj-38",
-					"maxclass" : "ubutton",
-					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 360.0, 525.0, 175.0, 16.0 ],
-					"varname" : "a9[2]"
 				}
 
 			}
@@ -58,12 +44,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"hidden" : 1,
-					"id" : "obj-30",
+					"id" : "obj-46",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 330.0, 510.0, 32.5, 18.0 ],
+					"patching_rect" : [ 0.0, 450.0, 32.5, 18.0 ],
 					"text" : "10"
 				}
 
@@ -71,14 +57,54 @@
 , 			{
 				"box" : 				{
 					"handoff" : "",
-					"hltcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"id" : "obj-31",
+					"id" : "obj-42",
 					"maxclass" : "ubutton",
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 360.0, 480.0, 175.0, 16.0 ],
-					"varname" : "a9[1]"
+					"patching_rect" : [ 30.0, 465.0, 175.0, 20.0 ],
+					"varname" : "a11"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"handoff" : "",
+					"id" : "obj-17",
+					"maxclass" : "ubutton",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "bang", "bang", "", "int" ],
+					"patching_rect" : [ 30.0, 435.0, 175.0, 20.0 ],
+					"varname" : "a10"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-32",
+					"maxclass" : "newobj",
+					"numinlets" : 10,
+					"numoutlets" : 9,
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+					"patching_rect" : [ 30.0, 465.0, 175.0, 20.0 ],
+					"text" : "hoa.recomposer~ 4 9"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-18",
+					"maxclass" : "newobj",
+					"numinlets" : 9,
+					"numoutlets" : 9,
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+					"patching_rect" : [ 30.0, 435.0, 175.0, 20.0 ],
+					"text" : "hoa.projector~ 4 9"
 				}
 
 			}
@@ -91,7 +117,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 390.0, 175.0, 20.0 ]
+					"patching_rect" : [ 30.0, 405.0, 175.0, 20.0 ]
 				}
 
 			}
@@ -115,12 +141,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-44",
-					"linecount" : 3,
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 285.0, 135.0, 266.0, 48.0 ],
-					"text" : "hoa.centralizer~ weights the harmonics signals depending to their order to restrain the soundfield on a part of the circle."
+					"patching_rect" : [ 285.0, 135.0, 268.0, 34.0 ],
+					"text" : "hoa.binaural~ allows you to use binaural synthesis with an ambisonic soundfield.."
 				}
 
 			}
@@ -142,9 +168,9 @@
 							"revision" : 9
 						}
 ,
-						"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
+						"rect" : [ 336.0, 182.0, 640.0, 480.0 ],
 						"bglocked" : 0,
-						"defrect" : [ 25.0, 69.0, 640.0, 480.0 ],
+						"defrect" : [ 336.0, 182.0, 640.0, 480.0 ],
 						"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -160,6 +186,224 @@
 						"enablevscroll" : 1,
 						"devicewidth" : 0.0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-3",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patcher" : 									{
+										"fileversion" : 1,
+										"appversion" : 										{
+											"major" : 5,
+											"minor" : 1,
+											"revision" : 9
+										}
+,
+										"rect" : [ 50.0, 94.0, 640.0, 480.0 ],
+										"bglocked" : 0,
+										"defrect" : [ 50.0, 94.0, 640.0, 480.0 ],
+										"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
+										"openinpresentation" : 0,
+										"default_fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial",
+										"gridonopen" : 0,
+										"gridsize" : [ 15.0, 15.0 ],
+										"gridsnaponopen" : 0,
+										"toolbarvisible" : 1,
+										"boxanimatetime" : 200,
+										"imprint" : 0,
+										"enablehscroll" : 1,
+										"enablevscroll" : 1,
+										"devicewidth" : 0.0,
+										"boxes" : [ 											{
+												"box" : 												{
+													"fontname" : "Arial",
+													"fontsize" : 12.0,
+													"id" : "obj-12",
+													"linecount" : 2,
+													"maxclass" : "message",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 50.0, 100.0, 589.0, 32.0 ],
+													"text" : "\"hoa.recomposer~ recompose a discretized ambisonic soundfield into spherical harmonics and allows you to perform a fish\" \"eye operation.\""
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"id" : "obj-18",
+													"maxclass" : "inlet",
+													"numinlets" : 0,
+													"numoutlets" : 1,
+													"outlettype" : [ "bang" ],
+													"patching_rect" : [ 50.0, 40.0, 25.0, 25.0 ]
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"id" : "obj-19",
+													"maxclass" : "outlet",
+													"numinlets" : 1,
+													"numoutlets" : 0,
+													"patching_rect" : [ 50.0, 233.0, 25.0, 25.0 ]
+												}
+
+											}
+ ],
+										"lines" : [ 											{
+												"patchline" : 												{
+													"destination" : [ "obj-19", 0 ],
+													"hidden" : 0,
+													"midpoints" : [  ],
+													"source" : [ "obj-12", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-12", 0 ],
+													"hidden" : 0,
+													"midpoints" : [  ],
+													"source" : [ "obj-18", 0 ]
+												}
+
+											}
+ ]
+									}
+,
+									"patching_rect" : [ 165.0, 210.0, 34.0, 20.0 ],
+									"saved_object_attributes" : 									{
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
+										"fontface" : 0,
+										"fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial"
+									}
+,
+									"text" : "p 10"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-2",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patcher" : 									{
+										"fileversion" : 1,
+										"appversion" : 										{
+											"major" : 5,
+											"minor" : 1,
+											"revision" : 9
+										}
+,
+										"rect" : [ 50.0, 94.0, 640.0, 480.0 ],
+										"bglocked" : 0,
+										"defrect" : [ 50.0, 94.0, 640.0, 480.0 ],
+										"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
+										"openinpresentation" : 0,
+										"default_fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial",
+										"gridonopen" : 0,
+										"gridsize" : [ 15.0, 15.0 ],
+										"gridsnaponopen" : 0,
+										"toolbarvisible" : 1,
+										"boxanimatetime" : 200,
+										"imprint" : 0,
+										"enablehscroll" : 1,
+										"enablevscroll" : 1,
+										"devicewidth" : 0.0,
+										"boxes" : [ 											{
+												"box" : 												{
+													"fontname" : "Arial",
+													"fontsize" : 12.0,
+													"id" : "obj-12",
+													"linecount" : 2,
+													"maxclass" : "message",
+													"numinlets" : 2,
+													"numoutlets" : 1,
+													"outlettype" : [ "" ],
+													"patching_rect" : [ 50.0, 100.0, 589.0, 32.0 ],
+													"text" : "\"hoa.recomposer~ recompose a discretized ambisonic soundfield into spherical harmonics and allows you to perform a fish\" \"eye operation.\""
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"id" : "obj-18",
+													"maxclass" : "inlet",
+													"numinlets" : 0,
+													"numoutlets" : 1,
+													"outlettype" : [ "bang" ],
+													"patching_rect" : [ 50.0, 40.0, 25.0, 25.0 ]
+												}
+
+											}
+, 											{
+												"box" : 												{
+													"comment" : "",
+													"id" : "obj-19",
+													"maxclass" : "outlet",
+													"numinlets" : 1,
+													"numoutlets" : 0,
+													"patching_rect" : [ 50.0, 233.0, 25.0, 25.0 ]
+												}
+
+											}
+ ],
+										"lines" : [ 											{
+												"patchline" : 												{
+													"destination" : [ "obj-19", 0 ],
+													"hidden" : 0,
+													"midpoints" : [  ],
+													"source" : [ "obj-12", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
+													"destination" : [ "obj-12", 0 ],
+													"hidden" : 0,
+													"midpoints" : [  ],
+													"source" : [ "obj-18", 0 ]
+												}
+
+											}
+ ]
+									}
+,
+									"patching_rect" : [ 180.0, 225.0, 33.0, 20.0 ],
+									"saved_object_attributes" : 									{
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
+										"fontface" : 0,
+										"fontsize" : 12.0,
+										"default_fontface" : 0,
+										"default_fontname" : "Arial"
+									}
+,
+									"text" : "p 11"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"comment" : "",
 									"id" : "obj-1",
@@ -266,12 +510,12 @@
 ,
 									"patching_rect" : [ 150.0, 195.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -375,12 +619,12 @@
 ,
 									"patching_rect" : [ 135.0, 180.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -483,12 +727,12 @@
 ,
 									"patching_rect" : [ 120.0, 165.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -592,12 +836,12 @@
 ,
 									"patching_rect" : [ 105.0, 150.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -701,12 +945,12 @@
 ,
 									"patching_rect" : [ 90.0, 135.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -810,12 +1054,12 @@
 ,
 									"patching_rect" : [ 75.0, 120.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -918,12 +1162,12 @@
 ,
 									"patching_rect" : [ 60.0, 105.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -1027,12 +1271,12 @@
 ,
 									"patching_rect" : [ 45.0, 90.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -1136,12 +1380,12 @@
 ,
 									"patching_rect" : [ 30.0, 75.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"globalpatchername" : "",
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial"
 									}
 ,
@@ -1156,10 +1400,10 @@
 									"id" : "obj-13",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
-									"numoutlets" : 10,
-									"outlettype" : [ "bang", "bang", "bang", "bang", "bang", "bang", "bang", "bang", "bang", "" ],
-									"patching_rect" : [ 30.0, 45.0, 176.0, 20.0 ],
-									"text" : "sel a1 a2 a3 a4 a5 a6 a7 a8 a9"
+									"numoutlets" : 12,
+									"outlettype" : [ "bang", "bang", "bang", "bang", "bang", "bang", "bang", "bang", "bang", "bang", "bang", "" ],
+									"patching_rect" : [ 30.0, 45.0, 222.0, 20.0 ],
+									"text" : "sel a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11"
 								}
 
 							}
@@ -1204,6 +1448,15 @@
 									"hidden" : 0,
 									"midpoints" : [  ],
 									"source" : [ "obj-13", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"hidden" : 0,
+									"midpoints" : [  ],
+									"source" : [ "obj-13", 10 ]
 								}
 
 							}
@@ -1281,10 +1534,28 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-3", 0 ],
+									"hidden" : 0,
+									"midpoints" : [  ],
+									"source" : [ "obj-13", 9 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-32", 0 ],
 									"hidden" : 0,
 									"midpoints" : [  ],
 									"source" : [ "obj-17", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-32", 0 ],
+									"hidden" : 0,
+									"midpoints" : [  ],
+									"source" : [ "obj-2", 0 ]
 								}
 
 							}
@@ -1362,6 +1633,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-32", 0 ],
+									"hidden" : 0,
+									"midpoints" : [  ],
+									"source" : [ "obj-3", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-38", 0 ],
 									"hidden" : 0,
 									"midpoints" : [  ],
@@ -1374,12 +1654,12 @@
 ,
 					"patching_rect" : [ 285.0, 105.0, 76.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"globalpatchername" : "",
+						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
+						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"fontname" : "Arial",
 						"default_fontname" : "Arial"
 					}
 ,
@@ -1423,7 +1703,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 390.0, 175.0, 16.0 ],
+					"patching_rect" : [ 30.0, 405.0, 175.0, 16.0 ],
 					"varname" : "a9"
 				}
 
@@ -1436,7 +1716,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 390.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 405.0, 175.0, 20.0 ],
 					"text" : "hoa.scope"
 				}
 
@@ -1449,7 +1729,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 360.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 375.0, 175.0, 20.0 ],
 					"varname" : "a8"
 				}
 
@@ -1463,7 +1743,7 @@
 					"numinlets" : 11,
 					"numoutlets" : 9,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 360.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 375.0, 175.0, 20.0 ],
 					"text" : "hoa.centralizer~ 4"
 				}
 
@@ -1491,7 +1771,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 330.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 345.0, 175.0, 20.0 ],
 					"varname" : "a7"
 				}
 
@@ -1505,7 +1785,7 @@
 					"numinlets" : 9,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "signal" ],
-					"patching_rect" : [ 30.0, 330.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 345.0, 175.0, 20.0 ],
 					"text" : "hoa.binaural~ 4"
 				}
 
@@ -1533,7 +1813,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 300.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 315.0, 175.0, 20.0 ],
 					"varname" : "a6"
 				}
 
@@ -1546,7 +1826,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 9,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 300.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 315.0, 175.0, 20.0 ],
 					"text" : "hoa.dac~ 1:9"
 				}
 
@@ -1568,26 +1848,13 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-16",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 127.0, 64.0, 20.0 ],
-					"text" : "Externals"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"handoff" : "",
 					"id" : "obj-28",
 					"maxclass" : "ubutton",
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 270.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 285.0, 175.0, 20.0 ],
 					"varname" : "a5"
 				}
 
@@ -1600,7 +1867,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 240.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 255.0, 175.0, 20.0 ],
 					"varname" : "a4"
 				}
 
@@ -1613,7 +1880,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 210.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 225.0, 175.0, 20.0 ],
 					"varname" : "a3"
 				}
 
@@ -1626,7 +1893,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 180.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 195.0, 175.0, 20.0 ],
 					"varname" : "a2"
 				}
 
@@ -1714,7 +1981,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 150.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 165.0, 175.0, 20.0 ],
 					"varname" : "a1"
 				}
 
@@ -1728,7 +1995,7 @@
 					"numinlets" : 9,
 					"numoutlets" : 9,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 180.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 195.0, 175.0, 20.0 ],
 					"text" : "hoa.decoder~ 4 9"
 				}
 
@@ -1742,7 +2009,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 9,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 150.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 165.0, 175.0, 20.0 ],
 					"text" : "hoa.encoder~ 4"
 				}
 
@@ -1756,7 +2023,7 @@
 					"numinlets" : 10,
 					"numoutlets" : 9,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 210.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 225.0, 175.0, 20.0 ],
 					"text" : "hoa.rotate~ 4"
 				}
 
@@ -1770,7 +2037,7 @@
 					"numinlets" : 9,
 					"numoutlets" : 9,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 240.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 255.0, 175.0, 20.0 ],
 					"text" : "hoa.plug~ 4 hoa.nothing~ post"
 				}
 
@@ -1783,7 +2050,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 270.0, 175.0, 20.0 ],
+					"patching_rect" : [ 30.0, 285.0, 175.0, 20.0 ],
 					"text" : "hoa.connect 4 5"
 				}
 
@@ -1885,14 +2152,14 @@
  ]
 					}
 ,
-					"patching_rect" : [ 83.0, 661.0, 69.0, 20.0 ],
+					"patching_rect" : [ 135.0, 135.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"globalpatchername" : "",
+						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
+						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"fontname" : "Arial",
 						"default_fontname" : "Arial"
 					}
 ,
@@ -1904,14 +2171,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
-					"hidden" : 1,
 					"id" : "obj-80",
-					"items" : [ "(Objects:)", ",", "hoa.encoder~", ",", "hoa.decoder~", ",", "hoa.rotate~", ",", "hoa.plug~", ",", "hoa.connect", ",", "hoa.dac~", ",", "hoa.binaural~", ",", "hoa.centralizer~", ",", "hoa.scope" ],
+					"items" : [ "(Objects:)", ",", "hoa.encoder~", ",", "hoa.decoder~", ",", "hoa.rotate~", ",", "hoa.plug~", ",", "hoa.connect", ",", "hoa.dac~", ",", "hoa.binaural~", ",", "hoa.centralizer~", ",", "hoa.scope", ",", "hoa.projector~", ",", "hoa.recomposer~" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
-					"patching_rect" : [ 0.0, 630.0, 179.0, 20.0 ],
+					"patching_rect" : [ 30.0, 135.0, 175.0, 20.0 ],
 					"types" : [  ],
 					"varname" : "autohelp_see_menu"
 				}
@@ -1973,8 +2239,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 8.0, 57.0, 597.0, 46.0 ],
-					"text" : "The hoa.library is a set of externals encode a signal in sphericals harmonics and to decode it on a number of channels. This library allows you to synthesize, transform and modulate sound fields. It has been elaborated to facilitate the use of the sphericals harmonics.",
+					"patching_rect" : [ 8.0, 57.0, 758.0, 46.0 ],
+					"text" : "The hoa.library is a set of externals that encodes a signal in ambisonic spherical harmonics  and to decodes the ambisonic soundfield for a circle array of loudspeakers. This library allows you to synthesize, transform and modulate sound fields. It has been elaborated to facilitate the use of the sphericals harmonics and the routing in the ambisonic domain.",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -1987,7 +2253,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 120.0, 211.0, 483.0 ]
+					"patching_rect" : [ 15.0, 120.0, 211.0, 390.0 ]
 				}
 
 			}
@@ -2022,6 +2288,15 @@
 					"hidden" : 1,
 					"midpoints" : [  ],
 					"source" : [ "obj-13", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-46", 0 ],
+					"hidden" : 1,
+					"midpoints" : [  ],
+					"source" : [ "obj-17", 0 ]
 				}
 
 			}
@@ -2108,15 +2383,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-30", 0 ],
-					"hidden" : 1,
-					"midpoints" : [  ],
-					"source" : [ "obj-31", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-36", 0 ],
 					"hidden" : 1,
 					"midpoints" : [  ],
@@ -2144,15 +2410,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-33", 0 ],
-					"hidden" : 1,
-					"midpoints" : [  ],
-					"source" : [ "obj-38", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-80", 0 ],
 					"hidden" : 1,
 					"midpoints" : [  ],
@@ -2171,10 +2428,37 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-47", 0 ],
+					"hidden" : 1,
+					"midpoints" : [  ],
+					"source" : [ "obj-42", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-41", 0 ],
 					"hidden" : 1,
 					"midpoints" : [  ],
 					"source" : [ "obj-45", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-80", 0 ],
+					"hidden" : 1,
+					"midpoints" : [  ],
+					"source" : [ "obj-46", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-80", 0 ],
+					"hidden" : 1,
+					"midpoints" : [  ],
+					"source" : [ "obj-47", 0 ]
 				}
 
 			}

@@ -28,6 +28,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"id" : "obj-59",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 510.0, 15.0, 292.0, 33.0 ],
+					"text" : "hoa.connect by Julien Colafrancesco Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
 					"id" : "obj-22",
 					"maxclass" : "newobj",
 					"numinlets" : 15,
@@ -237,20 +251,6 @@
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 30.0, 240.0, 208.0, 20.0 ],
 					"text" : "hoa.encoder~ 7"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 15.0, 293.0, 33.0 ],
-					"text" : "hoa.connect by Pierre Guillot & Julien Colafrancesco\n© 2012 CICM / Universite Paris 8"
 				}
 
 			}

@@ -76,7 +76,7 @@ public:
 		
 		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
 			
-		for(int j = 0; j < m_number_of_harmonics; j++)
+		for(int j = 0; j < m_number_of_outputs; j++)
 			aOutputs[j] = gsl_vector_get(m_output_vector, j);			
 	}	
 	
@@ -90,7 +90,7 @@ public:
 			
 			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
 			
-			for(int j = 0; j < m_number_of_harmonics; j++)
+			for(int j = 0; j < m_number_of_outputs; j++)
 				aOutputs[j][i] = gsl_vector_get(m_output_vector, j);			
 		}
 	}	

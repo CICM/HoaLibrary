@@ -104,6 +104,9 @@ void ambisonicProjector::computeBasicOptim()
 	m_optimMode = "basic"; 
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 		m_optimVector[i] = 1.;
+	m_optimVector[0] /= 2. * (double)(m_order + 1);
+	for(int i = 1; i < m_number_of_harmonics; i++)
+		m_optimVector[i] /= (double)(m_order + 1);
 }
 
 void ambisonicProjector::computeInPhaseOptim()
@@ -116,6 +119,9 @@ void ambisonicProjector::computeInPhaseOptim()
 		else 
 			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
 	}
+	m_optimVector[0] /= 2. * (double)(m_order + 1);
+	for(int i = 1; i < m_number_of_harmonics; i++)
+		m_optimVector[i] /= (double)(m_order + 1);
 }
 
 void ambisonicProjector::computeReOptim()
@@ -128,6 +134,9 @@ void ambisonicProjector::computeReOptim()
 		else 
 			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * PI / (2*m_order+2));
 	}
+	m_optimVector[0] /= 2. * (double)(m_order + 1);
+	for(int i = 1; i < m_number_of_harmonics; i++)
+		m_optimVector[i] /= (double)(m_order + 1);
 	
 }
 

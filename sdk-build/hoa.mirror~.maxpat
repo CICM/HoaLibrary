@@ -7,9 +7,9 @@
 			"revision" : 9
 		}
 ,
-		"rect" : [ 630.0, 180.0, 516.0, 550.0 ],
+		"rect" : [ 630.0, 180.0, 337.0, 298.0 ],
 		"bglocked" : 0,
-		"defrect" : [ 630.0, 180.0, 516.0, 550.0 ],
+		"defrect" : [ 630.0, 180.0, 337.0, 298.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -24,8 +24,22 @@
 		"enablehscroll" : 1,
 		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
-		"title" : "hoa.delayField~ (7)",
+		"title" : "hoa.mirror~ (7)",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-10",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 135.0, 150.0, 156.0, 48.0 ],
+					"text" : "Set the negatif harmonics to zero to create the mirror image of soundfield."
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,

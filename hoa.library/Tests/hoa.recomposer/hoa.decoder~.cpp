@@ -60,7 +60,7 @@ int main(void)
 
 	t_class *c;
 	
-	c = class_new("hoa.recomposer~", (method)HoaDecode_new, (method)HoaDecode_free, (long)sizeof(t_HoaDecode), 0L, A_GIMME, 0);
+	c = class_new("hoa.recomposerOld~", (method)HoaDecode_new, (method)HoaDecode_free, (long)sizeof(t_HoaDecode), 0L, A_GIMME, 0);
 	
 	class_addmethod(c, (method)HoaDecode_dsp,		"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaDecode_dsp64,		"dsp64",	A_CANT, 0);
