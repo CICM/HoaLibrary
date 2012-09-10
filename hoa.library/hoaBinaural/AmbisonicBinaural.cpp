@@ -35,6 +35,7 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_maximumNumberOfVirtualSpeakers = 72;
 	m_numberOfHarmonics = 2 * m_order + 1;
 	m_response_size = 200;
+	m_isHrtfLoaded = TRUE;
 	
 	if (m_order > 35) 
 		m_order = 35;
@@ -63,8 +64,11 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	setOptimMode(anOptimMode );
 	
 	loadImpulses();
-	responseInit();
-	matrixResize(aVectorSize, "Intialization");
+	if (m_isHrtfLoaded == TRUE)
+	{
+		responseInit();
+		matrixResize(aVectorSize, "Intialization");
+	}
 }
 
 int	AmbisonicBinaural::getParameters(std::string aParameter) const
@@ -110,7 +114,7 @@ void AmbisonicBinaural::loadImpulses()
 	std::string rightFilePath;
 	
 	
-	
+
 	for(int i = 0; i < m_numberOfVirtualSpeakers; i++)
 	{
 		m_angleListInDegree[i] = (5*72/m_numberOfVirtualSpeakers)*i;
@@ -118,6 +122,8 @@ void AmbisonicBinaural::loadImpulses()
 		rightFilePath = m_preFilePath + "right" + intToString(m_angleListInDegree[i]) + ".wav";
 		m_impulsesL[i] = Read_Wav(const_cast<char*>(leftFilePath.c_str()) );
 		m_impulsesR[i] = Read_Wav(const_cast<char*>(rightFilePath.c_str()));
+		if(m_impulsesL[i] == NULL || m_impulsesR[i] == NULL)
+			m_isHrtfLoaded = FALSE;
 	}
 
 }

@@ -65,6 +65,7 @@ private:
 	std::string m_preFilePath;
 	long		m_number_of_inputs;
 	long		m_number_of_outputs;
+	bool		m_isHrtfLoaded;
 	
 	int*		m_harmonicsIndex;
 	double*		m_optimVector;
@@ -101,6 +102,7 @@ public:
 	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSizen, std::string anOptimMode = "basic" , std::string pinnaSize = "small");
 	void	computeNbOfVirtualSpeaker();
 	int		getParameters(std::string aParameter) const;
+	bool	getisHrtfLoaded() {return m_isHrtfLoaded;}
 	
 	void	setOptimMode(std::string anOptim);
 	void	computeBasicOptim();
