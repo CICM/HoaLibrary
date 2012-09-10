@@ -71,6 +71,7 @@ int main(void)
 	class_register(CLASS_BOX, c);	
 	HoaRotate_class = c;
 	
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 

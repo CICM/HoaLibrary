@@ -485,13 +485,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"default_fontname" : "Arial",
+										"default_fontsize" : 12.0,
 										"fontname" : "Arial",
 										"globalpatchername" : "",
 										"default_fontface" : 0,
 										"fontface" : 0,
-										"fontsize" : 12.0,
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p attrArgs"
@@ -1213,13 +1213,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"default_fontname" : "Arial",
+										"default_fontsize" : 12.0,
 										"fontname" : "Arial",
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
 										"default_fontface" : 0,
 										"fontface" : 0,
-										"fontsize" : 12.0,
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p manageDisplay"
@@ -2499,13 +2499,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
+														"default_fontname" : "Arial",
+														"default_fontsize" : 12.0,
 														"fontname" : "Arial",
 														"globalpatchername" : "",
 														"default_fontface" : 0,
 														"fontface" : 0,
-														"fontsize" : 12.0,
-														"default_fontname" : "Arial",
-														"default_fontsize" : 12.0
+														"fontsize" : 12.0
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -3589,7 +3589,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 600.0, 90.0, 99.0, 20.0 ],
+					"patching_rect" : [ 630.0, 90.0, 99.0, 20.0 ],
 					"text" : "hoa.connect 7 16"
 				}
 
@@ -3709,15 +3709,15 @@
  ]
 					}
 ,
-					"patching_rect" : [ 600.0, 60.0, 69.0, 20.0 ],
+					"patching_rect" : [ 630.0, 60.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"default_fontname" : "Arial",
+						"default_fontsize" : 12.0,
 						"fontname" : "Arial",
 						"globalpatchername" : "",
 						"default_fontface" : 0,
 						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0
+						"fontsize" : 12.0
 					}
 ,
 					"text" : "p spaceBar"
@@ -3780,8 +3780,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 57.0, 577.0, 33.0 ],
-					"text" : "hoa.dac~ facilitates the setting of the channels. It works like a dac~ object you can use the mathlab syntax \":\"  to set the loudspeakers routing.",
+					"patching_rect" : [ 10.0, 57.0, 602.0, 33.0 ],
+					"text" : "hoa.dac~ facilitates the setting of the channels. It works like a dac~ object but you can use the matlab syntax \":\"  to set the loudspeakers routing.",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -3842,7 +3842,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-15", 0 ],
 					"hidden" : 0,
-					"midpoints" : [ 609.5, 81.0, 609.5, 81.0 ],
+					"midpoints" : [ 639.5, 81.0, 639.5, 81.0 ],
 					"source" : [ "obj-22", 0 ]
 				}
 

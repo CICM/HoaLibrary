@@ -88,7 +88,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 525.0, 60.0, 70.0, 20.0 ],
+					"patching_rect" : [ 645.0, 60.0, 70.0, 20.0 ],
 					"text" : "loadmess 0"
 				}
 
@@ -102,7 +102,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 525.0, 86.0, 43.0, 20.0 ],
+					"patching_rect" : [ 645.0, 86.0, 43.0, 20.0 ],
 					"text" : "js lock"
 				}
 
@@ -296,8 +296,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 57.0, 484.0, 46.0 ],
-					"text" : "hoa.connect helps to connect the hoa externals ( and also the dac~ ) together. You must \"drag-select\" the objects to connect then bang the object. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets.",
+					"patching_rect" : [ 10.0, 57.0, 548.0, 46.0 ],
+					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets.",
 					"varname" : "autohelp_top_description"
 				}
 

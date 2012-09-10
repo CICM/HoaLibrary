@@ -327,7 +327,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 57.0, 503.0, 33.0 ],
-					"text" : "hoa.pi is for peoples that never remember more than 4 decimals or want to initialize a good Pi number. The best number you can set in Max is 3.141593, here it's 3.14159265358979323846.",
+					"text" : "hoa.pi is for peoples that never remember more than 4 decimals or want to initialize a good Pi number. ",
 					"varname" : "autohelp_top_description"
 				}
 

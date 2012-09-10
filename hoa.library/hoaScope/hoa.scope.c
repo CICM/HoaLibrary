@@ -124,6 +124,7 @@ int main()
 	class_register(CLASS_BOX, c);
 	descriptor_class = c;
 	
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
