@@ -31,7 +31,9 @@ int main(void)
 	c = class_new("hoa.dac~", (method)dac_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
 	
 	class_register(CLASS_BOX, c);
-	dac_class = c;	
+	dac_class = c;
+	
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 }
 
 void *dac_new(t_symbol *s, int argc, t_atom *argv)

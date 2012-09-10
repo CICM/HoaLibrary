@@ -26,6 +26,33 @@
 		"devicewidth" : 0.0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"handoff" : "",
+					"id" : "obj-30",
+					"maxclass" : "ubutton",
+					"numinlets" : 1,
+					"numoutlets" : 4,
+					"outlettype" : [ "bang", "bang", "", "int" ],
+					"patching_rect" : [ 30.0, 375.0, 175.0, 20.0 ],
+					"varname" : "a8"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-16",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "float" ],
+					"patching_rect" : [ 30.0, 375.0, 175.0, 20.0 ],
+					"text" : "hoa.pi"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"hidden" : 1,
@@ -146,7 +173,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 285.0, 135.0, 269.0, 48.0 ],
-					"text" : "hoa.projector~ discretize the ambisonic soundfield into an array of virtual loudspeakers and gives a access to a new sound domain."
+					"text" : "hoa.centralizer~ weights the harmonics signals depending to their order to restrain the soundfield on a part of the circle."
 				}
 
 			}
@@ -281,13 +308,13 @@
 ,
 									"patching_rect" : [ 165.0, 210.0, 34.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 10"
@@ -390,13 +417,13 @@
 ,
 									"patching_rect" : [ 180.0, 225.0, 33.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 11"
@@ -510,13 +537,13 @@
 ,
 									"patching_rect" : [ 150.0, 195.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 9"
@@ -567,8 +594,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 583.0, 32.0 ],
-													"text" : "\"hoa.centralizer~ weights the harmonics signals depending to their order to restrain the soundfield on a part of the circle.\""
+													"patching_rect" : [ 50.0, 100.0, 585.0, 32.0 ],
+													"text" : "\"hoa.pi is for peoples that never remember more than 4 decimals or want to initialize a good Pi number. The best number you can set in Max is 3.141593, here it's 3.14159265358979323846.\""
 												}
 
 											}
@@ -619,13 +646,13 @@
 ,
 									"patching_rect" : [ 135.0, 180.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 8"
@@ -727,13 +754,13 @@
 ,
 									"patching_rect" : [ 120.0, 165.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 7"
@@ -836,13 +863,13 @@
 ,
 									"patching_rect" : [ 105.0, 150.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 6"
@@ -945,13 +972,13 @@
 ,
 									"patching_rect" : [ 90.0, 135.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 5"
@@ -1054,13 +1081,13 @@
 ,
 									"patching_rect" : [ 75.0, 120.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 4"
@@ -1162,13 +1189,13 @@
 ,
 									"patching_rect" : [ 60.0, 105.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 3"
@@ -1271,13 +1298,13 @@
 ,
 									"patching_rect" : [ 45.0, 90.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 2"
@@ -1380,13 +1407,13 @@
 ,
 									"patching_rect" : [ 30.0, 75.0, 27.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"default_fontname" : "Arial",
 										"default_fontsize" : 12.0,
+										"fontname" : "Arial",
 										"globalpatchername" : "",
-										"fontface" : 0,
-										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"default_fontname" : "Arial"
+										"fontface" : 0,
+										"fontsize" : 12.0
 									}
 ,
 									"text" : "p 1"
@@ -1654,13 +1681,13 @@
 ,
 					"patching_rect" : [ 285.0, 105.0, 76.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontname" : "Arial",
+						"default_fontname" : "Arial",
 						"default_fontsize" : 12.0,
+						"fontname" : "Arial",
 						"globalpatchername" : "",
-						"fontface" : 0,
-						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"default_fontname" : "Arial"
+						"fontface" : 0,
+						"fontsize" : 12.0
 					}
 ,
 					"text" : "p comments"
@@ -1755,8 +1782,9 @@
 					"fontsize" : 12.0,
 					"id" : "obj-35",
 					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
+					"numinlets" : 9,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "signal" ],
 					"patching_rect" : [ 30.0, 345.0, 175.0, 20.0 ],
 					"text" : "hoa.binaural~ 4"
 				}
@@ -2126,13 +2154,13 @@
 ,
 					"patching_rect" : [ 135.0, 135.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontname" : "Arial",
+						"default_fontname" : "Arial",
 						"default_fontsize" : 12.0,
+						"fontname" : "Arial",
 						"globalpatchername" : "",
-						"fontface" : 0,
-						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"default_fontname" : "Arial"
+						"fontface" : 0,
+						"fontsize" : 12.0
 					}
 ,
 					"text" : "p see_also"
@@ -2144,7 +2172,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-80",
-					"items" : [ "(Objects:)", ",", "hoa.encoder~", ",", "hoa.decoder~", ",", "hoa.rotate~", ",", "hoa.plug~", ",", "hoa.connect", ",", "hoa.dac~", ",", "hoa.binaural~", ",", "hoa.centralizer~", ",", "hoa.scope", ",", "hoa.projector~", ",", "hoa.recomposer~" ],
+					"items" : [ "(Objects:)", ",", "hoa.encoder~", ",", "hoa.decoder~", ",", "hoa.rotate~", ",", "hoa.plug~", ",", "hoa.connect", ",", "hoa.dac~", ",", "hoa.binaural~", ",", "hoa.pi", ",", "hoa.scope", ",", "hoa.projector~", ",", "hoa.recomposer~" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -2350,6 +2378,15 @@
 					"hidden" : 1,
 					"midpoints" : [  ],
 					"source" : [ "obj-28", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-40", 0 ],
+					"hidden" : 1,
+					"midpoints" : [  ],
+					"source" : [ "obj-30", 0 ]
 				}
 
 			}
