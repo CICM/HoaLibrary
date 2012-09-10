@@ -22,7 +22,6 @@
 
 AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode, std::string pinnaSize)
 {	
-	MKL_Set_Num_Threads(4);
 	if (pinnaSize == "small") {
 		m_preFilePath = "/Applications/Max5/Cycling '74/hoaLibrary/hrtfDatabase/";
 	}

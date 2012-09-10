@@ -74,6 +74,9 @@ int main(void)
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
 	
+	post("hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
+	post("Copyright (C) 2012, CICM / Universite Paris 8");
+	
 	return 0;
 }
 
