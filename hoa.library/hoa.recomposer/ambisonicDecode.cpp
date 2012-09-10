@@ -61,7 +61,7 @@ void ambisonicDecode::computeMicMatrixSet()
 	for (int matIndex = 0; matIndex < m_nbOfSampledMatrix; matIndex++) 
 	{
 		tmpFishEyeFactor = (float)matIndex/float(m_nbOfSampledMatrix-1);
-		computeMatrix(m_recompMicCoefsSet[matIndex], tmpFishEyeFactor);
+		computeMicMatrix(m_recompMicCoefsSet[matIndex], tmpFishEyeFactor);
 	}
 }
 
