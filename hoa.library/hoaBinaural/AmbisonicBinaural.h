@@ -22,6 +22,20 @@
 
 #undef	check
 
+//#define gsl_vector gsl_vector_float
+//#define gsl_vector_view gsl_vector_float_view
+//#define gsl_vector_get gsl_vector_float_get
+//#define gsl_vector_subvector gsl_vector_float_subvector
+//
+//
+//#define gsl_matrix gsl_matrix_float
+//#define gsl_blas_dgemm gsl_blas_sgemm
+//#define gsl_blas_dcopy gsl_blas_scopy
+//#define gsl_blas_daxpy gsl_blas_saxpy
+//#define gsl_matrix_set gsl_matrix_float_set
+//#define gsl_matrix_column gsl_matrix_float_column
+
+
 #include "math.h"
 #include <complex>
 #include <stdio.h>
@@ -31,6 +45,8 @@
 #include "fileLoader.h"
 #include <sstream>
 #include <ambisonicDecode.h> 
+#include <mkl_service.h>
+
 
 
 #define M_2PI 2*M_PI
@@ -47,6 +63,7 @@ private:
 	long		m_maximumNumberOfVirtualSpeakers;
 	long		m_numberOfVirtualSpeakers;
 	std::string m_optimMode;
+	std::string m_preFilePath;
 	long		m_number_of_inputs;
 	long		m_number_of_outputs;
 	
@@ -82,7 +99,7 @@ private:
 	
 public:
 	
-	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSizen, std::string anOptimMode = "basic" );
+	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSizen, std::string anOptimMode = "basic" , std::string pinnaSize = "small");
 	void	computeNbOfVirtualSpeaker();
 	int		getParameters(std::string aParameter) const;
 	

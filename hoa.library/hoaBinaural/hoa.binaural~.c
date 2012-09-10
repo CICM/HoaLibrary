@@ -29,7 +29,8 @@ typedef struct _HoaBinaural
 {
 	t_pxobject			f_ob;			
 	AmbisonicBinaural	*f_ambiBinaural;
-
+	int ninput;
+	int sum;
 } t_HoaBinaural;
 
 
@@ -75,7 +76,11 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 		if(argv[0].a_type == A_LONG)
 			order = atom_getlong(argv);
 		
-		x->f_ambiBinaural = new AmbisonicBinaural(order, sys_getsr(), sys_getblksize());
+		std::string pinnaSize;
+		if(argv[1].a_type == A_SYM)
+			pinnaSize = atom_getsym(argv+1)->s_name;
+		
+		x->f_ambiBinaural = new AmbisonicBinaural(order, sys_getsr(), sys_getblksize(), pinnaSize);
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiBinaural->getParameters("numberOfInputs"));
 		for (int i = 0; i < x->f_ambiBinaural->getParameters("numberOfOutputs"); i++) 
@@ -105,7 +110,8 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 	x->f_ambiBinaural->matrixResize(sp[0]->s_n);
 	
 	pointer_count = x->f_ambiBinaural->getParameters("numberOfOutputs") + x->f_ambiBinaural->getParameters("numberOfInputs") + 2;
-	
+	x->ninput = x->f_ambiBinaural->getParameters("numberOfInputs");
+	x->sum = pointer_count + 1;
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
 		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
@@ -125,11 +131,11 @@ t_int *HoaBinaural_perform(t_int *w)
 {
 	t_HoaBinaural *x	= (t_HoaBinaural *)(w[1]);
 	t_float		**ins	= (t_float **)w+3;
-	t_float		**outs	= (t_float **)w+3+x->f_ambiBinaural->getParameters("numberOfInputs");
+	t_float		**outs	= (t_float **)w+3+x->ninput;
 	
 	x->f_ambiBinaural->process(ins, outs);
 
-	return (w + x->f_ambiBinaural->getParameters("numberOfOutputs") + x->f_ambiBinaural->getParameters("numberOfInputs") + 3);
+	return (w + x->sum);
 }
 
 void HoaBinaural_optim(t_HoaBinaural *x, t_symbol *s, long argc, t_atom *argv)

@@ -19,8 +19,17 @@
 
 #include "AmbisonicBinaural.h"
 
-AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode)
+
+AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode, std::string pinnaSize)
 {	
+	MKL_Set_Num_Threads(4);
+	if (pinnaSize == "small") {
+		m_preFilePath = "/Applications/Max5/Cycling '74/hoaLibrary/hrtfDatabase/";
+	}
+	else {
+		m_preFilePath = "/Applications/Max5/Cycling '74/hoaLibrary/hrtfDatabase/large/";
+	}
+
 	m_vector_size = 0;
 	m_sampling_rate = aSamplingRate;
 	m_order = aOrder;	
@@ -100,13 +109,14 @@ void AmbisonicBinaural::loadImpulses()
 {
 	std::string leftFilePath;
 	std::string rightFilePath;
-	std::string preFilePath = "/Users/juliencolafrancesco/Desktop/hrtfDatabase/";
+	
+	
 	
 	for(int i = 0; i < m_numberOfVirtualSpeakers; i++)
 	{
 		m_angleListInDegree[i] = (5*72/m_numberOfVirtualSpeakers)*i;
-		leftFilePath  = preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
-		rightFilePath = preFilePath + "right" + intToString(m_angleListInDegree[i]) + ".wav";
+		leftFilePath  = m_preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
+		rightFilePath = m_preFilePath + "right" + intToString(m_angleListInDegree[i]) + ".wav";
 		m_impulsesL[i] = Read_Wav(const_cast<char*>(leftFilePath.c_str()) );
 		m_impulsesR[i] = Read_Wav(const_cast<char*>(rightFilePath.c_str()));
 	}
