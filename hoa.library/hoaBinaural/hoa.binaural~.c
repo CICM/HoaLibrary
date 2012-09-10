@@ -83,7 +83,10 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_ambiBinaural = new AmbisonicBinaural(order, sys_getsr(), sys_getblksize(), pinnaSize);
 		
 		if(x->f_ambiBinaural->getisHrtfLoaded() == FALSE)
+		{
+			post("HRTF Database not loaded");
 			return NULL;
+		}
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiBinaural->getParameters("numberOfInputs"));
 		for (int i = 0; i < x->f_ambiBinaural->getParameters("numberOfOutputs"); i++) 
