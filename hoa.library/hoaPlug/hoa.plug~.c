@@ -33,6 +33,7 @@ int main(void)
 	patcher = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
 	dblclickpatcher = class_method(patcher, gensym("dblclick"));
 	
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 }
 
 void *plug_new(t_symbol *s, int argc, t_atom *argv)

@@ -141,12 +141,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-44",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 285.0, 135.0, 268.0, 34.0 ],
-					"text" : "hoa.binaural~ allows you to use binaural synthesis with an ambisonic soundfield.."
+					"patching_rect" : [ 285.0, 135.0, 269.0, 48.0 ],
+					"text" : "hoa.projector~ discretize the ambisonic soundfield into an array of virtual loudspeakers and gives a access to a new sound domain."
 				}
 
 			}
@@ -229,8 +229,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 50.0, 100.0, 589.0, 32.0 ],
-													"text" : "\"hoa.recomposer~ recompose a discretized ambisonic soundfield into spherical harmonics and allows you to perform a fish\" \"eye operation.\""
+													"patching_rect" : [ 50.0, 100.0, 583.0, 32.0 ],
+													"text" : "\"hoa.projector~ discretize the ambisonic soundfield into an array of virtual loudspeakers and gives a access to a new sound domain.\""
 												}
 
 											}
@@ -1723,33 +1723,6 @@
 			}
 , 			{
 				"box" : 				{
-					"handoff" : "",
-					"id" : "obj-37",
-					"maxclass" : "ubutton",
-					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 30.0, 375.0, 175.0, 20.0 ],
-					"varname" : "a8"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-39",
-					"maxclass" : "newobj",
-					"numinlets" : 11,
-					"numoutlets" : 9,
-					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 375.0, 175.0, 20.0 ],
-					"text" : "hoa.centralizer~ 4"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"hidden" : 1,
@@ -1782,9 +1755,8 @@
 					"fontsize" : 12.0,
 					"id" : "obj-35",
 					"maxclass" : "newobj",
-					"numinlets" : 9,
-					"numoutlets" : 2,
-					"outlettype" : [ "signal", "signal" ],
+					"numinlets" : 0,
+					"numoutlets" : 0,
 					"patching_rect" : [ 30.0, 345.0, 175.0, 20.0 ],
 					"text" : "hoa.binaural~ 4"
 				}
@@ -2396,15 +2368,6 @@
 					"hidden" : 1,
 					"midpoints" : [  ],
 					"source" : [ "obj-36", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-40", 0 ],
-					"hidden" : 1,
-					"midpoints" : [  ],
-					"source" : [ "obj-37", 0 ]
 				}
 
 			}
