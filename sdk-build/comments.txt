@@ -1,2 +1,0 @@
-one, hoa.encoder~ creates the spherical harmonics of a signal depending of an given order and the position on a circle.
-two, hoa.decoder~ decodes an ambisonic soundfield for a given number of loudspeakers. First argument is the order of the ambisonic soundfield, second argument is the number of loudspeakers, it must be equal or superior to the number of harmonics (2 * order + 1).

@@ -2519,7 +2519,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 500.75, 8.0, 244.0, 46.0 ],
+					"patching_rect" : [ 555.0, 15.0, 244.0, 46.0 ],
 					"text" : "hoa.scope\nBy Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
 				}
 
@@ -2534,8 +2534,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 8.0, 485.0, 30.0 ],
-					"text" : "hoa.scope",
+					"patching_rect" : [ 15.0, 15.0, 563.0, 30.0 ],
+					"text" : "hoa.scope (BETA, not working look visu.maxpat)",
 					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
 					"varname" : "autohelp_top_title"
 				}
@@ -4565,13 +4565,13 @@
 ,
 					"patching_rect" : [ 30.0, 240.0, 214.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : ""
+						"globalpatchername" : "",
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0
 					}
 ,
 					"text" : "p speedLimiters 50"
@@ -4709,13 +4709,13 @@
 ,
 					"patching_rect" : [ 557.0, 69.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : ""
+						"globalpatchername" : "",
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0
 					}
 ,
 					"text" : "p key32"

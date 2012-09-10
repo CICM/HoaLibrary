@@ -1021,10 +1021,10 @@
 							"revision" : 9
 						}
 ,
-						"rect" : [ 37.0, 510.0, 242.0, 106.0 ],
+						"rect" : [ 30.0, 510.0, 242.0, 106.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
-						"defrect" : [ 37.0, 510.0, 242.0, 106.0 ],
+						"defrect" : [ 30.0, 510.0, 242.0, 106.0 ],
 						"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -1906,7 +1906,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 37.0, 510.0, 242.0, 106.0 ]
+					"patching_rect" : [ 30.0, 510.0, 242.0, 106.0 ]
 				}
 
 			}
@@ -1974,7 +1974,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 37.0, 645.0, 240.5, 20.0 ],
+					"patching_rect" : [ 30.0, 645.0, 241.5, 20.0 ],
 					"text" : "hoa.dac~ 1:16"
 				}
 
@@ -2203,13 +2203,13 @@
 ,
 					"patching_rect" : [ 300.0, 120.0, 66.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0,
 						"globalpatchername" : "",
-						"default_fontface" : 0,
 						"fontface" : 0,
 						"fontsize" : 12.0,
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"fontname" : "Arial"
+						"default_fontface" : 0
 					}
 ,
 					"text" : "p sinBuffer"
@@ -2650,13 +2650,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
 										"globalpatchername" : "",
-										"default_fontface" : 0,
 										"fontface" : 0,
 										"fontsize" : 12.0,
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0,
-										"fontname" : "Arial"
+										"default_fontface" : 0
 									}
 ,
 									"text" : "p attrArgs"
@@ -2698,6 +2698,7 @@
 								"box" : 								{
 									"args" : [  ],
 									"embed" : 1,
+									"hidden" : 1,
 									"id" : "obj-3",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -3377,13 +3378,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
-										"default_fontface" : 0,
 										"fontface" : 0,
 										"fontsize" : 12.0,
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0,
-										"fontname" : "Arial"
+										"default_fontface" : 0
 									}
 ,
 									"text" : "p manageDisplay"
@@ -4347,7 +4348,6 @@
 								"box" : 								{
 									"args" : [  ],
 									"embed" : 1,
-									"hidden" : 1,
 									"id" : "obj-22",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -4664,13 +4664,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
+														"default_fontname" : "Arial",
+														"fontname" : "Arial",
+														"default_fontsize" : 12.0,
 														"globalpatchername" : "",
-														"default_fontface" : 0,
 														"fontface" : 0,
 														"fontsize" : 12.0,
-														"default_fontname" : "Arial",
-														"default_fontsize" : 12.0,
-														"fontname" : "Arial"
+														"default_fontface" : 0
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -6304,12 +6304,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-59",
-					"linecount" : 3,
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 498.75, 6.0, 241.0, 46.0 ],
-					"text" : "hoa.projector~ \nBy Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
+					"patching_rect" : [ 498.75, 6.0, 294.0, 33.0 ],
+					"text" : "hoa.projector~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
 				}
 
 			}
@@ -6356,7 +6356,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 8.0, 56.0, 526.0, 33.0 ],
-					"text" : "hoa.projector~ discretize the ambisonic soundfield into an array of virtual loudspeakers and gives a access to a new sound domain.",
+					"text" : "hoa.projector~ discretizes the ambisonic soundfield into an array of virtual loudspeakers and gives a access to a new sound domain.",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -6476,15 +6476,15 @@
  ]
 					}
 ,
-					"patching_rect" : [ 622.0, 65.0, 51.0, 20.0 ],
+					"patching_rect" : [ 570.0, 60.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0,
 						"globalpatchername" : "",
-						"default_fontface" : 0,
 						"fontface" : 0,
 						"fontsize" : 12.0,
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"fontname" : "Arial"
+						"default_fontface" : 0
 					}
 ,
 					"text" : "p key32"
@@ -6499,7 +6499,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 622.0, 95.0, 99.0, 20.0 ],
+					"patching_rect" : [ 570.0, 90.0, 99.0, 20.0 ],
 					"text" : "hoa.connect 7 16"
 				}
 
@@ -6989,7 +6989,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-14", 0 ],
 					"hidden" : 0,
-					"midpoints" : [ 444.5, 390.0, 396.0, 390.0, 396.0, 210.0, 39.5, 210.0 ],
+					"midpoints" : [ 444.5, 399.0, 396.0, 399.0, 396.0, 210.0, 39.5, 210.0 ],
 					"source" : [ "obj-22", 0 ]
 				}
 
@@ -7142,7 +7142,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-27", 15 ],
 					"hidden" : 0,
-					"midpoints" : [ 324.5, 645.0, 268.0, 645.0 ],
+					"midpoints" : [ 324.5, 645.0, 262.0, 645.0 ],
 					"source" : [ "obj-34", 0 ]
 				}
 
@@ -7151,7 +7151,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-27", 15 ],
 					"hidden" : 0,
-					"midpoints" : [ 369.5, 645.0, 268.0, 645.0 ],
+					"midpoints" : [ 369.5, 645.0, 262.0, 645.0 ],
 					"source" : [ "obj-37", 0 ]
 				}
 
@@ -7295,7 +7295,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"hidden" : 0,
-					"midpoints" : [ 631.5, 87.0, 631.5, 87.0 ],
+					"midpoints" : [ 579.5, 82.0, 579.5, 82.0 ],
 					"source" : [ "obj-46", 0 ]
 				}
 
