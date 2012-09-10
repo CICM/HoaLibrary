@@ -8,7 +8,7 @@ double* Read_Wav (char *wave_file)
     if (file == NULL) 
 	{  
         printf("nerreur: fichier  %s  introuvablen", wave_file);  
-        exit(0);  
+        return NULL;
     }  
  
 	char ChunkID[4];    // contient les lettres "RIFF" pour indiquer que le fichier est codé selon la norme RIFF  
