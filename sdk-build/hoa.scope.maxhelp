@@ -7,9 +7,9 @@
 			"revision" : 9
 		}
 ,
-		"rect" : [ 149.0, 66.0, 1108.0, 719.0 ],
+		"rect" : [ 149.0, 66.0, 918.0, 719.0 ],
 		"bglocked" : 0,
-		"defrect" : [ 149.0, 66.0, 1108.0, 719.0 ],
+		"defrect" : [ 149.0, 66.0, 918.0, 719.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -2519,8 +2519,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 500.75, 8.0, 219.0, 46.0 ],
-					"text" : "hoa.scope\nBy Julien Colafrancesco & Pierre Guillot\n© 2012 CICM / Universite Paris 8"
+					"patching_rect" : [ 500.75, 8.0, 244.0, 46.0 ],
+					"text" : "hoa.scope\nBy Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
 				}
 
 			}
@@ -2566,7 +2566,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 58.0, 433.0, 20.0 ],
-					"text" : "hoa.scope displays the harmonics of an ambisonic sound field on a circle.",
+					"text" : "hoa.scope displays the harmonics of an ambisonic soundfield on a circle.",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -4565,13 +4565,13 @@
 ,
 					"patching_rect" : [ 30.0, 240.0, 214.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p speedLimiters 50"
@@ -4709,13 +4709,13 @@
 ,
 					"patching_rect" : [ 557.0, 69.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p key32"

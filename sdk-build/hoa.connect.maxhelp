@@ -28,6 +28,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"id" : "obj-59",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 510.0, 15.0, 292.0, 33.0 ],
+					"text" : "hoa.connect by Julien Colafrancesco Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
 					"id" : "obj-22",
 					"maxclass" : "newobj",
 					"numinlets" : 15,
@@ -242,20 +256,6 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 15.0, 293.0, 33.0 ],
-					"text" : "hoa.connect by Pierre Guillot & Julien Colafrancesco\n© 2012 CICM / Universite Paris 8"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontface" : 3,
 					"fontname" : "Arial",
 					"fontsize" : 20.871338,
@@ -341,34 +341,6 @@
 				}
 
 			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bgoncolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bgovercolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bgoveroncolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"bordercolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"fontface" : 3,
-					"fontlink" : 1,
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"id" : "obj-6",
-					"maxclass" : "textbutton",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "", "", "int" ],
-					"patching_rect" : [ 450.920868, 22.0, 49.079121, 14.666666 ],
-					"presentation_rect" : [ 0.0, 0.0, 49.079121, 14.666666 ],
-					"spacing_x" : 0.0,
-					"spacing_y" : 0.0,
-					"textcolor" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"textoncolor" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"textovercolor" : [ 0.4, 0.5, 0.65, 1.0 ],
-					"underline" : 1,
-					"varname" : "autohelp_top_ref"
-				}
-
-			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -399,7 +371,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],

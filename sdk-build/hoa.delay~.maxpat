@@ -24,6 +24,7 @@
 		"enablehscroll" : 1,
 		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
+		"title" : "hoa.delay~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -61,7 +62,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 175.0, 103.0, 67.0, 34.0 ],
-					"text" : "Harmonic number"
+					"text" : "Order number"
 				}
 
 			}
@@ -331,13 +332,13 @@
 ,
 					"patching_rect" : [ 225.0, 150.0, 79.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontname" : "Arial",
-						"fontface" : 0,
-						"default_fontface" : 0,
-						"fontsize" : 12.0,
 						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0,
 						"globalpatchername" : "",
-						"default_fontsize" : 12.0
+						"fontface" : 0,
+						"fontsize" : 12.0,
+						"default_fontface" : 0
 					}
 ,
 					"text" : "p orderInit"
