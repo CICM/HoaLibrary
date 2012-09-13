@@ -255,7 +255,7 @@ int validName(t_object *box)
 			}
 		}			
 	}
-	else if (object_classname(obj) == gensym("dac~"))
+	else if (object_classname(obj) == gensym("dac~") || object_classname(obj) == gensym("sfrecord~") || object_classname(obj) == gensym("sfplay~"))
 	{
 		strcpy(objName, "hoa.");
 	}
