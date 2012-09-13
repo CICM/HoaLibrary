@@ -45,10 +45,10 @@
 					"id" : "obj-8",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 15.0, 45.0, 154.0, 20.0 ],
-					"text" : "route signal float int"
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 15.0, 45.0, 198.0, 20.0 ],
+					"text" : "route signal float int time"
 				}
 
 			}
@@ -70,11 +70,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-5",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 105.0, 132.0, 71.0, 20.0 ],
+					"patching_rect" : [ 105.0, 132.0, 63.0, 34.0 ],
 					"text" : "pack 0. 100"
 				}
 
@@ -88,7 +89,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "bang" ],
-					"patching_rect" : [ 105.0, 162.0, 36.0, 20.0 ],
+					"patching_rect" : [ 105.0, 180.0, 36.0, 20.0 ],
 					"text" : "line~"
 				}
 
@@ -102,7 +103,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 15.0, 195.0, 109.0, 20.0 ],
+					"patching_rect" : [ 15.0, 213.0, 109.0, 20.0 ],
 					"text" : "*~"
 				}
 
@@ -189,8 +190,17 @@
 				"patchline" : 				{
 					"destination" : [ "obj-4", 0 ],
 					"hidden" : 0,
-					"midpoints" : [ 69.5, 75.0, 114.5, 75.0 ],
+					"midpoints" : [ 69.25, 75.0, 114.5, 75.0 ],
 					"source" : [ "obj-8", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 1 ],
+					"hidden" : 0,
+					"midpoints" : [  ],
+					"source" : [ "obj-8", 3 ]
 				}
 
 			}
