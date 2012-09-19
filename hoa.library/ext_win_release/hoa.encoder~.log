@@ -1,0 +1,25 @@
+﻿La génération a démarré 19/09/2012 10:27:28.
+     1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaEncoder\hoa.encoder~.vcxproj" sur le nœud 2 (build cible(s)).
+     1>InitializeBuildStatus:
+         Mise à jour de l'horodatage "..\ext_win_release\hoa.encoder~.unsuccessfulbuild".
+       ClCompile:
+         Toutes les sorties sont à jour.
+         Toutes les sorties sont à jour.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaEncoder\.\..\..\sdk-build\hoa.encoder~.dll) ne correspond pas à la valeur de la propriété OutputFile (C:\Users\Pierre\Documents\GitHub\CICM-Library\sdk-build\hoa.encoder~.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(991,5): warning MSB8012: TargetExt(.dll) ne correspond pas à la valeur de la propriété OutputFile (.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\..\sdk-build\hoa.encoder~.mxe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" MaxAPI.lib maxcrt.lib MaxAudio.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:MSVCRT.lib /DEF:".\hoa.encoder~.def" /MANIFEST:NO /DEBUG /PDB:"..\ext_win_release\hoa.encoder~.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\ext_win_release\hoa.encoder~.lib" /MACHINE:X86 /DLL ..\ext_win_release\dllmain_win.obj
+         ..\ext_win_release\AmbisonicEncode.obj
+         "..\ext_win_release\hoa.encoder~.obj" /MACHINE:I386 
+            Création de la bibliothèque ..\ext_win_release\hoa.encoder~.lib et de l'objet ..\ext_win_release\hoa.encoder~.exp
+         Génération de code en cours
+         Fin de la génération du code
+         hoa.encoder~.vcxproj -> C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaEncoder\.\..\..\sdk-build\hoa.encoder~.dll
+       FinalizeBuildStatus:
+         Suppression du fichier "..\ext_win_release\hoa.encoder~.unsuccessfulbuild".
+         Mise à jour de l'horodatage "..\ext_win_release\hoa.encoder~.lastbuildstate".
+     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaEncoder\hoa.encoder~.vcxproj" terminée (build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:00.49

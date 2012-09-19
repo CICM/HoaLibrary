@@ -1,0 +1,28 @@
+﻿La génération a démarré 19/09/2012 08:06:45.
+     1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaConnect\hoa.connect.vcxproj" sur le nœud 2 (build cible(s)).
+     1>InitializeBuildStatus:
+         Création de "..\ext_win_debug\hoa.connect.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
+       ClCompile:
+         Toutes les sorties sont à jour.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN_VERSION /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm /RTC1 /MDd /Zp2 /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_debug\\" /Fd"..\ext_win_debug\hoa.connect.pdb" /Gd /TC /analyze- /errorReport:prompt "..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes\common\dllmain_win.c" hoa.connect.c
+         hoa.connect.c
+         dllmain_win.c
+         Génération de code en cours...
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaConnect\.\..\..\sdk-build\hoa.connect.dll) ne correspond pas à la valeur de la propriété OutputFile (C:\Users\Pierre\Documents\GitHub\CICM-Library\sdk-build\hoa.connect.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(991,5): warning MSB8012: TargetExt(.dll) ne correspond pas à la valeur de la propriété OutputFile (.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\..\sdk-build\hoa.connect.mxe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" MaxAPI.lib MaxAudio.lib maxcrt.lib maxcrt_p.lib /NODEFAULTLIB:MSVCRTD.lib /DEF:".\hoa.connect.def" /MANIFEST:NO /DEBUG /PDB:"..\ext_win_debug\hoa.connect.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\ext_win_debug\hoa.connect.lib" /MACHINE:X86 /DLL ..\ext_win_debug\dllmain_win.obj
+         ..\ext_win_debug\hoa.connect.obj /MACHINE:I386 
+            Création de la bibliothèque ..\ext_win_debug\hoa.connect.lib et de l'objet ..\ext_win_debug\hoa.connect.exp
+     1>hoa.connect.exp : warning LNK4070: la directive /OUT:pg.arman~.mxe dans .EXP est différente du nom du fichier de sortie '.\..\..\sdk-build\hoa.connect.mxe' ; directive ignorée
+         hoa.connect.vcxproj -> C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaConnect\.\..\..\sdk-build\hoa.connect.dll
+       CopyFilesToOutputDirectory:
+         Copie du fichier de "..\ext_win_debug\hoa.connect.pdb" vers ".\..\..\sdk-build\hoa.connect.pdb".
+       FinalizeBuildStatus:
+         Suppression du fichier "..\ext_win_debug\hoa.connect.unsuccessfulbuild".
+         Mise à jour de l'horodatage "..\ext_win_debug\hoa.connect.lastbuildstate".
+     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaConnect\hoa.connect.vcxproj" terminée (build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:01.00

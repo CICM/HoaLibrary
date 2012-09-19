@@ -8,8 +8,7 @@
  */
 
 
-#include <gslMatrix.h>
-
+#include "gslMatrix.hpp"
 
 gsl_matrix* GenericSvdPseudoInverse(gsl_matrix* A)
 {
@@ -150,7 +149,7 @@ void resizeMatrix(gsl_matrix** matrix, unsigned int nbOfRow, unsigned int nbOfCo
 	gsl_matrix_free(*matrix);
 	*matrix = resizedMatrix;
 }
-
+/*
 void printMat(gsl_matrix* A)
 {
 	int M = A->size1;
@@ -174,4 +173,4 @@ void printVec(gsl_vector* a)
 		printf("%f ", gsl_vector_get(a, i));
 	}
 	printf("\n");
-}
+}*/
