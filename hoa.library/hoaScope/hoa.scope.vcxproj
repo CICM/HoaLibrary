@@ -179,22 +179,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes\common\dllmain_win.c" />
-    <ClCompile Include="..\pg.window\pg.window.c" />
-    <ClCompile Include="pg.analysis.c" />
-    <ClCompile Include="pg.buffer.c" />
-    <ClCompile Include="pg.compute.c" />
-    <ClCompile Include="pg.descriptor~.c" />
-    <ClCompile Include="pg.drawAnalyse.c" />
-    <ClCompile Include="pg.drawContext.c" />
-    <ClCompile Include="pg.interaction.c" />
+    <ClCompile Include="hoa.scope.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\pg.window\pg.window.h" />
-    <ClInclude Include="pg.descriptor.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\SDKs\fftw-3.3.2-dll32\libfftw3-3.def" />
-    <None Include="pg.descriptor~.def" />
+    <None Include="hoa.scope.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

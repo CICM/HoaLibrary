@@ -17,7 +17,7 @@
  *
  */
 
-#include "ambisonicRotate.h"
+#include "ambisonicRotate.hpp"
 
 ambisonicRotate::ambisonicRotate(int anOrder, int aVectorSize)
 {
@@ -47,7 +47,7 @@ void ambisonicRotate::computeIndex()
 	m_index_of_harmonics[0] = 0;
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
-		m_index_of_harmonics[i] = floor((i - 1) / 2) + 1;
+		m_index_of_harmonics[i] = floor((float)((i - 1) / 2)) + 1;
 		if (i % 2 == 1) 
 			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
 	}
@@ -56,16 +56,16 @@ void ambisonicRotate::computeIndex()
 int	ambisonicRotate::getParameters(std::string aParameter) const
 {
 	int value = 0;
-	
-	if (aParameter == "order") 
+
+	if (aParameter.compare("order"))
 		value = m_order;
-	else if (aParameter == "samplingRate") 
+	else if (aParameter.compare("samplingRate")) 
 		value =  m_sampling_rate;
-	else if (aParameter == "vectorSize") 
+	else if (aParameter.compare("vectorSize")) 
 		value =  m_vector_size;
-	else if (aParameter == "numberOfInputs") 
+	else if (aParameter.compare("numberOfInputs")) 
 		value =  m_number_of_inputs;
-	else if (aParameter == "numberOfOutputs") 
+	else if (aParameter.compare("numberOfOutputs"))
 		value =  m_number_of_outputs;
 	
 	return value;

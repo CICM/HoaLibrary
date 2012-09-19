@@ -17,7 +17,7 @@
  *
  */
 
-#include "AmbisonicEncode.h"
+#include "AmbisonicEncode.hpp"
 
 AmbisonicEncode::AmbisonicEncode(int anOrder, std::string aMode, int aVectorSize)
 {	
@@ -70,7 +70,7 @@ void AmbisonicEncode::computeIndex()
 	m_index_of_harmonics[0] = 0;
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
-		m_index_of_harmonics[i] = floor((i - 1) / 2) + 1;
+		m_index_of_harmonics[i] = (i - 1) / 2 + 1;
 		if (i % 2 == 1) 
 			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
 	}

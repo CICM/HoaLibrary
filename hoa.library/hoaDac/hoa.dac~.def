@@ -1,6 +1,6 @@
-;pg.arman~.def
+;hoa.dac~.def
 
-LIBRARY pg.arman~.mxe
+LIBRARY hoa.dac~.mxe
 
 EXPORTS
 	main
