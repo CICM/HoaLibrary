@@ -277,7 +277,7 @@ int validConditionColor(t_object *obj)
 {
 	t_object *jb, *o;
 	
-	if(object_classname(obj) == gensym("hoa.encoder~") || object_classname(obj) == gensym("hoa.rotate~"))
+	if(object_classname(obj) == gensym("hoa.encoder~") || object_classname(obj) == gensym("hoa.rotate~") || object_classname(obj) == gensym("hoa.recomposer~") || object_classname(obj) == gensym("sfplay~"))
 		return 1;
 	else if (object_classname(obj) == gensym("jpatcher"))
 	{

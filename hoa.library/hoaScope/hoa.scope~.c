@@ -517,7 +517,6 @@ void draw_contribution(t_scope *x,  t_object *view, t_rect *rect)
 		jfont_destroy(jf);
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("contrib_layer"), 0., 0.);
-	post("salut");
 }
 
 void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
