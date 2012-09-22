@@ -7,9 +7,9 @@
 			"revision" : 9
 		}
 ,
-		"rect" : [ 454.0, 97.0, 808.0, 529.0 ],
+		"rect" : [ 135.0, 173.0, 939.0, 445.0 ],
 		"bglocked" : 0,
-		"defrect" : [ 454.0, 97.0, 808.0, 529.0 ],
+		"defrect" : [ 135.0, 173.0, 939.0, 445.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -263,13 +263,13 @@
 ,
 					"patching_rect" : [ 660.0, 60.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
-						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0,
 						"default_fontname" : "Arial",
-						"fontname" : "Arial"
+						"default_fontsize" : 12.0,
+						"fontname" : "Arial",
+						"globalpatchername" : "",
+						"default_fontface" : 0,
+						"fontface" : 0,
+						"fontsize" : 12.0
 					}
 ,
 					"text" : "p spaceBar"

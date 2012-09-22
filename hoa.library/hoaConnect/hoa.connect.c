@@ -159,9 +159,9 @@ void color_patchline(t_connect *x)
 		if (validConditionColor(obj))
 		{ 
 			if (jpatchline_get_inletnum(line) % 2 == 1) 
-				jpatchline_set_color(line, &bleu);
+				jpatchline_set_color(line, &rouge);
 			else
-				jpatchline_set_color(line, &rouge);			
+				jpatchline_set_color(line, &bleu);			
 		}
 	}
 }
