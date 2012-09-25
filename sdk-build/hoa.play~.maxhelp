@@ -7,9 +7,9 @@
 			"revision" : 9
 		}
 ,
-		"rect" : [ 454.0, 97.0, 808.0, 529.0 ],
+		"rect" : [ 135.0, 173.0, 783.0, 449.0 ],
 		"bglocked" : 0,
-		"defrect" : [ 454.0, 97.0, 808.0, 529.0 ],
+		"defrect" : [ 135.0, 173.0, 783.0, 449.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -25,6 +25,34 @@
 		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-36",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 180.0, 90.0, 49.0, 18.0 ],
+					"text" : "resume"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-37",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 114.0, 87.0, 42.0, 18.0 ],
+					"text" : "pause"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
@@ -263,13 +291,13 @@
 ,
 					"patching_rect" : [ 660.0, 60.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
 						"globalpatchername" : "",
 						"fontface" : 0,
-						"fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"fontname" : "Arial"
+						"fontsize" : 12.0
 					}
 ,
 					"text" : "p spaceBar"
@@ -285,7 +313,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 15.0, 305.0, 33.0 ],
+					"patching_rect" : [ 510.0, 15.0, 262.0, 33.0 ],
 					"text" : "hoa.play~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
 				}
 
@@ -355,6 +383,7 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 14 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -364,6 +393,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 13 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -373,6 +403,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 12 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -382,6 +413,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 11 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -391,6 +423,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 10 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -400,6 +433,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 9 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -409,6 +443,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 8 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -418,6 +453,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 7 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -427,6 +463,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 6 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -436,6 +473,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 5 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -445,6 +483,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 4 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -454,6 +493,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 3 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -463,6 +503,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 2 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -472,6 +513,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 1 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -481,6 +523,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -501,7 +544,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"hidden" : 0,
-					"midpoints" : [  ],
+					"midpoints" : [ 69.5, 135.0, 24.5, 135.0 ],
 					"source" : [ "obj-10", 0 ]
 				}
 
@@ -530,6 +573,24 @@
 					"hidden" : 0,
 					"midpoints" : [ 264.5, 390.0, 227.0, 390.0 ],
 					"source" : [ "obj-32", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"hidden" : 0,
+					"midpoints" : [ 189.5, 135.0, 24.5, 135.0 ],
+					"source" : [ "obj-36", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"hidden" : 0,
+					"midpoints" : [ 123.5, 135.0, 24.5, 135.0 ],
+					"source" : [ "obj-37", 0 ]
 				}
 
 			}

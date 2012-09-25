@@ -235,8 +235,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 235.0, 491.0, 235.0, 20.0 ],
-					"text" : "dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
+					"patching_rect" : [ 235.0, 491.0, 221.5, 20.0 ],
+					"text" : "hoa.dac~ 1:16"
 				}
 
 			}
@@ -299,16 +299,6 @@
 					"patching_rect" : [ 10.0, 57.0, 548.0, 46.0 ],
 					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets.",
 					"varname" : "autohelp_top_description"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-24",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 188.0, 270.0, 36.0 ]
 				}
 
 			}

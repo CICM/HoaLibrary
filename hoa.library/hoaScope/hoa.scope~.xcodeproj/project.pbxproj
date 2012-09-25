@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E02D11016087A4200FE2C19 /* hoa.trajectory.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E02D10F16087A4200FE2C19 /* hoa.trajectory.c */; };
+		0E55CC7C15ECBE0D005292AF /* hoa.scope~.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E55CC7B15ECBE0D005292AF /* hoa.scope~.c */; };
 		0E6C283715C815AB0090858D /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283515C815AB0090858D /* MaxAPI.framework */; };
 		0E6C283815C815AB0090858D /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283615C815AB0090858D /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E02D10F16087A4200FE2C19 /* hoa.trajectory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hoa.trajectory.c; sourceTree = "<group>"; };
+		0E55CC7B15ECBE0D005292AF /* hoa.scope~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.scope~.c"; sourceTree = "<group>"; };
 		0E6C283515C815AB0090858D /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 		0E6C283615C815AB0090858D /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
-		2FBBEAE508F335360078DB84 /* hoa.trajectory.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.trajectory.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FBBEAE508F335360078DB84 /* hoa.scope~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.scope~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0E02D10F16087A4200FE2C19 /* hoa.trajectory.c */,
+				0E55CC7B15ECBE0D005292AF /* hoa.scope~.c */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -64,7 +64,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.trajectory.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.scope~.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,7 +98,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.trajectory.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.scope~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -106,7 +106,7 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.trajectory" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.scope~" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -150,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E02D11016087A4200FE2C19 /* hoa.trajectory.c in Sources */,
+				0E55CC7C15ECBE0D005292AF /* hoa.scope~.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +223,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.trajectory" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.scope~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

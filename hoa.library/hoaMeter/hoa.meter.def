@@ -1,0 +1,7 @@
+;pg.descriptor~.def
+
+LIBRARY pg.descriptor~.mxe
+
+EXPORTS
+	main
+
