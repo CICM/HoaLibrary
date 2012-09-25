@@ -253,24 +253,30 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 void meter_dsp64(t_meter *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	object_method(dsp64, gensym("dsp_add64"), x, meter_perform64, 0, NULL);
+	x->f_startclock = 1;
 }
 
 void meter_perform64(t_meter *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	int i;
-	while (sampleframes--) 
+	int i, j;
+	double max;
+	
+	for(i = 0; i < x->f_numberOfLoudspeakers; i++)
 	{
-		for(i = 0; i < x->f_numberOfLoudspeakers; i++)
+		max = x->f_amplitudeOfLoudspeakers[i];
+		for(j = 0; j < sampleframes; j++)
 		{
-			if(abs(ins[i][sampleframes]) > abs(x->f_amplitudeOfLoudspeakers[sampleframes]))
-				x->f_amplitudeOfLoudspeakers[sampleframes] = ins[i][sampleframes];
+			if(fabs(ins[i][j]) > fabs(max))
+				max = ins[i][j];
 		}
+		x->f_amplitudeOfLoudspeakers[i] = max;
 	}
+	
 	if (x->f_startclock) 
 	{
 		x->f_startclock = 0;
 		clock_delay(x->f_clock,0);
-	}	
+	}
 }
 
 void meter_dsp(t_meter *x, t_signal **sp, short *count)

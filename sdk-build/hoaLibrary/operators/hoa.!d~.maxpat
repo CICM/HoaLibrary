@@ -24,7 +24,7 @@
 		"enablehscroll" : 1,
 		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
-		"title" : "hoa.*~",
+		"title" : "hoa.!/~",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -35,7 +35,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 15.0, 120.0, 32.5, 20.0 ],
-					"text" : "/~"
+					"text" : "!/~"
 				}
 
 			}
