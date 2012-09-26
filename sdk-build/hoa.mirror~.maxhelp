@@ -564,13 +564,13 @@
 ,
 													"patching_rect" : [ 255.0, 210.0, 63.0, 20.0 ],
 													"saved_object_attributes" : 													{
+														"default_fontsize" : 12.0,
+														"globalpatchername" : "",
 														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
-														"fontname" : "Arial",
 														"default_fontname" : "Arial",
-														"globalpatchername" : "",
-														"default_fontsize" : 12.0
+														"fontname" : "Arial"
 													}
 ,
 													"text" : "p source2"
@@ -892,13 +892,13 @@
 ,
 													"patching_rect" : [ 360.0, 195.0, 63.0, 20.0 ],
 													"saved_object_attributes" : 													{
+														"default_fontsize" : 12.0,
+														"globalpatchername" : "",
 														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
-														"fontname" : "Arial",
 														"default_fontname" : "Arial",
-														"globalpatchername" : "",
-														"default_fontsize" : 12.0
+														"fontname" : "Arial"
 													}
 ,
 													"text" : "p source1"
@@ -1321,13 +1321,13 @@
 ,
 													"patching_rect" : [ 435.0, 195.0, 40.0, 20.0 ],
 													"saved_object_attributes" : 													{
+														"default_fontsize" : 12.0,
+														"globalpatchername" : "",
 														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
-														"fontname" : "Arial",
 														"default_fontname" : "Arial",
-														"globalpatchername" : "",
-														"default_fontsize" : 12.0
+														"fontname" : "Arial"
 													}
 ,
 													"text" : "p axe"
@@ -1536,13 +1536,13 @@
 ,
 									"patching_rect" : [ 540.0, 270.0, 47.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial",
-										"globalpatchername" : "",
-										"default_fontsize" : 12.0
+										"fontname" : "Arial"
 									}
 ,
 									"text" : "p draw"
@@ -1844,8 +1844,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 285.0, 360.0, 137.0, 20.0 ],
-					"text" : "loadmess optim inPhase"
+					"patching_rect" : [ 285.0, 360.0, 122.0, 20.0 ],
+					"text" : "loadmess optim basic"
 				}
 
 			}
@@ -2021,13 +2021,13 @@
 ,
 					"patching_rect" : [ 645.0, 45.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"default_fontsize" : 12.0,
+						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"fontname" : "Arial",
 						"default_fontname" : "Arial",
-						"globalpatchername" : "",
-						"default_fontsize" : 12.0
+						"fontname" : "Arial"
 					}
 ,
 					"text" : "p key32"
@@ -2481,13 +2481,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial",
-										"globalpatchername" : "",
-										"default_fontsize" : 12.0
+										"fontname" : "Arial"
 									}
 ,
 									"text" : "p attrArgs"
@@ -3208,13 +3208,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
 										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontname" : "Arial",
 										"default_fontname" : "Arial",
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
-										"default_fontsize" : 12.0
+										"fontname" : "Arial"
 									}
 ,
 									"text" : "p manageDisplay"
@@ -4495,13 +4495,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
+														"default_fontsize" : 12.0,
+														"globalpatchername" : "",
 														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
-														"fontname" : "Arial",
 														"default_fontname" : "Arial",
-														"globalpatchername" : "",
-														"default_fontsize" : 12.0
+														"fontname" : "Arial"
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -5564,12 +5564,11 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-5",
-					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 56.0, 603.0, 46.0 ],
-					"text" : "hoa.mirror~ is a small tip that disable all the negative harmonics to add the mirror image of a sound field to itself. The harmonics of the mirror image are in opposition of phase with the original one. Therefore the resulting sound field is very different than a mirror sound field created with only a rotation.",
+					"patching_rect" : [ 7.0, 56.0, 603.0, 20.0 ],
+					"text" : "hoa.mirror~ is a small tip that disable all the negative harmonics to add the mirror image of a sound field to itself. ",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -6062,7 +6061,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-35", 1 ],
 					"hidden" : 0,
-					"midpoints" : [ 279.5, 285.0, 247.5, 285.0 ],
+					"midpoints" : [ 279.5, 297.0, 247.5, 297.0 ],
 					"source" : [ "obj-42", 0 ]
 				}
 
@@ -6071,7 +6070,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-4", 15 ],
 					"hidden" : 0,
-					"midpoints" : [ 491.5, 345.0, 262.0, 345.0, 262.0, 357.0, 262.5, 357.0 ],
+					"midpoints" : [ 491.5, 345.0, 264.0, 345.0, 264.0, 357.0, 262.5, 357.0 ],
 					"source" : [ "obj-42", 1 ]
 				}
 

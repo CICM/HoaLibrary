@@ -204,6 +204,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
 void scope_dsp64(t_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	object_method(dsp64, gensym("dsp_add64"), x, scope_perform64, 0, NULL);
+	x->f_startclock = 1;
 }
 
 void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)

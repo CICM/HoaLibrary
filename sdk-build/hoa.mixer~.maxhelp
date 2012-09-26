@@ -906,8 +906,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 24.0, 105.0, 42.0, 20.0 ],
-					"text" : "sig~ 1"
+					"patching_rect" : [ 24.0, 105.0, 46.0, 20.0 ],
+					"text" : "sig~ -1"
 				}
 
 			}
@@ -1112,13 +1112,13 @@
 ,
 					"patching_rect" : [ 615.0, 45.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"default_fontsize" : 12.0,
+						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"fontname" : "Arial",
 						"default_fontname" : "Arial",
-						"globalpatchername" : "",
-						"default_fontsize" : 12.0
+						"fontname" : "Arial"
 					}
 ,
 					"text" : "p key32"
