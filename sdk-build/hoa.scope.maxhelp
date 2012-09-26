@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
 	"patcher" : 	{
 		"fileversion" : 1,
@@ -5072,3 +5073,5 @@
 	}
 
 }
+=======
+>>>>>>> origin/master

@@ -159,9 +159,9 @@ void color_patchline(t_connect *x)
 		if (validConditionColor(obj))
 		{ 
 			if (jpatchline_get_inletnum(line) % 2 == 1) 
-				jpatchline_set_color(line, &bleu);
+				jpatchline_set_color(line, &rouge);
 			else
-				jpatchline_set_color(line, &rouge);			
+				jpatchline_set_color(line, &bleu);			
 		}
 	}
 }
@@ -277,7 +277,7 @@ int validConditionColor(t_object *obj)
 {
 	t_object *jb, *o;
 	
-	if(object_classname(obj) == gensym("hoa.encoder~") || object_classname(obj) == gensym("hoa.rotate~"))
+	if(object_classname(obj) == gensym("hoa.encoder~") || object_classname(obj) == gensym("hoa.rotate~") || object_classname(obj) == gensym("hoa.recomposer~") || object_classname(obj) == gensym("sfplay~"))
 		return 1;
 	else if (object_classname(obj) == gensym("jpatcher"))
 	{
