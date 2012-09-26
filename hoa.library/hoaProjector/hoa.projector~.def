@@ -1,0 +1,7 @@
+;hoa.projector~.def
+
+LIBRARY hoa.projector~.mxe
+
+EXPORTS
+	main
+

@@ -1,0 +1,53 @@
+﻿La génération a démarré 19/09/2012 14:10:14.
+     1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaRecomposer\hoa.recomposer~.vcxproj" sur le nœud 2 (build cible(s)).
+     1>InitializeBuildStatus:
+         Mise à jour de l'horodatage "..\ext_win_debug\hoa.recomposer~.unsuccessfulbuild".
+       ClCompile:
+         Toutes les sorties sont à jour.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /IC:\gsl /Zi /nologo /W3 /WX- /Od /Oy- /D WIN_VERSION /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm /RTC1 /MDd /Zp2 /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_debug\\" /Fd"..\ext_win_debug\hoa.recomposer~.pdb" /Gd /TP /analyze- /errorReport:prompt ambisonicRecomposer.cpp "hoa.recomposer~.cpp"
+         hoa.recomposer~.cpp
+     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoarecomposer\ambisonicRecomposer.hpp(20): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xlocale(323): warning C4530: Gestionnaire d'exceptions C++ utilisé, mais les sémantiques de déroulement n'ont pas été activées. Spécifiez /EHsc
+     1>hoa.recomposer~.cpp(190): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : voir la déclaration de 'sprintf'
+     1>hoa.recomposer~.cpp(193): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : voir la déclaration de 'sprintf'
+     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoarecomposer\ambisonicRecomposer.hpp(99): warning C4244: '=' : conversion de 'double' en 't_float', perte possible de données
+                 hoa.recomposer~.cpp(161) : voir la référence à l'instanciation de la fonction modèle 'void ambisonicRecomposer::process<t_float>(Type **,Type **,Type *)' en cours de compilation
+                 with
+                 [
+                     Type=t_float
+                 ]
+     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoarecomposer\ambisonicRecomposer.hpp(113): warning C4244: '=' : conversion de 'double' en 't_float', perte possible de données
+                 hoa.recomposer~.cpp(172) : voir la référence à l'instanciation de la fonction modèle 'void ambisonicRecomposer::process<t_float>(Type **,Type **)' en cours de compilation
+                 with
+                 [
+                     Type=t_float
+                 ]
+         Génération de code en cours...
+         Compilation en cours...
+         ambisonicRecomposer.cpp
+     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoarecomposer\ambisonicRecomposer.hpp(20): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xlocale(323): warning C4530: Gestionnaire d'exceptions C++ utilisé, mais les sémantiques de déroulement n'ont pas été activées. Spécifiez /EHsc
+         Génération de code en cours...
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaRecomposer\.\..\..\sdk-build\hoa.recomposer~.dll) ne correspond pas à la valeur de la propriété OutputFile (C:\Users\Pierre\Documents\GitHub\CICM-Library\sdk-build\hoa.recomposer~.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(991,5): warning MSB8012: TargetExt(.dll) ne correspond pas à la valeur de la propriété OutputFile (.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\..\sdk-build\hoa.recomposer~.mxe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /LIBPATH:C:\gsl\lib\Win32\Release MaxAPI.lib MaxAudio.lib cblas.lib gsl.lib msvcrt.lib /NODEFAULTLIB:MSVCRTD.lib /DEF:".\hoa.recomposer~.def" /MANIFEST:NO /DEBUG /PDB:"..\ext_win_debug\hoa.recomposer~.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\ext_win_debug\hoa.recomposer~.lib" /MACHINE:X86 /DLL ..\ext_win_debug\dllmain_win.obj
+         ..\ext_win_debug\ambisonicRecomposer.obj
+         ..\ext_win_debug\gslMatrix.obj
+         "..\ext_win_debug\hoa.recomposer~.obj"
+         ..\ext_win_debug\matrixHandling.obj /MACHINE:I386 
+            Création de la bibliothèque ..\ext_win_debug\hoa.recomposer~.lib et de l'objet ..\ext_win_debug\hoa.recomposer~.exp
+     1>LINK : warning LNK4098: conflit entre la bibliothèque par défaut 'LIBCMT' et les autres bibliothèques ; utilisez /NODEFAULTLIB:library
+         hoa.recomposer~.vcxproj -> C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaRecomposer\.\..\..\sdk-build\hoa.recomposer~.dll
+       CopyFilesToOutputDirectory:
+         Copie du fichier de "..\ext_win_debug\hoa.recomposer~.pdb" vers ".\..\..\sdk-build\hoa.recomposer~.pdb".
+       FinalizeBuildStatus:
+         Suppression du fichier "..\ext_win_debug\hoa.recomposer~.unsuccessfulbuild".
+         Mise à jour de l'horodatage "..\ext_win_debug\hoa.recomposer~.lastbuildstate".
+     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaRecomposer\hoa.recomposer~.vcxproj" terminée (build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:02.10
