@@ -16,14 +16,14 @@
  *
  */
 
+#include "ambisonicDecode.hpp"
+
 extern "C"
 {
 	#include "ext.h"
 	#include "ext_obex.h"
 	#include "z_dsp.h"
 }
-
-#include "ambisonicDecode.h"
 
 
 typedef struct _HoaDecode 

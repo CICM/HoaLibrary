@@ -65,7 +65,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes;.\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\msp-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;_CRT_NOFORCE_MANIFEST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
@@ -96,7 +96,7 @@
       <AdditionalDependencies>MaxAPI.lib;MaxAudio.lib;maxcrt.lib;maxcrt_p.lib;libfftw3-3.lib;libfftw3f-3.lib;libfftw3l-3.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).mxe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>.\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>MSVCRTD.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ModuleDefinitionFile>.\$(ProjectName).def</ModuleDefinitionFile>
@@ -179,16 +179,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes\common\dllmain_win.c" />
-    <ClCompile Include="..\pg.delay\pg.delay.c" />
-    <ClCompile Include="pg.delayObj~.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\pg.delay\pg.delay.h" />
-    <ClInclude Include="pg.delayObj.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\SDKs\fftw-3.3.2-dll32\libfftw3-3.def" />
-    <None Include="pg.delay~.def" />
+    <ClCompile Include="hoa.plug~.c" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -196,6 +187,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hoa.plug~.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hoa.plug.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

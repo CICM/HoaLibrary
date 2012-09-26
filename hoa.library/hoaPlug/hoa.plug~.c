@@ -16,7 +16,7 @@
 *
 */
 
-#include "hoa.plug~.h"
+#include "hoa.plug.h"
 
 int main(void)
 {
@@ -333,6 +333,59 @@ void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, in
 	object_method_typed(x, gensym("connect"), 4, argv, &rv);
 }
 
+t_object* plug_inlet(t_object *patcher, int index, int order, int ninlet, int mode)
+{
+	int harm;
+	harm = floor((float)(index / ninlet));
+	index %= ninlet;
+	if (mode == 1) 
+		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Harmonic %i Input %i\" @patching_rect %i 0 20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / ninlet);
+	else if (mode == 0)
+		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Input %i\" @patching_rect %i 0 20 20 ", ninlet, harm * 100 + (index * 100) / ninlet);
+	else
+		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Input %i\" @patching_rect %i 0 20 20 ", ninlet, harm * 100 + (index * 100) / ninlet);
+}
+
+t_object *plug_script(t_object *patcher, int index, int order, int ninlet, int noutlet, int mode)
+{
+	int harm, last;
+	harm = floor((float)(index / ninlet));
+	last = index;
+	index %= ninlet;
+	if (mode == 2)
+		return newobject_sprintf(patcher, "@maxclass newobj @text \"hoa.plug_script %i %i %i %i %i\" @patching_rect %i 300 20 20", 
+								 last, order, mode, ninlet, noutlet, harm * 100 + (index * 100) / ninlet);
+	else
+		return newobject_sprintf(patcher, "@maxclass newobj @text \"hoa.plug_script %i %i %i %i %i\" @patching_rect %i 300 20 20", 
+								 plug_harmonic(harm, order), order, mode, ninlet, noutlet, harm * 100 + (index * 100) / ninlet);
+
+}
+
+t_object *plug_pcontr(t_object *patcher, int index, int order, int ninlet)
+{
+	return newobject_sprintf(patcher, "@maxclass newobj @text pcontrol @patching_rect %i 400 20 20 ", 50 + (100 / ninlet) * index);
+}
+
+t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int mode)
+{
+	if (mode == 2)
+		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i\" @patching_rect %i 500 20 20", s->s_name, index, order, index * 100);
+	else
+		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i\" @patching_rect %i 500 20 20", s->s_name, plug_harmonic(index, order), order, index * 100);
+}
+	
+t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet, int mode)
+{
+	int harm, last;
+	harm = floor((float)(index / noutlet));
+	last = index;
+	index %= noutlet;
+	if (mode == 2)
+		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Order %i Output %i\" @patching_rect %i 600 20 20 ", last, index, harm * 100 + (index * 100) / noutlet);
+	else
+		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Harmonic %i Output %i\" @patching_rect %i 600 20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / noutlet);
+}
+
 void plug_router(t_object *x, int order, t_symbol *s, int mode)
 {
 	int i, j, ninlet = 0, noutlet = 0;
@@ -393,7 +446,7 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode)
 		for(i = 0; i < (order * 2 + 1) * noutlet; i++)
 		{
 			outlets[i] = plug_outlet(x, i, order, noutlet, mode);
-			plug_connect(x, patchs[int(i /noutlet)], i % noutlet, outlets[i], 0);
+			plug_connect((t_object *)x, patchs[(int)(i /noutlet)], (int)(i % noutlet), (t_object *)outlets[i], 0);
 		}
 	}
 	else if(mode == 0)
@@ -433,7 +486,7 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode)
 		for(i = 0; i < (order * 2 + 1) * noutlet; i++)
 		{
 			outlets[i] = plug_outlet(x, i, order, noutlet, mode);
-			plug_connect(x, patchs[int(i /noutlet)], i % noutlet, outlets[i], 0);
+			plug_connect(x, patchs[i /noutlet], i % noutlet, outlets[i], 0);
 		}
 			
 	}
@@ -474,64 +527,8 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode)
 		for(i = 0; i < (order + 1) * noutlet; i++)
 		{
 			outlets[i] = plug_outlet(x, i, order, noutlet, mode);
-			plug_connect(x, patchs[int(i /noutlet)], i % noutlet, outlets[i], 0);
+			plug_connect(x, patchs[(int)(i /noutlet)], (i % noutlet), outlets[i], 0);
 		}
-		
 	}
-
-
-}
-
-t_object *plug_inlet(t_object *patcher, int index, int order, int ninlet, int mode)
-{
-	int harm;
-	harm = floor(index / ninlet);
-	index %= ninlet;
-	if (mode == 1) 
-		return newobject_sprintf(patcher, "@maxclass inlet @comment \"Harmonic %i Input %i\" @patching_rect %i 0 20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / ninlet);
-	else if (mode == 0)
-		return newobject_sprintf(patcher, "@maxclass inlet @comment \"Input %i\" @patching_rect %i 0 20 20 ", ninlet, harm * 100 + (index * 100) / ninlet);
-	else
-		return newobject_sprintf(patcher, "@maxclass inlet @comment \"Input %i\" @patching_rect %i 0 20 20 ", ninlet, harm * 100 + (index * 100) / ninlet);
-}
-
-t_object *plug_script(t_object *patcher, int index, int order, int ninlet, int noutlet, int mode)
-{
-	int harm, last;
-	harm = floor(index / ninlet);
-	last = index;
-	index %= ninlet;
-	if (mode == 2)
-		return newobject_sprintf(patcher, "@maxclass newobj @text \"hoa.plug_script %i %i %i %i %i\" @patching_rect %i 300 20 20", 
-								 last, order, mode, ninlet, noutlet, harm * 100 + (index * 100) / ninlet);
-	else
-		return newobject_sprintf(patcher, "@maxclass newobj @text \"hoa.plug_script %i %i %i %i %i\" @patching_rect %i 300 20 20", 
-								 plug_harmonic(harm, order), order, mode, ninlet, noutlet, harm * 100 + (index * 100) / ninlet);
-
-}
-
-t_object *plug_pcontr(t_object *patcher, int index, int order, int ninlet)
-{
-	return newobject_sprintf(patcher, "@maxclass newobj @text pcontrol @patching_rect %i 400 20 20 ", 50 + (100 / ninlet) * index);
-}
-
-t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int mode)
-{
-	if (mode == 2)
-		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i\" @patching_rect %i 500 20 20", s->s_name, index, order, index * 100);
-	else
-		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i\" @patching_rect %i 500 20 20", s->s_name, plug_harmonic(index, order), order, index * 100);
-}
-	
-t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet, int mode)
-{
-	int harm, last;
-	harm = floor(index / noutlet);
-	last = index;
-	index %= noutlet;
-	if (mode == 2)
-		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Order %i Output %i\" @patching_rect %i 600 20 20 ", last, index, harm * 100 + (index * 100) / noutlet);
-	else
-		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Harmonic %i Output %i\" @patching_rect %i 600 20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / noutlet);
 }
 

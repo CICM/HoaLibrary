@@ -1,0 +1,24 @@
+﻿La génération a démarré 18/09/2012 08:39:16.
+     1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaTrajectory\hoa.trajectory.vcxproj" sur le nœud 2 (build cible(s)).
+     1>InitializeBuildStatus:
+         Création de "..\ext_win_debug\hoa.trajectory.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes" /I".\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\msp-includes" /Zi /nologo /W3 /WX- /Od /Oy- /D WIN_VERSION /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm /RTC1 /MDd /Zp2 /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_debug\\" /Fd"..\ext_win_debug\hoa.trajectory.pdb" /Gd /TC /analyze- /errorReport:prompt hoa.trajectory.c
+         hoa.trajectory.c
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaTrajectory\.\..\..\sdk-build\hoa.trajectory.dll) ne correspond pas à la valeur de la propriété OutputFile (C:\Users\Pierre\Documents\GitHub\CICM-Library\sdk-build\hoa.trajectory.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(991,5): warning MSB8012: TargetExt(.dll) ne correspond pas à la valeur de la propriété OutputFile (.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\..\sdk-build\hoa.trajectory.mxe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\msp-includes" /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes" MaxAPI.lib MaxAudio.lib maxcrt.lib /NODEFAULTLIB:MSVCRTD.lib /DEF:".\hoa.trajectory.def" /MANIFEST:NO /DEBUG /PDB:"..\ext_win_debug\hoa.trajectory.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\ext_win_debug\hoa.trajectory.lib" /MACHINE:X86 /DLL ..\ext_win_debug\dllmain_win.obj
+         ..\ext_win_debug\hoa.trajectory.obj /MACHINE:I386 
+            Création de la bibliothèque ..\ext_win_debug\hoa.trajectory.lib et de l'objet ..\ext_win_debug\hoa.trajectory.exp
+         hoa.trajectory.vcxproj -> C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaTrajectory\.\..\..\sdk-build\hoa.trajectory.dll
+       CopyFilesToOutputDirectory:
+         Copie du fichier de "..\ext_win_debug\hoa.trajectory.pdb" vers ".\..\..\sdk-build\hoa.trajectory.pdb".
+       FinalizeBuildStatus:
+         Suppression du fichier "..\ext_win_debug\hoa.trajectory.unsuccessfulbuild".
+         Mise à jour de l'horodatage "..\ext_win_debug\hoa.trajectory.lastbuildstate".
+     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaTrajectory\hoa.trajectory.vcxproj" terminée (build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:00:00.54

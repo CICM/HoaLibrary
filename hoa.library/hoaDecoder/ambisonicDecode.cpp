@@ -17,7 +17,7 @@
  */
 
 
-#include "ambisonicDecode.h"
+#include "ambisonicDecode.hpp"
 
 ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorSize, std::string anOptimMode)
 {

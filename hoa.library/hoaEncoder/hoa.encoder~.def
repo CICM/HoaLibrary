@@ -1,0 +1,7 @@
+;hoa.encoder~.def
+
+LIBRARY hoa.encoder~.mxe
+
+EXPORTS
+	main
+

@@ -1,0 +1,278 @@
+﻿La génération a démarré 19/09/2012 11:20:34.
+     1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\hoa.decoder~.vcxproj" sur le nœud 2 (build cible(s)).
+     1>InitializeBuildStatus:
+         Mise à jour de l'horodatage "..\ext_win_debug\hoa.decoder~.unsuccessfulbuild".
+       ClCompile:
+         Toutes les sorties sont à jour.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /IC:\cygwin\usr\include /Zi /nologo /W3 /WX- /Od /Oy- /D WIN_VERSION /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm /RTC1 /MDd /Zp2 /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_debug\\" /Fd"..\ext_win_debug\hoa.decoder~.pdb" /Gd /TP /analyze- /errorReport:prompt ambisonicDecode.cpp gslMatrix.cpp "hoa.decoder~.cpp" matrixHandling.cpp
+         matrixHandling.cpp
+         hoa.decoder~.cpp
+     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoadecoder\ambisonicDecode.hpp(20): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
+     1>C:\cygwin\usr\include\sys/_types.h(36): error C2144: erreur de syntaxe : '__int64' doit être précédé de ';'
+     1>C:\cygwin\usr\include\sys/_types.h(36): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>C:\cygwin\usr\include\sys/_types.h(74): error C4980: '__value' : l'utilisation de ce mot clé requiert l'option de ligne de commande /clr:oldSyntax
+     1>C:\cygwin\usr\include\sys/_types.h(74): error C2059: erreur de syntaxe : '__value'
+     1>C:\cygwin\usr\include\sys/reent.h(185): error C2061: erreur de syntaxe : identificateur '_read'
+     1>C:\cygwin\usr\include\sys/reent.h(186): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(186): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(187): error C2061: erreur de syntaxe : identificateur '_write'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2535: 'int __sFILE::_EXFNPTR(void)' : fonction membre déjà définie ou déclarée
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2061: erreur de syntaxe : identificateur '_seek'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2556: '_fpos_t __sFILE::_EXFNPTR(void)' : la fonction surchargée ne diffère que par le type de retour de 'int __sFILE::_EXFNPTR(void)'
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2371: '__sFILE::_EXFNPTR' : redéfinition ; types de base différents
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2061: erreur de syntaxe : identificateur '_close'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2061: erreur de syntaxe : identificateur '__cleanup'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(618): error C2144: erreur de syntaxe : 'unsigned __int64' doit être précédé de ';'
+     1>C:\cygwin\usr\include\sys/reent.h(618): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>C:\cygwin\usr\include\sys/types.h(110): error C2371: 'time_t' : redéfinition ; types de base différents
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\crtdefs.h(486) : voir la déclaration de 'time_t'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2039: 'acosl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2873: 'acosl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2039: 'asinl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2873: 'asinl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2039: 'atanl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2873: 'atanl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2039: 'atan2l' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2873: 'atan2l' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2039: 'ceill' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2873: 'ceill' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2039: 'cosl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2873: 'cosl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2039: 'coshl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2873: 'coshl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2039: 'expl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2873: 'expl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2039: 'fabsl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2873: 'fabsl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2039: 'floorl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2873: 'floorl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2039: 'fmodl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2873: 'fmodl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2039: 'frexpl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2873: 'frexpl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2039: 'ldexpl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2873: 'ldexpl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2039: 'logl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2873: 'logl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2039: 'log10l' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2873: 'log10l' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2039: 'modfl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2873: 'modfl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2039: 'powl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2873: 'powl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2039: 'sinl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2873: 'sinl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2039: 'sinhl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2873: 'sinhl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2039: 'sqrtl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2873: 'sqrtl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2039: 'tanl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2873: 'tanl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2039: 'tanhl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2873: 'tanhl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(37): error C2039: 'abs' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(37): error C2873: 'abs' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\cygwin\usr\include\stdlib.h(64): error C2733: seconde liaison C d'une fonction surchargée 'atexit' non autorisée
+                 C:\cygwin\usr\include\stdlib.h(64) : voir la déclaration de 'atexit'
+     1>C:\cygwin\usr\include\stdlib.h(105): error C2733: seconde liaison C d'une fonction surchargée 'mkdtemp' non autorisée
+                 C:\cygwin\usr\include\stdlib.h(105) : voir la déclaration de 'mkdtemp'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cwchar(16): error C2371: '_Mbstatet' : redéfinition ; types de base différents
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\yvals.h(851) : voir la déclaration de '_Mbstatet'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(292): error C2660: 'wmemcmp' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(297): error C2660: 'wcslen' : la fonction ne prend pas 1 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(303): error C2660: 'wmemcpy' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(310): error C2039: 'wmemcpy_s' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(310): error C3861: 'wmemcpy_s' : identificateur introuvable
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(317): error C2660: 'wmemchr' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(323): error C2660: 'wmemmove' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(328): error C2660: 'wmemset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(388): error C2660: 'wmemcmp' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(393): error C2660: 'wcslen' : la fonction ne prend pas 1 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(400): error C2660: 'wmemcpy' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(407): error C2039: 'wmemcpy_s' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(407): error C3861: 'wmemcpy_s' : identificateur introuvable
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(415): error C2660: 'wmemchr' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(422): error C2660: 'wmemmove' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(427): error C2660: 'wmemset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(486): error C2660: 'memcmp' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(491): error C2660: 'strlen' : la fonction ne prend pas 1 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(497): error C2660: 'memcpy' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(504): error C2039: 'memcpy_s' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(504): error C3861: 'memcpy_s' : identificateur introuvable
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(511): error C2660: 'memchr' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(517): error C2660: 'memmove' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(522): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2697): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2702): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2707): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2730): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2735): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2740): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2740): fatal error C1003: le nombre d'erreurs est supérieur à 100 ; arrêt de la compilation
+         gslMatrix.cpp
+     1>C:\cygwin\usr\include\sys/_types.h(36): error C2144: erreur de syntaxe : '__int64' doit être précédé de ';'
+     1>C:\cygwin\usr\include\sys/_types.h(36): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>C:\cygwin\usr\include\sys/_types.h(74): error C4980: '__value' : l'utilisation de ce mot clé requiert l'option de ligne de commande /clr:oldSyntax
+     1>C:\cygwin\usr\include\sys/_types.h(74): error C2059: erreur de syntaxe : '__value'
+     1>C:\cygwin\usr\include\sys/reent.h(185): error C2061: erreur de syntaxe : identificateur '_read'
+     1>C:\cygwin\usr\include\sys/reent.h(186): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(186): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(187): error C2061: erreur de syntaxe : identificateur '_write'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2535: 'int __sFILE::_EXFNPTR(void)' : fonction membre déjà définie ou déclarée
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2061: erreur de syntaxe : identificateur '_seek'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2556: '_fpos_t __sFILE::_EXFNPTR(void)' : la fonction surchargée ne diffère que par le type de retour de 'int __sFILE::_EXFNPTR(void)'
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2371: '__sFILE::_EXFNPTR' : redéfinition ; types de base différents
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2061: erreur de syntaxe : identificateur '_close'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2061: erreur de syntaxe : identificateur '__cleanup'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(618): error C2144: erreur de syntaxe : 'unsigned __int64' doit être précédé de ';'
+     1>C:\cygwin\usr\include\sys/reent.h(618): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>C:\cygwin\usr\include\stdlib.h(64): error C2733: seconde liaison C d'une fonction surchargée 'atexit' non autorisée
+                 C:\cygwin\usr\include\stdlib.h(64) : voir la déclaration de 'atexit'
+     1>C:\cygwin\usr\include\stdlib.h(105): error C2733: seconde liaison C d'une fonction surchargée 'mkdtemp' non autorisée
+                 C:\cygwin\usr\include\stdlib.h(105) : voir la déclaration de 'mkdtemp'
+     1>C:\cygwin\usr\include\sys/types.h(110): error C2371: 'time_t' : redéfinition ; types de base différents
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\crtdefs.h(486) : voir la déclaration de 'time_t'
+     1>C:\cygwin\usr\include\sys/errno.h(14): warning C4005: 'errno' : redéfinition de macro
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stddef.h(48) : voir la définition précédente de 'errno'
+         ambisonicDecode.cpp
+     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoadecoder\ambisonicDecode.hpp(20): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
+     1>C:\cygwin\usr\include\sys/_types.h(36): error C2144: erreur de syntaxe : '__int64' doit être précédé de ';'
+     1>C:\cygwin\usr\include\sys/_types.h(36): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>C:\cygwin\usr\include\sys/_types.h(74): error C4980: '__value' : l'utilisation de ce mot clé requiert l'option de ligne de commande /clr:oldSyntax
+     1>C:\cygwin\usr\include\sys/_types.h(74): error C2059: erreur de syntaxe : '__value'
+     1>C:\cygwin\usr\include\sys/reent.h(185): error C2061: erreur de syntaxe : identificateur '_read'
+     1>C:\cygwin\usr\include\sys/reent.h(186): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(186): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(187): error C2061: erreur de syntaxe : identificateur '_write'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(188): error C2535: 'int __sFILE::_EXFNPTR(void)' : fonction membre déjà définie ou déclarée
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2061: erreur de syntaxe : identificateur '_seek'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2556: '_fpos_t __sFILE::_EXFNPTR(void)' : la fonction surchargée ne diffère que par le type de retour de 'int __sFILE::_EXFNPTR(void)'
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(189): error C2371: '__sFILE::_EXFNPTR' : redéfinition ; types de base différents
+                 C:\cygwin\usr\include\sys/reent.h(185) : voir la déclaration de '__sFILE::_EXFNPTR'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2061: erreur de syntaxe : identificateur '_close'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(190): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2061: erreur de syntaxe : identificateur '__cleanup'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2059: erreur de syntaxe : ')'
+     1>C:\cygwin\usr\include\sys/reent.h(597): error C2143: erreur de syntaxe : absence de ')' avant ';'
+     1>C:\cygwin\usr\include\sys/reent.h(618): error C2144: erreur de syntaxe : 'unsigned __int64' doit être précédé de ';'
+     1>C:\cygwin\usr\include\sys/reent.h(618): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+     1>C:\cygwin\usr\include\sys/types.h(110): error C2371: 'time_t' : redéfinition ; types de base différents
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\crtdefs.h(486) : voir la déclaration de 'time_t'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2039: 'acosl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2873: 'acosl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2039: 'asinl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(28): error C2873: 'asinl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2039: 'atanl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2873: 'atanl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2039: 'atan2l' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2873: 'atan2l' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2039: 'ceill' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(29): error C2873: 'ceill' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2039: 'cosl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2873: 'cosl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2039: 'coshl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2873: 'coshl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2039: 'expl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(30): error C2873: 'expl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2039: 'fabsl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2873: 'fabsl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2039: 'floorl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2873: 'floorl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2039: 'fmodl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(31): error C2873: 'fmodl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2039: 'frexpl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2873: 'frexpl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2039: 'ldexpl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2873: 'ldexpl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2039: 'logl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(32): error C2873: 'logl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2039: 'log10l' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2873: 'log10l' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2039: 'modfl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2873: 'modfl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2039: 'powl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(33): error C2873: 'powl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2039: 'sinl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2873: 'sinl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2039: 'sinhl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2873: 'sinhl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2039: 'sqrtl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(34): error C2873: 'sqrtl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2039: 'tanl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2873: 'tanl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2039: 'tanhl' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(35): error C2873: 'tanhl' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(37): error C2039: 'abs' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cmath(37): error C2873: 'abs' : un symbole ne peut pas être utilisé dans une déclaration using
+     1>C:\cygwin\usr\include\stdlib.h(64): error C2733: seconde liaison C d'une fonction surchargée 'atexit' non autorisée
+                 C:\cygwin\usr\include\stdlib.h(64) : voir la déclaration de 'atexit'
+     1>C:\cygwin\usr\include\stdlib.h(105): error C2733: seconde liaison C d'une fonction surchargée 'mkdtemp' non autorisée
+                 C:\cygwin\usr\include\stdlib.h(105) : voir la déclaration de 'mkdtemp'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\cwchar(16): error C2371: '_Mbstatet' : redéfinition ; types de base différents
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\yvals.h(851) : voir la déclaration de '_Mbstatet'
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(292): error C2660: 'wmemcmp' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(297): error C2660: 'wcslen' : la fonction ne prend pas 1 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(303): error C2660: 'wmemcpy' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(310): error C2039: 'wmemcpy_s' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(310): error C3861: 'wmemcpy_s' : identificateur introuvable
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(317): error C2660: 'wmemchr' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(323): error C2660: 'wmemmove' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(328): error C2660: 'wmemset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(388): error C2660: 'wmemcmp' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(393): error C2660: 'wcslen' : la fonction ne prend pas 1 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(400): error C2660: 'wmemcpy' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(407): error C2039: 'wmemcpy_s' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(407): error C3861: 'wmemcpy_s' : identificateur introuvable
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(415): error C2660: 'wmemchr' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(422): error C2660: 'wmemmove' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(427): error C2660: 'wmemset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(486): error C2660: 'memcmp' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(491): error C2660: 'strlen' : la fonction ne prend pas 1 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(497): error C2660: 'memcpy' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(504): error C2039: 'memcpy_s' : n'est pas membre de '`global namespace''
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(504): error C3861: 'memcpy_s' : identificateur introuvable
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(511): error C2660: 'memchr' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(517): error C2660: 'memmove' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\iosfwd(522): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2697): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2702): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2707): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2730): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2735): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2740): error C2660: 'memset' : la fonction ne prend pas 3 arguments
+     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2740): fatal error C1003: le nombre d'erreurs est supérieur à 100 ; arrêt de la compilation
+         Génération de code en cours...
+     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\hoa.decoder~.vcxproj" terminée (build cible(s)) -- ÉCHEC.
+
+ÉCHEC de la build.
+
+Temps écoulé 00:00:00.65
