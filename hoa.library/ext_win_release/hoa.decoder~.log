@@ -1,113 +1,28 @@
-﻿La génération a démarré 19/09/2012 10:57:33.
+﻿La génération a démarré 19/09/2012 13:44:49.
      1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\hoa.decoder~.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
          Mise à jour de l'horodatage "..\ext_win_release\hoa.decoder~.unsuccessfulbuild".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /IC:\cygwin\usr\include /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy /GL /D WIN_VERSION /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /GF /Gm- /MD /Zp2 /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_release\\" /Fd"..\ext_win_release\hoa.decoder~.pdb" /Gd /TC /analyze- /errorReport:prompt "..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c"
-         dllmain_win.c
-     1>C:\cygwin\usr\include\sys/_types.h(36): error C2054: '(' attendu après '__extension__'
-     1>C:\cygwin\usr\include\sys/_types.h(36): error C2085: '_off64_t' : ne figure pas dans la liste de paramètres formels
-     1>C:\cygwin\usr\include\sys/_types.h(44): error C2085: '_fpos_t' : ne figure pas dans la liste de paramètres formels
-     1>C:\cygwin\usr\include\sys/_types.h(56): error C2085: '_ssize_t' : ne figure pas dans la liste de paramètres formels
-     1>C:\cygwin\usr\include\sys/_types.h(73): error C2057: expression constante attendue
-     1>C:\cygwin\usr\include\sys/_types.h(74): error C4980: '__value' : l'utilisation de ce mot clé requiert l'option de ligne de commande /clr:oldSyntax
-     1>C:\cygwin\usr\include\sys/_types.h(74): error C2059: erreur de syntaxe : '__value'
-     1>C:\cygwin\usr\include\sys/_types.h(75): error C2085: '_mbstate_t' : ne figure pas dans la liste de paramètres formels
-     1>C:\cygwin\usr\include\sys/_types.h(79): error C2085: '_flock_t' : ne figure pas dans la liste de paramètres formels
-     1>C:\cygwin\usr\include\sys/_types.h(84): error C2085: '_iconv_t' : ne figure pas dans la liste de paramètres formels
-     1>C:\cygwin\usr\include\sys/reent.h(21): error C2085: '__ULong' : ne figure pas dans la liste de paramètres formels
-     1>C:\cygwin\usr\include\sys/reent.h(48): error C2061: erreur de syntaxe : identificateur '__ULong'
-     1>C:\cygwin\usr\include\sys/reent.h(49): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\sys/reent.h(75): error C2061: erreur de syntaxe : identificateur '__ULong'
-     1>C:\cygwin\usr\include\sys/reent.h(78): error C2061: erreur de syntaxe : identificateur '_is_cxa'
-     1>C:\cygwin\usr\include\sys/reent.h(78): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(79): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\sys/reent.h(94): error C2079: '_on_exit_args' utilise une struct de '_on_exit_args' non défini
-     1>C:\cygwin\usr\include\sys/reent.h(185): error C2059: erreur de syntaxe : ','
-     1>C:\cygwin\usr\include\sys/reent.h(185): error C2143: erreur de syntaxe : absence de ')' avant '('
-     1>C:\cygwin\usr\include\sys/reent.h(186): error C2091: fonction retournée par la fonction
-     1>C:\cygwin\usr\include\sys/reent.h(186): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\sys/reent.h(186): error C2032: '_EXFNPTR' : la fonction ne peut pas être membre de struct '__sFILE'
-     1>C:\cygwin\usr\include\sys/reent.h(187): error C2059: erreur de syntaxe : ','
-     1>C:\cygwin\usr\include\sys/reent.h(187): error C2143: erreur de syntaxe : absence de ')' avant '('
-     1>C:\cygwin\usr\include\sys/reent.h(188): error C2091: fonction retournée par la fonction
-     1>C:\cygwin\usr\include\sys/reent.h(188): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\sys/reent.h(188): error C2032: '_EXFNPTR' : la fonction ne peut pas être membre de struct '__sFILE'
-     1>C:\cygwin\usr\include\sys/reent.h(188): error C2020: '_EXFNPTR' : redéfinition du membre 'struct'
-     1>C:\cygwin\usr\include\sys/reent.h(189): error C2061: erreur de syntaxe : identificateur '_fpos_t'
-     1>C:\cygwin\usr\include\sys/reent.h(190): error C2059: erreur de syntaxe : ','
-     1>C:\cygwin\usr\include\sys/reent.h(190): error C2143: erreur de syntaxe : absence de ')' avant '('
-     1>C:\cygwin\usr\include\sys/reent.h(190): error C2091: fonction retournée par la fonction
-     1>C:\cygwin\usr\include\sys/reent.h(190): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\sys/reent.h(213): error C2061: erreur de syntaxe : identificateur '_lock'
-     1>C:\cygwin\usr\include\sys/reent.h(213): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(215): error C2061: erreur de syntaxe : identificateur '_mbstate'
-     1>C:\cygwin\usr\include\sys/reent.h(215): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(217): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\sys/reent.h(597): error C2059: erreur de syntaxe : ','
-     1>C:\cygwin\usr\include\sys/reent.h(597): error C2143: erreur de syntaxe : absence de ')' avant '('
-     1>C:\cygwin\usr\include\sys/reent.h(597): error C2091: fonction retournée par la fonction
-     1>C:\cygwin\usr\include\sys/reent.h(597): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\sys/reent.h(597): error C2032: '_EXFNPTR' : la fonction ne peut pas être membre de struct '_reent'
-     1>C:\cygwin\usr\include\sys/reent.h(618): error C2061: erreur de syntaxe : identificateur '__extension__'
-     1>C:\cygwin\usr\include\sys/reent.h(620): error C2061: erreur de syntaxe : identificateur '_mblen_state'
-     1>C:\cygwin\usr\include\sys/reent.h(620): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(621): error C2061: erreur de syntaxe : identificateur '_mbtowc_state'
-     1>C:\cygwin\usr\include\sys/reent.h(621): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(622): error C2061: erreur de syntaxe : identificateur '_wctomb_state'
-     1>C:\cygwin\usr\include\sys/reent.h(622): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(626): error C2061: erreur de syntaxe : identificateur '_mbrlen_state'
-     1>C:\cygwin\usr\include\sys/reent.h(626): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(627): error C2061: erreur de syntaxe : identificateur '_mbrtowc_state'
-     1>C:\cygwin\usr\include\sys/reent.h(627): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(628): error C2061: erreur de syntaxe : identificateur '_mbsrtowcs_state'
-     1>C:\cygwin\usr\include\sys/reent.h(628): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(629): error C2061: erreur de syntaxe : identificateur '_wcrtomb_state'
-     1>C:\cygwin\usr\include\sys/reent.h(629): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(630): error C2061: erreur de syntaxe : identificateur '_wcsrtombs_state'
-     1>C:\cygwin\usr\include\sys/reent.h(630): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/reent.h(632): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\sys/reent.h(642): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\sys/reent.h(655): error C2148: la taille totale du tableau ne doit pas dépasser 0x7fffffff octets
-     1>C:\cygwin\usr\include\sys/reent.h(656): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\sys/types.h(110): error C2371: 'time_t' : redéfinition ; types de base différents
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\crtdefs.h(486) : voir la déclaration de 'time_t'
-     1>C:\cygwin\usr\include\sys/types.h(185): error C2061: erreur de syntaxe : identificateur 'ssize_t'
-     1>C:\cygwin\usr\include\sys/types.h(185): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\stdio.h(55): error C2061: erreur de syntaxe : identificateur 'fpos_t'
-     1>C:\cygwin\usr\include\stdio.h(55): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/stdio.h(37): error C2061: erreur de syntaxe : identificateur 'getline'
-     1>C:\cygwin\usr\include\sys/stdio.h(37): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/stdio.h(37): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\sys/stdio.h(38): error C2061: erreur de syntaxe : identificateur 'getdelim'
-     1>C:\cygwin\usr\include\sys/stdio.h(38): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\sys/stdio.h(38): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\stdio.h(486): error C2061: erreur de syntaxe : identificateur '__getdelim'
-     1>C:\cygwin\usr\include\stdio.h(486): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\stdio.h(486): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\stdio.h(487): error C2061: erreur de syntaxe : identificateur '__getline'
-     1>C:\cygwin\usr\include\stdio.h(487): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\stdio.h(487): error C2059: erreur de syntaxe : ')'
-     1>C:\cygwin\usr\include\stdio.h(552): error C2061: erreur de syntaxe : identificateur 'cookie_read_function_t'
-     1>C:\cygwin\usr\include\stdio.h(552): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\stdio.h(552): error C2059: erreur de syntaxe : 'type'
-     1>C:\cygwin\usr\include\stdio.h(553): error C2061: erreur de syntaxe : identificateur 'cookie_write_function_t'
-     1>C:\cygwin\usr\include\stdio.h(553): error C2059: erreur de syntaxe : ';'
-     1>C:\cygwin\usr\include\stdio.h(553): error C2059: erreur de syntaxe : 'type'
-     1>C:\cygwin\usr\include\stdio.h(566): error C2016: C requiert qu'un struct ou une union possède au moins un membre
-     1>C:\cygwin\usr\include\stdio.h(566): error C2061: erreur de syntaxe : identificateur 'cookie_read_function_t'
-     1>C:\cygwin\usr\include\stdio.h(567): error C2143: erreur de syntaxe : absence de '{' avant '*'
-     1>C:\cygwin\usr\include\stdio.h(570): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\math.h(17): error C2061: erreur de syntaxe : identificateur '__ULong'
-     1>C:\cygwin\usr\include\math.h(18): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\math.h(23): error C2061: erreur de syntaxe : identificateur '__ULong'
-     1>C:\cygwin\usr\include\math.h(24): error C2059: erreur de syntaxe : '}'
-     1>C:\cygwin\usr\include\math.h(30): error C2061: erreur de syntaxe : identificateur '__ULong'
-     1>C:\cygwin\usr\include\math.h(31): error C2059: erreur de syntaxe : '}'
-     1>c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winsock.h(68): error C2011: '_types_fd_set' : redéfinition du type 'struct'
-                 C:\cygwin\usr\include\sys/types.h(234) : voir la déclaration de '_types_fd_set'
-     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\hoa.decoder~.vcxproj" terminée (build cible(s)) -- ÉCHEC.
+         Toutes les sorties sont à jour.
+         Toutes les sorties sont à jour.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\.\..\..\sdk-build\hoa.decoder~.dll) ne correspond pas à la valeur de la propriété OutputFile (C:\Users\Pierre\Documents\GitHub\CICM-Library\sdk-build\hoa.decoder~.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(991,5): warning MSB8012: TargetExt(.dll) ne correspond pas à la valeur de la propriété OutputFile (.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\..\sdk-build\hoa.decoder~.mxe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /LIBPATH:C:\gsl\lib\Win32\Release MaxAPI.lib MaxAudio.lib cblas.lib gsl.lib /NODEFAULTLIB:MSVCRT.lib /DEF:".\hoa.decoder~.def" /MANIFEST:NO /DEBUG /PDB:"..\ext_win_release\hoa.decoder~.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\ext_win_release\hoa.decoder~.lib" /MACHINE:X86 /DLL ..\ext_win_release\dllmain_win.obj
+         ..\ext_win_release\ambisonicDecode.obj
+         ..\ext_win_release\gslMatrix.obj
+         "..\ext_win_release\hoa.decoder~.obj"
+         ..\ext_win_release\matrixHandling.obj /MACHINE:I386 
+            Création de la bibliothèque ..\ext_win_release\hoa.decoder~.lib et de l'objet ..\ext_win_release\hoa.decoder~.exp
+     1>LINK : warning LNK4098: conflit entre la bibliothèque par défaut 'LIBCMT' et les autres bibliothèques ; utilisez /NODEFAULTLIB:library
+         Génération de code en cours
+         Fin de la génération du code
+         hoa.decoder~.vcxproj -> C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\.\..\..\sdk-build\hoa.decoder~.dll
+       FinalizeBuildStatus:
+         Suppression du fichier "..\ext_win_release\hoa.decoder~.unsuccessfulbuild".
+         Mise à jour de l'horodatage "..\ext_win_release\hoa.decoder~.lastbuildstate".
+     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\hoa.decoder~.vcxproj" terminée (build cible(s)).
 
-ÉCHEC de la build.
+La génération a réussi.
 
-Temps écoulé 00:00:00.32
+Temps écoulé 00:00:01.03

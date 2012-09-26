@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
-#include "gslMatrix.h"
+#include "gslMatrix.hpp"
 #include <gsl/gsl_sf.h>
 #include <vector>
 #include <string>

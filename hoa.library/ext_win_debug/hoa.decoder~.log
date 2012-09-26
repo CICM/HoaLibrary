@@ -1,11 +1,10 @@
-﻿La génération a démarré 19/09/2012 11:20:34.
+﻿La génération a démarré 19/09/2012 13:29:04.
      1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDecoder\hoa.decoder~.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
          Mise à jour de l'horodatage "..\ext_win_debug\hoa.decoder~.unsuccessfulbuild".
        ClCompile:
          Toutes les sorties sont à jour.
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /IC:\cygwin\usr\include /Zi /nologo /W3 /WX- /Od /Oy- /D WIN_VERSION /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm /RTC1 /MDd /Zp2 /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_debug\\" /Fd"..\ext_win_debug\hoa.decoder~.pdb" /Gd /TP /analyze- /errorReport:prompt ambisonicDecode.cpp gslMatrix.cpp "hoa.decoder~.cpp" matrixHandling.cpp
-         matrixHandling.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /IC:\cygwin\usr\include /Zi /nologo /W3 /WX- /Od /Oy- /D WIN_VERSION /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm /RTC1 /MDd /Zp2 /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_debug\\" /Fd"..\ext_win_debug\hoa.decoder~.pdb" /Gd /TP /analyze- /errorReport:prompt ambisonicDecode.cpp gslMatrix.cpp "hoa.decoder~.cpp"
          hoa.decoder~.cpp
      1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoadecoder\ambisonicDecode.hpp(20): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
      1>C:\cygwin\usr\include\sys/_types.h(36): error C2144: erreur de syntaxe : '__int64' doit être précédé de ';'
@@ -275,4 +274,4 @@
 
 ÉCHEC de la build.
 
-Temps écoulé 00:00:00.65
+Temps écoulé 00:00:00.66

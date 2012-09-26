@@ -17,15 +17,13 @@
  *
  */
 
+#include "ambisonicProjector.h"
 extern "C"
 {
 	#include "ext.h"
 	#include "ext_obex.h"
 	#include "z_dsp.h"
 }
-
-#include "ambisonicProjector.h"
-
 
 typedef struct _HoaProjector
 {
@@ -113,9 +111,9 @@ void HoaProjector_dsp(t_HoaProjector *x, t_signal **sp, short *count)
 	x->f_ambisonicProjector->setVectorSize(sp[0]->s_n);
 	pointer_count = x->f_ambisonicProjector->getParameters("numberOfInputs") + x->f_ambisonicProjector->getParameters("numberOfOutputs") + 2;
 	
-	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
+	sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
-		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
+		sigvec[i] = (t_int *)malloc(sizeof(t_int));
 	
 	sigvec[0] = (t_int *)x;
 	sigvec[1] = (t_int *)sp[0]->s_n;
@@ -145,7 +143,7 @@ void HoaProjector_assist(t_HoaProjector *x, void *b, long m, long a, char *s)
 		long harmonicIndex = 0;
 		if (a != 0)
 		{
-			harmonicIndex = floor((a - 1) / 2) + 1;
+			harmonicIndex = (a - 1) / 2 + 1;
 			if (a % 2 == 1) 
 				harmonicIndex = - harmonicIndex;
 		}

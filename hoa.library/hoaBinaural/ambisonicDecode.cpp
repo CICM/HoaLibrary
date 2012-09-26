@@ -7,7 +7,7 @@
  *
  */
 
-#include "ambisonicDecode.h"
+#include "ambisonicDecode.hpp"
 
 ambisonicDecode::ambisonicDecode(int channels,int order): m_order(order), m_harmonics(order*2+1), m_channels(channels), m_optimId("basic")
 {
@@ -20,7 +20,7 @@ ambisonicDecode::ambisonicDecode(int channels,int order): m_order(order), m_harm
 	m_harmonicsIndex[0] = 0;
 	for(int i = 1; i < m_harmonics; i++)
 	{
-		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+		m_harmonicsIndex[i] = (int)floor((float)(i-1) / 2.) + 1;
 		if (i % 2 == 1) 
 			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
 	}

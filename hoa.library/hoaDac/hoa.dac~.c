@@ -19,6 +19,7 @@
 #include "ext.h"
 #include "ext_obex.h"
 #include "ext_common.h"
+#include "z_dsp.h"
 
 void *dac_class;
 
@@ -29,7 +30,7 @@ int main(void)
 	t_class *c;
 
 	c = class_new("hoa.dac~", (method)dac_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
-	
+	class_dspinit(c);
 	class_register(CLASS_BOX, c);
 	dac_class = c;
 	

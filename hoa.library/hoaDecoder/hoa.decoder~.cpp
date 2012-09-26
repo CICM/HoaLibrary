@@ -148,7 +148,7 @@ void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 	
 		if (a != 0) 
 		{
-			harmonicIndex = floor((a - 1) / 2) + 1;
+			harmonicIndex = (a - 1) / 2 + 1;
 			if (a % 2 == 1) 
 				harmonicIndex = - harmonicIndex;
 		}
@@ -160,6 +160,7 @@ void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 
 void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
 {
+	/*
 	double value[argc];
 	for(int i = 0; i < argc; i++)
 	{
@@ -177,6 +178,7 @@ void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
 		
 	}
 	x->f_ambisonicDecoder->setSpkrsAngles(value, (int)argc);
+	*/
 }
 
 void HoaDecode_optim(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)

@@ -17,16 +17,25 @@
  *
  */
 
-#include "AmbisonicBinaural.h"
+#include "AmbisonicBinaural.hpp"
 
 
 AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode, std::string pinnaSize)
 {	
+	/*
 	if (pinnaSize == "small") {
 		m_preFilePath = "/Applications/Max5/Cycling '74/hoaLibrary/hrtfDatabase/";
 	}
 	else {
 		m_preFilePath = "/Applications/Max5/Cycling '74/hoaLibrary/hrtfDatabase/large/";
+	}
+	*/
+	if (pinnaSize == "small") 
+	{
+		m_preFilePath = "C:/Program Files (x86)/Cycling '74/Max 5.0/Cycling '74/hoaLibrary/hrtfDatabase/";
+	}
+	else {
+		m_preFilePath = "C:/Program Files (x86)/Cycling '74/Max 5.0/Cycling '74/hoaLibrary/hrtfDatabase/large/";
 	}
 
 	m_vector_size = 0;
@@ -55,7 +64,7 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	m_harmonicsIndex[0] = 0;
 	for(int i = 1; i < m_numberOfHarmonics; i++)
 	{
-		m_harmonicsIndex[i] = (int)floor((i-1)/2) + 1;
+		m_harmonicsIndex[i] = (int)floor((float)(i-1) / 2.f) + 1;
 		if (i % 2 == 1) 
 			m_harmonicsIndex[i] = - m_harmonicsIndex[i];
 	}

@@ -31,7 +31,7 @@
 #include <gsl/gsl_sf.h>
 #include <vector>
 #include <string>
-
+#include "gslMatrix.hpp"
 
 class ambisonicDecode
 {

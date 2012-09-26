@@ -17,6 +17,7 @@
  *
  */
 
+#include "ambisonicRecomposer.hpp"
 extern "C"
 {
 	#include "ext.h"
@@ -24,7 +25,6 @@ extern "C"
 	#include "z_dsp.h"
 }
 
-#include "ambisonicRecomposer.h"
 
 
 typedef struct _HoaRecomposer 
@@ -183,7 +183,7 @@ void HoaRecomposer_assist(t_HoaRecomposer *x, void *b, long m, long a, char *s)
 			harmonicIndex = 0;
 		else 
 		{
-			harmonicIndex = (int)floor((a - 1) / 2) + 1;
+			harmonicIndex = (a - 1) / 2 + 1;
 			if (a % 2 == 1) 
 				harmonicIndex = - harmonicIndex;
 		}
