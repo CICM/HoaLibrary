@@ -13,7 +13,11 @@
 =======
 		"defrect" : [ 57.0, 124.0, 814.0, 540.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
 		"default_fontface" : 0,
@@ -278,7 +282,11 @@
 						"default_fontname" : "Arial",
 						"globalpatchername" : "",
 						"default_fontsize" : 12.0
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 					}
 ,
 					"text" : "p key32"
@@ -312,7 +320,11 @@
 					"patching_rect" : [ 975.0, 90.0, 50.0, 20.0 ]
 =======
 					"patching_rect" : [ 495.0, 120.0, 50.0, 20.0 ]
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 				}
 
 			}
@@ -344,7 +356,11 @@
 						"bglocked" : 0,
 						"defrect" : [ 30.0, 135.0, 218.0, 87.0 ],
 						"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
 						"default_fontface" : 0,
@@ -782,7 +798,11 @@
 										"default_fontname" : "Arial",
 										"globalpatchername" : "",
 										"default_fontsize" : 12.0
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 									}
 ,
 									"text" : "p attrArgs"
@@ -1529,7 +1549,11 @@
 										"default_fontname" : "Arial",
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
 										"default_fontsize" : 12.0
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 									}
 ,
 									"text" : "p manageDisplay"
@@ -2842,7 +2866,11 @@
 														"default_fontname" : "Arial",
 														"globalpatchername" : "",
 														"default_fontsize" : 12.0
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -3856,7 +3884,11 @@
 =======
 					"patching_rect" : [ 30.0, 300.0, 484.0, 20.0 ],
 					"text" : "hoa.binaural~ 35 small"
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
+=======
+>>>>>>> origin/master
+>>>>>>> origin/Windows
 				}
 
 			}
