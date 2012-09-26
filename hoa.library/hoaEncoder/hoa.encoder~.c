@@ -25,6 +25,8 @@ extern "C" {
 
 #include <AmbisonicEncode.h>
 int postons = 0;
+
+
 typedef struct _HoaEncode 
 {
 	t_pxobject					f_ob;			
@@ -73,13 +75,14 @@ int main(void)
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
-	if(postons == 0)
-	{
-		post("hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
-		post("Copyright (C) 2012, CICM / Universite Paris 8");
-		postons = 1;
+
+	if(class_findbyname(CLASS_NOBOX, gensym("hoa.loader")) == NULL){
+		if (postons == 0) {
+			post("hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
+			post("Copyright (C) 2012, CICM / Universite Paris 8");
+			postons = 1;
+		}
 	}
-	
 	return 0;
 }
 
