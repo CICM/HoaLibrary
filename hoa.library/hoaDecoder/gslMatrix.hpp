@@ -14,10 +14,6 @@
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
 
-#ifndef PI
-#define PI 3.14159265
-#endif
-
 void printMat(gsl_matrix* A);
 void printVec(gsl_vector* a);
 void resizeVector(gsl_vector** vector, unsigned int size);

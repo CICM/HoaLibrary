@@ -7,58 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E42D10915EF60D400EB89AB /* hoa.binaural~.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E42D10815EF60D400EB89AB /* hoa.binaural~.c */; };
-		0E42D10C15EF60DB00EB89AB /* AmbisonicBinaural.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E42D10A15EF60DB00EB89AB /* AmbisonicBinaural.cpp */; };
-		0E42D10D15EF60DB00EB89AB /* AmbisonicBinaural.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E42D10B15EF60DB00EB89AB /* AmbisonicBinaural.h */; };
-		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
-		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		4E8540A215F220A500169453 /* gslMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */; };
-		4E8540A315F220A500169453 /* AmbisonicBinaural.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E42D10B15EF60DB00EB89AB /* AmbisonicBinaural.h */; };
-		4E8540A415F220A500169453 /* fileLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF5EDF415EF72FC00DC3523 /* fileLoader.h */; };
-		4E8540A515F220A500169453 /* ambisonicDecode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF5EE2B15EF787700DC3523 /* ambisonicDecode.h */; };
-		4E8540A815F220A500169453 /* gslMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */; };
-		4E8540A915F220A500169453 /* hoa.binaural~.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E42D10815EF60D400EB89AB /* hoa.binaural~.c */; };
+		0E6DC8D1161358160001AAF5 /* fileLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC8CD161358160001AAF5 /* fileLoader.cpp */; };
+		0E6DC8D2161358160001AAF5 /* fileLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC8CE161358160001AAF5 /* fileLoader.hpp */; };
+		0E6DC8D3161358160001AAF5 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC8CF161358160001AAF5 /* gslMatrix.cpp */; };
+		0E6DC8D4161358160001AAF5 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC8D0161358160001AAF5 /* gslMatrix.hpp */; };
 		4E8540AA15F220A500169453 /* AmbisonicBinaural.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E42D10A15EF60DB00EB89AB /* AmbisonicBinaural.cpp */; };
-		4E8540AB15F220A500169453 /* fileLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5EDF315EF72FC00DC3523 /* fileLoader.c */; };
 		4E8540AC15F220A500169453 /* ambisonicDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5EE2A15EF787700DC3523 /* ambisonicDecode.cpp */; };
 		4E8540AE15F220A500169453 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
 		4E8540AF15F220A500169453 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
-		4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */; };
-		4E8FAEFB15D016DD00A9EA47 /* gslMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */; };
-		4EF5EDF515EF72FC00DC3523 /* fileLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5EDF315EF72FC00DC3523 /* fileLoader.c */; };
-		4EF5EDF615EF72FC00DC3523 /* fileLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF5EDF415EF72FC00DC3523 /* fileLoader.h */; };
-		4EF5EE2C15EF787700DC3523 /* ambisonicDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5EE2A15EF787700DC3523 /* ambisonicDecode.cpp */; };
-		4EF5EE2D15EF787700DC3523 /* ambisonicDecode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EF5EE2B15EF787700DC3523 /* ambisonicDecode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E42D10815EF60D400EB89AB /* hoa.binaural~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.binaural~.c"; sourceTree = "<group>"; };
 		0E42D10A15EF60DB00EB89AB /* AmbisonicBinaural.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicBinaural.cpp; sourceTree = "<group>"; };
-		0E42D10B15EF60DB00EB89AB /* AmbisonicBinaural.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicBinaural.h; sourceTree = "<group>"; };
+		0E6DC8CD161358160001AAF5 /* fileLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fileLoader.cpp; sourceTree = "<group>"; };
+		0E6DC8CE161358160001AAF5 /* fileLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = fileLoader.hpp; sourceTree = "<group>"; };
+		0E6DC8CF161358160001AAF5 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
+		0E6DC8D0161358160001AAF5 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
+		0ED553C616134E5000B09E50 /* ambisonicDecode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ambisonicDecode.hpp; sourceTree = "<group>"; };
+		0ED553C816134E5700B09E50 /* AmbisonicBinaural.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AmbisonicBinaural.hpp; sourceTree = "<group>"; };
+		0ED553CA16134E6200B09E50 /* hoa.binaural~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.binaural~.cpp"; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2FBBEAE508F335360078DB84 /* hoa.binaural~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.binaural~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E8540B415F220A500169453 /* hoa.binaural~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.binaural~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E8540B515F220A500169453 /* Info copy 3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info copy 3.plist"; path = "../Info copy 3.plist"; sourceTree = "<group>"; };
-		4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = gslMatrix.h; sourceTree = "<group>"; };
-		4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gslMatrix.c; sourceTree = "<group>"; };
-		4EF5EDF315EF72FC00DC3523 /* fileLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fileLoader.c; sourceTree = "<group>"; };
-		4EF5EDF415EF72FC00DC3523 /* fileLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileLoader.h; sourceTree = "<group>"; };
 		4EF5EE2A15EF787700DC3523 /* ambisonicDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicDecode.cpp; sourceTree = "<group>"; };
-		4EF5EE2B15EF787700DC3523 /* ambisonicDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicDecode.h; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2FBBEADC08F335360078DB84 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */,
-				22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4E8540AD15F220A500169453 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,7 +53,6 @@
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
-				4E8540B515F220A500169453 /* Info copy 3.plist */,
 			);
 			name = iterator;
 			sourceTree = "<group>";
@@ -95,15 +69,15 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0E42D10815EF60D400EB89AB /* hoa.binaural~.c */,
-				0E42D10B15EF60DB00EB89AB /* AmbisonicBinaural.h */,
 				0E42D10A15EF60DB00EB89AB /* AmbisonicBinaural.cpp */,
-				4EF5EE2B15EF787700DC3523 /* ambisonicDecode.h */,
+				0ED553C816134E5700B09E50 /* AmbisonicBinaural.hpp */,
+				0ED553C616134E5000B09E50 /* ambisonicDecode.hpp */,
 				4EF5EE2A15EF787700DC3523 /* ambisonicDecode.cpp */,
-				4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */,
-				4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */,
-				4EF5EDF415EF72FC00DC3523 /* fileLoader.h */,
-				4EF5EDF315EF72FC00DC3523 /* fileLoader.c */,
+				0ED553CA16134E6200B09E50 /* hoa.binaural~.cpp */,
+				0E6DC8CD161358160001AAF5 /* fileLoader.cpp */,
+				0E6DC8CE161358160001AAF5 /* fileLoader.hpp */,
+				0E6DC8CF161358160001AAF5 /* gslMatrix.cpp */,
+				0E6DC8D0161358160001AAF5 /* gslMatrix.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -111,7 +85,6 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.binaural~.mxo */,
 				4E8540B415F220A500169453 /* hoa.binaural~.mxo */,
 			);
 			name = Products;
@@ -120,50 +93,18 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2FBBEAD708F335360078DB84 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */,
-				0E42D10D15EF60DB00EB89AB /* AmbisonicBinaural.h in Headers */,
-				4EF5EDF615EF72FC00DC3523 /* fileLoader.h in Headers */,
-				4EF5EE2D15EF787700DC3523 /* ambisonicDecode.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4E8540A115F220A500169453 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E8540A215F220A500169453 /* gslMatrix.h in Headers */,
-				4E8540A315F220A500169453 /* AmbisonicBinaural.h in Headers */,
-				4E8540A415F220A500169453 /* fileLoader.h in Headers */,
-				4E8540A515F220A500169453 /* ambisonicDecode.h in Headers */,
+				0E6DC8D2161358160001AAF5 /* fileLoader.hpp in Headers */,
+				0E6DC8D4161358160001AAF5 /* gslMatrix.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2FBBEAD608F335360078DB84 /* max-external */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
-			buildPhases = (
-				2FBBEAD708F335360078DB84 /* Headers */,
-				2FBBEAD808F335360078DB84 /* Resources */,
-				2FBBEADA08F335360078DB84 /* Sources */,
-				2FBBEADC08F335360078DB84 /* Frameworks */,
-				2FBBEADF08F335360078DB84 /* Rez */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "max-external";
-			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.binaural~.mxo */;
-			productType = "com.apple.product-type.bundle";
-		};
 		4E8540A015F220A500169453 /* max-external-mkl */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E8540B115F220A500169453 /* Build configuration list for PBXNativeTarget "max-external-mkl" */;
@@ -202,20 +143,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2FBBEAD608F335360078DB84 /* max-external */,
 				4E8540A015F220A500169453 /* max-external-mkl */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2FBBEAD808F335360078DB84 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4E8540A615F220A500169453 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -226,13 +159,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXRezBuildPhase section */
-		2FBBEADF08F335360078DB84 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4E8540B015F220A500169453 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
@@ -243,27 +169,14 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2FBBEADA08F335360078DB84 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4E8FAEFB15D016DD00A9EA47 /* gslMatrix.c in Sources */,
-				0E42D10915EF60D400EB89AB /* hoa.binaural~.c in Sources */,
-				0E42D10C15EF60DB00EB89AB /* AmbisonicBinaural.cpp in Sources */,
-				4EF5EDF515EF72FC00DC3523 /* fileLoader.c in Sources */,
-				4EF5EE2C15EF787700DC3523 /* ambisonicDecode.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4E8540A715F220A500169453 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E8540A815F220A500169453 /* gslMatrix.c in Sources */,
-				4E8540A915F220A500169453 /* hoa.binaural~.c in Sources */,
 				4E8540AA15F220A500169453 /* AmbisonicBinaural.cpp in Sources */,
-				4E8540AB15F220A500169453 /* fileLoader.c in Sources */,
 				4E8540AC15F220A500169453 /* ambisonicDecode.cpp in Sources */,
+				0E6DC8D1161358160001AAF5 /* fileLoader.cpp in Sources */,
+				0E6DC8D3161358160001AAF5 /* gslMatrix.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,79 +233,6 @@
 			};
 			name = Deployment;
 		};
-		2FBBEAE108F335360078DB84 /* Development */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
-				);
-				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/Developer/usr/include,
-					/Developer/Headers/FlatCarbon,
-					"\"$(C74SUPPORT)/max-includes\"",
-					"\"$(C74SUPPORT)/msp-includes\"",
-					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					/Developer/usr/lib,
-				);
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-				);
-				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
-				VALID_ARCHS = i386;
-			};
-			name = Development;
-		};
-		2FBBEAE208F335360078DB84 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
-				);
-				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/Developer/usr/include,
-					/Developer/Headers/FlatCarbon,
-					"\"$(C74SUPPORT)/max-includes\"",
-					"\"$(C74SUPPORT)/msp-includes\"",
-					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					/Developer/usr/lib,
-				);
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-				);
-				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
-				VALID_ARCHS = i386;
-			};
-			name = Deployment;
-		};
 		4E8540B215F220A500169453 /* Development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
@@ -400,28 +240,24 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/../../c74support/msp-includes\\\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/Developer/usr/include,
-					/Developer/Headers/FlatCarbon,
-					"\\\"$(C74SUPPORT)/max-includes\\\"",
-					"\\\"$(C74SUPPORT)/msp-includes\\\"",
-					"\\\"$(C74SUPPORT)/jit-includes\\\"",
-					/Developer/usr/local/boost_1_48_0,
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/include,
 				);
 				INFOPLIST_FILE = "../Info copy 3.plist";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					/Developer/usr/lib,
-				);
+				LIBRARY_SEARCH_PATHS = /Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib;
 				OTHER_LDFLAGS = (
+					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_sequential.a,
+					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_intel.a,
+					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_core.a,
 					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
 					"-lm",
 				);
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
@@ -440,25 +276,18 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				HEADER_SEARCH_PATHS = (
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/include,
-					/usr/local/include,
-					/Developer/usr/include,
-					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
+					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/include,
 				);
-				INFOPLIST_FILE = "../Info copy 3.plist";
-				LIBRARY_SEARCH_PATHS = (
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib,
-					/usr/local/lib,
-					/Developer/usr/lib,
-				);
+				INFOPLIST_FILE = ../Info.plist;
+				LIBRARY_SEARCH_PATHS = /Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-march=core2",
@@ -483,15 +312,6 @@
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,
 				2FBBEAD108F335010078DB84 /* Deployment */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
-		};
-		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2FBBEAE108F335360078DB84 /* Development */,
-				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;

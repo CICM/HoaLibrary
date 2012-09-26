@@ -178,18 +178,15 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
-					"\"$(SRCROOT)/../../c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
-					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
 				);
 			};
 			name = Development;
@@ -205,17 +202,14 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
-					"\"$(SRCROOT)/../../c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				HEADER_SEARCH_PATHS = (
-					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
 				);
 			};
 			name = Deployment;

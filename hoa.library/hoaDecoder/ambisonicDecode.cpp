@@ -75,7 +75,7 @@ void ambisonicDecode::computeAngles()
 	m_speakers_angles		= new double[m_number_of_outputs];
 	for(int i = 0; i < m_number_of_outputs; i++)
 	{
-		m_speakers_angles[i] = (2. * PI / (double)m_number_of_outputs) * (double)i;
+		m_speakers_angles[i] = (2. * M_PI / (double)m_number_of_outputs) * (double)i;
 	}
 }
 
@@ -119,7 +119,7 @@ void ambisonicDecode::computeReOptim()
 		if (i == 0) 
 			m_optimVector[i] = 1.;
 		else 
-			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * PI / (2*m_order+2));
+			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * M_PI / (2*m_order+2));
 	}
 	
 }

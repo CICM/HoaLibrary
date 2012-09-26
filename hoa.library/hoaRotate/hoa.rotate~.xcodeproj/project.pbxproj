@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E64A53815C6C80B00F85BF4 /* hoa.rotate~.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E64A53715C6C80B00F85BF4 /* hoa.rotate~.c */; };
+		0E6DC9CD16135C0D0001AAF5 /* hoa.rotate~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC9CC16135C0D0001AAF5 /* hoa.rotate~.cpp */; };
+		0E6DC9CF16135C130001AAF5 /* ambisonicRotate.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC9CE16135C130001AAF5 /* ambisonicRotate.hpp */; };
 		0E95FF8515F92F8300A806D5 /* ambisonicRotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E95FF8415F92F8300A806D5 /* ambisonicRotate.cpp */; };
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		4EBAEA6015C6CC6800BB54B7 /* ambisonicRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EBAEA5F15C6CC6800BB54B7 /* ambisonicRotate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E64A53715C6C80B00F85BF4 /* hoa.rotate~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.rotate~.c"; sourceTree = "<group>"; };
+		0E6DC9CC16135C0D0001AAF5 /* hoa.rotate~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.rotate~.cpp"; sourceTree = "<group>"; };
+		0E6DC9CE16135C130001AAF5 /* ambisonicRotate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ambisonicRotate.hpp; sourceTree = "<group>"; };
 		0E95FF8415F92F8300A806D5 /* ambisonicRotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicRotate.cpp; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* hoa.rotate~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.rotate~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EBAEA5F15C6CC6800BB54B7 /* ambisonicRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicRotate.h; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -60,9 +60,9 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0E64A53715C6C80B00F85BF4 /* hoa.rotate~.c */,
-				4EBAEA5F15C6CC6800BB54B7 /* ambisonicRotate.h */,
 				0E95FF8415F92F8300A806D5 /* ambisonicRotate.cpp */,
+				0E6DC9CE16135C130001AAF5 /* ambisonicRotate.hpp */,
+				0E6DC9CC16135C0D0001AAF5 /* hoa.rotate~.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -82,7 +82,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EBAEA6015C6CC6800BB54B7 /* ambisonicRotate.h in Headers */,
+				0E6DC9CF16135C130001AAF5 /* ambisonicRotate.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,8 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E64A53815C6C80B00F85BF4 /* hoa.rotate~.c in Sources */,
 				0E95FF8515F92F8300A806D5 /* ambisonicRotate.cpp in Sources */,
+				0E6DC9CD16135C0D0001AAF5 /* hoa.rotate~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,16 +186,15 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
-					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
 				);
 			};
 			name = Development;
@@ -211,15 +210,14 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				HEADER_SEARCH_PATHS = (
-					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
 				);
 			};
 			name = Deployment;

@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E6DC98916135B140001AAF5 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC98716135B140001AAF5 /* gslMatrix.cpp */; };
+		0E6DC98A16135B140001AAF5 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC98816135B140001AAF5 /* gslMatrix.hpp */; };
 		0E9B6EE415E65C5900FC3F5C /* hoa.projector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B6EE315E65C5900FC3F5C /* hoa.projector~.cpp */; };
 		0ECB4FD515F4BB6C0008737D /* ambisonicProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ECB4FD415F4BB6C0008737D /* ambisonicProjector.h */; };
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */; };
-		4E8FAEFB15D016DD00A9EA47 /* gslMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */; };
 		4EB5E0E014DEF21200ADF62A /* ambisonicProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicProjector.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E6DC98716135B140001AAF5 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
+		0E6DC98816135B140001AAF5 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
 		0E9B6EE315E65C5900FC3F5C /* hoa.projector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.projector~.cpp"; sourceTree = "<group>"; };
 		0ECB4FD415F4BB6C0008737D /* ambisonicProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicProjector.h; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.projector~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = gslMatrix.h; sourceTree = "<group>"; };
-		4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gslMatrix.c; sourceTree = "<group>"; };
 		4EB5E0DD14DEF21200ADF62A /* ambisonicProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicProjector.cpp; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -67,8 +67,8 @@
 				0E9B6EE315E65C5900FC3F5C /* hoa.projector~.cpp */,
 				0ECB4FD415F4BB6C0008737D /* ambisonicProjector.h */,
 				4EB5E0DD14DEF21200ADF62A /* ambisonicProjector.cpp */,
-				4E8FAE6715CFEBFF00A9EA47 /* gslMatrix.h */,
-				4E8FAEFA15D016DD00A9EA47 /* gslMatrix.c */,
+				0E6DC98716135B140001AAF5 /* gslMatrix.cpp */,
+				0E6DC98816135B140001AAF5 /* gslMatrix.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -88,8 +88,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E8FAE6815CFEBFF00A9EA47 /* gslMatrix.h in Headers */,
 				0ECB4FD515F4BB6C0008737D /* ambisonicProjector.h in Headers */,
+				0E6DC98A16135B140001AAF5 /* gslMatrix.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,8 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EB5E0E014DEF21200ADF62A /* ambisonicProjector.cpp in Sources */,
-				4E8FAEFB15D016DD00A9EA47 /* gslMatrix.c in Sources */,
 				0E9B6EE415E65C5900FC3F5C /* hoa.projector~.cpp in Sources */,
+				0E6DC98916135B140001AAF5 /* gslMatrix.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,23 +230,17 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/Developer/usr/include,
-					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					/Developer/usr/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					/usr/local/lib/libgsl.a,
 					"-lcblas",
@@ -269,22 +263,16 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/Developer/usr/include,
-					/Developer/Headers/FlatCarbon,
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/usr/local/boost_1_48_0,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					/Developer/usr/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					/usr/local/lib/libgsl.a,
 					"-lcblas",

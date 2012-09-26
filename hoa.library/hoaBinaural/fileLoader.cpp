@@ -1,6 +1,6 @@
 #include "fileLoader.hpp"
 
-double* Read_Wav (char *wave_file) 
+double* Read_Wav(char *wave_file) 
 {  
 	FILE *file;  
     file = fopen(wave_file, "rb");  
