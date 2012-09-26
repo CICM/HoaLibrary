@@ -14,10 +14,14 @@
 		"defrect" : [ 57.0, 124.0, 814.0, 540.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
 		"default_fontface" : 0,
@@ -283,10 +287,14 @@
 						"globalpatchername" : "",
 						"default_fontsize" : 12.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 					}
 ,
 					"text" : "p key32"
@@ -321,10 +329,14 @@
 =======
 					"patching_rect" : [ 495.0, 120.0, 50.0, 20.0 ]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 				}
 
 			}
@@ -357,10 +369,14 @@
 						"defrect" : [ 30.0, 135.0, 218.0, 87.0 ],
 						"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
 						"default_fontface" : 0,
@@ -799,10 +815,14 @@
 										"globalpatchername" : "",
 										"default_fontsize" : 12.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 									}
 ,
 									"text" : "p attrArgs"
@@ -1550,10 +1570,14 @@
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
 										"default_fontsize" : 12.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 									}
 ,
 									"text" : "p manageDisplay"
@@ -2867,10 +2891,14 @@
 														"globalpatchername" : "",
 														"default_fontsize" : 12.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -3885,10 +3913,14 @@
 					"patching_rect" : [ 30.0, 300.0, 484.0, 20.0 ],
 					"text" : "hoa.binaural~ 35 small"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 32f9a6e7b946a21a6b2e2239444d414ddb60e04e
 =======
 >>>>>>> origin/master
 >>>>>>> origin/Windows
+=======
+>>>>>>> origin/master
+>>>>>>> f1fa5aec3632a6ac8109c95a8fa4f1aa03c1b04c
 				}
 
 			}
