@@ -20,11 +20,13 @@
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -182,13 +184,10 @@
     <ClCompile Include="ambisonicDecode.cpp" />
     <ClCompile Include="gslMatrix.cpp" />
     <ClCompile Include="hoa.decoder~.cpp" />
-    <ClCompile Include="matrixHandling.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ambisonicDecode.hpp" />
     <ClInclude Include="gslMatrix.hpp" />
-    <ClInclude Include="matrixHandling.hpp" />
-    <ClInclude Include="matrixInverse.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hoa.decoder~.def" />

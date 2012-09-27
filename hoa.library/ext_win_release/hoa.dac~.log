@@ -1,4 +1,4 @@
-﻿La génération a démarré 19/09/2012 16:29:28.
+﻿La génération a démarré 26/09/2012 17:58:55.
      1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDac\hoa.dac~.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
          Création de "..\ext_win_release\hoa.dac~.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
@@ -10,9 +10,11 @@
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\..\sdk-build\hoa.dac~.mxe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" MaxAPI.lib MaxAudio.lib maxcrt.lib /NODEFAULTLIB:MSVCRT.lib /DEF:".\hoa.dac~.def" /MANIFEST:NO /DEBUG /PDB:"..\ext_win_release\hoa.dac~.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\ext_win_release\hoa.dac~.lib" /MACHINE:X86 /DLL ..\ext_win_release\dllmain_win.obj
          "..\ext_win_release\hoa.dac~.obj" /MACHINE:I386 
+     1>dllmain_win.obj : warning LNK4229: directive '/Intel(R) compiler non-linkable IL object file' non valide rencontrée ; ignorée
             Création de la bibliothèque ..\ext_win_release\hoa.dac~.lib et de l'objet ..\ext_win_release\hoa.dac~.exp
          Génération de code en cours
          Fin de la génération du code
+     1>dllmain_win.obj : warning LNK4229: directive '/Intel(R) compiler non-linkable IL object file' non valide rencontrée ; ignorée
          hoa.dac~.vcxproj -> C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaDac\.\..\..\sdk-build\hoa.dac~.dll
        FinalizeBuildStatus:
          Suppression du fichier "..\ext_win_release\hoa.dac~.unsuccessfulbuild".
@@ -21,4 +23,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:00.56
+Temps écoulé 00:00:00.68

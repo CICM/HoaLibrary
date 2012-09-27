@@ -17,11 +17,12 @@
  *
  */
 
-
+extern "C"
+{
 #include "ext.h"
 #include "ext_obex.h"
 #include "z_dsp.h"
-
+}
 #include "ambisonicRotate.hpp"
 
 typedef struct _HoaRotate 

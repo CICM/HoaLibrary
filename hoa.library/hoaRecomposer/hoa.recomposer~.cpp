@@ -190,12 +190,17 @@ void HoaRecomposer_assist(t_HoaRecomposer *x, void *b, long m, long a, char *s)
 		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
 	}
 	else 
-		sprintf(s,"(Signal) Virtual Microphone %ld", a);			
+	{
+		if(a == x->f_ambiRecomposer->getParameters("numberOfInputs"))
+			sprintf(s,"(Signal or float) Azimuth", a);	
+		else
+			sprintf(s,"(Signal) Virtual Microphone %ld", a);
+	}
 }
 
 void HoaRecomposer_free(t_HoaRecomposer *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete(x->f_ambiRecomposer);
+	delete x->f_ambiRecomposer;
 }
 

@@ -17,14 +17,13 @@
  *
  */
 
-#include "AmbisonicEncode.hpp"
 extern "C"
 {
 #include "ext.h"
 #include "ext_obex.h"
 #include "z_dsp.h"
 }
-
+#include "AmbisonicEncode.hpp"
 int postons = 0;
 typedef struct _HoaEncode 
 {
@@ -259,15 +258,22 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 	
 	if (m == ASSIST_INLET) 
 	{
-		if(a < x->f_ambiEncoder->getParameters("order"))
+		if(x->f_ambiEncoder->getParameters("mode"))
 		{
-			if(x->f_ambiEncoder->getParameters("mode"))
+			if(a < x->f_ambiEncoder->getParameters("order") + 1)
+			{
 				sprintf(s,"(Signal) Order %ld", a);
-			else
-				sprintf(s,"(Signal) Input");
+			}
+			else 
+				sprintf(s,"(Signal or float) Azimuth");
 		}
-		else 
-			sprintf(s,"(Signal or float) Azimuth");
+		else
+		{
+			if(a == 0)
+				sprintf(s,"(Signal) Input");
+			else
+				sprintf(s,"(Signal or float) Azimuth");
+		}
 	} 
 	else 
 	{

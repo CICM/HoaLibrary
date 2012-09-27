@@ -179,10 +179,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes\common\dllmain_win.c" />
-    <ClCompile Include="hoa.scope.c" />
+    <ClCompile Include="hoa.scope~.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hoa.scope.def" />
+    <None Include="hoa.scope~.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

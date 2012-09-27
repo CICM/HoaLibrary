@@ -182,7 +182,6 @@
     <ClCompile Include="ambisonicProjector.cpp" />
     <ClCompile Include="gslMatrix.cpp" />
     <ClCompile Include="hoa.projector~.cpp" />
-    <ClCompile Include="matrixHandling.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hoa.projector~.def" />
@@ -190,8 +189,6 @@
   <ItemGroup>
     <ClInclude Include="ambisonicProjector.h" />
     <ClInclude Include="gslMatrix.hpp" />
-    <ClInclude Include="matrixHandling.h" />
-    <ClInclude Include="matrixInverse.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

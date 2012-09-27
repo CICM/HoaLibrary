@@ -57,15 +57,15 @@ int	ambisonicRotate::getParameters(std::string aParameter) const
 {
 	int value = 0;
 
-	if (aParameter.compare("order"))
+	if (aParameter == "order")
 		value = m_order;
-	else if (aParameter.compare("samplingRate")) 
+	else if (aParameter == "samplingRate") 
 		value =  m_sampling_rate;
-	else if (aParameter.compare("vectorSize")) 
+	else if (aParameter == "vectorSize") 
 		value =  m_vector_size;
-	else if (aParameter.compare("numberOfInputs")) 
+	else if (aParameter == "numberOfInputs") 
 		value =  m_number_of_inputs;
-	else if (aParameter.compare("numberOfOutputs"))
+	else if (aParameter == "numberOfOutputs")
 		value =  m_number_of_outputs;
 	
 	return value;

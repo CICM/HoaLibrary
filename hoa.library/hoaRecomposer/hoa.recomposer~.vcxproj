@@ -182,7 +182,6 @@
     <ClCompile Include="ambisonicRecomposer.cpp" />
     <ClCompile Include="gslMatrix.cpp" />
     <ClCompile Include="hoa.recomposer~.cpp" />
-    <ClCompile Include="matrixHandling.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hoa.recomposer~.def" />
@@ -190,8 +189,6 @@
   <ItemGroup>
     <ClInclude Include="ambisonicRecomposer.hpp" />
     <ClInclude Include="gslMatrix.hpp" />
-    <ClInclude Include="matrixHandling.hpp" />
-    <ClInclude Include="matrixInverse.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,41 +1,23 @@
-﻿La génération a démarré 19/09/2012 13:52:41.
+﻿La génération a démarré 26/09/2012 18:11:34.
      1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaProjector\hoa.projector~.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
-         Création de "..\ext_win_release\hoa.projector~.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
+         Mise à jour de l'horodatage "..\ext_win_release\hoa.projector~.unsuccessfulbuild".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /IC:\gsl /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy /GL /D WIN_VERSION /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /GF /Gm- /MD /Zp2 /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_release\\" /Fd"..\ext_win_release\hoa.projector~.pdb" /Gd /TC /analyze- /errorReport:prompt "..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c"
-         dllmain_win.c
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /IC:\gsl /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy /GL /D WIN_VERSION /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /GF /Gm- /MD /Zp2 /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_release\\" /Fd"..\ext_win_release\hoa.projector~.pdb" /Gd /TP /analyze- /errorReport:prompt ambisonicProjector.cpp gslMatrix.cpp "hoa.projector~.cpp" matrixHandling.cpp
-         ambisonicProjector.cpp
-     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoaprojector\ambisonicProjector.h(20): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
-     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xlocale(323): warning C4530: Gestionnaire d'exceptions C++ utilisé, mais les sémantiques de déroulement n'ont pas été activées. Spécifiez /EHsc
-         gslMatrix.cpp
-         hoa.projector~.cpp
-     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoaprojector\ambisonicProjector.h(20): warning C4067: jetons inattendus après la directive du préprocesseur - saut de ligne attendu
-     1>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xlocale(323): warning C4530: Gestionnaire d'exceptions C++ utilisé, mais les sémantiques de déroulement n'ont pas été activées. Spécifiez /EHsc
-     1>hoa.projector~.cpp(150): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : voir la déclaration de 'sprintf'
-     1>hoa.projector~.cpp(153): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : voir la déclaration de 'sprintf'
-     1>c:\users\pierre\documents\github\cicm-library\hoa.library\hoaprojector\ambisonicProjector.h(94): warning C4244: '=' : conversion de 'double' en 't_float', perte possible de données
-                 hoa.projector~.cpp(134) : voir la référence à l'instanciation de la fonction modèle 'void ambisonicProjector::process<t_float>(Type **,Type **)' en cours de compilation
-                 with
-                 [
-                     Type=t_float
-                 ]
-         matrixHandling.cpp
+         Toutes les sorties sont à jour.
+         Toutes les sorties sont à jour.
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaProjector\.\..\..\sdk-build\hoa.projector~.dll) ne correspond pas à la valeur de la propriété OutputFile (C:\Users\Pierre\Documents\GitHub\CICM-Library\sdk-build\hoa.projector~.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(991,5): warning MSB8012: TargetExt(.dll) ne correspond pas à la valeur de la propriété OutputFile (.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\..\sdk-build\hoa.projector~.mxe" /INCREMENTAL:NO /NOLOGO /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /LIBPATH:".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /LIBPATH:C:\gsl\lib\Win32\Release MaxAPI.lib MaxAudio.lib cblas.lib gsl.lib /NODEFAULTLIB:MSVCRT.lib /DEF:".\hoa.projector~.def" /MANIFEST:NO /DEBUG /PDB:"..\ext_win_release\hoa.projector~.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\ext_win_release\hoa.projector~.lib" /MACHINE:X86 /DLL ..\ext_win_release\dllmain_win.obj
          ..\ext_win_release\ambisonicProjector.obj
          ..\ext_win_release\gslMatrix.obj
-         "..\ext_win_release\hoa.projector~.obj"
-         ..\ext_win_release\matrixHandling.obj /MACHINE:I386 
+         "..\ext_win_release\hoa.projector~.obj" /MACHINE:I386 
+     1>gslMatrix.obj : warning LNK4229: directive '/Intel(R) compiler non-linkable IL object file' non valide rencontrée ; ignorée
             Création de la bibliothèque ..\ext_win_release\hoa.projector~.lib et de l'objet ..\ext_win_release\hoa.projector~.exp
      1>LINK : warning LNK4098: conflit entre la bibliothèque par défaut 'LIBCMT' et les autres bibliothèques ; utilisez /NODEFAULTLIB:library
          Génération de code en cours
          Fin de la génération du code
+     1>gslMatrix.obj : warning LNK4229: directive '/Intel(R) compiler non-linkable IL object file' non valide rencontrée ; ignorée
          hoa.projector~.vcxproj -> C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaProjector\.\..\..\sdk-build\hoa.projector~.dll
        FinalizeBuildStatus:
          Suppression du fichier "..\ext_win_release\hoa.projector~.unsuccessfulbuild".
@@ -44,4 +26,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:02.18
+Temps écoulé 00:00:00.46

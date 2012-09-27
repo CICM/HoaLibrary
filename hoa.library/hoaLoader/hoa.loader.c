@@ -17,10 +17,9 @@
  *
  */
 
-extern "C" {
 #include "ext.h"
 #include "ext_obex.h"
-}
+
 
 int hoaWelcomePosted = 0;
 void *HoaLoader_class;

@@ -1,0 +1,7 @@
+;hoa.loader.def
+
+LIBRARY hoa.loader.mxe
+
+EXPORTS
+	main
+

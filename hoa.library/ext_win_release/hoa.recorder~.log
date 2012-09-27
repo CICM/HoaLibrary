@@ -1,11 +1,11 @@
-﻿La génération a démarré 19/09/2012 11:10:27.
+﻿La génération a démarré 26/09/2012 18:16:31.
      1>Projet "C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaRecorder\hoa.recorder~.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
          Création de "..\ext_win_release\hoa.recorder~.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy /GL /D WIN_VERSION /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /GF /Gm- /MD /Zp2 /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_release\\" /Fd"..\ext_win_release\hoa.recorder~.pdb" /Gd /TC /analyze- /errorReport:prompt "..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes\common\dllmain_win.c" "hoa.record~.c"
+         Toutes les sorties sont à jour.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes" /I".\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes" /Zi /nologo /W3 /WX- /Ox /Ob2 /Oi /Ot /Oy /GL /D WIN_VERSION /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D WIN_EXT_VERSION /D _CRT_NOFORCE_MANIFEST /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /GF /Gm- /MD /Zp2 /GS- /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo"..\ext_win_release\\" /Fd"..\ext_win_release\hoa.recorder~.pdb" /Gd /TC /analyze- /errorReport:prompt "..\..\..\..\SDKs\MaxSDK-6.0.4\c74support\max-includes\common\dllmain_win.c"
          dllmain_win.c
-         hoa.record~.c
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Pierre\Documents\GitHub\CICM-Library\hoa.library\hoaRecorder\.\..\..\sdk-build\hoa.recorder~.dll) ne correspond pas à la valeur de la propriété OutputFile (C:\Users\Pierre\Documents\GitHub\CICM-Library\sdk-build\hoa.recorder~.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(991,5): warning MSB8012: TargetExt(.dll) ne correspond pas à la valeur de la propriété OutputFile (.mxe) de Linker. Cela peut entraîner une génération incorrecte de votre projet. Pour corriger ce problème, vérifiez que les valeurs des propriétés $(OutDir), $(TargetName) et $(TargetExt) correspondent à la valeur spécifiée dans %(Link.OutputFile).
        Link:
@@ -24,4 +24,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:00.78
+Temps écoulé 00:00:00.71
