@@ -169,5 +169,7 @@ pip-log.txt
 *.mxe
 *.mode1V3
 *.pbxuser
-pierreg
+
+*ext_win_debug/
+*ext_win_release/
 #sdk-build
