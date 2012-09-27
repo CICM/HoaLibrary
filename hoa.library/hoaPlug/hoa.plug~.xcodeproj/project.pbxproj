@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E22C8EB16142F370006AAF2 /* hoa.plug.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E22C8EA16142F370006AAF2 /* hoa.plug.h */; };
 		0E6C27F215C8130B0090858D /* commonsyms.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C27F115C8130B0090858D /* commonsyms.c */; };
 		0E6C283715C815AB0090858D /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283515C815AB0090858D /* MaxAPI.framework */; };
 		0E6C283815C815AB0090858D /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283615C815AB0090858D /* MaxAudioAPI.framework */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E22C8EA16142F370006AAF2 /* hoa.plug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hoa.plug.h; sourceTree = "<group>"; };
 		0E6C27F115C8130B0090858D /* commonsyms.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = commonsyms.c; path = "../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes/common/commonsyms.c"; sourceTree = SOURCE_ROOT; };
 		0E6C283515C815AB0090858D /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 		0E6C283615C815AB0090858D /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
@@ -63,6 +65,7 @@
 				0E6C27F115C8130B0090858D /* commonsyms.c */,
 				0E9A03A515CFB5DE005E91C0 /* jpatcher_syms.c */,
 				0E7CF53315CF2A0D002595C2 /* hoa.plug~.c */,
+				0E22C8EA16142F370006AAF2 /* hoa.plug.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -82,6 +85,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E22C8EB16142F370006AAF2 /* hoa.plug.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
