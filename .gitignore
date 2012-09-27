@@ -168,7 +168,12 @@ pip-log.txt
 *.mxe
 *.mode1V3
 *.pbxuser
-
+# Windows
 ext_win_debug/
 ext_win_release/
+*.suo
+*.sln
+*.user
+*.sdf
+
 #sdk-build
