@@ -1,4 +1,3 @@
-
 #################
 ## Eclipse
 #################
@@ -170,6 +169,6 @@ pip-log.txt
 *.mode1V3
 *.pbxuser
 
-*ext_win_debug/
-*ext_win_release/
+.ext_win_debug/
+.ext_win_release/
 #sdk-build
