@@ -22,14 +22,14 @@
 
 AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode, std::string pinnaSize)
 {	
-	/*
+	
 	if (pinnaSize == "small") {
-		m_preFilePath = "/Applications/Max5/Cycling '74/hoaLibrary/hrtfDatabase/";
+		m_preFilePath = "/Library/Application Support/HoaLibrary/hrtfDatabase/";
 	}
 	else {
-		m_preFilePath = "/Applications/Max5/Cycling '74/hoaLibrary/hrtfDatabase/large/";
+		m_preFilePath = "/Library/Application Support/HoaLibrary/hrtfDatabase/large/";
 	}
-	*/
+	/*
 	if (pinnaSize == "small") 
 	{
 		m_preFilePath = "C:/Program Files (x86)/Cycling '74/Max 5.0/Cycling '74/hoaLibrary/hrtfDatabase/";
@@ -37,7 +37,7 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	else {
 		m_preFilePath = "C:/Program Files (x86)/Cycling '74/Max 5.0/Cycling '74/hoaLibrary/hrtfDatabase/large/";
 	}
-
+	*/
 	m_vector_size = 0;
 	m_sampling_rate = aSamplingRate;
 	m_order = aOrder;	

@@ -73,11 +73,15 @@ int main(void)
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
-	if(postons == 0)
+	
+	if(class_findbyname(CLASS_NOBOX, gensym("hoa.loader")) == NULL)
 	{
-		post("hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
-		post("Copyright (C) 2012, CICM / Universite Paris 8");
-		postons = 1;
+		if(postons == 0)
+		{
+			post("hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
+			post("Copyright (C) 2012, CICM / Universite Paris 8");
+			postons = 1;
+		}
 	}
 	
 	return 0;

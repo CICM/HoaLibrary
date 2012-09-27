@@ -49,7 +49,6 @@ void *HoaBinaural_class;
 
 int main(void)
 {	
-
 	t_class *c;
 	
 	c = class_new("hoa.binaural~", (method)HoaBinaural_new, (method)HoaBinaural_free, (long)sizeof(t_HoaBinaural), 0L, A_GIMME, 0);
