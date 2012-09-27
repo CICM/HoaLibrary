@@ -1,1 +1,1 @@
-## The CICM spatialisation Library.
+## A high order ambisonics library.
