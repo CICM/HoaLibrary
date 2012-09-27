@@ -169,6 +169,7 @@ pip-log.txt
 *.mode1V3
 *.pbxuser
 # Windows
+*.sln
 ext_win_debug/
 ext_win_release/
 *.suo
