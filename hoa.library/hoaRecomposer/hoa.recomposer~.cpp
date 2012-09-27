@@ -192,7 +192,7 @@ void HoaRecomposer_assist(t_HoaRecomposer *x, void *b, long m, long a, char *s)
 	else 
 	{
 		if(a == x->f_ambiRecomposer->getParameters("numberOfInputs"))
-			sprintf(s,"(Signal or float) Azimuth", a);	
+			sprintf(s,"(Signal or float) Azimuth");	
 		else
 			sprintf(s,"(Signal) Virtual Microphone %ld", a);
 	}

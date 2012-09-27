@@ -300,13 +300,20 @@ void scope_free(t_scope *x)
 
 void scope_assist(t_scope *x, void *b, long m, long a, char *s)
 {
+	long harmonicIndex = 0;
 	if (m == ASSIST_INLET) 
 	{
-		if(a)
-			sprintf(s,"(List) Loudspeakers values");
-		else
-			sprintf(s,"(List) Harmonics values");
+		if (a == 0)
+			harmonicIndex = 0;
+		else 
+		{
+			harmonicIndex = (a - 1) / 2 + 1;
+			if (a % 2 == 1) 
+				harmonicIndex = - harmonicIndex;
+		}
+		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex); 	
 	}
+
 }
 
 void scope_vector(t_scope *x)
