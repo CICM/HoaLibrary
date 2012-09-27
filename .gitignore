@@ -169,6 +169,7 @@ pip-log.txt
 *.mode1V3
 *.pbxuser
 # Windows
+*.mxo
 *.setting
 *.common.setting
 *.sln
