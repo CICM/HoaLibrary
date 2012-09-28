@@ -485,13 +485,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0,
-										"fontname" : "Arial",
-										"globalpatchername" : "",
+										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontface" : 0,
-										"fontsize" : 12.0
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "",
+										"fontface" : 0
 									}
 ,
 									"text" : "p attrArgs"
@@ -1213,13 +1213,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0,
-										"fontname" : "Arial",
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
+										"fontsize" : 12.0,
 										"default_fontface" : 0,
-										"fontface" : 0,
-										"fontsize" : 12.0
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
+										"fontface" : 0
 									}
 ,
 									"text" : "p manageDisplay"
@@ -2499,13 +2499,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"default_fontname" : "Arial",
-														"default_fontsize" : 12.0,
-														"fontname" : "Arial",
-														"globalpatchername" : "",
+														"fontsize" : 12.0,
 														"default_fontface" : 0,
-														"fontface" : 0,
-														"fontsize" : 12.0
+														"default_fontname" : "Arial",
+														"fontname" : "Arial",
+														"default_fontsize" : 12.0,
+														"globalpatchername" : "",
+														"fontface" : 0
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -3711,13 +3711,13 @@
 ,
 					"patching_rect" : [ 630.0, 60.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"fontname" : "Arial",
-						"globalpatchername" : "",
+						"fontsize" : 12.0,
 						"default_fontface" : 0,
-						"fontface" : 0,
-						"fontsize" : 12.0
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"globalpatchername" : "",
+						"fontface" : 0
 					}
 ,
 					"text" : "p spaceBar"
@@ -3780,8 +3780,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 57.0, 602.0, 33.0 ],
-					"text" : "hoa.dac~ facilitates the setting of the channels. It works like a dac~ object but you can use the matlab syntax \":\"  to set the loudspeakers routing.",
+					"patching_rect" : [ 10.0, 57.0, 555.0, 33.0 ],
+					"text" : "hoa.dac~ makes easier the setting of the channels. It works like a dac~ object but you can use the matlab syntax \":\"  to set the loudspeakers routing.",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -4137,7 +4137,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 14 ],
 					"hidden" : 0,
 					"midpoints" : [ 227.5, 246.0, 227.0, 246.0 ],
@@ -4147,7 +4147,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 13 ],
 					"hidden" : 0,
 					"midpoints" : [ 213.0, 267.0, 212.535721, 267.0 ],
@@ -4157,7 +4157,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 12 ],
 					"hidden" : 0,
 					"midpoints" : [ 198.5, 246.0, 198.071426, 246.0 ],
@@ -4167,7 +4167,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 11 ],
 					"hidden" : 0,
 					"midpoints" : [ 184.0, 246.0, 183.607147, 246.0 ],
@@ -4177,7 +4177,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 10 ],
 					"hidden" : 0,
 					"midpoints" : [ 169.5, 246.0, 169.142853, 246.0 ],
@@ -4187,7 +4187,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 9 ],
 					"hidden" : 0,
 					"midpoints" : [ 155.0, 246.0, 154.678574, 246.0 ],
@@ -4197,7 +4197,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 8 ],
 					"hidden" : 0,
 					"midpoints" : [ 140.5, 246.0, 140.214279, 246.0 ],
@@ -4207,7 +4207,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 7 ],
 					"hidden" : 0,
 					"midpoints" : [ 126.0, 267.0, 125.75, 267.0 ],
@@ -4217,7 +4217,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 6 ],
 					"hidden" : 0,
 					"midpoints" : [ 111.5, 246.0, 111.285713, 246.0 ],
@@ -4227,7 +4227,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 5 ],
 					"hidden" : 0,
 					"midpoints" : [ 97.0, 246.0, 96.821426, 246.0 ],
@@ -4237,7 +4237,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 4 ],
 					"hidden" : 0,
 					"midpoints" : [ 82.5, 246.0, 82.35714, 246.0 ],
@@ -4247,7 +4247,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 3 ],
 					"hidden" : 0,
 					"midpoints" : [ 68.0, 246.0, 67.89286, 246.0 ],
@@ -4257,7 +4257,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 2 ],
 					"hidden" : 0,
 					"midpoints" : [ 53.5, 246.0, 53.42857, 246.0 ],
@@ -4267,7 +4267,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-4", 1 ],
 					"hidden" : 0,
 					"midpoints" : [ 39.0, 267.0, 38.964287, 267.0 ],
@@ -4277,7 +4277,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-4", 0 ],
 					"hidden" : 0,
 					"midpoints" : [ 24.5, 246.0, 24.5, 246.0 ],

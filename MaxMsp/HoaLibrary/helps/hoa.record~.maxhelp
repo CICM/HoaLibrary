@@ -488,13 +488,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
 										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : ""
+										"globalpatchername" : "",
+										"fontface" : 0
 									}
 ,
 									"text" : "p attrArgs"
@@ -1216,13 +1216,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
 										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]"
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
+										"fontface" : 0
 									}
 ,
 									"text" : "p manageDisplay"
@@ -2502,13 +2502,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
 														"default_fontname" : "Arial",
 														"fontname" : "Arial",
 														"default_fontsize" : 12.0,
-														"globalpatchername" : ""
+														"globalpatchername" : "",
+														"fontface" : 0
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -2667,7 +2667,7 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -4021,13 +4021,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
 										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : ""
+										"globalpatchername" : "",
+										"fontface" : 0
 									}
 ,
 									"text" : "p attrArgs"
@@ -4749,13 +4749,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
 										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]"
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
+										"fontface" : 0
 									}
 ,
 									"text" : "p manageDisplay"
@@ -6035,13 +6035,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
 														"default_fontname" : "Arial",
 														"fontname" : "Arial",
 														"default_fontsize" : 12.0,
-														"globalpatchername" : ""
+														"globalpatchername" : "",
+														"fontface" : 0
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -7167,13 +7167,13 @@
 ,
 					"patching_rect" : [ 660.0, 60.0, 69.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : ""
+						"globalpatchername" : "",
+						"fontface" : 0
 					}
 ,
 					"text" : "p spaceBar"
@@ -7332,7 +7332,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 14 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7342,7 +7342,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 13 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7352,7 +7352,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 12 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7362,7 +7362,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 11 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7372,7 +7372,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 10 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7382,7 +7382,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 9 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7392,7 +7392,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 8 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7402,7 +7402,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 7 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7412,7 +7412,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 6 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7422,7 +7422,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 5 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7432,7 +7432,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 4 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7442,7 +7442,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 3 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7452,7 +7452,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 2 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7462,7 +7462,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 1 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7472,7 +7472,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7491,7 +7491,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 14 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7501,7 +7501,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 13 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7511,7 +7511,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 12 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7521,7 +7521,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 11 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7531,7 +7531,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 10 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7541,7 +7541,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 9 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7551,7 +7551,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 8 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7561,7 +7561,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 7 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7571,7 +7571,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 6 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7581,7 +7581,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 5 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7591,7 +7591,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 4 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7601,7 +7601,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 3 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7611,7 +7611,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 2 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7621,7 +7621,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "obj-12", 1 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
@@ -7631,7 +7631,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-12", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],

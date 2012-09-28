@@ -2,13 +2,15 @@
 	"patcher" : 	{
 		"fileversion" : 1,
 		"appversion" : 		{
-			"major" : 6,
-			"minor" : 0,
-			"revision" : 4
+			"major" : 5,
+			"minor" : 1,
+			"revision" : 9
 		}
 ,
-		"rect" : [ 162.0, 120.0, 911.0, 613.0 ],
+		"rect" : [ 458.0, 44.0, 911.0, 613.0 ],
 		"bglocked" : 0,
+		"defrect" : [ 458.0, 44.0, 911.0, 613.0 ],
+		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
 		"default_fontface" : 0,
@@ -16,16 +18,12 @@
 		"gridonopen" : 0,
 		"gridsize" : [ 15.0, 15.0 ],
 		"gridsnaponopen" : 0,
-		"statusbarvisible" : 2,
 		"toolbarvisible" : 1,
 		"boxanimatetime" : 200,
 		"imprint" : 0,
 		"enablehscroll" : 1,
 		"enablevscroll" : 1,
 		"devicewidth" : 0.0,
-		"description" : "",
-		"digest" : "",
-		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -105,10 +103,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 645.0, 86.0, 43.0, 20.0 ],
-					"saved_object_attributes" : 					{
-						"parameter_enable" : 0
-					}
-,
 					"text" : "js lock"
 				}
 
@@ -287,7 +281,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 36.0, 485.0, 21.0 ],
-					"text" : "Help to connect hoa library object's together",
+					"text" : "Help to connect the hoa objects together",
 					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
 					"varname" : "autohelp_top_digest"
 				}
@@ -310,22 +304,10 @@
 			}
 , 			{
 				"box" : 				{
-					"id" : "obj-24",
-					"ignoreclick" : 1,
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 15.0, 188.0, 270.0, 36.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"background" : 1,
 					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
 					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
 					"id" : "obj-9",
-					"ignoreclick" : 1,
 					"maxclass" : "panel",
 					"mode" : 1,
 					"numinlets" : 1,
@@ -353,8 +335,8 @@
 		"lines" : [ 			{
 				"patchline" : 				{
 					"destination" : [ "obj-23", 0 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-17", 0 ]
 				}
 
@@ -362,8 +344,8 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-18", 0 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-19", 0 ]
 				}
 
@@ -371,8 +353,8 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-14", 0 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-23", 0 ]
 				}
 
@@ -381,8 +363,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 0 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 0 ]
 				}
 
@@ -391,8 +373,8 @@
 				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 1 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 1 ]
 				}
 
@@ -401,8 +383,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 2 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 2 ]
 				}
 
@@ -411,8 +393,8 @@
 				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 3 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 3 ]
 				}
 
@@ -421,8 +403,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 4 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 4 ]
 				}
 
@@ -431,8 +413,8 @@
 				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 5 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 5 ]
 				}
 
@@ -441,8 +423,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 6 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 6 ]
 				}
 
@@ -451,8 +433,8 @@
 				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 7 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 7 ]
 				}
 
@@ -461,8 +443,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 8 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 8 ]
 				}
 
@@ -471,8 +453,8 @@
 				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 9 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 9 ]
 				}
 
@@ -481,8 +463,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 10 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 10 ]
 				}
 
@@ -491,8 +473,8 @@
 				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 11 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 11 ]
 				}
 
@@ -501,8 +483,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 12 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 12 ]
 				}
 
@@ -511,8 +493,8 @@
 				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "", 13 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 13 ]
 				}
 
@@ -521,8 +503,8 @@
 				"patchline" : 				{
 					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 					"destination" : [ "", 14 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-16", 14 ]
 				}
 
@@ -530,42 +512,11 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
-					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [  ],
 					"source" : [ "obj-14", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "lock.js",
-				"bootpath" : "/Users/elioton/Dropbox/hoaLibrary/externals/jsExternals",
-				"patcherrelativepath" : "../externals/jsExternals",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.nothing~.maxpat",
-				"bootpath" : "/Users/elioton/Dropbox/hoaLibrary/patchs",
-				"patcherrelativepath" : "../patchs",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.plug~.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}

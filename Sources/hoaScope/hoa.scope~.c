@@ -594,23 +594,23 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 			y1 = y2;
 		}
 		/* Energy */
-		jgraphics_set_source_rgba(g, 0.08, .43, 0.41, 1.);
-		
-		factor = (x->f_rayonCircle * 5.) / sqrt(energyX * energyX + energyY * energyY);
-		energyX *= factor;
-		energyY *= factor;
-		x1 =  energyX + x->f_center.x;
-		y1 =  energyY + x->f_center.y;
-		jgraphics_line_draw_fast(g, x->f_center.x, x->f_center.y, x1, y1, 1.);
-		angle = atan2(energyY, energyX);
-		rayon = sqrt(energyX * energyX + energyY * energyY);
-		
-		rayon -= x->f_rayonCircle / 4.;
-		angle -= JGRAPHICS_PI / 100.;
-		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
-		angle += JGRAPHICS_PI / 50.;
-		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
-		
+		//jgraphics_set_source_rgba(g, 0.08, .43, 0.41, 1.);
+//		
+//		factor = (x->f_rayonCircle * 5.) / sqrt(energyX * energyX + energyY * energyY);
+//		energyX *= factor;
+//		energyY *= factor;
+//		x1 =  energyX + x->f_center.x;
+//		y1 =  energyY + x->f_center.y;
+//		jgraphics_line_draw_fast(g, x->f_center.x, x->f_center.y, x1, y1, 1.);
+//		angle = atan2(energyY, energyX);
+//		rayon = sqrt(energyX * energyX + energyY * energyY);
+//		
+//		rayon -= x->f_rayonCircle / 4.;
+//		angle -= JGRAPHICS_PI / 100.;
+//		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
+//		angle += JGRAPHICS_PI / 50.;
+//		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
+//		
 		/* Velocity */
 		//jgraphics_set_source_rgba(g, 0.32, .18, 0.45, 1.);
 //
