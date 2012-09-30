@@ -1,0 +1,7 @@
+;hoa.meter~.def
+
+LIBRARY hoa.meter~.mxe
+
+EXPORTS
+	main
+
