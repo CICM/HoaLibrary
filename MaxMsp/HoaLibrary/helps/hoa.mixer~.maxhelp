@@ -903,11 +903,11 @@
 					"fontsize" : 11.595187,
 					"id" : "obj-10",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 24.0, 105.0, 46.0, 20.0 ],
-					"text" : "sig~ -1"
+					"patching_rect" : [ 24.0, 105.0, 63.0, 20.0 ],
+					"text" : "cycle~ 0.1"
 				}
 
 			}
@@ -1112,13 +1112,13 @@
 ,
 					"patching_rect" : [ 615.0, 45.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
-						"fontface" : 0
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p key32"

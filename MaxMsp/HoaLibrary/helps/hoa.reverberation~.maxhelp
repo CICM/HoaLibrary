@@ -33,8 +33,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 285.0, 405.0, 69.0, 20.0 ],
-					"text" : "prepend 20"
+					"patching_rect" : [ 285.0, 405.0, 65.0, 20.0 ],
+					"text" : "append 20"
 				}
 
 			}
@@ -95,9 +95,9 @@
 							"revision" : 9
 						}
 ,
-						"rect" : [ 800.0, 166.0, 640.0, 480.0 ],
+						"rect" : [ 640.0, 166.0, 640.0, 480.0 ],
 						"bglocked" : 0,
-						"defrect" : [ 800.0, 166.0, 640.0, 480.0 ],
+						"defrect" : [ 640.0, 166.0, 640.0, 480.0 ],
 						"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -435,13 +435,13 @@
 ,
 					"patching_rect" : [ 270.0, 315.0, 49.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"fontname" : "Arial",
-						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p scale"
@@ -540,9 +540,9 @@
 							"revision" : 9
 						}
 ,
-						"rect" : [ 1016.0, 223.0, 424.0, 586.0 ],
+						"rect" : [ 856.0, 223.0, 424.0, 586.0 ],
 						"bglocked" : 0,
-						"defrect" : [ 1016.0, 223.0, 424.0, 586.0 ],
+						"defrect" : [ 856.0, 223.0, 424.0, 586.0 ],
 						"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -773,24 +773,24 @@
  ]
 					}
 ,
-					"patching_rect" : [ 30.0, 375.0, 105.0, 20.0 ],
+					"patching_rect" : [ 30.0, 375.0, 59.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"fontname" : "Arial",
-						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"globalpatchername" : ""
 					}
 ,
-					"text" : "p doppler-lowpass"
+					"text" : "p doppler"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"filename" : "hoa.visu.js",
+					"filename" : "hoa.trajectory.js",
 					"id" : "obj-11",
 					"jsarguments" : [  ],
 					"maxclass" : "jsui",
@@ -1120,13 +1120,13 @@
 ,
 					"patching_rect" : [ 754.0, 48.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"fontname" : "Arial",
-						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
-						"default_fontface" : 0
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"globalpatchername" : ""
 					}
 ,
 					"text" : "p key32"
@@ -1593,13 +1593,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0,
-										"fontname" : "Arial",
-										"globalpatchername" : "",
 										"fontface" : 0,
 										"fontsize" : 12.0,
-										"default_fontface" : 0
+										"default_fontface" : 0,
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
+										"globalpatchername" : ""
 									}
 ,
 									"text" : "p attrArgs"
@@ -2065,7 +2065,7 @@
 										"enablehscroll" : 1,
 										"enablevscroll" : 1,
 										"devicewidth" : 0.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -2321,13 +2321,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"default_fontname" : "Arial",
-										"default_fontsize" : 12.0,
-										"fontname" : "Arial",
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
 										"fontface" : 0,
 										"fontsize" : 12.0,
-										"default_fontface" : 0
+										"default_fontface" : 0,
+										"default_fontname" : "Arial",
+										"fontname" : "Arial",
+										"default_fontsize" : 12.0,
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]"
 									}
 ,
 									"text" : "p manageDisplay"
@@ -3607,13 +3607,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"default_fontname" : "Arial",
-														"default_fontsize" : 12.0,
-														"fontname" : "Arial",
-														"globalpatchername" : "",
 														"fontface" : 0,
 														"fontsize" : 12.0,
-														"default_fontface" : 0
+														"default_fontface" : 0,
+														"default_fontname" : "Arial",
+														"fontname" : "Arial",
+														"default_fontsize" : 12.0,
+														"globalpatchername" : ""
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -4937,7 +4937,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-4", 2 ],
 					"hidden" : 0,
-					"midpoints" : [ 564.5, 306.0, 504.0, 306.0, 504.0, 330.0, 327.0, 330.0, 327.0, 360.0, 125.5, 360.0 ],
+					"midpoints" : [ 564.5, 306.0, 504.0, 306.0, 504.0, 330.0, 327.0, 330.0, 327.0, 360.0, 79.5, 360.0 ],
 					"source" : [ "obj-192", 0 ]
 				}
 
@@ -5185,7 +5185,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-192", 0 ],
-					"hidden" : 0,
+					"hidden" : 1,
 					"midpoints" : [  ],
 					"source" : [ "obj-22", 0 ]
 				}
@@ -5231,7 +5231,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-4", 1 ],
 					"hidden" : 0,
-					"midpoints" : [ 279.5, 353.0, 82.5, 353.0 ],
+					"midpoints" : [ 279.5, 353.0, 59.5, 353.0 ],
 					"source" : [ "obj-32", 0 ]
 				}
 

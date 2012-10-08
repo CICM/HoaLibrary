@@ -181,3 +181,8 @@ ext_win_release/
 *.sdf
 
 #sdk-build
+
+*.mpkg
+*.exe
+*.msi
+HoaPackage/
