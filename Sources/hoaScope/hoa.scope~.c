@@ -26,7 +26,7 @@
 #include "ext_dictionary.h"
 #include "ext_globalsymbol.h"
 
-#define MAXIMUM_SIZE 3600
+#define MAXIMUM_SIZE 360
 
 typedef struct  _scope 
 {

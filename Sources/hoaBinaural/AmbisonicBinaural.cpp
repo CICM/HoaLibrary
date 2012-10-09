@@ -22,21 +22,19 @@
 
 AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode, std::string pinnaSize)
 {	
-	/*
-	if (pinnaSize == "small") {
-		m_preFilePath = "/Library/Application Support/HoaLibrary/hrtfDatabase/";
-	}
-	else {
-		m_preFilePath = "/Library/Application Support/HoaLibrary/hrtfDatabase/large/";
-	}
-	*/
-	if (pinnaSize == "small") 
-	{
-		m_preFilePath = "C:/ProgramData/hoaLibrary/hrtfDatabase/";
-	}
-	else {
-		m_preFilePath = "C:/ProgramData/hoaLibrary/hrtfDatabase/large/";
-	}
+	
+	if (pinnaSize == "small")
+		m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Small";
+	else
+		m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Large";
+	
+	//if (pinnaSize == "small") 
+//	{
+//		m_preFilePath = "C:/ProgramData/hoaLibrary/hrtfDatabase/";
+//	}
+//	else {
+//		m_preFilePath = "C:/ProgramData/hoaLibrary/hrtfDatabase/large/";
+//	}
 	
 	m_vector_size = 0;
 	m_sampling_rate = aSamplingRate;
