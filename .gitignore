@@ -172,11 +172,10 @@ pip-log.txt
 *.mxo
 *.setting
 *.common.setting
-*.sln
 ext_win_debug/
 ext_win_release/
 *.suo
-*.sln
+# *.sln
 *.user
 *.sdf
 
