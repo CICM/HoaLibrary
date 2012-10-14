@@ -1,6 +1,6 @@
-;hoa.decoder~.def
+;hoa.optim~.def
 
-LIBRARY hoa.decoder~.mxe
+LIBRARY hoa.optim~.mxe
 
 EXPORTS
 	main

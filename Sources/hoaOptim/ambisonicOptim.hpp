@@ -30,7 +30,7 @@
 #include <vector>
 #include <string>
 #include <gsl/gsl_sf.h>
-#include "mkl.h"
+#include <mkl.h>
 
 class ambisonicOptim
 {
