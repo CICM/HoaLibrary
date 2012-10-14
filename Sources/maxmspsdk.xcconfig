@@ -18,7 +18,7 @@ PRODUCT_VERSION = 5.1.7
 C74SUPPORT = $(SRCROOT)/../../../../SDKs/MaxSDK-5.1.7/c74support
 HEADER_SEARCH_PATHS = /Developer/Headers/FlatCarbon "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
 FRAMEWORK_SEARCH_PATHS = "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
-DSTROOT = $(SRCROOT)/../../MaxMsp/HoaLibrary/externals/OsX
+DSTROOT = $(SRCROOT)/../../MaxMsp/Externals
 // (This next path is relative to DSTROOT)
 INSTALL_PATH = /
 

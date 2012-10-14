@@ -7,9 +7,9 @@
 			"revision" : 9
 		}
 ,
-		"rect" : [ 149.0, 44.0, 1190.0, 730.0 ],
+		"rect" : [ 250.0, 77.0, 1190.0, 730.0 ],
 		"bglocked" : 0,
-		"defrect" : [ 149.0, 44.0, 1190.0, 730.0 ],
+		"defrect" : [ 250.0, 77.0, 1190.0, 730.0 ],
 		"openrect" : [ 0.0, 0.0, 0.0, 0.0 ],
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -28,13 +28,136 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"id" : "obj-36",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 90.0, 345.0, 150.0, 33.0 ],
+					"text" : "allumettes claves fr\n"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-32",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 45.0, 270.0, 150.0, 20.0 ],
+					"text" : "bats in cave"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-31",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 30.0, 225.0, 150.0, 20.0 ],
+					"text" : "amorphous"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-16",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 135.0, 585.0, 71.0, 18.0 ],
+					"text" : "optim basic"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-22",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 135.0, 615.0, 87.0, 18.0 ],
+					"text" : "optim inPhase"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-20",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"patching_rect" : [ 660.0, 645.0, 23.0, 20.0 ],
+					"text" : "t b"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-17",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 660.0, 615.0, 88.0, 20.0 ],
+					"text" : "r switchKinnect"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-9",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 510.0, 660.0, 33.0, 18.0 ],
+					"text" : "stop"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-11",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 510.0, 630.0, 74.0, 18.0 ],
+					"text" : "startwindow"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
 					"id" : "obj-27",
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 627.0, 250.0, 50.0, 18.0 ],
-					"text" : "off"
+					"text" : "1"
 				}
 
 			}
@@ -77,34 +200,6 @@
 					"outlettype" : [ "float" ],
 					"patching_rect" : [ 956.0, 228.0, 55.0, 20.0 ],
 					"text" : "hoa.pi 1."
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-23",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 604.0, 635.0, 32.5, 18.0 ],
-					"text" : "stop"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-20",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 550.0, 633.0, 33.0, 18.0 ],
-					"text" : "start"
 				}
 
 			}
@@ -712,7 +807,7 @@
 													"maxclass" : "inlet",
 													"numinlets" : 0,
 													"numoutlets" : 1,
-													"outlettype" : [ "" ],
+													"outlettype" : [ "float" ],
 													"patching_rect" : [ 166.0, 40.0, 25.0, 25.0 ]
 												}
 
@@ -890,12 +985,12 @@
 ,
 									"patching_rect" : [ 390.0, 360.0, 60.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -1259,12 +1354,12 @@
 ,
 									"patching_rect" : [ 300.0, 300.0, 113.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -1656,12 +1751,12 @@
 ,
 									"patching_rect" : [ 300.0, 240.0, 120.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -1975,12 +2070,12 @@
 ,
 													"patching_rect" : [ 45.0, 150.0, 139.0, 20.0 ],
 													"saved_object_attributes" : 													{
-														"fontname" : "Arial",
+														"fontface" : 0,
+														"fontsize" : 12.0,
 														"globalpatchername" : "",
 														"default_fontface" : 0,
-														"fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontsize" : 12.0,
+														"fontname" : "Arial",
 														"default_fontsize" : 12.0
 													}
 ,
@@ -2343,12 +2438,12 @@
 ,
 													"patching_rect" : [ 165.0, 105.0, 112.0, 20.0 ],
 													"saved_object_attributes" : 													{
-														"fontname" : "Arial",
+														"fontface" : 0,
+														"fontsize" : 12.0,
 														"globalpatchername" : "",
 														"default_fontface" : 0,
-														"fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontsize" : 12.0,
+														"fontname" : "Arial",
 														"default_fontsize" : 12.0
 													}
 ,
@@ -2711,12 +2806,12 @@
 ,
 													"patching_rect" : [ 45.0, 105.0, 104.0, 20.0 ],
 													"saved_object_attributes" : 													{
-														"fontname" : "Arial",
+														"fontface" : 0,
+														"fontsize" : 12.0,
 														"globalpatchername" : "",
 														"default_fontface" : 0,
-														"fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontsize" : 12.0,
+														"fontname" : "Arial",
 														"default_fontsize" : 12.0
 													}
 ,
@@ -2886,12 +2981,12 @@
 ,
 									"patching_rect" : [ 150.0, 150.0, 279.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -2907,7 +3002,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 2,
-									"outlettype" : [ "signal", "" ],
+									"outlettype" : [ "signal", "float" ],
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
@@ -3427,12 +3522,12 @@
 ,
 									"patching_rect" : [ 450.0, 240.0, 114.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -3922,12 +4017,12 @@
 ,
 					"patching_rect" : [ 705.0, 135.0, 252.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontname" : "Arial",
+						"fontface" : 0,
+						"fontsize" : 12.0,
 						"globalpatchername" : "",
 						"default_fontface" : 0,
-						"fontface" : 0,
 						"default_fontname" : "Arial",
-						"fontsize" : 12.0,
+						"fontname" : "Arial",
 						"default_fontsize" : 12.0
 					}
 ,
@@ -4080,12 +4175,12 @@
 ,
 					"patching_rect" : [ 705.0, 15.0, 59.5, 20.0 ],
 					"saved_object_attributes" : 					{
-						"fontname" : "Arial",
+						"fontface" : 0,
+						"fontsize" : 12.0,
 						"globalpatchername" : "",
 						"default_fontface" : 0,
-						"fontface" : 0,
 						"default_fontname" : "Arial",
-						"fontsize" : 12.0,
+						"fontname" : "Arial",
 						"default_fontsize" : 12.0
 					}
 ,
@@ -4806,12 +4901,12 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -5534,12 +5629,12 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1][1][1]",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -6820,12 +6915,12 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"fontname" : "Arial",
+														"fontface" : 0,
+														"fontsize" : 12.0,
 														"globalpatchername" : "",
 														"default_fontface" : 0,
-														"fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontsize" : 12.0,
+														"fontname" : "Arial",
 														"default_fontsize" : 12.0
 													}
 ,
@@ -6985,13 +7080,13 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "alaVagionne.aif", ",", "allumettes_claves_freeze.aif", ",", "allumettes_claves_freeze_2.aif", ",", "allumettes_claves_freeze_2_bubbler_munger.aif", ",", "Amorphous Mass.wav", ",", "Bats in a Cave.wav", ",", "convolution_citerne_spec_gateVRSP-bille_bocal.aif", ",", "convolution_citerneResonFrot_flange_varispeed.aif", ",", "convolution_clarBasseMelo-TramElecWarpPan.aif", ",", "Js_120Bpm_68.wav", ",", "JS_Brass_120_AD_1.wav", ",", "Js_DoubleBass_120_E_8.wav", ",", "Klaxons(stereo).aif", ",", "LethargaDrone Sust.wav", ",", "munger_bic.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
 													"outlettype" : [ "int", "", "" ],
 													"patching_rect" : [ 148.0, 212.0, 100.0, 20.0 ],
-													"prefix" : "Macintosh HD:/Applications/Max5/examples/sounds/",
+													"prefix" : "Macintosh HD:/Users/pierreg/Desktop/sons_pour_/",
 													"presentation" : 1,
 													"presentation_rect" : [ 31.0, 4.0, 142.64183, 20.0 ],
 													"types" : [  ]
@@ -8229,12 +8324,12 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -8957,12 +9052,12 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1][2]",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -10243,12 +10338,12 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"fontname" : "Arial",
+														"fontface" : 0,
+														"fontsize" : 12.0,
 														"globalpatchername" : "",
 														"default_fontface" : 0,
-														"fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontsize" : 12.0,
+														"fontname" : "Arial",
 														"default_fontsize" : 12.0
 													}
 ,
@@ -10408,13 +10503,13 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "alaVagionne.aif", ",", "allumettes_claves_freeze.aif", ",", "allumettes_claves_freeze_2.aif", ",", "allumettes_claves_freeze_2_bubbler_munger.aif", ",", "Amorphous Mass.wav", ",", "Bats in a Cave.wav", ",", "convolution_citerne_spec_gateVRSP-bille_bocal.aif", ",", "convolution_citerneResonFrot_flange_varispeed.aif", ",", "convolution_clarBasseMelo-TramElecWarpPan.aif", ",", "Js_120Bpm_68.wav", ",", "JS_Brass_120_AD_1.wav", ",", "Js_DoubleBass_120_E_8.wav", ",", "Klaxons(stereo).aif", ",", "LethargaDrone Sust.wav", ",", "munger_bic.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
 													"outlettype" : [ "int", "", "" ],
 													"patching_rect" : [ 148.0, 212.0, 100.0, 20.0 ],
-													"prefix" : "Macintosh HD:/Applications/Max5/examples/sounds/",
+													"prefix" : "Macintosh HD:/Users/pierreg/Desktop/sons_pour_/",
 													"presentation" : 1,
 													"presentation_rect" : [ 31.0, 4.0, 142.64183, 20.0 ],
 													"types" : [  ]
@@ -11652,12 +11747,12 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -12380,12 +12475,12 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"fontname" : "Arial",
+										"fontface" : 0,
+										"fontsize" : 12.0,
 										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][2]",
 										"default_fontface" : 0,
-										"fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontsize" : 12.0,
+										"fontname" : "Arial",
 										"default_fontsize" : 12.0
 									}
 ,
@@ -13666,12 +13761,12 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
-														"fontname" : "Arial",
+														"fontface" : 0,
+														"fontsize" : 12.0,
 														"globalpatchername" : "",
 														"default_fontface" : 0,
-														"fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontsize" : 12.0,
+														"fontname" : "Arial",
 														"default_fontsize" : 12.0
 													}
 ,
@@ -13831,13 +13926,13 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "alaVagionne.aif", ",", "allumettes_claves_freeze.aif", ",", "allumettes_claves_freeze_2.aif", ",", "allumettes_claves_freeze_2_bubbler_munger.aif", ",", "Amorphous Mass.wav", ",", "Bats in a Cave.wav", ",", "convolution_citerne_spec_gateVRSP-bille_bocal.aif", ",", "convolution_citerneResonFrot_flange_varispeed.aif", ",", "convolution_clarBasseMelo-TramElecWarpPan.aif", ",", "Js_120Bpm_68.wav", ",", "JS_Brass_120_AD_1.wav", ",", "Js_DoubleBass_120_E_8.wav", ",", "Klaxons(stereo).aif", ",", "LethargaDrone Sust.wav", ",", "munger_bic.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
 													"outlettype" : [ "int", "", "" ],
 													"patching_rect" : [ 148.0, 212.0, 100.0, 20.0 ],
-													"prefix" : "Macintosh HD:/Applications/Max5/examples/sounds/",
+													"prefix" : "Macintosh HD:/Users/pierreg/Desktop/sons_pour_/",
 													"presentation" : 1,
 													"presentation_rect" : [ 31.0, 4.0, 142.64183, 20.0 ],
 													"types" : [  ]
@@ -14951,6 +15046,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-38", 15 ],
+					"hidden" : 0,
+					"midpoints" : [  ],
+					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-24", 0 ],
 					"hidden" : 0,
@@ -15410,6 +15514,24 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"hidden" : 0,
+					"midpoints" : [  ],
+					"source" : [ "obj-16", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-20", 0 ],
+					"hidden" : 0,
+					"midpoints" : [  ],
+					"source" : [ "obj-17", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 					"destination" : [ "obj-34", 0 ],
 					"hidden" : 0,
@@ -15713,7 +15835,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-38", 15 ],
+					"destination" : [ "obj-11", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
 					"source" : [ "obj-20", 0 ]
@@ -15731,10 +15853,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-38", 15 ],
+					"destination" : [ "obj-10", 0 ],
 					"hidden" : 0,
 					"midpoints" : [  ],
-					"source" : [ "obj-23", 0 ]
+					"source" : [ "obj-22", 0 ]
 				}
 
 			}
@@ -17496,6 +17618,15 @@
 					"hidden" : 0,
 					"midpoints" : [  ],
 					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-38", 15 ],
+					"hidden" : 0,
+					"midpoints" : [  ],
+					"source" : [ "obj-9", 0 ]
 				}
 
 			}

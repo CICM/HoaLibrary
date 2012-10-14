@@ -275,8 +275,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 405.0, 135.0, 70.0, 20.0 ],
-					"text" : "loadmess 1"
+					"patching_rect" : [ 405.0, 135.0, 86.0, 20.0 ],
+					"text" : "loadmess 0.35"
 				}
 
 			}
@@ -299,11 +299,11 @@
 					"fontsize" : 11.595187,
 					"id" : "obj-23",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 405.0, 195.0, 42.0, 20.0 ],
-					"text" : "sig~ 1"
+					"patching_rect" : [ 405.0, 195.0, 69.0, 20.0 ],
+					"text" : "cycle~ 0.35"
 				}
 
 			}
@@ -667,13 +667,13 @@
 ,
 					"patching_rect" : [ 600.0, 45.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
 						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
+						"globalpatchername" : "",
 						"default_fontname" : "Arial",
-						"fontname" : "Arial"
+						"fontname" : "Arial",
+						"default_fontsize" : 12.0
 					}
 ,
 					"text" : "p key32"

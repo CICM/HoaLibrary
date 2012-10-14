@@ -24,9 +24,9 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 {	
 	
 	if (pinnaSize == "small")
-		m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Small";
+		m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Small/";
 	else
-		m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Large";
+		m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Large/";
 	
 	//if (pinnaSize == "small") 
 //	{

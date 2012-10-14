@@ -108,8 +108,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 465.0, 195.0, 73.0, 20.0 ],
-					"text" : "loadmess 7."
+					"patching_rect" : [ 435.0, 180.0, 73.0, 20.0 ],
+					"text" : "loadmess 1."
 				}
 
 			}
@@ -119,12 +119,12 @@
 					"fontsize" : 11.595187,
 					"id" : "obj-6",
 					"maxclass" : "flonum",
-					"maximum" : 7.0,
+					"maximum" : 1.0,
 					"minimum" : 0.0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
-					"patching_rect" : [ 465.0, 225.0, 50.0, 20.0 ]
+					"patching_rect" : [ 435.0, 210.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -179,7 +179,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 450.0, 180.0, 150.0, 46.0 ],
+					"patching_rect" : [ 495.0, 210.0, 150.0, 46.0 ],
 					"text" : "With split mode, the input are splited by the given order."
 				}
 
@@ -328,13 +328,13 @@
 ,
 					"patching_rect" : [ 645.0, 45.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
+						"globalpatchername" : "",
+						"fontface" : 0,
 						"fontsize" : 12.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
-						"fontname" : "Arial",
 						"default_fontsize" : 12.0,
-						"globalpatchername" : "",
-						"fontface" : 0
+						"fontname" : "Arial"
 					}
 ,
 					"text" : "p key32"
@@ -363,7 +363,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
-					"patching_rect" : [ 626.0, 195.0, 50.0, 20.0 ]
+					"patching_rect" : [ 626.0, 231.0, 50.0, 20.0 ]
 				}
 
 			}
@@ -377,7 +377,7 @@
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 420.0, 255.0, 199.0, 20.0 ],
-					"text" : "hoa.plug~ 7 hoa.fracorder~ pre"
+					"text" : "hoa.plug~ 7 hoa.wider~ pre"
 				}
 
 			}
@@ -815,13 +815,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"globalpatchername" : "",
+										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : "",
-										"fontface" : 0
+										"fontname" : "Arial"
 									}
 ,
 									"text" : "p attrArgs"
@@ -863,7 +863,6 @@
 								"box" : 								{
 									"args" : [  ],
 									"embed" : 1,
-									"hidden" : 1,
 									"id" : "obj-3",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -1543,13 +1542,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1]",
+										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1]",
-										"fontface" : 0
+										"fontname" : "Arial"
 									}
 ,
 									"text" : "p manageDisplay"
@@ -2513,6 +2512,7 @@
 								"box" : 								{
 									"args" : [  ],
 									"embed" : 1,
+									"hidden" : 1,
 									"id" : "obj-22",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -2829,13 +2829,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
+														"globalpatchername" : "",
+														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontname" : "Arial",
 														"default_fontsize" : 12.0,
-														"globalpatchername" : "",
-														"fontface" : 0
+														"fontname" : "Arial"
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -4348,13 +4348,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 645.0, 240.0, 379.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"globalpatchername" : "",
+										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : "",
-										"fontface" : 0
+										"fontname" : "Arial"
 									}
 ,
 									"text" : "p attrArgs"
@@ -4396,7 +4396,6 @@
 								"box" : 								{
 									"args" : [  ],
 									"embed" : 1,
-									"hidden" : 1,
 									"id" : "obj-3",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -5076,13 +5075,13 @@
 									"presentation" : 1,
 									"presentation_rect" : [ 75.0, 162.000031, 106.0, 20.0 ],
 									"saved_object_attributes" : 									{
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
+										"fontface" : 0,
 										"fontsize" : 12.0,
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
-										"fontname" : "Arial",
 										"default_fontsize" : 12.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
-										"fontface" : 0
+										"fontname" : "Arial"
 									}
 ,
 									"text" : "p manageDisplay"
@@ -6046,6 +6045,7 @@
 								"box" : 								{
 									"args" : [  ],
 									"embed" : 1,
+									"hidden" : 1,
 									"id" : "obj-22",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -6362,13 +6362,13 @@
 ,
 													"patching_rect" : [ 39.0, 181.0, 100.0, 18.0 ],
 													"saved_object_attributes" : 													{
+														"globalpatchername" : "",
+														"fontface" : 0,
 														"fontsize" : 12.0,
 														"default_fontface" : 0,
 														"default_fontname" : "Arial",
-														"fontname" : "Arial",
 														"default_fontsize" : 12.0,
-														"globalpatchername" : "",
-														"fontface" : 0
+														"fontname" : "Arial"
 													}
 ,
 													"text" : "p folderOrSoundFile"
@@ -8383,7 +8383,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-36", 0 ],
 					"hidden" : 0,
-					"midpoints" : [ 474.5, 246.0, 429.0, 246.0, 429.0, 252.0, 429.5, 252.0 ],
+					"midpoints" : [ 444.5, 246.0, 429.0, 246.0, 429.0, 252.0, 429.5, 252.0 ],
 					"source" : [ "obj-6", 0 ]
 				}
 
