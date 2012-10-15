@@ -185,3 +185,4 @@ ext_win_release/
 *.exe
 *.msi
 HoaPackage/
+*.zip
