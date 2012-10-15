@@ -15,10 +15,15 @@ PRODUCT_VERSION = 5.1.7
 
 
 // Paths
+
 C74SUPPORT = $(SRCROOT)/../../../../SDKs/MaxSDK-5.1.7/c74support
 HEADER_SEARCH_PATHS = /Developer/Headers/FlatCarbon "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
 FRAMEWORK_SEARCH_PATHS = "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
-DSTROOT = $(SRCROOT)/../../MaxMsp/Externals
+
+//DSTROOT = $(SRCROOT)/../../MaxMsp/Externals
+//DSTROOT = $(SRCROOT)/../../MaxMsp/Max/$C74FOLDER
+
+
 // (This next path is relative to DSTROOT)
 INSTALL_PATH = /
 
@@ -42,3 +47,7 @@ WRAPPER_EXTENSION = mxo;
 WARNING_CFLAGS = -Wmost -Wno-four-char-constants -Wno-unknown-pragmas
 DEPLOYMENT_LOCATION = YES
 GENERATE_PKGINFO_FILE = YES
+
+//marche mais pas propre ! :
+C74FOLDER = '74
+DSTROOT = $(SRCROOT)/../../MaxMsp/Max/Cycling $C74FOLDER/HoaLibrary/externals/OsX

@@ -32,7 +32,7 @@ int main(void)
 	HoaLoader_class = c;
 	
 	if (hoaWelcomePosted == 0) {
-		post("hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
+		post("hoa.library (Beta 1.0.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
 		post("Copyright (C) 2012, CICM / Universite Paris 8");
 		hoaWelcomePosted = 1;
 	}
