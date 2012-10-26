@@ -1971,12 +1971,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CBB955AE2760426CB4D10FA2AB6867F6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CBE09707610B48F6A93CD9A03F087691"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2092,6 +2086,12 @@
         "Entry"
         {
         "MsmKey" = "8:_D40D89359D384924995A7B0B8483CE05"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D4C3120AD3CA42F78C3CEEF7BEA11456"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2564,7 +2564,7 @@
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
@@ -9132,26 +9132,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CBB955AE2760426CB4D10FA2AB6867F6"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\MaxMsp\\Max\\Cycling '74\\HoaLibrary\\externals\\Windows\\hoa.optim~.mxe"
-            "TargetName" = "8:hoa.optim~.mxe"
-            "Tag" = "8:"
-            "Folder" = "8:_CA56AB19D08544738723F3A6136C624B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CBE09707610B48F6A93CD9A03F087691"
             {
             "SourcePath" = "8:..\\..\\..\\..\\MaxMsp\\HrtfDatabase\\Large\\left60.wav"
@@ -9538,6 +9518,26 @@
             "TargetName" = "8:right170.wav"
             "Tag" = "8:"
             "Folder" = "8:_E5113BDB9F38431F8CFC05A5F533DB35"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D4C3120AD3CA42F78C3CEEF7BEA11456"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\MaxMsp\\Max\\Cycling '74\\HoaLibrary\\externals\\Windows\\hoa.optim~.mxe"
+            "TargetName" = "8:hoa.optim~.mxe"
+            "Tag" = "8:"
+            "Folder" = "8:_CA56AB19D08544738723F3A6136C624B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -11274,7 +11274,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:HoaLibrary"
         "ProductCode" = "8:{7285E813-1214-4B4F-A17A-81354D18906B}"
-        "PackageCode" = "8:{65D134A4-C644-476A-A598-A74707367CC0}"
+        "PackageCode" = "8:{816D2FDB-D763-44DF-9368-06F6939FDD63}"
         "UpgradeCode" = "8:{F5E3AE1B-1141-4246-AD95-87DB4C5A4B53}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
