@@ -21,7 +21,11 @@ function doRemove {
 		sudo rm -Rf "$C74Folder/HoaLibrary" && echo -ne "... done.\n"
 		
 		echo -ne "- Extension Files ($C74Folder/extensions/)"
-		sudo rm -Rf "$C74Folder/extensions/"hoa.* && echo -ne "... done.\n"    
+		sudo rm -Rf "$C74Folder/extensions/"hoa.* && echo -ne "... done.\n"
+
+		echo -ne "- Palettes Files ($C74Folder/object-palettes/)"
+		sudo rm -Rf "$C74Folder/object-palettes/"hoa-palette.json && echo -ne "... done.\n"
+		sudo rm -Rf "$C74Folder/object-palettes/"hoa.* && echo -ne "... done.\n"
 	fi
 	
 
