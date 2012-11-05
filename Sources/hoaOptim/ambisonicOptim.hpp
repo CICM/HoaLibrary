@@ -30,7 +30,6 @@
 #include <vector>
 #include <string>
 #include <gsl/gsl_sf.h>
-#include <mkl.h>
 
 class ambisonicOptim
 {
@@ -60,25 +59,19 @@ public:
 	/* Perform sample by sample */
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{	
-		vdmul(m_number_of_harmonics, aInputs, m_optimVector, aOutputs);
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			aOutputs[i] = m_optimVector[i] * aInputs[i];
 	}
 	
 	/* Perform block sample */
-	void process(double** aInputs, double** aOutputs)
+	template<typename Type> void process(Type** aInputs, Type** aOutputs)
 	{	
 		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
-			cblas_dcopy(m_vector_size, aInputs[i], 1, aOutputs[i], 1);
-			cblas_dscal(m_vector_size, m_optimVector[i], aOutputs[i], 1);
-		}
-	}
-	
-	void process(float** aInputs, float** aOutputs)
-	{	
-		for(int i = 0; i < m_number_of_harmonics; i++)
-		{
-			cblas_scopy(m_vector_size, aInputs[i], 1, aOutputs[i], 1);
-			cblas_sscal(m_vector_size, m_optimVector[i], aOutputs[i], 1);
+			for(int j = 0; j < m_vector_size; j++)
+			{
+				aOutputs[i][j] = m_optimVector[i] * aInputs[i][j];
+			}
 		}
 	}
 };

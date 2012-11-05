@@ -5,12 +5,15 @@ It has been elaborated to facilitate the use of the sphericals harmonics and the
 
 Windows Install :
 
+Firt please delete the .mxo files in the package (\Max\Cycling '74\extensions and Max\Cycling '74\HoaLibrary\externals\OsX).
 The easy solution is to put the "patches" folder and the "Cycling '74" folder include in the "max" folder of the package in the Max 5 or/and Max 6 folder application. Windows will ask you if you want to fusion the files and the folders, please accept for all. 
 You can also copy just part of the package but we recommend to include all the files and to respect the paths.
 The "HrtfDatabase" folder must be put in "C:/ProgramData/CicmLibrary/". If the "CicmLibrary" don't exist please create it.
 
 OsX Install :
 
+
+Firt please delete the .mxe files in the package (\Max\Cycling '74\extensions and Max\Cycling '74\HoaLibrary\externals\Windows).
 The easy solution is to put the "patches" folder and the "Cycling '74" folder include in the "max" folder of the package in the Max 5 or/and Max 6 folder application. 
 We recommend to include all the files and to respect the paths but you can also copy just part of the package.
 The "HrtfDatabase" folder must be put in "/Library/Application Support/CicmLibrary/". If the "CicmLibrary" don't exist please create it.
