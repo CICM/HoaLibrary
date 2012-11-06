@@ -310,7 +310,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 10.0, 57.0, 548.0, 45.0 ],
-					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets.",
+					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. (nb : only works when your patch isn't scrolled).",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -535,22 +535,22 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "lock.js",
-				"bootpath" : "/Users/elioton/Dropbox/hoapackage/OsX/HoaLibrary/externals/jsExternals",
-				"patcherrelativepath" : "../externals/jsExternals",
+				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/externals/jsExternals",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/externals/jsExternals",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Users/elioton/Dropbox/hoapackage/OsX/hoaRefpages/hoa-ref",
-				"patcherrelativepath" : "../../hoaRefpages/hoa-ref",
+				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Users/elioton/Dropbox/hoapackage/OsX/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}

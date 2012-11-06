@@ -28,6 +28,31 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-68",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.credits.maxpat",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 500.0, 8.0, 295.0, 31.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 9.160198,
+					"hidden" : 1,
+					"id" : "obj-56",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 0.0, 684.257935, 45.0, 17.0 ],
+					"text" : "onecopy"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"handoff" : "",
 					"id" : "obj-60",
 					"maxclass" : "ubutton",
@@ -1147,12 +1172,12 @@
 					"fontsize" : 12.0,
 					"frgb" : 0.0,
 					"id" : "obj-44",
-					"linecount" : 6,
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 270.0, 135.0, 275.0, 87.0 ],
-					"text" : "hoa.spat is a 2D spatialization user interface tool, allow you to spatialize several point sources.\nYou can control sources with a list of value in the first inlet, zoom in/out, add or remove loudspeakers, modify the distance between listener and loudspeaker... "
+					"patching_rect" : [ 270.0, 135.0, 275.0, 33.0 ],
+					"text" : "hoa.delay~ allows you to delay the differents harmonics."
 				}
 
 			}
@@ -3299,7 +3324,6 @@
 													}
 ,
 													"patching_rect" : [ 284.0, 360.0, 34.0, 20.0 ],
-													"presentation_rect" : [ 284.0, 359.0, 0.0, 0.0 ],
 													"saved_object_attributes" : 													{
 														"default_fontface" : 0,
 														"default_fontname" : "Arial",
@@ -6956,21 +6980,6 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 502.0, 12.0, 311.0, 32.0 ],
-					"text" : "hoa.library (version 1.1) by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontface" : 3,
 					"fontname" : "Arial",
 					"fontsize" : 20.871338,
@@ -7671,6 +7680,13 @@
 				"name" : "hoa.snapshot~.maxpat",
 				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/operators",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.credits.maxpat",
+				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
