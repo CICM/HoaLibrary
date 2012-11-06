@@ -91,17 +91,18 @@
 	<seealsolist>
 		<seealso name="hoa.encoder~" />
 		<seealso name="hoa.decoder~" />
+        <seealso name="hoa.rotate~" />
+        <seealso name="hoa.optim~" />
+        <seealso name="hoa.meter~" />
+        <seealso name="hoa.spat" />
+        <seealso name="hoa.scope~" />
+        <seealso name="hoa.plug~" />
+        <seealso name="hoa.projector~" />
         <seealso name="hoa.binaural~" />
         <seealso name="hoa.connect" />
         <seealso name="hoa.dac~" />
-        <seealso name="hoa.meter~" />
         <seealso name="hoa.pi" />
         <seealso name="hoa.play~" />
-        <seealso name="hoa.plug~" />
-        <seealso name="hoa.recomposer~" />
         <seealso name="hoa.record~" />
-        <seealso name="hoa.rotate~" />
-        <seealso name="hoa.scope~" />
-        <seealso name="hoa.trajectory" />
 	</seealsolist>
 </c74object>

@@ -79,14 +79,11 @@
 			</description>
 		</method>
 		<method name="optim">
-            <arglist>
-                basic || maxRe || inPhase
-			</arglist>
 			<digest>
-				Optimizations.
+				Deprecated, use <o>hoa.optim~</o> instead.
 			</digest>
 			<description>
-                Optimizations can be used on the harmonics.
+                Deprecated, use <o>hoa.optim~</o> instead.
 			</description>
 		</method>
 		<method name="scheme">
@@ -109,18 +106,19 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="hoa.encoder~" />
-        <seealso name="hoa.binaural~" />
-        <seealso name="hoa.connect" />
-        <seealso name="hoa.dac~" />
+        <seealso name="hoa.rotate~" />
+        <seealso name="hoa.optim~" />
         <seealso name="hoa.meter~" />
-        <seealso name="hoa.pi" />
-        <seealso name="hoa.play~" />
+        <seealso name="hoa.spat" />
+        <seealso name="hoa.scope~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
         <seealso name="hoa.recomposer~" />
+        <seealso name="hoa.binaural~" />
+        <seealso name="hoa.connect" />
+        <seealso name="hoa.dac~" />
+        <seealso name="hoa.pi" />
+        <seealso name="hoa.play~" />
         <seealso name="hoa.record~" />
-        <seealso name="hoa.rotate~" />
-        <seealso name="hoa.scope~" />
-        <seealso name="hoa.trajectory" />
 	</seealsolist>
 </c74object>
