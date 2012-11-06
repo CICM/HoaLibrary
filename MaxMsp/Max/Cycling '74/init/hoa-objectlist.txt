@@ -12,6 +12,6 @@ max oblist Hoa hoa.recomposer~;
 max oblist Hoa hoa.record~;
 max oblist Hoa hoa.rotate~;
 max oblist Hoa hoa.scope~;
-max oblist Hoa hoa.trajectory;
+max oblist Hoa hoa.spat;
 max oblist Hoa hoa.optim;
 
