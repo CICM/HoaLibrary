@@ -1,4 +1,4 @@
-/*
+/**
  *
  * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot, Eliott Paris Universite Paris 8
  * 
@@ -17,27 +17,25 @@
  *
  */
 
-#include "ext.h"
-#include "ext_obex.h"
-#include "../hoaHeader.h"
+#ifndef define DEF_HOAHEADER
+#define DEF_HOAHEADER
 
-//int hoaWelcomePosted = 0;
-void *HoaLoader_class;
+// Private Variables / Functions / Etc.
+char 	hoa_glob_loaded;
 
-int main(void)
-{	
-	t_class *c;
-	c = class_new("hoa.loader", (method)NULL, (method)NULL, 0, 0L, NULL, 0);
-	class_register(CLASS_NOBOX, c);	
-	HoaLoader_class = c;
+
+// Initialize Hoa
+void hoa_init(void)
+{
+	// Only run this function for the first object loaded...
+	if(hoa_glob_loaded == 1) return;
 	
-	hoa_init();
-	/*
-	if (hoaWelcomePosted == 0) {
-		post("hoa.library (Beta 1.0.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
-		post("Copyright (C) 2012, CICM / Universite Paris 8");
-		hoaWelcomePosted = 1;
-	}
-	*/
-	return 0;
+	// Post to the Max Window	
+	post("hoa.library (Beta 1.0.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
+	post("Copyright (C) 2012, CICM / Universite Paris 8");
+	
+	// Set the flag so this function isn't run again...
+	hoa_glob_loaded = 1;
 }
+
+#endif

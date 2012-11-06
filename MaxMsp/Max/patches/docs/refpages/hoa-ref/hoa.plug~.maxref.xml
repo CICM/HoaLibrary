@@ -67,7 +67,7 @@
 		</objarg>
 		<objarg id="2" name="mode" type="symbol" optional="0">
 			<digest>
-				Mode 'pre', 'no' or 'post' decoding.
+				Mode 'pre', 'no' or 'post' encoding.
             </digest>
 			<description>
 				- No-mode for no encoding processing, useful to create diffused soundfields.

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Eliott Paris, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -22,9 +22,10 @@ extern "C"
 #include "ext.h"
 #include "ext_obex.h"
 #include "z_dsp.h"
+#include "../hoaHeader.h"
 }
 #include "AmbisonicEncode.hpp"
-int postons = 0;
+//int postons = 0;
 typedef struct _HoaEncode 
 {
 	t_pxobject					f_ob;			
@@ -74,6 +75,8 @@ int main(void)
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
 	
+	hoa_init();
+	/*
 	if(class_findbyname(CLASS_NOBOX, gensym("hoa.loader")) == NULL)
 	{
 		if(postons == 0)
@@ -83,6 +86,7 @@ int main(void)
 			postons = 1;
 		}
 	}
+	*/
 	
 	return 0;
 }

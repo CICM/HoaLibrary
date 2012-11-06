@@ -24,6 +24,7 @@
 #include "jpatcher_syms.h"
 #include "ext_dictionary.h"
 #include "ext_globalsymbol.h"
+#include "../hoaHeader.h"
 
 #define MAX_SOURCES 100
 
@@ -179,7 +180,6 @@ int which_source_pointed(t_hoaspat *x, t_pt pt);
 
 //calcul methods
 double nextPow2(double aValue);
-double rps(double width, double cartPos); //convert cartesian pos (-1 1) to UI pos.
 double pX(double width, double cartPos);
 double pY(double width, double cartPos);
 double scale(double value, double aMin, double aMax, double bMin, double bMax);
@@ -196,10 +196,7 @@ t_pol pixtopol(t_hoaspat *x, t_pt pix);
 t_pt poltopix(t_hoaspat *x, t_pol pol, int antialiased);
 double radtodeg(double radian);
 double degtorad(double degree);
-
 double wrapi(double deltaPhase);
-
-
 t_pt point_to_radDist(t_pt pt1, t_pt pt2); // retourne le radian et la distance à partir de deux points
 t_pt point_to_degDist(t_pt pt1, t_pt pt2); // retourne le degree et la distance à partir de deux points
 
@@ -282,12 +279,14 @@ int main()
 	CLASS_ATTR_ORDER			(c, "headcolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "headcolor", 0, "0. 0. 0. 1.");
 	
+	/*
 	CLASS_ATTR_RGBA				(c, "selectcolor", 0, t_hoaspat, f_color_selection);
 	CLASS_ATTR_CATEGORY			(c, "selectcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "selectcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selectcolor", 0, "selection Color");
 	CLASS_ATTR_ORDER			(c, "selectcolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selectcolor", 0, "0. 0. 1. 0.05");
+	*/
 
 	/*
 	CLASS_ATTR_LONG				(c,"output_mode",0, t_hoaspat, f_output_mode);
@@ -348,7 +347,8 @@ int main()
 	class_register(CLASS_BOX, c);
 	hoaspat_class = c;
 	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	//class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	hoa_init();
 	return 0;
 }
 
@@ -397,6 +397,8 @@ void *hoaspat_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_sourceColors[8] = clr256(84,47,140,255);
 	x->f_sourceColors[9] = clr256(255,191,0,255);
 	x->f_nb_sourceColors = 10;
+	
+	x->f_color_selection = (t_jrgba){0., 0., 1., 0.05};
 	
 	
 	x->f_out = outlet_new((t_object *)x, NULL);
@@ -451,6 +453,13 @@ double calcul_angle_display(double x1, double y1, double x2, double y2){
 	float a = ((float)(atan2 (y2-y1, x2-x1)*180./JGRAPHICS_PI))-90.0f;
 	if (a <= -180) return 360+a;
 	else return a;
+}
+
+double pX(double width, double cartPos){
+	return floor( (cartPos+1)*0.5 * width) + 0.5; //+ antialiasing method
+}
+double pY(double width, double cartPos){
+	return floor( (-cartPos+1)*0.5 * width) + 0.5; //+ antialiasing method
 }
 
 t_pt poltocar(double distance, double angle){
@@ -558,22 +567,20 @@ void hoaspat_assist(t_hoaspat *x, void *b, long m, long a, char *s)
 		sprintf(s,"msg in (add, remove, clear, car, pol ...)");
 	} else {
 		if (a == 0) {
-			sprintf(s,"Cartesian coordinates output : (source, x, y).");
+			sprintf(s,"Cartesian coordinates output : (source, x, y)");
 		}
-		if (a == 1) {
-			sprintf(s,"Polar coordinates output : (source, distance, radius).");
+		else if (a == 1) {
+			sprintf(s,"Polar coordinates output : (source, distance, radius)");
+		}
+		else if (a == 2) {
+			sprintf(s,"Number of Sources in the scene");
 		}
 	}
 }
 
-void hoaspat_basis(t_hoaspat *x)
-{
-	;
-}
-
 void hoaspat_float(t_hoaspat *x, double f)
 {
-	//post("wrapi = %f", wrapi(f) );
+	;
 }
 void hoaspat_anything(t_hoaspat *x, t_symbol *s, short ac, t_atom *av)
 {
@@ -798,6 +805,7 @@ void hoaspat_remove(t_hoaspat *x){
 	if(x->f_numberOfSources <= -1) x->f_numberOfSources = 0;
 	update_source_selection(x, x->f_actualSource, 0);
 	x->f_actualSource = x->f_numberOfSources;
+	outlet_int(x->f_out, x->f_numberOfSources);
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
 	jbox_redraw((t_jbox *)x);
 }
@@ -811,6 +819,7 @@ void hoaspat_clear(t_hoaspat *x){
 	}
 	x->f_numberOfSources = 0;
 	x->f_actualSource = 0;
+	outlet_int(x->f_out, x->f_numberOfSources);
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
 	jbox_redraw((t_jbox *)x);
 }
@@ -829,11 +838,6 @@ void hoaspat_zoom(t_hoaspat *x, double v){
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("ls_layer"));
 	jbox_redraw((t_jbox *)x);
-}
-
-void hoaspat_nb_hp(t_hoaspat *x, int v){
-    if (v <= 1) { v = 1; }
-    x->f_numberOfSpeaker = v;
 }
 
 // pas implémentée
@@ -986,6 +990,8 @@ void draw_sources(t_hoaspat *x,  t_object *view, t_rect *rect)
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("sources_layer"), rect->width, rect->height);
 	size = w / 60.;
 	fontsize = (w / 30.) - 1.;
+	if (size < 5) size = 5;
+	if (fontsize < 10) fontsize = 10;
 	x->f_sourceSize = size;
 	ombreX = ombreY = floor(size * 0.15) + 0.5;
 	
@@ -1312,20 +1318,6 @@ double nextPow2(double aValue) {
 		pow = pow*2;
 	}
 	return (pow)/4;
-}
-
-//convert cartesian pos (-1 1) to UI pos. 
-double rps(double width, double cartPos){
-	//cartPos = (cartPos+1)*0.5;
-	//return cartPos * width;
-	return floor( (cartPos+1)*0.5 * width) + 0.5; //+ antialiasing method
-}
-
-double pX(double width, double cartPos){
-	return floor( (cartPos+1)*0.5 * width) + 0.5; //+ antialiasing method
-}
-double pY(double width, double cartPos){
-	return floor( (-cartPos+1)*0.5 * width) + 0.5; //+ antialiasing method
 }
 
 void draw_speakers(t_hoaspat *x, t_object *view, t_rect *rect){

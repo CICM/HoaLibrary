@@ -1,0 +1,10 @@
+## A high order ambisonics library.
+
+
+version beta 1.1
+ - hoa.trajectory and dependencies removed.
+ - hoa.spat (binaries + help + ref) added.
+ - uninstaller for mac.
+
+version beta 1.0.0
+ - initial version.
