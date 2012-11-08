@@ -25,7 +25,6 @@
 #include "z_dsp.h"
 #include "ext_dictionary.h"
 #include "ext_globalsymbol.h"
-#include "../hoaHeader.h"
 
 #define MAXIMUM_SIZE 3600
 
@@ -48,8 +47,6 @@ typedef struct  _meter
 	double		f_energyVectorY;
 	
 	t_jrgba		f_colorBackground;
-	t_jrgba		f_colorMeterBg;
-	t_jrgba		f_colorBorder;
 	t_jrgba		f_colorText;
 	t_jrgba		f_colorCircle;
 	t_jrgba		f_colorColdSignal;
@@ -61,15 +58,10 @@ typedef struct  _meter
 	t_jrgba		f_colorEnergy;
 	t_jrgba		f_colorVelocity;
 	
-	t_pt		f_center;
-	double		f_rayonMax;
+	t_rect		f_center;
+	double		f_rayonGlobal;
 	double		f_rayonCircle;
 	double		f_fontsize;
-	
-	double		f_strokeWidth;
-	double		f_rayonExt;
-	double		f_rayonInt;
-	int			f_drawmeter;
 	
 } t_meter;
 
@@ -87,8 +79,6 @@ void meter_dsp64(t_meter *x, t_object *dsp64, short *count, double samplerate, l
 void meter_perform64(t_meter *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params);
-long meter_oksize(t_meter *x, t_rect *newrect);
 
 /* Paint *********************************************/
 void meter_paint(t_meter *x, t_object *view);
@@ -96,9 +86,6 @@ void draw_background(t_meter *x, t_object *view, t_rect *rect);
 void draw_meter(t_meter *x,  t_object *view, t_rect *rect);
 void draw_vector(t_meter *x, t_object *view, t_rect *rect);
 void draw_angle(t_meter *x,  t_object *view, t_rect *rect);
-void draw_skelton(t_meter *x,  t_object *view, t_rect *rect);
-void draw_oneSkeltonSpeaker(t_meter *x, t_jgraphics *g, double rotDegree, double size);
-double degtorad(double degree);
 
 int main()
 {
@@ -115,8 +102,6 @@ int main()
 	class_addmethod(c, (method)meter_assist,		"assist",		A_CANT,	0);
 	class_addmethod(c, (method)meter_paint,			"paint",		A_CANT,	0);
 	class_addmethod(c, (method)meter_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)meter_getdrawparams, "getdrawparams", A_CANT, 0);
-	class_addmethod(c, (method)meter_oksize,		"oksize",		A_CANT, 0);
 
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 225 225");
 
@@ -127,7 +112,7 @@ int main()
 	CLASS_ATTR_CATEGORY			(c, "ls", 0, "Value");
 	CLASS_ATTR_ORDER			(c, "ls", 0, "1");
 	CLASS_ATTR_LABEL			(c, "ls", 0, "Number of Loudspeakers");
-	CLASS_ATTR_FILTER_MIN		(c, "ls", 1);
+	CLASS_ATTR_FILTER_MIN		(c, "ls", 3);
 	CLASS_ATTR_DEFAULT			(c, "ls", 0, "8");
 	CLASS_ATTR_SAVE				(c, "ls", 1);
 	//CLASS_ATTR_INVISIBLE		(c, "ls", 1);
@@ -136,8 +121,7 @@ int main()
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Value");
 	CLASS_ATTR_ORDER			(c, "offset", 0, "2");
 	CLASS_ATTR_LABEL			(c, "offset", 0, "Offset of Loudspeakers");
-	//CLASS_ATTR_FILTER_CLIP		(c, "offset", -1., 1.);
-	CLASS_ATTR_FILTER_CLIP		(c, "offset", -180., 180.);
+	CLASS_ATTR_FILTER_CLIP		(c, "offset", -1., 1.);
 	CLASS_ATTR_DEFAULT			(c, "offset", 0, "0");
 	CLASS_ATTR_SAVE				(c, "offset", 1);
 	
@@ -154,39 +138,21 @@ int main()
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 0.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "1. 1. 1. 1.");
 	
-	CLASS_ATTR_RGBA				(c, "mbgcolor", 0, t_meter, f_colorMeterBg);
-	CLASS_ATTR_CATEGORY			(c, "mbgcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "mbgcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "mbgcolor", 0, "Meter Background Color");
-	CLASS_ATTR_ORDER			(c, "mbgcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "mbgcolor", 0, "0.4 0.4 0.4 1.");
-	
-	CLASS_ATTR_RGBA				(c, "bordercolor", 0, t_meter, f_colorBorder);
-	CLASS_ATTR_CATEGORY			(c, "bordercolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bordercolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bordercolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bordercolor", 0, "3");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bordercolor", 0, "0.25 0.25 0.25 1");
-	
-	/*
 	CLASS_ATTR_RGBA				(c, "txcolor", 0, t_meter, f_colorText);
 	CLASS_ATTR_CATEGORY			(c, "txcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "txcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "txcolor", 0, "Text Color");
-	CLASS_ATTR_ORDER			(c, "txcolor", 0, "4");
+	CLASS_ATTR_ORDER			(c, "txcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "txcolor", 0, "1. 1. 1. 1.");
-	*/
-	
-	/*
+
 	CLASS_ATTR_RGBA				(c, "cicolor", 0, t_meter, f_colorCircle);
 	CLASS_ATTR_CATEGORY			(c, "cicolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "cicolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "cicolor", 0, "Circle Color");
-	CLASS_ATTR_ORDER			(c, "cicolor", 0, "5");
+	CLASS_ATTR_ORDER			(c, "cicolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "cicolor", 0, "0. 0. 0. 1.");
-	*/
 	
 	CLASS_ATTR_RGBA				(c, "coldcolor", 0, t_meter, f_colorColdSignal);
 	CLASS_ATTR_CATEGORY			(c, "coldcolor", 0, "Color");
@@ -240,8 +206,7 @@ int main()
 	class_register(CLASS_BOX, c);
 	meter_class = c;
 	
-	hoa_init();
-	//class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
@@ -280,30 +245,15 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_clock = clock_new(x,(method)meter_tick);
 	x->f_startclock = 0;
 	
-	x->f_drawmeter = 0;
-	
 	jbox_ready((t_jbox *)x);
 	
 	return (x);
-}
-
-void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_borderthickness = 0;
-}
-
-long meter_oksize(t_meter *x, t_rect *newrect){
-	if (newrect->width < 100){
-		newrect->width = newrect->height = 100;
-	}
-	return 0;
-}
+}			
 
 void meter_dsp64(t_meter *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	object_method(dsp64, gensym("dsp_add64"), x, meter_perform64, 0, NULL);
 	x->f_startclock = 1;
-	x->f_drawmeter = 1;
 }
 
 void meter_perform64(t_meter *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -350,7 +300,6 @@ void meter_dsp(t_meter *x, t_signal **sp, short *count)
 	
 	free(sigvec);
 	x->f_startclock = 1;
-	x->f_drawmeter = 1;
 }
 
 t_int *meter_perform(t_int *w)
@@ -388,7 +337,6 @@ void meter_tick(t_meter *x)
 	x->f_energyVectorY = 0.;
 	for(i = 0; i < x->f_numberOfLoudspeakers; i++)
 	{
-		//x->f_energyOfLoudspeakers[i] = 20. * log10(fabs(x->f_amplitudeOfLoudspeakers[i]));
 		x->f_energyOfLoudspeakers[i] = 20. * log10(fabs(x->f_amplitudeOfLoudspeakers[i]));
 		square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i];
 		
@@ -411,7 +359,7 @@ void meter_tick(t_meter *x)
 	}
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("vector_layer"));
-	//jbox_invalidate_layer((t_object *)x, NULL, gensym("angle_layer"));
+	jbox_invalidate_layer((t_object *)x, NULL, gensym("angle_layer"));
 	jbox_redraw((t_jbox *)x);
 	if (sys_getdspstate())
 		clock_fdelay(x->f_clock, x->f_interval);
@@ -444,23 +392,9 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
-		if(name == gensym("bgcolor"))
+		if(name == gensym("bgcolor") || name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overcolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-		}
-		else if(name == gensym("mbgcolor"))
-		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
-		}
-		else if(name == gensym("bordercolor"))
-		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
-		}
-		else if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overcolor"))
-		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 		}
 		else if(name == gensym("txcolor"))
 		{
@@ -472,8 +406,7 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 		}
 		else if(name == gensym("offset"))
 		{
-			//jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("vector_layer"));
 		}
@@ -490,206 +423,137 @@ void meter_paint(t_meter *x, t_object *view)
 	x->f_center.x = rect.width * .5;
 	x->f_center.y = rect.height * .5;
 	
-	x->f_rayonMax = rect.width * .5;
+	x->f_rayonGlobal = rect.width * .5;
 	if(rect.width > rect.height)
-		x->f_rayonMax = rect.height * .5;
+		x->f_rayonGlobal = rect.height * .5;
 	
-	x->f_fontsize = (x->f_rayonMax / 14.) - 1.;
-	x->f_rayonCircle = x->f_rayonMax / 32;
-	
-	x->f_strokeWidth = 2;
-	x->f_rayonExt = x->f_rayonMax - (x->f_strokeWidth*0.5) - 2;
-	//x->f_rayonInt = (x->f_rayonExt/4);
-	x->f_rayonInt = (x->f_rayonExt/4);
+	x->f_fontsize = (x->f_rayonGlobal / 14.) - 1.;
+	x->f_rayonCircle = x->f_rayonGlobal / 32;
 	
 	draw_background(x, view, &rect);
-	draw_skelton(x, view, &rect);
-	// trick to turn off led at start (other solution welcomed).
-	if (x->f_drawmeter) {
-		draw_meter(x, view, &rect);
-	}
+	draw_meter(x, view, &rect);
 	draw_vector(x, view, &rect);
 	//draw_angle(x, view, &rect);
 }
 
 void draw_background(t_meter *x,  t_object *view, t_rect *rect)
 {
+	int i;
+	double x1, y1;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
-	
+
 	if (g) 
 	{
 		/* Background */
 		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-		jgraphics_rectangle_rounded(g, 0, 0, rect->width, rect->height, 5, 5);
+		jgraphics_rectangle_fill_fast(g, 0., 0., rect->width, rect->height);
+		
+		/* Exterior circle */
+		jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+		jgraphics_arc(g, x->f_center.x, x->f_center.y, 30. * x->f_rayonCircle + 1.,  0., JGRAPHICS_2PI);
 		jgraphics_fill(g);
+		
+		/* Cold circle */
+		for(i = 3; i > 0; i--)
+		{
+			jgraphics_set_source_jrgba(g, &x->f_colorColdSignal);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (27. + i) * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+			jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (26. + i) * x->f_rayonCircle + 1.,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+		}
+		
+		/* Tepid circle */
+		for(i = 3; i > 0; i--)
+		{
+			jgraphics_set_source_jrgba(g, &x->f_colorTepidSignal);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (24. + i) * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+			jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (23. + i) * x->f_rayonCircle + 1.,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+		}
+		
+		/* Warm circle */
+		for(i = 3; i > 0; i--)
+		{
+			jgraphics_set_source_jrgba(g, &x->f_colorWarmSignal);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (21. + i) * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+			jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (20. + i) * x->f_rayonCircle + 1.,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+		}
+		
+		/* Hot circle */
+		for(i = 3; i > 0; i--)
+		{
+			jgraphics_set_source_jrgba(g, &x->f_colorHotSignal);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (18. + i) * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+			jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (17. + i) * x->f_rayonCircle + 1.,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
+		}
+
+		/* Over Circle */
+		jgraphics_set_source_jrgba(g, &x->f_colorOverSignal);
+		jgraphics_arc(g, x->f_center.x, x->f_center.y, (17.5 + i) * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+		jgraphics_fill(g);
+		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		jgraphics_arc(g, x->f_center.x, x->f_center.y, (16. + i) * x->f_rayonCircle + 1.,  0., JGRAPHICS_2PI);
+		jgraphics_fill(g);
+		
+		/* Axes */
+		jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+		for(i = 0; i < x->f_numberOfLoudspeakers; i++)
+		{
+			x1 = (30. * x->f_rayonCircle + 1.) * cos((double)i * JGRAPHICS_2PI / x->f_numberOfLoudspeakers - 0.5 * JGRAPHICS_2PI / x->f_numberOfLoudspeakers + x->f_offsetOfLoudspeakers * JGRAPHICS_2PI) + x->f_center.x;
+			y1 = (30. * x->f_rayonCircle + 1.) * sin((double)i * JGRAPHICS_2PI / x->f_numberOfLoudspeakers - 0.5 * JGRAPHICS_2PI / x->f_numberOfLoudspeakers + x->f_offsetOfLoudspeakers * JGRAPHICS_2PI) + x->f_center.y;
+			jgraphics_line_draw_fast(g, x1, y1, x->f_center.x, x->f_center.y, 3.);
+		}
+		
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
 }
 
-void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
-{
-	int i,j;
-	t_pt center = x->f_center;
-	long nLoudSpeak = x->f_numberOfLoudspeakers;
-	double speakerAngleSize = 360. / (double)nLoudSpeak;
-	double rotateAngle;
-	double deg1 = degtorad(90+1);
-	double deg2 = degtorad(90+(speakerAngleSize - 1));
-	double ledContainerSize, nbLed, ledStroke, ledMargin, ledOffset;
-	nbLed = 13;
-	ledContainerSize = x->f_rayonExt - x->f_rayonInt - 8;
-	ledOffset = ledContainerSize / 13;
-	ledStroke = ledOffset * 0.75;
-	ledMargin = ledOffset * 0.25;
-	
-	//t_jrgba ledColor;
-	t_jrgba ledBgColor = {0,0,0,0.05};
-	t_jmatrix transform;
-	
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("skelton_layer"), rect->width, rect->height);
-	
-	if (g) 
-	{
-		// Background :
-		jgraphics_set_source_jrgba(g, &x->f_colorMeterBg);
-		jgraphics_set_line_width(g, x->f_rayonExt*0.5+x->f_rayonInt - x->f_strokeWidth*0.5);
-		jgraphics_arc(g, center.x, center.y, x->f_rayonExt*0.5+(x->f_rayonInt*0.5), 0., JGRAPHICS_2PI);
-		jgraphics_stroke(g);
-		jgraphics_arc_negative(g, center.x, center.y, x->f_rayonExt*0.5+(x->f_rayonInt*0.5), JGRAPHICS_PI, -JGRAPHICS_2PI); // due to a stroke bug !
-		jgraphics_stroke(g);
-		
-		// skelton circles :
-		jgraphics_set_source_jrgba(g, &x->f_colorBorder);
-		jgraphics_set_line_width(g, x->f_strokeWidth);
-		jgraphics_arc(g, center.x, center.y, x->f_rayonExt,  0., JGRAPHICS_2PI);
-		jgraphics_stroke(g);
-		jgraphics_arc(g, center.x, center.y, x->f_rayonInt,  0., JGRAPHICS_2PI);
-		jgraphics_stroke(g);
-		
-		
-		// skelton separators :
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-		jgraphics_set_matrix(g, &transform);
-		
-		for(i=0; i<nLoudSpeak; i++)
-		{
-			rotateAngle = i*speakerAngleSize - speakerAngleSize*0.5 - x->f_offsetOfLoudspeakers;
-			jgraphics_rotate(g, degtorad(rotateAngle));
-			
-			// separator
-			if (x->f_numberOfLoudspeakers > 1) {
-				jgraphics_set_source_jrgba(g, &x->f_colorBorder);
-				jgraphics_set_line_width(g, x->f_strokeWidth);
-				jgraphics_move_to(g, 0., x->f_rayonInt);
-				jgraphics_line_to(g, 0, x->f_rayonExt);
-				jgraphics_stroke(g);
-			}
-			
-			// led placeholders :
-			jgraphics_set_line_width(g, ledStroke);
-			jgraphics_set_source_jrgba(g, &ledBgColor);
-			for(j=0; j<13; j++)
-			{
-				if (x->f_numberOfLoudspeakers > 1) {
-					jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  deg1+(0.008*j), deg2-(0.008*j));
-				}
-				else {
-					jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  0, JGRAPHICS_2PI);
-				}
-				jgraphics_stroke(g);
-			}
-			
-			jgraphics_rotate(g, degtorad(-rotateAngle));
-		}
-		
-		jbox_end_layer((t_object*)x, view, gensym("skelton_layer"));
-	}
-	jbox_paint_layer((t_object *)x, view, gensym("skelton_layer"), 0., 0.);
-}
-
-double degtorad(double degree)
-{
-	return degree / (double)(180. / JGRAPHICS_PI);
-}
-
 void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 {
-	int i,j,index;
-	t_pt center = x->f_center;
-	long nLoudSpeak = x->f_numberOfLoudspeakers;
-	double speakerAngleSize = 360. / (double)nLoudSpeak;
-	double rotateAngle;
-	double deg1 = degtorad(90+1);
-	double deg2 = degtorad(90+(speakerAngleSize - 1));
-	int nbLed;
-	double ledContainerSize, ledStroke, ledMargin, ledOffset;
-	nbLed = 13;
-	ledContainerSize = x->f_rayonExt - x->f_rayonInt - 8;
-	ledOffset = ledContainerSize / nbLed;
-	ledStroke = ledOffset * 0.75;
-	ledMargin = ledOffset * 0.25;
-	t_jrgba ledColor;
-	
-	t_jmatrix transform;
+	int i, index;
+	double angle1, angle2, radius, radianMax, x1, y1, offset;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("meter_layer"), rect->width, rect->height);
 	
 	if (g) 
 	{
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-		jgraphics_set_matrix(g, &transform);
-		
-		for(i=0; i<x->f_numberOfLoudspeakers; i++)
+		angle2 = JGRAPHICS_2PI / x->f_numberOfLoudspeakers;
+		radianMax = 30. * x->f_rayonCircle;
+		/* Meters */
+		offset = x->f_offsetOfLoudspeakers * JGRAPHICS_2PI - 0.5 * JGRAPHICS_2PI / x->f_numberOfLoudspeakers - 0.5 * JGRAPHICS_PI;
+		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		for(i = 0; i < x->f_numberOfLoudspeakers; i++)
 		{
-			//index = x->f_energyOfLoudspeakers[i] / -3;
-			index = x->f_energyOfLoudspeakers[i] / 3;
-			//post("index1 ls%i = %ld", i, index);
-			index = nbLed+index;
-			if(index < 0) index = 0;
-			if(index > nbLed) index = nbLed;
-			
-			//post("index ls%i = %ld", i, index);
-			
-			//index = nbLed - index;
-			
-			if (index > 0) {
-				//post("index = %ld", index);
-				rotateAngle = i*speakerAngleSize - speakerAngleSize*0.5 - x->f_offsetOfLoudspeakers;
-				jgraphics_rotate(g, degtorad(rotateAngle));
-				
-				// leds :
-				jgraphics_set_line_width(g, ledStroke);
-				for(j=0; j<nbLed; j++)
-				{
-					//if (j<index)
-					if (index-j>0)
-					{
-						if (j < 3) ledColor = x->f_colorColdSignal;
-						else if (j < 6) ledColor = x->f_colorTepidSignal;
-						else if (j < 9) ledColor = x->f_colorWarmSignal;
-						else if (j < 12) ledColor = x->f_colorHotSignal;
-						else ledColor = x->f_colorOverSignal;
-						
-						ledColor.alpha = 0.8;
-						jgraphics_set_source_jrgba(g, &ledColor);
-						jgraphics_set_line_width(g, ledStroke);
-						
-						if (x->f_numberOfLoudspeakers > 1) {
-							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  deg1+(0.008*j), deg2-(0.008*j));
-						}
-						else {
-							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  0, JGRAPHICS_2PI);
-						}
-						jgraphics_stroke(g);
-					}
-					else 
-					{
-						break;
-					}
-					
-				}			
-				jgraphics_rotate(g, degtorad(-rotateAngle));
-			}
+			angle1 = (x->f_numberOfLoudspeakers - i) * JGRAPHICS_2PI / x->f_numberOfLoudspeakers + offset;
+			index = x->f_energyOfLoudspeakers[i] / -3.;
+			if(index < 0) 
+				index = 0;
+			if(index > 14)
+				index = 14;
+
+			radius = (index + 16) * x->f_rayonCircle / 2.;
+			jgraphics_set_line_width(g, (index + 16) * x->f_rayonCircle);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, radius, angle1, angle1 + angle2);
+			jgraphics_stroke(g);
+		}
+		
+		/* Axes */
+		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		for(i = 0; i < x->f_numberOfLoudspeakers; i++)
+		{
+			x1 = (30. * x->f_rayonCircle + 2.) * cos((double)i * JGRAPHICS_2PI / x->f_numberOfLoudspeakers - 0.5 * JGRAPHICS_2PI / x->f_numberOfLoudspeakers + x->f_offsetOfLoudspeakers * JGRAPHICS_2PI) + x->f_center.x;
+			y1 = (30. * x->f_rayonCircle + 2.) * sin((double)i * JGRAPHICS_2PI / x->f_numberOfLoudspeakers - 0.5 * JGRAPHICS_2PI / x->f_numberOfLoudspeakers + x->f_offsetOfLoudspeakers * JGRAPHICS_2PI) + x->f_center.y;
+			jgraphics_line_draw_fast(g, x1, y1, x->f_center.x, x->f_center.y, 1.);
 		}
 		
 		jbox_end_layer((t_object*)x, view, gensym("meter_layer"));
@@ -699,16 +563,11 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 
 void draw_vector(t_meter *x, t_object *view, t_rect *rect)
 {
-	double angle, rayon, value;
-	
-	t_jmatrix transform;
+	double x1, y1, energyX, energyY, angle, rayon, value;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("vector_layer"), rect->width, rect->height);
 	
 	if (g) 
 	{
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-		jgraphics_set_matrix(g, &transform);
-		
 		/* Energy */
 		jgraphics_set_source_jrgba(g, &x->f_colorEnergy);
 		if (x->f_energyVectorX == 0.) 
@@ -716,23 +575,26 @@ void draw_vector(t_meter *x, t_object *view, t_rect *rect)
 		else
 			value = atan2(x->f_energyVectorY, x->f_energyVectorX);
 		
-		angle = value + (x->f_offsetOfLoudspeakers/180) * JGRAPHICS_PI;
-		rayon = x->f_rayonInt * 0.85;
+		angle = value + x->f_offsetOfLoudspeakers * JGRAPHICS_2PI + 1.5 * JGRAPHICS_PI;
+		rayon = (15 * x->f_rayonCircle);
 		
-		jgraphics_rotate(g, -angle);
+		energyX = rayon * cos(angle);
+		energyY = rayon * sin(angle);
+		x1 = energyX + x->f_center.x;
+		y1 = energyY + x->f_center.y;
+		jgraphics_line_draw_fast(g, x1, y1, x->f_center.x, x->f_center.y, 1.);
 		
-		// arrow
-		jgraphics_move_to(g, 0, 0);
-		jgraphics_line_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, -5, -5);
-		jgraphics_move_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, 5, -5);
-		jgraphics_stroke(g);
+		
+		rayon -= x->f_rayonCircle;
+		angle -= JGRAPHICS_PI / 60;
+		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
+		angle += JGRAPHICS_PI / 30;
+		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
 		
 		/* Center */
-		jgraphics_arc(g, 0, 0, 2, 0., JGRAPHICS_2PI);
+		jgraphics_arc(g, x->f_center.x, x->f_center.y, 3, 0., JGRAPHICS_2PI);
 		jgraphics_fill(g);
-				
+		
 		jbox_end_layer((t_object*)x, view, gensym("vector_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("vector_layer"), 0., 0.);

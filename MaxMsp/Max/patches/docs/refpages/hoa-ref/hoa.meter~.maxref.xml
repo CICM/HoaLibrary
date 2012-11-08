@@ -55,7 +55,7 @@
 				Offset of loudspeakers.
 			</digest>
 			<description>
-                Offset of loudspeakers (-1 - 1).
+                Offset of loudspeakers - degree - (-180° 180°).
 			</description>
 		</method>
 		<method name="interval">
@@ -81,10 +81,10 @@
 		</attribute>
 		<attribute name="offset" type="float" size="1">
 			<digest>
-				Offset of loudspeakers (-1. - 1.).
+				Offset of loudspeakers.
 			</digest>
 			<description>
-				Offset of loudspeakers (-1 - 1).
+				Offset of loudspeakers - degree - (-180° 180°).
             </description>
 		</attribute>
 		<attribute name="bgcolor">
@@ -95,12 +95,20 @@
 				Sets the RGBA values for the Background color.
             </description>
 		</attribute>
-		<attribute name="txcolor">
+		<attribute name="mbgcolor">
 			<digest>
-				Text color.
+				Meter background color.
 			</digest>
 			<description>
-				Sets the RGBA values for the Text color.
+				Sets the RGBA values for the Meter background color.
+            </description>
+		</attribute>
+		<attribute name="bordercolor">
+			<digest>
+				Meter border color.
+			</digest>
+			<description>
+				Sets the RGBA values for the Meter border color.
             </description>
 		</attribute>
 		<attribute name="cicolor">
