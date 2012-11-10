@@ -35,10 +35,16 @@ typedef struct  _meter
 	
 	void*		f_clock;
 	int			f_startclock;
-	int			f_interval;
-	
+
+	int			f_interval;	
 	int			f_numberOfLoudspeakers;
 	double		f_offsetOfLoudspeakers;
+	
+	int			f_dbperled;
+	int			f_nhotleds;
+	int			f_ntepidleds;
+	int			f_nwarmleds;
+	int			f_numleds;
 	
 	double*		f_amplitudeOfLoudspeakers;
 	double*		f_energyOfLoudspeakers;
@@ -50,6 +56,7 @@ typedef struct  _meter
 	t_jrgba		f_colorBackground;
 	t_jrgba		f_colorMeterBg;
 	t_jrgba		f_colorBorder;
+	t_jrgba		f_colorMeterBorder;
 	t_jrgba		f_colorText;
 	t_jrgba		f_colorCircle;
 	t_jrgba		f_colorColdSignal;
@@ -70,6 +77,9 @@ typedef struct  _meter
 	double		f_rayonExt;
 	double		f_rayonInt;
 	int			f_drawmeter;
+	long		f_leds_bg;
+	long		f_energy;
+	double		f_metersize;
 	
 } t_meter;
 
@@ -108,7 +118,8 @@ int main()
 
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
-	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
+	//jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
+	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
 	
 	class_addmethod(c, (method)meter_dsp,			"dsp",			A_CANT, 0);
 	class_addmethod(c, (method)meter_dsp64,			"dsp64",		A_CANT, 0);
@@ -121,8 +132,32 @@ int main()
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 225 225");
 
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
-	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
+	//CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
 	
+	// Custom
+	CLASS_ATTR_LONG				(c, "leds_bg", 0, t_meter, f_leds_bg);
+	CLASS_ATTR_CATEGORY			(c, "leds_bg", 0, "Custom");
+	CLASS_ATTR_ORDER			(c, "leds_bg", 0, "1");
+	CLASS_ATTR_STYLE_LABEL		(c, "leds_bg", 0, "onoff", "Draw Leds Background");
+	CLASS_ATTR_DEFAULT			(c, "leds_bg", 0, "1");
+	CLASS_ATTR_SAVE				(c, "leds_bg", 1);
+	
+	CLASS_ATTR_LONG				(c, "energy", 0, t_meter, f_energy);
+	CLASS_ATTR_CATEGORY			(c, "energy", 0, "Custom");
+	CLASS_ATTR_ORDER			(c, "energy", 0, "2");
+	CLASS_ATTR_STYLE_LABEL		(c, "energy", 0, "onoff", "Draw Energy Vector");
+	CLASS_ATTR_DEFAULT			(c, "energy", 0, "1");
+	CLASS_ATTR_SAVE				(c, "energy", 1);
+	
+	CLASS_ATTR_DOUBLE			(c, "metersize", 0, t_meter, f_metersize);
+	CLASS_ATTR_CATEGORY			(c, "metersize", 0, "Custom");
+	CLASS_ATTR_ORDER			(c, "metersize", 0, "3");
+	CLASS_ATTR_LABEL			(c, "metersize", 0, "Meter Circle Size");
+	CLASS_ATTR_FILTER_CLIP		(c, "metersize", 0., 1);
+	CLASS_ATTR_DEFAULT			(c, "metersize", 0, "0.8");
+	CLASS_ATTR_SAVE				(c, "metersize", 1);
+	
+	//value
 	CLASS_ATTR_LONG				(c, "ls", ATTR_SET_OPAQUE_USER, t_meter, f_numberOfLoudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "ls", 0, "Value");
 	CLASS_ATTR_ORDER			(c, "ls", 0, "1");
@@ -136,19 +171,59 @@ int main()
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Value");
 	CLASS_ATTR_ORDER			(c, "offset", 0, "2");
 	CLASS_ATTR_LABEL			(c, "offset", 0, "Offset of Loudspeakers");
-	//CLASS_ATTR_FILTER_CLIP		(c, "offset", -1., 1.);
 	CLASS_ATTR_FILTER_CLIP		(c, "offset", -180., 180.);
 	CLASS_ATTR_DEFAULT			(c, "offset", 0, "0");
 	CLASS_ATTR_SAVE				(c, "offset", 1);
 	
+	CLASS_ATTR_LONG				(c, "dbperled", 0, t_meter, f_dbperled);
+	CLASS_ATTR_CATEGORY			(c, "dbperled", 0, "Value");
+	CLASS_ATTR_ORDER			(c, "dbperled", 0, "3");
+	CLASS_ATTR_LABEL			(c, "dbperled", 0, "DeciBels per Led");
+	CLASS_ATTR_FILTER_CLIP		(c, "dbperled", 1, 12);
+	CLASS_ATTR_DEFAULT			(c, "dbperled", 0, "3");
+	CLASS_ATTR_SAVE				(c, "dbperled", 1);
+	
+	CLASS_ATTR_LONG				(c, "nhotleds", 0, t_meter, f_nhotleds);
+	CLASS_ATTR_CATEGORY			(c, "nhotleds", 0, "Value");
+	CLASS_ATTR_ORDER			(c, "nhotleds", 0, "4");
+	CLASS_ATTR_LABEL			(c, "nhotleds", 0, "Number of Hot Leds");
+	CLASS_ATTR_FILTER_CLIP		(c, "nhotleds", 0, 20);
+	CLASS_ATTR_DEFAULT			(c, "nhotleds", 0, "3");
+	CLASS_ATTR_SAVE				(c, "nhotleds", 1);
+	
+	CLASS_ATTR_LONG				(c, "ntepidleds", 0, t_meter, f_ntepidleds);
+	CLASS_ATTR_CATEGORY			(c, "ntepidleds", 0, "Value");
+	CLASS_ATTR_ORDER			(c, "ntepidleds", 0, "5");
+	CLASS_ATTR_LABEL			(c, "ntepidleds", 0, "Number of Tepid Leds");
+	CLASS_ATTR_FILTER_CLIP		(c, "ntepidleds", 0, 20);
+	CLASS_ATTR_DEFAULT			(c, "ntepidleds", 0, "3");
+	CLASS_ATTR_SAVE				(c, "ntepidleds", 1);
+	
+	CLASS_ATTR_LONG				(c, "nwarmleds", 0, t_meter, f_nwarmleds);
+	CLASS_ATTR_CATEGORY			(c, "nwarmleds", 0, "Value");
+	CLASS_ATTR_ORDER			(c, "nwarmleds", 0, "6");
+	CLASS_ATTR_LABEL			(c, "nwarmleds", 0, "Number of Warm Leds");
+	CLASS_ATTR_FILTER_CLIP		(c, "nwarmleds", 0, 20);
+	CLASS_ATTR_DEFAULT			(c, "nwarmleds", 0, "3");
+	CLASS_ATTR_SAVE				(c, "nwarmleds", 1);
+	
+	CLASS_ATTR_LONG				(c, "numleds", 0, t_meter, f_numleds);
+	CLASS_ATTR_CATEGORY			(c, "numleds", 0, "Value");
+	CLASS_ATTR_ORDER			(c, "numleds", 0, "7");
+	CLASS_ATTR_LABEL			(c, "numleds", 0, "Total Number of Leds");
+	CLASS_ATTR_FILTER_CLIP		(c, "numleds", 10, 20);
+	CLASS_ATTR_DEFAULT			(c, "numleds", 0, "12");
+	CLASS_ATTR_SAVE				(c, "numleds", 1);
+	
 	CLASS_ATTR_LONG				(c, "interval", 0, t_meter, f_interval);
 	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "interval", 0, "3");
+	CLASS_ATTR_ORDER			(c, "interval", 0, "8");
 	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
-	CLASS_ATTR_DEFAULT			(c, "interval", 0, "100");
+	CLASS_ATTR_DEFAULT			(c, "interval", 0, "50");
 	CLASS_ATTR_SAVE				(c, "interval", 1);
-								
+	
+	//color
 	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_meter, f_colorBackground);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
@@ -166,9 +241,16 @@ int main()
 	CLASS_ATTR_RGBA				(c, "bordercolor", 0, t_meter, f_colorBorder);
 	CLASS_ATTR_CATEGORY			(c, "bordercolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bordercolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bordercolor", 0, "Border Color");
+	CLASS_ATTR_LABEL			(c, "bordercolor", 0, "Box Border Color");
 	CLASS_ATTR_ORDER			(c, "bordercolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bordercolor", 0, "0.25 0.25 0.25 1");
+	
+	CLASS_ATTR_RGBA				(c, "mbordercolor", 0, t_meter, f_colorMeterBorder);
+	CLASS_ATTR_CATEGORY			(c, "mbordercolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "mbordercolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "mbordercolor", 0, "Meter Border Color");
+	CLASS_ATTR_ORDER			(c, "mbordercolor", 0, "3");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "mbordercolor", 0, "0.25 0.25 0.25 1");
 	
 	/*
 	CLASS_ATTR_RGBA				(c, "txcolor", 0, t_meter, f_colorText);
@@ -193,42 +275,42 @@ int main()
 	CLASS_ATTR_STYLE			(c, "coldcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "coldcolor", 0, "Cold Signal Color");
 	CLASS_ATTR_ORDER			(c, "coldcolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "coldcolor", 0, "0. 0.6 0. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "coldcolor", 0, "0. 0.6 0. 0.8");
 	
 	CLASS_ATTR_RGBA				(c, "tepidcolor", 0, t_meter, f_colorTepidSignal);
 	CLASS_ATTR_CATEGORY			(c, "tepidcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "tepidcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "tepidcolor", 0, "Tepid Signal Color");
 	CLASS_ATTR_ORDER			(c, "tepidcolor", 0, "5");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "tepidcolor", 0, "0.6 0.73 0. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "tepidcolor", 0, "0.6 0.73 0. 0.8");
 	
 	CLASS_ATTR_RGBA				(c, "warmcolor", 0, t_meter, f_colorWarmSignal);
 	CLASS_ATTR_CATEGORY			(c, "warmcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "warmcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "warmcolor", 0, "Warm Signal Color");
 	CLASS_ATTR_ORDER			(c, "warmcolor", 0, "6");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "warmcolor", 0, ".85 .85 0. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "warmcolor", 0, ".85 .85 0. 0.8");
 	
 	CLASS_ATTR_RGBA				(c, "hotcolor", 0, t_meter, f_colorHotSignal);
 	CLASS_ATTR_CATEGORY			(c, "hotcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "hotcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "hotcolor", 0, "Hot Signal Color");
 	CLASS_ATTR_ORDER			(c, "hotcolor", 0, "7");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "hotcolor", 0, "1. 0.6 0. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "hotcolor", 0, "1. 0.6 0. 0.8");
 	
 	CLASS_ATTR_RGBA				(c, "overcolor", 0, t_meter, f_colorOverSignal);
 	CLASS_ATTR_CATEGORY			(c, "overcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "overcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "overcolor", 0, "Overload Signal Color");
 	CLASS_ATTR_ORDER			(c, "overcolor", 0, "8");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "overcolor", 0, "1. 0. 0. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "overcolor", 0, "1. 0. 0. 0.8");
 	
 	CLASS_ATTR_RGBA				(c, "energycolor", 0, t_meter, f_colorEnergy);
 	CLASS_ATTR_CATEGORY			(c, "energycolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "energycolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "energycolor", 0, "Energy Vector Color");
 	CLASS_ATTR_ORDER			(c, "energycolor", 0, "9");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "energycolor", 0, "0. 0. 1. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "energycolor", 0, "0. 0. 1. 0.8");
 	
 	//CLASS_ATTR_RGBA				(c, "velocitycolor", 0, t_meter, f_colorEnergy);
 //	CLASS_ATTR_CATEGORY			(c, "velocitycolor", 0, "Color");
@@ -290,6 +372,8 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_borderthickness = 0;
+	//params->d_cornersize = 8;
+	//params->d_bordercolor = x->f_colorBorder;
 }
 
 long meter_oksize(t_meter *x, t_rect *newrect){
@@ -384,11 +468,9 @@ void meter_tick(t_meter *x)
 {
 	int i;
 	double sum = 0., square = 0.;
-	x->f_energyVectorX = 0.;
-	x->f_energyVectorY = 0.;
+	x->f_energyVectorX = x->f_energyVectorY = 0.;
 	for(i = 0; i < x->f_numberOfLoudspeakers; i++)
 	{
-		//x->f_energyOfLoudspeakers[i] = 20. * log10(fabs(x->f_amplitudeOfLoudspeakers[i]));
 		x->f_energyOfLoudspeakers[i] = 20. * log10(fabs(x->f_amplitudeOfLoudspeakers[i]));
 		square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i];
 		
@@ -432,10 +514,9 @@ void meter_assist(t_meter *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) 
 	{
-		sprintf(s,"Loudspeakers %ld", a);
+		sprintf(s,"(signal) Input Between 0-1 to Meter %ld", a);
 	}
 }
-
 
 t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
@@ -444,38 +525,38 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
-		if(name == gensym("bgcolor"))
+		if(name == gensym("bgcolor") || name == gensym("bordercolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 		}
-		else if(name == gensym("mbgcolor"))
+		else if(name == gensym("mbgcolor") || name == gensym("leds_bg") || name == gensym("mbordercolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
 		}
-		else if(name == gensym("bordercolor"))
-		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
-		}
-		else if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overcolor"))
+		else if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overcolor") || name == gensym("numleds"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 		}
+		/*
 		else if(name == gensym("txcolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("angle_layer"));
 		}
-		else if(name == gensym("energycolor"))
+		*/
+		else if(name == gensym("energycolor") || name == gensym("energy"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("vector_layer"));
 		}
-		else if(name == gensym("offset"))
+		else if(name == gensym("offset") || name == gensym("metersize"))
 		{
-			//jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("vector_layer"));
+		}
+		else if(name == gensym("dbperled") || name == gensym("nhotleds") || name == gensym("ntepidleds") || name == gensym("nwarmleds"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 		}
 		jbox_redraw((t_jbox *)x);
 	}
@@ -500,7 +581,7 @@ void meter_paint(t_meter *x, t_object *view)
 	x->f_strokeWidth = 2;
 	x->f_rayonExt = x->f_rayonMax - (x->f_strokeWidth*0.5) - 2;
 	//x->f_rayonInt = (x->f_rayonExt/4);
-	x->f_rayonInt = (x->f_rayonExt/4);
+	x->f_rayonInt = x->f_rayonExt*(1 - x->f_metersize);
 	
 	draw_background(x, view, &rect);
 	draw_skelton(x, view, &rect);
@@ -508,7 +589,9 @@ void meter_paint(t_meter *x, t_object *view)
 	if (x->f_drawmeter) {
 		draw_meter(x, view, &rect);
 	}
-	draw_vector(x, view, &rect);
+	if (x->f_energy) {
+		draw_vector(x, view, &rect);
+	}
 	//draw_angle(x, view, &rect);
 }
 
@@ -520,8 +603,12 @@ void draw_background(t_meter *x,  t_object *view, t_rect *rect)
 	{
 		/* Background */
 		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-		jgraphics_rectangle_rounded(g, 0, 0, rect->width, rect->height, 5, 5);
+		jgraphics_rectangle_rounded(g, 0, 0, rect->width, rect->height, 8, 8);
 		jgraphics_fill(g);
+		jgraphics_set_line_width(g, 1);
+		jgraphics_set_source_jrgba(g, &x->f_colorBorder);
+		jgraphics_rectangle_rounded(g, 0.5, 0.5, rect->width-1, rect->height-1, 8, 8);
+		jgraphics_stroke(g);
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
@@ -533,13 +620,11 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 	t_pt center = x->f_center;
 	long nLoudSpeak = x->f_numberOfLoudspeakers;
 	double speakerAngleSize = 360. / (double)nLoudSpeak;
-	double rotateAngle;
 	double deg1 = degtorad(90+1);
 	double deg2 = degtorad(90+(speakerAngleSize - 1));
-	double ledContainerSize, nbLed, ledStroke, ledMargin, ledOffset;
-	nbLed = 13;
-	ledContainerSize = x->f_rayonExt - x->f_rayonInt - 8;
-	ledOffset = ledContainerSize / 13;
+	double rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset;
+	ledContainerSize = x->f_rayonExt - x->f_rayonInt - (x->f_strokeWidth*4);
+	ledOffset = ledContainerSize / (x->f_numleds+1);
 	ledStroke = ledOffset * 0.75;
 	ledMargin = ledOffset * 0.25;
 	
@@ -553,14 +638,15 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 	{
 		// Background :
 		jgraphics_set_source_jrgba(g, &x->f_colorMeterBg);
-		jgraphics_set_line_width(g, x->f_rayonExt*0.5+x->f_rayonInt - x->f_strokeWidth*0.5);
+		//jgraphics_set_line_width(g, x->f_rayonExt*0.5+x->f_rayonInt - x->f_strokeWidth*0.5);
+		jgraphics_set_line_width(g, (x->f_rayonExt - x->f_rayonInt) - x->f_strokeWidth*0.5);
 		jgraphics_arc(g, center.x, center.y, x->f_rayonExt*0.5+(x->f_rayonInt*0.5), 0., JGRAPHICS_2PI);
 		jgraphics_stroke(g);
 		jgraphics_arc_negative(g, center.x, center.y, x->f_rayonExt*0.5+(x->f_rayonInt*0.5), JGRAPHICS_PI, -JGRAPHICS_2PI); // due to a stroke bug !
 		jgraphics_stroke(g);
 		
 		// skelton circles :
-		jgraphics_set_source_jrgba(g, &x->f_colorBorder);
+		jgraphics_set_source_jrgba(g, &x->f_colorMeterBorder);
 		jgraphics_set_line_width(g, x->f_strokeWidth);
 		jgraphics_arc(g, center.x, center.y, x->f_rayonExt,  0., JGRAPHICS_2PI);
 		jgraphics_stroke(g);
@@ -579,25 +665,41 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 			
 			// separator
 			if (x->f_numberOfLoudspeakers > 1) {
-				jgraphics_set_source_jrgba(g, &x->f_colorBorder);
+				jgraphics_set_source_jrgba(g, &x->f_colorMeterBorder);
 				jgraphics_set_line_width(g, x->f_strokeWidth);
 				jgraphics_move_to(g, 0., x->f_rayonInt);
 				jgraphics_line_to(g, 0, x->f_rayonExt);
 				jgraphics_stroke(g);
 			}
 			
-			// led placeholders :
-			jgraphics_set_line_width(g, ledStroke);
-			jgraphics_set_source_jrgba(g, &ledBgColor);
-			for(j=0; j<13; j++)
-			{
-				if (x->f_numberOfLoudspeakers > 1) {
-					jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  deg1+(0.008*j), deg2-(0.008*j));
+			if (x->f_leds_bg) {
+				// leds Background :
+				jgraphics_set_line_width(g, ledStroke);
+				jgraphics_set_source_jrgba(g, &ledBgColor);
+				for( j=0; j < x->f_numleds; j++ )
+				{
+					if (x->f_numberOfLoudspeakers > 1) {
+						if ( x->f_numberOfLoudspeakers < 24 ) {
+							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1+(0.008 * j * x->f_metersize), deg2-(0.008 * j * x->f_metersize) );
+						}
+						else {
+							jgraphics_arc_negative(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg2, deg1);
+						}
+						/*
+						if ( deg1+(0.008*j) < deg2-(0.008*j) ) {
+							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  deg1+(0.008*j), deg2-(0.008*j));
+						}
+						else {
+							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1, deg2 );
+						}
+						*/
+						//jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-x->f_strokeWidth*2,  deg1+(0.008*j), deg2-(0.008*j));
+					}
+					else {
+						jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-x->f_strokeWidth*2,  0, JGRAPHICS_2PI);
+					}
+					jgraphics_stroke(g);
 				}
-				else {
-					jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  0, JGRAPHICS_2PI);
-				}
-				jgraphics_stroke(g);
 			}
 			
 			jgraphics_rotate(g, degtorad(-rotateAngle));
@@ -615,21 +717,25 @@ double degtorad(double degree)
 
 void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 {
-	int i,j,index;
-	t_pt center = x->f_center;
+	int i, j, nbLed, tepidLimit, warmLimit, hotLimit;
+	t_jrgba ledColor;
 	long nLoudSpeak = x->f_numberOfLoudspeakers;
 	double speakerAngleSize = 360. / (double)nLoudSpeak;
-	double rotateAngle;
 	double deg1 = degtorad(90+1);
 	double deg2 = degtorad(90+(speakerAngleSize - 1));
-	int nbLed;
-	double ledContainerSize, ledStroke, ledMargin, ledOffset;
-	nbLed = 13;
-	ledContainerSize = x->f_rayonExt - x->f_rayonInt - 8;
+	double rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset, meter_dB, min_dB_to_display;
+	int drawOverLed = 0;
+	nbLed = x->f_numleds+1;
+	ledContainerSize = x->f_rayonExt - x->f_rayonInt - (x->f_strokeWidth*4);
 	ledOffset = ledContainerSize / nbLed;
 	ledStroke = ledOffset * 0.75;
 	ledMargin = ledOffset * 0.25;
-	t_jrgba ledColor;
+	
+	min_dB_to_display = -1 * ( (x->f_numleds * x->f_dbperled) - (x->f_dbperled * 0.5) );
+	
+	hotLimit = x->f_numleds - x->f_nhotleds;
+	warmLimit = hotLimit - x->f_nwarmleds;
+	tepidLimit = warmLimit - x->f_ntepidleds;
 	
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("meter_layer"), rect->width, rect->height);
@@ -639,21 +745,13 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
 		
-		for(i=0; i<x->f_numberOfLoudspeakers; i++)
+		for(i=0; i<nLoudSpeak; i++)
 		{
-			//index = x->f_energyOfLoudspeakers[i] / -3;
-			index = x->f_energyOfLoudspeakers[i] / 3;
-			//post("index1 ls%i = %ld", i, index);
-			index = nbLed+index;
-			if(index < 0) index = 0;
-			if(index > nbLed) index = nbLed;
+			meter_dB = x->f_energyOfLoudspeakers[i]; // dB (negatif) de -240 à 0;
+			if ( meter_dB >= 0. ) drawOverLed = 1;
 			
-			//post("index ls%i = %ld", i, index);
-			
-			//index = nbLed - index;
-			
-			if (index > 0) {
-				//post("index = %ld", index);
+			if ( meter_dB > min_dB_to_display ) // si on est en dessous pas la peine de dessiner
+			{
 				rotateAngle = i*speakerAngleSize - speakerAngleSize*0.5 - x->f_offsetOfLoudspeakers;
 				jgraphics_rotate(g, degtorad(rotateAngle));
 				
@@ -661,24 +759,47 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 				jgraphics_set_line_width(g, ledStroke);
 				for(j=0; j<nbLed; j++)
 				{
-					//if (j<index)
-					if (index-j>0)
+					if ( ( j < nbLed-1 ) && ( meter_dB > min_dB_to_display + (x->f_dbperled * j) ) )
 					{
-						if (j < 3) ledColor = x->f_colorColdSignal;
-						else if (j < 6) ledColor = x->f_colorTepidSignal;
-						else if (j < 9) ledColor = x->f_colorWarmSignal;
-						else if (j < 12) ledColor = x->f_colorHotSignal;
-						else ledColor = x->f_colorOverSignal;
+						if ( j < tepidLimit ) ledColor = x->f_colorColdSignal;
+						else if ( j < warmLimit ) ledColor = x->f_colorTepidSignal;
+						else if ( j < hotLimit ) ledColor = x->f_colorWarmSignal;
+						else ledColor = x->f_colorHotSignal;
 						
-						ledColor.alpha = 0.8;
 						jgraphics_set_source_jrgba(g, &ledColor);
 						jgraphics_set_line_width(g, ledStroke);
 						
-						if (x->f_numberOfLoudspeakers > 1) {
-							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  deg1+(0.008*j), deg2-(0.008*j));
+						if (nLoudSpeak > 1) {
+							//jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  deg1+(0.008*j), deg2-(0.008*j));
+							if ( nLoudSpeak < 24 ) {
+								jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  deg1+(0.008 * j * x->f_metersize), deg2-(0.008 * j * x->f_metersize));
+							}
+							else {
+								jgraphics_arc_negative(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg2, deg1);
+							}
 						}
 						else {
-							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  0, JGRAPHICS_2PI);
+							//jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  0, JGRAPHICS_2PI);
+							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  0, JGRAPHICS_2PI);
+						}
+						jgraphics_stroke(g);
+					}
+					else if ( drawOverLed )
+					{
+						jgraphics_set_source_jrgba(g, &x->f_colorOverSignal);
+						jgraphics_set_line_width(g, ledStroke);
+						
+						if (nLoudSpeak > 1) {
+							if ( nLoudSpeak < 24 ) {
+								jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth,  deg1+(0.005 * j * x->f_metersize), deg2-(0.005 * j * x->f_metersize));
+							}
+							else {
+								jgraphics_arc_negative(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth, deg2, deg1);
+							}
+							//jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth,  deg1+(0.005*j), deg2-(0.005*j));
+						}
+						else {
+							jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2,  0, JGRAPHICS_2PI);
 						}
 						jgraphics_stroke(g);
 					}
@@ -699,7 +820,7 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 
 void draw_vector(t_meter *x, t_object *view, t_rect *rect)
 {
-	double angle, rayon, value;
+	double angle, rayon, value, arrow;
 	
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("vector_layer"), rect->width, rect->height);
@@ -718,15 +839,16 @@ void draw_vector(t_meter *x, t_object *view, t_rect *rect)
 		
 		angle = value + (x->f_offsetOfLoudspeakers/180) * JGRAPHICS_PI;
 		rayon = x->f_rayonInt * 0.85;
+		arrow = rayon * 0.15;
 		
 		jgraphics_rotate(g, -angle);
 		
 		// arrow
 		jgraphics_move_to(g, 0, 0);
 		jgraphics_line_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, -5, -5);
+		jgraphics_rel_line_to(g, -arrow, -arrow);
 		jgraphics_move_to(g, 0, rayon);
-		jgraphics_rel_line_to(g, 5, -5);
+		jgraphics_rel_line_to(g, arrow, -arrow);
 		jgraphics_stroke(g);
 		
 		/* Center */
@@ -761,6 +883,3 @@ void draw_angle(t_meter *x,  t_object *view, t_rect *rect)
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("angle_layer"), 0., 0.);
 }
-
-
-
