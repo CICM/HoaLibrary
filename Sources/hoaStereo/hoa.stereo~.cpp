@@ -151,7 +151,12 @@ void HoaStereo_assist(t_HoaStereo *x, void *b, long m, long a, char *s)
 		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
 	}
 	else 
-		sprintf(s,"(Signal) Virtual Microphone %ld", a);			
+	{
+		if (a == 0)
+			sprintf(s,"(Signal) Left channel", a);
+		if (a == 1)
+			sprintf(s,"(Signal) Right channel", a);
+	}
 }
 
 void HoaStereo_free(t_HoaStereo *x)
