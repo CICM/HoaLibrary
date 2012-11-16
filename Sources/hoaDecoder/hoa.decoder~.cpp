@@ -177,15 +177,6 @@ void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
 	*/
 }
 
-void HoaDecode_optim(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
-{
-	if(atom_gettype(argv) == A_SYM)
-	{
-		std::string decodingId = atom_getsym(argv)->s_name;
-		x->f_ambisonicDecoder->setOptimMode(decodingId);
-	}
-}
-
 void HoaDecode_free(t_HoaDecode *x)
 {
 	dsp_free((t_pxobject *)x);

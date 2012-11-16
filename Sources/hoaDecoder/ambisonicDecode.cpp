@@ -19,7 +19,7 @@
 
 #include "ambisonicDecode.hpp"
 
-ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorSize, std::string anOptimMode)
+ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorSize)
 {
 	m_order					= anOrder;
 	m_number_of_harmonics	= m_order * 2 + 1;
@@ -36,7 +36,6 @@ ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorS
 	setVectorSize(aVectorSize);
 	computeIndex();
 	computeAngles();
-	setOptimMode(anOptimMode);
 	computePseudoInverse();
 }
 
