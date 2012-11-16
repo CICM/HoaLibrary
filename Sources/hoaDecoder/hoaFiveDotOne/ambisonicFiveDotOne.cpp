@@ -48,29 +48,30 @@ ambisonicFiveDotOne::ambisonicFiveDotOne(int anOrder, double anAngle1, double an
 	computeMicrophones();
 	computeInPhaseOptim();
 	
+	AmbisonicEncode* encoder = new AmbisonicEncode(m_order);
+	double* result = new double[m_number_of_harmonics];
+	encoder->process(1., result, 0.);
 	for(int j = 0; j < m_number_of_harmonics; j++)
-	{
-		if(j % 2 == 1)
-			gsl_vector_set(m_input_vector_front, j, 0.);
-		else
-			gsl_vector_set(m_input_vector_front, j, 1.);
-	}
+			gsl_vector_set(m_input_vector_front, j, result[j]);
 	
 	gsl_vector_mul(m_input_vector_front, m_optim_vector);
 	gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_front, m_input_vector_front, 0.0, m_output_vector_front);
-	
 	m_scale_factor_front = 1. / gsl_vector_get(m_output_vector_front, 0.);
-	
-	double optim1 = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[1])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[1])));
-	double optim2 = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[2])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[2])));
-	
-	gsl_vector_set(m_input_vector_surround, 0, 1.);
-	gsl_vector_set(m_input_vector_surround, 1, sin(m_angle2) * optim1 * 2. / 3.);
-	gsl_vector_set(m_input_vector_surround, 2, cos(m_angle2) * optim2 * 2. / 3.);
+	free(result);
+	delete encoder;
+
+	encoder = new AmbisonicEncode(1);
+	result = new double[3];
+	encoder->process(1., result, ((m_angle2 / 360.) * TWOPI));
+
+	gsl_vector_set(m_input_vector_surround, 0, result[0] * gsl_vector_get(m_optim_vector, 0));
+	for(int j = 1; j < 3; j++)
+			gsl_vector_set(m_input_vector_surround, j, result[j] * gsl_vector_get(m_optim_vector, j) * 2. / 3.);
 	gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_surround, m_input_vector_surround, 0.0, m_output_vector_surround);
 	
 	m_scale_factor_surround = 1. / gsl_vector_get(m_output_vector_surround, 0.);
-
+	free(result);
+	delete encoder;
 	m_last_sample = 0.;
 	setVectorSize(aVectorSize);
 }

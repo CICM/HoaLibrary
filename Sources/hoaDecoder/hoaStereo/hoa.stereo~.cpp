@@ -18,6 +18,7 @@
  */
 
 #include "ambisonicStereo.h"
+
 extern "C"
 {
 	#include "ext.h"
@@ -43,27 +44,6 @@ t_int *HoaStereo_perform(t_int *w);
 
 void HoaStereo_dsp64(t_HoaStereo *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaStereo_perform64(t_HoaStereo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-
-void *HoaStereo_class;
-
-int main(void)
-{	
-
-	t_class *c;
-	
-	c = class_new("hoa.Stereo~", (method)HoaStereo_new, (method)dsp_free, (long)sizeof(t_HoaStereo), 0L, A_GIMME, 0);
-	
-	class_addmethod(c, (method)HoaStereo_dsp,			"dsp",		A_CANT, 0);
-	class_addmethod(c, (method)HoaStereo_dsp64,			"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaStereo_assist,		"assist",	A_CANT, 0);
-	
-	class_dspinit(c);				
-	class_register(CLASS_BOX, c);	
-	HoaStereo_class = c;
-	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
-	return 0;
-}
 
 void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv)
 {

@@ -79,52 +79,6 @@ void ambisonicDecode::computeAngles()
 	}
 }
 
-void ambisonicDecode::setOptimMode(std::string anOptim)
-{
-	if(anOptim != m_optimMode)
-	{
-		if(anOptim == "inPhase")
-			computeInPhaseOptim();
-		else if(anOptim == "maxRe")
-			computeReOptim();
-		else
-			computeBasicOptim();
-	}
-}
-
-void ambisonicDecode::computeBasicOptim()
-{
-	m_optimMode = "basic"; 
-	for (int i = 0; i < m_number_of_harmonics; i++) 
-		m_optimVector[i] = 1.;
-}
-
-void ambisonicDecode::computeInPhaseOptim()
-{
-	m_optimMode = "inPhase"; 
-	for (int i = 0; i < m_number_of_harmonics; i++) 
-	{
-		if (i == 0) 
-			m_optimVector[i] = 1.;
-		else 
-			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
-	}
-}
-
-void ambisonicDecode::computeReOptim()
-{
-	m_optimMode = "maxRe";
-	for (int i = 0; i < m_number_of_harmonics; i++) 
-	{
-		if (i == 0) 
-			m_optimVector[i] = 1.;
-		else 
-			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * M_PI / (2*m_order+2));
-	}
-	
-}
-
-
 void ambisonicDecode::computePseudoInverse()
 {
 	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_number_of_harmonics, m_number_of_outputs); 

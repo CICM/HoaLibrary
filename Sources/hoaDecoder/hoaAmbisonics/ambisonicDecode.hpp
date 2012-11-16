@@ -60,10 +60,6 @@ public:
 	void computeIndex();
 	void computeAngles();
 	void setVectorSize(int aVectorSize);
-	void setOptimMode(std::string anOptim);
-	void computeBasicOptim();
-	void computeReOptim();
-	void computeInPhaseOptim();
 	
 	void computePseudoInverse();
 	void setSpkrsAngles(double* someSpkrsAngles, int size);
