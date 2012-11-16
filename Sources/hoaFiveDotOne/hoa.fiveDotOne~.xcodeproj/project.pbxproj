@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E6DC98916135B140001AAF5 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC98716135B140001AAF5 /* gslMatrix.cpp */; };
-		0E6DC98A16135B140001AAF5 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC98816135B140001AAF5 /* gslMatrix.hpp */; };
-		0E9B6EE415E65C5900FC3F5C /* hoa.projector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B6EE315E65C5900FC3F5C /* hoa.projector~.cpp */; };
-		0ECB4FD515F4BB6C0008737D /* ambisonicProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ECB4FD415F4BB6C0008737D /* ambisonicProjector.h */; };
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
+		2C2D32931656591E003EFFA6 /* AmbisonicEncode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2D328E1656591E003EFFA6 /* AmbisonicEncode.cpp */; };
+		2C2D32941656591E003EFFA6 /* AmbisonicEncode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2C2D328F1656591E003EFFA6 /* AmbisonicEncode.hpp */; };
+		2C2D32951656591E003EFFA6 /* ambisonicFiveDotOne.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2D32901656591E003EFFA6 /* ambisonicFiveDotOne.cpp */; };
+		2C2D32961656591E003EFFA6 /* ambisonicFiveDotOne.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C2D32911656591E003EFFA6 /* ambisonicFiveDotOne.h */; };
+		2C2D32971656591E003EFFA6 /* hoa.fiveDotOne~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2D32921656591E003EFFA6 /* hoa.fiveDotOne~.cpp */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		4EB5E0E014DEF21200ADF62A /* ambisonicProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicProjector.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E6DC98716135B140001AAF5 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
-		0E6DC98816135B140001AAF5 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
-		0E9B6EE315E65C5900FC3F5C /* hoa.projector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.projector~.cpp"; sourceTree = "<group>"; };
-		0ECB4FD415F4BB6C0008737D /* ambisonicProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicProjector.h; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.projector~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EB5E0DD14DEF21200ADF62A /* ambisonicProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicProjector.cpp; sourceTree = "<group>"; };
+		2C2D328E1656591E003EFFA6 /* AmbisonicEncode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncode.cpp; sourceTree = "<group>"; };
+		2C2D328F1656591E003EFFA6 /* AmbisonicEncode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AmbisonicEncode.hpp; sourceTree = "<group>"; };
+		2C2D32901656591E003EFFA6 /* ambisonicFiveDotOne.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicFiveDotOne.cpp; sourceTree = "<group>"; };
+		2C2D32911656591E003EFFA6 /* ambisonicFiveDotOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicFiveDotOne.h; sourceTree = "<group>"; };
+		2C2D32921656591E003EFFA6 /* hoa.fiveDotOne~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.fiveDotOne~.cpp"; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.fiveDotOne~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.fiveDotOne~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -64,11 +64,11 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0E9B6EE315E65C5900FC3F5C /* hoa.projector~.cpp */,
-				0ECB4FD415F4BB6C0008737D /* ambisonicProjector.h */,
-				4EB5E0DD14DEF21200ADF62A /* ambisonicProjector.cpp */,
-				0E6DC98716135B140001AAF5 /* gslMatrix.cpp */,
-				0E6DC98816135B140001AAF5 /* gslMatrix.hpp */,
+				2C2D328E1656591E003EFFA6 /* AmbisonicEncode.cpp */,
+				2C2D328F1656591E003EFFA6 /* AmbisonicEncode.hpp */,
+				2C2D32901656591E003EFFA6 /* ambisonicFiveDotOne.cpp */,
+				2C2D32911656591E003EFFA6 /* ambisonicFiveDotOne.h */,
+				2C2D32921656591E003EFFA6 /* hoa.fiveDotOne~.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -76,7 +76,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.fiveDotOne~.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,8 +88,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ECB4FD515F4BB6C0008737D /* ambisonicProjector.h in Headers */,
-				0E6DC98A16135B140001AAF5 /* gslMatrix.hpp in Headers */,
+				2C2D32941656591E003EFFA6 /* AmbisonicEncode.hpp in Headers */,
+				2C2D32961656591E003EFFA6 /* ambisonicFiveDotOne.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +112,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.fiveDotOne~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -120,7 +120,7 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.projector~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.fiveDotOne~" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -164,9 +164,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EB5E0E014DEF21200ADF62A /* ambisonicProjector.cpp in Sources */,
-				0E9B6EE415E65C5900FC3F5C /* hoa.projector~.cpp in Sources */,
-				0E6DC98916135B140001AAF5 /* gslMatrix.cpp in Sources */,
+				2C2D32931656591E003EFFA6 /* AmbisonicEncode.cpp in Sources */,
+				2C2D32951656591E003EFFA6 /* ambisonicFiveDotOne.cpp in Sources */,
+				2C2D32971656591E003EFFA6 /* hoa.fiveDotOne~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +287,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.projector~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.fiveDotOne~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

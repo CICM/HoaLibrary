@@ -28,9 +28,11 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 85899345920.0, 0.9, 0.9, 0.0 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-9",
 					"ls" : 23,
+					"ls_angles" : [ 23.0, 0.0, 0.0, 0.0, 45.0, 0.0, 0.0, 45.0 ],
 					"maxclass" : "hoa.meter~",
 					"metersize" : 1.0,
 					"numinlets" : 23,

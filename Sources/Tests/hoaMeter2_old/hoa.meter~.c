@@ -27,7 +27,7 @@
 #include "ext_globalsymbol.h"
 #include "../hoaHeader.h"
 
-#define MAX_SPEAKER 64
+#define MAXIMUM_SIZE 3600
 
 typedef struct  _meter 
 {
@@ -46,8 +46,6 @@ typedef struct  _meter
 	int			f_nwarmleds;
 	int			f_numleds;
 	
-	float*		f_speakerAngles;
-	long		f_nSpeakerAngles;
 	double*		f_amplitudeOfLoudspeakers;
 	double*		f_energyOfLoudspeakers;
 	double*		f_abscisseOfLoudspeakers;
@@ -101,9 +99,6 @@ void meter_perform64(t_meter *x, t_object *dsp64, double **ins, long numins, dou
 t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params);
 long meter_oksize(t_meter *x, t_rect *newrect);
-
-t_max_err f_speakerAngles_get(t_meter *x, void *attr, long *ac, t_atom **av);
-t_max_err f_speakerAngles_set(t_meter *x, void *attr, long *ac, t_atom **av);
 
 /* Paint *********************************************/
 void meter_paint(t_meter *x, t_object *view);
@@ -172,23 +167,17 @@ int main()
 	CLASS_ATTR_SAVE				(c, "ls", 1);
 	//CLASS_ATTR_INVISIBLE		(c, "ls", 1);
 	
-	CLASS_ATTR_FLOAT_VARSIZE	(c, "ls_angles", 0, t_meter, f_speakerAngles, f_nSpeakerAngles, MAX_SPEAKER);
-	CLASS_ATTR_ACCESSORS		(c, "ls_angles", f_speakerAngles_get, f_speakerAngles_set);
-	CLASS_ATTR_CATEGORY			(c, "ls_angles", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "ls_angles", 0, "2");
-	CLASS_ATTR_LABEL			(c, "ls_angles", 0, "Angles of Loudspeakers");
-	CLASS_ATTR_SAVE				(c, "ls_angles", 1);
-	
 	CLASS_ATTR_DOUBLE			(c, "offset", 0, t_meter, f_offsetOfLoudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "offset", 0, "3");
+	CLASS_ATTR_ORDER			(c, "offset", 0, "2");
 	CLASS_ATTR_LABEL			(c, "offset", 0, "Offset of Loudspeakers");
+	CLASS_ATTR_FILTER_CLIP		(c, "offset", -180., 180.);
 	CLASS_ATTR_DEFAULT			(c, "offset", 0, "0");
 	CLASS_ATTR_SAVE				(c, "offset", 1);
 	
 	CLASS_ATTR_LONG				(c, "dbperled", 0, t_meter, f_dbperled);
 	CLASS_ATTR_CATEGORY			(c, "dbperled", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "dbperled", 0, "4");
+	CLASS_ATTR_ORDER			(c, "dbperled", 0, "3");
 	CLASS_ATTR_LABEL			(c, "dbperled", 0, "DeciBels per Led");
 	CLASS_ATTR_FILTER_CLIP		(c, "dbperled", 1, 12);
 	CLASS_ATTR_DEFAULT			(c, "dbperled", 0, "3");
@@ -196,7 +185,7 @@ int main()
 	
 	CLASS_ATTR_LONG				(c, "nhotleds", 0, t_meter, f_nhotleds);
 	CLASS_ATTR_CATEGORY			(c, "nhotleds", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "nhotleds", 0, "5");
+	CLASS_ATTR_ORDER			(c, "nhotleds", 0, "4");
 	CLASS_ATTR_LABEL			(c, "nhotleds", 0, "Number of Hot Leds");
 	CLASS_ATTR_FILTER_CLIP		(c, "nhotleds", 0, 20);
 	CLASS_ATTR_DEFAULT			(c, "nhotleds", 0, "3");
@@ -204,7 +193,7 @@ int main()
 	
 	CLASS_ATTR_LONG				(c, "ntepidleds", 0, t_meter, f_ntepidleds);
 	CLASS_ATTR_CATEGORY			(c, "ntepidleds", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "ntepidleds", 0, "6");
+	CLASS_ATTR_ORDER			(c, "ntepidleds", 0, "5");
 	CLASS_ATTR_LABEL			(c, "ntepidleds", 0, "Number of Tepid Leds");
 	CLASS_ATTR_FILTER_CLIP		(c, "ntepidleds", 0, 20);
 	CLASS_ATTR_DEFAULT			(c, "ntepidleds", 0, "3");
@@ -212,7 +201,7 @@ int main()
 	
 	CLASS_ATTR_LONG				(c, "nwarmleds", 0, t_meter, f_nwarmleds);
 	CLASS_ATTR_CATEGORY			(c, "nwarmleds", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "nwarmleds", 0, "7");
+	CLASS_ATTR_ORDER			(c, "nwarmleds", 0, "6");
 	CLASS_ATTR_LABEL			(c, "nwarmleds", 0, "Number of Warm Leds");
 	CLASS_ATTR_FILTER_CLIP		(c, "nwarmleds", 0, 20);
 	CLASS_ATTR_DEFAULT			(c, "nwarmleds", 0, "3");
@@ -220,7 +209,7 @@ int main()
 	
 	CLASS_ATTR_LONG				(c, "numleds", 0, t_meter, f_numleds);
 	CLASS_ATTR_CATEGORY			(c, "numleds", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "numleds", 0, "8");
+	CLASS_ATTR_ORDER			(c, "numleds", 0, "7");
 	CLASS_ATTR_LABEL			(c, "numleds", 0, "Total Number of Leds");
 	CLASS_ATTR_FILTER_CLIP		(c, "numleds", 10, 20);
 	CLASS_ATTR_DEFAULT			(c, "numleds", 0, "12");
@@ -228,7 +217,7 @@ int main()
 	
 	CLASS_ATTR_LONG				(c, "interval", 0, t_meter, f_interval);
 	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "interval", 0, "9");
+	CLASS_ATTR_ORDER			(c, "interval", 0, "8");
 	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "50");
@@ -375,27 +364,9 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	
 	x->f_drawmeter = 0;
 	
-	//post("f_speakerAngles[0] = %f", x->f_speakerAngles[0]);
-	
 	jbox_ready((t_jbox *)x);
 	
 	return (x);
-}
-
-t_max_err f_speakerAngles_get(t_meter *x, void *attr, long *ac, t_atom **av)
-{
-    if (ac && av)
-    {
-        char alloc;
-        if (atom_alloc_array(MAX_SPEAKER, ac, av, &alloc)) {
-            return MAX_ERR_OUT_OF_MEM;
-        }
-		
-        for (int i = 0; i < MAX_SPEAKER; i++) {
-            atom_setfloat(*av + i, x->f_speakerAngles[i]);
-        }
-    }
-    return MAX_ERR_NONE;
 }
 
 void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params)
@@ -714,6 +685,15 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 						else {
 							jgraphics_arc_negative(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg2, deg1);
 						}
+						/*
+						if ( deg1+(0.008*j) < deg2-(0.008*j) ) {
+							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  deg1+(0.008*j), deg2-(0.008*j));
+						}
+						else {
+							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1, deg2 );
+						}
+						*/
+						//jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-x->f_strokeWidth*2,  deg1+(0.008*j), deg2-(0.008*j));
 					}
 					else {
 						jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-x->f_strokeWidth*2,  0, JGRAPHICS_2PI);

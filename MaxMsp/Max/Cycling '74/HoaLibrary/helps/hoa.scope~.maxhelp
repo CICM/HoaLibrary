@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 1.0, 44.0, 918.0, 719.0 ],
+		"rect" : [ 157.0, 44.0, 918.0, 719.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -46,7 +46,7 @@
 ,
 						"rect" : [ 0.0, 26.0, 918.0, 693.0 ],
 						"bglocked" : 0,
-						"openinpresentation" : 1,
+						"openinpresentation" : 0,
 						"default_fontsize" : 14.0,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -130,7 +130,7 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 15.0, 122.0, 128.0, 32.0 ],
 									"presentation" : 1,
-									"presentation_rect" : [ 90.0, 315.0, 128.0, 32.0 ]
+									"presentation_rect" : [ 475.0, 156.0, 128.0, 32.0 ]
 								}
 
 							}
