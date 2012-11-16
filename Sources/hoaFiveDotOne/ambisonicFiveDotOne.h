@@ -33,7 +33,7 @@
 #include <gsl/gsl_sf.h>
 #include <vector>
 #include <string>
-
+#include "AmbisonicEncode.hpp"
 
 class ambisonicFiveDotOne
 {
