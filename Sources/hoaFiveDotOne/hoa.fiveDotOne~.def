@@ -1,0 +1,7 @@
+;hoa.fiveDotOne~.def
+
+LIBRARY hoa.fiveDotOne~.mxe
+
+EXPORTS
+	main
+
