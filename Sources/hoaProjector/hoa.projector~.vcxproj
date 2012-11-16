@@ -180,7 +180,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c" />
     <ClCompile Include="ambisonicProjector.cpp" />
-    <ClCompile Include="gslMatrix.cpp" />
     <ClCompile Include="hoa.projector~.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,7 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ambisonicProjector.h" />
-    <ClInclude Include="gslMatrix.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
