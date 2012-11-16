@@ -179,6 +179,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="AmbisonicEncode.cpp" />
     <ClCompile Include="ambisonicStereo.cpp" />
     <ClCompile Include="hoa.stereo~.cpp" />
   </ItemGroup>
@@ -186,6 +187,7 @@
     <None Include="hoa.stereo~.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AmbisonicEncode.hpp" />
     <ClInclude Include="ambisonicStereo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

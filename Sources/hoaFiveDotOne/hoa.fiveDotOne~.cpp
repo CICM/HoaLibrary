@@ -159,15 +159,17 @@ void HoaFiveDotOne_assist(t_HoaFiveDotOne *x, void *b, long m, long a, char *s)
 	else
 	{
 		if (a == 0)
-			sprintf(s,"(Signal) Center channel", a);
+			sprintf(s,"(Signal) Center channel");
 		else if (a == 1)
-			sprintf(s,"(Signal) Front left channel", a);
+			sprintf(s,"(Signal) Front left channel");
 		else if (a == 2)
-			sprintf(s,"(Signal) Surround left channel", a);
+			sprintf(s,"(Signal) Front right channel");
 		else if (a == 3)
-			sprintf(s,"(Signal) Surround right channel", a);
+			sprintf(s,"(Signal) Surround left channel");
 		else if (a == 4)
-			sprintf(s,"(Signal) Front right channel", a);
+			sprintf(s,"(Signal) Surround right channel");
+		else
+			sprintf(s,"(Signal) Low Frequency Effects channel");
 	}
 }
 

@@ -38,17 +38,19 @@ ambisonicStereo::ambisonicStereo(int anOrder, double anAngle, int aVectorSize)
 	computeMicrophones();
 	computeInPhaseOptim();
 
+	
+	AmbisonicEncode* encoder = new AmbisonicEncode(m_order);
+	double* result = new double[m_number_of_harmonics];
+	encoder->process(1., result, ((m_angle / 360.) * TWOPI));
 	for(int j = 0; j < m_number_of_harmonics; j++)
 	{
-		if(j % 2 == 1)
-			gsl_vector_set(m_input_vector, j, 0.);
-		else
-			gsl_vector_set(m_input_vector, j, 1.);
+			gsl_vector_set(m_input_vector, j, result[j]);
 	}
 	gsl_vector_mul(m_input_vector, m_optim_vector);
 	gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
-	m_scale_factor = 2. / (3. * gsl_vector_get(m_output_vector, 0.));
-
+	m_scale_factor = 1. / gsl_vector_get(m_output_vector, 0.);
+	free(result);
+	delete encoder;
 	setVectorSize(aVectorSize);
 }
 

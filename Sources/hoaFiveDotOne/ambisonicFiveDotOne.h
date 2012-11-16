@@ -46,13 +46,17 @@ private:
 	int			m_vector_size;
 	double		m_angle1;
 	double		m_angle2;
-	double		m_scale_factor;
+	double		m_scale_factor_front;
+	double		m_scale_factor_surround;
 	double		m_last_sample;
 
 	int*		m_index_of_harmonics;
-	gsl_matrix* m_microphones_matrix;
-	gsl_vector* m_input_vector;
-	gsl_vector* m_output_vector;
+	gsl_matrix* m_microphones_matrix_front;
+	gsl_matrix* m_microphones_matrix_surround;
+	gsl_vector* m_input_vector_front;
+	gsl_vector* m_input_vector_surround;
+	gsl_vector* m_output_vector_front;
+	gsl_vector* m_output_vector_surround;
 	gsl_vector* m_optim_vector;
 	
 public:
@@ -68,21 +72,30 @@ public:
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{	
 		for(int j = 0; j < m_number_of_harmonics; j++)
-			gsl_vector_set(m_input_vector, j, aInputs[j]);
+			gsl_vector_set(m_input_vector_front, j, aInputs[j]);
 		
-		gsl_vector_mul(m_input_vector, m_optim_vector);
-		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
-			
-		aOutputs[5][i] = 0.;
-		for(int j = 0; j < m_number_of_outputs - 1; j++)
+		gsl_vector_mul(m_input_vector_front, m_optim_vector);
+		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_front, m_input_vector_front, 0.0, m_output_vector_front);
+		gsl_vector_set(m_input_vector_surround, 0, gsl_vector_get(m_input_vector_front, 0));
+		gsl_vector_set(m_input_vector_surround, 1, gsl_vector_get(m_input_vector_front, 1) * 2. / 3.);
+		gsl_vector_set(m_input_vector_surround, 2, gsl_vector_get(m_input_vector_front, 2) * 2. / 3.);
+		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_surround, m_input_vector_surround, 0.0, m_output_vector_surround);
+
+		aOutputs[5] = 0.;
+		for(int j = 0; j < 3; j++)
 		{
-			aOutputs[j][i] = m_scale_factor * gsl_vector_get(m_output_vector, j);
-			aOutputs[5][i] += aOutputs[j][i];
+			aOutputs[j] = m_scale_factor_front * gsl_vector_get(m_output_vector_front, j);
+			aOutputs[5] += aOutputs[j];
 		}
-		aOutputs[5][i] /= 5.;
-		aOutputs[5][i] *= -0.982904;
-		aOutputs[5][i] = -0.017096 * m_last_sample;
-		m_last_sample = aOutputs[5][i];
+		for(int j = 0; j < 2; j++)
+		{
+			aOutputs[j+3] = m_scale_factor_surround * gsl_vector_get(m_output_vector_surround, j);
+			aOutputs[5] += aOutputs[j];
+		}
+		aOutputs[5] /= 5.;
+		aOutputs[5] *= -0.982904;
+		aOutputs[5] -= 0.017096 * m_last_sample;
+		m_last_sample = aOutputs[5];
 	}	
 	
 	/* Perform block samples */
@@ -91,16 +104,26 @@ public:
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				gsl_vector_set(m_input_vector, j, aInputs[j][i]);
-			
-			gsl_vector_mul(m_input_vector, m_optim_vector);
-			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
-			
+				gsl_vector_set(m_input_vector_front, j, aInputs[j][i]);
+		
+			gsl_vector_mul(m_input_vector_front, m_optim_vector);
+			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_front, m_input_vector_front, 0.0, m_output_vector_front);
+
+			gsl_vector_set(m_input_vector_surround, 0, gsl_vector_get(m_input_vector_front, 0));
+			gsl_vector_set(m_input_vector_surround, 1, gsl_vector_get(m_input_vector_front, 1) * 2. / 3.);
+			gsl_vector_set(m_input_vector_surround, 2, gsl_vector_get(m_input_vector_front, 2) * 2. / 3.);
+			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_surround, m_input_vector_surround, 0.0, m_output_vector_surround);
+
 			aOutputs[5][i] = 0.;
-			for(int j = 0; j < m_number_of_outputs - 1; j++)
+			for(int j = 0; j < 3; j++)
 			{
-				aOutputs[j][i] = m_scale_factor * gsl_vector_get(m_output_vector, j);
+				aOutputs[j][i] = m_scale_factor_front * gsl_vector_get(m_output_vector_front, j);
 				aOutputs[5][i] += aOutputs[j][i];
+			}
+			for(int j = 0; j < 2; j++)
+			{
+				aOutputs[j+3][i] = m_scale_factor_surround * gsl_vector_get(m_output_vector_surround, j);
+				aOutputs[5][i] += aOutputs[j+3][i];
 			}
 			aOutputs[5][i] /= 5.;
 			aOutputs[5][i] *= -0.982904;

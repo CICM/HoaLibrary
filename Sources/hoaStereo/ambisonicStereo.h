@@ -33,7 +33,7 @@
 #include <gsl/gsl_sf.h>
 #include <vector>
 #include <string>
-
+#include "AmbisonicEncode.hpp"
 
 class ambisonicStereo
 {
@@ -52,7 +52,7 @@ private:
 	gsl_vector* m_input_vector;
 	gsl_vector* m_output_vector;
 	gsl_vector* m_optim_vector;
-	
+
 public:
 	ambisonicStereo(int anOrder, double anAngle = 30., int aVectorSize = 0);
 	int		getParameters(std::string aParameter) const;
