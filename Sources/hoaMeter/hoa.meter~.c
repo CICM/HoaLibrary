@@ -749,6 +749,7 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 		{
 			meter_dB = x->f_energyOfLoudspeakers[i]; // dB (negatif) de -240 à 0;
 			if ( meter_dB >= 0. ) drawOverLed = 1;
+			else drawOverLed = 0;
 			
 			if ( meter_dB > min_dB_to_display ) // si on est en dessous pas la peine de dessiner
 			{

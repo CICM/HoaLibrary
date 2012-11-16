@@ -4,10 +4,10 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 0,
-			"revision" : 7
+			"revision" : 8
 		}
 ,
-		"rect" : [ 100.0, 100.0, 911.0, 613.0 ],
+		"rect" : [ 6.0, 44.0, 814.0, 555.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -26,7 +26,134 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
+		"showontab" : 1,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"id" : "obj-6",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 6,
+							"minor" : 0,
+							"revision" : 8
+						}
+,
+						"rect" : [ 0.0, 26.0, 814.0, 529.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 13.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 0,
+						"gridsize" : [ 5.0, 5.0 ],
+						"gridsnaponopen" : 0,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"boxanimatetime" : 200,
+						"imprint" : 0,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"showontab" : 1,
+						"boxes" : [  ],
+						"lines" : [  ]
+					}
+,
+					"patching_rect" : [ 738.0, 491.0, 50.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"default_fontsize" : 13.0,
+						"description" : "",
+						"digest" : "",
+						"fontface" : 0,
+						"fontname" : "Arial",
+						"fontsize" : 13.0,
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p ?",
+					"varname" : "q_tab"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 3,
+					"fontname" : "Arial",
+					"fontsize" : 20.871338,
+					"frgb" : 0.0,
+					"id" : "obj-26",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 5.0, 5.0, 133.0, 30.0 ],
+					"text" : "hoa.connect",
+					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
+					"varname" : "autohelp_top_title[2]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.754705,
+					"frgb" : 0.0,
+					"id" : "obj-27",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 6.0, 34.0, 240.0, 21.0 ],
+					"text" : "Help to connect the hoa objects together",
+					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
+					"varname" : "autohelp_top_digest[2]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 3,
+					"fontname" : "Arial",
+					"fontsize" : 20.871338,
+					"frgb" : 0.0,
+					"id" : "obj-24",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 7.0, 133.0, 30.0 ],
+					"text" : "hoa.connect",
+					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+					"varname" : "autohelp_top_title[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.754705,
+					"frgb" : 0.0,
+					"id" : "obj-25",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 35.0, 240.0, 21.0 ],
+					"text" : "Help to connect the hoa objects together",
+					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+					"varname" : "autohelp_top_digest[1]"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
@@ -57,6 +184,10 @@
 			}
 , 			{
 				"box" : 				{
+					"background" : 1,
+					"bubble" : 1,
+					"bubbleside" : 3,
+					"bubbletextmargin" : 8,
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"frgb" : 0.0,
@@ -64,7 +195,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 70.0, 491.0, 161.0, 19.0 ],
+					"patching_rect" : [ 47.5, 486.0, 183.0, 29.0 ],
 					"text" : "I'm not a hoa but I'm a friend."
 				}
 
@@ -87,6 +218,7 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-19",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -101,6 +233,7 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-18",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -132,6 +265,9 @@
 			}
 , 			{
 				"box" : 				{
+					"background" : 1,
+					"bubble" : 1,
+					"bubbletextmargin" : 8,
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"frgb" : 0.0,
@@ -139,7 +275,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 428.0, 388.0, 78.0, 19.0 ],
+					"patching_rect" : [ 427.0, 381.0, 97.0, 29.0 ],
 					"text" : "Me neither..."
 				}
 
@@ -160,6 +296,9 @@
 			}
 , 			{
 				"box" : 				{
+					"background" : 1,
+					"bubble" : 1,
+					"bubbletextmargin" : 8,
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"frgb" : 0.0,
@@ -167,23 +306,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 107.0, 317.0, 137.0, 19.0 ],
+					"patching_rect" : [ 108.0, 310.0, 157.0, 29.0 ],
 					"text" : "Damned I'm not a hoa !"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-7",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 140.0, 190.0, 122.0, 32.0 ],
-					"text" : "Select the objects then send me a bang."
 				}
 
 			}
@@ -268,39 +392,6 @@
 			}
 , 			{
 				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-2",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 8.0, 485.0, 30.0 ],
-					"text" : "hoa.connect",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_title"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-3",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 36.0, 485.0, 21.0 ],
-					"text" : "Help to connect the hoa objects together",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_digest"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"frgb" : 0.0,
@@ -309,9 +400,28 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 57.0, 548.0, 45.0 ],
-					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. (nb : only works when your patch isn't scrolled).",
+					"patching_rect" : [ 10.0, 57.0, 568.0, 45.0 ],
+					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. (known issue : will not works in subpatch nor in scrolled patch).",
 					"varname" : "autohelp_top_description"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"background" : 1,
+					"bubble" : 1,
+					"bubblepoint" : 0.5,
+					"bubbletextmargin" : 8,
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-1",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 138.0, 183.5, 157.0, 42.0 ],
+					"text" : "Select the objects then send me a bang."
 				}
 
 			}
@@ -333,6 +443,9 @@
 , 			{
 				"box" : 				{
 					"background" : 1,
+					"bubble" : 1,
+					"bubblepoint" : 0.5,
+					"bubbletextmargin" : 8,
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"frgb" : 0.0,
@@ -340,7 +453,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 73.0, 135.0, 199.0, 19.0 ],
+					"patching_rect" : [ 73.0, 130.0, 199.0, 29.0 ],
 					"text" : "Spacebar to bang the hoas."
 				}
 
@@ -359,7 +472,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-18", 0 ],
 					"disabled" : 0,
-					"hidden" : 0,
+					"hidden" : 1,
 					"source" : [ "obj-19", 0 ]
 				}
 
