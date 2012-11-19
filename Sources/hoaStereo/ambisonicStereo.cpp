@@ -19,17 +19,23 @@
 
 #include "ambisonicStereo.h"
 
-ambisonicStereo::ambisonicStereo(int anOrder, double anAngle, int aVectorSize)
+ambisonicStereo::ambisonicStereo(int anOrder, double anLoudspeakersAngle, double aAxeAngle, int aVectorSize)
 {
 	m_order					= anOrder;
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_outputs		= 2;
 	m_number_of_inputs		= m_number_of_harmonics;
-	m_angle					= anAngle;
-	if(m_angle < 0.)
-		m_angle = 0.;
-	else if(m_angle > 360.)
-		m_angle = 0.;
+	m_loudspeakers_angle	= anLoudspeakersAngle;
+	if(m_loudspeakers_angle < 0.)
+		m_loudspeakers_angle = 0.;
+	else if(m_loudspeakers_angle > 180.)
+		m_loudspeakers_angle = 180.;
+
+	m_axe_angle	= aAxeAngle;
+	if(m_axe_angle < 0.)
+		m_axe_angle = 0.;
+	else if(m_axe_angle > 180.)
+		m_axe_angle = 180.;
 
 	m_output_vector	= gsl_vector_alloc (m_number_of_outputs);
 	m_input_vector	= gsl_vector_alloc (m_number_of_harmonics);
@@ -41,11 +47,14 @@ ambisonicStereo::ambisonicStereo(int anOrder, double anAngle, int aVectorSize)
 	
 	AmbisonicEncode* encoder = new AmbisonicEncode(m_order);
 	double* result = new double[m_number_of_harmonics];
-	encoder->process(1., result, ((m_angle / 360.) * TWOPI));
+	double aTheta = (((m_loudspeakers_angle / 2.) + m_axe_angle) / 360.) * TWOPI;
+	if(aTheta > TWOPI)
+		aTheta -=TWOPI;
+
+	encoder->process(1., result, aTheta);
 	for(int j = 0; j < m_number_of_harmonics; j++)
-	{
-			gsl_vector_set(m_input_vector, j, result[j]);
-	}
+		gsl_vector_set(m_input_vector, j, result[j]);
+	
 	gsl_vector_mul(m_input_vector, m_optim_vector);
 	gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
 	m_scale_factor = 1. / gsl_vector_get(m_output_vector, 0.);
@@ -87,8 +96,10 @@ void ambisonicStereo::computeInPhaseOptim()
 		double optim = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
 		if (i == 0) 
 			gsl_vector_set(m_optim_vector, i, 1.);
-		else 
+		else if(i < 20) 
 			gsl_vector_set(m_optim_vector, i, optim);
+		else 
+			gsl_vector_set(m_optim_vector, i, 0.);
 	}
 }
 
@@ -98,8 +109,14 @@ void ambisonicStereo::computeMicrophones()
 	double aThetaLeft, aThetaRight;
 	int aIndex;
 	
-	aThetaLeft = (m_angle / 360.) * TWOPI;
-	aThetaRight = TWOPI - aThetaLeft;
+	aThetaLeft = (( m_axe_angle + (m_loudspeakers_angle / 2.)) / 360.) * TWOPI;
+	if(aThetaLeft > TWOPI)
+		aThetaLeft -= TWOPI;
+	aThetaRight = (( m_axe_angle - (m_loudspeakers_angle / 2.)) / 360.) * TWOPI;
+	if(aThetaRight > TWOPI)
+		aThetaRight -= TWOPI;
+	else if(aThetaRight < 0.)
+		aThetaRight += TWOPI;
 	for (int j = 0; j < m_number_of_harmonics; j++) 
 	{
 		aIndex = (int)((((double)j - 1.) / 2.) + 1.);

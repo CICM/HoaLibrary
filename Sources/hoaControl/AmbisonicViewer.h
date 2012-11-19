@@ -1,0 +1,69 @@
+/*
+ *
+ * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * 
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Library General Public License as published 
+ * by the Free Software Foundation; either version 2 of the License.
+ * 
+ * This library is distributed in the hope that it will be useful, but WITHOUT 
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License 
+ * along with this library; if not, write to the Free Software Foundation, 
+ * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ */
+
+#ifndef DEF_AMBISONICVIEWER
+#define DEF_AMBISONICVIEWER
+
+#include <complex>
+#include <stdio.h>
+#include <vector>
+
+#define	M_PI 3.14159265358979323846264338327950288
+#define M_2PI 2*M_PI
+#define NUMBEROFCIRCLEPOINTS 360
+
+class AmbisonicViewer
+{
+	
+private:
+	long		m_order;
+	long		m_number_of_harmonics;
+
+	double*		m_cosinus_buffer;
+	double*		m_sinus_buffer;
+	double**	m_harmonics_basis;
+
+	double*		m_contributions;
+	double		m_biggest_contribution;
+
+	double*		m_harmonics_values;
+	double*		m_vector_x;
+	double*		m_vector_y;
+	int*		m_vector_color;
+		
+	void	computeTrigo();
+	void	computeBasis();
+	void	computeRepresentation();
+	void	computeContribution();
+	
+public:
+	AmbisonicViewer(long anOrder);
+	~AmbisonicViewer();
+	
+	template<typename Type> void process(Type* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+
+		computeContribution();
+		computeRepresentation();
+	}
+};
+
+#endif
