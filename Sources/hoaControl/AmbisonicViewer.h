@@ -35,12 +35,17 @@ private:
 	long		m_order;
 	long		m_number_of_harmonics;
 
+	long		m_biggest_contribution_index;
+	long		m_biggest_distance_index1;
+	long		m_biggest_distance_index2;
+
 	double*		m_cosinus_buffer;
 	double*		m_sinus_buffer;
 	double**	m_harmonics_basis;
 
 	double*		m_contributions;
 	double		m_biggest_contribution;
+	double		m_biggest_distance;
 
 	double*		m_harmonics_values;
 	double*		m_vector_x;
@@ -51,9 +56,19 @@ private:
 	void	computeBasis();
 	void	computeRepresentation();
 	void	computeContribution();
+	void	computeMaximumDistance();
 	
 public:
 	AmbisonicViewer(long anOrder);
+	double getBiggestContribution();
+	long   getBiggestContributionIndex();
+	double getContributions(long anIndex);
+	double getAbscisseValue(long anIndex);
+	double getOrdinateValue(long anIndex);
+	int	getColor(long anIndex);
+	double getBiggestDistance();
+	long   getBiggestDistanceIndex1();
+	long   getBiggestDistanceIndex2();
 	~AmbisonicViewer();
 	
 	template<typename Type> void process(Type* anInputs)
@@ -63,6 +78,7 @@ public:
 
 		computeContribution();
 		computeRepresentation();
+		computeMaximumDistance();
 	}
 };
 

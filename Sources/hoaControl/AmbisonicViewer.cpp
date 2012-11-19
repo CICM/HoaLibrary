@@ -26,11 +26,16 @@ AmbisonicViewer::AmbisonicViewer(long anOrder)
 	computeTrigo();
 	computeBasis();
 
+	m_harmonics_values = new double[m_number_of_harmonics];
 	m_contributions = new double[NUMBEROFCIRCLEPOINTS];
 	m_vector_x		= new double[NUMBEROFCIRCLEPOINTS];
 	m_vector_y		= new double[NUMBEROFCIRCLEPOINTS];
-	m_harmonics_values = new double[NUMBEROFCIRCLEPOINTS];
 	m_vector_color	= new int[NUMBEROFCIRCLEPOINTS];
+	
+	for(int i = 0; i < m_number_of_harmonics; i++)
+		m_harmonics_values[i] = 0.;
+	computeContribution();
+	computeRepresentation();
 }
 
 void AmbisonicViewer::computeTrigo()
@@ -40,8 +45,9 @@ void AmbisonicViewer::computeTrigo()
 	
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++) 
 	{
-		m_cosinus_buffer[i] = cos((double)i * M_2PI / (double)NUMBEROFCIRCLEPOINTS);
-		m_sinus_buffer[i]	= sin((double)i * M_2PI / (double)NUMBEROFCIRCLEPOINTS);
+		double azimuth = (double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS;
+		m_cosinus_buffer[i] = cos(CICM_2PI - azimuth - CICM_PI2);
+		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth - CICM_PI2);
 	}
 }
 
@@ -58,7 +64,7 @@ void AmbisonicViewer::computeBasis()
 	{
 		for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
 		{
-			double angularStep = (M_2PI / NUMBEROFCIRCLEPOINTS) * (double)i;
+			double angularStep = (CICM_2PI / NUMBEROFCIRCLEPOINTS) * (double)i;
 			m_harmonics_basis[j*2][i]	= cos((double)j * angularStep);
 			m_harmonics_basis[j*2-1][i] = sin((double)j * angularStep);
 		}
@@ -98,6 +104,7 @@ void AmbisonicViewer::computeRepresentation()
 void AmbisonicViewer::computeContribution()
 {
 	m_biggest_contribution = 0;
+	m_biggest_contribution_index = 0;
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
 	{    
 		m_contributions[i] = 0.;		
@@ -107,9 +114,78 @@ void AmbisonicViewer::computeContribution()
 		if (fabs(m_contributions[i]) >m_biggest_contribution)
 		{
 			m_biggest_contribution = fabs(m_contributions[i]);
+			m_biggest_contribution_index = i;
 			//biggestcontrib = (x->f_biggestContrib + 0.5 * x->f_harmonicsValues[0]) / ((double)(x->f_order + 1) * 4.);
 		}
 	}
+}
+
+void AmbisonicViewer::computeMaximumDistance()
+{
+	m_biggest_distance = 0;;
+	double distanceMax = 0.;
+	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
+	{    
+		long indexPlu = m_biggest_contribution_index + i;
+		if(indexPlu >= NUMBEROFCIRCLEPOINTS)
+			indexPlu -= NUMBEROFCIRCLEPOINTS;
+		long indexMin = m_biggest_contribution_index - i;
+		if(indexMin < 0)
+			indexMin += NUMBEROFCIRCLEPOINTS;
+
+		distanceMax = Tools::distance_euclidean(m_vector_x[indexPlu], m_vector_y[indexPlu], m_vector_x[indexMin], m_vector_y[indexMin]);
+		if (distanceMax > m_biggest_distance)
+		{
+			m_biggest_distance = distanceMax;
+			m_biggest_distance_index1 = indexPlu;
+			m_biggest_distance_index2 = indexMin;
+		}
+	}
+}
+
+double AmbisonicViewer::getContributions(long anIndex)
+{
+	return m_contributions[Tools::clip(anIndex, (long)0, (long)(NUMBEROFCIRCLEPOINTS - 1))];
+}
+
+double AmbisonicViewer::getAbscisseValue(long anIndex)
+{
+	return m_vector_x[Tools::clip(anIndex, (long)0, (long)(NUMBEROFCIRCLEPOINTS - 1))];
+}
+
+double AmbisonicViewer::getOrdinateValue(long anIndex)
+{
+	return m_vector_y[Tools::clip(anIndex, (long)0, (long)(NUMBEROFCIRCLEPOINTS - 1))];
+}
+
+double AmbisonicViewer::getBiggestContribution()
+{
+	return m_biggest_contribution;
+}
+
+long AmbisonicViewer::getBiggestContributionIndex()
+{
+	return m_biggest_contribution_index;
+}
+
+int	AmbisonicViewer::getColor(long anIndex)
+{
+	return m_vector_color[Tools::clip(anIndex, (long)0, (long)(NUMBEROFCIRCLEPOINTS - 1))];
+}
+
+double AmbisonicViewer::getBiggestDistance()
+{
+	return m_biggest_distance;
+}
+
+long AmbisonicViewer::getBiggestDistanceIndex1()
+{
+	return m_biggest_distance_index1;
+}
+
+long AmbisonicViewer::getBiggestDistanceIndex2()
+{
+	return m_biggest_distance_index2;
 }
 
 AmbisonicViewer::~AmbisonicViewer()
