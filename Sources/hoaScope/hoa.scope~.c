@@ -534,6 +534,7 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 	double x1, y1, x2, y2;
 	double energyX, energyY, velocityX, velocityY;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
+
 	
 	if (g) 
 	{
@@ -551,7 +552,7 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 
 		x1 =  x->f_xCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.x;
 		y1 =  x->f_yCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.y;
-		
+				
 		for(i = 1; i < MAXIMUM_SIZE; i++)
 		{
 			energyX += x->f_xCircleVector[i] * x->f_contributions[i] * x->f_contributions[i];
@@ -592,7 +593,9 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 			jgraphics_line_draw_fast(g, x1, y1, x2, y2, 1.);
 			x1 = x2;
 			y1 = y2;
+			
 		}
+		
 		/* Energy */
 		//jgraphics_set_source_rgba(g, 0.08, .43, 0.41, 1.);
 //		

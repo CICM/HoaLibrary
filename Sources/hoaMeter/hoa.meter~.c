@@ -46,7 +46,7 @@ typedef struct  _meter
 	int			f_nwarmleds;
 	int			f_numleds;
 	
-	float*		f_speakerAngles;
+	float		f_speakerAngles[MAX_SPEAKER];
 	long		f_nSpeakerAngles;
 	double*		f_amplitudeOfLoudspeakers;
 	double*		f_energyOfLoudspeakers;
@@ -103,7 +103,7 @@ void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *pa
 long meter_oksize(t_meter *x, t_rect *newrect);
 
 t_max_err f_speakerAngles_get(t_meter *x, void *attr, long *ac, t_atom **av);
-t_max_err f_speakerAngles_set(t_meter *x, void *attr, long *ac, t_atom **av);
+t_max_err f_speakerAngles_set(t_meter *x, void *attr, long ac, t_atom *av);
 
 /* Paint *********************************************/
 void meter_paint(t_meter *x, t_object *view);
@@ -173,10 +173,11 @@ int main()
 	//CLASS_ATTR_INVISIBLE		(c, "ls", 1);
 	
 	CLASS_ATTR_FLOAT_VARSIZE	(c, "ls_angles", 0, t_meter, f_speakerAngles, f_nSpeakerAngles, MAX_SPEAKER);
-	CLASS_ATTR_ACCESSORS		(c, "ls_angles", f_speakerAngles_get, f_speakerAngles_set);
+	CLASS_ATTR_ACCESSORS		(c, "ls_angles", NULL, f_speakerAngles_set);
 	CLASS_ATTR_CATEGORY			(c, "ls_angles", 0, "Value");
 	CLASS_ATTR_ORDER			(c, "ls_angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "ls_angles", 0, "Angles of Loudspeakers");
+	CLASS_ATTR_DEFAULT			(c, "ls_angles", 0, "666");
 	CLASS_ATTR_SAVE				(c, "ls_angles", 1);
 	
 	CLASS_ATTR_DOUBLE			(c, "offset", 0, t_meter, f_offsetOfLoudspeakers);
@@ -363,17 +364,25 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_amplitudeOfLoudspeakers = (double *)getbytes(x->f_numberOfLoudspeakers * sizeof(double));
 	x->f_abscisseOfLoudspeakers = (double *)getbytes(x->f_numberOfLoudspeakers * sizeof(double));
 	x->f_ordonneOfLoudspeakers = (double *)getbytes(x->f_numberOfLoudspeakers * sizeof(double));
+	
+	//x->f_nSpeakerAngles = x->f_numberOfLoudspeakers;
+	
+	
 	for(i = 0; i < x->f_numberOfLoudspeakers; i++)
 	{
 		x->f_energyOfLoudspeakers[i] = 0.00001;
 		x->f_amplitudeOfLoudspeakers[i] = 0.000001;
 		x->f_abscisseOfLoudspeakers[i] = cos(((double)(x->f_numberOfLoudspeakers - i) / (double)x->f_numberOfLoudspeakers) * JGRAPHICS_2PI);
 		x->f_ordonneOfLoudspeakers[i] = sin(((double)(x->f_numberOfLoudspeakers - i) / (double)x->f_numberOfLoudspeakers) * JGRAPHICS_2PI);
+		
+		//x->f_speakerAngles[i] = 360. / x->f_numberOfLoudspeakers * i;
 	}
 	x->f_clock = clock_new(x,(method)meter_tick);
 	x->f_startclock = 0;
 	
 	x->f_drawmeter = 0;
+	//if(x->f_speakerAngles[0] == 360)
+		//x->f_speakerAngles[0] = 4444;
 	
 	//post("f_speakerAngles[0] = %f", x->f_speakerAngles[0]);
 	
@@ -382,17 +391,55 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
+/*
 t_max_err f_speakerAngles_get(t_meter *x, void *attr, long *ac, t_atom **av)
 {
     if (ac && av)
     {
         char alloc;
-        if (atom_alloc_array(MAX_SPEAKER, ac, av, &alloc)) {
+        if (atom_alloc_array(x->f_nSpeakerAngles, ac, av, &alloc)) {
             return MAX_ERR_OUT_OF_MEM;
         }
 		
-        for (int i = 0; i < MAX_SPEAKER; i++) {
+        for (int i = 0; i < x->f_nSpeakerAngles; i++) {
             atom_setfloat(*av + i, x->f_speakerAngles[i]);
+        }
+    }
+    return MAX_ERR_NONE;
+}
+*/
+t_max_err f_speakerAngles_set(t_meter *x, void *attr, long ac, t_atom *av)
+{
+	float val;
+	int i;
+	int defaultAngle = 0;
+	int accum = 0;
+	
+    if (ac && av)
+    {
+		for(i = 0; i < ac ; i++)
+		{
+			accum += atom_getfloat(av + i);
+		}
+		x->f_nSpeakerAngles = x->f_numberOfLoudspeakers;
+		if (accum == 0) { // defaultValue
+			defaultAngle = 1;
+		}
+        for (i = 0; i < x->f_nSpeakerAngles; i++) {
+			if (defaultAngle) {
+				x->f_speakerAngles[i] = 360. / x->f_numberOfLoudspeakers * i;
+				//object_post((t_object*)x, "efef");
+			}
+			else {
+				val = atom_getfloat(av + i);
+				if (val > 360.) {
+					val = 360.;
+				}
+				if (val < 0.) {
+					val = 0.;
+				}
+				x->f_speakerAngles[i] = val;
+			}
         }
     }
     return MAX_ERR_NONE;
