@@ -17,14 +17,12 @@
  *
  */
 
-#ifndef define DEF_AMBISONICENCODE
+#ifndef DEF_AMBISONICENCODE
 #define DEF_AMBISONICENCODE
 
-#include "math.h"
 #include <complex>
 #include <stdio.h>
 #include <vector>
-
 
 #define	M_PI 3.14159265358979323846264338327950288
 #define M_2PI 2*M_PI

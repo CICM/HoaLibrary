@@ -2,40 +2,15 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="hoa.decoder~.cpp" />
-    <ClCompile Include="ambisonicDecode.cpp">
-      <Filter>Ambisonics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c" />
-    <ClCompile Include="hoaAmbisonics\hoa.decoder.cpp">
-      <Filter>Ambisonics</Filter>
-    </ClCompile>
-    <ClCompile Include="hoaAmbisonics\gslMatrix.cpp">
-      <Filter>Ambisonics</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Stereo">
-      <UniqueIdentifier>{c9c49185-525c-4a96-ad87-61d127ce59d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="5.1">
-      <UniqueIdentifier>{d4256eb8-45f0-47f9-8487-7a3922996390}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Ambisonics">
-      <UniqueIdentifier>{ba5a121c-316f-48a9-99f8-54d80e4ca601}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ambisonicDecode.hpp">
-      <Filter>Ambisonics</Filter>
-    </ClInclude>
-    <ClInclude Include="hoaAmbisonics\hoa.decoder.h">
-      <Filter>Ambisonics</Filter>
-    </ClInclude>
-    <ClInclude Include="hoaAmbisonics\gslMatrix.hpp">
-      <Filter>Ambisonics</Filter>
-    </ClInclude>
+    <ClCompile Include="gslMatrix.cpp" />
+    <ClCompile Include="ambisonicDecode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hoa.decoder~.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gslMatrix.hpp" />
+    <ClInclude Include="ambisonicDecode.hpp" />
   </ItemGroup>
 </Project>

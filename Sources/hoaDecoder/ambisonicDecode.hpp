@@ -54,7 +54,7 @@ private:
 	double		*m_optimVector;
 	
 public:
-	ambisonicDecode(int anOrder, int aNumberOfChannels = 0, int aVectorSize = 0, std::string anOptimMode = "basic");
+	ambisonicDecode(int anOrder, int aNumberOfChannels = 0, int aVectorSize = 0);
 	
 	int	 getParameters(std::string aParameter) const;
 	void computeIndex();

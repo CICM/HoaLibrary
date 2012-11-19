@@ -44,7 +44,8 @@ private:
 	int			m_number_of_outputs;
 	int			m_number_of_inputs;
 	int			m_vector_size;
-	double		m_angle;
+	double		m_loudspeakers_angle;
+	double		m_axe_angle;
 	double		m_scale_factor;
 
 	int*		m_index_of_harmonics;
@@ -54,7 +55,7 @@ private:
 	gsl_vector* m_optim_vector;
 
 public:
-	ambisonicStereo(int anOrder, double anAngle = 30., int aVectorSize = 0);
+	ambisonicStereo(int anOrder,double anLoudspeakersAngle = 60., double aAxeAngle = 0., int aVectorSize = 0);
 	int		getParameters(std::string aParameter) const;
 	void	computeMicrophones();
 	void	computeIndex();
