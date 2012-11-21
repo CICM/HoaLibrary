@@ -25,7 +25,6 @@ extern "C"
 	#include "z_dsp.h"
 }
 
-
 typedef struct _HoaWider 
 {
 	t_pxobject				f_ob;			

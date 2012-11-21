@@ -25,10 +25,11 @@ AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize)
 	m_number_of_inputs		= m_number_of_harmonics + 1;
 	m_number_of_outputs		= m_number_of_harmonics;
 
-	computeIndex();
+	setVectorSize(aVectorSize);
+
+	computeIndex();	
 	computeWidenVector();
 	setWidenValue(1.);
-	setVectorSize(aVectorSize);
 }
 
 long AmbisonicWider::getOrder()
@@ -67,6 +68,13 @@ void AmbisonicWider::computeIndex()
 			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
 	}
 }
+
+void AmbisonicWider::setVectorSize(long aVectorSize)
+{
+	m_vector_size = Tools::clip_power_of_two(aVectorSize);
+}
+
+
 void AmbisonicWider::computeWidenVector()
 {
 	m_minus_vector	= new double[m_number_of_harmonics];
@@ -85,11 +93,6 @@ void AmbisonicWider::computeWidenVector()
 void AmbisonicWider::setWidenValue(double aWidenValue)
 {
 	m_widen_value = Tools::clip(aWidenValue, 0., 1.);
-}
-
-void AmbisonicWider::setVectorSize(int aVectorSize)
-{
-	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
 AmbisonicWider::~AmbisonicWider()

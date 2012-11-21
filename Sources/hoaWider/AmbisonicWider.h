@@ -30,28 +30,26 @@
 
 class AmbisonicWider
 {
-	
 private:
 	long	m_order;
 	long	m_number_of_harmonics;
 	long	m_number_of_inputs;
 	long	m_number_of_outputs;
 	long	m_vector_size;
-	
-	double	m_widen_value;
-
-	double	m_order_weight;
 	long*	m_index_of_harmonics;
+
+	double	m_widen_value;
+	double	m_order_weight;
 	double*	m_minus_vector;
 	double*	m_dot_vector;
 
 	void computeIndex();
 	void computeWidenVector();
-
 public:
 	AmbisonicWider(long anOrderlong, long aVectorSize = 0);
-	void setVectorSize(int aVectorSize);
 	void setWidenValue(double aWidenValue);
+	void setVectorSize(long aVectorSize);
+
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
