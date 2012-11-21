@@ -31,7 +31,6 @@ ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorS
 	
 	m_input_vector		= gsl_vector_alloc (m_number_of_harmonics);
 	m_output_vector		= gsl_vector_alloc (m_number_of_outputs);
-	m_optimVector		= new double[m_number_of_harmonics];
 	
 	setVectorSize(aVectorSize);
 	computeIndex();
@@ -39,22 +38,29 @@ ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorS
 	computePseudoInverse();
 }
 
-int	ambisonicDecode::getParameters(std::string aParameter) const
+long ambisonicDecode::getOrder()
 {
-	int value = 0;
-	
-	if (aParameter == "order") 
-		value = m_order;
-	else if (aParameter == "samplingRate") 
-		value =  m_sampling_rate;
-	else if (aParameter == "vectorSize") 
-		value =  m_vector_size;
-	else if (aParameter == "numberOfInputs") 
-		value =  m_number_of_inputs;
-	else if (aParameter == "numberOfOutputs") 
-		value =  m_number_of_outputs;
-	
-	return value;
+	return m_order;
+}
+
+long ambisonicDecode::getNumberOfHarmonics()
+{
+	return m_number_of_harmonics;
+}
+
+long ambisonicDecode::getNumberOfInputs()
+{
+	return m_number_of_inputs;
+}
+
+long ambisonicDecode::getNumberOfOutputs()
+{
+	return m_number_of_outputs;
+}
+
+long ambisonicDecode::getVectorSize()
+{
+	return m_vector_size;
 }
 
 void ambisonicDecode::computeIndex()
@@ -116,6 +122,5 @@ ambisonicDecode::~ambisonicDecode()
 	delete m_output_vector;
 	delete m_index_of_harmonics;
 	delete m_speakers_angles;
-	delete m_optimVector;
 }
 

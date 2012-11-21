@@ -41,9 +41,7 @@ private:
 	int m_number_of_harmonics;
 	int m_number_of_inputs;
 	int m_number_of_outputs;
-	int	m_sampling_rate;
 	int	m_vector_size;
-	std::string m_optimMode;
 	
 	double		*m_speakers_angles;
 	int			*m_index_of_harmonics;
@@ -51,26 +49,27 @@ private:
 	gsl_matrix	*m_decoder_matrix;
 	gsl_vector	*m_input_vector;
 	gsl_vector	*m_output_vector;
-	double		*m_optimVector;
-	
-public:
-	ambisonicDecode(int anOrder, int aNumberOfChannels = 0, int aVectorSize = 0);
-	
-	int	 getParameters(std::string aParameter) const;
+
 	void computeIndex();
 	void computeAngles();
-	void setVectorSize(int aVectorSize);
-	
 	void computePseudoInverse();
 	void setSpkrsAngles(double* someSpkrsAngles, int size);
 
+public:
+	ambisonicDecode(int anOrder, int aNumberOfChannels = 0, int aVectorSize = 0);
+	long getOrder();
+	long getNumberOfHarmonics();
+	long getNumberOfInputs();
+	long getNumberOfOutputs();
+	long getVectorSize();
+	void setVectorSize(int aVectorSize);
 	~ambisonicDecode();
 	
 	/* Perform sample by sample */
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{	
 		for(int j = 0; j < m_number_of_harmonics; j++)
-			gsl_vector_set(m_input_vector, j, aInputs[j] * m_optimVector[j]);
+			gsl_vector_set(m_input_vector, j, aInputs[j]);
 		
 		gsl_blas_dgemv(CblasNoTrans,1.0, m_decoder_matrix, m_input_vector, 0.0, m_output_vector);
 		
@@ -84,7 +83,7 @@ public:
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				gsl_vector_set(m_input_vector, j, aInputs[j][i] * m_optimVector[j]);
+				gsl_vector_set(m_input_vector, j, aInputs[j][i]);
 			
 			gsl_blas_dgemv(CblasNoTrans,1.0, m_decoder_matrix, m_input_vector, 0.0, m_output_vector);
 			

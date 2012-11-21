@@ -80,8 +80,8 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->f_ambisonicDecoder	= new ambisonicDecode(order, outputs, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambisonicDecoder->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_ambisonicDecoder->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_ambisonicDecoder->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambisonicDecoder->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -107,9 +107,9 @@ void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count)
 	t_int **sigvec;
 
 	x->f_ambisonicDecoder->setVectorSize(sp[0]->s_n);
-	x->f_ninput = x->f_ambisonicDecoder->getParameters("numberOfInputs");
-	x->f_noutput = x->f_ambisonicDecoder->getParameters("numberOfOutputs");
-	pointer_count = x->f_ambisonicDecoder->getParameters("numberOfInputs") + x->f_ambisonicDecoder->getParameters("numberOfOutputs") + 2;
+	x->f_ninput = x->f_ambisonicDecoder->getNumberOfInputs();
+	x->f_noutput = x->f_ambisonicDecoder->getNumberOfOutputs();
+	pointer_count = x->f_ambisonicDecoder->getNumberOfInputs() + x->f_ambisonicDecoder->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
