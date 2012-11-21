@@ -17,9 +17,6 @@
  *
  */
 
-/********************************************************/
-/*					HOA.CTRL.ENCODER					*/
-/********************************************************/
 #include "AmbisonicEncode.h"
 #include "AmbisonicViewer.h"
 #include "AmbisonicOptim.h"
@@ -37,10 +34,9 @@ extern "C"
 	#include "ext_globalsymbol.h"
 }
 
-typedef struct  _controler_encoder 
+typedef struct  _control 
 {
 	t_jbox		j_box;
-	
 	void*		f_outAzimuth;
 	void*		f_outWide;
 	void*		f_outInfos;
@@ -72,53 +68,51 @@ typedef struct  _controler_encoder
 	AmbisonicWider*	 f_wider;
 	double*			 f_harmonicsValues;
 
-} t_controler_encoder;
+} t_control;
 
-t_class *controler_encoder_class;
+t_class *control_class;
 
-void controler_encoder_init();
-void *controler_encoder_new(t_symbol *s, int argc, t_atom *argv);
-void controler_encoder_free(t_controler_encoder *x);
-void controler_encoder_assist(t_controler_encoder *x, void *b, long m, long a, char *s);
+void *control_new(t_symbol *s, int argc, t_atom *argv);
+void control_free(t_control *x);
+void control_assist(t_control *x, void *b, long m, long a, char *s);
 
-t_max_err controler_encoder_notify(t_controler_encoder *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-t_max_err order_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-t_max_err optim_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-t_max_err wide_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-t_max_err azimuth_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-
+t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv);
+t_max_err optim_set(t_control *x, t_object *attr, long argc, t_atom *argv);
+t_max_err wide_set(t_control *x, t_object *attr, long argc, t_atom *argv);
+t_max_err azimuth_set(t_control *x, t_object *attr, long argc, t_atom *argv);
 /* Interaction ***************************************/
-void controler_encoder_mouse_down(t_controler_encoder *x, t_object *patcherview, t_pt pt, long modifiers);
-void controler_encoder_mouse_drag(t_controler_encoder *x, t_object *patcherview, t_pt pt, long modifiers);
-void controler_encoder_compute(t_controler_encoder *x);
+void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
+void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
+void conrol_compute(t_control *x);
 
 /* Paint *********************************************/
-void controler_encoder_paint(t_controler_encoder *x, t_object *view);
-void draw_background(t_controler_encoder *x, t_object *view, t_rect *rect);
-void draw_angle(t_controler_encoder *x,  t_object *view, t_rect *rect);
-void draw_harmonics(t_controler_encoder *x,  t_object *view, t_rect *rect);
-void draw_biggest_contribution(t_controler_encoder *x, t_object *view, t_rect *rect);
+void control_paint(t_control *x, t_object *view);
+void draw_background(t_control *x, t_object *view, t_rect *rect);
+void draw_angle(t_control *x,  t_object *view, t_rect *rect);
+void draw_harmonics(t_control *x,  t_object *view, t_rect *rect);
+void draw_biggest_contribution(t_control *x, t_object *view, t_rect *rect);
 
 int main()
 {
 	t_class *c;
 
-	c = class_new("hoa.ctrl.encoder", (method)controler_encoder_new, (method)controler_encoder_free, (short)sizeof(t_controler_encoder), 0L, A_GIMME, 0);
-	
+	c = class_new("hoa.control", (method)control_new, (method)control_free, (short)sizeof(t_control), 0L, A_GIMME, 0);
+
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 
-	class_addmethod(c, (method)controler_encoder_assist,		"assist",		A_CANT,	0);
-	class_addmethod(c, (method)controler_encoder_paint,			"paint",		A_CANT,	0);
-	class_addmethod(c, (method)controler_encoder_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)controler_encoder_mouse_down,	"mousedown",	A_CANT, 0);
-	class_addmethod(c, (method)controler_encoder_mouse_drag,	"mousedrag",	A_CANT, 0);
+	class_addmethod(c, (method)control_assist,		"assist",		A_CANT,	0);
+	class_addmethod(c, (method)control_paint,		"paint",		A_CANT,	0);
+	class_addmethod(c, (method)control_notify,		"notify",		A_CANT, 0);
+	class_addmethod(c, (method)control_mouse_down,	"mousedown",	A_CANT, 0);
+	class_addmethod(c, (method)control_mouse_drag,	"mousedrag",	A_CANT, 0);
 	
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
 
-	CLASS_ATTR_LONG					(c, "order", 0, t_controler_encoder, f_order);
+	CLASS_ATTR_LONG					(c, "order", 0, t_control, f_order);
 	CLASS_ATTR_CATEGORY				(c, "order", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "order", 0, "1");
 	CLASS_ATTR_LABEL				(c, "order", 0, "Ambisonic Order");
@@ -127,7 +121,7 @@ int main()
 	CLASS_ATTR_DEFAULT				(c, "order", 0, "4");
 	CLASS_ATTR_SAVE					(c, "order", 1);
 
-	CLASS_ATTR_LONG					(c, "optim", 0, t_controler_encoder, f_optimMode);
+	CLASS_ATTR_LONG					(c, "optim", 0, t_control, f_optimMode);
 	CLASS_ATTR_CATEGORY				(c, "optim", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "optim", 0, "2");
 	CLASS_ATTR_ENUMINDEX			(c, "optim", 0, "basic \" \"maxRe \" \"inPhase");
@@ -136,7 +130,7 @@ int main()
 	CLASS_ATTR_DEFAULT				(c, "optim", 0, "0");
 	CLASS_ATTR_SAVE					(c, "optim", 1);
 	
-	CLASS_ATTR_DOUBLE				(c, "wide", 0, t_controler_encoder, f_wide);
+	CLASS_ATTR_DOUBLE				(c, "wide", 0, t_control, f_wide);
 	CLASS_ATTR_CATEGORY				(c, "wide", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "wide", 0, "3");
 	CLASS_ATTR_LABEL				(c, "wide", 0, "Wide value");
@@ -145,7 +139,7 @@ int main()
 	CLASS_ATTR_DEFAULT				(c, "wide", 0, "1.");
 	CLASS_ATTR_SAVE					(c, "wide", 1);
 
-	CLASS_ATTR_DOUBLE				(c, "azimuth", 0, t_controler_encoder, f_azimuth);
+	CLASS_ATTR_DOUBLE				(c, "azimuth", 0, t_control, f_azimuth);
 	CLASS_ATTR_CATEGORY				(c, "azimuth", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "azimuth", 0, "4");
 	CLASS_ATTR_LABEL				(c, "azimuth", 0, "Azimuth value");
@@ -153,51 +147,51 @@ int main()
 	CLASS_ATTR_DEFAULT				(c, "azimuth", 0, "0.");
 	CLASS_ATTR_SAVE					(c, "azimuth", 1);
 
-	CLASS_ATTR_LONG					(c, "mode", 0, t_controler_encoder, f_mode);
+	CLASS_ATTR_LONG					(c, "mode", 0, t_control, f_mode);
 	CLASS_ATTR_CATEGORY				(c, "mode", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "mode", 0, "5");
 	CLASS_ATTR_ENUMINDEX			(c, "mode", 0, "Absolute \" \"Relative");
 	CLASS_ATTR_LABEL				(c, "mode", 0, "Interaction mode");
-	CLASS_ATTR_FILTER_CLIP			(c, "mode", 0, 1);
+	CLASS_ATTR_FILTER_CLIP			(c, "wide", 0, 1);
 	CLASS_ATTR_DEFAULT				(c, "mode", 0, "0.");
 	CLASS_ATTR_SAVE					(c, "mode", 1);
 
-	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_controler_encoder, f_colorBackground);
+	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_control, f_colorBackground);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER				(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "1. 1. 1. 1.");
 	
-	CLASS_ATTR_RGBA					(c, "txcolor", 0, t_controler_encoder, f_colorText);
+	CLASS_ATTR_RGBA					(c, "txcolor", 0, t_control, f_colorText);
 	CLASS_ATTR_CATEGORY				(c, "txcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "txcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "txcolor", 0, "Text Color");
 	CLASS_ATTR_ORDER				(c, "txcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "txcolor", 0, "0. 0. 0. 1.");
 
-	CLASS_ATTR_RGBA					(c, "cicolor", 0, t_controler_encoder, f_colorCircle);
+	CLASS_ATTR_RGBA					(c, "cicolor", 0, t_control, f_colorCircle);
 	CLASS_ATTR_CATEGORY				(c, "cicolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "cicolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "cicolor", 0, "Circle Color");
 	CLASS_ATTR_ORDER				(c, "cicolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cicolor", 0, "0. 0. 0. 1.");
 	
-	CLASS_ATTR_RGBA					(c, "phcolor", 0, t_controler_encoder, f_colorPositif);
+	CLASS_ATTR_RGBA					(c, "phcolor", 0, t_control, f_colorPositif);
 	CLASS_ATTR_CATEGORY				(c, "phcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "phcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "phcolor", 0, "Positifs Harmonics color");
 	CLASS_ATTR_ORDER				(c, "phcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "phcolor", 0, "0. 0. 1. 1.");
 	
-	CLASS_ATTR_RGBA					(c, "nhcolor", 0, t_controler_encoder, f_colorNegatif);
+	CLASS_ATTR_RGBA					(c, "nhcolor", 0, t_control, f_colorNegatif);
 	CLASS_ATTR_CATEGORY				(c, "nhcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "nhcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "nhcolor", 0, "Negatifs Harmonics color");
 	CLASS_ATTR_ORDER				(c, "nhcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "nhcolor", 0, "1. 0. 0. 1.");
 	
-	CLASS_ATTR_RGBA					(c, "cocolor", 0, t_controler_encoder, f_colorContrib);
+	CLASS_ATTR_RGBA					(c, "cocolor", 0, t_control, f_colorContrib);
 	CLASS_ATTR_CATEGORY				(c, "cocolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "cocolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "cocolor", 0, "Biggest contribution color");
@@ -205,27 +199,22 @@ int main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cocolor", 0, "0. 0. 0. 1.");
 
 	class_register(CLASS_BOX, c);
-	controler_encoder_class = c;
+	control_class = c;
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
-
 	return 0;
 }
 
-/********************************************************/
-/*					HOA.CTRL.ENCODER					*/
-/********************************************************/
-
-void *controler_encoder_new(t_symbol *s, int argc, t_atom *argv)
+void *control_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_controler_encoder *x =  NULL; 
+	t_control *x =  NULL; 
 	t_dictionary *d;
 	long flags;
 	
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 
-	x = (t_controler_encoder *)object_alloc(controler_encoder_class);
+	x = (t_control *)object_alloc(control_class);
 	flags = 0 
 			| JBOX_DRAWFIRSTIN 
 			| JBOX_DRAWINLAST
@@ -250,13 +239,13 @@ void *controler_encoder_new(t_symbol *s, int argc, t_atom *argv)
 
 	x->f_azimuth= 0.;
 	x->f_wide = 1.;
-	controler_encoder_compute(x);
+	conrol_compute(x);
 	jbox_ready((t_jbox *)x);
 	
 	return (x);
 }			
 
-void controler_encoder_free(t_controler_encoder *x)
+void control_free(t_control *x)
 {
 	jbox_free((t_jbox *)x);
 	free(x->f_harmonicsValues);
@@ -266,7 +255,7 @@ void controler_encoder_free(t_controler_encoder *x)
 	delete x->f_wider;
 }
 
-void controler_encoder_assist(t_controler_encoder *x, void *b, long m, long a, char *s)
+void control_assist(t_control *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) 
 	{
@@ -283,7 +272,7 @@ void controler_encoder_assist(t_controler_encoder *x, void *b, long m, long a, c
 	}
 }
 
-t_max_err controler_encoder_notify(t_controler_encoder *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 	if (msg == gensym("attr_modified"))
@@ -311,7 +300,7 @@ t_max_err controler_encoder_notify(t_controler_encoder *x, t_symbol *s, t_symbol
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
-void controler_encoder_paint(t_controler_encoder *x, t_object *view)
+void control_paint(t_control *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -333,7 +322,7 @@ void controler_encoder_paint(t_controler_encoder *x, t_object *view)
 	draw_biggest_contribution(x, view, &rect);
 }
 
-void draw_background(t_controler_encoder *x,  t_object *view, t_rect *rect)
+void draw_background(t_control *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double x1, x2, y1, y2;
@@ -376,7 +365,7 @@ void draw_background(t_controler_encoder *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
 }
 
-void draw_angle(t_controler_encoder *x,  t_object *view, t_rect *rect)
+void draw_angle(t_control *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double x1, y1;
@@ -395,7 +384,7 @@ void draw_angle(t_controler_encoder *x,  t_object *view, t_rect *rect)
 			x1 = x->f_rayonAngle * cos((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.x;
 			y1 = x->f_rayonAngle * sin((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.y;
 		
-			sprintf(text,"%d°", 30 * i);
+			sprintf(text,"%dÂ°", 30 * i);
 			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 1.5, y1 - 10, x->f_fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
 			jtextlayout_draw(jtl, g);
 			
@@ -407,7 +396,7 @@ void draw_angle(t_controler_encoder *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("angle_layer"), 0., 0.);
 }
 
-void draw_harmonics(t_controler_encoder *x,  t_object *view, t_rect *rect)
+void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
 
@@ -447,7 +436,7 @@ void draw_harmonics(t_controler_encoder *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
 }
 
-void draw_biggest_contribution(t_controler_encoder *x,  t_object *view, t_rect *rect)
+void draw_biggest_contribution(t_control *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("biggest_contribution_layer"), rect->width, rect->height);
 
@@ -470,7 +459,7 @@ void draw_biggest_contribution(t_controler_encoder *x,  t_object *view, t_rect *
 	jbox_paint_layer((t_object *)x, view, gensym("biggest_contribution_layer"), 0., 0.);
 }
 
-void controler_encoder_mouse_down(t_controler_encoder *x, t_object *patcherview, t_pt pt, long modifiers)
+void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	#ifdef WIN_VERSION
 		long shift = 18;
@@ -513,7 +502,7 @@ void controler_encoder_mouse_down(t_controler_encoder *x, t_object *patcherview,
 	}
 }
 
-void controler_encoder_mouse_drag(t_controler_encoder *x, t_object *patcherview, t_pt pt, long modifiers)
+void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	#ifdef WIN_VERSION
 		long shift = 18;
@@ -560,7 +549,7 @@ void controler_encoder_mouse_drag(t_controler_encoder *x, t_object *patcherview,
 	}
 }
 
-void controler_encoder_compute(t_controler_encoder *x)
+void conrol_compute(t_control *x)
 {
 	double angle = x->f_azimuth;
 	if(angle > JGRAPHICS_2PI)
@@ -569,12 +558,12 @@ void controler_encoder_compute(t_controler_encoder *x)
 		angle += JGRAPHICS_2PI;
 	
 	x->f_encoder->process(1., x->f_harmonicsValues, angle - JGRAPHICS_PIOVER2);
-	x->f_optim->process(x->f_harmonicsValues, x->f_harmonicsValues);
 	x->f_wider->process(x->f_harmonicsValues, x->f_harmonicsValues, x->f_wide);
+	x->f_optim->process(x->f_harmonicsValues, x->f_harmonicsValues);
 	x->f_viewer->process(x->f_harmonicsValues);
 }
 
-t_max_err order_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv)
+t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (atom_gettype(argv) == A_LONG)
 	{
@@ -598,7 +587,7 @@ t_max_err order_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *a
 				optimMode = "inPhase";
 			x->f_optim->setOptimMode(optimMode);
 
-			controler_encoder_compute(x);
+			conrol_compute(x);
 
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
@@ -608,10 +597,11 @@ t_max_err order_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *a
 	return 0;
 }
 
-t_max_err optim_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv)
+t_max_err optim_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (atom_gettype(argv) == A_LONG)
 	{
+		post(" %ld", atom_getlong(argv));
 		if(atom_getlong(argv) != x->f_optimMode)
 		{
 			t_atom mode[1];
@@ -637,7 +627,7 @@ t_max_err optim_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *a
 		
 			x->f_optim->setOptimMode(optimMode);
 
-			controler_encoder_compute(x);
+			conrol_compute(x);
 			outlet_anything(x->f_outInfos, gensym("optim"), 1, mode);
 
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
@@ -648,12 +638,12 @@ t_max_err optim_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *a
 	return 0;
 }
 
-t_max_err wide_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv)
+t_max_err wide_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (atom_gettype(argv) == A_FLOAT)
 	{
 		x->f_wide = atom_getfloat(argv);
-		controler_encoder_compute(x);
+		conrol_compute(x);
 		outlet_float(x->f_outWide, x->f_wide);
 
 		jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
@@ -663,12 +653,12 @@ t_max_err wide_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *ar
 	return 0;
 }
 
-t_max_err azimuth_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv)
+t_max_err azimuth_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (atom_gettype(argv) == A_FLOAT)
 	{
 		x->f_azimuth = fmod(atom_getfloat(argv) + JGRAPHICS_2PI, JGRAPHICS_2PI);
-		controler_encoder_compute(x);
+		conrol_compute(x);
 		outlet_float(x->f_outAzimuth, x->f_azimuth);
 
 		jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
