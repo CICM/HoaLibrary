@@ -20,7 +20,7 @@
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
+    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -133,7 +133,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
-      <AdditionalIncludeDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;.\..\..\..\CicmLibrary;C:\gsl</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN_VERSION;WIN32;NDEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;_CRT_NOFORCE_MANIFEST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -161,11 +161,11 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>MaxAPI.lib;maxcrt.lib;MaxAudio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MaxAPI.lib;maxcrt.lib;MaxAudio.lib;cblas.lib;gsl.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).mxe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes</AdditionalLibraryDirectories>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalLibraryDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;.\..\..\..\CicmLibrary;C:\gsl\lib\Win32\Release</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <ModuleDefinitionFile>.\$(ProjectName).def</ModuleDefinitionFile>
@@ -187,7 +187,6 @@
     <ClCompile Include="AmbisonicOptim.cpp" />
     <ClCompile Include="AmbisonicViewer.cpp" />
     <ClCompile Include="AmbisonicWider.cpp" />
-    <ClCompile Include="hoa.control.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmbisonicEncode.h" />
@@ -196,6 +195,7 @@
     <ClInclude Include="AmbisonicWider.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="hoa.control.cpp" />
     <None Include="hoa.control.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

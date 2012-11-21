@@ -16,95 +16,14 @@
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-
-/********************************************************/
-/*					HOA.CTRL.ENCODER					*/
-/********************************************************/
-#include "AmbisonicEncode.h"
-#include "AmbisonicViewer.h"
-#include "AmbisonicOptim.h"
-#include "AmbisonicWider.h"
-#include "cicmTools.h"
-
-extern "C"
-{
-	#include "ext.h"
-	#include "ext_obex.h"
-	#include "jpatcher_api.h"
-	#include "jgraphics.h"
-	#include "jpatcher_syms.h"
-	#include "ext_dictionary.h"
-	#include "ext_globalsymbol.h"
-}
-
-typedef struct  _controler_encoder 
-{
-	t_jbox		j_box;
-	
-	void*		f_outAzimuth;
-	void*		f_outWide;
-	void*		f_outInfos;
-
-	long		f_mode;
-	long		f_order;
-	long		f_optimMode;
-	double		f_azimuth;
-	double		f_azimuthOffset;
-	double		f_wide;
-	double		f_wideOffset;
-
-	t_jrgba		f_colorBackground;
-	t_jrgba		f_colorText;
-	t_jrgba		f_colorCircle;
-	t_jrgba		f_colorNegatif;
-	t_jrgba		f_colorPositif;
-	t_jrgba		f_colorContrib;
-
-	t_rect		f_center;
-	double		f_rayonGlobal;
-	double		f_rayonAngle;
-	double		f_rayonCircle;
-	double		f_fontsize;
-
-	AmbisonicEncode* f_encoder;
-	AmbisonicViewer* f_viewer;
-	AmbisonicOptim*	 f_optim;
-	AmbisonicWider*	 f_wider;
-	double*			 f_harmonicsValues;
-
-} t_controler_encoder;
-
-t_class *controler_encoder_class;
-
-void controler_encoder_init();
-void *controler_encoder_new(t_symbol *s, int argc, t_atom *argv);
-void controler_encoder_free(t_controler_encoder *x);
-void controler_encoder_assist(t_controler_encoder *x, void *b, long m, long a, char *s);
-
-t_max_err controler_encoder_notify(t_controler_encoder *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-t_max_err order_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-t_max_err optim_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-t_max_err wide_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-t_max_err azimuth_set(t_controler_encoder *x, t_object *attr, long argc, t_atom *argv);
-
-/* Interaction ***************************************/
-void controler_encoder_mouse_down(t_controler_encoder *x, t_object *patcherview, t_pt pt, long modifiers);
-void controler_encoder_mouse_drag(t_controler_encoder *x, t_object *patcherview, t_pt pt, long modifiers);
-void controler_encoder_compute(t_controler_encoder *x);
-
-/* Paint *********************************************/
-void controler_encoder_paint(t_controler_encoder *x, t_object *view);
-void draw_background(t_controler_encoder *x, t_object *view, t_rect *rect);
-void draw_angle(t_controler_encoder *x,  t_object *view, t_rect *rect);
-void draw_harmonics(t_controler_encoder *x,  t_object *view, t_rect *rect);
-void draw_biggest_contribution(t_controler_encoder *x, t_object *view, t_rect *rect);
+#include "hoa.ctrl.encoder.h"
 
 int main()
 {
 	t_class *c;
 
 	c = class_new("hoa.ctrl.encoder", (method)controler_encoder_new, (method)controler_encoder_free, (short)sizeof(t_controler_encoder), 0L, A_GIMME, 0);
-	
+
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 
@@ -211,10 +130,6 @@ int main()
 
 	return 0;
 }
-
-/********************************************************/
-/*					HOA.CTRL.ENCODER					*/
-/********************************************************/
 
 void *controler_encoder_new(t_symbol *s, int argc, t_atom *argv)
 {
@@ -395,7 +310,7 @@ void draw_angle(t_controler_encoder *x,  t_object *view, t_rect *rect)
 			x1 = x->f_rayonAngle * cos((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.x;
 			y1 = x->f_rayonAngle * sin((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.y;
 		
-			sprintf(text,"%d°", 30 * i);
+			sprintf(text,"%dÂ°", 30 * i);
 			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 1.5, y1 - 10, x->f_fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
 			jtextlayout_draw(jtl, g);
 			

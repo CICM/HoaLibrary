@@ -313,7 +313,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 14.0,
 					"id" : "obj-4",
-					"maxclass" : "hoa.control",
+					"maxclass" : "hoa.ctrl.encoder",
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"order" : 7,
@@ -3852,7 +3852,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1.0, 2.0, 126.0, 30.0 ],
-					"text" : "hoa.control",
+					"text" : "hoa.ctrl.encoder",
 					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
 					"varname" : "autohelp_top_title[2]"
 				}
@@ -3869,7 +3869,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1.0, 2.0, 126.0, 30.0 ],
-					"text" : "hoa.control",
+					"text" : "hoa.ctrl.encoder",
 					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
 					"varname" : "autohelp_top_title[1]"
 				}
@@ -3941,7 +3941,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 510.0, 2.0, 285.0, 33.0 ],
-					"text" : "hoa.control by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
+					"text" : "hoa.ctrl.encoder by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
 				}
 
 			}
@@ -3956,7 +3956,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 1.0, 56.0, 674.0, 60.0 ],
-					"text" : "hoa.control~ displays the representation of the harmonics of an encoded ponctual sound for a given order, optimization, azimuth value and wide value. Click and drag to move the azimuth of the dirac and hold shift to widen the dirac. The absolute and relative mode are explain in the \"controler\" subpatcher. It can be used to understand the behavior of the encoding, the optimization and fractionnal order effect (wider) ot to control the \"super encoder\" set.",
+					"text" : "hoa.ctrl.encoder displays the representation of the harmonics of an encoded ponctual sound for a given order, optimization, azimuth value and wide value. Click and drag to move the azimuth of the dirac and hold shift to widen the dirac. The absolute and relative mode are explain in the \"controler\" subpatcher. It can be used to understand the behavior of the encoding, the optimization and fractionnal order effect (wider) ot to control the \"super encoder\" set.",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -8385,7 +8385,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
 									"id" : "obj-1",
-									"maxclass" : "hoa.control",
+									"maxclass" : "hoa.ctrl.encoder",
 									"mode" : 1,
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -9623,7 +9623,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
 									"id" : "obj-4",
-									"maxclass" : "hoa.control",
+									"maxclass" : "hoa.ctrl.encoder",
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"order" : 7,
@@ -13162,7 +13162,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1.0, 2.0, 126.0, 30.0 ],
-									"text" : "hoa.control",
+									"text" : "hoa.ctrl.encoder",
 									"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
 									"varname" : "autohelp_top_title[2]"
 								}
@@ -13179,7 +13179,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1.0, 2.0, 126.0, 30.0 ],
-									"text" : "hoa.control",
+									"text" : "hoa.ctrl.encoder",
 									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
 									"varname" : "autohelp_top_title[1]"
 								}
@@ -13251,7 +13251,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 510.0, 2.0, 285.0, 33.0 ],
-									"text" : "hoa.control by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
+									"text" : "hoa.ctrl.encoder by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
 								}
 
 							}
@@ -13266,7 +13266,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 1.0, 56.0, 674.0, 60.0 ],
-									"text" : "hoa.control~ displays the representation of the harmonics of an encoded ponctual sound for a given order, optimization, azimuth value and wide value. Click and drag to move the azimuth of the dirac and hold shift to widen the dirac. The absolute and relative mode are explain in the \"controler\" subpatcher. It can be used to understand the behavior of the encoding, the optimization and fractionnal order effect (wider) ot to control the \"super encoder\" set.",
+									"text" : "hoa.ctrl.encoder displays the representation of the harmonics of an encoded ponctual sound for a given order, optimization, azimuth value and wide value. Click and drag to move the azimuth of the dirac and hold shift to widen the dirac. The absolute and relative mode are explain in the \"controler\" subpatcher. It can be used to understand the behavior of the encoding, the optimization and fractionnal order effect (wider) ot to control the \"super encoder\" set.",
 									"varname" : "autohelp_top_description"
 								}
 
@@ -18502,7 +18502,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
 									"id" : "obj-1",
-									"maxclass" : "hoa.control",
+									"maxclass" : "hoa.ctrl.encoder",
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "float", "float", "" ],
