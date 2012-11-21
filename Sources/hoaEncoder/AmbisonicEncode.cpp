@@ -17,7 +17,7 @@
  *
  */
 
-#include "AmbisonicEncode.hpp"
+#include "AmbisonicEncode.h"
 
 AmbisonicEncode::AmbisonicEncode(int anOrder, std::string aMode, int aVectorSize)
 {	

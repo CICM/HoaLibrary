@@ -17,12 +17,8 @@
  */
 
 
-#ifndef define DEF_AMBISONICOPTIM
+#ifndef DEF_AmbisonicOptim
 #define DEF_AMBISONICDECODE
-
-#ifndef M_PI
-#define M_PI 3.1415926535897932384626433832795
-#endif
 
 #include <stdio.h>
 #include <iostream>
@@ -30,31 +26,42 @@
 #include <vector>
 #include <string>
 #include <gsl/gsl_sf.h>
+#include "cicmTools.h"
 
-class ambisonicOptim
+class AmbisonicOptim
 {
 	
 private:
-	int m_order;
-	int m_number_of_harmonics;
-	int	m_sampling_rate;
-	int	m_vector_size;
+	long	m_order;
+	long	m_number_of_harmonics;
+	long	m_number_of_inputs;
+	long	m_number_of_outputs;
+	long	m_vector_size;
+
 	std::string m_optimMode;
 	
-	int*		m_index_of_harmonics;
+	long*		m_index_of_harmonics;
 	double*		m_optimVector;
-	
-public:
-	ambisonicOptim(int anOrder, std::string anOptimMode = "basic", int aVectorSize = 0);
-	int	 getParameters(std::string aParameter) const;
+
 	void computeIndex();
-	void setVectorSize(int aVectorSize);
-	void setOptimMode(std::string anOptim);
 	void computeBasicOptim();
 	void computeReOptim();
 	void computeInPhaseOptim();
+	
+public:
+	AmbisonicOptim(long anOrder, std::string anOptimMode = "basic", long aVectorSize = 0);
+	long getOrder();
+	long getNumberOfHarmonics();
+	long getNumberOfInputs();
+	long getNumberOfOutputs();
+	long getVectorSize();
+	std::string getMode();
+	
+	void setVectorSize(long aVectorSize);
+	void setOptimMode(std::string anOptim);
 
-	~ambisonicOptim();
+
+	~AmbisonicOptim();
 	
 	/* Perform sample by sample */
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)

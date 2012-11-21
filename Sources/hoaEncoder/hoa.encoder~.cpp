@@ -17,6 +17,8 @@
  *
  */
 
+#include "AmbisonicEncode.h"
+
 extern "C"
 {
 #include "ext.h"
@@ -24,8 +26,8 @@ extern "C"
 #include "z_dsp.h"
 #include "../hoaHeader.h"
 }
-#include "AmbisonicEncode.hpp"
-//int postons = 0;
+
+
 typedef struct _HoaEncode 
 {
 	t_pxobject					f_ob;			

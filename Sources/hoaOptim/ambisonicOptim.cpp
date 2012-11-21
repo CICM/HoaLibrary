@@ -17,50 +17,50 @@
  */
 
 
-#include "ambisonicOptim.hpp"
+#include "AmbisonicOptim.h"
 
-ambisonicOptim::ambisonicOptim(int anOrder, std::string anOptimMode, int aVectorSize)
+AmbisonicOptim::AmbisonicOptim(long anOrder, std::string anOptimMode, long aVectorSize)
 {
-	m_order					= anOrder;
+	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;
+	m_number_of_inputs		= m_number_of_harmonics;
+	m_number_of_outputs		= m_number_of_harmonics;
 	
-	m_optimVector		= new double[m_number_of_harmonics];
+	m_optimVector			= new double[m_number_of_harmonics];
 	
 	setVectorSize(aVectorSize);
 	computeIndex();
 	setOptimMode(anOptimMode);
 }
 
-	long getOrder();
-	long getNumberOfHarmonics();
-	long getNumberOfInputs();
-	long getNumberOfOutputs();
-	long getVectorSize();
-	std::string getMode();
-
-int	ambisonicOptim::getParameters(std::string aParameter) const
+long AmbisonicOptim::getOrder()
 {
-	int value = 0;
-	
-	if (aParameter == "order") 
-		value = m_order;
-	else if (aParameter == "samplingRate") 
-		value =  m_sampling_rate;
-	else if (aParameter == "vectorSize") 
-		value =  m_vector_size;
-	else if (aParameter == "numberOfHarmonics") 
-		value =  m_number_of_harmonics;
-	else if (aParameter == "numberOfInputs") 
-		value =  m_number_of_harmonics;
-	else if (aParameter == "numberOfOutputs") 
-		value =  m_number_of_harmonics;
-	
-	return value;
+	return m_order;
 }
 
-void ambisonicOptim::computeIndex()
+long AmbisonicOptim::getNumberOfHarmonics()
 {
-	m_index_of_harmonics	= new int[m_number_of_harmonics ];
+	return m_number_of_harmonics;
+}
+
+long AmbisonicOptim::getNumberOfInputs()
+{
+	return m_number_of_inputs;
+}
+
+long AmbisonicOptim::getNumberOfOutputs()
+{
+	return m_number_of_outputs;
+}
+
+long AmbisonicOptim::getVectorSize()
+{
+	return m_vector_size;
+}
+
+void AmbisonicOptim::computeIndex()
+{
+	m_index_of_harmonics	= new long[m_number_of_harmonics ];
 	m_index_of_harmonics[0] = 0;
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
@@ -70,7 +70,7 @@ void ambisonicOptim::computeIndex()
 	}
 }
 
-void ambisonicOptim::setOptimMode(std::string anOptim)
+void AmbisonicOptim::setOptimMode(std::string anOptim)
 {
 	if(anOptim != m_optimMode)
 	{
@@ -83,14 +83,14 @@ void ambisonicOptim::setOptimMode(std::string anOptim)
 	}
 }
 
-void ambisonicOptim::computeBasicOptim()
+void AmbisonicOptim::computeBasicOptim()
 {
 	m_optimMode = "basic"; 
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 		m_optimVector[i] = 1.;
 }
 
-void ambisonicOptim::computeInPhaseOptim()
+void AmbisonicOptim::computeInPhaseOptim()
 {
 	m_optimMode = "inPhase"; 
 	for (int i = 0; i < m_number_of_harmonics; i++) 
@@ -102,7 +102,7 @@ void ambisonicOptim::computeInPhaseOptim()
 	}
 }
 
-void ambisonicOptim::computeReOptim()
+void AmbisonicOptim::computeReOptim()
 {
 	m_optimMode = "maxRe";
 	for (int i = 0; i < m_number_of_harmonics; i++) 
@@ -110,17 +110,17 @@ void ambisonicOptim::computeReOptim()
 		if (i == 0) 
 			m_optimVector[i] = 1.;
 		else 
-			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * M_PI / (2*m_order+2));
+			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * CICM_PI / (2*m_order+2));
 	}
 	
 }
 
-void ambisonicOptim::setVectorSize(int aVectorSize)
+void AmbisonicOptim::setVectorSize(long aVectorSize)
 {
-	m_vector_size = aVectorSize;
+	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
-ambisonicOptim::~ambisonicOptim()
+AmbisonicOptim::~AmbisonicOptim()
 {
 	free(m_index_of_harmonics);
 	free(m_optimVector);

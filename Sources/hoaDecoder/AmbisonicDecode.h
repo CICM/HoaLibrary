@@ -17,12 +17,8 @@
  */
 
 
-#ifndef define DEF_AMBISONICDECODE
-#define DEF_AMBISONICDECODE
-
-#ifndef M_PI
-#define M_PI 3.1415926535897932384626433832795
-#endif
+#ifndef DEF_AmbisonicDecode
+#define DEF_AmbisonicDecode
 
 #include <stdio.h>
 #include <iostream>
@@ -32,19 +28,20 @@
 #include <vector>
 #include <string>
 #include "gslMatrix.hpp"
+#include "cicmTools.h"
 
-class ambisonicDecode
+class AmbisonicDecode
 {
 	
 private:
-	int m_order;
-	int m_number_of_harmonics;
-	int m_number_of_inputs;
-	int m_number_of_outputs;
-	int	m_vector_size;
+	long m_order;
+	long m_number_of_harmonics;
+	long m_number_of_inputs;
+	long m_number_of_outputs;
+	long m_vector_size;
 	
 	double		*m_speakers_angles;
-	int			*m_index_of_harmonics;
+	long		*m_index_of_harmonics;
 	
 	gsl_matrix	*m_decoder_matrix;
 	gsl_vector	*m_input_vector;
@@ -56,14 +53,16 @@ private:
 	void setSpkrsAngles(double* someSpkrsAngles, int size);
 
 public:
-	ambisonicDecode(int anOrder, int aNumberOfChannels = 0, int aVectorSize = 0);
+	AmbisonicDecode(long anOrder, long aNumberOfChannels = 0, long aVectorSize = 0);
+
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
 	long getNumberOfOutputs();
 	long getVectorSize();
+
 	void setVectorSize(int aVectorSize);
-	~ambisonicDecode();
+	~AmbisonicDecode();
 	
 	/* Perform sample by sample */
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)

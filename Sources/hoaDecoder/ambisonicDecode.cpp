@@ -17,55 +17,52 @@
  */
 
 
-#include "ambisonicDecode.hpp"
+#include "AmbisonicDecode.h"
 
-ambisonicDecode::ambisonicDecode(int anOrder,int aNumberOfChannels, int aVectorSize)
+AmbisonicDecode::AmbisonicDecode(long anOrder, long aNumberOfChannels, long aVectorSize)
 {
-	m_order					= anOrder;
+	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_inputs		= m_number_of_harmonics;
-	m_number_of_outputs		= aNumberOfChannels;
+	m_number_of_outputs		= Tools::clip_min(aNumberOfChannels, m_number_of_harmonics);
 	
-	if(m_number_of_outputs < m_number_of_harmonics)
-		m_number_of_outputs = m_number_of_harmonics;
+	m_input_vector		= gsl_vector_alloc(m_number_of_harmonics);
+	m_output_vector		= gsl_vector_alloc(m_number_of_outputs);
 	
-	m_input_vector		= gsl_vector_alloc (m_number_of_harmonics);
-	m_output_vector		= gsl_vector_alloc (m_number_of_outputs);
-	
-	setVectorSize(aVectorSize);
 	computeIndex();
 	computeAngles();
 	computePseudoInverse();
+	setVectorSize(aVectorSize);
 }
 
-long ambisonicDecode::getOrder()
+long AmbisonicDecode::getOrder()
 {
 	return m_order;
 }
 
-long ambisonicDecode::getNumberOfHarmonics()
+long AmbisonicDecode::getNumberOfHarmonics()
 {
 	return m_number_of_harmonics;
 }
 
-long ambisonicDecode::getNumberOfInputs()
+long AmbisonicDecode::getNumberOfInputs()
 {
 	return m_number_of_inputs;
 }
 
-long ambisonicDecode::getNumberOfOutputs()
+long AmbisonicDecode::getNumberOfOutputs()
 {
 	return m_number_of_outputs;
 }
 
-long ambisonicDecode::getVectorSize()
+long AmbisonicDecode::getVectorSize()
 {
 	return m_vector_size;
 }
 
-void ambisonicDecode::computeIndex()
+void AmbisonicDecode::computeIndex()
 {
-	m_index_of_harmonics	= new int[m_number_of_harmonics ];
+	m_index_of_harmonics	= new long[m_number_of_harmonics ];
 	m_index_of_harmonics[0] = 0;
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
@@ -75,16 +72,16 @@ void ambisonicDecode::computeIndex()
 	}
 }
 
-void ambisonicDecode::computeAngles()
+void AmbisonicDecode::computeAngles()
 {
 	m_speakers_angles		= new double[m_number_of_outputs];
 	for(int i = 0; i < m_number_of_outputs; i++)
 	{
-		m_speakers_angles[i] = (2. * M_PI / (double)m_number_of_outputs) * (double)i;
+		m_speakers_angles[i] = (2. * CICM_PI / (double)m_number_of_outputs) * (double)i;
 	}
 }
 
-void ambisonicDecode::computePseudoInverse()
+void AmbisonicDecode::computePseudoInverse()
 {
 	gsl_matrix* reencod_Mat = gsl_matrix_alloc(m_number_of_harmonics, m_number_of_outputs); 
 	
@@ -102,7 +99,7 @@ void ambisonicDecode::computePseudoInverse()
 	gsl_matrix_free(reencod_Mat);
 }
 
-void ambisonicDecode::setSpkrsAngles(double* someSpkrsAngles, int size)
+void AmbisonicDecode::setSpkrsAngles(double* someSpkrsAngles, int size)
 {
 	if (size > m_number_of_outputs) 
 		size = m_number_of_outputs;
@@ -111,15 +108,17 @@ void ambisonicDecode::setSpkrsAngles(double* someSpkrsAngles, int size)
 	computePseudoInverse();
 }
 
-void ambisonicDecode::setVectorSize(int aVectorSize)
+void AmbisonicDecode::setVectorSize(int aVectorSize)
 {
-	m_vector_size = aVectorSize;
+	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
-ambisonicDecode::~ambisonicDecode()
+AmbisonicDecode::~AmbisonicDecode()
 {
 	gsl_matrix_free(m_decoder_matrix);
-	delete m_output_vector;
+	gsl_vector_free(m_input_vector);
+	gsl_vector_free(m_output_vector);
+
 	delete m_index_of_harmonics;
 	delete m_speakers_angles;
 }

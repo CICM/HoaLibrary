@@ -183,10 +183,10 @@
     <ClCompile Include="hoa.encoder~.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AmbisonicEncode.hpp" />
+    <None Include="hoa.encoder~.def" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hoa.encoder~.def" />
+    <ClInclude Include="AmbisonicEncode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

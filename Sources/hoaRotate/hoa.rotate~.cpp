@@ -17,18 +17,19 @@
  *
  */
 
+#include "AmbisonicRotate.h"
+
 extern "C"
 {
 #include "ext.h"
 #include "ext_obex.h"
 #include "z_dsp.h"
 }
-#include "ambisonicRotate.hpp"
 
 typedef struct _HoaRotate 
 {
 	t_pxobject					f_ob;			
-	ambisonicRotate				*f_ambiRotate;
+	AmbisonicRotate				*f_ambiRotate;
 
 	long						f_inputNumber;
 	long						f_outputNumber;
@@ -81,10 +82,10 @@ void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		
-		x->f_ambiRotate = new ambisonicRotate(order, sys_getblksize());
+		x->f_ambiRotate = new AmbisonicRotate(order, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambiRotate->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_ambiRotate->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_ambiRotate->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambiRotate->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -94,18 +95,17 @@ void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaRotate_float(t_HoaRotate *x, double f)
 {
-	x->f_ambiRotate->computeTrigo(f);
+	x->f_ambiRotate->setAzimuth(f);
 }
 
 void HoaRotate_int(t_HoaRotate *x, long n)
 {
-	x->f_ambiRotate->computeTrigo(n);
+	x->f_ambiRotate->setAzimuth(n);
 }
 
 void HoaRotate_dsp64(t_HoaRotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiRotate->setVectorSize(maxvectorsize);
-	x->f_inputNumber = x->f_ambiRotate->getParameters("numberOfInputs");
 	if(count[x->f_inputNumber - 1])
 		object_method(dsp64, gensym("dsp_add64"), x, HoaRotate_perform64, 0, NULL);
 	else
@@ -114,7 +114,7 @@ void HoaRotate_dsp64(t_HoaRotate *x, t_object *dsp64, short *count, double sampl
 
 void HoaRotate_perform64(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiRotate->process(ins, outs, ins[x->f_inputNumber - 1]);
+	x->f_ambiRotate->process(ins, outs, ins[numins - 1]);
 }
 
 void HoaRotate_perform64Offset(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -129,8 +129,8 @@ void HoaRotate_dsp(t_HoaRotate *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
-	x->f_outputNumber = x->f_ambiRotate->getParameters("numberOfOutputs");
-	x->f_inputNumber = x->f_ambiRotate->getParameters("numberOfInputs");
+	x->f_outputNumber = x->f_ambiRotate->getNumberOfOutputs();
+	x->f_inputNumber = x->f_ambiRotate->getNumberOfInputs();
 	x->f_ambiRotate->setVectorSize(sp[0]->s_n);
 	pointer_count = x->f_inputNumber + x->f_outputNumber + 2;
 	

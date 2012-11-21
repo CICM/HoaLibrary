@@ -17,46 +17,53 @@
  *
  */
 
-#ifndef define DEF_AMBIROTATE
-#define DEF_AMBIROTATE
+#ifndef DEF_AmbisonicRotate
+#define DEF_AmbisonicRotate
 
 #include "math.h"
 #include <complex>
 #include <stdio.h>
 #include <vector>
+#include "cicmTools.h"
 
-#define M_PI 3.14159265358979323846264338327950288
-#define M_2PI 2*M_PI
 #define NUMBEROFCIRCLEPOINTS 360000
 
-class ambisonicRotate{
+class AmbisonicRotate{
 	
 private:
-	int m_order;
-	int m_number_of_harmonics;
-	int m_number_of_inputs;
-	int m_number_of_outputs;
-	int	m_sampling_rate;
-	int	m_vector_size;
+	long		m_order;
+	long		m_number_of_harmonics;
+	long		m_number_of_inputs;
+	long		m_number_of_outputs;
+	long		m_vector_size;
 	
-	int			*m_index_of_harmonics;
+	double		m_azimuth;
+	long*		m_index_of_harmonics;
 	double*		m_cosLookUp;
 	double*		m_sinLookUp;
 	double*		m_harmonicSin;
 	double*		m_harmonicCos;
 	
-public:
-	ambisonicRotate(int anOrder, int aVectorSize = 0);
-	int		getParameters(std::string aParameter) const;
 	void	computeIndex();
-	void	setVectorSize(int aVectorSize);
-	void	computeTrigo(double aTheta);
-	~ambisonicRotate();
+	
+public:
+	AmbisonicRotate(long anOrder, long aVectorSize = 0);
+	
+	long getOrder();
+	long getNumberOfHarmonics();
+	long getNumberOfInputs();
+	long getNumberOfOutputs();
+	long getVectorSize();
+	double getAzimuth();
+
+	void setAzimuth(double aTheta);
+	void setVectorSize(long aVectorSize);
+	~AmbisonicRotate();
 	
 	/* Perform sample by sample */
 	template<typename Type> void process(Type* anInput, Type *anOutput, Type aTheta)
 	{
-		computeTrigo(aTheta);
+		setAzimuth(aTheta);
 		process(anInput, anOutput);
 	}
 	
@@ -75,7 +82,7 @@ public:
 	{
 		for(int j = 0; j < m_vector_size; j++)
 		{
-			computeTrigo(aTheta[j]);
+			setAzimuth(aTheta[j]);
 			anOutput[0][j] = anInput[0][j];
 			for (int i = 1; i <= m_order; i++)
 			{
