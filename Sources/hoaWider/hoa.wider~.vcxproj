@@ -183,20 +183,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c" />
-    <ClCompile Include="AmbisonicEncode.cpp" />
-    <ClCompile Include="AmbisonicOptim.cpp" />
-    <ClCompile Include="AmbisonicViewer.cpp" />
     <ClCompile Include="AmbisonicWider.cpp" />
-    <ClCompile Include="hoa.control.cpp" />
+    <ClCompile Include="hoa.wider~.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AmbisonicEncode.h" />
-    <ClInclude Include="AmbisonicOptim.h" />
-    <ClInclude Include="AmbisonicViewer.h" />
+    <None Include="hoa.wider~.def" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="AmbisonicWider.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="hoa.control.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

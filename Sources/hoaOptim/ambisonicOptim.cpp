@@ -31,6 +31,13 @@ ambisonicOptim::ambisonicOptim(int anOrder, std::string anOptimMode, int aVector
 	setOptimMode(anOptimMode);
 }
 
+	long getOrder();
+	long getNumberOfHarmonics();
+	long getNumberOfInputs();
+	long getNumberOfOutputs();
+	long getVectorSize();
+	std::string getMode();
+
 int	ambisonicOptim::getParameters(std::string aParameter) const
 {
 	int value = 0;
