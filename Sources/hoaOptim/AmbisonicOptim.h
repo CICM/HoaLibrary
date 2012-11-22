@@ -17,8 +17,8 @@
  */
 
 
-#ifndef DEF_AmbisonicOptim
-#define DEF_AMBISONICDECODE
+#ifndef DEF_AMBISONICOPTIM
+#define DEF_AMBISONICOPTIM
 
 #include <stdio.h>
 #include <iostream>

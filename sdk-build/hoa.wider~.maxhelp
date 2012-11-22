@@ -7,7 +7,7 @@
 			"revision" : 7
 		}
 ,
-		"rect" : [ -4.0, 81.0, 1366.0, 656.0 ],
+		"rect" : [ 4.0, 81.0, 1366.0, 656.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -318,7 +318,7 @@
 							"revision" : 7
 						}
 ,
-						"rect" : [ 39.0, 183.0, 218.0, 87.0 ],
+						"rect" : [ 47.0, 183.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -788,6 +788,7 @@
 , 							{
 								"box" : 								{
 									"embed" : 1,
+									"hidden" : 1,
 									"id" : "obj-3",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -801,7 +802,7 @@
 											"revision" : 7
 										}
 ,
-										"rect" : [ 43.0, 205.0, 175.0, 67.0 ],
+										"rect" : [ 51.0, 205.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -1567,7 +1568,7 @@
 											"revision" : 7
 										}
 ,
-										"rect" : [ 43.0, 205.0, 179.0, 66.0 ],
+										"rect" : [ 51.0, 205.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -1777,7 +1778,7 @@
 											"revision" : 7
 										}
 ,
-										"rect" : [ 43.0, 205.0, 178.0, 65.0 ],
+										"rect" : [ 51.0, 205.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -2458,7 +2459,6 @@
 , 							{
 								"box" : 								{
 									"embed" : 1,
-									"hidden" : 1,
 									"id" : "obj-22",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -2472,7 +2472,7 @@
 											"revision" : 7
 										}
 ,
-										"rect" : [ 43.0, 205.0, 179.0, 65.0 ],
+										"rect" : [ 51.0, 205.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -3785,8 +3785,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 6.0, 485.0, 30.0 ],
-					"text" : "hoa.stereo~",
+					"patching_rect" : [ 7.0, 4.0, 485.0, 30.0 ],
+					"text" : "hoa.wider~",
 					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
 					"varname" : "autohelp_top_title"
 				}

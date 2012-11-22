@@ -20,11 +20,6 @@
 #ifndef DEF_AMBISONIC_STEREO
 #define DEF_AMBISONIC_STEREO
 
-#ifndef PI
-#define PI 3.1415926535897932384626433832795
-#define TWOPI 3.1415926535897932384626433832795 * 2.
-#endif
-
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
@@ -34,34 +29,46 @@
 #include <vector>
 #include <string>
 #include "AmbisonicEncode.hpp"
+#include "cicmTools.h"
 
-class ambisonicStereo
+class AmbisonicStereo
 {
 	
 private:
-	int			m_order;
-	int			m_number_of_harmonics;
-	int			m_number_of_outputs;
-	int			m_number_of_inputs;
-	int			m_vector_size;
-	double		m_loudspeakers_angle;
-	double		m_axe_angle;
-	double		m_scale_factor;
+	long			m_order;
+	long			m_number_of_harmonics;
+	long			m_number_of_outputs;
+	long			m_number_of_inputs;
+	long			m_vector_size;
+	double			m_loudspeakers_angle1;
+	double			m_loudspeakers_angle2;
+	double			m_scale_factor;
+	double			m_fractional_order;
 
-	int*		m_index_of_harmonics;
+	long*		m_index_of_harmonics;
 	gsl_matrix* m_microphones_matrix;
 	gsl_vector* m_input_vector;
 	gsl_vector* m_output_vector;
 	gsl_vector* m_optim_vector;
 
-public:
-	ambisonicStereo(int anOrder,double anLoudspeakersAngle = 60., double aAxeAngle = 0., int aVectorSize = 0);
-	int		getParameters(std::string aParameter) const;
 	void	computeMicrophones();
 	void	computeIndex();
 	void	computeInPhaseOptim();
+
+public:
+	AmbisonicStereo(long anOrder = 4, double aLoudspeakersAngle1 = 30., double aLoudspeakersAngle2 = 330., long aVectorSize = 0);
+
+	long	getOrder();
+	long	getNumberOfHarmonics();
+	long	getNumberOfInputs();
+	long	getNumberOfOutputs();
+	long	getVectorSize();
+	double	getFractionalOrder();
+	double	getAngle1();
+	double	getAngle2();
+
 	void	setVectorSize(int aVectorSize);
-	~ambisonicStereo();
+	~AmbisonicStereo();
 	
 	/* Perform sample by sample*/
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)

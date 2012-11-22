@@ -17,25 +17,32 @@
  *
  */
 
-#include "ambisonicStereo.h"
+#include "AmbisonicStereo.h"
 
-ambisonicStereo::ambisonicStereo(int anOrder, double anLoudspeakersAngle, double aAxeAngle, int aVectorSize)
+AmbisonicStereo::AmbisonicStereo(long anOrder, double aLoudspeakersAngle1, double aLoudspeakersAngle2, long aVectorSize)
 {
 	m_order					= anOrder;
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_outputs		= 2;
 	m_number_of_inputs		= m_number_of_harmonics;
-	m_loudspeakers_angle	= anLoudspeakersAngle;
-	if(m_loudspeakers_angle < 0.)
-		m_loudspeakers_angle = 0.;
-	else if(m_loudspeakers_angle > 180.)
-		m_loudspeakers_angle = 180.;
+	m_loudspeakers_angle1	= aLoudspeakersAngle1;
+	m_loudspeakers_angle1	= fmod(m_loudspeakers_angle1 + 360., 360.);
+	m_loudspeakers_angle2	= aLoudspeakersAngle2;
+	m_loudspeakers_angle2	= fmod(m_loudspeakers_angle2 + 360., 360);
 
-	m_axe_angle	= aAxeAngle;
-	if(m_axe_angle < 0.)
-		m_axe_angle = 0.;
-	else if(m_axe_angle > 180.)
-		m_axe_angle = 180.;
+	double distance;
+	if(m_loudspeakers_angle2 >= m_loudspeakers_angle1)
+		distance = m_loudspeakers_angle2 - m_loudspeakers_angle1;
+	else 
+		distance = m_loudspeakers_angle1 - m_loudspeakers_angle2;
+
+	if(distance > 180)
+		distance = 360. - distance;
+	distance = 180 - distance;
+
+	distance /= 180.;
+	distance *= 2.919;
+	m_fractional_order = exp(distance);
 
 	m_output_vector	= gsl_vector_alloc (m_number_of_outputs);
 	m_input_vector	= gsl_vector_alloc (m_number_of_harmonics);
@@ -47,9 +54,7 @@ ambisonicStereo::ambisonicStereo(int anOrder, double anLoudspeakersAngle, double
 	
 	AmbisonicEncode* encoder = new AmbisonicEncode(m_order);
 	double* result = new double[m_number_of_harmonics];
-	double aTheta = (((m_loudspeakers_angle / 2.) + m_axe_angle) / 360.) * TWOPI;
-	if(aTheta > TWOPI)
-		aTheta -=TWOPI;
+	double aTheta = (m_loudspeakers_angle1 / 360.) * CICM_2PI;
 
 	encoder->process(1., result, aTheta);
 	for(int j = 0; j < m_number_of_harmonics; j++)
@@ -63,23 +68,49 @@ ambisonicStereo::ambisonicStereo(int anOrder, double anLoudspeakersAngle, double
 	setVectorSize(aVectorSize);
 }
 
-int	ambisonicStereo::getParameters(std::string aParameter) const
+long AmbisonicStereo::getOrder()
 {
-	int value = 0;
-	
-	if (aParameter == "order") 
-		value = m_order;
-	else if (aParameter == "numberOfInputs") 
-		value =  m_number_of_inputs;
-	else if (aParameter == "numberOfOutputs") 
-		value =  m_number_of_outputs;
-	
-	return value;
+	return m_order;
 }
 
-void ambisonicStereo::computeIndex()
+long AmbisonicStereo::getNumberOfHarmonics()
 {
-	m_index_of_harmonics	= new int[m_number_of_harmonics ];
+	return m_number_of_harmonics;
+}
+
+long AmbisonicStereo::getNumberOfInputs()
+{
+	return m_number_of_inputs;
+}
+
+long AmbisonicStereo::getNumberOfOutputs()
+{
+	return m_number_of_outputs;
+}
+
+long AmbisonicStereo::getVectorSize()
+{
+	return m_vector_size;
+}
+
+double AmbisonicStereo::getFractionalOrder()
+{
+	return m_fractional_order;
+}
+
+double AmbisonicStereo::getAngle1()
+{
+	return m_loudspeakers_angle1;
+}
+
+double AmbisonicStereo::getAngle2()
+{
+	return m_loudspeakers_angle2;
+}
+
+void AmbisonicStereo::computeIndex()
+{
+	m_index_of_harmonics	= new long[m_number_of_harmonics ];
 	m_index_of_harmonics[0] = 0;
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
@@ -89,34 +120,41 @@ void ambisonicStereo::computeIndex()
 	}
 }
 
-void ambisonicStereo::computeInPhaseOptim()
+void AmbisonicStereo::computeInPhaseOptim()
 {
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
-		double optim = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
-		if (i == 0) 
-			gsl_vector_set(m_optim_vector, i, 1.);
-		else if(i < 20) 
-			gsl_vector_set(m_optim_vector, i, optim);
-		else 
+		if(abs(m_index_of_harmonics[i]) <= abs(m_fractional_order) + 1)
+		{
+			double optim = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
+			if (i == 0) 
+				gsl_vector_set(m_optim_vector, i, 1.);
+			else if(i < 20) 
+				gsl_vector_set(m_optim_vector, i, optim);
+			else 
+				gsl_vector_set(m_optim_vector, i, 0.);
+		}
+		else
+		{
 			gsl_vector_set(m_optim_vector, i, 0.);
+		}
+		if(abs(m_index_of_harmonics[i]) == abs(m_fractional_order) + 1)
+		{
+			double value = gsl_vector_get(m_optim_vector, i) * m_fractional_order - abs(m_fractional_order);
+			gsl_vector_set(m_optim_vector, i, value);
+		}
 	}
 }
 
-void ambisonicStereo::computeMicrophones()
+void AmbisonicStereo::computeMicrophones()
 {
 	m_microphones_matrix = gsl_matrix_alloc(m_number_of_harmonics, m_number_of_outputs); 
 	double aThetaLeft, aThetaRight;
 	int aIndex;
 	
-	aThetaLeft = (( m_axe_angle + (m_loudspeakers_angle / 2.)) / 360.) * TWOPI;
-	if(aThetaLeft > TWOPI)
-		aThetaLeft -= TWOPI;
-	aThetaRight = (( m_axe_angle - (m_loudspeakers_angle / 2.)) / 360.) * TWOPI;
-	if(aThetaRight > TWOPI)
-		aThetaRight -= TWOPI;
-	else if(aThetaRight < 0.)
-		aThetaRight += TWOPI;
+	aThetaLeft = (m_loudspeakers_angle1 / 360.) * CICM_2PI;
+	aThetaRight = (m_loudspeakers_angle2 / 360.) * CICM_2PI;
+	
 	for (int j = 0; j < m_number_of_harmonics; j++) 
 	{
 		aIndex = (int)((((double)j - 1.) / 2.) + 1.);
@@ -136,12 +174,12 @@ void ambisonicStereo::computeMicrophones()
 	}
 }
 
-void ambisonicStereo::setVectorSize(int aVectorSize)
+void AmbisonicStereo::setVectorSize(int aVectorSize)
 {
 	m_vector_size = aVectorSize;
 }
 
-ambisonicStereo::~ambisonicStereo()
+AmbisonicStereo::~AmbisonicStereo()
 {
 	gsl_matrix_free(m_microphones_matrix);
 	gsl_vector_free(m_input_vector);

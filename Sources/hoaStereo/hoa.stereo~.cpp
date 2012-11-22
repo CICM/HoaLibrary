@@ -17,7 +17,7 @@
  *
  */
 
-#include "ambisonicStereo.h"
+#include "AmbisonicStereo.h"
 
 extern "C"
 {
@@ -29,7 +29,7 @@ extern "C"
 typedef struct _HoaStereo
 {
 	t_pxobject					f_ob;			
-	ambisonicStereo			*f_ambisonicStereo;
+	AmbisonicStereo			*f_AmbisonicStereo;
 
 	int							f_ninputs;
 	int							f_noutputs;
@@ -38,6 +38,7 @@ typedef struct _HoaStereo
 void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv);
 void HoaStereo_free(t_HoaStereo *x);
 void HoaStereo_assist(t_HoaStereo *x, void *b, long m, long a, char *s);
+void HoaStereo_infos(t_HoaStereo *x);
 
 void HoaStereo_dsp(t_HoaStereo *x, t_signal **sp, short *count);
 t_int *HoaStereo_perform(t_int *w);
@@ -56,6 +57,7 @@ int main(void)
 	class_addmethod(c, (method)HoaStereo_dsp,		"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaStereo_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaStereo_assist,	"assist",	A_CANT, 0);
+	class_addmethod(c, (method)HoaStereo_infos,		"infos",	NULL, 0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -69,20 +71,25 @@ void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaStereo *x = NULL;
 	int order = 4;
-	double anAngle = 30.;
+	double anAngle1 = 30.;
+	double anAngle2 = 330.;
 	if (x = (t_HoaStereo *)object_alloc((t_class*)HoaStereo_class)) 
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
 		if(atom_gettype(argv+1) == A_LONG)
-			anAngle	= atom_getlong(argv+1);
+			anAngle1	= atom_getlong(argv+1);
 		else if(atom_gettype(argv+1) == A_FLOAT)
-			anAngle	= atom_getfloat(argv+1);
+			anAngle1	= atom_getfloat(argv+1);
+		if(atom_gettype(argv+2) == A_LONG)
+			anAngle2	= atom_getlong(argv+2);
+		else if(atom_gettype(argv+2) == A_FLOAT)
+			anAngle2	= atom_getfloat(argv+2);
 
-		x->f_ambisonicStereo	= new ambisonicStereo(order, anAngle, sys_getblksize());
+		x->f_AmbisonicStereo	= new AmbisonicStereo(order, anAngle1, anAngle2, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambisonicStereo->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_ambisonicStereo->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicStereo->getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicStereo->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 	
@@ -92,13 +99,13 @@ void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaStereo_dsp64(t_HoaStereo *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonicStereo->setVectorSize(maxvectorsize);
+	x->f_AmbisonicStereo->setVectorSize(maxvectorsize);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaStereo_perform64, 0, NULL);
 }
 
 void HoaStereo_perform64(t_HoaStereo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambisonicStereo->process(ins, outs);
+	x->f_AmbisonicStereo->process(ins, outs);
 }
 
 void HoaStereo_dsp(t_HoaStereo *x, t_signal **sp, short *count)
@@ -107,10 +114,10 @@ void HoaStereo_dsp(t_HoaStereo *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
-	x->f_ninputs = x->f_ambisonicStereo->getParameters("numberOfInputs");
-	x->f_noutputs = x->f_ambisonicStereo->getParameters("numberOfOutputs");
-	x->f_ambisonicStereo->setVectorSize(sp[0]->s_n);
-	pointer_count = x->f_ambisonicStereo->getParameters("numberOfInputs") + x->f_ambisonicStereo->getParameters("numberOfOutputs") + 2;
+	x->f_ninputs = x->f_AmbisonicStereo->getNumberOfInputs();
+	x->f_noutputs = x->f_AmbisonicStereo->getNumberOfOutputs();
+	x->f_AmbisonicStereo->setVectorSize(sp[0]->s_n);
+	pointer_count = x->f_AmbisonicStereo->getNumberOfInputs() + x->f_AmbisonicStereo->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -132,7 +139,7 @@ t_int *HoaStereo_perform(t_int *w)
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= (t_float **)w+3+x->f_ninputs;
 
-	x->f_ambisonicStereo->process(ins, outs);
+	x->f_AmbisonicStereo->process(ins, outs);
 	
 	return (w + x->f_noutputs + x->f_ninputs + 3);
 }
@@ -162,6 +169,13 @@ void HoaStereo_assist(t_HoaStereo *x, void *b, long m, long a, char *s)
 void HoaStereo_free(t_HoaStereo *x)
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_ambisonicStereo);
+	free(x->f_AmbisonicStereo);
+}
+
+void HoaStereo_infos(t_HoaStereo *x)
+{
+	post("hoa.stereo~ informations :");
+	post("Optimization : inPhase");
+	post("Fractional order : %.1f", (float)x->f_AmbisonicStereo->getFractionalOrder());
 }
 

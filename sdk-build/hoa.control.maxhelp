@@ -32,6 +32,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-23",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 776.0, 130.0, 76.5, 20.0 ],
+					"text" : "Look at us :"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
 					"id" : "obj-48",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -9282,7 +9296,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 791.0, 177.0, 65.0, 20.0 ],
+					"patching_rect" : [ 776.0, 150.0, 65.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -9305,6 +9319,7 @@
 					"color" : [ 0.8, 0.839216, 0.709804, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -9618,7 +9633,6 @@
 							}
 , 							{
 								"box" : 								{
-									"azimuth" : 0.177825,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
@@ -10594,7 +10608,7 @@
 														"description" : "",
 														"digest" : "",
 														"tags" : "",
-														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1][1][1][1]",
+														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1][1][1][1][1]",
 														"boxes" : [ 															{
 																"box" : 																{
 																	"fontname" : "Arial",
@@ -10858,7 +10872,7 @@
 														"fontface" : 0,
 														"fontname" : "Arial",
 														"fontsize" : 12.0,
-														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1][1][1][1]",
+														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1][1][1][1][1]",
 														"tags" : ""
 													}
 ,
@@ -14231,7 +14245,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 761.0, 117.0, 47.0, 20.0 ],
+					"patching_rect" : [ 765.0, 120.0, 47.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -19450,7 +19464,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 801.0, 207.0, 45.0, 20.0 ],
+					"patching_rect" : [ 776.0, 180.0, 45.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -19472,6 +19486,7 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"hidden" : 1,
 					"id" : "obj-24",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -19508,7 +19523,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 821.0, 234.0, 50.0, 20.0 ],
+					"patching_rect" : [ 812.5, 210.0, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -19524,6 +19539,18 @@
 ,
 					"text" : "p ?",
 					"varname" : "q_tab"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.666667, 0.666667, 0.666667, 0.0 ],
+					"border" : 1,
+					"id" : "obj-29",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 765.0, 120.0, 97.5, 90.0 ]
 				}
 
 			}
@@ -20295,12 +20322,12 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-13::obj-37" : [ "textedit[1]", "textedit", 0 ],
-			"obj-25::obj-37" : [ "textedit[6]", "textedit", 0 ],
 			"obj-13::obj-19" : [ "textedit", "textedit", 0 ],
-			"obj-16::obj-37" : [ "textedit[5]", "textedit", 0 ],
-			"obj-25::obj-44" : [ "textedit[8]", "textedit", 0 ],
 			"obj-19" : [ "textedit[11]", "textedit", 0 ],
+			"obj-13::obj-37" : [ "textedit[1]", "textedit", 0 ],
+			"obj-25::obj-44" : [ "textedit[8]", "textedit", 0 ],
+			"obj-16::obj-37" : [ "textedit[5]", "textedit", 0 ],
+			"obj-25::obj-37" : [ "textedit[6]", "textedit", 0 ],
 			"obj-37" : [ "textedit[10]", "textedit", 0 ],
 			"obj-16::obj-39" : [ "textedit[7]", "textedit", 0 ]
 		}
