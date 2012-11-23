@@ -90,7 +90,7 @@ double AmbisonicStereo::computeInPhaseFractionalOrder(double aDelta)
 	aDelta /= 2.;
 	aDelta = 90. - aDelta;
 	aDelta /= 90.;
-	aDelta *= 2.919;
+	aDelta *= 3.6;
 	return exp(aDelta);
 }
 

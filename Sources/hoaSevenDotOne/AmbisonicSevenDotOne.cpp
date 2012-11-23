@@ -17,38 +17,45 @@
  *
  */
 
-#include "AmbisonicFiveDotOne.h"
+#include "AmbisonicSevenDotOne.h"
 
-AmbisonicFiveDotOne::AmbisonicFiveDotOne(long anOrder, double aFrontDelta, double aSurroundDelta, long aVectorSize)
+AmbisonicSevenDotOne::AmbisonicSevenDotOne(long anOrder, double aFrontDelta, double aSurroundDelta, double aBackSurroundDelta, long aVectorSize)
 {
 	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;
-	m_number_of_outputs		= 6;
+	m_number_of_outputs		= 8;
 	m_number_of_inputs		= m_number_of_harmonics;
 	m_delta_front			= Tools::clip(aFrontDelta, 0., 90.);
-	m_delta_surround		= Tools::clip(aSurroundDelta, 90., 180.);
+	m_delta_surround		= Tools::clip(aSurroundDelta, 90., 130.);
+	m_delta_back_surround	= Tools::clip(aBackSurroundDelta, 130., 180.);
 
 	m_angle_center			= 0.;
 	m_angle_left			= m_delta_front;
 	m_angle_right			= 360. - m_delta_front;
 	m_angle_left_surround	= m_delta_surround;
 	m_angle_right_surround	= 360. - m_delta_surround;
+	m_angle_left_back_surround	= m_delta_back_surround;
+	m_angle_right_back_surround	= 360. - m_delta_back_surround;
 
 	m_fractional_order_center	= computeInPhaseFractionalOrder(m_delta_front);
 	m_fractional_order_stereo	= computeInPhaseFractionalOrder((m_delta_front + (m_delta_surround - m_delta_front)) / 2.);
-	m_fractional_order_surround = computeInPhaseFractionalOrder(((m_delta_surround - m_delta_front) + (m_angle_right_surround - m_delta_surround)) / 2.);
+	m_fractional_order_surround = computeInPhaseFractionalOrder(((m_delta_surround - m_delta_front) + (m_angle_left_surround - m_delta_back_surround)) / 2.);
+	m_fractional_order_back_surround = computeInPhaseFractionalOrder(((m_angle_left_surround - m_delta_back_surround) + (m_delta_back_surround - m_angle_right_back_surround)) / 2.);
 
 	m_input_vector_center	= gsl_vector_alloc(m_number_of_harmonics);
 	m_input_vector_stereo	= gsl_vector_alloc(m_number_of_harmonics);
 	m_input_vector_surround = gsl_vector_alloc(m_number_of_harmonics);
+	m_input_vector_back_surround = gsl_vector_alloc(m_number_of_harmonics);
 
 	m_output_vector_center	= gsl_vector_alloc(1);
 	m_output_vector_stereo	= gsl_vector_alloc(2);
 	m_output_vector_surround= gsl_vector_alloc(2);
+	m_output_vector_back_surround= gsl_vector_alloc(2);
 
 	m_optim_vector_center	= gsl_vector_alloc(m_number_of_harmonics);
 	m_optim_vector_stereo	= gsl_vector_alloc(m_number_of_harmonics);
 	m_optim_vector_surround	= gsl_vector_alloc(m_number_of_harmonics);
+	m_optim_vector_back_surround= gsl_vector_alloc(m_number_of_harmonics);
 
 	computeIndex();
 	computeMicrophones();
@@ -57,53 +64,59 @@ AmbisonicFiveDotOne::AmbisonicFiveDotOne(long anOrder, double aFrontDelta, doubl
 	m_scale_factor_center = 1.;
 	m_scale_factor_stereo = 1.;
 	m_scale_factor_surround = 1;
+	m_scale_factor_back_surround = 1;
 	m_scale_factor_center = computeScaleFactor(0, m_angle_center);
 	m_scale_factor_stereo = computeScaleFactor(1, m_angle_left);
 	m_scale_factor_surround = computeScaleFactor(2, m_angle_left_surround);
+	m_scale_factor_back_surround = computeScaleFactor(3, m_angle_left_back_surround);
 
 	m_last_sample = 0.;
 	setVectorSize(aVectorSize);
 }
 
-long AmbisonicFiveDotOne::getOrder()
+long AmbisonicSevenDotOne::getOrder()
 {
 	return m_order;
 }
 
-long AmbisonicFiveDotOne::getNumberOfHarmonics()
+long AmbisonicSevenDotOne::getNumberOfHarmonics()
 {
 	return m_number_of_harmonics;
 }
 
-long AmbisonicFiveDotOne::getNumberOfInputs()
+long AmbisonicSevenDotOne::getNumberOfInputs()
 {
 	return m_number_of_inputs;
 }
 
-long AmbisonicFiveDotOne::getNumberOfOutputs()
+long AmbisonicSevenDotOne::getNumberOfOutputs()
 {
 	return m_number_of_outputs;
 }
 
-long AmbisonicFiveDotOne::getVectorSize()
+long AmbisonicSevenDotOne::getVectorSize()
 {
 	return m_vector_size;
 }
 
-double AmbisonicFiveDotOne::getFractionalOrderCenter()
+double AmbisonicSevenDotOne::getFractionalOrderCenter()
 {
 	return m_fractional_order_center;
 }
-double AmbisonicFiveDotOne::getFractionalOrderFront()
+double AmbisonicSevenDotOne::getFractionalOrderFront()
 {
 	return m_fractional_order_stereo;
 }
-double AmbisonicFiveDotOne::getFractionalOrderSurround()
+double AmbisonicSevenDotOne::getFractionalOrderSurround()
 {
 	return m_fractional_order_surround;
 }
+double AmbisonicSevenDotOne::getFractionalOrderBackSurround()
+{
+	return m_fractional_order_back_surround;
+}
 
-double AmbisonicFiveDotOne::computeInPhaseFractionalOrder(double aDelta)
+double AmbisonicSevenDotOne::computeInPhaseFractionalOrder(double aDelta)
 {
 	aDelta /= 2.;
 	aDelta = 90. - aDelta;
@@ -112,7 +125,7 @@ double AmbisonicFiveDotOne::computeInPhaseFractionalOrder(double aDelta)
 	return exp(aDelta);
 }
 
-double AmbisonicFiveDotOne::computeScaleFactor(long anIndex, double anAngle)
+double AmbisonicSevenDotOne::computeScaleFactor(long anIndex, double anAngle)
 {
 	AmbisonicEncode* encoder	= new AmbisonicEncode(m_order);
 	double* inputs				= new double[m_number_of_inputs];
@@ -129,7 +142,7 @@ double AmbisonicFiveDotOne::computeScaleFactor(long anIndex, double anAngle)
 	return result;
 }
 
-void AmbisonicFiveDotOne::computeIndex()
+void AmbisonicSevenDotOne::computeIndex()
 {
 	m_index_of_harmonics	= new int[m_number_of_harmonics];
 	m_index_of_harmonics[0] = 0;
@@ -141,11 +154,12 @@ void AmbisonicFiveDotOne::computeIndex()
 	}
 }
 
-void AmbisonicFiveDotOne::computeFiveDotOneOptim()
+void AmbisonicSevenDotOne::computeFiveDotOneOptim()
 {
 	gsl_vector_set(m_optim_vector_center, 0, 1.);
 	gsl_vector_set(m_optim_vector_stereo, 0, 1.);
 	gsl_vector_set(m_optim_vector_surround, 0, 1.);
+	gsl_vector_set(m_optim_vector_back_surround, 0, 1.);
 	for (int i = 1; i < m_number_of_harmonics; i++) 
 	{
 		/* InPhase optimization */
@@ -163,6 +177,10 @@ void AmbisonicFiveDotOne::computeFiveDotOneOptim()
 				gsl_vector_set(m_optim_vector_surround, i, optim);
 		else
 			gsl_vector_set(m_optim_vector_surround, i, 0.);
+		if(abs(m_index_of_harmonics[i]) <= abs(m_fractional_order_back_surround) + 1)
+				gsl_vector_set(m_optim_vector_back_surround, i, optim);
+		else
+			gsl_vector_set(m_optim_vector_back_surround, i, 0.);
 
 		/* Weight of the fractional order */
 		if(abs(m_index_of_harmonics[i]) == abs(m_fractional_order_center) + 1)
@@ -180,16 +198,23 @@ void AmbisonicFiveDotOne::computeFiveDotOneOptim()
 			double value = gsl_vector_get(m_optim_vector_surround, i) * m_fractional_order_surround - abs(m_fractional_order_surround);
 			gsl_vector_set(m_optim_vector_surround, i, value);
 		}
+		if(abs(m_index_of_harmonics[i]) == abs(m_fractional_order_back_surround) + 1)
+		{
+			double value = gsl_vector_get(m_optim_vector_back_surround, i) * m_fractional_order_back_surround - abs(m_fractional_order_back_surround);
+			gsl_vector_set(m_optim_vector_back_surround, i, value);
+		}
 	}
 }
 
-void AmbisonicFiveDotOne::computeMicrophones()
+void AmbisonicSevenDotOne::computeMicrophones()
 {
 	m_microphones_matrix_center		= gsl_matrix_alloc(m_number_of_harmonics, 1);
 	m_microphones_matrix_stereo		= gsl_matrix_alloc(m_number_of_harmonics, 2); 
 	m_microphones_matrix_surround	= gsl_matrix_alloc(m_number_of_harmonics, 2); 
-
+	m_microphones_matrix_back_surround	= gsl_matrix_alloc(m_number_of_harmonics, 2); 
 	int aIndex;
+	double aThetaLeftBackSurround	= (m_angle_left_back_surround / 360.) * CICM_2PI;
+	double aThetaRightBackSurround	= (m_angle_right_back_surround / 360.) * CICM_2PI;
 	double aThetaLeftSurround	= (m_angle_left_surround / 360.) * CICM_2PI;
 	double aThetaRightSurround	= (m_angle_right_surround / 360.) * CICM_2PI;
 	double aThetaLeft			= (m_angle_left / 360.) * CICM_2PI;
@@ -209,6 +234,8 @@ void AmbisonicFiveDotOne::computeMicrophones()
 			gsl_matrix_set(m_microphones_matrix_stereo, j, 1,sin((double)abs(aIndex) * aThetaRight));
 			gsl_matrix_set(m_microphones_matrix_surround, j, 0,sin((double)abs(aIndex) * aThetaLeftSurround));
 			gsl_matrix_set(m_microphones_matrix_surround, j, 1,sin((double)abs(aIndex) * aThetaRightSurround));
+			gsl_matrix_set(m_microphones_matrix_back_surround, j, 0,sin((double)abs(aIndex) * aThetaLeftBackSurround));
+			gsl_matrix_set(m_microphones_matrix_back_surround, j, 1,sin((double)abs(aIndex) * aThetaRightBackSurround));
 		}
 		else
 		{
@@ -217,32 +244,38 @@ void AmbisonicFiveDotOne::computeMicrophones()
 			gsl_matrix_set(m_microphones_matrix_stereo, j, 1,cos((double)abs(aIndex) * aThetaRight));
 			gsl_matrix_set(m_microphones_matrix_surround, j, 0,cos((double)abs(aIndex) * aThetaLeftSurround));
 			gsl_matrix_set(m_microphones_matrix_surround, j, 1,cos((double)abs(aIndex) * aThetaRightSurround));
+			gsl_matrix_set(m_microphones_matrix_back_surround, j, 0,cos((double)abs(aIndex) * aThetaLeftBackSurround));
+			gsl_matrix_set(m_microphones_matrix_back_surround, j, 1,cos((double)abs(aIndex) * aThetaRightBackSurround));
 		}
 	}
 }
 
-void AmbisonicFiveDotOne::setVectorSize(int aVectorSize)
+void AmbisonicSevenDotOne::setVectorSize(int aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
-AmbisonicFiveDotOne::~AmbisonicFiveDotOne()
+AmbisonicSevenDotOne::~AmbisonicSevenDotOne()
 {
 	gsl_matrix_free(m_microphones_matrix_center);
 	gsl_matrix_free(m_microphones_matrix_stereo);
 	gsl_matrix_free(m_microphones_matrix_surround);
+	gsl_matrix_free(m_microphones_matrix_back_surround);
 
 	gsl_vector_free(m_input_vector_center);
 	gsl_vector_free(m_input_vector_stereo);
 	gsl_vector_free(m_input_vector_surround);
+	gsl_vector_free(m_input_vector_back_surround);
 
 	gsl_vector_free(m_output_vector_center);
 	gsl_vector_free(m_output_vector_stereo);
 	gsl_vector_free(m_output_vector_surround);
+	gsl_vector_free(m_output_vector_back_surround);
 
 	gsl_vector_free(m_optim_vector_center);
 	gsl_vector_free(m_optim_vector_stereo);
 	gsl_vector_free(m_optim_vector_surround);
+	gsl_vector_free(m_optim_vector_back_surround);
 
 	delete m_index_of_harmonics;
 }
