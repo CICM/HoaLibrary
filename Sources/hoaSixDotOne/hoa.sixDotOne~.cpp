@@ -186,7 +186,7 @@ void HoaSevenDotOne_free(t_HoaSevenDotOne *x)
 
 void HoaSevenDotOne_infos(t_HoaSevenDotOne *x)
 {
-	post("hoa.5.1~ informations :");
+	post("hoa.6.1~ informations :");
 	post("Fractional order center channel : %.1f", (float)x->f_AmbisonicSixDotOne->getFractionalOrderCenter());
 	post("Fractional order front channels : %.1f", (float)x->f_AmbisonicSixDotOne->getFractionalOrderFront());
 	post("Fractional order surround channels : %.1f", (float)x->f_AmbisonicSixDotOne->getFractionalOrderSurround());

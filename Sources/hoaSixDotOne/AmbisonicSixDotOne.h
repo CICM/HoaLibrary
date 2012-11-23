@@ -122,7 +122,7 @@ public:
 		gsl_vector_mul(m_input_vector_center, m_optim_vector_center);
 		gsl_vector_mul(m_input_vector_stereo, m_optim_vector_stereo);
 		gsl_vector_mul(m_input_vector_surround, m_optim_vector_surround);
-		gsl_vector_mul(m_input_vector_back_surround, m_optim_vector_surround);
+		gsl_vector_mul(m_input_vector_back_surround, m_optim_vector_back_surround);
 
 		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_center, m_input_vector_center, 0.0, m_output_vector_center);
 		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_stereo, m_input_vector_stereo, 0.0, m_output_vector_stereo);
@@ -134,7 +134,7 @@ public:
 		aOutputs[5] = gsl_vector_get(m_output_vector_stereo, 1) * m_scale_factor_stereo;
 		aOutputs[2] = gsl_vector_get(m_output_vector_surround, 0) * m_scale_factor_surround;
 		aOutputs[4] = gsl_vector_get(m_output_vector_surround, 1) * m_scale_factor_surround;
-		aOutputs[3] = gsl_vector_get(m_output_vector_surround, 0) * m_scale_factor_back_surround;
+		aOutputs[3] = gsl_vector_get(m_output_vector_back_surround, 0) * m_scale_factor_back_surround;
 		aOutputs[6] = 0.;
 		for(int j = 0; j < 6; j++)
 			aOutputs[6] += aOutputs[j];
@@ -160,7 +160,7 @@ public:
 			gsl_vector_mul(m_input_vector_center, m_optim_vector_center);
 			gsl_vector_mul(m_input_vector_stereo, m_optim_vector_stereo);
 			gsl_vector_mul(m_input_vector_surround, m_optim_vector_surround);
-			gsl_vector_mul(m_input_vector_back_surround, m_optim_vector_surround);
+			gsl_vector_mul(m_input_vector_back_surround, m_optim_vector_back_surround);
 
 			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_center, m_input_vector_center, 0.0, m_output_vector_center);
 			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_stereo, m_input_vector_stereo, 0.0, m_output_vector_stereo);
@@ -172,7 +172,7 @@ public:
 			aOutputs[5][i] = gsl_vector_get(m_output_vector_stereo, 1) * m_scale_factor_stereo;
 			aOutputs[2][i] = gsl_vector_get(m_output_vector_surround, 0) * m_scale_factor_surround;
 			aOutputs[4][i] = gsl_vector_get(m_output_vector_surround, 1) * m_scale_factor_surround;
-			aOutputs[3][i] = gsl_vector_get(m_output_vector_surround, 0) * m_scale_factor_back_surround;
+			aOutputs[3][i] = gsl_vector_get(m_output_vector_back_surround, 0) * m_scale_factor_back_surround;
 			aOutputs[6][i] = 0.;
 			for(int j = 0; j < 6; j++)
 				aOutputs[6][i] += aOutputs[j][i];
