@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -17,13 +17,8 @@
  *
  */
 
-#ifndef DEF_AMBISONIC_FIVEDOTONE
-#define DEF_AMBISONIC_FIVEDOTONE
-
-#ifndef PI
-#define PI 3.1415926535897932384626433832795
-#define TWOPI 3.1415926535897932384626433832795 * 2.
-#endif
+#ifndef DEF_AMBISONICFIVEDOTONE
+#define DEF_AMBISONICFIVEDOTONE
 
 #include <stdio.h>
 #include <iostream>
@@ -34,68 +29,106 @@
 #include <vector>
 #include <string>
 #include "AmbisonicEncode.hpp"
+#include "cicmTools.h"
 
-class ambisonicFiveDotOne
+class AmbisonicFiveDotOne
 {
 	
 private:
-	int			m_order;
-	int			m_number_of_harmonics;
-	int			m_number_of_outputs;
-	int			m_number_of_inputs;
-	int			m_vector_size;
-	double		m_angle1;
-	double		m_angle2;
-	double		m_scale_factor_front;
+	long		m_order;
+	long		m_number_of_harmonics;
+	long		m_number_of_outputs;
+	long		m_number_of_inputs;
+	long		m_vector_size;
+	
+	double		m_delta_front;
+	double		m_delta_surround;
+
+	double		m_angle_center;
+	double		m_angle_left;
+	double		m_angle_right;
+	double		m_angle_left_surround;
+	double		m_angle_right_surround;
+
+	double		m_fractional_order_center;
+	double		m_fractional_order_stereo;
+	double		m_fractional_order_surround;
+
+	double		m_scale_factor_center;
+	double		m_scale_factor_stereo;
 	double		m_scale_factor_surround;
+
 	double		m_last_sample;
 
 	int*		m_index_of_harmonics;
-	gsl_matrix* m_microphones_matrix_front;
+
+	gsl_matrix* m_microphones_matrix_center;
+	gsl_matrix* m_microphones_matrix_stereo;
 	gsl_matrix* m_microphones_matrix_surround;
-	gsl_vector* m_input_vector_front;
+
+	gsl_vector* m_input_vector_center;
+	gsl_vector* m_input_vector_stereo;
 	gsl_vector* m_input_vector_surround;
-	gsl_vector* m_output_vector_front;
+
+	gsl_vector* m_output_vector_center;
+	gsl_vector* m_output_vector_stereo;
 	gsl_vector* m_output_vector_surround;
-	gsl_vector* m_optim_vector;
-	
-public:
-	ambisonicFiveDotOne(int anOrder,  double anAngle1 = 30., double anAngle2 = 110., int aVectorSize = 0);
-	int		getParameters(std::string aParameter) const;
+
+	gsl_vector* m_optim_vector_center;
+	gsl_vector* m_optim_vector_stereo;
+	gsl_vector* m_optim_vector_surround;
+
+	double	computeInPhaseFractionalOrder(double aDelta);
+	double	computeScaleFactor(long anIndex, double anAngle);
 	void	computeMicrophones();
 	void	computeIndex();
-	void	computeInPhaseOptim();
+	void	computeFiveDotOneOptim();
+	
+public:
+	AmbisonicFiveDotOne(long anOrder,  double aFrontDelta = 30., double aSurroundDelta = 110., long aVectorSize = 0);
+	
+	long	getOrder();
+	long	getNumberOfHarmonics();
+	long	getNumberOfInputs();
+	long	getNumberOfOutputs();
+	long	getVectorSize();
+	double	getFractionalOrderCenter();
+	double	getFractionalOrderFront();
+	double	getFractionalOrderSurround();
+
 	void	setVectorSize(int aVectorSize);
-	~ambisonicFiveDotOne();
+	~AmbisonicFiveDotOne();
 	
 	/* Perform sample by sample*/
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{	
 		for(int j = 0; j < m_number_of_harmonics; j++)
-			gsl_vector_set(m_input_vector_front, j, aInputs[j]);
-		
-		gsl_vector_mul(m_input_vector_front, m_optim_vector);
-		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_front, m_input_vector_front, 0.0, m_output_vector_front);
-		gsl_vector_set(m_input_vector_surround, 0, gsl_vector_get(m_input_vector_front, 0));
-		gsl_vector_set(m_input_vector_surround, 1, gsl_vector_get(m_input_vector_front, 1) * 2. / 3.);
-		gsl_vector_set(m_input_vector_surround, 2, gsl_vector_get(m_input_vector_front, 2) * 2. / 3.);
+		{
+			gsl_vector_set(m_input_vector_center, j, aInputs[j]);
+			gsl_vector_set(m_input_vector_stereo, j, aInputs[j]);
+			gsl_vector_set(m_input_vector_surround, j, aInputs[j]);
+		}
+
+		gsl_vector_mul(m_input_vector_center, m_optim_vector_center);
+		gsl_vector_mul(m_input_vector_stereo, m_optim_vector_stereo);
+		gsl_vector_mul(m_input_vector_surround, m_optim_vector_surround);
+
+		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_center, m_input_vector_center, 0.0, m_output_vector_center);
+		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_stereo, m_input_vector_stereo, 0.0, m_output_vector_stereo);
 		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_surround, m_input_vector_surround, 0.0, m_output_vector_surround);
 
+		aOutputs[0] = gsl_vector_get(m_output_vector_center, 0) * m_scale_factor_center;
+		aOutputs[1] = gsl_vector_get(m_output_vector_stereo, 0) * m_scale_factor_stereo;
+		aOutputs[4] = gsl_vector_get(m_output_vector_stereo, 1) * m_scale_factor_stereo;
+		aOutputs[2] = gsl_vector_get(m_output_vector_surround, 0) * m_scale_factor_surround;
+		aOutputs[3] = gsl_vector_get(m_output_vector_surround, 1) * m_scale_factor_surround;
 		aOutputs[5] = 0.;
-		for(int j = 0; j < 3; j++)
-		{
-			aOutputs[j] = m_scale_factor_front * gsl_vector_get(m_output_vector_front, j);
+		for(int j = 0; j < 5; j++)
 			aOutputs[5] += aOutputs[j];
-		}
-		for(int j = 0; j < 2; j++)
-		{
-			aOutputs[j+3] = m_scale_factor_surround * gsl_vector_get(m_output_vector_surround, j);
-			aOutputs[5] += aOutputs[j];
-		}
 		aOutputs[5] /= 5.;
-		aOutputs[5] *= -0.982904;
-		aOutputs[5] -= 0.017096 * m_last_sample;
-		m_last_sample = aOutputs[5];
+		aOutputs[5] *= 0.017096;
+		aOutputs[5] -= m_last_sample;
+		m_last_sample = -0.982904 * aOutputs[5];
 	}	
 	
 	/* Perform block samples */
@@ -104,32 +137,33 @@ public:
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				gsl_vector_set(m_input_vector_front, j, aInputs[j][i]);
-		
-			gsl_vector_mul(m_input_vector_front, m_optim_vector);
-			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_front, m_input_vector_front, 0.0, m_output_vector_front);
+			{
+				gsl_vector_set(m_input_vector_center, j, aInputs[j][i]);
+				gsl_vector_set(m_input_vector_stereo, j, aInputs[j][i]);
+				gsl_vector_set(m_input_vector_surround, j, aInputs[j][i]);
+			}
 
-			gsl_vector_set(m_input_vector_surround, 0, gsl_vector_get(m_input_vector_front, 0));
-			gsl_vector_set(m_input_vector_surround, 1, gsl_vector_get(m_input_vector_front, 1) * 2. / 3.);
-			gsl_vector_set(m_input_vector_surround, 2, gsl_vector_get(m_input_vector_front, 2) * 2. / 3.);
+			gsl_vector_mul(m_input_vector_center, m_optim_vector_center);
+			gsl_vector_mul(m_input_vector_stereo, m_optim_vector_stereo);
+			gsl_vector_mul(m_input_vector_surround, m_optim_vector_surround);
+
+			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_center, m_input_vector_center, 0.0, m_output_vector_center);
+			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_stereo, m_input_vector_stereo, 0.0, m_output_vector_stereo);
 			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix_surround, m_input_vector_surround, 0.0, m_output_vector_surround);
 
+			aOutputs[0][i] = gsl_vector_get(m_output_vector_center, 0) * m_scale_factor_center;
+			aOutputs[1][i] = gsl_vector_get(m_output_vector_stereo, 0) * m_scale_factor_stereo;
+			aOutputs[4][i] = gsl_vector_get(m_output_vector_stereo, 1) * m_scale_factor_stereo;
+			aOutputs[2][i] = gsl_vector_get(m_output_vector_surround, 0) * m_scale_factor_surround;
+			aOutputs[3][i] = gsl_vector_get(m_output_vector_surround, 1) * m_scale_factor_surround;
 			aOutputs[5][i] = 0.;
-			for(int j = 0; j < 3; j++)
-			{
-				aOutputs[j][i] = m_scale_factor_front * gsl_vector_get(m_output_vector_front, j);
+			for(int j = 0; j < 5; j++)
 				aOutputs[5][i] += aOutputs[j][i];
-			}
-			for(int j = 0; j < 2; j++)
-			{
-				aOutputs[j+3][i] = m_scale_factor_surround * gsl_vector_get(m_output_vector_surround, j);
-				aOutputs[5][i] += aOutputs[j+3][i];
-			}
 			aOutputs[5][i] /= 5.;
-			aOutputs[5][i] *= -0.982904;
-			aOutputs[5][i] = -0.017096 * m_last_sample;
-			m_last_sample = aOutputs[5][i];
-		}
+			aOutputs[5][i] *= 0.017096;
+			aOutputs[5][i] -= m_last_sample;
+			m_last_sample = -0.982904 * aOutputs[5][i];
+		}	
 	}	
 };
 

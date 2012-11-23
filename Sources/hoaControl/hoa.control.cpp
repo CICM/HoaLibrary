@@ -17,8 +17,10 @@
  *
  */
 
-#include "AmbisonicEncode.hpp"
+#include "AmbisonicEncode.h"
 #include "AmbisonicViewer.h"
+#include "AmbisonicOptim.h"
+#include "AmbisonicWider.h"
 #include "cicmTools.h"
 
 extern "C"
@@ -35,17 +37,24 @@ extern "C"
 typedef struct  _control 
 {
 	t_jbox		j_box;
-	void*		f_deltaOut;
-	void*		f_angleOut;
+	void*		f_outAzimuth;
+	void*		f_outWide;
+	void*		f_outInfos;
 
-	int			f_order;
-	
+	long		f_mode;
+	long		f_order;
+	long		f_optimMode;
+	double		f_azimuth;
+	double		f_azimuthOffset;
+	double		f_wide;
+	double		f_wideOffset;
+
 	t_jrgba		f_colorBackground;
 	t_jrgba		f_colorText;
 	t_jrgba		f_colorCircle;
 	t_jrgba		f_colorNegatif;
 	t_jrgba		f_colorPositif;
-	t_jrgba		f_colorEnergy;
+	t_jrgba		f_colorContrib;
 
 	t_rect		f_center;
 	double		f_rayonGlobal;
@@ -55,7 +64,10 @@ typedef struct  _control
 
 	AmbisonicEncode* f_encoder;
 	AmbisonicViewer* f_viewer;
+	AmbisonicOptim*	 f_optim;
+	AmbisonicWider*	 f_wider;
 	double*			 f_harmonicsValues;
+
 } t_control;
 
 t_class *control_class;
@@ -66,18 +78,20 @@ void control_assist(t_control *x, void *b, long m, long a, char *s);
 
 t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv);
+t_max_err optim_set(t_control *x, t_object *attr, long argc, t_atom *argv);
+t_max_err wide_set(t_control *x, t_object *attr, long argc, t_atom *argv);
+t_max_err azimuth_set(t_control *x, t_object *attr, long argc, t_atom *argv);
 /* Interaction ***************************************/
-void control_mousedown(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
-void control_mousedrag(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
-void conrol_compute(t_control *x, double angle);
-void conrol_azimuth(t_control *x, double angle);
+void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
+void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
+void conrol_compute(t_control *x);
+
 /* Paint *********************************************/
 void control_paint(t_control *x, t_object *view);
 void draw_background(t_control *x, t_object *view, t_rect *rect);
 void draw_angle(t_control *x,  t_object *view, t_rect *rect);
 void draw_harmonics(t_control *x,  t_object *view, t_rect *rect);
 void draw_biggest_contribution(t_control *x, t_object *view, t_rect *rect);
-void draw_wide(t_control *x,  t_object *view, t_rect *rect);
 
 int main()
 {
@@ -91,25 +105,57 @@ int main()
 	class_addmethod(c, (method)control_assist,		"assist",		A_CANT,	0);
 	class_addmethod(c, (method)control_paint,		"paint",		A_CANT,	0);
 	class_addmethod(c, (method)control_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)conrol_azimuth,		"azimuth",		A_FLOAT, 0);
-	//class_addmethod(c, (method)NULL,		"wide",			A_FLOAT, 0);
-
-	class_addmethod(c, (method)control_mousedown,	"mousedown",	A_CANT, 0);
-	class_addmethod(c, (method)control_mousedrag,	"mousedrag",	A_CANT, 0);
+	class_addmethod(c, (method)control_mouse_down,	"mousedown",	A_CANT, 0);
+	class_addmethod(c, (method)control_mouse_drag,	"mousedrag",	A_CANT, 0);
 	
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
 
 	CLASS_ATTR_LONG					(c, "order", 0, t_control, f_order);
-	CLASS_ATTR_CATEGORY				(c, "order", 0, "Value");
+	CLASS_ATTR_CATEGORY				(c, "order", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "order", 0, "1");
 	CLASS_ATTR_LABEL				(c, "order", 0, "Ambisonic Order");
 	CLASS_ATTR_ACCESSORS			(c, "order", NULL, order_set);
 	CLASS_ATTR_FILTER_MIN			(c, "order", 1);
-	CLASS_ATTR_DEFAULT				(c, "order", 0, "3");
+	CLASS_ATTR_DEFAULT				(c, "order", 0, "4");
 	CLASS_ATTR_SAVE					(c, "order", 1);
+
+	CLASS_ATTR_LONG					(c, "optim", 0, t_control, f_optimMode);
+	CLASS_ATTR_CATEGORY				(c, "optim", 0, "Behavior");
+	CLASS_ATTR_ORDER				(c, "optim", 0, "2");
+	CLASS_ATTR_ENUMINDEX			(c, "optim", 0, "basic \" \"maxRe \" \"inPhase");
+	CLASS_ATTR_LABEL				(c, "optim", 0, "Ambisonic Optimization");
+	CLASS_ATTR_ACCESSORS			(c, "optim", NULL, optim_set);
+	CLASS_ATTR_DEFAULT				(c, "optim", 0, "0");
+	CLASS_ATTR_SAVE					(c, "optim", 1);
 	
+	CLASS_ATTR_DOUBLE				(c, "wide", 0, t_control, f_wide);
+	CLASS_ATTR_CATEGORY				(c, "wide", 0, "Behavior");
+	CLASS_ATTR_ORDER				(c, "wide", 0, "3");
+	CLASS_ATTR_LABEL				(c, "wide", 0, "Wide value");
+	CLASS_ATTR_ACCESSORS			(c, "wide", NULL, wide_set);
+	CLASS_ATTR_FILTER_CLIP			(c, "wide", 0., 1.);
+	CLASS_ATTR_DEFAULT				(c, "wide", 0, "1.");
+	CLASS_ATTR_SAVE					(c, "wide", 1);
+
+	CLASS_ATTR_DOUBLE				(c, "azimuth", 0, t_control, f_azimuth);
+	CLASS_ATTR_CATEGORY				(c, "azimuth", 0, "Behavior");
+	CLASS_ATTR_ORDER				(c, "azimuth", 0, "4");
+	CLASS_ATTR_LABEL				(c, "azimuth", 0, "Azimuth value");
+	CLASS_ATTR_ACCESSORS			(c, "azimuth", NULL, azimuth_set);
+	CLASS_ATTR_DEFAULT				(c, "azimuth", 0, "0.");
+	CLASS_ATTR_SAVE					(c, "azimuth", 1);
+
+	CLASS_ATTR_LONG					(c, "mode", 0, t_control, f_mode);
+	CLASS_ATTR_CATEGORY				(c, "mode", 0, "Behavior");
+	CLASS_ATTR_ORDER				(c, "mode", 0, "5");
+	CLASS_ATTR_ENUMINDEX			(c, "mode", 0, "Absolute \" \"Relative");
+	CLASS_ATTR_LABEL				(c, "mode", 0, "Interaction mode");
+	CLASS_ATTR_FILTER_CLIP			(c, "wide", 0, 1);
+	CLASS_ATTR_DEFAULT				(c, "mode", 0, "0.");
+	CLASS_ATTR_SAVE					(c, "mode", 1);
+
 	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_control, f_colorBackground);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
@@ -145,12 +191,12 @@ int main()
 	CLASS_ATTR_ORDER				(c, "nhcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "nhcolor", 0, "1. 0. 0. 1.");
 	
-	CLASS_ATTR_RGBA					(c, "encolor", 0, t_control, f_colorEnergy);
-	CLASS_ATTR_CATEGORY				(c, "encolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "encolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "encolor", 0, "Energy vector color");
-	CLASS_ATTR_ORDER				(c, "encolor", 0, "6");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "encolor", 0, "0. 0. 0. 1.");
+	CLASS_ATTR_RGBA					(c, "cocolor", 0, t_control, f_colorContrib);
+	CLASS_ATTR_CATEGORY				(c, "cocolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "cocolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "cocolor", 0, "Biggest contribution color");
+	CLASS_ATTR_ORDER				(c, "cocolor", 0, "6");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cocolor", 0, "0. 0. 0. 1.");
 
 	class_register(CLASS_BOX, c);
 	control_class = c;
@@ -175,28 +221,29 @@ void *control_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_TRANSPARENT	
 			| JBOX_GROWY
 			;
+
+	x->f_encoder			= new AmbisonicEncode(x->f_order);
+	x->f_viewer				= new AmbisonicViewer(x->f_order);
+	x->f_optim				= new AmbisonicOptim(x->f_order);
+	x->f_wider				= new AmbisonicWider(x->f_order);
+	x->f_harmonicsValues	= new double[x->f_order * 2 + 1];
+
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
-	x->f_deltaOut = floatout((t_object *)x);
-	x->f_angleOut = floatout((t_object *)x);
+
+	x->f_outInfos	= outlet_new(x, NULL);
+	x->f_outWide	= floatout((t_object *)x);
+	x->f_outAzimuth = floatout((t_object *)x);
+
 	attr_dictionary_process(x, d);
 
-	x->f_encoder = new AmbisonicEncode(x->f_order);
-	x->f_viewer = new AmbisonicViewer(x->f_order);
-	x->f_harmonicsValues = new double[x->f_order * 2 + 1];
-	conrol_compute(x, 0.);
+	x->f_azimuth= 0.;
+	x->f_wide = 1.;
+	conrol_compute(x);
 	jbox_ready((t_jbox *)x);
 	
 	return (x);
 }			
-
-void control_tick(t_control *x)
-{
-	
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-	jbox_redraw((t_jbox *)x);
-}
 
 void control_free(t_control *x)
 {
@@ -204,20 +251,24 @@ void control_free(t_control *x)
 	free(x->f_harmonicsValues);
 	delete x->f_encoder;
 	delete x->f_viewer;
+	delete x->f_optim;
+	delete x->f_wider;
 }
 
 void control_assist(t_control *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) 
 	{
-		sprintf(s,"(Anything) Order or color"); 
+		sprintf(s,"(Anything) Behavior and color messages"); 
 	}
 	else
 	{
 		if (a == 0)
-			sprintf(s,"(Float) Wider value"); 
+			sprintf(s,"(Float) Azimuth value"); 
+		else if(a == 1)
+			sprintf(s,"(Float) Wide value");
 		else
-			sprintf(s,"(Float) Azimuth value");
+			sprintf(s,"(Messages) Infos");
 	}
 }
 
@@ -235,11 +286,14 @@ t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender,
 		else if(name == gensym("txcolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("angle_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
 		}
-		else if(name == gensym("hacolor"))
+		else if(name == gensym("nhcolor") || name == gensym("phcolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+		}
+		else if(name == gensym("cocolor"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
 		}
 		jbox_redraw((t_jbox *)x);
 	}
@@ -266,7 +320,6 @@ void control_paint(t_control *x, t_object *view)
 	draw_angle(x, view, &rect);
 	draw_harmonics(x, view, &rect);
 	draw_biggest_contribution(x, view, &rect);
-	draw_wide(x, view, &rect);
 }
 
 void draw_background(t_control *x,  t_object *view, t_rect *rect)
@@ -356,16 +409,27 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 		if(x->f_viewer->getBiggestContribution() != 0.)
 		{
 			double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
+			jgraphics_set_source_jrgba(g, &x->f_colorPositif);
+			jgraphics_move_to(g, x->f_viewer->getAbscisseValue(0) * factor, x->f_viewer->getOrdinateValue(0) * factor );
 			for(int i = 1; i < NUMBEROFCIRCLEPOINTS; i++)
 			{
-				if(x->f_viewer->getColor(i) == 1)
-					jgraphics_set_source_jrgba(g, &x->f_colorPositif);
-				else
-					jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
-				jgraphics_move_to(g, x->f_viewer->getAbscisseValue(i-1) * factor, x->f_viewer->getOrdinateValue(i-1) * factor );
-				jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
-				jgraphics_stroke(g);
+				if(x->f_viewer->getColor(i) == 1 && x->f_viewer->getColor(i - 1) == 1)
+					jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
+				else if(x->f_viewer->getColor(i) == 1 && x->f_viewer->getColor(i - 1) == -1)
+					jgraphics_move_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
 			}
+			jgraphics_stroke(g);
+
+			jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
+			jgraphics_move_to(g, x->f_viewer->getAbscisseValue(0) * factor, x->f_viewer->getOrdinateValue(0) * factor );
+			for(int i = 1; i < NUMBEROFCIRCLEPOINTS; i++)
+			{
+				if(x->f_viewer->getColor(i) == -1 && x->f_viewer->getColor(i - 1) == -1)
+					jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
+				else if(x->f_viewer->getColor(i) == -1 && x->f_viewer->getColor(i - 1) == 1)
+					jgraphics_move_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
+			}
+			jgraphics_stroke(g);
 		}
 		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
 	}
@@ -385,71 +449,118 @@ void draw_biggest_contribution(t_control *x,  t_object *view, t_rect *rect)
 		if(x->f_viewer->getBiggestContribution() != 0.)
 		{
 			double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
-			jgraphics_set_source_jrgba(g, &x->f_colorEnergy);
-			jgraphics_move_to(g, 0., 0.);
-			jgraphics_line_to(g, x->f_viewer->getAbscisseValue(x->f_viewer->getBiggestContributionIndex()) * factor, x->f_viewer->getOrdinateValue(x->f_viewer->getBiggestContributionIndex()) * factor);
-			jgraphics_stroke(g);
+			jgraphics_set_source_jrgba(g, &x->f_colorContrib);
+			jgraphics_arc(g, x->f_viewer->getAbscisseValue(x->f_viewer->getBiggestContributionIndex()) * factor, x->f_viewer->getOrdinateValue(x->f_viewer->getBiggestContributionIndex()) * factor, 
+				3.,  0., JGRAPHICS_2PI);
+			jgraphics_fill(g);
 		}
 		jbox_end_layer((t_object*)x, view, gensym("biggest_contribution_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("biggest_contribution_layer"), 0., 0.);
 }
 
-void draw_wide(t_control *x,  t_object *view, t_rect *rect)
+void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("biggest_ditance_layer"), rect->width, rect->height);
-
-	if (g) 
+	#ifdef WIN_VERSION
+		long shift = 18;
+	#endif
+	#ifdef MAC_VERSION
+		long shift = 2;
+	#endif
+	t_atom argv[1];
+	if(modifiers != shift)
 	{
-		t_jmatrix transform;
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-		jgraphics_set_matrix(g, &transform);
-
-		if(x->f_viewer->getBiggestContribution() != 0.)
+		if(x->f_mode == 0)
 		{
-			double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
-			jgraphics_set_source_jrgba(g, &x->f_colorEnergy);
-			jgraphics_move_to(g, x->f_viewer->getAbscisseValue(x->f_viewer->getBiggestDistanceIndex1()) * factor, x->f_viewer->getOrdinateValue(x->f_viewer->getBiggestDistanceIndex1()) * factor);
-			jgraphics_line_to(g, x->f_viewer->getAbscisseValue(x->f_viewer->getBiggestDistanceIndex2()) * factor, x->f_viewer->getOrdinateValue(x->f_viewer->getBiggestDistanceIndex2()) * factor);
-			jgraphics_stroke(g);
+			double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			atom_setfloat(argv, angle);
+			object_method(x, gensym("azimuth"), 1, argv);
 		}
-		jbox_end_layer((t_object*)x, view, gensym("biggest_ditance_layer"));
+		else
+		{
+			x->f_azimuthOffset = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			double angle = x->f_azimuth;
+			atom_setfloat(argv, angle);
+			object_method(x, gensym("azimuth"), 1, argv);
+		}
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("biggest_ditance_layer"), 0., 0.);
+	else
+	{
+		if(x->f_mode == 0)
+		{
+			double radius = Tools::radius((pt.x - x->f_center.x) / (x->f_rayonGlobal * 5. / 6.), (pt.y - x->f_center.y) / (x->f_rayonGlobal * 5. / 6.));
+			atom_setfloat(argv, radius);
+			object_method(x, gensym("wide"), 1, argv);
+		}
+		else
+		{
+			x->f_wideOffset = Tools::radius(pt.x / x->f_rayonGlobal, (x->f_rayonGlobal * 2. - pt.y) / x->f_rayonGlobal);
+			double radius = x->f_wide;
+			atom_setfloat(argv, radius);
+			object_method(x, gensym("wide"), 1, argv);
+		}
+	}
 }
 
-void control_mousedown(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
+void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-	double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
-	conrol_azimuth(x, angle);
+	#ifdef WIN_VERSION
+		long shift = 18;
+	#endif
+	#ifdef MAC_VERSION
+		long shift = 2;
+	#endif
+	t_atom argv[1];
+	if(modifiers != shift)
+	{
+		if(x->f_mode == 0)
+		{
+			double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			atom_setfloat(argv, angle);
+			object_method(x, gensym("azimuth"), 1, argv);
+		}
+		else
+		{
+			double newAngle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			double offset = newAngle - x->f_azimuthOffset;
+			x->f_azimuthOffset = newAngle;
+			double angle = x->f_azimuth + offset;
+			atom_setfloat(argv, angle);
+			object_method(x, gensym("azimuth"), 1, argv);
+		}
+	}
+	else
+	{
+		if(x->f_mode == 0)
+		{
+			double radius = Tools::radius((pt.x - x->f_center.x) / (x->f_rayonGlobal * 5. / 6.), (pt.y - x->f_center.y) / (x->f_rayonGlobal * 5. / 6.));
+			atom_setfloat(argv, radius);
+			object_method(x, gensym("wide"), 1, argv);
+		}
+		else
+		{
+			double newRadius = Tools::radius(pt.x / x->f_rayonGlobal, (x->f_rayonGlobal * 2. - pt.y) / x->f_rayonGlobal);
+			double offset = newRadius - x->f_wideOffset;
+			x->f_wideOffset = newRadius;
+			double radius = x->f_wide + offset;
+			atom_setfloat(argv, radius);
+			object_method(x, gensym("wide"), 1, argv);
+		}
+	}
 }
 
-void control_mousedrag(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
+void conrol_compute(t_control *x)
 {
-	double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
-	conrol_azimuth(x, angle);
-}
-
-void conrol_compute(t_control *x, double angle)
-{
+	double angle = x->f_azimuth;
 	if(angle > JGRAPHICS_2PI)
 		angle -= JGRAPHICS_2PI;
 	else if(angle < 0.)
 		angle += JGRAPHICS_2PI;
-	outlet_float(x->f_deltaOut, angle);
+	
 	x->f_encoder->process(1., x->f_harmonicsValues, angle - JGRAPHICS_PIOVER2);
+	x->f_wider->process(x->f_harmonicsValues, x->f_harmonicsValues, x->f_wide);
+	x->f_optim->process(x->f_harmonicsValues, x->f_harmonicsValues);
 	x->f_viewer->process(x->f_harmonicsValues);
-	outlet_float(x->f_angleOut, x->f_viewer->getBiggestDistance());
-}
-
-void conrol_azimuth(t_control *x, double angle)
-{
-	conrol_compute(x, angle);
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_ditance_layer"));
-	jbox_redraw((t_jbox *)x);
 }
 
 t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv)
@@ -460,17 +571,99 @@ t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 		{
 			delete x->f_encoder;
 			delete x->f_viewer;
+			delete x->f_optim;
+			delete x->f_wider;
 			x->f_order = atom_getlong(argv);
-			x->f_encoder = new AmbisonicEncode(x->f_order);
-			x->f_viewer = new AmbisonicViewer(x->f_order);
+			x->f_encoder	= new AmbisonicEncode(x->f_order);
+			x->f_optim		= new AmbisonicOptim(x->f_order);
+			x->f_wider		= new AmbisonicWider(x->f_order);
+			x->f_viewer		= new AmbisonicViewer(x->f_order);
 			x->f_harmonicsValues = new double[x->f_order * 2 + 1];
 
-			conrol_compute(x, 0.);
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
+			std::string optimMode = "basic";
+			if(x->f_optimMode == 1)
+				optimMode = "maxRe";
+			else if(x->f_optimMode == 2)
+				optimMode = "inPhase";
+			x->f_optim->setOptimMode(optimMode);
+
+			conrol_compute(x);
+
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
 			jbox_redraw((t_jbox *)x);
 		}
+	}
+	return 0;
+}
+
+t_max_err optim_set(t_control *x, t_object *attr, long argc, t_atom *argv)
+{
+	if (atom_gettype(argv) == A_LONG)
+	{
+		post(" %ld", atom_getlong(argv));
+		if(atom_getlong(argv) != x->f_optimMode)
+		{
+			t_atom mode[1];
+			std::string optimMode;
+			if(atom_getlong(argv) == 1)
+			{
+				atom_setsym(mode, gensym("maxRe"));
+				optimMode = "maxRe";
+				x->f_optimMode = 1;
+			}
+			else if(atom_getlong(argv) == 2)
+			{
+				atom_setsym(mode, gensym("inPhase"));
+				optimMode = "inPhase";
+				x->f_optimMode = 2;
+			}
+			else
+			{
+				atom_setsym(mode, gensym("basic"));
+				optimMode = "basic";
+				x->f_optimMode = 0;
+			}
+		
+			x->f_optim->setOptimMode(optimMode);
+
+			conrol_compute(x);
+			outlet_anything(x->f_outInfos, gensym("optim"), 1, mode);
+
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
+			jbox_redraw((t_jbox *)x);
+		}
+	}
+	return 0;
+}
+
+t_max_err wide_set(t_control *x, t_object *attr, long argc, t_atom *argv)
+{
+	if (atom_gettype(argv) == A_FLOAT)
+	{
+		x->f_wide = atom_getfloat(argv);
+		conrol_compute(x);
+		outlet_float(x->f_outWide, x->f_wide);
+
+		jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+		jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
+		jbox_redraw((t_jbox *)x);
+	}
+	return 0;
+}
+
+t_max_err azimuth_set(t_control *x, t_object *attr, long argc, t_atom *argv)
+{
+	if (atom_gettype(argv) == A_FLOAT)
+	{
+		x->f_azimuth = fmod(atom_getfloat(argv) + JGRAPHICS_2PI, JGRAPHICS_2PI);
+		conrol_compute(x);
+		outlet_float(x->f_outAzimuth, x->f_azimuth);
+
+		jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+		jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
+		jbox_redraw((t_jbox *)x);
 	}
 	return 0;
 }

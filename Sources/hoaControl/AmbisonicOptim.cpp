@@ -16,7 +16,7 @@
  *
  */
 
-
+#include "cicmTools.h"
 #include "AmbisonicOptim.h"
 
 AmbisonicOptim::AmbisonicOptim(long anOrder, std::string anOptimMode, long aVectorSize)
@@ -25,11 +25,10 @@ AmbisonicOptim::AmbisonicOptim(long anOrder, std::string anOptimMode, long aVect
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_inputs		= m_number_of_harmonics;
 	m_number_of_outputs		= m_number_of_harmonics;
-	
-	m_optimVector			= new double[m_number_of_harmonics];
-	
-	setVectorSize(aVectorSize);
+
+	m_optim_vector		= new double[m_number_of_harmonics];
 	computeIndex();
+	setVectorSize(aVectorSize);
 	setOptimMode(anOptimMode);
 }
 
@@ -58,9 +57,14 @@ long AmbisonicOptim::getVectorSize()
 	return m_vector_size;
 }
 
+std::string AmbisonicOptim::getMode()
+{
+	return m_optim_mode;
+}
+
 void AmbisonicOptim::computeIndex()
 {
-	m_index_of_harmonics	= new long[m_number_of_harmonics ];
+	m_index_of_harmonics	= new int[m_number_of_harmonics ];
 	m_index_of_harmonics[0] = 0;
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
@@ -69,10 +73,9 @@ void AmbisonicOptim::computeIndex()
 			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
 	}
 }
-
 void AmbisonicOptim::setOptimMode(std::string anOptim)
 {
-	if(anOptim != m_optimMode)
+	if(anOptim != m_optim_mode)
 	{
 		if(anOptim == "inPhase")
 			computeInPhaseOptim();
@@ -85,37 +88,37 @@ void AmbisonicOptim::setOptimMode(std::string anOptim)
 
 void AmbisonicOptim::computeBasicOptim()
 {
-	m_optimMode = "basic"; 
+	m_optim_mode = "basic"; 
 	for (int i = 0; i < m_number_of_harmonics; i++) 
-		m_optimVector[i] = 1.;
+		m_optim_vector[i] = 1.;
 }
 
 void AmbisonicOptim::computeInPhaseOptim()
 {
-	m_optimMode = "inPhase"; 
+	m_optim_mode = "inPhase"; 
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
 		if (i == 0) 
-			m_optimVector[i] = 1.;
+			m_optim_vector[i] = 1.;
 		else 
-			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
+			m_optim_vector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
 	}
 }
 
 void AmbisonicOptim::computeReOptim()
 {
-	m_optimMode = "maxRe";
+	m_optim_mode = "maxRe";
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
 		if (i == 0) 
-			m_optimVector[i] = 1.;
+			m_optim_vector[i] = 1.;
 		else 
-			m_optimVector[i] = cos(abs(m_index_of_harmonics[i]) * CICM_PI / (2*m_order+2));
+			m_optim_vector[i] = cos(abs(m_index_of_harmonics[i]) * M_PI / (2*m_order+2));
 	}
 	
 }
 
-void AmbisonicOptim::setVectorSize(long aVectorSize)
+void AmbisonicOptim::setVectorSize(int aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
@@ -123,6 +126,6 @@ void AmbisonicOptim::setVectorSize(long aVectorSize)
 AmbisonicOptim::~AmbisonicOptim()
 {
 	free(m_index_of_harmonics);
-	free(m_optimVector);
+	free(m_optim_vector);
 }
 

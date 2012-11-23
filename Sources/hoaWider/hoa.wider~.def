@@ -1,0 +1,7 @@
+;hoa.wider~.def
+
+LIBRARY hoa.wider~.mxe
+
+EXPORTS
+	main
+

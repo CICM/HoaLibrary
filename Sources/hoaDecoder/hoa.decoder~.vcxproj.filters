@@ -4,13 +4,13 @@
     <ClCompile Include="hoa.decoder~.cpp" />
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c" />
     <ClCompile Include="gslMatrix.cpp" />
-    <ClCompile Include="ambisonicDecode.cpp" />
+    <ClCompile Include="AmbisonicDecode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hoa.decoder~.def" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gslMatrix.hpp" />
-    <ClInclude Include="ambisonicDecode.hpp" />
+    <ClInclude Include="AmbisonicDecode.h" />
   </ItemGroup>
 </Project>

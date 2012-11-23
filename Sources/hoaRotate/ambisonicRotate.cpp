@@ -17,11 +17,11 @@
  *
  */
 
-#include "ambisonicRotate.hpp"
+#include "AmbisonicRotate.h"
 
-ambisonicRotate::ambisonicRotate(int anOrder, int aVectorSize)
+AmbisonicRotate::AmbisonicRotate(long anOrder, long aVectorSize)
 {
-	m_order					= anOrder;
+	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= 2 * m_order + 1;
 	m_number_of_inputs		= m_number_of_harmonics + 1;
 	m_number_of_outputs		= m_number_of_harmonics;
@@ -34,16 +34,16 @@ ambisonicRotate::ambisonicRotate(int anOrder, int aVectorSize)
 	
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++) 
 	{
-		m_cosLookUp[i] = cos((double)i * M_2PI / (double)NUMBEROFCIRCLEPOINTS);
-		m_sinLookUp[i] = sin((double)i * M_2PI / (double)NUMBEROFCIRCLEPOINTS);
+		m_cosLookUp[i] = cos((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
+		m_sinLookUp[i] = sin((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 	}
-	computeTrigo(0.);
+	setAzimuth(0.);
 	setVectorSize(aVectorSize);
 }
 
-void ambisonicRotate::computeIndex()
+void AmbisonicRotate::computeIndex()
 {
-	m_index_of_harmonics	= new int[m_number_of_harmonics ];
+	m_index_of_harmonics	= new long[m_number_of_harmonics ];
 	m_index_of_harmonics[0] = 0;
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
@@ -53,33 +53,46 @@ void ambisonicRotate::computeIndex()
 	}
 }
 
-int	ambisonicRotate::getParameters(std::string aParameter) const
+long AmbisonicRotate::getOrder()
 {
-	int value = 0;
-
-	if (aParameter == "order")
-		value = m_order;
-	else if (aParameter == "samplingRate") 
-		value =  m_sampling_rate;
-	else if (aParameter == "vectorSize") 
-		value =  m_vector_size;
-	else if (aParameter == "numberOfInputs") 
-		value =  m_number_of_inputs;
-	else if (aParameter == "numberOfOutputs")
-		value =  m_number_of_outputs;
-	
-	return value;
+	return m_order;
 }
 
-void ambisonicRotate::computeTrigo(double aTheta)
+long AmbisonicRotate::getNumberOfHarmonics()
+{
+	return m_number_of_harmonics;
+}
+
+long AmbisonicRotate::getNumberOfInputs()
+{
+	return m_number_of_inputs;
+}
+
+long AmbisonicRotate::getNumberOfOutputs()
+{
+	return m_number_of_outputs;
+}
+
+long AmbisonicRotate::getVectorSize()
+{
+	return m_vector_size;
+}
+
+double AmbisonicRotate::getAzimuth()
+{
+	return m_azimuth;
+}
+
+void AmbisonicRotate::setAzimuth(double aTheta)
 {
 	long tmpAngle;
 	if (aTheta < 0) 
-		aTheta = aTheta + ( -floor(aTheta/M_2PI)) * M_2PI;
+		aTheta = aTheta + ( -floor(aTheta/CICM_2PI)) * CICM_2PI;
 	double tmpTheta = aTheta;
+	m_azimuth = fmod(aTheta + CICM_2PI, CICM_2PI);
 	for(int i = 0; i < m_order; i++)
 	{
-		double angleFactor = tmpTheta*NUMBEROFCIRCLEPOINTS/(M_2PI);
+		double angleFactor = tmpTheta*NUMBEROFCIRCLEPOINTS/(CICM_2PI);
 	
 		tmpAngle = (long)(angleFactor)%(NUMBEROFCIRCLEPOINTS-1);
 		m_harmonicSin[i] = m_sinLookUp[tmpAngle];
@@ -89,12 +102,12 @@ void ambisonicRotate::computeTrigo(double aTheta)
 	}
 }
 
-void ambisonicRotate::setVectorSize(int aVectorSize)
+void AmbisonicRotate::setVectorSize(long aVectorSize)
 {
-	m_vector_size = aVectorSize;
+	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
-ambisonicRotate::~ambisonicRotate()
+AmbisonicRotate::~AmbisonicRotate()
 {
 	delete m_harmonicCos;
 	delete m_harmonicSin;

@@ -1,6 +1,6 @@
-;hoa.control~.def
+;hoa.control.def
 
-LIBRARY hoa.control~.mxe
+LIBRARY hoa.control.mxe
 
 EXPORTS
 	main

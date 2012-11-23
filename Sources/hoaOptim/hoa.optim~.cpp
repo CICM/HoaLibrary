@@ -16,7 +16,7 @@
  *
  */
 
-#include "ambisonicOptim.hpp"
+#include "AmbisonicOptim.h"
 
 extern "C"
 {
@@ -29,7 +29,7 @@ extern "C"
 typedef struct _HoaOptim 
 {
 	t_pxobject				f_ob;			
-	ambisonicOptim			*f_ambisonicOptim;
+	AmbisonicOptim*			f_AmbisonicOptim;
 
 	int						f_ninput;
 	int						f_noutput;
@@ -82,10 +82,10 @@ void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv+1) == A_SYM)
 			decodingId = atom_getsym(argv+1)->s_name;
 			
-		x->f_ambisonicOptim	= new ambisonicOptim(order, decodingId, sys_getblksize());
+		x->f_AmbisonicOptim	= new AmbisonicOptim(order, decodingId, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambisonicOptim->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_ambisonicOptim->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicOptim->getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicOptim->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -95,13 +95,13 @@ void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaOptim_dsp64(t_HoaOptim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonicOptim->setVectorSize(maxvectorsize);
+	x->f_AmbisonicOptim->setVectorSize(maxvectorsize);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaOptim_perform64, 0, NULL);
 }
 
 void HoaOptim_perform64(t_HoaOptim *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambisonicOptim->process(ins, outs);
+	x->f_AmbisonicOptim->process(ins, outs);
 }
 
 void HoaOptim_dsp(t_HoaOptim *x, t_signal **sp, short *count)
@@ -110,10 +110,10 @@ void HoaOptim_dsp(t_HoaOptim *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 
-	x->f_ambisonicOptim->setVectorSize(sp[0]->s_n);
-	x->f_ninput = x->f_ambisonicOptim->getParameters("numberOfInputs");
-	x->f_noutput = x->f_ambisonicOptim->getParameters("numberOfOutputs");
-	pointer_count = x->f_ambisonicOptim->getParameters("numberOfInputs") + x->f_ambisonicOptim->getParameters("numberOfOutputs") + 2;
+	x->f_AmbisonicOptim->setVectorSize(sp[0]->s_n);
+	x->f_ninput = x->f_AmbisonicOptim->getNumberOfInputs();
+	x->f_noutput = x->f_AmbisonicOptim->getNumberOfOutputs();
+	pointer_count = x->f_AmbisonicOptim->getNumberOfInputs() + x->f_AmbisonicOptim->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -135,7 +135,7 @@ t_int *HoaOptim_perform(t_int *w)
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= (t_float **)w+3+x->f_ninput;
 	
-	x->f_ambisonicOptim->process(ins, outs);
+	x->f_AmbisonicOptim->process(ins, outs);
 	
 	return (w + x->f_ninput + x->f_noutput + 3);
 }
@@ -157,13 +157,13 @@ void HoaOptim_optim(t_HoaOptim *x, t_symbol *s, long argc, t_atom *argv)
 	if(atom_gettype(argv) == A_SYM)
 	{
 		std::string decodingId = atom_getsym(argv)->s_name;
-		x->f_ambisonicOptim->setOptimMode(decodingId);
+		x->f_AmbisonicOptim->setOptimMode(decodingId);
 	}
 }
 
 void HoaOptim_free(t_HoaOptim *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete(x->f_ambisonicOptim);
+	delete(x->f_AmbisonicOptim);
 }
 

@@ -67,7 +67,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;.\..\..\..\CicmLibrary</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;.\..\..\..\CicmLibrary;C:\gsl</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN_VERSION;WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN_EXT_VERSION;_CRT_NOFORCE_MANIFEST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>
@@ -95,10 +95,10 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>MaxAPI.lib;maxcrt.lib;MaxAudio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MaxAPI.lib;maxcrt.lib;MaxAudio.lib;cblas.lib;gsl.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).mxe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;.\..\..\..\CicmLibrary</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\msp-includes;.\..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes;.\..\..\..\CicmLibrary;C:\gsl\lib\Win32\Release</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
@@ -184,12 +184,16 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c" />
     <ClCompile Include="AmbisonicEncode.cpp" />
+    <ClCompile Include="AmbisonicOptim.cpp" />
     <ClCompile Include="AmbisonicViewer.cpp" />
+    <ClCompile Include="AmbisonicWider.cpp" />
     <ClCompile Include="hoa.control.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AmbisonicEncode.hpp" />
+    <ClInclude Include="AmbisonicEncode.h" />
+    <ClInclude Include="AmbisonicOptim.h" />
     <ClInclude Include="AmbisonicViewer.h" />
+    <ClInclude Include="AmbisonicWider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hoa.control.def" />

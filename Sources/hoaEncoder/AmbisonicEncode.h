@@ -17,7 +17,7 @@
  *
  */
 
-#ifndef define DEF_AMBISONICENCODE
+#ifndef DEF_AMBISONICENCODE
 #define DEF_AMBISONICENCODE
 
 #include "math.h"
