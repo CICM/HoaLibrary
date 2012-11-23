@@ -109,5 +109,6 @@
         <seealso name="hoa.pi" />
         <seealso name="hoa.play~" />
         <seealso name="hoa.record~" />
+        <seealso name="hoachapter01" module="hoa" type="tutorial" />
 	</seealsolist>
 </c74object>

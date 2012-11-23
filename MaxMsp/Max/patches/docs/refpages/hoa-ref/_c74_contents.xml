@@ -6,8 +6,7 @@
 <refpage name='hoa.binaural~.maxref.xml' />
 <refpage name='hoa.connect.maxref.xml' />
 <refpage name='hoa.dac~.maxref.xml' />
-<refpage name='hoa.inPhase~.maxref.xml' />
-<refpage name='hoa.meter~.maxref.xml' />
+<refpage name='hoa.optim~.maxref.xml' />
 <refpage name='hoa.meter~.maxref.xml' />
 <refpage name='hoa.pi.maxref.xml' />
 <refpage name='hoa.play~.maxref.xml' />
@@ -16,5 +15,5 @@
 <refpage name='hoa.record~.maxref.xml' />
 <refpage name='hoa.rotate~.maxref.xml' />
 <refpage name='hoa.scope~.maxref.xml' />
-<refpage name='hoa.trajectory.maxref.xml' />
+<refpage name='hoa.spat.maxref.xml' />
 </root>

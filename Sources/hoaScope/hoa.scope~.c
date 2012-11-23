@@ -420,10 +420,12 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 		{
 			jgraphics_set_source_jrgba(g, &x->f_colorCircle);
 			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-			jgraphics_fill(g);
+			jgraphics_stroke(g);
+			/*
 			jgraphics_set_source_jrgba(g, &x->f_colorBackground);
 			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle - 1.,  0., JGRAPHICS_2PI);
 			jgraphics_fill(g);
+			*/
 		}
 		/* Axes */
 		jgraphics_set_source_jrgba(g, &x->f_colorCircle);
@@ -437,10 +439,9 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 		}
 		
 		/* Center circle */
-		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-		jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonCircle - 1.,  0., JGRAPHICS_2PI);
-		
-		jgraphics_fill(g);
+		//jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		//jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonCircle - 1.,  0., JGRAPHICS_2PI);
+		//jgraphics_fill(g);
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
