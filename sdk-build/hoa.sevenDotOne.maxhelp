@@ -4066,7 +4066,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
+									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 45.0, 315.0, 248.0, 20.0 ],
 									"text" : "hoa.stereo~ 7 90."
 								}
@@ -11691,7 +11691,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
+									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 645.0, 365.0, 263.266663, 20.0 ],
 									"text" : "hoa.stereo~ 7 90."
 								}
@@ -17275,7 +17275,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 7,
 									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
+									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 345.0, 330.0, 248.0, 20.0 ],
 									"text" : "hoa.stereo~ 3 120."
 								}
@@ -21222,7 +21222,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
+									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 45.0, 330.0, 248.0, 20.0 ],
 									"text" : "hoa.stereo~ 7"
 								}
@@ -21808,6 +21808,48 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"id" : "obj-18",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
+									"patching_rect" : [ 60.0, 223.0, 43.0, 20.0 ],
+									"text" : "sig~ 1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-17",
+									"maxclass" : "flonum",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "float", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 510.0, 123.0, 50.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-7",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
+									"patching_rect" : [ 510.0, 165.0, 33.0, 20.0 ],
+									"text" : "sig~"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
 									"id" : "obj-15",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -21854,7 +21896,7 @@
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 7,
 									"numoutlets" : 0,
-									"patching_rect" : [ 92.809525, 340.25, 225.0, 225.0 ]
+									"patching_rect" : [ 80.85714, 375.0, 225.0, 225.0 ]
 								}
 
 							}
@@ -22165,7 +22207,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 49.0, 204.0, 218.0, 87.0 ],
+										"rect" : [ 49.0, 222.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -22635,7 +22677,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-3",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -22649,7 +22690,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 53.0, 226.0, 175.0, 67.0 ],
+														"rect" : [ 53.0, 244.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -23415,7 +23456,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 53.0, 226.0, 179.0, 66.0 ],
+														"rect" : [ 53.0, 244.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -23625,7 +23666,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 53.0, 226.0, 178.0, 65.0 ],
+														"rect" : [ 53.0, 244.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -24306,6 +24347,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -24319,7 +24361,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 53.0, 226.0, 179.0, 65.0 ],
+														"rect" : [ 53.0, 244.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -26085,6 +26127,24 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-17", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-23", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-18", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-12", 40 ],
 									"disabled" : 0,
@@ -26495,7 +26555,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-23", 0 ],
+									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-30", 0 ]
@@ -26522,20 +26582,20 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-33", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-34", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-31", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"midpoints" : [ 804.5, 27.0, 804.5, 27.0 ],
 									"source" : [ "obj-46", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-32", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-7", 0 ]
 								}
 
 							}
@@ -26611,10 +26671,6 @@
 			}
 , 			{
 				"name" : "hoa.meter~.mxe",
-				"type" : "iLaF"
-			}
-, 			{
-				"name" : "hoa.stereo~.mxe",
 				"type" : "iLaF"
 			}
 , 			{
