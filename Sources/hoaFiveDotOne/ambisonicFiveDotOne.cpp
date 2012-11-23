@@ -17,9 +17,9 @@
  *
  */
 
-#include "ambisonicFiveDotOne.h"
+#include "AmbisonicFiveDotOne.h"
 
-ambisonicFiveDotOne::ambisonicFiveDotOne(int anOrder, double anAngle1, double anAngle2, int aVectorSize)
+AmbisonicFiveDotOne::AmbisonicFiveDotOne(int anOrder, double anAngle1, double anAngle2, int aVectorSize)
 {
 	m_order					= anOrder;
 	m_number_of_harmonics	= m_order * 2 + 1;
@@ -76,7 +76,7 @@ ambisonicFiveDotOne::ambisonicFiveDotOne(int anOrder, double anAngle1, double an
 	setVectorSize(aVectorSize);
 }
 
-int	ambisonicFiveDotOne::getParameters(std::string aParameter) const
+int	AmbisonicFiveDotOne::getParameters(std::string aParameter) const
 {
 	int value = 0;
 	
@@ -90,7 +90,7 @@ int	ambisonicFiveDotOne::getParameters(std::string aParameter) const
 	return value;
 }
 
-void ambisonicFiveDotOne::computeIndex()
+void AmbisonicFiveDotOne::computeIndex()
 {
 	m_index_of_harmonics	= new int[m_number_of_harmonics];
 	m_index_of_harmonics[0] = 0;
@@ -102,7 +102,7 @@ void ambisonicFiveDotOne::computeIndex()
 	}
 }
 
-void ambisonicFiveDotOne::computeInPhaseOptim()
+void AmbisonicFiveDotOne::computeInPhaseOptim()
 {
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
@@ -114,7 +114,7 @@ void ambisonicFiveDotOne::computeInPhaseOptim()
 	}
 }
 
-void ambisonicFiveDotOne::computeMicrophones()
+void AmbisonicFiveDotOne::computeMicrophones()
 {
 	m_microphones_matrix_front = gsl_matrix_alloc(m_number_of_harmonics, 3); 
 	m_microphones_matrix_surround = gsl_matrix_alloc(3, 2); 
@@ -163,12 +163,12 @@ void ambisonicFiveDotOne::computeMicrophones()
 	}
 }
 
-void ambisonicFiveDotOne::setVectorSize(int aVectorSize)
+void AmbisonicFiveDotOne::setVectorSize(int aVectorSize)
 {
 	m_vector_size = aVectorSize;
 }
 
-ambisonicFiveDotOne::~ambisonicFiveDotOne()
+AmbisonicFiveDotOne::~AmbisonicFiveDotOne()
 {
 	gsl_matrix_free(m_microphones_matrix_front);
 	gsl_matrix_free(m_microphones_matrix_surround);

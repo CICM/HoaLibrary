@@ -71,8 +71,7 @@ void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaStereo *x = NULL;
 	int order = 4;
-	double anAngle1 = 30.;
-	double anAngle2 = 330.;
+	double anAngle1 = 60.;
 	if (x = (t_HoaStereo *)object_alloc((t_class*)HoaStereo_class)) 
 	{
 		if(atom_gettype(argv) == A_LONG)
@@ -81,12 +80,8 @@ void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv)
 			anAngle1	= atom_getlong(argv+1);
 		else if(atom_gettype(argv+1) == A_FLOAT)
 			anAngle1	= atom_getfloat(argv+1);
-		if(atom_gettype(argv+2) == A_LONG)
-			anAngle2	= atom_getlong(argv+2);
-		else if(atom_gettype(argv+2) == A_FLOAT)
-			anAngle2	= atom_getfloat(argv+2);
 
-		x->f_AmbisonicStereo	= new AmbisonicStereo(order, anAngle1, anAngle2, sys_getblksize());
+		x->f_AmbisonicStereo	= new AmbisonicStereo(order, anAngle1, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicStereo->getNumberOfInputs());
 		for (int i = 0; i < x->f_AmbisonicStereo->getNumberOfOutputs(); i++) 
@@ -175,7 +170,6 @@ void HoaStereo_free(t_HoaStereo *x)
 void HoaStereo_infos(t_HoaStereo *x)
 {
 	post("hoa.stereo~ informations :");
-	post("Optimization : inPhase");
 	post("Fractional order : %.1f", (float)x->f_AmbisonicStereo->getFractionalOrder());
 }
 

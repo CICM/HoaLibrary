@@ -711,7 +711,7 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 	
 	
 	//t_jrgba ledColor;
-	t_jrgba ledBgColor = {0,0,0,0.05};
+	t_jrgba ledBgColor;// = {0,0,0,0.05};
 	t_jmatrix transform;
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("skelton_layer"), rect->width, rect->height);

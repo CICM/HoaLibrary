@@ -42,21 +42,22 @@ private:
 	long			m_vector_size;
 	double			m_loudspeakers_angle1;
 	double			m_loudspeakers_angle2;
+	double			m_delta;
 	double			m_scale_factor;
 	double			m_fractional_order;
 
-	long*		m_index_of_harmonics;
-	gsl_matrix* m_microphones_matrix;
-	gsl_vector* m_input_vector;
-	gsl_vector* m_output_vector;
-	gsl_vector* m_optim_vector;
+	long*			m_index_of_harmonics;
+	gsl_matrix*		m_microphones_matrix;
+	gsl_vector*		m_input_vector;
+	gsl_vector*		m_output_vector;
+	gsl_vector*		m_optim_vector;
 
 	void	computeMicrophones();
 	void	computeIndex();
-	void	computeInPhaseOptim();
+	void	computeStereoOptim();
 
 public:
-	AmbisonicStereo(long anOrder = 4, double aLoudspeakersAngle1 = 30., double aLoudspeakersAngle2 = 330., long aVectorSize = 0);
+	AmbisonicStereo(long anOrder = 4, double aDelta = 60., long aVectorSize = 0);
 
 	long	getOrder();
 	long	getNumberOfHarmonics();

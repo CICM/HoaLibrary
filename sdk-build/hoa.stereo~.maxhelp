@@ -103,33 +103,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.666667, 0.666667, 0.666667, 0.0 ],
-					"border" : 1,
-					"id" : "obj-29",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 642.75, 123.0, 97.5, 90.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-14",
-					"ls" : 6,
-					"maxclass" : "hoa.meter~",
-					"numinlets" : 6,
-					"numoutlets" : 0,
-					"offset" : -0.08,
-					"patching_rect" : [ 585.0, 315.0, 225.0, 225.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-32",
@@ -3009,7 +2982,7 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -3921,20 +3894,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 310.0, 270.0, 35.0, 18.0 ],
 					"text" : "infos"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-39",
-					"maxclass" : "hoa.scope~",
-					"numinlets" : 15,
-					"numoutlets" : 0,
-					"order" : 7,
-					"patching_rect" : [ 315.0, 315.0, 225.0, 225.0 ]
 				}
 
 			}
@@ -6050,6 +6009,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-21",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -6744,7 +6704,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -8119,7 +8078,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
 									"patching_rect" : [ 45.0, 315.0, 248.0, 20.0 ],
-									"text" : "hoa.stereo~ 7 45 315"
+									"text" : "hoa.stereo~ 7 90."
 								}
 
 							}
@@ -8133,8 +8092,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 701.633301, 400.0, 150.0, 34.0 ],
-									"text" : "hoa.stereo got the whole world..."
+									"patching_rect" : [ 701.633301, 405.0, 155.0, 34.0 ],
+									"text" : "hoa.stereo's got the whole world..."
 								}
 
 							}
@@ -9847,6 +9806,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-21",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -10541,7 +10501,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -13538,6 +13497,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-21",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -14232,7 +14192,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -15580,7 +15539,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 56.0, 619.0, 60.0 ],
-									"text" : "Whole soundfield decoding : hoa.stereo~ decodes the range of the soundfield included between the two loudspeakers, and ignore the soundfield beyond that range. Here, we show you a small tip to that use the projector and recomposer to allow you to contract the soundfield within the defined range. The fish-eye factor shouldbe defined depending to the distance between the loudpseakers."
+									"text" : "Whole soundfield decoding : hoa.stereo~ decodes the range of the soundfield included between the two loudspeakers, and ignore the soundfield beyond that range. Here, we show you a small tip to that use the projector and recomposer to allow you to contract the soundfield within the defined range. The fish-eye factor should be defined depending to the distance between the loudpseakers."
 								}
 
 							}
@@ -15744,7 +15703,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
 									"patching_rect" : [ 645.0, 365.0, 263.266663, 20.0 ],
-									"text" : "hoa.stereo~ 7 45 315"
+									"text" : "hoa.stereo~ 7 90."
 								}
 
 							}
@@ -17533,8 +17492,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 380.0, 356.0, 178.0, 34.0 ],
-									"text" : "A \"medium\" stereo (60°- 300°), optimize with an order 3"
+									"patching_rect" : [ 380.0, 371.0, 178.0, 34.0 ],
+									"text" : "A large stereo (120°), optimize with an order 3"
 								}
 
 							}
@@ -17548,8 +17507,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 680.0, 356.0, 178.0, 34.0 ],
-									"text" : "A very large stereo (90°- 270°), optimize with an order 1"
+									"patching_rect" : [ 680.0, 371.0, 178.0, 34.0 ],
+									"text" : "A very large stereo (180°), optimize with an order 1"
 								}
 
 							}
@@ -17563,8 +17522,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 81.0, 356.0, 178.0, 34.0 ],
-									"text" : "A \"classical\" stereo (30°- 330°), optimize with an order 7"
+									"patching_rect" : [ 81.0, 371.0, 178.0, 34.0 ],
+									"text" : "A \"classical\" stereo (60°), optimize with an order 7"
 								}
 
 							}
@@ -19263,7 +19222,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-21",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -19958,6 +19916,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -21280,7 +21239,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 660.0, 390.0, 12.0, 90.0 ]
+									"patching_rect" : [ 660.0, 405.0, 12.0, 90.0 ]
 								}
 
 							}
@@ -21291,7 +21250,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 866.0, 390.0, 12.0, 90.0 ]
+									"patching_rect" : [ 866.0, 405.0, 12.0, 90.0 ]
 								}
 
 							}
@@ -21317,8 +21276,8 @@
 									"numinlets" : 3,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 645.0, 315.0, 248.0, 20.0 ],
-									"text" : "hoa.stereo~ 1 90. 330."
+									"patching_rect" : [ 645.0, 330.0, 248.0, 20.0 ],
+									"text" : "hoa.stereo~ 1 180."
 								}
 
 							}
@@ -25034,7 +24993,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 360.0, 390.0, 12.0, 90.0 ]
+									"patching_rect" : [ 360.0, 405.0, 12.0, 90.0 ]
 								}
 
 							}
@@ -25045,7 +25004,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 566.0, 390.0, 12.0, 90.0 ]
+									"patching_rect" : [ 566.0, 405.0, 12.0, 90.0 ]
 								}
 
 							}
@@ -25071,8 +25030,8 @@
 									"numinlets" : 7,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 345.0, 315.0, 248.0, 20.0 ],
-									"text" : "hoa.stereo~ 3 60. 300."
+									"patching_rect" : [ 345.0, 330.0, 248.0, 20.0 ],
+									"text" : "hoa.stereo~ 3 120."
 								}
 
 							}
@@ -28816,7 +28775,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 60.0, 390.0, 12.0, 90.0 ]
+									"patching_rect" : [ 60.0, 405.0, 12.0, 90.0 ]
 								}
 
 							}
@@ -28827,7 +28786,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 266.0, 390.0, 12.0, 90.0 ]
+									"patching_rect" : [ 266.0, 405.0, 12.0, 90.0 ]
 								}
 
 							}
@@ -28855,7 +28814,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 56.0, 613.0, 60.0 ],
-									"text" : "Configuration : hoa.stereo~ works for all the loudspeakers positions and all the ambisonic orders. Higher is the order, better is the restitution so it seems that for a \"classical\" stereo (30°- 330°), the best order is 7. For a lower distance between loudspeakers, you should use higher orders to increase the restitution. Reciprocally, you can use lower orders to preserve the cpu if the distance between the loudspeakers is higher."
+									"text" : "Configuration : hoa.stereo~ works for all the loudspeakers positions and all the ambisonic orders. Higher is the order, better is the restitution so it seems that for a \"classical\" stereo (60°), the best order is 7. For a lower distance between loudspeakers, you should use higher orders to increase the restitution. Reciprocally, you can use lower orders to preserve the cpu if the distance between the loudspeakers is higher."
 								}
 
 							}
@@ -29018,7 +28977,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 45.0, 315.0, 248.0, 20.0 ],
+									"patching_rect" : [ 45.0, 330.0, 248.0, 20.0 ],
 									"text" : "hoa.stereo~ 7"
 								}
 
@@ -29033,7 +28992,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 497.75, 6.0, 284.0, 33.0 ],
+									"patching_rect" : [ 497.0, 4.0, 284.0, 33.0 ],
 									"text" : "hoa.stereo~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris. © 2012 CICM / Universite Paris 8"
 								}
 
@@ -29102,7 +29061,7 @@
 									"destination" : [ "obj-35", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 54.5, 375.0, 66.0, 375.0 ],
+									"midpoints" : [ 54.5, 390.0, 66.0, 390.0 ],
 									"source" : [ "obj-12", 0 ]
 								}
 
@@ -29112,7 +29071,7 @@
 									"destination" : [ "obj-36", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 283.5, 375.0, 272.0, 375.0 ],
+									"midpoints" : [ 283.5, 390.0, 272.0, 390.0 ],
 									"source" : [ "obj-12", 1 ]
 								}
 
@@ -29498,7 +29457,7 @@
 									"destination" : [ "obj-75", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 354.5, 375.0, 366.0, 375.0 ],
+									"midpoints" : [ 354.5, 390.0, 366.0, 390.0 ],
 									"source" : [ "obj-78", 0 ]
 								}
 
@@ -29508,7 +29467,7 @@
 									"destination" : [ "obj-76", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 583.5, 375.0, 572.0, 375.0 ],
+									"midpoints" : [ 583.5, 390.0, 572.0, 390.0 ],
 									"source" : [ "obj-78", 1 ]
 								}
 
@@ -29630,7 +29589,7 @@
 									"destination" : [ "obj-89", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 654.5, 375.0, 666.0, 375.0 ],
+									"midpoints" : [ 654.5, 390.0, 666.0, 390.0 ],
 									"source" : [ "obj-92", 0 ]
 								}
 
@@ -29640,7 +29599,7 @@
 									"destination" : [ "obj-90", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 883.5, 375.0, 872.0, 375.0 ],
+									"midpoints" : [ 883.5, 390.0, 872.0, 390.0 ],
 									"source" : [ "obj-92", 1 ]
 								}
 
@@ -29676,7 +29635,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 648.0, 146.0, 87.0, 20.0 ],
+					"patching_rect" : [ 648.0, 149.5, 98.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -29690,7 +29649,7 @@
 						"tags" : ""
 					}
 ,
-					"text" : "p configuration"
+					"text" : "p fractional-order"
 				}
 
 			}
@@ -29733,16 +29692,30 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
-									"id" : "obj-14",
-									"ls" : 6,
-									"maxclass" : "hoa.meter~",
-									"numinlets" : 6,
+									"frgb" : 0.0,
+									"id" : "obj-4",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
 									"numoutlets" : 0,
-									"offset" : -0.08,
-									"patching_rect" : [ 585.0, 315.0, 225.0, 225.0 ]
+									"patching_rect" : [ 405.0, 330.0, 150.0, 62.0 ],
+									"text" : "Rajouter un rotate avec rotate sur hoa.meter pour montrer comment on désaxe la stéréo."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-11",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 7.0, 285.0, 35.0, 18.0 ],
+									"text" : "infos"
 								}
 
 							}
@@ -29888,7 +29861,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 274.0, 210.0, 71.0, 33.0 ],
+									"patching_rect" : [ 274.600006, 210.0, 71.0, 33.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -29915,7 +29888,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 274.0, 179.5, 41.0, 20.0 ],
+									"patching_rect" : [ 274.600006, 179.5, 41.0, 20.0 ],
 									"text" : "*~ 30."
 								}
 
@@ -29929,7 +29902,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 274.0, 149.5, 63.0, 20.0 ],
+									"patching_rect" : [ 274.600006, 149.5, 63.0, 20.0 ],
 									"text" : "cycle~ 0.1"
 								}
 
@@ -29944,7 +29917,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 274.0, 123.0, 50.0, 20.0 ]
+									"patching_rect" : [ 274.600006, 123.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -29958,7 +29931,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 274.0, 96.0, 79.0, 20.0 ],
+									"patching_rect" : [ 274.600006, 96.0, 79.0, 20.0 ],
 									"text" : "loadmess 0.1"
 								}
 
@@ -29972,7 +29945,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 45.0, 250.0, 248.0, 20.0 ],
+									"patching_rect" : [ 45.0, 250.0, 248.600006, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -31441,7 +31414,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-21",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -32136,6 +32108,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -33441,20 +33414,6 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
-									"id" : "obj-11",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 310.0, 270.0, 35.0, 18.0 ],
-									"text" : "infos"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
 									"id" : "obj-101",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -33509,7 +33468,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 45.0, 520.0, 248.0, 20.0 ],
+									"patching_rect" : [ 45.0, 520.0, 248.600006, 20.0 ],
 									"text" : "hoa.dac~ 1 2"
 								}
 
@@ -33523,36 +33482,8 @@
 									"numinlets" : 15,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 45.0, 315.0, 248.0, 20.0 ],
+									"patching_rect" : [ 45.0, 330.0, 248.600006, 20.0 ],
 									"text" : "hoa.stereo~ 7"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-16",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 310.0, 270.0, 35.0, 18.0 ],
-									"text" : "infos"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-39",
-									"maxclass" : "hoa.scope~",
-									"numinlets" : 15,
-									"numoutlets" : 0,
-									"order" : 7,
-									"patching_rect" : [ 315.0, 315.0, 225.0, 225.0 ]
 								}
 
 							}
@@ -33764,8 +33695,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 56.0, 609.0, 60.0 ],
-									"text" : "hoa.stereo~ decodes an ambisonic soundfield for stereophonic system. First argument is the order of the ambisonic soundfield, second and third argumentsare the angles of the loudspeakers in degrees (default 30° and 330°). It use fractional orders and inPhase optimization to keep a perceptive linear panning between the two louspeakers, send \"infos\" message to print the current configuration of the object.",
+									"patching_rect" : [ 7.0, 56.0, 667.0, 60.0 ],
+									"text" : "hoa.stereo~ decodes an ambisonic soundfield for stereophonic system. First argument is the order of the ambisonic soundfield, second is the distance between the loudspeakers in degrees (default 60°). It uses fractional orders and inPhase optimization to keep a perceptive linear panning between the two louspeakers, send \"infos\" message to print the current configuration of the object.",
 									"varname" : "autohelp_top_description"
 								}
 
@@ -33807,31 +33738,11 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-12", 14 ],
+									"destination" : [ "obj-12", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 319.5, 300.0, 283.5, 300.0 ],
+									"midpoints" : [ 16.5, 315.0, 54.5, 315.0 ],
 									"source" : [ "obj-11", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-14", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 283.5, 344.0, 312.0, 344.0, 312.0, 300.0, 800.5, 300.0 ],
-									"source" : [ "obj-12", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-14", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 54.5, 345.0, 312.0, 345.0, 312.0, 300.0, 594.5, 300.0 ],
-									"source" : [ "obj-12", 0 ]
 								}
 
 							}
@@ -33850,7 +33761,7 @@
 									"destination" : [ "obj-36", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 283.5, 375.0, 272.0, 375.0 ],
+									"midpoints" : [ 284.100006, 375.0, 272.0, 375.0 ],
 									"source" : [ "obj-12", 1 ]
 								}
 
@@ -34025,171 +33936,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 14 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 283.5, 300.0, 530.5, 300.0 ],
-									"source" : [ "obj-23", 14 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-									"destination" : [ "obj-39", 13 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 267.142853, 300.0, 515.785706, 300.0 ],
-									"source" : [ "obj-23", 13 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 12 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 250.785721, 300.0, 501.071442, 300.0 ],
-									"source" : [ "obj-23", 12 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-									"destination" : [ "obj-39", 11 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 234.428574, 300.0, 486.357147, 300.0 ],
-									"source" : [ "obj-23", 11 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 10 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 218.071426, 300.0, 471.642853, 300.0 ],
-									"source" : [ "obj-23", 10 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-									"destination" : [ "obj-39", 9 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 201.714279, 300.0, 456.928558, 300.0 ],
-									"source" : [ "obj-23", 9 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 8 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 185.357147, 300.0, 442.214294, 300.0 ],
-									"source" : [ "obj-23", 8 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-									"destination" : [ "obj-39", 7 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 169.0, 300.0, 427.5, 300.0 ],
-									"source" : [ "obj-23", 7 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 152.642853, 300.0, 412.785706, 300.0 ],
-									"source" : [ "obj-23", 6 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-									"destination" : [ "obj-39", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 136.285721, 300.0, 398.071442, 300.0 ],
-									"source" : [ "obj-23", 5 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 4 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 119.928574, 300.0, 383.357147, 300.0 ],
-									"source" : [ "obj-23", 4 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-									"destination" : [ "obj-39", 3 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 103.571426, 300.0, 368.642853, 300.0 ],
-									"source" : [ "obj-23", 3 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 2 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 87.214287, 300.0, 353.928558, 300.0 ],
-									"source" : [ "obj-23", 2 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-									"destination" : [ "obj-39", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 70.85714, 300.0, 339.214294, 300.0 ],
-									"source" : [ "obj-23", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-									"destination" : [ "obj-39", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 54.5, 300.0, 324.5, 300.0 ],
-									"source" : [ "obj-23", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-23", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -34276,6 +34022,18 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.666667, 0.666667, 0.666667, 0.0 ],
+					"border" : 1,
+					"id" : "obj-29",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 642.75, 123.0, 97.5, 90.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"background" : 1,
 					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
 					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
@@ -34316,26 +34074,6 @@
 					"hidden" : 0,
 					"midpoints" : [ 319.5, 300.0, 283.5, 300.0 ],
 					"source" : [ "obj-11", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-14", 5 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 283.5, 344.0, 312.0, 344.0, 312.0, 300.0, 800.5, 300.0 ],
-					"source" : [ "obj-12", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-14", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 54.5, 345.0, 312.0, 345.0, 312.0, 300.0, 594.5, 300.0 ],
-					"source" : [ "obj-12", 0 ]
 				}
 
 			}
@@ -34529,171 +34267,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 14 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 283.5, 300.0, 530.5, 300.0 ],
-					"source" : [ "obj-23", 14 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-39", 13 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 267.142853, 300.0, 515.785706, 300.0 ],
-					"source" : [ "obj-23", 13 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 12 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 250.785721, 300.0, 501.071442, 300.0 ],
-					"source" : [ "obj-23", 12 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-39", 11 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 234.428574, 300.0, 486.357147, 300.0 ],
-					"source" : [ "obj-23", 11 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 10 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 218.071426, 300.0, 471.642853, 300.0 ],
-					"source" : [ "obj-23", 10 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-39", 9 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 201.714279, 300.0, 456.928558, 300.0 ],
-					"source" : [ "obj-23", 9 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 8 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 185.357147, 300.0, 442.214294, 300.0 ],
-					"source" : [ "obj-23", 8 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-39", 7 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 169.0, 300.0, 427.5, 300.0 ],
-					"source" : [ "obj-23", 7 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 6 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 152.642853, 300.0, 412.785706, 300.0 ],
-					"source" : [ "obj-23", 6 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-39", 5 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 136.285721, 300.0, 398.071442, 300.0 ],
-					"source" : [ "obj-23", 5 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 4 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 119.928574, 300.0, 383.357147, 300.0 ],
-					"source" : [ "obj-23", 4 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-39", 3 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 103.571426, 300.0, 368.642853, 300.0 ],
-					"source" : [ "obj-23", 3 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 2 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 87.214287, 300.0, 353.928558, 300.0 ],
-					"source" : [ "obj-23", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-39", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 70.85714, 300.0, 339.214294, 300.0 ],
-					"source" : [ "obj-23", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-39", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 54.5, 300.0, 324.5, 300.0 ],
-					"source" : [ "obj-23", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-23", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -34763,10 +34336,6 @@
 				"type" : "iLaF"
 			}
 , 			{
-				"name" : "hoa.scope~.mxe",
-				"type" : "iLaF"
-			}
-, 			{
 				"name" : "hoa.stereo~.mxe",
 				"type" : "iLaF"
 			}
@@ -34776,10 +34345,6 @@
 			}
 , 			{
 				"name" : "hoa.pi.mxe",
-				"type" : "iLaF"
-			}
-, 			{
-				"name" : "hoa.meter~.mxe",
 				"type" : "iLaF"
 			}
 , 			{

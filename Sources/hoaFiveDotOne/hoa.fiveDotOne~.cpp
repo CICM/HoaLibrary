@@ -17,7 +17,7 @@
  *
  */
 
-#include "ambisonicFiveDotOne.h"
+#include "AmbisonicFiveDotOne.h"
 
 extern "C"
 {
@@ -29,7 +29,7 @@ extern "C"
 typedef struct _HoaFiveDotOne
 {
 	t_pxobject					f_ob;			
-	ambisonicFiveDotOne			*f_ambisonicFiveDotOne;
+	AmbisonicFiveDotOne			*f_AmbisonicFiveDotOne;
 
 	int							f_ninputs;
 	int							f_noutputs;
@@ -61,7 +61,7 @@ int main(void)
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	HoaFiveDotOne_class = c;
-
+	class_alias(c, gensym("hoa.5.1~"));
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
@@ -85,10 +85,10 @@ void *HoaFiveDotOne_new(t_symbol *s, long argc, t_atom *argv)
 		else if(atom_gettype(argv+2) == A_FLOAT)
 			anAngle2	= atom_getfloat(argv+2);
 
-		x->f_ambisonicFiveDotOne	= new ambisonicFiveDotOne(order, anAngle1, anAngle2, sys_getblksize());
+		x->f_AmbisonicFiveDotOne	= new AmbisonicFiveDotOne(order, anAngle1, anAngle2, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambisonicFiveDotOne->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_ambisonicFiveDotOne->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicFiveDotOne->getParameters("numberOfInputs"));
+		for (int i = 0; i < x->f_AmbisonicFiveDotOne->getParameters("numberOfOutputs"); i++) 
 			outlet_new(x, "signal");
 		
 	
@@ -98,13 +98,13 @@ void *HoaFiveDotOne_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaFiveDotOne_dsp64(t_HoaFiveDotOne *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonicFiveDotOne->setVectorSize(maxvectorsize);
+	x->f_AmbisonicFiveDotOne->setVectorSize(maxvectorsize);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaFiveDotOne_perform64, 0, NULL);
 }
 
 void HoaFiveDotOne_perform64(t_HoaFiveDotOne *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambisonicFiveDotOne->process(ins, outs);
+	x->f_AmbisonicFiveDotOne->process(ins, outs);
 }
 
 void HoaFiveDotOne_dsp(t_HoaFiveDotOne *x, t_signal **sp, short *count)
@@ -113,10 +113,10 @@ void HoaFiveDotOne_dsp(t_HoaFiveDotOne *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
-	x->f_ninputs = x->f_ambisonicFiveDotOne->getParameters("numberOfInputs");
-	x->f_noutputs = x->f_ambisonicFiveDotOne->getParameters("numberOfOutputs");
-	x->f_ambisonicFiveDotOne->setVectorSize(sp[0]->s_n);
-	pointer_count = x->f_ambisonicFiveDotOne->getParameters("numberOfInputs") + x->f_ambisonicFiveDotOne->getParameters("numberOfOutputs") + 2;
+	x->f_ninputs = x->f_AmbisonicFiveDotOne->getParameters("numberOfInputs");
+	x->f_noutputs = x->f_AmbisonicFiveDotOne->getParameters("numberOfOutputs");
+	x->f_AmbisonicFiveDotOne->setVectorSize(sp[0]->s_n);
+	pointer_count = x->f_AmbisonicFiveDotOne->getParameters("numberOfInputs") + x->f_AmbisonicFiveDotOne->getParameters("numberOfOutputs") + 2;
 	
 	sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -138,7 +138,7 @@ t_int *HoaFiveDotOne_perform(t_int *w)
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= (t_float **)w+3+x->f_ninputs;
 
-	x->f_ambisonicFiveDotOne->process(ins, outs);
+	x->f_AmbisonicFiveDotOne->process(ins, outs);
 	
 	return (w + x->f_noutputs + x->f_ninputs + 3);
 }
@@ -176,6 +176,6 @@ void HoaFiveDotOne_assist(t_HoaFiveDotOne *x, void *b, long m, long a, char *s)
 void HoaFiveDotOne_free(t_HoaFiveDotOne *x)
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_ambisonicFiveDotOne);
+	free(x->f_AmbisonicFiveDotOne);
 }
 

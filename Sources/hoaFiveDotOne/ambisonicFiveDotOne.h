@@ -17,13 +17,8 @@
  *
  */
 
-#ifndef DEF_AMBISONIC_FIVEDOTONE
-#define DEF_AMBISONIC_FIVEDOTONE
-
-#ifndef PI
-#define PI 3.1415926535897932384626433832795
-#define TWOPI 3.1415926535897932384626433832795 * 2.
-#endif
+#ifndef DEF_AMBISONICFIVEDOTONE
+#define DEF_AMBISONICFIVEDOTONE
 
 #include <stdio.h>
 #include <iostream>
@@ -34,8 +29,9 @@
 #include <vector>
 #include <string>
 #include "AmbisonicEncode.hpp"
+#include "cicmTools.h"
 
-class ambisonicFiveDotOne
+class AmbisonicFiveDotOne
 {
 	
 private:
@@ -60,13 +56,13 @@ private:
 	gsl_vector* m_optim_vector;
 	
 public:
-	ambisonicFiveDotOne(int anOrder,  double anAngle1 = 30., double anAngle2 = 110., int aVectorSize = 0);
+	AmbisonicFiveDotOne(int anOrder,  double anAngle1 = 30., double anAngle2 = 110., int aVectorSize = 0);
 	int		getParameters(std::string aParameter) const;
 	void	computeMicrophones();
 	void	computeIndex();
 	void	computeInPhaseOptim();
 	void	setVectorSize(int aVectorSize);
-	~ambisonicFiveDotOne();
+	~AmbisonicFiveDotOne();
 	
 	/* Perform sample by sample*/
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)

@@ -19,37 +19,29 @@
 
 #include "AmbisonicStereo.h"
 
-AmbisonicStereo::AmbisonicStereo(long anOrder, double aLoudspeakersAngle1, double aLoudspeakersAngle2, long aVectorSize)
+AmbisonicStereo::AmbisonicStereo(long anOrder, double aDelta, long aVectorSize)
 {
-	m_order					= anOrder;
+	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_outputs		= 2;
 	m_number_of_inputs		= m_number_of_harmonics;
-	m_loudspeakers_angle1	= aLoudspeakersAngle1;
-	m_loudspeakers_angle1	= fmod(m_loudspeakers_angle1 + 360., 360.);
-	m_loudspeakers_angle2	= aLoudspeakersAngle2;
-	m_loudspeakers_angle2	= fmod(m_loudspeakers_angle2 + 360., 360);
+	m_delta					= Tools::clip(aDelta, 0., 180.);
 
-	double distance;
-	if(m_loudspeakers_angle2 >= m_loudspeakers_angle1)
-		distance = m_loudspeakers_angle2 - m_loudspeakers_angle1;
-	else 
-		distance = m_loudspeakers_angle1 - m_loudspeakers_angle2;
+	m_loudspeakers_angle1 = m_delta / 2.;
+	m_loudspeakers_angle2 = 360. - m_loudspeakers_angle1;
 
-	if(distance > 180)
-		distance = 360. - distance;
-	distance = 180 - distance;
-
-	distance /= 180.;
-	distance *= 2.919;
-	m_fractional_order = exp(distance);
+	m_delta /= 2.;
+	m_delta = 90. - m_delta;
+	m_delta /= 90.;
+	m_delta *= 2.919;
+	m_fractional_order = exp(m_delta);
 
 	m_output_vector	= gsl_vector_alloc (m_number_of_outputs);
 	m_input_vector	= gsl_vector_alloc (m_number_of_harmonics);
 	m_optim_vector	= gsl_vector_alloc (m_number_of_harmonics);
 	computeIndex();
 	computeMicrophones();
-	computeInPhaseOptim();
+	computeStereoOptim();
 
 	
 	AmbisonicEncode* encoder = new AmbisonicEncode(m_order);
@@ -120,10 +112,11 @@ void AmbisonicStereo::computeIndex()
 	}
 }
 
-void AmbisonicStereo::computeInPhaseOptim()
+void AmbisonicStereo::computeStereoOptim()
 {
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
+		/* InPhase optimization */
 		if(abs(m_index_of_harmonics[i]) <= abs(m_fractional_order) + 1)
 		{
 			double optim = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
@@ -134,10 +127,12 @@ void AmbisonicStereo::computeInPhaseOptim()
 			else 
 				gsl_vector_set(m_optim_vector, i, 0.);
 		}
+		/* Except for order higher than the fractional order  */
 		else
 		{
 			gsl_vector_set(m_optim_vector, i, 0.);
 		}
+		/* Weight of the fractional order */
 		if(abs(m_index_of_harmonics[i]) == abs(m_fractional_order) + 1)
 		{
 			double value = gsl_vector_get(m_optim_vector, i) * m_fractional_order - abs(m_fractional_order);
