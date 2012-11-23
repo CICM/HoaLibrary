@@ -49,6 +49,8 @@ typedef struct  _meter
 	
 	float		f_speakerAngles[MAX_SPEAKER];
 	long		f_nSpeakerAngles;
+	float		f_speakerWeigth[MAX_SPEAKER];
+	float		f_speakerWeigthMax;
 	double*		f_amplitudeOfLoudspeakers;
 	double*		f_energyOfLoudspeakers;
 	double*		f_abscisseOfLoudspeakers;
@@ -350,10 +352,10 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	{
 		x->f_energyOfLoudspeakers[i] = 0.00001;
 		x->f_amplitudeOfLoudspeakers[i] = 0.000001;
-		//x->f_abscisseOfLoudspeakers[i] = cos(((double)(x->f_numberOfLoudspeakers - i) / (double)x->f_numberOfLoudspeakers) * JGRAPHICS_2PI);
-		//x->f_ordonneOfLoudspeakers[i] = sin(((double)(x->f_numberOfLoudspeakers - i) / (double)x->f_numberOfLoudspeakers) * JGRAPHICS_2PI);
-		x->f_abscisseOfLoudspeakers[i] = cos(degtorad(x->f_speakerAngles[i]));
-		x->f_ordonneOfLoudspeakers[i] = sin(degtorad(x->f_speakerAngles[i]));
+		x->f_abscisseOfLoudspeakers[i] = cos(((double)(x->f_numberOfLoudspeakers - i) / (double)x->f_numberOfLoudspeakers) * JGRAPHICS_2PI);
+		x->f_ordonneOfLoudspeakers[i] = sin(((double)(x->f_numberOfLoudspeakers - i) / (double)x->f_numberOfLoudspeakers) * JGRAPHICS_2PI);
+		//x->f_abscisseOfLoudspeakers[i] = cos(degtorad(x->f_speakerAngles[i]));
+		//x->f_ordonneOfLoudspeakers[i] = sin(degtorad(x->f_speakerAngles[i]));
 	}
 	x->f_clock = clock_new(x,(method)meter_tick);
 	x->f_startclock = 0;
@@ -395,7 +397,7 @@ t_max_err f_speakerAngles_set(t_meter *x, void *attr, long ac, t_atom *av)
 			{
 				val = atom_getfloat(av + i);
 				if (val > 360.) {
-					val = 360.;
+					val = 0.;
 				}
 				else if (val < 0.) {
 					if (val < -360.) val = -360.;
@@ -406,6 +408,7 @@ t_max_err f_speakerAngles_set(t_meter *x, void *attr, long ac, t_atom *av)
 			else {
 				x->f_speakerAngles[i] = 360. / x->f_numberOfLoudspeakers * i;
 			}
+			if (x->f_speakerAngles[i] == 360.) x->f_speakerAngles[i] = 0.;
         }
     }
 	bubblesort(x->f_speakerAngles, x->f_nSpeakerAngles);
@@ -514,30 +517,16 @@ void meter_tick(t_meter *x)
 {
 	int i;
 	double sum = 0., square = 0.;
-	double curAngle, prevAngle, nextAngle, prevPortion, nextPortion, speakerAngleSize, defSpeakerAngleSize, vectorCoeff;
-	defSpeakerAngleSize = 360. / (double)x->f_numberOfLoudspeakers;
 	
 	x->f_energyVectorX = x->f_energyVectorY = 0.;
 	for(i = 0; i < x->f_numberOfLoudspeakers; i++)
 	{
-		curAngle = x->f_speakerAngles[i];
-		if (i != 0) prevAngle = x->f_speakerAngles[i-1];
-		else prevAngle = x->f_speakerAngles[x->f_numberOfLoudspeakers-1];
-		if (i != x->f_numberOfLoudspeakers-1) nextAngle = x->f_speakerAngles[i+1];
-		else nextAngle = x->f_speakerAngles[0];
-		prevPortion = (curAngle - prevAngle);
-		nextPortion = (nextAngle - curAngle);
-		if (nextPortion < 0.) nextPortion += 360;
-		if (prevPortion < 0.) prevPortion += 360;
-		prevPortion *= 0.5;
-		nextPortion *= 0.5;
-		speakerAngleSize = prevPortion + nextPortion;
 		
-		vectorCoeff = defSpeakerAngleSize / speakerAngleSize;
 		
 		x->f_energyOfLoudspeakers[i] = 20. * log10(fabs(x->f_amplitudeOfLoudspeakers[i]));
 		//square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i] * x->f_speakerAngles[i] / x->f_speakerAngles[2];
-		square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i];
+
+		square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i] * (x->f_speakerWeigthMax / x->f_speakerWeigth[i]);
 		
 		x->f_energyVectorX += square * x->f_abscisseOfLoudspeakers[i];
 		x->f_energyVectorY += square * x->f_ordonneOfLoudspeakers[i];
@@ -578,7 +567,7 @@ void meter_assist(t_meter *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) 
 	{
-		sprintf(s,"(signal) Input Between 0-1 to Meter %ld", a);
+		sprintf(s,"(signal) Input Between 0-1 to Meter %ld", a+1);
 	}
 }
 
@@ -805,6 +794,8 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 	warmLimit = hotLimit - x->f_nwarmleds;
 	tepidLimit = warmLimit - x->f_ntepidleds;
 	
+	x->f_speakerWeigthMax = 0.;
+	
 	if (g) 
 	{
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
@@ -816,26 +807,31 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 			if ( meter_dB >= 0. ) drawOverLed = 1;
 			else drawOverLed = 0;
 			
+			curAngle = x->f_speakerAngles[i];
+			if (i != 0) prevAngle = x->f_speakerAngles[i-1];
+			else prevAngle = x->f_speakerAngles[nLoudSpeak-1];
+			if (i != nLoudSpeak-1) nextAngle = x->f_speakerAngles[i+1];
+			else nextAngle = x->f_speakerAngles[0];
+			
+			prevPortion = (curAngle - prevAngle);
+			nextPortion = (nextAngle - curAngle);
+			
+			if (nextPortion < 0.) nextPortion += 360;
+			if (prevPortion < 0.) prevPortion += 360;
+			
+			prevPortion *= 0.5;
+			nextPortion *= 0.5;
+			
+			x->f_speakerWeigth[i] = speakerAngleSize = prevPortion + nextPortion;
+			if (speakerAngleSize > x->f_speakerWeigthMax) x->f_speakerWeigthMax = speakerAngleSize;
+			
+			
 			if ( meter_dB > min_dB_to_display ) // si on est en dessous pas la peine de dessiner
 			{
-				curAngle = x->f_speakerAngles[i];
-				if (i != 0) prevAngle = x->f_speakerAngles[i-1];
-				else prevAngle = x->f_speakerAngles[nLoudSpeak-1];
-				if (i != nLoudSpeak-1) nextAngle = x->f_speakerAngles[i+1];
-				else nextAngle = x->f_speakerAngles[0];
-				
-				prevPortion = (curAngle - prevAngle);
-				nextPortion = (nextAngle - curAngle);
-				
-				if (nextPortion < 0.) nextPortion += 360;
-				if (prevPortion < 0.) prevPortion += 360;
-				
-				prevPortion *= 0.5;
-				nextPortion *= 0.5;
-				
-				speakerAngleSize = prevPortion + nextPortion;
 				deg2 = degtorad(90+(speakerAngleSize - 1));
-				rotateAngle = x->f_speakerAngles[i] - prevPortion - x->f_offsetOfLoudspeakers;
+				//rotateAngle = x->f_speakerAngles[i] - prevPortion - x->f_offsetOfLoudspeakers;
+				//rotateAngle = curAngle + (speakerAngleSize + prevPortion) - x->f_offsetOfLoudspeakers;
+				rotateAngle = curAngle - prevPortion - x->f_offsetOfLoudspeakers;
 				
 				//rotateAngle = i*speakerAngleSize - speakerAngleSize*0.5 - x->f_offsetOfLoudspeakers;
 				jgraphics_rotate(g, degtorad(rotateAngle));
@@ -919,13 +915,13 @@ void draw_vector(t_meter *x, t_object *view, t_rect *rect)
 		if (x->f_energyVectorX == 0.) 
 			value = 0.;
 		else
-			value = atan2(x->f_energyVectorY, x->f_energyVectorX) * 0.9;
+			value = atan2(x->f_energyVectorY, x->f_energyVectorX);
 		
-		angle = value + (x->f_offsetOfLoudspeakers/180) * JGRAPHICS_PI;
+		angle = value + (x->f_offsetOfLoudspeakers / 180.) * JGRAPHICS_PI;
 		rayon = x->f_rayonInt * 0.85;
 		arrow = rayon * 0.15;
 		
-		jgraphics_rotate(g, angle);
+		jgraphics_rotate(g, -angle);
 		
 		// arrow
 		jgraphics_move_to(g, 0, 0);

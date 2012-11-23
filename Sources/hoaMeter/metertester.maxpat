@@ -30,6 +30,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 14.0,
+					"id" : "obj-8",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 308.0, 117.0, 48.0, 22.0 ],
+					"text" : "sig~ 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 14.0,
 					"id" : "obj-22",
 					"maxclass" : "flonum",
 					"numinlets" : 1,
@@ -146,7 +160,7 @@
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 5,
 					"numoutlets" : 0,
-					"patching_rect" : [ 360.0, 408.0, 225.0, 225.0 ]
+					"patching_rect" : [ 312.0, 426.0, 225.0, 225.0 ]
 				}
 
 			}
@@ -159,7 +173,7 @@
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 5,
 					"numoutlets" : 0,
-					"patching_rect" : [ 360.0, 165.0, 225.0, 225.0 ]
+					"patching_rect" : [ 312.0, 182.0, 225.0, 225.0 ]
 				}
 
 			}
@@ -417,15 +431,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-15", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-7", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -448,6 +453,33 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-7", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-13", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-15", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-8", 0 ]
 				}
 
 			}
