@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -38,6 +38,7 @@ typedef struct _HoaFiveDotOne
 void *HoaFiveDotOne_new(t_symbol *s, long argc, t_atom *argv);
 void HoaFiveDotOne_free(t_HoaFiveDotOne *x);
 void HoaFiveDotOne_assist(t_HoaFiveDotOne *x, void *b, long m, long a, char *s);
+void HoaFiveDotOne_infos(t_HoaFiveDotOne *x);
 
 void HoaFiveDotOne_dsp(t_HoaFiveDotOne *x, t_signal **sp, short *count);
 t_int *HoaFiveDotOne_perform(t_int *w);
@@ -57,7 +58,8 @@ int main(void)
 	class_addmethod(c, (method)HoaFiveDotOne_dsp,			"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaFiveDotOne_dsp64,			"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaFiveDotOne_assist,		"assist",	A_CANT, 0);
-	
+	class_addmethod(c, (method)HoaFiveDotOne_infos,			"infos",	A_GIMME, 0);
+
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	HoaFiveDotOne_class = c;
@@ -87,8 +89,8 @@ void *HoaFiveDotOne_new(t_symbol *s, long argc, t_atom *argv)
 
 		x->f_AmbisonicFiveDotOne	= new AmbisonicFiveDotOne(order, anAngle1, anAngle2, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_AmbisonicFiveDotOne->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_AmbisonicFiveDotOne->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicFiveDotOne->getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicFiveDotOne->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 	
@@ -113,10 +115,10 @@ void HoaFiveDotOne_dsp(t_HoaFiveDotOne *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
-	x->f_ninputs = x->f_AmbisonicFiveDotOne->getParameters("numberOfInputs");
-	x->f_noutputs = x->f_AmbisonicFiveDotOne->getParameters("numberOfOutputs");
+	x->f_ninputs = x->f_AmbisonicFiveDotOne->getNumberOfInputs();
+	x->f_noutputs = x->f_AmbisonicFiveDotOne->getNumberOfOutputs();
 	x->f_AmbisonicFiveDotOne->setVectorSize(sp[0]->s_n);
-	pointer_count = x->f_AmbisonicFiveDotOne->getParameters("numberOfInputs") + x->f_AmbisonicFiveDotOne->getParameters("numberOfOutputs") + 2;
+	pointer_count = x->f_AmbisonicFiveDotOne->getNumberOfInputs() + x->f_AmbisonicFiveDotOne->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -134,7 +136,7 @@ void HoaFiveDotOne_dsp(t_HoaFiveDotOne *x, t_signal **sp, short *count)
 
 t_int *HoaFiveDotOne_perform(t_int *w)
 {
-	t_HoaFiveDotOne *x		= (t_HoaFiveDotOne *)(w[1]);	
+	t_HoaFiveDotOne *x	= (t_HoaFiveDotOne *)(w[1]);	
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= (t_float **)w+3+x->f_ninputs;
 
@@ -163,11 +165,11 @@ void HoaFiveDotOne_assist(t_HoaFiveDotOne *x, void *b, long m, long a, char *s)
 		else if (a == 1)
 			sprintf(s,"(Signal) Front left channel");
 		else if (a == 2)
-			sprintf(s,"(Signal) Front right channel");
-		else if (a == 3)
 			sprintf(s,"(Signal) Surround left channel");
-		else if (a == 4)
+		else if (a == 3)
 			sprintf(s,"(Signal) Surround right channel");
+		else if (a == 4)
+			sprintf(s,"(Signal) Front right channel");
 		else
 			sprintf(s,"(Signal) Low Frequency Effects channel");
 	}
@@ -179,3 +181,11 @@ void HoaFiveDotOne_free(t_HoaFiveDotOne *x)
 	free(x->f_AmbisonicFiveDotOne);
 }
 
+
+void HoaFiveDotOne_infos(t_HoaFiveDotOne *x)
+{
+	post("hoa.5.1~ informations :");
+	post("Fractional order center channel : %.1f", (float)x->f_AmbisonicFiveDotOne->getFractionalOrderCenter());
+	post("Fractional order front channels : %.1f", (float)x->f_AmbisonicFiveDotOne->getFractionalOrderFront());
+	post("Fractional order surround channels : %.1f", (float)x->f_AmbisonicFiveDotOne->getFractionalOrderSurround());
+}

@@ -40,8 +40,8 @@ private:
 	long			m_number_of_outputs;
 	long			m_number_of_inputs;
 	long			m_vector_size;
-	double			m_loudspeakers_angle1;
-	double			m_loudspeakers_angle2;
+	double			m_loudspeakers_angle_left;
+	double			m_loudspeakers_angle_right;
 	double			m_delta;
 	double			m_scale_factor;
 	double			m_fractional_order;
@@ -52,6 +52,8 @@ private:
 	gsl_vector*		m_output_vector;
 	gsl_vector*		m_optim_vector;
 
+	double	computeInPhaseFractionalOrder(double aDelta);
+	double	computeScaleFactor(long anIndex, double anAngle);
 	void	computeMicrophones();
 	void	computeIndex();
 	void	computeStereoOptim();

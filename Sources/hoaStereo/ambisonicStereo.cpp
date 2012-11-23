@@ -27,14 +27,10 @@ AmbisonicStereo::AmbisonicStereo(long anOrder, double aDelta, long aVectorSize)
 	m_number_of_inputs		= m_number_of_harmonics;
 	m_delta					= Tools::clip(aDelta, 0., 180.);
 
-	m_loudspeakers_angle1 = m_delta / 2.;
-	m_loudspeakers_angle2 = 360. - m_loudspeakers_angle1;
+	m_loudspeakers_angle_left	= m_delta / 2.;
+	m_loudspeakers_angle_right	= 360. - m_loudspeakers_angle_left;
 
-	m_delta /= 2.;
-	m_delta = 90. - m_delta;
-	m_delta /= 90.;
-	m_delta *= 2.919;
-	m_fractional_order = exp(m_delta);
+	m_fractional_order		= computeInPhaseFractionalOrder(m_delta);
 
 	m_output_vector	= gsl_vector_alloc (m_number_of_outputs);
 	m_input_vector	= gsl_vector_alloc (m_number_of_harmonics);
@@ -43,20 +39,9 @@ AmbisonicStereo::AmbisonicStereo(long anOrder, double aDelta, long aVectorSize)
 	computeMicrophones();
 	computeStereoOptim();
 
+	m_scale_factor = 1.;
+	m_scale_factor = computeScaleFactor(0, m_loudspeakers_angle_left);
 	
-	AmbisonicEncode* encoder = new AmbisonicEncode(m_order);
-	double* result = new double[m_number_of_harmonics];
-	double aTheta = (m_loudspeakers_angle1 / 360.) * CICM_2PI;
-
-	encoder->process(1., result, aTheta);
-	for(int j = 0; j < m_number_of_harmonics; j++)
-		gsl_vector_set(m_input_vector, j, result[j]);
-	
-	gsl_vector_mul(m_input_vector, m_optim_vector);
-	gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
-	m_scale_factor = 1. / gsl_vector_get(m_output_vector, 0.);
-	free(result);
-	delete encoder;
 	setVectorSize(aVectorSize);
 }
 
@@ -92,12 +77,38 @@ double AmbisonicStereo::getFractionalOrder()
 
 double AmbisonicStereo::getAngle1()
 {
-	return m_loudspeakers_angle1;
+	return m_loudspeakers_angle_left;
 }
 
 double AmbisonicStereo::getAngle2()
 {
-	return m_loudspeakers_angle2;
+	return m_loudspeakers_angle_right;
+}
+
+double AmbisonicStereo::computeInPhaseFractionalOrder(double aDelta)
+{
+	aDelta /= 2.;
+	aDelta = 90. - aDelta;
+	aDelta /= 90.;
+	aDelta *= 2.919;
+	return exp(aDelta);
+}
+
+double AmbisonicStereo::computeScaleFactor(long anIndex, double anAngle)
+{
+	AmbisonicEncode* encoder	= new AmbisonicEncode(m_order);
+	double* inputs				= new double[m_number_of_inputs];
+	double* outputs				= new double[m_number_of_outputs];
+	double result				= 1.;
+	double aTheta				= (anAngle / 360.) * CICM_2PI;
+
+	encoder->process(1., inputs, aTheta);
+	process(inputs, outputs);
+	result = 1. / outputs[anIndex];
+	free(inputs);
+	free(outputs);
+	delete encoder;
+	return result;
 }
 
 void AmbisonicStereo::computeIndex()
@@ -147,8 +158,8 @@ void AmbisonicStereo::computeMicrophones()
 	double aThetaLeft, aThetaRight;
 	int aIndex;
 	
-	aThetaLeft = (m_loudspeakers_angle1 / 360.) * CICM_2PI;
-	aThetaRight = (m_loudspeakers_angle2 / 360.) * CICM_2PI;
+	aThetaLeft = (m_loudspeakers_angle_left / 360.) * CICM_2PI;
+	aThetaRight = (m_loudspeakers_angle_right / 360.) * CICM_2PI;
 	
 	for (int j = 0; j < m_number_of_harmonics; j++) 
 	{
