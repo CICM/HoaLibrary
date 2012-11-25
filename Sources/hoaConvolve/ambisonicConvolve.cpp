@@ -17,49 +17,61 @@
  *
  */
 
-#include "ambisonicConvolve.hpp"
+#include "AmbisonicConvolve.h"
 
-ambisonicConvolve::ambisonicConvolve(long anOrder, long aVectorSize)
+AmbisonicConvolve::AmbisonicConvolve(long anOrder, long aVectorSize)
 {
 	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_inputs		= m_number_of_harmonics;
 	m_number_of_outputs		= m_number_of_harmonics;
+	
+	for(int i = 0; i < m_number_of_harmonics; i++)
+		m_convolution.push_back(new GardnerConvolution());
 }
 
-long ambisonicConvolve::getOrder()
+long AmbisonicConvolve::getOrder()
 {
 	return m_order;
 }
 
-long ambisonicConvolve::getNumberOfHarmonics()
+long AmbisonicConvolve::getNumberOfHarmonics()
 {
 	return m_number_of_harmonics;
 }
 
-long ambisonicConvolve::getNumberOfInputs()
+long AmbisonicConvolve::getNumberOfInputs()
 {
 	return m_number_of_inputs;
 }
 
-long ambisonicConvolve::getNumberOfOutputs()
+long AmbisonicConvolve::getNumberOfOutputs()
 {
 	return m_number_of_outputs;
 }
 
-void ambisonicConvolve::setVectorSize(long aVectorSize)
+void AmbisonicConvolve::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_min(aVectorSize, (long)1);
 }
 
-long ambisonicConvolve::getVectorSize()
+long AmbisonicConvolve::getVectorSize()
 {
 	return m_vector_size;
 }
 
-ambisonicConvolve::~ambisonicConvolve()
+void AmbisonicConvolve::setImpulseResponse(long aInstance, double* anImpulResponse, long aSize)
 {
-	;
+	aInstance = Tools::clip(aInstance, (long)0, m_number_of_harmonics);
+	m_convolution[aInstance]->setImpulseResponse(anImpulResponse, aSize);
+}
+AmbisonicConvolve::~AmbisonicConvolve()
+{
+	for(int i = 0; i < m_number_of_harmonics; i++)
+	{
+		delete m_convolution[i];
+		m_convolution[i] = 0;
+	}
 }
 
 
