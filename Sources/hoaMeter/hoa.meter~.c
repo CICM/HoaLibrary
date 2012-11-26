@@ -719,7 +719,7 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 			
 			prevPortion *= 0.5;
 			nextPortion *= 0.5;
-			
+						
 			speakerAngleSize = prevPortion + nextPortion;
 			deg2 = degtorad(90+(speakerAngleSize - 1));
 			rotateAngle = x->f_speakerAngles[i] - prevPortion - x->f_offsetOfLoudspeakers;
@@ -742,7 +742,7 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 				for( j=0; j < x->f_numleds; j++ )
 				{
 					if (x->f_numberOfLoudspeakers > 1) {
-						if ( x->f_numberOfLoudspeakers < 24 ) {
+						if ( x->f_numberOfLoudspeakers < 24  && (speakerAngleSize > 15)) {
 							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1+(0.008 * j * x->f_metersize), deg2-(0.008 * j * x->f_metersize) );
 						}
 						else {
@@ -821,7 +821,7 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 			
 			prevPortion *= 0.5;
 			nextPortion *= 0.5;
-			
+						
 			x->f_speakerWeigth[i] = speakerAngleSize = prevPortion + nextPortion;
 			if (speakerAngleSize > x->f_speakerWeigthMax) x->f_speakerWeigthMax = speakerAngleSize;
 			
@@ -829,8 +829,6 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 			if ( meter_dB > min_dB_to_display ) // si on est en dessous pas la peine de dessiner
 			{
 				deg2 = degtorad(90+(speakerAngleSize - 1));
-				//rotateAngle = x->f_speakerAngles[i] - prevPortion - x->f_offsetOfLoudspeakers;
-				//rotateAngle = curAngle + (speakerAngleSize + prevPortion) - x->f_offsetOfLoudspeakers;
 				rotateAngle = curAngle - prevPortion - x->f_offsetOfLoudspeakers;
 				
 				//rotateAngle = i*speakerAngleSize - speakerAngleSize*0.5 - x->f_offsetOfLoudspeakers;
@@ -851,12 +849,11 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 						jgraphics_set_line_width(g, ledStroke);
 						
 						if (nLoudSpeak > 1) {
-							//jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  deg1+(0.008*j), deg2-(0.008*j));
-							if ( nLoudSpeak < 24 ) {
+							if ( nLoudSpeak < 24 && (speakerAngleSize > 15)) {
 								jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  deg1+(0.008 * j * x->f_metersize), deg2-(0.008 * j * x->f_metersize));
 							}
 							else {
-								jgraphics_arc_negative(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg2, deg1);
+								jgraphics_arc_negative(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth, deg2, deg1);
 							}
 						}
 						else {
@@ -871,13 +868,12 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 						jgraphics_set_line_width(g, ledStroke);
 						
 						if (nLoudSpeak > 1) {
-							if ( nLoudSpeak < 24 ) {
+							if ( nLoudSpeak < 24  && (speakerAngleSize > 15)) {
 								jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth,  deg1+(0.005 * j * x->f_metersize), deg2-(0.005 * j * x->f_metersize));
 							}
 							else {
 								jgraphics_arc_negative(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth, deg2, deg1);
 							}
-							//jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth,  deg1+(0.005*j), deg2-(0.005*j));
 						}
 						else {
 							jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2,  0, JGRAPHICS_2PI);

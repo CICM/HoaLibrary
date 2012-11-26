@@ -49,7 +49,7 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 			x->f_output = x->f_harmonics;
 
 		
-		object_obex_lookup(x, gensym("#P"), &x->f_patcher);
+		//object_obex_lookup(x, gensym("#P"), &x->f_patcher); // passé dans la fonction connect_attach
 		defer_low(x, (method)connect_attach, NULL, 0, NULL);
 	
 		x->f_inc = 0;
@@ -181,6 +181,7 @@ void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive,
 
 void connect_attach(t_connect *x)
 {	
+	object_obex_lookup(x, gensym("#P"), &x->f_patcher);
 	x->f_patcherview = object_attr_getobj(x->f_patcher, gensym("firstview"));
 	object_attach_byptr_register(x, x->f_patcherview, CLASS_NOBOX);
 }
