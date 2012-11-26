@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -30,9 +30,6 @@ typedef struct _HoaStereo
 {
 	t_pxobject					f_ob;			
 	AmbisonicStereo			*f_AmbisonicStereo;
-
-	int							f_ninputs;
-	int							f_noutputs;
 } t_HoaStereo;
 
 void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv);
@@ -76,18 +73,19 @@ void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
+		
 		if(atom_gettype(argv+1) == A_LONG)
 			anAngle1	= atom_getlong(argv+1);
 		else if(atom_gettype(argv+1) == A_FLOAT)
 			anAngle1	= atom_getfloat(argv+1);
-
+		
 		x->f_AmbisonicStereo	= new AmbisonicStereo(order, anAngle1, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicStereo->getNumberOfInputs());
 		for (int i = 0; i < x->f_AmbisonicStereo->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
-	
+		x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 	return (x);
 }
@@ -105,23 +103,18 @@ void HoaStereo_perform64(t_HoaStereo *x, t_object *dsp64, double **ins, long num
 
 void HoaStereo_dsp(t_HoaStereo *x, t_signal **sp, short *count)
 {
-	int i;
-	int pointer_count;
-	t_int **sigvec;
-	
-	x->f_ninputs = x->f_AmbisonicStereo->getNumberOfInputs();
-	x->f_noutputs = x->f_AmbisonicStereo->getNumberOfOutputs();
 	x->f_AmbisonicStereo->setVectorSize(sp[0]->s_n);
-	pointer_count = x->f_AmbisonicStereo->getNumberOfInputs() + x->f_AmbisonicStereo->getNumberOfOutputs() + 2;
+	int pointer_count = x->f_AmbisonicStereo->getNumberOfInputs() + x->f_AmbisonicStereo->getNumberOfOutputs() + 3;
 	
-	sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
-	for(i = 0; i < pointer_count; i++)
+	t_int** sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
+	for(int i = 0; i < pointer_count; i++)
 		sigvec[i] = (t_int *)malloc(sizeof(t_int));
 	
 	sigvec[0] = (t_int *)x;
-	sigvec[1] = (t_int *)sp[0]->s_n;
-	for(i = 2; i < pointer_count; i++)
-		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
+	sigvec[1] = (t_int *)x->f_AmbisonicStereo->getNumberOfInputs();
+	sigvec[2] = (t_int *)x->f_AmbisonicStereo->getNumberOfOutputs();
+	for(int i = 3; i < pointer_count; i++)
+		sigvec[i] = (t_int *)sp[i - 3]->s_vec;
 	
 	dsp_addv(HoaStereo_perform, pointer_count, (void **)sigvec);
 	
@@ -130,13 +123,15 @@ void HoaStereo_dsp(t_HoaStereo *x, t_signal **sp, short *count)
 
 t_int *HoaStereo_perform(t_int *w)
 {
-	t_HoaStereo *x		= (t_HoaStereo *)(w[1]);	
-	t_float		**ins	= (t_float **)w+3;
-	t_float		**outs	= (t_float **)w+3+x->f_ninputs;
+	t_HoaStereo *x		= (t_HoaStereo *)(w[1]);
+	long		numins	= (long)(w[2]);
+	long		numouts	= (long)(w[3]);
+	t_float		**ins	= (t_float **)w+4;
+	t_float		**outs	= (t_float **)w+4+numins;
 
 	x->f_AmbisonicStereo->process(ins, outs);
 	
-	return (w + x->f_noutputs + x->f_ninputs + 3);
+	return (w + numins + numouts + 4);
 }
 
 void HoaStereo_assist(t_HoaStereo *x, void *b, long m, long a, char *s)
@@ -155,9 +150,9 @@ void HoaStereo_assist(t_HoaStereo *x, void *b, long m, long a, char *s)
 	else 
 	{
 		if (a == 0)
-			sprintf(s,"(Signal) Left channel", a);
+			sprintf(s,"(Signal) Left channel");
 		if (a == 1)
-			sprintf(s,"(Signal) Right channel", a);
+			sprintf(s,"(Signal) Right channel");
 	}
 }
 
