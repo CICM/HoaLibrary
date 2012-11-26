@@ -35,12 +35,17 @@ AmbisonicSixDotOne::AmbisonicSixDotOne(long anOrder, double aFrontDelta, double 
 	m_angle_left_surround	= m_delta_surround;
 	m_angle_right_surround	= 360. - m_delta_surround;
 	m_angle_back_surround	= m_delta_back_surround;
-
-	m_fractional_order_center	= computeInPhaseFractionalOrder(m_delta_front);
-	m_fractional_order_stereo	= computeInPhaseFractionalOrder((m_delta_front + (m_delta_surround - m_delta_front)) / 2.);
-	m_fractional_order_surround = computeInPhaseFractionalOrder(((m_delta_surround - m_delta_front) + (m_angle_left_surround - m_delta_back_surround)) / 2.);
-	m_fractional_order_back_surround = computeInPhaseFractionalOrder(m_angle_left_surround - m_delta_back_surround);
-
+	
+	m_fractional_order_center	= computeInPhaseFractionalOrder((m_angle_left - m_angle_center));
+	m_fractional_order_stereo	= computeInPhaseFractionalOrder(((m_angle_left - m_angle_center) + (m_angle_left_surround - m_angle_left)) / 2.);
+	m_fractional_order_surround = computeInPhaseFractionalOrder(((m_angle_left_surround - m_angle_left) + (m_angle_back_surround - m_angle_left_surround)) / 2.);
+	m_fractional_order_back_surround = computeInPhaseFractionalOrder(m_angle_back_surround - m_angle_left_surround);
+	/*
+	m_fractional_order_center	= computeInPhaseFractionalOrder(m_angle_left - m_angle_center);
+	m_fractional_order_stereo	= computeInPhaseFractionalOrder(m_angle_left_surround - m_angle_left);
+	m_fractional_order_surround = computeInPhaseFractionalOrder(m_angle_back_surround - m_angle_left_surround);
+	m_fractional_order_back_surround = computeInPhaseFractionalOrder(m_angle_back_surround - m_angle_left_surround);
+	*/
 	m_input_vector_center	= gsl_vector_alloc(m_number_of_harmonics);
 	m_input_vector_stereo	= gsl_vector_alloc(m_number_of_harmonics);
 	m_input_vector_surround = gsl_vector_alloc(m_number_of_harmonics);
@@ -62,13 +67,13 @@ AmbisonicSixDotOne::AmbisonicSixDotOne(long anOrder, double aFrontDelta, double 
 
 	m_scale_factor_center = 1.;
 	m_scale_factor_stereo = 1.;
-	m_scale_factor_surround = 1;
-	m_scale_factor_back_surround = 1;
+	m_scale_factor_surround = 1.;
+	m_scale_factor_back_surround = 1.;
 	m_scale_factor_center = computeScaleFactor(0, m_angle_center);
 	m_scale_factor_stereo = computeScaleFactor(1, m_angle_left);
 	m_scale_factor_surround = computeScaleFactor(2, m_angle_left_surround);
 	m_scale_factor_back_surround = computeScaleFactor(3, m_angle_back_surround);
-
+	
 	m_last_sample = 0.;
 	setVectorSize(aVectorSize);
 }

@@ -21,9 +21,9 @@
 #define DEF_AMBISONICCONVOLUTION
 
 #include "cicmTools.h"
-#include "hoaRecomposer\ambisonicRecomposer.hpp"
+#include "revConvolve.h"
 
-class ambisonicConvolve
+class AmbisonicConvolve
 {
 	
 private:
@@ -34,21 +34,24 @@ private:
 	long		m_sampling_rate;
 	long		m_vector_size;
 	
+	vector <GardnerConvolution*> m_convolution;
 public:
-	ambisonicConvolve(long anOrder, long aVectorSize);
+	AmbisonicConvolve(long anOrder = 4, long aVectorSize = 0);
 	long	getOrder();
 	long	getNumberOfHarmonics();
 	long	getNumberOfInputs();
 	long	getNumberOfOutputs();
 	void	setVectorSize(long aVectorSize);
 	long	getVectorSize();
-	~ambisonicConvolve();
+
+	void	setImpulseResponse(long aInstance, double* anImpulResponse, long aSize);
+	~AmbisonicConvolve();
 
 	/* Perform sample by sample */
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{
 		for(int j = 0; j < m_number_of_harmonics; j++)
-			aOutputs[j] = aInputs[j];
+			aOutputs[j] = m_convolution[j]->process(aInputs[j]);
 	}
 	
 	/* Perform sample block */
@@ -57,7 +60,7 @@ public:
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				aOutputs[j][i] = aInputs[j][i];
+				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]);
 		}
 	}
 };

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -29,7 +29,7 @@
 #include <vector>
 #include <string>
 #include "AmbisonicEncode.hpp"
-#include "cicmTools.h"
+#include "../cicmTools.h"
 
 class AmbisonicStereo
 {
@@ -76,7 +76,7 @@ public:
 	/* Perform sample by sample*/
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{	
-		for(int j = 0; j < m_number_of_harmonics; j++)
+		for(int j = 0; j < m_number_of_inputs; j++)
 			gsl_vector_set(m_input_vector, j, aInputs[j]);
 		
 		gsl_vector_mul(m_input_vector, m_optim_vector);
@@ -91,7 +91,7 @@ public:
 	{	
 		for(int i = 0; i < m_vector_size; i++)
 		{
-			for(int j = 0; j < m_number_of_harmonics; j++)
+			for(int j = 0; j < m_number_of_inputs; j++)
 				gsl_vector_set(m_input_vector, j, aInputs[j][i]);
 			
 			gsl_vector_mul(m_input_vector, m_optim_vector);

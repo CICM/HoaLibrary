@@ -17,8 +17,8 @@
  *
  */
 
-#include "ambisonicConvolve.hpp"
-
+#include "AmbisonicConvolve.h"
+#define MAX_SIZE 256
 extern "C"
 {
 	#include "ext.h"
@@ -31,12 +31,14 @@ extern "C"
 typedef struct _HoaConvolve 
 {
 	t_pxobject			f_ob;			
-	ambisonicConvolve*	f_ambiConvolve;
+	AmbisonicConvolve*	f_ambiConvolve;
 
-	t_symbol*			f_name;
-	t_buffer**			f_buffer;
-	long				f_channel;
-	long				f_limit;
+	t_symbol*			f_name[MAX_SIZE];
+	t_buffer*			f_buffer[MAX_SIZE];
+	long				f_channel[MAX_SIZE];
+	long				f_limit[MAX_SIZE];
+	long				f_numberOfHarmonics;
+	
 } t_HoaConvolve;
 
 void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv);
@@ -45,6 +47,7 @@ void HoaConvolve_assist(t_HoaConvolve *x, void *b, long m, long a, char *s);
 void HoaConvolve_int(t_HoaConvolve *x, long n);
 void HoaConvolve_float(t_HoaConvolve *x, double f);
 
+void buffer_setup(t_HoaConvolve *x);
 t_max_err buffer_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err limit_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
@@ -65,36 +68,35 @@ int main(void)
 	
 	c = class_new("hoa.convolve~", (method)HoaConvolve_new, (method)HoaConvolve_free, (long)sizeof(t_HoaConvolve), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaConvolve_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)HoaConvolve_int,			"int",		A_LONG, 0);
+	//class_addmethod(c, (method)HoaConvolve_float,		"float",	A_FLOAT, 0);
+	//class_addmethod(c, (method)HoaConvolve_int,			"int",		A_LONG, 0);
 	class_addmethod(c, (method)HoaConvolve_dsp,			"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaConvolve_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaConvolve_assist,		"assist",	A_CANT, 0);
 	
-	
-	CLASS_ATTR_SYM				(c, "buffer", 0, t_HoaConvolve, f_name);
-	CLASS_ATTR_CATEGORY			(c, "buffer", 0, "Behavior");
-	CLASS_ATTR_LABEL			(c, "buffer", 0, "buffer~ Object Name");
-	CLASS_ATTR_ORDER			(c, "buffer", 0, "1");
-	CLASS_ATTR_ACCESSORS		(c, "buffer", NULL, buffer_set);
-	CLASS_ATTR_DEFAULT			(c, "buffer", 0, "");
-	CLASS_ATTR_SAVE				(c, "buffer", 1);
+	CLASS_ATTR_SYM_VARSIZE		(c, "buffers", 0, t_HoaConvolve, f_name, f_numberOfHarmonics, MAX_SIZE);
+	CLASS_ATTR_CATEGORY			(c, "buffers", 0, "Behavior");
+	CLASS_ATTR_LABEL			(c, "buffers", 0, "buffer~ Objects Names");
+	CLASS_ATTR_ORDER			(c, "buffers", 0, "1");
+	CLASS_ATTR_ACCESSORS		(c, "buffers", NULL, buffer_set);
+	CLASS_ATTR_DEFAULT			(c, "buffers", 0, "");
+	CLASS_ATTR_SAVE				(c, "buffers", 1);
 
-	CLASS_ATTR_LONG				(c, "channel", 0, t_HoaConvolve, f_channel);
-	CLASS_ATTR_CATEGORY			(c, "channel", 0, "Behavior");
-	CLASS_ATTR_LABEL			(c, "channel", 0, "Channels");
-	CLASS_ATTR_ORDER			(c, "channel", 0, "2");
-	CLASS_ATTR_ACCESSORS		(c, "channel", NULL, channel_set);
-	CLASS_ATTR_DEFAULT			(c, "channel", 0, "0");
-	CLASS_ATTR_SAVE				(c, "channel", 1);
+	CLASS_ATTR_LONG_VARSIZE		(c, "channels", 0, t_HoaConvolve, f_channel, f_numberOfHarmonics, MAX_SIZE);
+	CLASS_ATTR_CATEGORY			(c, "channels", 0, "Behavior");
+	CLASS_ATTR_LABEL			(c, "channels", 0, "buffer~ Objects Channels");
+	CLASS_ATTR_ORDER			(c, "channels", 0, "2");
+	CLASS_ATTR_ACCESSORS		(c, "channels", NULL, channel_set);
+	CLASS_ATTR_DEFAULT			(c, "channels", 0, "0");
+	CLASS_ATTR_SAVE				(c, "channels", 1);
 	
-	CLASS_ATTR_LONG				(c, "limit", 0, t_HoaConvolve, f_limit);
-	CLASS_ATTR_CATEGORY			(c, "limit", 0, "Behavior");
-	CLASS_ATTR_LABEL			(c, "limit", 0, "Limit Size");
-	CLASS_ATTR_ORDER			(c, "limit", 0, "3");
-	CLASS_ATTR_ACCESSORS		(c, "limit", NULL, limit_set);
-	CLASS_ATTR_DEFAULT			(c, "limit", 0, "0");
-	CLASS_ATTR_SAVE				(c, "limit", 1);
+	CLASS_ATTR_LONG_VARSIZE		(c, "limits", 0, t_HoaConvolve, f_limit, f_numberOfHarmonics, MAX_SIZE);
+	CLASS_ATTR_CATEGORY			(c, "limits", 0, "Behavior");
+	CLASS_ATTR_LABEL			(c, "limits", 0, "buffer~ Objects Size Used");
+	CLASS_ATTR_ORDER			(c, "limits", 0, "3");
+	CLASS_ATTR_ACCESSORS		(c, "limits", NULL, limit_set);
+	CLASS_ATTR_DEFAULT			(c, "limits", 0, "0");
+	CLASS_ATTR_SAVE				(c, "limits", 1);
 
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -108,17 +110,15 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaConvolve *x = NULL;
 
-	int order = 4, inputs = 9;
+	long order = 4;
 	if (x = (t_HoaConvolve *)object_alloc((t_class*)HoaConvolve_class)) 
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
-		if(atom_gettype(argv+1) == A_LONG)
-			inputs	= atom_getlong(argv+1);
 
-		x->f_ambiConvolve	= new ambisonicConvolve(order, inputs);
-		
-		x->f_buffer = new t_buffer*[x->f_ambiConvolve->getNumberOfHarmonics()];
+		x->f_ambiConvolve	= new AmbisonicConvolve(order);
+		x->f_numberOfHarmonics = x->f_ambiConvolve->getNumberOfHarmonics();
+
 		for (int i = 0; i <x->f_ambiConvolve->getNumberOfHarmonics(); i++)
 			x->f_buffer[i] = NULL;
 
@@ -202,27 +202,69 @@ t_max_err buffer_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
 	t_buffer *b;
 	t_symbol *name;
-	t_atom channel[1];
-	if (atom_gettype(argv) == A_SYM)
+	t_atom channel[2];
+	if(atom_gettype(argv) == A_SYM)
 	{
-		name = atom_getsym(argv);
-		if(x->f_name != name)
+		if(atom_getsym(argv) == gensym("all"))
 		{
-			if ((b = (t_buffer *)(name->s_thing)) && ob_sym(b) == gensym("buffer~")) 
+			for(int i = 0; i < x->f_ambiConvolve->getNumberOfHarmonics(); i++)
 			{
-				if(x->f_name && x->f_buffer != NULL)
+				char bufferName[256];
+				name = atom_getsym(argv+1);
+				sprintf(bufferName, "%s.%i",  name->s_name, i+1);
+				name = gensym(bufferName);
+				if(x->f_name[i] != name)
 				{
-					globalsymbol_dereference((t_object*)x, x->f_name->s_name, "buffer~");
+
+					if ((b = (t_buffer *)(name->s_thing)) && ob_sym(b) == gensym("buffer~")) 
+					{
+						if(x->f_name && x->f_buffer[i] != NULL)
+						{
+							globalsymbol_dereference((t_object*)x, x->f_name[i]->s_name, "buffer~");
+						}
+						x->f_name[i] = name;
+						x->f_buffer[i] = (t_buffer*)globalsymbol_reference((t_object*)x, x->f_name[i]->s_name, "buffer~");
+						atom_setlong(channel, i);
+						atom_setlong(channel, x->f_channel[i]);
+						channel_set(x, attr, 2, channel);
+					}
+					else
+					{
+						x->f_buffer[i] = NULL;
+						x->f_name[i] = gensym("none");
+					}
 				}
-				x->f_name = name;
-				x->f_buffer = (t_buffer*)globalsymbol_reference((t_object*)x, x->f_name->s_name, "buffer~");
-				atom_setlong(channel, x->f_channel);
-				channel_set(x, attr, 1, channel);
 			}
-			else
+		}
+		else if(argc > 0)
+		{
+			if(argc > x->f_numberOfHarmonics)
+			argc = x->f_numberOfHarmonics;
+
+			for(int i = 0; i < argc; i++)
 			{
-				x->f_buffer = NULL;
-				x->f_name = gensym("");
+				name = atom_getsym(argv+i);
+				if(x->f_name[i] != name)
+				{
+
+					if ((b = (t_buffer *)(name->s_thing)) && ob_sym(b) == gensym("buffer~")) 
+					{
+						if(x->f_name && x->f_buffer[i] != NULL)
+						{
+							globalsymbol_dereference((t_object*)x, x->f_name[i]->s_name, "buffer~");
+						}
+						x->f_name[i] = name;
+						x->f_buffer[i] = (t_buffer*)globalsymbol_reference((t_object*)x, x->f_name[i]->s_name, "buffer~");
+						atom_setlong(channel, i);
+						atom_setlong(channel, x->f_channel[i]);
+						channel_set(x, attr, 2, channel);
+					}
+					else
+					{
+						x->f_buffer[i] = NULL;
+						x->f_name[i] = gensym("none");
+					}
+				}
 			}
 		}
 	}
@@ -231,22 +273,49 @@ t_max_err buffer_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
-	if(atom_gettype(argv) == A_LONG)
+	
+	if(argc == 2 && atom_gettype(argv) == A_SYM && atom_gettype(argv+1) == A_LONG)
 	{
-		if(x->f_buffer == NULL)
+		for(int i = 0; i < x->f_numberOfHarmonics; i++)
 		{
-			if(atom_getlong(argv) > 1)
-				x->f_channel = atom_getlong(argv);
-		}
-		else
-		{
-			if(atom_getlong(argv) > 1 && x->f_channel <= x->f_buffer->b_nchans)
-				x->f_channel = atom_getlong(argv);
-			else if(atom_getlong(argv) <= 1)
-				x->f_channel = 1;
+			if(x->f_buffer[i] == NULL)
+			{
+				if(atom_getlong(argv+1) >= 1)
+					x->f_channel[i] = atom_getlong(argv+1);
+			}
 			else
-				x->f_channel = x->f_buffer->b_nchans;
-			buffer_setup(x);
+			{
+				if(atom_getlong(argv+1) > 1 && x->f_channel[i] <= x->f_buffer[i]->b_nchans)
+					x->f_channel[i] = atom_getlong(argv+1);
+				else if(atom_getlong(argv+1) <= 1)
+					x->f_channel[i] = 1;
+				else
+					x->f_channel[i] = x->f_buffer[i]->b_nchans;
+			}
+		}
+		buffer_setup(x);
+	}
+	else if(argc > 0)
+	{
+		if(argc > x->f_numberOfHarmonics)
+			argc = x->f_numberOfHarmonics;
+		for(int i = 0; i < argc; i++)
+		{
+			if(x->f_buffer[i] == NULL)
+			{
+				if(atom_getlong(argv) >= 1)
+					x->f_channel[i] = atom_getlong(argv+i);
+			}
+			else
+			{
+				if(atom_getlong(argv+i) > 1 && x->f_channel[i] <= x->f_buffer[i]->b_nchans)
+					x->f_channel[i] = atom_getlong(argv+i);
+				else if(atom_getlong(argv+i) <= 1)
+					x->f_channel[i] = 1;
+				else
+					x->f_channel[i] = x->f_buffer[i]->b_nchans;
+				buffer_setup(x);
+			}
 		}
 	}
 	return 0;
@@ -254,55 +323,63 @@ t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err limit_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
-	if(atom_gettype(argv) == A_LONG)
+	if(argc == 2 && atom_gettype(argv) == A_SYM && atom_gettype(argv+1) == A_LONG)
 	{
-		if(atom_getlong(argv) > 0)
-			x->f_limit = atom_getlong(argv);
-		else
-			x->f_limit = 0;
+		for(int i = 0; i < x->f_numberOfHarmonics; i++)
+		{
+			if(atom_getlong(argv+1) > 0)
+				x->f_limit[i] = atom_getlong(argv+1);
+			else
+				x->f_limit[i] = 0;
+		}
 		buffer_setup(x);
 	}
-	else if(atom_gettype(argv) == A_FLOAT)
+	else if(argc > 0)
 	{
-		if(atom_getfloat(argv) > 0.f)
-			x->f_limit = atom_getfloat(argv);
-		else
-			x->f_limit = 0;
+		if(argc > x->f_numberOfHarmonics)
+			argc = x->f_numberOfHarmonics;
+		for(int i = 0; i < argc; i++)
+		{
+			if(atom_gettype(argv+i) == A_LONG && atom_getlong(argv+i) > 0)
+				x->f_limit[i] = atom_getlong(argv+i);
+			else
+				x->f_limit[i] = 0;
+		}
 		buffer_setup(x);
 	}
 	return 0;
 }
 
-
 void buffer_setup(t_HoaConvolve *x)
 {
-	int i;
-	double* datas;
-	long size;
-	if(x->f_buffer != NULL)
+	for(int j = 0; j < x->f_numberOfHarmonics; j++)
 	{
-		ATOMIC_INCREMENT(&x->f_buffer->b_inuse);
-		if (!x->f_buffer->b_valid) 
+		if(x->f_buffer[j] != NULL)
 		{
-			ATOMIC_DECREMENT(&x->f_buffer->b_inuse);
-		}
-		else
-		{
-			if(x->f_limit == 0)
-				size = x->f_buffer->b_frames;
-			else if(x->f_limit > x->f_buffer->b_frames)
-				size = x->f_buffer->b_frames;
-			else			
-				size = x->f_limit;
-			datas = new double[x->f_buffer->b_frames];
-			for(i = 0; i < x->f_buffer->b_frames; i++)
+			ATOMIC_INCREMENT(&x->f_buffer[j]->b_inuse);
+			if (!x->f_buffer[j]->b_valid) 
 			{
-				datas[i] = x->f_buffer->b_samples[i * x->f_buffer->b_nchans + (x->f_channel - 1)] * 0.05;
+				ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
 			}
-			ATOMIC_DECREMENT(&x->f_buffer->b_inuse);
+			else
+			{
+				long size;
+				if(x->f_limit[j] == 0)
+					size = x->f_buffer[j]->b_frames;
+				else if(x->f_limit[j] > x->f_buffer[j]->b_frames)
+					size = x->f_buffer[j]->b_frames;
+				else			
+					size = x->f_limit[j];
+				double* datas = new double[x->f_buffer[j]->b_frames];
+				for(long i = 0; i < x->f_buffer[j]->b_frames; i++)
+				{
+					datas[i] = x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] * 0.05;
+				}
+				ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
 
-			x->f_Zlc->setImpulseResponse(datas, size);
-			free(datas);
+				x->f_ambiConvolve->setImpulseResponse(j, datas, size);
+				free(datas);
+			}
 		}
 	}
 }
