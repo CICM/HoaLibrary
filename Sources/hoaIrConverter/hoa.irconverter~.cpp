@@ -116,7 +116,9 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_numberOfChannels	= numberOfChannels;
 
 		for (int i = 0; i < x->f_numberOfChannels; i++)
+		{
 			x->f_buffer[i] = NULL;
+		}
 
 		dsp_setup((t_pxobject *)x, 1);
 		x->f_bang_out = bangout(x);
@@ -267,7 +269,14 @@ t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err angle_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
-	if(argc > 0)
+	if(atom_gettype(argv) == A_SYM && atom_getsym(argv)== gensym("default"))
+	{
+		for(int i = 0; i < x->f_numberOfChannels; i++)
+		{
+			x->f_angle[i] = (float)i * 360. / (float)x->f_numberOfChannels;
+		}
+	}
+	else if(argc > 0)
 	{
 		if(argc > x->f_numberOfChannels)
 			argc = x->f_numberOfChannels;
@@ -278,6 +287,10 @@ t_max_err angle_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 			else if(atom_gettype(argv+i) == A_FLOAT)
 				x->f_angle[i] = atom_getfloat(argv+i);
 		}
+	}
+	for(int i = 0; i < x->f_numberOfChannels; i++)
+	{
+		x->f_angle[i] = fmod(x->f_angle[i] + 360., 360.);
 	}
 	x->f_ambiRecomposer->setAngles(x->f_angle);
 	return 0;
