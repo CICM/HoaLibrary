@@ -33,6 +33,7 @@ GardnerConvolution::GardnerConvolution(long aMinimumSize, long aMaximumSize)
 		windowSize = m_minimum_size * pow(2., (double)m_number_of_ffts);
 		m_fft.push_back(new FftConvolution(windowSize, 2));
 	}
+	 
 }
 
 void GardnerConvolution::setImpulseResponse(double* setImpulseResponse, long aSize)
@@ -63,7 +64,7 @@ void GardnerConvolution::setImpulseResponse(double* setImpulseResponse, long aSi
 		m_fft[i]->loadImpulseResponse(datas + offset);
 		offset *= 2;
 	}
-		
+	
 }
 
 GardnerConvolution::~GardnerConvolution()

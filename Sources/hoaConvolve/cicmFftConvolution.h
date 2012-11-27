@@ -39,9 +39,9 @@ private:
 	Cicm_Fft*			m_fft_instance;
 	Cicm_Signal**		m_real_vector;
 	Cicm_Signal*		m_buffer;
-	Cicm_Signal*		m_input_complexes;
-	Cicm_Signal**		m_impul_complexes;
-	Cicm_Signal*		m_output_complexes;
+	Cicm_Packed*		m_input_complexes;
+	Cicm_Packed**		m_impul_complexes;
+	Cicm_Packed*		m_output_complexes;
 	
 	Cicm_Signal			m_result;
 	

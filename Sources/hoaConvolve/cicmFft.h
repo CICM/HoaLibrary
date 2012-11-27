@@ -31,6 +31,7 @@ private:
 	double				m_scale;
 
 #ifdef CICM_VDSP
+	Cicm_Fft_Handle		m_fft_handle;
 #endif
 #ifdef CICM_IPPS
 	int					m_spec_size;
@@ -63,8 +64,8 @@ public:
 inline void Cicm_Fft::forward(Cicm_Signal *aRealVector, Cicm_Packed *anPackedVector)
 {
 #ifdef CICM_VDSP
-	vDSP_ctoz((Cicm_Complex *)aRealVector, 2, &m_input_complexes, 1, m_array_size); 
-	vDSP_fft_zrip(m_fft_setup, &m_input_complexes, 1, m_log2_size, FFT_FORWARD);
+	vDSP_ctoz((Cicm_Complex *)aRealVector, 2, anPackedVector, 1, m_array_size); 
+	Cicm_fft_forward(m_fft_handle, anPackedVector, m_order);
 #endif
 #ifdef CICM_IPPS
 	Cicm_fft_forward(aRealVector, anPackedVector, m_fft_handle, m_fft_buff);
@@ -79,8 +80,8 @@ inline void Cicm_Fft::forward(Cicm_Signal *aRealVector, Cicm_Packed *anPackedVec
 inline void Cicm_Fft::inverse(Cicm_Packed *anPackedVector, Cicm_Signal *aRealVector)
 {
 #ifdef CICM_VDSP
-	vDSP_ctoz((Cicm_Complex *)aRealVector, 2, &m_input_complexes, 1, m_array_size); 
-	vDSP_fft_zrip(m_fft_setup, &m_input_complexes, 1, m_log2_size, FFT_FORWARD);
+	Cicm_fft_inverse(m_fft_handle, anPackedVector, m_order);
+	vDSP_ztoc(anPackedVector, 1, (Cicm_Complex *)aRealVector, 2, m_array_size);
 #endif
 #ifdef CICM_IPPS
 	Cicm_fft_inverse(anPackedVector, aRealVector, m_fft_handle, m_fft_buff);
