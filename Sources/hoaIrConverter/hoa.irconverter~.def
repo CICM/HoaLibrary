@@ -1,0 +1,7 @@
+;hoa.irconverter~.def
+
+LIBRARY hoa.irconverter~.mxe
+
+EXPORTS
+	main
+
