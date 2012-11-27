@@ -4321,7 +4321,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 103.0, 101.0, 973.0, 524.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 524.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -4944,7 +4944,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 54.0, 610.0, 86.0 ],
+									"patching_rect" : [ 7.0, 54.0, 613.0, 86.0 ],
 									"text" : "hoa.irconverter~ create the circular harmonic dependant signals of a discrete circular impulse reponse for ambisonics processing. It facilitates the convertion for the use of hoa.convolve~ and allows you to changes the incidence angles of the discrete impulse response. The impulse response should be used with the hoa.convolve~ object to create reverberation in the circular harmonics domain. The first argument is the order and second argument is the number of loudspeakers. The attributes set the buffer~objects, the channels and the angles of the impulse response part (look at the subpatchers for further informations).",
 									"varname" : "autohelp_top_description"
 								}
@@ -5576,7 +5576,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 493.5, 372.0, 205.25, 32.0 ],
-									"text" : "angles 127 40 250 226 321 308 271 19"
+									"text" : "angles 233 110 74 228 10 264 124 172"
 								}
 
 							}
@@ -6227,7 +6227,7 @@
 									"outlettype" : [ "bang" ],
 									"patching_rect" : [ 406.25, 431.0, 114.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 127.0, 40.0, 250.0, 226.0, 321.0, 308.0, 271.0, 19.0 ],
+										"angles" : [ 233.0, 110.0, 74.0, 228.0, 10.0, 264.0, 124.0, 172.0 ],
 										"buffers" : [ "none", "none", "none", "none", "none", "none", "none", "none" ],
 										"channels" : [ 1, 1, 1, 1, 1, 1, 1, 1 ]
 									}
@@ -7335,7 +7335,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 973.0, 524.0 ],
+						"rect" : [ 103.0, 101.0, 973.0, 524.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -7356,6 +7356,20 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-8",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 60.0, 131.0, 76.0, 18.0 ],
+									"text" : "writetofolder"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -7748,12 +7762,11 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-5",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 2.0, 56.0, 642.0, 33.0 ],
-									"text" : "hoa.irconverter~ could be used with the polybuffer~ object, it facilitates the setting of the buffer~ objects and the channels. The contents can't be saved to audio files however it should be usefull to quickly test the impulse reponses.",
+									"patching_rect" : [ 2.0, 56.0, 642.0, 20.0 ],
+									"text" : "hoa.irconverter~ could be used with the polybuffer~ object, it facilitates the setting of the buffer~ objects and the channels.",
 									"varname" : "autohelp_top_description"
 								}
 
@@ -7839,6 +7852,16 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-7", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 69.5, 162.0, 168.0, 162.0 ],
+									"source" : [ "obj-8", 0 ]
 								}
 
 							}
