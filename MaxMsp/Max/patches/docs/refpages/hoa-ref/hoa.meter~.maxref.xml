@@ -87,7 +87,7 @@
 				Offset of loudspeakers - degree - (-180° 180°).
             </description>
 		</attribute>
-		<attribute name="bgcolor">
+		<attribute name="bgcolor" type="rgba" size="1">
 			<digest>
 				Background color
 			</digest>

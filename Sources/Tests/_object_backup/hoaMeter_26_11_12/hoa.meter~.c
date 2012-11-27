@@ -49,9 +49,8 @@ typedef struct  _meter
 	
 	float		f_speakerAngles[MAX_SPEAKER];
 	long		f_nSpeakerAngles;
-	float		f_speakerRealAngle[MAX_SPEAKER];
-	float		f_speakerWidth[MAX_SPEAKER];
-	float		f_speakerWidthMax;
+	float		f_speakerWeigth[MAX_SPEAKER];
+	float		f_speakerWeigthMax;
 	double*		f_amplitudeOfLoudspeakers;
 	double*		f_energyOfLoudspeakers;
 	double*		f_abscisseOfLoudspeakers;
@@ -126,6 +125,7 @@ int main()
 
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
+	//jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
 	
 	class_addmethod(c, (method)meter_dsp,			"dsp",			A_CANT, 0);
@@ -171,6 +171,7 @@ int main()
 	CLASS_ATTR_FILTER_CLIP		(c, "ls", 1, MAX_SPEAKER);
 	CLASS_ATTR_DEFAULT			(c, "ls", 0, "8");
 	CLASS_ATTR_SAVE				(c, "ls", 1);
+	//CLASS_ATTR_INVISIBLE		(c, "ls", 1);
 	
 	CLASS_ATTR_FLOAT_VARSIZE	(c, "ls_angles", 0, t_meter, f_speakerAngles, f_nSpeakerAngles, MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "ls_angles", NULL, f_speakerAngles_set);
@@ -332,6 +333,7 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 			;
 	
 	dictionary_getlong(d, gensym("ls"), &x->f_numberOfLoudspeakers); // make sure we have the number of loudspeaker before set up other args.
+	//attr_dictionary_process(x, d);
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.z_box.b_firstin = (t_object *)x;
 	dsp_setupjbox((t_pxjbox *)x, x->f_numberOfLoudspeakers);
@@ -380,12 +382,12 @@ void bubblesort(float array[], int size)
 	}
 }
 
-void speakerPosProcess(t_meter *x)
+void setRealSpeakerPos(t_meter *x)
 {
 	int i, nLoudSpeak;
-	double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
+	double speakerAngleSize, curAngle, prevAngle, nextAngle, prevPortion, nextPortion, accumSpeakerAngleSize, speakerRealAngle;
 	nLoudSpeak = x->f_numberOfLoudspeakers;
-	x->f_speakerWidthMax = 0.;
+	accumSpeakerAngleSize = 0;
 	for(i=0; i < nLoudSpeak; i++)
 	{			
 		curAngle = x->f_speakerAngles[i];
@@ -400,11 +402,13 @@ void speakerPosProcess(t_meter *x)
 		if (nextPortion < 0.) nextPortion += 360.;
 		if (prevPortion < 0.) prevPortion += 360.;
 		
-		x->f_speakerWidth[i] = (prevPortion + nextPortion)*0.5;
-		if (x->f_speakerWidth[i] > x->f_speakerWidthMax) x->f_speakerWidthMax = x->f_speakerWidth[i];
-		x->f_speakerRealAngle[i] = (curAngle - prevPortion*0.5) + x->f_speakerWidth[i]*0.5;
-		x->f_abscisseOfLoudspeakers[i] = cos(degtorad(x->f_speakerRealAngle[i]));
-		x->f_ordonneOfLoudspeakers[i] = sin(degtorad(x->f_speakerRealAngle[i]));
+		prevPortion *= 0.5;
+		nextPortion *= 0.5;
+		
+		speakerAngleSize = prevPortion + nextPortion;
+		speakerRealAngle = (curAngle - prevPortion) + speakerAngleSize*0.5;
+		x->f_abscisseOfLoudspeakers[i] = cos(degtorad(speakerRealAngle));
+		x->f_ordonneOfLoudspeakers[i] = sin(degtorad(speakerRealAngle));
 	}
 }
 
@@ -441,10 +445,9 @@ t_max_err f_speakerAngles_set(t_meter *x, void *attr, long ac, t_atom *av)
         }
     }
 	bubblesort(x->f_speakerAngles, x->f_nSpeakerAngles);
-	speakerPosProcess(x);
+	setRealSpeakerPos(x);
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("vector_layer"));
 	jbox_redraw((t_jbox *)x);
     return MAX_ERR_NONE;
 }
@@ -552,9 +555,12 @@ void meter_tick(t_meter *x)
 	x->f_energyVectorX = x->f_energyVectorY = 0.;
 	for(i = 0; i < x->f_numberOfLoudspeakers; i++)
 	{
+		
+		
 		x->f_energyOfLoudspeakers[i] = 20. * log10(fabs(x->f_amplitudeOfLoudspeakers[i]));
-		//square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i] * (x->f_speakerWidthMax / x->f_speakerWidth[i]);
-		square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i];
+		//square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i] * x->f_speakerAngles[i] / x->f_speakerAngles[2];
+
+		square = x->f_amplitudeOfLoudspeakers[i] * x->f_amplitudeOfLoudspeakers[i] * (x->f_speakerWeigthMax / x->f_speakerWeigth[i]);
 		
 		x->f_energyVectorX += square * x->f_abscisseOfLoudspeakers[i];
 		x->f_energyVectorY += square * x->f_ordonneOfLoudspeakers[i];
@@ -692,13 +698,16 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 {
 	int i,j;
 	long nLoudSpeak = x->f_numberOfLoudspeakers;
-	double deg1, deg2, rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset;
+	double defaultSpeakerAngleSize = 360. / (double)nLoudSpeak;
+	double speakerAngleSize = defaultSpeakerAngleSize;
+	double deg1 = degtorad(90);
+	double deg2 = degtorad(90+(speakerAngleSize));
+	double rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset, curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
 	t_pt center = x->f_center;
 	t_jrgba ledBgColor = {0,0,0,0.05};
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("skelton_layer"), rect->width, rect->height);
 	
-	deg1 = degtorad(90);
 	ledContainerSize = x->f_rayonExt - x->f_rayonInt - (x->f_strokeWidth*4);
 	ledOffset = ledContainerSize / (x->f_numleds+1);
 	ledStroke = ledOffset * 0.75;
@@ -708,6 +717,7 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 	{
 		// Background :
 		jgraphics_set_source_jrgba(g, &x->f_colorMeterBg);
+		//jgraphics_set_line_width(g, x->f_rayonExt*0.5+x->f_rayonInt - x->f_strokeWidth*0.5);
 		jgraphics_set_line_width(g, (x->f_rayonExt - x->f_rayonInt) - x->f_strokeWidth*0.5);
 		jgraphics_arc(g, center.x, center.y, x->f_rayonExt*0.5+(x->f_rayonInt*0.5), 0., JGRAPHICS_2PI);
 		jgraphics_stroke(g);
@@ -722,14 +732,33 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 		jgraphics_arc(g, center.x, center.y, x->f_rayonInt,  0., JGRAPHICS_2PI);
 		jgraphics_stroke(g);
 		
+		
+		// skelton separators :
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
 		
-		// skelton separators and leds bg:
 		for(i=0; i<nLoudSpeak; i++)
-		{
-			deg2 = degtorad(90+(x->f_speakerWidth[i]));
-			rotateAngle = x->f_speakerRealAngle[i] - (x->f_speakerWidth[i]*0.5) - x->f_offsetOfLoudspeakers;
+		{			
+			curAngle = x->f_speakerAngles[i];
+			if (i != 0) prevAngle = x->f_speakerAngles[i-1];
+			else prevAngle = x->f_speakerAngles[nLoudSpeak-1];
+			if (i != nLoudSpeak-1) nextAngle = x->f_speakerAngles[i+1];
+			else nextAngle = x->f_speakerAngles[0];
+			
+			prevPortion = (curAngle - prevAngle);
+			nextPortion = (nextAngle - curAngle);
+			
+			if (nextPortion < 0.) nextPortion += 360.;
+			if (prevPortion < 0.) prevPortion += 360.;
+			
+			prevPortion *= 0.5;
+			nextPortion *= 0.5;
+						
+			speakerAngleSize = prevPortion + nextPortion;
+			//deg2 = degtorad(90+(speakerAngleSize - 1));
+			deg2 = degtorad(90+(speakerAngleSize));
+			rotateAngle = x->f_speakerAngles[i] - prevPortion - x->f_offsetOfLoudspeakers;
+			
 			jgraphics_rotate(g, degtorad(rotateAngle));
 			
 			// separator
@@ -748,7 +777,7 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 				for( j=0; j < x->f_numleds; j++ )
 				{
 					if (x->f_numberOfLoudspeakers > 1) {
-						if ( x->f_numberOfLoudspeakers < 24  && (x->f_speakerWidth[i] > 14.5)) {
+						if ( x->f_numberOfLoudspeakers < 24  && (speakerAngleSize > 14.5)) {
 							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1+(0.008 * (j+1) * x->f_metersize), deg2-(0.008 * (j+1) * x->f_metersize) );
 						}
 						else {
@@ -777,24 +806,32 @@ double degtorad(double degree)
 
 void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 {
-	int i, j, nbLed, tepidLimit, warmLimit, hotLimit, drawOverLed;
-	long nLoudSpeak = x->f_numberOfLoudspeakers;
-	double deg1, deg2, rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset, meter_dB, min_dB_to_display;
+	int i, j, nbLed, tepidLimit, warmLimit, hotLimit;
 	t_jrgba ledColor;
+	long nLoudSpeak = x->f_numberOfLoudspeakers;
+	double speakerAngleSize = 360. / (double)nLoudSpeak;
+	//double deg1 = degtorad(90+1);
+	//double deg2 = degtorad(90+(speakerAngleSize - 1));
+	double deg1 = degtorad(90);
+	double deg2 = degtorad(90+(speakerAngleSize));
+	double rotateAngle, ledContainerSize, ledStroke, ledMargin, ledOffset, meter_dB, min_dB_to_display, curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
+	int drawOverLed = 0;
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("meter_layer"), rect->width, rect->height);
 	
-	deg1 = degtorad(90);
 	nbLed = x->f_numleds+1;
 	ledContainerSize = x->f_rayonExt - x->f_rayonInt - (x->f_strokeWidth*4);
 	ledOffset = ledContainerSize / nbLed;
 	ledStroke = ledOffset * 0.75;
 	ledMargin = ledOffset * 0.25;
+
+	min_dB_to_display = -1 * ( (x->f_numleds * x->f_dbperled) - (x->f_dbperled * 0.5) );
+	
 	hotLimit = x->f_numleds - x->f_nhotleds;
 	warmLimit = hotLimit - x->f_nwarmleds;
 	tepidLimit = warmLimit - x->f_ntepidleds;
-	min_dB_to_display = -1 * ( (x->f_numleds * x->f_dbperled) - (x->f_dbperled * 0.5) );
-	x->f_speakerWidthMax = 0.;
+	
+	x->f_speakerWeigthMax = 0.;
 	
 	if (g) 
 	{
@@ -807,10 +844,32 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 			if ( meter_dB >= 0. ) drawOverLed = 1;
 			else drawOverLed = 0;
 			
+			curAngle = x->f_speakerAngles[i];
+			if (i != 0) prevAngle = x->f_speakerAngles[i-1];
+			else prevAngle = x->f_speakerAngles[nLoudSpeak-1];
+			if (i != nLoudSpeak-1) nextAngle = x->f_speakerAngles[i+1];
+			else nextAngle = x->f_speakerAngles[0];
+			
+			prevPortion = (curAngle - prevAngle);
+			nextPortion = (nextAngle - curAngle);
+			
+			if (nextPortion < 0.) nextPortion += 360;
+			if (prevPortion < 0.) prevPortion += 360;
+			
+			prevPortion *= 0.5;
+			nextPortion *= 0.5;
+						
+			x->f_speakerWeigth[i] = speakerAngleSize = prevPortion + nextPortion;
+			if (speakerAngleSize > x->f_speakerWeigthMax) x->f_speakerWeigthMax = speakerAngleSize;
+			
+			
 			if ( meter_dB > min_dB_to_display ) // si on est en dessous pas la peine de dessiner
 			{
-				deg2 = degtorad(90+(x->f_speakerWidth[i]));
-				rotateAngle = x->f_speakerRealAngle[i] - (x->f_speakerWidth[i]*0.5) - x->f_offsetOfLoudspeakers;				
+				//deg2 = degtorad(90+(speakerAngleSize - 1));
+				deg2 = degtorad(90+(speakerAngleSize));
+				rotateAngle = curAngle - prevPortion - x->f_offsetOfLoudspeakers;
+				
+				//rotateAngle = i*speakerAngleSize - speakerAngleSize*0.5 - x->f_offsetOfLoudspeakers;
 				jgraphics_rotate(g, degtorad(rotateAngle));
 				
 				// leds :
@@ -828,7 +887,8 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 						jgraphics_set_line_width(g, ledStroke);
 						
 						if (nLoudSpeak > 1) {
-							if ( nLoudSpeak < 24 && (x->f_speakerWidth[i] > 14.5)) {
+							//if ( nLoudSpeak < 24 && (speakerAngleSize > 15)) {
+							if ( nLoudSpeak < 24 && (speakerAngleSize > 14.5)) {
 								jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  deg1+(0.008 * (j+1) * x->f_metersize), deg2-(0.008 * (j+1) * x->f_metersize));
 							}
 							else {
@@ -836,6 +896,7 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 							}
 						}
 						else {
+							//jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset)-ledMargin*2-4,  0, JGRAPHICS_2PI);
 							jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  0, JGRAPHICS_2PI);
 						}
 						jgraphics_stroke(g);
@@ -846,7 +907,7 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 						jgraphics_set_line_width(g, ledStroke);
 						
 						if (nLoudSpeak > 1) {
-							if ( nLoudSpeak < 24  && (x->f_speakerWidth[i] > 15)) {
+							if ( nLoudSpeak < 24  && (speakerAngleSize > 15)) {
 								jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth,  deg1+(0.005 * j * x->f_metersize), deg2-(0.005 * j * x->f_metersize));
 							}
 							else {
