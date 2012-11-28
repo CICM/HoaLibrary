@@ -68,8 +68,8 @@ int main(void)
 	
 	c = class_new("hoa.convolve~", (method)HoaConvolve_new, (method)HoaConvolve_free, (long)sizeof(t_HoaConvolve), 0L, A_GIMME, 0);
 	
-	//class_addmethod(c, (method)HoaConvolve_float,		"float",	A_FLOAT, 0);
-	//class_addmethod(c, (method)HoaConvolve_int,			"int",		A_LONG, 0);
+	class_addmethod(c, (method)HoaConvolve_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)HoaConvolve_int,			"int",		A_LONG, 0);
 	class_addmethod(c, (method)HoaConvolve_dsp,			"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaConvolve_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaConvolve_assist,		"assist",	A_CANT, 0);
@@ -130,6 +130,16 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 		attr_args_process(x, argc, argv);
 	}
 	return (x);
+}
+
+void HoaConvolve_float(t_HoaConvolve *x, double f)
+{
+	x->f_ambiConvolve->setGain(f);
+}
+
+void HoaConvolve_int(t_HoaConvolve *x, long n)
+{
+	x->f_ambiConvolve->setGain(n);
 }
 
 void HoaConvolve_dsp64(t_HoaConvolve *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)

@@ -16,7 +16,7 @@
 		DDCD841A16653ACF00A0020B /* cicmFir.h in Headers */ = {isa = PBXBuildFile; fileRef = DDCD840D16653ACF00A0020B /* cicmFir.h */; };
 		DDCD841B16653ACF00A0020B /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = DDCD840E16653ACF00A0020B /* cicmTools.h */; };
 		DDCD841C16653ACF00A0020B /* revConvolve.h in Headers */ = {isa = PBXBuildFile; fileRef = DDCD840F16653ACF00A0020B /* revConvolve.h */; };
-		DDCD841D16653ACF00A0020B /* ambisonicConvolve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD841016653ACF00A0020B /* ambisonicConvolve.cpp */; };
+		DDCD841D16653ACF00A0020B /* AmbisonicConvolve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD841016653ACF00A0020B /* AmbisonicConvolve.cpp */; };
 		DDCD841E16653ACF00A0020B /* cicmFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD841116653ACF00A0020B /* cicmFft.cpp */; };
 		DDCD841F16653ACF00A0020B /* cicmFftConvolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD841216653ACF00A0020B /* cicmFftConvolution.cpp */; };
 		DDCD842016653ACF00A0020B /* cicmFir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD841316653ACF00A0020B /* cicmFir.cpp */; };
@@ -37,7 +37,7 @@
 		DDCD840D16653ACF00A0020B /* cicmFir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmFir.h; sourceTree = "<group>"; };
 		DDCD840E16653ACF00A0020B /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmTools.h; sourceTree = "<group>"; };
 		DDCD840F16653ACF00A0020B /* revConvolve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revConvolve.h; sourceTree = "<group>"; };
-		DDCD841016653ACF00A0020B /* ambisonicConvolve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicConvolve.cpp; sourceTree = "<group>"; };
+		DDCD841016653ACF00A0020B /* AmbisonicConvolve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicConvolve.cpp; sourceTree = "<group>"; };
 		DDCD841116653ACF00A0020B /* cicmFft.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cicmFft.cpp; sourceTree = "<group>"; };
 		DDCD841216653ACF00A0020B /* cicmFftConvolution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cicmFftConvolution.cpp; sourceTree = "<group>"; };
 		DDCD841316653ACF00A0020B /* cicmFir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cicmFir.cpp; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 				DDCD840D16653ACF00A0020B /* cicmFir.h */,
 				DDCD840E16653ACF00A0020B /* cicmTools.h */,
 				DDCD840F16653ACF00A0020B /* revConvolve.h */,
-				DDCD841016653ACF00A0020B /* ambisonicConvolve.cpp */,
+				DDCD841016653ACF00A0020B /* AmbisonicConvolve.cpp */,
 				DDCD841116653ACF00A0020B /* cicmFft.cpp */,
 				DDCD841216653ACF00A0020B /* cicmFftConvolution.cpp */,
 				DDCD841316653ACF00A0020B /* cicmFir.cpp */,
@@ -197,7 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDCD841D16653ACF00A0020B /* ambisonicConvolve.cpp in Sources */,
+				DDCD841D16653ACF00A0020B /* AmbisonicConvolve.cpp in Sources */,
 				DDCD841E16653ACF00A0020B /* cicmFft.cpp in Sources */,
 				DDCD841F16653ACF00A0020B /* cicmFftConvolution.cpp in Sources */,
 				DDCD842016653ACF00A0020B /* cicmFir.cpp in Sources */,
