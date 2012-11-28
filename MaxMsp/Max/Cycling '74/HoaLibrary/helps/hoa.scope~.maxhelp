@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 157.0, 44.0, 918.0, 719.0 ],
+		"rect" : [ 71.0, 44.0, 918.0, 719.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -230,7 +230,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 679.0, 409.5, 53.0, 22.0 ],
+					"patching_rect" : [ 594.0, 134.5, 53.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -376,6 +376,8 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 0.729412, 0.745098, 0.756863, 1.0 ],
+					"cicolor" : [ 0.0, 0.0, 0.0, 0.5 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
@@ -385,7 +387,9 @@
 					"numinlets" : 15,
 					"numoutlets" : 0,
 					"order" : 7,
-					"patching_rect" : [ 195.0, 315.0, 293.0, 293.0 ]
+					"patching_rect" : [ 182.5, 300.0, 293.0, 293.0 ],
+					"phcolor" : [ 1.0, 0.011364, 0.011364, 1.0 ],
+					"txcolor" : [ 0.0, 0.0, 0.0, 0.501961 ]
 				}
 
 			}
@@ -1663,7 +1667,7 @@
 					"destination" : [ "obj-1", 14 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 684.5, 351.0, 498.0, 351.0, 498.0, 312.0, 478.5, 312.0 ],
+					"midpoints" : [ 684.5, 351.0, 498.0, 351.0, 498.0, 312.0, 466.0, 312.0 ],
 					"source" : [ "obj-29", 0 ]
 				}
 
