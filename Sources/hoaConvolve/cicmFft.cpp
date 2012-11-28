@@ -27,8 +27,7 @@ Cicm_Fft::Cicm_Fft(long aWindowSize)
 	m_scale			= 1. / (double)(m_window_size * 2.);
 
 #ifdef CICM_VDSP
-	vDSP_ctoz((Cicm_Complex *)aRealVector, 2, &m_input_complexes, 1, m_array_size); 
-	vDSP_fft_zrip(m_fft_setup, &m_input_complexes, 1, m_log2_size, FFT_FORWARD);
+	m_fft_handle = Cicm_fft_init_handle(m_order);
 #endif
 #ifdef CICM_IPPS
 	Cicm_fft_get_size(m_order, &m_spec_size, &m_init_size, &m_buff_size);
@@ -68,9 +67,8 @@ double	Cicm_Fft::getScale()
 
 Cicm_Fft::~Cicm_Fft()
 {
-#ifdef CICM_VDSP_FLOAT
-	vDSP_ctoz((Cicm_Complex *)aRealVector, 2, &m_input_complexes, 1, m_array_size); 
-	vDSP_fft_zrip(m_fft_setup, &m_input_complexes, 1, m_log2_size, FFT_FORWARD);
+#ifdef CICM_VDSP
+	Cicm_fft_free_handle(m_fft_handle);
 #endif
 #ifdef CICM_IPPS
 	Cicm_free(m_fft_buff);

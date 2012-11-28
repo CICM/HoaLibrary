@@ -17,14 +17,12 @@
  *
  */
 
-#define CICM_FFTW_GSL
-#define CICM_FLOAT
-
-//#define CICM_VDSP
+#define CICM_VDSP
 //#define CICM_FFTW_GSL
 //#define CICM_IPPS
-//#define CICM_FLOAT
+#define CICM_FLOAT
 //#define CICM_DOUBLE
+
 #ifndef DEF_CICM_DEFINE
 #define DEF_CICM_DEFINE
 
@@ -33,25 +31,54 @@
 #include <Accelerate/Accelerate.h>
 
 #ifdef CICM_FLOAT
+
+#define Cicm_Signal float
+#define Cicm_Packed DSPSplitComplex
+#define Cicm_Complex DSPComplex
+#define Cicm_Fft_Handle FFTSetup
+
+#define	Cicm_signal_malloc(pointeur, length) pointeur = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal))
+#define	Cicm_packed_malloc(pointeur, length) pointeur = (Cicm_Packed *)malloc(sizeof(Cicm_Packed)); pointeur[0].realp = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal)); pointeur[0].imagp = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal)); 
+
+#define Cicm_fft_init_handle(order) vDSP_create_fftsetup(order, FFT_RADIX2)
+#define	Cicm_free free
+#define Cicm_fft_free_handle vDSP_destroy_fftsetup
+
+#define Cicm_signal_copy(source, dest, length) vDSP_mmov(source, dest, length, 1, length, length)
+#define Cicm_signal_clear(source, length) vDSP_vclr(source, 1, length)
+#define Cicm_signal_dot(source1, source2, dest, length) vDSP_dotpr(source1, 1, source2, 1, dest, length)
+#define Cicm_signal_add(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
+
+#define Cicm_packed_mul(source1, source2, dest, length) zvmul(source1, 1, source2, 1, dest, 1, length, 1)
+#define Cicm_packed_clear(source, length) vDSP_vclr(source[0].imagp, 1, length); vDSP_vclr(source[0].realp, 1, length);
+
+#define Cicm_fft_forward(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_FORWARD)
+#define Cicm_fft_inverse(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
+
 #endif
 
 #ifdef CICM_DOUBLE
 
-#define Cicm_Signal double
-#define Cicm_Split_Complex DSPDoubleSplitComplex
-#define Cicm_Complex DSPDoubleComplex
-#define Cicm_Fft_setup FFTSetupD
+#define Cicm_Signal float
+#define Cicm_Packed DSPSplitComplex
+#define Cicm_Complex DSPComplex
+#define Cicm_Fft_Handle FFTSetup
 
-#define Cicm_create_Fft_setup vDSP_create_fftsetupD
-#define Cicm_destroy_Fft_setup vDSP_destroy_fftsetupD
-#define Cicm_mmov vDSP_mmovD
-#define Cicm_vclr vDSP_vclrD
-#define Cicm_zvmul vDSP_zvmulD
-#define Cicm_dotpr vDSP_dotprD
-#define Cicm_vadd vDSP_vaddD
-#define Cicm_ctoz vDSP_ctozD
-#define Cicm_ztoc vDSP_ztocD
-#define Cicm_fft_zrip vDSP_fft_zripD
+#define	Cicm_signal_malloc(pointeur, length) pointeur = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal))
+#define	Cicm_packed_malloc(pointeur, length) pointeur.realp = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal)); pointeur.imagp = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal)); 
+
+#define Cicm_fft_init_handle(order) vDSP_create_fftsetup(order, FFT_RADIX2)
+#define	Cicm_free free
+#define Cicm_fft_free_handle vDSP_destroy_fftsetup
+
+#define Cicm_signal_copy(source, dest, length) vDSP_mmov(source, dest, length, 1, length, length)
+#define Cicm_signal_clear(source, length) vDSP_vclr(source, 1, length)
+#define Cicm_packed_mul(source1, source2, dest, length) zvmul(source1, 1, source2, 1, dest, 1, length, 1) // a revoir
+#define Cicm_signal_dot(source1, source2, dest, length) vDSP_dotpr(source1, 1, source2, 1, dest, length)
+#define Cicm_signal_add(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
+#define Cicm_fft_forward(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_FORWARD)
+#define Cicm_fft_inverse(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
+
 #endif
 #endif
 
@@ -66,8 +93,10 @@
 #define Cicm_Fft_Handle		IppsFFTSpec_R_32f
 #define Cicm_Fft_Buffer		Ipp8u
 
-#define	Cicm_signal_malloc	ippsMalloc_32f
-#define	Cicm_buffer_malloc  ippsMalloc_8u
+#define	Cicm_signal_malloc(pointeur, length) pointeur = ippsMalloc_32f(length)
+#define	Cicm_packed_malloc(pointeur, length) pointeur = ippsMalloc_32f(length)
+
+#define	Cicm_buffer_malloc ippsMalloc_8u
 #define	Cicm_free ippsFree
 
 #define Cicm_signal_clear(source, length) ippsZero_32f(source, length)
@@ -90,8 +119,9 @@
 #define Cicm_Fft_Handle		IppsFFTSpec_R_64f
 #define Cicm_Fft_Buffer		Ipp8u
 
-#define	Cicm_signal_malloc	ippsMalloc_64f
-#define	Cicm_packed_malloc	ippsMalloc_64f
+#define	Cicm_signal_malloc(pointeur, length) pointeur = ippsMalloc_64f(length)
+#define	Cicm_packed_malloc(pointeur, length) pointeur = ippsMalloc_64f(length)
+
 #define	Cicm_buffer_malloc ippsMalloc_8u
 #define	Cicm_free ippsFree
 
@@ -138,8 +168,8 @@ static void packed_mul(float* x, float* y, float* out, long aLength)
 #define Cicm_Packed			float
 #define Cicm_Fft_Handle		fftwf_plan
 
-#define	Cicm_signal_malloc(length) malloc(length * sizeof(float))
-#define	Cicm_packed_malloc(length) malloc(length * sizeof(float))
+#define	Cicm_signal_malloc(pointeur, length) pointeur = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal))
+#define	Cicm_packed_malloc(pointeur, length) pointeur = (Cicm_Packed *)malloc(length * sizeof(Cicm_Packed))
 #define	Cicm_free free
 
 #define Cicm_signal_clear(source, length) gsl_vector_float_set_zero(&gsl_vector_float_view_array(source, length).vector)
@@ -177,8 +207,8 @@ static void packed_mul(double* x, double* y, double* out, long aLength)
 #define Cicm_Packed			double
 #define Cicm_Fft_Handle		fftw_plan
 
-#define	Cicm_signal_malloc(length) malloc(length * sizeof(double))
-#define	Cicm_packed_malloc(length) malloc(length * sizeof(double))
+#define	Cicm_signal_malloc(pointeur, length) pointeur = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal))
+#define	Cicm_packed_malloc(pointeur, length) pointeur = (Cicm_Packed *)malloc(length * sizeof(Cicm_Packed))
 #define	Cicm_free free
 
 #define Cicm_signal_clear(source, length) gsl_vector_set_zero(&gsl_vector_view_array(source, length).vector)

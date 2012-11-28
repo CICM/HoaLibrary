@@ -29,27 +29,30 @@ FftConvolution::FftConvolution(long aWindowSize, long aNumberOfInstances)
 	m_ramp = 0;
 
 	m_real_vector		= new Cicm_Signal*[m_number_of_instances];
-	m_impul_complexes	= new Cicm_Signal*[m_number_of_instances];
+	m_impul_complexes	= new Cicm_Packed*[m_number_of_instances];
 	
-	m_input_complexes	= (Cicm_Signal *)Cicm_signal_malloc(m_window_size);
-	m_output_complexes	= (Cicm_Signal *)Cicm_signal_malloc(m_window_size);
-	m_buffer			= (Cicm_Signal *)Cicm_signal_malloc(m_array_size);
-	Cicm_signal_clear(m_input_complexes, m_window_size);
-	Cicm_signal_clear(m_output_complexes, m_window_size);
+	Cicm_packed_malloc(m_input_complexes, m_window_size);
+	Cicm_packed_malloc(m_output_complexes, m_window_size);
+	Cicm_signal_malloc(m_buffer, m_array_size);
+	
+	Cicm_packed_clear(m_input_complexes, m_window_size);
+	Cicm_packed_clear(m_output_complexes, m_window_size);
 	Cicm_signal_clear(m_buffer, m_array_size);
 
 	for(int i = 0; i < m_number_of_instances; i++)
 	{
-		m_real_vector[i]		= (Cicm_Signal *)Cicm_signal_malloc(m_window_size);
-		m_impul_complexes[i]	= (Cicm_Signal *)Cicm_signal_malloc(m_window_size);
+		Cicm_signal_malloc(m_real_vector[i], m_window_size);
+		Cicm_packed_malloc(m_impul_complexes[i], m_window_size);
 		Cicm_signal_clear(m_real_vector[i], m_window_size);
-		Cicm_signal_clear(m_impul_complexes[i], m_window_size);
+		Cicm_packed_clear(m_impul_complexes[i], m_window_size);
 	}
+	
 }
 
 void FftConvolution::loadImpulseResponse(Cicm_Signal* anImpulseResponse)
 {
-	Cicm_Signal *datas = (Cicm_Signal *)Cicm_signal_malloc(m_window_size);
+	Cicm_Signal *datas;
+	Cicm_signal_malloc(datas, m_window_size);
 	for(int i = 0; i < m_number_of_instances; i++)
 	{
 		for(int j = 0; j < m_array_size; j++)
@@ -60,7 +63,7 @@ void FftConvolution::loadImpulseResponse(Cicm_Signal* anImpulseResponse)
 		m_fft_instance->forward(datas, m_impul_complexes[i]);
 	}
 	
-	free(datas);
+	Cicm_free(datas);
 }
 
 FftConvolution::~FftConvolution()

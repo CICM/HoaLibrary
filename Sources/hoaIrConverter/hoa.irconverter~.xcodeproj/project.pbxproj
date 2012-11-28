@@ -7,25 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E64A53815C6C80B00F85BF4 /* hoa.recomposer~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E64A53715C6C80B00F85BF4 /* hoa.recomposer~.cpp */; };
-		0E6DC9A416135B6F0001AAF5 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */; };
-		0E6DC9A516135B6F0001AAF5 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */; };
-		0E6DC9A716135B770001AAF5 /* ambisonicRecomposer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC9A616135B770001AAF5 /* ambisonicRecomposer.hpp */; };
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		4EB5E0E014DEF21200ADF62A /* ambisonicRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicRecomposer.cpp */; };
+		DDCD83A61665388100A0020B /* cicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = DDCD839F1665388100A0020B /* cicmDefine.h */; };
+		DDCD83A71665388100A0020B /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = DDCD83A01665388100A0020B /* cicmTools.h */; };
+		DDCD83A81665388100A0020B /* ambisonicRecomposer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DDCD83A11665388100A0020B /* ambisonicRecomposer.hpp */; };
+		DDCD83A91665388100A0020B /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DDCD83A21665388100A0020B /* gslMatrix.hpp */; };
+		DDCD83AA1665388100A0020B /* ambisonicRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD83A31665388100A0020B /* ambisonicRecomposer.cpp */; };
+		DDCD83AB1665388100A0020B /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD83A41665388100A0020B /* gslMatrix.cpp */; };
+		DDCD83AC1665388100A0020B /* hoa.irconverter~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDCD83A51665388100A0020B /* hoa.irconverter~.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E64A53715C6C80B00F85BF4 /* hoa.recomposer~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.recomposer~.cpp"; sourceTree = "<group>"; };
-		0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
-		0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
-		0E6DC9A616135B770001AAF5 /* ambisonicRecomposer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ambisonicRecomposer.hpp; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2FBBEAE508F335360078DB84 /* hoa.recomposer~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.recomposer~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EB5E0DD14DEF21200ADF62A /* ambisonicRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicRecomposer.cpp; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
+		DDCD839E1665387500A0020B /* hoa.irconverter~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.irconverter~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDCD839F1665388100A0020B /* cicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmDefine.h; sourceTree = "<group>"; };
+		DDCD83A01665388100A0020B /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmTools.h; sourceTree = "<group>"; };
+		DDCD83A11665388100A0020B /* ambisonicRecomposer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ambisonicRecomposer.hpp; sourceTree = "<group>"; };
+		DDCD83A21665388100A0020B /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
+		DDCD83A31665388100A0020B /* ambisonicRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicRecomposer.cpp; sourceTree = "<group>"; };
+		DDCD83A41665388100A0020B /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
+		DDCD83A51665388100A0020B /* hoa.irconverter~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.irconverter~.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,13 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				DDCD839F1665388100A0020B /* cicmDefine.h */,
+				DDCD83A01665388100A0020B /* cicmTools.h */,
+				DDCD83A11665388100A0020B /* ambisonicRecomposer.hpp */,
+				DDCD83A21665388100A0020B /* gslMatrix.hpp */,
+				DDCD83A31665388100A0020B /* ambisonicRecomposer.cpp */,
+				DDCD83A41665388100A0020B /* gslMatrix.cpp */,
+				DDCD83A51665388100A0020B /* hoa.irconverter~.cpp */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
@@ -64,11 +75,6 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */,
-				0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */,
-				0E64A53715C6C80B00F85BF4 /* hoa.recomposer~.cpp */,
-				4EB5E0DD14DEF21200ADF62A /* ambisonicRecomposer.cpp */,
-				0E6DC9A616135B770001AAF5 /* ambisonicRecomposer.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -76,7 +82,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.recomposer~.mxo */,
+				DDCD839E1665387500A0020B /* hoa.irconverter~.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,8 +94,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6DC9A516135B6F0001AAF5 /* gslMatrix.hpp in Headers */,
-				0E6DC9A716135B770001AAF5 /* ambisonicRecomposer.hpp in Headers */,
+				DDCD83A61665388100A0020B /* cicmDefine.h in Headers */,
+				DDCD83A71665388100A0020B /* cicmTools.h in Headers */,
+				DDCD83A81665388100A0020B /* ambisonicRecomposer.hpp in Headers */,
+				DDCD83A91665388100A0020B /* gslMatrix.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +120,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.recomposer~.mxo */;
+			productReference = DDCD839E1665387500A0020B /* hoa.irconverter~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -120,7 +128,7 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.recomposer~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.irconverter~" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -164,9 +172,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EB5E0E014DEF21200ADF62A /* ambisonicRecomposer.cpp in Sources */,
-				0E64A53815C6C80B00F85BF4 /* hoa.recomposer~.cpp in Sources */,
-				0E6DC9A416135B6F0001AAF5 /* gslMatrix.cpp in Sources */,
+				DDCD83AA1665388100A0020B /* ambisonicRecomposer.cpp in Sources */,
+				DDCD83AB1665388100A0020B /* gslMatrix.cpp in Sources */,
+				DDCD83AC1665388100A0020B /* hoa.irconverter~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +295,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.recomposer~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.irconverter~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

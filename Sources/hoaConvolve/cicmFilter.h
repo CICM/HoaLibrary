@@ -1,6 +1,5 @@
 /*
- *
- * Copyright (C) 2012 Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Pierre Guillot, CICM & Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -17,28 +16,44 @@
  *
  */
 
-#include "cicmFir.h"
+#ifndef DEF_CICM_FILTER
+#define DEF_CICM_FILTER
 
-FirFilter::FirFilter(long anImpulseSize)
+#include "cicmTools.h"
+
+class CicmFilter
 {
-	m_fir_size		= anImpulseSize;
-	m_input_size	= m_fir_size * 2 - 1;
+protected:
+	
+	Cicm_Signal*	m_buffer;
+	long			m_buffer_size;
+	long			m_index;
 
-	Cicm_signal_malloc(m_fir_vector, m_fir_size);
-	Cicm_signal_malloc(m_input_vector, m_input_size);
-	Cicm_signal_clear(m_fir_vector, m_fir_size);
-	Cicm_signal_clear(m_input_vector, m_input_size);
+	Cicm_Signal		m_result;
 
-	m_index = m_fir_size;
+public:
+	CicmFilter(long aBufferSize = 128);
+	virtual inline Cicm_Signal process();
+	long	getBufferSize() ;
+	~CicmFilter();
+};
+
+CicmFilter::CicmFilter(long aBufferSize)
+{
+	m_buffer_size = Tools::clip_min(aBufferSize, long(1));
+	Cicm_signal_malloc(m_buffer, m_buffer_size);
+	m_result = 0.;
+	m_index = 0;
 }
 
-void FirFilter::setImpulseResponse(Cicm_Signal* anImpulseResponse)
+long CicmFilter::getBufferSize() 
 {
-	Cicm_signal_copy(anImpulseResponse, m_fir_vector, m_fir_size);
+	return m_buffer_size;
 }
 
-FirFilter::~FirFilter()
+CicmFilter::~CicmFilter()
 {
-	Cicm_free(m_fir_vector);
-	Cicm_free(m_input_vector);
+	Cicm_free(m_buffer);
 }
+
+#endif
