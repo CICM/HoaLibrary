@@ -28,6 +28,8 @@ AmbisonicConvolve::AmbisonicConvolve(long anOrder, long aVectorSize)
 	
 	for(int i = 0; i < m_number_of_harmonics; i++)
 		m_convolution.push_back(new GardnerConvolution());
+	
+	setGain(1.);
 }
 
 long AmbisonicConvolve::getOrder()
@@ -52,12 +54,22 @@ long AmbisonicConvolve::getNumberOfOutputs()
 
 void AmbisonicConvolve::setVectorSize(long aVectorSize)
 {
-	m_vector_size = Tools::clip_min(aVectorSize, (long)1);
+	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
 long AmbisonicConvolve::getVectorSize()
 {
 	return m_vector_size;
+}
+
+void AmbisonicConvolve::setGain(double aGain)
+{
+	m_gain = Tools::clip(aGain, 0., 1.);
+}
+
+double AmbisonicConvolve::getGain()
+{
+	return m_gain;
 }
 
 void AmbisonicConvolve::setImpulseResponse(long aInstance, double* anImpulResponse, long aSize)

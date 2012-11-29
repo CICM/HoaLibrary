@@ -33,6 +33,7 @@ private:
 	long		m_number_of_outputs;
 	long		m_sampling_rate;
 	long		m_vector_size;
+	double		m_gain;
 	
 	vector <GardnerConvolution*> m_convolution;
 public:
@@ -43,6 +44,8 @@ public:
 	long	getNumberOfOutputs();
 	void	setVectorSize(long aVectorSize);
 	long	getVectorSize();
+	void	setGain(double aGain);
+	double	getGain();
 
 	void	setImpulseResponse(long aInstance, double* anImpulResponse, long aSize);
 	~AmbisonicConvolve();
@@ -51,7 +54,14 @@ public:
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{
 		for(int j = 0; j < m_number_of_harmonics; j++)
-			aOutputs[j] = m_convolution[j]->process(aInputs[j]);
+			aOutputs[j] = m_convolution[j]->process(aInputs[j]) * m_gain + (1. - m_gain) * aInputs[j];
+	}
+	
+	template<typename Type> void process(Type* aInputs, Type* aOutputs, Type aGain)
+	{
+		setGain(aGain);
+		for(int j = 0; j < m_number_of_harmonics; j++)
+			aOutputs[j] = m_convolution[j]->process(aInputs[j]) * m_gain + (1. - m_gain) * aInputs[j];
 	}
 	
 	/* Perform sample block */
@@ -60,7 +70,17 @@ public:
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]);
+				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]) + (1. - m_gain) * aInputs[j][i];
+		}
+	}
+	
+	template<typename Type> void process(Type** aInputs, Type** aOutputs, Type* aGain)
+	{
+		for(int i = 0; i < m_vector_size; i++)
+		{
+			setGain(aGain[i]);
+			for(int j = 0; j < m_number_of_harmonics; j++)
+				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]) + (1. - m_gain) * aInputs[j][i];
 		}
 	}
 };
