@@ -152,7 +152,7 @@ int main()
 	CLASS_ATTR_ORDER				(c, "mode", 0, "5");
 	CLASS_ATTR_ENUMINDEX			(c, "mode", 0, "Absolute \" \"Relative");
 	CLASS_ATTR_LABEL				(c, "mode", 0, "Interaction mode");
-	CLASS_ATTR_FILTER_CLIP			(c, "wide", 0, 1);
+	CLASS_ATTR_FILTER_CLIP			(c, "mode", 0, 1);
 	CLASS_ATTR_DEFAULT				(c, "mode", 0, "0.");
 	CLASS_ATTR_SAVE					(c, "mode", 1);
 
