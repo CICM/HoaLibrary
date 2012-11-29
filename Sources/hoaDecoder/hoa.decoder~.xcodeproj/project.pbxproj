@@ -7,34 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E6DC8A6161357BE0001AAF5 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC8A4161357BE0001AAF5 /* gslMatrix.cpp */; };
-		0E6DC8A7161357BE0001AAF5 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC8A5161357BE0001AAF5 /* gslMatrix.hpp */; };
-		4E85403415F16ED500169453 /* ambisonicDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */; };
-		4E85403515F16ED500169453 /* hoa.decoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */; };
-		4E85403815F16ED500169453 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
-		4E85403915F16ED500169453 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
+		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
+		2C23E2CC1667D5BB0079E87C /* ambisonicDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C23E2C71667D5BB0079E87C /* ambisonicDecode.cpp */; };
+		2C23E2CD1667D5BB0079E87C /* AmbisonicDecode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C23E2C81667D5BB0079E87C /* AmbisonicDecode.h */; };
+		2C23E2CE1667D5BB0079E87C /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C23E2C91667D5BB0079E87C /* gslMatrix.cpp */; };
+		2C23E2CF1667D5BB0079E87C /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2C23E2CA1667D5BB0079E87C /* gslMatrix.hpp */; };
+		2C23E2D01667D5BB0079E87C /* hoa.decoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C23E2CB1667D5BB0079E87C /* hoa.decoder~.cpp */; };
+		2C8C9C48165FB26B00821357 /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8C9C47165FB26B00821357 /* cicmTools.h */; };
+		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.decoder~.cpp"; sourceTree = "<group>"; };
-		0E6DC8A4161357BE0001AAF5 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
-		0E6DC8A5161357BE0001AAF5 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
-		0ED554621613502100B09E50 /* ambisonicDecode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ambisonicDecode.hpp; sourceTree = "<group>"; };
-		0ED5546D1613507C00B09E50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = SOURCE_ROOT; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		4E85403E15F16ED500169453 /* hoa.decoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.decoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicDecode.cpp; sourceTree = "<group>"; };
+		2C23E2C71667D5BB0079E87C /* ambisonicDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicDecode.cpp; sourceTree = "<group>"; };
+		2C23E2C81667D5BB0079E87C /* AmbisonicDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicDecode.h; sourceTree = "<group>"; };
+		2C23E2C91667D5BB0079E87C /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
+		2C23E2CA1667D5BB0079E87C /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
+		2C23E2CB1667D5BB0079E87C /* hoa.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.decoder~.cpp"; sourceTree = "<group>"; };
+		2C8C9C47165FB26B00821357 /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmTools.h; path = ../../../CicmLibrary/cicmTools.h; sourceTree = SOURCE_ROOT; };
+		2FBBEAE508F335360078DB84 /* hoa.decoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.decoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4E85403715F16ED500169453 /* Frameworks */ = {
+		2FBBEADC08F335360078DB84 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E85403815F16ED500169453 /* MaxAPI.framework in Frameworks */,
-				4E85403915F16ED500169453 /* MaxAudioAPI.framework in Frameworks */,
+				2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */,
+				22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
-				0ED5546D1613507C00B09E50 /* Info.plist */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
@@ -65,11 +66,12 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0E64A53715C6C80B00F85BF4 /* hoa.decoder~.cpp */,
-				4EB5E0DD14DEF21200ADF62A /* ambisonicDecode.cpp */,
-				0E6DC8A4161357BE0001AAF5 /* gslMatrix.cpp */,
-				0E6DC8A5161357BE0001AAF5 /* gslMatrix.hpp */,
-				0ED554621613502100B09E50 /* ambisonicDecode.hpp */,
+				2C23E2C71667D5BB0079E87C /* ambisonicDecode.cpp */,
+				2C23E2C81667D5BB0079E87C /* AmbisonicDecode.h */,
+				2C23E2C91667D5BB0079E87C /* gslMatrix.cpp */,
+				2C23E2CA1667D5BB0079E87C /* gslMatrix.hpp */,
+				2C23E2CB1667D5BB0079E87C /* hoa.decoder~.cpp */,
+				2C8C9C47165FB26B00821357 /* cicmTools.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -77,7 +79,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4E85403E15F16ED500169453 /* hoa.decoder~.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.decoder~.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,34 +87,36 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4E85402F15F16ED500169453 /* Headers */ = {
+		2FBBEAD708F335360078DB84 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6DC8A7161357BE0001AAF5 /* gslMatrix.hpp in Headers */,
+				2C8C9C48165FB26B00821357 /* cicmTools.h in Headers */,
+				2C23E2CD1667D5BB0079E87C /* AmbisonicDecode.h in Headers */,
+				2C23E2CF1667D5BB0079E87C /* gslMatrix.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4E85402E15F16ED500169453 /* max-external-mkl */ = {
+		2FBBEAD608F335360078DB84 /* max-external */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E85403B15F16ED500169453 /* Build configuration list for PBXNativeTarget "max-external-mkl" */;
+			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
 			buildPhases = (
-				4E85402F15F16ED500169453 /* Headers */,
-				4E85403215F16ED500169453 /* Resources */,
-				4E85403315F16ED500169453 /* Sources */,
-				4E85403715F16ED500169453 /* Frameworks */,
-				4E85403A15F16ED500169453 /* Rez */,
+				2FBBEAD708F335360078DB84 /* Headers */,
+				2FBBEAD808F335360078DB84 /* Resources */,
+				2FBBEADA08F335360078DB84 /* Sources */,
+				2FBBEADC08F335360078DB84 /* Frameworks */,
+				2FBBEADF08F335360078DB84 /* Rez */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "max-external-mkl";
+			name = "max-external";
 			productName = iterator;
-			productReference = 4E85403E15F16ED500169453 /* hoa.decoder~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.decoder~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -134,13 +138,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4E85402E15F16ED500169453 /* max-external-mkl */,
+				2FBBEAD608F335360078DB84 /* max-external */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4E85403215F16ED500169453 /* Resources */ = {
+		2FBBEAD808F335360078DB84 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -150,7 +154,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXRezBuildPhase section */
-		4E85403A15F16ED500169453 /* Rez */ = {
+		2FBBEADF08F335360078DB84 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -160,13 +164,13 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4E85403315F16ED500169453 /* Sources */ = {
+		2FBBEADA08F335360078DB84 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E85403415F16ED500169453 /* ambisonicDecode.cpp in Sources */,
-				4E85403515F16ED500169453 /* hoa.decoder~.cpp in Sources */,
-				0E6DC8A6161357BE0001AAF5 /* gslMatrix.cpp in Sources */,
+				2C23E2CC1667D5BB0079E87C /* ambisonicDecode.cpp in Sources */,
+				2C23E2CE1667D5BB0079E87C /* gslMatrix.cpp in Sources */,
+				2C23E2D01667D5BB0079E87C /* hoa.decoder~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +227,7 @@
 			};
 			name = Deployment;
 		};
-		4E85403C15F16ED500169453 /* Development */ = {
+		2FBBEAE108F335360078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
@@ -239,15 +243,12 @@
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/include,
 				);
-				INFOPLIST_FILE = ../Info.plist;
-				LIBRARY_SEARCH_PATHS = /Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib;
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_sequential.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_intel.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_core.a,
 					/usr/local/lib/libgsl.a,
+					"-lcblas",
+					"-latlas",
 					"-lm",
 				);
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
@@ -255,7 +256,7 @@
 			};
 			name = Development;
 		};
-		4E85403D15F16ED500169453 /* Deployment */ = {
+		2FBBEAE208F335360078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
@@ -274,15 +275,12 @@
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/include,
 				);
-				INFOPLIST_FILE = ../Info.plist;
-				LIBRARY_SEARCH_PATHS = /Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib;
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_sequential.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_intel.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_core.a,
 					/usr/local/lib/libgsl.a,
+					"-lcblas",
+					"-latlas",
 					"-lm",
 				);
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
@@ -302,11 +300,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;
 		};
-		4E85403B15F16ED500169453 /* Build configuration list for PBXNativeTarget "max-external-mkl" */ = {
+		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4E85403C15F16ED500169453 /* Development */,
-				4E85403D15F16ED500169453 /* Deployment */,
+				2FBBEAE108F335360078DB84 /* Development */,
+				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;

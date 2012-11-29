@@ -160,6 +160,7 @@ int main()
 	CLASS_ATTR_LABEL			(c, "cishadcolor", 0, "Circle Shadow Color");
 	CLASS_ATTR_ORDER			(c, "cishadcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "cishadcolor", 0, "1. 1. 1. 0.6");
+	//CLASS_ATTR_INVISIBLE		(c, "cishadcolor", 0);
 	
 	CLASS_ATTR_RGBA				(c, "phcolor", 0, t_scope, f_colorPositif);
 	CLASS_ATTR_CATEGORY			(c, "phcolor", 0, "Color");
@@ -291,7 +292,6 @@ t_int *scope_perform(t_int *w)
 
 void scope_tick(t_scope *x)
 {
-	
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 	jbox_redraw((t_jbox *)x);
@@ -398,6 +398,8 @@ t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, voi
 		{
 			if (x->f_shadow) object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 0);
 			else object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 1);
+			//if (x->f_shadow) object_attr_setlong(object_attr_get(x, gensym("cishadcolor")), gensym("invisible"), 0);
+			//else object_attr_setlong(object_attr_get(x, gensym("cishadcolor")), gensym("invisible"), 1);
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("harminics_layer"));
 		}
@@ -424,9 +426,11 @@ void scope_paint(t_scope *x, t_object *view)
 	
 	draw_background(x, view, &rect);
 	draw_angle(x, view, &rect);
-	draw_contribution(x, view, &rect);
-	draw_harmonics(x, view, &rect);
-	
+	if (sys_getdspstate())
+	{
+		draw_contribution(x, view, &rect);
+		draw_harmonics(x, view, &rect);
+	}
 }
 
 void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params)
@@ -454,18 +458,12 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 		
 		/* Background */
 		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-		//jgraphics_rectangle(g, 0., 0., rect->width, rect->height);
 		jgraphics_rectangle_rounded(g, 0., 0., rect->width, rect->height, 6, 6);
 		jgraphics_fill(g);
 		
 		/* Circles */
 		for(i = 5; i > 0; i--)
 		{
-			/*
-			jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-			jgraphics_stroke(g);
-			*/
 			if (x->f_shadow) {
 				//inner shadow
 				jgraphics_set_line_width(g, 2);
@@ -608,8 +606,96 @@ void draw_contribution(t_scope *x,  t_object *view, t_rect *rect)
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("contrib_layer"), 0., 0.);
 }
-
 void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
+{
+	int i;
+	double rayon, normalization;
+	double x1, y1, x2, y2;
+	double energyX, energyY, velocityX, velocityY;
+	t_jrgba black = {0.,0.,0., 0.5};
+	float alphablack = 1.;
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
+	
+	if (alphablack > x->f_colorPositif.alpha ) alphablack = x->f_colorPositif.alpha;
+	if (alphablack > x->f_colorNegatif.alpha ) alphablack = x->f_colorNegatif.alpha;
+	alphablack -= 0.5;
+	if (alphablack < 0.) alphablack = 0;
+	black.alpha = alphablack;
+	
+	
+	if (g) 
+	{
+		rayon = x->f_rayonCircle * 5.;
+		if(x->f_biggestContrib > 1.)
+			normalization = rayon / x->f_biggestContrib;
+		else
+			normalization = rayon;
+		
+		energyX = x->f_xCircleVector[0] * x->f_contributions[0] * x->f_contributions[0];
+		energyY = x->f_yCircleVector[0] * x->f_contributions[0] * x->f_contributions[0];
+		
+		velocityX = x->f_xCircleVector[0] * x->f_contributions[0];
+		velocityY = x->f_yCircleVector[0] * x->f_contributions[0];
+		
+		x1 =  x->f_xCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.x;
+		y1 =  x->f_yCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.y;
+		
+		for(i = 1; i < MAXIMUM_SIZE; i++)
+		{
+			energyX += x->f_xCircleVector[i] * x->f_contributions[i] * x->f_contributions[i];
+			energyY += x->f_yCircleVector[i] * x->f_contributions[i] * x->f_contributions[i];
+			
+			velocityX += x->f_xCircleVector[i] * x->f_contributions[i];
+			velocityY += x->f_yCircleVector[i] * x->f_contributions[i];
+			
+			x2 =  x->f_xCircleVector[i] * fabs(x->f_contributions[i]) * normalization + x->f_center.x;
+			y2 =  x->f_yCircleVector[i] * fabs(x->f_contributions[i]) * normalization + x->f_center.y;
+			
+            if (x->f_contributions[i] < 0.)
+            {
+				
+				if(i > 1 && x->f_contributions[i-1] >= 0.)
+				{
+					x2 = x->f_center.x;
+					y2 = x->f_center.y;
+				}
+				jgraphics_set_source_jrgba(g, &x->f_colorPositif);
+            }
+            else
+            {
+				if(i > 1 && x->f_contributions[i-1] < 0.)
+				{
+					x1 = x->f_center.x;
+					y1 = x->f_center.y;
+				}
+				jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
+            }
+			
+			if(i == MAXIMUM_SIZE - 1)
+			{
+				x2 =  x->f_xCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.x;
+				y2 =  x->f_yCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.y;
+			}
+			
+			if (x->f_shadow) 
+			{
+				jgraphics_line_draw_fast(g, x1-1, y1-1, x2-1, y2-1, 1.);
+				jgraphics_set_source_jrgba(g, &black);
+				jgraphics_line_draw_fast(g, x1, y1, x2, y2, 1.);
+			}
+			else {
+				jgraphics_line_draw_fast(g, x1, y1, x2, y2, 1.);
+			}
+			x1 = x2;
+			y1 = y2;
+			
+		}
+		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
+	}
+	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
+}
+
+void draw_harmonics_old(t_scope *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double rayon, normalization;
@@ -682,7 +768,6 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 			else {
 				jgraphics_line_draw_fast(g, x1, y1, x2, y2, 1.);
 			}
-
 			x1 = x2;
 			y1 = y2;
 			

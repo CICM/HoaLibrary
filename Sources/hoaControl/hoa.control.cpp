@@ -465,7 +465,8 @@ void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modif
 		long shift = 18;
 	#endif
 	#ifdef MAC_VERSION
-		long shift = 2;
+		//long shift = 2;
+		long shift = 18;
 	#endif
 	t_atom argv[1];
 	if(modifiers != shift)
@@ -508,7 +509,8 @@ void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modif
 		long shift = 18;
 	#endif
 	#ifdef MAC_VERSION
-		long shift = 2;
+		//long shift = 2;
+		long shift = 18;
 	#endif
 	t_atom argv[1];
 	if(modifiers != shift)
