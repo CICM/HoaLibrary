@@ -43,6 +43,7 @@ typedef struct  _control
 
 	long		f_mode;
 	long		f_order;
+	int			f_shadow;
 	long		f_optimMode;
 	double		f_azimuth;
 	double		f_azimuthOffset;
@@ -50,8 +51,10 @@ typedef struct  _control
 	double		f_wideOffset;
 
 	t_jrgba		f_colorBackground;
+	t_jrgba		f_gradientcolor;
 	t_jrgba		f_colorText;
 	t_jrgba		f_colorCircle;
+	t_jrgba		f_colorCircleShadow;
 	t_jrgba		f_colorNegatif;
 	t_jrgba		f_colorPositif;
 	t_jrgba		f_colorContrib;
@@ -77,6 +80,8 @@ void control_free(t_control *x);
 void control_assist(t_control *x, void *b, long m, long a, char *s);
 
 t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+long control_oksize(t_control *x, t_rect *newrect);
+void control_getdrawparams(t_control *x, t_object *patcherview, t_jboxdrawparams *params);
 t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv);
 t_max_err optim_set(t_control *x, t_object *attr, long argc, t_atom *argv);
 t_max_err wide_set(t_control *x, t_object *attr, long argc, t_atom *argv);
@@ -105,12 +110,21 @@ int main()
 	class_addmethod(c, (method)control_assist,		"assist",		A_CANT,	0);
 	class_addmethod(c, (method)control_paint,		"paint",		A_CANT,	0);
 	class_addmethod(c, (method)control_notify,		"notify",		A_CANT, 0);
+	class_addmethod(c, (method)control_getdrawparams, "getdrawparams", A_CANT, 0);
+	class_addmethod(c, (method)control_oksize,		"oksize",		A_CANT, 0);
 	class_addmethod(c, (method)control_mouse_down,	"mousedown",	A_CANT, 0);
 	class_addmethod(c, (method)control_mouse_drag,	"mousedrag",	A_CANT, 0);
 	
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
+	
+	CLASS_ATTR_LONG					(c, "shadow", 0, t_control, f_shadow);
+	CLASS_ATTR_CATEGORY				(c, "shadow", 0, "Appearance");
+	CLASS_ATTR_ORDER				(c, "shadow", 0, "1");
+	CLASS_ATTR_STYLE_LABEL			(c, "shadow", 0, "onoff", "Draw Shadows");
+	CLASS_ATTR_DEFAULT				(c, "shadow", 0, "1");
+	CLASS_ATTR_SAVE					(c, "shadow", 1);
 
 	CLASS_ATTR_LONG					(c, "order", 0, t_control, f_order);
 	CLASS_ATTR_CATEGORY				(c, "order", 0, "Behavior");
@@ -197,6 +211,20 @@ int main()
 	CLASS_ATTR_LABEL				(c, "cocolor", 0, "Biggest contribution color");
 	CLASS_ATTR_ORDER				(c, "cocolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cocolor", 0, "0. 0. 0. 1.");
+	
+	CLASS_ATTR_RGBA					(c, "cishadcolor", 0, t_control, f_colorCircleShadow);
+	CLASS_ATTR_CATEGORY				(c, "cishadcolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "cishadcolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "cishadcolor", 0, "Circle Shadow Color");
+	CLASS_ATTR_ORDER				(c, "cishadcolor", 0, "7");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cishadcolor", 0, "1. 1. 1. 0.6");
+	//CLASS_ATTR_INVISIBLE		(c, "cishadcolor", 0);
+	
+	CLASS_ATTR_RGBA					(c, "gradientcolor", 0, t_control, f_gradientcolor);
+	CLASS_ATTR_CATEGORY				(c, "gradientcolor", 0, "Color");
+	CLASS_ATTR_STYLE_LABEL			(c, "gradientcolor", 0, "rgba", "Gradient Color");
+	CLASS_ATTR_DEFAULTNAME_SAVE		(c, "gradientcolor", 0, "1.0 1.0 1.0 1.0");
+	CLASS_ATTR_ORDER				(c, "gradientcolor", 0, "8");
 
 	class_register(CLASS_BOX, c);
 	control_class = c;
@@ -279,7 +307,7 @@ t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender,
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
-		if(name == gensym("bgcolor") || name == gensym("cicolor"))
+		if(name == gensym("bgcolor") || name == gensym("cicolor") || name == gensym("gradientcolor") )
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 		}
@@ -295,9 +323,29 @@ t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender,
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
 		}
+		else if(name == gensym("shadow"))
+		{
+			if (x->f_shadow) object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 0);
+			else object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 1);
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("harminics_layer"));
+		}
 		jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
+}
+
+void control_getdrawparams(t_control *x, t_object *patcherview, t_jboxdrawparams *params)
+{
+	params->d_borderthickness = 0;
+	params->d_cornersize = 4; 
+}
+
+long control_oksize(t_control *x, t_rect *newrect){
+	if (newrect->width < 100){
+		newrect->width = newrect->height = 100;
+	}
+	return 0;
 }
 
 void control_paint(t_control *x, t_object *view)
@@ -317,7 +365,7 @@ void control_paint(t_control *x, t_object *view)
 	x->f_rayonCircle = x->f_rayonGlobal / 6;
 	
 	draw_background(x, view, &rect);
-	draw_angle(x, view, &rect);
+	//draw_angle(x, view, &rect);
 	draw_harmonics(x, view, &rect);
 	draw_biggest_contribution(x, view, &rect);
 }
@@ -325,44 +373,105 @@ void control_paint(t_control *x, t_object *view)
 void draw_background(t_control *x,  t_object *view, t_rect *rect)
 {
 	int i;
-	double x1, x2, y1, y2;
+	double y1, y2, rotateAngle;
+	t_jmatrix transform;
+	t_jpattern *pattern;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
-
+	
 	if (g) 
 	{
-		/* Background */
+		
+		//pattern = jgraphics_pattern_create_linear(rect->width*0.5, 0, rect->width,  rect->height);
+		pattern = jgraphics_pattern_create_linear(0, 0, rect->width,  rect->height);
+		jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_gradientcolor.red, x->f_gradientcolor.green, x->f_gradientcolor.blue, x->f_gradientcolor.alpha);
+		jgraphics_pattern_add_color_stop_rgba(pattern, 1., x->f_colorBackground.red, x->f_colorBackground.green, x->f_colorBackground.blue, x->f_colorBackground.alpha);
+		
+		jgraphics_set_source(g, pattern);
+		jgraphics_rectangle_rounded(g, 0, 0, rect->width,  rect->height, 20, 20);
+		jgraphics_fill(g);
+		
+		jgraphics_set_line_width(g, 2);
+		jgraphics_rectangle_rounded(g, 1, 1, rect->width-2.,  rect->height-2., 20, 20);
 		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-		jgraphics_rectangle_fill_fast(g, 0., 0., rect->width, rect->height);
+		jgraphics_stroke(g);
+		
+		jgraphics_arc(g, rect->width*0.5-2, rect->height*0.5-2, rect->width*0.45, 0., JGRAPHICS_2PI);
+		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		//jgraphics_fill(g);
+		jgraphics_stroke(g);
+		jgraphics_arc(g, rect->width*0.5, rect->height*0.5, rect->width*0.45, 0., JGRAPHICS_2PI);
+		jgraphics_set_source_jrgba(g, &x->f_gradientcolor);
+		jgraphics_fill(g);
+		
+		/* Background */
+		//jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		//jgraphics_rectangle_rounded(g, 0., 0., rect->width, rect->height, 6, 6);
+		//jgraphics_fill(g);
 		
 		/* Circles */
 		for(i = 5; i > 0; i--)
 		{
-			jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-			jgraphics_fill(g);
-			jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle - 1.,  0., JGRAPHICS_2PI);
-			jgraphics_fill(g);
+			if (x->f_shadow) {
+				//inner shadow
+				jgraphics_set_line_width(g, 2);
+				jgraphics_set_source_jrgba(g, &x->f_colorCircleShadow);
+				jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+				jgraphics_stroke(g);
+				jgraphics_set_line_width(g, 1);
+				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+				//jgraphics_ovalarc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle+1, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+				jgraphics_stroke(g);
+			}
+			else {
+				jgraphics_set_line_width(g, 1);
+				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+				jgraphics_stroke(g);
+			}
 		}
 		/* Axes */
 		jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-		for(i = 0; i < 6; i++)
+		
+		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+		jgraphics_set_matrix(g, &transform);
+		for(i = 0; i < 12; i++)
 		{
-			x1 = 5. / 6. * x->f_rayonGlobal	 * cos((double)i * JGRAPHICS_PI / 6.) + x->f_center.x;
-			x2 = 5. / 6. * x->f_rayonGlobal  * cos((double)i * JGRAPHICS_PI / 6. + JGRAPHICS_PI) + x->f_center.x;
-			y1 = 5. / 6. * x->f_rayonGlobal  * sin((double)i * JGRAPHICS_PI / 6.) + x->f_center.y;
-			y2 = 5. / 6. * x->f_rayonGlobal  * sin((double)i * JGRAPHICS_PI / 6. + JGRAPHICS_PI) + x->f_center.y;
-			jgraphics_line_draw_fast(g, x1, y1, x2, y2, 1.);
+			rotateAngle = (double)i/12. * JGRAPHICS_2PI;
+			jgraphics_rotate(g, rotateAngle);
+			
+			y1 = 1. / 6. * x->f_rayonGlobal;
+			y2 = 5. / 6. * x->f_rayonGlobal;
+			
+			if (x->f_shadow) 
+			{
+				if ( (rotateAngle <= JGRAPHICS_PI && rotateAngle > 0.) ) 
+				{
+					jgraphics_move_to(g, -0.5, y1-0.5);
+					jgraphics_line_to(g, -0.5, y2-0.5);
+				}
+				else 
+				{
+					jgraphics_move_to(g, 0.5, y1+0.5);
+					jgraphics_line_to(g, 0.5, y2+0.5);
+				}
+				jgraphics_set_line_width(g, 2);
+				jgraphics_set_source_jrgba(g, &x->f_colorCircleShadow);
+				jgraphics_stroke(g);
+			}
+			
+			jgraphics_move_to(g, 0, y1);
+			jgraphics_line_to(g, 0, y2);
+			jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+			jgraphics_set_line_width(g, 1);
+			jgraphics_stroke(g);
+			
+			jgraphics_rotate(g, -rotateAngle);
 		}
-		
-		/* Center circle */
-		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-		jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonCircle - 1.,  0., JGRAPHICS_2PI);
-		
-		jgraphics_fill(g);
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
+	jgraphics_pattern_destroy(pattern);
 }
 
 void draw_angle(t_control *x,  t_object *view, t_rect *rect)
@@ -405,12 +514,18 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 		t_jmatrix transform;
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
-
+		jgraphics_set_line_width(g, 2);
 		if(x->f_viewer->getBiggestContribution() != 0.)
 		{
 			double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
 			jgraphics_set_source_jrgba(g, &x->f_colorPositif);
-			jgraphics_move_to(g, x->f_viewer->getAbscisseValue(0) * factor, x->f_viewer->getOrdinateValue(0) * factor );
+			if (x->f_viewer->getColor(0) == 1) {
+				jgraphics_move_to(g, x->f_viewer->getAbscisseValue(0) * factor, x->f_viewer->getOrdinateValue(0) * factor );
+			}
+			else {
+				jgraphics_move_to(g, x->f_viewer->getAbscisseValue(1) * factor, x->f_viewer->getOrdinateValue(1) * factor );
+			}
+			//jgraphics_move_to(g, x->f_viewer->getAbscisseValue(0) * factor, x->f_viewer->getOrdinateValue(0) * factor );
 			for(int i = 1; i < NUMBEROFCIRCLEPOINTS; i++)
 			{
 				if(x->f_viewer->getColor(i) == 1 && x->f_viewer->getColor(i - 1) == 1)
@@ -418,8 +533,11 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 				else if(x->f_viewer->getColor(i) == 1 && x->f_viewer->getColor(i - 1) == -1)
 					jgraphics_move_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
 			}
+			jgraphics_close_path(g);
+			jgraphics_fill_preserve(g);
 			jgraphics_stroke(g);
-
+			
+			
 			jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
 			jgraphics_move_to(g, x->f_viewer->getAbscisseValue(0) * factor, x->f_viewer->getOrdinateValue(0) * factor );
 			for(int i = 1; i < NUMBEROFCIRCLEPOINTS; i++)
@@ -429,7 +547,10 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 				else if(x->f_viewer->getColor(i) == -1 && x->f_viewer->getColor(i - 1) == 1)
 					jgraphics_move_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
 			}
+			jgraphics_close_path(g);
+			jgraphics_fill_preserve(g);
 			jgraphics_stroke(g);
+			
 		}
 		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
 	}

@@ -21,7 +21,7 @@
 #define DEF_HOAHEADER
 
 // Private Variables / Functions / Etc.
-char 	hoa_glob_loaded;
+static long hoa_glob_loaded;
 
 
 // Initialize Hoa
