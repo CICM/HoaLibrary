@@ -25632,10 +25632,10 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-37",
 									"maxclass" : "newobj",
-									"numinlets" : 6,
+									"numinlets" : 5,
 									"numoutlets" : 0,
-									"patching_rect" : [ 45.0, 545.25, 343.0, 19.0 ],
-									"text" : "hoa.dac~ 1:6"
+									"patching_rect" : [ 45.0, 545.25, 278.200012, 19.0 ],
+									"text" : "hoa.dac~ 1 3 6 12 15"
 								}
 
 							}
@@ -25894,10 +25894,9 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-37", 5 ],
+									"destination" : [ "obj-37", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 459.5, 507.0, 378.5, 507.0 ],
 									"source" : [ "obj-101", 0 ]
 								}
 
@@ -25954,15 +25953,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-37", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 5 ]
 								}
 
 							}
@@ -26505,10 +26495,9 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-37", 5 ],
+									"destination" : [ "obj-37", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 420.0, 507.0, 378.5, 507.0 ],
 									"source" : [ "obj-99", 0 ]
 								}
 

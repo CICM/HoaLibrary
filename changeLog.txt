@@ -1,10 +1,41 @@
-## A high order ambisonics library.
+/**
+ * HOA library : A high order ambisonics library.
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot, Eliott Paris Universite Paris 8
+ * 
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Library General Public License as published 
+ * by the Free Software Foundation; either version 2 of the License.
+ * 
+ * This library is distributed in the hope that it will be useful, but WITHOUT 
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License 
+ * along with this library; if not, write to the Free Software Foundation, 
+ * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ */
 
 
 version beta 1.1
+ - overview : update.
+ - hoa.reverberation~ : help patch update.
+ - refs : several updates.
+ - helps : several updates.
+ - hoa.irconverter~ : new MSP object.
+ - hoa.convolve~ : new MSP object.
+ - hoa.optim : ref page created.
+ - hoa.plug~ : don't show error message anymore when no args provided.
+ - hoa.grain~ : now order dependent.
+ - hoa.wider~ (patch) : rename to hoa.pwider~ to prevent conflicts.
+ - hoa.wider~ (external) : new MSP object.
+ - hoa.control : new UI object
+ - hoa.scope~ : update (paint method).
+ - hoa.meter~ : update (several bug fixes, works now for 1 to 64 loudspeakers, same behavior than the original meter~, method added for angle settings, method added for number of led, dbperled…).
  - hoa.trajectory and dependencies removed.
- - hoa.spat (binaries + help + ref) added.
+ - hoa.spat : new object (binaries + help + ref) added.
  - uninstaller for mac.
 
 version beta 1.0.0
- - initial version.
+ - first version.

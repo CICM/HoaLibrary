@@ -28,7 +28,17 @@ int main(void)
 	class_addmethod(c, (method)connect_bang,				"bang",			A_CANT,	0);
 	
 	class_register(CLASS_BOX, c);
-	connect_class = c;	
+	connect_class = c;
+	
+	/*
+	CLASS_ATTR_INVISIBLE		(c, "color", 0);
+	CLASS_ATTR_RGBA				(c, "poscolor", 0, t_connect, f_colorPositiv);
+	CLASS_ATTR_CATEGORY			(c, "poscolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "poscolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "poscolor", 0, "Positiv Color");
+	CLASS_ATTR_ORDER			(c, "poscolor", 0, "4");
+	CLASS_ATTR_DEFAULT_SAVE		(c, "poscolor", 0, "0. 0. 1. 1");
+	*/
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 }
@@ -47,7 +57,8 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 			x->f_output	= atom_getlong(argv+1);
 		else 
 			x->f_output = x->f_harmonics;
-
+		
+		//attr_args_process(x, argc, argv);
 		
 		//object_obex_lookup(x, gensym("#P"), &x->f_patcher); // passé dans la fonction connect_attach
 		defer_low(x, (method)connect_attach, NULL, 0, NULL);
@@ -150,6 +161,8 @@ void color_patchline(t_connect *x)
 	bleu.green = rouge.green = 0;
 	bleu.blue = rouge.red = 1;
 	bleu.alpha = rouge.alpha =1;
+	
+	//bleu = x->f_colorPositiv;
 	
 	object_obex_lookup(x, gensym("#P"), &patcher);
 	for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line)) 

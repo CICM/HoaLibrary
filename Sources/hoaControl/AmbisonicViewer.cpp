@@ -72,19 +72,18 @@ void AmbisonicViewer::computeBasis()
 }
 
 void AmbisonicViewer::computeRepresentation()
-{
-	m_vector_x[0] = m_sinus_buffer[0] * fabs(m_contributions[0]);
-	m_vector_y[0] = m_cosinus_buffer[0] * fabs(m_contributions[0]);
-	m_vector_color[0] = 1;
-	for(int i = 1; i < NUMBEROFCIRCLEPOINTS - 1; i++)
+{	
+	for(int i = 0; i < NUMBEROFCIRCLEPOINTS - 1; i++)
 	{
 		m_vector_x[i] = m_sinus_buffer[i] * fabs(m_contributions[i]);
 		m_vector_y[i] = m_cosinus_buffer[i] * fabs(m_contributions[i]);
-		if(m_contributions[i] > 0)
+		if(m_contributions[i] > 0.)
 			m_vector_color[i] = 1;
-		else
+		else if (m_contributions[i] < 0.)
 			m_vector_color[i] = -1;
+		else m_vector_color[i] = 0;
 
+		/*
 		if(m_contributions[i] < 0. && m_contributions[i-1] >= 0.)
         {
 			m_vector_x[i] = 0.;
@@ -95,6 +94,7 @@ void AmbisonicViewer::computeRepresentation()
 			m_vector_x[i] = 0.;
 			m_vector_y[i] = 0.;
         }
+		*/
 	}
 	m_vector_x[NUMBEROFCIRCLEPOINTS - 1] = m_vector_x[0];
 	m_vector_y[NUMBEROFCIRCLEPOINTS - 1] = m_vector_y[0];
@@ -111,7 +111,7 @@ void AmbisonicViewer::computeContribution()
 		for(int j = 0; j < m_number_of_harmonics; j++)
 			m_contributions[i] += m_harmonics_basis[j][i] * m_harmonics_values[j];
 			
-		if (fabs(m_contributions[i]) >m_biggest_contribution)
+		if (fabs(m_contributions[i]) > m_biggest_contribution)
 		{
 			m_biggest_contribution = fabs(m_contributions[i]);
 			m_biggest_contribution_index = i;

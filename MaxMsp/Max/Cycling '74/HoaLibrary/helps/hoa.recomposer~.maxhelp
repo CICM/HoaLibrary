@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 28.0, 44.0, 827.0, 693.0 ],
+		"rect" : [ 28.0, 44.0, 832.0, 678.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -29,9 +29,10 @@
 		"showontab" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
+					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"color" : [ 1.0, 1.0, 1.0, 0.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"hidden" : 1,
+					"fontsize" : 14.84361,
 					"id" : "obj-21",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -44,7 +45,69 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 827.0, 667.0 ],
+						"rect" : [ 0.0, 26.0, 832.0, 652.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 14.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 0,
+						"gridsize" : [ 15.0, 15.0 ],
+						"gridsnaponopen" : 0,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"boxanimatetime" : 200,
+						"imprint" : 0,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"showontab" : 1,
+						"boxes" : [  ],
+						"lines" : [  ]
+					}
+,
+					"patching_rect" : [ 714.75, 105.0, 58.0, 23.0 ],
+					"saved_object_attributes" : 					{
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"default_fontsize" : 14.0,
+						"description" : "",
+						"digest" : "",
+						"fontface" : 0,
+						"fontname" : "Arial",
+						"fontsize" : 14.0,
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p basic",
+					"textcolor" : [ 1.0, 1.0, 1.0, 0.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"color" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"id" : "obj-22",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 6,
+							"minor" : 0,
+							"revision" : 8
+						}
+,
+						"rect" : [ 0.0, 26.0, 832.0, 652.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -68,7 +131,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 763.75, 607.5, 50.0, 20.0 ],
+					"patching_rect" : [ 778.25, 106.5, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -83,6 +146,7 @@
 					}
 ,
 					"text" : "p ?",
+					"textcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 					"varname" : "q_tab"
 				}
 
@@ -125,6 +189,7 @@
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-19",
 					"ls" : 16,
+					"ls_angles" : [ 0.0, 22.0, 45.0, 67.0, 90.0, 112.0, 135.0, 157.0, 180.0, 202.0, 225.0, 247.0, 270.0, 292.0, 315.0, 337.5 ],
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 16,
 					"numoutlets" : 0,
@@ -3944,7 +4009,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 375.0, 210.0, 222.0, 19.0 ],
+					"patching_rect" : [ 375.0, 210.0, 218.0, 19.0 ],
 					"text" : "hoa.encoder~ 7"
 				}
 
@@ -7518,7 +7583,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 15.0, 210.0, 222.0, 19.0 ],
+					"patching_rect" : [ 15.0, 210.0, 218.0, 19.0 ],
 					"text" : "hoa.encoder~ 7"
 				}
 
@@ -8342,7 +8407,7 @@
 					"destination" : [ "obj-33", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 264.5, 207.0, 227.5, 207.0 ],
+					"midpoints" : [ 264.5, 207.0, 223.5, 207.0 ],
 					"source" : [ "obj-31", 0 ]
 				}
 
@@ -8511,7 +8576,7 @@
 					"destination" : [ "obj-9", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 624.5, 207.0, 587.5, 207.0 ],
+					"midpoints" : [ 624.5, 207.0, 583.5, 207.0 ],
 					"source" : [ "obj-4", 0 ]
 				}
 

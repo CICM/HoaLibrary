@@ -258,7 +258,7 @@
 									"presentation" : 1,
 									"presentation_linecount" : 17,
 									"presentation_rect" : [ 607.0, 290.706909, 194.0, 273.0 ],
-									"text" : "- Move source(s) by dragging.\n\n- Select sources by dragging the scene.\n\n- Move only the source's angle with ctrl + drag.\n\n- Move only the source's distance with shift + drag.\n\n- cmd + a : select all sources actually in the scene.\n\n- cmd + click : toggle source selection."
+									"text" : "- Move source(s) by dragging it.\n\n- Select sources by dragging the scene.\n\n- Move only the source's angle with ctrl + drag.\n\n- Move only the source's distance with shift + drag.\n\n- cmd + a : select all sources actually in the scene.\n\n- cmd + click : toggle source selection."
 								}
 
 							}
@@ -1161,6 +1161,7 @@
 								"box" : 								{
 									"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 									"cicolor" : [ 0.0, 0.0, 0.0, 0.0 ],
+									"cishadcolor" : [ 0.0, 0.0, 0.0, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontface" : 1,
 									"fontname" : "Calibri",
@@ -1174,6 +1175,7 @@
 									"patching_rect" : [ 14.5, 45.0, 421.25, 421.25 ],
 									"presentation" : 1,
 									"presentation_rect" : [ 6.5, 77.206909, 592.0, 592.0 ],
+									"shadow" : 0,
 									"txcolor" : [ 0.0, 0.0, 0.0, 0.0 ]
 								}
 
@@ -2933,6 +2935,7 @@
 									"energycolor" : [ 0.0, 0.0, 1.0, 0.0 ],
 									"id" : "obj-53",
 									"ls" : 16,
+									"ls_angles" : [ 0.0, 22.0, 45.0, 67.0, 90.0, 112.0, 135.0, 157.0, 180.0, 202.0, 225.0, 247.0, 270.0, 292.0, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
 									"metersize" : 0.69,
 									"numinlets" : 16,
@@ -8335,13 +8338,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.wider~.maxpat",
-				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/effects",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/effects",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.spat.mxo",
 				"type" : "iLaX"
 			}
@@ -8366,7 +8362,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
+				"name" : "hoa.wider~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.connect.mxo",
 				"type" : "iLaX"
 			}
 , 			{

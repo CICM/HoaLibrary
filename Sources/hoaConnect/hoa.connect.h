@@ -47,6 +47,9 @@ typedef struct  _connect
 	int			f_outlet[100];
 	int			f_connected[100];
 	
+	t_jrgba		f_colorPositiv;
+	t_jrgba		f_colorNegativ;
+	
 	int			f_inc;
 	int			f_harmonics;
 	int			f_output;

@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 359.0, 99.0, 845.0, 572.0 ],
+		"rect" : [ 62.0, 118.0, 774.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -275,7 +275,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 749.0, 174.0, 69.0, 238.0 ],
+						"rect" : [ 452.0, 193.0, 69.0, 238.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -527,9 +527,8 @@
 									"fontsize" : 12.0,
 									"id" : "obj-3",
 									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "signal", "", "" ],
+									"numinlets" : 0,
+									"numoutlets" : 0,
 									"patching_rect" : [ 185.0, 413.0, 119.0, 20.0 ],
 									"text" : "hoa.plug_script 7 16"
 								}
@@ -1112,7 +1111,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 389.0, 189.0, 218.0, 87.0 ],
+						"rect" : [ 92.0, 208.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1596,7 +1595,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 393.0, 211.0, 175.0, 67.0 ],
+										"rect" : [ 96.0, 230.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -2362,7 +2361,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 393.0, 211.0, 179.0, 66.0 ],
+										"rect" : [ 96.0, 230.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -2572,7 +2571,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 393.0, 211.0, 178.0, 65.0 ],
+										"rect" : [ 96.0, 230.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -3266,7 +3265,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 393.0, 211.0, 179.0, 65.0 ],
+										"rect" : [ 96.0, 230.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,

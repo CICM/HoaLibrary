@@ -1,0 +1,8 @@
+à faire avant la prochaine version
+
+- actualiser le patch overview (intégrer les nouveaux obj)
+- hoa.control (doc + help + svg + integration palette)
+- intégrer les objets convolution (docs/refs/examples d'utilisation)
+- revoir help de hoa.reverberation~
+- faire tutoriel
+- ajouter liens des tutos dans chaque refs des objets. 
