@@ -22,6 +22,9 @@ function doRemove {
 		
 		echo -ne "- Extension Files ($C74Folder/extensions/)"
 		sudo rm -Rf "$C74Folder/extensions/"hoa.* && echo -ne "... done.\n"
+
+		echo -ne "- Init Files ($C74Folder/init/)"
+		sudo rm -Rf "$C74Folder/init/"hoa.* && echo -ne "... done.\n"
 		
 		echo -ne "- Palettes Files ($C74Folder/object-palettes/)"
 		sudo rm -Rf "$C74Folder/object-palettes/"hoa-palette.json && echo -ne "... done.\n"
@@ -39,6 +42,11 @@ function doRemove {
 		
 		echo -ne "- Reference Files ($maxAppFolder/patches/HoaLibrary Reference/)"
 		sudo rm -Rf "$maxAppFolder/patches/docs/refpages/hoa-ref" && echo -ne "... done.\n"
+
+		echo -ne "- Tutorial Files ($maxAppFolder/patches/HoaLibrary Tutorial/)"
+		sudo rm -Rf "$maxAppFolder/patches/docs/tutorials/hoa-tut" && echo -ne "... done.\n"
+		echo -ne "- Tutorial Patchs ($maxAppFolder/patches/HoaLibrary Tutorial/)"
+		sudo rm -Rf "$maxAppFolder/patches/docs/tutorial-patchers/hoa-tut" && echo -ne "... done.\n"
 	fi
  
 	echo -ne "\n";

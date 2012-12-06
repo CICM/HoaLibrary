@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 106.0, 161.0, 1020.0, 606.0 ],
+		"rect" : [ 383.0, 93.0, 1020.0, 606.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -28,6 +28,65 @@
 		"tags" : "",
 		"showontab" : 1,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-24",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 6,
+							"minor" : 0,
+							"revision" : 8
+						}
+,
+						"rect" : [ 0.0, 26.0, 1020.0, 580.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 13.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 0,
+						"gridsize" : [ 5.0, 5.0 ],
+						"gridsnaponopen" : 0,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"boxanimatetime" : 200,
+						"imprint" : 0,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"showontab" : 1,
+						"boxes" : [  ],
+						"lines" : [  ]
+					}
+,
+					"patching_rect" : [ 746.0, 242.0, 50.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"default_fontsize" : 13.0,
+						"description" : "",
+						"digest" : "",
+						"fontface" : 0,
+						"fontname" : "Arial",
+						"fontsize" : 13.0,
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p ?",
+					"varname" : "q_tab"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
@@ -261,7 +320,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 466.0, 317.0, 218.0, 87.0 ],
+						"rect" : [ 360.0, 156.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -745,7 +804,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 470.0, 339.0, 175.0, 67.0 ],
+										"rect" : [ 364.0, 178.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -1511,7 +1570,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 470.0, 339.0, 179.0, 66.0 ],
+										"rect" : [ 364.0, 178.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -1721,7 +1780,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 470.0, 339.0, 178.0, 65.0 ],
+										"rect" : [ 364.0, 178.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -2415,7 +2474,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 470.0, 339.0, 179.0, 65.0 ],
+										"rect" : [ 364.0, 178.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -4057,7 +4116,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 151.0, 317.0, 218.0, 87.0 ],
+						"rect" : [ 45.0, 156.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -4541,7 +4600,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 155.0, 339.0, 175.0, 67.0 ],
+										"rect" : [ 49.0, 178.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -5307,7 +5366,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 155.0, 339.0, 179.0, 66.0 ],
+										"rect" : [ 49.0, 178.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -5517,7 +5576,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 155.0, 339.0, 178.0, 65.0 ],
+										"rect" : [ 49.0, 178.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -6211,7 +6270,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 155.0, 339.0, 179.0, 65.0 ],
+										"rect" : [ 49.0, 178.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -7799,7 +7858,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 56.0, 609.0, 58.0 ],
-					"text" : "hoa.stereo~ decodes an ambisonic soundfield for stereophonic system. First argument is the order of the ambisonic soundfield, second and third argumentsare the angles of the loudspeakers in degrees (default 30° and 330°). It use fractional orders and inPhase optimization to keep a perceptive linear panning between the two louspeakers, send \"infos\" message to print the current configuration of the object.",
+					"text" : "hoa.stereo~ decodes an ambisonic soundfield for stereophonic system. First argument is the order of the ambisonic soundfield, second and third arguments are the angles of the loudspeakers in degrees (default 30° and 330°). It use fractional orders and inPhase optimization to keep a perceptive linear panning between the two louspeakers, send \"infos\" message to print the current configuration of the object.",
 					"varname" : "autohelp_top_description"
 				}
 
@@ -7820,7 +7879,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 44.0, 1020.0, 580.0 ],
+						"rect" : [ 383.0, 119.0, 1020.0, 580.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -7839,6 +7898,7 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
+						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
@@ -8255,7 +8315,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 45.0, 130.0, 218.0, 87.0 ],
+										"rect" : [ 428.0, 249.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -8739,7 +8799,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 175.0, 67.0 ],
+														"rect" : [ 432.0, 271.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -9505,7 +9565,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 179.0, 66.0 ],
+														"rect" : [ 432.0, 271.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -9715,7 +9775,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 178.0, 65.0 ],
+														"rect" : [ 432.0, 271.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -10409,7 +10469,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 179.0, 65.0 ],
+														"rect" : [ 432.0, 271.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -12052,7 +12112,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 645.0, 130.0, 218.0, 87.0 ],
+										"rect" : [ 1028.0, 249.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -12536,7 +12596,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 175.0, 67.0 ],
+														"rect" : [ 1032.0, 271.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -13302,7 +13362,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 179.0, 66.0 ],
+														"rect" : [ 1032.0, 271.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -13512,7 +13572,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 178.0, 65.0 ],
+														"rect" : [ 1032.0, 271.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -14206,7 +14266,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 179.0, 65.0 ],
+														"rect" : [ 1032.0, 271.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -15743,7 +15803,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 345.0, 130.0, 218.0, 87.0 ],
+										"rect" : [ 728.0, 249.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -16227,7 +16287,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 175.0, 67.0 ],
+														"rect" : [ 732.0, 271.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -16993,7 +17053,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 179.0, 66.0 ],
+														"rect" : [ 732.0, 271.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -17203,7 +17263,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 178.0, 65.0 ],
+														"rect" : [ 732.0, 271.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -17897,7 +17957,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 179.0, 65.0 ],
+														"rect" : [ 732.0, 271.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -21154,7 +21214,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 35.0, 95.0, 1020.0, 580.0 ],
+						"rect" : [ 0.0, 26.0, 1020.0, 580.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -21173,7 +21233,28 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
+						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-4",
+									"maxclass" : "newobj",
+									"numinlets" : 9,
+									"numoutlets" : 9,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 669.0, 96.0, 127.0, 20.0 ],
+									"saved_object_attributes" : 									{
+										"buffers" : [ "", "", "", "", "", "", "", "", "" ],
+										"channels" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+										"limits" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+									}
+,
+									"text" : "hoa.convolve~"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -21495,7 +21576,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 645.0, 130.0, 218.0, 87.0 ],
+										"rect" : [ 645.0, 156.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -21965,6 +22046,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-3",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -21978,7 +22060,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 175.0, 67.0 ],
+														"rect" : [ 649.0, 178.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -22744,7 +22826,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 179.0, 66.0 ],
+														"rect" : [ 649.0, 178.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -22954,7 +23036,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 178.0, 65.0 ],
+														"rect" : [ 649.0, 178.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -23635,7 +23717,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -23649,7 +23730,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 649.0, 152.0, 179.0, 65.0 ],
+														"rect" : [ 649.0, 178.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -24981,7 +25062,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 645.0, 520.0, 84.0, 19.0 ],
+									"patching_rect" : [ 645.0, 520.0, 249.0, 19.0 ],
 									"text" : "hoa.dac~ 2 16"
 								}
 
@@ -25235,7 +25316,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 345.0, 130.0, 218.0, 87.0 ],
+										"rect" : [ 345.0, 156.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -25719,7 +25800,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 175.0, 67.0 ],
+														"rect" : [ 349.0, 178.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -26485,7 +26566,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 179.0, 66.0 ],
+														"rect" : [ 349.0, 178.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -26695,7 +26776,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 178.0, 65.0 ],
+														"rect" : [ 349.0, 178.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -27389,7 +27470,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 349.0, 152.0, 179.0, 65.0 ],
+														"rect" : [ 349.0, 178.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -28989,7 +29070,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 45.0, 130.0, 218.0, 87.0 ],
+										"rect" : [ 45.0, 156.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -29473,7 +29554,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 175.0, 67.0 ],
+														"rect" : [ 49.0, 178.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -30239,7 +30320,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 179.0, 66.0 ],
+														"rect" : [ 49.0, 178.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -30449,7 +30530,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 178.0, 65.0 ],
+														"rect" : [ 49.0, 178.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -31143,7 +31224,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 49.0, 152.0, 179.0, 65.0 ],
+														"rect" : [ 49.0, 178.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -38652,6 +38733,10 @@
 			}
 , 			{
 				"name" : "hoa.pi.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.convolve~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

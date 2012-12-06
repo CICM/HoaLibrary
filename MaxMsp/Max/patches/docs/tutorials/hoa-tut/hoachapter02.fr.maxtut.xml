@@ -31,6 +31,7 @@
 <hoa_seealsolist>
 	<seealso name="hoachapter01" type="hoa-tut">HoaLibrary Tutorial 1 : Introduction</seealso>
 	<seealso name="hoachapter02" type="hoa-tut">HoaLibrary Tutorial 2 : Basics</seealso>
+    <seealso name="hoachapter03" type="hoa-tut">HoaLibrary Tutorial 3 : Optimizations</seealso>   
 	<seealso name="hoa.encoder~" type="hoa-object">Creates circular harmonics of a signal</seealso>
 	<seealso name="hoa.decoder~" type="hoa-object">Decodes an ambisonic soundfield for a given number of loudspeakers.</seealso>
     <seealso name="hoa.rotate~" type="hoa-object">Allows you to rotate the ambisonic soundfield.</seealso>
