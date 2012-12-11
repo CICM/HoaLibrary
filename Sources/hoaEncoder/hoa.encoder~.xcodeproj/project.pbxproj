@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0E6DC913161359A60001AAF5 /* hoa.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC912161359A60001AAF5 /* hoa.encoder~.cpp */; };
-		0E6DC915161359AF0001AAF5 /* AmbisonicEncode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC914161359AF0001AAF5 /* AmbisonicEncode.hpp */; };
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
+		2CD5D13B1675F293008009B2 /* hoaHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD5D13A1675F293008009B2 /* hoaHeader.h */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
 		4E0674E714DDA54E00C91AB7 /* AmbisonicEncode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0E6DC912161359A60001AAF5 /* hoa.encoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.encoder~.cpp"; sourceTree = "<group>"; };
-		0E6DC914161359AF0001AAF5 /* AmbisonicEncode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AmbisonicEncode.hpp; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
+		2CD5D13A1675F293008009B2 /* hoaHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoaHeader.h; path = ../hoaHeader.h; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* hoa.encoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.encoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncode.cpp; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
@@ -59,9 +59,9 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2CD5D13A1675F293008009B2 /* hoaHeader.h */,
 				0E6DC912161359A60001AAF5 /* hoa.encoder~.cpp */,
 				4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */,
-				0E6DC914161359AF0001AAF5 /* AmbisonicEncode.hpp */,
 				22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */,
 			);
 			name = Source;
@@ -82,7 +82,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6DC915161359AF0001AAF5 /* AmbisonicEncode.hpp in Headers */,
+				2CD5D13B1675F293008009B2 /* hoaHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

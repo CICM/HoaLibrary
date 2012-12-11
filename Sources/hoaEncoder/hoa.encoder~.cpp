@@ -27,6 +27,7 @@ extern "C"
 #include "../hoaHeader.h"
 }
 
+int postons = 0;
 
 typedef struct _HoaEncode 
 {
@@ -76,20 +77,15 @@ int main(void)
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
-	
-	hoa_init();
-	/*
+
 	if(class_findbyname(CLASS_NOBOX, gensym("hoa.loader")) == NULL)
 	{
 		if(postons == 0)
 		{
-			post("hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
-			post("Copyright (C) 2012, CICM / Universite Paris 8");
+			hoa_postcredits();
 			postons = 1;
 		}
 	}
-	*/
-	
 	return 0;
 }
 

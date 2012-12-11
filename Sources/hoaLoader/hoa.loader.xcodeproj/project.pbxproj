@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E6C283715C815AB0090858D /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283515C815AB0090858D /* MaxAPI.framework */; };
 		0E6C283815C815AB0090858D /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283615C815AB0090858D /* MaxAudioAPI.framework */; };
+		2CD5D1431675F32E008009B2 /* hoaHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD5D1421675F32E008009B2 /* hoaHeader.h */; };
 		2CE38DA1162C356C001DB400 /* hoa.loader.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CE38DA0162C356C001DB400 /* hoa.loader.c */; };
 /* End PBXBuildFile section */
 
@@ -16,6 +17,7 @@
 		0E6C283515C815AB0090858D /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
 		0E6C283615C815AB0090858D /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
+		2CD5D1421675F32E008009B2 /* hoaHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoaHeader.h; path = ../hoaHeader.h; sourceTree = SOURCE_ROOT; };
 		2CE38DA0162C356C001DB400 /* hoa.loader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hoa.loader.c; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.loader.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.loader.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -56,6 +58,7 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2CD5D1421675F32E008009B2 /* hoaHeader.h */,
 				2CE38DA0162C356C001DB400 /* hoa.loader.c */,
 			);
 			name = Source;
@@ -76,6 +79,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD5D1431675F32E008009B2 /* hoaHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

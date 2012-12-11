@@ -19,6 +19,7 @@
 
 
 version beta 1.1
+ - hoa-tut : hoa tutorials (fr/en).
  - overview : update.
  - hoa.reverberation~ : help patch update.
  - refs : several updates.

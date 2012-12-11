@@ -21,7 +21,7 @@
 #include "ext_obex.h"
 #include "../hoaHeader.h"
 
-//int hoaWelcomePosted = 0;
+int hoaCreditsPosted = 0;
 void *HoaLoader_class;
 
 int main(void)
@@ -31,13 +31,10 @@ int main(void)
 	class_register(CLASS_NOBOX, c);	
 	HoaLoader_class = c;
 	
-	hoa_init();
-	/*
-	if (hoaWelcomePosted == 0) {
-		post("hoa.library (Beta 1.0.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
-		post("Copyright (C) 2012, CICM / Universite Paris 8");
-		hoaWelcomePosted = 1;
+	if (hoaCreditsPosted == 0) 
+	{
+		hoa_postcredits();
+		hoaCreditsPosted = 1;
 	}
-	*/
 	return 0;
 }

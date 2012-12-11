@@ -7,7 +7,8 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 6.0, 44.0, 814.0, 555.0 ],
+		"rect" : [ 56.0, 107.0, 534.0, 555.0 ],
+		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -26,9 +27,111 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"showrootpatcherontab" : 0,
-		"showontab" : 0,
+		"showontab" : 1,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-5",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 385.0, 233.5, 104.0, 20.0 ],
+					"text" : "Happy patching..!",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[2]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-30",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 4.4375, 64.5, 519.5625, 60.0 ],
+					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. (known issue : will not works in subpatch nor in scrolled patch).",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-31",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 4.4375, 64.5, 519.5625, 60.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "@obj-name", "hoa.connect", "@obj-desc", "Help", "to", "connect", "the", "hoa", "objects", "together", "@width", 518 ],
+					"id" : "obj-3",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.helpheader.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 4.4375, 3.0, 519.5625, 56.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 7.180877,
+					"hidden" : 1,
+					"id" : "obj-7",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 0,
+					"patching_rect" : [ 418.4375, 19.5, 52.0, 23.0 ],
+					"text" : "bgcolor 0.93 0.93 0.92 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-28",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 13.0, 498.0, 496.0, 19.0 ],
+					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-29",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 13.0, 498.0, 496.0, 19.0 ],
+					"rounded" : 6,
+					"shadow" : -1
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 					"color" : [ 1.0, 1.0, 1.0, 0.0 ],
@@ -47,7 +150,8 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 6.0, 70.0, 814.0, 529.0 ],
+						"rect" : [ 56.0, 133.0, 534.0, 529.0 ],
+						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 14.0,
@@ -69,67 +173,89 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"fontface" : 3,
 									"fontname" : "Arial",
-									"fontsize" : 20.871338,
+									"fontsize" : 12.0,
 									"frgb" : 0.0,
-									"id" : "obj-26",
+									"id" : "obj-5",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 5.0, 133.0, 30.0 ],
-									"text" : "hoa.connect",
-									"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-									"varname" : "autohelp_top_title[2]"
+									"patching_rect" : [ 385.0, 233.5, 104.0, 20.0 ],
+									"text" : "Happy patching..!",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-9",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 372.75, 222.0, 130.75, 42.0 ],
+									"rounded" : 15,
+									"shadow" : -1
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 12.754705,
+									"fontsize" : 12.0,
 									"frgb" : 0.0,
-									"id" : "obj-27",
+									"id" : "obj-30",
+									"linecount" : 4,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.0, 34.0, 240.0, 21.0 ],
-									"text" : "Help to connect the hoa objects together",
-									"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-									"varname" : "autohelp_top_digest[2]"
+									"patching_rect" : [ 4.4375, 64.5, 519.5625, 60.0 ],
+									"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. (known issue : will not works in subpatch nor in scrolled patch).",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[1]"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"fontface" : 3,
-									"fontname" : "Arial",
-									"fontsize" : 20.871338,
-									"frgb" : 0.0,
-									"id" : "obj-24",
-									"maxclass" : "comment",
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-31",
+									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 7.0, 133.0, 30.0 ],
-									"text" : "hoa.connect",
-									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-									"varname" : "autohelp_top_title[1]"
+									"patching_rect" : [ 4.4375, 64.5, 519.5625, 60.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", "hoa.connect", "@obj-desc", "Help", "to", "connect", "the", "hoa", "objects", "together", "@width", 518 ],
+									"id" : "obj-3",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 4.4375, 3.0, 519.5625, 56.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 12.754705,
-									"frgb" : 0.0,
-									"id" : "obj-25",
-									"maxclass" : "comment",
-									"numinlets" : 1,
+									"fontsize" : 7.180877,
+									"hidden" : 1,
+									"id" : "obj-7",
+									"linecount" : 2,
+									"maxclass" : "newobj",
+									"numinlets" : 4,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 35.0, 240.0, 21.0 ],
-									"text" : "Help to connect the hoa objects together",
-									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-									"varname" : "autohelp_top_digest[1]"
+									"patching_rect" : [ 418.4375, 19.5, 52.0, 23.0 ],
+									"text" : "bgcolor 0.93 0.93 0.92 1."
 								}
 
 							}
@@ -138,13 +264,27 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
-									"id" : "obj-59",
-									"linecount" : 2,
+									"id" : "obj-28",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 510.0, 15.0, 292.0, 32.0 ],
-									"text" : "hoa.connect by Julien Colafrancesco Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
+									"patching_rect" : [ 13.0, 498.0, 496.0, 19.0 ],
+									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-29",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 13.0, 498.0, 496.0, 19.0 ],
+									"rounded" : 6,
+									"shadow" : -1
 								}
 
 							}
@@ -186,7 +326,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 645.0, 60.0, 70.0, 19.0 ],
+									"patching_rect" : [ 404.4375, 142.0, 70.0, 19.0 ],
 									"text" : "loadmess 0"
 								}
 
@@ -201,7 +341,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 645.0, 86.0, 43.0, 19.0 ],
+									"patching_rect" : [ 404.4375, 168.0, 43.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"filename" : "lock",
 										"parameter_enable" : 0
@@ -246,7 +386,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 30.0, 165.0, 20.0, 20.0 ]
+									"patching_rect" : [ 13.0, 193.0, 20.0, 20.0 ]
 								}
 
 							}
@@ -259,7 +399,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "bang", "" ],
-									"patching_rect" : [ 30.0, 135.0, 41.0, 19.0 ],
+									"patching_rect" : [ 13.0, 163.0, 41.0, 19.0 ],
 									"text" : "sel 32"
 								}
 
@@ -273,7 +413,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 4,
 									"outlettype" : [ "int", "int", "int", "int" ],
-									"patching_rect" : [ 30.0, 105.0, 59.5, 19.0 ],
+									"patching_rect" : [ 13.0, 133.0, 59.5, 19.0 ],
 									"text" : "key"
 								}
 
@@ -286,7 +426,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 30.0, 195.0, 99.0, 19.0 ],
+									"patching_rect" : [ 13.0, 223.0, 99.0, 19.0 ],
 									"text" : "hoa.connect 7 16"
 								}
 
@@ -299,7 +439,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 235.0, 491.0, 235.0, 19.0 ],
+									"patching_rect" : [ 235.4375, 450.0, 235.0, 19.0 ],
 									"text" : "dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
 								}
 
@@ -313,24 +453,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 30.0, 240.0, 208.0, 19.0 ],
+									"patching_rect" : [ 28.9375, 274.0, 208.0, 19.0 ],
 									"text" : "hoa.encoder~ 7"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-5",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 57.0, 568.0, 45.0 ],
-									"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. (known issue : will not works in subpatch nor in scrolled patch).",
-									"varname" : "autohelp_top_description"
 								}
 
 							}
@@ -347,7 +471,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 47.5, 486.0, 183.0, 29.0 ],
+									"patching_rect" : [ 47.9375, 445.0, 183.0, 29.0 ],
 									"text" : "I'm not a hoa but I'm a friend."
 								}
 
@@ -399,23 +523,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 138.0, 183.5, 157.0, 42.0 ],
+									"patching_rect" : [ 121.0, 211.5, 157.0, 42.0 ],
 									"text" : "Select the objects then send me a bang."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-									"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-									"id" : "obj-9",
-									"maxclass" : "panel",
-									"mode" : 1,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 5.0, 495.0, 52.0 ],
-									"varname" : "autohelp_top_panel"
 								}
 
 							}
@@ -431,7 +540,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 73.0, 130.0, 199.0, 29.0 ],
+									"patching_rect" : [ 56.0, 158.0, 199.0, 29.0 ],
 									"text" : "Spacebar to bang the hoas."
 								}
 
@@ -476,7 +585,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 603.75, 240.0, 58.0, 23.0 ],
+					"patching_rect" : [ 372.75, 193.0, 58.0, 23.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -514,7 +623,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 814.0, 529.0 ],
+						"rect" : [ 0.0, 26.0, 534.0, 529.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -538,7 +647,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 667.25, 241.5, 50.0, 20.0 ],
+					"patching_rect" : [ 436.25, 194.5, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -555,87 +664,6 @@
 					"text" : "p ?",
 					"textcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 					"varname" : "q_tab"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-26",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 5.0, 5.0, 133.0, 30.0 ],
-					"text" : "hoa.connect",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_title[2]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-27",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 6.0, 34.0, 240.0, 21.0 ],
-					"text" : "Help to connect the hoa objects together",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_digest[2]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-24",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 7.0, 133.0, 30.0 ],
-					"text" : "hoa.connect",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_title[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-25",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 35.0, 240.0, 21.0 ],
-					"text" : "Help to connect the hoa objects together",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_digest[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 15.0, 292.0, 32.0 ],
-					"text" : "hoa.connect by Julien Colafrancesco Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
 				}
 
 			}
@@ -666,7 +694,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 47.5, 486.0, 183.0, 29.0 ],
+					"patching_rect" : [ 47.9375, 445.0, 183.0, 29.0 ],
 					"text" : "I'm not a hoa but I'm a friend."
 				}
 
@@ -695,7 +723,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 645.0, 60.0, 70.0, 19.0 ],
+					"patching_rect" : [ 404.4375, 142.0, 70.0, 19.0 ],
 					"text" : "loadmess 0"
 				}
 
@@ -710,7 +738,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 645.0, 86.0, 43.0, 19.0 ],
+					"patching_rect" : [ 404.4375, 168.0, 43.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"filename" : "lock",
 						"parameter_enable" : 0
@@ -789,7 +817,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 30.0, 165.0, 20.0, 20.0 ]
+					"patching_rect" : [ 13.0, 193.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -802,7 +830,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "" ],
-					"patching_rect" : [ 30.0, 135.0, 41.0, 19.0 ],
+					"patching_rect" : [ 13.0, 163.0, 41.0, 19.0 ],
 					"text" : "sel 32"
 				}
 
@@ -816,8 +844,22 @@
 					"numinlets" : 0,
 					"numoutlets" : 4,
 					"outlettype" : [ "int", "int", "int", "int" ],
-					"patching_rect" : [ 30.0, 105.0, 59.5, 19.0 ],
+					"patching_rect" : [ 13.0, 133.0, 59.5, 19.0 ],
 					"text" : "key"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-9",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 372.75, 222.0, 130.75, 42.0 ],
+					"rounded" : 15,
+					"shadow" : -1
 				}
 
 			}
@@ -829,7 +871,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 195.0, 99.0, 19.0 ],
+					"patching_rect" : [ 13.0, 223.0, 99.0, 19.0 ],
 					"text" : "hoa.connect 7 16"
 				}
 
@@ -842,7 +884,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 235.0, 491.0, 235.0, 19.0 ],
+					"patching_rect" : [ 235.4375, 450.0, 235.0, 19.0 ],
 					"text" : "dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
 				}
 
@@ -856,24 +898,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 240.0, 208.0, 19.0 ],
+					"patching_rect" : [ 28.9375, 274.0, 208.0, 19.0 ],
 					"text" : "hoa.encoder~ 7"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-5",
-					"linecount" : 3,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 57.0, 568.0, 45.0 ],
-					"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" the objects then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. (known issue : will not works in subpatch nor in scrolled patch).",
-					"varname" : "autohelp_top_description"
 				}
 
 			}
@@ -890,23 +916,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 138.0, 183.5, 157.0, 42.0 ],
+					"patching_rect" : [ 121.0, 211.5, 157.0, 42.0 ],
 					"text" : "Select the objects then send me a bang."
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-					"id" : "obj-9",
-					"maxclass" : "panel",
-					"mode" : 1,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 5.0, 5.0, 495.0, 52.0 ],
-					"varname" : "autohelp_top_panel"
 				}
 
 			}
@@ -922,7 +933,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 73.0, 130.0, 199.0, 29.0 ],
+					"patching_rect" : [ 56.0, 158.0, 199.0, 29.0 ],
 					"text" : "Spacebar to bang the hoas."
 				}
 
@@ -1134,6 +1145,20 @@
 				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpheader.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
+				"patcherrelativepath" : "",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon.png",
+				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{

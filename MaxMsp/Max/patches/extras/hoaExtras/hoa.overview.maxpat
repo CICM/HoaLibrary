@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 39.0, 61.0, 875.0, 639.0 ],
+		"rect" : [ 115.0, 93.0, 875.0, 639.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -27,7 +27,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.library overview",
+		"title" : "|-- hoa.library overview --|",
 		"boxes" : [ 			{
 				"box" : 				{
 					"id" : "obj-72",
@@ -802,7 +802,7 @@
 											}
 , 											{
 												"key" : "hoa.control",
-												"value" : [ "hoa.control displays the representation of the harmonics of an encoded ponctual sound for a given order, optimization, azimuth value and wide value. It can be used to understand of the encoding behavior, the optimization and fractionnal order effect (wider) or as a controller for the super", "encoder set." ]
+												"value" : [ "hoa.control displays the representation of the harmonics of an encoded ponctual sound for a given order, optimization, azimuth value and wide value. It can be used to understand of the encoding behavior, the optimization and fractionnal order effect (wider) or as a controller for the 'super encoder' set." ]
 											}
 , 											{
 												"key" : "hoa.stereo~",
@@ -1102,7 +1102,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 65.0, 272.0, 605.0, 288.0 ],
+						"rect" : [ 141.0, 304.0, 605.0, 288.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1327,7 +1327,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.projector~"
+									"text" : "hoa.irconverter~"
 								}
 
 							}

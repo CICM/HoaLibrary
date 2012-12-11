@@ -7,7 +7,8 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 0.0, 44.0, 789.0, 692.0 ],
+		"rect" : [ 14.0, 44.0, 515.0, 693.0 ],
+		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -26,15 +27,45 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"showrootpatcherontab" : 0,
-		"showontab" : 0,
+		"showontab" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-					"color" : [ 1.0, 1.0, 1.0, 0.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
-					"id" : "obj-17",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-45",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 277.25, 477.0, 218.0, 47.0 ],
+					"text" : "Take a look at the optimization hoa tutorial for a better understanding of the process.",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[2]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-47",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 277.25, 477.0, 213.75, 47.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"id" : "obj-35",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
@@ -46,7 +77,8 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 70.0, 789.0, 666.0 ],
+						"rect" : [ 14.0, 70.0, 515.0, 667.0 ],
+						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 14.0,
@@ -69,13 +101,131 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-45",
+									"linecount" : 3,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 277.25, 477.0, 218.0, 47.0 ],
+									"text" : "Take a look at the optimization hoa tutorial for a better understanding of the process.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-47",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 277.25, 477.0, 213.75, 47.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", "hoa.optim~", "@obj-desc", "An", "ambisonic", "signal", "optimization", "external." ],
+									"id" : "obj-20",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 0,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 8.0, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 7.180877,
+									"hidden" : 1,
+									"id" : "obj-21",
+									"linecount" : 2,
+									"maxclass" : "newobj",
+									"numinlets" : 4,
+									"numoutlets" : 0,
+									"patching_rect" : [ 421.0, 24.5, 52.0, 23.0 ],
+									"text" : "bgcolor 0.93 0.93 0.92 1."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"frgb" : 0.0,
+									"id" : "obj-22",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 634.5, 497.0, 19.0 ],
+									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-28",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 634.5, 497.0, 19.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-25",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 78.0, 471.0, 34.0 ],
+									"text" : "hoa.optim~ applies an optimization to the cylindrical harmonics.\nIt can be \"basic\" for no optimization, \"maxRe\" or \"inPhase\".",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-27",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 78.0, 483.0, 34.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-23",
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 24.0, 223.0, 242.0, 19.0 ],
+									"patching_rect" : [ 24.0, 230.0, 242.0, 19.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -89,7 +239,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 24.0, 304.0, 242.0, 19.0 ],
+									"patching_rect" : [ 24.0, 274.0, 242.0, 19.0 ],
 									"text" : "hoa.optim~ 7 maxRe"
 								}
 
@@ -103,7 +253,7 @@
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 24.0, 388.0, 242.0, 242.0 ]
+									"patching_rect" : [ 24.0, 342.0, 242.0, 242.0 ]
 								}
 
 							}
@@ -116,7 +266,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 371.75, 133.0, 55.0, 19.0 ],
+									"patching_rect" : [ 319.5, 167.0, 55.0, 19.0 ],
 									"text" : "hoa.pi 2."
 								}
 
@@ -130,7 +280,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 299.25, 163.0, 91.5, 19.0 ],
+									"patching_rect" : [ 247.0, 197.0, 91.5, 19.0 ],
 									"text" : "*~"
 								}
 
@@ -145,21 +295,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 299.25, 107.0, 50.0, 19.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-10",
-									"maxclass" : "flonum",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "float", "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 247.0, 107.0, 50.0, 19.0 ]
+									"patching_rect" : [ 247.0, 141.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -172,7 +308,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 345.75, 604.0, 32.5, 17.0 ],
+									"patching_rect" : [ 357.0, 567.0, 32.5, 17.0 ],
 									"text" : "stop"
 								}
 
@@ -186,7 +322,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 266.0, 604.0, 72.0, 17.0 ],
+									"patching_rect" : [ 277.25, 567.0, 72.0, 17.0 ],
 									"text" : "startwindow"
 								}
 
@@ -201,23 +337,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 299.25, 78.0, 79.0, 19.0 ],
+									"patching_rect" : [ 247.0, 122.0, 79.0, 19.0 ],
 									"text" : "loadmess 0.5"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"hidden" : 1,
-									"id" : "obj-1",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 247.0, 78.0, 73.0, 19.0 ],
-									"text" : "loadmess 0."
 								}
 
 							}
@@ -230,7 +351,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 440.0, 215.0, 92.0, 19.0 ],
+									"patching_rect" : [ 364.0, 260.0, 92.0, 19.0 ],
 									"text" : "Optimizations :"
 								}
 
@@ -243,7 +364,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 24.0, 630.0, 242.0, 19.0 ],
+									"patching_rect" : [ 24.0, 602.0, 242.0, 19.0 ],
 									"text" : "hoa.dac~ 1:16"
 								}
 
@@ -258,7 +379,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 440.0, 200.0, 70.0, 19.0 ],
+									"patching_rect" : [ 364.0, 245.0, 70.0, 19.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -272,7 +393,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 440.0, 260.0, 85.0, 19.0 ],
+									"patching_rect" : [ 364.0, 305.0, 85.0, 19.0 ],
 									"text" : "prepend optim"
 								}
 
@@ -288,7 +409,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 440.0, 230.0, 100.0, 19.0 ]
+									"patching_rect" : [ 364.0, 275.0, 100.0, 19.0 ]
 								}
 
 							}
@@ -412,7 +533,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 600.0, 45.0, 51.0, 19.0 ],
+									"patching_rect" : [ 357.0, 358.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -439,36 +560,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 600.0, 75.0, 99.0, 19.0 ],
+									"patching_rect" : [ 357.0, 388.0, 99.0, 19.0 ],
 									"text" : "hoa.connect 7 16"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-24",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 247.0, 193.0, 71.25, 19.0 ],
-									"text" : "+~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-26",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 247.0, 133.0, 32.0, 19.0 ],
-									"text" : "sig~"
 								}
 
 							}
@@ -481,7 +574,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 299.25, 133.0, 72.0, 19.0 ],
+									"patching_rect" : [ 247.0, 167.0, 72.0, 19.0 ],
 									"text" : "phasor~ 0.5"
 								}
 
@@ -504,7 +597,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 13.0, 180.0, 218.0, 87.0 ],
+										"rect" : [ 38.0, 199.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -974,7 +1067,6 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
-													"hidden" : 1,
 													"id" : "obj-3",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -988,7 +1080,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 17.0, 202.0, 175.0, 67.0 ],
+														"rect" : [ 42.0, 221.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -1754,7 +1846,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 17.0, 202.0, 179.0, 66.0 ],
+														"rect" : [ 42.0, 221.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -1964,7 +2056,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 17.0, 202.0, 178.0, 65.0 ],
+														"rect" : [ 42.0, 221.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -2645,6 +2737,7 @@
 , 											{
 												"box" : 												{
 													"embed" : 1,
+													"hidden" : 1,
 													"id" : "obj-22",
 													"maxclass" : "bpatcher",
 													"numinlets" : 1,
@@ -2658,7 +2751,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 17.0, 202.0, 179.0, 65.0 ],
+														"rect" : [ 42.0, 221.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -3942,7 +4035,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 24.0, 110.0, 218.0, 87.0 ]
+									"patching_rect" : [ 24.0, 129.0, 218.0, 87.0 ]
 								}
 
 							}
@@ -3955,115 +4048,32 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 24.0, 343.0, 242.0, 20.0 ],
+									"patching_rect" : [ 24.0, 311.0, 242.0, 20.0 ],
 									"text" : "hoa.decoder~ 7 16"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-59",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 497.75, 6.0, 302.0, 32.0 ],
-									"text" : "hoa.optim~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris. © 2012 CICM / Universite Paris 8"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 3,
-									"fontname" : "Arial",
-									"fontsize" : 20.871338,
-									"frgb" : 0.0,
-									"id" : "obj-2",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 6.0, 485.0, 30.0 ],
-									"text" : "hoa.optim~",
-									"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-									"varname" : "autohelp_top_title"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.754705,
-									"frgb" : 0.0,
-									"id" : "obj-3",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 35.0, 503.0, 21.0 ],
-									"text" : "An ambisonic optimization external",
-									"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-									"varname" : "autohelp_top_digest"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-5",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 56.0, 576.0, 32.0 ],
-									"text" : "hoa.optim~ applies an optimization to the cylindrical harmonics. It can be basic for no optimization, maxRe or inPhase.",
-									"varname" : "autohelp_top_description"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-									"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-									"id" : "obj-9",
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-37",
 									"maxclass" : "panel",
-									"mode" : 1,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 2.0, 4.0, 495.0, 52.0 ],
-									"varname" : "autohelp_top_panel"
+									"patching_rect" : [ 357.0, 251.0, 133.0, 80.0 ],
+									"rounded" : 15,
+									"shadow" : -1
 								}
 
 							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
-									"destination" : [ "obj-10", 0 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-1", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-26", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-14", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 355.25, 625.0, 256.5, 625.0 ],
+									"midpoints" : [ 366.5, 592.5, 256.5, 592.5 ],
 									"source" : [ "obj-11", 0 ]
 								}
 
@@ -4676,24 +4686,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-23", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-24", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-24", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-26", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-7", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -4724,7 +4716,7 @@
 									"destination" : [ "obj-16", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 449.5, 292.0, 256.5, 292.0 ],
+									"midpoints" : [ 373.5, 339.0, 276.0, 339.0, 276.0, 270.0, 256.5, 270.0 ],
 									"source" : [ "obj-33", 0 ]
 								}
 
@@ -4734,7 +4726,6 @@
 									"destination" : [ "obj-33", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 490.0, 251.0, 449.0, 251.0, 449.0, 257.0, 449.5, 257.0 ],
 									"source" : [ "obj-34", 1 ]
 								}
 
@@ -4744,7 +4735,7 @@
 									"destination" : [ "obj-31", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 609.5, 66.0, 609.5, 66.0 ],
+									"midpoints" : [ 366.5, 379.0, 366.5, 379.0 ],
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -4760,7 +4751,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-24", 1 ],
+									"destination" : [ "obj-23", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-7", 0 ]
@@ -4772,6 +4763,7 @@
 									"destination" : [ "obj-14", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"midpoints" : [ 286.75, 592.5, 256.5, 592.5 ],
 									"source" : [ "obj-8", 0 ]
 								}
 
@@ -4779,7 +4771,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 596.5, 107.0, 58.0, 23.0 ],
+					"patching_rect" : [ 357.0, 413.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -4794,18 +4786,17 @@
 					}
 ,
 					"text" : "p basic",
-					"textcolor" : [ 1.0, 1.0, 1.0, 0.0 ]
+					"textcolor" : [ 0.209184, 0.209184, 0.209184, 1.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-					"color" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"hidden" : 1,
-					"id" : "obj-18",
+					"id" : "obj-36",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
@@ -4817,7 +4808,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 789.0, 666.0 ],
+						"rect" : [ 0.0, 26.0, 515.0, 667.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -4841,7 +4832,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 660.0, 108.5, 50.0, 20.0 ],
+					"patching_rect" : [ 408.0, 413.0, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -4856,8 +4847,95 @@
 					}
 ,
 					"text" : "p ?",
-					"textcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"textcolor" : [ 0.209184, 0.209184, 0.209184, 1.0 ],
 					"varname" : "q_tab"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "@obj-name", "hoa.optim~", "@obj-desc", "An", "ambisonic", "signal", "optimization", "external." ],
+					"id" : "obj-20",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.helpheader.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 8.0, 483.0, 56.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 7.180877,
+					"hidden" : 1,
+					"id" : "obj-21",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 0,
+					"patching_rect" : [ 421.0, 24.5, 52.0, 23.0 ],
+					"text" : "bgcolor 0.93 0.93 0.92 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-22",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 634.5, 497.0, 19.0 ],
+					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-28",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 634.5, 497.0, 19.0 ],
+					"rounded" : 6,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-25",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 78.0, 471.0, 34.0 ],
+					"text" : "hoa.optim~ applies an optimization to the cylindrical harmonics.\nIt can be \"basic\" for no optimization, \"maxRe\" or \"inPhase\".",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-27",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 78.0, 483.0, 34.0 ],
+					"rounded" : 15,
+					"shadow" : -1
 				}
 
 			}
@@ -4870,7 +4948,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 24.0, 223.0, 242.0, 19.0 ],
+					"patching_rect" : [ 24.0, 230.0, 242.0, 19.0 ],
 					"text" : "hoa.encoder~ 7"
 				}
 
@@ -4884,7 +4962,7 @@
 					"numinlets" : 15,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 24.0, 304.0, 242.0, 19.0 ],
+					"patching_rect" : [ 24.0, 274.0, 242.0, 19.0 ],
 					"text" : "hoa.optim~ 7 maxRe"
 				}
 
@@ -4898,7 +4976,7 @@
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 388.0, 242.0, 242.0 ]
+					"patching_rect" : [ 24.0, 342.0, 242.0, 242.0 ]
 				}
 
 			}
@@ -4911,7 +4989,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 371.75, 133.0, 55.0, 19.0 ],
+					"patching_rect" : [ 319.5, 167.0, 55.0, 19.0 ],
 					"text" : "hoa.pi 2."
 				}
 
@@ -4925,7 +5003,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 299.25, 163.0, 91.5, 19.0 ],
+					"patching_rect" : [ 247.0, 197.0, 91.5, 19.0 ],
 					"text" : "*~"
 				}
 
@@ -4940,21 +5018,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 299.25, 107.0, 50.0, 19.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-10",
-					"maxclass" : "flonum",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "float", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 247.0, 107.0, 50.0, 19.0 ]
+					"patching_rect" : [ 247.0, 141.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -4967,7 +5031,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 345.75, 604.0, 32.5, 17.0 ],
+					"patching_rect" : [ 357.0, 567.0, 32.5, 17.0 ],
 					"text" : "stop"
 				}
 
@@ -4981,7 +5045,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 266.0, 604.0, 72.0, 17.0 ],
+					"patching_rect" : [ 277.25, 567.0, 72.0, 17.0 ],
 					"text" : "startwindow"
 				}
 
@@ -4996,23 +5060,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 299.25, 78.0, 79.0, 19.0 ],
+					"patching_rect" : [ 247.0, 122.0, 79.0, 19.0 ],
 					"text" : "loadmess 0.5"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"hidden" : 1,
-					"id" : "obj-1",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 247.0, 78.0, 73.0, 19.0 ],
-					"text" : "loadmess 0."
 				}
 
 			}
@@ -5025,7 +5074,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 440.0, 215.0, 92.0, 19.0 ],
+					"patching_rect" : [ 364.0, 260.0, 92.0, 19.0 ],
 					"text" : "Optimizations :"
 				}
 
@@ -5038,7 +5087,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 630.0, 242.0, 19.0 ],
+					"patching_rect" : [ 24.0, 602.0, 242.0, 19.0 ],
 					"text" : "hoa.dac~ 1:16"
 				}
 
@@ -5053,7 +5102,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 440.0, 200.0, 70.0, 19.0 ],
+					"patching_rect" : [ 364.0, 245.0, 70.0, 19.0 ],
 					"text" : "loadmess 1"
 				}
 
@@ -5067,7 +5116,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 440.0, 260.0, 85.0, 19.0 ],
+					"patching_rect" : [ 364.0, 305.0, 85.0, 19.0 ],
 					"text" : "prepend optim"
 				}
 
@@ -5083,7 +5132,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 440.0, 230.0, 100.0, 19.0 ]
+					"patching_rect" : [ 364.0, 275.0, 100.0, 19.0 ]
 				}
 
 			}
@@ -5207,7 +5256,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 600.0, 45.0, 51.0, 19.0 ],
+					"patching_rect" : [ 357.0, 358.0, 51.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -5234,36 +5283,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 600.0, 75.0, 99.0, 19.0 ],
+					"patching_rect" : [ 357.0, 388.0, 99.0, 19.0 ],
 					"text" : "hoa.connect 7 16"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-24",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 247.0, 193.0, 71.25, 19.0 ],
-					"text" : "+~"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-26",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 247.0, 133.0, 32.0, 19.0 ],
-					"text" : "sig~"
 				}
 
 			}
@@ -5276,7 +5297,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 299.25, 133.0, 72.0, 19.0 ],
+					"patching_rect" : [ 247.0, 167.0, 72.0, 19.0 ],
 					"text" : "phasor~ 0.5"
 				}
 
@@ -5299,7 +5320,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 24.0, 136.0, 218.0, 87.0 ],
+						"rect" : [ 24.0, 155.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -5769,7 +5790,6 @@
 , 							{
 								"box" : 								{
 									"embed" : 1,
-									"hidden" : 1,
 									"id" : "obj-3",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -5783,7 +5803,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 28.0, 158.0, 175.0, 67.0 ],
+										"rect" : [ 28.0, 177.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -6549,7 +6569,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 28.0, 158.0, 179.0, 66.0 ],
+										"rect" : [ 28.0, 177.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -6759,7 +6779,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 28.0, 158.0, 178.0, 65.0 ],
+										"rect" : [ 28.0, 177.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -7440,6 +7460,7 @@
 , 							{
 								"box" : 								{
 									"embed" : 1,
+									"hidden" : 1,
 									"id" : "obj-22",
 									"maxclass" : "bpatcher",
 									"numinlets" : 1,
@@ -7453,7 +7474,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 28.0, 158.0, 179.0, 65.0 ],
+										"rect" : [ 28.0, 177.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -8737,7 +8758,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 24.0, 110.0, 218.0, 87.0 ]
+					"patching_rect" : [ 24.0, 129.0, 218.0, 87.0 ]
 				}
 
 			}
@@ -8750,115 +8771,32 @@
 					"numinlets" : 15,
 					"numoutlets" : 16,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 24.0, 343.0, 242.0, 20.0 ],
+					"patching_rect" : [ 24.0, 311.0, 242.0, 20.0 ],
 					"text" : "hoa.decoder~ 7 16"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 497.75, 6.0, 302.0, 32.0 ],
-					"text" : "hoa.optim~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris. © 2012 CICM / Universite Paris 8"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-2",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 6.0, 485.0, 30.0 ],
-					"text" : "hoa.optim~",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_title"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-3",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 35.0, 503.0, 21.0 ],
-					"text" : "An ambisonic optimization external",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_digest"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-5",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 56.0, 576.0, 32.0 ],
-					"text" : "hoa.optim~ applies an optimization to the cylindrical harmonics. It can be basic for no optimization, maxRe or inPhase.",
-					"varname" : "autohelp_top_description"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-					"id" : "obj-9",
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-37",
 					"maxclass" : "panel",
-					"mode" : 1,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2.0, 4.0, 495.0, 52.0 ],
-					"varname" : "autohelp_top_panel"
+					"patching_rect" : [ 357.0, 251.0, 133.0, 80.0 ],
+					"rounded" : 15,
+					"shadow" : -1
 				}
 
 			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-10", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-1", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-26", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-10", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-14", 15 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 355.25, 625.0, 256.5, 625.0 ],
+					"midpoints" : [ 366.5, 592.5, 256.5, 592.5 ],
 					"source" : [ "obj-11", 0 ]
 				}
 
@@ -9471,24 +9409,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-24", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-24", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-26", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-7", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -9519,7 +9439,7 @@
 					"destination" : [ "obj-16", 14 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 449.5, 292.0, 256.5, 292.0 ],
+					"midpoints" : [ 373.5, 339.0, 276.0, 339.0, 276.0, 270.0, 256.5, 270.0 ],
 					"source" : [ "obj-33", 0 ]
 				}
 
@@ -9529,7 +9449,6 @@
 					"destination" : [ "obj-33", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 490.0, 251.0, 449.0, 251.0, 449.0, 257.0, 449.5, 257.0 ],
 					"source" : [ "obj-34", 1 ]
 				}
 
@@ -9539,7 +9458,7 @@
 					"destination" : [ "obj-31", 0 ],
 					"disabled" : 0,
 					"hidden" : 1,
-					"midpoints" : [ 609.5, 66.0, 609.5, 66.0 ],
+					"midpoints" : [ 366.5, 379.0, 366.5, 379.0 ],
 					"source" : [ "obj-46", 0 ]
 				}
 
@@ -9555,7 +9474,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-24", 1 ],
+					"destination" : [ "obj-23", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-7", 0 ]
@@ -9567,12 +9486,27 @@
 					"destination" : [ "obj-14", 15 ],
 					"disabled" : 0,
 					"hidden" : 0,
+					"midpoints" : [ 286.75, 592.5, 256.5, 592.5 ],
 					"source" : [ "obj-8", 0 ]
 				}
 
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "hoa.helpheader.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
+				"patcherrelativepath" : "",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon.png",
+				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.decoder~.mxo",
 				"type" : "iLaX"
 			}

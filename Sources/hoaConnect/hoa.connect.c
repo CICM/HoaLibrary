@@ -27,18 +27,18 @@ int main(void)
 	class_addmethod(c, (method)connect_notify,				"notify",		A_CANT, 0);
 	class_addmethod(c, (method)connect_bang,				"bang",			A_CANT,	0);
 	
+	/*
+	CLASS_ATTR_RGBA				(c, "poscolor", 0, t_connect, f_colorPositiv);
+	CLASS_ATTR_CATEGORY			(c, "poscolor", 0, "Behavior");
+	CLASS_ATTR_STYLE			(c, "poscolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "poscolor", 0, "Positif Color");
+	CLASS_ATTR_ORDER			(c, "poscolor", 0, "0");
+	CLASS_ATTR_DEFAULT			(c, "poscolor", 0, "0. 0. 1. 1.");
+	CLASS_ATTR_SAVE				(c, "poscolor", 1);
+	*/
+	
 	class_register(CLASS_BOX, c);
 	connect_class = c;
-	
-	/*
-	CLASS_ATTR_INVISIBLE		(c, "color", 0);
-	CLASS_ATTR_RGBA				(c, "poscolor", 0, t_connect, f_colorPositiv);
-	CLASS_ATTR_CATEGORY			(c, "poscolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "poscolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "poscolor", 0, "Positiv Color");
-	CLASS_ATTR_ORDER			(c, "poscolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE		(c, "poscolor", 0, "0. 0. 1. 1");
-	*/
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 }
@@ -58,8 +58,6 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 		else 
 			x->f_output = x->f_harmonics;
 		
-		//attr_args_process(x, argc, argv);
-		
 		//object_obex_lookup(x, gensym("#P"), &x->f_patcher); // passé dans la fonction connect_attach
 		defer_low(x, (method)connect_attach, NULL, 0, NULL);
 	
@@ -68,6 +66,8 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_jr.y = 0;
 		x->f_jr.width = 0;
 		x->f_jr.height = 0;
+		
+		//attr_args_process(x, argc, argv);
 	}
 	
 	return x;

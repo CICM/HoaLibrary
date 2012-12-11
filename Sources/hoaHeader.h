@@ -17,25 +17,21 @@
  *
  */
 
-#ifndef define DEF_HOAHEADER
+#ifndef DEF_HOAHEADER
 #define DEF_HOAHEADER
 
 // Private Variables / Functions / Etc.
-static long hoa_glob_loaded;
-
+void hoa_postcredits();
 
 // Initialize Hoa
 void hoa_init(void)
 {
-	// Only run this function for the first object loaded...
-	if(hoa_glob_loaded == 1) return;
-	
-	// Post to the Max Window	
-	post("hoa.library (Beta 1.0.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
-	post("Copyright (C) 2012, CICM / Universite Paris 8");
-	
-	// Set the flag so this function isn't run again...
-	hoa_glob_loaded = 1;
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+}
+
+void hoa_postcredits(){
+	post("hoa.library (version 1.1) by Julien Colafrancesco, Pierre Guillot & Eliott Paris",0);
+	post(" Copyright (C) 2012, CICM | Universite Paris 8");
 }
 
 #endif

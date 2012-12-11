@@ -7,7 +7,8 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 17.0, 103.0, 779.0, 486.0 ],
+		"rect" : [ 39.0, 85.0, 520.0, 506.0 ],
+		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -28,34 +29,32 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"fontface" : 3,
 					"fontname" : "Arial",
-					"fontsize" : 20.871338,
+					"fontsize" : 12.0,
 					"frgb" : 0.0,
-					"id" : "obj-4",
+					"id" : "obj-3",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 2.0, 6.0, 117.0, 30.0 ],
-					"text" : "hoa.grain~",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_title[1]"
+					"patching_rect" : [ 43.0625, 288.5, 127.0, 33.0 ],
+					"text" : "dblclick on hoa.plug~ to see how it works.",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[2]"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-6",
-					"maxclass" : "comment",
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-4",
+					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 3.0, 36.0, 208.0, 21.0 ],
-					"text" : "An ambisonic granular synthesizer.",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_digest[1]"
+					"patching_rect" : [ 43.0625, 288.5, 123.0, 33.0 ],
+					"rounded" : 15,
+					"shadow" : -1
 				}
 
 			}
@@ -63,6 +62,94 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-19",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 475.0, 497.0, 19.0 ],
+					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-28",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 475.0, 497.0, 19.0 ],
+					"rounded" : 6,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-2",
+					"linecount" : 3,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 76.0, 483.0, 47.0 ],
+					"text" : "hoa.grain~ synthesizes a diffused sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending to the orders to generate a granular sound field.",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-31",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 76.0, 483.0, 47.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "@obj-name", "hoa.grain~", "@obj-desc", "An", "ambisonic", "granular", "synthesizer." ],
+					"id" : "obj-41",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.helpheader.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 7.0, 483.0, 56.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 7.180877,
+					"hidden" : 1,
+					"id" : "obj-16",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 0,
+					"patching_rect" : [ 421.0, 23.5, 52.0, 23.0 ],
+					"text" : "bgcolor 0.93 0.93 0.92 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-46",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -178,7 +265,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 630.0, 60.0, 51.0, 19.0 ],
+					"patching_rect" : [ 390.0, 415.0, 51.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -200,11 +287,12 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-11",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 630.0, 90.0, 99.0, 19.0 ],
+					"patching_rect" : [ 390.0, 445.0, 99.0, 19.0 ],
 					"text" : "hoa.connect 7 16"
 				}
 
@@ -218,7 +306,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 15,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 330.0, 235.0, 19.0 ],
+					"patching_rect" : [ 19.0, 370.0, 221.125, 19.0 ],
 					"text" : "hoa.plug~ 7 hoa.grain~ no"
 				}
 
@@ -227,6 +315,7 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-35",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -446,7 +535,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 510.0, 105.0, 66.0, 19.0 ],
+					"patching_rect" : [ 390.0, 370.0, 66.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -482,7 +571,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 47.0, 193.0, 218.0, 87.0 ],
+						"rect" : [ 58.0, 222.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -966,7 +1055,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 51.0, 215.0, 175.0, 67.0 ],
+										"rect" : [ 62.0, 244.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -1381,7 +1470,7 @@
 										"description" : "",
 										"digest" : "",
 										"tags" : "",
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1]",
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -1645,7 +1734,7 @@
 										"fontface" : 0,
 										"fontname" : "Arial",
 										"fontsize" : 12.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][1]",
 										"tags" : ""
 									}
 ,
@@ -1732,7 +1821,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 51.0, 215.0, 179.0, 66.0 ],
+										"rect" : [ 62.0, 244.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -1942,7 +2031,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 51.0, 215.0, 178.0, 65.0 ],
+										"rect" : [ 62.0, 244.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -2636,7 +2725,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 51.0, 215.0, 179.0, 65.0 ],
+										"rect" : [ 62.0, 244.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -3920,7 +4009,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 30.0, 90.0, 218.0, 87.0 ]
+					"patching_rect" : [ 19.0, 137.0, 218.0, 87.0 ]
 				}
 
 			}
@@ -3942,7 +4031,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 287.0, 193.0, 231.0, 223.0 ],
+						"rect" : [ 298.0, 222.0, 231.0, 223.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -4427,7 +4516,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 270.0, 90.0, 231.0, 223.0 ]
+					"patching_rect" : [ 259.0, 137.0, 231.0, 223.0 ]
 				}
 
 			}
@@ -4440,7 +4529,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 315.0, 390.0, 32.5, 17.0 ],
+					"patching_rect" : [ 338.25, 400.0, 32.5, 17.0 ],
 					"text" : "stop"
 				}
 
@@ -4454,7 +4543,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 300.0, 360.0, 72.0, 17.0 ],
+					"patching_rect" : [ 259.0, 400.0, 72.0, 17.0 ],
 					"text" : "startwindow"
 				}
 
@@ -4467,7 +4556,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 450.0, 234.5, 19.0 ],
+					"patching_rect" : [ 19.0, 445.0, 221.125, 19.0 ],
 					"text" : "hoa.dac~ 1:16"
 				}
 
@@ -4481,87 +4570,21 @@
 					"numinlets" : 15,
 					"numoutlets" : 16,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 30.0, 390.0, 235.0, 19.0 ],
+					"patching_rect" : [ 18.5, 400.0, 221.625, 19.0 ],
 					"text" : "hoa.decoder~ 7 16"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 497.75, 6.0, 278.0, 32.0 ],
-					"text" : "hoa.grain~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-2",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 4.0, 8.0, 117.0, 30.0 ],
-					"text" : "hoa.grain~",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_title"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-3",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 4.0, 37.0, 208.0, 21.0 ],
-					"text" : "An ambisonic granular synthesizer.",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_digest"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
+					"arrows" : 2,
+					"border" : 2.0,
 					"id" : "obj-5",
-					"linecount" : 2,
-					"maxclass" : "comment",
+					"justification" : 1,
+					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 56.0, 572.0, 32.0 ],
-					"text" : "hoa.grain~ synthesizes a diffused sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending to the orders to generate a granular sound field.",
-					"varname" : "autohelp_top_description"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-					"id" : "obj-9",
-					"maxclass" : "panel",
-					"mode" : 1,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 2.0, 4.0, 495.0, 52.0 ],
-					"varname" : "autohelp_top_panel[1]"
+					"patching_rect" : [ 147.0625, 324.5, 19.0, 34.0 ]
 				}
 
 			}
@@ -4580,7 +4603,7 @@
 					"destination" : [ "obj-12", 15 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 324.5, 428.0, 255.0, 428.0 ],
+					"midpoints" : [ 347.75, 440.0, 230.625, 440.0 ],
 					"source" : [ "obj-13", 0 ]
 				}
 
@@ -4740,7 +4763,7 @@
 					"destination" : [ "obj-14", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 279.5, 320.0, 39.5, 320.0 ],
+					"midpoints" : [ 268.5, 364.0, 28.5, 364.0 ],
 					"source" : [ "obj-42", 0 ]
 				}
 
@@ -4749,8 +4772,8 @@
 				"patchline" : 				{
 					"destination" : [ "obj-11", 0 ],
 					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 639.5, 81.0, 639.5, 81.0 ],
+					"hidden" : 1,
+					"midpoints" : [ 399.5, 436.0, 399.5, 436.0 ],
 					"source" : [ "obj-46", 0 ]
 				}
 
@@ -4760,7 +4783,7 @@
 					"destination" : [ "obj-12", 15 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 309.5, 428.0, 255.0, 428.0 ],
+					"midpoints" : [ 268.5, 440.0, 230.625, 440.0 ],
 					"source" : [ "obj-7", 0 ]
 				}
 
@@ -4929,6 +4952,20 @@
 				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/effects",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/effects",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpheader.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
+				"patcherrelativepath" : "",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon.png",
+				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{

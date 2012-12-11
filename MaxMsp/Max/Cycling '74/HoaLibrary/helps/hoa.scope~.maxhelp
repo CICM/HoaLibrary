@@ -7,7 +7,8 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 5.0, 44.0, 918.0, 719.0 ],
+		"rect" : [ 95.0, 49.0, 820.0, 706.0 ],
+		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -26,16 +27,44 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"showrootpatcherontab" : 0,
-		"showontab" : 0,
+		"showontab" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-					"color" : [ 0.8, 0.839216, 0.709804, 0.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.0,
+					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-4",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 508.0, 17.5, 257.0, 32.0 ],
+					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-41",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 508.0, 17.5, 257.0, 32.0 ],
+					"rounded" : 6,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"hidden" : 1,
-					"id" : "obj-30",
+					"id" : "obj-40",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
@@ -47,7 +76,8 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 5.0, 70.0, 918.0, 693.0 ],
+						"rect" : [ 0.0, 26.0, 820.0, 680.0 ],
+						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 14.0,
@@ -69,93 +99,89 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-30",
-									"maxclass" : "toggle",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 497.0, 121.0, 20.0, 20.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 14.0,
-									"id" : "obj-24",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 503.0, 153.0, 76.0, 20.0 ],
-									"text" : "shadow $1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 3,
-									"fontname" : "Arial",
-									"fontsize" : 20.871338,
-									"frgb" : 0.0,
-									"id" : "obj-38",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1.0, 1.0, 126.0, 30.0 ],
-									"text" : "hoa.scope~",
-									"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-									"varname" : "autohelp_top_title[2]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.754705,
-									"frgb" : 0.0,
-									"id" : "obj-39",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 2.0, 32.0, 184.0, 21.0 ],
-									"text" : "An ambisonic harmonic scope.",
-									"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-									"varname" : "autohelp_top_digest[2]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 3,
-									"fontname" : "Arial",
-									"fontsize" : 20.871338,
-									"frgb" : 0.0,
-									"id" : "obj-2",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 3.0, 3.0, 126.0, 30.0 ],
-									"text" : "hoa.scope~",
-									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-									"varname" : "autohelp_top_title[1]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.754705,
+									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-4",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 3.0, 33.0, 184.0, 21.0 ],
-									"text" : "An ambisonic harmonic scope.",
-									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-									"varname" : "autohelp_top_digest[1]"
+									"patching_rect" : [ 508.0, 17.5, 257.0, 32.0 ],
+									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-41",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 508.0, 17.5, 257.0, 32.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", "hoa.scope~", "@obj-desc", "An", "ambisonic", "harmonic", "scope" ],
+									"id" : "obj-31",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 8.0, 5.5, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 7.180877,
+									"hidden" : 1,
+									"id" : "obj-32",
+									"linecount" : 2,
+									"maxclass" : "newobj",
+									"numinlets" : 4,
+									"numoutlets" : 0,
+									"patching_rect" : [ 422.0, 22.0, 52.0, 23.0 ],
+									"text" : "bgcolor 0.93 0.93 0.92 1."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-35",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 8.0, 69.0, 604.0, 33.0 ],
+									"text" : "hoa.scope~ displays the harmonics of an ambisonic soundfield on a circle. The number of harmonics is defined at the object creation with the attribute @order and create order * 2 + 1 inputs (ex : hoa.scope~ @order 7).",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-37",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 8.0, 69.0, 604.0, 33.0 ],
+									"rounded" : 15,
+									"shadow" : -1
 								}
 
 							}
@@ -172,8 +198,8 @@
 									"numinlets" : 15,
 									"numoutlets" : 0,
 									"order" : 7,
-									"patching_rect" : [ 195.0, 310.0, 293.0, 293.0 ],
-									"phcolor" : [ 1.0, 0.011765, 0.011765, 1.0 ],
+									"patching_rect" : [ 194.5, 314.0, 293.0, 293.0 ],
+									"phcolor" : [ 1.0, 0.011364, 0.011364, 1.0 ],
 									"txcolor" : [ 0.0, 0.0, 0.0, 0.501961 ]
 								}
 
@@ -189,7 +215,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 675.0, 295.0, 50.0, 19.0 ]
+									"patching_rect" : [ 675.0, 300.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -203,7 +229,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 675.0, 265.0, 76.0, 19.0 ],
+									"patching_rect" : [ 675.0, 270.0, 76.0, 19.0 ],
 									"text" : "loadmess 20"
 								}
 
@@ -217,7 +243,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 675.0, 277.0, 137.0, 19.0 ],
+									"patching_rect" : [ 675.0, 282.0, 137.0, 19.0 ],
 									"text" : "Refresh Interval (ms) :"
 								}
 
@@ -231,7 +257,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 675.0, 325.0, 94.0, 19.0 ],
+									"patching_rect" : [ 675.0, 330.0, 94.0, 19.0 ],
 									"text" : "prepend interval"
 								}
 
@@ -274,7 +300,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 304.0, 86.0, 86.0, 19.0 ],
+									"patching_rect" : [ 304.0, 90.0, 86.0, 19.0 ],
 									"text" : "loadmess 0.05"
 								}
 
@@ -472,7 +498,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 195.0, 668.0, 293.0, 19.0 ],
+									"patching_rect" : [ 195.0, 647.0, 293.0, 19.0 ],
 									"text" : "hoa.dac~ 1:16"
 								}
 
@@ -500,7 +526,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 549.5, 616.0, 32.5, 17.0 ],
+									"patching_rect" : [ 579.5, 607.0, 32.5, 17.0 ],
 									"text" : "stop"
 								}
 
@@ -514,7 +540,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 510.0, 586.0, 72.0, 17.0 ],
+									"patching_rect" : [ 500.0, 607.0, 72.0, 17.0 ],
 									"text" : "startwindow"
 								}
 
@@ -537,37 +563,6 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-59",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 510.0, 1.0, 285.0, 32.0 ],
-									"text" : "hoa.scope~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-26",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 2.0, 55.0, 584.0, 32.0 ],
-									"text" : "hoa.scope~ displays the harmonics of an ambisonic soundfield on a circle. The number of harmonics is defined at the object creation with the attribute @order and create order * 2 + 1 inputs (ex : hoa.scope~ @order 7).",
-									"varname" : "autohelp_top_description"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
 									"id" : "obj-12",
 									"maxclass" : "newobj",
 									"numinlets" : 2,
@@ -582,6 +577,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-46",
 									"maxclass" : "newobj",
 									"numinlets" : 0,
@@ -697,7 +693,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 806.0, 43.0, 51.0, 19.0 ],
+									"patching_rect" : [ 679.0, 394.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -719,27 +715,13 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-10",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 806.0, 73.0, 99.0, 19.0 ],
+									"patching_rect" : [ 679.0, 424.0, 99.0, 19.0 ],
 									"text" : "hoa.connect 7 16"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-									"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-									"id" : "obj-27",
-									"maxclass" : "panel",
-									"mode" : 1,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1.0, 1.0, 495.0, 52.0 ],
-									"varname" : "autohelp_top_panel"
 								}
 
 							}
@@ -1449,19 +1431,10 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-1", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-24", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-1", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 684.5, 351.0, 498.0, 351.0, 498.0, 312.0, 478.5, 312.0 ],
+									"midpoints" : [ 684.5, 351.0, 498.0, 351.0, 498.0, 312.0, 478.0, 312.0 ],
 									"source" : [ "obj-29", 0 ]
 								}
 
@@ -1478,15 +1451,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-24", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-30", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-29", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1498,8 +1462,8 @@
 								"patchline" : 								{
 									"destination" : [ "obj-10", 0 ],
 									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 815.5, 64.0, 815.5, 64.0 ],
+									"hidden" : 1,
+									"midpoints" : [ 688.5, 415.0, 688.5, 415.0 ],
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -1538,7 +1502,7 @@
 									"destination" : [ "obj-69", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 519.5, 661.0, 478.5, 661.0 ],
+									"midpoints" : [ 509.5, 639.5, 478.5, 639.5 ],
 									"source" : [ "obj-71", 0 ]
 								}
 
@@ -1548,7 +1512,7 @@
 									"destination" : [ "obj-69", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 559.0, 661.0, 478.5, 661.0 ],
+									"midpoints" : [ 589.0, 639.5, 478.5, 639.5 ],
 									"source" : [ "obj-73", 0 ]
 								}
 
@@ -1718,7 +1682,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 685.5, 442.5, 55.0, 22.0 ],
+					"patching_rect" : [ 679.0, 450.5, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -1733,7 +1697,127 @@
 					}
 ,
 					"text" : "p basic",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.0 ]
+					"textcolor" : [ 0.209184, 0.209184, 0.209184, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
+					"id" : "obj-24",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 6,
+							"minor" : 0,
+							"revision" : 8
+						}
+,
+						"rect" : [ 0.0, 26.0, 820.0, 680.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 13.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 0,
+						"gridsize" : [ 5.0, 5.0 ],
+						"gridsnaponopen" : 0,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"boxanimatetime" : 200,
+						"imprint" : 0,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"showontab" : 1,
+						"boxes" : [  ],
+						"lines" : [  ]
+					}
+,
+					"patching_rect" : [ 730.0, 450.5, 50.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"default_fontsize" : 13.0,
+						"description" : "",
+						"digest" : "",
+						"fontface" : 0,
+						"fontname" : "Arial",
+						"fontsize" : 13.0,
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p ?",
+					"textcolor" : [ 0.209184, 0.209184, 0.209184, 1.0 ],
+					"varname" : "q_tab"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "@obj-name", "hoa.scope~", "@obj-desc", "An", "ambisonic", "harmonic", "scope" ],
+					"id" : "obj-31",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.helpheader.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 8.0, 5.5, 483.0, 56.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 7.180877,
+					"hidden" : 1,
+					"id" : "obj-32",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 0,
+					"patching_rect" : [ 422.0, 22.0, 52.0, 23.0 ],
+					"text" : "bgcolor 0.93 0.93 0.92 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-35",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 8.0, 69.0, 604.0, 33.0 ],
+					"text" : "hoa.scope~ displays the harmonics of an ambisonic soundfield on a circle. The number of harmonics is defined at the object creation with the attribute @order and create order * 2 + 1 inputs (ex : hoa.scope~ @order 7).",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-37",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 8.0, 69.0, 604.0, 33.0 ],
+					"rounded" : 15,
+					"shadow" : -1
 				}
 
 			}
@@ -1754,7 +1838,8 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 918.0, 693.0 ],
+						"rect" : [ 95.0, 75.0, 820.0, 680.0 ],
+						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 14.0,
@@ -1775,6 +1860,61 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 14.0,
+									"frgb" : 0.0,
+									"id" : "obj-8",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 462.0, 535.0, 112.0, 22.0 ],
+									"text" : "turn dac~ on",
+									"textcolor" : [ 0.326531, 0.326531, 0.326531, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-3",
+									"local" : 1,
+									"maxclass" : "ezdac~",
+									"numinlets" : 2,
+									"numoutlets" : 0,
+									"patching_rect" : [ 409.5, 513.0, 44.0, 44.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-26",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 403.5, 502.25, 181.0, 63.75 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 7.180877,
+									"hidden" : 1,
+									"id" : "obj-13",
+									"linecount" : 2,
+									"maxclass" : "newobj",
+									"numinlets" : 4,
+									"numoutlets" : 0,
+									"patching_rect" : [ 694.0, 40.0, 52.0, 23.0 ],
+									"text" : "bgcolor 0.93 0.93 0.92 1."
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
@@ -1840,31 +1980,6 @@
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 31.0, 154.0, 48.0, 22.0 ],
 									"text" : "sig~ 1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 14.0,
-									"frgb" : 0.0,
-									"id" : "obj-4",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 502.0, 544.0, 112.0, 22.0 ],
-									"text" : "turn on the dac~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-14",
-									"local" : 1,
-									"maxclass" : "ezdac~",
-									"numinlets" : 2,
-									"numoutlets" : 0,
-									"patching_rect" : [ 436.0, 507.0, 59.0, 59.0 ]
 								}
 
 							}
@@ -2108,7 +2223,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-35",
-									"items" : [ "bgcolor", ",", "txcolor", ",", "cicolor", ",", "phcolor", ",", "nhcolor" ],
+									"items" : [ "bgcolor", ",", "txcolor", ",", "cicolor", ",", "cishadcolor", ",", "phcolor", ",", "nhcolor" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -2127,10 +2242,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 31.0, 21.0, 255.0, 22.0 ],
-									"presentation" : 1,
-									"presentation_rect" : [ 13.5, 15.0, 253.0, 22.0 ],
-									"text" : "Color custom :",
+									"patching_rect" : [ 42.0, 21.0, 255.0, 22.0 ],
+									"text" : "Color customizatons :",
 									"underline" : 1
 								}
 
@@ -2147,6 +2260,20 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 499.0, 182.5, 70.0, 19.0 ],
 									"text" : "loadmess 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-9",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 31.0, 15.0, 273.0, 37.0 ],
+									"rounded" : 15,
+									"shadow" : -1
 								}
 
 							}
@@ -2424,135 +2551,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-					"color" : [ 0.8, 0.839216, 0.709804, 0.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"hidden" : 1,
-					"id" : "obj-24",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patcher" : 					{
-						"fileversion" : 1,
-						"appversion" : 						{
-							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
-						}
-,
-						"rect" : [ 0.0, 26.0, 918.0, 693.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 13.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 0,
-						"gridsize" : [ 5.0, 5.0 ],
-						"gridsnaponopen" : 0,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"boxanimatetime" : 200,
-						"imprint" : 0,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"showontab" : 1,
-						"boxes" : [  ],
-						"lines" : [  ]
-					}
-,
-					"patching_rect" : [ 745.0, 442.5, 50.0, 20.0 ],
-					"saved_object_attributes" : 					{
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"default_fontsize" : 13.0,
-						"description" : "",
-						"digest" : "",
-						"fontface" : 0,
-						"fontname" : "Arial",
-						"fontsize" : 13.0,
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
-					"text" : "p ?",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.0 ],
-					"varname" : "q_tab"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-38",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1.0, 1.0, 126.0, 30.0 ],
-					"text" : "hoa.scope~",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_title[2]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-39",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 2.0, 32.0, 184.0, 21.0 ],
-					"text" : "An ambisonic harmonic scope.",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_digest[2]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-2",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 3.0, 3.0, 126.0, 30.0 ],
-					"text" : "hoa.scope~",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_title[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-4",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 3.0, 33.0, 184.0, 21.0 ],
-					"text" : "An ambisonic harmonic scope.",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_digest[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"bgcolor" : [ 0.729412, 0.745098, 0.756863, 1.0 ],
 					"cicolor" : [ 0.0, 0.0, 0.0, 0.5 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
@@ -2666,7 +2664,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 304.0, 86.0, 86.0, 19.0 ],
+					"patching_rect" : [ 304.0, 90.0, 86.0, 19.0 ],
 					"text" : "loadmess 0.05"
 				}
 
@@ -2864,7 +2862,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 195.0, 668.0, 293.0, 19.0 ],
+					"patching_rect" : [ 195.0, 647.0, 293.0, 19.0 ],
 					"text" : "hoa.dac~ 1:16"
 				}
 
@@ -2892,7 +2890,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 549.5, 616.0, 32.5, 17.0 ],
+					"patching_rect" : [ 579.5, 607.0, 32.5, 17.0 ],
 					"text" : "stop"
 				}
 
@@ -2906,7 +2904,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 510.0, 586.0, 72.0, 17.0 ],
+					"patching_rect" : [ 500.0, 607.0, 72.0, 17.0 ],
 					"text" : "startwindow"
 				}
 
@@ -2929,37 +2927,6 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 1.0, 285.0, 32.0 ],
-					"text" : "hoa.scope~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-26",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 2.0, 55.0, 584.0, 32.0 ],
-					"text" : "hoa.scope~ displays the harmonics of an ambisonic soundfield on a circle. The number of harmonics is defined at the object creation with the attribute @order and create order * 2 + 1 inputs (ex : hoa.scope~ @order 7).",
-					"varname" : "autohelp_top_description"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
 					"id" : "obj-12",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -2974,6 +2941,7 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-46",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -3089,7 +3057,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 806.0, 43.0, 51.0, 19.0 ],
+					"patching_rect" : [ 679.0, 394.0, 51.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -3111,27 +3079,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-10",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 806.0, 73.0, 99.0, 19.0 ],
+					"patching_rect" : [ 679.0, 424.0, 99.0, 19.0 ],
 					"text" : "hoa.connect 7 16"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-					"id" : "obj-27",
-					"maxclass" : "panel",
-					"mode" : 1,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1.0, 1.0, 495.0, 52.0 ],
-					"varname" : "autohelp_top_panel"
 				}
 
 			}
@@ -3872,8 +3826,8 @@
 				"patchline" : 				{
 					"destination" : [ "obj-10", 0 ],
 					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 815.5, 64.0, 815.5, 64.0 ],
+					"hidden" : 1,
+					"midpoints" : [ 688.5, 415.0, 688.5, 415.0 ],
 					"source" : [ "obj-46", 0 ]
 				}
 
@@ -3912,7 +3866,7 @@
 					"destination" : [ "obj-69", 15 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 519.5, 661.0, 478.5, 661.0 ],
+					"midpoints" : [ 509.5, 639.5, 478.5, 639.5 ],
 					"source" : [ "obj-71", 0 ]
 				}
 
@@ -3922,7 +3876,7 @@
 					"destination" : [ "obj-69", 15 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 559.0, 661.0, 478.5, 661.0 ],
+					"midpoints" : [ 589.0, 639.5, 478.5, 639.5 ],
 					"source" : [ "obj-73", 0 ]
 				}
 
@@ -4091,6 +4045,20 @@
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "hoa.helpheader.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
+				"patcherrelativepath" : "",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon.png",
+				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.connect.mxo",
 				"type" : "iLaX"
 			}

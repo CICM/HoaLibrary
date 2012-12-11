@@ -7,7 +7,8 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 29.0, 44.0, 865.0, 682.0 ],
+		"rect" : [ 99.0, 44.0, 875.0, 694.0 ],
+		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -26,14 +27,101 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"showrootpatcherontab" : 0,
-		"showontab" : 0,
+		"showontab" : 1,
 		"boxes" : [ 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-					"color" : [ 1.0, 1.0, 1.0, 0.0 ],
 					"fontname" : "Arial",
-					"fontsize" : 14.84361,
+					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-36",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 559.0, 19.5, 257.0, 32.0 ],
+					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-37",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 559.0, 19.5, 257.0, 32.0 ],
+					"rounded" : 6,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "processing." ],
+					"id" : "obj-30",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.helpheader.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 10.0, 7.5, 483.0, 56.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 7.180877,
+					"hidden" : 1,
+					"id" : "obj-31",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 0,
+					"patching_rect" : [ 424.0, 24.0, 52.0, 23.0 ],
+					"text" : "bgcolor 0.93 0.93 0.92 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-34",
+					"linecount" : 4,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 10.0, 73.5, 620.0, 60.0 ],
+					"text" : "hoa.plug~ facilitates the modularization of patches for ambisonic processing. The number of inlets and outlets is dependant on the number of inlets and outlets objects within its subpatch window, the ambisonic order andf the 1st argument.\nThe 2nd argument is the name of the patcher to load and the 3rd argument is the mode pre, no or post decoding.",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-35",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 10.0, 73.5, 618.0, 60.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"hidden" : 1,
 					"id" : "obj-13",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -46,7 +134,8 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 29.0, 70.0, 865.0, 656.0 ],
+						"rect" : [ 99.0, 70.0, 875.0, 668.0 ],
+						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 14.0,
@@ -68,39 +157,95 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"fontface" : 3,
 									"fontname" : "Arial",
-									"fontsize" : 20.871338,
+									"fontsize" : 11.595187,
 									"frgb" : 0.0,
-									"id" : "obj-28",
+									"id" : "obj-36",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 8.0, 7.0, 110.0, 30.0 ],
-									"text" : "hoa.plug~",
-									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"varname" : "autohelp_top_title[1]"
+									"patching_rect" : [ 559.0, 19.5, 257.0, 32.0 ],
+									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-37",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 559.0, 19.5, 257.0, 32.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "processing." ],
+									"id" : "obj-30",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 10.0, 7.5, 483.0, 56.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 12.754705,
-									"frgb" : 0.0,
-									"id" : "obj-29",
-									"maxclass" : "comment",
-									"numinlets" : 1,
+									"fontsize" : 7.180877,
+									"hidden" : 1,
+									"id" : "obj-31",
+									"linecount" : 2,
+									"maxclass" : "newobj",
+									"numinlets" : 4,
 									"numoutlets" : 0,
-									"patching_rect" : [ 9.0, 36.0, 309.0, 21.0 ],
-									"text" : "A partcher that duplicates patcher for hoa processing",
-									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"varname" : "autohelp_top_digest[1]"
+									"patching_rect" : [ 424.0, 24.0, 52.0, 23.0 ],
+									"text" : "bgcolor 0.93 0.93 0.92 1."
 								}
 
 							}
 , 							{
 								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-34",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 10.0, 73.5, 620.0, 60.0 ],
+									"text" : "hoa.plug~ facilitates the modularization of patches for ambisonic processing. The number of inlets and outlets is dependant on the number of inlets and outlets objects within its subpatch window, the ambisonic order andf the 1st argument.\nThe 2nd argument is the name of the patcher to load and the 3rd argument is the mode pre, no or post decoding.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-35",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 10.0, 73.5, 618.0, 60.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-26",
@@ -263,7 +408,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 44.0, 190.0, 218.0, 87.0 ],
+										"rect" : [ 114.0, 235.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -747,7 +892,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 48.0, 212.0, 175.0, 67.0 ],
+														"rect" : [ 118.0, 257.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -1162,7 +1307,7 @@
 														"description" : "",
 														"digest" : "",
 														"tags" : "",
-														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][2]",
+														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][3]",
 														"boxes" : [ 															{
 																"box" : 																{
 																	"fontname" : "Arial",
@@ -1426,7 +1571,7 @@
 														"fontface" : 0,
 														"fontname" : "Arial",
 														"fontsize" : 12.0,
-														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][2]",
+														"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1][3]",
 														"tags" : ""
 													}
 ,
@@ -1513,7 +1658,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 48.0, 212.0, 179.0, 66.0 ],
+														"rect" : [ 118.0, 257.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -1723,7 +1868,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 48.0, 212.0, 178.0, 65.0 ],
+														"rect" : [ 118.0, 257.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -2417,7 +2562,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 48.0, 212.0, 179.0, 65.0 ],
+														"rect" : [ 118.0, 257.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -2895,7 +3040,7 @@
 																	"fontname" : "Arial",
 																	"fontsize" : 12.0,
 																	"id" : "obj-5",
-																	"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+																	"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 																	"maxclass" : "umenu",
 																	"numinlets" : 1,
 																	"numoutlets" : 3,
@@ -3701,7 +3846,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 15.0, 120.0, 218.0, 87.0 ]
+									"patching_rect" : [ 15.0, 165.0, 218.0, 87.0 ]
 								}
 
 							}
@@ -3723,7 +3868,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 614.0, 235.0, 273.0, 336.0 ],
+										"rect" : [ 684.0, 235.0, 273.0, 336.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -4084,7 +4229,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.0, 480.0, 232.0, 32.0 ],
+									"patching_rect" : [ 330.0, 480.0, 217.0, 32.0 ],
 									"text" : "Post-mode for processing on harmonics signals."
 								}
 
@@ -4184,7 +4329,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 30.0, 330.0, 208.0, 32.0 ],
+									"patching_rect" : [ 30.0, 326.0, 208.0, 32.0 ],
 									"text" : "No-mode for no encoding processing, useful to create diffused soundfields"
 								}
 
@@ -4199,7 +4344,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 257.1875, 298.0, 150.0, 32.0 ],
+									"patching_rect" : [ 257.1875, 296.0, 150.0, 32.0 ],
 									"text" : "Pre-mode for processing on order's signals."
 								}
 
@@ -4250,6 +4395,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-15",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -4263,6 +4409,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-22",
 									"maxclass" : "newobj",
 									"numinlets" : 0,
@@ -4409,80 +4556,71 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-59",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 510.0, 15.0, 277.0, 32.0 ],
-									"text" : "hoa.plug~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 3,
-									"fontname" : "Arial",
-									"fontsize" : 20.871338,
-									"frgb" : 0.0,
-									"id" : "obj-2",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 9.0, 110.0, 30.0 ],
-									"text" : "hoa.plug~",
-									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-									"varname" : "autohelp_top_title"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.754705,
-									"frgb" : 0.0,
-									"id" : "obj-3",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 37.0, 309.0, 21.0 ],
-									"text" : "A partcher that duplicates patcher for hoa processing",
-									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-									"varname" : "autohelp_top_digest"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-5",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 57.0, 665.0, 45.0 ],
-									"text" : "hoa.plug~ facilitates the modularization of patches for ambisonic processing. The number of inlets and outlets is dependant on the number of inlets and outlets objects within its subpatch window, the ambisonic order andf the 1st argument.\nThe 2nd argument is the name of the patcher to load and the 3rd argument is the mode pre, no or post decoding.",
-									"varname" : "autohelp_top_description"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"background" : 1,
-									"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-									"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-									"id" : "obj-9",
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-38",
 									"maxclass" : "panel",
-									"mode" : 1,
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 8.0, 7.0, 495.0, 52.0 ],
-									"varname" : "autohelp_top_panel"
+									"patching_rect" : [ 585.0, 547.5, 239.0, 32.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-39",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 330.0, 480.0, 216.0, 32.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-40",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 15.0, 465.0, 84.0, 45.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-42",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 257.1875, 296.0, 150.0, 32.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-41",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 30.0, 326.0, 208.0, 32.0 ],
+									"rounded" : 15,
+									"shadow" : -1
 								}
 
 							}
@@ -4840,7 +4978,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
 									"disabled" : 0,
-									"hidden" : 0,
+									"hidden" : 1,
 									"source" : [ "obj-22", 0 ]
 								}
 
@@ -5116,7 +5254,7 @@
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 24.5, 297.0, 249.5, 297.0 ],
+									"midpoints" : [ 24.5, 299.0, 249.5, 299.0 ],
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -5268,7 +5406,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 675.0, 120.0, 58.0, 23.0 ],
+					"patching_rect" : [ 675.0, 120.0, 51.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -5283,14 +5421,13 @@
 					}
 ,
 					"text" : "p basic",
-					"textcolor" : [ 1.0, 1.0, 1.0, 0.0 ]
+					"textcolor" : [ 0.209184, 0.209184, 0.209184, 1.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
-					"color" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"hidden" : 1,
@@ -5306,7 +5443,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 865.0, 656.0 ],
+						"rect" : [ 0.0, 26.0, 875.0, 668.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -5330,7 +5467,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 738.5, 121.5, 50.0, 20.0 ],
+					"patching_rect" : [ 726.0, 120.0, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -5345,46 +5482,14 @@
 					}
 ,
 					"text" : "p ?",
-					"textcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
+					"textcolor" : [ 0.209184, 0.209184, 0.209184, 1.0 ],
 					"varname" : "q_tab"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-28",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 8.0, 7.0, 110.0, 30.0 ],
-					"text" : "hoa.plug~",
-					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"varname" : "autohelp_top_title[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-29",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 9.0, 36.0, 309.0, 21.0 ],
-					"text" : "A partcher that duplicates patcher for hoa processing",
-					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"varname" : "autohelp_top_digest[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
+					"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-26",
@@ -5547,7 +5652,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 15.0, 146.0, 218.0, 87.0 ],
+						"rect" : [ 15.0, 191.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -6031,7 +6136,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 19.0, 168.0, 175.0, 67.0 ],
+										"rect" : [ 19.0, 213.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -6446,7 +6551,7 @@
 										"description" : "",
 										"digest" : "",
 										"tags" : "",
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -6710,7 +6815,7 @@
 										"fontface" : 0,
 										"fontname" : "Arial",
 										"fontsize" : 12.0,
-										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1]",
+										"globalpatchername" : "[1][1][1][3][1][1][3][2][1][1][1][1][1][2][3][3][1][1][1][1][1]",
 										"tags" : ""
 									}
 ,
@@ -6797,7 +6902,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 19.0, 168.0, 179.0, 66.0 ],
+										"rect" : [ 19.0, 213.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -7007,7 +7112,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 19.0, 168.0, 178.0, 65.0 ],
+										"rect" : [ 19.0, 213.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -7701,7 +7806,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 19.0, 168.0, 179.0, 65.0 ],
+										"rect" : [ 19.0, 213.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -8985,7 +9090,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 15.0, 120.0, 218.0, 87.0 ]
+					"patching_rect" : [ 15.0, 165.0, 218.0, 87.0 ]
 				}
 
 			}
@@ -9368,7 +9473,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 330.0, 480.0, 232.0, 32.0 ],
+					"patching_rect" : [ 330.0, 480.0, 217.0, 32.0 ],
 					"text" : "Post-mode for processing on harmonics signals."
 				}
 
@@ -9468,7 +9573,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 330.0, 208.0, 32.0 ],
+					"patching_rect" : [ 30.0, 326.0, 208.0, 32.0 ],
 					"text" : "No-mode for no encoding processing, useful to create diffused soundfields"
 				}
 
@@ -9483,7 +9588,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 257.1875, 298.0, 150.0, 32.0 ],
+					"patching_rect" : [ 257.1875, 296.0, 150.0, 32.0 ],
 					"text" : "Pre-mode for processing on order's signals."
 				}
 
@@ -9534,6 +9639,7 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-15",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -9547,6 +9653,7 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"hidden" : 1,
 					"id" : "obj-22",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -9693,80 +9800,71 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 510.0, 15.0, 277.0, 32.0 ],
-					"text" : "hoa.plug~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-2",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 9.0, 110.0, 30.0 ],
-					"text" : "hoa.plug~",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_title"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-3",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 37.0, 309.0, 21.0 ],
-					"text" : "A partcher that duplicates patcher for hoa processing",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_digest"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-5",
-					"linecount" : 3,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 10.0, 57.0, 665.0, 45.0 ],
-					"text" : "hoa.plug~ facilitates the modularization of patches for ambisonic processing. The number of inlets and outlets is dependant on the number of inlets and outlets objects within its subpatch window, the ambisonic order andf the 1st argument.\nThe 2nd argument is the name of the patcher to load and the 3rd argument is the mode pre, no or post decoding.",
-					"varname" : "autohelp_top_description"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-					"id" : "obj-9",
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-38",
 					"maxclass" : "panel",
-					"mode" : 1,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 8.0, 7.0, 495.0, 52.0 ],
-					"varname" : "autohelp_top_panel"
+					"patching_rect" : [ 585.0, 547.5, 239.0, 32.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-39",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 330.0, 480.0, 216.0, 32.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-40",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 15.0, 465.0, 84.0, 45.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-42",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 257.1875, 296.0, 150.0, 32.0 ],
+					"rounded" : 15,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-41",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 30.0, 326.0, 208.0, 32.0 ],
+					"rounded" : 15,
+					"shadow" : -1
 				}
 
 			}
@@ -10124,7 +10222,7 @@
 				"patchline" : 				{
 					"destination" : [ "obj-15", 0 ],
 					"disabled" : 0,
-					"hidden" : 0,
+					"hidden" : 1,
 					"source" : [ "obj-22", 0 ]
 				}
 
@@ -10576,6 +10674,20 @@
 				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/effects",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/effects",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpheader.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
+				"patcherrelativepath" : "",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon.png",
+				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{

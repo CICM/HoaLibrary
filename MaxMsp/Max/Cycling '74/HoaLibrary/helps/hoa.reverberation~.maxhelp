@@ -8,6 +8,7 @@
 		}
 ,
 		"rect" : [ 34.0, 44.0, 907.0, 680.0 ],
+		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 11.595187,
@@ -28,34 +29,89 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"fontface" : 3,
 					"fontname" : "Arial",
-					"fontsize" : 20.871338,
+					"fontsize" : 11.595187,
 					"frgb" : 0.0,
-					"id" : "obj-10",
+					"id" : "obj-57",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 5.0, 4.0, 199.0, 30.0 ],
-					"text" : "hoa.reverberation~",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_title[1]"
+					"patching_rect" : [ 512.75, 17.5, 257.0, 32.0 ],
+					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
+					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-58",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 512.75, 17.5, 257.0, 32.0 ],
+					"rounded" : 6,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"args" : [ "@obj-name", "hoa.reverberation~", "@obj-desc", "An", "ambisonics", "reverberation", "plug~", "effect" ],
+					"id" : "obj-28",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.helpheader.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 5.5, 483.0, 56.0 ]
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"fontname" : "Arial",
-					"fontsize" : 12.754705,
+					"fontsize" : 7.180877,
+					"hidden" : 1,
+					"id" : "obj-30",
+					"linecount" : 2,
+					"maxclass" : "newobj",
+					"numinlets" : 4,
+					"numoutlets" : 0,
+					"patching_rect" : [ 421.0, 22.0, 52.0, 23.0 ],
+					"text" : "bgcolor 0.93 0.93 0.92 1."
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"frgb" : 0.0,
-					"id" : "obj-27",
+					"id" : "obj-55",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 6.0, 34.0, 158.0, 21.0 ],
-					"text" : "A ambisonic reverberation",
-					"textcolor" : [ 0.93, 0.93, 0.97, 1.0 ],
-					"varname" : "autohelp_top_digest[1]"
+					"patching_rect" : [ 7.0, 74.0, 493.0, 33.0 ],
+					"text" : "hoa.reverberation~ use an algorithm based on feedback network delay and doppler effect to simulate a room reveberation. It can also be usefull to create a distance parameter.",
+					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+					"varname" : "autohelp_top_description[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-56",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 7.0, 74.0, 493.0, 33.0 ],
+					"rounded" : 15,
+					"shadow" : -1
 				}
 
 			}
@@ -245,7 +301,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 338.0, 110.0, 162.0, 19.0 ],
+					"patching_rect" : [ 320.5, 110.0, 162.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -272,7 +328,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "bang", "float" ],
-					"patching_rect" : [ 449.0, 138.0, 32.5, 19.0 ],
+					"patching_rect" : [ 431.5, 138.0, 32.5, 19.0 ],
 					"text" : "t b f"
 				}
 
@@ -286,7 +342,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 338.0, 191.0, 81.0, 19.0 ],
+					"patching_rect" : [ 320.5, 191.0, 81.0, 19.0 ],
 					"text" : "prepend pol 0"
 				}
 
@@ -300,7 +356,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 338.0, 166.0, 162.0, 19.0 ],
+					"patching_rect" : [ 320.5, 166.0, 162.0, 19.0 ],
 					"text" : "pack 0. 0."
 				}
 
@@ -314,7 +370,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 675.5, 647.0, 121.0, 19.0 ],
+					"patching_rect" : [ 651.5, 646.0, 121.0, 19.0 ],
 					"text" : "polar coordinates"
 				}
 
@@ -329,7 +385,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 399.0, 138.0, 50.0, 19.0 ]
+					"patching_rect" : [ 381.5, 138.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -343,7 +399,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 349.166687, 138.0, 50.0, 19.0 ]
+					"patching_rect" : [ 331.666687, 138.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -355,7 +411,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 675.5, 628.0, 64.0, 19.0 ],
+					"patching_rect" : [ 651.5, 627.0, 64.0, 19.0 ],
 					"text" : "s polcoord"
 				}
 
@@ -397,7 +453,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 488.0, 647.0, 121.0, 19.0 ],
+					"patching_rect" : [ 488.0, 646.0, 121.0, 19.0 ],
 					"text" : "cartesian coordinates"
 				}
 
@@ -427,7 +483,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 145.0, 277.0, 53.0, 32.0 ],
+					"patching_rect" : [ 156.0, 292.0, 53.0, 32.0 ],
 					"text" : "doppler on/off"
 				}
 
@@ -440,7 +496,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 125.0, 283.0, 20.0, 20.0 ]
+					"patching_rect" : [ 136.0, 298.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -452,7 +508,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 125.0, 309.0, 58.0, 19.0 ],
+					"patching_rect" : [ 136.0, 324.0, 58.0, 19.0 ],
 					"text" : "s doppler"
 				}
 
@@ -536,7 +592,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 203.5, 212.0, 37.0, 19.0 ],
+					"patching_rect" : [ 214.5, 227.0, 37.0, 19.0 ],
 					"text" : "in Hz"
 				}
 
@@ -550,7 +606,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 125.0, 212.0, 58.0, 19.0 ],
+					"patching_rect" : [ 136.0, 227.0, 58.0, 19.0 ],
 					"text" : "in meters"
 				}
 
@@ -577,7 +633,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 488.0, 628.0, 58.0, 19.0 ],
+					"patching_rect" : [ 488.0, 627.0, 58.0, 19.0 ],
 					"text" : "s revspat"
 				}
 
@@ -871,7 +927,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 199.0, 309.0, 62.0, 19.0 ],
+					"patching_rect" : [ 210.0, 324.0, 62.0, 19.0 ],
 					"text" : "s diffusion"
 				}
 
@@ -884,7 +940,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 203.5, 256.0, 70.0, 19.0 ],
+					"patching_rect" : [ 214.5, 271.0, 70.0, 19.0 ],
 					"text" : "s frequency"
 				}
 
@@ -897,7 +953,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 307.0, 256.0, 50.0, 19.0 ],
+					"patching_rect" : [ 318.0, 271.0, 50.0, 19.0 ],
 					"text" : "s decay"
 				}
 
@@ -910,7 +966,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 125.0, 256.0, 40.0, 19.0 ],
+					"patching_rect" : [ 136.0, 271.0, 40.0, 19.0 ],
 					"text" : "s size"
 				}
 
@@ -1785,10 +1841,10 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "list", "list", "" ],
-					"patching_rect" : [ 488.0, 224.0, 394.0, 394.0 ],
+					"patching_rect" : [ 488.0, 269.0, 346.0, 346.0 ],
 					"speaker_distance" : 2.5,
 					"speaker_number" : 16,
-					"zoom" : 0.1
+					"zoom" : 0.367578
 				}
 
 			}
@@ -1848,7 +1904,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 199.0, 284.0, 50.0, 19.0 ]
+					"patching_rect" : [ 210.0, 299.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -1864,7 +1920,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 203.5, 231.0, 50.0, 19.0 ]
+					"patching_rect" : [ 214.5, 246.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -1880,7 +1936,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 307.0, 231.0, 50.0, 19.0 ]
+					"patching_rect" : [ 318.0, 246.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -1896,7 +1952,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 125.0, 231.0, 50.0, 19.0 ]
+					"patching_rect" : [ 136.0, 246.0, 50.0, 19.0 ]
 				}
 
 			}
@@ -2125,7 +2181,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 64.0, 154.0, 218.0, 87.0 ],
+						"rect" : [ 64.0, 167.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2608,7 +2664,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 68.0, 176.0, 175.0, 67.0 ],
+										"rect" : [ 68.0, 189.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -3374,7 +3430,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 68.0, 176.0, 179.0, 66.0 ],
+										"rect" : [ 68.0, 189.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -3584,7 +3640,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 68.0, 176.0, 178.0, 65.0 ],
+										"rect" : [ 68.0, 189.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -4278,7 +4334,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 68.0, 176.0, 179.0, 65.0 ],
+										"rect" : [ 68.0, 189.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -5562,7 +5618,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 30.0, 110.0, 218.0, 87.0 ]
+					"patching_rect" : [ 30.0, 123.0, 218.0, 87.0 ]
 				}
 
 			}
@@ -5612,77 +5668,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-59",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 512.75, 6.0, 323.0, 32.0 ],
-					"text" : "hoa.reverberation~ by Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontface" : 3,
-					"fontname" : "Arial",
-					"fontsize" : 20.871338,
-					"frgb" : 0.0,
-					"id" : "obj-2",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 6.0, 199.0, 30.0 ],
-					"text" : "hoa.reverberation~",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_title"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.754705,
-					"frgb" : 0.0,
-					"id" : "obj-3",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 35.0, 158.0, 21.0 ],
-					"text" : "A ambisonic reverberation",
-					"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
-					"varname" : "autohelp_top_digest"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-5",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 56.0, 525.0, 32.0 ],
-					"text" : "hoa.reverberation~ use a algorithm based on feedback network delay and doppler effect to simulate a room reveberation. It can also be used to provide a distance parameter.",
-					"varname" : "autohelp_top_description"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
 					"hidden" : 1,
 					"id" : "obj-17",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 199.0, 284.0, 79.0, 19.0 ],
+					"patching_rect" : [ 210.0, 299.0, 79.0, 19.0 ],
 					"text" : "loadmess 0.7"
 				}
 
@@ -5697,7 +5689,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 125.0, 231.0, 73.0, 19.0 ],
+					"patching_rect" : [ 136.0, 246.0, 73.0, 19.0 ],
 					"text" : "loadmess 5."
 				}
 
@@ -5712,7 +5704,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 307.0, 231.0, 79.0, 19.0 ],
+					"patching_rect" : [ 318.0, 246.0, 79.0, 19.0 ],
 					"text" : "loadmess 0.6"
 				}
 
@@ -5727,23 +5719,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 203.5, 231.0, 92.0, 19.0 ],
+					"patching_rect" : [ 214.5, 246.0, 92.0, 19.0 ],
 					"text" : "loadmess 6000."
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"background" : 1,
-					"grad1" : [ 0.27, 0.35, 0.47, 1.0 ],
-					"grad2" : [ 0.85, 0.85, 0.85, 1.0 ],
-					"id" : "obj-9",
-					"maxclass" : "panel",
-					"mode" : 1,
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 2.0, 4.0, 495.0, 52.0 ],
-					"varname" : "autohelp_top_panel"
 				}
 
 			}
@@ -6795,6 +6772,20 @@
 				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/effects",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/effects",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpheader.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
+				"patcherrelativepath" : "",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon.png",
+				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
