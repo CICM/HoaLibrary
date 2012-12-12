@@ -37,8 +37,8 @@ Cicm_Fft::Cicm_Fft(long aWindowSize)
 	Cicm_fft_init_handle(&m_fft_handle, m_order, m_fft_spec, m_fft_init);
 #endif
 #ifdef CICM_FFTW_GSL
-	m_real_vector		= (Cicm_Signal *)Cicm_signal_malloc(m_window_size);
-	m_complex_vector	= (Cicm_Packed *)Cicm_packed_malloc(m_window_size);
+	Cicm_signal_malloc(m_real_vector, m_window_size);
+	Cicm_packed_malloc(m_complex_vector, m_window_size);
 	Cicm_signal_clear(m_real_vector, m_window_size);
 	Cicm_signal_clear(m_complex_vector, m_window_size);
 	m_handle_forward	= Cicm_fft_init_handle_forward(m_window_size, m_real_vector, m_complex_vector);
