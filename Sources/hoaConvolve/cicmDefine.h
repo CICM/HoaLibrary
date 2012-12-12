@@ -17,8 +17,8 @@
  *
  */
 
-#define CICM_VDSP
-//#define CICM_FFTW_GSL
+//#define CICM_VDSP
+#define CICM_FFTW_GSL
 //#define CICM_IPPS
 #define CICM_FLOAT
 //#define CICM_DOUBLE
@@ -178,11 +178,14 @@ static void packed_mul(float* x, float* y, float* out, long aLength)
 #define Cicm_signal_dot(source1, source2, dest, length) double result; gsl_blas_dsdot(&gsl_vector_float_view_array(source1, length).vector, &gsl_vector_float_view_array(source2, length).vector, &result); *dest = result
 #define Cicm_packed_mul(source1, source2, dest, length) packed_mul(source1, source2, dest, length)
 
+#define Cicm_packed_clear(source, length) gsl_vector_float_set_zero(&gsl_vector_float_view_array(source, length).vector)
+
 #define Cicm_fft_init_handle_forward(length, real, packed) fftwf_plan_r2r_1d(length, real, packed, FFTW_R2HC, FFTW_ESTIMATE)
 #define Cicm_fft_init_handle_inverse(length, packed, real) fftwf_plan_r2r_1d(length, packed, real, FFTW_HC2R, FFTW_ESTIMATE)
 #define Cicm_fft_forward fftwf_execute
 #define Cicm_fft_inverse fftwf_execute
 #define Cicm_fft_free_handle fftwf_destroy_plan
+
 #endif
 
 #ifdef CICM_DOUBLE

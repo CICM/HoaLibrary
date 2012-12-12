@@ -31,7 +31,8 @@ protected:
 	long		m_maximum_size;
 	long		m_offset_size;
 	long		m_number_of_ffts;
-	
+	long		m_number_of_first_filter;
+
 	FirFilter*	m_fir;
 	vector <FftConvolution*> m_fft;
 
@@ -46,9 +47,15 @@ public:
 
 inline Cicm_Signal GardnerConvolution::process(Cicm_Signal anInput)
 {
-	m_result = m_fir->process(anInput);
-	for(int i = 0; i < m_number_of_ffts; i++)
-		m_result += m_fft[i]->process(anInput);
+	if(!m_number_of_first_filter)
+		m_result = m_fir->process(anInput);
+	else 
+		m_result = 0.;
+
+	for(int i = m_number_of_ffts - 1; i > m_number_of_first_filter; i--)
+	{
+			m_result += m_fft[i]->process(anInput);
+	}
 	return  m_result;
 }
 

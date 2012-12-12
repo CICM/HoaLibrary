@@ -52,6 +52,7 @@ void buffer_setup(t_HoaConvolve *x);
 t_max_err buffer_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err limit_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
+t_max_err offset_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 
 void HoaConvolve_dsp(t_HoaConvolve *x, t_signal **sp, short *count);
 t_int *HoaConvolve_perform(t_int *w);

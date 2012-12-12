@@ -262,7 +262,8 @@
 									"saved_object_attributes" : 									{
 										"buffers" : [ "hoaIrO.1", "hoaIrO.2", "hoaIrO.3" ],
 										"channels" : [ 1, 1, 1 ],
-										"limits" : [ 0, 0, 0 ]
+										"limits" : [ 0, 0, 0 ],
+										"offsets" : [ 0, 0, 0 ]
 									}
 ,
 									"text" : "hoa.convolve~ 1 @buffers all hoaIrO @channels all 1"
@@ -4732,7 +4733,8 @@
 									"saved_object_attributes" : 									{
 										"buffers" : [ "hoaIr.1", "hoaIr.2", "hoaIr.3", "hoaIr.4", "hoaIr.5", "hoaIr.6", "hoaIr.7" ],
 										"channels" : [ 1, 1, 1, 1, 1, 1, 1 ],
-										"limits" : [ 0, 0, 0, 0, 0, 0, 0 ]
+										"limits" : [ 0, 0, 0, 0, 0, 0, 0 ],
+										"offsets" : [ 0, 0, 0, 0, 0, 0, 0 ]
 									}
 ,
 									"text" : "hoa.convolve~ 3 @buffers all hoaIr @channels all 1"
@@ -9206,82 +9208,27 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"id" : "obj-20",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 420.0, 285.0, 91.0, 18.0 ],
+									"text" : "offsets all 2048"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
 									"id" : "obj-18",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 300.0, 275.0, 84.0, 18.0 ],
-									"text" : "buffers hoaIrL"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-40",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 375.0, 275.0, 323.5, 34.0 ],
-									"text" : "The size of the buffer can be limited with \"limits\" message and a list. 0 meaning no limit."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-42",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 375.0, 315.0, 225.0, 18.0 ],
-									"text" : "limits 0 4000 2000 1000 500 250 125 75"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 382.341827, 338.0, 262.658173, 20.0 ],
-									"text" : "hoa.convolve~ accepts the pre-message \"all\"."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-45",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 382.341827, 355.0, 63.0, 18.0 ],
-									"text" : "limits all 0"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.666667, 0.666667, 0.666667, 0.0 ],
-									"border" : 1,
-									"id" : "obj-47",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 367.5, 263.0, 331.0, 122.0 ]
+									"patching_rect" : [ 345.0, 285.0, 71.0, 18.0 ],
+									"text" : "offsets all 0"
 								}
 
 							}
@@ -9686,12 +9633,13 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 30.0, 375.0, 245.81633, 20.0 ],
 									"saved_object_attributes" : 									{
-										"buffers" : [ "none", "", "", "", "", "", "" ],
-										"channels" : [ 0, 0, 0, 0, 0, 0, 0 ],
-										"limits" : [ 0, 4000, 2000, 1000, 500, 250, 125 ]
+										"buffers" : [ "hoaIrL.1", "hoaIrL.2", "hoaIrL.3", "hoaIrL.4", "hoaIrL.5", "hoaIrL.6", "hoaIrL.7" ],
+										"channels" : [ 1, 1, 1, 1, 1, 1, 1 ],
+										"limits" : [ 0, 0, 0, 0, 0, 0, 0 ],
+										"offsets" : [ 2048, 2048, 2048, 2048, 2048, 2048, 2048 ]
 									}
 ,
-									"text" : "hoa.convolve~ 3 hoaIrL"
+									"text" : "hoa.convolve~ 3 @buffers all hoaIrL"
 								}
 
 							}
@@ -13388,6 +13336,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-4", 6 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-20", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -13693,24 +13650,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-4", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-42", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-45", 0 ]
 								}
 
 							}
@@ -14272,7 +14211,8 @@
 									"saved_object_attributes" : 									{
 										"buffers" : [ "hoaIrM.1", "hoaIrM.2", "hoaIrM.3", "hoaIrM.4", "hoaIrM.5", "hoaIrM.6", "hoaIrM.7" ],
 										"channels" : [ 1, 1, 1, 1, 1, 1, 1 ],
-										"limits" : [ 0, 0, 0, 0, 0, 0, 0 ]
+										"limits" : [ 0, 0, 0, 0, 0, 0, 0 ],
+										"offsets" : [ 0, 0, 0, 0, 0, 0, 0 ]
 									}
 ,
 									"text" : "hoa.convolve~ 3"
@@ -18742,7 +18682,8 @@
 					"saved_object_attributes" : 					{
 						"buffers" : [ "hoaIr.1", "hoaIr.2", "hoaIr.3", "hoaIr.4", "hoaIr.5", "hoaIr.6", "hoaIr.7" ],
 						"channels" : [ 1, 1, 1, 1, 1, 1, 1 ],
-						"limits" : [ 0, 0, 0, 0, 0, 0, 0 ]
+						"limits" : [ 0, 0, 0, 0, 0, 0, 0 ],
+						"offsets" : [ 0, 0, 0, 0, 0, 0, 0 ]
 					}
 ,
 					"text" : "hoa.convolve~ 3 @buffers all hoaIr @channels all 1"
