@@ -400,7 +400,7 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 	double y1, y2, rotateAngle;
 	//t_pt c = {rect->width*0.5, rect->height*0.5};
 	t_jmatrix transform;
-	t_jpattern *pattern;
+	//t_jpattern *pattern;
 	//t_jrgba black = {0.,0.,0.,0.2};
 	//t_jrgba white = {1.,1.,1.,0.2};
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
@@ -493,7 +493,7 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
-	jgraphics_pattern_destroy(pattern);
+	//jgraphics_pattern_destroy(pattern);
 }
 
 void draw_angle(t_control *x,  t_object *view, t_rect *rect)
@@ -772,7 +772,7 @@ t_max_err optim_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (atom_gettype(argv) == A_LONG)
 	{
-		post(" %ld", atom_getlong(argv));
+		//post(" %ld", atom_getlong(argv));
 		if(atom_getlong(argv) != x->f_optimMode)
 		{
 			t_atom mode[1];
