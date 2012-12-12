@@ -39,7 +39,7 @@ protected:
 
 public:
 	GardnerConvolution(long aMinimumSize = 64, long aMaximumSize = 8192);
-	void	setImpulseResponse(double* anImpulResponse, long aSize);
+	void	setImpulseResponse(double* anImpulResponse, long aSize, long anOffset = 0);
 	inline Cicm_Signal process(Cicm_Signal anInput);
 	~GardnerConvolution();
 };

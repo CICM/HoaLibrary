@@ -47,7 +47,7 @@ public:
 	void	setGain(double aGain);
 	double	getGain();
 
-	void	setImpulseResponse(long aInstance, double* anImpulResponse, long aSize);
+	void	setImpulseResponse(long aInstance, double* anImpulResponse, long aSize, long anOffset = 0);
 	~AmbisonicConvolve();
 
 	/* Perform sample by sample */

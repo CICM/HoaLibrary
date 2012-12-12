@@ -36,7 +36,7 @@ GardnerConvolution::GardnerConvolution(long aMinimumSize, long aMaximumSize)
 	 
 }
 
-void GardnerConvolution::setImpulseResponse(double* setImpulseResponse, long aSize)
+void GardnerConvolution::setImpulseResponse(double* setImpulseResponse, long aSize, long anOffset)
 {
 	int aNumberOfFft = Tools::clip_min((int)((aSize - m_offset_size) / m_maximum_size), 0) + 1;
 	if(aNumberOfFft > 10)
@@ -46,14 +46,13 @@ void GardnerConvolution::setImpulseResponse(double* setImpulseResponse, long aSi
 	Cicm_Signal* datas = new Cicm_Signal[aIrSize];
 	for(int i = 0; i < aIrSize; i++)
 	{
-		if(i < aSize)
+		if(i < aSize && i >= anOffset)
 			datas[i] = (double)setImpulseResponse[i];
 		else
 			datas[i] = 0.;
 	}
 
-	if(aSize > m_minimum_size)
-		m_fir->setImpulseResponse(datas);
+	m_fir->setImpulseResponse(datas);
 	
 	m_fft.pop_back();
 	m_fft.push_back(new FftConvolution(m_maximum_size, aNumberOfFft));
