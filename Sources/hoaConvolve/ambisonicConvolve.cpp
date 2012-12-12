@@ -72,10 +72,10 @@ double AmbisonicConvolve::getGain()
 	return m_gain;
 }
 
-void AmbisonicConvolve::setImpulseResponse(long aInstance, double* anImpulResponse, long aSize)
+void AmbisonicConvolve::setImpulseResponse(long aInstance, double* anImpulResponse, long aSize, long anOffset)
 {
 	aInstance = Tools::clip(aInstance, (long)0, m_number_of_harmonics);
-	m_convolution[aInstance]->setImpulseResponse(anImpulResponse, aSize);
+	m_convolution[aInstance]->setImpulseResponse(anImpulResponse, aSize, anOffset);
 }
 AmbisonicConvolve::~AmbisonicConvolve()
 {

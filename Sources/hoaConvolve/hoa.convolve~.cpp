@@ -37,6 +37,7 @@ typedef struct _HoaConvolve
 	t_buffer*			f_buffer[MAX_SIZE];
 	long				f_channel[MAX_SIZE];
 	long				f_limit[MAX_SIZE];
+	long				f_offset[MAX_SIZE];
 	long				f_numberOfHarmonics;
 	
 } t_HoaConvolve;
@@ -97,6 +98,14 @@ int main(void)
 	CLASS_ATTR_ACCESSORS		(c, "limits", NULL, limit_set);
 	CLASS_ATTR_DEFAULT			(c, "limits", 0, "0");
 	CLASS_ATTR_SAVE				(c, "limits", 1);
+
+	CLASS_ATTR_LONG_VARSIZE		(c, "offsets", 0, t_HoaConvolve, f_offset, f_numberOfHarmonics, MAX_SIZE);
+	CLASS_ATTR_CATEGORY			(c, "offsets", 0, "Behavior");
+	CLASS_ATTR_LABEL			(c, "offsets", 0, "buffer~ Objects Offset");
+	CLASS_ATTR_ORDER			(c, "offsets", 0, "4");
+	CLASS_ATTR_ACCESSORS		(c, "offsets", NULL, offset_set);
+	CLASS_ATTR_DEFAULT			(c, "offsets", 0, "0");
+	CLASS_ATTR_SAVE				(c, "offsets", 1);
 
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -360,6 +369,34 @@ t_max_err limit_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 	return 0;
 }
 
+t_max_err offset_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(argc == 2 && atom_gettype(argv) == A_SYM && atom_gettype(argv+1) == A_LONG)
+	{
+		for(int i = 0; i < x->f_numberOfHarmonics; i++)
+		{
+			if(atom_getlong(argv+1) > 0)
+				x->f_offset[i] = atom_getlong(argv+1);
+			else
+				x->f_offset[i] = 0;
+		}
+		buffer_setup(x);
+	}
+	else if(argc > 0)
+	{
+		if(argc > x->f_numberOfHarmonics)
+			argc = x->f_numberOfHarmonics;
+		for(int i = 0; i < argc; i++)
+		{
+			if(atom_gettype(argv+i) == A_LONG && atom_getlong(argv+i) > 0)
+				x->f_offset[i] = atom_getlong(argv+i);
+			else
+				x->f_offset[i] = 0;
+		}
+		buffer_setup(x);
+	}
+	return 0;
+}
 void buffer_setup(t_HoaConvolve *x)
 {
 	for(int j = 0; j < x->f_numberOfHarmonics; j++)
@@ -387,7 +424,7 @@ void buffer_setup(t_HoaConvolve *x)
 				}
 				ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
 
-				x->f_ambiConvolve->setImpulseResponse(j, datas, size);
+				x->f_ambiConvolve->setImpulseResponse(j, datas, size, x->f_offset[j]);
 				free(datas);
 			}
 		}
