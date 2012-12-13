@@ -294,7 +294,7 @@ t_max_err buffer_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
 	
-	if(argc == 2 && atom_gettype(argv) == A_SYM && atom_gettype(argv+1) == A_LONG)
+	if(argc == 2 && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_LONG && atom_getlong(argv) == -1)
 	{
 		for(int i = 0; i < x->f_numberOfHarmonics; i++)
 		{
@@ -315,7 +315,7 @@ t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 		}
 		buffer_setup(x);
 	}
-	else if(argc > 0)
+	else
 	{
 		if(argc > x->f_numberOfHarmonics)
 			argc = x->f_numberOfHarmonics;
@@ -343,7 +343,7 @@ t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err limit_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
-	if(argc == 2 && atom_gettype(argv) == A_SYM && atom_gettype(argv+1) == A_LONG)
+	if(argc == 2 && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_LONG && atom_getlong(argv) == -1)
 	{
 		for(int i = 0; i < x->f_numberOfHarmonics; i++)
 		{
@@ -354,7 +354,7 @@ t_max_err limit_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 		}
 		buffer_setup(x);
 	}
-	else if(argc > 0)
+	else
 	{
 		if(argc > x->f_numberOfHarmonics)
 			argc = x->f_numberOfHarmonics;
@@ -372,7 +372,7 @@ t_max_err limit_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err offset_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
-	if(argc == 2 && atom_gettype(argv) == A_SYM && atom_gettype(argv+1) == A_LONG)
+	if(argc == 2 && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_LONG && atom_getlong(argv) == -1)
 	{
 		for(int i = 0; i < x->f_numberOfHarmonics; i++)
 		{
@@ -383,7 +383,7 @@ t_max_err offset_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 		}
 		buffer_setup(x);
 	}
-	else if(argc > 0)
+	else
 	{
 		if(argc > x->f_numberOfHarmonics)
 			argc = x->f_numberOfHarmonics;
@@ -398,6 +398,7 @@ t_max_err offset_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 	}
 	return 0;
 }
+
 void buffer_setup(t_HoaConvolve *x)
 {
 	for(int j = 0; j < x->f_numberOfHarmonics; j++)
