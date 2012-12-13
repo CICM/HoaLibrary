@@ -729,7 +729,7 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
 		for(i=0; i<nLoudSpeak; i++)
 		{
 			deg2 = degtorad(90+(x->f_speakerWidth[i]));
-			rotateAngle = x->f_speakerRealAngle[i] - (x->f_speakerWidth[i]*0.5) - x->f_offsetOfLoudspeakers;
+			rotateAngle = x->f_speakerRealAngle[i] - (x->f_speakerWidth[i]*0.5) + x->f_offsetOfLoudspeakers;
 			jgraphics_rotate(g, degtorad(rotateAngle));
 			
 			// separator
@@ -810,7 +810,7 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 			if ( meter_dB > min_dB_to_display ) // si on est en dessous pas la peine de dessiner
 			{
 				deg2 = degtorad(90+(x->f_speakerWidth[i]));
-				rotateAngle = x->f_speakerRealAngle[i] - (x->f_speakerWidth[i]*0.5) - x->f_offsetOfLoudspeakers;				
+				rotateAngle = x->f_speakerRealAngle[i] - (x->f_speakerWidth[i]*0.5) + x->f_offsetOfLoudspeakers;				
 				jgraphics_rotate(g, degtorad(rotateAngle));
 				
 				// leds :
@@ -891,7 +891,7 @@ void draw_vector(t_meter *x, t_object *view, t_rect *rect)
 		else
 			value = atan2(x->f_energyVectorY, x->f_energyVectorX);
 		
-		angle = value - (x->f_offsetOfLoudspeakers / 180.) * JGRAPHICS_PI;
+		angle = value + (x->f_offsetOfLoudspeakers / 180.) * JGRAPHICS_PI;
 		rayon = x->f_rayonInt * 0.85;
 		arrow = rayon * 0.15;
 		
