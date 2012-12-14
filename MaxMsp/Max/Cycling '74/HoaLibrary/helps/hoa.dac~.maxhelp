@@ -4719,10 +4719,10 @@
 , 			{
 				"box" : 				{
 					"border" : 1,
-					"embed" : 1,
+					"embed" : 0,
 					"id" : "obj-1",
 					"maxclass" : "bpatcher",
-					"name" : "poiu.maxpat",
+					"name" : "hoa.demosound.maxpat",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
