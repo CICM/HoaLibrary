@@ -17,7 +17,11 @@
  *
  */
 
-#include "ext.h"
+#include "cicmTools.h"
+
+extern "C"
+{
+	#include "ext.h"
 #include "ext_obex.h"
 #include "jpatcher_api.h"
 #include "jgraphics.h"
@@ -25,6 +29,7 @@
 #include "ext_dictionary.h"
 #include "ext_globalsymbol.h"
 #include "../hoaHeader.h"
+}
 
 #define MAX_SOURCES 100
 
@@ -398,7 +403,7 @@ void *hoaspat_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_sourceColors[9] = clr256(255,191,0,255);
 	x->f_nb_sourceColors = 10;
 	
-	x->f_color_selection = (t_jrgba){0., 0., 1., 0.05};
+	x->f_color_selection = clr256(0., 0., 255., 13);
 	
 	
 	x->f_out = outlet_new((t_object *)x, NULL);
@@ -543,9 +548,9 @@ t_pt point_to_degDist(t_pt pt1, t_pt pt2)
 double wrapi(double deltaPhase)
 {
 	if (deltaPhase>0)
-        deltaPhase = fmod(deltaPhase+M_PI, 2.0*M_PI)-M_PI;
+        deltaPhase = fmod(deltaPhase + CICM_PI, 2.0*CICM_PI)-CICM_PI;
     else
-        deltaPhase = fmod(deltaPhase-M_PI, 2.0*M_PI)+M_PI;
+        deltaPhase = fmod(deltaPhase - CICM_PI, 2.0*CICM_PI)+CICM_PI;
 	return deltaPhase;
 }
 /* --------- */
@@ -1347,9 +1352,10 @@ void draw_speakers(t_hoaspat *x, t_object *view, t_rect *rect){
 		draw_oneLs(x, g, 0, 0, 0, 10);
 		*/
 		
-		for(i=0; i<numHp; i++){
-			
-			pol = (t_pol){(x->f_speakerToHeadDistance), degtorad(i*stepAngle+offset)};
+		for(i=0; i<numHp; i++)
+		{			
+			pol.r = x->f_speakerToHeadDistance;
+			pol.a = degtorad(i*stepAngle+offset);
 			//pol.r = x->f_speakerToHeadDistance*x->f_zoomFactor;
 			//pol.a = degtorad(i*stepAngle);
 			//pix = poltopix(x, pol, 1);

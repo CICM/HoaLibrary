@@ -1,0 +1,7 @@
+;hoa.spat.def
+
+LIBRARY hoa.spat.mxe
+
+EXPORTS
+	main
+
