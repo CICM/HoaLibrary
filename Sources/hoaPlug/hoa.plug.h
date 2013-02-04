@@ -59,7 +59,7 @@ void *plug_script_class;
 method dblclickpatcher;
 
 void *plug_new(t_symbol *s, int argc, t_atom *argv);
-void plug_router(t_object *x, int order, t_symbol *s, int mode);
+void plug_router(t_object *x, int order, t_symbol *s, int mode, t_atom *argv, int argc);
 void plug_dblclick(t_object *x);
 
 void plug_script_init();
@@ -85,7 +85,7 @@ void plug_script_load(t_plug_script *x, t_symbol *s);
 
 int plug_harmonic(int index, int order);
 void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
-t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int mode);
+t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int mode, t_atom *argv, int argc);
 t_object *plug_script(t_object *patcher, int index, int order, int ninlet, int noutlet, int mode);
 t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet, int mode);
 t_object* plug_inlet(t_object *patcher, int index, int order, int ninlet, int mode);
