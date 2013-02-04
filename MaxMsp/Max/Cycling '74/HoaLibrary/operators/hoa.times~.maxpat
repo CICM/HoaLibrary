@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 412.0, 257.0, 392.0, 413.0 ],
+		"rect" : [ 594.0, 249.0, 392.0, 413.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -26,7 +26,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.*~",
+		"title" : "hoa.*~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -50,8 +50,8 @@
 					"numinlets" : 5,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
-					"patching_rect" : [ 15.0, 75.0, 140.0, 20.0 ],
-					"text" : "route signal sig2 float int"
+					"patching_rect" : [ 15.0, 75.0, 131.0, 20.0 ],
+					"text" : "route sig1 sig2 float int"
 				}
 
 			}
@@ -133,8 +133,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }
