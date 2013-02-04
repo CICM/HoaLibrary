@@ -17,7 +17,7 @@
  *
  */
 
-#ifndef define DEF_AMBISONICENTRALIZE
+#ifndef DEF_AMBISONICENTRALIZE
 #define DEF_AMBISONICENTRALIZE
 
 #undef	check
