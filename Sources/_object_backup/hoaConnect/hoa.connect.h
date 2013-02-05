@@ -32,8 +32,6 @@
 #include "jdataview.h"
 #include "hoa.structure.h"
 
-#define CONNECT_MAX_TAB 100
-
 typedef struct  _connect
 {
 	t_object	f_ob;
@@ -41,26 +39,21 @@ typedef struct  _connect
 	t_object	*f_patcher;
 	t_object	*f_patcherview;
 	
-	t_object	*f_object[CONNECT_MAX_TAB];
-	int			f_index[CONNECT_MAX_TAB];
-	int			f_mode[CONNECT_MAX_TAB];
-	int			f_order[CONNECT_MAX_TAB];
-	int			f_inlet[CONNECT_MAX_TAB];
-	int			f_outlet[CONNECT_MAX_TAB];
-	int			f_connected[CONNECT_MAX_TAB];
+	t_object	*f_object[100];
+	int			f_index[100];
+	int			f_mode[100];
+	int			f_order[100];
+	int			f_inlet[100];
+	int			f_outlet[100];
+	int			f_connected[100];
 	
 	t_jrgba		f_colorPositiv;
 	t_jrgba		f_colorNegativ;
-	
-	int			f_nbSelected;
-	int			f_objectab_cleaned;
-	int			f_tab_index;
 	
 	int			f_inc;
 	int			f_harmonics;
 	int			f_output;
 	
-	int			f_condition;
 	t_rect		f_jr;
 } t_connect;
 
@@ -81,6 +74,5 @@ int validName(t_object *box);
 
 void color_patchline(t_connect *x);
 int validConditionColor(t_object *obj);
-void clear_objectab(t_connect *x, t_object *objectab[], long tablen);
 
 #endif
