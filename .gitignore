@@ -186,3 +186,9 @@ ext_win_release/
 *.msi
 HoaPackage/
 *.zip
+
+*.xcworkspacedata
+*.pbxproj
+*.xcuserstate
+*.xcscheme
+*
