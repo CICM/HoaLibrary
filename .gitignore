@@ -187,8 +187,3 @@ ext_win_release/
 HoaPackage/
 *.zip
 
-*.xcworkspacedata
-*.pbxproj
-*.xcuserstate
-*.xcscheme
-*
