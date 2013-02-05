@@ -27,6 +27,7 @@
 
 #include "AmbisonicEncode.h"
 #include "AmbisonicOptim.h"
+#include "AmbisonicWider.h"
 
 class AmbisonicHalo 
 {
@@ -42,6 +43,7 @@ private:
 
 	AmbisonicEncode	*m_encoder;
 	AmbisonicOptim	*m_optim;
+	AmbisonicWider	*m_wider;
 
 	double	*m_input_vector;
 	double	*m_output_vector;
@@ -57,39 +59,36 @@ public:
 
 	void	setVectorSize(int aVectorSize);
 	void	setAzimuth(double aTheta);
-	void	setSpread(double aSpread);
+	void	setSpread(double aWidenValue);
 
 	~AmbisonicHalo();
 	
 	/* Perform sample by sample  */
-	void process(double *anInputs, double* anOutputs, double aTheta)
+	template<typename Type> void process_azimuth_spread(Type *anInputs, Type* anOutputs, Type aTheta, Type aWidenValue)
+	{
+		m_encoder->setAzimtuh(aTheta);
+		m_wider->setWidenValue(aWidenValue);
+		process(anInputs, anOutputs);
+	}
+
+	template<typename Type> void process_spread(Type *anInputs, Type* anOutputs, Type aWidenValue)
+	{
+		m_wider->setWidenValue(aWidenValue);
+		process(anInputs, anOutputs);
+	}
+
+	template<typename Type> void process_azimuth(Type *anInputs, Type* anOutputs, Type aTheta, Type aWidenValue)
 	{
 		m_encoder->setAzimtuh(aTheta);
 		process(anInputs, anOutputs);
 	}
 
-	void process(float *anInputs, float* anOutputs, float aTheta)
-	{
-		m_encoder->setAzimtuh(aTheta);
-		process(anInputs, anOutputs);
-	}
-	
-	void process(double* anInputs, double* anOutputs)
+	template<typename Type> void process(Type* anInputs, Type* anOutputs)
 	{
 		double sum = 0.;
 		m_encoder->process(0.5, anOutputs);
 		anOutputs[0] /= 2.;
-		m_optim->process(anOutputs, anOutputs);
-		for(int i = 0; i < m_number_of_harmonics; i++)
-			sum += anOutputs[i] * anInputs[i];
-		m_encoder->process(sum, anOutputs);
-	}
-
-	void process(float* anInputs, float* anOutputs)
-	{
-		float sum = 0.;
-		m_encoder->process(0.5f, anOutputs);
-		anOutputs[0] /= 2.;
+		m_wider->process(anOutputs, anOutputs);
 		m_optim->process(anOutputs, anOutputs);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			sum += anOutputs[i] * anInputs[i];
@@ -97,7 +96,7 @@ public:
 	}
 
 	/* Perform sample block */
-	void process(double** anInput, double** anOutputs, double* aTheta)
+	template<typename Type> void process_block_azimuth_spread(Type** anInput, Type** anOutputs, Type* aTheta, Type *aWidenValue)
 	{
 		for(int j = 0; j < m_vector_size; j++)
 		{
@@ -105,7 +104,7 @@ public:
 			{
 				m_input_vector[i] = anInput[i][j];
 			}
-			process(m_input_vector, m_output_vector, aTheta[j]);
+			process_azimuth_spread(m_input_vector, m_output_vector, aTheta[j], aWidenValue[j]);
 			for(int i = 0; i < m_number_of_harmonics; i++)
 			{
 				anOutputs[i][j] = m_output_vector[i];
@@ -113,7 +112,7 @@ public:
 		}
 	}
 
-	void process(float** anInput, float** anOutputs, float* aTheta)
+	template<typename Type> void process_block_spread(Type** anInput, Type** anOutputs, Type *aWidenValue)
 	{
 		for(int j = 0; j < m_vector_size; j++)
 		{
@@ -121,23 +120,7 @@ public:
 			{
 				m_input_vector[i] = anInput[i][j];
 			}
-			process(m_input_vector, m_output_vector, (double)aTheta[j]);
-			for(int i = 0; i < m_number_of_harmonics; i++)
-			{
-				anOutputs[i][j] = m_output_vector[i];
-			}
-		}
-	}
-	
-	void process(double** anInput, double** anOutputs)
-	{
-		for(int j = 0; j < m_vector_size; j++)
-		{
-			for(int i = 0; i < m_number_of_harmonics; i++)
-			{
-				m_input_vector[i] = anInput[i][j];
-			}
-			process(m_input_vector, m_output_vector);
+			process_spread(m_input_vector, m_output_vector, aWidenValue[j]);
 			for(int i = 0; i < m_number_of_harmonics; i++)
 			{
 				anOutputs[i][j] = m_output_vector[i];
@@ -145,13 +128,29 @@ public:
 		}
 	}
 
-	void process(float** anInput, float** anOutputs)
+	template<typename Type> void process_block_azimuth(Type** anInput, Type** anOutputs, Type* aTheta)
 	{
 		for(int j = 0; j < m_vector_size; j++)
 		{
 			for(int i = 0; i < m_number_of_harmonics; i++)
 			{
-				m_input_vector[j] = anInput[j][i];
+				m_input_vector[i] = anInput[i][j];
+			}
+			process_azimuth(m_input_vector, m_output_vector, aTheta[j]);
+			for(int i = 0; i < m_number_of_harmonics; i++)
+			{
+				anOutputs[i][j] = m_output_vector[i];
+			}
+		}
+	}
+
+	template<typename Type> void process_block(Type** anInput, Type** anOutputs)
+	{
+		for(int j = 0; j < m_vector_size; j++)
+		{
+			for(int i = 0; i < m_number_of_harmonics; i++)
+			{
+				m_input_vector[i] = anInput[i][j];
 			}
 			process(m_input_vector, m_output_vector);
 			for(int i = 0; i < m_number_of_harmonics; i++)

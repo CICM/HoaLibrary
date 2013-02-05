@@ -28,6 +28,7 @@ AmbisonicHalo::AmbisonicHalo(long anOrder, long aVectorSize)
 
 	m_optim					= new AmbisonicOptim(m_order, "inPhase");
 	m_encoder				= new AmbisonicEncode(m_order);
+	m_wider					= new AmbisonicWider(m_order);
 
 	m_input_vector			= new double[m_number_of_harmonics];
 	m_output_vector			= new double[m_number_of_harmonics];
@@ -75,9 +76,9 @@ void AmbisonicHalo::setVectorSize(int aVectorSize)
 	m_vector_size = aVectorSize;
 }
 
-void AmbisonicHalo::setSpread(double aSpread)
+void AmbisonicHalo::setSpread(double aWidenValue)
 {
-	m_spread = aSpread;
+	m_spread = aWidenValue;
 }
 
 AmbisonicHalo::~AmbisonicHalo()

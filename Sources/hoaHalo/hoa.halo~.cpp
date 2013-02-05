@@ -43,12 +43,14 @@ void HoaHalo_float(t_HoaHalo *x, double f);
 void HoaHalo_int(t_HoaHalo *x, long n);
 
 void HoaHalo_dsp(t_HoaHalo *x, t_signal **sp, short *count);
-t_int *HoaHalo_perform(t_int *w);
+t_int *HoaHalo_perform_spread(t_int *w);
 t_int *HoaHalo_performOffset(t_int *w);
 
 void HoaHalo_dsp64(t_HoaHalo *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void HoaHalo_perform64_azimuth_spread(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaHalo_perform64_azimuth(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaHalo_perform64_spread(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void HoaHalo_perform64(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaHalo_perform64Offset(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 void *HoaHalo_class;
 
@@ -106,20 +108,35 @@ void HoaHalo_int(t_HoaHalo *x, long n)
 void HoaHalo_dsp64(t_HoaHalo *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiHalo->setVectorSize(maxvectorsize);
-	if(count[x->f_ambiHalo->getNumberOfInputs() - 1])
-		object_method(dsp64, gensym("dsp_add64"), x, HoaHalo_perform64, 0, NULL);
+
+	if(count[x->f_ambiHalo->getNumberOfInputs() - 1] && count[x->f_ambiHalo->getNumberOfInputs() - 2])
+		object_method(dsp64, gensym("dsp_add64"), x, HoaHalo_perform64_azimuth_spread, 0, NULL);
+	else if(count[x->f_ambiHalo->getNumberOfInputs() - 2])
+		object_method(dsp64, gensym("dsp_add64"), x, HoaHalo_perform64_azimuth, 0, NULL);
+	else if(count[x->f_ambiHalo->getNumberOfInputs() - 1])
+		object_method(dsp64, gensym("dsp_add64"), x, HoaHalo_perform64_spread, 0, NULL);
 	else
-		object_method(dsp64, gensym("dsp_add64"), x, HoaHalo_perform64Offset, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, HoaHalo_perform64, 0, NULL);
+}
+
+void HoaHalo_perform64_azimuth_spread(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	x->f_ambiHalo->process_block_azimuth_spread(ins, outs, ins[numins - 2], ins[numins - 1]);
+}
+
+void HoaHalo_perform64_azimuth(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	x->f_ambiHalo->process_block_azimuth(ins, outs, ins[numins - 2]);
+}
+
+void HoaHalo_perform64_spread(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	x->f_ambiHalo->process_block_spread(ins, outs, ins[numins - 1]);
 }
 
 void HoaHalo_perform64(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiHalo->process(ins, outs, ins[numins - 1]);
-}
-
-void HoaHalo_perform64Offset(t_HoaHalo *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-	x->f_ambiHalo->process(ins, outs);
+	x->f_ambiHalo->process_block(ins, outs);
 }
 								  							  
 void HoaHalo_dsp(t_HoaHalo *x, t_signal **sp, short *count)
@@ -143,20 +160,20 @@ void HoaHalo_dsp(t_HoaHalo *x, t_signal **sp, short *count)
 		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
 	
 	if(count[x->f_inputNumber - 1])
-		dsp_addv(HoaHalo_perform, pointer_count, (void **)sigvec);
+		dsp_addv(HoaHalo_perform_spread, pointer_count, (void **)sigvec);
 	else
 		dsp_addv(HoaHalo_performOffset, pointer_count, (void **)sigvec);
 	
 	free(sigvec);
 }
 
-t_int *HoaHalo_perform(t_int *w)
+t_int *HoaHalo_perform_spread(t_int *w)
 {
 	t_HoaHalo *x			= (t_HoaHalo *)(w[1]);
 	t_float		**ins		= (t_float **)w+3;
 	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
 	
-	x->f_ambiHalo->process(ins, outs, ins[x->f_inputNumber - 1]);
+	x->f_ambiHalo->process_spread(ins, outs, ins[x->f_inputNumber - 1]);
 	
 	return (w + x->f_outputNumber + x->f_inputNumber + 3);
 }

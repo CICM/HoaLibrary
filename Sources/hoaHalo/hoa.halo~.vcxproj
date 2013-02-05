@@ -185,12 +185,14 @@
     <ClCompile Include="AmbisonicEncode.cpp" />
     <ClCompile Include="AmbisonicHalo.cpp" />
     <ClCompile Include="AmbisonicOptim.cpp" />
+    <ClCompile Include="AmbisonicWider.cpp" />
     <ClCompile Include="hoa.halo~.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmbisonicEncode.h" />
     <ClInclude Include="AmbisonicHalo.h" />
     <ClInclude Include="AmbisonicOptim.h" />
+    <ClInclude Include="AmbisonicWider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hoa.halo~.def" />
