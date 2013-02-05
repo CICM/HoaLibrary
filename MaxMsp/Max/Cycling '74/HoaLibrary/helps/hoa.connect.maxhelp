@@ -150,7 +150,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 56.0, 133.0, 534.0, 529.0 ],
+						"rect" : [ 0.0, 26.0, 534.0, 529.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1128,8 +1128,8 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "lock.js",
-				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/externals/jsExternals",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/externals/jsExternals",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/externals/jsExternals",
+				"patcherrelativepath" : "../externals/jsExternals",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
@@ -1142,8 +1142,8 @@
 			}
 , 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -1152,13 +1152,6 @@
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa-icon.png",
-				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
-				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{

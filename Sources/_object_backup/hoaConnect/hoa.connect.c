@@ -68,9 +68,6 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_jr.height = 0;
 		
 		//attr_args_process(x, argc, argv);
-		x->f_condition = 0;
-		x->f_tab_index = 0;
-		x->f_nbSelected = 0;
 	}
 	
 	return x;
@@ -84,24 +81,53 @@ void connect_free(t_connect *x)
 
 void connect_bang(t_connect *x)
 {
+	t_object *box;
+	
+	t_rect jr;
 	int i, j;
+	t_atom *av = NULL;
+	long ac = 0;
+
+	
+	int patchX = 0, patchY = 0;
+	object_attr_getvalueof(x->f_patcherview, gensym("rect"), &ac, &av);
+	if (ac && av) 
+	{
+		patchX = atom_getfloat(av);
+		patchY = atom_getfloat(av+1);
+		freebytes(av, sizeof(t_atom) * ac);
+	}
  
 	x->f_inc = 0;
-	
-	for (i = 0; i < x->f_nbSelected; i++) 
+	for (box = jpatcher_get_firstobject(x->f_patcher); box && x->f_inc < 100; box = jbox_get_nextobject(box)) 
 	{	
-		if(validName(x->f_object[i]))
+		jbox_get_patching_rect(box, &jr);
+		if(validName(box) && validPos(jr, x->f_jr, patchX, patchY))
 		{
-			x->f_object[x->f_inc++] = x->f_object[i];
+			x->f_index[x->f_inc] = jr.y;
+			for(i = 0; i < x->f_inc; i++)
+			{
+				if (x->f_index[x->f_inc] == x->f_index[i]) 
+				{
+					x->f_index[x->f_inc]++;
+				}
+			}
+			x->f_object[x->f_inc++] = box;
 		}
 	
 	}
 	
-	//ordonnerTableau(x->f_index, x->f_object, x->f_inc);
+	ordonnerTableau(x->f_index, x->f_object, x->f_inc);
 	for(i = 1; i < x->f_inc; i++)
 	{
 		if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~"))
 		{
+			//for(j = 0; j < 30; j++)
+//			{
+//				if((jbox_get_object(x->f_object[i -1]))->o_inlet[j] != NULL))
+//				   k++;
+//			}
+//			post("inlet %i", k);
 			for(j = 0; j < x->f_output; j++)
 			{
 				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
@@ -123,16 +149,7 @@ void connect_bang(t_connect *x)
 		}
 		
 	}
-	
-	for(i  = 0; i < CONNECT_MAX_TAB; i++)
-		x->f_object[i] = 0;
-	for(i  = 0; i < CONNECT_MAX_TAB; i++)
-		x->f_object[i] = NULL;
-	
-	x->f_nbSelected = 0;
-	
 	color_patchline(x);
-	
 }
 
 void color_patchline(t_connect *x)
@@ -182,176 +199,34 @@ void connect_attach(t_connect *x)
 	object_attach_byptr_register(x, x->f_patcherview, CLASS_NOBOX);
 }
 
-void clear_objectab(t_connect *x, t_object *objectab[], long tablen)
-{
-	int i;
-	if (!x->f_objectab_cleaned) 
-	{
-		for(i=0;i<tablen;i++)
-			objectab[i] = NULL;
-		x->f_objectab_cleaned = 1;
-	}
-}
-
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {	
-	int i, j, k, index, tabcheck, nb_object_allready_selected;
-	//int condition;
-	if (msg == gensym("attr_modified") && sender == x->f_patcherview) 
-	{
-		t_symbol *attrname;
-		attrname = (t_symbol *)object_method(data, gensym("getname"));
-		if (attrname == gensym("unselectedboxes")){
-			post("unselected !!!");
-		}
-			
-		if (attrname == gensym("selectedboxes")) {
-			t_atom *av = NULL;
-			long current_nb_selected = 0;
-			
-			object_attr_getvalueof(sender, attrname, &current_nb_selected, &av);
-			if (current_nb_selected && av) 
-			{				
-				// on supprime tous les objets du tableau qui ne sont plus dans la selection
-				/*
-				for( i = 0 ; i < current_nb_selected ; i++ )
-				{
-					//if (i > x->f_tab_index) break;
-					tabcheck = 0;
-					for(j = 0; j < x->f_nbSelected; j++)
-					{
-						if (atom_gettype(av+i) == A_OBJ && x->f_object[j] == (t_object*)atom_getobj(av+i)) 
-						{	
-							tabcheck = 1;
-							break;
-						}
-					}
-					
-					if (!tabcheck)
-						x->f_object[i] = NULL;
-				}
-				 */
-				if(x->f_nbSelected < 0)
-					x->f_nbSelected = 0;
-				if(current_nb_selected < x->f_nbSelected)
-				{
-					for(i = 0 ; i < current_nb_selected ; i++)
-					{
-						//if (i > x->f_tab_index) break;
-						tabcheck = 0;
-						for(j = 0; j < x->f_nbSelected; j++)
-						{
-							if (atom_gettype(av+i) == A_OBJ && x->f_object[j] == (t_object*)atom_getobj(av+i)) 
-							{	
-								tabcheck = 1;
-								break;
-							}
-						}
-						
-						if (!tabcheck)
-							x->f_object[j] = NULL;
-					}
-				
-					// puis on retrie le tableau
-					for(i = 0; i < x->f_nbSelected; i++)
-					{
-						if (x->f_object[i] == NULL)
-						{
-							for(k = i; k < x->f_nbSelected; k++)
-								x->f_object[k] = x->f_object[k+1];
-							
-							x->f_nbSelected--;
-							break;
-						}
-					}
-				}
-				else if(current_nb_selected > x->f_nbSelected)
-				{
-					for(i = 0 ; i < current_nb_selected ; i++)
-					{
-						tabcheck = 0;
-						for(j = 0; j < x->f_nbSelected; j++)
-						{
-							if (atom_gettype(av+i) == A_OBJ && x->f_object[j] == (t_object*)atom_getobj(av+i)) 
-							{	
-								tabcheck = 1;
-							}
-						}
-						
-						if (!tabcheck)
-							x->f_object[x->f_nbSelected] = (t_object*)atom_getobj(av+i);
-					}
-					x->f_nbSelected++;
-				}
-
-				
-				
-				for(i = 0; i < x->f_nbSelected; i++)
-				{
-					post("selected %ld : %s", i, jbox_get_maxclass(x->f_object[i])->s_name);
-				}
-				
-				//nb_object_allready_selected = index;
-				tabcheck = 0;
-				/*
-				for(i=0; i<ac; i++)
-				{
-					if (atom_gettype(av+i) == A_OBJ)
-					{
-						// on check si l'objet est déja dans le tableau (dans ce cas on le laisse à sa place)
-						/*
-						tabcheck = 0;
-						for( j = 0 ; j < CONNECT_MAX_TAB ; j++ )
-						{
-							if ( (t_object*)atom_getobj(av+i) == x->f_object[j] )
-							{	
-								tabcheck = 1;
-								break;
-							}
-						}
-						if (!tabcheck) {
-							x->f_object[index] = (t_object*)atom_getobj(av+i);
-							index++;
-						}
-						
-						// si il n'y
-						// si tab vide on stock
-						
-						
-						//post("selected %ld : %s", i, jbox_get_maxclass((t_object*)atom_getobj(av+i))->s_name);
-						
-						/*
-						if(x->f_condition)
-						{
-							condition = 1;
-							for(j=0; j<ac; j++)
-							{
-								if((t_object*)atom_getobj(av+ac-1) == x->f_object[j])
-									condition = 0;
-							}
-							if(condition)
-								x->f_object[ac-1] = (t_object*)atom_getobj(av+ac-1);
-						}							
-						else
-							x->f_object[i] = (t_object*)atom_getobj(av+i);
-						 *
-					}
-				}*/
-			}
-			freebytes(av, sizeof(t_atom) * current_nb_selected);
-		}			
-	}
-
-
+	int xPos, yPos;
+	
 	if (msg == gensym("startdrag"))
 	{
-		post("startdrag");
-		x->f_condition = 1;
+		jmouse_getposition_global(&xPos, &yPos);
+		x->f_jr.x = xPos;
+		x->f_jr.y = yPos;
 	}
 	else if (msg == gensym("enddrag"))
 	{
-		post("enddrag");
-		x->f_condition = 0;
+		jmouse_getposition_global(&xPos, &yPos);
+		if(xPos < x->f_jr.x)
+		{
+			x->f_jr.width = x->f_jr.x;
+			x->f_jr.x = xPos;
+		}
+		else
+			x->f_jr.width = xPos;
+
+		if(yPos < x->f_jr.y)
+		{
+			x->f_jr.height = x->f_jr.y;
+			x->f_jr.y = yPos;
+		}
+		else
+			x->f_jr.height = yPos;
 	}
 }
 
