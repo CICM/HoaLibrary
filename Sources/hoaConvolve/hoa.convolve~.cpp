@@ -40,6 +40,8 @@ typedef struct _HoaConvolve
 	long				f_offset[MAX_SIZE];
 	long				f_numberOfHarmonics;
 	
+	int					f_check;
+	
 } t_HoaConvolve;
 
 void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv);
@@ -123,6 +125,7 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 	long order = 4;
 	if (x = (t_HoaConvolve *)object_alloc((t_class*)HoaConvolve_class)) 
 	{
+		x->f_check = 0;
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
 
@@ -138,6 +141,8 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
 		attr_args_process(x, argc, argv);
+		x->f_check = 1;
+		buffer_setup(x);
 	}
 	return (x);
 }
@@ -401,34 +406,47 @@ t_max_err offset_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 
 void buffer_setup(t_HoaConvolve *x)
 {
-	for(int j = 0; j < x->f_numberOfHarmonics; j++)
+	if(x->f_check)
 	{
-		if(x->f_buffer[j] != NULL)
+		int vectorSize = 0;
+		for(int j = 0; j < x->f_numberOfHarmonics; j++)
 		{
-			ATOMIC_INCREMENT(&x->f_buffer[j]->b_inuse);
-			if (!x->f_buffer[j]->b_valid) 
+			if(x->f_buffer[j] != NULL)
 			{
-				ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
-			}
-			else
-			{
-				long size;
-				if(x->f_limit[j] == 0)
-					size = x->f_buffer[j]->b_frames;
-				else if(x->f_limit[j] > x->f_buffer[j]->b_frames)
-					size = x->f_buffer[j]->b_frames;
-				else			
-					size = x->f_limit[j];
-				double* datas = new double[x->f_buffer[j]->b_frames];
-				for(long i = 0; i < x->f_buffer[j]->b_frames; i++)
-				{
-					datas[i] = x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] * 0.05;
-				}
-				ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
-
-				x->f_ambiConvolve->setImpulseResponse(j, datas, size, x->f_offset[j]);
-				free(datas);
+				if(vectorSize < x->f_buffer[j]->b_frames)
+					vectorSize = x->f_buffer[j]->b_frames;
 			}
 		}
+		double* datas = new double[vectorSize];		   
+		for(int j = 0; j < x->f_numberOfHarmonics; j++)
+		{
+			if(x->f_buffer[j] != NULL)
+			{
+				ATOMIC_INCREMENT(&x->f_buffer[j]->b_inuse);
+				if (!x->f_buffer[j]->b_valid) 
+				{
+					ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
+				}
+				else
+				{
+					long size;
+					if(x->f_limit[j] == 0)
+						size = x->f_buffer[j]->b_frames;
+					else if(x->f_limit[j] > x->f_buffer[j]->b_frames)
+						size = x->f_buffer[j]->b_frames;
+					else			
+						size = x->f_limit[j];
+				
+					for(long i = 0; i < x->f_buffer[j]->b_frames; i++)
+					{
+						datas[i] = x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] * 0.05;
+					}
+					ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
+
+					x->f_ambiConvolve->setImpulseResponse(j, datas, size, x->f_offset[j]);
+				}
+			}
+		}
+		free(datas);
 	}
 }

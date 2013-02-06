@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		0E6C283715C815AB0090858D /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283515C815AB0090858D /* MaxAPI.framework */; };
-		2CBF2EEC1647D5A100A7BB04 /* hoa.spat.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF2EEB1647D5A100A7BB04 /* hoa.spat.c */; };
+		0EB9B48816C2839300677691 /* hoa.map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9B48716C2839300677691 /* hoa.map.cpp */; };
+		0EB9B49416C2842200677691 /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EB9B49316C2842200677691 /* cicmTools.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0E6C283515C815AB0090858D /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
+		0EB9B48716C2839300677691 /* hoa.map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.map.cpp; sourceTree = "<group>"; };
+		0EB9B49316C2842200677691 /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmTools.h; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
-		2CBF2EEB1647D5A100A7BB04 /* hoa.spat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hoa.spat.c; sourceTree = "<group>"; };
-		2FBBEAE508F335360078DB84 /* hoa.spat.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.spat.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FBBEAE508F335360078DB84 /* hoa.map.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.map.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,8 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2CBF2EEB1647D5A100A7BB04 /* hoa.spat.c */,
+				0EB9B49316C2842200677691 /* cicmTools.h */,
+				0EB9B48716C2839300677691 /* hoa.map.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -60,7 +63,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.spat.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.map.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +75,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EB9B49416C2842200677691 /* cicmTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +98,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.spat.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.map.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +106,7 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.spat" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.map" */;
 			compatibilityVersion = "Xcode 3.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -146,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CBF2EEC1647D5A100A7BB04 /* hoa.spat.c in Sources */,
+				0EB9B48816C2839300677691 /* hoa.map.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +220,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.spat" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.map" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

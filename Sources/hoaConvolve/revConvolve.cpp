@@ -67,7 +67,7 @@ void GardnerConvolution::setImpulseResponse(double* setImpulseResponse, long aSi
 	{
 		if(anOffset >= offset)
 			m_number_of_first_filter = i + 1;
-		m_fft[i]->loadImpulseResponse(datas + offset);
+		m_fft[i]->loadImpulseResponse(datas + offset, offset);
 		offset *= 2;
 	}
 	

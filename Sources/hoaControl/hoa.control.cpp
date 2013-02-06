@@ -617,11 +617,21 @@ void draw_biggest_contribution(t_control *x,  t_object *view, t_rect *rect)
 
 		if(x->f_viewer->getBiggestContribution() != 0.)
 		{
-			double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
-			jgraphics_set_source_jrgba(g, &x->f_colorContrib);
-			jgraphics_arc(g, x->f_viewer->getAbscisseValue(x->f_viewer->getBiggestContributionIndex()) * factor, x->f_viewer->getOrdinateValue(x->f_viewer->getBiggestContributionIndex()) * factor, 
-				3.,  0., JGRAPHICS_2PI);
-			jgraphics_fill(g);
+			if(x->f_wide)
+			{
+				double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
+				jgraphics_set_source_jrgba(g, &x->f_colorContrib);
+				jgraphics_arc(g, x->f_viewer->getAbscisseValue(x->f_viewer->getBiggestContributionIndex()) * factor, x->f_viewer->getOrdinateValue(x->f_viewer->getBiggestContributionIndex()) * factor, 
+							  3.,  0., JGRAPHICS_2PI);
+				jgraphics_fill(g);
+			}
+			else
+			{
+				double factor = x->f_rayonGlobal * 5. / 6.;
+				jgraphics_set_source_jrgba(g, &x->f_colorContrib);
+				jgraphics_arc(g, cos(x->f_azimuth + JGRAPHICS_PIOVER2) * factor, sin(x->f_azimuth + JGRAPHICS_PIOVER2) * factor, 3.,  0., JGRAPHICS_2PI);
+				jgraphics_fill(g);
+			}
 		}
 		jbox_end_layer((t_object*)x, view, gensym("biggest_contribution_layer"));
 	}

@@ -22,7 +22,7 @@
 
 #define CICM_PI 3.141592653589793238462643383279502884
 #define M_2PI 2*CICM_PI
-#define NUMBEROFCIRCLEPOINTS 360000
+#define NUMBEROFCIRCLEPOINTS 36000
 #define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
 
 #include <stdio.h>

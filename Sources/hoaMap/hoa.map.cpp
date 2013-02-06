@@ -70,7 +70,7 @@ typedef struct  _source
 	t_symbol	*description;
 } t_source;
 
-typedef struct  _hoaspat 
+typedef struct  _hoamap 
 {
 	t_jbox		j_box;
 	t_rect		rect;
@@ -113,75 +113,75 @@ typedef struct  _hoaspat
 	void*		f_outPolar;
 	void*		f_outCarte;
 	void*		f_out;
-} t_hoaspat;
+} t_hoamap;
 
-t_class *hoaspat_class;
+t_class *hoamap_class;
 
 // general methods
-void *hoaspat_new(t_symbol *s, int argc, t_atom *argv);
-void hoaspat_free(t_hoaspat *x);
-void hoaspat_getdrawparams(t_hoaspat *x, t_object *patcherview, t_jboxdrawparams *params);
-void hoaspat_assist(t_hoaspat *x, void *b, long m, long a, char *s);
-t_max_err hoaspat_notify(t_hoaspat *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void *hoamap_new(t_symbol *s, int argc, t_atom *argv);
+void hoamap_free(t_hoamap *x);
+void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params);
+void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
+t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 // mouse/key methods
-void hoaspat_mouseleave(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_mouseenter(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_mousedown(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_mousedown2(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_mouseup(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_focusgained(t_hoaspat *x, t_object *patcherview);
-void hoaspat_focuslost(t_hoaspat *x, t_object *patcherview);
-long hoaspat_key(t_hoaspat *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
-void hoaspat_mousemove(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_mousedragdelta(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_mousedrag(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoaspat_mousewheel(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
+void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousedown2(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_focusgained(t_hoamap *x, t_object *patcherview);
+void hoamap_focuslost(t_hoamap *x, t_object *patcherview);
+long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
+void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousedragdelta(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
 
 // msg-in methods
-void hoaspat_bang(t_hoaspat *x);
-void hoaspat_list(t_hoaspat *x, t_symbol *s, short ac, t_atom *av);
-void hoaspat_anything(t_hoaspat *x, t_symbol *s, short ac, t_atom *av);
-void hoaspat_float(t_hoaspat *x, double f);
+void hoamap_bang(t_hoamap *x);
+void hoamap_list(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
+void hoamap_anything(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
+void hoamap_float(t_hoamap *x, double f);
 
-void hoaspat_zoom(t_hoaspat *x, double v);
-void hoaspat_nb_hp(t_hoaspat *x, int v);
-void hoaspat_shape(t_hoaspat *x, int v);
-void hoaspat_delta(t_hoaspat *x, double v);
-void hoaspat_distance(t_hoaspat *x, double v);
-void hoaspat_display_angle(t_hoaspat *x, int v);
-void hoaspat_display_grid(t_hoaspat *x, int v);
-void hoaspat_display_cartvectors(t_hoaspat *x, int v);
+void hoamap_zoom(t_hoamap *x, double v);
+void hoamap_nb_hp(t_hoamap *x, int v);
+void hoamap_shape(t_hoamap *x, int v);
+void hoamap_delta(t_hoamap *x, double v);
+void hoamap_distance(t_hoamap *x, double v);
+void hoamap_display_angle(t_hoamap *x, int v);
+void hoamap_display_grid(t_hoamap *x, int v);
+void hoamap_display_cartvectors(t_hoamap *x, int v);
 
-void hoaspat_add(t_hoaspat *x, double xpos, double ypos); // ajoute une source en donnant (x,y);
-void hoaspat_move(t_hoaspat *x, t_symbol *s, short ac, t_atom *av); // bouge une source en donnant (index,x,y);
-void hoaspat_remove(t_hoaspat *x); // supprime le dernière source ajoutée;
-void hoaspat_clear(t_hoaspat *x); // fait place nette (plus aucune sources);
-void hoaspat_add_source_text_description(t_hoaspat *x, t_symbol *s, short ac, t_atom *av); // ajoute une description text à la source.
+void hoamap_add(t_hoamap *x, double xpos, double ypos); // ajoute une source en donnant (x,y);
+void hoamap_move(t_hoamap *x, t_symbol *s, short ac, t_atom *av); // bouge une source en donnant (index,x,y);
+void hoamap_remove(t_hoamap *x); // supprime le dernière source ajoutée;
+void hoamap_clear(t_hoamap *x); // fait place nette (plus aucune sources);
+void hoamap_add_source_text_description(t_hoamap *x, t_symbol *s, short ac, t_atom *av); // ajoute une description text à la source.
 
 // msg-out methods
-void hoaspat_outone(t_hoaspat *x, int i);
+void hoamap_outone(t_hoamap *x, int i);
 
 // paint methods
-void hoaspat_paint(t_hoaspat *x, t_object *view);
-void draw_background(t_hoaspat *x, t_object *view, t_rect *rect);
-void draw_head(t_hoaspat *x, t_object *view, t_rect *rect);
-void draw_cartVectors(t_hoaspat *x, t_object *view, t_rect *rect);
-void draw_grid(t_hoaspat *x, t_object *view, t_rect *rect);
-void draw_speakers(t_hoaspat *x, t_object *view, t_rect *rect);
-void draw_oneLs(t_hoaspat *x, t_jgraphics *g, double posX, double posY, double rotDegree, double size);
-//void draw_loudspeakers(t_hoaspat *x, t_object *view, t_rect *rect);
-void draw_sources(t_hoaspat *x,  t_object *view, t_rect *rect);
-void draw_angle(t_hoaspat *x,  t_object *view, t_rect *rect);
-void draw_rect_selection(t_hoaspat *x, t_object *view, t_rect *rect);
+void hoamap_paint(t_hoamap *x, t_object *view);
+void draw_background(t_hoamap *x, t_object *view, t_rect *rect);
+void draw_head(t_hoamap *x, t_object *view, t_rect *rect);
+void draw_cartVectors(t_hoamap *x, t_object *view, t_rect *rect);
+void draw_grid(t_hoamap *x, t_object *view, t_rect *rect);
+void draw_speakers(t_hoamap *x, t_object *view, t_rect *rect);
+void draw_oneLs(t_hoamap *x, t_jgraphics *g, double posX, double posY, double rotDegree, double size);
+//void draw_loudspeakers(t_hoamap *x, t_object *view, t_rect *rect);
+void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect);
+void draw_angle(t_hoamap *x,  t_object *view, t_rect *rect);
+void draw_rect_selection(t_hoamap *x, t_object *view, t_rect *rect);
 
 //specific methods
-void update_source_pos_in_pixel(t_hoaspat *x, int sourceIndex, t_pt pt);
-void update_source_pos_in_cart(t_hoaspat *x, int sourceIndex, t_pt pt);
-void update_source_pos_in_polar(t_hoaspat *x, int sourceIndex, double distance, double radian);
+void update_source_pos_in_pixel(t_hoamap *x, int sourceIndex, t_pt pt);
+void update_source_pos_in_cart(t_hoamap *x, int sourceIndex, t_pt pt);
+void update_source_pos_in_polar(t_hoamap *x, int sourceIndex, double distance, double radian);
 
-void update_source_selection(t_hoaspat *x, int sourceIndex, int isSelected);
-int which_source_pointed(t_hoaspat *x, t_pt pt);
+void update_source_selection(t_hoamap *x, int sourceIndex, int isSelected);
+int which_source_pointed(t_hoamap *x, t_pt pt);
 
 //calcul methods
 double nextPow2(double aValue);
@@ -195,10 +195,10 @@ double calcul_angle_display(double x1, double y1, double x2, double y2);
 
 t_pt poltocar(double distance, double angle); // return (x,y);
 t_pol cartopol(double x, double y);	// return (r = rayon, a = angle en radian);
-t_pt pixtocar(t_hoaspat *x, t_pt pix);
-t_pt cartopix(t_hoaspat *x, t_pt pt, int antialiased);
-t_pol pixtopol(t_hoaspat *x, t_pt pix);
-t_pt poltopix(t_hoaspat *x, t_pol pol, int antialiased);
+t_pt pixtocar(t_hoamap *x, t_pt pix);
+t_pt cartopix(t_hoamap *x, t_pt pt, int antialiased);
+t_pol pixtopol(t_hoamap *x, t_pt pix);
+t_pt poltopix(t_hoamap *x, t_pol pol, int antialiased);
 double radtodeg(double radian);
 double degtorad(double degree);
 double wrapi(double deltaPhase);
@@ -209,75 +209,75 @@ int main()
 {
 	t_class *c;
 	
-	c = class_new("hoa.spat", (method)hoaspat_new, (method)hoaspat_free, (short)sizeof(t_hoaspat), 0L, A_GIMME, 0);
+	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	
-	class_addmethod(c, (method)hoaspat_assist,		"assist",		A_CANT,	0);
-	class_addmethod(c, (method)hoaspat_paint,		"paint",		A_CANT,	0);
-	class_addmethod(c, (method)hoaspat_getdrawparams, "getdrawparams", A_CANT, 0);
-	class_addmethod(c, (method)hoaspat_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)hoaspat_bang,			"bang",			0L,0);
-	class_addmethod(c, (method)hoaspat_list,			"list",			A_GIMME, 0);
-	class_addmethod(c, (method)hoaspat_float,		"float",		A_FLOAT, 0);
-	class_addmethod(c, (method)hoaspat_anything,		"anything",		A_GIMME, 0);
-	//class_addmethod(c, (method)hoaspat_zoom,			"zoom",			A_DEFFLOAT, 0);
-	//class_addmethod(c, (method)hoaspat_nb_hp,		"loudspeaker",	A_DEFLONG, 0);
-	//class_addmethod(c, (method)hoaspat_shape,		"shape",		A_DEFLONG, 0);
-	class_addmethod(c, (method)hoaspat_display_angle,"display_angle",A_DEFLONG, 0);
-	class_addmethod(c, (method)hoaspat_display_grid, "display_grid", A_DEFLONG, 0);
-	class_addmethod(c, (method)hoaspat_display_cartvectors,"display_cartvectors",A_DEFLONG, 0);
-	//class_addmethod(c, (method)hoaspat_delta,		"delta",		A_DEFFLOAT, 0);
-	class_addmethod(c, (method)hoaspat_distance,		"distance",		A_DEFFLOAT, 0);
+	class_addmethod(c, (method)hoamap_assist,		"assist",		A_CANT,	0);
+	class_addmethod(c, (method)hoamap_paint,		"paint",		A_CANT,	0);
+	class_addmethod(c, (method)hoamap_getdrawparams, "getdrawparams", A_CANT, 0);
+	class_addmethod(c, (method)hoamap_notify,		"notify",		A_CANT, 0);
+	class_addmethod(c, (method)hoamap_bang,			"bang",			0L,0);
+	class_addmethod(c, (method)hoamap_list,			"list",			A_GIMME, 0);
+	class_addmethod(c, (method)hoamap_float,		"float",		A_FLOAT, 0);
+	class_addmethod(c, (method)hoamap_anything,		"anything",		A_GIMME, 0);
+	//class_addmethod(c, (method)hoamap_zoom,			"zoom",			A_DEFFLOAT, 0);
+	//class_addmethod(c, (method)hoamap_nb_hp,		"loudspeaker",	A_DEFLONG, 0);
+	//class_addmethod(c, (method)hoamap_shape,		"shape",		A_DEFLONG, 0);
+	class_addmethod(c, (method)hoamap_display_angle,"display_angle",A_DEFLONG, 0);
+	class_addmethod(c, (method)hoamap_display_grid, "display_grid", A_DEFLONG, 0);
+	class_addmethod(c, (method)hoamap_display_cartvectors,"display_cartvectors",A_DEFLONG, 0);
+	//class_addmethod(c, (method)hoamap_delta,		"delta",		A_DEFFLOAT, 0);
+	class_addmethod(c, (method)hoamap_distance,		"distance",		A_DEFFLOAT, 0);
 	
-	class_addmethod(c, (method)hoaspat_add,			"add",			A_DEFFLOAT, A_DEFFLOAT, 0);
-	class_addmethod(c, (method)hoaspat_remove,		"remove",		0L, 0);
-	class_addmethod(c, (method)hoaspat_clear,		"clear",		0L, 0);
-	//class_addmethod(c, (method)hoaspat_move,			"move",			A_GIMME, 0);
-	class_addmethod(c, (method)hoaspat_move,			"car",			A_GIMME, 0);
-	class_addmethod(c, (method)hoaspat_move,			"pol",			A_GIMME, 0);
-	class_addmethod(c, (method)hoaspat_add_source_text_description,	"text",			A_GIMME, 0);
+	class_addmethod(c, (method)hoamap_add,			"add",			A_DEFFLOAT, A_DEFFLOAT, 0);
+	class_addmethod(c, (method)hoamap_remove,		"remove",		0L, 0);
+	class_addmethod(c, (method)hoamap_clear,		"clear",		0L, 0);
+	//class_addmethod(c, (method)hoamap_move,			"move",			A_GIMME, 0);
+	class_addmethod(c, (method)hoamap_move,			"car",			A_GIMME, 0);
+	class_addmethod(c, (method)hoamap_move,			"pol",			A_GIMME, 0);
+	class_addmethod(c, (method)hoamap_add_source_text_description,	"text",			A_GIMME, 0);
 	
-	class_addmethod(c, (method) hoaspat_mousedown,	"mousedown",		A_CANT, 0);
-	class_addmethod(c, (method)hoaspat_mousedrag,	"mousedrag",		A_CANT, 0);
-	//class_addmethod(c, (method) hoaspat_mousedragdelta,	"mousedragdelta", A_CANT, 0);
-	class_addmethod(c, (method) hoaspat_mouseup,			"mouseup",		A_CANT, 0);
-	class_addmethod(c, (method) hoaspat_mousemove,		"mousemove",	A_CANT, 0);
-	//class_addmethod(c, (method) hoaspat_mouseleave,		"mouseleave",	A_CANT, 0);
-	//class_addmethod(c, (method) hoaspat_mouseenter,		"mouseenter",	A_CANT, 0);
-	//class_addmethod(c, (method) hoaspat_focusgained,		"focusgained",	A_CANT, 0);
-	//class_addmethod(c, (method) hoaspat_focuslost,		"focuslost",	A_CANT, 0);
-	class_addmethod(c, (method) hoaspat_key,				"key",			A_CANT, 0);
-	class_addmethod(c, (method) hoaspat_mousewheel,		"mousewheel",	A_CANT, 0);
+	class_addmethod(c, (method) hoamap_mousedown,	"mousedown",		A_CANT, 0);
+	class_addmethod(c, (method)hoamap_mousedrag,	"mousedrag",		A_CANT, 0);
+	//class_addmethod(c, (method) hoamap_mousedragdelta,	"mousedragdelta", A_CANT, 0);
+	class_addmethod(c, (method) hoamap_mouseup,			"mouseup",		A_CANT, 0);
+	class_addmethod(c, (method) hoamap_mousemove,		"mousemove",	A_CANT, 0);
+	//class_addmethod(c, (method) hoamap_mouseleave,		"mouseleave",	A_CANT, 0);
+	//class_addmethod(c, (method) hoamap_mouseenter,		"mouseenter",	A_CANT, 0);
+	//class_addmethod(c, (method) hoamap_focusgained,		"focusgained",	A_CANT, 0);
+	//class_addmethod(c, (method) hoamap_focuslost,		"focuslost",	A_CANT, 0);
+	class_addmethod(c, (method) hoamap_key,				"key",			A_CANT, 0);
+	class_addmethod(c, (method) hoamap_mousewheel,		"mousewheel",	A_CANT, 0);
 	
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
 	
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoaspat, f_colorBackground);
+	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_colorBackground);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "1. 1. 1. 1.");
 	
-	CLASS_ATTR_RGBA				(c, "gridcolor", 0, t_hoaspat, f_colorGrid);
+	CLASS_ATTR_RGBA				(c, "gridcolor", 0, t_hoamap, f_colorGrid);
 	CLASS_ATTR_CATEGORY			(c, "gridcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "gridcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "gridcolor", 0, "Grid Color");
 	CLASS_ATTR_ORDER			(c, "gridcolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "gridcolor", 0, "0. 0. 0. 1.");
 	
-	CLASS_ATTR_RGBA				(c, "lscolor", 0, t_hoaspat, f_colorLs);
+	CLASS_ATTR_RGBA				(c, "lscolor", 0, t_hoamap, f_colorLs);
 	CLASS_ATTR_CATEGORY			(c, "lscolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "lscolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "lscolor", 0, "LoudSpeaker Color");
 	CLASS_ATTR_ORDER			(c, "lscolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "lscolor", 0, "0. 0. 0. 1.");
 	
-	CLASS_ATTR_RGBA				(c, "headcolor", 0, t_hoaspat, f_colorHead);
+	CLASS_ATTR_RGBA				(c, "headcolor", 0, t_hoamap, f_colorHead);
 	CLASS_ATTR_CATEGORY			(c, "headcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "headcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "headcolor", 0, "Head Color");
@@ -285,7 +285,7 @@ int main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "headcolor", 0, "0. 0. 0. 1.");
 	
 	/*
-	CLASS_ATTR_RGBA				(c, "selectcolor", 0, t_hoaspat, f_color_selection);
+	CLASS_ATTR_RGBA				(c, "selectcolor", 0, t_hoamap, f_color_selection);
 	CLASS_ATTR_CATEGORY			(c, "selectcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "selectcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selectcolor", 0, "selection Color");
@@ -294,55 +294,55 @@ int main()
 	*/
 
 	/*
-	CLASS_ATTR_LONG				(c,"output_mode",0, t_hoaspat, f_output_mode);
+	CLASS_ATTR_LONG				(c,"output_mode",0, t_hoamap, f_output_mode);
 	CLASS_ATTR_LABEL			(c,"output_mode", 0, "Output Mode");
 	CLASS_ATTR_CATEGORY			(c,"output_mode",0,"Output");
 	CLASS_ATTR_ENUMINDEX		(c,"output_mode", 0, "Cartesian Polar");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"output_mode",0,"0");
 	*/
 	
-	CLASS_ATTR_CHAR				(c,"display_grid",0, t_hoaspat, f_displayGrid);
+	CLASS_ATTR_CHAR				(c,"display_grid",0, t_hoamap, f_displayGrid);
 	CLASS_ATTR_STYLE_LABEL		(c,"display_grid",0,"onoff","Display Grid");
 	CLASS_ATTR_CATEGORY			(c,"display_grid",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE		(c,"display_grid",0,"1");
 	
-	CLASS_ATTR_CHAR				(c,"display_cartvectors",0, t_hoaspat, f_displayCartVectors);
+	CLASS_ATTR_CHAR				(c,"display_cartvectors",0, t_hoamap, f_displayCartVectors);
 	CLASS_ATTR_STYLE_LABEL		(c,"display_cartvectors",0,"onoff","Display Cartesian Vectors");
 	CLASS_ATTR_CATEGORY			(c,"display_cartvectors",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE		(c,"display_cartvectors",0,"1");
 	
-	CLASS_ATTR_CHAR				(c,"display_angle",0, t_hoaspat, f_displayAngle);
+	CLASS_ATTR_CHAR				(c,"display_angle",0, t_hoamap, f_displayAngle);
 	CLASS_ATTR_STYLE_LABEL		(c,"display_angle",0,"onoff","Display Angle");
 	CLASS_ATTR_CATEGORY			(c,"display_angle",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE		(c,"display_angle",0,"1");
 	
 	/*
-	CLASS_ATTR_LONG				(c,"audio_config",0, t_hoaspat, f_audioConfig);
+	CLASS_ATTR_LONG				(c,"audio_config",0, t_hoamap, f_audioConfig);
 	CLASS_ATTR_LABEL			(c,"audio_config", 0, "Audio Configuration");
 	CLASS_ATTR_CATEGORY			(c,"audio_config",0,"Custom");
 	CLASS_ATTR_ENUMINDEX		(c,"audio_config", 0, "Ambisonic stereo quadriphonic octophonic \" \"5.1 \" \"6.1 \" \"7.1 \" \"9.1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"audio_config",0,"0");
 	*/
 	
-	CLASS_ATTR_DOUBLE			(c,"zoom",0, t_hoaspat, f_zoomFactor);
+	CLASS_ATTR_DOUBLE			(c,"zoom",0, t_hoamap, f_zoomFactor);
 	CLASS_ATTR_FILTER_CLIP		(c,"zoom", 0.1, 1.);
 	CLASS_ATTR_LABEL			(c,"zoom", 0, "Zoom");
 	CLASS_ATTR_CATEGORY			(c,"zoom",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"zoom",0,"0.5");
 	
-	CLASS_ATTR_DOUBLE			(c,"speaker_offset",0, t_hoaspat, f_speakerOffset);
+	CLASS_ATTR_DOUBLE			(c,"speaker_offset",0, t_hoamap, f_speakerOffset);
 	CLASS_ATTR_FILTER_CLIP		(c,"speaker_offset", -180, 180);
 	CLASS_ATTR_LABEL			(c,"speaker_offset", 0, "Speaker Offset Degree");
 	CLASS_ATTR_CATEGORY			(c,"speaker_offset",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"speaker_offset",0,"0.");
 	
-	CLASS_ATTR_DOUBLE			(c,"speaker_distance",0, t_hoaspat, f_speakerToHeadDistance);
+	CLASS_ATTR_DOUBLE			(c,"speaker_distance",0, t_hoamap, f_speakerToHeadDistance);
 	CLASS_ATTR_FILTER_MIN		(c,"speaker_distance", 0.1);
 	CLASS_ATTR_LABEL			(c,"speaker_distance", 0, "Speaker to Head Distance (meters)");
 	CLASS_ATTR_CATEGORY			(c,"speaker_distance",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"speaker_distance",0,"1.5");
 	
-	CLASS_ATTR_LONG				(c,"speaker_number",0, t_hoaspat, f_numberOfSpeaker);
+	CLASS_ATTR_LONG				(c,"speaker_number",0, t_hoamap, f_numberOfSpeaker);
 	CLASS_ATTR_FILTER_MIN		(c,"speaker_number", 1);
 	CLASS_ATTR_LABEL			(c,"speaker_number", 0, "Number of LoudSpeakers");
 	CLASS_ATTR_CATEGORY			(c,"speaker_number",0,"Custom");
@@ -350,16 +350,16 @@ int main()
 	
 	
 	class_register(CLASS_BOX, c);
-	hoaspat_class = c;
+	hoamap_class = c;
 	
 	//class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	hoa_init();
 	return 0;
 }
 
-void *hoaspat_new(t_symbol *s, int argc, t_atom *argv)
+void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_hoaspat *x =  NULL; 
+	t_hoamap *x =  NULL; 
 	int i;
 	t_dictionary *d;
 	long flags;
@@ -367,7 +367,7 @@ void *hoaspat_new(t_symbol *s, int argc, t_atom *argv)
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 	
-	x = (t_hoaspat *)object_alloc(hoaspat_class);
+	x = (t_hoamap *)object_alloc(hoamap_class);
 	flags = 0 
 	| JBOX_DRAWFIRSTIN 
 	| JBOX_DRAWINLAST
@@ -483,13 +483,13 @@ t_pol cartopol(double x, double y){
 	pol.a = radian;
 	return pol;
 }
-t_pt pixtocar(t_hoaspat *x, t_pt pix)
+t_pt pixtocar(t_hoamap *x, t_pt pix)
 {
 	t_pt cart = { scale(pix.x, 0, x->rect.width, -1, 1) / x->f_zoomFactor , scale(pix.y, 0, x->rect.height, 1, -1)  / x->f_zoomFactor};
 	return cart;
 }
 
-t_pt cartopix(t_hoaspat *x, t_pt pt, int antialiased)
+t_pt cartopix(t_hoamap *x, t_pt pt, int antialiased)
 {
 	double w = x->rect.width;
 	double zoom = x->f_zoomFactor;
@@ -503,13 +503,13 @@ t_pt cartopix(t_hoaspat *x, t_pt pt, int antialiased)
 	return pix;
 }
 
-t_pol pixtopol(t_hoaspat *x, t_pt pix)
+t_pol pixtopol(t_hoamap *x, t_pt pix)
 {
 	t_pt cart = pixtocar(x, pix);
 	return cartopol(cart.x, cart.y);
 }
 
-t_pt poltopix(t_hoaspat *x, t_pol pol, int antialiased)
+t_pt poltopix(t_hoamap *x, t_pol pol, int antialiased)
 {
 	t_pt cart = poltocar(pol.r, pol.a);
 	return cartopix(x, cart, antialiased);
@@ -555,18 +555,18 @@ double wrapi(double deltaPhase)
 }
 /* --------- */
 
-void hoaspat_getdrawparams(t_hoaspat *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_borderthickness = 1;
 	params->d_cornersize = 6; 
 }
 
-void hoaspat_free(t_hoaspat *x)
+void hoamap_free(t_hoamap *x)
 {
 	jbox_free(&x->j_box);
 }
 
-void hoaspat_assist(t_hoaspat *x, void *b, long m, long a, char *s)
+void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) {
 		sprintf(s,"msg in (add, remove, clear, car, pol ...)");
@@ -583,54 +583,54 @@ void hoaspat_assist(t_hoaspat *x, void *b, long m, long a, char *s)
 	}
 }
 
-void hoaspat_float(t_hoaspat *x, double f)
+void hoamap_float(t_hoamap *x, double f)
 {
 	;
 }
-void hoaspat_anything(t_hoaspat *x, t_symbol *s, short ac, t_atom *av)
-{
-	;
-}
-
-void hoaspat_list(t_hoaspat *x, t_symbol *s, short ac, t_atom *av)
+void hoamap_anything(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
 	;
 }
 
-void hoaspat_bang(t_hoaspat *x)
+void hoamap_list(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
+{
+	;
+}
+
+void hoamap_bang(t_hoamap *x)
 {
 	int i;
 	for(i = 0; i < x->f_numberOfSources; i++)
-		hoaspat_outone(x, i);
+		hoamap_outone(x, i);
 }
 
-void update_source_pos_in_pixel(t_hoaspat *x, int sourceIndex, t_pt pt){
+void update_source_pos_in_pixel(t_hoamap *x, int sourceIndex, t_pt pt){
 	x->f_sources[sourceIndex].pix = pt;
 	x->f_sources[sourceIndex].pos = pixtocar(x, pt);
 	t_pol pol = cartopol(x->f_sources[sourceIndex].pos.x, x->f_sources[sourceIndex].pos.y);
 	x->f_sources[sourceIndex].distance = pol.r;
 	x->f_sources[sourceIndex].angle = pol.a;
-	hoaspat_outone(x, sourceIndex);
+	hoamap_outone(x, sourceIndex);
 }
 
-void update_source_pos_in_cart(t_hoaspat *x, int sourceIndex, t_pt pt){
+void update_source_pos_in_cart(t_hoamap *x, int sourceIndex, t_pt pt){
 	x->f_sources[sourceIndex].pos = pt;
 	t_pol pol = cartopol(pt.x, pt.y);
 	x->f_sources[sourceIndex].distance = pol.r;
 	x->f_sources[sourceIndex].angle = pol.a;
-	hoaspat_outone(x, sourceIndex);
+	hoamap_outone(x, sourceIndex);
 }
 
-void update_source_pos_in_polar(t_hoaspat *x, int sourceIndex, double distance, double radian){
+void update_source_pos_in_polar(t_hoamap *x, int sourceIndex, double distance, double radian){
 	x->f_sources[sourceIndex].distance = distance;
 	x->f_sources[sourceIndex].angle = wrapi(radian);
 	x->f_sources[sourceIndex].pos = poltocar(distance, radian);
 	x->f_sources[sourceIndex].pix = cartopix(x, x->f_sources[sourceIndex].pos, 0);
-	hoaspat_outone(x, sourceIndex);
+	hoamap_outone(x, sourceIndex);
 }
 
 // update_source_selection (apply to all sources with sourceIndex = -1, toggle state with isSelected = -1)
-void update_source_selection(t_hoaspat *x, int sourceIndex, int isSelected){
+void update_source_selection(t_hoamap *x, int sourceIndex, int isSelected){
 	int i;
 	if (sourceIndex != -1) {
 		if (sourceIndex >= 0 && sourceIndex < x->f_numberOfSources) {
@@ -660,7 +660,7 @@ void update_source_selection(t_hoaspat *x, int sourceIndex, int isSelected){
 	jbox_redraw((t_jbox *)x);
 }
 
-void hoaspat_outone(t_hoaspat *x, int i)
+void hoamap_outone(t_hoamap *x, int i)
 {
 	t_atom	av[3];
 	atom_setlong(av, i);
@@ -691,7 +691,7 @@ void hoaspat_outone(t_hoaspat *x, int i)
 
 /* ------ MSG EXTERNS ------ */
 // ajoute une description text à la source.
-void hoaspat_add_source_text_description(t_hoaspat *x, t_symbol *s, short ac, t_atom *av)
+void hoamap_add_source_text_description(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
 	int source = -1;
 	t_symbol *text;
@@ -727,21 +727,21 @@ void hoaspat_add_source_text_description(t_hoaspat *x, t_symbol *s, short ac, t_
 }
 
 // ajoute une source en donnant (x,y) repère à 0;
-void hoaspat_add(t_hoaspat *x, double xpos, double ypos) {
+void hoamap_add(t_hoamap *x, double xpos, double ypos) {
 	t_pt point = {xpos,ypos};	
 	if(x->f_numberOfSources < MAX_SOURCES) x->f_numberOfSources++;
 	x->f_actualSource = x->f_numberOfSources;
 	//x->f_sources[x->f_actualSource-1].pos = point; // repere à 0 : -1 1 
 	
 	update_source_pos_in_cart(x, x->f_actualSource-1, point);
-	hoaspat_outone(x, x->f_actualSource-1);
+	hoamap_outone(x, x->f_actualSource-1);
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
 	jbox_redraw((t_jbox *)x);
 }
 
 
 // bouge une source en donnant (index,x,y);
-void hoaspat_move(t_hoaspat *x, t_symbol *s, short ac, t_atom *av)
+void hoamap_move(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
 	int source = -1;
 	double coord1, coord2;
@@ -805,7 +805,7 @@ void hoaspat_move(t_hoaspat *x, t_symbol *s, short ac, t_atom *av)
 }
 
 // supprime le dernière source ajoutée;
-void hoaspat_remove(t_hoaspat *x){
+void hoamap_remove(t_hoamap *x){
 	x->f_numberOfSources--;
 	if(x->f_numberOfSources <= -1) x->f_numberOfSources = 0;
 	update_source_selection(x, x->f_actualSource, 0);
@@ -816,7 +816,7 @@ void hoaspat_remove(t_hoaspat *x){
 }
 
 // fait place nette (plus acune sources);
-void hoaspat_clear(t_hoaspat *x){
+void hoamap_clear(t_hoamap *x){
 	int i;
 	for(i=0; i<= x->f_numberOfSources; i++){
 		x->f_sources[i].pos.x = x->f_sources[i].pos.y = x->f_sources[i].degree = x->f_sources[i].distance = 0;
@@ -829,7 +829,7 @@ void hoaspat_clear(t_hoaspat *x){
 	jbox_redraw((t_jbox *)x);
 }
 
-void hoaspat_zoom(t_hoaspat *x, double v){
+void hoamap_zoom(t_hoamap *x, double v){
     if (v>1) {v = 1;}
     else if (v < 0.1) {v = 0.1; }
     x->f_zoomFactor = v;
@@ -847,7 +847,7 @@ void hoaspat_zoom(t_hoaspat *x, double v){
 
 // pas implémentée
 /*
-void hoaspat_shape(t_hoaspat *x, int v){
+void hoamap_shape(t_hoamap *x, int v){
     if (v <= 0) { v = 0; }
     else if (v >= 1) { v = 1; }
     x->f_arrayType = v;
@@ -856,7 +856,7 @@ void hoaspat_shape(t_hoaspat *x, int v){
 
 // pas implémentée (wfs specific)
 /*
-void hoaspat_delta(t_hoaspat *x, double v){
+void hoamap_delta(t_hoamap *x, double v){
     if (v <= 0) { v = 0; };
     //else if (v >= 1) { v = 1 };
     x->f_speakerSpacement = v;
@@ -865,7 +865,7 @@ void hoaspat_delta(t_hoaspat *x, double v){
 }
 */
 
-void hoaspat_distance(t_hoaspat *x, double v){
+void hoamap_distance(t_hoamap *x, double v){
     if (v <= 0) { v = 0; };
     x->f_speakerToHeadDistance = v;
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
@@ -873,20 +873,20 @@ void hoaspat_distance(t_hoaspat *x, double v){
 	jbox_redraw((t_jbox *)x);
 }
 
-void hoaspat_display_angle(t_hoaspat *x, int v){
+void hoamap_display_angle(t_hoamap *x, int v){
 	if (v != 0) v = 1;
 	object_attr_setchar(x, gensym("display_angle"), (char)v);
 }
-void hoaspat_display_grid(t_hoaspat *x, int v){
+void hoamap_display_grid(t_hoamap *x, int v){
 	if (v != 0) v = 1;
 	object_attr_setchar(x, gensym("display_grid"), (char)v);
 }
-void hoaspat_display_cartvectors(t_hoaspat *x, int v){
+void hoamap_display_cartvectors(t_hoamap *x, int v){
 	if (v != 0) v = 1;
 	object_attr_setchar(x, gensym("display_cartvectors"), (char)v);
 }
 
-t_max_err hoaspat_notify(t_hoaspat *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 	if (msg == gensym("attr_modified"))
@@ -948,7 +948,7 @@ t_max_err hoaspat_notify(t_hoaspat *x, t_symbol *s, t_symbol *msg, void *sender,
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
-void hoaspat_paint(t_hoaspat *x, t_object *view)
+void hoamap_paint(t_hoamap *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -969,7 +969,7 @@ void hoaspat_paint(t_hoaspat *x, t_object *view)
 	draw_rect_selection(x, view, &rect);
 }
 
-void draw_sources(t_hoaspat *x,  t_object *view, t_rect *rect)
+void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double size, fontsize;
@@ -1091,7 +1091,7 @@ void draw_sources(t_hoaspat *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("sources_layer"), 0., 0.);
 }
 
-void draw_angle(t_hoaspat *x,  t_object *view, t_rect *rect){
+void draw_angle(t_hoamap *x,  t_object *view, t_rect *rect){
 	int i;
 	double zoom = x->f_zoomFactor;
 	double w = rect->width;
@@ -1156,7 +1156,7 @@ void draw_angle(t_hoaspat *x,  t_object *view, t_rect *rect){
 	jbox_paint_layer((t_object *)x, view, gensym("angle_layer"), 0., 0.);
 }
 
-void draw_head(t_hoaspat *x,  t_object *view, t_rect *rect)
+void draw_head(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	double size;
 	//double w = rect->width;
@@ -1213,7 +1213,7 @@ void draw_head(t_hoaspat *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("head_layer"), 0., 0.);
 }
 
-void draw_cartVectors(t_hoaspat *x,  t_object *view, t_rect *rect)
+void draw_cartVectors(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	double zoom = x->f_zoomFactor;
 	double w = rect->width;
@@ -1264,7 +1264,7 @@ void draw_cartVectors(t_hoaspat *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("cartvectors_layer"), 0., 0.);
 }
 
-void draw_grid(t_hoaspat *x,  t_object *view, t_rect *rect)
+void draw_grid(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	double w = rect->width;	
 	t_jfont *jf;
@@ -1325,7 +1325,7 @@ double nextPow2(double aValue) {
 	return (pow)/4;
 }
 
-void draw_speakers(t_hoaspat *x, t_object *view, t_rect *rect){
+void draw_speakers(t_hoamap *x, t_object *view, t_rect *rect){
 	//t_jrgba hpcolor = {0,0,0,0.8};
 	//double w = x->rect.width;
 	t_jrgba hpcolor = x->f_colorLs;
@@ -1376,7 +1376,7 @@ void draw_speakers(t_hoaspat *x, t_object *view, t_rect *rect){
 	jbox_paint_layer((t_object *)x, view, gensym("ls_layer"), 0., 0.);
 }
 
-void draw_oneLs(t_hoaspat *x, t_jgraphics *g, double posX, double posY, double rotDegree, double size){
+void draw_oneLs(t_hoamap *x, t_jgraphics *g, double posX, double posY, double rotDegree, double size){
 	
 	double w = x->rect.width;
 	t_jmatrix transform;
@@ -1399,7 +1399,7 @@ void draw_oneLs(t_hoaspat *x, t_jgraphics *g, double posX, double posY, double r
 	//jgraphics_path_roundcorners(g, size*0.25);
 }
 
-void draw_background(t_hoaspat *x,  t_object *view, t_rect *rect)
+void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	double w = x->rect.width;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
@@ -1425,7 +1425,7 @@ void draw_background(t_hoaspat *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
 }
 
-void draw_rect_selection(t_hoaspat *x,  t_object *view, t_rect *rect)
+void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("rect_selection_layer"), rect->width, rect->height);
 	t_rect sel;
@@ -1463,7 +1463,7 @@ void draw_rect_selection(t_hoaspat *x,  t_object *view, t_rect *rect)
 // Mouse :
 
 // Quand la souris rentre dans l'objet en up :
-void hoaspat_mouseenter(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	//post("mouseenter");
 }
@@ -1471,14 +1471,14 @@ void hoaspat_mouseenter(t_hoaspat *x, t_object *patcherview, t_pt pt, long modif
 ////////////////////////////
 
 // Quand la souris quitte l'objet apres y être entree en up :
-void hoaspat_mouseleave(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	//post("mouseleave");
 }
 
 ////////////////////////////
 
-int which_source_pointed(t_hoaspat *x, t_pt pt)
+int which_source_pointed(t_hoamap *x, t_pt pt)
 {
 	int i;
 	int sourcePointed = -1;
@@ -1490,14 +1490,14 @@ int which_source_pointed(t_hoaspat *x, t_pt pt)
 	return sourcePointed;
 }
 
-void hoaspat_mousedown(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {	
 	t_pt cart_pt = pixtocar(x, pt);
 	//int i;
 	
 	// rajoute une source si aucune n'est presente.
 	if(x->f_numberOfSources == 0) {
-		hoaspat_add(x, cart_pt.x , cart_pt.y);
+		hoamap_add(x, cart_pt.x , cart_pt.y);
 	}
 	
 	int sourceClicked = which_source_pointed(x, pt);
@@ -1508,7 +1508,7 @@ void hoaspat_mousedown(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifi
 		   update_source_selection(x, sourceClicked, -1);
 	   }else {
 		   jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_POINTINGHAND);
-		   hoaspat_outone(x, sourceClicked);
+		   hoamap_outone(x, sourceClicked);
 	   }
 	   x->f_aSourceIsSelected = 1;
 	   x->f_actualSource = sourceClicked + 1;
@@ -1541,7 +1541,7 @@ void hoaspat_mousedown(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifi
 }
 
 
-void hoaspat_mousedrag(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	int i;
 	t_pol polin;
@@ -1637,7 +1637,7 @@ void hoaspat_mousedrag(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifi
 
 ////////////////////////////
 
-void hoaspat_mouseup(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	t_rect sel = x->f_rect_selection;
 	t_pt pix;
@@ -1671,13 +1671,13 @@ void hoaspat_mouseup(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifier
 ////////////////////////////
 
 // focus sur l'objet :
-void hoaspat_focusgained(t_hoaspat *x, t_object *patcherview)
+void hoamap_focusgained(t_hoamap *x, t_object *patcherview)
 {
 	//post("focusGain");
 }
 
 // focus perdu sur l'objet :
-void hoaspat_focuslost(t_hoaspat *x, t_object *patcherview)
+void hoamap_focuslost(t_hoamap *x, t_object *patcherview)
 {
 	//post("You have lost the keyboard focus.");
 	//jbox_redraw((t_jbox *)x);
@@ -1687,7 +1687,7 @@ void hoaspat_focuslost(t_hoaspat *x, t_object *patcherview)
 
 // Mouse Move (when mouse up move over the locked view inside the Objet) :
 
-void hoaspat_mousemove(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	int i;
 	int sourcePointed = 0;
@@ -1716,7 +1716,7 @@ void hoaspat_mousemove(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifi
 
 // Mouse Delta (calcul la difference entre la position du dernier down et position courante) :
 
-void hoaspat_mousedragdelta(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoamap_mousedragdelta(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	//click'n drag method :
 	//post("mousedragdelta");
@@ -1724,7 +1724,7 @@ void hoaspat_mousedragdelta(t_hoaspat *x, t_object *patcherview, t_pt pt, long m
 }
 
 // key intercept
-long hoaspat_key(t_hoaspat *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
+long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
 {	
 	//post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
 	
@@ -1752,7 +1752,7 @@ long hoaspat_key(t_hoaspat *x, t_object *patcherview, long keycode, long modifie
 }
 
 
-void hoaspat_mousewheel(t_hoaspat *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
+void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
 {
 	// alt (mac) = 8 | 264
 	long alt = eAltKey;
@@ -1763,6 +1763,6 @@ void hoaspat_mousewheel(t_hoaspat *x, t_object *patcherview, t_pt pt, long modif
 	
 	if (modifiers == alt) {
 		newZoom = x->f_zoomFactor + y_inc;
-		hoaspat_zoom(x, newZoom);
+		hoamap_zoom(x, newZoom);
 	}
 }

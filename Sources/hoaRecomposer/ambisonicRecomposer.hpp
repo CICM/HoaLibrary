@@ -21,7 +21,7 @@
 #define DEF_AMBISONICRECOMPOSER
 
 #define M_2PI 2*M_PI
-#define NUMBEROFCIRCLEPOINTS 360000
+#define NUMBEROFCIRCLEPOINTS 36000
 #define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
 
 #include <stdio.h>

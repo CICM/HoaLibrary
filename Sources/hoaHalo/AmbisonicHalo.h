@@ -68,13 +68,13 @@ public:
 	void process_azimuth_spread(double *anInputs, double* anOutputs, double aTheta, double aWidenValue)
 	{
 		m_encoder->setAzimtuh(aTheta);
-		m_wider->setWidenValue(aWidenValue);
+		setSpread(aWidenValue);
 		process(anInputs, anOutputs);
 	}
 
 	void process_spread(double *anInputs, double* anOutputs, double aWidenValue)
 	{
-		m_wider->setWidenValue(aWidenValue);
+		setSpread(aWidenValue);
 		process(anInputs, anOutputs);
 	}
 
@@ -89,11 +89,14 @@ public:
 		double sum = 0.;
 		m_encoder->process(0.5, anOutputs);
 		anOutputs[0] /= 2.;
-		m_wider->process(anOutputs, anOutputs);
+		
 		m_optim->process(anOutputs, anOutputs);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			sum += anOutputs[i] * anInputs[i];
 		m_encoder->process(sum, anOutputs);
+		
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			anOutputs[i] = anOutputs[i] * m_spread + (1. - m_spread) * anInputs[i];
 	}
 
 	/* Perform sample block */
@@ -166,13 +169,13 @@ public:
 	void process_azimuth_spread(float *anInputs, float* anOutputs, float aTheta, float aWidenValue)
 	{
 		m_encoder->setAzimtuh(aTheta);
-		m_wider->setWidenValue(aWidenValue);
+		setSpread(aWidenValue);
 		process(anInputs, anOutputs);
 	}
 	
 	void process_spread(float *anInputs, float* anOutputs, float aWidenValue)
 	{
-		m_wider->setWidenValue(aWidenValue);
+		setSpread(aWidenValue);
 		process(anInputs, anOutputs);
 	}
 	
@@ -187,11 +190,14 @@ public:
 		float sum = 0.;
 		m_encoder->process(0.5f, anOutputs);
 		anOutputs[0] /= 2.;
-		m_wider->process(anOutputs, anOutputs);
+	
 		m_optim->process(anOutputs, anOutputs);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			sum += anOutputs[i] * anInputs[i];
 		m_encoder->process(sum, anOutputs);
+		
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			anOutputs[i] = anOutputs[i] * m_spread + (1. - m_spread) * anInputs[i];
 	}
 	
 	/* Perform sample block */

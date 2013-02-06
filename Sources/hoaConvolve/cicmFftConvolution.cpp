@@ -49,15 +49,18 @@ FftConvolution::FftConvolution(long aWindowSize, long aNumberOfInstances)
 	
 }
 
-void FftConvolution::loadImpulseResponse(Cicm_Signal* anImpulseResponse)
+void FftConvolution::loadImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize)
 {
 	Cicm_Signal *datas;
 	Cicm_signal_malloc(datas, m_window_size);
+	int sizeMax = m_array_size;
+	if(sizeMax > aSize)
+		sizeMax = aSize;
 	for(int i = 0; i < m_number_of_instances; i++)
 	{
-		for(int j = 0; j < m_array_size; j++)
+		for(int j = 0; j < sizeMax; j++)
 			datas[j] = anImpulseResponse[j + m_array_size * i] * m_fft_instance->getScale();
-		for(int j = m_array_size; j < m_window_size; j++)
+		for(int j = sizeMax; j < m_window_size; j++)
 			datas[j] = 0.;
 		
 		m_fft_instance->forward(datas, m_impul_complexes[i]);

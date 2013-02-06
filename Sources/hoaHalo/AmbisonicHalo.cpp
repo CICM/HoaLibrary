@@ -38,6 +38,7 @@ AmbisonicHalo::AmbisonicHalo(long anOrder, long aVectorSize)
 		m_output_vector[i]	= 0.;
 	}
 
+	setSpread(1.);
 	setVectorSize(aVectorSize);
 }
 
@@ -78,7 +79,9 @@ void AmbisonicHalo::setVectorSize(int aVectorSize)
 
 void AmbisonicHalo::setSpread(double aWidenValue)
 {
-	m_spread = aWidenValue;
+	m_spread = Tools::clip(aWidenValue, 0., 1.);
+	m_spread = sqrt(m_spread);
+	m_spread = sqrt(m_spread);
 }
 
 AmbisonicHalo::~AmbisonicHalo()
