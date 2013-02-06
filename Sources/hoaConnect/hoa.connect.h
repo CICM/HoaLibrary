@@ -51,16 +51,13 @@ typedef struct  _connect
 	
 	t_jrgba		f_colorPositiv;
 	t_jrgba		f_colorNegativ;
+	t_jrgba		f_colorPlane;
 	
 	int			f_nbSelected;
-	int			f_objectab_cleaned;
-	int			f_tab_index;
-	
 	int			f_inc;
 	int			f_harmonics;
 	int			f_output;
 	
-	int			f_condition;
 	t_rect		f_jr;
 } t_connect;
 
@@ -74,13 +71,10 @@ void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive,
 void connect_attach(t_connect *x);
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void connect_list(t_connect *x, t_symbol *s, long argc, t_atom *argv);
-void ordonnerTableau(int *positions, t_object **objects, int size);
 
-int validPos(t_rect jr, t_rect f_jr, int patchX, int patchY);
 int validName(t_object *box);
 
 void color_patchline(t_connect *x);
 int validConditionColor(t_object *obj);
-void clear_objectab(t_connect *x, t_object *objectab[], long tablen);
 
 #endif
