@@ -125,71 +125,57 @@ void connect_bang(t_connect *x)
  
 	x->f_inc = 0;
 	
-	for (i = 0; i < x->f_nbSelected; i++) 
-	{	
-		if(validName(x->f_object[i]))
-		{
-			x->f_object[x->f_inc++] = x->f_object[i];
-		}
-	
-	}
-	
-	for(i = 1; i < x->f_inc; i++)
+	if (x->f_nbSelected > 0) 
 	{
-		if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~") || object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.projector~"))
-		{
-			for(j = 0; j < x->f_output; j++)
+		for (i = 0; i < x->f_nbSelected; i++) 
+		{	
+			if(validName(x->f_object[i]))
 			{
-				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+				x->f_object[x->f_inc++] = x->f_object[i];
 			}
-		}
-		else if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("jpatcher"))
-		{
-			for(j = 0; j < x->f_harmonics; j++)
-			{
-				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
-			}
-		}
-		else
-		{
-			for(j = 0; j < x->f_harmonics; j++)
-			{
-				connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
-			}
+			
 		}
 		
+		for(i = 1; i < x->f_inc; i++)
+		{
+			if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~") || object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.projector~"))
+			{
+				for(j = 0; j < x->f_output; j++)
+				{
+					connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+				}
+			}
+			else if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("jpatcher"))
+			{
+				for(j = 0; j < x->f_harmonics; j++)
+				{
+					connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+				}
+			}
+			else
+			{
+				for(j = 0; j < x->f_harmonics; j++)
+				{
+					connect_connect(x->f_patcher, x->f_object[i -1], j, x->f_object[i], j);
+				}
+			}
+			
+		}
+		
+		for(i  = 0; i < CONNECT_MAX_TAB; i++)
+			x->f_object[i] = NULL;
+		
+		jpatcher_set_dirty(x->f_patcherview, true);
 	}
-	
-	for(i  = 0; i < CONNECT_MAX_TAB; i++)
-		x->f_object[i] = NULL;
 	
 	x->f_nbSelected = 0;
 	
 	color_patchline(x);
-	
-	jpatcher_set_dirty(x->f_patcherview, true);
-	
 }
 
 void color_patchline(t_connect *x)
 {
 	t_object *line, *obj, *patcher;
-	t_jrgba rouge, bleu, blanc;
-	
-	blanc.red = 1;
-	blanc.green = 1;
-	blanc.blue = 1;
-	blanc.alpha = 1;
-	
-	bleu.red = rouge.blue = 0;
-	bleu.green = rouge.green = 0;
-	bleu.blue = rouge.red = 1;
-	bleu.alpha = rouge.alpha =1;
-	
-	//bleu = x->f_colorPositiv;
-	
-	rouge = x->f_colorPositiv;
-	
 	object_obex_lookup(x, gensym("#P"), &patcher);
 	for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line)) 
 	{
