@@ -27,15 +27,21 @@ int main(void)
 	class_addmethod(c, (method)connect_notify,				"notify",		A_CANT, 0);
 	class_addmethod(c, (method)connect_bang,				"bang",			A_CANT,	0);
 	
-	/*
-	CLASS_ATTR_RGBA				(c, "poscolor", 0, t_connect, f_colorPositiv);
-	CLASS_ATTR_CATEGORY			(c, "poscolor", 0, "Behavior");
-	CLASS_ATTR_STYLE			(c, "poscolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "poscolor", 0, "Positif Color");
-	CLASS_ATTR_ORDER			(c, "poscolor", 0, "0");
-	CLASS_ATTR_DEFAULT			(c, "poscolor", 0, "0. 0. 1. 1.");
-	CLASS_ATTR_SAVE				(c, "poscolor", 1);
-	*/
+	// defaults don't work with non-UI objects (an optimization)
+	CLASS_ATTR_CATEGORY(c, "poscolor", 0, "Behavior");
+	CLASS_ATTR_RGBA(c, "poscolor", 0, t_connect, f_colorPositiv);
+	CLASS_ATTR_ACCESSORS(c, "poscolor", NULL, connect_setattr_poscolor);
+	CLASS_ATTR_SAVE(c, "poscolor", 1);
+	
+	CLASS_ATTR_CATEGORY(c, "negcolor", 0, "Behavior");
+	CLASS_ATTR_RGBA(c, "negcolor", 0, t_connect, f_colorNegativ);
+	CLASS_ATTR_ACCESSORS(c, "negcolor", NULL, connect_setattr_negcolor);
+	CLASS_ATTR_SAVE(c, "poscolor", 1);
+	
+	CLASS_ATTR_CATEGORY(c, "planecolor", 0, "Behavior");
+	CLASS_ATTR_RGBA(c, "planecolor", 0, t_connect, f_colorPlane);
+	CLASS_ATTR_ACCESSORS(c, "planecolor", NULL, connect_setattr_planecolor);
+	CLASS_ATTR_SAVE(c, "poscolor", 1);
 	
 	class_register(CLASS_BOX, c);
 	connect_class = c;
@@ -58,6 +64,13 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 		else 
 			x->f_output = x->f_harmonics;
 		
+		// colors setup
+		x->f_colorPositiv.red = x->f_colorPositiv.alpha = 1.;
+		x->f_colorPositiv.green = x->f_colorPositiv.blue = 0.;
+		x->f_colorNegativ.blue = x->f_colorNegativ.alpha = 1.;
+		x->f_colorNegativ.green = x->f_colorNegativ.red = 0.;
+		x->f_colorPlane.red = x->f_colorPlane.green = x->f_colorPlane.blue = x->f_colorPlane.alpha = 1.;
+		
 		//object_obex_lookup(x, gensym("#P"), &x->f_patcher); // passé dans la fonction connect_attach
 		defer_low(x, (method)connect_attach, NULL, 0, NULL);
 		
@@ -72,6 +85,38 @@ void connect_free(t_connect *x)
 {
 	if(x->f_patcherview)
 		object_detach_byptr(x, x->f_patcherview);
+}
+
+// custom attr setter changes colors of patchlines
+t_max_err connect_setattr_poscolor(t_connect *x, void *attr, long argc, t_atom *argv)
+{
+	if (argc >= 4) {
+		x->f_colorPositiv.red = atom_getfloat(argv);
+		x->f_colorPositiv.green = atom_getfloat(argv + 1);
+		x->f_colorPositiv.blue = atom_getfloat(argv + 2);
+		x->f_colorPositiv.alpha = atom_getfloat(argv + 3);
+	}
+	return 0;
+}
+t_max_err connect_setattr_negcolor(t_connect *x, void *attr, long argc, t_atom *argv)
+{
+	if (argc >= 4) {
+		x->f_colorNegativ.red = atom_getfloat(argv);
+		x->f_colorNegativ.green = atom_getfloat(argv + 1);
+		x->f_colorNegativ.blue = atom_getfloat(argv + 2);
+		x->f_colorNegativ.alpha = atom_getfloat(argv + 3);
+	}
+	return 0;
+}
+t_max_err connect_setattr_planecolor(t_connect *x, void *attr, long argc, t_atom *argv)
+{
+	if (argc >= 4) {
+		x->f_colorPlane.red = atom_getfloat(argv);
+		x->f_colorPlane.green = atom_getfloat(argv + 1);
+		x->f_colorPlane.blue = atom_getfloat(argv + 2);
+		x->f_colorPlane.alpha = atom_getfloat(argv + 3);
+	}
+	return 0;
 }
 
 void connect_bang(t_connect *x)
@@ -143,6 +188,8 @@ void color_patchline(t_connect *x)
 	
 	//bleu = x->f_colorPositiv;
 	
+	rouge = x->f_colorPositiv;
+	
 	object_obex_lookup(x, gensym("#P"), &patcher);
 	for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line)) 
 	{
@@ -151,13 +198,13 @@ void color_patchline(t_connect *x)
 		if (validConditionColor(obj) == 1)
 		{ 
 			if (jpatchline_get_inletnum(line) % 2 == 1) 
-				jpatchline_set_color(line, &rouge);
+				jpatchline_set_color(line, &x->f_colorPositiv);
 			else
-				jpatchline_set_color(line, &bleu);			
+				jpatchline_set_color(line, &x->f_colorNegativ);			
 		}
 		else if (validConditionColor(obj) == 2)
 		{ 
-			jpatchline_set_color(line, &blanc);		
+			jpatchline_set_color(line, &x->f_colorPlane);		
 		}
 	}
 }

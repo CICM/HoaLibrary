@@ -72,6 +72,10 @@ void connect_attach(t_connect *x);
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void connect_list(t_connect *x, t_symbol *s, long argc, t_atom *argv);
 
+t_max_err connect_setattr_poscolor(t_connect *x, void *attr, long argc, t_atom *argv);
+t_max_err connect_setattr_negcolor(t_connect *x, void *attr, long argc, t_atom *argv);
+t_max_err connect_setattr_planecolor(t_connect *x, void *attr, long argc, t_atom *argv);
+
 int validName(t_object *box);
 
 void color_patchline(t_connect *x);
