@@ -12,6 +12,7 @@
 		2CD5D13B1675F293008009B2 /* hoaHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD5D13A1675F293008009B2 /* hoaHeader.h */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
 		4E0674E714DDA54E00C91AB7 /* AmbisonicEncode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */; };
+		8F9F910516C2CD1C000827DF /* AmbisonicEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9F910416C2CD1C000827DF /* AmbisonicEncode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		2FBBEAE508F335360078DB84 /* hoa.encoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.encoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncode.cpp; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
+		8F9F910416C2CD1C000827DF /* AmbisonicEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicEncode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				2CD5D13A1675F293008009B2 /* hoaHeader.h */,
 				0E6DC912161359A60001AAF5 /* hoa.encoder~.cpp */,
+				8F9F910416C2CD1C000827DF /* AmbisonicEncode.h */,
 				4E0674E514DDA54E00C91AB7 /* AmbisonicEncode.cpp */,
 				22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */,
 			);
@@ -83,6 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CD5D13B1675F293008009B2 /* hoaHeader.h in Headers */,
+				8F9F910516C2CD1C000827DF /* AmbisonicEncode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
