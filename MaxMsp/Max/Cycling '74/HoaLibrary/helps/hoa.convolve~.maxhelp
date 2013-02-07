@@ -2679,7 +2679,7 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -3900,7 +3900,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 624.816345, 134.0, 333.0, 47.0 ],
+					"patching_rect" : [ 624.816345, 134.0, 336.0, 47.0 ],
 					"text" : "hoa.convolve~ have auto-completation messages to facilitate the setting of attributes. Here, the different ways to set attributes are explained.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[3]"
@@ -3940,13 +3940,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-21",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 624.816345, 221.0, 228.683655, 31.0 ],
-					"text" : "buffers hoaIrM.1 hoaIrM.2 hoaIrM.3 hoaIrM.4 hoaIrM.5 hoaIrM.6 hoaIrM.7"
+					"patching_rect" : [ 624.816345, 221.0, 327.0, 18.0 ],
+					"text" : "buffers hoaIr.1 hoaIr.2 hoaIr.3 hoaIr.4 hoaIr.5 hoaIr.6 hoaIr.7"
 				}
 
 			}
@@ -3959,8 +3958,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 658.5, 296.0, 103.0, 18.0 ],
-					"text" : "buffers all hoaIrM"
+					"patching_rect" : [ 658.5, 296.0, 93.0, 18.0 ],
+					"text" : "buffers all hoaIr"
 				}
 
 			}
@@ -4461,7 +4460,7 @@
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 30.0, 448.0, 245.81633, 32.0 ],
 					"saved_object_attributes" : 					{
-						"buffers" : [ "none", "none", "none", "none", "none", "none", "none" ],
+						"buffers" : [ "hoaIr.1", "hoaIr.2", "hoaIr.3", "hoaIr.4", "hoaIr.5", "hoaIr.6", "hoaIr.7" ],
 						"channels" : [ 1, 1, 1, 1, 1, 1, 1 ],
 						"limits" : [ 0, 0, 0, 0, 0, 0, 0 ],
 						"offsets" : [ 0, 128, 256, 512, 1024, 2048, 4096 ]

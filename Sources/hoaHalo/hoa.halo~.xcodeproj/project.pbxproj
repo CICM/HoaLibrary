@@ -263,14 +263,11 @@
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/include,
+					/usr/local/include/gsl,
 				);
 				INFOPLIST_FILE = ../Info.plist;
-				LIBRARY_SEARCH_PATHS = /Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/include/gsl;
 				OTHER_LDFLAGS = (
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_sequential.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_intel.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_core.a,
 					/usr/local/lib/libgsl.a,
 					"-lm",
 				);
@@ -297,14 +294,11 @@
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/include,
+					/usr/local/include/gsl,
 				);
 				INFOPLIST_FILE = ../Info.plist;
-				LIBRARY_SEARCH_PATHS = /Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/include/gsl;
 				OTHER_LDFLAGS = (
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_sequential.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_intel.a,
-					/Developer/Applications/opt/intel/composer_xe_2011_sp1.11.344/mkl/lib/libmkl_core.a,
 					/usr/local/lib/libgsl.a,
 					"-lm",
 				);

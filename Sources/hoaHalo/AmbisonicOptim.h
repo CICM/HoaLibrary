@@ -25,7 +25,7 @@
 #include <math.h>
 #include <vector>
 #include <string>
-//#include <gsl/gsl_sf.h>
+#include <gsl/gsl_sf.h>
 #include "cicmTools.h"
 
 class AmbisonicOptim
