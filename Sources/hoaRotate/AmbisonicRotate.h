@@ -20,13 +20,7 @@
 #ifndef DEF_AmbisonicRotate
 #define DEF_AmbisonicRotate
 
-#include "math.h"
-#include <complex>
-#include <stdio.h>
-#include <vector>
-#include "cicmTools.h"
-
-#define NUMBEROFCIRCLEPOINTS 360000
+#include "../cicmTools.h"
 
 class AmbisonicRotate{
 	

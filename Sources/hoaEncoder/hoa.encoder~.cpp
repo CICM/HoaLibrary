@@ -17,7 +17,7 @@
  *
  */
 
-#include "AmbisonicEncode.h"
+#include "AmbisonicEncoder.h"
 
 extern "C"
 {
@@ -32,7 +32,7 @@ int postons = 0;
 typedef struct _HoaEncode 
 {
 	t_pxobject					f_ob;			
-	AmbisonicEncode				*f_ambiEncoder;
+	AmbisonicEncoder			*f_ambiEncoder;
 	
 	long						f_inputNumber;
 	long						f_outputNumber;
@@ -58,7 +58,7 @@ void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, lo
 void HoaEncode_perform64vec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void HoaEncode_perform64Offsetvec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void *HoaEncode_class;
+t_class *HoaEncode_class;
     
 
 int main(void)
@@ -94,7 +94,7 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 	t_HoaEncode *x = NULL;
 	int	order = 4;
 	std::string mode = "basic";
-	if (x = (t_HoaEncode *)object_alloc((t_class*)HoaEncode_class)) 
+	if (x = (t_HoaEncode *)object_alloc(HoaEncode_class)) 
 	{		
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
@@ -102,10 +102,10 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv + 1) == A_SYM)
 			mode = atom_getsym(argv + 1)->s_name;
 		
-		x->f_ambiEncoder = new AmbisonicEncode(order, mode, sys_getblksize());
+		x->f_ambiEncoder = new AmbisonicEncoder(order, mode, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_ambiEncoder->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -115,19 +115,19 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaEncode_float(t_HoaEncode *x, double f)
 {
-	x->f_ambiEncoder->computeCoefs(f);
+	x->f_ambiEncoder->setAzimtuh(f);
 }
 
 void HoaEncode_int(t_HoaEncode *x, long n)
 {
-	x->f_ambiEncoder->computeCoefs(n);
+	x->f_ambiEncoder->setAzimtuh(n);
 }
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiEncoder->setVectorSize(maxvectorsize);
-	x->f_inputNumber = x->f_ambiEncoder->getParameters("numberOfInputs");
-	if(x->f_ambiEncoder->getParameters("mode"))
+	x->f_inputNumber = x->f_ambiEncoder->getNumberOfInputs();
+	if(x->f_ambiEncoder->getMode() == "split")
 	{
 		if(count[x->f_inputNumber - 1])
 			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64vec, 0, NULL);
@@ -172,9 +172,9 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 	t_int **sigvec;
 	
 	x->f_ambiEncoder->setVectorSize(sp[0]->s_n);
-	x->f_inputNumber = x->f_ambiEncoder->getParameters("numberOfInputs");
-	x->f_outputNumber = x->f_ambiEncoder->getParameters("numberOfOutputs");
-	if(x->f_ambiEncoder->getParameters("mode"))
+	x->f_inputNumber = x->f_ambiEncoder->getNumberOfInputs();
+	x->f_outputNumber = x->f_ambiEncoder->getNumberOfOutputs();
+	if(x->f_ambiEncoder->getMode() == "split")
 	{
 		pointer_count = x->f_outputNumber + 2 + x->f_inputNumber;
 		
@@ -264,9 +264,9 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 	
 	if (m == ASSIST_INLET) 
 	{
-		if(x->f_ambiEncoder->getParameters("mode"))
+		if(x->f_ambiEncoder->getMode() == "split")
 		{
-			if(a < x->f_ambiEncoder->getParameters("order") + 1)
+			if(a < x->f_ambiEncoder->getOrder() + 1)
 			{
 				sprintf(s,"(Signal) Order %ld", a);
 			}

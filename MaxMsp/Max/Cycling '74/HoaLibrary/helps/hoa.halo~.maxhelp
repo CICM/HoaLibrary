@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1440.0, 722.0 ],
+		"rect" : [ 0.0, 100.0, 1128.0, 666.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -351,6 +351,7 @@
 			}
 , 			{
 				"box" : 				{
+					"azimuth" : 4.112031,
 					"bgcolor" : [ 1.0, 1.0, 0.988235, 0.0 ],
 					"borderboxcolor" : [ 0.501961, 0.501961, 0.501961, 0.0 ],
 					"cicolor" : [ 0.0, 0.0, 0.011765, 0.0 ],
@@ -363,8 +364,9 @@
 					"numoutlets" : 3,
 					"order" : 7,
 					"outlettype" : [ "float", "float", "" ],
-					"patching_rect" : [ 394.75, 287.75, 256.5, 256.5 ],
-					"varname" : "hoaControl"
+					"patching_rect" : [ 395.25, 287.75, 256.5, 256.5 ],
+					"varname" : "hoaControl",
+					"wide" : 0.00255
 				}
 
 			}
@@ -2349,6 +2351,7 @@
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"gridcolor" : [ 0.0, 0.0, 0.0, 0.0 ],
+					"headcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-37",
 					"ignoreclick" : 1,
 					"lscolor" : [ 0.0, 0.0, 0.0, 0.0 ],
@@ -2356,7 +2359,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "list", "list", "" ],
-					"patching_rect" : [ 373.0, 266.0, 300.0, 300.0 ],
+					"patching_rect" : [ 373.5, 266.0, 300.0, 300.0 ],
 					"speaker_number" : 16,
 					"varname" : "hoaSources"
 				}
@@ -2395,7 +2398,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 748.0, 142.0, 218.0, 87.0 ],
+						"rect" : [ 748.0, 198.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2879,7 +2882,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 752.0, 164.0, 175.0, 67.0 ],
+										"rect" : [ 752.0, 220.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -3645,7 +3648,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 752.0, 164.0, 179.0, 66.0 ],
+										"rect" : [ 752.0, 220.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -3855,7 +3858,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 752.0, 164.0, 178.0, 65.0 ],
+										"rect" : [ 752.0, 220.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -4549,7 +4552,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 752.0, 164.0, 179.0, 65.0 ],
+										"rect" : [ 752.0, 220.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -5027,7 +5030,7 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -5870,7 +5873,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 373.0, 143.0, 218.0, 87.0 ],
+						"rect" : [ 373.0, 199.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -6354,7 +6357,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 377.0, 165.0, 175.0, 67.0 ],
+										"rect" : [ 377.0, 221.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -7120,7 +7123,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 377.0, 165.0, 179.0, 66.0 ],
+										"rect" : [ 377.0, 221.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -7330,7 +7333,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 377.0, 165.0, 178.0, 65.0 ],
+										"rect" : [ 377.0, 221.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -8024,7 +8027,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 377.0, 165.0, 179.0, 65.0 ],
+										"rect" : [ 377.0, 221.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -8502,7 +8505,7 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -9560,6 +9563,10 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 508.0, 51.0, 99.0, 19.0 ],
+					"saved_object_attributes" : 					{
+						"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
+					}
+,
 					"text" : "hoa.connect 7 16"
 				}
 
@@ -9596,7 +9603,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 9.0, 142.0, 218.0, 87.0 ],
+						"rect" : [ 9.0, 198.0, 218.0, 87.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -10080,7 +10087,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 13.0, 164.0, 175.0, 67.0 ],
+										"rect" : [ 13.0, 220.0, 175.0, 67.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -10846,7 +10853,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 13.0, 164.0, 179.0, 66.0 ],
+										"rect" : [ 13.0, 220.0, 179.0, 66.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -11056,7 +11063,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 13.0, 164.0, 178.0, 65.0 ],
+										"rect" : [ 13.0, 220.0, 178.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -11750,7 +11757,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 13.0, 164.0, 179.0, 65.0 ],
+										"rect" : [ 13.0, 220.0, 179.0, 65.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -12228,7 +12235,7 @@
 													"fontname" : "Arial",
 													"fontsize" : 12.0,
 													"id" : "obj-5",
-													"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+													"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 													"maxclass" : "umenu",
 													"numinlets" : 1,
 													"numoutlets" : 3,
@@ -13097,6 +13104,7 @@
 			}
 , 			{
 				"box" : 				{
+					"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"energycolor" : [ 0.0, 0.0, 1.0, 0.0 ],
 					"id" : "obj-73",
@@ -13108,7 +13116,7 @@
 					"metersize" : 0.24,
 					"numinlets" : 16,
 					"numoutlets" : 0,
-					"patching_rect" : [ 373.0, 266.0, 300.0, 300.0 ]
+					"patching_rect" : [ 373.5, 266.0, 300.0, 300.0 ]
 				}
 
 			}

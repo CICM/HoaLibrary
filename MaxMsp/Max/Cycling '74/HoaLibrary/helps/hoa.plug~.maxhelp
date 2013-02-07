@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 186.0, 119.0, 1022.0, 650.0 ],
+		"rect" : [ 97.0, 69.0, 1037.0, 679.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -46,7 +46,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 186.0, 145.0, 1022.0, 624.0 ],
+						"rect" : [ 0.0, 26.0, 1037.0, 653.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -142,7 +142,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 347.0, 290.0, 218.0, 87.0 ],
+										"rect" : [ 161.0, 171.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -626,7 +626,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 351.0, 312.0, 175.0, 67.0 ],
+														"rect" : [ 165.0, 193.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -1392,7 +1392,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 351.0, 312.0, 179.0, 66.0 ],
+														"rect" : [ 165.0, 193.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -1602,7 +1602,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 351.0, 312.0, 178.0, 65.0 ],
+														"rect" : [ 165.0, 193.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -2296,7 +2296,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 351.0, 312.0, 179.0, 65.0 ],
+														"rect" : [ 165.0, 193.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -2774,7 +2774,7 @@
 																	"fontname" : "Arial",
 																	"fontsize" : 12.0,
 																	"id" : "obj-5",
-																	"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+																	"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 																	"maxclass" : "umenu",
 																	"numinlets" : 1,
 																	"numoutlets" : 3,
@@ -4883,7 +4883,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1022.0, 624.0 ],
+						"rect" : [ 0.0, 26.0, 1037.0, 653.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7599,7 +7599,7 @@
 																	"fontname" : "Arial",
 																	"fontsize" : 12.0,
 																	"id" : "obj-5",
-																	"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+																	"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 																	"maxclass" : "umenu",
 																	"numinlets" : 1,
 																	"numoutlets" : 3,
@@ -9482,7 +9482,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1022.0, 624.0 ],
+						"rect" : [ 0.0, 26.0, 1037.0, 653.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -19101,7 +19101,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1022.0, 624.0 ],
+						"rect" : [ 0.0, 26.0, 1037.0, 653.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -28006,7 +28006,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1022.0, 624.0 ],
+						"rect" : [ 97.0, 95.0, 1037.0, 653.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -28075,7 +28075,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 172.0, 155.0, 218.0, 87.0 ],
+										"rect" : [ 269.0, 236.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -28559,7 +28559,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 176.0, 177.0, 175.0, 67.0 ],
+														"rect" : [ 273.0, 258.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -29325,7 +29325,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 176.0, 177.0, 179.0, 66.0 ],
+														"rect" : [ 273.0, 258.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -29535,7 +29535,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 176.0, 177.0, 178.0, 65.0 ],
+														"rect" : [ 273.0, 258.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -30229,7 +30229,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 176.0, 177.0, 179.0, 65.0 ],
+														"rect" : [ 273.0, 258.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -30707,7 +30707,7 @@
 																	"fontname" : "Arial",
 																	"fontsize" : 12.0,
 																	"id" : "obj-5",
-																	"items" : [ "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
+																	"items" : [ "Browse...", ",", "<separator>", ",", "anton.aif", ",", "cello-f2.aif", ",", "cherokee.aif", ",", "drumLoop.aif", ",", "jongly.aif", ",", "rainstick.aif", ",", "sho0630.aif", ",", "vibes-a1.aif" ],
 																	"maxclass" : "umenu",
 																	"numinlets" : 1,
 																	"numoutlets" : 3,
@@ -32833,7 +32833,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1022.0, 624.0 ],
+						"rect" : [ 0.0, 26.0, 1037.0, 653.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
