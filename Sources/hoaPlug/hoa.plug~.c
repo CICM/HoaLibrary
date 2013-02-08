@@ -74,6 +74,8 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 			mode = 1;
 		else if(atom_getsym(argv+2) == gensym("pre"))
 			mode = 2;
+        else if(atom_getsym(argv+2) == gensym("out"))
+			mode = 3;
 		else 
 			mode = 0;
 	}
@@ -346,15 +348,36 @@ void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, in
 
 t_object* plug_inlet(t_object *patcher, int index, int order, int ninlet, int mode)
 {
-	int harm;
-	harm = floor((float)(index / ninlet));
-	index %= ninlet;
+    int harm, virtualSpeak;
+    
+    virtualSpeak = floor((float)index / (float)ninlet);
+	harm    = floor((float)(index / ninlet));
+	index  %= ninlet;
+    
 	if (mode == 1) 
-		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Harmonic %i Input %i\" @patching_rect %i 0 20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / ninlet);
+		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Harmonic %i Input %i\" @patching_rect %i 0           20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / ninlet);
 	else if (mode == 0)
 		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Input %i\" @patching_rect %i 0 20 20 ", ninlet, harm * 100 + (index * 100) / ninlet);
-	else
+	else if (mode == 2)
 		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Input %i\" @patching_rect %i 0 20 20 ", ninlet, harm * 100 + (index * 100) / ninlet);
+    else
+		return (t_object *)newobject_sprintf(patcher, "@maxclass inlet @comment \"Virtual Microphone %i Input %i\" @patching_rect %i 0 20 20 ", virtualSpeak, index, harm * 100 + (index * 100) / ninlet);
+}
+
+t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet, int mode)
+{
+	int harm, last, virtualSpeak;
+    
+    virtualSpeak = floor((float)index / (float)noutlet);
+	harm = floor((float)(index / noutlet));
+	last = index;
+	index %= noutlet;
+	if (mode == 2)
+		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Order %i Output %i\" @patching_rect %i 600 20 20 ", last, index, harm * 100 + (index * 100) / noutlet);
+    else if (mode == 3)
+		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Virtual Speaker %i Output %i\" @patching_rect %i 600 20 20 ", virtualSpeak, index, harm * 100 + (index * 100) / noutlet);
+	else
+		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Harmonic %i Output %i\" @patching_rect %i 600 20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / noutlet);
 }
 
 t_object *plug_script(t_object *patcher, int index, int order, int ninlet, int noutlet, int mode)
@@ -392,18 +415,6 @@ t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int m
 		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i @args %s\" @patching_rect %i 500 20 20", s->s_name, index, order, argus, index * 100);
 	else
 		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i @args %s\" @patching_rect %i 500 20 20", s->s_name, plug_harmonic(index, order), order, argus, index * 100);
-}
-	
-t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet, int mode)
-{
-	int harm, last;
-	harm = floor((float)(index / noutlet));
-	last = index;
-	index %= noutlet;
-	if (mode == 2)
-		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Order %i Output %i\" @patching_rect %i 600 20 20 ", last, index, harm * 100 + (index * 100) / noutlet);
-	else
-		return newobject_sprintf(patcher, "@maxclass outlet @comment \"Harmonic %i Output %i\" @patching_rect %i 600 20 20 ", plug_harmonic(harm, order), index, harm * 100 + (index * 100) / noutlet);
 }
 
 void plug_router(t_object *x, int order, t_symbol *s, int mode, t_atom *argv, int argc)
@@ -510,7 +521,7 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode, t_atom *argv, in
 		}
 			
 	}
-	else 
+	else if(mode == 2)
 	{
 		inlets = (t_object **)getbytes(ninlet * sizeof(t_object *));
 		for(i = 0; i < ninlet; i++)
@@ -548,6 +559,50 @@ void plug_router(t_object *x, int order, t_symbol *s, int mode, t_atom *argv, in
 		{
 			outlets[i] = plug_outlet(x, i, order, noutlet, mode);
 			plug_connect(x, patchs[(int)(i /noutlet)], (i % noutlet), outlets[i], 0);
+		}
+	}
+    else
+	{
+		router[0] = newobject_sprintf(x, "@maxclass newobj @text \"route open mute target\" @patching_rect 0 50 20 20");
+		router[1] = newobject_sprintf(x, "@maxclass newobj @text \"prepend open\" @patching_rect 0 100 20 20");
+		router[2] = newobject_sprintf(x, "@maxclass newobj @text \"prepend mute\" @patching_rect 0 150 20 20");
+		router[3] = newobject_sprintf(x, "@maxclass newobj @text \"prepend target\" @patching_rect 0 200 20 20");
+		plug_connect(x, router[0], 0, router[1], 0);
+		plug_connect(x, router[0], 1, router[2], 0);
+		plug_connect(x, router[0], 2, router[3], 0);
+		
+		inlets = (t_object **)getbytes(order * ninlet * sizeof(t_object *));
+		scripts = (t_object **)getbytes(order * ninlet * sizeof(t_object *));
+		for(i = 0; i < order * ninlet; i++)
+		{
+			inlets[i] = plug_inlet(x, i, order, ninlet, mode);
+			scripts[i] = plug_script(x, i, order, ninlet, noutlet, mode);
+			plug_connect(x, inlets[i], 0, scripts[i], 0);
+			plug_connect(x, inlets[i], 0, router[0], 0);
+			inlets[i] = plug_pcontr(x, i, order, ninlet);
+			plug_connect(x, scripts[i], 2, inlets[i], 0);
+			for(j = 1; j < 4; j++)
+				plug_connect(x, router[j], 0, scripts[i], 0);
+		}
+		
+		patchs = (t_object **)getbytes(order * sizeof(t_object *));
+		for(i = 0; i < order; i++)
+		{
+			patchs[i] = plug_patch(x, s, i, order, mode, argv, argc);
+			sprintf(name, "%s (%i)", s->s_name,  plug_harmonic(i, order));
+			jpatcher_set_title(patchs[i], gensym(name));
+			for(j = 0; j < ninlet; j++)
+			{
+				plug_connect(x, scripts[i * ninlet +j], 0, patchs[i], j);
+				plug_connect(x, scripts[i * ninlet +j], 1, patchs[i], j);
+				plug_connect(x, inlets[i * ninlet +j], 0, patchs[i], j);
+			}
+		}
+		outlets = (t_object **)getbytes(order * noutlet * sizeof(t_object *));
+		for(i = 0; i < order * noutlet; i++)
+		{
+			outlets[i] = plug_outlet(x, i, order, noutlet, mode);
+			plug_connect((t_object *)x, patchs[(int)(i /noutlet)], (int)(i % noutlet), (t_object *)outlets[i], 0);
 		}
 	}
 }
