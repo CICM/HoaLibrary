@@ -20,23 +20,30 @@
 #ifndef DEF_AMBISONICOPTIM
 #define DEF_AMBISONICOPTIM
 
+#ifndef M_PI
+#define M_PI 3.1415926535897932384626433832795
+#endif
+
+#include <stdio.h>
+#include <iostream>
+#include <math.h>
+#include <vector>
+#include <string>
 #include <gsl/gsl_sf.h>
-#include "../cicmTools.h"
 
 class AmbisonicOptim
 {
 	
 private:
-	long	m_order;
-	long	m_number_of_harmonics;
-	long	m_number_of_inputs;
-	long	m_number_of_outputs;
-	long	m_vector_size;
-
-	std::string m_optimMode;
+	long m_order;
+	long m_number_of_harmonics;
+	long m_number_of_inputs;
+	long m_number_of_outputs;
+	long m_vector_size;
+	std::string m_optim_mode;
 	
-	long*		m_index_of_harmonics;
-	double*		m_optimVector;
+	int*		m_index_of_harmonics;
+	double*		m_optim_vector;
 
 	void computeIndex();
 	void computeBasicOptim();
@@ -45,16 +52,15 @@ private:
 	
 public:
 	AmbisonicOptim(long anOrder, std::string anOptimMode = "basic", long aVectorSize = 0);
+	void setVectorSize(int aVectorSize);
+	void setOptimMode(std::string anOptim);
+
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
 	long getNumberOfOutputs();
 	long getVectorSize();
 	std::string getMode();
-	
-	void setVectorSize(long aVectorSize);
-	void setOptimMode(std::string anOptim);
-
 
 	~AmbisonicOptim();
 	
@@ -62,7 +68,7 @@ public:
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{	
 		for(int i = 0; i < m_number_of_harmonics; i++)
-			aOutputs[i] = m_optimVector[i] * aInputs[i];
+			aOutputs[i] = m_optim_vector[i] * aInputs[i];
 	}
 	
 	/* Perform block sample */
@@ -72,7 +78,7 @@ public:
 		{
 			for(int j = 0; j < m_vector_size; j++)
 			{
-				aOutputs[i][j] = m_optimVector[i] * aInputs[i][j];
+				aOutputs[i][j] = m_optim_vector[i] * aInputs[i][j];
 			}
 		}
 	}
