@@ -61,11 +61,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-24",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 116.0, 213.0, 77.0, 20.0 ],
-					"text" : "sprintf %s%i"
+					"patching_rect" : [ 116.0, 213.0, 97.0, 20.0 ],
+					"text" : "sprintf %s %s%i"
 				}
 
 			}
@@ -327,7 +327,8 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [  ]
 	}
 
 }
