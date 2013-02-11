@@ -71,11 +71,11 @@
                     "destrect" : [ 0.000000, 0.000000, 0.000000, 0.000000 ], 
                     "patching_rect" : [ 250.000000, 250.000000, 250.000000, 250.000000 ], 
                     "autofit" : 1, 
-                    "id" : "hoa.spat", 
+                    "id" : "hoa.map", 
                     "ignoreclick" : 0, 
                     "hidden" : 0,
                     "fontname" : "Courier", 
-                    "pic" : "hoa.spat.svg", 
+                    "pic" : "hoa.map.svg", 
                     "xoffset" : 0.000000, 
                     "yoffset" : 0.000000, 
                     "background" : 0, 
@@ -85,8 +85,8 @@
                     "instance_attributes" : 
                     {
                         "palette_category" : [ "HoaLib", "Interface", "Recent" ], 
-                        "palette_caption" : "hoa.spat",
-                        "palette_action" : "hoa.spat" 
+                        "palette_caption" : "hoa.map",
+                        "palette_action" : "hoa.map" 
                     }
             }
         },

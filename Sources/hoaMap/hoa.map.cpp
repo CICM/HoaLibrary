@@ -84,8 +84,10 @@ typedef struct  _hoamap
 	t_jrgba		f_color_selection;
 	
 	char		f_displayGrid;
+	char		f_displayHead;
 	char		f_displayCartVectors;
 	char		f_displayAngle;
+	char		f_displaySpeakers;
 	double		f_zoomFactor;
 	long		f_audioConfig;
 	double		f_speakerOffset;
@@ -205,6 +207,9 @@ double wrapi(double deltaPhase);
 t_pt point_to_radDist(t_pt pt1, t_pt pt2); // retourne le radian et la distance à partir de deux points
 t_pt point_to_degDist(t_pt pt1, t_pt pt2); // retourne le degree et la distance à partir de deux points
 
+//utilities
+double hoaclip(double val, double min, double max);
+
 int main()
 {
 	t_class *c;
@@ -293,13 +298,11 @@ int main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selectcolor", 0, "0. 0. 1. 0.05");
 	*/
 
-	/*
 	CLASS_ATTR_LONG				(c,"output_mode",0, t_hoamap, f_output_mode);
 	CLASS_ATTR_LABEL			(c,"output_mode", 0, "Output Mode");
 	CLASS_ATTR_CATEGORY			(c,"output_mode",0,"Output");
 	CLASS_ATTR_ENUMINDEX		(c,"output_mode", 0, "Cartesian Polar");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"output_mode",0,"0");
-	*/
 	
 	CLASS_ATTR_CHAR				(c,"display_grid",0, t_hoamap, f_displayGrid);
 	CLASS_ATTR_STYLE_LABEL		(c,"display_grid",0,"onoff","Display Grid");
@@ -315,6 +318,16 @@ int main()
 	CLASS_ATTR_STYLE_LABEL		(c,"display_angle",0,"onoff","Display Angle");
 	CLASS_ATTR_CATEGORY			(c,"display_angle",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE		(c,"display_angle",0,"1");
+	
+	CLASS_ATTR_CHAR				(c,"display_head",0, t_hoamap, f_displayHead);
+	CLASS_ATTR_STYLE_LABEL		(c,"display_head",0,"onoff","Display Head");
+	CLASS_ATTR_CATEGORY			(c,"display_head",0,"Custom");
+	CLASS_ATTR_DEFAULT_SAVE		(c,"display_head",0,"1");
+	
+	CLASS_ATTR_CHAR				(c,"display_speakers",0, t_hoamap, f_displaySpeakers);
+	CLASS_ATTR_STYLE_LABEL		(c,"display_speakers",0,"onoff","Display Speakers");
+	CLASS_ATTR_CATEGORY			(c,"display_speakers",0,"Custom");
+	CLASS_ATTR_DEFAULT_SAVE		(c,"display_speakers",0,"1");
 	
 	/*
 	CLASS_ATTR_LONG				(c,"audio_config",0, t_hoamap, f_audioConfig);
@@ -407,7 +420,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	
 	
 	x->f_out = outlet_new((t_object *)x, NULL);
-	x->f_outPolar		= listout(x);
+	//x->f_outPolar		= listout(x);
 	x->f_outCarte		= listout(x);
 	
 	x->f_numberOfSources = 0;
@@ -435,6 +448,10 @@ t_jrgba clr256(int r, int g, int b, float a)
 	color.blue = b / 255.0f;
 	color.alpha = a / 255.0f;
 	return color;
+}
+
+double hoaclip(double val, double min, double max){
+	return val >= max ? max : (val <= min ? min : val);
 }
 
 double scale(double value, double aMin, double aMax, double bMin, double bMax){
@@ -667,6 +684,7 @@ void hoamap_outone(t_hoamap *x, int i)
 	
 	outlet_int(x->f_out, x->f_numberOfSources);
 	
+	/*
 	atom_setfloat(av+1, (float)x->f_sources[i].distance);
 	atom_setfloat(av+2, (float)x->f_sources[i].angle);
 	outlet_list(x->f_outPolar, NULL, 3, av);
@@ -674,9 +692,9 @@ void hoamap_outone(t_hoamap *x, int i)
 	atom_setfloat(av+1, (float)x->f_sources[i].pos.x);
 	atom_setfloat(av+2, (float)x->f_sources[i].pos.y);
 	outlet_list(x->f_outCarte, NULL, 3, av);
+	*/
 	
 	
-	/*
 	if (x->f_output_mode == CARTESIAN) {
 		atom_setfloat(av+1, (float)x->f_sources[i].pos.x);
 		atom_setfloat(av+2, (float)x->f_sources[i].pos.y);
@@ -686,7 +704,6 @@ void hoamap_outone(t_hoamap *x, int i)
 		atom_setfloat(av+2, (float)x->f_sources[i].angle);
 	}
 	outlet_list(x->f_outCarte, NULL, 3, av);
-	*/
 }
 
 /* ------ MSG EXTERNS ------ */
@@ -815,7 +832,7 @@ void hoamap_remove(t_hoamap *x){
 	jbox_redraw((t_jbox *)x);
 }
 
-// fait place nette (plus acune sources);
+// fait place nette (plus aucune sources);
 void hoamap_clear(t_hoamap *x){
 	int i;
 	for(i=0; i<= x->f_numberOfSources; i++){
@@ -893,56 +910,44 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
 	 {
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
-		if(name == gensym("bgcolor") || name == gensym("cicolor"))
-		 {
+		if(name == gensym("speaker_offset") || name == gensym("speaker_number") || name == gensym("lscolor") || name == gensym("display_speakers"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("ls_layer"));
+		}
+		else if(name == gensym("bgcolor") || name == gensym("cicolor"))
+		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-		 }
-		else if(name == gensym("headcolor"))
-		 {
+		}
+		else if(name == gensym("headcolor") || name == gensym("display_head"))
+		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("head_layer"));
-		 }
-		else if(name == gensym("gridcolor"))
-		 {
+		}
+		else if(name == gensym("display_grid") || name == gensym("gridcolor"))
+		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("grid_layer"));
-		 }
-		else if(name == gensym("lscolor"))
-		 {
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("ls_layer"));
-		 }
-		else if(name == gensym("display_grid"))
-		 {
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("grid_layer"));
-		 }
+		}
 		else if(name == gensym("display_angle"))
-		 {
+		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("angle_layer"));
-		 }
+		}
 		else if(name == gensym("display_cartvectors"))
-		 {
+		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("cartvectors_layer"));
-		 }
-		else if(name == gensym("speaker_number"))
-		 {
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("ls_layer"));
-		 }
+		}
 		else if(name == gensym("speaker_distance"))
-		 {
+		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("ls_layer"));
-		 }
-		else if(name == gensym("speaker_offset"))
-		 {
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("ls_layer"));
-		 }
+		}
 		else if(name == gensym("zoom"))
-		 {
+		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("cartvectors_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("head_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("grid_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("ls_layer"));
-		 }
+		}
 		jbox_redraw((t_jbox *)x);
 	 }
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
@@ -960,11 +965,15 @@ void hoamap_paint(t_hoamap *x, t_object *view)
 	if (x->f_displayCartVectors) {
 		draw_cartVectors(x, view, &rect);
 	}
-	draw_speakers(x, view, &rect);
+	if (x->f_displaySpeakers) {
+		draw_speakers(x, view, &rect);
+	}
 	if (x->f_displayAngle) {
 		draw_angle(x, view, &rect);
 	}
-	draw_head(x, view, &rect);
+	if (x->f_displayHead) {
+		draw_head(x, view, &rect);
+	}
 	draw_sources(x, view, &rect);
 	draw_rect_selection(x, view, &rect);
 }
@@ -1105,6 +1114,7 @@ void draw_angle(t_hoamap *x,  t_object *view, t_rect *rect){
 	t_jtextlayout *jtl;
 	long fontsize = (w / 30.);
 	char text[16];
+	int angleDrawn = 0;
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("angle_layer"), rect->width, rect->height);
 	
@@ -1115,9 +1125,10 @@ void draw_angle(t_hoamap *x,  t_object *view, t_rect *rect){
 		t_jrgba angleFillColor = {0.1,0.1,0.1,0.2};
 		t_jrgba angleStrokeColor = {0,0,0,0.4};
 		
-		for(i = 0; i < x->f_numberOfSources; i++){
-			if (x->f_sources[i].hasfocus) {
-				
+		//for(i = 0; i < x->f_numberOfSources; i++){
+		 for(i = x->f_numberOfSources-1; i >= 0  ; i--){
+			if (x->f_sources[i].hasfocus && !angleDrawn) {
+				angleDrawn = 1;
 				// angle
 				radians[0] = degtorad(-90);
 				radians[1] = x->f_sources[i].angle + degtorad(-90);
@@ -1224,8 +1235,8 @@ void draw_cartVectors(t_hoamap *x,  t_object *view, t_rect *rect)
 		
 		t_jrgba red = {0.7,0,0,0.9};
 		t_jrgba green = {0,0.7,0,0.9};
-		char *xLetter = "x";
-		char *yLetter = "y";
+		const char *xLetter = "x";
+		const char *yLetter = "y";
 		
 		int flechePoint = 1;
         jgraphics_set_line_width(g, 1);
@@ -1544,12 +1555,15 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 	int i;
+	double w = x->rect.width;
+	double h = x->rect.height;
 	t_pol polin;
 	double diff;
 	t_pol polout;
 	double factor;
 	t_pt pixSource;
 	t_pt pixDiff;
+	t_pt cartemp;
 	
 	if (x->f_aSourceIsSelected) {
 		jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_POINTINGHAND);
@@ -1564,7 +1578,11 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 			{
 				if (x->f_sources[i].selected || i == x->f_actualSource-1) 
 				{
-					update_source_pos_in_polar(x, i, x->f_sources[i].distance, x->f_sources[i].angle + diff);
+					cartemp = poltocar(x->f_sources[i].distance, x->f_sources[i].angle + diff);
+					cartemp.x = hoaclip(cartemp.x, -10, 10);
+					cartemp.y = hoaclip(cartemp.y, -10, 10);
+					update_source_pos_in_cart(x, i, cartemp);
+					//update_source_pos_in_polar(x, i, x->f_sources[i].distance, x->f_sources[i].angle + diff);
 				}
 			}
 		}
@@ -1588,7 +1606,12 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 					if (polout.r == 0.) {
 						polout.r = 0.00001;
 					}
-					update_source_pos_in_polar(x, i, polout.r, polout.a);
+					
+					cartemp = poltocar(polout.r, polout.a);
+					cartemp.x = hoaclip(cartemp.x, -10, 10);
+					cartemp.y = hoaclip(cartemp.y, -10, 10);
+					update_source_pos_in_cart(x, i, cartemp);
+					//update_source_pos_in_polar(x, i, polout.r, polout.a);
 				}
 			}			
 		}
@@ -1604,7 +1627,13 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 					pixSource = cartopix(x, x->f_sources[i].pos, 0);
 					pixSource.x += pixDiff.x;
 					pixSource.y += pixDiff.y;
-					update_source_pos_in_pixel(x, i, pixSource);
+					
+					// limite les sources au zoom-max;
+					cartemp = pixtocar(x, pixSource);
+					cartemp.x = hoaclip(cartemp.x, -10, 10);
+					cartemp.y = hoaclip(cartemp.y, -10, 10);
+					update_source_pos_in_cart(x, i, cartemp);
+					//update_source_pos_in_pixel(x, i, pixSource);
 				}
 			}
 		}
