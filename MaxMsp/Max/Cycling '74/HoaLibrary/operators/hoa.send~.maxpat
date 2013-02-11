@@ -50,8 +50,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 225.0, 124.0, 74.0, 20.0 ],
-					"text" : "join"
+					"patching_rect" : [ 225.0, 124.0, 46.0, 20.0 ],
+					"text" : "pak s f"
 				}
 
 			}
@@ -133,8 +133,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 280.0, 82.0, 65.0, 20.0 ],
-					"text" : "route args"
+					"patching_rect" : [ 280.0, 82.0, 71.0, 20.0 ],
+					"text" : "route name"
 				}
 
 			}

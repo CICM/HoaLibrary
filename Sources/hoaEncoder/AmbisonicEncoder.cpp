@@ -38,8 +38,8 @@ AmbisonicEncoder::AmbisonicEncoder(long anOrder, std::string aMode, long aVector
 	
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++) 
 	{
-		m_cosLookUp[i] = cos((double)i * CICM_PI / (double)NUMBEROFCIRCLEPOINTS);
-		m_sinLookUp[i] = sin((double)i * CICM_PI / (double)NUMBEROFCIRCLEPOINTS);
+		m_cosLookUp[i] = cos((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
+		m_sinLookUp[i] = sin((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 	}
 	setAzimtuh(0.);
 	setVectorSize(aVectorSize);
@@ -93,9 +93,9 @@ void AmbisonicEncoder::setAzimtuh(double aTheta)
 	int  tmpIndex = 2;
 	long tmpAngle;
 	if (aTheta < 0) 
-		aTheta = aTheta + ( -floor(aTheta/CICM_PI)) * CICM_PI;
+		aTheta = aTheta + ( -floor(aTheta/CICM_2PI)) * CICM_2PI;
 
-	double angleFactor = aTheta*NUMBEROFCIRCLEPOINTS/(CICM_PI);
+	double angleFactor = aTheta*NUMBEROFCIRCLEPOINTS/(CICM_2PI);
 	
 	for (int i = 1; i <= m_order; i++) 
 	{
@@ -105,7 +105,6 @@ void AmbisonicEncoder::setAzimtuh(double aTheta)
 		
 		tmpIndex += 2;
 	}
-	
 }
 
 void AmbisonicEncoder::setVectorSize(int aVectorSize)
