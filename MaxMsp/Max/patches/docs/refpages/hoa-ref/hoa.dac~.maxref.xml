@@ -82,7 +82,8 @@
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.optim~" />
         <seealso name="hoa.meter~" />
-        <seealso name="hoa.spat" />
+        <seealso name="hoa.map" />
+        <seealso name="hoa.halo~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />

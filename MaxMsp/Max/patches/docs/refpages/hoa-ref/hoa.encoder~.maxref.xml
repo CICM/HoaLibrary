@@ -98,7 +98,8 @@
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.optim~" />
         <seealso name="hoa.meter~" />
-        <seealso name="hoa.spat" />
+        <seealso name="hoa.map" />
+        <seealso name="hoa.halo~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
@@ -109,6 +110,6 @@
         <seealso name="hoa.pi" />
         <seealso name="hoa.play~" />
         <seealso name="hoa.record~" />
-        <seealso name="hoachapter01" module="hoa" type="tutorial" />
+        <!-- <seealso name="hoachapter01" module="hoa" type="tutorial" /> -->
 	</seealsolist>
 </c74object>
