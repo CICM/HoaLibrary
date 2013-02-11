@@ -120,8 +120,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 302.0, 77.0, 65.0, 20.0 ],
-					"text" : "route args"
+					"patching_rect" : [ 302.0, 77.0, 71.0, 20.0 ],
+					"text" : "route name"
 				}
 
 			}

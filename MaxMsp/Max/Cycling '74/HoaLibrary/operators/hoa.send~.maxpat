@@ -133,8 +133,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 280.0, 82.0, 65.0, 20.0 ],
-					"text" : "route args"
+					"patching_rect" : [ 280.0, 82.0, 71.0, 20.0 ],
+					"text" : "route name"
 				}
 
 			}

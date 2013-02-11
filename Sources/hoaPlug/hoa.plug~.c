@@ -79,8 +79,8 @@ void *plug_new(t_symbol *s, int argc, t_atom *argv)
 		else 
 			mode = 0;
 	}
-	if (atom_gettype(argv+3) == A_SYM && atom_getsym(argv+3) == gensym("@args")) 
-		plug_router(x, order, patchname, mode, argv+4, argc-4);
+	if (argc > 3)
+		plug_router(x, order, patchname, mode, argv+3, argc-3);
 	else
 		plug_router(x, order, patchname, mode, argv, 0);
 	
@@ -142,8 +142,8 @@ void plug_script_init()
 void *plug_script_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_plug_script *x = NULL;
-	
-	if (x = (t_plug_script *)object_alloc((t_class *)plug_script_class)) 
+	x = (t_plug_script *)object_alloc((t_class *)plug_script_class);
+	if (x)
 	{
 		x->f_outcontr = outlet_new((t_object *)x, NULL);
 		x->f_outany = outlet_new((t_object *)x, NULL);
@@ -404,17 +404,31 @@ t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int m
 {
 	int i;
 	char argus[256];
+    char buffer [50];
 	strcpy(argus, "");
 	for(i = 0; i < argc; i++)
 	{
-		strcat(argus, atom_getsym(argv+i)->s_name);
-		strcat(argus, gensym(" ")->s_name);
+        if(atom_gettype(argv+i) ==  A_SYM)
+        {
+            strcat(argus, atom_getsym(argv+i)->s_name);
+        }
+        else if (atom_gettype(argv+i) ==  A_FLOAT)
+        {
+            sprintf(buffer, "%f", atom_getfloat(argv+i));
+            strcat(argus, buffer);
+        }
+        else if (atom_gettype(argv+i) ==  A_LONG)
+        {
+            sprintf(buffer, "%ld", atom_getlong(argv+i));
+            strcat(argus, buffer);
+        }
+        strcat(argus, gensym(" ")->s_name);
 	}
 	
 	if (mode == 2)
-		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i @args %s\" @patching_rect %i 500 20 20", s->s_name, index, order, argus, index * 100);
+		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i %s\" @patching_rect %i 500 20 20", s->s_name, index, order, argus, index * 100);
 	else
-		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i @args %s\" @patching_rect %i 500 20 20", s->s_name, plug_harmonic(index, order), order, argus, index * 100);
+		return newobject_sprintf(patcher, "@maxclass newobj @text \"%s %i %i %s\" @patching_rect %i 500 20 20", s->s_name, plug_harmonic(index, order), order, argus, index * 100);
 }
 
 void plug_router(t_object *x, int order, t_symbol *s, int mode, t_atom *argv, int argc)

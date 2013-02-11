@@ -94,7 +94,8 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 	t_HoaEncode *x = NULL;
 	int	order = 4;
 	std::string mode = "basic";
-	if (x = (t_HoaEncode *)object_alloc(HoaEncode_class)) 
+    x = (t_HoaEncode *)object_alloc(HoaEncode_class);
+	if (x)
 	{		
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
