@@ -186,7 +186,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.spat", "@obj-desc", "A", "2D", "spatialization", "graphic", "user", "interface", "tool" ],
+									"args" : [ "@obj-name", "hoa.map", "@obj-desc", "A", "2D", "spatialization", "graphic", "user", "interface", "tool" ],
 									"id" : "obj-19",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -237,7 +237,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 553.5, 524.5, 27.0, 98.0 ],
+									"patching_rect" : [ 553.5, 524.5, 27.0, 97.0 ],
 									"text" : "|---\n|\n|\n|---\n|\n|\n|---"
 								}
 
@@ -855,7 +855,7 @@
 													"maxclass" : "comment",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 5.0, 25.0, 480.0, 133.0 ],
+													"patching_rect" : [ 5.0, 25.0, 480.0, 132.0 ],
 													"text" : "- click : add a source in the scene if there isn't already one.\n- drag : move a source if you click on it before, or all selected sources if the source you move is a part of a selection, make a rect selection otherwise.\n- ctrl + drag : move only the angle of a source | the selected sources.\n- shift + drag : move only the distance of a source | the selected sources.\n- cmd + a : select all sources actually in the scene.\n- cmd + click : toggle source selection if you click on it.\n- alt + mousewheel : zoom."
 												}
 
@@ -2440,7 +2440,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 807.0, 679.0 ],
+						"rect" : [ 2.0, 70.0, 807.0, 679.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2947,7 +2947,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 448.75, 201.353455, 330.0, 180.0 ],
+									"patching_rect" : [ 448.75, 201.353455, 330.0, 179.0 ],
 									"presentation" : 1,
 									"presentation_linecount" : 17,
 									"presentation_rect" : [ 587.0, 350.706909, 195.0, 273.0 ],
@@ -3010,8 +3010,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 14.5, 519.746338, 345.0, 22.0 ],
-									"text" : "poly~ hoa.spatpoly~ 4"
+									"patching_rect" : [ 20.091841, 519.746338, 325.428558, 22.0 ],
+									"text" : "poly~ hoa.mappoly~ 4"
 								}
 
 							}
@@ -4532,7 +4532,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 569.5, 476.5, 27.0, 176.0 ],
+					"patching_rect" : [ 569.5, 476.5, 27.0, 175.0 ],
 					"text" : "|---\n|\n|\n|---\n|\n|\n|---\n|\n|\n|---\n|\n|\n|---"
 				}
 
@@ -5136,7 +5136,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 25.0, 480.0, 133.0 ],
+									"patching_rect" : [ 5.0, 25.0, 480.0, 132.0 ],
 									"text" : "- click : add a source in the scene if there isn't already one.\n- drag : move a source if you click on it before, or all selected sources if the source you move is a part of a selection, make a rect selection otherwise.\n- ctrl + drag : move only the angle of a source | the selected sources.\n- shift + drag : move only the distance of a source | the selected sources.\n- cmd + a : select all sources actually in the scene.\n- cmd + click : toggle source selection if you click on it.\n- alt + mousewheel : zoom."
 								}
 
@@ -6601,10 +6601,10 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 435.0, 60.0, 80.500031, 32.0 ],
+													"patching_rect" : [ 435.0, 60.0, 80.500031, 31.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
-													"presentation_rect" : [ 70.0, 230.0, 74.0, 32.0 ],
+													"presentation_rect" : [ 70.0, 230.0, 74.0, 31.0 ],
 													"text" : ";\rmax refresh"
 												}
 
@@ -11141,16 +11141,16 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.spatpoly~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
+				"name" : "hoa.mappoly~.maxpat",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
-				"patcherrelativepath" : "",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
