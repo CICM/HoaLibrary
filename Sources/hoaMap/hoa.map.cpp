@@ -365,8 +365,8 @@ int main()
 	class_register(CLASS_BOX, c);
 	hoamap_class = c;
 	
-	//class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
-	hoa_init();
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	//hoa_init();
 	return 0;
 }
 
