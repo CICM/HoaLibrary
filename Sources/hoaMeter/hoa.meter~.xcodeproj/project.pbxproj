@@ -175,6 +175,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -191,6 +193,7 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 					/Developer/usr/local/boost_1_48_0,
 				);
+				SDKROOT = "";
 			};
 			name = Development;
 		};
@@ -198,10 +201,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -217,6 +218,7 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 					/Developer/usr/local/boost_1_48_0,
 				);
+				SDKROOT = "";
 			};
 			name = Deployment;
 		};
