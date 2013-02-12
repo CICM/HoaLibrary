@@ -81,7 +81,8 @@ void *HoaHalo_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaHalo *x = NULL;
 	int	order = 4;
-	if (x = (t_HoaHalo *)object_alloc((t_class*)HoaHalo_class)) 
+    x = (t_HoaHalo *)object_alloc((t_class*)HoaHalo_class);
+	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
@@ -220,8 +221,10 @@ t_int *HoaHalo_perform(t_int *w)
 void HoaHalo_assist(t_HoaHalo *x, void *b, long m, long a, char *s)
 {
 	long harmonicIndex = 0;
-	if(a != x->f_inputNumber-1)
+	if(a == x->f_ambiHalo->getNumberOfInputs()-2)
 		sprintf(s,"(Signal or float) Azimuth");
+    else if(a == x->f_ambiHalo->getNumberOfInputs()-1)
+		sprintf(s,"(Signal or float) Spread");
 	else
 	{
 		if (a == 0)
