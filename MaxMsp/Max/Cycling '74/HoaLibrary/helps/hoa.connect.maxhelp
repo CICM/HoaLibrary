@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 320.0, 90.0, 615.0, 634.0 ],
+		"rect" : [ 320.0, 90.0, 540.0, 563.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -46,7 +46,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 615.0, 608.0 ],
+						"rect" : [ 320.0, 116.0, 540.0, 537.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1752,7 +1752,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 320.0, 116.0, 615.0, 608.0 ],
+						"rect" : [ 0.0, 26.0, 540.0, 537.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1814,7 +1814,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.4375, 64.5, 591.0, 47.0 ],
+									"patching_rect" : [ 4.4375, 64.5, 519.5625, 47.0 ],
 									"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" or \"click-select\" the objects in order then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -1829,7 +1829,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.4375, 64.5, 591.0, 47.0 ],
+									"patching_rect" : [ 4.4375, 64.5, 519.5625, 47.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -2227,7 +2227,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 615.0, 608.0 ],
+						"rect" : [ 0.0, 26.0, 540.0, 537.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -2274,7 +2274,7 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "lock.js",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/externals/jsExternals",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/externals/jsExternals",
 				"patcherrelativepath" : "../externals/jsExternals",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -2282,20 +2282,20 @@
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
