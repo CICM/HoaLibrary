@@ -133,7 +133,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 76.0, 517.0, 20.0 ],
-									"text" : "hoa.play~ creates an sfplay~ object with the best arguments to play of an ambisonic soundfield.",
+									"text" : "hoa.play~ creates an sfplay~ object with the best arguments to play an ambisonic soundfield.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
