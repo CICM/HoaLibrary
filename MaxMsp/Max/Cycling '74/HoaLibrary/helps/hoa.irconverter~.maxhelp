@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 53.0, 49.0, 973.0, 550.0 ],
+		"rect" : [ 100.0, 100.0, 973.0, 550.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -47,7 +47,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 53.0, 75.0, 973.0, 524.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 524.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6026,7 +6026,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 493.5, 387.0, 205.25, 31.0 ],
-									"text" : "angles 321 353 108 60 49 183 332 28"
+									"text" : "angles 22 64 276 358 194 312 55 282"
 								}
 
 							}
@@ -6594,7 +6594,7 @@
 									"outlettype" : [ "bang" ],
 									"patching_rect" : [ 406.25, 446.0, 114.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 321.0, 353.0, 108.0, 60.0, 49.0, 183.0, 332.0, 28.0 ],
+										"angles" : [ 22.0, 64.0, 276.0, 358.0, 194.0, 312.0, 55.0, 282.0 ],
 										"buffers" : [ "hoaIr1D.1", "hoaIr1D.2", "hoaIr1D.3", "hoaIr1D.4", "hoaIr1D.5", "hoaIr1D.6", "hoaIr1D.7", "hoaIr1D.8" ],
 										"channels" : [ 1, 1, 1, 1, 1, 1, 1, 1 ]
 									}
@@ -7864,7 +7864,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 973.0, 524.0 ],
+						"rect" : [ 100.0, 126.0, 973.0, 524.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -8013,7 +8013,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 232.25, 143.5, 338.0, 32.0 ],
+									"patching_rect" : [ 286.25, 151.0, 338.0, 32.0 ],
 									"text" : "Load impulse reponse folder.\n     ( facultative : chapel.wav are already in the buffer~ objects ).",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -8027,7 +8027,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 232.25, 143.5, 338.0, 34.0 ],
+									"patching_rect" : [ 286.25, 151.0, 338.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -8336,14 +8336,14 @@
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 12.0,
+									"fontsize" : 11.595187,
 									"id" : "obj-7",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 156.5, 151.0, 65.0, 18.0 ],
-									"text" : "readfolder"
+									"patching_rect" : [ 156.5, 124.5, 244.0, 17.0 ],
+									"text" : "readfolder ./examples/HoaIrs/HoaSmallRoom"
 								}
 
 							}
@@ -8397,12 +8397,12 @@
 									"outlettype" : [ "bang" ],
 									"patching_rect" : [ 223.0, 440.0, 114.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-										"buffers" : [ "none", "none", "none", "none", "none", "none", "none", "none" ],
-										"channels" : [ 1, 1, 1, 1, 1, 1, 1, 1 ]
+										"angles" : [ 0.0, 0.0, 0.0, 0.0 ],
+										"buffers" : [ "", "", "", "" ],
+										"channels" : [ 0, 0, 0, 0 ]
 									}
 ,
-									"text" : "hoa.irconverter~ 3 8"
+									"text" : "hoa.irconverter~ 1 4"
 								}
 
 							}
@@ -8473,7 +8473,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 156.5, 124.5, 20.0, 20.0 ],
+									"patching_rect" : [ 156.5, 98.0, 20.0, 20.0 ],
 									"rounded" : 60.0,
 									"text" : "1",
 									"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
