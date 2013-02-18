@@ -31,6 +31,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-24",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 105.0, 224.0, 42.0, 18.0 ],
+					"text" : "signal"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-29",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -396,7 +410,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
-									"patching_rect" : [ 212.0, 205.0, 32.5, 20.0 ],
+									"patching_rect" : [ 192.0, 205.0, 32.5, 20.0 ],
 									"text" : "- 1"
 								}
 
@@ -410,7 +424,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
-									"patching_rect" : [ 212.0, 171.0, 32.5, 20.0 ],
+									"patching_rect" : [ 192.0, 171.0, 32.5, 20.0 ],
 									"text" : "* 2"
 								}
 
@@ -424,7 +438,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
-									"patching_rect" : [ 212.0, 142.0, 30.0, 20.0 ],
+									"patching_rect" : [ 192.0, 142.0, 30.0, 20.0 ],
 									"text" : "abs"
 								}
 
@@ -452,8 +466,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 50.0, 100.0, 181.0, 20.0 ],
-									"text" : "if $i1 >= 0 then $i1 else out2 $i1"
+									"patching_rect" : [ 50.0, 100.0, 161.0, 20.0 ],
+									"text" : "if $i1 >= 0 then $i1 else out2"
 								}
 
 							}
@@ -1769,11 +1783,11 @@
 					"id" : "obj-8",
 					"linecount" : 2,
 					"maxclass" : "newobj",
-					"numinlets" : 4,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 15.0, 45.0, 109.0, 33.0 ],
-					"text" : "route float int factor"
+					"numinlets" : 5,
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 15.0, 45.0, 139.0, 33.0 ],
+					"text" : "route float int factor signal"
 				}
 
 			}
@@ -2052,6 +2066,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-78", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-24", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-9", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -2233,6 +2256,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-24", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-8", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-54", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -2247,15 +2279,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-8", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-78", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 3 ]
 				}
 
 			}
