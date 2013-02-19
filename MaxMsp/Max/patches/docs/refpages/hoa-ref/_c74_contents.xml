@@ -8,7 +8,9 @@
 <refpage name='hoa.dac~.maxref.xml' />
 <refpage name='hoa.decoder~.maxref.xml' />
 <refpage name='hoa.encoder~.maxref.xml' />
+<refpage name='hoa.halo~.maxref.xml' />
 <refpage name='hoa.irconverter~.maxref.xml' />
+<refpage name='hoa.map.maxref.xml' />
 <refpage name='hoa.meter~.maxref.xml' />
 <refpage name='hoa.optim~.maxref.xml' />
 <refpage name='hoa.pi.maxref.xml' />
@@ -19,7 +21,6 @@
 <refpage name='hoa.record~.maxref.xml' />
 <refpage name='hoa.rotate~.maxref.xml' />
 <refpage name='hoa.scope~.maxref.xml' />
-<refpage name='hoa.spat.maxref.xml' />
 <refpage name='hoa.stereo~.maxref.xml' />
 <refpage name='hoa.wider~.maxref.xml' />
 </root>

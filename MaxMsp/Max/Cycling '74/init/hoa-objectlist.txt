@@ -5,6 +5,7 @@ max oblist Hoa hoa.convolve~;
 max oblist Hoa hoa.dac~;
 max oblist Hoa hoa.decoder~;
 max oblist Hoa hoa.encoder~;
+max oblist Hoa hoa.halo~;
 max oblist Hoa hoa.irconverter~;
 max oblist Hoa hoa.map;
 max oblist Hoa hoa.meter~;

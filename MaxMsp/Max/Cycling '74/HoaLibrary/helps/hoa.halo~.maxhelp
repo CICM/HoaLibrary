@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 100.0, 100.0, 1208.0, 666.0 ],
+		"rect" : [ 72.0, 100.0, 1208.0, 666.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -46,7 +46,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 100.0, 126.0, 1208.0, 640.0 ],
+						"rect" : [ 72.0, 126.0, 1208.0, 640.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4078,7 +4078,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 848.0, 224.0, 218.0, 87.0 ],
+										"rect" : [ 820.0, 224.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -4562,7 +4562,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 852.0, 246.0, 175.0, 67.0 ],
+														"rect" : [ 824.0, 246.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -4933,10 +4933,10 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 435.0, 60.0, 80.500031, 31.0 ],
+													"patching_rect" : [ 435.0, 60.0, 80.500031, 32.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
-													"presentation_rect" : [ 70.0, 230.0, 74.0, 31.0 ],
+													"presentation_rect" : [ 70.0, 230.0, 74.0, 32.0 ],
 													"text" : ";\rmax refresh"
 												}
 
@@ -5328,7 +5328,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 852.0, 246.0, 179.0, 66.0 ],
+														"rect" : [ 824.0, 246.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -5538,7 +5538,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 852.0, 246.0, 178.0, 65.0 ],
+														"rect" : [ 824.0, 246.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -6232,7 +6232,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 852.0, 246.0, 179.0, 65.0 ],
+														"rect" : [ 824.0, 246.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -7553,7 +7553,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 473.0, 225.0, 218.0, 87.0 ],
+										"rect" : [ 445.0, 225.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -8037,7 +8037,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 477.0, 247.0, 175.0, 67.0 ],
+														"rect" : [ 449.0, 247.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -8408,10 +8408,10 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 435.0, 60.0, 80.500031, 31.0 ],
+													"patching_rect" : [ 435.0, 60.0, 80.500031, 32.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
-													"presentation_rect" : [ 70.0, 230.0, 74.0, 31.0 ],
+													"presentation_rect" : [ 70.0, 230.0, 74.0, 32.0 ],
 													"text" : ";\rmax refresh"
 												}
 
@@ -8803,7 +8803,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 477.0, 247.0, 179.0, 66.0 ],
+														"rect" : [ 449.0, 247.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -9013,7 +9013,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 477.0, 247.0, 178.0, 65.0 ],
+														"rect" : [ 449.0, 247.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -9707,7 +9707,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 477.0, 247.0, 179.0, 65.0 ],
+														"rect" : [ 449.0, 247.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -11045,7 +11045,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 58.5, 455.0, 20.0 ],
+									"patching_rect" : [ 5.0, 63.5, 455.0, 20.0 ],
 									"text" : "The \"halo\" effect can be done in max using encoders and soundfield multiplication.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -11060,7 +11060,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.0, 58.5, 455.0, 20.0 ],
+									"patching_rect" : [ 5.0, 63.5, 455.0, 20.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -11268,7 +11268,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 108.0, 225.0, 218.0, 87.0 ],
+										"rect" : [ 80.0, 225.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -11752,7 +11752,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 112.0, 247.0, 175.0, 67.0 ],
+														"rect" : [ 84.0, 247.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -12123,10 +12123,10 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 435.0, 60.0, 80.500031, 31.0 ],
+													"patching_rect" : [ 435.0, 60.0, 80.500031, 32.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
-													"presentation_rect" : [ 70.0, 230.0, 74.0, 31.0 ],
+													"presentation_rect" : [ 70.0, 230.0, 74.0, 32.0 ],
 													"text" : ";\rmax refresh"
 												}
 
@@ -12518,7 +12518,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 112.0, 247.0, 179.0, 66.0 ],
+														"rect" : [ 84.0, 247.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -12728,7 +12728,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 112.0, 247.0, 178.0, 65.0 ],
+														"rect" : [ 84.0, 247.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -13422,7 +13422,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 112.0, 247.0, 179.0, 65.0 ],
+														"rect" : [ 84.0, 247.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -19282,10 +19282,10 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 435.0, 60.0, 80.500031, 31.0 ],
+													"patching_rect" : [ 435.0, 60.0, 80.500031, 32.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
-													"presentation_rect" : [ 70.0, 230.0, 74.0, 31.0 ],
+													"presentation_rect" : [ 70.0, 230.0, 74.0, 32.0 ],
 													"text" : ";\rmax refresh"
 												}
 
@@ -22757,10 +22757,10 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 435.0, 60.0, 80.500031, 31.0 ],
+													"patching_rect" : [ 435.0, 60.0, 80.500031, 32.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
-													"presentation_rect" : [ 70.0, 230.0, 74.0, 31.0 ],
+													"presentation_rect" : [ 70.0, 230.0, 74.0, 32.0 ],
 													"text" : ";\rmax refresh"
 												}
 
@@ -26487,10 +26487,10 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 435.0, 60.0, 80.500031, 31.0 ],
+													"patching_rect" : [ 435.0, 60.0, 80.500031, 32.0 ],
 													"presentation" : 1,
 													"presentation_linecount" : 2,
-													"presentation_rect" : [ 70.0, 230.0, 74.0, 31.0 ],
+													"presentation_rect" : [ 70.0, 230.0, 74.0, 32.0 ],
 													"text" : ";\rmax refresh"
 												}
 
@@ -30506,7 +30506,7 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
@@ -30514,41 +30514,41 @@
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.times~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.name1~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.name2~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
