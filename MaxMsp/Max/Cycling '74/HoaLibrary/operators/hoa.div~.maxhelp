@@ -55,7 +55,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 410.4375, 98.0, 32.5, 16.0 ],
-					"text" : "*~"
+					"text" : "/~"
 				}
 
 			}
@@ -115,7 +115,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 9.0, 58.0, 561.0, 34.0 ],
-					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the default value of *~\"",
+					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you can use args to set \"the right value of /~\"",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
 				}
@@ -145,7 +145,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 59.4375, 300.5, 314.5, 20.0 ],
-					"text" : "multiply two signals together by naming each one before",
+					"text" : "divide two signals together by naming each one before",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[3]"
 				}
@@ -383,7 +383,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 351.9375, 212.0, 266.5, 22.0 ],
-					"text" : "hoa.plug~ 1 hoa.*~ post 2"
+					"text" : "hoa.plug~ 1 hoa./~ post 2"
 				}
 
 			}
@@ -396,8 +396,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 59.4375, 327.5, 48.0, 22.0 ],
-					"text" : "sig~ 2"
+					"patching_rect" : [ 59.4375, 327.5, 56.0, 22.0 ],
+					"text" : "sig~ 10"
 				}
 
 			}
@@ -498,7 +498,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 147.4375, 417.5, 161.0, 20.0 ],
-					"text" : "hoa.plug~ 1 hoa.*~ post"
+					"text" : "hoa.plug~ 1 hoa./~ post"
 				}
 
 			}
@@ -586,7 +586,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "signal", "signal", "signal" ],
 					"patching_rect" : [ 15.0, 212.0, 169.0, 22.0 ],
-					"text" : "hoa.plug~ 1 hoa.*~ no 5"
+					"text" : "hoa.plug~ 1 hoa./~ no 2"
 				}
 
 			}
@@ -662,7 +662,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.*~", "@obj-desc", "hoa.plug~", "version", "of", "the", "vanilla", "*~", "object" ],
+					"args" : [ "@obj-name", "hoa./~", "@obj-desc", "hoa.plug~", "version", "of", "the", "vanilla", "/~", "object" ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -963,7 +963,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.times~.maxpat",
+				"name" : "hoa.div~.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "",
 				"type" : "JSON",

@@ -308,10 +308,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-6", 1 ],
+					"destination" : [ "obj-6", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 284.5, 174.5, 145.5, 174.5 ],
+					"midpoints" : [ 284.5, 174.5, 114.5, 174.5 ],
 					"source" : [ "obj-20", 0 ]
 				}
 
