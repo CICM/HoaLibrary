@@ -460,12 +460,12 @@
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-82",
-					"linecount" : 8,
+					"linecount" : 7,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 651.0, 356.5, 206.0, 142.0 ],
-					"text" : "NB : to see references and tutorials pages you must before deactivate the option \"Use New Documentation Rendering\" in the global max preferences window. This is a current limitation of Max in this current version (6.0.8).",
+					"patching_rect" : [ 651.0, 356.5, 213.0, 125.0 ],
+					"text" : "NB : to see references pages you must before deactivate the option \"Use New Documentation Rendering\" in the global max preferences window. This is a current limitation of Max version (6.0.8).",
 					"textcolor" : [ 0.74902, 0.203922, 0.235294, 0.81 ],
 					"varname" : "autohelp_top_description[1]"
 				}
@@ -709,7 +709,7 @@
 											}
 , 											{
 												"key" : "hoa.decorrelation~",
-												"value" : [ "allows you to delay the differents harmonics depending to the harmonic number to decorrelate the harmonics and generate a diffused soundfield." ]
+												"value" : [ "hoa.decorrelation~ allows you to delay the differents harmonics depending to the harmonic number to decorrelate the harmonics and generate a diffuse soundfield." ]
 											}
 , 											{
 												"key" : "hoa.grain~",
@@ -729,7 +729,7 @@
 											}
 , 											{
 												"key" : "hoa.halo~",
-												"value" : [ "highlights a part of the soundfield. It puts all the soundfield in the dark exept where you're directing the 'sound-flashlight'. The spread value controls the diffusion of the 'sound-flashlight'." ]
+												"value" : [ "hoa.halo~ highlights a part of the soundfield. It puts all the soundfield in the dark exept where you're directing the 'sound-flashlight'. The spread value controls the diffusion of the 'sound-flashlight'." ]
 											}
  ]
 									}
@@ -969,6 +969,7 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
+					"offset" : [ -1313.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
@@ -999,6 +1000,45 @@
 						"digest" : "",
 						"tags" : "",
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-21",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 4334.0, 264.0, 248.0, 20.0 ],
+									"text" : "Operators and tools shortcuts for hoa.plug~",
+									"textcolor" : [ 0.375912, 0.375912, 0.375912, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"border" : 1,
+									"button" : 1,
+									"clicktabcolor" : [ 0.392157, 0.494118, 0.666667, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"hovertabcolor" : [ 0.392157, 0.494118, 0.666667, 0.9 ],
+									"hovertextcolor" : [ 1.0, 1.0, 1.0, 0.9 ],
+									"id" : "obj-20",
+									"margin" : 0,
+									"maxclass" : "tab",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "int", "", "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 3994.0, 0.0, 617.0, 282.0 ],
+									"rounded" : 6.0,
+									"spacing_x" : 20.0,
+									"spacing_y" : 5.0,
+									"tabs" : [ "hoa.abs~", "hoa.all", "hoa.amp~", "hoa.div~", "hoa.equals~", "hoa.greaterthan~", "hoa.greaterthaneq~", "hoa.highpass~", "hoa.lessthan~", "hoa.lessthaneq~", "hoa.minus~", "hoa.modulo~", "hoa.name1~", "hoa.name2~", "hoa.notequals~", "hoa.nothing~", "hoa.onepole~", "hoa.plus~", "hoa.plusequals~", "hoa.rdiv~", "hoa.receive", "hoa.receive~", "hoa.rminus~", "hoa.send", "hoa.send~", "hoa.snapshot~", "hoa.times~" ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
@@ -1203,14 +1243,14 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.irconverter~"
+									"text" : "hoa.control"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 5,
+										"count" : 6,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.delay~" ]
@@ -1230,6 +1270,10 @@
 , 											{
 												"key" : 4,
 												"value" : [ "hoa.reverberation~" ]
+											}
+, 											{
+												"key" : 5,
+												"value" : [ "hoa.decorrelation~" ]
 											}
  ]
 									}
@@ -1361,7 +1405,7 @@
 											}
 , 											{
 												"key" : 2,
-												"value" : [ "hoa.spat" ]
+												"value" : [ "hoa.map" ]
 											}
 , 											{
 												"key" : 3,
@@ -1706,22 +1750,6 @@
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-109",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 4331.0, 130.0, 144.0, 33.0 ],
-									"text" : "Operators and tools shortcuts for hoa.plug~ :",
-									"textcolor" : [ 0.375912, 0.375912, 0.375912, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
 									"fontsize" : 14.0,
 									"hidden" : 1,
 									"id" : "obj-9",
@@ -1856,291 +1884,6 @@
 							}
 , 							{
 								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-128",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "float" ],
-									"patching_rect" : [ 4174.0, 220.0, 90.0, 20.0 ],
-									"text" : "hoa.snapshot~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-127",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4264.0, 115.0, 46.0, 20.0 ],
-									"text" : "hoa.*~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-126",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4264.0, 160.0, 48.0, 20.0 ],
-									"text" : "hoa.!-~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-125",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4099.0, 220.0, 48.0, 20.0 ],
-									"text" : "hoa.!/~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-124",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4234.0, 190.0, 55.0, 20.0 ],
-									"text" : "hoa.+=~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-123",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4234.0, 85.0, 48.0, 20.0 ],
-									"text" : "hoa.+~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-122",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4024.0, 205.0, 51.0, 20.0 ],
-									"text" : "hoa.!=~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-121",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4189.0, 160.0, 52.0, 20.0 ],
-									"text" : "hoa.%~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-120",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4129.0, 160.0, 45.0, 20.0 ],
-									"text" : "hoa.-~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-118",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4144.0, 190.0, 55.0, 20.0 ],
-									"text" : "hoa.<=~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-119",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4069.0, 175.0, 48.0, 20.0 ],
-									"text" : "hoa.<~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-117",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 4024.0, 130.0, 78.0, 20.0 ],
-									"text" : "hoa.name2~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-116",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 4174.0, 130.0, 78.0, 20.0 ],
-									"text" : "hoa.name1~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-115",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4174.0, 100.0, 55.0, 20.0 ],
-									"text" : "hoa.>=~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-114",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4114.0, 115.0, 48.0, 20.0 ],
-									"text" : "hoa.>~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-113",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4054.0, 100.0, 55.0, 20.0 ],
-									"text" : "hoa.==~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-112",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4189.0, 55.0, 44.0, 20.0 ],
-									"text" : "hoa./~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-111",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 4099.0, 70.0, 64.0, 20.0 ],
-									"text" : "hoa.amp~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"color" : [ 0.390905, 0.495765, 0.666667, 1.0 ],
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-110",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 4039.0, 55.0, 46.0, 20.0 ],
-									"text" : "hoa.all"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"comment" : "",
 									"hidden" : 1,
 									"id" : "obj-2",
@@ -2203,7 +1946,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.delay~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.reverberation~" ]
+									"tabs" : [ "hoa.delay~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.reverberation~", "hoa.decorrelation~" ]
 								}
 
 							}
@@ -2526,6 +2269,15 @@
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-2", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-73", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-20", 1 ]
 								}
 
 							}
@@ -2998,7 +2750,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 651.0, 356.5, 206.0, 142.0 ],
+					"patching_rect" : [ 651.0, 356.5, 206.0, 125.0 ],
 					"rounded" : 15,
 					"shadow" : -1
 				}
@@ -3180,139 +2932,6 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.amp~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.div~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.equals~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.greaterthan~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.greaterthaneq~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.name1~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.name2~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.lessthan~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.lessthaneq~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.minus~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.modulo~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.notequals~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.plus~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.plusequals~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.rdiv~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.rminus~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.times~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.snapshot~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/others",
