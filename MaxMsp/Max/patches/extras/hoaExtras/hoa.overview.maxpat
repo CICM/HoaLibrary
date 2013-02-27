@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 36.0, 128.0, 875.0, 639.0 ],
+		"rect" : [ 160.0, 77.0, 875.0, 639.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -618,14 +618,14 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 28,
+										"count" : 26,
 										"data" : [ 											{
 												"key" : "hoa.encoder~",
 												"value" : [ "hoa.encoder~ creates the spherical harmonics of a signal depending of an given order and the position on a circle." ]
 											}
 , 											{
 												"key" : "hoa.decoder~",
-												"value" : [ "hoa.decoder~ decodes an ambisonic soundfield for a given number of loudspeakers." ]
+												"value" : [ "hoa.decoder~ decodes an ambisonic soundfield for a given number of loudspeakers. First argument is the order of the ambisonic soundfield, second argument is the number of loudspeakers, it must be equal or superior to the number of harmonics (2 * order + 1)." ]
 											}
 , 											{
 												"key" : "hoa.rotate~",
@@ -633,7 +633,7 @@
 											}
 , 											{
 												"key" : "hoa.plug~",
-												"value" : [ "hoa.plug~ facilitates the modularization of patches for ambisonic processing." ]
+												"value" : [ "hoa.plug~ facilitates the modularization of patches for ambisonic processing. The number of inlets and outlets is dependant on the number of inlets and outlets objects within its subpatch window, the ambisonic order andf the 1st argument.\nThe 2nd argument is the name of the patcher to load and the 3rd argument is the mode pre, no or post decoding." ]
 											}
 , 											{
 												"key" : "hoa.connect",
@@ -677,15 +677,15 @@
 											}
 , 											{
 												"key" : "hoa.optim~",
-												"value" : [ "hoa.optim~ applies an optimization to the cylindrical harmonics." ]
+												"value" : [ "hoa.optim~ applies an optimization to the cylindrical harmonics. It can be basic for no optimization, maxRe or inPhase." ]
 											}
 , 											{
 												"key" : "hoa.map",
-												"value" : [ "hoa.map is a 2D spatialization user interface tool. It allows you to spatialize several point sources." ]
+												"value" : [ "hoa.map is a 2D spatialization user interface tool, allow you to spatialize several point sources. You can control sources with a list of value in the first inlet, zoom in/out, add or remove loudspeakers, modify the distance between listener and loudspeaker..." ]
 											}
 , 											{
 												"key" : "hoa.control",
-												"value" : [ "hoa.control displays the representation of the harmonics of an encoded sound for a given order. optimization. azimuth value and wide value. It can be used to understand of the encoding behavior. But also the optimization and fractionnal order effect (wider) or as a controller for the 'super encoder' set." ]
+												"value" : [ "hoa.control displays the representation of the harmonics of an encoded ponctual sound for a given order, optimization, azimuth value and wide value. It can be used to understand of the encoding behavior, the optimization and fractionnal order effect (wider) or as a controller for the 'super encoder' set." ]
 											}
 , 											{
 												"key" : "hoa.stereo~",
@@ -701,15 +701,11 @@
 											}
 , 											{
 												"key" : "hoa.wider~",
-												"value" : [ "hoa.wider~ can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes." ]
+												"value" : [ "hoa.wider~ can be used to make more wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes." ]
 											}
 , 											{
 												"key" : "hoa.delay~",
 												"value" : [ "hoa.delay~ allows you to delay the differents harmonics." ]
-											}
-, 											{
-												"key" : "hoa.decorrelation~",
-												"value" : [ "hoa.decorrelation~ allows you to delay the differents harmonics depending to the harmonic number to decorrelate the harmonics and generate a diffuse soundfield." ]
 											}
 , 											{
 												"key" : "hoa.grain~",
@@ -717,7 +713,7 @@
 											}
 , 											{
 												"key" : "hoa.mirror~",
-												"value" : [ "hoa.mirror~ applies a weight on the negatives harmonics to add the mirror image of a soundfield to itself." ]
+												"value" : [ "hoa.mirror~ applies a weight on the negatives harmonics to add the mirror image of a soundfield to itself. " ]
 											}
 , 											{
 												"key" : "hoa.mixer~",
@@ -726,10 +722,6 @@
 , 											{
 												"key" : "hoa.reverberation~",
 												"value" : [ "hoa.reverberation~ use a algorithm based on feedback network delay and doppler effect to simulate a room reveberation." ]
-											}
-, 											{
-												"key" : "hoa.halo~",
-												"value" : [ "hoa.halo~ highlights a part of the soundfield. It puts all the soundfield in the dark exept where you're directing the 'sound-flashlight'. The spread value controls the diffusion of the 'sound-flashlight'." ]
 											}
  ]
 									}
@@ -907,7 +899,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 36.5, 202.257935, 579.0, 5.0 ]
+					"patching_rect" : [ 38.5, 206.257935, 579.0, 5.0 ]
 				}
 
 			}
@@ -918,7 +910,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 35.5, 201.257935, 579.0, 5.0 ]
+					"patching_rect" : [ 37.5, 205.257935, 579.0, 5.0 ]
 				}
 
 			}
@@ -953,11 +945,11 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 25.5, 165.257935, 605.125, 30.242065 ],
+					"patching_rect" : [ 20.5, 165.257935, 616.125, 33.0 ],
 					"rounded" : 0.0,
 					"spacing_x" : 1.0,
 					"spacing_y" : 0.0,
-					"tabs" : [ "All", "Basics", "GUI", "Advanced", "Utility", "Effects", "Operators" ]
+					"tabs" : [ "Externals-all", "Externals-1", "Externals-2", "Externals-GUI", "Externals-Utility", "Plug-process", "Plug-Operators" ]
 				}
 
 			}
@@ -969,7 +961,6 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
-					"offset" : [ -1313.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
@@ -979,7 +970,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 62.0, 339.0, 605.0, 288.0 ],
+						"rect" : [ 186.0, 288.0, 605.0, 288.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1000,6 +991,21 @@
 						"digest" : "",
 						"tags" : "",
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"hidden" : 1,
+									"id" : "obj-49",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1313.0, -26.0, 64.0, 20.0 ],
+									"text" : "external-2"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -1243,14 +1249,14 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.control"
+									"text" : "hoa.decoder~"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 6,
+										"count" : 5,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.delay~" ]
@@ -1270,10 +1276,6 @@
 , 											{
 												"key" : 4,
 												"value" : [ "hoa.reverberation~" ]
-											}
-, 											{
-												"key" : 5,
-												"value" : [ "hoa.decorrelation~" ]
 											}
  ]
 									}
@@ -1493,7 +1495,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 22,
+										"count" : 21,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.encoder~" ]
@@ -1556,7 +1558,7 @@
 											}
 , 											{
 												"key" : 15,
-												"value" : [ "hoa.spat" ]
+												"value" : [ "hoa.map" ]
 											}
 , 											{
 												"key" : 16,
@@ -1577,10 +1579,6 @@
 , 											{
 												"key" : 20,
 												"value" : [ "hoa.wider~" ]
-											}
-, 											{
-												"key" : 21,
-												"value" : [ "hoa.halo~" ]
 											}
  ]
 									}
@@ -1946,7 +1944,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.delay~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.reverberation~", "hoa.decorrelation~" ]
+									"tabs" : [ "hoa.am~", "hoa.closer~", "hoa.delay~", "hoa.decorrelation~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.reverberation~" ]
 								}
 
 							}
@@ -2038,7 +2036,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 1313.0, -26.0, 32.0, 20.0 ],
+									"patching_rect" : [ 2117.0, -39.0, 32.0, 20.0 ],
 									"text" : "GUI"
 								}
 
@@ -2077,8 +2075,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 660.0, -20.75, 46.0, 20.0 ],
-									"text" : "Basics"
+									"patching_rect" : [ 660.0, -20.75, 64.0, 20.0 ],
+									"text" : "external-1"
 								}
 
 							}
@@ -2313,7 +2311,7 @@
 									"destination" : [ "obj-27", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"source" : [ "obj-24", 3 ]
+									"source" : [ "obj-24", 2 ]
 								}
 
 							}
@@ -2349,7 +2347,7 @@
 									"destination" : [ "obj-6", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"source" : [ "obj-24", 2 ]
+									"source" : [ "obj-24", 3 ]
 								}
 
 							}
@@ -2736,7 +2734,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 18.0625, 156.257935, 622.0, 342.242065 ],
+					"patching_rect" : [ 16.0625, 156.257935, 628.0, 342.242065 ],
 					"rounded" : 15,
 					"shadow" : -1
 				}

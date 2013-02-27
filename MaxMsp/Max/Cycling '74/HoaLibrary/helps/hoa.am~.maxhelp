@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 2.0, 57.0, 1278.0, 633.0 ],
+		"rect" : [ 2.0, 100.0, 1278.0, 633.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -139,9 +139,9 @@
 					"id" : "obj-64",
 					"linecount" : 2,
 					"maxclass" : "newobj",
-					"numinlets" : 0,
+					"numinlets" : 15,
 					"numoutlets" : 15,
-					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 590.0, 338.916656, 186.666672, 32.0 ],
 					"text" : "hoa.plug~ 7 hoa.receive~ post @name ama"
 				}
@@ -651,9 +651,9 @@
 					"id" : "obj-24",
 					"linecount" : 2,
 					"maxclass" : "newobj",
-					"numinlets" : 0,
+					"numinlets" : 15,
 					"numoutlets" : 15,
-					"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 					"patching_rect" : [ 589.5, 110.0, 187.166672, 32.0 ],
 					"text" : "hoa.plug~ 7 hoa.receive~ post @name amo"
 				}
@@ -771,7 +771,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 70.0, 540.0, 33.0 ],
-					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal dependinbg to their number.",
+					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending to their number.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[1]"
 				}
