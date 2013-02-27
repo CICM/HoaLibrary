@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ -1.0, 100.0, 1154.0, 653.0 ],
+		"rect" : [ 101.0, 59.0, 1154.0, 653.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -47,7 +47,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ -1.0, 126.0, 1154.0, 627.0 ],
+						"rect" : [ 101.0, 85.0, 1154.0, 627.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -78,8 +78,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 371.625, 360.0, 173.0, 30.0 ],
-									"text" : "readfolder ./examples/HoaIrs/HoaChapel"
+									"patching_rect" : [ 371.625, 360.0, 187.691345, 30.0 ],
+									"text" : "readfolder ./examples/hoa/HoaIrs/HoaChapel"
 								}
 
 							}
@@ -89,12 +89,13 @@
 									"fontsize" : 11.595187,
 									"hidden" : 1,
 									"id" : "obj-7",
+									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 371.625, 332.0, 273.0, 19.0 ],
-									"text" : "loadmess readfolder ./examples/HoaIrs/HoaChapel"
+									"patching_rect" : [ 371.625, 332.0, 187.691345, 32.0 ],
+									"text" : "loadmess readfolder ./examples/hoa/HoaIrs/HoaChapel"
 								}
 
 							}
@@ -881,7 +882,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 30.0, 448.0, 245.81633, 32.0 ],
 									"saved_object_attributes" : 									{
-										"buffers" : [ "hoaIr.1", "hoaIr.2", "hoaIr.3", "hoaIr.4", "hoaIr.5", "hoaIr.6", "hoaIr.7" ],
+										"buffers" : [ "none", "none", "none", "none", "none", "none", "none" ],
 										"channels" : [ 1, 1, 1, 1, 1, 1, 1 ],
 										"limits" : [ 0, 0, 0, 0, 0, 0, 0 ],
 										"offsets" : [ 0, 128, 256, 512, 1024, 2048, 4096 ]
@@ -1769,14 +1770,14 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
