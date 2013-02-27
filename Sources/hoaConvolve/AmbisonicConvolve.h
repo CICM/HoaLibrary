@@ -70,7 +70,7 @@ public:
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]) + (1. - m_gain) * aInputs[j][i];
+				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]) * m_gain + (1. - m_gain) * aInputs[j][i];
 		}
 	}
 	
@@ -80,7 +80,7 @@ public:
 		{
 			setGain(aGain[i]);
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]) + (1. - m_gain) * aInputs[j][i];
+				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i]) * m_gain + (1. - m_gain) * aInputs[j][i];
 		}
 	}
 };
