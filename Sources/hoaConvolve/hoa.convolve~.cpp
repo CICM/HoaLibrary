@@ -123,7 +123,8 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 	t_HoaConvolve *x = NULL;
 
 	long order = 4;
-	if (x = (t_HoaConvolve *)object_alloc((t_class*)HoaConvolve_class)) 
+    x = (t_HoaConvolve *)object_alloc((t_class*)HoaConvolve_class);
+	if (x)
 	{
 		x->f_check = 0;
 		if(atom_gettype(argv) == A_LONG)
@@ -143,18 +144,19 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 		attr_args_process(x, argc, argv);
 		x->f_check = 1;
 		buffer_setup(x);
+        x->f_ambiConvolve->setGain(1.);
 	}
 	return (x);
 }
 
 void HoaConvolve_float(t_HoaConvolve *x, double f)
 {
-	x->f_ambiConvolve->setGain(f);
+	//x->f_ambiConvolve->setGain(f);
 }
 
 void HoaConvolve_int(t_HoaConvolve *x, long n)
 {
-	x->f_ambiConvolve->setGain(n);
+	//x->f_ambiConvolve->setGain(n);
 }
 
 void HoaConvolve_dsp64(t_HoaConvolve *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
