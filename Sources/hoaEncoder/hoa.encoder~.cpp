@@ -110,6 +110,7 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
+        post("salut");
 	}
 	return (x);
 }
