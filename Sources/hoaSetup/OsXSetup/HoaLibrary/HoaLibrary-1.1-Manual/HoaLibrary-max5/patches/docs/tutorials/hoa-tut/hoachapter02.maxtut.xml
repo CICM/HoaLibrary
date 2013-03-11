@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<?xml-stylesheet href="./_c74_tut.xsl" type="text/xsl"?>
+
+<chapter name="HoaLibrary | Tutorial 2 : Basics">
+
+<hoa_style/><hoa_custom lang="en" tutoname="hoachapter02"/>
+
+<openfile name="02basics" patch="02basics.maxpat"/>
+
+<indexinfo category="Tutorials" title="HoaLibrary Tutorial 2">Basics</indexinfo>
+
+<header>HoaLibrary Tutorial 2: Basics</header>
+
+<subhead>On HoaLibrary tutorials :</subhead>
+<hoa_block>
+	Welcome to the HoaLibrary tutorials. This series of tutorials covers all relevant aspects of HoaLibrary and aims at getting you started as quickly as possible. For an overview of all tutorials, see the <i>See Also</i> sections in each <i>Hoa</i> object's help files and references. Be sure to check out the HoaLibrary references besides these tutorials which explains every function of HoaLibrary objects in detail. If you wish to restart a tutorial just close the tutorial patcher and open it by clicking the <openpatchlink>Open the tutorial</openpatchlink> link again. 
+	<br/>You could also visit our <a href="http://www.mshparisnord.fr/hoalibrary/en/">website</a> for more informations.
+</hoa_block>
+
+<subhead>Let's get started.</subhead>
+<hoa_block>
+	<openpatchlink>Open the tutorial</openpatchlink>.
+</hoa_block>                                   
+
+<subhead></subhead>
+<hoa_block>
+	In this tutorial we will try to provide you an introduction to the basic concept of ambisonics.
+</hoa_block>
+
+<subhead>Further readings :</subhead>
+<hoa_block>
+	The links below :
+	<ul>
+		<li>
+			
+		</li>
+		<li>
+			
+		</li>
+		<li>
+			
+		</li>
+	</ul>
+</hoa_block>
+
+<hoa_seealsolist>
+	<seealso name="hoachapter01" type="hoa-tut">HoaLibrary Tutorial 1 : Introduction</seealso>
+	<seealso name="hoachapter02" type="hoa-tut">HoaLibrary Tutorial 2 : Basics</seealso>
+	<seealso name="hoachapter03" type="hoa-tut">HoaLibrary Tutorial 3 : Optimizations</seealso>
+	<seealso name="hoa.encoder~" type="hoa-object">Creates circular harmonics of a signal</seealso>
+	<seealso name="hoa.decoder~" type="hoa-object">Decodes an ambisonic soundfield for a given number of loudspeakers.</seealso>
+    <seealso name="hoa.rotate~" type="hoa-object">Allows you to rotate the ambisonic soundfield.</seealso>
+    <seealso name="hoa.optim~" type="hoa-object">Applies an optimization to the cylindrical harmonics.</seealso>
+    <seealso name="hoa.meter~" type="hoa-object">A multiphonic and circular version of the <o>meter~</o> object.</seealso>
+    <seealso name="hoa.spat" type="hoa-object">A 2D spatialization U/I tool to spatialize several points sources.</seealso>
+    <seealso name="hoa.scope~" type="hoa-object">U/I object to displaying the circular harmonics of an ambisonic soundfield.</seealso>
+    <seealso name="hoa.plug~" type="hoa-object">A patcher that duplicates patcher for Hoa processing.</seealso>
+    <seealso name="hoa.projector~" type="hoa-object">Discretizes the ambisonic soundfield into an array of virtual loudspeakers.</seealso>
+    <seealso name="hoa.recomposer~" type="hoa-object">Recomposes a plane wave decomposition into circular harmonics and allows you to perform a "fish eye" operation.</seealso>
+    <seealso name="hoa.binaural~" type="hoa-object">A binaural decoder for ambisonic soundfield.</seealso>
+    <seealso name="hoa.connect" type="hoa-object">Help to connect hoa library object's together</seealso>
+    <seealso name="hoa.dac~" type="hoa-object">A custom <o>dac~</o> object.</seealso>
+    <seealso name="hoa.pi" type="hoa-object">A good pi number with loadbang and a multiply factor;</seealso>
+    <seealso name="hoa.play~" type="hoa-object">A custom <o>play~</o> object for ambisonic soundfield.</seealso>
+    <seealso name="hoa.record~" type="hoa-object">A custom <o>record~</o> object for ambisonic soundfield.</seealso>
+</hoa_seealsolist>
+	
+</chapter>
+
+

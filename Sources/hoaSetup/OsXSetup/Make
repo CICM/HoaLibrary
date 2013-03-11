@@ -9,7 +9,9 @@ DISTRIBMAX5="$PACKMAX5-$VERSION"
 DISTRIBMAX6="$PACKMAX6-$VERSION"
 UNINSTALLERMAX5="$PACKMAX5-Uninstaller.command"
 UNINSTALLERMAX6="$PACKMAX6-Uninstaller.command"
-MAXPACK="../../MaxMsp/Max"
+MAXPACK5="../../../MaxMsp/Max5"
+MAXPACK6="../../../MaxMsp/Max6"
+HRTFPACK="../../../MaxMsp/HrtfDatabase"
 MANUALZIP="$LIBRARY-$VERSION-Manual"
 
 ## Installer Max5 
@@ -47,7 +49,9 @@ rm -rf $PACKMAX6.pkg
 ## Manual Max5-6
 
 mkdir $MANUALZIP
-cp -pR $MAXPACK $MANUALZIP/$LIBRARY/
+cp -pR $MAXPACK5 $MANUALZIP/$LIBRARY-max5/
+cp -pR $MAXPACK6 $MANUALZIP/$LIBRARY-max6/
+cp -pR $HRTFPACK $MANUALZIP/HrtfDatabase/
 cp -pR license.rtf $MANUALZIP
 cp -pR README.txt $MANUALZIP
 cp -pR $UNINSTALLERMAX6 $MANUALZIP
