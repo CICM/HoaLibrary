@@ -20,15 +20,16 @@ function doRemove {
 		echo -ne "- HoaLibrary Folder ($C74Folder/HoaLibrary/)"
 		sudo rm -Rf "$C74Folder/HoaLibrary" && echo -ne "... done.\n"
 		
+		#supression du loader
 		echo -ne "- Extension Files ($C74Folder/extensions/)"
 		sudo rm -Rf "$C74Folder/extensions/"hoa.* && echo -ne "... done.\n"
 
 		echo -ne "- Init Files ($C74Folder/init/)"
-		sudo rm -Rf "$C74Folder/init/"hoa.* && echo -ne "... done.\n"
-
+		sudo rm -Rf "$C74Folder/init/"hoa-* && echo -ne "... done.\n"
+		
 		echo -ne "- Palettes Files ($C74Folder/object-palettes/)"
 		sudo rm -Rf "$C74Folder/object-palettes/"hoa-palette.json && echo -ne "... done.\n"
-		sudo rm -Rf "$C74Folder/object-palettes/"hoa.* && echo -ne "... done.\n"
+		sudo rm -Rf "$C74Folder/object-palettes/"hoa.* && echo -ne "... done.\n"   
 	fi
 	
 
@@ -42,6 +43,12 @@ function doRemove {
 		
 		echo -ne "- Reference Files ($maxAppFolder/patches/HoaLibrary Reference/)"
 		sudo rm -Rf "$maxAppFolder/patches/docs/refpages/hoa-ref" && echo -ne "... done.\n"
+
+		echo -ne "- Prototypes Files ($maxAppFolder/patches/object-prototypes)"
+		sudo rm -Rf "$maxAppFolder/patches/object-prototypes/hoa.meter~" && echo -ne "... done.\n"
+
+		echo -ne "- Examples Files ($maxAppFolder/examples/hoa)"
+		sudo rm -Rf "$maxAppFolder/examples/hoa" && echo -ne "... done.\n"
 
 		echo -ne "- Tutorial Files ($maxAppFolder/patches/HoaLibrary Tutorial/)"
 		sudo rm -Rf "$maxAppFolder/patches/docs/tutorials/hoa-tut" && echo -ne "... done.\n"

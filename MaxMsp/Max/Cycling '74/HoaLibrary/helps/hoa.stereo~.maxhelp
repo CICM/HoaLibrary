@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 313.0, 102.0, 1010.0, 665.0 ],
+		"rect" : [ 51.0, 44.0, 1010.0, 665.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -47,7 +47,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 313.0, 128.0, 1010.0, 639.0 ],
+						"rect" : [ 51.0, 70.0, 1010.0, 639.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -69,6 +69,17 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-3",
+									"maxclass" : "spectroscope~",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 531.0, 575.0, 300.0, 100.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -168,7 +179,7 @@
 									"mbordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"numinlets" : 5,
 									"numoutlets" : 0,
-									"offset" : -36.0,
+									"offset" : 36.0,
 									"patching_rect" : [ 88.200012, 392.700012, 161.599976, 161.599976 ]
 								}
 
@@ -489,11 +500,14 @@
 							}
 , 							{
 								"box" : 								{
+									"bordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-66",
+									"leds_bg" : 0,
 									"ls" : 5,
-									"ls_angles" : [ 120.0, 120.0, 180.0, 239.0, 240.0 ],
+									"ls_angles" : [ 179.0, 180.0, 180.0, 180.0, 181.0 ],
 									"maxclass" : "hoa.meter~",
+									"mbordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"numinlets" : 5,
 									"numoutlets" : 0,
 									"patching_rect" : [ 689.900024, 313.799988, 142.700012, 142.700012 ]
@@ -1079,7 +1093,7 @@
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
 ,
-									"text" : "hoa.connect 25 2"
+									"text" : "hoa.connect 11 2"
 								}
 
 							}
@@ -1851,6 +1865,7 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"bgcolor" : [ 0.54902, 0.54902, 0.54902, 0.0 ],
+									"bordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-41",
 									"leds_bg" : 0,
@@ -1977,7 +1992,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 9.4375, 6.5, 630.5625, 33.0 ],
+									"patching_rect" : [ 9.4375, 6.5, 630.5625, 34.0 ],
 									"text" : "This subpatch show you how to reveal different part of the surround soundfield.\nin this exemple we rotate whole soundfield before sending it to the hoa.stereo~ object.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -2025,7 +2040,7 @@
 									"mbordercolor" : [ 0.54902, 0.54902, 0.54902, 0.0 ],
 									"numinlets" : 5,
 									"numoutlets" : 0,
-									"offset" : 93.0,
+									"offset" : 90.0,
 									"patching_rect" : [ 431.712524, 408.637512, 166.608337, 166.608337 ]
 								}
 
@@ -7049,20 +7064,6 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
-									"id" : "obj-5",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 687.0, 127.0, 57.0, 20.0 ],
-									"text" : "triangle~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
 									"id" : "obj-36",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -7237,16 +7238,17 @@
 							}
 , 							{
 								"box" : 								{
+									"bordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-18",
 									"leds_bg" : 0,
 									"ls" : 5,
-									"ls_angles" : [ 180.0, 180.0, 180.0, 180.0, 181.0 ],
+									"ls_angles" : [ 179.0, 180.0, 180.0, 180.0, 181.0 ],
 									"maxclass" : "hoa.meter~",
 									"mbordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"numinlets" : 5,
 									"numoutlets" : 0,
-									"patching_rect" : [ 690.200012, 400.399994, 155.799988, 155.799988 ]
+									"patching_rect" : [ 690.200012, 400.399994, 158.600006, 158.600006 ]
 								}
 
 							}
@@ -7310,6 +7312,7 @@
 							}
 , 							{
 								"box" : 								{
+									"bordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-10",
 									"leds_bg" : 0,
@@ -7355,17 +7358,16 @@
 							}
 , 							{
 								"box" : 								{
-									"bgcolor" : [ 0.54902, 0.54902, 0.54902, 1.0 ],
+									"bordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-4",
 									"leds_bg" : 0,
 									"ls" : 5,
-									"ls_angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
+									"ls_angles" : [ 60.0, 60.0, 180.0, 299.0, 300.0 ],
 									"maxclass" : "hoa.meter~",
 									"mbordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"numinlets" : 5,
 									"numoutlets" : 0,
-									"offset" : -36.0,
 									"patching_rect" : [ 90.699997, 400.399994, 158.600006, 158.600006 ]
 								}
 
@@ -7422,7 +7424,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 8.4375, 70.0, 630.5625, 47.0 ],
+									"patching_rect" : [ 8.4375, 70.0, 634.0, 47.0 ],
 									"text" : "hoa.stereo~ works for all the loudspeakers positions and all the ambisonic orders. There is an optimal order for all the confugurations. For a lower distance between loudspeakers, you should use higher orders to increase the restitution. Reciprocally, you can use lower orders to preserve the cpu if the distance between the loudspeakers is higher. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -9277,14 +9279,14 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
@@ -9292,13 +9294,13 @@
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
 				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../../../patches/docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1

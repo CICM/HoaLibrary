@@ -93,6 +93,7 @@ public:
 		}
 	}
 	
+	/*
 	template<typename Type> void process(Type* anInput, Type** anOutputs)
 	{
 		for(int i  = 0; i < m_vector_size; i++)
@@ -101,7 +102,19 @@ public:
 				anOutputs[j][i] = anInput[i] * m_ambiCoeffs[j];
 		}
 	}
+	*/
 	
+	template<typename Type> void process(Type* anInput, Type** anOutputs)
+	{
+		Type* pointeur;
+		for (int j = 0; j < m_number_of_harmonics; j++)
+		{
+			pointeur = anOutputs[j];
+			for(int i  = 0; i < m_vector_size; i++)
+				pointeur[i] = anInput[i] * m_ambiCoeffs[j];
+		}
+	}
+	 
 	/* Perform sample block - Split Mode */
 	template<typename Type> void process(Type** anInputs, Type** anOutputs, Type* aTheta)
 	{
