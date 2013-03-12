@@ -23,24 +23,5 @@
     <string>CICM</string>
     <key>NSHighResolutionCapable</key>
     <true/>
-    <key>AudioComponents</key>
-    <array>
-      <dict>
-        <key>name</key>
-        <string>hoaplug</string>
-        <key>description</key>
-        <string>hoaplug</string>
-        <key>factoryFunction</key>
-        <string>hoaplugAUFactory</string>
-        <key>manufacturer</key>
-        <string>Manu</string>
-        <key>type</key>
-        <string>aumf</string>
-        <key>subtype</key>
-        <string>Plug</string>
-        <key>version</key>
-        <integer>65536</integer>
-      </dict>
-    </array>
   </dict>
 </plist>
