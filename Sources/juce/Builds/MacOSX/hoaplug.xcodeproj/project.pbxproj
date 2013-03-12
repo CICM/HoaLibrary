@@ -2862,7 +2862,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
-					/Users/Pierre/SDKs/Vst3SDK,
+					../../../../../../SDKs/Vst3SDK,
 					../../JuceLibraryCode,
 					/usr/local/include,
 					/usr/local/include/gsl,
@@ -2908,7 +2908,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
-					/Users/Pierre/SDKs/Vst3SDK,
+					../../../../../../SDKs/Vst3SDK,
 					../../JuceLibraryCode,
 					/usr/local/include,
 					"$(inherited)",
