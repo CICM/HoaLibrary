@@ -50,4 +50,4 @@ GENERATE_PKGINFO_FILE = YES
 
 //marche mais pas propre ! :
 C74FOLDER = '74
-DSTROOT = $(SRCROOT)/../../MaxMsp/Max/Cycling $C74FOLDER/HoaLibrary/externals/OsX
+DSTROOT = $(SRCROOT)/../../MaxMsp/Max6/Cycling $C74FOLDER/HoaLibrary/externals/OsX

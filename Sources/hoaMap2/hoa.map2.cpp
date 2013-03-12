@@ -160,7 +160,8 @@ void hoamap_display_angle(t_hoamap *x, int v);
 void hoamap_display_grid(t_hoamap *x, int v);
 void hoamap_display_cartvectors(t_hoamap *x, int v);
 
-void hoamap_add(t_hoamap *x, double xpos, double ypos); // ajoute une source en donnant (x,y);
+void hoamap_add(t_hoamap *x, int sourceIndex, double xpos, double ypos);
+//void hoamap_add(t_hoamap *x, double xpos, double ypos); // ajoute une source en donnant (x,y);
 void hoamap_move(t_hoamap *x, t_symbol *s, short ac, t_atom *av); // bouge une source en donnant (index,x,y);
 void hoamap_remove(t_hoamap *x); // supprime le dernière source ajoutée;
 void hoamap_clear(t_hoamap *x); // fait place nette (plus aucune sources);
@@ -242,7 +243,7 @@ int main()
 	//class_addmethod(c, (method)hoamap_delta,		"delta",		A_DEFFLOAT, 0);
 	class_addmethod(c, (method)hoamap_distance,		"distance",		A_DEFFLOAT, 0);
 	
-	class_addmethod(c, (method)hoamap_add,			"add",			A_DEFFLOAT, A_DEFFLOAT, 0);
+	class_addmethod(c, (method)hoamap_add,			"add",			A_LONG, A_DEFFLOAT, A_DEFFLOAT, 0);
 	class_addmethod(c, (method)hoamap_remove,		"remove",		0L, 0);
 	class_addmethod(c, (method)hoamap_clear,		"clear",		0L, 0);
 	//class_addmethod(c, (method)hoamap_move,			"move",			A_GIMME, 0);
@@ -752,8 +753,9 @@ void hoamap_add_source_text_description(t_hoamap *x, t_symbol *s, short ac, t_at
 }
 
 // ajoute une source en donnant (x,y) repère à 0;
-void hoamap_add(t_hoamap *x, double xpos, double ypos) {
-	int index = x->map->addSource(xpos, ypos);
+//void hoamap_add(t_hoamap *x, double xpos, double ypos) {
+void hoamap_add(t_hoamap *x, int sourceIndex, double xpos, double ypos) {
+	int index = x->map->addSource(sourceIndex, xpos, ypos);
 	if (index != -1) {
 		//hoamap_outone(x, x->map->get_number_of_sources() );
 		hoamap_outone(x, index );
@@ -1466,7 +1468,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	
 	// rajoute une source si aucune n'est presente.
 	if(nbSources == 0) {
-		hoamap_add(x, cart_pt.x , cart_pt.y);
+		//hoamap_add(x, cart_pt.x , cart_pt.y);
+		hoamap_add(x, 0, cart_pt.x , cart_pt.y);
 	}
 	
 	int sourceClicked = which_source_pointed(x, pt);

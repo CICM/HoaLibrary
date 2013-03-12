@@ -39,6 +39,18 @@ int SourceManager::addSource(double _x, double _y)
 	return -1;
 }
 
+int SourceManager::addSource(int _sourceIndex, double _x, double _y)
+{
+	if (!source_exist(_sourceIndex) && m_nbSources < m_maxSources) {
+		SourcePoint* newpoint = new SourcePoint( _x , _y );
+		m_sources.push_back(newpoint);
+		m_accessIndex.push_back( _sourceIndex );
+		m_nbSources++;
+		return _sourceIndex;
+	}
+	return -1;
+}
+
 int SourceManager::get_smallest_free_accessIndex()
 {
 	int smallest = 0;
@@ -50,6 +62,14 @@ int SourceManager::get_smallest_free_accessIndex()
 			if (counter != 0) smallest++;
 			else return smallest;
 		}
+	}
+	return 0;
+}
+
+int SourceManager::source_exist(int _sourceIndex)
+{
+	if ( count(m_accessIndex.begin(), m_accessIndex.end(), _sourceIndex) ) {
+		return 1;
 	}
 	return 0;
 }

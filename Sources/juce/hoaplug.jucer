@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="TDRYII" name="hoaplug" projectType="audioplug" version="1.0.0"
+              bundleIdentifier="com.cicm.hoaplug" buildVST="0" buildAU="1"
+              pluginName="hoaplug" pluginDesc="hoaplug" pluginManufacturer="CICM"
+              pluginManufacturerCode="Manu" pluginCode="Plug" pluginChannelConfigs="{1, 4}, {1, 8}, {1, 16}, {2, 4}, {2, 8}, {2, 16}"
+              pluginIsSynth="0" pluginWantsMidiIn="1" pluginProducesMidiOut="1"
+              pluginSilenceInIsSilenceOut="1" pluginEditorRequiresKeys="1"
+              pluginAUExportPrefix="hoaplugAU" pluginRTASCategory="" aaxIdentifier="com.yourcompany.hoaplug"
+              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.0.0"
+              companyName="CICM">
+  <MAINGROUP id="fQ2lQw" name="hoaplug">
+    <GROUP id="{72C8CAC0-DB4D-F919-A080-8DB8F7A7AE09}" name="Source">
+      <GROUP id="{475753B5-FA90-B73B-2018-1C6A32F64721}" name="ambisonics">
+        <FILE id="idky6N" name="cicmTools.h" compile="0" resource="0" file="Source/cicmTools.h"/>
+        <FILE id="xWfKKJ" name="ambisonicDecode.cpp" compile="1" resource="0"
+              file="Source/ambisonicDecode.cpp"/>
+        <FILE id="GnvUQh" name="AmbisonicDecode.h" compile="0" resource="0"
+              file="Source/AmbisonicDecode.h"/>
+        <FILE id="j4zcB5" name="AmbisonicEncoder.cpp" compile="1" resource="0"
+              file="Source/AmbisonicEncoder.cpp"/>
+        <FILE id="lrlnBH" name="AmbisonicEncoder.h" compile="0" resource="0"
+              file="Source/AmbisonicEncoder.h"/>
+        <FILE id="WaRstW" name="gslMatrix.cpp" compile="1" resource="0" file="Source/gslMatrix.cpp"/>
+        <FILE id="XkIjKO" name="gslMatrix.hpp" compile="0" resource="0" file="Source/gslMatrix.hpp"/>
+      </GROUP>
+      <FILE id="d0KVLw" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="AqxrCg" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="RtuAvP" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="vNqZev" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="/SDKs/juce/modules"
+               extraLinkerFlags="libgsl.a -static -lcblas -latlas -lm" extraCompilerFlags="">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="1" optimisation="1" targetName="hoaplug" headerPath="/usr/local/include"/>
+        <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       isDebug="0" optimisation="3" targetName="hoaplug" headerPath="/usr/local/include"/>
+      </CONFIGURATIONS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+</JUCERPROJECT>

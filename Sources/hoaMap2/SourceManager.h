@@ -53,8 +53,10 @@ public:
 	SourceManager();
 	
 	int addSource(double _x = 0, double _y = 0);
+	int addSource(int index, double _x, double _y);
 	int addSource(string* name, double _x = 0, double _y = 0);
 	
+	int source_exist(int _sourceIndex);
 	int get_smallest_free_accessIndex();
 	int clear();
 	int removeLastSource();
