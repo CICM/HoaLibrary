@@ -59,9 +59,11 @@
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
                        isDebug="1" optimisation="1" targetName="hoaplug" headerPath="/usr/local/include&#10;/usr/local/include/gsl"
-                       libraryPath="/usr/local/include/gsl&#10;/usr/local/include" defines=""/>
+                       libraryPath="/usr/local/include/gsl&#10;/usr/local/include" defines=""
+                       binaryPath="./"/>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                       isDebug="0" optimisation="3" targetName="hoaplug" headerPath="/usr/local/include"/>
+                       isDebug="0" optimisation="3" targetName="hoaplug" headerPath="/usr/local/include"
+                       binaryPath="./"/>
       </CONFIGURATIONS>
     </XCODE_MAC>
   </EXPORTFORMATS>

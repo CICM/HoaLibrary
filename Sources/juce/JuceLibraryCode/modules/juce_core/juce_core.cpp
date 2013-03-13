@@ -52,11 +52,6 @@
  #include <ctime>
  #include <winsock2.h>
  #include <ws2tcpip.h>
- #include <Dbghelp.h>
-
- #if ! JUCE_DONT_AUTOLINK_TO_WIN32_LIBRARIES
-  #pragma comment (lib, "DbgHelp.lib")
- #endif
 
  #if JUCE_MINGW
   #include <ws2spi.h>
@@ -81,10 +76,6 @@
  #include <arpa/inet.h>
  #include <netinet/tcp.h>
  #include <sys/time.h>
-
- #if ! JUCE_ANDROID
-  #include <execinfo.h>
- #endif
 #endif
 
 #if JUCE_MAC || JUCE_IOS
