@@ -27,10 +27,6 @@ HoaplugAudioProcessorEditor::~HoaplugAudioProcessorEditor()
 //==============================================================================
 void HoaplugAudioProcessorEditor::paint (Graphics& g)
 {
-    g.fillAll (Colours::white);
-    g.setColour (Colours::black);
-    g.setFont (15.0f);
-    g.drawFittedText ("High Order Ambisonics !",
-                      0, 0, getWidth(), getHeight(),
-                      Justification::centred, 1);
+    g.drawImageAt(ImageCache::getFromFile(File("map.png")), 150, 100);
+    g.drawRoundedRectangle(150, 100, 300, 300, 5, 5);
 }
