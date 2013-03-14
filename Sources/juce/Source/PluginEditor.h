@@ -18,15 +18,28 @@
 //==============================================================================
 /**
 */
-class HoaplugAudioProcessorEditor  : public AudioProcessorEditor
+class HoaplugAudioProcessorEditor  :
+    public AudioProcessorEditor,
+    public Value::Listener
 {
 public:
     HoaplugAudioProcessorEditor (HoaplugAudioProcessor* ownerFilter);
     ~HoaplugAudioProcessorEditor();
-
+    
+    void valueChanged (Value& value);
+    
     //==============================================================================
     // This is just a standard Juce paint method...
     void paint (Graphics& g);
+    
+private:
+    Image bg;
+    Label nbSourcesLabel, nbSpeakersLabel, speakerOffsetLabel, speakerDistanceLabel;
+    
+    HoaplugAudioProcessor* getProcessor() const
+    {
+        return static_cast <HoaplugAudioProcessor*> (getAudioProcessor());
+    }
 };
 
 

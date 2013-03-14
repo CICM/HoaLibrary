@@ -14,10 +14,21 @@
 
 //==============================================================================
 HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor* ownerFilter)
-    : AudioProcessorEditor (ownerFilter)
+    : AudioProcessorEditor (ownerFilter),
+    nbSourcesLabel ("", "1"),
+    nbSpeakersLabel ("", "LoudSpeaker number :"),
+    speakerOffsetLabel ("", "LoudSpeaker Offset :"),
+    speakerDistanceLabel("", "Distance of loudSpeaker :")
 {
+    bg = ImageCache::getFromMemory (BinaryData::background_jpg, BinaryData::background_jpgSize);
+    
+    //add the labels :
+    addAndMakeVisible (&nbSourcesLabel);
+    nbSourcesLabel.setEditable(true);
+    
+    
     // This is where our plugin's editor size is set.
-    setSize (600, 450);
+    setSize (580, 420);
 }
 
 HoaplugAudioProcessorEditor::~HoaplugAudioProcessorEditor()
@@ -27,6 +38,23 @@ HoaplugAudioProcessorEditor::~HoaplugAudioProcessorEditor()
 //==============================================================================
 void HoaplugAudioProcessorEditor::paint (Graphics& g)
 {
-    g.drawImageAt(ImageCache::getFromFile(File("map.png")), 150, 100);
-    g.drawRoundedRectangle(150, 100, 300, 300, 5, 5);
+    //g.setColour(Colours::beige);
+    g.drawImage(bg, 0, 0, bg.getWidth(), bg.getHeight(), 0, 0, bg.getWidth(), bg.getHeight());
+    
+    nbSourcesLabel.setBounds (getWidth()-155, 217, 50, 20);
+    
+    //g.setFillType( FillType(Colour((uint8)236,(uint8)236,(uint8)234)) );
+    //g.setFillType(FillType(&bgcolor));
+    //g.fillRect(0, 0, 580, 380);
+    //g.setColour(Colours::black);
+    //g.drawEllipse(10, 10, 360, 360, 2);
+    //g.drawText(String("HOA Library"), 200, 10, 200, 50, Justification::left, true);
+    //g.drawRoundedRectangle(10, 60, 480, 480, 5, 5);
+}
+
+void HoaplugAudioProcessorEditor::valueChanged (Value& value)
+{
+    if (value == &nbSourcesLabel) {
+        String val = nbSourcesLabel.getText();
+    }
 }

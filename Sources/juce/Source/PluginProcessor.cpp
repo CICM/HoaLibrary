@@ -142,6 +142,7 @@ void HoaplugAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer&
     for (int channel = 0; channel < getNumInputChannels(); ++channel)
     {
         float* channelData = buffer.getSampleData (channel);
+        channelData = 0;
 
         // ..do something to the data...
     }

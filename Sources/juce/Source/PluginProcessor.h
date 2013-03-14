@@ -17,7 +17,8 @@
 //==============================================================================
 /**
 */
-class HoaplugAudioProcessor  : public AudioProcessor
+class HoaplugAudioProcessor  :
+        public AudioProcessor
 {
 public:
     //==============================================================================
