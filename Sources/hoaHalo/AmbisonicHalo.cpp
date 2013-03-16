@@ -27,7 +27,7 @@ AmbisonicHalo::AmbisonicHalo(long anOrder, long aVectorSize)
 	m_number_of_inputs		= m_number_of_harmonics + 2;
 
 	m_optim					= new AmbisonicOptim(m_order, "inPhase");
-	m_encoder				= new AmbisonicEncode(m_order);
+	m_encoder				= new AmbisonicEncoder(m_order);
 	m_wider					= new AmbisonicWider(m_order);
 
 	m_input_vector			= new double[m_number_of_harmonics];

@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <vector>
 
-#include "AmbisonicEncode.h"
+#include "AmbisonicEncoder.h"
 #include "AmbisonicOptim.h"
 #include "AmbisonicWider.h"
 
@@ -41,7 +41,7 @@ private:
 	
 	double		m_spread;
 
-	AmbisonicEncode	*m_encoder;
+	AmbisonicEncoder*m_encoder;
 	AmbisonicOptim	*m_optim;
 	AmbisonicWider	*m_wider;
 

@@ -28,6 +28,7 @@
 #include <string.h>
 #include <math.h>
 using namespace std;
+#include <string>
 
 #define CICM_PI 3.141592653589793238462643383279502884
 #define CICM_2PI CICM_PI * 2.

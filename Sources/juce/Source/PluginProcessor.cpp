@@ -15,6 +15,10 @@
 //==============================================================================
 HoaplugAudioProcessor::HoaplugAudioProcessor()
 {
+    nbSources = 1;
+    nbSpeakers = 4;
+    speakerOffset = 0;
+    speakerDistance = 0.5;
 }
 
 HoaplugAudioProcessor::~HoaplugAudioProcessor()
@@ -142,6 +146,7 @@ void HoaplugAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer&
     for (int channel = 0; channel < getNumInputChannels(); ++channel)
     {
         float* channelData = buffer.getSampleData (channel);
+        channelData = 0;
 
         // ..do something to the data...
     }

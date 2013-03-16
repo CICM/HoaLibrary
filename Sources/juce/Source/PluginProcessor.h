@@ -17,7 +17,8 @@
 //==============================================================================
 /**
 */
-class HoaplugAudioProcessor  : public AudioProcessor
+class HoaplugAudioProcessor  :
+        public AudioProcessor
 {
 public:
     //==============================================================================
@@ -65,6 +66,20 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
+    
+    
+    enum Parameters
+    {
+        nbSourcesParam = 0,
+        nbSpeakersParam,
+        speakerOffsetParam,
+        speakerDistanceParam,
+        
+        totalNumParams
+    };
+    
+    int nbSources, nbSpeakers, speakerOffset;
+    float speakerDistance;
 
 private:
     //==============================================================================
