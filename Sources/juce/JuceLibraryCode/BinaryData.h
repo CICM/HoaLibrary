@@ -6,8 +6,11 @@
 
 namespace BinaryData
 {
+    extern const char*   head_png;
+    const int            head_pngSize = 2528;
+
     extern const char*   background_jpg;
-    const int            background_jpgSize = 79687;
+    const int            background_jpgSize = 77887;
 
     // If you provide the name of one of the binary resource variables above, this function will
     // return the corresponding data and its size (or a null pointer if the name isn't found).

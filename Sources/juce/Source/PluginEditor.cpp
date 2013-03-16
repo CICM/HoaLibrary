@@ -11,21 +11,44 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-
 //==============================================================================
 HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor* ownerFilter)
     : AudioProcessorEditor (ownerFilter),
-    nbSourcesLabel ("", "1"),
-    nbSpeakersLabel ("", "LoudSpeaker number :"),
-    speakerOffsetLabel ("", "LoudSpeaker Offset :"),
-    speakerDistanceLabel("", "Distance of loudSpeaker :")
+    nbSources_Slider ("nbSources"),
+    nbSpeakers_Slider ("nbSpeakers"),
+    speakerOffset_Slider ("speakerOffset"),
+    speakerDistance_Slider ("speakerDistance")
 {
     bg = ImageCache::getFromMemory (BinaryData::background_jpg, BinaryData::background_jpgSize);
     
-    //add the labels :
-    addAndMakeVisible (&nbSourcesLabel);
-    nbSourcesLabel.setEditable(true);
+    //add the draggable-number-box sliders :
+    addAndMakeVisible (&nbSources_Slider);
+    nbSources_Slider.addListener(this);
+    nbSources_Slider.setSliderStyle (Slider::IncDecButtons);
+    nbSources_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
+    nbSources_Slider.setRange(1, 64, 1);
+    nbSources_Slider.setChangeNotificationOnlyOnRelease	( true );
     
+    addAndMakeVisible (&nbSpeakers_Slider);
+    nbSpeakers_Slider.addListener(this);
+    nbSpeakers_Slider.setSliderStyle (Slider::IncDecButtons);
+    nbSpeakers_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
+    nbSpeakers_Slider.setRange(1, 64, 1);
+    //nbSpeakers_Slider.setChangeNotificationOnlyOnRelease	( true );
+    
+    addAndMakeVisible (&speakerOffset_Slider);
+    speakerOffset_Slider.addListener(this);
+    speakerOffset_Slider.setSliderStyle (Slider::IncDecButtons);
+    speakerOffset_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
+    speakerOffset_Slider.setRange(-180, 180, 1);
+    
+    addAndMakeVisible (&speakerDistance_Slider);
+    speakerDistance_Slider.addListener(this);
+    speakerDistance_Slider.setSliderStyle (Slider::IncDecButtons);
+    speakerDistance_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
+    speakerDistance_Slider.setRange(0., 1., 0.01);
+    
+    addAndMakeVisible (&theMap);
     
     // This is where our plugin's editor size is set.
     setSize (580, 420);
@@ -38,23 +61,48 @@ HoaplugAudioProcessorEditor::~HoaplugAudioProcessorEditor()
 //==============================================================================
 void HoaplugAudioProcessorEditor::paint (Graphics& g)
 {
-    //g.setColour(Colours::beige);
     g.drawImage(bg, 0, 0, bg.getWidth(), bg.getHeight(), 0, 0, bg.getWidth(), bg.getHeight());
+        
+    nbSources_Slider.setBounds (getWidth()-159, 216, 58, 23);
+    nbSpeakers_Slider.setBounds (getWidth()-80, 216, 58, 23);
+    speakerOffset_Slider.setBounds (getWidth()-80, 278, 62, 23);
+    speakerDistance_Slider.setBounds (getWidth()-80, 347, 60, 23);
     
-    nbSourcesLabel.setBounds (getWidth()-155, 217, 50, 20);
-    
-    //g.setFillType( FillType(Colour((uint8)236,(uint8)236,(uint8)234)) );
-    //g.setFillType(FillType(&bgcolor));
-    //g.fillRect(0, 0, 580, 380);
-    //g.setColour(Colours::black);
-    //g.drawEllipse(10, 10, 360, 360, 2);
-    //g.drawText(String("HOA Library"), 200, 10, 200, 50, Justification::left, true);
-    //g.drawRoundedRectangle(10, 60, 480, 480, 5, 5);
+    theMap.setBounds (10, 10, 400, 400);
 }
 
 void HoaplugAudioProcessorEditor::valueChanged (Value& value)
 {
-    if (value == &nbSourcesLabel) {
-        String val = nbSourcesLabel.getText();
+}
+
+
+// This is our Slider::Listener callback, when the user drags a slider.
+void HoaplugAudioProcessorEditor::sliderValueChanged (Slider* slider)
+{
+	// It's vital to use setParameterNotifyingHost to change any parameters that are automatable
+	// by the host, rather than just modifying them directly, otherwise the host won't know
+	// that they've changed.
+    
+    if (slider == &nbSources_Slider) {
+        theMap.setNbSources(nbSources_Slider.getValue());
     }
+    else if (slider == &nbSpeakers_Slider) {
+        theMap.setNbSpeakers(nbSpeakers_Slider.getValue());
+    }
+    else if (slider == &speakerOffset_Slider) {
+        theMap.setSpeakerOffset(speakerOffset_Slider.getValue());
+    }
+    else if (slider == &speakerDistance_Slider) {
+        theMap.setSpeakerDistance(speakerDistance_Slider.getValue());
+    }
+	/*
+     if (slider == &gainSlider) {
+     //getProcessor()->setParameterNotifyingHost (ModulatorAudioProcessor::gainParam, (float) gainSlider.getValue());
+     }
+     */
+}
+
+
+void changeListenerCallback (ChangeBroadcaster* source){
+    ;
 }

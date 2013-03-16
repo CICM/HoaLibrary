@@ -15,6 +15,10 @@
 //==============================================================================
 HoaplugAudioProcessor::HoaplugAudioProcessor()
 {
+    nbSources = 1;
+    nbSpeakers = 4;
+    speakerOffset = 0;
+    speakerDistance = 0.5;
 }
 
 HoaplugAudioProcessor::~HoaplugAudioProcessor()

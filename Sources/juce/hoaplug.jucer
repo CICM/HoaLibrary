@@ -12,11 +12,13 @@
               buildRTAS="0">
   <MAINGROUP id="fQ2lQw" name="hoaplug">
     <GROUP id="{437051D4-D878-43BF-22E9-C451A62C759B}" name="ressources">
+      <FILE id="yVGiYi" name="head.png" compile="0" resource="1" file="ressources/head.png"/>
       <FILE id="uenUeh" name="background.jpg" compile="0" resource="1" file="ressources/background.jpg"/>
     </GROUP>
     <GROUP id="{72C8CAC0-DB4D-F919-A080-8DB8F7A7AE09}" name="Source">
-      <FILE id="CALgEg" name="map.cpp" compile="1" resource="0" file="Source/map.cpp"/>
-      <FILE id="chjWTM" name="map.h" compile="0" resource="0" file="Source/map.h"/>
+      <FILE id="YpNFEM" name="TextBoxSlider.h" compile="0" resource="0" file="Source/TextBoxSlider.h"/>
+      <FILE id="CALgEg" name="HoaMap.cpp" compile="1" resource="0" file="Source/HoaMap.cpp"/>
+      <FILE id="chjWTM" name="HoaMap.h" compile="0" resource="0" file="Source/HoaMap.h"/>
       <GROUP id="{577059B2-21A0-855C-A68D-92C08004700F}" name="ambisonics">
         <FILE id="Qtf2CG" name="ambisonicDecode.cpp" compile="1" resource="0"
               file="Source/ambisonicDecode.cpp"/>
