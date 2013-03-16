@@ -30,32 +30,21 @@ HoaMap::~HoaMap()
 
 void HoaMap::paint (Graphics& g)
 {
-    float distSpeakerRayon = getWidth() * m_speakerDistance;
-    float distSpeakerCenter = getWidth()*0.5 - distSpeakerRayon*0.5;
-    float headScale = 0.3;
-    //g.fillAll (Colours::white);   // clear the background
-
-    //g.setColour (Colours::grey);
-    //g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
     
+    float headScale = 0.3;
     g.setColour (Colours::grey);
     g.drawEllipse(1, 1, getWidth()-2, getHeight()-2, 2);
     
-    g.setColour (Colours::grey);
-    g.fillEllipse(distSpeakerCenter, distSpeakerCenter, distSpeakerRayon, distSpeakerRayon);
-    
-    //draw_head(g);
-    
     draw_speakers(g);
-    
+    draw_head(g);
+    /*
     g.drawImage(head,
                 getWidth()*0.5 - (head.getWidth()*headScale*0.5)+0.5,
                 getHeight()*0.5 - (head.getHeight()*headScale*0.5)+0.5,
                 head.getWidth()*headScale,
                 head.getHeight()*headScale,
                 0, 0, head.getWidth(), head.getHeight());
-    
-    
+     */
 }
 
 void HoaMap::draw_speakers(Graphics& g)
@@ -63,12 +52,20 @@ void HoaMap::draw_speakers(Graphics& g)
     Path speakers;
     Path speaker;
     int i;
+    float distSpeakerRayon = getWidth() * m_speakerDistance;
+    float distSpeakerCenter = getWidth()*0.5 - distSpeakerRayon*0.5;
     float speakerSize = 10;
     float center = getWidth()*0.5;
-    g.setColour (Colours::black);
-    float stepAngle = 360.0f/(double)m_nbSpeakers;
+    float stepAngle = HOA_2PI/(float)m_nbSpeakers;
     float speakerOffset = m_speakerOffset / (180 / HOA_PI);
     
+    //draw a circle who represents distance of loudspeaker :
+    g.setColour ( (Colours::black).withAlpha((float)0.1) );
+    g.fillEllipse(distSpeakerCenter, distSpeakerCenter, distSpeakerRayon, distSpeakerRayon);
+    
+    //g.setColour (Colours::black);
+    //g.setColour ( (Colours::black).withAlpha((float)0.6) );
+    g.setColour ( Colour(0xff444444) );
     for (i=0; i < m_nbSpeakers; i++) {
         speaker.addRectangle(center-speakerSize*0.5,
                             center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5,
@@ -82,78 +79,66 @@ void HoaMap::draw_speakers(Graphics& g)
                            center - getHeight()*0.5*m_speakerDistance + speakerSize*0.5);
         
         speakers.addPath(speaker,
-                         AffineTransform::rotation( (i*stepAngle) * HOA_PI * (1./180.)+ speakerOffset, center, center));
-        //g.setColour (Colours::white);
-//        g.drawTextAsPath(String(i),
-//                         AffineTransform::rotation( (i*stepAngle) * HOA_PI * (1./180.)+ speakerOffset, center, center));
-        //myPath.applyTransform (AffineTransform::rotation( i*stepAngle + speakerOffset, center, center));
+                         AffineTransform::rotation( i*stepAngle + speakerOffset, center, center));
     }
     g.fillPath (speakers);
-    g.setColour (Colours::white);
+    g.setColour (Colour(0xffDDDDDD));
+    g.setFont(11);
+    g.beginTransparencyLayer(1);
     for (i=0; i < m_nbSpeakers; i++) {
-        g.drawText(String(i),
+        g.addTransform(AffineTransform::rotation( i*stepAngle + speakerOffset, center, center));
+        g.drawFittedText(String(i+1),
                    center-speakerSize*0.5,
-                   center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5,
+                   center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5 -1,
                    speakerSize,
-                   speakerSize, Justification(0), true);
-        g.addTransform(AffineTransform::rotation( (i*stepAngle)+ speakerOffset, center, center));
+                   speakerSize, Justification(4), true);
+        g.addTransform(AffineTransform::rotation( -( i*stepAngle + speakerOffset), center, center));
     }
+    g.endTransparencyLayer();
 }
 
 void HoaMap::draw_head(Graphics& g){
-	//t_jrgba ombrecolor = {0,0,0,0.3};
-	//double ombre;
-    float headSize = 30;
+    Path headPath;
+    float headSize = 20;
     float center = getWidth()*0.5;
-	float size = getWidth()*0.5;
+    g.setColour ( Colour(0xff444444) );
     
-   // ombre = floor(size * 0.01) + 0.5;
+    // head :
+    headPath.addCentredArc(center,
+                           center,
+                           headSize*0.5,
+                           headSize*0.5,
+                           0,
+                           0, HOA_2PI);
+    headPath.closeSubPath();
     
-    //tête
-    g.setColour (Colours::black);
-    //jgraphics_set_source_jrgba(g, &ombrecolor);
-    g.fillEllipse(center - headSize*0.5,
-                  center - headSize*0.5,
-                  headSize, headSize);
+    // Left Ear :
+    headPath.addCentredArc(center-headSize*0.4,
+                           center,
+                           headSize*0.2,
+                           headSize*0.2,
+                           0,
+                           0, HOA_2PI);
+    headPath.closeSubPath();
     
-    // Ear Left
-    g.fillEllipse(center - headSize*0.5,
-                  center,
-                  headSize*0.2,
-                  headSize*0.3);
-    /*
-    jgraphics_arc(g, rect->width * .5 + ombre, rect->height * .5 + ombre, size*0.1,  0., JGRAPHICS_2PI);
-    jgraphics_fill(g);
-    //oreille G ombre
-    jgraphics_set_line_width(g, size*(0.015));
-    jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
-    jgraphics_arc(g, rect->width * .5 + ombre, rect->height * .5 + ombre, size*(0.12), JGRAPHICS_2PI*0.47, JGRAPHICS_2PI*0.53);
-    jgraphics_stroke(g);
-    //oreille D ombre
-    jgraphics_arc(g, rect->width * .5 + ombre, rect->height * .5 + ombre, size*(0.12), JGRAPHICS_2PI*0.97, JGRAPHICS_2PI*0.03);
-    jgraphics_stroke(g);
-    // nez ombre
-    jgraphics_ovalarc(g, rect->width * .5 + ombre, rect->height * .5 - size*0.05 + ombre, size*0.015, size*0.07,  0., JGRAPHICS_2PI);
-    jgraphics_fill(g);
+    // Right Ear :
+    headPath.addCentredArc(center+headSize*0.4,
+                           center,
+                           headSize*0.2,
+                           headSize*0.2,
+                           0,
+                           0, HOA_2PI);
+    headPath.closeSubPath();
     
-    x->f_colorHead.alpha = 1;
+    // Nose :
+    headPath.addCentredArc(center,
+                           center-headSize*0.3,
+                           headSize*0.15,
+                           headSize*0.3,
+                           0,
+                           0, HOA_2PI);
     
-    //tête
-    jgraphics_set_source_jrgba(g, &x->f_colorHead);
-    jgraphics_arc(g, rect->width * .5, rect->height * .5, size*0.1,  0., JGRAPHICS_2PI);
-    jgraphics_fill(g);
-    //oreille G
-    jgraphics_set_line_width(g, size*(0.015));
-    jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
-    jgraphics_arc(g, rect->width * .5, rect->height * .5, size*(0.12), JGRAPHICS_2PI*0.47, JGRAPHICS_2PI*0.53);
-    jgraphics_stroke(g);
-    //oreille D
-    jgraphics_arc(g, rect->width * .5, rect->height * .5, size*(0.12), JGRAPHICS_2PI*0.97, JGRAPHICS_2PI*0.03);
-    jgraphics_stroke(g);
-    // nez
-    jgraphics_ovalarc(g, rect->width * .5, rect->height * .5 - size*0.05, size*0.015, size*0.07,  0., JGRAPHICS_2PI);
-    jgraphics_fill(g);
-    */
+    g.fillPath(headPath);
 }
 
 void HoaMap::resized()
