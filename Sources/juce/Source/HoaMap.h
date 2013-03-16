@@ -40,7 +40,6 @@ public:
     void setSpeakerOffset(float _speakerOffset);
 
 private:
-    Image head;
     int m_nbSources, m_nbSpeakers;
     float m_speakerOffset, m_speakerDistance;
     

@@ -17,7 +17,6 @@ HoaMap::HoaMap()
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     
-    head = ImageCache::getFromMemory (BinaryData::head_png, BinaryData::head_pngSize);
     m_nbSources = 1;
     m_nbSpeakers = 4;
     m_speakerOffset = 0;
@@ -31,20 +30,26 @@ HoaMap::~HoaMap()
 void HoaMap::paint (Graphics& g)
 {
     
-    float headScale = 0.3;
     g.setColour (Colours::grey);
     g.drawEllipse(1, 1, getWidth()-2, getHeight()-2, 2);
     
     draw_speakers(g);
     draw_head(g);
-    /*
-    g.drawImage(head,
-                getWidth()*0.5 - (head.getWidth()*headScale*0.5)+0.5,
-                getHeight()*0.5 - (head.getHeight()*headScale*0.5)+0.5,
-                head.getWidth()*headScale,
-                head.getHeight()*headScale,
-                0, 0, head.getWidth(), head.getHeight());
-     */
+    draw_sources(g);
+}
+
+void HoaMap::draw_sources(Graphics& g)
+{
+    float sourceSize = 15;
+    float center = getWidth()*0.5;
+    int i;
+    for (i=0; i < m_nbSources; i++) {
+        g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
+        g.fillEllipse(center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize);
+        g.setColour ( Colour(0xff444444) );
+        g.drawEllipse(center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize, .5);
+        g.drawFittedText(String(i+1), center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize, Justification(4), true);
+    }
 }
 
 void HoaMap::draw_speakers(Graphics& g)
@@ -99,7 +104,7 @@ void HoaMap::draw_speakers(Graphics& g)
 
 void HoaMap::draw_head(Graphics& g){
     Path headPath;
-    float headSize = 20;
+    float headSize = 15;
     float center = getWidth()*0.5;
     g.setColour ( Colour(0xff444444) );
     
@@ -139,6 +144,9 @@ void HoaMap::draw_head(Graphics& g){
                            0, HOA_2PI);
     
     g.fillPath(headPath);
+    
+    g.setColour ( Colour(0xAADDDDDD) );
+    g.drawEllipse(center-headSize*0.5, center-headSize*0.5, headSize, headSize, 0.3);
 }
 
 void HoaMap::resized()
