@@ -1,0 +1,7 @@
+;hoa.map.def
+
+LIBRARY hoa.map.mxe
+
+EXPORTS
+	main
+

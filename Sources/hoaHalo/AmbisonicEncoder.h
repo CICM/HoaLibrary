@@ -1,36 +1,28 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#ifndef DEF_AMBISONICENCODE
-#define DEF_AMBISONICENCODE
+#ifndef DEF_AMBISONICENCODER
+#define DEF_AMBISONICENCODER
 
-#include "math.h"
-#include <complex>
-#include <stdio.h>
-#include <vector>
-#include "cicmTools.h"
+#include "../cicmTools.h"
 
-#define	M_PI 3.14159265358979323846264338327950288
-#define M_2PI 2*M_PI
-#define NUMBEROFCIRCLEPOINTS 360000
-
-class AmbisonicEncode 
+class AmbisonicEncoder 
 {
 	
 private:
@@ -49,7 +41,7 @@ private:
 	
 
 public:
-	AmbisonicEncode(long anOrder, std::string aMode = "basic", long aVectorSize = 0);
+	AmbisonicEncoder(long anOrder, std::string aMode = "basic", long aVectorSize = 0);
 
 	long getOrder();
 	long getNumberOfHarmonics();
@@ -62,12 +54,12 @@ public:
 	void	setVectorSize(int aVectorSize);
 	void	setAzimtuh(double aTheta);
 
-	~AmbisonicEncode();
+	~AmbisonicEncoder();
 	
 	/* Perform sample by sample - Basic Mode */
 	template<typename Type> void process(Type anInput, Type* anOutputs, Type aTheta)
 	{
-		computeCoefs(aTheta);
+		setAzimtuh(aTheta);
 		return process(anInput, anOutputs);
 	}
 	
@@ -80,7 +72,7 @@ public:
 	/* Perform sample by sample - Split Mode */
 	template<typename Type> void process(Type* anInputs, Type* anOutputs, Type aTheta)
 	{
-		computeCoefs(aTheta);	
+		setAzimtuh(aTheta);	
 		return process(anInputs, anOutputs);
 	}
 	
@@ -95,12 +87,13 @@ public:
 	{
 		for(int i = 0; i < m_vector_size; i++)
 		{
-			computeCoefs(aTheta[i]);
+			setAzimtuh(aTheta[i]);
 			for (int j = 0; j < m_number_of_harmonics; j++)
 				anOutputs[j][i] = anInput[i] * m_ambiCoeffs[j];
 		}
 	}
 	
+	/*
 	template<typename Type> void process(Type* anInput, Type** anOutputs)
 	{
 		for(int i  = 0; i < m_vector_size; i++)
@@ -109,13 +102,25 @@ public:
 				anOutputs[j][i] = anInput[i] * m_ambiCoeffs[j];
 		}
 	}
+	*/
 	
+	template<typename Type> void process(Type* anInput, Type** anOutputs)
+	{
+		Type* pointeur;
+		for (int j = 0; j < m_number_of_harmonics; j++)
+		{
+			pointeur = anOutputs[j];
+			for(int i  = 0; i < m_vector_size; i++)
+				pointeur[i] = anInput[i] * m_ambiCoeffs[j];
+		}
+	}
+	 
 	/* Perform sample block - Split Mode */
 	template<typename Type> void process(Type** anInputs, Type** anOutputs, Type* aTheta)
 	{
 		for(int i  = 0; i < m_vector_size; i++)
 		{
-			computeCoefs(aTheta[i]);
+			setAzimtuh(aTheta[i]);
 			for (int j = 0; j < m_number_of_harmonics; j++) 
 				anOutputs[j][i] = anInputs[abs(m_index_of_harmonics[j])][i] * m_ambiCoeffs[j];
 		}
