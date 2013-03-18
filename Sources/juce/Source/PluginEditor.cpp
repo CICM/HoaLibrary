@@ -50,6 +50,8 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
     
     addAndMakeVisible (&theMap);
     
+    updateMouseCursor ();
+    
     // This is where our plugin's editor size is set.
     setSize (580, 420);
 }
