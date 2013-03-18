@@ -19,10 +19,12 @@ HoaplugAudioProcessor::HoaplugAudioProcessor()
     nbSpeakers = 4;
     speakerOffset = 0;
     speakerDistance = 0.5;
+    m_ambisonic_tool = new AmbisonicTool();
 }
 
 HoaplugAudioProcessor::~HoaplugAudioProcessor()
 {
+    delete m_ambisonic_tool;
 }
 
 //==============================================================================

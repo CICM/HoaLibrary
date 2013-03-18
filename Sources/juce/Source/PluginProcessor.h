@@ -12,6 +12,7 @@
 #define __PLUGINPROCESSOR_H_160AE7E1__
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "Ambisonics/AmbisonicTool.h"
 
 
 //==============================================================================
@@ -20,6 +21,12 @@
 class HoaplugAudioProcessor  :
         public AudioProcessor
 {
+    
+private:
+    //==============================================================================
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaplugAudioProcessor)
+    AmbisonicTool* m_ambisonic_tool;
+    
 public:
     //==============================================================================
     HoaplugAudioProcessor();
@@ -80,10 +87,6 @@ public:
     
     int nbSources, nbSpeakers, speakerOffset;
     float speakerDistance;
-
-private:
-    //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaplugAudioProcessor)
 };
 
 #endif  // __PLUGINPROCESSOR_H_160AE7E1__

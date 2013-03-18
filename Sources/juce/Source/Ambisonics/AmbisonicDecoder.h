@@ -17,8 +17,8 @@
  */
 
 
-#ifndef DEF_AmbisonicDecode
-#define DEF_AmbisonicDecode
+#ifndef DEF_AMBISONICDECODER
+#define DEF_AMBISONICDECODER
 
 #include <stdio.h>
 #include <iostream>
@@ -51,7 +51,9 @@ private:
 	void computeAngles();
 	void computePseudoInverse();
 	void setSpkrsAngles(double* someSpkrsAngles, int size);
-
+    
+    double*		m_optimVector;
+    void        computeInPhaseOptim();
 public:
 	AmbisonicDecode(long anOrder, long aNumberOfChannels = 0, long aVectorSize = 0);
 
@@ -65,7 +67,7 @@ public:
 	~AmbisonicDecode();
 	
 	/* Perform sample by sample */
-	template<typename Type> void process(Type* aInputs, Type* aOutputs)
+	void process(double* aInputs, double* aOutputs)
 	{	
 		for(int j = 0; j < m_number_of_harmonics; j++)
 			gsl_vector_set(m_input_vector, j, aInputs[j]);
@@ -77,12 +79,12 @@ public:
 	}
 	
 	/* Perform block sample */
-	template<typename Type> void process(Type** aInputs, Type** aOutputs)
+	void process(double** aInputs, double** aOutputs)
 	{	
 		for(int i = 0; i < m_vector_size; i++)
 		{
 			for(int j = 0; j < m_number_of_harmonics; j++)
-				gsl_vector_set(m_input_vector, j, aInputs[j][i]);
+				gsl_vector_set(m_input_vector, j, aInputs[j][i] * m_optimVector[j]);
 			
 			gsl_blas_dgemv(CblasNoTrans,1.0, m_decoder_matrix, m_input_vector, 0.0, m_output_vector);
 			

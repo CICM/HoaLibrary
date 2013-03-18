@@ -38,7 +38,6 @@ private:
 	double*		m_ambiCoeffs;
 	double*		m_cosLookUp;
 	double*		m_sinLookUp;
-	
 
 public:
 	AmbisonicEncoder(long anOrder, std::string aMode = "basic", long aVectorSize = 0);
@@ -53,57 +52,15 @@ public:
 	void	computeIndex();
 	void	setVectorSize(int aVectorSize);
 	void	setAzimtuh(double aTheta);
-
+    
 	~AmbisonicEncoder();
-	
-	/* Perform sample by sample - Basic Mode */
-	template<typename Type> void process(Type anInput, Type* anOutputs, Type aTheta)
-	{
-		setAzimtuh(aTheta);
-		return process(anInput, anOutputs);
-	}
 	
 	template<typename Type> void process(Type anInput, Type* anOutputs)
 	{
 		for (int i = 0; i < m_number_of_harmonics; i++) 
 			anOutputs[i] = m_ambiCoeffs[i] * anInput;
 	}
-	
-	/* Perform sample by sample - Split Mode */
-	template<typename Type> void process(Type* anInputs, Type* anOutputs, Type aTheta)
-	{
-		setAzimtuh(aTheta);	
-		return process(anInputs, anOutputs);
-	}
-	
-	template<typename Type> void process(Type* anInputs, Type* anOutputs)
-	{
-		for (int i = 0; i< m_number_of_harmonics; i++) 
-			anOutputs[i] = m_ambiCoeffs[i] * anInputs[m_index_of_harmonics[i]];
-	}
-
-	/* Perform sample block - Basic Mode */
-	template<typename Type> void process(Type* anInput, Type** anOutputs, Type* aTheta)
-	{
-		for(int i = 0; i < m_vector_size; i++)
-		{
-			setAzimtuh(aTheta[i]);
-			for (int j = 0; j < m_number_of_harmonics; j++)
-				anOutputs[j][i] = anInput[i] * m_ambiCoeffs[j];
-		}
-	}
-	
-	/*
-	template<typename Type> void process(Type* anInput, Type** anOutputs)
-	{
-		for(int i  = 0; i < m_vector_size; i++)
-		{
-			for (int j = 0; j < m_number_of_harmonics; j++) 
-				anOutputs[j][i] = anInput[i] * m_ambiCoeffs[j];
-		}
-	}
-	*/
-	
+    
 	template<typename Type> void process(Type* anInput, Type** anOutputs)
 	{
 		Type* pointeur;
@@ -115,26 +72,6 @@ public:
 		}
 	}
 	 
-	/* Perform sample block - Split Mode */
-	template<typename Type> void process(Type** anInputs, Type** anOutputs, Type* aTheta)
-	{
-		for(int i  = 0; i < m_vector_size; i++)
-		{
-			setAzimtuh(aTheta[i]);
-			for (int j = 0; j < m_number_of_harmonics; j++) 
-				anOutputs[j][i] = anInputs[abs(m_index_of_harmonics[j])][i] * m_ambiCoeffs[j];
-		}
-	}
-	
-	template<typename Type> void process(Type** anInputs, Type** anOutputs)
-	{
-		for(int i  = 0; i < m_vector_size; i++)
-		{
-			for (int j = 0; j < m_number_of_harmonics; j++) 
-				anOutputs[j][i] = anInputs[abs(m_index_of_harmonics[j])][i] * m_ambiCoeffs[j];
-		}
-	}
-	
 	
 };
 
