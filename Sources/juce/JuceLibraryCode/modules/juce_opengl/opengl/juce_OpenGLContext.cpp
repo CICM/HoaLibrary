@@ -37,7 +37,6 @@ public:
          #else
           shadersAvailable (false),
          #endif
-          hasInitialised (false),
           needsUpdate (1)
     {
         nativeContext = new NativeContext (component, pixFormat, contextToShare);
@@ -66,7 +65,6 @@ public:
        #if ! JUCE_ANDROID
         stopThread (10000);
        #endif
-        hasInitialised = false;
     }
 
     //==============================================================================
@@ -278,19 +276,6 @@ public:
        #endif
     }
 
-    void handleResize()
-    {
-        updateViewportSize (true);
-
-       #if JUCE_MAC
-        if (hasInitialised)
-        {
-            [nativeContext->view update];
-            renderFrame();
-        }
-       #endif
-    }
-
     //==============================================================================
     void run()
     {
@@ -301,13 +286,14 @@ public:
                 return;
         }
 
+        nativeContext->makeActive();
+        nativeContext->setSwapInterval (1);
+
         initialiseOnThread();
 
        #if JUCE_USE_OPENGL_SHADERS && ! JUCE_OPENGL_ES
         shadersAvailable = OpenGLShaderProgram::getLanguageVersion() > 0;
        #endif
-
-        hasInitialised = true;
 
         while (! threadShouldExit())
         {
@@ -320,15 +306,15 @@ public:
 
     void initialiseOnThread()
     {
-        jassert (associatedObjectNames.size() == 0);
-        jassert (! cachedImageFrameBuffer.isValid());
+        associatedObjectNames.clear();
+        associatedObjects.clear();
 
-        context.makeActive();
+        cachedImageFrameBuffer.release();
+
         nativeContext->initialiseOnRenderThread();
         glViewport (0, 0, component.getWidth(), component.getHeight());
 
         context.extensions.initialise();
-        nativeContext->setSwapInterval (1);
 
         if (context.renderer != nullptr)
             context.renderer->newOpenGLContextCreated();
@@ -367,7 +353,7 @@ public:
     ReferenceCountedArray<ReferenceCountedObject> associatedObjects;
 
     WaitableEvent canPaintNowFlag, finishedPaintingFlag;
-    bool shadersAvailable, hasInitialised;
+    bool shadersAvailable;
     Atomic<int> needsUpdate;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CachedImage)
@@ -425,7 +411,7 @@ public:
              && context.nativeContext != nullptr)
         {
             if (CachedImage* const c = CachedImage::get (comp))
-                c->handleResize();
+                c->updateViewportSize (true);
 
             context.nativeContext->updateWindowPosition (comp.getTopLevelComponent()
                                                             ->getLocalArea (&comp, comp.getLocalBounds()));
@@ -576,37 +562,22 @@ Component* OpenGLContext::getTargetComponent() const noexcept
     return attachment != nullptr ? attachment->getComponent() : nullptr;
 }
 
-static ThreadLocalValue<OpenGLContext*> currentThreadActiveContext;
-
 OpenGLContext* OpenGLContext::getCurrentContext()
 {
-    return currentThreadActiveContext.get();
+   #if JUCE_ANDROID
+    if (NativeContext* const nc = NativeContext::getActiveContext())
+        if (CachedImage* currentContext = CachedImage::get (nc->component))
+   #else
+        if (CachedImage* currentContext = dynamic_cast <CachedImage*> (Thread::getCurrentThread()))
+   #endif
+            return &currentContext->context;
+
+    return nullptr;
 }
 
-bool OpenGLContext::makeActive() const noexcept
-{
-    OpenGLContext*& current = currentThreadActiveContext.get();
-
-    if (nativeContext != nullptr && nativeContext->makeActive())
-    {
-        current = const_cast <OpenGLContext*> (this);
-        return true;
-    }
-
-    current = nullptr;
-    return false;
-}
-
-bool OpenGLContext::isActive() const noexcept
-{
-    return nativeContext != nullptr && nativeContext->isActive();
-}
-
-void OpenGLContext::deactivateCurrentContext()
-{
-    NativeContext::deactivateCurrentContext();
-    currentThreadActiveContext.get() = nullptr;
-}
+bool OpenGLContext::makeActive() const noexcept     { return nativeContext != nullptr && nativeContext->makeActive(); }
+bool OpenGLContext::isActive() const noexcept       { return nativeContext != nullptr && nativeContext->isActive(); }
+void OpenGLContext::deactivateCurrentContext()      { NativeContext::deactivateCurrentContext(); }
 
 void OpenGLContext::triggerRepaint()
 {

@@ -32,10 +32,15 @@ AmbisonicTool::AmbisonicTool(long aNumberOfLoudspeakers, long aNumberOfSources, 
     m_number_of_sources = aNumberOfSources;
     for(int i = 0; i < m_number_of_sources; i++)
     {
-        //m_encoders.push_back(new AmbisonicEncoder(m_order));
-        //m_widers.push_back(new AmbisonicWider(m_order));
+        m_encoders.push_back(new AmbisonicEncoder(m_order));
+        m_widers.push_back(new AmbisonicWider(m_order));
     }
-    //m_decoder = new AmbisonicDecode(m_order, m_number_of_loudspeakers);
+    m_decoder = new AmbisonicDecode(m_order, m_number_of_loudspeakers);
+    for(int i = 0; i < 63; i++)
+    {
+        m_harmonics_block_vector[i] = new double[128];
+        m_harmonics_block_copy[i] = new double[128];
+    }
     
     setVectorSize(aVectorSize);
     
@@ -45,6 +50,7 @@ AmbisonicTool::AmbisonicTool(long aNumberOfLoudspeakers, long aNumberOfSources, 
     
    for(int i = 0; i < m_number_of_sources; i++)
        setPolarCoordinates(i, 1., 0.);
+     
 }
 
 long AmbisonicTool::getOrder()
@@ -90,7 +96,7 @@ void AmbisonicTool::setVectorSize(long aVectorSize)
         free(m_harmonics_block_vector[i]);
         free(m_harmonics_block_copy[i]);
         m_harmonics_block_vector[i] = new double[m_vector_size];
-        m_harmonics_block_copy[i] = new double[m_vector_size];;
+        m_harmonics_block_copy[i] = new double[m_vector_size];
     }
     
     for(int i = 0; i < m_number_of_sources; i++)
@@ -188,7 +194,7 @@ void AmbisonicTool::freeSources()
 
 void AmbisonicTool::freeLoudspeakers()
 {
-    //delete m_decoder;
+    delete m_decoder;
 }
 
 AmbisonicTool::~AmbisonicTool()

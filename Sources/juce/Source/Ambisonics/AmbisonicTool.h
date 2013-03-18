@@ -51,6 +51,7 @@ private:
     void    freeLoudspeakers();
 public:
 	AmbisonicTool(long aNumberOfLoudspeakers = 4, long aNumberOfSources = 1, long aVectorSize = 0);
+    
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
