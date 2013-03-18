@@ -43,11 +43,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\..\..\MaxMsp\HoaLibrary\externals\Windows</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\MaxMsp\Max6\Cycling %2774\HoaLibrary\externals\Windows</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\ext_win_debug\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\..\..\MaxMsp\Max\Cycling '74\HoaLibrary\externals\Windows</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\MaxMsp\Max6\Cycling %2774\HoaLibrary\externals\Windows</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\ext_win_release\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
@@ -182,14 +182,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\SDKs\MaxSDK-5.1.7\c74support\max-includes\common\dllmain_win.c" />
-    <ClCompile Include="AmbisonicEncode.cpp" />
+    <ClCompile Include="AmbisonicEncoder.cpp" />
     <ClCompile Include="AmbisonicHalo.cpp" />
     <ClCompile Include="AmbisonicOptim.cpp" />
     <ClCompile Include="AmbisonicWider.cpp" />
     <ClCompile Include="hoa.halo~.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AmbisonicEncode.h" />
+    <ClInclude Include="AmbisonicEncoder.h" />
     <ClInclude Include="AmbisonicHalo.h" />
     <ClInclude Include="AmbisonicOptim.h" />
     <ClInclude Include="AmbisonicWider.h" />

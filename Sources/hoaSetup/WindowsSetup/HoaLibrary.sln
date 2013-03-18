@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HoaSetup", "HoaSetup\HoaSetup.vdproj", "{C23DB97A-1922-4035-BADA-C5A1630F5ACF}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HoaLibrary", "HoaSetup\HoaSetup.vdproj", "{C23DB97A-1922-4035-BADA-C5A1630F5ACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,8 +9,8 @@ Global
 		Release|Default = Release|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C23DB97A-1922-4035-BADA-C5A1630F5ACF}.Debug|Default.ActiveCfg = Debug
-		{C23DB97A-1922-4035-BADA-C5A1630F5ACF}.Debug|Default.Build.0 = Debug
+		{C23DB97A-1922-4035-BADA-C5A1630F5ACF}.Debug|Default.ActiveCfg = Release
+		{C23DB97A-1922-4035-BADA-C5A1630F5ACF}.Debug|Default.Build.0 = Release
 		{C23DB97A-1922-4035-BADA-C5A1630F5ACF}.Release|Default.ActiveCfg = Release
 		{C23DB97A-1922-4035-BADA-C5A1630F5ACF}.Release|Default.Build.0 = Release
 	EndGlobalSection
