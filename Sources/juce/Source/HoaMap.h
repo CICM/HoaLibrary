@@ -33,6 +33,12 @@ public:
     void draw_sources (Graphics&);
     void resized();
     
+    //mouse events :
+    void mouseMove (const MouseEvent &event);
+    void mouseDown (const MouseEvent &event);
+    void mouseDrag (const MouseEvent &event);
+    void mouseUp   (const MouseEvent &event);
+    
     // setters :
     void setNbSources(int _nbSources);
     void setNbSpeakers(int _nbSpeakers);

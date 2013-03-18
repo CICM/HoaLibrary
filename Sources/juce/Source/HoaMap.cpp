@@ -27,6 +27,23 @@ HoaMap::~HoaMap()
 {
 }
 
+void HoaMap::mouseMove (const MouseEvent &event)
+{
+    Point<int> mouse = event.getPosition();
+}
+void HoaMap::mouseDown (const MouseEvent &event)
+{
+    ;
+}
+void HoaMap::mouseDrag (const MouseEvent &event)
+{
+    ;
+}
+void HoaMap::mouseUp   (const MouseEvent &event)
+{
+    ;
+}
+
 void HoaMap::paint (Graphics& g)
 {
     
@@ -44,7 +61,8 @@ void HoaMap::draw_sources(Graphics& g)
     float center = getWidth()*0.5;
     int i;
     for (i=0; i < m_nbSources; i++) {
-        g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
+        //g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
+        g.setColour ( Colour((float)1*i, (float)0.5, (float)0.5, (float)0.95) );
         g.fillEllipse(center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize);
         g.setColour ( Colour(0xff444444) );
         g.drawEllipse(center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize, .5);
