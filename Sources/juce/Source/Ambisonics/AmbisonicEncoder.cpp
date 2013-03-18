@@ -41,6 +41,7 @@ AmbisonicEncoder::AmbisonicEncoder(long anOrder, std::string aMode, long aVector
 		m_cosLookUp[i] = cos((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 		m_sinLookUp[i] = sin((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 	}
+    
 	setAzimtuh(0.);
 	setVectorSize(aVectorSize);
 }

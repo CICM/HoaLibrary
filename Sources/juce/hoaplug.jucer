@@ -12,26 +12,36 @@
               buildRTAS="0">
   <MAINGROUP id="fQ2lQw" name="hoaplug">
     <GROUP id="{437051D4-D878-43BF-22E9-C451A62C759B}" name="ressources">
-      <FILE id="yVGiYi" name="head.png" compile="0" resource="1" file="ressources/head.png"/>
       <FILE id="uenUeh" name="background.jpg" compile="0" resource="1" file="ressources/background.jpg"/>
     </GROUP>
     <GROUP id="{72C8CAC0-DB4D-F919-A080-8DB8F7A7AE09}" name="Source">
+      <GROUP id="{17D3EA1E-AA5B-0A9D-F638-14FDC6F5C849}" name="Ambisonics">
+        <FILE id="RuiDNh" name="AmbisonicDecoder.cpp" compile="1" resource="0"
+              file="Source/Ambisonics/AmbisonicDecoder.cpp"/>
+        <FILE id="VN0CXC" name="AmbisonicDecoder.h" compile="0" resource="0"
+              file="Source/Ambisonics/AmbisonicDecoder.h"/>
+        <FILE id="dpjRHd" name="AmbisonicEncoder.cpp" compile="1" resource="0"
+              file="Source/Ambisonics/AmbisonicEncoder.cpp"/>
+        <FILE id="umFL9z" name="AmbisonicEncoder.h" compile="0" resource="0"
+              file="Source/Ambisonics/AmbisonicEncoder.h"/>
+        <FILE id="TAixRB" name="AmbisonicOptim.cpp" compile="1" resource="0"
+              file="Source/Ambisonics/AmbisonicOptim.cpp"/>
+        <FILE id="sw1IvZ" name="AmbisonicOptim.h" compile="0" resource="0"
+              file="Source/Ambisonics/AmbisonicOptim.h"/>
+        <FILE id="MDZoC5" name="AmbisonicTool.cpp" compile="1" resource="0"
+              file="Source/Ambisonics/AmbisonicTool.cpp"/>
+        <FILE id="jQpj8G" name="AmbisonicTool.h" compile="0" resource="0" file="Source/Ambisonics/AmbisonicTool.h"/>
+        <FILE id="Ki6pk9" name="AmbisonicWider.cpp" compile="1" resource="0"
+              file="Source/Ambisonics/AmbisonicWider.cpp"/>
+        <FILE id="QsLKWj" name="AmbisonicWider.h" compile="0" resource="0"
+              file="Source/Ambisonics/AmbisonicWider.h"/>
+        <FILE id="RRPZBE" name="cicmTools.h" compile="0" resource="0" file="Source/Ambisonics/cicmTools.h"/>
+        <FILE id="nXty0J" name="gslMatrix.cpp" compile="1" resource="0" file="Source/Ambisonics/gslMatrix.cpp"/>
+        <FILE id="WJ5NNr" name="gslMatrix.hpp" compile="0" resource="0" file="Source/Ambisonics/gslMatrix.hpp"/>
+      </GROUP>
       <FILE id="YpNFEM" name="TextBoxSlider.h" compile="0" resource="0" file="Source/TextBoxSlider.h"/>
       <FILE id="CALgEg" name="HoaMap.cpp" compile="1" resource="0" file="Source/HoaMap.cpp"/>
       <FILE id="chjWTM" name="HoaMap.h" compile="0" resource="0" file="Source/HoaMap.h"/>
-      <GROUP id="{577059B2-21A0-855C-A68D-92C08004700F}" name="ambisonics">
-        <FILE id="Qtf2CG" name="ambisonicDecode.cpp" compile="1" resource="0"
-              file="Source/ambisonicDecode.cpp"/>
-        <FILE id="gcbefv" name="AmbisonicDecode.h" compile="0" resource="0"
-              file="Source/AmbisonicDecode.h"/>
-        <FILE id="nYq98s" name="AmbisonicEncoder.cpp" compile="1" resource="0"
-              file="Source/AmbisonicEncoder.cpp"/>
-        <FILE id="BCOLk4" name="AmbisonicEncoder.h" compile="0" resource="0"
-              file="Source/AmbisonicEncoder.h"/>
-        <FILE id="Dsbem3" name="cicmTools.h" compile="0" resource="0" file="Source/cicmTools.h"/>
-        <FILE id="XLpXV1" name="gslMatrix.cpp" compile="1" resource="0" file="Source/gslMatrix.cpp"/>
-        <FILE id="NCwFcs" name="gslMatrix.hpp" compile="0" resource="0" file="Source/gslMatrix.hpp"/>
-      </GROUP>
       <FILE id="dJhpCM" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="V1endz" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>

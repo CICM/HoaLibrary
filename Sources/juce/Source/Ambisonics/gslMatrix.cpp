@@ -148,3 +148,28 @@ void resizeMatrix(gsl_matrix** matrix, unsigned int nbOfRow, unsigned int nbOfCo
 	gsl_matrix_free(*matrix);
 	*matrix = resizedMatrix;
 }
+/*
+void printMat(gsl_matrix* A)
+{
+	int M = A->size1;
+	int N = A->size2;
+	for (int i=0;i<M;i++)
+    {
+		for (int j=0;j<N;j++)
+		{
+			printf("%g ",gsl_matrix_get(A,i,j));
+		}
+		printf("\n");
+    }
+	printf("\n");
+}
+
+void printVec(gsl_vector* a)
+{
+	int N = a->size;
+	for(int i = 0; i < N; i++)
+	{
+		printf("%f ", gsl_vector_get(a, i));
+	}
+	printf("\n");
+}*/

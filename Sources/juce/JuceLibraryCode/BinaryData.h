@@ -6,9 +6,6 @@
 
 namespace BinaryData
 {
-    extern const char*   head_png;
-    const int            head_pngSize = 2528;
-
     extern const char*   background_jpg;
     const int            background_jpgSize = 77887;
 
