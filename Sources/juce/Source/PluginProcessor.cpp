@@ -94,7 +94,13 @@ void HoaplugAudioProcessor::setParameter(int index, float newValue)
     if(index == 0)
         m_offset_of_loudspeakers = parameters[0].getValue();
     else if(index == 1)
+    {
         m_distance_of_loudspeakers = parameters[1].getValue();
+        for(int i = 0; i < getNumInputChannels(); i++)
+        {
+            m_ambisonic_tool->setCartesianCoordinates(i+1, -m_sources_abscissa[i] / m_distance_of_loudspeakers, -m_sources_ordinate[i] / m_distance_of_loudspeakers);
+        }
+    }
     else if(index >= 2)
     {
         int indexBis;

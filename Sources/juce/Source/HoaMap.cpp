@@ -12,11 +12,11 @@
 #include "HoaMap.h"
 
 //==============================================================================
-HoaMap::HoaMap()
+HoaMap::HoaMap(HoaplugAudioProcessorEditor* monPapa)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-    
+    papa = monPapa;
     m_nbSources = 1;
     m_nbSpeakers = 4;
     m_speakerOffset = 0;
@@ -311,7 +311,8 @@ int HoaMap::setSourceAbscissa(int _sourceIndex, float _newAbscissa, Notification
 {
     if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
         m_sources[_sourceIndex].setX(Tools::clip(_newAbscissa, -1.0f, 1.0f));
-        triggerChangeMessage (notification);
+        //triggerChangeMessage (notification);
+        papa->changeListenerCallback(this);
         return 1;
     }
     return 0;
@@ -322,6 +323,7 @@ void HoaMap::triggerChangeMessage (const NotificationType notification)
     if (notification != dontSendNotification)
     {
         if (notification == sendNotificationSync)
-            sendSynchronousChangeMessage();
+            //sendSynchronousChangeMessage();
+            sendChangeMessage();
     }
 }

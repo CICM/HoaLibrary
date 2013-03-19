@@ -20,7 +20,7 @@
 //==============================================================================
 /**
 */
-class HoaplugAudioProcessor  : public AudioProcessor, public Value::Listener
+class HoaplugAudioProcessor  : public AudioProcessor, public Value::Listener//, public ChangeListener
 {
     
 private:

@@ -17,7 +17,8 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
     nbSources_Slider ("nbSources"),
     nbSpeakers_Slider ("nbSpeakers"),
     speakerOffset_Slider ("speakerOffset"),
-    speakerDistance_Slider ("speakerDistance")
+    speakerDistance_Slider ("speakerDistance"),
+    theMap(this)
 {
     bg = ImageCache::getFromMemory (BinaryData::background_jpg, BinaryData::background_jpgSize);
     
@@ -99,6 +100,7 @@ void HoaplugAudioProcessorEditor::sliderValueChanged (Slider* slider)
     }
     else if (slider == &speakerDistance_Slider) {
         theMap.setSpeakerDistance(speakerDistance_Slider.getValue());
+        getProcessor()->setParameterNotifyingHost (HoaplugAudioProcessor::m_distance_of_loudspeakers_parameter, (float) speakerDistance_Slider.getValue());
     }
 	/*
      if (slider == &gainSlider) {
@@ -110,5 +112,14 @@ void HoaplugAudioProcessorEditor::sliderValueChanged (Slider* slider)
 
 void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* source)
 {
-    ;
+    if (source == &theMap)
+    {
+        for(int i = 0; i < nbSources_Slider.getValue(); i++)
+        {
+            getProcessor()->setParameterNotifyingHost((i*2+2), (float)theMap.getSourceAbscissa(i));
+            getProcessor()->setParameterNotifyingHost((i*2+3), (float)theMap.getSourceOrdinate(i));
+        }
+    }
+    getProcessor()->setParameterNotifyingHost(2, 1.);
+    getProcessor()->setParameterNotifyingHost(3, 1.);
 }
