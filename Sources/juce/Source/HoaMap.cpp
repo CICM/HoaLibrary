@@ -21,6 +21,16 @@ HoaMap::HoaMap()
     m_nbSpeakers = 4;
     m_speakerOffset = 0;
     m_speakerDistance = 0.5;
+    m_minimum_of_loudspeakers = 3;
+    m_maximum_of_loudspeakers = m_maximum_of_sources = 64;
+    m_minimum_of_sources = 1;
+    m_sourceSize = 0.08;
+    m_sourcePointed = m_sourceOver = -1;
+    for (int i = 0; i < m_maximum_of_loudspeakers; i++)
+    {
+        m_sources_ordinate[i] = m_sources_abscissa[i] = 0.;
+        //m_sources[i] = new Point();
+    }        
 }
 
 HoaMap::~HoaMap()
@@ -29,45 +39,111 @@ HoaMap::~HoaMap()
 
 void HoaMap::mouseMove (const MouseEvent &event)
 {
-    Point<int> mouse = event.getPosition();
+    /*
+    Point<float> mouse = event.getPosition().toFloat();
+    
+     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
+                                                            getWidth(), 0, 1, 1,
+                                                            getWidth(), getHeight(), 1, -1));
+     
+    m_sources[0].setXY(mouse.getX(), mouse.getY());
+    repaint();
+    */
 }
 void HoaMap::mouseDown (const MouseEvent &event)
 {
-    ;
+    Point<float> mouse = event.getPosition().toFloat();
+    // coordonnées mouse en cartesien :
+    mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
+                                                           getWidth(), 0, 1, 1,
+                                                           getWidth(), getHeight(), 1, -1));
+    m_sourcePointed = -1;
+    for (int i = 0; i < m_maximum_of_sources; i++) {
+        if (mouse.getDistanceFrom(m_sources[i]) < m_sourceSize) {
+            m_sourcePointed = i;
+            break;
+        }
+    }
 }
 void HoaMap::mouseDrag (const MouseEvent &event)
 {
-    ;
+    Point<float> mouse = event.getPosition().toFloat();
+    
+    // conversion en cartesien :
+    mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
+                                                           getWidth(), 0, 1, 1,
+                                                           getWidth(), getHeight(), 1, -1));
+    
+    if (m_sourcePointed >= 0 && m_sourcePointed < m_maximum_of_sources) {
+        setSourceAbscissa(m_sourcePointed, mouse.getX());
+        setSourceOrdinate(m_sourcePointed, mouse.getY());
+        //m_sources[m_sourcePointed].setXY(mouse.getX(), mouse.getY());
+        //setMouseCursor(CrosshairCursor);
+        repaint();
+    }
+    /*
+    if (mouse.getDistanceFromOrigin() < 1.0f - m_sourceSize) {
+        m_sources[0].setXY(mouse.getX(), mouse.getY());
+        repaint();
+    }
+    */
 }
 void HoaMap::mouseUp   (const MouseEvent &event)
 {
-    ;
+    m_sourcePointed = -1;
 }
 
 void HoaMap::paint (Graphics& g)
 {
-    
     g.setColour (Colours::grey);
     g.drawEllipse(1, 1, getWidth()-2, getHeight()-2, 2);
     
     draw_speakers(g);
     draw_head(g);
     draw_sources(g);
+    //g.drawText(String(m_sources[1].getX()), 0, 0, getWidth(), 50, Justification(4), 1);
 }
 
 void HoaMap::draw_sources(Graphics& g)
 {
-    float sourceSize = 15;
-    float center = getWidth()*0.5;
-    int i;
-    for (i=0; i < m_nbSources; i++) {
-        //g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
-        g.setColour ( Colour((float)1*i, (float)0.5, (float)0.5, (float)0.95) );
-        g.fillEllipse(center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize);
-        g.setColour ( Colour(0xff444444) );
-        g.drawEllipse(center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize, .5);
-        g.drawFittedText(String(i+1), center-sourceSize*0.5, center-sourceSize*0.5-100, sourceSize, sourceSize, Justification(4), true);
+    for (int i = 0; i < m_nbSources; i++)
+    {
+        draw_source(g, i);
     }
+}
+
+void HoaMap::draw_source(Graphics& g, int _sourceIndex)
+{
+    float sourceSize = 0.08;
+    
+    g.beginTransparencyLayer(1);
+    
+    g.addTransform(AffineTransform::fromTargetPoints(-1, 1, 0, 0,
+                                                     1, 1, getWidth(), 0,
+                                                     1, -1, getWidth(), getHeight()));
+    
+    g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
+    
+    g.fillEllipse(m_sources[_sourceIndex].getX()-sourceSize*0.5,
+                  m_sources[_sourceIndex].getY()-sourceSize*0.5,
+                  sourceSize, sourceSize);
+    
+    g.setColour ( Colour(0xff444444) );
+    g.drawEllipse(m_sources[_sourceIndex].getX()-sourceSize*0.5,
+                  m_sources[_sourceIndex].getY()-sourceSize*0.5,
+                  sourceSize, sourceSize, sourceSize*0.1);
+    
+    g.setFont(sourceSize*0.01);
+    g.drawText(String(_sourceIndex),
+               m_sources[_sourceIndex].getX()-sourceSize*0.5,
+               m_sources[_sourceIndex].getY()-sourceSize*0.5,
+               sourceSize, sourceSize, Justification(4), false);
+    g.endTransparencyLayer();
+}
+
+void HoaMap::draw_source_in_polar(Graphics& g, int _sourceIndex, float _radius, float _angle)
+{
+    ;
 }
 
 void HoaMap::draw_speakers(Graphics& g)
@@ -171,26 +247,81 @@ void HoaMap::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..
-
 }
 
-void HoaMap::setNbSources(int _nbSources)
+/* --- getters --- */
+float HoaMap::getSourceOrdinate(int _sourceIndex)
 {
-    m_nbSources = _nbSources;
-    repaint();
+    if (_sourceIndex >= 0 && _sourceIndex < m_maximum_of_sources) {
+        return m_sources[_sourceIndex].getY();
+    }
+    return 0;
 }
-void HoaMap::setNbSpeakers(int _nbSpeakers)
+float HoaMap::getSourceAbscissa(int _sourceIndex)
 {
-    m_nbSpeakers = _nbSpeakers;
-    repaint();
+    if (_sourceIndex >= 0 && _sourceIndex < m_maximum_of_sources) {
+        return m_sources[_sourceIndex].getX();
+    }
+    return 0;
 }
-void HoaMap::setSpeakerDistance(float _speakerDistance)
+
+/* --- setters --- */
+int HoaMap::setNbSources(int _nbSources)
 {
-    m_speakerDistance = _speakerDistance;
+    if (_nbSources < m_minimum_of_sources ) m_nbSources = m_minimum_of_sources;
+    else if (_nbSources > m_maximum_of_sources) m_nbSources = m_maximum_of_sources;
+    else m_nbSources = _nbSources;
     repaint();
+    return 1;
 }
-void HoaMap::setSpeakerOffset(float _speakerOffset)
+int HoaMap::setNbSpeakers(int _nbSpeakers)
 {
-    m_speakerOffset = _speakerOffset;
+    if (_nbSpeakers < m_minimum_of_loudspeakers ) m_nbSpeakers = m_minimum_of_loudspeakers;
+    else if (_nbSpeakers > m_maximum_of_loudspeakers) m_nbSpeakers = m_maximum_of_loudspeakers;
+    else m_nbSpeakers = _nbSpeakers;
     repaint();
+    return 1;
+}
+int HoaMap::setSpeakerDistance(float _speakerDistance)
+{
+    if (_speakerDistance < 0 ) m_speakerDistance = 0;
+    else if (_speakerDistance > 1) m_speakerDistance = 1;
+    else m_speakerDistance = _speakerDistance;
+    repaint();
+    return 1;
+}
+int HoaMap::setSpeakerOffset(float _speakerOffset)
+{
+    if (_speakerOffset < -180 ) m_speakerOffset = -180;
+    else if (_speakerOffset > 180 ) m_speakerOffset = 180;
+    else m_speakerOffset = _speakerOffset;
+    repaint();
+    return 1;
+}
+int HoaMap::setSourceOrdinate(int _sourceIndex, float _newOrdinate, NotificationType notification)
+{
+    if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
+        m_sources[_sourceIndex].setY(Tools::clip(_newOrdinate, -1.0f, 1.0f));
+        triggerChangeMessage (notification);
+        return 1;
+    }
+    return 0;
+}
+int HoaMap::setSourceAbscissa(int _sourceIndex, float _newAbscissa, NotificationType notification)
+{
+    if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
+        m_sources[_sourceIndex].setX(Tools::clip(_newAbscissa, -1.0f, 1.0f));
+        triggerChangeMessage (notification);
+        return 1;
+    }
+    return 0;
+}
+
+void HoaMap::triggerChangeMessage (const NotificationType notification)
+{
+    if (notification != dontSendNotification)
+    {
+        if (notification == sendNotificationSync)
+            sendSynchronousChangeMessage();
+    }
 }

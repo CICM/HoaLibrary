@@ -17,6 +17,7 @@
 		26ADA20DC7D51325028F582F /* juce_core.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6161C6017707C77D4F53510 /* juce_core.mm */; };
 		2BEB318E07B880824F0C3742 /* AmbisonicEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1326B335EC112353C20AA210 /* AmbisonicEncoder.cpp */; };
 		2D3DB2A52FE41BEB90339024 /* juce_RTAS_MacUtilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC06745D64165B0D3D3DE25 /* juce_RTAS_MacUtilities.mm */; };
+		2E0B4122FF8FCF94C4792EE6 /* juce_RTAS_MacResources.r in Rez */ = {isa = PBXBuildFile; fileRef = D1E00CF828C64E472ABCB2F3 /* juce_RTAS_MacResources.r */; };
 		34146FE6B376D8D7E9B2C550 /* juce_audio_utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F5A6BED36A4A9FA3238B4 /* juce_audio_utils.mm */; };
 		3A432915E49548E216EED132 /* juce_audio_devices.mm in Sources */ = {isa = PBXBuildFile; fileRef = 255A2704D47EAF7D9F3D9454 /* juce_audio_devices.mm */; };
 		459AC1D8E4B5524B5218A1DB /* juce_graphics.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0CB908C7DBDCFBC79A46AE9 /* juce_graphics.mm */; };
@@ -49,6 +50,7 @@
 		C1B6FC17BAD0DC7498ED340A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DDECC83E8012D1B1CD3E11C /* OpenGL.framework */; };
 		C460652C9E219E26856287CF /* juce_PluginUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7DFD41277ACFD9704F01BB8 /* juce_PluginUtilities.cpp */; };
 		C61EC0B3149C58DE13348283 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCEE9BED368D53DCF7725FC4 /* WebKit.framework */; };
+		D3336B3CBF4754B7FB3E1890 /* juce_AU_Resources.r in Rez */ = {isa = PBXBuildFile; fileRef = 23D568112982C5BEBAFD80D1 /* juce_AU_Resources.r */; };
 		D48ADC32D8DC5E09AEEC4862 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8619CF14E395471BF2AD7950 /* gslMatrix.cpp */; };
 		DC519AA23623397CED23D231 /* juce_AAX_Wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52CC9504D5F2DF656845A691 /* juce_AAX_Wrapper.cpp */; };
 		F6369F4E261FDE992642FEA2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21350E859EF7EFFF50BA321D /* Accelerate.framework */; };
@@ -2789,6 +2791,8 @@
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3336B3CBF4754B7FB3E1890 /* juce_AU_Resources.r in Rez */,
+				2E0B4122FF8FCF94C4792EE6 /* juce_RTAS_MacResources.r in Rez */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2867,6 +2871,7 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRODUCT_NAME = hoaplug;
+				SDKROOT = macosx10.7;
 				WARNING_CFLAGS = "-Wreorder";
 				ZERO_LINK = NO;
 			};
@@ -2887,6 +2892,7 @@
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRODUCT_NAME = hoaplug;
+				SDKROOT = macosx10.7;
 				WARNING_CFLAGS = "-Wreorder";
 				ZERO_LINK = NO;
 			};
@@ -2895,10 +2901,11 @@
 		D25D7186CEE2556A01AC4945 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = ../../../juce;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2935,6 +2942,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -d ppc64_$ppc64 -d x86_64_$x86_64 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I \"$(DEVELOPER_DIR)/Extras/CoreAudio/AudioUnits/AUPublic/AUBase\"";
 				SDKROOT_ppc = macosx10.5;
+				SYMROOT = ../../../juce;
 				WRAPPER_EXTENSION = component;
 			};
 			name = Debug;
@@ -2942,9 +2950,10 @@
 		DBA89ADC96456FCDF6DF29EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				COMBINE_HIDPI_IMAGES = YES;
+				DSTROOT = ../../../juce;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2975,6 +2984,7 @@
 				);
 				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -d ppc64_$ppc64 -d x86_64_$x86_64 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I \"$(DEVELOPER_DIR)/Extras/CoreAudio/AudioUnits/AUPublic/AUBase\"";
 				SDKROOT_ppc = macosx10.5;
+				SYMROOT = ../../../juce;
 				WRAPPER_EXTENSION = component;
 			};
 			name = Release;

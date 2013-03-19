@@ -25,7 +25,7 @@ class HoaplugAudioProcessor  :
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaplugAudioProcessor)
-    AmbisonicTool* m_ambisonic_tool;
+    //AmbisonicTool* m_ambisonic_tool;
     
 public:
     //==============================================================================

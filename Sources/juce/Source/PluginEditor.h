@@ -22,14 +22,15 @@
 */
 class HoaplugAudioProcessorEditor  :
     public AudioProcessorEditor,
-    public Value::Listener,
-    public SliderListener
+    //public Value::Listener,
+    public SliderListener,
+    public ChangeListener
 {
 public:
     HoaplugAudioProcessorEditor (HoaplugAudioProcessor* ownerFilter);
     ~HoaplugAudioProcessorEditor();
     
-    void valueChanged (Value& value);
+    //void valueChanged (Value& value);
     void changeListenerCallback (ChangeBroadcaster* source);
     void sliderValueChanged (Slider*);
     

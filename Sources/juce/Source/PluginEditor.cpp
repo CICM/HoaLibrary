@@ -50,6 +50,8 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
     
     addAndMakeVisible (&theMap);
     
+    theMap.addChangeListener(this);
+    
     updateMouseCursor ();
     
     // This is where our plugin's editor size is set.
@@ -58,6 +60,7 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
 
 HoaplugAudioProcessorEditor::~HoaplugAudioProcessorEditor()
 {
+    theMap.removeAllChangeListeners();
 }
 
 //==============================================================================
@@ -73,9 +76,9 @@ void HoaplugAudioProcessorEditor::paint (Graphics& g)
     theMap.setBounds (10, 10, 400, 400);
 }
 
-void HoaplugAudioProcessorEditor::valueChanged (Value& value)
-{
-}
+//void HoaplugAudioProcessorEditor::valueChanged (Value& value)
+//{
+//}
 
 
 // This is our Slider::Listener callback, when the user drags a slider.
@@ -105,6 +108,7 @@ void HoaplugAudioProcessorEditor::sliderValueChanged (Slider* slider)
 }
 
 
-void changeListenerCallback (ChangeBroadcaster* source){
+void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* source)
+{
     ;
 }
