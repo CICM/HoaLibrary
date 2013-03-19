@@ -17,64 +17,70 @@
  */
 
 
-#ifndef DEF_AMBISONICOPTIM
-#define DEF_AMBISONICOPTIM
+#ifndef DEF_AMBISONITOOL
+#define DEF_AMBISONITOOL
 
-#include <gsl/gsl_sf.h>
 #include "cicmTools.h"
+#include "AmbisonicEase.h"
 
-class AmbisonicOptim
+class AmbisonicPolyEase
 {
 	
 private:
+    vector <AmbisonicEase*> m_eases;
+    
+    long    m_number_of_sources;
 	long	m_order;
 	long	m_number_of_harmonics;
 	long	m_number_of_inputs;
 	long	m_number_of_outputs;
 	long	m_vector_size;
+    
+    double   m_radius[64];
+    double   m_azimuth[64];
 
-	std::string m_optimMode;
-	
-	long*		m_index_of_harmonics;
-	double*		m_optimVector;
-
-	void computeIndex();
-	void computeBasicOptim();
-	void computeReOptim();
-	void computeInPhaseOptim();
-	
 public:
-	AmbisonicOptim(long anOrder, std::string anOptimMode = "basic", long aVectorSize = 0);
+	AmbisonicPolyEase(long anOrder = 4, long aNumberOfSources = 1, long aVectorSize = 0);
+    
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
 	long getNumberOfOutputs();
 	long getVectorSize();
-	std::string getMode();
-	
+    long getNumberOfSources();
+    float getRadius(long aSourceIndex);
+    float getAzimuth(long aSourceIndex);
+    
+    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers);
+    void setNumberOfSources(long aNumberOfSources);
 	void setVectorSize(long aVectorSize);
-	void setOptimMode(std::string anOptim);
-
-
-	~AmbisonicOptim();
+    void setCartesianCoordinates(long aSourceIndex, double anAbscissa, double anOrdinate);
+    void setPolarCoordinates(long aSourceIndex, double aRadius, double anAzimuth);
+    
+	~AmbisonicPolyEase();
 	
 	/* Perform sample by sample */
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
-	{	
-		for(int i = 0; i < m_number_of_harmonics; i++)
-			aOutputs[i] = m_optimVector[i] * aInputs[i];
+	{
+        for(int i = 0; i < m_number_of_harmonics; i++)
+            aOutputs[i] = 0.;
+		for(int i = 0; i < m_number_of_sources; i++)
+            m_eases[i]->process(aInputs[i], aOutputs);
 	}
 	
 	/* Perform block sample */
 	template<typename Type> void process(Type** aInputs, Type** aOutputs)
-	{	
-		for(int i = 0; i < m_number_of_harmonics; i++)
-		{
-			for(int j = 0; j < m_vector_size; j++)
-			{
-				aOutputs[i][j] = m_optimVector[i] * aInputs[i][j];
-			}
-		}
+	{
+        Type* outputs;
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            outputs = aOutputs[i];
+            for(int j = 0; j < m_vector_size; j++)
+                outputs[j] = 0.;
+        }
+        
+		for(int i = 0; i < m_number_of_sources; i++)
+            m_eases[i]->process(aInputs[i], aOutputs);
 	}
 };
 
