@@ -190,3 +190,5 @@ HoaPackage/
 *.o
 *.d
 *.dia
+*.dat
+*.rsrc
