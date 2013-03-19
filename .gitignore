@@ -187,3 +187,6 @@ ext_win_release/
 HoaPackage/
 *.zip
 *.dmg
+*.o
+*.d
+*.dia
