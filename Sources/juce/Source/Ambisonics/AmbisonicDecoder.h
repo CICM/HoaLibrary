@@ -67,7 +67,7 @@ public:
 	~AmbisonicDecode();
 	
 	/* Perform sample by sample */
-	void process(double* aInputs, double* aOutputs)
+	void process(float* aInputs, float* aOutputs)
 	{	
 		for(int j = 0; j < m_number_of_harmonics; j++)
 			gsl_vector_set(m_input_vector, j, aInputs[j]);
@@ -79,7 +79,7 @@ public:
 	}
 	
 	/* Perform block sample */
-	void process(double** aInputs, double** aOutputs)
+	void process(float** aInputs, float** aOutputs)
 	{	
 		for(int i = 0; i < m_vector_size; i++)
 		{

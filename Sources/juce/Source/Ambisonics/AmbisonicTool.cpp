@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -38,8 +38,8 @@ AmbisonicTool::AmbisonicTool(long aNumberOfLoudspeakers, long aNumberOfSources, 
     m_decoder = new AmbisonicDecode(m_order, m_number_of_loudspeakers);
     for(int i = 0; i < 63; i++)
     {
-        m_harmonics_block_vector[i] = new double[128];
-        m_harmonics_block_copy[i] = new double[128];
+        m_harmonics_block_vector[i] = new float[128];
+        m_harmonics_block_copy[i] = new float[128];
     }
     
     setVectorSize(aVectorSize);
@@ -88,6 +88,16 @@ long AmbisonicTool::getNumberOfSources()
 	return m_number_of_sources;
 }
 
+float AmbisonicTool::getRadius(long aSourceIndex)
+{
+    return m_radius[aSourceIndex];
+}
+
+float AmbisonicTool::getAzimuth(long aSourceIndex)
+{
+    return m_azimuth[aSourceIndex];
+}
+
 void AmbisonicTool::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
@@ -95,8 +105,8 @@ void AmbisonicTool::setVectorSize(long aVectorSize)
     {
         free(m_harmonics_block_vector[i]);
         free(m_harmonics_block_copy[i]);
-        m_harmonics_block_vector[i] = new double[m_vector_size];
-        m_harmonics_block_copy[i] = new double[m_vector_size];
+        m_harmonics_block_vector[i] = new float[m_vector_size];
+        m_harmonics_block_copy[i] = new float[m_vector_size];
     }
     
     for(int i = 0; i < m_number_of_sources; i++)
@@ -112,7 +122,9 @@ void AmbisonicTool::setPolarCoordinates(long aSourceIndex, double aRadius, doubl
     if(aSourceIndex > 0 && aSourceIndex <= m_number_of_sources)
     {
         aSourceIndex--;
-        m_encoders[aSourceIndex]->setAzimtuh(anAzimuth);
+        m_widers[aSourceIndex]->setAzimtuh(anAzimuth);
+        m_azimuth[aSourceIndex] = anAzimuth;
+        m_radius[aSourceIndex] = aRadius;
         if(aRadius >= 1)
         {
             m_widers[aSourceIndex]->setWidenValue(1.);

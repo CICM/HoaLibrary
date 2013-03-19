@@ -16,50 +16,50 @@
  *
  */
 
-#include "AmbisonicWider.h"
+#include "AmbisonicEase.h"
 
-AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize)
+AmbisonicEase::AmbisonicEase(long anOrder, long aVectorSize)
 {
 	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;
-	m_number_of_inputs		= m_number_of_harmonics + 1;
+	m_number_of_inputs		= 1;
 	m_number_of_outputs		= m_number_of_harmonics;
 
 	computeVectors();
-	setWidenValue(1.);
-    setAzimtuh(0.);
+	setPolarCoordinates(1., 0.);
     setVectorSize(aVectorSize);
 }
 
-long AmbisonicWider::getOrder()
+long AmbisonicEase::getOrder()
 {
 	return m_order;
 }
 
-long AmbisonicWider::getNumberOfHarmonics()
+long AmbisonicEase::getNumberOfHarmonics()
 {
 	return m_number_of_harmonics;
 }
 
-long AmbisonicWider::getNumberOfInputs()
+long AmbisonicEase::getNumberOfInputs()
 {
 	return m_number_of_inputs;
 }
 
-long AmbisonicWider::getNumberOfOutputs()
+long AmbisonicEase::getNumberOfOutputs()
 {
 	return m_number_of_outputs;
 }
 
-long AmbisonicWider::getVectorSize()
+long AmbisonicEase::getVectorSize()
 {
 	return m_vector_size;
 }
 
-void AmbisonicWider::computeVectors()
+void AmbisonicEase::computeVectors()
 {
 	m_index_of_harmonics	= new long[m_number_of_harmonics ];
     m_ambiCoeffs            = new double[m_number_of_harmonics];
+    m_optimVector           = new double[m_number_of_harmonics];
     m_minus_vector          = new double[m_number_of_harmonics];
 	m_dot_vector            = new double[m_number_of_harmonics];
     m_widen_vector          = new double[m_number_of_harmonics];
@@ -71,28 +71,36 @@ void AmbisonicWider::computeVectors()
 		m_index_of_harmonics[i] = (i - 1) / 2 + 1;
 		if (i % 2 == 1) 
 			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
-        
+	}
+    for(int i = 1; i < m_number_of_harmonics; i++)
+	{
         m_minus_vector[i] = Tools::clip_min(log((double)abs(m_index_of_harmonics[i])), 0.);
 		m_dot_vector[i]	= Tools::clip_min(log((double)abs(m_index_of_harmonics[i]) + 1.), 0.);
 		m_dot_vector[i] -= m_minus_vector[i];
 		m_dot_vector[i] = 1. / m_dot_vector[i];
-	}
-    
+    }
     for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
 	{
 		m_cosLookUp[i] = cos((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 		m_sinLookUp[i] = sin((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
-	}   
+	}
+    for (int i = 0; i < m_number_of_harmonics; i++)
+	{
+		if (i == 0)
+			m_optimVector[i] = 1.;
+		else
+			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
+	}
 }
 
-void AmbisonicWider::setVectorSize(long aVectorSize)
+void AmbisonicEase::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
-void AmbisonicWider::setAzimtuh(double aTheta)
+void AmbisonicEase::setAzimtuh(double aTheta)
 {
-	m_ambiCoeffs[0] = 1.;
+	m_ambiCoeffs[0] = 1. * m_optimVector[0];
 	int  tmpIndex = 2;
 	long tmpAngle;
 	if (aTheta < 0)
@@ -103,28 +111,54 @@ void AmbisonicWider::setAzimtuh(double aTheta)
 	for (int i = 1; i <= m_order; i++)
 	{
 		tmpAngle = (long)(i*angleFactor)%(NUMBEROFCIRCLEPOINTS-1);
-		m_ambiCoeffs[tmpIndex-1] = m_sinLookUp[tmpAngle];
-		m_ambiCoeffs[tmpIndex]   = m_cosLookUp[tmpAngle];
+		m_ambiCoeffs[tmpIndex-1] = m_sinLookUp[tmpAngle] * m_optimVector[tmpIndex-1];
+		m_ambiCoeffs[tmpIndex]   = m_cosLookUp[tmpAngle] * m_optimVector[tmpIndex];
 		
 		tmpIndex += 2;
 	}
 }
 
-void AmbisonicWider::setWidenValue(double aWidenValue)
+void AmbisonicEase::setWidenValue(double aWidenValue)
 {
 	m_widen_value = Tools::clip(aWidenValue, 0., 1.);
-    double weight = ((1. - m_widen_value) * m_order_weight + 1.) * 2.;
+    double weight = (1. - m_widen_value) * m_order_weight + 1.;
     m_widen_vector[0] = weight;
-    for(int i = 1; i < m_number_of_harmonics; i+=2)
+    
+    for(int i = 1; i < m_number_of_harmonics; i++)
+    {
         m_widen_vector[i] = weight * Tools::clip(((m_widen_value * m_order_weight) - m_minus_vector[i]) * m_dot_vector[i], 0., 1.);
+    }
 }
 
-AmbisonicWider::~AmbisonicWider()
+void AmbisonicEase::setPolarCoordinates(double aRadius, double anAzimuth)
+{
+    setAzimtuh(anAzimuth + CICM_PI2);
+    if(aRadius >= 1)
+    {
+        setWidenValue(1.);
+        for(int i = 0; i < m_number_of_harmonics; i++)
+            m_widen_vector[i] *= (2. / (aRadius + 1.));
+    }
+    else
+    {
+        setWidenValue(aRadius);
+    }
+    for(int i = 0; i < m_number_of_harmonics; i++)
+        m_ambiCoeffs[i] *= m_widen_vector[i];
+}
+
+void AmbisonicEase::setCartesianCoordinates(double anAbscissa, double anOrdinate)
+{
+    setPolarCoordinates(Tools::radius(anAbscissa, anOrdinate), Tools::angle(anAbscissa, anOrdinate));
+}
+
+AmbisonicEase::~AmbisonicEase()
 {
 	free(m_index_of_harmonics);
 	free(m_minus_vector);
 	free(m_dot_vector);
     free(m_widen_vector);
     free(m_ambiCoeffs);
+    free(m_optimVector);
 }
 

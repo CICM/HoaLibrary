@@ -42,10 +42,13 @@ private:
 	long	m_number_of_outputs;
 	long	m_vector_size;
     
-    double  m_weight_values[64];
-    double  m_harmonics_vector[63];
-    double* m_harmonics_block_vector[63];
-    double* m_harmonics_block_copy[63];
+    float  m_weight_values[64];
+    float  m_harmonics_vector[63];
+    float* m_harmonics_block_vector[63];
+    float* m_harmonics_block_copy[63];
+    
+    float  m_radius[64];
+    float  m_azimuth[64];
     
     void    freeSources();
     void    freeLoudspeakers();
@@ -59,6 +62,8 @@ public:
 	long getVectorSize();
 	long getNumberOfLoudspeakers();
     long getNumberOfSources();
+    float getRadius(long aSourceIndex);
+    float getAzimuth(long aSourceIndex);
     
     void setNumberOfLoudspeakers(long aNumberOfLoudspeakers);
     void setNumberOfSources(long aNumberOfSources);
@@ -69,18 +74,16 @@ public:
 	~AmbisonicTool();
 	
 	/* Perform sample by sample */
-	void process(double* aInputs, double* aOutputs)
+	void process(float* aInputs, float* aOutputs)
 	{	
 		for(int i = 0; i < m_number_of_sources; i++)
-        {
-            m_encoders[i]->process(aInputs[i], m_harmonics_vector);
-            m_widers[i]->process(m_harmonics_vector, m_harmonics_vector);
-        }
+            m_widers[i]->process(aInputs[i], m_harmonics_vector);
+        
         m_decoder->process(m_harmonics_vector, aOutputs);
 	}
 	
 	/* Perform block sample */
-	void process(double** aInputs, double** aOutputs)
+	void process(float** aInputs, float** aOutputs)
 	{
         for(int j = 0; j < m_number_of_harmonics; j++)
         {
@@ -91,12 +94,7 @@ public:
         }
 		for(int i = 0; i < m_number_of_sources; i++)
         {
-            for(int k = 0; k < m_vector_size; k++)
-            {
-                aInputs[i][k] *= m_weight_values[i];
-            }
-            m_encoders[i]->process(aInputs[i], m_harmonics_block_copy);
-            m_widers[i]->process(m_harmonics_block_copy, m_harmonics_block_copy);
+            m_widers[i]->process(aInputs[i], m_harmonics_block_copy);
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
                 for(int k = 0; k < m_vector_size; k++)
