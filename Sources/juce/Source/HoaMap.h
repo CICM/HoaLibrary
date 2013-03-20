@@ -24,12 +24,15 @@
 //==============================================================================
 /*
 */
+
+#include "PluginEditor.h"
+
 class HoaMap    :
     public Component,
     public ChangeBroadcaster
 {
 public:
-    HoaMap();
+    HoaMap(HoaplugAudioProcessorEditor* monPapa);
     ~HoaMap();
 
     void paint (Graphics&);
@@ -69,6 +72,7 @@ public:
     void triggerChangeMessage (const NotificationType notification);
 
 private:
+    HoaplugAudioProcessorEditor* papa;
     int m_minimum_of_loudspeakers, m_maximum_of_loudspeakers, m_minimum_of_sources, m_maximum_of_sources;
     int m_nbSources, m_nbSpeakers;
     float m_speakerOffset, m_speakerDistance;
