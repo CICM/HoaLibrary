@@ -1,12 +1,12 @@
 /*
-  ==============================================================================
-
-    HoaMap.cpp
-    Created: 13 Mar 2013 11:15:41pm
-    Author:  eliott PARIS
-
-  ==============================================================================
-*/
+ ==============================================================================
+ 
+ HoaMap.cpp
+ Created: 13 Mar 2013 11:15:41pm
+ Author:  eliott PARIS
+ 
+ ==============================================================================
+ */
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "HoaMap.h"
@@ -30,7 +30,7 @@ HoaMap::HoaMap()
     {
         m_sources_ordinate[i] = m_sources_abscissa[i] = 0.;
         //m_sources[i] = new Point();
-    }        
+    }
 }
 
 HoaMap::~HoaMap()
@@ -40,15 +40,15 @@ HoaMap::~HoaMap()
 void HoaMap::mouseMove (const MouseEvent &event)
 {
     /*
-    Point<float> mouse = event.getPosition().toFloat();
-    
-     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
-                                                            getWidth(), 0, 1, 1,
-                                                            getWidth(), getHeight(), 1, -1));
+     Point<float> mouse = event.getPosition().toFloat();
      
-    m_sources[0].setXY(mouse.getX(), mouse.getY());
-    repaint();
-    */
+     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
+     getWidth(), 0, 1, 1,
+     getWidth(), getHeight(), 1, -1));
+     
+     m_sources[0].setXY(mouse.getX(), mouse.getY());
+     repaint();
+     */
 }
 void HoaMap::mouseDown (const MouseEvent &event)
 {
@@ -82,11 +82,11 @@ void HoaMap::mouseDrag (const MouseEvent &event)
         repaint();
     }
     /*
-    if (mouse.getDistanceFromOrigin() < 1.0f - m_sourceSize) {
-        m_sources[0].setXY(mouse.getX(), mouse.getY());
-        repaint();
-    }
-    */
+     if (mouse.getDistanceFromOrigin() < 1.0f - m_sourceSize) {
+     m_sources[0].setXY(mouse.getX(), mouse.getY());
+     repaint();
+     }
+     */
 }
 void HoaMap::mouseUp   (const MouseEvent &event)
 {
@@ -103,7 +103,7 @@ void HoaMap::paint (Graphics& g)
     draw_sources(g);
     g.drawText(String(m_sources[0].getX()), 0, 0, getWidth(), 50, Justification(4), 1);
     g.drawText(String(m_sources[0].getY()), 0, 80, getWidth(), 50, Justification(4), 1);
-
+    
 }
 
 void HoaMap::draw_sources(Graphics& g)
@@ -169,15 +169,15 @@ void HoaMap::draw_speakers(Graphics& g)
     g.setColour ( Colour(0xff444444) );
     for (i=0; i < m_nbSpeakers; i++) {
         speaker.addRectangle(center-speakerSize*0.5,
-                            center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5,
-                            speakerSize,
-                            speakerSize);
+                             center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5,
+                             speakerSize,
+                             speakerSize);
         speaker.addTriangle(center,
-                           center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5,
-                           center+speakerSize*0.9,
-                           center - getHeight()*0.5*m_speakerDistance + speakerSize*0.5,
-                           center-speakerSize*0.9,
-                           center - getHeight()*0.5*m_speakerDistance + speakerSize*0.5);
+                            center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5,
+                            center+speakerSize*0.9,
+                            center - getHeight()*0.5*m_speakerDistance + speakerSize*0.5,
+                            center-speakerSize*0.9,
+                            center - getHeight()*0.5*m_speakerDistance + speakerSize*0.5);
         
         speakers.addPath(speaker,
                          AffineTransform::rotation( i*stepAngle + speakerOffset, center, center));
@@ -189,10 +189,10 @@ void HoaMap::draw_speakers(Graphics& g)
     for (i=0; i < m_nbSpeakers; i++) {
         g.addTransform(AffineTransform::rotation( i*stepAngle + speakerOffset, center, center));
         g.drawFittedText(String(i+1),
-                   center-speakerSize*0.5,
-                   center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5 -1,
-                   speakerSize,
-                   speakerSize, Justification(4), true);
+                         center-speakerSize*0.5,
+                         center - getHeight()*0.5*m_speakerDistance - speakerSize*0.5 -1,
+                         speakerSize,
+                         speakerSize, Justification(4), true);
         g.addTransform(AffineTransform::rotation( -( i*stepAngle + speakerOffset), center, center));
     }
     g.endTransparencyLayer();
