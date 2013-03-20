@@ -97,7 +97,7 @@ void HoaplugAudioProcessor::setParameter(int index, float newValue)
     {
         m_distance_of_loudspeakers = parameters[1].getValue();
         for (int i = 0; i < getNumInputChannels(); i++) {
-            m_ambisonic_tool->setCartesianCoordinates(i, -m_sources_abscissa[i] / m_distance_of_loudspeakers, -m_sources_ordinate[i] / m_distance_of_loudspeakers);
+            m_ambisonic_tool->setCartesianCoordinates(i, m_sources_abscissa[i] / m_distance_of_loudspeakers, m_sources_ordinate[i] / m_distance_of_loudspeakers);
         }
     }
     else if(index >= 2)
@@ -107,14 +107,16 @@ void HoaplugAudioProcessor::setParameter(int index, float newValue)
         {
             indexBis = ((index-2)/2);
             m_sources_abscissa[indexBis] = parameters[index].getValue();
+            m_ambisonic_tool->setCartesianCoordinates(indexBis, parameters[index].getValue() / m_distance_of_loudspeakers, parameters[index+1].getValue() / m_distance_of_loudspeakers);
         }
         else
         {
             indexBis = ((index-3)/2);
             m_sources_ordinate[indexBis] = parameters[index].getValue();
+            m_ambisonic_tool->setCartesianCoordinates(indexBis, parameters[index-1].getValue() / m_distance_of_loudspeakers, parameters[index].getValue() / m_distance_of_loudspeakers);
         }
         
-        m_ambisonic_tool->setCartesianCoordinates(indexBis, (m_sources_abscissa[indexBis] + 1.) / (2. * m_distance_of_loudspeakers), (m_sources_ordinate[indexBis] + 1.) / (2. * m_distance_of_loudspeakers));
+        
     }
 }
 

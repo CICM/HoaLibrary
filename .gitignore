@@ -192,3 +192,6 @@ HoaPackage/
 *.dia
 *.dat
 *.rsrc
+*.dep
+hoaPlug.build/
+xcuserdata/
