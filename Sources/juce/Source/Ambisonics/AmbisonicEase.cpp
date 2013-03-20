@@ -1,17 +1,17 @@
 /*
  * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
@@ -24,7 +24,7 @@ AmbisonicEase::AmbisonicEase(long anOrder, long aVectorSize)
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_inputs		= 1;
 	m_number_of_outputs		= m_number_of_harmonics;
-
+    
 	computeVectors();
 	setPolarCoordinates(1., 0.);
     setVectorSize(aVectorSize);
@@ -69,7 +69,7 @@ void AmbisonicEase::computeVectors()
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
 		m_index_of_harmonics[i] = (i - 1) / 2 + 1;
-		if (i % 2 == 1) 
+		if (i % 2 == 1)
 			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
 	}
     for(int i = 1; i < m_number_of_harmonics; i++)
@@ -161,4 +161,3 @@ AmbisonicEase::~AmbisonicEase()
     free(m_ambiCoeffs);
     free(m_optimVector);
 }
-
