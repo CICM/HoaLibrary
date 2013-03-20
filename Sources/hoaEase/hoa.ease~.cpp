@@ -42,8 +42,8 @@ void HoaTool_assist(t_HoaTool *x, void *b, long m, long a, char *s);
 void HoaTool_pol(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 void HoaTool_car(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 
-//void HoaTool_dsp(t_HoaTool *x, t_signal **sp, short *count);
-//t_int *HoaTool_perform(t_int *w);
+void HoaTool_dsp(t_HoaTool *x, t_signal **sp, short *count);
+t_int *HoaTool_perform(t_int *w);
 
 void HoaTool_dsp64(t_HoaTool *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaTool_perform64(t_HoaTool *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -76,7 +76,6 @@ void *HoaTool_new(t_symbol *s, long argc, t_atom *argv)
 	t_HoaTool *x = NULL;
 	int order = 4;
     int numberOfSources = 1;
-	int inputMode = 0;
     
     x = (t_HoaTool *)object_alloc((t_class*)HoaTool_class);
 	if (x)
@@ -85,14 +84,9 @@ void *HoaTool_new(t_symbol *s, long argc, t_atom *argv)
 			order = atom_getlong(argv);
 		if(atom_gettype(argv+1) == A_LONG)
 			numberOfSources = atom_getlong(argv+1);
-        if(atom_gettype(argv+2) == A_SYM && atom_getsym(argv+2) == gensym("signal"))
-            inputMode = 1;
         
 		x->f_AmbisonicPolyEase	= new AmbisonicPolyEase(order, numberOfSources, sys_getblksize());
-		if(inputMode)
-            dsp_setup((t_pxobject *)x, x->f_AmbisonicPolyEase->getNumberOfInputs() * 3);
-        else
-            dsp_setup((t_pxobject *)x, x->f_AmbisonicPolyEase->getNumberOfInputs());
+        dsp_setup((t_pxobject *)x, x->f_AmbisonicPolyEase->getNumberOfInputs());
         
 		for (int i = 0; i < x->f_AmbisonicPolyEase->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
@@ -112,7 +106,7 @@ void HoaTool_perform64(t_HoaTool *x, t_object *dsp64, double **ins, long numins,
 {
 	x->f_AmbisonicPolyEase->process(ins, outs);
 }
-/*
+
 void HoaTool_dsp(t_HoaTool *x, t_signal **sp, short *count)
 {
 	int i;
@@ -147,18 +141,25 @@ t_int *HoaTool_perform(t_int *w)
 	x->f_AmbisonicPolyEase->process(ins, outs);
 	
 	return (w + x->f_ninput + x->f_noutput + 3);
-}*/
+}
 
 void HoaTool_assist(t_HoaTool *x, void *b, long m, long a, char *s)
 {
-	long harmonicIndex = 0;
-	if (a != 0) 
-	{
-		harmonicIndex = (a - 1) / 2 + 1;
-		if (a % 2 == 1) 
-			harmonicIndex = - harmonicIndex;
-	}
-	sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
+    if(m == ASSIST_INLET)
+    {
+        sprintf(s,"(Signal) Source %ld", a);
+    }
+    else
+    {
+        long harmonicIndex = 0;
+        if (a != 0)
+        {
+            harmonicIndex = (a - 1) / 2 + 1;
+            if (a % 2 == 1)
+                harmonicIndex = - harmonicIndex;
+        }
+        sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
+    }
 }
 
 void HoaTool_pol(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)

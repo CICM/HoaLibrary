@@ -85,18 +85,16 @@ void AmbisonicPolyEase::setVectorSize(long aVectorSize)
 
 void AmbisonicPolyEase::setPolarCoordinates(long aSourceIndex, double aRadius, double anAzimuth)
 {
-    if(aSourceIndex > 0 && aSourceIndex <= m_number_of_sources)
+    if(aSourceIndex >= 0 && aSourceIndex < m_number_of_sources)
     {
-        aSourceIndex--;
         m_eases[aSourceIndex]->setPolarCoordinates(aRadius, anAzimuth);
     }
 }
 
 void AmbisonicPolyEase::setCartesianCoordinates(long aSourceIndex, double anAbscissa, double anOrdinate)
 {
-    if(aSourceIndex > 0 && aSourceIndex <= m_number_of_sources)
+    if(aSourceIndex >= 0 && aSourceIndex < m_number_of_sources)
     {
-        aSourceIndex--;
         m_eases[aSourceIndex]->setCartesianCoordinates(anAbscissa, anOrdinate);
     }
 }

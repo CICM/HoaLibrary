@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2FBBEAD608F335360078DB84"
-               BuildableName = "hoa.encoder~.mxo"
+               BlueprintIdentifier = "4E85402E15F16ED500169453"
+               BuildableName = "hoa.ease~.mxo"
                BlueprintName = "max-external"
-               ReferencedContainer = "container:hoa.encoder~.xcodeproj">
+               ReferencedContainer = "container:hoa.ease~.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
