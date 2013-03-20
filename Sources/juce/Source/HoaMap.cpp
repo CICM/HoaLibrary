@@ -101,7 +101,9 @@ void HoaMap::paint (Graphics& g)
     draw_speakers(g);
     draw_head(g);
     draw_sources(g);
-    //g.drawText(String(m_sources[1].getX()), 0, 0, getWidth(), 50, Justification(4), 1);
+    g.drawText(String(m_sources[0].getX()), 0, 0, getWidth(), 50, Justification(4), 1);
+    g.drawText(String(m_sources[0].getY()), 0, 80, getWidth(), 50, Justification(4), 1);
+
 }
 
 void HoaMap::draw_sources(Graphics& g)
@@ -250,17 +252,17 @@ void HoaMap::resized()
 }
 
 /* --- getters --- */
-float HoaMap::getSourceOrdinate(int _sourceIndex)
-{
-    if (_sourceIndex >= 0 && _sourceIndex < m_maximum_of_sources) {
-        return m_sources[_sourceIndex].getY();
-    }
-    return 0;
-}
 float HoaMap::getSourceAbscissa(int _sourceIndex)
 {
     if (_sourceIndex >= 0 && _sourceIndex < m_maximum_of_sources) {
         return m_sources[_sourceIndex].getX();
+    }
+    return 0;
+}
+float HoaMap::getSourceOrdinate(int _sourceIndex)
+{
+    if (_sourceIndex >= 0 && _sourceIndex < m_maximum_of_sources) {
+        return m_sources[_sourceIndex].getY();
     }
     return 0;
 }
@@ -298,19 +300,19 @@ int HoaMap::setSpeakerOffset(float _speakerOffset)
     repaint();
     return 1;
 }
-int HoaMap::setSourceOrdinate(int _sourceIndex, float _newOrdinate, NotificationType notification)
+int HoaMap::setSourceAbscissa(int _sourceIndex, float _newAbscissa, NotificationType notification)
 {
     if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
-        m_sources[_sourceIndex].setY(Tools::clip(_newOrdinate, -1.0f, 1.0f));
+        m_sources[_sourceIndex].setX(Tools::clip(_newAbscissa, -1.0f, 1.0f));
         triggerChangeMessage (notification);
         return 1;
     }
     return 0;
 }
-int HoaMap::setSourceAbscissa(int _sourceIndex, float _newAbscissa, NotificationType notification)
+int HoaMap::setSourceOrdinate(int _sourceIndex, float _newOrdinate, NotificationType notification)
 {
     if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
-        m_sources[_sourceIndex].setX(Tools::clip(_newAbscissa, -1.0f, 1.0f));
+        m_sources[_sourceIndex].setY(Tools::clip(_newOrdinate, -1.0f, 1.0f));
         triggerChangeMessage (notification);
         return 1;
     }
@@ -322,6 +324,9 @@ void HoaMap::triggerChangeMessage (const NotificationType notification)
     if (notification != dontSendNotification)
     {
         if (notification == sendNotificationSync)
+        {
             sendSynchronousChangeMessage();
+        }
+        else sendChangeMessage ();
     }
 }

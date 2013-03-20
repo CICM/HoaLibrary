@@ -28,7 +28,7 @@
 */
 //===============================================================
 
-class TextBoxSlider	:	public Label//, public ChangeBroadcaster
+class TextBoxSlider	:	public Label, public ChangeBroadcaster
 {
 private:
 	/** The numerical parameters of the control */
