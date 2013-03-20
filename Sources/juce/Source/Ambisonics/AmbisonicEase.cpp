@@ -132,7 +132,7 @@ void AmbisonicEase::setWidenValue(double aWidenValue)
 
 void AmbisonicEase::setPolarCoordinates(double aRadius, double anAzimuth)
 {
-    setAzimtuh(anAzimuth + CICM_PI2);
+    setAzimtuh(anAzimuth - CICM_PI2);
     if(aRadius >= 1)
     {
         setWidenValue(1.);

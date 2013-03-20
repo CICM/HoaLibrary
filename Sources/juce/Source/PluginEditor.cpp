@@ -72,8 +72,8 @@ void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* sou
 {
     if (source == &theMap) {
         for (int i = 0; i < nbSources_Slider.getValue(); i++) {
-            getProcessor()->setParameterNotifyingHost ( i*2+2, (float) theMap.getSourceAbscissa(i) );
-            getProcessor()->setParameterNotifyingHost ( i*2+3, (float) theMap.getSourceOrdinate(i) );
+            getProcessor()->setParameterNotifyingHost ( i*2+2, (float) theMap.getSourceAbscissa(i) + 0.5);
+            getProcessor()->setParameterNotifyingHost ( i*2+3, (float) theMap.getSourceOrdinate(i) + 0.5);
         }
     }
     else if (source == &nbSources_Slider) {
