@@ -57,7 +57,7 @@ HoaplugAudioProcessor::HoaplugAudioProcessor()
             char namo[256];
             sprintf(name, "Source %d Y", (i-1)/2);
             sprintf(namo, "Ordinate of the source %d", (i-1)/2);
-            parameters[i].init (name, UnitPan, namo, 0., -1., 1., 0.);
+            parameters[i].init (name, UnitPan, namo, 1., -1., 1., 1.);
         }
     }    
 }
@@ -96,9 +96,8 @@ void HoaplugAudioProcessor::setParameter(int index, float newValue)
     else if(index == 1)
     {
         m_distance_of_loudspeakers = parameters[1].getValue();
-        for(int i = 0; i < getNumInputChannels(); i++)
-        {
-            m_ambisonic_tool->setCartesianCoordinates(i+1, -m_sources_abscissa[i] / m_distance_of_loudspeakers, -m_sources_ordinate[i] / m_distance_of_loudspeakers);
+        for (int i = 0; i < getNumInputChannels(); i++) {
+            m_ambisonic_tool->setCartesianCoordinates(i, -m_sources_abscissa[i] / m_distance_of_loudspeakers, -m_sources_ordinate[i] / m_distance_of_loudspeakers);
         }
     }
     else if(index >= 2)
@@ -114,7 +113,8 @@ void HoaplugAudioProcessor::setParameter(int index, float newValue)
             indexBis = ((index-3)/2);
             m_sources_ordinate[indexBis] = parameters[index].getValue();
         }
-        m_ambisonic_tool->setCartesianCoordinates(indexBis+1, -m_sources_abscissa[indexBis] / m_distance_of_loudspeakers, -m_sources_ordinate[indexBis] / m_distance_of_loudspeakers);
+        
+        m_ambisonic_tool->setCartesianCoordinates(indexBis, (m_sources_abscissa[indexBis] + 1.) / (2. * m_distance_of_loudspeakers), (m_sources_ordinate[indexBis] + 1.) / (2. * m_distance_of_loudspeakers));
     }
 }
 
@@ -245,7 +245,7 @@ void HoaplugAudioProcessor::numChannelsChanged()
 //==============================================================================
 void HoaplugAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-    if(getNumInputChannels() != m_ambisonic_decoder->getNumberOfOutputs())
+    if(getNumOutputChannels() != m_ambisonic_decoder->getNumberOfOutputs())
     {
         delete m_ambisonic_tool;
         delete m_ambisonic_decoder;
@@ -259,6 +259,10 @@ void HoaplugAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock
     
         m_ambisonic_tool = new AmbisonicPolyEase(anOrder, getNumInputChannels());
         m_ambisonic_decoder = new AmbisonicDecode(anOrder, aNumberOfLoudspeakers);
+    }
+    if(getNumInputChannels() != m_ambisonic_tool->getNumberOfSources())
+    {
+        m_ambisonic_tool->setNumberOfSources(getNumInputChannels());
     }
     m_ambisonic_tool->setVectorSize(samplesPerBlock);
     m_ambisonic_decoder->setVectorSize(samplesPerBlock);
@@ -278,6 +282,7 @@ void HoaplugAudioProcessor::releaseResources()
 void HoaplugAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     float** channelArray = buffer.getArrayOfChannels();
+
     m_ambisonic_tool->process(channelArray, m_harmonics_vector);
     m_ambisonic_decoder->process(m_harmonics_vector, channelArray);
 }

@@ -17,40 +17,29 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
     nbSources_Slider ("nbSources"),
     nbSpeakers_Slider ("nbSpeakers"),
     speakerOffset_Slider ("speakerOffset"),
-    speakerDistance_Slider ("speakerDistance"),
-    theMap(this)
+    speakerDistance_Slider ("speakerDistance")
 {
     bg = ImageCache::getFromMemory (BinaryData::background_jpg, BinaryData::background_jpgSize);
     
     //add the draggable-number-box sliders :
     addAndMakeVisible (&nbSources_Slider);
-    nbSources_Slider.addListener(this);
-    nbSources_Slider.setSliderStyle (Slider::IncDecButtons);
-    nbSources_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
+    nbSources_Slider.addChangeListener(this);
     nbSources_Slider.setRange(1, 64, 1);
-    nbSources_Slider.setChangeNotificationOnlyOnRelease	( true );
     
     addAndMakeVisible (&nbSpeakers_Slider);
-    nbSpeakers_Slider.addListener(this);
-    nbSpeakers_Slider.setSliderStyle (Slider::IncDecButtons);
-    nbSpeakers_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
-    nbSpeakers_Slider.setRange(1, 64, 1);
-    //nbSpeakers_Slider.setChangeNotificationOnlyOnRelease	( true );
+    nbSources_Slider.addChangeListener(this);
+    nbSpeakers_Slider.setRange(3, 64, 1);
     
     addAndMakeVisible (&speakerOffset_Slider);
-    speakerOffset_Slider.addListener(this);
-    speakerOffset_Slider.setSliderStyle (Slider::IncDecButtons);
-    speakerOffset_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
+    speakerOffset_Slider.addChangeListener(this);
     speakerOffset_Slider.setRange(-180, 180, 1);
     
     addAndMakeVisible (&speakerDistance_Slider);
-    speakerDistance_Slider.addListener(this);
-    speakerDistance_Slider.setSliderStyle (Slider::IncDecButtons);
-    speakerDistance_Slider.setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
+    speakerDistance_Slider.addChangeListener(this);
     speakerDistance_Slider.setRange(0., 1., 0.01);
     
+    // add the Map
     addAndMakeVisible (&theMap);
-    
     theMap.addChangeListener(this);
     
     updateMouseCursor ();
@@ -73,53 +62,32 @@ void HoaplugAudioProcessorEditor::paint (Graphics& g)
     nbSpeakers_Slider.setBounds (getWidth()-80, 216, 58, 23);
     speakerOffset_Slider.setBounds (getWidth()-80, 278, 62, 23);
     speakerDistance_Slider.setBounds (getWidth()-80, 347, 60, 23);
+
+    //test.setBounds (getWidth()-80, 278, 62, 23);
     
     theMap.setBounds (10, 10, 400, 400);
 }
 
-//void HoaplugAudioProcessorEditor::valueChanged (Value& value)
-//{
-//}
-
-
-// This is our Slider::Listener callback, when the user drags a slider.
-void HoaplugAudioProcessorEditor::sliderValueChanged (Slider* slider)
+void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* source)
 {
-	// It's vital to use setParameterNotifyingHost to change any parameters that are automatable
-	// by the host, rather than just modifying them directly, otherwise the host won't know
-	// that they've changed.
-    
-    if (slider == &nbSources_Slider) {
+    if (source == &theMap) {
+        for (int i = 0; i < nbSources_Slider.getValue(); i++) {
+            getProcessor()->setParameterNotifyingHost ( i*2+2, (float) theMap.getSourceAbscissa(i) );
+            getProcessor()->setParameterNotifyingHost ( i*2+3, (float) theMap.getSourceOrdinate(i) );
+        }
+    }
+    else if (source == &nbSources_Slider) {
         theMap.setNbSources(nbSources_Slider.getValue());
     }
-    else if (slider == &nbSpeakers_Slider) {
+    else if (source == &nbSpeakers_Slider) {
         theMap.setNbSpeakers(nbSpeakers_Slider.getValue());
     }
-    else if (slider == &speakerOffset_Slider) {
+    else if (source == &speakerOffset_Slider) {
         theMap.setSpeakerOffset(speakerOffset_Slider.getValue());
     }
-    else if (slider == &speakerDistance_Slider) {
+    else if (source == &speakerDistance_Slider) {
         theMap.setSpeakerDistance(speakerDistance_Slider.getValue());
         getProcessor()->setParameterNotifyingHost (HoaplugAudioProcessor::m_distance_of_loudspeakers_parameter, (float) speakerDistance_Slider.getValue());
     }
-	/*
-     if (slider == &gainSlider) {
-     //getProcessor()->setParameterNotifyingHost (ModulatorAudioProcessor::gainParam, (float) gainSlider.getValue());
-     }
-     */
 }
 
-
-void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* source)
-{
-    if (source == &theMap)
-    {
-        for(int i = 0; i < nbSources_Slider.getValue(); i++)
-        {
-            getProcessor()->setParameterNotifyingHost((i*2+2), (float)theMap.getSourceAbscissa(i));
-            getProcessor()->setParameterNotifyingHost((i*2+3), (float)theMap.getSourceOrdinate(i));
-        }
-    }
-    getProcessor()->setParameterNotifyingHost(2, 1.);
-    getProcessor()->setParameterNotifyingHost(3, 1.);
-}

@@ -103,16 +103,26 @@ void PluginParameter::setUnitSuffix (String newSuffix)
 	unitSuffix = newSuffix;
 }
 
+bool almostEqual (double firstValue, double secondValue, double precision = 0.00001)
+{
+    if (fabs (firstValue - secondValue) < precision)
+        return true;
+    else
+        return false;
+}
+
 void PluginParameter::smooth()
 {
 	if (smoothValue != getValue())
 	{
-	   /*
+	   
 		if( (smoothCoeff == 1.0) || almostEqual (smoothValue, getValue()) )
 			smoothValue = getValue(); 
-		*/
+		
+        /*
 	   if( (smoothCoeff == 1.0) )
 		   smoothValue = getValue();
+        */
 		else
 			smoothValue = ((getValue() - smoothValue) * smoothCoeff) + smoothValue;
 	}

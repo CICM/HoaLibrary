@@ -14,7 +14,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 #include "HoaMap.h"
-//#include "TextBoxSlider.h"
+#include "TextBoxSlider.h"
 
 
 //==============================================================================
@@ -22,8 +22,6 @@
 */
 class HoaplugAudioProcessorEditor  :
     public AudioProcessorEditor,
-    //public Value::Listener,
-    public SliderListener,
     public ChangeListener
 {
 public:
@@ -40,8 +38,10 @@ public:
     
 private:
     Image bg;
-    Slider nbSources_Slider, nbSpeakers_Slider, speakerOffset_Slider, speakerDistance_Slider;
+    //Slider nbSources_Slider, nbSpeakers_Slider, speakerOffset_Slider, speakerDistance_Slider;
+    TextBoxSlider nbSources_Slider, nbSpeakers_Slider, speakerOffset_Slider, speakerDistance_Slider;
     HoaMap theMap;
+    //TextBoxSlider test;
     
     
     HoaplugAudioProcessor* getProcessor() const
