@@ -78,7 +78,7 @@ void HoaMap::mouseDrag (const MouseEvent &event)
         setSourceAbscissa(m_sourcePointed, mouse.getX());
         setSourceOrdinate(m_sourcePointed, mouse.getY());
         //m_sources[m_sourcePointed].setXY(mouse.getX(), mouse.getY());
-        //setMouseCursor(CrosshairCursor);
+        setMouseCursor(MouseCursor::CrosshairCursor);
         repaint();
     }
     /*
