@@ -26,11 +26,6 @@ HoaMap::HoaMap()
     m_minimum_of_sources = 1;
     m_sourceSize = 0.08;
     m_sourcePointed = m_sourceOver = -1;
-    for (int i = 0; i < m_maximum_of_loudspeakers; i++)
-    {
-        m_sources_ordinate[i] = m_sources_abscissa[i] = 0.;
-        //m_sources[i] = new Point();
-    }
 }
 
 HoaMap::~HoaMap()
@@ -46,7 +41,7 @@ void HoaMap::mouseMove (const MouseEvent &event)
                                                            getWidth(), getHeight(), 1, -1));
     setMouseCursor(MouseCursor::NormalCursor);
     m_sourceOver = -1;
-    for (int i = 0; i < m_maximum_of_sources; i++) {
+    for (int i = 0; i < m_nbSources; i++) {
         if (mouse.getDistanceFrom(m_sources[i]) < m_sourceSize*0.5 && i <= m_nbSources) {
             m_sourceOver = i;
             setMouseCursor(MouseCursor::PointingHandCursor);
@@ -62,7 +57,7 @@ void HoaMap::mouseDown (const MouseEvent &event)
                                                            getWidth(), 0, 1, 1,
                                                            getWidth(), getHeight(), 1, -1));
     m_sourcePointed = -1;
-    for (int i = 0; i < m_maximum_of_sources; i++) {
+    for (int i = 0; i < m_nbSources; i++) {
         if (mouse.getDistanceFrom(m_sources[i]) < m_sourceSize*0.5) {
             m_sourcePointed = i;
             break;
@@ -124,6 +119,8 @@ void HoaMap::draw_source(Graphics& g, int _sourceIndex)
     float sourceSize = 0.08;
     float sourceX = m_sources[_sourceIndex].getX()-sourceSize*0.5;
     float sourceY = m_sources[_sourceIndex].getY()-sourceSize*0.5;
+    float sourceThickness = sourceSize*0.1;
+    if (_sourceIndex == m_sourceOver) sourceThickness *= 1.2;
     
     g.beginTransparencyLayer(1);
     
@@ -131,12 +128,14 @@ void HoaMap::draw_source(Graphics& g, int _sourceIndex)
                                                      1, 1, getWidth(), 0,
                                                      1, -1, getWidth(), getHeight()));
     
-    g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
-    
+    //g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
+
+    g.setColour ( (Colour((float)fmod(_sourceIndex*0.1, 1), (float)0.5, (float)0.5, (float)0.5 )).withAlpha((float)0.9) );
+
     g.fillEllipse(sourceX, sourceY, sourceSize, sourceSize);
     
     g.setColour ( Colour(0xff444444) );
-    g.drawEllipse(sourceX, sourceY, sourceSize, sourceSize, sourceSize*0.1);
+    g.drawEllipse(sourceX, sourceY, sourceSize, sourceSize, sourceThickness);
     
     g.setFont(sourceSize*0.01);
     
@@ -315,6 +314,15 @@ int HoaMap::setSourceOrdinate(int _sourceIndex, float _newOrdinate, Notification
 {
     if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
         m_sources[_sourceIndex].setY(Tools::clip(_newOrdinate, -1.0f, 1.0f));
+        triggerChangeMessage (notification);
+        return 1;
+    }
+    return 0;
+}
+int HoaMap::setCartesianCoordinates(int _sourceIndex, float _newAbscissa, float _newOrdinate, NotificationType notification)
+{
+    if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
+        m_sources[_sourceIndex].setXY(Tools::clip(_newAbscissa, -1.0f, 1.0f), Tools::clip(_newOrdinate, -1.0f, 1.0f));
         triggerChangeMessage (notification);
         return 1;
     }

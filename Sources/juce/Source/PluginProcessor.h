@@ -20,7 +20,9 @@
 //==============================================================================
 /**
 */
-class HoaplugAudioProcessor  : public AudioProcessor, public Value::Listener//, public ChangeListener
+class HoaplugAudioProcessor  :
+    public AudioProcessor,
+    public Value::Listener
 {
     
 private:
@@ -60,6 +62,8 @@ public:
     const String getOutputChannelName (int channelIndex) const;
     bool isInputChannelStereoPair (int index) const;
     bool isOutputChannelStereoPair (int index) const;
+    
+    bool isParameterAutomatable	(int parameterIndex) const;
 
     bool acceptsMidi() const;
     bool producesMidi() const;
@@ -85,7 +89,7 @@ public:
     void getStateInformation (MemoryBlock& destData);
     void setStateInformation (const void* data, int sizeInBytes);
     void numChannelsChanged();
-    
+        
     enum Parameters
     {
         m_offset_of_loudspeakers_parameter = 0,
@@ -163,6 +167,7 @@ public:
     
     float   m_sources_ordinate[64], m_sources_abscissa[64];
     float   m_offset_of_loudspeakers, m_distance_of_loudspeakers;
+    int     m_number_of_loudspeakers, m_number_of_sources;
     //==============================================================================
     void valueChanged(Value& value);
     PluginParameter& getPluginParameter (int index);

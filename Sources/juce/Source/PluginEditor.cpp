@@ -27,7 +27,7 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
     nbSources_Slider.setRange(1, 64, 1);
     
     addAndMakeVisible (&nbSpeakers_Slider);
-    nbSources_Slider.addChangeListener(this);
+    nbSpeakers_Slider.addChangeListener(this);
     nbSpeakers_Slider.setRange(3, 64, 1);
     
     addAndMakeVisible (&speakerOffset_Slider);
@@ -38,14 +38,17 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
     speakerDistance_Slider.addChangeListener(this);
     speakerDistance_Slider.setRange(0., 1., 0.01);
     
-    // add the Map
+    // add the HoaMap component
     addAndMakeVisible (&theMap);
     theMap.addChangeListener(this);
     
     updateMouseCursor ();
     
-    // This is where our plugin's editor size is set.
+    // Setting size of our plug :
     setSize (580, 420);
+    
+    // start a timer to check peridiocally if any value of the processor has changed
+    startTimer (50);
 }
 
 HoaplugAudioProcessorEditor::~HoaplugAudioProcessorEditor()
@@ -61,19 +64,39 @@ void HoaplugAudioProcessorEditor::paint (Graphics& g)
     nbSources_Slider.setBounds (getWidth()-159, 216, 58, 23);
     nbSpeakers_Slider.setBounds (getWidth()-80, 216, 58, 23);
     speakerOffset_Slider.setBounds (getWidth()-80, 278, 62, 23);
-    speakerDistance_Slider.setBounds (getWidth()-80, 347, 60, 23);
-
-    //test.setBounds (getWidth()-80, 278, 62, 23);
-    
+    speakerDistance_Slider.setBounds (getWidth()-80, 347, 60, 23);    
     theMap.setBounds (10, 10, 400, 400);
+}
+
+void HoaplugAudioProcessorEditor::timerCallback()
+{
+    HoaplugAudioProcessor* ourProcessor = getProcessor();
+    
+    speakerDistance_Slider.setValue (ourProcessor->m_distance_of_loudspeakers, dontSendNotification);
+    theMap.setSpeakerDistance(ourProcessor->m_distance_of_loudspeakers);
+    speakerOffset_Slider.setValue (ourProcessor->m_offset_of_loudspeakers, dontSendNotification);
+    theMap.setSpeakerOffset(ourProcessor->m_offset_of_loudspeakers);
+    
+    for (int i = 0; i < nbSources_Slider.getValue(); i++) {
+        
+        theMap.setCartesianCoordinates(i, ourProcessor->m_sources_abscissa[i], ourProcessor->m_sources_ordinate[i], dontSendNotification);
+        
+        //theMap.setCartesianCoordinates(i, (ourProcessor->m_sources_abscissa[i]) * 2 - 1, (ourProcessor->m_sources_ordinate[i]), dontSendNotification);
+    }
+}
+
+void HoaplugAudioProcessorEditor::valueChanged (Value& value)
+{
+    ;
 }
 
 void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* source)
 {
     if (source == &theMap) {
-        for (int i = 0; i < nbSources_Slider.getValue(); i++) {
-            getProcessor()->setParameterNotifyingHost ( i*2+2, (float) theMap.getSourceAbscissa(i) + 0.5);
-            getProcessor()->setParameterNotifyingHost ( i*2+3, (float) theMap.getSourceOrdinate(i) + 0.5);
+        for (int i = 0; i < nbSources_Slider.getValue(); i++)
+        {
+            getProcessor()->setParameterNotifyingHost ( i*2+2, (float) (theMap.getSourceAbscissa(i) + 1) * 0.5);
+            getProcessor()->setParameterNotifyingHost ( i*2+3, (float) (theMap.getSourceOrdinate(i) + 1) * 0.5);
         }
     }
     else if (source == &nbSources_Slider) {
@@ -84,6 +107,10 @@ void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* sou
     }
     else if (source == &speakerOffset_Slider) {
         theMap.setSpeakerOffset(speakerOffset_Slider.getValue());
+        getProcessor()->setParameterNotifyingHost (HoaplugAudioProcessor::m_offset_of_loudspeakers_parameter, (float) (speakerOffset_Slider.getValue()+ 180)/360) ;
+        /*
+        getProcessor()->setParameterNotifyingHost (HoaplugAudioProcessor::m_offset_of_loudspeakers_parameter, (float) speakerOffset_Slider.getValue());
+        */
     }
     else if (source == &speakerDistance_Slider) {
         theMap.setSpeakerDistance(speakerDistance_Slider.getValue());

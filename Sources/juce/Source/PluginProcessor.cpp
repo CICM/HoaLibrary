@@ -37,8 +37,13 @@ HoaplugAudioProcessor::HoaplugAudioProcessor()
     {
         parameters[i].getValueObject().addListener(this);
     }
-    
+    /*
+    void PluginParameter::init (const String& name_, ParameterUnit unit_, String description_,
+                                double value_, double min_, double max_, double default_,
+                                double skewFactor_, double smoothCoeff_, double step_, String unitSuffix_)
+    */
     parameters[0].init ("Offset", UnitDegrees, "Offset of the loudspeakers", 0, -180, 180, 0);
+    //parameters[0].init ("Offset", UnitDegrees, "Offset of the loudspeakers", 0, -180, 180, 0, 1, 0.1, 1);
     parameters[1].init ("Distance", UnitGeneric, "Distance of the loudspeakers", 0.5, 0., 1., 0.5);
     
     for(int i = 2; i < m_number_of_parameters; i++)
@@ -57,9 +62,9 @@ HoaplugAudioProcessor::HoaplugAudioProcessor()
             char namo[256];
             sprintf(name, "Source %d Y", (i-1)/2);
             sprintf(namo, "Ordinate of the source %d", (i-1)/2);
-            parameters[i].init (name, UnitPan, namo, 1., -1., 1., 1.);
+            parameters[i].init (name, UnitPan, namo, 0., -1., 1., 0.);
         }
-    }    
+    }
 }
 
 HoaplugAudioProcessor::~HoaplugAudioProcessor()
@@ -90,7 +95,7 @@ float HoaplugAudioProcessor::getParameter(int index)
 
 void HoaplugAudioProcessor::setParameter(int index, float newValue)
 {
-    parameters[index].setNormalisedValue (newValue);
+    parameters[index].setNormalisedValue(newValue);
     if(index == 0)
         m_offset_of_loudspeakers = parameters[0].getValue();
     else if(index == 1)
@@ -115,8 +120,6 @@ void HoaplugAudioProcessor::setParameter(int index, float newValue)
             m_sources_ordinate[indexBis] = parameters[index].getValue();
             m_ambisonic_tool->setCartesianCoordinates(indexBis, parameters[index-1].getValue() / m_distance_of_loudspeakers, parameters[index].getValue() / m_distance_of_loudspeakers);
         }
-        
-        
     }
 }
 
@@ -170,10 +173,15 @@ const String HoaplugAudioProcessor::getOutputChannelName (int channelIndex) cons
 
 bool HoaplugAudioProcessor::isInputChannelStereoPair (int index) const
 {
-    return true;
+    return false;
 }
 
 bool HoaplugAudioProcessor::isOutputChannelStereoPair (int index) const
+{
+    return false;
+}
+
+bool HoaplugAudioProcessor::isParameterAutomatable	(int parameterIndex) const
 {
     return true;
 }

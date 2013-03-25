@@ -19,8 +19,6 @@
 #define HOA_2PI		(2. * 3.1415926535897932384626433832795028842)
 #endif
 
-#define DrawEllipse(index) g.fillEllipse(m_sources_ordinate[index]-0.04, m_sources_abscissa[index]-0.04, 0.08, 0.08);
-
 //==============================================================================
 /*
  */
@@ -57,6 +55,7 @@ public:
     int setSpeakerOffset(float _speakerOffset);
     int setSourceAbscissa(int _sourceIndex, float _newAbscissa, NotificationType notification = sendNotificationAsync);
     int setSourceOrdinate(int _sourceIndex, float _newOrdinate, NotificationType notification = sendNotificationAsync);
+    int setCartesianCoordinates(int _sourceIndex, float _newAbscissa, float _newOrdinate, NotificationType notification = sendNotificationAsync);
     
     // getters :
     int   getNbSources()  { return m_nbSources; }
@@ -72,8 +71,6 @@ private:
     int m_minimum_of_loudspeakers, m_maximum_of_loudspeakers, m_minimum_of_sources, m_maximum_of_sources;
     int m_nbSources, m_nbSpeakers;
     float m_speakerOffset, m_speakerDistance;
-    float m_sources_ordinate[64], m_sources_abscissa[64];
-    //Point<float> *m_sources;
     Point<float> m_sources[64];
     float m_sourceSize;
     int m_sourcePointed, m_sourceOver;

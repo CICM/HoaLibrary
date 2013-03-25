@@ -70,9 +70,7 @@ public:
 	    return attemptedValue;
 	}
 
-	void setValue (double newValue,
-						const bool sendUpdateMessage = true,
-						const bool sendMessageSynchronously = false)
+    void setValue (double newValue, NotificationType notification = sendNotificationAsync)
 	{
 		if (newValue <= minimum || maximum <= minimum)
 		{
@@ -94,22 +92,19 @@ public:
 			currentValue = newValue;
 			updateText();
 			repaint();
-            
-			if (sendUpdateMessage)
-			{
-				if (sendMessageSynchronously)
-					//sendSynchronousChangeMessage (this);
-                    sendSynchronousChangeMessage ();
-				else
-					//sendChangeMessage (this);
+            if (notification != dontSendNotification)
+            {
+                if (notification == sendNotificationSync)
+                    sendSynchronousChangeMessage();
+                else
                     sendChangeMessage ();
-				try
+                try
 				{
 					valueChanged (currentValue);
 				}
 				catch (...)
 				{}
-			}
+            }
 		}
 	}
 
@@ -145,7 +140,8 @@ public:
 				}
 			}
 
-			setValue (currentValue, false, false);
+			//setValue (currentValue, false, false);
+            setValue (currentValue, dontSendNotification);
 			updateText();
 		}
 	}
@@ -208,7 +204,8 @@ public:
 			if (retPressed || ! hasKeyboardFocus (true))
 			{
 				startedDragging();
-				setValue (snapValue (getValueFromText (getText()), false), true, true);
+                setValue (snapValue (getValueFromText (getText()), false), sendNotificationSync);
+				//setValue (snapValue (getValueFromText (getText()), false), true, true);
 				stoppedDragging();
 			}
 
@@ -299,7 +296,8 @@ public:
 			}
 		
 			valueWhenLastDragged = jlimit (minimum, maximum, valueWhenLastDragged);
-			setValue (snapValue (valueWhenLastDragged, true), true, false);
+            setValue (snapValue (valueWhenLastDragged, true), sendNotificationAsync);
+			//setValue (snapValue (valueWhenLastDragged, true), true, false);
 			mouseXWhenLastDragged = e.x;
 			mouseYWhenLastDragged = e.y;
 		}
@@ -323,7 +321,8 @@ public:
 
 			startedDragging();
 
-			setValue (snapValue (currentValue + delta, false), true, true);
+            setValue (snapValue (currentValue + delta, false), sendNotificationSync);
+			//setValue (snapValue (currentValue + delta, false), true, true);
 
 			stoppedDragging();
 		}

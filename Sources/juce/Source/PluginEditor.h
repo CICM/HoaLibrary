@@ -22,13 +22,16 @@
 */
 class HoaplugAudioProcessorEditor  :
     public AudioProcessorEditor,
-    public ChangeListener
+    public Value::Listener,
+    public ChangeListener,
+    public Timer
 {
 public:
     HoaplugAudioProcessorEditor (HoaplugAudioProcessor* ownerFilter);
     ~HoaplugAudioProcessorEditor();
     
-    //void valueChanged (Value& value);
+    void timerCallback();
+    void valueChanged (Value& value);
     void changeListenerCallback (ChangeBroadcaster* source);
     void sliderValueChanged (Slider*);
     
@@ -38,11 +41,8 @@ public:
     
 private:
     Image bg;
-    //Slider nbSources_Slider, nbSpeakers_Slider, speakerOffset_Slider, speakerDistance_Slider;
     TextBoxSlider nbSources_Slider, nbSpeakers_Slider, speakerOffset_Slider, speakerDistance_Slider;
     HoaMap theMap;
-    //TextBoxSlider test;
-    
     
     HoaplugAudioProcessor* getProcessor() const
     {
