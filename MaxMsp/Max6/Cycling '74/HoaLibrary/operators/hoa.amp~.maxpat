@@ -26,7 +26,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.amp~ (1)",
+		"title" : "hoa.amp~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -298,21 +298,21 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-5", 1 ],
+					"destination" : [ "obj-4", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 341.5, 136.0, 174.5, 136.0 ],
-					"source" : [ "obj-20", 1 ]
+					"midpoints" : [ 284.5, 126.0, 165.0, 126.0, 165.0, 90.0, 114.5, 90.0 ],
+					"source" : [ "obj-20", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-6", 0 ],
+					"destination" : [ "obj-5", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 284.5, 174.5, 114.5, 174.5 ],
-					"source" : [ "obj-20", 0 ]
+					"midpoints" : [ 341.5, 136.0, 174.5, 136.0 ],
+					"source" : [ "obj-20", 1 ]
 				}
 
 			}

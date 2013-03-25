@@ -53,7 +53,8 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_connect *x = NULL;
 
-	if (x = (t_connect *)object_alloc((t_class *)connect_class)) 
+	x = (t_connect *)object_alloc((t_class *)connect_class);
+	if (x)
 	{	
 		x->f_harmonics = 4;
 		x->f_output = 4;
@@ -367,7 +368,7 @@ int validConditionColor(t_object *obj)
 	t_object *jb, *o;
 	t_symbol *obclass = object_classname(obj);
 	
-	if(obclass == gensym("hoa.encoder~") || obclass == gensym("hoa.rotate~") || obclass == gensym("hoa.recomposer~") || obclass == gensym("sfplay~") || obclass == gensym("hoa.optim~"))
+	if(obclass == gensym("hoa.encoder~") || obclass == gensym("hoa.rotate~") || obclass == gensym("hoa.recomposer~") || obclass == gensym("sfplay~") || obclass == gensym("hoa.optim~") || obclass == gensym("hoa.ease~") || obclass == gensym("hoa.convolve~") || obclass == gensym("hoa.wider~"))
 		return 1;
 	else if(obclass == gensym("hoa.projector~"))
 		return 2;

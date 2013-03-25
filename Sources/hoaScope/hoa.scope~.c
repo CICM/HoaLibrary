@@ -439,9 +439,11 @@ void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *pa
 	params->d_cornersize = 6; 
 }
 
-long scope_oksize(t_scope *x, t_rect *newrect){
-	if (newrect->width < 100){
-		newrect->width = newrect->height = 100;
+long scope_oksize(t_scope *x, t_rect *newrect)
+{
+	if (newrect->width < 20)
+    {
+		newrect->width = newrect->height = 20;
 	}
 	return 0;
 }
