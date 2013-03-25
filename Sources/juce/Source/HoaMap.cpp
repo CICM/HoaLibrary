@@ -39,16 +39,20 @@ HoaMap::~HoaMap()
 
 void HoaMap::mouseMove (const MouseEvent &event)
 {
-    /*
-     Point<float> mouse = event.getPosition().toFloat();
-     
-     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
-     getWidth(), 0, 1, 1,
-     getWidth(), getHeight(), 1, -1));
-     
-     m_sources[0].setXY(mouse.getX(), mouse.getY());
-     repaint();
-     */
+    Point<float> mouse = event.getPosition().toFloat();
+    // coordonnées mouse en cartesien :
+    mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
+                                                           getWidth(), 0, 1, 1,
+                                                           getWidth(), getHeight(), 1, -1));
+    setMouseCursor(MouseCursor::NormalCursor);
+    m_sourceOver = -1;
+    for (int i = 0; i < m_maximum_of_sources; i++) {
+        if (mouse.getDistanceFrom(m_sources[i]) < m_sourceSize*0.5 && i <= m_nbSources) {
+            m_sourceOver = i;
+            setMouseCursor(MouseCursor::PointingHandCursor);
+            break;
+        }
+    }
 }
 void HoaMap::mouseDown (const MouseEvent &event)
 {
@@ -59,7 +63,7 @@ void HoaMap::mouseDown (const MouseEvent &event)
                                                            getWidth(), getHeight(), 1, -1));
     m_sourcePointed = -1;
     for (int i = 0; i < m_maximum_of_sources; i++) {
-        if (mouse.getDistanceFrom(m_sources[i]) < m_sourceSize) {
+        if (mouse.getDistanceFrom(m_sources[i]) < m_sourceSize*0.5) {
             m_sourcePointed = i;
             break;
         }
@@ -74,11 +78,11 @@ void HoaMap::mouseDrag (const MouseEvent &event)
                                                            getWidth(), 0, 1, 1,
                                                            getWidth(), getHeight(), 1, -1));
     
-    if (m_sourcePointed >= 0 && m_sourcePointed < m_maximum_of_sources) {
+    if (m_sourcePointed >= 0 && m_sourcePointed < m_nbSources) {
         setSourceAbscissa(m_sourcePointed, mouse.getX());
         setSourceOrdinate(m_sourcePointed, mouse.getY());
         //m_sources[m_sourcePointed].setXY(mouse.getX(), mouse.getY());
-        //setMouseCursor(CrosshairCursor);
+        setMouseCursor(MouseCursor::DraggingHandCursor);
         repaint();
     }
     /*
@@ -91,6 +95,7 @@ void HoaMap::mouseDrag (const MouseEvent &event)
 void HoaMap::mouseUp   (const MouseEvent &event)
 {
     m_sourcePointed = -1;
+    setMouseCursor(MouseCursor::NormalCursor);
 }
 
 void HoaMap::paint (Graphics& g)
@@ -101,8 +106,8 @@ void HoaMap::paint (Graphics& g)
     draw_speakers(g);
     draw_head(g);
     draw_sources(g);
-    g.drawText(String(m_sources[0].getX()), 0, 0, getWidth(), 50, Justification(4), 1);
-    g.drawText(String(m_sources[0].getY()), 0, 80, getWidth(), 50, Justification(4), 1);
+    //g.drawText(String(m_sources[0].getX()), 0, 0, getWidth(), 50, Justification(4), 1);
+    //g.drawText(String(m_sources[0].getY()), 0, 80, getWidth(), 50, Justification(4), 1);
     
 }
 
@@ -117,6 +122,8 @@ void HoaMap::draw_sources(Graphics& g)
 void HoaMap::draw_source(Graphics& g, int _sourceIndex)
 {
     float sourceSize = 0.08;
+    float sourceX = m_sources[_sourceIndex].getX()-sourceSize*0.5;
+    float sourceY = m_sources[_sourceIndex].getY()-sourceSize*0.5;
     
     g.beginTransparencyLayer(1);
     
@@ -126,21 +133,16 @@ void HoaMap::draw_source(Graphics& g, int _sourceIndex)
     
     g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
     
-    g.fillEllipse(m_sources[_sourceIndex].getX()-sourceSize*0.5,
-                  m_sources[_sourceIndex].getY()-sourceSize*0.5,
-                  sourceSize, sourceSize);
+    g.fillEllipse(sourceX, sourceY, sourceSize, sourceSize);
     
     g.setColour ( Colour(0xff444444) );
-    g.drawEllipse(m_sources[_sourceIndex].getX()-sourceSize*0.5,
-                  m_sources[_sourceIndex].getY()-sourceSize*0.5,
-                  sourceSize, sourceSize, sourceSize*0.1);
+    g.drawEllipse(sourceX, sourceY, sourceSize, sourceSize, sourceSize*0.1);
     
     g.setFont(sourceSize*0.01);
-    g.drawText(String(_sourceIndex),
-               m_sources[_sourceIndex].getX()-sourceSize*0.5,
-               m_sources[_sourceIndex].getY()-sourceSize*0.5,
-               sourceSize, sourceSize, Justification(4), false);
+    
     g.endTransparencyLayer();
+    
+    g.drawText(String(_sourceIndex), sourceX, sourceY, sourceSize, sourceSize, Justification(4), false);
 }
 
 void HoaMap::draw_source_in_polar(Graphics& g, int _sourceIndex, float _radius, float _angle)
