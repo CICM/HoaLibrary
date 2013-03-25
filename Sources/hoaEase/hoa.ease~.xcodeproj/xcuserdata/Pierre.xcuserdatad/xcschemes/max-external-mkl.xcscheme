@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4E85402E15F16ED500169453"
-               BuildableName = "hoa.tool~.mxo"
+               BuildableName = "hoa.ease~.mxo"
                BlueprintName = "max-external"
                ReferencedContainer = "container:hoa.ease~.xcodeproj">
             </BuildableReference>

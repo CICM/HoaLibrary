@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 160.0, 77.0, 875.0, 639.0 ],
+		"rect" : [ 88.0, 94.0, 875.0, 639.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -304,7 +304,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 33.6875, 522.5, 817.3125, 23.0 ],
+					"patching_rect" : [ 33.6875, 537.5, 817.3125, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -317,7 +317,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 23.0625, 521.5, 6.0, 80.0 ],
+					"patching_rect" : [ 23.0625, 536.5, 6.0, 80.0 ],
 					"rounded" : 5
 				}
 
@@ -330,7 +330,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 18.0625, 514.5, 838.9375, 93.0 ],
+					"patching_rect" : [ 18.0625, 529.5, 838.9375, 93.0 ],
 					"rounded" : 15,
 					"shadow" : -1
 				}
@@ -432,7 +432,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 812.395813, 68.75, 318.0, 26.0 ],
+					"patching_rect" : [ 812.395813, 68.75, 318.0, 25.0 ],
 					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/contacts/"
 				}
 
@@ -493,7 +493,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 33.0625, 623.0, 782.0, 5.0 ]
+					"patching_rect" : [ 33.0625, 638.0, 782.0, 5.0 ]
 				}
 
 			}
@@ -504,7 +504,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 32.0625, 622.0, 782.0, 5.0 ]
+					"patching_rect" : [ 32.0625, 637.0, 782.0, 5.0 ]
 				}
 
 			}
@@ -618,7 +618,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 26,
+										"count" : 28,
 										"data" : [ 											{
 												"key" : "hoa.encoder~",
 												"value" : [ "hoa.encoder~ creates the spherical harmonics of a signal depending of an given order and the position on a circle." ]
@@ -722,6 +722,14 @@
 , 											{
 												"key" : "hoa.reverberation~",
 												"value" : [ "hoa.reverberation~ use a algorithm based on feedback network delay and doppler effect to simulate a room reveberation." ]
+											}
+, 											{
+												"key" : "hoa.halo~",
+												"value" : [ "hoa.halo~ highlights a part of the soundfield. It puts all the soundfield in the dark exept where you re directing the soundflashlight." ]
+											}
+, 											{
+												"key" : "hoa.ease~",
+												"value" : [ "hoa.ease~ creates the circular harmonics of signals depending of a given order an angles and a radius." ]
 											}
  ]
 									}
@@ -874,7 +882,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ -67.875, 514.5, 79.0, 20.0 ],
+					"patching_rect" : [ -67.875, 529.5, 79.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -970,7 +978,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 186.0, 288.0, 605.0, 288.0 ],
+						"rect" : [ 119.0, 314.0, 605.0, 304.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1249,7 +1257,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.decoder~"
+									"text" : "hoa.rotate~"
 								}
 
 							}
@@ -1495,7 +1503,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 21,
+										"count" : 22,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.encoder~" ]
@@ -1579,6 +1587,10 @@
 , 											{
 												"key" : 20,
 												"value" : [ "hoa.wider~" ]
+											}
+, 											{
+												"key" : 21,
+												"value" : [ "hoa.ease~" ]
 											}
  ]
 									}
@@ -2139,7 +2151,7 @@
 									"rounded" : 6.0,
 									"spacing_x" : 20.0,
 									"spacing_y" : 5.0,
-									"tabs" : [ "hoa.encoder~", "hoa.decoder~", "hoa.rotate~", "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.binaural~", "hoa.pi", "hoa.scope~", "hoa.projector~", "hoa.recomposer~", "hoa.meter~", "hoa.record~", "hoa.play~", "hoa.optim~", "hoa.map", "hoa.control", "hoa.stereo~", "hoa.convolve~", "hoa.irconverter~", "hoa.wider~", "hoa.halo~" ]
+									"tabs" : [ "hoa.encoder~", "hoa.decoder~", "hoa.rotate~", "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.binaural~", "hoa.pi", "hoa.scope~", "hoa.projector~", "hoa.recomposer~", "hoa.meter~", "hoa.record~", "hoa.play~", "hoa.optim~", "hoa.map", "hoa.control", "hoa.stereo~", "hoa.convolve~", "hoa.irconverter~", "hoa.wider~", "hoa.halo~", "hoa.ease~", "hoa.freeverb~" ]
 								}
 
 							}
@@ -2660,7 +2672,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 25.5, 210.5, 605.125, 288.0 ]
+					"patching_rect" : [ 31.0625, 220.257935, 605.125, 304.0 ]
 				}
 
 			}
@@ -2690,7 +2702,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 717.729187, 68.75, 261.5, 26.0 ],
+					"patching_rect" : [ 717.729187, 68.75, 261.5, 25.0 ],
 					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/"
 				}
 
@@ -2734,7 +2746,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.0625, 156.257935, 628.0, 342.242065 ],
+					"patching_rect" : [ 16.0625, 156.257935, 628.0, 367.242065 ],
 					"rounded" : 15,
 					"shadow" : -1
 				}
@@ -2931,7 +2943,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../../../Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
