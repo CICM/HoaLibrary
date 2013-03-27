@@ -22,9 +22,9 @@
 Freeverb::Freeverb(long anOrder, double aFactor)
 {
 	m_factor = aFactor;
-    m_order = 0;
+    m_order = anOrder;
     
-    for(int i = m_order; i < numcombs; i++)
+    for(int i = 0; i < numcombs; i++)
         m_comb_filter.push_back(new CombFilter((long)(combtuning[i] + m_factor * spread)));
     
     for(int i = 0; i < numallpasses; i++)
@@ -53,8 +53,8 @@ long Freeverb::getVectorSize()
 void Freeverb::setSamplingRate(long aSamplingRate)
 {
     m_sampling_rate = aSamplingRate;
-    for(int i = m_order; i < numcombs; i++)
-        m_comb_filter[i - m_order]->setBufferSize((long)((combtuning[i] + m_factor * spread) * m_sampling_rate / 44100.));
+    for(int i = 0; i < numcombs; i++)
+        m_comb_filter[i]->setBufferSize((long)((combtuning[i] + m_factor * spread) * m_sampling_rate / 44100.));
     for(int i = 0; i < numallpasses; i++)
         m_allpass_filter[i]->setBufferSize((long)((allpasstuning[i] + m_factor * spread) * m_sampling_rate / 44100.));
 }
@@ -80,10 +80,10 @@ void Freeverb::update()
 		m_gain = fixedgain;
 	}
 
-	for(int i = m_order; i < numcombs; i++)
+	for(int i = 0; i < numcombs; i++)
 	{
-		m_comb_filter[i - m_order]->setFeedback(roomsize1);
-		m_comb_filter[i - m_order]->setDamp(damp1);
+		m_comb_filter[i]->setFeedback(roomsize1);
+		m_comb_filter[i]->setDamp(damp1);
 	}
 }
 
@@ -157,10 +157,10 @@ double Freeverb::getWetValue()
 
 Freeverb::~Freeverb()
 {
-    for(int i = m_order; i < numcombs; i++)
+    for(int i = 0; i < numcombs; i++)
 	{
-		delete m_comb_filter[i - m_order];
-		m_comb_filter[i - m_order] = 0;
+		delete m_comb_filter[i];
+		m_comb_filter[i] = 0;
 	}
     for(int i = 0; i < numallpasses; i++)
 	{

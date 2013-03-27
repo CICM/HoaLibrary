@@ -149,7 +149,7 @@ void AmbisonicEase::setPolarCoordinates(double aRadius, double anAzimuth)
 
 void AmbisonicEase::setCartesianCoordinates(double anAbscissa, double anOrdinate)
 {
-    setPolarCoordinates(Tools::radius(anAbscissa, anOrdinate), Tools::angle(anAbscissa, anOrdinate));
+    setPolarCoordinates(Tools::radius(anAbscissa, anOrdinate), Tools::angle(anAbscissa, anOrdinate) - CICM_PI2);
 }
 
 AmbisonicEase::~AmbisonicEase()

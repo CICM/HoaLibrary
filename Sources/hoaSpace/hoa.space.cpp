@@ -17,23 +17,29 @@
  *
  */
 
+#include "AmbisonicRotate.h"
 #include "AmbisonicRecomposer.h"
 #include "AmbisonicProjector.h"
 #include "AmbisonicViewer.h"
 #include "cicmTools.h"
 
+#define MAX_MICS 64
+
 extern "C"
 {
 	#include "ext.h"
 	#include "ext_obex.h"
+    #include "ext_common.h"
 	#include "jpatcher_api.h"
 	#include "jgraphics.h"
 	#include "jpatcher_syms.h"
 	#include "ext_dictionary.h"
 	#include "ext_globalsymbol.h"
+    #include "commonsyms.h"
+    #include "ext_parameter.h"
 }
 
-typedef struct  _control 
+typedef struct  _space
 {
 	t_jbox		j_box;
 	void*		f_out;
@@ -42,228 +48,224 @@ typedef struct  _control
 	long		f_mode;
 	long		f_order;
 	int			f_shadow;
-	long		f_optimMode;
-	double		f_azimuth;
-	double		f_azimuthOffset;
-	double		f_wide;
-	double		f_wideOffset;
 
-	t_jrgba		f_colorBackground;
-	t_jrgba		f_borderboxcolor;
-	t_jrgba		f_gradientcolor;
-	t_jrgba		f_colorText;
-	t_jrgba		f_colorCircle;
-	t_jrgba		f_colorCircleInner;
-	t_jrgba		f_colorCircleShadow;
-	t_jrgba		f_colorNegatif;
-	t_jrgba		f_colorPositif;
-	t_jrgba		f_colorContrib;
+	t_jrgba		f_color_background;
+	t_jrgba		f_color_border_box;
+	t_jrgba		f_color_circle;
+	t_jrgba		f_color_circleInner;
+	t_jrgba		f_color_circleShadow;
+	t_jrgba		f_color_harmonics;
+	t_jrgba		f_color_points;
 
 	t_rect		f_center;
 	double		f_rayonGlobal;
-	double		f_rayonAngle;
 	double		f_rayonCircle;
-	double		f_fontsize;
 
 	AmbisonicViewer*        f_viewer;
     ambisonicRecomposer*    f_recomposer;
     ambisonicProjector*     f_projector;
-	double*                 f_harmonicsValues;
-    double*                 f_microphonesValues;
+    AmbisonicRotate*        f_rotate;
+	double                  f_harmonicsValues[MAX_MICS];
+    double                  f_harmonicsValuesBis[MAX_MICS];
+    double                  f_microphonesValues[MAX_MICS];
+    t_atom                  f_tempory_values[MAX_MICS];
+    long                    f_number_of_harmonics;
+    long                    f_number_of_microphones;
+    int                     f_number_of_microphones_initialized;
+    double                  f_reference_angle;
+    double                  f_rotation;
+    double                  f_retractation;
+} t_space;
 
-} t_control;
+t_class *space_class;
 
-t_class *control_class;
+void *space_new(t_symbol *s, int argc, t_atom *argv);
+void space_free(t_space *x);
+void space_assist(t_space *x, void *b, long m, long a, char *s);
+void space_preset(t_space *x);
 
-void *control_new(t_symbol *s, int argc, t_atom *argv);
-void control_free(t_control *x);
-void control_assist(t_control *x, void *b, long m, long a, char *s);
-
-t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-long control_oksize(t_control *x, t_rect *newrect);
-void control_getdrawparams(t_control *x, t_object *patcherview, t_jboxdrawparams *params);
-t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv);
+t_max_err space_notify(t_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *params);
+t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_atom *argv);
+t_max_err coefficients_set(t_space *x, void *attr, long ac, t_atom *av);
+t_max_err space_setvalueof(t_space *x, long ac, t_atom *av);
+t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av);
 
 /* Interaction ***************************************/
-void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
-void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modifiers);
-void control_compute(t_control *x);
+void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_mouse_drag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_mouse_enddrag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_draw_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_rotate_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_retract_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_compute(t_space *x);
 
 /* Paint *********************************************/
-void control_paint(t_control *x, t_object *view);
-void draw_background(t_control *x, t_object *view, t_rect *rect);
-void draw_angle(t_control *x,  t_object *view, t_rect *rect);
-void draw_harmonics(t_control *x,  t_object *view, t_rect *rect);
-void draw_biggest_contribution(t_control *x, t_object *view, t_rect *rect);
+void space_paint(t_space *x, t_object *view);
+void draw_background(t_space *x, t_object *view, t_rect *rect);
+void draw_harmonics(t_space *x,  t_object *view, t_rect *rect);
+void draw_microphones_points(t_space *x, t_object *view, t_rect *rect);
+void draw_rotation(t_space *x, t_object *view, t_rect *rect);
 
 int main()
 {
 	t_class *c;
 
-	c = class_new("hoa.space", (method)control_new, (method)control_free, (short)sizeof(t_control), 0L, A_GIMME, 0);
+	c = class_new("hoa.space", (method)space_new, (method)space_free, (short)sizeof(t_space), 0L, A_GIMME, 0);
 
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
-	//jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
 
-	class_addmethod(c, (method)control_assist,		"assist",		A_CANT,	0);
-	class_addmethod(c, (method)control_paint,		"paint",		A_CANT,	0);
-	class_addmethod(c, (method)control_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)control_getdrawparams, "getdrawparams", A_CANT, 0);
-	class_addmethod(c, (method)control_oksize,		"oksize",		A_CANT, 0);
-	class_addmethod(c, (method)control_mouse_down,	"mousedown",	A_CANT, 0);
-	class_addmethod(c, (method)control_mouse_down,	"mousedrag",	A_CANT, 0);
-	
+	class_addmethod(c, (method)space_assist,          "assist",         A_CANT,	0);
+	class_addmethod(c, (method)space_paint,           "paint",          A_CANT,	0);
+	class_addmethod(c, (method)space_notify,          "notify",         A_CANT, 0);
+	class_addmethod(c, (method)space_getdrawparams,   "getdrawparams",  A_CANT, 0);
+	class_addmethod(c, (method)space_mouse_down,      "mousedown",      A_CANT, 0);
+	class_addmethod(c, (method)space_mouse_drag,      "mousedrag",      A_CANT, 0);
+    class_addmethod(c, (method)space_mouse_enddrag,   "mouseup",         A_CANT, 0);
+    class_addmethod(c, (method)space_preset,          "preset",         0);
+    class_addmethod(c, (method)space_getvalueof,      "getvalueof",     A_CANT, 0);
+	class_addmethod(c, (method)space_setvalueof,      "setvalueof",     A_CANT, 0);
+    
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
 	
-	CLASS_ATTR_LONG					(c, "shadow", 0, t_control, f_shadow);
+	CLASS_ATTR_LONG					(c, "shadow", 0, t_space, f_shadow);
 	CLASS_ATTR_CATEGORY				(c, "shadow", 0, "Appearance");
 	CLASS_ATTR_ORDER				(c, "shadow", 0, "1");
 	CLASS_ATTR_STYLE_LABEL			(c, "shadow", 0, "onoff", "Draw Shadows");
 	CLASS_ATTR_DEFAULT				(c, "shadow", 0, "1");
 	CLASS_ATTR_SAVE					(c, "shadow", 1);
 
-	CLASS_ATTR_LONG					(c, "order", 0, t_control, f_order);
-	CLASS_ATTR_CATEGORY				(c, "order", 0, "Behavior");
-	CLASS_ATTR_ORDER				(c, "order", 0, "1");
-	CLASS_ATTR_LABEL				(c, "order", 0, "Ambisonic Order");
-	CLASS_ATTR_ACCESSORS			(c, "order", NULL, order_set);
-	CLASS_ATTR_FILTER_MIN			(c, "order", 1);
-	CLASS_ATTR_DEFAULT				(c, "order", 0, "4");
-	CLASS_ATTR_SAVE					(c, "order", 1);
+    CLASS_ATTR_LONG					(c, "nmics", 0, t_space, f_number_of_microphones);
+	CLASS_ATTR_CATEGORY				(c, "nmics", 0, "Behavior");
+	CLASS_ATTR_ORDER				(c, "nmics", 0, "1");
+	CLASS_ATTR_LABEL				(c, "nmics", 0, "Number of virtuals microphones");
+	CLASS_ATTR_ACCESSORS			(c, "nmics", NULL, number_of_microphones_set);
+	CLASS_ATTR_DEFAULT				(c, "nmics", 0, "10");
+	CLASS_ATTR_SAVE					(c, "nmics", 1);
+    
+    CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_MICS);
+	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
+	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
+	CLASS_ATTR_LABEL                (c, "coeffs", 0, "Virtuals microphones coefficients");
+    CLASS_ATTR_ACCESSORS			(c, "coeffs", NULL, coefficients_set);
+	CLASS_ATTR_DEFAULT              (c, "coeffs", 0, "666.");
+	CLASS_ATTR_SAVE                 (c, "coeffs", 1);
 
-	CLASS_ATTR_LONG					(c, "mode", 0, t_control, f_mode);
-	CLASS_ATTR_CATEGORY				(c, "mode", 0, "Behavior");
-	CLASS_ATTR_ORDER				(c, "mode", 0, "5");
-	CLASS_ATTR_ENUMINDEX			(c, "mode", 0, "Absolute \" \"Relative");
-	CLASS_ATTR_LABEL				(c, "mode", 0, "Interaction mode");
-	CLASS_ATTR_FILTER_CLIP			(c, "mode", 0, 1);
-	CLASS_ATTR_DEFAULT				(c, "mode", 0, "0.");
-	CLASS_ATTR_SAVE					(c, "mode", 1);
-
-	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_control, f_colorBackground);
+	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_space, f_color_background);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "1. 1. 1. 1.");
 	
-
-	CLASS_ATTR_RGBA					(c, "cicolor", 0, t_control, f_colorCircle);
-	CLASS_ATTR_CATEGORY				(c, "cicolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "cicolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "cicolor", 0, "Circle Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cicolor", 0, "0.6 0.6 0.6 1.");
+	CLASS_ATTR_RGBA					(c, "circlecolor", 0, t_space, f_color_circle);
+	CLASS_ATTR_CATEGORY				(c, "circlecolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "circlecolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "circlecolor", 0, "Circle Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "circlecolor", 0, "0.6 0.6 0.6 1.");
 	
-	CLASS_ATTR_RGBA					(c, "phcolor", 0, t_control, f_colorPositif);
-	CLASS_ATTR_CATEGORY				(c, "phcolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "phcolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "phcolor", 0, "Positifs Harmonics color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "phcolor", 0, "0. 0. 1. 0.25");
+	CLASS_ATTR_RGBA					(c, "harmocolor", 0, t_space, f_color_harmonics);
+	CLASS_ATTR_CATEGORY				(c, "harmocolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "harmocolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "harmocolor", 0, "Harmonics color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "harmocolor", 0, "0. 0. 1. 0.25");
 	
-	CLASS_ATTR_RGBA					(c, "nhcolor", 0, t_control, f_colorNegatif);
-	CLASS_ATTR_CATEGORY				(c, "nhcolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "nhcolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "nhcolor", 0, "Negatifs Harmonics color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "nhcolor", 0, "1. 0. 0. 0.25");
+	CLASS_ATTR_RGBA					(c, "miccolor", 0, t_space, f_color_points);
+	CLASS_ATTR_CATEGORY				(c, "miccolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "miccolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "miccolor", 0, "Virtuals microphones color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "miccolor", 0, "0. 0. 0. 1.");
 	
-	CLASS_ATTR_RGBA					(c, "cocolor", 0, t_control, f_colorContrib);
-	CLASS_ATTR_CATEGORY				(c, "cocolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "cocolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "cocolor", 0, "Biggest contribution color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cocolor", 0, "0. 0. 0. 1.");
-	
-	CLASS_ATTR_RGBA					(c, "cishadcolor", 0, t_control, f_colorCircleShadow);
+	CLASS_ATTR_RGBA					(c, "cishadcolor", 0, t_space, f_color_circleShadow);
 	CLASS_ATTR_CATEGORY				(c, "cishadcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "cishadcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "cishadcolor", 0, "Circle Shadow Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cishadcolor", 0, "1. 1. 1. 0.2");
 	
-	CLASS_ATTR_RGBA					(c, "cicolorin", 0, t_control, f_colorCircleInner);
+	CLASS_ATTR_RGBA					(c, "cicolorin", 0, t_space, f_color_circleInner);
 	CLASS_ATTR_CATEGORY				(c, "cicolorin", 0, "Color");
 	CLASS_ATTR_STYLE_LABEL			(c, "cicolorin", 0, "rgba", "Circle Inner Color");
 	CLASS_ATTR_DEFAULTNAME_SAVE		(c, "cicolorin", 0, "0.7 0.7 0.7 1.");
 	
-	
-	CLASS_ATTR_RGBA					(c, "borderboxcolor", 0, t_control, f_borderboxcolor);
+	CLASS_ATTR_RGBA					(c, "borderboxcolor", 0, t_space, f_color_border_box);
 	CLASS_ATTR_CATEGORY				(c, "borderboxcolor", 0, "Color");
 	CLASS_ATTR_STYLE_LABEL			(c, "borderboxcolor", 0, "rgba", "Border Box Color");
 	CLASS_ATTR_DEFAULTNAME_SAVE		(c, "borderboxcolor", 0, "0.5 0.5 0.5 1.");
 	
-	//ordre
 	CLASS_ATTR_ORDER				(c, "bgcolor", 0, "1");
 	CLASS_ATTR_ORDER				(c, "borderboxcolor", 0, "2");
 	CLASS_ATTR_ORDER				(c, "cicolor", 0, "3");
 	CLASS_ATTR_ORDER				(c, "cicolorin", 0, "4");
 	CLASS_ATTR_ORDER				(c, "cishadcolor", 0, "5");
-	CLASS_ATTR_ORDER				(c, "phcolor", 0, "6");
-	CLASS_ATTR_ORDER				(c, "nhcolor", 0, "7");
-	CLASS_ATTR_ORDER				(c, "cocolor", 0, "8");
+	CLASS_ATTR_ORDER				(c, "harmocolor", 0, "6");
+	CLASS_ATTR_ORDER				(c, "miccolor", 0, "7");
 	
-	
-	
-
 	class_register(CLASS_BOX, c);
-	control_class = c;
+	space_class = c;
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *control_new(t_symbol *s, int argc, t_atom *argv)
+void *space_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_control *x =  NULL; 
+	t_space *x =  NULL; 
 	t_dictionary *d;
 	long flags;
 	
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 
-	x = (t_control *)object_alloc(control_class);
+	x = (t_space *)object_alloc(space_class);
 	flags = 0 
 			| JBOX_DRAWFIRSTIN 
 			| JBOX_DRAWINLAST
 			| JBOX_TRANSPARENT	
 			| JBOX_GROWY
 			;
+    x->f_number_of_microphones_initialized = false;
 
-	x->f_viewer				= new AmbisonicViewer(x->f_order);
-    x->f_recomposer         = new ambisonicRecomposer(x->f_order, x->f_order * 2 + 2);
-    x->f_projector          = new ambisonicProjector(x->f_order, x->f_order * 2 + 2);
-	x->f_harmonicsValues	= new double[x->f_order * 2 + 1];
-    x->f_microphonesValues  = new double[x->f_order * 2 + 2];
-    
-    for(int i = 0; i < x->f_order * 2 + 2; i++)
-        x->f_microphonesValues[i] = 1.;
+	x->f_viewer				= new AmbisonicViewer(1);
+    x->f_recomposer         = new ambisonicRecomposer(1, 3);
+    x->f_projector          = new ambisonicProjector(1, 3);
+    x->f_rotate             = new AmbisonicRotate(1);
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
 
 	x->f_outInfos	= outlet_new(x, NULL);
     x->f_out        = listout(x);
-
+    dictionary_getfloat(d, gensym("coeffs"), x->f_microphonesValues);
 	attr_dictionary_process(x, d);
-
-	x->f_azimuth= 0.;
-	x->f_wide = 1.;
-	control_compute(x);
 	jbox_ready((t_jbox *)x);
 	
 	return (x);
 }			
 
-void control_free(t_control *x)
+void space_free(t_space *x)
 {
 	jbox_free((t_jbox *)x);
-	free(x->f_harmonicsValues);
-    free(x->f_microphonesValues);
+
 	delete x->f_viewer;
     delete x->f_recomposer;
     delete x->f_projector;
+    delete x->f_rotate;
 }
 
-void control_assist(t_control *x, void *b, long m, long a, char *s)
+void space_preset(t_space *x)
+{
+    
+    void* z;
+    if(!(z = gensym("_preset")->s_thing))
+        return;
+
+    binbuf_vinsert(z, gensym("ossl")->s_name, x, object_classname(x), gensym("nmics"), x->f_number_of_microphones);
+    binbuf_vinsert(z, gensym("ossffffffffffffffffffffffffffffff")->s_name, x, object_classname(x), gensym("coeffs"), (float)x->f_microphonesValues[0], (float)x->f_microphonesValues[1], (float)x->f_microphonesValues[2], (float)x->f_microphonesValues[3], (float)x->f_microphonesValues[4], (float)x->f_microphonesValues[5], (float)x->f_microphonesValues[6], (float)x->f_microphonesValues[7], (float)x->f_microphonesValues[8], (float)x->f_microphonesValues[9], (float)x->f_microphonesValues[10], (float)x->f_microphonesValues[11], (float)x->f_microphonesValues[12], (float)x->f_microphonesValues[13], (float)x->f_microphonesValues[14], (float)x->f_microphonesValues[15], (float)x->f_microphonesValues[16], (float)x->f_microphonesValues[17], (float)x->f_microphonesValues[18], (float)x->f_microphonesValues[19], (float)x->f_microphonesValues[20], (float)x->f_microphonesValues[21], (float)x->f_microphonesValues[22], (float)x->f_microphonesValues[23], (float)x->f_microphonesValues[24], (float)x->f_microphonesValues[25], (float)x->f_microphonesValues[26], (float)x->f_microphonesValues[27], (float)x->f_microphonesValues[28], (float)x->f_microphonesValues[29]);
+}
+
+void space_assist(t_space *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) 
 	{
@@ -272,36 +274,30 @@ void control_assist(t_control *x, void *b, long m, long a, char *s)
 	else
 	{
 		if (a == 0)
-			sprintf(s,"(Float) Azimuth value"); 
+			sprintf(s,"(List) Virtual microphones coefficients"); 
 		else if(a == 1)
-			sprintf(s,"(Float) Wide value");
-		else
-			sprintf(s,"(Messages) Infos");
+			sprintf(s,"(Anything) Check it out");
 	}
 }
 
-t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err space_notify(t_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 	if (msg == gensym("attr_modified"))
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
-		if(name == gensym("bgcolor") || name == gensym("borderboxcolor") || name == gensym("cicolor") || name == gensym("cicolorin") || name == gensym("gradientcolor") )
+		if(name == gensym("bgcolor") || name == gensym("borderboxcolor") || name == gensym("cicolor") || name == gensym("cicolorin") )
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 		}
-		else if(name == gensym("txcolor"))
-		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("angle_layer"));
-		}
-		else if(name == gensym("nhcolor") || name == gensym("phcolor"))
+		else if(name == gensym("harmocolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 		}
-		else if(name == gensym("cocolor"))
+		else if(name == gensym("miccolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_points_layer"));
 		}
 		else if(name == gensym("shadow"))
 		{
@@ -314,20 +310,13 @@ t_max_err control_notify(t_control *x, t_symbol *s, t_symbol *msg, void *sender,
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
-void control_getdrawparams(t_control *x, t_object *patcherview, t_jboxdrawparams *params)
+void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_borderthickness = 0;
 	params->d_cornersize = 12; 
 }
 
-long control_oksize(t_control *x, t_rect *newrect){
-	if (newrect->width < 100){
-		newrect->width = newrect->height = 100;
-	}
-	return 0;
-}
-
-void control_paint(t_control *x, t_object *view)
+void space_paint(t_space *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -339,16 +328,15 @@ void control_paint(t_control *x, t_object *view)
 	if(rect.width > rect.height)
 		x->f_rayonGlobal = rect.height * .5;
 	
-	x->f_fontsize = (x->f_rayonGlobal / 14.) - 1.;
-	x->f_rayonAngle = 5. / 6. * x->f_rayonGlobal + x->f_fontsize * 1.5;
 	x->f_rayonCircle = x->f_rayonGlobal / 6;
 	
 	draw_background(x, view, &rect);
+    draw_rotation(x, view, &rect);
 	draw_harmonics(x, view, &rect);
-	draw_biggest_contribution(x, view, &rect);
+	draw_microphones_points(x, view, &rect);
 }
 
-void draw_background(t_control *x,  t_object *view, t_rect *rect)
+void draw_background(t_space *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double y1, y2, rotateAngle;
@@ -358,53 +346,67 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 	
 	if (g) 
 	{
-		//background
+		/* Background ************************************/
 		jgraphics_rectangle_rounded(g, 0.5, 0.5, rect->width-1.,  rect->height-1., 12, 12);
-		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		jgraphics_set_source_jrgba(g, &x->f_color_background);
 		jgraphics_fill_preserve(g);
-		jgraphics_set_source_jrgba(g, &x->f_borderboxcolor);
+		jgraphics_set_source_jrgba(g, &x->f_color_border_box);
 		jgraphics_stroke(g);
 		
+        /* Rotation slider *******************************/
+        if (x->f_shadow) {
+            /* Inner shadow */
+            jgraphics_set_line_width(g, 4);
+            jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
+            jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)5.5 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+            jgraphics_stroke(g);
+            
+            jgraphics_set_line_width(g, 4);
+            jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
+            jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)5.8 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+            jgraphics_stroke(g);
+        }
+        /* Circle color */
+        jgraphics_set_line_width(g, 3);
+        jgraphics_set_source_jrgba(g, &x->f_color_circle);
+        jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)5.5 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+        jgraphics_stroke(g);
+        
+        jgraphics_set_line_width(g, 3);
+        jgraphics_set_source_jrgba(g, &x->f_color_circle);
+        jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)5.8 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+        jgraphics_stroke(g);
+        
+        /* Gros cercle */
 		jgraphics_arc(g, x->f_center.x, x->f_center.y, 5 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-		jgraphics_set_source_jrgba(g, &x->f_colorCircleInner);
+		jgraphics_set_source_jrgba(g, &x->f_color_circleInner);
 		jgraphics_fill(g);
 		
-		/* Circles */
+		/* Circles ***************************************/
 		for(i = 5; i > 0; i--)
 		{
 			if (x->f_shadow) {
-				//inner shadow
+				/* Inner shadow */
 				jgraphics_set_line_width(g, 2);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircleShadow);
+				jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
 				jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
 				jgraphics_stroke(g);
-				// circle color (outer shadow)
-				jgraphics_set_line_width(g, 1);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-				jgraphics_stroke(g);
 			}
-			else {
-				jgraphics_set_line_width(g, 1);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-				jgraphics_stroke(g);
-			}
+			/* Circle color */
+			jgraphics_set_line_width(g, 1);
+			jgraphics_set_source_jrgba(g, &x->f_color_circle);
+			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+			jgraphics_stroke(g);
 		}
 
-        // circle color (outer shadow)
-        jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-        jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonCircle,  0., JGRAPHICS_2PI);
-        jgraphics_fill(g);
-        
-		/* Axes */
-		jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+		/* Axes *******************************************/
+		jgraphics_set_source_jrgba(g, &x->f_color_circle);
 		
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
-		for(i = 0; i < x->f_order * 2 + 2; i++)
+		for(i = 0; i < x->f_number_of_microphones; i++)
 		{
-			rotateAngle = (double)i/ (x->f_order * 2 + 2) * JGRAPHICS_2PI - JGRAPHICS_2PI / ((x->f_order * 2 + 2) * 2.);
+			rotateAngle = (double)i/ (double)x->f_number_of_microphones * JGRAPHICS_2PI - JGRAPHICS_2PI / ((double)x->f_number_of_microphones * 2.);
 			jgraphics_rotate(g, rotateAngle);
 			
 			y1 = 1. / 6. * x->f_rayonGlobal;
@@ -423,13 +425,13 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 					jgraphics_line_to(g, 0.5, y2+0.5);
 				}
 				jgraphics_set_line_width(g, 2);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircleShadow);
+				jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
 				jgraphics_stroke(g);
 			}
 			
 			jgraphics_move_to(g, 0, y1);
 			jgraphics_line_to(g, 0, y2);
-			jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+			jgraphics_set_source_jrgba(g, &x->f_color_circle);
 			jgraphics_set_line_width(g, 1);
 			jgraphics_stroke(g);
 			
@@ -438,41 +440,26 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
-	//jgraphics_pattern_destroy(pattern);
 }
 
-void draw_angle(t_control *x,  t_object *view, t_rect *rect)
+void draw_rotation(t_space *x, t_object *view, t_rect *rect)
 {
-	int i;
-	double x1, y1;
-	t_jfont *jf;
-	t_jtextlayout *jtl;
-	char text[16];
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("angle_layer"), rect->width, rect->height);
-	
-	if (g) 
-	{
-		jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_WEIGHT_NORMAL, x->f_fontsize);
-		jtl = jtextlayout_create();
-		jtextlayout_settextcolor(jtl, &x->f_colorText); 
-		for(i = 0; i < 12; i++)
-		{
-			x1 = x->f_rayonAngle * cos((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.x;
-			y1 = x->f_rayonAngle * sin((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.y;
-		
-			sprintf(text,"%d°", 30 * i);
-			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 1.5, y1 - 10, x->f_fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
-			jtextlayout_draw(jtl, g);
-			
-		}	
-		jtextlayout_destroy(jtl);
-		jfont_destroy(jf);
-		jbox_end_layer((t_object*)x, view, gensym("angle_layer"));
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("rotation_layer"), rect->width, rect->height);
+
+	if (g)
+    {
+        for(int i = 0; i < 24; i++)
+        {
+            double angle = x->f_rotation * -1 - CICM_PI2 + CICM_2PI * (double)i / 24.;
+            jgraphics_set_source_jrgba(g, &x->f_color_circle);
+            jgraphics_line_draw_fast(g, Tools::abscisse((double)5.5 * x->f_rayonCircle, angle) + rect->width * 0.5, Tools::ordinate((double)5.5 * x->f_rayonCircle,angle) + rect->width * 0.5,Tools::abscisse((double)5.8 * x->f_rayonCircle, angle) + rect->width * 0.5, Tools::ordinate((double)5.8 * x->f_rayonCircle, angle) + rect->width * 0.5, 5.);
+        }
+            jbox_end_layer((t_object*)x, view, gensym("rotation_layer"));
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("angle_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, gensym("rotation_layer"), 0., 0.);
 }
 
-void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
+void draw_harmonics(t_space *x,  t_object *view, t_rect *rect)
 {
 	int pathLength = 0;
 	t_pt beginCoord;
@@ -484,19 +471,23 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
 		jgraphics_set_line_width(g, 2);
+        
 		if(x->f_viewer->getBiggestContribution() != 0.)
 		{
             double max = 0.;
             double normalize = 1;
-            for(int i = 0 ; i < x->f_order * 2 + 2; i++)
+            for(int i = 0 ; i < x->f_number_of_microphones; i++)
             {
                 if(x->f_microphonesValues[i] > max)
                     max = x->f_microphonesValues[i];
             }
-            normalize = max / x->f_viewer->getBiggestContribution();
+            if( x->f_mode == 1)
+                normalize = 1. / x->f_viewer->getBiggestContribution();
+            else
+                normalize = max / x->f_viewer->getBiggestContribution();
 			double factor = (x->f_rayonGlobal * 5. / 6.) * normalize;
 			
-			jgraphics_set_source_jrgba(g, &x->f_colorPositif);
+			jgraphics_set_source_jrgba(g, &x->f_color_harmonics);
 			for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
 			{
 				
@@ -511,7 +502,9 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 						beginCoord.y = x->f_viewer->getOrdinateValue(i) * factor;
 						jgraphics_move_to(g, beginCoord.x, beginCoord.y );
 						pathLength++;
-					} else {
+					}
+                    else
+                    {
 						jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor, 
 										  x->f_viewer->getOrdinateValue(i) * factor);
 					}
@@ -522,45 +515,15 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 				jgraphics_fill_preserve(g);
 				jgraphics_stroke(g);
 			}
-			
-			pathLength = 0;
-			jgraphics_new_path(g);
-			jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
-			for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
-			{
-				
-				if (i == NUMBEROFCIRCLEPOINTS-1) {
-					jgraphics_line_to(g, beginCoord.x, beginCoord.y );
-				}
-				else if(x->f_viewer->getColor(i) == -1)
-				{
-					if (!pathLength) 
-					{
-						beginCoord.x = x->f_viewer->getAbscisseValue(i) * factor;
-						beginCoord.y = x->f_viewer->getOrdinateValue(i) * factor;
-						jgraphics_move_to(g, beginCoord.x, beginCoord.y );
-						pathLength++;
-					} else {
-						jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor, 
-										  x->f_viewer->getOrdinateValue(i) * factor);
-					}
-				}
-			}
-			if (pathLength) {
-				jgraphics_close_path(g);
-				jgraphics_fill_preserve(g);
-				jgraphics_stroke(g);
-			}
-			
 		}
 		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
 }
 
-void draw_biggest_contribution(t_control *x,  t_object *view, t_rect *rect)
+void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
 {
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("biggest_contribution_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("microphones_points_layer"), rect->width, rect->height);
 
 	if (g) 
 	{
@@ -568,123 +531,285 @@ void draw_biggest_contribution(t_control *x,  t_object *view, t_rect *rect)
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
 
-		
-		jgraphics_set_source_jrgba(g, &x->f_colorContrib);
-        double loudspeaker_angle = CICM_2PI / (x->f_order * 2 + 2);
-        double factor = x->f_rayonGlobal * 5. / 6.;
-        for(int i = 0; i < x->f_order * 2 + 2; i++)
+		jgraphics_set_source_jrgba(g, &x->f_color_points);
+        double loudspeaker_angle = CICM_2PI / (double)x->f_number_of_microphones;
+        double factor1 = 4. * x->f_rayonCircle;
+        double factor2 = x->f_rayonCircle;
+        for(int i = 0; i < x->f_number_of_microphones; i++)
         {
-            jgraphics_set_source_jrgba(g, &x->f_colorContrib);
+            jgraphics_set_source_jrgba(g, &x->f_color_points);
             double angle = loudspeaker_angle * (double)(i) + CICM_PI2;
-            jgraphics_arc(g, Tools::abscisse(x->f_microphonesValues[i] * (5. / 6.) + 1. / 6., angle) * factor, Tools::ordinate(x->f_microphonesValues[i] * (5. / 6.) + 1. / 6., angle) * factor, 3.,  0., JGRAPHICS_2PI);
+            jgraphics_arc(g, Tools::abscisse(x->f_microphonesValues[i] * factor1 + factor2, angle), Tools::ordinate(x->f_microphonesValues[i] * factor1 + factor2, angle), 3.,  0., JGRAPHICS_2PI);
             jgraphics_fill(g);
         }
-		jbox_end_layer((t_object*)x, view, gensym("biggest_contribution_layer"));
+		jbox_end_layer((t_object*)x, view, gensym("microphones_points_layer"));
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("biggest_contribution_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, gensym("microphones_points_layer"), 0., 0.);
 }
 
-void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
+void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    double loudspeaker_angle = CICM_2PI / (x->f_order * 2 + 2);
-    double loudspeaker_angle_mid = loudspeaker_angle / 2.;
-    
     double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
     double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
     double radius   = (Tools::radius(mapped_x, mapped_y) - (1. / 6.)) * (31. / 20.);
-    radius = Tools::clip_min(radius, 0.);
     double angle    = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
+
+    if(modifiers == 18)
+    {
+        x->f_mode = 2;
+        x->f_retractation = radius;
+    }
+    else if(radius > 1)
+    {
+        x->f_mode = 1;
+        x->f_reference_angle = angle;
+    }
+    else
+        x->f_mode = 0;
+    space_mouse_drag(x, patcherview, pt, modifiers);
+}
+
+void space_mouse_drag(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    if(x->f_mode == 0)
+        space_draw_points(x, patcherview, pt, modifiers);
+    else if(x->f_mode == 1)
+        space_rotate_points(x, patcherview, pt, modifiers);
+    else if(x->f_mode == 2)
+        space_retract_points(x, patcherview, pt, modifiers);
+}
+
+void space_mouse_enddrag(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    if(x->f_mode == 1)
+    {
+        for(int i = 0; i < x->f_number_of_microphones; i++)
+            x->f_harmonicsValues[i] = x->f_harmonicsValuesBis[i];
+    }
+}
+
+void space_draw_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    double loudspeaker_angle = CICM_2PI / (double)x->f_number_of_microphones;
+    double loudspeaker_angle_mid = loudspeaker_angle / 2.;
+    
+    double mapped_x = (pt.x - x->f_center.x);
+    double mapped_y = (pt.y - x->f_center.y);
+    
+    double angle    = Tools::angle(mapped_x, -mapped_y) - CICM_PI2;
     if(angle < 0.)
         angle += CICM_2PI;
     
-    if(angle > CICM_2PI - loudspeaker_angle_mid || angle < loudspeaker_angle_mid)
+    if(Tools::radius(mapped_x, mapped_y) < x->f_rayonCircle)
     {
-        x->f_microphonesValues[0] = radius;
-    }
-    else
-    {
-        for(int i = 1; i < x->f_order * 2 + 2; i++)
+        if(angle > CICM_2PI - loudspeaker_angle_mid || angle < loudspeaker_angle_mid)
+            atom_setfloat(x->f_tempory_values, 0.);
+        else
         {
-            if(angle > i * loudspeaker_angle - loudspeaker_angle_mid && angle < i * loudspeaker_angle + loudspeaker_angle_mid)
+            for(int i = 1; i < x->f_number_of_microphones; i++)
             {
-                x->f_microphonesValues[i] = radius;
-                
+                if(angle > i * loudspeaker_angle - loudspeaker_angle_mid && angle < i * loudspeaker_angle + loudspeaker_angle_mid)
+                    atom_setfloat(x->f_tempory_values+i, 0.);
             }
         }
     }
-    control_compute(x);
-}
-
-void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-    double loudspeaker_angle = CICM_2PI / (x->f_order * 2 + 2);
-    double loudspeaker_angle_mid = loudspeaker_angle / 2.;
-    double mapped_x = ((pt.x - x->f_center.x) / x->f_center.x * (6. / 5.));
-    double mapped_y = ((pt.y - x->f_center.y) / x->f_center.y * (6. / 5.)) * -1.;
-    double radius   = Tools::radius(mapped_x, mapped_y);
-    double angle    = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
-    if(angle < 0.)
-        angle += CICM_2PI;
-    if(angle > CICM_2PI - loudspeaker_angle_mid || angle < loudspeaker_angle_mid)
-    {
-        x->f_microphonesValues[0] = radius;
-    }
     else
     {
-        for(int i = 1; i < x->f_order * 2 + 2; i++)
+        double center_x = Tools::abscisse(x->f_rayonCircle, angle - CICM_PI2 + CICM_PI);
+        mapped_x = mapped_x - center_x;
+        double center_y = Tools::ordinate(x->f_rayonCircle, angle - CICM_PI2 + CICM_PI);
+        mapped_y = -mapped_y - center_y;
+        double radius  = Tools::radius(mapped_x, mapped_y) / (4. * x->f_rayonCircle);
+    
+        if(angle > CICM_2PI - loudspeaker_angle_mid || angle < loudspeaker_angle_mid)
+            atom_setfloat(x->f_tempory_values, radius);
+        else
         {
-            if(angle > i * loudspeaker_angle - loudspeaker_angle_mid && angle < i * loudspeaker_angle + loudspeaker_angle_mid)
+            for(int i = 1; i < x->f_number_of_microphones; i++)
             {
-                x->f_microphonesValues[i] = radius;
-                
+                if(angle > i * loudspeaker_angle - loudspeaker_angle_mid && angle < i * loudspeaker_angle + loudspeaker_angle_mid)
+                    atom_setfloat(x->f_tempory_values+i, radius);
             }
         }
     }
-    control_compute(x);
+    object_method(x, gensym("coeffs"), x->f_number_of_microphones, x->f_tempory_values);
 }
 
-void control_compute(t_control *x)
+void space_rotate_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-	x->f_recomposer->process(x->f_microphonesValues, x->f_harmonicsValues);
-	x->f_viewer->process(x->f_harmonicsValues);
+    
+    double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
+    double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
+    x->f_rotation  = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
+    double offset = x->f_rotation - x->f_reference_angle;
+    
+    x->f_rotate->process(x->f_harmonicsValues, x->f_harmonicsValuesBis, offset);
+    x->f_projector->process(x->f_harmonicsValuesBis, x->f_microphonesValues);
+    
+    for(int i = 0; i < x->f_number_of_microphones; i++)
+        atom_setfloat(x->f_tempory_values+i ,abs(x->f_microphonesValues[i]));
+    
+    object_method(x, gensym("coeffs"), x->f_number_of_microphones, x->f_tempory_values);
+}
+
+void space_retract_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
+    double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
+    double radius   = (Tools::radius(mapped_x, mapped_y) - (1. / 6.)) * (31. / 20.);
+    double offset = x->f_retractation - radius;
+    x->f_retractation = radius;
+    
+    for(int i = 0; i < x->f_number_of_microphones; i++)
+        atom_setfloat(x->f_tempory_values+i ,x->f_microphonesValues[i] - offset);
+    
+    object_method(x, gensym("coeffs"), x->f_number_of_microphones, x->f_tempory_values);
+}
+
+void space_compute(t_space *x)
+{
+    if(x->f_mode == 0 ||  x->f_mode == 2)
+    {
+        x->f_recomposer->process(x->f_microphonesValues, x->f_harmonicsValues);
+        x->f_viewer->process(x->f_harmonicsValues);
+    }
+    else
+    {
+        x->f_recomposer->process(x->f_microphonesValues, x->f_harmonicsValuesBis);
+        x->f_viewer->process(x->f_harmonicsValuesBis);
+    }
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("rotation_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_points_layer"));
     jbox_redraw((t_jbox *)x);
-    t_atom* list;
-    list =  new t_atom[x->f_order * 2 + 2];
-    for(int i = 0; i < x->f_order * 2 + 2; i++)
-    {
-        atom_setfloat(list+i, x->f_microphonesValues[i]);
-    }
-    outlet_list(x->f_out, 0L, x->f_order * 2 + 2, list);
+
+    for(int i = 0; i < x->f_number_of_microphones; i++)
+        atom_setfloat(x->f_tempory_values+i, x->f_microphonesValues[i]);
+    
+    outlet_list(x->f_out, 0L, x->f_number_of_microphones, x->f_tempory_values);
 }
 
-t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv)
+t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_atom *argv)
 {
-	if (atom_gettype(argv) == A_LONG)
+    if(atom_gettype(argv) == A_LONG)
 	{
-		if(atom_getlong(argv) != x->f_order && atom_getlong(argv) >= 1)
+		if(atom_getlong(argv) != x->f_number_of_microphones || x->f_number_of_microphones_initialized == false)
 		{
 			delete x->f_viewer;
             delete x->f_recomposer;
             delete x->f_projector;
-            free(x->f_harmonicsValues);
-            free(x->f_microphonesValues);
-			x->f_order = atom_getlong(argv);
+            delete x->f_rotate;
+            
+            x->f_number_of_microphones = atom_getlong(argv);
+
+            x->f_number_of_microphones = Tools::clip_min(x->f_number_of_microphones, (long)3);
+            if(x->f_number_of_microphones % 2 == 0)
+                x->f_order              = (x->f_number_of_microphones - 2) / 2;
+            else
+                 x->f_order             = (x->f_number_of_microphones - 1) / 2;
+            x->f_number_of_harmonics    = x->f_order * 2 + 1;
+            			
 			x->f_viewer         = new AmbisonicViewer(x->f_order);
-            x->f_recomposer		= new ambisonicRecomposer(x->f_order, x->f_order * 2 + 2);
-            x->f_projector		= new ambisonicProjector(x->f_order, x->f_order * 2 + 2);
-			x->f_harmonicsValues    = new double[x->f_order * 2 + 1];
-            x->f_microphonesValues  = new double[x->f_order * 2 + 2];
-            for(int i = 0; i < x->f_order * 2 + 2; i++)
-                x->f_microphonesValues[i] = 1.;
-
-			control_compute(x);
-
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("biggest_contribution_layer"));
-			jbox_redraw((t_jbox *)x);
+            x->f_recomposer		= new ambisonicRecomposer(x->f_order, x->f_number_of_microphones);
+            x->f_projector		= new ambisonicProjector(x->f_order, x->f_number_of_microphones);
+            x->f_rotate         = new AmbisonicRotate(x->f_order);
+            
+            if(x->f_number_of_microphones_initialized == false)
+                x->f_number_of_microphones_initialized = true;
+            jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
+            object_method(x, gensym("coeffs"), 0, NULL);
 		}
 	}
 	return 0;
+}
+
+t_max_err coefficients_set(t_space *x, void *attr, long ac, t_atom *av)
+{
+    if (ac >= 1 && atom_getfloat(av) == 666.)
+    {
+        for (int i = 0; i < x->f_number_of_microphones; i++)
+		{
+                x->f_microphonesValues[i] = 0.;
+        }
+        
+    }
+    else if (ac && av)
+    {
+        if(atom_gettype(av) == A_FLOAT)
+        {
+            if(x->f_mode == 0)
+            {
+                for (int i = 0; i < ac && i < MAX_MICS; i++)
+                {
+                    if(atom_gettype(av+i) == A_FLOAT)
+                        x->f_microphonesValues[i] = Tools::clip((double)atom_getfloat(av + i), 0., 1.);
+                }
+                
+            }
+            else if(x->f_mode == 2)
+            {
+                double max = 1.;
+                double min = 0.;
+                for (int i = 0; i < ac && i < MAX_MICS; i++)
+                {
+                    if(atom_getfloat(av + i) > max)
+                        max = atom_getfloat(av + i);
+                    if(atom_getfloat(av + i) < min)
+                        min = atom_getfloat(av + i);
+                }
+                for (int i = 0; i < ac && i < MAX_MICS; i++)
+                {
+                    if(atom_gettype(av+i) == A_FLOAT)
+                        x->f_microphonesValues[i] = atom_getfloat(av + i) - (max - 1.) - min;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < ac && i < MAX_MICS; i++)
+                {   
+                    x->f_microphonesValues[i] = atom_getfloat(av + i);
+                }
+            }
+        }
+        else if (atom_gettype(av) == A_LONG && ac >= 2)
+        {
+            if(atom_gettype(av+1) == A_FLOAT && atom_getlong(av) < x->f_number_of_microphones)
+                x->f_microphonesValues[atom_getlong(av)] = Tools::clip((double)atom_getfloat(av+1), 0., 1.);
+        }
+    }
+   
+    if (x->f_number_of_microphones_initialized ==  true)
+        space_compute(x);
+    return 0;
+}
+
+
+t_max_err space_setvalueof(t_space *x, long ac, t_atom *av)
+{
+	if (ac && av)
+    {
+        coefficients_set(x, gensym("coeffs"), ac, av);
+	}
+	return MAX_ERR_NONE;
+}
+
+t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av)
+{
+	if (ac && av)
+    {
+		if (*ac && *av)
+        {
+            ;
+		}
+        else
+        {
+			*av = (t_atom *)getbytes(x->f_number_of_microphones * sizeof(t_atom));
+            *ac = x->f_number_of_microphones;
+        }
+        for (int i = 0; i < *ac; i++)
+        {
+            atom_setfloat(*av+i, (float)x->f_microphonesValues[i]);
+        }
+    }
+	return MAX_ERR_NONE;
 }
