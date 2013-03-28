@@ -26,6 +26,19 @@ HoaMap::HoaMap()
     m_minimum_of_sources = 1;
     m_sourceSize = 0.08;
     m_sourcePointed = m_sourceOver = -1;
+    /*
+    sourceColors[0]    = Colour(0x1001200);
+    sourceColors[1]    = Colour(0x1001200);
+    sourceColors[2]    = Colour(0x1001300);
+    sourceColors[3]    = Colour(0x1001310);
+    sourceColors[4]    = Colour(0x1001311);
+    sourceColors[5]    = Colour(0x1001312);
+    sourceColors[6]    = Colour(0x1001400);
+    sourceColors[7]    = Colour(0x1001500);
+    sourceColors[8]    = Colour(0x1001600);
+    sourceColors[9]    = Colour(0x1001700);
+    sourceColors[10]   = Colour(0x1001700);
+    */
 }
 
 HoaMap::~HoaMap()
@@ -48,6 +61,7 @@ void HoaMap::mouseMove (const MouseEvent &event)
             break;
         }
     }
+    repaint();
 }
 void HoaMap::mouseDown (const MouseEvent &event)
 {
@@ -67,26 +81,21 @@ void HoaMap::mouseDown (const MouseEvent &event)
 void HoaMap::mouseDrag (const MouseEvent &event)
 {
     Point<float> mouse = event.getPosition().toFloat();
+    Point<float> newPos;
     
     // conversion en cartesien :
     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1,
                                                            getWidth(), 0, 1, 1,
                                                            getWidth(), getHeight(), 1, -1));
     
+    newPos = mouse;
+    
     if (m_sourcePointed >= 0 && m_sourcePointed < m_nbSources) {
-        setSourceAbscissa(m_sourcePointed, mouse.getX());
-        setSourceOrdinate(m_sourcePointed, mouse.getY());
-        //m_sources[m_sourcePointed].setXY(mouse.getX(), mouse.getY());
         setMouseCursor(MouseCursor::DraggingHandCursor);
-        repaint();
+        setCartesianCoordinates(m_sourcePointed, newPos.x, newPos.y, sendNotificationSync);
     }
-    /*
-     if (mouse.getDistanceFromOrigin() < 1.0f - m_sourceSize) {
-     m_sources[0].setXY(mouse.getX(), mouse.getY());
-     repaint();
-     }
-     */
 }
+
 void HoaMap::mouseUp   (const MouseEvent &event)
 {
     m_sourcePointed = -1;
@@ -108,9 +117,19 @@ void HoaMap::paint (Graphics& g)
 
 void HoaMap::draw_sources(Graphics& g)
 {
+    int drawSourceInLast = -1;
     for (int i = 0; i < m_nbSources; i++)
     {
-        draw_source(g, i);
+        if (i == m_sourcePointed || i == m_sourceOver) {
+            drawSourceInLast = i;
+        }
+        else
+        {
+            draw_source(g, i);
+        }
+    }
+    if (drawSourceInLast >= 0) {
+        draw_source(g, drawSourceInLast);
     }
 }
 
@@ -120,28 +139,37 @@ void HoaMap::draw_source(Graphics& g, int _sourceIndex)
     float sourceX = m_sources[_sourceIndex].getX()-sourceSize*0.5;
     float sourceY = m_sources[_sourceIndex].getY()-sourceSize*0.5;
     float sourceThickness = sourceSize*0.1;
-    if (_sourceIndex == m_sourceOver) sourceThickness *= 1.2;
+    if (_sourceIndex == m_sourceOver) sourceThickness *= 1.5;
     
     g.beginTransparencyLayer(1);
     
     g.addTransform(AffineTransform::fromTargetPoints(-1, 1, 0, 0,
                                                      1, 1, getWidth(), 0,
                                                      1, -1, getWidth(), getHeight()));
-    
-    //g.setColour ( (Colours::tomato).withAlpha((float)0.9) );
 
-    g.setColour ( (Colour((float)fmod(_sourceIndex*0.1, 1), (float)0.5, (float)0.5, (float)0.5 )).withAlpha((float)0.9) );
-
+    g.setColour ( (Colour((float)fmod( (float)_sourceIndex * 1.61803398875, 1), (float)0.5, (float)0.8, (float)0.9 )).withAlpha((float)0.9) );
     g.fillEllipse(sourceX, sourceY, sourceSize, sourceSize);
     
     g.setColour ( Colour(0xff444444) );
     g.drawEllipse(sourceX, sourceY, sourceSize, sourceSize, sourceThickness);
     
-    g.setFont(sourceSize*0.01);
-    
     g.endTransparencyLayer();
     
-    g.drawText(String(_sourceIndex), sourceX, sourceY, sourceSize, sourceSize, Justification(4), false);
+    // add text to the source :
+    g.setFont(11);
+    g.setColour ( Colour(0xff444444) );
+    g.drawText(String(_sourceIndex+1), getSourcePixRect(m_sources[_sourceIndex]), Justification(4), FALSE);
+}
+
+Rectangle<int> HoaMap::getSourcePixRect(Point<float>& sourcePoint)
+{
+    float center = getWidth() * 0.5;
+    float sourceSizeinPix = m_sourceSize * center;
+    return Rectangle<int>(((sourcePoint.x+1) * center) - sourceSizeinPix*0.5,
+                          ((1-sourcePoint.y) * center) - sourceSizeinPix*0.5,
+                          sourceSizeinPix,
+                          sourceSizeinPix);
+
 }
 
 void HoaMap::draw_source_in_polar(Graphics& g, int _sourceIndex, float _radius, float _angle)
@@ -269,35 +297,39 @@ float HoaMap::getSourceOrdinate(int _sourceIndex)
 }
 
 /* --- setters --- */
-int HoaMap::setNbSources(int _nbSources)
+int HoaMap::setNbSources(int _nbSources, NotificationType notification)
 {
     if (_nbSources < m_minimum_of_sources ) m_nbSources = m_minimum_of_sources;
     else if (_nbSources > m_maximum_of_sources) m_nbSources = m_maximum_of_sources;
     else m_nbSources = _nbSources;
+    triggerChangeMessage (notification);
     repaint();
     return 1;
 }
-int HoaMap::setNbSpeakers(int _nbSpeakers)
+int HoaMap::setNbSpeakers(int _nbSpeakers, NotificationType notification)
 {
     if (_nbSpeakers < m_minimum_of_loudspeakers ) m_nbSpeakers = m_minimum_of_loudspeakers;
     else if (_nbSpeakers > m_maximum_of_loudspeakers) m_nbSpeakers = m_maximum_of_loudspeakers;
     else m_nbSpeakers = _nbSpeakers;
+    triggerChangeMessage (notification);
     repaint();
     return 1;
 }
-int HoaMap::setSpeakerDistance(float _speakerDistance)
+int HoaMap::setSpeakerDistance(float _speakerDistance, NotificationType notification)
 {
     if (_speakerDistance < 0 ) m_speakerDistance = 0;
     else if (_speakerDistance > 1) m_speakerDistance = 1;
     else m_speakerDistance = _speakerDistance;
+    triggerChangeMessage (notification);
     repaint();
     return 1;
 }
-int HoaMap::setSpeakerOffset(float _speakerOffset)
+int HoaMap::setSpeakerOffset(float _speakerOffset, NotificationType notification)
 {
     if (_speakerOffset < -180 ) m_speakerOffset = -180;
     else if (_speakerOffset > 180 ) m_speakerOffset = 180;
     else m_speakerOffset = _speakerOffset;
+    triggerChangeMessage (notification);
     repaint();
     return 1;
 }
@@ -305,7 +337,9 @@ int HoaMap::setSourceAbscissa(int _sourceIndex, float _newAbscissa, Notification
 {
     if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
         m_sources[_sourceIndex].setX(Tools::clip(_newAbscissa, -1.0f, 1.0f));
+        constrainPointToRadius(m_sources[_sourceIndex], 1.0f-m_sourceSize*0.5);
         triggerChangeMessage (notification);
+        repaint();
         return 1;
     }
     return 0;
@@ -314,7 +348,9 @@ int HoaMap::setSourceOrdinate(int _sourceIndex, float _newOrdinate, Notification
 {
     if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
         m_sources[_sourceIndex].setY(Tools::clip(_newOrdinate, -1.0f, 1.0f));
+        constrainPointToRadius(m_sources[_sourceIndex], 1.0f-m_sourceSize*0.5);
         triggerChangeMessage (notification);
+        repaint();
         return 1;
     }
     return 0;
@@ -323,7 +359,9 @@ int HoaMap::setCartesianCoordinates(int _sourceIndex, float _newAbscissa, float 
 {
     if (_sourceIndex >= m_minimum_of_sources-1 && _sourceIndex < m_maximum_of_sources) {
         m_sources[_sourceIndex].setXY(Tools::clip(_newAbscissa, -1.0f, 1.0f), Tools::clip(_newOrdinate, -1.0f, 1.0f));
+        constrainPointToRadius(m_sources[_sourceIndex], 1.0f-m_sourceSize*0.5);
         triggerChangeMessage (notification);
+        repaint();
         return 1;
     }
     return 0;
@@ -338,5 +376,14 @@ void HoaMap::triggerChangeMessage (const NotificationType notification)
             sendSynchronousChangeMessage();
         }
         else sendChangeMessage ();
+    }
+}
+
+void HoaMap::constrainPointToRadius (Point<float>& source, float radius)
+{
+    float angle;
+    if ( source.getDistanceFromOrigin() > radius) {
+        angle = Tools::angle(source.y, source.x);
+        source.setXY(Tools::ordinate(radius, angle), Tools::abscisse(radius, angle));
     }
 }

@@ -49,10 +49,10 @@ public:
     void mouseUp   (const MouseEvent &event);
     
     // setters :
-    int setNbSources(const int _nbSources);
-    int setNbSpeakers(int _nbSpeakers);
-    int setSpeakerDistance(float _speakerDistance);
-    int setSpeakerOffset(float _speakerOffset);
+    int setNbSources(const int _nbSources, NotificationType notification = dontSendNotification);
+    int setNbSpeakers(int _nbSpeakers, NotificationType notification = dontSendNotification);
+    int setSpeakerDistance(float _speakerDistance, NotificationType notification = dontSendNotification);
+    int setSpeakerOffset(float _speakerOffset, NotificationType notification = dontSendNotification);
     int setSourceAbscissa(int _sourceIndex, float _newAbscissa, NotificationType notification = sendNotificationAsync);
     int setSourceOrdinate(int _sourceIndex, float _newOrdinate, NotificationType notification = sendNotificationAsync);
     int setCartesianCoordinates(int _sourceIndex, float _newAbscissa, float _newOrdinate, NotificationType notification = sendNotificationAsync);
@@ -74,6 +74,9 @@ private:
     Point<float> m_sources[64];
     float m_sourceSize;
     int m_sourcePointed, m_sourceOver;
+    
+    void constrainPointToRadius (Point<float>& source, float radius);
+    Rectangle<int> getSourcePixRect(Point<float>& sourcePoint);
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaMap)
 };
