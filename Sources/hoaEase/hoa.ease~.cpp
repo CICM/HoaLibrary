@@ -41,6 +41,7 @@ void HoaTool_free(t_HoaTool *x);
 void HoaTool_assist(t_HoaTool *x, void *b, long m, long a, char *s);
 void HoaTool_pol(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 void HoaTool_car(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
+void HoaTool_list(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 
 void HoaTool_dsp(t_HoaTool *x, t_signal **sp, short *count);
 t_int *HoaTool_perform(t_int *w);
@@ -57,11 +58,12 @@ int main(void)
 	
 	c = class_new("hoa.ease~", (method)HoaTool_new, (method)dsp_free, (long)sizeof(t_HoaTool), 0L, A_GIMME, 0);
 	
-	//class_addmethod(c, (method)HoaTool_dsp,         "dsp",		A_CANT, 0);
+	class_addmethod(c, (method)HoaTool_dsp,         "dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaTool_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaTool_assist,		"assist",	A_CANT, 0);
     class_addmethod(c, (method)HoaTool_pol,         "pol",      A_GIMME, 0);
 	class_addmethod(c, (method)HoaTool_car,         "car",      A_GIMME, 0);
+    class_addmethod(c, (method)HoaTool_list,        "list",      A_GIMME, 0);
     
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -170,6 +172,14 @@ void HoaTool_pol(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
 void HoaTool_car(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
 {
 	x->f_AmbisonicPolyEase->setCartesianCoordinates(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+}
+
+void HoaTool_list(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
+{
+    if(atom_getsym(argv) == gensym("car"))
+        x->f_AmbisonicPolyEase->setCartesianCoordinates(atom_getlong(argv+1), atom_getfloat(argv+2), atom_getfloat(argv+3));
+    else if(atom_getsym(argv) == gensym("pol"))
+        x->f_AmbisonicPolyEase->setPolarCoordinates(atom_getlong(argv+1), atom_getfloat(argv+2), atom_getfloat(argv+3));
 }
 
 void HoaTool_free(t_HoaTool *x)

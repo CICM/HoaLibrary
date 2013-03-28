@@ -65,12 +65,14 @@ public:
 
 	inline void	process(float *anInput, float *anOutput)
     {
+        float input;
         for(int i = 0; i < m_vector_size; i++)
         {
-            anInput[i] *= m_gain;
+            input = anInput[i];
+            input *= m_gain;
             anOutput[i] = 0.;
-            for(int j = m_order; j < numcombs; j++)
-                anOutput[i] += m_comb_filter[j-m_order]->process(anInput[i]);
+            for(int j = 0; j < numcombs; j++)
+                anOutput[i] += m_comb_filter[j]->process(input);
             
             for(int j = 0; j < numallpasses; j++)
                 anOutput[i] = m_allpass_filter[j]->process(anOutput[i]);
@@ -81,12 +83,14 @@ public:
     
     inline void	process(double *anInput, double *anOutput)
     {
+        double input;
         for(int i = 0; i < m_vector_size; i++)
         {
-            anInput[i] *= m_gain;
+            input = anInput[i];
+            input *= m_gain;
             anOutput[i] = 0.;
-            for(int j = m_order; j < numcombs; j++)
-                anOutput[i] += m_comb_filter[j-m_order]->process(anInput[i]);
+            for(int j = 0; j < numcombs; j++)
+                anOutput[i] += m_comb_filter[j]->process(input);
             
             for(int j = 0; j < numallpasses; j++)
                 anOutput[i] = m_allpass_filter[j]->process(anOutput[i]);

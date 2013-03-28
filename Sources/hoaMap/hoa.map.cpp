@@ -36,7 +36,8 @@ extern "C"
 // output mode
 enum {
 	CARTESIAN = 0,
-	POLAR
+	POLAR,
+    EASE
 };
 
 // configs audio
@@ -115,6 +116,7 @@ typedef struct  _hoamap
 	void*		f_outPolar;
 	void*		f_outCarte;
 	void*		f_out;
+
 } t_hoamap;
 
 t_class *hoamap_class;
@@ -301,7 +303,7 @@ int main()
 	CLASS_ATTR_LONG				(c,"output_mode",0, t_hoamap, f_output_mode);
 	CLASS_ATTR_LABEL			(c,"output_mode", 0, "Output Mode");
 	CLASS_ATTR_CATEGORY			(c,"output_mode",0,"Output");
-	CLASS_ATTR_ENUMINDEX		(c,"output_mode", 0, "Cartesian Polar");
+	CLASS_ATTR_ENUMINDEX		(c,"output_mode", 0, "Cartesian Polar Ease");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"output_mode",0,"0");
 	
 	CLASS_ATTR_CHAR				(c,"display_grid",0, t_hoamap, f_displayGrid);
@@ -419,8 +421,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_color_selection = clr256(0., 0., 255., 13);
 	
 	
-	x->f_out = outlet_new((t_object *)x, NULL);
-	//x->f_outPolar		= listout(x);
+	x->f_out            = outlet_new((t_object *)x, NULL);
 	x->f_outCarte		= listout(x);
 	
 	x->f_numberOfSources = 0;
@@ -679,7 +680,7 @@ void update_source_selection(t_hoamap *x, int sourceIndex, int isSelected){
 
 void hoamap_outone(t_hoamap *x, int i)
 {
-	t_atom	av[3];
+	t_atom	av[4];
 	atom_setlong(av, i);
 	
 	outlet_int(x->f_out, x->f_numberOfSources);
@@ -698,12 +699,21 @@ void hoamap_outone(t_hoamap *x, int i)
 	if (x->f_output_mode == CARTESIAN) {
 		atom_setfloat(av+1, (float)x->f_sources[i].pos.x);
 		atom_setfloat(av+2, (float)x->f_sources[i].pos.y);
+        outlet_list(x->f_outCarte, NULL, 3, av);
 	}
 	else if (x->f_output_mode == POLAR) {
 		atom_setfloat(av+1, (float)x->f_sources[i].distance);
 		atom_setfloat(av+2, (float)x->f_sources[i].angle);
+        outlet_list(x->f_outCarte, NULL, 3, av);
 	}
-	outlet_list(x->f_outCarte, NULL, 3, av);
+    else
+    {
+        atom_setsym(av, gensym("car"));
+        atom_setlong(av+1, i);
+        atom_setfloat(av+2, (float)x->f_sources[i].pos.x);
+		atom_setfloat(av+3, (float)x->f_sources[i].pos.y);
+        outlet_list(x->f_outCarte, NULL, 4, av);
+    }
 }
 
 /* ------ MSG EXTERNS ------ */
