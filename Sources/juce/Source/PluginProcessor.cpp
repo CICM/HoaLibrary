@@ -25,7 +25,8 @@ HoaplugAudioProcessor::HoaplugAudioProcessor()
     else
         anOrder = aNumberOfLoudspeakers / 2 - 0.5;
     
-    m_ambisonic_tool = new AmbisonicPolyEase(anOrder, getNumInputChannels());
+    //m_ambisonic_tool = new AmbisonicPolyEase(anOrder, getNumInputChannels());
+    m_ambisonic_tool = new AmbisonicPolyEase(anOrder, 1);
     m_ambisonic_decoder = new AmbisonicDecode(anOrder, aNumberOfLoudspeakers);
     for(int i = 0; i < 64; i++)
     {
@@ -33,17 +34,15 @@ HoaplugAudioProcessor::HoaplugAudioProcessor()
         m_sources_ordinate[i] = 0;
     }
     
+    //m_number_of_loudspeakers = getNumOutputChannels();
+    //m_number_of_sources = getNumInputChannels();
+    //sendChangeMessage();
+    
     for (int i = 0; i < m_number_of_parameters; i++)
     {
         parameters[i].getValueObject().addListener(this);
     }
-    /*
-    void PluginParameter::init (const String& name_, ParameterUnit unit_, String description_,
-                                double value_, double min_, double max_, double default_,
-                                double skewFactor_, double smoothCoeff_, double step_, String unitSuffix_)
-    */
     parameters[0].init ("Offset", UnitDegrees, "Offset of the loudspeakers", 0, -180, 180, 0);
-    //parameters[0].init ("Offset", UnitDegrees, "Offset of the loudspeakers", 0, -180, 180, 0, 1, 0.1, 1);
     parameters[1].init ("Distance", UnitGeneric, "Distance of the loudspeakers", 0.5, 0., 1., 0.5);
     
     for(int i = 2; i < m_number_of_parameters; i++)
@@ -105,7 +104,7 @@ void HoaplugAudioProcessor::setParameter(int index, float newValue)
             m_ambisonic_tool->setCartesianCoordinates(i, m_sources_abscissa[i] / m_distance_of_loudspeakers, m_sources_ordinate[i] / m_distance_of_loudspeakers);
         }
     }
-    else if(index >= 2)
+    else if(index >= 2 && index < getNumParameters())
     {
         int indexBis;
         if(index%2 == 0)
@@ -251,6 +250,13 @@ void HoaplugAudioProcessor::numChannelsChanged()
     
     m_ambisonic_tool = new AmbisonicPolyEase(anOrder, getNumInputChannels());
     m_ambisonic_decoder = new AmbisonicDecode(anOrder, aNumberOfLoudspeakers);
+    
+    m_number_of_loudspeakers = getNumOutputChannels();
+    m_number_of_sources = getNumInputChannels();
+    //m_number_of_loudspeakers = 6;
+    //m_number_of_sources = 3;
+    
+    //sendChangeMessage ();
 }
 //==============================================================================
 void HoaplugAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
@@ -269,10 +275,13 @@ void HoaplugAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock
     
         m_ambisonic_tool = new AmbisonicPolyEase(anOrder, getNumInputChannels());
         m_ambisonic_decoder = new AmbisonicDecode(anOrder, aNumberOfLoudspeakers);
+        
+        //m_number_of_loudspeakers = getNumOutputChannels();
     }
     if(getNumInputChannels() != m_ambisonic_tool->getNumberOfSources())
     {
         m_ambisonic_tool->setNumberOfSources(getNumInputChannels());
+        //m_number_of_sources = getNumInputChannels();
     }
     m_ambisonic_tool->setVectorSize(samplesPerBlock);
     m_ambisonic_decoder->setVectorSize(samplesPerBlock);
@@ -281,7 +290,11 @@ void HoaplugAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock
         free(m_harmonics_vector[i]);
         m_harmonics_vector[i] = new float[samplesPerBlock];
     }
-    
+    //sendChangeMessage ();
+    //m_number_of_loudspeakers = getNumOutputChannels();
+    //m_number_of_sources = getNumInputChannels();
+    //m_number_of_loudspeakers = 6;
+    //m_number_of_sources = 3;
 }
 
 void HoaplugAudioProcessor::releaseResources()

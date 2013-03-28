@@ -22,7 +22,8 @@
 */
 class HoaplugAudioProcessor  :
     public AudioProcessor,
-    public Value::Listener
+    public Value::Listener,
+    public ChangeBroadcaster
 {
     
 private:

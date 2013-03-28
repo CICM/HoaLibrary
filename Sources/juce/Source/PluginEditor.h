@@ -24,7 +24,8 @@ class HoaplugAudioProcessorEditor  :
     public AudioProcessorEditor,
     public Value::Listener,
     public ChangeListener,
-    public Timer
+    public Timer,
+    public AudioProcessorListener
 {
 public:
     HoaplugAudioProcessorEditor (HoaplugAudioProcessor* ownerFilter);
@@ -34,6 +35,11 @@ public:
     void valueChanged (Value& value);
     void changeListenerCallback (ChangeBroadcaster* source);
     void sliderValueChanged (Slider*);
+    
+    void audioProcessorParameterChanged (AudioProcessor *processor, int parameterIndex, float newValue);
+    void audioProcessorChanged (AudioProcessor *processor);
+    void audioProcessorParameterChangeGestureBegin (AudioProcessor *processor, int parameterIndex);
+    void audioProcessorParameterChangeGestureEnd (AudioProcessor *processor, int parameterIndex);
     
     //==============================================================================
     // This is just a standard Juce paint method...

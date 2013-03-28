@@ -49,11 +49,19 @@ HoaplugAudioProcessorEditor::HoaplugAudioProcessorEditor (HoaplugAudioProcessor*
     
     // start a timer to check peridiocally if any value of the processor has changed
     startTimer (50);
+    
+    getProcessor()->addListener(this);
+    getProcessor()->addChangeListener(this);
 }
 
 HoaplugAudioProcessorEditor::~HoaplugAudioProcessorEditor()
 {
+    nbSources_Slider.removeChangeListener(this);
+    nbSpeakers_Slider.removeChangeListener(this);
+    speakerOffset_Slider.removeChangeListener(this);
+    speakerDistance_Slider.removeChangeListener(this);
     theMap.removeAllChangeListeners();
+    getProcessor()->removeListener(this);
 }
 
 //==============================================================================
@@ -68,21 +76,77 @@ void HoaplugAudioProcessorEditor::paint (Graphics& g)
     theMap.setBounds (10, 10, 400, 400);
 }
 
-void HoaplugAudioProcessorEditor::timerCallback()
+void HoaplugAudioProcessorEditor::audioProcessorParameterChanged (AudioProcessor *processor, int parameterIndex, float newValue)
 {
     HoaplugAudioProcessor* ourProcessor = getProcessor();
     
+    /*
     speakerDistance_Slider.setValue (ourProcessor->m_distance_of_loudspeakers, dontSendNotification);
     theMap.setSpeakerDistance(ourProcessor->m_distance_of_loudspeakers);
     speakerOffset_Slider.setValue (ourProcessor->m_offset_of_loudspeakers, dontSendNotification);
     theMap.setSpeakerOffset(ourProcessor->m_offset_of_loudspeakers);
     
-    for (int i = 0; i < nbSources_Slider.getValue(); i++) {
-        
-        theMap.setCartesianCoordinates(i, ourProcessor->m_sources_abscissa[i], ourProcessor->m_sources_ordinate[i], dontSendNotification);
-        
-        //theMap.setCartesianCoordinates(i, (ourProcessor->m_sources_abscissa[i]) * 2 - 1, (ourProcessor->m_sources_ordinate[i]), dontSendNotification);
+    theMap.setNbSources(ourProcessor->m_number_of_sources);
+    nbSources_Slider.setValue(ourProcessor->m_number_of_sources);
+    theMap.setNbSpeakers(ourProcessor->m_number_of_loudspeakers);
+    nbSpeakers_Slider.setValue(ourProcessor->m_number_of_loudspeakers);
+    */
+    
+    if (parameterIndex < 2)
+    {
+        if (parameterIndex == HoaplugAudioProcessor::m_distance_of_loudspeakers_parameter) {
+            speakerDistance_Slider.setValue (ourProcessor->getScaledParameter(parameterIndex), dontSendNotification);
+            theMap.setSpeakerDistance(ourProcessor->getScaledParameter(parameterIndex));
+        }
+        else if (parameterIndex == HoaplugAudioProcessor::m_offset_of_loudspeakers_parameter) {
+            speakerOffset_Slider.setValue (ourProcessor->getScaledParameter(parameterIndex), dontSendNotification);
+            theMap.setSpeakerOffset(ourProcessor->getScaledParameter(parameterIndex));
+        }
     }
+    else
+    {
+        int indexBis;
+        if(parameterIndex%2 == 0)
+        {
+            indexBis = ((parameterIndex-2)/2);
+            theMap.setSourceAbscissa(indexBis, ourProcessor->getScaledParameter(parameterIndex), dontSendNotification);
+        }
+        else
+        {
+            indexBis = ((parameterIndex-3)/2);
+            theMap.setSourceOrdinate(indexBis, ourProcessor->getScaledParameter(parameterIndex), dontSendNotification);
+        }
+    }
+}
+void HoaplugAudioProcessorEditor::audioProcessorChanged (AudioProcessor *processor)
+{
+    //HoaplugAudioProcessor* ourProcessor = getProcessor();
+    /*
+    theMap.setNbSources(ourProcessor->m_number_of_sources);
+    nbSources_Slider.setValue(ourProcessor->m_number_of_sources);
+    theMap.setNbSpeakers(ourProcessor->m_number_of_loudspeakers);
+    nbSpeakers_Slider.setValue(ourProcessor->m_number_of_loudspeakers);
+    */
+}
+
+void HoaplugAudioProcessorEditor::audioProcessorParameterChangeGestureBegin (AudioProcessor *processor, int parameterIndex)
+{
+    ;
+}
+void HoaplugAudioProcessorEditor::audioProcessorParameterChangeGestureEnd (AudioProcessor *processor, int parameterIndex)
+{
+    ;
+}
+
+void HoaplugAudioProcessorEditor::timerCallback()
+{
+    
+    HoaplugAudioProcessor* ourProcessor = getProcessor();
+    
+    theMap.setNbSources(ourProcessor->m_number_of_sources, dontSendNotification);
+    nbSources_Slider.setValue(ourProcessor->m_number_of_sources, dontSendNotification);
+    theMap.setNbSpeakers(ourProcessor->m_number_of_loudspeakers, dontSendNotification);
+    nbSpeakers_Slider.setValue(ourProcessor->m_number_of_loudspeakers, dontSendNotification);
 }
 
 void HoaplugAudioProcessorEditor::valueChanged (Value& value)
@@ -92,7 +156,17 @@ void HoaplugAudioProcessorEditor::valueChanged (Value& value)
 
 void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* source)
 {
-    if (source == &theMap) {
+    //getProcessor()->beginParameterChangeGesture	(0);
+    //getProcessor()->endParameterChangeGesture(slider->getName().getIntValue());
+    if (source == getProcessor()) {
+        /*
+        theMap.setNbSources(getProcessor()->m_number_of_sources);
+        nbSources_Slider.setValue(getProcessor()->m_number_of_sources);
+        theMap.setNbSpeakers(getProcessor()->m_number_of_loudspeakers);
+        nbSpeakers_Slider.setValue(getProcessor()->m_number_of_loudspeakers);
+        */
+    }
+    else if (source == &theMap) {
         for (int i = 0; i < nbSources_Slider.getValue(); i++)
         {
             getProcessor()->setParameterNotifyingHost ( i*2+2, (float) (theMap.getSourceAbscissa(i) + 1) * 0.5);
@@ -100,20 +174,20 @@ void HoaplugAudioProcessorEditor::changeListenerCallback (ChangeBroadcaster* sou
         }
     }
     else if (source == &nbSources_Slider) {
-        theMap.setNbSources(nbSources_Slider.getValue());
+        theMap.setNbSources(nbSources_Slider.getValue(), dontSendNotification);
     }
     else if (source == &nbSpeakers_Slider) {
-        theMap.setNbSpeakers(nbSpeakers_Slider.getValue());
+        theMap.setNbSpeakers(nbSpeakers_Slider.getValue(), dontSendNotification);
     }
     else if (source == &speakerOffset_Slider) {
-        theMap.setSpeakerOffset(speakerOffset_Slider.getValue());
+        theMap.setSpeakerOffset(speakerOffset_Slider.getValue(), dontSendNotification);
         getProcessor()->setParameterNotifyingHost (HoaplugAudioProcessor::m_offset_of_loudspeakers_parameter, (float) (speakerOffset_Slider.getValue()+ 180)/360) ;
         /*
         getProcessor()->setParameterNotifyingHost (HoaplugAudioProcessor::m_offset_of_loudspeakers_parameter, (float) speakerOffset_Slider.getValue());
         */
     }
     else if (source == &speakerDistance_Slider) {
-        theMap.setSpeakerDistance(speakerDistance_Slider.getValue());
+        theMap.setSpeakerDistance(speakerDistance_Slider.getValue(), dontSendNotification);
         getProcessor()->setParameterNotifyingHost (HoaplugAudioProcessor::m_distance_of_loudspeakers_parameter, (float) speakerDistance_Slider.getValue());
     }
 }
