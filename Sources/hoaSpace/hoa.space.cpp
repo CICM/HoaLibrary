@@ -126,7 +126,8 @@ int main()
     class_addmethod(c, (method)space_preset,          "preset",         0);
     class_addmethod(c, (method)space_getvalueof,      "getvalueof",     A_CANT, 0);
 	class_addmethod(c, (method)space_setvalueof,      "setvalueof",     A_CANT, 0);
-
+    class_addmethod(c, (method)coefficients_set,      "list",           A_GIMME, 0);
+    
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
