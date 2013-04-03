@@ -160,14 +160,18 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Development;
 		};
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = /Developer/usr/local/boost_1_48_0;
+				SDKROOT = macosx10.7;
 			};
 			name = Deployment;
 		};
@@ -193,7 +197,7 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 					/Developer/usr/local/boost_1_48_0,
 				);
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Development;
 		};
@@ -218,7 +222,7 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 					/Developer/usr/local/boost_1_48_0,
 				);
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Deployment;
 		};
