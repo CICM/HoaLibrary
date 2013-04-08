@@ -17,7 +17,7 @@
  *
  */
 #include "cicmTools.h"
-#include "ambisonicRecomposer.hpp"
+#include "ambisonicRecomposer.h"
 
 #define MAX_SIZE 256
 extern "C"
@@ -38,6 +38,7 @@ typedef struct _HoaConvolve
 	t_buffer*			f_buffer[MAX_SIZE];
 	long				f_channel[MAX_SIZE];
 	float				f_angle[MAX_SIZE];
+    double*             f_coeffs;
 	long				f_numberOfHarmonics;
 	long				f_numberOfChannels;
 	
@@ -100,8 +101,9 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaConvolve *x = NULL;
 
-	long order = 4, numberOfChannels = 9;
-	if (x = (t_HoaConvolve *)object_alloc((t_class*)HoaConvolve_class)) 
+	long order = 4, numberOfChannels = 10;
+    x = (t_HoaConvolve *)object_alloc((t_class*)HoaConvolve_class);
+	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
@@ -120,6 +122,34 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 			x->f_buffer[i] = NULL;
 		}
 
+        double* myReverbForm = new double[x->f_numberOfHarmonics +1];
+        x->f_coeffs = new double[x->f_numberOfHarmonics];
+        
+        for(int i = 0; i < (x->f_numberOfHarmonics + 1) / 2; i++)
+        {
+            myReverbForm[i] = 0.3 * ((double)i / ((x->f_numberOfHarmonics + 1) / 2)) + 0.7;
+            myReverbForm[(x->f_numberOfHarmonics + 1) / 2 - 1 - i] = 0.3 * ((double)(i - 0.25)/ ((x->f_numberOfHarmonics + 1) / 2)) + 0.7;
+        }
+        x->f_ambiRecomposer->process(myReverbForm, x->f_coeffs);
+        double factor = 0;
+        for(int i = 0; i < x->f_numberOfHarmonics; i++)
+        {
+            if(x->f_coeffs[i] < 0)
+            {
+                x->f_coeffs[i-1] -= x->f_coeffs[i];
+                x->f_coeffs[i] = 0.;
+            }
+            if (fabs(x->f_coeffs[i]) > factor)
+            {
+                factor = fabs(x->f_coeffs[i]);
+            }
+        }
+        for(int i = 0; i < x->f_numberOfHarmonics; i++)
+        {
+            x->f_coeffs[i] = order * x->f_coeffs[i] / factor;
+            post("%f", x->f_coeffs[i]);
+        }
+        
 		dsp_setup((t_pxobject *)x, 1);
 		x->f_bang_out = bangout(x);
 		
@@ -131,13 +161,10 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaConvolve_assist(t_HoaConvolve *x, void *b, long m, long a, char *s)
 {
-
-	long harmonicIndex = 0;
 	if (m == ASSIST_OUTLET)
 		sprintf(s,"(Bang) Done");
 	else
 		sprintf(s,"(Messages or bang ) Compute");
-	
 }
 
 void HoaConvolve_free(t_HoaConvolve *x)
@@ -292,7 +319,7 @@ t_max_err angle_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 	{
 		x->f_angle[i] = fmod(x->f_angle[i] + 360., 360.);
 	}
-	x->f_ambiRecomposer->setAngles(x->f_angle);
+	//x->f_ambiRecomposer->setAngles(x->f_angle);
 	return 0;
 }
 
@@ -306,6 +333,7 @@ void HoaConvolve_compute(t_HoaConvolve *x)
 	}
 	if(!bufferUsed)
 	{
+        post("hi");
 		for(int j = 0; j < x->f_numberOfChannels; j++)
 		{
 			ATOMIC_INCREMENT(&x->f_buffer[j]->b_inuse);
@@ -320,21 +348,75 @@ void HoaConvolve_compute(t_HoaConvolve *x)
 			long size = x->f_buffer[0]->b_frames;
 			for(int j = 1; j < x->f_numberOfChannels; j++)
 			{
-				if(x->f_buffer[j]->b_frames < size)
+				if(x->f_buffer[j]->b_frames > size)
 				{
 					size = x->f_buffer[j]->b_frames;
 				}
 			}
-			
-			double* datas = new double[x->f_numberOfChannels];
-			for(long i = 0; i < size; i++)
+			double** datas = new double*[x->f_numberOfChannels];
+            for(int i = 0; i < x->f_numberOfChannels; i++)
+            {
+                datas[i] = new double[size];
+            }
+			for(int j = 0; j < x->f_numberOfChannels; j++)
 			{
-				for(int j = 0; j < x->f_numberOfChannels; j++)
-					datas[j] = x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)];
-				x->f_ambiRecomposer->process(datas, datas);
-				for(int j = 0; j < x->f_numberOfChannels; j++)
-					x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] = datas[j];
-			}
+				for(long i = 0; i < size; i++)
+                {
+                    if(i < x->f_buffer[j]->b_frames)
+                        datas[j][i] = x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] * 2. / x->f_numberOfChannels;
+                    else
+                        datas[j][i] = 0.;
+                }
+            }
+            //x->f_ambiRecomposer->setFishEyeFactor(1.);
+            //x->f_ambiRecomposer->setVectorSize(size);
+            //x->f_ambiRecomposer->process(datas, datas);
+            for(int j = 0; j < x->f_numberOfChannels; j++)
+				ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
+            int resizeOk = 1;
+            for(int i = 0; i < x->f_numberOfChannels; i++)
+            {
+                object_method(x->f_buffer[i], gensym("sizeinsamps"), size);
+                if(x->f_buffer[i]->b_frames != size)
+                    resizeOk = 0;
+            }
+            if(resizeOk)
+            {
+                long offset;
+                for(int j = 0; j < x->f_numberOfChannels; j++)
+                    ATOMIC_INCREMENT(&x->f_buffer[j]->b_inuse);
+                for(int j = 0; j < x->f_numberOfHarmonics; j++)
+                {
+                    offset = x->f_coeffs[j] * x->f_buffer[j]->b_msr * 100.;
+                    post("%f", offset);
+                    if(offset > 0)
+                    {
+                        for(long i = 0; i < size; i++)
+                        {/*
+                            if(i > offset)
+                                x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] = 0.;
+                            else*/
+                            {
+                                for(int k = 0; k < x->f_numberOfChannels; k++)
+                                    x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] += datas[k][i];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for(long i = 0; i < size; i++)
+                        {
+                            if(i < abs(offset))
+                                x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] = 0.;
+                            else
+                            {
+                                for(int k = 0; k < x->f_numberOfChannels; k++)
+                                    x->f_buffer[j]->b_samples[i * x->f_buffer[j]->b_nchans + (x->f_channel[j] - 1)] += datas[k][i];
+                            }
+                        }
+                    }
+                }
+            }
 			for(int j = 0; j < x->f_numberOfChannels; j++)
 				ATOMIC_DECREMENT(&x->f_buffer[j]->b_inuse);
 

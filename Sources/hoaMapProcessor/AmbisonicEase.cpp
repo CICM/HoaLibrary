@@ -25,9 +25,14 @@ AmbisonicEase::AmbisonicEase(long anOrder, long aVectorSize)
 	m_number_of_inputs		= 1;
 	m_number_of_outputs		= m_number_of_harmonics;
 
-	computeVectors();
+    m_lineAbscissa = new AmbisonicLine(aVectorSize);
+    m_lineOrdinate = new AmbisonicLine(aVectorSize);
+    
+    computeVectors();
 	setPolarCoordinates(1., 0.);
     setVectorSize(aVectorSize);
+    m_lineAbscissa->setCoefficientDirect(0.);
+    m_lineOrdinate->setCoefficientDirect(1.);
 }
 
 long AmbisonicEase::getOrder()
@@ -59,7 +64,6 @@ void AmbisonicEase::computeVectors()
 {
 	m_index_of_harmonics	= new long[m_number_of_harmonics ];
     m_ambiCoeffs            = new double[m_number_of_harmonics];
-    m_optimVector           = new double[m_number_of_harmonics];
     m_minus_vector          = new double[m_number_of_harmonics];
 	m_dot_vector            = new double[m_number_of_harmonics];
     m_widen_vector          = new double[m_number_of_harmonics];
@@ -84,23 +88,18 @@ void AmbisonicEase::computeVectors()
 		m_cosLookUp[i] = cos((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 		m_sinLookUp[i] = sin((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 	}
-    for (int i = 0; i < m_number_of_harmonics; i++)
-	{
-		if (i == 0)
-			m_optimVector[i] = 1.;
-		else
-			m_optimVector[i] = pow(gsl_sf_fact(m_order), 2) / ( gsl_sf_fact(m_order+abs(m_index_of_harmonics[i])) * gsl_sf_fact(m_order-abs(m_index_of_harmonics[i])));
-	}
 }
 
 void AmbisonicEase::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
+    m_lineAbscissa->setVectorSize(m_vector_size);
+    m_lineOrdinate->setVectorSize(m_vector_size);
 }
 
 void AmbisonicEase::setAzimtuh(double aTheta)
 {
-	m_ambiCoeffs[0] = 1. * m_optimVector[0];
+	m_ambiCoeffs[0] = 1.;
 	int  tmpIndex = 2;
 	long tmpAngle;
 	if (aTheta < 0)
@@ -111,8 +110,8 @@ void AmbisonicEase::setAzimtuh(double aTheta)
 	for (int i = 1; i <= m_order; i++)
 	{
 		tmpAngle = (long)(i*angleFactor)%(NUMBEROFCIRCLEPOINTS-1);
-		m_ambiCoeffs[tmpIndex-1] = m_sinLookUp[tmpAngle] * m_optimVector[tmpIndex-1];
-		m_ambiCoeffs[tmpIndex]   = m_cosLookUp[tmpAngle] * m_optimVector[tmpIndex];
+		m_ambiCoeffs[tmpIndex-1] = m_sinLookUp[tmpAngle];
+		m_ambiCoeffs[tmpIndex]   = m_cosLookUp[tmpAngle];
 		
 		tmpIndex += 2;
 	}
@@ -152,6 +151,12 @@ void AmbisonicEase::setCartesianCoordinates(double anAbscissa, double anOrdinate
     setPolarCoordinates(Tools::radius(anAbscissa, anOrdinate), Tools::angle(anAbscissa, anOrdinate) - CICM_PI2);
 }
 
+void AmbisonicEase::setCartesianCoordinatesLine(double anAbscissa, double anOrdinate)
+{
+    m_lineAbscissa->setCoefficient(anAbscissa);
+    m_lineOrdinate->setCoefficient(anOrdinate);
+}
+
 AmbisonicEase::~AmbisonicEase()
 {
 	free(m_index_of_harmonics);
@@ -159,6 +164,7 @@ AmbisonicEase::~AmbisonicEase()
 	free(m_dot_vector);
     free(m_widen_vector);
     free(m_ambiCoeffs);
-    free(m_optimVector);
+    delete m_lineAbscissa;
+    delete m_lineOrdinate;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco ,Pierre Guillot & Eliott Paris, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -42,6 +42,7 @@ void HoaTool_assist(t_HoaTool *x, void *b, long m, long a, char *s);
 void HoaTool_pol(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 void HoaTool_car(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 void HoaTool_list(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
+void HoaTool_mute(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 
 void HoaTool_dsp(t_HoaTool *x, t_signal **sp, short *count);
 t_int *HoaTool_perform(t_int *w);
@@ -65,6 +66,7 @@ int main(void)
     class_addmethod(c, (method)HoaTool_pol,         "polar",    A_GIMME, 0);
 	class_addmethod(c, (method)HoaTool_car,         "car",      A_GIMME, 0);
     class_addmethod(c, (method)HoaTool_car,         "cartesian",A_GIMME, 0);
+    class_addmethod(c, (method)HoaTool_mute,        "mute",     A_GIMME, 0);
     class_addmethod(c, (method)HoaTool_list,        "list",     A_GIMME, 0);
     
 	class_dspinit(c);				
@@ -182,6 +184,12 @@ void HoaTool_list(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
         x->f_AmbisonicPolyEase->setCartesianCoordinates(atom_getlong(argv+1), atom_getfloat(argv+2), atom_getfloat(argv+3));
     else if(atom_getsym(argv) == gensym("pol") || atom_getsym(argv) == gensym("polar"))
         x->f_AmbisonicPolyEase->setPolarCoordinates(atom_getlong(argv+1), atom_getfloat(argv+2), atom_getfloat(argv+3));
+}
+
+void HoaTool_mute(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
+{
+    if(atom_gettype(argv) == A_LONG )
+        x->f_AmbisonicPolyEase->setMuted(atom_getlong(argv));
 }
 
 void HoaTool_free(t_HoaTool *x)

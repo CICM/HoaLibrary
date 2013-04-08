@@ -63,13 +63,14 @@ typedef struct  _space
     ambisonicRecomposer*    f_recomposer;
 
 	double                  f_harmonicsValues[MAX_MICS];
-    double                  f_microphonesValuesRotate[MAX_MICS];
+    double                  f_mode_values[MAX_MICS];
     double                  f_microphonesValues[MAX_MICS];
     t_atom                  f_tempory_values[MAX_MICS];
     long                    f_number_of_harmonics;
     long                    f_number_of_microphones;
     double                  f_reference_angle;
     double                  f_rotation;
+    double                  f_rotation_max;
     double                  f_retractation;
 } t_space;
 
@@ -249,25 +250,11 @@ void space_free(t_space *x)
     delete x->f_recomposer;
 }
 
-void space_preset(t_space *x)
-{
-    
-    void* z;
-    if(!(z = gensym("_preset")->s_thing))
-        return;
-    
-    
-    for(int i = 0; i < x->f_number_of_microphones; i++)
-    {
-        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), gensym("coeffs"), i, (float)x->f_microphonesValues[i]);
-    }
-}
-
 void space_assist(t_space *x, void *b, long m, long a, char *s)
 {
-	if (m == ASSIST_INLET) 
+	if (m == ASSIST_INLET)
 	{
-		sprintf(s,"(Anything) Behavior and color messages"); 
+		sprintf(s,"(Anything) Behavior and appearance");
 	}
 	else
 	{
@@ -309,8 +296,67 @@ t_max_err space_notify(t_space *x, t_symbol *s, t_symbol *msg, void *sender, voi
 void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_borderthickness = 0;
-	params->d_cornersize = 12; 
+	params->d_cornersize = 12;
 }
+
+/**********************************************************/
+/*                      Preset et Pattrs                  */
+/**********************************************************/
+
+void space_preset(t_space *x)
+{
+    
+    void* z;
+    if(!(z = gensym("_preset")->s_thing))
+        return;
+    
+    for(int i = 0; i < x->f_number_of_microphones; i++)
+        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), gensym("coeffs"), i, (float)x->f_microphonesValues[i]);
+}
+
+t_max_err space_setvalueof(t_space *x, long ac, t_atom *av)
+{
+	if (ac && av)
+    {
+        if(ac > MAX_MICS)
+            ac = MAX_MICS;
+        for (int i = 0; i < ac; i++)
+        {
+            if(atom_gettype(av+i) == A_FLOAT)
+                x->f_microphonesValues[i] = Tools::clip((double)atom_getfloat(av + i), 0., 1.);
+        }
+        space_compute(x);
+	}
+	return MAX_ERR_NONE;
+}
+
+t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av)
+{
+	if (ac && av)
+    {
+		if (*ac && *av)
+        {
+            int limit = *ac;
+            if (limit > MAX_MICS)
+                limit = MAX_MICS;
+            
+            for (int i = 0; i < limit; i++)
+                atom_setfloat(*av+i, (float)x->f_microphonesValues[i]);
+		}
+        else
+        {
+			*av = (t_atom *)getbytes(x->f_number_of_microphones * sizeof(t_atom));
+            *ac = x->f_number_of_microphones;
+        }
+        for (int i = 0; i < *ac; i++)
+            atom_setfloat(*av+i, (float)x->f_microphonesValues[i]);
+    }
+	return MAX_ERR_NONE;
+}
+
+/**********************************************************/
+/*                      Dessin                            */
+/**********************************************************/
 
 void space_paint(t_space *x, t_object *view)
 {
@@ -478,10 +524,9 @@ void draw_harmonics(t_space *x,  t_object *view, t_rect *rect)
                     max = x->f_microphonesValues[i];
             }
             normalize = max / x->f_viewer->getBiggestContribution();
-            /*
+            
             if(x->f_mode == 1)
-                normalize = 1. / x->f_viewer->getBiggestContribution();
-            */
+                normalize = x->f_rotation_max / x->f_viewer->getBiggestContribution();
             
 			double factor = (x->f_rayonGlobal * 5. / 6.) * normalize;
 			
@@ -545,6 +590,10 @@ void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("microphones_points_layer"), 0., 0.);
 }
 
+/**********************************************************/
+/*                      Souris                            */
+/**********************************************************/
+
 void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
@@ -552,20 +601,26 @@ void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers
     double radius   = Tools::radius(mapped_x, mapped_y);
     double angle    = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
 
-    if(modifiers == 18)
+    if(radius > 0.9)
+    {
+        x->f_mode = 1;
+        x->f_rotation_max = 0.;
+        for(int i = 0 ; i < x->f_number_of_microphones; i++)
+        {
+            if(x->f_microphonesValues[i] > x->f_rotation_max)
+                x->f_rotation_max = x->f_microphonesValues[i];
+        }
+        x->f_reference_angle = angle;
+        for(int i =0; i < x->f_number_of_microphones; i++)
+            x->f_mode_values[i] = x->f_microphonesValues[i];
+    }
+    else if(modifiers == 18)
     {
         x->f_mode = 2;
         x->f_retractation = radius;
-    }
-    else if(radius > 0.9)
-    {
-        x->f_mode = 1;
-        x->f_reference_angle = angle;
+        for(int i =0; i < x->f_number_of_microphones; i++)
         {
-            for(int i =0; i < x->f_number_of_microphones; i++)
-            {
-                x->f_microphonesValuesRotate[i] = x->f_microphonesValues[i];
-            }
+            x->f_mode_values[i] = x->f_microphonesValues[i];
         }
     }
     else
@@ -587,11 +642,13 @@ void space_mouse_drag(t_space *x, t_object *patcherview, t_pt pt, long modifiers
 
 void space_mouse_enddrag(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    if(x->f_mode == 1)
+    /*
+    if(x->f_mode == 2)
     {
         for(int i = 0; i < x->f_number_of_microphones; i++)
-            x->f_microphonesValues[i] = x->f_microphonesValuesRotate[i];
-    }
+            x->f_microphonesValues[i] = x->f_mode_values[i];
+    }*/
+    space_compute(x);
 }
 
 void space_draw_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -649,7 +706,7 @@ void space_rotate_points(t_space *x, t_object *patcherview, t_pt pt, long modifi
     x->f_rotation  = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
     double offset = x->f_rotation - x->f_reference_angle;
     offset *= -1.;
-    if(offset < 0.)
+    while(offset < 0.)
         offset += CICM_2PI;
     int nbDecalage = offset / loudspeaker_angle;
     double decimal = (offset - loudspeaker_angle * nbDecalage) / loudspeaker_angle;
@@ -661,7 +718,7 @@ void space_rotate_points(t_space *x, t_object *patcherview, t_pt pt, long modifi
     {
         index1 = ((i + nbDecalage) + x->f_number_of_microphones) % x->f_number_of_microphones;
         index2 = ((i + 1 + nbDecalage) + x->f_number_of_microphones) % x->f_number_of_microphones;
-        newcoeff = x->f_microphonesValuesRotate[index2] * decimal + x->f_microphonesValuesRotate[index1] * (1. - decimal);
+        newcoeff = x->f_mode_values[index2] * decimal + x->f_mode_values[index1] * (1. - decimal);
         atom_setfloat(x->f_tempory_values+i ,newcoeff);
     }
 
@@ -674,10 +731,9 @@ void space_retract_points(t_space *x, t_object *patcherview, t_pt pt, long modif
     double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
     double radius   = (Tools::radius(mapped_x, mapped_y) - (1. / 6.)) * (31. / 20.);
     double offset = x->f_retractation - radius;
-    x->f_retractation = radius;
     
     for(int i = 0; i < x->f_number_of_microphones; i++)
-        atom_setfloat(x->f_tempory_values+i ,x->f_microphonesValues[i] - offset);
+        atom_setfloat(x->f_tempory_values+i ,x->f_mode_values[i] - offset);
     
     object_method(x, gensym("coeffs"), x->f_number_of_microphones, x->f_tempory_values);
 }
@@ -731,7 +787,7 @@ t_max_err coefficients_set(t_space *x, t_object *attr, long ac, t_atom *av)
     {
         if(atom_gettype(av) == A_FLOAT)
         {
-            if(x->f_mode == 0)
+            if(x->f_mode == 0 || x->f_mode == 2)
             {
                 for (int i = 0; i < ac && i < MAX_MICS; i++)
                 {
@@ -739,23 +795,6 @@ t_max_err coefficients_set(t_space *x, t_object *attr, long ac, t_atom *av)
                         x->f_microphonesValues[i] = Tools::clip((double)atom_getfloat(av + i), 0., 1.);
                 }
                 
-            }
-            else if(x->f_mode == 2)
-            {
-                double max = 1.;
-                double min = 0.;
-                for (int i = 0; i < ac && i < MAX_MICS; i++)
-                {
-                    if(atom_getfloat(av + i) > max)
-                        max = atom_getfloat(av + i);
-                    if(atom_getfloat(av + i) < min)
-                        min = atom_getfloat(av + i);
-                }
-                for (int i = 0; i < ac && i < MAX_MICS; i++)
-                {
-                    if(atom_gettype(av+i) == A_FLOAT)
-                        x->f_microphonesValues[i] = atom_getfloat(av + i) - (max - 1.) - min;
-                }
             }
             else
             {
@@ -781,47 +820,3 @@ t_max_err coefficients_set(t_space *x, t_object *attr, long ac, t_atom *av)
 }
 
 
-t_max_err space_setvalueof(t_space *x, long ac, t_atom *av)
-{
-	if (ac && av)
-    {
-        if(ac > MAX_MICS)
-            ac = MAX_MICS;
-        for (int i = 0; i < ac; i++)
-        {
-            if(atom_gettype(av+i) == A_FLOAT)
-                x->f_microphonesValues[i] = Tools::clip((double)atom_getfloat(av + i), 0., 1.);
-        }
-        space_compute(x);
-	}
-	return MAX_ERR_NONE;
-}
-
-t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av)
-{
-	if (ac && av)
-    {
-		if (*ac && *av)
-        {
-            int limit = *ac;
-            if (limit > MAX_MICS)
-                limit = MAX_MICS;
-            
-            for (int i = 0; i < limit; i++)
-            {
-                atom_setfloat(*av+i, (float)x->f_microphonesValues[i]);
-            }
-		}
-        else
-        {
-			*av = (t_atom *)getbytes(x->f_number_of_microphones * sizeof(t_atom));
-            *ac = x->f_number_of_microphones;
-        }
-        for (int i = 0; i < *ac; i++)
-        {
-            atom_setfloat(*av+i, (float)x->f_microphonesValues[i]);
-        }
-        
-    }
-	return MAX_ERR_NONE;
-}

@@ -19,7 +19,7 @@
 #include "cicmTools.h"
 #include "AmbisonicSourcesManager.h"
 
-#define MAX_SOURCES 128
+#define MAX_SOURCES 64
 #define CLOCK_INTERVAL 800
 
 extern "C"
@@ -40,7 +40,8 @@ typedef struct  _hoamap
 {
 	t_jbox		j_box;
 
-    long        f_counter;
+    void*       f_clock;
+    long double f_time;
     int         f_show_add_source;
     long        f_index_of_source_to_remove;
     t_pt        f_mouse_position;
@@ -51,7 +52,7 @@ typedef struct  _hoamap
     
 	t_jrgba		f_colorBackground;
     t_jrgba		f_colorSources;
-	
+	long        f_pattr_index;
     long        f_index_of_selected_source;
     double      f_size_source;
 	double		f_zoom_factor;
@@ -60,8 +61,8 @@ typedef struct  _hoamap
 	void*		f_out_sources;
     
     t_symbol*   f_descriptions[MAX_SOURCES];
-    double      f_radius[MAX_SOURCES];
-    double      f_angles[MAX_SOURCES];
+    double      f_abscissa[MAX_SOURCES];
+    double      f_ordinates[MAX_SOURCES];
     long        f_existence[MAX_SOURCES];
 } t_hoamap;
 
@@ -82,10 +83,11 @@ t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av);
 void hoamap_bang(t_hoamap *x);
 void hoamap_infos(t_hoamap *x);
 
-t_max_err hoamap_radius_saved(t_hoamap *x, t_object *s, short ac, t_atom *av);
-t_max_err hoamap_angles_saved(t_hoamap *x, t_object *s, short ac, t_atom *av);
+t_max_err hoamap_abscissa_saved(t_hoamap *x, t_object *s, short ac, t_atom *av);
+t_max_err hoamap_ordinate_saved(t_hoamap *x, t_object *s, short ac, t_atom *av);
 t_max_err hoamap_description_saved(t_hoamap *x, t_object *s, short ac, t_atom *av);
 t_max_err hoamap_existence(t_hoamap *x, t_object *s, short ac, t_atom *av);
+t_max_err hoamap_pattr_select(t_hoamap *x, t_object *s, short ac, t_atom *av);
 void hoamap_all_preset(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_polar(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_radius(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
@@ -94,8 +96,9 @@ void hoamap_cartesian(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_abscissa(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_ordinate(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_description(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_remove(t_hoamap *x, long n);
-
+void hoamap_sourceRemove(t_hoamap *x, long n);
+void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
+;
 
 /* Paint Methods */
 void hoamap_paint(t_hoamap *x, t_object *view);
@@ -105,6 +108,7 @@ void draw_add_source(t_hoamap *x,  t_object *view, t_rect *rect);
 
 void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -130,6 +134,7 @@ int main()
 	class_addmethod(c, (method)hoamap_bang,             "bang",			A_CANT, 0);
     class_addmethod(c, (method)hoamap_infos,            "infos",		A_GIMME,0);
     
+    class_addmethod(c, (method)hoamap_all_preset,        "all",         A_GIMME,0);
     class_addmethod(c, (method)hoamap_polar,            "polar",        A_GIMME,0);
     class_addmethod(c, (method)hoamap_radius,           "radius",       A_GIMME,0);
     class_addmethod(c, (method)hoamap_angle,            "angle",        A_GIMME,0);
@@ -137,17 +142,16 @@ int main()
     class_addmethod(c, (method)hoamap_abscissa,         "abscissa",     A_GIMME,0);
     class_addmethod(c, (method)hoamap_ordinate,         "ordinate",     A_GIMME,0);
     class_addmethod(c, (method)hoamap_description,      "description",  A_GIMME,0);
-	class_addmethod(c, (method)hoamap_remove,           "remove",		A_LONG, 0);
+	class_addmethod(c, (method)hoamap_sourceRemove,     "remove",		A_LONG, 0);
+    class_addmethod(c, (method)hoamap_group,            "group",        A_GIMME,0);
     
     class_addmethod(c, (method)hoamap_mousedown,        "mousedown",	A_CANT, 0);
     class_addmethod(c, (method)hoamap_mousedrag,        "mousedrag",	A_CANT, 0);
-    /*
+    class_addmethod(c, (method)hoamap_mouseup,          "mouseup",      A_CANT, 0);
     class_addmethod(c, (method)hoamap_mouseenter,       "mouseenter",   A_CANT, 0);
     class_addmethod(c, (method)hoamap_mousemove,        "mousemove",    A_CANT, 0);
     class_addmethod(c, (method)hoamap_mouseleave,       "mouseleave",   A_CANT, 0);
-    */
-    class_addmethod(c, (method)hoamap_all_preset,        "all",         A_GIMME, 0);
-    
+
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
@@ -158,15 +162,15 @@ int main()
     CLASS_ATTR_INVISIBLE		(c, "description_saved", 0);
     CLASS_ATTR_SAVE             (c, "description_saved", 1);
     
-    CLASS_ATTR_DOUBLE_ARRAY     (c, "radius_saved", ATTR_SET_OPAQUE_USER, t_hoamap, f_radius, MAX_SOURCES);
-    CLASS_ATTR_ACCESSORS		(c, "radius_saved", NULL, hoamap_radius_saved);
-    CLASS_ATTR_INVISIBLE		(c, "radius_saved", 0);
-    CLASS_ATTR_SAVE             (c, "radius_saved", 1);
+    CLASS_ATTR_DOUBLE_ARRAY     (c, "abscissa_saved", ATTR_SET_OPAQUE_USER, t_hoamap, f_abscissa, MAX_SOURCES);
+    CLASS_ATTR_ACCESSORS		(c, "abscissa_saved", NULL, hoamap_abscissa_saved);
+    CLASS_ATTR_INVISIBLE		(c, "abscissa_saved", 0);
+    CLASS_ATTR_SAVE             (c, "abscissa_saved", 1);
     
-    CLASS_ATTR_DOUBLE_ARRAY     (c, "angles_saved", ATTR_SET_OPAQUE_USER, t_hoamap, f_angles, MAX_SOURCES);
-    CLASS_ATTR_ACCESSORS		(c, "angles_saved", NULL, hoamap_angles_saved);
-    CLASS_ATTR_INVISIBLE		(c, "angles_saved", 0);
-    CLASS_ATTR_SAVE             (c, "angles_saved", 1);
+    CLASS_ATTR_DOUBLE_ARRAY     (c, "ordinate_saved", ATTR_SET_OPAQUE_USER, t_hoamap, f_ordinates, MAX_SOURCES);
+    CLASS_ATTR_ACCESSORS		(c, "ordinate_saved", NULL, hoamap_ordinate_saved);
+    CLASS_ATTR_INVISIBLE		(c, "ordinate_saved", 0);
+    CLASS_ATTR_SAVE             (c, "ordinate_saved", 1);
     
     CLASS_ATTR_LONG_ARRAY       (c, "existence", ATTR_SET_OPAQUE_USER, t_hoamap, f_existence, MAX_SOURCES);
     CLASS_ATTR_ACCESSORS		(c, "existence", NULL, hoamap_existence);
@@ -179,7 +183,7 @@ int main()
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "1. 1. 1. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0. 0. 0. 1.");
     
     CLASS_ATTR_RGBA				(c, "sourcecolor", 0, t_hoamap, f_colorSources);
 	CLASS_ATTR_CATEGORY			(c, "sourcecolor", 0, "Color");
@@ -196,12 +200,21 @@ int main()
 	CLASS_ATTR_DEFAULT          (c,"outputmode", 0,  "0");
     CLASS_ATTR_SAVE             (c,"outputmode", 1);
 	
+    CLASS_ATTR_LONG             (c,"pattr_source", 0, t_hoamap, f_pattr_index);
+    CLASS_ATTR_ACCESSORS		(c,"pattr_source", NULL, hoamap_pattr_select);
+	CLASS_ATTR_LABEL			(c,"pattr_source", 0,   "Pattrstorage source write");
+	CLASS_ATTR_CATEGORY			(c,"pattr_source", 0,   "Behavior");
+	CLASS_ATTR_DEFAULT          (c,"pattr_source", 0,   "-1");
+    CLASS_ATTR_SAVE             (c,"pattr_source", 1);
+    
 	CLASS_ATTR_DOUBLE			(c,"zoom", 0, t_hoamap, f_zoom_factor);
     CLASS_ATTR_ACCESSORS		(c,"zoom", NULL, hoamap_zoom);
 	CLASS_ATTR_LABEL			(c,"zoom", 0,   "Zoom");
 	CLASS_ATTR_CATEGORY			(c,"zoom", 0,   "Custom");
 	CLASS_ATTR_DEFAULT          (c,"zoom", 0,   "0.35");
     CLASS_ATTR_SAVE             (c,"zoom", 1);
+    
+    
     
 	
 	class_register(CLASS_BOX, c);
@@ -229,20 +242,22 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	| JBOX_GROWY
 	| JBOX_HILITE
 	;
-	jbox_new(&x->j_box, flags, argc, argv); 
+	jbox_new(&x->j_box, flags, argc, argv);
+    x->f_clock = clock_new((t_object *)x, (method)hoamap_tick);
 	x->f_source_manager = new SourcesManager();
     x->f_show_add_source = 0;
     x->f_index_of_source_to_remove = -1;
 	x->f_zoom_factor = 0.5;
+    x->f_index_of_selected_source = -1;
 	x->f_out_sources   = listout(x);
 	x->j_box.b_firstin = (t_object*) x;
 	
 	attr_dictionary_process(x, d);
-    
+    x->f_pattr_index = -1;
     for (int i = 0; i < MAX_SOURCES; i++)
     {
         if(x->f_existence[i] == 0)
-            x->f_source_manager->remove(i);
+            x->f_source_manager->sourceRemove(i);
     }
     
 	jbox_ready(&x->j_box);
@@ -263,27 +278,23 @@ void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *
 void hoamap_free(t_hoamap *x)
 {
 	jbox_free(&x->j_box);
+    object_free(x->f_clock);
     delete x->f_source_manager;
 }
 
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
-		sprintf(s,"Anything");
+		sprintf(s,"(Anything) Behavior and appearance");
 	else
-    {
-		if (a == 0)
-			sprintf(s,"Sources coordinates");
-		else
-			sprintf(s,"General informations");
-	}
+        sprintf(s,"(List) Sources coordinates");
 }
 
 /**********************************************************/
 /* Sauvegarde des derniers paramètres pour l'initaliation */
 /**********************************************************/
 
-t_max_err hoamap_radius_saved(t_hoamap *x, t_object *s, short ac, t_atom *av)
+t_max_err hoamap_abscissa_saved(t_hoamap *x, t_object *s, short ac, t_atom *av)
 {
     if (ac > MAX_SOURCES)
         ac = MAX_SOURCES;
@@ -291,15 +302,15 @@ t_max_err hoamap_radius_saved(t_hoamap *x, t_object *s, short ac, t_atom *av)
     {
         if(atom_gettype(av+i) == A_FLOAT)
         {
-            x->f_source_manager->setRadius(i, atom_getfloat(av+i));
-            x->f_radius[i] = x->f_source_manager->getRadius(i);
+            x->f_source_manager->sourceSetAbscissa(i, atom_getfloat(av+i));
+            x->f_abscissa[i] = x->f_source_manager->getAbscissa(i);
         }
     }
     object_notify(x, _sym_modified, NULL);
     return MAX_ERR_NONE;
 }
 
-t_max_err hoamap_angles_saved(t_hoamap *x, t_object *s, short ac, t_atom *av)
+t_max_err hoamap_ordinate_saved(t_hoamap *x, t_object *s, short ac, t_atom *av)
 {
     if (ac > MAX_SOURCES)
         ac = MAX_SOURCES;
@@ -307,8 +318,8 @@ t_max_err hoamap_angles_saved(t_hoamap *x, t_object *s, short ac, t_atom *av)
     {
         if(atom_gettype(av+i) == A_FLOAT)
         {
-            x->f_source_manager->setAngle(i, atom_getfloat(av+i));
-            x->f_angles[i] = x->f_source_manager->getAngle(i);
+            x->f_source_manager->sourceSetOrdinate(i, atom_getfloat(av+i));
+            x->f_ordinates[i] = x->f_source_manager->getOrdinate(i);
         }
     }
     object_notify(x, _sym_modified, NULL);
@@ -324,7 +335,7 @@ t_max_err hoamap_description_saved(t_hoamap *x, t_object *s, short ac, t_atom *a
         if(atom_gettype(av+i) == A_SYM)
         {
             x->f_descriptions[i] = atom_getsym(av+i);
-            x->f_source_manager->setDescription(i, atom_getsym(av+i)->s_name);
+            x->f_source_manager->sourceSetDescription(i, atom_getsym(av+i)->s_name);
         }
     }
     object_notify(x, _sym_modified, NULL);
@@ -340,7 +351,7 @@ t_max_err hoamap_existence(t_hoamap *x, t_object *s, short ac, t_atom *av)
         if(atom_gettype(av+i) == A_LONG && atom_getlong(av+i) == 0)
         {
             x->f_existence[i] = 0;
-            x->f_source_manager->remove(i);
+            x->f_source_manager->sourceRemove(i);
         }
         else
             x->f_existence[i] = 1;
@@ -358,28 +369,29 @@ void hoamap_all_preset(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         i = atom_getlong(av);
     if(atom_gettype(av+1) == A_FLOAT && atom_gettype(av+2) == A_FLOAT)
     {
-        x->f_source_manager->setCoordinatesPolar(i, atom_getfloat(av+1), atom_getfloat(av+2));
-        x->f_radius[i] = atom_getfloat(av+1);
-        x->f_angles[i] = atom_getfloat(av+2);
+        x->f_source_manager->sourceSetCoordinatesCartesian(i, atom_getfloat(av+1), atom_getfloat(av+2));
+        x->f_abscissa[i] = atom_getfloat(av+1);
+        x->f_ordinates[i] = atom_getfloat(av+2);
     }
     if(atom_gettype(av+3) == A_SYM)
     {
-        x->f_source_manager->setDescription(i, atom_getsym(av+3)->s_name);
+        x->f_source_manager->sourceSetDescription(i, atom_getsym(av+3)->s_name);
         x->f_descriptions[i] = atom_getsym(av+3);
     }
     if(atom_gettype(av+4) == A_LONG && atom_getlong(av+4) < 1)
     {
-        x->f_source_manager->remove(i);
+        x->f_source_manager->sourceRemove(i);
         x->f_existence[i] = 0;
     }
     else
         x->f_existence[i] = 1;
 
+    object_notify(x, _sym_modified, NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);
     
-    object_notify(x, _sym_modified, NULL);
+    
 }
 
 /**********************************************************/
@@ -392,9 +404,9 @@ void hoamap_polar(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     {
         if(atom_gettype(av) == A_LONG && atom_gettype(av+1) == A_FLOAT && atom_gettype(av+2) == A_FLOAT)
         {
-            x->f_source_manager->setCoordinatesPolar(atom_getlong(av), atom_getfloat(av+1), atom_getfloat(av+2));
-            x->f_radius[atom_getlong(av)] = x->f_source_manager->getRadius(atom_getlong(av));
-            x->f_angles[atom_getlong(av)] = x->f_source_manager->getAngle(atom_getlong(av));
+            x->f_source_manager->sourceSetCoordinatesPolar(atom_getlong(av), atom_getfloat(av+1), atom_getfloat(av+2));
+            x->f_abscissa[atom_getlong(av)] = x->f_source_manager->getOrdinate(atom_getlong(av));
+            x->f_ordinates[atom_getlong(av)] = x->f_source_manager->getAbscissa(atom_getlong(av));
             x->f_existence[atom_getlong(av)] = x->f_source_manager->getSourceExistence(atom_getlong(av));
         }
     }
@@ -410,8 +422,9 @@ void hoamap_radius(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     {
         if(atom_gettype(av) == A_LONG && atom_gettype(av+1) == A_FLOAT)
         {
-            x->f_source_manager->setRadius(atom_getlong(av), atom_getfloat(av+1));
-            x->f_radius[atom_getlong(av)] = x->f_source_manager->getRadius(atom_getlong(av));
+            x->f_source_manager->sourceSetRadius(atom_getlong(av), atom_getfloat(av+1));
+            x->f_abscissa[atom_getlong(av)] = x->f_source_manager->getOrdinate(atom_getlong(av));
+            x->f_ordinates[atom_getlong(av)] = x->f_source_manager->getAbscissa(atom_getlong(av));
             x->f_existence[atom_getlong(av)] = x->f_source_manager->getSourceExistence(atom_getlong(av));
         }
     }
@@ -427,8 +440,9 @@ void hoamap_angle(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     {
         if(atom_gettype(av) == A_LONG && atom_gettype(av+1) == A_FLOAT)
         {
-            x->f_source_manager->setAngle(atom_getlong(av), atom_getfloat(av+1));
-            x->f_angles[atom_getlong(av)] = x->f_source_manager->getAngle(atom_getlong(av));
+            x->f_source_manager->sourceSetAngle(atom_getlong(av), atom_getfloat(av+1));
+            x->f_abscissa[atom_getlong(av)] = x->f_source_manager->getOrdinate(atom_getlong(av));
+            x->f_ordinates[atom_getlong(av)] = x->f_source_manager->getAbscissa(atom_getlong(av));
             x->f_existence[atom_getlong(av)] = x->f_source_manager->getSourceExistence(atom_getlong(av));
         }
     }
@@ -444,9 +458,9 @@ void hoamap_cartesian(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     {
         if(atom_gettype(av) == A_LONG && atom_gettype(av+1) == A_FLOAT && atom_gettype(av+2) == A_FLOAT)
         {
-            x->f_source_manager->setCoordinatesCartesian(atom_getlong(av), atom_getfloat(av+1), atom_getfloat(av+2));
-            x->f_radius[atom_getlong(av)] = x->f_source_manager->getRadius(atom_getlong(av));
-            x->f_angles[atom_getlong(av)] = x->f_source_manager->getAngle(atom_getlong(av));
+            x->f_source_manager->sourceSetCoordinatesCartesian(atom_getlong(av), atom_getfloat(av+1), atom_getfloat(av+2));
+            x->f_abscissa[atom_getlong(av)] = x->f_source_manager->getOrdinate(atom_getlong(av));
+            x->f_ordinates[atom_getlong(av)] = x->f_source_manager->getAbscissa(atom_getlong(av));
             x->f_existence[atom_getlong(av)] = x->f_source_manager->getSourceExistence(atom_getlong(av));
         }
     }
@@ -462,9 +476,9 @@ void hoamap_abscissa(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     {
         if(atom_gettype(av) == A_LONG && atom_gettype(av+1) == A_FLOAT)
         {
-            x->f_source_manager->setAbscissa(atom_getlong(av), atom_getfloat(av+1));
-            x->f_radius[atom_getlong(av)] = x->f_source_manager->getRadius(atom_getlong(av));
-            x->f_angles[atom_getlong(av)] = x->f_source_manager->getAngle(atom_getlong(av));
+            x->f_source_manager->sourceSetAbscissa(atom_getlong(av), atom_getfloat(av+1));
+            x->f_abscissa[atom_getlong(av)] = x->f_source_manager->getOrdinate(atom_getlong(av));
+            x->f_ordinates[atom_getlong(av)] = x->f_source_manager->getAbscissa(atom_getlong(av));
             x->f_existence[atom_getlong(av)] = x->f_source_manager->getSourceExistence(atom_getlong(av));
         }
     }
@@ -480,9 +494,9 @@ void hoamap_ordinate(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     {
         if(atom_gettype(av) == A_LONG && atom_gettype(av+1) == A_FLOAT)
         {
-            x->f_source_manager->setOrdinate(atom_getlong(av), atom_getfloat(av+1));
-            x->f_radius[atom_getlong(av)] = x->f_source_manager->getRadius(atom_getlong(av));
-            x->f_angles[atom_getlong(av)] = x->f_source_manager->getAngle(atom_getlong(av));
+            x->f_source_manager->sourceSetOrdinate(atom_getlong(av), atom_getfloat(av+1));
+            x->f_abscissa[atom_getlong(av)] = x->f_source_manager->getOrdinate(atom_getlong(av));
+            x->f_ordinates[atom_getlong(av)] = x->f_source_manager->getAbscissa(atom_getlong(av));
             x->f_existence[atom_getlong(av)] = x->f_source_manager->getSourceExistence(atom_getlong(av));
         }
     }
@@ -506,7 +520,7 @@ void hoamap_description(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 strcat(description, " ");
                 if(atom_getsym(av+1) == gensym("remove"))
                 {
-                    x->f_source_manager->setDescription(atom_getlong(av), "");
+                    x->f_source_manager->sourceSetDescription(atom_getlong(av), "");
                     x->f_descriptions[atom_getlong(av)] = NULL;
                     object_notify(x, _sym_modified, NULL);
                     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
@@ -532,7 +546,7 @@ void hoamap_description(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                     strcat(description, number);
                 }
             }
-            x->f_source_manager->setDescription(atom_getlong(av), description);
+            x->f_source_manager->sourceSetDescription(atom_getlong(av), description);
             x->f_descriptions[atom_getlong(av)] = gensym(description);
 
         }
@@ -542,17 +556,51 @@ void hoamap_description(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     jbox_redraw((t_jbox *)x);
 }
 
-void hoamap_remove(t_hoamap *x, long n)
+void hoamap_sourceRemove(t_hoamap *x, long n)
 {
     if(n >= 0 && n < MAX_SOURCES)
     {
-        x->f_source_manager->remove(n);
+        x->f_source_manager->sourceRemove(n);
         x->f_existence[n] = 0;
     }
     object_notify(x, _sym_modified, NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);
+}
+
+void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
+{
+    if(ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
+    {
+        if(atom_getsym(av+1) == gensym("set"))
+        {
+            x->f_source_manager->groupRemove(atom_getlong(av));
+            for(int i = 2; i < ac; i++)
+            {
+                x->f_source_manager->groupSetSource(atom_getlong(av), atom_getlong(av+i));
+            }
+        }
+        else if(atom_getsym(av+1) == gensym("remove"))
+            x->f_source_manager->groupRemove(atom_getlong(av));
+        else if(atom_getsym(av+1) == gensym("polar"))
+            x->f_source_manager->groupShiftPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+        else if(atom_getsym(av+1) == gensym("radius"))
+            x->f_source_manager->groupShiftRadius(atom_getlong(av), atom_getfloat(av+2));
+        else if(atom_getsym(av+1) == gensym("angle"))
+            x->f_source_manager->groupShiftAngle(atom_getlong(av), atom_getfloat(av+2));
+        else if(atom_getsym(av+1) == gensym("cartesian"))
+            x->f_source_manager->groupShiftCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
+        else if(atom_getsym(av+1) == gensym("abscissa"))
+            x->f_source_manager->groupShiftAbscissa(atom_getlong(av), atom_getfloat(av+2));
+        else if(atom_getsym(av+1) == gensym("ordinate"))
+            x->f_source_manager->groupShiftOrdinate(atom_getlong(av), atom_getfloat(av+2));
+                
+    }
+    object_notify(x, _sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+    jbox_redraw((t_jbox *)x);
+    hoamap_bang(x);    
 }
 
 /**********************************************************/
@@ -631,8 +679,17 @@ void hoamap_preset(t_hoamap *x)
     
     for(long i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        binbuf_vinsert(z, gensym("osslffsl")->s_name, x, object_classname(x), gensym("all"), i, x->f_source_manager->getRadius(i), x->f_source_manager->getAngle(i), gensym(x->f_source_manager->getDescription(i).c_str()), x->f_source_manager->getSourceExistence(i));
+        binbuf_vinsert(z, gensym("osslffsl")->s_name, x, object_classname(x), gensym("all"), i, x->f_source_manager->getAbscissa(i), x->f_source_manager->getOrdinate(i), gensym(x->f_source_manager->getDescription(i).c_str()), x->f_source_manager->getSourceExistence(i));
     }
+}
+
+t_max_err hoamap_pattr_select(t_hoamap *x, t_object *s, short ac, t_atom *av)
+{
+    if (ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) < MAX_SOURCES)
+    {
+        x->f_pattr_index = Tools::clip_min(atom_getlong(av), (long)-1);
+    }
+    return MAX_ERR_NONE;
 }
 
 t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av)
@@ -643,29 +700,37 @@ t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av)
             ac = MAX_SOURCES * 4;
         for (int i = 0; i < ac; i += 4)
         {
+            if(x->f_pattr_index != i/4)
+            {
             if(atom_gettype(av+i) == A_FLOAT && atom_gettype(av+i+1) == A_FLOAT)
             {
-                x->f_source_manager->setCoordinatesPolar(i/4, atom_getfloat(av+i), atom_getfloat(av+i+1));
-                x->f_radius[i/4] = atom_getfloat(av+i);
-                x->f_angles[i/4] = atom_getfloat(av+i+1);
+                x->f_source_manager->sourceSetCoordinatesCartesian(i/4, atom_getfloat(av+i), atom_getfloat(av+i+1));
+                x->f_abscissa[i/4] = atom_getfloat(av+i);
+                x->f_ordinates[i/4] = atom_getfloat(av+i+1);
             }
             if(atom_gettype(av+i+2) == A_SYM)
             {
-                x->f_source_manager->setDescription(i/4, atom_getsym(av+i+2)->s_name);
+                x->f_source_manager->sourceSetDescription(i/4, atom_getsym(av+i+2)->s_name);
                 x->f_descriptions[i/4] = atom_getsym(av+i+2);
             }
             if(atom_gettype(av+i+3) == A_LONG && atom_getlong(av+i+3) < 1)
             {
-                x->f_source_manager->remove(i/4);
+                x->f_source_manager->sourceRemove(i/4);
                 x->f_existence[i/4] = 0;
             }
             else if(atom_gettype(av+i+3) == A_FLOAT && atom_getfloat(av+i+3) < 1.)
             {
-                x->f_source_manager->remove(i/4);
+                x->f_source_manager->sourceRemove(i/4);
                 x->f_existence[i/4] = 0;
             }
             else
                 x->f_existence[i/4] = 1;
+            }
+            else
+            {
+                x->f_abscissa[i/4] = x->f_source_manager->getAbscissa(i / 4);
+                x->f_ordinates[i/4] = x->f_source_manager->getOrdinate(i / 4);
+            }
         }
         jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
         jbox_redraw((t_jbox *)x);
@@ -686,8 +751,8 @@ t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
             
             for (int i = 0; i < limit; i += 4)
             {
-                atom_setfloat(*av+i, x->f_source_manager->getRadius(i / 4));
-                atom_setfloat(*av+i+1, x->f_source_manager->getAngle(i / 4));
+                atom_setfloat(*av+i, x->f_source_manager->getAbscissa(i / 4));
+                atom_setfloat(*av+i+1, x->f_source_manager->getOrdinate(i / 4));
                 atom_setsym(*av+i+2, gensym(x->f_source_manager->getDescription(i / 4).c_str()));
                 atom_setlong(*av+i+3, x->f_source_manager->getSourceExistence(i / 4));
             }
@@ -700,8 +765,8 @@ t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
         }
         for (int i = 0; i < *ac; i += 4)
         {
-            atom_setfloat(*av+i, x->f_source_manager->getRadius(i / 4));
-            atom_setfloat(*av+i+1, x->f_source_manager->getAngle(i / 4));
+            atom_setfloat(*av+i, x->f_source_manager->getAbscissa(i / 4));
+            atom_setfloat(*av+i+1, x->f_source_manager->getOrdinate(i / 4));
             atom_setsym(*av+i+2, gensym(x->f_source_manager->getDescription(i / 4).c_str()));
             atom_setlong(*av+i+3, x->f_source_manager->getSourceExistence(i / 4));
         }
@@ -736,7 +801,7 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 		}
-        else if(name == gensym("bgcolor") )
+        else if(name == gensym("sourcecolor") )
         {
             jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
         }
@@ -771,39 +836,41 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
 	
 	if (g)
     {
-		t_jrgba outsideColor = {0,0,0,0.1};
-		
-		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		t_jrgba outsideColor = {1,1,1, 1};
+		t_jrgba insideColor = x->f_colorBackground;
+        insideColor.alpha = 0.2;
+		jgraphics_set_source_jrgba(g, &outsideColor);
 		jgraphics_rectangle_rounded(g, 0., 0., x->rect.width, x->rect.width, 6, 6);
 		jgraphics_fill(g);
         
-		jgraphics_set_source_jrgba(g, &outsideColor);
+		jgraphics_set_source_jrgba(g, &insideColor);
 		jgraphics_rectangle_rounded(g, 0., 0., x->rect.width, x->rect.width, 6, 6);
 		jgraphics_fill(g);
 		
         /* Circles */
-		for(int i = 5; i > 0; i--)
-		{
+        double radius  = x->f_zoom_factor * rect->width / 10.;
+        for(int i = 5; i > 0; i--)
+        {
             jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &outsideColor);
-            jgraphics_arc(g, rect->width / 2 + 0.5, rect->width / 2 + 0.5, (double)i * x->f_zoom_factor * rect->width / 10.,  0., JGRAPHICS_2PI);
+            jgraphics_set_source_jrgba(g, &insideColor);
+            jgraphics_arc(g, rect->width / 2 + 0.5, rect->width / 2 + 0.5, (double)i * radius,  0., JGRAPHICS_2PI);
             jgraphics_stroke(g);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-
-            jgraphics_arc(g, rect->width / 2, rect->width / 2, (double)i * x->f_zoom_factor * rect->width / 10.,  0., JGRAPHICS_2PI);
-            jgraphics_stroke(g);
-		}
-
         
-        jgraphics_set_source_jrgba(g, &outsideColor);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &outsideColor);
+            jgraphics_arc(g, rect->width / 2, rect->width / 2, (double)i * radius,  0., JGRAPHICS_2PI);
+            jgraphics_stroke(g);
+        }
+    
+        /* Lines ¨*/
+        jgraphics_set_source_jrgba(g, &insideColor);
         jgraphics_move_to(g, 0. - 0.5, rect->width / 2. - 0.5);
         jgraphics_line_to(g, rect->width - 0.5, rect->width / 2. - 0.5);
         jgraphics_move_to(g, rect->width / 2. - 0.5, 0. - 0.5);
         jgraphics_line_to(g, rect->width / 2. - 0.5, rect->width - 0.5);
         jgraphics_set_line_width(g, 2);
         jgraphics_stroke(g);
-        jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+        jgraphics_set_source_jrgba(g, &outsideColor);
         jgraphics_move_to(g, 0., rect->width / 2.);
         jgraphics_line_to(g, rect->width, rect->width / 2.);
         jgraphics_move_to(g, rect->width / 2., 0.);
@@ -811,9 +878,14 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
         jgraphics_set_line_width(g, 1);
         jgraphics_stroke(g);
 
-		for(double i = x->f_zoom_factor * rect->width / 2.; i < rect->width / 2.; i += x->f_zoom_factor * rect->width / 2.)
+        double ecart = x->f_zoom_factor * rect->width / 2.;
+        if(ecart < 10 && ecart >= 5)
+            ecart *= 2;
+        else if(ecart < 5)
+            ecart *= 4;
+		for(double i = ecart; i < rect->width / 2.; i += ecart)
         {
-            jgraphics_set_source_jrgba(g, &outsideColor);
+            jgraphics_set_source_jrgba(g, &insideColor);
             jgraphics_move_to(g, 0. - 0.5, rect->width / 2. - i - 0.5);
             jgraphics_line_to(g, rect->width - 0.5, rect->width / 2. - i - 0.5);
             jgraphics_move_to(g, 0. - 0.5, rect->width / 2. + i - 0.5);
@@ -825,7 +897,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
             jgraphics_set_line_width(g, 2);
             jgraphics_stroke(g);
             
-            jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+            jgraphics_set_source_jrgba(g, &outsideColor);
             jgraphics_move_to(g, 0., rect->width / 2. - i);
             jgraphics_line_to(g, rect->width, rect->width / 2. - i);
             jgraphics_move_to(g, 0., rect->width / 2. + i);
@@ -857,6 +929,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 	int ombreX;
 	int ombreY;
 	t_jrgba ombre = {0,0,0,0.3};
+    t_jrgba selected_color = {0,0,1,0.2};
 	char description[250];
 	double descriptionPositionX;
     double descriptionPositionY;
@@ -928,12 +1001,13 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_arc(g, sourcePositionShadowX, sourcePositionShadowY, x->f_size_source * 1.0,  0., JGRAPHICS_2PI);
                     jgraphics_stroke(g);
                 }
-			/*
-			if (x->f_sources[i].selected == 1) {
-				jgraphics_set_source_jrgba(g, &selected_color);
-				jgraphics_arc(g, sourcePos.x + ombreX*0.5, sourcePos.y + ombreX*0.5, size*1.5,  0., JGRAPHICS_2PI);
-				jgraphics_fill(g);
-			}*/
+			
+                if (x->f_index_of_selected_source == i)
+                {
+                    jgraphics_set_source_jrgba(g, &selected_color);
+                    jgraphics_arc(g, sourcePositionShadowX + ombreX * 0.5, sourcePositionShadowY + ombreX * 0.5, x->f_size_source * 1.5,  0., JGRAPHICS_2PI);
+                    jgraphics_fill(g);
+                }
 			// source
                 jgraphics_set_source_jrgba(g, &sourceColor);
                 if (rect->width <= 400)
@@ -1021,6 +1095,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             x->f_index_of_selected_source = i;
         }
     }
+    post("%ld", modifiers);
     if(x->f_show_add_source)
     {
         if(x->f_index_of_source_to_remove == -1)
@@ -1033,7 +1108,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
         else
         {
-            x->f_source_manager->remove(x->f_index_of_source_to_remove);
+            x->f_source_manager->sourceRemove(x->f_index_of_source_to_remove);
             x->f_index_of_source_to_remove = -1;
             x->f_index_of_selected_source = -1;
         }
@@ -1051,11 +1126,11 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	if (x->f_index_of_selected_source != -1)
     {
         if(modifiers == 148 || modifiers == 404)
-            x->f_source_manager->setAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y));
+            x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
         else if(modifiers == 18 || modifiers == 274)
-            x->f_source_manager->setRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
+            x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
         else
-            x->f_source_manager->setCoordinatesCartesian(x->f_index_of_selected_source, cursor.x, cursor.y);
+            x->f_source_manager->sourceSetCoordinatesCartesian(x->f_index_of_selected_source, cursor.x, cursor.y);
     }
     x->f_show_add_source = 0;
     object_notify(x, _sym_modified, NULL);
@@ -1064,26 +1139,36 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     hoamap_bang(x);
 }
 
+void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    x->f_index_of_selected_source = -1;
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+    jbox_redraw((t_jbox *)x);
+}
 void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
+    double time;
+    scheduler_gettime(x->f_clock, &time);
+    x->f_time = time;
     x->f_mouse_position = pt;
     x->f_show_add_source = 0;
-    x->f_counter = 0;
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("add_source_layer"));
+    jbox_redraw((t_jbox *)x);
+    
 }
+
 void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
+    double time;
+    scheduler_gettime(x->f_clock, &time);
     if(Tools::distance_euclidean(x->f_mouse_position.x, x->f_mouse_position.y, pt.x, pt.y) > x->f_size_source * 0.2)
     {
-        x->f_counter = 0;
         x->f_show_add_source = 0;
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("add_source_layer"));
-        jbox_redraw((t_jbox *)x);
+        x->f_time = time;
     }
-    else
-        x->f_counter++;
- 
+
     x->f_mouse_position = pt;
-    if(x->f_counter >= 10)
+    if(time - x->f_time >= 1000)
     {
         coordinatesCartesian cursor;
         cursor.x = ((x->f_mouse_position.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
@@ -1099,14 +1184,18 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 x->f_index_of_source_to_remove = i;
             }
         }
-        
         x->f_show_add_source = 1;
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("add_source_layer"));
-        jbox_redraw((t_jbox *)x);
-    }   
+    }
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("add_source_layer"));
+    jbox_redraw((t_jbox *)x);
 }
+
 void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    x->f_counter = 0;
+    double time;
+    scheduler_gettime(x->f_clock, &time);
+    x->f_time = time;
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("add_source_layer"));
+    jbox_redraw((t_jbox *)x);
 }
 

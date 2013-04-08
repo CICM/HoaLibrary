@@ -8,7 +8,7 @@
  */
 
 
-#include "gslMatrix.hpp"
+#include "gslMatrix.h"
 
 
 gsl_matrix* GenericSvdPseudoInverse(gsl_matrix* A)

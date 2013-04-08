@@ -37,18 +37,32 @@ private:
 public:
 	SourcesManager();
     
-    void remove(long anIndex);
-    void setCoordinatesPolar(long anIndex, coordinatesPolar polarCoordinates);
-	void setCoordinatesPolar(long anIndex, double aRadius, double anAngle);
-	void setRadius(long anIndex, double aRadius);
-    void setAngle(long anIndex, double anAngle);
-    void setCoordinatesCartesian(long anIndex, coordinatesCartesian cartesianCoordinates);
-    void setCoordinatesCartesian(long anIndex, double anAbscissa, double anOrdinate);
-	void setAbscissa(long anIndex, double anAbscissa);
-	void setOrdinate(long anIndex, double anOrdinate);
-    void setColor(long anIndex, color aColor);
-	void setDescription(long anIndex, std::string aDescription);
+    void sourceSetCoordinatesPolar(long anIndex, coordinatesPolar polarCoordinates);
+	void sourceSetCoordinatesPolar(long anIndex, double aRadius, double anAngle);
+	void sourceSetRadius(long anIndex, double aRadius);
+    void sourceSetAngle(long anIndex, double anAngle);
+    void sourceSetCoordinatesCartesian(long anIndex, coordinatesCartesian cartesianCoordinates);
+    void sourceSetCoordinatesCartesian(long anIndex, double anAbscissa, double anOrdinate);
+	void sourceSetAbscissa(long anIndex, double anAbscissa);
+	void sourceSetOrdinate(long anIndex, double anOrdinate);
+    void sourceSetColor(long anIndex, color aColor);
+	void sourceSetDescription(long anIndex, std::string aDescription);
+    void sourceRemove(long anIndex);
 	
+    void groupSetSource(long aGroupIndex, long aSourceIndex);
+    void groupRemoveSource(long aGroupIndex, long aSourceIndex);
+    void groupShiftPolar(long aGroupIndex, coordinatesPolar polarCoordinates);
+	void groupShiftPolar(long aGroupIndex, double aRadius, double anAngle);
+    void groupShiftRadius(long aGroupIndex, double aRadius);
+    void groupShiftAngle(long aGroupIndex, double anAngle);
+    void groupShiftCartesian(long aGroupIndex, coordinatesCartesian cartesianCoordinates);
+    void groupShiftCartesian(long aGroupIndex, double anAbscissa, double anOrdinate);
+    void groupShiftAbscissa(long aGroupIndex, double anAbscissa);
+    void groupShiftOrdinate(long aGroupIndex, double anOrdinate);
+    void groupSetColor(long aGroupIndex, color aColor);
+    void groupSetDescription(long aGroupIndex, std::string aDescription);
+    void groupRemove(long aGroupIndex);
+    
     long getMaximumIndexOfSource();
     long getNumberOfSources();
     long getSourceExistence(long anIndex);

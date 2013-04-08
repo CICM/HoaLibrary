@@ -27,6 +27,7 @@
 #include <string>
 #include <gsl/gsl_sf.h>
 #include "cicmTools.h"
+#include "AmbisonicLine.h"
 
 class AmbisonicEase
 {
@@ -38,17 +39,18 @@ private:
 	long	m_vector_size;
 	long*	m_index_of_harmonics;
 
-    double      m_weight;
 	double      m_widen_value;
 	double      m_order_weight;
 	double*     m_minus_vector;
 	double*     m_dot_vector;
     double*     m_widen_vector;
     double*		m_ambiCoeffs;
-    double*		m_optimVector;
+
 	double		m_cosLookUp[NUMBEROFCIRCLEPOINTS];
 	double		m_sinLookUp[NUMBEROFCIRCLEPOINTS];
     
+    AmbisonicLine* m_lineAbscissa;
+    AmbisonicLine* m_lineOrdinate;
 	void computeVectors();
     void setWidenValue(double aWidenValue);
     void setAzimtuh(double anAngle);
@@ -57,8 +59,8 @@ public:
     
     void setPolarCoordinates(double aRadius, double anAzimuth);
     void setCartesianCoordinates(double anAbscissa, double anOrdinate);
+    void setCartesianCoordinatesLine(double anAbscissa, double anOrdinate);
     void setVectorSize(long aVectorSize);
-    
     
 	long getOrder();
 	long getNumberOfHarmonics();
@@ -71,6 +73,7 @@ public:
 	/* Perform sample by sample */
 	template<typename Type> void process(Type aInputs, Type* aOutputs)
 	{
+        setCartesianCoordinates(m_lineAbscissa->process(), m_lineOrdinate->process());
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			aOutputs[i] += aInputs * m_ambiCoeffs[i];
 	}
@@ -78,12 +81,13 @@ public:
 	/* Perform block sample */
 	template<typename Type> void process(Type* aInputs, Type** aOutputs)
 	{
-        Type* outputs;
-		for(int i = 0; i < m_number_of_harmonics; i++)
+		for(int i = 0; i < m_vector_size; i++)
 		{
-            outputs = aOutputs[i];
-			for(int j = 0; j < m_vector_size; j++)
-                outputs[j] += aInputs[j] * m_ambiCoeffs[i];
+            setCartesianCoordinates(m_lineAbscissa->process(), m_lineOrdinate->process());
+			for(int j = 0; j < m_number_of_harmonics; j++)
+            {
+                aOutputs[j][i] += aInputs[i] * m_ambiCoeffs[j];
+            }
 		}
 	}
 

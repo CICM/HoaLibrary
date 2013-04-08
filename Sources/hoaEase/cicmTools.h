@@ -117,11 +117,6 @@ public:
 	{
 		return atan2(y, x);
 	}
-    
-	template<typename Type> static Type angle_inverse(Type x, Type y)
-	{
-		return atan2(x, y);
-	}
 
 	template<typename Type> static Type ordinate(Type radius, Type angle)
 	{

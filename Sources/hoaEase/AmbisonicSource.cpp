@@ -63,8 +63,6 @@ void Source::setCoordinatesPolar(double aRadius, double anAngle)
 void Source::setRadius(double aRadius)
 {
     m_coordinate_polar.radius = Tools::clip_min(aRadius, 0.);
-    m_coordinate_cartesian.x = Tools::abscisse(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
-    m_coordinate_cartesian.y = Tools::ordinate(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
 }
 
 void Source::setAngle(double anAngle)
@@ -74,32 +72,32 @@ void Source::setAngle(double anAngle)
     while (anAngle < 0.)
         anAngle += CICM_2PI;
     m_coordinate_polar.angle = anAngle;
-    m_coordinate_cartesian.x = Tools::abscisse(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
-    m_coordinate_cartesian.y = Tools::ordinate(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
 }
 
 void Source::setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates)
 {
     setRadius(Tools::radius(cartesianCoordinates.x, cartesianCoordinates.y));
-    setAngle(-Tools::angle(cartesianCoordinates.x, cartesianCoordinates.y) + CICM_PI2);
+    setAngle(Tools::angle(cartesianCoordinates.x, cartesianCoordinates.y) - CICM_PI2);
 }
 
 void Source::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
 {
     setRadius(Tools::radius(anAbscissa, anOrdinate));
-    setAngle(-Tools::angle(anAbscissa, anOrdinate) + CICM_PI2);
+    setAngle(Tools::angle(anAbscissa, anOrdinate) - CICM_PI2);
 }
 
 void Source::setAbscissa(double anAbscissa)
 {
-    setRadius(Tools::radius(anAbscissa, m_coordinate_cartesian.y));
-    setAngle(-Tools::angle(anAbscissa, m_coordinate_cartesian.y) + CICM_PI2);
+    double ordinate = getOrdinate();
+    setRadius(Tools::radius(anAbscissa, ordinate));
+    setAngle(Tools::angle(anAbscissa, ordinate) - CICM_PI2);
 }
 
 void Source::setOrdinate(double anOrdinate)
 {
-    setRadius(Tools::radius(m_coordinate_cartesian.x, anOrdinate));
-    setAngle(-Tools::angle(m_coordinate_cartesian.x, anOrdinate) + CICM_PI2);
+    double abscissa = getAbscissa();
+    setRadius(Tools::radius(abscissa, anOrdinate));
+    setAngle(Tools::angle(abscissa, anOrdinate) - CICM_PI2);
 }
 
 void Source::setColor(color aColor)
@@ -132,17 +130,20 @@ double Source::getAngle()
 
 coordinatesCartesian Source::getCoordinatesCartesian()
 {
-    return m_coordinate_cartesian;
+    coordinatesCartesian cartesianCoordiantes;
+    cartesianCoordiantes.x = getAbscissa();
+    cartesianCoordiantes.y = getOrdinate();
+    return cartesianCoordiantes;
 }
 
 double Source::getAbscissa()
 {
-    return m_coordinate_cartesian.x;
+    return Tools::abscisse(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
 }
 
 double Source::getOrdinate()
 {
-    return m_coordinate_cartesian.y;
+    return Tools::ordinate(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
 }
 
 color Source::getColor()
