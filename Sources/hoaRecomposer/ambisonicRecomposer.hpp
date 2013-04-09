@@ -17,7 +17,7 @@
  *
  */
 
-#ifndef define DEF_AMBISONICRECOMPOSER
+#ifndef DEF_AMBISONICRECOMPOSER
 #define DEF_AMBISONICRECOMPOSER
 
 #define M_2PI 2*M_PI
@@ -27,8 +27,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
-#include "gslMatrix.hpp"
-#include <gsl/gsl_sf.h>
+//#include "gslMatrix.hpp"
+//#include <gsl/gsl_sf.h>
 #include <vector>
 #include <string>
 

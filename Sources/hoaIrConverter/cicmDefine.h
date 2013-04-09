@@ -17,10 +17,10 @@
  *
  */
 
-#define CICM_FFTW_GSL
+//#define CICM_FFTW_GSL
 #define CICM_FLOAT
 
-//#define CICM_VDSP
+#define CICM_VDSP
 //#define CICM_FFTW_GSL
 //#define CICM_IPPS
 //#define CICM_FLOAT

@@ -259,20 +259,25 @@ t_max_err HoaSpace_notify(t_HoaSpace *x, t_symbol *s, t_symbol *msg, void *sende
                 object_attr_getvalueof(sender, attrname, &ac, &av);
                 if (ac && av)
                 {
-                
-                    if(atom_getlong(av+2) > atom_getlong(av+3))
-                        atom_setlong(av+3, atom_getlong(av+2));
-                    else if(atom_getlong(av+2) < atom_getlong(av+3))
-                        atom_setlong(av+2, atom_getlong(av+3));
-                    
+                    long size;
+                    if(atom_getlong(av+2) < atom_getlong(av+3))
+                        size = atom_getlong(av+2);
+                    else
+                        size = atom_getlong(av+3);
+
                     t_atom  rv[4];
                     long    rc = 4;
                     atom_setlong(rv, 0.);
                     atom_setlong(rv+1, 0.);
-                    atom_setlong(rv+2, atom_getlong(av+2));
-                    atom_setlong(rv+3, atom_getlong(av+3));
-                    //object_attr_setvalueof(x->f_patcherview, gensym("rect"), ac, av);
-                    object_attr_setvalueof(x->f_ui, gensym("patching_rect"), rc, rv);
+                    atom_setlong(rv+2, size);
+                    atom_setlong(rv+3, size);
+                    if(atom_getlong(av+2) != size || atom_getlong(av+3) != size)
+                    {
+                        atom_setlong(av+2, size);
+                        atom_setlong(av+3, size);
+                        //object_attr_setvalueof(x->f_patcher, gensym("rect"), ac, av);
+                        object_attr_setvalueof(x->f_ui, gensym("patching_rect"), rc, rv);
+                    }
                 
                     freebytes(av, sizeof(t_atom) * ac);
                 }

@@ -20,7 +20,6 @@
 #ifndef DEF_CICM_TOOLS
 #define DEF_CICM_TOOLS
 
-#include "cicmDefine.h"
 #include <iostream>
 #include <vector>
 #include <stdio.h>
@@ -32,6 +31,7 @@ using namespace std;
 #define CICM_PI 3.141592653589793238462643383279502884
 #define CICM_2PI CICM_PI * 2.
 #define CICM_PI2 CICM_PI / 2.
+#define CICM_PI4 CICM_PI / 4.
 
 #define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
 

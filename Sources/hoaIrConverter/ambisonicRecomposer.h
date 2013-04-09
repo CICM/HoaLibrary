@@ -20,15 +20,14 @@
 #ifndef DEF_AMBISONICRECOMPOSER
 #define DEF_AMBISONICRECOMPOSER
 
-#define CICM_PI 3.141592653589793238462643383279502884
-#define M_2PI 2*CICM_PI
+#define M_2PI 2*M_PI
 #define NUMBEROFCIRCLEPOINTS 36000
 #define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
 
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
-#include "gslMatrix.hpp"
+#include "gslMatrix.h"
 #include <gsl/gsl_sf.h>
 #include <vector>
 #include <string>
@@ -60,8 +59,7 @@ public:
 	void computeIndex();
 	void computeAngles();
 	void setVectorSize(int aVectorSize);
-	void setAngles(double* anAnglesVector);
-	void setAngles(float* anAnglesVector);
+	void setFishEyeFactor(double aFishEyeFactor);
 	void computeMicMatrix(gsl_matrix* resMatrix, double aFishFactor);
 	void computeMicMatrixSet();
 	

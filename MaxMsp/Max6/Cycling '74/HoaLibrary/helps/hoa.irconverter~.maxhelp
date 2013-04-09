@@ -1336,7 +1336,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 973.0, 524.0 ],
+						"rect" : [ 100.0, 126.0, 973.0, 524.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1358,6 +1358,34 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-14",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 486.0, 469.0, 33.0, 18.0 ],
+									"text" : "stop"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-11",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 412.0, 446.0, 74.0, 18.0 ],
+									"text" : "startwindow"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -1670,7 +1698,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 120.0, 146.0, 218.0, 87.0 ],
+										"rect" : [ 220.0, 246.0, 218.0, 87.0 ],
 										"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 1,
@@ -2154,7 +2182,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 124.0, 168.0, 175.0, 67.0 ],
+														"rect" : [ 224.0, 268.0, 175.0, 67.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -2920,7 +2948,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 124.0, 168.0, 179.0, 66.0 ],
+														"rect" : [ 224.0, 268.0, 179.0, 66.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -3130,7 +3158,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 124.0, 168.0, 178.0, 65.0 ],
+														"rect" : [ 224.0, 268.0, 178.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -3824,7 +3852,7 @@
 															"revision" : 8
 														}
 ,
-														"rect" : [ 124.0, 168.0, 179.0, 65.0 ],
+														"rect" : [ 224.0, 268.0, 179.0, 65.0 ],
 														"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 														"bglocked" : 0,
 														"openinpresentation" : 1,
@@ -5290,10 +5318,28 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-41", 7 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-11", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-8", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-13", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-41", 7 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-14", 0 ]
 								}
 
 							}
@@ -6026,7 +6072,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 493.5, 387.0, 205.25, 31.0 ],
-									"text" : "angles 22 64 276 358 194 312 55 282"
+									"text" : "angles 25 276 65 198 358 62 311 339"
 								}
 
 							}
@@ -6594,7 +6640,7 @@
 									"outlettype" : [ "bang" ],
 									"patching_rect" : [ 406.25, 446.0, 114.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 22.0, 64.0, 276.0, 358.0, 194.0, 312.0, 55.0, 282.0 ],
+										"angles" : [ 25.0, 276.0, 65.0, 198.0, 358.0, 62.0, 311.0, 339.0 ],
 										"buffers" : [ "hoaIr1D.1", "hoaIr1D.2", "hoaIr1D.3", "hoaIr1D.4", "hoaIr1D.5", "hoaIr1D.6", "hoaIr1D.7", "hoaIr1D.8" ],
 										"channels" : [ 1, 1, 1, 1, 1, 1, 1, 1 ]
 									}
@@ -7864,7 +7910,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 100.0, 126.0, 973.0, 524.0 ],
+						"rect" : [ 0.0, 26.0, 973.0, 524.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -8398,7 +8444,7 @@
 									"patching_rect" : [ 223.0, 440.0, 114.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 0.0, 0.0, 0.0 ],
-										"buffers" : [ "", "", "", "" ],
+										"buffers" : [ "none", "none", "none", "none" ],
 										"channels" : [ 0, 0, 0, 0 ]
 									}
 ,
@@ -8660,7 +8706,7 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1

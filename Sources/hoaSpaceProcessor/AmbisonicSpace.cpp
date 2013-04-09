@@ -55,12 +55,7 @@ long AmbisonicSpace::getNumberOfOutputs()
 
 long AmbisonicSpace::getVectorSize()
 {
-	return m_vector_size;
-    for(int i = 0; i < m_number_of_microphones; i++)
-    {
-        m_microphones_coefficients_step[i] = (m_microphones_coefficients_old[i] - m_microphones_coefficients_new[i]) / (double)m_vector_size;
-    }
-    
+	return m_vector_size;   
 }
 
 double AmbisonicSpace::getCoefficient(long anIndex)
@@ -76,8 +71,9 @@ void AmbisonicSpace::setCoefficient(long anIndex, double aCoefficient)
     if(anIndex >= 0 && anIndex < m_number_of_microphones)
     {
         m_microphones_coefficients_new[anIndex] = aCoefficient;
-        m_microphones_coefficients_step[anIndex] = (m_microphones_coefficients_old[anIndex] - m_microphones_coefficients_new[anIndex]) / (double)4100.;
+        m_microphones_coefficients_step[anIndex] = (m_microphones_coefficients_new[anIndex] - m_microphones_coefficients_old[anIndex]) / (double)RAMP_SAMPLE;
     }
+    m_counter = 0;
 }
 
 void AmbisonicSpace::setCoefficient(double* aCoefficientVector)
@@ -85,8 +81,9 @@ void AmbisonicSpace::setCoefficient(double* aCoefficientVector)
     for(int i = 0; i < m_number_of_microphones; i++)
     {
         m_microphones_coefficients_new[i] = aCoefficientVector[i];
-        m_microphones_coefficients_step[i] =(m_microphones_coefficients_old[i] - m_microphones_coefficients_new[i]) / (double)4100.;
+        m_microphones_coefficients_step[i] =(m_microphones_coefficients_new[i] - m_microphones_coefficients_old[i]) / (double)RAMP_SAMPLE;
     }
+    m_counter = 0;
 }
 
 void AmbisonicSpace::setCoefficient(float* aCoefficientVector)
@@ -94,8 +91,9 @@ void AmbisonicSpace::setCoefficient(float* aCoefficientVector)
     for(int i = 0; i < m_number_of_microphones; i++)
     {
         m_microphones_coefficients_new[i] = aCoefficientVector[i];
-        m_microphones_coefficients_step[i] = (m_microphones_coefficients_old[i] - m_microphones_coefficients_new[i]) / (double)4100.;
+        m_microphones_coefficients_step[i] = (m_microphones_coefficients_new[i] - m_microphones_coefficients_old[i]) / (double)RAMP_SAMPLE;
     }
+    m_counter = 0;
 }
 
 void AmbisonicSpace::setVectorSize(long aVectorSize)

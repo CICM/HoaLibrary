@@ -20,6 +20,7 @@
 
 SourcesGroup::SourcesGroup(std::string aDescription)
 {
+    m_exist = 1;
     setDescription(aDescription);
 }
 
@@ -30,14 +31,33 @@ void SourcesGroup::setDescription(std::string aDescription)
 
 void SourcesGroup::addSource(Source* aSource)
 {
-    m_sources.push_back(aSource);
+    if(m_sources.size() == 0)
+        m_sources.push_back(aSource);
+    else
+    {
+        for(int i = 0; i < m_sources.size(); i++)
+        {
+            if(m_sources[i] == aSource)
+                return;
+        }
+        for(int i = 0; i < m_sources.size(); i++)
+        {
+            if(m_sources[i] == NULL);
+            {
+                m_sources.push_back(aSource);
+                return;
+            }
+        }
+    }
 }
 
 void SourcesGroup::removeSource(Source* aSource)
 {
+    if(aSource == NULL)
+        return;
     for(int i = 0; i < m_sources.size(); i++)
     {
-        if(m_sources[i] == aSource);
+        if(m_sources[i] == aSource)
             m_sources[i] = NULL;
     }
 }
@@ -57,7 +77,8 @@ void SourcesGroup::shiftRadius(double aRadius)
 {
     for(int i = 0; i < m_sources.size(); i++)
     {
-        m_sources[i]->setRadius(aRadius + m_sources[i]->getRadius());
+        if(m_sources[i] != NULL)
+            m_sources[i]->setRadius(aRadius + m_sources[i]->getRadius());
     }
 }
 
@@ -65,7 +86,8 @@ void SourcesGroup::shiftAngle(double anAngle)
 {
     for(int i = 0; i < m_sources.size(); i++)
     {
-        m_sources[i]->setAngle(anAngle + m_sources[i]->getAngle());
+        if(m_sources[i] != NULL)
+            m_sources[i]->setAngle(anAngle + m_sources[i]->getAngle());
     }
 }
 
@@ -84,7 +106,8 @@ void SourcesGroup::shiftAbscissa(double anAbscissa)
 {
     for(int i = 0; i < m_sources.size(); i++)
     {
-        m_sources[i]->setAbscissa(anAbscissa + m_sources[i]->getAbscissa());
+        if(m_sources[i] != NULL)
+            m_sources[i]->setAbscissa(anAbscissa + m_sources[i]->getAbscissa());
     }
 }
 
@@ -92,7 +115,8 @@ void SourcesGroup::shiftOrdinate(double anOrdinate)
 {
     for(int i = 0; i < m_sources.size(); i++)
     {
-        m_sources[i]->setOrdinate(anOrdinate + m_sources[i]->getOrdinate());
+        if(m_sources[i] != NULL)
+            m_sources[i]->setOrdinate(anOrdinate + m_sources[i]->getOrdinate());
     }
 }
 

@@ -24,13 +24,10 @@
 
 #include "cicmTools.h"
 
-
 class Source
 {
-	
 private:
 	coordinatesPolar        m_coordinate_polar;
-    coordinatesCartesian    m_coordinate_cartesian;
 	color                   m_color;
     std::string             m_description;
     long                    m_exist;

@@ -21,6 +21,7 @@
 #define DEF_AMBISONICSPACE
 
 #include "cicmTools.h"
+#define RAMP_SAMPLE 4410
 
 class AmbisonicSpace{
 	
@@ -54,10 +55,10 @@ public:
 	{
 		for (int i = 0; i < m_number_of_microphones; i++)
 		{
-			anOutput[i]	= anInput[i] * m_microphones_coefficients_old[i];
             m_microphones_coefficients_old[i] += m_microphones_coefficients_step[i];
+			anOutput[i]	= anInput[i] * m_microphones_coefficients_old[i];
 		}
-        if(m_counter++ == m_vector_size)
+        if(m_counter++ >= RAMP_SAMPLE)
         {
             for (int i = 0; i < m_number_of_microphones; i++)
             {
@@ -71,19 +72,22 @@ public:
 	/* Perform sample block */	
 	template<typename Type> void process(Type** anInputVector, Type** anOutputVector)
 	{
-        Type* anInput;
-        Type* anOutput;
-		for (int i = 0; i < m_number_of_microphones; i++)
+        for(int j = 0; j < m_vector_size; j++)
 		{
-            anInput = anInputVector[i];
-            anOutput= anOutputVector[i];
-			for(int j = 0; j < m_vector_size; j++)
+            for (int i = 0; i < m_number_of_microphones; i++)
             {
-                anOutput[j]	= anInput[j] * m_microphones_coefficients_old[i];
                 m_microphones_coefficients_old[i] += m_microphones_coefficients_step[i];
+                anOutputVector[i][j]	= anInputVector[i][j] * m_microphones_coefficients_old[i];
             }
-            m_microphones_coefficients_step[i] = 0.;
-            m_microphones_coefficients_old[i] = m_microphones_coefficients_new[i];
+            if(m_counter++ >= RAMP_SAMPLE)
+            {
+                for (int i = 0; i < m_number_of_microphones; i++)
+                {
+                    m_microphones_coefficients_step[i] = 0.;
+                    m_microphones_coefficients_old[i] = m_microphones_coefficients_new[i];
+                }
+                m_counter = 0;
+            }
 		}
 	}
 	

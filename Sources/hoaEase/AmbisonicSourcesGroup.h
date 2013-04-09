@@ -30,10 +30,11 @@ class SourcesGroup
 {
 	
 private:
-    std::vector <Source*> m_sources;
-    std::string m_description;
+    std::vector <Source*>   m_sources;
+    std::string             m_description;
+    long                    m_exist;
 public:
-	SourcesGroup(std::string aDescription = NULL);
+	SourcesGroup(std::string aDescription = "");
     
     void setDescription(std::string aDescription);
     void addSource(Source* aSource);

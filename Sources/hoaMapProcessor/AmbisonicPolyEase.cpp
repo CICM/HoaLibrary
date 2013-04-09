@@ -28,8 +28,10 @@ AmbisonicPolyEase::AmbisonicPolyEase(long anOrder, long aNumberOfSources, long a
     m_number_of_inputs		= m_number_of_sources;
     
     for(int i = 0; i < m_number_of_sources; i++)
+    {
         m_eases.push_back(new AmbisonicEase(m_order));
-    
+        m_mute.push_back(1);
+    }
     setVectorSize(aVectorSize);    
     for(int i = 0; i < m_number_of_sources; i++)
        setPolarCoordinates(i, 1., 0.);
@@ -76,6 +78,15 @@ float AmbisonicPolyEase::getAzimuth(long aSourceIndex)
     return m_azimuth[aSourceIndex];
 }
 
+long AmbisonicPolyEase::getMuted(long aSourceIndex)
+{
+    if(aSourceIndex >= 0 && aSourceIndex < m_number_of_sources)
+    {
+        return m_mute[aSourceIndex];
+    }
+    return 1;
+}
+
 void AmbisonicPolyEase::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
@@ -87,7 +98,11 @@ void AmbisonicPolyEase::setPolarCoordinates(long aSourceIndex, double aRadius, d
 {
     if(aSourceIndex >= 0 && aSourceIndex < m_number_of_sources)
     {
-        m_eases[aSourceIndex]->setPolarCoordinates(aRadius, anAzimuth);
+        double abs = Tools::abscisse(aRadius, anAzimuth + CICM_PI2);
+        double ord = Tools::ordinate(aRadius, anAzimuth + CICM_PI2);
+        m_eases[aSourceIndex]->setCartesianCoordinatesLine(abs, ord);
+        if(m_mute[aSourceIndex])
+            m_mute[aSourceIndex] = 0;
     }
 }
 
@@ -95,7 +110,17 @@ void AmbisonicPolyEase::setCartesianCoordinates(long aSourceIndex, double anAbsc
 {
     if(aSourceIndex >= 0 && aSourceIndex < m_number_of_sources)
     {
-        m_eases[aSourceIndex]->setCartesianCoordinates(anAbscissa, anOrdinate);
+        m_eases[aSourceIndex]->setCartesianCoordinatesLine(anAbscissa, anOrdinate);
+        if(m_mute[aSourceIndex])
+            m_mute[aSourceIndex] = 0;
+    }
+}
+
+void AmbisonicPolyEase::setMuted(long aSourceIndex)
+{
+    if(aSourceIndex >= 0 && aSourceIndex < m_number_of_sources)
+    {
+            m_mute[aSourceIndex] = 1;
     }
 }
 
@@ -108,6 +133,7 @@ void AmbisonicPolyEase::setNumberOfSources(long aNumberOfSources)
         {
             m_eases.push_back(new AmbisonicEase(m_order));
             setPolarCoordinates(i, 1, 0);
+            m_mute.push_back(1);
         }
         m_number_of_sources = aNumberOfSources;
     }
@@ -116,6 +142,7 @@ void AmbisonicPolyEase::setNumberOfSources(long aNumberOfSources)
         for(int i = m_number_of_sources; i < aNumberOfSources; i++)
         {
             m_eases.pop_back();
+            m_mute.pop_back();
         }
         m_number_of_sources = aNumberOfSources;
     }
@@ -128,6 +155,7 @@ AmbisonicPolyEase::~AmbisonicPolyEase()
 	{
         delete m_eases[i];
         m_eases[i] = 0;
+        m_mute.pop_back();
 	}
 }
 

@@ -22,13 +22,13 @@
 
 #include "cicmTools.h"
 #include "AmbisonicEase.h"
-
+#include "AmbisonicLine.h"
 class AmbisonicPolyEase
 {
 	
 private:
     vector <AmbisonicEase*> m_eases;
-    
+    vector <long>           m_mute;
     long    m_number_of_sources;
 	long	m_order;
 	long	m_number_of_harmonics;
@@ -50,12 +50,14 @@ public:
     long getNumberOfSources();
     float getRadius(long aSourceIndex);
     float getAzimuth(long aSourceIndex);
+    long getMuted(long aSourceIndex);
     
     void setNumberOfLoudspeakers(long aNumberOfLoudspeakers);
     void setNumberOfSources(long aNumberOfSources);
 	void setVectorSize(long aVectorSize);
     void setCartesianCoordinates(long aSourceIndex, double anAbscissa, double anOrdinate);
     void setPolarCoordinates(long aSourceIndex, double aRadius, double anAzimuth);
+    void setMuted(long aSourceIndex);
     
 	~AmbisonicPolyEase();
 	
@@ -65,8 +67,13 @@ public:
         for(int i = 0; i < m_number_of_harmonics; i++)
             aOutputs[i] = 0.;
 		for(int i = 0; i < m_number_of_sources; i++)
-            m_eases[i]->process(aInputs[i], aOutputs);
-	}
+        {
+            if(!m_mute[i])
+            {
+                m_eases[i]->process(aInputs[i], aOutputs);
+            }
+        }
+    }
 	
 	/* Perform block sample */
 	template<typename Type> void process(Type** aInputs, Type** aOutputs)
@@ -80,7 +87,12 @@ public:
         }
         
 		for(int i = 0; i < m_number_of_sources; i++)
-            m_eases[i]->process(aInputs[i], aOutputs);
+        {
+            if(!m_mute[i])
+            {
+                m_eases[i]->process(aInputs[i], aOutputs);
+            }
+        }
 	}
 };
 

@@ -78,7 +78,8 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
 	t_HoaRecomposer *x = NULL;
 
 	int order = 4, inputs = 9;
-	if (x = (t_HoaRecomposer *)object_alloc((t_class*)HoaRecomposer_class)) 
+    x = (t_HoaRecomposer *)object_alloc((t_class*)HoaRecomposer_class);
+	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
