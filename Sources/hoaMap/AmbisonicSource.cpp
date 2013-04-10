@@ -16,9 +16,9 @@
  *
  */
 
-#include "AmbisonicSource.h"
+#include "AmbisonicSourcesManager.h"
 
-Source::Source(long deadOrAlive, double aRadius, double anAngle, color aColor, std::string aDescription)
+SourcesManager::Source::Source(long deadOrAlive, double aRadius, double anAngle, color aColor, std::string aDescription)
 {
     m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
     setRadius(aRadius);
@@ -27,7 +27,7 @@ Source::Source(long deadOrAlive, double aRadius, double anAngle, color aColor, s
     setDescription(aDescription);
 }
 
-Source::Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor, std::string aDescription)
+SourcesManager::Source::Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor, std::string aDescription)
 {
     m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
     setCoordinatesPolar(polarCoordinates);
@@ -35,7 +35,7 @@ Source::Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor
     setDescription(aDescription);
 }
 
-Source::Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates, color aColor, std::string aDescription)
+SourcesManager::Source::Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates, color aColor, std::string aDescription)
 {
     m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
     setCoordinatesCartesian(cartesianCoordinates);
@@ -43,29 +43,29 @@ Source::Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates, colo
     setDescription(aDescription);
 }
 
-void Source::setExistence(long deadOrAlive)
+void SourcesManager::Source::setExistence(long deadOrAlive)
 {
     m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
 }
 
-void Source::setCoordinatesPolar(coordinatesPolar polarCoordinates)
+void SourcesManager::Source::setCoordinatesPolar(coordinatesPolar polarCoordinates)
 {
     setRadius(polarCoordinates.radius);
     setAngle(polarCoordinates.angle);
 }
 
-void Source::setCoordinatesPolar(double aRadius, double anAngle)
+void SourcesManager::Source::setCoordinatesPolar(double aRadius, double anAngle)
 {
     setRadius(aRadius);
     setAngle(anAngle);
 }
 
-void Source::setRadius(double aRadius)
+void SourcesManager::Source::setRadius(double aRadius)
 {
     m_coordinate_polar.radius = Tools::clip_min(aRadius, 0.);
 }
 
-void Source::setAngle(double anAngle)
+void SourcesManager::Source::setAngle(double anAngle)
 {
     while (anAngle > CICM_2PI)
         anAngle -= CICM_2PI;
@@ -74,33 +74,33 @@ void Source::setAngle(double anAngle)
     m_coordinate_polar.angle = anAngle;
 }
 
-void Source::setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates)
+void SourcesManager::Source::setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates)
 {
     setRadius(Tools::radius(cartesianCoordinates.x, cartesianCoordinates.y));
     setAngle(Tools::angle(cartesianCoordinates.x, cartesianCoordinates.y) - CICM_PI2);
 }
 
-void Source::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
+void SourcesManager::Source::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
 {
     setRadius(Tools::radius(anAbscissa, anOrdinate));
     setAngle(Tools::angle(anAbscissa, anOrdinate) - CICM_PI2);
 }
 
-void Source::setAbscissa(double anAbscissa)
+void SourcesManager::Source::setAbscissa(double anAbscissa)
 {
     double ordinate = getOrdinate();
     setRadius(Tools::radius(anAbscissa, ordinate));
     setAngle(Tools::angle(anAbscissa, ordinate) - CICM_PI2);
 }
 
-void Source::setOrdinate(double anOrdinate)
+void SourcesManager::Source::setOrdinate(double anOrdinate)
 {
     double abscissa = getAbscissa();
     setRadius(Tools::radius(abscissa, anOrdinate));
     setAngle(Tools::angle(abscissa, anOrdinate) - CICM_PI2);
 }
 
-void Source::setColor(color aColor)
+void SourcesManager::Source::setColor(color aColor)
 {
     m_color.red =  Tools::clip(aColor.red, 0., 1.);
     m_color.green =  Tools::clip(aColor.green, 0., 1.);
@@ -108,27 +108,52 @@ void Source::setColor(color aColor)
     m_color.alpha =  Tools::clip(aColor.alpha, 0., 1.);
 }
 
-void Source::setDescription(std::string aDescription)
+void SourcesManager::Source::setDescription(std::string aDescription)
 {
     m_description = aDescription;
 }
 
-coordinatesPolar Source::getCoordinatesPolar()
+void SourcesManager::Source::setGroup(long aGroupIndex)
+{
+    for(int i = 0; i < m_groups.size(); i++)
+    {
+        if(m_groups[i] == aGroupIndex)
+            return;
+    }
+    m_groups.push_back(aGroupIndex);
+}
+
+void SourcesManager::Source::removeGroup(long aGroupIndex)
+{
+    for(int i = 0; i < m_groups.size(); i++)
+    {
+        if(m_groups[i] == aGroupIndex)
+        {
+            for(int j = i; j < m_groups.size() - 1; j++)
+            {
+                m_groups[j] = m_groups[j+1];
+            }
+            m_groups.pop_back();
+        }
+    }
+}
+
+coordinatesPolar SourcesManager::Source::getCoordinatesPolar()
 {
     return m_coordinate_polar;
 }
 
-double Source::getRadius()
+double SourcesManager::Source::getRadius()
 {
     return m_coordinate_polar.radius;
 }
 
-double Source::getAngle()
+double SourcesManager::Source::getAngle()
 {
     return m_coordinate_polar.angle;
 }
 
-coordinatesCartesian Source::getCoordinatesCartesian()
+coordinatesCartesian SourcesManager::Source::getCoordinatesCartesian()
 {
     coordinatesCartesian cartesianCoordiantes;
     cartesianCoordiantes.x = getAbscissa();
@@ -136,32 +161,48 @@ coordinatesCartesian Source::getCoordinatesCartesian()
     return cartesianCoordiantes;
 }
 
-double Source::getAbscissa()
+double SourcesManager::Source::getAbscissa()
 {
     return Tools::abscisse(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
 }
 
-double Source::getOrdinate()
+double SourcesManager::Source::getOrdinate()
 {
     return Tools::ordinate(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
 }
 
-color Source::getColor()
+color SourcesManager::Source::getColor()
 {
     return m_color;
 }
 
-long Source::getExistence()
+long SourcesManager::Source::getExistence()
 {
     return m_exist;
 }
 
-std::string Source::getDescription()
+std::string SourcesManager::Source::getDescription()
 {
     return m_description;
 }
 
-Source::~Source()
+long SourcesManager::Source::getNumberOfGroups()
 {
-	;
+    return m_groups.size();
+}
+
+long SourcesManager::Source::getGroupIndex(long anIndex)
+{
+    if(anIndex < m_groups.size() && anIndex >= 0)
+        return m_groups[anIndex];
+    else
+        return -1;
+}
+
+SourcesManager::Source::~Source()
+{
+    for(int i = 0; i < m_groups.size(); i++)
+    {
+        m_groups.pop_back();
+    }
 }

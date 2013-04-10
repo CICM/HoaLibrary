@@ -75,12 +75,12 @@
 			children = (
 				8F294E0A17061E5600A6E271 /* hoa.map.cpp */,
 				8F294E0317061E5600A6E271 /* AmbisonicSource.cpp */,
-				8F294E0417061E5600A6E271 /* AmbisonicSource.h */,
 				8F294E0517061E5600A6E271 /* AmbisonicSourcesGroup.cpp */,
-				8F294E0617061E5600A6E271 /* AmbisonicSourcesGroup.h */,
 				8F294E0717061E5600A6E271 /* AmbisonicSourcesManager.cpp */,
 				8F294E0817061E5600A6E271 /* AmbisonicSourcesManager.h */,
 				8F294E1317061EA600A6E271 /* cicmTools.h */,
+				8F294E0417061E5600A6E271 /* AmbisonicSource.h */,
+				8F294E0617061E5600A6E271 /* AmbisonicSourcesGroup.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";

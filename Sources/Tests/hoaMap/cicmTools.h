@@ -20,13 +20,12 @@
 #ifndef DEF_CICM_TOOLS
 #define DEF_CICM_TOOLS
 
+//#include "cicmDefine.h"
 #include <iostream>
 #include <vector>
-#include <set>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <stddef.h>
 #include <math.h>
 using namespace std;
 
@@ -36,33 +35,6 @@ using namespace std;
 
 #define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
 
-typedef struct  coordinatesPolar
-{
-	double		radius;
-	double		angle;
-} coordinatesPolar;
-
-typedef struct  coordinatesCartesian
-{
-	double		x;
-	double		y;
-} coordinatesCartesian;
-
-typedef struct  color
-{
-	double      red;
-	double      green;
-    double      blue;
-	double      alpha;
-} color;
-
-static color color_black;
-static color color_null;
-static coordinatesPolar coordinatesPolar_null;
-static coordinatesCartesian coordinatesCartesian_null;
-
-
-    
 class Tools
 {
 public:
