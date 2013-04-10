@@ -14,7 +14,6 @@ PRODUCT_NAME = $(PROJECT_NAME)
 PRODUCT_VERSION = 6.1.0
 ARCHS = i386 x86_64
 
-
 // Paths
 C74SUPPORT = $(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support
 HEADER_SEARCH_PATHS = /Developer/Headers/FlatCarbon "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"

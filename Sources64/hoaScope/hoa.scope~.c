@@ -230,14 +230,15 @@ void scope_dsp64(t_scope *x, t_object *dsp64, short *count, double samplerate, l
 void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	int i, j;
-	for(i = 0; i < (x->f_order * 2 + 1); i++)
-	{
-		for(j = 0; j < sampleframes; j++)
-		{
-			x->f_harmonicsValues[i] = ins[i][j];
-		}
-	}
-	if (x->f_startclock) 
+    for(i = 0; i < (x->f_order * 2 + 1); i++)
+    {
+        for(j = 0; j < sampleframes; j++)
+        {
+            x->f_harmonicsValues[i] = ins[i][j];
+        }
+    }
+    
+	if (x->f_startclock)
 	{
 		x->f_startclock = 0;
 		clock_delay(x->f_clock,0);
@@ -696,122 +697,3 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
 }
-
-void draw_harmonics_old(t_scope *x,  t_object *view, t_rect *rect)
-{
-	int i;
-	double rayon, normalization;
-	double x1, y1, x2, y2;
-	double energyX, energyY, velocityX, velocityY;
-	t_jrgba black = {0.,0.,0., 0.5};
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
-
-	
-	if (g) 
-	{
-		rayon = x->f_rayonCircle * 5.;
-		if(x->f_biggestContrib > 1.)
-			normalization = rayon / x->f_biggestContrib;
-		else
-			normalization = rayon;
-		
-		energyX = x->f_xCircleVector[0] * x->f_contributions[0] * x->f_contributions[0];
-		energyY = x->f_yCircleVector[0] * x->f_contributions[0] * x->f_contributions[0];
-		
-		velocityX = x->f_xCircleVector[0] * x->f_contributions[0];
-		velocityY = x->f_yCircleVector[0] * x->f_contributions[0];
-
-		x1 =  x->f_xCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.x;
-		y1 =  x->f_yCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.y;
-				
-		for(i = 1; i < MAXIMUM_SIZE; i++)
-		{
-			energyX += x->f_xCircleVector[i] * x->f_contributions[i] * x->f_contributions[i];
-			energyY += x->f_yCircleVector[i] * x->f_contributions[i] * x->f_contributions[i];
-			
-			velocityX += x->f_xCircleVector[i] * x->f_contributions[i];
-			velocityY += x->f_yCircleVector[i] * x->f_contributions[i];
-			
-			x2 =  x->f_xCircleVector[i] * fabs(x->f_contributions[i]) * normalization + x->f_center.x;
-			y2 =  x->f_yCircleVector[i] * fabs(x->f_contributions[i]) * normalization + x->f_center.y;
-			
-            if (x->f_contributions[i] < 0.)
-            {
-				
-				if(i > 1 && x->f_contributions[i-1] >= 0.)
-				{
-					x2 = x->f_center.x;
-					y2 = x->f_center.y;
-				}
-				jgraphics_set_source_jrgba(g, &x->f_colorPositif);
-            }
-            else
-            {
-				if(i > 1 && x->f_contributions[i-1] < 0.)
-				{
-					x1 = x->f_center.x;
-					y1 = x->f_center.y;
-				}
-				jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
-            }
-			
-			if(i == MAXIMUM_SIZE - 1)
-			{
-				x2 =  x->f_xCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.x;
-				y2 =  x->f_yCircleVector[0] * fabs(x->f_contributions[0]) * normalization + x->f_center.y;
-			}
-			
-			if (x->f_shadow) 
-			{
-				jgraphics_line_draw_fast(g, x1-1, y1-1, x2-1, y2-1, 1.);
-				jgraphics_set_source_jrgba(g, &black);
-				jgraphics_line_draw_fast(g, x1, y1, x2, y2, 1.);
-			}
-			else {
-				jgraphics_line_draw_fast(g, x1, y1, x2, y2, 1.);
-			}
-			x1 = x2;
-			y1 = y2;
-			
-		}
-		
-		/* Energy */
-		//jgraphics_set_source_rgba(g, 0.08, .43, 0.41, 1.);
-//		
-//		factor = (x->f_rayonCircle * 5.) / sqrt(energyX * energyX + energyY * energyY);
-//		energyX *= factor;
-//		energyY *= factor;
-//		x1 =  energyX + x->f_center.x;
-//		y1 =  energyY + x->f_center.y;
-//		jgraphics_line_draw_fast(g, x->f_center.x, x->f_center.y, x1, y1, 1.);
-//		angle = atan2(energyY, energyX);
-//		rayon = sqrt(energyX * energyX + energyY * energyY);
-//		
-//		rayon -= x->f_rayonCircle / 4.;
-//		angle -= JGRAPHICS_PI / 100.;
-//		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
-//		angle += JGRAPHICS_PI / 50.;
-//		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
-//		
-		/* Velocity */
-		//jgraphics_set_source_rgba(g, 0.32, .18, 0.45, 1.);
-//
-//		factor = (x->f_rayonCircle * 5.) / sqrt(velocityX * velocityX + velocityY * velocityY);
-//		velocityX *= factor;
-//		velocityY *= factor;
-//		x1 =  velocityX + x->f_center.x;
-//		y1 =  velocityY + x->f_center.y;
-//		jgraphics_line_draw_fast(g, x->f_center.x, x->f_center.y, x1, y1, 1.);
-//		angle = atan2(velocityY, velocityX);
-//		rayon = sqrt(velocityX * velocityX + velocityY * velocityY);
-//		
-//		rayon -= x->f_rayonCircle / 4.;
-//		angle -= JGRAPHICS_PI / 100.;
-//		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
-//		angle += JGRAPHICS_PI / 50.;
-//		jgraphics_line_draw_fast(g, x1, y1, rayon * cos(angle)+ x->f_center.x, rayon * sin(angle)+ x->f_center.y, 1.);
-		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
-	}
-	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
-}
-
