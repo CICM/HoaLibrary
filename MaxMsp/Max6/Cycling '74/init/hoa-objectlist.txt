@@ -11,6 +11,7 @@ max oblist Hoa hoa.map;
 max oblist Hoa hoa.meter~;
 max oblist Hoa hoa.optim~;
 max oblist Hoa hoa.pi;
+max oblist Hoa hoa.pi~;
 max oblist Hoa hoa.play~;
 max oblist Hoa hoa.plug~;
 max oblist Hoa hoa.projector~;
