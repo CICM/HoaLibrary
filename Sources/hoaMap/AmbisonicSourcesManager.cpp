@@ -18,11 +18,22 @@
 
 #include "AmbisonicSourcesManager.h"
 
-SourcesManager::SourcesManager()
+SourcesManager::SourcesManager(double aMaximumLimitValue)
 {
-    ;
+    setMaximumRadius(aMaximumLimitValue);
 }
 
+void SourcesManager::setMaximumRadius(double aLimitValue)
+{
+    m_maximum_radius = aLimitValue;
+    for(int i = 0; i < m_groups.size(); i++)
+        m_groups[i]->setMaximumRadius(m_maximum_radius);
+}
+
+double SourcesManager::getLimitMaximum()
+{
+    return m_maximum_radius;
+}
 
 long SourcesManager::getMaximumIndexOfSource()
 {
@@ -64,18 +75,21 @@ void SourcesManager::sourceRemove(long anIndex)
 {
     if(anIndex < m_sources.size() && anIndex >= 0)
     {
-        m_sources[anIndex]->setExistence(0);
-        m_sources[anIndex]->setDescription("");
-        m_sources[anIndex]->setColor(color_mat_black);
-        m_sources[anIndex]->setCoordinatesCartesian(0., 1.);
         int numberOfGroups = m_sources[anIndex]->getNumberOfGroups();
+        int indexOfGroup = -1;
         for(int i = 0; i < numberOfGroups; i++)
         {
-            int indexOfGroup = m_sources[anIndex]->getGroupIndex(i);
-            m_sources[anIndex]->removeGroup(indexOfGroup);
-            if(indexOfGroup >= 0 && indexOfGroup < m_groups.size());
+             indexOfGroup = m_sources[anIndex]->getGroupIndex(i);
+            
+            if(indexOfGroup >= 0 && indexOfGroup < getNumberOfGroups());
                m_groups[indexOfGroup]->removeSource(anIndex);
         }
+        for(int i = 0; i < numberOfGroups; i++)
+        {
+            indexOfGroup = m_sources[anIndex]->getGroupIndex(i);
+            m_sources[anIndex]->removeGroup(indexOfGroup);
+        }
+        m_sources[anIndex]->setExistence(0);
     }
 }
 
@@ -98,8 +112,11 @@ void SourcesManager::sourceSetRadius(long anIndex, double aRadius)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
+                m_sources[i]->setMaximumRadius(m_maximum_radius);
+
         }
         m_sources.push_back(new Source(anIndex, aRadius));
+            m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
     }
     else if(anIndex >= 0)
     {
@@ -122,8 +139,10 @@ void SourcesManager::sourceSetAngle(long anIndex, double anAngle)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
+                m_sources[i]->setMaximumRadius(m_maximum_radius);
         }
         m_sources.push_back(new Source(anIndex, 0., anAngle));
+            m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
     }
     else if(anIndex >= 0)
     {
@@ -158,11 +177,13 @@ void SourcesManager::sourceSetAbscissa(long anIndex, double anAbscissa)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
+                m_sources[i]->setMaximumRadius(m_maximum_radius);
         }
         coordinatesCartesian cartesianCoordinates;
         cartesianCoordinates.x = anAbscissa;
         cartesianCoordinates.y = 0.;
         m_sources.push_back(new Source(anIndex, cartesianCoordinates));
+        m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
     }
     else if(anIndex >= 0)
     {
@@ -185,11 +206,13 @@ void SourcesManager::sourceSetOrdinate(long anIndex, double anOrdinate)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
+                m_sources[i]->setMaximumRadius(m_maximum_radius);
         }
         coordinatesCartesian cartesianCoordinates;
         cartesianCoordinates.x = 0.;
         cartesianCoordinates.y = anOrdinate;
         m_sources.push_back(new Source(anIndex, cartesianCoordinates));
+            m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
     }
     else if(anIndex >= 0)
     {
@@ -309,8 +332,7 @@ long SourcesManager::sourceGetGroupIndex(long aSourceIndex, long aGroupIndex)
 {
     if(aSourceIndex < m_sources.size() && aSourceIndex >= 0)
     {
-        if(aGroupIndex >= sourceGetNumberOfGroups(aSourceIndex))
-            return m_sources[aSourceIndex]->getGroupIndex(aGroupIndex);
+        return m_sources[aSourceIndex]->getGroupIndex(aGroupIndex);
     }
     return 0;
 }
@@ -326,17 +348,21 @@ void SourcesManager::groupSetSource(long aGroupIndex, long aSourceIndex)
         for(int i = m_groups.size(); i < aGroupIndex; i++)
         {
             m_groups.push_back(new SourcesGroup(this, 0));
+                m_groups[i]->setMaximumRadius(m_maximum_radius);
+            
         }
-        m_groups.push_back(new SourcesGroup(this, 1));
-        if(m_sources.size() > aSourceIndex)
+        m_groups.push_back(new SourcesGroup(this, 0));
+            m_groups[aGroupIndex]->setMaximumRadius(m_maximum_radius);
+        if(m_sources.size() > aSourceIndex && m_sources[aSourceIndex]->getExistence())
         {
+            m_groups[aGroupIndex]->setExistence(1);
             m_groups[aGroupIndex]->addSource(aSourceIndex);
             m_sources[aSourceIndex]->setGroup(aGroupIndex);
         }
     }
     else if(aGroupIndex >= 0)
     {
-        if(m_sources.size() > aSourceIndex)
+        if(m_sources.size() > aSourceIndex && m_sources[aSourceIndex]->getExistence())
         {
             m_groups[aGroupIndex]->addSource(aSourceIndex);
             m_sources[aSourceIndex]->setGroup(aGroupIndex);

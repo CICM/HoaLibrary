@@ -208,6 +208,7 @@
 					"-latlas",
 					"-lm",
 				);
+				SDKROOT = macosx10.7;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;
@@ -233,6 +234,7 @@
 					"-latlas",
 					"-lm",
 				);
+				SDKROOT = macosx10.7;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;
@@ -255,12 +257,14 @@
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = (
 					/usr/local/lib/libgsl.a,
 					"-lcblas",
@@ -268,7 +272,7 @@
 					"-lm",
 				);
 				PRODUCT_NAME = hoa.ease;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = i386;
 			};
@@ -290,12 +294,14 @@
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = (
 					/usr/local/lib/libgsl.a,
 					"-lcblas",
@@ -303,7 +309,7 @@
 					"-lm",
 				);
 				PRODUCT_NAME = hoa.ease;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = i386;
 			};
@@ -319,7 +325,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
+			defaultConfigurationName = Development;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -328,7 +334,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};

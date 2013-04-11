@@ -41,6 +41,7 @@ private:
         std::string             m_description;
         long                    m_exist;
         std::vector <long>      m_groups;
+        double                  m_maximum_radius;
         
     public:
         Source(long deadOrAlive, double aRadius = 0., double anAngle = 0., color aColor = color_mat_black, std::string aDescription = "");
@@ -60,6 +61,7 @@ private:
         void setDescription(std::string aDescription);
         void setGroup(long aGroupIndex);
         void removeGroup(long aGroupIndex);
+        void setMaximumRadius(double aLimitValue);
         
         long   getExistence();
         coordinatesPolar        getCoordinatesPolar();
@@ -86,6 +88,7 @@ private:
         color                   m_color;
         coordinatesCartesian    m_centroid;
         SourcesManager*         m_source_manager;
+        double                  m_maximum_radius;
         
         void computeCentroid();
         void shiftPolar(coordinatesPolar polarCoordinates);
@@ -101,6 +104,7 @@ private:
         
         void setExistence(long deadOrAlive);
         void setDescription(std::string aDescription);
+        void setMaximumRadius(double aLimitValue);
         void setColor(color aColor);
         void addSource(long aSourceIndex);
         void removeSource(long aSourceIndex);
@@ -133,16 +137,19 @@ private:
         
         ~SourcesGroup();
     };
+    double                      m_maximum_radius;
     std::vector <Source*>       m_sources;
     std::vector <SourcesGroup*> m_groups;
     
 public:
-	SourcesManager();
+	SourcesManager(double aMaximumLimitValue = -1.);
     
+    void setMaximumRadius(double aLimitValue);
     long getMaximumIndexOfSource();
     long getNumberOfSources();
     long getMaximumIndexOfGroup();
     long getNumberOfGroups();
+    double getLimitMaximum();
     
     /* Source */
     void sourceSetPolar(long anIndex, coordinatesPolar polarCoordinates);

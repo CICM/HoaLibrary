@@ -25,6 +25,7 @@ SourcesManager::Source::Source(long deadOrAlive, double aRadius, double anAngle,
     setAngle(anAngle);
     setColor(aColor);
     setDescription(aDescription);
+    m_maximum_radius = -1;
 }
 
 SourcesManager::Source::Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor, std::string aDescription)
@@ -43,9 +44,18 @@ SourcesManager::Source::Source(long deadOrAlive, coordinatesCartesian cartesianC
     setDescription(aDescription);
 }
 
+
+void SourcesManager::Source::setMaximumRadius(double aLimitValue)
+{
+    m_maximum_radius = aLimitValue;
+}
+
 void SourcesManager::Source::setExistence(long deadOrAlive)
 {
     m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
+    setDescription("");
+    setColor(color_mat_black);
+    setCoordinatesCartesian(0., 1.);
 }
 
 void SourcesManager::Source::setCoordinatesPolar(coordinatesPolar polarCoordinates)
@@ -62,6 +72,11 @@ void SourcesManager::Source::setCoordinatesPolar(double aRadius, double anAngle)
 
 void SourcesManager::Source::setRadius(double aRadius)
 {
+    if(m_maximum_radius >= 0)
+    {
+        if(aRadius < -m_maximum_radius || aRadius > m_maximum_radius)
+            return;
+    }
     m_coordinate_polar.radius = Tools::clip_min(aRadius, 0.);
 }
 

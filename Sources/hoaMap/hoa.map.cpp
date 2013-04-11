@@ -21,7 +21,8 @@
 #include "AmbisonicSourcesManager.h"
 
 #define MAX_SOURCES 64
-
+#define MAX_ZOOM 1.
+#define MIN_ZOOM 0.01
 extern "C"
 {
 #include "ext.h"
@@ -203,7 +204,6 @@ int main()
 void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_hoamap *x =  NULL; 
-	//int i;
 	t_dictionary *d;
 	long flags;
 	
@@ -219,8 +219,8 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	| JBOX_HILITE
 	;
 	jbox_new(&x->j_box, flags, argc, argv);
-	x->f_source_manager = new SourcesManager();
-
+	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
+    
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
     x->j_box.b_firstin = (t_object*) x;
@@ -230,7 +230,6 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	x->jfont = jfont_create(jbox_get_fontname((t_object *)x)->s_name, (t_jgraphics_font_slant)jbox_get_font_slant((t_object *)x), (t_jgraphics_font_weight)jbox_get_font_weight((t_object *)x), jbox_get_fontsize((t_object *)x));
     
 	attr_dictionary_process(x, d);
-
     for (int i = 0; i < MAX_SOURCES; i++)
     {
         if(x->f_source_existence[i] == 0)
@@ -266,7 +265,7 @@ void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
 	else
     {
         if(a == 0)
-        sprintf(s,"(List) Sources coordinates");
+            sprintf(s,"(List) Sources coordinates");
         if(a == 1)
             sprintf(s,"(List) Groups coordinates");
     }
@@ -344,8 +343,6 @@ t_max_err hoamap_existence(t_hoamap *x, t_object *s, short ac, t_atom *av)
 
 void hoamap_all_preset(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
-    if (ac > 5)
-        ac = 5;
     int i = 0;
     if(atom_gettype(av) == A_LONG)
         i = atom_getlong(av);
@@ -452,12 +449,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             sourceColor.alpha = atom_getfloat(av+5);
             x->f_source_manager->sourceSetColor(atom_getlong(av), sourceColor);
         }
-        long ngroup = x->f_source_manager->sourceGetNumberOfGroups(atom_getlong(av));
-        post("N groups : %ld", ngroup);
-        for(int i = 0; i <= ngroup; i++)
-        {
-            post("groups : %ld", x->f_source_manager->sourceGetGroupIndex(atom_getlong(av), i));
-        }
+        
         x->f_source_abscissa[atom_getlong(av)] = x->f_source_manager->sourceGetAbscissa(atom_getlong(av));
         x->f_source_ordinate[atom_getlong(av)] = x->f_source_manager->sourceGetOrdinate(atom_getlong(av));
         x->f_source_existence[atom_getlong(av)] = x->f_source_manager->sourceGetExistence(atom_getlong(av));
@@ -710,14 +702,9 @@ t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 
 t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc >= 1 && argv)
-    {
-        if(atom_gettype(argv) == A_FLOAT)
-            x->f_zoom_factor = Tools::clip(atom_getfloat(argv), 0.01f, 1.f);
-        else if(atom_gettype(argv) == A_LONG)
-            x->f_zoom_factor = Tools::clip((float)atom_getlong(argv), 0.01f, 1.f);
-        
-    }
+    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+            x->f_zoom_factor = Tools::clip(atom_getfloat(argv), (float)MIN_ZOOM, (float)MAX_ZOOM);
+    
     jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
@@ -730,7 +717,6 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
 	if (msg == gensym("attr_modified"))
 	 {
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
-         post("attr %s", name->s_name);
 		if(name == gensym("bgcolor") )
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
@@ -844,8 +830,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
             jgraphics_set_line_width(g, 1);
             jgraphics_stroke(g);
             
-        }
-        
+        }        
 		
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
@@ -884,7 +869,6 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 	
 	if (g)
     {
-        //jfont_set_font_size(x->jfont, fontSize);
         jtl = jtextlayout_create();
         jgraphics_set_line_width(g, x->f_size_source * 0.2);
 		for(i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
@@ -1002,7 +986,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 // source
                 
                 jgraphics_set_source_jrgba(g, &sourceColor);
-                jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 0.5,  0., JGRAPHICS_2PI);
+                jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.,  0., JGRAPHICS_2PI);
                 jgraphics_stroke(g);
                 /*
                 sprintf(description,"%ld", (long)i);
@@ -1014,7 +998,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 for(int j = 0; j < 4; j++)
                 {
                     jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                    jgraphics_line_to(g, sourcePositionX + Tools::abscisse(x->f_size_source, CICM_2PI * j / 4.), sourcePositionY + Tools::ordinate(x->f_size_source, CICM_2PI * j / 4.));
+                    jgraphics_line_to(g, sourcePositionX + Tools::abscisse(x->f_size_source * 1., CICM_2PI * j / 4.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 4.));
                 }
                  
                 jgraphics_stroke(g);
@@ -1062,7 +1046,6 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             }
         }
     }
-    post("%ld", modifiers);
 
     if(modifiers == 160)
     {

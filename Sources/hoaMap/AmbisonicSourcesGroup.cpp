@@ -25,6 +25,7 @@ SourcesManager::SourcesGroup::SourcesGroup(SourcesManager* aSourceManager, long 
     setDescription(aDescription);
     setColor(aColor);
     computeCentroid();
+    m_maximum_radius = -1;
 }
 
 void SourcesManager::SourcesGroup::setExistence(long deadOrAlive)
@@ -45,6 +46,11 @@ void SourcesManager::SourcesGroup::setColor(color aColor)
     m_color.alpha =  Tools::clip(aColor.alpha, 0., 1.);
 }
 
+void SourcesManager::SourcesGroup::setMaximumRadius(double aLimitValue)
+{
+    m_maximum_radius = aLimitValue;
+}
+
 void SourcesManager::SourcesGroup::computeCentroid()
 {
     m_centroid.x = 0.;
@@ -53,8 +59,11 @@ void SourcesManager::SourcesGroup::computeCentroid()
     {
         for(int i = 0; i < m_sources.size(); i++)
         {
-            m_centroid.x += m_source_manager->sourceGetAbscissa(m_sources[i]);
-            m_centroid.y += m_source_manager->sourceGetOrdinate(m_sources[i]);
+            if(m_source_manager->sourceGetExistence(m_sources[i]))
+            {
+                m_centroid.x += m_source_manager->sourceGetAbscissa(m_sources[i]);
+                m_centroid.y += m_source_manager->sourceGetOrdinate(m_sources[i]);
+            }
         }
         m_centroid.x /= m_sources.size();
         m_centroid.y /= m_sources.size();
@@ -63,17 +72,13 @@ void SourcesManager::SourcesGroup::computeCentroid()
 
 void SourcesManager::SourcesGroup::addSource(long aSourceIndex)
 {
-    if(m_sources.size() == 0)
-        m_sources.push_back(aSourceIndex);
-    else
+    for(int i = 0; i < m_sources.size(); i++)
     {
-        for(int i = 0; i < m_sources.size(); i++)
-        {
-            if(m_sources[i] == aSourceIndex)
-                return;
-        }
-        m_sources.push_back(aSourceIndex);
+        if(m_sources[i] == aSourceIndex)
+            return;
     }
+    m_sources.push_back(aSourceIndex);
+    
     computeCentroid();
 }
 
@@ -84,16 +89,20 @@ void SourcesManager::SourcesGroup::sourceHasMoved()
 
 void SourcesManager::SourcesGroup::removeSource(long aSourceIndex)
 {
-    int size = m_sources.size();
-    for(int i = 0; i < size; i++)
+    if(m_sources.size() > 0)
     {
-        if(m_sources[i] == aSourceIndex)
+        int size = m_sources.size();
+        
+        for(int i = 0; i < size; i++)
         {
-            for(int j = i; j < size - 1; j++)
+            if(m_sources[i] == aSourceIndex)
             {
-                m_sources[j] = m_sources[j+1];
+                for(int j = i; j < size - 1; j++)
+                {
+                    m_sources[j] = m_sources[j+1];
+                }
+                m_sources.pop_back();
             }
-            m_sources.pop_back();
         }
     }
     computeCentroid();
@@ -112,6 +121,39 @@ void SourcesManager::SourcesGroup::shiftPolar(double aRadius, double anAngle)
 
 void SourcesManager::SourcesGroup::shiftRadius(double aRadius)
 {
+    if(m_maximum_radius >= 0)
+    {
+        if(aRadius < 0.)
+        {
+            double refRadius = m_maximum_radius;
+            for(int i = 0; i < m_sources.size(); i++)
+            {
+                if(m_source_manager->sourceGetRadius(m_sources[i]) < refRadius)
+                {
+                    refRadius = m_source_manager->sourceGetRadius(m_sources[i]);
+                }
+            }
+            if(aRadius + refRadius < 0.)
+            {
+                aRadius = - refRadius;
+            }
+        }
+        else if(aRadius >= 0.)
+        {
+            double refRadius = -m_maximum_radius;
+            for(int i = 0; i < m_sources.size(); i++)
+            {
+                if(m_source_manager->sourceGetRadius(m_sources[i]) > refRadius)
+                {
+                    refRadius = m_source_manager->sourceGetRadius(m_sources[i]);
+                }
+            }
+            if(aRadius + refRadius > m_maximum_radius)
+            {
+                aRadius = m_maximum_radius - refRadius;
+            }
+        }
+    }
     for(int i = 0; i < m_sources.size(); i++)
     {
         m_source_manager->sourceSetRadius(m_sources[i], aRadius + m_source_manager->sourceGetRadius(m_sources[i]));
@@ -139,16 +181,61 @@ void SourcesManager::SourcesGroup::shiftCartesian(double anAbscissa, double anOr
 
 void SourcesManager::SourcesGroup::shiftAbscissa(double anAbscissa)
 {
+    double refRadius = 0.;
+    double anOrdinate = 0.;
+    if(m_maximum_radius >= 0)
+    {
+        refRadius = -m_maximum_radius;
+        for(int i = 0; i < m_sources.size(); i++)
+        {
+            if(m_source_manager->sourceGetRadius(m_sources[i]) > refRadius)
+            {
+                refRadius = m_source_manager->sourceGetRadius(m_sources[i]);
+                if(Tools::radius(m_source_manager->sourceGetAbscissa(m_sources[i]) + anAbscissa, m_source_manager->sourceGetOrdinate(m_sources[i])) > m_maximum_radius)
+                {
+                    return;
+                    /*
+                    anOrdinate = Tools::ordinate(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2) ;
+                    anAbscissa = Tools::abscisse(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2);
+                     */
+                }
+            }
+        }
+    }
+
     for(int i = 0; i < m_sources.size(); i++)
     {
+        m_source_manager->sourceSetOrdinate(m_sources[i], anOrdinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
         m_source_manager->sourceSetAbscissa(m_sources[i], anAbscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
     }
 }
 
 void SourcesManager::SourcesGroup::shiftOrdinate(double anOrdinate)
 {
+    double refRadius = 0.;
+    double anAbscissa = 0.;
+    if(m_maximum_radius >= 0)
+    {
+        refRadius = -m_maximum_radius;
+        for(int i = 0; i < m_sources.size(); i++)
+        {
+            if(m_source_manager->sourceGetRadius(m_sources[i]) > refRadius)
+            {
+                refRadius = m_source_manager->sourceGetRadius(m_sources[i]);
+                if(Tools::radius(m_source_manager->sourceGetAbscissa(m_sources[i]), m_source_manager->sourceGetOrdinate(m_sources[i]) + anOrdinate) > m_maximum_radius)
+                {
+                    return;
+                    /*
+                    anOrdinate = Tools::ordinate(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2) ;
+                    anAbscissa = Tools::abscisse(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2);*/
+                }
+            }
+        }
+    }
+    
     for(int i = 0; i < m_sources.size(); i++)
     {
+        m_source_manager->sourceSetAbscissa(m_sources[i], anAbscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
         m_source_manager->sourceSetOrdinate(m_sources[i], anOrdinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
     }
 }
