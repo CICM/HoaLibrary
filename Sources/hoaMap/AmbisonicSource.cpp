@@ -18,32 +18,15 @@
 
 #include "AmbisonicSourcesManager.h"
 
-SourcesManager::Source::Source(long deadOrAlive, double aRadius, double anAngle, color aColor, std::string aDescription)
+SourcesManager::Source::Source(long deadOrAlive, double aRadius, double anAngle)
 {
     m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
     setRadius(aRadius);
     setAngle(anAngle);
-    setColor(aColor);
-    setDescription(aDescription);
+    setColor(0.2, 0.2, 0.2, 1.);
+    setDescription("");
     m_maximum_radius = -1;
 }
-
-SourcesManager::Source::Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor, std::string aDescription)
-{
-    m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
-    setCoordinatesPolar(polarCoordinates);
-    setColor(aColor);
-    setDescription(aDescription);
-}
-
-SourcesManager::Source::Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates, color aColor, std::string aDescription)
-{
-    m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
-    setCoordinatesCartesian(cartesianCoordinates);
-    setColor(aColor);
-    setDescription(aDescription);
-}
-
 
 void SourcesManager::Source::setMaximumRadius(double aLimitValue)
 {
@@ -53,15 +36,6 @@ void SourcesManager::Source::setMaximumRadius(double aLimitValue)
 void SourcesManager::Source::setExistence(long deadOrAlive)
 {
     m_exist = Tools::clip(deadOrAlive, (long)0, (long)1);
-    setDescription("");
-    setColor(color_mat_black);
-    setCoordinatesCartesian(0., 1.);
-}
-
-void SourcesManager::Source::setCoordinatesPolar(coordinatesPolar polarCoordinates)
-{
-    setRadius(polarCoordinates.radius);
-    setAngle(polarCoordinates.angle);
 }
 
 void SourcesManager::Source::setCoordinatesPolar(double aRadius, double anAngle)
@@ -89,12 +63,6 @@ void SourcesManager::Source::setAngle(double anAngle)
     m_coordinate_polar.angle = anAngle;
 }
 
-void SourcesManager::Source::setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates)
-{
-    setRadius(Tools::radius(cartesianCoordinates.x, cartesianCoordinates.y));
-    setAngle(Tools::angle(cartesianCoordinates.x, cartesianCoordinates.y) - CICM_PI2);
-}
-
 void SourcesManager::Source::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
 {
     setRadius(Tools::radius(anAbscissa, anOrdinate));
@@ -115,12 +83,12 @@ void SourcesManager::Source::setOrdinate(double anOrdinate)
     setAngle(Tools::angle(abscissa, anOrdinate) - CICM_PI2);
 }
 
-void SourcesManager::Source::setColor(color aColor)
+void SourcesManager::Source::setColor(double red, double green, double blue, double alpha)
 {
-    m_color.red =  Tools::clip(aColor.red, 0., 1.);
-    m_color.green =  Tools::clip(aColor.green, 0., 1.);
-    m_color.blue =  Tools::clip(aColor.blue, 0., 1.);
-    m_color.alpha =  Tools::clip(aColor.alpha, 0., 1.);
+    m_color.red =  Tools::clip(red, 0., 1.);
+    m_color.green =  Tools::clip(green, 0., 1.);
+    m_color.blue =  Tools::clip(blue, 0., 1.);
+    m_color.alpha =  Tools::clip(alpha, 0., 1.);
 }
 
 void SourcesManager::Source::setDescription(std::string aDescription)
@@ -153,11 +121,6 @@ void SourcesManager::Source::removeGroup(long aGroupIndex)
     }
 }
 
-coordinatesPolar SourcesManager::Source::getCoordinatesPolar()
-{
-    return m_coordinate_polar;
-}
-
 double SourcesManager::Source::getRadius()
 {
     return m_coordinate_polar.radius;
@@ -166,14 +129,6 @@ double SourcesManager::Source::getRadius()
 double SourcesManager::Source::getAngle()
 {
     return m_coordinate_polar.angle;
-}
-
-coordinatesCartesian SourcesManager::Source::getCoordinatesCartesian()
-{
-    coordinatesCartesian cartesianCoordiantes;
-    cartesianCoordiantes.x = getAbscissa();
-    cartesianCoordiantes.y = getOrdinate();
-    return cartesianCoordiantes;
 }
 
 double SourcesManager::Source::getAbscissa()

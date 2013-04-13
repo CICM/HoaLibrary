@@ -23,11 +23,6 @@
 
 #include "cicmTools.h"
 
-static color color_mat_black = {0.2, 0.2, 0.2, 1.};
-static color color_null = {-1., -1., -1., -1.};
-static coordinatesPolar coordinatesPolar_null;
-static coordinatesCartesian coordinatesCartesian_null;
-
 class SourcesManager
 {
 	
@@ -44,30 +39,24 @@ private:
         double                  m_maximum_radius;
         
     public:
-        Source(long deadOrAlive, double aRadius = 0., double anAngle = 0., color aColor = color_mat_black, std::string aDescription = "");
-        Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor = color_mat_black, std::string aDescription = "");
-        Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates, color aColor = color_mat_black, std::string aDescription = "");
+        Source(long deadOrAlive, double aRadius = 0., double anAngle = 0.);
         
         void setExistence(long deadOrAlive);
-        void setCoordinatesPolar(coordinatesPolar polarCoordinates);
         void setCoordinatesPolar(double aRadius, double anAngle);
         void setRadius(double aRadius);
         void setAngle(double anAngle);
-        void setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates);
         void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
         void setAbscissa(double anAbscissa);
         void setOrdinate(double anOrdinate);
-        void setColor(color aColor);
+        void setColor(double red, double green, double blue, double alpha);
         void setDescription(std::string aDescription);
         void setGroup(long aGroupIndex);
         void removeGroup(long aGroupIndex);
         void setMaximumRadius(double aLimitValue);
         
         long   getExistence();
-        coordinatesPolar        getCoordinatesPolar();
         double getRadius();
         double getAngle();
-        coordinatesCartesian    getCoordinatesCartesian();
         double getAbscissa();
         double getOrdinate();
         color  getColor();
@@ -91,47 +80,41 @@ private:
         double                  m_maximum_radius;
         
         void computeCentroid();
-        void shiftPolar(coordinatesPolar polarCoordinates);
         void shiftPolar(double aRadius, double anAngle);
         void shiftRadius(double aRadius);
         void shiftAngle(double anAngle);
-        void shiftCartesian(coordinatesCartesian cartesianCoordinates);
         void shiftCartesian(double anAbscissa, double anOrdinate);
         void shiftAbscissa(double anAbscissa);
         void shiftOrdinate(double anOrdinate);
     public:
-        SourcesGroup(SourcesManager* aSourceManager, long deadOrAlive, color aColor = color_mat_black, std::string aDescription = "");
+        SourcesGroup(SourcesManager* aSourceManager, long deadOrAlive);
         
         void setExistence(long deadOrAlive);
         void setDescription(std::string aDescription);
         void setMaximumRadius(double aLimitValue);
-        void setColor(color aColor);
+        void setColor(double red, double green, double blue, double alpha);
         void addSource(long aSourceIndex);
         void removeSource(long aSourceIndex);
         void sourceHasMoved();
         
-        void setCoordinatesPolar(coordinatesPolar polarCoordinates);
         void setCoordinatesPolar(double aRadius, double anAngle);
         void setRadius(double aRadius);
         void setAngle(double anAngle);
-        void setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates);
         void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
         void setAbscissa(double anAbscissa);
         void setOrdinate(double anOrdinate);
         
-        void setRelativeCoordinatesPolar(coordinatesPolar polarCoordinates);
         void setRelativeCoordinatesPolar(double aRadius, double anAngle);
         void setRelativeRadius(double aRadius);
         void setRelativeAngle(double anAngle);
         
         long   getExistence();
-        coordinatesPolar        getCoordinatesPolar();
         double getRadius();
         double getAngle();
-        coordinatesCartesian    getCoordinatesCartesian();
         double getAbscissa();
         double getOrdinate();
-        long getNumberOfSources();
+        long   getNumberOfSources();
+        long   getSourceIndex(long anIndex);
         std::string getDescription();
         color  getColor();
         
@@ -152,15 +135,13 @@ public:
     double getLimitMaximum();
     
     /* Source */
-    void sourceSetPolar(long anIndex, coordinatesPolar polarCoordinates);
 	void sourceSetPolar(long anIndex, double aRadius, double anAngle);
 	void sourceSetRadius(long anIndex, double aRadius);
     void sourceSetAngle(long anIndex, double anAngle);
-    void sourceSetCartesian(long anIndex, coordinatesCartesian cartesianCoordinates);
     void sourceSetCartesian(long anIndex, double anAbscissa, double anOrdinate);
 	void sourceSetAbscissa(long anIndex, double anAbscissa);
 	void sourceSetOrdinate(long anIndex, double anOrdinate);
-    void sourceSetColor(long anIndex, color aColor);
+    void sourceSetColor(long anIndex, double red, double green, double blue, double alpha);
 	void sourceSetDescription(long anIndex, std::string aDescription);
     void sourceRemove(long anIndex);	
     
@@ -179,29 +160,26 @@ public:
     /* Groups */
     void groupSetSource(long aGroupIndex, long aSourceIndex);
     void groupRemoveSource(long aGroupIndex, long aSourceIndex);
-    void groupSetPolar(long aGroupIndex, coordinatesPolar polarCoordinates);
 	void groupSetPolar(long aGroupIndex, double aRadius, double anAngle);
     void groupSetRadius(long aGroupIndex, double aRadius);
     void groupSetAngle(long aGroupIndex, double anAngle);
-    void groupSetCartesian(long aGroupIndex, coordinatesCartesian cartesianCoordinates);
     void groupSetCartesian(long aGroupIndex, double anAbscissa, double anOrdinate);
     void groupSetAbscissa(long aGroupIndex, double anAbscissa);
     void groupSetOrdinate(long aGroupIndex, double anOrdinate);
-    void groupSetColor(long aGroupIndex, color aColor);
+    void groupSetColor(long aGroupIndex, double red, double green, double blue, double alpha);
     void groupSetDescription(long aGroupIndex, std::string aDescription);
     void groupRemove(long aGroupIndex);
+    long groupGetNumberOfSources(long aGroupIndex);
+    long groupGetSourceIndex(long aGroupIndex, long aSourceIndex);
     
-    void groupSetRelativePolar(long aGroupIndex, coordinatesPolar polarCoordinates);
 	void groupSetRelativePolar(long aGroupIndex, double aRadius, double anAngle);
 	void groupSetRelativeRadius(long aGroupIndex, double aRadius);
     void groupSetRelativeAngle(long aGroupIndex, double anAngle);
 
     
     long groupGetExistence(long anIndex);
-    coordinatesPolar groupGetCoordinatesPolar(long anIndex);
 	double groupGetRadius(long anIndex);
 	double groupGetAngle(long anIndex);
-    coordinatesCartesian groupGetCoordinatesCartesian(long anIndex);
 	double groupGetAbscissa(long anIndex);
 	double groupGetOrdinate(long anIndex);
     color groupGetColor(long anIndex);

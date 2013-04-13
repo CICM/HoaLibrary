@@ -20,7 +20,7 @@
 
 SourcesManager::SourcesManager(double aMaximumLimitValue)
 {
-    setMaximumRadius(aMaximumLimitValue);
+    setMaximumRadius(aMaximumLimitValue);    
 }
 
 void SourcesManager::setMaximumRadius(double aLimitValue)
@@ -90,13 +90,10 @@ void SourcesManager::sourceRemove(long anIndex)
             m_sources[anIndex]->removeGroup(indexOfGroup);
         }
         m_sources[anIndex]->setExistence(0);
+        m_sources[anIndex]->setDescription("");
+        m_sources[anIndex]->setColor(0.2, 0.2, 0.2, 1.);
+        m_sources[anIndex]->setCoordinatesCartesian(0., 1.);
     }
-}
-
-void SourcesManager::sourceSetPolar(long anIndex, coordinatesPolar polarCoordinates)
-{
-    sourceSetRadius(anIndex, polarCoordinates.radius);
-    sourceSetAngle(anIndex, polarCoordinates.angle);
 }
 
 void SourcesManager::sourceSetPolar(long anIndex, double aRadius, double anAngle)
@@ -112,11 +109,12 @@ void SourcesManager::sourceSetRadius(long anIndex, double aRadius)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
-                m_sources[i]->setMaximumRadius(m_maximum_radius);
+            m_sources[i]->setMaximumRadius(m_maximum_radius);
 
         }
-        m_sources.push_back(new Source(anIndex, aRadius));
-            m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
+        m_sources.push_back(new Source(1));
+        m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
+        m_sources[anIndex]->setRadius(aRadius);
     }
     else if(anIndex >= 0)
     {
@@ -139,10 +137,11 @@ void SourcesManager::sourceSetAngle(long anIndex, double anAngle)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
-                m_sources[i]->setMaximumRadius(m_maximum_radius);
+            m_sources[i]->setMaximumRadius(m_maximum_radius);
         }
-        m_sources.push_back(new Source(anIndex, 0., anAngle));
-            m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
+        m_sources.push_back(new Source(1));
+        m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
+        m_sources[anIndex]->setAngle(anAngle);
     }
     else if(anIndex >= 0)
     {
@@ -158,12 +157,6 @@ void SourcesManager::sourceSetAngle(long anIndex, double anAngle)
     }
 }
 
-void SourcesManager::sourceSetCartesian(long anIndex, coordinatesCartesian cartesianCoordinates)
-{
-    sourceSetAbscissa(anIndex, cartesianCoordinates.x);
-    sourceSetOrdinate(anIndex, cartesianCoordinates.y);
-}
-
 void SourcesManager::sourceSetCartesian(long anIndex, double anAbscissa, double anOrdinate)
 {
     sourceSetAbscissa(anIndex, anAbscissa);
@@ -177,13 +170,11 @@ void SourcesManager::sourceSetAbscissa(long anIndex, double anAbscissa)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
-                m_sources[i]->setMaximumRadius(m_maximum_radius);
+            m_sources[i]->setMaximumRadius(m_maximum_radius);
         }
-        coordinatesCartesian cartesianCoordinates;
-        cartesianCoordinates.x = anAbscissa;
-        cartesianCoordinates.y = 0.;
-        m_sources.push_back(new Source(anIndex, cartesianCoordinates));
+        m_sources.push_back(new Source(1));
         m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
+        m_sources[anIndex]->setAbscissa(anAbscissa);
     }
     else if(anIndex >= 0)
     {
@@ -206,17 +197,15 @@ void SourcesManager::sourceSetOrdinate(long anIndex, double anOrdinate)
         for(int i = m_sources.size(); i < anIndex; i++)
         {
             m_sources.push_back(new Source(0));
-                m_sources[i]->setMaximumRadius(m_maximum_radius);
+            m_sources[i]->setMaximumRadius(m_maximum_radius);
         }
-        coordinatesCartesian cartesianCoordinates;
-        cartesianCoordinates.x = 0.;
-        cartesianCoordinates.y = anOrdinate;
-        m_sources.push_back(new Source(anIndex, cartesianCoordinates));
-            m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
+        m_sources.push_back(new Source(1));
+        m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
+        m_sources[anIndex]->setOrdinate(anOrdinate);
     }
     else if(anIndex >= 0)
     {
-         m_sources[anIndex]->setOrdinate(anOrdinate);
+        m_sources[anIndex]->setOrdinate(anOrdinate);
         if(!m_sources[anIndex]->getExistence())
             m_sources[anIndex]->setExistence(1);
     }
@@ -228,11 +217,11 @@ void SourcesManager::sourceSetOrdinate(long anIndex, double anOrdinate)
     }
 }
 
-void SourcesManager::sourceSetColor(long anIndex, color aColor)
+void SourcesManager::sourceSetColor(long anIndex, double red, double green, double blue, double alpha)
 {
     if(anIndex < m_sources.size() && anIndex >= 0)
     {
-        m_sources[anIndex]->setColor(aColor);
+        m_sources[anIndex]->setColor(red, green, blue, alpha);
     }
 }
 
@@ -245,14 +234,6 @@ void SourcesManager::sourceSetDescription(long anIndex, std::string aDescription
 }
 
 /******************************************************************************/
-
-coordinatesPolar SourcesManager::sourceGetCoordinatesPolar(long anIndex)
-{
-    if(anIndex < m_sources.size() && anIndex >= 0)
-        return m_sources[anIndex]->getCoordinatesPolar();
-    
-    return coordinatesPolar_null;
-}
 
 double SourcesManager::sourceGetRadius(long anIndex)
 {
@@ -268,14 +249,6 @@ double SourcesManager::sourceGetAngle(long anIndex)
         return m_sources[anIndex]->getAngle();
     
     return NULL;
-}
-
-coordinatesCartesian SourcesManager::sourceGetCoordinatesCartesian(long anIndex)
-{
-    if(anIndex < m_sources.size() && anIndex >= 0)
-        return m_sources[anIndex]->getCoordinatesCartesian();
-    
-    return coordinatesCartesian_null;
 }
 
 double SourcesManager::sourceGetAbscissa(long anIndex)
@@ -299,7 +272,8 @@ color SourcesManager::sourceGetColor(long anIndex)
     if(anIndex < m_sources.size() && anIndex >= 0)
         return m_sources[anIndex]->getColor();
     
-    return color_null;
+    color sourceColor = {-1, -1, -1, -1};
+    return sourceColor;
 }
 
 std::string SourcesManager::sourceGetDescription(long anIndex)
@@ -348,11 +322,11 @@ void SourcesManager::groupSetSource(long aGroupIndex, long aSourceIndex)
         for(int i = m_groups.size(); i < aGroupIndex; i++)
         {
             m_groups.push_back(new SourcesGroup(this, 0));
-                m_groups[i]->setMaximumRadius(m_maximum_radius);
+            m_groups[i]->setMaximumRadius(m_maximum_radius);
             
         }
         m_groups.push_back(new SourcesGroup(this, 0));
-            m_groups[aGroupIndex]->setMaximumRadius(m_maximum_radius);
+        m_groups[aGroupIndex]->setMaximumRadius(m_maximum_radius);
         if(m_sources.size() > aSourceIndex && m_sources[aSourceIndex]->getExistence())
         {
             m_groups[aGroupIndex]->setExistence(1);
@@ -383,14 +357,6 @@ void SourcesManager::groupRemoveSource(long aGroupIndex, long aSourceIndex)
     }
 }
 
-void SourcesManager::groupSetPolar(long aGroupIndex, coordinatesPolar polarCoordinates)
-{
-    if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
-    {
-        m_groups[aGroupIndex]->setCoordinatesPolar(polarCoordinates);
-    }
-}
-
 void SourcesManager::groupSetPolar(long aGroupIndex, double aRadius, double anAngle)
 {
     if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
@@ -412,14 +378,6 @@ void SourcesManager::groupSetAngle(long aGroupIndex, double anAngle)
     if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
     {
         m_groups[aGroupIndex]->setAngle(anAngle);
-    }
-}
-
-void SourcesManager::groupSetCartesian(long aGroupIndex, coordinatesCartesian cartesianCoordinates)
-{
-    if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
-    {
-        m_groups[aGroupIndex]->setCoordinatesCartesian(cartesianCoordinates);
     }
 }
 
@@ -447,14 +405,6 @@ void SourcesManager::groupSetOrdinate(long aGroupIndex, double anOrdinate)
     }
 }
 
-void SourcesManager::groupSetRelativePolar(long aGroupIndex, coordinatesPolar polarCoordinates)
-{
-    if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
-    {
-        m_groups[aGroupIndex]->setRelativeCoordinatesPolar(polarCoordinates);
-    }
-}
-
 void SourcesManager::groupSetRelativePolar(long aGroupIndex, double aRadius, double anAngle)
 {
     if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
@@ -479,11 +429,11 @@ void SourcesManager::groupSetRelativeAngle(long aGroupIndex, double anAngle)
     }
 }
 
-void SourcesManager::groupSetColor(long aGroupIndex, color aColor)
+void SourcesManager::groupSetColor(long aGroupIndex, double red, double green, double blue, double alpha)
 {
     if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
     {
-        m_groups[aGroupIndex]->setColor(aColor);
+        m_groups[aGroupIndex]->setColor(red, green, blue, alpha);
     }
 }
 
@@ -502,9 +452,13 @@ void SourcesManager::groupRemove(long aGroupIndex)
         for(int i = 0; i < m_sources.size(); i++)
         {
             m_sources[i]->removeGroup(aGroupIndex);
+            
+        }
+        for(int i = 0; i < m_sources.size(); i++)
+        {
             m_groups[aGroupIndex]->removeSource(i);
         }
-        m_groups[aGroupIndex]->setColor(color_mat_black);
+        m_groups[aGroupIndex]->setColor(0.2, 0.2, 0.2, 1.);
         m_groups[aGroupIndex]->setDescription("");
         m_groups[aGroupIndex]->setExistence(0);
     }
@@ -512,14 +466,6 @@ void SourcesManager::groupRemove(long aGroupIndex)
 
 
 /******************************************************************************/
-
-coordinatesPolar SourcesManager::groupGetCoordinatesPolar(long anIndex)
-{
-    if(anIndex < m_groups.size() && anIndex >= 0)
-        return m_groups[anIndex]->getCoordinatesPolar();
-    
-    return coordinatesPolar_null;
-}
 
 double SourcesManager::groupGetRadius(long anIndex)
 {
@@ -535,14 +481,6 @@ double SourcesManager::groupGetAngle(long anIndex)
         return m_groups[anIndex]->getAngle();
     
     return NULL;
-}
-
-coordinatesCartesian SourcesManager::groupGetCoordinatesCartesian(long anIndex)
-{
-    if(anIndex < m_groups.size() && anIndex >= 0)
-        return m_groups[anIndex]->getCoordinatesCartesian();
-    
-    return coordinatesCartesian_null;
 }
 
 double SourcesManager::groupGetAbscissa(long anIndex)
@@ -566,7 +504,8 @@ color SourcesManager::groupGetColor(long anIndex)
     if(anIndex < m_groups.size() && anIndex >= 0)
         return m_groups[anIndex]->getColor();
     
-    return color_null;
+    color groupColor = {-1, -1, -1 -1};
+    return groupColor;
 }
 
 std::string SourcesManager::groupGetDescription(long anIndex)
@@ -586,6 +525,23 @@ long SourcesManager::groupGetExistence(long anIndex)
     return 0;
 }
 
+long SourcesManager::groupGetNumberOfSources(long anIndex)
+{
+    if(anIndex < m_groups.size() && anIndex >= 0)
+    {
+        return m_groups[anIndex]->getNumberOfSources();
+    }
+    return 0;
+}
+
+long SourcesManager::groupGetSourceIndex(long aGroupIndex, long aSourceIndex)
+{
+    if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+    {
+        return m_groups[aGroupIndex]->getSourceIndex(aSourceIndex);
+    }
+    return 0;
+}
 /************************************/
 
 SourcesManager::~SourcesManager()

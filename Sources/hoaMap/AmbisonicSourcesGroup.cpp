@@ -18,12 +18,12 @@
 
 #include "AmbisonicSourcesManager.h"
 
-SourcesManager::SourcesGroup::SourcesGroup(SourcesManager* aSourceManager, long deadOrAlive, color aColor, std::string aDescription)
+SourcesManager::SourcesGroup::SourcesGroup(SourcesManager* aSourceManager, long deadOrAlive)
 {
     m_source_manager = aSourceManager;
     setExistence(deadOrAlive);
-    setDescription(aDescription);
-    setColor(aColor);
+    setColor(0.2, 0.2, 0.2, 1.);
+    setDescription("");
     computeCentroid();
     m_maximum_radius = -1;
 }
@@ -38,12 +38,12 @@ void SourcesManager::SourcesGroup::setDescription(std::string aDescription)
     m_description = aDescription;
 }
 
-void SourcesManager::SourcesGroup::setColor(color aColor)
+void SourcesManager::SourcesGroup::setColor(double red, double green, double blue, double alpha)
 {
-    m_color.red =  Tools::clip(aColor.red, 0., 1.);
-    m_color.green =  Tools::clip(aColor.green, 0., 1.);
-    m_color.blue =  Tools::clip(aColor.blue, 0., 1.);
-    m_color.alpha =  Tools::clip(aColor.alpha, 0., 1.);
+    m_color.red =  Tools::clip(red, 0., 1.);
+    m_color.green =  Tools::clip(green, 0., 1.);
+    m_color.blue =  Tools::clip(blue, 0., 1.);
+    m_color.alpha =  Tools::clip(alpha, 0., 1.);
 }
 
 void SourcesManager::SourcesGroup::setMaximumRadius(double aLimitValue)
@@ -108,11 +108,6 @@ void SourcesManager::SourcesGroup::removeSource(long aSourceIndex)
     computeCentroid();
 }
 
-void SourcesManager::SourcesGroup::shiftPolar(coordinatesPolar polarCoordinates)
-{
-    shiftPolar(polarCoordinates.radius, polarCoordinates.angle);
-}
-
 void SourcesManager::SourcesGroup::shiftPolar(double aRadius, double anAngle)
 {
     shiftRadius(aRadius);
@@ -168,17 +163,6 @@ void SourcesManager::SourcesGroup::shiftAngle(double anAngle)
     }
 }
 
-void SourcesManager::SourcesGroup::shiftCartesian(coordinatesCartesian cartesianCoordinates)
-{
-    shiftCartesian(cartesianCoordinates.x, cartesianCoordinates.y);
-}
-
-void SourcesManager::SourcesGroup::shiftCartesian(double anAbscissa, double anOrdinate)
-{
-    shiftAbscissa(anAbscissa);
-    shiftOrdinate(anOrdinate);
-}
-
 void SourcesManager::SourcesGroup::shiftAbscissa(double anAbscissa)
 {
     double refRadius = 0.;
@@ -194,10 +178,8 @@ void SourcesManager::SourcesGroup::shiftAbscissa(double anAbscissa)
                 if(Tools::radius(m_source_manager->sourceGetAbscissa(m_sources[i]) + anAbscissa, m_source_manager->sourceGetOrdinate(m_sources[i])) > m_maximum_radius)
                 {
                     return;
-                    /*
                     anOrdinate = Tools::ordinate(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2) ;
                     anAbscissa = Tools::abscisse(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2);
-                     */
                 }
             }
         }
@@ -205,7 +187,7 @@ void SourcesManager::SourcesGroup::shiftAbscissa(double anAbscissa)
 
     for(int i = 0; i < m_sources.size(); i++)
     {
-        m_source_manager->sourceSetOrdinate(m_sources[i], anOrdinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
+        //m_source_manager->sourceSetOrdinate(m_sources[i], anOrdinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
         m_source_manager->sourceSetAbscissa(m_sources[i], anAbscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
     }
 }
@@ -224,10 +206,39 @@ void SourcesManager::SourcesGroup::shiftOrdinate(double anOrdinate)
                 refRadius = m_source_manager->sourceGetRadius(m_sources[i]);
                 if(Tools::radius(m_source_manager->sourceGetAbscissa(m_sources[i]), m_source_manager->sourceGetOrdinate(m_sources[i]) + anOrdinate) > m_maximum_radius)
                 {
-                    return;
-                    /*
+                    
+                    
                     anOrdinate = Tools::ordinate(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2) ;
-                    anAbscissa = Tools::abscisse(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2);*/
+                    anAbscissa = Tools::abscisse(m_maximum_radius - refRadius, m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2);
+                }
+            }
+        }
+    }
+    
+    for(int i = 0; i < m_sources.size(); i++)
+    {
+        //m_source_manager->sourceSetAbscissa(m_sources[i], anAbscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
+        m_source_manager->sourceSetOrdinate(m_sources[i], anOrdinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
+    }
+}
+
+void SourcesManager::SourcesGroup::shiftCartesian(double anAbscissa, double anOrdinate)
+{
+    double refRadius = 0.;
+    if(m_maximum_radius >= 0)
+    {
+        refRadius = -m_maximum_radius;
+        for(int i = 0; i < m_sources.size(); i++)
+        {
+            if(Tools::radius(m_source_manager->sourceGetAbscissa(m_sources[i]) + anAbscissa, m_source_manager->sourceGetOrdinate(m_sources[i]) + anOrdinate) > refRadius)
+            {
+                refRadius = Tools::radius(m_source_manager->sourceGetAbscissa(m_sources[i]) + anAbscissa, m_source_manager->sourceGetOrdinate(m_sources[i]) + anOrdinate);
+                if(Tools::radius(m_source_manager->sourceGetAbscissa(m_sources[i]) + anAbscissa, m_source_manager->sourceGetOrdinate(m_sources[i]) + anOrdinate) > m_maximum_radius)
+                {
+                    
+                    
+                    anOrdinate = Tools::ordinate(m_maximum_radius - m_source_manager->sourceGetRadius(m_sources[i]), m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2) ;
+                    anAbscissa = Tools::abscisse(m_maximum_radius - m_source_manager->sourceGetRadius(m_sources[i]), m_source_manager->sourceGetAngle(m_sources[i]) + CICM_PI2);
                 }
             }
         }
@@ -240,21 +251,14 @@ void SourcesManager::SourcesGroup::shiftOrdinate(double anOrdinate)
     }
 }
 
-void SourcesManager::SourcesGroup::setCoordinatesPolar(coordinatesPolar polarCoordinates)
-{
-    setRadius(polarCoordinates.radius);
-    setAngle(polarCoordinates.angle);
-}
-
 void SourcesManager::SourcesGroup::setCoordinatesPolar(double aRadius, double anAngle)
 {
-    setRadius(aRadius);
-    setAngle(anAngle);
+    setCoordinatesCartesian(Tools::abscisse(aRadius, anAngle), Tools::ordinate(aRadius, anAngle));
 }
 
 void SourcesManager::SourcesGroup::setRadius(double aRadius)
 {
-    setCoordinatesCartesian(Tools::abscisse(aRadius, getAngle()), Tools::ordinate(aRadius, getAngle() - CICM_PI2));
+    setCoordinatesCartesian(Tools::abscisse(aRadius, getAngle()), Tools::ordinate(aRadius, getAngle()));
 }
 
 void SourcesManager::SourcesGroup::setAngle(double anAngle)
@@ -262,16 +266,11 @@ void SourcesManager::SourcesGroup::setAngle(double anAngle)
     setCoordinatesCartesian(Tools::abscisse(getRadius(), anAngle), Tools::ordinate(getRadius(), anAngle));
 }
 
-void SourcesManager::SourcesGroup::setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates)
-{
-    setAbscissa(cartesianCoordinates.x);
-    setOrdinate(cartesianCoordinates.y);
-}
-
 void SourcesManager::SourcesGroup::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
 {
-    setAbscissa(anAbscissa);
-    setOrdinate(anOrdinate);
+    anAbscissa = anAbscissa - getAbscissa();
+    anOrdinate = anOrdinate - getOrdinate();
+    shiftCartesian(anAbscissa, anOrdinate);
 }
 
 void SourcesManager::SourcesGroup::setAbscissa(double anAbscissa)
@@ -286,12 +285,6 @@ void SourcesManager::SourcesGroup::setOrdinate(double anOrdinate)
     double aOrdinateOffset = anOrdinate - getOrdinate();
     shiftOrdinate(aOrdinateOffset);
     computeCentroid();
-}
-
-void SourcesManager::SourcesGroup::setRelativeCoordinatesPolar(coordinatesPolar polarCoordinates)
-{
-    setRelativeRadius(polarCoordinates.radius);
-    setRelativeAngle(polarCoordinates.angle);
 }
 
 void SourcesManager::SourcesGroup::setRelativeCoordinatesPolar(double aRadius, double anAngle)
@@ -320,14 +313,6 @@ void SourcesManager::SourcesGroup::setRelativeAngle(double anAngle)
     computeCentroid();
 }
 
-coordinatesPolar SourcesManager::SourcesGroup::getCoordinatesPolar()
-{
-    coordinatesPolar polarCentroid;
-    polarCentroid.radius = getRadius();
-    polarCentroid.angle = getAngle();
-    return polarCentroid;
-}
-
 double SourcesManager::SourcesGroup::getRadius()
 {
     return Tools::radius(m_centroid.x, m_centroid.y);
@@ -336,11 +321,6 @@ double SourcesManager::SourcesGroup::getRadius()
 double SourcesManager::SourcesGroup::getAngle()
 {
     return Tools::angle(m_centroid.x, m_centroid.y) + CICM_PI2;
-}
-
-coordinatesCartesian SourcesManager::SourcesGroup::getCoordinatesCartesian()
-{
-    return m_centroid;
 }
 
 double SourcesManager::SourcesGroup::getAbscissa()
@@ -356,6 +336,15 @@ double SourcesManager::SourcesGroup::getOrdinate()
 long SourcesManager::SourcesGroup::getNumberOfSources()
 {
     return m_sources.size();
+}
+
+
+long SourcesManager::SourcesGroup::getSourceIndex(long anIndex)
+{
+    if(anIndex < m_sources.size() && anIndex >= 0)
+        return m_sources[anIndex];
+    else
+        return -1;
 }
 
 

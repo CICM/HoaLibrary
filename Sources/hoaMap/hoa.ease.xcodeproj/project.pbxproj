@@ -3,14 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8F294E0B17061E5600A6E271 /* AmbisonicSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F294E0317061E5600A6E271 /* AmbisonicSource.cpp */; };
-		8F294E0C17061E5600A6E271 /* AmbisonicSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F294E0417061E5600A6E271 /* AmbisonicSource.h */; };
 		8F294E0D17061E5600A6E271 /* AmbisonicSourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F294E0517061E5600A6E271 /* AmbisonicSourcesGroup.cpp */; };
-		8F294E0E17061E5600A6E271 /* AmbisonicSourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F294E0617061E5600A6E271 /* AmbisonicSourcesGroup.h */; };
 		8F294E0F17061E5600A6E271 /* AmbisonicSourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F294E0717061E5600A6E271 /* AmbisonicSourcesManager.cpp */; };
 		8F294E1017061E5600A6E271 /* AmbisonicSourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F294E0817061E5600A6E271 /* AmbisonicSourcesManager.h */; };
 		8F294E1217061E5600A6E271 /* hoa.map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F294E0A17061E5600A6E271 /* hoa.map.cpp */; };
@@ -24,9 +22,7 @@
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* hoa.ease.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.ease.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F294E0317061E5600A6E271 /* AmbisonicSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSource.cpp; sourceTree = "<group>"; };
-		8F294E0417061E5600A6E271 /* AmbisonicSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSource.h; sourceTree = "<group>"; };
 		8F294E0517061E5600A6E271 /* AmbisonicSourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesGroup.cpp; sourceTree = "<group>"; };
-		8F294E0617061E5600A6E271 /* AmbisonicSourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesGroup.h; sourceTree = "<group>"; };
 		8F294E0717061E5600A6E271 /* AmbisonicSourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesManager.cpp; sourceTree = "<group>"; };
 		8F294E0817061E5600A6E271 /* AmbisonicSourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesManager.h; sourceTree = "<group>"; };
 		8F294E0A17061E5600A6E271 /* hoa.map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.map.cpp; sourceTree = "<group>"; };
@@ -79,8 +75,6 @@
 				8F294E0717061E5600A6E271 /* AmbisonicSourcesManager.cpp */,
 				8F294E0817061E5600A6E271 /* AmbisonicSourcesManager.h */,
 				8F294E1317061EA600A6E271 /* cicmTools.h */,
-				8F294E0417061E5600A6E271 /* AmbisonicSource.h */,
-				8F294E0617061E5600A6E271 /* AmbisonicSourcesGroup.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -100,8 +94,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F294E0C17061E5600A6E271 /* AmbisonicSource.h in Headers */,
-				8F294E0E17061E5600A6E271 /* AmbisonicSourcesGroup.h in Headers */,
 				8F294E1017061E5600A6E271 /* AmbisonicSourcesManager.h in Headers */,
 				8F294E1417061EA600A6E271 /* cicmTools.h in Headers */,
 			);
@@ -134,8 +126,11 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.ease" */;
-			compatibilityVersion = "Xcode 3.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -208,7 +203,7 @@
 					"-latlas",
 					"-lm",
 				);
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;
@@ -234,7 +229,7 @@
 					"-latlas",
 					"-lm",
 				);
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;
@@ -245,8 +240,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -272,7 +267,7 @@
 					"-lm",
 				);
 				PRODUCT_NAME = hoa.ease;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = i386;
 			};
@@ -282,8 +277,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -309,7 +304,7 @@
 					"-lm",
 				);
 				PRODUCT_NAME = hoa.ease;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = i386;
 			};
