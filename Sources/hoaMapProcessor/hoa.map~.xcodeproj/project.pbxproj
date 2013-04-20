@@ -264,17 +264,10 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				INFOPLIST_FILE = ../Info.plist;
-				LIBRARY_SEARCH_PATHS = /usr/local/include/gsl;
+				LIBRARY_SEARCH_PATHS = "";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-static",
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "hoa.map~";
 				SDKROOT = "";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
@@ -304,17 +297,10 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				INFOPLIST_FILE = ../Info.plist;
-				LIBRARY_SEARCH_PATHS = /usr/local/include/gsl;
+				LIBRARY_SEARCH_PATHS = "";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-static",
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "hoa.map~";
 				SDKROOT = "";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";

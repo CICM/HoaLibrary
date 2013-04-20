@@ -26,6 +26,7 @@ SourcesManager::Source::Source(long deadOrAlive, double aRadius, double anAngle)
     setColor(0.2, 0.2, 0.2, 1.);
     setDescription("");
     m_maximum_radius = -1;
+    m_mute = 0;
 }
 
 void SourcesManager::Source::setMaximumRadius(double aLimitValue)
@@ -106,6 +107,11 @@ void SourcesManager::Source::setGroup(long aGroupIndex)
     m_groups.push_back(aGroupIndex);
 }
 
+void SourcesManager::Source::setMute(long aValue)
+{
+    m_mute = Tools::clip(aValue, (long)0, long(1));
+}
+
 void SourcesManager::Source::removeGroup(long aGroupIndex)
 {
     for(int i = 0; i < m_groups.size(); i++)
@@ -169,10 +175,12 @@ long SourcesManager::Source::getGroupIndex(long anIndex)
         return -1;
 }
 
+long SourcesManager::Source::getMute()
+{
+    return m_mute;
+}
+
 SourcesManager::Source::~Source()
 {
-    for(int i = 0; i < m_groups.size(); i++)
-    {
-        m_groups.pop_back();
-    }
+    m_groups.clear();
 }

@@ -17,40 +17,28 @@
  *
  */
 
-#ifndef DEF_CICM_FIR
-#define DEF_CICM_FIR
+#include "RevFir.h"
 
-#include "cicmDefine.h"
-#include "cicmTools.h"
-
-class FirFilter
+FirFilter::FirFilter(long anImpulseSize)
 {
-protected:
-	
-	Cicm_Signal*	m_input_vector;
-	Cicm_Signal*	m_fir_vector;
-	long			m_fir_size;
-	long			m_input_size;
-	long			m_index;
-	Cicm_Signal		m_result;
+	m_fir_size		= anImpulseSize;
+	m_input_size	= m_fir_size * 2 - 1;
 
-public:
-	FirFilter(long anImpulseSize = 128);
-	void	setImpulseResponse(Cicm_Signal* anImpulseResponse);
-	inline Cicm_Signal process(Cicm_Signal anInput);
-	~FirFilter();
-};
+	Cicm_signal_malloc(m_fir_vector, m_fir_size);
+	Cicm_signal_malloc(m_input_vector, m_input_size);
+	Cicm_signal_clear(m_fir_vector, m_fir_size);
+	Cicm_signal_clear(m_input_vector, m_input_size);
 
-inline Cicm_Signal FirFilter::process(Cicm_Signal anInput)
-{
-	m_input_vector[--m_index] = anInput;
-	Cicm_signal_dot(m_input_vector+m_index, m_fir_vector, &m_result, m_fir_size);
-	if(m_index <= 0)
-	{
-		m_index = m_fir_size;
-		Cicm_signal_copy(m_input_vector, m_input_vector+m_fir_size, m_fir_size);
-	}
-	return m_result;
+	m_index = m_fir_size;
 }
 
-#endif
+void FirFilter::setImpulseResponse(Cicm_Signal* anImpulseResponse)
+{
+	Cicm_signal_copy(anImpulseResponse, m_fir_vector, m_fir_size);
+}
+
+FirFilter::~FirFilter()
+{
+	Cicm_free(m_fir_vector);
+	Cicm_free(m_input_vector);
+}

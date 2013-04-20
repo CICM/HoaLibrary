@@ -21,42 +21,39 @@
 #define DEF_CICM_CONVOLVE
 
 #include "cicmTools.h"
-#include "cicmFir.h"
-#include "cicmFftConvolution.h"
+#include "RevFir.h"
+#include "RevFftConvolution.h"
 
-class GardnerConvolution
+class RevConvolution
 {
 protected:
 	long		m_minimum_size;
 	long		m_maximum_size;
-	long		m_offset_size;
-	long		m_number_of_ffts;
-	long		m_number_of_first_filter;
-
+    long        m_number_of_fft;
 	FirFilter*	m_fir;
 	vector <FftConvolution*> m_fft;
 
-	Cicm_Signal		m_result;
-
 public:
-	GardnerConvolution(long aMinimumSize = 64, long aMaximumSize = 8192);
-	void	setImpulseResponse(double* anImpulResponse, long aSize, long anOffset = 0);
-	inline Cicm_Signal process(Cicm_Signal anInput);
-	~GardnerConvolution();
+	RevConvolution(long aMinimumSize = 128, long aMaximumSize = 16384);
+	void	setImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize);
+	inline  Cicm_Signal process(Cicm_Signal anInput);
+    
+    long getMinimumSize(){return m_minimum_size;};
+    long getMaximumSize(){return m_maximum_size;};
+    long getNumberOfFFT(){return m_number_of_fft;};
+    
+	~RevConvolution();
 };
 
-inline Cicm_Signal GardnerConvolution::process(Cicm_Signal anInput)
+inline Cicm_Signal RevConvolution::process(Cicm_Signal anInput)
 {
-	if(!m_number_of_first_filter)
-		m_result = m_fir->process(anInput);
-	else 
-		m_result = 0.;
-
-	for(int i = m_number_of_ffts - 1; i > m_number_of_first_filter; i--)
-	{
-			m_result += m_fft[i]->process(anInput);
-	}
-	return  m_result;
+    Cicm_Signal inputSignal = anInput;
+	anInput = m_fir->process(inputSignal);
+    
+	for(int i = 0; i < m_number_of_fft; i++)
+			anInput += m_fft[i]->process(inputSignal);
+     
+	return  anInput;
 }
 
 #endif

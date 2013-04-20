@@ -28,7 +28,7 @@ extern "C"
 
 typedef struct _HoaTool 
 {
-	t_pxobject				f_ob;			
+	t_pxobject				f_ob;
 	AmbisonicPolyEase*		f_AmbisonicPolyEase;
 
 	int						f_ninput;
@@ -39,10 +39,7 @@ typedef struct _HoaTool
 void *HoaTool_new(t_symbol *s, long argc, t_atom *argv);
 void HoaTool_free(t_HoaTool *x);
 void HoaTool_assist(t_HoaTool *x, void *b, long m, long a, char *s);
-void HoaTool_pol(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
-void HoaTool_car(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 void HoaTool_list(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
-void HoaTool_mute(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv);
 
 void HoaTool_dsp(t_HoaTool *x, t_signal **sp, short *count);
 t_int *HoaTool_perform(t_int *w);
@@ -62,11 +59,6 @@ int main(void)
 	class_addmethod(c, (method)HoaTool_dsp,         "dsp",		A_CANT,  0);
 	class_addmethod(c, (method)HoaTool_dsp64,		"dsp64",	A_CANT,  0);
 	class_addmethod(c, (method)HoaTool_assist,		"assist",	A_CANT,  0);
-    class_addmethod(c, (method)HoaTool_pol,         "pol",      A_GIMME, 0);
-    class_addmethod(c, (method)HoaTool_pol,         "polar",    A_GIMME, 0);
-	class_addmethod(c, (method)HoaTool_car,         "car",      A_GIMME, 0);
-    class_addmethod(c, (method)HoaTool_car,         "cartesian",A_GIMME, 0);
-    class_addmethod(c, (method)HoaTool_mute,        "mute",     A_GIMME, 0);
     class_addmethod(c, (method)HoaTool_list,        "list",     A_GIMME, 0);
     
 	class_dspinit(c);				
@@ -153,7 +145,10 @@ void HoaTool_assist(t_HoaTool *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
     {
-        sprintf(s,"(Signal) Source %ld", a);
+        if(a == 0)
+            sprintf(s,"(Signal or List) Source %ld, sources coordinates", a);
+        else
+            sprintf(s,"(Signal) Source %ld", a);
     }
     else
     {
@@ -168,28 +163,14 @@ void HoaTool_assist(t_HoaTool *x, void *b, long m, long a, char *s)
     }
 }
 
-void HoaTool_pol(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
-{
-	x->f_AmbisonicPolyEase->setPolarCoordinates(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
-}
-
-void HoaTool_car(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
-{
-	x->f_AmbisonicPolyEase->setCartesianCoordinates(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
-}
-
 void HoaTool_list(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
 {
-    if(atom_getsym(argv) == gensym("car") || atom_getsym(argv) == gensym("cartesian"))
-        x->f_AmbisonicPolyEase->setCartesianCoordinates(atom_getlong(argv+1), atom_getfloat(argv+2), atom_getfloat(argv+3));
-    else if(atom_getsym(argv) == gensym("pol") || atom_getsym(argv) == gensym("polar"))
-        x->f_AmbisonicPolyEase->setPolarCoordinates(atom_getlong(argv+1), atom_getfloat(argv+2), atom_getfloat(argv+3));
-}
-
-void HoaTool_mute(t_HoaTool *x, t_symbol *s, long argc, t_atom *argv)
-{
-    if(atom_gettype(argv) == A_LONG )
-        x->f_AmbisonicPolyEase->setMuted(atom_getlong(argv));
+    if(atom_getsym(argv+1) == gensym("car") || atom_getsym(argv+1) == gensym("cartesian"))
+        x->f_AmbisonicPolyEase->setCartesianCoordinates(atom_getlong(argv), atom_getfloat(argv+2), atom_getfloat(argv+3));
+    else if(atom_getsym(argv+1) == gensym("pol") || atom_getsym(argv+1) == gensym("polar"))
+        x->f_AmbisonicPolyEase->setPolarCoordinates(atom_getlong(argv), atom_getfloat(argv+2), atom_getfloat(argv+3));
+    else if (atom_getsym(argv+1) == gensym("mute"))
+        x->f_AmbisonicPolyEase->setMuted(atom_getlong(argv), atom_getlong(argv+2));
 }
 
 void HoaTool_free(t_HoaTool *x)

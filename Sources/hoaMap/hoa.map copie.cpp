@@ -1264,7 +1264,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         if(x->f_index_of_selected_group != -1)
         {
             jpopupmenu_additem(popup, 0, "Menu", NULL, 0, 1, NULL);
-            jpopupmenu_addseperator(popup);
+            jpopupmenu_addseperator(popup);'"(§'
             jpopupmenu_additem(popup, 1, "Remove group", NULL, 0, 0, NULL);
             //jpopupmenu_additem(popup, 2, "Set group color", NULL, 0, 0, NULL);
             int choice = jpopupmenu_popup(popup, pos, 0);

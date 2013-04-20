@@ -18,9 +18,33 @@
 
 #include "AmbisonicSourcesManager.h"
 
-SourcesManager::SourcesManager(double aMaximumLimitValue)
+SourcesManager::SourcesManager(double aMaximumLimitValue, long deadOrAlive)
 {
+    setExistence(deadOrAlive);
     setMaximumRadius(aMaximumLimitValue);    
+}
+
+void SourcesManager::setExistence(long deadOrAlive)
+{
+    m_existence = Tools::clip(deadOrAlive, (long)0, (long)1);
+    if(m_existence == 0)
+    {
+        long maxIndex = m_sources.size();
+        for(int i = 0; i < maxIndex; i++)
+        {
+            m_sources.pop_back();
+        }
+        maxIndex = m_groups.size();
+        for(int i = 0; i < maxIndex; i++)
+        {
+            m_groups.pop_back();
+        }
+    }
+}
+
+long SourcesManager::getExistence()
+{
+    return m_existence;
 }
 
 void SourcesManager::setMaximumRadius(double aLimitValue)
@@ -93,6 +117,7 @@ void SourcesManager::sourceRemove(long anIndex)
         m_sources[anIndex]->setDescription("");
         m_sources[anIndex]->setColor(0.2, 0.2, 0.2, 1.);
         m_sources[anIndex]->setCoordinatesCartesian(0., 1.);
+        m_sources[anIndex]->setMute(0);
     }
 }
 
@@ -232,6 +257,43 @@ void SourcesManager::sourceSetDescription(long anIndex, std::string aDescription
         m_sources[anIndex]->setDescription(aDescription);
     }
 }
+void SourcesManager::checkMute()
+{
+    for(int i = 0; i < m_groups.size(); i++)
+    {
+        m_groups[i]->setMute(1);
+        for(int j = 0; j < m_groups[i]->getNumberOfSources(); j++)
+        {
+            int sourceIndex = m_groups[i]->getSourceIndex(j);
+            if(sourceIndex >= 0 && sourceIndex < m_sources.size())
+            {
+                if(m_sources[sourceIndex]->getMute() != 1)
+                {
+                    m_groups[i]->setMute(0);
+                }
+            }
+        }
+    }
+}
+
+void SourcesManager::sourceSetMute(long anIndex, long aValue)
+{
+    aValue = Tools::clip(aValue, (long)0, (long)1);
+    
+    if(anIndex < m_sources.size() && anIndex >= 0)
+    {
+        m_sources[anIndex]->setMute(aValue);
+        for(int i = 0; i < m_sources[anIndex]->getNumberOfGroups(); i++)
+        {
+            int groupIndex = m_sources[anIndex]->getGroupIndex(i);
+            if(groupIndex >= 0 && groupIndex < m_groups.size())
+            {
+                m_groups[groupIndex]->setMute(0);
+            }
+        }
+        checkMute();
+    }
+}
 
 /******************************************************************************/
 
@@ -311,6 +373,15 @@ long SourcesManager::sourceGetGroupIndex(long aSourceIndex, long aGroupIndex)
     return 0;
 }
 
+long SourcesManager::sourceGetMute(long anIndex)
+{
+    if(anIndex < m_sources.size() && anIndex >= 0)
+    {
+        return m_sources[anIndex]->getMute();
+    }
+    return 0;
+}
+
 /*******************************************************************************/
 /**********************************  GROUP  ************************************/
 /*******************************************************************************/
@@ -332,6 +403,7 @@ void SourcesManager::groupSetSource(long aGroupIndex, long aSourceIndex)
             m_groups[aGroupIndex]->setExistence(1);
             m_groups[aGroupIndex]->addSource(aSourceIndex);
             m_sources[aSourceIndex]->setGroup(aGroupIndex);
+            checkMute();
         }
     }
     else if(aGroupIndex >= 0)
@@ -341,6 +413,7 @@ void SourcesManager::groupSetSource(long aGroupIndex, long aSourceIndex)
             m_groups[aGroupIndex]->addSource(aSourceIndex);
             m_sources[aSourceIndex]->setGroup(aGroupIndex);
             m_groups[aGroupIndex]->setExistence(1);
+            checkMute();
         }
     }
 }
@@ -461,7 +534,23 @@ void SourcesManager::groupRemove(long aGroupIndex)
         m_groups[aGroupIndex]->setColor(0.2, 0.2, 0.2, 1.);
         m_groups[aGroupIndex]->setDescription("");
         m_groups[aGroupIndex]->setExistence(0);
+        m_groups[aGroupIndex]->setMute(0);
     }
+}
+
+void SourcesManager::groupSetMute(long aGroupIndex, long aValue)
+{
+    if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+    {
+        m_groups[aGroupIndex]->setMute(aValue);
+        for(int i = 0; i < m_groups[aGroupIndex]->getNumberOfSources(); i++)
+        {
+            int sourceIndex = m_groups[aGroupIndex]->getSourceIndex(i);
+            if(sourceIndex >= 0 && sourceIndex < m_sources.size())
+                m_sources[sourceIndex]->setMute(aValue);
+        }
+    }
+    checkMute();
 }
 
 
@@ -542,18 +631,20 @@ long SourcesManager::groupGetSourceIndex(long aGroupIndex, long aSourceIndex)
     }
     return 0;
 }
+
+long SourcesManager::groupGetMute(long anIndex)
+{
+    if(anIndex < m_groups.size() && anIndex >= 0)
+    {
+        return m_groups[anIndex]->getMute();
+    }
+    return 0;
+}
+
 /************************************/
 
 SourcesManager::~SourcesManager()
 {
-    for(int i = 0; i < m_sources.size(); i++)
-    {
-        delete m_sources[i];
-        m_sources[i] = NULL;
-    }
-    for(int i = 0; i < m_groups.size(); i++)
-    {
-        delete m_groups[i];
-        m_groups[i] = NULL;
-    }
+    m_sources.clear();
+    m_groups.clear();
 }

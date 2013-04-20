@@ -21,7 +21,7 @@
 #define DEF_AMBISONICCONVOLUTION
 
 #include "cicmTools.h"
-#include "revConvolve.h"
+#include "RevConvolve.h"
 
 class AmbisonicConvolve
 {
@@ -35,7 +35,7 @@ private:
 	double		m_wet;
 	double		m_dry;
     
-	vector <GardnerConvolution*> m_convolution;
+	vector <RevConvolution*> m_convolution;
 public:
 	AmbisonicConvolve(long anOrder = 4, long aVectorSize = 0);
 	long	getOrder();
@@ -49,23 +49,31 @@ public:
     void	setDryValue(double aGain);
 	double	getDryValue();
 
-	void	setImpulseResponse(long aInstance, double* anImpulResponse, long aSize, long anOffset = 0);
+    long getMinimumSize(){return m_convolution[0]->getMinimumSize();};
+    long getMaximumSize(){return m_convolution[0]->getMaximumSize();};
+    long getNumberOfFFT(){return m_convolution[0]->getNumberOfFFT();};
+    
+	void	setImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize);
 	~AmbisonicConvolve();
 
 	/* Perform sample by sample */
-	template<typename Type> void process(Type* aInputs, Type* aOutputs)
+	template<typename Type> inline void process(Type* aInputs, Type* aOutputs)
 	{
 		for(int j = 0; j < m_number_of_harmonics; j++)
 			aOutputs[j] = m_convolution[j]->process(aInputs[j]) * m_wet + m_dry * aInputs[j];
 	}
 	
 	/* Perform sample block */
-	template<typename Type> void process(Type** aInputs, Type** aOutputs)
+	template<typename Type> inline void process(Type** aInputs, Type** aOutputs)
 	{
-		for(int i = 0; i < m_vector_size; i++)
+        Type* In;
+        Type* Out;
+		for(int j = 0; j < m_number_of_harmonics; j++)
 		{
-			for(int j = 0; j < m_number_of_harmonics; j++)
-				aOutputs[j][i] = m_convolution[j]->process(aInputs[j][i])  * m_wet + m_dry * aInputs[j][i];
+            In = aInputs[j];
+            Out  = aOutputs[j];
+			for(int i = 0; i < m_vector_size; i++)
+				Out[i] = m_convolution[j]->process(In[i])  * m_wet + m_dry * In[i];
 		}
 	}
 	

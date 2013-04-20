@@ -30,21 +30,18 @@ private:
 	
 	long				m_window_size;
 	long				m_array_size;
-	long				m_number_of_instances;
 	long				m_ramp;
 	long				m_hope_size;
 
 	Cicm_Fft*			m_fft_instance;
-	Cicm_Signal**		m_real_vector;
+	Cicm_Signal*		m_real_vector;
 	Cicm_Signal*		m_buffer;
 	Cicm_Packed*		m_input_complexes;
-	Cicm_Packed**		m_impul_complexes;
+	Cicm_Packed*		m_impul_complexes;
 	Cicm_Packed*		m_output_complexes;
 	
-	Cicm_Signal			m_result;
-	
 public:
-	FftConvolution(long aWindowSize = 1024, long aNumberOfInstances = 2);
+	FftConvolution(long aWindowSize = 1024);
 	void loadImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize);
 	inline Cicm_Signal process(Cicm_Signal anInput);
 	~FftConvolution();
@@ -52,38 +49,22 @@ public:
 	
 inline Cicm_Signal FftConvolution::process(Cicm_Signal anInput)
 {
-	m_result = m_real_vector[0][m_ramp];
-	m_real_vector[0][m_ramp] = anInput;
-	
-	if(m_ramp % m_hope_size == 0 && m_ramp != 0)
-	{
-		int index = m_ramp / m_hope_size;
-		if(index < m_number_of_instances)
-		{
-			Cicm_packed_mul(m_input_complexes, m_impul_complexes[index], m_output_complexes, m_array_size);
-			m_fft_instance->inverse(m_output_complexes, m_real_vector[index]);
-		
-			if(index < m_number_of_instances - 1)
-				Cicm_signal_add(m_real_vector[index+1], m_real_vector[index], m_real_vector[index], m_window_size);
-		}
-	}
-	
+	Cicm_Signal result = m_real_vector[m_ramp];
+	m_real_vector[m_ramp] = anInput;
 	if(++m_ramp >= m_array_size)
 	{
-		Cicm_signal_copy(m_real_vector[0]+m_array_size, m_buffer, m_array_size);
-		Cicm_signal_clear(m_real_vector[0]+m_array_size, m_array_size);
-		m_fft_instance->forward(m_real_vector[0], m_input_complexes);
+		Cicm_signal_copy(m_real_vector+m_array_size, m_buffer, m_array_size);
+		Cicm_signal_clear(m_real_vector+m_array_size, m_array_size);
+		m_fft_instance->forward(m_real_vector, m_input_complexes);
 
-		Cicm_packed_mul(m_input_complexes, m_impul_complexes[0], m_output_complexes, m_array_size);
+		Cicm_packed_mul(m_input_complexes, m_impul_complexes, m_output_complexes, m_array_size);
 
-		m_fft_instance->inverse(m_output_complexes, m_real_vector[0]);
-		if(m_number_of_instances > 1)
-			Cicm_signal_add(m_real_vector[1], m_real_vector[0], m_real_vector[0], m_window_size);
-		Cicm_signal_add(m_buffer, m_real_vector[0], m_real_vector[0], m_array_size);
+		m_fft_instance->inverse(m_output_complexes, m_real_vector);
+		Cicm_signal_add(m_buffer, m_real_vector, m_real_vector, m_array_size);
 		m_ramp = 0;
 	}
 	
-	return m_result;
+	return result;
 }
 
 #endif

@@ -27,7 +27,7 @@ AmbisonicConvolve::AmbisonicConvolve(long anOrder, long aVectorSize)
 	m_number_of_outputs		= m_number_of_harmonics;
 	
 	for(int i = 0; i < m_number_of_harmonics; i++)
-		m_convolution.push_back(new GardnerConvolution());
+		m_convolution.push_back(new RevConvolution());
 	
 	setWetValue(1);
     setDryValue(0.);
@@ -83,10 +83,10 @@ double	AmbisonicConvolve::getDryValue()
     return m_dry;
 }
 
-void AmbisonicConvolve::setImpulseResponse(long aInstance, double* anImpulResponse, long aSize, long anOffset)
+void AmbisonicConvolve::setImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize)
 {
-	aInstance = Tools::clip(aInstance, (long)0, m_number_of_harmonics);
-	m_convolution[aInstance]->setImpulseResponse(anImpulResponse, aSize, anOffset);
+	for(int i = 0; i < m_number_of_harmonics; i++)
+        m_convolution[i]->setImpulseResponse(anImpulseResponse, aSize);
 }
 AmbisonicConvolve::~AmbisonicConvolve()
 {
