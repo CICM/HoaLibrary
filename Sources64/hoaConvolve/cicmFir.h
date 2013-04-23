@@ -31,7 +31,7 @@ protected:
 	Cicm_Signal*	m_fir_vector;
 	long			m_fir_size;
 	long			m_input_size;
-	long			m_index;
+	int             m_index;;
 
 public:
 	FirFilter(long anImpulseSize = 128);

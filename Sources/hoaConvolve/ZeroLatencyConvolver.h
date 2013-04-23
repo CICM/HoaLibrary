@@ -21,39 +21,38 @@
 #define DEF_CICM_CONVOLVE
 
 #include "cicmTools.h"
-#include "RevFir.h"
-#include "RevFftConvolution.h"
+#include "cicmFir.h"
+#include "cicmFftConvolution.h"
 
-class RevConvolution
+class ZeroLatencyConvolver
 {
 protected:
-	long		m_minimum_size;
-	long		m_maximum_size;
-    long        m_number_of_fft;
+	int     m_minimum_size;
+	int		m_maximum_size;
+	int		m_number_of_ffts;
+    int		m_ffts_useds;
+
 	FirFilter*	m_fir;
 	vector <FftConvolution*> m_fft;
 
 public:
-	RevConvolution(long aMinimumSize = 128, long aMaximumSize = 16384);
-	void	setImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize);
-	inline  Cicm_Signal process(Cicm_Signal anInput);
-    
-    long getMinimumSize(){return m_minimum_size;};
-    long getMaximumSize(){return m_maximum_size;};
-    long getNumberOfFFT(){return m_number_of_fft;};
-    
-	~RevConvolution();
+	ZeroLatencyConvolver(long aMinimumSize = 128, long aMaximumSize = 32768);
+	void	setImpulseResponse(float* anImpulResponse, long aSize);
+	inline Cicm_Signal process(Cicm_Signal anInput);
+    long getNumberOfFFTs(){return m_ffts_useds;};
+    long getNumberOfInstance(){return m_fft[m_number_of_ffts-1]->getNumberOfInstances();};
+	~ZeroLatencyConvolver();
 };
 
-inline Cicm_Signal RevConvolution::process(Cicm_Signal anInput)
+inline Cicm_Signal ZeroLatencyConvolver::process(Cicm_Signal anInput)
 {
-    Cicm_Signal inputSignal = anInput;
-	anInput = m_fir->process(inputSignal);
+	Cicm_Signal result = m_fir->process(anInput);
     
-	for(int i = 0; i < m_number_of_fft; i++)
-			anInput += m_fft[i]->process(inputSignal);
-     
-	return  anInput;
+	for(int i = 0; i < m_ffts_useds; i++)
+			result += m_fft[i]->process(anInput);
+    
+    //Cicm_Signal result = m_fft[0]->process(anInput);
+	return  result;
 }
 
 #endif
