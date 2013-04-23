@@ -21,9 +21,9 @@
 #define DEF_AMBISONICCONVOLUTION
 
 #include "cicmTools.h"
-#include "RevConvolve.h"
+#include "ZeroLatencyConvolver.h"
 
-class AmbisonicConvolve
+class AmbisonicConvolver
 {
 	
 private:
@@ -31,49 +31,66 @@ private:
 	long		m_number_of_harmonics;
 	long		m_number_of_inputs;
 	long		m_number_of_outputs;
+    
+    long		m_sampling_frequency;
 	long		m_vector_size;
+    
 	double		m_wet;
 	double		m_dry;
+    double      m_early_diffraction;
+    double      m_tail_diffraction;
+    double		m_cutoff_time;
+
+    float*     m_impulse_response;
+    float**    m_ambisonics_impulse_responses;
+    long        m_impulse_response_size;
+	vector <ZeroLatencyConvolver*> m_convolution;
     
-	vector <RevConvolution*> m_convolution;
+    void        computeAmbisonicsImpulseResponses();
 public:
-	AmbisonicConvolve(long anOrder = 4, long aVectorSize = 0);
+	AmbisonicConvolver(long anOrder = 4, long aSamplingFrequency = 44100, long aVectorSize = 0);
 	long	getOrder();
 	long	getNumberOfHarmonics();
 	long	getNumberOfInputs();
 	long	getNumberOfOutputs();
 	void	setVectorSize(long aVectorSize);
 	long	getVectorSize();
+    void	setSamplingFrequency(long aSamplingFrequency);
+	long	getSamplingFrequency();
     void	setWetValue(double aGain);
 	double	getWetValue();
     void	setDryValue(double aGain);
 	double	getDryValue();
+    void    setEarlyDiffractionValue(double aValue);
+    double  getEarlyDiffractionValue();
+    void    setTailDiffractionValue(double aValue);
+    double  getTailDiffractionValue();
+    void    setCutOffTime(double aTimeValue);
+    double  getCutOffTime();
 
-    long getMinimumSize(){return m_convolution[0]->getMinimumSize();};
-    long getMaximumSize(){return m_convolution[0]->getMaximumSize();};
-    long getNumberOfFFT(){return m_convolution[0]->getNumberOfFFT();};
+    long getNumberOfFFTs(){return m_convolution[0]->getNumberOfFFTs();};
+    long getNumberOfInstance(){return m_convolution[0]->getNumberOfInstance();};
     
-	void	setImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize);
-	~AmbisonicConvolve();
+	void	setImpulseResponse(float* anImpulResponse, long aSize);
+	~AmbisonicConvolver();
 
 	/* Perform sample by sample */
-	template<typename Type> inline void process(Type* aInputs, Type* aOutputs)
+	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{
 		for(int j = 0; j < m_number_of_harmonics; j++)
 			aOutputs[j] = m_convolution[j]->process(aInputs[j]) * m_wet + m_dry * aInputs[j];
 	}
 	
 	/* Perform sample block */
-	template<typename Type> inline void process(Type** aInputs, Type** aOutputs)
+	template<typename Type> void process(Type** aInputs, Type** aOutputs)
 	{
-        Type* In;
-        Type* Out;
-		for(int j = 0; j < m_number_of_harmonics; j++)
+        Type *InputVector, *OutputVector;
+		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
-            In = aInputs[j];
-            Out  = aOutputs[j];
-			for(int i = 0; i < m_vector_size; i++)
-				Out[i] = m_convolution[j]->process(In[i])  * m_wet + m_dry * In[i];
+            InputVector = aInputs[i];
+            OutputVector = aOutputs[i];
+			for(int j = 0; j < m_vector_size; j++)
+				OutputVector[j] = m_convolution[i]->process(InputVector[j]) * m_wet + m_dry * InputVector[j];
 		}
 	}
 	

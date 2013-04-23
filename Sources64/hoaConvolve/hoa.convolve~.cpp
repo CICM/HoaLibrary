@@ -18,7 +18,7 @@
  */
 
 
-#include "AmbisonicConvolve.h"
+#include "AmbisonicConvolver.h"
 
 extern "C"
 {
@@ -32,16 +32,19 @@ extern "C"
 typedef struct _HoaConvolve 
 {
 	t_pxobject			f_ob;			
-	AmbisonicConvolve*	f_ambiConvolve;
+	AmbisonicConvolver*	f_ambiConvolve;
 
 	t_symbol*			f_name;
 	t_buffer*			f_buffer;
 	long				f_channel;
 	long				f_numberOfHarmonics;
-    
+	
 	int					f_check;
 	double              f_wet;
     double              f_dry;
+    double              f_early_diff;
+    double              f_tail_diff;
+    double              f_cutoff_time;
 } t_HoaConvolve;
 
 void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv);
@@ -55,6 +58,10 @@ t_max_err buffer_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err channel_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err dry_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err wet_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
+t_max_err early_diff_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
+t_max_err tail_diff_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
+t_max_err cutoff_time_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
+void HoaConvolve_info(t_HoaConvolve *x);
 
 void HoaConvolve_dsp(t_HoaConvolve *x, t_signal **sp, short *count);
 t_int *HoaConvolve_perform(t_int *w);
@@ -65,7 +72,7 @@ void HoaConvolve_perform64(t_HoaConvolve *x, t_object *dsp64, double **ins, long
 
 void *HoaConvolve_class;
 
-int main(void)
+int C74_EXPORT main(void)
 {	
 
 	t_class *c;
@@ -75,6 +82,7 @@ int main(void)
 	class_addmethod(c, (method)HoaConvolve_dsp,			"dsp",		A_CANT,     0);
 	class_addmethod(c, (method)HoaConvolve_dsp64,		"dsp64",	A_CANT,     0);
 	class_addmethod(c, (method)HoaConvolve_assist,		"assist",	A_CANT,     0);
+    class_addmethod(c, (method)HoaConvolve_info,		"getinfo",       0);
 	
 	CLASS_ATTR_SYM              (c, "buffer",   0, t_HoaConvolve, f_name);
 	CLASS_ATTR_CATEGORY			(c, "buffer",   0, "Behavior");
@@ -107,6 +115,30 @@ int main(void)
 	CLASS_ATTR_ACCESSORS		(c, "wet",      NULL, wet_set);
 	CLASS_ATTR_DEFAULT			(c, "wet",      0, "1.");
 	CLASS_ATTR_SAVE				(c, "wet",      1);
+    
+    CLASS_ATTR_DOUBLE			(c, "earlydiff",      0, t_HoaConvolve, f_early_diff);
+	CLASS_ATTR_CATEGORY			(c, "earlydiff",      0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "earlydiff",      0, "Early diffraction value");
+	CLASS_ATTR_ORDER			(c, "earlydiff",      0, "3");
+	CLASS_ATTR_ACCESSORS		(c, "earlydiff",      NULL, early_diff_set);
+	CLASS_ATTR_DEFAULT			(c, "earlydiff",      0, "0.");
+	CLASS_ATTR_SAVE				(c, "earlydiff",      1);
+    
+    CLASS_ATTR_DOUBLE			(c, "taildiff",      0, t_HoaConvolve, f_tail_diff);
+	CLASS_ATTR_CATEGORY			(c, "taildiff",      0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "taildiff",      0, "Tail diffraction value");
+	CLASS_ATTR_ORDER			(c, "taildiff",      0, "4");
+	CLASS_ATTR_ACCESSORS		(c, "taildiff",      NULL, tail_diff_set);
+	CLASS_ATTR_DEFAULT			(c, "taildiff",      0, "1.");
+	CLASS_ATTR_SAVE				(c, "taildiff",      1);
+    
+    CLASS_ATTR_DOUBLE			(c, "cutofftime",      0, t_HoaConvolve, f_cutoff_time);
+	CLASS_ATTR_CATEGORY			(c, "cutofftime",      0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "cutofftime",      0, "Cutoff time (ms)");
+	CLASS_ATTR_ORDER			(c, "cutofftime",      0, "5");
+	CLASS_ATTR_ACCESSORS		(c, "cutofftime",      NULL, cutoff_time_set);
+	CLASS_ATTR_DEFAULT			(c, "cutofftime",      0, "100.");
+	CLASS_ATTR_SAVE				(c, "cutofftime",      1);
 
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -130,8 +162,9 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
         if(order < 1)
             order = 1;
 
-		x->f_ambiConvolve	= new AmbisonicConvolve(order);
+		x->f_ambiConvolve	= new AmbisonicConvolver(order, sys_getsr(), sys_getblksize());
 		x->f_numberOfHarmonics = x->f_ambiConvolve->getNumberOfHarmonics();
+       
         x->f_buffer = NULL;
          
 		dsp_setup((t_pxobject *)x, x->f_ambiConvolve->getNumberOfInputs());
@@ -146,9 +179,17 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
+void HoaConvolve_info(t_HoaConvolve *x)
+{
+    object_post((t_object *)x, "Number of convolution intances %ld", x->f_ambiConvolve->getNumberOfFFTs());
+    object_post((t_object *)x, "Number of big convolution intances %ld", x->f_ambiConvolve->getNumberOfInstance());
+}
+
 void HoaConvolve_dsp64(t_HoaConvolve *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiConvolve->setVectorSize(maxvectorsize);
+    if(x->f_ambiConvolve->getSamplingFrequency() != samplerate)
+        x->f_ambiConvolve->setSamplingFrequency(samplerate);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaConvolve_perform64, 0, NULL);
 }
 
@@ -164,6 +205,9 @@ void HoaConvolve_dsp(t_HoaConvolve *x, t_signal **sp, short *count)
 	t_int **sigvec;
 	
 	x->f_ambiConvolve->setVectorSize(sp[0]->s_n);
+    if(x->f_ambiConvolve->getSamplingFrequency() != sp[0]->s_sr)
+        x->f_ambiConvolve->setSamplingFrequency(sp[0]->s_sr);
+    
 	pointer_count = x->f_ambiConvolve->getNumberOfInputs() + x->f_ambiConvolve->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
@@ -220,9 +264,6 @@ t_max_err buffer_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
     
 	if(argc && argv && atom_gettype(argv) == A_SYM)
 	{
-		if(argc > x->f_numberOfHarmonics)
-		argc = x->f_numberOfHarmonics;
-
 		name = atom_getsym(argv);
 		if(x->f_name != name)
 		{
@@ -275,9 +316,12 @@ void buffer_setup(t_HoaConvolve *x)
 {
 	if(x->f_check)
 	{
+		int vectorSize = 0;
         if(x->f_buffer != NULL)
         {
-            Cicm_Signal* datas = new Cicm_Signal[x->f_buffer->b_frames];
+            if(vectorSize < x->f_buffer->b_frames)
+				vectorSize = x->f_buffer->b_frames;
+            float* datas = new float[vectorSize];
             
             ATOMIC_INCREMENT(&x->f_buffer->b_inuse);
             if (!x->f_buffer->b_valid)
@@ -291,10 +335,10 @@ void buffer_setup(t_HoaConvolve *x)
                     datas[i] = x->f_buffer->b_samples[i * x->f_buffer->b_nchans + (x->f_channel - 1)];
                 }
                 ATOMIC_DECREMENT(&x->f_buffer->b_inuse);
+                post("size %ld", x->f_buffer->b_frames);
             }
             x->f_ambiConvolve->setImpulseResponse(datas, x->f_buffer->b_frames);
             free(datas);
-            post("n fft : %ld", x->f_ambiConvolve->getNumberOfFFT());
         }
 	}
 }
@@ -317,7 +361,40 @@ t_max_err wet_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 		x->f_ambiConvolve->setWetValue(atom_getlong(argv));
 	else if(atom_gettype(argv) == A_FLOAT)
 		x->f_ambiConvolve->setWetValue(atom_getfloat(argv));
-    
+
 	x->f_wet = x->f_ambiConvolve->getWetValue();
+	return 0;
+}
+
+t_max_err early_diff_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(atom_gettype(argv) == A_LONG)
+		x->f_ambiConvolve->setEarlyDiffractionValue(atom_getlong(argv));
+	else if(atom_gettype(argv) == A_FLOAT)
+		x->f_ambiConvolve->setEarlyDiffractionValue(atom_getfloat(argv));
+    
+	x->f_early_diff = x->f_ambiConvolve->getEarlyDiffractionValue();
+	return 0;
+}
+
+t_max_err tail_diff_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(atom_gettype(argv) == A_LONG)
+		x->f_ambiConvolve->setTailDiffractionValue(atom_getlong(argv));
+	else if(atom_gettype(argv) == A_FLOAT)
+		x->f_ambiConvolve->setTailDiffractionValue(atom_getfloat(argv));
+    
+	x->f_tail_diff = x->f_ambiConvolve->getTailDiffractionValue();
+	return 0;
+}
+
+t_max_err cutoff_time_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(atom_gettype(argv) == A_LONG)
+		x->f_ambiConvolve->setCutOffTime(atom_getlong(argv));
+	else if(atom_gettype(argv) == A_FLOAT)
+		x->f_ambiConvolve->setCutOffTime(atom_getfloat(argv));
+    
+	x->f_cutoff_time = x->f_ambiConvolve->getCutOffTime();
 	return 0;
 }

@@ -12,6 +12,13 @@
 		2CD5D13B1675F293008009B2 /* hoaHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD5D13A1675F293008009B2 /* hoaHeader.h */; };
 		2FBBEADE08F335360078DB84 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
 		4E0674E714DDA54E00C91AB7 /* AmbisonicEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E0674E514DDA54E00C91AB7 /* AmbisonicEncoder.cpp */; };
+		8F955751172536C1009F6A97 /* hoaHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD5D13A1675F293008009B2 /* hoaHeader.h */; };
+		8F955752172536C1009F6A97 /* AmbisonicEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9F910416C2CD1C000827DF /* AmbisonicEncoder.h */; };
+		8F955753172536C1009F6A97 /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9F910816C3AE92000827DF /* cicmTools.h */; };
+		8F955756172536C1009F6A97 /* AmbisonicEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E0674E514DDA54E00C91AB7 /* AmbisonicEncoder.cpp */; };
+		8F955757172536C1009F6A97 /* hoa.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC912161359A60001AAF5 /* hoa.encoder~.cpp */; };
+		8F955759172536C1009F6A97 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54266BCE05E6E9780000000C /* MaxAPI.framework */; };
+		8F95575A172536C1009F6A97 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
 		8F9F910516C2CD1C000827DF /* AmbisonicEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9F910416C2CD1C000827DF /* AmbisonicEncoder.h */; };
 		8F9F910916C3AE92000827DF /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9F910816C3AE92000827DF /* cicmTools.h */; };
 /* End PBXBuildFile section */
@@ -24,6 +31,8 @@
 		2FBBEAE508F335360078DB84 /* hoa.encoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.encoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0674E514DDA54E00C91AB7 /* AmbisonicEncoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncoder.cpp; sourceTree = "<group>"; };
 		54266BCE05E6E9780000000C /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
+		8F95575F172536C1009F6A97 /* hoa.encoder.pd.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.encoder.pd.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F955760172536C1009F6A97 /* max-external copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "max-external copy-Info.plist"; path = "/Users/Pierre/SourceTree/HoaLibrary/Sources/hoaEncoder/max-external copy-Info.plist"; sourceTree = "<absolute>"; };
 		8F9F910416C2CD1C000827DF /* AmbisonicEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicEncoder.h; sourceTree = "<group>"; };
 		8F9F910816C3AE92000827DF /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmTools.h; path = ../cicmTools.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -38,6 +47,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8F955758172536C1009F6A97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F955759172536C1009F6A97 /* MaxAPI.framework in Frameworks */,
+				8F95575A172536C1009F6A97 /* MaxAudioAPI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -48,6 +66,7 @@
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
+				8F955760172536C1009F6A97 /* max-external copy-Info.plist */,
 			);
 			name = iterator;
 			sourceTree = "<group>";
@@ -77,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				2FBBEAE508F335360078DB84 /* hoa.encoder~.mxo */,
+				8F95575F172536C1009F6A97 /* hoa.encoder.pd.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,6 +111,16 @@
 				2CD5D13B1675F293008009B2 /* hoaHeader.h in Headers */,
 				8F9F910516C2CD1C000827DF /* AmbisonicEncoder.h in Headers */,
 				8F9F910916C3AE92000827DF /* cicmTools.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F955750172536C1009F6A97 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F955751172536C1009F6A97 /* hoaHeader.h in Headers */,
+				8F955752172536C1009F6A97 /* AmbisonicEncoder.h in Headers */,
+				8F955753172536C1009F6A97 /* cicmTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +146,25 @@
 			productReference = 2FBBEAE508F335360078DB84 /* hoa.encoder~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
+		8F95574F172536C1009F6A97 /* pd-external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F95575C172536C1009F6A97 /* Build configuration list for PBXNativeTarget "pd-external" */;
+			buildPhases = (
+				8F955750172536C1009F6A97 /* Headers */,
+				8F955754172536C1009F6A97 /* Resources */,
+				8F955755172536C1009F6A97 /* Sources */,
+				8F955758172536C1009F6A97 /* Frameworks */,
+				8F95575B172536C1009F6A97 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "pd-external";
+			productName = iterator;
+			productReference = 8F95575F172536C1009F6A97 /* hoa.encoder.pd.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -139,12 +188,20 @@
 			projectRoot = "";
 			targets = (
 				2FBBEAD608F335360078DB84 /* max-external */,
+				8F95574F172536C1009F6A97 /* pd-external */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2FBBEAD808F335360078DB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F955754172536C1009F6A97 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -161,6 +218,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8F95575B172536C1009F6A97 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -170,6 +234,15 @@
 			files = (
 				4E0674E714DDA54E00C91AB7 /* AmbisonicEncoder.cpp in Sources */,
 				0E6DC913161359A60001AAF5 /* hoa.encoder~.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F955755172536C1009F6A97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F955756172536C1009F6A97 /* AmbisonicEncoder.cpp in Sources */,
+				8F955757172536C1009F6A97 /* hoa.encoder~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +317,52 @@
 			};
 			name = Deployment;
 		};
+		8F95575D172536C1009F6A97 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				INFOPLIST_FILE = "max-external copy-Info.plist";
+				PRODUCT_NAME = hoa.encoder.pd;
+				SDKROOT = "";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Development;
+		};
+		8F95575E172536C1009F6A97 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				INFOPLIST_FILE = "max-external copy-Info.plist";
+				PRODUCT_NAME = hoa.encoder.pd;
+				SDKROOT = "";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Deployment;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -261,6 +380,15 @@
 			buildConfigurations = (
 				2FBBEAE108F335360078DB84 /* Development */,
 				2FBBEAE208F335360078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		8F95575C172536C1009F6A97 /* Build configuration list for PBXNativeTarget "pd-external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F95575D172536C1009F6A97 /* Development */,
+				8F95575E172536C1009F6A97 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;

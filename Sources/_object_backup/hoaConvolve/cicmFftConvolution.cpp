@@ -17,20 +17,19 @@
  *
  */
 
-#include "RevFftConvolution.h"
+#include "cicmFftConvolution.h"
 
-FftConvolution::FftConvolution(long aWindowSize)
+FftConvolution::FftConvolution(long aWindowSize, long aNumberOfInstances)
 {
 	m_fft_instance	= new Cicm_Fft(aWindowSize);
 	m_window_size	= m_fft_instance->getWindowSize();
 	m_array_size	= m_fft_instance->getArraySize();
-	m_hope_size		= m_array_size;		
+	m_number_of_instances = Tools::clip_min(aNumberOfInstances, (long)1);
+	m_hope_size		= m_array_size / m_number_of_instances;		
 	m_ramp = 0;
 
-	Cicm_signal_malloc(m_real_vector, m_window_size);
-    Cicm_signal_clear(m_real_vector, m_window_size);
-    Cicm_packed_malloc(m_impul_complexes, m_window_size);
-    Cicm_packed_clear(m_impul_complexes, m_window_size);
+	m_real_vector		= new Cicm_Signal*[m_number_of_instances];
+	m_impul_complexes	= new Cicm_Packed*[m_number_of_instances];
 	
 	Cicm_packed_malloc(m_input_complexes, m_window_size);
 	Cicm_packed_malloc(m_output_complexes, m_window_size);
@@ -39,17 +38,33 @@ FftConvolution::FftConvolution(long aWindowSize)
 	Cicm_packed_clear(m_input_complexes, m_window_size);
 	Cicm_packed_clear(m_output_complexes, m_window_size);
 	Cicm_signal_clear(m_buffer, m_array_size);
+
+	for(int i = 0; i < m_number_of_instances; i++)
+	{
+		Cicm_signal_malloc(m_real_vector[i], m_window_size);
+		Cicm_packed_malloc(m_impul_complexes[i], m_window_size);
+		Cicm_signal_clear(m_real_vector[i], m_window_size);
+		Cicm_packed_clear(m_impul_complexes[i], m_window_size);
+	}
+	
 }
 
 void FftConvolution::loadImpulseResponse(Cicm_Signal* anImpulseResponse, long aSize)
 {
-    for(int j = 0; j < m_array_size; j++)
-        m_real_vector[j] = anImpulseResponse[j] * m_fft_instance->getScale();
-    for(int j = m_array_size; j < m_window_size; j++)
-        m_real_vector[j] = 0.;
-            
-    m_fft_instance->forward(m_real_vector, m_impul_complexes);
-    Cicm_signal_clear(m_real_vector, m_window_size);
+	Cicm_Signal *datas;
+	Cicm_signal_malloc(datas, m_window_size);
+    
+	for(int i = 0; i < m_number_of_instances; i++)
+	{
+		for(int j = 0; j < m_array_size; j++)
+			datas[j] = anImpulseResponse[j + m_array_size * i] * m_fft_instance->getScale();
+		for(int j = m_array_size; j < m_window_size; j++)
+			datas[j] = 0.;
+		
+		m_fft_instance->forward(datas, m_impul_complexes[i]);
+	}
+	
+	Cicm_free(datas);
 }
 
 FftConvolution::~FftConvolution()
@@ -57,7 +72,12 @@ FftConvolution::~FftConvolution()
 	Cicm_free(m_buffer);
 	Cicm_free(m_input_complexes);
 	Cicm_free(m_output_complexes);
-    Cicm_free(m_real_vector);
-    Cicm_free(m_impul_complexes);
+	for(int i = 0; i < m_number_of_instances; i++)
+	{
+		Cicm_free(m_real_vector[i]);
+		Cicm_free(m_impul_complexes[i]);
+	}
+	free(m_real_vector);
+	free(m_impul_complexes);
 	delete m_fft_instance;
 }

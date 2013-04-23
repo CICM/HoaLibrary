@@ -17,40 +17,42 @@
  *
  */
 
-#ifndef DEF_CICM_FIR
-#define DEF_CICM_FIR
+#ifndef DEF_CICM_CONVOLVE
+#define DEF_CICM_CONVOLVE
 
-#include "cicmDefine.h"
 #include "cicmTools.h"
+#include "cicmFir.h"
+#include "cicmFftConvolution.h"
 
-class FirFilter
+class ZeroLatencyConvolver
 {
 protected:
-	
-	Cicm_Signal*	m_input_vector;
-	Cicm_Signal*	m_fir_vector;
-	long			m_fir_size;
-	long			m_input_size;
-	int             m_index;;
+	int     m_minimum_size;
+	int		m_maximum_size;
+	int		m_number_of_ffts;
+    int		m_ffts_useds;
+
+	FirFilter*	m_fir;
+	vector <FftConvolution*> m_fft;
 
 public:
-	FirFilter(long anImpulseSize = 128);
-	void	setImpulseResponse(Cicm_Signal* anImpulseResponse);
+	ZeroLatencyConvolver(long aMinimumSize = 128, long aMaximumSize = 32768);
+	void	setImpulseResponse(float* anImpulResponse, long aSize);
 	inline Cicm_Signal process(Cicm_Signal anInput);
-	~FirFilter();
+    long getNumberOfFFTs(){return m_ffts_useds;};
+    long getNumberOfInstance(){return m_fft[m_number_of_ffts-1]->getNumberOfInstances();};
+	~ZeroLatencyConvolver();
 };
 
-inline Cicm_Signal FirFilter::process(Cicm_Signal anInput)
+inline Cicm_Signal ZeroLatencyConvolver::process(Cicm_Signal anInput)
 {
-    Cicm_Signal result;
-	m_input_vector[--m_index] = anInput;
-	Cicm_signal_dot(m_input_vector+m_index, m_fir_vector, &result, m_fir_size);
-	if(m_index <= 0)
-	{
-		m_index = m_fir_size;
-		Cicm_signal_copy(m_input_vector, m_input_vector+m_fir_size, m_fir_size);
-	}
-	return result;
+	Cicm_Signal result = m_fir->process(anInput);
+    
+	for(int i = 0; i < m_ffts_useds; i++)
+			result += m_fft[i]->process(anInput);
+    
+    //Cicm_Signal result = m_fft[0]->process(anInput);
+	return  result;
 }
 
 #endif
