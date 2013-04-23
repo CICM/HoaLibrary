@@ -50,45 +50,6 @@ public:
     void setPlugIO(int _numberOfInputs, int _numberOfOutputs);
     void process(float** aInputs, float** aOutputs);
     void process(float** aInputs, int nbInput, float** aOutputs, int nbOutput);
-    
-    int bufferSize;
-	vector< t_sample * > inputBuffers;
-	vector< t_sample * > outputBuffers;
-    //t_sample** inputBuffers;
-    //t_sample** outputBuffers;
-    
-    /* Perform sample by sample */
-    /*
-	template<typename Type> void process(Type* aInputs, Type* aOutputs)
-	{
-        for(int i = 0; i < m_number_of_harmonics; i++)
-            aOutputs[i] = 0.;
-		for(int i = 0; i < m_number_of_sources; i++)
-            m_eases[i]->process(aInputs[i], aOutputs);
-	}
-    */
-	
-	/* Perform block sample */
-    /*
-	template<typename Type> void process(Type** aInputs, Type** aOutputs)
-	{
-        Type* outputs;
-        for(int i = 0; i < m_number_of_harmonics; i++)
-        {
-            outputs = aOutputs[i];
-            for(int j = 0; j < m_vector_size; j++)
-                outputs[j] = 0.;
-        }
-        
-		for(int i = 0; i < m_number_of_sources; i++)
-            m_eases[i]->process(aInputs[i], aOutputs);
-	}
-    */
-//    void process(float** aInputs, float** aOutputs)
-//	{
-//        perform(genGrain, (t_sample**)aInputs, getNumberOfInputs(), (t_sample**)aOutputs, getNumberOfOutputs(), getVectorSize());
-//	}
-    
 };
 
 #endif /* defined(__hoa_granulate___GrainPlug__) */

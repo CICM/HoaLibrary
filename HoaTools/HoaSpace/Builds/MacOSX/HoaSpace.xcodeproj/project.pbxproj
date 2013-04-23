@@ -245,6 +245,7 @@
 		2BA92CEFD4C9747A3ECF2D38 /* juce_DragAndDropContainer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_DragAndDropContainer.cpp; path = ../../JuceLibraryCode/modules/juce_gui_basics/mouse/juce_DragAndDropContainer.cpp; sourceTree = SOURCE_ROOT; };
 		2BF9DFC14547084D266A1C80 /* juce_ApplicationBase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_ApplicationBase.cpp; path = ../../JuceLibraryCode/modules/juce_events/messages/juce_ApplicationBase.cpp; sourceTree = SOURCE_ROOT; };
 		2C3B77566A7A4181D116F497 /* juce_ios_UIViewComponentPeer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_ios_UIViewComponentPeer.mm; path = ../../JuceLibraryCode/modules/juce_gui_basics/native/juce_ios_UIViewComponentPeer.mm; sourceTree = SOURCE_ROOT; };
+		2C716B4317269A0200A11CE5 /* gen_exported.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = gen_exported.cpp; path = ../../Source/ambisonics/gen_exported.cpp; sourceTree = "<group>"; };
 		2C754F4B1722B48A00268528 /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmTools.h; path = ../../Source/cicmTools.h; sourceTree = "<group>"; };
 		2C86A4DC3C8A0AE127AE82A7 /* juce_TableListBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_TableListBox.cpp; path = ../../JuceLibraryCode/modules/juce_gui_basics/widgets/juce_TableListBox.cpp; sourceTree = SOURCE_ROOT; };
 		2CEEC3908191E46FBECE7164 /* juce_TextEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_TextEditor.h; path = ../../JuceLibraryCode/modules/juce_gui_basics/widgets/juce_TextEditor.h; sourceTree = SOURCE_ROOT; };
@@ -2312,6 +2313,7 @@
 		C181DD7C89654AB6E96F1019 /* ambisonics */ = {
 			isa = PBXGroup;
 			children = (
+				2C716B4317269A0200A11CE5 /* gen_exported.cpp */,
 				67874B5CB1B8B2BC2DEB38AA /* gen_dsp */,
 				2CF3D88B1722E31D00CC21E9 /* hoa.gengrain.cpp */,
 				91BBAC4196D60EE19DE72B72 /* GrainPlug.cpp */,

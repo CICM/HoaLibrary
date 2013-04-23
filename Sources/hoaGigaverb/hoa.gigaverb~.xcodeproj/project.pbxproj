@@ -228,6 +228,7 @@
 					"-latlas",
 					"-lm",
 				);
+				SDKROOT = macosx10.7;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;
@@ -255,6 +256,7 @@
 					"-latlas",
 					"-lm",
 				);
+				SDKROOT = macosx10.7;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = i386;

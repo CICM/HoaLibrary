@@ -19,64 +19,18 @@
 
 #include "GrainPlug.h"
 
-#ifndef MIN
-#define MIN(a, b) (((a) < (b)) ? (a) : (b))
-#endif
-
-void toSample(t_sample *dst, const float *src, long n) {
-	while (n--) *dst++ = *src++;
-}
-
-void fromSample(float *dst, const t_sample *src, long n) {
-	while (n--) *dst++ = *src++;
-}
-
-void zeroBuffer(t_sample *dst, int n) {
-	while (n--) *dst++ = 0;
-}
-
 GrainPlug::GrainPlug(long _order, double _grainsize, double _delay, double _feedback, double _rarefaction) : HoaPlugProcessor(_order, NO), genGrain(0)
 {
     genGrain = (CommonState *)create(getSampleRate(), 512);
     nParams = genGrain->numparams;
-    
-    /*
-    bufferSize = getVectorSize();
-    inputBuffers.resize(getNumberOfInputs());
-	outputBuffers.resize(getNumberOfOutputs());
-	
-	for(int i=0; i < inputBuffers.size(); i++) {
-		inputBuffers[i] = new t_sample[bufferSize];
-	}
-	for(int i=0; i < outputBuffers.size(); i++) {
-		outputBuffers[i] = new t_sample[bufferSize];
-	}
-    */
 }
 GrainPlug::~GrainPlug()
 {
     if(genGrain) destroy(genGrain);
-    
-    for(int i=0; i < inputBuffers.size(); i++) {
-		delete[] inputBuffers[i];
-	}
-	for(int i=0; i < outputBuffers.size(); i++) {
-		delete[] outputBuffers[i];
-	}
 }
 
 void GrainPlug::setPlugIO(int _numberOfInputs, int _numberOfOutputs)
 {
-    bufferSize = getVectorSize();
-    inputBuffers.resize(_numberOfInputs);
-	outputBuffers.resize(_numberOfOutputs);
-	
-	for(int i=0; i < inputBuffers.size(); i++) {
-		inputBuffers[i] = new t_sample[bufferSize];
-	}
-	for(int i=0; i < outputBuffers.size(); i++) {
-		outputBuffers[i] = new t_sample[bufferSize];
-	};
 }
 
 void GrainPlug::DSPChangeCallback()
@@ -95,19 +49,22 @@ void GrainPlug::IOChangeCallback()
 void GrainPlug::setGrainSize(double _grainSize)
 {
     m_grainSize = Tools::clip(_grainSize, double(10), double(2000));
-    //genGrain->params->
+    setparameter(genGrain, 3, m_grainSize, NULL);
 }
 void GrainPlug::setDelay(double _delay)
 {
     m_delay = Tools::clip(_delay, double(0), double(4000));
+    setparameter(genGrain, 2, m_delay, NULL);
 }
 void GrainPlug::setFeedback(double _feedback)
 {
     m_feedback = Tools::clip(_feedback, double(0), double(1));
+    setparameter(genGrain, 1, m_feedback, NULL);
 }
 void GrainPlug::setRarefaction(double _rarefaction)
 {
     m_rarefaction = Tools::clip(_rarefaction, double(0), double(1));
+    setparameter(genGrain, 0, m_rarefaction, NULL);
 }
 
 //=====================================
@@ -119,46 +76,6 @@ void GrainPlug::process(float** aInputs, float** aOutputs)
 void GrainPlug::process(float** aInputs, int nbInput, float** aOutputs, int nbOutput)
 {
     perform(genGrain, aInputs, nbInput, aOutputs, nbOutput, getVectorSize());
-    
-    //perform(genGrain, inputBuffers, nbInput, outputBuffers, nbOutput, getVectorSize());
-    //    int nin = (int)MIN(inSourceP.size(), inputBuffers.size());
-    //    int nout = (int)MIN(inDestP.size(), outputBuffers.size());
-    //int nin = inputBuffers.size();
-    //int nout = outputBuffers.size();
-    /*
-    int nin = (int)MIN(nbInput, inputBuffers.size());
-    int nout = (int)MIN(nbOutput, outputBuffers.size());
-    int inFramesToProcess = getVectorSize();
-    int n = 0;
-    
-    while(n < inFramesToProcess) {
-        int toprocess = MIN(bufferSize, (inFramesToProcess-n));
-        
-        for(int i=0; i < nin; i++) {
-            //toSample(inputBuffers[i], aInputs[i]+n, toprocess);
-            toSample(inputBuffers[i], aInputs[i]+n, toprocess);
-        }
-        for(int i=nin; i < inputBuffers.size(); i++) {
-            zeroBuffer(inputBuffers[i], toprocess);
-        }
-        
-        perform(
-				genGrain,
-				&(inputBuffers[0]), inputBuffers.size(),
-				&(outputBuffers[0]), outputBuffers.size(),
-				toprocess
-                );
-        
-        for(int i=0; i < nout; i++) {
-            fromSample(aOutputs[i]+n, outputBuffers[i], toprocess);
-        }
-        
-        n += toprocess;
-    }
-     
-    */
-    
-    //perform(genGrain, (t_sample**)aInputs, nbInput, (t_sample**)aOutputs, nbOutput, getVectorSize());
 }
 
 

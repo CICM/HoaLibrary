@@ -121,8 +121,8 @@ typedef struct State {
 			m_delay_1.write((mul_112 + in1));
 			m_delay_1.step();
 			// assign results to output buffer;
-			//(*(__out1++)) = out1;
-            (*(__out1++)) = in1*0.2;
+			(*(__out1++)) = out1;
+            //(*(__out1++)) = in1*0.2;
 			
 		};
 		return __exception;

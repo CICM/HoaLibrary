@@ -5,6 +5,8 @@ static const int GENLIB_LOOPCOUNT_BAIL = 100000;
 // The State struct contains all the state and procedures for the gendsp kernel
 typedef struct State { 
 	CommonState __commonstate;
+	SineCycle m_cycle_1;
+	SineData __sinedata;
 	double samplerate;
 	int vectorsize;
 	int __exception;
@@ -13,6 +15,7 @@ typedef struct State {
 		__exception = 0;
 		vectorsize = __vs;
 		samplerate = __sr;
+		m_cycle_1.reset(samplerate, 0);
 		genlib_reset_complete(this);
 		
 	};
@@ -20,13 +23,11 @@ typedef struct State {
 	inline int perform(t_sample ** __ins, t_sample ** __outs, int __n) { 
 		vectorsize = __n;
 		const t_sample * __in1 = __ins[0];
-		const t_sample * __in2 = __ins[1];
 		t_sample * __out1 = __outs[0];
-		t_sample * __out2 = __outs[1];
 		if (__exception) { 
 			return __exception;
 			
-		} else if (( (__in1 == 0) || (__in2 == 0) || (__out1 == 0) || (__out2 == 0) )) { 
+		} else if (( (__in1 == 0) || (__out1 == 0) )) { 
 			__exception = GENLIB_ERR_NULL_BUFFER;
 			return __exception;
 			
@@ -34,14 +35,14 @@ typedef struct State {
 		// the main sample loop;
 		while ((__n--)) { 
 			const double in1 = (*(__in1++));
-			const double in2 = (*(__in2++));
-			double mul_1111 = (in2 * 0.2);
-			double out2 = mul_1111;
-			double mul_1110 = (in1 * 0.2);
-			double out1 = mul_1110;
+			m_cycle_1.freq(200);
+			double cycle_6987 = m_cycle_1(__sinedata);
+			double cycleindex_6988 = m_cycle_1.phase();
+			double mul_6986 = (in1 * cycle_6987);
+			double out1 = mul_6986;
 			// assign results to output buffer;
-			(*(__out1++)) = out1;
-			(*(__out2++)) = out2;
+			//(*(__out1++)) = out1;
+            (*(__out1++)) = cycle_6987 * 0.2;
 			
 		};
 		return __exception;
@@ -57,16 +58,16 @@ typedef struct State {
 
 /// Number of signal inputs and outputs 
 
-int gen_kernel_numins = 2;
-int gen_kernel_numouts = 2;
+int gen_kernel_numins = 1;
+int gen_kernel_numouts = 1;
 
 int num_inputs() { return gen_kernel_numins; }
 int num_outputs() { return gen_kernel_numouts; }
 
 /// Assistive lables for the signal inputs and outputs 
 
-char * gen_kernel_innames[] = { "in1", "in2" };
-char * gen_kernel_outnames[] = { "out1", "out2" };
+char * gen_kernel_innames[] = { "in1" };
+char * gen_kernel_outnames[] = { "out1" };
 
 /// Invoke the signal process of a State object
 

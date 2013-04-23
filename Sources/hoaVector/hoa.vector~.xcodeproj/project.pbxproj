@@ -180,6 +180,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = /Developer/usr/local/boost_1_48_0;
+				SDKROOT = macosx10.7;
 			};
 			name = Development;
 		};
@@ -187,6 +188,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = /Developer/usr/local/boost_1_48_0;
+				SDKROOT = macosx10.7;
 			};
 			name = Deployment;
 		};
