@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="hxyWcd" name="HoaSpace" projectType="audioplug" version="1.0.0"
+              bundleIdentifier="com.cicm.HoaSpace" buildVST="1" buildAU="0"
+              pluginName="HoaSpace" pluginDesc="HoaSpace" pluginManufacturer="CICM"
+              pluginManufacturerCode="Manu" pluginCode="Plug" pluginChannelConfigs="{1, 3},{1, 4},{1, 5},{1, 6},{1, 7},{1, 8},{1, 9},{1, 10},{1, 11},{1, 12},{1, 13},{1, 14},{1, 15},{1, 16},{1, 17},{1, 18},{1, 19},{1, 20},{1, 21},{1, 22},{1, 23},{1, 24},{1, 25},{1, 26},{1, 27},{1, 28},{1, 29},{1, 30},{1, 31},{1, 32}"
+              pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
+              pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
+              pluginAUExportPrefix="HoaSpaceAU" pluginRTASCategory="" aaxIdentifier="com.yourcompany.HoaSpace"
+              pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.0.0"
+              companyName="CICM">
+  <MAINGROUP id="MDAavl" name="HoaSpace">
+    <GROUP id="{02A0F0BB-ED68-7B21-434E-D1B9A2E5EC13}" name="Source">
+      <FILE id="EWsFix" name="PluginParameter.cpp" compile="1" resource="0"
+            file="Source/PluginParameter.cpp"/>
+      <FILE id="J9Ia6U" name="PluginParameter.h" compile="0" resource="0"
+            file="Source/PluginParameter.h"/>
+      <GROUP id="{F11B981C-D24A-B616-7DD5-63AF5FC2BB11}" name="ambisonics">
+        <GROUP id="{FFEDA69F-C2C3-4BEE-229E-1167025FC8EB}" name="gen_dsp">
+          <FILE id="ZOIR89" name="genlib.cpp" compile="1" resource="0" file="Source/ambisonics/gen_dsp/genlib.cpp"/>
+          <FILE id="GtnPEH" name="genlib.h" compile="0" resource="0" file="Source/ambisonics/gen_dsp/genlib.h"/>
+          <FILE id="qJOfAR" name="genlib_common.h" compile="0" resource="0" file="Source/ambisonics/gen_dsp/genlib_common.h"/>
+          <FILE id="XLvu96" name="genlib_exportfunctions.h" compile="0" resource="0"
+                file="Source/ambisonics/gen_dsp/genlib_exportfunctions.h"/>
+          <FILE id="fYupBS" name="genlib_exportstate.h" compile="0" resource="0"
+                file="Source/ambisonics/gen_dsp/genlib_exportstate.h"/>
+          <FILE id="Bb65Hf" name="genlib_module.cpp" compile="1" resource="0"
+                file="Source/ambisonics/gen_dsp/genlib_module.cpp"/>
+          <FILE id="JbDFf8" name="genlib_ops.h" compile="0" resource="0" file="Source/ambisonics/gen_dsp/genlib_ops.h"/>
+        </GROUP>
+        <FILE id="mSbr6n" name="GrainPlug.cpp" compile="1" resource="0" file="Source/ambisonics/GrainPlug.cpp"/>
+        <FILE id="bxs86h" name="GrainPlug.h" compile="0" resource="0" file="Source/ambisonics/GrainPlug.h"/>
+        <FILE id="oEiW4Z" name="hoa.gengrain.cpp" compile="1" resource="0"
+              file="Source/ambisonics/hoa.gengrain.cpp"/>
+        <FILE id="QcMqgO" name="HoaPlugProcessor.cpp" compile="1" resource="0"
+              file="Source/ambisonics/HoaPlugProcessor.cpp"/>
+        <FILE id="kqonIQ" name="HoaPlugProcessor.h" compile="0" resource="0"
+              file="Source/ambisonics/HoaPlugProcessor.h"/>
+      </GROUP>
+      <GROUP id="{7F7F2F4F-ADD9-88AF-BD6F-0313CC5FCECC}" name="components">
+        <FILE id="uNyYwa" name="HoaSpaceUI.cpp" compile="1" resource="0" file="Source/components/HoaSpaceUI.cpp"/>
+        <FILE id="EZge8A" name="HoaSpaceUI.h" compile="0" resource="0" file="Source/components/HoaSpaceUI.h"/>
+        <FILE id="wSRlub" name="Meter.cpp" compile="1" resource="0" file="Source/components/Meter.cpp"/>
+        <FILE id="BnB2XV" name="Meter.h" compile="0" resource="0" file="Source/components/Meter.h"/>
+        <FILE id="zHq0NZ" name="TextBoxSlider.h" compile="0" resource="0" file="Source/components/TextBoxSlider.h"/>
+      </GROUP>
+      <FILE id="g5cvXZ" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="Ks6EG7" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="GjFDS6" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="jhUYyn" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" juceFolder="../../../../SDKs/Juce"
+               vstFolder="../../../../SDKs/Vst3SDK" postbuildCommand="&#13;&#10;# This script takes the build product and copies it to the AU, VST, and RTAS folders, depending on &#13;&#10;# which plugin types you've built&#13;&#10;&#13;&#10;original=$CONFIGURATION_BUILD_DIR/$FULL_PRODUCT_NAME&#13;&#10;&#13;&#10;# this looks inside the binary to detect which platforms are needed.. &#13;&#10;copyAU=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'AudioUnit' | wc -l&#96;&#13;&#10;copyVST=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'VSTPlugin' | wc -l&#96;&#13;&#10;copyRTAS=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'CProcess' | wc -l&#96;&#13;&#10;copyAAX=&#96;nm -g &quot;$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH&quot; | grep -i 'ACFStartup' | wc -l&#96;&#13;&#10;&#13;&#10;if [ $copyAU -gt 0 ]; then&#13;&#10;  echo &quot;Copying to AudioUnit folder...&quot;&#13;&#10;  AU=~/Library/Audio/Plug-Ins/Components/$PRODUCT_NAME.component&#13;&#10;  if [ -d &quot;$AU&quot; ]; then &#13;&#10;    rm -r &quot;$AU&quot;&#13;&#10;  fi&#13;&#10;&#13;&#10;  cp -r &quot;$original&quot; &quot;$AU&quot;&#13;&#10;  sed -i &quot;&quot; -e 's/TDMwPTul/BNDLPTul/g' &quot;$AU/Contents/PkgInfo&quot;&#13;&#10;  sed -i &quot;&quot; -e 's/TDMw/BNDL/g' &quot;$AU/Contents/$INFOPLIST_FILE&quot;&#13;&#10;fi&#13;&#10;&#13;&#10;if [ $copyVST -gt 0 ]; then&#13;&#10;  echo &quot;Copying to VST folder...&quot;&#13;&#10;  VST=~/Library/Audio/Plug-Ins/VST/$PRODUCT_NAME.vst&#13;&#10;  if [ -d &quot;$VST&quot; ]; then &#13;&#10;    rm -r &quot;$VST&quot;&#13;&#10;  fi&#13;&#10;&#13;&#10;  cp -r &quot;$original&quot; &quot;$VST&quot;&#13;&#10;  sed -i &quot;&quot; -e 's/TDMwPTul/BNDLPTul/g' &quot;$VST/Contents/PkgInfo&quot;&#13;&#10;  sed -i &quot;&quot; -e 's/TDMw/BNDL/g' &quot;$VST/Contents/$INFOPLIST_FILE&quot;&#13;&#10;fi&#13;&#10;&#13;&#10;if [ $copyRTAS -gt 0 ]; then&#13;&#10;  echo &quot;Copying to RTAS folder...&quot;&#13;&#10;  RTAS=/Library/Application\ Support/Digidesign/Plug-Ins/$PRODUCT_NAME.dpm&#13;&#10;  if [ -d &quot;$RTAS&quot; ]; then&#13;&#10;    rm -r &quot;$RTAS&quot;&#13;&#10;  fi&#13;&#10;&#13;&#10;  cp -r &quot;$original&quot; &quot;$RTAS&quot;&#13;&#10;fi&#13;&#10;&#13;&#10;if [ $copyAAX -gt 0 ]; then&#13;&#10;  echo &quot;Copying to AAX folder...&quot;&#13;&#10;&#13;&#10;  if [ -d &quot;/Applications/ProTools_3PDev/Plug-Ins&quot; ]; then&#13;&#10;    AAX1=&quot;/Applications/ProTools_3PDev/Plug-Ins/$PRODUCT_NAME.aaxplugin&quot;&#13;&#10;&#13;&#10;    if [ -d &quot;$AAX1&quot; ]; then&#13;&#10;      rm -r &quot;$AAX1&quot;&#13;&#10;    fi&#13;&#10;&#13;&#10;    cp -r &quot;$original&quot; &quot;$AAX1&quot;&#13;&#10;  fi&#13;&#10;&#13;&#10;  if [ -d &quot;/Library/Application Support/Avid/Audio/Plug-Ins&quot; ]; then&#13;&#10;    AAX2=&quot;/Library/Application Support/Avid/Audio/Plug-Ins/$PRODUCT_NAME.aaxplugin&quot;&#13;&#10;&#13;&#10;    if [ -d &quot;$AAX2&quot; ]; then&#13;&#10;      rm -r &quot;$AAX2&quot;&#13;&#10;    fi&#13;&#10;&#13;&#10;    cp -r &quot;$original&quot; &quot;$AAX2&quot;&#13;&#10;  fi&#13;&#10;fi&#13;&#10;">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="10.5 SDK" osxCompatibility="10.5 SDK" osxArchitecture="64BitIntel"
+                       isDebug="1" optimisation="1" targetName="HoaSpace"/>
+        <CONFIGURATION name="Release" osxSDK="10.5 SDK" osxCompatibility="10.5 SDK"
+                       osxArchitecture="64BitIntel" isDebug="0" optimisation="2" targetName="HoaSpace"/>
+      </CONFIGURATIONS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+</JUCERPROJECT>

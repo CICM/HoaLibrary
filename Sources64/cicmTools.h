@@ -35,7 +35,7 @@ using namespace std;
 #define CICM_PI2 CICM_PI / 2.
 #define NUMBEROFCIRCLEPOINTS 36000
 
-#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
+//#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
 
 class Tools
 {
