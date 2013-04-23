@@ -19,9 +19,7 @@
 
 
 #include "AmbisonicConvolve.h"
-#include "AmbisonicPolyEase.h"
 
-#define MAX_SIZE 256
 extern "C"
 {
 	#include "ext.h"
@@ -40,7 +38,7 @@ typedef struct _HoaConvolve
 	t_buffer*			f_buffer;
 	long				f_channel;
 	long				f_numberOfHarmonics;
-	double*             f_offset;
+    
 	int					f_check;
 	double              f_wet;
     double              f_dry;
@@ -134,37 +132,7 @@ void *HoaConvolve_new(t_symbol *s, long argc, t_atom *argv)
 
 		x->f_ambiConvolve	= new AmbisonicConvolve(order);
 		x->f_numberOfHarmonics = x->f_ambiConvolve->getNumberOfHarmonics();
-        AmbisonicPolyEase* recomposer  = new AmbisonicPolyEase(order, x->f_numberOfHarmonics +1, 1);
         x->f_buffer = NULL;
-        
-        double* myReverbForm = new double[x->f_numberOfHarmonics +1];
-        x->f_offset = new double[x->f_numberOfHarmonics];
-        
-        for(int i = 0; i < (x->f_numberOfHarmonics + 1) / 2; i++)
-        {
-            myReverbForm[i] = 0.3 * ((double)i / ((x->f_numberOfHarmonics + 1) / 2)) + 0.7;
-            myReverbForm[(x->f_numberOfHarmonics + 1) / 2 - 1 - i] = 0.3 * ((double)(i - 0.25)/ ((x->f_numberOfHarmonics + 1) / 2)) + 0.7;
-            recomposer->setPolarCoordinates(i, 1., CICM_2PI * (double)i / (double)(x->f_numberOfHarmonics + 1));
-        }
-        recomposer->process(myReverbForm, x->f_offset);
-        double factor = 0;
-        for(int i = 0; i < x->f_numberOfHarmonics; i++)
-        {
-            if(x->f_offset[i] < 0)
-            {
-                x->f_offset[i-1] -= x->f_offset[i];
-                x->f_offset[i] = 0.;
-            }
-            if (fabs(x->f_offset[i]) > factor)
-            {
-                factor = fabs(x->f_offset[i]);
-            }
-        }
-        for(int i = 0; i < x->f_numberOfHarmonics; i++)
-        {
-            x->f_offset[i] = order * x->f_offset[i] / factor;
-        }
-        delete recomposer;
          
 		dsp_setup((t_pxobject *)x, x->f_ambiConvolve->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiConvolve->getNumberOfOutputs(); i++) 
@@ -307,12 +275,9 @@ void buffer_setup(t_HoaConvolve *x)
 {
 	if(x->f_check)
 	{
-		int vectorSize = 0;
         if(x->f_buffer != NULL)
         {
-            if(vectorSize < x->f_buffer->b_frames)
-				vectorSize = x->f_buffer->b_frames;
-            double* datas = new double[vectorSize];
+            Cicm_Signal* datas = new Cicm_Signal[x->f_buffer->b_frames];
             
             ATOMIC_INCREMENT(&x->f_buffer->b_inuse);
             if (!x->f_buffer->b_valid)
@@ -321,39 +286,26 @@ void buffer_setup(t_HoaConvolve *x)
             }
             else
             {
-                double max = 0.;
                 for(long i = 0; i < x->f_buffer->b_frames; i++)
                 {
                     datas[i] = x->f_buffer->b_samples[i * x->f_buffer->b_nchans + (x->f_channel - 1)];
-                    if(datas[i] > max)
-                        max = datas[i];
-                }
-                for(long i = 0; i < x->f_buffer->b_frames; i++)
-                {
-                    datas[i] /= max;
                 }
                 ATOMIC_DECREMENT(&x->f_buffer->b_inuse);
             }
-            for(int j = 0; j < x->f_numberOfHarmonics; j++)
-            {
-                double offset = (x->f_offset[j] / 100.) * x->f_buffer->b_frames * 4.;
-                long size = x->f_buffer->b_frames - offset;
-                x->f_ambiConvolve->setImpulseResponse(j, datas, size, 0);
-            }
+            x->f_ambiConvolve->setImpulseResponse(datas, x->f_buffer->b_frames);
             free(datas);
+            post("n fft : %ld", x->f_ambiConvolve->getNumberOfFFT());
         }
 	}
 }
 
 t_max_err dry_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
-    post("%f", atom_getfloat(argv));
 	if(atom_gettype(argv) == A_LONG)
 		x->f_ambiConvolve->setDryValue(atom_getlong(argv));
 	else if(atom_gettype(argv) == A_FLOAT)
 		x->f_ambiConvolve->setDryValue(atom_getfloat(argv));
     
-    post("dry %f", x->f_ambiConvolve->getDryValue());
 	x->f_dry = x->f_ambiConvolve->getDryValue();
 	return 0;
 }
@@ -361,13 +313,11 @@ t_max_err dry_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err wet_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv)
 {
-     post("%f", atom_getfloat(argv));
 	if(atom_gettype(argv) == A_LONG)
 		x->f_ambiConvolve->setWetValue(atom_getlong(argv));
 	else if(atom_gettype(argv) == A_FLOAT)
 		x->f_ambiConvolve->setWetValue(atom_getfloat(argv));
     
-    post("wet %f", x->f_ambiConvolve->getWetValue());
 	x->f_wet = x->f_ambiConvolve->getWetValue();
 	return 0;
 }

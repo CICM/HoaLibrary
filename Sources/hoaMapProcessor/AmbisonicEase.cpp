@@ -136,7 +136,7 @@ void AmbisonicEase::setPolarCoordinates(double aRadius, double anAzimuth)
     {
         setWidenValue(1.);
         for(int i = 0; i < m_number_of_harmonics; i++)
-            m_widen_vector[i] *= (2. / (aRadius + 1.));
+            m_widen_vector[i] *= (2. / (aRadius*aRadius + 1.));
     }
     else
     {

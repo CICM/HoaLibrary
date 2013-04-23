@@ -57,7 +57,7 @@ public:
 	void setVectorSize(long aVectorSize);
     void setCartesianCoordinates(long aSourceIndex, double anAbscissa, double anOrdinate);
     void setPolarCoordinates(long aSourceIndex, double aRadius, double anAzimuth);
-    void setMuted(long aSourceIndex);
+    void setMuted(long aSourceIndex, long aValue);
     
 	~AmbisonicPolyEase();
 	
@@ -68,7 +68,7 @@ public:
             aOutputs[i] = 0.;
 		for(int i = 0; i < m_number_of_sources; i++)
         {
-            if(!m_mute[i])
+            if(m_mute[i] != 1)
             {
                 m_eases[i]->process(aInputs[i], aOutputs);
             }
@@ -88,7 +88,7 @@ public:
         
 		for(int i = 0; i < m_number_of_sources; i++)
         {
-            if(!m_mute[i])
+            if(m_mute[i] != 1)
             {
                 m_eases[i]->process(aInputs[i], aOutputs);
             }

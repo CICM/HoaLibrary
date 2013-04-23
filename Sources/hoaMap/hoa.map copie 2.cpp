@@ -19,9 +19,10 @@
 
 #include "cicmTools.h"
 #include "AmbisonicSourcesManager.h"
-#include "AmbisonicSourcesPreset.h"
-#include "AmbisonicSourcesTrajectory.h"
+#include "AmbisonicSourcesTajectory.h"
 
+#define MAX_SOURCES 16
+#define MAX_GROUP 16
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
 
@@ -29,7 +30,6 @@ extern "C"
 {
 #include "ext.h"
 #include "ext_obex.h"
-#include "ext_path.h"
 #include "ext_common.h"
 #include "jpatcher_api.h"
 #include "jgraphics.h"
@@ -66,19 +66,15 @@ typedef struct  _hoamap
 	t_jbox          j_box;
 	t_rect          rect;
 	t_jfont*        jfont;
-    void*           f_clock;
-    
     long		f_output_mode;
 	void*		f_out_sources;
     void*		f_out_groups;
-    void*		f_out_infos;
     
     t_object*   f_patcher;
     t_object*   f_colorpicker;
     t_object*   f_textfield;
     
     SourcesManager*     f_source_manager;
-    SourcesPreset*      f_source_preset;
     SourcesTrajectory*  f_source_trajectory;
     
     t_pt        f_cursor_position;
@@ -96,6 +92,8 @@ typedef struct  _hoamap
     
     t_rect		f_rect_selection;
 	int			f_rect_selection_exist;
+    
+    long        f_parameters;
 } t_hoamap;
 
 t_class *hoamap_class;
@@ -109,27 +107,18 @@ void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
 t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
 
-void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av);
-void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av);
-void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av);
-void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av);
-void hoamap_source_save(t_hoamap *x, t_dictionary *d);
-void hoamap_group_save(t_hoamap *x, t_dictionary *d);
-void hoamap_slot_save(t_hoamap *x, t_dictionary *d);
-void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d);
+t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av);
+t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av);
+void hoamap_parameters(t_hoamap *x, short ac, t_atom *av);
 void hoamap_jsave(t_hoamap *x, t_dictionary *d);
-
 void hoamap_doread(t_hoamap *x, t_symbol *s);
-void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
-void hoamap_tick(t_hoamap *x);
+void hoamap_spool(t_hoamap *x, t_symbol *s);
+void hoamap_read(t_hoamap *x, t_symbol *s);
 
 void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
 void hoamap_bang(t_hoamap *x);
-void hoamap_infos(t_hoamap *x);
-
 void hoamap_color_picker(t_hoamap *x);
 void hoamap_text_field(t_hoamap *x);
 
@@ -154,7 +143,8 @@ int main()
     hoa_textfield_init();
 	t_class *c;
     
-	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
+    
+	c = class_new("hoa.ease", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
@@ -164,15 +154,15 @@ int main()
 	class_addmethod(c, (method)hoamap_getdrawparams,    "getdrawparams",A_CANT, 0);
 	class_addmethod(c, (method)hoamap_notify,           "notify",		A_CANT, 0);
     
+    class_addmethod(c, (method)hoamap_getvalueof,       "getvalueof",   A_CANT, 0);
+	class_addmethod(c, (method)hoamap_setvalueof,       "setvalueof",   A_CANT, 0);
     class_addmethod(c, (method)hoamap_jsave,            "jsave",        A_CANT, 0);
+    //class_addmethod(c, (method)hoamap_read,             "read",         A_DEFSYM,0);
     
     class_addmethod(c, (method)hoamap_bang,             "bang",			A_CANT, 0);
-    class_addmethod(c, (method)hoamap_infos,            "getinfo",		0);
-    
     class_addmethod(c, (method)hoamap_source,           "source",       A_GIMME,0);
     class_addmethod(c, (method)hoamap_group,            "group",        A_GIMME,0);
     class_addmethod(c, (method)hoamap_slot,             "slot",         A_GIMME,0);
-    class_addmethod(c, (method)hoamap_trajectory,       "trajectory",   A_GIMME,0);
     
     class_addmethod(c, (method)hoamap_mousedown,        "mousedown",	A_CANT, 0);
     class_addmethod(c, (method)hoamap_mousedrag,        "mousedrag",	A_CANT, 0);
@@ -209,16 +199,14 @@ int main()
 	CLASS_ATTR_ENUMINDEX		(c,"outputmode", 0, "Polar Cartesian");
 	CLASS_ATTR_DEFAULT          (c,"outputmode", 0,  "0");
     CLASS_ATTR_SAVE             (c,"outputmode", 1);
-    CLASS_ATTR_ORDER			(c,"outputmode", 0, "1");
     
 	CLASS_ATTR_DOUBLE			(c,"zoom", 0, t_hoamap, f_zoom_factor);
     CLASS_ATTR_ACCESSORS		(c,"zoom", NULL, hoamap_zoom);
 	CLASS_ATTR_LABEL			(c,"zoom", 0,   "Zoom");
-	CLASS_ATTR_CATEGORY			(c,"zoom", 0,   "Behavior");
+	CLASS_ATTR_CATEGORY			(c,"zoom", 0,   "Custom");
 	CLASS_ATTR_DEFAULT          (c,"zoom", 0,   "0.35");
-    CLASS_ATTR_ORDER			(c,"zoom", 0,   "2");
     CLASS_ATTR_SAVE             (c,"zoom", 1);
-
+	
 	class_register(CLASS_BOX, c);
 	hoamap_class = c;
 	
@@ -245,19 +233,15 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	;
 	jbox_new(&x->j_box, flags, argc, argv);
 	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
-    x->f_source_preset = new SourcesPreset();
     x->f_source_trajectory = new SourcesTrajectory();
     
     x->f_rect_selection_exist = 0;
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
     x->j_box.b_firstin = (t_object*) x;
-    
-    x->f_out_infos      = listout(x);
-    x->f_out_groups     = listout(x);
-	x->f_out_sources    = listout(x);
+    x->f_out_groups = listout(x);
+	x->f_out_sources   = listout(x);
 	
-    x->f_clock = clock_new(x,(method)hoamap_tick);
 	x->jfont = jfont_create(jbox_get_fontname((t_object *)x)->s_name, (t_jgraphics_font_slant)jbox_get_font_slant((t_object *)x), (t_jgraphics_font_weight)jbox_get_font_weight((t_object *)x), jbox_get_fontsize((t_object *)x));
 
     x->f_patcher = NULL;
@@ -267,30 +251,15 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     t_atom *av = NULL;
     long ac = 0;
     
-    dictionary_copyatoms(d, gensym("trajectory_parameters"), &ac, &av);
-    hoamap_parameters_trajectory(x, ac, av);
-    if (av && ac)
-    {
-        ac = 0;
-        sysmem_freeptr(av);
-    }
-    dictionary_copyatoms(d, gensym("slots_parameters"), &ac, &av);
-    hoamap_parameters_slots(x, ac, av);
-    if (av && ac)
-    {
-        ac = 0;
-        sysmem_freeptr(av);
-    }
-    
     dictionary_copyatoms(d, gensym("sources_parameters"), &ac, &av);
-    hoamap_parameters_sources(x, ac, av);
+    hoamap_parameters(x, ac, av);
     if (av && ac)
     {
         ac = 0;
         sysmem_freeptr(av);
     }
     dictionary_copyatoms(d, gensym("groups_parameters"), &ac, &av);
-    hoamap_parameters_groups(x, ac, av);
+    hoamap_parameters(x, ac, av);
     if (av && ac)
     {
         ac = 0;
@@ -301,20 +270,28 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
+void hoamap_tick(t_hoamap *x)
+{
+    ;
+}
+
+void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
+{
+	params->d_borderthickness = 1;
+	params->d_cornersize = 6;
+}
+
 void hoamap_free(t_hoamap *x)
 {
 	jbox_free(&x->j_box);
     jfont_destroy(x->jfont);
-    freeobject((t_object *)x->f_clock);
     delete x->f_source_manager;
-    delete x->f_source_preset;
-    delete x->f_source_trajectory;
     if(x->f_patcher)
         object_free(x->f_patcher);
     if(x->f_colorpicker )
         object_free(x->f_colorpicker);
     if(x->f_textfield)
-        object_free(x->f_textfield);
+         object_free(x->f_textfield);
 }
 
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
@@ -327,124 +304,7 @@ void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
             sprintf(s,"(List) Sources coordinates");
         if(a == 1)
             sprintf(s,"(List) Groups coordinates");
-        if(a == 2)
-            sprintf(s,"(List) Infos");
     }
-}
-
-void hoamap_doread(t_hoamap *x, t_symbol *s)
-{
-	short vol,error;
-	char ps[MAX_PATH_CHARS];
-	long type;
-    long types = 'pSto';
-	short savelock;
-	t_dictionary *d;
-    
-	if (s==gensym(""))
-    {
-		if (open_dialog(ps,&vol,&type, &types,1))
-			return;
-	}
-    else
-    {
-		strcpy(ps,s->s_name);
-		if (locatefile_extended(ps,&vol,&type,&types,-1))
-        {
-			object_error((t_object *)x, "%s: can't find file",ps);
-			return;
-		}
-	}
-	error = dictionary_read(ps, vol, &d);
-	if (error)
-    {
-		object_error((t_object *)x, "%s: error %d opening file",ps, error);
-		return;
-	}
-    else
-    {
-        t_atom *av = NULL;
-        long ac = 0;
-        
-        dictionary_copyatoms(d, gensym("slots_parameters"), &ac, &av);
-        hoamap_parameters_slots(x, ac, av);
-        if (av && ac)
-        {
-            ac = 0;
-            sysmem_freeptr(av);
-        }
-        
-        dictionary_copyatoms(d, gensym("trajectory_parameters"), &ac, &av);
-        hoamap_parameters_trajectory(x, ac, av);
-        if (av && ac)
-        {
-            ac = 0;
-            sysmem_freeptr(av);
-        }
-        
-        if (d)
-        {
-            object_free(d);
-        }
-    }
-	savelock = lockout_set(1);
-	lockout_set(savelock);
-}
-
-void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
-{
-	short vol,error;
-	char ps[MAX_PATH_CHARS];
-	long type;
-    long types = 'pSto';
-	short savelock;
-    t_filehandle ref;
-	t_dictionary *d = dictionary_new();
-
-    if(atom_getsym(argv+1) == gensym("slot"))
-        hoamap_slot_save(x, d);
-    if(atom_getsym(argv+1) == gensym("trajectory"))
-        hoamap_trajectory_save(x, d);
-	if (atom_getsym(argv)==gensym(""))
-    {
-		if (saveasdialog_extended(ps,&vol, &types, &types, 1))
-			return;
-	}
-    else
-    {
-		strcpy(ps, atom_getsym(argv)->s_name);
-        if(locatefile_extended(ps,&vol,&type,&type,-1))
-           path_createsysfile(ps, vol, types, &ref);
-		
-	}
-    
-	error = dictionary_write(d, ps, vol);
-	if (error)
-    {
-		object_error((t_object *)x, "%s: error %d writing file",ps, error);
-		return;
-	}
-    if (d)
-    {
-        object_free(d);
-    }
-	savelock = lockout_set(1);
-	lockout_set(savelock);
-}
-
-void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_borderthickness = 1;
-	params->d_cornersize = 6;
-}
-
-void hoamap_tick(t_hoamap *x)
-{
-    if(x->f_index_of_selected_source != -1)
-        x->f_source_trajectory->recordSourceInTrajectory(x->f_source_manager, x->f_index_of_selected_source);
-    else if(x->f_index_of_selected_group != -1)
-        x->f_source_trajectory->recordGroupInTrajectory(x->f_source_manager, x->f_index_of_selected_group);
-    clock_fdelay(x->f_clock, 100);
 }
 
 /**********************************************************/
@@ -541,7 +401,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             }
         }        
         else if(atom_getsym(av+1) == gensym("polar") || atom_getsym(av+1) == gensym("pol"))
-            x->f_source_manager->groupSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3) + CICM_PI2);
+            x->f_source_manager->groupSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
         else if(atom_getsym(av+1) == gensym("radius"))
             x->f_source_manager->groupSetRadius(atom_getlong(av), atom_getfloat(av+2));
         else if(atom_getsym(av+1) == gensym("angle"))
@@ -624,81 +484,32 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
     if(ac && av)
     {
         if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("store"))
-            x->f_source_preset->storeSouceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storeagain"))
-            x->f_source_preset->storeSouceManagerAtLastUsedSlot(x->f_source_manager);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storeempty"))
-            x->f_source_preset->storeSouceManagerAtFirstEmptySlot(x->f_source_manager);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storeend"))
-            x->f_source_preset->storeSouceManagerAtNewEndSlot(x->f_source_manager);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storenext"))
-            x->f_source_preset->storeSouceManagerAtNextSlot(x->f_source_manager);
+            x->f_source_trajectory->storeSlot(x->f_source_manager, atom_getlong(av+1));
         else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("insert"))
-            x->f_source_preset->insertSlot(x->f_source_manager, atom_getlong(av+1));
+            x->f_source_trajectory->insertSlot(x->f_source_manager, atom_getlong(av+1));
         else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("remove"))
-            x->f_source_preset->removeSlot(atom_getlong(av+1));
+            x->f_source_trajectory->removeSlot(atom_getlong(av+1));
         else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("delete"))
-            x->f_source_preset->deleteSlot(atom_getlong(av+1));
+            x->f_source_trajectory->deleteSlot(atom_getlong(av+1));
         else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("copy"))
-            x->f_source_preset->copySlot(atom_getlong(av+1), atom_getlong(av+2));
+            x->f_source_trajectory->copySlot(atom_getlong(av+1), atom_getlong(av+2));
         else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("renumber"))
-            x->f_source_preset->renumber();
+            x->f_source_trajectory->renumber();
         else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("clear"))
-            x->f_source_preset->clear();
-        else if(atom_gettype(av) == A_LONG)
-            x->f_source_preset->recallSlot(x->f_source_manager, atom_getlong(av));
-        else if(atom_gettype(av) == A_FLOAT)
-            x->f_source_preset->recallFractionalSlot(x->f_source_manager, (double)atom_getfloat(av));
+            x->f_source_trajectory->clear();
         else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("recall"))
-            x->f_source_preset->RecallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("read"))
-            defer(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("write"))
-        {
-            t_atom parameter[2];
-            atom_setsym(parameter, atom_getsym(av+1));
-            atom_setsym(parameter+1, gensym("slot"));
-            defer(x,(method)hoamap_dowrite, NULL, 2, parameter);
-        }
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storesource"))
-             x->f_source_preset->storeSourceAtSlot(x->f_source_manager, atom_getlong(av+1),atom_getlong(av+2));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storegroup"))
-             x->f_source_preset->storeGroupAtSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2));
-        
-    }
-    
-    object_notify(x, _sym_modified, NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
-    jbox_redraw((t_jbox *)x);
-    hoamap_bang(x);
-}
-
-void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
-{
-    if(ac && av)
-    {
-        if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("record"))
-            x->f_source_trajectory->setRecording(atom_getlong(av+1));
-        if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("limit"))
-            x->f_source_trajectory->setLimited(atom_getlong(av+1));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("erase"))
-            x->f_source_trajectory->erase();
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("erasepart"))
-            x->f_source_trajectory->erase(atom_getfloat(av+1), atom_getfloat(av+2));
+            x->f_source_trajectory->recallSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
+        else if(atom_gettype(av) == A_LONG)
+            x->f_source_trajectory->recallSlot(x->f_source_manager, atom_getlong(av));
         else if(atom_gettype(av) == A_FLOAT)
-            x->f_source_trajectory->playTrajectory(x->f_source_manager, (double)atom_getfloat(av));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("read"))
-            defer(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("write"))
-        {
-            t_atom parameter[2];
-            atom_setsym(parameter, atom_getsym(av+1));
-            atom_setsym(parameter+1, gensym("trajectory"));
-            defer(x,(method)hoamap_dowrite, NULL, 2, parameter);
-        }
+            x->f_source_trajectory->recallFractionalSlot(x->f_source_manager, (double)atom_getfloat(av));
     }
     
+    for(int i = 0; i < x->f_source_trajectory->getMaximumIndexOfSlot(); i++)
+    {
+        if(x->f_source_trajectory->getSlotExistence(i))
+            post("slot %ld", i);
+    }
     object_notify(x, _sym_modified, NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
@@ -712,46 +523,31 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 
 void hoamap_jsave(t_hoamap *x, t_dictionary *d)
 {
-    hoamap_source_save(x, d);
-    hoamap_group_save(x, d);
-    hoamap_slot_save(x, d);
-    hoamap_trajectory_save(x, d);
-}
-
-void hoamap_source_save(t_hoamap *x, t_dictionary *d)
-{
     t_atom *av;
     long ac = x->f_source_manager->getNumberOfSources()*10;
     av = new t_atom[ac];
-    if(av && ac)
+    for(long i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        for(long i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        if(x->f_source_manager->sourceGetExistence(i))
         {
-            if(x->f_source_manager->sourceGetExistence(i))
-            {
-                atom_setsym(av+j, gensym("source"));
-                atom_setlong(av+j+1, i);
-                atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
-                atom_setfloat(av+j+3, x->f_source_manager->sourceGetOrdinate(i));
-                atom_setlong(av+j+4, x->f_source_manager->groupGetMute(i));
-                atom_setfloat(av+j+5, x->f_source_manager->sourceGetColor(i).red);
-                atom_setfloat(av+j+6, x->f_source_manager->sourceGetColor(i).green);
-                atom_setfloat(av+j+7, x->f_source_manager->sourceGetColor(i).blue);
-                atom_setfloat(av+j+8, x->f_source_manager->sourceGetColor(i).alpha);
-                atom_setsym(av+j+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
-                
-                j += 10;
-            }
+            atom_setsym(av+j, gensym("source"));
+            atom_setlong(av+j+1, i);
+            atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
+            atom_setfloat(av+j+3, x->f_source_manager->sourceGetOrdinate(i));
+            atom_setlong(av+j+4, x->f_source_manager->groupGetMute(i));
+            atom_setfloat(av+j+5, x->f_source_manager->sourceGetColor(i).red);
+            atom_setfloat(av+j+6, x->f_source_manager->sourceGetColor(i).green);
+            atom_setfloat(av+j+7, x->f_source_manager->sourceGetColor(i).blue);
+            atom_setfloat(av+j+8, x->f_source_manager->sourceGetColor(i).alpha);
+            atom_setsym(av+j+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+            
+            j += 10;
         }
-        dictionary_appendatoms(d, gensym("sources_parameters"), ac, av);
-        free(av);
     }
-}
-
-void hoamap_group_save(t_hoamap *x, t_dictionary *d)
-{
-    t_atom *av;
-    long ac = 0;
+    dictionary_appendatoms(d, gensym("sources_parameters"), ac, av);
+    
+    free(av);
+    ac = 0;
     for(long i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
@@ -760,210 +556,33 @@ void hoamap_group_save(t_hoamap *x, t_dictionary *d)
         }
     }
     av = new t_atom[ac];
-    if(av && ac)
+    for(long i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
-        for(long i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        if(x->f_source_manager->groupGetExistence(i))
         {
-            if(x->f_source_manager->groupGetExistence(i))
+            long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
+            atom_setsym(av+j, gensym("group"));
+            atom_setlong(av+j+1, i);
+            atom_setlong(av+j+2, numberOfsource);
+            for (long k = 0; k < numberOfsource; k++)
             {
-                long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
-                atom_setsym(av+j, gensym("group"));
-                atom_setlong(av+j+1, i);
-                atom_setlong(av+j+2, numberOfsource);
-                for (long k = 0; k < numberOfsource; k++)
-                {
-                    atom_setlong(av+j+k+3, x->f_source_manager->groupGetSourceIndex(i, k));
-                }
-                atom_setlong(av+j+numberOfsource+3, x->f_source_manager->groupGetMute(i));
-                atom_setfloat(av+j+numberOfsource+4, x->f_source_manager->groupGetColor(i).red);
-                atom_setfloat(av+j+numberOfsource+5, x->f_source_manager->groupGetColor(i).green);
-                atom_setfloat(av+j+numberOfsource+6, x->f_source_manager->groupGetColor(i).blue);
-                atom_setfloat(av+j+numberOfsource+7, x->f_source_manager->groupGetColor(i).alpha);
-                atom_setsym(av+j+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
-                
-                j += x->f_source_manager->groupGetNumberOfSources(i) + 9;
+                atom_setlong(av+j+k+3, x->f_source_manager->groupGetSourceIndex(i, k));
             }
-        }
-        dictionary_appendatoms(d, gensym("groups_parameters"), ac, av);
-        free(av);
-    }
-}
-
-void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
-{
-    t_atom *av;
-    long ac = 0;
-    
-    SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
-    if(temporySourceManager)
-    {
-        ac = 0;
-        for(long i = 0; i <= x->f_source_preset->getMaximumIndexOfSlot(); i++)
-        {
-            if(x->f_source_preset->getSlotExistence(i))
-            {
-                ac += 2;
-                x->f_source_preset->recallSlot(temporySourceManager, i);
-                ac += temporySourceManager->getNumberOfSources()*10;
-                for(long j = 0; j < temporySourceManager->getMaximumIndexOfGroup(); j++)
-                {
-                    if(temporySourceManager->groupGetExistence(j))
-                    {
-                        ac += temporySourceManager->groupGetNumberOfSources(j) + 9;
-                    }
-                }
-            }
-        }
-        av = new t_atom[ac];
-        if(av && ac)
-        {
-            for(long j = 0, i = 0; j <= x->f_source_preset->getMaximumIndexOfSlot(); j++)
-            {
-                if(x->f_source_preset->getSlotExistence(j))
-                {
-                    atom_setsym(av+i, gensym("slot"));
-                    atom_setlong(av+i+1, j);
-                    x->f_source_preset->recallSlot(temporySourceManager, j);
-                    i += 2;
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfSource(); k++)
-                    {
-                        if(temporySourceManager->sourceGetExistence(k))
-                        {
-                            atom_setsym(av+i, gensym("source"));
-                            atom_setlong(av+i+1, k);
-                            atom_setfloat(av+i+2, temporySourceManager->sourceGetAbscissa(k));
-                            atom_setfloat(av+i+3, temporySourceManager->sourceGetOrdinate(k));
-                            atom_setlong(av+i+4, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+5, temporySourceManager->sourceGetColor(k).red);
-                            atom_setfloat(av+i+6, temporySourceManager->sourceGetColor(k).green);
-                            atom_setfloat(av+i+7, temporySourceManager->sourceGetColor(k).blue);
-                            atom_setfloat(av+i+8, temporySourceManager->sourceGetColor(k).alpha);
-                            atom_setsym(av+i+9, gensym(temporySourceManager->sourceGetDescription(k).c_str()));
-                            
-                            i += 10;
-                        }
-                    }
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfGroup(); k++)
-                    {
-                        if(temporySourceManager->groupGetExistence(k))
-                        {
-                            long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
-                            atom_setsym(av+i, gensym("group"));
-                            atom_setlong(av+i+1, k);
-                            atom_setlong(av+i+2, numberOfsource);
-                            for (long l = 0; l < numberOfsource; l++)
-                            {
-                                atom_setlong(av+i+l+3, temporySourceManager->groupGetSourceIndex(k, l));
-                            }
-                            atom_setlong(av+i+numberOfsource+3, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+numberOfsource+4, temporySourceManager->groupGetColor(k).red);
-                            atom_setfloat(av+i+numberOfsource+5, temporySourceManager->groupGetColor(k).green);
-                            atom_setfloat(av+i+numberOfsource+6, temporySourceManager->groupGetColor(k).blue);
-                            atom_setfloat(av+i+numberOfsource+7, temporySourceManager->groupGetColor(k).alpha);
-                            atom_setsym(av+i+numberOfsource+8, gensym(temporySourceManager->groupGetDescription(k).c_str()));
-                            
-                            i += numberOfsource + 9;
-                        }
-                    }
-                }
-            }
+            atom_setlong(av+j+numberOfsource+3, x->f_source_manager->groupGetMute(i));
+            atom_setfloat(av+j+numberOfsource+4, x->f_source_manager->groupGetColor(i).red);
+            atom_setfloat(av+j+numberOfsource+5, x->f_source_manager->groupGetColor(i).green);
+            atom_setfloat(av+j+numberOfsource+6, x->f_source_manager->groupGetColor(i).blue);
+            atom_setfloat(av+j+numberOfsource+7, x->f_source_manager->groupGetColor(i).alpha);
+            atom_setsym(av+j+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
             
-            dictionary_appendatoms(d, gensym("slots_parameters"), ac, av);
-            free(av);
+            j += x->f_source_manager->groupGetNumberOfSources(i) + 9;
         }
-        delete temporySourceManager;
     }
+    dictionary_appendatoms(d, gensym("groups_parameters"), ac, av);
+    free(av);
 }
 
-void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
-{
-    t_atom *av;
-    long ac = 0;
-
-    SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
-    if(temporySourceManager)
-    {
-        ac = 0;
-        for(long i = 0; i <= x->f_source_trajectory->getMaximumIndexOfSlot(); i++)
-        {
-            if(x->f_source_trajectory->getSlotExistence(i))
-            {
-                ac += 2;
-                x->f_source_trajectory->recallSlot(temporySourceManager, i);
-                ac += temporySourceManager->getNumberOfSources()*10;
-                for(long j = 0; j < temporySourceManager->getMaximumIndexOfGroup(); j++)
-                {
-                    if(temporySourceManager->groupGetExistence(j))
-                    {
-                        ac += temporySourceManager->groupGetNumberOfSources(j) + 9;
-                    }
-                }
-            }
-        }
-        av = new t_atom[ac];
-        if(av && ac)
-        {
-            for(long j = 0, i = 0; j <= x->f_source_trajectory->getMaximumIndexOfSlot(); j++)
-            {
-                if(x->f_source_trajectory->getSlotExistence(j))
-                {
-                    atom_setsym(av+i, gensym("slot"));
-                    atom_setlong(av+i+1, j);
-                    x->f_source_trajectory->recallSlot(temporySourceManager, j);
-                    i += 2;
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfSource(); k++)
-                    {
-                        if(temporySourceManager->sourceGetExistence(k))
-                        {
-                            atom_setsym(av+i, gensym("source"));
-                            atom_setlong(av+i+1, k);
-                            atom_setfloat(av+i+2, temporySourceManager->sourceGetAbscissa(k));
-                            atom_setfloat(av+i+3, temporySourceManager->sourceGetOrdinate(k));
-                            atom_setlong(av+i+4, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+5, temporySourceManager->sourceGetColor(k).red);
-                            atom_setfloat(av+i+6, temporySourceManager->sourceGetColor(k).green);
-                            atom_setfloat(av+i+7, temporySourceManager->sourceGetColor(k).blue);
-                            atom_setfloat(av+i+8, temporySourceManager->sourceGetColor(k).alpha);
-                            atom_setsym(av+i+9, gensym(temporySourceManager->sourceGetDescription(k).c_str()));
-                            
-                            i += 10;
-                        }
-                    }
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfGroup(); k++)
-                    {
-                        if(temporySourceManager->groupGetExistence(k))
-                        {
-                            long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
-                            atom_setsym(av+i, gensym("group"));
-                            atom_setlong(av+i+1, k);
-                            atom_setlong(av+i+2, numberOfsource);
-                            for (long l = 0; l < numberOfsource; l++)
-                            {
-                                atom_setlong(av+i+l+3, temporySourceManager->groupGetSourceIndex(k, l));
-                            }
-                            atom_setlong(av+i+numberOfsource+3, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+numberOfsource+4, temporySourceManager->groupGetColor(k).red);
-                            atom_setfloat(av+i+numberOfsource+5, temporySourceManager->groupGetColor(k).green);
-                            atom_setfloat(av+i+numberOfsource+6, temporySourceManager->groupGetColor(k).blue);
-                            atom_setfloat(av+i+numberOfsource+7, temporySourceManager->groupGetColor(k).alpha);
-                            atom_setsym(av+i+numberOfsource+8, gensym(temporySourceManager->groupGetDescription(k).c_str()));
-                            
-                            i += numberOfsource + 9;
-                        }
-                    }
-                }
-            }
-            
-            dictionary_appendatoms(d, gensym("trajectory_parameters"), ac, av);
-            free(av);
-        }
-        delete temporySourceManager;
-    }
-}
-
-void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av)
+void hoamap_parameters(t_hoamap *x, short ac, t_atom *av)
 {
     if(ac && av)
     {
@@ -977,17 +596,7 @@ void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av)
                 x->f_source_manager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
                 i += 8;
             }
-        }
-    }
-}
-
-void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
-{
-    if(ac && av)
-    {
-        for(long i = 0; i < ac; i++)
-        {
-            if(atom_getsym(av+i) == gensym("group"))
+            else if(atom_getsym(av+i) == gensym("group"))
             {
                 long numberOfsource = atom_getlong(av+i+2);
                 for (int j = 0; j < numberOfsource; j++)
@@ -1002,88 +611,106 @@ void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
             }
         }
     }
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    jbox_redraw((t_jbox *)x);
+    hoamap_bang(x);
 }
 
-void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
+t_max_err hoamap_setvalueof(t_hoamap *x, long ac, t_atom *av)
 {
-    SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
-    if(ac && av && temporySourceManager)
+    if(ac && av)
     {
-        long slotIndex = -1;
-        for(long i = 0; i < ac; i++)
+        if(atom_getsym(av) == gensym("source"))
         {
-            if(atom_getsym(av+i) == gensym("slot"))
+            for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
             {
-                x->f_source_preset->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
-                temporySourceManager->setExistence(0);
-                temporySourceManager->setExistence(1);
-                slotIndex = atom_getlong(av+i+1);
+                if(x->f_source_manager->sourceGetExistence(i))
+                    x->f_source_manager->sourceRemove(i);
             }
-            else if(atom_getsym(av+i) == gensym("source"))
+            for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
             {
-                temporySourceManager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
-                temporySourceManager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
-                temporySourceManager->sourceSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
-                temporySourceManager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
-            }
-            if(atom_getsym(av+i) == gensym("group"))
-            {
-                long numberOfsource = atom_getlong(av+i+2);
-                for (int j = 0; j < numberOfsource; j++)
-                {
-                    temporySourceManager->groupSetSource(atom_getlong(av+i+1), atom_getlong(av+i+3+j));
-                }
-                if(atom_getlong(av+i+3+numberOfsource) == 1)
-                    temporySourceManager->groupSetMute(atom_getlong(av+i+1), 1);
-                temporySourceManager->groupSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
-                temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
+                if(x->f_source_manager->groupGetExistence(i))
+                    x->f_source_manager->groupRemove(i);
             }
         }
-        x->f_source_preset->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
-        delete temporySourceManager;
+        if(atom_getsym(av) == gensym("group"))
+        {
+            for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+            {
+                if(x->f_source_manager->groupGetExistence(i))
+                    x->f_source_manager->groupRemove(i);
+            }
+        }
     }
+	hoamap_parameters(x, ac, av);
+	return MAX_ERR_NONE;
 }
 
-void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
+t_max_err hoamap_getvalueof(t_hoamap *x, long *ac, t_atom **av)
 {
-    SourcesManager* temporySourceManager = NULL;
-    temporySourceManager = new SourcesManager();
-    if(ac && av && temporySourceManager)
+	if (ac && av)
     {
-        long slotIndex = -1;
-        for(long i = 0; i < ac; i++)
+		if (*ac && *av)
         {
-            if(atom_getsym(av+i) == gensym("slot"))
+            ;
+        }
+        else
+        {
+            *ac = x->f_source_manager->getNumberOfSources() * 10;
+            for(long i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
             {
-                x->f_source_trajectory->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
-                temporySourceManager->setExistence(0);
-                temporySourceManager->setExistence(1);
-                slotIndex = atom_getlong(av+i+1);
-            }
-            else if(atom_getsym(av+i) == gensym("source"))
-            {
-                temporySourceManager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
-                temporySourceManager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
-                temporySourceManager->sourceSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
-                temporySourceManager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
-            }
-            if(atom_getsym(av+i) == gensym("group"))
-            {
-                long numberOfsource = atom_getlong(av+i+2);
-                for (int j = 0; j < numberOfsource; j++)
+                if(x->f_source_manager->groupGetExistence(i))
                 {
-                    temporySourceManager->groupSetSource(atom_getlong(av+i+1), atom_getlong(av+i+3+j));
+                    *ac += x->f_source_manager->groupGetNumberOfSources(i) + 9;
                 }
-                if(atom_getlong(av+i+3+numberOfsource) == 1)
-                    temporySourceManager->groupSetMute(atom_getlong(av+i+1), 1);
-                temporySourceManager->groupSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
-                temporySourceManager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
+            }
+			*av = (t_atom *)getbytes(*ac  * sizeof(t_atom));
+        }
+        long j = 0;
+        for(long i = 0; j < *ac  && i  < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        {
+            if(x->f_source_manager->sourceGetExistence(i))
+            {
+                atom_setsym(*av+j, gensym("source"));
+                atom_setlong(*av+j+1, i);
+                atom_setfloat(*av+j+2, x->f_source_manager->sourceGetAbscissa(i));
+                atom_setfloat(*av+j+3, x->f_source_manager->sourceGetOrdinate(i));
+                atom_setlong(*av+j+4, x->f_source_manager->groupGetMute(i));
+                atom_setfloat(*av+j+5, x->f_source_manager->sourceGetColor(i).red);
+                atom_setfloat(*av+j+6, x->f_source_manager->sourceGetColor(i).green);
+                atom_setfloat(*av+j+7, x->f_source_manager->sourceGetColor(i).blue);
+                atom_setfloat(*av+j+8, x->f_source_manager->sourceGetColor(i).alpha);
+                atom_setsym(*av+j+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+                
+                j += 10;
             }
         }
-        x->f_source_trajectory->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
-        delete temporySourceManager;
+        for(long i = 0; j < *ac && i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        {
+            if(x->f_source_manager->groupGetExistence(i))
+            {
+                long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
+                atom_setsym(*av+j, gensym("group"));
+                atom_setlong(*av+j+1, i);
+                atom_setlong(*av+j+2, numberOfsource);
+                for (long k = 0; k < numberOfsource; k++)
+                {
+                    atom_setlong(*av+j+k+3, x->f_source_manager->groupGetSourceIndex(i, k));
+                }
+                atom_setlong(*av+j+numberOfsource+3, x->f_source_manager->groupGetMute(i));
+                atom_setfloat(*av+j+numberOfsource+4, x->f_source_manager->groupGetColor(i).red);
+                atom_setfloat(*av+j+numberOfsource+5, x->f_source_manager->groupGetColor(i).green);
+                atom_setfloat(*av+j+numberOfsource+6, x->f_source_manager->groupGetColor(i).blue);
+                atom_setfloat(*av+j+numberOfsource+7, x->f_source_manager->groupGetColor(i).alpha);
+                atom_setsym(*av+j+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
+                
+                j += x->f_source_manager->groupGetNumberOfSources(i) + 9;
+            }
+        }
+        
     }
+	return MAX_ERR_NONE;
 }
 
 t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
@@ -1267,133 +894,6 @@ void hoamap_bang(t_hoamap *x)
             }
         }
     }
-}
-
-void hoamap_infos(t_hoamap *x)
-{
-    t_atom avNumber[3];
-    t_atom* avIndex;
-    t_atom* avSource;
-    t_atom avMute[4];
-    
-    /* Sources */
-    long numberOfSource = 0;
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
-    {
-        
-        if(x->f_source_manager->sourceGetExistence(i))
-        {
-            numberOfSource++;
-        }
-    }
-    atom_setsym(avNumber, gensym("source"));
-    atom_setsym(avNumber+1, gensym("number"));
-    atom_setlong(avNumber+2, numberOfSource);
-    outlet_list(x->f_out_infos, 0L, 3, avNumber);
-    
-    avIndex = new t_atom[numberOfSource+2];
-    atom_setsym(avIndex, gensym("source"));
-    atom_setsym(avIndex+1, gensym("index"));
-    for(int i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
-    {
-        if(x->f_source_manager->sourceGetExistence(i))
-        {
-            atom_setlong(avIndex+j+2, i);
-            j++;
-        }
-    }
-    outlet_list(x->f_out_infos, 0L, numberOfSource+2, avIndex);
-    free(avIndex);
-    
-    atom_setsym(avMute, gensym("source"));
-    atom_setsym(avMute+1, gensym("mute"));
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
-    {
-        if(x->f_source_manager->sourceGetExistence(i))
-        {
-            atom_setlong(avMute+2, i);
-            atom_setlong(avMute+3, x->f_source_manager->sourceGetMute(i));
-            outlet_list(x->f_out_infos, 0L, 4, avMute);
-        }
-    }
-    
-    /* Groups */
-    long numberOfGroups = 0;
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
-    {
-        if(x->f_source_manager->groupGetExistence(i))
-        {
-            numberOfGroups++;
-        }
-    }
-    atom_setsym(avNumber, gensym("group"));
-    atom_setsym(avNumber+1, gensym("number"));
-    atom_setlong(avNumber+2, numberOfGroups);
-    outlet_list(x->f_out_infos, 0L, 3, avNumber);
-    
-    avIndex = new t_atom[numberOfGroups+2];
-    atom_setsym(avIndex, gensym("group"));
-    atom_setsym(avIndex+1, gensym("index"));
-    for(int i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
-    {
-        if(x->f_source_manager->groupGetExistence(i))
-        {
-            atom_setlong(avIndex+j+2, i);
-            j++;
-            avSource = new t_atom[x->f_source_manager->groupGetNumberOfSources(i)+3];
-            atom_setsym(avSource, gensym("group"));
-            atom_setsym(avSource+1, gensym("source"));
-            atom_setlong(avSource+2, i);
-            for(int k = 0; k < x->f_source_manager->groupGetNumberOfSources(i); k++)
-            {
-                atom_setlong(avSource+3+k,x->f_source_manager->groupGetSourceIndex(i, k));
-            }
-            outlet_list(x->f_out_infos, 0L, x->f_source_manager->groupGetNumberOfSources(i)+3, avSource);
-            free(avSource);
-        }
-    }
-    outlet_list(x->f_out_infos, 0L, numberOfGroups+2, avIndex);
-    free(avIndex);
-    
-    atom_setsym(avMute, gensym("group"));
-    atom_setsym(avMute+1, gensym("mute"));
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
-    {
-        if(x->f_source_manager->groupGetExistence(i))
-        {
-            atom_setlong(avMute+2, i);
-            atom_setlong(avMute+3, x->f_source_manager->groupGetMute(i));
-            outlet_list(x->f_out_infos, 0L, 4, avMute);
-        }
-    }
-
-    /* Slots */
-    long numberOfSlots = 0;
-    for(int i = 0; i <= x->f_source_preset->getMaximumIndexOfSlot(); i++)
-    {
-        if(x->f_source_preset->getSlotExistence(i))
-        {
-            numberOfSlots++;
-        }
-    }
-    atom_setsym(avNumber, gensym("slot"));
-    atom_setsym(avNumber+1, gensym("number"));
-    atom_setlong(avNumber+2, numberOfSlots);
-    outlet_list(x->f_out_infos, 0L, 3, avNumber);
-
-    avIndex = new t_atom[numberOfSlots+2];
-    atom_setsym(avIndex, gensym("slot"));
-    atom_setsym(avIndex+1, gensym("index"));
-    for(int i = 0, j = 0; i <= x->f_source_preset->getMaximumIndexOfSlot(); i++)
-    {
-        if(x->f_source_preset->getSlotExistence(i))
-        {
-            atom_setlong(avIndex+j+2, i);
-            j++;
-        }
-    }
-    outlet_list(x->f_out_infos, 0L, numberOfSlots+2, avIndex);
-    free(avIndex);    
 }
 
 /**********************************************************/
@@ -1954,18 +1454,15 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
         jpopupmenu_destroy(popup);
     }
-    
     x->f_rect_selection_exist = -1;
-    x->f_rect_selection.width =  x->f_rect_selection.height = 0.;
-    x->f_rect_selection.x = pt.x;
-    x->f_rect_selection.y = pt.y;
+    x->f_rect_selection.x = x->f_rect_selection.y = x->f_rect_selection.width =  x->f_rect_selection.height = 0.;
     if(x->f_index_of_selected_source == -1 && x->f_index_of_selected_group == -1)
     {
+        x->f_rect_selection.x = pt.x;
+        x->f_rect_selection.y = pt.y;
         x->f_rect_selection_exist = 1;
     }
     hoamap_mousedrag(x, patcherview, pt, modifiers);
-    if(x->f_source_trajectory->getRecording())
-        clock_set(x->f_clock, 100);
 }
 
 
@@ -2015,18 +1512,13 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 
 void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    if(x->f_source_trajectory)
-        clock_unset(x->f_clock);
-    
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
     
     if(x->f_rect_selection_exist)
     {
-        x->f_rect_selection.width = pt.x - x->f_rect_selection.x;
-		x->f_rect_selection.height = pt.y - x->f_rect_selection.y;
         int indexOfNewGroup = -1;
-        for(int i = 0; indexOfNewGroup == -1; i++)
+        for(int i = 0; i < MAX_SOURCES && indexOfNewGroup == -1; i++)
         {
             if (x->f_source_manager->groupGetExistence(i) == 0)
             {
@@ -2043,8 +1535,8 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
         {
             if(x->f_source_manager->sourceGetExistence(i) && indexOfNewGroup >= 0)
             {
-                double abscissaOfSource = x->f_source_manager->sourceGetAbscissa(i);
-                double ordinateOfSource = x->f_source_manager->sourceGetOrdinate(i);
+                int abscissaOfSource = x->f_source_manager->sourceGetAbscissa(i);
+                int ordinateOfSource = x->f_source_manager->sourceGetOrdinate(i);
                 
                 if(((abscissaOfSource > x1 && abscissaOfSource < x2) || (abscissaOfSource < x1 && abscissaOfSource > x2)) && ((ordinateOfSource > y1 && ordinateOfSource < y2) || (ordinateOfSource < y1 && ordinateOfSource > y2)))
                 {
