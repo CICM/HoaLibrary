@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <root>
 <refpage name='hoa.binaural~.maxref.xml' />
-<refpage name='hoa.connect.maxref.xml'/>
 <refpage name='hoa.control.maxref.xml' />
 <refpage name='hoa.convolve~.maxref.xml' />
 <refpage name='hoa.connect.maxref.xml' />
@@ -10,7 +9,6 @@
 <refpage name='hoa.encoder~.maxref.xml' />
 <refpage name='hoa.freeverb~.maxref.xml' />
 <refpage name='hoa.gigaverb~.maxref.xml' />
-<refpage name='hoa.halo~.maxref.xml' />
 <refpage name='hoa.map.maxref.xml' />
 <refpage name='hoa.map~.maxref.xml' />
 <refpage name='hoa.meter~.maxref.xml' />
