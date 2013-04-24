@@ -25,23 +25,20 @@ AmbisonicConvolver::AmbisonicConvolver(long anOrder, long aSamplingFrequency, lo
 	m_number_of_harmonics	= m_order * 2 + 1;
 	m_number_of_inputs		= m_number_of_harmonics;
 	m_number_of_outputs		= m_number_of_harmonics;
-    m_wider                 = new AmbisonicWider(anOrder);
-    m_early_widen_vector    = new double[m_number_of_harmonics];
-    m_tail_widen_vector     = new double[m_number_of_harmonics];
     
 	m_impulse_response      = new float[1];
     m_impulse_response_size = 1;
-    m_ambisonics_impulse_responses = new float*[m_number_of_harmonics];
-    
-    m_early_diffraction = 0.;
-    m_tail_diffraction  = 0.;
-    
+
 	for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        m_ambisonics_impulse_responses[i] = new float[1];
 		m_convolution.push_back(new ZeroLatencyConvolver());
     }
-	
+	m_wet_vector = new double[1];
+    m_dry_vector = new double[1];
+    m_wet_line = new AmbisonicLine();
+    m_dry_line = new AmbisonicLine();
+    m_wet_line->setCoefficientDirect(1.);
+    m_dry_line->setCoefficientDirect(0.);
 	setWetValue(1);
     setDryValue(0.);
 }
@@ -69,6 +66,12 @@ long AmbisonicConvolver::getNumberOfOutputs()
 void AmbisonicConvolver::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
+    m_wet_line->setVectorSize(aVectorSize);
+    m_dry_line->setVectorSize(aVectorSize);
+    free(m_wet_vector);
+    m_wet_vector = new double[m_vector_size];
+    free(m_dry_vector);
+    m_dry_vector = new double[m_vector_size];
 }
 
 long AmbisonicConvolver::getVectorSize()
@@ -89,6 +92,7 @@ long AmbisonicConvolver::getSamplingFrequency()
 void AmbisonicConvolver::setWetValue(double aGain)
 {
     m_wet = Tools::clip(aGain, 0., 1.);
+    m_wet_line->setCoefficient(m_wet);
 }
 
 double	AmbisonicConvolver::getWetValue()
@@ -99,6 +103,7 @@ double	AmbisonicConvolver::getWetValue()
 void AmbisonicConvolver::setDryValue(double aGain)
 {
     m_dry = Tools::clip(aGain, 0., 1.);
+    m_dry_line->setCoefficient(m_dry);
 }
 
 double	AmbisonicConvolver::getDryValue()
@@ -106,92 +111,10 @@ double	AmbisonicConvolver::getDryValue()
     return m_dry;
 }
 
-void AmbisonicConvolver::setEarlyDiffractionValue(double aValue)
+void AmbisonicConvolver::clear()
 {
-    m_early_diffraction = Tools::clip(aValue, 0., 1.);
-    computeAmbisonicsImpulseResponses();
-}
-
-double	AmbisonicConvolver::getEarlyDiffractionValue()
-{
-    return m_early_diffraction;
-}
-
-void AmbisonicConvolver::setTailDiffractionValue(double aValue)
-{
-    m_tail_diffraction = Tools::clip(aValue, 0., 1.);
-    computeAmbisonicsImpulseResponses();
-}
-
-double	AmbisonicConvolver::getTailDiffractionValue()
-{
-    return m_tail_diffraction;
-}
-
-void AmbisonicConvolver::setCutOffTime(double aTimeValue)
-{
-    m_cutoff_time = Tools::clip_min(aTimeValue, 0.);
-    computeAmbisonicsImpulseResponses();
-}
-
-double AmbisonicConvolver::getCutOffTime()
-{
-    return m_cutoff_time;
-}
-
-void AmbisonicConvolver::computeAmbisonicsImpulseResponses()
-{
-    long cutOffsample = m_cutoff_time * m_sampling_frequency / 1000.;
-    double widenValue;
-    for(int i = 0; i < m_impulse_response_size; i++)
-    {
-        if(i < cutOffsample)
-        {
-            widenValue = m_early_diffraction * sqrt((double)i / (double)(cutOffsample * Tools::clip_min((1. - m_early_diffraction), 0.0000000001)));
-            for(int j = 0; j < m_number_of_harmonics; j++)
-                m_early_widen_vector[j] = m_impulse_response[i];
-            
-            m_wider->process(m_early_widen_vector, m_early_widen_vector, 1. - widenValue);
-            
-            for(int j = 0; j < m_number_of_harmonics; j++)
-                m_ambisonics_impulse_responses[j][i] = m_early_widen_vector[j];
-            
-            widenValue = m_early_diffraction * sqrt((double)i / (double)(cutOffsample * Tools::clip_min((1. - sqrt(m_early_diffraction)), 0.0000000001)));
-            for(int j = 0; j < m_number_of_harmonics; j++)
-                m_early_widen_vector[j] = m_impulse_response[i];
-            
-            m_wider->process(m_early_widen_vector, m_early_widen_vector, 1. - widenValue);
-            
-            for(int j = 1; j < m_number_of_harmonics; j+=2)
-                m_ambisonics_impulse_responses[j][i] = m_early_widen_vector[j];
-            
-        }
-        else
-        {
-            widenValue = m_tail_diffraction * sqrt((double)i / (double)(cutOffsample * Tools::clip_min((1. - m_early_diffraction), 0.0000000001)));
-            
-            for(int j = 0; j < m_number_of_harmonics; j++)
-                m_tail_widen_vector[j] = m_impulse_response[i];
-            
-            m_wider->process(m_tail_widen_vector, m_tail_widen_vector, 1. - widenValue);
-            
-            for(int j = 0; j < m_number_of_harmonics; j++)
-                m_ambisonics_impulse_responses[j][i] = m_tail_widen_vector[m_number_of_harmonics - j - 1];
-            
-            widenValue = m_tail_diffraction * sqrt((double)i / (double)(cutOffsample * Tools::clip_min((1. - sqrt(m_early_diffraction)), 0.0000000001)));
-            
-            for(int j = 0; j < m_number_of_harmonics; j++)
-                m_tail_widen_vector[j] = m_impulse_response[i];
-            
-            m_wider->process(m_tail_widen_vector, m_tail_widen_vector, 1. - widenValue);
-            
-            for(int j = 1; j < m_number_of_harmonics; j+=2)
-                m_ambisonics_impulse_responses[j][i] = m_tail_widen_vector[m_number_of_harmonics - j - 1];
-        }
-    }
-    
     for(int i = 0; i < m_number_of_harmonics; i++)
-        m_convolution[i]->setImpulseResponse(m_ambisonics_impulse_responses[i], m_impulse_response_size);
+        m_convolution[i]->clear();
 }
 
 void AmbisonicConvolver::setImpulseResponse(float* anImpulResponse, long aSize)
@@ -201,34 +124,22 @@ void AmbisonicConvolver::setImpulseResponse(float* anImpulResponse, long aSize)
         free(m_impulse_response);
         m_impulse_response = new float[aSize];
         m_impulse_response_size = aSize;
-        for(int i = 0; i < m_number_of_harmonics; i++)
-        {
-            free(m_ambisonics_impulse_responses[i]);
-            m_ambisonics_impulse_responses[i] = new float[m_impulse_response_size];
-        }
-        
     }
     for(int i = 0; i < m_impulse_response_size; i++)
         m_impulse_response[i] = anImpulResponse[i];
-    /*
+    
     for(int i = 0; i < m_number_of_harmonics; i++)
         m_convolution[i]->setImpulseResponse(m_impulse_response, m_impulse_response_size);
-    */
-    computeAmbisonicsImpulseResponses();
+    
 }
 AmbisonicConvolver::~AmbisonicConvolver()
 {
-    delete m_wider;
-	for(int i = 0; i < m_number_of_harmonics; i++)
-	{
-		delete m_convolution[i];
-		m_convolution[i] = 0;
-        free(m_ambisonics_impulse_responses[i]);
-	}
-    free(m_early_widen_vector);
-    free(m_tail_widen_vector);
+    m_convolution.clear();
+    delete m_wet_line;
+    delete m_dry_line;
     free(m_impulse_response);
-    free(m_ambisonics_impulse_responses);
+    free(m_wet_vector);
+    free(m_dry_vector);
 }
 
 

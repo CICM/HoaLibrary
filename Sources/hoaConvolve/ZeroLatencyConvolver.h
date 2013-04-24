@@ -38,6 +38,7 @@ protected:
 public:
 	ZeroLatencyConvolver(long aMinimumSize = 128, long aMaximumSize = 32768);
 	void	setImpulseResponse(float* anImpulResponse, long aSize);
+    void    clear();
 	inline Cicm_Signal process(Cicm_Signal anInput);
     long getNumberOfFFTs(){return m_ffts_useds;};
     long getNumberOfInstance(){return m_fft[m_number_of_ffts-1]->getNumberOfInstances();};

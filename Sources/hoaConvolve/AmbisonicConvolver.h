@@ -22,7 +22,7 @@
 
 #include "cicmTools.h"
 #include "ZeroLatencyConvolver.h"
-#include "AmbisonicWider.h"
+#include "AmbisonicLine.h"
 
 class AmbisonicConvolver
 {
@@ -38,17 +38,14 @@ private:
     
 	double		m_wet;
 	double		m_dry;
-    double      m_early_diffraction;
-    double      m_tail_diffraction;
-    double		m_cutoff_time;
+    double*		m_wet_vector;
+	double*		m_dry_vector;
+    AmbisonicLine* m_wet_line;
+    AmbisonicLine* m_dry_line;
     
-    AmbisonicWider* m_wider;
-    double*     m_early_widen_vector;
-    double*     m_tail_widen_vector;
-    
-    float*     m_impulse_response;
-    float**    m_ambisonics_impulse_responses;
+    float*      m_impulse_response;
     long        m_impulse_response_size;
+    
 	vector <ZeroLatencyConvolver*> m_convolution;
     
     void        computeAmbisonicsImpulseResponses();
@@ -66,13 +63,8 @@ public:
 	double	getWetValue();
     void	setDryValue(double aGain);
 	double	getDryValue();
-    void    setEarlyDiffractionValue(double aValue);
-    double  getEarlyDiffractionValue();
-    void    setTailDiffractionValue(double aValue);
-    double  getTailDiffractionValue();
-    void    setCutOffTime(double aTimeValue);
-    double  getCutOffTime();
-
+    void    clear();
+    
     long getNumberOfFFTs(){return m_convolution[0]->getNumberOfFFTs();};
     long getNumberOfInstance(){return m_convolution[0]->getNumberOfInstance();};
     
@@ -83,19 +75,21 @@ public:
 	template<typename Type> void process(Type* aInputs, Type* aOutputs)
 	{
 		for(int j = 0; j < m_number_of_harmonics; j++)
-			aOutputs[j] = m_convolution[j]->process(aInputs[j]) * m_wet + m_dry * aInputs[j];
+			aOutputs[j] = m_convolution[j]->process(aInputs[j]) * m_wet_line->process() + m_dry_line->process() * aInputs[j];
 	}
 	
 	/* Perform sample block */
 	template<typename Type> void process(Type** aInputs, Type** aOutputs)
 	{
         Type *InputVector, *OutputVector;
+        m_wet_line->process(m_wet_vector);
+        m_dry_line->process(m_dry_vector);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
             InputVector = aInputs[i];
             OutputVector = aOutputs[i];
 			for(int j = 0; j < m_vector_size; j++)
-				OutputVector[j] = m_convolution[i]->process(InputVector[j]) * m_wet + m_dry * InputVector[j];
+				OutputVector[j] = m_convolution[i]->process(InputVector[j]) * m_wet_vector[j] + m_dry_vector[j] * InputVector[j];
 		}
 	}
 	
