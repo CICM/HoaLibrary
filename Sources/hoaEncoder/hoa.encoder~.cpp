@@ -18,17 +18,14 @@
  */
 
 #include "AmbisonicEncoder.h"
-#include "../hoaHeader.h"
+
 extern "C"
 {
-#include "m_pd.h"
-    /*
 #include "ext.h"
 #include "ext_obex.h"
 #include "z_dsp.h"
-
-     */
 }
+#include "../hoaHeader.h"
 
 int postons = 0;
 

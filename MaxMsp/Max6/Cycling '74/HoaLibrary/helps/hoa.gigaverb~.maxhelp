@@ -3,12 +3,11 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"minor" : 0,
+			"revision" : 8
 		}
 ,
-		"rect" : [ 359.0, 46.0, 763.0, 769.0 ],
+		"rect" : [ 652.0, 145.0, 763.0, 769.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -44,12 +43,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 359.0, 72.0, 763.0, 743.0 ],
+						"rect" : [ 652.0, 171.0, 763.0, 743.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -551,12 +549,12 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-20",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 68.0, 685.0, 60.0 ],
-									"text" : "hoa.freeverb~ is based on Juhana Sadeharju reverberation model that uses delay lines and filters to create a larger reverberation than the freeverb algorithm. The filters coefficients of gigaverb are extended to circular harmonic domain to simulate variations of acoustic response of the room depending to the incidence angle and keep directionality. The number of comb filters depends to the harmonics order to optimize the process.",
+									"patching_rect" : [ 7.625, 68.0, 507.0, 47.0 ],
+									"text" : "hoa.gigaverb~ is based on Juhana Sadeharju reverberation model that uses delay lines and filters to create a larger reverberation than the freeverb algorithm and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -570,7 +568,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 68.0, 666.0, 60.0 ],
+									"patching_rect" : [ 7.625, 68.0, 507.0, 47.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -687,6 +685,7 @@
 									"patching_rect" : [ 30.0, 409.0, 208.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"dry" : 0.5,
+										"size" : 300.0,
 										"wet" : 0.5
 									}
 ,
@@ -735,9 +734,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -2284,9 +2282,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
 						"rect" : [ 0.0, 26.0, 763.0, 743.0 ],
@@ -2337,43 +2334,36 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.times~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}

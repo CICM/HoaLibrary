@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 495.0, 180.0, 790.0, 667.0 ],
+		"rect" : [ 138.0, 82.0, 790.0, 667.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -47,7 +47,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 495.0, 206.0, 790.0, 641.0 ],
+						"rect" : [ 138.0, 108.0, 790.0, 641.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -555,12 +555,12 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-20",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 68.0, 666.0, 60.0 ],
-									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters. The filters coefficients of freeverb are extended to circular harmonic domain to simulate variations of acoustic response of the room depending to the incidence angle and keep directionality. The number of comb filters depends to the harmonics order to optimize the process.",
+									"patching_rect" : [ 7.625, 68.0, 483.0, 47.0 ],
+									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -574,7 +574,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 68.0, 666.0, 60.0 ],
+									"patching_rect" : [ 7.625, 68.0, 483.0, 47.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -690,7 +690,8 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 30.0, 429.0, 208.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"dry" : 0.4
+										"dry" : 0.25,
+										"wet" : 0.75
 									}
 ,
 									"text" : "hoa.freeverb~ 7 @size 0.5 @damp 0.5"

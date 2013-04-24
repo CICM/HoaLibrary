@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 76.0, 44.0, 600.0, 698.0 ],
+		"rect" : [ 76.0, 44.0, 599.0, 630.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -31,12 +31,42 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
+					"id" : "obj-5",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 94.0, 105.0, 54.0, 30.0 ],
+					"text" : ";\rdsp stop"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"id" : "obj-3",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 24.0, 105.0, 55.0, 30.0 ],
+					"text" : ";\rdsp start"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
 					"frgb" : 0.0,
 					"id" : "obj-22",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 39.0, 669.0, 497.0, 19.0 ],
+					"patching_rect" : [ 24.0, 587.0, 497.0, 19.0 ],
 					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -50,7 +80,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 39.0, 669.0, 497.0, 19.0 ],
+					"patching_rect" : [ 24.0, 587.0, 497.0, 19.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
@@ -1008,7 +1038,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 24.0, 120.0, 63.0, 19.0 ],
+					"patching_rect" : [ 24.0, 141.5, 63.0, 19.0 ],
 					"text" : "cycle~ 0.1"
 				}
 
@@ -1067,33 +1097,6 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 255.0, 135.0, 45.0, 19.0 ],
 					"text" : "sig~ 0."
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-8",
-					"maxclass" : "newobj",
-					"numinlets" : 15,
-					"numoutlets" : 16,
-					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 24.0, 565.0, 250.0, 19.0 ],
-					"text" : "hoa.decoder~ 7 16"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-12",
-					"maxclass" : "newobj",
-					"numinlets" : 16,
-					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 630.0, 250.0, 19.0 ],
-					"text" : "hoa.dac~ 1:16"
 				}
 
 			}
@@ -1216,7 +1219,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 414.0, 555.0, 51.0, 19.0 ],
+					"patching_rect" : [ 414.0, 523.0, 51.0, 19.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -1242,7 +1245,11 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 414.0, 585.0, 99.0, 19.0 ],
+					"patching_rect" : [ 414.0, 553.0, 99.0, 19.0 ],
+					"saved_object_attributes" : 					{
+						"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
+					}
+,
 					"text" : "hoa.connect 7 16"
 				}
 
@@ -2227,34 +2234,6 @@
 				}
 
 			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-13",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 339.0, 585.0, 32.5, 17.0 ],
-					"text" : "stop"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"id" : "obj-7",
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 309.0, 555.0, 72.0, 17.0 ],
-					"text" : "startwindow"
-				}
-
-			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -2342,16 +2321,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-10", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 15 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 348.5, 630.0, 264.5, 630.0 ],
-					"source" : [ "obj-13", 0 ]
 				}
 
 			}
@@ -2501,156 +2470,6 @@
 					"destination" : [ "obj-17", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-14", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 14 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 14 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-8", 13 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 13 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 12 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 12 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-8", 11 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 11 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 10 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 10 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-8", 9 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 9 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 8 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 8 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-8", 7 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 7 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 6 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 6 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-8", 5 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 5 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 4 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 4 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-8", 3 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 3 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 2 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"destination" : [ "obj-8", 1 ],
-					"disabled" : 0,
-					"hidden" : 1,
-					"source" : [ "obj-14", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"color" : [ 0.0, 0.0, 1.0, 1.0 ],
-					"destination" : [ "obj-8", 0 ],
-					"disabled" : 0,
-					"hidden" : 1,
 					"source" : [ "obj-14", 0 ]
 				}
 
@@ -3018,7 +2837,7 @@
 					"destination" : [ "obj-11", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 423.5, 576.0, 423.5, 576.0 ],
+					"midpoints" : [ 423.5, 544.0, 423.5, 544.0 ],
 					"source" : [ "obj-46", 0 ]
 				}
 
@@ -3032,194 +2851,19 @@
 				}
 
 			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 15 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"midpoints" : [ 318.5, 630.0, 264.5, 630.0 ],
-					"source" : [ "obj-7", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 15 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 15 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 14 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 14 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 13 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 13 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 12 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 12 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 11 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 11 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 10 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 10 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 9 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 9 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 8 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 8 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 7 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 7 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 6 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 6 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 5 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 5 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 4 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 4 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 3 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 3 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 2 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-12", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-8", 0 ]
-				}
-
-			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.mixer~.maxpat",
-				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/effects",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/HoaLibrary/effects",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "delay.maxpat",
-				"bootpath" : "/Applications/Max6/Cycling '74/ajoutés/UBCToolbox_0.97/Modules/Effects/delay/lib",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/Cycling '74/ajoutés/UBCToolbox_0.97/Modules/Effects/delay/lib",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
+				"patcherrelativepath" : "../effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/helps",
-				"patcherrelativepath" : "",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"patcherrelativepath" : "../others",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa-icon.png",
-				"bootpath" : "/Applications/Max6/patches/docs/tutorials/hoa-tut/images",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/tutorials/hoa-tut/images",
-				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
@@ -3232,10 +2876,6 @@
 			}
 , 			{
 				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

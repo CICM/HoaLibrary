@@ -22,16 +22,17 @@
 
 // Private Variables / Functions / Etc.
 void hoa_postcredits();
-/*
+
 // Initialize Hoa
 void hoa_init(void)
 {
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 }
 
-void hoa_postcredits(){
-	post("hoa.library (version 1.1) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
-}*/
+void hoa_postcredits()
+ {
+	post("hoa.library (version 1.2) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+    post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
+}
 
 #endif

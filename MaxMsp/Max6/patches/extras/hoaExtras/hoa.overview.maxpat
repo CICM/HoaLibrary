@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 88.0, 94.0, 875.0, 639.0 ],
+		"rect" : [ 352.0, 113.0, 664.0, 647.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -30,6 +30,28 @@
 		"title" : "|-- hoa.library overview --|",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-2",
+					"linecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"maxclass" : "live.line",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 4.78125, 72.75, 644.84375, 8.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-3",
+					"linecolor" : [ 0.0, 0.0, 0.0, 0.3 ],
+					"maxclass" : "live.line",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 3.78125, 71.75, 644.84375, 8.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 3,
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -39,7 +61,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 208.78125, 20.75, 73.0, 20.0 ],
-					"text" : "version 1.1",
+					"text" : "version 1.2",
 					"textcolor" : [ 0.9404, 0.940544, 0.940332, 1.0 ],
 					"varname" : "autohelp_top_title[4]"
 				}
@@ -95,7 +117,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 4.78125, 5.75, 868.21875, 8.775246 ]
+					"patching_rect" : [ 4.78125, 5.75, 644.84375, 8.0 ]
 				}
 
 			}
@@ -106,29 +128,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 3.78125, 4.75, 868.21875, 8.775246 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-58",
-					"linecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"maxclass" : "live.line",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 4.78125, 69.75, 868.21875, 8.775246 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-59",
-					"linecolor" : [ 0.0, 0.0, 0.0, 0.3 ],
-					"maxclass" : "live.line",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 3.78125, 68.75, 868.21875, 8.775246 ]
+					"patching_rect" : [ 3.78125, 4.75, 644.84375, 8.0 ]
 				}
 
 			}
@@ -196,10 +196,11 @@
 					"fontsize" : 11.595187,
 					"frgb" : 0.0,
 					"id" : "obj-19",
+					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 407.5625, 15.75, 454.5, 19.0 ],
+					"patching_rect" : [ 317.5625, 10.75, 268.5, 32.0 ],
 					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012-13 CICM / Universite Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -213,7 +214,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 407.5625, 15.75, 454.5, 19.0 ],
+					"patching_rect" : [ 317.5625, 10.75, 268.5, 32.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
@@ -265,38 +266,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.776471, 0.776471, 0.776471, 0.0 ],
-					"fontname" : "Goudy Old Style",
-					"fontsize" : 15.0,
-					"frgb" : 0.0,
-					"id" : "obj-33",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 651.0, 279.0, 206.0, 40.0 ],
-					"text" : "This library is released under the terms of the GNU licence.",
-					"textcolor" : [ 0.30292, 0.30292, 0.30292, 0.81 ],
-					"varname" : "autohelp_top_description[2]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-					"id" : "obj-34",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 651.0, 279.0, 206.0, 40.0 ],
-					"rounded" : 15,
-					"shadow" : -1
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontname" : "Goudy Old Style",
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
@@ -304,7 +273,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 33.6875, 537.5, 817.3125, 23.0 ],
+					"patching_rect" : [ 33.6875, 552.5, 604.375, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -317,7 +286,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 23.0625, 536.5, 6.0, 80.0 ],
+					"patching_rect" : [ 23.0625, 551.5, 6.0, 80.0 ],
 					"rounded" : 5
 				}
 
@@ -330,49 +299,9 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 18.0625, 529.5, 838.9375, 93.0 ],
+					"patching_rect" : [ 18.0625, 544.5, 626.0, 87.0 ],
 					"rounded" : 15,
 					"shadow" : -1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"arrows" : 1,
-					"border" : 2.0,
-					"id" : "obj-16",
-					"justification" : 1,
-					"maxclass" : "live.line",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 657.0, 216.5, 22.0, 10.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"border" : 2.0,
-					"id" : "obj-15",
-					"maxclass" : "live.line",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 679.0, 202.5, 12.0, 20.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"frgb" : 0.0,
-					"id" : "obj-12",
-					"linecount" : 2,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 662.0, 165.257935, 154.5, 33.0 ],
-					"text" : "Click in the tab to open the appropriate help file.",
-					"textcolor" : [ 0.260204, 0.260204, 0.260204, 1.0 ]
 				}
 
 			}
@@ -400,7 +329,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 797.0625, 43.75, 65.0, 20.0 ],
+					"patching_rect" : [ 423.0625, 45.75, 65.0, 20.0 ],
 					"text" : "contact us",
 					"textcolor" : [ 0.392157, 0.494118, 0.666667, 1.0 ]
 				}
@@ -415,7 +344,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 797.0625, 43.75, 65.0, 20.0 ],
+					"patching_rect" : [ 423.0625, 45.75, 65.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 619.529907, 138.725479, 92.470032, 20.274523 ]
 				}
@@ -432,7 +361,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 812.395813, 68.75, 318.0, 25.0 ],
+					"patching_rect" : [ 661.729187, 44.75, 318.0, 25.0 ],
 					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/contacts/"
 				}
 
@@ -455,24 +384,6 @@
 			}
 , 			{
 				"box" : 				{
-					"bgcolor" : [ 0.776471, 0.776471, 0.776471, 0.0 ],
-					"fontname" : "Goudy Old Style",
-					"fontsize" : 15.0,
-					"frgb" : 0.0,
-					"id" : "obj-82",
-					"linecount" : 7,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 651.0, 356.5, 213.0, 125.0 ],
-					"text" : "NB : to see references pages you must before deactivate the option \"Use New Documentation Rendering\" in the global max preferences window. This is a current limitation of Max version (6.0.8).",
-					"textcolor" : [ 0.74902, 0.203922, 0.235294, 0.81 ],
-					"varname" : "autohelp_top_description[1]"
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"frgb" : 0.0,
@@ -480,31 +391,9 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 692.0625, 43.75, 96.0, 20.0 ],
+					"patching_rect" : [ 318.0625, 45.75, 96.0, 20.0 ],
 					"text" : "visit our website",
 					"textcolor" : [ 0.392157, 0.494118, 0.666667, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-37",
-					"linecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"maxclass" : "live.line",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 33.0625, 638.0, 782.0, 5.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-38",
-					"linecolor" : [ 0.0, 0.0, 0.0, 0.66 ],
-					"maxclass" : "live.line",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 32.0625, 637.0, 782.0, 5.0 ]
 				}
 
 			}
@@ -618,7 +507,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 28,
+										"count" : 35,
 										"data" : [ 											{
 												"key" : "hoa.encoder~",
 												"value" : [ "hoa.encoder~ creates the spherical harmonics of a signal depending of an given order and the position on a circle." ]
@@ -652,6 +541,10 @@
 												"value" : [ "hoa.pi is for peoples that never remember more than 4 decimals or want to initialize a good Pi number. " ]
 											}
 , 											{
+												"key" : "hoa.pi~",
+												"value" : [ "hoa.pi~ (msp version of the hoa.pi object) is for peoples that never remember more than 4 decimals or want to initialize a good Pi number. " ]
+											}
+, 											{
 												"key" : "hoa.scope~",
 												"value" : [ "hoa.scope~ displays the harmonics of an ambisonic soundfield on a circle. The number of harmonics is defined at the object creation with the attribute @order and create order * 2 + 1 inputs (ex : hoa.scope~ @order 7)." ]
 											}
@@ -681,7 +574,11 @@
 											}
 , 											{
 												"key" : "hoa.map",
-												"value" : [ "hoa.map is a 2D spatialization user interface tool, allow you to spatialize several point sources. You can control sources with a list of value in the first inlet, zoom in/out, add or remove loudspeakers, modify the distance between listener and loudspeaker..." ]
+												"value" : [ "hoa.map allows you to spatialize several sources on a plane. You can add and remove sources change coordinates add description and create groups. Used with hoa.map~ the source spatialization has never been so easy." ]
+											}
+, 											{
+												"key" : "hoa.map~",
+												"value" : [ "hoa.map~ is a tool that encodes several sources in the spherical harmonics domain. It's easy to use and works with hoa.map. You should look at hoa.map's help for futher informations." ]
 											}
 , 											{
 												"key" : "hoa.control",
@@ -693,11 +590,7 @@
 											}
 , 											{
 												"key" : "hoa.convolve~",
-												"value" : [ "hoa.convolve~ uses FIR and FFT filtering to apply reveberation on harmonics dependant signals. The zero latency convolution is optimized with the Gardner algorithm and uses the circular harmonics behavior to reduce the number of FFT convolution." ]
-											}
-, 											{
-												"key" : "hoa.irconverter~",
-												"value" : [ "hoa.irconverter~ create the circular harmonic dependant signals of a discrete circular impulse response for ambisonics processing. It facilitates the convertion for the use of hoa.convolve~ and allows you to changes the incidence angles of the discrete impulse response." ]
+												"value" : [ "hoa.convolve~ uses time domain and frequency domain filtering to apply reveberation on harmonics dependant signals. The zero latency convolution is optimized with an algorithm based on the Gardner algorithm." ]
 											}
 , 											{
 												"key" : "hoa.wider~",
@@ -709,7 +602,7 @@
 											}
 , 											{
 												"key" : "hoa.grain~",
-												"value" : [ "hoa.grain~ synthesizes a diffused sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending to the orders to generate a granular sound field." ]
+												"value" : [ "hoa.grain~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending to the orders to generate a granular sound field." ]
 											}
 , 											{
 												"key" : "hoa.mirror~",
@@ -720,16 +613,40 @@
 												"value" : [ "hoa.mixer~ helps to understand ambisonics and the behavior of the circular harmonics." ]
 											}
 , 											{
-												"key" : "hoa.reverberation~",
-												"value" : [ "hoa.reverberation~ use a algorithm based on feedback network delay and doppler effect to simulate a room reveberation." ]
+												"key" : "hoa.freeverb~",
+												"value" : [ "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process." ]
 											}
 , 											{
-												"key" : "hoa.halo~",
-												"value" : [ "hoa.halo~ highlights a part of the soundfield. It puts all the soundfield in the dark exept where you re directing the soundflashlight." ]
+												"key" : "hoa.gigaverb~",
+												"value" : [ "hoa.gigaverb~ is based on Juhana Sadeharju reverberation model that uses delay lines and filters to create a larger reverberation than the freeverb algorithm and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process." ]
 											}
 , 											{
-												"key" : "hoa.ease~",
-												"value" : [ "hoa.ease~ creates the circular harmonics of signals depending of a given order an angles and a radius." ]
+												"key" : "hoa.space",
+												"value" : [ "hoa.space allows you to draw and set vitual microphones coefficients that can transform your ambisonics soundfields with the hoa.space~ object in the plane wave domain." ]
+											}
+, 											{
+												"key" : "hoa.space~",
+												"value" : [ "hoa.space~ allows you to apply gain to the virtual microphones. There is a hoa.space object embed in hoa.space~ to facilitate the modulation of the soundfield. Look at the hoa.space's help for more informations." ]
+											}
+, 											{
+												"key" : "hoa.vector~",
+												"value" : [ "hoa.vector~ display the coordinates of the velocity vector and the energy vector that caractérize a soundfield. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992." ]
+											}
+, 											{
+												"key" : "hoa.am~",
+												"value" : [ "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending on their number." ]
+											}
+, 											{
+												"key" : "hoa.closer~",
+												"value" : [ "hoa.closer~ weights the harmonics depending to their number and the radius value. It's based on the cicmtool ambipan~ external." ]
+											}
+, 											{
+												"key" : "hoa.decorrelation~",
+												"value" : [ "hoa.decorrelation~ allows you to delay the differents harmonics depending on the harmonic number to decorrelate the harmonics and generate a diffuse soundfield." ]
+											}
+, 											{
+												"key" : "hoa.granular~",
+												"value" : [ "hoa.granular~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending on the orders to generate a granular sound field." ]
 											}
  ]
 									}
@@ -907,7 +824,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 38.5, 206.257935, 579.0, 5.0 ]
+					"patching_rect" : [ 38.5, 221.257935, 579.0, 5.0 ]
 				}
 
 			}
@@ -918,7 +835,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 37.5, 205.257935, 579.0, 5.0 ]
+					"patching_rect" : [ 37.5, 220.257935, 579.0, 5.0 ]
 				}
 
 			}
@@ -953,7 +870,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "", "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 20.5, 165.257935, 616.125, 33.0 ],
+					"patching_rect" : [ 20.5, 180.257935, 616.125, 33.0 ],
 					"rounded" : 0.0,
 					"spacing_x" : 1.0,
 					"spacing_y" : 0.0,
@@ -969,6 +886,7 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
+					"offset" : [ -3300.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
@@ -978,7 +896,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 119.0, 314.0, 605.0, 304.0 ],
+						"rect" : [ 386.0, 345.0, 605.0, 304.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -999,6 +917,20 @@
 						"digest" : "",
 						"tags" : "",
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 13.0,
+									"id" : "obj-50",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 618.0, 313.5, 64.0, 19.0 ],
+									"text" : "sort -1 -1"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -1257,33 +1189,45 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.rotate~"
+									"text" : "hoa.encoder~"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 5,
+										"count" : 8,
 										"data" : [ 											{
 												"key" : 0,
-												"value" : [ "hoa.delay~" ]
+												"value" : [ "hoa.am~" ]
 											}
 , 											{
 												"key" : 1,
-												"value" : [ "hoa.grain~" ]
+												"value" : [ "hoa.closer~" ]
 											}
 , 											{
 												"key" : 2,
-												"value" : [ "hoa.mirror~" ]
+												"value" : [ "hoa.delay~" ]
 											}
 , 											{
 												"key" : 3,
-												"value" : [ "hoa.mixer~" ]
+												"value" : [ "hoa.decorrelation~" ]
 											}
 , 											{
 												"key" : 4,
-												"value" : [ "hoa.reverberation~" ]
+												"value" : [ "hoa.grain~" ]
+											}
+, 											{
+												"key" : 5,
+												"value" : [ "hoa.mirror~" ]
+											}
+, 											{
+												"key" : 6,
+												"value" : [ "hoa.mixer~" ]
+											}
+, 											{
+												"key" : 7,
+												"value" : [ "hoa.granular~" ]
 											}
  ]
 									}
@@ -1308,7 +1252,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 6,
+										"count" : 7,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.plug~" ]
@@ -1327,10 +1271,14 @@
 											}
 , 											{
 												"key" : 4,
-												"value" : [ "hoa.record~" ]
+												"value" : [ "hoa.pi~" ]
 											}
 , 											{
 												"key" : 5,
+												"value" : [ "hoa.record~" ]
+											}
+, 											{
+												"key" : 6,
 												"value" : [ "hoa.play~" ]
 											}
  ]
@@ -1356,7 +1304,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 6,
+										"count" : 10,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.projector~" ]
@@ -1379,7 +1327,23 @@
 											}
 , 											{
 												"key" : 5,
-												"value" : [ "hoa.irconverter~" ]
+												"value" : [ "hoa.map~" ]
+											}
+, 											{
+												"key" : 6,
+												"value" : [ "hoa.space~" ]
+											}
+, 											{
+												"key" : 7,
+												"value" : [ "hoa.freeverb~" ]
+											}
+, 											{
+												"key" : 8,
+												"value" : [ "hoa.gigaverb~" ]
+											}
+, 											{
+												"key" : 9,
+												"value" : [ "hoa.vector~" ]
 											}
  ]
 									}
@@ -1404,7 +1368,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 4,
+										"count" : 5,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.scope~" ]
@@ -1420,6 +1384,10 @@
 , 											{
 												"key" : 3,
 												"value" : [ "hoa.control" ]
+											}
+, 											{
+												"key" : 4,
+												"value" : [ "hoa.space" ]
 											}
  ]
 									}
@@ -1503,7 +1471,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 22,
+										"count" : 27,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.encoder~" ]
@@ -1538,59 +1506,79 @@
 											}
 , 											{
 												"key" : 8,
-												"value" : [ "hoa.scope~" ]
+												"value" : [ "hoa.pi~" ]
 											}
 , 											{
 												"key" : 9,
-												"value" : [ "hoa.projector~" ]
+												"value" : [ "hoa.scope~" ]
 											}
 , 											{
 												"key" : 10,
-												"value" : [ "hoa.recomposer~" ]
+												"value" : [ "hoa.projector~" ]
 											}
 , 											{
 												"key" : 11,
-												"value" : [ "hoa.meter~" ]
+												"value" : [ "hoa.recomposer~" ]
 											}
 , 											{
 												"key" : 12,
-												"value" : [ "hoa.record~" ]
+												"value" : [ "hoa.meter~" ]
 											}
 , 											{
 												"key" : 13,
-												"value" : [ "hoa.play~" ]
+												"value" : [ "hoa.record~" ]
 											}
 , 											{
 												"key" : 14,
-												"value" : [ "hoa.optim~" ]
+												"value" : [ "hoa.play~" ]
 											}
 , 											{
 												"key" : 15,
-												"value" : [ "hoa.map" ]
+												"value" : [ "hoa.optim~" ]
 											}
 , 											{
 												"key" : 16,
-												"value" : [ "hoa.control" ]
+												"value" : [ "hoa.map" ]
 											}
 , 											{
 												"key" : 17,
-												"value" : [ "hoa.stereo~" ]
+												"value" : [ "hoa.map~" ]
 											}
 , 											{
 												"key" : 18,
-												"value" : [ "hoa.convolve~" ]
+												"value" : [ "hoa.control" ]
 											}
 , 											{
 												"key" : 19,
-												"value" : [ "hoa.irconverter~" ]
+												"value" : [ "hoa.stereo~" ]
 											}
 , 											{
 												"key" : 20,
-												"value" : [ "hoa.wider~" ]
+												"value" : [ "hoa.convolve~" ]
 											}
 , 											{
 												"key" : 21,
-												"value" : [ "hoa.ease~" ]
+												"value" : [ "hoa.wider~" ]
+											}
+, 											{
+												"key" : 22,
+												"value" : [ "hoa.freeverb~" ]
+											}
+, 											{
+												"key" : 23,
+												"value" : [ "hoa.gigaverb~" ]
+											}
+, 											{
+												"key" : 24,
+												"value" : [ "hoa.space" ]
+											}
+, 											{
+												"key" : 25,
+												"value" : [ "hoa.space~" ]
+											}
+, 											{
+												"key" : 26,
+												"value" : [ "hoa.vector~" ]
 											}
  ]
 									}
@@ -1956,7 +1944,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.am~", "hoa.closer~", "hoa.delay~", "hoa.decorrelation~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.reverberation~" ]
+									"tabs" : [ "hoa.am~", "hoa.closer~", "hoa.delay~", "hoa.decorrelation~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.granular~" ]
 								}
 
 							}
@@ -1995,7 +1983,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.projector~", "hoa.recomposer~", "hoa.binaural~", "hoa.stereo~", "hoa.convolve~", "hoa.irconverter~" ]
+									"tabs" : [ "hoa.projector~", "hoa.recomposer~", "hoa.binaural~", "hoa.stereo~", "hoa.convolve~", "hoa.map~", "hoa.space~", "hoa.freeverb~", "hoa.gigaverb~", "hoa.vector~" ]
 								}
 
 							}
@@ -2034,7 +2022,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.pi", "hoa.record~", "hoa.play~" ]
+									"tabs" : [ "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.pi", "hoa.pi~", "hoa.record~", "hoa.play~" ]
 								}
 
 							}
@@ -2073,7 +2061,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.scope~", "hoa.meter~", "hoa.map", "hoa.control" ]
+									"tabs" : [ "hoa.scope~", "hoa.meter~", "hoa.map", "hoa.control", "hoa.space" ]
 								}
 
 							}
@@ -2151,7 +2139,7 @@
 									"rounded" : 6.0,
 									"spacing_x" : 20.0,
 									"spacing_y" : 5.0,
-									"tabs" : [ "hoa.encoder~", "hoa.decoder~", "hoa.rotate~", "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.binaural~", "hoa.pi", "hoa.scope~", "hoa.projector~", "hoa.recomposer~", "hoa.meter~", "hoa.record~", "hoa.play~", "hoa.optim~", "hoa.map", "hoa.control", "hoa.stereo~", "hoa.convolve~", "hoa.irconverter~", "hoa.wider~", "hoa.halo~", "hoa.ease~", "hoa.freeverb~" ]
+									"tabs" : [ "hoa.encoder~", "hoa.decoder~", "hoa.rotate~", "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.binaural~", "hoa.pi", "hoa.pi~", "hoa.scope~", "hoa.projector~", "hoa.recomposer~", "hoa.meter~", "hoa.record~", "hoa.play~", "hoa.optim~", "hoa.map", "hoa.map~", "hoa.control", "hoa.stereo~", "hoa.convolve~", "hoa.wider~", "hoa.freeverb~", "hoa.gigaverb~", "hoa.space", "hoa.space~", "hoa.vector~" ]
 								}
 
 							}
@@ -2653,6 +2641,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-50", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-3", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -2672,7 +2669,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 31.0625, 220.257935, 605.125, 304.0 ]
+					"patching_rect" : [ 33.6875, 231.5, 605.125, 304.0 ]
 				}
 
 			}
@@ -2685,7 +2682,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 692.0625, 43.75, 96.0, 20.0 ],
+					"patching_rect" : [ 318.0625, 45.75, 96.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 604.529907, 123.725479, 92.470032, 20.274523 ]
 				}
@@ -2702,7 +2699,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 717.729187, 68.75, 261.5, 25.0 ],
+					"patching_rect" : [ 661.729187, 10.75, 261.5, 25.0 ],
 					"text" : ";\rmax launchbrowser http://www.mshparisnord.fr/hoalibrary/en/"
 				}
 
@@ -2727,11 +2724,11 @@
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-5",
-					"linecount" : 3,
+					"linecount" : 4,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 13.9375, 81.5, 854.0, 57.0 ],
+					"patching_rect" : [ 13.9375, 88.5, 630.125, 74.0 ],
 					"text" : "The hoa.library is a set of externals that encodes a signal in ambisonic spherical harmonics and decodes the ambisonic soundfield for a circle array of loudspeakers. This library allows you to synthesize, transform and modulate sound fields. It has been elaborated to facilitate the use of the sphericals harmonics and the routing in the ambisonics domain.",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"
@@ -2746,36 +2743,8 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.0625, 156.257935, 628.0, 367.242065 ],
+					"patching_rect" : [ 16.0625, 171.257935, 628.0, 367.242065 ],
 					"rounded" : 15,
-					"shadow" : -1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-					"id" : "obj-4",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 651.0, 356.5, 206.0, 125.0 ],
-					"rounded" : 15,
-					"shadow" : -1
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-					"id" : "obj-14",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 662.0, 165.257935, 154.5, 33.0 ],
-					"rounded" : 0,
 					"shadow" : -1
 				}
 
@@ -2788,7 +2757,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 13.9375, 81.25, 849.5625, 58.25 ],
+					"patching_rect" : [ 13.9375, 88.25, 630.125, 74.25 ],
 					"rounded" : 15,
 					"shadow" : -1
 				}
@@ -2802,7 +2771,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 692.0625, 43.75, 96.0, 20.0 ],
+					"patching_rect" : [ 318.0625, 45.75, 96.0, 20.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}
@@ -2816,7 +2785,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 797.0625, 43.75, 65.0, 20.0 ],
+					"patching_rect" : [ 423.0625, 45.75, 65.0, 20.0 ],
 					"rounded" : 6,
 					"shadow" : -1
 				}

@@ -3,12 +3,11 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"minor" : 0,
+			"revision" : 8
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1007.0, 706.0 ],
+		"rect" : [ 0.0, 44.0, 1000.0, 706.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -44,12 +43,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1007.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +69,23 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-12",
+									"linecount" : 16,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 657.0, 287.0, 193.0, 221.0 ],
+									"text" : "      How to record trajectories\n\n1 - Set \"record 1\"\n2 - Draw the trajectory of a source or a group\n2 (bis) - Set \"record 0\" (for safety)\n3 - Replay with floats between 0. and 1.\n4 - Rewind to 0.\n5 - Set \"limit 1\"\n6 - Set \"record 1\"\n7 - Overwrite the trajectory with another source or another group\n8 - Rewind to 0\n9 - (record, play and rewind to inifite)",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[2]"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -584,7 +599,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.5, 69.0, 639.0, 47.0 ],
+									"patching_rect" : [ 5.5, 69.0, 628.5, 47.0 ],
 									"text" : "hoa.map allows you to record and play trajectories. Trajectories record the position of sources or groups while you're draging it. You can overwrite with other sources or groups to create complexs trajectories. Trajectory are saved in the patch and can be saved in a JSON file format.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -619,9 +634,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -961,12 +975,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1007.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1374,7 +1387,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 399.25, 89.5, 88.0, 19.0 ],
+									"patching_rect" : [ 556.0, 76.0, 88.0, 19.0 ],
 									"text" : "loadmess set 0"
 								}
 
@@ -1419,7 +1432,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 393.125, 89.5, 88.0, 19.0 ],
+									"patching_rect" : [ 591.125, 43.0, 88.0, 19.0 ],
 									"text" : "loadmess set 0"
 								}
 
@@ -1785,7 +1798,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 5.5, 69.0, 507.0, 33.0 ],
-									"text" : "hoa.map allows you to create groups with a set of sources, move sources via the group and to define color and description with messages. Here, we show you how to the syntax to use.",
+									"text" : "hoa.map allows you to create groups with a set of sources, move sources via the group and to define color and description with messages. Here, we show you how to use the syntax.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -1819,9 +1832,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -2248,7 +2260,7 @@
 									"destination" : [ "obj-80", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 402.625, 119.5, 480.75, 119.5 ],
+									"midpoints" : [ 600.625, 119.5, 480.75, 119.5 ],
 									"source" : [ "obj-78", 0 ]
 								}
 
@@ -2354,12 +2366,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1007.0, 680.0 ],
+						"rect" : [ 0.0, 70.0, 1000.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3452,9 +3463,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -3964,12 +3974,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1007.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5067,9 +5076,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -5600,12 +5608,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1007.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6342,7 +6349,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 5.5, 69.0, 503.0, 33.0 ],
-									"text" : "hoa.map allows you to define the sources coordinates, color and description with messages. Here, we show you how to the syntax to use.",
+									"text" : "hoa.map allows you to define the sources coordinates, color and description with messages. Here, we show you how to use the syntax.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -6376,9 +6383,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -6847,12 +6853,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1007.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7101,7 +7106,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 15.0, 256.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, 0.59458, -0.763871, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.73772, 0.700559, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.748731, -0.719828, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.627613, 0.766623, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, 0.59458, -0.763871, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.73959, 0.632796, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.748731, -0.719828, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.637578, 0.798566, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
 									"zoom" : 0.522812
 								}
@@ -7150,9 +7155,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 399.0, 165.0, 996.0, 480.0 ],
@@ -7381,9 +7385,8 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"minor" : 0,
+															"revision" : 8
 														}
 ,
 														"rect" : [ 487.0, 74.0, 514.0, 240.0 ],
@@ -7675,9 +7678,8 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"minor" : 0,
+															"revision" : 8
 														}
 ,
 														"rect" : [ 620.0, 172.0, 640.0, 480.0 ],
@@ -7957,9 +7959,8 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"minor" : 0,
+															"revision" : 8
 														}
 ,
 														"rect" : [ 30.0, 44.0, 793.0, 670.0 ],
@@ -7994,9 +7995,8 @@
 																		"fileversion" : 1,
 																		"appversion" : 																		{
 																			"major" : 6,
-																			"minor" : 1,
-																			"revision" : 2,
-																			"architecture" : "x86"
+																			"minor" : 0,
+																			"revision" : 8
 																		}
 ,
 																		"rect" : [ 69.0, 145.0, 640.0, 480.0 ],
@@ -9474,9 +9474,8 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"minor" : 0,
+															"revision" : 8
 														}
 ,
 														"rect" : [ 354.0, 91.0, 640.0, 480.0 ],
@@ -10545,9 +10544,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"minor" : 0,
+											"revision" : 8
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -11202,12 +11200,11 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"minor" : 0,
+							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1007.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -11255,57 +11252,50 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"bootpath" : "/Applications/Max6/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max6/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
-				"bootpath" : "/Applications/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/examples/gen",
+				"bootpath" : "/Applications/Max6/examples/gen",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max6/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "yafr2.maxpat",
-				"bootpath" : "/Applications/Max 6.1/examples/effects/reverb/lib",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/examples/effects/reverb/lib",
+				"bootpath" : "/Applications/Max6/examples/effects/reverb/lib",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max6/examples/effects/reverb/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.amp~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}

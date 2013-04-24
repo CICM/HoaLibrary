@@ -26,7 +26,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.granular~",
+		"title" : "hoa.granular~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -510,7 +510,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 64.0, 116.0, 793.0, 670.0 ],
+						"rect" : [ 609.0, 70.0, 793.0, 670.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1462,26 +1462,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-23", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 570.5, 372.0, 403.5, 372.0 ],
-									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-8", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 570.5, 315.0, 527.5, 315.0 ],
-									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-21", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1790,6 +1770,26 @@
 									"destination" : [ "obj-10", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-23", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 570.5, 264.0, 537.0, 264.0, 537.0, 414.0, 403.5, 414.0 ],
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-8", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 570.5, 264.0, 527.0, 264.0, 527.0, 327.0, 527.5, 327.0 ],
 									"source" : [ "obj-5", 0 ]
 								}
 
@@ -2539,8 +2539,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }
