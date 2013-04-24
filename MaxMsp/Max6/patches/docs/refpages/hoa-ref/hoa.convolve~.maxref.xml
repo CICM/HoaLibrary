@@ -11,7 +11,7 @@
 		<o>
 			hoa.convolve~
 		</o>
-        uses FIR and FFT filtering to apply reveberation on harmonics dependant signals. The zero latency convolution is optimized with the Gardner algorithm and uses the circular harmonics behavior to reduce the number of FFT convolution. The only argument is the order and the attribute's messages are explain in the "messages" subpatcher.
+        uses time and frequency domain filtering to apply reveberation on harmonics dependant signals. The zero latency convolution is optimized with an algorithm based on the Gardner algorithm.
 	</description>
 	<!--METADATA-->
 	<metadatalist>
@@ -51,10 +51,10 @@
 	<objarglist>
 		<objarg name="ambisonic-order" type="int" optional="0">
 			<digest>
-				ambisonic order.
+				Ambisonic order.
 			</digest>
 			<description>
-				Set the ambisonic order.
+				Set the Ambisonic Order.
 			</description>
 		</objarg>
 	</objarglist>
@@ -70,63 +70,69 @@
 				Harmonics signals.
 			</description>
 		</method>
+		<method name="clear">
+			<arglist />
+			<digest>
+				Impolitely clears the Reverb.
+			</digest>
+			<description>
+				Impolitely clears the Reverb.
+			</description>
+		</method>
 	</methodlist>
     
 	<!--ATTRIBUTES-->
 	<attributelist>
-		<attribute name="buffers" get="1" set="1" type="atom" size="10">
+		<attribute name="buffer" get="1" set="1" type="atom" size="10">
 			<digest>
-				Bind buffer~ object's names with a list.
+				Buffer name.
 			</digest>
 			<description>
-				Bind buffer~ object's names with a list.
-				<o>hoa.convolve~</o> share the same syntax as the <o>polybuffer~</o> object and auto-complete the name with the "all" message.
+				Names the <o>buffer~</o> object containing the sample to be used by <o>hoa.convolve~</o> as an impulse response.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Buffer~ Objects Names" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Buffer~ Object Name" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="varchar" />
 			</attributelist>
 		</attribute>
-		<attribute name="channels" get="1" set="1" type="atom" size="10">
+		<attribute name="channel" get="1" set="1" type="atom" size="10">
 			<digest>
-				Bind the buffer~ object's channels.
+				Buffer Channel.
 			</digest>
 			<description>
-				The buffer~ object channels can be set with a list.
-				<o>hoa.convolve~</o> accepts the pre-message "all".
+				Set the <o>buffer~</o> object channel to be used by <o>hoa.convolve~</o>
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Buffer~ Objects Channels" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Buffer~ Object Channel" />
 				<attribute name="style" get="1" set="1" type="symbol" size="1" value="varlong" />
 			</attributelist>
 		</attribute>
-		<attribute name="limits" get="1" set="1" type="atom" size="10">
+		<attribute name="dry" get="1" set="1" type="float" size="1">
 			<digest>
-				Limits the size of the buffer.
+				Dry factor.
 			</digest>
 			<description>
-				The size of the buffer can be limited with "limits" message and a list. 0 means no limit.
-				<o>hoa.convolve~</o> accepts the pre-message "all".
+				Set the Dry factor.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Buffer~ Objects Size Used" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="varlong" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Dry" />
+				<attribute name="type" get="1" set="1" type="symbol" size="1" value="float" />
 			</attributelist>
 		</attribute>
-		<attribute name="offsets" get="1" set="1" type="atom" size="10">
+		<attribute name="wet" get="1" set="1" type="atom" size="10">
 			<digest>
-				The begin of the buffer~ objects can be ignored with the "offsets".
+				Wet factor.
 			</digest>
 			<description>
-				<o>hoa.convolve~</o> is optimized for high order processing with the offsets attribute. It ignores a defined number of samples at the beginning of the buffers and then reduce the number of FIR filtering and small FFT convolutions. (accepts the pre-message "-1").
+				Set the Wet factor.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
-				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Buffer~ Objects Offsets" />
-				<attribute name="style" get="1" set="1" type="symbol" size="1" value="varlong" />
+				<attribute name="label" get="1" set="1" type="symbol" size="1" value="Wet" />
+				<attribute name="type" get="1" set="1" type="symbol" size="1" value="float" />
 			</attributelist>
 		</attribute>
 	</attributelist>
