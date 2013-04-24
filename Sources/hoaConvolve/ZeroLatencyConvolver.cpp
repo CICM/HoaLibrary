@@ -108,6 +108,12 @@ void ZeroLatencyConvolver::setImpulseResponse(float* anImpulseResponse, long aSi
     }
 }
 
+void ZeroLatencyConvolver::clear()
+{
+    for(int i = 0; i < m_number_of_ffts; i++)
+        m_fft[i]->clear();
+}
+
 ZeroLatencyConvolver::~ZeroLatencyConvolver()
 {
 	delete m_fir;

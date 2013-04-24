@@ -45,6 +45,7 @@ private:
 public:
 	FftConvolution(long aWindowSize = 1024, long aNumberOfInstances = 2);
 	void loadImpulseResponse(Cicm_Signal* anImpulseResponse);
+    void clear();
     long getNumberOfInstances(){return m_number_of_instances;};
 	inline Cicm_Signal process(Cicm_Signal anInput);
 	~FftConvolution();

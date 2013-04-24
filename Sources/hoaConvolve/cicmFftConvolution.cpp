@@ -70,6 +70,12 @@ void FftConvolution::loadImpulseResponse(Cicm_Signal* anImpulseResponse)
 	Cicm_free(real);
 }
 
+void FftConvolution::clear()
+{
+    for(int i = 0; i < m_number_of_instances; i++)
+		Cicm_signal_clear(m_real_vector[i], m_window_size);
+}
+
 FftConvolution::~FftConvolution()
 {
 	Cicm_free(m_buffer);
