@@ -11,8 +11,7 @@
 
 // Name & Version
 PRODUCT_NAME = $(PROJECT_NAME)
-PRODUCT_VERSION = 5.1.7
-
+PRODUCT_VERSION = 1.2
 
 // Paths
 
