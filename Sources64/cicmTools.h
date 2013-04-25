@@ -33,7 +33,6 @@ using namespace std;
 #define CICM_PI 3.141592653589793238462643383279502884
 #define CICM_2PI CICM_PI * 2.
 #define CICM_PI2 CICM_PI / 2.
-#define NUMBEROFCIRCLEPOINTS 36000
 
 //#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
 

@@ -85,7 +85,7 @@ void plug_script_load(t_plug_script *x, t_symbol *s);
 
 int plug_harmonic(int index, int order);
 void plug_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
-t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int mode, t_atom *argv, int argc);
+t_object *plug_patch(t_object *patcher, t_symbol *s, int index, int order, int mode, int noutlet, t_atom *argv, int argc);
 t_object *plug_script(t_object *patcher, int index, int order, int ninlet, int noutlet, int mode);
 t_object *plug_outlet(t_object *patcher, int index, int order, int noutlet, int mode);
 t_object* plug_inlet(t_object *patcher, int index, int order, int ninlet, int mode);
