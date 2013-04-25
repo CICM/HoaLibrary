@@ -1,7 +1,31 @@
-For an overview of hoa.library and new features in version 1.1, please refer to the 'hoa.library overview' patch in the extra folder.
+For an overview of hoa.library and new features in version 1.2, please refer to the 'hoa.library overview' patch in the extra folder.
 
 ------------------------
-version beta 1.1
+version 1.2
+------------------------
+
+New FEATURES:
+ - hoa.freeverb~ : new MSP object.
+ - hoa.gigaverb~ : new MSP object.
+ - hoa.space : new UI object.
+ - hoa.space~ : new MSP object.
+ - hoa.pi~ : new MSP object.
+ - hoa.vector~ : new MSP object.
+ - hoa.map : object revisited.
+ - hoa.map~ : new MSP object.
+ - hoa.convolve~ : object revisited.
+ - hoa.irconverter~ : removed from package (deprecated).
+ - hoa.halo~ : removed from package (deprecated because of the the new hoa.space~ object).
+ - hoa.granular~ : new abstraction for hoa.plug~.
+
+BUGS FIXED:
+ - hoa.plug~ : mode out now output good index number.
+ - hoa.connect : better coloration and several bug fixed.
+ - hoa.decorrelation~ : harmonic index fixed.
+ - hoa.rotate~ : now accept float for azimuth.
+
+------------------------
+version 1.1
 ------------------------
 
 New FEATURES:
