@@ -77,7 +77,8 @@ void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaRotate *x = NULL;
 	int	order = 4;
-	if (x = (t_HoaRotate *)object_alloc((t_class*)HoaRotate_class)) 
+    x = (t_HoaRotate *)object_alloc((t_class*)HoaRotate_class);
+	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);

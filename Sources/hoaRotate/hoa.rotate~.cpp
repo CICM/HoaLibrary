@@ -62,7 +62,7 @@ int main(void)
 	class_addmethod(c, (method)HoaRotate_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)HoaRotate_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)HoaRotate_dsp,		"dsp",		A_CANT, 0);
-	class_addmethod(c, (method)HoaRotate_dsp64,		"dsp64",		A_CANT, 0);
+	class_addmethod(c, (method)HoaRotate_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaRotate_assist,	"assist",	A_CANT, 0);
 	
 	class_dspinit(c);				
@@ -77,7 +77,8 @@ void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaRotate *x = NULL;
 	int	order = 4;
-	if (x = (t_HoaRotate *)object_alloc((t_class*)HoaRotate_class)) 
+    x = (t_HoaRotate *)object_alloc((t_class*)HoaRotate_class);
+	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
@@ -106,7 +107,7 @@ void HoaRotate_int(t_HoaRotate *x, long n)
 void HoaRotate_dsp64(t_HoaRotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiRotate->setVectorSize(maxvectorsize);
-	if(count[x->f_inputNumber - 1])
+	if(count[x->f_ambiRotate->getNumberOfInputs() - 1])
 		object_method(dsp64, gensym("dsp_add64"), x, HoaRotate_perform64, 0, NULL);
 	else
 		object_method(dsp64, gensym("dsp_add64"), x, HoaRotate_perform64Offset, 0, NULL);
