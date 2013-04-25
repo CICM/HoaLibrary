@@ -368,14 +368,25 @@ int validConditionColor(t_object *obj)
 	t_object *jb, *o;
 	t_symbol *obclass = object_classname(obj);
 	
-	if(obclass == gensym("hoa.encoder~") || obclass == gensym("hoa.rotate~") || obclass == gensym("hoa.recomposer~") || obclass == gensym("sfplay~") || obclass == gensym("hoa.optim~") || obclass == gensym("hoa.ease~") || obclass == gensym("hoa.convolve~") || obclass == gensym("hoa.wider~"))
+	if(obclass == gensym("hoa.encoder~") ||
+	   obclass == gensym("hoa.rotate~") ||
+	   obclass == gensym("hoa.recomposer~") ||
+	   obclass == gensym("sfplay~") ||
+	   obclass == gensym("hoa.optim~") ||
+	   obclass == gensym("hoa.convolve~") ||
+	   obclass == gensym("hoa.wider~") ||
+	   obclass == gensym("hoa.map~") ||
+	   obclass == gensym("hoa.freeverb~") ||
+	   obclass == gensym("hoa.gigaverb~")
+	   )
 		return 1;
-	else if(obclass == gensym("hoa.projector~"))
+	else if(obclass == gensym("hoa.projector~") ||
+			obclass == gensym("hoa.space~"))
 		return 2;
 	else if (obclass == gensym("jpatcher"))
 	{
 		jb = jpatcher_get_firstobject(obj);
-		while(jb) 
+		while(jb)
 		{
 			o = jbox_get_object(jb);
 			if(object_classname(o) == gensym("hoa.plug_script"))
@@ -385,7 +396,7 @@ int validConditionColor(t_object *obj)
 			jb = jbox_get_nextobject(jb);
 		}
 		
-	}		
+	}
 	
 	return 0;
 }

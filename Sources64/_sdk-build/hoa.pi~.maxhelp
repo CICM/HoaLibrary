@@ -70,14 +70,44 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-8",
-									"maxclass" : "number",
+									"fontsize" : 14.0,
+									"hidden" : 1,
+									"id" : "obj-14",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 322.0, 96.0, 82.0, 22.0 ],
+									"text" : "loadmess 2"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 14.0,
+									"hidden" : 1,
+									"id" : "obj-12",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 247.0, 96.0, 94.0, 22.0 ],
+									"text" : "loadmess 1.5"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 14.0,
+									"id" : "obj-9",
+									"maxclass" : "flonum",
 									"numinlets" : 1,
 									"numoutlets" : 2,
-									"outlettype" : [ "int", "bang" ],
+									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 247.0, 128.0, 50.0, 19.0 ]
+									"patching_rect" : [ 247.0, 128.0, 50.0, 22.0 ]
 								}
 
 							}
@@ -363,7 +393,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
 									"patching_rect" : [ 322.0, 128.0, 68.0, 22.0 ],
-									"sig" : 0.0
+									"sig" : 2.0
 								}
 
 							}
@@ -406,6 +436,24 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-11", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-12", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-14", 0 ]
 								}
 
 							}
@@ -459,7 +507,7 @@
 									"destination" : [ "obj-10", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-8", 0 ]
+									"source" : [ "obj-9", 0 ]
 								}
 
 							}
@@ -550,7 +598,7 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1

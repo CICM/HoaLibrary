@@ -70,17 +70,6 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-3",
-									"maxclass" : "spectroscope~",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 531.0, 575.0, 300.0, 100.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-6",
@@ -505,7 +494,7 @@
 									"id" : "obj-66",
 									"leds_bg" : 0,
 									"ls" : 5,
-									"ls_angles" : [ 179.0, 180.0, 180.0, 180.0, 181.0 ],
+									"ls_angles" : [ 60.0, 60.0, 180.0, 299.0, 300.0 ],
 									"maxclass" : "hoa.meter~",
 									"mbordercolor" : [ 0.25098, 0.25098, 0.25098, 0.0 ],
 									"numinlets" : 5,
@@ -1992,7 +1981,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 9.4375, 6.5, 630.5625, 34.0 ],
+									"patching_rect" : [ 9.4375, 6.5, 630.5625, 33.0 ],
 									"text" : "This subpatch show you how to reveal different part of the surround soundfield.\nin this exemple we rotate whole soundfield before sending it to the hoa.stereo~ object.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -9279,28 +9268,21 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../../patches/docs/refpages/hoa-ref",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Applications/Max6/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1

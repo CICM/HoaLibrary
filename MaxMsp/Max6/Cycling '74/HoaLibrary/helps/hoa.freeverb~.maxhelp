@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 138.0, 82.0, 790.0, 667.0 ],
@@ -43,8 +44,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 138.0, 108.0, 790.0, 641.0 ],
@@ -559,7 +561,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 68.0, 483.0, 47.0 ],
+									"patching_rect" : [ 7.625, 68.0, 484.0, 47.0 ],
 									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -739,8 +741,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1667,6 +1670,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1676,6 +1680,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1685,6 +1690,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1694,6 +1700,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1703,6 +1710,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1712,6 +1720,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1721,6 +1730,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1730,6 +1740,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1739,6 +1750,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1748,6 +1760,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1757,6 +1770,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1766,6 +1780,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1775,6 +1790,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1784,6 +1800,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1793,6 +1810,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1802,6 +1820,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 14 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1811,6 +1830,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-30", 13 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1820,6 +1840,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 12 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1829,6 +1850,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-30", 11 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1838,6 +1860,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 10 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1847,6 +1870,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-30", 9 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1856,6 +1880,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 8 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1865,6 +1890,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-30", 7 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1874,6 +1900,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 6 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1883,6 +1910,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-30", 5 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1892,6 +1920,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 4 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1901,6 +1930,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-30", 3 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1910,6 +1940,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 2 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1919,6 +1950,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-30", 1 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1928,6 +1960,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-30", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -2038,8 +2071,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 790.0, 641.0 ],
@@ -2090,36 +2124,43 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa.plug~.maxref.xml",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.times~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}

@@ -49,7 +49,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 61.0, 70.0, 1068.0, 697.0 ],
+						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -253,7 +253,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u823012278"
+									"varname" : "u951003912"
 								}
 
 							}
@@ -2352,7 +2352,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -2599,7 +2599,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 545.0, 220.600006, 19.0 ],
 									"text" : "hoa.decoder~ 7 16"
 								}
@@ -3136,7 +3136,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3146,7 +3146,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3156,7 +3156,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3166,7 +3166,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3176,7 +3176,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3186,7 +3186,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3196,7 +3196,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3206,7 +3206,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3216,7 +3216,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3226,7 +3226,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3236,7 +3236,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3246,7 +3246,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3256,7 +3256,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3266,7 +3266,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3276,7 +3276,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3286,7 +3286,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -7235,7 +7235,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -7482,7 +7482,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 545.0, 220.600006, 19.0 ],
 									"text" : "hoa.decoder~ 7 16"
 								}
@@ -8000,7 +8000,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8010,7 +8010,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8020,7 +8020,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8030,7 +8030,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8040,7 +8040,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8050,7 +8050,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8060,7 +8060,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8070,7 +8070,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8080,7 +8080,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8090,7 +8090,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8100,7 +8100,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8110,7 +8110,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8120,7 +8120,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8130,7 +8130,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8140,7 +8140,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8150,7 +8150,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -9715,7 +9715,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
+						"rect" : [ 61.0, 70.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -11896,7 +11896,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -12143,7 +12143,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 545.0, 220.600006, 19.0 ],
 									"text" : "hoa.decoder~ 7 16"
 								}
@@ -12661,7 +12661,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12671,7 +12671,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12681,7 +12681,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12691,7 +12691,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12701,7 +12701,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12711,7 +12711,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12721,7 +12721,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12731,7 +12731,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12741,7 +12741,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12751,7 +12751,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12761,7 +12761,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12771,7 +12771,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12781,7 +12781,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12791,7 +12791,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12801,7 +12801,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -12811,7 +12811,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -14224,6 +14224,13 @@
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa.granular~.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/effects",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/effects",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.times~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
@@ -14239,10 +14246,6 @@
 			}
 , 			{
 				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.decoder~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

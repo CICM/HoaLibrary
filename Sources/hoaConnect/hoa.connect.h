@@ -32,7 +32,7 @@
 #include "jdataview.h"
 #include "hoa.structure.h"
 
-#define CONNECT_MAX_TAB 100
+#define CONNECT_MAX_TAB 200
 
 typedef struct  _connect
 {

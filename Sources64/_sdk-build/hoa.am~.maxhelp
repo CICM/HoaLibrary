@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 2.0, 100.0, 1278.0, 633.0 ],
+		"rect" : [ 0.0, 100.0, 1281.0, 597.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -771,7 +771,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 70.0, 540.0, 33.0 ],
-					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending to their number.",
+					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending on their number.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[1]"
 				}
@@ -2910,50 +2910,43 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max6/patches/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max6/patches/docs/refpages/hoa-ref",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.am~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/effects",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
 				"patcherrelativepath" : "../effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"patcherrelativepath" : "../operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1

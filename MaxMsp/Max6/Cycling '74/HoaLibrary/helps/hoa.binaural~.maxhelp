@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 98.0, 64.0, 533.0, 570.0 ],
+		"rect" : [ 98.0, 64.0, 530.0, 618.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -42,11 +43,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 98.0, 90.0, 533.0, 544.0 ],
+						"rect" : [ 98.0, 90.0, 530.0, 592.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -70,13 +72,44 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-23",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 147.0, 395.0, 33.0 ],
+									"text" : "NB : the hoa.binaural object has actually an offset of pi/2, to fix it you may use a rotate before. It will be fixed in the next release.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[3]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-24",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 147.0, 395.0, 33.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-5",
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 174.5, 439.0, 52.0, 18.0 ],
+									"patching_rect" : [ 174.5, 472.0, 52.0, 17.0 ],
 									"text" : "set 9 10"
 								}
 
@@ -121,7 +154,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 483.0, 48.0 ],
+									"patching_rect" : [ 7.0, 68.0, 483.0, 47.0 ],
 									"text" : "hoa.binaural~ virtualizes ambisonic soundfield for two headspeakers. It uses hrtf to perform FIR filtering on the incoming signal. Hrtf are extracted from the \"sipic hrtf database\". hoa.binaural~ works up to the order 35 and at 44100 Hz only.\n",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -151,7 +184,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 11.0, 514.0, 497.0, 20.0 ],
+									"patching_rect" : [ 11.0, 547.0, 497.0, 19.0 ],
 									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -165,7 +198,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 11.0, 514.0, 497.0, 19.0 ],
+									"patching_rect" : [ 11.0, 547.0, 497.0, 19.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -192,7 +225,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 448.25, 225.0, 52.0, 20.0 ],
+									"patching_rect" : [ 448.25, 258.0, 52.0, 19.0 ],
 									"text" : "hoa.pi 2"
 								}
 
@@ -207,7 +240,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 434.75, 121.0, 79.0, 20.0 ],
+									"patching_rect" : [ 434.75, 172.0, 79.0, 19.0 ],
 									"text" : "loadmess 0.1"
 								}
 
@@ -221,7 +254,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 434.75, 251.0, 32.5, 20.0 ],
+									"patching_rect" : [ 434.75, 284.0, 32.5, 19.0 ],
 									"text" : "*~"
 								}
 
@@ -235,7 +268,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 434.75, 198.0, 72.0, 20.0 ],
+									"patching_rect" : [ 434.75, 231.0, 72.0, 19.0 ],
 									"text" : "phasor~ 0.1"
 								}
 
@@ -249,7 +282,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 280.0, 446.75, 20.0 ],
+									"patching_rect" : [ 7.0, 313.0, 446.75, 19.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -261,7 +294,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 421.0, 377.0, 12.0, 79.0 ]
+									"patching_rect" : [ 421.0, 410.0, 12.0, 79.0 ]
 								}
 
 							}
@@ -272,7 +305,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 22.0, 377.0, 12.0, 79.0 ]
+									"patching_rect" : [ 22.0, 410.0, 12.0, 79.0 ]
 								}
 
 							}
@@ -284,7 +317,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 476.0, 446.75, 20.0 ],
+									"patching_rect" : [ 7.0, 509.0, 446.75, 19.0 ],
 									"text" : "hoa.dac~ 1 2"
 								}
 
@@ -303,8 +336,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -409,7 +443,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 245.75, 168.0, 51.0, 20.0 ],
+									"patching_rect" : [ 245.75, 201.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -436,7 +470,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 245.75, 198.0, 99.0, 20.0 ],
+									"patching_rect" : [ 245.75, 231.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -455,7 +489,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 434.75, 167.0, 50.0, 20.0 ]
+									"patching_rect" : [ 434.75, 200.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -469,7 +503,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 7.0, 167.0, 218.0, 87.0 ]
+									"patching_rect" : [ 7.0, 200.0, 218.0, 87.0 ]
 								}
 
 							}
@@ -482,7 +516,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 125.75, 439.0, 32.5, 18.0 ],
+									"patching_rect" : [ 125.75, 472.0, 32.5, 17.0 ],
 									"text" : "stop"
 								}
 
@@ -496,7 +530,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 47.75, 439.0, 72.0, 18.0 ],
+									"patching_rect" : [ 47.75, 472.0, 72.0, 17.0 ],
 									"text" : "startwindow"
 								}
 
@@ -510,7 +544,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 7.0, 345.0, 446.75, 20.0 ],
+									"patching_rect" : [ 7.0, 378.0, 446.75, 19.0 ],
 									"text" : "hoa.binaural~ 7 small"
 								}
 
@@ -545,7 +579,7 @@
 									"destination" : [ "obj-12", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 135.25, 466.0, 16.5, 466.0 ],
+									"midpoints" : [ 135.25, 499.0, 16.5, 499.0 ],
 									"source" : [ "obj-13", 0 ]
 								}
 
@@ -750,7 +784,7 @@
 									"destination" : [ "obj-11", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 255.25, 189.0, 255.25, 189.0 ],
+									"midpoints" : [ 255.25, 222.0, 255.25, 222.0 ],
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -760,7 +794,7 @@
 									"destination" : [ "obj-12", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 184.0, 465.0, 16.5, 465.0 ],
+									"midpoints" : [ 184.0, 498.0, 16.5, 498.0 ],
 									"source" : [ "obj-5", 0 ]
 								}
 
@@ -770,7 +804,7 @@
 									"destination" : [ "obj-12", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 57.25, 466.0, 16.5, 466.0 ],
+									"midpoints" : [ 57.25, 499.0, 16.5, 499.0 ],
 									"source" : [ "obj-7", 0 ]
 								}
 
@@ -789,7 +823,7 @@
 									"destination" : [ "obj-12", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 16.5, 436.0, 16.5, 436.0 ],
+									"midpoints" : [ 16.5, 469.0, 16.5, 469.0 ],
 									"source" : [ "obj-8", 0 ]
 								}
 
@@ -799,7 +833,7 @@
 									"destination" : [ "obj-21", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 16.5, 366.0, 28.0, 366.0 ],
+									"midpoints" : [ 16.5, 399.0, 28.0, 399.0 ],
 									"source" : [ "obj-8", 0 ]
 								}
 
@@ -809,7 +843,7 @@
 									"destination" : [ "obj-22", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 444.25, 368.0, 427.0, 368.0 ],
+									"midpoints" : [ 444.25, 401.0, 427.0, 401.0 ],
 									"source" : [ "obj-8", 1 ]
 								}
 
@@ -849,11 +883,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 533.0, 544.0 ],
+						"rect" : [ 0.0, 26.0, 530.0, 592.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -900,40 +935,33 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "\\Users\\Pierre\\Documents\\GitHub\\HoaLibrary\\MaxMsp\\Max6\\Cycling '74\\HoaLibrary\\others",
-				"patcherrelativepath" : "..\\others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "\\Users\\Pierre\\Documents\\GitHub\\HoaLibrary\\MaxMsp\\Max6\\Cycling '74\\HoaLibrary\\others",
-				"patcherrelativepath" : "..\\others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa-icon-45.png",
-				"bootpath" : "\\Users\\Pierre\\Downloads",
-				"patcherrelativepath" : "..\\..\\..\\..\\..\\..\\..\\..\\Downloads",
-				"type" : "PNG ",
-				"implicit" : 1
+				"name" : "hoa.binaural~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.binaural~.mxe",
-				"type" : "iLaF"
+				"name" : "hoa.connect.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.connect.mxe",
-				"type" : "iLaF"
+				"name" : "hoa.encoder~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxe",
-				"type" : "iLaF"
-			}
-, 			{
-				"name" : "hoa.pi.mxe",
-				"type" : "iLaF"
+				"name" : "hoa.pi.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}

@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 0.0, 106.0, 1068.0, 723.0 ],
+		"rect" : [ 61.0, 44.0, 1068.0, 723.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -43,11 +44,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
+						"rect" : [ 61.0, 70.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -69,6 +71,34 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-20",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 341.600006, 134.0, 72.0, 17.0 ],
+									"text" : "1, 18 18000"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-18",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 341.600006, 180.0, 46.0, 19.0 ],
+									"text" : "line 0."
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -106,7 +136,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 253.600006, 102.0, 70.0, 19.0 ],
+									"patching_rect" : [ 341.600006, 97.0, 70.0, 19.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -120,7 +150,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 316.0, 210.0, 88.0, 17.0 ],
+									"patching_rect" : [ 98.0, 213.0, 88.0, 17.0 ],
 									"text" : "storagewindow"
 								}
 
@@ -157,62 +187,6 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
-									"id" : "obj-96",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 196.600006, 213.0, 46.0, 17.0 ],
-									"text" : "store 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-97",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 138.0, 213.0, 46.0, 17.0 ],
-									"text" : "store 3"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-95",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 78.599998, 213.0, 46.0, 17.0 ],
-									"text" : "store 2"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-94",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 22.0, 213.0, 46.0, 17.0 ],
-									"text" : "store 1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
 									"id" : "obj-41",
 									"maxclass" : "flonum",
 									"minimum" : 1.0,
@@ -220,7 +194,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 253.600006, 210.0, 50.0, 19.0 ]
+									"patching_rect" : [ 341.600006, 213.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -275,17 +249,16 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 29.599998, 261.5, 59.5, 19.0 ],
 									"restore" : 									{
-										"hoaspace" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+										"hoaspace" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.003446, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u615003912"
+									"varname" : "u823012278"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"autorestore" : "hoa.space.json",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-81",
@@ -401,8 +374,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -451,8 +425,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -891,8 +866,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -1331,8 +1307,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -1771,8 +1748,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -2307,7 +2285,7 @@
 								"box" : 								{
 									"bgcolor" : [ 1.0, 1.0, 1.0, 0.01 ],
 									"cicolorin" : [ 0.698039, 0.698039, 0.698039, 1.0 ],
-									"coeffs" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+									"coeffs" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.003446, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.space",
@@ -2374,7 +2352,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -2669,8 +2647,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -2828,7 +2807,7 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
-									"destination" : [ "obj-41", 0 ],
+									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-1", 0 ]
@@ -2840,7 +2819,7 @@
 									"destination" : [ "obj-81", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 325.5, 246.0, 175.600006, 246.0 ],
+									"midpoints" : [ 107.5, 246.0, 175.600006, 246.0 ],
 									"source" : [ "obj-101", 0 ]
 								}
 
@@ -3326,11 +3305,29 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-41", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-18", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"midpoints" : [ 31.5, 567.0, 420.0, 567.0, 420.0, 390.0, 444.5, 390.0 ],
 									"source" : [ "obj-2", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-18", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-20", 0 ]
 								}
 
 							}
@@ -4125,7 +4122,7 @@
 									"destination" : [ "obj-81", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 263.100006, 246.0, 175.600006, 246.0 ],
+									"midpoints" : [ 351.100006, 246.0, 175.600006, 246.0 ],
 									"source" : [ "obj-41", 0 ]
 								}
 
@@ -4623,46 +4620,6 @@
 								}
 
 							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-81", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 31.5, 246.0, 175.600006, 246.0 ],
-									"source" : [ "obj-94", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-81", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 88.099998, 246.0, 175.600006, 246.0 ],
-									"source" : [ "obj-95", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-81", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 206.100006, 246.0, 175.600006, 246.0 ],
-									"source" : [ "obj-96", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-81", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 147.5, 246.0, 175.600006, 246.0 ],
-									"source" : [ "obj-97", 0 ]
-								}
-
-							}
  ]
 					}
 ,
@@ -4700,11 +4657,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 132.0, 1068.0, 697.0 ],
+						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5299,8 +5257,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -5349,8 +5308,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -5789,8 +5749,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -6229,8 +6190,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -6669,8 +6631,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -7205,7 +7168,7 @@
 								"box" : 								{
 									"bgcolor" : [ 1.0, 1.0, 1.0, 0.01 ],
 									"cicolorin" : [ 0.698039, 0.698039, 0.698039, 1.0 ],
-									"coeffs" : [ 0.33, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+									"coeffs" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.space",
@@ -7272,7 +7235,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -7478,7 +7441,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 5.5, 69.0, 628.5, 33.0 ],
-									"text" : "hoa.space allows you to set the coefficients manually and compute the coefficients for soundfield transformations like expansion, retraction or rotation.s",
+									"text" : "hoa.space allows you to set the coefficients manually and compute the coefficients for soundfield transformations like expansion, retraction or rotation.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -7567,8 +7530,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -9746,8 +9710,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
@@ -9954,8 +9919,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -10004,8 +9970,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -10444,8 +10411,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -10884,8 +10852,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -11324,8 +11293,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -11926,7 +11896,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -12221,8 +12191,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -14173,8 +14144,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 1068.0, 697.0 ],
@@ -14225,50 +14197,43 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa.plug~.maxref.xml",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.granular~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
-				"patcherrelativepath" : "../effects",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.times~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Applications/Max6/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max6/patches/docs/tutorial-patchers/msp-tut",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.space.json",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}

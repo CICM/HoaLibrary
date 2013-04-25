@@ -283,14 +283,6 @@ void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void
 					}
 					x->f_nbSelected++;
 				}
-
-				
-				/*
-				for(i = 0; i < x->f_nbSelected; i++)
-				{
-					post("selected %ld : %s", i, jbox_get_maxclass(x->f_object[i])->s_name);
-				}
-				*/
 			}
 			freebytes(av, sizeof(t_atom) * current_nb_selected);
 		}			
@@ -307,11 +299,6 @@ void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void
 			x->f_nbSelected = 0;
 		}
 	}
-	/*
-	else if (msg == gensym("enddrag"))
-	{
-	}
-	*/
 }
 
 int validName(t_object *box)
@@ -368,9 +355,20 @@ int validConditionColor(t_object *obj)
 	t_object *jb, *o;
 	t_symbol *obclass = object_classname(obj);
 	
-	if(obclass == gensym("hoa.encoder~") || obclass == gensym("hoa.rotate~") || obclass == gensym("hoa.recomposer~") || obclass == gensym("sfplay~") || obclass == gensym("hoa.optim~") || obclass == gensym("hoa.ease~") || obclass == gensym("hoa.convolve~") || obclass == gensym("hoa.wider~"))
+	if(obclass == gensym("hoa.encoder~") ||
+	   obclass == gensym("hoa.rotate~") ||
+	   obclass == gensym("hoa.recomposer~") ||
+	   obclass == gensym("sfplay~") ||
+	   obclass == gensym("hoa.optim~") ||
+	   obclass == gensym("hoa.convolve~") ||
+	   obclass == gensym("hoa.wider~") ||
+	   obclass == gensym("hoa.map~") ||
+	   obclass == gensym("hoa.freeverb~") ||
+	   obclass == gensym("hoa.gigaverb~")
+	   )
 		return 1;
-	else if(obclass == gensym("hoa.projector~"))
+	else if(obclass == gensym("hoa.projector~") ||
+			obclass == gensym("hoa.space~"))
 		return 2;
 	else if (obclass == gensym("jpatcher"))
 	{

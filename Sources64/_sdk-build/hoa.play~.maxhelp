@@ -50,7 +50,7 @@
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
-						"default_fontsize" : 14.0,
+						"default_fontsize" : 11.595187,
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
 						"gridonopen" : 0,
@@ -995,12 +995,12 @@
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
-						"default_fontsize" : 14.0,
+						"default_fontsize" : 11.595187,
 						"description" : "",
 						"digest" : "",
 						"fontface" : 0,
 						"fontname" : "Arial",
-						"fontsize" : 14.0,
+						"fontsize" : 11.595187,
 						"globalpatchername" : "",
 						"tags" : ""
 					}
@@ -1075,7 +1075,7 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1

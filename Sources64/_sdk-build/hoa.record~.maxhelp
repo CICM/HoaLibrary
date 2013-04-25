@@ -318,7 +318,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@module", 0, "@file", 3 ],
+									"args" : [ "@module", 0, "@file", 3, "@loop", 1 ],
 									"border" : 1,
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
@@ -444,7 +444,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@module", 0, "@file", 2 ],
+									"args" : [ "@module", 0, "@file", 4, "@loop", 1 ],
 									"border" : 1,
 									"id" : "obj-1",
 									"maxclass" : "bpatcher",
@@ -1164,14 +1164,14 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../others",
 				"type" : "JSON",
 				"implicit" : 1

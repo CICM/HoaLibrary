@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 652.0, 145.0, 763.0, 769.0 ],
+		"rect" : [ 517.0, 145.0, 763.0, 769.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -43,11 +44,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 652.0, 171.0, 763.0, 743.0 ],
+						"rect" : [ 517.0, 171.0, 763.0, 743.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -685,7 +687,6 @@
 									"patching_rect" : [ 30.0, 409.0, 208.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"dry" : 0.5,
-										"size" : 300.0,
 										"wet" : 0.5
 									}
 ,
@@ -734,8 +735,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1625,6 +1627,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1634,6 +1637,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-5", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1643,6 +1647,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1652,6 +1657,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-5", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1661,6 +1667,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1670,6 +1677,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-5", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1679,6 +1687,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1688,6 +1697,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-5", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1697,6 +1707,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1706,6 +1717,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-5", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1715,6 +1727,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1724,6 +1737,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-5", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1733,6 +1747,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1742,6 +1757,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-5", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1751,6 +1767,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-5", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -2282,8 +2299,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 763.0, 743.0 ],
@@ -2334,36 +2352,43 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa.plug~.maxref.xml",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.times~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
