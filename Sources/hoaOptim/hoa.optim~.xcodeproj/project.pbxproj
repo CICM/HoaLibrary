@@ -286,7 +286,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		4E85403B15F16ED500169453 /* Build configuration list for PBXNativeTarget "max-external-mkl" */ = {
 			isa = XCConfigurationList;
@@ -295,7 +295,7 @@
 				4E85403D15F16ED500169453 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};

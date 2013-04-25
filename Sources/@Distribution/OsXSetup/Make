@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.1"
+VERSION="1.2"
 LIBRARY="HoaLibrary"
 
 PACKMAX5="$LIBRARY-max5"
@@ -23,6 +23,7 @@ mkdir -p $DISTRIBMAX5
 cp -pR $PACKMAX5.pkg $DISTRIBMAX5
 cp -pR license.rtf $DISTRIBMAX5
 cp -pR README.txt $DISTRIBMAX5
+cp -pR changelog.txt $DISTRIBMAX5
 cp -pR $UNINSTALLERMAX5 $DISTRIBMAX5
 
 hdiutil create $DISTRIBMAX5.dmg -srcfolder $DISTRIBMAX5
@@ -39,6 +40,7 @@ mkdir -p $DISTRIBMAX6
 cp -pR $PACKMAX6.pkg $DISTRIBMAX6
 cp -pR license.rtf $DISTRIBMAX6
 cp -pR README.txt $DISTRIBMAX6
+cp -pR changelog.txt $DISTRIBMAX6
 cp -pR $UNINSTALLERMAX6 $DISTRIBMAX6
 
 hdiutil create $DISTRIBMAX6.dmg -srcfolder $DISTRIBMAX6

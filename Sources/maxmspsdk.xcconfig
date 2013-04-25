@@ -11,7 +11,7 @@
 
 // Name & Version
 PRODUCT_NAME = $(PROJECT_NAME)
-PRODUCT_VERSION = 1.2
+PRODUCT_VERSION = HoaLibrary 1.2
 
 // Paths
 

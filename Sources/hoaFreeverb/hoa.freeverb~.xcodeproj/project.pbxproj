@@ -310,6 +310,7 @@
 				);
 				INFOPLIST_FILE = ../Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					/usr/local/lib/libgsl.a,
 					"-lcblas",
@@ -346,6 +347,7 @@
 				);
 				INFOPLIST_FILE = ../Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					/usr/local/lib/libgsl.a,
 					"-lcblas",
