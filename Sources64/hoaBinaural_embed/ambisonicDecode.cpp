@@ -32,7 +32,6 @@ ambisonicDecode::ambisonicDecode(int channels,int order): m_order(order), m_harm
 	}
 	computePseudoInverse();
 	computeMaxReOptim();
-
 }
 
 void ambisonicDecode::computeInPhaseOptim()
@@ -104,6 +103,7 @@ void ambisonicDecode::setSpkrsAngles(double* someSpkrsAngles, int size)
 double*  ambisonicDecode::process(double* input)
 {
 	gsl_vector_view input_vec = gsl_vector_view_array(input, m_harmonics);
+    
 	if (m_optimId == "maxRe" || m_optimId == "inPhase") {
 		gsl_vector_mul(&input_vec.vector, m_optimVector);
 	}

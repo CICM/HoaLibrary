@@ -20,16 +20,12 @@
 #include "AmbisonicBinaural.hpp"
 
 
-AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSize, std::string anOptimMode, std::string pinnaSize)
+AmbisonicBinaural::AmbisonicBinaural(int aOrder, double aSamplingRate, int aVectorSize, std::string hrtfRootPath, std::string pinnaSize)
 {
-
-    if (pinnaSize == "small")
-		//m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Small/";
-        m_preFilePath = "Contents/Resources/HrtfDatabase/Small/";
-	else
-        m_preFilePath = "Contents/Resources/HrtfDatabase/Large/";
-		//m_preFilePath = "/Library/Application Support/CicmLibrary/HrtfDatabase/Large/";
-	
+    
+    m_hrtfFullPath = "";
+    m_hrtfRootPath = hrtfRootPath;
+    m_pinnasize = pinnaSize;
 	m_vector_size = 0;
 	m_sampling_rate = aSamplingRate;
 	m_order = aOrder;	
@@ -62,14 +58,64 @@ AmbisonicBinaural::AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorS
 	}
 	
 	m_optimVector = new double[m_numberOfHarmonics];
-	setOptimMode(anOptimMode );
-	
+	setOptimMode("basic");
+    
+	formatHrtfFilePath(m_hrtfRootPath, aSamplingRate, pinnaSize);
+    
 	loadImpulses();
 	if (m_isHrtfLoaded == TRUE)
 	{
 		responseInit();
 		matrixResize(aVectorSize, "Intialization");
 	}
+}
+
+void AmbisonicBinaural::setVectorSizeAndSamplingRate(int aVectorSize, double aSamplingRate)
+{
+    if (m_sampling_rate != aSamplingRate)
+    {
+        m_sampling_rate = aSamplingRate;
+        if (formatHrtfFilePath(m_hrtfRootPath, aSamplingRate, m_pinnasize)) // Path has changed
+        {
+            loadImpulses();
+            if (m_isHrtfLoaded == TRUE)
+            {
+                responseInit();
+                matrixResize(aVectorSize);
+            }
+        }
+    }
+    if (m_isHrtfLoaded == TRUE)
+        matrixResize(aVectorSize);
+}
+
+void AmbisonicBinaural::setPinnaSize(std::string pinnaSize)
+{
+    if (formatHrtfFilePath(m_hrtfRootPath, m_sampling_rate, pinnaSize)) // Path has changed
+    {
+        loadImpulses();
+        if (m_isHrtfLoaded == TRUE)
+        {
+            responseInit();
+        }
+    }
+}
+
+bool AmbisonicBinaural::formatHrtfFilePath(std::string hrtfRootPath, int aSamplingRate, std::string pinnaSize)
+{
+    //m_hrtfFullPath = "";
+    std::string tempFullPath = hrtfRootPath;
+    m_pinnasize = pinnaSize;
+    if (aSamplingRate != 44100 && aSamplingRate != 48000 && aSamplingRate != 88200 && aSamplingRate != 96000) aSamplingRate = 44100;
+    if (m_pinnasize != "Small" && m_pinnasize != "Large") m_pinnasize = "Small";
+    tempFullPath += intToString(aSamplingRate) + "/" + m_pinnasize + "/";
+    if (tempFullPath != m_hrtfFullPath)
+    {
+        m_hrtfFullPath = tempFullPath;
+        return true; 
+    }
+    m_hrtfFullPath = tempFullPath;
+    return false;
 }
 
 int	AmbisonicBinaural::getParameters(std::string aParameter) const
@@ -113,14 +159,12 @@ void AmbisonicBinaural::loadImpulses()
 {
 	std::string leftFilePath;
 	std::string rightFilePath;
-	
-	
 
 	for(int i = 0; i < m_numberOfVirtualSpeakers; i++)
 	{
 		m_angleListInDegree[i] = (5*72/m_numberOfVirtualSpeakers)*i;
-		leftFilePath  = m_preFilePath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
-		rightFilePath = m_preFilePath + "right" + intToString(m_angleListInDegree[i]) + ".wav";
+        leftFilePath  = m_hrtfFullPath + "left"  + intToString(m_angleListInDegree[i]) + ".wav";
+		rightFilePath = m_hrtfFullPath + "right" + intToString(m_angleListInDegree[i]) + ".wav";
 		m_impulsesL[i] = Read_Wav(const_cast<char*>(leftFilePath.c_str()) );
 		m_impulsesR[i] = Read_Wav(const_cast<char*>(rightFilePath.c_str()));
 		if(m_impulsesL[i] == NULL || m_impulsesR[i] == NULL)
