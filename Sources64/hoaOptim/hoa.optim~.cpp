@@ -68,8 +68,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "optim", NULL, HoaOptim_optim);
 	CLASS_ATTR_DEFAULT			(c, "optim", 0, "inPhase");
 	CLASS_ATTR_SAVE				(c, "optim", 1);
-    
-	class_addmethod(c, (method)HoaOptim_optim,		"optim",	A_GIMME, 0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	

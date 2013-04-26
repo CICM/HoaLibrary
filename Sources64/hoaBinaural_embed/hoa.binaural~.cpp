@@ -30,6 +30,7 @@ typedef struct _HoaBinaural
 	AmbisonicBinaural	*f_ambiBinaural;
 	int ninput;
 	int sum;
+    t_symbol* pinnasizeAttr;
 } t_HoaBinaural;
 
 
@@ -37,6 +38,7 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv);
 void HoaBinaural_free(t_HoaBinaural *x);
 void HoaBinaural_assist(t_HoaBinaural *x, void *b, long m, long a, char *s);
 void HoaBinaural_optim(t_HoaBinaural *x, t_symbol *s, long argc, t_atom *argv);
+t_max_err HoaBinaural_set_pinnasize(t_HoaBinaural *x, t_object *attr, long argc, t_atom *argv);
 
 void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count);
 t_int *HoaBinaural_perform(t_int *w);
@@ -56,7 +58,15 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)HoaBinaural_dsp,			"dsp",		A_CANT,		0);
 	class_addmethod(c, (method)HoaBinaural_dsp64,		"dsp64",	A_CANT,		0);
 	class_addmethod(c, (method)HoaBinaural_assist,		"assist",	A_CANT,		0);
-	class_addmethod(c, (method)HoaBinaural_optim,		"optim",	A_GIMME,	0);
+    
+    CLASS_ATTR_SYM              (c,"pinnasize", 0, t_HoaBinaural, pinnasizeAttr);
+    CLASS_ATTR_ACCESSORS		(c,"pinnasize", NULL, HoaBinaural_set_pinnasize);
+	CLASS_ATTR_LABEL			(c,"pinnasize", 0,   "Pinna Size");
+	CLASS_ATTR_CATEGORY			(c,"pinnasize", 0,   "Behavior");
+    CLASS_ATTR_ENUM             (c,"pinnasize", 0, "small large");
+	CLASS_ATTR_DEFAULT          (c,"pinnasize", 0,  "small");
+    CLASS_ATTR_ORDER			(c,"pinnasize", 0,   "1");
+    CLASS_ATTR_SAVE             (c,"pinnasize", 1);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -69,35 +79,104 @@ int C74_EXPORT main(void)
 void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaBinaural *x = NULL;
-	int order = 4;
-	if (x = (t_HoaBinaural *)object_alloc((t_class *)HoaBinaural_class)) 
-	{		
-		if(argv[0].a_type == A_LONG)
+	int order = 3;
+    std::string pinnaSize = "small";
+    std::string filePath = "HrtfDatabase/";
+    std::string absoluteHrtfFilePath = "";
+    
+    x = (t_HoaBinaural *)object_alloc((t_class *)HoaBinaural_class);
+	if (x)
+	{
+        
+		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
-		
-		std::string pinnaSize;
-		if(argv[1].a_type == A_SYM)
+        
+		if(atom_gettype(argv+1) == A_SYM)
 			pinnaSize = atom_getsym(argv+1)->s_name;
+        
+        if (pinnaSize == "small")
+        {
+            pinnaSize = "Small";
+        }
+        else
+        {
+            pinnaSize = "Large";
+        }
+        
+#ifdef __APPLE__
+        // OSX only : access to the hoa.binaural~ bundle
+        CFBundleRef hoaBinaural_bundle = CFBundleGetBundleWithIdentifier(CFSTR("com.cycling74.hoa-binaural-"));
+        CFURLRef hoaBinaural_ref = CFBundleCopyBundleURL(hoaBinaural_bundle);
+        UInt8 bundle_path[512];
+        Boolean res = CFURLGetFileSystemRepresentation(hoaBinaural_ref, true, bundle_path, 512);
+        assert(res);
+        // Built the complete resource path
+        absoluteHrtfFilePath = std::string((const char*)bundle_path) + std::string("/Contents/Resources/") + std::string(filePath);
+#endif
+        
+#ifdef WIN32
+        HMODULE handle = LoadLibrary("hoa.binaural~.mxe");
+        if (handle) {
+            // Get hoa.binaural~.mxe path
+            char name[512];
+            GetModuleFileName(handle, name, 512);
+            string str_name = string(name);
+            str_name = str_name.substr(0, str_name.find_last_of("\\"));
+            // Built the complete resource path
+            absoluteHrtfFilePath = string(str_name) + string("/Contents/Resources/") + string(filePath);
+            FreeLibrary(handle);
+        } else {
+            post("Error : cannot locate hoa.binaural~.mxe...");
+            absoluteHrtfFilePath = "";
+        }
+#endif
 		
-		x->f_ambiBinaural = new AmbisonicBinaural(order, sys_getsr(), sys_getblksize(), pinnaSize);
+		x->f_ambiBinaural = new AmbisonicBinaural(order, sys_getsr(), sys_getblksize(), absoluteHrtfFilePath, pinnaSize);
+        
+        //post("filePath : %s", filePath.c_str());
+        //post("absoluteFilePath : %s", absoluteFilePath.c_str());
 		
 		if(x->f_ambiBinaural->getisHrtfLoaded() == FALSE)
 		{
-			post("HRTF Database not loaded");
+            post("error : HRTF Database not loaded");
+            //post("error HrtfPath : %s", x->f_ambiBinaural->getHrtfPath().c_str());
 			return NULL;
 		}
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiBinaural->getParameters("numberOfInputs"));
 		for (int i = 0; i < x->f_ambiBinaural->getParameters("numberOfOutputs"); i++) 
 			outlet_new(x, "signal");
-		
+        
+        x->pinnasizeAttr = gensym("small");
+        attr_args_process(x, argc, argv);
 	}
 	return (x);
 }
 
+t_max_err HoaBinaural_set_pinnasize(t_HoaBinaural *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc && argv && atom_gettype(argv) == A_SYM)
+    {
+        if (atom_getsym(argv) == gensym("large") || atom_getsym(argv) == gensym(" large"))
+        {
+            if(x->pinnasizeAttr != gensym("large"))
+                x->f_ambiBinaural->setPinnaSize("Large");
+             x->pinnasizeAttr = gensym("large");
+        }
+        else
+        {
+            if(x->pinnasizeAttr != gensym("small"))
+                x->f_ambiBinaural->setPinnaSize("Small");
+            x->pinnasizeAttr = gensym("small");
+        }
+    }
+    return MAX_ERR_NONE;
+}
+
 void HoaBinaural_dsp64(t_HoaBinaural *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambiBinaural->matrixResize(maxvectorsize);
+    x->f_ambiBinaural->setVectorSizeAndSamplingRate(maxvectorsize, samplerate);
+    //post("HrtfPath : %s", x->f_ambiBinaural->getHrtfPath().c_str());
 	object_method(dsp64, gensym("dsp_add64"), x, HoaBinaural_perform64, 0, NULL);
 }
 
@@ -112,7 +191,7 @@ void HoaBinaural_dsp(t_HoaBinaural *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
-	x->f_ambiBinaural->matrixResize(sp[0]->s_n);
+    x->f_ambiBinaural->setVectorSizeAndSamplingRate(sp[0]->s_n, sp[0]->s_sr);
 	
 	pointer_count = x->f_ambiBinaural->getParameters("numberOfOutputs") + x->f_ambiBinaural->getParameters("numberOfInputs") + 2;
 	x->ninput = x->f_ambiBinaural->getParameters("numberOfInputs");

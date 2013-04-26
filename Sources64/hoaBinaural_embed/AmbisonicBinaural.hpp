@@ -58,11 +58,13 @@ private:
 	long		m_numberOfHarmonics;
 	long		m_response_size;
 	long		m_vector_size;
-	long		m_sampling_rate;
+	double		m_sampling_rate;
 	long		m_maximumNumberOfVirtualSpeakers;
 	long		m_numberOfVirtualSpeakers;
 	std::string m_optimMode;
-	std::string m_preFilePath;
+    std::string m_hrtfRootPath;
+    std::string m_pinnasize;
+    std::string m_hrtfFullPath;
 	long		m_number_of_inputs;
 	long		m_number_of_outputs;
 	bool		m_isHrtfLoaded;
@@ -99,16 +101,23 @@ private:
 	
 public:
 	
-	AmbisonicBinaural(int aOrder, int aSamplingRate, int aVectorSizen, std::string anOptimMode = "basic" , std::string pinnaSize = "small");
+	AmbisonicBinaural(int aOrder, double aSamplingRate, int aVectorSizen, std::string hrtfRootPath = "", std::string pinnaSize = "Small");
 	void	computeNbOfVirtualSpeaker();
 	int		getParameters(std::string aParameter) const;
 	bool	getisHrtfLoaded() {return m_isHrtfLoaded;}
-    	
+    
+    std::string	getHrtfPath() {return m_hrtfFullPath;}
+    
+	bool	formatHrtfFilePath(std::string hrtfRootPath, int aSamplingRate, std::string pinnaSize);
+    
 	void	setOptimMode(std::string anOptim);
+    void    setPinnaSize(std::string pinnaSize);
+    void    setSamplingRate(int aSamplingRate);
 	void	computeBasicOptim();
 	void	computeInPhaseOptim();
 	void	computeReOptim();
 	
+    void    setVectorSizeAndSamplingRate(int aVectorSize, double aSamplingRate);
 	void	loadImpulses();
 	void	responseInit();
 	void	printBasis(double *basisArray, int size);
