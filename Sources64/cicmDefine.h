@@ -74,6 +74,7 @@
 /* Vector and Matrix Product */
 #define Cicm_Matrix_Vector_Float_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_sgemv(CblasColMajor, CblasNoTrans, column_size, number_of_rows, 1.f, &matrix[0][0], column_size, vectorSource, 1, 0.f, vectorDest, 1)
 #define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_dgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1.f, &matrix[0][0], column_size, vectorSource, 1, 0.f, vectorDest, 1)
+
 /*
 #define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) vDSP_mmulD(&matrix[0][0], 1, vectorSource, 1, vectorDest, 1, number_of_rows, 1, column_size)
 */
@@ -86,8 +87,12 @@
 #define Cicm_Matrix_Vector_Float_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmul(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 #define Cicm_Matrix_Vector_Double_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmulD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 
-#define Cicm_Matrix_Vector_Scalar_Float_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, scalar, vectorDest, 1, size)
-#define Cicm_Matrix_Vector_Scalar_Double_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, scalar, vectorDest, 1, size)
+#define Cicm_Vector_Scalar_Float_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, scalar, vectorDest, 1, size)
+#define Cicm_Vector_Scalar_Double_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, scalar, vectorDest, 1, size)
+
+#define Cicm_Vector_Vector_Float_Mul(vectorOne, vectorDest, size) cblas_sdot(size, vectorOne, 1, vectorDest, 1)
+#define Cicm_Vector_Vector_Double_Mul(vectorOne, vectorDest, size) cblas_ddot(size, vectorOne, 1, vectorDest, 1)
+
 
 /* Matrix Transpose */
 #define  Cicm_Matrix_Transpose_Float(matrixSource, matrixDest, rowDest, columnDest) vDSP_mtrans(&matrixSource[0][0], 1, &matrixDest[0][0], 1, rowDest, columnDest);
@@ -109,10 +114,13 @@
 #define Cicm_fft_forward(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_FORWARD)
 #define Cicm_fft_inverse(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
 
+/* Sinus and Cosinus */
 #define Cicm_Vector_Float_Cosinus vvcosf
 #define Cicm_Vector_Float_Sinus vvsinf
 #define Cicm_Vector_Double_Cosinus vvcos
 #define Cicm_Vector_Double_Sinus vvsin
+#define Cicm_Vector_Float_SinCos vvsincosf
+#define Cicm_Vector_Double_SinCos vvsincos
 
 #endif
 

@@ -34,10 +34,13 @@ AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, std::string aMode, long aVect
     
     Cicm_Signal_Vector_Float_Malloc(m_ambisonics_coeffs_float, m_number_of_harmonics); 
     Cicm_Signal_Vector_Double_Malloc(m_ambisonics_coeffs_double, m_number_of_harmonics);
-	Cicm_Signal_Vector_Float_Malloc(m_coeffs_float, m_vector_size);
+	Cicm_Signal_Vector_Float_Malloc(m_cos_float, m_vector_size);
+    Cicm_Signal_Vector_Float_Malloc(m_sin_float, m_vector_size);
     Cicm_Signal_Vector_Float_Malloc(m_angles_float, m_vector_size);
-    Cicm_Signal_Vector_Double_Malloc(m_coeffs_double, m_vector_size);
+    Cicm_Signal_Vector_Double_Malloc(m_cos_double, m_vector_size);
+    Cicm_Signal_Vector_Double_Malloc(m_sin_double, m_vector_size);
     Cicm_Signal_Vector_Double_Malloc(m_angles_double, m_vector_size);
+    
 	setAzimtuhBoth(0.);
 }
 
@@ -77,13 +80,17 @@ void AmbisonicsEncoder::setVectorSize(long aVectorSize)
 	if(m_vector_size != Tools::clip_power_of_two(aVectorSize))
     {
         m_vector_size = Tools::clip_power_of_two(aVectorSize);
-        Cicm_Free(m_coeffs_float);
+        Cicm_Free(m_cos_float);
+        Cicm_Free(m_sin_float);
         Cicm_Free(m_angles_float);
-        Cicm_Free(m_coeffs_double);
+        Cicm_Free(m_cos_double);
+        Cicm_Free(m_sin_double);
         Cicm_Free(m_angles_double);
-        Cicm_Signal_Vector_Float_Malloc(m_coeffs_float, m_vector_size);
+        Cicm_Signal_Vector_Float_Malloc(m_cos_float, m_vector_size);
+        Cicm_Signal_Vector_Float_Malloc(m_sin_float, m_vector_size);
         Cicm_Signal_Vector_Float_Malloc(m_angles_float, m_vector_size);
-        Cicm_Signal_Vector_Double_Malloc(m_coeffs_double, m_vector_size);
+        Cicm_Signal_Vector_Double_Malloc(m_cos_double, m_vector_size);
+        Cicm_Signal_Vector_Double_Malloc(m_sin_double, m_vector_size);
         Cicm_Signal_Vector_Double_Malloc(m_angles_double, m_vector_size);
     }
 }
@@ -92,8 +99,10 @@ AmbisonicsEncoder::~AmbisonicsEncoder()
 {
 	Cicm_Free(m_ambisonics_coeffs_float);
     Cicm_Free(m_ambisonics_coeffs_double);
-    Cicm_Free(m_coeffs_float);
+    Cicm_Free(m_cos_float);
+    Cicm_Free(m_sin_float);
     Cicm_Free(m_angles_float);
-    Cicm_Free(m_coeffs_double);
+    Cicm_Free(m_cos_double);
+    Cicm_Free(m_sin_double);
     Cicm_Free(m_angles_double);
 }
