@@ -1,30 +1,26 @@
 /*
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#include "AmbisonicRotate.h"
+#include "AmbisonicsRotate.h"
 
-AmbisonicRotate::AmbisonicRotate(long anOrder, long aVectorSize)
+AmbisonicsRotate::AmbisonicsRotate(long anOrder, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
-	m_order					= Tools::clip_min(anOrder, (long)1);
-	m_number_of_harmonics	= 2 * m_order + 1;
 	m_number_of_inputs		= m_number_of_harmonics + 1;
-	m_number_of_outputs		= m_number_of_harmonics;
 	
 	m_harmonicCos = new double[m_order];
 	m_harmonicSin = new double[m_order];
@@ -38,10 +34,9 @@ AmbisonicRotate::AmbisonicRotate(long anOrder, long aVectorSize)
 		m_sinLookUp[i] = sin((double)i * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS);
 	}
 	setAzimuth(0.);
-	setVectorSize(aVectorSize);
 }
 
-void AmbisonicRotate::computeIndex()
+void AmbisonicsRotate::computeIndex()
 {
 	m_index_of_harmonics	= new long[m_number_of_harmonics ];
 	m_index_of_harmonics[0] = 0;
@@ -53,37 +48,12 @@ void AmbisonicRotate::computeIndex()
 	}
 }
 
-long AmbisonicRotate::getOrder()
-{
-	return m_order;
-}
-
-long AmbisonicRotate::getNumberOfHarmonics()
-{
-	return m_number_of_harmonics;
-}
-
-long AmbisonicRotate::getNumberOfInputs()
-{
-	return m_number_of_inputs;
-}
-
-long AmbisonicRotate::getNumberOfOutputs()
-{
-	return m_number_of_outputs;
-}
-
-long AmbisonicRotate::getVectorSize()
-{
-	return m_vector_size;
-}
-
-double AmbisonicRotate::getAzimuth()
+double AmbisonicsRotate::getAzimuth()
 {
 	return m_azimuth;
 }
 
-void AmbisonicRotate::setAzimuth(double aTheta)
+void AmbisonicsRotate::setAzimuth(double aTheta)
 {
 	long tmpAngle;
 	if (aTheta < 0) 
@@ -102,12 +72,8 @@ void AmbisonicRotate::setAzimuth(double aTheta)
 	}
 }
 
-void AmbisonicRotate::setVectorSize(long aVectorSize)
-{
-	m_vector_size = Tools::clip_power_of_two(aVectorSize);
-}
 
-AmbisonicRotate::~AmbisonicRotate()
+AmbisonicsRotate::~AmbisonicsRotate()
 {
 	delete m_harmonicCos;
 	delete m_harmonicSin;
