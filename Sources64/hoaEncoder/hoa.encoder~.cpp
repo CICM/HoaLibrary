@@ -17,7 +17,7 @@
  *
  */
 
-#include "AmbisonicEncoder.h"
+#include "AmbisonicsEncoder.h"
 
 extern "C"
 {
@@ -32,7 +32,7 @@ int postons = 0;
 typedef struct _HoaEncode 
 {
 	t_pxobject					f_ob;			
-	AmbisonicEncoder			*f_ambiEncoder;
+	AmbisonicsEncoder			*f_ambiEncoder;
 	
 	long						f_inputNumber;
 	long						f_outputNumber;
@@ -103,7 +103,7 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv + 1) == A_SYM)
 			mode = atom_getsym(argv + 1)->s_name;
 		
-		x->f_ambiEncoder = new AmbisonicEncoder(order, mode, sys_getblksize());
+		x->f_ambiEncoder = new AmbisonicsEncoder(order, mode, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
@@ -116,12 +116,12 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaEncode_float(t_HoaEncode *x, double f)
 {
-	x->f_ambiEncoder->setAzimtuh(f);
+	x->f_ambiEncoder->setAzimtuhBoth(f);
 }
 
 void HoaEncode_int(t_HoaEncode *x, long n)
 {
-	x->f_ambiEncoder->setAzimtuh(n);
+	x->f_ambiEncoder->setAzimtuhBoth(n);
 }
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -284,16 +284,7 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 	} 
 	else 
 	{
-		long harmonicIndex = 0;
-		if (a == 0)
-			harmonicIndex = 0;
-		else 
-		{
-			harmonicIndex = (a - 1) / 2 + 1;
-			if (a % 2 == 1) 
-				harmonicIndex = - harmonicIndex;
-		}
-		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex); 			
+		sprintf(s,"(Signal) Harmonic %ld", x->f_ambiEncoder->getHarmonicIndex(a));
 	}
 }
 

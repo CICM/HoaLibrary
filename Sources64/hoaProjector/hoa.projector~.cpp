@@ -1,23 +1,22 @@
 /*
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#include "ambisonicProjector.h"
+#include "AmbisonicsProjector.h"
 extern "C"
 {
 	#include "ext.h"
@@ -28,7 +27,7 @@ extern "C"
 typedef struct _HoaProjector
 {
 	t_pxobject					f_ob;			
-	ambisonicProjector			*f_ambisonicProjector;
+	AmbisonicsProjector			*f_AmbisonicsProjector;
 
 	int							f_ninputs;
 	int							f_noutputs;
@@ -37,7 +36,6 @@ typedef struct _HoaProjector
 void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv);
 void HoaProjector_free(t_HoaProjector *x);
 void HoaProjector_assist(t_HoaProjector *x, void *b, long m, long a, char *s);
-void HoaProjector_optim(t_HoaProjector *x, t_symbol *s, long argc, t_atom *argv);
 
 void HoaProjector_dsp(t_HoaProjector *x, t_signal **sp, short *count);
 t_int *HoaProjector_perform(t_int *w);
@@ -57,7 +55,6 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)HoaProjector_dsp,			"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaProjector_dsp64,			"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaProjector_assist,			"assist",	A_CANT, 0);
-	class_addmethod(c, (method)HoaProjector_optim,			"optim",	A_GIMME, 0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -71,17 +68,18 @@ void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaProjector *x = NULL;
 	int order = 4, outputs = 9;
-	if (x = (t_HoaProjector *)object_alloc((t_class*)HoaProjector_class)) 
+    x = (t_HoaProjector *)object_alloc((t_class*)HoaProjector_class);
+	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
 		if(atom_gettype(argv+1) == A_LONG)
 			outputs	= atom_getlong(argv+1);
 		
-		x->f_ambisonicProjector	= new ambisonicProjector(order, outputs, sys_getblksize());
+		x->f_AmbisonicsProjector	= new AmbisonicsProjector(order, outputs, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambisonicProjector->getParameters("numberOfInputs"));
-		for (int i = 0; i < x->f_ambisonicProjector->getParameters("numberOfOutputs"); i++) 
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicsProjector->getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicsProjector->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
 		
 	
@@ -91,13 +89,13 @@ void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaProjector_dsp64(t_HoaProjector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonicProjector->setVectorSize(maxvectorsize);
+	x->f_AmbisonicsProjector->setVectorSize(maxvectorsize);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaProjector_perform64, 0, NULL);
 }
 
 void HoaProjector_perform64(t_HoaProjector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambisonicProjector->process(ins, outs);
+	x->f_AmbisonicsProjector->process(ins, outs);
 }
 
 void HoaProjector_dsp(t_HoaProjector *x, t_signal **sp, short *count)
@@ -106,10 +104,10 @@ void HoaProjector_dsp(t_HoaProjector *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 	
-	x->f_ninputs = x->f_ambisonicProjector->getParameters("numberOfInputs");
-	x->f_noutputs = x->f_ambisonicProjector->getParameters("numberOfOutputs");
-	x->f_ambisonicProjector->setVectorSize(sp[0]->s_n);
-	pointer_count = x->f_ambisonicProjector->getParameters("numberOfInputs") + x->f_ambisonicProjector->getParameters("numberOfOutputs") + 2;
+	x->f_ninputs = x->f_AmbisonicsProjector->getNumberOfInputs();
+	x->f_noutputs = x->f_AmbisonicsProjector->getNumberOfOutputs();
+	x->f_AmbisonicsProjector->setVectorSize(sp[0]->s_n);
+	pointer_count = x->f_AmbisonicsProjector->getNumberOfInputs() + x->f_AmbisonicsProjector->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -131,7 +129,7 @@ t_int *HoaProjector_perform(t_int *w)
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= (t_float **)w+3+x->f_ninputs;
 
-	x->f_ambisonicProjector->process(ins, outs);
+	x->f_AmbisonicsProjector->process(ins, outs);
 	
 	return (w + x->f_noutputs + x->f_ninputs + 3);
 }
@@ -140,32 +138,15 @@ void HoaProjector_assist(t_HoaProjector *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 	{
-		long harmonicIndex = 0;
-		if (a != 0)
-		{
-			harmonicIndex = (a - 1) / 2 + 1;
-			if (a % 2 == 1) 
-				harmonicIndex = - harmonicIndex;
-		}
-		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
+		sprintf(s,"(Signal) Harmonic %ld", x->f_AmbisonicsProjector->getHarmonicIndex(a));
 	}
 	else 
 		sprintf(s,"(Signal) Virtual Microphone %ld", a);			
 }
 
-
-void HoaProjector_optim(t_HoaProjector *x, t_symbol *s, long argc, t_atom *argv)
-{
-	if(atom_gettype(argv) == A_SYM)
-	{
-		std::string decodingId = atom_getsym(argv)->s_name;
-		x->f_ambisonicProjector->setOptimMode(decodingId);
-	}
-}
-
 void HoaProjector_free(t_HoaProjector *x)
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_ambisonicProjector);
+	free(x->f_AmbisonicsProjector);
 }
 

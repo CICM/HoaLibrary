@@ -106,7 +106,16 @@ public:
 	{
 		return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}
-	
+    
+    template<typename Type> static Type factoriel(Type n)
+	{
+        Type j = 1;
+        for(int i = 1; i <= n; i++)
+        {
+            j = i * j;
+        }
+        return j;
+	}	
 };
 
 #endif

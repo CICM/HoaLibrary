@@ -16,7 +16,7 @@
  *
  */
 
-#include "AmbisonicDecode.h"
+#include "AmbisonicsDecoder.h"
 
 extern "C"
 {
@@ -29,7 +29,7 @@ extern "C"
 typedef struct _HoaDecode 
 {
 	t_pxobject				f_ob;			
-	AmbisonicDecode			*f_AmbisonicDecoder;
+	AmbisonicsDecoder		*f_AmbisonicsDecoder;
 
 	int						f_ninput;
 	int						f_noutput;
@@ -39,7 +39,6 @@ typedef struct _HoaDecode
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv);
 void HoaDecode_free(t_HoaDecode *x);
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s);
-void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv);
 
 void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count);
 t_int *HoaDecode_perform(t_int *w);
@@ -71,17 +70,18 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaDecode *x = NULL;
 	int order = 4, outputs = 9;
-	if (x = (t_HoaDecode *)object_alloc((t_class*)HoaDecode_class)) 
+    x = (t_HoaDecode *)object_alloc((t_class*)HoaDecode_class);
+	if(x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
 		if(atom_gettype(argv+1) == A_LONG)
 			outputs	= atom_getlong(argv+1);
 		
-		x->f_AmbisonicDecoder	= new AmbisonicDecode(order, outputs, sys_getblksize());
+		x->f_AmbisonicsDecoder	= new AmbisonicsDecoder(order, outputs, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_AmbisonicDecoder->getNumberOfInputs());
-		for (int i = 0; i < x->f_AmbisonicDecoder->getNumberOfOutputs(); i++) 
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicsDecoder->getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -91,13 +91,13 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaDecode_dsp64(t_HoaDecode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_AmbisonicDecoder->setVectorSize(maxvectorsize);
+	x->f_AmbisonicsDecoder->setVectorSize(maxvectorsize);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaDecode_perform64, 0, NULL);
 }
 
 void HoaDecode_perform64(t_HoaDecode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_AmbisonicDecoder->process(ins, outs);
+	x->f_AmbisonicsDecoder->process(ins, outs);
 }
 
 void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count)
@@ -106,10 +106,10 @@ void HoaDecode_dsp(t_HoaDecode *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 
-	x->f_AmbisonicDecoder->setVectorSize(sp[0]->s_n);
-	x->f_ninput = x->f_AmbisonicDecoder->getNumberOfInputs();
-	x->f_noutput = x->f_AmbisonicDecoder->getNumberOfOutputs();
-	pointer_count = x->f_AmbisonicDecoder->getNumberOfInputs() + x->f_AmbisonicDecoder->getNumberOfOutputs() + 2;
+	x->f_AmbisonicsDecoder->setVectorSize(sp[0]->s_n);
+	x->f_ninput = x->f_AmbisonicsDecoder->getNumberOfInputs();
+	x->f_noutput = x->f_AmbisonicsDecoder->getNumberOfOutputs();
+	pointer_count = x->f_AmbisonicsDecoder->getNumberOfInputs() + x->f_AmbisonicsDecoder->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -131,7 +131,7 @@ t_int *HoaDecode_perform(t_int *w)
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= (t_float **)w+3+x->f_ninput;
 	
-	x->f_AmbisonicDecoder->process(ins, outs);
+	x->f_AmbisonicsDecoder->process(ins, outs);
 	
 	return (w + x->f_ninput + x->f_noutput + 3);
 }
@@ -154,32 +154,9 @@ void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 		sprintf(s,"(Signal) Speaker %ld", a);			
 }
 
-void HoaDecode_scheme(t_HoaDecode *x, t_symbol *s, long argc, t_atom *argv)
-{
-	/*
-	double value[argc];
-	for(int i = 0; i < argc; i++)
-	{
-		
-		if(atom_gettype(argv+i) == A_FLOAT)
-		{
-			value[i] = atom_getfloat(argv+i) * 3.14159265 / 180 ;
-			post(" scheme %i, %f", i, atom_getfloat(argv+i));
-		}
-		else if (atom_gettype(argv+i) == A_LONG)
-		{
-			value[i] = (float)atom_getlong(argv+i) * 3.14159265 / 180 ;
-			post(" scheme %i, %f", i, (float)atom_getlong(argv+i));
-		}
-		
-	}
-	x->f_AmbisonicDecoder->setSpkrsAngles(value, (int)argc);
-	*/
-}
-
 void HoaDecode_free(t_HoaDecode *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_AmbisonicDecoder;
+	delete x->f_AmbisonicsDecoder;
 }
 

@@ -3,27 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E6DC9A416135B6F0001AAF5 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */; };
-		0E6DC9A516135B6F0001AAF5 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */; };
-		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
-		2C2F72E11711F4D400BF03DA /* ambisonicDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F72DE1711F4D400BF03DA /* ambisonicDecode.cpp */; };
-		2C2F72E21711F4D400BF03DA /* AmbisonicDecode.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C2F72DF1711F4D400BF03DA /* AmbisonicDecode.h */; };
+		2C2F72E11711F4D400BF03DA /* AmbisonicsDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F72DE1711F4D400BF03DA /* AmbisonicsDecoder.cpp */; };
+		2C2F72E21711F4D400BF03DA /* AmbisonicsDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C2F72DF1711F4D400BF03DA /* AmbisonicsDecoder.h */; };
 		2C2F72E31711F4D400BF03DA /* hoa.decoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F72E01711F4D400BF03DA /* hoa.decoder~.cpp */; };
+		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
+		8F18A8C21728743B005FD621 /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A8C11728743B005FD621 /* cicmTools.h */; };
+		8F18A8C617287E79005FD621 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8C517287E79005FD621 /* MaxAudioAPI.framework */; };
+		8FE028A7172A7F7C00BD68AA /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE028A5172A7F7C00BD68AA /* Ambisonics.cpp */; };
+		8FE028A8172A7F7C00BD68AA /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE028A6172A7F7C00BD68AA /* Ambisonics.h */; };
+		8FE028AA172A7F8300BD68AA /* cicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE028A9172A7F8300BD68AA /* cicmDefine.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
-		0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
-		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2C2F72DE1711F4D400BF03DA /* ambisonicDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicDecode.cpp; sourceTree = "<group>"; };
-		2C2F72DF1711F4D400BF03DA /* AmbisonicDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicDecode.h; sourceTree = "<group>"; };
+		2C2F72DE1711F4D400BF03DA /* AmbisonicsDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDecoder.cpp; sourceTree = "<group>"; };
+		2C2F72DF1711F4D400BF03DA /* AmbisonicsDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDecoder.h; sourceTree = "<group>"; };
 		2C2F72E01711F4D400BF03DA /* hoa.decoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.decoder~.cpp"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.decoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.decoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F18A8C11728743B005FD621 /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmTools.h; path = ../cicmTools.h; sourceTree = "<group>"; };
+		8F18A8C517287E79005FD621 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		8FE028A5172A7F7C00BD68AA /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ambisonics.cpp; path = ../hoaAmbisonics/Ambisonics.cpp; sourceTree = "<group>"; };
+		8FE028A6172A7F7C00BD68AA /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ambisonics.h; path = ../hoaAmbisonics/Ambisonics.h; sourceTree = "<group>"; };
+		8FE028A9172A7F8300BD68AA /* cicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmDefine.h; path = ../cicmDefine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */,
+				8F18A8C617287E79005FD621 /* MaxAudioAPI.framework in Frameworks */,
+				8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,7 +48,11 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				8F18A8C517287E79005FD621 /* MaxAudioAPI.framework */,
+				8F18A8BD17287341005FD621 /* Accelerate.framework */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
+				8F18A8C11728743B005FD621 /* cicmTools.h */,
+				8FE028A9172A7F8300BD68AA /* cicmDefine.h */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
@@ -52,7 +63,6 @@
 		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -60,11 +70,11 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2C2F72DE1711F4D400BF03DA /* ambisonicDecode.cpp */,
-				2C2F72DF1711F4D400BF03DA /* AmbisonicDecode.h */,
+				8FE028A5172A7F7C00BD68AA /* Ambisonics.cpp */,
+				8FE028A6172A7F7C00BD68AA /* Ambisonics.h */,
+				2C2F72DE1711F4D400BF03DA /* AmbisonicsDecoder.cpp */,
+				2C2F72DF1711F4D400BF03DA /* AmbisonicsDecoder.h */,
 				2C2F72E01711F4D400BF03DA /* hoa.decoder~.cpp */,
-				0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */,
-				0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -84,8 +94,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6DC9A516135B6F0001AAF5 /* gslMatrix.hpp in Headers */,
-				2C2F72E21711F4D400BF03DA /* AmbisonicDecode.h in Headers */,
+				2C2F72E21711F4D400BF03DA /* AmbisonicsDecoder.h in Headers */,
+				8F18A8C21728743B005FD621 /* cicmTools.h in Headers */,
+				8FE028A8172A7F7C00BD68AA /* Ambisonics.h in Headers */,
+				8FE028AA172A7F8300BD68AA /* cicmDefine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,9 +172,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6DC9A416135B6F0001AAF5 /* gslMatrix.cpp in Sources */,
-				2C2F72E11711F4D400BF03DA /* ambisonicDecode.cpp in Sources */,
+				2C2F72E11711F4D400BF03DA /* AmbisonicsDecoder.cpp in Sources */,
 				2C2F72E31711F4D400BF03DA /* hoa.decoder~.cpp in Sources */,
+				8FE028A7172A7F7C00BD68AA /* Ambisonics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +184,7 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -200,8 +211,7 @@
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -229,29 +239,42 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_FAST_MATH = YES;
+				GCC_FEEDBACK_DIRECTED_OPTIMIZATION = GenerateProfile;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.decoder~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -262,28 +285,42 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_FAST_MATH = YES;
+				GCC_FEEDBACK_DIRECTED_OPTIMIZATION = GenerateProfile;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.decoder~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -300,7 +337,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -309,7 +346,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};

@@ -3,27 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E6DC9A416135B6F0001AAF5 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */; };
-		0E6DC9A516135B6F0001AAF5 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */; };
-		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
-		2CF61A4B1712D2FD0062A8EA /* ambisonicProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF61A481712D2FD0062A8EA /* ambisonicProjector.cpp */; };
-		2CF61A4C1712D2FD0062A8EA /* ambisonicProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CF61A491712D2FD0062A8EA /* ambisonicProjector.h */; };
 		2CF61A4D1712D2FD0062A8EA /* hoa.projector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF61A4A1712D2FD0062A8EA /* hoa.projector~.cpp */; };
+		8F4CB83E172A9BAC0016BFEC /* AmbisonicsProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CB83C172A9BAC0016BFEC /* AmbisonicsProjector.cpp */; };
+		8F4CB83F172A9BAC0016BFEC /* AmbisonicsProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4CB83D172A9BAC0016BFEC /* AmbisonicsProjector.h */; };
+		8F4CB841172A9CEF0016BFEC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CB840172A9CEF0016BFEC /* Accelerate.framework */; };
+		8F4CB843172A9CFA0016BFEC /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CB842172A9CFA0016BFEC /* MaxAudioAPI.framework */; };
+		8F4CB846172A9D1C0016BFEC /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4CB844172A9D1C0016BFEC /* cicmTools.h */; };
+		8F4CB847172A9D1C0016BFEC /* cicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4CB845172A9D1C0016BFEC /* cicmDefine.h */; };
+		8F4CB84A172A9D270016BFEC /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CB848172A9D270016BFEC /* Ambisonics.cpp */; };
+		8F4CB84B172A9D270016BFEC /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4CB849172A9D270016BFEC /* Ambisonics.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
-		0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
-		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2CF61A481712D2FD0062A8EA /* ambisonicProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ambisonicProjector.cpp; sourceTree = "<group>"; };
-		2CF61A491712D2FD0062A8EA /* ambisonicProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambisonicProjector.h; sourceTree = "<group>"; };
 		2CF61A4A1712D2FD0062A8EA /* hoa.projector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.projector~.cpp"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.projector~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4CB83C172A9BAC0016BFEC /* AmbisonicsProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsProjector.cpp; sourceTree = "<group>"; };
+		8F4CB83D172A9BAC0016BFEC /* AmbisonicsProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsProjector.h; sourceTree = "<group>"; };
+		8F4CB840172A9CEF0016BFEC /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F4CB842172A9CFA0016BFEC /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		8F4CB844172A9D1C0016BFEC /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmTools.h; path = ../cicmTools.h; sourceTree = "<group>"; };
+		8F4CB845172A9D1C0016BFEC /* cicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmDefine.h; path = ../cicmDefine.h; sourceTree = "<group>"; };
+		8F4CB848172A9D270016BFEC /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ambisonics.cpp; path = ../hoaAmbisonics/Ambisonics.cpp; sourceTree = "<group>"; };
+		8F4CB849172A9D270016BFEC /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ambisonics.h; path = ../hoaAmbisonics/Ambisonics.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */,
+				8F4CB843172A9CFA0016BFEC /* MaxAudioAPI.framework in Frameworks */,
+				8F4CB841172A9CEF0016BFEC /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,30 +48,25 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				8F4CB842172A9CFA0016BFEC /* MaxAudioAPI.framework */,
+				8F4CB840172A9CEF0016BFEC /* Accelerate.framework */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
+				8F4CB844172A9D1C0016BFEC /* cicmTools.h */,
+				8F4CB845172A9D1C0016BFEC /* cicmDefine.h */,
 				08FB77ADFE841716C02AAC07 /* Source */,
-				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
 			sourceTree = "<group>";
 		};
-		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */,
-			);
-			name = "External Frameworks and Libraries";
-			sourceTree = "<group>";
-		};
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2CF61A481712D2FD0062A8EA /* ambisonicProjector.cpp */,
-				2CF61A491712D2FD0062A8EA /* ambisonicProjector.h */,
+				8F4CB83C172A9BAC0016BFEC /* AmbisonicsProjector.cpp */,
+				8F4CB848172A9D270016BFEC /* Ambisonics.cpp */,
+				8F4CB849172A9D270016BFEC /* Ambisonics.h */,
+				8F4CB83D172A9BAC0016BFEC /* AmbisonicsProjector.h */,
 				2CF61A4A1712D2FD0062A8EA /* hoa.projector~.cpp */,
-				0E6DC9A216135B6F0001AAF5 /* gslMatrix.cpp */,
-				0E6DC9A316135B6F0001AAF5 /* gslMatrix.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -84,8 +86,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6DC9A516135B6F0001AAF5 /* gslMatrix.hpp in Headers */,
-				2CF61A4C1712D2FD0062A8EA /* ambisonicProjector.h in Headers */,
+				8F4CB83F172A9BAC0016BFEC /* AmbisonicsProjector.h in Headers */,
+				8F4CB846172A9D1C0016BFEC /* cicmTools.h in Headers */,
+				8F4CB847172A9D1C0016BFEC /* cicmDefine.h in Headers */,
+				8F4CB84B172A9D270016BFEC /* Ambisonics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,9 +164,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6DC9A416135B6F0001AAF5 /* gslMatrix.cpp in Sources */,
-				2CF61A4B1712D2FD0062A8EA /* ambisonicProjector.cpp in Sources */,
 				2CF61A4D1712D2FD0062A8EA /* hoa.projector~.cpp in Sources */,
+				8F4CB83E172A9BAC0016BFEC /* AmbisonicsProjector.cpp in Sources */,
+				8F4CB84A172A9D270016BFEC /* Ambisonics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +176,7 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -200,8 +203,7 @@
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -229,29 +231,33 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.projector~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -262,28 +268,33 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.projector~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";

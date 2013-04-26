@@ -30,7 +30,7 @@ void hoa_init(void)
 }
 
 void hoa_postcredits(){
-	post("hoa.library (version 1.1) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+	post("hoa.library (version 1.2) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
 	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
 }
 

@@ -56,6 +56,7 @@ cp -pR $MAXPACK6 $MANUALZIP/$LIBRARY-max6/
 cp -pR $HRTFPACK $MANUALZIP/HrtfDatabase/
 cp -pR license.rtf $MANUALZIP
 cp -pR README.txt $MANUALZIP
+cp -pR changelog.txt $MANUALZIP
 cp -pR $UNINSTALLERMAX6 $MANUALZIP
 cp -pR $UNINSTALLERMAX5 $MANUALZIP
 ditto -ck --rsrc --sequesterRsrc $MANUALZIP $MANUALZIP.zip
