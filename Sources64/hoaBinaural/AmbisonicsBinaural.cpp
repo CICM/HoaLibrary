@@ -96,8 +96,8 @@ long AmbisonicsBinaural::loadImpulses()
         free(m_impulse_right[i]);
         m_impulse_right[i] = NULL;
 		int angleOfLoudspeaker = 360 / m_number_of_loudspeakers * i;
-        //angleOfLoudspeaker += 270;
-        //angleOfLoudspeaker %= 360;
+        angleOfLoudspeaker += 270;
+        angleOfLoudspeaker %= 360;
         leftFilePath  = m_hrtf_full_path + "left"  + Tools::intToString(angleOfLoudspeaker) + ".wav";
 		rightFilePath = m_hrtf_full_path + "right" + Tools::intToString(angleOfLoudspeaker) + ".wav";
         
@@ -152,8 +152,6 @@ long AmbisonicsBinaural::loadImpulses()
 			}
             m_impluse_matrix[sampleIndex*m_number_of_harmonics+harmonicIndex] = tmpValueL * (1. / 1.125) * (44100. / (double)m_sampling_rate);
             m_impluse_matrix[(sampleIndex+m_impulse_size)*m_number_of_harmonics+harmonicIndex] = tmpValueR * (1. / 1.125) * (44100. / (double)m_sampling_rate);
-			//Cicm_Matrix_Float_Set(m_impluse_matrix, sampleIndex                 , harmonicIndex, m_number_of_harmonics, tmpValueL);
-			//Cicm_Matrix_Float_Set(m_impluse_matrix, sampleIndex+m_impulse_size  , harmonicIndex, m_number_of_harmonics, tmpValueR);
 		}
 	}
     
@@ -214,8 +212,8 @@ long AmbisonicsBinaural::matrixResize(long aVectorSize)
     Cicm_Vector_Float_Malloc(m_linear_vector_left, aVectorSize + m_impulse_size - 1);
     Cicm_Vector_Float_Malloc(m_linear_vector_right, aVectorSize + m_impulse_size - 1);
     
-    m_result_matrix_right   = m_result_matrix;
-    m_result_matrix_left    = m_result_matrix+aVectorSize*m_impulse_size;
+    m_result_matrix_right   = m_result_matrix+aVectorSize*m_impulse_size;
+    m_result_matrix_left    = m_result_matrix;
     if(m_input_matrix && m_result_matrix && m_linear_vector_left && m_linear_vector_right)
     {
          m_vector_size = aVectorSize;
