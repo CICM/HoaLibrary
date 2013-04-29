@@ -41,6 +41,7 @@ public:
 	long getVectorSize();
 	long getSamplingRate();
     long getHarmonicIndex(long anIndex);
+    long getHarmonicOrder(long anIndex);
     
 	void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);

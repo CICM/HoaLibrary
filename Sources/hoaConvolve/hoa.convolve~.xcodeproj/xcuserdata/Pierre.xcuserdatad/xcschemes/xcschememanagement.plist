@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>max-external copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>max-external.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>2FBBEAD608F335360078DB84</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8F04FD5A172C502A000D77BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

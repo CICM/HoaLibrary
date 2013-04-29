@@ -26,12 +26,12 @@ class AmbisonicsDecoder : public Ambisonics
 	
 private:
 	
-	Cicm_Signal_Matrix_Float    m_decoder_matrix_float;
-    Cicm_Signal_Matrix_Double   m_decoder_matrix_double;
-    Cicm_Signal_Vector_Float    m_signal_vector_float_input;
-    Cicm_Signal_Vector_Float    m_signal_vector_float_output;
-    Cicm_Signal_Vector_Double   m_signal_vector_double_input;
-    Cicm_Signal_Vector_Double   m_signal_vector_double_output;
+	Cicm_Matrix_Float    m_decoder_matrix_float;
+    Cicm_Matrix_Double   m_decoder_matrix_double;
+    Cicm_Vector_Float    m_vector_float_input;
+    Cicm_Vector_Float    m_vector_float_output;
+    Cicm_Vector_Double   m_vector_double_input;
+    Cicm_Vector_Double   m_vector_double_output;
     
 	void computeMatrix();
 
@@ -57,12 +57,12 @@ public:
 		{
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
-                m_signal_vector_double_input[j] = aInputs[j][i];
+                m_vector_float_input[j] = aInputs[j][i];
             }
-            process(m_signal_vector_double_input, m_signal_vector_double_output);
+            process(m_vector_float_input, m_vector_float_output);
             for(int j = 0; j < m_number_of_outputs; j++)
             {
-                aOutputs[j][i] = m_signal_vector_double_output[j];
+                aOutputs[j][i] = m_vector_float_output[j];
             }
         }
 	}
@@ -73,12 +73,12 @@ public:
 		{
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
-                m_signal_vector_float_input[j] = aInputs[j][i];
+                m_vector_float_input[j] = aInputs[j][i];
             }
-            process(m_signal_vector_float_input, m_signal_vector_float_output);
+            process(m_vector_float_input, m_vector_float_output);
             for(int j = 0; j < m_number_of_outputs; j++)
             {
-                aOutputs[j][i] = m_signal_vector_float_output[j];
+                aOutputs[j][i] = m_vector_float_output[j];
             }
 		}
 	}

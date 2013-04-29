@@ -47,11 +47,11 @@
 					"fontsize" : 11.595187,
 					"id" : "obj-34",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 15,
-					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 54.75, 300.0, 208.0, 19.0 ],
-					"text" : "hoa.encoder~ 7"
+					"numinlets" : 7,
+					"numoutlets" : 9,
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+					"patching_rect" : [ 54.75, 300.0, 127.0, 19.0 ],
+					"text" : "hoa.decoder~ 3"
 				}
 
 			}
@@ -76,7 +76,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.encoder~.mxo",
+				"name" : "hoa.decoder~.mxo",
 				"type" : "iLaX"
 			}
  ]

@@ -30,10 +30,9 @@
 using namespace std;
 #include <string>
 
-#define CICM_PI (3.141592653589793238462643383279502884)
+#define CICM_PI 3.141592653589793238462643383279502884
 #define CICM_2PI CICM_PI * 2.
-#define CICM_PI2 (1.57079632679489661923132169163975144)
-#define CICM_PI4 (0.785398163397448309615660845819875721)
+#define CICM_PI2 CICM_PI / 2.
 #define NUMBEROFCIRCLEPOINTS 36000
 
 //#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
@@ -118,48 +117,65 @@ public:
         return j;
 	}
     
-    template<typename Type> static bool isInside(Type val, Type lo, Type hi)
-	{
-		return (val >= lo && val <= hi);
-	}
-    
-    static double radToDeg(double radian)
+    static std::string intToString(int aValue)
     {
-        return radian * (180 / CICM_PI);
+        char number[256];
+        sprintf(number, "%i", aValue);
+        return number;
     }
     
-    static double degToRad(double degree)
+    static double* Read_Wav(char *wave_file)
     {
-        return degree / (180 / CICM_PI);
-    }
-    
-    static double phasewrap(double val) {
-        const double twopi = CICM_PI*2.;
-        const double oneovertwopi = 1./twopi;
-        if (val>= twopi || val <= twopi) {
-            double d = val * oneovertwopi;	//multiply faster
-            d = d - (long)d;
-            val = d * twopi;
+        FILE *file;
+        file = fopen(wave_file, "rb");
+        
+        if (file == NULL)
+        {
+            printf("nerreur: fichier  %s  introuvablen", wave_file);
+            return NULL;
         }
-        if (val > CICM_PI) val -= twopi;
-        if (val < -CICM_PI) val += twopi;
-        return val;
-    }
-    
-    static double wrap(double _val, double _lo, double _hi){
-        double lo;
-        double hi;
-        if(_lo == _hi) return _lo;
-        if (_lo > _hi) {
-            hi = _lo; lo = _hi;
-        } else {
-            lo = _lo; hi = _hi;
-        }
-        const double range = hi - lo;
-        if (_val >= lo && _val < hi) return _val;
-        if (range <= 0.000000001) return lo;	// no point...
-        const long numWraps = long((_val-lo)/range) - (_val < lo);
-        return _val - range * double(numWraps);
+        
+        char ChunkID[4];    // contient les lettres "RIFF" pour indiquer que le fichier est codé selon la norme RIFF
+        unsigned long ChunkSize;        // taille du fichier entier en octets (sans compter les 8 octets de ce champ (4o) et le champ précédent CunkID (4o)
+        char Format[4];        // correspond au format du fichier donc ici, contient les lettres "WAVE" car fichier est au format wave
+        char Subchunk1ID[4];    // contient les lettres "fmt " pour indiquer les données à suivre décrivent le format des données audio
+        unsigned long Subchunk1Size;    // taille en octet des données à suivre (qui suivent cette variable) 16 Pour un fichier PCM
+        short AudioFormat;        // format de compression (une valeur autre que 1 indique une compression)
+        short NumChannels;        // nombre de canaux: Mono = 1, Stereo = 2, etc..
+        unsigned long SampleRate;        // fréquence d'échantillonage, ex 44100, 44800 (nombre d'échantillons par secondes)
+        unsigned long ByteRate;            // nombre d'octects par secondes
+        short Blockalign;        // nombre d'octects pour coder un échantillon
+        short BitsPerSample;    // nombre de bits pour coder un échantillon
+        char Subchunk2ID[4];    // contient les lettres "data" pour indiquer que les données à suivre sont les données audio (les échantillons et)
+        unsigned long Subchunk2Size;    // taille des données audio (nombre total d'octets codant les données audio)
+        short *data;            // données audio... les échantillons
+        
+        fread(&ChunkID, 4, 1, file);
+        fread(&ChunkSize, 4, 1, file);
+        fread(&Format, 4, 1, file);
+        fread(&Subchunk1ID, 4, 1, file);
+        fread(&Subchunk1Size, 4, 1, file);
+        fread(&AudioFormat, 2, 1, file);
+        fread(&NumChannels, 2, 1, file);
+        fread(&SampleRate, 4, 1, file);
+        fread(&ByteRate, 4, 1, file);
+        fread(&Blockalign, 2, 1, file);
+        fread(&BitsPerSample, 2, 1, file);
+        fread(&Subchunk2ID, 4, 1, file);
+        fread(&Subchunk2Size, 4, 1, file);
+        
+        data = new short[(int)(Subchunk2Size + 1) / Blockalign];
+        double* datas = new double[(int)(Subchunk2Size + 1) / (int)Blockalign];
+        
+        for (int i=0; i < (int)Subchunk2Size/Blockalign; i++)
+        {  
+            
+            fread(&data[i], Blockalign, 1, file);
+            datas[i]  = (((double)data[i])/ pow(2. ,15));
+        }  
+        
+        fclose(file);
+        return datas;  
     }
 };
 

@@ -32,14 +32,14 @@ AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, std::string aMode, long aVect
 		m_number_of_inputs	= 2;
     }
     
-    Cicm_Signal_Vector_Float_Malloc(m_ambisonics_coeffs_float, m_number_of_harmonics); 
-    Cicm_Signal_Vector_Double_Malloc(m_ambisonics_coeffs_double, m_number_of_harmonics);
-	Cicm_Signal_Vector_Float_Malloc(m_cos_float, m_vector_size);
-    Cicm_Signal_Vector_Float_Malloc(m_sin_float, m_vector_size);
-    Cicm_Signal_Vector_Float_Malloc(m_angles_float, m_vector_size);
-    Cicm_Signal_Vector_Double_Malloc(m_cos_double, m_vector_size);
-    Cicm_Signal_Vector_Double_Malloc(m_sin_double, m_vector_size);
-    Cicm_Signal_Vector_Double_Malloc(m_angles_double, m_vector_size);
+    Cicm_Vector_Float_Malloc(m_ambisonics_coeffs_float, m_number_of_harmonics); 
+    Cicm_Vector_Double_Malloc(m_ambisonics_coeffs_double, m_number_of_harmonics);
+	Cicm_Vector_Float_Malloc(m_cos_float, m_vector_size);
+    Cicm_Vector_Float_Malloc(m_sin_float, m_vector_size);
+    Cicm_Vector_Float_Malloc(m_angles_float, m_vector_size);
+    Cicm_Vector_Double_Malloc(m_cos_double, m_vector_size);
+    Cicm_Vector_Double_Malloc(m_sin_double, m_vector_size);
+    Cicm_Vector_Double_Malloc(m_angles_double, m_vector_size);
     
 	setAzimtuhBoth(0.);
 }
@@ -54,8 +54,8 @@ void AmbisonicsEncoder::setAzimtuh(double aTheta)
     m_ambisonics_coeffs_float[0] = 1.;
 	for (int i = 2, j = 1; i < m_number_of_harmonics; i += 2, j++)
     {
-		m_ambisonics_coeffs_double[i-1] = sinf(j*aTheta);
-		m_ambisonics_coeffs_double[i]   = cosf(j*aTheta);
+		m_ambisonics_coeffs_double[i-1] = sin(j*aTheta);
+		m_ambisonics_coeffs_double[i]   = cos(j*aTheta);
 	}
 }
 
@@ -64,8 +64,8 @@ void AmbisonicsEncoder::setAzimtuh(float aTheta)
 	m_ambisonics_coeffs_float[0] = 1.;
 	for (int i = 2, j = 1; i < m_number_of_harmonics; i += 2, j++)
     {
-		m_ambisonics_coeffs_float[i-1] = sinf(j*aTheta);
-		m_ambisonics_coeffs_float[i]   = cosf(j*aTheta);
+		m_ambisonics_coeffs_float[i-1] = sin(j*aTheta);
+		m_ambisonics_coeffs_float[i]   = cos(j*aTheta);
 	}
 }
 
@@ -86,12 +86,12 @@ void AmbisonicsEncoder::setVectorSize(long aVectorSize)
         Cicm_Free(m_cos_double);
         Cicm_Free(m_sin_double);
         Cicm_Free(m_angles_double);
-        Cicm_Signal_Vector_Float_Malloc(m_cos_float, m_vector_size);
-        Cicm_Signal_Vector_Float_Malloc(m_sin_float, m_vector_size);
-        Cicm_Signal_Vector_Float_Malloc(m_angles_float, m_vector_size);
-        Cicm_Signal_Vector_Double_Malloc(m_cos_double, m_vector_size);
-        Cicm_Signal_Vector_Double_Malloc(m_sin_double, m_vector_size);
-        Cicm_Signal_Vector_Double_Malloc(m_angles_double, m_vector_size);
+        Cicm_Vector_Float_Malloc(m_cos_float, m_vector_size);
+        Cicm_Vector_Float_Malloc(m_sin_float, m_vector_size);
+        Cicm_Vector_Float_Malloc(m_angles_float, m_vector_size);
+        Cicm_Vector_Double_Malloc(m_cos_double, m_vector_size);
+        Cicm_Vector_Double_Malloc(m_sin_double, m_vector_size);
+        Cicm_Vector_Double_Malloc(m_angles_double, m_vector_size);
     }
 }
 

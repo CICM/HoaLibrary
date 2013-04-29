@@ -61,7 +61,7 @@ int main(void)
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	HoaBinaural_class = c;
-	
+	post("new");
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
@@ -90,6 +90,7 @@ void *HoaBinaural_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_ambiBinaural->getParameters("numberOfInputs"));
 		for (int i = 0; i < x->f_ambiBinaural->getParameters("numberOfOutputs"); i++) 
 			outlet_new(x, "signal");
+        post("new");
 		
 	}
 	return (x);

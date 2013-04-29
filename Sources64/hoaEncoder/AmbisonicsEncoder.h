@@ -28,15 +28,15 @@ class AmbisonicsEncoder : public Ambisonics
 private:
 	std::string m_mode;
 	
-	Cicm_Signal_Vector_Float	m_ambisonics_coeffs_float;
-    Cicm_Signal_Vector_Double	m_ambisonics_coeffs_double;
+	Cicm_Vector_Float	m_ambisonics_coeffs_float;
+    Cicm_Vector_Double	m_ambisonics_coeffs_double;
     
-	Cicm_Signal_Vector_Float	m_angles_float;
-	Cicm_Signal_Vector_Float	m_cos_float;
-    Cicm_Signal_Vector_Float	m_sin_float;
-    Cicm_Signal_Vector_Double	m_angles_double;
-	Cicm_Signal_Vector_Double	m_cos_double;
-    Cicm_Signal_Vector_Double	m_sin_double;
+	Cicm_Vector_Float	m_angles_float;
+	Cicm_Vector_Float	m_cos_float;
+    Cicm_Vector_Float	m_sin_float;
+    Cicm_Vector_Double	m_angles_double;
+	Cicm_Vector_Double	m_cos_double;
+    Cicm_Vector_Double	m_sin_double;
     
 public:
 	AmbisonicsEncoder(long anOrder = 1, std::string aMode = "basic", long aVectorSize = 0);
@@ -78,7 +78,7 @@ public:
     /* Perform sample block */    
 	inline void process(double* anInput, double** anOutputs, double* aTheta)
 	{
-        Cicm_Signal_Vector_Double_Copy(anInput, anOutputs[0], m_vector_size);
+        Cicm_Vector_Double_Copy(anInput, anOutputs[0], m_vector_size);
         double j = 1;
         for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
         {
@@ -91,15 +91,17 @@ public:
 	
 	inline void process(double* anInput, double** anOutputs)
 	{
-		for (int j = 0; j < m_number_of_harmonics; j++)
-		{
-            Cicm_Vector_Scalar_Double_Mul(anInput, m_ambisonics_coeffs_double+j, anOutputs[j], m_vector_size);
-		}
+		Cicm_Vector_Double_Copy(anInput, anOutputs[0], m_vector_size);
+        for (int i = 2; i < m_number_of_harmonics; i += 2)
+        {
+            Cicm_Vector_Scalar_Double_Mul(anInput, &m_ambisonics_coeffs_double[i-1], anOutputs[i-1], m_vector_size);
+            Cicm_Vector_Scalar_Double_Mul(anInput, &m_ambisonics_coeffs_double[i], anOutputs[i], m_vector_size);
+        }
 	}
     
     inline void process(float* anInput, float** anOutputs, float* aTheta)
 	{
-        Cicm_Signal_Vector_Float_Copy(anInput, anOutputs[0], m_vector_size);
+        Cicm_Vector_Float_Copy(anInput, anOutputs[0], m_vector_size);
         float j = 1;
         for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
         {
@@ -112,10 +114,12 @@ public:
 	
 	inline void process(float* anInput, float** anOutputs)
 	{
-		for (int j = 0; j < m_number_of_harmonics; j++)
-		{
-            Cicm_Vector_Scalar_Float_Mul(anInput, m_ambisonics_coeffs_float+j, anOutputs[j], m_vector_size);
-		}
+		Cicm_Vector_Float_Copy(anInput, anOutputs[0], m_vector_size);
+        for (int i = 2; i < m_number_of_harmonics; i += 2)
+        {
+            Cicm_Vector_Scalar_Float_Mul(anInput, &m_ambisonics_coeffs_float[i-1], anOutputs[i-1], m_vector_size);
+            Cicm_Vector_Scalar_Float_Mul(anInput, &m_ambisonics_coeffs_float[i], anOutputs[i], m_vector_size);
+        }
 	}
     
     /********** SPLIT ************************/
@@ -147,7 +151,7 @@ public:
 	/* Perform sample block - Split Mode */
 	inline void process(double** anInputs, double** anOutputs, double* aTheta)
 	{
-        Cicm_Signal_Vector_Double_Copy(anInputs[0], anOutputs[0], m_vector_size);
+        Cicm_Vector_Double_Copy(anInputs[0], anOutputs[0], m_vector_size);
         double j = 1;
         for (int i = 2, size = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
         {
@@ -160,7 +164,7 @@ public:
 	
 	inline void process(double** anInputs, double** anOutputs)
 	{
-		Cicm_Signal_Vector_Double_Copy(anInputs[0], anOutputs[0], m_vector_size);
+		Cicm_Vector_Double_Copy(anInputs[0], anOutputs[0], m_vector_size);
         for (int i = 2, j = 1; i < m_number_of_harmonics; i += 2, j++)
         {
             Cicm_Vector_Scalar_Double_Mul(anInputs[j], &m_ambisonics_coeffs_double[i-1], anOutputs[i-1], m_vector_size);
@@ -170,7 +174,7 @@ public:
     
     inline void process(float** anInputs, float** anOutputs, float* aTheta)
 	{
-        Cicm_Signal_Vector_Float_Copy(anInputs[0], anOutputs[0], m_vector_size);
+        Cicm_Vector_Float_Copy(anInputs[0], anOutputs[0], m_vector_size);
         float j = 1;
         for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
         {
@@ -183,7 +187,7 @@ public:
 	
 	inline void process(float** anInputs, float** anOutputs)
 	{
-        Cicm_Signal_Vector_Float_Copy(anInputs[0], anOutputs[0], m_vector_size);
+        Cicm_Vector_Float_Copy(anInputs[0], anOutputs[0], m_vector_size);
         for (int i = 2, j = 1; i < m_number_of_harmonics; i += 2, j++)
         {
             Cicm_Vector_Scalar_Float_Mul(anInputs[j], &m_ambisonics_coeffs_float[i-1], anOutputs[i-1], m_vector_size);

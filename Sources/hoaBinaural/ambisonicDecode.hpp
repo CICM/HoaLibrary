@@ -8,7 +8,7 @@
  *
  */
 
-#ifndef define DEF_AMBISONICDECODE
+#ifndef DEF_AMBISONICDECODE
 #define DEF_AMBISONICDECODE
 
 #ifndef PI
