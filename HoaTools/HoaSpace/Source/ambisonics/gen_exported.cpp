@@ -41,8 +41,8 @@ typedef struct State {
 			double mul_6986 = (in1 * cycle_6987);
 			double out1 = mul_6986;
 			// assign results to output buffer;
-			//(*(__out1++)) = out1;
-            (*(__out1++)) = cycle_6987 * 0.2;
+			(*(__out1++)) = out1;
+            //(*(__out1++)) = cycle_6987 * 0.2;
 			
 		};
 		return __exception;

@@ -37,6 +37,7 @@ void GrainPlug::DSPChangeCallback()
 {
     genGrain->sr = m_sampleRate;
     genGrain->vs = m_vectorSize;
+    reset(genGrain);
 }
 
 
