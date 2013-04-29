@@ -30,9 +30,10 @@
 using namespace std;
 #include <string>
 
-#define CICM_PI 3.141592653589793238462643383279502884
-#define CICM_2PI CICM_PI * 2.
-#define CICM_PI2 CICM_PI / 2.
+#define CICM_PI (3.141592653589793238462643383279502884)
+#define CICM_2PI (6.283185307179586476925286766559005)
+#define CICM_PI2 (1.57079632679489661923132169163975144)
+#define CICM_PI4 (0.785398163397448309615660845819875721)
 #define NUMBEROFCIRCLEPOINTS 36000
 
 //#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
@@ -176,6 +177,50 @@ public:
         
         fclose(file);
         return datas;  
+    }
+    
+    template<typename Type> static bool isInside(Type val, Type lo, Type hi)
+	{
+		return (val >= lo && val <= hi);
+	}
+    
+    static double radToDeg(double radian)
+    {
+        return radian * (180 / CICM_PI);
+    }
+    
+    static double degToRad(double degree)
+    {
+        return degree / (180 / CICM_PI);
+    }
+    
+    static double phasewrap(double val) {
+        const double twopi = CICM_PI*2.;
+        const double oneovertwopi = 1./twopi;
+        if (val>= twopi || val <= twopi) {
+            double d = val * oneovertwopi;	//multiply faster
+            d = d - (long)d;
+            val = d * twopi;
+        }
+        if (val > CICM_PI) val -= twopi;
+        if (val < -CICM_PI) val += twopi;
+        return val;
+    }
+    
+    static double wrap(double _val, double _lo, double _hi){
+        double lo;
+        double hi;
+        if(_lo == _hi) return _lo;
+        if (_lo > _hi) {
+            hi = _lo; lo = _hi;
+        } else {
+            lo = _lo; hi = _hi;
+        }
+        const double range = hi - lo;
+        if (_val >= lo && _val < hi) return _val;
+        if (range <= 0.000000001) return lo;	// no point...
+        const long numWraps = long((_val-lo)/range) - (_val < lo);
+        return _val - range * double(numWraps);
     }
 };
 
