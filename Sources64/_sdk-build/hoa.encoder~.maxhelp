@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 92.0, 47.0, 616.0, 721.0 ],
@@ -42,11 +43,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 92.0, 73.0, 616.0, 695.0 ],
+						"rect" : [ 0.0, 26.0, 616.0, 695.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -273,8 +275,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1343,11 +1346,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 616.0, 695.0 ],
+						"rect" : [ 92.0, 73.0, 616.0, 695.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1602,27 +1606,13 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
-									"id" : "obj-1",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "float" ],
-									"patching_rect" : [ 401.5, 185.0, 55.0, 19.0 ],
-									"text" : "hoa.pi 2."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
 									"hidden" : 1,
 									"id" : "obj-8",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 327.5, 125.0, 79.0, 19.0 ],
+									"patching_rect" : [ 334.5, 125.0, 79.0, 19.0 ],
 									"text" : "loadmess 0.1"
 								}
 
@@ -1656,8 +1646,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1821,7 +1812,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 272.5, 245.0, 74.0, 19.0 ],
+									"patching_rect" : [ 272.5, 245.0, 81.0, 19.0 ],
 									"text" : "+~"
 								}
 
@@ -1835,8 +1826,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 272.5, 215.0, 32.0, 19.0 ],
-									"text" : "sig~"
+									"patching_rect" : [ 272.5, 215.0, 59.0, 19.0 ],
+									"text" : "hoa.pi~ 0"
 								}
 
 							}
@@ -1850,7 +1841,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 327.5, 155.0, 50.0, 19.0 ]
+									"patching_rect" : [ 334.5, 155.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -1860,11 +1851,11 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-17",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
+									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 327.5, 215.0, 93.0, 19.0 ],
-									"text" : "*~"
+									"patching_rect" : [ 334.5, 215.0, 62.0, 19.0 ],
+									"text" : "hoa.pi~ 2."
 								}
 
 							}
@@ -1877,22 +1868,13 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 327.5, 185.0, 72.0, 19.0 ],
+									"patching_rect" : [ 334.5, 185.0, 72.0, 19.0 ],
 									"text" : "phasor~ 0.1"
 								}
 
 							}
  ],
 						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-17", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-1", 0 ]
-								}
-
-							}
-, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
 									"disabled" : 0,
@@ -2060,7 +2042,7 @@
 									"destination" : [ "obj-34", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 282.0, 274.0, 252.449997, 274.0 ],
+									"midpoints" : [ 282.0, 279.0, 252.449997, 279.0 ],
 									"source" : [ "obj-14", 0 ]
 								}
 
@@ -2088,7 +2070,7 @@
 									"destination" : [ "obj-27", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 337.0, 176.0, 337.0, 176.0 ],
+									"midpoints" : [ 344.0, 176.0, 344.0, 176.0 ],
 									"source" : [ "obj-19", 0 ]
 								}
 
@@ -2419,7 +2401,7 @@
 									"destination" : [ "obj-3", 13 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 237.935715, 316.5, 476.0, 316.5 ],
+									"midpoints" : [ 237.935711, 316.5, 476.0, 316.5 ],
 									"source" : [ "obj-34", 13 ]
 								}
 
@@ -2430,7 +2412,7 @@
 									"destination" : [ "obj-3", 12 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 223.421432, 316.5, 462.5, 316.5 ],
+									"midpoints" : [ 223.421426, 316.5, 462.5, 316.5 ],
 									"source" : [ "obj-34", 12 ]
 								}
 
@@ -2441,7 +2423,7 @@
 									"destination" : [ "obj-3", 11 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 208.907135, 316.5, 449.0, 316.5 ],
+									"midpoints" : [ 208.90714, 316.5, 449.0, 316.5 ],
 									"source" : [ "obj-34", 11 ]
 								}
 
@@ -2452,7 +2434,7 @@
 									"destination" : [ "obj-3", 10 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 194.392853, 316.5, 435.5, 316.5 ],
+									"midpoints" : [ 194.392855, 316.5, 435.5, 316.5 ],
 									"source" : [ "obj-34", 10 ]
 								}
 
@@ -2463,7 +2445,7 @@
 									"destination" : [ "obj-3", 9 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 179.878571, 316.5, 422.0, 316.5 ],
+									"midpoints" : [ 179.878569, 316.5, 422.0, 316.5 ],
 									"source" : [ "obj-34", 9 ]
 								}
 
@@ -2474,7 +2456,7 @@
 									"destination" : [ "obj-3", 8 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 165.364288, 316.5, 408.5, 316.5 ],
+									"midpoints" : [ 165.364284, 316.5, 408.5, 316.5 ],
 									"source" : [ "obj-34", 8 ]
 								}
 
@@ -2485,7 +2467,7 @@
 									"destination" : [ "obj-3", 7 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 150.850006, 316.5, 395.0, 316.5 ],
+									"midpoints" : [ 150.849998, 316.5, 395.0, 316.5 ],
 									"source" : [ "obj-34", 7 ]
 								}
 
@@ -2496,7 +2478,7 @@
 									"destination" : [ "obj-3", 6 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 136.335709, 316.5, 381.5, 316.5 ],
+									"midpoints" : [ 136.335713, 316.5, 381.5, 316.5 ],
 									"source" : [ "obj-34", 6 ]
 								}
 
@@ -2507,7 +2489,7 @@
 									"destination" : [ "obj-3", 5 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 121.821426, 316.5, 368.0, 316.5 ],
+									"midpoints" : [ 121.821427, 316.5, 368.0, 316.5 ],
 									"source" : [ "obj-34", 5 ]
 								}
 
@@ -2518,7 +2500,7 @@
 									"destination" : [ "obj-3", 4 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 107.307144, 316.5, 354.5, 316.5 ],
+									"midpoints" : [ 107.307142, 316.5, 354.5, 316.5 ],
 									"source" : [ "obj-34", 4 ]
 								}
 
@@ -2529,7 +2511,7 @@
 									"destination" : [ "obj-3", 3 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 92.792854, 316.5, 341.0, 316.5 ],
+									"midpoints" : [ 92.792856, 316.5, 341.0, 316.5 ],
 									"source" : [ "obj-34", 3 ]
 								}
 
@@ -2540,7 +2522,7 @@
 									"destination" : [ "obj-3", 2 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 78.278572, 316.5, 327.5, 316.5 ],
+									"midpoints" : [ 78.278571, 316.5, 327.5, 316.5 ],
 									"source" : [ "obj-34", 2 ]
 								}
 
@@ -2551,7 +2533,7 @@
 									"destination" : [ "obj-3", 1 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 63.764286, 316.5, 314.0, 316.5 ],
+									"midpoints" : [ 63.764285, 316.5, 314.0, 316.5 ],
 									"source" : [ "obj-34", 1 ]
 								}
 
@@ -2650,8 +2632,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 616.0, 695.0 ],
@@ -2703,37 +2686,37 @@
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.amp~.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.pwider~.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
-				"patcherrelativepath" : "../effects",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
+				"name" : "hoa.pi~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
+				"name" : "hoa.connect.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -2750,6 +2733,10 @@
 			}
 , 			{
 				"name" : "hoa.plug~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.pi.mxo",
 				"type" : "iLaX"
 			}
  ]

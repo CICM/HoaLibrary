@@ -61,17 +61,23 @@ long Ambisonics::getSamplingRate()
 
 long Ambisonics::getHarmonicIndex(long anIndex)
 {
+    int index;
     if (anIndex == 0)
         return 0;
     else if(anIndex > 0 && anIndex < m_number_of_harmonics)
     {
-        anIndex = (anIndex - 1) / 2 + 1;
+        index = (anIndex - 1) / 2. + 1.;
         if (anIndex % 2 == 1)
-            anIndex = -anIndex;
-        return anIndex;
+            index = -index;
+        return index;
     }
     else
-        return -1;
+        return 0;
+}
+
+long Ambisonics::getHarmonicOrder(long anIndex)
+{
+    return abs(getHarmonicIndex(anIndex));
 }
 
 void Ambisonics::setVectorSize(long aVectorSize)

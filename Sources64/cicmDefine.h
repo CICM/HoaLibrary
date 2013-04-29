@@ -33,13 +33,13 @@
 
 #ifdef CICM_FLOAT
 
-#define Cicm_Signal_Float float
-#define Cicm_Signal_Vector_Float  float*
-#define Cicm_Signal_Matrix_Float  float**
+#define Cicm_Float float
+#define Cicm_Vector_Float  float*
+#define Cicm_Matrix_Float  float*
 
-#define Cicm_Signal_Double double
-#define Cicm_Signal_Vector_Double  double*
-#define Cicm_Signal_Matrix_Double  double**
+#define Cicm_Double double
+#define Cicm_Vector_Double  double*
+#define Cicm_Matrix_Double  double*
 
 #define Cicm_Complex_Float DSPComplex
 #define Cicm_Complex_Packed_Float DSPSplitComplex
@@ -48,42 +48,47 @@
 #define Cicm_Complex_Double DSPComplexD
 #define Cicm_Complex_Packed_Double DSPSplitComplexD
 
-/* Vector, Matrix, Packed Malloc */
-#define	Cicm_Signal_Vector_Float_Malloc(vector, size) vector = (Cicm_Signal_Vector_Float)malloc(size * sizeof(Cicm_Signal_Float))
-#define	Cicm_Signal_Matrix_Float_Malloc(matrix, bloc, number_of_rows, columns_size) matrix = (Cicm_Signal_Matrix_Float)malloc(sizeof(Cicm_Signal_Vector_Float) * number_of_rows); Cicm_Signal_Vector_Float bloc = (Cicm_Signal_Vector_Float)malloc(sizeof(Cicm_Signal_Float) * number_of_rows * columns_size); for(int i = 0; i < number_of_rows; i++){ matrix[i] = &bloc[i*columns_size];}
-#define	Cicm_Complex_Packed_Float_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Float *)malloc(sizeof(Cicm_Complex_Packed_Float)); packedComplex[0].realp = (Cicm_Signal_Float *)malloc(size * sizeof(Cicm_Signal_Float)); packedComplex[0].imagp = (Cicm_Signal *)malloc(size * sizeof(Cicm_Signal_Float));
+/**************** ALLOCATION *****************/
+#define	Cicm_Vector_Float_Malloc(vector, size) vector = (Cicm_Vector_Float)calloc(size, sizeof(Cicm_Float))
+#define	Cicm_Vector_Double_Malloc(vector, size) vector = (Cicm_Vector_Double)calloc(size, sizeof(Cicm_Double))
 
-#define	Cicm_Signal_Vector_Double_Malloc(vector, size) vector = (Cicm_Signal_Vector_Double)malloc(size * sizeof(Cicm_Signal_Double))
-#define	Cicm_Signal_Matrix_Double_Malloc(matrix, bloc, number_of_rows, columns_size) matrix = (Cicm_Signal_Matrix_Double)malloc(sizeof(Cicm_Signal_Vector_Double) * number_of_rows); Cicm_Signal_Vector_Double bloc = (Cicm_Signal_Vector_Double)malloc(sizeof(Cicm_Signal_Double) * number_of_rows * columns_size); for(int i = 0; i < number_of_rows; i++){ matrix[i] = &bloc[i*columns_size];}
-#define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (Cicm_Signal_Double *)malloc(size * sizeof(Cicm_Signal_Double)); packedComplex[0].imagp = (Cicm_Signal_Double *)malloc(size * sizeof(Cicm_Signal_Double));
+#define	Cicm_Matrix_Float_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)calloc(number_of_rows * columns_size, sizeof(Cicm_Float) );
+#define	Cicm_Matrix_Double_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)calloc(number_of_rows * columns_size, sizeof(Cicm_Double));
 
-/* Vector, Matrix, Packed Free */
-#define Cicm_Free(vector) free(vector)
+#define	Cicm_Complex_Packed_Float_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Float *)malloc(sizeof(Cicm_Complex_Packed_Float)); packedComplex[0].realp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float)); packedComplex[0].imagp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float));
+
+#define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (Cicm_Vector_Double)malloc(size * sizeof(Cicm_Double)); packedComplex[0].imagp = (Cicm__Vector_Double *)malloc(size * sizeof(Cicm_Double));
+
+/**************** FREE *****************/
+#define Cicm_Free(pointor) free(pointor)
 #define Cicm_Free_Complex_Packed(vector) free(vector[0].realp); free(vector[0].imagp);
 
-/* Vector and Matrix Copy */
-#define Cicm_Signal_Vector_Float_Copy(vectorSource, vectorDest, size) vDSP_mmov(vectorSource, vectorDest, size, 1, size, size)
-#define Cicm_Signal_Vector_Double_Copy(vectorSource, vectorDest, size) vDSP_mmovD(vectorSource, vectorDest, size, 1, size, size)
+/**************** SET ******************/
+#define Cicm_Matrix_Float_Set(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
+#define Cicm_Matrix_Double_Set(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
 
-#define Cicm_Signal_Vector_Matrix_Float_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmov(vectorSource, &matrixDest[0][0]+ row_number * size, size, 1, size, size)
-#define Cicm_Signal_Vector_Matrix_Double_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmovD(vectorSource, &matrixDest[0][0]+row_number * size, size, 1, size, size)
+/**************** COPY *****************/
+#define Cicm_Vector_Float_Copy(vectorSource, vectorDest, size) vDSP_mmov(vectorSource, vectorDest, size, 1, size, size)
+#define Cicm_Vector_Double_Copy(vectorSource, vectorDest, size) vDSP_mmovD(vectorSource, vectorDest, size, 1, size, size)
 
-#define Cicm_Signal_Matrix_Vector_Float_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmov(&matrixSource[0][0]+row_number * size, vectorDest, size, 1, size, size)
-#define Cicm_Signal_Matrix_Vector_Double_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmovD(&matrixSource[0][0]+row_number * size, vectorDest, size, 1, size, size)
+#define Cicm_Vector_Matrix_Float_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmov(vectorSource, matrixDest+ row_number * size, size, 1, size, size)
+#define Cicm_Vector_Matrix_Double_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmovD(vectorSource, matrixDest+row_number * size, size, 1, size, size)
 
-/* Vector and Matrix Product */
-#define Cicm_Matrix_Vector_Float_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_sgemv(CblasColMajor, CblasNoTrans, column_size, number_of_rows, 1.f, &matrix[0][0], column_size, vectorSource, 1, 0.f, vectorDest, 1)
-#define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_dgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1.f, &matrix[0][0], column_size, vectorSource, 1, 0.f, vectorDest, 1)
+#define Cicm_Matrix_Vector_Float_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmov(matrixSource+row_number * size, vectorDest, size, 1, size, size)
+#define Cicm_Matrix_Vector_Double_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmovD(matrixSource+row_number * size, vectorDest, size, 1, size, size)
 
-/*
-#define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) vDSP_mmulD(&matrix[0][0], 1, vectorSource, 1, vectorDest, 1, number_of_rows, 1, column_size)
-*/
+/**************** PRODUCT *************/
+#define Cicm_Matrix_Vector_Float_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_sgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1.f, matrix, column_size, vectorSource, 1, 0.f, vectorDest, 1)
+#define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_dgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1., matrix, column_size, vectorSource, 1, 0., vectorDest, 1)
 
-/* Vector Dot Product */
+#define Cicm_Matrix_Matrix_Float_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1.f, matrixOne, number_of_rowsOne, matrixTwo, number_of_rowsOne, 0.f, matrixDest, number_of_rowsOne);
+#define Cicm_Matrix_Matrix_Double_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1., matrixOne, number_of_rowsOne, matrixTwo, column_sizeOne, 0., matrixDest, column_sizetwo);
+
+/**************** DOT PRODUCT *********/
 #define Cicm_Vector_Float_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotpr(vectorOne, 1, vectorTwo, 1, scalarDest, size)
 #define Cicm_Vector_Double_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotprD(vectorOne, 1, vectorTwo, 1, scalarDest, size)
 
-/* Vector, scalar Mul Product */
+/**************** MUL *****************/
 #define Cicm_Matrix_Vector_Float_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmul(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 #define Cicm_Matrix_Vector_Double_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmulD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 
@@ -93,15 +98,23 @@
 #define Cicm_Vector_Vector_Float_Mul(vectorOne, vectorDest, size) cblas_sdot(size, vectorOne, 1, vectorDest, 1)
 #define Cicm_Vector_Vector_Double_Mul(vectorOne, vectorDest, size) cblas_ddot(size, vectorOne, 1, vectorDest, 1)
 
+/**************** ADD *****************/
+#define Cicm_Vector_Float_Add(vectorOne, vectorDest, size) cblas_saxpy(size, 1.f, vectorOne, 1, vectorDest, 1)
+#define Cicm_Vector_Double_Add(vectorOne, vectorDest, size) cblas_daxpy(size, 1., vectorOne, 1, vectorDest, 1)
+
+/**************** SUM *****************/
+#define Cicm_Vector_Float_Sum(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
+#define Cicm_Vector_Double_Sum(source1, source2, dest, length) vDSP_vaddD(source1, 1, source2, 1, dest, 1, length)
+
+/**************** CLEAR ***************/
+#define Cicm_Vector_Float_Clear(source, length) vDSP_vclr(source, 1, length)
+#define Cicm_Vector_Double_Clear(source, length) vDSP_vclrD(source, 1, length)
 
 /* Matrix Transpose */
-#define  Cicm_Matrix_Transpose_Float(matrixSource, matrixDest, rowDest, columnDest) vDSP_mtrans(&matrixSource[0][0], 1, &matrixDest[0][0], 1, rowDest, columnDest);
-
-#define  Cicm_Matrix_Transpose_Double(matrixSource, matrixDest, rowDest, columnDest) vDSP_mtransD(&matrixSource[0][0], 1, &matrixDest[0][0], 1, rowDest, columnDest);
-
+ #define  Cicm_Matrix_Transpose_Float(matrixSource, matrixDest, rowDest, columnDest) vDSP_mtrans(&matrixSource[0][0], 1, &matrixDest[0][0], 1, rowDest, columnDest);
+ 
+ #define  Cicm_Matrix_Transpose_Double(matrixSource, matrixDest, rowDest, columnDest) vDSP_mtransD(matrixSource, 1, matrixDest, 1, rowDest, columnDest);
 /***/
-#define Cicm_signal_add(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
-#define Cicm_signal_clear(source, length) vDSP_vclr(source, 1, length)
 
 #define Cicm_fft_init_handle(order) vDSP_create_fftsetup(order, FFT_RADIX2)
 #define	Cicm_free_packed(pointeur) free(pointeur[0].realp) free(pointeur[0].imagp)
