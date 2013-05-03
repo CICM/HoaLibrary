@@ -17,14 +17,12 @@
  *
  */
 
-#include "AmbisonicsStereo.h"
+#include "AmbisonicsRestitution.h"
 
-AmbisonicsStereo::AmbisonicsStereo(long anOrder, double aDelta, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, double anAngle, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
-    m_number_of_loudspeakers = m_number_of_harmonics+1;
-    m_delta = Tools::clip(aDelta, 0., 180.);
-    double loudspeakerAngleLeft = (m_delta / 2.) / 360. * CICM_2PI;
-    double loudspeakerAngleRight = (360. - m_delta / 2.) / 360. * CICM_2PI;
+    m_number_of_virtual_loudspeakers = m_number_of_harmonics+1;
+    m_number_of_real_loudspeakers    = Tools::clip(<#Type aValue#>)
 	m_decoder = new AmbisonicsDecoder(anOrder, m_number_of_loudspeakers, aVectorSize);
     
     Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_loudspeakers);
@@ -38,20 +36,34 @@ AmbisonicsStereo::AmbisonicsStereo(long anOrder, double aDelta, long aVectorSize
     Cicm_Vector_Double_Malloc(m_left_gains_vector_double, m_number_of_loudspeakers);
     Cicm_Vector_Double_Malloc(m_right_gains_vector_double, m_number_of_loudspeakers);
     
-    for(int i = 0; i < m_number_of_loudspeakers; i++)
-    {
-        double virtualLoudspeakerAngle = ((double)i / (double)m_number_of_loudspeakers) * CICM_2PI;
-        double distance = Tools::radianDistance(virtualLoudspeakerAngle, loudspeakerAngleLeft) / 2.;
-        m_left_gains_vector_double[i]   = cos();
-        m_right_gains_vector_double[i]  = cos(Tools::radianDistance(virtualLoudspeakerAngle, loudspeakerAngleRight) / 2.);
-        m_left_gains_vector_float[i]    = m_left_gains_vector_double[i];
-        m_right_gains_vector_float[i]   = m_right_gains_vector_double[i];
-    }
+    setLoudspeakersDelta(anAngle);
     m_number_of_outputs = 2;
 }
 
+void AmbisonicsRestitution::setLoudspeakersDelta(double anAngle)
+{
+    m_delta = Tools::clip(anAngle, 0., 180.);
+    double loudspeakerAngleLeft = (m_delta / 2.) / 360. * CICM_2PI;
+    double loudspeakerAngleRight = - loudspeakerAngleLeft;
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        double virtualLoudspeakerAngle = ((double)i / (double)m_number_of_loudspeakers) * CICM_2PI;
+        double distance = virtualLoudspeakerAngle - loudspeakerAngleLeft;
+        m_left_gains_vector_double[i]   = fabs(cos(distance / 2.));
+        m_left_gains_vector_float[i]    = m_left_gains_vector_double[i];
+        distance = fabs((virtualLoudspeakerAngle - loudspeakerAngleRight));
+        m_right_gains_vector_double[i]  = fabs(cos(distance / 2.));
+        m_right_gains_vector_float[i]   = m_right_gains_vector_double[i];
+    }
 
-AmbisonicsStereo::~AmbisonicsStereo()
+}
+
+double AmbisonicsRestitution::getLoudspeakersDelta()
+{
+    return m_delta;
+}
+
+AmbisonicsRestitution::~AmbisonicsRestitution()
 {
     Cicm_Free(m_vector_float_input);
     Cicm_Free(m_vector_double_input);

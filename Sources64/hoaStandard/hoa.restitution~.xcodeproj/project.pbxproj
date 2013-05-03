@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		8F9518841733899F000402C7 /* AmbisonicsStereo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518811733899F000402C7 /* AmbisonicsStereo.cpp */; };
-		8F9518851733899F000402C7 /* AmbisonicsStereo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518821733899F000402C7 /* AmbisonicsStereo.h */; };
-		8F9518861733899F000402C7 /* hoa.stereo~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518831733899F000402C7 /* hoa.stereo~.cpp */; };
+		8F9518841733899F000402C7 /* AmbisonicsRestitution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518811733899F000402C7 /* AmbisonicsRestitution.cpp */; };
+		8F9518851733899F000402C7 /* AmbisonicsRestitution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518821733899F000402C7 /* AmbisonicsRestitution.h */; };
+		8F9518861733899F000402C7 /* hoa.restitution~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518831733899F000402C7 /* hoa.restitution~.cpp */; };
 		8F95188917338BC1000402C7 /* AmbisonicsDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F95188717338BC1000402C7 /* AmbisonicsDecoder.cpp */; };
 		8F95188A17338BC1000402C7 /* AmbisonicsDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95188817338BC1000402C7 /* AmbisonicsDecoder.h */; };
 		8F9518A71733B338000402C7 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95189E1733B338000402C7 /* CicmDefine.h */; };
@@ -29,10 +29,10 @@
 
 /* Begin PBXFileReference section */
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2FBBEAE508F335360078DB84 /* hoa.stereo~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.stereo~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F9518811733899F000402C7 /* AmbisonicsStereo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsStereo.cpp; sourceTree = "<group>"; };
-		8F9518821733899F000402C7 /* AmbisonicsStereo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsStereo.h; sourceTree = "<group>"; };
-		8F9518831733899F000402C7 /* hoa.stereo~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.stereo~.cpp"; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.restitution~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.restitution~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F9518811733899F000402C7 /* AmbisonicsRestitution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRestitution.cpp; sourceTree = "<group>"; };
+		8F9518821733899F000402C7 /* AmbisonicsRestitution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRestitution.h; sourceTree = "<group>"; };
+		8F9518831733899F000402C7 /* hoa.restitution~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.restitution~.cpp"; sourceTree = "<group>"; };
 		8F95188717338BC1000402C7 /* AmbisonicsDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmbisonicsDecoder.cpp; path = ../hoaDecoder/AmbisonicsDecoder.cpp; sourceTree = "<group>"; };
 		8F95188817338BC1000402C7 /* AmbisonicsDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmbisonicsDecoder.h; path = ../hoaDecoder/AmbisonicsDecoder.h; sourceTree = "<group>"; };
 		8F95189E1733B338000402C7 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.stereo~.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.restitution~.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,9 +114,9 @@
 				8FE028B1172A837000BD68AA /* Ambisonics.h */,
 				8F95188717338BC1000402C7 /* AmbisonicsDecoder.cpp */,
 				8F95188817338BC1000402C7 /* AmbisonicsDecoder.h */,
-				8F9518811733899F000402C7 /* AmbisonicsStereo.cpp */,
-				8F9518821733899F000402C7 /* AmbisonicsStereo.h */,
-				8F9518831733899F000402C7 /* hoa.stereo~.cpp */,
+				8F9518811733899F000402C7 /* AmbisonicsRestitution.cpp */,
+				8F9518821733899F000402C7 /* AmbisonicsRestitution.h */,
+				8F9518831733899F000402C7 /* hoa.restitution~.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -129,7 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FE028B3172A837000BD68AA /* Ambisonics.h in Headers */,
-				8F9518851733899F000402C7 /* AmbisonicsStereo.h in Headers */,
+				8F9518851733899F000402C7 /* AmbisonicsRestitution.h in Headers */,
 				8F95188A17338BC1000402C7 /* AmbisonicsDecoder.h in Headers */,
 				8F9518A71733B338000402C7 /* CicmDefine.h in Headers */,
 				8F9518A91733B338000402C7 /* CicmFilter.h in Headers */,
@@ -158,7 +158,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.stereo~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.restitution~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -169,7 +169,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.stereo~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.restitution~" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -215,8 +215,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FE028B2172A837000BD68AA /* Ambisonics.cpp in Sources */,
-				8F9518841733899F000402C7 /* AmbisonicsStereo.cpp in Sources */,
-				8F9518861733899F000402C7 /* hoa.stereo~.cpp in Sources */,
+				8F9518841733899F000402C7 /* AmbisonicsRestitution.cpp in Sources */,
+				8F9518861733899F000402C7 /* hoa.restitution~.cpp in Sources */,
 				8F95188917338BC1000402C7 /* AmbisonicsDecoder.cpp in Sources */,
 				8F9518A81733B338000402C7 /* CicmFilter.cpp in Sources */,
 				8F9518AA1733B338000402C7 /* CicmFilterBiquad.cpp in Sources */,
@@ -266,7 +266,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "hoa.stereo~";
+				PRODUCT_NAME = "hoa.restitution~";
 			};
 			name = Development;
 		};
@@ -293,14 +293,14 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "hoa.stereo~";
+				PRODUCT_NAME = "hoa.restitution~";
 			};
 			name = Deployment;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.stereo~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.restitution~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

@@ -17,7 +17,7 @@
  *
  */
 
-#include "AmbisonicsStereo.h"
+#include "AmbisonicsRestitution.h"
 
 extern "C"
 {
@@ -29,7 +29,7 @@ extern "C"
 typedef struct _HoaStereo
 {
 	t_pxobject					f_ob;			
-	AmbisonicsStereo			*f_AmbisonicStereo;
+	AmbisonicsRestitution			*f_AmbisonicStereo;
 } t_HoaStereo;
 
 void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv);
@@ -48,7 +48,7 @@ int C74_EXPORT main(void)
 {	
 	t_class *c;
 	
-	c = class_new("hoa.stereo~", (method)HoaStereo_new, (method)HoaStereo_free, (long)sizeof(t_HoaStereo), 0L, A_GIMME, 0);
+	c = class_new("hoa.restitution~", (method)HoaStereo_new, (method)HoaStereo_free, (long)sizeof(t_HoaStereo), 0L, A_GIMME, 0);
 	
 	class_addmethod(c, (method)HoaStereo_dsp,		"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaStereo_dsp64,		"dsp64",	A_CANT, 0);
@@ -78,7 +78,7 @@ void *HoaStereo_new(t_symbol *s, long argc, t_atom *argv)
 		else if(atom_gettype(argv+1) == A_FLOAT)
 			anAngle	= atom_getfloat(argv+1);
 		
-		x->f_AmbisonicStereo	= new AmbisonicsStereo(order, anAngle, sys_getblksize());
+		x->f_AmbisonicStereo	= new AmbisonicsRestitution(order, anAngle, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicStereo->getNumberOfInputs());
 		for (int i = 0; i < x->f_AmbisonicStereo->getNumberOfOutputs(); i++) 

@@ -23,12 +23,13 @@
 #include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaDecoder/AmbisonicsDecoder.h"
 
-class AmbisonicsStereo : public Ambisonics
+class AmbisonicsRestitution : public Ambisonics
 {
 	
 private:
     double              m_delta;
-    long                m_number_of_loudspeakers;
+    long                m_number_of_virutal_loudspeakers;
+    long                m_number_of_real_loudspeakers;
     
 	AmbisonicsDecoder*  m_decoder;
     Cicm_Vector_Float   m_vector_float_input;
@@ -43,8 +44,10 @@ private:
     Cicm_Vector_Double  m_right_gains_vector_double;
     
 public:
-	AmbisonicsStereo(long anOrder = 1, double aDelta = 60., long aVectorSize = 0);
-	~AmbisonicsStereo();
+	AmbisonicsRestitution(long anOrder = 1, long aNumberOfLoudspeakers = 2, long lowFrequencyEffect = 0, aVectorSize = 0);
+    void setLoudspeakersDelta(double anAngle);
+    double getLoudspeakersDelta();
+	~AmbisonicsRestitution();
 	
 	/* Perform sample by sample*/
 	void process(double* aInputs, double* aOutputs)
