@@ -16,7 +16,8 @@ extern "C" {
 #endif
 }
 
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmDefine.h"
+#include "../CicmLibrary/CicmTools.h"
 #include "CicmLine.h"
 
 #define MAX_IO 64
@@ -404,16 +405,13 @@ void hoaGain_dsp64(t_hoaGain *x, t_object *dsp64, short *count, double samplerat
 }
 void hoaGain_perform64(t_hoaGain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int i, j;
+    int i;
     double line[sampleframes];
     
     x->f_amp->process(line);
     
-    
-        for(i = 0; i < x->f_numberOfChannels; i++)
-		{
-            Cicm_Matrix_Vector_Mul(ins[i], line, outs[i], sampleframes);
-		}
+    for(i = 0; i < x->f_numberOfChannels; i++)
+        Cicm_Matrix_Vector_Double_Mul(ins[i], line, outs[i], sampleframes);
 }
 
 void hoaGain_set_gain(t_hoaGain *x)
@@ -486,7 +484,6 @@ void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
             jgraphics_move_to(g, long(pos)+0.5+3, 6);
             jgraphics_line_to(g, long(pos)+0.5+3, rect->height - 6);
             jgraphics_stroke(g);
-            
         } else {
             
         }

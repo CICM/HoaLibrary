@@ -20,7 +20,7 @@
 #ifndef DEF_CicmLine_h
 #define DEF_CicmLine_h
 
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmTools.h"
 #define DEF_RAMPSIZE_IN_MS 20 // 882 samples at 44.1k samplerate
 
 class CicmLine{
