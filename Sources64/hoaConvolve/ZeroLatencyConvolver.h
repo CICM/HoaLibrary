@@ -50,8 +50,7 @@ inline Cicm_Signal ZeroLatencyConvolver::process(Cicm_Signal anInput)
     
 	for(int i = 0; i < m_ffts_useds; i++)
 			result += m_fft[i]->process(anInput);
-    
-    //Cicm_Signal result = m_fft[0]->process(anInput);
+ 
 	return  result;
 }
 

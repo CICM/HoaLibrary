@@ -17,90 +17,46 @@
  *
  */
 
-#ifndef DEF_AMBISONIC_STEREO
-#define DEF_AMBISONIC_STEREO
+#ifndef DEF_AMBISONICSSTEREO
+#define DEF_AMBISONICSSTEREO
 
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
-#include <gsl/gsl_blas.h>
-#include <gsl/gsl_linalg.h>
-#include <gsl/gsl_sf.h>
-#include <vector>
-#include <string>
-#include "AmbisonicEncode.hpp"
-#include "../cicmTools.h"
+#include "../HoaAmbisonics/Ambisonics.h"
+#include "../hoaDecoder/AmbisonicsDecoder.h"
 
-class AmbisonicStereo
+class AmbisonicsStereo : public Ambisonics
 {
 	
 private:
-	long			m_order;
-	long			m_number_of_harmonics;
-	long			m_number_of_outputs;
-	long			m_number_of_inputs;
-	long			m_vector_size;
-	double			m_loudspeakers_angle_left;
-	double			m_loudspeakers_angle_right;
-	double			m_delta;
-	double			m_scale_factor;
-	double			m_fractional_order;
-
-	long*			m_index_of_harmonics;
-	gsl_matrix*		m_microphones_matrix;
-	gsl_vector*		m_input_vector;
-	gsl_vector*		m_output_vector;
-	gsl_vector*		m_optim_vector;
-
-	double	computeInPhaseFractionalOrder(double aDelta);
-	double	computeScaleFactor(long anIndex, double anAngle);
-	void	computeMicrophones();
-	void	computeIndex();
-	void	computeStereoOptim();
-
+    double              m_delta;
+	AmbisonicsDecoder*  m_decoder;
+    Cicm_Vector_Float   m_loudspeakers_vector_float;
+    Cicm_Vector_Double  m_loudspeakers_vector_double;
+    
 public:
-	AmbisonicStereo(long anOrder = 4, double aDelta = 60., long aVectorSize = 0);
-
-	long	getOrder();
-	long	getNumberOfHarmonics();
-	long	getNumberOfInputs();
-	long	getNumberOfOutputs();
-	long	getVectorSize();
-	double	getFractionalOrder();
-	double	getAngle1();
-	double	getAngle2();
-
-	void	setVectorSize(int aVectorSize);
-	~AmbisonicStereo();
+	AmbisonicsStereo(long anOrder = 1, double aDelta = 60., long aVectorSize = 0);
+	~AmbisonicsStereo();
 	
 	/* Perform sample by sample*/
-	template<typename Type> void process(Type* aInputs, Type* aOutputs)
-	{	
-		for(int j = 0; j < m_number_of_inputs; j++)
-			gsl_vector_set(m_input_vector, j, aInputs[j]);
-		
-		gsl_vector_mul(m_input_vector, m_optim_vector);
-		gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
-			
-		for(int j = 0; j < m_number_of_outputs; j++)
-			aOutputs[j] = m_scale_factor * gsl_vector_get(m_output_vector, j);			
-	}	
+	void process(double* aInputs, double* aOutputs)
+	{
+        m_decoder->process(aInputs, m_loudspeakers_vector_double);
+	}
+    
+    void process(float* aInputs, float* aOutputs)
+	{
+        m_decoder->process(aInputs, m_loudspeakers_vector_float);
+	}
 	
 	/* Perform block samples */
-	template<typename Type> void process(Type** aInputs, Type** aOutputs)
+	void process(double** aInputs, double** aOutputs)
 	{	
-		for(int i = 0; i < m_vector_size; i++)
-		{
-			for(int j = 0; j < m_number_of_inputs; j++)
-				gsl_vector_set(m_input_vector, j, aInputs[j][i]);
-			
-			gsl_vector_mul(m_input_vector, m_optim_vector);
-			gsl_blas_dgemv(CblasTrans, 1.0, m_microphones_matrix, m_input_vector, 0.0, m_output_vector);
-			
-			for(int j = 0; j < m_number_of_outputs; j++)
-				aOutputs[j][i] = m_scale_factor * gsl_vector_get(m_output_vector, j);			
-		}
-	}	
+		
+	}
+
+	void process(float** aInputs, float** aOutputs)
+	{
+		
+	}
 };
 
 #endif

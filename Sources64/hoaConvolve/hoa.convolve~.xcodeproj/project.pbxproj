@@ -8,22 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		8F04FD41172C4F52000D77BE /* AmbisonicConvolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A88C1726C226005FD621 /* AmbisonicConvolver.h */; };
-		8F04FD42172C4F52000D77BE /* cicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A88F1726C226005FD621 /* cicmDefine.h */; };
-		8F04FD43172C4F52000D77BE /* cicmFft.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A8911726C226005FD621 /* cicmFft.h */; };
-		8F04FD44172C4F52000D77BE /* cicmFftConvolution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A8931726C226005FD621 /* cicmFftConvolution.h */; };
-		8F04FD45172C4F52000D77BE /* cicmFir.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A8951726C226005FD621 /* cicmFir.h */; };
-		8F04FD46172C4F52000D77BE /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A8961726C226005FD621 /* cicmTools.h */; };
-		8F04FD47172C4F52000D77BE /* ZeroLatencyConvolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A8A61726C22D005FD621 /* ZeroLatencyConvolver.h */; };
-		8F04FD49172C4F52000D77BE /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		8F04FD4B172C4F52000D77BE /* AmbisonicConvolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A88B1726C226005FD621 /* AmbisonicConvolver.cpp */; };
-		8F04FD4C172C4F52000D77BE /* cicmFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A8901726C226005FD621 /* cicmFft.cpp */; };
-		8F04FD4D172C4F52000D77BE /* cicmFftConvolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A8921726C226005FD621 /* cicmFftConvolution.cpp */; };
-		8F04FD4E172C4F52000D77BE /* cicmFir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A8941726C226005FD621 /* cicmFir.cpp */; };
-		8F04FD4F172C4F52000D77BE /* hoa.convolve~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A8971726C226005FD621 /* hoa.convolve~.cpp */; };
-		8F04FD50172C4F52000D77BE /* ZeroLatencyConvolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A8A51726C22D005FD621 /* ZeroLatencyConvolver.cpp */; };
-		8F04FD52172C4F52000D77BE /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8A91726C237005FD621 /* Accelerate.framework */; };
-		8F04FD53172C4F52000D77BE /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8AB1726C5BD005FD621 /* MaxAudioAPI.framework */; };
 		8F18A8981726C226005FD621 /* AmbisonicConvolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F18A88B1726C226005FD621 /* AmbisonicConvolver.cpp */; };
 		8F18A8991726C226005FD621 /* AmbisonicConvolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A88C1726C226005FD621 /* AmbisonicConvolver.h */; };
 		8F18A89C1726C226005FD621 /* cicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A88F1726C226005FD621 /* cicmDefine.h */; };
@@ -44,7 +28,6 @@
 /* Begin PBXFileReference section */
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.convolve~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.convolve~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F04FD58172C4F52000D77BE /* max-external copy.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "max-external copy.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A88B1726C226005FD621 /* AmbisonicConvolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicConvolver.cpp; sourceTree = "<group>"; };
 		8F18A88C1726C226005FD621 /* AmbisonicConvolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicConvolver.h; sourceTree = "<group>"; };
 		8F18A88F1726C226005FD621 /* cicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmDefine.h; sourceTree = "<group>"; };
@@ -72,15 +55,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F04FD51172C4F52000D77BE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F04FD52172C4F52000D77BE /* Accelerate.framework in Frameworks */,
-				8F04FD53172C4F52000D77BE /* MaxAudioAPI.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -95,9 +69,9 @@
 				8F18A88F1726C226005FD621 /* cicmDefine.h */,
 				8F18A8901726C226005FD621 /* cicmFft.cpp */,
 				8F18A8911726C226005FD621 /* cicmFft.h */,
-				8F18A8921726C226005FD621 /* cicmFftConvolution.cpp */,
 				8F18A8A51726C22D005FD621 /* ZeroLatencyConvolver.cpp */,
 				8F18A8A61726C22D005FD621 /* ZeroLatencyConvolver.h */,
+				8F18A8921726C226005FD621 /* cicmFftConvolution.cpp */,
 				8F18A8931726C226005FD621 /* cicmFftConvolution.h */,
 				8F18A8941726C226005FD621 /* cicmFir.cpp */,
 				8F18A8951726C226005FD621 /* cicmFir.h */,
@@ -112,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				2FBBEAE508F335360078DB84 /* hoa.convolve~.mxo */,
-				8F04FD58172C4F52000D77BE /* max-external copy.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,20 +104,6 @@
 				8F18A8A21726C226005FD621 /* cicmFir.h in Headers */,
 				8F18A8A31726C226005FD621 /* cicmTools.h in Headers */,
 				8F18A8A81726C22D005FD621 /* ZeroLatencyConvolver.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8F04FD40172C4F52000D77BE /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F04FD41172C4F52000D77BE /* AmbisonicConvolver.h in Headers */,
-				8F04FD42172C4F52000D77BE /* cicmDefine.h in Headers */,
-				8F04FD43172C4F52000D77BE /* cicmFft.h in Headers */,
-				8F04FD44172C4F52000D77BE /* cicmFftConvolution.h in Headers */,
-				8F04FD45172C4F52000D77BE /* cicmFir.h in Headers */,
-				8F04FD46172C4F52000D77BE /* cicmTools.h in Headers */,
-				8F04FD47172C4F52000D77BE /* ZeroLatencyConvolver.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,25 +129,6 @@
 			productReference = 2FBBEAE508F335360078DB84 /* hoa.convolve~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
-		8F04FD3F172C4F52000D77BE /* max-external-intel */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8F04FD55172C4F52000D77BE /* Build configuration list for PBXNativeTarget "max-external-intel" */;
-			buildPhases = (
-				8F04FD40172C4F52000D77BE /* Headers */,
-				8F04FD48172C4F52000D77BE /* Resources */,
-				8F04FD4A172C4F52000D77BE /* Sources */,
-				8F04FD51172C4F52000D77BE /* Frameworks */,
-				8F04FD54172C4F52000D77BE /* Rez */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "max-external-intel";
-			productName = iterator;
-			productReference = 8F04FD58172C4F52000D77BE /* max-external copy.mxo */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -212,7 +152,6 @@
 			projectRoot = "";
 			targets = (
 				2FBBEAD608F335360078DB84 /* max-external */,
-				8F04FD3F172C4F52000D77BE /* max-external-intel */,
 			);
 		};
 /* End PBXProject section */
@@ -226,25 +165,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F04FD48172C4F52000D77BE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F04FD49172C4F52000D77BE /* maxmspsdk.xcconfig in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXRezBuildPhase section */
 		2FBBEADF08F335360078DB84 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8F04FD54172C4F52000D77BE /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -264,19 +188,6 @@
 				8F18A8A11726C226005FD621 /* cicmFir.cpp in Sources */,
 				8F18A8A41726C226005FD621 /* hoa.convolve~.cpp in Sources */,
 				8F18A8A71726C22D005FD621 /* ZeroLatencyConvolver.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8F04FD4A172C4F52000D77BE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F04FD4B172C4F52000D77BE /* AmbisonicConvolver.cpp in Sources */,
-				8F04FD4C172C4F52000D77BE /* cicmFft.cpp in Sources */,
-				8F04FD4D172C4F52000D77BE /* cicmFftConvolution.cpp in Sources */,
-				8F04FD4E172C4F52000D77BE /* cicmFir.cpp in Sources */,
-				8F04FD4F172C4F52000D77BE /* hoa.convolve~.cpp in Sources */,
-				8F04FD50172C4F52000D77BE /* ZeroLatencyConvolver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,65 +252,13 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_FAST_MATH = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 				PRODUCT_NAME = "hoa.convolve~";
-			};
-			name = Deployment;
-		};
-		8F04FD56172C4F52000D77BE /* Development */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
-			buildSettings = {
-				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../c74support/msp-includes\"",
-					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
-					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/max-includes\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_FAST_MATH = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.intel.compilers.icc.13_0_0;
-				ICC_OPTLEVEL = speedHLO;
-				INFOPLIST_FILE = "max-external copy-Info.plist";
-				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "max-external copy";
-			};
-			name = Development;
-		};
-		8F04FD57172C4F52000D77BE /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
-			buildSettings = {
-				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../c74support/msp-includes\"",
-					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
-					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/max-includes\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_FAST_MATH = YES;
-				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.intel.compilers.icc.13_0_0;
-				ICC_OPTLEVEL = speedHLO;
-				INFOPLIST_FILE = "max-external copy-Info.plist";
-				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "max-external copy";
 			};
 			name = Deployment;
 		};
@@ -420,15 +279,6 @@
 			buildConfigurations = (
 				2FBBEAE108F335360078DB84 /* Development */,
 				2FBBEAE208F335360078DB84 /* Deployment */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
-		};
-		8F04FD55172C4F52000D77BE /* Build configuration list for PBXNativeTarget "max-external-intel" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8F04FD56172C4F52000D77BE /* Development */,
-				8F04FD57172C4F52000D77BE /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;

@@ -1,139 +1,145 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#include "../cicmTools.h"
-#include "ambisonicRecomposer.hpp"
+#include "AmbisonicsRecomposer.h"
 
-ambisonicRecomposer::ambisonicRecomposer(int anOrder, int aNumberOfChannels, int aVectorSize)
+AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophones, long aVectorSize, long fixedOrNot) : Ambisonics(anOrder, aVectorSize)
 {
-	m_order					= anOrder;
-	m_number_of_harmonics	= m_order * 2 + 1;
-	m_number_of_inputs		= aNumberOfChannels;
-	m_number_of_outputs		= m_number_of_harmonics;
-	
-	m_fishEyeFactor			= 1.;
-	
-	m_input_vector			= gsl_vector_alloc(m_number_of_inputs);
-	m_output_vector			= gsl_vector_alloc(m_number_of_outputs);
-	
-	m_recompMicCoefs		= gsl_matrix_alloc(m_number_of_inputs, m_number_of_outputs);
-	m_recompMicCoefsSet		= new gsl_matrix*[NUMBEROFCIRCLEPOINTS];
-	
-	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
-		m_recompMicCoefsSet[i] = gsl_matrix_alloc(m_number_of_inputs, m_number_of_outputs);
-	
-	computeIndex();
-	computeAngles();
-	computeMicMatrixSet();
-	setVectorSize(aVectorSize);
-
+    setFixed(fixedOrNot);
+	m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, m_number_of_harmonics);
+    m_number_of_inputs = m_number_of_microphones;
+    m_number_of_outputs = m_number_of_harmonics;
+    for(int i = 0; i < m_number_of_microphones; i++)
+    {
+        m_encoders.push_back(new AmbisonicsEncoder(m_order, "basic", m_vector_size));
+        m_widers.push_back(new AmbisonicsWider(m_order, m_vector_size));
+        m_lines.push_back(new CicmLine(4410, m_vector_size));
+        m_wider_lines.push_back(new CicmLine(4410, m_vector_size));
+        
+        double angle = ((double)i / (double)(m_number_of_microphones)) * CICM_2PI;
+        m_encoders[i]->setAzimtuhBoth(angle);
+        m_lines[i]->setCoefficientAngleDirect(angle);
+        m_wider_lines[i]->setCoefficientDirect(1.);
+    }
+    Cicm_Vector_Float_Malloc(m_harmonics_vector_float, m_number_of_harmonics);
+    Cicm_Vector_Double_Malloc(m_harmonics_vector_double, m_number_of_harmonics);
+    
+    Cicm_Vector_Float_Malloc(m_angles_vector_float, m_vector_size);
+    Cicm_Vector_Double_Malloc(m_angles_vector_double, m_vector_size);
+    
+    m_harmonics_matrix_float    = new Cicm_Vector_Float[m_number_of_harmonics];
+    m_harmonics_matrix_double   = new Cicm_Vector_Double[m_number_of_harmonics];
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        Cicm_Vector_Float_Malloc(m_harmonics_matrix_float[i], m_vector_size);
+        Cicm_Vector_Double_Malloc(m_harmonics_matrix_double[i], m_vector_size);
+    }
 }
 
-int	ambisonicRecomposer::getParameters(std::string aParameter) const
+void AmbisonicsRecomposer::setMicrophoneAngle(long anIndex, double anAngle)
 {
-	int value = 0;
-	
-	if (aParameter == "order") 
-		value = m_order;
-	else if (aParameter == "samplingRate") 
-		value =  m_sampling_rate;
-	else if (aParameter == "vectorSize") 
-		value =  m_vector_size;
-	else if (aParameter == "numberOfInputs") 
-		value =  m_number_of_inputs;
-	else if (aParameter == "numberOfOutputs") 
-		value =  m_number_of_outputs;
-	
-	return value;
+    if(anIndex >= 0 && anIndex < m_number_of_microphones)
+        m_lines[anIndex]->setCoefficientAngle(anAngle);
 }
 
-void ambisonicRecomposer::computeIndex()
+double AmbisonicsRecomposer::getMicrophoneAngle(long anIndex)
 {
-	m_index_of_harmonics	= new int[m_number_of_harmonics ];
-	m_index_of_harmonics[0] = 0;
-	for(int i = 1; i < m_number_of_harmonics; i++)
-	{
-		m_index_of_harmonics[i] = (i - 1) / 2 + 1;
-		if (i % 2 == 1) 
-			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
-	}
+    if(anIndex >= 0 && anIndex < m_number_of_microphones)
+        return m_lines[anIndex]->getCoefficient();
+    else
+        return 0.;
 }
 
-void ambisonicRecomposer::computeAngles()
+void AmbisonicsRecomposer::setMicrophoneWide(long anIndex, double anAngle)
 {
-	m_speakers_angles		= new double[m_number_of_inputs];
-	for(int i = 0; i < m_number_of_inputs; i++)
-	{
-		m_speakers_angles[i] = (2. * CICM_PI / (double)m_number_of_inputs) * (double)i;
-		if(m_speakers_angles[i] > CICM_PI)
-			m_speakers_angles[i] -= 2. * CICM_PI;
-	}
+    if(anIndex >= 0 && anIndex < m_number_of_microphones)
+        m_wider_lines[anIndex]->setCoefficientAngle(anAngle);
 }
 
-void ambisonicRecomposer::computeMicMatrix(gsl_matrix* resMatrix, double aFishFactor)
+void AmbisonicsRecomposer::setFixed(long fixedOrNot)
 {
-	for (int micIndex = 0; micIndex < m_number_of_inputs; micIndex++)
-	{
-		gsl_matrix_set(resMatrix, micIndex, 0, 1);
-		for (int orderIndex = 1; orderIndex <= m_order; orderIndex++) 
-		{
-			gsl_matrix_set(resMatrix, micIndex, orderIndex * 2 -1, sin(orderIndex * m_speakers_angles[micIndex] * aFishFactor));
-			gsl_matrix_set(resMatrix, micIndex, orderIndex * 2   , cos(orderIndex * m_speakers_angles[micIndex] * aFishFactor));
-		}
-	}
+    m_fixed = Tools::clip(fixedOrNot, (long)0, (long)1);
 }
 
-void ambisonicRecomposer::computeMicMatrixSet()
+double AmbisonicsRecomposer::getMicrophoneWide(long anIndex)
 {
-	double tmpFishEyeFactor;
-	for (int matIndex = 0; matIndex < NUMBEROFCIRCLEPOINTS; matIndex++) 
-	{
-		tmpFishEyeFactor = (float)matIndex/float(NUMBEROFCIRCLEPOINTS-1);
-		computeMicMatrix(m_recompMicCoefsSet[matIndex], tmpFishEyeFactor);
-	}
+    if(anIndex >= 0 && anIndex < m_number_of_microphones)
+        return m_wider_lines[anIndex]->getCoefficient();
+    else
+        return 0.;
 }
 
-void ambisonicRecomposer::setVectorSize(int aVectorSize)
+long AmbisonicsRecomposer::getFixed()
 {
-		m_vector_size	= aVectorSize;	
+    return m_fixed;
 }
 
-void ambisonicRecomposer::setFishEyeFactor(double aFishEyeFactor)
+void AmbisonicsRecomposer::setVectorSize(long aVectorSize)
 {
-	if (aFishEyeFactor > 1.) 
-		aFishEyeFactor = 1.;
-	else if (aFishEyeFactor < 0.)
-		aFishEyeFactor = 0.;
-	m_fishEyeFactor = aFishEyeFactor;	
+    m_vector_size = Tools::clip_power_of_two(aVectorSize);
+    for(int i = 0; i < m_number_of_microphones; i++)
+    {
+        m_encoders[i]->setVectorSize(m_vector_size);
+        m_lines[i]->setVectorSize(m_vector_size);
+        m_widers[i]->setVectorSize(m_vector_size);
+        m_wider_lines[i]->setVectorSize(m_vector_size);
+        
+        Cicm_Free(m_angles_vector_float);
+        Cicm_Free(m_angles_vector_double);
+        Cicm_Vector_Float_Malloc(m_angles_vector_float, m_vector_size);
+        Cicm_Vector_Double_Malloc(m_angles_vector_double, m_vector_size);
+    }
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        Cicm_Free(m_harmonics_matrix_float[i]);
+        Cicm_Free(m_harmonics_matrix_double[i]);
+        Cicm_Vector_Float_Malloc(m_harmonics_matrix_float[i], m_vector_size);
+        Cicm_Vector_Double_Malloc(m_harmonics_matrix_double[i], m_vector_size);
+    }
 }
 
-ambisonicRecomposer::~ambisonicRecomposer()
+void AmbisonicsRecomposer::setRamp(long aNumberOfSample)
 {
-	gsl_matrix_free(m_recompMicCoefs);
-	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
-		gsl_matrix_free(m_recompMicCoefsSet[i]);
-	delete[] m_recompMicCoefsSet;
-	
-	gsl_vector_free(m_output_vector);
-	gsl_vector_free(m_input_vector);
-	delete[] m_speakers_angles;
-	delete[] m_index_of_harmonics;
+    for(int i = 0; i < m_number_of_microphones; i++)
+    {
+        m_lines[i]->setRamp(aNumberOfSample);
+        m_wider_lines[i]->setRamp(aNumberOfSample);
+    }
+}
+
+AmbisonicsRecomposer::~AmbisonicsRecomposer()
+{
+	m_encoders.clear();
+    m_lines.clear();
+    m_widers.clear();
+    m_wider_lines.clear();
+    Cicm_Free(m_harmonics_vector_float);
+    Cicm_Free(m_harmonics_vector_double);
+    Cicm_Free(m_angles_vector_float);
+    Cicm_Free(m_angles_vector_double);
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        Cicm_Free(m_harmonics_matrix_float[i]);
+        Cicm_Free(m_harmonics_matrix_double[i]);
+    }
+    Cicm_Free(m_harmonics_matrix_float);
+    Cicm_Free(m_harmonics_matrix_double);
 }
 
 

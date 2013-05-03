@@ -342,7 +342,8 @@
 									"numinlets" : 15,
 									"numoutlets" : 0,
 									"order" : 7,
-									"patching_rect" : [ 340.9375, 367.5, 225.0, 225.0 ]
+									"patching_rect" : [ 340.9375, 367.5, 225.0, 225.0 ],
+									"shadow" : 0
 								}
 
 							}
@@ -356,7 +357,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 0,
-									"patching_rect" : [ 30.0, 479.0, 208.0, 32.0 ],
+									"patching_rect" : [ 30.0, 479.0, 221.5, 32.0 ],
 									"text" : "hoa.plug~ 7 hoa.send~ post @name freeverb"
 								}
 
@@ -559,7 +560,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.625, 68.0, 483.0, 47.0 ],
+									"patching_rect" : [ 7.625, 68.0, 484.0, 47.0 ],
 									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -685,16 +686,11 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-4",
 									"maxclass" : "newobj",
-									"numinlets" : 15,
+									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 30.0, 429.0, 208.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"dry" : 0.25,
-										"wet" : 0.75
-									}
-,
-									"text" : "hoa.freeverb~ 7 @size 0.5 @damp 0.5"
+									"patching_rect" : [ 30.0, 429.0, 221.5, 19.0 ],
+									"text" : "hoa.diffuser~ 7 @size 0.5 @damp 0.5"
 								}
 
 							}
@@ -706,7 +702,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 30.0, 588.5, 208.0, 19.0 ],
+									"patching_rect" : [ 30.0, 588.5, 221.5, 19.0 ],
 									"text" : "hoa.dac~ 1:16"
 								}
 
@@ -720,7 +716,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 30.0, 552.0, 208.0, 19.0 ],
+									"patching_rect" : [ 30.0, 552.0, 221.5, 19.0 ],
 									"text" : "hoa.decoder~ 7 16"
 								}
 
@@ -1135,7 +1131,7 @@
 									"destination" : [ "obj-41", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 264.5, 585.0, 228.5, 585.0 ],
+									"midpoints" : [ 264.5, 585.0, 242.0, 585.0 ],
 									"source" : [ "obj-19", 0 ]
 								}
 
@@ -1304,7 +1300,7 @@
 									"destination" : [ "obj-41", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 294.5, 585.0, 228.5, 585.0 ],
+									"midpoints" : [ 294.5, 585.0, 242.0, 585.0 ],
 									"source" : [ "obj-22", 0 ]
 								}
 
@@ -2091,35 +2087,35 @@
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.send~.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.times~.maxpat",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../operators",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -2136,7 +2132,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.freeverb~.mxo",
+				"name" : "hoa.diffuser~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

@@ -1,110 +1,164 @@
 /*
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris Universite Paris 8
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
+#ifndef DEF_AMBISONISCWIDER
+#define DEF_AMBISONISCWIDER
 
-#ifndef DEF_AMBISONICWIDER
-#define DEF_AMBISONICWIDER
+#include "../HoaAmbisonics/Ambisonics.h"
 
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
-#include <vector>
-#include <string>
-//#include <gsl/gsl_sf.h>
-#include "../cicmTools.h"
-
-class AmbisonicWider
+class AmbisonicsWider : public Ambisonics
 {
 private:
-	long	m_order;
-	long	m_number_of_harmonics;
-	long	m_number_of_inputs;
-	long	m_number_of_outputs;
-	long	m_vector_size;
-	long*	m_index_of_harmonics;
-
 	double	m_widen_value;
-	double	m_order_weight;
-	double*	m_minus_vector;
-	double*	m_dot_vector;
+    double	m_order_weight_double;
+    float	m_order_weight_float;
+    
+    float   m_weight_float;
+    double  m_weight_double;
+    
+	Cicm_Vector_Float	m_minus_vector_float;
+    Cicm_Vector_Double	m_minus_vector_double;
+    
+	Cicm_Vector_Float	m_dot_vector_float;
+	Cicm_Vector_Double	m_dot_vector_double;
 
+    Cicm_Vector_Double	m_harmonics_double;
+	Cicm_Vector_Float	m_harmonics_float;
+    
+    Cicm_Vector_Double	m_weight_vector_double;
+	Cicm_Vector_Float	m_weight_vector_float;
+    Cicm_Vector_Double	m_scale_double;
+	Cicm_Vector_Float	m_scale_float;
+    
 	void computeIndex();
 	void computeWidenVector();
 public:
-	AmbisonicWider(long anOrderlong, long aVectorSize = 0);
+	AmbisonicsWider(long anOrderlong, long aVectorSize = 0);
+    
+    void setWidenValueBoth(double aWidenValue);
 	void setWidenValue(double aWidenValue);
+    void setWidenValue(float aWidenValue);
 	void setVectorSize(long aVectorSize);
 
-	long getOrder();
-	long getNumberOfHarmonics();
-	long getNumberOfInputs();
-	long getNumberOfOutputs();
-	long getVectorSize();
-
-	~AmbisonicWider();
+	~AmbisonicsWider();
 	
 	/* Perform sample by sample */
-	template<typename Type> void process(Type* aInputs, Type* aOutputs)
-	{	
-		double weight = (1. - m_widen_value) * m_order_weight + 1.;
-		aOutputs[0] = aInputs[0] * weight;
-		for(int i = 1; i < m_number_of_harmonics; i++)
-			aOutputs[i] = aInputs[i] * weight 
-			* Tools::clip(((m_widen_value * m_order_weight) - m_minus_vector[i]) * m_dot_vector[i], 0., 1.);
+	inline void process(double* aInputs, double* aOutputs)
+	{
+        /* All Harmonics */
+        Cicm_Vector_Scalar_Double_Mul(aInputs, &m_weight_double, aOutputs, m_number_of_harmonics);
+        /* Harmonics Exept Zero */
+        Cicm_Vector_Vector_Double_Mul(m_harmonics_double, aOutputs+1, m_number_of_harmonics-1);
+	}
+    
+    inline void process(float* aInputs, float* aOutputs)
+	{
+		/* All Harmonics */
+        Cicm_Vector_Scalar_Float_Mul(aInputs, &m_weight_float, aOutputs, m_number_of_harmonics);
+        /* Harmonics Exept Zero */
+        Cicm_Vector_Vector_Float_Mul(m_harmonics_float, aOutputs+1, m_number_of_harmonics-1);
 	}
 	
-	template<typename Type> void process(Type* aInputs, Type* aOutputs, Type aWidenValues)
+	inline void process(double* aInputs, double* aOutputs, double aWidenValues)
 	{			
 		setWidenValue(aWidenValues);
-		double weight = (1. - m_widen_value) * m_order_weight + 1.;
-		aOutputs[0] = aInputs[0] * weight;
-		for(int i = 1; i < m_number_of_harmonics; i++)
-			aOutputs[i] = aInputs[i] * weight * Tools::clip(((m_widen_value * m_order_weight) - m_minus_vector[i]) * m_dot_vector[i], 0., 1.);
+		process(aInputs, aOutputs);
+	}
+    
+    inline void process(float* aInputs, float* aOutputs, float aWidenValues)
+	{
+		setWidenValue(aWidenValues);
+		process(aInputs, aOutputs);
 	}
 
+    /************************/
 	/* Perform block sample */
-	template<typename Type> void process(Type** aInputs, Type** aOutputs)
-	{	
-		double weight;
-		for(int j = 0; j < m_vector_size; j++)
-		{
-			weight = (1. - m_widen_value) * m_order_weight + 1.;
-			aOutputs[0][j] = aInputs[0][j] * weight;
-			for(int i = 1; i < m_number_of_harmonics; i++)
-			{
-				aOutputs[i][j] = aInputs[i][j] * weight * Tools::clip(((m_widen_value * m_order_weight) - m_minus_vector[i]) * m_dot_vector[i], 0., 1.);
-			}
-		}
+    /************************/
+	inline void process(double** aInputs, double** aOutputs)
+	{
+        Cicm_Vector_Scalar_Double_Mul(aInputs[0], &m_weight_double, aOutputs[0], m_vector_size);
+        for(int i = 1; i < m_number_of_harmonics; i++)
+        {
+            Cicm_Vector_Scalar_Double_Mul(aInputs[i], &m_weight_double, aOutputs[i], m_vector_size);
+            Cicm_Vector_Scalar_Double_Mul(aOutputs[i], &m_harmonics_double[i], aOutputs[i], m_vector_size);
+        }
+	}
+    
+    inline void process(float** aInputs, float** aOutputs)
+	{
+        Cicm_Vector_Scalar_Float_Mul(aInputs[0], &m_weight_float, aOutputs[0], m_vector_size);
+        for(int i = 1; i < m_number_of_harmonics; i++)
+        {
+            Cicm_Vector_Scalar_Float_Mul(aInputs[i], &m_weight_float, aOutputs[i], m_vector_size);
+            Cicm_Vector_Scalar_Float_Mul(aOutputs[i], &m_harmonics_float[i], aOutputs[i], m_vector_size);
+        }
 	}
 
-	template<typename Type> void process(Type** aInputs, Type** aOutputs, Type* aWidenValues)
-	{	
-		double weight;
-		for(int j = 0; j < m_vector_size; j++)
-		{
-			setWidenValue(aWidenValues[j]);
-			weight = (1. - m_widen_value) * m_order_weight + 1.;
-			aOutputs[0][j] = aInputs[0][j] * weight;
-			for(int i = 1; i < m_number_of_harmonics; i++)
-			{
-				aOutputs[i][j] = aInputs[i][j] * weight * Tools::clip(((m_widen_value * m_order_weight) - m_minus_vector[i]) * m_dot_vector[i], 0., 1.);
-			}
-		}
+	inline void process(double** aInputs, double** aOutputs, double* aWidenValues)
+	{
+        double  zero = 0.;
+        double  one  = 1.;
+        Cicm_Vector_Double_Clip(aWidenValues, &zero, &one, aWidenValues, m_vector_size);
+        for(int i = 0; i < m_vector_size; i++)
+             m_weight_vector_double[i] = (1. - aWidenValues[i]) * m_order_weight_double + 1.;
+        Cicm_Vector_Scalar_Double_Mul(aWidenValues, &m_order_weight_double, m_scale_double, m_vector_size);
+        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            Cicm_Matrix_Vector_Double_Mul(aInputs[i], m_weight_vector_double, aOutputs[i], m_vector_size);
+        }
+        
+        for(int i = 1; i < m_number_of_harmonics; i++)
+        {
+            Cicm_Vector_Scalar_Double_Sum(m_scale_double, &m_minus_vector_double[i], m_weight_vector_double, m_vector_size);
+            Cicm_Vector_Scalar_Double_Mul(m_weight_vector_double, &m_dot_vector_double[i], m_weight_vector_double, m_vector_size);
+            Cicm_Vector_Double_Clip(m_weight_vector_double, &zero, &one, m_weight_vector_double, m_vector_size);
+            Cicm_Matrix_Vector_Double_Mul(aOutputs[i], m_weight_vector_double, aOutputs[i], m_vector_size);
+        }
+        
+        /* Save last widen value */
+        m_widen_value = aWidenValues[m_vector_size - 1];
+	}
+    
+    inline void process(float** aInputs, float** aOutputs, float* aWidenValues)
+	{
+        float  zero = 0.f;
+        float  one  = 1.f;
+        Cicm_Vector_Float_Clip(aWidenValues, &zero, &one, aWidenValues, m_vector_size);
+        for(int i = 0; i < m_vector_size; i++)
+            m_weight_vector_float[i] = (1. - aWidenValues[i]) * m_order_weight_double + 1.;
+        Cicm_Vector_Scalar_Float_Mul(aWidenValues, &m_order_weight_float, m_scale_float, m_vector_size);
+        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            Cicm_Matrix_Vector_Float_Mul(aInputs[i], m_weight_vector_float, aOutputs[i], m_vector_size);
+        }
+        
+        for(int i = 1; i < m_number_of_harmonics; i++)
+        {
+            Cicm_Vector_Scalar_Float_Sum(m_scale_float, &m_minus_vector_float[i], m_weight_vector_float, m_vector_size);
+            Cicm_Vector_Scalar_Float_Mul(m_weight_vector_float, &m_dot_vector_float[i], m_weight_vector_float, m_vector_size);
+            Cicm_Vector_Float_Clip(m_weight_vector_float, &zero, &one, m_weight_vector_float, m_vector_size);
+            Cicm_Matrix_Vector_Float_Mul(aOutputs[i], m_weight_vector_float, aOutputs[i], m_vector_size);
+        }
+        
+        /* Save last widen value */
+        m_widen_value = aWidenValues[m_vector_size - 1];
 	}
 };
 

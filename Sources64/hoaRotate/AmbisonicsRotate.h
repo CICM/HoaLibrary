@@ -60,12 +60,12 @@ public:
 	}
 	
 	/* Perform sample block */
-	template<typename Type> void process(Type** anInput, Type **anOutput, Type *aTheta)
+	void process(double** anInput, double** anOutput, double *aTheta)
 	{
+        Cicm_Vector_Double_Copy(anInput, anOutput, m_vector_size);
 		for(int j = 0; j < m_vector_size; j++)
 		{
 			setAzimuth(aTheta[j]);
-			anOutput[0][j] = anInput[0][j];
 			for (int i = 1; i <= m_order; i++)
 			{
 				anOutput[2*i][j]	= m_harmonicCos[i-1] * anInput[2*i][j] - m_harmonicSin[i-1] * anInput[2*i-1][j];
@@ -74,12 +74,27 @@ public:
 		}
 	}
 	
-	template<typename Type> void process(Type** anInput, Type **anOutput)
+	void process(double** anInput, double **anOutput)
 	{
-		for(int j = 0; j < m_vector_size; j++)
+        Cicm_Vector_Double_Copy(anInput, anOutput, m_vector_size);
+            
+		for (int i = 1; i <= m_order; i++)
 		{
-			anOutput[0][j] = anInput[0][j];
-			for (int i = 1; i <= m_order; i++)
+			for(int j = 0; j < m_vector_size; j++)
+			{
+				anOutput[2*i][j]	= m_harmonicCos[i-1] * anInput[2*i][j] - m_harmonicSin[i-1] * anInput[2*i-1][j];
+				anOutput[2*i-1][j]	= m_harmonicSin[i-1] * anInput[2*i][j] + m_harmonicCos[i-1] * anInput[2*i-1][j];
+			}
+		}
+	}
+    
+    void process(float** anInput, float **anOutput)
+	{
+        Cicm_Vector_Float_Copy(anInput, anOutput, m_vector_size);
+        
+		for (int i = 1; i <= m_order; i++)
+		{
+			for(int j = 0; j < m_vector_size; j++)
 			{
 				anOutput[2*i][j]	= m_harmonicCos[i-1] * anInput[2*i][j] - m_harmonicSin[i-1] * anInput[2*i-1][j];
 				anOutput[2*i-1][j]	= m_harmonicSin[i-1] * anInput[2*i][j] + m_harmonicCos[i-1] * anInput[2*i-1][j];

@@ -36,8 +36,6 @@ using namespace std;
 #define CICM_PI4 (0.785398163397448309615660845819875721)
 #define NUMBEROFCIRCLEPOINTS 36000
 
-//#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
-
 class Tools
 {
 public:
@@ -194,17 +192,37 @@ public:
         return degree / (180 / CICM_PI);
     }
     
-    static double phasewrap(double val) {
-        const double twopi = CICM_PI*2.;
-        const double oneovertwopi = 1./twopi;
-        if (val>= twopi || val <= twopi) {
-            double d = val * oneovertwopi;	//multiply faster
-            d = d - (long)d;
-            val = d * twopi;
-        }
-        if (val > CICM_PI) val -= twopi;
-        if (val < -CICM_PI) val += twopi;
-        return val;
+    static double radianWrap(double anAngle)
+    {
+        while(anAngle < 0.)
+            anAngle += CICM_2PI;
+        while(anAngle > CICM_2PI)
+            anAngle -= CICM_2PI;
+        
+        return anAngle;
+    }
+    
+    static double radianDistance(double anAngle1, double anAngle2)
+    {
+        double distance;
+        anAngle1 = radianWrap(anAngle1);
+        anAngle2 = radianWrap(anAngle2);
+        if(anAngle1 > anAngle2)
+            distance = anAngle1 - anAngle2;
+        else
+            distance = anAngle2 - anAngle1;
+        
+        return distance;
+    }
+    
+    static double degreeWrap(double anAngle)
+    {
+        while(anAngle < 0.)
+            anAngle += 360.;
+        while(anAngle > 360.)
+            anAngle -= 360.;
+        
+        return anAngle;
     }
     
     static double wrap(double _val, double _lo, double _hi){

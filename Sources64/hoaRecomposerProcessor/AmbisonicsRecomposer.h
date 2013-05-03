@@ -1,117 +1,212 @@
 /*
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#ifndef DEF_AMBISONICRECOMPOSER
-#define DEF_AMBISONICRECOMPOSER
+#ifndef DEF_AMBISONICSRECOMPOSER
+#define DEF_AMBISONICSRECOMPOSER
 
-#define M_2PI 2*M_PI
-#define NUMBEROFCIRCLEPOINTS 36000
-#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
+#include "../HoaAmbisonics/Ambisonics.h"
+#include "../hoaEncoder/AmbisonicsEncoder.h"
+#include "../HoaWider/AmbisonicsWider.h"
 
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
-#include "gslMatrix.hpp"
-#include <gsl/gsl_sf.h>
-#include <vector>
-#include <string>
-
-
-class ambisonicRecomposer
+class AmbisonicsRecomposer : public Ambisonics
 {
 	
 private:
-	int		m_order;
-	int		m_number_of_harmonics;
-	int		m_number_of_inputs;
-	int		m_number_of_outputs;
-	int		m_sampling_rate;
-	int		m_vector_size;
-	
-	double	m_fishEyeFactor;
-
-	double		*m_speakers_angles;
-	int			*m_index_of_harmonics;
-	
-	gsl_matrix*		m_recompMicCoefs;
-	gsl_matrix**	m_recompMicCoefsSet;
-	gsl_vector*		m_output_vector;
-	gsl_vector*		m_input_vector;
+    long                        m_number_of_microphones;
+	Cicm_Vector_Float           m_harmonics_vector_float;
+    Cicm_Vector_Double          m_harmonics_vector_double;
+    
+    Cicm_Vector_Float           m_angles_vector_float;
+    Cicm_Vector_Double          m_angles_vector_double;
+    
+    Cicm_Vector_Float*          m_harmonics_matrix_float;
+    Cicm_Vector_Double*         m_harmonics_matrix_double;
+    
+	vector<AmbisonicsEncoder*>  m_encoders;
+    vector<CicmLine*>           m_lines;
+    vector<AmbisonicsWider*>    m_widers;
+    vector<CicmLine*>           m_wider_lines;
+    
+    long                        m_fixed;
+    
 public:
-	ambisonicRecomposer(int anOrder, int aNumberOfChannels = 0, int aVectorSize = 0);
-	int	getParameters(std::string aParameter) const;
-	void computeIndex();
-	void computeAngles();
-	void setVectorSize(int aVectorSize);
-	void setFishEyeFactor(double aFishEyeFactor);
-	void computeMicMatrix(gsl_matrix* resMatrix, double aFishFactor);
-	void computeMicMatrixSet();
-	
-	~ambisonicRecomposer();
+	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aVectorSize = 0, long fixedOrNot = 0);
+    
+    void setVectorSize(long aVectorSize);
+    void setRamp(long aNumberOfSample);
+    void setFixed(long fixedOrNot);
+	void setMicrophoneAngle(long anIndex, double anAngle);
+    void setMicrophoneWide(long anIndex, double anAngle);
+    
+    double getMicrophoneAngle(long anIndex);
+    double getMicrophoneWide(long anIndex);
+    long getFixed();
+
+	~AmbisonicsRecomposer();
 	
 	/* Perform sample by sample */
-	template<typename Type> void process(Type* aInputs, Type* aOutputs, Type aFishEyeFactor)
+	inline void process(double* aInputs, double* aOutputs)
 	{
-		setFishEyeFactor(aFishEyeFactor);
-		process(aInputs, aOutputs);
+        if(m_fixed)
+        {
+            processFixe(aInputs, aOutputs);
+            return;
+        }
+        double angle    = m_lines[0]->process();
+        double wide     = m_wider_lines[0]->process();
+        m_encoders[0]->process(aInputs[0], aOutputs, angle);
+        m_widers[0]->process(aOutputs, aOutputs, wide);
+		for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            angle = m_lines[i]->process();
+            wide  = m_wider_lines[i]->process();
+            m_encoders[i]->process(aInputs[i], m_harmonics_vector_double, angle);
+            m_widers[i]->process(m_harmonics_vector_double, m_harmonics_vector_double, wide);
+            Cicm_Vector_Double_Add(m_harmonics_vector_double, aOutputs, m_number_of_harmonics);
+        }
 	}
-	
-	template<typename Type> void process(Type* aInputs, Type* aOutputs)
+    
+    inline void process(float* aInputs, float* aOutputs)
 	{
-		for(int j = 0; j < m_number_of_inputs; j++)
-			gsl_vector_set(m_input_vector, j, aInputs[j]);
-		
-		gsl_blas_dgemv(CblasTrans,1.0, m_recompMicCoefsSet[(int)round(m_fishEyeFactor * (NUMBEROFCIRCLEPOINTS-1))], m_input_vector, 0.0, m_output_vector);
-		
-		for(int j = 0; j < m_number_of_outputs; j++)
-			aOutputs[j] = gsl_vector_get(m_output_vector, j);
+        if(m_fixed)
+        {
+            processFixe(aInputs, aOutputs);
+            return;
+        }
+        float angle = m_lines[0]->process();
+        float wide  = m_wider_lines[0]->process();
+        m_encoders[0]->process(aInputs[0], aOutputs, angle);
+        m_widers[0]->process(aOutputs, aOutputs, wide);
+		for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            angle = m_lines[i]->process();
+            wide  = m_wider_lines[i]->process();
+            m_encoders[i]->process(aInputs[i], m_harmonics_vector_float, angle);
+            m_widers[i]->process(m_harmonics_vector_float, m_harmonics_vector_float, wide);
+            Cicm_Vector_Float_Add(m_harmonics_vector_float, aOutputs, m_number_of_harmonics);
+        }
 	}
 	
 	/* Perform sample block */
-	template<typename Type> void process(Type** aInputs, Type** aOutputs, Type* aFishEyeFactor)
+	inline void process(double** aInputs, double** aOutputs)
 	{
-		for(int i = 0; i < m_vector_size; i++)
-		{
-			setFishEyeFactor(aFishEyeFactor[i]);
-
-			for(int j = 0; j < m_number_of_inputs; j++)
-				gsl_vector_set(m_input_vector, j, aInputs[j][i]);
-			
-			gsl_blas_dgemv(CblasTrans,1.0, m_recompMicCoefsSet[(int)round((m_fishEyeFactor * (NUMBEROFCIRCLEPOINTS-1)))], m_input_vector, 0.0, m_output_vector);
-			
-			for(int j = 0; j < m_number_of_outputs; j++)
-				aOutputs[j][i] = gsl_vector_get(m_output_vector, j);
-		}
+        if(m_fixed)
+        {
+            processFixe(aInputs, aOutputs);
+            return;
+        }
+        m_lines[0]->process(m_angles_vector_double);
+        m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_double);
+        m_wider_lines[0]->process(m_angles_vector_double);
+        m_widers[0]->process(aOutputs, aOutputs, m_angles_vector_double);
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            m_lines[i]->process(m_angles_vector_double);
+            m_encoders[i]->process(aInputs[i], m_harmonics_matrix_double, m_angles_vector_double);
+            m_wider_lines[i]->process(m_angles_vector_double);
+            m_widers[i]->process(m_harmonics_matrix_double, m_harmonics_matrix_double, m_angles_vector_double);
+            for(int k = 0; k < m_number_of_harmonics; k++)
+            {
+                Cicm_Vector_Double_Add(m_harmonics_matrix_double[k], aOutputs[k], m_vector_size);
+            }
+        }
 	}
-	
-	template<typename Type> void process(Type** aInputs, Type** aOutputs)
+    
+    inline void process(float** aInputs, float** aOutputs)
 	{
-		for(int i = 0; i < m_vector_size; i++)
-		{
-			for(int j = 0; j < m_number_of_inputs; j++)
-				gsl_vector_set(m_input_vector, j, aInputs[j][i]);
-		
-			gsl_blas_dgemv(CblasTrans,1.0, m_recompMicCoefsSet[(int)round(m_fishEyeFactor * (NUMBEROFCIRCLEPOINTS-1))], m_input_vector, 0.0, m_output_vector);
-		
-			for(int j = 0; j < m_number_of_outputs; j++)
-				aOutputs[j][i] = gsl_vector_get(m_output_vector, j);
-		}
+        if(m_fixed)
+        {
+            processFixe(aInputs, aOutputs);
+            return;
+        }
+        m_lines[0]->process(m_angles_vector_float);
+        m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_float);
+        m_wider_lines[0]->process(m_angles_vector_float);
+        m_widers[0]->process(aOutputs, aOutputs, m_angles_vector_float);
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            m_lines[i]->process(m_angles_vector_float);
+            m_encoders[i]->process(aInputs[i], m_harmonics_matrix_float, m_angles_vector_float);
+            m_wider_lines[i]->process(m_angles_vector_double);
+            m_widers[i]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);
+            for(int k = 0; k < m_number_of_harmonics; k++)
+            {
+                Cicm_Vector_Float_Add(m_harmonics_matrix_float[k], aOutputs[k], m_vector_size);
+            }
+        }
+	}
+    
+    /* Perform sample by sample - angle and wide fixed */
+    inline void processFixe(double* aInputs, double* aOutputs)
+	{
+        m_encoders[0]->process(aInputs[0], aOutputs);
+        m_widers[0]->process(aOutputs, aOutputs);
+		for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            m_encoders[i]->process(aInputs[i], m_harmonics_vector_double);
+            m_widers[i]->process(m_harmonics_vector_double, m_harmonics_vector_double);
+            Cicm_Vector_Double_Add(m_harmonics_vector_double, aOutputs, m_number_of_harmonics);
+        }
+	}
+    
+    inline void processFixe(float* aInputs, float* aOutputs)
+	{
+        m_encoders[0]->process(aInputs[0], aOutputs);
+        m_widers[0]->process(aOutputs, aOutputs);
+		for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            m_encoders[i]->process(aInputs[i], m_harmonics_vector_float);
+            m_widers[i]->process(m_harmonics_vector_float, m_harmonics_vector_float);
+            Cicm_Vector_Float_Add(m_harmonics_vector_float, aOutputs, m_number_of_harmonics);
+        }
+	}
+    
+    /* Perform sample block - angle and wide fixed */
+	inline void processFixe(double** aInputs, double** aOutputs)
+	{
+        m_encoders[0]->process(aInputs[0], aOutputs);
+        m_widers[0]->process(aOutputs, aOutputs);
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            m_encoders[i]->process(aInputs[i], m_harmonics_matrix_double);
+            m_widers[0]->process(m_harmonics_matrix_double, m_harmonics_matrix_double);
+            for(int k = 0; k < m_number_of_harmonics; k++)
+            {
+                Cicm_Vector_Double_Add(m_harmonics_matrix_double[k], aOutputs[k], m_vector_size);
+            }
+        }
+	}
+    
+    inline void processFixe(float** aInputs, float** aOutputs)
+	{
+        m_encoders[0]->process(aInputs[0], aOutputs);
+        m_widers[0]->process(aOutputs, aOutputs);
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            m_encoders[i]->processAdd(aInputs[i], m_harmonics_matrix_float);
+            m_widers[0]->process(m_harmonics_matrix_float, m_harmonics_matrix_float);
+            for(int k = 0; k < m_number_of_harmonics; k++)
+            {
+                Cicm_Vector_Float_Add(m_harmonics_matrix_float[k], aOutputs[k], m_vector_size);
+            }
+
+        }
 	}
 };
 

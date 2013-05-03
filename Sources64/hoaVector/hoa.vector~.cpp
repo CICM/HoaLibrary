@@ -1,23 +1,22 @@
 /*
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris Universite Paris 8
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#include "AmbisonicVector.h"
+#include "AmbisonicsVector.h"
 
 extern "C"
 {
@@ -33,7 +32,7 @@ extern "C"
 typedef struct _HoaVectore
 {
 	t_pxobject					f_ob;
-	Ambisonicvector				*f_ambiVector;
+	Ambisonicsvector				*f_ambiVector;
 
 	long						f_inputNumber;
 	long						f_outputNumber;
@@ -93,7 +92,7 @@ void *HoaVector_new(t_symbol *s, long argc, t_atom *argv)
 			anNumberOfMicrophones = atom_getlong(argv);
 		if(argc > 1 && atom_gettype(argv+1) == A_SYM)
             mode = atom_getsym(argv+1);
-		x->f_ambiVector = new Ambisonicvector(anNumberOfMicrophones, mode->s_name, sys_getblksize());
+		x->f_ambiVector = new Ambisonicsvector(anNumberOfMicrophones, mode->s_name, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiVector->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiVector->getNumberOfOutputs(); i++) 
