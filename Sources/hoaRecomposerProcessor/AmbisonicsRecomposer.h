@@ -20,18 +20,8 @@
 #ifndef DEF_AMBISONICRECOMPOSER
 #define DEF_AMBISONICRECOMPOSER
 
-#define M_2PI 2*M_PI
+
 #define NUMBEROFCIRCLEPOINTS 36000
-#define round(x) ((fabs(ceil(x) - (x)) < fabs(floor(x) - (x))) ? ceil(x) : floor(x))
-
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
-#include "gslMatrix.hpp"
-#include <gsl/gsl_sf.h>
-#include <vector>
-#include <string>
-
 
 class ambisonicRecomposer
 {

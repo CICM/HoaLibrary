@@ -409,13 +409,11 @@ void hoaGain_perform64(t_hoaGain *x, t_object *dsp64, double **ins, long numins,
     
     x->f_amp->process(line);
     
-    for(j = 0; j < sampleframes; j++)
-	{
+    
         for(i = 0; i < x->f_numberOfChannels; i++)
 		{
-            outs[i][j] = ins[i][j] * line[j];
+            Cicm_Matrix_Vector_Mul(ins[i], line, outs[i], sampleframes);
 		}
-	}
 }
 
 void hoaGain_set_gain(t_hoaGain *x)

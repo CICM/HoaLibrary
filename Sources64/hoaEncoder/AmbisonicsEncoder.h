@@ -80,7 +80,8 @@ public:
 	{
         Cicm_Vector_Double_Copy(anInput, anOutputs[0], m_vector_size);
         double j = 1;
-        for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
+        int size = m_vector_size;
+        for (int i = 2; i < m_number_of_harmonics; i += 2, j++)
         {
             Cicm_Vector_Scalar_Double_Mul(aTheta, &j, m_angles_double, m_vector_size);
             Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, &size);
@@ -103,7 +104,8 @@ public:
 	{
         Cicm_Vector_Float_Copy(anInput, anOutputs[0], m_vector_size);
         float j = 1;
-        for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
+        int size = m_vector_size;
+        for (int i = 2; i < m_number_of_harmonics; i += 2, j++)
         {
             Cicm_Vector_Scalar_Float_Mul(aTheta, &j, m_angles_float, m_vector_size);
             Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, &size);
@@ -195,7 +197,52 @@ public:
         }
 	}
 	
-	
+    /* Perform add sample block */
+	inline void processAdd(double* anInput, double** anOutputs, double* aTheta)
+	{
+        Cicm_Vector_Double_Add(anInput, anOutputs[0], m_vector_size);
+        double j = 1;
+        for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
+        {
+            Cicm_Vector_Scalar_Double_Mul(aTheta, &j, m_angles_double, m_vector_size);
+            Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, &size);
+            vDSP_vmaD(anInput, 1, m_sin_double, 1, anOutputs[i-1], 1, anOutputs[i-1], 1, size);
+            vDSP_vmaD(anInput, 1, m_cos_double, 1, anOutputs[i], 1, anOutputs[i], 1, size);
+        }
+	}
+    
+    inline void processAdd(double* anInput, double** anOutputs)
+	{
+		Cicm_Vector_Double_Add(anInput, anOutputs[0], m_vector_size);
+        for (int i = 2; i < m_number_of_harmonics; i += 2)
+        {
+            vDSP_vsmaD(anInput, 1, &m_ambisonics_coeffs_double[i-1], anOutputs[i-1], 1, anOutputs[i-1], 1, m_vector_size);
+            vDSP_vsmaD(anInput, 1, &m_ambisonics_coeffs_double[i], anOutputs[i], 1, anOutputs[i], 1, m_vector_size);
+        }
+	}
+    
+    inline void processAdd(float* anInput, float** anOutputs, float* aTheta)
+	{
+        Cicm_Vector_Float_Add(anInput, anOutputs[0], m_vector_size);
+        float j = 1;
+        for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
+        {
+            Cicm_Vector_Scalar_Float_Mul(aTheta, &j, m_angles_float, m_vector_size);
+            Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, &size);
+            vDSP_vma(anInput, 1, m_sin_float, 1, anOutputs[i-1], 1, anOutputs[i-1], 1, size);
+            vDSP_vma(anInput, 1, m_cos_float, 1, anOutputs[i], 1, anOutputs[i], 1, size);
+        }
+	}
+    
+    inline void processAdd(float* anInput, float** anOutputs)
+	{
+		Cicm_Vector_Float_Add(anInput, anOutputs[0], m_vector_size);
+        for (int i = 2; i < m_number_of_harmonics; i += 2)
+        {
+            vDSP_vsma(anInput, 1, &m_ambisonics_coeffs_float[i-1], anOutputs[i-1], 1, anOutputs[i-1], 1, m_vector_size);
+            vDSP_vsma(anInput, 1, &m_ambisonics_coeffs_float[i], anOutputs[i], 1, anOutputs[i], 1, m_vector_size);
+        }
+	}	
 };
 
 #endif

@@ -17,7 +17,7 @@
  *
  */
 
-#include "ambisonicRecomposer.hpp"
+#include "AmbisonicsRecomposer.h"
 
 ambisonicRecomposer::ambisonicRecomposer(int anOrder, int aNumberOfChannels, int aVectorSize)
 {

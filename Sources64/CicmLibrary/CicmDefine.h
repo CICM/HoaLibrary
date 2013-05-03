@@ -106,6 +106,13 @@
 #define Cicm_Vector_Float_Sum(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
 #define Cicm_Vector_Double_Sum(source1, source2, dest, length) vDSP_vaddD(source1, 1, source2, 1, dest, 1, length)
 
+#define Cicm_Vector_Scalar_Float_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsadd(vectorSource, 1, scalar, vectorDest, 1, size);
+#define Cicm_Vector_Scalar_Double_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsaddD(vectorSource, 1, scalar, vectorDest, 1, size);
+
+/**************** CLIP  ***************/
+#define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
+#define Cicm_Vector_Double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, low, high, vectorDest, 1, size);
+
 /**************** CLEAR ***************/
 #define Cicm_Vector_Float_Clear(source, length) vDSP_vclr(source, 1, length)
 #define Cicm_Vector_Double_Clear(source, length) vDSP_vclrD(source, 1, length)

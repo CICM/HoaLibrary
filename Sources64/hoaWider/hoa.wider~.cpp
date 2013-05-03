@@ -1,22 +1,22 @@
 /*
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris Universite Paris 8
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#include "AmbisonicWider.h"
+#include "AmbisonicsWider.h"
 
 extern "C"
 {
@@ -28,7 +28,7 @@ extern "C"
 typedef struct _HoaWider 
 {
 	t_pxobject				f_ob;			
-	AmbisonicWider*			f_ambisonicWider;
+	AmbisonicsWider*		f_AmbisonicsWider;
 
 } t_HoaWider;
 
@@ -70,16 +70,16 @@ void *HoaWider_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaWider *x = NULL;
 	int order = 4;
-	
-	if (x = (t_HoaWider *)object_alloc((t_class*)HoaWider_class)) 
+	x = (t_HoaWider *)object_alloc((t_class*)HoaWider_class);
+	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
 			
-		x->f_ambisonicWider	= new AmbisonicWider(order,  sys_getblksize());
+		x->f_AmbisonicsWider	= new AmbisonicsWider(order,  sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambisonicWider->getNumberOfInputs());
-		for (int i = 0; i < x->f_ambisonicWider->getNumberOfOutputs(); i++) 
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicsWider->getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicsWider->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -89,18 +89,18 @@ void *HoaWider_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaWider_float(t_HoaWider *x, double f)
 {
-	x->f_ambisonicWider->setWidenValue(f);
+	x->f_AmbisonicsWider->setWidenValueBoth(f);
 }
 
 void HoaWider_int(t_HoaWider *x, long n)
 {
-	x->f_ambisonicWider->setWidenValue(n);
+	x->f_AmbisonicsWider->setWidenValueBoth(n);
 }
 
 void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonicWider->setVectorSize(maxvectorsize);
-	if(count[x->f_ambisonicWider->getNumberOfInputs() - 1])
+	x->f_AmbisonicsWider->setVectorSize(maxvectorsize);
+	if(count[x->f_AmbisonicsWider->getNumberOfInputs() - 1])
 		object_method(dsp64, gensym("dsp_add64"), x, HoaWider_perform64, 0, NULL);
 	else
 		object_method(dsp64, gensym("dsp_add64"), x, HoaWider_perform64_offset, 0, NULL);
@@ -108,12 +108,12 @@ void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double sampler
 
 void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambisonicWider->process(ins, outs, ins[numins - 1]);
+	x->f_AmbisonicsWider->process(ins, outs, ins[numins - 1]);
 }
 
 void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambisonicWider->process(ins, outs);
+	x->f_AmbisonicsWider->process(ins, outs);
 }
 
 void HoaWider_dsp(t_HoaWider *x, t_signal **sp, short *count)
@@ -122,8 +122,8 @@ void HoaWider_dsp(t_HoaWider *x, t_signal **sp, short *count)
 	int pointer_count;
 	t_int **sigvec;
 
-	x->f_ambisonicWider->setVectorSize(sp[0]->s_n);
-	pointer_count = x->f_ambisonicWider->getNumberOfInputs() + x->f_ambisonicWider->getNumberOfOutputs() + 2;
+	x->f_AmbisonicsWider->setVectorSize(sp[0]->s_n);
+	pointer_count = x->f_AmbisonicsWider->getNumberOfInputs() + x->f_AmbisonicsWider->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
@@ -142,12 +142,12 @@ void HoaWider_dsp(t_HoaWider *x, t_signal **sp, short *count)
 t_int *HoaWider_perform(t_int *w)
 {
 	t_HoaWider *x		= (t_HoaWider *)(w[1]);
-	long		numins	= x->f_ambisonicWider->getNumberOfInputs();
-	long		numouts	= x->f_ambisonicWider->getNumberOfOutputs();
+	long		numins	= x->f_AmbisonicsWider->getNumberOfInputs();
+	long		numouts	= x->f_AmbisonicsWider->getNumberOfOutputs();
 	t_float		**ins	= (t_float **)w+3;
 	t_float		**outs	= (t_float **)w+3+numins;
 	
-	x->f_ambisonicWider->process(ins, outs, ins[numins - 1]);
+	x->f_AmbisonicsWider->process(ins, outs, ins[numins - 1]);
 	
 	return (w + numins + numouts + 3);
 }
@@ -161,7 +161,7 @@ void HoaWider_assist(t_HoaWider *x, void *b, long m, long a, char *s)
 		if (a % 2 == 1) 
 			harmonicIndex = - harmonicIndex;
 	}
-	if( a == x->f_ambisonicWider->getNumberOfInputs() - 1)
+	if( a == x->f_AmbisonicsWider->getNumberOfInputs() - 1)
 		sprintf(s,"(Signal, float or int) Widen value");
 	else
 		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
@@ -170,6 +170,6 @@ void HoaWider_assist(t_HoaWider *x, void *b, long m, long a, char *s)
 void HoaWider_free(t_HoaWider *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_ambisonicWider;
+	delete x->f_AmbisonicsWider;
 }
 

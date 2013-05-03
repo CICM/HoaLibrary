@@ -1,50 +1,42 @@
 /*
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris Universite Paris 8
  *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
 
-#ifndef DEF_AMBISONICVECTOR
-#define DEF_AMBISONICVECTOR
+#ifndef DEF_AMBISONICSVECTOR
+#define DEF_AMBISONICSVECTOR
 
-#include "cicmTools.h"
+#include "../HoaAmbisonics/Ambisonics.h"
 
-class Ambisonicvector
+class Ambisonicsvector : public Ambisonics
 {	
 private:
 	long		m_number_of_loudspeakers;
-	long		m_number_of_inputs;
-	long		m_number_of_outputs;
-	long		m_vector_size;
     double*     m_abscissa_of_loudspeakers;
     double*     m_ordinate_of_loudspeakers;
     int         m_mode;
+    
 public:
-	Ambisonicvector(long aNumberOfLoudspeakers, std::string aMode = "polar", long aVectorSize = 0);
+	Ambisonicsvector(long aNumberOfLoudspeakers, std::string aMode = "polar", long aVectorSize = 0);
 	
 	long getNumberOfLoudspeakers();
-	long getNumberOfInputs();
-	long getNumberOfOutputs();
-	long getVectorSize();
     std::string getMode();
 
-    void setMode(std::string aMode);
-	void setVectorSize(long aVectorSize);
-    
-	~Ambisonicvector();
+    void setMode(std::string aMode);    
+	~Ambisonicsvector();
 	
 	/* Perform sample by sample */
 	void process(double* anInput, double *anOutput)

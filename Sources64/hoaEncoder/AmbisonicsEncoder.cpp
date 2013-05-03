@@ -31,7 +31,6 @@ AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, std::string aMode, long aVect
         m_mode = "basic";
 		m_number_of_inputs	= 2;
     }
-    
     Cicm_Vector_Float_Malloc(m_ambisonics_coeffs_float, m_number_of_harmonics); 
     Cicm_Vector_Double_Malloc(m_ambisonics_coeffs_double, m_number_of_harmonics);
 	Cicm_Vector_Float_Malloc(m_cos_float, m_vector_size);
