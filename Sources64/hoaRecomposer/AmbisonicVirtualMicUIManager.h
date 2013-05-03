@@ -26,24 +26,29 @@
 class AmbisonicVirtualMicUIManager
 {
 private:
-    int m_numberOfMics;
-    AmbisonicVirtualMicUI m_mic[MAX_MICROPHONES];
+    long m_numberOfMics;
+    AmbisonicVirtualMicUI m_mic[MAX_MICS];
     
 public:
-    AmbisonicVirtualMicUIManager();
+    AmbisonicVirtualMicUIManager(long _numberOfMics = 0);
     ~AmbisonicVirtualMicUIManager();
     
+    void resetAngles(const int _index);
+    void setNumberOfMics(long _numberOfMics);
     void setAnglesInRadian(double* _radians, long _len);
-    void setAnglesInDegree(double* _radians, long _len);
+    void setAnglesInDegree(double* _degrees, long _len);
     void setAngleInRadian(const int _index, double _radian);
     void setAngleInDegree(const int _index, double _degree);
     void setDistance(const int _index, double _distance);
-    void setSelected(const int _index, bool _selectedState);
+    void setSelected(const int _index, int _selectedState);
+    void selectMicsBetweenMics(int _micIndex1, int _micIndex2);
+    void rotateSelectedMicsWithRadian(double _newRadian, int _sourceBeingDragged);
     
-    inline bool isSelected(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICROPHONES-1)].isSelected();};
-    inline double getDistance(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICROPHONES-1)].getDistance();}
-    inline double getAngleInRadian(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICROPHONES-1)].getAngleInRadian();}
-    inline double getAngleInDegree(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICROPHONES-1)].getAngleInDegree();}
+    inline long getNumberOfMics() {return m_numberOfMics;}
+    inline bool isSelected(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].isSelected();};
+    inline double getDistance(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].getDistance();}
+    inline double getAngleInRadian(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].getAngleInRadian();}
+    inline double getAngleInDegree(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].getAngleInDegree();}
 };
 
 #endif /* defined(__hoa_recomposer__AmbisonicVirtualMicManager__) */

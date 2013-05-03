@@ -34,10 +34,11 @@ public:
     ~AmbisonicVirtualMicUI();
     
     void setAngleInRadian(double _radian);
-    inline void setAngleInDegree(double _degree) {m_angleInRadian = Tools::degToRad(_degree);}
+    inline void setAngleInDegree(double _degree) {setAngleInRadian(Tools::degToRad(_degree));}
     inline void setDistance(double _distance) {m_distance = Tools::clip_min(_distance, 0.);}
+    void setSelected(int _selectedState);
+    void rotateAngleInRadian(double _deltaRadian);
     
-    inline void setSelected(bool _selectedState) {m_isSelected = _selectedState;}
     inline bool isSelected() {return m_isSelected;}
     inline double getDistance() {return m_distance;}
     inline double getAngleInRadian() {return m_angleInRadian;}

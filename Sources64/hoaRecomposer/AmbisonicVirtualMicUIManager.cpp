@@ -19,69 +19,122 @@
 
 #include "AmbisonicVirtualMicUIManager.h"
 
-AmbisonicVirtualMicUIManager::AmbisonicVirtualMicUIManager()
+AmbisonicVirtualMicUIManager::AmbisonicVirtualMicUIManager(long _numberOfMics)
 {
-    ;
+    m_numberOfMics = _numberOfMics;
+    setAngleInDegree(-1, 0);
 }
 AmbisonicVirtualMicUIManager::~AmbisonicVirtualMicUIManager()
 {
     ;
 }
 
+void AmbisonicVirtualMicUIManager::setNumberOfMics(long _numberOfMicrophones)
+{
+    m_numberOfMics = Tools::clip(_numberOfMicrophones, long(0), long(MAX_MICS));
+}
+
+void AmbisonicVirtualMicUIManager::resetAngles(const int _index)
+{
+    double tempDegAngle = CICM_2PI / m_numberOfMics;
+    
+    if (_index == -1) // tous les angles
+    {
+        for (int i = 0; i < m_numberOfMics; i++)
+            m_mic[i].setAngleInRadian(tempDegAngle*i);
+    }
+    else if (Tools::isInside(long(_index), long(0), long(m_numberOfMics)))
+    {
+        m_mic[_index].setAngleInRadian(tempDegAngle * _index);
+    }
+}
+
 void AmbisonicVirtualMicUIManager::setAnglesInRadian(double* _radians, long _len)
 {
-    ;
+    for (int i=0; i < _len && i < m_numberOfMics; i++) {
+        m_mic[i].setAngleInRadian(_radians[i]);
+    }
 }
-void AmbisonicVirtualMicUIManager::setAnglesInDegree(double* _radians, long _len)
+void AmbisonicVirtualMicUIManager::setAnglesInDegree(double* _degrees, long _len)
 {
-    ;
+    for (int i=0; i < _len && i < m_numberOfMics; i++) {
+        m_mic[i].setAngleInDegree(_degrees[i]);
+    }
 }
 
 void AmbisonicVirtualMicUIManager::setAngleInRadian(const int _index, double _radian)
 {
     if (_index == -1)
     {
-        for (int i=0; i<MAX_MICROPHONES; i++)
+        for (int i=0; i<MAX_MICS; i++)
             m_mic[i].setAngleInRadian(_radian);
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICROPHONES)].setAngleInRadian(_radian);
+        m_mic[Tools::clip(_index, 0, MAX_MICS)].setAngleInRadian(_radian);
     }
 }
 void AmbisonicVirtualMicUIManager::setAngleInDegree(const int _index, double _degree)
 {
     if (_index == -1)
     {
-        for (int i=0; i<MAX_MICROPHONES; i++)
+        for (int i=0; i<MAX_MICS; i++)
             m_mic[i].setAngleInDegree(_degree);
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICROPHONES)].setAngleInDegree(_degree);
+        m_mic[Tools::clip(_index, 0, MAX_MICS)].setAngleInDegree(_degree);
     }
 }
 void AmbisonicVirtualMicUIManager::setDistance(const int _index, double _distance)
 {
     if (_index == -1)
     {
-        for (int i=0; i<MAX_MICROPHONES; i++)
+        for (int i=0; i<MAX_MICS; i++)
             m_mic[i].setDistance(_distance);
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICROPHONES)].setDistance(_distance);
+        m_mic[Tools::clip(_index, 0, MAX_MICS)].setDistance(_distance);
     }
 }
-void AmbisonicVirtualMicUIManager::setSelected(const int _index, bool _selectedState)
+void AmbisonicVirtualMicUIManager::setSelected(const int _index, int _selectedState)
 {
     if (_index == -1)
     {
-        for (int i=0; i<MAX_MICROPHONES; i++)
+        for (int i=0; i<MAX_MICS; i++)
             m_mic[i].setSelected(_selectedState);
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICROPHONES)].setSelected(_selectedState);
+        m_mic[Tools::clip(_index, 0, MAX_MICS)].setSelected(_selectedState);
     }
 }
+
+void AmbisonicVirtualMicUIManager::selectMicsBetweenMics(int _micIndex1, int _micIndex2)
+{
+    double angle1 = getAngleInRadian(_micIndex1);
+    double angle2 = getAngleInRadian(_micIndex2);
+    
+    for (int i=0; i<MAX_MICS; i++) {
+        if (Tools::isInside(getAngleInRadian(i), angle1, angle2)) {
+            setSelected(i, 1);
+        }
+    }
+}
+
+void AmbisonicVirtualMicUIManager::rotateSelectedMicsWithRadian(double _newRadian, int _sourceBeingDragged)
+{
+    if (!Tools::isInside(_sourceBeingDragged, int(0), int(m_numberOfMics))) return;
+    double deltaAngle = _newRadian - m_mic[_sourceBeingDragged].getAngleInRadian();
+    m_mic[_sourceBeingDragged].setAngleInRadian(_newRadian);
+    for (int i=0; i < m_numberOfMics; i++) {
+        if (isSelected(i) && i != _sourceBeingDragged) {
+            m_mic[i].rotateAngleInRadian(deltaAngle);
+        }
+    }
+}
+
+
+
+
