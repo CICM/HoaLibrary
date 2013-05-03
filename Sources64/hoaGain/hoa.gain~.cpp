@@ -37,8 +37,8 @@ static double s_hoaGain_startval;
 #define	hoaGain_BORDERTHICKNESS			(2.)
 #define hoaGain_CORNERSIZE				(6.)
 
-//#define hoaGain_DISPLAYINSET			5		// amount subtracted from rect for value
-#define hoaGain_DISPLAYINSET			11		// amount subtracted from rect for value
+#define hoaGain_DISPLAYINSET			(11)	// amount subtracted from rect for value
+#define knobMargin                      (6)		// Knob Margin
 
 typedef struct _hoaGain
 {
@@ -88,6 +88,7 @@ void hoaGain_output_dB(t_hoaGain *x);
 long hoaGain_oksize(t_hoaGain *x, t_rect *newrect);
 void hoaGain_paint(t_hoaGain *x, t_object *view);
 void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
+void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
 void draw_dB_grid(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz);
 void hoaGain_getdrawparams(t_hoaGain *x, t_object *patcherview, t_jboxdrawparams *params);
 /* Input ------------------------------------- */
@@ -427,6 +428,7 @@ void hoaGain_paint(t_hoaGain *x, t_object *view)
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
     isHoriz = hoaGain_ishorizontal(x, &rect);
     //draw_dB_grid(x, view, &rect, isHoriz);
+    draw_background(x, view, &rect, isHoriz);
     draw_cursor(x, view, &rect, isHoriz);
 }
 
@@ -471,21 +473,35 @@ void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
             
             // draw knob rect
             jgraphics_set_source_jrgba(g, &x->j_knobcolor);
-            jgraphics_rectangle(g, pos-5, 4, 11, rect->height - 8);
+            jgraphics_rectangle(g, pos-5, knobMargin, 11, rect->height - (knobMargin*2));
             jgraphics_fill(g);
             
             //draw knob interior line
             jgraphics_set_source_jrgba(g, &x->j_intknobcolor);
             jgraphics_set_line_width(g,1);
-            jgraphics_move_to(g, long(pos)+0.5-3, 6);
-            jgraphics_line_to(g, long(pos)+0.5-3, rect->height - 6);
-            jgraphics_move_to(g, long(pos)+0.5, 6);
-            jgraphics_line_to(g, long(pos)+0.5, rect->height - 6);
-            jgraphics_move_to(g, long(pos)+0.5+3, 6);
-            jgraphics_line_to(g, long(pos)+0.5+3, rect->height - 6);
+            jgraphics_move_to(g, long(pos)+0.5-3, knobMargin+2);
+            jgraphics_line_to(g, long(pos)+0.5-3, rect->height - (knobMargin+2));
+            jgraphics_move_to(g, long(pos)+0.5, (knobMargin+2));
+            jgraphics_line_to(g, long(pos)+0.5, rect->height - (knobMargin+2));
+            jgraphics_move_to(g, long(pos)+0.5+3, (knobMargin+2));
+            jgraphics_line_to(g, long(pos)+0.5+3, rect->height - (knobMargin+2));
             jgraphics_stroke(g);
         } else {
+            // draw knob rect
+            jgraphics_set_source_jrgba(g, &x->j_knobcolor);
+            jgraphics_rectangle(g, knobMargin, pos-5, rect->width - (knobMargin*2), 11);
+            jgraphics_fill(g);
             
+            //draw knob interior line
+            jgraphics_set_source_jrgba(g, &x->j_intknobcolor);
+            jgraphics_set_line_width(g,1);
+            jgraphics_move_to(g, (knobMargin+2), long(pos)+0.5-3);
+            jgraphics_line_to(g, rect->width - (knobMargin+2), long(pos)+0.5-3);
+            jgraphics_move_to(g, (knobMargin+2), long(pos)+0.5);
+            jgraphics_line_to(g, rect->width - (knobMargin+2), long(pos)+0.5);
+            jgraphics_move_to(g, (knobMargin+2), long(pos)+0.5+3);
+            jgraphics_line_to(g, rect->width - (knobMargin+2), long(pos)+0.5+3);
+            jgraphics_stroke(g);
         }
         
         jtextlayout_settextcolor(jtl, &x->j_frgba);
@@ -496,6 +512,98 @@ void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
     jfont_destroy(jf);
     jbox_end_layer((t_object*)x, view, gensym("cursor_layer"));
 	jbox_paint_layer((t_object *)x, view, gensym("cursor_layer"), 0., 0.);
+}
+
+void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
+{
+	t_jgraphics *g;
+    t_jfont *jf;
+	t_jtextlayout *jtl;
+    //char dBCurrentTextValue[100];
+    double fontsize = 12;
+	int zerodBpos;
+    //t_jrgba black = {0,0,0,0.8};
+    t_jrgba black = x->j_brgba;
+    t_jrgba white = x->j_brgba;
+    
+    black.red -= 0.2;
+    black.green -= 0.2;
+    black.blue -= 0.2;
+    
+    white.red += 0.2;
+    white.green += 0.2;
+    white.blue += 0.2;
+    
+    zerodBpos = hoaGain_dBvaltopos(x, 0, rect, isHoriz);
+    
+    g = jbox_start_layer((t_object *)x, view, gensym("bg_layer"), rect->width, rect->height);
+    
+    jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_WEIGHT_NORMAL, fontsize);
+    jtl = jtextlayout_create();
+    
+    if (g) {
+        
+        if (isHoriz) {
+            
+            // draw knob rect
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_line_width(g,1);
+            jgraphics_rectangle_rounded(g, zerodBpos-5, 4, 12, rect->height - 5, 2, 2);
+            jgraphics_stroke(g);
+            
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_set_line_width(g,1);
+            jgraphics_rectangle_rounded(g, zerodBpos-6, 3, 13, rect->height - 6, 2, 2);
+            jgraphics_stroke(g);
+            
+            /*
+            // draw zero dB line :
+            jgraphics_set_line_width(g,1);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_move_to(g, long(zerodBpos)+1.5, rect->height*0.25);
+            jgraphics_line_to(g, long(zerodBpos)+1.5, rect->height*0.75);
+            jgraphics_stroke(g);
+            
+            jgraphics_set_line_width(g,1);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_move_to(g, long(zerodBpos)+0.5, rect->height*0.25);
+            jgraphics_line_to(g, long(zerodBpos)+0.5, rect->height*0.75);
+            jgraphics_stroke(g);
+            */
+            
+            // draw middle line :
+            jgraphics_set_line_width(g,1);
+            jgraphics_set_source_jrgba(g, &white);
+            // neg
+            jgraphics_move_to(g, 3, rect->height*0.5);
+            jgraphics_line_to(g, long(zerodBpos)+0.5 - (knobMargin), rect->height*0.5);
+            // pos
+            jgraphics_move_to(g, long(zerodBpos)+0.5 + (knobMargin), rect->height*0.5);
+            jgraphics_line_to(g, rect->width - 4, rect->height*0.5);
+            jgraphics_stroke(g);
+            
+            
+            jgraphics_set_line_width(g,1);
+            jgraphics_set_source_jrgba(g, &black);
+            // neg
+            jgraphics_move_to(g, 3, rect->height*0.5-1);
+            jgraphics_line_to(g, long(zerodBpos)+0.5 - (knobMargin), rect->height*0.5-1);
+            // pos
+            jgraphics_move_to(g, long(zerodBpos)+0.5 + (knobMargin), rect->height*0.5-1);
+            jgraphics_line_to(g, rect->width - 4, rect->height*0.5-1);
+            jgraphics_stroke(g);
+        }
+        else
+        {
+            
+        }
+    }
+    
+    jtextlayout_destroy(jtl);
+    jfont_destroy(jf);
+    
+    jbox_end_layer((t_object*)x, view, gensym("bg_layer"));
+	jbox_paint_layer((t_object *)x, view, gensym("bg_layer"), 0., 0.);
 }
 
 void draw_dB_grid(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
@@ -663,7 +771,8 @@ void hoaGain_setminmax(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
 		if (old_min != x->j_min || old_size != x->j_size)
         {
             //hoaGain_assign(x, x->j_val, true);
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("dbGrid_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("bg_layer"));
+            //jbox_invalidate_layer((t_object *)x, NULL, gensym("dbGrid_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
             jbox_redraw((t_jbox *)x);
         }
@@ -959,7 +1068,8 @@ t_max_err hoaGain_notify(t_hoaGain *x, t_symbol *s, t_symbol *msg, void *sender,
         }
         else if(name == gensym("dbgridcolorneg") || name == gensym("dbgridcolorpos"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("dbGrid_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("bg_layer"));
+			//jbox_invalidate_layer((t_object *)x, NULL, gensym("dbGrid_layer"));
 		}
         jbox_redraw((t_jbox *)x);
 	}

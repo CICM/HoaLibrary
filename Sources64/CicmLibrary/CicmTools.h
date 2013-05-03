@@ -217,6 +217,24 @@ public:
         return denom == 0. ? 0. : num/denom;
     }
     
+    template<typename Type> static void sortVector(Type* array, int size)
+    {
+        Type tmp;
+        int i,j;
+        for(i = 0;i < size ; i++)
+        {
+            for(j=0;j < size;j++)
+            {
+                if(array[i] < array[j])
+                {
+                    tmp = array[i];
+                    array[i] = array[j];
+                    array[j] = tmp;
+                }
+            }
+        }
+    }
+    
     static double scale(double in, double inlow, double inhigh, double outlow, double outhigh, double power)
     {
         double value;

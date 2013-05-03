@@ -1254,7 +1254,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 193.75, 438.0, 64.0, 128.0 ]
+									"patching_rect" : [ 403.0, 491.0, 64.0, 128.0 ]
 								}
 
 							}
@@ -1355,13 +1355,13 @@
 									"patching_rect" : [ 654.0, 333.0, 115.0, 136.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
+											"parameter_unitstyle" : 4,
+											"parameter_mmax" : 120.0,
 											"parameter_mmin" : -80.0,
 											"parameter_initial" : [ 0.0 ],
 											"parameter_type" : 0,
 											"parameter_shortname" : "live.gain~",
-											"parameter_longname" : "live.gain~",
-											"parameter_unitstyle" : 4,
-											"parameter_mmax" : 120.0
+											"parameter_longname" : "live.gain~"
 										}
 
 									}
@@ -1430,12 +1430,12 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 576.0, 62.0, 66.0, 22.0 ],
 									"restore" : 									{
-										"hoa.gain~" : [ -69.0 ],
+										"hoa.gain~" : [ -14.520164 ],
 										"live.gain~" : [ 120.0 ]
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u404000268"
+									"varname" : "u071000267"
 								}
 
 							}
@@ -1602,7 +1602,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 286.0, 480.0, 78.0, 22.0 ]
+									"patching_rect" : [ 305.5, 553.0, 78.0, 22.0 ]
 								}
 
 							}
@@ -1651,7 +1651,7 @@
 									"numoutlets" : 17,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "" ],
 									"parameter_enable" : 1,
-									"patching_rect" : [ 40.0, 352.0, 265.0, 19.0 ],
+									"patching_rect" : [ 40.0, 352.0, 265.0, 108.0 ],
 									"range" : [ -70.0, 18.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
@@ -3137,8 +3137,8 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-11::obj-1" : [ "hoa.gain~", "hoa.gain~", 0 ],
-			"obj-11::obj-33" : [ "live.gain~", "live.gain~", 0 ]
+			"obj-11::obj-33" : [ "live.gain~", "live.gain~", 0 ],
+			"obj-11::obj-1" : [ "hoa.gain~", "hoa.gain~", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
