@@ -23,9 +23,9 @@
 
 #include "../cicmTools.h"
 
-#define MAX_MICROPHONES 100
-#define MIN_MICROPHONES 0
-#define DEF_MICROPHONES 8
+#define MAX_MICS 64
+#define MIN_MICS 0
+#define DEF_MICS 8
 
 
 #endif

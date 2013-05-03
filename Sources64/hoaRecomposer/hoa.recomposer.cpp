@@ -35,28 +35,38 @@ typedef struct  _HoaRecomposerUI
 {
 	t_jbox		j_box;
 	t_rect		rect;
+    
+    // color
 	t_jrgba		f_colorBackground;
+    t_jrgba		f_colorInnerCircle;
 	t_jrgba		f_colorMic;
     t_jrgba		f_colorMicSelected;
 	t_jrgba		f_color_selection;
     
     //microphones
-    AmbisonicVirtualMicUIManager f_mics[MAX_MICROPHONES];
+    AmbisonicVirtualMicUIManager* f_mics;
     int			f_numberOfMic;
-    float		f_MicAngles[MAX_MICROPHONES];
-    int			f_isMicSelected[MAX_MICROPHONES];
+    float		f_MicAngles[MAX_MICS];
+    int			f_isMicSelected[MAX_MICS];
     int			f_aMicIsSelected;
-    int         f_micOver;
 	
-	char		f_displaySpeakers;
+    // options
+	int         f_activeMagnet;
     char        f_displayAngle;
 	double		f_speakerOffset;
 	int			f_numberOfSpeaker;
     
-	t_pt		f_last_mousemove;
-	
-	int			f_actualSource;
+    // mouse
+	t_pt		f_last_mouseMove;
+    int         f_last_mouseMoveOverMic;
+    t_pt		f_last_mouseDown;
+    int         f_last_mouseDownOverMic;
+    t_pt		f_last_mouseUp;
+    int         f_last_mouseUpOverMic;
+    t_pt		f_last_mouseDrag;
+    double		f_last_mouseDragAngle;
     
+    // outlets
 	void*		f_out;
     void*		f_outlet_infos;
 
@@ -71,32 +81,29 @@ void HoaRecomposerUI_getdrawparams(t_HoaRecomposerUI *x, t_object *patcherview, 
 void HoaRecomposerUI_assist(t_HoaRecomposerUI *x, void *b, long m, long a, char *s);
 t_max_err HoaRecomposerUI_notify(t_HoaRecomposerUI *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
-t_max_err set_MicAngles(t_HoaRecomposerUI *x, void *attr, long ac, t_atom *av);
-
 // mouse/key methods
 void HoaRecomposerUI_mouseleave(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mouseenter(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mousedown2(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mouseup(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_focusgained(t_HoaRecomposerUI *x, t_object *patcherview);
-void HoaRecomposerUI_focuslost(t_HoaRecomposerUI *x, t_object *patcherview);
 long HoaRecomposerUI_key(t_HoaRecomposerUI *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 void HoaRecomposerUI_mousemove(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_mousedragdelta(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_mousewheel(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
 
 // msg-in methods
+t_max_err set_MicAngles(t_HoaRecomposerUI *x, void *attr, long ac, t_atom *av);
+t_max_err set_numberOfMics(t_HoaRecomposerUI *x, void *attr, long ac, t_atom *av);
 void HoaRecomposerUI_bang(t_HoaRecomposerUI *x);
 void HoaRecomposerUI_list(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 void HoaRecomposerUI_anything(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 void HoaRecomposerUI_float(t_HoaRecomposerUI *x, double f);
+void HoaRecomposerUI_resetAngles(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 
 void HoaRecomposerUI_nb_hp(t_HoaRecomposerUI *x, int v);
 
 // msg-out methods
-void HoaRecomposerUI_output(t_HoaRecomposerUI *x, int i);
+void HoaRecomposerUI_output(t_HoaRecomposerUI *x);
 
 // paint methods
 void HoaRecomposerUI_paint(t_HoaRecomposerUI *x, t_object *view);
@@ -105,12 +112,6 @@ void draw_microphones(t_HoaRecomposerUI *x, t_object *view, t_rect *rect);
 void draw_oneMic(t_HoaRecomposerUI *x, t_jgraphics *g, double posX, double posY, double rotDegree, double size);
 
 //calcul methods
-double pX(double width, double cartPos);
-double pY(double width, double cartPos);
-double radtodeg(double radian);
-double degtorad(double degree);
-double wrapi(double deltaPhase);
-
 int isPointOverAMic(t_HoaRecomposerUI *x, t_pt *pt);
 
 int main()
@@ -128,6 +129,7 @@ int main()
 	class_addmethod(c, (method)HoaRecomposerUI_notify,          "notify",		A_CANT, 0);
 	class_addmethod(c, (method)HoaRecomposerUI_bang,			"bang",			0L,0);
 	class_addmethod(c, (method)HoaRecomposerUI_list,			"list",			A_GIMME, 0);
+    class_addmethod(c, (method)HoaRecomposerUI_resetAngles,		"resetangles",	A_GIMME, 0);
 	class_addmethod(c, (method)HoaRecomposerUI_anything,		"anything",		A_GIMME, 0);
 	class_addmethod(c, (method) HoaRecomposerUI_mousedown,	"mousedown",		A_CANT, 0);
 	class_addmethod(c, (method)HoaRecomposerUI_mousedrag,	"mousedrag",		A_CANT, 0);
@@ -145,7 +147,14 @@ int main()
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "1. 1. 1. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.65 0.65 0.65 1.");
+    
+    CLASS_ATTR_RGBA				(c, "circlecolor", 0, t_HoaRecomposerUI, f_colorInnerCircle);
+	CLASS_ATTR_CATEGORY			(c, "circlecolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "circlecolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "circlecolor", 0, "Circle Inner Color");
+	CLASS_ATTR_ORDER			(c, "circlecolor", 0, "1");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "circlecolor", 0, "0.3 0.3 0.3 1.");
 	
 	CLASS_ATTR_RGBA				(c, "miccolor", 0, t_HoaRecomposerUI, f_colorMic);
 	CLASS_ATTR_CATEGORY			(c, "miccolor", 0, "Color");
@@ -161,20 +170,27 @@ int main()
 	CLASS_ATTR_ORDER			(c, "selmiccolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmiccolor", 0, "0.5 0.5 0.5 1.");
 	
-	CLASS_ATTR_LONG				(c,"nmics",0, t_HoaRecomposerUI, f_numberOfMic);
-	CLASS_ATTR_FILTER_MIN		(c,"nmics", 1);
-	CLASS_ATTR_LABEL			(c,"nmics", 0, "Number of Microphones");
-	CLASS_ATTR_CATEGORY			(c,"nmics",0,"Custom");
+	CLASS_ATTR_LONG				(c, "nmics",0, t_HoaRecomposerUI, f_numberOfMic);
+	CLASS_ATTR_FILTER_MIN		(c, "nmics", 1);
+    CLASS_ATTR_ACCESSORS		(c, "nmics", NULL, set_numberOfMics);
+	CLASS_ATTR_LABEL			(c, "nmics", 0, "Number of Microphones");
+	CLASS_ATTR_CATEGORY			(c, "nmics",0,"Custom");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"nmics",0,"8");
     
-    CLASS_ATTR_FLOAT_VARSIZE	(c, "mic_angles", 0, t_HoaRecomposerUI, f_MicAngles, f_numberOfMic, MAX_MICROPHONES);
+    CLASS_ATTR_FLOAT_VARSIZE	(c, "mic_angles", 0, t_HoaRecomposerUI, f_MicAngles, f_numberOfMic, MAX_MICS);
 	CLASS_ATTR_ACCESSORS		(c, "mic_angles", NULL, set_MicAngles);
 	CLASS_ATTR_CATEGORY			(c, "mic_angles", 0, "Custom");
 	CLASS_ATTR_ORDER			(c, "mic_angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "mic_angles", 0, "Angles of Microphones");
 	CLASS_ATTR_DEFAULT			(c, "mic_angles", 0, "666");
 	CLASS_ATTR_SAVE				(c, "mic_angles", 1);
-	
+    
+    CLASS_ATTR_LONG             (c, "magnetmics", 0, t_HoaRecomposerUI, f_activeMagnet);
+	CLASS_ATTR_CATEGORY			(c, "magnetmics", 0, "Custom");
+	CLASS_ATTR_ORDER			(c, "magnetmics", 0, "3");
+	CLASS_ATTR_LABEL			(c, "magnetmics", 0, "Active Magnetism on Mics");
+	CLASS_ATTR_DEFAULT			(c, "magnetmics", 0, "1");
+	CLASS_ATTR_SAVE				(c, "magnetmics", 1);
 	
 	class_register(CLASS_BOX, c);
 	HoaRecomposerUI_class = c;
@@ -201,16 +217,21 @@ void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
 	| JBOX_GROWY
 	| JBOX_HILITE
 	;
-	jbox_new(&x->j_box, flags, argc, argv); 
-	
-    x->f_numberOfMic = DEF_MICROPHONES;
-	x->f_displayAngle = 1;
-    x->f_micOver = -1;
-	
+	jbox_new(&x->j_box, flags, argc, argv);
+    
     x->f_outlet_infos = listout(x);
     x->f_out = listout(x);
+    
+    
+    x->f_numberOfMic = DEF_MICS;
+	x->f_displayAngle = 1;
+    x->f_last_mouseMoveOverMic = x->f_last_mouseDownOverMic = x->f_last_mouseUpOverMic = -1;
+    
+    x->f_mics = new AmbisonicVirtualMicUIManager(x->f_numberOfMic);
+    
+    x->f_mics->setNumberOfMics(x->f_numberOfMic);
         
-	for(i = 0; i < MAX_MICROPHONES; i++) {
+	for(i = 0; i < MAX_MICS; i++) {
 		x->f_MicAngles[i] = 0;
 	}
 
@@ -231,6 +252,7 @@ void HoaRecomposerUI_getdrawparams(t_HoaRecomposerUI *x, t_object *patcherview, 
 void HoaRecomposerUI_free(t_HoaRecomposerUI *x)
 {
 	jbox_free(&x->j_box);
+    delete x->f_mics;
 }
 
 void HoaRecomposerUI_assist(t_HoaRecomposerUI *x, void *b, long m, long a, char *s)
@@ -249,71 +271,71 @@ void HoaRecomposerUI_assist(t_HoaRecomposerUI *x, void *b, long m, long a, char 
 
 /* --------- */
 
-double radtodeg(double radian)
-{
-	return radian * (180 / JGRAPHICS_PI);
-}
-
-double degtorad(double degree)
-{
-	return degree / (180 / JGRAPHICS_PI);
-}
-
-//wraping function :
-double wrapi(double deltaPhase)
-{
-	if (deltaPhase>0)
-        deltaPhase = fmod(deltaPhase + CICM_PI, 2.0*CICM_PI)-CICM_PI;
+void HoaRecomposerUI_resetAngles(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av)
+{    
+    if (ac == 0) {
+        x->f_mics->resetAngles(-1);
+    }
     else
-        deltaPhase = fmod(deltaPhase - CICM_PI, 2.0*CICM_PI)+CICM_PI;
-	return deltaPhase;
+    {
+        for(int i = 0; i < ac ; i++)
+        {
+            if (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
+                x->f_mics->resetAngles(atom_getlong(av + i));
+        }
+    }
+    
+    HoaRecomposerUI_output(x);
+	jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+	jbox_redraw((t_jbox *)x);
 }
-/* --------- */
 
 t_max_err set_MicAngles(t_HoaRecomposerUI *x, void *attr, long ac, t_atom *av)
 {
-	float val;
-	int i;
-	int defaultAngle = 0;
-	int accum = 0;
-    
     double listAngles[ac];
-    
+    long index;
 	
     if (ac && av)
     {
-        for(i = 0; i < ac ; i++)
+        if (atom_gettype(av) == A_LONG && Tools::isInside(index = atom_getlong(av), long(0), x->f_mics->getNumberOfMics())) // index + angle
         {
-            if (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG) {
-                listAngles[i] = atom_getfloat(av + i);
-            } else listAngles[i] = 0;
+            if (!Tools::isInside(index, long(0), x->f_mics->getNumberOfMics())) return MAX_ERR_NONE;
+            x->f_mics->setAngleInDegree(index, atom_getfloat(av+1));
+            x->f_MicAngles[index] = x->f_mics->getAngleInDegree(index);
         }
-        x->f_mics->setAnglesInDegree(listAngles, ac);
-
-		for(i = 0; i < ac ; i++) accum += (int)atom_getfloat(av + i);
-		if (accum == 0 || atom_getfloat(av) == 666) defaultAngle = 1;
-        for (i = 0; i < x->f_numberOfMic; i++)
-		{
-			if (defaultAngle == 0 || i < ac)
-			{
-				val = atom_getfloat(av + i);
-				if (val > 360.) {
-					val = 0.;
-				}
-				else if (val < 0.) {
-					if (val < -360.) val = -360.;
-					val += 360.;
-				}
-				x->f_MicAngles[i] = val;
-			}
-			else {
-				x->f_MicAngles[i] = 360. / x->f_numberOfMic * i;
-			}
-			if (x->f_MicAngles[i] == 360.) x->f_MicAngles[i] = 0.;
+        else
+        {
+            for(int i = 0; i < ac ; i++)
+            {
+                if (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG) {
+                    listAngles[i] = atom_getfloat(av + i);
+                } else listAngles[i] = 0;
+            }
+            x->f_mics->setAnglesInDegree(listAngles, ac);
+            for (int i=0; i < x->f_mics->getNumberOfMics(); i++) {
+                x->f_MicAngles[i] = x->f_mics->getAngleInDegree(i);
+            }
         }
     }
+
+    HoaRecomposerUI_output(x);
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
 	jbox_redraw((t_jbox *)x);
+    return MAX_ERR_NONE;
+}
+
+t_max_err set_numberOfMics(t_HoaRecomposerUI *x, void *attr, long ac, t_atom *av)
+{
+	if (ac && av)
+    {
+        if (atom_gettype(av) == A_LONG || atom_gettype(av) == A_FLOAT) {
+            x->f_mics->setNumberOfMics(atom_getlong(av));
+            x->f_numberOfMic = x->f_mics->getNumberOfMics();
+        }
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+        jbox_redraw((t_jbox *)x);
+    }
+    HoaRecomposerUI_output(x);
     return MAX_ERR_NONE;
 }
 
@@ -331,22 +353,23 @@ void HoaRecomposerUI_list(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *a
 
 void HoaRecomposerUI_bang(t_HoaRecomposerUI *x)
 {
-    HoaRecomposerUI_output(x, 0);
+    HoaRecomposerUI_output(x);
 }
 
-void HoaRecomposerUI_output(t_HoaRecomposerUI *x, int i)
+void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
 {
-	t_atom	av_angles[x->f_numberOfMic];
+    int nmics = x->f_mics->getNumberOfMics();
+	t_atom	av_angles[nmics];
     t_atom  av_infos[2];
     
     atom_setsym(av_infos, gensym("nmics"));
-    atom_setlong(av_infos+1, x->f_numberOfMic);
+    atom_setlong(av_infos+1, nmics);
     outlet_list(x->f_outlet_infos, NULL, 2, av_infos);
     
-    for (int i=0; i<x->f_numberOfMic; i++) {
-        atom_setfloat(av_angles+i, (float)x->f_MicAngles[i]);
+    for (int i=0; i<nmics; i++) {
+        atom_setfloat(av_angles+i, (float)x->f_mics->getAngleInRadian(i));
     }
-    outlet_list(x->f_out, NULL, x->f_numberOfMic, av_angles);
+    outlet_list(x->f_out, NULL, nmics, av_angles);
 }
 
 //========================= Notify Methods :
@@ -365,7 +388,7 @@ t_max_err HoaRecomposerUI_notify(t_HoaRecomposerUI *x, t_symbol *s, t_symbol *ms
          {
              jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
          }
-         else if(name == gensym("bgcolor") || name == gensym("cicolor"))
+         else if(name == gensym("bgcolor") || name == gensym("circlecolor"))
          {
              jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
          }
@@ -392,7 +415,13 @@ void draw_microphones(t_HoaRecomposerUI *x, t_object *view, t_rect *rect){
     double hpSize;
 	hpSize = (w / 20.) * 0.4;
     
+    t_jrgba overMicColor = x->f_colorMicSelected;
+    overMicColor.red -= 0.1;
+    overMicColor.green -= 0.1;
+    overMicColor.blue -= 0.1;
+    
     t_jmatrix transform;
+
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("mic_layer"), rect->width, rect->height);
 	
@@ -403,17 +432,18 @@ void draw_microphones(t_HoaRecomposerUI *x, t_object *view, t_rect *rect){
         
 		for(int i=numMics-1; i>=0; i--)
 		{
-            jgraphics_set_source_jrgba(g, x->f_micOver == i ? &x->f_colorMicSelected : &x->f_colorMic);
-            mic_angle = x->f_MicAngles[numMics-i];
+            jgraphics_set_source_jrgba(g, x->f_mics->isSelected(i) ? &x->f_colorMicSelected : ( (x->f_last_mouseMoveOverMic == i) ? &overMicColor : &x->f_colorMic) );
+            mic_angle = x->f_mics->getAngleInRadian(i);
             
-            jgraphics_rotate(g, degtorad(mic_angle));
+            jgraphics_rotate(g, mic_angle);
             jgraphics_translate(g, 0, w*0.4);
             //-- rotated and translated
-                        
+            
             // head of the mic :
             jgraphics_arc(g, 0, 0, hpSize, 0, CICM_2PI);
             jgraphics_fill(g);
             
+            /*
             //body of the mic :
             jgraphics_new_path(g);
             jgraphics_move_to(g, -hpSize*0.5-1, hpSize*0.5+5);
@@ -422,10 +452,11 @@ void draw_microphones(t_HoaRecomposerUI *x, t_object *view, t_rect *rect){
             jgraphics_line_to(g, -2, hpSize*3);
             jgraphics_close_path(g);
             jgraphics_fill(g);
+            */
             
             //-- inverse rotation and translate
             jgraphics_translate(g, 0, -w*0.4);
-            jgraphics_rotate(g, degtorad(-mic_angle));
+            jgraphics_rotate(g, -mic_angle);
 		}
 		jbox_end_layer((t_object*)x, view, gensym("mic_layer"));
 	}
@@ -452,23 +483,24 @@ int isPointOverAMic(t_HoaRecomposerUI *x, t_pt *pt)
     
     for(int i=x->f_numberOfMic-1; i>=0; i--)
     {
-        mic_angle = x->f_MicAngles[x->f_numberOfMic-i];
+        mic_angle = x->f_mics->getAngleInRadian(i);        
         
         //-- test head :
-        jgraphics_rotate(context, degtorad(mic_angle));
+        jgraphics_rotate(context, mic_angle);
         jgraphics_translate(context, 0, w*0.4);
         jgraphics_new_path(context);
         jgraphics_arc(context, 0, 0, hpSize, 0, CICM_2PI);
         jgraphics_close_path(context);
         jgraphics_translate(context, 0, -w*0.4);
-        jgraphics_rotate(context, degtorad(-mic_angle));
+        jgraphics_rotate(context, -mic_angle);
         if (jgraphics_in_fill(context, ptTranformed.x, ptTranformed.y)) {
             result = i;
             break;
         }
         
+        /*
         //-- test body :
-        jgraphics_rotate(context, degtorad(mic_angle));
+        jgraphics_rotate(context, mic_angle);
         jgraphics_translate(context, 0, w*0.4);
         jgraphics_new_path(context);
         jgraphics_move_to(context, -hpSize*0.5-1, hpSize*0.5+5);
@@ -477,11 +509,12 @@ int isPointOverAMic(t_HoaRecomposerUI *x, t_pt *pt)
         jgraphics_line_to(context, -2, hpSize*3);
         jgraphics_close_path(context);
         jgraphics_translate(context, 0, -w*0.4);
-        jgraphics_rotate(context, degtorad(-mic_angle));
+        jgraphics_rotate(context, -mic_angle);
         if (jgraphics_in_fill(context, ptTranformed.x, ptTranformed.y)) {
             result = i;
             break;
         }
+        */
     }
     
     jgraphics_destroy(context);
@@ -493,26 +526,46 @@ int isPointOverAMic(t_HoaRecomposerUI *x, t_pt *pt)
 void draw_background(t_HoaRecomposerUI *x,  t_object *view, t_rect *rect)
 {
 	double w = x->rect.width;
+    //t_jrgba outsideColor = {0,0,0,0.1};
+    t_jrgba HpMarkerColor = {0.1,0.1,0.1,1};
+    double hpSize;
+	hpSize = (w / 20.) * 0.4;
+    t_jmatrix transform;
+    double mic_angle = CICM_2PI / x->f_mics->getNumberOfMics();
+    
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
 	
 	if (g) {
-		t_jrgba outsideColor = {0,0,0,0.1};
-        t_jrgba HpMarkerColor = {0,0,0,0.4};
-		
 		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
 		jgraphics_rectangle_rounded(g, 0., 0., w, w, 6, 6);
 		jgraphics_fill(g);
-		jgraphics_set_source_jrgba(g, &outsideColor);
-		jgraphics_rectangle_rounded(g, 0., 0., w, w, 6, 6);
-		jgraphics_fill(g);
 		
-		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		jgraphics_set_source_jrgba(g, &x->f_colorInnerCircle);
 		jgraphics_arc(g, w*0.5, w*0.5, w*0.4,  0., JGRAPHICS_2PI);
 		jgraphics_fill(g);
         
+        jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
+        jgraphics_set_matrix(g, &transform);
         jgraphics_set_source_jrgba(g, &HpMarkerColor);
-        for (int i=0; i<x->f_numberOfMic; i++) {
-            ;
+        jgraphics_set_line_width(g, 1.5);
+        
+        for (int i=0; i < x->f_mics->getNumberOfMics(); i++) {
+            jgraphics_rotate(g, mic_angle*i);
+            jgraphics_translate(g, 0, w*0.4);
+            jgraphics_arc(g, 0, 0, hpSize*1.4, 0, CICM_2PI);
+            jgraphics_set_source_jrgba(g, &x->f_colorInnerCircle);
+            jgraphics_fill(g);
+            jgraphics_translate(g, 0, -w*0.4);
+            jgraphics_rotate(g, -mic_angle*i);
+            
+            jgraphics_rotate(g, mic_angle*i);
+            jgraphics_translate(g, 0, w*0.4);
+            jgraphics_move_to(g, 0, -4);
+            jgraphics_line_to(g, 0, 4);
+            jgraphics_set_source_jrgba(g, &HpMarkerColor);
+            jgraphics_stroke(g);
+            jgraphics_translate(g, 0, -w*0.4);
+            jgraphics_rotate(g, -mic_angle*i);
         }
 		
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
@@ -533,34 +586,90 @@ void HoaRecomposerUI_mouseleave(t_HoaRecomposerUI *x, t_object *patcherview, t_p
 }
 
 void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
-{	
-	//t_pt cart_pt = pixtocar(x, pt);
-}
-
-void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-	//double w = x->rect.width;
-}
-
-void HoaRecomposerUI_mouseup(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-    x->f_micOver = isPointOverAMic(x, &pt);
-    jmouse_setcursor(patcherview, (t_object *)x, (x->f_micOver != -1) ? JMOUSE_CURSOR_POINTINGHAND : JMOUSE_CURSOR_ARROW);
-}
-
-void HoaRecomposerUI_mousemove(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-    x->f_micOver = isPointOverAMic(x, &pt);
-    jmouse_setcursor(patcherview, (t_object *)x, (x->f_micOver != -1) ? JMOUSE_CURSOR_POINTINGHAND : JMOUSE_CURSOR_ARROW);
+    // cmd   : on ajoute à la selection courante (toggle)
+    // shift : on selectionne entre deux angles
+    // 1 mic : 
+    // 0 mic : on deselectionne tout
+    
+    //-- modifiers :
+    //post("modifiers : %ld", modifiers);
+    // 16 : rien
+    // 17 : cmd
+    // 18 : shift
+    // 148: ctrl
+    // 19 : cmd+shift
+    
+    x->f_last_mouseDown = pt;
+    
+    int isMouseDownOverAMic = -1;
+    isMouseDownOverAMic = isPointOverAMic(x, &pt);
+    
+    if (isMouseDownOverAMic == -1 )
+    {
+        if (modifiers == 16) {
+            x->f_mics->setSelected(-1, 0); // tout deselectionné
+        }
+    }
+    else
+    {
+        if (modifiers == 16) // rien
+        {
+            if (!x->f_mics->isSelected(isMouseDownOverAMic)) {
+                x->f_mics->setSelected(-1, 0); // tout deselectionné
+                x->f_mics->setSelected(isMouseDownOverAMic, 1);
+            }
+        }
+        if (modifiers == 17) // cmd
+        {
+            x->f_mics->setSelected(isMouseDownOverAMic, -1);
+        }
+        else if (modifiers == 18 && x->f_last_mouseDownOverMic != -1) //shift
+        {
+            x->f_mics->selectMicsBetweenMics(x->f_last_mouseDownOverMic, isMouseDownOverAMic);
+        }
+    }
+    
+    x->f_last_mouseDownOverMic = isMouseDownOverAMic;
+    jmouse_setcursor(patcherview, (t_object *)x, (x->f_last_mouseMoveOverMic != -1) ? JMOUSE_CURSOR_POINTINGHAND : JMOUSE_CURSOR_ARROW);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
     jbox_redraw((t_jbox *)x);
 }
 
-void HoaRecomposerUI_mousedragdelta(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
+void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-	//click'n drag method :
-	//post("mousedragdelta");
-	//post("mouseX = %f, mouseY = %f", pt.x, pt.y);
+    double w = x->rect.width;
+    t_pt ptTranformed = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
+    double angleDrag = Tools::angle(ptTranformed.x, ptTranformed.y) - CICM_PI*0.5;
+    if (x->f_last_mouseDownOverMic != -1) {
+        x->f_mics->rotateSelectedMicsWithRadian(angleDrag, x->f_last_mouseDownOverMic);
+    }
+	x->f_last_mouseDrag = pt;
+    x->f_last_mouseDragAngle = angleDrag;
+    HoaRecomposerUI_output(x);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+    jbox_redraw((t_jbox *)x);
+}
+
+void HoaRecomposerUI_mouseup(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    x->f_last_mouseUp = pt;
+    int isMouseUpOverAMic = -1;
+    isMouseUpOverAMic = isPointOverAMic(x, &pt);
+    
+    x->f_last_mouseUpOverMic = isMouseUpOverAMic;
+    jmouse_setcursor(patcherview, (t_object *)x, (x->f_last_mouseMoveOverMic != -1) ? JMOUSE_CURSOR_POINTINGHAND : JMOUSE_CURSOR_ARROW);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+    jbox_redraw((t_jbox *)x);    
+}
+
+void HoaRecomposerUI_mousemove(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    x->f_last_mouseMoveOverMic = isPointOverAMic(x, &pt);
+    x->f_last_mouseMove = pt;
+    jmouse_setcursor(patcherview, (t_object *)x, (x->f_last_mouseMoveOverMic != -1) ? JMOUSE_CURSOR_POINTINGHAND : JMOUSE_CURSOR_ARROW);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+    jbox_redraw((t_jbox *)x);
 }
 
 // key intercept

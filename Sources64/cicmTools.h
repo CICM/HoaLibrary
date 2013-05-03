@@ -136,20 +136,20 @@ public:
             return NULL;
         }
         
-        char ChunkID[4];    // contient les lettres "RIFF" pour indiquer que le fichier est codé selon la norme RIFF
+        char ChunkID[4];                // contient les lettres "RIFF" pour indiquer que le fichier est codé selon la norme RIFF
         unsigned long ChunkSize;        // taille du fichier entier en octets (sans compter les 8 octets de ce champ (4o) et le champ précédent CunkID (4o)
-        char Format[4];        // correspond au format du fichier donc ici, contient les lettres "WAVE" car fichier est au format wave
-        char Subchunk1ID[4];    // contient les lettres "fmt " pour indiquer les données à suivre décrivent le format des données audio
+        char Format[4];                 // correspond au format du fichier donc ici, contient les lettres "WAVE" car fichier est au format wave
+        char Subchunk1ID[4];            // contient les lettres "fmt " pour indiquer les données à suivre décrivent le format des données audio
         unsigned long Subchunk1Size;    // taille en octet des données à suivre (qui suivent cette variable) 16 Pour un fichier PCM
-        short AudioFormat;        // format de compression (une valeur autre que 1 indique une compression)
-        short NumChannels;        // nombre de canaux: Mono = 1, Stereo = 2, etc..
-        unsigned long SampleRate;        // fréquence d'échantillonage, ex 44100, 44800 (nombre d'échantillons par secondes)
-        unsigned long ByteRate;            // nombre d'octects par secondes
-        short Blockalign;        // nombre d'octects pour coder un échantillon
-        short BitsPerSample;    // nombre de bits pour coder un échantillon
-        char Subchunk2ID[4];    // contient les lettres "data" pour indiquer que les données à suivre sont les données audio (les échantillons et)
+        short AudioFormat;              // format de compression (une valeur autre que 1 indique une compression)
+        short NumChannels;              // nombre de canaux: Mono = 1, Stereo = 2, etc..
+        unsigned long SampleRate;       // fréquence d'échantillonage, ex 44100, 44800 (nombre d'échantillons par secondes)
+        unsigned long ByteRate;         // nombre d'octects par secondes
+        short Blockalign;               // nombre d'octects pour coder un échantillon
+        short BitsPerSample;            // nombre de bits pour coder un échantillon
+        char Subchunk2ID[4];            // contient les lettres "data" pour indiquer que les données à suivre sont les données audio (les échantillons et)
         unsigned long Subchunk2Size;    // taille des données audio (nombre total d'octets codant les données audio)
-        short *data;            // données audio... les échantillons
+        short *data;                    // données audio... les échantillons
         
         fread(&ChunkID, 4, 1, file);
         fread(&ChunkSize, 4, 1, file);
@@ -192,6 +192,52 @@ public:
     static double degToRad(double degree)
     {
         return degree / (180 / CICM_PI);
+    }
+    
+    static long mstosamps(double ms, double samplerate=44100.)
+    {
+        return samplerate * ms * 0.001;
+    }
+    
+    static double sampstoms(double s, double samplerate=44100.)
+    {
+        return 1000. * s / samplerate;
+    }
+    
+    static double atodb(double amp)
+    {
+        return (amp <=0.) ? -999. : (20. * log10(amp));
+    }
+    
+    static double dbtoa(double dB)
+    {
+        return pow(10., dB * 0.05);
+    }
+    
+    static double safediv(double num, double denom)
+    {
+        return denom == 0. ? 0. : num/denom;
+    }
+    
+    static double scale(double in, double inlow, double inhigh, double outlow, double outhigh, double power)
+    {
+        double value;
+        double inscale = safediv(1., inhigh - inlow);
+        double outdiff = outhigh - outlow;
+        
+        value = (in - inlow) * inscale;
+        if (value > 0.0)
+            value = pow(value, power);
+        else if (value < 0.0)
+            value = -pow(-value, power);
+        value = (value * outdiff) + outlow;
+        
+        return value;
+    }
+    
+    static double scale(double in, double inlow, double inhigh, double outlow, double outhigh)
+    {
+        return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
     }
     
     static double phasewrap(double val) {
