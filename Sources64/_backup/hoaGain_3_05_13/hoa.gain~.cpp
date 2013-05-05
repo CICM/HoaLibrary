@@ -41,12 +41,6 @@ static double s_hoaGain_startval;
 #define knobMargin                      (6)		// Knob Margin
 #define knobRound                       (8)		// Knob Round
 
-enum inputmode {
-DECIBELS = 0,
-AMPLITUDE = 1,
-MIDI = 2
-};
-
 typedef struct _hoaGain
 {
 	t_pxjbox	j_box;
@@ -100,12 +94,8 @@ void hoaGain_getdrawparams(t_hoaGain *x, t_object *patcherview, t_jboxdrawparams
 void hoaGain_bang(t_hoaGain *x);
 void hoaGain_int(t_hoaGain *x, long n);
 void hoaGain_float(t_hoaGain *x, double f);
-void hoaGain_float_dB(t_hoaGain *x, double dBValue); // for mouse value setting
 void hoaGain_set(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv);
 void hoaGain_setminmax(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv);
-void hoaGain_contextValue(t_hoaGain *x, long valueType, double value);
-void hoaGain_setInputModeValue(t_hoaGain *x, double value, bool outputTheValue);
-double hoaGain_getInputModeValue(t_hoaGain *x);
 t_max_err hoaGain_setattr_interp(t_hoaGain *x, t_object *attr, long ac, t_atom *av);
 t_max_err hoaGain_setattr_channels(t_hoaGain *x, t_object *attr, long ac, t_atom *av);
 t_max_err hoaGain_setattr_range(t_hoaGain *x, t_object *attr, long ac, t_atom *av);
@@ -129,8 +119,6 @@ void hoaGain_mouseup(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifier
 
 void hoaGain_set_gain(t_hoaGain *x);
 
-void hoaGain_drawPopupValue(t_hoaGain *x);
-
 int C74_EXPORT main()
 {
 	t_class *c; 
@@ -149,9 +137,9 @@ int C74_EXPORT main()
 	class_addmethod (c, (method) hoaGain_paint,               "paint",                A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_int,                 "int",                  A_LONG, 0);
 	class_addmethod (c, (method) hoaGain_float,               "float",                A_FLOAT, 0);
-    class_addmethod (c, (method) hoaGain_contextValue,        "contextvalue", A_LONG, A_FLOAT, 0);
 	class_addmethod (c, (method) hoaGain_bang,                "bang",                         0);
 	class_addmethod (c, (method) hoaGain_set,                 "set",                  A_GIMME, 0);
+	class_addmethod (c, (method) hoaGain_setminmax,           "setminmax",            A_GIMME, 0);
 	class_addmethod (c, (method) hoaGain_getdrawparams,       "getdrawparams",        A_CANT, 0);
     class_addmethod (c, (method) hoaGain_mousedoubleclick,    "mousedoubleclick",     A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_mousedown,           "mousedown",            A_CANT, 0);
@@ -201,15 +189,21 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULTNAME_SAVE_PAINT(c,"bordercolor",0,"0.2 0.2 0.2 1.");
 	CLASS_ATTR_STYLE_LABEL(c,"bordercolor",0,"rgba","Border Color");
 	class_parameter_register_default_color(c, gensym("bordercolor"), ps_control_bg);
+	CLASS_STICKY_CATEGORY_CLEAR(c);
     
     CLASS_ATTR_RGBA				(c, "knobcolor", 0, t_hoaGain, j_knobcolor);
-    CLASS_ATTR_STYLE_LABEL      (c, "knobcolor", 0, "rgba","Knob Background Color");
+	CLASS_ATTR_CATEGORY			(c, "knobcolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "knobcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "knobcolor", 0, "Knob Background Color");
+	CLASS_ATTR_ORDER			(c, "knobcolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "knobcolor", 0, "0.16 0.16 0.16 1");
     
     CLASS_ATTR_RGBA				(c, "intknobcolor", 0, t_hoaGain, j_intknobcolor);
-    CLASS_ATTR_STYLE_LABEL      (c, "intknobcolor", 0, "rgba","Interior Knob Color");
+	CLASS_ATTR_CATEGORY			(c, "intknobcolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "intknobcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "intknobcolor", 0, "Interior Knob Color");
+	CLASS_ATTR_ORDER			(c, "intknobcolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "intknobcolor", 0, "0.9 0.9 0.9 1");
-	CLASS_STICKY_CATEGORY_CLEAR(c);
 
 	CLASS_ATTR_INVISIBLE(c, "color", 0);
 	CLASS_ATTR_ATTR_PARSE(c, "color","save", USESYM(long), 0, "0");
@@ -240,7 +234,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ACCESSORS        (c, "range", (method)NULL,(method)hoaGain_setattr_range);
 	CLASS_ATTR_ORDER			(c, "range", 0, "2");
 	CLASS_ATTR_LABEL			(c, "range", 0, "Display Range (dB)");
-	CLASS_ATTR_DEFAULT			(c, "range", 0, "-70. 18.");
+	CLASS_ATTR_DEFAULT			(c, "range", 0, "-70. 6.");
 	CLASS_ATTR_SAVE             (c, "range", 1);
 
 	class_register(CLASS_BOX, c);
@@ -321,43 +315,13 @@ void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s)
         if (a != x->f_numberOfChannels)
             sprintf(s,"(signal) Audio Signal to be Scaled (ch %ld)", a+1);
         else
-        {
-            switch (x->f_inputMode) {
-                case DECIBELS:
-                    sprintf(s,"(Int/Float) Set dB Value (%.2f-%.2f)", x->f_range[0], x->f_range[1]);
-                    break;
-                case AMPLITUDE:
-                    sprintf(s,"(Int/Float) Set Amplitude Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
-                    break;
-                case MIDI:
-                    sprintf(s,"(int) Set Midi Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
+			sprintf(s,"(Int/Float) Set Value");
 	} 
 	else {
 		if (a != x->f_numberOfChannels)
             sprintf(s,"(signal) Scaled Signal (ch %ld)", a+1);
         else
-        {
-            switch (x->f_inputMode) {
-                case DECIBELS:
-                    sprintf(s,"(Float) dB Value (%.2f-%.2f)", x->f_range[0], x->f_range[1]);
-                    break;
-                case AMPLITUDE:
-                    sprintf(s,"(Float) Amplitude Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
-                    break;
-                case MIDI:
-                    sprintf(s,"(int) Midi Value (dB range : %.2f-%.2f)", x->f_range[0], x->f_range[1]);
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
+			sprintf(s,"(Float) Value in dB (%.2f-%.2f)", x->f_range[0], x->f_range[1]);
 	}
 }
 
@@ -366,72 +330,7 @@ void hoaGain_preset(t_hoaGain *x)
 	void *z;
 	if (!(z = ps_preset->s_thing))
 		return;
-    
-    binbuf_vinsert(z,(char*)"osslf",x,object_classname(x), gensym("contextvalue"), x->f_inputMode, hoaGain_getInputModeValue(x));
-}
-
-void hoaGain_contextValue(t_hoaGain *x, long valueType, double value)
-{
-    x->f_inputMode = Tools::clip(valueType, long(0), long(2));
-    hoaGain_setInputModeValue(x, value, true);
-}
-
-void hoaGain_setInputModeValue(t_hoaGain *x, double value, bool outputTheValue)
-{
-    double dBValue = x->j_valdB;
-
-    switch (x->f_inputMode) {
-        case DECIBELS :
-            dBValue = value;
-            break;
-        case AMPLITUDE :
-            dBValue = Tools::atodb(value);
-            break;
-        case MIDI :
-            dBValue = Tools::scale(value, 0, 128, -70, 0);
-            break;
-    }
-    
-    x->j_val = hoaGain_constrain_real_value(x, dBValue) - x->j_min;
-    x->j_valdB = x->j_val + x->j_min;
-        
-    hoaGain_set_gain(x);
-	if (outputTheValue)
-		object_notify(x, _sym_modified, NULL);
-    
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
-	jbox_redraw((t_jbox *)x);
-}
-
-void hoaGain_float_dB(t_hoaGain *x, double dBValue)
-{
-    
-    x->j_val = hoaGain_constrain_real_value(x, dBValue) - x->j_min;
-    x->j_valdB = x->j_val + x->j_min;
-    hoaGain_set_gain(x);
-    object_notify(x, _sym_modified, NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
-	jbox_redraw((t_jbox *)x);
-    
-    hoaGain_bang(x);
-}
-
-double hoaGain_getInputModeValue(t_hoaGain *x)
-{
-    switch (x->f_inputMode) {
-        case DECIBELS :
-            return x->j_valdB;
-            break;
-        case AMPLITUDE :
-            return x->j_valdB > -70 ? Tools::dbtoa(x->j_valdB) : 0;
-            break;
-        case MIDI :
-            return Tools::scale(x->j_valdB, -70, 0, 0, 128);
-            break;
-        default:
-            break;
-    }
-    return 0;
+    binbuf_vinsert(z,(char*)"ossf",x,object_classname(x), _sym_float, x->j_val + x->j_min);
 }
 
 void hoaGain_free(t_hoaGain *x)
@@ -472,21 +371,23 @@ t_int *hoaGain_perform(t_int *w)
 	t_int	sampleframes= (t_int)(w[2]);
 	t_float	**ins		= (t_float **)w+3;
     t_float	**outs		= (t_float **)w+3+x->f_numberOfChannels+1;
-    
-    int i;
-    t_float line[sampleframes];
-    
-    x->f_amp->process(line);
-    
-    for(i = 0; i < x->f_numberOfChannels; i++)
-        Cicm_Matrix_Vector_Float_Mul(ins[i], line, outs[i], sampleframes);
-
+	int i, j;
+	
+	for(i = 0; i < x->f_numberOfChannels; i++)
+	{
+		for(j = 0; j < sampleframes; j++)
+		{
+			outs[i][j] = ins[i][j] * x->f_amp->process();
+		}
+	}
 	return (w + x->f_numberOfChannels*2 + 4);
 }
 void hoaGain_dsp64(t_hoaGain *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     x->f_amp->setSampleRate(samplerate);
     x->f_amp->setVectorSize(maxvectorsize);
+    post("interp ms = %f", x->f_amp->getRampTimeInMs());
+    post("ramp samples = %ld", (long)x->f_amp->getRampTimeInSamps());
     object_method(dsp64, gensym("dsp_add64"), x, hoaGain_perform64, 0, NULL);
 }
 void hoaGain_perform64(t_hoaGain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -502,32 +403,18 @@ void hoaGain_perform64(t_hoaGain *x, t_object *dsp64, double **ins, long numins,
 
 void hoaGain_set_gain(t_hoaGain *x)
 {
-    x->f_amp->setCoefficient( x->j_valdB > -70.0f ? Tools::dbtoa(x->j_valdB) : 0.0f );
+    x->f_amp->setCoefficient( x->j_valdB >= -70.0f ? Tools::dbtoa(x->j_valdB) : 0.0f );
 }
 
 /* Paint ------------------------------------- */
 void hoaGain_paint(t_hoaGain *x, t_object *view)
 {
 	t_rect rect;
-    char isHoriz;    
+    char isHoriz;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
     isHoriz = hoaGain_ishorizontal(x, &rect);
     draw_background(x, view, &rect, isHoriz);
     draw_cursor(x, view, &rect, isHoriz);
-}
-
-void hoaGain_drawPopupValue(t_hoaGain *x)
-{
-    /*
-    t_jfont *jf;
-    jf = jfont_create(jbox_get_fontname((t_jbox *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_SLANT_NORMAL, 16);
-    t_jpopupmenu* popup = jpopupmenu_create();
-    //jpopupmenu_setfont(subpopup, x->jfont);
-    jpopupmenu_additem(popup, 0, "Menu", NULL, 0, 1, NULL);
-    jpopupmenu_addseperator(popup);
-    jpopupmenu_additem(popup, 1, "Add source", NULL, 0, 0, NULL);
-    jpopupmenu_destroy(popup);
-    */
 }
 
 void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
@@ -592,13 +479,13 @@ void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
     t_jrgba black, white;
     black = white = x->j_brgba;
     
-    black.red = Tools::clip_min(black.red -= 0.05);
-    black.green = Tools::clip_min(black.green -= 0.05);
-    black.blue = Tools::clip_min(black.blue -= 0.05);
+    black.red = Tools::clip_min(black.red -= 0.1);
+    black.green = Tools::clip_min(black.green -= 0.1);
+    black.blue = Tools::clip_min(black.blue -= 0.1);
     
-    white.red = Tools::clip_max(white.red += 0.05, 1.);
-    white.green = Tools::clip_max(white.green += 0.05, 1.);
-    white.blue = Tools::clip_max(white.blue += 0.05, 1.);
+    white.red = Tools::clip_max(white.red += 0.1, 1.);
+    white.green = Tools::clip_max(white.green += 0.1, 1.);
+    white.blue = Tools::clip_max(white.blue += 0.1, 1.);
     
     zerodBpos = hoaGain_dBvaltopos(x, 0, rect, isHoriz);
     
@@ -685,11 +572,10 @@ void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
 
 void hoaGain_bang(t_hoaGain *x)
 {
-    if (x->f_inputMode == MIDI) {
-        outlet_int(x->f_outlet_infos, (long)hoaGain_getInputModeValue(x));
-    }
-    else
-        outlet_float(x->f_outlet_infos, hoaGain_getInputModeValue(x));
+	double value;
+	value = CLAMP(x->j_val, 0, x->j_size);
+	value += x->j_min;
+    outlet_float(x->f_outlet_infos, value);
 }
 
 void hoaGain_int(t_hoaGain *x, long n)
@@ -739,7 +625,9 @@ void hoaGain_setminmax(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
 		
 		if (old_min != x->j_min || old_size != x->j_size)
         {
+            //hoaGain_assign(x, x->j_val, true);
             jbox_invalidate_layer((t_object *)x, NULL, gensym("bg_layer"));
+            //jbox_invalidate_layer((t_object *)x, NULL, gensym("dbGrid_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
             jbox_redraw((t_jbox *)x);
         }
@@ -759,6 +647,8 @@ t_max_err hoaGain_setattr_interp(t_hoaGain *x, t_object *attr, long ac, t_atom *
 		d = atom_getfloat(av);
         x->f_amp->setRampTimeInMs(d);
         x->f_interp = x->f_amp->getRampTimeInMs();
+        post("interp ms = %f", x->f_amp->getRampTimeInMs());
+        post("ramp samples = %ld", x->f_amp->getRampTimeInSamps());
 	}
 	return MAX_ERR_NONE;
 }
@@ -796,45 +686,19 @@ t_max_err hoaGain_setattr_range(t_hoaGain *x, t_object *attr, long ac, t_atom *a
 
 t_max_err hoaGain_setvalueof(t_hoaGain *x, long ac, t_atom *av)
 {
-    if (ac && av) {
-        if (ac >= 2) {
-            x->f_inputMode = Tools::clip(long(atom_getlong(av)), long(0), long(2));
-            if (atom_gettype(av+1) == A_LONG || atom_gettype(av+1) == A_FLOAT)
-                hoaGain_setInputModeValue(x, atom_getfloat(av+1), false);
-            
-            hoaGain_bang(x);
-        }
+	if (ac && av) {
+		if (av->a_type == A_FLOAT)
+			hoaGain_assign(x, atom_getfloat(av), false);
+		else if (av->a_type == A_LONG)
+			hoaGain_assign(x, atom_getlong(av), false);
+		
+		hoaGain_bang(x); 
 	}
 	return MAX_ERR_NONE;
 }
 
 t_max_err hoaGain_getvalueof(t_hoaGain *x, long *ac, t_atom **av)
 {
-    if (ac && av)
-    {
-		if (*ac && *av)
-        {
-            atom_setlong(*av+0, (long)x->f_inputMode);
-            if (x->f_inputMode == MIDI)
-                atom_setlong(*av+1, (long)hoaGain_getInputModeValue(x));
-            else
-                atom_setfloat(*av+1, hoaGain_getInputModeValue(x));
-		}
-        else
-        {
-            *ac = 2;
-			*av = (t_atom *)getbytes(2 * sizeof(t_atom));
-        }
-        
-        atom_setlong(*av+0, (long)x->f_inputMode);
-        if (x->f_inputMode == MIDI)
-            atom_setlong(*av+1, (long)hoaGain_getInputModeValue(x));
-        else
-        atom_setfloat(*av+1, hoaGain_getInputModeValue(x));
-    }
-	return MAX_ERR_NONE;
-    
-    /*
 	t_atom a;
 	
 	if (ac && av) {	
@@ -848,13 +712,10 @@ t_max_err hoaGain_getvalueof(t_hoaGain *x, long *ac, t_atom **av)
 		**av = a; 
 	}
 	return MAX_ERR_NONE;
-    */
 }
 
 void hoaGain_assign(t_hoaGain *x, double f, long notify)
 {
-    hoaGain_setInputModeValue(x, f, notify);
-    /*
 	x->j_val = hoaGain_constrain_real_value(x,f) - x->j_min;
     x->j_valdB = x->j_val + x->j_min;
     hoaGain_set_gain(x);
@@ -863,7 +724,6 @@ void hoaGain_assign(t_hoaGain *x, double f, long notify)
     
     jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
 	jbox_redraw((t_jbox *)x);
-    */
 }
 
 double hoaGain_constrain_real_value(t_hoaGain *x, double f)
@@ -950,7 +810,7 @@ double hoaGain_valtodb(t_hoaGain *x, double val)
 
 void hoaGain_mousedoubleclick(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    hoaGain_float_dB(x, 0);
+    hoaGain_float(x, 0);
 }
 
 void hoaGain_mousedown(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -964,7 +824,7 @@ void hoaGain_mousedown(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifi
 	ishoriz = hoaGain_ishorizontal(x, &rect);
 	val = hoaGain_postoval(x, pt, &rect, ishoriz);
 	if (!x->j_relative)
-		hoaGain_float_dB(x, val + x->j_min);	// set value immediately
+		hoaGain_float(x, val + x->j_min);	// set value immediately
 	s_hoaGain_startval = x->j_val;
 }
 
@@ -990,7 +850,7 @@ void hoaGain_mousedragdelta(t_hoaGain *x, t_object *patcherview, t_pt pt, long m
 		inc = s_hoaGain_cum.x * factor;
 		val = s_hoaGain_startval + inc;
 		cval = hoaGain_constrain(x,val);
-		hoaGain_float_dB(x,cval + x->j_min);
+		hoaGain_float(x,cval + x->j_min);
 		// in case we were constrained, adjust the cum
 		if (cval != val)
 			s_hoaGain_cum.x = (cval-s_hoaGain_startval) / factor;
@@ -999,14 +859,14 @@ void hoaGain_mousedragdelta(t_hoaGain *x, t_object *patcherview, t_pt pt, long m
 		inc = s_hoaGain_cum.y * factor;
 		val = s_hoaGain_startval + inc;
 		cval = hoaGain_constrain(x,val);
-		hoaGain_float_dB(x, cval + x->j_min);
+		hoaGain_float(x, cval + x->j_min);
 		if (cval != val)
 			s_hoaGain_cum.y = (cval - s_hoaGain_startval) / factor; 
 	}
     
     // force to 0dB :
     if (Tools::isInside(x->j_valdB, -0.05, 0.05) ) {
-        hoaGain_float_dB(x, 0);
+        hoaGain_float(x, 0);
     }
 }
 
