@@ -43,6 +43,7 @@ public:
 	long getSamplingRate();
     long getHarmonicIndex(long anIndex);
     long getHarmonicOrder(long anIndex);
+    std::string  getHarmonicsName(long anIndex);
     
 	void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);

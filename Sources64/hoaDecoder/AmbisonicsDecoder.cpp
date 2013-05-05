@@ -18,24 +18,88 @@
 
 #include "AmbisonicsDecoder.h"
 
-AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfChannels, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfLoudspeakers, double anOffset, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
-	m_number_of_outputs		= Tools::clip_min(aNumberOfChannels, m_number_of_harmonics);
-	Cicm_Matrix_Float_Malloc(m_decoder_matrix_float, m_number_of_outputs, m_number_of_harmonics);
-    Cicm_Matrix_Double_Malloc(m_decoder_matrix_double, m_number_of_outputs, m_number_of_harmonics);
-    
     Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_harmonics);
-    Cicm_Vector_Float_Malloc(m_vector_float_output, m_number_of_outputs);
     Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_vector_double_output, m_number_of_outputs);
+    
+    m_decoder_matrix_float  = NULL;
+    m_decoder_matrix_double = NULL;
+    m_vector_float_output   = NULL;
+    m_vector_double_output  = NULL;
+    m_offset = Tools::degToRad(Tools::degreeWrap(anOffset));
+    m_number_of_loudspeakers = 0;
+    setNumberOfLoudspeakers(aNumberOfLoudspeakers);
+}
+
+void AmbisonicsDecoder::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
+{
+    m_number_of_outputs		= Tools::clip_min(aNumberOfLoudspeakers, m_number_of_harmonics);
+    if(m_number_of_loudspeakers != m_number_of_outputs)
+    {
+        if(m_decoder_matrix_float)
+            Cicm_Free(m_decoder_matrix_float);
+        if(m_decoder_matrix_double)
+            Cicm_Free(m_decoder_matrix_double);
+        if(m_vector_float_output)
+            Cicm_Free(m_vector_float_output);
+        if(m_vector_double_output)
+            Cicm_Free(m_vector_double_output);
+        
+        m_number_of_loudspeakers = m_number_of_outputs;
+        
+        Cicm_Matrix_Float_Malloc(m_decoder_matrix_float, m_number_of_outputs, m_number_of_harmonics);
+        Cicm_Matrix_Double_Malloc(m_decoder_matrix_double, m_number_of_outputs, m_number_of_harmonics);
+        Cicm_Vector_Float_Malloc(m_vector_float_output, m_number_of_outputs);
+        Cicm_Vector_Double_Malloc(m_vector_double_output, m_number_of_outputs);
+        computeMatrix();
+    }
+}
+
+long AmbisonicsDecoder::getNumberOfLoudspeakers()
+{
+    return m_number_of_loudspeakers;
+}
+
+void AmbisonicsDecoder::setOffset(double anOffset)
+{
+    m_offset = Tools::degToRad(Tools::degreeWrap(anOffset));
     computeMatrix();
 }
+
+double AmbisonicsDecoder::getOffset()
+{
+    return Tools::radToDeg(m_offset);
+}
+
+double AmbisonicsDecoder::getLoudspeakerAngle(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
+    {
+        double angle = CICM_2PI * ((double)anIndex / (double)(m_number_of_outputs)) + m_offset;
+        angle = Tools::radianWrap(angle);
+        return Tools::radToDeg(angle);
+    }
+    else
+        return 0.;
+}
+
+std::string AmbisonicsDecoder::getLoudspeakerName(long anIndex)
+{
+    float angle = anIndex / (double)m_number_of_loudspeakers * 360.;
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
+        return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(angle) + "°";
+    else
+        return "No channel";
+}
+
 
 void AmbisonicsDecoder::computeMatrix()
 {
     for (int i = 0; i < m_number_of_outputs; i++)
 	{
-		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs));
+		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs)) + m_offset;
+        angle = Tools::radianWrap(angle);
 		for (int j = 0; j < m_number_of_harmonics; j++)
 		{
             int index = getHarmonicIndex(j);
@@ -62,10 +126,11 @@ void AmbisonicsDecoder::computeMatrix()
 
 AmbisonicsDecoder::~AmbisonicsDecoder()
 {
-    Cicm_Free(m_decoder_matrix_float);
-    Cicm_Free(m_decoder_matrix_double);
     Cicm_Free(m_vector_float_input);
     Cicm_Free(m_vector_double_input);
+    
+    Cicm_Free(m_decoder_matrix_float);
+    Cicm_Free(m_decoder_matrix_double);
     Cicm_Free(m_vector_float_output);
     Cicm_Free(m_vector_double_output);
 }

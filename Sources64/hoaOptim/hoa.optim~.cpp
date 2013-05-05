@@ -98,6 +98,12 @@ void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
+        
+        char returnOptim[256];
+        sprintf(returnOptim, "%s", x->f_AmbisonicsOptim->getOptimMode().c_str());
+        
+        object_method(x, gensym("optim"), gensym(returnOptim));
+        attr_args_process(x, argc, argv);
 	}
 	return (x);
 }
@@ -161,11 +167,11 @@ t_max_err HoaOptim_optim(t_HoaOptim *x, t_object *attr, long argc, t_atom *argv)
 	{
 		std::string optim = atom_getsym(argv)->s_name;
 		x->f_AmbisonicsOptim->setOptimMode(optim);
-        if(atom_getsym(argv) == gensym(" basic"))
+        if(atom_getsym(argv) == gensym(" basic") || atom_getsym(argv) == gensym("basic"))
             x->f_AmbisonicsOptim->setOptimMode("basic");
-        else if(atom_getsym(argv) == gensym(" maxRe"))
+        else if(atom_getsym(argv) == gensym(" maxRe") || atom_getsym(argv) == gensym("maxRe"))
             x->f_AmbisonicsOptim->setOptimMode("maxRe");
-        else if(atom_getsym(argv) == gensym(" inPhase"))
+        else if(atom_getsym(argv) == gensym(" inPhase") || atom_getsym(argv) == gensym("inPhase"))
             x->f_AmbisonicsOptim->setOptimMode("inPhase");
            
 	}

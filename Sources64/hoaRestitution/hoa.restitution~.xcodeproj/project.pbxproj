@@ -1,0 +1,324 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
+		8F9518841733899F000402C7 /* AmbisonicsRestitution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518811733899F000402C7 /* AmbisonicsRestitution.cpp */; };
+		8F9518851733899F000402C7 /* AmbisonicsRestitution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518821733899F000402C7 /* AmbisonicsRestitution.h */; };
+		8F9518861733899F000402C7 /* hoa.restitution~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518831733899F000402C7 /* hoa.restitution~.cpp */; };
+		8F95188917338BC1000402C7 /* AmbisonicsDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F95188717338BC1000402C7 /* AmbisonicsDecoder.cpp */; };
+		8F95188A17338BC1000402C7 /* AmbisonicsDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95188817338BC1000402C7 /* AmbisonicsDecoder.h */; };
+		8F9518A71733B338000402C7 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95189E1733B338000402C7 /* CicmDefine.h */; };
+		8F9518A81733B338000402C7 /* CicmFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518A01733B338000402C7 /* CicmFilter.cpp */; };
+		8F9518A91733B338000402C7 /* CicmFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518A11733B338000402C7 /* CicmFilter.h */; };
+		8F9518AA1733B338000402C7 /* CicmFilterBiquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518A21733B338000402C7 /* CicmFilterBiquad.cpp */; };
+		8F9518AB1733B338000402C7 /* CicmFilterBiquad.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518A31733B338000402C7 /* CicmFilterBiquad.h */; };
+		8F9518AC1733B338000402C7 /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518A41733B338000402C7 /* CicmLine.cpp */; };
+		8F9518AD1733B338000402C7 /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518A51733B338000402C7 /* CicmLine.h */; };
+		8F9518AE1733B338000402C7 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518A61733B338000402C7 /* CicmTools.h */; };
+		8FE028B2172A837000BD68AA /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE028B0172A837000BD68AA /* Ambisonics.cpp */; };
+		8FE028B3172A837000BD68AA /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE028B1172A837000BD68AA /* Ambisonics.h */; };
+		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
+		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.restitution~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.restitution~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F9518811733899F000402C7 /* AmbisonicsRestitution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRestitution.cpp; sourceTree = "<group>"; };
+		8F9518821733899F000402C7 /* AmbisonicsRestitution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRestitution.h; sourceTree = "<group>"; };
+		8F9518831733899F000402C7 /* hoa.restitution~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.restitution~.cpp"; sourceTree = "<group>"; };
+		8F95188717338BC1000402C7 /* AmbisonicsDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmbisonicsDecoder.cpp; path = ../hoaDecoder/AmbisonicsDecoder.cpp; sourceTree = "<group>"; };
+		8F95188817338BC1000402C7 /* AmbisonicsDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmbisonicsDecoder.h; path = ../hoaDecoder/AmbisonicsDecoder.h; sourceTree = "<group>"; };
+		8F95189E1733B338000402C7 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
+		8F9518A01733B338000402C7 /* CicmFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilter.cpp; sourceTree = "<group>"; };
+		8F9518A11733B338000402C7 /* CicmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilter.h; sourceTree = "<group>"; };
+		8F9518A21733B338000402C7 /* CicmFilterBiquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterBiquad.cpp; sourceTree = "<group>"; };
+		8F9518A31733B338000402C7 /* CicmFilterBiquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterBiquad.h; sourceTree = "<group>"; };
+		8F9518A41733B338000402C7 /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
+		8F9518A51733B338000402C7 /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
+		8F9518A61733B338000402C7 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
+		8FE028B0172A837000BD68AA /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ambisonics.cpp; path = ../hoaAmbisonics/Ambisonics.cpp; sourceTree = "<group>"; };
+		8FE028B1172A837000BD68AA /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ambisonics.h; path = ../hoaAmbisonics/Ambisonics.h; sourceTree = "<group>"; };
+		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2FBBEADC08F335360078DB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */,
+				8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* iterator */ = {
+			isa = PBXGroup;
+			children = (
+				8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */,
+				8FE028B4172A837B00BD68AA /* Accelerate.framework */,
+				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
+				8F95189D1733B338000402C7 /* CicmLibrary */,
+				8FE028AB172A833B00BD68AA /* Source */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+			);
+			name = iterator;
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBEAE508F335360078DB84 /* hoa.restitution~.mxo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F95189D1733B338000402C7 /* CicmLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				8F95189E1733B338000402C7 /* CicmDefine.h */,
+				8F95189F1733B338000402C7 /* CicmFilters */,
+				8F9518A41733B338000402C7 /* CicmLine.cpp */,
+				8F9518A51733B338000402C7 /* CicmLine.h */,
+				8F9518A61733B338000402C7 /* CicmTools.h */,
+			);
+			name = CicmLibrary;
+			path = ../CicmLibrary;
+			sourceTree = "<group>";
+		};
+		8F95189F1733B338000402C7 /* CicmFilters */ = {
+			isa = PBXGroup;
+			children = (
+				8F9518A01733B338000402C7 /* CicmFilter.cpp */,
+				8F9518A11733B338000402C7 /* CicmFilter.h */,
+				8F9518A21733B338000402C7 /* CicmFilterBiquad.cpp */,
+				8F9518A31733B338000402C7 /* CicmFilterBiquad.h */,
+			);
+			path = CicmFilters;
+			sourceTree = "<group>";
+		};
+		8FE028AB172A833B00BD68AA /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				8FE028B0172A837000BD68AA /* Ambisonics.cpp */,
+				8FE028B1172A837000BD68AA /* Ambisonics.h */,
+				8F95188717338BC1000402C7 /* AmbisonicsDecoder.cpp */,
+				8F95188817338BC1000402C7 /* AmbisonicsDecoder.h */,
+				8F9518811733899F000402C7 /* AmbisonicsRestitution.cpp */,
+				8F9518821733899F000402C7 /* AmbisonicsRestitution.h */,
+				8F9518831733899F000402C7 /* hoa.restitution~.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2FBBEAD708F335360078DB84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FE028B3172A837000BD68AA /* Ambisonics.h in Headers */,
+				8F9518851733899F000402C7 /* AmbisonicsRestitution.h in Headers */,
+				8F95188A17338BC1000402C7 /* AmbisonicsDecoder.h in Headers */,
+				8F9518A71733B338000402C7 /* CicmDefine.h in Headers */,
+				8F9518A91733B338000402C7 /* CicmFilter.h in Headers */,
+				8F9518AB1733B338000402C7 /* CicmFilterBiquad.h in Headers */,
+				8F9518AD1733B338000402C7 /* CicmLine.h in Headers */,
+				8F9518AE1733B338000402C7 /* CicmTools.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2FBBEAD608F335360078DB84 /* max-external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
+			buildPhases = (
+				2FBBEAD708F335360078DB84 /* Headers */,
+				2FBBEAD808F335360078DB84 /* Resources */,
+				2FBBEADA08F335360078DB84 /* Sources */,
+				2FBBEADC08F335360078DB84 /* Frameworks */,
+				2FBBEADF08F335360078DB84 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "max-external";
+			productName = iterator;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.restitution~.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.restitution~" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FBBEAD608F335360078DB84 /* max-external */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2FBBEAD808F335360078DB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2FBBEADF08F335360078DB84 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2FBBEADA08F335360078DB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FE028B2172A837000BD68AA /* Ambisonics.cpp in Sources */,
+				8F9518841733899F000402C7 /* AmbisonicsRestitution.cpp in Sources */,
+				8F9518861733899F000402C7 /* hoa.restitution~.cpp in Sources */,
+				8F95188917338BC1000402C7 /* AmbisonicsDecoder.cpp in Sources */,
+				8F9518A81733B338000402C7 /* CicmFilter.cpp in Sources */,
+				8F9518AA1733B338000402C7 /* CicmFilterBiquad.cpp in Sources */,
+				8F9518AC1733B338000402C7 /* CicmLine.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2FBBEAD008F335010078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				SDKROOT = macosx10.7;
+			};
+			name = Development;
+		};
+		2FBBEAD108F335010078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				SDKROOT = macosx10.7;
+			};
+			name = Deployment;
+		};
+		2FBBEAE108F335360078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_NAME = "hoa.restitution~";
+			};
+			name = Development;
+		};
+		2FBBEAE208F335360078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
+				PRODUCT_NAME = "hoa.restitution~";
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.restitution~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAD008F335010078DB84 /* Development */,
+				2FBBEAD108F335010078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAE108F335360078DB84 /* Development */,
+				2FBBEAE208F335360078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

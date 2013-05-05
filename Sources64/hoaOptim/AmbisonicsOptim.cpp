@@ -21,8 +21,8 @@
 
 AmbisonicsOptim::AmbisonicsOptim(long anOrder, std::string anOptimMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
-	Cicm_Signal_Vector_Float_Malloc(m_optim_vector_float, m_number_of_harmonics);
-    Cicm_Signal_Vector_Double_Malloc(m_optim_vector_double, m_number_of_harmonics);
+	Cicm_Vector_Float_Malloc(m_optim_vector_float, m_number_of_harmonics);
+    Cicm_Vector_Double_Malloc(m_optim_vector_double, m_number_of_harmonics);
 	setOptimMode(anOptimMode);
 }
 

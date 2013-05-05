@@ -23,13 +23,13 @@ AmbisonicsProjector::AmbisonicsProjector(long anOrder, long aNumberOfChannels, l
 {
 	m_number_of_outputs		= Tools::clip_min(aNumberOfChannels, m_number_of_harmonics);
     
-	Cicm_Signal_Matrix_Float_Malloc(m_decoder_matrix_float, m_number_of_outputs, m_number_of_harmonics);
-    Cicm_Signal_Matrix_Double_Malloc(m_decoder_matrix_double, m_number_of_outputs, m_number_of_harmonics);
+	Cicm_Matrix_Float_Malloc(m_decoder_matrix_float, m_number_of_outputs, m_number_of_harmonics);
+    Cicm_Matrix_Double_Malloc(m_decoder_matrix_double, m_number_of_outputs, m_number_of_harmonics);
     
-    Cicm_Signal_Vector_Float_Malloc(m_signal_vector_float_input, m_number_of_harmonics);
-    Cicm_Signal_Vector_Float_Malloc(m_signal_vector_float_output, m_number_of_outputs);
-    Cicm_Signal_Vector_Double_Malloc(m_signal_vector_double_input, m_number_of_harmonics);
-    Cicm_Signal_Vector_Double_Malloc(m_signal_vector_double_output, m_number_of_outputs);
+    Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_harmonics);
+    Cicm_Vector_Float_Malloc(m_vector_float_output, m_number_of_outputs);
+    Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_harmonics);
+    Cicm_Vector_Double_Malloc(m_vector_double_output, m_number_of_outputs);
     
     computeMatrix();
 }
@@ -48,20 +48,20 @@ void AmbisonicsProjector::computeMatrix()
 			if (index < 0)
             {
                 double value = sin(fabs(index) * angle);
-                m_decoder_matrix_float[i][j]    = value / (double)(m_order+1.);
-                m_decoder_matrix_double[i][j]   = value / (double)(m_order+1.);
+                m_decoder_matrix_float[i * m_number_of_harmonics + j]    = value / (double)(m_order+1.);
+                m_decoder_matrix_double[i * m_number_of_harmonics + j]   = value / (double)(m_order+1.);
             }
 			else
             {
                 double value = cos(fabs(index) * angle);
-                m_decoder_matrix_float[i][j]    = value / (double)(m_order+1.);
-                m_decoder_matrix_double[i][j]   = value / (double)(m_order+1.);
+                m_decoder_matrix_float[i * m_number_of_harmonics + j]    = value / (double)(m_order+1.);
+                m_decoder_matrix_double[i * m_number_of_harmonics + j]   = value / (double)(m_order+1.);
             }
             
             if (index == 0)
             {
-                m_decoder_matrix_float[i][j]    /= 2.;
-                m_decoder_matrix_double[i][j]   /= 2.;
+                m_decoder_matrix_float[i * m_number_of_harmonics + j]    /= 2.;
+                m_decoder_matrix_double[i * m_number_of_harmonics + j]   /= 2.;
             }
             
 		}
@@ -72,9 +72,9 @@ AmbisonicsProjector::~AmbisonicsProjector()
 {
     Cicm_Free(m_decoder_matrix_float);
     Cicm_Free(m_decoder_matrix_double);
-    Cicm_Free(m_signal_vector_float_input);
-    Cicm_Free(m_signal_vector_double_input);
-    Cicm_Free(m_signal_vector_float_output);
-    Cicm_Free(m_signal_vector_double_output);
+    Cicm_Free(m_vector_float_input);
+    Cicm_Free(m_vector_double_input);
+    Cicm_Free(m_vector_float_output);
+    Cicm_Free(m_vector_double_output);
 }
 

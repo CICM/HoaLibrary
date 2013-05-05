@@ -19,7 +19,7 @@
 #include "AmbisonicsBinaural.h"
 
 
-AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, std::string aPinnaSize, double aSamplingRate, long aVectorSize) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, long aPinnaSize, double aSamplingRate, long aVectorSize) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
     /* Limit Order Due To HRTFs Discretization */
     if (m_order > 35)
@@ -79,11 +79,13 @@ long AmbisonicsBinaural::loadImpulses()
         m_impulse_size = 200;
         m_sampling_rate = 44100;
     }
+    std::string pinna;
     
-    if (m_pinna_size != "Small" && m_pinna_size != "Large")
-        m_pinna_size = "Small";
-    
-    m_hrtf_full_path += Tools::intToString(m_sampling_rate) + "/" + m_pinna_size + "/";
+    if (m_pinna_size == Hoa_Large)
+        pinna = "Large";
+    else
+        pinna = "Small";
+    m_hrtf_full_path += Tools::intToString(m_sampling_rate) + "/" + pinna + "/";
     
     /* Load HRTFs */
 	std::string leftFilePath;
@@ -160,8 +162,9 @@ long AmbisonicsBinaural::loadImpulses()
     return 1;
 }
 
-void AmbisonicsBinaural::setPinnaSize(std::string aPinnaSize)
+void AmbisonicsBinaural::setPinnaSize(long aPinnaSize)
 {
+    aPinnaSize = Tools::clip(aPinnaSize, (long)Hoa_Small, (long)Hoa_Large);
     if(aPinnaSize != m_pinna_size)
     {
         m_pinna_size = aPinnaSize;
@@ -221,6 +224,14 @@ long AmbisonicsBinaural::matrixResize(long aVectorSize)
     }
     else
         return 0;
+}
+
+std::string AmbisonicsBinaural::getLoudspeakerName(long anIndex)
+{
+    if(anIndex == 0)
+        return "Left headphone";
+    else
+        return "Right headphone";
 }
 
 AmbisonicsBinaural::~AmbisonicsBinaural()
