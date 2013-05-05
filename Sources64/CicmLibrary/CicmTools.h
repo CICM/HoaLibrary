@@ -52,16 +52,12 @@ public:
 
 	template<typename Type> static Type clip_min(Type aValue, Type aMinimum = 0)
 	{
-		if(aValue < aMinimum)
-			aValue = aMinimum;
-		return aValue;
+        return (aValue > aMinimum) ? aValue : aMinimum;
 	}
 
-	template<typename Type> static Type clip_max(Type aValue, Type aMinimum = 0)
+	template<typename Type> static Type clip_max(Type aValue, Type aMaximum = 0)
 	{
-		if(aValue < aMinimum)
-			aValue = aMinimum;
-		return aValue;
+        return (aValue < aMaximum) ? aValue : aMaximum;
 	}
 
 	template<typename Type> static Type clip_power_of_two(Type aValue)
