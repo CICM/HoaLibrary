@@ -26,12 +26,6 @@ enum
     Hoa_Restitution
 };
 
-enum
-{
-    Hoa_Small  = 0,
-    Hoa_Large
-};
-
 #include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaBinaural/AmbisonicsBinaural.h"
 #include "../hoaDecoder/AmbisonicsDecoder.h"
@@ -48,16 +42,24 @@ private:
     AmbisonicsRestitution*  m_restitution;
 
 public:
-	AmbisonicsMultiDecoder(long anOrder = 1, std::string aRootPath = "", std::string aPinnaSize = "Small", long aVectorSize = 0, long aSamplingRate = 44100, long aMode = Hoa_Ambisonics, double aConfiguration = 4., double anOffset = 0.);
+	AmbisonicsMultiDecoder(long anOrder = 1, std::string aRootPath = "", long aPinnaSize = Hoa_Small, long aVectorSize = 0, long aSamplingRate = 44100, long aMode = Hoa_Ambisonics, long aNumberOfLoudspeakers = 4, double aConfiguration = 5.1, double anOffset = 0.);
     
     void    setMode(long aMode);
     long    getMode();
-    void    setConfiguration(double aConfiguration);
-    double  getConfiguration();
+    
+    void    setNumberOfLoudspeakers(long aConfiguration);
+    long    getNumberOfLoudspeakers();
     void    setOffset(double anOffset);
     double  getOffset();
+    
+    void    setPinnaSize(long aPinnaSize);
+    long    getPinnaSize();
+    
+    void    setConfiguration(double aConfiguration);
+    double  getConfiguration();
     void    setLoudspeakerAngle(long anIndex, double anAngle);
     double  getLoudspeakerAngle(long anIndex);
+    std::string  getLoudspeakerName(long anIndex);
     
     void    setVectorSize(long aVectorSize);
     void    setSamplingRate(long aSamplingRate);

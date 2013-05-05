@@ -123,6 +123,20 @@ public:
         return number;
     }
     
+    static std::string floatToString(float aValue)
+    {
+        char number[256];
+        sprintf(number, "%f", (float)aValue);
+        return number;
+    }
+    
+    static std::string floatToStringOneDecimal(float aValue)
+    {
+        char number[256];
+        sprintf(number, "%.f", (float)aValue);
+        return number;
+    }
+    
     static double* Read_Wav(char *wave_file)
     {
         FILE *file;

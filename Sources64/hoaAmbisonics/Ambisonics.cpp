@@ -90,6 +90,15 @@ void Ambisonics::setSamplingRate(long aSamplingRate)
 	m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
 }
 
+std::string Ambisonics::getHarmonicsName(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_harmonics)
+        return "Harmonic " + Tools::intToString(getHarmonicIndex(anIndex));
+    else
+        return "No harmonic";
+}
+
+
 Ambisonics::~Ambisonics()
 {
 	;

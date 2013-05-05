@@ -44,6 +44,7 @@ public:
     void setOffset(double anOffset);
     double getOffset();
     double getLoudspeakerAngle(long anIndex);
+    std::string  getLoudspeakerName(long anIndex);
     
 	~AmbisonicsDecoder();
 	

@@ -52,6 +52,7 @@ public:
     double  getConfiguration();
     void    setLoudspeakerAngle(long anIndex, double anAngle);
     double  getLoudspeakerAngle(long anIndex);
+    std::string  getLoudspeakerName(long anIndex);
     
 	~AmbisonicsRestitution();
 	

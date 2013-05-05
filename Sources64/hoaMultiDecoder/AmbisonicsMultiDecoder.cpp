@@ -18,13 +18,12 @@
 
 #include "AmbisonicsMultiDecoder.h"
 
-AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, std::string aRootPath, std::string aPinnaSize, long aVectorSize, long aSamplingRate, long aMode, double aConfiguration, double anOffset) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, std::string aRootPath, long aPinnaSize, long aVectorSize, long aSamplingRate, long aMode, long aNumberOfLoudspeakers, double aConfiguration, double anOffset) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
-	m_decoder = new AmbisonicsDecoder(m_order);
+	m_decoder = new AmbisonicsDecoder(m_order, aNumberOfLoudspeakers, anOffset, m_vector_size);
     m_binaural = new AmbisonicsBinaural(m_order, aRootPath, aPinnaSize, m_vector_size, m_sampling_rate);
-    m_restitution = new AmbisonicsRestitution(m_order);
+    m_restitution = new AmbisonicsRestitution(m_order, aConfiguration, m_vector_size);
     setMode(aMode);
-    setConfiguration(aConfiguration);
     setOffset(anOffset);
 }
 
@@ -58,57 +57,51 @@ long AmbisonicsMultiDecoder::getMode()
     return m_mode;
 }
 
-void AmbisonicsMultiDecoder::setConfiguration(double aConfiguration)
+/* ANBISONICS */
+void AmbisonicsMultiDecoder::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
 {
+    m_decoder->setNumberOfLoudspeakers(aNumberOfLoudspeakers);
     if(m_mode == Hoa_Ambisonics)
-    {
-        m_decoder->setNumberOfLoudspeakers(aConfiguration);
-        m_number_of_outputs = m_decoder->getNumberOfLoudspeakers();
-    }
-    else if(m_mode == Hoa_Binaural)
-    {
-        if(aConfiguration == Hoa_Large)
-            m_binaural->setPinnaSize("Large");
-        else
-            m_binaural->setPinnaSize("Small");
-    }
-    else if(m_mode == Hoa_Restitution)
-    {
-        m_restitution->setConfiguration(aConfiguration);
-    }
+        m_number_of_outputs = m_decoder->getNumberOfOutputs();
 }
 
-double AmbisonicsMultiDecoder::getConfiguration()
+long AmbisonicsMultiDecoder::getNumberOfLoudspeakers()
 {
-    if(m_mode == Hoa_Restitution)
-    {
-        return m_restitution->getConfiguration();
-    }
-    else if(m_mode == Hoa_Binaural)
-    {
-        if(m_binaural->getPinnaSize() == "Large")
-            return Hoa_Large;
-        else
-            return Hoa_Small;
-    }
-    else
-    {
-        return m_decoder->getNumberOfOutputs();
-    }
+    return m_decoder->getNumberOfOutputs();
 }
 
 void AmbisonicsMultiDecoder::setOffset(double anOffset)
 {
-    if(m_mode == Hoa_Ambisonics)
-        m_decoder->setOffset(anOffset);
+    m_decoder->setOffset(anOffset);
 }
 
 double AmbisonicsMultiDecoder::getOffset()
 {
-    if(m_mode == Hoa_Ambisonics)
-        return m_decoder->getOffset();
-    else
-        return NULL;
+    return m_decoder->getOffset();
+}
+
+/* BINAURAL */
+void AmbisonicsMultiDecoder::setPinnaSize(long aPinnaSize)
+{
+    m_binaural->setPinnaSize(aPinnaSize);
+}
+
+long AmbisonicsMultiDecoder::getPinnaSize()
+{
+    return m_binaural->getPinnaSize();
+}
+
+/* RESTITUTION */
+void AmbisonicsMultiDecoder::setConfiguration(double aConfiguration)
+{
+    m_restitution->setConfiguration(aConfiguration);
+    if(m_mode == Hoa_Restitution)
+        m_number_of_outputs = m_restitution->getNumberOfOutputs();
+}
+
+double AmbisonicsMultiDecoder::getConfiguration()
+{
+    return m_restitution->getConfiguration();
 }
 
 void AmbisonicsMultiDecoder::setLoudspeakerAngle(long anIndex, double anAngle)
@@ -119,18 +112,7 @@ void AmbisonicsMultiDecoder::setLoudspeakerAngle(long anIndex, double anAngle)
 
 double AmbisonicsMultiDecoder::getLoudspeakerAngle(long anIndex)
 {
-    if(m_mode == Hoa_Restitution)
-    {
-        return m_restitution->getLoudspeakerAngle(anIndex);
-    }
-    else if(m_mode == Hoa_Binaural)
-    {
-        return NULL;
-    }
-    else
-    {
-        return m_decoder->getLoudspeakerAngle(anIndex);
-    }
+    return m_restitution->getLoudspeakerAngle(anIndex);
 }
 
 void AmbisonicsMultiDecoder::setVectorSize(long aVectorSize)
@@ -164,6 +146,22 @@ void AmbisonicsMultiDecoder::setSamplingRate(long aSamplingRate)
     else
     {
         m_decoder->setSamplingRate(m_vector_size);
+    }
+}
+
+std::string  AmbisonicsMultiDecoder::getLoudspeakerName(long anIndex)
+{
+    if(m_mode == Hoa_Restitution)
+    {
+        return m_restitution->getLoudspeakerName(anIndex);
+    }
+    else if(m_mode == Hoa_Binaural)
+    {
+        return m_binaural->getLoudspeakerName(anIndex);
+    }
+    else
+    {
+        return m_decoder->getLoudspeakerName(anIndex);
     }
 }
 
