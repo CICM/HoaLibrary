@@ -46,7 +46,8 @@ typedef struct  _HoaRecomposerUI
     //microphones
     AmbisonicVirtualMicUIManager* f_mics;
     int			f_numberOfMic;
-    float		f_MicAngles[MAX_MICS];
+    double		f_MicAngles[MAX_MICS];
+    double		f_MicWiders[MAX_MICS];
     int			f_isMicSelected[MAX_MICS];
     int			f_aMicIsSelected;
 	
@@ -65,6 +66,7 @@ typedef struct  _HoaRecomposerUI
     int         f_last_mouseUpOverMic;
     t_pt		f_last_mouseDrag;
     double		f_last_mouseDragAngle;
+    double      f_last_mouseDragRadius;
     
     // outlets
 	void*		f_out;
@@ -526,7 +528,6 @@ int isPointOverAMic(t_HoaRecomposerUI *x, t_pt *pt)
 void draw_background(t_HoaRecomposerUI *x,  t_object *view, t_rect *rect)
 {
 	double w = x->rect.width;
-    //t_jrgba outsideColor = {0,0,0,0.1};
     t_jrgba HpMarkerColor = {0.1,0.1,0.1,1};
     double hpSize;
 	hpSize = (w / 20.) * 0.4;
@@ -620,13 +621,9 @@ void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
                 x->f_mics->setSelected(isMouseDownOverAMic, 1);
             }
         }
-        if (modifiers == 17) // cmd
+        else if (modifiers == 17) // cmd
         {
             x->f_mics->setSelected(isMouseDownOverAMic, -1);
-        }
-        else if (modifiers == 18 && x->f_last_mouseDownOverMic != -1) //shift
-        {
-            x->f_mics->selectMicsBetweenMics(x->f_last_mouseDownOverMic, isMouseDownOverAMic);
         }
     }
     
@@ -641,11 +638,23 @@ void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
     double w = x->rect.width;
     t_pt ptTranformed = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
     double angleDrag = Tools::angle(ptTranformed.x, ptTranformed.y) - CICM_PI*0.5;
+    double radiusDrag = Tools::radius(ptTranformed.x, ptTranformed.y) ;
+    
     if (x->f_last_mouseDownOverMic != -1) {
-        x->f_mics->rotateSelectedMicsWithRadian(angleDrag, x->f_last_mouseDownOverMic);
+        if (modifiers == 18) // shift => set wider
+        {
+            double radiusDelta = x->f_last_mouseDragRadius - radiusDrag;
+            x->f_mics->setSelectedMicsWiderValueWithRadiusDelta(radiusDelta);
+        }
+        else
+        {
+            x->f_mics->rotateSelectedMicsWithRadian(angleDrag, x->f_last_mouseDownOverMic);
+        }
     }
+    
 	x->f_last_mouseDrag = pt;
     x->f_last_mouseDragAngle = angleDrag;
+    x->f_last_mouseDragRadius = radiusDrag;
     HoaRecomposerUI_output(x);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
     jbox_redraw((t_jbox *)x);

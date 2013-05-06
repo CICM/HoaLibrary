@@ -39,16 +39,20 @@ public:
     void setAnglesInDegree(double* _degrees, long _len);
     void setAngleInRadian(const int _index, double _radian);
     void setAngleInDegree(const int _index, double _degree);
+    void setWiderValues(double* _widerValues, long _len);
+    void setWiderValue(const int _index, long _widerValue);
     void setDistance(const int _index, double _distance);
     void setSelected(const int _index, int _selectedState);
     void selectMicsBetweenMics(int _micIndex1, int _micIndex2);
     void rotateSelectedMicsWithRadian(double _newRadian, int _sourceBeingDragged);
+    void setSelectedMicsWiderValueWithRadiusDelta(double _deltaRadius);
     
     inline long getNumberOfMics() {return m_numberOfMics;}
     inline bool isSelected(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].isSelected();};
     inline double getDistance(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].getDistance();}
     inline double getAngleInRadian(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].getAngleInRadian();}
     inline double getAngleInDegree(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].getAngleInDegree();}
+    inline double getWiderValue(const int _index) {return m_mic[Tools::clip(_index, 0, MAX_MICS-1)].getWiderValue();}
 };
 
 #endif /* defined(__hoa_recomposer__AmbisonicVirtualMicManager__) */

@@ -22,6 +22,7 @@
 AmbisonicVirtualMicUI::AmbisonicVirtualMicUI()
 {
     m_angleInRadian = 0;
+    m_widerValue = 1;
     m_distance = 1;
     m_isSelected = false;
 }
@@ -37,6 +38,11 @@ void AmbisonicVirtualMicUI::setAngleInRadian(double _radian)
 void AmbisonicVirtualMicUI::rotateAngleInRadian(double _deltaRadian)
 {
     m_angleInRadian = Tools::wrap(m_angleInRadian + _deltaRadian, 0, CICM_2PI);
+}
+
+void AmbisonicVirtualMicUI::setWiderValue(double _widerValue)
+{
+    m_widerValue = Tools::wrap(_widerValue, 0.0f, 1.0f);
 }
 
 void AmbisonicVirtualMicUI::setSelected(int _selectedState)

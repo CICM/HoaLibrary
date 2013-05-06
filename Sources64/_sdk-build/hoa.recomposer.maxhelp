@@ -88,73 +88,6 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
-									"id" : "obj-24",
-									"linecount" : 2,
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 827.0, 495.0, 50.0, 36.0 ],
-									"text" : "0. -999."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 14.0,
-									"id" : "obj-20",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 790.0, 291.0, 48.0, 22.0 ],
-									"text" : "sig~ 1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-18",
-									"maxclass" : "gain~",
-									"numinlets" : 2,
-									"numoutlets" : 2,
-									"outlettype" : [ "signal", "int" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 900.0, 349.0, 22.0, 140.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-16",
-									"maxclass" : "live.gain~",
-									"numinlets" : 2,
-									"numoutlets" : 5,
-									"outlettype" : [ "signal", "signal", "", "float", "list" ],
-									"parameter_enable" : 1,
-									"patching_rect" : [ 790.0, 331.0, 48.0, 136.0 ],
-									"saved_attribute_attributes" : 									{
-										"valueof" : 										{
-											"parameter_unitstyle" : 4,
-											"parameter_mmax" : 6.0,
-											"parameter_mmin" : -70.0,
-											"parameter_initial" : [ 0.0 ],
-											"parameter_type" : 0,
-											"parameter_shortname" : "live.gain~",
-											"parameter_longname" : "live.gain~"
-										}
-
-									}
-,
-									"varname" : "live.gain~"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 14.0,
 									"id" : "obj-8",
 									"maxclass" : "message",
 									"numinlets" : 2,
@@ -343,7 +276,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 428.75, 578.0, 266.0, 36.0 ],
-									"text" : "0. 0.785398 1.570796 2.356194 3.141593 3.926991 4.712389 6.041721"
+									"text" : "0. 0.785398 1.570796 2.356194 3.141593 3.926991 4.712389 5.497787"
 								}
 
 							}
@@ -809,15 +742,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-24", 1 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-16", 4 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-11", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -832,15 +756,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-2", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-16", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-20", 0 ]
 								}
 
 							}
@@ -1845,10 +1760,6 @@
 			}
  ],
 		"lines" : [  ],
-		"parameters" : 		{
-			"obj-41::obj-16" : [ "live.gain~", "live.gain~", 0 ]
-		}
-,
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",

@@ -25,9 +25,10 @@
 class AmbisonicVirtualMicUI
 {
 private:
-    double m_angleInRadian;
-    double m_distance;
-    bool m_isSelected;
+    double  m_widerValue;
+    double  m_angleInRadian;
+    double  m_distance;
+    bool    m_isSelected;
     
 public:
     AmbisonicVirtualMicUI();
@@ -36,6 +37,7 @@ public:
     void setAngleInRadian(double _radian);
     inline void setAngleInDegree(double _degree) {setAngleInRadian(Tools::degToRad(_degree));}
     inline void setDistance(double _distance) {m_distance = Tools::clip_min(_distance, 0.);}
+    void setWiderValue(double _widerValue);
     void setSelected(int _selectedState);
     void rotateAngleInRadian(double _deltaRadian);
     
@@ -43,6 +45,7 @@ public:
     inline double getDistance() {return m_distance;}
     inline double getAngleInRadian() {return m_angleInRadian;}
     inline double getAngleInDegree() {return Tools::radToDeg(m_angleInRadian);}
+    inline double getWiderValue() {return m_angleInRadian;}
 };
 
 #endif /* defined(__hoa_recomposer__AmbisonicVirtualMicUI__) */

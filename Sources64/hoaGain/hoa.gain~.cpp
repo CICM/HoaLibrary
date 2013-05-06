@@ -38,7 +38,7 @@ static double s_hoaGain_startval;
 #define hoaGain_CORNERSIZE				(6.)
 
 #define hoaGain_DISPLAYINSET			(11)	// amount subtracted from rect for value
-#define knobMargin                      (6)		// Knob Margin
+#define knobMargin                      (4)		// Knob Margin
 #define knobRound                       (8)		// Knob Round
 
 enum inputmode {
@@ -65,6 +65,7 @@ typedef struct _hoaGain
     char        f_inputMode;
     float       f_range[2];
     double      j_valdB;
+    double      j_defaultValuedB;
     
     //inputs/output
     void*       f_inlet_val;
@@ -101,6 +102,7 @@ void hoaGain_bang(t_hoaGain *x);
 void hoaGain_int(t_hoaGain *x, long n);
 void hoaGain_float(t_hoaGain *x, double f);
 void hoaGain_float_dB(t_hoaGain *x, double dBValue); // for mouse value setting
+void hoaGain_set_dB(t_hoaGain *x, double dBValue);
 void hoaGain_set(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv);
 void hoaGain_setminmax(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv);
 void hoaGain_contextValue(t_hoaGain *x, long valueType, double value);
@@ -108,6 +110,7 @@ void hoaGain_setInputModeValue(t_hoaGain *x, double value, bool outputTheValue);
 double hoaGain_getInputModeValue(t_hoaGain *x);
 t_max_err hoaGain_setattr_interp(t_hoaGain *x, t_object *attr, long ac, t_atom *av);
 t_max_err hoaGain_setattr_channels(t_hoaGain *x, t_object *attr, long ac, t_atom *av);
+void hoaGain_resize_io(t_hoaGain *x, long newNumberOfChannel);
 t_max_err hoaGain_setattr_range(t_hoaGain *x, t_object *attr, long ac, t_atom *av);
 t_max_err hoaGain_setvalueof(t_hoaGain *x, long ac, t_atom *av);
 t_max_err hoaGain_getvalueof(t_hoaGain *x, long *ac, t_atom **av);
@@ -180,6 +183,9 @@ int C74_EXPORT main()
     CLASS_ATTR_CHAR(c,"inputmode", 0, t_hoaGain, f_inputMode);
 	CLASS_ATTR_LABEL(c,"inputmode", 0, "Input Mode");
 	CLASS_ATTR_ENUMINDEX3(c, "inputmode", 0, "DeciBels", "Amplitude", "Midi");
+    
+    CLASS_ATTR_DOUBLE       (c, "defvaldb", 0, t_hoaGain, j_defaultValuedB);
+    CLASS_ATTR_LABEL        (c, "defvaldb", 0, "Default Value (dB)");
 	CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	CLASS_ATTR_CHAR(c,"orientation",0,t_hoaGain,j_orientation);
@@ -215,6 +221,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_ATTR_PARSE(c, "color","save", USESYM(long), 0, "0");
 
 	CLASS_ATTR_DEFAULT_SAVE(c,"relative",0,"0");
+    CLASS_ATTR_DEFAULT_SAVE(c,"defvaldb",0,"0");
     CLASS_ATTR_DEFAULT_SAVE(c,"inputmode",0,"0");
     CLASS_ATTR_DEFAULT_SAVE(c,"interp",0,"20");
 	CLASS_ATTR_LABEL(c,"min", 0, "Output Minimum");
@@ -239,7 +246,7 @@ int C74_EXPORT main()
     CLASS_ATTR_FLOAT_ARRAY      (c, "range", 0, t_hoaGain, f_range, 2);
     CLASS_ATTR_ACCESSORS        (c, "range", (method)NULL,(method)hoaGain_setattr_range);
 	CLASS_ATTR_ORDER			(c, "range", 0, "2");
-	CLASS_ATTR_LABEL			(c, "range", 0, "Display Range (dB)");
+	CLASS_ATTR_LABEL			(c, "range", 0, "Range (dB)");
 	CLASS_ATTR_DEFAULT			(c, "range", 0, "-70. 18.");
 	CLASS_ATTR_SAVE             (c, "range", 1);
 
@@ -278,16 +285,17 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
 			;
 
 	x->j_val = 0;
-    x->j_valdB = 0;
+    x->j_defaultValuedB = 0;
+    x->j_valdB = x->j_defaultValuedB;
     x->f_interp = 20;
     
-    dictionary_getlong(d, gensym("channels"), &x->f_numberOfChannels); // make sure we have the number of inputs before set up other args.
+    x->f_numberOfChannels = 8;
+    
+    //dictionary_getlong(d, gensym("channels"), &x->f_numberOfChannels); // make sure we have the number of inputs before set up other args.
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.z_box.b_firstin = (t_object *)x;
     
-    x->f_amp = new CicmLine(sys_getblksize(), sys_getsr(), 100.);
-    
-    attr_dictionary_process(x,d); // handle attribute args
+    x->f_amp = new CicmLine(sys_getblksize(), sys_getsr(), x->f_interp);
     
     // inputs
 	dsp_setupjbox((t_pxjbox *)x, x->f_numberOfChannels + 1);
@@ -295,7 +303,11 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
     x->f_outlet_infos = outlet_new(x, NULL);
     for (int i=0; i < x->f_numberOfChannels; i++)
         outlet_new(x,"signal");
-        //outlet_append((t_object *)x, NULL, gensym("signal"));
+    
+    attr_dictionary_process(x,d); // handle attribute args
+    
+    hoaGain_set_dB(x, x->j_defaultValuedB);
+    
     
     jbox_ready((t_jbox *)x);
     x->j_box.z_misc = Z_NO_INPLACE;
@@ -306,9 +318,9 @@ long hoaGain_oksize(t_hoaGain *x, t_rect *newrect)
 {
     int isHoriz = hoaGain_ishorizontal(x, newrect);
     long minWidth, minHeight;
-    minWidth = minHeight = 20;
-    if (isHoriz) minWidth = 70; // horizontal
-    else minHeight = 70; // vertical
+    minWidth = minHeight = 10;
+    if (isHoriz) minWidth = 30; // horizontal
+    else minHeight = 30; // vertical
     if (newrect->width < minWidth) newrect->width = minWidth;
     if (newrect->height < minHeight) newrect->height = minHeight;
     return 0;
@@ -414,6 +426,17 @@ void hoaGain_float_dB(t_hoaGain *x, double dBValue)
 	jbox_redraw((t_jbox *)x);
     
     hoaGain_bang(x);
+}
+
+void hoaGain_set_dB(t_hoaGain *x, double dBValue)
+{
+    
+    x->j_val = hoaGain_constrain_real_value(x, dBValue) - x->j_min;
+    x->j_valdB = x->j_val + x->j_min;
+    hoaGain_set_gain(x);
+    object_notify(x, _sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
+	jbox_redraw((t_jbox *)x);    
 }
 
 double hoaGain_getInputModeValue(t_hoaGain *x)
@@ -766,26 +789,56 @@ t_max_err hoaGain_setattr_interp(t_hoaGain *x, t_object *attr, long ac, t_atom *
 t_max_err hoaGain_setattr_channels(t_hoaGain *x, t_object *attr, long ac, t_atom *av)
 {
 	long d;
-    long old_numberOfChannels = x->f_numberOfChannels;
-    //long IO_diff;
-    //t_object *b = NULL;
 	if (ac && av) {
         if (atom_gettype(av) == A_LONG) {
             d = atom_getlong(av);
-            if (old_numberOfChannels != d) {
-                x->f_numberOfChannels = Tools::clip(d, long(MIN_IO), long(MAX_IO));
-                /*
-                IO_diff = x->f_numberOfChannels - old_numberOfChannels;
-                object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
-                outlet_delete(outlet_nth((t_object*)x, i));
-                object_method((t_jbox *)x, gensym("dynlet_begin"));
-                dsp_resize((t_pxobject*)x, x->f_numberOfChannels);
-                object_method((t_jbox *)x, gensym("dynlet_end"));
-                */
-            }
+            hoaGain_resize_io(x, d);
         }
 	}
 	return MAX_ERR_NONE;
+}
+
+void hoaGain_resize_io(t_hoaGain *x, long newNumberOfChannel)
+{
+    int dspState = sys_getdspobjdspstate((t_object*)x);
+    int lastNumberOfChannels = x->f_numberOfChannels;
+    newNumberOfChannel = Tools::clip(newNumberOfChannel, long(MIN_IO), long(MAX_IO));
+    if (lastNumberOfChannels != newNumberOfChannel) {
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        
+        t_object *b = NULL;
+        object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+        object_method(b, gensym("dynlet_begin"));
+        
+        dsp_resize((t_pxobject*)x, newNumberOfChannel+1);
+        
+        outlet_delete(outlet_nth((t_object*)x, lastNumberOfChannels)); // delete value out outlet
+        
+        if(lastNumberOfChannels > newNumberOfChannel)
+        {
+            for(int i = lastNumberOfChannels; i > newNumberOfChannel; i--)
+            {
+                outlet_delete(outlet_nth((t_object*)x, i-1));
+            }
+        }
+        else if(lastNumberOfChannels < newNumberOfChannel)
+        {
+            for(int i = lastNumberOfChannels; i < newNumberOfChannel; i++)
+            {
+                outlet_append((t_object*)x, NULL, gensym("signal"));
+            }
+        }
+        
+        x->f_outlet_infos = outlet_append((t_object*)x, NULL, NULL); // restore value out outlet
+        
+        object_method(b, gensym("dynlet_end"));
+        
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("start"));
+        
+        x->f_numberOfChannels = newNumberOfChannel;
+    }
 }
 
 t_max_err hoaGain_setattr_range(t_hoaGain *x, t_object *attr, long ac, t_atom *av)
@@ -833,37 +886,11 @@ t_max_err hoaGain_getvalueof(t_hoaGain *x, long *ac, t_atom **av)
         atom_setfloat(*av+1, hoaGain_getInputModeValue(x));
     }
 	return MAX_ERR_NONE;
-    
-    /*
-	t_atom a;
-	
-	if (ac && av) {	
-		if (*ac && *av) {
-			//memory passed in use it
-		} else {
-			*av = (t_atom *)getbytes(sizeof(t_atom));
-		}
-		*ac = 1;
-        atom_setfloat(&a,x->j_val + x->j_min);
-		**av = a; 
-	}
-	return MAX_ERR_NONE;
-    */
 }
 
 void hoaGain_assign(t_hoaGain *x, double f, long notify)
 {
     hoaGain_setInputModeValue(x, f, notify);
-    /*
-	x->j_val = hoaGain_constrain_real_value(x,f) - x->j_min;
-    x->j_valdB = x->j_val + x->j_min;
-    hoaGain_set_gain(x);
-	if (notify)
-		object_notify(x, _sym_modified, NULL);
-    
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
-	jbox_redraw((t_jbox *)x);
-    */
 }
 
 double hoaGain_constrain_real_value(t_hoaGain *x, double f)
@@ -950,7 +977,7 @@ double hoaGain_valtodb(t_hoaGain *x, double val)
 
 void hoaGain_mousedoubleclick(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    hoaGain_float_dB(x, 0);
+    hoaGain_float_dB(x, x->j_defaultValuedB);
 }
 
 void hoaGain_mousedown(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifiers)

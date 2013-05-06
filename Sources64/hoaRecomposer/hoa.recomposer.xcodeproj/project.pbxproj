@@ -12,8 +12,8 @@
 		2C75F364172D655C000BDABC /* AmbisonicVirtualMicUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C75F362172D655C000BDABC /* AmbisonicVirtualMicUI.h */; };
 		2C75F367172D65E6000BDABC /* AmbisonicVirtualMicUIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C75F365172D65E6000BDABC /* AmbisonicVirtualMicUIManager.cpp */; };
 		2C75F368172D65E6000BDABC /* AmbisonicVirtualMicUIManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C75F366172D65E6000BDABC /* AmbisonicVirtualMicUIManager.h */; };
+		2CB6473E1737066B005EE2C8 /* CicmLibrary in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6473D1737066B005EE2C8 /* CicmLibrary */; };
 		2CC13EDF172C149100873620 /* hoa.recomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC13EDE172C149100873620 /* hoa.recomposer.cpp */; };
-		2CC13EE1172C20AF00873620 /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC13EE0172C20AF00873620 /* cicmTools.h */; };
 		2CF61A471712D0620062A8EA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,8 +24,8 @@
 		2C75F365172D65E6000BDABC /* AmbisonicVirtualMicUIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVirtualMicUIManager.cpp; sourceTree = "<group>"; };
 		2C75F366172D65E6000BDABC /* AmbisonicVirtualMicUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicVirtualMicUIManager.h; sourceTree = "<group>"; };
 		2C75F369172DAF65000BDABC /* CicmProjectHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CicmProjectHeader.h; sourceTree = "<group>"; };
+		2CB6473D1737066B005EE2C8 /* CicmLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CicmLibrary; path = ../CicmLibrary; sourceTree = "<group>"; };
 		2CC13EDE172C149100873620 /* hoa.recomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.recomposer.cpp; sourceTree = "<group>"; };
-		2CC13EE0172C20AF00873620 /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cicmTools.h; path = ../cicmTools.h; sourceTree = "<group>"; };
 		2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.recomposer.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.recomposer.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -46,7 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */,
-				2CC13EE0172C20AF00873620 /* cicmTools.h */,
+				2CB6473D1737066B005EE2C8 /* CicmLibrary */,
 				2C75F369172DAF65000BDABC /* CicmProjectHeader.h */,
 				2CC13EDE172C149100873620 /* hoa.recomposer.cpp */,
 				2C75F361172D655C000BDABC /* AmbisonicVirtualMicUI.cpp */,
@@ -74,7 +74,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CC13EE1172C20AF00873620 /* cicmTools.h in Headers */,
 				2C75F364172D655C000BDABC /* AmbisonicVirtualMicUI.h in Headers */,
 				2C75F368172D65E6000BDABC /* AmbisonicVirtualMicUIManager.h in Headers */,
 			);
@@ -135,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C6E3332171047C000BA3BDC /* maxmspsdk.xcconfig in Resources */,
+				2CB6473E1737066B005EE2C8 /* CicmLibrary in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
