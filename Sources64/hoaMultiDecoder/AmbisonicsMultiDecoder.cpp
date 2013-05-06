@@ -112,7 +112,12 @@ void AmbisonicsMultiDecoder::setLoudspeakerAngle(long anIndex, double anAngle)
 
 double AmbisonicsMultiDecoder::getLoudspeakerAngle(long anIndex)
 {
-    return m_restitution->getLoudspeakerAngle(anIndex);
+    if(m_mode == Hoa_Ambisonics)
+        return m_decoder->getLoudspeakerAngle(anIndex);
+    else if(m_mode == Hoa_Restitution)
+        return m_restitution->getLoudspeakerAngle(anIndex);
+    else
+        return m_binaural->getLoudspeakerAngle(anIndex);
 }
 
 void AmbisonicsMultiDecoder::setVectorSize(long aVectorSize)

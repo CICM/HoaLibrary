@@ -12,6 +12,8 @@
 		8F18A8CC172A4ECD005FD621 /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F18A8CA172A4ECD005FD621 /* Ambisonics.h */; };
 		8F18A8CE172A5775005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8CD172A5775005FD621 /* Accelerate.framework */; };
 		8F18A8D2172A578D005FD621 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8D1172A578D005FD621 /* MaxAudioAPI.framework */; };
+		8FD5CC5A1737F896009BD586 /* Ambisonics.cpp in Resources */ = {isa = PBXBuildFile; fileRef = 8FD5CC581737F896009BD586 /* Ambisonics.cpp */; };
+		8FD5CC5B1737F896009BD586 /* Ambisonics.h in Resources */ = {isa = PBXBuildFile; fileRef = 8FD5CC591737F896009BD586 /* Ambisonics.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		8F18A8CA172A4ECD005FD621 /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonics.h; sourceTree = "<group>"; };
 		8F18A8CD172A5775005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F18A8D1172A578D005FD621 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		8FD5CC581737F896009BD586 /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = Ambisonics.cpp; sourceTree = "<group>"; };
+		8FD5CC591737F896009BD586 /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = Ambisonics.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,8 @@
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
+				8FD5CC581737F896009BD586 /* Ambisonics.cpp */,
+				8FD5CC591737F896009BD586 /* Ambisonics.h */,
 			);
 			name = iterator;
 			sourceTree = "<group>";
@@ -137,6 +143,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FD5CC5A1737F896009BD586 /* Ambisonics.cpp in Resources */,
+				8FD5CC5B1737F896009BD586 /* Ambisonics.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

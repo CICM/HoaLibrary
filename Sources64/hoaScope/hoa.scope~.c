@@ -393,7 +393,7 @@ t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, voi
 		}
 		else if(name == gensym("phcolor") || name == gensym("nhcolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("harminics_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 		}
 		else if(name == gensym("shadow"))
 		{
@@ -402,7 +402,7 @@ t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, voi
 			//if (x->f_shadow) object_attr_setlong(object_attr_get(x, gensym("cishadcolor")), gensym("invisible"), 0);
 			//else object_attr_setlong(object_attr_get(x, gensym("cishadcolor")), gensym("invisible"), 1);
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("harminics_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 		}
 		jbox_redraw((t_jbox *)x);
 	}

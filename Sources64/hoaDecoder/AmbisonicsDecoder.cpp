@@ -86,7 +86,9 @@ double AmbisonicsDecoder::getLoudspeakerAngle(long anIndex)
 
 std::string AmbisonicsDecoder::getLoudspeakerName(long anIndex)
 {
-    float angle = anIndex / (double)m_number_of_loudspeakers * 360.;
+    float angle = (anIndex / (double)m_number_of_loudspeakers * 360. + m_offset);
+    if(angle > 360.)
+        angle -= 360.;
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
         return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(angle) + "°";
     else

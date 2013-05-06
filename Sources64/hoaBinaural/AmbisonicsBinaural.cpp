@@ -234,6 +234,14 @@ std::string AmbisonicsBinaural::getLoudspeakerName(long anIndex)
         return "Right headphone";
 }
 
+double AmbisonicsBinaural::getLoudspeakerAngle(long anIndex)
+{
+    if(anIndex == 0)
+        return 90.f;
+    else
+        return 270.f;
+}
+
 AmbisonicsBinaural::~AmbisonicsBinaural()
 {
     delete m_decoder;

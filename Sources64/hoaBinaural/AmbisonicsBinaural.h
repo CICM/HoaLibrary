@@ -68,6 +68,7 @@ public:
     long    getGetHrtfLoaded(){return m_hrtf_loaded;};
     long    getHrtfSize(){return m_impulse_size;};
     long    getPinnaSize(){return m_pinna_size;};
+    double       getLoudspeakerAngle(long anIndex);
     std::string  getLoudspeakerName(long anIndex);
     
 	~AmbisonicsBinaural();
