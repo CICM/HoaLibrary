@@ -98,6 +98,27 @@ void AmbisonicVirtualMicUIManager::setDistance(const int _index, double _distanc
         m_mic[Tools::clip(_index, 0, MAX_MICS)].setDistance(_distance);
     }
 }
+
+void AmbisonicVirtualMicUIManager::setWiderValues(double* _widerValues, long _len)
+{
+    for (int i=0; i < _len && i < m_numberOfMics; i++) {
+        m_mic[i].setWiderValue(_widerValues[i]);
+    }
+}
+
+void AmbisonicVirtualMicUIManager::setWiderValue(const int _index, long _widerValue)
+{
+    if (_index == -1)
+    {
+        for (int i=0; i<MAX_MICS; i++)
+            m_mic[i].setWiderValue(_widerValue);
+    }
+    else
+    {
+        m_mic[Tools::clip(_index, 0, MAX_MICS)].setWiderValue(_widerValue);
+    }
+}
+
 void AmbisonicVirtualMicUIManager::setSelected(const int _index, int _selectedState)
 {
     if (_index == -1)
@@ -131,6 +152,15 @@ void AmbisonicVirtualMicUIManager::rotateSelectedMicsWithRadian(double _newRadia
     for (int i=0; i < m_numberOfMics; i++) {
         if (isSelected(i) && i != _sourceBeingDragged) {
             m_mic[i].rotateAngleInRadian(deltaAngle);
+        }
+    }
+}
+
+void AmbisonicVirtualMicUIManager::setSelectedMicsWiderValueWithRadiusDelta(double deltaRadius)
+{
+    for (int i=0; i < m_numberOfMics; i++) {
+        if (isSelected(i)) {
+            m_mic[i].setWiderValue(m_mic[i].getWiderValue() + deltaRadius );
         }
     }
 }

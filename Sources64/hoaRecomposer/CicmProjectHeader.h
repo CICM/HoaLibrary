@@ -21,7 +21,7 @@
 #define hoa_recomposer_CicmProjectHeader_h
 
 
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmTools.h"
 
 #define MAX_MICS 64
 #define MIN_MICS 0

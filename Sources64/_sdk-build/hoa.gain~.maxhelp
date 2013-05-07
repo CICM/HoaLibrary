@@ -608,7 +608,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 179.0, 70.0, 772.0, 578.0 ],
+						"rect" : [ 0.0, 26.0, 772.0, 578.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1195,7 +1195,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u922000163"
+									"varname" : "u702000166"
 								}
 
 							}
@@ -2758,7 +2758,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 772.0, 578.0 ],
+						"rect" : [ 179.0, 70.0, 772.0, 578.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2780,6 +2780,62 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-6",
+									"maxclass" : "flonum",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "float", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 366.0, 129.0, 50.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-3",
+									"maxclass" : "gain~",
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "signal", "int" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 189.0, 102.838226, 106.77948, 10.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.350365, 0.350365, 0.350365, 1.0 ],
+									"bordercolor" : [ 0.196253, 0.196253, 0.196253, 1.0 ],
+									"channels" : 16,
+									"id" : "obj-2",
+									"interp" : 400.0,
+									"intknobcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"knobcolor" : [ 0.164319, 0.164319, 0.164319, 1.0 ],
+									"maxclass" : "hoa.gain~",
+									"numinlets" : 17,
+									"numoutlets" : 17,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "" ],
+									"parameter_enable" : 1,
+									"patching_rect" : [ 334.854156, 102.838226, 31.75, 10.0 ],
+									"saved_attribute_attributes" : 									{
+										"valueof" : 										{
+											"parameter_initial" : [ 0, 0.0 ],
+											"parameter_type" : 3,
+											"parameter_invisible" : 1,
+											"parameter_shortname" : "hoa.gain~",
+											"parameter_longname" : "hoa.gain~[1]"
+										}
+
+									}
+,
+									"varname" : "hoa.gain~[1]"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bubble" : 1,
 									"bubblepoint" : 0.100001,
@@ -3868,6 +3924,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-6", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-2", 16 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-24", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -4477,7 +4542,8 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-11::obj-1" : [ "hoa.gain~", "hoa.gain~", 0 ]
+			"obj-11::obj-1" : [ "hoa.gain~", "hoa.gain~", 0 ],
+			"obj-11::obj-2" : [ "hoa.gain~[1]", "hoa.gain~", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
