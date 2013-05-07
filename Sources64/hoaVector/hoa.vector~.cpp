@@ -32,11 +32,22 @@ extern "C"
 typedef struct _HoaVectore
 {
 	t_pxobject					f_ob;
-	Ambisonicsvector				*f_ambiVector;
+	Ambisonicsvector            *f_ambiVector;
 
 	long						f_inputNumber;
 	long						f_outputNumber;
-    long                        f_mode;
+    
+    long                    f_output_mode;
+    t_symbol*               f_mode;
+    
+    t_atom_long             f_number_of_loudspeakers;
+    t_object*               f_offset_attr;
+    double                  f_offset;
+    t_symbol*               f_pinna_size;
+    t_atom_long             f_n_ls;
+    double                  f_configuration;
+    double                  f_angle_of_ls[256];
+    
 } t_HoaVectore;
 
 void *HoaVector_new(t_symbol *s, long argc, t_atom *argv);
@@ -63,7 +74,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)HoaVector_dsp64,     "dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaVector_assist,    "assist",	A_CANT, 0);
     
-    CLASS_ATTR_LONG					(c, "mode", 0, t_HoaVectore, f_mode);
+    CLASS_ATTR_LONG					(c, "mode", 0, t_HoaVectore, f_output_mode);
 	CLASS_ATTR_CATEGORY				(c, "mode", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "mode", 0, "1");
     CLASS_ATTR_ENUMINDEX            (c, "mode", 0, "Polar \" Cartesian");
@@ -155,38 +166,15 @@ t_int *HoaVector_perform(t_int *w)
 void HoaVector_assist(t_HoaVectore* x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
-        sprintf(s,"(Signal) Loudspeakers %ld", a);
+        sprintf(s,"(Signal) %s", x->f_ambiVector->getLoudspeakerName(a).c_str());
     else
-    {
-        if(!x->f_mode)
-        {
-            if(a == 0)
-                sprintf(s,"(Signal) Velocity Vector Radius");
-            else if(a == 1)
-                sprintf(s,"(Signal) Velocity Vector Angle");
-            else if(a == 2)
-                sprintf(s,"(Signal) Energy Vector Radius");
-            else if(a == 3)
-                sprintf(s,"(Signal) Energy Vector Angle");
-        }
-        else
-        {
-            if(a == 0)
-                sprintf(s,"(Signal) Velocity Vector Abscissa");
-            else if(a == 1)
-                sprintf(s,"(Signal) Velocity Vector Ordinate");
-            else if(a == 2)
-                sprintf(s,"(Signal) Energy Vector Abscissa");
-            else if(a == 3)
-                sprintf(s,"(Signal) Energy Vector Ordinate");
-        }
-    }
+        sprintf(s,"(Signal) %s", x->f_ambiVector->getVectorName(a).c_str());
 }
 
 void HoaVector_free(t_HoaVectore* x)
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_ambiVector);
+	delete x->f_ambiVector;
 }
 
 t_max_err mode_set(t_HoaVectore *x, t_object *attr, long ac, t_atom *av)

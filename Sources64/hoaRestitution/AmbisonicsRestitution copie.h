@@ -57,13 +57,11 @@ public:
 	AmbisonicsRestitution(long anOrder = 1, double aConfiguration = 2, long aResitutionMode = Hoa_Amplitude_Panning,  long aVectorSize = 0);
     
     void    setRestitutionMode(long aResitutionMode);
-    void    setConfiguration(double aConfiguration, bool standardOnOff = 1);
-    void    setLoudspeakerAngle(long anIndex, double anAngle);
-    
     long    getRestitutionMode();
+    void    setConfiguration(double aConfiguration);
     double  getConfiguration();
+    void    setLoudspeakerAngle(long anIndex, double anAngle);
     double  getLoudspeakerAngle(long anIndex);
-
     std::string  getLoudspeakerName(long anIndex);
     
 	~AmbisonicsRestitution();

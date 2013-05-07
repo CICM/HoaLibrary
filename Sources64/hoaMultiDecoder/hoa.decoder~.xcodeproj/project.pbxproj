@@ -14,12 +14,6 @@
 		8F18A8C617287E79005FD621 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8C517287E79005FD621 /* MaxAudioAPI.framework */; };
 		8F7E2D8D1735023700EEE6AE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7E2D8C1735023700EEE6AE /* CoreFoundation.framework */; };
 		8F9518951733A941000402C7 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95188C1733A941000402C7 /* CicmDefine.h */; };
-		8F9518961733A941000402C7 /* CicmFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F95188E1733A941000402C7 /* CicmFilter.cpp */; };
-		8F9518971733A941000402C7 /* CicmFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95188F1733A941000402C7 /* CicmFilter.h */; };
-		8F9518981733A941000402C7 /* CicmFilterBiquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518901733A941000402C7 /* CicmFilterBiquad.cpp */; };
-		8F9518991733A941000402C7 /* CicmFilterBiquad.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518911733A941000402C7 /* CicmFilterBiquad.h */; };
-		8F95189A1733A941000402C7 /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518921733A941000402C7 /* CicmLine.cpp */; };
-		8F95189B1733A941000402C7 /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518931733A941000402C7 /* CicmLine.h */; };
 		8F95189C1733A941000402C7 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518941733A941000402C7 /* CicmTools.h */; };
 		8F9518C31734E2B8000402C7 /* AmbisonicsRestitution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518C11734E2B8000402C7 /* AmbisonicsRestitution.cpp */; };
 		8F9518C41734E2B8000402C7 /* AmbisonicsRestitution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518C21734E2B8000402C7 /* AmbisonicsRestitution.h */; };
@@ -42,12 +36,6 @@
 		8F18A8C517287E79005FD621 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8F7E2D8C1735023700EEE6AE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		8F95188C1733A941000402C7 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
-		8F95188E1733A941000402C7 /* CicmFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilter.cpp; sourceTree = "<group>"; };
-		8F95188F1733A941000402C7 /* CicmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilter.h; sourceTree = "<group>"; };
-		8F9518901733A941000402C7 /* CicmFilterBiquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterBiquad.cpp; sourceTree = "<group>"; };
-		8F9518911733A941000402C7 /* CicmFilterBiquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterBiquad.h; sourceTree = "<group>"; };
-		8F9518921733A941000402C7 /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
-		8F9518931733A941000402C7 /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
 		8F9518941733A941000402C7 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
 		8F9518C11734E2B8000402C7 /* AmbisonicsRestitution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AmbisonicsRestitution.cpp; path = ../hoaRestitution/AmbisonicsRestitution.cpp; sourceTree = "<group>"; };
 		8F9518C21734E2B8000402C7 /* AmbisonicsRestitution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmbisonicsRestitution.h; path = ../hoaRestitution/AmbisonicsRestitution.h; sourceTree = "<group>"; };
@@ -127,24 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				8F95188C1733A941000402C7 /* CicmDefine.h */,
-				8F95188D1733A941000402C7 /* CicmFilters */,
-				8F9518921733A941000402C7 /* CicmLine.cpp */,
-				8F9518931733A941000402C7 /* CicmLine.h */,
 				8F9518941733A941000402C7 /* CicmTools.h */,
 			);
 			name = CicmLibrary;
 			path = ../CicmLibrary;
-			sourceTree = "<group>";
-		};
-		8F95188D1733A941000402C7 /* CicmFilters */ = {
-			isa = PBXGroup;
-			children = (
-				8F95188E1733A941000402C7 /* CicmFilter.cpp */,
-				8F95188F1733A941000402C7 /* CicmFilter.h */,
-				8F9518901733A941000402C7 /* CicmFilterBiquad.cpp */,
-				8F9518911733A941000402C7 /* CicmFilterBiquad.h */,
-			);
-			path = CicmFilters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,9 +131,6 @@
 				2C2F72E21711F4D400BF03DA /* AmbisonicsMultiDecoder.h in Headers */,
 				8FFAE4BB172B1573003EFB78 /* Ambisonics.h in Headers */,
 				8F9518951733A941000402C7 /* CicmDefine.h in Headers */,
-				8F9518971733A941000402C7 /* CicmFilter.h in Headers */,
-				8F9518991733A941000402C7 /* CicmFilterBiquad.h in Headers */,
-				8F95189B1733A941000402C7 /* CicmLine.h in Headers */,
 				8F95189C1733A941000402C7 /* CicmTools.h in Headers */,
 				8F9518C41734E2B8000402C7 /* AmbisonicsRestitution.h in Headers */,
 				8F9518C81734E2C2000402C7 /* AmbisonicsDecoder.h in Headers */,
@@ -245,9 +216,6 @@
 				2C2F72E11711F4D400BF03DA /* AmbisonicsMultiDecoder.cpp in Sources */,
 				2C2F72E31711F4D400BF03DA /* hoa.multidecoder~.cpp in Sources */,
 				8FFAE4BA172B1573003EFB78 /* Ambisonics.cpp in Sources */,
-				8F9518961733A941000402C7 /* CicmFilter.cpp in Sources */,
-				8F9518981733A941000402C7 /* CicmFilterBiquad.cpp in Sources */,
-				8F95189A1733A941000402C7 /* CicmLine.cpp in Sources */,
 				8F9518C31734E2B8000402C7 /* AmbisonicsRestitution.cpp in Sources */,
 				8F9518C71734E2C2000402C7 /* AmbisonicsDecoder.cpp in Sources */,
 				8F9518CB1734E2CB000402C7 /* AmbisonicsBinaural.cpp in Sources */,

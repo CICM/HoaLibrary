@@ -1,6 +1,5 @@
 /*
- *
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris Universite Paris 8
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Library General Public License as published
@@ -17,7 +16,7 @@
  *
  */
 
-#include "../hoaAmbisonics/Ambisonics.h"
+#include "AmbisonicsMeter.h"
 
 extern "C"
 {
@@ -58,7 +57,6 @@ typedef struct  _meter
 	
 	float		f_speakerRealAngle[MAX_SPEAKER];
 	float		f_speakerWidth[MAX_SPEAKER];
-	float		f_speakerWidthMax;
 	double		f_amplitudeOfLoudspeakers[MAX_SPEAKER];
 	double		f_energyOfLoudspeakers[MAX_SPEAKER];
 	double		f_abscisseOfLoudspeakers[MAX_SPEAKER];
@@ -441,7 +439,7 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
     }
     
 	double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
-	x->f_speakerWidthMax = 0.;
+
 	for(int i = 0; i < x->f_number_of_loudspeakers; i++)
 	{
 		curAngle = x->f_angles_of_loudspeakers[i];
@@ -461,7 +459,7 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
 		if (prevPortion < 0.) prevPortion += 360.;
 		
 		x->f_speakerWidth[i] = (prevPortion + nextPortion)*0.5;
-		if (x->f_speakerWidth[i] > x->f_speakerWidthMax) x->f_speakerWidthMax = x->f_speakerWidth[i];
+
 		x->f_speakerRealAngle[i] = (curAngle - prevPortion*0.5) + x->f_speakerWidth[i]*0.5;
 		x->f_abscisseOfLoudspeakers[i] = cos(Tools::degToRad(x->f_speakerRealAngle[i]));
 		x->f_ordonneOfLoudspeakers[i] = sin(Tools::degToRad(x->f_speakerRealAngle[i]));
@@ -757,7 +755,6 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 	warmLimit = hotLimit - x->f_nwarmleds;
 	tepidLimit = warmLimit - x->f_ntepidleds;
 	min_dB_to_display = -1 * ( (x->f_numleds * x->f_dbperled) - (x->f_dbperled * 0.5) );
-	x->f_speakerWidthMax = 0.;
 	
 	if (g)
 	{

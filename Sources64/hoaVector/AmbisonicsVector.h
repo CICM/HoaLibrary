@@ -25,14 +25,25 @@ class Ambisonicsvector : public Ambisonics
 {	
 private:
 	long		m_number_of_loudspeakers;
+    long        m_low_frequency_effect;
+    double      m_configuation;
+    
     double*     m_abscissa_of_loudspeakers;
     double*     m_ordinate_of_loudspeakers;
+    double*     m_angles_of_loudspeakers;
     int         m_mode;
     
 public:
-	Ambisonicsvector(long aNumberOfLoudspeakers, std::string aMode = "polar", long aVectorSize = 0);
+	Ambisonicsvector(double aConfiguration = 8., std::string aMode = "polar", long aVectorSize = 0);
 	
-	long getNumberOfLoudspeakers();
+	long    getNumberOfLoudspeakers();
+    void    setConfiguration(double aConfiguration);
+    double  getConfiguration();
+    void    setLoudspeakerAngle(long anIndex, double anAngle);
+    double  getLoudspeakerAngle(long anIndex);
+    std::string  getLoudspeakerName(long anIndex);
+    std::string  getVectorName(long anIndex);
+    
     std::string getMode();
 
     void setMode(std::string aMode);    
