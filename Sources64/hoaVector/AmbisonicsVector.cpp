@@ -28,7 +28,7 @@ Ambisonicsvector::Ambisonicsvector(double aConfiguration, std::string aMode, lon
     setMode("aMode");
 }
 
-void Ambisonicsvector::setConfiguration(double aConfiguration)
+void Ambisonicsvector::setConfiguration(double aConfiguration, bool standardOnOff)
 {
     /* Initialize the configuration */
     m_number_of_loudspeakers    = Tools::clip_min((long)aConfiguration, (long)1);
@@ -56,65 +56,73 @@ void Ambisonicsvector::setConfiguration(double aConfiguration)
     m_ordinate_of_loudspeakers = new double[m_number_of_loudspeakers];
     
     /* Define standard configuration */
-    if(m_number_of_loudspeakers == 1)          // Mono //
+    m_angles_of_loudspeakers = new double[m_number_of_loudspeakers];
+    if(standardOnOff)
     {
-        m_angles_of_loudspeakers[0] = 0.;
+        if(m_number_of_loudspeakers == 1)          // Mono //
+        {
+            m_angles_of_loudspeakers[0] = 0.;
+        }
+        else if(m_number_of_loudspeakers == 2)     // Stereo //
+        {
+            m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[1] = 330. / 360. * CICM_2PI;
+        }
+        else if(m_number_of_loudspeakers == 3)     // Dolby Surround //
+        {
+            m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[1] = 180. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[2] = 330. / 360. * CICM_2PI;
+        }
+        else if(m_number_of_loudspeakers == 4)     // Quadriphonic //
+        {
+            m_angles_of_loudspeakers[0] = 45. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[1] = 135. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[2] = 225. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[3] = 315. / 360. * CICM_2PI;
+        }
+        else if(m_number_of_loudspeakers == 5)     // Surround 5.1 //
+        {
+            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[3] = 250. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[4] = 330. / 360. * CICM_2PI;
+        }
+        else if(m_number_of_loudspeakers == 6)     // Surround 6.1 //
+        {
+            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[3] = 180. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[4] = 250. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[5] = 330. / 360. * CICM_2PI;
+        }
+        else if(m_number_of_loudspeakers == 7)     // Surround 7.1 //
+        {
+            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[3] = 135 / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[4] = 225 / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[5] = 250. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers[6] = 330. / 360. * CICM_2PI;
+        }
+        else                                            // Ambisonics base //
+        {
+            for (int i = 0; i < m_number_of_loudspeakers; i++)
+                m_angles_of_loudspeakers[i] = (double)i / (double)m_number_of_loudspeakers * CICM_2PI;
+        }
     }
-    else if(m_number_of_loudspeakers == 2)     // Stereo //
-    {
-        m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[1] = 330. / 360. * CICM_2PI;
-    }
-    else if(m_number_of_loudspeakers == 3)     // Dolby Surround //
-    {
-        m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[1] = 180. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[2] = 330. / 360. * CICM_2PI;
-    }
-    else if(m_number_of_loudspeakers == 4)     // Quadriphonic //
-    {
-        m_angles_of_loudspeakers[0] = 45. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[1] = 135. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[2] = 225. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[3] = 315. / 360. * CICM_2PI;
-    }
-    else if(m_number_of_loudspeakers == 5)     // Surround 5.1 //
-    {
-        m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[3] = 250. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[4] = 330. / 360. * CICM_2PI;
-    }
-    else if(m_number_of_loudspeakers == 6)     // Surround 6.1 //
-    {
-        m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[3] = 180. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[4] = 250. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[5] = 330. / 360. * CICM_2PI;
-    }
-    else if(m_number_of_loudspeakers == 7)     // Surround 7.1 //
-    {
-        m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[3] = 135 / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[4] = 225 / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[5] = 250. / 360. * CICM_2PI;
-        m_angles_of_loudspeakers[6] = 330. / 360. * CICM_2PI;
-    }
-    else                                          // Ambisonics base //
+    else                                                // Ambisonics base //
     {
         for (int i = 0; i < m_number_of_loudspeakers; i++)
             m_angles_of_loudspeakers[i] = (double)i / (double)m_number_of_loudspeakers * CICM_2PI;
     }
-    
-    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    for (int i = 0; i < m_number_of_loudspeakers; i++)
     {
-        m_abscissa_of_loudspeakers[i] = cos(Tools::degToRad(m_angles_of_loudspeakers[i]));
-        m_ordinate_of_loudspeakers[i] = sin(Tools::degToRad(m_angles_of_loudspeakers[i]));
+        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
+        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
     }
     
     m_number_of_inputs = m_number_of_loudspeakers + m_low_frequency_effect;
@@ -151,88 +159,12 @@ double Ambisonicsvector::getLoudspeakerAngle(long anIndex)
 
 std::string Ambisonicsvector::getLoudspeakerName(long anIndex)
 {
-    if(m_number_of_loudspeakers == 1)          // Mono //
-    {
-        return "Omnidirectionnal Channel";
-    }
-    else if(m_number_of_loudspeakers == 2)     // Stereo //
-    {
-        if(anIndex == 0)
-            return "Left channel";
-        else if(anIndex == 1)
-            return "Right channel";
-        else if(anIndex == 2)
-            return "Lfe channel";
-    }
-    else if(m_number_of_loudspeakers == 3)     // Dolby Surround //
-    {
-        if(anIndex == 0)
-            return "Left channel";
-        else if(anIndex == 1)
-            return "Right channel";
-        else if(anIndex == 2)
-            return "Back channel";
-        else if(anIndex == 3)
-            return "Lfe channel";
-    }
-    else if(m_number_of_loudspeakers == 5)     // Surround 5.1 //
-    {
-        if(anIndex == 0)
-            return "Center channel";
-        else if(anIndex == 1)
-            return "Front left channel";
-        else if(anIndex == 2)
-            return "Surround left channel";
-        else if(anIndex == 3)
-            return "Surround right channel";
-        else if(anIndex == 4)
-            return "Front right channel";
-        else if(anIndex == 5)
-            return "Lfe channel";
-    }
-    else if(m_number_of_loudspeakers == 6)     // Surround 6.1 //
-    {
-        if(anIndex == 0)
-            return "Front center channel";
-        else if(anIndex == 1)
-            return "Front left channel";
-        else if(anIndex == 2)
-            return "Surround left channel";
-        else if(anIndex == 3)
-            return "Back center channel";
-        else if(anIndex == 4)
-            return "Surround right channel";
-        else if(anIndex == 5)
-            return "Front right channel";
-        else if(anIndex == 6)
-            return "Lfe channel";
-    }
-    else if(m_number_of_loudspeakers == 7)     // Surround 7.1 //
-    {
-        if(anIndex == 0)
-            return "Front center channel";
-        else if(anIndex == 1)
-            return "Front left channel";
-        else if(anIndex == 2)
-            return "Surround left channel";
-        else if(anIndex == 3)
-            return "Back left channel";
-        else if(anIndex == 4)
-            return "Back right channel";
-        else if(anIndex == 5)
-            return "Surround right channel";
-        else if(anIndex == 6)
-            return "Front right channel";
-        else if(anIndex == 7)
-            return "Lfe channel";
-    }
-    else                                           // Ambisonics base //
-    {
-        if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
-            return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(m_angles_of_loudspeakers[anIndex]/ CICM_2PI * 360.) + "°";
-        
-    }
-    return "No channel";
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
+        return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(m_angles_of_loudspeakers[anIndex]/ CICM_2PI * 360.) + "°";
+    else if(anIndex == m_number_of_loudspeakers && m_low_frequency_effect)
+        return "Lfe channel";
+    else
+        return "No channel";
 }
 
 std::string Ambisonicsvector::getVectorName(long anIndex)

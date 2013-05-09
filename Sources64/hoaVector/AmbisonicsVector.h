@@ -37,7 +37,7 @@ public:
 	Ambisonicsvector(double aConfiguration = 8., std::string aMode = "polar", long aVectorSize = 0);
 	
 	long    getNumberOfLoudspeakers();
-    void    setConfiguration(double aConfiguration);
+    void    setConfiguration(double aConfiguration, bool standardOnOff = 1);
     double  getConfiguration();
     void    setLoudspeakerAngle(long anIndex, double anAngle);
     double  getLoudspeakerAngle(long anIndex);

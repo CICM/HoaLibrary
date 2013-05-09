@@ -18,10 +18,10 @@
 
 #include "AmbisonicsMultiDecoder.h"
 
-AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, std::string aRootPath, long aPinnaSize, long aVectorSize, long aSamplingRate, long aMode, long aNumberOfLoudspeakers, double aConfiguration, double anOffset) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, std::string aRootPath, long aPinnaeSize, long aVectorSize, long aSamplingRate, long aMode, long aNumberOfLoudspeakers, double aConfiguration, double anOffset) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
 	m_decoder = new AmbisonicsDecoder(m_order, aNumberOfLoudspeakers, anOffset, m_vector_size);
-    m_binaural = new AmbisonicsBinaural(m_order, aRootPath, aPinnaSize, m_vector_size, m_sampling_rate);
+    m_binaural = new AmbisonicsBinaural(m_order, aRootPath, aPinnaeSize, m_vector_size, m_sampling_rate);
     m_restitution = new AmbisonicsRestitution(m_order, aConfiguration, Hoa_Amplitude_Panning,  m_vector_size);
     setMode(aMode);
     setOffset(anOffset);
@@ -81,14 +81,14 @@ double AmbisonicsMultiDecoder::getOffset()
 }
 
 /* BINAURAL */
-void AmbisonicsMultiDecoder::setPinnaSize(long aPinnaSize)
+void AmbisonicsMultiDecoder::setPinnaeSize(long aPinnaeSize)
 {
-    m_binaural->setPinnaSize(aPinnaSize);
+    m_binaural->setPinnaeSize(aPinnaeSize);
 }
 
-long AmbisonicsMultiDecoder::getPinnaSize()
+long AmbisonicsMultiDecoder::getPinnaeSize()
 {
-    return m_binaural->getPinnaSize();
+    return m_binaural->getPinnaeSize();
 }
 
 /* RESTITUTION */

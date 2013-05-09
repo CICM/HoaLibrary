@@ -70,7 +70,7 @@ t_max_err HoaDecode_notify(t_HoaDecode *x, t_symbol *s, t_symbol *msg, void *sen
 t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err loudspeakers_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err offset_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
-t_max_err pinnasize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
+t_max_err pinnaesize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err config_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err restitution_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
@@ -116,13 +116,13 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_SAVE             (c, "offset", 1);
     
     /* Binaural */
-    CLASS_ATTR_SYM              (c, "pinnasize", 0, t_HoaDecode, f_pinna_size);
-	CLASS_ATTR_CATEGORY			(c, "pinnasize", 0, "Behavior");
-    CLASS_ATTR_LABEL            (c, "pinnasize", 0, "Pinna Size");
-    CLASS_ATTR_ENUM             (c, "pinnasize", 0, "small large");
-	CLASS_ATTR_ACCESSORS		(c, "pinnasize", NULL, pinnasize_set);
-    CLASS_ATTR_ORDER            (c, "pinnasize", 0, "4");
-    CLASS_ATTR_SAVE             (c, "pinnasize", 1);
+    CLASS_ATTR_SYM              (c, "pinnaesize", 0, t_HoaDecode, f_pinna_size);
+	CLASS_ATTR_CATEGORY			(c, "pinnaesize", 0, "Behavior");
+    CLASS_ATTR_LABEL            (c, "pinnaesize", 0, "Pinnae Size");
+    CLASS_ATTR_ENUM             (c, "pinnaesize", 0, "small large");
+	CLASS_ATTR_ACCESSORS		(c, "pinnaesize", NULL, pinnaesize_set);
+    CLASS_ATTR_ORDER            (c, "pinnaesize", 0, "4");
+    CLASS_ATTR_SAVE             (c, "pinnaesize", 1);
     
     /* Irregular */
     CLASS_ATTR_DOUBLE           (c, "config", 0, t_HoaDecode, f_configuration_of_irregular_loudspeakers);
@@ -144,7 +144,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "restitution", 0, "Restituion Mode");
     CLASS_ATTR_ENUM             (c, "restitution", 0, "panning projection");
-	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, configuration_set);
+	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, restitution_set);
     CLASS_ATTR_ORDER            (c, "restitution", 0, "7");
     CLASS_ATTR_SAVE             (c, "restitution", 1);
     
@@ -253,7 +253,7 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "1");
-            object_attr_addattr_parse((t_object*)x, "pinnasize", "invisible", USESYM(long), 1, "0");
+            object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
             
@@ -265,7 +265,7 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "1");
-            object_attr_addattr_parse((t_object*)x, "pinnasize", "invisible", USESYM(long), 1, "1");
+            object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "0");
         }
@@ -276,7 +276,7 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "0");
-            object_attr_addattr_parse((t_object*)x, "pinnasize", "invisible", USESYM(long), 1, "1");
+            object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
         }
@@ -323,17 +323,17 @@ t_max_err offset_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 }
 
 /* Binaural */
-t_max_err pinnasize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
+t_max_err pinnaesize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 {
     if(x->f_AmbisonicsDecoder->getMode() == Hoa_Binaural)
     {
         if(atom_gettype(argv) == A_SYM && (atom_getsym(argv) == gensym("large") || atom_getsym(argv) == gensym(" large")))
-            x->f_AmbisonicsDecoder->setPinnaSize(Hoa_Large);
+            x->f_AmbisonicsDecoder->setPinnaeSize(Hoa_Large);
         else
-            x->f_AmbisonicsDecoder->setPinnaSize(Hoa_Small);
+            x->f_AmbisonicsDecoder->setPinnaeSize(Hoa_Small);
     }
 
-    if(x->f_AmbisonicsDecoder->getPinnaSize() == Hoa_Large)
+    if(x->f_AmbisonicsDecoder->getPinnaeSize() == Hoa_Large)
         x->f_pinna_size = gensym("large");
     else
         x->f_pinna_size = gensym("small");
@@ -344,14 +344,14 @@ t_max_err pinnasize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err restitution_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution)
+    if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution && atom_gettype(argv) == A_SYM)
     {
-        if(atom_gettype(argv) == A_SYM && (atom_getsym(argv) == gensym("projection") || atom_getsym(argv) == gensym(" projection")))
+        if(atom_getsym(argv) == gensym("projection") || atom_getsym(argv) == gensym(" projection"))
             x->f_AmbisonicsDecoder->setRestitutionMode(Hoa_Microphone_Simulation);
         else
-            x->f_AmbisonicsDecoder->setPinnaSize(Hoa_Amplitude_Panning);
+            x->f_AmbisonicsDecoder->setRestitutionMode(Hoa_Amplitude_Panning);
     }
-    if(x->f_AmbisonicsDecoder->getPinnaSize() == Hoa_Microphone_Simulation)
+    if(x->f_AmbisonicsDecoder->getRestitutionMode() == Hoa_Microphone_Simulation)
         x->f_resitution_mode = gensym("projection");
     else
         x->f_resitution_mode = gensym("panning");
@@ -500,7 +500,7 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
         if (jpatchline_get_box1(line) == decoder)
         {
             object = jpatchline_get_box2(line);
-            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~"))
+            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
             {
                 long    argc = 1;
                 t_atom *argv = new t_atom[1];
@@ -508,9 +508,11 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
                     atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfLoudspeakers());
                 else if(x->f_AmbisonicsDecoder->getMode() == Hoa_Binaural)
                     atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfOutputs());
-                if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution)
+                else if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution)
                     atom_setlong(argv, x->f_AmbisonicsDecoder->getConfiguration());
-                object_method(jbox_get_object(object), gensym("loudspeakers"), argc, argv);
+                
+                object_method_typed(jbox_get_object(object), gensym("loudspeakers"), argc, argv, NULL);
+                
                 free(argv);
                 
                 argc = x->f_AmbisonicsDecoder->getNumberOfOutputs();
@@ -519,15 +521,15 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
                 for(int i = 0; i < argc; i++)
                     atom_setfloat(argv+i, x->f_AmbisonicsDecoder->getLoudspeakerAngle(i));
                 
-                object_method(jbox_get_object(object), gensym("angles"), argc, argv);
+                object_method_typed(jbox_get_object(object), gensym("angles"), argc, argv, NULL);
                 free(argv);
             }
-            else if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+            if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
             {
                 long argc = 1;
                 t_atom argv[1];
                 atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfOutputs());
-                object_method(jbox_get_object(object), gensym("channels"), argc, argv);
+                object_method_typed(jbox_get_object(object), gensym("channels"), argc, argv, NULL);
             }
         }
     }

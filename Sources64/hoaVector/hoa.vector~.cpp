@@ -41,9 +41,6 @@ typedef struct _HoaVectore
     t_symbol*               f_mode;
     
     t_atom_long             f_number_of_loudspeakers;
-    t_object*               f_offset_attr;
-    double                  f_offset;
-    t_symbol*               f_pinna_size;
     t_atom_long             f_n_ls;
     double                  f_configuration;
     double                  f_angle_of_ls[256];

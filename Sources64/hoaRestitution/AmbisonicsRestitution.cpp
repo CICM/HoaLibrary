@@ -22,7 +22,7 @@
 AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, double aConfiguration, long aResitutionMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
     m_number_of_virtual_loudspeakers = m_number_of_harmonics+1;
-    m_decoder = new AmbisonicsDecoder(anOrder, m_number_of_virtual_loudspeakers, m_vector_size);
+    m_decoder = new AmbisonicsDecoder(m_order, m_number_of_virtual_loudspeakers, 0., 0);
     
     Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_virtual_loudspeakers);
     Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_virtual_loudspeakers);
@@ -279,27 +279,41 @@ void AmbisonicsRestitution::computeAmplitudePanning()
         }
         
     }
-
 }
-
 
 void AmbisonicsRestitution::computeMicrophoneSimulation()
 {
     for(int i = 0; i < m_number_of_real_loudspeakers; i++)
     {
+        double ratio;
+        if(i == 0)
+        {
+            ratio = ((CICM_2PI - m_angles_of_loudspeakers[m_number_of_real_loudspeakers-1]) + m_angles_of_loudspeakers[1]);
+        }
+        else if(i == m_number_of_real_loudspeakers - 1)
+        {
+            ratio = (CICM_2PI - m_angles_of_loudspeakers[i-1]) + m_angles_of_loudspeakers[0];
+        }
+        else
+        {
+            ratio = (m_angles_of_loudspeakers[i+1] - m_angles_of_loudspeakers[i-1]);
+        }
+        
         for(int j = 0; j < m_number_of_virtual_loudspeakers; j++)
         {
             double distance;
-            double virtualAngle = ((double)i / (double)m_number_of_virtual_loudspeakers) * CICM_2PI;
+            double virtualAngle = ((double)j / (double)m_number_of_virtual_loudspeakers) * CICM_2PI;
             distance = fabs(m_angles_of_loudspeakers[i] - virtualAngle);
             if(distance > CICM_PI)
                 distance = CICM_2PI - distance;
+            distance /= ratio;
+            if(distance > 1.)
+                distance  = 1.;
             
-            distance /= 2.;
-            m_loudspeakers_gains_vector_double[i][j] = cos(distance);
-            m_loudspeakers_gains_vector_float[j][i] = m_loudspeakers_gains_vector_double[i][j];
+            m_loudspeakers_gains_vector_double[i][j] = cos(distance*CICM_PI2);
+            m_loudspeakers_gains_vector_float[i][j] = m_loudspeakers_gains_vector_double[i][j];
         }
-    }    
+    }
 }
 
 

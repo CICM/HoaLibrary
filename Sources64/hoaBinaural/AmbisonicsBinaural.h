@@ -32,7 +32,7 @@ class AmbisonicsBinaural : public Ambisonics
 {
 	
 private:
-    long m_pinna_size;
+    long m_Pinnae_size;
     long        m_number_of_loudspeakers;
     long        m_loudspeakers_configurations[10] = {3, 4, 6, 8, 9, 12, 18, 24, 36, 72};
     
@@ -60,14 +60,14 @@ private:
 	long	matrixResize(long aVectorSize);
 public:
 	
-	AmbisonicsBinaural(long anOrder = 1, std::string aRootPath = "", long aPinnaSize = Hoa_Small, double aSamplingRate = 44100, long aVectorSize = 0);
+	AmbisonicsBinaural(long anOrder = 1, std::string aRootPath = "", long aPinnaeSize = Hoa_Small, double aSamplingRate = 44100, long aVectorSize = 0);
 	
-    void    setPinnaSize(long pinnaSize);
+    void    setPinnaeSize(long PinnaeSize);
 	void    setVectorSize(long aVectorSize);
     void    setSamplingRate(long aSamplingRate);
     long    getGetHrtfLoaded(){return m_hrtf_loaded;};
     long    getHrtfSize(){return m_impulse_size;};
-    long    getPinnaSize(){return m_pinna_size;};
+    long    getPinnaeSize(){return m_Pinnae_size;};
     double       getLoudspeakerAngle(long anIndex);
     std::string  getLoudspeakerName(long anIndex);
     

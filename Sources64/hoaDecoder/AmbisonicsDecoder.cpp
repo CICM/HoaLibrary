@@ -100,7 +100,7 @@ void AmbisonicsDecoder::computeMatrix()
 {
     for (int i = 0; i < m_number_of_outputs; i++)
 	{
-		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs)) + m_offset;
+		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs)) - m_offset;
         angle = Tools::radianWrap(angle);
 		for (int j = 0; j < m_number_of_harmonics; j++)
 		{

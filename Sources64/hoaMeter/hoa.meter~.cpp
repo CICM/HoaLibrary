@@ -882,7 +882,8 @@ void draw_vector(t_meter *x, t_object *view, t_rect *rect)
 		angle = value + (x->f_offsetOfLoudspeakers / 180.) * JGRAPHICS_PI;
 		rayon = x->f_rayonInt * 0.85;
 		arrow = rayon * 0.15;
-        if (!x->f_speakers_dir_of_rotation) angle *= -1;
+        if (!x->f_speakers_dir_of_rotation)
+            angle *= -1;
 		jgraphics_rotate(g, angle);
 		
 		// arrow
@@ -914,9 +915,7 @@ void meter_resize_inlet(t_meter *x, long lastNumberOfOutlet)
     
     dsp_resize((t_pxobject*)x, x->f_number_of_loudspeakers);
     object_method(b, gensym("dynlet_end"));
-    
-   // HoaDecode_send_configuration(x);
-    //HoaDecode_reconnect_outlet(x);
+
     if(dspState)
         object_method(gensym("dsp")->s_thing, gensym("start"));
 }

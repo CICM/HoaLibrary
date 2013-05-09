@@ -83,6 +83,8 @@ t_max_err hoaGain_notify(t_hoaGain *x, t_symbol *s, t_symbol *msg, void *sender,
 void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s);
 void hoaGain_preset(t_hoaGain *x);
 void *hoaGain_stdargs(t_dictionary *d, t_symbol *s, long argc, t_atom *argv);
+void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv);
+void HoaGain_reconnect_outlet(t_hoaGain *x);
 /* DSP ------------------------------------- */
 void hoaGain_dsp(t_hoaGain *x, t_signal **sp, short *count);
 t_int *hoaGain_perform(t_int *w);
@@ -166,6 +168,7 @@ int C74_EXPORT main()
 	class_addmethod (c, (method) hoaGain_preset,              "preset",                       0);
 	class_addmethod (c, (method) hoaGain_notify,              "notify",               A_CANT, 0); 
 	class_addmethod (c, (method) hoaGain_oksize,              "oksize",               A_CANT, 0);
+    class_addmethod (c, (method) hoaGain_tometer,             "anything",             A_GIMME, 0);
     
 	CLASS_ATTR_DEFAULT(c,"patching_rect",0, "0. 0. 200. 30.");
 	
@@ -789,10 +792,13 @@ t_max_err hoaGain_setattr_interp(t_hoaGain *x, t_object *attr, long ac, t_atom *
 t_max_err hoaGain_setattr_channels(t_hoaGain *x, t_object *attr, long ac, t_atom *av)
 {
 	long d;
-	if (ac && av) {
-        if (atom_gettype(av) == A_LONG) {
+	if (ac && av)
+    {
+        if (atom_gettype(av) == A_LONG)
+        {
             d = atom_getlong(av);
             hoaGain_resize_io(x, d);
+            HoaGain_reconnect_outlet(x);
         }
 	}
 	return MAX_ERR_NONE;
@@ -1094,4 +1100,77 @@ t_max_err hoaGain_notify(t_hoaGain *x, t_symbol *s, t_symbol *msg, void *sender,
         jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
+}
+
+void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
+{
+    t_object *patcher;
+	t_object *gain;
+    t_object *object;
+    t_object *line;
+	t_max_err err;
+    
+    if(argc && argv && (s == gensym("loudspeakers") || s == gensym("angles")))
+    {
+        err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+        if (err != MAX_ERR_NONE)
+            return;
+       
+        err = object_obex_lookup(x, gensym("#B"), (t_object **)&gain);
+        if (err != MAX_ERR_NONE)
+            return;
+        for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+        {
+            if (jpatchline_get_box1(line) == gain)
+            {
+                object = jpatchline_get_box2(line);
+                if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~"))
+                {
+                    object_method_typed(jbox_get_object(object), s, argc, argv, NULL);
+                }
+                else if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+                {
+                    object_method_typed(jbox_get_object(object), s, argc, argv, NULL);
+                }
+            }
+        }
+	}
+}
+
+void HoaGain_reconnect_outlet(t_hoaGain *x)
+{
+	t_object *patcher;
+	t_object *decoder;
+    t_object *object;
+    t_object *line;
+	t_max_err err;
+    
+	err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+	err = object_obex_lookup(x, gensym("#B"), (t_object **)&decoder);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+    for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+    {
+        if (jpatchline_get_box1(line) == decoder)
+        {
+            object = jpatchline_get_box2(line);
+            
+            for(int i = 0; jbox_getinlet((t_jbox *)object, i) != NULL && i < x->f_numberOfChannels; i++)
+            {
+                t_atom msg[4];
+                t_atom rv;
+                
+                atom_setobj(msg, decoder);
+                atom_setlong(msg + 1, i);
+                atom_setobj(msg + 2, object);
+                atom_setlong(msg + 3, i);
+                
+                object_method_typed(patcher , gensym("connect"), 4, msg, &rv);
+            }
+        }
+    }
 }

@@ -52,8 +52,8 @@ public:
     void    setOffset(double anOffset);
     double  getOffset();
     
-    void    setPinnaSize(long aPinnaSize);
-    long    getPinnaSize();
+    void    setPinnaeSize(long aPinnaSize);
+    long    getPinnaeSize();
     
     void    setRestitutionMode(long aResitutionMode);
     long    getRestitutionMode();

@@ -22,6 +22,7 @@
 
 #include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaDecoder/AmbisonicsDecoder.h"
+#include "../hoaEncoder/AmbisonicsEncoder.h"
 
 enum
 {
