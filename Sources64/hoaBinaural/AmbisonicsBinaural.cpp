@@ -19,7 +19,7 @@
 #include "AmbisonicsBinaural.h"
 
 
-AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, long aPinnaSize, double aSamplingRate, long aVectorSize) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, long aPinnaeSize, double aSamplingRate, long aVectorSize) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
     /* Limit Order Due To HRTFs Discretization */
     if (m_order > 35)
@@ -50,7 +50,7 @@ AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, long
     }
     
     m_hrtf_root_path    = aRootPath;
-    m_pinna_size        = aPinnaSize;
+    m_Pinnae_size        = aPinnaeSize;
     
     m_impluse_matrix  = NULL;
     m_result_matrix   = NULL;
@@ -79,13 +79,13 @@ long AmbisonicsBinaural::loadImpulses()
         m_impulse_size = 200;
         m_sampling_rate = 44100;
     }
-    std::string pinna;
+    std::string Pinnae;
     
-    if (m_pinna_size == Hoa_Large)
-        pinna = "Large";
+    if (m_Pinnae_size == Hoa_Large)
+        Pinnae = "Large";
     else
-        pinna = "Small";
-    m_hrtf_full_path += Tools::intToString(m_sampling_rate) + "/" + pinna + "/";
+        Pinnae = "Small";
+    m_hrtf_full_path += Tools::intToString(m_sampling_rate) + "/" + Pinnae + "/";
     
     /* Load HRTFs */
 	std::string leftFilePath;
@@ -162,12 +162,12 @@ long AmbisonicsBinaural::loadImpulses()
     return 1;
 }
 
-void AmbisonicsBinaural::setPinnaSize(long aPinnaSize)
+void AmbisonicsBinaural::setPinnaeSize(long aPinnaeSize)
 {
-    aPinnaSize = Tools::clip(aPinnaSize, (long)Hoa_Small, (long)Hoa_Large);
-    if(aPinnaSize != m_pinna_size)
+    aPinnaeSize = Tools::clip(aPinnaeSize, (long)Hoa_Small, (long)Hoa_Large);
+    if(aPinnaeSize != m_Pinnae_size)
     {
-        m_pinna_size = aPinnaSize;
+        m_Pinnae_size = aPinnaeSize;
         m_hrtf_loaded = loadImpulses();
     }
 }

@@ -919,10 +919,13 @@
 							}
 , 							{
 								"box" : 								{
+									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+									"channels" : 16,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-24",
+									"loudspeakers" : 16,
 									"ls" : 16,
-									"ls_angles" : [ 0.0, 22.0, 45.0, 67.0, 90.0, 112.0, 135.0, 157.0, 180.0, 202.0, 225.0, 247.0, 270.0, 292.0, 315.0, 337.5 ],
+									"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 0,
@@ -1026,6 +1029,10 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 282.5, 361.5, 221.5, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : 0
+									}
+,
 									"text" : "hoa.vector~ 16"
 								}
 
@@ -1185,6 +1192,17 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 40.000004, 314.0, 221.949997, 19.0 ],
+									"saved_object_attributes" : 									{
+										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
+										"config" : 5.1,
+										"loudspeakers" : 16,
+										"ls" : 16,
+										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
+										"mode" : "ambisonics",
+										"offset" : 0.0,
+										"pinnasize" : "small"
+									}
+,
 									"text" : "hoa.decoder~ 7 16"
 								}
 

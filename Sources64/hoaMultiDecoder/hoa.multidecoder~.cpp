@@ -46,13 +46,15 @@ typedef struct _HoaDecode
     
     t_symbol*               f_mode;
     
-    t_atom_long             f_number_of_loudspeakers;
-    t_object*               f_offset_attr;
-    double                  f_offset;
+    t_atom_long             f_number_of_ambisonics_loudspeakers;
+    double                  f_offset_of_ambisonics_loudspeakers;
+    
     t_symbol*               f_pinna_size;
-    t_atom_long             f_n_ls;
-    double                  f_configuration;
-    double                  f_angle_of_ls[256];
+    
+    t_atom_long             f_number_of_irregular_loudspeakers;
+    double                  f_configuration_of_irregular_loudspeakers;
+    double                  f_angles_of_irregular_loudspeakers[MAX_SPEAKER];
+    t_symbol*               f_resitution_mode;
 } t_HoaDecode;
 
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv);
@@ -64,12 +66,14 @@ void HoaDecode_disconnect_outlet(t_HoaDecode *x);
 void HoaDecode_send_configuration(t_HoaDecode *x);
 
 t_max_err HoaDecode_notify(t_HoaDecode *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+
 t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err loudspeakers_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err offset_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
-t_max_err pinnasize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
+t_max_err pinnaesize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err config_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
+t_max_err restitution_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 
 void HoaDecode_dsp64(t_HoaDecode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaDecode_perform64(t_HoaDecode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -96,7 +100,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SAVE             (c, "mode", 1);
 
     /* Ambisonics Mode */
-    CLASS_ATTR_LONG             (c, "loudspeakers", 0, t_HoaDecode, f_number_of_loudspeakers);
+    CLASS_ATTR_LONG             (c, "loudspeakers", 0, t_HoaDecode, f_number_of_ambisonics_loudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "loudspeakers", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "loudspeakers", 0, "Number of Loudspeakers");
 	CLASS_ATTR_ACCESSORS		(c, "loudspeakers", NULL, loudspeakers_set);
@@ -104,7 +108,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SAVE             (c, "loudspeakers", 1);
     CLASS_ATTR_ALIAS            (c, "loudspeakers", "ls");
     
-    CLASS_ATTR_DOUBLE           (c, "offset", 0, t_HoaDecode, f_offset);
+    CLASS_ATTR_DOUBLE           (c, "offset", 0, t_HoaDecode, f_offset_of_ambisonics_loudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "offset", 0, "Offset of Loudspeakers");
 	CLASS_ATTR_ACCESSORS		(c, "offset", NULL, offset_set);
@@ -112,29 +116,37 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_SAVE             (c, "offset", 1);
     
     /* Binaural */
-    CLASS_ATTR_SYM              (c, "pinnasize", 0, t_HoaDecode, f_pinna_size);
-	CLASS_ATTR_CATEGORY			(c, "pinnasize", 0, "Behavior");
-    CLASS_ATTR_LABEL            (c, "pinnasize", 0, "Pinna Size");
-    CLASS_ATTR_ENUM             (c, "pinnasize", 0, "small large");
-	CLASS_ATTR_ACCESSORS		(c, "pinnasize", NULL, pinnasize_set);
-    CLASS_ATTR_ORDER            (c, "pinnasize", 0, "4");
-    CLASS_ATTR_SAVE             (c, "pinnasize", 1);
+    CLASS_ATTR_SYM              (c, "pinnaesize", 0, t_HoaDecode, f_pinna_size);
+	CLASS_ATTR_CATEGORY			(c, "pinnaesize", 0, "Behavior");
+    CLASS_ATTR_LABEL            (c, "pinnaesize", 0, "Pinnae Size");
+    CLASS_ATTR_ENUM             (c, "pinnaesize", 0, "small large");
+	CLASS_ATTR_ACCESSORS		(c, "pinnaesize", NULL, pinnaesize_set);
+    CLASS_ATTR_ORDER            (c, "pinnaesize", 0, "4");
+    CLASS_ATTR_SAVE             (c, "pinnaesize", 1);
     
     /* Irregular */
-    CLASS_ATTR_DOUBLE           (c, "config", 0, t_HoaDecode, f_configuration);
+    CLASS_ATTR_DOUBLE           (c, "config", 0, t_HoaDecode, f_configuration_of_irregular_loudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "config", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "config", 0, "Configuration");
 	CLASS_ATTR_ACCESSORS		(c, "config", NULL, config_set);
     CLASS_ATTR_ORDER            (c, "config", 0, "5");
 	CLASS_ATTR_SAVE             (c, "config", 1);
     
-    CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", 0, t_HoaDecode, f_angle_of_ls, f_n_ls, 256);
+    CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", 0, t_HoaDecode, f_angles_of_irregular_loudspeakers, f_number_of_irregular_loudspeakers, MAX_SPEAKER);
 	CLASS_ATTR_CATEGORY			(c, "angles", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "angles", 0, "Angles of Loudspeakers");
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
     CLASS_ATTR_ORDER            (c, "angles", 0, "6");
 	CLASS_ATTR_SAVE             (c, "angles", 1);
     CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
+    
+    CLASS_ATTR_SYM              (c, "restitution", 0, t_HoaDecode, f_resitution_mode);
+	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
+    CLASS_ATTR_LABEL            (c, "restitution", 0, "Restituion Mode");
+    CLASS_ATTR_ENUM             (c, "restitution", 0, "panning projection");
+	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, restitution_set);
+    CLASS_ATTR_ORDER            (c, "restitution", 0, "7");
+    CLASS_ATTR_SAVE             (c, "restitution", 1);
     
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -169,14 +181,15 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         
         /* Base Attributes */
 		x->f_mode = gensym("ambisonics");
-        x->f_number_of_loudspeakers =  order * 2 + 2;
-        x->f_configuration = 5.1;
-        x->f_offset = 0.;
-        x->f_n_ls = 5;
+        x->f_number_of_ambisonics_loudspeakers =  order * 2 + 2;
+        x->f_configuration_of_irregular_loudspeakers = 5.1;
+        x->f_offset_of_ambisonics_loudspeakers = 0.;
+        x->f_number_of_irregular_loudspeakers = 5;
         x->f_pinna_size = gensym("small");
+        x->f_resitution_mode = gensym("panning");
         
-        for(int i = 0; i < x->f_n_ls; i++)
-            x->f_angle_of_ls[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
+        for(int i = 0; i < x->f_number_of_irregular_loudspeakers; i++)
+            x->f_angles_of_irregular_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
         
         /* DSP Setup */
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicsDecoder->getNumberOfInputs());
@@ -240,8 +253,9 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "1");
-            object_attr_addattr_parse((t_object*)x, "pinnasize", "invisible", USESYM(long), 1, "0");
+            object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "1");
+            object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
             
         }
         else if(atom_getsym(argv) == gensym("irregular") || atom_getsym(argv) == gensym(" irregular"))
@@ -251,8 +265,9 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "1");
-            object_attr_addattr_parse((t_object*)x, "pinnasize", "invisible", USESYM(long), 1, "1");
+            object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "1");
+            object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "0");
         }
         else
         {
@@ -261,19 +276,13 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "0");
-            object_attr_addattr_parse((t_object*)x, "pinnasize", "invisible", USESYM(long), 1, "1");
+            object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "0");
-        
-            char attributes[256];
-            sprintf(attributes, "loudspeakers offset config angles pinnasize");
-            object_attr_touch_parse((t_object*)x, attributes);
+            object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
         }
 	}
 
     HoaDecode_resize_outlet(x, numOutlet);
-    
-    if(dspState)
-        object_method(gensym("dsp")->s_thing, gensym("start"));
     
     return NULL;
 }
@@ -295,11 +304,8 @@ t_max_err loudspeakers_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *ar
             x->f_AmbisonicsDecoder->setNumberOfLoudspeakers(atom_getfloat(argv));
         
         HoaDecode_resize_outlet(x, numOutlet);
-        
-        if(dspState)
-            object_method(gensym("dsp")->s_thing, gensym("start"));
     }
-    x->f_number_of_loudspeakers = x->f_AmbisonicsDecoder->getNumberOfLoudspeakers();
+    x->f_number_of_ambisonics_loudspeakers = x->f_AmbisonicsDecoder->getNumberOfLoudspeakers();
     return NULL;
 }
 
@@ -312,22 +318,22 @@ t_max_err offset_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
         else if(atom_gettype(argv) == A_LONG)
             x->f_AmbisonicsDecoder->setOffset(atom_getlong(argv));
     }        
-    x->f_offset = x->f_AmbisonicsDecoder->getOffset();
+    x->f_offset_of_ambisonics_loudspeakers = x->f_AmbisonicsDecoder->getOffset();
     return NULL;
 }
 
 /* Binaural */
-t_max_err pinnasize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
+t_max_err pinnaesize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 {
     if(x->f_AmbisonicsDecoder->getMode() == Hoa_Binaural)
     {
         if(atom_gettype(argv) == A_SYM && (atom_getsym(argv) == gensym("large") || atom_getsym(argv) == gensym(" large")))
-            x->f_AmbisonicsDecoder->setPinnaSize(Hoa_Large);
+            x->f_AmbisonicsDecoder->setPinnaeSize(Hoa_Large);
         else
-            x->f_AmbisonicsDecoder->setPinnaSize(Hoa_Small);
+            x->f_AmbisonicsDecoder->setPinnaeSize(Hoa_Small);
     }
 
-    if(x->f_AmbisonicsDecoder->getPinnaSize() == Hoa_Large)
+    if(x->f_AmbisonicsDecoder->getPinnaeSize() == Hoa_Large)
         x->f_pinna_size = gensym("large");
     else
         x->f_pinna_size = gensym("small");
@@ -335,31 +341,47 @@ t_max_err pinnasize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 }
 
 /* Irregular */
+
+t_max_err restitution_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution && atom_gettype(argv) == A_SYM)
+    {
+        if(atom_getsym(argv) == gensym("projection") || atom_getsym(argv) == gensym(" projection"))
+            x->f_AmbisonicsDecoder->setRestitutionMode(Hoa_Microphone_Simulation);
+        else
+            x->f_AmbisonicsDecoder->setRestitutionMode(Hoa_Amplitude_Panning);
+    }
+    if(x->f_AmbisonicsDecoder->getRestitutionMode() == Hoa_Microphone_Simulation)
+        x->f_resitution_mode = gensym("projection");
+    else
+        x->f_resitution_mode = gensym("panning");
+    return NULL;
+}
+
 t_max_err config_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 {
     if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution)
     {
+        long standard = 1;
         int dspState = sys_getdspobjdspstate((t_object*)x);
         if(dspState)
             object_method(gensym("dsp")->s_thing, gensym("stop"));
         
         long numOutlet = x->f_AmbisonicsDecoder->getNumberOfOutputs();
-        
+        if(argc == 2 && atom_gettype(argv+1) == A_LONG && atom_getlong(argv+1) == 0)
+            standard = 0;
         if(atom_gettype(argv) == A_FLOAT)
-            x->f_AmbisonicsDecoder->setConfiguration(atom_getfloat(argv));
+            x->f_AmbisonicsDecoder->setConfiguration(atom_getfloat(argv), standard);
         else if(atom_gettype(argv) == A_LONG)
-            x->f_AmbisonicsDecoder->setConfiguration(atom_getlong(argv));
+            x->f_AmbisonicsDecoder->setConfiguration(atom_getlong(argv), standard);
         
         HoaDecode_resize_outlet(x, numOutlet);
-        
-        if(dspState)
-            object_method(gensym("dsp")->s_thing, gensym("start"));
     }
-    x->f_configuration = x->f_AmbisonicsDecoder->getConfiguration();
-    x->f_n_ls = x->f_configuration;
-    for(int i = 0; i < x->f_n_ls; i++)
+    x->f_configuration_of_irregular_loudspeakers = x->f_AmbisonicsDecoder->getConfiguration();
+    x->f_number_of_irregular_loudspeakers = x->f_configuration_of_irregular_loudspeakers;
+    for(int i = 0; i < x->f_number_of_irregular_loudspeakers; i++)
     {
-        x->f_angle_of_ls[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
+        x->f_angles_of_irregular_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     }
     object_attr_touch((t_object*)x, gensym("angles"));
     return NULL;
@@ -381,9 +403,9 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
         }
     }
     
-    for(int i = 0; i < x->f_n_ls; i++)
+    for(int i = 0; i < x->f_number_of_irregular_loudspeakers; i++)
     {
-        x->f_angle_of_ls[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
+        x->f_angles_of_irregular_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     }
     
     return NULL;
@@ -417,8 +439,6 @@ void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet)
     
     HoaDecode_send_configuration(x);
     HoaDecode_reconnect_outlet(x);
-    if(dspState)
-        object_method(gensym("dsp")->s_thing, gensym("start"));
 }
 
 void HoaDecode_reconnect_outlet(t_HoaDecode *x)
@@ -480,7 +500,7 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
         if (jpatchline_get_box1(line) == decoder)
         {
             object = jpatchline_get_box2(line);
-            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~"))
+            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
             {
                 long    argc = 1;
                 t_atom *argv = new t_atom[1];
@@ -488,9 +508,11 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
                     atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfLoudspeakers());
                 else if(x->f_AmbisonicsDecoder->getMode() == Hoa_Binaural)
                     atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfOutputs());
-                if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution)
+                else if(x->f_AmbisonicsDecoder->getMode() == Hoa_Restitution)
                     atom_setlong(argv, x->f_AmbisonicsDecoder->getConfiguration());
-                object_method(jbox_get_object(object), gensym("loudspeakers"), argc, argv);
+                
+                object_method_typed(jbox_get_object(object), gensym("loudspeakers"), argc, argv, NULL);
+                
                 free(argv);
                 
                 argc = x->f_AmbisonicsDecoder->getNumberOfOutputs();
@@ -499,15 +521,15 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
                 for(int i = 0; i < argc; i++)
                     atom_setfloat(argv+i, x->f_AmbisonicsDecoder->getLoudspeakerAngle(i));
                 
-                object_method(jbox_get_object(object), gensym("angles"), argc, argv);
+                object_method_typed(jbox_get_object(object), gensym("angles"), argc, argv, NULL);
                 free(argv);
             }
-            else if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+            if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
             {
                 long argc = 1;
                 t_atom argv[1];
                 atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfOutputs());
-                object_method(jbox_get_object(object), gensym("channels"), argc, argv);
+                object_method_typed(jbox_get_object(object), gensym("channels"), argc, argv, NULL);
             }
         }
     }

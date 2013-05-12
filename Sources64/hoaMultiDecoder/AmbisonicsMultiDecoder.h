@@ -52,10 +52,12 @@ public:
     void    setOffset(double anOffset);
     double  getOffset();
     
-    void    setPinnaSize(long aPinnaSize);
-    long    getPinnaSize();
+    void    setPinnaeSize(long aPinnaSize);
+    long    getPinnaeSize();
     
-    void    setConfiguration(double aConfiguration);
+    void    setRestitutionMode(long aResitutionMode);
+    long    getRestitutionMode();
+    void    setConfiguration(double aConfiguration, bool standardOnOff = 1);
     double  getConfiguration();
     void    setLoudspeakerAngle(long anIndex, double anAngle);
     double  getLoudspeakerAngle(long anIndex);

@@ -230,12 +230,12 @@ public:
     
     static double radToDeg(double radian)
     {
-        return radian * (180 / CICM_PI);
+        return radian * 360. / CICM_2PI;
     }
     
     static double degToRad(double degree)
     {
-        return degree / (180 / CICM_PI);
+        return degree / 360. * CICM_2PI;
     }
     
     static long mstosamps(double ms, double samplerate=44100.)
