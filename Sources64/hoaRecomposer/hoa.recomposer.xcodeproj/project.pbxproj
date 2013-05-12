@@ -23,6 +23,7 @@
 		2CB6473E1737066B005EE2C8 /* CicmLibrary in Resources */ = {isa = PBXBuildFile; fileRef = 2CB6473D1737066B005EE2C8 /* CicmLibrary */; };
 		2CC13EDF172C149100873620 /* hoa.recomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC13EDE172C149100873620 /* hoa.recomposer.cpp */; };
 		2CF61A471712D0620062A8EA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */; };
+		8F97A89817404C0500F8AABE /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F97A89717404C0500F8AABE /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		2CC13EDE172C149100873620 /* hoa.recomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.recomposer.cpp; sourceTree = "<group>"; };
 		2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.recomposer.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.recomposer.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F97A89717404C0500F8AABE /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F97A89817404C0500F8AABE /* Accelerate.framework in Frameworks */,
 				2CF61A471712D0620062A8EA /* MaxAudioAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,6 +65,7 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				8F97A89717404C0500F8AABE /* Accelerate.framework */,
 				2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */,
 				2CAEFCEF1738682700688F34 /* hoa.control.cpp */,
 				2CB6473D1737066B005EE2C8 /* CicmLibrary */,
@@ -315,7 +319,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -324,7 +328,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};
