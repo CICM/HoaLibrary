@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 166.0, 105.0, 1009.0, 493.0 ],
+		"rect" : [ 78.0, 97.0, 1009.0, 493.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -27,7 +28,8 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"showontab" : 1,
+		"showrootpatcherontab" : 0,
+		"showontab" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
 					"color" : [ 0.734694, 0.734694, 0.734694, 1.0 ],
@@ -42,11 +44,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 166.0, 131.0, 1009.0, 467.0 ],
+						"rect" : [ 78.0, 123.0, 1009.0, 467.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -136,8 +139,7 @@
 									"maxclass" : "hoa.scope~",
 									"numinlets" : 7,
 									"numoutlets" : 0,
-									"patching_rect" : [ 651.200012, 132.625, 300.0, 300.0 ],
-									"shadow" : 0
+									"patching_rect" : [ 651.200012, 132.625, 300.0, 300.0 ]
 								}
 
 							}
@@ -168,7 +170,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 15.0, 116.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, 1.222193, -1.303397, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.803785, 0.612473, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -1.090064, -1.19329, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.715699, 0.56843, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, 0.220215, -0.092215, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.066064, 0.128, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.308301, -0.279398, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, -0.033032, 0.006882, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
 									"zoom" : 0.605469
 								}
@@ -217,8 +219,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 399.0, 165.0, 996.0, 480.0 ],
@@ -447,8 +450,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 487.0, 74.0, 514.0, 240.0 ],
@@ -740,8 +744,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 620.0, 172.0, 640.0, 480.0 ],
@@ -1021,8 +1026,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 30.0, 44.0, 793.0, 670.0 ],
@@ -1057,8 +1063,9 @@
 																		"fileversion" : 1,
 																		"appversion" : 																		{
 																			"major" : 6,
-																			"minor" : 0,
-																			"revision" : 8
+																			"minor" : 1,
+																			"revision" : 2,
+																			"architecture" : "x86"
 																		}
 ,
 																		"rect" : [ 69.0, 145.0, 640.0, 480.0 ],
@@ -2536,8 +2543,9 @@
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
-															"minor" : 0,
-															"revision" : 8
+															"minor" : 1,
+															"revision" : 2,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 354.0, 91.0, 640.0, 480.0 ],
@@ -3443,6 +3451,10 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
 									"patching_rect" : [ 429.733307, 353.5, 140.333328, 19.0 ],
+									"saved_object_attributes" : 									{
+										"pinnasize" : ""
+									}
+,
 									"text" : "hoa.binaural~ 3 small"
 								}
 
@@ -3547,8 +3559,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -3808,6 +3821,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3817,6 +3831,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3826,6 +3841,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3835,6 +3851,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3844,6 +3861,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 2 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -3853,6 +3871,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 1 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -3862,6 +3881,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -3871,6 +3891,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-74", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3880,6 +3901,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-74", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3889,6 +3911,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-74", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3898,6 +3921,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-74", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3907,6 +3931,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-74", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3916,6 +3941,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-74", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3925,6 +3951,7 @@
 							}
 , 							{
 								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-74", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -4087,8 +4114,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 1009.0, 467.0 ],
@@ -4139,50 +4167,57 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Applications/Max6/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../Applications/Max6/patches/docs/tutorial-patchers/msp-tut",
+				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
-				"bootpath" : "/Applications/Max6/examples/gen",
-				"patcherrelativepath" : "../../../../../../Applications/Max6/examples/gen",
+				"bootpath" : "/Applications/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "yafr2.maxpat",
-				"bootpath" : "/Applications/Max6/examples/effects/reverb/lib",
-				"patcherrelativepath" : "../../../../../../Applications/Max6/examples/effects/reverb/lib",
+				"bootpath" : "/Applications/Max 6.1/examples/effects/reverb/lib",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/examples/effects/reverb/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa.plug~.maxref.xml",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/docs",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.amp~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
-				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}

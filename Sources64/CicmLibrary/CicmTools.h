@@ -187,10 +187,46 @@ public:
         return datas;
     }
     
-    template<typename Type> static bool isInside(Type val, Type lo, Type hi)
+    template<typename Type> static bool isInside(Type val, Type v1, Type v2)
 	{
-		return (val >= lo && val <= hi);
+        return (v1 <= v2) ? (val >= v1 && val <= v2) : (val >= v2 && val <= v1);
 	}
+    
+    static bool isInsideRad(double val, double loRad, double hiRad)
+	{
+        return isInside(radianWrap(val-loRad), double(0), radianWrap(hiRad-loRad));
+	}
+    
+    template<typename Type> static Type max(Type v1, Type v2)
+	{
+        return (v2 >= v1) ? v2 : v1;
+	}
+    
+    template<typename Type> static Type min(Type v1, Type v2)
+	{
+        return (v1 <= v2) ? v1 : v2;
+	}
+    
+    static double radianInterp(double _step, double _startRad, double _endRad)
+    {
+        double start = radianWrap(_startRad);
+        double end   = radianWrap(_endRad);
+        
+        if ( radianWrap(end - start) <= CICM_PI ) // anti-clockwise
+        {
+            if (end - start >= 0)
+                return radianWrap( start + _step*(end - start) );
+            else
+                return radianWrap( start + _step*( (end+CICM_2PI) - start) );
+        }
+        else // clockwise
+        {
+            if (end - start <= 0)
+                return radianWrap( start + _step*(end - start) );
+            else
+                return radianWrap( start - _step*( (start+CICM_2PI) - end) );
+        }
+    }
     
     static double radToDeg(double radian)
     {
@@ -287,6 +323,20 @@ public:
             distance = anAngle2 - anAngle1;
         
         return distance;
+    }
+
+    static double radianClosestDistance(double anAngle1, double anAngle2)
+    {
+        double minRad, maxRad;
+        anAngle1 = radianWrap(anAngle1);
+        anAngle2 = radianWrap(anAngle2);
+        minRad = min(anAngle1, anAngle2);
+        maxRad = max(anAngle1, anAngle2);
+        
+        if (maxRad - minRad <= CICM_PI)
+            return maxRad - minRad;
+        else
+            return CICM_2PI - (maxRad - minRad);
     }
     
     static double degreeWrap(double anAngle)
