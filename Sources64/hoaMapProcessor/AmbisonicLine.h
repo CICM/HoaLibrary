@@ -20,7 +20,7 @@
 #ifndef DEF_AMBISONICLINE
 #define DEF_AMBISONICLINE
 
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmTools.h"
 #define RAMP_SAMPLE 4410
 
 class AmbisonicLine{

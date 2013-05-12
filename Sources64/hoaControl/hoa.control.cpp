@@ -17,11 +17,11 @@
  *
  */
 
-#include "AmbisonicEncode.h"
-#include "AmbisonicViewer.h"
-#include "AmbisonicOptim.h"
-#include "AmbisonicWider.h"
-#include "cicmTools.h"
+#include "../hoaRecomposer/AmbisonicViewer.h"
+#include "../hoaEncoder/AmbisonicsEncoder.h"
+#include "../hoaOptim/AmbisonicsOptim.h"
+#include "../hoaWider/AmbisonicsWider.h"
+#include "../CicmLibrary/CicmTools.h"
 
 extern "C"
 {
@@ -67,10 +67,10 @@ typedef struct  _control
 	double		f_rayonCircle;
 	double		f_fontsize;
 
-	AmbisonicEncode* f_encoder;
+	AmbisonicsEncoder* f_encoder;
 	AmbisonicViewer* f_viewer;
-	AmbisonicOptim*	 f_optim;
-	AmbisonicWider*	 f_wider;
+	AmbisonicsOptim*	 f_optim;
+	AmbisonicsWider*	 f_wider;
 	double*			 f_harmonicsValues;
 
 } t_control;
@@ -274,10 +274,10 @@ void *control_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_GROWY
 			;
 
-	x->f_encoder			= new AmbisonicEncode(x->f_order);
+	x->f_encoder			= new AmbisonicsEncoder(x->f_order);
 	x->f_viewer				= new AmbisonicViewer(x->f_order);
-	x->f_optim				= new AmbisonicOptim(x->f_order);
-	x->f_wider				= new AmbisonicWider(x->f_order);
+	x->f_optim				= new AmbisonicsOptim(x->f_order);
+	x->f_wider				= new AmbisonicsWider(x->f_order);
 	x->f_harmonicsValues	= new double[x->f_order * 2 + 1];
 
 	jbox_new((t_jbox *)x, flags, argc, argv);
@@ -755,9 +755,9 @@ t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 			delete x->f_optim;
 			delete x->f_wider;
 			x->f_order = atom_getlong(argv);
-			x->f_encoder	= new AmbisonicEncode(x->f_order);
-			x->f_optim		= new AmbisonicOptim(x->f_order);
-			x->f_wider		= new AmbisonicWider(x->f_order);
+			x->f_encoder	= new AmbisonicsEncoder(x->f_order);
+			x->f_optim		= new AmbisonicsOptim(x->f_order);
+			x->f_wider		= new AmbisonicsWider(x->f_order);
 			x->f_viewer		= new AmbisonicViewer(x->f_order);
 			x->f_harmonicsValues = new double[x->f_order * 2 + 1];
 

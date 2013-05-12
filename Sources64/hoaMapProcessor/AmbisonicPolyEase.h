@@ -20,7 +20,7 @@
 #ifndef DEF_AMBISONITOOL
 #define DEF_AMBISONITOOL
 
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmTools.h"
 #include "AmbisonicEase.h"
 #include "AmbisonicLine.h"
 class AmbisonicPolyEase

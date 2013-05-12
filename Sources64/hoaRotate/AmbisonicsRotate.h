@@ -43,13 +43,29 @@ public:
 	~AmbisonicsRotate();
 	
 	/* Perform sample by sample */
-	template<typename Type> void process(Type* anInput, Type *anOutput, Type aTheta)
+	void process(float* anInput, float *anOutput, float aTheta)
+	{
+		setAzimuth(aTheta);
+		process(anInput, anOutput);
+	}
+    
+    void process(double* anInput, double *anOutput, double aTheta)
 	{
 		setAzimuth(aTheta);
 		process(anInput, anOutput);
 	}
 	
-	template<typename Type> void process(Type* anInput, Type *anOutput)
+	void process(float* anInput, float *anOutput)
+	{
+		anOutput[0] = anInput[0];
+		for (int i = 1; i < m_order; i++)
+		{
+			anOutput[2*i]	= m_harmonicCos[i-1] * anInput[2*i] - m_harmonicSin[i-1] * anInput[2*i-1];
+			anOutput[2*i-1]	= m_harmonicSin[i-1] * anInput[2*i] + m_harmonicCos[i-1] * anInput[2*i-1];
+		}
+	}
+    
+    void process(double* anInput, double *anOutput)
 	{
 		anOutput[0] = anInput[0];
 		for (int i = 1; i < m_order; i++)
@@ -62,7 +78,7 @@ public:
 	/* Perform sample block */
 	void process(double** anInput, double** anOutput, double *aTheta)
 	{
-        Cicm_Vector_Double_Copy(anInput, anOutput, m_vector_size);
+        Cicm_Vector_Double_Copy(anInput[0], anOutput[0], m_vector_size);
 		for(int j = 0; j < m_vector_size; j++)
 		{
 			setAzimuth(aTheta[j]);
@@ -76,8 +92,7 @@ public:
 	
 	void process(double** anInput, double **anOutput)
 	{
-        Cicm_Vector_Double_Copy(anInput, anOutput, m_vector_size);
-            
+        Cicm_Vector_Double_Copy(anInput[0], anOutput[0], m_vector_size);
 		for (int i = 1; i <= m_order; i++)
 		{
 			for(int j = 0; j < m_vector_size; j++)
@@ -88,10 +103,24 @@ public:
 		}
 	}
     
+    
+    void process(float** anInput, float **anOutput, float *aTheta)
+	{
+        Cicm_Vector_Float_Copy(anInput[0], anOutput[0], m_vector_size);
+        for(int j = 0; j < m_vector_size; j++)
+		{
+			setAzimuth(aTheta[j]);
+			for (int i = 1; i <= m_order; i++)
+			{
+				anOutput[2*i][j]	= m_harmonicCos[i-1] * anInput[2*i][j] - m_harmonicSin[i-1] * anInput[2*i-1][j];
+				anOutput[2*i-1][j]	= m_harmonicSin[i-1] * anInput[2*i][j] + m_harmonicCos[i-1] * anInput[2*i-1][j];
+			}
+		}
+	}
+    
     void process(float** anInput, float **anOutput)
 	{
-        Cicm_Vector_Float_Copy(anInput, anOutput, m_vector_size);
-        
+        Cicm_Vector_Float_Copy(anInput[0], anOutput[0], m_vector_size);
 		for (int i = 1; i <= m_order; i++)
 		{
 			for(int j = 0; j < m_vector_size; j++)

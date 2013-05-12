@@ -22,7 +22,7 @@
 #ifndef DEF_AMBISONICONEPOLE
 #define DEF_AMBISONICONEPOLE
 
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmTools.h"
 
 class AmbisonicOnePole{
 	

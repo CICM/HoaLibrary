@@ -25,8 +25,7 @@
 #include <math.h>
 #include <vector>
 #include <string>
-//#include <gsl/gsl_sf.h>
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmTools.h"
 #include "AmbisonicLine.h"
 
 class AmbisonicEase
