@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1000.0, 706.0 ],
+		"rect" : [ 0.0, 100.0, 991.0, 706.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -47,7 +47,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 991.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -599,7 +599,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 5.5, 69.0, 628.5, 47.0 ],
+									"patching_rect" : [ 5.5, 69.0, 631.0, 47.0 ],
 									"text" : "hoa.map allows you to record and play trajectories. Trajectories record the position of sources or groups while you're draging it. You can overwrite with other sources or groups to create complexs trajectories. Trajectory are saved in the patch and can be saved in a JSON file format.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -979,7 +979,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 991.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2370,7 +2370,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1000.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 991.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3978,7 +3978,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 991.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5612,7 +5612,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 991.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6857,7 +6857,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
+						"rect" : [ 0.0, 126.0, 991.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7106,9 +7106,9 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 15.0, 256.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, 0.59458, -0.763871, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.73959, 0.632796, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.748731, -0.719828, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.637578, 0.798566, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, -0.131959, -3.427792, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 2.997355, 1.184489, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -1.834859, -2.849686, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 3, -2.469519, -0.386451, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
-									"zoom" : 0.522812
+									"zoom" : 0.265234
 								}
 
 							}
@@ -10498,6 +10498,10 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
 									"patching_rect" : [ 424.733307, 477.5, 140.333328, 19.0 ],
+									"saved_object_attributes" : 									{
+										"pinnasize" : ""
+									}
+,
 									"text" : "hoa.binaural~ 3 small"
 								}
 
@@ -10709,8 +10713,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 546.06665, 410.125, 68.0, 19.0 ],
-									"text" : "hoa.pi~ 0.5"
+									"patching_rect" : [ 546.06665, 410.125, 62.0, 19.0 ],
+									"text" : "hoa.pi~ 0."
 								}
 
 							}
@@ -11204,7 +11208,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1000.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 991.0, 680.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,

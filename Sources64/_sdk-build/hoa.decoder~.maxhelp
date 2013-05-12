@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 391.0, 54.0, 912.0, 675.0 ],
+		"rect" : [ 138.0, 61.0, 912.0, 675.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 391.0, 80.0, 912.0, 649.0 ],
+						"rect" : [ 0.0, 26.0, 912.0, 649.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -192,14 +192,14 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-36",
-									"linecount" : 4,
+									"linecount" : 6,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "int", "", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 602.0, 367.0, 136.0, 19.0 ],
-									"text" : "0. 30. 110. 250. 330.\n\n\n\n"
+									"text" : "0. 30. 110. 250. 330.\n\n0.\n\n\n\n"
 								}
 
 							}
@@ -2499,10 +2499,6 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 164.967712, 245.0, 227.064575, 19.0 ],
-									"saved_object_attributes" : 									{
-										"optim" : "basic"
-									}
-,
 									"text" : "hoa.optim~ 7 @optim inPhase"
 								}
 
@@ -2987,7 +2983,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 482.5, 435.0, 444.0, 435.0, 444.0, 279.0, 382.532287, 279.0 ],
+									"midpoints" : [ 482.5, 450.0, 444.0, 450.0, 444.0, 279.0, 382.532287, 279.0 ],
 									"source" : [ "obj-21", 0 ]
 								}
 
@@ -3042,7 +3038,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 611.5, 435.0, 444.0, 435.0, 444.0, 279.0, 382.532287, 279.0 ],
+									"midpoints" : [ 611.5, 450.0, 444.0, 450.0, 444.0, 279.0, 382.532287, 279.0 ],
 									"source" : [ "obj-27", 0 ]
 								}
 
@@ -3635,7 +3631,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 552.5, 374.032288, 258.0, 84.0 ],
+									"patching_rect" : [ 552.5, 374.032288, 261.0, 84.0 ],
 									"text" : "Note that Kemar mannequins are not humans and every heads are differents thus binaural resittution doesn't work for everybody. Optimization can be useless for a binaural decoding and can create artefacts like unwanted filtering. "
 								}
 
@@ -6739,7 +6735,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 912.0, 649.0 ],
+						"rect" : [ 138.0, 87.0, 912.0, 649.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6946,7 +6942,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 563.0, 192.0, 210.0, 32.0 ],
+									"patching_rect" : [ 563.0, 192.0, 213.0, 32.0 ],
 									"text" : "Initialization of number of loudspeakers is a slow and expensif process."
 								}
 
@@ -9103,7 +9099,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 164.967712, 241.0, 227.064575, 19.0 ],
 									"saved_object_attributes" : 									{
-										"optim" : "basic"
+										"optim" : "maxRe"
 									}
 ,
 									"text" : "hoa.optim~ 7"
@@ -9251,6 +9247,7 @@
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 0,
+									"offset" : 17.0,
 									"patching_rect" : [ 164.967712, 354.0, 227.064575, 227.064575 ]
 								}
 
@@ -10515,7 +10512,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 516.75, 466.5, 210.0, 32.0 ],
-									"text" : "For futher informations of each mode, please look at the tabs."
+									"text" : "For futher informations of each mode, please look at tabs."
 								}
 
 							}

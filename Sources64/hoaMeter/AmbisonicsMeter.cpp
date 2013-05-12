@@ -18,10 +18,9 @@
 
 #include "AmbisonicsMeter.h"
 
-AmbisonicsMeter::AmbisonicsMeter(long aVectorSize, double aSamplingRate, long aNumberofChannels) : Ambisonics(0)
+AmbisonicsMeter::AmbisonicsMeter(long aVectorSize, double aSamplingRate, long aNumberofChannels) : Planewaves(<#args#>)
 {
-	m_order					= 0;
-	m_number_of_harmonics	= 0;
+
 	m_number_of_inputs		= Tools::clip_min(aNumberofChannels, (long)1);
 	m_number_of_outputs		= 0;
 	

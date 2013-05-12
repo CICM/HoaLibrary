@@ -64,6 +64,7 @@ void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet);
 void HoaDecode_reconnect_outlet(t_HoaDecode *x);
 void HoaDecode_disconnect_outlet(t_HoaDecode *x);
 void HoaDecode_send_configuration(t_HoaDecode *x);
+void HoaDecode_send_angles(t_HoaDecode *x);
 
 t_max_err HoaDecode_notify(t_HoaDecode *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
@@ -319,6 +320,7 @@ t_max_err offset_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
             x->f_AmbisonicsDecoder->setOffset(atom_getlong(argv));
     }        
     x->f_offset_of_ambisonics_loudspeakers = x->f_AmbisonicsDecoder->getOffset();
+    
     return NULL;
 }
 
@@ -407,6 +409,7 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
     {
         x->f_angles_of_irregular_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     }
+    HoaDecode_send_angles(x);
     
     return NULL;
 }
@@ -530,6 +533,42 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
                 t_atom argv[1];
                 atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfOutputs());
                 object_method_typed(jbox_get_object(object), gensym("channels"), argc, argv, NULL);
+            }
+        }
+    }
+}
+
+void HoaDecode_send_angles(t_HoaDecode *x)
+{
+	t_object *patcher;
+	t_object *decoder;
+    t_object *object;
+    t_object *line;
+	t_max_err err;
+    
+	err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+	err = object_obex_lookup(x, gensym("#B"), (t_object **)&decoder);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+    for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+    {
+        if (jpatchline_get_box1(line) == decoder)
+        {
+            object = jpatchline_get_box2(line);
+            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+            {                
+                long    argc = x->f_AmbisonicsDecoder->getNumberOfOutputs();
+                t_atom *argv = new t_atom[argc];
+                
+                for(int i = 0; i < argc; i++)
+                    atom_setfloat(argv+i, x->f_AmbisonicsDecoder->getLoudspeakerAngle(i));
+                
+                object_method_typed(jbox_get_object(object), gensym("angles"), argc, argv, NULL);
+                free(argv);
             }
         }
     }

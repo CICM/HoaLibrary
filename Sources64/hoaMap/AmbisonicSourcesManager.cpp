@@ -21,7 +21,7 @@
 SourcesManager::SourcesManager(double aMaximumLimitValue, long deadOrAlive)
 {
     setExistence(deadOrAlive);
-    setMaximumRadius(aMaximumLimitValue);    
+    setMaximumRadius(aMaximumLimitValue);
 }
 
 void SourcesManager::setExistence(long deadOrAlive)

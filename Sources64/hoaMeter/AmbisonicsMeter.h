@@ -19,10 +19,9 @@
 #ifndef DEF_AMBISONICSMETER
 #define DEF_AMBISONICSMETER
 
-#include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaVector/AmbisonicsVector.h"
 
-class AmbisonicsMeter : public Ambisonics
+class AmbisonicsMeter : public Planewaves
 {
 protected:
     Ambisonicsvector*   m_vectors;
@@ -33,16 +32,14 @@ protected:
     Cicm_Float         m_vector_coordinates_float[4];
     
 public:
-	AmbisonicsMeter(long aVectorSize = 0, double aSamplingRate = 44100., long aNumberofChannels = 1);
+	AmbisonicsMeter(double aConfiguration = 1., long aVectorSize = 0, double aSamplingRate = 44100.);
     
-    void         setNumberOfChannels(long aNumberofChannels);
     double       getLoudspeakerAmplitude(long anIndex);
     double       getLoudspeakerEnergy(long anIndex);
     double       getEnergyVectorAbscissa();
     double       getEnergyVectorOrdinate();
     double       getVelocityVectorAbscissa();
     double       getVelocityVectorOrdinate();
-    std::string  getChannelName(long anIndex);
 
 	~AmbisonicsMeter();
 	

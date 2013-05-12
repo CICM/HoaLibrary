@@ -15,8 +15,8 @@
 		8F95187E17337DE2000402C7 /* AmbisonicsVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F95187B17337DE2000402C7 /* AmbisonicsVector.cpp */; };
 		8F95187F17337DE2000402C7 /* AmbisonicsVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95187C17337DE2000402C7 /* AmbisonicsVector.h */; };
 		8F95188017337DE2000402C7 /* hoa.vector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F95187D17337DE2000402C7 /* hoa.vector~.cpp */; };
-		8FE028B2172A837000BD68AA /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE028B0172A837000BD68AA /* Ambisonics.cpp */; };
-		8FE028B3172A837000BD68AA /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE028B1172A837000BD68AA /* Ambisonics.h */; };
+		8FD5CC76173CCE82009BD586 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5CC74173CCE82009BD586 /* Planewaves.cpp */; };
+		8FD5CC77173CCE82009BD586 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FD5CC75173CCE82009BD586 /* Planewaves.h */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
 		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
@@ -31,8 +31,8 @@
 		8F95187B17337DE2000402C7 /* AmbisonicsVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsVector.cpp; sourceTree = "<group>"; };
 		8F95187C17337DE2000402C7 /* AmbisonicsVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsVector.h; sourceTree = "<group>"; };
 		8F95187D17337DE2000402C7 /* hoa.vector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.vector~.cpp"; sourceTree = "<group>"; };
-		8FE028B0172A837000BD68AA /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ambisonics.cpp; path = ../hoaAmbisonics/Ambisonics.cpp; sourceTree = "<group>"; };
-		8FE028B1172A837000BD68AA /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ambisonics.h; path = ../hoaAmbisonics/Ambisonics.h; sourceTree = "<group>"; };
+		8FD5CC74173CCE82009BD586 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Planewaves.cpp; path = ../hoaAmbisonics/Planewaves.cpp; sourceTree = "<group>"; };
+		8FD5CC75173CCE82009BD586 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Planewaves.h; path = ../hoaAmbisonics/Planewaves.h; sourceTree = "<group>"; };
 		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,8 +86,8 @@
 		8FE028AB172A833B00BD68AA /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				8FE028B0172A837000BD68AA /* Ambisonics.cpp */,
-				8FE028B1172A837000BD68AA /* Ambisonics.h */,
+				8FD5CC74173CCE82009BD586 /* Planewaves.cpp */,
+				8FD5CC75173CCE82009BD586 /* Planewaves.h */,
 				8F95187B17337DE2000402C7 /* AmbisonicsVector.cpp */,
 				8F95187C17337DE2000402C7 /* AmbisonicsVector.h */,
 				8F95187D17337DE2000402C7 /* hoa.vector~.cpp */,
@@ -102,11 +102,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FE028B3172A837000BD68AA /* Ambisonics.h in Headers */,
 				8F90987C172EADF400AB0C37 /* CicmDefine.h in Headers */,
 				8F90987E172EADF400AB0C37 /* CicmLine.h in Headers */,
 				8F90987F172EADF400AB0C37 /* CicmTools.h in Headers */,
 				8F95187F17337DE2000402C7 /* AmbisonicsVector.h in Headers */,
+				8FD5CC77173CCE82009BD586 /* Planewaves.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,10 +185,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FE028B2172A837000BD68AA /* Ambisonics.cpp in Sources */,
 				8F90987D172EADF400AB0C37 /* CicmLine.cpp in Sources */,
 				8F95187E17337DE2000402C7 /* AmbisonicsVector.cpp in Sources */,
 				8F95188017337DE2000402C7 /* hoa.vector~.cpp in Sources */,
+				8FD5CC76173CCE82009BD586 /* Planewaves.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

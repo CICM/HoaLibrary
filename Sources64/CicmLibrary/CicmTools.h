@@ -36,6 +36,12 @@ using namespace std;
 #define CICM_PI4 (0.785398163397448309615660845819875721)
 #define NUMBEROFCIRCLEPOINTS 36000
 
+enum
+{
+    Hoa_Polar  = 0,
+    Hoa_Cartesian
+};
+
 class Tools
 {
 public:
