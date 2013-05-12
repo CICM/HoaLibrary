@@ -21,10 +21,10 @@
 #define __hoa_recomposer__AmbisonicVirtualMicUI__
 
 #include "CicmProjectHeader.h"
-#include "../hoaEncoder/AmbisonicsEncoder.h"
-#include "../hoaAmbisonics/AmbisonicsViewer.h"
-#include "../hoaOptim/AmbisonicsOptim.h"
-#include "../hoaWider/AmbisonicsWider.h"
+#include "AmbisonicEncode.h"
+#include "AmbisonicViewer.h"
+#include "AmbisonicOptim.h"
+#include "AmbisonicWider.h"
 
 class AmbisonicVirtualMicUI
 {
@@ -35,12 +35,12 @@ private:
     bool    m_isSelected;
     double  m_fisheyeStartAngleInRadian;
     
-    int                  m_order;
-    AmbisonicsEncoder*   m_encoder;
-	AmbisonicsOptim*     m_optim;
-	AmbisonicsWider*     m_wider;
-    AmbisonicsViewer*    m_viewer;
-    double*              m_harmonicsValues;
+    int              m_order;
+    AmbisonicEncode* m_encoder;
+	AmbisonicOptim*	 m_optim;
+	AmbisonicWider*	 m_wider;
+    AmbisonicViewer* m_viewer;
+    double*			 m_harmonicsValues;
     
 public:
     AmbisonicVirtualMicUI();
