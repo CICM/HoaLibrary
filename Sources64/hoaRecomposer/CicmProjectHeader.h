@@ -24,8 +24,9 @@
 #include "../CicmLibrary/CicmTools.h"
 
 #define MAX_MICS 64
-#define MIN_MICS 0
+#define MIN_MICS 3
 #define DEF_MICS 8
 
+#define NUMBEROFCIRCLEPOINTS_UI 360
 
 #endif
