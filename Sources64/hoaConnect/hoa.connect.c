@@ -139,7 +139,7 @@ void connect_bang(t_connect *x)
 		
 		for(i = 1; i < x->f_inc; i++)
 		{
-			if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~") || object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.projector~"))
+			if (object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.decoder~") || object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.projector~") || object_classname(jbox_get_object(x->f_object[i -1])) == gensym("hoa.space~") )
 			{
 				for(j = 0; j < x->f_output; j++)
 				{

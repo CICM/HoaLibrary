@@ -223,11 +223,10 @@
 									"fontsize" : 12.0,
 									"hidden" : 1,
 									"id" : "obj-5",
-									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 38.0, 420.25, 221.5, 33.0 ],
+									"patching_rect" : [ 100.5, 499.25, 238.0, 20.0 ],
 									"text" : "hoa.plug~ 16 hoa.send~ out @name optim"
 								}
 
@@ -394,12 +393,11 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-3",
-									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 642.25, 206.0, 242.560059, 33.0 ],
+									"patching_rect" : [ 642.25, 206.0, 251.0, 20.0 ],
 									"text" : "hoa.plug~ 16 hoa.receive~ out @name optim"
 								}
 
@@ -833,7 +831,7 @@
 							}
 , 							{
 								"box" : 								{
-									"azimuth" : 3.141593,
+									"azimuth" : 6.228936,
 									"bgcolor" : [ 0.402663, 0.402663, 0.402663, 0.19 ],
 									"cicolor" : [ 0.6, 0.584724, 0.577706, 1.0 ],
 									"cicolorin" : [ 0.679731, 0.680325, 0.678963, 1.0 ],
@@ -843,7 +841,7 @@
 									"mode" : 1,
 									"numinlets" : 1,
 									"numoutlets" : 3,
-									"optim" : 1,
+									"optim" : 2,
 									"order" : 7,
 									"outlettype" : [ "float", "float", "" ],
 									"patching_rect" : [ 322.0, 243.5, 243.25, 243.25 ],
@@ -1262,7 +1260,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-42", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -8446,8 +8443,8 @@
 			}
 , 			{
 				"name" : "hoa.amp~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -8460,29 +8457,29 @@
 			}
 , 			{
 				"name" : "hoa.pencoder~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/effects",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/effects",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
+				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -8519,11 +8516,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
+				"name" : "hoa.control.mxo",
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.control.mxo",
+				"name" : "hoa.pi.mxo",
 				"type" : "iLaX"
 			}
 , 			{
