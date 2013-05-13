@@ -128,11 +128,11 @@
 
 #define Cicm_fft_free_handle vDSP_destroy_fftsetup
 
-#define Cicm_packed_mul(source1, source2, dest, length) zvmul(source1, 1, source2, 1, dest, 1, length, 1)
+#define Cicm_packed_mul(source1, source2, dest, length) vDSP_zvmul(source1, 1, source2, 1, dest, 1, length, 1)
 #define Cicm_packed_clear(source, length) vDSP_vclr(source[0].imagp, 1, length); vDSP_vclr(source[0].realp, 1, length);
 
-#define Cicm_fft_forward(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_FORWARD)
-#define Cicm_fft_inverse(fft_handle, complex, order) fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
+#define Cicm_fft_forward(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_FORWARD)
+#define Cicm_fft_inverse(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
 
 /* Sinus and Cosinus */
 #define Cicm_Vector_Float_Cosinus vvcosf

@@ -192,6 +192,13 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         for(int i = 0; i < x->f_number_of_irregular_loudspeakers; i++)
             x->f_angles_of_irregular_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
         
+        object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
+        object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
+        object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "0");
+        object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
+        object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "0");
+        object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
+        
         /* DSP Setup */
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicsDecoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfOutputs(); i++) 
