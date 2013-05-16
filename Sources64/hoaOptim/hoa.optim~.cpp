@@ -102,7 +102,9 @@ void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
         char returnOptim[256];
         sprintf(returnOptim, "%s", x->f_AmbisonicsOptim->getOptimMode().c_str());
         
-        object_method(x, gensym("optim"), gensym(returnOptim));
+        t_atom optimization[1];
+        atom_setsym(optimization, gensym(returnOptim));
+        object_method(x, gensym("optim"), 1, optimization);
         attr_args_process(x, argc, argv);
 	}
 	return (x);
