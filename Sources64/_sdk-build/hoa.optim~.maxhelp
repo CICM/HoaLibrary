@@ -5,7 +5,7 @@
 			"major" : 6,
 			"minor" : 1,
 			"revision" : 2,
-			"architecture" : "x64"
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 0.0, 44.0, 518.0, 696.0 ],
@@ -46,7 +46,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 2,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 70.0, 518.0, 670.0 ],
@@ -211,12 +211,8 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 24.0, 274.0, 242.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"optim" : "maxRe"
-									}
-,
-									"text" : "hoa.optim~ 7 maxRe"
+									"patching_rect" : [ 24.0, 274.0, 208.0, 19.0 ],
+									"text" : "hoa.optim~ 7 @optim inPhase"
 								}
 
 							}
@@ -405,7 +401,7 @@
 											"major" : 6,
 											"minor" : 1,
 											"revision" : 2,
-											"architecture" : "x64"
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -581,13 +577,9 @@
 									"id" : "obj-12",
 									"maxclass" : "newobj",
 									"numinlets" : 15,
-									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"numoutlets" : 16,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 24.0, 311.0, 242.0, 20.0 ],
-									"saved_object_attributes" : 									{
-										"pinnasize" : ""
-									}
-,
 									"text" : "hoa.decoder~ 7 16"
 								}
 
@@ -749,6 +741,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-12", 15 ]
 								}
 
 							}
@@ -1237,7 +1238,7 @@
 									"destination" : [ "obj-16", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 373.5, 339.0, 276.0, 339.0, 276.0, 270.0, 256.5, 270.0 ],
+									"midpoints" : [ 373.5, 333.0, 315.0, 333.0, 315.0, 264.0, 222.5, 264.0 ],
 									"source" : [ "obj-33", 0 ]
 								}
 
@@ -1327,7 +1328,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 2,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 518.0, 670.0 ],
@@ -1378,14 +1379,14 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
 				"type" : "JSON",
 				"implicit" : 1

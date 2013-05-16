@@ -61,9 +61,11 @@ public:
 	inline void process(double* aInputs, double* aOutputs)
 	{
         /* All Harmonics */
-        Cicm_Vector_Scalar_Double_Mul(aInputs, &m_weight_double, aOutputs, m_number_of_harmonics);
+        double outs[m_number_of_harmonics];
+        Cicm_Vector_Scalar_Double_Mul(aInputs, &m_weight_double, outs, m_number_of_harmonics);
         /* Harmonics Exept Zero */
-        Cicm_Vector_Vector_Double_Mul(m_harmonics_double, aOutputs+1, m_number_of_harmonics-1);
+        Cicm_Matrix_Vector_Double_Mul(outs+1, m_harmonics_double, aOutputs+1, m_number_of_harmonics-1);
+        aOutputs[0] = outs[0];
 	}
     
     inline void process(float* aInputs, float* aOutputs)
@@ -71,7 +73,7 @@ public:
 		/* All Harmonics */
         Cicm_Vector_Scalar_Float_Mul(aInputs, &m_weight_float, aOutputs, m_number_of_harmonics);
         /* Harmonics Exept Zero */
-        Cicm_Vector_Vector_Float_Mul(m_harmonics_float, aOutputs+1, m_number_of_harmonics-1);
+        Cicm_Matrix_Vector_Float_Mul(aOutputs+1, m_harmonics_float, aOutputs+1, m_number_of_harmonics-1);
 	}
 	
 	inline void process(double* aInputs, double* aOutputs, double aWidenValues)

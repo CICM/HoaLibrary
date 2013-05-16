@@ -28,10 +28,10 @@ AmbisonicVirtualMicUI::AmbisonicVirtualMicUI()
     m_isSelected = false;
     m_order = 7;
     
-    m_encoder           = new AmbisonicsEncoder(m_order);
-	m_viewer			= new AmbisonicsViewer(m_order);
-	m_optim				= new AmbisonicsOptim(m_order);
-	m_wider				= new AmbisonicsWider(m_order);
+    m_encoder           = new AmbisonicEncode(m_order);
+	m_viewer			= new AmbisonicViewer(m_order);
+	m_optim				= new AmbisonicOptim(m_order);
+	m_wider				= new AmbisonicWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     
     compute();
@@ -45,50 +45,13 @@ AmbisonicVirtualMicUI::~AmbisonicVirtualMicUI()
 	delete m_wider;
 }
 
-
 void AmbisonicVirtualMicUI::compute()
-{
-    //m_wider->setVectorSize(2);
-    double** harm1;
-    double** harm2;
-    harm1 = new double*[m_order*2+1];
-    harm2 = new double*[m_order*2+1];
-    
-    m_encoder->process(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);
-    
-    for(int i = 0; i < m_order*2+1; i++)
-    {
-        harm1[i] = new double[2];
-        harm2[i] = new double[2];
-        
-        harm1[i][0] = m_harmonicsValues[i];
-        harm1[i][1] = m_harmonicsValues[i];
-    }
-    
-    /*
-    m_wider->setWidenValue(m_widerValue);
-    m_wider->process(harm1, harm2);
-    for(int i = 0; i < m_order*2+1; i++)
-        m_harmonicsValues[i] = harm2[i][0];
-    */
-    
-    
-    //m_wider->process(m_harmonicsValues, m_harmonicsValues, m_widerValue);
-    
-    //m_optim->process(m_harmonicsValues, m_harmonicsValues);
-	m_viewer->process(m_harmonicsValues);
-
-}
-
-/*
-void AmbisonicVirtualMicUI::compute()
-{
-    m_encoder->process(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);
-    m_wider->process(m_harmonicsValues, m_harmonicsValues, m_widerValue);
-    m_optim->process(m_harmonicsValues, m_harmonicsValues);
+{	
+	m_encoder->process(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);
+	m_wider->process(m_harmonicsValues, m_harmonicsValues, m_widerValue);
+	m_optim->process(m_harmonicsValues, m_harmonicsValues);
 	m_viewer->process(m_harmonicsValues);
 }
-*/
 
 void AmbisonicVirtualMicUI::setOrder(long _order)
 {
@@ -101,10 +64,10 @@ void AmbisonicVirtualMicUI::setOrder(long _order)
 	delete m_wider;
     
     m_order = Tools::clip_min(_order, long(1));
-    m_encoder           = new AmbisonicsEncoder(m_order);
-	m_viewer			= new AmbisonicsViewer(m_order);
-	m_optim				= new AmbisonicsOptim(m_order);
-	m_wider				= new AmbisonicsWider(m_order);
+    m_encoder           = new AmbisonicEncode(m_order);
+	m_viewer			= new AmbisonicViewer(m_order);
+	m_optim				= new AmbisonicOptim(m_order);
+	m_wider				= new AmbisonicWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     
     compute();

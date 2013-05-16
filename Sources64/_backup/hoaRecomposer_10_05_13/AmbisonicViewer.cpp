@@ -17,9 +17,9 @@
  *
  */
 
-#include "AmbisonicsViewer.h"
+#include "AmbisonicViewer.h"
 
-AmbisonicsViewer::AmbisonicsViewer(long anOrder)
+AmbisonicViewer::AmbisonicViewer(long anOrder)
 {	
 	m_order					= Tools::clip_min(anOrder, long(1));
 	m_number_of_harmonics	= m_order * 2 + 1;
@@ -39,7 +39,7 @@ AmbisonicsViewer::AmbisonicsViewer(long anOrder)
 	computeRepresentation();
 }
 
-void AmbisonicsViewer::computeTrigo()
+void AmbisonicViewer::computeTrigo()
 {
 	m_cosinus_buffer	= new double[NUMBEROFCIRCLEPOINTS_UI];
 	m_sinus_buffer		= new double[NUMBEROFCIRCLEPOINTS_UI];
@@ -52,7 +52,7 @@ void AmbisonicsViewer::computeTrigo()
 	}
 }
 
-void AmbisonicsViewer::computeBasis()
+void AmbisonicViewer::computeBasis()
 {
 	m_harmonics_basis           = new double*[m_number_of_harmonics];
 	for (int i = 0; i <= m_number_of_harmonics ; i++)
@@ -72,7 +72,7 @@ void AmbisonicsViewer::computeBasis()
 	}
 }
 
-void AmbisonicsViewer::computeRepresentation()
+void AmbisonicViewer::computeRepresentation()
 {
 	for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 	{
@@ -87,7 +87,7 @@ void AmbisonicsViewer::computeRepresentation()
 }
 
 /*
-void AmbisonicsViewer::computeRepresentation()
+void AmbisonicViewer::computeRepresentation()
 {	
 	for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI - 1; i++)
 	{
@@ -105,7 +105,7 @@ void AmbisonicsViewer::computeRepresentation()
 }
 */
 
-void AmbisonicsViewer::computeContribution()
+void AmbisonicViewer::computeContribution()
 {
 	m_biggest_contribution = 0;
 	m_biggest_contribution_index = 0;
@@ -123,7 +123,7 @@ void AmbisonicsViewer::computeContribution()
 	}
 }
 
-void AmbisonicsViewer::computeMaximumDistance()
+void AmbisonicViewer::computeMaximumDistance()
 {
 	m_biggest_distance = 0;;
 	double distanceMax = 0.;
@@ -146,7 +146,7 @@ void AmbisonicsViewer::computeMaximumDistance()
 	}
 }
 
-void AmbisonicsViewer::computeBiggestLobe()
+void AmbisonicViewer::computeBiggestLobe()
 {
     long index;
     double distance1, distance2;
@@ -168,7 +168,10 @@ void AmbisonicsViewer::computeBiggestLobe()
             vectorSize++;
 		}
         else
-            break;        
+        {
+            break;
+        }
+        
         distance1 = distance2;
 	}
     
@@ -199,12 +202,12 @@ void AmbisonicsViewer::computeBiggestLobe()
     m_biggest_lobe_vector_size = vectorSize;
 }
 
-long AmbisonicsViewer::getBiggestLobeNbPoint()
+long AmbisonicViewer::getBiggestLobeNbPoint()
 {
     return m_biggest_lobe_vector_size;
 }
 
-double AmbisonicsViewer::getBiggestLobe_x(long anIndex)
+double AmbisonicViewer::getBiggestLobe_x(long anIndex)
 {
     long index = m_biggest_lobe_index1 + anIndex;
     if(index >= NUMBEROFCIRCLEPOINTS_UI)
@@ -212,7 +215,7 @@ double AmbisonicsViewer::getBiggestLobe_x(long anIndex)
 	return m_vector_x[Tools::clip(index, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
-double AmbisonicsViewer::getBiggestLobe_y(long anIndex)
+double AmbisonicViewer::getBiggestLobe_y(long anIndex)
 {
 	long index = m_biggest_lobe_index1 + anIndex;
     if(index >= NUMBEROFCIRCLEPOINTS_UI)
@@ -220,52 +223,52 @@ double AmbisonicsViewer::getBiggestLobe_y(long anIndex)
 	return m_vector_y[Tools::clip(index, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
-double AmbisonicsViewer::getContributions(long anIndex)
+double AmbisonicViewer::getContributions(long anIndex)
 {
 	return m_contributions[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
-double AmbisonicsViewer::getAbscisseValue(long anIndex)
+double AmbisonicViewer::getAbscisseValue(long anIndex)
 {
 	return m_vector_x[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
-double AmbisonicsViewer::getOrdinateValue(long anIndex)
+double AmbisonicViewer::getOrdinateValue(long anIndex)
 {
 	return m_vector_y[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
-double AmbisonicsViewer::getBiggestContribution()
+double AmbisonicViewer::getBiggestContribution()
 {
 	return m_biggest_contribution;
 }
 
-long AmbisonicsViewer::getBiggestContributionIndex()
+long AmbisonicViewer::getBiggestContributionIndex()
 {
 	return m_biggest_contribution_index;
 }
 
-int	AmbisonicsViewer::getColor(long anIndex)
+int	AmbisonicViewer::getColor(long anIndex)
 {
 	return m_vector_color[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
-double AmbisonicsViewer::getBiggestDistance()
+double AmbisonicViewer::getBiggestDistance()
 {
 	return m_biggest_distance;
 }
 
-long AmbisonicsViewer::getBiggestDistanceIndex1()
+long AmbisonicViewer::getBiggestDistanceIndex1()
 {
 	return m_biggest_distance_index1;
 }
 
-long AmbisonicsViewer::getBiggestDistanceIndex2()
+long AmbisonicViewer::getBiggestDistanceIndex2()
 {
 	return m_biggest_distance_index2;
 }
 
-AmbisonicsViewer::~AmbisonicsViewer()
+AmbisonicViewer::~AmbisonicViewer()
 {
 	free(m_sinus_buffer);
 	free(m_cosinus_buffer);

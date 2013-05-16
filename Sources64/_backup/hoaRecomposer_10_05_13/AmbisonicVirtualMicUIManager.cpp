@@ -21,7 +21,7 @@
 
 AmbisonicVirtualMicUIManager::AmbisonicVirtualMicUIManager(long _numberOfMics)
 {
-    setNumberOfMics(_numberOfMics);
+    m_numberOfMics = _numberOfMics;
     setDefaultAngles();
     resetAngles(-1);
 }

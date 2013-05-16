@@ -629,6 +629,52 @@ void draw_microphones(t_HoaRecomposerUI *x, t_object *view, t_rect *rect){
 	jbox_paint_layer((t_object *)x, view, gensym("mic_layer"), 0., 0.);
 }
 
+void draw_harmonics_old(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
+{
+    double w = rect->width;
+    t_jrgba harmonicsFillColor = x->f_colorHarmonics;
+    
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
+    
+    harmonicsFillColor.alpha = Tools::clip_min(x->f_colorHarmonics.alpha - 0.2);
+    
+	if (g)
+	{
+		t_jmatrix transform;
+		jgraphics_matrix_init(&transform, 1, 0, 0, -1, (w*0.5), (w*0.5));
+		jgraphics_set_matrix(g, &transform);
+		jgraphics_set_line_width(g, 2);
+        jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
+        jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
+        
+        //for (int i = 0; i < x->f_numberOfMic; i++)
+        for (int i = 0; i < 1; i++)
+        {
+            
+            if(x->f_mics->getBiggestContribution(i) != 0.)
+            {
+                double factor = (x->f_micRadius) / x->f_mics->getBiggestContribution(i);
+                
+                jgraphics_set_source_jrgba(g, &harmonicsFillColor);
+                jgraphics_move_to(g, x->f_mics->getAbscisseValue(i, 0) * factor, x->f_mics->getOrdinateValue(i, 0) * factor);
+                for(int j = 1; j < NUMBEROFCIRCLEPOINTS_UI; j++)
+                {
+                    jgraphics_line_to(g, x->f_mics->getAbscisseValue(i, j) * factor, x->f_mics->getOrdinateValue(i, j) * factor );
+                }
+                jgraphics_line_to(g, x->f_mics->getAbscisseValue(i, 0) * factor, x->f_mics->getOrdinateValue(i, 0) * factor);
+                
+                jgraphics_close_path(g);
+                jgraphics_fill_preserve(g);
+                jgraphics_set_source_jrgba(g, &x->f_colorHarmonics);
+                jgraphics_stroke(g);
+            }
+        }
+        
+		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
+	}
+	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
+}
+
 void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
