@@ -124,6 +124,7 @@ void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, lon
             outs[j][i] = in[j];
     }
     */
+    
 	x->f_AmbisonicsWider->process(ins, outs);
 }
 

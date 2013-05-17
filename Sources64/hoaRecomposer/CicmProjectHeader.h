@@ -27,6 +27,4 @@
 #define MIN_MICS 3
 #define DEF_MICS 8
 
-#define NUMBEROFCIRCLEPOINTS_UI 360
-
 #endif

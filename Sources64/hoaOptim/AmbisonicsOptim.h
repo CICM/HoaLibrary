@@ -52,6 +52,11 @@ public:
 	{
 		Cicm_Matrix_Vector_Double_Mul(inputs, m_optim_vector_double, outputs, m_number_of_harmonics);
 	}
+    
+    inline void process(double* ioVector)
+	{
+		Cicm_Matrix_Vector_Double_Mul(ioVector, m_optim_vector_double, ioVector, m_number_of_harmonics);
+	}
 	
 	/* Perform block sample */
 	inline void process(float** inputs, float** outputs)

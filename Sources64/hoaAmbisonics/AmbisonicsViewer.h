@@ -20,14 +20,11 @@
 #ifndef DEF_AmbisonicsViewer
 #define DEF_AmbisonicsViewer
 
-#include "CicmProjectHeader.h"
+#include "../CicmLibrary/CicmTools.h"
 
 #include <complex>
 #include <stdio.h>
 #include <vector>
-
-#define	M_PI 3.14159265358979323846264338327950288
-#define M_2PI 2*M_PI
 
 class AmbisonicsViewer
 {
