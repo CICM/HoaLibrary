@@ -37,15 +37,16 @@ typedef struct  _scope
 	
 	void*		f_clock;
 	int			f_startclock;
-	t_atom_long			f_interval;
-	t_atom_long			f_order;
-	t_atom_long			f_shadow;
+	t_atom_long	f_interval;
+	t_atom_long	f_order;
+    t_atom_long	f_process_mode;
+    t_atom_long f_drawCircle;
+    t_atom_long f_drawContributions;
+    t_atom_long f_drawAngles;
 	
 	t_jrgba		f_colorBackground;
     t_jrgba     f_bordercolor;
 	t_jrgba		f_colorText;
-	t_jrgba		f_colorCircle;
-	t_jrgba		f_colorCircleShadow;
 	t_jrgba		f_colorNegatif;
 	t_jrgba		f_colorPositif;
 	
@@ -65,8 +66,6 @@ t_class *scope_class;
 void *scope_new(t_symbol *s, int argc, t_atom *argv);
 void scope_free(t_scope *x);
 void scope_assist(t_scope *x, void *b, long m, long a, char *s);
-void scope_vector(t_scope *x);
-void scope_basis(t_scope *x);
 void scope_tick(t_scope *x);
 
 void scope_dsp(t_scope *x, t_signal **sp, short *count);
@@ -81,9 +80,12 @@ void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *pa
 /* Paint *********************************************/
 void scope_paint(t_scope *x, t_object *view);
 void draw_background(t_scope *x, t_object *view, t_rect *rect);
-void draw_angle(t_scope *x,  t_object *view, t_rect *rect);
+void draw_angles(t_scope *x,  t_object *view, t_rect *rect);
 void draw_contribution(t_scope *x,  t_object *view, t_rect *rect);
 void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect);
+
+void scope_resize_inputs(t_scope *x, long newNumberOfInput);
+t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av);
 
 int C74_EXPORT main()
 {
@@ -104,16 +106,9 @@ int C74_EXPORT main()
 	class_addmethod(c, (method)scope_oksize,		"oksize",		A_CANT, 0);
 
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 225 225");
-	
-	CLASS_ATTR_ATOM_LONG		(c, "shadow", 0, t_scope, f_shadow);
-	CLASS_ATTR_CATEGORY			(c, "shadow", 0, "Appearance");
-	CLASS_ATTR_ORDER			(c, "shadow", 0, "1");
-	CLASS_ATTR_STYLE_LABEL		(c, "shadow", 0, "onoff", "Draw Shadows");
-	CLASS_ATTR_DEFAULT			(c, "shadow", 0, "1");
-	CLASS_ATTR_SAVE				(c, "shadow", 1);
 
-	CLASS_ATTR_LONG		(c, "order", ATTR_SET_OPAQUE_USER, t_scope, f_order);
-    //CLASS_ATTR_LONG				(c, "order", 0, t_scope, f_order);
+    CLASS_ATTR_LONG             (c, "order", 0, t_scope, f_order);
+    CLASS_ATTR_ACCESSORS        (c, "order", (method)NULL,(method)scope_setattr_order);
 	CLASS_ATTR_CATEGORY			(c, "order", 0, "Value");
 	CLASS_ATTR_ORDER			(c, "order", 0, "1");
 	CLASS_ATTR_LABEL			(c, "order", 0, "Ambisonic Order");
@@ -121,6 +116,14 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT			(c, "order", 0, "3");
 	CLASS_ATTR_SAVE				(c, "order", 1);
 	
+    CLASS_ATTR_LONG             (c, "mode", 0, t_scope, f_process_mode);
+	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Value");
+    CLASS_ATTR_ENUMINDEX2       (c, "mode", 0, "Peak", "Average");
+	CLASS_ATTR_ORDER			(c, "mode", 0, "2");
+	CLASS_ATTR_LABEL			(c, "mode", 0, "Process Mode");
+	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
+	CLASS_ATTR_SAVE				(c, "mode", 1);
+    
 	CLASS_ATTR_LONG             (c, "interval", 0, t_scope, f_interval);
 	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Value");
 	CLASS_ATTR_ORDER			(c, "interval", 0, "3");
@@ -128,6 +131,27 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "100");
 	CLASS_ATTR_SAVE				(c, "interval", 1);
+    
+    CLASS_ATTR_ATOM_LONG		(c, "drawcircle", 0, t_scope, f_drawCircle);
+	CLASS_ATTR_CATEGORY			(c, "drawcircle", 0, "Appearance");
+	CLASS_ATTR_ORDER			(c, "drawcircle", 0, "1");
+	CLASS_ATTR_STYLE_LABEL		(c, "drawcircle", 0, "onoff", "Draw Circle");
+	CLASS_ATTR_DEFAULT			(c, "drawcircle", 0, "1");
+	CLASS_ATTR_SAVE				(c, "drawcircle", 1);
+    
+    CLASS_ATTR_ATOM_LONG		(c, "drawangles", 0, t_scope, f_drawAngles);
+	CLASS_ATTR_CATEGORY			(c, "drawangles", 0, "Appearance");
+	CLASS_ATTR_ORDER			(c, "drawangles", 0, "2");
+	CLASS_ATTR_STYLE_LABEL		(c, "drawangles", 0, "onoff", "Draw Angles");
+	CLASS_ATTR_DEFAULT			(c, "drawangles", 0, "1");
+	CLASS_ATTR_SAVE				(c, "drawangles", 1);
+    
+    CLASS_ATTR_ATOM_LONG		(c, "drawcontrib", 0, t_scope, f_drawContributions);
+	CLASS_ATTR_CATEGORY			(c, "drawcontrib", 0, "Appearance");
+	CLASS_ATTR_ORDER			(c, "drawcontrib", 0, "3");
+	CLASS_ATTR_STYLE_LABEL		(c, "drawcontrib", 0, "onoff", "Draw Contributions");
+	CLASS_ATTR_DEFAULT			(c, "drawcontrib", 0, "1");
+	CLASS_ATTR_SAVE				(c, "drawcontrib", 1);
 	
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
@@ -137,49 +161,34 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.75 0.75 0.75 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.76 0.76 0.76 1.");
     
     CLASS_ATTR_RGBA				(c, "bordercolor", 0, t_scope, f_bordercolor);
 	CLASS_ATTR_CATEGORY			(c, "bordercolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bordercolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bordercolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bordercolor", 0, "1");
+	CLASS_ATTR_ORDER			(c, "bordercolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bordercolor", 0, "0.7 0.7 0.7 1.");
 	
 	CLASS_ATTR_RGBA				(c, "txcolor", 0, t_scope, f_colorText);
 	CLASS_ATTR_CATEGORY			(c, "txcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "txcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "txcolor", 0, "Text Color");
-	CLASS_ATTR_ORDER			(c, "txcolor", 0, "2");
+	CLASS_ATTR_ORDER			(c, "txcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "txcolor", 0, "0. 0. 0. 7.");
-
-	CLASS_ATTR_RGBA				(c, "cicolor", 0, t_scope, f_colorCircle);
-	CLASS_ATTR_CATEGORY			(c, "cicolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "cicolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "cicolor", 0, "Circle Color");
-	CLASS_ATTR_ORDER			(c, "cicolor", 0, "3");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "cicolor", 0, "0. 0. 0. 0.4");
-	
-	CLASS_ATTR_RGBA				(c, "cishadcolor", 0, t_scope, f_colorCircleShadow);
-	CLASS_ATTR_CATEGORY			(c, "cishadcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "cishadcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "cishadcolor", 0, "Circle Shadow Color");
-	CLASS_ATTR_ORDER			(c, "cishadcolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "cishadcolor", 0, "1. 1. 1. 0.6");
-	//CLASS_ATTR_INVISIBLE		(c, "cishadcolor", 0);
 	
 	CLASS_ATTR_RGBA				(c, "phcolor", 0, t_scope, f_colorPositif);
 	CLASS_ATTR_CATEGORY			(c, "phcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "phcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "phcolor", 0, "Positifs Harmonics");
-	CLASS_ATTR_ORDER			(c, "phcolor", 0, "5");
+	CLASS_ATTR_ORDER			(c, "phcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "phcolor", 0, "1. 0. 0. 1.");
 	
 	CLASS_ATTR_RGBA				(c, "nhcolor", 0, t_scope, f_colorNegatif);
 	CLASS_ATTR_CATEGORY			(c, "nhcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "nhcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "nhcolor", 0, "Negatifs Harmonics");
-	CLASS_ATTR_ORDER			(c, "nhcolor", 0, "6");
+	CLASS_ATTR_ORDER			(c, "nhcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "nhcolor", 0, "0. 0. 1. 1.");
 	
 	class_register(CLASS_BOX, c);
@@ -202,12 +211,14 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
 	flags = 0 
 			| JBOX_DRAWFIRSTIN 
 			| JBOX_DRAWINLAST
+            | JBOX_DRAWBACKGROUND
 			| JBOX_TRANSPARENT	
 			| JBOX_GROWY
 			;
 	jbox_new((t_jbox *)x, flags, argc, argv);
-	attr_dictionary_process(x, d);
-	
+    
+    x->f_order = 3;
+    
 	x->j_box.z_box.b_firstin = (t_object *)x;
 	dsp_setupjbox((t_pxjbox *)x, x->f_order * 2 + 1);
 	
@@ -218,12 +229,52 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_harmonicsValues = new double[x->f_order * 2 + 1];
     for (int i = 0; i < x->f_order * 2 + 1; i++)
         x->f_harmonicsValues[i] = 0.;
+    
+    attr_dictionary_process(x, d);
 	
 	jbox_ready((t_jbox *)x);
 	
 	return (x);
-}			
+}
 
+t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
+{
+    long d;
+	if (ac && av)
+    {
+        if (atom_gettype(av) == A_LONG)
+        {
+            d = Tools::clip_min( long(atom_getlong(av)), long(1));
+            if (d != x->f_order)
+            {
+                int dspState = sys_getdspobjdspstate((t_object*)x);
+                if(dspState)
+                    object_method(gensym("dsp")->s_thing, gensym("stop"));
+                
+                free(x->f_harmonicsValues);
+                delete x->f_viewer;
+                x->f_viewer = new AmbisonicsViewer(d);
+                x->f_order = x->f_viewer->getOrder();
+                x->f_harmonicsValues = new double[x->f_order * 2 + 1];
+                scope_resize_inputs(x, x->f_order * 2 + 1);
+                
+                if(dspState)
+                    object_method(gensym("dsp")->s_thing, gensym("start"));
+            }
+        }
+	}
+	return MAX_ERR_NONE;
+}
+
+void scope_resize_inputs(t_scope *x, long newNumberOfInput)
+{
+    newNumberOfInput = Tools::clip_min(newNumberOfInput, long(1));
+    t_object *b = NULL;
+    object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+    object_method(b, gensym("dynlet_begin"));
+    dsp_resize((t_pxobject*)x, newNumberOfInput);
+    object_method(b, gensym("dynlet_end"));
+}
 
 void scope_dsp64(t_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
@@ -234,11 +285,20 @@ void scope_dsp64(t_scope *x, t_object *dsp64, short *count, double samplerate, l
 void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	int i, j;
+    double meanHarmo = 0;
     for(i = 0; i < (x->f_order * 2 + 1); i++)
     {
-        for(j = 0; j < sampleframes; j++)
+        if (x->f_process_mode == 1) // average
         {
-            x->f_harmonicsValues[i] = ins[i][j];
+            for(j = 0; j < sampleframes; j++)
+                meanHarmo += ins[i][j];
+            
+            x->f_harmonicsValues[i] = meanHarmo / sampleframes;
+            meanHarmo = 0.;
+        }
+        else
+        {
+            x->f_harmonicsValues[i] = ins[i][0]; // first sample only
         }
     }
     
@@ -274,18 +334,28 @@ void scope_dsp(t_scope *x, t_signal **sp, short *count)
 
 t_int *scope_perform(t_int *w)
 {
-	t_scope *x			= (t_scope *)(w[1]);
-	t_int	sampleframes= (t_int)(w[2]);
-	t_float	**ins		= (t_float **)w+3;
+	t_scope *x			 = (t_scope *)(w[1]);
+	t_int	sampleframes = (t_int)(w[2]);
+	t_float	**ins		 = (t_float **)w+3;
 	int i, j;
-	
-	for(i = 0; i < (x->f_order * 2 + 1); i++)
-	{
-		for(j = 0; j < sampleframes; j++)
-		{
-			x->f_harmonicsValues[i] = ins[i][j];
-		}
-	}
+	double meanHarmo = 0;
+    
+    for(i = 0; i < (x->f_order * 2 + 1); i++)
+    {
+        if (x->f_process_mode == 1) // average
+        {
+            
+            for(j = 0; j < sampleframes; j++)
+                meanHarmo += ins[i][j];
+            
+            x->f_harmonicsValues[i] = meanHarmo / sampleframes;
+            meanHarmo = 0.;
+        }
+        else
+        {
+            x->f_harmonicsValues[i] = ins[i][0]; // first sample only
+        }
+    }
 	
 	if (x->f_startclock) 
 	{
@@ -297,7 +367,7 @@ t_int *scope_perform(t_int *w)
 
 void scope_tick(t_scope *x)
 {
-    x->f_viewer->process(x->f_harmonicsValues);
+    x->f_viewer->processContribAndRep(x->f_harmonicsValues);
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 	jbox_redraw((t_jbox *)x);
@@ -340,7 +410,7 @@ t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, voi
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
-		if( name == gensym("bgcolor") || name == gensym("cicolor") || name == gensym("cishadcolor") )
+		if( name == gensym("bgcolor") || name == gensym("drawcircle") )
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 		}
@@ -353,18 +423,30 @@ t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, voi
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
 		}
-		else if(name == gensym("shadow"))
+        else if(name == gensym("order"))
 		{
-			if (x->f_shadow) object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 0);
-			else object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 1);
-			//if (x->f_shadow) object_attr_setlong(object_attr_get(x, gensym("cishadcolor")), gensym("invisible"), 0);
-			//else object_attr_setlong(object_attr_get(x, gensym("cishadcolor")), gensym("invisible"), 1);
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("angle_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
 		}
 		jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
+}
+
+void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params)
+{
+	params->d_borderthickness = 2;
+	params->d_cornersize = 6;
+    params->d_bordercolor = x->f_bordercolor;
+    params->d_boxfillcolor = x->f_colorBackground;
+}
+
+long scope_oksize(t_scope *x, t_rect *newrect)
+{
+	if (newrect->width < 20)
+		newrect->width = newrect->height = 20;
+	return 0;
 }
 
 void scope_paint(t_scope *x, t_object *view)
@@ -383,101 +465,84 @@ void scope_paint(t_scope *x, t_object *view)
 	x->f_rayonAngle = 5. / 6. * x->f_rayonGlobal + x->f_fontsize * 1.5;
 	x->f_rayonCircle = x->f_rayonGlobal / 6;
 	
-	draw_background(x, view, &rect);
-	draw_angle(x, view, &rect);
-    
-    draw_contribution(x, view, &rect);
+	if (x->f_drawCircle) draw_background(x, view, &rect);
+    if (x->f_drawAngles) draw_angles(x, view, &rect);
+    if (x->f_drawContributions) draw_contribution(x, view, &rect);
     draw_harmonics(x, view, &rect);
-    
-	if (sys_getdspstate())
-	{
-	}
-}
-
-void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_borderthickness = 2;
-	params->d_cornersize = 6;
-    params->d_bordercolor = x->f_bordercolor;
-}
-
-long scope_oksize(t_scope *x, t_rect *newrect)
-{
-	if (newrect->width < 20)
-    {
-		newrect->width = newrect->height = 20;
-	}
-	return 0;
 }
 
 void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double y1, y2, rotateAngle;
-	t_jmatrix transform;
+    t_jmatrix transform;
+    t_jrgba black, white;
+    double contrastBlack = 0.12;
+    double contrastWhite = 0.08;
+    
+    black = white = x->f_colorBackground;
+    black.red = Tools::clip_min(black.red -= contrastBlack);
+    black.green = Tools::clip_min(black.green -= contrastBlack);
+    black.blue = Tools::clip_min(black.blue -= contrastBlack);
+    
+    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
+    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
+    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
+    
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
 
 	if (g) 
 	{
 		/* Background */
+        /*
 		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
 		jgraphics_rectangle_rounded(g, 0., 0., rect->width, rect->height, 6, 6);
 		jgraphics_fill(g);
+        */
 		
 		/* Circles */
 		for(i = 5; i > 0; i--)
 		{
-			if (x->f_shadow) {
-				//inner shadow
-				jgraphics_set_line_width(g, 2);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircleShadow);
-				jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-				jgraphics_stroke(g);
-				jgraphics_set_line_width(g, 1);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-				jgraphics_stroke(g);
-			}
-			else {
-				jgraphics_set_line_width(g, 1);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-				jgraphics_stroke(g);
-			}
+            //inner shadow
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_stroke(g);
 		}
 		/* Axes */
-		jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-		
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
-		for(i = 0; i < 12; i++)
+        jgraphics_set_source_jrgba(g, &black);
+		//for(i = 0; i < 12; i++)
+        for(i = 0; i < (x->f_order * 2 + 2) ; i++)
 		{
-			rotateAngle = (double)i/12. * JGRAPHICS_2PI;
+            rotateAngle = ( (double)i/(x->f_order * 2 + 2) * CICM_2PI ) - ( 0.5/(x->f_order * 2 + 2) * CICM_2PI );
 			jgraphics_rotate(g, rotateAngle);
 			
 			y1 = 1. / 6. * x->f_rayonGlobal;
 			y2 = 5. / 6. * x->f_rayonGlobal;
 			
-			if (x->f_shadow) 
-			{
-				if ( (rotateAngle <= JGRAPHICS_PI && rotateAngle > 0.) ) 
-				{
-					jgraphics_move_to(g, -0.5, y1-0.5);
-					jgraphics_line_to(g, -0.5, y2-0.5);
-				}
-				else 
-				{
-					jgraphics_move_to(g, 0.5, y1+0.5);
-					jgraphics_line_to(g, 0.5, y2+0.5);
-				}
-				jgraphics_set_line_width(g, 2);
-				jgraphics_set_source_jrgba(g, &x->f_colorCircleShadow);
-				jgraphics_stroke(g);
-			}
-			
+			if ( (rotateAngle <= CICM_PI && rotateAngle > 0.) )
+            {
+                jgraphics_move_to(g, -0.5, y1-0.5);
+                jgraphics_line_to(g, -0.5, y2-0.5);
+            }
+            else
+            {
+                jgraphics_move_to(g, 0.5, y1+0.5);
+                jgraphics_line_to(g, 0.5, y2+0.5);
+            }
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_stroke(g);
+            
 			jgraphics_move_to(g, 0, y1);
 			jgraphics_line_to(g, 0, y2);
-			jgraphics_set_source_jrgba(g, &x->f_colorCircle);
+            jgraphics_set_source_jrgba(g, &black);
 			jgraphics_set_line_width(g, 1);
 			jgraphics_stroke(g);
 			
@@ -488,7 +553,7 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
 }
 
-void draw_angle(t_scope *x,  t_object *view, t_rect *rect)
+void draw_angles(t_scope *x,  t_object *view, t_rect *rect)
 {
 	int i;
 	double x1, y1;
@@ -503,12 +568,13 @@ void draw_angle(t_scope *x,  t_object *view, t_rect *rect)
 		jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_WEIGHT_NORMAL, x->f_fontsize);
 		jtl = jtextlayout_create();
 		jtextlayout_settextcolor(jtl, &x->f_colorText); 
-		for(i = 0; i < 12; i++)
+		for(i = 0; i < (x->f_order*2+2); i++)
 		{
-			x1 = x->f_rayonAngle * cos((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.x;
-			y1 = x->f_rayonAngle * sin((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.y;
+			x1 = x->f_rayonAngle * cos((double)-i * CICM_2PI / (x->f_order*2+2) - CICM_PI / 2.) + x->f_center.x;
+			y1 = x->f_rayonAngle * sin((double)-i * CICM_2PI / (x->f_order*2+2) - CICM_PI / 2.) + x->f_center.y;
 		
-			sprintf(text,"%d°", 30 * i);
+			//sprintf(text,"%d°", 30 * i);
+            sprintf(text,"%ld°", long( (360*i) / (x->f_order*2+2) ) );
 			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 1.5, y1 - 10, x->f_fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
 			jtextlayout_draw(jtl, g);
 			
@@ -531,7 +597,7 @@ void draw_contribution(t_scope *x,  t_object *view, t_rect *rect)
 	
 	if (g)
 	{
-		x1 = x->f_center.x + x->f_fontsize * .25;
+		x1 = x->f_center.x;
 		y1 = x->f_center.y - 2 * x->f_fontsize;
 		jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_WEIGHT_NORMAL, x->f_fontsize * 0.75);
 		jtl = jtextlayout_create();
@@ -542,7 +608,7 @@ void draw_contribution(t_scope *x,  t_object *view, t_rect *rect)
 		for(int i = 1; i < 5; i++)
 		{
 			sprintf(text,"%.2f", (float)(i * biggestcontrib));
-			jtextlayout_set(jtl, text, jf, x1, y1 - i * x->f_rayonCircle, x->f_fontsize * 3, 20, JGRAPHICS_TEXT_JUSTIFICATION_LEFT, JGRAPHICS_TEXTLAYOUT_NOWRAP);
+			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 2, y1 - i * x->f_rayonCircle, x->f_fontsize * 4, x->f_fontsize, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
 			jtextlayout_draw(jtl, g);
 			
 		}
@@ -562,6 +628,10 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
     t_jmatrix transform;
     t_jrgba shadcolor = {0.4, 0.4, 0.4, 0.9};
     double alphaShadow = 1.;
+    long posPathLen, negPathLen;
+    long precIndex = 0;
+    double factor;
+    posPathLen = negPathLen = 0;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
     
     if (alphaShadow > x->f_colorPositif.alpha ) alphaShadow = x->f_colorPositif.alpha;
@@ -572,21 +642,27 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
     
 	if (g)
 	{
-		
+		jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
+        jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
 		jgraphics_set_line_width(g, 1);
-		if(x->f_viewer->getBiggestContribution() != 0.)
+		if(x->f_viewer->getBiggestContribution() > 0.)
 		{
-			double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
+            factor = (x->f_rayonGlobal * 5. / 6.);
+            if (x->f_viewer->getBiggestContribution() > 1)
+                factor /= x->f_viewer->getBiggestContribution();
+            
+            Tools::clip(&factor, 0., (x->f_rayonGlobal * 5. / 6.));
 			
             // positiv harmonics
-			//jgraphics_set_source_jrgba(g, &x->f_colorPositif);
 			for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 			{
-				
+				precIndex = i-1;
+                if (precIndex < 0) precIndex += NUMBEROFCIRCLEPOINTS_UI;
+                
 				if (i == NUMBEROFCIRCLEPOINTS_UI-1) {
 					jgraphics_line_to(g, beginCoord.x, beginCoord.y );
 				}
-				else if(x->f_viewer->getColor(i) == 1)
+				else if(x->f_viewer->getColor(i) == 1 || x->f_viewer->getColor(i) == 0)
 				{
 					if (pathLength == 0)
 					{
@@ -594,27 +670,35 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 						beginCoord.y = x->f_viewer->getOrdinateValue(i) * factor;
 						jgraphics_move_to(g, beginCoord.x, beginCoord.y );
 						pathLength++;
-					} else {
-						jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor,
-										  x->f_viewer->getOrdinateValue(i) * factor);
+					}
+                    else if(x->f_viewer->getColor(precIndex) != 1)
+                    {
+                        jgraphics_line_to(g, 0, 0);
+                        jgraphics_move_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
+                    }
+                    else
+                    {
+						jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
 					}
 				}
 			}
 			if (pathLength) {
-				jgraphics_close_path(g);
+				//jgraphics_close_path(g);
                 posHarmPath = jgraphics_copy_path(g);
 			}
+            posPathLen = pathLength;
 			
 			pathLength = 0;
 			jgraphics_new_path(g);
-			//jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
 			for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 			{
-				
+				precIndex = i-1;
+                if (precIndex < 0) precIndex += NUMBEROFCIRCLEPOINTS_UI;
+                
 				if (i == NUMBEROFCIRCLEPOINTS_UI-1) {
 					jgraphics_line_to(g, beginCoord.x, beginCoord.y );
 				}
-				else if(x->f_viewer->getColor(i) == -1)
+				else if(x->f_viewer->getColor(i) == -1 || x->f_viewer->getColor(i) == 0)
 				{
 					if (!pathLength)
 					{
@@ -622,38 +706,46 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 						beginCoord.y = x->f_viewer->getOrdinateValue(i) * factor;
 						jgraphics_move_to(g, beginCoord.x, beginCoord.y );
 						pathLength++;
-					} else {
-						jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor,
-										  x->f_viewer->getOrdinateValue(i) * factor);
+					}
+                    else if(x->f_viewer->getColor(precIndex) != -1)
+                    {
+                        jgraphics_line_to(g, 0, 0);
+                        jgraphics_move_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
+                    }
+                    else
+                    {
+						jgraphics_line_to(g, x->f_viewer->getAbscisseValue(i) * factor, x->f_viewer->getOrdinateValue(i) * factor);
 					}
 				}
 			}
 			if (pathLength) {
-				jgraphics_close_path(g);
+				//jgraphics_close_path(g);
                 negHarmPath = jgraphics_copy_path(g);
 			}
+            negPathLen = pathLength;
             
             // draw harmonics :
-            jgraphics_new_path(g);
-            jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-            jgraphics_set_matrix(g, &transform);
-            
-            // shadows
-            jgraphics_append_path(g, posHarmPath);
-            jgraphics_append_path(g, negHarmPath);
-            jgraphics_set_source_jrgba(g, &shadcolor);
-            jgraphics_stroke(g);
-            
-            jgraphics_translate(g, 1, 1);
-            // harmocolor
-			jgraphics_append_path(g, posHarmPath);
-            jgraphics_set_source_jrgba(g, &x->f_colorPositif);
-            jgraphics_stroke(g);
-                        
-            jgraphics_append_path(g, negHarmPath);
-            jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
-            jgraphics_stroke(g);
-            
+            if (posPathLen || negPathLen) {
+                jgraphics_new_path(g);
+                jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+                jgraphics_set_matrix(g, &transform);
+                
+                // shadows
+                if (posPathLen) jgraphics_append_path(g, posHarmPath);
+                //if (negPathLen) jgraphics_append_path(g, negHarmPath);
+                jgraphics_set_source_jrgba(g, &shadcolor);
+                jgraphics_stroke(g);
+                
+                jgraphics_translate(g, 1, 1);
+                // harmocolor
+                if (posPathLen) jgraphics_append_path(g, posHarmPath);
+                jgraphics_set_source_jrgba(g, &x->f_colorPositif);
+                jgraphics_stroke(g);
+                
+                if (negPathLen) jgraphics_append_path(g, negHarmPath);
+                jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
+                jgraphics_stroke(g);
+            }
 		}
 		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
 	}

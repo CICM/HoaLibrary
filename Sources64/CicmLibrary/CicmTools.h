@@ -56,6 +56,14 @@ public:
 			aValue = aMaximum;
 		return aValue;
 	}
+    
+    template<typename Type> static void clip(Type *aValue, Type aMinimum = 0, Type aMaximum = 1)
+	{
+		if(*aValue < aMinimum)
+			*aValue = aMinimum;
+		else if(*aValue > aMaximum)
+			*aValue = aMaximum;
+	}
 
 	template<typename Type> static Type clip_min(Type aValue, Type aMinimum = 0)
 	{

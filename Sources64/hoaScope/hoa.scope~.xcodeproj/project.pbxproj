@@ -21,7 +21,6 @@
 /* Begin PBXFileReference section */
 		2C3900DC174692B200D28CDE /* hoa.scope~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.scope~.cpp"; sourceTree = "<group>"; };
 		2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2C75F369172DAF65000BDABC /* CicmProjectHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CicmProjectHeader.h; sourceTree = "<group>"; };
 		2CB6473D1737066B005EE2C8 /* CicmLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CicmLibrary; path = ../CicmLibrary; sourceTree = "<group>"; };
 		2CF0D70E1740565500A09B08 /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonics.cpp; sourceTree = "<group>"; };
 		2CF0D70F1740565500A09B08 /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonics.h; sourceTree = "<group>"; };
@@ -52,7 +51,6 @@
 				2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */,
 				2CB6473D1737066B005EE2C8 /* CicmLibrary */,
 				2CF0D70D1740565500A09B08 /* hoaAmbisonics */,
-				2C75F369172DAF65000BDABC /* CicmProjectHeader.h */,
 				2C3900DC174692B200D28CDE /* hoa.scope~.cpp */,
 				2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,

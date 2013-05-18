@@ -19,10 +19,11 @@
 
 #include "AmbisonicsViewer.h"
 
-AmbisonicsViewer::AmbisonicsViewer(long anOrder)
+AmbisonicsViewer::AmbisonicsViewer(long anOrder, double offset)
 {	
 	m_order					= Tools::clip_min(anOrder, long(1));
 	m_number_of_harmonics	= m_order * 2 + 1;
+    m_representation_offset = offset;
 	computeTrigo();
 	computeBasis();
 
@@ -47,8 +48,12 @@ void AmbisonicsViewer::computeTrigo()
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++) 
 	{
 		double azimuth = double(i) * CICM_2PI / double(NUMBEROFCIRCLEPOINTS_UI);
+        m_cosinus_buffer[i] = cos(CICM_2PI - azimuth + m_representation_offset);
+		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth + m_representation_offset);
+        /*
 		m_cosinus_buffer[i] = cos(CICM_2PI - azimuth - CICM_PI2);
 		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth - CICM_PI2);
+        */
 	}
 }
 
@@ -65,9 +70,27 @@ void AmbisonicsViewer::computeBasis()
 	{
 		for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 		{
-			double angularStep = (CICM_2PI / NUMBEROFCIRCLEPOINTS_UI) * (double)i;
-			m_harmonics_basis[j*2][i]	= cos((double)j * angularStep);
-			m_harmonics_basis[j*2-1][i] = sin((double)j * angularStep);
+			double angularStep = (CICM_2PI / NUMBEROFCIRCLEPOINTS_UI) * double(i);
+			m_harmonics_basis[j*2][i]	= cos(double(j) * angularStep);
+			m_harmonics_basis[j*2-1][i] = sin(double(j) * angularStep);
+		}
+	}
+}
+
+void AmbisonicsViewer::computeContribution()
+{
+	m_biggest_contribution = 0;
+	m_biggest_contribution_index = 0;
+	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+	{
+		m_contributions[i] = 0.;
+		for(int j = 0; j < m_number_of_harmonics; j++)
+			m_contributions[i] += m_harmonics_basis[j][i] * m_harmonics_values[j];
+        
+		if (fabs(m_contributions[i]) > m_biggest_contribution)
+		{
+			m_biggest_contribution = fabs(m_contributions[i]);
+			m_biggest_contribution_index = i;
 		}
 	}
 }
@@ -83,43 +106,6 @@ void AmbisonicsViewer::computeRepresentation()
 		else if (m_contributions[i] < 0.)
 			m_vector_color[i] = -1;
 		else m_vector_color[i] = 0;
-	}
-}
-
-/*
-void AmbisonicsViewer::computeRepresentation()
-{	
-	for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI - 1; i++)
-	{
-		m_vector_x[i] = m_sinus_buffer[i] * fabs(m_contributions[i]);
-		m_vector_y[i] = m_cosinus_buffer[i] * fabs(m_contributions[i]);
-		if(m_contributions[i] > 0.)
-			m_vector_color[i] = 1;
-		else if (m_contributions[i] < 0.)
-			m_vector_color[i] = -1;
-		else m_vector_color[i] = 0;
-	}
-	m_vector_x[NUMBEROFCIRCLEPOINTS_UI - 1] = m_vector_x[0];
-	m_vector_y[NUMBEROFCIRCLEPOINTS_UI - 1] = m_vector_y[0];
-	m_vector_color[NUMBEROFCIRCLEPOINTS_UI - 1] = m_vector_color[0];
-}
-*/
-
-void AmbisonicsViewer::computeContribution()
-{
-	m_biggest_contribution = 0;
-	m_biggest_contribution_index = 0;
-	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
-	{    
-		m_contributions[i] = 0.;		
-		for(int j = 0; j < m_number_of_harmonics; j++)
-			m_contributions[i] += m_harmonics_basis[j][i] * m_harmonics_values[j];
-			
-		if (fabs(m_contributions[i]) > m_biggest_contribution)
-		{
-			m_biggest_contribution = fabs(m_contributions[i]);
-			m_biggest_contribution_index = i;
-		}
 	}
 }
 
