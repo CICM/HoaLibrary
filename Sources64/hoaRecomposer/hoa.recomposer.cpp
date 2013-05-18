@@ -680,7 +680,7 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 }
 
 
-void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
+void draw_harmonics_old(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
     t_jrgba harmonicsFillColor = x->f_colorHarmonics;
@@ -727,7 +727,7 @@ void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 }
 
 
-void draw_harmonics_old(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
+void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
     t_jrgba harmonicsFillColor = x->f_colorHarmonics;

@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 95.0, 49.0, 820.0, 706.0 ],
@@ -42,8 +43,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 95.0, 75.0, 820.0, 680.0 ],
@@ -198,6 +200,7 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.729412, 0.745098, 0.756863, 1.0 ],
+									"bordercolor" : [ 0.543587, 0.543587, 0.543587, 1.0 ],
 									"cicolor" : [ 0.0, 0.0, 0.0, 0.5 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
@@ -205,11 +208,12 @@
 									"id" : "obj-1",
 									"interval" : 20,
 									"maxclass" : "hoa.scope~",
+									"nhcolor" : [ 0.0, 0.0, 1.0, 0.9 ],
 									"numinlets" : 15,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 194.5, 314.0, 293.0, 293.0 ],
-									"phcolor" : [ 1.0, 0.011364, 0.011364, 1.0 ],
+									"phcolor" : [ 1.0, 0.022727, 0.022727, 0.9 ],
 									"txcolor" : [ 0.0, 0.0, 0.0, 0.501961 ]
 								}
 
@@ -542,8 +546,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1209,8 +1214,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 820.0, 680.0 ],
@@ -1270,8 +1276,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 820.0, 680.0 ],
@@ -1475,8 +1482,9 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 6,
-											"minor" : 0,
-											"revision" : 8
+											"minor" : 1,
+											"revision" : 2,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -2038,8 +2046,8 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}

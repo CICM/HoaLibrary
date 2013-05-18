@@ -26,6 +26,8 @@
 #include "ext_dictionary.h"
 #include "ext_globalsymbol.h"
 
+//#include "../CicmLibrary/CicmTools.h"
+
 #define MAXIMUM_SIZE 360
 
 typedef struct  _scope 
