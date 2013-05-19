@@ -29,8 +29,7 @@ AmbisonicVirtualMicUI::AmbisonicVirtualMicUI()
     m_order = 7;
     
     m_encoder           = new AmbisonicsEncoder(m_order);
-	m_viewer			= new AmbisonicsViewer(m_order);
-	//m_optim			= new AmbisonicsOptim(m_order, "inPhase");
+	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
     m_optim				= new AmbisonicsOptim(m_order);
 	m_wider				= new AmbisonicsWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
@@ -52,7 +51,7 @@ void AmbisonicVirtualMicUI::compute()
     m_encoder->process(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);
     m_wider->process(m_harmonicsValues, m_widerValue);
     m_optim->process(m_harmonicsValues);
-	m_viewer->process(m_harmonicsValues);
+    m_viewer->processBigLob(m_harmonicsValues);
 }
 
 void AmbisonicVirtualMicUI::setOrder(long _order)
@@ -67,8 +66,7 @@ void AmbisonicVirtualMicUI::setOrder(long _order)
     
     m_order = Tools::clip_min(_order, long(1));
     m_encoder           = new AmbisonicsEncoder(m_order);
-	m_viewer			= new AmbisonicsViewer(m_order);
-	//m_optim				= new AmbisonicsOptim(m_order, "inPhase");
+	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
     m_optim				= new AmbisonicsOptim(m_order);
 	m_wider				= new AmbisonicsWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];

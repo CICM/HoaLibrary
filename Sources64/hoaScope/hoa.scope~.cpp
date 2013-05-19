@@ -40,6 +40,7 @@ typedef struct  _scope
 	t_atom_long	f_interval;
 	t_atom_long	f_order;
     t_atom_long	f_process_mode;
+    t_atom_long f_bufsize;
     t_atom_long f_drawCircle;
     t_atom_long f_drawContributions;
     t_atom_long f_drawAngles;
@@ -58,6 +59,8 @@ typedef struct  _scope
     
     AmbisonicsViewer* f_viewer;
     double*     f_harmonicsValues;
+    long        f_sampleCounter;
+    double*     f_averageHarmo;
 	
 } t_scope;
 
@@ -124,9 +127,17 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
 	CLASS_ATTR_SAVE				(c, "mode", 1);
     
+    CLASS_ATTR_LONG             (c, "bufsize", 0, t_scope, f_bufsize);
+	CLASS_ATTR_CATEGORY			(c, "bufsize", 0, "Value");
+	CLASS_ATTR_ORDER			(c, "bufsize", 0, "3");
+    CLASS_ATTR_FILTER_MIN		(c, "bufsize", 1);
+	CLASS_ATTR_LABEL			(c, "bufsize", 0, "Buffer Size (in samps)");
+	CLASS_ATTR_DEFAULT			(c, "bufsize", 0, "128");
+	CLASS_ATTR_SAVE				(c, "bufsize", 1);
+    
 	CLASS_ATTR_LONG             (c, "interval", 0, t_scope, f_interval);
 	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "interval", 0, "3");
+	CLASS_ATTR_ORDER			(c, "interval", 0, "4");
 	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "100");
@@ -218,6 +229,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
 	jbox_new((t_jbox *)x, flags, argc, argv);
     
     x->f_order = 3;
+    x->f_sampleCounter = 0;
     
 	x->j_box.z_box.b_firstin = (t_object *)x;
 	dsp_setupjbox((t_pxjbox *)x, x->f_order * 2 + 1);
@@ -227,8 +239,12 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
     
     x->f_viewer = new AmbisonicsViewer(x->f_order);
 	x->f_harmonicsValues = new double[x->f_order * 2 + 1];
+    x->f_averageHarmo = new double[x->f_order * 2 + 1];
     for (int i = 0; i < x->f_order * 2 + 1; i++)
+    {
         x->f_harmonicsValues[i] = 0.;
+        x->f_averageHarmo[i] = 0.;
+    }
     
     attr_dictionary_process(x, d);
 	
@@ -252,10 +268,12 @@ t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
                     object_method(gensym("dsp")->s_thing, gensym("stop"));
                 
                 free(x->f_harmonicsValues);
+                free(x->f_averageHarmo);
                 delete x->f_viewer;
                 x->f_viewer = new AmbisonicsViewer(d);
                 x->f_order = x->f_viewer->getOrder();
                 x->f_harmonicsValues = new double[x->f_order * 2 + 1];
+                x->f_averageHarmo = new double[x->f_order * 2 + 1];
                 scope_resize_inputs(x, x->f_order * 2 + 1);
                 
                 if(dspState)
@@ -285,16 +303,20 @@ void scope_dsp64(t_scope *x, t_object *dsp64, short *count, double samplerate, l
 void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	int i, j;
-    double meanHarmo = 0;
     for(i = 0; i < (x->f_order * 2 + 1); i++)
     {
         if (x->f_process_mode == 1) // average
         {
             for(j = 0; j < sampleframes; j++)
-                meanHarmo += ins[i][j];
-            
-            x->f_harmonicsValues[i] = meanHarmo / sampleframes;
-            meanHarmo = 0.;
+            {
+                x->f_averageHarmo[i] += ins[i][j];
+                x->f_sampleCounter++;
+                if (x->f_sampleCounter >= x->f_bufsize)
+                {
+                    x->f_harmonicsValues[i] = x->f_averageHarmo[i] / x->f_bufsize;
+                    x->f_averageHarmo[i] = x->f_sampleCounter = 0.;
+                }
+            }
         }
         else
         {
@@ -337,19 +359,21 @@ t_int *scope_perform(t_int *w)
 	t_scope *x			 = (t_scope *)(w[1]);
 	t_int	sampleframes = (t_int)(w[2]);
 	t_float	**ins		 = (t_float **)w+3;
-	int i, j;
-	double meanHarmo = 0;
-    
+    int i, j;
     for(i = 0; i < (x->f_order * 2 + 1); i++)
     {
         if (x->f_process_mode == 1) // average
         {
-            
             for(j = 0; j < sampleframes; j++)
-                meanHarmo += ins[i][j];
-            
-            x->f_harmonicsValues[i] = meanHarmo / sampleframes;
-            meanHarmo = 0.;
+            {
+                x->f_averageHarmo[i] += ins[i][j];
+                x->f_sampleCounter++;
+                if (x->f_sampleCounter >= x->f_bufsize)
+                {
+                    x->f_harmonicsValues[i] = x->f_averageHarmo[i] / x->f_bufsize;
+                    x->f_averageHarmo[i] = x->f_sampleCounter = 0.;
+                }
+            }
         }
         else
         {
@@ -382,6 +406,7 @@ void scope_free(t_scope *x)
 	jbox_free((t_jbox *)x);
     
     free(x->f_harmonicsValues);
+    free(x->f_averageHarmo);
     delete x->f_viewer;
 }
 
@@ -573,7 +598,6 @@ void draw_angles(t_scope *x,  t_object *view, t_rect *rect)
 			x1 = x->f_rayonAngle * cos((double)-i * CICM_2PI / (x->f_order*2+2) - CICM_PI / 2.) + x->f_center.x;
 			y1 = x->f_rayonAngle * sin((double)-i * CICM_2PI / (x->f_order*2+2) - CICM_PI / 2.) + x->f_center.y;
 		
-			//sprintf(text,"%d°", 30 * i);
             sprintf(text,"%ld°", long( (360*i) / (x->f_order*2+2) ) );
 			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 1.5, y1 - 10, x->f_fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
 			jtextlayout_draw(jtl, g);

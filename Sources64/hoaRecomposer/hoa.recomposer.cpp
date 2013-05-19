@@ -45,6 +45,8 @@ typedef struct  _HoaRecomposerUI
 	t_jrgba		f_color_selection;
     t_jrgba		f_colorHarmonics;
     t_jrgba     f_fisheyecolor;
+    t_jrgba     f_colorTextMic;
+    t_jrgba     f_colorTextMicSelected;
     
     // microphones
     AmbisonicVirtualMicUIManager* f_mics;
@@ -215,6 +217,18 @@ int main()
 	CLASS_ATTR_LABEL			(c, "rectselectcolor", 0, "Rect Selection color");
 	CLASS_ATTR_ORDER			(c, "rectselectcolor", 0, "8");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "rectselectcolor", 0, "0.39 0.52 0.8 1.");
+    
+    CLASS_ATTR_RGBA				(c, "mictextcolor", 0, t_HoaRecomposerUI, f_colorTextMic);
+	CLASS_ATTR_STYLE			(c, "mictextcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "mictextcolor", 0, "Rect Selection color");
+	CLASS_ATTR_ORDER			(c, "mictextcolor", 0, "9");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "mictextcolor", 0, "0.39 0.52 0.8 1.");
+    
+    CLASS_ATTR_RGBA				(c, "selmictextcolor", 0, t_HoaRecomposerUI, f_colorTextMicSelected);
+	CLASS_ATTR_STYLE			(c, "selmictextcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "selmictextcolor", 0, "Rect Selection color");
+	CLASS_ATTR_ORDER			(c, "selmictextcolor", 0, "10");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmictextcolor", 0, "0.39 0.52 0.8 1.");
     CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	CLASS_ATTR_LONG				(c, "nmics",0, t_HoaRecomposerUI, f_numberOfMic);
@@ -271,15 +285,30 @@ void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_ready(&x->j_box);
     
+    short version = maxversion() << 12;
+    
+    if (version == 0x0612) {
+        post("Max 6.1.2");
+    }
+    else if (version == 608)
+    {
+        post("Max 6.0.8");
+    }
+    
+    post("version %d", maxversion() & 0x3fff);
+    post("version2 %d", maxversion() & 0xf000);
+    //post("version %d", maxversion() & 12);
+    
     /*
     if ( (maxversion() << 12) > 610 ) {
         post("Max 6.1");
     }
     else
         post("Max 6");
+    */
     post("maxversion %x", maxversion());
     post("maxversion short %d", maxversion());
-    */
+    
 	
 	return (x);
 }
@@ -488,7 +517,8 @@ t_max_err set_numberOfMics(t_HoaRecomposerUI *x, void *attr, long ac, t_atom *av
         jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
         jbox_redraw((t_jbox *)x);
     }
-    HoaRecomposerUI_outputAndNotifyChange(x);
+    
+    object_method(x, gensym("resetangle"));
     return MAX_ERR_NONE;
 }
 
@@ -559,6 +589,10 @@ t_max_err HoaRecomposerUI_notify(t_HoaRecomposerUI *x, t_symbol *s, t_symbol *ms
          {
              jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
          }
+         else if(name == gensym("mictextcolor") || name == gensym("selmictextcolor"))
+         {
+             jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
+         }
          else if(name == gensym("bgcolor") || name == gensym("circlecolor"))
          {
              jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
@@ -588,7 +622,7 @@ void HoaRecomposerUI_paint(t_HoaRecomposerUI *x, t_object *view)
     draw_harmonics(x, view, &rect);
     draw_microphones(x, view, &rect);
     draw_fishEye(x, view, &rect);
-    //draw_textMics(x, view, &rect);
+    draw_textMics(x, view, &rect);
     draw_rect_selection(x, view, &rect);
 }
 
@@ -648,27 +682,23 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
     t_jfont *jf;
 	t_jtextlayout *jtl;
     char text[16];
-    double fontsize = 12;
-    t_jrgba black = {0.3, 0.3, 0.3, 1};
+    double fontsize = 10;
     double x1, y1;
-    t_jmatrix transform;
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("text_layer"), rect->width, rect->height);
-	
+    	
 	if (g) {
         
         jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_WEIGHT_NORMAL, fontsize);
 		jtl = jtextlayout_create();
-		jtextlayout_settextcolor(jtl, &black);
-		
-        jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
-		jgraphics_set_matrix(g, &transform);
+        //jtl = jtextlayout_withbgcolor(g, &x->f_colorMic);
         
         for(int i=numMics-1; i>=0; i--)
         {
-            mic_angle = x->f_mics->getAngleInRadian(i);
-            x1 = Tools::abscisse(x->f_micRadius, mic_angle + CICM_PI2);
-            y1 = Tools::ordinate(x->f_micRadius, mic_angle + CICM_PI2);
+            jtextlayout_settextcolor(jtl, (x->f_mics->isSelected(i) || x->f_last_mouseMoveOverMic == i) ? &x->f_colorTextMicSelected : &x->f_colorTextMic);
+            mic_angle = CICM_2PI - (x->f_mics->getAngleInRadian(i) + CICM_PI2);
+            x1 = long(Tools::abscisse(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
+            y1 = long(Tools::ordinate(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
             sprintf(text,"%i", i+1);
 			jtextlayout_set(jtl, text, jf, x1 - fontsize * 1.5, y1 - 10, fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
 			jtextlayout_draw(jtl, g);
@@ -679,7 +709,7 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("text_layer"), 0., 0.);
 }
 
-
+/*
 void draw_harmonics_old(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 {
     double w = rect->width;
@@ -725,7 +755,7 @@ void draw_harmonics_old(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
 }
-
+*/
 
 void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 {
@@ -744,6 +774,10 @@ void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 		jgraphics_set_line_width(g, 2);
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
         jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
+        
+        post("biggestContrib %f", x->f_mics->getBiggestContribution(0));
+        post("biggestLobeNbPoint %ld", x->f_mics->getBiggestLobeNbPoint(0));
+        post("biggestContribIndex %ld", x->f_mics->getBiggestContributionIndex(0));
         
         for (int i = 0; i < x->f_numberOfMic; i++) {
             if(x->f_mics->getBiggestContribution(i) != 0.)
@@ -921,7 +955,7 @@ void draw_fishEye(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
                 jgraphics_fill(g);
             }
         }
-        
+
         jgraphics_arc(g, cartFisheyeDest.x, cartFisheyeDest.y, 4, 0, CICM_2PI);
         jgraphics_fill(g);
         
@@ -1047,8 +1081,12 @@ void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
         double factor = Tools::isInsideRad(angleDrag, fisheyeAngle-CICM_PI2, fisheyeAngle+CICM_PI2) ? 1 : -1;
         double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor;
         x->f_mics->setSelectedMicsFisheyeStepWithDelta(-2, radiusDelta / x->f_micRadius);
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("fisheye_layer"));
         HoaRecomposerUI_outputAndNotifyChange(x);
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("fisheye_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+        jbox_redraw((t_jbox *)x);
     }
     else if (x->f_last_mouseDownOverMic != -1)
     {
@@ -1059,22 +1097,22 @@ void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
             double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor;
             x->f_mics->setSelectedMicsWiderValueWithRadiusDelta(radiusDelta / x->f_micRadius);
         }
-        else
+        else // => simply rotate
         {
             int magnet = (modifiers == 17) ? 1 : 0;
             x->f_mics->rotateSelectedMicsWithRadian(angleDrag, x->f_last_mouseDownOverMic, magnet);
         }
         
         HoaRecomposerUI_outputAndNotifyChange(x);
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+        jbox_redraw((t_jbox *)x);
     }
     
 	x->f_last_mouseDrag = pt;
     x->f_last_mouseDragAngle = angleDrag;
     x->f_last_mouseDragRadius = radiusDrag;
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-    jbox_redraw((t_jbox *)x);
 }
 
 void HoaRecomposerUI_mouseup(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)

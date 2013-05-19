@@ -24,6 +24,7 @@ AmbisonicsViewer::AmbisonicsViewer(long anOrder, double offset)
 	m_order					= Tools::clip_min(anOrder, long(1));
 	m_number_of_harmonics	= m_order * 2 + 1;
     m_representation_offset = offset;
+    m_biggest_contribution = 0;
 	computeTrigo();
 	computeBasis();
 
@@ -50,10 +51,6 @@ void AmbisonicsViewer::computeTrigo()
 		double azimuth = double(i) * CICM_2PI / double(NUMBEROFCIRCLEPOINTS_UI);
         m_cosinus_buffer[i] = cos(CICM_2PI - azimuth + m_representation_offset);
 		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth + m_representation_offset);
-        /*
-		m_cosinus_buffer[i] = cos(CICM_2PI - azimuth - CICM_PI2);
-		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth - CICM_PI2);
-        */
 	}
 }
 
@@ -134,53 +131,47 @@ void AmbisonicsViewer::computeMaximumDistance()
 
 void AmbisonicsViewer::computeBiggestLobe()
 {
-    long index;
-    double distance1, distance2;
-    long vectorSize = 1;
-    distance1 = Tools::radius(m_vector_x[m_biggest_contribution_index], m_vector_y[m_biggest_contribution_index]);
-    
-    // looking for the first index
+    long index, precIndex;
+    long vectorSize = 0;
+    precIndex = m_biggest_contribution_index;
+
     for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 	{
 		index = m_biggest_contribution_index - i;
 		if(index < 0)
 			index += NUMBEROFCIRCLEPOINTS_UI;
         
-		distance2 = Tools::radius(m_vector_x[index], m_vector_y[index]);
-        
-		if ( (distance2 - distance1) <= 0)
+        if (fabs(m_contributions[index]) <= fabs(m_contributions[precIndex]))
 		{
 			m_biggest_lobe_index1 = index;
             vectorSize++;
 		}
-        else
-            break;        
-        distance1 = distance2;
+        else break;
+        
+        precIndex = index;
 	}
     
-    if (vectorSize < NUMBEROFCIRCLEPOINTS_UI-1)
-    {
-        distance1 = Tools::radius(m_vector_x[m_biggest_contribution_index], m_vector_y[m_biggest_contribution_index]);
-        
-        for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI-1; i++)
-        {
-            index = m_biggest_contribution_index + i;
-            if(index >= NUMBEROFCIRCLEPOINTS_UI)
-                index -= NUMBEROFCIRCLEPOINTS_UI;
-            
-            distance2 = Tools::radius(m_vector_x[index], m_vector_y[index]);
-            
-            if ( (distance2 - distance1) <= 0)
-                vectorSize++;
-            else
-                break;
-            distance1 = distance2;
-        }
-    }
-    else
-    {
+    if (vectorSize >= NUMBEROFCIRCLEPOINTS_UI-1) {
+        vectorSize = NUMBEROFCIRCLEPOINTS_UI;
         m_biggest_lobe_index1 = 0;
+        return;
     }
+    
+    precIndex = m_biggest_contribution_index;
+    for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+	{
+		index = m_biggest_contribution_index + i;
+		if(index >= NUMBEROFCIRCLEPOINTS_UI)
+			index -= NUMBEROFCIRCLEPOINTS_UI;
+        
+        if (fabs(m_contributions[index]) <= fabs(m_contributions[precIndex]))
+		{
+            vectorSize++;
+		}
+        else break;
+        
+        precIndex = index;
+	}
     
     m_biggest_lobe_vector_size = vectorSize;
 }

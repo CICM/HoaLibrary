@@ -266,7 +266,7 @@ void *control_new(t_symbol *s, int argc, t_atom *argv)
 			;
 
 	x->f_encoder			= new AmbisonicsEncoder(x->f_order);
-	x->f_viewer				= new AmbisonicsViewer(x->f_order);
+	x->f_viewer				= new AmbisonicsViewer(x->f_order, -CICM_PI2);
 	x->f_optim				= new AmbisonicsOptim(x->f_order);
 	x->f_wider				= new AmbisonicsWider(x->f_order);
 	x->f_harmonicsValues	= new double[x->f_order * 2 + 1];
@@ -749,7 +749,7 @@ t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 			x->f_encoder	= new AmbisonicsEncoder(x->f_order);
 			x->f_optim		= new AmbisonicsOptim(x->f_order);
 			x->f_wider		= new AmbisonicsWider(x->f_order);
-			x->f_viewer		= new AmbisonicsViewer(x->f_order);
+			x->f_viewer		= new AmbisonicsViewer(x->f_order, -CICM_PI2);
 			x->f_harmonicsValues = new double[x->f_order * 2 + 1];
 
 			std::string optimMode = "basic";

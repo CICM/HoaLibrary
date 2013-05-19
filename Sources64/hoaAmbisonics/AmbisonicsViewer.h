@@ -53,7 +53,7 @@ private:
 	double*		m_vector_x;
 	double*		m_vector_y;
 	int*		m_vector_color;
-		
+    		
 	void	computeTrigo();
 	void	computeBasis();
 	void	computeRepresentation();
@@ -110,7 +110,7 @@ public:
 		computeRepresentation();
 	}
     
-    template<typename Type> void processContribAndRepAndMaxDist(Type* anInputs)
+    template<typename Type> void processMaxDist(Type* anInputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			m_harmonics_values[i] = anInputs[i];
@@ -120,7 +120,7 @@ public:
 		computeMaximumDistance();
 	}
     
-    template<typename Type> void processContribAndRepAndBigLob(Type* anInputs)
+    template<typename Type> void processBigLob(Type* anInputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			m_harmonics_values[i] = anInputs[i];
