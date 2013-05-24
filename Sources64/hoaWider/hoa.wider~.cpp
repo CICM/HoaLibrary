@@ -113,6 +113,18 @@ void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numin
 
 void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+    /*
+    double in[x->f_AmbisonicsWider->getNumberOfHarmonics()];
+    for (int i = 0; i < sampleframes; i++)
+    {
+        for(int j = 0; j < x->f_AmbisonicsWider->getNumberOfHarmonics(); j++)
+            in[j] = ins[j][i];
+        x->f_AmbisonicsWider->process(in, in);
+        for(int j = 0; j < x->f_AmbisonicsWider->getNumberOfHarmonics(); j++)
+            outs[j][i] = in[j];
+    }
+    */
+    
 	x->f_AmbisonicsWider->process(ins, outs);
 }
 

@@ -172,7 +172,7 @@ int C74_EXPORT main()
     
 	CLASS_ATTR_DEFAULT(c,"patching_rect",0, "0. 0. 200. 30.");
 	
-	CLASS_STICKY_CATEGORY(c,0,"Value");
+	CLASS_STICKY_CATEGORY   (c,0,"Value");
     CLASS_ATTR_DOUBLE       (c, "interp", 0, t_hoaGain, f_interp);
 	CLASS_ATTR_ACCESSORS    (c, "interp",(method)NULL,(method)hoaGain_setattr_interp);
     CLASS_ATTR_LABEL        (c, "interp", 0, "Ramp Time (ms)");
@@ -617,14 +617,15 @@ void draw_background(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
 	int zerodBpos;
     t_jrgba black, white;
     black = white = x->j_brgba;
+    double contrast = 0.05;
     
-    black.red = Tools::clip_min(black.red -= 0.05);
-    black.green = Tools::clip_min(black.green -= 0.05);
-    black.blue = Tools::clip_min(black.blue -= 0.05);
+    black.red = Tools::clip_min(black.red -= contrast);
+    black.green = Tools::clip_min(black.green -= contrast);
+    black.blue = Tools::clip_min(black.blue -= contrast);
     
-    white.red = Tools::clip_max(white.red += 0.05, 1.);
-    white.green = Tools::clip_max(white.green += 0.05, 1.);
-    white.blue = Tools::clip_max(white.blue += 0.05, 1.);
+    white.red = Tools::clip_max(white.red += contrast, 1.);
+    white.green = Tools::clip_max(white.green += contrast, 1.);
+    white.blue = Tools::clip_max(white.blue += contrast, 1.);
     
     zerodBpos = hoaGain_dBvaltopos(x, 0, rect, isHoriz);
     

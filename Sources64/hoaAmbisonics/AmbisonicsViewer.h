@@ -20,14 +20,11 @@
 #ifndef DEF_AmbisonicsViewer
 #define DEF_AmbisonicsViewer
 
-#include "CicmProjectHeader.h"
+#include "../CicmLibrary/CicmTools.h"
 
 #include <complex>
 #include <stdio.h>
 #include <vector>
-
-#define	M_PI 3.14159265358979323846264338327950288
-#define M_2PI 2*M_PI
 
 class AmbisonicsViewer
 {
@@ -35,6 +32,7 @@ class AmbisonicsViewer
 private:
 	long		m_order;
 	long		m_number_of_harmonics;
+    double      m_representation_offset;
 
 	long		m_biggest_contribution_index;
 	long		m_biggest_distance_index1;
@@ -55,7 +53,7 @@ private:
 	double*		m_vector_x;
 	double*		m_vector_y;
 	int*		m_vector_color;
-		
+    		
 	void	computeTrigo();
 	void	computeBasis();
 	void	computeRepresentation();
@@ -64,7 +62,8 @@ private:
     void	computeBiggestLobe();
 	
 public:
-	AmbisonicsViewer(long anOrder);
+	AmbisonicsViewer(long anOrder, double offset = 0.);
+    inline long getOrder() {return m_order;}
 	double  getBiggestContribution();
 	long    getBiggestContributionIndex();
 	double  getContributions(long anIndex);
@@ -79,6 +78,7 @@ public:
     double  getBiggestLobe_y(long anIndex);
 	~AmbisonicsViewer();
 	
+    
 	template<typename Type> void process(Type* anInputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
@@ -87,6 +87,46 @@ public:
 		computeContribution();
 		computeRepresentation();
 		computeMaximumDistance();
+        computeBiggestLobe();
+	}
+    
+    template<typename Type> void processAll(Type* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+        
+		computeContribution();
+		computeRepresentation();
+		computeMaximumDistance();
+        computeBiggestLobe();
+	}
+    
+    template<typename Type> void processContribAndRep(Type* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+        
+		computeContribution();
+		computeRepresentation();
+	}
+    
+    template<typename Type> void processMaxDist(Type* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+        
+		computeContribution();
+		computeRepresentation();
+		computeMaximumDistance();
+	}
+    
+    template<typename Type> void processBigLob(Type* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+        
+		computeContribution();
+		computeRepresentation();
         computeBiggestLobe();
 	}
 };

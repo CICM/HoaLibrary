@@ -17,11 +17,11 @@
  *
  */
 
-#include "../hoaRecomposer/AmbisonicViewer.h"
+#include "../CicmLibrary/CicmTools.h"
+#include "../hoaAmbisonics/AmbisonicsViewer.h"
 #include "../hoaEncoder/AmbisonicsEncoder.h"
 #include "../hoaOptim/AmbisonicsOptim.h"
 #include "../hoaWider/AmbisonicsWider.h"
-#include "../CicmLibrary/CicmTools.h"
 
 extern "C"
 {
@@ -68,10 +68,10 @@ typedef struct  _control
 	double		f_fontsize;
 
 	AmbisonicsEncoder* f_encoder;
-	AmbisonicViewer* f_viewer;
-	AmbisonicsOptim*	 f_optim;
-	AmbisonicsWider*	 f_wider;
-	double*			 f_harmonicsValues;
+	AmbisonicsViewer*  f_viewer;
+	AmbisonicsOptim*   f_optim;
+	AmbisonicsWider*   f_wider;
+	double*            f_harmonicsValues;
 
 } t_control;
 
@@ -178,15 +178,6 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.25 0.25 0.25 1.");
-	
-	/*
-	CLASS_ATTR_RGBA					(c, "txcolor", 0, t_control, f_colorText);
-	CLASS_ATTR_CATEGORY				(c, "txcolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "txcolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "txcolor", 0, "Text Color");
-	CLASS_ATTR_ORDER				(c, "txcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "txcolor", 0, "0. 0. 0. 1.");
-	*/
 
 	CLASS_ATTR_RGBA					(c, "cicolor", 0, t_control, f_colorCircle);
 	CLASS_ATTR_CATEGORY				(c, "cicolor", 0, "Color");
@@ -275,7 +266,7 @@ void *control_new(t_symbol *s, int argc, t_atom *argv)
 			;
 
 	x->f_encoder			= new AmbisonicsEncoder(x->f_order);
-	x->f_viewer				= new AmbisonicViewer(x->f_order);
+	x->f_viewer				= new AmbisonicsViewer(x->f_order, -CICM_PI2);
 	x->f_optim				= new AmbisonicsOptim(x->f_order);
 	x->f_wider				= new AmbisonicsWider(x->f_order);
 	x->f_harmonicsValues	= new double[x->f_order * 2 + 1];
@@ -419,14 +410,14 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 		pattern = jgraphics_pattern_create_linear(rect->width*0.5, -rect->height*0.3, rect->width*0.5,  rect->height*0.5);
 		jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_gradientcolor.red, x->f_gradientcolor.green, x->f_gradientcolor.blue, x->f_gradientcolor.alpha);
 		jgraphics_pattern_add_color_stop_rgba(pattern, 1., 0., 0., 0., 0.);
-		jgraphics_ovalarc(g, rect->width*0.5, -rect->height*0.5, rect->width*1.5, rect->width, 0., JGRAPHICS_2PI);
+		jgraphics_ovalarc(g, rect->width*0.5, -rect->height*0.5, rect->width*1.5, rect->width, 0., CICM_2PI);
 		jgraphics_set_source(g, pattern);
 		jgraphics_fill(g);
 		*/
 		
 		
-		//jgraphics_arc(g, rect->width*0.5, rect->height*0.5, rect->width*0.42-2, 0., JGRAPHICS_2PI);
-		jgraphics_arc(g, x->f_center.x, x->f_center.y, 5 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+		//jgraphics_arc(g, rect->width*0.5, rect->height*0.5, rect->width*0.42-2, 0., CICM_2PI);
+		jgraphics_arc(g, x->f_center.x, x->f_center.y, 5 * x->f_rayonCircle,  0., CICM_2PI);
 		jgraphics_set_source_jrgba(g, &x->f_colorCircleInner);
 		jgraphics_fill(g);
 		
@@ -437,18 +428,18 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 				//inner shadow
 				jgraphics_set_line_width(g, 2);
 				jgraphics_set_source_jrgba(g, &x->f_colorCircleShadow);
-				jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+				jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
 				jgraphics_stroke(g);
 				// circle color (outer shadow)
 				jgraphics_set_line_width(g, 1);
 				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., CICM_2PI);
 				jgraphics_stroke(g);
 			}
 			else {
 				jgraphics_set_line_width(g, 1);
 				jgraphics_set_source_jrgba(g, &x->f_colorCircle);
-				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+				jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., CICM_2PI);
 				jgraphics_stroke(g);
 			}
 		}
@@ -459,7 +450,7 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 		jgraphics_set_matrix(g, &transform);
 		for(i = 0; i < 12; i++)
 		{
-			rotateAngle = (double)i/12. * JGRAPHICS_2PI;
+			rotateAngle = (double)i/12. * CICM_2PI;
 			jgraphics_rotate(g, rotateAngle);
 			
 			y1 = 1. / 6. * x->f_rayonGlobal;
@@ -467,7 +458,7 @@ void draw_background(t_control *x,  t_object *view, t_rect *rect)
 			
 			if (x->f_shadow) 
 			{
-				if ( (rotateAngle <= JGRAPHICS_PI && rotateAngle > 0.) ) 
+				if ( (rotateAngle <= CICM_PI && rotateAngle > 0.) ) 
 				{
 					jgraphics_move_to(g, -0.5, y1-0.5);
 					jgraphics_line_to(g, -0.5, y2-0.5);
@@ -512,8 +503,8 @@ void draw_angle(t_control *x,  t_object *view, t_rect *rect)
 		jtextlayout_settextcolor(jtl, &x->f_colorText); 
 		for(i = 0; i < 12; i++)
 		{
-			x1 = x->f_rayonAngle * cos((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.x;
-			y1 = x->f_rayonAngle * sin((double)-i * JGRAPHICS_2PI / 12. - JGRAPHICS_PI / 2.) + x->f_center.y;
+			x1 = x->f_rayonAngle * cos((double)-i * CICM_2PI / 12. - CICM_PI / 2.) + x->f_center.x;
+			y1 = x->f_rayonAngle * sin((double)-i * CICM_2PI / 12. - CICM_PI / 2.) + x->f_center.y;
 		
 			sprintf(text,"%d°", 30 * i);
 			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 1.5, y1 - 10, x->f_fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
@@ -544,10 +535,10 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 			double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
 			
 			jgraphics_set_source_jrgba(g, &x->f_colorPositif);
-			for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
+			for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 			{
 				
-				if (i == NUMBEROFCIRCLEPOINTS-1) {
+				if (i == NUMBEROFCIRCLEPOINTS_UI-1) {
 					jgraphics_line_to(g, beginCoord.x, beginCoord.y );
 				}
 				else if(x->f_viewer->getColor(i) == 1)
@@ -573,10 +564,10 @@ void draw_harmonics(t_control *x,  t_object *view, t_rect *rect)
 			pathLength = 0;
 			jgraphics_new_path(g);
 			jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
-			for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
+			for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 			{
 				
-				if (i == NUMBEROFCIRCLEPOINTS-1) {
+				if (i == NUMBEROFCIRCLEPOINTS_UI-1) {
 					jgraphics_line_to(g, beginCoord.x, beginCoord.y );
 				}
 				else if(x->f_viewer->getColor(i) == -1)
@@ -622,14 +613,14 @@ void draw_biggest_contribution(t_control *x,  t_object *view, t_rect *rect)
 				double factor = (x->f_rayonGlobal * 5. / 6.) / x->f_viewer->getBiggestContribution();
 				jgraphics_set_source_jrgba(g, &x->f_colorContrib);
 				jgraphics_arc(g, x->f_viewer->getAbscisseValue(x->f_viewer->getBiggestContributionIndex()) * factor, x->f_viewer->getOrdinateValue(x->f_viewer->getBiggestContributionIndex()) * factor, 
-							  3.,  0., JGRAPHICS_2PI);
+							  3.,  0., CICM_2PI);
 				jgraphics_fill(g);
 			}
 			else
 			{
 				double factor = x->f_rayonGlobal * 5. / 6.;
 				jgraphics_set_source_jrgba(g, &x->f_colorContrib);
-				jgraphics_arc(g, cos(x->f_azimuth + JGRAPHICS_PIOVER2) * factor, sin(x->f_azimuth + JGRAPHICS_PIOVER2) * factor, 3.,  0., JGRAPHICS_2PI);
+				jgraphics_arc(g, cos(x->f_azimuth + CICM_PI2) * factor, sin(x->f_azimuth + CICM_PI2) * factor, 3.,  0., CICM_2PI);
 				jgraphics_fill(g);
 			}
 		}
@@ -652,13 +643,13 @@ void control_mouse_down(t_control *x, t_object *patcherview, t_pt pt, long modif
 	{
 		if(x->f_mode == 0)
 		{
-			double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - CICM_PI2;
 			atom_setfloat(argv, angle);
 			object_method(x, gensym("azimuth"), 1, argv);
 		}
 		else
 		{
-			x->f_azimuthOffset = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			x->f_azimuthOffset = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - CICM_PI2;
 			double angle = x->f_azimuth;
 			atom_setfloat(argv, angle);
 			object_method(x, gensym("azimuth"), 1, argv);
@@ -696,13 +687,13 @@ void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modif
 	{
 		if(x->f_mode == 0)
 		{
-			double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			double angle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - CICM_PI2;
 			atom_setfloat(argv, angle);
 			object_method(x, gensym("azimuth"), 1, argv);
 		}
 		else
 		{
-			double newAngle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - JGRAPHICS_PIOVER2;
+			double newAngle = Tools::angle(pt.x - x->f_center.x, pt.y - x->f_center.y) * -1. - CICM_PI2;
 			double offset = newAngle - x->f_azimuthOffset;
 			x->f_azimuthOffset = newAngle;
 			double angle = x->f_azimuth + offset;
@@ -733,12 +724,12 @@ void control_mouse_drag(t_control *x, t_object *patcherview, t_pt pt, long modif
 void control_compute(t_control *x)
 {
 	double angle = x->f_azimuth;
-	if(angle > JGRAPHICS_2PI)
-		angle -= JGRAPHICS_2PI;
+	if(angle > CICM_2PI)
+		angle -= CICM_2PI;
 	else if(angle < 0.)
-		angle += JGRAPHICS_2PI;
+		angle += CICM_2PI;
 	
-	x->f_encoder->process(1., x->f_harmonicsValues, angle - JGRAPHICS_PIOVER2);
+	x->f_encoder->process(1., x->f_harmonicsValues, angle - CICM_PI2);
 	x->f_wider->process(x->f_harmonicsValues, x->f_harmonicsValues, x->f_wide);
 	x->f_optim->process(x->f_harmonicsValues, x->f_harmonicsValues);
 	x->f_viewer->process(x->f_harmonicsValues);
@@ -758,7 +749,7 @@ t_max_err order_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 			x->f_encoder	= new AmbisonicsEncoder(x->f_order);
 			x->f_optim		= new AmbisonicsOptim(x->f_order);
 			x->f_wider		= new AmbisonicsWider(x->f_order);
-			x->f_viewer		= new AmbisonicViewer(x->f_order);
+			x->f_viewer		= new AmbisonicsViewer(x->f_order, -CICM_PI2);
 			x->f_harmonicsValues = new double[x->f_order * 2 + 1];
 
 			std::string optimMode = "basic";
@@ -838,7 +829,7 @@ t_max_err azimuth_set(t_control *x, t_object *attr, long argc, t_atom *argv)
 {
 	if (atom_gettype(argv) == A_FLOAT)
 	{
-		x->f_azimuth = fmod(atom_getfloat(argv) + JGRAPHICS_2PI, JGRAPHICS_2PI);
+		x->f_azimuth = fmod(atom_getfloat(argv) + CICM_2PI, CICM_2PI);
 		control_compute(x);
 		outlet_float(x->f_outAzimuth, x->f_azimuth);
 

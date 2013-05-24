@@ -19,10 +19,12 @@
 
 #include "AmbisonicsViewer.h"
 
-AmbisonicsViewer::AmbisonicsViewer(long anOrder)
+AmbisonicsViewer::AmbisonicsViewer(long anOrder, double offset)
 {	
 	m_order					= Tools::clip_min(anOrder, long(1));
 	m_number_of_harmonics	= m_order * 2 + 1;
+    m_representation_offset = offset;
+    m_biggest_contribution = 0;
 	computeTrigo();
 	computeBasis();
 
@@ -47,8 +49,8 @@ void AmbisonicsViewer::computeTrigo()
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++) 
 	{
 		double azimuth = double(i) * CICM_2PI / double(NUMBEROFCIRCLEPOINTS_UI);
-		m_cosinus_buffer[i] = cos(CICM_2PI - azimuth - CICM_PI2);
-		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth - CICM_PI2);
+        m_cosinus_buffer[i] = cos(CICM_2PI - azimuth + m_representation_offset);
+		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth + m_representation_offset);
 	}
 }
 
@@ -65,9 +67,27 @@ void AmbisonicsViewer::computeBasis()
 	{
 		for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 		{
-			double angularStep = (CICM_2PI / NUMBEROFCIRCLEPOINTS_UI) * (double)i;
-			m_harmonics_basis[j*2][i]	= cos((double)j * angularStep);
-			m_harmonics_basis[j*2-1][i] = sin((double)j * angularStep);
+			double angularStep = (CICM_2PI / NUMBEROFCIRCLEPOINTS_UI) * double(i);
+			m_harmonics_basis[j*2][i]	= cos(double(j) * angularStep);
+			m_harmonics_basis[j*2-1][i] = sin(double(j) * angularStep);
+		}
+	}
+}
+
+void AmbisonicsViewer::computeContribution()
+{
+	m_biggest_contribution = 0;
+	m_biggest_contribution_index = 0;
+	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+	{
+		m_contributions[i] = 0.;
+		for(int j = 0; j < m_number_of_harmonics; j++)
+			m_contributions[i] += m_harmonics_basis[j][i] * m_harmonics_values[j];
+        
+		if (fabs(m_contributions[i]) > m_biggest_contribution)
+		{
+			m_biggest_contribution = fabs(m_contributions[i]);
+			m_biggest_contribution_index = i;
 		}
 	}
 }
@@ -83,43 +103,6 @@ void AmbisonicsViewer::computeRepresentation()
 		else if (m_contributions[i] < 0.)
 			m_vector_color[i] = -1;
 		else m_vector_color[i] = 0;
-	}
-}
-
-/*
-void AmbisonicsViewer::computeRepresentation()
-{	
-	for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI - 1; i++)
-	{
-		m_vector_x[i] = m_sinus_buffer[i] * fabs(m_contributions[i]);
-		m_vector_y[i] = m_cosinus_buffer[i] * fabs(m_contributions[i]);
-		if(m_contributions[i] > 0.)
-			m_vector_color[i] = 1;
-		else if (m_contributions[i] < 0.)
-			m_vector_color[i] = -1;
-		else m_vector_color[i] = 0;
-	}
-	m_vector_x[NUMBEROFCIRCLEPOINTS_UI - 1] = m_vector_x[0];
-	m_vector_y[NUMBEROFCIRCLEPOINTS_UI - 1] = m_vector_y[0];
-	m_vector_color[NUMBEROFCIRCLEPOINTS_UI - 1] = m_vector_color[0];
-}
-*/
-
-void AmbisonicsViewer::computeContribution()
-{
-	m_biggest_contribution = 0;
-	m_biggest_contribution_index = 0;
-	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
-	{    
-		m_contributions[i] = 0.;		
-		for(int j = 0; j < m_number_of_harmonics; j++)
-			m_contributions[i] += m_harmonics_basis[j][i] * m_harmonics_values[j];
-			
-		if (fabs(m_contributions[i]) > m_biggest_contribution)
-		{
-			m_biggest_contribution = fabs(m_contributions[i]);
-			m_biggest_contribution_index = i;
-		}
 	}
 }
 
@@ -148,56 +131,47 @@ void AmbisonicsViewer::computeMaximumDistance()
 
 void AmbisonicsViewer::computeBiggestLobe()
 {
-    long index;
-    double distance1, distance2;
-    long vectorSize = 1;
-    distance1 = Tools::radius(m_vector_x[m_biggest_contribution_index], m_vector_y[m_biggest_contribution_index]);
-    
-    // looking for the first index
+    long index, precIndex;
+    long vectorSize = 0;
+    precIndex = m_biggest_contribution_index;
+
     for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 	{
 		index = m_biggest_contribution_index - i;
 		if(index < 0)
 			index += NUMBEROFCIRCLEPOINTS_UI;
         
-		distance2 = Tools::radius(m_vector_x[index], m_vector_y[index]);
-        
-		if ( (distance2 - distance1) <= 0)
+        if (fabs(m_contributions[index]) <= fabs(m_contributions[precIndex]))
 		{
 			m_biggest_lobe_index1 = index;
             vectorSize++;
 		}
-        else
-        {
-            break;
-        }
+        else break;
         
-        distance1 = distance2;
+        precIndex = index;
 	}
     
-    if (vectorSize < NUMBEROFCIRCLEPOINTS_UI-1)
-    {
-        distance1 = Tools::radius(m_vector_x[m_biggest_contribution_index], m_vector_y[m_biggest_contribution_index]);
-        
-        for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI-1; i++)
-        {
-            index = m_biggest_contribution_index + i;
-            if(index >= NUMBEROFCIRCLEPOINTS_UI)
-                index -= NUMBEROFCIRCLEPOINTS_UI;
-            
-            distance2 = Tools::radius(m_vector_x[index], m_vector_y[index]);
-            
-            if ( (distance2 - distance1) <= 0)
-                vectorSize++;
-            else
-                break;
-            distance1 = distance2;
-        }
-    }
-    else
-    {
+    if (vectorSize >= NUMBEROFCIRCLEPOINTS_UI-1) {
+        vectorSize = NUMBEROFCIRCLEPOINTS_UI;
         m_biggest_lobe_index1 = 0;
+        return;
     }
+    
+    precIndex = m_biggest_contribution_index;
+    for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+	{
+		index = m_biggest_contribution_index + i;
+		if(index >= NUMBEROFCIRCLEPOINTS_UI)
+			index -= NUMBEROFCIRCLEPOINTS_UI;
+        
+        if (fabs(m_contributions[index]) <= fabs(m_contributions[precIndex]))
+		{
+            vectorSize++;
+		}
+        else break;
+        
+        precIndex = index;
+	}
     
     m_biggest_lobe_vector_size = vectorSize;
 }

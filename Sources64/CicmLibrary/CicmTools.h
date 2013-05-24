@@ -35,6 +35,7 @@ using namespace std;
 #define CICM_PI2 (1.57079632679489661923132169163975144)
 #define CICM_PI4 (0.785398163397448309615660845819875721)
 #define NUMBEROFCIRCLEPOINTS 36000
+#define NUMBEROFCIRCLEPOINTS_UI 360
 
 enum
 {
@@ -54,6 +55,14 @@ public:
 		else if(aValue > aMaximum)
 			aValue = aMaximum;
 		return aValue;
+	}
+    
+    template<typename Type> static void clip(Type *aValue, Type aMinimum = 0, Type aMaximum = 1)
+	{
+		if(*aValue < aMinimum)
+			*aValue = aMinimum;
+		else if(*aValue > aMaximum)
+			*aValue = aMaximum;
 	}
 
 	template<typename Type> static Type clip_min(Type aValue, Type aMinimum = 0)

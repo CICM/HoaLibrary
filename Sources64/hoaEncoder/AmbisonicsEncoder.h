@@ -62,6 +62,7 @@ public:
 	inline void process(double anInput, double* anOutputs)
 	{
         Cicm_Vector_Scalar_Double_Mul(m_ambisonics_coeffs_double, &anInput, anOutputs, m_number_of_harmonics);
+        anOutputs[0] = anInput;
 	}
     
     inline void process(float anInput, float* anOutputs, float aTheta)
@@ -73,6 +74,7 @@ public:
 	inline void process(float anInput, float* anOutputs)
 	{
         Cicm_Vector_Scalar_Float_Mul(m_ambisonics_coeffs_float, &anInput, anOutputs, m_number_of_harmonics);
+        anOutputs[0] = anInput;
 	}
 	
     /* Perform sample block */    
