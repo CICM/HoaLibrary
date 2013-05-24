@@ -130,7 +130,7 @@
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 0,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 8.0, 483.0, 56.0 ]
 								}
@@ -707,7 +707,7 @@
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 0,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 8.0, 483.0, 56.0 ]
 								}
@@ -834,7 +834,8 @@
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpaudio.maxpat",
 									"numinlets" : 0,
-									"numoutlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 7.0, 105.0, 218.0, 87.0 ]
 								}
 
@@ -6549,7 +6550,7 @@
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 0,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 8.0, 483.0, 56.0 ]
 								}
@@ -8113,7 +8114,7 @@
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 0,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 8.0, 483.0, 56.0 ]
 								}
@@ -8271,7 +8272,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u406004148"
+									"varname" : "u953000430"
 								}
 
 							}
@@ -8609,11 +8610,6 @@
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 277.0, 260.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"play" : 0,
-										"ramp" : 0.0
-									}
-,
 									"text" : "hoa.recomposer~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -8826,7 +8822,7 @@
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 0,
+									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 8.0, 483.0, 56.0 ]
 								}
@@ -8879,12 +8875,15 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+									"channels" : 16,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
-									"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"loudspeakers" : 16,
+									"ls" : 16,
+									"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
-									"numinlets" : 8,
+									"numinlets" : 16,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 347.5, 260.0, 260.0 ]
 								}
@@ -8925,7 +8924,8 @@
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpaudio.maxpat",
 									"numinlets" : 0,
-									"numoutlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 7.0, 105.0, 218.0, 87.0 ]
 								}
 
@@ -9315,6 +9315,78 @@
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-27", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 15 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 14 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 14 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 13 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 13 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 12 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 12 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 11 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 11 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 10 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 10 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 9 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 9 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 8 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-27", 8 ]
 								}
 
 							}
@@ -9864,6 +9936,20 @@
  ],
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
+				"name" : "hoa.helpaudio.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpheader.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "testRecomposer.json",
 				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/Sources64/_sdk-build",
 				"patcherrelativepath" : ".",

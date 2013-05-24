@@ -5,7 +5,7 @@
 			"major" : 6,
 			"minor" : 1,
 			"revision" : 2,
-			"architecture" : "x64"
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 0.0, 44.0, 518.0, 696.0 ],
@@ -46,7 +46,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 2,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 70.0, 518.0, 670.0 ],
@@ -222,12 +222,12 @@
 							}
 , 							{
 								"box" : 								{
+									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
-									"ls" : 16,
-									"ls_angles" : [ 0.0, 22.0, 45.0, 67.0, 90.0, 112.0, 135.0, 157.0, 180.0, 202.0, 225.0, 247.0, 270.0, 292.0, 315.0, 337.5 ],
+									"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
 									"maxclass" : "hoa.meter~",
-									"numinlets" : 16,
+									"numinlets" : 8,
 									"numoutlets" : 0,
 									"patching_rect" : [ 24.0, 342.0, 242.0, 242.0 ]
 								}
@@ -405,7 +405,7 @@
 											"major" : 6,
 											"minor" : 1,
 											"revision" : 2,
-											"architecture" : "x64"
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -581,11 +581,19 @@
 									"id" : "obj-12",
 									"maxclass" : "newobj",
 									"numinlets" : 15,
-									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"numoutlets" : 16,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 24.0, 311.0, 242.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"pinnasize" : ""
+										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
+										"config" : 5.1,
+										"loudspeakers" : 16,
+										"ls" : 16,
+										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
+										"mode" : "ambisonics",
+										"offset" : 0.0,
+										"pinnaesize" : "small",
+										"restitution" : "panning"
 									}
 ,
 									"text" : "hoa.decoder~ 7 16"
@@ -749,69 +757,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 14 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 14 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 13 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 13 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 12 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 12 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 11 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 11 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 10 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 10 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 9 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 9 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-19", 8 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 8 ]
 								}
 
 							}
@@ -1237,7 +1182,7 @@
 									"destination" : [ "obj-16", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 373.5, 339.0, 276.0, 339.0, 276.0, 270.0, 256.5, 270.0 ],
+									"midpoints" : [ 373.5, 324.0, 276.0, 324.0, 276.0, 270.0, 256.5, 270.0 ],
 									"source" : [ "obj-33", 0 ]
 								}
 
@@ -1327,7 +1272,7 @@
 							"major" : 6,
 							"minor" : 1,
 							"revision" : 2,
-							"architecture" : "x64"
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 518.0, 670.0 ],
@@ -1378,15 +1323,15 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../../MaxMsp/Max6/Cycling '74/HoaLibrary/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
