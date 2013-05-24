@@ -34,10 +34,11 @@ private:
     double  m_distance;
     bool    m_isSelected;
     double  m_fisheyeStartAngleInRadian;
+    double  m_fisheyeEndAngleInRadian;
     
     int                  m_order;
     AmbisonicsEncoder*   m_encoder;
-	AmbisonicsOptim*     m_optim;
+	//AmbisonicsOptim*     m_optim;
 	AmbisonicsWider*     m_wider;
     AmbisonicsViewer*    m_viewer;
     double*              m_harmonicsValues;
@@ -54,7 +55,9 @@ public:
     void setSelected(int _selectedState);
     void rotateAngleInRadian(double _deltaRadian);
     void setFisheyeStartAngle(); // take current angle
-    void setFisheyeStartAngle(double _radian); // take an angle
+    void setFisheyeStartAngle(double _radian); // take a specified angle
+    void setFisheyeEndAngle(); // take current angle
+    void setFisheyeEndAngle(double _radian); // take a specified angle
     void setAngleCartesianCoordinate(double _abscissa, double _ordinate);
     
     void compute();

@@ -22,7 +22,7 @@
 AmbisonicVirtualMicUI::AmbisonicVirtualMicUI()
 {
     m_angleInRadian = 0;
-    m_fisheyeStartAngleInRadian = m_angleInRadian;
+    m_fisheyeEndAngleInRadian = m_fisheyeStartAngleInRadian = m_angleInRadian;
     m_widerValue = 1;
     m_distance = 1;
     m_isSelected = false;
@@ -30,7 +30,7 @@ AmbisonicVirtualMicUI::AmbisonicVirtualMicUI()
     
     m_encoder           = new AmbisonicsEncoder(m_order);
 	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
-    m_optim				= new AmbisonicsOptim(m_order);
+    //m_optim				= new AmbisonicsOptim(m_order);
 	m_wider				= new AmbisonicsWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     
@@ -41,7 +41,7 @@ AmbisonicVirtualMicUI::~AmbisonicVirtualMicUI()
     free (m_harmonicsValues);
 	delete m_encoder;
 	delete m_viewer;
-	delete m_optim;
+	//delete m_optim;
 	delete m_wider;
 }
 
@@ -49,8 +49,8 @@ AmbisonicVirtualMicUI::~AmbisonicVirtualMicUI()
 void AmbisonicVirtualMicUI::compute()
 {
     m_encoder->process(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);
-    m_wider->process(m_harmonicsValues, m_widerValue);
-    m_optim->process(m_harmonicsValues);
+    m_wider->process(m_harmonicsValues, Tools::clip(m_widerValue, double(0.0000001), double(1)));
+    //m_optim->process(m_harmonicsValues);
     m_viewer->processBigLob(m_harmonicsValues);
 }
 
@@ -61,13 +61,13 @@ void AmbisonicVirtualMicUI::setOrder(long _order)
     free (m_harmonicsValues);
 	delete m_encoder;
 	delete m_viewer;
-	delete m_optim;
+	//delete m_optim;
 	delete m_wider;
     
     m_order = Tools::clip_min(_order, long(1));
     m_encoder           = new AmbisonicsEncoder(m_order);
 	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
-    m_optim				= new AmbisonicsOptim(m_order);
+    //m_optim				= new AmbisonicsOptim(m_order);
 	m_wider				= new AmbisonicsWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     
@@ -106,6 +106,16 @@ void AmbisonicVirtualMicUI::setFisheyeStartAngle()
 void AmbisonicVirtualMicUI::setFisheyeStartAngle(double _radian)
 {
     m_fisheyeStartAngleInRadian = Tools::wrap(_radian, 0, CICM_2PI);
+}
+
+void AmbisonicVirtualMicUI::setFisheyeEndAngle()
+{
+    m_fisheyeEndAngleInRadian = m_angleInRadian;
+}
+
+void AmbisonicVirtualMicUI::setFisheyeEndAngle(double _radian)
+{
+    m_fisheyeEndAngleInRadian = Tools::wrap(_radian, 0, CICM_2PI);
 }
 
 void AmbisonicVirtualMicUI::setSelected(int _selectedState)

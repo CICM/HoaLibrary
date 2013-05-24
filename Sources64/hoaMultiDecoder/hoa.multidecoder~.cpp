@@ -143,7 +143,7 @@ int C74_EXPORT main(void)
     
     CLASS_ATTR_SYM              (c, "restitution", 0, t_HoaDecode, f_resitution_mode);
 	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
-    CLASS_ATTR_LABEL            (c, "restitution", 0, "Restituion Mode");
+    CLASS_ATTR_LABEL            (c, "restitution", 0, "Restitution Mode");
     CLASS_ATTR_ENUM             (c, "restitution", 0, "panning projection");
 	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, restitution_set);
     CLASS_ATTR_ORDER            (c, "restitution", 0, "7");
@@ -192,12 +192,20 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         for(int i = 0; i < x->f_number_of_irregular_loudspeakers; i++)
             x->f_angles_of_irregular_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
         
+        object_attr_setdisabled((t_object *)x, gensym("config"), 1);
+        object_attr_setdisabled((t_object *)x, gensym("angles"), 1);
+        object_attr_setdisabled((t_object *)x, gensym("offset"), 0);
+        object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 1);
+        object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 0);
+        object_attr_setdisabled((t_object *)x, gensym("restitution"), 1);
+        /*
         object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
         object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
         object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "0");
         object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
         object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "0");
         object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
+        */
         
         /* DSP Setup */
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicsDecoder->getNumberOfInputs());
@@ -258,35 +266,58 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
         {
             x->f_AmbisonicsDecoder->setMode(Hoa_Binaural);
             x->f_mode = gensym("binaural");
+            /*
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
-            
+            */
+            object_attr_setdisabled((t_object *)x, gensym("config"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("angles"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("offset"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 0);
+            object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("restitution"), 1);
         }
         else if(atom_getsym(argv) == gensym("irregular") || atom_getsym(argv) == gensym(" irregular"))
         {
             x->f_AmbisonicsDecoder->setMode(Hoa_Restitution);
             x->f_mode = gensym("irregular");
+            /*
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "0");
+            */
+            object_attr_setdisabled((t_object *)x, gensym("config"), 0);
+            object_attr_setdisabled((t_object *)x, gensym("angles"), 0);
+            object_attr_setdisabled((t_object *)x, gensym("offset"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("restitution"), 0);
         }
         else
         {
             x->f_AmbisonicsDecoder->setMode(Hoa_Ambisonics);
             x->f_mode = gensym("ambisonics");
+            /*
             object_attr_addattr_parse((t_object*)x, "config", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "angles", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "offset", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "pinnaesize", "invisible", USESYM(long), 1, "1");
             object_attr_addattr_parse((t_object*)x, "loudspeakers", "invisible", USESYM(long), 1, "0");
             object_attr_addattr_parse((t_object*)x, "restitution", "invisible", USESYM(long), 1, "1");
+            */
+            object_attr_setdisabled((t_object *)x, gensym("config"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("angles"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("offset"), 0);
+            object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 0);
+            object_attr_setdisabled((t_object *)x, gensym("restitution"), 1);
         }
 	}
 

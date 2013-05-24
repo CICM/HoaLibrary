@@ -21,6 +21,7 @@
 
 AmbisonicVirtualMicUIManager::AmbisonicVirtualMicUIManager(long _numberOfMics)
 {
+    m_defaultAngles = NULL;
     setNumberOfMics(_numberOfMics);
     setDefaultAngles();
     resetAngles(-1);
@@ -346,5 +347,27 @@ void AmbisonicVirtualMicUIManager::setAngleToClosestDefMicAngle(const int _micIn
 {
     if (!Tools::isInside(_micIndex, int(0), int(m_numberOfMics))) return;
     m_mic[_micIndex].setAngleInRadian(getClosestDefMicAngle(_micIndex));
+}
+
+// non implemented
+int AmbisonicVirtualMicUIManager::getClosestMicIndex(double _angleInRadian)
+{
+    int closest = 0;
+    return closest;
+}
+
+// non implemented
+int AmbisonicVirtualMicUIManager::getFarthestMicIndex(double _angleInRadian)
+{
+    int farthest = 0;
+    return farthest;
+}
+
+long AmbisonicVirtualMicUIManager::getNumberOfSelectedMics()
+{
+    long numberOfSelectedMics = 0;
+    for (int i = 0; i < m_numberOfMics; i++)
+        if (m_mic[i].isSelected()) numberOfSelectedMics++;
+    return numberOfSelectedMics;
 }
 

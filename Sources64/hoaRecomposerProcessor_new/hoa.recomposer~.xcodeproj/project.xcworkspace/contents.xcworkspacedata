@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:hoa.ambisonics~.xcodeproj">
+      location = "self:hoa.recomposer~.xcodeproj">
    </FileRef>
 </Workspace>

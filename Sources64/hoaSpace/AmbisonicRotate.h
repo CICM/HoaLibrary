@@ -20,7 +20,7 @@
 #ifndef DEF_AmbisonicRotate
 #define DEF_AmbisonicRotate
 
-#include "../cicmTools.h"
+#include "../CicmLibrary/CicmTools.h"
 
 class AmbisonicRotate{
 	

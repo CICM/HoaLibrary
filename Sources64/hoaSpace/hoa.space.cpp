@@ -67,7 +67,7 @@ typedef struct  _space
     double                  f_microphonesValues[MAX_MICS];
     t_atom                  f_tempory_values[MAX_MICS];
     long                    f_number_of_harmonics;
-    long                    f_number_of_microphones;
+    t_atom_long             f_number_of_microphones;
     double                  f_reference_angle;
     double                  f_rotation;
     double                  f_rotation_max;
@@ -145,8 +145,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER				(c, "nmics", 0, "1");
 	CLASS_ATTR_LABEL				(c, "nmics", 0, "Number of virtuals microphones");
 	CLASS_ATTR_ACCESSORS			(c, "nmics", NULL, number_of_microphones_set);
-	CLASS_ATTR_DEFAULT				(c, "nmics", 0, "10");
-	CLASS_ATTR_SAVE					(c, "nmics", 1);
+	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nmics", 0,"8");
 
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_MICS);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
@@ -233,6 +232,8 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
+    
+    //x->f_number_of_microphones = dictionary_getlong(d, gensym("nmics"), &x->f_number_of_microphones);
 
     x->f_out        = listout(x);
 
@@ -295,7 +296,7 @@ t_max_err space_notify(t_space *x, t_symbol *s, t_symbol *msg, void *sender, voi
 
 void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-	params->d_borderthickness = 0;
+	params->d_borderthickness = 2;
 	params->d_cornersize = 12;
 }
 
@@ -756,28 +757,31 @@ void space_compute(t_space *x)
 
 t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(atom_gettype(argv) == A_LONG)
-	{
-		if(atom_getlong(argv) != x->f_number_of_microphones)
-		{
-			delete x->f_viewer;
-            delete x->f_recomposer;
-            
-            x->f_number_of_microphones = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_MICS);
-            if(x->f_number_of_microphones % 2 == 0)
-                x->f_order              = (x->f_number_of_microphones - 2) / 2;
-            else
-                 x->f_order             = (x->f_number_of_microphones - 1) / 2;
-            x->f_number_of_harmonics    = x->f_order * 2 + 1;
-            
-			x->f_viewer         = new AmbisonicViewer(x->f_order);
-            x->f_recomposer		= new ambisonicRecomposer(x->f_order, x->f_number_of_microphones);
-            
-
-            jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
-            space_compute(x);
-		}
-	}
+    if (argc && argv)
+    {
+        if(atom_gettype(argv) == A_LONG)
+        {
+            if(atom_getlong(argv) != x->f_number_of_microphones)
+            {
+                delete x->f_viewer;
+                delete x->f_recomposer;
+                
+                x->f_number_of_microphones  = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_MICS);
+                if(x->f_number_of_microphones % 2 == 0)
+                    x->f_order              = (x->f_number_of_microphones - 2) / 2;
+                else
+                    x->f_order              = (x->f_number_of_microphones - 1) / 2;
+                x->f_number_of_harmonics    = x->f_order * 2 + 1;
+                
+                x->f_viewer         = new AmbisonicViewer(x->f_order);
+                x->f_recomposer		= new ambisonicRecomposer(x->f_order, x->f_number_of_microphones);
+                
+                
+                jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
+                space_compute(x);
+            }
+        }
+    }
 	return 0;
 }
 

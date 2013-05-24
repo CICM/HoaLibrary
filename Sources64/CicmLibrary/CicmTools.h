@@ -37,6 +37,13 @@ using namespace std;
 #define NUMBEROFCIRCLEPOINTS 36000
 #define NUMBEROFCIRCLEPOINTS_UI 360
 
+// check maxversion
+#define MAXVERSION maxversion()
+#define MAXVERSION_LESSTHAN_500 (MAXVERSION < 1280)
+#define MAXVERSION_500 (MAXVERSION >= 1280 && MAXVERSION < 1536)
+#define MAXVERSION_600 (MAXVERSION >= 1536 && MAXVERSION < 1552)
+#define MAXVERSION_GREATHERTHAN_610 (MAXVERSION >= 1552)
+
 enum
 {
     Hoa_Polar  = 0,
@@ -224,22 +231,22 @@ public:
     
     static double radianInterp(double _step, double _startRad, double _endRad)
     {
-        double start = radianWrap(_startRad);
-        double end   = radianWrap(_endRad);
+        _startRad = radianWrap(_startRad);
+        _endRad   = radianWrap(_endRad);
         
-        if ( radianWrap(end - start) <= CICM_PI ) // anti-clockwise
+        if ( radianWrap(_endRad - _startRad) <= CICM_PI ) // anti-clockwise
         {
-            if (end - start >= 0)
-                return radianWrap( start + _step*(end - start) );
+            if (_endRad - _startRad >= 0)
+                return radianWrap( _startRad + _step*(_endRad - _startRad) );
             else
-                return radianWrap( start + _step*( (end+CICM_2PI) - start) );
+                return radianWrap( _startRad + _step*( (_endRad+CICM_2PI) - _startRad) );
         }
         else // clockwise
         {
-            if (end - start <= 0)
-                return radianWrap( start + _step*(end - start) );
+            if (_endRad - _startRad <= 0)
+                return radianWrap( _startRad + _step*(_endRad - _startRad) );
             else
-                return radianWrap( start - _step*( (start+CICM_2PI) - end) );
+                return radianWrap( _startRad - _step*( (_startRad+CICM_2PI) - _endRad) );
         }
     }
     

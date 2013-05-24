@@ -135,7 +135,7 @@ void do_rect_selection(t_HoaRecomposerUI *x, t_pt pt);
 void end_rect_selection(t_HoaRecomposerUI *x, t_pt pt);
 bool isMicInsideRect(t_HoaRecomposerUI *x, int micIndex, t_rect rectSelection);
 
-int main()
+int C74_EXPORT main()
 {
 	t_class *c;
 	
@@ -192,13 +192,13 @@ int main()
 	CLASS_ATTR_STYLE			(c, "miccolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "miccolor", 0, "Microphone Color");
 	CLASS_ATTR_ORDER			(c, "miccolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "miccolor", 0, "0.06 0.33 0.49 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "miccolor", 0, "0.5 0.5 0.5 1.");
     
     CLASS_ATTR_RGBA				(c, "selmiccolor", 0, t_HoaRecomposerUI, f_colorMicSelected);
 	CLASS_ATTR_STYLE			(c, "selmiccolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selmiccolor", 0, "Selected Microphone Color");
 	CLASS_ATTR_ORDER			(c, "selmiccolor", 0, "5");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmiccolor", 0, "0.11 0.61 0.89 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmiccolor", 0, "0.86 0.86 0.86 1.");
     
     CLASS_ATTR_RGBA				(c, "harmonicscolor", 0, t_HoaRecomposerUI, f_colorHarmonics);
 	CLASS_ATTR_STYLE			(c, "harmonicscolor", 0, "rgba");
@@ -220,15 +220,15 @@ int main()
     
     CLASS_ATTR_RGBA				(c, "mictextcolor", 0, t_HoaRecomposerUI, f_colorTextMic);
 	CLASS_ATTR_STYLE			(c, "mictextcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "mictextcolor", 0, "Rect Selection color");
+	CLASS_ATTR_LABEL			(c, "mictextcolor", 0, "Mics text color");
 	CLASS_ATTR_ORDER			(c, "mictextcolor", 0, "9");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "mictextcolor", 0, "0.39 0.52 0.8 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "mictextcolor", 0, "0.9 0.9 0.9 1.");
     
     CLASS_ATTR_RGBA				(c, "selmictextcolor", 0, t_HoaRecomposerUI, f_colorTextMicSelected);
 	CLASS_ATTR_STYLE			(c, "selmictextcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "selmictextcolor", 0, "Rect Selection color");
+	CLASS_ATTR_LABEL			(c, "selmictextcolor", 0, "Selected Mics text color");
 	CLASS_ATTR_ORDER			(c, "selmictextcolor", 0, "10");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmictextcolor", 0, "0.39 0.52 0.8 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmictextcolor", 0, "0.4 0.4 0.4 1.");
     CLASS_STICKY_CATEGORY_CLEAR(c);
 	
 	CLASS_ATTR_LONG				(c, "nmics",0, t_HoaRecomposerUI, f_numberOfMic);
@@ -268,7 +268,6 @@ void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
     x->f_outlet_infos = listout(x);
     x->f_out = outlet_new(x, NULL);
     
-    
     x->f_numberOfMic = DEF_MICS;
     x->f_last_mouseMoveOverMic = x->f_last_mouseDownOverMic = x->f_last_mouseUpOverMic = -1;
     x->f_showFishEye = 0;
@@ -280,36 +279,8 @@ void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
 	x->j_box.b_firstin = (t_object*) x;
 	
 	attr_dictionary_process(x, d);
-    
-    HoaRecomposerUI_resetAngles(x, NULL, 0, NULL); // reset all angles;
-    
 	jbox_ready(&x->j_box);
     
-    short version = maxversion() << 12;
-    
-    if (version == 0x0612) {
-        post("Max 6.1.2");
-    }
-    else if (version == 608)
-    {
-        post("Max 6.0.8");
-    }
-    
-    post("version %d", maxversion() & 0x3fff);
-    post("version2 %d", maxversion() & 0xf000);
-    //post("version %d", maxversion() & 12);
-    
-    /*
-    if ( (maxversion() << 12) > 610 ) {
-        post("Max 6.1");
-    }
-    else
-        post("Max 6");
-    */
-    post("maxversion %x", maxversion());
-    post("maxversion short %d", maxversion());
-    
-	
 	return (x);
 }
 
@@ -689,9 +660,8 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
     	
 	if (g) {
         
-        jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_WEIGHT_NORMAL, fontsize);
-		jtl = jtextlayout_create();
-        //jtl = jtextlayout_withbgcolor(g, &x->f_colorMic);
+        jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_ITALIC, JGRAPHICS_FONT_WEIGHT_BOLD, fontsize);
+        jtl = jtextlayout_withbgcolor(g, &x->f_colorMic);
         
         for(int i=numMics-1; i>=0; i--)
         {
@@ -701,61 +671,13 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
             y1 = long(Tools::ordinate(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
             sprintf(text,"%i", i+1);
 			jtextlayout_set(jtl, text, jf, x1 - fontsize * 1.5, y1 - 10, fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
-			jtextlayout_draw(jtl, g);
+            jtextlayout_draw(jtl, g);
         }
         
 		jbox_end_layer((t_object*)x, view, gensym("text_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("text_layer"), 0., 0.);
 }
-
-/*
-void draw_harmonics_old(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
-{
-    double w = rect->width;
-    t_jrgba harmonicsFillColor = x->f_colorHarmonics;
-    
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
-    
-    harmonicsFillColor.alpha = Tools::clip_min(x->f_colorHarmonics.alpha - 0.2);
-    
-	if (g)
-	{
-		t_jmatrix transform;
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, (w*0.5), (w*0.5));
-		jgraphics_set_matrix(g, &transform);
-		jgraphics_set_line_width(g, 2);
-        jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
-        jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
-        
-        //for (int i = 0; i < x->f_numberOfMic; i++)
-        for (int i = 0; i < 1; i++)
-        {
-            
-            if(x->f_mics->getBiggestContribution(i) != 0.)
-            {
-                double factor = (x->f_micRadius) / x->f_mics->getBiggestContribution(i);
-                                
-                jgraphics_set_source_jrgba(g, &harmonicsFillColor);
-                jgraphics_move_to(g, x->f_mics->getAbscisseValue(i, 0) * factor, x->f_mics->getOrdinateValue(i, 0) * factor);
-                for(int j = 1; j < NUMBEROFCIRCLEPOINTS_UI; j++)
-                {
-                    jgraphics_line_to(g, x->f_mics->getAbscisseValue(i, j) * factor, x->f_mics->getOrdinateValue(i, j) * factor );
-                }                
-                jgraphics_line_to(g, x->f_mics->getAbscisseValue(i, 0) * factor, x->f_mics->getOrdinateValue(i, 0) * factor);
-                
-                jgraphics_close_path(g);
-                jgraphics_fill_preserve(g);
-                jgraphics_set_source_jrgba(g, &x->f_colorHarmonics);
-                jgraphics_stroke(g);                
-            }
-        }
-        
-		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
-	}
-	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
-}
-*/
 
 void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 {
@@ -774,10 +696,6 @@ void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 		jgraphics_set_line_width(g, 2);
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
         jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
-        
-        post("biggestContrib %f", x->f_mics->getBiggestContribution(0));
-        post("biggestLobeNbPoint %ld", x->f_mics->getBiggestLobeNbPoint(0));
-        post("biggestContribIndex %ld", x->f_mics->getBiggestContributionIndex(0));
         
         for (int i = 0; i < x->f_numberOfMic; i++) {
             if(x->f_mics->getBiggestContribution(i) != 0.)
@@ -933,7 +851,6 @@ void draw_fishEye(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         
         jgraphics_set_source_jrgba(g, &x->f_fisheyecolor);
         jgraphics_set_line_width(g, 1);
-        
         jgraphics_set_dash(g, dashes, 2, 0);
         
         cartFisheyeDest.x = Tools::abscisse(x->f_micRadius, x->f_fisheyeAngle);
@@ -941,8 +858,10 @@ void draw_fishEye(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         cartFisheyeDest.x = (cartFisheyeDest.x + (w*0.5));
         cartFisheyeDest.y = ( (w - cartFisheyeDest.y) - (w*0.5) );
         
-        for (int i=0; i < x->f_numberOfMic; i++) {
-            if (x->f_mics->isSelected(i)) {
+        for (int i=0; i < x->f_numberOfMic; i++)
+        {
+            if (x->f_mics->isSelected(i))
+            {
                 micAngle = x->f_mics->getAngleInRadian(i);
                 cart.x = Tools::abscisse(x->f_micRadius, micAngle + CICM_PI2);
                 cart.y = Tools::ordinate(x->f_micRadius, micAngle + CICM_PI2);
@@ -955,7 +874,7 @@ void draw_fishEye(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
                 jgraphics_fill(g);
             }
         }
-
+        
         jgraphics_arc(g, cartFisheyeDest.x, cartFisheyeDest.y, 4, 0, CICM_2PI);
         jgraphics_fill(g);
         

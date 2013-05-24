@@ -66,7 +66,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ENUM             (c, "optim", 0, "basic \" \"maxRe \" \"inPhase");
 	CLASS_ATTR_ORDER			(c, "optim", 0, "1");
 	CLASS_ATTR_ACCESSORS		(c, "optim", NULL, HoaOptim_optim);
-	CLASS_ATTR_DEFAULT			(c, "optim", 0, "inPhase");
+	//CLASS_ATTR_DEFAULT			(c, "optim", 0, "inPhase");
 	CLASS_ATTR_SAVE				(c, "optim", 1);
 	
 	class_dspinit(c);				

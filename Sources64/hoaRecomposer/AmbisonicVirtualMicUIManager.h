@@ -61,10 +61,13 @@ public:
     void setFisheyeStepDirect(const int _micIndex, double _fisheyeStep); // _micIndex : -1 = all | -2 = selectedMics | >= 0 = micIndex
     void setAngleToClosestDefMicAngle(const int _micIndex);
     
+    long          getNumberOfSelectedMics();
     double        getClosestDefMicAngle(const int _micIndex);
     double        getClosestDefMicAngle(double _angleInRadian);
     double        getClosestDefMicDistance(const int _micIndex);
     double        getClosestDefMicDistance(double _angleInRadian);
+    int           getClosestMicIndex(double _angleInRadian); // non implemented
+    int           getFarthestMicIndex(double _angleInRadian); // non implemented
     inline double getDistanceBetweenTwoDefMics() { return m_distanceBetweenTwoDefMics; }
     inline double getFisheyeDestAngle() { return m_fisheyeDestAngleInRadian; }
     inline long   getNumberOfMics(){ return m_numberOfMics; }
