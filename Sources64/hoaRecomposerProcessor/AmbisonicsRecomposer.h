@@ -43,27 +43,31 @@ private:
     vector<AmbisonicsWider*>    m_widers;
     vector<CicmLine*>           m_wider_lines;
     
-    long                        m_fixed;
+    long                        m_mode;
+    double                      m_fishEyeFactor;
     
 public:
 	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aVectorSize = 0, long fixedOrNot = 0);
     
     void setVectorSize(long aVectorSize);
     void setRamp(long aNumberOfSample);
-    void setFixed(long fixedOrNot);
+    void setMode(long aMode);
+    void setFishEyeFactor(double aFishEyeFactor);
 	void setMicrophoneAngle(long anIndex, double anAngle);
-    void setMicrophoneWide(long anIndex, double anAngle);
+    void setMicrophoneWide(long anIndex, double aWidenValue);
+    
     
     double getMicrophoneAngle(long anIndex);
     double getMicrophoneWide(long anIndex);
-    long getFixed();
+    inline double getFishEyeFactor() {return m_fishEyeFactor;}
+    inline long getMode() {return m_mode;}
 
 	~AmbisonicsRecomposer();
 	
 	/* Perform sample by sample */
 	inline void process(double* aInputs, double* aOutputs)
 	{
-        if(m_fixed)
+        if(m_mode == 0) // fixe
         {
             processFixe(aInputs, aOutputs);
             return;
@@ -84,7 +88,7 @@ public:
     
     inline void process(float* aInputs, float* aOutputs)
 	{
-        if(m_fixed)
+        if(m_mode == 0)
         {
             processFixe(aInputs, aOutputs);
             return;
@@ -106,7 +110,7 @@ public:
 	/* Perform sample block */
 	inline void process(double** aInputs, double** aOutputs)
 	{
-        if(m_fixed)
+        if(m_mode == 0)
         {
             processFixe(aInputs, aOutputs);
             return;
@@ -130,7 +134,7 @@ public:
     
     inline void process(float** aInputs, float** aOutputs)
 	{
-        if(m_fixed)
+        if(m_mode == 0)
         {
             processFixe(aInputs, aOutputs);
             return;
@@ -142,6 +146,67 @@ public:
         for(int i = 1; i < m_number_of_microphones; i++)
         {
             m_lines[i]->process(m_angles_vector_float);
+            m_encoders[i]->process(aInputs[i], m_harmonics_matrix_float, m_angles_vector_float);
+            m_wider_lines[i]->process(m_angles_vector_double);
+            m_widers[i]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);
+            for(int k = 0; k < m_number_of_harmonics; k++)
+            {
+                Cicm_Vector_Float_Add(m_harmonics_matrix_float[k], aOutputs[k], m_vector_size);
+            }
+        }
+	}
+    
+    /* Perform sample block - with wide fixed and angle set by fisheye factor*/
+	inline void process(double** aInputs, double** aOutputs, double* fisheyeFactor)
+	{
+        double clip[2] = {0.,1.};
+        Cicm_Vector_Double_Clip(fisheyeFactor, &clip[0], &clip[1], fisheyeFactor, m_vector_size);
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
+
+        for (int v=0; v<m_vector_size; v++)
+        {
+            m_angles_vector_double[v] = 0.;
+        }
+        m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_double);
+        m_wider_lines[0]->process(m_angles_vector_double);
+        m_widers[0]->process(aOutputs, aOutputs, m_angles_vector_double);
+        
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            for (int v=0; v<m_vector_size; v++)
+            {
+                m_angles_vector_double[v] = Tools::radianInterp(1-fisheyeFactor[v], distanceBetwenTwoDefMics*i, 0.);
+            }
+            m_encoders[i]->process(aInputs[i], m_harmonics_matrix_double, m_angles_vector_double);
+            m_wider_lines[i]->process(m_angles_vector_double);
+            m_widers[i]->process(m_harmonics_matrix_double, m_harmonics_matrix_double, m_angles_vector_double);
+            for(int k = 0; k < m_number_of_harmonics; k++)
+            {
+                Cicm_Vector_Double_Add(m_harmonics_matrix_double[k], aOutputs[k], m_vector_size);
+            }
+        }
+	}
+    
+    inline void process(float** aInputs, float** aOutputs, float* fisheyeFactor)
+	{
+        float clip[2] = {0.,1.};
+        Cicm_Vector_Float_Clip(fisheyeFactor, &clip[0], &clip[1], fisheyeFactor, m_vector_size);
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
+        
+        for (int v=0; v<m_vector_size; v++)
+        {
+            m_angles_vector_double[v] = 0.;
+        }
+        m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_float);
+        m_wider_lines[0]->process(m_angles_vector_double);
+        m_widers[0]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);
+        
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            for (int v=0; v<m_vector_size; v++)
+            {
+                m_angles_vector_double[v] = Tools::radianInterp(1-fisheyeFactor[v], distanceBetwenTwoDefMics*i, 0.);
+            }
             m_encoders[i]->process(aInputs[i], m_harmonics_matrix_float, m_angles_vector_float);
             m_wider_lines[i]->process(m_angles_vector_double);
             m_widers[i]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);

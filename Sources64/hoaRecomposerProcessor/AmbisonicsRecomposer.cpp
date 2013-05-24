@@ -19,9 +19,9 @@
 
 #include "AmbisonicsRecomposer.h"
 
-AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophones, long aVectorSize, long fixedOrNot) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophones, long aVectorSize, long aMode) : Ambisonics(anOrder, aVectorSize)
 {
-    setFixed(fixedOrNot);
+    setMode(aMode);
 	m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, m_number_of_harmonics);
     m_number_of_inputs = m_number_of_microphones;
     m_number_of_outputs = m_number_of_harmonics;
@@ -66,15 +66,25 @@ double AmbisonicsRecomposer::getMicrophoneAngle(long anIndex)
         return 0.;
 }
 
-void AmbisonicsRecomposer::setMicrophoneWide(long anIndex, double anAngle)
+void AmbisonicsRecomposer::setMicrophoneWide(long anIndex, double aWidenValue)
 {
     if(anIndex >= 0 && anIndex < m_number_of_microphones)
-        m_wider_lines[anIndex]->setCoefficientAngle(anAngle);
+        m_wider_lines[anIndex]->setCoefficient(aWidenValue);
 }
 
-void AmbisonicsRecomposer::setFixed(long fixedOrNot)
+void AmbisonicsRecomposer::setFishEyeFactor(double aFishEyeFactor)
 {
-    m_fixed = Tools::clip(fixedOrNot, (long)0, (long)1);
+    m_fishEyeFactor = 1 - Tools::clip(aFishEyeFactor, 0., 1.);
+    double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
+    for (int i=0; i < m_number_of_microphones; i++)
+    {
+        setMicrophoneAngle(i, Tools::radianInterp(m_fishEyeFactor, distanceBetwenTwoDefMics*i, 0.));
+    }
+}
+
+void AmbisonicsRecomposer::setMode(long aMode)
+{
+    m_mode = Tools::clip(aMode, long(0), long(2));
 }
 
 double AmbisonicsRecomposer::getMicrophoneWide(long anIndex)
@@ -83,11 +93,6 @@ double AmbisonicsRecomposer::getMicrophoneWide(long anIndex)
         return m_wider_lines[anIndex]->getCoefficient();
     else
         return 0.;
-}
-
-long AmbisonicsRecomposer::getFixed()
-{
-    return m_fixed;
 }
 
 void AmbisonicsRecomposer::setVectorSize(long aVectorSize)
