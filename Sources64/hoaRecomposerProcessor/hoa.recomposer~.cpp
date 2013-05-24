@@ -21,20 +21,29 @@
 
 extern "C"
 {
-	#include "ext.h"
-	#include "ext_obex.h"
-	#include "z_dsp.h"
+#include "ext.h"
+#include "ext_obex.h"
+#include "ext_path.h"
+#include "ext_common.h"
+#include "jpatcher_api.h"
+#include "jgraphics.h"
+#include "jpatcher_syms.h"
+#include "ext_dictionary.h"
+#include "ext_globalsymbol.h"
+#include "ext_parameter.h"
+#include "z_dsp.h"
 }
+
 
 typedef struct _HoaRecomposer 
 {
-	t_pxobject					f_ob;			
-	AmbisonicsRecomposer*       f_ambiRecomposer;
-
+	t_pxobject					f_ob;
+    AmbisonicsRecomposer*       f_ambiRecomposer;
+    
 	long						f_inputNumber;
 	long						f_outputNumber;
     t_atom_long                 f_play;
-    t_atom_float                f_ramp_time;
+    double                      f_ramp_time;
 } t_HoaRecomposer;
 
 void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv);
@@ -60,6 +69,7 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.recomposer~", (method)HoaRecomposer_new, (method)HoaRecomposer_free, (long)sizeof(t_HoaRecomposer), 0L, A_GIMME, 0);
 	;
+    
 	class_addmethod(c, (method)HoaRecomposer_dsp,			"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaRecomposer_dsp64,			"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaRecomposer_assist,		"assist",	A_CANT, 0);
@@ -72,16 +82,15 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c,"play", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"play", NULL, HoaRecomposer_play);
 	CLASS_ATTR_DEFAULT          (c,"play", 0,  "1");
-    CLASS_ATTR_ORDER			(c,"play", 0,   "1");
+    CLASS_ATTR_ORDER			(c,"play", 0,  "1");
+    CLASS_ATTR_SAVE             (c,"play", 1);
     
-    CLASS_ATTR_FLOAT			(c,"ramp", 0, t_HoaRecomposer, f_ramp_time);
+    CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_HoaRecomposer, f_ramp_time);
 	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time (ms)");
 	CLASS_ATTR_CATEGORY			(c,"ramp", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"ramp", NULL, HoaRecomposer_ramp);
 	CLASS_ATTR_DEFAULT          (c,"ramp", 0,  "100.");
     CLASS_ATTR_ORDER			(c,"ramp", 0,  "2");
-    
-    CLASS_ATTR_SAVE             (c,"play", 1);
     CLASS_ATTR_SAVE             (c,"ramp", 1);
     
 	class_dspinit(c);				
@@ -112,6 +121,13 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
 			outlet_new(x, "signal");
 
 		x->f_ob.z_misc = Z_NO_INPLACE;
+        
+        t_atom av[1];
+        atom_setlong(av, 1);
+        object_method_typed(x, gensym("play"), 1, av, NULL);
+        atom_setfloat(av, 100.);
+        object_method_typed(x, gensym("ramp"), 1, av, NULL);
+        
         attr_args_process(x, argc, argv);
 	}
 	return (x);
@@ -147,39 +163,32 @@ void HoaRecomposer_wide(t_HoaRecomposer *x, t_symbol *s, short ac, t_atom *av)
 
 t_max_err HoaRecomposer_play(t_HoaRecomposer *x, t_object *attr, long argc, t_atom *argv)
 {
-    post("hi");
     if(argc && argv && atom_gettype(argv) == A_FLOAT)
     {
-        post("hi1");
         int value = 1 - Tools::clip((long)atom_getfloat(argv), (long)0, (long)1);
         x->f_ambiRecomposer->setFixed(value);
-        x->f_play = 1 - x->f_ambiRecomposer->getFixed();
     }
     if(argc && argv && atom_gettype(argv) == A_LONG)
     {
-        post("hi2");
         int value = 1 - Tools::clip((long)atom_getlong(argv), (long)0, (long)1);
         x->f_ambiRecomposer->setFixed(value);
-        x->f_play = 1 - x->f_ambiRecomposer->getFixed();
+        
     }
+    x->f_play = 1 - x->f_ambiRecomposer->getFixed();
     return MAX_ERR_NONE;
 }
 
 t_max_err HoaRecomposer_ramp(t_HoaRecomposer *x, t_object *attr, long argc, t_atom *argv)
 {
-    post("ho");
     if(argc && argv && atom_gettype(argv) == A_FLOAT)
     {
-        post("ho1");
         x->f_ambiRecomposer->setRamp(atom_getfloat(argv) * sys_getsr()  / 1000.);
-        x->f_ramp_time = Tools::clip_min((float)atom_getfloat(argv), 0.f);
     }
     if(argc && argv && atom_gettype(argv) == A_LONG)
     {
-        post("ho2");
         x->f_ambiRecomposer->setRamp(atom_getlong(argv) * sys_getsr()  / 1000.);
-        x->f_ramp_time = Tools::clip_min((long)atom_getlong(argv), (long)0);
     }
+    x->f_ramp_time = Tools::clip_min((float)atom_getfloat(argv), 0.f);
     return MAX_ERR_NONE;
 }
 

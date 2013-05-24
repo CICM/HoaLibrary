@@ -31,6 +31,36 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
+					"fontsize" : 11.595187,
+					"frgb" : 0.0,
+					"id" : "obj-8",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 58.0, 157.0, 54.625, 32.0 ],
+					"text" : "Signal à encoder",
+					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+					"id" : "obj-27",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 5.774994, 157.0, 106.850006, 32.0 ],
+					"rounded" : 6,
+					"shadow" : -1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
 					"fontsize" : 7.180877,
 					"hidden" : 1,
 					"id" : "obj-6",
@@ -352,7 +382,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 25.0, 165.0, 42.0, 19.0 ],
+					"patching_rect" : [ 25.0, 112.5, 42.0, 19.0 ],
 					"text" : "sig~ 1"
 				}
 
@@ -902,9 +932,16 @@
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "hoa.plug~.maxref.xml",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.pencoder~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
-				"patcherrelativepath" : "../../SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
