@@ -47,7 +47,7 @@ private:
     double                      m_fishEyeFactor;
     
 public:
-	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aVectorSize = 0, long fixedOrNot = 0);
+	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aVectorSize = 0, long aMode = 0);
     
     void setVectorSize(long aVectorSize);
     void setRamp(long aNumberOfSample);

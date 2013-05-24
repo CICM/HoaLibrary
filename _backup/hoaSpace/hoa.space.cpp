@@ -17,9 +17,9 @@
  *
  */
 
-#include "../CicmLibrary/cicmTools.h"
-#include "../hoaRecomposerProcessor/AmbisonicsRecomposer.h"
-#include "../hoaAmbisonics/AmbisonicsViewer.h"
+#include "AmbisonicRecomposer.h"
+#include "AmbisonicViewer.h"
+#include "cicmTools.h"
 
 #define MAX_MICS 256
 
@@ -59,8 +59,8 @@ typedef struct  _space
 	double		f_rayonGlobal;
 	double		f_rayonCircle;
 
-	AmbisonicsViewer*        f_viewer;
-    AmbisonicsRecomposer*    f_recomposer;
+	AmbisonicViewer*        f_viewer;
+    ambisonicRecomposer*    f_recomposer;
 
 	double                  f_harmonicsValues[MAX_MICS];
     double                  f_mode_values[MAX_MICS];
@@ -227,8 +227,8 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_GROWY
 			;
     
-	x->f_viewer				= new AmbisonicsViewer(1);
-    x->f_recomposer         = new AmbisonicsRecomposer(1, 3);
+	x->f_viewer				= new AmbisonicViewer(1);
+    x->f_recomposer         = new ambisonicRecomposer(1, 3);
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
@@ -773,8 +773,8 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
                     x->f_order              = (x->f_number_of_microphones - 1) / 2;
                 x->f_number_of_harmonics    = x->f_order * 2 + 1;
                 
-                x->f_viewer         = new AmbisonicsViewer(x->f_order);
-                x->f_recomposer		= new AmbisonicsRecomposer(x->f_order, x->f_number_of_microphones);
+                x->f_viewer         = new AmbisonicViewer(x->f_order);
+                x->f_recomposer		= new ambisonicRecomposer(x->f_order, x->f_number_of_microphones);
                 
                 
                 jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
