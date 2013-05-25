@@ -3,7 +3,8 @@
 ## Juce
 #################
 
-
+*.component
+JuceLibraryCode/
 
 #################
 ## Visual Studio
