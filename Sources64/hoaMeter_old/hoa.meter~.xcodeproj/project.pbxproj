@@ -276,7 +276,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
+			defaultConfigurationName = Development;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -285,7 +285,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};

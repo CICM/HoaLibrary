@@ -28,7 +28,7 @@ Ambisonicsvector::Ambisonicsvector(double aConfiguration, long aMode, long aVect
 
 void Ambisonicsvector::setConfiguration(double aConfiguration, bool standardOnOff)
 {
-    m_configuration  = (long)Tools::clip_min(aConfiguration, 0.);
+    m_configuration  = (long)Tools::clip_min(aConfiguration, 1.);
     m_number_of_inputs		= m_configuration;
 	m_number_of_outputs		= 4;
     if(aConfiguration - (long)aConfiguration != 0.)
@@ -68,12 +68,26 @@ void Ambisonicsvector::setLoudspeakerAngle(long anIndex, double anAngle)
         m_angles_of_loudspeakers[anIndex] = anAngle;
     }
     Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
+    
     for(int i = 0; i < (long)m_configuration; i++)
     {
         m_abscissa_of_loudspeakers[i] = cos(m_angles_of_loudspeakers[i]);
         m_ordinate_of_loudspeakers[i] = sin(m_angles_of_loudspeakers[i]);
     }
+}
+
+void Ambisonicsvector::setLoudspeakerAngles(long len, double* angles)
+{
+    for (int i=0; i<len && i<m_number_of_inputs; i++) {
+        m_angles_of_loudspeakers[i] = Tools::radianWrap(angles[i] / 360. * CICM_2PI);
+    }
+    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
     
+    for(int i = 0; i < (long)m_configuration; i++)
+    {
+        m_abscissa_of_loudspeakers[i] = cos(m_angles_of_loudspeakers[i]);
+        m_ordinate_of_loudspeakers[i] = sin(m_angles_of_loudspeakers[i]);
+    }
 }
 
 std::string Ambisonicsvector::getVectorName(long anIndex)

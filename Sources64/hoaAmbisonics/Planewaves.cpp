@@ -136,7 +136,7 @@ void Planewaves::computeConfiguration(bool standardOnOff)
 
 void Planewaves::setConfiguration(double aConfiguration, bool standardOnOff)
 {
-    m_configuration  = (long)Tools::clip_min(aConfiguration, 0.);
+    m_configuration  = (long)Tools::clip_min(aConfiguration, 1.);
     m_number_of_inputs		= m_configuration;
 	m_number_of_outputs		= m_configuration;
     if(aConfiguration - (long)aConfiguration != 0.)
@@ -163,6 +163,14 @@ void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
     {
         anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
         m_angles_of_loudspeakers[anIndex] = anAngle;
+    }
+    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
+}
+
+void Planewaves::setLoudspeakerAngles(long len, double* angles)
+{
+    for (int i=0; i<len && i<m_number_of_inputs; i++) {
+        m_angles_of_loudspeakers[i] = Tools::radianWrap(angles[i] / 360. * CICM_2PI);
     }
     Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
 }

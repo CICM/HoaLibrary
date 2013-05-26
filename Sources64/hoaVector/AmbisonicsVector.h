@@ -33,6 +33,7 @@ public:
 	
     void    setConfiguration(double aConfiguration, bool standardOnOff = 1);
     void    setLoudspeakerAngle(long anIndex, double anAngle);
+    void    setLoudspeakerAngles(long len, double* angles);
     std::string  getVectorName(long anIndex);
     long getMode();
     void setMode(long aMode);

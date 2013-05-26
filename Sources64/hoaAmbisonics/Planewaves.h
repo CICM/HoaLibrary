@@ -48,6 +48,7 @@ public:
 
     void setConfiguration(double aConfiguration, bool standardOnOff = 1);
     void setLoudspeakerAngle(long anIndex, double anAngle);
+    void setLoudspeakerAngles(long len, double* angles);
 	void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
 

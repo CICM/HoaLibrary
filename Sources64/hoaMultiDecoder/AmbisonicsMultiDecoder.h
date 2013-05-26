@@ -60,6 +60,7 @@ public:
     void    setConfiguration(double aConfiguration, bool standardOnOff = 1);
     double  getConfiguration();
     void    setLoudspeakerAngle(long anIndex, double anAngle);
+    void    setLoudspeakerAngles(long len, double* angles);
     double  getLoudspeakerAngle(long anIndex);
     std::string  getLoudspeakerName(long anIndex);
     

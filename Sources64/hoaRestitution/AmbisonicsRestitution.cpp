@@ -179,6 +179,19 @@ void AmbisonicsRestitution::setLoudspeakerAngle(long anIndex, double anAngle)
         computeMicrophoneSimulation();
 }
 
+void AmbisonicsRestitution::setLoudspeakerAngles(long len, double* angles)
+{
+    for (int i=0; i<len && i<m_number_of_inputs; i++)
+        m_angles_of_loudspeakers[i] = Tools::radianWrap(angles[i] / 360. * CICM_2PI);
+    
+    Tools::sortVector(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
+    
+    if(m_restitution_mode == Hoa_Amplitude_Panning)
+        computeAmplitudePanning();
+    else
+        computeMicrophoneSimulation();
+}
+
 double AmbisonicsRestitution::getLoudspeakerAngle(long anIndex)
 {
     if(anIndex >= 0 && anIndex < m_number_of_real_loudspeakers)

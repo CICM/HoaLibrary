@@ -120,6 +120,12 @@ void AmbisonicsMultiDecoder::setLoudspeakerAngle(long anIndex, double anAngle)
         m_restitution->setLoudspeakerAngle(anIndex, anAngle);
 }
 
+void AmbisonicsMultiDecoder::setLoudspeakerAngles(long len, double* angles)
+{
+    if(m_mode == Hoa_Restitution)
+        m_restitution->setLoudspeakerAngles(len, angles);
+}
+
 double AmbisonicsMultiDecoder::getLoudspeakerAngle(long anIndex)
 {
     if(m_mode == Hoa_Ambisonics)
