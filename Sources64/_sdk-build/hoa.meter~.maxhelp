@@ -559,7 +559,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 36.0, 624.0, 67.0, 32.0 ],
-									"presentation_rect" : [ 19.0, 626.0, 0.0, 0.0 ],
 									"text" : "Energy \nvector (x/y)",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -574,7 +573,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 36.0, 624.0, 67.0, 32.0 ],
-									"presentation_rect" : [ 19.0, 626.0, 0.0, 0.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -1196,7 +1194,6 @@
 									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
 									"bordercolor" : [ 0.254902, 0.254902, 0.254902, 1.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"drawvector" : 3,
 									"id" : "obj-25",
 									"interval" : 20,
 									"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
@@ -1606,7 +1603,7 @@
 									"destination" : [ "obj-3", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 606.055562, 215.0, 214.833333, 215.0 ],
+									"midpoints" : [ 606.055563, 215.0, 214.833333, 215.0 ],
 									"source" : [ "obj-47", 4 ]
 								}
 
@@ -1826,7 +1823,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 495.0, 171.0, 94.0, 33.0 ],
+									"patching_rect" : [ 495.0, 171.0, 100.0, 33.0 ],
 									"text" : "Refresh Interval \n(ms) :",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -1856,7 +1853,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 345.0, 171.0, 129.0, 33.0 ],
+									"patching_rect" : [ 345.0, 171.0, 132.0, 33.0 ],
 									"text" : "Offset of loudspeakers (-180°  180°) : ",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -3086,7 +3083,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.0, 73.0, 481.0, 19.0 ],
-									"presentation_rect" : [ 9.0, 76.5, 0.0, 0.0 ],
 									"text" : "hoa.meter~ lets you set angles for each loudspeakers",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -3475,13 +3471,13 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
+									"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
 									"channels" : 5,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
 									"loudspeakers" : 5,
 									"ls" : 5,
-									"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
+									"ls_angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 5,
 									"numleds" : 10,
@@ -3701,15 +3697,15 @@
 									"id" : "obj-3",
 									"maxclass" : "newobj",
 									"numinlets" : 5,
-									"numoutlets" : 5,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
+									"numoutlets" : 6,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 31.0, 198.0, 424.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
-										"config" : 5.0,
+										"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
+										"config" : 5.1,
 										"loudspeakers" : 5,
 										"ls" : 5,
-										"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
+										"ls_angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
 										"mode" : "irregular",
 										"offset" : 0.0,
 										"pinnaesize" : "small",
@@ -5108,7 +5104,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 56.0, 70.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5139,7 +5135,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 641.0, 125.0, 81.0, 20.0 ],
-									"presentation_rect" : [ 752.0, 138.0, 0.0, 0.0 ],
 									"text" : "@offset -45°",
 									"textcolor" : [ 0.229592, 0.229592, 0.229592, 1.0 ]
 								}
@@ -5154,7 +5149,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 641.0, 125.0, 81.0, 20.0 ],
-									"presentation_rect" : [ 752.0, 138.0, 0.0, 0.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5801,7 +5795,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 56.0, 70.0, 838.0, 676.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5833,7 +5827,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 593.5, 302.0, 72.0, 20.0 ],
-									"presentation_rect" : [ 594.5, 298.0, 0.0, 0.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -5864,7 +5857,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 593.5, 522.0, 72.0, 20.0 ],
-									"presentation_rect" : [ 594.5, 522.0, 0.0, 0.0 ],
 									"text" : "loadmess 1"
 								}
 
@@ -6257,12 +6249,12 @@
 									"patching_rect" : [ 493.0, 549.625, 79.0, 20.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_shortname" : "umenu[1]",
 											"parameter_longname" : "umenu[1]",
 											"parameter_initial" : [ 1 ],
 											"parameter_type" : 3,
 											"parameter_initial_enable" : 1,
-											"parameter_invisible" : 1
+											"parameter_invisible" : 1,
+											"parameter_shortname" : "umenu[1]"
 										}
 
 									}
@@ -6299,12 +6291,12 @@
 									"patching_rect" : [ 493.0, 485.0, 105.0, 20.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_shortname" : "umenu",
 											"parameter_longname" : "umenu",
 											"parameter_initial" : [ 0 ],
 											"parameter_type" : 3,
 											"parameter_initial_enable" : 1,
-											"parameter_invisible" : 1
+											"parameter_invisible" : 1,
+											"parameter_shortname" : "umenu"
 										}
 
 									}
@@ -6329,21 +6321,6 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 7.180877,
-									"hidden" : 1,
-									"id" : "obj-4",
-									"linecount" : 2,
-									"maxclass" : "newobj",
-									"numinlets" : 4,
-									"numoutlets" : 0,
-									"patching_rect" : [ 606.0, 95.0, 52.0, 23.0 ],
-									"text" : "bgcolor 0.93 0.93 0.92 1."
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-21",
 									"maxclass" : "toggle",
 									"numinlets" : 1,
@@ -6353,12 +6330,12 @@
 									"patching_rect" : [ 493.0, 274.0, 20.0, 20.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_shortname" : "toggle",
 											"parameter_longname" : "toggle",
 											"parameter_initial" : [ 0 ],
 											"parameter_type" : 3,
 											"parameter_initial_enable" : 1,
-											"parameter_invisible" : 1
+											"parameter_invisible" : 1,
+											"parameter_shortname" : "toggle"
 										}
 
 									}
@@ -6382,12 +6359,12 @@
 									"patching_rect" : [ 493.0, 203.0, 46.0, 20.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_shortname" : "flonum",
 											"parameter_longname" : "flonum",
 											"parameter_initial" : [ 0.8 ],
 											"parameter_type" : 3,
 											"parameter_initial_enable" : 1,
-											"parameter_invisible" : 1
+											"parameter_invisible" : 1,
+											"parameter_shortname" : "flonum"
 										}
 
 									}
@@ -6830,6 +6807,7 @@
 									"channels" : 32,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"dbperled" : 2,
+									"energycolor" : [ 0.027451, 0.0, 0.913725, 0.7 ],
 									"fill_dir" : 1,
 									"id" : "obj-1",
 									"interval" : 120,
@@ -6837,6 +6815,7 @@
 									"ls" : 32,
 									"ls_angles" : [ 0.33, 11.58, 22.83, 34.08, 45.33, 56.58, 67.83, 79.08, 90.33, 101.58, 112.83, 124.08, 135.33, 146.58, 157.83, 169.08, 180.33, 191.58, 202.83, 214.08, 225.33, 236.58, 247.83, 259.08, 270.33, 281.58, 292.83, 304.08, 315.33, 326.58, 337.83, 349.08 ],
 									"maxclass" : "hoa.meter~",
+									"metersize" : 0.545,
 									"numinlets" : 32,
 									"numleds" : 15,
 									"numoutlets" : 2,
@@ -7677,10 +7656,10 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
 			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
-			"obj-30::obj-19" : [ "flonum", "flonum", 0 ],
-			"obj-30::obj-28" : [ "umenu", "umenu", 0 ]
+			"obj-30::obj-28" : [ "umenu", "umenu", 0 ],
+			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
+			"obj-30::obj-19" : [ "flonum", "flonum", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{

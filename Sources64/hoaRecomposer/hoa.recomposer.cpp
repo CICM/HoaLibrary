@@ -163,9 +163,7 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) HoaRecomposerUI_mousemove,       "mousemove",     A_CANT,   0);
     class_addmethod(c, (method) HoaRecomposerUI_mousedoubleclick,"mousedoubleclick", A_CANT,0);
 	class_addmethod(c, (method) HoaRecomposerUI_key,             "key",           A_CANT,   0);
-    
-    object_super_method(<#...#>)
-	
+    	
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);

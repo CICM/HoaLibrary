@@ -28,9 +28,9 @@ class AmbisonicVirtualMicUIManager
 private:
     long m_numberOfMics;
     AmbisonicVirtualMicUI m_mic[MAX_MICS];
+    double* m_defaultAngles;
     double  m_fisheyeStep;
     double  m_fisheyeDestAngleInRadian;
-    double* m_defaultAngles;
     double  m_distanceBetweenTwoDefMics;
     
     inline int safeIndex(const int _index) {return Tools::clip(_index, 0, MAX_MICS-1);}
