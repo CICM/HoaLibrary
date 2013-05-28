@@ -123,7 +123,7 @@ int C74_EXPORT main()
 	class_addmethod(c, (method)space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_down,      "mousedown",      A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_drag,      "mousedrag",      A_CANT, 0);
-    class_addmethod(c, (method)space_mouse_enddrag,   "mouseup",         A_CANT, 0);
+    class_addmethod(c, (method)space_mouse_enddrag,   "mouseup",        A_CANT, 0);
     class_addmethod(c, (method)space_preset,          "preset",         0);
     class_addmethod(c, (method)space_getvalueof,      "getvalueof",     A_CANT, 0);
 	class_addmethod(c, (method)space_setvalueof,      "setvalueof",     A_CANT, 0);
@@ -235,6 +235,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
     
     //x->f_number_of_microphones = dictionary_getlong(d, gensym("nmics"), &x->f_number_of_microphones);
 
+    x->f_outInfos   = outlet_new(x, NULL);
     x->f_out        = listout(x);
 
 	attr_dictionary_process(x, d);
@@ -261,6 +262,8 @@ void space_assist(t_space *x, void *b, long m, long a, char *s)
 	{
 		if (a == 0)
 			sprintf(s,"(List) Virtual microphones coefficients");
+        else if (a == 1)
+			sprintf(s,"(int) Nuber of Virtual microphones");
 	}
 }
 
@@ -748,6 +751,8 @@ void space_compute(t_space *x)
     jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_points_layer"));
     jbox_redraw((t_jbox *)x);
+    
+    outlet_int(x->f_outInfos, x->f_number_of_microphones);
 
     for(int i = 0; i < x->f_number_of_microphones; i++)
         atom_setfloat(x->f_tempory_values+i, x->f_microphonesValues[i]);
