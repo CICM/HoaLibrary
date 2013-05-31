@@ -433,6 +433,16 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
     {
         if(argc && argv)
         {
+            double angles[argc];
+            for(int i = 0; i < argc && i < x->f_number_of_irregular_loudspeakers; i++)
+            {
+                if(atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
+                    angles[i] = atom_getfloat(argv + i);
+                else angles[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
+            }
+            x->f_AmbisonicsDecoder->setLoudspeakerAngles(argc, angles);
+            
+            /*
             for(int i = 0; i < argc; i++)
             {
                 if(atom_gettype(argv+i) == A_FLOAT)
@@ -440,6 +450,7 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
                 else if(atom_gettype(argv+i) == A_LONG)
                     x->f_AmbisonicsDecoder->setLoudspeakerAngle(i, atom_getlong(argv+i));
             }
+            */
         }
     }
     
@@ -447,8 +458,8 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
     {
         x->f_angles_of_irregular_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     }
+    object_attr_touch((t_object *)x, gensym("angles"));
     HoaDecode_send_angles(x);
-    
     return NULL;
 }
 /*******************************************************************/

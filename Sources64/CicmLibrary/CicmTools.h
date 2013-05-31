@@ -141,17 +141,33 @@ public:
         return number;
     }
     
-    static std::string floatToString(float aValue)
+    static std::string floatToString(float aValue, int numberOfDecimals = 2)
     {
         char number[256];
-        sprintf(number, "%f", (float)aValue);
-        return number;
+        if ( (aValue - long(aValue) != 0.) || numberOfDecimals <= 0)
+        {
+            sprintf(number, "%ld", long(aValue));
+            return number;
+        }
+        else
+        {
+            switch (numberOfDecimals)
+            {
+                case 1: {sprintf(number, "%.1f", aValue); break;}
+                case 2: {sprintf(number, "%.2f", aValue); break;}
+                case 3: {sprintf(number, "%.3f", aValue); break;}
+                case 4: {sprintf(number, "%.4f", aValue); break;}
+                case 5: {sprintf(number, "%.5f", aValue); break;}
+                default: {sprintf(number, "%f", aValue); break;}
+            }
+            return number;
+        }
     }
     
     static std::string floatToStringOneDecimal(float aValue)
     {
         char number[256];
-        sprintf(number, "%.f", (float)aValue);
+        (aValue - long(aValue) != 0.) ? sprintf(number, "%.1f", aValue) : sprintf(number, "%ld", long(aValue));
         return number;
     }
     
@@ -214,9 +230,14 @@ public:
         return (v1 <= v2) ? (val >= v1 && val <= v2) : (val >= v2 && val <= v1);
 	}
     
-    static bool isInsideRad(double val, double loRad, double hiRad)
+    static bool isInsideRad(double radian, double loRad, double hiRad)
 	{
-        return isInside(radianWrap(val-loRad), double(0), radianWrap(hiRad-loRad));
+        return isInside(radianWrap(radian-loRad), double(0), radianWrap(hiRad-loRad));
+	}
+    
+    static bool isInsideDeg(double degree, double loDeg, double hiDeg)
+	{
+        return isInside(degreeWrap(degree-loDeg), double(0), degreeWrap(hiDeg-loDeg));
 	}
     
     template<typename Type> static Type max(Type v1, Type v2)

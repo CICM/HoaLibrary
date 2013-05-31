@@ -20,6 +20,9 @@
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
 
+#define CORNERSIZE 8
+#define BORDERTHICK 2
+
 extern "C"
 {
 #include "ext.h"
@@ -89,8 +92,11 @@ typedef struct  _hoamap
     long        f_index_of_source_to_color;
     long        f_index_of_group_to_color;
     
-    t_jrgba		f_source_colorBackground;
-    t_jrgba		f_source_colorBackgroundInside;
+    t_jrgba		f_colorBackground;
+    t_jrgba		f_colorBackgroundInside;
+    t_jrgba     f_colorBorder;
+    t_jrgba     f_colorSelection;
+    
     double      f_size_source;
 	double		f_zoom_factor;
     
@@ -147,6 +153,7 @@ void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
+long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 
 int C74_EXPORT main()
 {
@@ -159,28 +166,29 @@ int C74_EXPORT main()
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	
-	class_addmethod(c, (method)hoamap_assist,           "assist",		A_CANT,	0);
-	class_addmethod(c, (method)hoamap_paint,            "paint",		A_CANT,	0);
-	class_addmethod(c, (method)hoamap_getdrawparams,    "getdrawparams",A_CANT, 0);
-	class_addmethod(c, (method)hoamap_notify,           "notify",		A_CANT, 0);
+	class_addmethod(c, (method) hoamap_assist,           "assist",		A_CANT,	0);
+	class_addmethod(c, (method) hoamap_paint,            "paint",		A_CANT,	0);
+	class_addmethod(c, (method) hoamap_getdrawparams,    "getdrawparams",A_CANT, 0);
+	class_addmethod(c, (method) hoamap_notify,           "notify",		A_CANT, 0);
     
-    class_addmethod(c, (method)hoamap_jsave,            "jsave",        A_CANT, 0);
+    class_addmethod(c, (method) hoamap_jsave,            "jsave",        A_CANT, 0);
     
-    class_addmethod(c, (method)hoamap_bang,             "bang",			A_CANT, 0);
-    class_addmethod(c, (method)hoamap_infos,            "getinfo",		0);
+    class_addmethod(c, (method) hoamap_bang,             "bang",			A_CANT, 0);
+    class_addmethod(c, (method) hoamap_infos,            "getinfo",		0);
     
-    class_addmethod(c, (method)hoamap_source,           "source",       A_GIMME,0);
-    class_addmethod(c, (method)hoamap_group,            "group",        A_GIMME,0);
-    class_addmethod(c, (method)hoamap_slot,             "slot",         A_GIMME,0);
-    class_addmethod(c, (method)hoamap_trajectory,       "trajectory",   A_GIMME,0);
+    class_addmethod(c, (method) hoamap_source,           "source",       A_GIMME,0);
+    class_addmethod(c, (method) hoamap_group,            "group",        A_GIMME,0);
+    class_addmethod(c, (method) hoamap_slot,             "slot",         A_GIMME,0);
+    class_addmethod(c, (method) hoamap_trajectory,       "trajectory",   A_GIMME,0);
     
-    class_addmethod(c, (method)hoamap_mousedown,        "mousedown",	A_CANT, 0);
-    class_addmethod(c, (method)hoamap_mousedrag,        "mousedrag",	A_CANT, 0);
-    class_addmethod(c, (method)hoamap_mouseup,          "mouseup",      A_CANT, 0);
-    class_addmethod(c, (method)hoamap_mouseenter,       "mouseenter",   A_CANT, 0);
-    class_addmethod(c, (method)hoamap_mousemove,        "mousemove",    A_CANT, 0);
-    class_addmethod(c, (method)hoamap_mouseleave,       "mouseleave",   A_CANT, 0);
-    class_addmethod(c, (method)hoamap_mousewheel,		"mousewheel",	A_CANT, 0);
+    class_addmethod(c, (method) hoamap_mousedown,        "mousedown",	A_CANT, 0);
+    class_addmethod(c, (method) hoamap_mousedrag,        "mousedrag",	A_CANT, 0);
+    class_addmethod(c, (method) hoamap_mouseup,          "mouseup",      A_CANT, 0);
+    class_addmethod(c, (method) hoamap_mouseenter,       "mouseenter",   A_CANT, 0);
+    class_addmethod(c, (method) hoamap_mousemove,        "mousemove",    A_CANT, 0);
+    class_addmethod(c, (method) hoamap_mouseleave,       "mouseleave",   A_CANT, 0);
+    class_addmethod(c, (method) hoamap_mousewheel,		"mousewheel",	A_CANT, 0);
+    class_addmethod(c, (method) hoamap_key,             "key",           A_CANT,   0);
 
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	
@@ -188,19 +196,33 @@ int C74_EXPORT main()
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
     
     /* Colors */
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_source_colorBackground);
+	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_colorBackground);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Outside Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0. 0. 0. .2");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 1.");
     
-    CLASS_ATTR_RGBA				(c, "bgcolor2", 0, t_hoamap, f_source_colorBackgroundInside);
+    CLASS_ATTR_RGBA				(c, "bgcolor2", 0, t_hoamap, f_colorBackgroundInside);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor2", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor2", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor2", 0, "Background Inside Color");
-	CLASS_ATTR_ORDER			(c, "bgcolor2", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor2", 0, "1. 1. 1. 1.");
+	CLASS_ATTR_ORDER			(c, "bgcolor2", 0, "2");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor2", 0, "0.75 0.75 0.75 1.");
+    
+    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoamap, f_colorBorder);
+	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
+	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "3");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
+    
+    CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoamap, f_colorSelection);
+	CLASS_ATTR_CATEGORY			(c, "selcolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "selcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "selcolor", 0, "Selection Color");
+	CLASS_ATTR_ORDER			(c, "selcolor", 0, "4");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selcolor", 0, "0.36 0.37 0.7 0.5");
 	
     /* Behavior */
 	CLASS_ATTR_LONG				(c,"outputmode", 0, t_hoamap, f_output_mode);
@@ -239,7 +261,8 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	flags = 0 
 	| JBOX_DRAWFIRSTIN 
 	| JBOX_DRAWINLAST
-	| JBOX_TRANSPARENT	
+	| JBOX_TRANSPARENT
+	| JBOX_DRAWBACKGROUND
 	| JBOX_GROWY
 	| JBOX_HILITE
 	;
@@ -437,8 +460,10 @@ void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 
 void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-	params->d_borderthickness = 1;
-	params->d_cornersize = 6;
+    params->d_boxfillcolor = x->f_colorBackground;
+    params->d_bordercolor =  x->f_colorBorder;
+	params->d_borderthickness = 2;
+	params->d_cornersize = CORNERSIZE;
 }
 
 void hoamap_tick(t_hoamap *x)
@@ -1158,10 +1183,10 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                     }
                     else if(x->f_index_of_source_to_color == -2)
                     {
-                        x->f_source_colorBackground.red = atom_getfloat(av);
-                        x->f_source_colorBackground.green = atom_getfloat(av+1);
-                        x->f_source_colorBackground.blue = atom_getfloat(av+2);
-                        x->f_source_colorBackground.alpha = atom_getfloat(av+3);
+                        x->f_colorBackground.red = atom_getfloat(av);
+                        x->f_colorBackground.green = atom_getfloat(av+1);
+                        x->f_colorBackground.blue = atom_getfloat(av+2);
+                        x->f_colorBackground.alpha = atom_getfloat(av+3);
                         jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
                         object_notify(x, _sym_modified, NULL);
                     }
@@ -1400,7 +1425,7 @@ void hoamap_infos(t_hoamap *x)
 }
 
 /**********************************************************/
-/*                          Dessin                        */
+/*                          Paint                        */
 /**********************************************************/
 
 void hoamap_paint(t_hoamap *x, t_object *view)
@@ -1455,101 +1480,112 @@ void hoamap_paint(t_hoamap *x, t_object *view)
 
 void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
 {
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
+    t_jgraphics *g, *g2, *g3;
+    t_jsurface *s1, *s2;
+    t_jrgba black, white;
+    double w = rect->width;
+    
+    double contrastBlack = 0.12;
+    double contrastWhite = 0.08;
+    black = white = x->f_colorBackgroundInside;
+    black.red = Tools::clip_min(black.red -= contrastBlack);
+    black.green = Tools::clip_min(black.green -= contrastBlack);
+    black.blue = Tools::clip_min(black.blue -= contrastBlack);
+    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
+    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
+    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
+    
+	g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), w, rect->height);
 	
 	if (g)
     {
-		t_jrgba outsideColor = x->f_source_colorBackgroundInside;
-		t_jrgba insideColor = x->f_source_colorBackground;
-
-        jgraphics_set_source_jrgba(g, &outsideColor);
-        jgraphics_arc(g, rect->width / 2., rect->width / 2., (rect->width / 2.) * (1./MIN_ZOOM * x->f_zoom_factor),  0., JGRAPHICS_2PI);
-        jgraphics_fill(g);
+        s1 = jgraphics_image_surface_create(JGRAPHICS_FORMAT_ARGB32, int(w), int(w));
+        g2 = jgraphics_create(s1);
         
-        jgraphics_set_source_jrgba(g, &insideColor);
-        jgraphics_arc(g, rect->width / 2., rect->width / 2., (rect->width / 2.) * (1./MIN_ZOOM * x->f_zoom_factor),  0., JGRAPHICS_2PI);
-        jgraphics_fill(g);
-    
+        s2 = jgraphics_image_surface_create(JGRAPHICS_FORMAT_ARGB32, int(w), int(w));
+        g3 = jgraphics_create(s2);
+        
+        jgraphics_set_source_jrgba(g3, &x->f_colorBackgroundInside);
+        jgraphics_set_line_width(g3, 1);
+        jgraphics_arc(g3, w / 2., w / 2., (w / 2.) * (1./MIN_ZOOM * x->f_zoom_factor),  0., JGRAPHICS_2PI);
+        jgraphics_fill(g3);
+        
+        double ecart = x->f_zoom_factor * w / 2.;
+        if(ecart < 10 && ecart >= 5) ecart *= 4;
+        else if(ecart < 5 && ecart > 2.5) ecart *= 8;
+        else if(ecart < 2.5) ecart *= 16;
+        ecart = int(ecart);
+        
+		for(double i = 0; i < w / 2.; i += ecart)
+        {
+            jgraphics_set_line_width(g3, 1);
+            jgraphics_set_source_jrgba(g3, &white);
+            jgraphics_move_to(g3, 0., w / 2. - i);
+            jgraphics_line_to(g3, w, w / 2. - i);
+            jgraphics_move_to(g3, 0., w / 2. + i);
+            jgraphics_line_to(g3, w, w / 2. + i);
+            jgraphics_move_to(g3, w / 2. - i, 0.);
+            jgraphics_line_to(g3, w / 2. - i, w);
+            jgraphics_move_to(g3, w / 2. + i, 0.);
+            jgraphics_line_to(g3, w / 2. + i, w);
+            jgraphics_set_line_width(g3, 1);
+            jgraphics_scale(g3, 0.25, 0.25); // tricks to draw a 0.25 line width
+            jgraphics_stroke(g3);
+            jgraphics_scale(g3, 4, 4);
+            
+            jgraphics_set_line_width(g3, 1);
+            jgraphics_set_source_jrgba(g3, &black);
+            jgraphics_move_to(g3, 0. - 0.5, w / 2. - i - 0.5);
+            jgraphics_line_to(g3, w - 0.5, w / 2. - i - 0.5);
+            jgraphics_move_to(g3, 0. - 0.5, w / 2. + i - 0.5);
+            jgraphics_line_to(g3, w - 0.5, w / 2. + i - 0.5);
+            jgraphics_move_to(g3, w / 2. - i - 0.5, 0. - 0.5);
+            jgraphics_line_to(g3, w / 2. - i - 0.5, w - 0.5);
+            jgraphics_move_to(g3, w / 2. + i - 0.5, 0. - 0.5);
+            jgraphics_line_to(g3, w / 2. + i - 0.5, w - 0.5);
+            jgraphics_set_line_width(g3, 2);
+            jgraphics_scale(g3, 0.25, 0.25);
+            jgraphics_stroke(g3);
+            jgraphics_scale(g3, 4, 4);
+        }
+        
         /* Circles */
-        double radius  = x->f_zoom_factor * rect->width / 10.;
-        //radius = (int)radius;
+        double radius = x->f_zoom_factor * w / 10.;
         for(int i = 5; i > 0; i--)
         {
+            jgraphics_set_line_width(g3, 1);
+            jgraphics_set_source_jrgba(g3, &white);
+            jgraphics_arc(g3, w / 2, w / 2, (double)i * radius - 1,  0., JGRAPHICS_2PI);
+            jgraphics_scale(g3, 0.5, 0.5); // tricks to draw a 0.5 line width
+            jgraphics_stroke(g3);
+            jgraphics_scale(g3, 2, 2);
             
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &insideColor);
-            jgraphics_arc(g, rect->width / 2 - 0.5, rect->width / 2 - 0.5, (double)i * radius,  0., JGRAPHICS_2PI);
-            jgraphics_stroke(g);
-            
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &outsideColor);
-            jgraphics_arc(g, rect->width / 2, rect->width / 2, (double)i * radius,  0., JGRAPHICS_2PI);
-            jgraphics_stroke(g);
-         
+            jgraphics_set_line_width(g3, 2);
+            jgraphics_set_source_jrgba(g3, &black);
+            jgraphics_arc(g3, w / 2 - 0.5, w / 2 - 0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
+            jgraphics_scale(g3, 0.5, 0.5);
+            jgraphics_stroke(g3);
+            jgraphics_scale(g3, 2, 2);
         }
-    
-        double ecart = x->f_zoom_factor * rect->width / 2.;
-        if(ecart < 10 && ecart >= 5)
-            ecart *= 2;
-        else if(ecart < 5 && ecart > 2.5)
-            ecart *= 4;
-        else if(ecart < 2.5)
-            ecart *= 8;
         
-        ecart = (int)ecart;
-		for(double i = 0; i < rect->width / 2.; i += ecart)
-        {
-            jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &insideColor);
-            jgraphics_move_to(g, 0. - 0.5, rect->width / 2. - i - 0.5);
-            jgraphics_line_to(g, rect->width - 0.5, rect->width / 2. - i - 0.5);
-            jgraphics_move_to(g, 0. - 0.5, rect->width / 2. + i - 0.5);
-            jgraphics_line_to(g, rect->width - 0.5, rect->width / 2. + i - 0.5);
-            jgraphics_move_to(g, rect->width / 2. - i - 0.5, 0. - 0.5);
-            jgraphics_line_to(g, rect->width / 2. - i - 0.5, rect->width - 0.5);
-            jgraphics_move_to(g, rect->width / 2. + i - 0.5, 0. - 0.5);
-            jgraphics_line_to(g, rect->width / 2. + i - 0.5, rect->width - 0.5);
-            jgraphics_set_line_width(g, 2);
-            jgraphics_stroke(g);
-            
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &outsideColor);
-            jgraphics_move_to(g, 0., rect->width / 2. - i);
-            jgraphics_line_to(g, rect->width, rect->width / 2. - i);
-            jgraphics_move_to(g, 0., rect->width / 2. + i);
-            jgraphics_line_to(g, rect->width, rect->width / 2. + i);
-            jgraphics_move_to(g, rect->width / 2. - i, 0.);
-            jgraphics_line_to(g, rect->width / 2. - i, rect->width);
-            jgraphics_move_to(g, rect->width / 2. + i, 0.);
-            jgraphics_line_to(g, rect->width / 2. + i, rect->width);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_stroke(g);
-        }
-        jgraphics_set_source_jrgba(g, &outsideColor);
-        outsideColor.alpha = 0.1;
-        jgraphics_set_line_width(g, 2);
-        for(int i = 0; (rect->width / 2.) * (100. * x->f_zoom_factor) + 1 + i < 1.5 * rect->width ; i++)
-        {
-            
-            jgraphics_arc(g, rect->width / 2., rect->width / 2., (rect->width / 2.) * (1./MIN_ZOOM * x->f_zoom_factor) + 3 + i,  0., JGRAPHICS_2PI);
-            jgraphics_stroke(g);
-        }
-        jgraphics_set_source_jrgba(g, &insideColor);
-        insideColor.alpha = 0.1;
-        jgraphics_set_line_width(g, 1);
-        jgraphics_arc(g, rect->width / 2., rect->width / 2., (rect->width / 2.) * (1./MIN_ZOOM * x->f_zoom_factor) + 1.,  0., JGRAPHICS_2PI);
-        jgraphics_stroke(g);
-        for(int i = 0; (rect->width / 2.) * (100. * x->f_zoom_factor) + 1 + i < 1.5 * rect->width ; i++)
-        {
-            jgraphics_arc(g, rect->width / 2., rect->width / 2., (rect->width / 2.) * (1./MIN_ZOOM * x->f_zoom_factor) + 2 + i,  0., JGRAPHICS_2PI);
-            jgraphics_stroke(g);
-        }
+        /* clip jgraphics_3 to circle */
+        jgraphics_destroy(g3);
+        jgraphics_set_source_surface(g2, s2, 0, 0);
+        jgraphics_surface_destroy(s2);
+        jgraphics_arc(g2, w / 2., w / 2., (w / 2.) * (1./MIN_ZOOM * x->f_zoom_factor) - (BORDERTHICK*2),  0., CICM_2PI);
+        jgraphics_fill(g2);
+        
+        /* clip jgraphics_2 to rounded rect */
+        jgraphics_destroy(g2);
+        jgraphics_set_source_surface(g, s1, 0, 0);
+        jgraphics_surface_destroy(s1);
+        jgraphics_rectangle_rounded(g, 0, 0, w, rect->height, CORNERSIZE, CORNERSIZE);
+        jgraphics_fill(g);
         
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
 }
-
 
 void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 {
@@ -1557,8 +1593,6 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 	double fontSize;
 	t_jtextlayout *jtl;
 	t_jrgba sourceColor;
-  
-    t_jrgba selected_color = {0,0,1,0.2};
 	char description[250];
 	double descriptionPositionX;
     double descriptionPositionY;
@@ -1602,7 +1636,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 			
                 if (x->f_index_of_selected_source == i)
                 {
-                    jgraphics_set_source_jrgba(g, &selected_color);
+                    jgraphics_set_source_jrgba(g, &x->f_colorSelection);
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., JGRAPHICS_2PI);
                     jgraphics_fill(g);
                     
@@ -1654,9 +1688,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
 	int i;
 	double fontSize;
 	t_jtextlayout *jtl;
-	t_jrgba sourceColor;
-    
-    t_jrgba selected_color = {0,0,1,0.2};
+	t_jrgba sourceColor;    
 	char description[250] = {0};
 	double descriptionPositionX;
     double descriptionPositionY;
@@ -1698,7 +1730,8 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 
                 if (x->f_index_of_selected_group == i)
                 {
-                    jgraphics_set_source_jrgba(g, &selected_color);
+                    //x->f_colorSelection
+                    jgraphics_set_source_jrgba(g, &x->f_colorSelection);
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., JGRAPHICS_2PI);
                     jgraphics_fill(g);
                     
@@ -1758,9 +1791,13 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
 
 void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 {
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("rect_selection_layer"), rect->width, rect->height);
+	t_jgraphics *g;
+    t_jrgba strokecolor = x->f_colorSelection;
+    strokecolor.alpha = 0.8;
 	t_rect sel;
-	t_jrgba selected_color = {0,0,1,0.2};
+    
+    g = jbox_start_layer((t_object *)x, view, gensym("rect_selection_layer"), rect->width, rect->height);
+    
 	if (g)
     {
 		if (x->f_rect_selection_exist)
@@ -1770,11 +1807,7 @@ void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 			sel.width = x->f_rect_selection.width;
 			sel.height = x->f_rect_selection.height;
 			
-			selected_color.alpha = 0.05;
-			t_jrgba strokecolor = selected_color;
-			strokecolor.alpha = 0.2;
-			
-			jgraphics_set_source_jrgba(g, &selected_color);
+			jgraphics_set_source_jrgba(g, &x->f_colorSelection);
 			jgraphics_rectangle(g, sel.x, sel.y, sel.width, sel.height);
 			jgraphics_fill(g);
 			
@@ -2075,42 +2108,12 @@ void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
         jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
         jbox_redraw((t_jbox *)x);
-	}    
+	}
 }
 
 void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    coordinatesCartesian cursor;
-    cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
-    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.) / x->f_zoom_factor;
-    double ditanceSelected = (x->f_size_source / x->rect.width * 2.) / x->f_zoom_factor;
-    x->f_cursor_position.x = cursor.x;
-    x->f_cursor_position.y = cursor.y;
-    
-    x->f_index_of_selected_source = -1;
-    x->f_index_of_selected_group = -1;
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
-    {
-        if(x->f_source_manager->sourceGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
-        {
-            ditanceSelected = Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y);
-            x->f_index_of_selected_source = i;
-        }
-    }
-    if(x->f_index_of_selected_source == -1)
-    {
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
-        {
-            if(x->f_source_manager->groupGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
-            {
-                ditanceSelected = Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
-                x->f_index_of_selected_group = i;
-            }
-        }
-    }
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
-    jbox_redraw((t_jbox *)x);
+    ;
 }
 
 void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -2143,6 +2146,11 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             }
         }
     }
+    
+    if(x->f_index_of_selected_group >= 0 || x->f_index_of_selected_source >= 0)
+        jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_POINTINGHAND);
+    else jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_ARROW);
+    
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_redraw((t_jbox *)x);
@@ -2151,6 +2159,34 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     ;
+}
+
+long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
+{
+	post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
+    int filter = 0;
+	if (keycode == 97 && modifiers == 1 && textcharacter == 0) // cmd+a -> select all;
+    {
+		int indexOfNewGroup = -1;
+        for(int i = 0; indexOfNewGroup == -1; i++)
+        {
+            if (x->f_source_manager->groupGetExistence(i) == 0)
+            {
+                indexOfNewGroup = i;
+            }
+        }
+        
+        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        {
+            if(x->f_source_manager->sourceGetExistence(i) && indexOfNewGroup >= 0)
+            {
+                x->f_source_manager->groupSetSource(indexOfNewGroup, i);
+                x->f_index_of_selected_group = indexOfNewGroup;
+            }
+        }
+        filter = 1;
+	}
+	return filter;	// returns 1 if you want to filter it from the key object (otherwise return 0)
 }
     
 void hoamap_color_picker(t_hoamap *x)
@@ -2183,7 +2219,6 @@ void hoamap_color_picker(t_hoamap *x)
     
     object_method(x->f_colorpicker, gensym("bang"));
 }
-
 
 void hoamap_text_field(t_hoamap *x)
 {

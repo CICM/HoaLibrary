@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0E3C798F15D8FD6100FD84F6 /* hoa.dac~.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E3C798E15D8FD6100FD84F6 /* hoa.dac~.c */; };
-		0E6C283715C815AB0090858D /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283515C815AB0090858D /* MaxAPI.framework */; };
-		0E6C283815C815AB0090858D /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6C283615C815AB0090858D /* MaxAudioAPI.framework */; };
+		2CFF947F1753731300C7D857 /* MaxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFF947E1753731300C7D857 /* MaxAPI.framework */; };
+		2CFF94811753732200C7D857 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFF94801753732200C7D857 /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0E3C798E15D8FD6100FD84F6 /* hoa.dac~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.dac~.c"; sourceTree = "<group>"; };
-		0E6C283515C815AB0090858D /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../c74support/max-includes/MaxAPI.framework"; sourceTree = SOURCE_ROOT; };
-		0E6C283615C815AB0090858D /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
+		2CFF947E1753731300C7D857 /* MaxAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAPI.framework; path = "../../../../SDKs/MaxSDK-5.1.7/c74support/max-includes/MaxAPI.framework"; sourceTree = "<group>"; };
+		2CFF94801753732200C7D857 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-5.1.7/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.dac~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.dac~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -25,8 +25,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6C283715C815AB0090858D /* MaxAPI.framework in Frameworks */,
-				0E6C283815C815AB0090858D /* MaxAudioAPI.framework in Frameworks */,
+				2CFF94811753732200C7D857 /* MaxAudioAPI.framework in Frameworks */,
+				2CFF947F1753731300C7D857 /* MaxAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +36,8 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				2CFF94801753732200C7D857 /* MaxAudioAPI.framework */,
+				2CFF947E1753731300C7D857 /* MaxAPI.framework */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
@@ -47,8 +49,6 @@
 		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				0E6C283515C815AB0090858D /* MaxAPI.framework */,
-				0E6C283615C815AB0090858D /* MaxAudioAPI.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -183,6 +183,8 @@
 					"\"$(SRCROOT)/../../c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 					"\"$(SRCROOT)/../../c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-5.1.7/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-5.1.7/c74support/msp-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -208,6 +210,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-5.1.7/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-5.1.7/c74support/msp-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				HEADER_SEARCH_PATHS = (

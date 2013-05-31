@@ -27,19 +27,28 @@ protected:
     Ambisonicsvector*   m_vectors;
     
     Cicm_Vector_Double m_loudspeakers_amplitudes;
+    Cicm_Vector_Double m_loudspeakers_peaks;
     Cicm_Vector_Double m_loudspeakers_energies;
     Cicm_Double        m_vector_coordinates_double[4];
     Cicm_Float         m_vector_coordinates_float[4];
     
 public:
-	AmbisonicsMeter(double aConfiguration = 1., long aVectorSize = 0, double aSamplingRate = 44100.);
+	AmbisonicsMeter(long aNumberOfChannel = 1., long aVectorSize = 0, double aSamplingRate = 44100.);
     
-    double       getLoudspeakerAmplitude(long anIndex);
+    void         setNumberOfChannels(long aNumberofChannels);
+    void         setVectorSize(long aVectorSize);
+    void         setLoudspeakerAngle(long anIndex, double anAngle);
+    void         setLoudspeakerAngles(long len, double* angles);
+    
+    double       getLoudspeakerPeaks(long anIndex);
     double       getLoudspeakerEnergy(long anIndex);
     double       getEnergyVectorAbscissa();
     double       getEnergyVectorOrdinate();
+    double       getEnergyVectorAngle();
     double       getVelocityVectorAbscissa();
     double       getVelocityVectorOrdinate();
+    double       getVelocityVectorAngle();
+    std::string  getChannelName(long anIndex);
 
 	~AmbisonicsMeter();
 	
@@ -49,18 +58,11 @@ public:
         for(int i = 0; i < m_number_of_inputs; i++)
         {
             m_loudspeakers_amplitudes[i] = inputs[i][0];
+            m_loudspeakers_peaks[i] = inputs[i][0];
             for(int j = 0; j < m_vector_size; j++)
             {
-                if(fabs(inputs[i][j]) > fabs(m_loudspeakers_amplitudes[i]))
-                    m_loudspeakers_amplitudes[i] = inputs[i][j];
-            }
-        }
-        for(int i = 0; i < m_vector_size; i++)
-        {
-            m_vectors->process(inputs[i], m_vector_coordinates_float);
-            for(int j = 0; j < 4; j++)
-            {
-                m_vector_coordinates_double[j] = m_vector_coordinates_float[j];
+                if(fabs(inputs[i][j]) > fabs(m_loudspeakers_peaks[i]))
+                    m_loudspeakers_peaks[i] = inputs[i][j];
             }
         }
 	}
@@ -71,16 +73,24 @@ public:
         for(int i = 0; i < m_number_of_inputs; i++)
         {
             m_loudspeakers_amplitudes[i] = inputs[i][0];
+            m_loudspeakers_peaks[i] = inputs[i][0];
             for(int j = 0; j < m_vector_size; j++)
             {
-                if(fabs(inputs[i][j]) > fabs(m_loudspeakers_amplitudes[i]))
-                    m_loudspeakers_amplitudes[i] = inputs[i][j];
+                if(fabs(inputs[i][j]) > fabs(m_loudspeakers_peaks[i]))
+                    m_loudspeakers_peaks[i] = inputs[i][j];
             }
         }
-        for(int i = 0; i < m_vector_size; i++)
-        {
-            m_vectors->process(inputs[i], m_vector_coordinates_double);
-        }
+	}
+    
+    inline void processEnergy()
+	{
+        for(int i = 0; i < m_number_of_inputs; i++)
+            m_loudspeakers_energies[i] = 20. * log10(fabs(m_loudspeakers_peaks[i]));
+	}
+    
+    inline void processVectors()
+	{
+        m_vectors->process(m_loudspeakers_amplitudes, m_vector_coordinates_double);
 	}
 };
 
