@@ -48,7 +48,7 @@ private:
 	void computeIndex();
 	void computeWidenVector();
 public:
-	AmbisonicsWider(long anOrderlong, long aVectorSize = 0);
+	AmbisonicsWider(long anOrder = 1, long aVectorSize = 0);
     
     void setWidenValueBoth(double aWidenValue);
 	void setWidenValue(double aWidenValue);

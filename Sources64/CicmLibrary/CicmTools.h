@@ -124,9 +124,9 @@ public:
 		return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}
     
-    template<typename Type> static Type factoriel(Type n)
+    static long double factoriel(long double n)
 	{
-        Type j = 1;
+        long double j = 1;
         for(int i = 1; i <= n; i++)
         {
             j = i * j;

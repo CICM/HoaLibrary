@@ -15,9 +15,12 @@
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
+#define C74_X64
 
 #include "ext.h"
 #include "ext_obex.h"
+
+
 
 typedef struct _hoaChild 
 {	
@@ -59,7 +62,8 @@ void *hoaChild_new(t_symbol *s, int argc, t_atom *argv)
 {
 	//t_hoaChild *x = (t_hoaChild *)object_alloc(hoaChild_class);
     t_hoaChild *x = (t_hoaChild *)class_super_construct(hoaChild_class, argc, argv);
-    object_super_method((t_object *)x, gensym("set_inletnum"), 9);
+    //object_super_method((t_object *)x, gensym("set_inletnum"), 9);
+
     //object_super_method((t_object *)x, gensym("set_inletnum"), 9);
 	return(x);
 }
