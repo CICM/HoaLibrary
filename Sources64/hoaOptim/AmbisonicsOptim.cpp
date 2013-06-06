@@ -19,25 +19,25 @@
 
 #include "AmbisonicsOptim.h"
 
-AmbisonicsOptim::AmbisonicsOptim(long anOrder, std::string anOptimMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsOptim::AmbisonicsOptim(long anOrder, long anOptimMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
 	Cicm_Vector_Float_Malloc(m_optim_vector_float, m_number_of_harmonics);
     Cicm_Vector_Double_Malloc(m_optim_vector_double, m_number_of_harmonics);
 	setOptimMode(anOptimMode);
 }
 
-std::string AmbisonicsOptim::getOptimMode()
+long AmbisonicsOptim::getOptimMode()
 {
     return m_optimMode;
 }
 
-void AmbisonicsOptim::setOptimMode(std::string anOptim)
+void AmbisonicsOptim::setOptimMode(long anOptim)
 {
 	if(anOptim != m_optimMode)
 	{
-		if(anOptim == "inPhase")
+		if(anOptim == Hoa_InPhase_Optim)
 			computeInPhaseOptim();
-		else if(anOptim == "maxRe")
+		else if(anOptim == Hoa_MaxRe_Optim)
 			computeReOptim();
 		else
 			computeBasicOptim();
@@ -50,14 +50,14 @@ void AmbisonicsOptim::setOptimMode(std::string anOptim)
 
 void AmbisonicsOptim::computeBasicOptim()
 {
-	m_optimMode = "basic"; 
+	m_optimMode = Hoa_Basic_Optim;
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 		m_optim_vector_double[i] = 1.;
 }
 
 void AmbisonicsOptim::computeReOptim()
 {
-	m_optimMode = "maxRe";
+	m_optimMode = Hoa_MaxRe_Optim;
 	for (int i = 0; i < m_number_of_harmonics; i++)
 	{
 		if (i == 0)
@@ -70,13 +70,16 @@ void AmbisonicsOptim::computeReOptim()
 
 void AmbisonicsOptim::computeInPhaseOptim()
 {
-	m_optimMode = "inPhase"; 
+	m_optimMode = Hoa_InPhase_Optim;
+
 	for (int i = 0; i < m_number_of_harmonics; i++) 
 	{
 		if (i == 0) 
 			m_optim_vector_double[i] = 1.;
-		else 
-			m_optim_vector_double[i] = pow(Tools::factoriel(m_order), 2) / (Tools::factoriel(m_order+abs(getHarmonicIndex(i))) * Tools::factoriel(m_order-abs(getHarmonicIndex(i))));
+		else
+        {
+			m_optim_vector_double[i] = (long double)(Tools::factoriel(m_order) * (double)Tools::factoriel(m_order)) / (long double)(Tools::factoriel(m_order+getHarmonicOrder(i)) * Tools::factoriel(m_order-getHarmonicOrder(i)));
+        }
 	}
 }
 

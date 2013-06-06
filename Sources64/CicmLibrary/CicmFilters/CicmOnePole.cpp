@@ -17,7 +17,7 @@
  *
  */
 
-#include "AmbisonicOnePole.h"
+#include "CicmOnePole.h"
 
 AmbisonicOnePole::AmbisonicOnePole(double aSamplingRate, long aVectorSize)
 {

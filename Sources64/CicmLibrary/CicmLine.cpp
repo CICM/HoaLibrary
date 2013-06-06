@@ -96,8 +96,6 @@ void CicmLine::setCoefficientAngle(double anAngle)
 void CicmLine::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
-    m_value_step = (m_value_new - m_value_old) / (double)m_ramp;
-    m_counter = 0;
 }
 
 CicmLine::~CicmLine()

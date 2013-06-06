@@ -19,13 +19,21 @@
 #ifndef DEF_AMBISONICSOPTIM
 #define DEF_AMBISONICSOPTIM
 
+enum
+{
+    Hoa_Basic_Optim  = 0,
+    Hoa_MaxRe_Optim,
+    Hoa_InPhase_Optim
+};
+
+
 #include "../HoaAmbisonics/Ambisonics.h"
 
 class AmbisonicsOptim : public Ambisonics
 {
 	
 private:
-	std::string m_optimMode;
+	long m_optimMode;
 	
     Cicm_Vector_Float	m_optim_vector_float;
 	Cicm_Vector_Double	m_optim_vector_double;
@@ -35,9 +43,9 @@ private:
 	void computeInPhaseOptim();
 	
 public:
-	AmbisonicsOptim(long anOrder = 1, std::string anOptimMode = "basic", long aVectorSize = 0);
-	std::string getOptimMode();
-	void setOptimMode(std::string anOptim);
+	AmbisonicsOptim(long anOrder = 1, long anOptimMode = Hoa_InPhase_Optim, long aVectorSize = 0);
+	long getOptimMode();
+	void setOptimMode(long anOptim);
 
 	~AmbisonicsOptim();
 	
