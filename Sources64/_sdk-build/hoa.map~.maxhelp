@@ -154,7 +154,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 135.5, 100.5, 73.0, 19.0 ],
+									"patching_rect" : [ 91.283295, 126.0, 73.0, 19.0 ],
 									"text" : "loadmess 1."
 								}
 
@@ -478,7 +478,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.map~", "@obj-desc", "An", "ambisonic", "multisource", "spatializer" ],
+									"args" : [ "@obj-name", "hoa.map~", "@obj-desc", "An", "ambisonics", "sources", "spatializer" ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -499,7 +499,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 2.5, 67.5, 602.5, 47.0 ],
-									"text" : "hoa.map~ allows you to use signal in the first and second inlets when there's one source to encode. It can be useful if you want to be set very fast movements. You can switch between polar (default) and cartesian coordinates, and use floats values.",
+									"text" : "hoa.map~ allows you to use signal in the first and second inlets when there's one source to encode (like ambipan~). It can be useful if you want to create fast movements. You can switch between polar (default) and cartesian coordinates, and use floats values.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -1137,7 +1137,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 96.0, 20.5, 79.0, 20.0 ],
+					"patching_rect" : [ 96.0, 20.5, 83.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -1151,7 +1151,7 @@
 						"tags" : ""
 					}
 ,
-					"text" : "p one_souce",
+					"text" : "p one_source",
 					"textcolor" : [ 0.209184, 0.209184, 0.209184, 1.0 ],
 					"varname" : "q_tab[2]"
 				}
@@ -1502,7 +1502,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 438.75, 130.5, 58.0, 19.0 ],
+									"patching_rect" : [ 464.25, 130.5, 58.0, 19.0 ],
 									"text" : "loadbang"
 								}
 
@@ -1531,11 +1531,11 @@
 									"outlettype" : [ "signal", "signal" ],
 									"patching_rect" : [ 151.5, 511.0, 236.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0 ],
+										"angles" : [ 90.0, 270.0, 270.0, 270.0, 270.0 ],
 										"config" : 5.1,
 										"loudspeakers" : 8,
 										"ls" : 8,
-										"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0 ],
+										"ls_angles" : [ 90.0, 270.0, 270.0, 270.0, 270.0 ],
 										"mode" : "binaural",
 										"offset" : 0.0,
 										"pinnaesize" : "small",
@@ -1587,7 +1587,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 464.25, 163.0, 146.0, 146.0 ],
-									"sources_parameters" : [ "source", 0, 0.034146, 1.038034, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.969742, 0.027317, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.006829, -0.915109, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, -0.956084, 0.0, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, 0.038636, 0.971426, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.855517, 0.022078, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.005519, -0.838959, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, -1.043179, 0.022078, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
 									"zoom" : 0.620469
 								}
@@ -1670,7 +1670,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.map~", "@obj-desc", "An", "ambisonic", "multisource", "spatializer" ],
+									"args" : [ "@obj-name", "hoa.map~", "@obj-desc", "An", "ambisonics", "sources", "spatializer" ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -1690,8 +1690,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 2.5, 68.5, 643.0, 47.0 ],
-									"text" : "hoa.map~ is an ambisonics encoder that uses fractionnal orders and amplitude variation to simulate sources distances.  First argument is the order and second argument is the number of sources (default 1, look at one_source tab). Link with the UI object hoa.map, sound spatialisation become very easy.",
+									"patching_rect" : [ 2.5, 68.5, 647.0, 47.0 ],
+									"text" : "hoa.map~ is an ambisonics encoder that uses fractionnal orders and amplitude variation to simulate sources distances.  First argument is the order and second argument is the number of sources (default 1, look at one_source tab). Link with the UI object hoa.map, source spatialization become very easy.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -2172,7 +2172,7 @@
 									"destination" : [ "obj-29", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 502.75, 509.0, 397.5, 509.0, 397.5, 212.0, 378.0, 212.0 ],
+									"midpoints" : [ 502.75, 519.0, 397.5, 519.0, 397.5, 212.0, 378.0, 212.0 ],
 									"source" : [ "obj-49", 0 ]
 								}
 
@@ -2290,7 +2290,7 @@
 						"lines" : [  ]
 					}
 ,
-					"patching_rect" : [ 161.0, 20.5, 50.0, 20.0 ],
+					"patching_rect" : [ 179.0, 20.5, 50.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
