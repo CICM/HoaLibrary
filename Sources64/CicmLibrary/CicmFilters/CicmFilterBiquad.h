@@ -106,6 +106,19 @@ public:
         }
 	}
     
+    inline void processCurOffFrequency(float* inputs, float* outputs, float* aCutoffFrequency)
+	{
+        for(int i = 0; i < m_vector_size; i++)
+        {
+            if(m_type == Cicm_Biquad_Ambisonics)
+                inputs[i] *= m_weight;
+            setCutoffFrequency(aCutoffFrequency[i]);
+            outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
+            m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
+            m_delay_two = inputs[i] * m_coeff_a2 - m_coeff_b2 * outputs[i];
+        }
+	}
+    
 	inline void process(double* inputs, double* outputs)
 	{
         for(int i = 0; i < m_vector_size; i++)
@@ -125,6 +138,19 @@ public:
             if(m_type == Cicm_Biquad_Ambisonics)
                 inputs[i] *= m_weight;
             setAll(aCutoffFrequency[i], aQValue[i], aGain[i]);
+            outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
+            m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
+            m_delay_two = inputs[i] * m_coeff_a2 - m_coeff_b2 * outputs[i];
+        }
+	}
+    
+    inline void processCurOffFrequency(double* inputs, double* outputs, double* aCutoffFrequency)
+	{
+        for(int i = 0; i < m_vector_size; i++)
+        {
+            if(m_type == Cicm_Biquad_Ambisonics)
+                inputs[i] *= m_weight;
+            setCutoffFrequency(aCutoffFrequency[i]);
             outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
             m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
             m_delay_two = inputs[i] * m_coeff_a2 - m_coeff_b2 * outputs[i];

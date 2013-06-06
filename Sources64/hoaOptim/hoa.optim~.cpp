@@ -99,8 +99,6 @@ void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
             object_method(x, gensym("optim"), 1, atom_getsym(argv+1)->s_name);
         
         attr_args_process(x, argc, argv);
-        for(int i = 1; i < 15; i++)
-            post("%i %i", i, (Tools::factoriel(i) * Tools::factoriel(i)));
 	}
 	return (x);
 }
