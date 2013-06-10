@@ -86,7 +86,8 @@ void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
-			
+        
+        x->f_optim_mode = gensym("inPhase");
 		x->f_AmbisonicsOptim	= new AmbisonicsOptim(order, Hoa_InPhase_Optim, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicsOptim->getNumberOfInputs());

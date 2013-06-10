@@ -3,49 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
-		2CA6EFE7172928BD00957BC2 /* AmbisonicFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFD7172928BD00957BC2 /* AmbisonicFreeverb.cpp */; };
-		2CA6EFE8172928BD00957BC2 /* AmbisonicFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFD8172928BD00957BC2 /* AmbisonicFreeverb.h */; };
-		2CA6EFE9172928BD00957BC2 /* AmbisonicRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFD9172928BD00957BC2 /* AmbisonicRecomposer.cpp */; };
-		2CA6EFEA172928BD00957BC2 /* AmbisonicRecomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFDA172928BD00957BC2 /* AmbisonicRecomposer.h */; };
-		2CA6EFEB172928BD00957BC2 /* cicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFDB172928BD00957BC2 /* cicmDefine.h */; };
-		2CA6EFEC172928BD00957BC2 /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFDC172928BD00957BC2 /* cicmTools.h */; };
-		2CA6EFED172928BD00957BC2 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFDD172928BD00957BC2 /* gslMatrix.cpp */; };
-		2CA6EFEE172928BD00957BC2 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFDE172928BD00957BC2 /* gslMatrix.hpp */; };
+		2CA6EFE7172928BD00957BC2 /* AmbisonicsFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFD7172928BD00957BC2 /* AmbisonicsFreeverb.cpp */; };
+		2CA6EFE8172928BD00957BC2 /* AmbisonicsFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFD8172928BD00957BC2 /* AmbisonicsFreeverb.h */; };
 		2CA6EFEF172928BD00957BC2 /* hoa.freeverb~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFDF172928BD00957BC2 /* hoa.freeverb~.cpp */; };
-		2CA6EFF0172928BD00957BC2 /* revAllpassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFE0172928BD00957BC2 /* revAllpassFilter.cpp */; };
-		2CA6EFF1172928BD00957BC2 /* revAllpassFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFE1172928BD00957BC2 /* revAllpassFilter.h */; };
-		2CA6EFF2172928BD00957BC2 /* revCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFE2172928BD00957BC2 /* revCombFilter.cpp */; };
-		2CA6EFF3172928BD00957BC2 /* revCombFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFE3172928BD00957BC2 /* revCombFilter.h */; };
-		2CA6EFF4172928BD00957BC2 /* revFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFE4172928BD00957BC2 /* revFreeverb.cpp */; };
-		2CA6EFF5172928BD00957BC2 /* revFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFE5172928BD00957BC2 /* revFreeverb.h */; };
-		2CA6EFF6172928BD00957BC2 /* revTuning.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFE6172928BD00957BC2 /* revTuning.h */; };
+		8F43573C1764622500FFA649 /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4357321764622500FFA649 /* Ambisonics.cpp */; };
+		8F43573D1764622500FFA649 /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4357331764622500FFA649 /* Ambisonics.h */; };
+		8F4357471764624400FFA649 /* CicmFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4357441764624400FFA649 /* CicmFreeverb.cpp */; };
+		8F4357481764624400FFA649 /* CicmFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4357451764624400FFA649 /* CicmFreeverb.h */; };
+		8F4357491764624400FFA649 /* CicmTuning.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4357461764624400FFA649 /* CicmTuning.h */; };
+		8F43575B1764635800FFA649 /* CicmFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F43574B1764635800FFA649 /* CicmFilter.cpp */; };
+		8F43575C1764635800FFA649 /* CicmFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F43574C1764635800FFA649 /* CicmFilter.h */; };
+		8F43575D1764635800FFA649 /* CicmFilterAllpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F43574D1764635800FFA649 /* CicmFilterAllpass.cpp */; };
+		8F43575E1764635800FFA649 /* CicmFilterAllpass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F43574E1764635800FFA649 /* CicmFilterAllpass.h */; };
+		8F4357611764635800FFA649 /* CicmFilterComb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4357511764635800FFA649 /* CicmFilterComb.cpp */; };
+		8F4357621764635800FFA649 /* CicmFilterComb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4357521764635800FFA649 /* CicmFilterComb.h */; };
+		8F43576C17646ADC00FFA649 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F43576B17646ADC00FFA649 /* Accelerate.framework */; };
+		8F43576E17646AEF00FFA649 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F43576D17646AEF00FFA649 /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2CA6EFD7172928BD00957BC2 /* AmbisonicFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicFreeverb.cpp; sourceTree = "<group>"; };
-		2CA6EFD8172928BD00957BC2 /* AmbisonicFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicFreeverb.h; sourceTree = "<group>"; };
-		2CA6EFD9172928BD00957BC2 /* AmbisonicRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicRecomposer.cpp; sourceTree = "<group>"; };
-		2CA6EFDA172928BD00957BC2 /* AmbisonicRecomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicRecomposer.h; sourceTree = "<group>"; };
-		2CA6EFDB172928BD00957BC2 /* cicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmDefine.h; sourceTree = "<group>"; };
-		2CA6EFDC172928BD00957BC2 /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmTools.h; sourceTree = "<group>"; };
-		2CA6EFDD172928BD00957BC2 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
-		2CA6EFDE172928BD00957BC2 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
+		2CA6EFD7172928BD00957BC2 /* AmbisonicsFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsFreeverb.cpp; sourceTree = "<group>"; };
+		2CA6EFD8172928BD00957BC2 /* AmbisonicsFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsFreeverb.h; sourceTree = "<group>"; };
 		2CA6EFDF172928BD00957BC2 /* hoa.freeverb~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.freeverb~.cpp"; sourceTree = "<group>"; };
-		2CA6EFE0172928BD00957BC2 /* revAllpassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = revAllpassFilter.cpp; sourceTree = "<group>"; };
-		2CA6EFE1172928BD00957BC2 /* revAllpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revAllpassFilter.h; sourceTree = "<group>"; };
-		2CA6EFE2172928BD00957BC2 /* revCombFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = revCombFilter.cpp; sourceTree = "<group>"; };
-		2CA6EFE3172928BD00957BC2 /* revCombFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revCombFilter.h; sourceTree = "<group>"; };
-		2CA6EFE4172928BD00957BC2 /* revFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = revFreeverb.cpp; sourceTree = "<group>"; };
-		2CA6EFE5172928BD00957BC2 /* revFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revFreeverb.h; sourceTree = "<group>"; };
-		2CA6EFE6172928BD00957BC2 /* revTuning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revTuning.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.freeverb~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.freeverb~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4357321764622500FFA649 /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonics.cpp; sourceTree = "<group>"; };
+		8F4357331764622500FFA649 /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonics.h; sourceTree = "<group>"; };
+		8F4357441764624400FFA649 /* CicmFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFreeverb.cpp; sourceTree = "<group>"; };
+		8F4357451764624400FFA649 /* CicmFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFreeverb.h; sourceTree = "<group>"; };
+		8F4357461764624400FFA649 /* CicmTuning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTuning.h; sourceTree = "<group>"; };
+		8F43574B1764635800FFA649 /* CicmFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilter.cpp; sourceTree = "<group>"; };
+		8F43574C1764635800FFA649 /* CicmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilter.h; sourceTree = "<group>"; };
+		8F43574D1764635800FFA649 /* CicmFilterAllpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterAllpass.cpp; sourceTree = "<group>"; };
+		8F43574E1764635800FFA649 /* CicmFilterAllpass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterAllpass.h; sourceTree = "<group>"; };
+		8F4357511764635800FFA649 /* CicmFilterComb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterComb.cpp; sourceTree = "<group>"; };
+		8F4357521764635800FFA649 /* CicmFilterComb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterComb.h; sourceTree = "<group>"; };
+		8F43576B17646ADC00FFA649 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F43576D17646AEF00FFA649 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */,
+				8F43576E17646AEF00FFA649 /* MaxAudioAPI.framework in Frameworks */,
+				8F43576C17646ADC00FFA649 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +63,8 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
+				8F43576D17646AEF00FFA649 /* MaxAudioAPI.framework */,
+				8F43576B17646ADC00FFA649 /* Accelerate.framework */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
@@ -83,21 +85,11 @@
 			isa = PBXGroup;
 			children = (
 				2CA6EFDF172928BD00957BC2 /* hoa.freeverb~.cpp */,
-				2CA6EFD7172928BD00957BC2 /* AmbisonicFreeverb.cpp */,
-				2CA6EFD8172928BD00957BC2 /* AmbisonicFreeverb.h */,
-				2CA6EFD9172928BD00957BC2 /* AmbisonicRecomposer.cpp */,
-				2CA6EFDA172928BD00957BC2 /* AmbisonicRecomposer.h */,
-				2CA6EFDB172928BD00957BC2 /* cicmDefine.h */,
-				2CA6EFDC172928BD00957BC2 /* cicmTools.h */,
-				2CA6EFDD172928BD00957BC2 /* gslMatrix.cpp */,
-				2CA6EFDE172928BD00957BC2 /* gslMatrix.hpp */,
-				2CA6EFE0172928BD00957BC2 /* revAllpassFilter.cpp */,
-				2CA6EFE1172928BD00957BC2 /* revAllpassFilter.h */,
-				2CA6EFE2172928BD00957BC2 /* revCombFilter.cpp */,
-				2CA6EFE3172928BD00957BC2 /* revCombFilter.h */,
-				2CA6EFE4172928BD00957BC2 /* revFreeverb.cpp */,
-				2CA6EFE5172928BD00957BC2 /* revFreeverb.h */,
-				2CA6EFE6172928BD00957BC2 /* revTuning.h */,
+				2CA6EFD7172928BD00957BC2 /* AmbisonicsFreeverb.cpp */,
+				2CA6EFD8172928BD00957BC2 /* AmbisonicsFreeverb.h */,
+				8F4357311764622500FFA649 /* hoaAmbisonics */,
+				8F4357431764624400FFA649 /* CicmReverb */,
+				8F43574A1764635800FFA649 /* CicmFilters */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -110,6 +102,41 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8F4357311764622500FFA649 /* hoaAmbisonics */ = {
+			isa = PBXGroup;
+			children = (
+				8F4357321764622500FFA649 /* Ambisonics.cpp */,
+				8F4357331764622500FFA649 /* Ambisonics.h */,
+			);
+			name = hoaAmbisonics;
+			path = ../hoaAmbisonics;
+			sourceTree = "<group>";
+		};
+		8F4357431764624400FFA649 /* CicmReverb */ = {
+			isa = PBXGroup;
+			children = (
+				8F4357441764624400FFA649 /* CicmFreeverb.cpp */,
+				8F4357451764624400FFA649 /* CicmFreeverb.h */,
+				8F4357461764624400FFA649 /* CicmTuning.h */,
+			);
+			name = CicmReverb;
+			path = ../CicmLibrary/CicmReverb;
+			sourceTree = "<group>";
+		};
+		8F43574A1764635800FFA649 /* CicmFilters */ = {
+			isa = PBXGroup;
+			children = (
+				8F43574B1764635800FFA649 /* CicmFilter.cpp */,
+				8F43574C1764635800FFA649 /* CicmFilter.h */,
+				8F43574D1764635800FFA649 /* CicmFilterAllpass.cpp */,
+				8F43574E1764635800FFA649 /* CicmFilterAllpass.h */,
+				8F4357511764635800FFA649 /* CicmFilterComb.cpp */,
+				8F4357521764635800FFA649 /* CicmFilterComb.h */,
+			);
+			name = CicmFilters;
+			path = ../CicmLibrary/CicmFilters;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -117,15 +144,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CA6EFE8172928BD00957BC2 /* AmbisonicFreeverb.h in Headers */,
-				2CA6EFEA172928BD00957BC2 /* AmbisonicRecomposer.h in Headers */,
-				2CA6EFEB172928BD00957BC2 /* cicmDefine.h in Headers */,
-				2CA6EFEC172928BD00957BC2 /* cicmTools.h in Headers */,
-				2CA6EFEE172928BD00957BC2 /* gslMatrix.hpp in Headers */,
-				2CA6EFF1172928BD00957BC2 /* revAllpassFilter.h in Headers */,
-				2CA6EFF3172928BD00957BC2 /* revCombFilter.h in Headers */,
-				2CA6EFF5172928BD00957BC2 /* revFreeverb.h in Headers */,
-				2CA6EFF6172928BD00957BC2 /* revTuning.h in Headers */,
+				2CA6EFE8172928BD00957BC2 /* AmbisonicsFreeverb.h in Headers */,
+				8F43573D1764622500FFA649 /* Ambisonics.h in Headers */,
+				8F4357481764624400FFA649 /* CicmFreeverb.h in Headers */,
+				8F4357491764624400FFA649 /* CicmTuning.h in Headers */,
+				8F43575C1764635800FFA649 /* CicmFilter.h in Headers */,
+				8F43575E1764635800FFA649 /* CicmFilterAllpass.h in Headers */,
+				8F4357621764635800FFA649 /* CicmFilterComb.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,8 +181,11 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.freeverb~" */;
-			compatibilityVersion = "Xcode 3.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -200,13 +228,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CA6EFE7172928BD00957BC2 /* AmbisonicFreeverb.cpp in Sources */,
-				2CA6EFE9172928BD00957BC2 /* AmbisonicRecomposer.cpp in Sources */,
-				2CA6EFED172928BD00957BC2 /* gslMatrix.cpp in Sources */,
+				2CA6EFE7172928BD00957BC2 /* AmbisonicsFreeverb.cpp in Sources */,
 				2CA6EFEF172928BD00957BC2 /* hoa.freeverb~.cpp in Sources */,
-				2CA6EFF0172928BD00957BC2 /* revAllpassFilter.cpp in Sources */,
-				2CA6EFF2172928BD00957BC2 /* revCombFilter.cpp in Sources */,
-				2CA6EFF4172928BD00957BC2 /* revFreeverb.cpp in Sources */,
+				8F43573C1764622500FFA649 /* Ambisonics.cpp in Sources */,
+				8F4357471764624400FFA649 /* CicmFreeverb.cpp in Sources */,
+				8F43575B1764635800FFA649 /* CicmFilter.cpp in Sources */,
+				8F43575D1764635800FFA649 /* CicmFilterAllpass.cpp in Sources */,
+				8F4357611764635800FFA649 /* CicmFilterComb.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +244,7 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -234,7 +261,7 @@
 					"-latlas",
 					"-lm",
 				);
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = "i386 x86_64";
@@ -244,8 +271,7 @@
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/Developer/usr/include,
@@ -262,7 +288,7 @@
 					"-latlas",
 					"-lm",
 				);
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				VALID_ARCHS = "i386 x86_64";
@@ -273,29 +299,34 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.freeverb~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -306,28 +337,34 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.freeverb~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -344,7 +381,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -353,7 +390,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};

@@ -33,8 +33,6 @@ private:
 	double*		m_harmonicSin;
 	double*		m_harmonicCos;
 	
-	void	computeIndex();
-	
 public:
 	AmbisonicsRotate(long anOrder = 1, long aVectorSize = 0);
 	

@@ -19,7 +19,7 @@
 
 #include "AmbisonicMultiMaps.h"
 
-AmbisonicsMultiMaps::AmbisonicsMultiMaps(long anOrder, long aNumberOfSources, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsMultiMaps::AmbisonicsMultiMaps(long anOrder, long aNumberOfSources,long aRampSample, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
     m_number_of_sources     = Tools::clip(aNumberOfSources, (long)1, (long)64);
     if(m_number_of_sources != 1)

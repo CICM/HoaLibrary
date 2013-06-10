@@ -211,12 +211,12 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 24.0, 274.0, 242.0, 19.0 ],
+									"patching_rect" : [ 24.0, 275.0, 242.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"optim" : "maxRe"
 									}
 ,
-									"text" : "hoa.optim~ 7 @optim inPhase"
+									"text" : "hoa.optim~ 7 @optim maxRe"
 								}
 
 							}
@@ -231,7 +231,8 @@
 									"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
-									"numoutlets" : 0,
+									"numoutlets" : 2,
+									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 24.0, 342.0, 242.0, 242.0 ]
 								}
 

@@ -8,40 +8,46 @@
 
 /* Begin PBXBuildFile section */
 		22CF119E0EE9A82E0054F513 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */; };
-		2CA6F00517292D5700957BC2 /* AmbisonicGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFF717292D5700957BC2 /* AmbisonicGigaverb.cpp */; };
-		2CA6F00617292D5700957BC2 /* AmbisonicGigaverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFF817292D5700957BC2 /* AmbisonicGigaverb.h */; };
-		2CA6F00717292D5700957BC2 /* AmbisonicRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFF917292D5700957BC2 /* AmbisonicRecomposer.cpp */; };
-		2CA6F00817292D5700957BC2 /* AmbisonicRecomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFFA17292D5700957BC2 /* AmbisonicRecomposer.h */; };
-		2CA6F00917292D5700957BC2 /* cicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFFB17292D5700957BC2 /* cicmDefine.h */; };
-		2CA6F00A17292D5700957BC2 /* cicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFFC17292D5700957BC2 /* cicmTools.h */; };
-		2CA6F00B17292D5700957BC2 /* gslMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFFD17292D5700957BC2 /* gslMatrix.cpp */; };
-		2CA6F00C17292D5700957BC2 /* gslMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFFE17292D5700957BC2 /* gslMatrix.hpp */; };
+		2CA6F00517292D5700957BC2 /* AmbisonicsGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFF717292D5700957BC2 /* AmbisonicsGigaverb.cpp */; };
+		2CA6F00617292D5700957BC2 /* AmbisonicsGigaverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6EFF817292D5700957BC2 /* AmbisonicsGigaverb.h */; };
 		2CA6F00D17292D5700957BC2 /* hoa.gigaverb~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6EFFF17292D5700957BC2 /* hoa.gigaverb~.cpp */; };
-		2CA6F00E17292D5700957BC2 /* revDamper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6F00017292D5700957BC2 /* revDamper.h */; };
-		2CA6F00F17292D5700957BC2 /* revDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6F00117292D5700957BC2 /* revDiffuser.h */; };
-		2CA6F01017292D5700957BC2 /* revFixedDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6F00217292D5700957BC2 /* revFixedDelay.h */; };
-		2CA6F01117292D5700957BC2 /* revGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA6F00317292D5700957BC2 /* revGigaverb.cpp */; };
-		2CA6F01217292D5700957BC2 /* revGigaverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA6F00417292D5700957BC2 /* revGigaverb.h */; };
+		8FF823BB1765E26800814996 /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF823B11765E26800814996 /* Ambisonics.cpp */; };
+		8FF823BC1765E26800814996 /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823B21765E26800814996 /* Ambisonics.h */; };
+		8FF823E41765E27900814996 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823C31765E27900814996 /* CicmDefine.h */; };
+		8FF823E71765E27900814996 /* CicmFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF823C81765E27900814996 /* CicmFilter.cpp */; };
+		8FF823E81765E27900814996 /* CicmFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823C91765E27900814996 /* CicmFilter.h */; };
+		8FF823F71765E27900814996 /* revDamper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823D81765E27900814996 /* revDamper.h */; };
+		8FF823F81765E27900814996 /* revDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823D91765E27900814996 /* revDiffuser.h */; };
+		8FF823F91765E27900814996 /* CicmFilterFixedDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823DA1765E27900814996 /* CicmFilterFixedDelay.h */; };
+		8FF823FC1765E27900814996 /* CicmFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF823DE1765E27900814996 /* CicmFreeverb.cpp */; };
+		8FF823FD1765E27900814996 /* CicmFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823DF1765E27900814996 /* CicmFreeverb.h */; };
+		8FF823FE1765E27900814996 /* CicmTuning.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823E01765E27900814996 /* CicmTuning.h */; };
+		8FF823FF1765E27900814996 /* CicmGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF823E11765E27900814996 /* CicmGigaverb.cpp */; };
+		8FF824001765E27900814996 /* CicmGigaverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823E21765E27900814996 /* CicmGigaverb.h */; };
+		8FF824011765E27900814996 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF823E31765E27900814996 /* CicmTools.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
-		2CA6EFF717292D5700957BC2 /* AmbisonicGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicGigaverb.cpp; sourceTree = "<group>"; };
-		2CA6EFF817292D5700957BC2 /* AmbisonicGigaverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicGigaverb.h; sourceTree = "<group>"; };
-		2CA6EFF917292D5700957BC2 /* AmbisonicRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicRecomposer.cpp; sourceTree = "<group>"; };
-		2CA6EFFA17292D5700957BC2 /* AmbisonicRecomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicRecomposer.h; sourceTree = "<group>"; };
-		2CA6EFFB17292D5700957BC2 /* cicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmDefine.h; sourceTree = "<group>"; };
-		2CA6EFFC17292D5700957BC2 /* cicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cicmTools.h; sourceTree = "<group>"; };
-		2CA6EFFD17292D5700957BC2 /* gslMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gslMatrix.cpp; sourceTree = "<group>"; };
-		2CA6EFFE17292D5700957BC2 /* gslMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gslMatrix.hpp; sourceTree = "<group>"; };
+		2CA6EFF717292D5700957BC2 /* AmbisonicsGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsGigaverb.cpp; sourceTree = "<group>"; };
+		2CA6EFF817292D5700957BC2 /* AmbisonicsGigaverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsGigaverb.h; sourceTree = "<group>"; };
 		2CA6EFFF17292D5700957BC2 /* hoa.gigaverb~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.gigaverb~.cpp"; sourceTree = "<group>"; };
-		2CA6F00017292D5700957BC2 /* revDamper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revDamper.h; sourceTree = "<group>"; };
-		2CA6F00117292D5700957BC2 /* revDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revDiffuser.h; sourceTree = "<group>"; };
-		2CA6F00217292D5700957BC2 /* revFixedDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revFixedDelay.h; sourceTree = "<group>"; };
-		2CA6F00317292D5700957BC2 /* revGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = revGigaverb.cpp; sourceTree = "<group>"; };
-		2CA6F00417292D5700957BC2 /* revGigaverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revGigaverb.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.gigaverb~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.gigaverb~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FF823B11765E26800814996 /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonics.cpp; sourceTree = "<group>"; };
+		8FF823B21765E26800814996 /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonics.h; sourceTree = "<group>"; };
+		8FF823C31765E27900814996 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
+		8FF823C81765E27900814996 /* CicmFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilter.cpp; sourceTree = "<group>"; };
+		8FF823C91765E27900814996 /* CicmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilter.h; sourceTree = "<group>"; };
+		8FF823D81765E27900814996 /* revDamper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revDamper.h; sourceTree = "<group>"; };
+		8FF823D91765E27900814996 /* revDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revDiffuser.h; sourceTree = "<group>"; };
+		8FF823DA1765E27900814996 /* CicmFilterFixedDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterFixedDelay.h; sourceTree = "<group>"; };
+		8FF823DE1765E27900814996 /* CicmFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFreeverb.cpp; sourceTree = "<group>"; };
+		8FF823DF1765E27900814996 /* CicmFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFreeverb.h; sourceTree = "<group>"; };
+		8FF823E01765E27900814996 /* CicmTuning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTuning.h; sourceTree = "<group>"; };
+		8FF823E11765E27900814996 /* CicmGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmGigaverb.cpp; sourceTree = "<group>"; };
+		8FF823E21765E27900814996 /* CicmGigaverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmGigaverb.h; sourceTree = "<group>"; };
+		8FF823E31765E27900814996 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
+				8FF823C21765E27900814996 /* CicmLibrary */,
+				8FF823B01765E26800814996 /* hoaAmbisonics */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
@@ -78,20 +86,9 @@
 		08FB77ADFE841716C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2CA6EFF717292D5700957BC2 /* AmbisonicGigaverb.cpp */,
-				2CA6EFF817292D5700957BC2 /* AmbisonicGigaverb.h */,
-				2CA6EFF917292D5700957BC2 /* AmbisonicRecomposer.cpp */,
-				2CA6EFFA17292D5700957BC2 /* AmbisonicRecomposer.h */,
-				2CA6EFFB17292D5700957BC2 /* cicmDefine.h */,
-				2CA6EFFC17292D5700957BC2 /* cicmTools.h */,
-				2CA6EFFD17292D5700957BC2 /* gslMatrix.cpp */,
-				2CA6EFFE17292D5700957BC2 /* gslMatrix.hpp */,
+				2CA6EFF717292D5700957BC2 /* AmbisonicsGigaverb.cpp */,
+				2CA6EFF817292D5700957BC2 /* AmbisonicsGigaverb.h */,
 				2CA6EFFF17292D5700957BC2 /* hoa.gigaverb~.cpp */,
-				2CA6F00017292D5700957BC2 /* revDamper.h */,
-				2CA6F00117292D5700957BC2 /* revDiffuser.h */,
-				2CA6F00217292D5700957BC2 /* revFixedDelay.h */,
-				2CA6F00317292D5700957BC2 /* revGigaverb.cpp */,
-				2CA6F00417292D5700957BC2 /* revGigaverb.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -104,6 +101,52 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8FF823B01765E26800814996 /* hoaAmbisonics */ = {
+			isa = PBXGroup;
+			children = (
+				8FF823B11765E26800814996 /* Ambisonics.cpp */,
+				8FF823B21765E26800814996 /* Ambisonics.h */,
+			);
+			name = hoaAmbisonics;
+			path = ../hoaAmbisonics;
+			sourceTree = "<group>";
+		};
+		8FF823C21765E27900814996 /* CicmLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				8FF823C31765E27900814996 /* CicmDefine.h */,
+				8FF823C71765E27900814996 /* CicmFilters */,
+				8FF823DD1765E27900814996 /* CicmReverb */,
+				8FF823E31765E27900814996 /* CicmTools.h */,
+			);
+			name = CicmLibrary;
+			path = ../CicmLibrary;
+			sourceTree = "<group>";
+		};
+		8FF823C71765E27900814996 /* CicmFilters */ = {
+			isa = PBXGroup;
+			children = (
+				8FF823C81765E27900814996 /* CicmFilter.cpp */,
+				8FF823C91765E27900814996 /* CicmFilter.h */,
+				8FF823D81765E27900814996 /* revDamper.h */,
+				8FF823D91765E27900814996 /* revDiffuser.h */,
+				8FF823DA1765E27900814996 /* CicmFilterFixedDelay.h */,
+			);
+			path = CicmFilters;
+			sourceTree = "<group>";
+		};
+		8FF823DD1765E27900814996 /* CicmReverb */ = {
+			isa = PBXGroup;
+			children = (
+				8FF823DE1765E27900814996 /* CicmFreeverb.cpp */,
+				8FF823DF1765E27900814996 /* CicmFreeverb.h */,
+				8FF823E01765E27900814996 /* CicmTuning.h */,
+				8FF823E11765E27900814996 /* CicmGigaverb.cpp */,
+				8FF823E21765E27900814996 /* CicmGigaverb.h */,
+			);
+			path = CicmReverb;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -111,15 +154,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CA6F00617292D5700957BC2 /* AmbisonicGigaverb.h in Headers */,
-				2CA6F00817292D5700957BC2 /* AmbisonicRecomposer.h in Headers */,
-				2CA6F00917292D5700957BC2 /* cicmDefine.h in Headers */,
-				2CA6F00A17292D5700957BC2 /* cicmTools.h in Headers */,
-				2CA6F00C17292D5700957BC2 /* gslMatrix.hpp in Headers */,
-				2CA6F00E17292D5700957BC2 /* revDamper.h in Headers */,
-				2CA6F00F17292D5700957BC2 /* revDiffuser.h in Headers */,
-				2CA6F01017292D5700957BC2 /* revFixedDelay.h in Headers */,
-				2CA6F01217292D5700957BC2 /* revGigaverb.h in Headers */,
+				2CA6F00617292D5700957BC2 /* AmbisonicsGigaverb.h in Headers */,
+				8FF823BC1765E26800814996 /* Ambisonics.h in Headers */,
+				8FF823E41765E27900814996 /* CicmDefine.h in Headers */,
+				8FF823E81765E27900814996 /* CicmFilter.h in Headers */,
+				8FF823F71765E27900814996 /* revDamper.h in Headers */,
+				8FF823F81765E27900814996 /* revDiffuser.h in Headers */,
+				8FF823F91765E27900814996 /* CicmFilterFixedDelay.h in Headers */,
+				8FF823FD1765E27900814996 /* CicmFreeverb.h in Headers */,
+				8FF823FE1765E27900814996 /* CicmTuning.h in Headers */,
+				8FF824001765E27900814996 /* CicmGigaverb.h in Headers */,
+				8FF824011765E27900814996 /* CicmTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,11 +239,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CA6F00517292D5700957BC2 /* AmbisonicGigaverb.cpp in Sources */,
-				2CA6F00717292D5700957BC2 /* AmbisonicRecomposer.cpp in Sources */,
-				2CA6F00B17292D5700957BC2 /* gslMatrix.cpp in Sources */,
+				2CA6F00517292D5700957BC2 /* AmbisonicsGigaverb.cpp in Sources */,
 				2CA6F00D17292D5700957BC2 /* hoa.gigaverb~.cpp in Sources */,
-				2CA6F01117292D5700957BC2 /* revGigaverb.cpp in Sources */,
+				8FF823BB1765E26800814996 /* Ambisonics.cpp in Sources */,
+				8FF823E71765E27900814996 /* CicmFilter.cpp in Sources */,
+				8FF823FC1765E27900814996 /* CicmFreeverb.cpp in Sources */,
+				8FF823FF1765E27900814996 /* CicmGigaverb.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,19 +321,14 @@
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.gigaverb~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -307,19 +348,14 @@
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"\"$(C74SUPPORT)/max-includes\"",
 					"\"$(C74SUPPORT)/msp-includes\"",
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.gigaverb~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -336,7 +372,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -345,7 +381,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};

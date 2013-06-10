@@ -1,17 +1,17 @@
 /*
- * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
+ * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot & Eliott Paris, Universite Paris 8
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Library General Public License as published
  * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
  * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
@@ -35,7 +35,7 @@ private:
     double   m_azimuth[64];
 
 public:
-	AmbisonicsMultiMaps(long anOrder = 1, long aNumberOfSources = 1, long aVectorSize = 0);
+	AmbisonicsMultiMaps(long anOrder = 1, long aNumberOfSources = 1, long aRampSample = 4410, long aVectorSize = 0, long aSamplingRate = 0);
     
 
     long     getNumberOfSources();
@@ -91,7 +91,7 @@ public:
 	/******** Perform block sample *********/
     /***************************************/
     
-	void process(float** aInputs, float** aOutputs)
+	inline void process(float** aInputs, float** aOutputs)
 	{        
 		if(m_first_source >= 0)
         {
@@ -104,7 +104,7 @@ public:
         }
 	}
     
-    void process(double** aInputs, double** aOutputs)
+    inline void process(double** aInputs, double** aOutputs)
 	{
 		if(m_first_source != m_number_of_sources)
         {
@@ -121,84 +121,84 @@ public:
     /* One Source Perform sample by sample */
     /***************************************/
     
-    void processCartesian(float aInputs, float* aOutputs, float anAbscissa, float anOrdinate)
+    inline void processCartesian(float aInputs, float* aOutputs, float anAbscissa, float anOrdinate)
 	{
         m_maps[0]->setCoordinatesCartesian(anAbscissa, anOrdinate);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processPolar(float aInputs, float* aOutputs, float aRadius, float anAzimuth)
+    inline void processPolar(float aInputs, float* aOutputs, float aRadius, float anAzimuth)
 	{
          m_maps[0]->setCoordinatesPolar(aRadius, anAzimuth);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processCartesian(double aInputs, double* aOutputs, double anAbscissa, double anOrdinate)
+    inline void processCartesian(double aInputs, double* aOutputs, double anAbscissa, double anOrdinate)
 	{
         m_maps[0]->setCoordinatesCartesian(anAbscissa, anOrdinate);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processPolar(double aInputs, double* aOutputs, double aRadius, double anAzimuth)
+    inline void processPolar(double aInputs, double* aOutputs, double aRadius, double anAzimuth)
 	{
         m_maps[0]->setCoordinatesPolar(aRadius, anAzimuth);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processRadius(float aInputs, float* aOutputs, float aRadius)
+    inline void processRadius(float aInputs, float* aOutputs, float aRadius)
 	{
         m_maps[0]->setCoordinatesRadius(aRadius);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processAzimuth(float aInputs, float* aOutputs, float anAzimuth)
+    inline void processAzimuth(float aInputs, float* aOutputs, float anAzimuth)
 	{
         m_maps[0]->setCoordinatesAzimuth(anAzimuth);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processRadius(double aInputs, double* aOutputs, double aRadius)
+    inline void processRadius(double aInputs, double* aOutputs, double aRadius)
 	{
         m_maps[0]->setCoordinatesRadius(aRadius);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processAzimuth(double aInputs, double* aOutputs, double anAzimuth)
+    inline void processAzimuth(double aInputs, double* aOutputs, double anAzimuth)
 	{
         m_maps[0]->setCoordinatesAzimuth(anAzimuth);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processAbscissa(float aInputs, float* aOutputs, float anAbscissa)
+    inline void processAbscissa(float aInputs, float* aOutputs, float anAbscissa)
 	{
         m_maps[0]->setCoordinatesAbscissa(anAbscissa);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processOrdinate(float aInputs, float* aOutputs, float anOrdinate)
+    inline void processOrdinate(float aInputs, float* aOutputs, float anOrdinate)
 	{
         m_maps[0]->setCoordinatesOrdinate(anOrdinate);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processAbscissa(double aInputs, double* aOutputs, double anAbscissa)
+    inline void processAbscissa(double aInputs, double* aOutputs, double anAbscissa)
 	{
         m_maps[0]->setCoordinatesAbscissa(anAbscissa);
         if(!m_mute[0])
             m_maps[0]->process(aInputs, aOutputs);
     }
     
-    void processOrdinate(double aInputs, double* aOutputs, double anOrdinate)
+    inline void processOrdinate(double aInputs, double* aOutputs, double anOrdinate)
 	{
         m_maps[0]->setCoordinatesOrdinate(anOrdinate);
         if(!m_mute[0])
@@ -209,72 +209,72 @@ public:
     /*** One Source Perform block sample ***/
     /***************************************/
     
-    void processCartesian(float* aInputs, float** aOutputs, float* anAbscissa, float* anOrdinate)
+    inline void processCartesian(float* aInputs, float** aOutputs, float* anAbscissa, float* anOrdinate)
 	{
         if(!m_mute[0])
             m_maps[0]->processCartesian(aInputs, aOutputs, anAbscissa, anOrdinate);
     }
     
-    void processPolar(float* aInputs, float** aOutputs, float* aRadius, float* anAzimuth)
+    inline void processPolar(float* aInputs, float** aOutputs, float* aRadius, float* anAzimuth)
 	{
         if(!m_mute[0])
             m_maps[0]->processPolar(aInputs, aOutputs, aRadius, anAzimuth);
     }
     
-    void processCartesian(double* aInputs, double** aOutputs, double* anAbscissa, double* anOrdinate)
+    inline void processCartesian(double* aInputs, double** aOutputs, double* anAbscissa, double* anOrdinate)
 	{
         if(!m_mute[0])
             m_maps[0]->processCartesian(aInputs, aOutputs, anAbscissa, anOrdinate);
     }
     
-    void processPolar(double* aInputs, double** aOutputs, double* aRadius, double* anAzimuth)
+    inline void processPolar(double* aInputs, double** aOutputs, double* aRadius, double* anAzimuth)
 	{
         if(!m_mute[0])
             m_maps[0]->processPolar(aInputs, aOutputs, aRadius, anAzimuth);
     }
     
-    void processRadius(float* aInputs, float** aOutputs, float* aRadius)
+    inline void processRadius(float* aInputs, float** aOutputs, float* aRadius)
 	{
         if(!m_mute[0])
             m_maps[0]->processRadius(aInputs, aOutputs, aRadius);
     }
     
-    void processAzimuth(float* aInputs, float** aOutputs, float* anAzimuth)
+    inline void processAzimuth(float* aInputs, float** aOutputs, float* anAzimuth)
 	{
         if(!m_mute[0])
             m_maps[0]->processAzimuth(aInputs, aOutputs, anAzimuth);
     }
     
-    void processRadius(double* aInputs, double** aOutputs, double* aRadius)
+    inline void processRadius(double* aInputs, double** aOutputs, double* aRadius)
 	{
         if(!m_mute[0])
             m_maps[0]->processRadius(aInputs, aOutputs, aRadius);
     }
     
-    void processAzimuth(double* aInputs, double** aOutputs, double* anAzimuth)
+    inline void processAzimuth(double* aInputs, double** aOutputs, double* anAzimuth)
 	{
         if(!m_mute[0])
             m_maps[0]->processAzimuth(aInputs, aOutputs, anAzimuth);
     }
-    void processAbscissa(float* aInputs, float** aOutputs, float* anAbscissa)
+    inline void processAbscissa(float* aInputs, float** aOutputs, float* anAbscissa)
 	{
         if(!m_mute[0])
             m_maps[0]->processAbscissa(aInputs, aOutputs, anAbscissa);
     }
     
-    void processOrdinate(float* aInputs, float** aOutputs, float* anOrdinate)
+    inline void processOrdinate(float* aInputs, float** aOutputs, float* anOrdinate)
 	{
         if(!m_mute[0])
             m_maps[0]->processOrdinate(aInputs, aOutputs, anOrdinate);
     }
     
-    void processAbscissa(double* aInputs, double** aOutputs, double* anAbscissa)
+    inline void processAbscissa(double* aInputs, double** aOutputs, double* anAbscissa)
 	{
         if(!m_mute[0])
             m_maps[0]->processAbscissa(aInputs, aOutputs, anAbscissa);
     }
     
-    void processOrdinate(double* aInputs, double** aOutputs, double* anOrdinate)
+    inline void processOrdinate(double* aInputs, double** aOutputs, double* anOrdinate)
 	{
         if(!m_mute[0])
             m_maps[0]->processOrdinate(aInputs, aOutputs, anOrdinate);
