@@ -229,7 +229,7 @@ void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void
 			long current_nb_selected = 0;
 			
 			object_attr_getvalueof(sender, attrname, &current_nb_selected, &av);
-			if (current_nb_selected && av) 
+			if (current_nb_selected && av)
 			{				
 				// on supprime tous les objets du tableau qui ne sont plus dans la selection
 				if(x->f_nbSelected < 0)
