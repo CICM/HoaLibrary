@@ -21,7 +21,7 @@
 #define DEF_AMBISONICSMAP
 
 #include "../CicmLibrary/CicmLine.h"
-#include "../CicmLibrary/CicmFilters/CicmFilterBiquad.h"
+#include "../CicmLibrary/CicmFilters/CicmFilterOnePole.h"
 #include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaEncoder/AmbisonicsEncoder.h"
 #include "../hoaWider/AmbisonicsWider.h"
@@ -33,7 +33,7 @@ private:
     AmbisonicsWider*    m_wider;
     
     bool                m_air_absorption;
-    FilterBiquad*       m_biquad;
+    FilterOnePole*      m_low_pass_filter;
     Cicm_Vector_Double  m_frequency_double;
     Cicm_Vector_Float   m_frequency_float;
     
@@ -70,7 +70,7 @@ private:
     Cicm_Vector_Float   m_ordinate_float;
     
 public:
-	AmbisonicsMap(long anOrder = 1, long aVectorSize = 0, long aRampSample = 4410);
+	AmbisonicsMap(long anOrder = 1, long aRampSample = 4410, long aVectorSize = 0, long aSamplingRate = 44100);
     
     void setCoordinatesPolar(double aRadius, double anAzimuth);
     void setCoordinatesRadius(double aRadius);
@@ -87,6 +87,7 @@ public:
     void setCoordinatesOrdinateLine(double anOrdinate);
     
     void setVectorSize(long aVectorSize);
+    void setSamplingRate(long aSamplingRate);
     void setRamp(long aNumberOfSample);
     long getRamp();
     
@@ -101,7 +102,7 @@ public:
         float signal;
         setCoordinatesPolar(m_line_one->process(), m_line_two->process());
         if(m_air_absorption)
-            signal = m_biquad->process(aInputs * m_gain);
+            signal = m_low_pass_filter->process(aInputs * m_gain);
         else
             signal = aInputs * m_gain;
         
@@ -114,7 +115,7 @@ public:
         double signal;
         setCoordinatesPolar(m_line_one->process(), m_line_two->process());
         if(m_air_absorption)
-            signal = m_biquad->process(aInputs * m_gain);
+            signal = m_low_pass_filter->process(aInputs * m_gain);
         else
             signal = aInputs * m_gain;
         
@@ -127,7 +128,7 @@ public:
         float signal;
         setCoordinatesPolar(m_line_one->process(), m_line_two->process());
 		if(m_air_absorption)
-            signal = m_biquad->process(aInputs * m_gain);
+            signal = m_low_pass_filter->process(aInputs * m_gain);
         else
             signal = aInputs * m_gain;
         
@@ -141,7 +142,7 @@ public:
         double signal;
         setCoordinatesPolar(m_line_one->process(), m_line_two->process());
 		if(m_air_absorption)
-            signal = m_biquad->process(aInputs * m_gain);
+            signal = m_low_pass_filter->process(aInputs * m_gain);
         else
             signal = aInputs * m_gain;
         
@@ -200,7 +201,9 @@ public:
 		m_encoder->process(m_gains_float, m_harmonics_matrix_float, m_azimuth_float);
         m_wider->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_radius_float);
         for(int i = 0; i < m_number_of_harmonics; i++)
+        {
             Cicm_Vector_Float_Add(m_harmonics_matrix_float[i], aOutputs[i], m_vector_size);
+        }
 	}
     
     inline void processAdd(double* aInputs, double** aOutputs)

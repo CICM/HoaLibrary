@@ -98,7 +98,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SAVE             (c, "mode", 1);
     
     /* Ambisonics Mode */
-    CLASS_ATTR_LONG             (c, "loudspeakers", 0, t_HoaDecode, f_number_of_ambisonics_loudspeakers);
+    CLASS_ATTR_LONG             (c, "loudspeakers", 0, t_HoaVector, f_number_of_ambisonics_loudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "loudspeakers", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "loudspeakers", 0, "Number of Loudspeakers");
 	CLASS_ATTR_ACCESSORS		(c, "loudspeakers", NULL, loudspeakers_set);
@@ -106,21 +106,12 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SAVE             (c, "loudspeakers", 1);
     CLASS_ATTR_ALIAS            (c, "loudspeakers", "ls");
     
-    CLASS_ATTR_DOUBLE           (c, "offset", 0, t_HoaDecode, f_offset_of_ambisonics_loudspeakers);
+    CLASS_ATTR_DOUBLE           (c, "offset", 0, t_HoaVector, f_offset_of_ambisonics_loudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "offset", 0, "Offset of Loudspeakers");
 	CLASS_ATTR_ACCESSORS		(c, "offset", NULL, offset_set);
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
 	CLASS_ATTR_SAVE             (c, "offset", 1);
-    
-    /* Binaural */
-    CLASS_ATTR_SYM              (c, "pinnaesize", 0, t_HoaDecode, f_pinna_size);
-	CLASS_ATTR_CATEGORY			(c, "pinnaesize", 0, "Behavior");
-    CLASS_ATTR_LABEL            (c, "pinnaesize", 0, "Pinnae Size");
-    CLASS_ATTR_ENUM             (c, "pinnaesize", 0, "small large");
-	CLASS_ATTR_ACCESSORS		(c, "pinnaesize", NULL, pinnaesize_set);
-    CLASS_ATTR_ORDER            (c, "pinnaesize", 0, "4");
-    CLASS_ATTR_SAVE             (c, "pinnaesize", 1);
     
     CLASS_ATTR_DOUBLE               (c, "config", 0, t_HoaVector, f_configuration_of_loudspeakers);
 	CLASS_ATTR_CATEGORY             (c, "config", 0, "Behavior");

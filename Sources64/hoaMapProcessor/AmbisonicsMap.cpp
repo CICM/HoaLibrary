@@ -19,7 +19,7 @@
 
 #include "AmbisonicsMap.h"
 
-AmbisonicsMap::AmbisonicsMap(long anOrder, long aVectorSize, long aRampSample) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsMap::AmbisonicsMap(long anOrder, long aRampSample, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
 	m_number_of_inputs		= 1;
 
@@ -29,6 +29,8 @@ AmbisonicsMap::AmbisonicsMap(long anOrder, long aVectorSize, long aRampSample) :
     m_line_two  = new CicmLine(aRampSample);
     m_line_thr  = new CicmLine(aRampSample);
     m_line_fou  = new CicmLine(aRampSample);
+    m_low_pass_filter    = new FilterOnePole(m_sampling_rate);
+    m_low_pass_filter->setCutOffFrequency(m_sampling_rate / 2.);
     
     Cicm_Vector_Float_Malloc(m_harmonics_float, m_number_of_harmonics);
     Cicm_Vector_Double_Malloc(m_harmonics_double, m_number_of_harmonics);
@@ -72,6 +74,7 @@ void AmbisonicsMap::setVectorSize(long aVectorSize)
     m_line_two->setVectorSize(m_vector_size);
     m_line_thr->setVectorSize(m_vector_size);
     m_line_fou->setVectorSize(m_vector_size);
+    m_low_pass_filter->setVectorSize(m_vector_size);
     
     Cicm_Free(m_gains_double);
     Cicm_Free(m_gains_float);
@@ -102,6 +105,11 @@ void AmbisonicsMap::setVectorSize(long aVectorSize)
     }
 }
 
+void AmbisonicsMap::setSamplingRate(long aSamplingRate)
+{
+    m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
+    m_low_pass_filter->setSamplingRate(aSamplingRate);
+}
 
 void AmbisonicsMap::setCoordinatesPolar(double aRadius, double anAzimuth)
 {
@@ -110,10 +118,12 @@ void AmbisonicsMap::setCoordinatesPolar(double aRadius, double anAzimuth)
     {
         m_gain = 1.;
         m_wide = m_radius;
+        m_low_pass_filter->setCutOffFrequency(m_sampling_rate / 2.);
     }
     else
     {
         m_gain = 1. / (m_radius * m_radius);
+        m_low_pass_filter->setCutOffFrequency(1000. + (m_sampling_rate / 2.) -  (m_sampling_rate / 2.) * (m_radius * m_radius) / 1225.);
         m_wide = 1.;
     }
    
@@ -211,6 +221,7 @@ AmbisonicsMap::~AmbisonicsMap()
     delete m_line_two;
     delete m_line_thr;
     delete m_line_fou;
+    delete m_low_pass_filter;
     
     Cicm_Free(m_abscissa_double);
     Cicm_Free(m_abscissa_float);

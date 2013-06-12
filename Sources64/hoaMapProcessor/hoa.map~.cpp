@@ -25,7 +25,6 @@ extern "C"
 	#include "z_dsp.h"
 }
 
-
 typedef struct _HoaMap 
 {
 	t_pxobject				f_ob;
@@ -71,7 +70,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)HoaMap_assist,      "assist",	A_CANT,  0);
     class_addmethod(c, (method)HoaMap_list,        "list",      A_GIMME, 0);
     class_addmethod(c, (method)HoaMap_float,       "float",     A_FLOAT);
-    class_addmethod(c, (method)HoaMap_int,          "int",      A_LONG);
+    class_addmethod(c, (method)HoaMap_int,         "int",       A_LONG);
     
     CLASS_ATTR_SYM              (c, "mode", 0, t_HoaMap, f_mode);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
@@ -110,7 +109,7 @@ void *HoaMap_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv+1) == A_LONG)
 			numberOfSources = atom_getlong(argv+1);
         
-		x->f_maps	= new AmbisonicsMultiMaps(order, numberOfSources, sys_getblksize());
+		x->f_maps	= new AmbisonicsMultiMaps(order, numberOfSources, 4410, sys_getblksize(), sys_getsr());
         dsp_setup((t_pxobject *)x, x->f_maps->getNumberOfInputs());
         
 		for (int i = 0; i < x->f_maps->getNumberOfOutputs(); i++) 

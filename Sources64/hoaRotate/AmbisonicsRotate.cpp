@@ -22,11 +22,10 @@ AmbisonicsRotate::AmbisonicsRotate(long anOrder, long aVectorSize) : Ambisonics(
 {
 	m_number_of_inputs		= m_number_of_harmonics + 1;
 	
-	m_harmonicCos = new double[m_order];
-	m_harmonicSin = new double[m_order];
-	computeIndex();
-	m_cosLookUp = new double[NUMBEROFCIRCLEPOINTS];
-	m_sinLookUp = new double[NUMBEROFCIRCLEPOINTS];
+	m_harmonicCos   = new double[m_order];
+	m_harmonicSin   = new double[m_order];
+	m_cosLookUp     = new double[NUMBEROFCIRCLEPOINTS];
+	m_sinLookUp     = new double[NUMBEROFCIRCLEPOINTS];
 	
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS; i++) 
 	{
@@ -36,17 +35,6 @@ AmbisonicsRotate::AmbisonicsRotate(long anOrder, long aVectorSize) : Ambisonics(
 	setAzimuth(0.);
 }
 
-void AmbisonicsRotate::computeIndex()
-{
-	m_index_of_harmonics	= new long[m_number_of_harmonics ];
-	m_index_of_harmonics[0] = 0;
-	for(int i = 1; i < m_number_of_harmonics; i++)
-	{
-		m_index_of_harmonics[i] = floor((float)((i - 1) / 2)) + 1;
-		if (i % 2 == 1) 
-			m_index_of_harmonics[i] = - m_index_of_harmonics[i];
-	}
-}
 
 double AmbisonicsRotate::getAzimuth()
 {
@@ -79,5 +67,4 @@ AmbisonicsRotate::~AmbisonicsRotate()
 	delete m_harmonicSin;
 	delete m_sinLookUp;
 	delete m_cosLookUp;
-	delete m_index_of_harmonics;
 }

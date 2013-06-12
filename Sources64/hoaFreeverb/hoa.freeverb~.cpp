@@ -18,7 +18,7 @@
  *
  */
 
-#include "AmbisonicFreeverb.h"
+#include "AmbisonicsFreeverb.h"
 
 extern "C" 
 {
@@ -33,23 +33,28 @@ extern "C"
 typedef struct _freeverb
 {
 	t_pxobject          f_ob;	
-	AmbisonicFreeverb	*f_freeverb;
+	AmbisonicsFreeverb	*f_freeverb;
 	long                f_freeze;
 	float               f_size;
 	float               f_damp;
     float               f_dry;
 	float               f_wet;
+    float               f_first_spread;
+    float               f_late_spread;
 }
 t_freeverb ;
 
 void *freeverb_new(t_symbol *s, long argc, t_atom *argv);
 void freeverb_free(t_freeverb *x);
 void freeverb_assist(t_freeverb *x, void *b, long m, long a, char *s);
+void freeverb_spread(t_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
 
 t_max_err size_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
 t_max_err damp_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
 t_max_err dry_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
 t_max_err wet_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
+t_max_err first_spread_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
+t_max_err late_spread_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
 t_max_err freeze_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
 
 void freeverb_dsp(t_freeverb *x, t_signal **sp, short *count);
@@ -69,6 +74,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)freeverb_dsp,		"dsp",			A_CANT, 0);
 	class_addmethod(c, (method)freeverb_dsp64,		"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)freeverb_assist,		"assist",		A_CANT, 0);
+    class_addmethod(c, (method)freeverb_spread,		"spread",		A_GIMME, 0);
     
 	CLASS_ATTR_FLOAT			(c, "size", 0, t_freeverb, f_size);
 	CLASS_ATTR_CATEGORY			(c, "size", 0, "Parameters");
@@ -106,6 +112,22 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_FILTER_MIN		(c, "wet", 0);
 	CLASS_ATTR_SAVE				(c, "wet", 1);
 
+    CLASS_ATTR_FLOAT			(c, "fspread", 0, t_freeverb, f_first_spread);
+	CLASS_ATTR_CATEGORY			(c, "fspread", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "fspread", 0, "First spread");
+	CLASS_ATTR_ORDER			(c, "fspread", 0, "5");
+	CLASS_ATTR_ACCESSORS		(c, "fspread", NULL, first_spread_set);
+	CLASS_ATTR_DEFAULT			(c, "fspread", 0, "0.");
+	CLASS_ATTR_SAVE				(c, "fspread", 1);
+    
+    CLASS_ATTR_FLOAT			(c, "lspread", 0, t_freeverb, f_late_spread);
+	CLASS_ATTR_CATEGORY			(c, "lspread", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "lspread", 0, "Late spread");
+	CLASS_ATTR_ORDER			(c, "lspread", 0, "6");
+	CLASS_ATTR_ACCESSORS		(c, "lspread", NULL, late_spread_set);
+	CLASS_ATTR_DEFAULT			(c, "lspread", 0, "0.");
+	CLASS_ATTR_SAVE				(c, "lspread", 1);
+    
 	CLASS_ATTR_LONG				(c, "freeze", 0, t_freeverb, f_freeze);
 	CLASS_ATTR_CATEGORY			(c, "freeze", 0, "Behaviors");
 	CLASS_ATTR_STYLE_LABEL		(c, "freeze", 0, "onoff", "Freeze");
@@ -132,7 +154,7 @@ void *freeverb_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG)
 			anOrder = atom_getlong(argv);
 
-		x->f_freeverb = new AmbisonicFreeverb(anOrder);
+		x->f_freeverb = new AmbisonicsFreeverb(anOrder);
 		
 		dsp_setup((t_pxobject *)x, x->f_freeverb->getNumberOfInputs());
 		for (int i = 0; i < x->f_freeverb->getNumberOfOutputs(); i++)
@@ -176,16 +198,7 @@ void freeverb_perform64(t_freeverb *x, t_object *dsp64, double **ins, long numin
 
 void freeverb_assist(t_freeverb *x, void *b, long m, long a, char *s)
 {
-    long harmonicIndex = 0;
-	if (a == 0)
-		harmonicIndex = 0;
-	else
-	{
-		harmonicIndex = (a - 1) / 2 + 1;
-		if (a % 2 == 1)
-			harmonicIndex = - harmonicIndex;
-	}
-	sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
+	sprintf(s,"(Signal) %s", x->f_freeverb->getHarmonicsName(a).c_str());
 }
 
 void freeverb_free(t_freeverb *x)
@@ -237,6 +250,34 @@ t_max_err wet_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv)
 		x->f_freeverb->setWetValue(atom_getfloat(argv));
     
 	x->f_wet = x->f_freeverb->getWetValue();
+	return 0;
+}
+
+t_max_err first_spread_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_LONG)
+		x->f_freeverb->setDirectionalSpread(atom_getlong(argv));
+	else if(atom_gettype(argv) == A_FLOAT)
+		x->f_freeverb->setDirectionalSpread(atom_getfloat(argv));
+    
+	x->f_first_spread = x->f_freeverb->getDirectionalSpread();
+	return 0;
+}
+
+void freeverb_spread(t_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+{
+    object_method(x, gensym("fspread"), argc, argv);
+    object_method(x, gensym("lspread"), argc, argv);
+}
+
+t_max_err late_spread_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_LONG)
+		x->f_freeverb->setDiffuseSpread(atom_getlong(argv));
+	else if(atom_gettype(argv) == A_FLOAT)
+		x->f_freeverb->setDiffuseSpread(atom_getfloat(argv));
+    
+	x->f_late_spread = x->f_freeverb->getDiffuseSpread();
 	return 0;
 }
 

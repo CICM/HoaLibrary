@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 660.0, 85.0, 616.0, 721.0 ],
+		"rect" : [ 100.0, 100.0, 616.0, 721.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -1363,7 +1363,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 660.0, 111.0, 616.0, 695.0 ],
+						"rect" : [ 100.0, 126.0, 616.0, 695.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1863,8 +1863,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 334.5, 215.0, 62.0, 19.0 ],
-									"text" : "hoa.pi~ 2."
+									"patching_rect" : [ 334.5, 215.0, 65.0, 19.0 ],
+									"text" : "hoa.pi~ 2.."
 								}
 
 							}
@@ -2086,7 +2086,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-17", 0 ],
+									"destination" : [ "obj-17", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-27", 0 ]
