@@ -17,47 +17,37 @@
  *
  */
 
-#ifndef DEF_CICMFILTERFIXEDDELAY
-#define DEF_CICMFILTERFIXEDDELAY
+#ifndef DEF_FILTERFIXEDDELAY
+#define DEF_FILTERFIXEDDELAY
 
-class FilterFixedDelay
+#include "CicmFilter.h"
+
+class FilterFixedDelay : public Filter
 {
 private :
-	long	m_size;
+	double*	m_buffer;
+	long	m_buffer_size;
+    long	m_buffer_size_max;
 	long	m_ramp;
-	double* m_buffer;
 
 public:
-	inline FixedDelay(long aSize)
-    {
-        m_size = aSize;
-        m_ramp = 0;
-        m_buffer = new double[m_size];
-        flush();
-    }
+	FilterFixedDelay(long aBufferSize);
+    void	setBufferSizeMax(long aBufferSize);
+    long	getBufferSizeMax();
+    void	setBufferSize(long aBufferSize);
+    long	getBufferSize();
+    ~FilterFixedDelay();
     
     inline double read(long anIndex)
     {
-        return m_buffer[(m_ramp - anIndex + m_size) % m_size];
+        return m_buffer[(m_ramp - anIndex + m_buffer_size) % m_buffer_size];
     }
     
     inline void write(double aValue)
     {
         m_buffer[m_ramp] = aValue;
-        if (++m_ramp >= m_size)
+        if (++m_ramp >= m_buffer_size)
             m_ramp = 0;
-    }
-    
-    
-    inline ~FixedDelay()
-    {
-        delete[] m_buffer;
-    }
-    
-    inline void flush()
-    {
-        for(int i = 0; i < m_size; i++)
-            m_buffer[i] = 0.;
     }
 };
 

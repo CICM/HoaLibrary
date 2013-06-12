@@ -17,45 +17,36 @@
  *
  */
 
-#ifndef DEF_DAMPER
-#define DEF_DAMPER
+#ifndef DEF_FILTERDAMPER
+#define DEF_FILTERDAMPER
 
-class Damper
+#include "CicmFilter.h"
+
+class FilterDamper : public Filter
 {
 private:
-	double m_damping;
-	double m_delay;
+	double m_coefficient;
+	double m_buffer;
 
 public:
-	inline Damper(double aDamping);
-	inline void flush();
-	inline void set(double aDamping);
-	inline double process(double aValue);
-	inline ~Damper(){};
+	FilterDamper(double aCoefficient) : Filter()
+    {
+        setCoefficient(aCoefficient);
+    }
+    
+	void setCoefficient(double aCoefficient)
+    {
+        m_coefficient = Tools::clip(aCoefficient, 0., 1.);
+    }
+    
+	inline double process(double aValue)
+    {
+        m_buffer = aValue * (1. - m_coefficient) + m_buffer * m_coefficient;
+        return(m_buffer);
+    }
+    
+	~FilterDamper(){};
 };
-
-inline Damper::Damper(double aDamping)
-{
-	m_damping = aDamping;
-	flush();
-}
-
-inline void Damper::flush()
-{
-	m_delay = 0.0f;
-}
-
-inline void Damper::set(double aDamping)
-{ 
-	m_damping = aDamping;
-} 
-  
-inline double Damper::process(double aValue)
-{ 
-	m_delay = aValue * (1. - m_damping) + m_delay * m_damping;
-	return(m_delay);
-}
-
 
 
 #endif

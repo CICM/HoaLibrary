@@ -17,53 +17,44 @@
  *
  */
 
-#ifndef DEF_DIFFUSER
-#define DEF_DIFFUSER
+#ifndef DEF_FILTERDIFFUSER
+#define DEF_FILTERDIFFUSER
 
-class Diffuser
+#include "CicmFilter.h"
+
+class FilterDiffuser : public Filter
 {
 private:
-	long	m_size;
-	double	m_Coefficient;
-	long	m_ramp;
+    double	m_coefficient;
+    
 	double*	m_buffer;
+	long	m_buffer_size;
+    long	m_buffer_size_max;
+	long	m_ramp;
 
 public:
-	inline Diffuser(long aSize, double aCoefficient);
-	inline void flush();
-	inline double process(double aValue);
-	inline ~Diffuser();
+	FilterDiffuser(long aBufferSize, double aCoefficient);
+    void	setCoefficient(double aCoefficient);
+    double  getCoefficient();
+    void	setBufferSizeMax(long aBufferSize);
+    long	getBufferSizeMax();
+    void	setBufferSize(long aBufferSize);
+    long	getBufferSize();
+    ~FilterDiffuser();
+    
+	inline double process(double aValue)
+    {
+        double w = aValue - m_buffer[m_ramp] * m_coefficient;
+        double y = m_buffer[m_ramp] + w * m_coefficient;
+        m_buffer[m_ramp] = w;
+        if (++m_ramp >= m_buffer_size)
+            m_ramp = 0;
+        
+        return y;
+    }
+    
+	
 };
 
-inline Diffuser::Diffuser(long aSize, double aCoefficient)
-{
-	m_size			= aSize;
-	m_Coefficient	= aCoefficient;
-	m_ramp			= 0;
-	m_buffer		= new double[m_size];
-	flush();
-}
-
-inline double Diffuser::process(double aValue)
-{
-	double w = aValue - m_buffer[m_ramp] * m_Coefficient;
-	double y = m_buffer[m_ramp] + w * m_Coefficient;
-	m_buffer[m_ramp] = w;
-	if (++m_ramp >= m_size) 
-		m_ramp = 0;
-
-	return y;
-}
-
-inline Diffuser :: ~Diffuser()
-{
-	delete[] m_buffer;
-}
-
-inline void Diffuser::flush()
-{
-	for(int i = 0; i < m_size; i++)
-		m_buffer[i] = 0.;
-}
 
 #endif

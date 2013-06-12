@@ -20,10 +20,9 @@
 #ifndef DEF_GIGAVERB
 #define DEF_GIGAVERB
 
-#include "cicmTools.h"
-#include "revDamper.h"
-#include "revDiffuser.h"
-#include "revFixedDelay.h"
+#include "../CicmFilters/CicmFilterDiffuser.h"
+#include "../CicmFilters/CicmFilterFixedDelay.h"
+#include "../CicmFilters/CicmFilterDamper.h"
 
 #define FDNORDER 4
 #define REV_MAXROOMSIZE 300.
@@ -31,7 +30,7 @@
 class Gigaverb
 {
 protected:
-
+    long		m_vector_size;
 	long		m_sampling_rate;
 	double		m_tail_level;
 	double		m_early_level;
@@ -41,28 +40,28 @@ protected:
 	double		m_damping_value;
 	double		m_bandwidth;
 	
-	Damper*		m_input_damper;
+	FilterDamper*	m_input_damper;
 	
-	FixedDelay* m_tap_delay;
+	FilterFixedDelay* m_tap_delay;
 	int			m_tap_times[FDNORDER];
 	double		m_tap_gains[FDNORDER];
 	
-	FixedDelay* m_fdn_delays[FDNORDER];
+	FilterFixedDelay* m_fdn_delays[FDNORDER];
 	int			m_fdn_times[FDNORDER];
 	double		m_fdn_gains[FDNORDER];
 	
-	Damper*		m_fdn_damps[FDNORDER]; 
+	FilterDamper*		m_fdn_damps[FDNORDER];
 	double		m_fdn_damping;
 	
-	Diffuser*	m_diffusers[FDNORDER];
+	FilterDiffuser*	m_diffusers[FDNORDER];
 
 	double alpha;
 public:
 
-	Gigaverb(long aMode = 0, double aFactor = 0.854046, double aSamplingRate = 44100., double aRoomsize = 50., double revtime = 7., double damping = 0.5, double spread = 15., double inputbandwidth = 0.5, double earlylevel = 1., double taillevel = 1.);
+	Gigaverb(long aVectorSize = 0., double aSamplingRate = 44100., double aRoomsize = 50., double revtime = 7., double damping = 0.5, double spread = 15., double inputbandwidth = 0.5, double earlylevel = 1., double taillevel = 1.);
 	
-	void flush();
-	void clear();
+	void	setVectorSize(long aVectorSize);
+    void	setSamplingRate(long aSamplingRate);
 
 	void setRoomSize(double aRoomSize);
 	double getRoomSize();
@@ -76,6 +75,7 @@ public:
 	double getEarlyLevel();
 	void setTailLevel(double aValue);
 	double getTailLevel();
+    
     
     inline double perform(double anInput)
     {

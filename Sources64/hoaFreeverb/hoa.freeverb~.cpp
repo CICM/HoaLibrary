@@ -155,7 +155,21 @@ void *freeverb_new(t_symbol *s, long argc, t_atom *argv)
 			anOrder = atom_getlong(argv);
 
 		x->f_freeverb = new AmbisonicsFreeverb(anOrder);
-		
+        x->f_freeverb->setroomsize(0.75);
+        x->f_freeverb->setdamp(0.5);
+        x->f_freeverb->setDryValue(0.);
+        x->f_freeverb->setWetValue(1.);
+        x->f_freeverb->setSpread(0.2);
+        x->f_freeverb->setmode(0);
+        
+		object_method(x, gensym("size"), NULL, NULL);
+        object_method(x, gensym("damp"), NULL, NULL);
+        object_method(x, gensym("dry"), NULL, NULL);
+        object_method(x, gensym("wet"), NULL, NULL);
+        object_method(x, gensym("fspread"), NULL, NULL);
+        object_method(x, gensym("lspread"), NULL, NULL);
+        object_method(x, gensym("freeze"), NULL, NULL);
+        
 		dsp_setup((t_pxobject *)x, x->f_freeverb->getNumberOfInputs());
 		for (int i = 0; i < x->f_freeverb->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");

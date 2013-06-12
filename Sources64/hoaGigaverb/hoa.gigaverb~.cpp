@@ -18,7 +18,7 @@
  *
  */
 
-#include "AmbisonicGigaverb.h"
+#include "AmbisonicsGigaverb.h"
 
 extern "C" 
 {
@@ -33,7 +33,7 @@ extern "C"
 typedef struct _gigaverb
 {
 	t_pxobject          f_ob;	
-	AmbisonicGigaverb	*f_gigaverb;
+	AmbisonicsGigaverb	*f_gigaverb;
 	float			f_size;
 	float			f_damp;
 	float			f_time;
@@ -75,7 +75,7 @@ int main(void)
 	class_addmethod(c, (method)gigaverb_dsp,		"dsp",			A_CANT, 0);
 	class_addmethod(c, (method)gigaverb_dsp64,		"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)gigaverb_assist,		"assist",		A_CANT, 0);
-    
+    /*
     CLASS_ATTR_FLOAT			(c, "size", 0, t_gigaverb, f_size);
 	CLASS_ATTR_CATEGORY			(c, "size", 0, "Parameters");
 	CLASS_ATTR_LABEL			(c, "size", 0, "Room size");
@@ -146,7 +146,7 @@ int main(void)
 	CLASS_ATTR_DEFAULT			(c, "wet", 0, "1.");
 	CLASS_ATTR_FILTER_MIN		(c, "wet", 0);
 	CLASS_ATTR_SAVE				(c, "wet", 1);
-
+    */
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	gigaverb_class = c;
@@ -166,7 +166,7 @@ void *gigaverb_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG)
 			anOrder = atom_getlong(argv);
 
-		x->f_gigaverb = new AmbisonicGigaverb(anOrder);
+		x->f_gigaverb = new AmbisonicsGigaverb(anOrder, sys_getmaxblksize(), sys_getsr());
 		
 		dsp_setup((t_pxobject *)x, x->f_gigaverb->getNumberOfInputs());
 		for (int i = 0; i < x->f_gigaverb->getNumberOfOutputs(); i++)
@@ -210,16 +210,7 @@ void gigaverb_perform64(t_gigaverb *x, t_object *dsp64, double **ins, long numin
 
 void gigaverb_assist(t_gigaverb *x, void *b, long m, long a, char *s)
 {
-    long harmonicIndex = 0;
-	if (a == 0)
-		harmonicIndex = 0;
-	else
-	{
-		harmonicIndex = (a - 1) / 2 + 1;
-		if (a % 2 == 1)
-			harmonicIndex = - harmonicIndex;
-	}
-	sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
+    sprintf(s,"(Signal) %s", x->f_gigaverb->getHarmonicsName(a).c_str());
 }
 
 void gigaverb_free(t_gigaverb *x)
@@ -304,7 +295,6 @@ t_max_err dry_set(t_gigaverb *x, t_object *attr, long argc, t_atom *argv)
 	x->f_dry = x->f_gigaverb->getDryValue();
 	return 0;
 }
-
 
 t_max_err wet_set(t_gigaverb *x, t_object *attr, long argc, t_atom *argv)
 {
