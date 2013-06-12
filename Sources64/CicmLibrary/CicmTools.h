@@ -407,6 +407,24 @@ public:
         const long numWraps = long((_val-lo)/range) - (_val < lo);
         return _val - range * double(numWraps);
     }
+    
+    // pseudo random generator :
+    
+    static int getRand(int min,int max)
+    {
+        return(rand()%(max-min)+min);
+    }
+    
+    static float getRandf(float fMin, float fMax)
+    {
+        return fMin + (float(rand()) / float(RAND_MAX)) * (fMax - fMin);
+    }
+    
+    static double getRandd(double dMin, double dMax)
+    {
+        return dMin + (double(rand()) / double(RAND_MAX)) * (dMax - dMin);
+    }
+
 };
 
 #endif
