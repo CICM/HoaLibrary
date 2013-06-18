@@ -22,7 +22,7 @@
 FilterDiffuser::FilterDiffuser(long aBufferSize, double aCoefficient) : Filter()
 {
    
-	m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
+	m_buffer_size_max = Tools::clip_min(aBufferSize, (long)2);
 	m_buffer = new double[m_buffer_size_max];
 	m_buffer_size = m_buffer_size_max;
 	for(int i = 0; i < m_buffer_size_max; i++)

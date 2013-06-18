@@ -21,7 +21,8 @@
 
 AmbisonicsGigaverb::AmbisonicsGigaverb(long anOrder, long aVectorSize, double aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
-    m_gigaverb.push_back(new Gigaverb(m_vector_size, m_sampling_rate));
+    for(int i = 0; i < m_number_of_harmonics; i++)
+        m_gigaverb.push_back(new Gigaverb(m_vector_size, m_sampling_rate));
 }
 
 void AmbisonicsGigaverb::setDryValue(double value)

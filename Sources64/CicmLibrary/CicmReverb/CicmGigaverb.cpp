@@ -112,7 +112,7 @@ void Gigaverb::setRoomSize(double aRoomSize)
 	m_tap_times[1] = (int)(5+0.300 * m_largest_delay);
 	m_tap_times[2] = (int)(5+0.155 * m_largest_delay);
 	m_tap_times[3] = (int)(5);
-
+    
 	for(int i = 0; i < FDNORDER; i++)
 		m_tap_gains[i] = pow(alpha,(double)m_tap_times[i]);
 }

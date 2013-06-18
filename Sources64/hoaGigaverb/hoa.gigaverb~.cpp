@@ -75,7 +75,7 @@ int main(void)
 	class_addmethod(c, (method)gigaverb_dsp,		"dsp",			A_CANT, 0);
 	class_addmethod(c, (method)gigaverb_dsp64,		"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)gigaverb_assist,		"assist",		A_CANT, 0);
-    /*
+    
     CLASS_ATTR_FLOAT			(c, "size", 0, t_gigaverb, f_size);
 	CLASS_ATTR_CATEGORY			(c, "size", 0, "Parameters");
 	CLASS_ATTR_LABEL			(c, "size", 0, "Room size");
@@ -146,7 +146,7 @@ int main(void)
 	CLASS_ATTR_DEFAULT			(c, "wet", 0, "1.");
 	CLASS_ATTR_FILTER_MIN		(c, "wet", 0);
 	CLASS_ATTR_SAVE				(c, "wet", 1);
-    */
+    
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	gigaverb_class = c;

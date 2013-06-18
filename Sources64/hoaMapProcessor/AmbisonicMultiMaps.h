@@ -63,6 +63,7 @@ public:
 	/* Perform sample by sample */
 	void process(float* aInputs, float* aOutputs)
 	{
+        Cicm_Vector_Float_Clear(aOutputs, m_number_of_harmonics);
         if(m_first_source >= 0)
         {
             m_maps[m_first_source]->process(aInputs[m_first_source], aOutputs);
@@ -76,6 +77,7 @@ public:
     
     void process(double* aInputs, double* aOutputs)
 	{
+        Cicm_Vector_Double_Clear(aOutputs, m_number_of_harmonics);
 		if(m_first_source >= 0)
         {
             m_maps[m_first_source]->process(aInputs[m_first_source], aOutputs);
@@ -93,7 +95,7 @@ public:
     
 	inline void process(float** aInputs, float** aOutputs)
 	{        
-		if(m_first_source >= 0)
+		if(m_first_source != m_number_of_sources)
         {
             m_maps[m_first_source]->process(aInputs[m_first_source], aOutputs);
             for(int i = m_first_source+1; i < m_number_of_sources; i++)
@@ -101,6 +103,11 @@ public:
                 if(!m_mute[i])
                     m_maps[i]->processAdd(aInputs[i], aOutputs);
             }
+        }
+        else
+        {
+            for(int i = 0; i < m_number_of_harmonics; i++)
+                Cicm_Vector_Float_Clear(aOutputs[i], m_vector_size);
         }
 	}
     
@@ -114,6 +121,11 @@ public:
                 if(!m_mute[i])
                     m_maps[i]->processAdd(aInputs[i], aOutputs);
             }
+        }
+        else
+        {
+            for(int i = 0; i < m_number_of_harmonics; i++)
+                Cicm_Vector_Double_Clear(aOutputs[i], m_vector_size);
         }
 	}
     

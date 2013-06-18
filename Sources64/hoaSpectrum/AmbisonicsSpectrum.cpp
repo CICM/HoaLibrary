@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot, Eliott Paris Universite Paris 8
+ *
+ * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -16,10 +17,14 @@
  *
  */
 
-#include "AmbisonicStars.h"
+#include "AmbisonicsSpectrum.h"
 
-Star::Star(long deadOrAlive, double aRadius, double anAngle, double aRadiusPrincipal, double aRadiusSecondary, double aAngleEllipse) : Source(deadOrAlive, aRadius, anAngle)
+AmbisonicsSpectrum::AmbisonicsSpectrum(long anOrder, long aVectorSize, double aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
     ;
 }
 
+AmbisonicsSpectrum::~AmbisonicsSpectrum()
+{
+    ;
+}

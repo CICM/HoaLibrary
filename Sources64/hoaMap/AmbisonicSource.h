@@ -34,9 +34,9 @@ private:
     std::vector <long>      m_groups;
     
 public:
-    Source(long deadOrAlive, double aRadius = 0., double anAngle = 0., color aColor = color_black, std::string aDescription = "");
-    Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor = color_black, std::string aDescription = "");
-    Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates, color aColor = color_black, std::string aDescription = "");
+    Source(long deadOrAlive, double aRadius = 0., double anAngle = 0.);
+    Source(long deadOrAlive, coordinatesPolar polarCoordinates);
+    Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates);
     
     void setExistence(long deadOrAlive);
     void setCoordinatesPolar(coordinatesPolar polarCoordinates);
