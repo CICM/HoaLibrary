@@ -22,51 +22,23 @@
 #ifndef DEF_AMBISONICSTAR
 #define DEF_AMBISONICSTAR
 
-#include "cicmTools.h"
+#include "../hoaMap/AmbisonicSource.h"
 
-class Star
+class Star : public Source
 {
 private:
-	coordinatesPolar        m_coordinate_polar;
-	color                   m_color;
-    std::string             m_description;
-    long                    m_exist;
+    double                  m_radius_principal;
+    double                  m_radius_secondary;
+    double                  m_angle_ellipse;
     
     Star*                   m_sun;
     std::vector <long>      m_satellites;
     
 public:
-    Source(long deadOrAlive, double aRadius = 0., double anAngle = 0., color aColor = color_black, std::string aDescription = "");
-    Source(long deadOrAlive, coordinatesPolar polarCoordinates, color aColor = color_black, std::string aDescription = "");
-    Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates, color aColor = color_black, std::string aDescription = "");
+    Star(long deadOrAlive, double aRadius = 0., double anAngle = 0., double aRadiusPrincipal = 0., double aRadiusSecondary = 0., double aAngleEllipse = 0.);
     
-    void setExistence(long deadOrAlive);
-    void setCoordinatesPolar(coordinatesPolar polarCoordinates);
-	void setCoordinatesPolar(double aRadius, double anAngle);
-	void setRadius(double aRadius);
-    void setAngle(double anAngle);
-    void setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates);
-    void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
-	void setAbscissa(double anAbscissa);
-	void setOrdinate(double anOrdinate);
-    void setColor(color aColor);
-	void setDescription(std::string aDescription);
-    void setGroup(long aGroupIndex);
-	void removeGroup(long aGroupIndex);
-    
-    long   getExistence();
-    coordinatesPolar        getCoordinatesPolar();
-	double getRadius();
-	double getAngle();
-    coordinatesCartesian    getCoordinatesCartesian();
-	double getAbscissa();
-	double getOrdinate();
-    color  getColor();
-    std::string getDescription();
-    long   getNumberOfGroups();
-    long   getGroupIndex(long anIndex);
 	
-	~Source();
+	~Star();
 };
 
 #endif

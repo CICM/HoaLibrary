@@ -37,7 +37,7 @@ public:
     void	setBufferSizeMax(long aBufferSize);
     long	getBufferSizeMax();
     void	setBufferSize(long aBufferSize);
-    long	getBufferSize() ;
+    long	getBufferSize();
     void	setFeedback(double val);
     double	getFeedback();
     ~FilterAllpass();

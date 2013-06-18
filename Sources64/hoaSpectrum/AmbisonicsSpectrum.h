@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2012 Julien Colafrancesco, Pierre Guillot, Eliott Paris Universite Paris 8
+ *
+ * Copyright (C) 2012 Julien Colafrancesco & Pierre Guillot, Universite Paris 8
  * 
  * This library is free software; you can redistribute it and/or modify it 
  * under the terms of the GNU Library General Public License as published 
@@ -16,10 +17,22 @@
  *
  */
 
-#include "AmbisonicStars.h"
+#ifndef DEF_AMBISONICSSPECTRUM
+#define DEF_AMBISONICSSPECTRUM
 
-Star::Star(long deadOrAlive, double aRadius, double anAngle, double aRadiusPrincipal, double aRadiusSecondary, double aAngleEllipse) : Source(deadOrAlive, aRadius, anAngle)
+#include "../hoaAmbisonics/Ambisonics.h"
+#include "../CicmLibrary/CicmFft/CicmFft.h"
+
+class AmbisonicsSpectrum : public Ambisonics
 {
-    ;
-}
+	
+private:
+    Cicm_Fft*   m_fft;
 
+	
+public:
+	AmbisonicsSpectrum(long anOrder = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
+	~AmbisonicsSpectrum();
+};
+
+#endif
