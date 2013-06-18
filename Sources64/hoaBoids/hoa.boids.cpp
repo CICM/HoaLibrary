@@ -40,6 +40,8 @@ extern "C"
 #include "../CicmLibrary/CicmTools.h"
 #include "BoidsManager.h"
 
+#define DEF_REFRESH_TIME 20
+
 typedef struct  _hoaboids
 {
 	t_jbox          j_box;
@@ -73,7 +75,9 @@ typedef struct  _hoaboids
     double f_septhresh;
     double f_maxvel;
     double f_gravity;
-    t_pt   f_gravpoint;
+    double f_gravpoint[2];
+    
+    double f_refreshInterval;
     
     double      f_size_source;
 	double		f_zoom_factor;
@@ -85,12 +89,12 @@ t_class *hoaboids_class;
 // general methods
 void *hoaboids_new(t_symbol *s, int argc, t_atom *argv);
 void hoaboids_free(t_hoaboids *x);
-void hoaboids_tick(t_hoaboids *x);
 void hoaboids_getdrawparams(t_hoaboids *x, t_object *patcherview, t_jboxdrawparams *params);
 void hoaboids_assist(t_hoaboids *x, void *b, long m, long a, char *s);
 t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 // attr setters :
+t_max_err hoaboids_setAttr_gravpoint(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_nbirds(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_separation(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
@@ -104,6 +108,11 @@ t_max_err hoaboids_setAttr_gravity(t_hoaboids *x, t_object *attr, long argc, t_a
 void hoaboids_setGravityPoint(t_hoaboids *x, double gx, double gy);
 
 void hoaboids_tick(t_hoaboids *x);
+
+void hoaboids_start(t_hoaboids *x);
+void hoaboids_stop(t_hoaboids *x);
+void hoaboids_float(t_hoaboids *x, double v);
+void hoaboids_int(t_hoaboids *x, long v);
 
 void hoaboids_bang(t_hoaboids *x);
 void hoaboids_infos(t_hoaboids *x);
@@ -133,21 +142,25 @@ int C74_EXPORT main()
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	
 	class_addmethod(c, (method) hoaboids_assist,           "assist",		A_CANT,	0);
-	class_addmethod(c, (method) hoaboids_paint,            "paint",		A_CANT,	0);
-	class_addmethod(c, (method) hoaboids_getdrawparams,    "getdrawparams",A_CANT, 0);
+	class_addmethod(c, (method) hoaboids_paint,            "paint",         A_CANT,	0);
+	class_addmethod(c, (method) hoaboids_getdrawparams,    "getdrawparams", A_CANT, 0);
 	class_addmethod(c, (method) hoaboids_notify,           "notify",		A_CANT, 0);
-        
+    
+    class_addmethod(c, (method) hoaboids_start,            "start",         0);
+    class_addmethod(c, (method) hoaboids_stop,             "stop",          0);
+    class_addmethod(c, (method) hoaboids_int,              "int",			A_LONG, 0);
+    class_addmethod(c, (method) hoaboids_float,            "float",			A_FLOAT, 0);
     class_addmethod(c, (method) hoaboids_bang,             "bang",			A_CANT, 0);
     class_addmethod(c, (method) hoaboids_infos,            "getinfo",		0);
     
-    class_addmethod(c, (method) hoaboids_mousedown,        "mousedown",	A_CANT, 0);
-    class_addmethod(c, (method) hoaboids_mousedrag,        "mousedrag",	A_CANT, 0);
-    class_addmethod(c, (method) hoaboids_mouseup,          "mouseup",      A_CANT, 0);
-    class_addmethod(c, (method) hoaboids_mouseenter,       "mouseenter",   A_CANT, 0);
-    class_addmethod(c, (method) hoaboids_mousemove,        "mousemove",    A_CANT, 0);
-    class_addmethod(c, (method) hoaboids_mouseleave,       "mouseleave",   A_CANT, 0);
-    class_addmethod(c, (method) hoaboids_mousewheel,		"mousewheel",	A_CANT, 0);
-    class_addmethod(c, (method) hoaboids_key,             "key",           A_CANT,   0);
+    class_addmethod(c, (method) hoaboids_mousedown,        "mousedown",     A_CANT, 0);
+    class_addmethod(c, (method) hoaboids_mousedrag,        "mousedrag",     A_CANT, 0);
+    class_addmethod(c, (method) hoaboids_mouseup,          "mouseup",       A_CANT, 0);
+    class_addmethod(c, (method) hoaboids_mouseenter,       "mouseenter",    A_CANT, 0);
+    class_addmethod(c, (method) hoaboids_mousemove,        "mousemove",     A_CANT, 0);
+    class_addmethod(c, (method) hoaboids_mouseleave,       "mouseleave",    A_CANT, 0);
+    class_addmethod(c, (method) hoaboids_mousewheel,       "mousewheel",	A_CANT, 0);
+    class_addmethod(c, (method) hoaboids_key,              "key",           A_CANT, 0);
 
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	
@@ -209,6 +222,13 @@ int C74_EXPORT main()
     
     /* hoa.boids */
     CLASS_STICKY_CATEGORY(c, 0, "hoa.boids");
+    CLASS_ATTR_DOUBLE_ARRAY     (c,"gravpoint", 0, t_hoaboids, f_gravpoint, 2);
+    CLASS_ATTR_ACCESSORS		(c,"gravpoint", NULL, hoaboids_setAttr_gravpoint);
+	CLASS_ATTR_LABEL			(c,"gravpoint", 0,   "Gravity Point");
+	CLASS_ATTR_DEFAULT          (c,"gravpoint", 0,   "0. 0.");
+    CLASS_ATTR_ORDER			(c,"gravpoint", 0,   "1");
+    CLASS_ATTR_SAVE             (c,"gravpoint", 1);
+    
     CLASS_ATTR_LONG             (c,"nbirds", 0, t_hoaboids, f_numberOfBirds);
     CLASS_ATTR_ACCESSORS		(c,"nbirds", NULL, hoaboids_setAttr_nbirds);
 	CLASS_ATTR_LABEL			(c,"nbirds", 0,   "Number of Birds");
@@ -306,8 +326,11 @@ void *hoaboids_new(t_symbol *s, int argc, t_atom *argv)
     x->f_out_infos      = listout(x);
     x->f_out_groups     = listout(x);
 	x->f_out_sources    = listout(x);
+    
+    x->f_refreshInterval = DEF_REFRESH_TIME;
 	
     x->f_clock = clock_new(x,(method)hoaboids_tick);
+    //clock_set(x->f_clock, x->f_refreshInterval);
 	x->jfont = jfont_create(jbox_get_fontname((t_object *)x)->s_name, (t_jgraphics_font_slant)jbox_get_font_slant((t_object *)x), (t_jgraphics_font_weight)jbox_get_font_weight((t_object *)x), jbox_get_fontsize((t_object *)x));
     
 	attr_dictionary_process(x, d);
@@ -342,19 +365,60 @@ void hoaboids_getdrawparams(t_hoaboids *x, t_object *patcherview, t_jboxdrawpara
 {
     params->d_boxfillcolor = x->f_colorBackground;
     params->d_bordercolor =  x->f_colorBorder;
-	params->d_borderthickness = 2;
+	params->d_borderthickness = 1;
 	params->d_cornersize = CORNERSIZE;
 }
 
 void hoaboids_tick(t_hoaboids *x)
 {
-    /*
-    if(x->f_index_of_selected_source != -1)
-        x->f_source_trajectory->recordSourceInTrajectory(x->f_boids_manager, x->f_index_of_selected_source);
-    else if(x->f_index_of_selected_group != -1)
-        x->f_source_trajectory->recordGroupInTrajectory(x->f_boids_manager, x->f_index_of_selected_group);
-    clock_fdelay(x->f_clock, 100);
-    */
+    x->f_boids_manager->update();
+    hoaboids_bang(x);
+    clock_fdelay(x->f_clock, x->f_refreshInterval);
+}
+
+void hoaboids_start(t_hoaboids *x)
+{
+    hoaboids_tick(x);
+}
+
+void hoaboids_stop(t_hoaboids *x)
+{
+    clock_unset(x->f_clock);
+}
+
+void hoaboids_float(t_hoaboids *x, double v)
+{
+    hoaboids_int(x, long(v));
+}
+
+void hoaboids_int(t_hoaboids *x, long v)
+{
+    (v == 0) ? hoaboids_stop(x) : hoaboids_start(x);
+}
+
+
+t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+        x->f_zoom_factor = Tools::clip(float(atom_getfloat(argv)), float(MIN_ZOOM), float(MAX_ZOOM));
+    
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_gravpoint(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 2 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG) && (atom_gettype(argv+1) == A_FLOAT || atom_gettype(argv+1) == A_LONG))
+    {
+        double gx, gy;
+        gx = Tools::clip(double(atom_getfloat(argv)), double(-10), double(10));
+        gy = Tools::clip(double(atom_getfloat(argv+1)), double(-10), double(10));
+        hoaboids_setGravityPoint(x, gx, gy);
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
+    }
+    return MAX_ERR_NONE;
 }
 
 t_max_err hoaboids_setAttr_nbirds(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
@@ -367,22 +431,11 @@ t_max_err hoaboids_setAttr_nbirds(t_hoaboids *x, t_object *attr, long argc, t_at
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
-{
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
-            x->f_zoom_factor = Tools::clip(float(atom_getfloat(argv)), float(MIN_ZOOM), float(MAX_ZOOM));
-    
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
-    return MAX_ERR_NONE;
-}
-
 t_max_err hoaboids_setAttr_separation(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
     {
-        x->f_separation = Tools::clip(double(atom_getfloat(argv)), double(0), double(1));
+        x->f_separation = Tools::clip(double(atom_getfloat(argv)), double(0), double(10));
         x->f_boids_manager->setSeparation(x->f_separation);
     }
     return MAX_ERR_NONE;
@@ -460,8 +513,11 @@ t_max_err hoaboids_setAttr_gravity(t_hoaboids *x, t_object *attr, long argc, t_a
 
 void hoaboids_setGravityPoint(t_hoaboids *x, double gx, double gy)
 {
-    x->f_gravpoint.x = gx/x->f_zoom_factor;
-    x->f_gravpoint.y = gy/x->f_zoom_factor;
+    //x->f_gravpoint[0] = gx/x->f_zoom_factor;
+    //x->f_gravpoint[1] = gy/x->f_zoom_factor;
+    x->f_gravpoint[0] = gx;
+    x->f_gravpoint[1] = gy;
+    x->f_boids_manager->setGravPoint(x->f_gravpoint[0], x->f_gravpoint[1]);
 }
 
 
@@ -499,7 +555,20 @@ t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sende
 
 void hoaboids_bang(t_hoaboids *x)
 {
-    x->f_boids_manager->update();
+    t_atom av[4];
+    double birdCoord[2];
+    //x->f_boids_manager->update();
+    
+    for (int i=0; i < x->f_boids_manager->getNumberOfBoids(); i++)
+    {
+        x->f_boids_manager->getBirdCoord(i, birdCoord);
+        atom_setlong(av, i);
+        atom_setsym(av+1, gensym("cartesian"));
+        atom_setfloat(av+2, birdCoord[0]);
+        atom_setfloat(av+3, birdCoord[1]);
+        outlet_list(x->f_out_sources, 0L, 4, av);
+    }
+    
     jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
     jbox_redraw((t_jbox *)x);
 }
@@ -672,8 +741,11 @@ void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect)
     double w = rect->width;
     double h = rect->height;
     
-    double attPosX = x->f_cursor_position.x * ( (w*0.5) * x->f_zoom_factor);
-    double attPosY = x->f_cursor_position.y * ( (h*0.5) * x->f_zoom_factor);
+    //double attPosX = x->f_cursor_position.x * ( (w*0.5) * x->f_zoom_factor);
+    //double attPosY = x->f_cursor_position.y * ( (h*0.5) * x->f_zoom_factor);
+    
+    double attPosX = x->f_gravpoint[0] * ( (w*0.5) * x->f_zoom_factor);
+    double attPosY = x->f_gravpoint[1] * ( (h*0.5) * x->f_zoom_factor);
 		
 	if ((g = jbox_start_layer((t_object *)x, view, gensym("attractor_layer"), rect->width, rect->height)))
     {
@@ -700,11 +772,9 @@ void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect)
 void hoaboids_mousedown(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt cursor;
-    cursor.x = ((pt.x / x->rect.width * 2.) - 1.);
-    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.);
-    hoaboids_setGravityPoint(x, cursor.x, cursor.x);
-    cursor.x /= x->f_zoom_factor;
-    cursor.y /= x->f_zoom_factor;
+    cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
+    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.) / x->f_zoom_factor;
+    hoaboids_setGravityPoint(x, cursor.x, cursor.y);
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
     
@@ -724,17 +794,15 @@ void hoaboids_mousedown(t_hoaboids *x, t_object *patcherview, t_pt pt, long modi
 void hoaboids_mousedrag(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     t_pt cursor;
-    cursor.x = ((pt.x / x->rect.width * 2.) - 1.);
-    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.);
-    hoaboids_setGravityPoint(x, cursor.x, cursor.x);
-    cursor.x /= x->f_zoom_factor;
-    cursor.y /= x->f_zoom_factor;
+    cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
+    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.) / x->f_zoom_factor;
+    hoaboids_setGravityPoint(x, cursor.x, cursor.y);
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
 
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
-    hoaboids_bang(x);
+    //hoaboids_bang(x);
 }
 
 void hoaboids_mouseup(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)

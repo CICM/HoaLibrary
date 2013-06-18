@@ -20,10 +20,11 @@ BoidsManager::BoidsManager()
     m_coherence = 0.02;
     m_inertia = 0.5;
     m_friction = 0.5;
-    m_septhresh = 0.1;
+    //m_septhresh = 0.1;
+    m_septhresh = 1.;
     m_maxvel = 0.05;
     m_gravity = 0.;
-    m_gravpoint_x = m_gravpoint_y = 0.5;
+    m_gravpoint_x = m_gravpoint_y = 0.;
     
     setNumberOfBoids(m_numberOfBoids);
 }
@@ -36,15 +37,15 @@ BoidsManager::~BoidsManager()
 void BoidsManager::setNumberOfBoids(long _numberOfBoids)
 {
     // clip agentcount to range 1.-100.
-	m_numberOfBoids = Tools::clip(_numberOfBoids, long(0), long(100));
+	m_numberOfBoids = Tools::clip(_numberOfBoids, long(1), long(100));
     
     m_birds.resize(m_numberOfBoids);
     
 	for (int i=0; i < m_numberOfBoids; i++)
 	{
         // start with random position/velocity
-        m_birds[i].x  = Tools::getRandd(-1., 1.);
-        m_birds[i].y  = Tools::getRandd(-1., 1.);
+        m_birds[i].x  = Tools::getRandd(m_gravpoint_x - 1., m_gravpoint_x + 1.);
+        m_birds[i].y  = Tools::getRandd(m_gravpoint_y - 1., m_gravpoint_y + 1.);
         m_birds[i].vx = Tools::getRandd(-0.05, 0.05);
         m_birds[i].vy = Tools::getRandd(-0.05, 0.05);
 	}
@@ -58,7 +59,6 @@ void BoidsManager::update()
 	for (int i=0; i < m_numberOfBoids; i++)
 	{
         birdUpdate(i);
-		//m_birds[i].tick();
 		
 		// calculate current frame's average position/velocity
 		cx += m_birds[i].x;
@@ -105,11 +105,13 @@ void BoidsManager::birdUpdate(int _index)
 	a->vx = Tools::clip(a->vx,-m_maxvel,m_maxvel);
 	a->vy = Tools::clip(a->vy,-m_maxvel,m_maxvel);
     
+    // Random test
+	a->vx = Tools::clip(Tools::getRandd(-0.01, 0.01) + a->vx,-m_maxvel,m_maxvel);
+	a->vy = Tools::clip(Tools::getRandd(-0.01, 0.01) + a->vy,-m_maxvel,m_maxvel);
+    
 	// update position based on velocity and friction
 	a->x += a->vx*(1.-m_friction);
 	a->y += a->vy*(1.-m_friction);
-    
-	//wrap(this); // torus space	
 }
 
 // rules
@@ -129,15 +131,6 @@ void BoidsManager::birdSeparate(int _index)
 			dx = m_birds[i].x - a->x;
 			dy = m_birds[i].y - a->y;
 			
-            /*
-			//torus space
-			if (dx>0.5) dx -= 1.;
-			else if (dx<-0.5) dx += 1.;
-			//torus space
-			if (dy>0.5) dy -= 1.;
-			else if (dy<-0.5) dy += 1.;
-            */
-			
 			if ((fabs(dx) > 0.0001) && (fabs(dy) > 0.0001))
 				mag = (dx*dx+dy*dy); // cheap mag, no sqrt
 			else
@@ -145,9 +138,11 @@ void BoidsManager::birdSeparate(int _index)
 			
 			if (mag < m_septhresh) {
 				if (mag < 0.0001)
-					proxscale = 8;
+					//proxscale = 8;
+                    proxscale = 1000;
 				else
-					proxscale = Tools::clip(m_septhresh/(m_septhresh-(m_septhresh-mag)), 0.,8.);
+                    proxscale = Tools::clip(m_septhresh/(m_septhresh-(m_septhresh-mag)), 0.,1000.);
+					//proxscale = Tools::clip(m_septhresh/(m_septhresh-(m_septhresh-mag)), 0.,8.);
 				a->vx -= dx*m_separation*proxscale;
 				a->vy -= dy*m_separation*proxscale;
 			}
@@ -199,7 +194,8 @@ void BoidsManager::birdGravitate(int _index)
 
 void BoidsManager::setSeparation(double _separation)
 {
-    m_separation = Tools::clip(_separation,0.,1.)*0.1;
+    //m_separation = Tools::clip(_separation,0.,1.)*0.1;
+    m_separation = Tools::clip(_separation,0.,1.)*100000;
 }
 
 void BoidsManager::setAlignment(double _alignment)
@@ -224,7 +220,7 @@ void BoidsManager::setInertia(double _inertia)
 
 void BoidsManager::setSepThresh(double _septhresh)
 {
-    m_septhresh = Tools::clip(_septhresh,0.,1.)*0.5;
+    //m_septhresh = Tools::clip(_septhresh,0.,1.)*0.5;
 }
 
 void BoidsManager::setMaxVel(double _maxvel)

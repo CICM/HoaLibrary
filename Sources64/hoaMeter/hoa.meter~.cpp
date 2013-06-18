@@ -662,12 +662,13 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
             jgraphics_stroke(g);
             jgraphics_arc(g, center.x, center.y, x->f_rayonInt,  0., JGRAPHICS_2PI);
             jgraphics_stroke(g);
-            
-            jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-            jgraphics_set_matrix(g, &transform);
         }
         
-        if (x->f_leds_bg) {
+        if (x->f_leds_bg)
+        {
+            jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+            jgraphics_set_matrix(g, &transform);
+            
             white.alpha = 0.5;
             // skelton separators and leds bg:
             for(i=0; i < x->f_number_of_loudspeakers; i++)
