@@ -46,7 +46,7 @@ AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, std::string aMode, long aVect
     Cicm_Vector_Double_Malloc(m_sin_double, m_vector_size);
     Cicm_Vector_Double_Malloc(m_angles_double, m_vector_size);
     
-	setAzimtuhBoth(0.);
+	setAzimuthBoth(0.);
 }
 
 std::string	AmbisonicsEncoder::getMode()
@@ -54,7 +54,7 @@ std::string	AmbisonicsEncoder::getMode()
 	return m_mode;
 }
 
-void AmbisonicsEncoder::setAzimtuh(double aTheta)
+void AmbisonicsEncoder::setAzimuth(double aTheta)
 {
     m_ambisonics_coeffs_float[0] = 1.;
 	for (int i = 2, j = 1; i < m_number_of_harmonics; i += 2, j++)
@@ -64,7 +64,7 @@ void AmbisonicsEncoder::setAzimtuh(double aTheta)
 	}
 }
 
-void AmbisonicsEncoder::setAzimtuh(float aTheta)
+void AmbisonicsEncoder::setAzimuth(float aTheta)
 {
 	m_ambisonics_coeffs_float[0] = 1.;
 	for (int i = 2, j = 1; i < m_number_of_harmonics; i += 2, j++)
@@ -74,10 +74,10 @@ void AmbisonicsEncoder::setAzimtuh(float aTheta)
 	}
 }
 
-void AmbisonicsEncoder::setAzimtuhBoth(double aTheta)
+void AmbisonicsEncoder::setAzimuthBoth(double aTheta)
 {
-	setAzimtuh(aTheta);
-    setAzimtuh((float)aTheta);
+	setAzimuth(aTheta);
+    setAzimuth((float)aTheta);
 }
 
 void AmbisonicsEncoder::setVectorSize(long aVectorSize)

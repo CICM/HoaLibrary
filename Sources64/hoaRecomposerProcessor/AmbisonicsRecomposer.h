@@ -153,7 +153,7 @@ public:
         {
             m_lines[i]->process(m_angles_vector_float);
             m_encoders[i]->process(aInputs[i], m_harmonics_matrix_float, m_angles_vector_float);
-            m_wider_lines[i]->process(m_angles_vector_double);
+            m_wider_lines[i]->process(m_angles_vector_float);
             m_widers[i]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);
             for(int k = 0; k < m_number_of_harmonics; k++)
             {
@@ -174,8 +174,6 @@ public:
             m_angles_vector_double[v] = 0.;
         }
         m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_double);
-        m_wider_lines[0]->process(m_angles_vector_double);
-        m_widers[0]->process(aOutputs, aOutputs, m_angles_vector_double);
         
         for(int i = 1; i < m_number_of_microphones; i++)
         {
@@ -184,8 +182,6 @@ public:
                 m_angles_vector_double[v] = Tools::radianInterp(1-fisheyeFactor[v], distanceBetwenTwoDefMics*i, 0.);
             }
             m_encoders[i]->process(aInputs[i], m_harmonics_matrix_double, m_angles_vector_double);
-            m_wider_lines[i]->process(m_angles_vector_double);
-            m_widers[i]->process(m_harmonics_matrix_double, m_harmonics_matrix_double, m_angles_vector_double);
             for(int k = 0; k < m_number_of_harmonics; k++)
             {
                 Cicm_Vector_Double_Add(m_harmonics_matrix_double[k], aOutputs[k], m_vector_size);
@@ -199,27 +195,16 @@ public:
         Cicm_Vector_Float_Clip(fisheyeFactor, &clip[0], &clip[1], fisheyeFactor, m_vector_size);
         double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         
-        for (int v=0; v<m_vector_size; v++)
-        {
-            m_angles_vector_double[v] = 0.;
-        }
-        m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_float);
-        m_wider_lines[0]->process(m_angles_vector_double);
-        m_widers[0]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);
+        m_encoders[0]->setAzimuthBoth(0.);
+        m_encoders[0]->process(aInputs[0], aOutputs);
         
         for(int i = 1; i < m_number_of_microphones; i++)
         {
-            for (int v=0; v<m_vector_size; v++)
+            for (int j = 0; j < m_vector_size; j++)
             {
-                m_angles_vector_double[v] = Tools::radianInterp(1-fisheyeFactor[v], distanceBetwenTwoDefMics*i, 0.);
+                m_angles_vector_float[j] = Tools::radianInterp(fisheyeFactor[j], 0., distanceBetwenTwoDefMics * (float)i);
             }
-            m_encoders[i]->process(aInputs[i], m_harmonics_matrix_float, m_angles_vector_float);
-            m_wider_lines[i]->process(m_angles_vector_double);
-            m_widers[i]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);
-            for(int k = 0; k < m_number_of_harmonics; k++)
-            {
-                Cicm_Vector_Float_Add(m_harmonics_matrix_float[k], aOutputs[k], m_vector_size);
-            }
+            m_encoders[i]->processAdd(aInputs[i], aOutputs, m_angles_vector_float);
         }
 	}
     
@@ -267,16 +252,9 @@ public:
     inline void processFixe(float** aInputs, float** aOutputs)
 	{
         m_encoders[0]->process(aInputs[0], aOutputs);
-        m_widers[0]->process(aOutputs, aOutputs);
         for(int i = 1; i < m_number_of_microphones; i++)
         {
-            m_encoders[i]->processAdd(aInputs[i], m_harmonics_matrix_float);
-            m_widers[0]->process(m_harmonics_matrix_float, m_harmonics_matrix_float);
-            for(int k = 0; k < m_number_of_harmonics; k++)
-            {
-                Cicm_Vector_Float_Add(m_harmonics_matrix_float[k], aOutputs[k], m_vector_size);
-            }
-
+            m_encoders[i]->processAdd(aInputs[i], aOutputs);
         }
 	}
 };

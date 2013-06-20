@@ -26,7 +26,8 @@
 #ifndef DEF_AMBISONICSPACE
 #define DEF_AMBISONICSPACE
 
-#include "cicmTools.h"
+#include "../CicmLibrary/CicmDefine.h"
+#include "../CicmLibrary/CicmTools.h"
 #define RAMP_SAMPLE 4410
 
 class AmbisonicSpace{

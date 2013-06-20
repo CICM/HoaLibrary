@@ -57,7 +57,7 @@ void AmbisonicsOptim::setOptimMode(long anOptim)
 void AmbisonicsOptim::computeBasicOptim()
 {
 	m_optimMode = Hoa_Basic_Optim;
-	for (int i = 0; i < m_number_of_harmonics; i++) 
+	for (int i = 0; i < m_number_of_harmonics; i++)
 		m_optim_vector_double[i] = 1.;
 }
 

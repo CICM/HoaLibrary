@@ -39,7 +39,7 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
         m_wider_lines.push_back(new CicmLine(4410, m_vector_size));
         
         double angle = ((double)i / (double)(m_number_of_microphones)) * CICM_2PI;
-        m_encoders[i]->setAzimtuhBoth(angle);
+        m_encoders[i]->setAzimuthBoth(angle);
         m_lines[i]->setCoefficientAngleDirect(angle);
         m_wider_lines[i]->setCoefficientDirect(1.);
     }
