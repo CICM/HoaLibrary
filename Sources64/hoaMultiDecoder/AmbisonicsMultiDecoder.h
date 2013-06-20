@@ -33,7 +33,7 @@ enum
     Hoa_Restitution
 };
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../hoaAmbisonics/Ambisonics.h"
 #include "../hoaBinaural/AmbisonicsBinaural.h"
 #include "../hoaDecoder/AmbisonicsDecoder.h"
 #include "../hoaRestitution/AmbisonicsRestitution.h"
