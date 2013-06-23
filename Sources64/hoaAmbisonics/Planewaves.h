@@ -35,27 +35,30 @@ class Planewaves
 protected:
 	long	m_number_of_outputs;
 	long	m_number_of_inputs;
-    double  m_configuration;
-    long    m_low_frequency_effect;
+    long    m_number_of_loudspeakers;
+    
+    double*     m_angles_of_loudspeakers;
+    double*     m_abscissa_of_loudspeakers;
+    double*     m_ordinate_of_loudspeakers;
+    
 	long	m_vector_size;
     long	m_sampling_rate;
-    double* m_angles_of_loudspeakers;
-
-    void computeConfiguration(bool standardOnOff = 1);
+    
+    void computeConfiguration(bool standardOnOff = 0);
 public:
-	Planewaves(double aConfiguration = 1., long aVectorSize = 0, double aSamplingRate = 44100.);
+	Planewaves(long aNumberOfLoudspeakers = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
 	
 	long            getNumberOfInputs();
 	long            getNumberOfOutputs();
-    double          getConfiguration();
+    long            getNumberOfLoudspeakers();
     double          getLoudspeakerAngle(long anIndex);
     std::string     getLoudspeakerName(long anIndex);
 	long            getVectorSize();
 	long            getSamplingRate();
 
-    void setConfiguration(double aConfiguration, bool standardOnOff = 1);
+    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff = 0);
     void setLoudspeakerAngle(long anIndex, double anAngle);
-    void setLoudspeakerAngles(long len, double* angles);
+
 	void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
 

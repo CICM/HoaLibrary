@@ -62,9 +62,11 @@ void AmbisonicsRestitution::setConfiguration(double aConfiguration, bool standar
     /* Initialize the configuration */
     m_number_of_real_loudspeakers    = Tools::clip_min((long)aConfiguration, (long)1);
     m_configuation                   = m_number_of_real_loudspeakers;
+    
     if(aConfiguration - (long)aConfiguration != 0.)
     {
-        m_low_frequency_effect = 1;
+        m_low_frequency_effect = 0;
+        //m_low_frequency_effect = 1;
         m_configuation += 0.1;
     }
     else
@@ -73,11 +75,6 @@ void AmbisonicsRestitution::setConfiguration(double aConfiguration, bool standar
     /* Free memories */
     if(m_loudspeakers_gains_vector_float && m_loudspeakers_gains_vector_double)
     {
-        for(int i = 0; i < m_number_of_real_loudspeakers; i++)
-        {
-            //Cicm_Free(m_loudspeakers_gains_vector_double[i]);
-            //Cicm_Free(m_loudspeakers_gains_vector_float[i]);
-        }
         Cicm_Free(m_loudspeakers_gains_vector_double);
         Cicm_Free(m_loudspeakers_gains_vector_float);
     }

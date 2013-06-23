@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsMeter.h"
+#include "../../Sources64/hoaMeter/AmbisonicsMeter.h"
 
 extern "C"
 {
@@ -352,7 +352,7 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
     
     dictionary_getlong(d, gensym("channels"), &x->f_number_of_loudspeakers);
     
-    x->f_meter->setNumberOfChannels(x->f_number_of_loudspeakers);
+    x->f_meter->setNumberOfLoudspeakers(x->f_number_of_loudspeakers);
     x->f_number_of_loudspeakers = x->f_meter->getNumberOfInputs();
 
 	attr_dictionary_process(x, d);
@@ -397,7 +397,7 @@ t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_at
             object_attr_setdisabled((t_object*)x, gensym("ls_rot_dir"), 0);
         }
         
-        x->f_meter->setNumberOfChannels(x->f_number_of_loudspeakers);
+        x->f_meter->setNumberOfLoudspeakers(x->f_number_of_loudspeakers);
         meter_resize_inlet(x, x->f_number_of_loudspeakers);
         
         if(dspState)
@@ -418,17 +418,16 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
 {
     if (ac && av)
     {
-        double angles[ac];
         for(int i = 0; i < ac && i < x->f_number_of_loudspeakers; i++)
         {
             if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
-                angles[i] = atom_getfloat(av + i);
-            else angles[i] = x->f_meter->getLoudspeakerAngle(i);
+                x->f_meter->setLoudspeakerAngle(i, atom_getfloat(av+i));
         }
-        x->f_meter->setLoudspeakerAngles(ac, angles);
+        
     }
     
-    for (int i=0; i < x->f_meter->getNumberOfInputs(); i++) {
+    for (int i=0; i < x->f_meter->getNumberOfInputs(); i++)
+    {
         x->f_angles_of_loudspeakers[i] = x->f_meter->getLoudspeakerAngle(i);
     }
     

@@ -25,52 +25,47 @@
 
 #include "AmbisonicsMeter.h"
 
-AmbisonicsMeter::AmbisonicsMeter(long aNumberOfChannels, long aVectorSize, double aSamplingRate) : Planewaves()
+AmbisonicsMeter::AmbisonicsMeter(long aNumberOfChannels, long aVectorSize, double aSamplingRate) : Planewaves(aNumberOfChannels, aVectorSize, aSamplingRate)
 {
-
-	m_number_of_inputs		= Tools::clip_min(aNumberOfChannels, (long)1);
-	m_number_of_outputs		= 0;
-    
-    Cicm_Vector_Double_Malloc(m_loudspeakers_amplitudes, m_number_of_inputs);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_peaks, m_number_of_inputs);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_energies, m_number_of_inputs);
-    
-    m_vectors = new Ambisonicsvector(m_number_of_inputs, Hoa_Cartesian);
-    
-    for(int i = 0; i < m_number_of_inputs; i++)
-    {
-        m_loudspeakers_peaks[i] = 0.;
-        m_loudspeakers_energies[i] = -999;
-    }
-    
+	
+    m_vectors = new Ambisonicsvector(m_number_of_loudspeakers, Hoa_Cartesian, aVectorSize);
     for(int i = 0; i < 4; i++)
         m_vector_coordinates_double[i] = m_vector_coordinates_float[i] = 0.;
-	
+    
+    m_loudspeakers_amplitudes   = NULL;
+    m_loudspeakers_peaks        = NULL;
+    m_loudspeakers_energies     = NULL;    
+    
+	setNumberOfLoudspeakers(aNumberOfChannels);
 	setVectorSize(aVectorSize);
-    setSamplingRate(aSamplingRate);
+    m_number_of_outputs		= 0;
 }
 
 void AmbisonicsMeter::setVectorSize(long aVectorSize)
 {
-	m_vector_size = Tools::clip_power_of_two(aVectorSize);
+	Planewaves::setVectorSize(aVectorSize);
     m_vectors->setVectorSize(m_vector_size);
 }
 
-void AmbisonicsMeter::setNumberOfChannels(long aNumberofChannels)
+void AmbisonicsMeter::setNumberOfLoudspeakers(long aNumberOfChannels)
 {
-    setConfiguration(aNumberofChannels);
-    //m_number_of_inputs = Tools::clip_min(aNumberofChannels, (long)1);
-    m_vectors->setConfiguration(m_number_of_inputs);
+    Planewaves::setNumberOfLoudspeakers(aNumberOfChannels);
+    m_vectors->setNumberOfLoudspeakers(aNumberOfChannels);
+    m_number_of_outputs		= 0;
     
-    Cicm_Free(m_loudspeakers_amplitudes);
-    Cicm_Free(m_loudspeakers_peaks);
-    Cicm_Free(m_loudspeakers_energies);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_amplitudes, m_number_of_inputs);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_peaks, m_number_of_inputs);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_energies, m_number_of_inputs);
+    if(m_loudspeakers_amplitudes)
+        Cicm_Free(m_loudspeakers_amplitudes);
+    if(m_loudspeakers_peaks)
+        Cicm_Free(m_loudspeakers_peaks);
+    if(m_loudspeakers_energies)
+        Cicm_Free(m_loudspeakers_energies);
+    Cicm_Vector_Double_Malloc(m_loudspeakers_amplitudes, m_number_of_loudspeakers);
+    Cicm_Vector_Double_Malloc(m_loudspeakers_peaks, m_number_of_loudspeakers);
+    Cicm_Vector_Double_Malloc(m_loudspeakers_energies, m_number_of_loudspeakers);
     
-    for(int i = 0; i < m_number_of_inputs; i++)
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
+        m_loudspeakers_amplitudes[i] = 0.;
         m_loudspeakers_peaks[i] = 0.;
         m_loudspeakers_energies[i] = -999;
     }
@@ -86,22 +81,8 @@ std::string AmbisonicsMeter::getChannelName(long anIndex)
 
 void AmbisonicsMeter::setLoudspeakerAngle(long anIndex, double anAngle)
 {
-    if(anIndex >= 0 && anIndex < (long)m_configuration)
-    {
-        m_vectors->setLoudspeakerAngle(anIndex, anAngle);
-        anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
-        m_angles_of_loudspeakers[anIndex] = anAngle;
-    }
-    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
-}
-
-void AmbisonicsMeter::setLoudspeakerAngles(long len, double* angles)
-{
-    for (int i=0; i<len && i<m_number_of_inputs; i++) {
-        m_angles_of_loudspeakers[i] = Tools::radianWrap(angles[i] / 360. * CICM_2PI);
-    }
-    m_vectors->setLoudspeakerAngles(len, angles);
-    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
+    Planewaves::setLoudspeakerAngle(anIndex, anAngle);
+    m_vectors->setLoudspeakerAngle(anIndex, anAngle);
 }
 
 double AmbisonicsMeter::getLoudspeakerPeaks(long anIndex)
@@ -149,6 +130,12 @@ double AmbisonicsMeter::getVelocityVectorAngle()
 
 AmbisonicsMeter::~AmbisonicsMeter()
 {
-	;
+    delete m_vectors;
+	if(m_loudspeakers_amplitudes)
+        Cicm_Free(m_loudspeakers_amplitudes);
+    if(m_loudspeakers_peaks)
+        Cicm_Free(m_loudspeakers_peaks);
+    if(m_loudspeakers_energies)
+        Cicm_Free(m_loudspeakers_energies);
 }
 

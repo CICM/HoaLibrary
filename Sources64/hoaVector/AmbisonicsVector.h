@@ -31,19 +31,14 @@
 class Ambisonicsvector : public Planewaves
 {	
 private:
-    double*     m_abscissa_of_loudspeakers;
-    double*     m_ordinate_of_loudspeakers;
-    int         m_mode;
+    bool         m_mode;
     
 public:
-	Ambisonicsvector(double aConfiguration = 1., long aMode = Hoa_Polar, long aVectorSize = 0);
+	Ambisonicsvector(long aNumberOfLoudspeakers = 1., bool aMode = Hoa_Polar, long aVectorSize = 0);
 	
-    void    setConfiguration(double aConfiguration, bool standardOnOff = 1);
-    void    setLoudspeakerAngle(long anIndex, double anAngle);
-    void    setLoudspeakerAngles(long len, double* angles);
     std::string  getVectorName(long anIndex);
     long getMode();
-    void setMode(long aMode);
+    void setMode(bool aMode);
     
 	~Ambisonicsvector();
 	
@@ -51,7 +46,7 @@ public:
 	void process(double* anInput, double *anOutput)
 	{
         double sum = 0., weihtedSumAbscissa = 0, weihtedSumOrdinate = 0,  sumAbs = 0.,weihtedSumAbsAbscissa = 0, weihtedSumAbsOrdinate = 0;
-        for (int i = 0; i < (long)m_configuration; i++)
+        for (int i = 0; i < m_number_of_loudspeakers; i++)
         {
             sum += anInput[i];
             sumAbs += fabs(anInput[i]) * fabs(anInput[i]);
@@ -105,7 +100,7 @@ public:
     void process(float* anInput, float *anOutput)
 	{
         double sum = 0., weihtedSumAbscissa = 0, weihtedSumOrdinate = 0,  sumAbs = 0.,weihtedSumAbsAbscissa = 0, weihtedSumAbsOrdinate = 0;
-        for (int i = 0; i < (long)m_configuration; i++)
+        for (int i = 0; i < m_number_of_loudspeakers; i++)
         {
             sum += anInput[i];
             sumAbs += fabs(anInput[i]) * fabs(anInput[i]);
@@ -163,7 +158,7 @@ public:
         for(int j = 0; j < m_vector_size; j++)
 		{
             double sum = 0., weihtedSumAbscissa = 0, weihtedSumOrdinate = 0,  sumAbs = 0.,weihtedSumAbsAbscissa = 0, weihtedSumAbsOrdinate = 0;
-            for (int i = 0; i < (long)m_configuration; i++)
+            for (int i = 0; i < m_number_of_loudspeakers; i++)
             {
                 sum += anInputVector[i][j];
                 sumAbs += fabs(anInputVector[i][j]) * fabs(anInputVector[i][j]);
@@ -220,7 +215,7 @@ public:
         for(int j = 0; j < m_vector_size; j++)
 		{
             double sum = 0., weihtedSumAbscissa = 0, weihtedSumOrdinate = 0,  sumAbs = 0.,weihtedSumAbsAbscissa = 0, weihtedSumAbsOrdinate = 0;
-            for (int i = 0; i < (long)m_configuration; i++)
+            for (int i = 0; i < m_number_of_loudspeakers; i++)
             {
                 sum += anInputVector[i][j];
                 sumAbs += fabs(anInputVector[i][j]) * fabs(anInputVector[i][j]);

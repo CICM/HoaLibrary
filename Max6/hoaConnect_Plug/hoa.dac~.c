@@ -30,6 +30,7 @@
 typedef struct _dac
 {
 	t_pxobject p_ob;
+    t_object* f_dac;
 } t_dac;
 
 void *dac_new(t_symbol *s, int argc, t_atom *argv);
@@ -40,21 +41,20 @@ void *dac_class;
 int C74_EXPORT main(void)
 {
 	t_class* c;
-
     t_class* dac = class_findbyname(CLASS_BOX, gensym("dac~"));
     
-	c = class_new("hoa.dac~", (method)dac_new, NULL, (short)sizeof(t_dac), 0L, A_GIMME, 0);
-    //c = class_new("hoa.dac~", (method)NULL, (method)NULL, (short)sizeof(t_dac), 0L, A_GIMME, 0);
+	c = class_new("hoa.dac~", (method)dac_new, (method)NULL, (short)sizeof(t_dac), 0L, A_GIMME, 0);
     
     class_addmethod(c, (method)dac_assist,	"assist",	A_CANT, 0);
-    class_addmethod(c, (method)class_method(dac, gensym("dsp64")),	"dsp64",	A_CANT, 0);
+    class_addmethod(c, (method)class_method(dac, gensym("dsp64")),      "dsp64",	A_CANT, 0);
     class_addmethod(c, (method)class_method(dac, gensym("dblclick")),	"dblclick",	A_CANT, 0);
+    class_addmethod(c, (method)class_method(dac, gensym("start")),      "start",	A_GIMME, 0);
+    class_addmethod(c, (method)class_method(dac, gensym("stop")),       "stop",	    A_GIMME, 0);
+    class_addmethod(c, (method)class_method(dac, gensym("stop")),       "stop",	    A_GIMME, 0);
     
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
 	dac_class = c;
-    
-    class_subclass(class_findbyname(CLASS_BOX, gensym("dac~")), c);
 	
 	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 }
@@ -62,65 +62,60 @@ int C74_EXPORT main(void)
 void *dac_new(t_symbol *s, int argc, t_atom *argv)
 {
     t_dac *x = (t_dac *)object_alloc(dac_class);
-	int i, j, count;
-	t_atom channels[10000];
-	int min, max;
-	count = 0;
-	for(i = 0; i < argc; i++)
+    
+	if (x)
 	{
-		if(atom_gettype(argv+i) == A_SYM)
-		{
-			min = atoi(atom_getsym(argv+i)->s_name);
-			if (min < 10)
-				max = atoi(atom_getsym(argv+i)->s_name+2);
-			else if (min < 100)
-				max = atoi(atom_getsym(argv+i)->s_name+3);
-			else if (min < 1000)
-				max = atoi(atom_getsym(argv+i)->s_name+4);
-			else
-				max = atoi(atom_getsym(argv+i)->s_name+5);
-			if (max > min) 
-			{
-				for(j = min; j <= max; j++)
-				{
-					atom_setlong(channels+count++, j);
-				}
-			}
-			else 
-			{
-				for(j = min; j >= max; j--)
-				{
-					atom_setlong(channels+count++, j);
-				}
-			}
-
-		}	
-		else if(atom_gettype(argv+i) == A_LONG)
-		{
-			channels[count++] = argv[i];
-		}
-	}
-    
-    //t_dac *x = (t_dac *)class_super_construct(dac_class, count, channels);
-    //t_dac *x = (t_dac *)class_super_construct((t_class *)dac_class);
-    
-    //object_super_method((t_object *)x, gensym("set"), count, channels);
-    
-    //object_method(x, gensym("set"), count, channels);
-    
-    
-	//x = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count, channels);
+        int i, j, count;
+        t_atom channels[10000];
+        int min, max;
+        count = 0;
+        for(i = 0; i < argc; i++)
+        {
+            if(atom_gettype(argv+i) == A_SYM)
+            {
+                min = atoi(atom_getsym(argv+i)->s_name);
+                if (min < 10)
+                    max = atoi(atom_getsym(argv+i)->s_name+2);
+                else if (min < 100)
+                    max = atoi(atom_getsym(argv+i)->s_name+3);
+                else if (min < 1000)
+                    max = atoi(atom_getsym(argv+i)->s_name+4);
+                else
+                    max = atoi(atom_getsym(argv+i)->s_name+5);
+                if (max > min)
+                {
+                    for(j = min; j <= max; j++)
+                    {
+                        atom_setlong(channels+count++, j);
+                    }
+                }
+                else 
+                {
+                    for(j = min; j >= max; j--)
+                    {
+                        atom_setlong(channels+count++, j);
+                    }
+                }
+                
+            }	
+            else if(atom_gettype(argv+i) == A_LONG)
+            {
+                channels[count++] = argv[i];
+            }
+        }
+        dsp_setup((t_pxobject *)x, count);
+        x->f_dac = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count, channels);
+        method_object_new((method)object_getmethod_object((t_object *)x->f_dac, gensym("startwindow")), gensym("startwindow")->s_name);
+        //object_addmethod((t_object *)x, (method)object_getmethod_object((t_object *)x->f_dac, gensym("startwindow")), gensym("startwindow")->s_name);
+        //object_addmethod_object((t_object *)x, (t_object *)x->f_dac);
+    }
 	
 	return x;
 }
 
 void dac_assist(t_dac *x, void *b, long m, long a, char *s)
 {
-    //object_super_method(x, gensym("assist"), b, m, a, s);
-    /*
-	if (m == ASSIST_OUTLET)
-		sprintf(s,"input channel %ld", a);
-    */
+    sprintf(s,"Loudpseakers channels %ld", a);
 }
 
 

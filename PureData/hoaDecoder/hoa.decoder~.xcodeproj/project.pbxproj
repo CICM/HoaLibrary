@@ -60,13 +60,13 @@
 		5913846415DAA36D0029AD16 = {
 			isa = PBXGroup;
 			children = (
+				8FF140F61770C1A80033763B /* Accelerate.framework */,
 				8FF141BE1771273D0033763B /* hoaAmbisonics */,
 				8F0F725D1772D237004C3017 /* hoaRestitution */,
 				8F0F6DC31772D211004C3017 /* hoaBinaural */,
 				8F0F6DB61772D1FB004C3017 /* hoaDecoder */,
 				8F0F691A1772D163004C3017 /* hoaMultiDecoder */,
 				8FF141981771273D0033763B /* CicmLibrary */,
-				8FF140F61770C1A80033763B /* Accelerate.framework */,
 				5913847615DAA4A50029AD16 /* hoa.decoder~.cpp */,
 				5913847015DAA36D0029AD16 /* Products */,
 			);
@@ -260,17 +260,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DSTROOT = "$(SRCROOT)/../_sdk-build";
 				EXECUTABLE_EXTENSION = pd_darwin;
 				EXECUTABLE_PREFIX = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = "$(SRCROOT)/../_sdk-build";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../Library/Developer/Xcode/DerivedData/hoaEncoder-cwmjizcpisjzcdefxtwapfwnjdhw/Build/Products/Release\"",
 				);
+				LLVM_LTO = NO;
 				OTHER_LDFLAGS = (
 					"-undefined",
 					dynamic_lookup,

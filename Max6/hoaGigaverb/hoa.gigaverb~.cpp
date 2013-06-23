@@ -155,7 +155,7 @@ int main(void)
 	class_register(CLASS_BOX, c);	
 	gigaverb_class = c;
     
-    class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+    class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 	
 	return 0;
 }
@@ -171,7 +171,26 @@ void *gigaverb_new(t_symbol *s, long argc, t_atom *argv)
 			anOrder = atom_getlong(argv);
 
 		x->f_gigaverb = new AmbisonicsGigaverb(anOrder, sys_getmaxblksize(), sys_getsr());
-		
+		x->f_gigaverb->setRoomSize(50.);
+        x->f_gigaverb->setDamping(0.5);
+        x->f_gigaverb->setDryValue(0.);
+        x->f_gigaverb->setWetValue(1.);
+        x->f_gigaverb->setTailLevel(1);
+        x->f_gigaverb->setReverberationTime(7.);
+        x->f_gigaverb->setInputBandwidth(0.5);
+        x->f_gigaverb->setEarlyLevel(1.);
+        
+		object_method(x, gensym("size"), NULL, NULL);
+        object_method(x, gensym("damp"), NULL, NULL);
+        object_method(x, gensym("time"), NULL, NULL);
+        object_method(x, gensym("bandwidth"), NULL, NULL);
+        object_method(x, gensym("egain"), NULL, NULL);
+        object_method(x, gensym("tgain"), NULL, NULL);
+        object_method(x, gensym("dry"), NULL, NULL);
+        object_method(x, gensym("wet"), NULL, NULL);
+        object_method(x, gensym("fspread"), NULL, NULL);
+        object_method(x, gensym("lspread"), NULL, NULL);
+        
 		dsp_setup((t_pxobject *)x, x->f_gigaverb->getNumberOfInputs());
 		for (int i = 0; i < x->f_gigaverb->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");

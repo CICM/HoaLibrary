@@ -1195,7 +1195,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u702000166"
+									"varname" : "u995000163"
 								}
 
 							}
@@ -2845,13 +2845,17 @@
 							}
 , 							{
 								"box" : 								{
+									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+									"channels" : 16,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-45",
+									"loudspeakers" : 16,
 									"ls" : 16,
-									"ls_angles" : [ 0.0, 22.0, 45.0, 67.0, 90.0, 112.0, 135.0, 157.0, 180.0, 202.0, 225.0, 247.0, 270.0, 292.0, 315.0, 337.5 ],
+									"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
-									"numoutlets" : 0,
+									"numoutlets" : 2,
+									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 444.0, 384.5, 178.0, 178.0 ]
 								}
 
@@ -2945,7 +2949,7 @@
 													"fontsize" : 11.595187,
 													"id" : "obj-30",
 													"maxclass" : "newobj",
-													"numinlets" : 1,
+													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
 													"patching_rect" : [ 50.0, 169.0, 59.0, 19.0 ],
@@ -3237,6 +3241,18 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 40.0, 262.5, 255.77948, 20.0 ],
+									"saved_object_attributes" : 									{
+										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
+										"config" : 5.1,
+										"loudspeakers" : 16,
+										"ls" : 16,
+										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
+										"mode" : "ambisonics",
+										"offset" : 0.0,
+										"pinnaesize" : "small",
+										"restitution" : "panning"
+									}
+,
 									"text" : "hoa.decoder~ 7 16"
 								}
 
@@ -3410,6 +3426,24 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-23", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-1", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-23", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-40", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -3557,7 +3591,6 @@
 									"destination" : [ "obj-45", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 286.279449, 378.669128, 612.5, 378.669128 ],
 									"source" : [ "obj-1", 15 ]
 								}
 
@@ -3567,7 +3600,6 @@
 									"destination" : [ "obj-45", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 270.473328, 378.669128, 601.900024, 378.669128 ],
 									"source" : [ "obj-1", 14 ]
 								}
 
@@ -3577,7 +3609,6 @@
 									"destination" : [ "obj-45", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 254.667206, 378.669128, 591.299988, 378.669128 ],
 									"source" : [ "obj-1", 13 ]
 								}
 
@@ -3587,7 +3618,6 @@
 									"destination" : [ "obj-45", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 238.861069, 378.669128, 580.700012, 378.669128 ],
 									"source" : [ "obj-1", 12 ]
 								}
 
@@ -3597,7 +3627,6 @@
 									"destination" : [ "obj-45", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 223.054932, 378.669128, 570.099976, 378.669128 ],
 									"source" : [ "obj-1", 11 ]
 								}
 
@@ -3607,7 +3636,6 @@
 									"destination" : [ "obj-45", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 207.24881, 378.669128, 559.5, 378.669128 ],
 									"source" : [ "obj-1", 10 ]
 								}
 
@@ -3617,7 +3645,6 @@
 									"destination" : [ "obj-45", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 191.442673, 378.669128, 548.900024, 378.669128 ],
 									"source" : [ "obj-1", 9 ]
 								}
 
@@ -3627,7 +3654,6 @@
 									"destination" : [ "obj-45", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 175.636536, 378.669128, 538.299988, 378.669128 ],
 									"source" : [ "obj-1", 8 ]
 								}
 
@@ -3637,7 +3663,6 @@
 									"destination" : [ "obj-45", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 159.830414, 378.669128, 527.700012, 378.669128 ],
 									"source" : [ "obj-1", 7 ]
 								}
 
@@ -3647,7 +3672,6 @@
 									"destination" : [ "obj-45", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 144.024277, 378.669128, 517.099976, 378.669128 ],
 									"source" : [ "obj-1", 6 ]
 								}
 
@@ -3657,7 +3681,6 @@
 									"destination" : [ "obj-45", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 128.218155, 378.669128, 506.5, 378.669128 ],
 									"source" : [ "obj-1", 5 ]
 								}
 
@@ -3667,7 +3690,6 @@
 									"destination" : [ "obj-45", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 112.412018, 378.669128, 495.899994, 378.669128 ],
 									"source" : [ "obj-1", 4 ]
 								}
 
@@ -3677,7 +3699,6 @@
 									"destination" : [ "obj-45", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 96.605888, 378.669128, 485.299988, 378.669128 ],
 									"source" : [ "obj-1", 3 ]
 								}
 
@@ -3687,7 +3708,6 @@
 									"destination" : [ "obj-45", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 80.799759, 378.669128, 474.700012, 378.669128 ],
 									"source" : [ "obj-1", 2 ]
 								}
 
@@ -3697,7 +3717,6 @@
 									"destination" : [ "obj-45", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 64.993622, 378.669128, 464.100006, 378.669128 ],
 									"source" : [ "obj-1", 1 ]
 								}
 
@@ -4482,8 +4501,8 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.1/misc/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}

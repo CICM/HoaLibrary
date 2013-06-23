@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		2CFE07E2171051B600972936 /* hoa.dac~.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE07E1171051B600972936 /* hoa.dac~.c */; };
 		2CFF947D17536D6D00C7D857 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFF947C17536D6D00C7D857 /* MaxAudioAPI.framework */; };
+		8FD95B741775638C0049495B /* hoa.dac~ copie.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FD95B731775638C0049495B /* hoa.dac~ copie.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2CFE07E1171051B600972936 /* hoa.dac~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.dac~.c"; sourceTree = "<group>"; };
 		2CFF947C17536D6D00C7D857 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/x64/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.dac~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.dac~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FD95B731775638C0049495B /* hoa.dac~ copie.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.dac~ copie.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,8 +35,8 @@
 			isa = PBXGroup;
 			children = (
 				2CFF947C17536D6D00C7D857 /* MaxAudioAPI.framework */,
-				2CFE07E1171051B600972936 /* hoa.dac~.c */,
 				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
+				8FD95B731775638C0049495B /* hoa.dac~ copie.c */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CFE07E2171051B600972936 /* hoa.dac~.c in Sources */,
+				8FD95B741775638C0049495B /* hoa.dac~ copie.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +213,7 @@
 				2FBBEAD108F335010078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
 			isa = XCConfigurationList;
@@ -222,7 +222,7 @@
 				2FBBEAE208F335360078DB84 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Deployment;
 		};
 /* End XCConfigurationList section */
 	};

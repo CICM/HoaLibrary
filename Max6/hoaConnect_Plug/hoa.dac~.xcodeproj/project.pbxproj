@@ -8,33 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		8F90987C172EADF400AB0C37 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F909878172EADF400AB0C37 /* CicmDefine.h */; };
-		8F90987D172EADF400AB0C37 /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F909879172EADF400AB0C37 /* CicmLine.cpp */; };
-		8F90987E172EADF400AB0C37 /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F90987A172EADF400AB0C37 /* CicmLine.h */; };
-		8F90987F172EADF400AB0C37 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F90987B172EADF400AB0C37 /* CicmTools.h */; };
-		8F95187E17337DE2000402C7 /* AmbisonicsVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F95187B17337DE2000402C7 /* AmbisonicsVector.cpp */; };
-		8F95187F17337DE2000402C7 /* AmbisonicsVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F95187C17337DE2000402C7 /* AmbisonicsVector.h */; };
-		8F95188017337DE2000402C7 /* hoa.vector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F95187D17337DE2000402C7 /* hoa.vector~.cpp */; };
-		8FD5CC76173CCE82009BD586 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FD5CC74173CCE82009BD586 /* Planewaves.cpp */; };
-		8FD5CC77173CCE82009BD586 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FD5CC75173CCE82009BD586 /* Planewaves.h */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
 		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
+		8FFD0BF01775653800556258 /* hoa.dac~.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD0BEF1775653800556258 /* hoa.dac~.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2FBBEAE508F335360078DB84 /* hoa.vector~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.vector~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F909878172EADF400AB0C37 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
-		8F909879172EADF400AB0C37 /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
-		8F90987A172EADF400AB0C37 /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
-		8F90987B172EADF400AB0C37 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
-		8F95187B17337DE2000402C7 /* AmbisonicsVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsVector.cpp; sourceTree = "<group>"; };
-		8F95187C17337DE2000402C7 /* AmbisonicsVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsVector.h; sourceTree = "<group>"; };
-		8F95187D17337DE2000402C7 /* hoa.vector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.vector~.cpp"; sourceTree = "<group>"; };
-		8FD5CC74173CCE82009BD586 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Planewaves.cpp; path = ../hoaAmbisonics/Planewaves.cpp; sourceTree = "<group>"; };
-		8FD5CC75173CCE82009BD586 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Planewaves.h; path = ../hoaAmbisonics/Planewaves.h; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.dac~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.dac~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		8FFD0BEF1775653800556258 /* hoa.dac~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.dac~.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +40,7 @@
 				8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */,
 				8FE028B4172A837B00BD68AA /* Accelerate.framework */,
 				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
-				8F909877172EADF400AB0C37 /* CicmLibrary */,
-				8FE028AB172A833B00BD68AA /* Source */,
+				8FFD0BEF1775653800556258 /* hoa.dac~.c */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
@@ -66,33 +49,9 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.vector~.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.dac~.mxo */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		8F909877172EADF400AB0C37 /* CicmLibrary */ = {
-			isa = PBXGroup;
-			children = (
-				8F909878172EADF400AB0C37 /* CicmDefine.h */,
-				8F909879172EADF400AB0C37 /* CicmLine.cpp */,
-				8F90987A172EADF400AB0C37 /* CicmLine.h */,
-				8F90987B172EADF400AB0C37 /* CicmTools.h */,
-			);
-			name = CicmLibrary;
-			path = ../CicmLibrary;
-			sourceTree = "<group>";
-		};
-		8FE028AB172A833B00BD68AA /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				8FD5CC74173CCE82009BD586 /* Planewaves.cpp */,
-				8FD5CC75173CCE82009BD586 /* Planewaves.h */,
-				8F95187B17337DE2000402C7 /* AmbisonicsVector.cpp */,
-				8F95187C17337DE2000402C7 /* AmbisonicsVector.h */,
-				8F95187D17337DE2000402C7 /* hoa.vector~.cpp */,
-			);
-			name = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,11 +61,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F90987C172EADF400AB0C37 /* CicmDefine.h in Headers */,
-				8F90987E172EADF400AB0C37 /* CicmLine.h in Headers */,
-				8F90987F172EADF400AB0C37 /* CicmTools.h in Headers */,
-				8F95187F17337DE2000402C7 /* AmbisonicsVector.h in Headers */,
-				8FD5CC77173CCE82009BD586 /* Planewaves.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +83,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.vector~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.dac~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -140,7 +94,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.vector~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.dac~" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -185,10 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F90987D172EADF400AB0C37 /* CicmLine.cpp in Sources */,
-				8F95187E17337DE2000402C7 /* AmbisonicsVector.cpp in Sources */,
-				8F95188017337DE2000402C7 /* hoa.vector~.cpp in Sources */,
-				8FD5CC76173CCE82009BD586 /* Planewaves.cpp in Sources */,
+				8FFD0BF01775653800556258 /* hoa.dac~.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +151,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				SDKROOT = macosx10.7;
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Development;
 		};
@@ -208,6 +160,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				SDKROOT = macosx10.7;
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Deployment;
 		};
@@ -215,6 +168,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -234,7 +188,9 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "hoa.vector~";
+				PRODUCT_NAME = "hoa.dac~";
+				SDKROOT = "";
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Development;
 		};
@@ -242,6 +198,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -261,14 +218,16 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "hoa.vector~";
+				PRODUCT_NAME = "hoa.dac~";
+				SDKROOT = "";
+				VALID_ARCHS = "x86_64 i386";
 			};
 			name = Deployment;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.vector~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.dac~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

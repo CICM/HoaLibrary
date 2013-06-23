@@ -116,7 +116,13 @@ void hoa_decoder_dsp(hoa_decoder *x, t_signal **sp, short *count)
 {
 	x->f_ambisonics_decoder->setVectorSize(sp[0]->s_n);
     x->f_ambisonics_decoder->setSamplingRate(sp[0]->s_sr);
-
+    post("sampling_rate %f", sp[0]->s_sr);
+    post("sampling_rate2 %f", x->f_ambisonics_decoder->getSamplingRate());
+    post("vector_size %i", sp[0]->s_n);
+    post("vector_size2 %i", x->f_ambisonics_decoder->getVectorSize());
+    
+    post("%f", sys_getblksize());
+    
     for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfInputs(); i++)
         x->f_inputs[i] = sp[i]->s_vec;
     for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfOutputs(); i++)

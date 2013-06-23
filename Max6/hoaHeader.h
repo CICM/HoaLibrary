@@ -32,10 +32,11 @@ void hoa_postcredits();
 // Initialize Hoa
 void hoa_init(void)
 {
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 }
 
-void hoa_postcredits(){
+void hoa_postcredits()
+{
 	post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
 	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
 }

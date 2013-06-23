@@ -99,6 +99,7 @@ typedef struct _hoaGain
     // options
     double          f_interp;
     t_atom_long     f_numberOfChannels;
+    t_pt            f_popup_menu_pt;
     
 } t_hoaGain;
 
@@ -339,6 +340,7 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
     
     jbox_ready((t_jbox *)x);
     x->j_box.z_misc = Z_NO_INPLACE;
+    
 	return x;
 }
 
@@ -565,20 +567,21 @@ void hoaGain_paint(t_hoaGain *x, t_object *view)
     isHoriz = hoaGain_ishorizontal(x, &rect);
     draw_background(x, view, &rect, isHoriz);
     draw_cursor(x, view, &rect, isHoriz);
+    x->f_popup_menu_pt.x = rect.x + rect.width;
+    x->f_popup_menu_pt.y = rect.y + rect.height;
 }
 
 void hoaGain_drawPopupValue(t_hoaGain *x)
 {
     /*
-    t_jfont *jf;
-    jf = jfont_create(jbox_get_fontname((t_jbox *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_SLANT_NORMAL, 16);
+    char text[256];
+    //t_jfont* jf = jfont_create(jbox_get_fontname((t_jbox *)x)->s_name, JGRAPHICS_FONT_SLANT_NORMAL, JGRAPHICS_FONT_SLANT_NORMAL, 16);
+    sprintf(text, "%.f dB", x->j_valdB);
     t_jpopupmenu* popup = jpopupmenu_create();
-    //jpopupmenu_setfont(subpopup, x->jfont);
-    jpopupmenu_additem(popup, 0, "Menu", NULL, 0, 1, NULL);
-    jpopupmenu_addseperator(popup);
-    jpopupmenu_additem(popup, 1, "Add source", NULL, 0, 0, NULL);
+    jpopupmenu_additem(popup, 0, text, NULL, 0, 1, NULL);
+    jpopupmenu_popup(popup, x->f_popup_menu_pt, 0);
     jpopupmenu_destroy(popup);
-    */
+     */
 }
 
 void draw_cursor(t_hoaGain *x, t_object *view, t_rect *rect, char isHoriz)
@@ -1067,6 +1070,7 @@ void hoaGain_mousedragdelta(t_hoaGain *x, t_object *patcherview, t_pt pt, long m
     if (Tools::isInside(x->j_valdB, -0.05, 0.05) ) {
         hoaGain_float_dB(x, 0);
     }
+    hoaGain_drawPopupValue(x);
 }
 
 void hoaGain_mouseup(t_hoaGain *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -1136,7 +1140,7 @@ void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
     t_object *line;
 	t_max_err err;
     
-    if(argc && argv && (s == gensym("loudspeakers") || s == gensym("angles")))
+    if(argc && argv && (s == gensym("loudspeakers") || s == gensym("angles") || s == gensym("offset") ))
     {
         err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
         if (err != MAX_ERR_NONE)
