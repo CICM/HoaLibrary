@@ -59,7 +59,7 @@ void setup_hoa0x2edecoder_tilde(void)
     
     hoa_decoder_class = c;
     CLASS_MAINSIGNALIN(hoa_decoder_class, hoa_decoder, f);
-    post("hoa.library (version 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+    post("hoa.library (version 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris with the participation of Manuel Deneu");
 	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
 }
 }
@@ -95,7 +95,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         
         sprintf(hrtfPath, "%s/HrtfDatabase/", canvas_getcurrentdir()->s_name);
         
-		x->f_ambisonics_decoder = new AmbisonicsMultiDecoder(order, hrtfPath, pinnaesize, sys_getblksize(), sys_getsr(), mode, numberOfLoudspeakers, numberOfLoudspeakers, offset);
+		x->f_ambisonics_decoder = new AmbisonicsMultiDecoder(order, hrtfPath, pinnaesize, 64, 44100, mode, numberOfLoudspeakers, numberOfLoudspeakers, offset);
         x->f_ambisonics_decoder->setRestitutionMode(decmode);
         
         for (int i = 0; i < x->f_ambisonics_decoder->getNumberOfInputs()-1; i++)
@@ -114,14 +114,8 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 
 void hoa_decoder_dsp(hoa_decoder *x, t_signal **sp, short *count)
 {
-	x->f_ambisonics_decoder->setVectorSize(sp[0]->s_n);
-    x->f_ambisonics_decoder->setSamplingRate(sp[0]->s_sr);
-    post("sampling_rate %f", sp[0]->s_sr);
-    post("sampling_rate2 %f", x->f_ambisonics_decoder->getSamplingRate());
-    post("vector_size %i", sp[0]->s_n);
-    post("vector_size2 %i", x->f_ambisonics_decoder->getVectorSize());
-    
-    post("%f", sys_getblksize());
+	x->f_ambisonics_decoder->setVectorSize((long)sp[0]->s_n);
+    x->f_ambisonics_decoder->setSamplingRate((long)sp[0]->s_sr);
     
     for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfInputs(); i++)
         x->f_inputs[i] = sp[i]->s_vec;
@@ -136,6 +130,7 @@ t_int *hoa_decoder_perform(t_int *w)
 	hoa_decoder *x	= (hoa_decoder *)(w[1]);
 	
 	x->f_ambisonics_decoder->process(x->f_inputs, x->f_outputs);
+    
     for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfOutputs(); i++)
         Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_decoder->getVectorSize());
     

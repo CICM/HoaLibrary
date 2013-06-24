@@ -131,15 +131,17 @@ public:
 	{
         if(m_hrtf_loaded == 1)
         {
+            float* input;
             /* Record Inputs vectors In The Matrix */
             for (int i = 0; i < m_number_of_harmonics; i++)
             {
+                input = aInputs[i];
                 for (int j = 0; j < m_vector_size; j++)
                 {
-                    m_input_matrix[i*m_vector_size+j] = aInputs[i][j];
+                    m_input_matrix[i*m_vector_size+j] = input[j];
                 }
             }
-            cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (int)(m_impulse_size * 2), m_vector_size, m_number_of_harmonics, 1.,
+            cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (m_impulse_size * 2), m_vector_size, m_number_of_harmonics, 1.,
                         m_impluse_matrix, m_number_of_harmonics,
                         m_input_matrix,  m_vector_size,
                         0., m_result_matrix,  m_vector_size);
@@ -147,9 +149,8 @@ public:
             /* Write On The Tempory Vectors And The Outputs Vectors */
             for (int j = 0; j < m_vector_size; j++)
             {
-                
-                cblas_saxpy(m_impulse_size, 1.f, m_result_matrix_left + j, m_vector_size, m_linear_vector_left + j, 1);
-                cblas_saxpy(m_impulse_size, 1.f, m_result_matrix_right + j, m_vector_size, m_linear_vector_right + j, 1);
+                cblas_saxpy(m_impulse_size,1.f, m_result_matrix+j+m_vector_size*m_impulse_size, m_vector_size, m_linear_vector_left  + j, 1);
+                cblas_saxpy(m_impulse_size,1.f, m_result_matrix+j, m_vector_size, m_linear_vector_right + j, 1);
                 
                 aOutputs[0][j] = m_linear_vector_left[j];
                 aOutputs[1][j] = m_linear_vector_right[j];

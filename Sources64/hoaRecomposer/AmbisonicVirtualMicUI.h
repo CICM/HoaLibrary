@@ -26,7 +26,10 @@
 #ifndef __hoa_recomposer__AmbisonicVirtualMicUI__
 #define __hoa_recomposer__AmbisonicVirtualMicUI__
 
-#include "CicmProjectHeader.h"
+#define MAX_MICS 64
+#define MIN_MICS 3
+#define DEF_MICS 8
+
 #include "../hoaEncoder/AmbisonicsEncoder.h"
 #include "../hoaAmbisonics/AmbisonicsViewer.h"
 #include "../hoaOptim/AmbisonicsOptim.h"

@@ -26,7 +26,6 @@
 #ifndef __hoa_recomposer__AmbisonicVirtualMicUIManager__
 #define __hoa_recomposer__AmbisonicVirtualMicUIManager__
 
-#include "CicmProjectHeader.h"
 #include "AmbisonicVirtualMicUI.h"
 
 class AmbisonicVirtualMicUIManager

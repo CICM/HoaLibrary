@@ -61,6 +61,11 @@ public:
     
     void    setPinnaeSize(long aPinnaSize);
     long    getPinnaeSize();
+    long    getGetHrtfLoaded(){return m_binaural->getGetHrtfLoaded();};
+    long    getHrtfSize()
+    {
+        return m_binaural->getHrtfSize();
+    };
     
     void    setRestitutionMode(long aResitutionMode);
     long    getRestitutionMode();

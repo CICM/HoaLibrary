@@ -34,7 +34,6 @@ extern "C"
 #include "ext_globalsymbol.h"
 }
 
-#include "../CicmLibrary/CicmTools.h"
 
 #define MAX_MICS 64
 #define MIN_MICS 3
