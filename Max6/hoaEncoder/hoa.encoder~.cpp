@@ -30,7 +30,6 @@ extern "C"
 #include "ext.h"
 #include "ext_obex.h"
 #include "z_dsp.h"
-#include "../hoaHeader.h"
 }
 
 int postons = 0;
@@ -84,14 +83,9 @@ int C74_EXPORT main(void)
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
 
-	if(class_findbyname(CLASS_NOBOX, gensym("hoa.loader")) == NULL)
-	{
-		if(postons == 0)
-		{
-			hoa_postcredits();
-			postons = 1;
-		}
-	}
+    post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
+    
 	return 0;
 }
 
