@@ -2,36 +2,24 @@
 
 A high order ambisonics library.
 
-Hoa Library is a collection of C++ classes and MAX/MSP objects destined to high order ambisonic sound reproduction. 
+Hoa Library is a collection of C/C++ classes and Max/MSP objects, Pure Data objects and VST plugins destined to high order ambisonic sound reproduction. 
 It‘s totally free and made availlable by CICM, a research center bi-localized between Paris VIII University and the MSH (Maison des sciences de l‘Homme).
+
+## Authors :
+
+Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
 ## Libraries : 
 
-### Mac OsX Install
+### Mac OsX 
 
-#### GSL (http://www.gnu.org/software/gsl/) : 
+#### Apple Accelerate framework
 
-	1 . Download (ftp://ftp.gnu.org/gnu/gsl/gsl-1.15.tar.gz)
-	2 . Unpack gsl-1.15.tar.gz
-	3 . Use the Terminal and change the directory (cd gsl-1.15)
-	4 . ./configure CFLAGS="-m32 -g -O2"
-	5 . make
-	6 . sudo make install
+### Windows
 
-#### GFORTRAN (http://gcc.gnu.org/wiki/GFortranBinariesMacOS) :
+#### Intel Composer XE
 
-	1 . Download (http://quatramaran.ens.fr/~coudert/gfortran/gfortran-and-gcc-4-6-2-RC20111019-Sno-x86-64.dmg)
-	2 . Install the package
+## Libraries : 
 
-#### ATLAS and LAPACK (http://math-atlas.sourceforge.net/)
-
-	1 . Download (http://sourceforge.net/projects/math-atlas/files/latest/download?source=files)
-	2 . Download (http://www.netlib.org/lapack/lapack-3.4.2.tgz)
-	3 . Create tempory directory
-	4 . Put the two packages and unpack atlas3.10.0.tar.bz2
-	5 . Use the Terminal and change the directory (cd atlas3.10.0)
-	6 . mkdir bld
-	7 . cd bld
-	8 . ../configure -b 64 --shared --prefix=/usr/local/atlas-3.10.0 \
-    --with-netlib-lapack-tarfile=../../lapack-3.4.2.tgz
-    9 . make build
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/fr/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://creativecommons.org']);" rel="license"><img style="border-width: 0;" src="http://i.creativecommons.org/l/by-nc-sa/3.0/fr/88x31.png" alt="Licence Creative Commons" /></a><br />
+La Bibliothèque <em>HoaLibrary</em> est mise à disposition par le <a href="http://cicm.mshparisnord.org/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://cicm.mshparisnord.org']);" rel="cc:attributionURL">CICM</a> selon les termes de la <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/fr/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://creativecommons.org']);" rel="license">licence Creative Commons Attribution &#8211; Pas d’Utilisation Commerciale &#8211; Partage dans les Mêmes Conditions 3.0 France</a>.<br />
