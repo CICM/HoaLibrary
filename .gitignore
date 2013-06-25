@@ -12,8 +12,11 @@ JuceLibraryCode/
 #################
 ## XCode
 #################
+xcuserdata/
+
 *.build/
 *.gcda
+
 # Mac crap
 .DS_Store
 
