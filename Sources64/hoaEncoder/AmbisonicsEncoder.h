@@ -50,9 +50,9 @@ public:
 	std::string getMode();
     
     void    setVectorSize(long aVectorSize);
-	void	setAzimtuh(double aTheta);
-    void    setAzimtuh(float aTheta);
-    void	setAzimtuhBoth(double aTheta);
+	void	setAzimuth(double aTheta);
+    void    setAzimuth(float aTheta);
+    void	setAzimuthBoth(double aTheta);
 
 	~AmbisonicsEncoder();
     
@@ -61,7 +61,7 @@ public:
 	
 	inline void process(double anInput, double* anOutputs, double aTheta)
 	{
-		setAzimtuh((double)aTheta);
+		setAzimuth((double)aTheta);
 		return process(anInput, anOutputs);
 	}
 	
@@ -73,7 +73,7 @@ public:
     
     inline void process(float anInput, float* anOutputs, float aTheta)
 	{
-		setAzimtuh((float)aTheta);
+		setAzimuth((float)aTheta);
 		return process(anInput, anOutputs);
 	}
 	
@@ -136,7 +136,7 @@ public:
     /* Perform sample by sample - Split Mode */
 	inline void process(double* anInputs, double* anOutputs, double aTheta)
 	{
-		setAzimtuh((double)aTheta);
+		setAzimuth((double)aTheta);
 		return process(anInputs, anOutputs);
 	}
 	
@@ -148,7 +148,7 @@ public:
     
     inline void process(float* anInputs, float* anOutputs, float aTheta)
 	{
-		setAzimtuh((float)aTheta);
+		setAzimuth((float)aTheta);
 		return process(anInputs, anOutputs);
 	}
 	

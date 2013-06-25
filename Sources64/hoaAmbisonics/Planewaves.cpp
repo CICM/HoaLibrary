@@ -25,11 +25,15 @@
 
 #include "Planewaves.h"
 
-Planewaves::Planewaves(double aConfiguration, long aVectorSize, double aSamplingRate)
+Planewaves::Planewaves(long aNumberOfLoudspeakers, long aVectorSize, double aSamplingRate)
 {
     m_angles_of_loudspeakers = NULL;
+    m_abscissa_of_loudspeakers = NULL;
+    m_ordinate_of_loudspeakers = NULL;
+    
 	setVectorSize(aVectorSize);
     setSamplingRate(aSamplingRate);
+    setNumberOfLoudspeakers(aNumberOfLoudspeakers, 0);
 }
 
 long Planewaves::getNumberOfInputs()
@@ -52,14 +56,14 @@ long Planewaves::getSamplingRate()
 	return m_sampling_rate;
 }
 
-double Planewaves::getConfiguration()
+long Planewaves::getNumberOfLoudspeakers()
 {
-    return m_configuration;
+    return m_number_of_loudspeakers;
 }
 
 double Planewaves::getLoudspeakerAngle(long anIndex)
 {
-    if(anIndex >= 0 && anIndex < m_configuration)
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
         return m_angles_of_loudspeakers[anIndex] / CICM_2PI * 360.;
     else
         return 0.;
@@ -67,41 +71,39 @@ double Planewaves::getLoudspeakerAngle(long anIndex)
 
 std::string Planewaves::getLoudspeakerName(long anIndex)
 {
-    if(anIndex >= 0 && anIndex < m_configuration)
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
         return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(m_angles_of_loudspeakers[anIndex]/ CICM_2PI * 360.) + "°";
-    else if(anIndex == (long)m_configuration && m_low_frequency_effect)
-        return "Lfe channel";
     else
         return "No channel";
 }
 
 void Planewaves::computeConfiguration(bool standardOnOff)
 {
-    if(standardOnOff)
+    if(standardOnOff && m_number_of_loudspeakers <= 7)
     {
-        if((long)m_configuration == 1)          // Mono //
+        if(m_number_of_loudspeakers == 1)          // Mono //
         {
             m_angles_of_loudspeakers[0] = 0.;
         }
-        else if((long)m_configuration == 2)     // Stereo //
+        else if(m_number_of_loudspeakers == 2)     // Stereo //
         {
             m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[1] = 330. / 360. * CICM_2PI;
         }
-        else if((long)m_configuration == 3)     // Dolby Surround //
+        else if(m_number_of_loudspeakers == 3)     // Dolby Surround //
         {
             m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[1] = 180. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[2] = 330. / 360. * CICM_2PI;
         }
-        else if((long)m_configuration == 4)     // Quadriphonic //
+        else if(m_number_of_loudspeakers == 4)     // Quadriphonic //
         {
             m_angles_of_loudspeakers[0] = 45. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[1] = 135. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[2] = 225. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[3] = 315. / 360. * CICM_2PI;
         }
-        else if((long)m_configuration == 5)     // Surround 5.1 //
+        else if(m_number_of_loudspeakers == 5)     // Surround 5.1 //
         {
             m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
@@ -109,7 +111,7 @@ void Planewaves::computeConfiguration(bool standardOnOff)
             m_angles_of_loudspeakers[3] = 250. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[4] = 330. / 360. * CICM_2PI;
         }
-        else if((long)m_configuration == 6)     // Surround 6.1 //
+        else if(m_number_of_loudspeakers == 6)     // Surround 6.1 //
         {
             m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
@@ -118,7 +120,7 @@ void Planewaves::computeConfiguration(bool standardOnOff)
             m_angles_of_loudspeakers[4] = 250. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[5] = 330. / 360. * CICM_2PI;
         }
-        else if((long)m_configuration == 7)     // Surround 7.1 //
+        else if(m_number_of_loudspeakers == 7)     // Surround 7.1 //
         {
             m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
@@ -128,58 +130,48 @@ void Planewaves::computeConfiguration(bool standardOnOff)
             m_angles_of_loudspeakers[5] = 250. / 360. * CICM_2PI;
             m_angles_of_loudspeakers[6] = 330. / 360. * CICM_2PI;
         }
-        else                                            // Ambisonics base //
-        {
-            for (int i = 0; i < (long)m_configuration; i++)
-                m_angles_of_loudspeakers[i] = (double)i / (double)((long)m_configuration) * CICM_2PI;
-        }
     }
-    else                                                // Ambisonics base //
+    else                   // Ambisonics base //
     {
-        for (int i = 0; i < (long)m_configuration; i++)
-            m_angles_of_loudspeakers[i] = (double)i / (double)((long)m_configuration) * CICM_2PI;
+        for (int i = 0; i < (long)m_number_of_loudspeakers; i++)
+            m_angles_of_loudspeakers[i] = (double)i / (double)(m_number_of_loudspeakers) * CICM_2PI;
     }
 }
 
-void Planewaves::setConfiguration(double aConfiguration, bool standardOnOff)
+void Planewaves::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff)
 {
-    m_configuration  = (long)Tools::clip_min(aConfiguration, 1.);
-    m_number_of_inputs		= m_configuration;
-	m_number_of_outputs		= m_configuration;
-    if(aConfiguration - (long)aConfiguration != 0.)
-    {
-        m_low_frequency_effect = 1;
-        m_configuration += 0.1;
-        m_number_of_inputs++;
-        m_number_of_outputs++;
-    }
-    else
-        m_low_frequency_effect = 0;
+    m_number_of_loudspeakers    = (long)Tools::clip_min(aNumberOfLoudspeakers, (long)1);
+    m_number_of_inputs          = m_number_of_loudspeakers;
+	m_number_of_outputs         = m_number_of_loudspeakers;
     
     if(m_angles_of_loudspeakers)
         free(m_angles_of_loudspeakers);
+    if(m_abscissa_of_loudspeakers)
+        free(m_abscissa_of_loudspeakers);
+    if(m_ordinate_of_loudspeakers)
+        free(m_ordinate_of_loudspeakers);
     
     /* Define standard configuration */
-    m_angles_of_loudspeakers = new double[(long)m_configuration];
+    m_angles_of_loudspeakers    = new double[m_number_of_inputs];
+    m_abscissa_of_loudspeakers  = new double[m_number_of_inputs];
+    m_ordinate_of_loudspeakers  = new double[m_number_of_inputs];
     computeConfiguration(standardOnOff);
+    
+    for (int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
+        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
+    }
 }
 
 void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
 {
-    if(anIndex >= 0 && anIndex < (long)m_configuration)
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
     {
         anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
         m_angles_of_loudspeakers[anIndex] = anAngle;
     }
-    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
-}
-
-void Planewaves::setLoudspeakerAngles(long len, double* angles)
-{
-    for (int i=0; i<len && i<m_number_of_inputs; i++) {
-        m_angles_of_loudspeakers[i] = Tools::radianWrap(angles[i] / 360. * CICM_2PI);
-    }
-    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
+    Tools::sortVector(m_angles_of_loudspeakers, m_number_of_loudspeakers);
 }
 
 void Planewaves::setVectorSize(long aVectorSize)
@@ -195,5 +187,7 @@ void Planewaves::setSamplingRate(long aSamplingRate)
 Planewaves::~Planewaves()
 {
 	free(m_angles_of_loudspeakers);
+    free(m_abscissa_of_loudspeakers);
+    free(m_ordinate_of_loudspeakers);
 }
 

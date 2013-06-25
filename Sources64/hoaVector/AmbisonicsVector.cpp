@@ -25,76 +25,9 @@
 
 #include "AmbisonicsVector.h"
 
-Ambisonicsvector::Ambisonicsvector(double aConfiguration, long aMode, long aVectorSize) : Planewaves(aConfiguration, aVectorSize)
+Ambisonicsvector::Ambisonicsvector(long aNumberOfLoudspeakers, bool aMode, long aVectorSize) : Planewaves(aNumberOfLoudspeakers, aVectorSize)
 {
-    m_abscissa_of_loudspeakers = NULL;
-    m_ordinate_of_loudspeakers = NULL;
-    setConfiguration(m_configuration);
     setMode(aMode);
-}
-
-void Ambisonicsvector::setConfiguration(double aConfiguration, bool standardOnOff)
-{
-    m_configuration  = (long)Tools::clip_min(aConfiguration, 1.);
-    m_number_of_inputs		= m_configuration;
-	m_number_of_outputs		= 4;
-    if(aConfiguration - (long)aConfiguration != 0.)
-    {
-        m_low_frequency_effect = 1;
-        m_configuration += 0.1;
-    }
-    else
-        m_low_frequency_effect = 0;
-    
-    if(m_angles_of_loudspeakers)
-        free(m_angles_of_loudspeakers);
-    if(m_abscissa_of_loudspeakers)
-        free(m_abscissa_of_loudspeakers);
-    if(m_ordinate_of_loudspeakers)
-        free(m_ordinate_of_loudspeakers);
-    
-    /* Define standard configuration */
-    m_angles_of_loudspeakers = new double[(long)m_configuration];
-    m_abscissa_of_loudspeakers = new double[(long)m_configuration];
-    m_ordinate_of_loudspeakers = new double[(long)m_configuration];
-    computeConfiguration(standardOnOff);
-   
-    for (int i = 0; i < (long)m_configuration; i++)
-    {
-        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
-        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
-    }
-
-}
-
-void Ambisonicsvector::setLoudspeakerAngle(long anIndex, double anAngle)
-{
-    if(anIndex >= 0 && anIndex < (long)m_configuration)
-    {
-        anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
-        m_angles_of_loudspeakers[anIndex] = anAngle;
-    }
-    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
-    
-    for(int i = 0; i < (long)m_configuration; i++)
-    {
-        m_abscissa_of_loudspeakers[i] = cos(m_angles_of_loudspeakers[i]);
-        m_ordinate_of_loudspeakers[i] = sin(m_angles_of_loudspeakers[i]);
-    }
-}
-
-void Ambisonicsvector::setLoudspeakerAngles(long len, double* angles)
-{
-    for (int i=0; i<len && i<m_number_of_inputs; i++) {
-        m_angles_of_loudspeakers[i] = Tools::radianWrap(angles[i] / 360. * CICM_2PI);
-    }
-    Tools::sortVector(m_angles_of_loudspeakers, (long)m_configuration);
-    
-    for(int i = 0; i < (long)m_configuration; i++)
-    {
-        m_abscissa_of_loudspeakers[i] = cos(m_angles_of_loudspeakers[i]);
-        m_ordinate_of_loudspeakers[i] = sin(m_angles_of_loudspeakers[i]);
-    }
 }
 
 std::string Ambisonicsvector::getVectorName(long anIndex)
@@ -128,7 +61,7 @@ long Ambisonicsvector::getMode()
     return m_mode;
 }
 
-void Ambisonicsvector::setMode(long aMode)
+void Ambisonicsvector::setMode(bool aMode)
 {
     if(aMode == Hoa_Cartesian)
         m_mode = Hoa_Cartesian;
@@ -138,10 +71,5 @@ void Ambisonicsvector::setMode(long aMode)
 
 Ambisonicsvector::~Ambisonicsvector()
 {
-	if(m_angles_of_loudspeakers)
-        free(m_angles_of_loudspeakers);
-    if(m_abscissa_of_loudspeakers)
-        free(m_abscissa_of_loudspeakers);
-    if(m_ordinate_of_loudspeakers)
-        free(m_ordinate_of_loudspeakers);
+	;
 }

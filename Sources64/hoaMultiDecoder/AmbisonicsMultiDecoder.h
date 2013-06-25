@@ -33,7 +33,7 @@ enum
     Hoa_Restitution
 };
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../hoaAmbisonics/Ambisonics.h"
 #include "../hoaBinaural/AmbisonicsBinaural.h"
 #include "../hoaDecoder/AmbisonicsDecoder.h"
 #include "../hoaRestitution/AmbisonicsRestitution.h"
@@ -61,6 +61,11 @@ public:
     
     void    setPinnaeSize(long aPinnaSize);
     long    getPinnaeSize();
+    long    getGetHrtfLoaded(){return m_binaural->getGetHrtfLoaded();};
+    long    getHrtfSize()
+    {
+        return m_binaural->getHrtfSize();
+    };
     
     void    setRestitutionMode(long aResitutionMode);
     long    getRestitutionMode();

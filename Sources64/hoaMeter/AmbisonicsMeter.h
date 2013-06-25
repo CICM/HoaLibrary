@@ -40,12 +40,12 @@ protected:
     Cicm_Float         m_vector_coordinates_float[4];
     
 public:
-	AmbisonicsMeter(long aNumberOfChannel = 1., long aVectorSize = 0, double aSamplingRate = 44100.);
+	AmbisonicsMeter(long aNumberOfChannel = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
     
-    void         setNumberOfChannels(long aNumberofChannels);
+    void         setNumberOfLoudspeakers(long aNumberOfChannels);
     void         setVectorSize(long aVectorSize);
     void         setLoudspeakerAngle(long anIndex, double anAngle);
-    void         setLoudspeakerAngles(long len, double* angles);
+    //void         setLoudspeakerAngles(long len, double* angles);
     
     double       getLoudspeakerPeaks(long anIndex);
     double       getLoudspeakerEnergy(long anIndex);

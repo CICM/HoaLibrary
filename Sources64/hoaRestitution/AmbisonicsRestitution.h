@@ -23,10 +23,10 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AMBISONICSSTEREO
-#define DEF_AMBISONICSSTEREO
+#ifndef DEF_AMBISONICSRESTITUTION
+#define DEF_AMBISONICSRESTITUTION
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../hoaAmbisonics/Ambisonics.h"
 #include "../hoaDecoder/AmbisonicsDecoder.h"
 #include "../hoaEncoder/AmbisonicsEncoder.h"
 
