@@ -23,9 +23,9 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../CicmLibrary/cicmTools.h"
-#include "../hoaRecomposerProcessor/AmbisonicsRecomposer.h"
-#include "../hoaAmbisonics/AmbisonicsViewer.h"
+#include "../../Sources/CicmLibrary/cicmTools.h"
+#include "../../Sources/hoaRecomposer/AmbisonicsRecomposer.h"
+#include "../../Sources/hoaAmbisonics/AmbisonicsViewer.h"
 
 #define MAX_MICS 256
 
@@ -64,6 +64,7 @@ typedef struct  _space
 	t_rect		f_center;
 	double		f_rayonGlobal;
 	double		f_rayonCircle;
+    double      f_rayonExtCircle;
 
 	AmbisonicsViewer*        f_viewer;
     AmbisonicsRecomposer*    f_recomposer;
@@ -231,6 +232,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_DRAWINLAST
 			| JBOX_TRANSPARENT	
 			| JBOX_GROWY
+			| JBOX_DRAWBACKGROUND
 			;
     
 	x->f_viewer				= new AmbisonicsViewer(1);
@@ -305,6 +307,8 @@ t_max_err space_notify(t_space *x, t_symbol *s, t_symbol *msg, void *sender, voi
 
 void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *params)
 {
+    params->d_boxfillcolor = x->f_color_background;
+    params->d_bordercolor = x->f_color_border_box;
 	params->d_borderthickness = 2;
 	params->d_cornersize = 12;
 }
@@ -380,10 +384,11 @@ void space_paint(t_space *x, t_object *view)
 	if(rect.width > rect.height)
 		x->f_rayonGlobal = rect.height * .5;
 	
-	x->f_rayonCircle = x->f_rayonGlobal / 6;
+//	x->f_rayonCircle = x->f_rayonGlobal / 6;
+    x->f_rayonExtCircle = x->f_rayonGlobal - 5;
+    x->f_rayonCircle = x->f_rayonExtCircle/5;
 	
 	draw_background(x, view, &rect);
-    draw_rotation(x, view, &rect);
 	draw_harmonics(x, view, &rect);
 	draw_microphones_points(x, view, &rect);
 }
@@ -398,39 +403,8 @@ void draw_background(t_space *x,  t_object *view, t_rect *rect)
 	
 	if (g) 
 	{
-		/* Background ************************************/
-		jgraphics_rectangle_rounded(g, 0.5, 0.5, rect->width-1.,  rect->height-1., 12, 12);
-		jgraphics_set_source_jrgba(g, &x->f_color_background);
-		jgraphics_fill_preserve(g);
-		jgraphics_set_source_jrgba(g, &x->f_color_border_box);
-		jgraphics_stroke(g);
-		
-        /* Rotation slider *******************************/
-        if (x->f_shadow) {
-            /* Inner shadow */
-            jgraphics_set_line_width(g, 4);
-            jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
-            jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)5.5 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-            jgraphics_stroke(g);
-            
-            jgraphics_set_line_width(g, 4);
-            jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
-            jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)5.8 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-            jgraphics_stroke(g);
-        }
-        /* Circle color */
-        jgraphics_set_line_width(g, 3);
-        jgraphics_set_source_jrgba(g, &x->f_color_circle);
-        jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)5.5 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-        jgraphics_stroke(g);
-        
-        jgraphics_set_line_width(g, 3);
-        jgraphics_set_source_jrgba(g, &x->f_color_circle);
-        jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)5.8 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-        jgraphics_stroke(g);
-        
         /* Gros cercle */
-		jgraphics_arc(g, x->f_center.x, x->f_center.y, 5 * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+		jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonExtCircle,  0., JGRAPHICS_2PI);
 		jgraphics_set_source_jrgba(g, &x->f_color_circleInner);
 		jgraphics_fill(g);
 		
@@ -442,12 +416,15 @@ void draw_background(t_space *x,  t_object *view, t_rect *rect)
 				jgraphics_set_line_width(g, 2);
 				jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
 				jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+                //jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, x->f_rayonExtCircle / double(5-i),  0., JGRAPHICS_2PI);
 				jgraphics_stroke(g);
 			}
+            
 			/* Circle color */
 			jgraphics_set_line_width(g, 1);
 			jgraphics_set_source_jrgba(g, &x->f_color_circle);
 			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+            //jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonExtCircle / double(5-i),  0., JGRAPHICS_2PI);
 			jgraphics_stroke(g);
 		}
 
