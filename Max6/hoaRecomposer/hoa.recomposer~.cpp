@@ -176,7 +176,11 @@ void HoaRecomposer_float(t_HoaRecomposer *x, double f)
 t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
-    {        
+    {
+        int dspState = sys_getdspobjdspstate((t_object*)x);
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        
         long lastNumberOfInputs = x->f_ambiRecomposer->getNumberOfInputs();
         
         x->f_ambiRecomposer->setMode(atom_getfloat(argv));
@@ -184,9 +188,7 @@ t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long a
         
         if (lastNumberOfInputs != x->f_ambiRecomposer->getNumberOfInputs())
         {
-            int dspState = sys_getdspobjdspstate((t_object*)x);
-            if(dspState)
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
+            
             
             t_object *b = NULL;
             object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
@@ -194,13 +196,15 @@ t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long a
             dsp_resize((t_pxobject*)x, x->f_ambiRecomposer->getNumberOfInputs());
             object_method(b, gensym("dynlet_end"));
             
-            if(dspState)
-                object_method(gensym("dsp")->s_thing, gensym("start"));
         }
         if(x->f_ambiRecomposer->getMode() == Hoa_Fixe)
             object_attr_setdisabled((t_object *)x, gensym("ramp"), 1);
         else
             object_attr_setdisabled((t_object *)x, gensym("ramp"), 0);
+        /*
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("start"));
+         */
     }
     return MAX_ERR_NONE;
 }
@@ -244,7 +248,7 @@ void HoaRecomposer_perform64_fixe(t_HoaRecomposer *x, t_object *dsp64, double **
 
 void HoaRecomposer_perform64_fisheye(t_HoaRecomposer *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    x->f_ambiRecomposer->processFisheye(ins, outs, ins[x->f_ambiRecomposer->getNumberOfInputs()]);
+    x->f_ambiRecomposer->processFisheye(ins, outs, ins[x->f_ambiRecomposer->getNumberOfInputs()-1]);
 }
 
 void HoaRecomposer_perform64_fisheye_offset(t_HoaRecomposer *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)

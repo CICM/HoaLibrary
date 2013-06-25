@@ -66,7 +66,9 @@ private:
     long                        m_mode;
     double                      m_fishEyeFactor;
     
+    void computeMatrixBoth(double aFishEyeFactor);
     void computeMatrix(double aFishEyeFactor);
+    void computeMatrix(float aFishEyeFactor);
 public:
 	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aVectorSize = 0, long aMode = Hoa_Fixe);
     
@@ -169,24 +171,24 @@ public:
     /* Perform sample by sample */
     inline void processFisheye(double* aInputs, double* aOutputs)
 	{
-        Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_outputs);
+        Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     inline void processFisheye(float* aInputs, float* aOutputs)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_outputs);
+        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     inline void processFisheye(double* aInputs, double* aOutputs, double fisheyeFactor)
 	{
         computeMatrix(fisheyeFactor);
-        Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_outputs);
+        Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     inline void processFisheye(float* aInputs, float* aOutputs, float fisheyeFactor)
 	{
         computeMatrix(fisheyeFactor);
-        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_outputs);
+        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     /* Perform sample block */
@@ -199,7 +201,7 @@ public:
             {
                 m_microphones_vector_double[j] = aInputs[j][i];
             }
-            process(m_microphones_vector_double, m_harmonics_vector_double);
+            processFisheye(m_microphones_vector_double, m_harmonics_vector_double);
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
                 aOutputs[j][i] = m_harmonics_vector_double[j];
@@ -215,7 +217,7 @@ public:
             {
                 m_microphones_vector_float[j] = aInputs[j][i];
             }
-            process(m_microphones_vector_float, m_harmonics_vector_float);
+            processFisheye(m_microphones_vector_float, m_harmonics_vector_float);
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
                 aOutputs[j][i] = m_harmonics_vector_float[j];
@@ -232,7 +234,7 @@ public:
             {
                 m_microphones_vector_double[j] = aInputs[j][i];
             }
-            process(m_microphones_vector_double, m_harmonics_vector_double);
+            processFisheye(m_microphones_vector_double, m_harmonics_vector_double);
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
                 aOutputs[j][i] = m_harmonics_vector_double[j];
@@ -249,7 +251,7 @@ public:
             {
                 m_microphones_vector_float[j] = aInputs[j][i];
             }
-            process(m_microphones_vector_float, m_harmonics_vector_float);
+            processFisheye(m_microphones_vector_float, m_harmonics_vector_float);
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
                 aOutputs[j][i] = m_harmonics_vector_float[j];
@@ -265,12 +267,12 @@ public:
     /* Perform sample by sample */
     inline void processFixe(double* aInputs, double* aOutputs)
 	{
-         Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_outputs);
+         Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     inline void processFixe(float* aInputs, float* aOutputs)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_outputs);
+        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     /* Perform sample block */
@@ -282,7 +284,7 @@ public:
             {
                 m_microphones_vector_double[j] = aInputs[j][i];
             }
-            process(m_microphones_vector_double, m_harmonics_vector_double);
+            processFixe(m_microphones_vector_double, m_harmonics_vector_double);
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
                 aOutputs[j][i] = m_harmonics_vector_double[j];
@@ -298,7 +300,7 @@ public:
             {
                 m_microphones_vector_float[j] = aInputs[j][i];
             }
-            process(m_microphones_vector_float, m_harmonics_vector_float);
+            processFixe(m_microphones_vector_float, m_harmonics_vector_float);
             for(int j = 0; j < m_number_of_harmonics; j++)
             {
                 aOutputs[j][i] = m_harmonics_vector_float[j];

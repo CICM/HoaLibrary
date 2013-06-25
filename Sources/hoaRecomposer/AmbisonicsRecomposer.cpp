@@ -28,9 +28,7 @@
 AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophones, long aVectorSize, long aMode) : Ambisonics(anOrder, aVectorSize)
 {
 	m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, m_number_of_harmonics);
-    m_number_of_inputs = m_number_of_microphones;
     m_number_of_outputs = m_number_of_harmonics;
-    
     
     for(int i = 0; i < m_number_of_microphones; i++)
     {
@@ -60,42 +58,91 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
         Cicm_Vector_Double_Malloc(m_harmonics_matrix_double[i], m_vector_size);
     }
     
-    Cicm_Matrix_Float_Malloc(m_recomposer_matrix_float, m_number_of_harmonics, m_number_of_outputs);
-    Cicm_Matrix_Double_Malloc(m_recomposer_matrix_double, m_number_of_harmonics, m_number_of_outputs);
-    for (int i = 0; i < m_number_of_outputs; i++)
+    Cicm_Matrix_Float_Malloc(m_recomposer_matrix_float, m_number_of_harmonics, m_number_of_microphones);
+    Cicm_Matrix_Double_Malloc(m_recomposer_matrix_double, m_number_of_harmonics, m_number_of_microphones);
+    for (int i = 0; i < m_number_of_microphones; i++)
 	{
-        Cicm_Matrix_Float_Set(m_recomposer_matrix_float, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
-        Cicm_Matrix_Double_Set(m_recomposer_matrix_double, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+        Cicm_Matrix_Float_Set(m_recomposer_matrix_float, 0, i, m_number_of_microphones, 1.);
+        Cicm_Matrix_Double_Set(m_recomposer_matrix_double, 0, i, m_number_of_microphones, 1.);
     }
     setMode(aMode);
 }
 
-void AmbisonicsRecomposer::computeMatrix(double aFishEyeFactor)
+void AmbisonicsRecomposer::computeMatrixBoth(double aFishEyeFactor)
 {
+    double angle;
     aFishEyeFactor = Tools::clip(aFishEyeFactor, 0., 1.);
-    for (int i = 0; i < m_number_of_outputs; i++)
+    for (int i = 0; i < m_number_of_microphones; i++)
 	{
-		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs)) * aFishEyeFactor;
-        angle = Tools::radianWrap(angle);
-		for (int j = 0; j < m_number_of_harmonics; j++)
+		angle = CICM_2PI * ((double)i / (double)(m_number_of_microphones));
+        if(angle < CICM_PI)
+            angle *= aFishEyeFactor;
+        else
+            angle = CICM_2PI - ((CICM_2PI - angle) * aFishEyeFactor);
+		for (int j = 1; j < m_number_of_harmonics; j++)
 		{
             int index = getHarmonicIndex(j);
-            if(index == 0)
+            if(index > 0)
             {
-                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
-                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
-            }
-            else if(index > 0)
-            {
-                double value = cos(fabs(index) * angle) / (double)(m_order+1.);
-                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_harmonics, value);
-                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_harmonics, value);
+                double value = cos(fabs(index) * angle);
+                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
             }
 			else if(index < 0)
             {
-                double value = sin(fabs(index) * angle) / (double)(m_order+1.);
-                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_harmonics, value);
-                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_harmonics, value);
+                double value = sin(fabs(index) * angle);
+                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
+            }
+		}
+    }
+}
+
+void AmbisonicsRecomposer::computeMatrix(double aFishEyeFactor)
+{
+    double angle;
+    aFishEyeFactor = Tools::clip(aFishEyeFactor, 0., 1.);
+    for (int i = 0; i < m_number_of_microphones; i++)
+	{
+		angle = CICM_2PI * ((double)i / (double)(m_number_of_microphones));
+        if(angle < CICM_PI)
+            angle *= aFishEyeFactor;
+        else
+            angle = CICM_2PI - ((CICM_2PI - angle) * aFishEyeFactor);
+		for (int j = 1; j < m_number_of_harmonics; j++)
+		{
+            int index = getHarmonicIndex(j);
+            if(index > 0)
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, cos(fabs(index) * angle));
+			else if(index < 0)
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, sin(fabs(index) * angle));
+		}
+    }
+}
+
+void AmbisonicsRecomposer::computeMatrix(float aFishEyeFactor)
+{
+    double angle;
+    aFishEyeFactor = Tools::clip(aFishEyeFactor, 0.f, 1.f);
+    for (int i = 0; i < m_number_of_microphones; i++)
+	{
+		angle = CICM_2PI * ((double)i / (double)(m_number_of_microphones));
+        if(angle < CICM_PI)
+            angle *= aFishEyeFactor;
+        else
+            angle = CICM_2PI - ((CICM_2PI - angle) * aFishEyeFactor);
+		for (int j = 1; j < m_number_of_harmonics; j++)
+		{
+            int index = getHarmonicIndex(j);
+            if(index > 0)
+            {
+                double value = cos(fabs(index) * angle);
+                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
+            }
+			else if(index < 0)
+            {
+                double value = sin(fabs(index) * angle);
+                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
             }
 		}
     }
@@ -123,14 +170,16 @@ void AmbisonicsRecomposer::setMicrophoneWide(long anIndex, double aWidenValue)
 
 void AmbisonicsRecomposer::setFishEyeFactor(double aFishEyeFactor)
 {
-    computeMatrix(aFishEyeFactor);
+    computeMatrixBoth(aFishEyeFactor);
 }
 
 void AmbisonicsRecomposer::setMode(long aMode)
 {
     m_mode = Tools::clip(aMode, long(0), long(2));
     if(m_mode == Hoa_Fisheye)
+    {
         m_number_of_inputs = m_number_of_microphones + 1;
+    }
     else if(m_mode == Hoa_Fixe)
     {
         m_number_of_inputs = m_number_of_microphones;
