@@ -14,7 +14,7 @@ La Bibliothèque <em>HoaLibrary</em> est mise à disposition par le <a href="htt
 
 ### Libraries : 
 
-Mac OsX : Apple Accelerate framework
+Mac OsX : Apple Accelerate framework <br />
 Windows : Intel Composer XE
 
 
