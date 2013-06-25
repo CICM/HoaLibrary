@@ -81,6 +81,7 @@ typedef struct  _hoaboids
     double f_septhresh;
     double f_maxvel;
     double f_gravity;
+    double f_noise;
     double f_gravpoint[2];
     
     double f_refreshInterval;
@@ -111,6 +112,7 @@ t_max_err hoaboids_setAttr_friction(t_hoaboids *x, t_object *attr, long argc, t_
 t_max_err hoaboids_setAttr_septhresh(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_maxvel(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_gravity(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_agitation(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 void hoaboids_setGravityPoint(t_hoaboids *x, double gx, double gy);
 
 void hoaboids_tick(t_hoaboids *x);
@@ -297,6 +299,13 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT          (c,"gravity", 0,   "0.03");
     CLASS_ATTR_ORDER			(c,"gravity", 0,   "8");
     CLASS_ATTR_SAVE             (c,"gravity", 1);
+    
+    CLASS_ATTR_DOUBLE			(c,"agitation", 0, t_hoaboids, f_noise);
+    CLASS_ATTR_ACCESSORS		(c,"agitation", NULL, hoaboids_setAttr_agitation);
+	CLASS_ATTR_LABEL			(c,"agitation", 0,   "Agitation");
+	CLASS_ATTR_DEFAULT          (c,"agitation", 0,   "0.1");
+    CLASS_ATTR_ORDER			(c,"agitation", 0,   "9");
+    CLASS_ATTR_SAVE             (c,"agitation", 1);
     CLASS_STICKY_CATEGORY_CLEAR(c);
     
 	class_register(CLASS_BOX, c);
@@ -513,6 +522,16 @@ t_max_err hoaboids_setAttr_gravity(t_hoaboids *x, t_object *attr, long argc, t_a
     {
         x->f_gravity = Tools::clip(double(atom_getfloat(argv)), double(-1.), double(1.));
         x->f_boids_manager->setGravity(x->f_gravity);
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_agitation(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+    {
+        x->f_noise = Tools::clip(double(atom_getfloat(argv)), double(0.), double(1.));
+        x->f_boids_manager->setNoise(x->f_noise);
     }
     return MAX_ERR_NONE;
 }
