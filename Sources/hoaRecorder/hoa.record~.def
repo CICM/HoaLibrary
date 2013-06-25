@@ -1,7 +1,0 @@
-;hoa.play~.def
-
-LIBRARY hoa.play~.mxe
-
-EXPORTS
-	main
-

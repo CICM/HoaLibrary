@@ -1,7 +1,0 @@
-;pg.halo~.def
-
-LIBRARY pg.halo~.mxe
-
-EXPORTS
-	main
-

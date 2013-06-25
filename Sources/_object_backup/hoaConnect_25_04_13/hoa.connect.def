@@ -1,7 +1,0 @@
-;pg.arman~.def
-
-LIBRARY pg.arman~.mxe
-
-EXPORTS
-	main
-

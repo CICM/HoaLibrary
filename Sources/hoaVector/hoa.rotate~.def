@@ -1,7 +1,0 @@
-;pg.rotate~.def
-
-LIBRARY pg.rotate~.mxe
-
-EXPORTS
-	main
-

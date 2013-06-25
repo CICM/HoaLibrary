@@ -1,7 +1,0 @@
-;hoa.optim~.def
-
-LIBRARY hoa.optim~.mxe
-
-EXPORTS
-	main
-

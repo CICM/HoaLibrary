@@ -1,7 +1,0 @@
-;hoa.binaural~.def
-
-LIBRARY hoa.binaural~.mxe
-
-EXPORTS
-	main
-

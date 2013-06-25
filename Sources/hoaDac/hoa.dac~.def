@@ -1,7 +1,0 @@
-;hoa.dac~.def
-
-LIBRARY hoa.dac~.mxe
-
-EXPORTS
-	main
-

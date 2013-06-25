@@ -1,7 +1,0 @@
-;hoa.pi.def
-
-LIBRARY hoa.pi.mxe
-
-EXPORTS
-	main
-

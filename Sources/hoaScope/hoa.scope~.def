@@ -1,7 +1,0 @@
-;hoa.scope~.def
-
-LIBRARY hoa.scope~.mxe
-
-EXPORTS
-	main
-

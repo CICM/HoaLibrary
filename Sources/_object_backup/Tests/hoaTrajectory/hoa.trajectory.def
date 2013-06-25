@@ -1,7 +1,0 @@
-;hoa.trajectory.def
-
-LIBRARY hoa.trajectory.mxe
-
-EXPORTS
-	main
-

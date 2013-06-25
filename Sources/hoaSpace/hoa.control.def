@@ -1,7 +1,0 @@
-;hoa.control.def
-
-LIBRARY hoa.control.mxe
-
-EXPORTS
-	main
-
