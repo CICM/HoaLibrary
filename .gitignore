@@ -24,10 +24,10 @@ xcuserdata/
 *.pbxuser
 
 HoaPackage/
+*.mxo
+*.mxe
 *.mpkg
-*.exe
 *.msi
-*.zip
 *.dmg
 *.o
 *.d
