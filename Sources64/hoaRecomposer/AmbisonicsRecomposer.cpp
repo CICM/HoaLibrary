@@ -27,10 +27,11 @@
 
 AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophones, long aVectorSize, long aMode) : Ambisonics(anOrder, aVectorSize)
 {
-    setMode(aMode);
 	m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, m_number_of_harmonics);
     m_number_of_inputs = m_number_of_microphones;
     m_number_of_outputs = m_number_of_harmonics;
+    
+    
     for(int i = 0; i < m_number_of_microphones; i++)
     {
         m_encoders.push_back(new AmbisonicsEncoder(m_order, "basic", m_vector_size));
@@ -45,6 +46,8 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
     }
     Cicm_Vector_Float_Malloc(m_harmonics_vector_float, m_number_of_harmonics);
     Cicm_Vector_Double_Malloc(m_harmonics_vector_double, m_number_of_harmonics);
+    Cicm_Vector_Float_Malloc(m_microphones_vector_float, m_number_of_harmonics);
+    Cicm_Vector_Double_Malloc(m_microphones_vector_double, m_number_of_harmonics);
     
     Cicm_Vector_Float_Malloc(m_angles_vector_float, m_vector_size);
     Cicm_Vector_Double_Malloc(m_angles_vector_double, m_vector_size);
@@ -55,6 +58,46 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
     {
         Cicm_Vector_Float_Malloc(m_harmonics_matrix_float[i], m_vector_size);
         Cicm_Vector_Double_Malloc(m_harmonics_matrix_double[i], m_vector_size);
+    }
+    
+    Cicm_Matrix_Float_Malloc(m_recomposer_matrix_float, m_number_of_harmonics, m_number_of_outputs);
+    Cicm_Matrix_Double_Malloc(m_recomposer_matrix_double, m_number_of_harmonics, m_number_of_outputs);
+    for (int i = 0; i < m_number_of_outputs; i++)
+	{
+        Cicm_Matrix_Float_Set(m_recomposer_matrix_float, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+        Cicm_Matrix_Double_Set(m_recomposer_matrix_double, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+    }
+    setMode(aMode);
+}
+
+void AmbisonicsRecomposer::computeMatrix(double aFishEyeFactor)
+{
+    aFishEyeFactor = Tools::clip(aFishEyeFactor, 0., 1.);
+    for (int i = 0; i < m_number_of_outputs; i++)
+	{
+		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs)) * aFishEyeFactor;
+        angle = Tools::radianWrap(angle);
+		for (int j = 0; j < m_number_of_harmonics; j++)
+		{
+            int index = getHarmonicIndex(j);
+            if(index == 0)
+            {
+                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, 0, i, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+            }
+            else if(index > 0)
+            {
+                double value = cos(fabs(index) * angle) / (double)(m_order+1.);
+                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_harmonics, value);
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_harmonics, value);
+            }
+			else if(index < 0)
+            {
+                double value = sin(fabs(index) * angle) / (double)(m_order+1.);
+                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_harmonics, value);
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_harmonics, value);
+            }
+		}
     }
 }
 
@@ -80,17 +123,22 @@ void AmbisonicsRecomposer::setMicrophoneWide(long anIndex, double aWidenValue)
 
 void AmbisonicsRecomposer::setFishEyeFactor(double aFishEyeFactor)
 {
-    m_fishEyeFactor = 1 - Tools::clip(aFishEyeFactor, 0., 1.);
-    double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
-    for (int i=0; i < m_number_of_microphones; i++)
-    {
-        setMicrophoneAngle(i, Tools::radianInterp(m_fishEyeFactor, distanceBetwenTwoDefMics*i, 0.));
-    }
+    computeMatrix(aFishEyeFactor);
 }
 
 void AmbisonicsRecomposer::setMode(long aMode)
 {
     m_mode = Tools::clip(aMode, long(0), long(2));
+    if(m_mode == Hoa_Fisheye)
+        m_number_of_inputs = m_number_of_microphones + 1;
+    else if(m_mode == Hoa_Fixe)
+    {
+        m_number_of_inputs = m_number_of_microphones;
+        computeMatrix(1.);
+    }
+    else
+        m_number_of_inputs = m_number_of_microphones;
+        
 }
 
 double AmbisonicsRecomposer::getMicrophoneWide(long anIndex)
@@ -134,14 +182,23 @@ void AmbisonicsRecomposer::setRamp(long aNumberOfSample)
     }
 }
 
+std::string AmbisonicsRecomposer::getMicrophonesName(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_microphones)
+        return "Virtual Microphone " + Tools::intToString(anIndex);
+    else if(m_number_of_microphones == m_number_of_inputs && m_mode == Hoa_Fisheye)
+        return "Fisheye Factor";
+    else
+        return "No Virtual Microphone";
+}
+
 AmbisonicsRecomposer::~AmbisonicsRecomposer()
 {
 	m_encoders.clear();
     m_lines.clear();
     m_widers.clear();
     m_wider_lines.clear();
-    Cicm_Free(m_harmonics_vector_float);
-    Cicm_Free(m_harmonics_vector_double);
+    
     Cicm_Free(m_angles_vector_float);
     Cicm_Free(m_angles_vector_double);
     for(int i = 0; i < m_number_of_harmonics; i++)
@@ -151,6 +208,14 @@ AmbisonicsRecomposer::~AmbisonicsRecomposer()
     }
     Cicm_Free(m_harmonics_matrix_float);
     Cicm_Free(m_harmonics_matrix_double);
+    
+    Cicm_Free(m_harmonics_vector_float);
+    Cicm_Free(m_harmonics_vector_double);
+    Cicm_Free(m_microphones_vector_float);
+    Cicm_Free(m_microphones_vector_double);
+    
+    Cicm_Free(m_recomposer_matrix_float);
+    Cicm_Free(m_recomposer_matrix_double);
 }
 
 
