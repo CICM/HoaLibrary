@@ -24,6 +24,8 @@ xcuserdata/
 *.pbxuser
 
 HoaPackage/
+*.mxo
+*.mxe
 *.mpkg
 *.msi
 *.dmg
