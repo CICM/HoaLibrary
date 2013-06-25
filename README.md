@@ -7,8 +7,6 @@ It‘s totally free and made availlable by CICM, a research center bi-localized 
 
 <a href="http://www.mshparisnord.fr/hoalibrary/"> HoaLibrary Website</a><br />
 
-#### Julien Colafrancesco, Pierre Guillot, Eliott Paris
-
 ### Authors :
 
 #### Julien Colafrancesco, Pierre Guillot, Eliott Paris
