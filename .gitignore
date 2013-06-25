@@ -27,7 +27,6 @@ HoaPackage/
 *.mpkg
 *.exe
 *.msi
-*.zip
 *.dmg
 *.o
 *.d
