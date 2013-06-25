@@ -8,7 +8,7 @@
 
 #### Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
-### Libraries : 
+### Dependencies : 
 
 Mac OsX : Apple Accelerate <br />
 Windows : Intel Composer XE
