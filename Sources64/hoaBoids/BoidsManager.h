@@ -55,6 +55,7 @@ class BoidsManager {
     double m_septhresh;
     double m_maxvel;
     double m_gravity;
+    double m_noise;
     double m_gravpoint_x;
     double m_gravpoint_y;
     
@@ -85,6 +86,7 @@ public:
     void setSepThresh(double _septhresh);
     void setMaxVel(double _maxvel);
     void setGravity(double _gravity);
+    void setNoise(double _noise);
     void setGravPoint_x(double _gravPoint_x);
     void setGravPoint_y(double _gravPoint_y);
     void setGravPoint(double _gravPoint_x, double _gravPoint_y);
@@ -98,6 +100,7 @@ public:
     inline double getSepThresh() {return m_septhresh;}
     inline double getMaxVel() {return m_maxvel;}
     inline double getGravity() {return m_gravity;}
+    inline double getNoise() {return m_noise;}
     inline double getGravPoint_x() {return m_gravpoint_x;}
     inline double getGravPoint_y() {return m_gravpoint_y;}
     

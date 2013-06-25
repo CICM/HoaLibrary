@@ -41,6 +41,7 @@ BoidsManager::BoidsManager()
     m_septhresh = 1.;
     m_maxvel = 0.05;
     m_gravity = 0.;
+    m_noise = 0.1;
     m_gravpoint_x = m_gravpoint_y = 0.;
     
     setNumberOfBoids(m_numberOfBoids);
@@ -123,8 +124,8 @@ void BoidsManager::birdUpdate(int _index)
 	a->vy = Tools::clip(a->vy,-m_maxvel,m_maxvel);
     
     // Random test
-	a->vx = Tools::clip(Tools::getRandd(-0.01, 0.01) + a->vx,-m_maxvel,m_maxvel);
-	a->vy = Tools::clip(Tools::getRandd(-0.01, 0.01) + a->vy,-m_maxvel,m_maxvel);
+	a->vx = Tools::clip(Tools::getRandd(-m_noise, m_noise) + a->vx,-m_maxvel,m_maxvel);
+	a->vy = Tools::clip(Tools::getRandd(-m_noise, m_noise) + a->vy,-m_maxvel,m_maxvel);
     
 	// update position based on velocity and friction
 	a->x += a->vx*(1.-m_friction);
@@ -248,6 +249,11 @@ void BoidsManager::setMaxVel(double _maxvel)
 void BoidsManager::setGravity(double _gravity)
 {
     m_gravity = Tools::clip(_gravity,-1.,1.)*0.1;
+}
+
+void BoidsManager::setNoise(double _noise)
+{
+    m_noise = Tools::clip(_noise,0.,1.);
 }
 
 void BoidsManager::setGravPoint_x(double _gravPoint_x)
