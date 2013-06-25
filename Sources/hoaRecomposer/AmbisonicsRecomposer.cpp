@@ -68,36 +68,6 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
     setMode(aMode);
 }
 
-void AmbisonicsRecomposer::computeMatrixBoth(double aFishEyeFactor)
-{
-    double angle;
-    aFishEyeFactor = Tools::clip(aFishEyeFactor, 0., 1.);
-    for (int i = 0; i < m_number_of_microphones; i++)
-	{
-		angle = CICM_2PI * ((double)i / (double)(m_number_of_microphones));
-        if(angle < CICM_PI)
-            angle *= aFishEyeFactor;
-        else
-            angle = CICM_2PI - ((CICM_2PI - angle) * aFishEyeFactor);
-		for (int j = 1; j < m_number_of_harmonics; j++)
-		{
-            int index = getHarmonicIndex(j);
-            if(index > 0)
-            {
-                double value = cos(fabs(index) * angle);
-                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
-                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
-            }
-			else if(index < 0)
-            {
-                double value = sin(fabs(index) * angle);
-                Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
-                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
-            }
-		}
-    }
-}
-
 void AmbisonicsRecomposer::computeMatrix(double aFishEyeFactor)
 {
     double angle;
@@ -113,36 +83,16 @@ void AmbisonicsRecomposer::computeMatrix(double aFishEyeFactor)
 		{
             int index = getHarmonicIndex(j);
             if(index > 0)
-                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, cos(fabs(index) * angle));
-			else if(index < 0)
-                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, sin(fabs(index) * angle));
-		}
-    }
-}
-
-void AmbisonicsRecomposer::computeMatrix(float aFishEyeFactor)
-{
-    double angle;
-    aFishEyeFactor = Tools::clip(aFishEyeFactor, 0.f, 1.f);
-    for (int i = 0; i < m_number_of_microphones; i++)
-	{
-		angle = CICM_2PI * ((double)i / (double)(m_number_of_microphones));
-        if(angle < CICM_PI)
-            angle *= aFishEyeFactor;
-        else
-            angle = CICM_2PI - ((CICM_2PI - angle) * aFishEyeFactor);
-		for (int j = 1; j < m_number_of_harmonics; j++)
-		{
-            int index = getHarmonicIndex(j);
-            if(index > 0)
             {
                 double value = cos(fabs(index) * angle);
                 Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
             }
 			else if(index < 0)
             {
                 double value = sin(fabs(index) * angle);
                 Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
+                Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
             }
 		}
     }
@@ -170,7 +120,7 @@ void AmbisonicsRecomposer::setMicrophoneWide(long anIndex, double aWidenValue)
 
 void AmbisonicsRecomposer::setFishEyeFactor(double aFishEyeFactor)
 {
-    computeMatrixBoth(aFishEyeFactor);
+    computeMatrix(aFishEyeFactor);
 }
 
 void AmbisonicsRecomposer::setMode(long aMode)

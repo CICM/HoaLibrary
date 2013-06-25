@@ -66,9 +66,7 @@ private:
     long                        m_mode;
     double                      m_fishEyeFactor;
     
-    void computeMatrixBoth(double aFishEyeFactor);
     void computeMatrix(double aFishEyeFactor);
-    void computeMatrix(float aFishEyeFactor);
 public:
 	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aVectorSize = 0, long aMode = Hoa_Fixe);
     
@@ -181,18 +179,36 @@ public:
     
     inline void processFisheye(double* aInputs, double* aOutputs, double fisheyeFactor)
 	{
-        computeMatrix(fisheyeFactor);
-        Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
+        
+        Tools::clip(fisheyeFactor, 0., 1.);
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
+        double angle = 0;
+        m_encoders[0]->process(aInputs[0], aOutputs, angle);
+        
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            angle = Tools::radianInterp(fisheyeFactor, 0., distanceBetwenTwoDefMics * (float)i);
+            m_encoders[i]->process(aInputs[i], m_harmonics_vector_double, angle);
+            Cicm_Vector_Double_Add(m_harmonics_vector_double, aOutputs, m_number_of_harmonics);
+        }
 	}
     
     inline void processFisheye(float* aInputs, float* aOutputs, float fisheyeFactor)
 	{
-        computeMatrix(fisheyeFactor);
-        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
+        Tools::clip(fisheyeFactor, 0.f, 1.f);
+        float distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
+        float angle = 0;
+        m_encoders[0]->process(aInputs[0], aOutputs, angle);
+        
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            angle = Tools::radianInterp(fisheyeFactor, 0., distanceBetwenTwoDefMics * (float)i);
+            m_encoders[i]->process(aInputs[i], m_harmonics_vector_float, angle);
+            Cicm_Vector_Float_Add(m_harmonics_vector_float, aOutputs, m_number_of_harmonics);
+        }
 	}
     
     /* Perform sample block */
-    
     inline void processFisheye(double** aInputs, double** aOutputs)
 	{
         for(int i = 0; i < m_vector_size; i++)
@@ -227,37 +243,41 @@ public:
     
 	inline void processFisheye(double** aInputs, double** aOutputs, double* fisheyeFactor)
 	{
-        for(int i = 0; i < m_vector_size; i++)
-		{
-            computeMatrix(fisheyeFactor[i]);
-            for(int j = 0; j < m_number_of_microphones; j++)
+        double clip[2] = {0.,1.};
+        Cicm_Vector_Double_Clip(fisheyeFactor, &clip[0], &clip[1], fisheyeFactor, m_vector_size);
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
+        
+        m_encoders[0]->setAzimuth(0.);
+        m_encoders[0]->process(aInputs[0], aOutputs);
+        
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            for (int j = 0; j < m_vector_size; j++)
             {
-                m_microphones_vector_double[j] = aInputs[j][i];
+                m_angles_vector_double[j] = Tools::radianInterp(fisheyeFactor[j], 0., distanceBetwenTwoDefMics * (float)i);
             }
-            processFisheye(m_microphones_vector_double, m_harmonics_vector_double);
-            for(int j = 0; j < m_number_of_harmonics; j++)
-            {
-                aOutputs[j][i] = m_harmonics_vector_double[j];
-            }
-		}
+            m_encoders[i]->processAdd(aInputs[i], aOutputs, m_angles_vector_double);
+        }
 	}
     
     inline void processFisheye(float** aInputs, float** aOutputs, float* fisheyeFactor)
 	{
-        for(int i = 0; i < m_vector_size; i++)
-		{
-            computeMatrix(fisheyeFactor[i]);
-            for(int j = 0; j < m_number_of_microphones; j++)
+        float clip[2] = {0.,1.};
+        Cicm_Vector_Float_Clip(fisheyeFactor, &clip[0], &clip[1], fisheyeFactor, m_vector_size);
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
+        
+        m_encoders[0]->setAzimuth(0.f);
+        m_encoders[0]->process(aInputs[0], aOutputs);
+        
+        for(int i = 1; i < m_number_of_microphones; i++)
+        {
+            for (int j = 0; j < m_vector_size; j++)
             {
-                m_microphones_vector_float[j] = aInputs[j][i];
+                m_angles_vector_float[j] = Tools::radianInterp(fisheyeFactor[j], 0., distanceBetwenTwoDefMics * (float)i);
             }
-            processFisheye(m_microphones_vector_float, m_harmonics_vector_float);
-            for(int j = 0; j < m_number_of_harmonics; j++)
-            {
-                aOutputs[j][i] = m_harmonics_vector_float[j];
-            }
-		}
-	}
+            m_encoders[i]->processAdd(aInputs[i], aOutputs, m_angles_vector_float);
+        }
+    }
     
     
     /*******************************************************/
