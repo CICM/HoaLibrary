@@ -524,13 +524,6 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 
 	if (g) 
 	{
-		/* Background */
-        /*
-		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
-		jgraphics_rectangle_rounded(g, 0., 0., rect->width, rect->height, 6, 6);
-		jgraphics_fill(g);
-        */
-		
 		/* Circles */
 		for(i = 5; i > 0; i--)
 		{
@@ -557,7 +550,7 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 			y1 = 1. / 6. * x->f_rayonGlobal;
 			y2 = 5. / 6. * x->f_rayonGlobal;
 			
-			if ( (rotateAngle <= CICM_PI && rotateAngle > 0.) )
+            if ( (rotateAngle <= CICM_PI && rotateAngle > 0.) )
             {
                 jgraphics_move_to(g, -0.5, y1-0.5);
                 jgraphics_line_to(g, -0.5, y2-0.5);

@@ -10,7 +10,7 @@
 
 
 // Name & Version
-HOALIBRARY_VERSION = 1.2
+HOALIBRARY_VERSION = 1.3
 PRODUCT_NAME = $(PROJECT_NAME)
 //PRODUCT_VERSION = 6.1.0
 PRODUCT_VERSION = HoaLibrary $(HOALIBRARY_VERSION)
@@ -20,7 +20,7 @@ ARCHS = i386 x86_64
 C74SUPPORT = $(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support
 HEADER_SEARCH_PATHS = /Developer/Headers/FlatCarbon "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
 FRAMEWORK_SEARCH_PATHS = "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
-DSTROOT = $(SRCROOT)/../_sdk-build
+DSTROOT = $(SRCROOT)/../builds
 // (This next path is relative to DSTROOT)
 INSTALL_PATH = /
 

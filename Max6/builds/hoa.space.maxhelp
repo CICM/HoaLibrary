@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
@@ -45,7 +45,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -253,7 +253,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u664003921"
+									"varname" : "u501000942"
 								}
 
 							}
@@ -375,7 +375,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -426,7 +426,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -867,7 +867,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -1308,7 +1308,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -1749,7 +1749,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -2308,7 +2308,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 419.0, 225.0, 19.0 ],
 									"text" : "hoa.plug~ 7 hoa.times~ post 5"
 								}
@@ -2323,7 +2323,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 172.0, 225.0, 19.0 ],
 									"text" : "hoa.plug~ 7 hoa.times~ post 5"
 								}
@@ -2352,7 +2352,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -2380,7 +2380,7 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-11",
 									"maxclass" : "hoa.scope~",
-									"numinlets" : 15,
+									"numinlets" : 16,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 740.75, 379.5, 225.0, 225.0 ]
@@ -2395,9 +2395,9 @@
 									"id" : "obj-12",
 									"linecount" : 2,
 									"maxclass" : "newobj",
-									"numinlets" : 15,
+									"numinlets" : 0,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 379.5, 225.0, 32.0 ],
 									"text" : "hoa.plug~ 7 hoa.receive~ post @name space2"
 								}
@@ -2410,7 +2410,7 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-8",
 									"maxclass" : "hoa.scope~",
-									"numinlets" : 15,
+									"numinlets" : 16,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 740.75, 119.0, 225.0, 225.0 ]
@@ -2440,9 +2440,9 @@
 									"id" : "obj-23",
 									"linecount" : 2,
 									"maxclass" : "newobj",
-									"numinlets" : 15,
+									"numinlets" : 0,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 119.0, 225.0, 32.0 ],
 									"text" : "hoa.plug~ 7 hoa.receive~ post @name space"
 								}
@@ -2456,13 +2456,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 428.0, 220.600006, 19.0 ],
-									"saved_object_attributes" : 									{
-										"mode" : 0,
-										"ramp" : 20.0
-									}
-,
 									"text" : "hoa.recomposer~ 7 16"
 								}
 
@@ -2475,7 +2470,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 395.0, 208.0, 19.0 ],
 									"text" : "hoa.space~ 16"
 								}
@@ -2489,7 +2484,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 340.0, 208.0, 19.0 ],
 									"text" : "hoa.projector~ 7 16"
 								}
@@ -2604,20 +2599,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 545.0, 220.600006, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
-										"config" : 5.1,
-										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
-										"mode" : "ambisonics",
-										"offset" : 0.0,
-										"pinnaesize" : "small",
-										"restitution" : "panning"
-									}
-,
 									"text" : "hoa.decoder~ 7 16"
 								}
 
@@ -2665,7 +2648,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -4675,7 +4658,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -5275,7 +5258,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -5326,7 +5309,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -5767,7 +5750,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -6208,7 +6191,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -6649,7 +6632,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -7208,7 +7191,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 419.0, 225.0, 19.0 ],
 									"text" : "hoa.plug~ 7 hoa.times~ post 5"
 								}
@@ -7223,7 +7206,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 172.0, 225.0, 19.0 ],
 									"text" : "hoa.plug~ 7 hoa.times~ post 5"
 								}
@@ -7252,7 +7235,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -7280,7 +7263,7 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-11",
 									"maxclass" : "hoa.scope~",
-									"numinlets" : 15,
+									"numinlets" : 16,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 740.75, 379.5, 225.0, 225.0 ]
@@ -7295,9 +7278,9 @@
 									"id" : "obj-12",
 									"linecount" : 2,
 									"maxclass" : "newobj",
-									"numinlets" : 15,
+									"numinlets" : 0,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 379.5, 225.0, 32.0 ],
 									"text" : "hoa.plug~ 7 hoa.receive~ post @name space2"
 								}
@@ -7310,7 +7293,7 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-8",
 									"maxclass" : "hoa.scope~",
-									"numinlets" : 15,
+									"numinlets" : 16,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 740.75, 119.0, 225.0, 225.0 ]
@@ -7340,9 +7323,9 @@
 									"id" : "obj-23",
 									"linecount" : 2,
 									"maxclass" : "newobj",
-									"numinlets" : 15,
+									"numinlets" : 0,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 119.0, 225.0, 32.0 ],
 									"text" : "hoa.plug~ 7 hoa.receive~ post @name space"
 								}
@@ -7356,13 +7339,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 428.0, 220.600006, 19.0 ],
-									"saved_object_attributes" : 									{
-										"mode" : 0,
-										"ramp" : 20.0
-									}
-,
 									"text" : "hoa.recomposer~ 7 16"
 								}
 
@@ -7375,7 +7353,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 395.0, 208.0, 19.0 ],
 									"text" : "hoa.space~ 16"
 								}
@@ -7389,7 +7367,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 340.0, 208.0, 19.0 ],
 									"text" : "hoa.projector~ 7 16"
 								}
@@ -7504,20 +7482,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 545.0, 220.600006, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
-										"config" : 5.1,
-										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
-										"mode" : "ambisonics",
-										"offset" : 0.0,
-										"pinnaesize" : "small",
-										"restitution" : "panning"
-									}
-,
 									"text" : "hoa.decoder~ 7 16"
 								}
 
@@ -7565,7 +7531,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -9745,7 +9711,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -9795,7 +9761,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 16.0, 633.0, 304.0, 56.0 ],
-									"text" : "0.924212 0.849462 0.718255 0.584259 0.479168 0.556042 0.535989 0.478796 0.45842 0.471205 0.511991 0.530362 0.610219 0.727397 0.747845 0.856196"
+									"text" : "0.286506 0.237457 0.323083 0.438247 0.493504 0.508995 0.522607 0.527757 0.496642 0.416135 0.308984 0.213067 0.16066 0.198893 0.324444 0.376095"
 								}
 
 							}
@@ -9983,7 +9949,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -10034,7 +10000,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -10475,7 +10441,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -10916,7 +10882,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -11357,7 +11323,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -11891,9 +11857,9 @@
 							}
 , 							{
 								"box" : 								{
-									"bgcolor" : [ 1.0, 1.0, 1.0, 0.01 ],
+									"bgcolor" : [ 0.734993, 0.734993, 0.734993, 1.0 ],
 									"cicolorin" : [ 0.698039, 0.698039, 0.698039, 1.0 ],
-									"coeffs" : [ 0.924212, 0.849462, 0.718255, 0.584259, 0.479168, 0.556042, 0.535989, 0.478796, 0.45842, 0.471205, 0.511991, 0.530362, 0.610219, 0.727397, 0.747845, 0.856196 ],
+									"coeffs" : [ 0.286506, 0.237457, 0.323083, 0.438247, 0.493504, 0.508995, 0.522607, 0.527757, 0.496642, 0.416135, 0.308984, 0.213067, 0.16066, 0.198893, 0.324444, 0.376095 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-2",
 									"maxclass" : "hoa.space",
@@ -11915,7 +11881,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 419.0, 225.0, 19.0 ],
 									"text" : "hoa.plug~ 7 hoa.times~ post 5"
 								}
@@ -11930,7 +11896,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 172.0, 225.0, 19.0 ],
 									"text" : "hoa.plug~ 7 hoa.times~ post 5"
 								}
@@ -11959,7 +11925,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 235.5, 208.0, 45.0 ],
 									"text" : "hoa.plug~ 7 hoa.granular~ no @size 400 @delay 3000 @feedback 0.9 @rarefaction 0. @name space"
 								}
@@ -11987,7 +11953,7 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-11",
 									"maxclass" : "hoa.scope~",
-									"numinlets" : 15,
+									"numinlets" : 16,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 740.75, 379.5, 225.0, 225.0 ]
@@ -12002,9 +11968,9 @@
 									"id" : "obj-12",
 									"linecount" : 2,
 									"maxclass" : "newobj",
-									"numinlets" : 15,
+									"numinlets" : 0,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 379.5, 225.0, 32.0 ],
 									"text" : "hoa.plug~ 7 hoa.receive~ post @name space2"
 								}
@@ -12017,7 +11983,7 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-8",
 									"maxclass" : "hoa.scope~",
-									"numinlets" : 15,
+									"numinlets" : 16,
 									"numoutlets" : 0,
 									"order" : 7,
 									"patching_rect" : [ 740.75, 119.0, 225.0, 225.0 ]
@@ -12047,9 +12013,9 @@
 									"id" : "obj-23",
 									"linecount" : 2,
 									"maxclass" : "newobj",
-									"numinlets" : 15,
+									"numinlets" : 0,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 740.75, 119.0, 225.0, 32.0 ],
 									"text" : "hoa.plug~ 7 hoa.receive~ post @name space"
 								}
@@ -12063,13 +12029,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 428.0, 220.600006, 19.0 ],
-									"saved_object_attributes" : 									{
-										"mode" : 0,
-										"ramp" : 20.0
-									}
-,
 									"text" : "hoa.recomposer~ 7 16"
 								}
 
@@ -12082,7 +12043,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 395.0, 208.0, 19.0 ],
 									"text" : "hoa.space~ 16"
 								}
@@ -12096,7 +12057,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 340.0, 208.0, 19.0 ],
 									"text" : "hoa.projector~ 7 16"
 								}
@@ -12211,20 +12172,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 435.0, 545.0, 220.600006, 19.0 ],
-									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
-										"config" : 5.1,
-										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0 ],
-										"mode" : "ambisonics",
-										"offset" : 0.0,
-										"pinnaesize" : "small",
-										"restitution" : "panning"
-									}
-,
 									"text" : "hoa.decoder~ 7 16"
 								}
 
@@ -12272,7 +12221,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -14244,7 +14193,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -14296,43 +14245,8 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.granular~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.times~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -14345,30 +14259,6 @@
 			}
 , 			{
 				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.projector~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.space~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.recomposer~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.plug~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.scope~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

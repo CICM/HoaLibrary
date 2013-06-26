@@ -46,7 +46,8 @@ public:
     ~AmbisonicVirtualMicUIManager();
     
     void setFisheyeDestAngle(double _angleInRadian);
-    void resetAngles(const int _index);
+    void resetAngles(const int _index = -1);
+    void resetWides(const int _index = -1);
     void setNumberOfMics(long _numberOfMics);
     void setAnglesInRadian(double* _radians, long _len);
     void setAnglesInDegree(double* _degrees, long _len);
