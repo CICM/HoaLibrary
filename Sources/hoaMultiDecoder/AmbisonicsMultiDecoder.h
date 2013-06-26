@@ -49,31 +49,25 @@ private:
     AmbisonicsRestitution*  m_restitution;
 
 public:
-	AmbisonicsMultiDecoder(long anOrder = 1, std::string aRootPath = "", long aPinnaSize = Hoa_Small, long aVectorSize = 0, long aSamplingRate = 44100, long aMode = Hoa_Ambisonics, long aNumberOfLoudspeakers = 4, double aConfiguration = 5.1, double anOffset = 0.);
+	AmbisonicsMultiDecoder(long anOrder = 1, long aNumberOfLoudspeakers = 4, long aMode = Hoa_Ambisonics, long aPinnaSize = Hoa_Small, std::string aRootPath = "", long aVectorSize = 0, long aSamplingRate = 44100);
     
     void    setMode(long aMode);
     long    getMode();
     
     void    setNumberOfLoudspeakers(long aConfiguration);
     long    getNumberOfLoudspeakers();
-    void    setOffset(double anOffset);
-    double  getOffset();
     
     void    setPinnaeSize(long aPinnaSize);
     long    getPinnaeSize();
     long    getGetHrtfLoaded(){return m_binaural->getGetHrtfLoaded();};
-    long    getHrtfSize()
-    {
-        return m_binaural->getHrtfSize();
-    };
+    long    getHrtfSize(){return m_binaural->getHrtfSize();};
     
     void    setRestitutionMode(long aResitutionMode);
     long    getRestitutionMode();
-    void    setConfiguration(double aConfiguration, bool standardOnOff = 1);
-    double  getConfiguration();
+    
     void    setLoudspeakerAngle(long anIndex, double anAngle);
-    void    setLoudspeakerAngles(long len, double* angles);
     double  getLoudspeakerAngle(long anIndex);
+    
     std::string  getLoudspeakerName(long anIndex);
     
     void    setVectorSize(long aVectorSize);

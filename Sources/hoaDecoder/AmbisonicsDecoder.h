@@ -33,7 +33,6 @@ class AmbisonicsDecoder : public Ambisonics
 	
 private:
     long                 m_number_of_loudspeakers;
-    double               m_offset;
 	Cicm_Matrix_Float    m_decoder_matrix_float;
     Cicm_Matrix_Double   m_decoder_matrix_double;
     Cicm_Vector_Float    m_vector_float_input;
@@ -44,13 +43,12 @@ private:
 	void computeMatrix();
 
 public:
-	AmbisonicsDecoder(long anOrder = 1, long aNumberOfLoudspeakers = 0, double anOffset = 0., long aVectorSize = 0);
-    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers);
-    long getNumberOfLoudspeakers();
+	AmbisonicsDecoder(long anOrder = 1, long aNumberOfLoudspeakers = 0, long aVectorSize = 0);
     
-    void setOffset(double anOffset);
-    double getOffset();
-    double getLoudspeakerAngle(long anIndex);
+    void        setNumberOfLoudspeakers(long aNumberOfLoudspeakers);
+    long        getNumberOfLoudspeakers();
+    
+    double       getLoudspeakerAngle(long anIndex);
     std::string  getLoudspeakerName(long anIndex);
     
 	~AmbisonicsDecoder();

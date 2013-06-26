@@ -25,13 +25,12 @@
 
 #include "AmbisonicsMultiDecoder.h"
 
-AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, std::string aRootPath, long aPinnaeSize, long aVectorSize, long aSamplingRate, long aMode, long aNumberOfLoudspeakers, double aConfiguration, double anOffset) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, long aNumberOfLoudspeakers, long aMode, long aPinnaeSize, std::string aRootPath, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
-	m_decoder = new AmbisonicsDecoder(m_order, aNumberOfLoudspeakers, anOffset, m_vector_size);
+	m_decoder = new AmbisonicsDecoder(m_order, aNumberOfLoudspeakers, m_vector_size);
     m_binaural = new AmbisonicsBinaural(m_order, aRootPath, aPinnaeSize, m_vector_size, m_sampling_rate);
-    m_restitution = new AmbisonicsRestitution(m_order, aConfiguration, Hoa_Amplitude_Panning,  m_vector_size);
+    m_restitution = new AmbisonicsRestitution(m_order, aNumberOfLoudspeakers, Hoa_Amplitude_Panning, m_vector_size);
     setMode(aMode);
-    setOffset(anOffset);
 }
 
 void AmbisonicsMultiDecoder::setMode(long aMode)
@@ -39,9 +38,9 @@ void AmbisonicsMultiDecoder::setMode(long aMode)
     if(aMode == Hoa_Restitution)
     {
         m_mode = Hoa_Restitution;
-        m_restitution->setVectorSize(m_vector_size);
-        m_restitution->setSamplingRate(m_sampling_rate);
-        m_number_of_outputs = m_restitution->getNumberOfOutputs();
+        m_restitution->Ambisonics::setVectorSize(m_vector_size);
+        m_restitution->Ambisonics::setSamplingRate(m_sampling_rate);
+        m_number_of_outputs = m_restitution->Planewaves::getNumberOfOutputs();
     }
     else if(aMode == Hoa_Binaural)
     {
@@ -64,30 +63,27 @@ long AmbisonicsMultiDecoder::getMode()
     return m_mode;
 }
 
-/* ANBISONICS */
 void AmbisonicsMultiDecoder::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
-{
-    m_decoder->setNumberOfLoudspeakers(aNumberOfLoudspeakers);
+{    
     if(m_mode == Hoa_Ambisonics)
+    {
+        m_decoder->setNumberOfLoudspeakers(aNumberOfLoudspeakers);
         m_number_of_outputs = m_decoder->getNumberOfOutputs();
+    }
+    else if (m_mode == Hoa_Restitution)
+    {
+        m_restitution->setNumberOfLoudspeakers(aNumberOfLoudspeakers);
+        m_number_of_outputs = m_restitution->Planewaves::getNumberOfOutputs();
+    }
+    else
+        m_number_of_outputs = 2;
 }
 
 long AmbisonicsMultiDecoder::getNumberOfLoudspeakers()
 {
-    return m_decoder->getNumberOfOutputs();
+    return m_number_of_outputs;
 }
 
-void AmbisonicsMultiDecoder::setOffset(double anOffset)
-{
-    m_decoder->setOffset(anOffset);
-}
-
-double AmbisonicsMultiDecoder::getOffset()
-{
-    return m_decoder->getOffset();
-}
-
-/* BINAURAL */
 void AmbisonicsMultiDecoder::setPinnaeSize(long aPinnaeSize)
 {
     m_binaural->setPinnaeSize(aPinnaeSize);
@@ -98,7 +94,6 @@ long AmbisonicsMultiDecoder::getPinnaeSize()
     return m_binaural->getPinnaeSize();
 }
 
-/* RESTITUTION */
 void AmbisonicsMultiDecoder::setRestitutionMode(long aResitutionMode)
 {
     m_restitution->setRestitutionMode(aResitutionMode);
@@ -109,28 +104,10 @@ long AmbisonicsMultiDecoder::getRestitutionMode()
     return m_restitution->getRestitutionMode();
 }
 
-void AmbisonicsMultiDecoder::setConfiguration(double aConfiguration, bool standardOnOff)
-{
-    m_restitution->setConfiguration(aConfiguration, standardOnOff);
-    if(m_mode == Hoa_Restitution)
-        m_number_of_outputs = m_restitution->getNumberOfOutputs();
-}
-
-double AmbisonicsMultiDecoder::getConfiguration()
-{
-    return m_restitution->getConfiguration();
-}
-
 void AmbisonicsMultiDecoder::setLoudspeakerAngle(long anIndex, double anAngle)
 {
     if(m_mode == Hoa_Restitution)
         m_restitution->setLoudspeakerAngle(anIndex, anAngle);
-}
-
-void AmbisonicsMultiDecoder::setLoudspeakerAngles(long len, double* angles)
-{
-    if(m_mode == Hoa_Restitution)
-        m_restitution->setLoudspeakerAngles(len, angles);
 }
 
 double AmbisonicsMultiDecoder::getLoudspeakerAngle(long anIndex)
@@ -150,7 +127,7 @@ void AmbisonicsMultiDecoder::setVectorSize(long aVectorSize)
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     if(m_mode == Hoa_Restitution)
     {
-        m_restitution->setVectorSize(m_vector_size);
+        m_restitution->Ambisonics::setVectorSize(m_vector_size);
     }
     else if(m_mode == Hoa_Binaural)
     {
@@ -167,7 +144,7 @@ void AmbisonicsMultiDecoder::setSamplingRate(long aSamplingRate)
     m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
     if(m_mode == Hoa_Restitution)
     {
-        m_restitution->setSamplingRate(m_vector_size);
+        m_restitution->Ambisonics::setSamplingRate(m_vector_size);
     }
     else if(m_mode == Hoa_Binaural)
     {

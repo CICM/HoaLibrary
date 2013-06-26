@@ -9,16 +9,16 @@
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
  *  - Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice, 
+ *  - Redistributions of source code must retain the above copyright notice,
  *      this list of conditions and the following disclaimer.
  *  - Redistributions in binary form must reproduce the above copyright notice,
  *      this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
  *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
  * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
  * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
  * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
@@ -27,16 +27,16 @@
 
 extern "C"
 {
-	#include "ext.h"
-	#include "ext_obex.h"
-	#include "z_dsp.h"
+#include "ext.h"
+#include "ext_obex.h"
+#include "z_dsp.h"
 }
 
-typedef struct _HoaRecomposer 
+typedef struct _HoaRecomposer
 {
-	t_pxobject					f_ob;			
+	t_pxobject					f_ob;
 	AmbisonicsRecomposer*       f_ambiRecomposer;
-
+    
 	long						f_inputNumber;
 	long						f_outputNumber;
     t_atom_long                 f_mode;
@@ -70,8 +70,8 @@ void HoaRecomposer_perform64_fisheye_offset(t_HoaRecomposer *x, t_object *dsp64,
 void *HoaRecomposer_class;
 
 int C74_EXPORT main(void)
-{	
-
+{
+    
 	t_class *c;
 	
 	c = class_new("hoa.recomposer~", (method)HoaRecomposer_new, (method)HoaRecomposer_free, (long)sizeof(t_HoaRecomposer), 0L, A_GIMME, 0);
@@ -99,8 +99,8 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SAVE             (c,"mode", 1);
     CLASS_ATTR_SAVE             (c,"ramp", 1);
     
-	class_dspinit(c);				
-	class_register(CLASS_BOX, c);	
+	class_dspinit(c);
+	class_register(CLASS_BOX, c);
 	HoaRecomposer_class = c;
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
@@ -129,7 +129,7 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_ambiRecomposer->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiRecomposer->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
-
+        
 		x->f_ob.z_misc = Z_NO_INPLACE;
         
         d = (t_dictionary *)gensym("#D")->s_thing;
@@ -142,7 +142,7 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
 void HoaRecomposer_angle(t_HoaRecomposer *x, t_symbol *s, short ac, t_atom *av)
 {
     if(ac == 2 && atom_gettype(av) == A_LONG && atom_gettype(av+1) == A_FLOAT)
-            x->f_ambiRecomposer->setMicrophoneAngle(atom_getlong(av), atom_getfloat(av+1));
+        x->f_ambiRecomposer->setMicrophoneAngle(atom_getlong(av), atom_getfloat(av+1));
     else
     {
         for(int i = 0; i < ac; i++)
@@ -202,8 +202,8 @@ t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long a
         else
             object_attr_setdisabled((t_object *)x, gensym("ramp"), 0);
         /*
-        if(dspState)
-            object_method(gensym("dsp")->s_thing, gensym("start"));
+         if(dspState)
+         object_method(gensym("dsp")->s_thing, gensym("start"));
          */
     }
     return MAX_ERR_NONE;
@@ -222,7 +222,7 @@ t_max_err HoaRecomposer_ramp(t_HoaRecomposer *x, t_object *attr, long argc, t_at
 void HoaRecomposer_dsp64(t_HoaRecomposer *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiRecomposer->setVectorSize(maxvectorsize);
-
+    
     if (x->f_ambiRecomposer->getMode() == Hoa_Free)
         object_method(dsp64, gensym("dsp_add64"), x, HoaRecomposer_perform64_free, 0, NULL);
     else if(x->f_ambiRecomposer->getMode() == Hoa_Fixe)
@@ -267,7 +267,7 @@ void HoaRecomposer_dsp(t_HoaRecomposer *x, t_signal **sp, short *count)
 	x->f_inputNumber = x->f_ambiRecomposer->getNumberOfInputs();
 	x->f_outputNumber = x->f_ambiRecomposer->getNumberOfOutputs();
 	pointer_count = x->f_inputNumber + x->f_outputNumber + 2;
-
+    
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
 	for(i = 0; i < pointer_count; i++)
 		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
@@ -340,7 +340,7 @@ void HoaRecomposer_assist(t_HoaRecomposer *x, void *b, long m, long a, char *s)
 {
 	if (m != ASSIST_INLET)
         sprintf(s,"(Signal) %s", x->f_ambiRecomposer->getHarmonicsName(a).c_str());
-	else 
+	else
         sprintf(s,"(Signal) %s", x->f_ambiRecomposer->getMicrophonesName(a).c_str());
 }
 
