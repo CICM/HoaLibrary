@@ -54,6 +54,7 @@ typedef struct _HoaDecode
     t_symbol*               f_mode;
     
     t_atom_long             f_number_of_loudspeakers;
+    t_atom_long             f_send_config;
     t_symbol*               f_pinna_size;
     double                  f_angles_of_loudspeakers[MAX_SPEAKER];
     t_symbol*               f_resitution_mode;
@@ -123,7 +124,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c, "angles", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "angles", 0, "Angles of Loudspeakers");
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
-    CLASS_ATTR_ORDER            (c, "angles", 0, "6");
+    CLASS_ATTR_ORDER            (c, "angles", 0, "5");
 	CLASS_ATTR_SAVE             (c, "angles", 1);
     CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
     
@@ -132,8 +133,15 @@ int C74_EXPORT main(void)
     CLASS_ATTR_LABEL            (c, "restitution", 0, "Restitution Mode");
     CLASS_ATTR_ENUM             (c, "restitution", 0, "panning projection");
 	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, restitution_set);
-    CLASS_ATTR_ORDER            (c, "restitution", 0, "7");
+    CLASS_ATTR_ORDER            (c, "restitution", 0, "6");
     CLASS_ATTR_SAVE             (c, "restitution", 1);
+    
+    CLASS_ATTR_LONG             (c, "autoconnect", 0, t_HoaDecode, f_send_config);
+	CLASS_ATTR_CATEGORY			(c, "autoconnect", 0, "Behavior");
+	CLASS_ATTR_STYLE_LABEL      (c, "autoconnect", 0, "onoff", "Auto connection");
+    CLASS_ATTR_ORDER            (c, "autoconnect", 0, "7");
+    CLASS_ATTR_SAVE             (c, "autoconnect", 1);
+    
     
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -146,7 +154,7 @@ int C74_EXPORT main(void)
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaDecode *x = NULL;
-    
+    t_dictionary *d;
 	int order = 4;
     x = (t_HoaDecode *)object_alloc((t_class*)HoaDecode_class);
 	if(x)
@@ -159,7 +167,7 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         x->f_number_of_loudspeakers =  order * 2 + 2;
         x->f_pinna_size = gensym("small");
         x->f_resitution_mode = gensym("panning");
-        
+        x->f_send_config =1;
 #ifdef __APPLE__
         // OSX only : access to the hoa.binaural~ bundle
         CFBundleRef hoaBinaural_bundle = CFBundleGetBundleWithIdentifier(CFSTR("com.cicm.hoa-decoder-"));
@@ -187,8 +195,8 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		
         attr_args_process(x, argc, argv);
 		x->f_ob.z_misc = Z_NO_INPLACE;
-        
-        object_attach_byptr_register(x, x, CLASS_BOX);
+        d = (t_dictionary *)gensym("#D")->s_thing;
+        if (d) attr_dictionary_process(x, d);
 	}
     
 	return (x);
@@ -340,7 +348,7 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
         x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     }
     
-    //HoaDecode_send_angles(x);
+    HoaDecode_send_angles(x);
     return NULL;
 }
 
@@ -371,9 +379,11 @@ void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet)
         }
     }
     object_method(b, gensym("dynlet_end"));
-    
-    //HoaDecode_send_configuration(x);
-    //HoaDecode_reconnect_outlet(x);
+    if(x->f_send_config)
+    {
+        HoaDecode_send_configuration(x);
+        HoaDecode_reconnect_outlet(x);
+    }
 }
 
 void HoaDecode_reconnect_outlet(t_HoaDecode *x)

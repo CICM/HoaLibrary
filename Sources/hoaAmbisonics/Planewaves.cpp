@@ -152,9 +152,9 @@ void Planewaves::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standa
         free(m_ordinate_of_loudspeakers);
     
     /* Define standard configuration */
-    m_angles_of_loudspeakers    = new double[m_number_of_inputs];
-    m_abscissa_of_loudspeakers  = new double[m_number_of_inputs];
-    m_ordinate_of_loudspeakers  = new double[m_number_of_inputs];
+    m_angles_of_loudspeakers    = new double[m_number_of_loudspeakers];
+    m_abscissa_of_loudspeakers  = new double[m_number_of_loudspeakers];
+    m_ordinate_of_loudspeakers  = new double[m_number_of_loudspeakers];
     computeConfiguration(standardOnOff);
     
     for (int i = 0; i < m_number_of_loudspeakers; i++)

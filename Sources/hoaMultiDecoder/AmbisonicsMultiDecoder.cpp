@@ -40,7 +40,7 @@ void AmbisonicsMultiDecoder::setMode(long aMode)
         m_mode = Hoa_Restitution;
         m_restitution->Ambisonics::setVectorSize(m_vector_size);
         m_restitution->Ambisonics::setSamplingRate(m_sampling_rate);
-        m_number_of_outputs = m_restitution->Planewaves::getNumberOfOutputs();
+        m_number_of_outputs = m_restitution->getNumberOfOutputs();
     }
     else if(aMode == Hoa_Binaural)
     {
@@ -73,7 +73,7 @@ void AmbisonicsMultiDecoder::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
     else if (m_mode == Hoa_Restitution)
     {
         m_restitution->setNumberOfLoudspeakers(aNumberOfLoudspeakers);
-        m_number_of_outputs = m_restitution->Planewaves::getNumberOfOutputs();
+        m_number_of_outputs = m_restitution->getNumberOfOutputs();
     }
     else
         m_number_of_outputs = 2;
@@ -101,7 +101,7 @@ void AmbisonicsMultiDecoder::setRestitutionMode(long aResitutionMode)
 
 long AmbisonicsMultiDecoder::getRestitutionMode()
 {
-    return m_restitution->getRestitutionMode();
+    return 0;m_restitution->getRestitutionMode();
 }
 
 void AmbisonicsMultiDecoder::setLoudspeakerAngle(long anIndex, double anAngle)
