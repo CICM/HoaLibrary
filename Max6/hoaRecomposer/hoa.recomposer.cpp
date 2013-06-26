@@ -118,7 +118,6 @@ void HoaRecomposerUI_bang(t_HoaRecomposerUI *x);
 void HoaRecomposerUI_list(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 void HoaRecomposerUI_anything(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 void HoaRecomposerUI_float(t_HoaRecomposerUI *x, double f);
-void HoaRecomposerUI_resetAngles(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 
 void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av);
@@ -166,7 +165,6 @@ int C74_EXPORT main()
     class_addmethod(c, (method) HoaRecomposerUI_set,             "set",           A_GIMME,  0);
     class_addmethod(c, (method) HoaRecomposerUI_angle,           "angle",         A_GIMME,  0);
     class_addmethod(c, (method) HoaRecomposerUI_wide,            "wide",          A_GIMME,  0);
-    class_addmethod(c, (method) HoaRecomposerUI_resetAngles,     "resetangle",    A_GIMME,  0);
     class_addmethod(c, (method) HoaRecomposerUI_reset,           "reset",         A_GIMME,  0);
 	class_addmethod(c, (method) HoaRecomposerUI_anything,        "anything",      A_GIMME,  0);
 	class_addmethod(c, (method) HoaRecomposerUI_mousedown,       "mousedown",     A_CANT,   0);
@@ -298,7 +296,7 @@ void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
 
 void HoaRecomposerUI_getdrawparams(t_HoaRecomposerUI *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-	params->d_borderthickness = 2;
+	params->d_borderthickness = 1;
 	params->d_cornersize = 8;
     params->d_bordercolor = x->f_colorBorder;
     params->d_boxfillcolor = x->f_colorBackground;
@@ -393,27 +391,6 @@ t_max_err HoaRecomposerUI_getvalueof(t_HoaRecomposerUI *x, long *ac, t_atom **av
 }
 
 /* --------- */
-
-void HoaRecomposerUI_resetAngles(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av)
-{    
-    if (ac == 0) {
-        x->f_mics->resetAngles(-1);
-    }
-    else
-    {
-        for(int i = 0; i < ac ; i++)
-        {
-            if (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
-                x->f_mics->resetAngles(atom_getlong(av + i));
-        }
-    }
-    
-    HoaRecomposerUI_outputAndNotifyChange(x);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
-	jbox_redraw((t_jbox *)x);
-}
 
 void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av)
 {
@@ -552,7 +529,8 @@ t_max_err set_numberOfMics(t_HoaRecomposerUI *x, void *attr, long ac, t_atom *av
         jbox_redraw((t_jbox *)x);
     }
     
-    object_method(x, gensym("resetangle"));
+    HoaRecomposerUI_reset(x, gensym("reset"), 0, NULL);
+    //object_method(x, gensym("resetangle"));
     return MAX_ERR_NONE;
 }
 
@@ -651,7 +629,8 @@ void HoaRecomposerUI_paint(t_HoaRecomposerUI *x, t_object *view)
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	x->rect = rect;
-    x->f_micRadius = rect.width * 0.45;
+    //x->f_micRadius = rect.width * 0.45;
+    x->f_micRadius = rect.width * 0.46;
 	draw_background(x, view, &rect);
     draw_harmonics(x, view, &rect);
     draw_microphones(x, view, &rect);
@@ -694,7 +673,11 @@ void draw_microphones(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
             
             // head of the mic :
             jgraphics_arc(g, 0, 0, hpSize, 0, CICM_2PI);
-            jgraphics_fill(g);
+            jgraphics_fill_preserve(g);
+            
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, x->f_mics->isSelected(i) ? &x->f_colorMic : ( (x->f_last_mouseMoveOverMic == i) ? &overMicColor : &x->f_colorMicSelected) );
+            jgraphics_stroke(g);
             
             //-- inverse rotation and translate
             jgraphics_translate(g, 0, -x->f_micRadius);
@@ -763,7 +746,7 @@ void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         for (int i = 0; i < x->f_numberOfMic; i++) {
             if(x->f_mics->getBiggestContribution(i) != 0.)
             {
-                double factor = (x->f_micRadius) / x->f_mics->getBiggestContribution(i);
+                double factor = (x->f_micRadius*0.92) / x->f_mics->getBiggestContribution(i);
                 
                 jgraphics_set_source_jrgba(g, &harmonicsFillColor);
                 jgraphics_move_to(g, x->f_mics->getBiggestLobe_x(i, 0) * factor, x->f_mics->getBiggestLobe_y(i, 0) * factor);
@@ -865,7 +848,7 @@ void draw_background(t_HoaRecomposerUI *x,  t_object *view, t_rect *rect)
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
         jgraphics_set_matrix(g, &transform);
         jgraphics_set_source_jrgba(g, &HpMarkerColor);
-        jgraphics_set_line_width(g, 1.5);
+        jgraphics_set_line_width(g, 1.);
         
         for (int i=0; i < x->f_mics->getNumberOfMics(); i++) {
             jgraphics_rotate(g, mic_angle*i);

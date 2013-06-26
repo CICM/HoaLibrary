@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1059.0, 664.0 ],
+						"rect" : [ 0.0, 70.0, 1059.0, 664.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +71,53 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bgcolor" : [ 0.352446, 0.352446, 0.352446, 1.0 ],
+									"bordercolor" : [ 0.196168, 0.196168, 0.196168, 1.0 ],
+									"circlecolor" : [ 0.196078, 0.196078, 0.196078, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"fisheyecolor" : [ 0.687659, 0.179729, 0.179729, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 14.0,
+									"id" : "obj-3",
+									"maxclass" : "hoa.recomposer",
+									"miccolor" : [ 0.062419, 0.329952, 0.487508, 1.0 ],
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "list" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 702.75, 278.0, 313.0, 313.0 ],
+									"presentation_rect" : [ 702.75, 278.0, 0.0, 0.0 ],
+									"rectselectcolor" : [ 0.386326, 0.519675, 0.8, 1.0 ],
+									"selmiccolor" : [ 0.903228, 0.903228, 0.903228, 1.0 ],
+									"varname" : "hoa.recomposer[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.352446, 0.352446, 0.352446, 1.0 ],
+									"bordercolor" : [ 0.196168, 0.196168, 0.196168, 1.0 ],
+									"circlecolor" : [ 0.196078, 0.196078, 0.196078, 1.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"fisheyecolor" : [ 0.687659, 0.179729, 0.179729, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 14.0,
+									"id" : "obj-4",
+									"maxclass" : "hoa.recomposer",
+									"miccolor" : [ 0.443451, 0.444146, 0.486275, 1.0 ],
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "list" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 379.75, 235.0, 313.0, 313.0 ],
+									"rectselectcolor" : [ 0.386326, 0.519675, 0.8, 1.0 ],
+									"selmiccolor" : [ 0.903228, 0.903228, 0.903228, 1.0 ],
+									"varname" : "hoa.recomposer"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"bgcolor" : [ 0.352941, 0.352941, 0.352941, 0.0 ],
 									"bordercolor" : [ 0.661033, 0.661033, 0.661033, 1.0 ],
@@ -6047,7 +6094,7 @@
 									"id" : "obj-4",
 									"maxclass" : "hoa.recomposer",
 									"miccolor" : [ 0.062419, 0.329952, 0.487508, 1.0 ],
-									"nmics" : 16,
+									"nmics" : 17,
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "list" ],
@@ -7705,7 +7752,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1059.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1059.0, 664.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7736,7 +7783,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 459.0, 152.0, 37.0, 18.0 ],
-									"presentation_rect" : [ 455.75, 147.0, 0.0, 0.0 ],
 									"text" : "reset"
 								}
 
@@ -7751,7 +7797,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 438.75, 122.0, 70.0, 18.0 ],
-									"presentation_rect" : [ 435.75, 118.0, 0.0, 0.0 ],
 									"text" : "reset angle"
 								}
 
@@ -7803,12 +7848,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-8",
+									"linecount" : 2,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 394.5, 618.0, 228.0, 18.0 ],
-									"text" : "1. 1. 1. 1. 1. 1. 1. 1."
+									"patching_rect" : [ 394.5, 618.0, 228.0, 31.0 ],
+									"text" : "0.499324 0.499324 0.499324 0.499324 0.499324 0.499324 0.499324 0.499324"
 								}
 
 							}
@@ -7822,8 +7868,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 44.0, 591.0, 228.0, 31.0 ],
-									"text" : "0. 0.785398 1.570796 2.356194 3.141593 3.926991 4.712389 5.497787"
+									"patching_rect" : [ 44.0, 591.0, 232.0, 31.0 ],
+									"text" : "-0.772873 0.012525 0.797923 1.583322 2.36872 -3.129067 -2.343669 -1.558271"
 								}
 
 							}
@@ -7993,8 +8039,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 402.25, 189.0, 74.0, 18.0 ],
-									"text" : "1, 18 20000"
+									"patching_rect" : [ 402.25, 189.0, 67.0, 18.0 ],
+									"text" : "1, 6 20000"
 								}
 
 							}
@@ -8059,11 +8105,11 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 459.0, 227.0, 59.5, 20.0 ],
 									"restore" : 									{
-										"hoa.recomposer" : [ 1.0, 0.0, 1.0, 0.707107, 0.707107, 1.0, 0.0, 1.0, 1.0, -0.707107, 0.707107, 1.0, -1.0, 0.0, 1.0, -0.707107, -0.707107, 1.0, -0.0, -1.0, 1.0, 0.707107, -0.707107, 1.0 ]
+										"hoa.recomposer" : [ 0.715908, -0.698195, 0.499324, 0.999922, 0.012525, 0.499324, 0.698195, 0.715908, 0.499324, -0.012525, 0.999922, 0.499324, -0.715908, 0.698195, 0.499324, -0.999922, -0.012525, 0.499324, -0.698195, -0.715908, 0.499324, 0.012525, -0.999922, 0.499324 ]
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u371000400"
+									"varname" : "u129000401"
 								}
 
 							}
@@ -8102,20 +8148,6 @@
 								}
 
 							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"id" : "obj-10",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 137.75, 152.0, 67.0, 18.0 ],
-									"text" : "resetangle"
-								}
-
-							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
@@ -8132,15 +8164,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-1", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-10", 0 ]
 								}
 
 							}
