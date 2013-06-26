@@ -73,6 +73,17 @@ void AmbisonicVirtualMicUIManager::resetAngles(const int _index)
         m_mic[_index].setAngleInRadian(m_defaultAngles[_index]);
 }
 
+void AmbisonicVirtualMicUIManager::resetWides(const int _index)
+{
+    if (_index == -1) // tous les angles
+    {
+        for (int i = 0; i < m_numberOfMics; i++)
+            m_mic[i].setWiderValue(1);
+    }
+    else if (Tools::isInside(long(_index), long(0), long(m_numberOfMics)))
+        m_mic[_index].setWiderValue(1);
+}
+
 void AmbisonicVirtualMicUIManager::setAnglesInRadian(double* _radians, long _len)
 {
     for (int i=0; i < _len && i < m_numberOfMics; i++)

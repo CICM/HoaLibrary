@@ -39,7 +39,7 @@ extern "C"
 #define MIN_MICS 3
 #define DEF_MICS 8
 
-#include "AmbisonicVirtualMicUIManager.h"
+#include "../../Sources/hoaRecomposer/AmbisonicVirtualMicUIManager.h"
 
 typedef struct  _HoaRecomposerUI
 {
@@ -119,6 +119,7 @@ void HoaRecomposerUI_list(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *a
 void HoaRecomposerUI_anything(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 void HoaRecomposerUI_float(t_HoaRecomposerUI *x, double f);
 void HoaRecomposerUI_resetAngles(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
+void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 
 void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av);
 void HoaRecomposerUI_angle(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av);
@@ -166,6 +167,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method) HoaRecomposerUI_angle,           "angle",         A_GIMME,  0);
     class_addmethod(c, (method) HoaRecomposerUI_wide,            "wide",          A_GIMME,  0);
     class_addmethod(c, (method) HoaRecomposerUI_resetAngles,     "resetangle",    A_GIMME,  0);
+    class_addmethod(c, (method) HoaRecomposerUI_reset,           "reset",         A_GIMME,  0);
 	class_addmethod(c, (method) HoaRecomposerUI_anything,        "anything",      A_GIMME,  0);
 	class_addmethod(c, (method) HoaRecomposerUI_mousedown,       "mousedown",     A_CANT,   0);
 	class_addmethod(c, (method) HoaRecomposerUI_mousedrag,       "mousedrag",     A_CANT,   0);
@@ -353,6 +355,8 @@ t_max_err HoaRecomposerUI_setvalueof(t_HoaRecomposerUI *x, long ac, t_atom *av)
         jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
         jbox_redraw((t_jbox *)x);
+        
+        HoaRecomposerUI_output(x);
 	}
 	return MAX_ERR_NONE;
 }
@@ -401,6 +405,55 @@ void HoaRecomposerUI_resetAngles(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_
         {
             if (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
                 x->f_mics->resetAngles(atom_getlong(av + i));
+        }
+    }
+    
+    HoaRecomposerUI_outputAndNotifyChange(x);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+	jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
+	jbox_redraw((t_jbox *)x);
+}
+
+void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av)
+{
+    // "reset" | "reset angle" | "reset angle 1" | "reset wide" | "reset wide 1"
+    if (ac == 0)
+    {
+        x->f_mics->resetAngles();
+        x->f_mics->resetWides();
+    }
+    else if (ac >= 1 && atom_gettype(av) == A_SYM)
+    {
+        if (atom_getsym(av) == gensym("angle"))
+        {
+            if (ac >= 2)
+            {
+                for(int i = 1; i < ac ; i++)
+                {
+                    if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG) && atom_getlong(av + i) != 0 )
+                        x->f_mics->resetAngles(atom_getlong(av + i) - 1);
+                }
+            }
+            else
+            {
+                x->f_mics->resetAngles();
+            }
+        }
+        else if (atom_getsym(av) == gensym("wide"))
+        {
+            if (ac >= 2)
+            {
+                for(int i = 1; i < ac ; i++)
+                {
+                    if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG) && atom_getlong(av + i) != 0 )
+                        x->f_mics->resetWides(atom_getlong(av + i) - 1);
+                }
+            }
+            else
+            {
+                x->f_mics->resetWides();
+            }
         }
     }
     

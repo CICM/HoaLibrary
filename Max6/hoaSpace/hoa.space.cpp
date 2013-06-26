@@ -51,17 +51,15 @@ typedef struct  _space
 
 	long		f_mode;
 	long		f_order;
-	int			f_shadow;
 
 	t_jrgba		f_color_background;
 	t_jrgba		f_color_border_box;
-	t_jrgba		f_color_circle;
 	t_jrgba		f_color_circleInner;
-	t_jrgba		f_color_circleShadow;
 	t_jrgba		f_color_harmonics;
 	t_jrgba		f_color_points;
 
 	t_rect		f_center;
+    double		f_nbCircleToDraw;
 	double		f_rayonGlobal;
 	double		f_rayonCircle;
     double      f_rayonExtCircle;
@@ -112,7 +110,6 @@ void space_paint(t_space *x, t_object *view);
 void draw_background(t_space *x, t_object *view, t_rect *rect);
 void draw_harmonics(t_space *x,  t_object *view, t_rect *rect);
 void draw_microphones_points(t_space *x, t_object *view, t_rect *rect);
-void draw_rotation(t_space *x, t_object *view, t_rect *rect);
 
 int C74_EXPORT main()
 {
@@ -139,13 +136,6 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
-	
-	CLASS_ATTR_LONG					(c, "shadow", 0, t_space, f_shadow);
-	CLASS_ATTR_CATEGORY				(c, "shadow", 0, "Appearance");
-	CLASS_ATTR_ORDER				(c, "shadow", 0, "1");
-	CLASS_ATTR_STYLE_LABEL			(c, "shadow", 0, "onoff", "Draw Shadows");
-	CLASS_ATTR_DEFAULT				(c, "shadow", 0, "1");
-	CLASS_ATTR_SAVE					(c, "shadow", 1);
 
     CLASS_ATTR_LONG					(c, "nmics", 0, t_space, f_number_of_microphones);
 	CLASS_ATTR_CATEGORY				(c, "nmics", 0, "Behavior");
@@ -168,12 +158,6 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "1. 1. 1. 1.");
 	
-	CLASS_ATTR_RGBA					(c, "circlecolor", 0, t_space, f_color_circle);
-	CLASS_ATTR_CATEGORY				(c, "circlecolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "circlecolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "circlecolor", 0, "Circle Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "circlecolor", 0, "0.6 0.6 0.6 1.");
-	
 	CLASS_ATTR_RGBA					(c, "harmocolor", 0, t_space, f_color_harmonics);
 	CLASS_ATTR_CATEGORY				(c, "harmocolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "harmocolor", 0, "rgba");
@@ -185,12 +169,6 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE				(c, "miccolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "miccolor", 0, "Virtuals microphones color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "miccolor", 0, "0. 0. 0. 1.");
-	
-	CLASS_ATTR_RGBA					(c, "cishadcolor", 0, t_space, f_color_circleShadow);
-	CLASS_ATTR_CATEGORY				(c, "cishadcolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "cishadcolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "cishadcolor", 0, "Circle Shadow Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "cishadcolor", 0, "1. 1. 1. 0.2");
 	
 	CLASS_ATTR_RGBA					(c, "cicolorin", 0, t_space, f_color_circleInner);
 	CLASS_ATTR_CATEGORY				(c, "cicolorin", 0, "Color");
@@ -294,12 +272,6 @@ t_max_err space_notify(t_space *x, t_symbol *s, t_symbol *msg, void *sender, voi
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_points_layer"));
 		}
-		else if(name == gensym("shadow"))
-		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-			if (x->f_shadow) object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 0);
-			else object_attr_setdisabled((t_object *)x, gensym("cishadcolor"), 1);
-		}
 		jbox_redraw((t_jbox *)x);
 	}
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
@@ -309,8 +281,8 @@ void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *pa
 {
     params->d_boxfillcolor = x->f_color_background;
     params->d_bordercolor = x->f_color_border_box;
-	params->d_borderthickness = 2;
-	params->d_cornersize = 12;
+	params->d_borderthickness = 1;
+	params->d_cornersize = 6;
 }
 
 /**********************************************************/
@@ -384,9 +356,9 @@ void space_paint(t_space *x, t_object *view)
 	if(rect.width > rect.height)
 		x->f_rayonGlobal = rect.height * .5;
 	
-//	x->f_rayonCircle = x->f_rayonGlobal / 6;
+    x->f_nbCircleToDraw = 5;
     x->f_rayonExtCircle = x->f_rayonGlobal - 5;
-    x->f_rayonCircle = x->f_rayonExtCircle/5;
+    x->f_rayonCircle = x->f_rayonExtCircle / x->f_nbCircleToDraw;
 	
 	draw_background(x, view, &rect);
 	draw_harmonics(x, view, &rect);
@@ -398,6 +370,19 @@ void draw_background(t_space *x,  t_object *view, t_rect *rect)
 	int i;
 	double y1, y2, rotateAngle;
 	t_jmatrix transform;
+    
+    t_jrgba black, white;
+    double contrastBlack = 0.12;
+    double contrastWhite = 0.08;
+    
+    black = white = x->f_color_circleInner;
+    black.red = Tools::clip_min(black.red -= contrastBlack);
+    black.green = Tools::clip_min(black.green -= contrastBlack);
+    black.blue = Tools::clip_min(black.blue -= contrastBlack);
+    
+    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
+    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
+    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
 
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
 	
@@ -409,58 +394,54 @@ void draw_background(t_space *x,  t_object *view, t_rect *rect)
 		jgraphics_fill(g);
 		
 		/* Circles ***************************************/
-		for(i = 5; i > 0; i--)
+		for(i = x->f_nbCircleToDraw; i > 0; i--)
 		{
-			if (x->f_shadow) {
-				/* Inner shadow */
-				jgraphics_set_line_width(g, 2);
-				jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
-				jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-                //jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, x->f_rayonExtCircle / double(5-i),  0., JGRAPHICS_2PI);
-				jgraphics_stroke(g);
-			}
+            /* Inner shadow */
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_arc(g, x->f_center.x + 0.5, x->f_center.y + 0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+            jgraphics_stroke(g);
             
 			/* Circle color */
 			jgraphics_set_line_width(g, 1);
-			jgraphics_set_source_jrgba(g, &x->f_color_circle);
+			jgraphics_set_source_jrgba(g, &black);
 			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
-            //jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonExtCircle / double(5-i),  0., JGRAPHICS_2PI);
 			jgraphics_stroke(g);
 		}
 
 		/* Axes *******************************************/
-		jgraphics_set_source_jrgba(g, &x->f_color_circle);
+		jgraphics_set_source_jrgba(g, &black);
 		
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
+        
 		for(i = 0; i < x->f_number_of_microphones; i++)
 		{
-			rotateAngle = (double)i/ (double)x->f_number_of_microphones * JGRAPHICS_2PI - JGRAPHICS_2PI / ((double)x->f_number_of_microphones * 2.);
+			rotateAngle = (double)i/ (double)x->f_number_of_microphones * CICM_2PI - CICM_2PI / ((double)x->f_number_of_microphones * 2.);
 			jgraphics_rotate(g, rotateAngle);
+            
+            y1 = 1. / x->f_nbCircleToDraw * x->f_rayonExtCircle;
+			y2 = x->f_rayonExtCircle;
 			
-			y1 = 1. / 6. * x->f_rayonGlobal;
-			y2 = 5. / 6. * x->f_rayonGlobal;
-			
-			if (x->f_shadow) 
-			{
-				if ( (rotateAngle <= JGRAPHICS_PI && rotateAngle > 0.) ) 
-				{
-					jgraphics_move_to(g, -0.5, y1-0.5);
-					jgraphics_line_to(g, -0.5, y2-0.5);
-				}
-				else 
-				{
-					jgraphics_move_to(g, 0.5, y1+0.5);
-					jgraphics_line_to(g, 0.5, y2+0.5);
-				}
-				jgraphics_set_line_width(g, 2);
-				jgraphics_set_source_jrgba(g, &x->f_color_circleShadow);
-				jgraphics_stroke(g);
-			}
+            /* Inner shadow */
+            //if ( (rotateAngle <= CICM_PI && rotateAngle > 0.) )
+            if ( Tools::isInsideDeg( Tools::radToDeg(rotateAngle), 46., -135.) )
+            {
+                jgraphics_move_to(g, -0.5, y1-0.5);
+                jgraphics_line_to(g, -0.5, y2-0.5);
+            }
+            else
+            {
+                jgraphics_move_to(g, 0.5, y1+0.5);
+                jgraphics_line_to(g, 0.5, y2+0.5);
+            }
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_stroke(g);
 			
 			jgraphics_move_to(g, 0, y1);
 			jgraphics_line_to(g, 0, y2);
-			jgraphics_set_source_jrgba(g, &x->f_color_circle);
+			jgraphics_set_source_jrgba(g, &black);
 			jgraphics_set_line_width(g, 1);
 			jgraphics_stroke(g);
 			
@@ -469,23 +450,6 @@ void draw_background(t_space *x,  t_object *view, t_rect *rect)
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
-}
-
-void draw_rotation(t_space *x, t_object *view, t_rect *rect)
-{
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("rotation_layer"), rect->width, rect->height);
-
-	if (g)
-    {
-        for(int i = 0; i < 24; i++)
-        {
-            double angle = x->f_rotation * -1 - CICM_PI2 + CICM_2PI * (double)i / 24.;
-            jgraphics_set_source_jrgba(g, &x->f_color_circle);
-            jgraphics_line_draw_fast(g, Tools::abscisse((double)5.5 * x->f_rayonCircle, angle) + rect->width * 0.5, Tools::ordinate((double)5.5 * x->f_rayonCircle,angle) + rect->width * 0.5,Tools::abscisse((double)5.8 * x->f_rayonCircle, angle) + rect->width * 0.5, Tools::ordinate((double)5.8 * x->f_rayonCircle, angle) + rect->width * 0.5, 5.);
-        }
-            jbox_end_layer((t_object*)x, view, gensym("rotation_layer"));
-	}
-	jbox_paint_layer((t_object *)x, view, gensym("rotation_layer"), 0., 0.);
 }
 
 void draw_harmonics(t_space *x,  t_object *view, t_rect *rect)
@@ -515,7 +479,7 @@ void draw_harmonics(t_space *x,  t_object *view, t_rect *rect)
             if(x->f_mode == 1)
                 normalize = x->f_rotation_max / x->f_viewer->getBiggestContribution();
             
-			double factor = (x->f_rayonGlobal * 5. / 6.) * normalize;
+            double factor = x->f_rayonExtCircle * normalize;
 			
 			jgraphics_set_source_jrgba(g, &x->f_color_harmonics);
 			for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
@@ -563,7 +527,7 @@ void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
 
 		jgraphics_set_source_jrgba(g, &x->f_color_points);
         double loudspeaker_angle = CICM_2PI / (double)x->f_number_of_microphones;
-        double factor1 = 4. * x->f_rayonCircle;
+        double factor1 = (x->f_nbCircleToDraw-1) * x->f_rayonCircle;
         double factor2 = x->f_rayonCircle;
         for(int i = 0; i < x->f_number_of_microphones; i++)
         {
@@ -583,12 +547,24 @@ void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
 
 void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
+    // cmd = 17
+    // ctrl = 148
     double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
     double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
     double radius   = Tools::radius(mapped_x, mapped_y);
     double angle    = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
-
-    if(radius > 0.9)
+    
+    if(modifiers == 18) // shift
+    {
+        x->f_mode = 2;
+        x->f_retractation = radius;
+        for(int i =0; i < x->f_number_of_microphones; i++)
+        {
+            x->f_mode_values[i] = x->f_microphonesValues[i];
+        }
+    }
+    //else if(radius > 0.9)
+    else if(modifiers == 148) // ctrl
     {
         x->f_mode = 1;
         x->f_rotation_max = 0.;
@@ -600,15 +576,6 @@ void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers
         x->f_reference_angle = angle;
         for(int i =0; i < x->f_number_of_microphones; i++)
             x->f_mode_values[i] = x->f_microphonesValues[i];
-    }
-    else if(modifiers == 18)
-    {
-        x->f_mode = 2;
-        x->f_retractation = radius;
-        for(int i =0; i < x->f_number_of_microphones; i++)
-        {
-            x->f_mode_values[i] = x->f_microphonesValues[i];
-        }
     }
     else
     {
@@ -727,7 +694,7 @@ void space_retract_points(t_space *x, t_object *patcherview, t_pt pt, long modif
 
 void space_compute(t_space *x)
 {
-    x->f_recomposer->process(x->f_microphonesValues, x->f_harmonicsValues);
+    x->f_recomposer->processFixe(x->f_microphonesValues, x->f_harmonicsValues);
     x->f_viewer->process(x->f_harmonicsValues);
 
     jbox_invalidate_layer((t_object *)x, NULL, gensym("rotation_layer"));
