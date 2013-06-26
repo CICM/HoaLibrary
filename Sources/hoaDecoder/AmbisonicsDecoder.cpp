@@ -25,7 +25,7 @@
 
 #include "AmbisonicsDecoder.h"
 
-AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfLoudspeakers, double anOffset, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfLoudspeakers, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
     Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_harmonics);
     Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_harmonics);
@@ -34,7 +34,6 @@ AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfLoudspeakers, d
     m_decoder_matrix_double = NULL;
     m_vector_float_output   = NULL;
     m_vector_double_output  = NULL;
-    m_offset = Tools::degToRad(Tools::degreeWrap(anOffset));
     m_number_of_loudspeakers = 0;
     setNumberOfLoudspeakers(aNumberOfLoudspeakers);
 }
@@ -68,22 +67,11 @@ long AmbisonicsDecoder::getNumberOfLoudspeakers()
     return m_number_of_loudspeakers;
 }
 
-void AmbisonicsDecoder::setOffset(double anOffset)
-{
-    m_offset = Tools::degToRad(Tools::degreeWrap(anOffset));
-    computeMatrix();
-}
-
-double AmbisonicsDecoder::getOffset()
-{
-    return Tools::radToDeg(m_offset);
-}
-
 double AmbisonicsDecoder::getLoudspeakerAngle(long anIndex)
 {
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
     {
-        double angle = CICM_2PI * ((double)anIndex / (double)(m_number_of_outputs)) + m_offset;
+        double angle = CICM_2PI * ((double)anIndex / (double)(m_number_of_outputs));
         angle = Tools::radianWrap(angle);
         return Tools::radToDeg(angle);
     }
@@ -93,7 +81,7 @@ double AmbisonicsDecoder::getLoudspeakerAngle(long anIndex)
 
 std::string AmbisonicsDecoder::getLoudspeakerName(long anIndex)
 {
-    float angle = (anIndex / (double)m_number_of_loudspeakers * 360. + m_offset);
+    float angle = (anIndex / (double)m_number_of_loudspeakers * 360.);
     if(angle > 360.)
         angle -= 360.;
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
@@ -107,7 +95,7 @@ void AmbisonicsDecoder::computeMatrix()
 {
     for (int i = 0; i < m_number_of_outputs; i++)
 	{
-		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs)) - m_offset;
+		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs));
         angle = Tools::radianWrap(angle);
 		for (int j = 0; j < m_number_of_harmonics; j++)
 		{

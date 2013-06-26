@@ -157,7 +157,8 @@ void AmbisonicsViewer::computeBiggestLobe()
         precIndex = index;
 	}
     
-    if (vectorSize >= NUMBEROFCIRCLEPOINTS_UI-1) {
+    if (vectorSize >= NUMBEROFCIRCLEPOINTS_UI-1)
+    {
         vectorSize = NUMBEROFCIRCLEPOINTS_UI;
         m_biggest_lobe_index1 = 0;
         return;

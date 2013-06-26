@@ -25,31 +25,31 @@
 
 #include "AmbisonicsRestitution.h"
 
-AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, double aConfiguration, long aResitutionMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, long aNumberOfLouspeakers, long aResitutionMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize), Planewaves(aNumberOfLouspeakers, aVectorSize)
 {
-    m_number_of_virtual_loudspeakers = m_number_of_harmonics+1;
-    m_decoder = new AmbisonicsDecoder(m_order, m_number_of_virtual_loudspeakers, 0., 0);
+    m_decoder = new AmbisonicsDecoder(m_order, m_number_of_harmonics+1, Ambisonics::m_vector_size);
     
-    Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_virtual_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_virtual_loudspeakers);
-    Cicm_Vector_Float_Malloc(m_loudspeakers_vector_float, m_number_of_virtual_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_vector_double, m_number_of_virtual_loudspeakers);
+    m_vector_float_input = NULL;
+    m_vector_double_input = NULL;
+    m_loudspeakers_vector_float = NULL;
+    m_loudspeakers_vector_double = NULL;
     
     m_loudspeakers_gains_vector_float   = NULL;
     m_loudspeakers_gains_vector_double  = NULL;
-    m_angles_of_loudspeakers = NULL;
     
     m_restitution_mode = Tools::clip(aResitutionMode, (long)Hoa_Amplitude_Panning, (long)Hoa_Microphone_Simulation);
-    setConfiguration(aConfiguration);
+    setNumberOfLoudspeakers(aNumberOfLouspeakers);
 }
 
 void AmbisonicsRestitution::setRestitutionMode(long aResitutionMode)
 {
+    /*
     m_restitution_mode = Tools::clip(aResitutionMode, (long)Hoa_Amplitude_Panning, (long)Hoa_Microphone_Simulation);
     if(m_restitution_mode == Hoa_Amplitude_Panning)
         computeAmplitudePanning();
     else
         computeMicrophoneSimulation();
+     */
 }
 
 long AmbisonicsRestitution::getRestitutionMode()
@@ -57,167 +57,91 @@ long AmbisonicsRestitution::getRestitutionMode()
     return m_restitution_mode;
 }
 
-void AmbisonicsRestitution::setConfiguration(double aConfiguration, bool standardOnOff)
+void AmbisonicsRestitution::setNumberOfLoudspeakers(long aNumberOfLousperkers, bool standardOnOff)
 {
-    /* Initialize the configuration */
-    m_number_of_real_loudspeakers    = Tools::clip_min((long)aConfiguration, (long)1);
-    m_configuation                   = m_number_of_real_loudspeakers;
+    Planewaves::setNumberOfLoudspeakers(aNumberOfLousperkers, standardOnOff);
     
-    if(aConfiguration - (long)aConfiguration != 0.)
+    if(m_loudspeakers_gains_vector_double)
     {
-        m_low_frequency_effect = 0;
-        //m_low_frequency_effect = 1;
-        m_configuation += 0.1;
-    }
-    else
-        m_low_frequency_effect = 0;
-    
-    /* Free memories */
-    if(m_loudspeakers_gains_vector_float && m_loudspeakers_gains_vector_double)
-    {
+        for(int i = 0; i < m_number_of_loudspeakers; i++)
+            Cicm_Free(m_loudspeakers_gains_vector_double[i]);
         Cicm_Free(m_loudspeakers_gains_vector_double);
+    }
+    if(m_loudspeakers_gains_vector_float)
+    {
+        for(int i = 0; i < m_number_of_loudspeakers; i++)
+            Cicm_Free(m_loudspeakers_gains_vector_float[i]);
         Cicm_Free(m_loudspeakers_gains_vector_float);
     }
-    if(m_angles_of_loudspeakers)
-        free(m_angles_of_loudspeakers);
     
-    /* Alloc memories */
-    m_loudspeakers_gains_vector_float   = new Cicm_Vector_Float[m_number_of_real_loudspeakers];
-    m_loudspeakers_gains_vector_double  = new Cicm_Vector_Double[m_number_of_real_loudspeakers];
-    m_angles_of_loudspeakers = new double[m_number_of_real_loudspeakers];
-    for(int i = 0; i < m_number_of_real_loudspeakers; i++)
+    m_loudspeakers_gains_vector_float   = new Cicm_Vector_Float[m_number_of_loudspeakers];
+    m_loudspeakers_gains_vector_double  = new Cicm_Vector_Double[m_number_of_loudspeakers];
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
-        Cicm_Vector_Float_Malloc(m_loudspeakers_gains_vector_float[i], m_number_of_virtual_loudspeakers);
-        Cicm_Vector_Double_Malloc(m_loudspeakers_gains_vector_double[i], m_number_of_virtual_loudspeakers);
-    }
-    
-    /* Define standard configuration */
-    m_angles_of_loudspeakers = new double[m_number_of_real_loudspeakers];
-    if(standardOnOff)
-    {
-        if(m_number_of_real_loudspeakers == 1)          // Mono //
-        {
-            m_angles_of_loudspeakers[0] = 0.;
-        }
-        else if(m_number_of_real_loudspeakers == 2)     // Stereo //
-        {
-            m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 330. / 360. * CICM_2PI;
-        }
-        else if(m_number_of_real_loudspeakers == 3)     // Dolby Surround //
-        {
-            m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 180. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 330. / 360. * CICM_2PI;
-        }
-        else if(m_number_of_real_loudspeakers == 4)     // Quadriphonic //
-        {
-            m_angles_of_loudspeakers[0] = 45. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 135. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 225. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 315. / 360. * CICM_2PI;
-        }
-        else if(m_number_of_real_loudspeakers == 5)     // Surround 5.1 //
-        {
-            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 250. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[4] = 330. / 360. * CICM_2PI;
-        }
-        else if(m_number_of_real_loudspeakers == 6)     // Surround 6.1 //
-        {
-            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 180. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[4] = 250. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[5] = 330. / 360. * CICM_2PI;
-        }
-        else if(m_number_of_real_loudspeakers == 7)     // Surround 7.1 //
-        {
-            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 135 / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[4] = 225 / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[5] = 250. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[6] = 330. / 360. * CICM_2PI;
-        }
-        else                                            // Ambisonics base //
-        {
-            for (int i = 0; i < m_number_of_real_loudspeakers; i++)
-                m_angles_of_loudspeakers[i] = (double)i / (double)m_number_of_real_loudspeakers * CICM_2PI;
-        }
-    }
-    else                                                // Ambisonics base //
-    {
-        for (int i = 0; i < m_number_of_real_loudspeakers; i++)
-            m_angles_of_loudspeakers[i] = (double)i / (double)m_number_of_real_loudspeakers * CICM_2PI;
+        Cicm_Vector_Float_Malloc(m_loudspeakers_gains_vector_float[i], m_decoder->getNumberOfLoudspeakers());
+        Cicm_Vector_Double_Malloc(m_loudspeakers_gains_vector_double[i], m_decoder->getNumberOfLoudspeakers());
     }
     
     if(m_restitution_mode == Hoa_Amplitude_Panning)
         computeAmplitudePanning();
     else
-        computeMicrophoneSimulation();
-    m_number_of_outputs = m_number_of_real_loudspeakers + m_low_frequency_effect;
+        computeMicrophoneSimulation();    
 }
 
-double AmbisonicsRestitution::getConfiguration()
+void AmbisonicsRestitution::computeDecoder()
 {
-    return m_configuation;
+    int numberOfloudspeakers = m_number_of_harmonics+1;
+    
+    if(m_restitution_mode == Hoa_Amplitude_Panning)
+    {
+        double smallestAngle = CICM_2PI;
+        for (int i = 0; i < m_number_of_loudspeakers-1; i++)
+        {
+            if(m_angles_of_loudspeakers[i+1] - m_angles_of_loudspeakers[i] < smallestAngle)
+                smallestAngle = m_angles_of_loudspeakers[i+1] - m_angles_of_loudspeakers[i];
+        }/*
+        if((CICM_2PI - m_angles_of_loudspeakers[m_number_of_loudspeakers-1]) + m_angles_of_loudspeakers[0] < smallestAngle)
+            smallestAngle = (CICM_2PI - m_angles_of_loudspeakers[m_number_of_loudspeakers-1]) + m_angles_of_loudspeakers[0];
+        */
+        while (CICM_2PI / (double)m_decoder->getNumberOfLoudspeakers() > smallestAngle)
+        {
+            numberOfloudspeakers++;
+        }
+    }
+    
+    if(m_vector_float_input)
+        Cicm_Free(m_vector_float_input);
+    if(m_vector_double_input)
+        Cicm_Free(m_vector_double_input);
+    if(m_loudspeakers_vector_float)
+        Cicm_Free(m_loudspeakers_vector_float);
+    if(m_loudspeakers_vector_double)
+        Cicm_Free(m_loudspeakers_vector_double);
+    
+    m_decoder->setNumberOfLoudspeakers(numberOfloudspeakers);
+    
+    Cicm_Vector_Float_Malloc(m_vector_float_input, m_decoder->getNumberOfLoudspeakers());
+    Cicm_Vector_Double_Malloc(m_vector_double_input, m_decoder->getNumberOfLoudspeakers());
+    Cicm_Vector_Float_Malloc(m_loudspeakers_vector_float, m_decoder->getNumberOfLoudspeakers());
+    Cicm_Vector_Double_Malloc(m_loudspeakers_vector_double, m_decoder->getNumberOfLoudspeakers());
 }
 
 void AmbisonicsRestitution::setLoudspeakerAngle(long anIndex, double anAngle)
 {
-    if(anIndex >= 0 && anIndex < m_number_of_real_loudspeakers)
-    {
-        anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
-        m_angles_of_loudspeakers[anIndex] = anAngle;
-    }
-    Tools::sortVector(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
-    if(m_restitution_mode == Hoa_Amplitude_Panning)
-        computeAmplitudePanning();
-    else
-        computeMicrophoneSimulation();
-}
-
-void AmbisonicsRestitution::setLoudspeakerAngles(long len, double* angles)
-{
-    for (int i=0; i<len && i<m_number_of_inputs; i++)
-        m_angles_of_loudspeakers[i] = Tools::radianWrap(angles[i] / 360. * CICM_2PI);
-    
-    Tools::sortVector(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
+    Planewaves::setLoudspeakerAngle(anIndex, anAngle);    
+    computeDecoder();
     
     if(m_restitution_mode == Hoa_Amplitude_Panning)
         computeAmplitudePanning();
     else
         computeMicrophoneSimulation();
-}
-
-double AmbisonicsRestitution::getLoudspeakerAngle(long anIndex)
-{
-    if(anIndex >= 0 && anIndex < m_number_of_real_loudspeakers)
-        return m_angles_of_loudspeakers[anIndex] / CICM_2PI * 360.;
-    else
-        return 0.;
-}
-
-std::string AmbisonicsRestitution::getLoudspeakerName(long anIndex)
-{
-    if(anIndex >= 0 && anIndex < m_number_of_real_loudspeakers)
-        return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(m_angles_of_loudspeakers[anIndex]/ CICM_2PI * 360.) + "°";
-    else if(anIndex == m_number_of_real_loudspeakers && m_low_frequency_effect)
-        return "Lfe channel";
-    else
-        return "No channel";
 }
 
 void AmbisonicsRestitution::computeAmplitudePanning()
 {
-    for(int i = 0; i < m_number_of_virtual_loudspeakers; i++)
+    for(int i = 0; i < m_decoder->getNumberOfLoudspeakers(); i++)
     {
-        double virtualAngle = ((double)i / (double)m_number_of_virtual_loudspeakers) * CICM_2PI;
+        double virtualAngle = ((double)i / (double)m_decoder->getNumberOfLoudspeakers()) * CICM_2PI;
        
         double ratio1;
         double ratio2;
@@ -225,7 +149,7 @@ void AmbisonicsRestitution::computeAmplitudePanning()
         if(virtualAngle <= m_angles_of_loudspeakers[0])
         {
              // Le virtualHp est < à Hp(0) -> gain entre Hp(0) et Hp(last) //
-            int ilast = m_number_of_real_loudspeakers - 1;
+            int ilast = m_number_of_loudspeakers - 1;
             double distance = m_angles_of_loudspeakers[0] + (CICM_2PI - m_angles_of_loudspeakers[ilast]);
             
             ratio1 = (m_angles_of_loudspeakers[0] - virtualAngle) / distance;
@@ -237,16 +161,16 @@ void AmbisonicsRestitution::computeAmplitudePanning()
             m_loudspeakers_gains_vector_float[ilast][i] = m_loudspeakers_gains_vector_double[ilast][i];
             
             // Le gain des autres Hp est nul //
-            for(int j = 1; j < m_number_of_real_loudspeakers - 1; j++)
+            for(int j = 1; j < m_number_of_loudspeakers - 1; j++)
             {
                 m_loudspeakers_gains_vector_double[j][i] = 0.;
                 m_loudspeakers_gains_vector_float[j][i] = 0.;
             }
         }
-        else if(virtualAngle > m_angles_of_loudspeakers[m_number_of_real_loudspeakers - 1])
+        else if(virtualAngle > m_angles_of_loudspeakers[m_number_of_loudspeakers - 1])
         {
             // Le virtualHp est  à 0 -> gain entre le 0 et le dernier //
-            int ilast = m_number_of_real_loudspeakers - 1;
+            int ilast = m_number_of_loudspeakers - 1;
             double distance = m_angles_of_loudspeakers[0] + (CICM_2PI - m_angles_of_loudspeakers[ilast]);
             
             ratio1 = (m_angles_of_loudspeakers[0] - (virtualAngle - CICM_2PI)) / distance ;
@@ -259,7 +183,7 @@ void AmbisonicsRestitution::computeAmplitudePanning()
             m_loudspeakers_gains_vector_float[ilast][i] = m_loudspeakers_gains_vector_double[ilast][i];
             
             // Le gain des autres Hp est nul //
-            for(int j = 1; j < m_number_of_real_loudspeakers - 1; j++)
+            for(int j = 1; j < m_number_of_loudspeakers - 1; j++)
             {
                 m_loudspeakers_gains_vector_double[j][i] = 0.;
                 m_loudspeakers_gains_vector_float[j][i] = 0.;
@@ -267,7 +191,7 @@ void AmbisonicsRestitution::computeAmplitudePanning()
         }
         else
         {
-            for(int j = 0; j < m_number_of_real_loudspeakers - 1; j++)
+            for(int j = 0; j < m_number_of_loudspeakers - 1; j++)
             {
                 if(virtualAngle > m_angles_of_loudspeakers[j] && virtualAngle <= m_angles_of_loudspeakers[j+1])
                 {
@@ -282,7 +206,7 @@ void AmbisonicsRestitution::computeAmplitudePanning()
                     m_loudspeakers_gains_vector_double[j+1][i] = cos(ratio2 * CICM_PI2);
                     m_loudspeakers_gains_vector_float[j+1][i] =  m_loudspeakers_gains_vector_double[j+1][i];
                     
-                    for(int k = 0; k < m_number_of_real_loudspeakers; k++)
+                    for(int k = 0; k < m_number_of_loudspeakers; k++)
                     {
                         if(k != j && k != j+1)
                         {
@@ -299,14 +223,14 @@ void AmbisonicsRestitution::computeAmplitudePanning()
 
 void AmbisonicsRestitution::computeMicrophoneSimulation()
 {
-    for(int i = 0; i < m_number_of_real_loudspeakers; i++)
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
         double ratio;
         if(i == 0)
         {
-            ratio = ((CICM_2PI - m_angles_of_loudspeakers[m_number_of_real_loudspeakers-1]) + m_angles_of_loudspeakers[1]);
+            ratio = ((CICM_2PI - m_angles_of_loudspeakers[m_number_of_loudspeakers-1]) + m_angles_of_loudspeakers[1]);
         }
-        else if(i == m_number_of_real_loudspeakers - 1)
+        else if(i == m_number_of_loudspeakers - 1)
         {
             ratio = (CICM_2PI - m_angles_of_loudspeakers[i-1]) + m_angles_of_loudspeakers[0];
         }
@@ -315,10 +239,10 @@ void AmbisonicsRestitution::computeMicrophoneSimulation()
             ratio = (m_angles_of_loudspeakers[i+1] - m_angles_of_loudspeakers[i-1]);
         }
         
-        for(int j = 0; j < m_number_of_virtual_loudspeakers; j++)
+        for(int j = 0; j < m_decoder->getNumberOfLoudspeakers(); j++)
         {
             double distance;
-            double virtualAngle = ((double)j / (double)m_number_of_virtual_loudspeakers) * CICM_2PI;
+            double virtualAngle = ((double)j / (double)m_decoder->getNumberOfLoudspeakers()) * CICM_2PI;
             distance = fabs(m_angles_of_loudspeakers[i] - virtualAngle);
             if(distance > CICM_PI)
                 distance = CICM_2PI - distance;
@@ -339,14 +263,16 @@ AmbisonicsRestitution::~AmbisonicsRestitution()
     Cicm_Free(m_vector_double_input);
     Cicm_Free(m_loudspeakers_vector_float);
     Cicm_Free(m_loudspeakers_vector_double);
-    for(int i = 0; i < m_number_of_real_loudspeakers; i++)
+    
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
         Cicm_Free(m_loudspeakers_gains_vector_double[i]);
         Cicm_Free(m_loudspeakers_gains_vector_float[i]);
     }
+    
     Cicm_Free(m_loudspeakers_gains_vector_double);
     Cicm_Free(m_loudspeakers_gains_vector_float);
-    free(m_angles_of_loudspeakers);
+
 	delete m_decoder;
 }
 
