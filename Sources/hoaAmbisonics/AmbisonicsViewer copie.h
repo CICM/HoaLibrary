@@ -28,6 +28,10 @@
 
 #include "../CicmLibrary/CicmTools.h"
 
+#include <complex>
+#include <stdio.h>
+#include <vector>
+
 class AmbisonicsViewer
 {
 	
@@ -40,11 +44,11 @@ private:
 	long		m_biggest_distance_index1;
 	long		m_biggest_distance_index2;
 
-	double		m_cosinus_buffer[NUMBEROFCIRCLEPOINTS_UI];
-	double		m_sinus_buffer[NUMBEROFCIRCLEPOINTS_UI];
+	double*		m_cosinus_buffer;
+	double*		m_sinus_buffer;
 	double**	m_harmonics_basis;
 
-	double		m_contributions[NUMBEROFCIRCLEPOINTS_UI];
+	double*		m_contributions;
 	double		m_biggest_contribution;
 	double		m_biggest_distance;
     
@@ -52,9 +56,9 @@ private:
     long        m_biggest_lobe_vector_size;
 
 	double*		m_harmonics_values;
-	double		m_vector_x[NUMBEROFCIRCLEPOINTS_UI];
-	double		m_vector_y[NUMBEROFCIRCLEPOINTS_UI];
-	int         m_vector_color[NUMBEROFCIRCLEPOINTS_UI];
+	double*		m_vector_x;
+	double*		m_vector_y;
+	int*		m_vector_color;
     		
 	void	computeTrigo();
 	void	computeBasis();

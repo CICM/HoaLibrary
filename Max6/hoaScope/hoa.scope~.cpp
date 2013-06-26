@@ -34,8 +34,7 @@ extern "C" {
 #include "ext_globalsymbol.h"
 }
 
-#include "../CicmLibrary/CicmTools.h"
-#include "../hoaAmbisonics/AmbisonicsViewer.h"
+#include "../../Sources/hoaAmbisonics/AmbisonicsViewer.h"
 
 typedef struct  _scope 
 {

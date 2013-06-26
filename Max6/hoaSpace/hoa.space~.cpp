@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicSpace.h"
+#include "../../Sources/hoaSpace/AmbisonicSpace.h"
 
 extern "C"
 {

@@ -35,6 +35,10 @@ AmbisonicsViewer::AmbisonicsViewer(long anOrder, double offset)
 	computeBasis();
 
 	m_harmonics_values = new double[m_number_of_harmonics];
+	m_contributions = new double[NUMBEROFCIRCLEPOINTS_UI];
+	m_vector_x		= new double[NUMBEROFCIRCLEPOINTS_UI];
+	m_vector_y		= new double[NUMBEROFCIRCLEPOINTS_UI];
+	m_vector_color	= new int[NUMBEROFCIRCLEPOINTS_UI];
 	
 	for(int i = 0; i < m_number_of_harmonics; i++)
 		m_harmonics_values[i] = 0.;
@@ -44,10 +48,13 @@ AmbisonicsViewer::AmbisonicsViewer(long anOrder, double offset)
 }
 
 void AmbisonicsViewer::computeTrigo()
-{	
+{
+	m_cosinus_buffer	= new double[NUMBEROFCIRCLEPOINTS_UI];
+	m_sinus_buffer		= new double[NUMBEROFCIRCLEPOINTS_UI];
+	
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++) 
 	{
-		double azimuth = (double)i * CICM_2PI / (double)(NUMBEROFCIRCLEPOINTS_UI+1);
+		double azimuth = double(i) * CICM_2PI / double(NUMBEROFCIRCLEPOINTS_UI);
         m_cosinus_buffer[i] = cos(CICM_2PI - azimuth + m_representation_offset);
 		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth + m_representation_offset);
 	}
@@ -56,7 +63,6 @@ void AmbisonicsViewer::computeTrigo()
 void AmbisonicsViewer::computeBasis()
 {
 	m_harmonics_basis           = new double*[m_number_of_harmonics];
-    
 	for (int i = 0; i <= m_number_of_harmonics ; i++)
 		m_harmonics_basis[i]	= new double[NUMBEROFCIRCLEPOINTS_UI];
 
@@ -205,14 +211,12 @@ double AmbisonicsViewer::getContributions(long anIndex)
 
 double AmbisonicsViewer::getAbscisseValue(long anIndex)
 {
-    anIndex = Tools::clip(anIndex, (long)0, (long)NUMBEROFCIRCLEPOINTS_UI - 1);
-	return m_vector_x[anIndex];
+	return m_vector_x[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
 double AmbisonicsViewer::getOrdinateValue(long anIndex)
 {
-    anIndex = Tools::clip(anIndex, (long)0, (long)NUMBEROFCIRCLEPOINTS_UI - 1);
-	return m_vector_y[anIndex];
+	return m_vector_y[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
 double AmbisonicsViewer::getBiggestContribution()
@@ -227,8 +231,7 @@ long AmbisonicsViewer::getBiggestContributionIndex()
 
 int	AmbisonicsViewer::getColor(long anIndex)
 {
-    anIndex = Tools::clip(anIndex, (long)0, (long)NUMBEROFCIRCLEPOINTS_UI - 1);
-	return m_vector_color[anIndex];
+	return m_vector_color[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
 double AmbisonicsViewer::getBiggestDistance()
@@ -248,6 +251,12 @@ long AmbisonicsViewer::getBiggestDistanceIndex2()
 
 AmbisonicsViewer::~AmbisonicsViewer()
 {
+	free(m_sinus_buffer);
+	free(m_cosinus_buffer);
+	free(m_contributions);
+	free(m_vector_x);
+	free(m_vector_y);
+	free(m_vector_color);
 	free(m_harmonics_values);
 	for (int i = 0; i <= m_number_of_harmonics ; i++)
 		free(m_harmonics_basis[i]);
