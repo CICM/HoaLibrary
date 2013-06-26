@@ -233,13 +233,7 @@
 					/usr/local/lib,
 					Developer/usr/lib,
 				);
-				OTHER_LDFLAGS = (
-					libgsl.a,
-					"-static",
-					"-lcblas",
-					"-latlas",
-					"-lm",
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
@@ -260,13 +254,7 @@
 					/usr/local/lib,
 					Developer/usr/lib,
 				);
-				OTHER_LDFLAGS = (
-					libgsl.a,
-					"-static",
-					"-lcblas",
-					"-latlas",
-					"-lm",
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
@@ -296,13 +284,7 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.scope~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";
@@ -330,13 +312,7 @@
 					"\"$(C74SUPPORT)/jit-includes\"",
 				);
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					/usr/local/lib/libgsl.a,
-					"-lcblas",
-					"-latlas",
-					"-lm",
-					"\"$(C74_SYM_LINKER_FLAGS)\"",
-				);
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
 				PRODUCT_NAME = "hoa.scope~";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
 				VALID_ARCHS = "i386 x86_64";

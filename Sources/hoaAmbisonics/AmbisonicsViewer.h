@@ -103,14 +103,14 @@ public:
         computeBiggestLobe();
 	}
     
-    template<typename Type> void processContribAndRep(Type* anInputs)
+    template<typename Type> inline void processContribAndRep(Type* anInputs)
 	{
-		for(int i = 0; i < m_number_of_harmonics; i++)
+        for(int i = 0; i < m_number_of_harmonics; i++)
 			m_harmonics_values[i] = anInputs[i];
         
 		computeContribution();
 		computeRepresentation();
-	}
+    }
     
     template<typename Type> void processMaxDist(Type* anInputs)
 	{
