@@ -466,8 +466,8 @@ t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, voi
 
 void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-	params->d_borderthickness = 2;
-	params->d_cornersize = 6;
+	params->d_borderthickness = 1;
+	params->d_cornersize = 8;
     params->d_bordercolor = x->f_bordercolor;
     params->d_boxfillcolor = x->f_colorBackground;
 }
@@ -670,8 +670,6 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 		if(x->f_viewer->getBiggestContribution() > 0.)
 		{
             factor = (x->f_rayonGlobal * 5. / 6.);
-            if (x->f_viewer->getBiggestContribution() > 1)
-                factor /= x->f_viewer->getBiggestContribution();
             
             Tools::clip(&factor, 0., (x->f_rayonGlobal * 5. / 6.));
 			
