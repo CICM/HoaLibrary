@@ -138,47 +138,30 @@ void AmbisonicsViewer::computeMaximumDistance()
 
 void AmbisonicsViewer::computeBiggestLobe()
 {
-    long index, precIndex;
+    long index;
     long vectorSize = 0;
-    precIndex = m_biggest_contribution_index;
 
-    for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+    for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 	{
 		index = m_biggest_contribution_index - i;
 		if(index < 0)
 			index += NUMBEROFCIRCLEPOINTS_UI;
         
-        if (fabs(m_contributions[index]) <= fabs(m_contributions[precIndex]))
+        if (m_contributions[index] < 0.)
 		{
-			m_biggest_lobe_index1 = index;
-            vectorSize++;
+			m_biggest_lobe_index1 = index+1;
+            break;
 		}
-        else break;
-        
-        precIndex = index;
 	}
     
-    if (vectorSize >= NUMBEROFCIRCLEPOINTS_UI-1)
-    {
-        vectorSize = NUMBEROFCIRCLEPOINTS_UI;
-        m_biggest_lobe_index1 = 0;
-        return;
-    }
-    
-    precIndex = m_biggest_contribution_index;
-    for (int i = 1; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+    for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
 	{
-		index = m_biggest_contribution_index + i;
+		index = m_biggest_lobe_index1 + i;
 		if(index >= NUMBEROFCIRCLEPOINTS_UI)
 			index -= NUMBEROFCIRCLEPOINTS_UI;
-        
-        if (fabs(m_contributions[index]) <= fabs(m_contributions[precIndex]))
-		{
-            vectorSize++;
-		}
-        else break;
-        
-        precIndex = index;
+        vectorSize++;
+        if (m_contributions[index] < 0.)
+            break;
 	}
     
     m_biggest_lobe_vector_size = vectorSize;

@@ -694,8 +694,7 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
     double w = rect->width;
 	int numMics = x->f_numberOfMic;
     double mic_angle;
-    double hpSize;
-	hpSize = (w / 20.) * 0.4;
+
     t_jfont *jf;
 	t_jtextlayout *jtl;
     char text[16];
@@ -746,7 +745,8 @@ void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         for (int i = 0; i < x->f_numberOfMic; i++) {
             if(x->f_mics->getBiggestContribution(i) != 0.)
             {
-                double factor = (x->f_micRadius*0.92) / x->f_mics->getBiggestContribution(i);
+                //double factor = (x->f_micRadius*0.92) / x->f_mics->getBiggestContribution(i);
+                double factor = (x->f_micRadius*0.92);
                 
                 jgraphics_set_source_jrgba(g, &harmonicsFillColor);
                 jgraphics_move_to(g, x->f_mics->getBiggestLobe_x(i, 0) * factor, x->f_mics->getBiggestLobe_y(i, 0) * factor);
