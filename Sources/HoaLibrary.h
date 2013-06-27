@@ -23,53 +23,29 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef DEF_HOA_LIBRARY
+#define DEF_HOA_LIBRARY
 
-#ifndef DEF_AMBISONICSOURCE
-#define DEF_AMBISONICSOURCE
+#include "CicmLibrary/CicmDefine.h"
+#include "CicmLibrary/CicmTools.h"
 
-#include "cicmTools.h"
-/*
-class Source
-{
-private:
-	coordinatesPolar        m_coordinate_polar;
-	color                   m_color;
-    std::string             m_description;
-    long                    m_exist;
-    std::vector <long>      m_groups;
-    
-public:
-    Source(long deadOrAlive, double aRadius = 0., double anAngle = 0.);
-    Source(long deadOrAlive, coordinatesPolar polarCoordinates);
-    Source(long deadOrAlive, coordinatesCartesian cartesianCoordinates);
-    
-    void setExistence(long deadOrAlive);
-    void setCoordinatesPolar(coordinatesPolar polarCoordinates);
-	void setCoordinatesPolar(double aRadius, double anAngle);
-	void setRadius(double aRadius);
-    void setAngle(double anAngle);
-    void setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates);
-    void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
-	void setAbscissa(double anAbscissa);
-	void setOrdinate(double anOrdinate);
-    void setColor(color aColor);
-	void setDescription(std::string aDescription);
-    void setGroup(long aGroupIndex);
-	void removeGroup(long aGroupIndex);
-    
-    long   getExistence();
-    coordinatesPolar        getCoordinatesPolar();
-	double getRadius();
-	double getAngle();
-    coordinatesCartesian    getCoordinatesCartesian();
-	double getAbscissa();
-	double getOrdinate();
-    color  getColor();
-    std::string getDescription();
-    long   getNumberOfGroups();
-    long   getGroupIndex(long anIndex);
-	
-	~Source();
-};
-*/
+#include "hoaConvolve/AmbisonicConvolver.h"
+#include "hoaEncoder/AmbisonicsEncoder.h"
+#include "hoaFreeverb/AmbisonicsFreeverb.h"
+#include "hoaGigaverb/AmbisonicsGigaverb.h"
+#include "hoaMap/AmbisonicMultiMaps.h"
+#include "hoaMap/AmbisonicSourcesManager.h"
+#include "hoaMap/AmbisonicSourcesPreset.h"
+#include "hoaMap/AmbisonicSourcesTrajectory.h"
+#include "hoaMeter/AmbisonicsMeter.h"
+#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
+#include "hoaOptim/AmbisonicsOptim.h"
+#include "hoaProjector/AmbisonicsProjector.h"
+#include "hoaRecomposer/AmbisonicsRecomposer.h"
+#include "hoaRotate/AmbisonicsRotate.h"
+#include "hoaSpace/AmbisonicSpace.h"
+#include "hoaWider/AmbisonicsWider.h"
+
 #endif
+
+

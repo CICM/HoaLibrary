@@ -40,9 +40,10 @@ private:
     
     bool                m_air_absorption;
     FilterOnePole*      m_low_pass_filter;
+    /*
     Cicm_Vector_Double  m_frequency_double;
     Cicm_Vector_Float   m_frequency_float;
-    
+    */
     CicmLine*           m_line_one;
     CicmLine*           m_line_two;
     

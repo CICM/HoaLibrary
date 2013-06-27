@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources64/hoaEncoder/AmbisonicsEncoder.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
@@ -93,15 +93,15 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaEncode *x = NULL;
 	int	order = 4;
-	std::string mode = "basic";
+	int mode = Hoa_Basic;
     x = (t_HoaEncode *)object_alloc(HoaEncode_class);
 	if (x)
 	{		
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		
-		if(atom_gettype(argv + 1) == A_SYM)
-			mode = atom_getsym(argv + 1)->s_name;
+		if(atom_gettype(argv + 1) == A_SYM && atom_getsym(argv + 1) == gensym("split"))
+			mode = Hoa_Split;
 		
 		x->f_ambiEncoder = new AmbisonicsEncoder(order, mode, sys_getblksize());
 		
@@ -128,7 +128,7 @@ void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double sampl
 {
 	x->f_ambiEncoder->setVectorSize(maxvectorsize);
 	x->f_inputNumber = x->f_ambiEncoder->getNumberOfInputs();
-	if(x->f_ambiEncoder->getMode() == "split")
+	if(x->f_ambiEncoder->getMode() == Hoa_Split)
 	{
 		if(count[x->f_inputNumber - 1])
 			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64vec, 0, NULL);
@@ -175,7 +175,7 @@ void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
 	x->f_ambiEncoder->setVectorSize(sp[0]->s_n);
 	x->f_inputNumber = x->f_ambiEncoder->getNumberOfInputs();
 	x->f_outputNumber = x->f_ambiEncoder->getNumberOfOutputs();
-	if(x->f_ambiEncoder->getMode() == "split")
+	if(x->f_ambiEncoder->getMode() == Hoa_Split)
 	{
 		pointer_count = x->f_outputNumber + 2 + x->f_inputNumber;
 		
@@ -265,26 +265,26 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 	
 	if (m == ASSIST_INLET) 
 	{
-		if(x->f_ambiEncoder->getMode() == "split")
+		if(x->f_ambiEncoder->getMode() == Hoa_Split)
 		{
 			if(a < x->f_ambiEncoder->getOrder() + 1)
 			{
 				sprintf(s,"(Signal) Order %ld", a);
 			}
 			else 
-				sprintf(s,"(Signal or float) Azimuth");
+				sprintf(s,"(Signal or float) Angle");
 		}
 		else
 		{
 			if(a == 0)
 				sprintf(s,"(Signal) Input");
 			else
-				sprintf(s,"(Signal or float) Azimuth");
+				sprintf(s,"(Signal or float) Angle");
 		}
 	} 
 	else 
 	{
-		sprintf(s,"(Signal) Harmonic %ld", x->f_ambiEncoder->getHarmonicIndex(a));
+		sprintf(s,"(Signal) %s", x->f_ambiEncoder->getHarmonicsName(a).c_str());
 	}
 }
 

@@ -25,18 +25,14 @@
 
 #include "AmbisonicsEncoder.h"
 
-AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, std::string aMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
-{	
-	if(aMode == "split")
-    {
-        m_mode = aMode;
+AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, long aMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+{
+    m_mode = Tools::clip(aMode, (long)0, (long)1);
+	if(m_mode == Hoa_Basic)
 		m_number_of_inputs	= m_order + 2;
-    }
 	else
-    {
-        m_mode = "basic";
 		m_number_of_inputs	= 2;
-    }
+    
     Cicm_Vector_Float_Malloc(m_ambisonics_coeffs_float, m_number_of_harmonics); 
     Cicm_Vector_Double_Malloc(m_ambisonics_coeffs_double, m_number_of_harmonics);
 	Cicm_Vector_Float_Malloc(m_cos_float, m_vector_size);
@@ -49,7 +45,7 @@ AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, std::string aMode, long aVect
 	setAzimuthBoth(0.);
 }
 
-std::string	AmbisonicsEncoder::getMode()
+long AmbisonicsEncoder::getMode()
 {
 	return m_mode;
 }

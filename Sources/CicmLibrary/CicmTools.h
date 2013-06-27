@@ -56,6 +56,32 @@ enum
     Hoa_Cartesian
 };
 
+enum
+{
+    Hoa_Basic  = 0,
+    Hoa_Split
+};
+
+typedef struct  coordinatesPolar
+{
+	double		radius;
+	double		angle;
+} coordinatesPolar;
+
+typedef struct  coordinatesCartesian
+{
+	double		x;
+	double		y;
+} coordinatesCartesian;
+
+typedef struct  color
+{
+	double      red;
+	double      green;
+    double      blue;
+	double      alpha;
+} color;
+
 class Tools
 {
 public:

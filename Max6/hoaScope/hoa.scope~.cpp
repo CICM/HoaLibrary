@@ -49,6 +49,7 @@ typedef struct  _scope
     t_atom_long f_drawCircle;
     t_atom_long f_drawContributions;
     t_atom_long f_drawAngles;
+    float       f_normalize;
 	
 	t_jrgba		f_colorBackground;
     t_jrgba     f_bordercolor;
@@ -117,32 +118,40 @@ int C74_EXPORT main()
 
     CLASS_ATTR_LONG             (c, "order", 0, t_scope, f_order);
     CLASS_ATTR_ACCESSORS        (c, "order", (method)NULL,(method)scope_setattr_order);
-	CLASS_ATTR_CATEGORY			(c, "order", 0, "Value");
+	CLASS_ATTR_CATEGORY			(c, "order", 0, "Behavior");
 	CLASS_ATTR_ORDER			(c, "order", 0, "1");
 	CLASS_ATTR_LABEL			(c, "order", 0, "Ambisonic Order");
 	CLASS_ATTR_FILTER_MIN		(c, "order", 1);
 	CLASS_ATTR_DEFAULT			(c, "order", 0, "3");
 	CLASS_ATTR_SAVE				(c, "order", 1);
+    
+    CLASS_ATTR_FLOAT            (c, "gain", 0, t_scope, f_normalize);
+	CLASS_ATTR_CATEGORY			(c, "gain", 0, "Behavior");
+	CLASS_ATTR_ORDER			(c, "gain", 0, "2");
+	CLASS_ATTR_LABEL			(c, "gain", 0, "Gain factor");
+	CLASS_ATTR_FILTER_MIN		(c, "gain", 1.);
+	CLASS_ATTR_DEFAULT			(c, "gain", 0, "1.");
+	CLASS_ATTR_SAVE				(c, "gain", 1);
 	
     CLASS_ATTR_LONG             (c, "mode", 0, t_scope, f_process_mode);
-	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Value");
+	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
     CLASS_ATTR_ENUMINDEX2       (c, "mode", 0, "Peak", "Average");
-	CLASS_ATTR_ORDER			(c, "mode", 0, "2");
+	CLASS_ATTR_ORDER			(c, "mode", 0, "3");
 	CLASS_ATTR_LABEL			(c, "mode", 0, "Process Mode");
 	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
 	CLASS_ATTR_SAVE				(c, "mode", 1);
     
     CLASS_ATTR_LONG             (c, "bufsize", 0, t_scope, f_bufsize);
-	CLASS_ATTR_CATEGORY			(c, "bufsize", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "bufsize", 0, "3");
+	CLASS_ATTR_CATEGORY			(c, "bufsize", 0, "Behavior");
+	CLASS_ATTR_ORDER			(c, "bufsize", 0, "4");
     CLASS_ATTR_FILTER_MIN		(c, "bufsize", 1);
 	CLASS_ATTR_LABEL			(c, "bufsize", 0, "Buffer Size (in samps)");
 	CLASS_ATTR_DEFAULT			(c, "bufsize", 0, "128");
 	CLASS_ATTR_SAVE				(c, "bufsize", 1);
     
 	CLASS_ATTR_LONG             (c, "interval", 0, t_scope, f_interval);
-	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Value");
-	CLASS_ATTR_ORDER			(c, "interval", 0, "4");
+	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Behavior");
+	CLASS_ATTR_ORDER			(c, "interval", 0, "5");
 	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "100");
@@ -235,7 +244,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
     
     x->f_order = 3;
     x->f_sampleCounter = 0;
-    
+    x->f_normalize = 1.;
 	x->j_box.z_box.b_firstin = (t_object *)x;
 	dsp_setupjbox((t_pxjbox *)x, x->f_order * 2 + 1);
 	
@@ -314,7 +323,7 @@ void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, dou
         {
             for(j = 0; j < sampleframes; j++)
             {
-                x->f_averageHarmo[i] += ins[i][j];
+                x->f_averageHarmo[i] += ins[i][j] * x->f_normalize;
                 x->f_sampleCounter++;
                 if (x->f_sampleCounter >= x->f_bufsize)
                 {
@@ -325,7 +334,7 @@ void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, dou
         }
         else
         {
-            x->f_harmonicsValues[i] = ins[i][0]; // first sample only
+            x->f_harmonicsValues[i] = ins[i][0] * x->f_normalize; // first sample only
         }
     }
     

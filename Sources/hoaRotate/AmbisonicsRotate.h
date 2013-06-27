@@ -34,7 +34,6 @@ class AmbisonicsRotate : public Ambisonics
 private:
 	
 	double		m_azimuth;
-	long*		m_index_of_harmonics;
 	double*		m_cosLookUp;
 	double*		m_sinLookUp;
 	double*		m_harmonicSin;

@@ -32,7 +32,7 @@ class AmbisonicsEncoder : public Ambisonics
 {
 	
 private:
-	std::string m_mode;
+	long m_mode;
 	
 	Cicm_Vector_Float	m_ambisonics_coeffs_float;
     Cicm_Vector_Double	m_ambisonics_coeffs_double;
@@ -45,9 +45,9 @@ private:
     Cicm_Vector_Double	m_sin_double;
     
 public:
-	AmbisonicsEncoder(long anOrder = 1, std::string aMode = "basic", long aVectorSize = 0);
+	AmbisonicsEncoder(long anOrder = 1, long aMode = Hoa_Basic, long aVectorSize = 0);
 
-	std::string getMode();
+	long    getMode();
     
     void    setVectorSize(long aVectorSize);
 	void	setAzimuth(double aTheta);
