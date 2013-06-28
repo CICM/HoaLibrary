@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsWider.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
@@ -47,6 +47,7 @@ void HoaWider_int(t_HoaWider *x, long n);
 
 void HoaWider_dsp(t_HoaWider *x, t_signal **sp, short *count);
 t_int *HoaWider_perform(t_int *w);
+t_int *HoaWider_perform_offset(t_int *w);
 
 void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -119,19 +120,7 @@ void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numin
 }
 
 void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    /*
-    double in[x->f_AmbisonicsWider->getNumberOfHarmonics()];
-    for (int i = 0; i < sampleframes; i++)
-    {
-        for(int j = 0; j < x->f_AmbisonicsWider->getNumberOfHarmonics(); j++)
-            in[j] = ins[j][i];
-        x->f_AmbisonicsWider->process(in, in);
-        for(int j = 0; j < x->f_AmbisonicsWider->getNumberOfHarmonics(); j++)
-            outs[j][i] = in[j];
-    }
-    */
-    
+{    
 	x->f_AmbisonicsWider->process(ins, outs);
 }
 
@@ -152,38 +141,43 @@ void HoaWider_dsp(t_HoaWider *x, t_signal **sp, short *count)
 	sigvec[1] = (t_int *)sp[0]->s_n;
 	for(i = 2; i < pointer_count; i++)
 		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-	
-	dsp_addv(HoaWider_perform, pointer_count, (void **)sigvec);
-	
+    
+	if(count[x->f_AmbisonicsWider->getNumberOfInputs() - 1])
+        dsp_addv(HoaWider_perform, pointer_count, (void **)sigvec);
+    else
+        dsp_addv(HoaWider_perform_offset, pointer_count, (void **)sigvec);
+    
 	free(sigvec);
 }
 
 t_int *HoaWider_perform(t_int *w)
 {
-	t_HoaWider *x		= (t_HoaWider *)(w[1]);
-	long		numins	= x->f_AmbisonicsWider->getNumberOfInputs();
-	long		numouts	= x->f_AmbisonicsWider->getNumberOfOutputs();
+	t_HoaWider  *x		= (t_HoaWider *)(w[1]);
 	t_float		**ins	= (t_float **)w+3;
-	t_float		**outs	= (t_float **)w+3+numins;
+	t_float		**outs	= (t_float **)w+3+x->f_AmbisonicsWider->getNumberOfInputs();
 	
-	x->f_AmbisonicsWider->process(ins, outs, ins[numins - 1]);
+	x->f_AmbisonicsWider->process(ins, outs, ins[x->f_AmbisonicsWider->getNumberOfInputs() - 1]);
 	
-	return (w + numins + numouts + 3);
+	return (w + x->f_AmbisonicsWider->getNumberOfInputs() + x->f_AmbisonicsWider->getNumberOfOutputs() + 3);
+}
+
+t_int *HoaWider_perform_offset(t_int *w)
+{
+	t_HoaWider  *x		= (t_HoaWider *)(w[1]);
+	t_float		**ins	= (t_float **)w+3;
+	t_float		**outs	= (t_float **)w+3+x->f_AmbisonicsWider->getNumberOfInputs();
+	
+	x->f_AmbisonicsWider->process(ins, outs);
+	
+	return (w + x->f_AmbisonicsWider->getNumberOfInputs() + x->f_AmbisonicsWider->getNumberOfOutputs() + 3);
 }
 
 void HoaWider_assist(t_HoaWider *x, void *b, long m, long a, char *s)
 {
-	long harmonicIndex = 0;
-	if (a != 0) 
-	{
-		harmonicIndex = (a - 1) / 2 + 1;
-		if (a % 2 == 1) 
-			harmonicIndex = - harmonicIndex;
-	}
 	if( a == x->f_AmbisonicsWider->getNumberOfInputs() - 1)
-		sprintf(s,"(Signal, float or int) Widen value");
+		sprintf(s,"(Signal or float) Widen value");
 	else
-		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex);
+		sprintf(s,"(Signal) %s", x->f_AmbisonicsWider->getHarmonicsName(a).c_str());
 }
 
 void HoaWider_free(t_HoaWider *x)

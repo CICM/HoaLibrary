@@ -28,7 +28,7 @@
 AmbisonicsEncoder::AmbisonicsEncoder(long anOrder, long aMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
     m_mode = Tools::clip(aMode, (long)0, (long)1);
-	if(m_mode == Hoa_Basic)
+	if(m_mode == Hoa_Split)
 		m_number_of_inputs	= m_order + 2;
 	else
 		m_number_of_inputs	= 2;

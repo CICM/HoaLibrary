@@ -101,7 +101,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, configuration_set);
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
     CLASS_ATTR_SAVE             (c, "mode", 1);
-
+    
     CLASS_ATTR_LONG             (c, "loudspeakers", 0, t_HoaDecode, f_number_of_loudspeakers);
 	CLASS_ATTR_CATEGORY			(c, "loudspeakers", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "loudspeakers", 0, "Number of Loudspeakers");
@@ -109,6 +109,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "loudspeakers", 0, "2");
     CLASS_ATTR_SAVE             (c, "loudspeakers", 1);
     CLASS_ATTR_ALIAS            (c, "loudspeakers", "ls");
+    CLASS_ATTR_ALIAS            (c, "loudspeakers", "yls");
     
     /* Binaural */
     CLASS_ATTR_SYM              (c, "pinnaesize", 0, t_HoaDecode, f_pinna_size);
@@ -127,6 +128,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "angles", 0, "5");
 	CLASS_ATTR_SAVE             (c, "angles", 1);
     CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
+    CLASS_ATTR_ALIAS            (c, "angles", "zls");
     
     CLASS_ATTR_SYM              (c, "restitution", 0, t_HoaDecode, f_resitution_mode);
 	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
@@ -147,7 +149,7 @@ int C74_EXPORT main(void)
 	class_register(CLASS_BOX, c);	
 	HoaDecode_class = c;
 	
-	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
@@ -196,7 +198,6 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         attr_args_process(x, argc, argv);
 		x->f_ob.z_misc = Z_NO_INPLACE;
         d = (t_dictionary *)gensym("#D")->s_thing;
-        if (d) attr_dictionary_process(x, d);
 	}
     
 	return (x);
@@ -237,7 +238,7 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_method(gensym("dsp")->s_thing, gensym("stop"));
         
         long numOutlet = x->f_AmbisonicsDecoder->getNumberOfOutputs();
-        
+      
         if(atom_getsym(argv) == gensym("binaural") || atom_getsym(argv) == gensym(" binaural"))
         {
             x->f_AmbisonicsDecoder->setMode(Hoa_Binaural);
@@ -290,15 +291,16 @@ t_max_err loudspeakers_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *ar
     long numOutlet = x->f_AmbisonicsDecoder->getNumberOfOutputs();
     
     if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
         x->f_AmbisonicsDecoder->setNumberOfLoudspeakers(atom_getfloat(argv));
-        
+    }
+    
     HoaDecode_resize_outlet(x, numOutlet);
     x->f_number_of_loudspeakers = x->f_AmbisonicsDecoder->getNumberOfOutputs();
     
     for(int i = 0; i < x->f_number_of_loudspeakers; i++)
         x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     object_attr_touch((t_object *)x, gensym("angles"));
-    
     return NULL;
 }
 
@@ -445,7 +447,7 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
         if (jpatchline_get_box1(line) == decoder)
         {
             object = jpatchline_get_box2(line);
-            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~") || object_classname(jbox_get_object(object)) == gensym("hoa.vector~"))
             {
                 long    argc = 1;
                 t_atom *argv = new t_atom[1];
@@ -496,7 +498,7 @@ void HoaDecode_send_angles(t_HoaDecode *x)
         if (jpatchline_get_box1(line) == decoder)
         {
             object = jpatchline_get_box2(line);
-            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~") || object_classname(jbox_get_object(object)) == gensym("hoa.vector~"))
             {                
                 long    argc = x->f_AmbisonicsDecoder->getNumberOfOutputs();
                 t_atom *argv = new t_atom[argc];

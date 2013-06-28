@@ -24,9 +24,10 @@
  */
 
 #include "AmbisonicStars.h"
-
+/*
 Star::Star(long deadOrAlive, double aRadius, double anAngle, double aRadiusPrincipal, double aRadiusSecondary, double aAngleEllipse) : Source(deadOrAlive, aRadius, anAngle)
 {
     ;
 }
+ */
 

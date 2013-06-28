@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources64/hoaMeter/AmbisonicsMeter.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
@@ -151,7 +151,8 @@ int C74_EXPORT main()
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	
 	/* APPEARANCE */
-    CLASS_STICKY_CATEGORY (c, 0, "Appearance");
+    CLASS_STICKY_CATEGORY       (c, 0, "Appearance");
+    
 	CLASS_ATTR_LONG				(c, "leds_bg", 0, t_meter, f_leds_bg);
 	CLASS_ATTR_ORDER			(c, "leds_bg", 0, "1");
 	CLASS_ATTR_STYLE_LABEL		(c, "leds_bg", 0, "onoff", "Draw Leds Background");
@@ -179,30 +180,33 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT			(c, "metersize", 0, "0.8");
 	CLASS_ATTR_SAVE				(c, "metersize", 1);
     
-    CLASS_ATTR_LONG				(c, "fill_dir", 0, t_meter, f_fill_direction);
-	CLASS_ATTR_LABEL			(c, "fill_dir", 0, "Meter Fill Direction");
-    CLASS_ATTR_ORDER			(c, "fill_dir", 0, "5");
-	CLASS_ATTR_ENUMINDEX		(c, "fill_dir", 0, "inside outside");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"fill_dir",0, "0");
+    CLASS_ATTR_LONG				(c, "orientation", 0, t_meter, f_fill_direction);
+	CLASS_ATTR_LABEL			(c, "orientation", 0, "Meter Fill Orientation");
+    CLASS_ATTR_ORDER			(c, "orientation", 0, "5");
+	CLASS_ATTR_ENUMINDEX		(c, "orientation", 0, "inside outside");
+    CLASS_ATTR_ALIAS            (c, "orientation", "fill_dir");
+    CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"orientation",0, "0");
+    
     CLASS_STICKY_CATEGORY_CLEAR (c);
 	
 	/* BEHAVIOR */
-    CLASS_STICKY_CATEGORY (c, 0, "Behavior");
-	CLASS_ATTR_LONG				(c, "ls", 0 , t_meter, f_number_of_loudspeakers);
-    CLASS_ATTR_ACCESSORS		(c, "ls", NULL, number_of_loudspeakers_set);
-	CLASS_ATTR_ORDER			(c, "ls", 0, "1");
-	CLASS_ATTR_LABEL			(c, "ls", 0, "Number of Loudspeakers");
-	CLASS_ATTR_SAVE				(c, "ls", 1);
-    CLASS_ATTR_DEFAULT          (c, "ls", 0, "8");
-	CLASS_ATTR_ALIAS            (c, "ls", "loudspeakers");
-    CLASS_ATTR_ALIAS            (c, "ls", "channels");
+    CLASS_STICKY_CATEGORY       (c, 0, "Behavior");
     
-	CLASS_ATTR_DOUBLE_VARSIZE	(c, "ls_angles", 0, t_meter,f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
-	CLASS_ATTR_ACCESSORS		(c, "ls_angles", NULL, angles_of_loudspeakers_set);
-	CLASS_ATTR_ORDER			(c, "ls_angles", 0, "2");
-	CLASS_ATTR_LABEL			(c, "ls_angles", 0, "Angles of Loudspeakers");
-	CLASS_ATTR_SAVE				(c, "ls_angles", 1);
-	CLASS_ATTR_ALIAS            (c, "ls_angles", "angles");
+	CLASS_ATTR_LONG				(c, "loudspeakers", 0 , t_meter, f_number_of_loudspeakers);
+    CLASS_ATTR_ACCESSORS		(c, "loudspeakers", NULL, number_of_loudspeakers_set);
+	CLASS_ATTR_ORDER			(c, "loudspeakers", 0, "1");
+	CLASS_ATTR_LABEL			(c, "loudspeakers", 0, "Number of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "loudspeakers", 1);
+    CLASS_ATTR_DEFAULT          (c, "loudspeakers", 0, "8");
+	CLASS_ATTR_ALIAS            (c, "loudspeakers", "ls");
+    CLASS_ATTR_ALIAS            (c, "loudspeakers", "channels");
+    
+	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_meter,f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
+	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
+	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
+	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "angles", 1);
+	CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
     
 	CLASS_ATTR_DOUBLE			(c, "offset", 0, t_meter, f_offsetOfLoudspeakers);
 	CLASS_ATTR_ORDER			(c, "offset", 0, "3");
@@ -210,10 +214,20 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT			(c, "offset", 0, "0");
 	CLASS_ATTR_SAVE				(c, "offset", 1);
     
-    CLASS_ATTR_LONG				(c,"ls_rot_dir", 0, t_meter, f_speakers_dir_of_rotation);
-	CLASS_ATTR_LABEL			(c,"ls_rot_dir", 0, "Direction of Loudspeakers Rotation");
-	CLASS_ATTR_ENUMINDEX		(c,"ls_rot_dir", 0, "clockwise anti-clockwise");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"ls_rot_dir",0, "1");
+    CLASS_ATTR_LONG				(c, "rotation", 0, t_meter, f_speakers_dir_of_rotation);
+    CLASS_ATTR_ORDER			(c, "rotation", 0, "4");
+	CLASS_ATTR_LABEL			(c, "rotation", 0, "Rotation of Loudspeakers");
+	CLASS_ATTR_ENUMINDEX		(c, "rotation", 0, "clockwise anti-clockwise");
+    CLASS_ATTR_ALIAS            (c, "rotation", "ls_rot_dir");
+    CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"rotation",0, "1");
+    
+    CLASS_ATTR_LONG				(c, "interval", 0, t_meter, f_interval);
+	CLASS_ATTR_ORDER			(c, "interval", 0, "5");
+	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
+	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
+	CLASS_ATTR_DEFAULT			(c, "interval", 0, "50");
+	CLASS_ATTR_SAVE				(c, "interval", 1);
+    
     CLASS_STICKY_CATEGORY_CLEAR (c);
 	
     /* VALUE */
@@ -253,12 +267,6 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT			(c, "numleds", 0, "12");
 	CLASS_ATTR_SAVE				(c, "numleds", 1);
 	
-	CLASS_ATTR_LONG				(c, "interval", 0, t_meter, f_interval);
-	CLASS_ATTR_ORDER			(c, "interval", 0, "9");
-	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
-	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
-	CLASS_ATTR_DEFAULT			(c, "interval", 0, "50");
-	CLASS_ATTR_SAVE				(c, "interval", 1);
     CLASS_STICKY_CATEGORY_CLEAR (c);
 	
 	/* COLORS */

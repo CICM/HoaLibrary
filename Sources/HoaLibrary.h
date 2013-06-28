@@ -45,6 +45,7 @@
 #include "hoaRotate/AmbisonicsRotate.h"
 #include "hoaSpace/AmbisonicSpace.h"
 #include "hoaWider/AmbisonicsWider.h"
+#include "hoaVector/AmbisonicsVector.h"
 
 #endif
 
