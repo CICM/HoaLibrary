@@ -32,7 +32,7 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
     
     for(int i = 0; i < m_number_of_microphones; i++)
     {
-        m_encoders.push_back(new AmbisonicsEncoder(m_order, "basic", m_vector_size));
+        m_encoders.push_back(new AmbisonicsEncoder(m_order, Hoa_Basic, m_vector_size));
         m_widers.push_back(new AmbisonicsWider(m_order, m_vector_size));
         m_lines.push_back(new CicmLine(4410, m_vector_size));
         m_wider_lines.push_back(new CicmLine(4410, m_vector_size));

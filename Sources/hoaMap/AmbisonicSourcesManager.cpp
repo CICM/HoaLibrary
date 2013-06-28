@@ -49,6 +49,14 @@ void SourcesManager::setExistence(long deadOrAlive)
     }
 }
 
+void SourcesManager::clearAll()
+{
+    for(int i = 0; i < getMaximumIndexOfSource(); i++)
+        sourceRemove(i);
+    for(int i = 0; i < getMaximumIndexOfGroup(); i++)
+        groupRemove(i);
+}
+
 long SourcesManager::getExistence()
 {
     return m_existence;
@@ -543,6 +551,17 @@ void SourcesManager::groupRemove(long aGroupIndex)
         m_groups[aGroupIndex]->setExistence(0);
         m_groups[aGroupIndex]->setMute(0);
     }
+}
+
+void SourcesManager::groupRemoveWithSources(long aGroupIndex)
+{
+    for(int i = 0; i < getMaximumIndexOfSource(); i++)
+    {
+        if (m_sources[i]->isOwnedByGroup(aGroupIndex)) {
+            sourceRemove(i);
+        }
+    }
+    groupRemove(aGroupIndex);
 }
 
 void SourcesManager::groupSetMute(long aGroupIndex, long aValue)

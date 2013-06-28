@@ -182,6 +182,13 @@ long SourcesManager::Source::getGroupIndex(long anIndex)
         return -1;
 }
 
+long SourcesManager::Source::isOwnedByGroup(long aGroupIndex)
+{
+    for (int i = 0; i < m_groups.size(); i++)
+        if (m_groups[i] == aGroupIndex) return 1;
+    return 0;
+}
+
 long SourcesManager::Source::getMute()
 {
     return m_mute;

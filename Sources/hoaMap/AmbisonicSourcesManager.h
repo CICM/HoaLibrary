@@ -69,6 +69,7 @@ private:
         std::string getDescription();
         long   getNumberOfGroups();
         long   getGroupIndex(long anIndex);
+        long   isOwnedByGroup(long aGroupIndex);
         long   getMute();
         
         ~Source();
@@ -138,6 +139,7 @@ private:
 public:
 	SourcesManager(double aMaximumLimitValue = -1., long deadOrAlive = 1);
     
+    void clearAll();
     void setMaximumRadius(double aLimitValue);
     void setExistence(long deadOrAlive);
     long getMaximumIndexOfSource();
@@ -184,6 +186,7 @@ public:
     void groupSetColor(long aGroupIndex, double red, double green, double blue, double alpha);
     void groupSetDescription(long aGroupIndex, std::string aDescription);
     void groupRemove(long aGroupIndex);
+    void groupRemoveWithSources(long aGroupIndex);
     long groupGetNumberOfSources(long aGroupIndex);
     long groupGetSourceIndex(long aGroupIndex, long aSourceIndex);
     void groupSetMute(long anIndex, long aValue);
