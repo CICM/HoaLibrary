@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsOptim.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
@@ -37,10 +37,8 @@ typedef struct _HoaOptim
 {
 	t_pxobject				f_ob;			
 	AmbisonicsOptim*		f_AmbisonicsOptim;
-
-	int						f_ninput;
-	int						f_noutput;
     t_symbol*               f_optim_mode;
+    
 } t_HoaOptim;
 
 void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv);
@@ -54,7 +52,7 @@ t_int *HoaOptim_perform(t_int *w);
 void HoaOptim_dsp64(t_HoaOptim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaOptim_perform64(t_HoaOptim *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void *HoaOptim_class;
+t_class *HoaOptim_class;
 
 int C74_EXPORT main(void)
 {	
@@ -85,10 +83,9 @@ int C74_EXPORT main(void)
 
 void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_HoaOptim *x = NULL;
+	t_HoaOptim *x = (t_HoaOptim *)object_alloc(HoaOptim_class);
 	int order = 4;
     
-	x = (t_HoaOptim *)object_alloc((t_class*)HoaOptim_class);
 	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
@@ -129,8 +126,6 @@ void HoaOptim_dsp(t_HoaOptim *x, t_signal **sp, short *count)
 	t_int **sigvec;
 
 	x->f_AmbisonicsOptim->setVectorSize(sp[0]->s_n);
-	x->f_ninput = x->f_AmbisonicsOptim->getNumberOfInputs();
-	x->f_noutput = x->f_AmbisonicsOptim->getNumberOfOutputs();
 	pointer_count = x->f_AmbisonicsOptim->getNumberOfInputs() + x->f_AmbisonicsOptim->getNumberOfOutputs() + 2;
 	
 	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
@@ -143,19 +138,18 @@ void HoaOptim_dsp(t_HoaOptim *x, t_signal **sp, short *count)
 		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
 	
 	dsp_addv(HoaOptim_perform, pointer_count, (void **)sigvec);
-	
 	free(sigvec);
 }
 
 t_int *HoaOptim_perform(t_int *w)
 {
-	t_HoaOptim *x			= (t_HoaOptim *)(w[1]);	
+	t_HoaOptim *x		= (t_HoaOptim *)(w[1]);	
 	t_float		**ins	= (t_float **)w+3;
-	t_float		**outs	= (t_float **)w+3+x->f_ninput;
+	t_float		**outs	= (t_float **)w+3+x->f_AmbisonicsOptim->getNumberOfInputs();
 	
 	x->f_AmbisonicsOptim->process(ins, outs);
 	
-	return (w + x->f_ninput + x->f_noutput + 3);
+	return (w + x->f_AmbisonicsOptim->getNumberOfInputs() + x->f_AmbisonicsOptim->getNumberOfOutputs() + 3);
 }
 
 void HoaOptim_assist(t_HoaOptim *x, void *b, long m, long a, char *s)
@@ -183,7 +177,6 @@ t_max_err HoaOptim_optim(t_HoaOptim *x, t_object *attr, long argc, t_atom *argv)
             x->f_optim_mode = gensym("basic");
         }
 	}
-    
     return NULL;
 }
 

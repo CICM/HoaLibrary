@@ -43,7 +43,7 @@ public:
 	~Ambisonicsvector();
 	
 	/* Perform sample by sample */
-	void process(double* anInput, double *anOutput)
+	inline void process(double* anInput, double *anOutput)
 	{
         double sum = 0., weihtedSumAbscissa = 0, weihtedSumOrdinate = 0,  sumAbs = 0.,weihtedSumAbsAbscissa = 0, weihtedSumAbsOrdinate = 0;
         for (int i = 0; i < m_number_of_loudspeakers; i++)
@@ -97,7 +97,7 @@ public:
         }
 	}
     
-    void process(float* anInput, float *anOutput)
+    inline void process(float* anInput, float *anOutput)
 	{
         double sum = 0., weihtedSumAbscissa = 0, weihtedSumOrdinate = 0,  sumAbs = 0.,weihtedSumAbsAbscissa = 0, weihtedSumAbsOrdinate = 0;
         for (int i = 0; i < m_number_of_loudspeakers; i++)
@@ -153,7 +153,7 @@ public:
 	}
 	
 	/* Perform sample block */
-	void process(double** anInputVector, double** anOutputVector)
+	inline void process(double** anInputVector, double** anOutputVector)
 	{
         for(int j = 0; j < m_vector_size; j++)
 		{
@@ -175,6 +175,8 @@ public:
                 {
                     anOutputVector[0][j] = Tools::radius(weihtedSumAbscissa, weihtedSumOrdinate);
                     anOutputVector[1][j] = Tools::angle(weihtedSumAbscissa, weihtedSumOrdinate);
+                    if(anOutputVector[1][j] < 0.)
+                        anOutputVector[1][j] += CICM_2PI;
                 }
                 else
                 {
@@ -195,6 +197,8 @@ public:
                 {
                     anOutputVector[2][j] = Tools::radius(weihtedSumAbsAbscissa, weihtedSumAbsOrdinate);
                     anOutputVector[3][j] = Tools::angle(weihtedSumAbsAbscissa, weihtedSumAbsOrdinate);
+                    if(anOutputVector[1][j] < 0.)
+                        anOutputVector[1][j] += CICM_2PI;
                 }
                 else
                 {
@@ -210,7 +214,7 @@ public:
 		}
 	}
     
-    void process(float** anInputVector, float** anOutputVector)
+    inline void process(float** anInputVector, float** anOutputVector)
 	{
         for(int j = 0; j < m_vector_size; j++)
 		{

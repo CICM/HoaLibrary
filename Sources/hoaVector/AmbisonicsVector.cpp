@@ -28,6 +28,7 @@
 Ambisonicsvector::Ambisonicsvector(long aNumberOfLoudspeakers, bool aMode, long aVectorSize) : Planewaves(aNumberOfLoudspeakers, aVectorSize)
 {
     setMode(aMode);
+    m_number_of_outputs = 4;
 }
 
 std::string Ambisonicsvector::getVectorName(long anIndex)

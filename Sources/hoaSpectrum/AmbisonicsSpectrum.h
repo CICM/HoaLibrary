@@ -33,7 +33,7 @@ class AmbisonicsSpectrum : public Ambisonics
 {
 	
 private:
-    Cicm_Fft*   m_fft;
+    //Cicm_Fft*   m_fft;
 
 	
 public:
