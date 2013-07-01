@@ -129,8 +129,10 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d);
 void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d);
 void hoamap_jsave(t_hoamap *x, t_dictionary *d);
 
-void hoamap_doread(t_hoamap *x, t_symbol *s);
-void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
+//void hoamap_doread(t_hoamap *x, t_symbol *s);
+//void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
+void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv);
+void hoamap_dowrite(t_hoamap *x, t_symbol *s, long argc, t_atom *argv);
 void hoamap_tick(t_hoamap *x);
 
 void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
@@ -170,7 +172,7 @@ int C74_EXPORT main()
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
-//    jbox_initclass(c, JBOX_COLOR | JBOX_FONTATTR);
+    //jbox_initclass(c, JBOX_COLOR | JBOX_FONTATTR);
 	
 	class_addmethod(c, (method) hoamap_assist,           "assist",		A_CANT,	0);
 	class_addmethod(c, (method) hoamap_paint,            "paint",		A_CANT,	0);
@@ -363,7 +365,7 @@ void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
     }
 }
 
-void hoamap_doread(t_hoamap *x, t_symbol *s)
+void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
 {
 	short outvol,error;
 	char ps[MAX_PATH_CHARS];
@@ -435,11 +437,13 @@ void hoamap_doread(t_hoamap *x, t_symbol *s)
     }
 	savelock = lockout_set(1);
 	lockout_set(savelock);
-    object_post((t_object *)x, "read file : %s", forgot_dotjson ? ps_dotjson : ps);
+    //object_post((t_object *)x, "read file : %s", forgot_dotjson ? ps_dotjson : ps);
 }
 
-void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+//void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+void hoamap_dowrite(t_hoamap *x, t_symbol *sym, long argc, t_atom *argv)
 {
+    //post("write method");
 	short outvol,error;
 	char ps[MAX_PATH_CHARS];
     t_fourcc outtype;
@@ -466,7 +470,8 @@ void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
     else
     {
 		strcpy(ps, atom_getsym(argv)->s_name);
-        if(locatefile_extended(ps, &outvol, &outtype, &filetypelist, -1))
+        //if(locatefile_extended(ps, &outvol, &outtype, &filetypelist, -1))
+        if(locatefile_extended(ps, &outvol, &outtype, &filetypelist, 1))
            path_createsysfile(ps, outvol, filetypelist, &ref);
 	}
     
@@ -482,7 +487,7 @@ void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
     }
 	savelock = lockout_set(1);
 	lockout_set(savelock);
-    object_post((t_object *)x, "write file : %s", ps);
+    //object_post((t_object *)x, "write file : %s", ps);
 }
 
 void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
@@ -717,13 +722,23 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             else if(sym == gensym("recall"))
                 x->f_source_preset->RecallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
             else if(sym == gensym("read"))
-                defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
+            {
+                t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
+                defer_low( (t_object *)x,(method)hoamap_doread, sym,0, NULL);
+                //defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
+            }
             else if(sym == gensym("write"))
             {
                 t_atom parameter[2];
-                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
+                //atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
+                atom_setsym(parameter, gensym(""));
+                
                 atom_setsym(parameter+1, gensym("slot"));
-                defer_low(x,(method)hoamap_dowrite, NULL, 2, parameter);
+                
+                //post("boom");
+
+                defer_low(x,(method)hoamap_dowrite, gensym(""), 2, parameter);
+                //defer_low(x,(method)hoamap_dowrite, NULL, 2, parameter);
             }
             else if(sym == gensym("storesource"))
                 x->f_source_preset->storeSourceAtSlot(x->f_source_manager, atom_getlong(av+1),atom_getlong(av+2));
@@ -759,7 +774,11 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             else if(sym == gensym("erasepart"))
                 x->f_source_trajectory->erase(atom_getfloat(av+1), atom_getfloat(av+2));
             else if(sym == gensym("read"))
-                defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
+            {
+                t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
+                defer_low( (t_object *)x,(method)hoamap_doread, sym,0, NULL);
+                //defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
+            }
             else if(sym == gensym("write"))
             {
                 t_atom parameter[2];
@@ -1962,6 +1981,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
                     x->f_source_manager->groupRemove(x->f_index_of_group_to_remove);
+                    hoamap_bang(x);
                     break;
                 }
                 case 2: // remove group & source
@@ -1971,8 +1991,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                     atom_setsym(av+1, gensym("mute"));
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
-                    hoamap_bang(x);
                     x->f_source_manager->groupRemoveWithSources(x->f_index_of_group_to_remove);
+                    hoamap_bang(x);
                     break;
                 }
                 case 3: // Mute group
@@ -1998,6 +2018,10 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 default:
                     break;
             }
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+            jbox_redraw((t_jbox *)x);
+            hoamap_bang(x);
         }
         else if(x->f_index_of_selected_source != -1)
         {
@@ -2045,6 +2069,10 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 default:
                     break;
             }
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+            jbox_redraw((t_jbox *)x);
+            hoamap_bang(x);
         }
         else /* Free zone - Add Source */
         {
@@ -2095,6 +2123,11 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     //hoamap_mousedrag(x, patcherview, pt, modifiers);
     if(x->f_source_trajectory->getRecording())
         clock_set(x->f_clock, 100);
+    
+//    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+//    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+//    jbox_redraw((t_jbox *)x);
+//    hoamap_bang(x);
 }
 
 
