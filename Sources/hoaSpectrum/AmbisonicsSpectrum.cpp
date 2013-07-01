@@ -25,12 +25,27 @@
 
 #include "AmbisonicsSpectrum.h"
 
-AmbisonicsSpectrum::AmbisonicsSpectrum(long anOrder, long aVectorSize, double aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsSpectrum::AmbisonicsSpectrum(long aNumberOfLoudspeakers, long aWindowSize, long aVectorSize, long aSamplingRate) : Planewaves(aNumberOfLoudspeakers, aVectorSize, aSamplingRate)
 {
-    ;
+    m_vector = new AmbisonicsVector(aNumberOfLoudspeakers, m_vector_size, m_sampling_rate);
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_low.push_back(new FilterBiquad(Cicm_Biquad_Lowpass, m_vector_size, m_sampling_rate));
+        m_low[i]->setCutoffFrequency(200.);
+        m_low_medium.push_back(new FilterBiquad(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));
+        m_low_medium[i]->setCutoffFrequency(300.);
+        m_medium.push_back(new FilterBiquad(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));
+        m_medium[i]->setCutoffFrequency(600.);
+        m_high_medium.push_back(new FilterBiquad(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));
+        m_high_medium[i]->setCutoffFrequency(2400.);
+        m_high.push_back(new FilterBiquad(Cicm_Biquad_Highpass, m_vector_size, m_sampling_rate));
+        m_high[i]->setCutoffFrequency(4000.);
+    }
+  
 }
 
 AmbisonicsSpectrum::~AmbisonicsSpectrum()
 {
-    ;
+    delete m_vector;
 }
+

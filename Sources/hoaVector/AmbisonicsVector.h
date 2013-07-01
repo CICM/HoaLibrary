@@ -28,19 +28,19 @@
 
 #include "../HoaAmbisonics/Planewaves.h"
 
-class Ambisonicsvector : public Planewaves
+class AmbisonicsVector : public Planewaves
 {	
 private:
     bool         m_mode;
     
 public:
-	Ambisonicsvector(long aNumberOfLoudspeakers = 1., bool aMode = Hoa_Polar, long aVectorSize = 0);
+	AmbisonicsVector(long aNumberOfLoudspeakers = 1., bool aMode = Hoa_Polar, long aVectorSize = 0);
 	
     std::string  getVectorName(long anIndex);
     long getMode();
     void setMode(bool aMode);
     
-	~Ambisonicsvector();
+	~AmbisonicsVector();
 	
 	/* Perform sample by sample */
 	inline void process(double* anInput, double *anOutput)
@@ -175,8 +175,7 @@ public:
                 {
                     anOutputVector[0][j] = Tools::radius(weihtedSumAbscissa, weihtedSumOrdinate);
                     anOutputVector[1][j] = Tools::angle(weihtedSumAbscissa, weihtedSumOrdinate);
-                    if(anOutputVector[1][j] < 0.)
-                        anOutputVector[1][j] += CICM_2PI;
+
                 }
                 else
                 {
@@ -197,8 +196,6 @@ public:
                 {
                     anOutputVector[2][j] = Tools::radius(weihtedSumAbsAbscissa, weihtedSumAbsOrdinate);
                     anOutputVector[3][j] = Tools::angle(weihtedSumAbsAbscissa, weihtedSumAbsOrdinate);
-                    if(anOutputVector[1][j] < 0.)
-                        anOutputVector[1][j] += CICM_2PI;
                 }
                 else
                 {

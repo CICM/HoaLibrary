@@ -26,19 +26,72 @@
 #ifndef DEF_AMBISONICSSPECTRUM
 #define DEF_AMBISONICSSPECTRUM
 
-#include "../hoaAmbisonics/Ambisonics.h"
-#include "../CicmLibrary/CicmFft/CicmFft.h"
+#include "../hoaAmbisonics/Planewaves.h"
+#include "../hoaVector/AmbisonicsVector.h"
+#include "../CicmLibrary/CicmFilters/CicmFilterBiquad.h"
 
-class AmbisonicsSpectrum : public Ambisonics
+class AmbisonicsSpectrum : public Planewaves
 {
 	
 private:
-    //Cicm_Fft*   m_fft;
+    vector <FilterBiquad*>         m_low;
+    vector <FilterBiquad*>         m_low_medium;
+    vector <FilterBiquad*>         m_medium;
+    vector <FilterBiquad*>         m_high_medium;
+    vector <FilterBiquad*>         m_high;
+    
+	AmbisonicsVector*               m_vector;
 
-	
+    /*
+    Cicm_Vector_Float*              m_low_vector_float;
+    Cicm_Vector_Float*              m_low_medium_vector_float;
+    Cicm_Vector_Float*              m_medium_vector_float;
+    Cicm_Vector_Float*              m_high_medium_vector_float;
+    Cicm_Vector_Float*              m_high_vector_float;
+    */
+    Cicm_Vector_Double*              m_low_vector_double;
+    Cicm_Vector_Double*              m_low_medium_vector_double;
+    Cicm_Vector_Double*              m_medium_vector_double;
+    Cicm_Vector_Double*              m_high_medium_vector_double;
+    Cicm_Vector_Double*              m_high_vector_double;
+    
+    //Cicm_Vector_Float*              m_coordinates;
+    
 public:
-	AmbisonicsSpectrum(long anOrder = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
+	AmbisonicsSpectrum(long aNumberOfLoudspeakers = 1, long aWindowSize = 256, long aVectorSize = 0, long aSamplingRate = 44100);
 	~AmbisonicsSpectrum();
+    
+    /* Perform sample by sample */
+	inline void process(float* inputs)
+	{
+    }
+    
+    /* Perform sample by sample */
+	inline void process(double* inputs)
+	{
+	}
+	
+	/* Perform block sample */
+	inline void process(float** inputs)
+	{
+        for(int h = 0; h < m_vector_size; h++)
+        {
+        }
+	}
+    
+    /* Perform block sample */
+	inline void process(double** inputs)
+	{
+        for(int i = 0; i < m_number_of_loudspeakers; i++)
+        {
+            m_low[i]->process(inputs[i], m_low_vector_double[i]);
+            m_low_medium[i]->process(inputs[i], m_low_medium_vector_double[i]);
+            m_medium[i]->process(inputs[i], m_medium_vector_double[i]);
+            m_high_medium[i]->process(inputs[i], m_high_medium_vector_double[i]);
+            m_high[i]->process(inputs[i], m_high_vector_double[i]);
+        }
+	}
+    
 };
 
 #endif
