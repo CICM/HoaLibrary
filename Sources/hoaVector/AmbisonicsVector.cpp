@@ -25,13 +25,13 @@
 
 #include "AmbisonicsVector.h"
 
-Ambisonicsvector::Ambisonicsvector(long aNumberOfLoudspeakers, bool aMode, long aVectorSize) : Planewaves(aNumberOfLoudspeakers, aVectorSize)
+AmbisonicsVector::AmbisonicsVector(long aNumberOfLoudspeakers, bool aMode, long aVectorSize) : Planewaves(aNumberOfLoudspeakers, aVectorSize)
 {
     setMode(aMode);
     m_number_of_outputs = 4;
 }
 
-std::string Ambisonicsvector::getVectorName(long anIndex)
+std::string AmbisonicsVector::getVectorName(long anIndex)
 {
     if(!m_mode)        
     {
@@ -57,12 +57,12 @@ std::string Ambisonicsvector::getVectorName(long anIndex)
     }
 }
 
-long Ambisonicsvector::getMode()
+long AmbisonicsVector::getMode()
 {
     return m_mode;
 }
 
-void Ambisonicsvector::setMode(bool aMode)
+void AmbisonicsVector::setMode(bool aMode)
 {
     if(aMode == Hoa_Cartesian)
         m_mode = Hoa_Cartesian;
@@ -70,7 +70,7 @@ void Ambisonicsvector::setMode(bool aMode)
         m_mode = Hoa_Polar;
 }
 
-Ambisonicsvector::~Ambisonicsvector()
+AmbisonicsVector::~AmbisonicsVector()
 {
 	;
 }

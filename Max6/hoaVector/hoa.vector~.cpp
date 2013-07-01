@@ -41,7 +41,7 @@ extern "C"
 typedef struct _HoaVector
 {
 	t_pxobject				f_ob;
-	Ambisonicsvector        *f_ambiVector;
+	AmbisonicsVector        *f_ambiVector;
     
     t_symbol*               f_output_mode; 
     t_atom_long             f_number_of_loudspeakers;
@@ -124,7 +124,7 @@ void *HoaVector_new(t_symbol *s, long argc, t_atom *argv)
         if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
             x->f_number_of_loudspeakers = atom_getfloat(argv);
         
-		x->f_ambiVector = new Ambisonicsvector(x->f_number_of_loudspeakers, Hoa_Polar, sys_getblksize());
+		x->f_ambiVector = new AmbisonicsVector(x->f_number_of_loudspeakers, Hoa_Polar, sys_getblksize());
 		x->f_number_of_loudspeakers = x->f_ambiVector->getNumberOfLoudspeakers();
         for(int i = 0; i < x->f_number_of_loudspeakers; i++)
             x->f_angles_of_loudspeakers[i] = x->f_ambiVector->getLoudspeakerAngle(i);

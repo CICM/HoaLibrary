@@ -31,7 +31,7 @@
 class AmbisonicsMeter : public Planewaves
 {
 protected:
-    Ambisonicsvector*   m_vectors;
+    AmbisonicsVector*   m_vectors;
     
     Cicm_Vector_Double m_loudspeakers_amplitudes;
     Cicm_Vector_Double m_loudspeakers_peaks;
