@@ -99,6 +99,8 @@ typedef struct  _hoamap
     t_jrgba     f_colorBorder;
     t_jrgba     f_colorSelection;
     
+    int         f_cartConstrain;
+    
     double      f_size_source;
 	double		f_zoom_factor;
     
@@ -365,6 +367,8 @@ void hoamap_doread(t_hoamap *x, t_symbol *s)
 {
 	short outvol,error;
 	char ps[MAX_PATH_CHARS];
+    char ps_dotjson[MAX_PATH_CHARS];
+    int forgot_dotjson = 0;
 	//long type;
     t_fourcc outtype;
     t_fourcc filetypelist = 'pSto';
@@ -378,14 +382,26 @@ void hoamap_doread(t_hoamap *x, t_symbol *s)
 	}
     else
     {
-		strcpy(ps,s->s_name);
-		if (locatefile_extended(ps, &outvol, &outtype, &filetypelist, -1))
+        strcpy(ps,s->s_name);
+        forgot_dotjson = bool(!strstr(ps, ".json"));
+        if (!forgot_dotjson) {
+            if (locatefile_extended(ps, &outvol, &outtype, &filetypelist, -1))
+            {
+                object_error((t_object *)x, "%s: can't find file",ps);
+                return;
+            }
+        }
+        else
         {
-			object_error((t_object *)x, "%s: can't find file",ps);
-			return;
-		}
+            sprintf(ps_dotjson, "%s.json", ps);
+            if (locatefile_extended(ps_dotjson, &outvol, &outtype, &filetypelist, -1))
+            {
+                object_error((t_object *)x, "%s: can't find file",ps);
+                return;
+            }
+        }
 	}
-	error = dictionary_read(ps, outvol, &d);
+	error = forgot_dotjson ? dictionary_read(ps_dotjson, outvol, &d) : dictionary_read(ps, outvol, &d);
 	if (error)
     {
 		object_error((t_object *)x, "%s: error %d opening file",ps, error);
@@ -419,24 +435,29 @@ void hoamap_doread(t_hoamap *x, t_symbol *s)
     }
 	savelock = lockout_set(1);
 	lockout_set(savelock);
+    object_post((t_object *)x, "read file : %s", forgot_dotjson ? ps_dotjson : ps);
 }
 
 void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 {
 	short outvol,error;
 	char ps[MAX_PATH_CHARS];
-	//long type;
-    //long types = 'pSto';
     t_fourcc outtype;
     t_fourcc filetypelist = 'pSto';
 	short savelock;
     t_filehandle ref;
 	t_dictionary *d = dictionary_new();
-
+    
     if(atom_getsym(argv+1) == gensym("slot"))
         hoamap_slot_save(x, d);
-    if(atom_getsym(argv+1) == gensym("trajectory"))
+    else if(atom_getsym(argv+1) == gensym("trajectory"))
         hoamap_trajectory_save(x, d);
+    else
+    {
+        hoamap_slot_save(x, d);
+        hoamap_trajectory_save(x, d);
+    }
+    
 	if (atom_getsym(argv)==gensym(""))
     {
 		if (saveasdialog_extended(ps,&outvol, &outtype, &filetypelist, 1))
@@ -447,7 +468,6 @@ void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 		strcpy(ps, atom_getsym(argv)->s_name);
         if(locatefile_extended(ps, &outvol, &outtype, &filetypelist, -1))
            path_createsysfile(ps, outvol, filetypelist, &ref);
-		
 	}
     
 	error = dictionary_write(d, ps, outvol);
@@ -462,6 +482,7 @@ void hoamap_dowrite(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
     }
 	savelock = lockout_set(1);
 	lockout_set(savelock);
+    object_post((t_object *)x, "write file : %s", ps);
 }
 
 void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
@@ -668,48 +689,51 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
     if(ac && av)
     {
-        if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("store"))
-            x->f_source_preset->storeSouceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storeagain"))
-            x->f_source_preset->storeSouceManagerAtLastUsedSlot(x->f_source_manager);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storeempty"))
-            x->f_source_preset->storeSouceManagerAtFirstEmptySlot(x->f_source_manager);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storeend"))
-            x->f_source_preset->storeSouceManagerAtNewEndSlot(x->f_source_manager);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storenext"))
-            x->f_source_preset->storeSouceManagerAtNextSlot(x->f_source_manager);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("insert"))
-            x->f_source_preset->insertSlot(x->f_source_manager, atom_getlong(av+1));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("remove"))
-            x->f_source_preset->removeSlot(atom_getlong(av+1));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("delete"))
-            x->f_source_preset->deleteSlot(atom_getlong(av+1));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("copy"))
-            x->f_source_preset->copySlot(atom_getlong(av+1), atom_getlong(av+2));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("renumber"))
-            x->f_source_preset->renumber();
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("clear"))
-            x->f_source_preset->clear();
+        if(atom_gettype(av) == A_SYM)
+        {
+            t_symbol *sym = atom_getsym(av);
+            if(sym == gensym("store"))
+                x->f_source_preset->storeSouceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
+            else if(sym == gensym("storeagain"))
+                x->f_source_preset->storeSouceManagerAtLastUsedSlot(x->f_source_manager);
+            else if(sym == gensym("storeempty"))
+                x->f_source_preset->storeSouceManagerAtFirstEmptySlot(x->f_source_manager);
+            else if(sym == gensym("storeend"))
+                x->f_source_preset->storeSouceManagerAtNewEndSlot(x->f_source_manager);
+            else if(sym == gensym("storenext"))
+                x->f_source_preset->storeSouceManagerAtNextSlot(x->f_source_manager);
+            else if(sym == gensym("insert"))
+                x->f_source_preset->insertSlot(x->f_source_manager, atom_getlong(av+1));
+            else if(sym == gensym("remove"))
+                x->f_source_preset->removeSlot(atom_getlong(av+1));
+            else if(sym == gensym("delete"))
+                x->f_source_preset->deleteSlot(atom_getlong(av+1));
+            else if(sym == gensym("copy"))
+                x->f_source_preset->copySlot(atom_getlong(av+1), atom_getlong(av+2));
+            else if(sym == gensym("renumber"))
+                x->f_source_preset->renumber();
+            else if(sym == gensym("clear"))
+                x->f_source_preset->clear();
+            else if(sym == gensym("recall"))
+                x->f_source_preset->RecallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
+            else if(sym == gensym("read"))
+                defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
+            else if(sym == gensym("write"))
+            {
+                t_atom parameter[2];
+                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
+                atom_setsym(parameter+1, gensym("slot"));
+                defer_low(x,(method)hoamap_dowrite, NULL, 2, parameter);
+            }
+            else if(sym == gensym("storesource"))
+                x->f_source_preset->storeSourceAtSlot(x->f_source_manager, atom_getlong(av+1),atom_getlong(av+2));
+            else if(sym == gensym("storegroup"))
+                x->f_source_preset->storeGroupAtSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2));
+        }
         else if(atom_gettype(av) == A_LONG)
             x->f_source_preset->recallSlot(x->f_source_manager, atom_getlong(av));
         else if(atom_gettype(av) == A_FLOAT)
             x->f_source_preset->recallFractionalSlot(x->f_source_manager, (double)atom_getfloat(av));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("recall"))
-            x->f_source_preset->RecallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("read"))
-            defer(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("write"))
-        {
-            t_atom parameter[2];
-            atom_setsym(parameter, atom_getsym(av+1));
-            atom_setsym(parameter+1, gensym("slot"));
-            defer(x,(method)hoamap_dowrite, NULL, 2, parameter);
-        }
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storesource"))
-             x->f_source_preset->storeSourceAtSlot(x->f_source_manager, atom_getlong(av+1),atom_getlong(av+2));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("storegroup"))
-             x->f_source_preset->storeGroupAtSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2));
-        
     }
     
     object_notify(x, _sym_modified, NULL);
@@ -723,25 +747,29 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
     if(ac && av)
     {
-        if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("record"))
-            x->f_source_trajectory->setRecording(atom_getlong(av+1));
-        if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("limit"))
-            x->f_source_trajectory->setLimited(atom_getlong(av+1));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("erase"))
-            x->f_source_trajectory->erase();
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("erasepart"))
-            x->f_source_trajectory->erase(atom_getfloat(av+1), atom_getfloat(av+2));
+        if(atom_gettype(av) == A_SYM)
+        {
+            t_symbol *sym = atom_getsym(av);
+            if(sym == gensym("record"))
+                x->f_source_trajectory->setRecording(atom_getlong(av+1));
+            if(sym == gensym("limit"))
+                x->f_source_trajectory->setLimited(atom_getlong(av+1));
+            else if(sym == gensym("erase"))
+                x->f_source_trajectory->erase();
+            else if(sym == gensym("erasepart"))
+                x->f_source_trajectory->erase(atom_getfloat(av+1), atom_getfloat(av+2));
+            else if(sym == gensym("read"))
+                defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
+            else if(sym == gensym("write"))
+            {
+                t_atom parameter[2];
+                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
+                atom_setsym(parameter+1, gensym("trajectory"));
+                defer_low(x,(method)hoamap_dowrite, NULL, 2, parameter);
+            }
+        }
         else if(atom_gettype(av) == A_FLOAT)
             x->f_source_trajectory->playTrajectory(x->f_source_manager, (double)atom_getfloat(av));
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("read"))
-            defer(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
-        else if(atom_gettype(av) == A_SYM && atom_getsym(av) == gensym("write"))
-        {
-            t_atom parameter[2];
-            atom_setsym(parameter, atom_getsym(av+1));
-            atom_setsym(parameter+1, gensym("trajectory"));
-            defer(x,(method)hoamap_dowrite, NULL, 2, parameter);
-        }
     }
     
     object_notify(x, _sym_modified, NULL);
@@ -1154,6 +1182,13 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
             x->f_colorpicker = NULL;
         }
 	}
+    else if (msg == gensym("endeditbox")) // delete textfield
+    {
+        if(x->f_textfield)
+            object_free(x->f_textfield);
+        if(x->f_patcher)
+            object_free(x->f_patcher);
+    }
     else if(msg == gensym("text"))
     {
         if (sender == x->f_textfield)
@@ -1540,29 +1575,29 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
         {
             jgraphics_set_line_width(g3, 1);
             jgraphics_set_source_jrgba(g3, &white);
-            jgraphics_move_to(g3, 0., ctr.y - i);
-            jgraphics_line_to(g3, w, ctr.y - i);
-            jgraphics_move_to(g3, 0., ctr.y + i);
-            jgraphics_line_to(g3, w, ctr.y + i);
-            jgraphics_move_to(g3, ctr.x - i, 0.);
-            jgraphics_line_to(g3, ctr.x - i, w);
-            jgraphics_move_to(g3, ctr.x + i, 0.);
-            jgraphics_line_to(g3, ctr.x + i, w);
+            jgraphics_move_to(g3, 0., long(ctr.y - i) + 0.5);
+            jgraphics_line_to(g3, w,  long(ctr.y - i) + 0.5);
+            jgraphics_move_to(g3, 0., long(ctr.y + i) + 0.5);
+            jgraphics_line_to(g3, w,  long(ctr.y + i) + 0.5);
+            jgraphics_move_to(g3, long(ctr.x - i) + 0.5, 0.);
+            jgraphics_line_to(g3, long(ctr.x - i) + 0.5, w);
+            jgraphics_move_to(g3, long(ctr.x + i) + 0.5, 0.);
+            jgraphics_line_to(g3, long(ctr.x + i) + 0.5, w);
             jgraphics_set_line_width(g3, 1);
-            jgraphics_scale(g3, 0.25, 0.25); // tricks to draw a 0.25 line width
+            jgraphics_scale(g3, 0.5, 0.5); // tricks to draw a 0.5 line width
             jgraphics_stroke(g3);
-            jgraphics_scale(g3, 4, 4);
+            jgraphics_scale(g3, 2, 2);
             
             jgraphics_set_line_width(g3, 1);
             jgraphics_set_source_jrgba(g3, &black);
-            jgraphics_move_to(g3, 0. - 0.5, ctr.y - i - 0.5);
-            jgraphics_line_to(g3, w - 0.5, ctr.y - i - 0.5);
-            jgraphics_move_to(g3, 0. - 0.5, ctr.y + i - 0.5);
-            jgraphics_line_to(g3, w - 0.5, ctr.y + i - 0.5);
-            jgraphics_move_to(g3, ctr.x - i - 0.5, 0. - 0.5);
-            jgraphics_line_to(g3, ctr.x - i - 0.5, w - 0.5);
-            jgraphics_move_to(g3, ctr.x + i - 0.5, 0. - 0.5);
-            jgraphics_line_to(g3, ctr.x + i - 0.5, w - 0.5);
+            jgraphics_move_to(g3, 0. - 0.5, long(ctr.y - i) - 0.5);
+            jgraphics_line_to(g3, w - 0.5, long(ctr.y - i) - 0.5);
+            jgraphics_move_to(g3, 0. - 0.5, long(ctr.y + i) - 0.5);
+            jgraphics_line_to(g3, w - 0.5, long(ctr.y + i) - 0.5);
+            jgraphics_move_to(g3, long(ctr.x - i) - 0.5, 0. - 0.5);
+            jgraphics_line_to(g3, long(ctr.x - i) - 0.5, w - 0.5);
+            jgraphics_move_to(g3, long(ctr.x + i) - 0.5, 0. - 0.5);
+            jgraphics_line_to(g3, long(ctr.x + i) - 0.5, w - 0.5);
             jgraphics_set_line_width(g3, 2);
             jgraphics_scale(g3, 0.25, 0.25);
             jgraphics_stroke(g3);
@@ -1573,16 +1608,16 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
         double radius = x->f_zoom_factor * (maxctr*2) / 10.;
         for(int i = 5; i > 0; i--)
         {
-            jgraphics_set_line_width(g3, 1);
+            jgraphics_set_line_width(g3, 2);
             jgraphics_set_source_jrgba(g3, &white);
-            jgraphics_arc(g3, ctr.x, ctr.y, (double)i * radius - 1,  0., JGRAPHICS_2PI);
+            jgraphics_arc(g3, long(ctr.x)+0.5, long(ctr.y)+0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
             jgraphics_scale(g3, 0.5, 0.5); // tricks to draw a 0.5 line width
             jgraphics_stroke(g3);
             jgraphics_scale(g3, 2, 2);
             
             jgraphics_set_line_width(g3, 2);
             jgraphics_set_source_jrgba(g3, &black);
-            jgraphics_arc(g3, ctr.x - 0.5, ctr.y - 0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
+            jgraphics_arc(g3, long(ctr.x) - 0.5, long(ctr.y) - 0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
             jgraphics_scale(g3, 0.5, 0.5);
             jgraphics_stroke(g3);
             jgraphics_scale(g3, 2, 2);
@@ -1866,6 +1901,9 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
     
+    x->f_rect_selection_exist = -1;
+    x->f_rect_selection.width = x->f_rect_selection.height = 0.;
+        
     for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
@@ -1874,6 +1912,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             x->f_index_of_selected_source = i;
         }
     }
+    
     if(x->f_index_of_selected_source == -1)
     {
         for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
@@ -1932,6 +1971,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                     atom_setsym(av+1, gensym("mute"));
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
+                    hoamap_bang(x);
                     x->f_source_manager->groupRemoveWithSources(x->f_index_of_group_to_remove);
                     break;
                 }
@@ -2045,15 +2085,14 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         jpopupmenu_destroy(popup);
     }
     
-    x->f_rect_selection_exist = -1;
-    x->f_rect_selection.width =  x->f_rect_selection.height = 0.;
-    x->f_rect_selection.x = pt.x;
-    x->f_rect_selection.y = pt.y;
     if(x->f_index_of_selected_source == -1 && x->f_index_of_selected_group == -1)
     {
+        x->f_rect_selection.x = pt.x;
+        x->f_rect_selection.y = pt.y;
         x->f_rect_selection_exist = 1;
     }
-    hoamap_mousedrag(x, patcherview, pt, modifiers);
+    
+    //hoamap_mousedrag(x, patcherview, pt, modifiers);
     if(x->f_source_trajectory->getRecording())
         clock_set(x->f_clock, 100);
 }
@@ -2064,6 +2103,8 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     coordinatesCartesian cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
+    
+    t_pt mousedelta = {x->f_cursor_position.x - cursor.x, x->f_cursor_position.y - cursor.y};
 	
     /* Deplacement d'une source */
 	if (x->f_index_of_selected_source != -1)
@@ -2072,6 +2113,15 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
         else if(modifiers == 18 || modifiers == 274)
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
+        else if (modifiers == 17)
+        {
+            if (fabs(mousedelta.x) >= fabs(mousedelta.y)) {
+                x->f_source_manager->sourceSetAbscissa(x->f_index_of_selected_source, cursor.x);
+            }
+            else
+                x->f_source_manager->sourceSetOrdinate(x->f_index_of_selected_source, cursor.y);
+            //if (x->f_cartConstrain == 1) x->f_cartConstrain = (pt.y >= pt.x) + 2;
+        }
         else
             x->f_source_manager->sourceSetCartesian(x->f_index_of_selected_source, cursor.x, cursor.y);
     }
@@ -2087,15 +2137,17 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         else
             x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);            
     }
-    /* Selection de plusieurs source pour la création d'un groupe */
-    else
+    else /* Selection de plusieurs source pour la création d'un groupe */
     {
 		x->f_rect_selection.width = pt.x - x->f_rect_selection.x;
 		x->f_rect_selection.height = pt.y - x->f_rect_selection.y;
 		jbox_invalidate_layer((t_object *)x, NULL, gensym("rect_selection_layer"));
 		jbox_redraw((t_jbox *)x);
-        
     }
+    
+    x->f_cursor_position.x = cursor.x;
+    x->f_cursor_position.y = cursor.y;
+    
     object_notify(x, _sym_modified, NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
@@ -2113,8 +2165,8 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
     
     if(x->f_rect_selection_exist)
     {
-        x->f_rect_selection.width = pt.x - x->f_rect_selection.x;
-		x->f_rect_selection.height = pt.y - x->f_rect_selection.y;
+        //x->f_rect_selection.width = pt.x - x->f_rect_selection.x;
+		//x->f_rect_selection.height = pt.y - x->f_rect_selection.y;
         int indexOfNewGroup = -1;
         for(int i = 0; indexOfNewGroup == -1; i++)
         {
@@ -2135,7 +2187,7 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
             {
                 double abscissaOfSource = x->f_source_manager->sourceGetAbscissa(i);
                 double ordinateOfSource = x->f_source_manager->sourceGetOrdinate(i);
-                
+                                
                 if(((abscissaOfSource > x1 && abscissaOfSource < x2) || (abscissaOfSource < x1 && abscissaOfSource > x2)) && ((ordinateOfSource > y1 && ordinateOfSource < y2) || (ordinateOfSource < y1 && ordinateOfSource > y2)))
                 {
                     x->f_source_manager->groupSetSource(indexOfNewGroup, i);
@@ -2143,8 +2195,10 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
                 }
             }
         }
-        x->f_rect_selection_exist = 0;
     }
+    
+    x->f_rect_selection_exist = x->f_rect_selection.width = x->f_rect_selection.height = 0;
+    
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("rect_selection_layer"));
@@ -2251,26 +2305,26 @@ void hoamap_color_picker(t_hoamap *x)
     if(x->f_colorpicker )
         object_free(x->f_colorpicker);
     
-       x->f_patcher = NULL;
-       x->f_colorpicker = NULL;
-       
-       t_dictionary *dico = dictionary_new();
-       char parsebuf[256];
-       t_atom a;
-       long ac = 0;
-       t_atom *av = NULL;
-       
-       sprintf(parsebuf,"@defrect 0 0 128 32 @openrect 0 0 128 32 @title color @enablehscroll 0 @enablevscroll 0 @presentation 0 @toolbarid \"\"");
-       atom_setparse(&ac,&av,parsebuf);
-       attr_args_dictionary(dico,ac,av);
-       atom_setobj(&a,dico);
-       sysmem_freeptr(av);
-       x->f_patcher = (t_object *)object_new_typed(CLASS_NOBOX,gensym("jpatcher"),1, &a);
-       freeobject((t_object *)dico);
-       
-       x->f_colorpicker = newobject_sprintf(x->f_patcher, "@maxclass colorpicker @patching_rect 0 0 128 32");
-       object_attach_byptr_register(x, x->f_patcher, CLASS_NOBOX);
-       object_attach_byptr_register(x, x->f_colorpicker, CLASS_BOX);
+    x->f_patcher = NULL;
+    x->f_colorpicker = NULL;
+    
+    t_dictionary *dico = dictionary_new();
+    char parsebuf[256];
+    t_atom a;
+    long ac = 0;
+    t_atom *av = NULL;
+    
+    sprintf(parsebuf,"@defrect 0 0 128 32 @openrect 0 0 128 32 @title color @enablehscroll 0 @enablevscroll 0 @presentation 0 @toolbarid \"\"");
+    atom_setparse(&ac,&av,parsebuf);
+    attr_args_dictionary(dico,ac,av);
+    atom_setobj(&a,dico);
+    sysmem_freeptr(av);
+    x->f_patcher = (t_object *)object_new_typed(CLASS_NOBOX,gensym("jpatcher"),1, &a);
+    freeobject((t_object *)dico);
+    
+    x->f_colorpicker = newobject_sprintf(x->f_patcher, "@maxclass colorpicker @patching_rect 0 0 128 32");
+    object_attach_byptr_register(x, x->f_patcher, CLASS_NOBOX);
+    object_attach_byptr_register(x, x->f_colorpicker, CLASS_BOX);
     
     object_method(x->f_colorpicker, gensym("bang"));
 }
@@ -2291,7 +2345,10 @@ void hoamap_text_field(t_hoamap *x)
     long ac = 0;
     t_atom *av = NULL;
     
-    sprintf(parsebuf,"@defrect 0 0 256 32 @openrect 0 0 256 32 @title Description @enablehscroll 0 @enablevscroll 0 @presentation 0 @toolbarvisible 0 @retain 1\"\"");
+    int posX, posY;
+    jmouse_getposition_global(&posX, &posY);
+    
+    sprintf(parsebuf,"@defrect %i %i 256 32 @openrect 0 0 256 32 @title Description @enablehscroll 0 @enablevscroll 0 @presentation 0 @toolbarvisible 0 @retain 1\"\"", posX, posY);
     atom_setparse(&ac,&av,parsebuf);
     attr_args_dictionary(dico,ac,av);
     atom_setobj(&a,dico);
@@ -2376,7 +2433,8 @@ t_textfield* textfield_new(t_symbol *name, short argc, t_atom *argv)
          */
 		t_jrgba textcolor = {0., 0., 0., 1.};
 		textfield = jbox_get_textfield((t_object*) x);
-		if (textfield) {
+		if (textfield)
+        {
 			textfield_set_editonclick(textfield, 1);
 			textfield_set_textmargins(textfield, 3, 3, 3, 3);
 			textfield_set_textcolor(textfield, &textcolor);
@@ -2444,6 +2502,7 @@ long textfield_keyfilter(t_textfield *x, t_object *patcherview, long *keycode, l
     t_object *textfield = jbox_get_textfield((t_object *)x);
     object_method(textfield, gensym("gettextptr"), &text, &size);
     object_notify(x, gensym("text"), text);
+    if (!rv) object_notify(x, gensym("endeditbox"), NULL);
 	return rv;
 }
 
@@ -2516,7 +2575,6 @@ t_max_err textfield_notify(t_textfield *x, t_symbol *s, t_symbol *msg, void *sen
                 jbox_redraw((t_jbox *)x);
             }
         }
-        
     }
     return MAX_ERR_NONE;
 }

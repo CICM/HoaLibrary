@@ -20,7 +20,7 @@ ARCHS = i386 x86_64
 C74SUPPORT = $(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support
 HEADER_SEARCH_PATHS = /Developer/Headers/FlatCarbon "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
 FRAMEWORK_SEARCH_PATHS = "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes" "$(C74SUPPORT)/jit-includes"
-DSTROOT = $(SRCROOT)/../_sdk-build
+DSTROOT = $(SRCROOT)/../builds
 // (This next path is relative to DSTROOT)
 INSTALL_PATH = /
 

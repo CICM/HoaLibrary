@@ -108,7 +108,6 @@ void AmbisonicsViewer::computeRepresentation()
             m_vector_color[i] = 1;
         else
             m_vector_color[i] = -1;
-        
     }
 
 }
