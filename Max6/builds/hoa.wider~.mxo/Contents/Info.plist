@@ -13,21 +13,21 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
-	<string>hoa.wider~ HoaLibrary 1.2, Copyright 2010 Cycling '74</string>
+	<string>hoa.wider~ HoaLibrary 1.3, Copyright 2010 Cycling '74</string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
 	<key>CFBundleShortVersionString</key>
-	<string>HoaLibrary 1.2</string>
+	<string>HoaLibrary 1.3</string>
 	<key>CFBundleSignature</key>
 	<string>max2</string>
 	<key>CFBundleVersion</key>
-	<string>HoaLibrary 1.2</string>
+	<string>HoaLibrary 1.3</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>4H1003</string>
+	<string>4H1503</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
@@ -35,8 +35,8 @@
 	<key>DTSDKName</key>
 	<string>macosx10.7</string>
 	<key>DTXcode</key>
-	<string>0462</string>
+	<string>0463</string>
 	<key>DTXcodeBuild</key>
-	<string>4H1003</string>
+	<string>4H1503</string>
 </dict>
 </plist>

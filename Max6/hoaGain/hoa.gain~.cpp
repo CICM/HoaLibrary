@@ -41,9 +41,9 @@ extern "C" {
 #endif
 }
 
-#include "../../Sources64/CicmLibrary/CicmDefine.h"
-#include "../../Sources64/CicmLibrary/CicmTools.h"
-#include "../../Sources64/CicmLibrary/CicmLine2.h"
+#include "../../Sources/CicmLibrary/CicmDefine.h"
+#include "../../Sources/CicmLibrary/CicmTools.h"
+#include "../../Sources/CicmLibrary/CicmLine2.h"
 
 #define MAX_IO 64
 #define MIN_IO 1

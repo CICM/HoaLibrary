@@ -63,6 +63,12 @@ typedef struct  _space
 	double		f_rayonGlobal;
 	double		f_rayonCircle;
     double      f_rayonExtCircle;
+    
+    t_jsurface* f_cursor_gain;
+    t_jsurface* f_cursor_rotation;
+    
+    t_pt        f_mousepos;
+    int         f_cursorType;
 
 	AmbisonicsViewer*        f_viewer;
     AmbisonicsRecomposer*    f_recomposer;
@@ -95,6 +101,7 @@ t_max_err space_setvalueof(t_space *x, long ac, t_atom *av);
 t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av);
 
 /* Interaction ***************************************/
+void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_drag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_enddrag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -110,6 +117,7 @@ void space_paint(t_space *x, t_object *view);
 void draw_background(t_space *x, t_object *view, t_rect *rect);
 void draw_harmonics(t_space *x,  t_object *view, t_rect *rect);
 void draw_microphones_points(t_space *x, t_object *view, t_rect *rect);
+void draw_cursor(t_space *x, t_object *view, t_rect *rect);
 
 int C74_EXPORT main()
 {
@@ -126,6 +134,7 @@ int C74_EXPORT main()
 	class_addmethod(c, (method)space_notify,          "notify",         A_CANT, 0);
 	class_addmethod(c, (method)space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_down,      "mousedown",      A_CANT, 0);
+    class_addmethod(c, (method)space_mousemove,       "mousemove",      A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_drag,      "mousedrag",      A_CANT, 0);
     class_addmethod(c, (method)space_mouse_enddrag,   "mouseup",        A_CANT, 0);
     class_addmethod(c, (method)space_preset,          "preset",         0);
@@ -363,6 +372,90 @@ void space_paint(t_space *x, t_object *view)
 	draw_background(x, view, &rect);
 	draw_harmonics(x, view, &rect);
 	draw_microphones_points(x, view, &rect);
+    draw_cursor(x, view, &rect);
+}
+
+void draw_cursor(t_space *x, t_object *view, t_rect *rect)
+{
+	t_jmatrix transform;
+    
+    t_jrgba black = {0,0,0,1.};
+    
+    double size;
+    
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("cursor_layer"), rect->width, rect->height);
+	
+	if (g)
+	{
+        if (x->f_cursorType != 0)
+        {
+            jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+            jgraphics_set_matrix(g, &transform);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_rotate(g, x->f_mousepos.y);
+            jgraphics_translate(g, 0, x->f_mousepos.x*rect->width*0.5);
+            
+            if (x->f_cursorType == 1) // gain cursor
+            {
+                size = 10;
+                
+                jgraphics_move_to(g, 0, -size*0.6);
+                jgraphics_line_to(g, 0, size*0.6);
+                jgraphics_set_line_width(g, 2);
+                jgraphics_stroke(g);
+                
+                jgraphics_move_to(g, 0, -size);
+                jgraphics_line_to(g, -(size*0.4), -size*0.5);
+                jgraphics_line_to(g, (size*0.4), -size*0.5);
+                jgraphics_line_to(g, 0, -size);
+                jgraphics_fill(g);
+                
+                jgraphics_move_to(g, 0, size);
+                jgraphics_line_to(g, -(size*0.6), size*0.5);
+                jgraphics_line_to(g, (size*0.6), size*0.5);
+                jgraphics_line_to(g, 0, size);
+                jgraphics_fill(g);
+                
+                jmouse_setcursor(view, (t_object *)x, JMOUSE_CURSOR_NONE);
+            }
+            
+            if (x->f_cursorType == 2) // rotation cursor
+            {
+                size = 6;
+                jgraphics_translate(g, size*1.5, 0);
+                jgraphics_ovalarc(g, -size*1.5, 0, size*1.5, size*0.5, CICM_2PI*0.1, CICM_2PI*0.4);
+                jgraphics_set_line_width(g, 2);
+                jgraphics_stroke(g);
+                
+                jgraphics_translate(g, -size*1.5, 0);
+                
+                jgraphics_translate(g, -size*0.4, size*0.7);
+                jgraphics_rotate(g, 0.4);
+                jgraphics_move_to(g, -size*2, 0);
+                jgraphics_line_to(g, -size*1, size*0.6);
+                jgraphics_line_to(g, -size*1, -size*0.6);
+                jgraphics_fill(g);
+                
+                jgraphics_translate(g, size*0.4, -size*0.7);
+                jgraphics_rotate(g, -0.4);
+                
+                jgraphics_translate(g, size*0.2, size*0.5);
+                jgraphics_rotate(g, -0.4);
+                jgraphics_move_to(g, size*2, 0);
+                jgraphics_line_to(g, size*1, size*0.6);
+                jgraphics_line_to(g, size*1, -size*0.6);
+                jgraphics_fill(g);
+                
+                jmouse_setcursor(view, (t_object *)x, JMOUSE_CURSOR_NONE);
+            }
+        }
+        else
+        {
+            jmouse_setcursor(view, (t_object*)x, JMOUSE_CURSOR_ARROW);
+        }
+        jbox_end_layer((t_object*)x, view, gensym("cursor_layer"));
+	}
+	jbox_paint_layer((t_object *)x, view, gensym("cursor_layer"), 0., 0.);
 }
 
 void draw_background(t_space *x,  t_object *view, t_rect *rect)
@@ -424,7 +517,6 @@ void draw_background(t_space *x,  t_object *view, t_rect *rect)
 			y2 = x->f_rayonExtCircle;
 			
             /* Inner shadow */
-            //if ( (rotateAngle <= CICM_PI && rotateAngle > 0.) )
             if ( Tools::isInsideDeg( Tools::radToDeg(rotateAngle), 46., -135.) )
             {
                 jgraphics_move_to(g, -0.5, y1-0.5);
@@ -468,19 +560,23 @@ void draw_harmonics(t_space *x,  t_object *view, t_rect *rect)
 		if(x->f_viewer->getBiggestContribution() != 0.)
 		{
             double max = 0.;
+            
             double normalize = 1;
             for(int i = 0 ; i < x->f_number_of_microphones; i++)
             {
                 if(x->f_microphonesValues[i] > max)
                     max = x->f_microphonesValues[i];
             }
-            normalize = max / x->f_viewer->getBiggestContribution();
+            //normalize = max / x->f_viewer->getBiggestContribution();
+            normalize = max;
+            
             
             if(x->f_mode == 1)
-                normalize = x->f_rotation_max / x->f_viewer->getBiggestContribution();
+                normalize = x->f_rotation_max;
+                //normalize = x->f_rotation_max / x->f_viewer->getBiggestContribution();
             
             double factor = x->f_rayonExtCircle * normalize;
-			
+            
 			jgraphics_set_source_jrgba(g, &x->f_color_harmonics);
 			for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i++)
 			{
@@ -545,6 +641,34 @@ void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
 /*                      Souris                            */
 /**********************************************************/
 
+void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    //post("mod : %ld", modifiers);
+    double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
+    double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
+    double radius   = Tools::radius(mapped_x, mapped_y);
+    double angle    = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
+    
+    x->f_mousepos.x = radius;
+    x->f_mousepos.y = angle;
+    
+    if(modifiers == 132) // ctrl : rotation
+    {
+        x->f_cursorType = 2;
+    }
+    else if(modifiers == 2) // shift : gain
+    {
+        x->f_cursorType = 1;
+    }
+    else
+    {
+        x->f_cursorType = 0;
+    }
+    
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
+    jbox_redraw((t_jbox *)x);
+}
+
 void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     // cmd = 17
@@ -586,22 +710,36 @@ void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers
 
 void space_mouse_drag(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
+    double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
+    double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
+    double radius   = Tools::radius(mapped_x, mapped_y);
+    double angle    = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
+    
+    x->f_mousepos.x = radius;
+    x->f_mousepos.y = angle;
+    
     if(x->f_mode == 0)
+    {
+        x->f_cursorType = 0;
         space_draw_points(x, patcherview, pt, modifiers);
+    }
     else if(x->f_mode == 1)
+    {
+        x->f_cursorType = 2;
         space_rotate_points(x, patcherview, pt, modifiers);
+    }
     else if(x->f_mode == 2)
+    {
+        x->f_cursorType = 1;
         space_retract_points(x, patcherview, pt, modifiers);
+    }
+    
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
+    jbox_redraw((t_jbox *)x);
 }
 
 void space_mouse_enddrag(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    /*
-    if(x->f_mode == 2)
-    {
-        for(int i = 0; i < x->f_number_of_microphones; i++)
-            x->f_microphonesValues[i] = x->f_mode_values[i];
-    }*/
     space_compute(x);
 }
 
@@ -695,7 +833,7 @@ void space_retract_points(t_space *x, t_object *patcherview, t_pt pt, long modif
 void space_compute(t_space *x)
 {
     x->f_recomposer->processFixe(x->f_microphonesValues, x->f_harmonicsValues);
-    x->f_viewer->process(x->f_harmonicsValues);
+    x->f_viewer->processContribAndRep(x->f_harmonicsValues);
 
     jbox_invalidate_layer((t_object *)x, NULL, gensym("rotation_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));

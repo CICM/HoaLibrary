@@ -24,7 +24,7 @@
  */
 
 
-#include "AmbisonicConvolver.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
