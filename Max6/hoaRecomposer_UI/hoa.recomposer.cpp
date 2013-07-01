@@ -121,7 +121,7 @@ void HoaRecomposerUI_float(t_HoaRecomposerUI *x, double f);
 void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *av);
 
 void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av);
-void HoaRecomposerUI_angle(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av);
+void HoaRecomposerUI_angles(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av);
 void HoaRecomposerUI_wide(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av);
 void HoaRecomposerUI_nb_hp(t_HoaRecomposerUI *x, int v);
 
@@ -163,8 +163,8 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) HoaRecomposerUI_notify,          "notify",        A_CANT,   0);
 	class_addmethod(c, (method) HoaRecomposerUI_bang,            "bang",                 0L,0);
     class_addmethod(c, (method) HoaRecomposerUI_set,             "set",           A_GIMME,  0);
-    class_addmethod(c, (method) HoaRecomposerUI_angle,           "angle",         A_GIMME,  0);
-    class_addmethod(c, (method) HoaRecomposerUI_wide,            "wide",          A_GIMME,  0);
+    class_addmethod(c, (method) HoaRecomposerUI_angles,          "angles",         A_GIMME,  0);
+    class_addmethod(c, (method) HoaRecomposerUI_wide,            "directivities",          A_GIMME,  0);
     class_addmethod(c, (method) HoaRecomposerUI_reset,           "reset",         A_GIMME,  0);
 	class_addmethod(c, (method) HoaRecomposerUI_anything,        "anything",      A_GIMME,  0);
 	class_addmethod(c, (method) HoaRecomposerUI_mousedown,       "mousedown",     A_CANT,   0);
@@ -311,10 +311,10 @@ void HoaRecomposerUI_free(t_HoaRecomposerUI *x)
 void HoaRecomposerUI_assist(t_HoaRecomposerUI *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) {
-		sprintf(s,"(list) Set Microphones Angles");
+		sprintf(s,"(list) Set Microphones Directivities and Angles Values");
 	} else {
 		if (a == 0) {
-			sprintf(s,"(list) Microphones Angles");
+			sprintf(s,"(list) Microphones Directivities and Angles Values");
 		}
 		else if (a == 1) {
 			sprintf(s,"Infos output");
@@ -333,8 +333,8 @@ void HoaRecomposerUI_preset(t_HoaRecomposerUI *x)
     
     for(int i = 0; i < x->f_numberOfMic; i++)
     {
-        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), gensym("angle"), i, (float)x->f_mics->getAngleInRadian(i));
-        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), gensym("wide"), i, (float)x->f_mics->getWiderValue(i));
+        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), gensym("angles"), i, (float)x->f_mics->getAngleInRadian(i));
+        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), gensym("directivities"), i, (float)x->f_mics->getWiderValue(i));
     }
 }
 
@@ -402,7 +402,7 @@ void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *
     }
     else if (ac >= 1 && atom_gettype(av) == A_SYM)
     {
-        if (atom_getsym(av) == gensym("angle"))
+        if (atom_getsym(av) == gensym("angles"))
         {
             if (ac >= 2)
             {
@@ -417,7 +417,7 @@ void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *
                 x->f_mics->resetAngles();
             }
         }
-        else if (atom_getsym(av) == gensym("wide"))
+        else if (atom_getsym(av) == gensym("directivities"))
         {
             if (ac >= 2)
             {
@@ -449,7 +449,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
 	
     if (ac && av)
     {
-        if ( name == gensym("angle") )
+        if ( name == gensym("angles") )
         {
             if (atom_gettype(av+isSet) == A_LONG) // index + angle
             {
@@ -471,7 +471,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
                 x->f_mics->setAnglesInRadian(list, ac);
             }
         }
-        else if ( name == gensym("wide") )
+        else if ( name == gensym("directivities") )
         {
             if (atom_gettype(av+isSet) == A_LONG) // index + wide
             {
@@ -503,7 +503,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
 	jbox_redraw((t_jbox *)x);
 }
 
-void HoaRecomposerUI_angle(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
+void HoaRecomposerUI_angles(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
 {
     HoaRecomposerUI_set(x, s, ac, av); // notifying in set method
     HoaRecomposerUI_output(x);
@@ -573,13 +573,13 @@ void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
     for (int i=0; i<nmics; i++) {
         atom_setfloat(av_left+i, x->f_mics->getAngleInRadian(i));
     }
-    outlet_anything(x->f_out, gensym("angle"), nmics, av_left);
+    outlet_anything(x->f_out, gensym("angles"), nmics, av_left);
     
     // wider values of microphones
     for (int i=0; i<nmics; i++) {
         atom_setfloat(av_left+i, x->f_mics->getWiderValue(i));
     }
-    outlet_anything(x->f_out, gensym("wide"), nmics, av_left);
+    outlet_anything(x->f_out, gensym("directivities"), nmics, av_left);
 }
 
 //========================= Notify Methods :
@@ -1236,5 +1236,3 @@ bool isMicInsideRect(t_HoaRecomposerUI *x, int micIndex, t_rect rectSelection)
     micPoint.y = ( (w - micPoint.y) - (w*0.5) );
     return jgraphics_ptinrect(micPoint, rectSelection);
 }
-
-
