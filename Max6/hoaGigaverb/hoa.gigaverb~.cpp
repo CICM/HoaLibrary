@@ -23,8 +23,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsGigaverb.h"
-
 extern "C" 
 {
 	#include "ext.h"
@@ -34,6 +32,7 @@ extern "C"
 	#include "ext_globalsymbol.h"
 }
 
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _gigaverb
 {

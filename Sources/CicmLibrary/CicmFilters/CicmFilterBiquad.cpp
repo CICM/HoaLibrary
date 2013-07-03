@@ -100,7 +100,7 @@ void FilterBiquad::computeCoefficients()
     switch (m_type)
     {
         case Cicm_Biquad_Lowpass:
-            norm = 1 / (1 + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
+            norm = 1. / (double)(1. + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
             m_coeff_a0 = m_frequency_factor * m_frequency_factor * norm;
             m_coeff_a1 = 2 * m_coeff_a0;
             m_coeff_a2 = m_coeff_a0;
@@ -109,7 +109,7 @@ void FilterBiquad::computeCoefficients()
             break;
             
         case Cicm_Biquad_Highpass:
-            norm = 1 / (1 + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
+            norm = 1. / (double)(1. + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
             m_coeff_a0 = 1 * norm;
             m_coeff_a1 = -2 * m_coeff_a0;
             m_coeff_a2 = m_coeff_a0;
@@ -118,12 +118,12 @@ void FilterBiquad::computeCoefficients()
             break;
             
         case Cicm_Biquad_Bandpass:
-            norm = 1 / (1 + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
+            norm = 1. / (double)(1. + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
             m_coeff_a0 = m_frequency_factor / m_q_value * norm;
-            m_coeff_a1 = 0;
+            m_coeff_a1 = 0.;
             m_coeff_a2 = -m_coeff_a0;
-            m_coeff_b1 = 2 * (m_frequency_factor * m_frequency_factor - 1) * norm;
-            m_coeff_b2 = (1 - m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor) * norm;
+            m_coeff_b1 = 2. * (double)(m_frequency_factor * m_frequency_factor - 1.) * norm;
+            m_coeff_b2 = (double)(1. - m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor) * norm;
             break;
             
         case Cicm_Biquad_Notch:

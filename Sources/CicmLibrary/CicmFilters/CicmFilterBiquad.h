@@ -31,8 +31,8 @@
 enum
 {
     Cicm_Biquad_Lowpass = 0,
-    Cicm_Biquad_Highpass,
-    Cicm_Biquad_Bandpass,
+    Cicm_Biquad_Highpass = 1,
+    Cicm_Biquad_Bandpass = 2,
     Cicm_Biquad_Notch,
     Cicm_Biquad_Peak,
     Cicm_Biquad_Lowshelf,
@@ -130,8 +130,6 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
         {
-            if(m_type == Cicm_Biquad_Ambisonics)
-                inputs[i] *= m_weight;
             outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
             m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
             m_delay_two = inputs[i] * m_coeff_a2 - m_coeff_b2 * outputs[i];

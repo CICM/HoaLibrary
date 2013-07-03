@@ -66,7 +66,7 @@
 #define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (Cicm_Vector_Double)malloc(size * sizeof(Cicm_Double)); packedComplex[0].imagp = (Cicm__Vector_Double *)malloc(size * sizeof(Cicm_Double));
 
 /**************** FREE *****************/
-#define Cicm_Free(pointor) free(pointor)
+#define Cicm_Free(pointor) free(pointor); pointor = NULL;
 #define Cicm_Free_Complex_Packed(vector) free(vector[0].realp); free(vector[0].imagp);
 
 /**************** SET ******************/
