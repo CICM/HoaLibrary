@@ -471,7 +471,7 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *sym, long argc, t_atom *argv)
     {
 		strcpy(ps, atom_getsym(argv)->s_name);
         //if(locatefile_extended(ps, &outvol, &outtype, &filetypelist, -1))
-        if(locatefile_extended(ps, &outvol, &outtype, &filetypelist, 1))
+        if(locatefile_extended(ps, &outvol, &outtype, &filetypelist, -1))
            path_createsysfile(ps, outvol, filetypelist, &ref);
 	}
     
@@ -724,20 +724,15 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             else if(sym == gensym("read"))
             {
                 t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
-                defer_low( (t_object *)x,(method)hoamap_doread, sym,0, NULL);
+                defer( (t_object *)x,(method)hoamap_doread, sym, 0, NULL);
                 //defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
             }
             else if(sym == gensym("write"))
             {
                 t_atom parameter[2];
-                //atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
-                atom_setsym(parameter, gensym(""));
-                
+                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
                 atom_setsym(parameter+1, gensym("slot"));
-                
-                //post("boom");
-
-                defer_low(x,(method)hoamap_dowrite, gensym(""), 2, parameter);
+                defer(x,(method)hoamap_dowrite, gensym(""), 2, parameter);
                 //defer_low(x,(method)hoamap_dowrite, NULL, 2, parameter);
             }
             else if(sym == gensym("storesource"))
@@ -767,7 +762,7 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             t_symbol *sym = atom_getsym(av);
             if(sym == gensym("record"))
                 x->f_source_trajectory->setRecording(atom_getlong(av+1));
-            if(sym == gensym("limit"))
+            else if(sym == gensym("limit"))
                 x->f_source_trajectory->setLimited(atom_getlong(av+1));
             else if(sym == gensym("erase"))
                 x->f_source_trajectory->erase();
@@ -776,7 +771,7 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             else if(sym == gensym("read"))
             {
                 t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
-                defer_low( (t_object *)x,(method)hoamap_doread, sym,0, NULL);
+                defer( (t_object *)x,(method)hoamap_doread, sym,0, NULL);
                 //defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
             }
             else if(sym == gensym("write"))
@@ -784,7 +779,7 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 t_atom parameter[2];
                 atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
                 atom_setsym(parameter+1, gensym("trajectory"));
-                defer_low(x,(method)hoamap_dowrite, NULL, 2, parameter);
+                defer(x,(method)hoamap_dowrite, gensym(""), 2, parameter);
             }
         }
         else if(atom_gettype(av) == A_FLOAT)

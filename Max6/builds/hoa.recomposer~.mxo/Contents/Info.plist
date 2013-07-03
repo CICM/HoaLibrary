@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>12E55</string>
+	<string>12D78</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
@@ -31,9 +31,9 @@
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>12E55</string>
+	<string>11E52</string>
 	<key>DTSDKName</key>
-	<string></string>
+	<string>macosx10.7</string>
 	<key>DTXcode</key>
 	<string>0463</string>
 	<key>DTXcodeBuild</key>

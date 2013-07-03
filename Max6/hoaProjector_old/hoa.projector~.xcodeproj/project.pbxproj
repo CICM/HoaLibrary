@@ -1,0 +1,369 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2CF61A4D1712D2FD0062A8EA /* hoa.projector~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF61A4A1712D2FD0062A8EA /* hoa.projector~.cpp */; };
+		8F4CB83E172A9BAC0016BFEC /* AmbisonicsProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CB83C172A9BAC0016BFEC /* AmbisonicsProjector.cpp */; };
+		8F4CB83F172A9BAC0016BFEC /* AmbisonicsProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4CB83D172A9BAC0016BFEC /* AmbisonicsProjector.h */; };
+		8F4CB841172A9CEF0016BFEC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CB840172A9CEF0016BFEC /* Accelerate.framework */; };
+		8F4CB843172A9CFA0016BFEC /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CB842172A9CFA0016BFEC /* MaxAudioAPI.framework */; };
+		8F4CB84A172A9D270016BFEC /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CB848172A9D270016BFEC /* Ambisonics.cpp */; };
+		8F4CB84B172A9D270016BFEC /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4CB849172A9D270016BFEC /* Ambisonics.h */; };
+		8F9518B91733C942000402C7 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518B01733C942000402C7 /* CicmDefine.h */; };
+		8F9518BA1733C942000402C7 /* CicmFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518B21733C942000402C7 /* CicmFilter.cpp */; };
+		8F9518BB1733C942000402C7 /* CicmFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518B31733C942000402C7 /* CicmFilter.h */; };
+		8F9518BC1733C942000402C7 /* CicmFilterBiquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518B41733C942000402C7 /* CicmFilterBiquad.cpp */; };
+		8F9518BD1733C942000402C7 /* CicmFilterBiquad.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518B51733C942000402C7 /* CicmFilterBiquad.h */; };
+		8F9518BE1733C942000402C7 /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F9518B61733C942000402C7 /* CicmLine.cpp */; };
+		8F9518BF1733C942000402C7 /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518B71733C942000402C7 /* CicmLine.h */; };
+		8F9518C01733C942000402C7 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F9518B81733C942000402C7 /* CicmTools.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
+		2CF61A4A1712D2FD0062A8EA /* hoa.projector~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.projector~.cpp"; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.projector~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4CB83C172A9BAC0016BFEC /* AmbisonicsProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsProjector.cpp; sourceTree = "<group>"; };
+		8F4CB83D172A9BAC0016BFEC /* AmbisonicsProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsProjector.h; sourceTree = "<group>"; };
+		8F4CB840172A9CEF0016BFEC /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F4CB842172A9CFA0016BFEC /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		8F4CB848172A9D270016BFEC /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ambisonics.cpp; path = ../hoaAmbisonics/Ambisonics.cpp; sourceTree = "<group>"; };
+		8F4CB849172A9D270016BFEC /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ambisonics.h; path = ../hoaAmbisonics/Ambisonics.h; sourceTree = "<group>"; };
+		8F9518B01733C942000402C7 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
+		8F9518B21733C942000402C7 /* CicmFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilter.cpp; sourceTree = "<group>"; };
+		8F9518B31733C942000402C7 /* CicmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilter.h; sourceTree = "<group>"; };
+		8F9518B41733C942000402C7 /* CicmFilterBiquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterBiquad.cpp; sourceTree = "<group>"; };
+		8F9518B51733C942000402C7 /* CicmFilterBiquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterBiquad.h; sourceTree = "<group>"; };
+		8F9518B61733C942000402C7 /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
+		8F9518B71733C942000402C7 /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
+		8F9518B81733C942000402C7 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2FBBEADC08F335360078DB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F4CB843172A9CFA0016BFEC /* MaxAudioAPI.framework in Frameworks */,
+				8F4CB841172A9CEF0016BFEC /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* iterator */ = {
+			isa = PBXGroup;
+			children = (
+				8F4CB842172A9CFA0016BFEC /* MaxAudioAPI.framework */,
+				8F4CB840172A9CEF0016BFEC /* Accelerate.framework */,
+				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
+				8F9518AF1733C942000402C7 /* CicmLibrary */,
+				08FB77ADFE841716C02AAC07 /* Source */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+			);
+			name = iterator;
+			sourceTree = "<group>";
+		};
+		08FB77ADFE841716C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				8F4CB848172A9D270016BFEC /* Ambisonics.cpp */,
+				8F4CB849172A9D270016BFEC /* Ambisonics.h */,
+				8F4CB83C172A9BAC0016BFEC /* AmbisonicsProjector.cpp */,
+				8F4CB83D172A9BAC0016BFEC /* AmbisonicsProjector.h */,
+				2CF61A4A1712D2FD0062A8EA /* hoa.projector~.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F9518AF1733C942000402C7 /* CicmLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				8F9518B01733C942000402C7 /* CicmDefine.h */,
+				8F9518B11733C942000402C7 /* CicmFilters */,
+				8F9518B61733C942000402C7 /* CicmLine.cpp */,
+				8F9518B71733C942000402C7 /* CicmLine.h */,
+				8F9518B81733C942000402C7 /* CicmTools.h */,
+			);
+			name = CicmLibrary;
+			path = ../CicmLibrary;
+			sourceTree = "<group>";
+		};
+		8F9518B11733C942000402C7 /* CicmFilters */ = {
+			isa = PBXGroup;
+			children = (
+				8F9518B21733C942000402C7 /* CicmFilter.cpp */,
+				8F9518B31733C942000402C7 /* CicmFilter.h */,
+				8F9518B41733C942000402C7 /* CicmFilterBiquad.cpp */,
+				8F9518B51733C942000402C7 /* CicmFilterBiquad.h */,
+			);
+			path = CicmFilters;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2FBBEAD708F335360078DB84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F4CB83F172A9BAC0016BFEC /* AmbisonicsProjector.h in Headers */,
+				8F4CB84B172A9D270016BFEC /* Ambisonics.h in Headers */,
+				8F9518B91733C942000402C7 /* CicmDefine.h in Headers */,
+				8F9518BB1733C942000402C7 /* CicmFilter.h in Headers */,
+				8F9518BD1733C942000402C7 /* CicmFilterBiquad.h in Headers */,
+				8F9518BF1733C942000402C7 /* CicmLine.h in Headers */,
+				8F9518C01733C942000402C7 /* CicmTools.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2FBBEAD608F335360078DB84 /* max-external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
+			buildPhases = (
+				2FBBEAD708F335360078DB84 /* Headers */,
+				2FBBEAD808F335360078DB84 /* Resources */,
+				2FBBEADA08F335360078DB84 /* Sources */,
+				2FBBEADC08F335360078DB84 /* Frameworks */,
+				2FBBEADF08F335360078DB84 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "max-external";
+			productName = iterator;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.projector~.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.projector~" */;
+			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FBBEAD608F335360078DB84 /* max-external */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2FBBEAD808F335360078DB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2FBBEADF08F335360078DB84 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2FBBEADA08F335360078DB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CF61A4D1712D2FD0062A8EA /* hoa.projector~.cpp in Sources */,
+				8F4CB83E172A9BAC0016BFEC /* AmbisonicsProjector.cpp in Sources */,
+				8F4CB84A172A9D270016BFEC /* Ambisonics.cpp in Sources */,
+				8F9518BA1733C942000402C7 /* CicmFilter.cpp in Sources */,
+				8F9518BC1733C942000402C7 /* CicmFilterBiquad.cpp in Sources */,
+				8F9518BE1733C942000402C7 /* CicmLine.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2FBBEAD008F335010078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Developer/usr/include,
+					/Developer/usr/local/boost_1_48_0,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					libgsl.a,
+					"-static",
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
+				SDKROOT = macosx10.7;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Development;
+		};
+		2FBBEAD108F335010078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Developer/usr/include,
+					/Developer/usr/local/boost_1_48_0,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					Developer/usr/lib,
+				);
+				OTHER_LDFLAGS = (
+					libgsl.a,
+					"-static",
+					"-lcblas",
+					"-latlas",
+					"-lm",
+				);
+				SDKROOT = macosx10.7;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Deployment;
+		};
+		2FBBEAE108F335360078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				LIBRARY_SEARCH_PATHS = "";
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
+				PRODUCT_NAME = "hoa.projector~";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Development;
+		};
+		2FBBEAE208F335360078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22CF10220EE984600054F513 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/msp-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.0.4/c74support/max-includes\"",
+					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
+				LIBRARY_SEARCH_PATHS = "";
+				LLVM_LTO = YES;
+				OTHER_LDFLAGS = "\"$(C74_SYM_LINKER_FLAGS)\"";
+				PRODUCT_NAME = "hoa.projector~";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /Developer/usr/include";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.projector~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAD008F335010078DB84 /* Development */,
+				2FBBEAD108F335010078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAE108F335360078DB84 /* Development */,
+				2FBBEAE208F335360078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}
