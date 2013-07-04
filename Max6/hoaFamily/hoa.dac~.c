@@ -48,41 +48,55 @@ void *dac_new(t_symbol *s, int argc, t_atom *argv)
 {
 	int i, j, count;
 	t_object *x;
-	t_atom channels[10000];
+	t_atom channels[512];
 	int min, max;
 	count = 0;
-	for(i = 0; i < argc; i++)
+    
+    int symPrepend = 0;
+    
+    if (argc && atom_gettype(argv) == A_SYM)
+    {
+        char *dac_bus_name = atom_getsym(argv)->s_name;
+        if (isalpha(dac_bus_name[0])) // only works if the first letter isn't a number
+        {
+            symPrepend = 1;
+            atom_setsym(channels, atom_getsym(argv));
+        }
+    }
+    
+	for(i = 0; i < (argc-symPrepend); i++)
 	{
-		if(atom_gettype(argv+i) == A_SYM)
+		if(atom_gettype(argv+i+symPrepend) == A_SYM)
 		{
-			min = atoi(atom_getsym(argv+i)->s_name);
+			min = atoi(atom_getsym(argv+i+symPrepend)->s_name);
 			if (min < 10)
-				max = atoi(atom_getsym(argv+i)->s_name+2);
+				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+2);
 			else if (min < 100)
-				max = atoi(atom_getsym(argv+i)->s_name+3);
+				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+3);
 			else if (min < 1000)
-				max = atoi(atom_getsym(argv+i)->s_name+4);
+				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+4);
 			else
-				max = atoi(atom_getsym(argv+i)->s_name+5);
+				max = atoi(atom_getsym(argv+i+symPrepend)->s_name+5);
 			if (max > min) 
 			{
 				for(j = min; j <= max; j++)
 				{
-					atom_setlong(channels+count++, j);
+					atom_setlong(channels + symPrepend + count++, j);
 				}
 			}
 			else 
 			{
 				for(j = min; j >= max; j--)
 				{
-					atom_setlong(channels+count++, j);
+					atom_setlong(channels + symPrepend + count++, j);
 				}
 			}
 
 		}	
-		else if(atom_gettype(argv+i) == A_LONG)
+		else if(atom_gettype(argv + symPrepend + i) == A_LONG)
 		{
-			channels[count++] = argv[i];
+            atom_setlong(channels + symPrepend + count++, atom_getlong(argv + symPrepend + i));
+			//channels[count++] = argv[i];
 		}
 	}
 	x = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count, channels);
