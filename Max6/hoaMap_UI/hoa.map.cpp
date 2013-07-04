@@ -575,7 +575,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 }
                 else if(atom_gettype(av+i) == A_LONG)
                 {
-                    sprintf(number, "%lld ", atom_getlong(av+i));
+                    sprintf(number, "%ld ", (long)atom_getlong(av+i));
                     strcat(description, number);
                 }
                 else if(atom_gettype(av+i) == A_FLOAT)
@@ -666,7 +666,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 }
                 else if(atom_gettype(av+i) == A_LONG)
                 {
-                    sprintf(number, "%lld ", atom_getlong(av+i));
+                    sprintf(number, "%ld ", (long)atom_getlong(av+i));
                     strcat(description, number);
                 }
                 else if(atom_gettype(av+i) == A_FLOAT)

@@ -69,13 +69,10 @@ void HoaDecode_reconnect_outlet(t_HoaDecode *x);
 void HoaDecode_disconnect_outlet(t_HoaDecode *x);
 void HoaDecode_send_configuration(t_HoaDecode *x);
 void HoaDecode_send_angles(t_HoaDecode *x);
-void HoaDecode_send_offset(t_HoaDecode *x);
 
 t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err loudspeakers_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
-t_max_err offset_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err pinnaesize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
-t_max_err config_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 t_max_err restitution_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv);
 
@@ -156,8 +153,8 @@ int C74_EXPORT main(void)
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaDecode *x = NULL;
-    t_dictionary *d;
 	int order = 4;
+    
     x = (t_HoaDecode *)object_alloc((t_class*)HoaDecode_class);
 	if(x)
 	{
@@ -197,7 +194,6 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		
         attr_args_process(x, argc, argv);
 		x->f_ob.z_misc = Z_NO_INPLACE;
-        d = (t_dictionary *)gensym("#D")->s_thing;
 	}
     
 	return (x);

@@ -34,16 +34,23 @@ extern "C" {
 #include "ext_globalsymbol.h"
 }
 
+#define MAX_SPEAKER 64
+#define DEF_SPEAKER 8
+
 #include "../../Sources/HoaLibrary.h"
 
 typedef struct  _spectrum 
 {
 	t_pxjbox	j_box;
-	
+	AmbisonicsSpectrum* f_spectrum;
+    
 	void*		f_clock;
 	int			f_startclock;
-    
-    AmbisonicsSpectrum* f_spectrum;
+    t_atom_long	f_interval;
+    t_atom_long f_number_of_loudspeakers;
+	double      f_offset_of_loudspeakers;
+    double		f_angles_of_loudspeakers[MAX_SPEAKER];
+    double      f_frequency_band[4];
 	
 } t_spectrum;
 
@@ -76,6 +83,39 @@ int C74_EXPORT main()
 	class_addmethod(c, (method)spectrum_assist,         "assist",		A_CANT,	0);
 	class_addmethod(c, (method)spectrum_paint,			"paint",		A_CANT,	0);
     
+    /* BEHAVIOR */
+	CLASS_ATTR_LONG				(c, "loudspeakers", 0 , t_spectrum, f_number_of_loudspeakers);
+    CLASS_ATTR_CATEGORY         (c, "loudspeakers", 0, "Behavior");
+    //CLASS_ATTR_ACCESSORS		(c, "loudspeakers", NULL, number_of_loudspeakers_set);
+	CLASS_ATTR_ORDER			(c, "loudspeakers", 0, "1");
+	CLASS_ATTR_LABEL			(c, "loudspeakers", 0, "Number of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "loudspeakers", 1);
+    CLASS_ATTR_DEFAULT          (c, "loudspeakers", 0, "8");
+    
+	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_spectrum,f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
+    CLASS_ATTR_CATEGORY         (c, "angles", 0, "Behavior");
+	//CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
+	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
+	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "angles", 1);
+	CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
+    
+    CLASS_ATTR_DOUBLE_ARRAY     (c, "bands", 0, t_spectrum, f_frequency_band, 4);
+    CLASS_ATTR_CATEGORY         (c, "bands", 0, "Behavior");
+	//CLASS_ATTR_ACCESSORS		(c, "bands", NULL, angles_of_loudspeakers_set);
+	CLASS_ATTR_ORDER			(c, "bands", 0, "3");
+	CLASS_ATTR_LABEL			(c, "bands", 0, "Angles of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "bands", 1);
+	CLASS_ATTR_ALIAS            (c, "bands", "ls_angles");
+    
+    CLASS_ATTR_LONG				(c, "interval", 0, t_spectrum, f_interval);
+    CLASS_ATTR_CATEGORY         (c, "interval", 0, "Behavior");
+	CLASS_ATTR_ORDER			(c, "interval", 0, "4");
+	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
+	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
+	CLASS_ATTR_DEFAULT			(c, "interval", 0, "50");
+	CLASS_ATTR_SAVE				(c, "interval", 1);
+    
 	class_register(CLASS_BOX, c);
 	spectrum_class = c;
 	
@@ -104,15 +144,43 @@ void *spectrum_new(t_symbol *s, int argc, t_atom *argv)
 
 	x->j_box.z_box.b_firstin = (t_object *)x;
 	dsp_setupjbox((t_pxjbox *)x, 16);
-    x->f_spectrum = new AmbisonicsSpectrum(16, 512, sys_getblksize(), sys_getsr());
-	
+    x->f_spectrum = new AmbisonicsSpectrum(16, 3, sys_getblksize(), sys_getsr());
+	x->j_box.z_misc = Z_NO_INPLACE;
+    
 	x->f_clock = clock_new(x,(method)spectrum_tick);
 	x->f_startclock = 0;
     
     attr_dictionary_process(x, d);
 	
 	jbox_ready((t_jbox *)x);
-	
+    
+    double m_frequency_factor = tan(CICM_PI * 250. / 44100.);
+    double m_q_value = 1.;
+    
+    double norm = 1. / (double)(1. + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
+    double m_coeff_a0 = m_frequency_factor / m_q_value * norm;
+    double m_coeff_a1 = 0.;
+    double m_coeff_a2 = -(m_frequency_factor / m_q_value * norm);
+    double m_coeff_b1 = 2 * (m_frequency_factor * m_frequency_factor - 1) * norm;
+    double m_coeff_b2 = (1 - m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor) * norm;
+	post("%f", m_coeff_a0);
+    post("%f", m_coeff_a1);
+    post("%f", m_coeff_a2);
+    post("%f", m_coeff_b1);
+    post("%f", m_coeff_b2);
+    
+    double m_delay_one = 0., m_delay_two = 0.;
+    double input, output;
+    for(int i = 0; i < 128; i++)
+    {
+        input = cos(i);
+        post("%i : %f", i, input);
+        output = input * m_coeff_a0 + m_delay_one;
+        m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
+        m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
+        post("%i : %f", i, output);
+    }
+    
 	return (x);
 }
 
@@ -120,31 +188,28 @@ void *spectrum_new(t_symbol *s, int argc, t_atom *argv)
 void spectrum_dsp64(t_spectrum *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     x->f_spectrum->setVectorSize(maxvectorsize);
+    x->f_spectrum->setSamplingRate(samplerate);
+  
 	object_method(dsp64, gensym("dsp_add64"), x, spectrum_perform64, 0, NULL);
-	//x->f_startclock = 1;
+	x->f_startclock = 1;
 }
 
 void spectrum_perform64(t_spectrum *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     x->f_spectrum->process(ins);
-    /*
+    
 	if (x->f_startclock)
 	{
 		x->f_startclock = 0;
 		clock_delay(x->f_clock,0);
-	}*/
+	}
 }
 
 void spectrum_tick(t_spectrum *x)
 {
-    /*
-    
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("contrib_layer"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-	jbox_redraw((t_jbox *)x);
+    x->f_spectrum->tick();
 	if (sys_getdspstate())
 		clock_fdelay(x->f_clock, 100.);
-     */
 }
 
 void spectrum_free(t_spectrum *x)
@@ -157,7 +222,7 @@ void spectrum_free(t_spectrum *x)
 
 void spectrum_assist(t_spectrum *x, void *b, long m, long a, char *s)
 {
-    sprintf(s,"(Signal) %ld", a);
+    sprintf(s,"(Signal) %s", x->f_spectrum->getLoudspeakerName(a).c_str());
 }
 
 void spectrum_paint(t_spectrum *x, t_object *view)

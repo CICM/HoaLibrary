@@ -28,7 +28,7 @@
 AmbisonicsGigaverb::AmbisonicsGigaverb(long anOrder, long aVectorSize, double aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
     for(int i = 0; i < m_number_of_harmonics; i++)
-        m_gigaverb.push_back(new Gigaverb(m_vector_size, m_sampling_rate));
+        m_gigaverb.push_back(new Gigaverb(m_sampling_rate));
 }
 
 void AmbisonicsGigaverb::setDryValue(double value)
@@ -133,7 +133,7 @@ void AmbisonicsGigaverb::setVectorSize(long aVectorSize)
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        m_gigaverb[i]->setVectorSize(m_vector_size);
+        //m_gigaverb[i]->setVectorSize(m_vector_size);
     }
 }
 
@@ -142,7 +142,7 @@ void AmbisonicsGigaverb::setSamplingRate(long aSamplingRate)
 	m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        m_gigaverb[i]->setSamplingRate(m_sampling_rate);
+        //m_gigaverb[i]->setSamplingRate(m_sampling_rate);
     }
 
 }

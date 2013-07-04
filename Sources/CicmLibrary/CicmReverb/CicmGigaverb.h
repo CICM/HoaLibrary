@@ -64,10 +64,10 @@ protected:
 	double alpha;
 public:
 
-	Gigaverb(long aVectorSize = 0., double aSamplingRate = 44100., double aRoomsize = 50., double revtime = 7., double damping = 0.5, double spread = 15., double inputbandwidth = 0.5, double earlylevel = 1., double taillevel = 1.);
+	Gigaverb(double aSamplingRate = 44100., double aRoomsize = 50., double revtime = 7., double damping = 0.5, double spread = 15., double inputbandwidth = 0.5, double earlylevel = 1., double taillevel = 1.);
 	
-	void	setVectorSize(long aVectorSize);
-    void	setSamplingRate(long aSamplingRate);
+	//void	setVectorSize(long aVectorSize);
+    //void	setSamplingRate(long aSamplingRate);
 
 	void setRoomSize(double aRoomSize);
 	double getRoomSize();

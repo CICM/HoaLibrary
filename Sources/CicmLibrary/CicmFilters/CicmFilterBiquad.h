@@ -31,13 +31,12 @@
 enum
 {
     Cicm_Biquad_Lowpass = 0,
-    Cicm_Biquad_Highpass,
-    Cicm_Biquad_Bandpass,
-    Cicm_Biquad_Notch,
-    Cicm_Biquad_Peak,
-    Cicm_Biquad_Lowshelf,
-    Cicm_Biquad_Highshelf,
-    Cicm_Biquad_Ambisonics
+    Cicm_Biquad_Highpass = 1,
+    Cicm_Biquad_Bandpass = 2,
+    Cicm_Biquad_Notch = 3,
+    Cicm_Biquad_Peak = 4,
+    Cicm_Biquad_Lowshelf = 5,
+    Cicm_Biquad_Highshelf = 6,
 };
 
 class FilterBiquad : public Filter
@@ -53,6 +52,7 @@ protected:
 public:
 	FilterBiquad(long aType, long aVectorSize = 0, double aSamplingRate = 44100.);
 
+    void setSamplingRate(long aSamplingRate);
     void setType(long aType);
     void setAll(double aCutoffFrequency, double aQValue, double aGain);
     void setCutoffFrequency(double aCutoffFrequency);
@@ -69,8 +69,6 @@ public:
 	/* Perform sample by sample */
 	inline float process(float input)
 	{
-        if(m_type == Cicm_Biquad_Ambisonics)
-            input *= m_weight;
         float output = input * m_coeff_a0 + m_delay_one;
         m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
         m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
@@ -79,8 +77,6 @@ public:
     
 	inline double process(double input)
 	{
-        if(m_type == Cicm_Biquad_Ambisonics)
-            input *= m_weight;
 		double output = input * m_coeff_a0 + m_delay_one;
         m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
         m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
@@ -90,13 +86,14 @@ public:
 	/* Perform block sample */
 	inline void process(float* inputs, float* outputs)
 	{
+        float input, output;
         for(int i = 0; i < m_vector_size; i++)
         {
-            if(m_type == Cicm_Biquad_Ambisonics)
-                inputs[i] *= m_weight;
-            outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
-            m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
-            m_delay_two = inputs[i] * m_coeff_a2 - m_coeff_b2 * outputs[i];
+            input = inputs[i];
+            output = input * m_coeff_a0 + m_delay_one;
+            m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
+            m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
+            outputs[i] = output;
         }
 	}
     
@@ -104,8 +101,6 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
         {
-            if(m_type == Cicm_Biquad_Ambisonics)
-                inputs[i] *= m_weight;
             setAll(aCutoffFrequency[i], aQValue[i], aGain[i]);
             outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
             m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
@@ -117,8 +112,6 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
         {
-            if(m_type == Cicm_Biquad_Ambisonics)
-                inputs[i] *= m_weight;
             setCutoffFrequency(aCutoffFrequency[i]);
             outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
             m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
@@ -126,15 +119,20 @@ public:
         }
 	}
     
+    /**************************************************/
+    /**************************************************/
+    /**************************************************/
+    
 	inline void process(double* inputs, double* outputs)
 	{
+        double input, output;
         for(int i = 0; i < m_vector_size; i++)
         {
-            if(m_type == Cicm_Biquad_Ambisonics)
-                inputs[i] *= m_weight;
-            outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
-            m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
-            m_delay_two = inputs[i] * m_coeff_a2 - m_coeff_b2 * outputs[i];
+            input = inputs[i];
+            output = input * m_coeff_a0 + m_delay_one;
+            m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
+            m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
+            outputs[i] = output;
         }
 	}
     
@@ -142,8 +140,6 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
         {
-            if(m_type == Cicm_Biquad_Ambisonics)
-                inputs[i] *= m_weight;
             setAll(aCutoffFrequency[i], aQValue[i], aGain[i]);
             outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
             m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];
@@ -155,8 +151,6 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
         {
-            if(m_type == Cicm_Biquad_Ambisonics)
-                inputs[i] *= m_weight;
             setCutoffFrequency(aCutoffFrequency[i]);
             outputs[i] = inputs[i] * m_coeff_a0 + m_delay_one;
             m_delay_one = inputs[i] * m_coeff_a1 + m_delay_two - m_coeff_b1 * outputs[i];

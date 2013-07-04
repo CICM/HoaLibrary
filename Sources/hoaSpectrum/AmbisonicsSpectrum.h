@@ -34,42 +34,41 @@ class AmbisonicsSpectrum : public Planewaves
 {
 	
 private:
-    vector <FilterBiquad*>         m_low;
-    vector <FilterBiquad*>         m_low_medium;
-    vector <FilterBiquad*>         m_medium;
-    vector <FilterBiquad*>         m_high_medium;
-    vector <FilterBiquad*>         m_high;
+    AmbisonicsVector*                   m_vector;
+ 
+    vector <vector <FilterBiquad*> >    m_filter;
+    Cicm_Vector_Float**                 m_filtered_signal_float;
+    Cicm_Vector_Double**                m_filtered_signal_double;
+    Cicm_Vector_Double                  m_frequency;
     
-	AmbisonicsVector*               m_vector;
-
-    /*
-    Cicm_Vector_Float*              m_low_vector_float;
-    Cicm_Vector_Float*              m_low_medium_vector_float;
-    Cicm_Vector_Float*              m_medium_vector_float;
-    Cicm_Vector_Float*              m_high_medium_vector_float;
-    Cicm_Vector_Float*              m_high_vector_float;
-    */
-    Cicm_Vector_Double*              m_low_vector_double;
-    Cicm_Vector_Double*              m_low_medium_vector_double;
-    Cicm_Vector_Double*              m_medium_vector_double;
-    Cicm_Vector_Double*              m_high_medium_vector_double;
-    Cicm_Vector_Double*              m_high_vector_double;
+    Cicm_Vector_Double                  m_amplitude;
+    Cicm_Vector_Double                  m_abscissa;
+    Cicm_Vector_Double                  m_ordinate;
     
-    //Cicm_Vector_Float*              m_coordinates;
+    double                              m_vector_values[4];
+    double*                             m_loudspeakers_values;
+    Cicm_Vector_Double                  m_temp_amplitude_value;
+    void initializeFrequencyBands();
     
 public:
-	AmbisonicsSpectrum(long aNumberOfLoudspeakers = 1, long aWindowSize = 256, long aVectorSize = 0, long aSamplingRate = 44100);
+	AmbisonicsSpectrum(long aNumberOfLoudspeakers = 1, long aNumberOfBands = 3, long aVectorSize = 0, long aSamplingRate = 44100);
+    
+    
+    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff = 0);
+    void setLoudspeakerAngle(long anIndex, double anAngle);
+    void setFrequencyBand(long anIndex, double aFrequency);
+    void setNumberOfBands(long aNumberOfBands);
+    
+    double getAmplitude(long aBandIndex);
+    double getAbscissa(long aBandIndex);
+    double getOrdinate(long aBandIndex);
+    double getFrequencyBand(long anIndex);
+    long   getNumberOfBands();
+    
+    void setVectorSize(long aVectorSize);
+    void setSamplingRate(long aSamplingRate);
+    
 	~AmbisonicsSpectrum();
-    
-    /* Perform sample by sample */
-	inline void process(float* inputs)
-	{
-    }
-    
-    /* Perform sample by sample */
-	inline void process(double* inputs)
-	{
-	}
 	
 	/* Perform block sample */
 	inline void process(float** inputs)
@@ -79,18 +78,46 @@ public:
         }
 	}
     
-    /* Perform block sample */
 	inline void process(double** inputs)
 	{
-        for(int i = 0; i < m_number_of_loudspeakers; i++)
+        for(int i = 0; i < m_filter.size(); i++)
         {
-            m_low[i]->process(inputs[i], m_low_vector_double[i]);
-            m_low_medium[i]->process(inputs[i], m_low_medium_vector_double[i]);
-            m_medium[i]->process(inputs[i], m_medium_vector_double[i]);
-            m_high_medium[i]->process(inputs[i], m_high_medium_vector_double[i]);
-            m_high[i]->process(inputs[i], m_high_vector_double[i]);
+            for(int j = 0; j < m_number_of_loudspeakers; j++)
+            {
+                m_filter[i][j]->process(inputs[j], m_filtered_signal_double[i][j]);
+            }
         }
-	}
+        double amplitude;
+        for(int i = 0; i < m_filter.size(); i++)
+        {
+            for(int k = 0; k < m_vector_size; k++)
+            {
+                amplitude = 0.;
+                for(int j = 0; j < m_number_of_loudspeakers; j++)
+                {
+                    amplitude += fabs(m_filtered_signal_double[i][j][k]);
+                }
+                if(amplitude > m_temp_amplitude_value[i])
+                    m_temp_amplitude_value[i] = amplitude;
+            }
+        }
+    }
+    
+    inline void tick()
+    {
+        for(int i = 0; i < m_filter.size(); i++)
+        {
+            for(int j = 0; j < m_number_of_loudspeakers; j++)
+            {
+                m_loudspeakers_values[j] = m_filtered_signal_double[i][j][m_vector_size-1];
+            }
+            m_vector->process(m_loudspeakers_values, m_vector_values);
+            m_abscissa[i] = m_vector_values[2];
+            m_ordinate[i] = m_vector_values[3];
+            m_amplitude[i] = m_temp_amplitude_value[i];
+            m_temp_amplitude_value[i] = 0.;
+        }
+    }
     
 };
 

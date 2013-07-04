@@ -31,7 +31,7 @@
 class FilterFixedDelay : public Filter
 {
 private :
-	double*	m_buffer;
+	Cicm_Vector_Double	m_buffer;
 	long	m_buffer_size;
     long	m_buffer_size_max;
 	long	m_ramp;
