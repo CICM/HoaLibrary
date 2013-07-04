@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Rewire">
+	<header1>
+	Using ReWire in Max
+	</header1>
+			
+		<bodytext>
+			Max supports ReWire, a software protocol developed by Propellerheads that allows data transfer and remote
+			control among audio software applications. In addition to being able to route audio between Max and ReWire
+			compatible applications, ReWire supports sending synchronization, transport, and tempo information both
+			to and from Max and the host application.
+		</bodytext>
+			
+		<bodytext>
+			You can use Max as a <i>ReWire client</i> and route audio from Max into another application (such as
+			Ableton Live or Digital Performer) using ad_rewire, a special audio driver.
+		</bodytext>
+			
+		<bodytext>
+			You can also use Max as a <i>ReWire mixer</i> using the <o>rewire~</o> object and route audio to Max from
+			other applications.
+		</bodytext>
+			
+		<bodytext>
+			You cannot use both the ad_rewire audio driver and the <o>rewire~</o> object simultaneously; When you try to
+			use them at the same time, you won’t get any audio output because each is waiting for the other: the ad_rewire
+			driver is waiting for the rewire~ object to ask it for an audio stream, but the  rewire~ object can't do
+			anything unless given processing time by an audio driver.
+		</bodytext>
+			
+		<bodytext>
+			You can also use the ad_rewire driver when creating
+			<link type="vignette" module="core" name="standalones">standalone applications</link>.
+		</bodytext>
+			
+	<header2>
+	Using Max as a ReWire client
+	</header2>
+			
+		<bodytext>
+			To use Max as a ReWire client and route audio to another application the Max ad_rewire driver is used.
+		</bodytext>
+			
+	<bluebox>
+	<header2>
+	Enabling the ad_rewire driver
+	</header2>
+		<ul>
+		<li>
+			Choose <b>Audio Status</b> from the Options menu to show the Audio Status window. Click in the Value column
+			for the Driver setting and choose <b>ad_rewire</b> from the Driver pop-up window. The ReWire driver will
+			be selected, and you will see Max listed as a ReWire device the next time you launch your host application.
+		</li>
+		</ul>
+	</bluebox>
+			
+			
+			
+		<bodytext>
+			With ad_rewire selected as the audio driver for Max, there are three MSP objects you can use to provide
+			this information and to control the host’s transport:
+		</bodytext>
+			
+		<ul>
+		<li>
+			The <o>hostcontrol~</o> object allows you to send commands to the ReWire host to start and stop
+			the transport, set the transport position, change the tempo, change the time signature, and set loop points.
+		</li>
+		<li>
+			The <o>hostphasor~</o> object will output a beat-synchronized ramp (like the <o>phasor~</o> object)
+			when the host's transport is playing,. You can use this ramp output to drive your synthesizer in a
+			beat-synchronous fashion or to trigger events on the beat.
+		</li>
+		<li>
+			The <o>hostcontrol~</o> object allows you to send commands to the ReWire host to start and stop
+			the transport, set the transport position, change the tempo, change the time signature, and set loop points.
+		</li>
+		</ul>
+			
+	<bluebox>
+	<header2>
+	Connecting from Max to a host application using ReWire
+	</header2>
+		<ul>
+		<li>
+			If you have not already done so, enable the ad_rewire driver as described above.
+		</li>
+		<li>
+			Start the application you want to send Max audio output to.
+		</li>
+		<li>
+			Create a channel in the host application to accept input from Max
+		</li>
+		<li>
+			Open your Max patch and turn on the DSP
+		</li>
+		</ul>
+	</bluebox>
+			
+	<header2>
+	Hosting a ReWire client
+	</header2>
+			
+		<bodytext>
+			The <o>rewire~</o> object is used when Max is used as a <i>ReWire host</i>, routing audio from other host applications to Max.
+			The <o>rewire~</o> object allows you to select a ReWire client, use the available audio outputs, send and receive MIDI messages and
+			control the connected device’s transport controls.
+		</bodytext>
+			
+	<bluebox>
+	<header2>
+	Creating a connection from a ReWire client to Max
+	</header2>
+		<ul>
+		<li>
+			Add a <o>rewire~</o> object to your Max patch, connect the second outlet from the right to a <o>umenu</o> object, and add a second
+			connection from the middle outlet of the <o>umenu</o> object to the <o>rewire~</o> object. You will also need to add a <o>button</o> or
+			<o>loadbang</o> object to send a <m>bang</m> message to the <o>rewire~</o> object to populate the menu.
+		</li>
+		</ul>
+			
+		<bodytext>
+			<img src="images/rewire1.png"  />
+		</bodytext>
+			
+		<ul>
+		<li>
+			Close the patch and click on the <o>button</o>. The <o>umenu</o> will be automatically populated with a listing of all available ReWire
+			clients which can send audio to Max. Click on the umenu and select the client you want from the pop-up menu. You will see the message
+			<m>rewire~: opened device</m><space/><bi>XXX</bi> in the Max window.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/rewire2.png"  />
+		</bodytext>
+	</bluebox>
+		<br /><space/>
+	<bluebox>
+	<header2>
+	Routing ReWire client audio outputs to Max outputs
+	</header2>
+		<ul>
+		<li>
+			Connect the rightmost outlet of the <o>rewire~</o> object in your Max patch to each of a pair of <o>umenu</o> and <link type="refpage" name="message">message box</link> objects
+			which are connected back to the <o>rewire~</o> object.
+		</li>
+		</ul>
+			
+		<bodytext>
+			<img src="images/rewire3.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Close the patch and click on the button. The <o>umenu</o> objects will be automatically populated with a listing of all the ReWire audio outputs
+			from the client application. Click on both <o>umenu</o> objects and select the clients you want from the pop-up menu.
+		</li>
+		</ul>
+			
+		<bodytext>
+			<img src="images/rewire4.png"  />
+		</bodytext>
+			
+		<ul>
+		<li>
+			Clicking on a <o>umenu</o> selection will send the message <m>map 1|2</m><space/><bi>&lt;client output&gt;</bi> to the <o>rewire~</o> object,
+			routing the audio from the client application to the <o>rewire~</o> object’s audio outlets for use in your Max patch.
+		</li>
+		</ul>
+	</bluebox>
+			
+			
+		<bodytext>
+			In addition to routing audio from other applications through Max, the <o>rewire~</o> object also
+			lets you control the transport mechanism of any client application to which it is connected, and
+			to send and receive MIDI messages. See the rewire~ help file and the
+			<link type="refpage" name="dac~">rewire~ object Reference page</link>
+			for more information.
+		</bodytext>
+			
+			
+			
+	<header2>
+	ReWire and MIDI
+	</header2>
+			
+		<bodytext>
+			Rewire 2 also supports MIDI communication to and from ReWire Devices. Currently both the
+			<o>rewire~</o> object and the ad_rewire~ driver support MIDI, although they work in different ways.
+		</bodytext>
+			
+		<bodytext>
+			When you use the ad_rewire driver, Max MIDI ports are automatically created so you can use
+			the standard Max MIDI objects to send and receive MIDI. After you choose the ad_rewire
+			driver in the Audio Status Window, MIDI ports will appear in the MIDI Setup window the next
+			time it is opened.
+		</bodytext>
+			
+			
+	<header2>
+	Using MIDI with the ad_rewire driver
+	</header2>
+			
+		<bodytext>
+			By default, the ad_rewire driver has two MIDI input channels and two MIDI output channels available for your use.
+		</bodytext>
+			
+	<bluebox>
+	<header2>
+	Setting up MIDI ports with the ad_rewire driver
+	</header2>
+		<ul>
+		<li>
+			If you have not already done so, enable the ad_rewire driver as described above. Add a
+			<o>midiin</o> object to your Max patch and Command-double-click (Macintosh) or Alt-double-click
+			(Windows) on the <o>midiin</o> object to show the MIDI sources pop-up menu. The ReWire MIDI ports
+			will be shown and you can choose them.
+		</li>
+		</ul>
+			
+		<bodytext>
+			You can use the same procedure to set up an output port using the <o>midiout</o> object.
+		</bodytext>
+			
+	</bluebox>
+		<br /><space/>
+	<bluebox>
+	<header2>
+	Adding MIDI ports to ReWire
+	</header2>
+		<ul>
+		<li>
+			Choose <b>Audio Status</b> from the Options menu to show the Audio Status window. Double-click
+			in the Value column for the Input Channels or Output Channels setting in the Audio Status
+			window to get a text cursor, Type in the number of input or output channels you want followed by a
+			carriage return. The new values will appear in the Value column, and the new number of MIDI input
+			or output channels will be available via Max MIDI objects.
+		</li>
+		</ul>
+	</bluebox>
+			
+	<header2>
+	Using MIDI with the rewire~ object
+	</header2>
+			
+		<bodytext>
+			When you use Max as a ReWire host using the <o>rewire~</o> object, MIDI messages are automatically
+			sent and received using the <o>rewire~</o> object—it includes a dedicated outlet for MIDI messages,
+			and you can use the <m>midi</m> message to the <o>rewire~</o> object to send MIDI data to the ReWire
+			clients. For more information about the format that the <o>rewire~</o> object understands, see the
+			rewire~ object
+			Help file
+			or
+			<link type="refpage" name="rewire~">the rewire~ object Reference page</link>.
+		</bodytext>
+			
+</vignette>

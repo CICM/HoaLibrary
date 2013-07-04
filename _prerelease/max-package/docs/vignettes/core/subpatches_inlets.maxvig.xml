@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Subpatcher Inlets and Outlets">
+	<header1>
+	Subpatcher Inlets and Outlets
+	</header1>
+<bodytext>
+	The <o>inlet</o> object moves data from a parent patcher to a subpatcher. The <o>outlet</o> object moves data from a subpatcher to a parent patcher. Inlets corresponding to the internal <o>inlet</o> objects appear at the top of the <o>patcher</o> object in the parent patch, and corresponding outlets appear at the bottom of the patcher object.
+</bodytext>	
+<bluebox>
+<header2>
+Adding inlets and outlets to a subpatcher
+</header2>
+	<ul>
+	<li>
+		Command-double-click (Macintosh) or Alt-double-click (Windows) on the <o>patcher</o>
+		object in an unlocked Patcher window. The patcher window for the subpatcher
+		will be shown or brought to the front if it is already open.
+	</li>
+	<li>
+		Double-click in a blank space in the subpatcher window to show the
+		Object Explorer.
+	</li>
+	<li>
+		Click on the icon for an <o>inlet</o> object. An <o>inlet</o> object will be added to your
+		patch, and an inlet will appear on the <o>patcher</o> object in the main patch window.
+	</li>
+	<li>
+		Double-click in a blank space in the subpatcher's window to show the <link type="vignette" module="core" name="object_explorer">Object Explorer</link>.
+	</li>
+	<li>
+		Click on the icon for an <o>outlet</o> object. An <o>outlet</o> object will be added to your
+		patch, and an outlet will appear on the <o>patcher</o> object in the main patch window.
+	</li>
+	</ul>
+</bluebox>
+</vignette>
+

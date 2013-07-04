@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Preferences Window">
+	<header1>
+	The Preferences Window
+	</header1>
+	<bodytext>
+			Max remembers many of your working preferences by storing settings each time you quit the
+			application. The first time you use Max, a folder containing your preferences is created.
+		</bodytext>
+	<bodytext>
+			On Macintosh, this folder is called “Max 6 Preferences Folder”, and is in the Preferences
+			folder inside the <i>Library</i> folder of your home directory. Your preferences are stored in
+			a file called <i>maxpreferences.maxpref</i>.
+		</bodytext>
+	<bodytext>
+			On Windows, this folder is called “Max 6 Preferences Files”, and its location varies
+			according to the name of the user logged in (e.g.
+			<i>C:\Documents and Settings\&lt;user&gt;\Application Data\Cycling '74\Max 6 Preferences Files\</i>).
+		</bodytext>
+	<bodytext>
+			The Preferences folder is also where Max stores settings you have chosen in the
+			<link module="core" name="midi_setup_window" type="vignette">MIDI setup</link>and
+				<link module="core" name="file_preferences_window" type="vignette">file preferences</link> windows, as well as the current settings of the Options menu.
+		</bodytext>
+	<bluebox>
+		<header2>
+	Viewing the Preferences Window
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Macintosh) or the Options menu (Windows) to show the Preferences Window.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/preferences1.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<bodytext>
+			The preferences are divided into categories, each of which is associated
+			with a category divider in the Presentation Window. Each divider contains a
+			disclosure triangle that you can click to hide or reveal the attributes
+			associated with the divider.
+		</bodytext>
+	<bodytext>
+			You can mouse over an item and look in the
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>
+			to see a description of each preference item.
+		</bodytext>
+	<header2>
+	Navigating the Preferences Window
+	</header2>
+	<bodytext>
+			The top of the Preferences Window has four view selector tabs that allow you to view
+			subsets of preferences that you will probably use often in addition to viewing the 
+			entire contents of the window.
+		</bodytext>
+	<bodytext><i>All</i> shows all of the preferences in a single pane.
+		</bodytext>
+	<bodytext><i>Basic</i> shows a subset of the commonly accessed preferences, organized by category.
+		</bodytext>
+	<bodytext><i>Colors</i> shows a subset of settings associated with colors used in the patching environment.
+		</bodytext>
+	<bodytext><i>Recent</i> shows categories that you have recently edited for Max.
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="assistance_preferences" type="vignette">Assistance category</link>
+			of the Preferences Window shows the settings associated with using the 
+			<link module="core" name="assistance" type="vignette">Assistance</link>
+			features of Max.
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="browser_preferences" type="vignette">Browser category</link>
+			of the Preferences Window shows some settings associated with using the 
+			<link module="core" name="file_browser" type="vignette">File Browser</link>
+			features of Max.
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="clue_window_preferences" type="vignette">Clue category</link>
+			of the Preferences Window lets you set the colors for the 
+			Patcher window's 
+			<link module="core" name="clue_window" type="vignette">Clue Window</link>
+			(whose functionality has largely been replaced by the Max 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>
+			).
+		</bodytext>
+	<bodytext>
+			The 
+			<link module="core" name="debugging_preferences" type="vignette">Debugging category</link>
+			of the Preferences Window lets you set the behavior of features related to debugging
+			your patches -
+			<link module="core" name="watchpoints" type="vignette">Watchpoints</link>
+			and
+			other
+			<link module="core" name="tracing_tools" type="vignette">debugging tools</link>.
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="font_preferences" type="vignette">Font category</link>
+			of the Preferences Window shows the settings for the default font and default size.
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="interface_preferences" type="vignette">Interface category</link>
+			of the Preferences Window shows some settings how the ways that the Max
+			interface works (e.g., truncating floating point numbers automatically).
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="language_preferences" type="vignette">Language category</link>
+			lists the currently available language choices.
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="mixer_preferences" type="vignette">Mixer category</link>
+			lets you set preferences for the behavior of the 
+			<link module="core" name="mixer" type="vignette">Mixer</link>
+			features of Max. You can.
+		</bodytext>
+	<bodytext>
+			The
+			<link module="core" name="patching_preferences" type="vignette">Patching category</link>
+			of the Preferences Window contains a listing of parameters related to Max's
+			behavior as you patch (e.g.
+			<link anchor="segmented" module="core" name="patch_cords" type="vignette">segmented patch cords</link>,
+			enabling
+			<link module="core" name="assistance" type="vignette">Assistance</link>
+			in a patcher, etc.), and settings that control how the Max interface
+			responds to you (e.g., auto fix width, 
+			<link anchor="autocompletion" module="core" name="patcher_window" type="vignette">autocompletion</link>, 
+			etc.)
+		</bodytext>
+	<bodytext>
+			The 
+			<link module="core" name="scheduler_settings" type="vignette">Scheduling category</link>
+			of the Preferences Window shows the parameters you can use when tuning the performance of Max
+			on your system.
+		</bodytext>
+	<header2>
+	About the Window’s columns:
+	</header2>
+	<bodytext>
+			The Preferences Window consists of three columns:
+		</bodytext>
+	<bodytext>
+			The <i>Attribute</i> column can be used to edit and restore attribute settings.
+		</bodytext>
+	<bodytext>
+			The <i>Setting</i> column has the name or a description of each object setting
+		</bodytext>
+	<bodytext>
+			The <i>Value</i> column displays the current value associated with each setting
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Changing the Preferences Window view
+	</header2>
+		<ul>
+			<li>
+			Click on a view selector in the Preferences Window to show a subset of all the settings.
+			To return to the original organization of settings, click on the All tab.
+		</li>
+			<li>
+			Click on the disclosure triangle for a preferences category to hide or reveal the 
+			preferences.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Getting information about an Inspector setting
+	</header2>
+		<ul>
+			<li>
+			Position your cursor over the Setting column of any row in the window. A brief description of
+			the setting will be shown in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Changing the value of a Setting
+	</header2>
+		<ul>
+			<li>
+			Click in the Value column for a Setting row to select the value you want to change
+		</li>
+			<li>
+			If the value column contains a check box, click in the box to toggle the value
+		</li>
+			<li>
+			If the value column has a set of arrows on the right, it is a pop-up menu.
+			Click in the Value column, choose a setting from the pop-up menu, and release.
+		</li>
+			<li>
+			If the value column contains a color display, click in the box to show
+			the
+			<link module="core" name="color_picker" type="vignette">Color Picker</link>
+			pop-up menu. You can use the swatch to set colors
+			or enter them as text.
+		</li>
+			<li>
+			If the value column contains ints, floats, messages, or lists, double-click
+			in the box to show a cursor and text box. You can type values into the text
+			box and type a carriage return to set the values.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Changing the attribute list order
+	</header2>
+		<ul>
+			<li>
+			Click on a Setting column. The column will be selected an an arrow will appear on the 
+			right side of the column header.
+		</li>
+			<li>
+			Click on the arrow to re-sort the contents for each category of the object Inspector 
+			in alphabetical order
+		</li>
+			<li>
+			Click on the left-hand column header to restore the original “default” listing order 
+			for all Settings.
+		</li>
+		</ul>
+	</bluebox>
+</vignette>

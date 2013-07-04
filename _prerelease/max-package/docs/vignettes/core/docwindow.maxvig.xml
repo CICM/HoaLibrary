@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Documentation Window">
+	<header1>
+	The Documentation Window
+	</header1>
+	<bodytext>
+	The documentation window permits you to read, search, and navigate Max's documentation resources.
+</bodytext>
+	<bodytext>
+	At the top of the documentation window is a <link module="core" name="docsearch" type="vignette">search field</link>.
+</bodytext>
+	<bodytext>
+		<img src="images/docwindow1.png"/>
+	</bodytext>
+	<a name="docwindowtoolbar"/>
+	<header2>
+	Documentation Window Toolbar
+</header2>
+	<bodytext>
+At the bottom of the documentation window is a toolbar that lets you navigate through the documentation.
+</bodytext>
+	<bodytext>
+	The <i>Show Previous Page</i> button is the same thing as a Back button in a web browser.
+</bodytext>
+	<bodytext>
+		<img src="images/docwindow1.png"/>
+	</bodytext>
+	<bodytext>
+	The <i>Show Next Page</i> button is the same thing as a Forward button in a web browser.
+</bodytext>
+	<bodytext>
+		<img src="images/docwindow2.png"/>
+	</bodytext>
+	<bodytext>
+	The <i>Documentation Home</i> button displays the Max documentation <link module="intro" name="docintro" type="vignette">home page</link>, the entry point for all documentation resources.
+</bodytext>
+	<bodytext>
+		<img src="images/docwindow3.png"/>
+	</bodytext>
+	<bodytext>
+	The <i>Open Online Version</i> button will launch a web browser and display
+	the online version of the page you are viewing residing on the Cycling '74
+	web site. Using this link is helpful when you want to copy text from a 
+	<link module="core" name="docrefpages" type="vignette">reference page</link>, print a page of the documentation, or change the size of the text.
+</bodytext>
+	<bodytext>
+		<img src="images/docwindow4.png"/>
+	</bodytext>
+</vignette>

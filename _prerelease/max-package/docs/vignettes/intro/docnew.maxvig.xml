@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="What's New in Max 6">
+	<header1>
+	What's New in Max 6? 
+	</header1>
+	<bodytext>
+		<a href="#newin61">Click this link</a> to see Max 6.1 additions.
+	</bodytext>
+	<br/>
+	<header2>
+			A New Interface
+			<br/>
+			<img src="images/WNIM6-01.png" width="640" height="377" />
+	</header2>
+	<header3>
+		Patching Changes
+	</header3>
+	<bodytext>
+		<ul>
+			<li>Patch cords are now curved by default. “Curved Patch Cords” in the Preferences 
+			window adjusts this setting. </li>
+			<li>Alignment guides and new Align menu options speed interface layout tasks.</li>
+			<li>Patching is now the default action when clicking on an inlet. Right- or control-click 
+			to access the quickref menu on an inlet.</li>
+		</ul>
+	</bodytext>
+	<header3>
+		The Patcher Sidebar
+	</header3>
+	<bodytext>
+			The Patcher Sidebar provides access to new Object Explorer, the updated Inspector, the 
+			Max window, and object reference documentation. 
+		</bodytext>
+	<header3>
+		Circular menu
+	</header3>
+	<bodytext>
+			A new circular menu pops up to the left of an object box, providing instant access to 
+			attributes, messages, prototypes and common editing tasks. 
+		</bodytext>
+	<header3>
+		Searchable auto-completion
+	</header3>
+	<bodytext>
+			Auto-completion works in both object and message boxes. It includes argument and 
+			attribute information, and returns results based on searching descriptions as well as names. 
+		</bodytext>
+	<header2>
+			Improved Audio Engine
+			<br/>
+			<img src="images/WNIM6-02.png" width="640" height="534" />
+	</header2>
+	<header3>
+		64-bit Audio Signals
+	</header3>
+	<bodytext>
+			All MSP signals are now 64-bit for increased accuracy during synthesis, filtering and 
+			large buffer access. The cycle~ object now uses 16K wavetables (instead of 512 samples) 
+			providing an increased signal-to-noise ratio. The poly~ object offers high-quality 
+			resampling filters.
+		</bodytext>
+	<header3>
+		Audio Mixer
+	</header3>
+	<bodytext>
+			An integrated mixer provides audio routing capabilities and support for multiple 
+			processors by maintaining each top-level patcher’s audio in a separate DSP chain. When a 
+			patch is changed, the mixer cross-fades from the old version to the new one, facilitating 
+			live patching and a more pleasant editing experience. 
+		</bodytext>
+	<header3>
+		Filter design tools
+	</header3>
+	<bodytext>
+			The filterdesign and filterdetail objects let you design custom filters and visualize 
+			their characteristics using the new plot~ object.
+		</bodytext>
+	<header2>
+			Enhanced OpenGL Support
+			<br/>
+			<img src="images/WNIM6-04.png" width="640" height="458" />
+	</header2>
+	<header3>
+		New Physics Engine
+	</header3>
+	<bodytext>
+			Built on top of the Bullet physics engine, the jit.phys.* objects enable physical world 
+			simulation.
+		</bodytext>
+	<header3>
+		Built-in Material System
+	</header3>
+	<bodytext>
+			The jit.gl.material object provides material support for Jitter OpenGL objects. A 
+			materials browser (available by double-clicking on a jit.gl.material object) allows you to 
+			select a material and adjust its rendering behavior.
+		</bodytext>
+	<header3>
+		Hierarchical Rendering
+	</header3>
+	<bodytext>
+			A node-based hierarchy provides multi-level rendering contexts and supports complex 
+			scenes by allowing for nodal manipulation (such as movement and rotation). Combined with the 
+			new implicit rendering context, complex scenes are now much easier to create.
+		</bodytext>
+	<header2>
+			Gen: Our New Code Generation Add-on
+			<br/>
+			<img src="images/WNIM6-03.png" width="640" height="480" />
+	</header2>
+	<header3>
+		gen~ for DSP development
+	</header3>
+	<bodytext>
+			DSP programmers have a new set of tools for audio stream manipulation – the gen~ object. 
+			This provides a context-specific patching environment that works on single samples within 
+			a synchronous environment. These patches are compiled into executable code with improved 
+			performance over equivalent MSP patches.
+		</bodytext>
+	<header3>
+		jit.gen, jit.pix and jit.gl.pix for matrix manipulation
+	</header3>
+	<bodytext>
+			Where the gen~ object works with audio samples, the jit.gen, jit.pix and jit.gl.pix objects 
+			work directly on Jitter matrices. The resulting code also executes faster, and the 
+			jit.gl.pix object produces pixel shaders that run on the computer’s GPU.
+		</bodytext>
+	<header2>
+			And More...
+			<br/>
+			<img src="images/WNIM6-05.png" width="640" height="548" />	
+	</header2>
+	<header3>
+		Self-contained project development system
+	</header3>
+	<bodytext>
+			When working on large projects, managing all of the patches, externals, abstractions 
+			and media files can become difficult. The new Project File system helps to package 
+			projects while maintaining project-specific search paths, Max preferences and performance 
+			settings.
+		</bodytext>
+	<header3>
+		Complex data structures using dictionaries
+	</header3>
+	<bodytext>
+			Max includes a new set of objects that can send large sets of organized data (called 
+			dictionaries) to each other. The dict.* objects build, modify, and display the contents 
+			of dictionaries. 
+		</bodytext>
+	<header3>
+		Visual CPU profiling of audio signals
+	</header3>
+	<bodytext>
+			Choose Show CPU Usage from the View menu to reveal the audio load of a patcher by 
+			coloring the most CPU-intensive objects.
+		</bodytext>
+	<header3>
+		Vector graphic drawing via object or Javascript
+	</header3>
+	<bodytext>
+			A new 2D vector graphics API called Mgraphics is now available both 
+			through an object (jit.mgraphics) as well as within Javascript. The 
+			jit.mgraphics provides anti-aliased, path-based drawing directly to 
+			a standard Jitter matrix. Within Javascript, you can use Mgraphics 
+			for user interface tasks and data display.
+		</bodytext>
+	<header3>
+		Multiple OpenGL Camera and Light support
+	</header3>
+	<bodytext>
+			The OpenGL engine has been updated to support multiple cameras and multiple light 
+			sources. The material engine further supports this by rendering all materials within 
+			a multiply-lighted context.
+	</bodytext>
+	<header2>
+			<a name="newin61"/>
+			New in Max 6.1
+			<br/>
+			<img src="images/WNIM61-01.png" width="640" height="548" />	
+	</header2>
+	<bodytext>
+			The Max 6.1 release notes can be viewed 
+			<a href="http://cycling74.s3.amazonaws.com/support/version_6_1_0.html">here</a>.
+	</bodytext>
+	<header3>
+		Core Application Improvements
+	</header3>
+	<bodytext>
+			The Max application features better patch loading speed, new text justification 
+			features and several object enhancements. There is also a new “packages” system 
+			for managing user and third-party resources.
+	</bodytext>
+	<header3>
+		Live 9 Support
+	</header3>
+	<bodytext>
+			Max 6.1 is required for use with Ableton Live 9 and Max for Live. In addition to 
+			version compatibility, this version includes faster load time and project support 
+			for Max for Live devices.
+	</bodytext>
+	<header3>
+		Gen Improvements
+	</header3>
+	<bodytext>
+			The Gen Add-on has been revamped with many new features, including an integrated 
+			reference library, reusable Gen subpatches and additional operators. The entire 
+			Gen system has been enhanced to increase programming efficiency and discovery. 
+			In addition, a “beta” version of the Code Export function is available in this 
+			release.
+	</bodytext>
+	<header3>
+		64-bit Operation
+	</header3>
+	<bodytext>
+			Large systems can now take advantage of the power of advanced operating systems by 
+			running in 64-bit mode. In addition to allowing larger (> 4Gb) memory use, the 64-bit 
+			version of Max now uses 64-bit integers and floating-point numbers for much higher 
+			precision in Max messages. The 64-bit versions on both Macintosh and Windows have some 
+			limits – especially regarding QuickTime and Jitter. You can review the 64-bit limitations 
+			<link type="vignette" module="core" name="max_64_limitations">here</link>.
+	</bodytext>
+
+</vignette>

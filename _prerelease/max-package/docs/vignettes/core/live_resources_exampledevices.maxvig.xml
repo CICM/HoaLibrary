@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Max For Live Example Devices">
+<header1>
+	Max For Live Essentials
+</header1>
+<bodytext>
+	The 
+	<a href="https://www.ableton.com/en/packs/max-live-essentials//">Max for Live Essentials</a>
+	Live Pack contains a collection of audio effects, MIDI effects, drum synthesizers and control devices for Live 9.
+	The collection includes:
+</bodytext>
+<ul>
+<li>
+	<b>Buffer Shuffler</b>: an update of a Max for Live devices originally released with Max for Live 1.0.
+	It is an audio effect that reads incoming audio on Live audio track into a buffer and divides the buffer into 
+	a user-definable number of slices. You can change the order in which steps are played back, the direction of 
+	playback, and reorder playback on the fly using the user interface.
+</li>
+<li>
+	<b>Convolution Reverb Suite</b>: A Max for Live device that offers high-quality convolution using Impulses taken from real 
+	spaces or analog/digital hardware. Drop an impulse (or a single channel of a true stereo impulse stored as two 
+	stereo files ending with L and R) to load it in the convolution engine. Offline control is offered over the 
+	decay time and size of the virtual space. The predelay time, width of the reverb, and levels can be controlled 
+	in real time. The <b>Convolution Reverb Pro</b> is similar to the Convolution Reverb, but adds more advanced features such as 
+	realtime EQ, virtual positioning, modulation, frequency-dependent damping, and shape controls. The <b>IR Measurement Device</b>
+	lets you load your own Impulse responses
+</li>
+<li>
+	<b>Mono Sequencer</b>: An analog-inspired step sequencer with independent phases for parameters such as pitch, 
+	octave, velocity, repeat and gate.
+</li>
+<li>
+	<b>DrumSynth</b>: a collection of 13 Max for Live instruments that use synthesis to produce a wide variety of electronic drum 
+	and percussion sounds. Each instrument is designed to replicate a particular type of drum sound, and they can be mixed 
+	and matched in Live's Drum Racks to create custom synthetic drum kits. DrumSynth also comes with a number of pre-made 
+	Drum Racks in a variety of styles.
+</li>
+<li>
+	MIDI Effects and Control Devices: A collection of devices that include an LFO, and an Envelope Follower that function to 
+	modulate control parameters in a Live Set.
+</li>
+</ul>
+<bodytext>
+	Live Suite owners can download this Live Pack by choosing <b>Your Account > Your Packs</b>
+	when logged in to the Ableton website and clicking on the download button to the Live Pack.
+	To install the Live Pack, double-click on the <i>.alp</i> file
+</bodytext>
+<bodytext>
+	In addition, you can also download copies of the original "Big Three" devices originally released with Max For Live 1.0
+	as individual Live packs. You may find them to be useful programming examples, in addition to being a lot of fun.
+</bodytext>
+<ul>
+<li>
+	<a href="https://www.ableton.com/en/packs/max-live-buffer-shuffler/">The Max for Live 1.0 Buffer Shuffler</a>
+</li>
+<li>
+	<a href="https://www.ableton.com/en/packs/max-live-loop-shifter/">The Max for Live 1.0 Loop Shifter</a>
+</li>
+<li>
+	<a href="https://www.ableton.com/en/packs/max-live-step-sequencer/">The Max for Live 1.0 Step Sequencer</a>
+</li>
+</ul>
+</vignette>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Hints">
+	<header1>
+	Hints
+	</header1>
+	<bodytext>
+			Earlier versions of Max let you add hints to an area of a patch using the
+			<o>hint</o> object; the <o>hint</o> object would display helpful information
+			when the move was positioned over an area in a patch.
+			Max lets you add hints to individuals Max objects using the
+			<link module="core" name="inspector" type="vignette">Inspector</link>.
+		</bodytext>
+	<bluebox>
+		<header2>
+	Adding an hint to a Max object
+	</header2>
+		<ul>
+			<li>
+			Select and object and open the object's
+			<link module="core" name="inspector" type="vignette">Inspector</link>.
+		</li>
+			<li>
+			Double-click in the Value column for the Hint attribute. A text box will
+			appear for entering some text.
+		</li>
+			<li>
+			Enter the text for your hint and press the return key.
+		</li>
+			<li>
+			Click on the Lock icon in the patcher window toolbar to lock your patch. 
+		</li>
+			<li>
+			When you position the cursor over the object to which you've added a hint, your 
+			text will be shown near the object in a tooltip.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/hints1.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<bluebox>
+		<header2>
+	Removing a hint from a Max object
+	</header2>
+		<ul>
+			<li>
+				Select an object and open its <link module="core" name="inspector" type="vignette">Inspector</link>.
+			</li>
+			<li>
+				Double-click in the Value column for the Hint attribute. Remove the text. After you do so, a hint will no longer appear for the selected object.
+			</li>
+		</ul>
+	</bluebox>
+</vignette>

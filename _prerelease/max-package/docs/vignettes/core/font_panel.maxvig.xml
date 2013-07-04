@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Font Panel">
+	<header1>
+	The Font Panel
+	</header1>
+<bodytext>
+The <i>font panel</i> is a floating window that displays font information for the selected object, attribute, or window. As the selection changes, the font panel updates to show you its font information.
+</bodytext>
+<bodytext>
+Here is the font panel on Macintosh:<br />
+<img src="images/fonts1.png"  />
+</bodytext>
+<bodytext>
+Here is the font panel on Windows:<br />
+<img src="images/fonts2.png" />
+</bodytext>
+<bluebox>
+<header2>
+Showing and Hiding the Font Panel
+</header2>
+	<ul>
+	<li>
+		Choose <b>Show Fonts</b> from the Object menu to show the font panel. To close the font panel, click its close box, or choose <b>Hide Fonts</b> from the Object menu.
+	</li>
+	</ul>
+</bluebox>
+	<br /><space/>
+<bluebox>
+	<header2>
+	Changing font information for the selection
+	</header2>
+		<ul>
+		<li>
+			With objects selected, choose <b>Show Fonts</b> from the Object menu. The font panel appears showing the font information currently assigned to the selected object.
+		</li>
+		<li>
+			Choose the font, size,
+			or style you want to apply from the font panel. As you make changes, the selection
+			will update to reflect your changes.
+		</li>
+		</ul>
+	</bluebox>
+</vignette>
+

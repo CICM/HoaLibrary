@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="System and Fallback Fonts">
+	<header1>
+	System and Fallback Fonts
+	</header1>
+	<bodytext>
+		The <i>system font</i> is the font used for user interface display within the Max environment, such as column headings, dialog boxes, and so forth. There may be some cases where the font used in the Max user interface will not change with the system font. Also, the <link type="vignette" module="core" name="max_window">Max window</link> uses a separate font setting, which you change using the <link type="vignette" module="core" name="font_panel">font panel</link> when the Max window is the topmost window.
+	</bodytext>
+	<bodytext>
+	The <i>fallback font</i> is the font used when the font that is drawing text does not contain a Unicode character in the text. This will occur when attempting to draw Japanese text with the Arial font for example. You will want to set the fallback font to a font that can display the characters in the non-Roman text you will normally encounter.
+</bodytext>
+	<bodytext>
+	One more important note: there is currently a limitation on how the system and fallback fonts are specified. Normally, the <link type="vignette" module="core" name="font_menu">font menu</link> permits you to open the <link type="vignette" module="core" name="font_panel">font panel</link> by choosing Show Fonts. However, in the case of the system and fallback fonts, Show Fonts is disabled in the font menu. If you have never picked the font you want to use for the system or fallback font before, you will need to use the font panel to choose it somewhere else in Max first, then return to the preferences window, where it will appear in the font menu to be chosen.
+</bodytext>
+<bluebox>
+	<header2>
+	Setting the system font for the Max application
+	</header2>
+		<ul>
+			<li>
+				Open the preferences window by choosing <b>Preferences</b> from the Max menu (Mac) or Options menu (Windows).
+			</li>
+			<li>
+				Click the Font tab.
+			</li>
+			<li>
+				Click in the Value column for the System Font setting. Use the <link type="vignette" module="core" name="font_menu">font menu</link> to choose the desired font.
+			</li>
+		</ul>
+	</bluebox>
+		<br />
+<bluebox>
+	<header2>
+	Setting the fallback font
+	</header2>
+		<ul>
+			<li>
+				Open the preferences window by choosing <b>Preferences</b> from the Max menu (Mac) or Options 
+				menu (Windows).
+			</li>
+			<li>
+				Scroll to the Font section.
+			</li>
+			<li>
+				Click in the Value column for the Fallback Font setting. Use the 
+				<link type="vignette" module="core" name="font_menu">font menu</link> to choose the desired font.
+			</li>
+		</ul>
+	</bluebox>
+<br />
+<bodytext>
+	<link type="vignette" module="core" name="font_preferences">More information about the settings in the font preferences</link> in the preferences window.
+</bodytext>
+</vignette>
+

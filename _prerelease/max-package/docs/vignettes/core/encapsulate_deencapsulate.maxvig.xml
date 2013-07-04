@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Encapsulate and De-encapsulate">
+	<header1>
+	Encapsulate and De-encapsulate
+	</header1>
+<bodytext>
+The <b>Encapsulate</b> command in the Edit menu creates a <link type="vignette" module="core" name="subpatchers">subpatcher</link> from a group of objects. The <b>De-encapsulate</b> command does the opposite: it transforms a subpatcher into a group of objects in the subpatcher's parent patch.
+</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Encapsulating objects
+	</header2>
+		<ul>
+		<li>
+			Select the objects in your patch you want to turn into a subpatcher.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/subpatches8.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Choose <b>Encapsulate</b> from the Edit menu. The selected portions of your
+			patch will be replaced by a new subpatch.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/subpatches9.png"  />
+		</bodytext>
+		<bodytext>
+			The new subpatcher's window will open, showing the portion of the patch you selected for
+			encapsulation, including the proper number of <o>inlet</o> and <o>outlet</o> objects.
+		</bodytext>
+		<bodytext>
+			<img src="images/subpatches10.png"  />
+		</bodytext>
+	</bluebox>
+		<br /><space/>
+	<bluebox>
+	<header2>
+	De-encapsulating a subpatch
+	</header2>
+		<ul>
+		<li>
+			Select a <o>patcher</o> object in an unlocked patcher window.
+		</li>
+		<li>
+			Choose <b>De-encapsulate</b> from the Edit menu. The subpatch’s object box
+			will disappear, and the contents of the subpatch will be pasted
+			into the parent patcher window. The connections between objects in
+			the parent patch and objects once connected to <o>inlet</o> and <o>outlet</o>
+			objects will be correctly created.
+		</li>
+		</ul>
+	</bluebox>
+</vignette>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Object Quickref">
+	<header1>
+	Object Quickref
+	</header1>
+	<bodytext>
+			Many Max objects will accept a variety of different kinds of messages. 
+			While 
+			<link module="core" name="assistance" type="vignette">Assistance</link>
+			provides a very brief description of the most commonly used 
+			messages to a Max object, you can get a list of <i>all</i> the messages 
+			the object understands using the Quickref contextual menu. You can use the 
+			Quickref menus as an aid to Max patching, automatically creating message
+			boxes that contain messages to an object from the Quickref listing.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Viewing the Quickref pop-up menu
+	</header2>
+		<ul>
+			<li>Click on any inlet to a Max object to show the Quickref pop-up menu.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/quickref_1.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<bodytext>
+			The Quickref pop-up menu displays
+		</bodytext>
+	<ul>
+		<li>
+			A listing of the messages the Max object accepts
+		</li>
+		<li>
+			Menu items that let you open
+			<link anchor="refman" module="core" name="help_docs" type="vignette">Reference pages</link>
+			and
+			<link module="core" name="help_docs" type="vignette">Help files</link>
+			for the item.
+		</li>
+		<li>
+			Menu items that let you send a message to the Max object without using a patch cord, and to query the output of the object
+		</li>
+	</ul>
+	<bodytext>
+			The Quickref menu gives you a short summary of each message and its syntax. The format of a Quickref listing is:
+		</bodytext>
+	<ul>
+		<li>
+			The name of the message
+		</li>
+		<li>
+			The message type (int / float / symbol / array) for any additional messages [in square brackets]. If there the message is followed by a
+			list, the number of items in the list is also shown in square brackets (e.g., <bi>color [float array[4]]</bi>  means that the object expects
+			a message that begins with the symbol <i>color</i> and is followed by a list of 4 floats)
+		</li>
+		<li>
+			The message’s default value, in parentheses (e.g. val = 0.73 0.82 0.63 1.00)
+		</li>
+	</ul>
+	<bluebox>
+		<header2>
+	Getting information from the Quickref pop-up menu
+	</header2>
+		<ul>
+			<li>Click on the left inlet to a Max object to show the Quickref pop-up menu.
+			As you move your cursor over any Quickref listing, a description of
+			the message will appear in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Patching from the Quickref pop-up menu
+	</header2>
+		<ul>
+			<li>
+			Click on the left inlet to a Max object to show the Quickref pop-up menu
+			and click on any message listed to select it. A <link name="message" type="refpage">message box</link> 
+			containing the message connected to the left inlet of the Max object will 
+			automatically be created, ready for you to complete by typing in any arguments the 
+			message may require.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/quickref_2.png"/>
+		</bodytext>
+	</bluebox>
+</vignette>

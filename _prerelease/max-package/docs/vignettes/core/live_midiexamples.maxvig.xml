@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="MIDI Effect Tools">
+	<header1>
+		MIDI Effect Tools
+	</header1>
+<bodytext>
+	In addition to the
+	<link type="vignette" module="core" name="live_resources_exampledevices">Max for Live example devices</link>, 
+	Max for Live includes a set of MIDI Effects that provide examples of various 
+	kinds of operations and processes. You can use these patches 
+	in series in your Live sessions, or edit and recombine them to 
+	make your own devices. 
+</bodytext>	
+<bodytext>
+	In addition to the
+	<link type="vignette" module="core" name="live_resources_exampledevices"><b>Max for Live example devices</b></link>, 
+	the 
+	<a href="https://www.ableton.com/en/packs/max-live-building-tools/">Max for Live Building Tools</a>
+	Max for Live includes a set of MIDI Effects devices that provide examples of various 
+	kinds of operations and processes. You can use these patches 
+	in series in your Live Session, or edit and recombine them to 
+	make your own devices. 
+</bodytext>	
+<bodytext>
+	Live Suite owners can download this Live Pack by choosing <b>Your Account > Your Packs</b>
+	when logged in to the Ableton website and clicking on the download button to the Live Pack.
+	To install the Live Pack, double-click on the <i>.alp</i> file
+</bodytext>
+<bluebox>
+<header2>
+	Finding the Audio Effect Building Blocks
+</header2>
+	<ul>
+	<li>
+		After you have installed the Live Pack,
+		click on the Packs button in Live's File browser to display
+		the list of currently installed Live Packs. In the column to the
+		right, click on the arrow to the left of the M4L Building Tools
+		folder to show the Live Pack contents.
+	</li>
+	</ul>
+	<br />
+</bluebox>
+<br />
+<!-- Commented out until there's something to screenshoot
+<bluebox>
+<header2>
+	Finding the MIDI Effect Tools
+</header2>
+	<ul>
+	<li>
+		Click on a File button in Live's File browser and
+		choose <b>Library</b> from the pull-down Bookmarks menu to
+		show the Library.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Presets</b>.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>MIDI Effects</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Max MIDI Effect</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Tools</b> to show the folder's contents.
+	</li>
+	<li>
+		The example devices are listed in the Tools folder 
+		beneath the Building Blocks folder. Each example device is
+		contained in its own folder, along with a number of presets.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/moremidiexamples1.png" />
+	</bodytext>
+</bluebox>
+-->
+	<br />
+	<header2>
+	Overview of MIDI Effect Tools
+	</header2>
+	<ul>
+	<li>
+		<b>Max ImproBeat </b>: A combination rhythm generator and step sequencer
+	</li>
+	<li>
+		<b>Max MidiGran </b>: A MIDI "granulator"
+	</li>
+	<li>
+		<b>Max MidiShuffler </b>: The MIDIfied little brother of the audio Buffer Shuffler
+	</li>
+	<li>
+		<b>Max PolyBeat </b>: A MIDI polyrhythmic note generator
+	</li>
+	<li>
+		<b>Max StepEcho </b>: A MIDI note repeater with decreasing or increasing velocity and rate
+	</li>
+	</ul>
+	</vignette>

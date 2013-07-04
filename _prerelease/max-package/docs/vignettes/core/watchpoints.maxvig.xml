@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Watchpoints">
+	<header1>
+	Watchpoints
+	</header1>
+<bodytext>
+	A <i>watchpoint</i> is an action you can attach to a patch cord. 
+</bodytext>
+<bodytext>
+	A <i>monitor watchpoint</i> is orange. It lets you monitor messages being sent through a patch cord. 
+</bodytext>
+<bodytext>
+	A <i>break watchpoint</i> is red. It suspends execution of your patch and opens the debug window. A watchpoint can, if desired, break <i>and</i> monitor at the same time. <link type="vignette" module="core" name="tracing_tools">More information on break watchpoints and stepping through patches using the debugger</link>.
+</bodytext>
+<bodytext>
+The Watchpoints window shows all currently defined watchpoints. To see it, choose <b>Watchpoints</b> from the Debug menu.
+</bodytext>
+<bodytext>
+	<img src="images/watchpoints_1.png"  />
+</bodytext>	
+<bodytext>
+<b><i>Note: Watchpoints are automatically saved when you quit Max. By default, all Max patches open with debug mode disabled. 
+When debug mode is off, watchpoints are greyed out in an unlocked patcher and hidden in a locked patcher.</i></b>
+</bodytext>
+	<a name="watchpointswindow"/>
+	<header2>
+	About the Watchpoints window:
+	</header2>
+		<bodytext>
+			The left column lists each current watchpoint, with color indicating its type and status.
+		</bodytext>
+		<bodytext>
+			The <i>Action</i> column contains a pop-up menu for each watchpoint. You can change
+			the type of watchpoint associated with this number (watch,  break, or watch/break)
+			or disable the watchpoint by choosing none.
+		</bodytext>
+		<bodytext>
+			The <i>Sender</i> column lists the source of the message to the watchpoint.
+		</bodytext>
+		<bodytext>
+			The <i>Patcher</i> column lists the name of the patcher where the watchpoint is located.
+		</bodytext>
+		<bodytext>
+			The <i>Value</i> column displays any messages a watchpoint receives.
+		</bodytext>
+		<bodytext>
+			The <i>Count</i> column displays the number of messages received by a watchpoint
+			since it was inserted or made active.
+		</bodytext>
+		<bodytext>
+			When the watchpoint mode is set to watch/break, the History column displays the
+			three most recent messages received by a watchpoint
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Adding a watchpoint
+	</header2>
+		<ul>
+		<li>
+			Select the patchcord or patchcords you want to insert watchpoints on and choose
+			<b>Add Watchpoint – Monitor</b> or <b>Add Watchpoint – Break</b> from the Debug menu. A new
+			numbered watchpoint marker will appear in the middle of the patchcord. 
+		</li>
+		</ul>			
+		<bodytext>
+			<img src="images/watchpoints_2.png"  />
+		</bodytext>
+	</bluebox>
+	<br />
+	<bluebox>
+	<header2>
+	Removing a watchpoint
+	</header2>
+		<ul>
+		<li>
+			Select the patchcord or patchcords that contain the watchpoints you want to
+			remove and choose <b>Remove Watchpoint</b> from the Debug menu. The watchpoint marker
+			will disappear and its entry in the Watchpoint window will be removed (note that the
+			watchpoints are not renumbered. If you add a new watchpoint, the number will be reused).
+		</li>
+		</ul>
+		<bodytext>
+			You can remove all the watchpoints currently defined by choosing <b>Remove All Watchpoints</b>
+			from the Debug menu.
+		</bodytext>
+	</bluebox>
+	<br />
+	<bluebox>
+	<header2>
+	Disabling a watchpoint
+	</header2>
+		<ul>
+		<li>
+			Select the patch cord that contains the watchpoints you want to disable
+			and choose <b>Disable Watchpoint</b> from the Debug menu. The watchpoint marker on the patch cord will turn gray to indicate it is disabled.
+		</li>
+		</ul>
+	</bluebox>
+<br />
+	
+</vignette>

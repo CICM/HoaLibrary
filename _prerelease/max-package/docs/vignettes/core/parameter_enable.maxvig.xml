@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Parameter attributes in Max">
+	<header1>
+		Parameter attributes in Max
+	</header1>
+	<bodytext>
+		In order to provide interoperability between the Max and Live 
+		application, Max for Live introduced some new attributes
+		intended to allow users to include generic Max UI objects (e.g. 
+		<o>rslider</o>, 
+		<o>multislider</o>
+		) as part of a Max for Live device.
+		These parameter attributes are available to all Max users, and 
+		provide a simple means for saving the initial state of
+		any Max/Max for Live UI object in a Max patch in addition to 
+		<link module="core" name="live_parameters" type="vignette">their use with Max for Live</link>.
+	</bodytext>
+	<header2>
+		Parameter Data Types
+	</header2>
+	<bodytext>
+		Parameters used in Max for Live can be one of four types: 
+	</bodytext>
+	<ul>
+		<li>
+		integer. Note: In Max for Live, integer ranges are 
+		restricted to 0 - 255).
+	</li>
+		<li>
+		floating-point.	
+	</li>
+		<li>
+		enum: an enumerated list of items
+	</li>
+		<li>
+		blob: any type of data you can store with a 
+		<o>pattr</o> object: single values, lists, or strings.
+	</li>
+	</ul>
+	<br/>
+	<bluebox>
+		<header2>
+		Setting an initial state for a UI object
+	</header2>
+		<ul>
+			<li>
+		Select the UI object and click the Inspector button in the Patcher toolbar 
+		to show the object's
+		<link module="core" name="inspector" type="vignette">Inspector</link>.
+	</li>
+			<li>
+		Locate the Parameter Enable attribute and click in the
+		Parameter Mode Enable checkbox. The Inspector will display
+		an additional group of attributes.
+		<br/>
+		<br/>
+		Note: If you have selected a Max for Live UI object (e.g.
+		<o>live.dial</o>,
+		<o>live.sider</o>,
+		etc.) Parameter mode is automatically enabled.
+	</li>
+		</ul>
+		<bodytext>
+			<img src="images/parameter_enable.png"/>
+		</bodytext>
+		<ul>
+			<li>
+		Locate the Initial Enable attribute and click in the checkbox to enable it.
+	</li>
+			<li>
+		Enter a value by clicking in Value column for the Initial attribute
+		and typing in a value.
+	</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<br/>
+	<header1>
+	Parameter Names
+</header1>
+	<bodytext>
+	Max provides several ways to name a parameter in a device, each
+	of which is an
+	<link module="core" name="attributes_intro" type="vignette">Attribute</link>
+	that can be set using an object's 
+	<link module="core" name="inspector" type="vignette">Inspector</link>.
+	These names can be set separately or linked together, and they serve several
+	useful purposes.
+</bodytext>
+	<ul>
+		<li>
+		The <m>Scripting Name</m> attribute can be used to identify a UI object
+		when used in conjunction with the Max <o>pattr</o> preset objects. When
+		a UI object has a scripting name set, it will automatically appear in the
+		<o>pattrstorage</o> object's inventory of parameter names when you add an
+		<o>autopattr</o> object to your Max patch as described in the 
+		<link module="max" name="pattrchapter02" type="tutorial">pattr Chapter 2</link>.		
+		Max tutorial.
+	</li>
+		<li>
+		The <m>Long Name</m> and <m>Short Name</m> attributes are 
+		<link anchor="m4lnames" module="core" name="live_parameters" type="vignette">commonly used when working with Max for Live</link>.
+	</li>
+	</ul>
+	<header1>
+	Ordering Initial Value Recall
+</header1>
+	<bodytext>
+		The Order attribute, can be used to set the order in which parameters
+		are recalled and set when a patch is opened. By default, all attributes 
+		are recalled sequentially/at one time. By setting an attribute to have a 
+		lower order number, you can recall initial parameter values in complex 
+		patches whose initial values may need to be calculated based on initial 
+		values so that the dependencies are preserved.
+		<br/>
+		<br/>
+		Note: the order in which initial values are set for attributes having
+		the same order value is indeterminate.
+	</bodytext>
+	<bluebox>
+		<header2>
+		Setting the initialization order a UI object
+	</header2>
+		<ul>
+			<li>
+		Select the UI object and click the Inspector button in the Patcher toolbar 
+		to show the object's
+		<link module="core" name="inspector" type="vignette">Inspector</link>.
+	</li>
+			<li>
+		Locate the Parameter Enable attribute and click in the
+		Parameter Mode Enable checkbox. The Inspector will display
+		an additional group of attributes.
+		<br/>
+		<br/>
+		Note: If you have selected a Max for Live UI object (e.g.
+		<o>live.dial</o>,
+		<o>live.sider</o>,
+		etc.) Parameter mode is automatically enabled.
+	</li>
+			<li>
+		Enter a value by clicking in Value column for the Order attribute
+		and typing in a value. Higher numbers will be recalled and initialized
+		first (the default is 0 - first priority).
+	</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<br/>
+</vignette>

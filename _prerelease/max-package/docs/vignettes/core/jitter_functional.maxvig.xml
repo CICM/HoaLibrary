@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Jitter Object Functional Listing"><header1>
+		An Functional Listing of all Jitter Objects
+		</header1><bodytext>
+						Here is a listing of all Jitter objects, grouped by their function. This
+						listing corresponds to the New Object menu listings in earlier versions of 
+						Jitter. Click on any subject listing to see an object listing. To see the 
+						<link anchor="refman" module="core" name="help_docs" type="vignette">Reference page</link> 
+						for any object, click on its name.
+				</bodytext>
+	 
+			<a name="Analysis"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Analysis
+	</header2>
+			<o>jit.3m</o>
+	 
+			<o>jit.bsort</o>
+	 
+			<o>jit.change</o>
+	 
+			<o>jit.findbounds</o>
+	 
+			<o>jit.histogram</o>
+	 
+			<o>jit.normalize</o>
+	 
+			<o>jit.fft</o>
+	 
+			<a name="Audio"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Audio
+	</header2>
+			<o>jit.buffer~</o>
+	 
+			<o>jit.catch~</o>
+	 
+			<o>jit.peek~</o>
+	 
+			<o>jit.poke~</o>
+	 
+			<o>jit.release~</o>
+	 
+			<o>spigot~</o>
+	 
+			<a name="Blur or Sharpen"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Blur or Sharpen
+	</header2>
+			<o>jit.avg4</o>
+	 
+			<o>jit.brass</o>
+	 
+			<o>jit.convolve</o>
+	 
+			<o>jit.fastblur</o>
+	 
+			<o>jit.robcross</o>
+	 
+			<o>jit.sobel</o>
+	 
+			<o>jit.wake</o>
+	 
+			<a name="Colorspace"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Colorspace
+	</header2>
+			<o>jit.argb2ayuv</o>
+	 
+			<o>jit.argb2grgb</o>
+	 
+			<o>jit.argb2uyvy</o>
+	 
+			<o>jit.ayuv2argb</o>
+	 
+			<o>jit.ayuv2luma</o>
+	 
+			<o>jit.ayuv2uyvy</o>
+	 
+			<o>jit.brcosa</o>
+	 
+			<o>jit.colorspace</o>
+	 
+			<o>jit.grgb2argb</o>
+	 
+			<o>jit.hsl2rgb</o>
+	 
+			<o>jit.hue</o>
+	 
+			<o>jit.luma2uyvy</o>
+	 
+			<o>jit.luma2ayuv</o>
+	 
+			<o>jit.rgb2hsl</o>
+	 
+			<o>jit.rgb2luma</o>
+	 
+			<o>jit.traffic</o>
+	 
+			<o>jit.uyvy2argb</o>
+	 
+			<o>jit.uyvy2ayuv</o>
+	 
+			<o>jit.uyvy2luma</o>
+	 
+			<a name="Compositing"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Compositing
+	</header2>
+			<o>jit.alphablend</o>
+	 
+			<o>jit.chromakey</o>
+	 
+			<o>jit.keyscreen</o>
+	 
+			<o>jit.lumakey</o>
+	 
+			<o>jit.op</o>
+	 
+			<o>jit.shade</o>
+	 
+			<o>jit.xfade</o>
+	 
+			<a name="Data"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Data
+	</header2>
+			<o>jit.concat</o>
+	 
+			<o>jit.coerce</o>
+	 
+			<o>jit.demultiplex</o>
+	 
+			<o>jit.dimmap</o>
+	 
+			<o>jit.glue</o>
+	 
+			<o>jit.matrix</o>
+	 
+			<o>jit.matrixset</o>
+	 
+			<o>jit.matrixinfo</o>
+	 
+			<o>jit.multiplex</o>
+	 
+			<o>jit.pack</o>
+	 
+			<o>jit.scissors</o>
+	 
+			<o>jit.split</o>
+	 
+			<o>jit.submatrix</o>
+	 
+			<o>jit.unpack</o>
+	 
+			<o>jit.thin</o>
+	 
+			<a name="Devices"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Devices
+	</header2>
+			<o>jit.avc</o>
+	 
+			<o>jit.desktop</o>
+	 
+			<o>jit.displays</o>
+	 
+			<o>jit.dx.videoout</o>
+	 
+			<o>jit.qt.videoout</o>
+	 
+			<a name="Generators"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Generators
+	</header2>
+			<o>jit.bfg</o>
+	 
+			<o>jit.desktop</o>
+	 
+			<o>jit.dx.grab</o>
+	 
+			<o>jit.gen</o>
+	 
+			<o>jit.gencoord</o>
+	 
+			<o>jit.gradient</o>
+	 
+			<o>jit.grab</o>
+	 
+			<o>jit.graph</o>
+	 
+			<o>jit.lcd</o>
+	 
+			<o>jit.mgraphics</o>
+	 
+			<o>jit.noise</o>
+	 
+			<o>jit.plot</o>
+	 
+			<o>jit.qt.grab</o>
+	 
+			<o>jit.qt.movie</o>
+	 
+			<a name="Lists"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Lists
+	</header2>
+			<o>jit.fill</o>
+	 
+			<o>jit.iter</o>
+	 
+			<o>jit.spill</o>
+	 
+			<a name="Math"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Math
+	</header2>
+			<o>jit.charmap</o>
+	 
+			<o>jit.clip</o>
+	 
+			<o>jit.conway</o>
+	 
+			<o>jit.expr</o>
+	 
+			<o>jit.la.determinant</o>
+	 
+			<o>jit.la.diagproduct</o>
+	 
+			<o>jit.la.inverse</o>
+	 
+			<o>jit.la.mult</o>
+	 
+			<o>jit.la.trace</o>
+	 
+			<o>jit.la.uppertri</o>
+	 
+			<o>jit.linden</o>
+	 
+			<o>jit.map</o>
+	 
+			<o>jit.op</o>
+	 
+			<o>jit.scalebias</o>
+	 
+			<o>jit.transpose</o>
+	 
+			<a name="Networking"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Networking
+	</header2>
+			<o>jit.broadcast</o>
+	 
+			<o>jit.net.send</o>
+	 
+			<o>jit.net.recv</o>
+	 
+			<o>jit.qt.broadcast</o>
+	 
+			<a name="OpenGL"/>
+<bodytext>
+</bodytext>
+	<header2>
+	OpenGL
+	</header2>
+			<o>jit.anim.drive</o>
+	 			
+			<o>jit.anim.node</o>
+	 
+			<o>jit.anim.path</o>
+	 
+			<o>jit.gl.camera</o>
+	 			
+			<o>jit.gl.gridshape</o>
+	 
+			<o>jit.gl.graph</o>
+	 
+			<o>jit.gl.handle</o>
+	 
+			<o>jit.gl.isosurf</o>
+	 
+			<o>jit.gl.imageunit</o>
+	 
+			<o>jit.gl.light</o>
+	 
+			<o>jit.gl.lua</o>
+	 
+			<o>jit.gl.material</o>
+	 
+			<o>jit.gl.mesh</o>
+	 
+			<o>jit.gl.model</o>
+	 
+			<o>jit.gl.multiple</o>
+	 
+			<o>jit.gl.node</o>
+	 
+			<o>jit.gl.nurbs</o>
+	 
+			<o>jit.gl.path</o>
+	 
+			<o>jit.gl.physdraw</o>
+	 
+			<o>jit.gl.pix</o>
+	 
+			<o>jit.gl.plato</o>
+	 
+			<o>jit.gl.render</o>
+	 
+			<o>jit.gl.shader</o>
+	 
+			<o>jit.gl.sketch</o>
+	 
+			<o>jit.gl.slab</o>
+	 
+			<o>jit.gl.text2d</o>
+	 
+			<o>jit.gl.text3d</o>
+	 
+			<o>jit.gl.texture</o>
+	 
+			<o>jit.gl.videoplane</o>
+	 
+			<o>jit.gl.volume</o>
+	 
+			<a name="Particles"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Particles
+	</header2>
+			<o>jit.p.bounds</o>
+	 
+			<o>jit.p.shiva</o>
+	 
+			<o>jit.p.vishnu</o>
+	 
+			<a name="QuickTime"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Physics
+	</header2>
+			<o>jit.phys.6dof</o>
+	 
+			<o>jit.phys.barslide</o>
+	 
+			<o>jit.phys.body</o>
+	 
+			<o>jit.phys.conetwist</o>
+	 
+			<o>jit.phys.hinge</o>
+	 
+			<o>jit.phys.multiple</o>
+	 
+			<o>jit.phys.picker</o>
+	 
+			<o>jit.phys.point2point</o>
+	 
+			<o>jit.phys.world</o>
+	 
+			<a name="QuickTime"/>
+<bodytext>
+</bodytext>
+	<header2>
+	QuickTime
+	</header2>
+			<o>jit.qt.broadcast</o>
+	 
+			<o>jit.qt.effect</o>
+	 
+			<o>jit.qt.grab</o>
+	 
+			<o>jit.qt.movie</o>
+	 
+			<o>jit.qt.record</o>
+	 
+			<o>jit.qt.videoout</o>
+	 
+			<o>jit.vcr</o>
+	 
+			<a name="Spatial"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Spatial
+	</header2>
+			<o>jit.mxform2d</o>
+	 
+			<o>jit.plume</o>
+	 
+			<o>jit.rota</o>
+	 
+			<o>jit.rubix</o>
+	 
+			<o>jit.repos</o>
+	 
+			<o>jit.resamp</o>
+	 
+			<o>jit.sprinkle</o>
+	 
+			<a name="Special FX"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Special FX
+	</header2>
+			<o>jit.altern</o>
+	 
+			<o>jit.ameba</o>
+	 
+			<o>jit.brcosa</o>
+	 
+			<o>jit.eclipse</o>
+	 
+			<o>jit.fluoride</o>
+	 
+			<o>jit.freeframe</o>
+	 
+			<o>jit.glop</o>
+	 
+			<o>jit.hatch</o>
+	 
+			<o>jit.plur</o>
+	 
+			<o>jit.qt.effect</o>
+	 
+			<o>jit.roy</o>
+	 
+			<o>jit.scanoffset</o>
+	 
+			<o>jit.scanslide</o>
+	 
+			<o>jit.scanwrap</o>
+	 
+			<o>jit.slide</o>
+	 
+			<o>jit.streak</o>
+	 
+			<o>jit.tiffany</o>
+	 
+			<o>jit.wake</o>
+	 
+			<a name="Strings"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Strings
+	</header2>
+			<o>jit.str.fromsymbol</o>
+	 
+			<o>jit.str.op</o>
+	 
+			<o>jit.str.regexp</o>
+	 
+			<o>jit.str.tosymbol</o>
+	 
+			<o>jit.textfile</o>
+	 
+			<a name="User Interface"/>
+<bodytext>
+</bodytext>
+	<header2>
+	User Interface
+	</header2>
+			<o>jit.cellblock</o>
+	 
+			<o>jit.fpsgui</o>
+	 
+			<o>jit.pwindow</o>
+	 
+			<o>jit.window</o>
+	 
+			<a name="Utilities"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Utilities
+	</header2>
+			<o>jit.cycle</o>
+	 
+			<o>jit.fprint</o>
+	 
+			<o>jit.obref</o>
+	 
+			<o>jit.openexr</o>
+	 
+			<o>jit.print</o>
+	 
+			<o>jit.qball</o>
+	 
+			<o>jit.reverse</o>
+	 
+			<o>jit.turtle</o>
+	 
+			<o>jit.uldl</o>
+	 
+			<o>jit.qfaker</o>
+</vignette>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Creating MIDI Effects">
+	<header1>
+	Creating MIDI Effects
+	</header1>
+<bodytext>
+	Max for Live lets you create MIDI effects devices which receive MIDI information
+	from the Live application, perform some operation on that data (e.g. mapping incoming
+	notes to a user-definied musical scale), and then pass MIDI data downstream to 
+	another MIDI effect or to a MIDI Instrument - the last device in a MIDI effects
+	chain (although the audio output of the instrument may be further processed 
+	by any number of Audio effects devices).
+</bodytext>
+<bodytext>
+	By convention, Max for Live gets all its MIDI data from the Live application
+	using the <o>midiin</o> object, and all of that data must all be passed downstream to other MIDI
+	devices by means of the <o>midiout</o> object. Max for Live provides a means to redirect 
+	portions of an incoming MIDI data stream for processing while leaving the rest of
+	the stream unchanged, as described below.
+</bodytext>
+<bodytext>
+	Also by convention, all Max for Live MIDI devices receive audio on MIDI channel 1.
+	You can receive receive MIDI data in your Max for Live MIDI Effects 
+	device on a channel number other than 1 by routing the MIDI input as described here.
+</bodytext>
+<bodytext>
+	Max for Live provides several tutorials and example MIDI effects devices
+	you can try, study, and modify:
+</bodytext>
+	<ul>
+	<li>
+	One of the 
+	<link type="vignette" module="core" name="live_resources_exampledevices">Max for Live example devices</link> 
+	contained in the Max for Live Essentials Live pack is an example of a classic MIDI effects device - a Step Sequencer 
+	effect that contains four independent step sequencers whose editor looks and acts like Live's native MIDI editor.
+	</li>
+	<li>
+		The
+		MIDI Effect <link type="vignette" module="core" name="live_midiexamples">Tools</link> and <link type="vignette" module="core" name="live_midibuildingblocks">Building Blocks</link>		
+ demonstrate techniques for processing and generating MIDI.
+	</li>
+<!-- Since the tutorials aren't here I'm commenting it out for now
+	<li>
+		Each of the 
+		<link type="vignette" module="core" name="live_resources_tutorials">Max for Live Tutorials</link>
+		contains a sequence of fully functional Audio effects, MIDI effects, or Instruments
+		that you can use as starting points.
+	</li>
+	<li>
+	The tutorials are Live sessions
+	that consist of a sequence of fully-featured devices
+	that will introduce you to the basics of programming
+	and techniques for processing data. These tutorials include a sequence on
+	<link type="vignette" module="core" name="live_resources_tutorials" anchor="midi_effect_tutorials1">processing MIDI Notes</link>
+	and a tutorial sequence on
+	<link type="vignette" module="core" name="live_resources_tutorials" anchor="midi_effect_tutorials2">building MIDI generators</link>
+	</li>
+-->
+	</ul>
+<bodytext>
+	You can also download copies of instruments from the original "Big Three" devices originally released with Max For Live 1.0
+	as individual Live packs. The 
+	<a href="https://www.ableton.com/en/packs/max-live-step-sequencer/">The Max for Live 1.0 Step Sequencer</a>
+	is a good example of a MIDI effects device that you may find useful as a starting point.
+</bodytext>
+<header2>
+	Capturing a portion of the MIDI data stream in Max for Live
+</header2>
+<bodytext>
+	Max for Live requires that all MIDI data coming into a MIDI Effects
+	device be passed downstream. There are situations in which you may 
+	want to use only a portion of the incoming MIDI data stream - to select
+	only MIDI notes in a given range, or input from specific MIDI continuous
+	controllers for use in your device. The Max <o>midiselect</o> object lets
+	you specify portions of an incoming MIDI data stream to filter out for
+	further processing in your device, and passes any other MIDI data out 
+	unchanged.
+</bodytext>
+<br />
+<bluebox>
+<header2>
+Redirecting a part of a MIDI data stream
+</header2>
+        <ul>
+        <li>
+        	In your unlocked patch, add a <o>midiselect</o> object and connect its inlet to the 
+        	outlet of the <o>midiin</o> object in your MIDI Effect or MIDI Instrument template
+        	file.       
+        </li>
+        <li>
+			Following the name of the <o>midiselect</o> object enter the attributes corresponding
+			to the MIDI data you want to filter out of the data stream, followed by any
+			arguments that specify additional data (MIDI channel numbers, MIDI controller
+			numbers, etc.). Attributes names
+			begin with an at-sign (@), and there is no space following it and the
+			type of data you want to filter out. 
+			<br />
+			The data types are: 
+			<br />
+			ch: MIDI channel (only used when routing MIDI data from a non-channel 1
+			source, as described below)
+			<br />
+			note: MIDI note data
+			<br />
+			ctl: MIDI controller data
+			<br />
+			bend:pitchbend data
+			<br />
+			pgm: MIDI program change messages 
+			<br />
+			touch: Aftertouch data
+			<br />
+			poly: Polyphonic aftertouch data
+        </li>
+		<bodytext>
+	<img src="images/MIDI-input6.png" />
+		</bodytext>
+		<li>
+			Connect the input of the <o>midiout</o> object in your MIDI Effect or MIDI 
+			Instrument template file to the right outlet of the <o>midiselect</o> object. 
+			Any data you do not specify when you instantiate the object or data you 
+			select by sending messages to the <o>midiselect</o> object will be passed 
+			downstream without being edited.
+        </li>
+        </ul>
+</bluebox>
+<br />
+</vignette>

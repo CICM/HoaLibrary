@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Using the Extras Menu">
+	<header1>
+	Using the Extras Menu
+	</header1>
+	<bodytext>
+		The Extras menu is a place to put handy utility patches you use on a regular basis. Just choose the patch you want to open from the menu, and it will appear. If it's already open, use the Extras menu to bring it to the front (patches launched from the Extras menu won't appear in the Window menu).
+	</bodytext>
+	<header2>
+	Included Extras
+	</header2>
+	<bodytext>
+	Max comes with a few Extras we think are pretty useful. They're described below. 
+	It could be argued that extras that are included are not actually extras, are they?
+</bodytext>
+<ul>
+	<li><i>AddingExtras</i> tells you how to add your own patches to the Extras menu. Basically, all you have to do is add the patch to the extras folder inside your patches folder, and restart Max. You can also create subfolders inside the extras folder. When you do this, the folder name will be the title of a hierarchical menu that lists the patchers contained inside the folder.</li>
+	<li><i>Audiotester</i> measures input and output levels for your audio setup, and can be used to test your audio hardware and sound system.</li>
+	<li><i>DSP CPU Monitor</i> shows the current approximate audio CPU utilization.</li>
+	<li><i>ExamplesOverview</i> lets you browse and launch examples included with Max.</li>
+	<li><i>GlobalTransport</i> lets you you start, stop, and display the passage of time for objects that use
+	<link type="vignette" module="core" name="maxtime">Max Time</link> 
+	formats.</li>
+	<li><i>Human Interface Driver Tester</i> lets you set up and test any object that support the <o>hi</o> object.</li>
+	<li><i>JitterTester</i> tests video input devices.</li>
+	<li><i>KeyMidi</i> lets you use your computer keyboard as a MIDI keyboard.</li>	
+	<li><i>Meterin and Meterout</i> provide 24 channels of meters for audio input and output.</li>
+	<li><i>MIDI Tester</i> will display all MIDI input and output devices and lets you test your connections.</li>
+	<li><i>Mousemeter</i> tracks the mouse.</li>
+	<li><i>ObjectHelpLauncher</i> is a fast way to open a help file.</li>
+	<li><i>Quickrecord</i> makes it easy to record the audio you are producing.</li>
+	<li><i>UDP Tester</i> lets you test the sending of Max messages over a network using UDP.</li>
+</ul>
+</vignette>
+
+	

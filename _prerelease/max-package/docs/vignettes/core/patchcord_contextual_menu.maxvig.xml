@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Patch Cord Menu">
+	<header1>
+	Patch Cord Contextual Menu
+	</header1>
+	<bodytext>
+		The Patch Cord Contextual Menu makes your patching life easier by providing you quick 
+		access to a number of useful patching activities with a click of the mouse. You can
+		use the menu to quickly align, delete and route connections, create or delete
+		<link module="core" name="watchpoints" type="vignette">watchpoints</link> 
+		when debugging a patch, and even disable/enable a selected connection.
+	</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+		Viewing the Patch Cord Contextual Menu
+	</header2>
+		<ul>
+			<li>
+			Hover over a patchcord to highlight it and display the menu button, 
+			and click on the menu button to display the contextual menu.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/patchcordmenu_1.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<bodytext>
+			The Patch Cord Contextual Menu displays
+	</bodytext>
+	<ul>
+		<li>
+			Menu items that let you delete, align, and route a patch cord or remove its segments.
+		</li>
+		<li>
+			Menu items that let you add or remove
+			Monitor
+			or 
+			Break 
+			watchpoints to the connection, and show/hide the watchpoint.
+		</li>
+		<li>
+			Menu items for enabling and disabling the patch cord connection.
+		</li>
+		<li>
+			A menu item to set the color of the patch cord.
+		</li>
+	</ul>
+	<bluebox>
+		<header2>
+		Getting information from the Patch Cord Contextual Menu
+	</header2>
+		<ul>
+			<li>
+			Hover over a patchcord to highlight it and display the menu button, and click on the menu button to display the contextual menu.
+		</li>
+			<li>
+			As you move your cursor over any menu listings, a description of
+			the message will appear in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+			Patching from the Patch Cord Contextual Menu
+		</header2>
+		<ul>
+			<li>
+			Choose <b>Delete</b> from the menu to delete the currently selected patch cord.
+		</li>
+			<li>
+			Choose <b>Align</b> from the menu to align the currently selected patch cord.
+		</li>
+			<li>
+			Choose <b>Route Patch Cords</b> from the menu to create a patch cord path that routes the connection to avoid overlapping external objects in your patch.
+		</li>
+			<li>
+			Choose <b>Remove All Segments</b> from the menu to remove any and all segments in the selected patch cord.
+		</li>
+			<li>
+			Choose <b>Color....</b> from the menu to open the
+			<link module="core" name="color_picker" type="vignette">Color Picker</link>
+			and choose a color for the currently selected patch cord.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+			Debugging with the Patch Cord Contextual Menu
+		</header2>
+		<ul>
+			<li>
+			Choose <b>Add Watchpoint - Monitor</b> from the menu to add a
+			<link module="core" name="watchpoints" type="vignette">monitor watchpoint</link>
+			to the currently selected patch cord.
+		</li>
+			<li>
+			Choose <b>Add Watchpoint - Break</b> from the menu to add a
+			<link module="core" name="watchpoints" type="vignette">monitor watchpoint</link>
+			to the currently selected patch cord.
+		</li>
+			<li>
+			Choose <b>Remove Watchpoint</b> from the menu to remove any 
+			breakpoints associated with the currently selected patch cord.
+		</li>
+			<li>
+			Choose <b>Show Watchpoints</b> from the menu to display the 
+			<link anchor="watchpointswindow" module="core" name="watchpoints" type="vignette">Watchpoints Window</link>
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+			Disabling/Enabling patch cords
+		</header2>
+		<bodytext>
+			You can use the Patch Cord Contextual menu to disable a patch cord - to prevent it from sending data to the object to which it is connected.
+		</bodytext>
+		<ul>
+			<li>
+			Hover over a patchcord to highlight it and display the menu button, and click on the menu button to display the contextual menu.
+		</li>
+			<li>
+			Choose <b>Disable Patch Cord</b> from the contextual menu. The patch cord will be greyed out and display a
+			button indicating that it is disabled.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/disabled_patchcord.png"/>
+		</bodytext>
+		<bodytext>
+			Choose <b>Enable Patch Cord</b> from the contextual menu to re-enable data transfer.
+		</bodytext>
+	</bluebox>
+	<br/>
+	<space/>
+</vignette>

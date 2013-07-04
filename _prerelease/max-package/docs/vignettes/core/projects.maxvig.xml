@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="About Projects">
+	<header1>About Projects</header1>
+	<bodytext>
+		<i>Projects</i> collect and organize the disparate elements relevant to your Max work including patchers, media, and code into a centrally-managed location, with per-project control over search path and Max settings.</bodytext>
+	<bodytext>Projects offer essentially three new features to improve your Max workflow:
+		<ol>
+			<li>
+				A simple interface with which you can easily view and manage patchers, media files, code and other assets in use by your main patcher(s).</li>
+			<li>An extension to the central Max search path
+				<ul>
+					<li>ensures that Project-specific elements local to a Project are preferentially loaded (before files outside of the Project are searched).</li>
+					<li>isolates Project-specific assets from other patchers and Projects.</li>
+					<li>allows the user to easily switch between global and project-local assets</li>
+					<li>potentially reduces the number of paths in Max's global search path, improving overall patcher loading and editing speed</li>
+				</ul>
+			</li>
+			<li>'Open Actions', with which Max configuration options can be changed when loading a Project.</li>
+		</ol>
+	</bodytext>
+		
+	<bodytext>
+		<b>Topics:</b><br/>
+		<link name="projects_creating" type="vignette" module="core">Creating a Project</link><br/>
+		<link name="projects_anatomy" type="vignette" module="core">Anatomy of the Project Window</link><br/>
+		<link name="projects_addingfiles" type="vignette" module="core">Adding and Removing Files to/from Projects</link><br/>
+		<link name="projects_editingfiles" type="vignette" module="core">Editing Files in Projects</link><br/>
+		<link name="projects_consolidate" type="vignette" module="core">The Manage Project Menu</link><br/>
+		<link name="projects_settings" type="vignette" module="core">Project Settings</link><br/>
+		<link name="projects_searchpath" type="vignette" module="core">Project Search Paths</link><br/>
+		<link name="projects_searchpath2" type="vignette" module="core">Project Search Path Example</link><br/>
+		<link name="projects_openactions" type="vignette" module="core">Project Open Actions</link><br/>
+		<link name="projects_devices" type="vignette" module="core">Max for Live Device Projects</link><br/>
+	</bodytext>	
+	
+	<!--
+	<bodytext>
+	Project Settings are accessed from the Project window. The 
+		<link module="core" name="project_window" type="vignette">
+			Project window</link>
+		can be invoked from the 'Show Containing Project' button at the bottom of your patcher window
+		<img src="images/project-show_containing.png"/>
+	</bodytext>
+	-->
+</vignette>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Javascript in Max">
+<header1>
+Javascript in Max
+</header1>
+<body>
+<ul>
+<li>
+<link type="vignette" module="js" name="jsintro">Introduction</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsbasic">Basic techniques</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsglobal">Universally Available Methods</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsmaxobject">the Max Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jspatcherobject">the Patcher Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsmaxobj">the Maxobj Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jswindobj">the Wind Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsglobalobject">the Global Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jstaskobject">the Task Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsfolderobject">the Folder Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsfileobject">the File Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsthreading">Javascript and Threading</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsuiintro">jsui Intro</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsuiobject">the jsui Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsimageobject">the Image Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jssketchobject">the Sketch Object</link>
+</li>
+<li>
+<link type="vignette" module="js" name="jsmgraphics">MGraphics Quick Start Guide</link>
+</li>
+</ul>
+</body>
+</vignette>

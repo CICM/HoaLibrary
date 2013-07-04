@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Basic Javascript programming: Global Methods">
+<header1>Universally Available Methods</header1>
+<bodytext>
+The following methods are defined in the global Javascript context and can be used anywhere, including global code.
+</bodytext>
+<code>
+  <b>cpost</b> (<i>any arguments</i>)
+</code>
+<bodytext>
+Prints a message to the system console window. See post() below for further details about arguments.
+</bodytext>
+<code>
+  <b>error</b> (<i>any arguments</i>)
+</code>
+<bodytext>
+Sends a red tinged message to the Max window.
+</bodytext>
+<code>
+function bang()
+{
+error("What just happened?\n");
+}
+</code>
+<code>
+  <b>messnamed</b> (<i>Max object name, message name, any arguments</i>)
+</code>
+<bodytext>
+Sends a message to the named Max object. A named Max object is an object associated with a global symbol (not an object with a patcher-specific name). For example, Max <o>receive</o> objects are bound to global symbols. The following code would send the message bang to the named object flower.
+</bodytext>
+<code>
+  messnamed("flower","bang”);
+</code>
+
+
+
+
+
+
+
+
+
+
+<code>
+  <b>post</b> (<i>any arguments</i>)
+</code>
+<bodytext>
+Prints a representation of the arguments in the Max window. If post() has no arguments, it prints starting on the next line. Otherwise it prints the input on the current line separated by spaces. Arrays are unrolled to one level as with outlet.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  a = new Array(900,1000,1100);
+  post(1,2,3,"violet",a);
+  post();
+  post(4,5,6);
+</code>
+<bodytext>
+ These statements produce the following output in the Max window:
+</bodytext>
+<bodytext>
+1 2 3 violet 900 1000 1100
+4 5 6
+</bodytext>
+<bodytext>
+If you want a line break in the middle of a call to post() you can use "\n" within a string (this 
+is now a general feature of Max). Also, post() begins a new line if the last person to write to 
+the Max window was not the <o>js</o> object.
+</bodytext>
+<header2>The <b>jsthis</b> Object</header2>
+<bodytext>
+The <b>jsthis</b> object is the this within the context of any function you define that can be invoked 
+from Max as well as your global code. When you define functions, they become methods of your extension 
+of jsthis. When you use variables in your global code, they become its properties. The <b>jsthis</b> object 
+has certain built-in properties and methods that facilitate interacting with and controlling the 
+Max environment.
+</bodytext>
+<a name="jsthisproperties" />
+<bodytext>
+jsthis Properties
+</bodytext>
+<code>
+  <b>autowatch</b> (<i>Number, get/set</i>)
+</code>
+<bodytext>
+Turns on the automatic file recompilation feature where a file is reloaded and recompiled if it changes. This is particularly useful during development of your Javascript code if you have several <o>js</o> instances using the same source file and you want them all to update when the source changes. It can also be used to facilitate the use of an external text editor. When the text editor saves the file, the <o>js</o> object will notice and recompile it. By default, the value of autowatch is 0 (off). If you want to turn on autowatch, it is best to do so in your global code.
+</bodytext>
+<code>
+  <b>box</b> (<i>Maxobj, get</i>)
+</code>
+<bodytext>
+Returns the Maxobj containing the <o>js</o> object. This is most useful for the <o>jsui</o> object to obtain the rectangle of the object’s box.
+For more information on this object, see
+<link type="vignette" module="js" name="jsmaxobject">the Max Object</link>.
+</bodytext>
+<code>
+  <b>editfontsize</b> (<i>Number, get/set</i>)
+</code>
+<bodytext>
+Controls the size of the font shown in the text editing window where you edit a script in points. By assigning the editfontsize property in your global code, you can override the default font size setting for text editing, which is the same size as the text shown in the Max window.
+</bodytext>
+<code>
+  <b>inlet</b> (<i>Number, get</i>)
+</code>
+<bodytext>
+During the execution of a function, the inlet property reports the inlet number that received the message that triggered the function, starting at 0 for the leftmost inlet. This property’s value is 0 within global code.
+</bodytext>
+<code>
+  <b>inlets</b> (<i>Number, get/set</i>)
+</code>
+<bodytext>
+Specifies how many inlets an instance should have. The inlets property must be set in the global code to have any effect. If it isn't set, an object with one inlet will be created.
+</bodytext>
+<code>
+  <b>inspector</b> (<i>Number get/set</i>)
+</code>
+<bodytext>
+Specific to the <o>jsui</o> object. The inspector property, if set to 1, causes Max to look for an inspector patch specific to your script rather than the default jsui-insp.pat file. The name used will be the name of your script (without the .js extension) plus –insp.pat. For example, if your script is called foo.js, your inspector file should be named foo-insp.pat. Inspector patches can be placed anywhere in the Max search path.
+</bodytext>
+<code>
+  <b>jsarguments</b> (<i>Array, get</i>)
+</code>
+<bodytext>
+Allows access to the arguments typed into your object when it was instantiated. The filename is jsarguments[0], the first typed-in argument is jsarguments[1]. The number of arguments plus one is jsarguments.length. jsarguments[] is available in global code and any function. It never changes after an object is instantiated, unless the Max <o>js</o> object receives the jsargs message with new typed-in arguments.
+</bodytext>
+<bodytext>
+Example:
+</bodytext>
+<bodytext>
+Creating an object with a variable number of outlets based on an argument typed into the <o>js</o> object:
+</bodytext>
+<code>
+  // set a test default value, protects against
+  // a bad arg or no args
+  outlets = 0;
+  if (jsarguments.length >= 2)
+    outlets = jsarguments[1];
+  if (!outlets)
+  outlets = 1; // default value
+</code>
+<code>
+  <b>max</b> (<i>Max, get</i>)
+</code>
+<bodytext>
+Returns a Javascript representation of the "max" object (i.e., the recipient of ; max preempt 1 in 
+a message box). Lets you send any message to the object that controls the Max application. In addition, 
+the max object has <o>js</o>-specific properties listed in the section on <o>js</o> 
+<link type="vignette" module="js" name="jsmaxobject" anchor="maxobjectproperties">Max Object Properties</link>. 
+Here is an example of sending the max object the preempt message to turn Overdrive on:
+</bodytext>
+<code>
+  max.preempt(1);
+</code>
+<code>
+  <b>maxclass</b> (<i>String, get</i>)
+</code>
+<bodytext>
+Returns "js" (the standard Javascript class property returns "jsthis”)
+</bodytext>
+<code>
+  <b>messagename</b> (<i>String, get</i>)
+</code>
+<bodytext>
+The name of the message to the <o>js</o> object that invoked the method currently running. In global code, this is a nil value. This is generally useful only from within an anything() function that will be called when no specific function name matches the message sent to the <o>js</o> object. Here is an example of an anything() function that adds a property to a variable declared in global code. Note the use of the tricky Javascript bracket notation to specify a variable property.
+</bodytext>
+<code>
+  var stuff;
+  function anything(val)
+  {
+    if (arguments.length) // were there any arguments?
+      stuff[messagename] = val;
+  }
+</code>
+<code>
+  <b>patcher</b> (<i>Patcher, get</i>)
+</code>
+<bodytext>
+Access to the patcher containing the <o>js</o> object. See 
+<link type="vignette" module="js" name="jspatcherobject">the Patcher Object</link>
+for more information on this object.
+</bodytext>
+<code>
+  <b>outlets</b> (<i>Number, get/set</i>)
+</code>
+<bodytext>
+The number of inlets an object should have. The outlets property must be set in the global code to have any effect. If it isn’t set, and object with one outlet will be created.
+</bodytext>
+<a name="jsthismethods" />
+<bodytext>
+jsthis Methods
+</bodytext>
+<bodytext>
+The important methods of the <b>jsthis</b> object are outlet() and post(). The others listed here are typically for more advanced applications.
+</bodytext>
+<code>
+  <b>arrayfromargs</b> (<i>message, argument list</i>)
+</code>
+<bodytext>
+A utility for writing functions that take a variable number of arguments, and/or those that can be called using various messages (such as an anything function). The Function object has an arguments property that can be numerically indexed like an Array but is not an instance of Array. This means that you cannot call Array functions such as sort() on the arguments property, or send the arguments property out an outlet as a list of values. The arrayfromargs() method will convert the arguments property to an Array, optionally with message as the zeroth element of the array. This message usage is useful for processing messages as though they are lists beginning with a symbol, as would be typical in your anything function. Here is an example of a function that allows its arguments to be sorted. Note that messagename is a property of the <b>jsthis</b> object that returns the name of the message that invoked the function.
+</bodytext>
+<code>
+  function anything()
+  {
+    var a = arrayfromargs(messagename,arguments);
+  
+    a.sort();
+    outlet(0,a);
+  }
+</code>
+<code>
+  <b>assist</b> (<i>any arguments</i>)
+</code>
+<bodytext>
+Sets the patcher assist string for a designated inlet or outlet of a <o>js</o> object box
+</bodytext>
+<bodytext>
+designed to be called from the assistance function specified as an argument to the setinletassist() or setoutletassist() method (see example under setoutletassist() below).
+</bodytext>
+<code>
+  <b>declareattribute</b> (<i>attributenamex, gettername, settername, embed</i>)
+</code>
+<bodytext>
+Declare an attribute which can be set, queried, and optionally stored in the patcher file. The attributename, argument is required, but the following arguments are optional. If no getterr or setter methods are specified, default ones will be used. These attributes can also be referenced by pattr. A few example uses are below.
+</bodytext>
+<code>
+  // default getter/setter
+  var foo=2;
+  declareattribute("foo"); //simple
+
+  // default getter/setter and embed on save
+  declareattribute("foo",null,null,1);
+
+  // explicit getter/setter
+  declareattribute("foo","getfoo","setfoo");
+
+  function setfoo(v)
+  {
+    foo = v;
+  }
+
+  function getfoo()
+  {
+    return foo;
+  }
+
+  function bang()
+  {
+    outlet(0,foo);
+  }
+</code>
+<a name="embedmessage" />
+<code>
+  <b>embedmessage</b> (<i>method_name as string, any arguments</i>)
+</code>
+<bodytext>
+The embedmessage method works only inside of your save() function. You use it to specify the name of a function you want to be called when the <o>js</o> object containing your script is recreated. The function name must be given as a string, followed by the arguments you wish to pass to the function. These arguments will typically be numbers, arrays, or strings (Javascript objects cannot be used in this context) and will reflect the current state of your object.
+</bodytext>
+<bodytext>
+You may use the embedmessage method as many times as you want to specify multiple functions you wish to invoke to restore object state. Here is an example where functions we assume you’ve defined called numchairs(), numtables(), and roomname() are used in separate embedmessage statements within a save function.
+</bodytext>
+<code>
+  function save()
+  {
+    embedmessage("numchairs",20);
+    embedmessage("numtables",2);
+    embedmessage("roomname","diningroom");
+  }
+</code>
+<bodytext>
+When  the <o>js</o> object containing this script is recreated, the function numchairs will be called with an argument of 20, followed by the numtables function with an argument of 2. Finally, the roomname function will be called with an argument of the String diningroom.
+</bodytext>
+<code>
+  <b>notifyclients</b> (<i></i>)
+</code>
+<bodytext>
+Notifies any clients (such as the <o>pattr</o> family of objects), that the object’s current value has changed. Clients can then take appropriate action such as sending a <o>js</o> instance the message getvalueof to invoke the getvalueof() method (if defined – see the special function names listed above for more information). The notifyclients() method is useful for objects that define setvalueof() and getvalueof() functions for <o>pattr</o> compatibility.
+</bodytext>
+<code>
+  <b>outlet</b> (<i>outlet_number, any arguments</i>)
+</code>
+<bodytext>
+Sends the data after the first argument out the outlet specified by the outlet_number. 0 refers to the leftmost outlet. If the outlet_number is greater than the number of outlets, no output occurs.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  outlet(0,"bang");  // sends a bang out the left outlet
+
+  outlet(1,4,5,6); // sends a list 4 5 6 out second-from-left 
+</code>
+<bodytext>
+If the argument to outlet() is a Javascript object, it is passed as the Max message <m>jsobject &lt;jsvalue&gt;</m> 
+which is the address of the object. When jsobject followed by a number is sent to a <o>js</o> object, it is parsed 
+and checked to see if the number specifies the address of a valid Javascript object. If so, the word jsobject disappears 
+and the function sees only the Javascript object reference.
+</bodytext>
+<bodytext>
+If the argument to outlet is an array, it is unrolled (to one level only) and passed as a Max message or list (depending on whether the first element of the array is a number or string).
+</bodytext>
+<code>
+  <b>setinletassist</b> (<i>inlet_number, object</i>)
+</code>
+<bodytext>
+Associates either a number, string, or function with the numbered inlet (starting at 0 for the left inlet). If -1 is passed as the inlet number, the object argument is used for all inlets. In order to produce any assistance text in the patcher window the assistance function needs to call the assist() method described above. See example at setoutletassist() below. The setinletassist() and setoutletassist() functions are best called in global code but can be called at any time. You can even replace the assistance function or string dynamically.
+</bodytext>
+<code>
+   <b>setoutletassist</b> (<i>number, object</i>)
+</code>
+<bodytext>
+Associates either a number, string, or function with the numbered outlet (starting at 0 for the left outlet). If -1 is passed as the outlet number, the object argument is used for all outlets. In order to produce any assistance in the patcher, the assistance function needs to call the assist() method described above. 
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  // assistance function
+  function describe_it(num)
+  {
+    assist("this is outlet number",num);
+  }
+  // global code to set it up
+  setoutletassist(-1,describe_it);
+</code>
+
+</vignette>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Live Abstractions">
+	<header1>
+	Live Abstractions
+	</header1>
+	<bodytext>
+		Useful audio and MIDI abstractions you can use in your own devices. If you are reading this document in Max, you can click on the links below to open the files.
+	</bodytext>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.bal1~.maxpat/M4L.bal1~.maxpat">M4L.bal1~.maxpat</a>: Balance two mono signals with constant power
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.bal2~.maxpat/M4L.bal2~.maxpat">M4L.bal2~.maxpat</a>: Balance two stereo signals with constant power
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.comb2.voice~.maxpat/M4L.comb2.voice~.maxpat">M4L.comb2.voice~.maxpat</a>: Stereo comb filter voice for <o>poly~</o>
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.cross1~.maxpat/M4L.cross1~.maxpat">M4L.cross1~.maxpat</a>: Crossfade two mono signals with constant power
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.cross2~.maxpat/M4L.cross2~.maxpat">M4L.cross2~.maxpat</a>: Crossfade two stereo signals with constant power
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.delay.pfft~.maxpat/M4L.delay.pfft~.maxpat">M4L.delay.pfft~.maxpat</a>: Frequency-domain delay line for <o>pfft~</o>
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.envfol~.maxpat/M4L.envfol~.maxpat">M4L.envfol~.maxpat</a>: Signal envelope follower with shape controls 
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.gain1~.maxpat/M4L.gain1~.maxpat">M4L.gain1~.maxpat</a>: Scale a mono signal
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.gain2~.maxpat/M4L.gain2~.maxpat">M4L.gain2~.maxpat</a>: Scale a stereo signal
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.MidiGran.voice.maxpat/M4L.MidiGran.voice.maxpat">M4L.MidiGran.voice.maxpat</a>: A MIDI "granulator" engine to be used with <o>poly~</o>
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.pan1~.maxpat/M4L.pan1~.maxpat">M4L.pan1~.maxpat</a>: Pan a mono signal with constant power
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.pan2~.maxpat/M4L.pan2~.maxpat">M4L.pan2~.maxpat</a>: Pan a stereo signal with constant power
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.PitchScale.bpatch.maxpat/M4L.PitchScale.bpatch.maxpat">M4L.PitchScale.bpatch.maxpat</a>: A pitch remapping abstraction to be loaded into a <o>bpatcher</o> box
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.PolyBeat.bpatch.maxpat/M4L.PolyBeat.bpatch.maxpat">M4L.PolyBeat.bpatch.maxpat</a>: A pulse generator abstraction to be loaded into a <o>bpatcher</o> box
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.StepEcho.voice.maxpat/M4L.StepEcho.voice.maxpat">M4L.StepEcho.voice.maxpat</a>: A MIDI delay engine to be used with <o>poly~</o>
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.tapdelay.voice~.maxpat/M4L.tapdelay.voice~.maxpat">M4L.tapdelay.voice~.maxpat</a>: Tap delay voice for <o>poly~</o>
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.transp.pfft~.maxpat/M4L.transp.pfft~.maxpat">M4L.transp.pfft~.maxpat</a>: Frequency-domain pitch shifter for <o>pfft~</o>
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.vdelay~.maxpat/M4L.vdelay~.maxpat">M4L.vdelay~.maxpat</a>: Clickless variable tap delay
+	</li>
+	</ul>
+
+	</vignette>

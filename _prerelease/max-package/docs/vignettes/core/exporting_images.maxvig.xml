@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Printing a patch">
+	<header1>
+	Creating a visual image of your patch
+	</header1>
+	
+	<bodytext>
+		You can use Max's export feature to create a visual image of your
+		Patcher window or a portion of a patch, and then size or modify the results using your
+		favorite image editing software.
+	</bodytext>
+	<bluebox>
+	<header2>
+	Aligning objects
+	</header2>
+		<ul>
+		<li>
+			Bring the Patcher Window you want to print to the front
+or click and drag to select a portion of your patch.
+		</li>
+		<li>
+			Choose <b>Export image...</b> from the File menu. A file dialog 
+			will appear to let you name your image. Images are saved in
+			Portable Network Graphics (.png) format.
+		</li>
+		</ul>
+	</bluebox>
+	<bodytext>
+		Max images created with the Export Image command
+		are saved at an image resolution of 72 DPI. You can use the 
+		<a href="../../vignettes/core/interface_pane.html">Interface pane</a>
+		of the Max Preferences
+		Window to change the default image resolution to 72, 96, 150 or 300 DPI.
+	</bodytext>
+</vignette>

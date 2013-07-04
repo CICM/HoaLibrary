@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Creating Patchers">
+	<header1>
+	Creating Patchers
+	</header1>
+<bodytext>
+A patcher window can be created by <link type="vignette" module="core" name="opening_patches">opening an existing patcher</link>, creating a new blank patcher window by choosing <b>New Patcher</b> from the File menu, or creating a patcher based on a <link type="vignette" module="core" name="templates">template</link>.
+</bodytext>
+</vignette>

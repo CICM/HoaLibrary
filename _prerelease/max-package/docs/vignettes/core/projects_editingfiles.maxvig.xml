@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Editing Files in a Project">
+	<header1>Editing Files in a Project</header1>
+	<bodytext>
+		To edit a patcher or text file from a Project, double-click on the file's name in the Project window. The patcher will be opened, or a text editor will be presented for editing. Alternatively, right-click on the file's name in the Project window and choose <b>Open</b> from the contextual menu.
+	</bodytext>
+	<bluebox>At this time, only files which can be editing directly in Max will be opened. Non-native files, such as media files, will ignore attempts to open them.</bluebox>
+	<bodytext>
+		<img src="images/project-edit.png"/>
+		The editing environment for patchers in Projects is identical to the normal patcher window, with one addition: the "Show Containing Project" button in the toolbar. By clicking this button, you can easily switch back to the Project window. It's also a good visual cue that you're editing within the Project environment.
+	</bodytext>
+	<bluebox>
+		At this time, <i>only patchers and other documents (e.g. JavaScript files) opened from a Project are Project-aware</i>. While you can open and edit a patcher directly from your hard drive, you lose all advantages of the Project's <link name="projects_searchpath" type="vignette" module="core">search path management</link>, so some dependencies may be found in the wrong location (globally rather than project-locally), and some may not be found at all. For this reason, we suggest that you adopt a workflow which centers around the Project window, rather than from the Finder/Explorer.
+	</bluebox>
+</vignette>

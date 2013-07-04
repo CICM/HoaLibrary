@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Plug-In Support in Max">
+	<header1>
+		Plug-In Support in Max
+	</header1>
+		<bodytext>
+			Max does not support building VST plug-ins from 
+			patches. The objects used to build plug-ins are included in Max and 
+			work - inside Max - as they did in the past.
+		</bodytext>
+		<bodytext>
+			The <o>vst~</o> object is not compatible with VST plug-ins created 
+			with earlier versions of Max. When used on PowerPC computers on the 
+			Mac platform, the <o>vst~</o> object is not compatible with certain older third-party 
+			VST plug-ins that do not support the VST 2.4 specification. By 
+			contrast, VST plug-ins that work on the Mac Intel platform should 
+			work better when hosted by <o>vst~</o> in Max than they did in 
+			previous versions. 
+		</bodytext>
+		<bodytext>
+			As an alternative to making plug-ins out of your patches, you may 
+			wish to consider using the new features of the <o>poly~</o> object. 
+			In addition to the <o>poly~</o> object's new multi-processor capabilities, 
+			it can also load patchers dynamically without shutting off the audio 
+			of the enclosing patch by using the new patchername attribute. The 
+			<o>vst~</o> object's ability to load new plug-ins while the audio was 
+			running was one of the primary reasons Max users converted patches 
+			into VST plug-ins. With <o>poly~</o> in Max, this is no longer necessary.
+		</bodytext>	
+
+</vignette>

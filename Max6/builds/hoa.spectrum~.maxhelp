@@ -4,8 +4,8 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"revision" : 3,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 92.0, 47.0, 843.0, 777.0 ],
@@ -45,8 +45,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 843.0, 751.0 ],
@@ -347,8 +347,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 3,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -398,8 +398,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"revision" : 3,
+															"architecture" : "x64"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -839,8 +839,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"revision" : 3,
+															"architecture" : "x64"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -1280,8 +1280,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"revision" : 3,
+															"architecture" : "x64"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -1721,8 +1721,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
-															"architecture" : "x86"
+															"revision" : 3,
+															"architecture" : "x64"
 														}
 ,
 														"rect" : [ 799.0, 125.0, 640.0, 480.0 ],
@@ -2551,8 +2551,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 3,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -3250,7 +3250,7 @@
 									"destination" : [ "obj-14", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 797.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 254.809219, 276.0 ],
+									"midpoints" : [ 797.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 254.809226, 276.0 ],
 									"source" : [ "obj-23", 13 ]
 								}
 
@@ -3261,7 +3261,7 @@
 									"destination" : [ "obj-14", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 783.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 239.023514, 276.0 ],
+									"midpoints" : [ 783.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 239.023511, 276.0 ],
 									"source" : [ "obj-23", 12 ]
 								}
 
@@ -3272,7 +3272,7 @@
 									"destination" : [ "obj-14", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 770.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 223.237793, 276.0 ],
+									"midpoints" : [ 770.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 223.237797, 276.0 ],
 									"source" : [ "obj-23", 11 ]
 								}
 
@@ -3283,7 +3283,7 @@
 									"destination" : [ "obj-14", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 756.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 207.452087, 276.0 ],
+									"midpoints" : [ 756.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 207.452083, 276.0 ],
 									"source" : [ "obj-23", 10 ]
 								}
 
@@ -3294,7 +3294,7 @@
 									"destination" : [ "obj-14", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 743.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 191.666367, 276.0 ],
+									"midpoints" : [ 743.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 191.666369, 276.0 ],
 									"source" : [ "obj-23", 9 ]
 								}
 
@@ -3305,7 +3305,7 @@
 									"destination" : [ "obj-14", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 729.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 175.880661, 276.0 ],
+									"midpoints" : [ 729.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 175.880654, 276.0 ],
 									"source" : [ "obj-23", 8 ]
 								}
 
@@ -3327,7 +3327,7 @@
 									"destination" : [ "obj-14", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 702.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 144.309219, 276.0 ],
+									"midpoints" : [ 702.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 144.309226, 276.0 ],
 									"source" : [ "obj-23", 6 ]
 								}
 
@@ -3338,7 +3338,7 @@
 									"destination" : [ "obj-14", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 689.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 128.523514, 276.0 ],
+									"midpoints" : [ 689.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 128.523511, 276.0 ],
 									"source" : [ "obj-23", 5 ]
 								}
 
@@ -3349,7 +3349,7 @@
 									"destination" : [ "obj-14", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 675.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 112.737801, 276.0 ],
+									"midpoints" : [ 675.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 112.737797, 276.0 ],
 									"source" : [ "obj-23", 4 ]
 								}
 
@@ -3360,7 +3360,7 @@
 									"destination" : [ "obj-14", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 662.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 96.95208, 276.0 ],
+									"midpoints" : [ 662.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 96.952083, 276.0 ],
 									"source" : [ "obj-23", 3 ]
 								}
 
@@ -3371,7 +3371,7 @@
 									"destination" : [ "obj-14", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 648.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 81.166367, 276.0 ],
+									"midpoints" : [ 648.758362, 309.0, 291.0, 309.0, 291.0, 276.0, 81.166369, 276.0 ],
 									"source" : [ "obj-23", 2 ]
 								}
 
@@ -3382,7 +3382,7 @@
 									"destination" : [ "obj-14", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 635.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 65.380653, 276.0 ],
+									"midpoints" : [ 635.258362, 309.0, 291.0, 309.0, 291.0, 276.0, 65.380654, 276.0 ],
 									"source" : [ "obj-23", 1 ]
 								}
 
@@ -3537,8 +3537,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 843.0, 751.0 ],
@@ -4143,8 +4143,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 3,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -5007,8 +5007,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 843.0, 751.0 ],
@@ -5155,13 +5155,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 3,
 									"numoutlets" : 7,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"outlettype" : [ "", "", "", "", "", "", "" ],
 									"patching_rect" : [ 592.0, 347.0, 100.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"mode" : "polar",
-										"ramp" : 100.0
-									}
-,
 									"text" : "hoa.map~ 3 1"
 								}
 
@@ -5766,8 +5761,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 3,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -6366,7 +6361,7 @@
 									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 409.0, 488.0, 270.264282, 488.0 ],
+									"midpoints" : [ 409.0, 488.0, 270.264286, 488.0 ],
 									"source" : [ "obj-23", 1 ]
 								}
 
@@ -6697,7 +6692,7 @@
 									"destination" : [ "obj-8", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 351.5, 288.0, 270.59494, 288.0 ],
+									"midpoints" : [ 351.5, 288.0, 270.594944, 288.0 ],
 									"source" : [ "obj-7", 0 ]
 								}
 
@@ -6907,8 +6902,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 92.0, 73.0, 843.0, 751.0 ],
@@ -6934,6 +6929,17 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-3",
+									"maxclass" : "button",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 378.0, 346.0, 20.0, 20.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -6941,7 +6947,7 @@
 									"maxclass" : "hoa.spectrum~",
 									"numinlets" : 16,
 									"numoutlets" : 0,
-									"patching_rect" : [ 42.34494, 408.5, 237.75, 237.75 ]
+									"patching_rect" : [ 40.244942, 375.5, 239.849991, 239.849991 ]
 								}
 
 							}
@@ -7123,7 +7129,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.vector~", "@obj-desc", "A", "soundfield", "energy", "and", "velocity", "vectors", "calculator." ],
+									"args" : [ "@obj-name", "hoa.spectrum~", "@obj-desc", "A", "soundfield", "energy", "and", "velocity", "vectors", "calculator." ],
 									"id" : "obj-56",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -7265,8 +7271,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 3,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -7595,6 +7601,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-5", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-8", 14 ],
 									"disabled" : 0,
@@ -7767,7 +7782,7 @@
 									"destination" : [ "obj-8", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 388.5, 279.0, 270.25, 279.0 ],
+									"midpoints" : [ 388.5, 279.0, 270.250004, 279.0 ],
 									"source" : [ "obj-45", 0 ]
 								}
 
@@ -7978,8 +7993,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 843.0, 751.0 ],
@@ -8030,36 +8045,36 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.decorrelation~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/patchers/effects",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -8093,10 +8108,6 @@
 			}
 , 			{
 				"name" : "hoa.wider~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.map~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

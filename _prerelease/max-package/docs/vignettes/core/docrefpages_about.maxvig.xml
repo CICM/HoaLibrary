@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="About Object Reference Pages">
+	<header1>
+	About Object Reference Pages
+	</header1>
+<bodytext>
+	Every object in Max, MSP, and Jitter has its own <i>reference page</i>. This page lists:
+</bodytext>
+
+	<ul><li>The object name and a brief description of what it does</li></ul>
+	<bodytext>
+		<img src="images/refpage1.png"/>
+	</bodytext>
+
+	<ul><li>A more detailed description of what the object does</li></ul>
+	<bodytext>
+		<img src="images/refpage2.png"/>
+	</bodytext>
+
+	<ul><li>Arguments you can type in after the object's name</li></ul>
+	<bodytext>
+		<img src="images/refpage3.png"/>
+	</bodytext>
+
+	<ul><li>Messages you can send to the object</li></ul>
+	<bodytext>
+		<img src="images/refpage4.png"/>
+	</bodytext>
+
+	<ul><li>Output the object produces</li></ul>
+	<bodytext>
+		<img src="images/refpage5.png"/>
+	</bodytext>
+
+	<ul><li>A small example of using the object</li></ul>
+	<bodytext>
+		<img src="images/refpage6.png"/>
+	</bodytext>
+	
+	<ul><li>Other related objects and documentation</li></ul>
+	<bodytext>
+		<img src="images/refpage7.png"/>
+	</bodytext>
+</vignette>
+
+

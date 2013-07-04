@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Max for Live Device Projects">
+	<header1>Max for Live Device Projects</header1>
+	<bodytext>
+		<img src="images/project-devices.png"/>
+		Beginning in Max 6.1, all Max for Live devices are Projects, and function as you would expect. There are just a few differences between regular Max projects and Max for Live device projects:
+		<ol>
+			<li>The default location for Max for Live Device Projects is ~/Documents/Max/Max for Live Devices (Mac) or (User Folder)\My Documents\Max\Max for Live Devices (Win)</li>
+			<li><link name="live_unfreezing" type="vignette" module="core">Unfreezing a device</link> will unpack the device's assets to the Project's folder, rather than to the "Unfrozen Max Device Files" folder on the Desktop. Starting with Max 6.1, the "Unfrozen Max Device Files" folder is no longer used.</li>
+			<li>Conflicts are now auto-resolved in favor of the Device version (although you can override this in the <link name="live_resolveconflicts" type="vignette" module="core">Resolve Conflicts</link> window if you need to).</li>
+			<li>The <i>Snapshot...</i> item in the <link name="projects_consolidate" type="vignette" module="core">Manage Project</link> toolbar menu creates a datestamped ".zip" archive (not ".maxzip") of a frozen copy of the current device.</li>
+			<li><link name="live_freezing" type="vignette" module="core">Freezing a device</link> will include all files listed in the Project window (both explicit and implicit items). The <link name="live_dependencies" type="vignette" module="core">Dependencies Window</link> is deprecated.</li>
+		</ol>
+	</bodytext>
+	<bluebox>
+		Freezing a device which utilizes 3rd party externals will automatically collect and freeze the externals for other Max platforms if they can be found in Max's (or the Project's) search path. For instance, freezing a device which uses myextern.mxe on 32-bit Windows will also include the myextern.mxe64 (64-bit Windows) and myextern.mxo (OSX) externals if they are available. None of these need to be added explicitly to the Project.
+	</bluebox>
+</vignette>

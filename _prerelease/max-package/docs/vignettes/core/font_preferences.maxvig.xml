@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Font Preferences">
+	<header1>
+	Font Preferences
+	</header1>
+	<bodytext>
+		The <i>Font</i> section of the 
+		<link module="core" name="preferences_window" type="vignette">Preferences Window</link> 
+		lets you specify
+		the default font and font sizes used when when you start and work with Max,
+		and also aids you in importing text in languages that require two bytes
+		per character to specify text.
+	</bodytext>
+	<ul>
+		<li><link module="core" name="font_default" type="vignette">Default Font and Default Font Size</link></li>
+		<li><link module="core" name="font_system" type="vignette">System Font and Fallback Font</link></li>
+	</ul>
+	<header2>
+			Auto Fix Width
+		</header2>
+	<bodytext>
+		When enabled, <i>Auto Fix Width</i> changes the width of a text object's box to fit the text as you type.
+		</bodytext>
+	<header2>
+			Fix Width on Font Change
+		</header2>
+	<bodytext>
+		When enabled, <i>Fix Width on Font Change</i> changes the width of a text object's box to fit the text when you change the font or font size of the text.
+		</bodytext>
+	<ul>
+		<li><link module="core" name="font_rendering" type="vignette">Native Text Rendering</link></li> 
+		<li><link module="core" name="font_rendering" type="vignette">Max Font Size for Native Subpixel Antialiasing</link></li>
+	</ul>
+	<header2>
+		Text Encoding Conversion (Mac only)
+	</header2>
+	<bodytext>
+		Attempt Text Encoding Conversion will examine the font information when importing an old patcher in order to determine the encoding that might have been used. This is only an issue for documents that might contain non-Roman text characters that were <i>not</i> stored in two-byte comments. While this use of the Max file format was not officially supported, it may be possible in certain cases to recover the text encoding information if the font originally used is present on your computer when you import the patch. 
+	</bodytext>
+	<ul>
+		<li><link module="core" name="compat_doc" type="vignette">More information about  importing patches</link>.</li>
+	</ul>
+	<header2>
+		Two Byte Comment Import Encoding
+	</header2>
+	<bodytext>
+		The default <i>Autodetect</i> setting uses font information to recover the original encoding. Generally, Autodetect only works for non-Roman text on the Mac. If you are importing a file with two-byte comments in Japanese, particularly when using Windows, set Two Byte Comment Import Encoding to <i>Shift-JIS</i>. To ignore any font-specific encoding information in a patcher you are importing, choose <i>Macroman</i>. 
+	</bodytext>
+	<ul>
+		<li><link module="core" name="compat_doc" type="vignette">More information about importing patches</link>.</li>
+	</ul>
+
+</vignette>

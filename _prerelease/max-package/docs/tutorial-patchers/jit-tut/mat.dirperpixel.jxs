@@ -1,0 +1,129 @@
+<jittershader name="sh-mat-plastic-tex-light-dir-pix">
+	<description>
+	Textured plastic material lit with a directional light w/ambient, diffuse and specular components calculated per pixel.
+	</description>
+	<param name="lightdir" type="vec3" state="LIGHT0_POSITION">
+		<description>Direction of Light Source</description>
+	</param>
+	<param name="ambient" type="vec4" state="LIGHT0_AMBIENT">
+		<description>Ambient Color</description>
+	</param>
+	<param name="diffuse" type="vec4" state="LIGHT0_DIFFUSE">
+		<description>Diffuse Color</description>
+	</param>
+	<param name="specular" type="vec4" state="LIGHT0_SPECULAR">
+		<description>Specular Color</description>
+	</param>
+	<param name="ka" type="float" default="1.0">
+		<description>Ambient Multiplier</description>
+	</param>
+	<param name="kd" type="float" default="0.8">
+		<description>Diffuse Multiplier</description>
+	</param>
+	<param name="ks" type="float" default="1.0">
+		<description>Specular Multiplier</description>
+	</param>
+	<param name="shininess" type="float" default="7.0">
+		<description>Specularity Adjustment</description>
+	</param>
+	<language name="glsl" version="1.0">
+		<bind param="lightdir" program="vp" />
+		<bind param="ambient" program="fp" />
+		<bind param="diffuse" program="fp" />
+		<bind param="specular" program="fp" />
+		<bind param="ka" program="fp" />
+		<bind param="kd" program="fp" />
+		<bind param="ks" program="fp" />
+		<bind param="shininess" program="fp" />
+		<program name="vp" type="vertex">
+<![CDATA[
+/*
+ * sh.dirperpixel.fp
+ *
+ * Derek Gerstmann - derek@cycling74.com
+ * Copyright 2005 - Cycling '74
+ *
+ * GLSL vertex program for a
+ * directional light source  with ambient, diffuse, and specular 
+ * components (ads) calculated per pixel/fragment (pix).
+ *
+ */
+
+uniform vec3 lightdir;
+
+varying vec3  normal;
+varying vec3  lightvec;
+varying vec3  viewdir;
+
+void main(void)
+{
+
+	// transform vertex
+	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+
+	// compute view vector in view space
+	viewdir = vec3(-normalize(gl_ModelViewMatrix * gl_Vertex));  
+
+	// get light direction in view space
+	lightvec = lightdir.xyz;
+
+	// transform normal into view space
+	normal = vec3(normalize( gl_NormalMatrix * gl_Normal));
+
+}
+]]>
+		</program>
+		<program name="fp" type="fragment">
+<![CDATA[
+/*
+ * sh.dirperpixel.fp
+ *
+ * Derek Gerstmann - derek@cycling74.com
+ * Copyright 2005 - Cycling '74
+ *
+ * GLSL fragment program lit by a 
+ * directional light source  with ambient, diffuse, and specular 
+ * components (ads) calculated per pixel/fragment (pix).
+ *
+ */
+
+uniform float shininess;	// specularity adjustment
+
+uniform float ka;		// ambient multiplier
+uniform float kd;		// diffuse multiplier
+uniform float ks;		// specular multiplier
+
+uniform vec4 diffuse;		// diffuse color
+uniform vec4 specular;		// specular color
+uniform vec4 ambient;		// ambient color
+
+varying vec3 normal;		// normal direction
+varying vec3 lightvec;		// light direction
+varying vec3 viewdir;		// view direction
+
+uniform sampler2DRect basecolormap;	// base color map
+
+void main(void)
+{
+	// compute the reflection vector
+	vec3 reflect = normalize( 2.0 * dot( normal, lightvec) * normal - lightvec );       
+
+	// compute ambient term
+	vec4 ambientcolor = ambient * vec4(ka);
+
+	// compute diffuse term
+	vec4 diffusecolor = diffuse * vec4(kd * max( 0.0, dot( normal, lightvec )));
+
+	// compute specular term
+	vec4 specularcolor = specular * vec4(ks * pow( max( 0.0, dot(reflect, viewdir)), shininess ));
+
+	// compute final color
+	vec4 finalcolor = ambientcolor + diffusecolor + specularcolor;
+
+	// output final color
+	gl_FragColor = finalcolor;
+}
+]]>
+		</program>
+	</language>
+</jittershader>

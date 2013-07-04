@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Automation">
+<header1>
+Automation
+</header1>
+<bodytext>
+	Parameters of a device whose <m>Parameter Visibility</m> attribute is set to Automated and Stored are available in Live's automation editor (visible in the Arrangement view). The automation editor permits you to draw curves or other control information that will change parameter values automatically as the arrangement plays.
+</bodytext>
+<bodytext>
+	The parameter data type determines the type of automation editor shown. More on this topic soon.
+</bodytext>
+<bodytext>
+Another way parameter values can be changed automatically is by using clip envelopes to modulate parameter values. While automation sets the absolute value of a parameter, modulation adjusts the value up or down from its current value.
+</bodytext>
+<bluebox>
+	<header2>
+	Modulating a Max for Live Device Parameter
+</header2>
+	<ul>
+	<li>
+		Click on a Max for Live user interface object to select it
+		and click on the Inspector icon in the toolbar to show the 
+		Inspector.
+	</li>
+	<li>
+		If you have not already done so, choose int or float from
+		the <m>Type</m> attribute's pull-down menu to set the parameter
+		type.
+	</li>
+	<bodytext>
+		<b>Note:</b> Parameter modulation is only available for parameters
+		whose parameter type is set to int or float.
+	</bodytext>
+	<li>
+		Choose the modulation mode you want to use from
+		the <m>Modulation Mode</m> attribute's pull-down menu to set the parameter.
+	</li>
+	<bodytext>
+		If you choose Absolute, the <m>Modulation Range</m> attribute entry
+		will be ungreyed in the Inspector. Double-click on the Value column 
+		for the Modulation Range to show a cursor and text box.
+		Type in the range of values for the parameter.
+	</bodytext>
+	<li>
+		In the Live application, select the parameter, choose a
+		modulation source, and enable modulation as you would with 
+		any normal Live device parameter.
+	</li>
+	</ul>
+</bluebox>
+<br />
+	<header1>
+		Parameter Automation Data at Audio Rates
+	</header1>
+	<bodytext>
+		While getting parameter automation data from the Live application at
+		message rates for use in your Max for Live device is common, some
+		devices require that you receive parameter automation data from the
+		Live applcation at higher and more accurate rates. Any Max for Live
+		device can receive its parameter automation data in the form of
+		a sample-accurate audio-rate ramp using the <o>live.param~</o> object.
+	</bodytext>
+	<bodytext>
+		The <o>live.param~</o> object takes as an argument the name of
+		an automatable parameter to which it is bound. Any change to the
+		automatable parameter's output value will be send out the outlet
+		of the <o>live.param~</o> object at signal rate.
+	</bodytext>	
+<br />
+<bluebox>
+<header2>
+Sending parameter automation data at signal rate
+</header2>
+	<ul>
+	<li>
+		Add a new object to your patcher window, and type in
+		<m>live.param~</m> followed by the name ot the parameter
+		whose output you want to use (be sure to use the name of
+		the parameter set by the <m>Scripting Name</m>
+		attribute. When you close and save your device and
+		start the transport, your patch will send audio-rate 
+		data out the outlet of the <o>live.param~</o> object.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/live-param1.png" />
+	</bodytext>
+</bluebox>
+
+</vignette>

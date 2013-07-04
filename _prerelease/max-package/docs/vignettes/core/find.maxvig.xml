@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Finding Objects in a Patcher">
+	<header1>
+	Finding Objects in a Patcher
+	</header1>
+<bodytext>
+	Use the <i>find bar</i> to search for objects by name, including scripting name.
+</bodytext>
+		<br /><space />
+	<bluebox>
+	<header2>
+	Showing the find bar
+	</header2>
+		<ul>
+		<li>
+			Choose <b>Find...</b> from the Edit menu.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/patcher_window11.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			To close the find bar, choose <b>Find...</b> from the Edit menu again, or click the Done button.
+		</li>
+		</ul>
+	</bluebox>
+		<br /><space />
+	<bluebox>
+	<header2>
+	Finding objects with the find bar
+	</header2>
+		<ul>
+		<li>
+			Enter text into the search field. As you type, the current number of matches to your text is displayed. When you press return, all matches are highlighted.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/patcher_window12.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			If you're finding objects in a patcher that contains subpatchers, any subpatcher results will appear in parentheses. To see the subpatchers with results, click on the underlined count of subpatcher results. If there is only one subpatcher with matches, it will be opened with its own find bar containing the parent patcher's search text. If there is more than one match, a menu will appear, permitting you to select the subpatcher you want to open.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/patcher_window13.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			To select all matching objects in a patcher, click the Select All button. To step through matches, click the Prev or Next buttons.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/patcher_window14.png"  />
+		</bodytext>
+		
+		
+		</bluebox>		
+</vignette>

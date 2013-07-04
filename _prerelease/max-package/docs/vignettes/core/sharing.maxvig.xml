@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Sharing Patches With Others">
+	<header1>
+	Sharing Patches With Others
+	</header1>
+<bodytext>
+If you want to collaborate with other Max users, or let people who are not Max users experience you work, you'll want to know how to set your patches free to travel beyond your own computer.
+</bodytext>
+<ul>
+<li><link type="vignette" module="core" name="sharing_patches">Sending patches in e-mail messages</link></li>
+<li><link type="vignette" module="core" name="collectives">Building collectives</link></li>
+<li><link type="vignette" module="core" name="standalones">Building standalone applications</link></li>
+</ul>
+</vignette>

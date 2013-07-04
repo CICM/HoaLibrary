@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Audio Effect Building Blocks">
+	<header1>
+		Audio Effect Building Blocks
+	</header1>
+<bodytext>
+	The 
+	<a href="https://www.ableton.com/en/packs/max-live-building-tools/">Max for Live Building Tools</a>
+	Live Pack contains a set of fully
+	functional Audio Effect devices that provide examples of various 
+	kinds of operations and processes. You can use these patches 
+	in series in your Live Session, or edit and recombine them to 
+	make your own devices. 
+</bodytext>
+<bodytext>
+	Live Suite owners can download this Live Pack by choosing <b>Your Account > Your Packs</b>
+	when logged in to the Ableton website and clicking on the download button to the Live Pack.
+	To install the Live Pack, double-click on the <i>.alp</i> file
+</bodytext>
+<bluebox>
+<header2>
+	Finding the Audio Effect Building Blocks
+</header2>
+	<ul>
+	<li>
+		After you have installed the Live Pack,
+		click on the Packs button in Live's File browser to display
+		the list of currently installed Live Packs. In the column to the
+		right, click on the arrow to the left of the M4L Building Tools
+		folder to show the Live Pack contents.
+	</li>
+<!-- There is currently no pack to install, and so I can't get a screenshot. Commented out.
+	<bodytext>
+	<img src="images/finding-pluggo-devices1.png" />
+	</bodytext>
+-->
+	<li>
+		Click on the arrow to the left
+		of the folder marked Max Instrument or Max Audio Effect
+		to show the available resources.
+	</li>
+	</ul>
+	
+<!-- Again, nothing to describe for now. Commented out.
+	<li>
+		Click on a File button in Live's File browser and
+		choose <b>Library</b> from the pull-down Bookmarks menu to
+		show the Library.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Presets</b>.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Audio Effects</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Max Audio Effect</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Tools</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Building Blocks</b> to show 
+		Building Blocks devices.
+	</li>
+	<bodytext>
+	<img src="images/audiobuildingblocks1.png" />
+	</bodytext>
+-->
+</bluebox>
+<br />
+	<header2>
+	Overview of the Audio Effect Building Blocks
+	</header2>
+	<ul>
+	<li>
+		<b>Max BalanceDualMono </b>: A (dual) mono balance utility
+	</li>
+	<li>
+		<b>Max BalanceStereo </b>: A stereo balance utility
+	</li>
+	<li>
+		<b>Max Chorus </b>: A comb filter for chorus effects
+	</li>
+	<li>
+		<b>Max CombFilter </b>: A stereo comb filter with pitch control
+	</li>
+	<li>
+		<b>Max CutHacker </b>: A signal hacker that can be synced to Live's transport
+	</li>
+	<li>
+		<b>Max Degrader </b>: Signal quality reducer
+	</li>
+	<li>
+		<b>Max DelayLine </b>: A stereo delay line with feedback
+	</li>
+	<li>
+		<b>Max EqParametric1 </b>: A one-band parametric filter
+	</li>
+	<li>
+		<b>Max GainDualMono </b>: A (dual) mono gain utility
+	</li>
+	<li>
+		<b>Max GainStereo </b>: A stereo gain utility
+	</li>
+	<li>
+		<b>Max MixDualMono </b>: A (dual mono) plugin mixing utility
+	</li>
+	<li>
+		<b>Max MixStereo </b>: A (stereo) plugin mixing utility
+	</li>
+	<li>
+		<b>Max MsMatrix </b>: Implementing a popular audio algorithm: a "MS stereo matrix"
+	</li>
+	<li>
+		<b>Max Overdrive </b>: A simple distortion object
+	</li>
+	<li>
+		<b>Max PanDualMono </b>: A (dual) mono panpot utility
+	</li>
+	<li>
+		<b>Max PanStereo </b>: A stereo panpot utility
+	</li>
+	<li>
+		<b>Max PeakLimiter </b>: A stereo peak limiter object
+	</li>
+	<li>
+		<b>Max RingMod </b>: Low-tech ring modulator
+	</li>
+	<li>
+		<b>Max RingModDual </b>: Low-tech ring modulator (dual version)
+	</li>
+	<li>
+		<b>Max SignalViewers </b>: Graphic signal monitoring and conversion
+	</li>
+	</ul>
+
+	</vignette>

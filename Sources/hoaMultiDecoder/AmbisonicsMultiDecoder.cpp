@@ -144,15 +144,15 @@ void AmbisonicsMultiDecoder::setSamplingRate(long aSamplingRate)
     m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
     if(m_mode == Hoa_Restitution)
     {
-        m_restitution->Ambisonics::setSamplingRate(m_vector_size);
+        m_restitution->Ambisonics::setSamplingRate(m_sampling_rate);
     }
     else if(m_mode == Hoa_Binaural)
     {
-        m_binaural->setSamplingRate(m_vector_size);
+        m_binaural->setSamplingRate(m_sampling_rate);
     }
     else
     {
-        m_decoder->setSamplingRate(m_vector_size);
+        m_decoder->setSamplingRate(m_sampling_rate);
     }
 }
 

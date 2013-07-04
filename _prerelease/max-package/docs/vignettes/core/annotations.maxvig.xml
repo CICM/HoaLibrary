@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Annotations">
+	<header1>
+	Annotations
+	</header1>
+	<bodytext><i>Annotations</i> are explanatory text associated with a
+			specific object. Annotations are viewable when patches are
+			locked or unlocked, and the annotated text is displayed in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Adding an annotation to an object
+	</header2>
+		<ul>
+			<li>
+			Select an object and open its 
+			<link module="core" name="inspector" type="vignette">Inspector</link>.
+		</li>
+			<li>
+			Double-click in the Value column for the Annotation attribute. A text box will
+			appear for entering some text (The annotation marker is only visible when a 
+			patch is unlocked).
+		</li>
+			<li>
+			When you enter the text, an <i>annotation marker</i> will appear in the upper right-hand
+			corner of the selected object.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/annotations1.png"/>
+		</bodytext>
+		<ul>
+			<li>
+			When you move the mouse over the object you have annotated, your text will be
+			shown in the Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>. 
+			If you are using the 
+			<link module="core" name="clue_window" type="vignette">Clue Window</link>
+			rather than the Status Bar to view annotations, the 
+			Clue Window will change color to indicate that the text refers to an annotation
+			you've made.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/annotations2.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Removing an annotation from an object
+	</header2>
+		<ul>
+			<li>
+			Select an object and open its 
+			<link module="core" name="inspector" type="vignette">Inspector</link>.
+		</li>
+			<li>
+			Double-click in the Value column for the Annotation attribute. Remove 
+			the text. After you do so the annotation marker will disappear from the 
+			selected object.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<bodytext>
+			If you are using the
+			<link module="core" name="clue_window" type="vignette">Clue Window</link>
+			rather than the Status Bar, you can set its background and text color
+			when you're displaying an annotation you've added to your patch.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Assigning an annotation color for the Clue Window
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Mac) or the Options menu (Windows) and 
+			locate the Clue category.
+		</li>
+			<li>
+			Use the
+			<link module="core" name="color_picker" type="vignette">Color Picker</link>
+			to change the color of the Clue Window Background Color setting. When you move 
+			the mouse over an object with annotation, the Patcher window's 
+			<link module="core" name="clue_window" type="vignette">Clue Window</link>
+			will change to the color you've assigned.
+		</li>
+			<li>
+			You may also want to change the color of the Clue Window Text Color setting so 
+			that the text contrasts with the background color you've chosen.
+		</li>
+		</ul>
+	</bluebox>
+</vignette>

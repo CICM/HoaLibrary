@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Anatomy of the Project Window">
+	<header1>Anatomy of the Project Window</header1>
+	<bodytext>The screenshot below shows a typical project window. Although quite simple, it contains a great deal of useful information.
+		<img src="images/project-anatomy.png"/>
+			
+		<ul>
+			<li><b>Category header</b>: Files in your Project are automatically assigned to a category. The Project display only contains "Patcher" files, but other Projects might contain "Media" files, "Code" files, "Externals", and so on. Categories are only shown if there are matching files in the Project.</li>
+			<li><b>Patcher opened with project</b>: A project may contain one or more "top-level patchers". These are displayed in <b>bold</b> in the Project window, and are automatically opened when the Project is loaded.</li>
+			<li><b>Explicit vs. Implicit Project member</b>: Files listed with the word "(implicit)" after their names are dependencies. In other words, they are used by some other file in the Project. The "(implicit)" denotes that the file is not itself referenced by the Project -- the file is only displayed because it is being used by something else. Removing the parent of an implicit dependency will cause the dependency to be removed from the Project window as well.<br/>"Explicit" Project members, on the other hand, are shown in the Project window whether or not they are in use by other files. Another way of thinking about it: all implicit files are dependencies; explicit files may or may not be dependencies.</li>
+			<li><b>Global vs. Local Project member</b>: Files listed in <i>italics</i> are in the <i>global search path</i> of Max (detailed discussion below). Files listed in non-italics are in the Project's local search path (more detail below). Note that <font color="red">missing</font> Project members will be displayed in <font color="red">red</font> in the Project window.</li>
+			<li><b>Details view</b>: When the Details view is shown, and a file from the list is selected, a variety of information is displayed: the name, kind and absolute path of the file. If the file is a dependency (whether explicit or implicit), a link is shown to highlight the patchers in the file list which use it. Also shown is whether the file is opened with the project or not.</li>
+			<li><b>Project toolbar</b>: The Project toolbar permits a number of useful operations, including opening the Project's folder in the Finder/Explorer, showing or hiding the Details view, adding new or existing files, and reloading the Project. The "Manage Project" and "Project Settings" items will be discussed in greater detail below.</li>
+		</ul>
+	</bodytext>
+	<bluebox>If your Project is missing a file and you know where the file is located on your hard drive, you can drag the file into the Project window to resolve the item's missing status.</bluebox>
+</vignette>

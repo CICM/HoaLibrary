@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Patcher Object">
+<header1>The Patcher Object</header1>
+<bodytext>
+The Patcher object is a Javascript representation of a Max patcher. You can find, create, modify, and iterate through objects within a patcher, send messages to a patcher that you would use with the thispatcher object, etc.
+</bodytext>
+<bodytext>
+There are currently three ways to get a Patcher:
+</bodytext>
+<ul>
+<li>
+Use the Constructor
+</li><li>
+Access the patcher property of a <b>jsthis</b> (accessed as this.patcher)
+</li><li>
+Use the subpatcher() method of a Maxobj object
+</li></ul>
+<header2>Patcher Constructor</header2>
+<code>
+  var p = new Patcher(left,top,bottom,right);
+</code>
+<bodytext>
+left, top, bottom, right: global screen coordinates of the Patcher window
+</bodytext>
+<code>
+  var p = new Patcher();
+</code>
+<bodytext>
+Uses 100,100,400,400 as default window coordinates
+</bodytext>
+<header2>Patcher Properties</header2>
+<code>
+  <b>box</b> (<i>Maxobj, get</i>)
+</code>
+<bodytext>
+If the patcher is a subpatcher, the box property returns the Maxobj that contains it. To traverse up to the top-level patcher:
+</bodytext>
+<code>
+ var prev = 0;
+  var owner = this.patcher.box;
+  while (owner) {
+    prev = owner;
+    owner = owner.patcher.box;
+  }
+  if (prev)
+    post("top patcher is",prev.patcher.name);
+</code>
+<code>
+  <b>count</b> (<i>Number, get</i>)
+</code>
+<bodytext>
+Number of objects in the patcher
+</bodytext>
+<code>
+  <b>filepath</b> (<i>String, get</i>)
+</code>
+<bodytext>
+The patcher’s file path on disk
+</bodytext>
+<code>
+  <b>firstobject</b> (<i>Maxobj, get</i>)
+</code>
+<bodytext>
+If the patcher contains objects, this is the first one in its list. You can iterate through all objects in a patcher using the nextobject property of a Maxobj.
+</bodytext>
+<code>
+  <b>name</b> (<i>String, get/set</i>)
+</code>
+<bodytext>
+The patcher's name (its window title, without any brackets that appear for subpatchers)
+</bodytext>
+<code>
+  <b>locked</b> (<i>Boolean, get/set</i>)
+</code>
+<bodytext>
+The patcher's locked state. This property is read-only in the runtime version of Max.
+</bodytext>
+<code>
+  <b>maxclass</b> (<i>String, get</i>)
+</code>
+<bodytext>
+Returns “patcher”
+</bodytext>
+<code>
+  <b>parentclass</b> (<i>String, get</i>)
+</code>
+<bodytext>
+Returns the Max class name of the parent object if this is a subpatcher, or a nil value if this is a top-level patcher.
+</bodytext>
+<code>
+  <b>parentpatcher</b> (<i>Patcher, get</i>)
+</code>
+<bodytext>
+If the patcher is a subpatcher, this returns the parent patcher. Otherwise it returns a nil value.
+</bodytext>
+<code>
+  <b>scrolloffset</b> (<i>Array, get/set</i>)
+</code>
+<bodytext>
+X/Y coordinate array for the scroll offset of a patcher is window
+</bodytext>
+<code>
+  <b>scrollorigin</b> (<i>Array, get/set</i>)
+</code>
+<bodytext>
+X/Y coordinate array for the patcher's fixed origin
+</bodytext>
+<code>
+  <b>wind</b> (<i>Wind, get</i>)
+</code>
+<bodytext>
+A Javascript representation of the window associated with the patcher. For more information, see
+<link type="vignette" module="js" name="jswindobj">the Wind Object</link>.
+</bodytext>
+<header2>Patcher Methods</header2>
+<bodytext>
+Any message to a patcher that you can send in Max (via the thispatcher object) you can send in Javascript in js. 
+</bodytext>
+<bodytext>
+Examples:
+</bodytext>
+<code>
+  p = this.patcher;
+  p.fullscreen(1);  // makes the patcher take up the whole screen
+  p.dirty();    // make an editable patcher dirty
+</code>
+<bodytext>
+The Patcher methods listed below present a slighly more usable implementation of patcher scripting. You can still script a patcher using the script message, since, as shown above, a Javascript Patcher object can accept any message you can send to a thispatcher object.
+</bodytext>
+<code>
+  <b>newobject</b> (<i>classname,params</i>)
+</code>
+<bodytext>
+Creates a new object of Max class classname in a patcher using the specified parameters and returns a Maxobj (see below) that represents it.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  a = patcher.newobject("toggle",122,90,15,0);
+</code>
+<code>
+  <b>newdefault</b> (<i>left,right,classname, additional arguments</i>)
+</code>
+<bodytext>
+Creates a new object of class classname in a patcher using the specified parameters and return a Maxobj (see below) that represents it.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  a = patcher.newdefault(122,90,"toggle");
+</code>
+<bodytext>
+The newdefault() method also accepts additional arguments for non-user interface objects that represent the created object’s typed-in arguments.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  a = patcher.newdefault(122,90,"pack", "rgb", 255, 128, 64);
+</code>
+<code>
+  <b>connect</b> (<i>from_object, outlet, to_object, inlet</i>)
+</code>
+<bodytext>
+Connects two objects (of type Maxobj) in a patcher. Indices for the outlet and inlet arguments start at 0 for the leftmost inlet or outlet.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  p = this.patcher;
+  a = p.newobject("toggle",122,90,15,0);
+  b = p.newobject("toggle",122,140,15,0);
+  p.connect(a,0,b,0);
+</code>
+<code>
+  <b>hiddenconnect</b> (<i>from_object, outlet, to_object, inlet</i>)
+</code>
+<bodytext>
+Connects two objects (of type Maxobj) in a patcher with a hidden patch cord. Arguments are the same as for the connect message above.
+</bodytext>
+<code>
+  <b>disconnect</b> (<i>from_object, outlet, to_object, inlet</i>)
+</code>
+<bodytext>
+Disconnects an existing connection between two objects (of type Maxobj) in a patcher. Indices for the outlet and inlet arguments start at 0 for the leftmost inlet or outlet.
+</bodytext>
+<bodytext>
+<b>Example:</b> (assuming the connect() example above):
+</bodytext>
+<code>
+  p.disconnect(a,0,b,0);
+</code>
+<code>
+   <b>apply</b> (<i>function</i>)
+</code>
+<bodytext>
+For all objects in a patcher, calls the function with the each object's Maxobj as an argument. Does not recurse into subpatchers. The following example prints the name of each object's class in the Max window:
+</bodytext>
+<code>
+  function printobj(a)
+  {
+    post(a.maxclass);
+    post();
+    return true;    
+  // iterfun must return true to continue
+  // iterating, else stops
+  }
+  this.patcher.apply(printobj);
+</code>
+<code>
+  <b>applydeep</b> (<i>function</i>)
+</code>
+<bodytext>
+Same as apply() except that applydeep() recurses into subpatchers (depth first).
+</bodytext>
+<code>
+  <b>applyif</b> (<i>action_function, test_function</i>)
+</code>
+<bodytext>
+For all objects in a patcher, run the test_function for each object's Maxobj as an argument. If the test_function returns true, the action_function is executed with the Maxobj as an argument.
+</bodytext>
+<code>
+  <b>applydeepif</b> (<i>action_function, test_function</i>)
+</code>
+<bodytext>
+Same as applyif() except that applydeepif() recurses into subpatchers
+</bodytext>
+<code>
+  <b>remove</b> (<i>object</i>)
+</code>
+<bodytext>
+Removes the object (a Maxobj passed as an argument) from a patcher
+</bodytext>
+<code>
+  <b>getnamed</b> (<i>name</i>)
+</code>
+<bodytext>
+Returns the first object found in a patcher with the given name. The name is a local name as specified by the Name... dialog in a patcher, not the name of a send or <o>receive</o> object. You can also set an object's name using the varname property of a Maxobj.
+</bodytext>
+<code>
+  <b>getlogical</b> (<i>function</i>)
+</code>
+<bodytext>
+Calls the function on each object in a patcher, passing it as a Maxobj argument to the function. If the function returns true, the iteration stops and the Maxobj object is returned as the value of the getlogical() method. Otherwise getlogical() returns a nil value. Please note that access to patcher attributes in global code is not supported. This requires the use of <b>loadbang()</b>.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+// post the patching rectangle and Max class of each object in the current patch
+	function logical(a)
+	{
+		if(a)
+			return 1;
+		else
+			return 0;
+	}
+	
+	function loadbang()
+	{
+		e = patcher.getlogical(logical); //uses the return value as an array
+		if (e &amp;&amp; e.length) { 
+			for (var i=0;i &lt; e.length;i++) {
+				post(e[i].maxclass+": "+e[i].rect+"\n");
+			}
+		}
+	} 
+	
+	function bang()
+	{
+		loadbang();
+	}
+</code>
+<code>
+  <b>bringtofront</b> (<i>object</i>)
+</code>
+<bodytext>
+Moves the object to the front of the current layer to which it is assigned (either background or foreground). You can change the layer by setting the background property of a Maxobj.
+</bodytext>
+<code>
+  <b>sendtoback</b> (<i>object</i>)
+</code>
+<bodytext>
+Moves the object to the back of the current layer to which it is assigned (either background or foreground). You can change the layer by setting the background property of a Maxobj.
+</bodytext>
+
+</vignette>

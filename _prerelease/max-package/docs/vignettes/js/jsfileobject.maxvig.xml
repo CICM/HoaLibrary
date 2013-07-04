@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The File Object">
+<header1>The File Object</header1>
+<bodytext>
+The File object provides a means of reading and writing files from Javasccript.
+</bodytext>
+<header2>File Constructor</header2>
+<code>  
+  f = new File(filename, access, typelist);
+</code>
+<bodytext>
+filename can be a file in the Max search path, an absolute path, or a relative path. Acceptable values for access can be "read", "write", or "readwrite". The default value for access is "read". Acceptable values for typelist are four character filetype codes listed in the file max-fileformats.txt, which is located at /Library/Application Support/Cycling ’74 on Macintosh and C:\Program Files\Common Files\Cycling ’74 on Windows. By default, typelist is empty. If able to, the File constructor opens the file specified by filename, provided it is one of the types in typelist.
+</bodytext>
+<header2>File Properties</header2>
+<code>
+  <b>access</b> (<i>String, get/set</i>) 
+</code>
+<bodytext>
+File access permissions: "read", "write", or "readwrite". By default, this value is "read".
+</bodytext>
+<code>
+  <b>byteorder</b> (<i>String, get/set</i>) 
+</code>
+<bodytext>
+The assumed file byteorder (endianness): "big", "little", or "native". By default, this value is "native". 
+</bodytext>
+<code>
+  <b>eof</b> (<i>Number, get/set</i>) 
+</code>
+<bodytext>
+The location of the end of file, in bytes.
+</bodytext>
+<code>
+  <b>filename</b> (<i>String, get/set</i>) 
+</code>
+<bodytext>
+The current filename.
+</bodytext>
+<code>
+  <b>filetype</b> (<i>String, get/set</i>) 
+</code>
+<bodytext>
+The four-character code associated. See  c74:/init/max-fileformats.txt for possible values.
+</bodytext>
+<code>
+  <b>foldername</b> (<i>String, get</i>) 
+</code>
+<bodytext>
+The absolute path to parent folder.
+</bodytext>
+<code>
+  <b>isopen</b> (<i>Boolean, get</i>) 
+</code>
+<bodytext>
+Is file open? A useful test to determine if the File constructor was successful in finding and opening the file.
+</bodytext>
+<code>
+  <b>linebreak</b> (<i>String, get/set</i>) 
+</code>
+<bodytext>
+The line break convention to use when writing lines: "dos", "mac", "unix", or "native". By default, this value is "native".
+</bodytext>
+<code>
+  <b>position</b> (<i>Number, get/set</i>) 
+</code>
+<bodytext>
+The current file position, in bytes.
+</bodytext>
+<code>
+  <b>typelist</b> (<i>Array, get/set</i>) 
+</code>
+<bodytext>
+An array file type codes to filter by when opening a file. By default, this is the empty array.
+</bodytext>
+<header2>
+File Methods
+</header2>
+<code>
+  <b>open</b> (<i>filename</i>)
+</code>
+<bodytext>
+Opens the file specified by the filename argument. If no argument is specified, it will open the last opened file.
+</bodytext>
+<code>
+  <b>close</b> (<i></i>)
+</code>
+<bodytext>
+Closes the currently open file.
+</bodytext>
+<code>
+  <b>writeline</b> (<i>string</i>)
+</code>
+<bodytext>
+Writes the characters contained in the string argument as characters to the file, starting at the current file position, and inserts a line break appropriate to the linebreak property. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>readline</b> (<i>maximum_count</i>)
+</code>
+<bodytext>
+Reads and returns a string containing up to maximum_count characters or up to the first line break as read from the file, starting at the current file position. The file position is updated accordingly. 
+</bodytext>
+<code>
+  <b>writestring</b> (<i>string</i>)
+</code>
+<bodytext>
+Writes the characters contained in the string argument as characters to the file, starting at the current file position. Unlike writeline(), no line break is inserted. The file position is updated accordingly. 
+</bodytext>
+<code>
+  <b>readstring</b> (<i>char_count</i>)
+</code>
+<bodytext>
+Reads and returns a string containing up to char_count characters as read from the file, starting at the current file position. Unlike readline(), line breaks are not considered. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>writebytes</b> (<i>byte_array</i>)
+</code>
+<bodytext>
+Writes the numbers contained in the byte_array argument as bytes to the file, starting at the current file position. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>readbytes</b> (<i>byte_count</i>)
+</code>
+<bodytext>
+Reads and returns an array containing up to byte_count numbers, read as bytes from the file, starting at the current file position. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>writechars</b> (<i>char_array</i>)
+</code>
+<bodytext>
+Writes the single character strings contained in the char_array argument as characters to the file, starting at the current file position.  The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>readchars</b> (<i>char_count</i>)
+</code>
+<bodytext>
+Reads and returns an array containing the single character strings, read as characters from the file, starting at the current file position. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>writeint16</b> (<i>int16_array</i>)
+</code>
+<bodytext>
+Writes the numbers contained in the int16_array argument as signed 16-bit integers to the file, starting at the current file position. The byteorder property is taken into account when writing these values. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>readint16</b> (<i>int16_count</i>)
+</code>
+<bodytext>
+Reads and returns an array containing the numbers read as signed 16-bit integers from the file starting at the current file position. The byteorder property is taken into account when reading these values. The file position is updated accordingly. 
+</bodytext>
+<code>
+  <b>writeint32</b> (<i>int32_array</i>)
+</code>
+<bodytext>
+Writes the numbers contained in the int32_array argument as signed 32-bit integers to the file, starting at the current file position. The byteorder property is taken into account when writing these values. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>readint32</b> (<i>int32_count</i>)
+</code>
+<bodytext>
+Reads and returns an array containing the numbers read as signed 32-bit integers from the file starting at the current file position. The byteorder property is taken into account when reading these values. The file position is updated accordingly. 
+</bodytext>
+<code>
+  <b>writefloat32</b> (<i>float32_array</i>)
+</code>
+<bodytext>
+Writes the numbers contained in the float32_array argument as 32-bit floating point numbers to the file, starting at the current file position. The byteorder property is taken into account when writing these values. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>readfloat32</b> (<i>float32_count</i>)
+</code>
+<bodytext>
+Reads and returns an array containing the numbers read as 32-bit floating point numbers from the file starting at the current file position. The byteorder property is taken into account when reading these values. The file position is updated accordingly. 
+</bodytext>
+<code>
+  <b>writefloat64</b> (<i>float64_array</i>)
+</code>
+<bodytext>
+Writes the numbers contained in the float64_array argument as 64-bit floating point numbers to the file, starting at the current file position. The byteorder property is taken into account when writing these values. The file position is updated accordingly.
+</bodytext>
+<code>
+  <b>readfloat64</b> (<i>float64_count</i>)
+</code>
+<bodytext>
+Reads and returns an array containing the numbers read as 64-bit floating point numbers from the file starting at the current file position. The byteorder property is taken into account when reading these values. The file position is updated accordingly.
+</bodytext>
+
+
+</vignette>

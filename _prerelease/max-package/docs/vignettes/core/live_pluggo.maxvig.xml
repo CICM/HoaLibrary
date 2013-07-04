@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Max for Live for Pluggo Developers">
+	<header1>
+	Max for Live for Pluggo Developers
+</header1>
+	<bodytext>
+	Max was able to create plug-ins for VST, Audio Unit, and RTAS 
+	using the Pluggo system first introduced in 1999. Ten years later, 
+	Pluggo was replaced by Max for Live. If you were familiar with plug-in
+	development using Max in version 4.0, here are some tips about 
+	working with Max for Live.	
+	<bluebox><i><b>Max 6 Users</b>: This documentation refers to deprecated features of Max which have been
+	since removed from the software. While the information presented is still accurate, Max 6 no longer 
+	supports the use of the older Pluggo parameter objects.</i></bluebox>
+</bodytext>
+	<header2>
+	Audio I/O
+</header2>
+	<bodytext>
+	Max for Live uses the same objects as Pluggo for audio I/O, <o>plugin~</o> 
+	for audio input and <m>plugout</m> for audio input. However, all audio I/O 
+	in Max for Live is currently stereo, as is true for all Live devices.
+</bodytext>
+	<header2>
+	MIDI I/O
+</header2>
+	<bodytext>
+	Max for Live uses the standard Max MIDI objects for MIDI input and output, 
+	which are much easier to work with than <m>plugmidiin</m> and <m>plugmidiout</m> 
+	used by Pluggo. 
+</bodytext>
+	<bodytext>
+	The <o>midiselect</o> object works with <o>midiin</o> 
+	and <o>midiout</o> for creating MIDI effects that filter some but not all MIDI.
+</bodytext>
+	<bluebox>
+	<bodytext>
+	Live does not currently support polyphonic aftertouch (received by the 
+	<o>polyin</o> object).
+</bodytext>
+	</bluebox>
+	<br/>
+	<header2>
+	Defining Plug-in Types
+</header2>
+	<bodytext>
+	Pluggo used the keyword <i>synth</i> in a <m>plugconfig</m> script 
+	to tell the host application it was an instrument. In Max for Live, 
+	you create new devices by modifying existing ones. There are three 
+	default Max devices: <i>Max Audio Effect</i> with an audio input 
+	and output, <i>Max MIDI Effect</i> with a MIDI input and MIDI output, 
+	and <i>Max Instrument</i> with a MIDI input and audio output. A new 
+	Max device saved from an existing device always shares the same device type. 
+</bodytext>
+	<header2>
+	Defining Latency
+</header2>
+	<bodytext>
+	In Pluggo, you could define the fixed latency of a plug-in using 
+	the <i>latency</i> keyword in a <m>plugconfig</m> script. In Max 
+	for Live, you define a device's latency
+	using the Patcher Inspector. See the section 'Defining Latency for a Max for Live audio device' in the
+	<link module="core" name="live_audiodevices" type="vignette">Creating Audio Effect Devices</link> documentation.
+</bodytext>
+	<header2>
+	Parameters
+</header2>
+	<bodytext>
+	Parameters in Pluggo were most often defined with the <m>pp</m> object. 
+	This object took a number of arguments for defining a parameter's name, 
+	minimum, maximum, and so forth. The <m>pp</m> object  stored 32-bit 
+	floating point values (the standard data type in the original VST 
+	specification). You would connect <m>pp</m> objects to Max user 
+	interface objects in a loop. This functionality has been replaced by
+	<link module="core" name="live_pattr" type="vignette">pattr objects in Max for Live</link>,
+	which provide similar functionality and support a wider variety of data types. 
+</bodytext>
+	<bodytext>
+	Live UI objects such as 
+	<o>live.dial</o> now integrate user interface and parameter storage. Parameter 
+	settings are configured using the Parameter tab of the
+	<link module="core" name="inspector" type="vignette">Inspector</link> 
+	on these objects. Here are the Max for Live equivalents of <m>pp</m> object options:
+</bodytext>
+	<bodytext>
+		<i>Parameter Number</i>
+	</bodytext>
+	<bodytext>
+	The parameter number of a <m>pp</m> object determined the order in 
+	which preset data from a host would be output, as well as the order 
+	that the parameter would appear in an automatically generated VST interface. 
+	In Max for Live, the equivalent attribute for parameter-aware objects is 
+	called Parameter Order. There is no concept of an automatically-generated 
+	plug-in user interface.
+</bodytext>
+	<bodytext>
+		<i>Parameter Name</i>
+	</bodytext>
+	<bodytext>
+	There are two names for each parameter in Max for Live, the <i>long name</i> 
+	and <i>short name</i>. Long names are described in more detail 
+	here
+</bodytext>
+	<bodytext>
+		<i>hidden</i>
+	</bodytext>
+	<bodytext>
+	If a <m>pp</m> object used the <i>hidden</i> keyword, the parameter 
+	would not be automated by the host. The hidden attribute of a parameter-aware 
+	object is equivalent.
+</bodytext>
+	<bodytext>
+		<i>fixed</i>
+	</bodytext>
+	<bodytext>
+	If a <m>pp</m> object used the <i>fixed</i> keyword, the parameter would 
+	not be changed by Pluggo's auto-randomization feature. Auto-randomization 
+	is not currently implemented in Max for Live.
+</bodytext>
+	<bodytext>
+		<i>modable</i>
+	</bodytext>
+	<bodytext>
+	The <i>modable</i> keyword for the <m>pp</m> object was intended to be 
+	used in conjunction with the <i>hidden</i> keyword, to permit non-automating 
+	parameters to be changed by other Pluggo modulator plug-ins. In Max for Live, 
+	only automatable parameters can be changed by other plug-ins using the Live API 
+	and the <o>live.remote~</o> object. Max for Live has a separate concept of 
+	<link anchor="parametermodulation" module="core" name="live_parameters" type="vignette">modulation-enabled parameters</link>  
+	that can be changed by Live's clip modulation feature.
+</bodytext>
+	<bodytext>
+		<i>meta</i>
+	</bodytext>
+	<bodytext>
+	The <i>meta</i> keyword for the <m>pp</m> object was used to identify parameters 
+	that could be changed by other parameters. This feature existed specifically to 
+	appease Apple's Audio Unit validation tool. Live does not require meta-parameters 
+	to be explicitly identified.
+</bodytext>
+	<bodytext>
+		<i>c2-c4</i>
+	</bodytext>
+	<bodytext>
+	The <i>c2</i>, <i>c3</i>, and <i>c4</i> keywords were used to specify 
+	optional colors for a parameter's display in the automatically generated 
+	user interface. This feature does not apply to Max for Live.
+</bodytext>
+	<bodytext>
+		<i>minimum and maximum</i>
+	</bodytext>
+	<bodytext>
+	Set a Max for Live parameter's range using the Minimum and Maximum 
+	<link module="core" name="attributes" type="vignette">attributes</link> in the 
+	<link module="core" name="inspector" type="vignette">Inspector</link> .
+</bodytext>
+	<bodytext>
+		<i>unit label</i>
+	</bodytext>
+	<bodytext>
+	The labels for 
+	<link anchor="unitstyles" module="core" name="live_parameterswindow" type="vignette">unit styles</link>
+	for Live UI object parameters are set using the 
+	UI object's
+	<link module="core" name="inspector" type="vignette">Inspector</link> .
+</bodytext>
+	<bodytext>
+		<i>choices</i>
+	</bodytext>
+	<bodytext>
+	The <m>pp</m> object used the <i>choices</i> keyword followed by a list of items to 
+	create a parameter that displayed a list of text items. To set a list of items for 
+	a Max for Live parameter's value, use the <o>live.menu</o> or <o>live.tab</o> object, and 
+	set the Range/Enum 
+	<link module="core" name="attributes" type="vignette">attribute</link> 
+	in the object's
+	<link module="core" name="inspector" type="vignette">Inspector</link>
+	to reflect the choices you want to use.
+</bodytext>
+	<bodytext>
+		<i>db</i>
+	</bodytext>
+	<bodytext>
+	The <m>pp</m> object used the <i>db</i> keyword to specify that a parameter represented 
+	decibel units of amplitude. 
+	To use decibel units for a Max for Live parameter, set the Unit Style 
+	attribute 
+	in the object's 
+	<link module="core" name="inspector" type="vignette">Inspector</link> 
+	to <m>deciBel</m>.
+</bodytext>
+	<header2>
+	Storing Presets
+</header2>
+	<bodytext>
+	To store an initial program in a device, set the 
+	<m>Parameter Mode Enable</m>
+	and
+	<m>Initial Value</m> 
+	<link module="core" name="attributes" type="vignette">attributes</link> 
+	for each parameter-aware object using the object's
+	<link module="core" name="inspector" type="vignette">Inspector</link> . 
+	There is no support for storing additional programs in 
+	Max for Live devices. Make presets for your device by creating them in Live.
+</bodytext>
+	<bodytext><link module="core" name="live_presets" type="vignette">More information about presets for Max devices</link>.
+</bodytext>
+	<header2>
+	Other plugconfig Features
+</header2>
+	<bodytext>
+	The following <m>plugconfig</m> keywords do not apply to Max for Live: usedefault, 
+	useviews, numprograms, preempt, package, oversampling, sigvschange, sigvsdefault, 
+	autosize, setsize, nohintarea, welcome, defaultview, defaultpage, addview, dragscroll, 
+	infotext, infopict, setprogram, meter, hintfg, hintbg, noinfo, accurate, nonrealtime, 
+	vendor, product, category, tailsize, version, surround.
+</bodytext>
+</vignette>

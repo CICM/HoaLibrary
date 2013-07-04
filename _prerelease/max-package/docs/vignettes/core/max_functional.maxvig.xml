@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Max Object Functional Listing"><header1>
+		A Functional Listing of all Max Objects
+		</header1><bodytext>
+						Here is a listing of all Max objects, grouped by their function. This
+						listing corresponds to the New Object menu listings in earlier versions of 
+						Max. Click on any subject listing to see an object listing. To see the 
+						<link anchor="refman" module="core" name="help_docs" type="vignette">Reference page</link> 
+						for any object, click on its name.
+				</bodytext>
+	 
+			<a name="Control"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Control
+	</header2>
+			<o>attrui</o>
+	 
+			<o>change</o>
+	 
+			<o>counter</o>
+	 
+            <o>dict</o>
+	 
+            <o>dict.deserialize</o>
+	 
+            <o>dict.group</o>
+	 
+            <o>dict.iter</o>
+	 
+            <o>dict.join</o>
+	 
+            <o>dict.pack</o>
+	 
+            <o>dict.print</o>
+	 
+            <o>dict.route</o>
+	 
+            <o>dict.serialize</o>
+	 
+            <o>dict.slice</o>
+	 
+            <o>dict.strip</o>
+	 
+            <o>dict.unpack</o>
+	 
+            <o>dict.view</o>
+     
+            <o>filterdesign</o>
+	 
+        	<o>filterdetail</o>
+	 
+			<o>forward</o>
+	 
+			<o>gate</o>
+	 
+            <o>getattr</o>
+	 
+			<o>grab</o>
+	 
+			<o>if</o>
+	 
+			<o>match</o>
+	 
+			<o>maximum</o>
+	 
+			<o>minimum</o>
+	 
+			<o>next</o>
+	 
+			<o>onebang</o>
+	 
+			<o>past</o>
+	 
+			<o>patcher</o>
+	 
+			<o>peak</o>
+	 
+			<o>pvar</o>
+	 
+			<o>route</o>
+	 
+			<o>routepass</o>
+	 
+			<o>router</o>
+	 
+			<o>select</o>
+	 
+			<o>split</o>
+	 
+			<o>switch</o>
+	 
+			<o>thispatcher</o>
+	 
+			<o>togedge</o>
+	 
+			<o>trigger</o>
+	 
+			<o>trough</o>
+	 
+			<o>universal</o>
+	 
+			<o>uzi</o>
+	 
+			<a name="Data"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Data
+	</header2>
+			<o>anal</o>
+	 
+			<o>autopattr</o>
+	 
+			<o>bag</o>
+	 
+			<o>bline</o>
+	 
+			<o>borax</o>
+	 
+			<o>bucket</o>
+	 
+			<o>capture</o>
+	 
+			<o>coll</o>
+	 
+			<o>combine</o>
+	 
+			<o>cycle</o>
+	 
+			<o>decode</o>
+	 
+			<o>float</o>
+	 
+			<o>funbuff</o>
+	 
+			<o>function</o>
+	 
+			<o>funnel</o>
+	 
+			<o>histo</o>
+	 
+			<o>int</o>
+	 
+			<o>line</o>
+	 
+			<o>nodes</o>
+	 
+			<o>pattr</o>
+	 
+			<o>pattrforward</o>
+	 
+			<o>pattrhub</o>
+	 
+			<o>pattrstorage</o>
+	 
+			<o>pattrmarker</o>
+	 
+			<o>preset</o>
+	 
+			<o>prob</o>
+	 
+			<o>pvar</o>
+	 
+			<o>qlist</o>
+	 
+			<o>spell</o>
+	 
+			<o>spray</o>
+	 
+			<o>table</o>
+	 
+			<o>text</o>
+	 
+			<o>value</o>
+	 
+			<a name="Devices"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Devices
+	</header2>
+			<o>hi</o>
+	 
+			<o>serial</o>
+	 
+			<o>udpreceive</o>
+	 
+			<o>udpsend</o>
+	 
+			<o>vdp</o>
+	 
+			<a name="Files"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Files
+	</header2>
+			<o>absolutepath</o>
+	 
+			<o>conformpath</o>
+	 
+			<o>filedate</o>
+	 
+			<o>filein</o>
+	 
+			<o>filepath</o>
+	 
+			<o>filewatch</o>
+	 
+			<o>folder</o>
+	 
+			<o>fontlist</o>
+	 
+			<o>onecopy</o>
+	 
+			<o>opendialog</o>
+	 
+			<o>relativepath</o>
+	 
+			<o>savedialog</o>
+	 
+			<o>strippath</o>
+	 
+			<a name="Interaction"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Interaction
+	</header2>
+			<o>dialog</o>
+	 
+			<o>key</o>
+	 
+			<o>keyup</o>
+	 
+			<o>modifiers</o>
+	 
+			<o>mousefilter</o>
+	 
+			<o>mousestate</o>
+	 
+			<o>numkey</o>
+	 
+			<a name="Languages"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Languages
+	</header2>
+			<o>js</o>
+	 
+			<o>mxj</o>
+	 
+			<a name="Lists"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Lists
+	</header2>
+			<o>atoi</o>
+	 
+			<o>funnel</o>
+	 
+			<o>iter</o>
+	 
+			<o>itoa</o>
+	 
+            <o>join</o>
+	 
+			<o>pack</o>
+	 
+			<o>pak</o>
+	 
+			<o>quickthresh</o>
+	 
+			<o>spray</o>
+	 
+			<o>thresh</o>
+	 
+            <o>unjoin</o>
+	 
+			<o>unpack</o>
+	 
+			<o>zl</o>
+	 
+			<a name="Math"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Math
+	</header2>
+			<o>!-</o>
+	 
+			<o>!/</o>
+	 
+			<o>!=</o>
+	 
+			<o>%</o>
+	 
+			<o>&amp;</o>
+	 
+			<o>&amp;&amp;</o>
+	 
+			<o>*</o>
+	 
+			<o>+</o>
+	 
+			<o>-</o>
+	 
+			<o>/</o>
+	 
+			<o>&lt;</o>
+	 
+			<o>&lt;&lt;</o>
+	 
+			<o>&lt;=</o>
+	 
+			<o>==</o>
+	 
+			<o>&gt;</o>
+	 
+			<o>&gt;=</o>
+	 
+			<o>&gt;&gt;</o>
+	 
+			<o>abs</o>
+	 
+			<o>accum</o>
+	 
+			<o>acos</o>
+	 
+			<o>acosh</o>
+	 
+			<o>asin</o>
+	 
+			<o>asinh</o>
+	 
+			<o>atan</o>
+	 
+			<o>atan2</o>
+	 
+			<o>atanh</o>
+	 
+			<o>atodb</o>
+	 
+			<o>cartopol</o>
+	 
+			<o>clip</o>
+	 
+			<o>cos</o>
+	 
+			<o>cosh</o>
+	 
+			<o>dbtoa</o>
+	 
+			<o>drunk</o>
+	 
+			<o>expr</o>
+	 
+			<o>ftom</o>
+	 
+			<o>if</o>
+	 
+			<o>linedrive</o>
+	 
+			<o>mean</o>
+	 
+			<o>mean</o>
+	 
+			<o>mtof</o>
+	 
+			<o>poltocar</o>
+	 
+			<o>pow</o>
+	 
+			<o>random</o>
+	 
+			<o>regexp</o>
+	 
+			<o>scale</o>
+	 
+			<o>sin</o>
+	 
+			<o>sinh</o>
+	 
+			<o>sqrt</o>
+	 
+			<o>tan</o>
+	 
+			<o>tanh</o>
+	 
+			<o>urn</o>
+	 
+			<o>vexpr</o>
+	 
+			<o>zmap</o>
+	 
+			<o>|</o>
+	 
+			<o>||</o>
+	 
+			<a name="Messages"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Messages
+	</header2>
+			<o>append</o>
+	 
+			<o>fromsymbol</o>
+	 
+			<o>loadmess</o>
+	 
+			<o>prepend</o>
+	 
+			<o>receive</o>
+	 
+			<o>send</o>
+	 
+			<o>sprintf</o>
+	 
+			<o>substitute</o>
+	 
+			<o>tosymbol</o>
+	 
+			<a name="MIDI"/>
+<bodytext>
+</bodytext>
+	<header2>
+	MIDI
+	</header2>
+			<o>bendin</o>
+	 
+			<o>bendout</o>
+	 
+			<o>ctlin</o>
+	 
+			<o>ctlout</o>
+	 
+			<o>midiflush</o>
+	 
+			<o>midiin</o>
+	 
+			<o>midiinfo</o>
+	 
+			<o>midiout</o>
+	 
+			<o>notein</o>
+	 
+			<o>noteout</o>
+	 
+			<o>pgmin</o>
+	 
+			<o>pgmout</o>
+	 
+			<o>polyin</o>
+	 
+			<o>polyout</o>
+	 
+			<o>rtin</o>
+	 
+			<o>sysexin</o>
+	 
+			<o>sxformat</o>
+	 
+			<o>touchin</o>
+	 
+			<o>touchout</o>
+	 
+			<o>xbendin</o>
+	 
+			<link name="xbendin" type="refpage">xbendin2</link>
+	 
+			<o>xbendout</o>
+	 
+			<link name="xbendout" type="refpage">xbendout2</link>
+	 
+			<o>xnotein</o>
+	 
+			<o>xnoteout</o>
+	 
+			<a name="Notes"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Notes
+	</header2>
+			<o>flush</o>
+	 
+			<o> makenote</o>
+	 
+			<o> midiformat</o>
+	 
+			<o> midiparse</o>
+	 
+			<o> offer</o>
+	 
+			<o> poly</o>
+	 
+			<o> stripnote</o>
+	 
+			<o> sustain</o>
+	 
+			<a name="Patching"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Patching
+	</header2>
+			<o>bgcolor</o>
+	 
+			<o>closebang</o>
+	 
+			<o>freebang</o>
+	 
+			<o>loadbang</o>
+	 
+			<o>loadmess</o>
+	 
+			<o>patcher</o>
+	 
+			<o>patcherargs</o>
+	 
+			<o>pcontrol</o>
+	 
+			<o>thispatcher</o>
+	 
+			<a name="Right-to-Left"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Right-to-Left
+	</header2>
+			<o>bangbang</o>
+	 
+			<o>bondo</o>
+	 
+			<o>buddy</o>
+	 
+			<o>fswap</o>
+	 
+			<o>swap</o>
+	 
+			<o>trigger</o>
+	 
+			<a name="Sequencing"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Sequencing
+	</header2>
+			<o>detonate</o>
+	 
+			<o>follow</o>
+	 
+			<o>mtr</o>
+	 
+			<o>seq</o>
+	 
+			<a name="System"/>
+<bodytext>
+</bodytext>
+	<header2>
+	System
+	</header2>
+			<o>active</o>
+	 
+			<o>colorpicker</o>
+	 
+			<o>date</o>
+	 
+			<o>error</o>
+	 
+			<o>fontlist</o>
+	 
+			<o>gestalt</o>
+	 
+			<o>menubar</o>
+	 
+			<o>print</o>
+	 
+			<o>screensize</o>
+	 
+			<o>suspend</o>
+	 
+			<a name="Timing"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Timing
+	</header2>
+			<o>bline</o>
+	 
+			<o>borax</o>
+	 
+			<o>clocker</o>
+	 
+			<o>cpuclock</o>
+	 
+			<o>defer</o>
+	 
+			<o>deferlow</o>
+	 
+			<o>delay</o>
+	 
+			<o>function</o>
+	 
+			<o>line</o>
+	 
+			<o>metro</o>
+	 
+			<o>pipe</o>
+	 
+			<o>speedlim</o>
+	 
+			<o>qlim</o>
+	 
+			<o>qmetro</o>
+	 
+			<o>quickthresh</o>
+	 
+			<o>tempo</o>
+	 
+			<o>thresh</o>
+	 
+			<o>timepoint</o>
+	 
+			<o>timer</o>
+	 
+			<o>translate</o>
+	 
+			<o>transport</o>
+	 
+			<o>when</o>
+	 
+			<a name="User Interface"/>
+<bodytext>
+</bodytext>
+	<header2>
+	User Interface
+	</header2>
+			<o>button</o>
+	 
+			<o>comment</o>
+	 
+			<o>dial</o>
+	 
+			<o>dropfile</o>
+	 
+			<o>flonum</o>
+	 
+			<o>fpic</o>
+	 
+			<o>gswitch</o>
+	 
+			<o>gswitch2</o>
+	 
+			<o>hint</o>
+	 
+			<o>incdec</o>
+	 
+			<o>inlet</o>
+	 
+			<o>itable</o>
+	 
+			<o>jit.cellblock</o>
+	 
+			<o>kslider</o>
+	 
+			<o>lcd</o>
+	 
+			<o>led</o>
+	 
+			<o>matrixctrl</o>
+	 
+			<o>multislider</o>
+	 
+			<o>nodes</o>
+	 
+			<o>nslider</o>
+	 
+			<o>number</o>
+	 
+			<o>outlet</o>
+	 
+			<o>panel</o>
+	 
+			<o>pictctrl</o>
+	 
+			<o>pictslider</o>
+	 
+			<o>preset</o>
+	 
+			<o>radiogroup</o>
+	 
+			<o>rslider</o>
+	 
+			<o>slider</o>
+	 
+			<o>swatch</o>
+	 
+			<o>tab</o>
+	 
+			<o>textbutton</o>
+	 
+			<o>textedit</o>
+	 
+			<o>toggle</o>
+	 
+			<o>ubutton</o>
+	 
+			<o>umenu</o>
+</vignette>

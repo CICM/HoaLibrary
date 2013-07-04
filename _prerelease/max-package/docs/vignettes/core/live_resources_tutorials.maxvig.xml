@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Max for Live Tutorials">
+<a name="tutorialpatches" />
+	<header1>
+	Max for Live Tutorials
+	</header1>
+<bodytext>
+	In addition to 
+	tutorials designed to help you learn Max, 
+	the following series of
+	video tutorials will introduce the Max programming environment in Max for Live, and
+	help you get started creating your own Max audio and MIDI effects
+	and Instruments:
+</bodytext>
+<ul>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_1:_An_Introduction_to_Programming_in_the_Max_Environment">An Introduction to Programming in the Max Environment</a>
+</li>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_2:_Creating_Some_Basic_Audio_Effects">Creating Some Basic Audio Effects</a>
+</li>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_3:_Creating_User_Interfaces">Creating User Interfaces</a>
+</li>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_4:_Creating_A_Dub_Delay">Creating a Dub Delay</a>
+</li>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_5:_Creating_a_Velocity_Sequencer_MIDI_Effect">Creading a Velocity-based Sequencer MIDI Effect</a>
+</li>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_6:_Creating_a_Wobble_Bass_MIDI_Instrument">Creating a Wobble Bass Midi Instrument</a>
+</li>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_7:_Creating_a_Polyphonic_Synth">Creating a Polyphonic Synth</a>
+</li>
+<li>
+<a href="http://cycling74.com/wiki/index.php?title=Programming_in_Max_for_Live_Episode_8:_Creating_a_Live_API-based_Step_Sequencer">Creating a Live API-based Step Sequencer</a>
+</li>
+</ul>
+</vignette>

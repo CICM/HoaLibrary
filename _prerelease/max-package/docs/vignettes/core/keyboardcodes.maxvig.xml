@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Keyboard Codes">
+	<header1>
+	Keyboard Codes
+	</header1>
+<bodytext>
+	The fourth outlet of the <o>key</o> and <o>keyup</o> objects output a 
+	keyboard-independent code you can use to detect key presses and releases 
+	as described below.
+</bodytext>
+<header2>
+	Letters and Numbers
+</header2>
+<bodytext>
+	When pressing a letter or number key,
+	the values reported from this outlet correspond to the
+	unshifted Unicode (ASCII) valuversion of the pressed key.
+</bodytext>
+<header2>
+	Other Characters
+</header2>
+<bodytext>
+	When pressing a key that is a character key but is not a letter or number, 
+	the Unicode value of the key symbol that would be output by the keyboard 
+	<i>when the shift key is not depressed</i> is output. 
+	(For example, on U.S. keyboards, 
+	there is a key with both a single and double quote. 
+	When this key is pressed, the key object will report single quote. 
+</bodytext>
+<header2>
+	Other Keys
+</header2>
+<bodytext>
+	Other keys such as function, home, page up etc. output a consistent values independent of 
+	keyboard on each platform. The values are listed below:
+</bodytext>
+<ul>
+	<li><b>(none)</b>: -1</li>
+	<li><b>Space bar</b>: -2</li>
+	<li><b>Escape</b>: -3</li>
+	<li><b>Return/Enter</b>: -4</li>
+	<li><b>Tab</b>: -5</li>
+	<li><b>Delete</b>: -6</li>
+	<li><b>Backspace</b>: -7</li>
+	<li><b>Insert</b>: -8</li>
+	<li><b>Up arrow</b>: -9</li>
+	<li><b>Down arrow</b>: -10</li>
+	<li><b>Left arrow</b>: -11</li>
+	<li><b>Right arrow</b>: -12</li>
+	<li><b>Page up</b>: -13</li>
+	<li><b>Page down</b>: -14</li>
+	<li><b>Home</b>: -15</li>
+	<li><b>End</b>: -16</li>
+	<li><b>F1</b> (function key): -17</li>
+	<li><b>F2</b> (function key): -18</li>
+	<li><b>F3</b> (function key): -19</li>
+	<li><b>F4</b> (function key): -20</li>
+	<li><b>F5</b> (function key): -21</li>
+	<li><b>F6</b> (function key): -22</li>
+	<li><b>F7</b> (function key): -23</li>
+	<li><b>F8</b> (function key): -24</li>
+	<li><b>F9</b> (function key): -25</li>
+	<li><b>F10</b> (function key): -26</li>
+	<li><b>F11</b> (function key): -27</li>
+	<li><b>F12</b> (function key): -28</li>
+	<li><b>F13</b> (function key): -29</li>
+	<li><b>F14</b> (function key): -30</li>
+	<li><b>F15</b> (function key): -31</li>
+	<li><b>F16</b> (function key): -32</li>
+	<li><b>0</b> (number pad): -33</li>
+	<li><b>1</b> (number pad): -34</li>
+	<li><b>2</b> (number pad): -35</li>
+	<li><b>3</b> (number pad): -36</li>
+	<li><b>4</b> (number pad): -37</li>
+	<li><b>5</b> (number pad): -38</li>
+	<li><b>6</b> (number pad): -39</li>
+	<li><b>7</b> (number pad): -40</li>
+	<li><b>8</b> (number pad): -41</li>
+	<li><b>9</b> (number pad): -42</li>
+	<li><b>Add</b> (number pad): -43</li>
+	<li><b>Subtract</b> (number pad): -44</li>
+	<li><b>Multiply</b> (number pad): -45</li>
+	<li><b>Divide</b> (number pad): -46</li>
+	<li><b>Separator</b> (number pad): -47</li>
+	<li><b>Decimal</b> (number pad): -48</li>
+	<li><b>Equals</b> (number pad): -49</li>
+	<li><b>Delete</b> (number pad): -50</li>
+	<li><b>Play/Pause</b>: -51</li>
+	<li><b>Stop</b>: -52</li>
+	<li><b>Nexttrack</b>: -53</li>
+	<li><b>Prevtrack</b>: -54</li>
+	<li><b>Help</b>: -55</li>
+</ul>
+</vignette>

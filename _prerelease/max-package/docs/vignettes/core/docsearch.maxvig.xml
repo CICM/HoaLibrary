@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Searching the Documentation">
+	<header1>
+	Searching the Documentation
+	</header1>
+	<bodytext>
+	You can search the Max documentation by using the Max documentation window. 
+	It allows you to perform searches and to explore documentation resources.
+</bodytext>
+	<bluebox>
+		<header2>
+	Using documentation search results
+	</header2>
+		<ul>
+			<li>Choose <b>Max Help</b> from the Help menu to display the documentation window.
+		</li>
+			<li>Click in the Search field at upper right of the documentation window and enter the text you are looking for.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/search1.png"/>
+		</bodytext>
+		<ul>
+			<li>The results of your search will be returned, organized by types. The results displayed will include Max Object refpages, Max Tutorials, and Vignettes.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/search2.png"/>
+		</bodytext>
+		<ul>
+			<li>Use the disclosure triangles to hide or display categories to refine your search.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/search3.png"/>
+		</bodytext>
+		<ul>
+			<li>Click any item link to display your choice in the documentation window.</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<bodytext>
+		Once you enter some search text, you can also see the results for any matching filenames in the 
+		<link module="core" name="file_browser" type="vignette">file browser</link>.
+</bodytext>
+	<bluebox>
+		<header2>
+	Exploring the Documentation
+	</header2>
+		<bodytext>
+		The documentation window also allows you to explore the online documentation by type.
+	</bodytext>
+		<ul>
+			<li>
+			Choose <b>Max Help</b> from the Help menu to display the documentation window. You'll see tabs for Max objects, tutorials and vignettes.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/search4.png"/>
+		</bodytext>
+		<ul>
+			<li>To explore the documentation, click on a tab.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/search5.png"/>
+		</bodytext>
+		<ul>
+			<li>Use the disclosure triangles to show you the documentation contents in greater detail.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/search6.png"/>
+		</bodytext>
+		<ul>
+			<li>Click any item link to display your choice in the documentation window.</li>
+		</ul>
+	</bluebox>
+	<br/>
+</vignette>

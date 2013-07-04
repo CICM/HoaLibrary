@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Basic Javascript programming for the js and jsui objects">
+  <header1>
+  Introduction
+  </header1>
+<bodytext>
+The <o>js</o> and <o>jsui</o> objects run Javascript version 1.6 inside of Max. This topic covers information about the functions added to the Javascript language that are specific to the <o>js</o> and <o>jsui</o> object implementation. This topic is not a general reference on Javascript programming. A good on-line resource on Javascript is available here:
+</bodytext>
+<bodytext>
+<a href="https://developer.mozilla.org/en/JavaScript/Reference">https://developer.mozilla.org/en/JavaScript/Reference</a> 
+</bodytext>
+<bodytext>
+The Javascript language used by the <o>js</o> and <o>jsui</o> objects does not include web browser-specific functions and properties
+</bodytext>
+<bodytext>
+User interface functions and properties specific to the <o>jsui</o> object are covered in the Javascript Graphics topic. In this topic, unless specifically noted, all information covers both <o>js</o> and <o>jsui</o> even though we will refer only to the <o>js</o> object. 
+</bodytext>
+<header2>How Javascript Works in the js Object</header2>
+<bodytext>
+Javascript is a textual language that is “compiled” into a script. Scripts have global code and functions. Any Javascript expressions and statements that aren’t inside functions are considered to be in global code
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  var a = 2; // global code
+  function assign(x)
+  {
+    a = x;  // statement in a function, not global code
+  }
+</code>
+<bodytext>
+Global code is executed immediately after a Javascript source file is compiled. This allows you to initialize a global variable or property. Functions can be called by global code, but they can also be called via messages sent to the <o>js</o> object. This makes implementing new Max objects in Javascript very straightforward because the name you give to a function is the same as the message name a Max user would use to invoke it. 
+</bodytext>
+<bodytext>
+ For example, if the Javascript source above were compiled into a <o>js</o> object, we could click on the message box in the patch shown below to invoke the assign() function with an argument of 10.
+</bodytext>
+<bodytext>
+  <img src="images/js1.png" />
+</bodytext>
+<bodytext>
+The <o>js</o> object only uses Javascript saved in a text file. You can write Javascript code using a separate editor, or use the text window built into Max. If you use the built-in window, the <o>js</o> object will recompile its Javascript source each time you save the file. If you use another text editor, you can recompile the source from the text file by sending the message compile to the <o>js</o> object. Or you can send the message autowatch 1 to the <o>js</o> object, and every time the file is saved, the object will recompile it automatically
+</bodytext>
+<header2>Overview of js Object Extensions to Javascript</header2>
+<bodytext>
+Javascript is a language designed to control the software in which it is embedded. Put another way, it is a language designed to script an application.  Javascript code always executes within a script context that can add new properties and functions -  this is, for example, how Netscape added browser-specific features familiar to Web developers. 
+</bodytext>
+<bodytext>
+In order to understand the script context in the Max <o>js</o> object, it is important to realize that there is a Javascript model of the Max world that you will be manipulating. Perhaps the most important aspect of this model is that there is a Javascript version of the Max <o>js</o> object itself. This object, which we refer to in this documentation as the <b>jsthis</b> object, is the “base” on which you build properties and methods when you write functions and global code. Some examples should make this clear. Consider the Javascript we listed above again:
+</bodytext>
+<code>
+  var a = 2; // global code
+  function assign(x)
+  {
+    a = x;  // statement in a function, not global code
+  }
+</code>
+<bodytext> 
+The function assign() becomes a method of jsthis, and the variable a becomes its property. In Javascript a method can be invoked by using a dot notation on an object. We could rewrite the above example as follows using the optional Javascript this keyword to make the object-oriented nature of the environment more apparent. We’ve also added a new function provoke() that invokes assign()
+</bodytext>
+<code>
+  this.a = 2; // global code
+  function assign(x)
+  {
+    this.a = x; 
+    // statement in a function, not global code
+  }
+  function provoke()
+  {
+    this.assign(1000);
+  }
+</code>
+<bodytext>
+However, you shouldn’t really need to concern yourself with these semantic details if you have an irrational hatred of object-oriented terminology and concepts
+</bodytext>
+<bodytext>
+The Javascript <b>jsthis</b> object has certain built-in properties and methods you will need to use in order to work within the Max environment. For example, there is an outlet() method to send data out an outlet. You can also access the Max <o>js</o> object’s typed-in arguments, find out which inlet received a message, and define the number of inlets and outlets the object has. These features are documented in the section on the 
+<b>jsthis</b> object described in the
+<link type="vignette" module="js" name="jsbasic">basic techniques</link>
+vignette. 
+</bodytext>
+<bodytext>
+While the word this in generally optional, you may need to use it when passing the current <b>jsthis</b> instance to functions. For example, you can send a reference to your <b>jsthis</b> object out an outlet, or use it in creating a Task object (see below for more about Tasks)
+</bodytext>
+<bodytext>
+In addition to jsthis, the notion of a Javascript Max model is completed with a series of Javascript classes defined as part of the context. One of the primary reasons for the <o>js</o> object was to provide a more powerful interface for the patcher scripting features where you can create, connect and move new objects.  The Max, Patcher, Wind, and Maxobj classes are used in scripting and Max application control. The Task object provides a convenient Javascript interface to the Max scheduler. The Folder class allows you to enumerate files. And the Global class allows different <o>js</o> instances to communicate with each other and share data, as well as interface to Max send and <o>receive</o> objects
+</bodytext>
+<bodytext>
+Before we enumerate the properties and functions for these Javascript classes, we’ll review how you handle Javascript source text files for the <o>js</o> and <o>jsui</o> objects
+</bodytext>
+<header2>Assigning a File to js and jsui</header2>
+<bodytext>
+Applies to the <o>js</o> object only: If you type <o>js</o> into an object box with no arguments, you will get an object that can’t do anything and has a single inlet and outlet. The first argument to the <o>js</o> object is a filename of some Javascript source. By convention, Javascript source files end in the extension .js. In fact, if you like, you can name a file something like myscript.js and type <o>js</o> myscript. Assuming the file myscript.js is in the Max search path, the <o>js</o> object will find it
+</bodytext>
+<bodytext>
+Applies to the <o>jsui</o> object only: There are several ways to assign a Javascript source file to the <o>jsui</o> object. 
+</bodytext>
+<ul>
+<li>
+Select the <o>jsui</o> object.
+Click on the Inspector button in the Patcher Window toolbar to show the Inspector.
+Click on the <b>Choose...</b> button in the Value column of the JavaScript File Setting
+and select it from the standard open file dialog window.
+</li>
+<li>
+Right-click or control-click on a selected <o>jsui</o> object to see a contextual menu. You will see several choices specific to the <o>jsui</o> object, including the names of Javascript source files in the jsui-library folder inside the Cycling ’74 folder. Choose one of these files, or choose Load New File… to select another file using a standard open file dialog window.
+</li>
+<li>
+Right-click or control-click on a selected <o>jsui</o> object and click to see a contextual menu. Choose Open Editor from the contextual menu. After typing some Javascript, save the text window. The name you gave the file is now assigned to the <o>jsui</o> object and will be recorded when the patcher containing the <o>jsui</o> is saved.
+</li>
+</ul>
+
+
+
+</vignette>

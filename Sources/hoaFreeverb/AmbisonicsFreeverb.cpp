@@ -45,6 +45,9 @@ void AmbisonicsFreeverb::setSamplingRate(long aSamplingRate)
     m_sampling_rate = Tools::clip_min(aSamplingRate, (long)44100);
     for(int i = 0; i < m_number_of_harmonics; i++)
         m_freeverb[i]->setSamplingRate(m_sampling_rate);
+    
+    setDiffuseSpread(m_diffuse);
+    setDirectionalSpread(m_directional_spread);
 }
 
 
@@ -128,10 +131,10 @@ void AmbisonicsFreeverb::setDirectionalSpread(double value)
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         if(getHarmonicIndex(i) >= 0)
-            spreadOne = m_diffuse_spread * m_diffuse_spread * m_diffuse_spread * ((double)getHarmonicOrder(i) / (double)m_order);
+            spreadOne = m_directional_spread * m_directional_spread * m_directional_spread * ((double)getHarmonicOrder(i) / (double)m_order);
         else
-            spreadOne = m_diffuse_spread * m_diffuse_spread * m_diffuse_spread * ((double)(getHarmonicOrder(i) - 0.5) / (double)m_order);
-        m_freeverb[i]->setDiffuseSpread(spreadOne);
+            spreadOne = m_directional_spread * m_directional_spread * m_directional_spread * ((double)(getHarmonicOrder(i) - 0.5) / (double)m_order);
+        m_freeverb[i]->setDirectionalSpread(spreadOne);
     }
 }
 
@@ -145,7 +148,7 @@ void AmbisonicsFreeverb::setDiffuseSpread(double value)
             spreadTwo = m_diffuse_spread * m_diffuse_spread * m_diffuse_spread * ((double)getHarmonicOrder(i) / (double)m_order);
         else
             spreadTwo = m_diffuse_spread * m_diffuse_spread * m_diffuse_spread * ((double)(getHarmonicOrder(i) - 0.5) / (double)m_order);
-        m_freeverb[i]->setDirectionalSpread(spreadTwo);
+        m_freeverb[i]->setDiffuseSpread(spreadTwo);
     }
 }
 

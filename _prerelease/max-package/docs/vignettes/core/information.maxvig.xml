@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Information">
+	<header1>
+	Information
+	</header1>
+	<bodytext>
+			Max provides you with several ways to find out about the Max application itself,
+			the function of the Max objects you use as you program, and the flow of data through a Max patch.
+		</bodytext>
+	<bodytext>
+			As you navigate using your mouse, the Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>
+			provides you with help about Max menus, the interface, objects in a Patcher window, and
+			Max’s various Inspectors, Palettes, and Windows.
+		</bodytext>
+	<bodytext><link module="core" name="assistance" type="vignette">Assistance</link>
+			gives you a brief description of the use of each inlet and outlet
+			of a Max object in unlocked (or locked) Patcher windows.
+		</bodytext>
+	<bodytext><link module="core" name="quickref" type="vignette">The Quickref menu</link>
+			provides you with a listing of all the messages that
+			Max object understands, a simple message sending and querying facility, and
+			access to Mac help files and Reference pages.
+		</bodytext>
+	<bodytext>
+			Each Max object has its own definitive online
+			<link anchor="refman" module="core" name="help_docs" type="vignette">Reference page</link>
+			and
+			<link anchor="helpfile" module="core" name="help_docs" type="vignette">help file</link>
+			that provides information about the function of the object and its use. You can consult view
+			the Max reference and Help files directly from the Max application as you work.
+		</bodytext>
+	<bodytext>
+			You can search for objects and media using the Max
+			<link module="core" name="file_browser" type="vignette">File Browser</link>,
+			and save the materials you have for future reference.
+		</bodytext>
+	<bodytext>
+			You can monitor what is happening in your patch as you work by using
+			<link module="core" name="watchpoints" type="vignette">watchpoints</link> -
+			a kind of “wiretap” for Max patch cords, and the
+			<link module="core" name="signal_probe" type="vignette">signal probe</link>.
+		</bodytext>
+</vignette>

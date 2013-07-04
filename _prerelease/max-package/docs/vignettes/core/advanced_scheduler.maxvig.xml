@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Advanced Scheduler Settings">
+	<header1>
+	Advanced Scheduler Settings
+</header1>
+	<ul>
+		<li>
+			When <i>Enable Refresh</i> is checked (on), redrawing is limited 
+			to the rate set by the <i>Refresh Rate</i> parameter.
+		</li>
+		<li><i>Event Interval</i> is the rate, in milliseconds, at which 
+			Max services the low-priority queue, which includes redrawing 
+			the screen. The effective rate of redrawing is limited by 
+			the <i>Refresh Interval</i>, but other, less expensive low-priority 
+			events may occur more often. The default value of is 2 ms.
+		</li>
+		<li>
+			When <i>Overdrive</i> is enabled, Max gives priority to timing and 
+			MIDI processing over screen drawing and user interface tasks such as 
+			responding to mouse clicks. If you are primarily going to be using Max 
+			for MIDI or audio processing, Overdrive should be enabled. If you are 
+			primarily going to be using Jitter, Overdrive should be disabled. 
+			In addition, the debugging features of Max only work if overdrive is 
+			disabled.
+		</li>
+		<li><i>Poll Throttle</i> sets the number of high-priority 
+			events processed per by the scheduler at one time. High 
+			priority events include MIDI as well as events generated 
+			by <o>metro</o> and other timing objects. A lower setting 
+			(e.g., 1) means less event clumping, while a higher value 
+			(e.g., 100) will result in less of an event backlog. The 
+			default value is 20 events.
+		</li>
+		<li><i>Queue Throttle</i> sets the number of events processed 
+			per servicing of the low priority event queue (Low priority 
+			events include user interface events, graphics operations, 
+			reading files from disk, and other expensive operations that 
+			would otherwise cause timing problems for the scheduler). A 
+			lower setting (e.g. 1) means less event clumping, while a 
+			higher value (e.g. 100) will result in less of an event backlog. 
+			The default value is 10 events.
+		</li>
+		<li><i>Redraw Queue Throttle</i> sets the maximum number of patcher
+			UI update events to process at a time. Lower values can lead
+			to more processing power being made available to other low-priority
+			Max processes, and higher values make user interfaces more responsive
+			(especially for patches in which large numbers of <o>bpatcher</o>
+			objects are being used). The default value is 1000 ms.
+		</li>
+		<li><i>Refresh Rate</i> sets the minimum time, in milliseconds, 
+			between updating of the interface. A lower setting (e.g., 5) 
+			means that Max will devote more time to redrawing the screen 
+			and less to responding to user input, while a higher value (e.g., 60) 
+			will mean that the interface is faster and more responsive. The 
+			default value is 33.3 ms. This setting has no effect unless <i>Enable Refresh</i> 
+			is checked.
+		</li>
+		<li><i>Scheduler Interval</i> sets the interval, in milliseconds, 
+				between timer ticks. This determines how often the scheduler 
+				services events when <i>Overdrive</i> is enabled. This setting 
+				can range from 1 to 20 ms. Larger intervals can dramatically 
+				reduce overall CPU utilization at the expense of timing accuracy. 
+				The default value is 1 ms.
+		</li>
+		<li><i>Scheduler slop</i> is the amount of time, in milliseconds, the 
+			scheduler is permitted to fall behind actual time before correcting 
+			the scheduler time to actual time. The scheduler will fall behind 
+			actual time if there are more high priority events than the computer 
+			can process. Typically some amount of slop is desired so that 
+			high priority events will maintain long term temporal accuracy 
+			despite small temporal deviations. A lower setting (e.g., 1) results 
+			in greater short term accuracy, while a higher value (e.g., 100) 
+			will mean that the scheduler is more accurate in the long term. 
+			The default value is 25 milliseconds.
+		</li>
+	</ul>
+	<br/>
+</vignette>

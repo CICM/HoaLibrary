@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Advanced Max Topics">
+	<header1>
+	Advanced Max Topics
+	</header1>
+	<bodytext>
+	Additional resources for advanced topics are available on the following pages:
+</bodytext>
+	<ul>
+		<li>
+			<link module="core" name="debugging" type="vignette">Debugging</link>
+		</li>
+		<li>
+			<link module="core" name="messages_to_max" type="vignette">Messages to <o>max</o></link>
+		</li>
+		<li>
+			<link module="js" name="javascriptinmax" type="vignette">Javascript in Max</link>
+		</li>
+	</ul>
+</vignette>

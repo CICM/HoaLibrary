@@ -28,8 +28,8 @@
 FilterAllpass::FilterAllpass(long aBufferSize) : Filter()
 {
     m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	m_buffer = new double[m_buffer_size_max];
 	m_buffer_size = m_buffer_size_max;
+    Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
 	for(int i = 0; i < m_buffer_size_max; i++)
 		m_buffer[i] = 0.;
 	m_ramp = 0;
@@ -37,10 +37,10 @@ FilterAllpass::FilterAllpass(long aBufferSize) : Filter()
 
 void FilterAllpass::setBufferSizeMax(long aBufferSize)
 {
-	free(m_buffer);
     m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	m_buffer = new double[m_buffer_size_max];
-	m_buffer_size = m_buffer_size_max;
+    m_buffer_size = m_buffer_size_max;
+    Cicm_Free(m_buffer);
+    Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
 	for(int i = 0; i < m_buffer_size_max; i++)
 		m_buffer[i] = 0.;
     

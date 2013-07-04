@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Patcher Preferences">
+	<header1>
+	Patcher Preferences
+	</header1>
+	<bodytext>
+			Max remembers many of your working preferences associated with various details of
+			working in a Patcher window by storing settings each time you quit the
+			application. The first time you use Max, a folder containing your preferences is created.
+		</bodytext>
+	<bodytext>
+			Some of these preferences are set for things you use often, such as using
+			<link anchor="segmented" module="core" name="patch_cords" type="vignette">segmented patch cords</link>
+			or
+			<link module="core" name="assistance" type="vignette">providing assistance</link>
+			on objects and abstractions you use while patching.
+		</bodytext>
+	<bodytext>
+			Other parameters involve ways that Max responds to you as you patch.
+		</bodytext>
+	<bodytext>
+			Scheduler parameter settings may be viewed and set using the
+			<link module="core" name="preferences_window" type="vignette">Preferences Window</link>.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Viewing the Patcher Preferences
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences...</b> from the Max menu. The Preferences Window will be shown
+		</li>
+			<li>
+			Locate the <b>Patcher</b> category to show the Patcher preference settings.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Getting information about a Patcher Preferences setting
+	</header2>
+		<ul>
+			<li>
+			Position your cursor over the Setting column of any row in the window. A brief description of
+			the setting will be shown in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<bodytext>
+			When Auto Fix Width is checked, Max will automatically adjust the width of
+			all object boxes, a comments, or a message boxes to accommodate all the 
+			text they contain on a single line.
+		</bodytext>
+	<a name="overdrive"/>
+	<header2>
+	About the scheduler settings:
+	</header2>
+	<bodytext>
+			When <i>Overdrive</i> is enabled, Max gives priority to timing and MIDI processing
+			over screen drawing and user interface tasks such as responding to mouse clicks.
+			If you are primarily going to be using Max for MIDI or audio processing, Overdrive
+			should be enabled. If you are primarily going to be using Jitter, Overdrive 
+			should be disabled.
+		</bodytext>
+	<bodytext>
+			For many Max users, Overdrive is the only scheduler parameter that they will ever set.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Enabling/disabling Overdrive
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Overdrive</b> from the Options menu. The Overdrive menu item will
+			be checked, and Overdrive will be enabled (the Overdrive Value in the Scheduler
+			tab of the Preferences Window will be updated to indicate your choice).
+		</li>
+		</ul>
+		<bodytext>
+			To disable Overdrive, choose <b>Overdrive</b> from the Options menu. The menu item
+			will be unchecked to indicate that Overdrive is disabled.
+		</bodytext>
+	</bluebox>
+	<br/>
+	<bodytext><i>Refresh Rate</i> sets the rate, in Hz., at which Max attempts to update the 
+			interface (The actual refresh rate may be higher or lower depending on various 
+			application and operating system activities, and overall system load). A lower 
+			setting (e.g. 5) means that Max will update the interface more slowly, but run 
+			more efficiently, while a higher value (e.g. 60) will mean that the interface 
+			is faster and more responsive. The default value is 30 Hz.
+		</bodytext>
+	<bodytext><i>Scheduler slop</i> is the amount of time, in milliseconds, the scheduler 
+			is permitted to fall behind actual time before correcting the scheduler 
+			time to actual time. The scheduler will fall behind actual time if there 
+			are more high priority events than can be processed in real time. Scheduler 
+			slop prevents the scheduler from backlogging in such a case with some 
+			slop—a threshold. Typically some amount of slop is desired so that high 
+			priority events (like a metronome) will maintain long term temporal accuracy 
+			despite small temporal deviations. A lower setting (e.g. 1) results in greater 
+			short term accuracy, while a higher value (e.g. 100) will mean that the 
+			scheduler is more accurate in the long term. The default value is 25 milliseconds.
+		</bodytext>
+	<bodytext><i>Sleep Interval</i> sets the amount of time, in milliseconds, that 
+			the low priority thread sleeps between servicing the low priority event 
+			queue (Low priority events include user interface events, graphics 
+			operations, reading files from disk, and other expensive operations that 
+			would otherwise cause timing problems for the scheduler). A lower setting (e.g. 1) 
+			results in greater responsiveness, while a higher value (e.g. 20) will mean 
+			that more time is available for other applications. The default value is 
+			2 milliseconds.
+		</bodytext>
+	<bodytext>
+			When <i>Enable Refresh</i> is checked (on), the screen will be refreshed 
+			at the rate set by the Refresh Rate parameter. This can help improve visual 
+			performance on some machines.
+		</bodytext>
+	<bodytext><i>Poll Throttle</i> sets the number of events processed per servicing 
+			of the scheduler's high priority event queue (High priority events include 
+			MIDI, events generated by <o>metro</o>, <o>tempo</o>, <o>line</o>, <o>delay</o>, <o>pipe</o>, <o>snapshot~</o>, 
+			and other scheduler based objects). A lower setting (e.g. 1) means less 
+			event clumping, while a higher value (e.g. 100) will result in less of 
+			an event backlog. The default value is 20 events.
+		</bodytext>
+	<bodytext><i>Event Interval</i> is the rate, in milliseconds, at which Max attempts 
+			to update the interface. The actual refresh rate may be higher or lower 
+			depending on various application and operating system activities, and 
+			overall system load. A lower setting (e.g. 1) will provide greater accuracy in terms of interface updates, while a higher value (e.g. 20) will result in less CPU usage. The default value is 2 ms events.
+		</bodytext>
+	<bodytext><i>Queue Throttle</i> sets the number of events processed per servicing 
+			of the low priority event queue (Low priority events include user 
+			interface events, graphics operations, reading files from disk, and 
+			other expensive operations that would otherwise cause timing problems 
+			for the scheduler). A lower setting (e.g. 1) means less event clumping, 
+			while a higher value (e.g. 100) will result in less of an event backlog. 
+			The default value is 10 events.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Changing the Scheduler Settings
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences...</b> from the Max menu (Macintosh) or the 
+			Options menu (Windows) to show the Preferences Window.
+		</li>
+			<li>
+			Locate the <b>Scheduler</b> category to show the Scheduler settings.
+		</li>
+			<li>
+			Double-click on the Value column for the Setting you want to change 
+			to show a cursor and text box.
+		</li>
+			<li>
+			Type the new value, followed by a carriage return. The new scheduler 
+			value will be set.
+		</li>
+		</ul>
+	</bluebox>
+</vignette>

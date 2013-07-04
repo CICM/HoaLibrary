@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Limitations of Max for Live">
+<header1>
+Max Authorization States
+</header1>
+<bodytext>
+Max for Live is integrated with Max's own copy protection and authorization system. Max can be running on its own authorization, via a Live authorization, or both. When the Max application  receives its authorization from Live alone, a number of limitations apply. Before we describe these limitations, it's worth describing how Max will be in any particular authorization state.
+</bodytext>
+<bodytext>
+	Max's own copy protection and authorization system starts in <i>demo mode</i>, typically a one-time 30-day period in which it is fully functional. During the demo period, you can launch the Max application by double-clicking on it from the Mac OS Finder or Windows Explorer. You will see a dialog informing you of the remaining demo period that also permits you to authorize the software. Click the Demo mode to continue launching Max. Once demo mode expires, you will not be able to launch Max from the Finder or Windows Explorer without purchasing an authorization from Cycling '74.
+</bodytext>
+<bodytext>
+	Note that when launching Max via Live, you will not see the demo dialog, nor will you be informed when the demo period expires.
+</bodytext>
+<bodytext>
+	A Max authorization comes in three varieties: you can purchase Max alone, or Max/MSP to work with audio, or Max/MSP/Jitter to work with both audio and visual media. MSP and Jitter work during demo mode, but after that, they require product-specific authorization.
+</bodytext>
+<bodytext>
+	If you have purchased Max for Live, Max devices will have an edit button in Live that will launch Max and open the specified device. Once Max's demo mode has expired, if you do not own a Max authorization, <i>you can only launch Max by clicking on the edit button in Live</i>. If you own both Max and Max for Live, you can launch Max either way, but you will only obtain Live's authorization if you launch Max by clicking the edit button in Live.
+</bodytext>
+<header1>
+	Max for Live Limitations
+</header1>
+<bodytext>
+Any limitations imposed by a Live authorization will not exist when Max is fully authorized (or when it is in demo mode). In other words, your fully authorized copy of Max is never limited by launching the application via Live. 
+</bodytext>
+<bodytext>
+	Another way to put it is this: Max can determine its own authorization state whether you launch it from the OS or from Live. But the Live authorization state can <i>only</i> be set properly when launching from Live.
+</bodytext>
+<header2>
+	Max Limitations
+</header2>
+<bodytext>
+Communication between devices using <o>send</o> and <o>receive</o> is supported, but there may be some latency involved when sending data between devices.
+</bodytext>
+<bodytext>
+The <o>grab</o> object cannot be used to communicate from a <o>send</o> to a <o>receive</o> between devices.
+</bodytext>
+<header2>
+	Audio Limitations
+</header2>
+<bodytext>
+	When authorized only via Live, the Max application will not use its own audio drivers. Its audio input is the input to a Max device you are editing, and its audio output is the output from that Max device. Audio I/O works when using <link type="vignette" module="core" name="live_preview">preview mode</link>. If you turn <link type="vignette" module="core" name="live_preview">preview mode</link> off, all audio I/O for the Max application will stop.
+</bodytext>
+<bodytext>
+	Input and output are limited to two channels (MSP supports up to 512 channels of audio I/O). When you open a Max patcher such as a help file, the <o>dac~</o> objects in the patcher will be mixed with the output of the device you are currently editing. If you open a file with <o>dac~</o> or <o>adc~</o> objects when you are not editing a device, or when Preview Mode is turned off, you will not hear any sound.
+</bodytext>
+<bodytext>
+	If Max and MSP are authorized when editing a Live device, Max windows that are not a part of the Live device will use the regular Max audio drivers.
+</bodytext>
+<bodytext>
+The use of the <o>send~</o> and <o>receive~</o> objects to pass audio between Max for Live devices is not supported.
+</bodytext>
+<header2>
+	MIDI Limitations
+</header2>
+<bodytext>
+	When authorized only via Live, the Max application will not use its own MIDI drivers. MIDI input arrives from Live and MIDI output is sent to Live. MIDI I/O works only when using <link type="vignette" module="core" name="live_preview">preview mode</link>. If you turn <link type="vignette" module="core" name="live_preview">preview mode</link> off, all MIDI I/O for the Max application will stop.
+</bodytext>
+<bodytext>
+When you open a Max patcher file such as a help file containing Max MIDI objects, the MIDI output will be sent to the MIDI output of the device you are currently editing. If you open a file containing MIDI objects when you are not editing a device, there will be no MIDI I/O.
+</bodytext>
+<bodytext>
+	If Max is authorized when editing a Live device, Max windows that are not a part of the Live device will use the regular Max MIDI drivers for MIDI objects.
+</bodytext>
+<header2>
+Jitter Limitations
+</header2>
+<bodytext>
+	When authorized only via Live, the visual display of the <o>jit.window</o> and <o>jit.pwindow</o> objects are crippled. This limitation does not exist inside Live itself, or when Max and Jitter are authorized.
+</bodytext>
+<header2>
+<a name="pattr"/><o>pattr</o> and Max for Live Parameters
+</header2>
+<bodytext>
+	Although the <link type="tutorial" module="max" name="pattrchapter01">pattr objects</link> can be used in the context of Max for Live, there are some differences as compared to normal Max use.
+</bodytext>
+<bodytext>
+	<o>autopattr</o>: The <o>autopattr</o> object cannot be used to batch-register objects with the Parameter system. You need to use individual <o>pattr</o> objects for this purpose.
+</bodytext>
+<bodytext>
+	<o>pattr</o>: The <o>pattr</o> object functions mostly identically under Max and Max for Live. However, some users might expect the value of a <o>pattr</o> object in a Max for Live device to be automatically maintained by the Live Set upon save and close, and to be correctly restored when the Set is re-opened. This is not the case. This behavior is available, but only if the <o>pattr</o> object's <a>Parameter Mode Enable</a> attribute is enabled in the object's Inspector and the <a>Parameter Visibility</a> attribute is set to '<m>Automated and Stored</m>' or '<m>Stored Only'</m>.
+</bodytext>
+<bodytext>
+	<o>pattrstorage</o>: The <o>pattrstorage</o> object also functions mostly identically under Max for Live, but there are a few important distinctions to keep in mind, <i>if the object is in Parameter Mode</i>. First, the value of the <o>pattrstorage</o> object in Parameter Mode is its entire storage state (what is ordinarily saved to an external file), rather than the currently recalled slot. This means that devices using <o>pattrstorage</o> in Parameter Mode need not require an external file to recall the storage state of the object (it can be saved in presets, set as an initial value or stored in the Set). Use of an external file can be disabled using the object's <a>savemode</a> attribute (set to 0). If the <o>pattrstorage</o> object has an <a>Initial Value</a> (<a>Initial Enable</a> is turned on in the Inspector), the <a>savemode</a> and <a>autorestore</a> attributes are ignored and file-less use of the object is assumed. Finally, the <o>pattrstorage</o> object has an additional attribute when in Parameter Mode: <a>Auto-update Parameter Initial Value</a>. When this is enabled and <a>Initial Enable</a> is turned on, all changes to the object's storage state will cause the <a>Initial Value</a> to auto-update to the new state.
+</bodytext>
+<header2>
+Other Limitations
+</header2>
+<bodytext>
+When authorized only via Live, Max cannot build <link type="vignette" module="core" name="collective_guide">collectives</link> or standalone applications. <link type="vignette" module="core" name="live_freezing">Frozen devices</link>, which Max for Live creates, are very similar to collectives.
+</bodytext>
+</vignette>

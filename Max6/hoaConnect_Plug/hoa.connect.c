@@ -33,6 +33,7 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)connect_notify,				"notify",		A_CANT, 0);
 	class_addmethod(c, (method)connect_bang,				"bang",			A_CANT,	0);
+    class_addmethod(c, (method)connect_assist,				"assist",			A_CANT,	0);
 	
 	// defaults don't work with non-UI objects (an optimization)
 	CLASS_ATTR_CATEGORY(c, "poscolor", 0, "Behavior");
@@ -93,6 +94,11 @@ void connect_free(t_connect *x)
 {
 	if(x->f_patcherview)
 		object_detach_byptr(x, x->f_patcherview);
+}
+
+void connect_assist(t_connect *x, void *b, long m, long a, char *s)
+{
+    sprintf(s, "(bang) Select objects you want to connect, then bang me to connect them");
 }
 
 // custom attr setter changes colors of patchlines

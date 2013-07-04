@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Debugging Settings">
+	<header1>
+	Setting Debugging preferences
+	</header1>
+	<bodytext>
+			The <i>Debugging</i> category of the Max Preferences window
+			shows some settings broadly associated with debugging
+			and tracing tasks in Max, such as interacting with the Max
+			scheduler, 
+			<link module="core" name="signal_probe" type="vignette">signal probing</link>
+			and 
+			<link module="core" name="matrix_probe" type="vignette">matrix probing</link>
+			features, and the use of 
+			<link module="core" name="watchpoints" type="vignette">Watchpoint</link>. 
+		</bodytext>
+	<br/>
+	<space/>
+	<a name="disableschedulerstopping"/>
+	<bodytext>
+			As a default, you can start and stop the Max scheduler by holding down the 
+			Command Key (Macintosh) or Control Key (Windows) and typing a period. This
+			feature may be disabled. It may be useful to disable this feature in Standalone 
+			applications, in some cases (so that users don't accidentally stop the
+			scheduler).
+		</bodytext>
+	<bluebox>
+		<header2>
+	Disabling scheduler stopping
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Macintosh) or the Options 
+			menu (Windows) to show the Preferences Window. Locate the <b>Debugging</b>  
+			category and click in the
+			Disable Scheduler Stopping checkbox. You can uncheck the checkbox to 
+			enable this feature.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<a name="enableprobing"/>
+	<bodytext>
+			By default, signal and matrix probing are enabled when you launch Max.
+			Besides the personal matter of whether you'd like these features available
+			on launching Max, you may also wish to disable these features in Standalone applications.
+		</bodytext>
+	<bluebox>
+		<header2>
+	Disabling/enabling signal and matrix probing
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Macintosh) or the Options 
+			menu (Windows) to show the Preferences Window. Locate the <b>Debugging</b>  
+			category and click in the
+			Save Watchpoints in Patcher checkbox. You can uncheck the checkbox to 
+			disable this feature.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<a name="savewatchpoints"/>
+	<bluebox>
+		<header2>
+	Configuring Max to save watchpoints
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Macintosh) or the Options 
+			menu (Windows) to show the Preferences Window. Locate the <b>Debugging</b>  
+			category and click in the
+			Save Watchpoints in Patcher checkbox. You can uncheck the checkbox to 
+			disable this feature.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+</vignette>

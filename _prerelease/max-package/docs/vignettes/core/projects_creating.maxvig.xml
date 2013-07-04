@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Creating a Project">
+	<header1>Creating a Project</header1>
+	<bodytext>You can start with a new empty project, or create a project from an existing patcher. </bodytext>
+	<ul>
+		<li>To create a new empty project, choose <b>File &gt; New Project</b>. This action creates a Max Project at the location specified. By default, this
+		is ~/Documents/Max/Projects (Mac) or (User Folder)\My Documents\Max\Projects (Win). Projects can be saved anywhere, but it is recommended to use the default location.</li>
+		<li>To create a project from your existing open patcher, choose <b>File &gt; Save as Project</b>. Your patcher will close and re-open for this operation.</li>
+	</ul>
+	<bodytext>
+		Once the project is created, you don't need to save it: projects are saved automatically every time a change is made.
+	</bodytext>
+
+	<bluebox>
+		<i>The following screenshots and explanations utilize a Project created via the second method above, by using the "Save as Project..." option in the File menu on the Quad Spatializer example patcher.</i><br/>
+		<img src="images/project-saveasproject.png"/>
+	</bluebox>		
+</vignette>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="SQLite Database Access">
+
+	<header1>SQLite Database Access</header1>
+
+	<bodytext>
+		Max contains an implementation of the SQLite database engine (more info available @ http://sqlite.org).
+		This database engine is accessible through both the C-API and directly in Max through the JavaScript interface.
+		A tutorial on the Javascript interface written by Andrew Benson has been published on the Cycling '74 <a href="http://cycling74.com/2008/09/05/data-collection-building-databases-using-sqlite/">website</a>.
+	</bodytext>
+	<bodytext>
+		The Javascript interface is composed of two objects: SQLite and SQLResult.
+		A SQLResult object is used to represent the data returned by queries to the SQLite object.
+		These objects are created in the same manner as any object in Javascript, as shown below.
+	</bodytext>
+	<code>
+		var sqlite = new SQLite;
+		var result = new SQLResult;
+	</code>
+	
+	<header2>SQLite Object Methods</header2>
+	<bodytext>
+		The SQLite object responds to the following methods:
+	</bodytext>
+	<ul>
+		<li>open -- 2 args: name and 'ram-based' boolean, no return val       </li>
+		<li>close -- no args, no return val                                   </li>
+		<li>exec -- 2 args: query string and SQLResult object, no return val  </li>
+		<li>lastinsertid -- no args, returns int                              </li>
+		<li>starttransaction -- no args, no return val                        </li>
+		<li>endtransaction -- no args, no return val                          </li>
+	</ul>
+
+	<header2>SQLResult Object Methods</header2>
+	<bodytext>
+		The SQLResult object responds to the following methods:
+	</bodytext>
+	<ul>
+		<li>numrecords -- no args, returns int                                      </li>
+		<li>numfields -- no args, returns int                                       </li>
+		<li>fieldname -- column index (int) arg, returns string                     </li>
+		<li>value -- column index(int) and record index (int) args, returns string  </li>
+	</ul>
+	
+	<bodytext>
+		All records returned by the SQLResult object are returned as strings.  
+		Thus, a numeric value such as 1 is actually returned as the string "1".
+		SQLite only uses datatypes as recommendations.  
+		It does not enforce data types and in fact always returns a string.
+		More information about this and other SQLite-specific topics can be found in a Google Talk given by Richard Hipp 
+		(the author of the SQLite library) @ <a href="http://video.google.com/videoplay?docid=-5160435487953918649#">video.google.com</a> .
+	</bodytext>
+
+</vignette>

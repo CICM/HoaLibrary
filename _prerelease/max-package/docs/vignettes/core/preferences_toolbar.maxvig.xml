@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Preferences Toolbar">
+	<header1>
+		The Preferences Toolbar
+	</header1>
+	<bodytext>
+		The <i>Modify Selected Item</i> button displays a pop-up menu
+		of commands for modifying a selected attribute's preference.
+	</bodytext>
+	<bodytext>
+		<img src="images/preferences_toolbar1.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show/Hide Attribute Names</i> button toggles the display
+		of an additional column in the Inspector that displays the
+		programmatic names for an object's attributes.
+	</bodytext>
+	<!-- commented out until I find out what's up with the button
+	<bodytext>
+		<img src="images/preferences_toolbar2.png"/>
+	</bodytext>
+-->
+	<header2>
+		Working with Attribute Default Values
+	</header2>
+	<bodytext>
+		You can use the Modify Selected Item pull-down menu to perform
+		several useful tasks when you are editing attributes. You can
+		revert to previously set or to default values, set an attribute
+		value to match a
+		<link module="core" name="ui_defaults" type="vignette">color scheme</link>
+		you've created, or revert to the original value of an attribute whose
+		value you have
+		<link module="core" name="freezing_attributes" type="vignette">frozen</link>.	
+	</bodytext>
+	<ul>
+		<li>
+		Choosing 
+		<b>Revert Value</b> from the 
+		Modify Selected Item pull-down menu will return the selected 
+		attribute to its previous value.
+	</li>
+		<li>
+		Choosing 
+		<b>Set to Default Value</b> from the 
+		Modify Selected Item pull-down menu will set the 
+		selected attribute to its default value.
+	</li>
+		<li>	
+		Choosing 
+		<b>Set to Named Default Value</b> from the 
+		Modify Selected Item pull-down menu will return the selected attribute to the 
+		default setting for the currently loaded 
+		<link module="core" name="ui_defaults" type="vignette">color scheme</link>.
+	</li>
+		<li>
+		Choosing
+		<b>Set to Frozen Value</b>
+		from the Modify Selected Item pull-down menu to return a selected 
+		attribute to the setting you used when you originally froze the attribute.
+		This menu item will only be enabled if the attribute has a 
+		frozen value and the current value deviates from that frozen value. 
+	</li>
+	</ul>
+	<bluebox>
+		<header2>
+		Changing Attribute Default Values
+	</header2>
+		<ul>
+			<li>
+		Select an object or objects in the Preferences window.
+	</li>
+			<li>
+		Click in any column in an attribute's row in the Preferences window
+		to select it.
+	</li>
+			<li>
+		Click on the Modify Selected Item in the Preferences toolbar
+		and select an option from the pull-down menu. When you release
+		the mouse button, the selected option will be applied to your
+		object.
+	</li>
+		</ul>
+		<bodytext>
+			<img src="images/preferences_modify_menu.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<space/>
+</vignette>

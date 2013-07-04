@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Abstractions">
+	<header1>
+	Abstractions
+	</header1>
+		<bodytext>
+			Any patch you have created and saved can be used as an object in another patch,
+			just by typing the filename of your patch into an object box as if it were an
+			object name. Patches used in this way are called <i>abstractions</i>.
+		</bodytext>
+		<bodytext>
+			To create an abstraction, you need to identify what information your patch
+			always uses, and that its output is. Those things become the inlets and the
+			outlets of your abstraction.
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Creating an abstraction from a subpatcher
+	</header2>
+		<ul>
+		<li>
+			Command-double-click (Macintosh) or Alt-double-click (Windows) on the <o>patcher</o>
+			object in an unlocked Patcher window. The Patcher window for the subpatch
+			will be shown or brought to the front if it is already open.
+		</li>
+		<li>Unlock the subpatcher window.</li>
+		<li>
+			Use the Object Explorer to add as many <o>inlet</o> and <o>outlet</o>
+			objects as you need.
+		</li>
+		<li>
+			Choose <b>Save As....</b> from the File menu.
+			Give it a name that is memorable and useful, and be sure to save your object
+			somewhere in the
+			<link type="vignette" module="core" name="file_preferences_window" anchor="searchpath">search path</link>,
+			so that Max can locate the object.
+		</li>
+		</ul>
+		<bodytext>
+		If you save your abstraction with either .pat or .maxpat file extensions,
+		your abstractions will be available if 
+		<link type="vignette" module="core" name="patcher_window" anchor="autocompletion">autocompletion</link>
+		is enabled.
+  </bodytext>
+	</bluebox>
+	<br />
+		<bodytext>
+			Once you create the abstraction file, you can return the main patcher, create a new object box, and type in the name of file (the extension is not required). Once you type the name of an abstraction once, it is added to the object box <link type="vignette" module="core" name="patcher_window" anchor="autocompletion">autocompletion</link> list.
+		</bodytext>
+</vignette>

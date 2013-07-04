@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Making Patches">
+	<header1>
+	Making Patches
+	</header1>
+<ul>
+<li>The first step to make a patch is creating a <link type="vignette" module="core" name="patcher_window">patcher window</link>.
+</li>
+<li>Next, you'll <link type="vignette" module="core" name="object_explorer">place objects in a patch</link> using the Object Explorer, and <link type="vignette" module="core" name="patch_cords">connect objects together</link> using patch cords.
+</li>
+<li>As you edit a patch, you'll <link type="vignette" module="core" name="patcher_window_navigation">move around a patcher window</link> and zoom in and out.
+</li>
+<li><link type="vignette" module="core" name="presentation_mode">Presentation mode</link> is a great way to create a refined user interface for your patch.
+</li>
+<li>As you refine your patcher, you'll be <link type="vignette" module="core" name="aligning_objects">aligning objects</link>, <link type="vignette" module="core" name="aligning_patchcords">aligning patch cords</link>, and <link type="vignette" module="core" name="grid">using the edit grid</link>.
+</li>
+<li>To modify the z-ordering of objects in a patcher, you can use the <link type="vignette" module="core" name="background">background layer</link>, or the commands to <link type="vignette" module="core" name="object_ordering">change relative object ordering</link>.
+</li>
+<li>To clean up complex patchers, <link type="vignette" module="core" name="subpatchers">subpatchers</link> are very useful.</li>
+<li>Finally, to customize more advanced settings of a patcher, you can use the <link type="vignette" module="core" name="patcher_inspector">patcher inspector</link> window.
+</li>
+</ul>
+</vignette>

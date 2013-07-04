@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Manage Project Menu">
+	<header1>The Manage Project Menu</header1>
+	<bodytext>
+		The Manage Project button at the bottom of the Project window provides access to several important features.
+		<img src="images/project-manage.png"/>
+	</bodytext>
+	<ul>
+		<li><b>Consolidate</b>: Consolidate copies all explicit project members and their dependencies to the Project's folder. All files are "localized", meaning that the local version will be referenced from the project. Any global or project search path files will be ignored in favor of the local versions.</li>
+		<li><b>Snapshot...</b>: Creates an archive of your current Project's state. This operation is similar to Consolidate, but is performed on a copy of the current Project (the open Project is untouched). When you choose <i>Snapshot...</i>, a File Dialog will open and allow you to choose a location for the saved snapshot file. By default, this is the name of your Project, followed by a datestamp (YYYYMMDD_HHMMSS). The resulting file (a ".maxzip" archive) contains a consolidated copy of your current Project.<br/>
+		You can open a ".maxzip" file directly from Max; the contents will be extracted to the default Project directory (typically found at ~/Documents/Max/Projects (Mac) or (User Folder)\My Documents\Max\Projects (Win)) and the Project will be automatically opened.</li>
+		<li><b>De-Consolidate</b>: De-Consolidating a Project attempts to "globalize" your Project. If a file in the Project can be found in Max's global search path, that copy will be used preferentially (and any Project-local copies will be <i>moved</i> to a folder called "_DeletedItems" within the Project's folder). Files which are only in the Project's search path won't be affected.</li>
+		<li><b>Build Collective / Application:</b> Builds a Collective or Application from your Project. No additional configuration is necessary (or possible): all files, explicit or implicit, which belong to your Project will be automatically included.</li>
+	</ul>
+</vignette>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Patch Cords">
+	<header1>
+	Patch Cords
+	</header1>
+	<bodytext>
+			Max objects are connected together using patch cords. There are three different types
+			of patch cords — those used for Max objects, audio patch cords used for MSP objects,
+			and Jitter patch cords. Each type of patch cord has a unique look.
+	</bodytext>
+	<bodytext>
+			In addition to straight point-to-point connections, Max patch cords can use a
+			curved style. Both straight and curved patch cords can be segment to aid in
+			the readability of a patch.
+	</bodytext>
+	<bodytext>
+			You can use the Max Preferences Window to set
+			<link anchor="curvedpatchcords" module="core" name="preferences_window" type="vignette">curved</link>
+			and 
+			<link anchor="segmentedpatchcords" module="core" name="preferences_window" type="vignette">segmented</link>
+			patch cords as your default setting when patching.
+	</bodytext>
+	<bodytext>
+		<img src="images/patchcord_1a.png"/>
+	</bodytext>
+	<bodytext>
+			Patch cord connections you create as you patch will automatically be moved to the
+			background layer
+			of your Max patch when you lock it as an aid to readability.
+		</bodytext>
+	<bodytext>
+		<img src="images/patchcord_1b.png"/>
+	</bodytext>
+	<bodytext>
+		In order to make patching easier, individual patch cords
+		are highlighted when you hover over them with the mouse in an unlocked patch. 
+		Clicking on a highlighted patch cord will display green and red diamonds mark that 
+		mark the start and endpoints of the patch cord. You can click on those diamonds and 
+		drag to change the source or destination of a highlighted patch cord. In addition, you'll see a
+		<link module="core" name="patchcord_contextual_menu" type="vignette">patch cord contextual menu</link>
+		button. Clicking on this button will bring up contextual menu you can use to perform several useful tasks.
+	</bodytext>
+	<bodytext>
+		<img src="images/patchcord_1c.png"/>
+	</bodytext>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Connecting Max objects
+	</header2>
+		<ul>
+			<li>
+			To connect two Max objects, click on the inlet or outlet of an object and drag 
+			to the outlet or inlet or of another. When you release the mouse, the patch cord 
+			connection will be created.
+			<br/>
+			If an object does not accept the kind of connection you are trying to make,
+			the object’s inlet will not expand when you mouse over it.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Making multiple connections from a single Max object
+	</header2>
+		<ul>
+			<li>
+			Shift-click on an inlet of an object when completing a connection. When the patch
+			cord you’re connecting appears, another patch cord will be created immediately for
+			the next connection.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Selecting multiple patch cords
+	</header2>
+		<ul>
+			<li>
+			Option-click (Macintosh) or Alt-click (Windows) and drag over an area
+			to select a patch cord or cords. They will be highlighted.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<bodytext>
+			You may find it useful to use different colored patch cords to identify
+			different parts of your patch.
+	</bodytext>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Changing the color of a patchcord
+	</header2>
+		<ul>
+			<li>
+			Click on a patchcord to select it. To select multiple patch cords,
+			option-click and drag (Macintosh) or control-click and drag (Windows).
+		</li>
+			<li>
+			Choose <b>Colors...</b> from the Options menu to show the
+			<link module="core" name="color_picker" type="vignette">Color Picker</link>.
+		</li>
+			<li>
+			Select the color you wish to use or enter the color values. The
+			color of the patchcord(s) will change to match your selection.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<a name="segmentedpatchcords"/>
+	<header2>
+	Segmented Patch Cords
+	</header2>
+	<bodytext>
+			By default, you can draw a straight- or curved-line patch cord when connecting
+			objects together. The type of patch cord depends on the kind of Max objects being
+			connected (Max, MSP, or Jitter).
+		</bodytext>
+	<bodytext>
+			Max also lets you draw segmented patch cords — connections that
+			have joints or corners. You can have both kinds of patch cords in the same patch, and
+			convert one kind of patch cord to another. Macintosh or Control-clicking anywhere on Windows.
+		</bodytext>
+	<bodytext>
+			Although segmented patch cords redraw a little more slowly when selected or deselected,
+			a segmented patch cord functions exactly like a straight one—it doesn’t take up any additional
+			memory when a patch is loaded, or have any effect on the order in which messages are sent
+			from and received by objects in a patch.
+	</bodytext>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Creating segmented patch cords
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Segmented Patch Cords</b> from the Options menu. The menu item will be checked. Click
+			on the outlet of an object, click at each point where you want the patch cord to bend, and then
+			click on the inlet of the other object. The adjust the shape of a segmented patch cord, click
+			on a segment so select it and click and drag the segment with the mouse.
+			<br/>
+			You can make your patch look neater by 
+			<link anchor="aligningpatchcords" module="core" name="arranging_and_aligning" type="vignette">aligning patch cord connections</link>,
+			too
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Correcting a segmented patch cord while you draw
+	</header2>
+		<ul>
+			<li>
+			Option-click (Macintosh) or Alt-click (Windows) to erase the most recent patch cord line
+			segment. To remove a patch cord completely, command-click (Macintosh) or control-click (Windows)
+			anywhere in the Patcher window.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Drawing a single segmented patch cord
+	</header2>
+		<ul>
+			<li>
+			If the <b>Segmented Patch Cords</b> option is not checked in the Options menu,
+			hold the Shift key down when clicking on an outlet. The next patch cord you draw
+			will be segmented.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Drawing a single straight patch cord
+	</header2>
+		<ul>
+			<li>
+			If the <b>Segmented Patch Cords</b> option is checked in the Options menu, hold the
+			Shift key down when clicking on an outlet. The next patch cord you draw will be straight.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Disabling segmented patch cords for a connection (when Segmented Patch Cords are enabled)
+	</header2>
+		<ul>
+			<li>
+			Shift-click on an outlet before you begin drawing your patch cord. The next connection
+			you make from this outlet will use an unsegmented patch cord.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Disabling patch cord auto-connection
+	</header2>
+		<ul>
+			<li>
+			Hold down the control key if you are making a segmented patch cord and want to
+			make a corner over an object. The normal auto-connection feature will be disabled.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Getting rid of a segmented patch cord connection you’re making
+	</header2>
+		<ul>
+			<li>
+			Command-click (Macintosh) or Control-click (Windows) while making a segmented patch cord.
+			The patch cord you are working with will be removed.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Getting rid of a segmented patch cord segment you’re making
+	</header2>
+		<ul>
+			<li>
+			Option-click (Macintosh) or Alt-click (Windows) while making a segmented patch cord. The
+			last segment will be removed
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Adding patch cord segments and aligning connections
+	</header2>
+		<ul>
+			<li>
+			Control-click (Macintosh) or right-click (Windows) on any patch cord in an unlocked 
+			Patcher window in Patcher or Presentation mode. When the patch cord contextual menu appears, 
+			choose Align from the menu. If the patch cord is straight, it will be replaced by a segmented 
+			patch cord. Max will also try to align patch cord connections so that patch cords don't
+			overlap Max objects.
+		</li>
+		</ul>
+	</bluebox>
+	<header2>
+	Hiding patch cords in Patcher mode
+	</header2>
+	<bodytext>
+			While the
+			<link module="core" name="presentation_mode" type="vignette">Presentation Mode</link>
+			of Max is ideal for creating user
+			interfaces for your patch, it’s sometimes simpler to merely hide certain
+			objects and patch cords in your patch whenever the patch is locked mode.
+		</bodytext>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Hiding and revealing patch cords in Patcher mode
+	</header2>
+		<ul>
+			<li>
+			Option-click (Macintosh) or Alt-click (Macintosh) and drag to select
+			the patch cords you want to hide or reveal and choose <b>Hide on Lock</b> from the Object menu.
+			Any selected patch cords or objects will be invisible when the Patcher window is locked.
+			<br/>
+			To reveal patch cords that are currently hidden on lock, select the patch cords and choose
+			<b>Show on Lock</b> from the Object menu. Any selected patch
+			cords will once again be visible when the Patcher window is locked.	
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+</vignette>

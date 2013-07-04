@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Signal Probe">
+	<header1>
+	Signal Probe
+	</header1>
+		<bodytext>
+			Max lets you monitor the parts of your patch that are running at audio
+			rates using the signal probe.
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Viewing a Signal
+	</header2>
+		<ul>
+		<li>
+			Position your cursor over an audio patchcord in a locked or unlocked patcher
+			window. If the audio scheduler is running, a signal probe display will appear,
+			showing the current signal values, along with an LED audio out indicator.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/signal_probe1.png"  />
+		</bodytext>
+	</bluebox>
+	<br />
+	<bluebox>
+	<header2>
+	Disabling signal probing
+	</header2>
+		<ul>
+		<li>
+			Choose <b>Probing</b> from the Debug menu. Probing will be disabled and
+			the menu item will no longer have a check to indicate it is enabled.
+		</li>
+		</ul>
+		<bodytext>
+			By default, probing is enabled when you launch Max. You can configure Max to 
+			<link type="vignette" module="core" name="debugging_preferences" anchor="enableprobing">disable signal probing automatically</link> 
+			using the Debugger pane of
+			the Max Preferences Window.
+		</bodytext>
+		</bluebox>
+</vignette>

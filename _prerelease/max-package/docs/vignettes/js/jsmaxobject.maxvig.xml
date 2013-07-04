@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Basic Javascript programming: The Max Object">
+	<header1>The Max Object</header1>
+	<bodytext>
+The Max object can be accessed as a property of a <b>jsthis</b> object (see <b>jsthis</b> Properties above). It is intended to provide control over the application environment.
+</bodytext>
+	<header2>Max Properties</header2>
+	<code><b>apppath</b> (<i>String, get</i>)
+</code>
+	<bodytext>
+The pathname of the Max application
+</bodytext>
+	<code><b>frontpatcher</b> (<i>Patcher, get</i>)
+</code>
+	<bodytext>
+The Patcher object of the frontmost patcher window, or a nil value if no patcher window is visible. You can traverse the list of open patcher windows with the next property of a Wind object.
+</bodytext>
+	<code><b>isplugin</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+1 if the <o>js</o> object is within a plug-in; note that this would be 1 if the <o>js</o> object was within a plug-in loaded into the vst~ object in Max.
+</bodytext>
+	<code><b>isruntime</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+1 if the currently executing Max application environment does not allow editing, 0 if it does.
+</bodytext>
+	<code><b>loadbangdisabled</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+1 if the user has disabled loadbang for the currently loading patch. If your object implements a loadbang method, it can test this property and choose to do nothing if it is true.
+</bodytext>
+	<code><b>os</b> (<i>String, get</i>)
+</code>
+	<bodytext>
+  The name of the platform (e.g., “windows” or “macintosh”)
+</bodytext>
+	<code><b>osversion</b> (<i>String, get</i>)
+</code>
+	<bodytext>
+  The current OS version number.
+</bodytext>
+	<code><b>time</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+The current scheduler time in milliseconds - will be a floating-point value.
+</bodytext>
+	<code><b>version</b> (<i>String, get</i>)
+</code>
+	<bodytext>
+The version of the Max application, in the following form: "451"
+</bodytext>
+	<bodytext>
+Max Modifier Key Properties
+</bodytext>
+	<code><b>cmdkeydown</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+  1 if the command (Macintosh) or control (Windows) key is currently held down
+</bodytext>
+	<code><b>ctrlkeydown</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+  1 if the control key is currently held down
+</bodytext>
+	<code><b>optionkeydown</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+1 if the option (Macintosh) or alt (Windows) key is currently held down
+</bodytext>
+	<code><b>shiftkeydown</b> (<i>Number, get</i>)
+</code>
+	<bodytext>
+1 if the shift key is currently held down
+</bodytext>
+	<bodytext>
+</bodytext>
+	<header2>Max Methods</header2>
+	<bodytext>
+The Max object can be accessed as a property of a <b>jsthis</b> object (see <b>jsthis</b> Properties above). Any message you can send to the max object using the semicolon notation in a message box can be invoked within Javascript using Javascript syntax. For example, the following in a message box:
+</bodytext>
+	<code>
+; max preempt 1
+</code>
+	<bodytext>
+This can be expressed in Javascript as:
+</bodytext>
+	<code>
+max.preempt(1);
+</code>
+	<bodytext>
+For a list of current messages that can be sent to the Max object, refer to the Messages to Max topic.
+</bodytext>
+</vignette>

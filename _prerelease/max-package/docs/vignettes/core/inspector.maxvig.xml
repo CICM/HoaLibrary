@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Inspector">
+	<header1>
+		The Object Inspector
+	</header1>
+	<bodytext>
+		The <i>object Inspector</i> is used to edit the 
+		<link module="core" name="attributes" type="vignette">attributes</link> 
+		of Max objects. In addition to providing a complete listings of all
+		attributes associated with a selected Max object, you can use the 
+		Inspector to set attributes, perform various patching tasks, and to
+		<link module="core" name="freezing_attributes" type="vignette">frozen attributes</link> 
+		to save their initial state.
+	</bodytext>
+	<bodytext>
+		The
+		<link module="core" name="inspector_toolbar" type="vignette">Object Inspector toolbar</link> 
+		provides easy access to patching activities you'll use often.
+	</bodytext>
+	<bodytext>		
+		In addition to the Inspector for Max objects, there is also another Inspector 
+		available that lets you set the behavior of your current Patcher itself rather
+		than individual objects in a patch- the
+		<link module="core" name="patcher_inspector" type="vignette">Patcher Inspector</link>.
+	</bodytext>
+	<bluebox>
+		<header2>
+		Showing the Object Inspector
+	</header2>
+		<bodytext>
+		There are several ways to show the Inspector window for an object:
+	</bodytext>
+		<ul>
+			<li>
+		Is the 
+		<link module="core" name="sidebar" type="vignette">Sidebar</link>
+		is not already visible, click on the Open Sidebar button in the 
+		<link module="core" name="patcher_toolbar" type="vignette">Patcher window toolbar</link>
+		and click on the Inspector tab in the Sidebar to show the object Inspector.
+	</li>
+			<li>
+		Position the mouse on the left side of the object until the
+		Circular object menu
+		appears. Click in the <b>Object</b> segment of the wheel and choose 
+		<b>Inspector</b> from the pop-up menu.
+	</li>
+		</ul>
+		<bodytext>
+			<img src="images/inspector_opening1.png"/>
+		</bodytext>
+		<ul>
+			<li>
+		Select an object or multiple objects in your patcher window by Shift-clicking or clicking
+		and dragging an outline around the objects and click the Inspector button in the 
+		<link module="core" name="patcher_toolbar" type="vignette">Patcher window toolbar</link>.
+		When one or more objects are selected, click the Inspector button in the 
+		Patcher window toolbar. When you open the object inspector on multiple objects, 
+		only the attributes <i>shared</i> by the objects are shown.
+	</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bodytext>
+		<link module="core" name="attributes_inspecting" type="vignette">For information about editing attributes using the object Inspector, click here.</link>
+	</bodytext>
+	<bodytext>
+		<link module="core" name="freezing_attributes" type="vignette">For information about freezing attributes, click here.</link>
+	</bodytext>
+	<bodytext>
+		<link module="core" name="dragging_attributes" type="vignette">For information about patching using the Inspector, click here.</link>
+	</bodytext>
+</vignette>

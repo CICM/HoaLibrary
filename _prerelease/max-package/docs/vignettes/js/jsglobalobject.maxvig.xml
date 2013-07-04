@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Global Object">
+<header1>
+The Global Object
+</header1>
+<bodytext>
+The Global object is a fairly generic Javascript object that allows you to share data among <o>js</o> instances by adding and accessing properties. You can also access Global object properties from Max messages completely outside of js. Executing methods stored in Global objects from Max is not supported. However, methods are certainly among the kinds of things you can store within a Global object.
+</bodytext>
+ <header2>Global Constructor</header2>
+<code>
+  g = new Global(name);
+</code>
+<bodytext>
+<I>name</I> represents a String that uniquely identifies the Global.
+</bodytext>
+<bodytext>
+A Global is basically a reference to a Javascript object that you can't access directly. The object is connected to the Max 
+symbol with the name you supplied as an argument (this allows it to be accessed from Max). Every time you access a Global, 
+it hands off the access to the secret hidden Javascript object. This means you can create any number of Global objects in your code, in any number of <o>js</o> instances, and if they all have the same name, they will all share the same data. In this way, a Global resembles a namespace.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  g = new Global("name");
+  g.bob = 12;
+  h = new Global("name");
+  post(h.bob);  // will print 12
+</code>
+<header2>Global Properties</header2>
+<bodytext>
+There are no fixed properties for a Global object. Instead, you assign properties to a Global object (described above) 
+so that they can be accessed by multiple <o>js</o> object instances.
+</bodytext>
+<header2>Global Methods</header2>
+<code>
+  <b>sendnamed</b> (<i>receive_name, property_name</i>)
+</code>
+<bodytext>
+Sends the value of the named property property_name to the named Max <o>receive</o> object (or other Max object) bound to the specified receive_name symbol.
+</bodytext>
+<bodytext>
+<b>Example:</b>
+</bodytext>
+<code>
+  g = new Global("xyz");
+  g.ethyl = 1000;
+  g.sendnamed("fred","ethyl");
+</code>
+<bodytext>
+Any <o>receive</o> objects named fred will send <m>1000</m> out their outlets.
+</bodytext>
+<header2>Accessing the Global Object from Max</header2>
+<bodytext>
+To use Max to send a message to a named object, type a semicolon followed by the name of the receiver and the message you want to send into a message box. To set a property of a <o>js</o> Global object, send the property name followed by one or more values (multiple values set the value of the property to an array). Assuming you have already created a Global xyz object...
+</bodytext>
+<bodytext>
+This sets the value of the george property to 30.
+</bodytext>
+<code>
+  ; xyz george 30
+</code>
+<bodytext>
+This sets the value of the frank property to an array of three strings containing "x" "y" and "z"
+</bodytext>
+<code>
+  ; xyz frank x y z
+</code>
+<bodytext>
+You can also use the message sendnamed from Max to output property values to named <o>receive</o> objects. This sends the current value of the frank property in the <o>js</o> Global object xyz to any <o>receive</o> objects named hubert.
+</bodytext>
+<code>
+  ; xyz sendnamed hubert frank
+</code>
+<bodytext>
+Note a subtle distinction. When setting property values using Max, the Javascript properties are changed but no further action happens. When using sendnamed(), <o>receive</o> objects take action and output the property values.
+</bodytext>
+</vignette>

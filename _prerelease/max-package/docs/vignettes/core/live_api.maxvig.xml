@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Creating Devices that use the Live API">
+<header1>
+	Creating Devices that use the Live API
+</header1>
+<bodytext>
+		Max for Live provides two different ways to access the Live application
+		directly through the Live API:
+</bodytext>
+	<ul>
+	<li>
+		You can use a trio of Max for Live objects -
+		(<o>live.object</o> , 
+		<o>live.observer</o> , and 
+		<o>live.path</o>) to access, observe, and control 
+		the Live application.
+	</li>
+	<li>
+		You can use the Max <o>js</o> object to write code using the <link type="vignette" module="js" name="jsliveapi">LiveAPI</link> Javascript object that exposes the <link type="vignette" module="core" name="live_object_model">Live Object Model</link>.
+	</li>
+	</ul>
+	<bodytext>
+		Regardless of which method you decide to use, online documentation
+		for the
+		<link type="vignette" module="core" name="live_object_model">Live Object Model</link>
+		describes the properties and functions of a Live session
+		that can be queried and set and observed.
+	</bodytext>
+	<bodytext>
+		You can get or set values, call functions, and observe the
+		status of properties using the Live API from any kind of 
+		Max for Live device on any channel.
+	</bodytext>
+	<bodytext>
+		The Live API is described in
+		<link type="vignette" module="core" name="live_api_overview">this overview</link> .
+	</bodytext>
+	<bodytext>
+		The Live Object Model divides the Live application 
+		into several basic functional units (<i>properties</i>) associated with 
+		aspects of the Live application - the application itself, Songs,
+		Tracks, Clip slots, Clips, Devices, Device Parameters, 
+		the Mixer Device, Scenes, Cue Points, And Control Surfaces. 
+		The Live API provides ways to access some properties of the application to 
+		control how the Live application displays them to you
+		(Application.View, Song.View, and Track.View). 
+	</bodytext>
+	<bodytext>
+		Your use of the Live API involves one of four kinds of different operations:
+	</bodytext>
+	<ul>
+	<li>
+		You can query (<i>get</i>) the current state of a property
+		of your current Live session.
+	</li>
+	<li>
+		You can <i>set</i> the state of some properties of your
+		current Live session
+	</li>
+	<li>
+		Some properties can be controlled using <i>functions</i>
+		that perform various actions (e.g. firing a clip).
+	</li>
+	<li>
+		Some properties can be <i>observed</i> (i.e. their current state is
+		reported and updated automatically).
+	</li>
+	</ul>
+	<bodytext>
+		The
+		<link type="vignette" module="core" name="live_object_model">Live Object Model</link>
+		provides a complete reference to which objects can be queried, set,
+		and observed, as well as a listing of the functions associated with them.
+	</bodytext>	
+	<header2>
+		Resources - Live API examples
+	</header2>
+	<bodytext>
+		Max for Live includes a set of helpful
+		<link type="vignette" module="core" name="abstractions">abstractions</link>
+		that demonstrate how to interact with the Live API
+		in a Max for Live device. 
+		<link type="vignette" module="core" name="live_resources_abstractions" anchor="m4l_api_abstractions">The Live API abstractions</link>
+		provide programming examples
+		and starting points for constructing your own patches that interact directly
+		with the Live application. They are grouped by the part of a Live Session 
+		they can access and control.
+	</bodytext>
+	<header2>
+		Querying the Live API (getting data) using Max for Live objects
+	</header2>
+	<bodytext>
+		You can use the Max for Live <o>live.path</o> and <o>live.object</o>
+		objects to find out the current state of any property defined in the
+		Live Object Model
+		reference.
+	</bodytext>
+	<bodytext>
+		The <o>live.path</o> object
+		is used to navigate to the Live object properties you wish to query.
+		Each property of the Live object model in a session is 
+		associated with an id specific to that particular Song,
+		Track, Clip, Clip Slot, Device, etc. Sending a message
+		to a <o>live.path</o> object results in an object id
+		being sent out the left outout (where the id follows the
+		object) or middle outlet (where the id follows the path).
+	</bodytext>
+	<bodytext>
+		In turn, the <o>live.object</o> object takes the id message from 
+   		the <o>live.path</o> object and lets you use <m>get</m> messages
+    	to get information about the properties of the object.
+    	The result of the query is sent out the outlet of the
+    	<o>live.object</o> object, preceded by the name of the 
+    	query.
+	</bodytext>    	
+<br />
+<bluebox>
+<header2>
+	Querying the Live API
+</header2>
+	<ul>
+	<li>
+		Using the Live Object Model, find the canonical path listing for the
+		property (in this case, the Track properties). This part of the
+		Live Object Model listing displays its
+		canonical path - the syntax for queries about the Track in a Live session.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-get1.png" />
+	</bodytext>	
+	<ul>
+	<li>
+		Find the listing in the Live Object Model page for the
+		query you want to make (in this example, we want to to 
+		see whether or not Track 3 is muted).
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-get2.png" />
+	</bodytext>	
+	<bodytext>
+		The listing from the 
+	    Live Object Model listing for the <m>mute</m> property of a Live Track
+	    lists its Type as <i>bool</i> (boolean, 0 = off, 1 = on), and its 
+	    Access as <i>get, set, observe</i>, which means that this property can
+	    be queried or set or observed (there's also an indication that
+	    Live Master Tracks cannot be queried or set).
+	</bodytext>
+	<ul>
+	<li>
+		Use a 
+		<link type="refpage" name="message">message box</link>
+		to construct a message to be sent to the 
+		<o>live.path</o>
+		object telling it the name of the property we want to query - Track 3
+		(by convention, track numbering in the Live API starts from 0). 
+		In this case, the message is
+		<m>path live_set tracks 2</m> .
+	</li>
+	</ul>
+	<bodytext>
+		The 
+		<o>live.path</o>
+		object responds with the message <m>id <i>N</i></m>, where 
+		<i>N</i> is the id number associated with Track 3.
+	</bodytext>
+	<ul>
+	<li>
+		use a Max
+		<o>trigger</o>
+		object to set up a sequence of operations. When the
+		<o>trigger</o>
+		object receives the list output, it sends the id message to the
+		<o>live.object</o>
+		object's right inlet, and then sends a bang message to the 
+		<link type="refpage" name="message">message box</link>
+		containing the symbol <m>get</m>, followed by the name of the property being queried.
+		In response, the 
+		<o>live.object</o> 
+		object sends the message <m>mute 0</m>
+		out the left outlet of the
+		<o>live.object</o> object
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-get3.png" />
+	</bodytext>	
+</bluebox>
+<br />
+	<header2>
+		Setting a property in the Live API using Max for Live objects
+	</header2>
+	<bodytext>
+		You can also use the Max for Live <o>live.path</o> and <o>live.object</o>
+		objects to set the current state of many properties defined in the
+		Live Object Model
+		reference.
+	</bodytext>
+	<bodytext>
+		The <o>live.path</o> object
+		is used to navigate to the Live objects you wish to query.
+		Each property of the Live object model in a session is 
+		associated with an id specific to that particular Song,
+		Track, Clip, Clip Slot, Device, etc. Sending a message
+		to a <o>live.path</o> object results in an object id
+		being sent out the left outout (where the id follows the
+		object) or middle outlet (where the id follows the path).
+	</bodytext>
+	<bodytext>
+    	In turn, the <o>live.object</o> object takes the id message from 
+   		the <o>live.path</o> object and lets you use <m>set</m> messages,
+   		followed by arguments that specify the new setting to set
+   		the state of a property. In this example, we'll use a <m>set</m>
+   		message to mute Track 3 of a Live session.
+	</bodytext>    	
+<br />
+<bluebox>
+<header2>
+	Setting a Live API property
+</header2>
+	<ul>
+	<li>
+		Using the Live Object Model, find the canonical path listing for the
+		property (in this case, the Track properties). This part of the
+		Live Object Model listing displays its
+		canonical path - the syntax for queries about the Track in a Live session.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-get1.png" />
+	</bodytext>	
+	<ul>
+	<li>
+		Find the listing in the Live Object Model page for the
+		query you want to make (in this example, we want to to 
+		see whether or not Track 3 is muted).
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-get2.png" />
+	</bodytext>	
+	<bodytext>
+		The listing from the 
+	    Live Object Model listing for the <m>mute</m> property of a Live Track
+	    lists its Type as <i>bool</i> (boolean, 0 = off, 1 = on), and its 
+	    Access as <i>get, set, observe</i>, which means that this property can
+	    be set as well as queried and observed (there's also an indication that
+	    Live Master Tracks cannot be queried or set).
+	</bodytext>
+	<ul>
+	<li>
+		Use a 
+		<link type="refpage" name="message">message box</link>
+		to construct a message to be sent to the 
+		<o>live.path</o>
+		object telling it the name of the property we want to query - Track 3
+		(by convention, track numbering in the Live API starts from 0). 
+		In this case, the message is
+		<m>path live_set tracks 3</m> .
+	</li>
+	</ul>
+	<bodytext>
+		The 
+		<o>live.path</o>
+		object responds with the message <m>id <i>N</i></m>, where 
+		<i>N</i> is the id number associated with Track 3.
+	</bodytext>
+	<ul>
+	<li>
+		Use a Max
+		<o>trigger</o> 
+		object to set up a sequence of operations. When the
+		<o>trigger</o>
+		object receives the list output, it sends the id message to the
+		<o>live.object</o>
+		object's right inlet, and then sends a bang message to the 
+		<link type="refpage" name="message">message box</link>
+		containing the message <m>set</m>, followed by the name of the 
+		property we want to set and its new value - in this case, <m>set mute 1</m> .
+	</li>
+	</ul>
+	<bodytext>
+		When you save and close the device and click on the upper message
+		box, Track 3 will be muted.
+	</bodytext>
+	<bodytext>
+	<img src="images/api-set1.png" />
+	</bodytext>	
+	</bluebox>
+<br />
+	<header2>
+		Observing a property in the Live API using Max for Live objects
+	</header2>
+	<bodytext>
+		Some properties in the Live API can be <i>observed</i>. The Live
+		API not only reports the current state of a property in response
+		to a query when it is observed, but also subsequently updates the 
+		state of that property if it changes. Observing a property using
+		the Live API uses the <o>live.path</o> object also used for getting
+		and setting properties, but also uses the<o>live.observer</o>
+		objects to perform the task.
+	</bodytext>
+	<bodytext>
+		The <o>live.path</o> object
+		is used to navigate to the Live objects whose functions
+		you want to call.
+		Each property of the Live object model in a session is 
+		associated with an id specific to that particular Song,
+		Track, Clip, Clip Slot, Device, etc. Sending a message
+		to a <o>live.path</o> object results in an object id
+		being sent out the left outout (where the id follows the
+		object) or middle outlet (where the id follows the path).
+	</bodytext>
+	<bodytext>
+    	In turn, the <o>live.observer</o> object takes the id message from 
+   		the <o>live.path</o> object and lets you use <m>property</m> messages
+   		to define what property of the object you want to observe. In this 
+   		example, we'll observe whether or not Track 3 of our session is 
+   		muted or not.
+	</bodytext>
+	<br />
+<bluebox>
+<header2>
+	Observing a Live API property
+</header2>
+	<ul>
+	<li>
+		Using the Live Object Model, find the canonical path listing for the
+		property (in this case, the Track properties). This part of the
+		Live Object Model listing displays its
+		canonical path - the syntax for queries about the Track in a Live session.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-get1.png" />
+	</bodytext>	
+	<ul>
+	<li>
+		Find the listing in the Live Object Model page for the
+		property you wish to observe. Not all properties may be
+		observed via the Live API (in this example, we want to to 
+		observe the behavior of muting on Track 3.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-get2.png" />
+	</bodytext>	
+	<bodytext>
+		The listing from the 
+	    Live Object Model listing for the <m>mute</m> property of a Live Track
+	    lists its Type as <i>bool</i> (boolean, 0 = off, 1 = on), and its 
+	    Access as <i>get, set, observe</i>, which means that this property can
+	    be observed (there's also an indication that
+	    Live Master Tracks cannot be observed).
+	</bodytext>
+	<ul>
+	<li>
+		Use a 
+		<link type="refpage" name="message">message box</link>
+		to construct a message to be sent to the 
+		<o>live.path</o>
+		object telling it the name of the property we want to query - Track 3
+		(by convention, track numbering in the Live API starts from 0). 
+		In this case, the message is
+		<m>path live_set tracks 3</m> .
+	</li>
+	</ul>
+	<bodytext>
+		The 
+		<o>live.path</o>
+		object responds with the message <m>id <i>N</i></m>, where 
+		<i>N</i> is the id number associated with Track 3.
+	</bodytext>
+	<ul>
+	<li>
+		Use a Max
+		<o>trigger</o> 
+		object to set up a sequence of operations. When the
+		<o>trigger</o>
+		object receives the list output, it sends the id message to the
+		<o>live.observer</o>
+		object's right inlet, and then sends a bang message to the 
+		<link type="refpage" name="message">message box</link>
+		containing the message <m>property</m>, followed by the name of the 
+		property we want to observe - in this case, <m>property mute</m> .
+	</li>
+	</ul>
+	<bodytext>
+		When you save and close the device and click on the upper message
+		box while Track 3 is playing, you'll notice that the patch displays
+		a 0 (unmuted). If you mute the track by clicking on the Track Activator
+		button, you'll see the output of the <o>live.observer</o> object
+		change to a 1 (muted). As you unmute and mute the track, the value
+		will change.
+	</bodytext>
+	<bodytext>
+	<img src="images/api-observe1.png" />
+	</bodytext>	
+	</bluebox>
+<br />
+	<header2>
+		Calling a function in the Live API using Max for Live objects
+	</header2>
+	<bodytext>
+		The Live API also includes various kinds of functions that
+		are used to perform activities such as changing various aspects
+		of the Live application's interface display (View) or controlling
+		the playing of clips or scenes.
+		You can also use the Max for Live <o>live.path</o> and <o>live.object</o>
+		objects to <i>call</i> (perform) these functions.
+	</bodytext>
+	<bodytext>
+		The <o>live.path</o> object
+		is used to navigate to the Live objects whose functions
+		you want to call.
+		Each property of the Live object model in a session is 
+		associated with an id specific to that particular Song,
+		Track, Clip, Clip Slot, Device, etc. Sending a message
+		to a <o>live.path</o> object results in an object id
+		being sent out the left outout (where the id follows the
+		object) or middle outlet (where the id follows the path).
+	</bodytext>
+	<bodytext>
+    	In turn, the <o>live.object</o> object takes the id message from 
+   		the <o>live.path</o> object and lets you use <m>call</m> messages,
+   		followed by arguments that specify the name of the function
+   		you're calling and any data for the function in the form of
+   		arguments to execute the function. In this example, we'll use a <m>fire</m>
+   		function to play the clip in slot 2 or Track 2 of a Live session.
+	</bodytext>  	
+	<br />
+<bluebox>
+<header2>
+	Calling a function of a Live API property
+</header2>
+	<ul>
+	<li>
+		Using the Live Object Model, find the canonical path listing for the
+		property (in this case, the ClipSlot properties). This part of the
+		Live Object Model listing displays its
+		canonical path - the syntax for queries about the ClipSlot in a Live session.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-function1.png" />
+	</bodytext>	
+	<ul>
+	<li>
+		Find the listing in the Live Object Model page for the
+		property's functions (in this example, we want to fire
+		(launch) the clip in clip slot 2 on Track 2.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/api-function2.png" />
+	</bodytext>	
+	<bodytext>
+		The listing from the 
+	    Live Object Model listing for the <m>fire</m> function of the ClipSlot 
+	    property indicates that it needs no other data arguments.
+	</bodytext>
+	<ul>
+	<li>
+		Use a 
+		<link type="refpage" name="message">message box</link>
+		to construct a message to be sent to the 
+		<o>live.path</o>
+		object telling it the name of the property we want to query - Clip
+		Slot 2 or Track 2
+		(by convention, all numbering in the Live API starts from 0). 
+		In this case, the message is
+		<m>path live_set tracks 1 clip_slots 1</m> .
+	</li>
+	</ul>
+	<bodytext>
+		The 
+		<o>live.path</o>
+		object responds with the message <m>id <i>N</i></m>, where 
+		<i>N</i> is the id number associated with Clip Slot 2 of Track 2.
+	</bodytext>
+	<ul>
+	<li>
+		Use a Max
+		<o>trigger</o> 
+		object to set up a sequence of operations. When the
+		<o>trigger</o>
+		object receives the list output, it sends the id message to the
+		<o>live.observer</o>
+		object's right inlet, and then sends a bang message to the 
+		<link type="refpage" name="message">message box</link>
+		containing the message <m>call</m>, followed by the name of the 
+		function - in this case, <m>call fire</m> .
+	</li>
+	</ul>
+	<bodytext>
+		When you save and close the device and click on the upper message
+		box while Track any other clip in any other clip slot in Track 
+		2 is playing, you'll notice that the clip in Clip Slot 2 is launched.
+	</bodytext>
+	<bodytext>
+	<img src="images/api-function3.png" />
+	</bodytext>	
+	</bluebox>
+<br />
+	<header2>
+		Automating device parameters at signal rate
+	</header2>
+	<bodytext>
+		The <o>live.object</o> is designed to mimic user interactions with the 
+		Live Session (and adds to undo history), so there are some situations that
+		involve rapid modulation of device parameters where the object may not
+		be appropriate. The <o>live.remote~</o> object allows you to directly 
+		modulate the parameters of any "remotely mappable" control in Live at 
+		signal rate.
+	</bodytext>
+	<bodytext>
+		As with setting values and calling functions, the <o>live.path</o> object
+		is used to navigate to the Live objects whose functions
+		you want to control.
+		Each property of the Live object model in a session is 
+		associated with an id specific to that particular Song,
+		Track, Clip, Clip Slot, Device, etc. Sending a message
+		to a <o>live.path</o> object results in an object id
+		being sent out the left outout (where the id follows the
+		object) or middle outlet (where the id follows the path).
+	</bodytext>
+	<bodytext>
+    	In turn, the <o>live.remote~</o> object takes the id message from 
+   		the <o>live.path</o> object and accepts signal data in its left
+   		inlet which is used to modulate or control the Live API property. 
+   		In the following example, we'll use the output of a <o>cycle~</o>
+   		object to control the sends on an audio track.
+	</bodytext>  	
+	<br />
+<bluebox>
+<header2>
+	Controlling a property using the live.remote~ object
+</header2>
+	<ul>
+	<li>
+		Using the Live Object Model, find the canonical path listing for the
+		property (in this case, the MixerDevice properties). This part of the
+		Live Object Model listing displays its
+		canonical path - the syntax for queries about the Track in a Live session.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/live_remote1.png" />
+	</bodytext>	
+	<ul>
+	<li>
+		Find the listing in the Live Object Model page for the
+		property you wish to control (in this example, we want to to 
+		control the first send on Track 1. Remember that numbering
+		in the Live API starts from zero by convention.
+	</li>
+	<li>
+		Use a 
+		<link type="refpage" name="message">message box</link>
+		to construct a message to be sent to the 
+		<o>live.path</o>
+		object telling it the name of the property we want to control. 
+		In this case, the message is
+		<m>path live_set tracks 0 mixer_device sends 0</m> .
+	</li>
+	</ul>
+	<bodytext>
+		The 
+		<o>live.path</o>
+		object responds with the message <m>id <i>N</i></m>, where 
+		<i>N</i> is the id number associated with the first send on
+		Track 1.
+	</bodytext>
+	<ul>
+	<li>
+		Add some logic to produce signal-rate data to control
+		the property. In this case, we're using a <o>cycle~</o>
+		device to use a sinusoidal waveform and then using the
+		<o>abs~</o> (absolute value) object to keep the output
+		in the positive signal range.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/live_remote1.png" />
+	</bodytext>
+	<bodytext>
+		When you save and close the device and click on the upper message
+		box while Track 1 is playing, you'll notice that the dial for
+		Send A on Track one moves at the rate you specify for the 
+		<o>cycle~</o> object.
+	</bodytext>	
+	</bluebox>
+<br />
+
+</vignette>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Using and Editing Example Devices">
+	<header1>
+	Using and Editing Example Devices
+	</header1>
+	<bodytext>
+	Max for Live includes several different types of example devices and Max patches 
+	to demonstrate the kinds of higher-level devices that can be created using
+	Max for Live, to help you learn to use Live, and provide you with tools to help 
+	you create your own Live devices.
+</bodytext>
+	<bluebox>
+<header2>
+	Important Note
+</header2>
+<bodytext>
+	Before editing an example device, 
+	always 
+	save a copy of the device 
+	and work on the copy so as
+	not to overwrite or otherwise mangle the original example.
+</bodytext>
+	<br/>
+	</bluebox>
+	<br/>
+<bodytext>
+	One way to learn Max for Live is to start with someone else's work,
+	analyze the Max patch to see how it works, and then to 
+	begin by making changes to the patch to do new things. 
+	In addition to the 
+	Max Documentation 
+	itself and the extensive set of 
+	<link module="core" name="live_resources_tutorials" type="vignette">Max for Live tutorials</link>,
+	there are several several tools and tips that will help
+	you as you begin to investigate example Max patches
+	created by others.
+</bodytext>
+	<ul>
+	<li>
+		The Max example patches contains UI objects that contain
+		<link module="core" name="annotations" type="vignette">Max annotations</link>.
+		When you position your cursor over a
+		user interface object in a device's window, you'll see a description of
+		what the control does in Live's Info View.
+	</li>
+	</ul>
+	<bodytext>
+		<img src="images/example-devices1.png"/>
+	</bodytext>
+	<ul>
+	<li>
+		The
+		<link module="core" name="live_parameterswindow" type="vignette">Parameters Window</link>
+		will show you all of the parameters in a Max for Live
+		device when you're editing it. You can use the Parameters
+		Window to display and also to edit the parameter settings.
+	</li>
+	<li>
+		You can use the Max
+		Patcher window's 
+		<link module="core" name="status_bar" type="vignette">Status Bar</link>
+		to find out about the Max objects that are in the patch,
+		what those objects do.
+	</li>
+	<li>
+		Some of the Max for Live example patches included in the 
+		<a href="https://www.ableton.com/en/packs/max-live-essentials//">Max for Live Essentials</a>
+		and
+		<a href="https://www.ableton.com/en/packs/max-live-pluggo-live//">Max for Live Pluggo for Live</a>
+		Live packs contain UI objects that include
+		<link module="core" name="annotations" type="vignette">Max annotations</link>.
+		When you position your cursor over a user interface object in a device's window, 
+		you'll see a description of what the control does in Live's Info View.
+	</li>
+	<li>
+		When a Max for Live device's patcher window is open,
+		You can use the Max
+		Patcher window's 
+		<link module="core" name="status_bar" type="vignette">Status Bar</link>
+		to find out about the Max objects that are in the patch,
+		what those objects do.
+	</li>
+	</ul>
+<bodytext>
+		<img src="images/example-devices2.png"/>
+</bodytext>
+	<ul>
+	<li>
+		The
+		<link module="core" name="live_parameterswindow" type="vignette">Parameters Window</link> 
+	 	lets you view and edit all of the parameters in a device.
+	</li>
+	</ul>
+</vignette>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Specifying Time Values">
+	<header1>
+	Specifying Time Values
+	</header1>
+<ul>
+	<li><link type="vignette" module="core" name="maxtime_syntax">Time Value Syntax</link></li>
+	<li><link type="vignette" module="core" name="attributes_inspecting">Editing Time Values in the Inspector</link></li>
+	<li><link type="vignette" module="core" name="maxtime_objects">Objects that support time values</link></li>
+	<li><link type="tutorial" module="max" name="basicchapter19">Max Tutorial 19: Timing</link></li>
+
+</ul>
+</vignette>

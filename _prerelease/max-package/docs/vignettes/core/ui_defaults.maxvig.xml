@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Object Defaults">
+	<header1>
+	Object Defaults
+	</header1>
+	<bodytext>
+			When you launch Max, the colors for all Max objects are set to
+			default values. You can change the look of individual objects using the
+			object's
+			<link module="core" name="inspector" type="vignette">Inspector</link>,
+			and you can use the
+			<link module="core" name="patcher_inspector" type="vignette">Patcher Inspector</link>
+			to set the background color for a patcher window in both its locked and unlocked states.
+		</bodytext>
+	<bodytext>
+			Max also allows you to change the default settings of a large number of
+			Max objects using the Object Defaults window. These object default settings 
+			are recalled each time you launch Max. You can use the Object Defaults window 
+			to customize the look of your copy of Max, and to maintain a consistent look 
+			across Max patches.
+			<br/>
+			<b>Note:</b> Although the Object Defaults window lists a large number
+			of default preferences for Max objects, it does not list them all. You can
+			use the
+			<link module="core" name="prototypes" type="vignette">object prototype</link>
+			feature to create customized versions of any UI objects not listed in the 
+			Object Defaults window and maintain a consistent look to your
+			patches.
+		</bodytext>
+	<br/>
+	<header2>
+	The Object Defaults Window
+	</header2>
+	<bodytext>
+			The Object Defaults Window includes of a set of tabs you can use to change what
+			is displayed in the window, and a listing of all the settings associated
+			with all Max objects.
+		</bodytext>
+	<bodytext>
+		<img src="images/ui_defaults1.png"/>
+	</bodytext>
+	<header2>
+	Object Defaults Tabs
+	</header2>
+	<bodytext><i>All</i> shows the settings for all objects.
+		</bodytext>
+	<bodytext><i>Patcher</i> shows features associated with the Patcher window,
+			such as background and patch cord colors.
+		</bodytext>
+	<bodytext>
+			Object-specific settings are found under the tabs identified with 
+			icons as seen in the Object Explorer. Move the mouse over a tab to 
+			see the object's name.
+		</bodytext>
+	<bluebox>
+		<header2>
+	Changing a default value for an object
+	</header2>
+		<ul>
+			<li>Select the desired object's tab at the top of the Object Defaults window</li>
+			<li>
+			Click in the Value column for a setting you want to change. Use the pop-up 
+			<link module="core" name="color_picker" type="vignette">Color Picker</link> 
+			to change the color.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<bodytext>
+			As you change a color, you'll notice that it will change in any open 
+			patcher windows containing the object whose defaults you are modifying.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Restoring default values
+	</header2>
+		<ul>
+			<li>
+			Click on the x at the bottom of the windows to restore default values.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/ui_defaults6.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<bluebox>
+		<header2>
+	Saving a set of object defaults
+	</header2>
+		<ul>
+			<li>
+			Click the <b>Save Settings</b>
+			button in Object Defaults window toolbar. Type a name for the settings file. Click OK.
+		</li>
+		</ul>
+		<bodytext>
+			Your new color set will be added to the pop-up menu you see when you
+			click on the <b>Load Settings</b> button.
+		</bodytext>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Loading a set of object defaults
+	</header2>
+		<ul>
+			<li>
+			Click the <b>Load Settings</b> button in the Object Defaults window toolbar
+			and choose a settings file from the menu.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/ui_defaults5.png"/>
+		</bodytext>
+		<ul>
+			<li>
+			The chosen settings will be loaded, the Object Defaults window will show
+			the new colors, and the color set will be applied to all open patcher windows. 
+			It will also be used in any newly created patcher windows as well as become the 
+			default color set the next time you launch Max.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Reverting to the default object colors
+	</header2>
+		<ul>
+			<li>
+			Click the Set All to Default Values button in the Object Window toolbar. All 
+			colors of all objects will be restored to their original default values.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bodytext>
+		Normally, when you save a patch, the current default colors are not stored. 
+		Instead, no value is stored for a color if it is set to the default value. 
+		This has the effect of making files smaller as well as making it possible 
+		to apply your default colors not just to new patches, but to patches you 
+		made in the past or patches you get from other people. However, if you 
+		really want specific colors in a patch, you can save all object attributes, 
+		whether they are set to the current default value or not. 
+	</bodytext>
+	<bluebox>
+		<header2>
+		Insulating a patch from the effect of object defaults
+	</header2>
+		<ul>
+			<li>Before saving a patcher, choose Patcher Inspector from the View 
+		menu to open the patcher inspector window.</li>
+			<li>Check Save Default-Valued Object Attributes.</li>
+			<li>Close the patcher inspector window and save the patcher.</li>
+		</ul>
+	</bluebox>
+</vignette>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="How to Use the Documentation">
+	<header1>
+	How to Use the Documentation
+	</header1>
+<header2>
+	Viewing documentation content
+</header2>
+<ul>
+	<li><link type="vignette" module="core" name="docwindow">The documentation window</link></li>
+	<li><link type="vignette" module="core" name="docsearch">Searching the documentation</link></li>
+	<li><link type="vignette" module="core" name="docrefpages">Object reference pages</link></li>
+	<li><link type="vignette" module="core" name="doctutorials">Tutorials</link></li>
+</ul>
+<header2>
+	Interactive documentation features
+</header2>
+<ul>
+
+<li><link type="vignette" module="core" name="circular_object_menu">The Circular Object menu</link></li>
+<li><link type="vignette" module="core" name="quickref">The Quickref menu</link></li>
+<li><link type="vignette" module="core" name="status_bar">The Status Bar</link></li>
+<li><link type="vignette" module="core" name="clue_window">The Clue window</link></li>
+<li><link type="vignette" module="core" name="assistance">Assistance</link></li>
+</ul>
+</vignette>

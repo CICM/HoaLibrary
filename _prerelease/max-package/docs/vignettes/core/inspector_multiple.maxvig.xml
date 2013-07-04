@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Inspecting Multiple Objects">
+	<header1>
+	Inspecting Multiple Objects
+	</header1>
+<bodytext>
+	When you open the object inspector on multiple objects, only the attributes shared by the objects are shown.
+</bodytext>
+<bluebox>
+<header2>
+Selecting and inspecting multiple objects
+</header2>
+	<ul>
+	<li>
+		Select multiple objects in your patcher window by Shift-clicking or clicking
+		and dragging an outline around the objects.
+	</li>
+	<li>
+		Click the Inspector button in the patcher toolbar.
+	</li>
+	<li>If you have selected objects of different types, the inspector window will appear with the title <i>multiple objects inspector</i>. In most cases, this means only the <link type="vignette" module="core" name="attributes_stdbox">common box attributes</link> will appear in the inspector.</li>
+	</ul>
+	<bodytext>
+		<img src="images/inspector_12.png" />
+	</bodytext>
+</bluebox>
+</vignette>

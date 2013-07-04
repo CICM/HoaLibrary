@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Working with Files">
+<header1>
+Working with Files in Max for Live
+</header1>
+<bodytext>
+Historically, Max developers have used the <link type="vignette" module="core" name="search_path">search path</link> for convenient access to files by name, but this is not sufficient for managing files in Live <link type="vignette" module="core" name="live_presets">presets</link> or documents.
+</bodytext>
+<bodytext>
+	The <o>live.drop</o> object was designed to be added to Max devices that work with files. 
+	When you drag an audio file from either the Live file browser or your operating system's 
+	file manager, <o>live.drop</o> will output the complete file path as a single symbol. You can then pass this symbol to a <o>buffer~</o> or <o>sfplay~</o> object, as shown in the example below.
+</bodytext>
+<img src="images/live_drop_example.png" />
+<bodytext>
+	The <o>live.drop</o> object also <i>stores</i> the name and location of the most recently dropped file in a way that Live understands. By default, <o>live.drop</o> has its
+	<link type="vignette" module="core" name="live_pattr" anchor="parameter_mode_enable">Parameter Mode enabled</link>, so any files dropped onto it will be saved in the current Live document. When the document is re-opened, the name will be sent out <o>live.drop</o>'s outlet. When saving a preset for a device containing a <o>live.drop</o>, Live will copy any referenced audio files to the Live library if they are not already there. When a user opens the preset, the file's path in the Library, not the file's original path, will be sent out <o>live.drop</o>'s outlet.
+</bodytext>
+<bodytext>
+	If you perform a Collect All and Save on your Live Set, any audio files referenced by <o>live.drop</o> objects with Parameter Mode enabled will be copied into a newly created folder. 
+This permits Live users to move documents containing Max devices written with <o>live.drop</o> to different computers without losing the audio files the devices were using.
+</bodytext>
+<bodytext>
+	A Live user can, however, choose to turn off the program's default file-copying behavior.
+</bodytext>
+<bluebox>
+	<header2>
+		Setting Live's Preset and Export File Copying Behavior
+	</header2>
+<ul>
+	<li>Open the Live Preferences window.</li>
+	<li>Click the <b>File Folder</b> tab.</li>
+	<li>At the bottom of the File Folder preference pane, you will see an item called <i>Collect Files on Export</i>. <i>Always</i> is the default behavior. You can also choose <i>Never</i>, in which case files are never copied, or <i>Ask</i>, where you will be given the opportunity to decide whether files should be copied in each case that arises.
+</li>
+</ul>
+</bluebox>
+</vignette>

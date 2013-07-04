@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Clue Window Settings">
+	<header1>
+	Clue Window display colors
+	</header1>
+	<bodytext>
+			The <i>Clue</i> category of the Max Preferences window
+			lets you set the colors for the 
+			Patcher window's 
+			<link module="core" name="clue_window" type="vignette">Clue Window</link>
+			(whose functionality has largely been replaced by the Max 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>
+			).
+		</bodytext>
+	<bluebox>
+		<header2>
+	Changing the Clue Window display colors
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Macintosh) or the Options menu (Windows) 
+			to show the Preferences Window.
+			Scroll to the <b>Browser</b>
+			category of the preferences listings, then click in the Values column for the either the
+			Clue Window Text Color, 
+			Clue Window Background Color,			
+			or 
+			Clue Window Annotation Color 
+			settings and use the
+			<link module="core" name="color_picker" type="vignette">Color Picker</link>
+			to change the look of the Clue Window.
+			The Max application keeps track of this setting, and it will be used
+			whenever you launch the program.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+</vignette>

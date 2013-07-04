@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Audio Status Window"><header1>
+	The Audio Status Window
+	</header1><bodytext>
+			The Audio Status Window shows you the complete set all of the parameters
+			of audio input and output in MSP. You can use the Audio Status Window
+			to set these parameters, and as a way to monitor your current audio
+			settings.
+		</bodytext><bodytext>
+			Using the Audio Status Window, you can:
+		</bodytext><ul><li>
+			Enable/disable audio processing in Max
+		</li><li>
+			View and select an audio driver
+		</li><li>
+			Monitor the amount of signal processing MSP is currently doing
+		</li><li>
+			Set the audio sampling rate
+		</li><li>
+			Set the number of samples MSP processes at a time - the <i>I/O Vector Size</i>) for input and output.
+		</li><li>
+			Enable/disable Overdrive
+		</li><li>
+			Map logical input and outputs channels for I/O in MSP
+		</li></ul><bodytext>
+			All of these options can also be changed from within your Max patch
+			by using the <o>adstatus</o> object in your max patch, or by sending
+			<link module="core" name="messages_to_max" type="vignette">messages to the Max application</link>.
+		</bodytext><br/><bluebox><header2>
+	Viewing the Audio Status Window
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li></ul><bodytext><img src="images/audio_status1.png"/></bodytext><bodytext>
+			You can also double-click on any <o>dac~</o> or <o>adc~</o> object in a locked Patcher window.
+		</bodytext></bluebox><br/><space/><bodytext>
+			The Audio Status Window includes of a set of tabs you can use to change what is
+			displayed in the window,  and a listing of all the settings associated
+			with DSP processing in Max.
+		</bodytext><br/><space/><bluebox><header2>
+	Getting information about a setting
+	</header2><ul><li>
+			Position your cursor over the Setting column of any row in the window. A brief description of
+			the setting will be shown in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</li></ul></bluebox><br/><space/><bluebox><header2>
+	Changing the value of a Setting
+	</header2><ul><li>
+			If the the parameter is a pop-up menu, click on the menu, choose a setting, and release.
+		</li><li><bodytext><img src="images/audio_status2.png"/></bodytext>
+		If the parameter has a check box, click in the box to toggle the value
+		<bodytext><img src="images/audio_status3.png"/></bodytext>
+		</li><li>
+			If the parameter has a number box that includes a triangle, you can type values into the 
+			box. Number boxes without the triangle will only display values.
+		<bodytext><img src="images/audio_status4.png"/></bodytext>
+		</li><li>
+			If the parameter has a text button, click on it to open a new window.
+		<bodytext><img src="images/audio_status5.png"/></bodytext>
+		</li></ul></bluebox><br/><space/><header2>
+	Audio processing and your system
+	</header2><bodytext>
+			You can turn audio processing on and off using the Audio Status Window, and also
+			toggle audio processing using the MSP UI objects <o>ezdac~</o> and <o>ezdac~</o>,
+			or the <o>adc~</o> and <o>dac~</o> MSP objects.
+		</bodytext><br/><bluebox><header2>
+	Enabling/disabling audio processing using the Audio Status Window
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the Audio pop-up menu and choose an <b>On</b> from
+			the pop-up menu.
+		</li></ul><bodytext><img src="images/audio_status6.png"/></bodytext><bodytext><b>Note:</b> You must have placed an MSP object in a patcher
+			to be able to turn audio on or off using the Audio Status Window. If no MSP objects
+			have been instantiated, audio will turn itself off immediately.
+		</bodytext></bluebox><br/><bluebox><header2>
+	Enabling/disabling audio processing using MSP objects
+	</header2><ul><li>
+			If you’re using <o>ezdac~</o> or <o>ezdac~</o> objects in your Max patch,
+			click on them to start the audio. Both of these UI objects function as toggle switches.
+		</li><li>
+			If you’re using a <o>dac~</o> object in your Max patch, click on any toggle box or message box
+			containing the message <m>1</m>, <m>start</m>, or <m>startwindow</m>.
+		</li></ul><bodytext>
+			Audio is disabled by sending the messages <m>0</m> or <m>stop</m> to a <o>dac~</o> object.
+		</bodytext><bodytext>
+			If you want to only turn on audio processing for a specific patcher window,
+			use the <m>startwindow</m> message sent to the <o>dac~</o> object.
+		</bodytext></bluebox><br/><header2>
+	Configuring MSP audio for your system
+	</header2><bodytext>
+			While some specific features and settings for using audio on your computer will
+			vary according to the type of audio interface and audio drivers you have installed,
+			you can access these settings in MSP using Audio Status Window.
+		</bodytext><bodytext>
+			The Driver pop-up menu in the Audio Status Window lets you view and select an
+			audio driver for MSP. The list of available drivers will vary according to
+			the audio drivers installed on your system. Here is a brief summary of
+			the default options:
+		</bodytext><ul><li><i>None</i> shuts off MSP audio processing.
+		</li><li><i>CoreAudio</i> is the default audio driver for MSP on Macintosh.
+		</li><li><i>MME</i>, <i>DirectSound</i>, or <i>ASIO</i> drivers for Windows systems will appear if you have correctly installed external hardware that supports the standard.
+		</li><li>
+			The <i>ad_rewire</i> driver supports ReWire, a standard developed by Propellerhead Software that allows sound generating applications (ReWire Devices) to send multiple channels of audio and midi to other applications (ReWire Mixers) that process and output it.
+		</li><li>
+			The <i>NonRealTime</i> driver enables MSP to work in non real-time mode, allowing you to synthesize and process audio without any real-time processor performance limitations.
+		</li></ul><bluebox><header2>
+	Selecting an audio driver
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the Driver pop-up menu and choose an audio driver from
+			the pop-up menu.
+		</li></ul><bodytext>
+			This menu lists all the audio drivers installed on and available
+			for use with Max. When you choose a driver from the menu, it becomes your
+			default audio driver, and will remain so the next time you launch Max.
+		</bodytext></bluebox><br/><space/><bodytext>
+			When you have selected the audio driver you want to use, various input (<i>Input Channels</i>,
+			<i>Input Device</i>, and <i>Input Source</i>) and output (<i>Output Channels</i>, 
+			<i>Output Destination</i>, and <i>Playthrough Input</i>)
+			parameter settings will become available based on the audio driver you choose. 
+		</bodytext><bodytext><b>Note:</b> the number of input channels and output channels displayed in the
+			DSP window are displayed with the grey attribute icon because the number of
+			channels is driver/interface-dependent.
+		</bodytext><bluebox><header2>
+	Configuring audio system inputs and outputs
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the Input Source or Output Destination pop-up menus and choose
+			the source or destination you want to use from the menu.
+		</li></ul><bodytext>
+			These menu lists all the input and output sources and destinations available
+			for use with your audio driver. When you choose a source or destination from the menu, 
+			it becomes your default setting, and will remain so the next time you launch Max.
+		</bodytext><bodytext>
+			The Playthrough Input option is available on Macintosh non-Intel systems only.
+			This checkbox lets you choose whether or not the input 
+			device is ‘monitored’ directly through to the output. When playthrough is enabled, 
+			the dry signal from the input source will play through to the output mixed 
+			in with any processed signal you may be sending to the output in MSP. 
+			Disabling playthrough will enable you to control how much (if any) dry signal 
+			from the audio input is routed to the output. This option can be changed in MSP on Macintosh by 
+			sending a message to the dsp object 
+			to change it.
+		</bodytext></bluebox><br/><space/><bluebox><header2>
+	Monitoring CPU usage
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li></ul><bodytext>
+			Three fields in the Audio Status window monitor the amount of signal processing MSP is currently doing.
+		</bodytext><bodytext><i>CPU Utilization</i> displays a rough estimate of how much of your computer's CPU is being allocated for crunching audio in MSP.
+		</bodytext><bodytext>
+			The number of <i>Function Calls</i> gives an approximate idea of how many calculations are being required for each sample of audio.
+		</bodytext><bodytext>
+			The number next to <i>Signals Used</i> shows the number of internal buffers that were needed by MSP
+			to connect the signal objects used in the current signal network.
+		</bodytext></bluebox><br/><space/><bodytext>
+			You can set the audio sampling rate with the Sampling Rate pop-up menu.
+			For full-range audio, the recommended sampling rate is 44.1 kHz. Using a lower rate
+			will reduce the number of samples that MSP has to calculate, thus lightening
+			your computer’s burden, but it will also reduce the frequency range.
+		</bodytext><br/><bluebox><header2>
+	Setting the audio sampling rate
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the Sampling Rate pop-up menu to show a list of the available
+			audio sampling rates. When you choose a driver from the menu, it becomes your default
+			sampling rate.
+		</li></ul></bluebox><br/><space/><bodytext>
+			Max processes audio in by using a block of samples called a <i>signal vector</i>
+			(for an introduction to how MSP works, click
+			<link anchor="MSPintro" module="msp" name="mspchapter03" type="tutorial">here</link>).
+			You can use the Audio Status Window to select the I/O vector size (i.e., the number of audio
+			samples) of the block size that Max uses when working with audio input and
+			audio output. You can also set the signal vector size - the number of samples that Max
+			processes at a time.
+		</bodytext><bodytext>
+			The I/O Vector size and Signal Vector size in MSP are commonly expressed as powers of two. They can be
+			set as low as 2 samples, and in most cases can go as
+			high as the largest available I/O Vector Size for your audio driver. However, if the
+			I/O Vector Size is not a power of 2, the maximum signal vector size is the largest power
+			of 2 that divides evenly into the I/O vector size.
+		</bodytext><bodytext>
+			Optimizing the performance of any particular large audio patch when you are close to the
+			limit of your CPU’s capability is a trial-and-error process that requires an
+			understanding of how signal vector sizes and the Max scheduler interact. THe
+			Audio I/O chapter of the MSP
+			Tutorial contains a thorough discussion of
+			<link anchor="cpu_usage" module="msp" name="mspaudioio" type="tutorial">CPU usage</link>, the
+			<link anchor="sampling_rate" module="msp" name="mspaudioio" type="tutorial">sampling rate</link>,
+			<link anchor="vector_size" module="msp" name="mspaudioio" type="tutorial">vector sizes</link> and
+			<link anchor="signal_vector" module="msp" name="mspaudioio" type="tutorial">signal vectors</link>,
+			and Max scheduler parameters such as
+			<link anchor="overdrive" module="msp" name="mspaudioio" type="tutorial">overdrive</link> and
+			<link anchor="audio_interrupt" module="msp" name="mspaudioio" type="tutorial">audio interrupt</link>.
+		</bodytext><br/><bluebox><header2>
+	Setting the I/O and Signal Vector Sizes
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the I/O Vector Size or Signal Vector size pop-up menu and choose
+			an audio vector size from the menu. When you choose a value from the menu,
+			it becomes your default vector size.
+		</li></ul><bodytext>
+			Some audio interface cards do not provide a choice of I/O Vector Sizes.
+			There are also some ASIO drivers whose selection of I/O Vector Sizes may not conform to the
+			multiple-of-a-power-of-2 limitation currently imposed by MSP's ASIO support. In some cases,
+			this limitation can be remedied by using the ASIO driver at a different sampling rate.
+		</bodytext></bluebox><br/><header2>
+	Overdrive
+	</header2><bodytext>
+			When <i>Overdrive</i> is enabled, Max gives priority to timing and MIDI processing
+			over screen drawing and user interface tasks such as responding to mouse clicks.
+			If you are primarily going to be using Max for MIDI or audio processing, Overdrive
+			should be enabled. If you are primarily going to be using Jitter, Overdrive should be disabled.
+			You can use the Audio Status Window to set this feature.
+		</bodytext><br/><bluebox><header2>
+	Enabling/disabling Overdrive
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the checkbox in the Value column for the Scheduler in Overdrive setting to
+			enable Overdrive. To disable Overdrive, click in the checkbox to unselect the option.
+		</li></ul></bluebox><br/><header2>
+	Processing audio in non real-time
+	</header2><bodytext>
+			MSP includes a non real-time driver that lets you to use MSP as a disk-based audio
+			processing and synthesis system, removing the limit of how much processing you
+			can do with your CPU in real time. Using the NonRealTime driver means that
+			Max calculates samples in MSP independently of any physical scheduling
+			priority, allowing you to process a vector of audio using a signal path
+			that might take your computer more than one vector's worth of real time to
+			compute.
+		</bodytext><bodytext>
+			Patches that use the non real-time driver typically use the <o>dsptime~</o>
+			object to see how long the audio has been turned on, and pipe their output of
+			to <o>sfrecord~</o> to capture the results.
+		</bodytext><br/><bluebox><header2>
+	Using the non real-time driver
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the Driver pop-up menu and choose the NonRealTime audio driver. 
+			Max will use the NonRealTime driver, and hardware input and output are disabled.
+		</li></ul></bluebox><br/><header2>
+		Using the Mixer
+	</header2><bodytext>
+		Max includes a 
+		<link module="core" name="mixer" type="vignette">Mixer Engine</link>
+		which separates every top-level patcher into its own DSP chain. 
+		This flexibility allows Max to use multiple processors to process 
+		separate top level patchers, and lets separate patchers remain separate - 
+		as one patcher is running, another patcher can be opened, closed, or 
+		edited without stopping the global DSP chain.
+	</bodytext><bodytext>
+		While you can set the behavior of the Audio Engine using the
+		Mixer control panel 
+		accessible via the 
+		<link module="core" name="patcher_toolbar" type="vignette">Patcher toolbar</link> 
+		and set
+		<link module="core" name="mixer_preferences" type="vignette">Mixer preferences</link> 
+		from the 
+		<link module="core" name="preferences_window" type="vignette">Max preferences window</link>,
+		The Audio Status Window provides a single access point for
+		setting Mixer behavior
+	</bodytext>
+		The <i>Enable Mixer Crossfade</i> pop-up menu lets you set the
+		<link anchor="crossfademode" module="core" name="mixer" type="vignette">Mixer crossfade mode</link>.
+	<bodytext>
+	</bodytext>
+		Click in the <i>Parallel Processing</i> checkbox to enable
+		<link anchor="mixerparallelprocesing" module="core" name="mixer_preferences" type="vignette">parallel processing in the Mixer</link>.
+	<bodytext>
+		Two number boxes are provided where you can enter values for
+		<link anchor="mixerlatency" module="core" name="mixer_preferences" type="vignette">Crossfade Latency</link>.
+		and
+		Crossfade Ramp Time.
+		<link anchor="mixerramptime" module="core" name="mixer_preferences" type="vignette">Crossfade Ramp Time</link>.
+	</bodytext>
+	<br/>
+	<header2>
+	Logical Input and Output Channels
+	</header2>
+	<bodytext>
+			In Max, you can create a <o>dac~</o> or <o>adc~</o> object that uses
+			a channel number between 1 and 512. These numbers refer to what are called
+			<i>logical channels</i>. Logical channels can be dynamically assigned and
+			reassigned to the physical device channels of a particular driver using the
+			Audio Status window and its I/O Mappings subwindow, (you can also do this remapping
+			using the <o>adstatus</o> object.
+		</bodytext>
+	<bodytext>
+			The pop-up menus labeled Input Channel 1, Input Channel 2,
+			Output Channel 1, and Output Channel 2 allow you to map the
+			first two logical channels of I/O in MSP (i.e. the first two
+			outlets of the <o>adc~</o> object and the first two inlets of the
+			<o>dac~</o> object) to physical channels used by your audio driver.
+			Different audio drivers give you different options - for example,
+			the MME driver on Windows only supports two channels, so you will
+			normally use the default options. To map additional logical
+			channels, use the I/O Mappings window, which you can view by
+			clicking the I/O Mappings button at the bottom of the Audio Status window.
+		</bodytext>
+	<bodytext>
+			In addition, you can use the <o>adstatus</o> object from within your
+			patch to map any of the 512 logical audio I/O channels.
+		</bodytext>
+	<br/>
+	<bluebox><header2>
+	Mapping an output pair
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on an Output Channel pop-up menu and choose one of the available output
+			channels that appear (the precise content of the pop-up menu
+			will vary depending on the type of audio driver you are using).
+		</li></ul><bodytext>
+			The output you select will be used as the outlet for channel 1 or 2 for the <o>dac~</o> object,
+			and will become the new default physical outputs.
+		</bodytext></bluebox>
+	<br/>
+	<space/>
+	<bodytext>
+			The reason for using logical and physical channels is to let you create
+			patches that use as many channels as you need without
+			regard to the particular hardware configuration you're using. For instance,
+			some audio interfaces use physical device channels 1 and 2 for S/PDIF input and output.
+			If you don't happen to have a S/PDIF-compatible audio interface, you may wish to
+			use channels 8 and 9 instead. You can simply go to the Audio Status window and choose the eighth and ninth
+			physical channels listed in the Input and Output pop-up menus.
+		</bodytext>
+	<bodytext>
+			Logical channels in MSP are only created if there is a <o>dac~</o> or <o>adc~</o>
+			object using them. In other words, if you're only using logical outputs 1 and 2,
+			there aren't 510 unused audio streams sitting around hogging your CPU. However,
+			since you can mix any number of logical channels to a single physical channel if
+			necessary, you can create a complex multi-channel setup that will allow other
+			people to hear all of your logical channels when they use it on a two-channel
+			output device.
+		</bodytext>
+	<br/>
+	<bluebox><header2>
+	Assigning multiple logical channels to a single physical channel
+	</header2><ul><li>
+			Choose <b>Audio Status...</b> from the Options menu to show the Audio Status Window.
+		</li><li>
+			Click on the I/O Mappings textbutton at the bottom of the Audio Status window to show the
+			I/O Mappings subwindow.	
+		</li></ul><bodytext><img src="images/audio_status7.png"/></bodytext><ul><li>
+			For each output channel you wish to map to the first (left) output channel, choose
+			1 output from the pop-up menu. For each output channel you want to map to the second
+			(right) output channel, choose 2 output from the pop-up menu. The multiple channels
+			will now be mapped to a pair of output channels - 1 and 2.
+		</li></ul></bluebox>
+</vignette>

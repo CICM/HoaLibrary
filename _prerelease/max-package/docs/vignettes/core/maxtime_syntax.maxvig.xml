@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Time Value Syntax">
+	<header1>
+	Time Value Syntax
+	</header1>
+<bodytext>
+	One of the fundamental aspects of working in Max is the notion of creating processes 
+	that progress or act over a period of time.  Traditionally, time values in Max have always 
+	been expressed using milliseconds as the unit.  In Max, time values for many objects (<link type="vignette" module="core" name="maxtime_objects">see the complete list</link>) may also 
+	be expressed in a number of human-friendly units. There are two types of time values: <i>fixed</i> values are similar to milliseconds in that they express an amount of time that doesn't change. <i>Tempo-relative</i> units vary according to the current tempo set in a <o>transport</o> object.
+</bodytext>
+<header2>
+	Fixed Time Values
+</header2>
+<ul>
+	<li><b>Milliseconds</b> are specified with a single number, or with a number followed by <m>ms</m></li>
+	<li><b>Hours/minutes/seconds</b> are specified with numbers separated by colons, such as <m>00:03:25</m>, which means zero hours, 3 minutes, and 25 seconds. An optional millisecond value can be added after a period, for example: <m>00:03:25.230</m>. Hours/minutes/seconds can also specified by a list of three or four numbers followed by <m>hh:mm:ss</m>.</li>
+	<li><b>Samples</b> can be specified by a single number followed by <m>samples</m>.</li>
+	<li><b>Frequency</b> can be specified by a single number followed by <m>hz</m>.</li>
+</ul>
+<a name="tempobasedtime" />
+<header2>
+	Tempo-Relative Time Values
+</header2>
+<ul>
+	<li><b>Ticks</b> represent 1/480th of a quarter note. In places where <i>only</i> tempo-relative time values are allowed, such as the <m>quantize</m> attribute of the <o>metro</o> object, values in ticks can be specified as a single number. In places where <i>both</i> fixed and tempo-relative units are permissible, such as the <m>interval</m> attribute of a <o>metro</o> object, a value in ticks must be followed by <m>ticks</m> to be interpreted as ticks instead of milliseconds. See below for a table of ticks and note value equivalents.</li>
+	<li><b>Note values</b> are symbols that abbreviate musical note time values, for example <m>4n</m> for quarter-note. They may be specified by themselves (you cannot use a note value in an expression, such as 3 * 16n). See below for a table of ticks and note value equivalents.</li>
+	<li><b>Bars/beats/units</b> can be specified in two ways. Where it is necessary to use a single value, bars/beats/units can be separated by periods, for example: <m>2.3.240</m>, which is 2 measures (bars), 3 beats, and 240 ticks. When it is possible to pass a list of values, bars/beats/units can be specified by separate numbers, e.g., <m>2 3 240</m>. To disambiguate bars/beats/units from hours/minutes/seconds where time values can be either fixed or tempo-relative, you can add the optional symbol <b>bbu</b> after the list.</li>
+</ul>
+<header2>
+	Time Offsets and Time Intervals
+</header2>
+<bodytext>
+	With tempo-relative units, particularly bars/beats/units, you can specify a time <i>interval</i> or a time  <i>position</i>. A time offset or position refers to the value of a <o>transport</o>, so for example, the time argument to the <o>timepoint</o> object is considered a position. A time <i>interval</i>, by contrast is a distance or an amount of time. Interval, quantization, and delay attributes of objects are generally time intervals. The bars/beats/units method of specifying time will be interpreted differently depending on context. A time of 1 1 0 as a <i>position</i> is 0 ticks. A time of 1 1 0 as an <i>interval</i> in 4/4 time is (4 * 480) + 480 ticks (2400 ticks).</bodytext>
+<bodytext>
+	The <o>translate</o> object has a <m>mode</m> attribute that can convert time units as either intervals or positions.
+</bodytext>
+<header2>
+	Table of Ticks and Note Values
+</header2>
+
+<bodytext>
+Here is a listing of the note and tick values associated with common note durations. Note value abbreviations that can be used in Max to specify time are in bold.
+</bodytext>
+<bodytext>
+<b>1nd</b> - Dotted whole note - 2880 ticks
+<br />
+<b>1n</b> - Whole note - 1920 ticks
+<br />
+<b>1nt</b> - Whole note triplet - 1280 ticks
+<br />
+<b>2nd</b> - Dotted half note - 1440 ticks
+<br />
+<b>2n</b> - Half note - 960 ticks
+<br />
+<b>2nt</b> - Half note triplet - 640 ticks
+<br />
+<b>4nd</b> - Dotted quarter note - 720 ticks
+<br />
+<b>4n</b> - Quarter note - 480 ticks
+<br />
+<b>4nt</b> - Quarter note triplet - 320 ticks
+<br />
+<b>8nd</b> - Dotted eighth note - 360 ticks
+<br />
+<b>8n</b> - Eighth note - 240 ticks
+<br />
+<b>8nt</b> - Eighth note triplet - 160 ticks
+<br />
+<b>16nd</b> - Dotted sixteenth note - 180 ticks
+<br />
+<b>16n</b> - Sixteenth note - 120 ticks
+<br />
+<b>16nt</b> - Sixteenth note triplet - 80 ticks
+<br />
+<b>32nd</b> - Dotted thirty-second note - 90 ticks
+<br />
+<b>32n</b> - thirty-second note - 60 ticks
+<br />
+<b>32nt</b> - thirty-second-note triplet - 40 ticks
+<br />
+<b>64nd</b> - Dotted sixty-fourth note - 45 ticks
+<br />
+<b>64n</b> - Sixty-fourth note - 30 ticks
+<br />
+<b>128n</b> - One-hundred-twenty-eighth note - 15 ticks
+</bodytext>
+</vignette>

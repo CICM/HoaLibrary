@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Interface Settings">
+	<header1>
+	Setting Interface preferences
+	</header1>
+	<bodytext>
+			The <i>Interface</i> category of the Max Preferences window
+			lets you set a number of preferences that affect how
+			you work with Max.
+		</bodytext>
+	<a name="allwindowsactive"/>
+	<header2>
+	All Windows Active (Windows systems only)
+	</header2>
+	<bodytext>
+			By default, only Max objects in the frontmost window can respond to 
+			mouse clicks, and any other windows must be clicked on to bring them
+			to the foreground. When the All Windows Active checkbox in the 
+			Interface pane is checked, Max objects in background windows will 
+			respond to the mouse, but you'll need to either click on the title
+			bar or choose the window's name from the Max Window menu to bring it
+			to the foreground.
+			<br/>
+			You can only type numbers into one of the Max number box objects if
+			the window in which the number box is located is in the foreground.
+			However, keystrokes on your computer keyboard will be sent out the
+			outlets of any <o>key</o>, <o>keyup</o>, or <o>modifiers</o>
+			object in any loaded patch or subpatch regardless of the All Windows
+			Active setting.
+		</bodytext>
+	<br/>
+	<space/>
+	<a name="defaultimageresolution"/>
+	<header2>
+	Setting image resolution preferences
+	</header2>
+	<bodytext>
+			Several Max objects (<o>jit.qt.grab</o>, <o>jit.dx.grab</o>, <o>jit.qt.movie</o>) 
+			allow you to save loaded image files or individual
+			frames of a Jitter matrix. You can set a preference for the default 
+			resolution for any image files you save.
+		</bodytext>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Setting a default image resolution
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Macintosh) or the Options 
+			menu (Windows) to show the Preferences Window. Locate the <b>Interface</b>  
+			category and click in the Values
+			column for the Export Image Resolution setting and choose a resolution
+			from the pop-up menu (the options are 72, 96, 150, or 300 DPI).
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<header2>
+	Displaying floating-point numbers
+	</header2>
+	<bodytext>
+			The way floating-point numbers are stored on your computer means that not all 
+			numbers can be represented. This means that you will often see values such as 2.3 
+			displayed as 2.29999. Clicking in the Float Display Correction checkbox will
+			make the Max application round numbers and truncates them at what it guesses 
+			is the least significant digit.
+		</bodytext>
+	<header2>
+	Setting file saving preferences
+	</header2>
+	<bodytext>
+			By default, the Max application will automatically save any previously 
+			created patcher file in its original location without reminding you
+			of what that location is. If you would like to be gently reminded of
+			a file's current location every time you save it, click in the
+			Save Dialog Shows File Location checkbox in the Interface category.
+		</bodytext>
+</vignette>

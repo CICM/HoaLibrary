@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="MSP Object Functional Listing"><header1>
+		A Functional Listing of all MSP Objects
+		</header1><bodytext>
+						Here is a listing of all MSP objects, grouped by their function. This
+						listing corresponds to the New Object menu listings in earlier versions of 
+						MSP. Click on any subject listing to see an object listing. To see the 
+						<link anchor="refman" module="core" name="help_docs" type="vignette">Reference page</link> 
+						for any object, click on its name.
+				</bodytext>
+	 
+			<a name="Analysis"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Analysis
+	</header2>
+			<o>capture~</o>
+	 
+			<o>change~</o>
+	 
+			<o>count~</o>
+	 
+			<o>edge~</o>
+	 
+			<o>fzero~</o>
+	 
+			<o>maximum~</o>
+	 
+			<o>minimum~</o>
+	 
+			<o>minmax~</o>
+	 
+			<o>peakamp~</o>
+	 
+			<o>snapshot~</o>
+	 
+			<o>spike~</o>
+	 
+			<o>sync~</o>
+	 
+			<o>thresh~</o>
+	 
+			<o>zerox~</o>
+	 
+			<a name="Delays"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Delays
+	</header2>
+			<o>delay~</o>
+	 
+			<o>tapin~</o>
+	 
+			<o>tapout~</o>
+	 
+			<a name="Dynamics"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Dynamics
+	</header2>
+			<o>omx.4band~</o>
+	 
+			<o>omx.5band~</o>
+	 
+			<o>omx.comp~</o>
+	 
+			<o>omx.peaklim~</o>
+	 
+			<a name="FFT"/>
+<bodytext>
+</bodytext>
+	<header2>
+	FFT
+	</header2>
+			<o>cartopol~</o>
+	 
+			<o>fbinshift~</o>
+	 
+			<o>fftinfo~</o>
+	 
+			<o>fftin~</o>
+	 
+			<o>fftout~</o>
+	 
+			<o>fft~</o>
+	 
+			<o>gizmo~</o>
+	 
+			<o>frameaccum~</o>
+	 
+			<o>frameaverage~</o>
+	 
+			<o>framesmooth~</o>
+	 
+			<o>framedelta~</o>
+	 
+			<o>ifft~</o>
+	 
+			<o>pfft~</o>
+	 
+			<o>phasewrap~</o>
+	 
+			<o>poltocar~</o>
+	 
+			<o>vectral~</o>
+	 
+			<a name="Filters"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Filters
+	</header2>
+			<o>allpass~</o>
+	 
+			<o>biquad~</o>
+	 
+			<o>buffir~</o>
+	 
+			<o>cascade~</o>
+	 
+			<o>comb~</o>
+	 
+			<o>cross~</o>
+	 
+			<o>fffb~</o>
+	 
+			<o>filtercoeff~</o>
+     
+			<o>hilbert~</o>
+	 
+			<o>lores~</o>
+	 
+			<o>onepole~</o>
+	 
+			<o>phaseshift~</o>
+	 
+			<o>reson~</o>
+	 
+			<o>slide~</o>
+	 
+			<o>svf~</o>
+	 
+			<o>teeth~</o>
+	 
+			<a name="Functions"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Functions
+	</header2>
+			<o>adsr~</o>
+	 
+			<o>count~</o>
+	 
+			<o>curve~</o>
+	 
+			<o>line~</o>
+	 
+			<o>rand~</o>
+	 
+			<o>seq~</o>
+	 
+			<o>sig~</o>
+	 
+			<o>techno~</o>
+	 
+			<o>trapezoid~</o>
+	 
+			<o>triangle~</o>
+	 
+			<o>zigzag~</o>
+	 
+			<a name="Generators"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Generators
+	</header2>
+			<o>sah~</o>
+	 
+			<a name="Input - Output"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Input - Output
+	</header2>
+			<o>adc~</o>
+	 
+			<o>adoutput~</o>
+	 
+			<o>dac~</o>
+	 
+			<o>ezadc~</o>
+	 
+			<o>ezdac~</o>
+	 
+			<o>rewire~</o>
+	 
+			<o>sfinfo~</o>
+	 
+			<o>sflist~</o>
+	 
+			<o>sfplay~</o>
+	 
+			<o>sfrecord~</o>
+	 
+			<a name="Modifiers"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Modifiers
+	</header2>
+			<o>clip~</o>
+	 
+			<o>degrade~</o>
+	 
+			<o>deltaclip~</o>
+	 
+			<o>delta~</o>
+	 
+			<o>downsamp~</o>
+	 
+			<o>freqshift~</o>
+	 
+			<o>maximum~</o>
+	 
+			<o>minimum~</o>
+	 
+			<o>minmax~</o>
+	 
+			<o>normalize~</o>
+	 
+			<o>overdrive~</o>
+	 
+			<o>peakamp~</o>
+	 
+			<o>pong~</o>
+	 
+			<o>rampsmooth~</o>
+	 
+			<o>rate~</o>
+	 
+			<o>round~</o>
+	 
+			<o>trunc~</o>
+	 
+			<a name="Operators"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Operators
+	</header2>
+			<o>!-~</o>
+	 
+			<o>!/~</o>
+	 
+			<o>!=~</o>
+	 
+			<o>%~</o>
+	 
+			<o>*~</o>
+	 
+			<o>+~</o>
+	 
+			<o>-~</o>
+	 
+			<o>/~</o>
+	 
+			<o>&lt;=~</o>
+	 
+			<o>&lt;~</o>
+	 
+			<o>==~</o>
+	 
+			<o>&gt;=~</o>
+	 
+			<o>&gt;~</o>
+	 
+			<o>abs~</o>
+	 
+			<o>acosh~</o>
+	 
+			<o>acos~</o>
+	 
+			<o>asinh~</o>
+	 
+			<o>asin~</o>
+	 
+			<o>atan2~</o>
+	 
+			<o>atanh~</o>
+	 
+			<o>atan~</o>
+	 
+			<o>atodb~</o>
+	 
+			<o>average~</o>
+	 
+			<o>avg~</o>
+	 
+			<o>bitand~</o>
+	 
+			<o>bitnot~</o>
+	 
+			<o>bitor~</o>
+	 
+			<o>bitshift~</o>
+	 
+			<o>bitxor~</o>
+	 
+			<o>cosh~</o>
+	 
+			<o>cosx~</o>
+	 
+			<o>cos~</o>
+	 
+			<o>dbtoa~</o>
+	 
+			<o>ftom~</o>
+	 
+			<o>log~</o>
+	 
+			<o>mtof~</o>
+	 
+			<o>pow~</o>
+	 
+			<o>sinh~</o>
+	 
+			<o>sinx~</o>
+	 
+			<o>sqrt~</o>
+	 
+			<o>tanh~</o>
+	 
+			<o>tanx~</o>
+	 
+			<a name="Plug-ins"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Plug-ins
+	</header2>
+			<o>hostcontrol~</o>
+	 
+			<o>hostphasor~</o>
+	 
+			<o>hostsync~</o>
+	 
+			<o>plugin~</o>
+	 
+			<o>plugout~</o>
+	 
+			<o>plugphasor~</o>
+	 
+			<o>plugreceive~</o>
+	 
+			<o>plugsend~</o>
+	 
+			<o>plugsync~</o>
+	 
+			<o>vst~</o>
+	 
+			<a name="Polyphony"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Polyphony
+	</header2>
+			<o>in</o>
+	 
+			<o>in~</o>
+	 
+			<o>out</o>
+	 
+			<o>out~</o>
+	 
+			<o>poly~</o>
+	 
+			<o>thispoly~</o>
+	 
+			<a name="Routing"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Routing
+	</header2>
+			<o>begin~</o>
+	 
+			<o>gate~</o>
+	 
+			<o>matrix~</o>
+	 
+			<o>receive~</o>
+	 
+			<o>selector~</o>
+	 
+			<o>send~</o>
+	 
+			<a name="Sampling"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Sampling
+	</header2>
+			<o>2d.wave~</o>
+	 
+			<o>buffer~</o>
+	 
+			<o>chucker~</o>
+	 
+			<o>groove~</o>
+	 
+			<o>index~</o>
+	 
+			<o>info~</o>
+	 
+			<o>lookup~</o>
+	 
+			<o>peek~</o>
+	 
+			<o>play~</o>
+	 
+			<o>poke~</o>
+	 
+			<o>polybuffer~</o>
+	 
+			<o>record~</o>
+	 
+			<o>stutter~</o>
+	 
+			<o>wave~</o>
+	 
+			<a name="Synthesis"/>
+<bodytext>
+</bodytext>
+	<header2>
+	Synthesis
+	</header2>
+			<o>click~</o>
+	 
+			<o>cos~</o>
+	 
+			<o>cycle~</o>
+	 
+			<o>ioscbank~</o>
+	 
+			<o>kink~</o>
+	 
+			<o>noise~</o>
+	 
+			<o>oscbank~</o>
+	 
+			<o>phasor~</o>
+	 
+			<o>pink~</o>
+	 
+			<o>rect~</o>
+	 
+			<o>saw~</o>
+	 
+			<o>train~</o>
+	 
+			<o>tri~</o>
+	 
+			<a name="System"/>
+<bodytext>
+</bodytext>
+	<header2>
+	System
+	</header2>
+			<o>adstatus</o>
+	 
+			<o>dspstate~</o>
+	 
+			<o>dsptime~</o>
+	 
+			<o>hostcontrol~</o>
+	 
+			<o>hostphasor~</o>
+	 
+			<o>hostsync~</o>
+	 
+			<o>mstosamps~</o>
+	 
+			<o>mute~</o>
+	 
+			<o>pass~</o>
+	 
+			<o>sampstoms~</o>
+	 
+			<a name="User Interface"/>
+<bodytext>
+</bodytext>
+	<header2>
+	User Interface
+	</header2>
+			<o>ezadc~</o>
+	 
+			<o>ezdac~</o>
+	 
+			<o>filtergraph~</o>
+	 
+			<o>function</o>
+	 
+			<o>gain~</o>
+	 
+			<o>levelmeter~</o>
+	 
+			<o>meter~</o>
+	 
+			<o>number~</o>
+	 
+			<o>plot~</o>
+	 
+			<o>scope~</o>
+	 
+			<o>spectroscope~</o>
+	 
+			<o>waveform~</o>
+	 
+			<o>zplane~</o>
+</vignette>

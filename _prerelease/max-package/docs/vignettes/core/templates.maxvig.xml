@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Templates">
+	<header1>
+	Templates
+	</header1>
+		<bodytext>
+			You can create and use templates in Max. A template is a Max patcher document that includes a patch intended
+			to get you started with certain types of applications you use often. Templates are generally larger and more
+			complex than a
+			<link type="vignette" module="core" name="clippings">clipping</link>,
+			and they open in their own untitled Patcher Window of a preconfigured size
+			rather than being pasted into an unlocked patcher window as a clipping is.
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Using a template
+	</header2>
+		<ul>
+		<li>
+			Choose <b>File &gt; New &gt;</b> from the edit menu. After the Patcher, Table and Text choices, a list of any
+			templates you may have appears on the New menu. Choose a template from the list and it will open in a new
+			untitled Patcher window
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/templates1.png"  />
+		</bodytext>
+	</bluebox>
+		<br /><space/>
+	<bluebox>
+	<header2>
+	Creating a template
+	</header2>
+		<ul>
+		<li>
+			Save the patcher file you want to use as a template to the templates folder inside the <i>patches</i> folder inside
+			the Max application folder. When you restart Max, patcher file you named and saved will appear in the menu listing
+		</li>
+		</ul>
+	</bluebox>
+</vignette>
+			

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Controlling Jitter with Messages">
+	<header1>
+	Controlling Jitter with Messages
+	</header1>
+		<bodytext>
+			As is the case with Max, you can control Jitter using the <link type="refpage" name="message">message box</link> 
+			object. Normally, the <link type="refpage" name="message">message box</link> contains an 
+			object, and you click on it or replace a variable typed into the 
+			<link type="refpage" name="message">message box</link> to send a message down a patch cord to another
+			Max object. However, if the message in a message box begins with a semicolon (;)
+			followed by the word jitter, any message which follows will be sent directly
+			to the Max application itself, just as though there were a <o>receive</o> object named "jitter".
+		</bodytext>
+		<bodytext>
+			Another way this may be accomplished is to send messages via the <o>forward</o> object. 
+			The forward object works similar to the send object, but is not restricted to sending to 
+			named instances of the <o>receive</o> object. 
+		</bodytext>
+		<bodytext>
+			These messages may be also included in a file named "jitter-config.txt", located anywhere 
+			in the search path and they will be executed when Jitter loads. This is particularly 
+			useful for the <m>nosplash</m> or <m>javaload</m> messages.
+		</bodytext>
+	<br /><space />
+	<bluebox>
+		<header2>
+			Sending a message to Jitter
+		</header2>
+			<ul>
+			<li>
+			Add a <o>message</o> box to your Patcher, and type in a semicolon and the
+			word jitter (<m>; jitter</m>), 
+			followed by the message you want to send. Your message box can 
+			contain variables (e.g. <m>: jitter menubar $1</m>).
+			</li>
+			</ul>
+		<bodytext>
+			When you click on the <o>message</o> box or send it a <m>bang</m> or a value, 
+			the message will be sent to the Max application.
+		</bodytext>
+	</bluebox>
+	<br /><space />
+		<bodytext>
+			Here is listing of the messages you can send using this technique:
+		</bodytext>
+		<header2>
+			about
+		</header2>
+		<bodytext>
+		Launches the Jitter about box.
+		</bodytext>
+		<header2>
+			cursor
+		</header2>
+		<bodytext>
+			(Macintosh only) The word <m>cursor</m>, followed by a zero or one, toggles 
+			cursor visibility on/off.
+		</bodytext>
+		<header2>
+			glattribpush
+		</header2>
+		<bodytext>
+			The word <m>glattribpush</m>, followed by a zero or one, toggles 
+			safety measure used to isolate individual OpenGL objects from adversely affecting one 
+			another's OpenGL state machine. By default, this is off (as of Jitter 1.5 and later), 
+			but it may be useful to turn on if experiencing problems which seem like OpenGL state 
+			from one object is affecting another object.
+		</bodytext>
+		<header2>
+			glerrorcheck
+		</header2>
+		<bodytext>
+			The word <m>glerrorcheck</m>, followed by a zero or one, toggles 
+			opengl error testing/reporting on/off. By default this is on, but turning it off 
+			can give minor performance boost.
+		</bodytext>
+		<header2>
+			html_ref
+		</header2>
+		<bodytext>
+			The word <m>html_ref</m>, followed by a symbol that specifies the name of a Jitter object,
+			launches the reference file for the object. (must be in Max's search path).
+		</bodytext>
+		<header2>
+			javaload
+		</header2>
+		<bodytext>
+			The word <m>javaload</m>, followed by a zero or one, toggles Jitter Java support on/off.
+		</bodytext>
+		<header2>
+			launch_browser
+		</header2>
+		<bodytext>
+			The word <m>launch_browser</m>, followed by a URL as a symbol, Launches the specified URL 
+			in the default system web browser.
+		</bodytext>
+		<header2>
+			menubar
+		</header2>
+		<bodytext>
+			(Macintosh only) The word <m>menubar</m>, followed by a zero or one, toggles 
+			menubar visibility on/off. Similar to Max's <m>showmenubar</m>, and <m>hidemenubar</m> messages. 
+			When using in conjunction with the <o>jit.window</o> object's fullscreen attribute, it 
+			is recommended that the <o>jit.window</o> object's <i>fsmenubar</i> attribute is used instead of 
+			Jitter's <m>menubar</m> message, in order to prevent possible "pixel trash".
+		</bodytext>
+		<header2>
+			nosplash
+		</header2>
+		<bodytext>
+			The word <m>nosplash</m>, followed by a one, disables the Jitter splash screen. 
+			Only useful if contained in a jitter-config.txt file.
+		</bodytext>
+		<header2>
+			parallel
+		</header2>
+		<bodytext>
+			The word <m>parallel</m>, followed by a zero or one, toggles parallel processor support. 
+			The default is on if machine has multiple processors (or cores), and otherwise off.
+		</bodytext>
+		<header2>
+			parallelthreads
+		</header2>
+		<bodytext>
+			The word <m>parallelthreads</m>, followed by an integer, specifies the number of 
+			threads used for parallel processor support. Default is the number of processors (or cores).
+		</bodytext>
+		<header2>
+			parallelthresh
+		</header2>
+		<bodytext>
+			The word <m>parallelthresh</m>, followed by an integer, specifies matrix cellcount 
+			above which parallel processors are used. Default is 10000 cells.
+		</bodytext>
+		<header2>
+			pollthrottle
+		</header2>
+		<bodytext>
+			The word <m>pollthrottle</m>, followed by an integer,  sets the number of 
+			scheduler events to process per scheduler tick. Equivalent to Max's 
+			<m>setpollthrottle</m> message.
+		</bodytext>
+		<header2>
+			postversion
+		</header2>
+		<bodytext>
+		Posts the Jitter version string in Max Window.
+		</bodytext>
+		<header2>
+			queuethrottle
+		</header2>
+		<bodytext>
+			The word <m>queuethrottle</m>, followed by an integer, sets the number 
+			of low priority queue events to process per low priority queue service. 
+			Equivalent to Max's <m>setqueuethrottle</m> message.
+		</bodytext>
+		<header2>
+			spigot_cache
+		</header2>
+		<bodytext>
+			Set the cache location. Cached audio will be saved:<br />
+			0 = next to the original movie<br />
+			1 = in the user-domain common folder (default)<br />
+			2 = in the system-domain common folder<br />
+			3 = in the user's temporary items folder<br />
+			(symbol) = in the folder specified by the symbol<br />
+			<br />
+			<br />
+			On Macintosh, the user-domain common folder is "~/Library/Application Support/Cycling '74/spigot-cache/". 
+			<br />
+			On Windows, this folder is
+			"C:\Documents and Settings\(username)\Local Settings\Application Data\Cycling '74\spigot-cache\"
+		</bodytext>
+		<bodytext>
+			On Macintosh and Windows, the system-domain common folder is "(Cycling '74 support folder)/spigot-cache/".
+		</bodytext>
+		<bodytext>
+			The temporary items folder is typically invisible and inaccessible to normal users on both systems. 
+		</bodytext>
+		<header2>
+			spigot_cachesize
+		</header2>
+		<bodytext>
+			Set the maximum size of the audio cache in megabytes. A cache size 
+			less than 0 indicates that the cache should have no maximum size (the default).
+		</bodytext>
+		<header2>
+			spigot_getcache
+		</header2>	
+		<bodytext>
+			Gets the cache location. The cache location is sent to any receive object with the same name as 
+			the <sig>receiver</sig> argument, and is reported as a fully-qualified path.
+		</bodytext>
+		<header2>
+			spigot_getcachesize
+		</header2>
+		<bodytext>
+			Gets the cache site. The cache size is sent to any receive object with the same name as 
+			the <sig>receiver</sig> argument.
+		</bodytext>
+		<header2>
+			spigot_locatecache
+		</header2>
+		<bodytext>
+			Opens the cache location in your Operating System's file browser.
+		</bodytext>		
+		<header2>
+			spigot_purgecache
+		</header2>
+		<bodytext>
+			Deletes the contents of the cache, to the limit specified by <m>spigot_cachesize</m>. 
+			This method is called automatically every time jit.qt.movie opens a cached audio file, 
+			or every time the cache size is set with the <m>spigot_cachesize</m> method.
+		</bodytext>	
+</vignette>

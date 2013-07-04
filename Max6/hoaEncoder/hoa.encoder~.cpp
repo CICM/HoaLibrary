@@ -82,10 +82,12 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
-
-    post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
     
+    if (!postons) {
+        post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+        post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
+        postons = 1;
+    }
 	return 0;
 }
 

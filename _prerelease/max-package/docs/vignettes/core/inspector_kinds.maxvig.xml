@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Object Inspectors and Settings Editors">
+	<header1>
+	Object Inspectors and Settings Editors
+	</header1>
+	<bodytext>
+	You'll see two types of inspector windows in Max.
+</bodytext>
+	<ul>
+		<li>The <i>object Inspector</i> is used to edit the attributes of objects that live in patchers. It has colored rows and tabs.</li>
+		<li><i>Settings editors</i> include the <link module="core" name="preferences_window" type="vignette">Preferences Window</link> and <link module="core" name="patcher_inspector" type="vignette">patcher inspector</link>. These windows have less colorful striped rows and gray tabs.</li>
+	</ul>
+	<bodytext>
+	The two types of inspectors work similarly. You <link module="core" name="attributes_inspecting" type="vignette">edit settings and attributes</link> in the same way. But one important difference is that the object inspector window content updates to reflect the current selection of a patcher window. This allows you to leave the object inspector window open while working in a patcher. The content of a settings editor is not affected by a change in what is selected.
+</bodytext>
+</vignette>

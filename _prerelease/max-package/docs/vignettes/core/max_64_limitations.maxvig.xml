@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="64-bit Issues and Limitations">
+	<header1>
+	64-bit Issues and Limitations in Max 6.1
+	</header1>
+	<bodytext>
+			The 64-bit implementation of Max is an exciting development for people creating 
+			patches with large memory requirements, but it comes with some limitations. These 
+			limits are based on underlying technologies that have either changed or are no 
+			longer available. We are actively working to resolve these issues, and future 
+			updates will improve the functionality of the 64-bit versions.
+	</bodytext>
+	<br/>
+	<header2>
+			QuickTime
+	</header2>
+	<bodytext>
+			The primary change is Max’s use of QuickTime as a media layer for graphic and audio 
+			content: QuickTime is unavailable under 64-bit Windows, and has reduced functionality 
+			in 64-bit MacOS. Therefore, objects and functions that were based on QuickTime 
+			capabilities have to be rewritten to use other technologies. In the short term, 
+			this means that the following objects are not supported in our 64-bit versions:
+			<ul>
+				<li>jit.avc</li>
+				<li>jit.broadcast</li>
+				<li>jit.desktop</li>
+				<li>jit.displays</li>
+				<li>jit.gl.text2d</li>
+				<li>jit.lcd</li>
+				<li>jit.qt.broadcast</li>
+				<li>jit.qt.effect</li>
+				<li>jit.videoout</li>
+				<li>jit.vcr</li>
+				<li>jit.qt.record</li>
+				<li>spigot~	</li>
+			</ul>
+			In some cases, QuickTime was used was for media format conversion. As a result, only 
+			JPG and PNG files can be used under 64-bit Windows for any Max object that includes 
+			external graphics (such as pictctrl, pictslider and matrixctrl). Any PICT, GIF or 
+			other file types must be converted to JPG or PNG formats to maintain cross-platform 
+			compatibility.<br/>
+			This media conversion issue also affects file reads into the buffer~ object. All 
+			versions support reading/importing WAVE, AIFF and FLAC files. MacOS (32- and 64-bit) 
+			can read formats supported by Apple’s Audio Toolbox system (which includes MP3, AAC, 
+			SD2 and other file types). 32-bit Windows can support QuickTime movie-based audio 
+			(including MP3). But for maximum cross-platform compatibility, WAVE, AIFF and FLAC 
+			are the recommended formats.<br/>
+			Finally, the following objects will have limited functionality due to changes in the 
+			media layer:
+			<ul>
+				<li>jit.qt.movie</li>
+				<li>jit.grab</li>
+				<li>jit.qt.grab</li>
+			</ul>
+	</bodytext>
+	<header2>
+		Other Limitations
+	</header2>
+	<bodytext>
+			64-bit Windows no longer supports the “Microsoft Synthesizer” as a MIDI destination. 
+			The “Microsoft GS Wavetable Synth” should be used in its place.
+	</bodytext>
+	<header2>
+		Using the 64-bit Version
+	</header2>
+	<bodytext>
+			Windows 32- and 64-bit versions of Max are contained in separate installers. Externals 
+			for these versions have different extensions: .mxe for 32-bit and .mxe64 for 64-bit.<br/>
+			The MacOS installer is provided as a FAT bundle, and contains both 32- and 64-bit 
+			versions. When installed, the application defaults to 32-bit mode. To change this, 
+			select the application in the Finder and choose the “Get Info” menu option, then turn 
+			off the “Open in 32-bit mode” setting in the General tab.<br/>
+			Externals under MacOS are also FAT bundles, and contain both 32- and 64-bit versions 
+			of the underlying code.<br/>
+			3rd party external use is limited to the 32-bit version until the externals are converted 
+			into 64-bit equivalents by the developer. 32-bit externals cannot be used by the 64-bit 
+			version of the Max application.<br/>
+	</bodytext>
+</vignette>

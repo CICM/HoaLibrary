@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Creating Subpatchers">
+	<header1>
+	Creating Subpatchers
+	</header1>
+<bodytext>
+	A <link type="vignette" module="core" name="subpatchers">subpatcher</link> is a good way to organize your work. It can  hide messy details from the top level of your patcher or clarify the function of a group of objects.
+</bodytext>
+	<bluebox>
+	<header2>
+	Creating a subpatcher
+	</header2>
+		<ul>
+		<li>
+			In an unlocked patcher window, type <m>n</m> to create a blank object box.
+		</li>
+		<li>
+			Type a <m>p</m> followed by a space, and the name you want to give your subpatcher.
+		</li>
+		<li>
+			Click anywhere outside the object box in the Patcher window. A new patcher window
+			will open. Since you gave your subpatcher a name by typing an argument into the
+			object box, the name you typed will be shown at the top of the subpatcher window.
+		</li>
+		</ul>
+	</bluebox>
+	<br />
+	<bodytext>
+	 When you save your main patch, the subpatcher is saved as part
+	of the same document. If the subpatcher window is open when the document is
+	saved, it will also be open the next time you open the main patch.
+</bodytext>
+</vignette>

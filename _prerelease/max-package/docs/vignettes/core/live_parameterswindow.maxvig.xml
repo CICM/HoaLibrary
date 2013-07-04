@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Parameters Window">
+	<header1>
+		The Parameters Window
+	</header1>
+	<bodytext>
+		The <i>Parameters Window</i> provides an 
+		overview of all the <link module="core" name="live_parameters" type="vignette">parameters</link> currently associated with a Max 
+		for Live device, whether they are built into the UI objects or 
+		defined via <o>pattr</o> objects.
+	</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+Displaying the Parameters Window
+</header2>
+		<ul>
+			<li>
+		Choose <b>Parameters</b> from the View menu when a device patcher window is the frontmost window. The Parameters window will appear.
+	</li>
+		</ul>
+		<bodytext>
+			<img src="images/parameters_window1.png"/>
+		</bodytext>
+	</bluebox>
+	<ul>
+		<li>
+		The <b>#</b> column displays the setting for the <m>Order</m> attribute,
+		which can be used to set the order in which parameters
+		are recalled when a device is loaded. By default, all attributes are recalled
+		sequentially/at one time. By setting an attribute to have a lower order number,
+		you can recall parameter values in complex patches whose initial values may
+		need to be calculated based on initial or preset values so that the dependencies
+		are preserved.
+	</li>
+		<li>
+		The <b>L</b> column displays the setting for the <m>Link to Scripting Name</m> attribute, which
+		can be used to link the Scripting Name used with the <o>pattr</o> family of objects and
+		patcher scripting to the <m>Long Name</m> and <m>Short Name</m> attributes. If the attribute
+		names are linked, the box is checked and the name of the parameter is shown in a different 
+		color text.
+	</li>
+	</ul>
+	<bodytext>
+		<img src="images/parameters_window2.png"/>
+	</bodytext>
+	<ul>
+		<li>
+		The <b>Name</b> column displays either the <m>Scripting Name</m> attribute or the 
+		<m>Long Name</m> attribute, depending on whether or not they are linked.
+		The <m>Long Name</m> attribute sets the name that appears in Live's automation view.
+	</li>
+		<li>
+		The <b>Short Name</b> column displays either the <m>Scripting Name</m> attribute or the 
+		<m>Short Name</m> attribute, depending on whether or not they are linked.
+		The <m>Short Name</m> attribute sets the name that appears as a part of the UI object's display.
+	</li>
+		<li>
+		The <b>Type</b> column displays the <m>Type</m> attribute used to set the type of data associated with
+		the object. The choices are:
+		<br/>
+		<br/>
+		Float: floating point number
+		<br/>
+		Int: integer in the range 0-255
+		<br/>
+		Enum: enumerated list (used for objects such as <o>multislider</o> and <o>umenu</o> objects)
+		<br/>
+	</li>
+		<li>
+		The <b>Range</b> column displays the <m>Range/Enum</m> attribute that sets 
+		either a minimum/maximum or a list of possible values associated with the object's output.
+	</li>
+		<li>
+		The <b>Mod Mode</b> column displays the <m>Modulation Mode</m> attribute that sets the type of 
+		parameter modulation applied to the parameter. 
+		The modulation modes are described
+		<link anchor="parametermodulation" module="core" name="live_parameters" type="vignette">here</link>.
+	</li>
+		<li>
+		The <b>Mod range</b> column displays the <m>Modulation Range</m> attribute that sets the low 
+		and high range values within which a parameter is modulated. Some
+		modulation modes 
+		use these parameter ranges for truncating modulation data.
+	</li>
+		<li>
+		The <b>I</b> column displays the <m>Initial Enable</m> attribute checkbox that enables or 
+		disables setting an initial value as a part of a UI object's state.
+	</li>
+		<li>
+		The <b>Initial Value</b> column displays the initial value of the parameter if the 
+		<m>Initial Enable</m> attribute is checked.
+	</li>
+		<a name="unitstyles"/>
+		<li>
+		The <b>Unit Style</b> column displays the <m>Unit Style</m> attribute used when adding 
+		labels to UI object displays. The unit style type for display can be set using the
+		object's 
+		<link module="core" name="inspector" type="vignette">Inspector</link> .
+		The choices are:
+		<br/>
+		<br/>
+		Int: integer
+		<br/>
+		Float: floating point
+		<br/>
+		Time: output values will have a ms (milliseconds) label. Larger values automatically display seconds and milliseconds.
+		<br/>
+		Hertz: output values are labeled in Hz (Hertz). Larger values automatically display in kHz.
+		<br/>
+		deciBel: output values are labeled in dB
+		<br/>
+		%: output values are displayed as an integer percentage value
+		<br/>
+		Pan: output values are labeled as Left/Right pan integer values based on the range set for the object.
+		When a range value between negative and positive integer values (e.g. -100. 100.), negative values will
+		be labeled as left or right channel settings (-100L, 100R).
+		If the range settings are have an upper range value of 0, the value will be reported as <m><i>value</i>L</m>.
+		only Left channel values will be displayed.
+		If the range settings are have an lower range value of 0, the value will be reported as <m><i>value</i>R</m>.
+		<br/>
+		Semitones: displays values as negative/positive integer semitones for tuning displays
+		<br/>
+		MIDI: displays integer values in the range 0 - 127 as MIDI note numbers (e.g. C#-2).
+		<br/>
+		Custom: the label is user-definable, and is settable
+		<link anchor="customunitstyles" module="core" name="live_parameters" type="vignette">using the UI object's Inspector</link> .
+		<br/>
+		Native: displays the native unit style
+	</li>
+		<li>
+		The <b>Exponent</b> column displays the exponential value used when calculating the object's output.
+	</li>
+		<li>
+		The <b>Steps</b> column displays the the precision of the object's output when clicking and dragging. (The computer's keyboard can be used to enter any value.)
+	</li>
+		<li>
+		The <b>Value</b> column displays the current value.
+	</li>
+	</ul>
+	<br/>
+	<bluebox>
+		<header2>
+Locating a Parameter Object
+</header2>
+		<ul>
+			<li>
+		Click on the blue info icon in the left column for the parameter you
+		want to locate and choose <b>Reveal in Patcher</b> from the
+		pop-up menu. The object associated with the parameter will be highlighted.
+	</li>
+		</ul>
+		<bodytext>
+			<img src="images/parameters_window3.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<bluebox>
+		<header2>
+Setting Parameter Object Values
+</header2>
+		<ul>
+			<li>
+		Double-click in the Value column for a parameter setting to show a 
+		cursor and text box. Type in a new value or symbol for the initialization 
+		value, followed by a carriage return.
+		<br/>
+		You can also adjust the user interface object manually, 
+		click on the blue info icon in the left column for the 
+		parameter you want to set a value for and choose
+		<b>Update Initial Value</b>.
+	</li>
+			<li>
+		Click on the blue info icon in the left column for the parameter you
+		want to set a value for and choose <b>Set to Initial Value</b> from the
+		pop-up menu. The UI object will change to reflect the new initial
+		value.
+	</li>
+		</ul>
+		<bodytext>
+			<img src="images/parameters_window4.png"/>
+		</bodytext>
+		<ul>
+			<li>
+		Choose <b>Save</b> from the File menu to save the new initialization settings.
+	</li>
+		</ul>
+	</bluebox>
+</vignette>

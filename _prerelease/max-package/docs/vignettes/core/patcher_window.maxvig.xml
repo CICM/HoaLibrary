@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Patcher Window">
+	<header1>
+	The Patcher Window
+	</header1>
+<ul>
+	<li><link type="vignette" module="core" name="patcher_creating">Creating new patchers</link></li>
+	<li><link type="vignette" module="core" name="patcher_toolbar">The patcher window toolbar</link></li>
+	<li><link type="vignette" module="core" name="patcher_editing">Editing text in a patcher</link></li>
+	<li><link type="vignette" module="core" name="presentation_mode">Using presentation mode</link></li>
+	<li><link type="vignette" module="core" name="patcher_views">Multiple views of a patcher</link></li>
+	<li><link type="vignette" module="core" name="patcher_window_navigation">Navigating in a patcher window</link></li>
+	<li><link type="vignette" module="core" name="find">Finding objects in a patcher</link></li>
+	<li><link type="vignette" module="core" name="assistance">Assistance</link></li>
+	<li><link type="vignette" module="core" name="patcher_inspector">Using the patcher inspector</link></li>
+</ul>
+</vignette>

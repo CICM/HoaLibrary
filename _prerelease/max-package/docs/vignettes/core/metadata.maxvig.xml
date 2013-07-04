@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+			
+<vignette name="Metadata">
+	<header1>
+	Metadata
+	</header1>
+			
+		<bodytext>
+			Max lets you add metadata to the various kinds of
+			files in your Max 
+			<link type="vignette" module="core" name="file_preferences_window" anchor="searchpath">search path</link>. 
+			Metadata consists of information about a file you can attach to the file itself, but which isn't
+			actually part of the file's content.
+			The most common type of metadata you will see or work with is called a 'tag'.
+		</bodytext>		
+		<bodytext>
+			Once you've added a tag to a file in Max, you can use the
+			<link type="vignette" module="core" name="file_browser">File Browser</link>
+			to search for all files in your search path that are tagged in a certain way.
+		</bodytext>
+			
+		<bodytext>
+			There are several reasons you might want to add metadata to your files
+		</bodytext>
+			
+		<ul>
+		<li>
+			You can tag files - Max
+			patcher files, audiofiles, movies, text files - to indicate
+			that you use them for a specific project.
+		</li>
+		<li>
+			You can tag media files with information about their length,
+			content, or information about what's in the file (pitch,
+			time, descriptions, etc.).
+		</li>
+		<li>
+			You can tag groups of Max objects to identify them as
+			having a specific purpose.
+		</li>
+		<li>
+			You can tag can add 'author' metadata to tutorials or other kinds of documents or
+			Max objects to identify their author.
+		</li>
+		</ul>
+		<bodytext>
+			The File Browser Preview displays a file's tags as well as author metadata.
+			You can also use the File Browser to perform searches based on this metadata.
+		</bodytext>
+		<bodytext>
+			By default, the
+			File Browser is set to display information about a file
+			you select in its Preview pane, located in the lower part
+			of the browser window. Depending on how your preferences are
+			set for Max, you may need to
+			<link type="vignette" module="core" name="preferences_window" anchor="previewpane">enable viewing the Preview pane on startup</link>.
+		</bodytext>
+			
+	<bluebox>
+	<header2>
+	Viewing metadata file tags
+	</header2>
+		<ul>
+		<li>
+			In the File Browser window, click on the name of a file. The
+			Author metadata and any tags will be shown in the File Preview area.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/metadata1.png"  />
+		</bodytext>
+	</bluebox>
+		<br />
+	<bluebox>
+	<header2>
+	Adding metadata tags to a file
+	</header2>
+		<ul>
+		<li>
+			In the File Browser window, click on the name of the file you
+			want to add metadata tags to. The Edit Metadata button in the
+			File Browser toolbar will be enabled.
+		</li>
+		<li>
+			Click on the Edit Metadata button to show the Metadata Editor window.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/metadata2.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Click on the Add Tag icon. A new line will appear in the Metadata window.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/metadata3.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Double-click in the Value column to get a text box and
+			a cursor. Type in the value for the tag, followed by a carriage return.
+		</li>
+		</ul>
+		<bodytext>
+			Note: a tag or author must be a single symbol (e.g. d-minor).
+		</bodytext>
+		<bodytext>
+			The tag will be added. and you will see the tag listed in the Preview pane.
+		</bodytext>
+	</bluebox>
+		<br />
+	<bluebox>
+	<header2>
+	Removing a tag from a file
+	</header2>
+		<ul>
+		<li>
+			In the File Browser window, click on the name of the file you
+			want to remove a tag from. The Edit Metadata button in the
+			File Browser toolbar will be enabled.
+		</li>
+		<li>
+			Click on the Edit Metadata button to show the Metadata window.
+		</li>
+		<li>
+			Click on the line of metadata you want to remove. The Remove Tag button in the
+			Metadata window will be enabled.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/metadata4.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Click on the Remove Metadata button. The tag will be removed from the file
+			and the tag listing in the Preview pane will be updated.
+		</li>
+		</ul>
+	</bluebox>
+		<br />
+	<bluebox>
+	<header2>
+	Doing a file search using metadata
+	</header2>
+		<ul>
+		<li>
+			In the File Browser, click on the + button to the right of the main Search entry
+			The search bar will expand to include a qualified search term.
+		</li>
+		<li>
+			Click on the Name button and choose <b>Tag</b> from the pop-up menu.
+		</li>
+		<li>
+			Click on the Begins With button and choose <b>Contains</b> from the pop-up menu.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/metadata5.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Click in the search entry and type in the tag you want to search for.
+		</li>
+		</ul>
+		<bodytext>
+			The File Browser will search for any files that have the specified tag,
+			and display the results.
+		</bodytext>
+	</bluebox>
+</vignette>

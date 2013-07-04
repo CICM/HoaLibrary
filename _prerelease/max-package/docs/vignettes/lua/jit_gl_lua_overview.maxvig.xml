@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="jit.gl.lua Overview" order="1">
+
+<header1>jit.gl.lua</header1>
+<bodytext>
+<o>jit.gl.lua</o> embeds the <a href="http://www.lua.org/">Lua</a> scripting language inside a Jitter OpenGL object.  <o>jit.gl.lua</o> serves as both a general purpose Lua scripting object and a 3D graphics scripting object.  It is very similar to the <o>js</o> object for JavaScript with the addition that OpenGL commands can be used directly.  <a href="http://www.opengl.org/">OpenGL</a> is what Jitter uses for 3D graphics rendering.  Normally, access to the 3D drawing functionality is wrapped in higher level jit.gl objects (e.g. jit.gl.gridshape).  jit.gl.lua however exposes OpenGL directly in its scripting environment for more precise, dynamic control over OpenGL's 3D drawing commands.
+</bodytext>
+<bodytext>
+The Lua scripting environment inside jit.gl.lua interacts with Max and Jitter in two ways: through patcher messages and through commands from Jitter's OpenGL rendering system.  If you have done Lua scripting in other contexts, that knowledge is directly applicable to working with <o>jit.gl.lua</o>.  <o>jit.gl.lua</o> simply adds extra functionality to the standard Lua environment, and this is what is covered in this documentation.  For more information on Lua, visit the Lua homepage.  For documentation on the OpenGL commands, what they do, and how to use them, please visit the OpenGL website.  Of particular note are the OpenGL man pages, which are available for each command.  They explain what type of arguments a command requires, what it does, and any possible errors that may arise from improper use.
+</bodytext>
+
+
+<header1>The 'this' Variable</header1>
+<bodytext>
+In <o>jit.gl.lua</o>, there is a special variable called <m>this</m>.  <m>this</m> represents the <o>jit.gl.lua</o> object the Lua script is running inside.  Whenever you need to modify or query the properties of embedding <o>jit.gl.lua</o> object, use the <m>this</m> variable.  A common idiom when scripting with <o>jit.gl.lua</o> is to use the drawto attribute of <o>jit.gl.lua</o> when creating other jit.gl objects.  All jit.gl objects must belong to a rendering context in order to be used.  In Jitter, rendering contexts are given names, so jit.gl objects join a rendering context using the context's name.  This attribute is called <m>drawto</m>.
+</bodytext>
+<bodytext>
+	<img src="images/this.drawto.png"/>
+</bodytext>
+<bodytext>
+When other jit.gl objects are created in a script, they too have to belong to a context, so we typically attach them to the same context as the <o>jit.gl.lua</o> object, which can be accessed by referring to <m>this.drawto</m>.
+</bodytext>
+
+
+<header1>Messages and Functions</header1>
+<bodytext>
+Global functions in jit.gl.lua can be called by sending messages to the jit.gl.lua object.  If a script contains the code
+</bodytext>
+<code><span style="color:#be230d;">function</span> apply()
+	print(<span style="color:#9a32d2">"the apply() function was called"</span>)
+<span style="color:#be230d;">end</span>
+</code>
+<bodytext>
+	<img src="images/apply.png"/>
+</bodytext>
+<bodytext>
+sending the message apply to a jit.gl.lua object will call the function above. 
+</bodytext>
+<bodytext>
+If the message is followed by any extra strings or numbers, these will be passed as arguments to the function.  While a function can have any name and be called by a message, there are a few function names that have special significance.  There are two groups of these functions: one for handling patcher input and another for Jitter OpenGL messages.  
+
+<header2>Patcher Interaction Functions</header2>
+The patcher handling, the functions are <m>float</m>, <m>int</m>, <m>list</m>, <m>loadbang</m>, <m>closebang</m>, and <m>scriptload</m>.
+</bodytext>
+<code><span style="color:#be230d;">function</span> float(v)
+   print(<span style="color:#9a32d2">"float"</span>, v, <span style="color:#9a32d2">"inlet"</span>, this.last_inlet)
+<span style="color:#be230d;">end</span>
+
+<span style="color:#be230d;">function</span> int(v)
+   print(<span style="color:#9a32d2">"int"</span>, v, <span style="color:#9a32d2">"inlet"</span>, this.last_inlet)
+<span style="color:#be230d;">end</span>
+
+<span style="color:#be230d;">function</span> list(...)
+   <span style="color:#be230d;">local</span> values = {...}
+   print(<span style="color:#9a32d2">"list"</span>, table.concat(values, <span style="color:#9a32d2">", "</span>), <span style="color:#9a32d2">"inlet"</span>, this.last_inlet)
+<span style="color:#be230d;">end</span>
+</code>
+<bodytext>
+When a number is sent to a <o>jit.gl.lua</o> inlet, the <m>float</m> messages is called and passed the value.  When an integer is sent, the <m>int</m> message is called.  Similarly, a list of values triggers the <m>list</m> function with the elements of the list set as arguments to the function.  The list can be captured into a table by using the Lua idiom 
+</bodytext>
+<code><span style="color:#0c7f3d;">-- variable arguments captured into a table</span>
+<span style="color:#be230d;">local</span> thelist = {...}
+</code>
+<bodytext>
+When the patcher is loaded, the <m>loadbang</m> function is called, and when it is closed, the <m>closebang</m> function is called.  <m>loadbang</m> will only be called when the patcher containing the <o>jit.gl.lua</o> object is called.  This happens once during the patcher lifetime, so if a script is reloaded, <m>loadbang</m> will not be called again.  To perform any setup each time a script is loaded, use the <m>scriptload</m> function.
+</bodytext>
+
+<header2>OpenGL Callback Functions</header2>
+<bodytext>
+The Opengl methods are <m>draw</m>, <m>dest_changed</m>, <m>dest_closing</m>.  They are called in response to events in the Jitter OpenGL rendering system.  The OpenGL callback functions are used to manage OpenGL resources and draw to the rendering destination.  It is important to remember that OpenGL commands can <i>only</i> be used inside the three OpenGL callback functions.
+<bodytext>
+</bodytext>
+Whenever a <o>jit.gl.lua object</o> is asked to draw itself by the <o>jit.gl.render</o> object, it calls the <m>draw</m> function.  When the <m>draw</m> function is called OpenGL commands can be used to draw to the rendering destination.  Any OpenGL related attributes set on the <o>jit.gl.lua object</o> objet such as <m>blend</m>  will be applied before the draw function is called, so they can be used initialize the drawing state before any OpenGL commands are called in the draw function. 
+</bodytext>
+<bodytext>
+The <m>dest_changed</m> and <m>dest_closing</m> functions on the other hand are used to manage OpenGL resources.  <m>dest_changed</m> is called when the OpenGL context is created and the first frame is about to be rendered.  <m>dest_closing</m> is called when the context is about to be destroyed.  When both functions are called, the OpenGL context is active so any OpenGL command can be used.  Typically the <m>dest_changed</m> function is used to create OpenGL resources such as display lists while the <m>dest_closing</m> function is used to destroy them.
+</bodytext>
+
+<code><span style="color:#be230d;">local</span> gl = require("opengl")
+<span style="color:#be230d;">local</span> GL = gl
+
+<span style="color:#be230d;">function</span> dest_changed()
+   <span style="color:#0c7f3d;">-- context is new</span>
+<span style="color:#be230d;">end</span>
+
+<span style="color:#be230d;">function</span> dest_closing()
+   <span style="color:#0c7f3d;">-- context is closing</span>
+<span style="color:#be230d;">end</span>
+
+<span style="color:#be230d;">function</span> draw()
+   <span style="color:#0c7f3d;">-- draw a line</span>
+   gl.Begin(GL.LINES)
+      gl.Vertex(<span style="color:#1b39f5;">-1</span>, <span style="color:#1b39f5;">0</span>, <span style="color:#1b39f5;">0</span>)
+      gl.Vertex(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>, <span style="color:#1b39f5;">0</span>)
+   gl.End()
+<span style="color:#be230d;">end</span>
+</code>
+
+<header1>Inlets and Outlets</header1>
+<header2>Creating Inlets and Outlets</header2>
+<bodytext>
+<o>jit.gl.lua</o> can have a variable number of inlets and outlets.  The number of inlets and outlets are specified by setting the <m>inlets</m> and <m>outlets</m> attriubutes respectively on the <o>jit.gl.lua</o> object itself.
+</bodytext>
+<code><span style="color:#0c7f3d;">-- 3 inlets, 2 outlets</span>
+this.inlets = 3
+this.outlets = 2
+</code>
+<bodytext>
+Since <o>jit.gl.lua</o> has dynamic inlets and outlets, whenever the <m>inlets</m> or <m>outlets</m> attriubutes are set, the change is immediately reflected in the patcher.
+</bodytext>
+<header2>Inlet Detection and Data Conversion</header2>
+<bodytext>
+Lua has a single number type, so integer and float inputs are both converted to a Lua number.  When an input is sent to an inlet, <o>jit.gl.lua</o>'s <m>last_inlet</m> attribute is set, allowing a script to determine what inlet a message was sent to so that inlet-specific behaviors can be designed if needed.
+</bodytext>
+<bodytext>
+	<img src="images/plus.png"/>
+</bodytext>
+<bodytext>
+In the script above, the <m>last_inlet</m> attribute of <o>jit.gl.lua</o> is used to save the input number 
+when it comes in the right inlet.  When input comes in the left inlet, it triggers an addition operation and 
+the result is sent out the outlet.	
+</bodytext>
+<header2>Outlets and Data Conversion</header2>
+<bodytext>
+Outlets in <o>jit.gl.lua</o> are accessed through the <m>outlet</m> function.  <m>outlet</m> takes two or more arguments.  The first argument is the outlet index with 0 as the left-most outlet.  The other arguments are the values to be sent out the outlet.  Outlets can be sent both string and numerical values.  If a numerical value is an integer, <o>jit.gl.lua</o> will convert it to an Max integer type, otherwise it will be a Max float type.
+</bodytext>
+
+<header1>Jitter Bindings</header1>
+<header2>Creating Jitter Objects</header2>
+<bodytext>
+Jitter objects can be created in a jit.gl.lua script using the <m>jit.new</m> function.  When called, <m>jit.new</m> will create and return a Jitter object.  The arguments to <m>jit.new</m> are the classname of the object and any additional arguments that the object's constructor might take.  For example, to create a <o>jit.xfade</o> object:
+</bodytext>
+<code>xfade = jit.new(<span style="color:#9a32d2">"jit.xfade"</span>)
+</code>
+<bodytext>
+to create a <o>jit.gl.gridshape</o> object:
+</bodytext>
+<code><span style="color:#0c7f3d;">-- classname of the object, the context name</span>
+gshape = jit.new(<span style="color:#9a32d2">"jit.gl.gridshape"</span>, this.drawto)
+</code>
+<bodytext>
+Once created, the messages and attributes of the object are exposed to Lua in the usual Lua fashion. In Lua, functions belonging to an object are called using the ':' operator, which is a kind of object-oriented syntax sugar.  This operator passes the object itself in as an implicit first argument.
+</bodytext>
+<code>gshape = jit.new(<span style="color:#9a32d2">"jit.gl.gridshape"</span>, this.drawto)
+
+<span style="color:#be230d;">function</span> draw()
+   <span style="color:#0c7f3d;">-- use ':' to call the gridshape's draw function</span>
+   <span style="color:#0c7f3d;">-- equivalent to gshape.draw(gshape)</span>
+   gshape:draw()
+<span style="color:#be230d;">end</span>
+</code>
+<bodytext>
+All Jitter object messages can be called this way.  Attributes are acessed more like properties stored in a table and can be accessed using the '.' operator.  For example:
+</bodytext>
+<code>gshape = jit.new("jit.gl.gridshape", this.drawto)
+<span style="color:#0c7f3d;">-- set some of the gridshape's attributes</span>
+gshape.shape = <span style="color:#9a32d2">"cylinder"</span>
+gshape.automatic = <span style="color:#1b39f5;">0</span>
+gshape.poly_mode = {<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>}  <span style="color:#0c7f3d;">-- set an attribute that takes a list of values</span>
+
+<span style="color:#0c7f3d;">-- print the shape attribute</span>
+print("gridshape using shape", gshape.shape)
+</code>
+<bodytext>
+Some attributes consist of a array of values such as gridshape's <m>poly_mode</m> above.  These can be set with a list of values stored in a table.  When getting an array attribute, the list of values will be returned in a table as well.
+</bodytext>
+<header2>jit.matrix</header2>
+<bodytext>
+There are two ways to create a jit.matrix object in <o>jit.gl.lua</o>.  One is using the <m>jit.new</m> function as described above.  The other is by using the convenience <m>jit.matrix</m> function.  Both are equivalent in terms of functionality.  The <m>jit.matrix</m> function takes the same arguments as are used when creating a <o>jit.matrix</o> object in a patcher.  The arguments are the matrix name (optional), planecount, type, and dimensions.
+</bodytext>
+<code><span style="color:#0c7f3d;">-- equivalent to jit.new("jit.matrix", 4, "char", 720, 480)</span>
+mat1 = jit.matrix(4, <span style="color:#9a32d2">"char"</span>, 720, 480)
+
+<span style="color:#0c7f3d;">-- a named matrix</span>
+mat2 = jit.matrix(<span style="color:#9a32d2">"frame"</span>)
+</code>
+<header2>jit.listener</header2>
+<bodytext>
+Certain Jitter objects such as <o>jit.window</o> send messages out an outlet in response to patcher and user events.  Since Jitter objects in scripts have no outlets, this information has to be accessed another way.  In <o>jit.gl.lua</o>, the jit.listener object is used to attach to an object and listen to any notifications it may send out.
+</bodytext>
+<code><span style="color:#0c7f3d;">-- listener function</span>
+<span style="color:#be230d;">function</span> wincb(event)
+   print(event.subjectname)
+   print(table.concat(event.args, <span style="color:#9a32d2">", "</span>))
+<span style="color:#be230d;">end</span>
+
+win = jit.new(<span style="color:#9a32d2">"jit.window"</span>, <span style="color:#9a32d2">"x"</span>)
+<span style="color:#0c7f3d;">-- list to the window with wincb as the callback function</span>
+listener = jit.listener(win.name, wincb)
+</code>
+<bodytext>
+jit.listener takes two arguments: the name of the object to listen to and the function to call when the listener gets notified of some information.  The second argument can either be a function directly or the name of a global function.  This code is equivalent to the code above:
+</bodytext>
+<code><span style="color:#be230d;">function</span> wincb(event)
+   print(event.subjectname)
+   print(table.concat(event.args, <span style="color:#9a32d2">", "</span>))
+<span style="color:#be230d;">end</span>
+
+win = jit.new(<span style="color:#9a32d2">"jit.window"</span>, <span style="color:#9a32d2">"x"</span>)
+listener = jit.listener(win.name, <span style="color:#9a32d2">"wincb"</span>)
+</code>
+<bodytext>
+Notice that the second argument in this code is a string naming the function to call as opposed to the function itself.
+</bodytext>
+<header2>jit.gl Functions</header2>
+<bodytext>
+In addition to the low-level OpenGL bindings discussed below, jit.gl.lua has bindings to Jitter-specific OpenGL functionality for working with Jitter textures and jit.gl objects at a lower level than usual.
+</bodytext>
+<code><span style="color:#0c7f3d;">-- v2 and v3 are optional</span>
+jit.gl.texcoord(v1, [v2], [v3])
+
+<span style="color:#0c7f3d;">-- also can take a table</span>
+jit.gl.texcoord({v1, [v2], [v3]})
+</code>
+<bodytext>
+<m>jit.gl.texcoord</m> creates multi-texturing texture coordinates so that if there are textures bound on different units, they will each get texture coordinates to be properly displayed on the geometry.
+</bodytext>
+<code><span style="color:#be230d;">local</span> gl = require(<span style="color:#9a32d2">"opengl"</span>)
+<span style="color:#be230d;">local</span> GL = gl
+
+<span style="color:#be230d;">function</span> draw()
+   gl.Color(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>)
+   jit.gl.bindtexture(<span style="color:#9a32d2">"tex1"</span>, <span style="color:#1b39f5;">0</span>)
+   jit.gl.bindtexture(<span style="color:#9a32d2">"tex2"</span>, <span style="color:#1b39f5;">1</span>)
+   gl.Begin(GL.QUADS)
+      jit.gl.texcoord(<span style="color:#1b39f5;">0</span>, <span style="color:#1b39f5;">0</span>) gl.Vertex(<span style="color:#1b39f5;">-1</span>, <span style="color:#1b39f5;">-1</span>, <span style="color:#1b39f5;">0</span>)
+      jit.gl.texcoord(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>) gl.Vertex(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">-1</span>, <span style="color:#1b39f5;">0</span>)
+      jit.gl.texcoord(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>) gl.Vertex(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>)
+      jit.gl.texcoord(<span style="color:#1b39f5;">0</span>, <span style="color:#1b39f5;">1</span>) gl.Vertex(<span style="color:#1b39f5;">-1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>)
+   gl.End()
+   jit.gl.unbindtexture(<span style="color:#9a32d2">"tex2"</span>, <span style="color:#1b39f5;">1</span>)
+   jit.gl.unbindtexture(<span style="color:#9a32d2">"tex1"</span>, <span style="color:#1b39f5;">0</span>)
+<span style="color:#be230d;">end</span>
+</code>
+<code>jit.gl.bindtexture(texname, texunit)
+<span style="color:#0c7f3d;">-- draw some geometry</span>
+jit.gl.unbindtexture(texname, texunit)
+</code>
+<bodytext>
+<m>jit.gl.bindtexture</m> and <m>jit.gl.unbindtexture</m> are used to bind and unbind texture.  The first argument is a texture name and the second argument is the texture unit to assign the texture to.  Every graphics card has a fixed number of slots called texture units.  The number of texture units a card has determines how many textures can be used simultaneously.  This number is usually 8 but can be 16 or even 32.  To see how many texture units your card has, go to the Options Menu > OpenGL Status.  Under the OpenGL Limits > Textures item, you'll see MAX_TEXTURE_UNITS and a value next to it.  This is the number of texture units your card supports.
+</bodytext>
+<code>jit.gl.begincapture(texname)
+<span style="color:#0c7f3d;">-- draw some geometry</span>
+jit.gl.endcapture(texname)
+</code>
+<bodytext>
+<m>jit.gl.begincapture</m> and <m>jit.gl.endcapture</m> are used to render drawing commands to a texture instead of to a window.  The only argument is the texture name.
+</bodytext>
+<code><span style="color:#be230d;">local</span> gl = require(<span style="color:#9a32d2">"opengl"</span>)
+<span style="color:#be230d;">local</span> GL = gl
+
+<span style="color:#be230d;">local</span> pi = math.pi
+
+<span style="color:#be230d;">local</span> tex = jit.new(<span style="color:#9a32d2">"jit.gl.texture"</span>, this.drawto)
+tex.dim = {1024, 1024}
+
+<span style="color:#be230d;">function</span> draw()
+   <span style="color:#0c7f3d;">-- capture to texture</span>
+   jit.gl.begincapture(tex.name)
+      gl.Color(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>)
+      gl.Begin(GL.LINES)
+      for i=<span style="color:#1b39f5;">0</span>, pi, pi/<span style="color:#1b39f5;">100</span> do
+         gl.Vertex(math.cos(i), math.sin(i*<span style="color:#1b39f5;">2.4</span>))
+         gl.Vertex(math.cos(i+pi), math.sin(i*<span style="color:#1b39f5;">2.4</span>+pi))
+      end	
+      gl.End()
+      <span style="color:#0c7f3d;">-- end capturing to texture</span>
+   jit.gl.endcapture(tex.name)
+
+   <span style="color:#0c7f3d;">-- draw the result</span>
+   gl.Color(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>)
+   jit.gl.bindtexture(tex.name, <span style="color:#1b39f5;">0</span>)
+   gl.Begin(GL.QUADS)
+      gl.TexCoord(<span style="color:#1b39f5;">0</span>, <span style="color:#1b39f5;">0</span>) gl.Vertex(<span style="color:#1b39f5;">-1</span>, -<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>)
+      gl.TexCoord(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>) gl.Vertex(<span style="color:#1b39f5;">1</span>, -<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>)
+      gl.TexCoord(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>) gl.Vertex(<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>)
+      gl.TexCoord(<span style="color:#1b39f5;">0</span>, <span style="color:#1b39f5;">1</span>) gl.Vertex(<span style="color:#1b39f5;">-1</span>, <span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0</span>)
+   gl.End()
+   jit.gl.unbindtexture(tex.name, <span style="color:#1b39f5;">0</span>)
+<span style="color:#be230d;">end</span>
+</code>
+<code><span style="color:#0c7f3d;">-- arguments can be either a table or list of values</span>
+screenpos = jit.gl.worldtoscreen(worldpos)
+
+<span style="color:#0c7f3d;">-- arguments can be either a table or list of values</span>
+worldpos = jit.gl.screentoworld(screenpos)
+</code>
+<bodytext>
+<m>jit.gl.worldtoscreen</m> converts world coordinates into screen coordinates.  <m>jit.gl.screentoworld</m> performs the inverse operation, converting screen coordinate into world coordinates.  Both functions can take either a table of values or a list of x, y, z values.  The z-coordinate in <m>jit.gl.screentoworld</m> is typically a value in the range [0, 1] where 0 represents the near clipping plane and 1 the far clipping plane, which can be used to cast a ray into the OpenGL scene as the code below demonstrates:
+</bodytext>
+<code><span style="color:#be230d;">function</span> castray(x, y)
+   <span style="color:#be230d;">local</span> raystart = jit.gl.screentoworld(x, y, <span style="color:#1b39f5;">0</span>)
+   <span style="color:#be230d;">local</span> rayend = jit.gl.screentoworld(x, y, <span style="color:#1b39f5;">1</span>)
+   <span style="color:#be230d;">return</span> raystart, rayend
+<span style="color:#be230d;">end</span>
+</code>
+<code>jit.gl.draw_begin(jit_gl_object)
+jit.gl.draw_end(jit_gl_object)
+</code>
+<bodytext>
+<m>jit.gl.draw_begin</m> and <m>jit.gl.draw_end</m> operate on jit.gl objects.  All jit.gl objects share a set of common attributes know as ob3d (or object 3D)  attributes.  Whenever a jit.gl object draws itself, it sets up the OpenGL state to reflect the settings of its attributes such as <m>depth_enable</m> and <m>blend</m> among others.  When an object is drawn, the following sequence of calls takes place: 
+</bodytext>
+<code>draw_begin(ob3d)
+draw(ob3d)
+draw_end(ob3d)
+</code>
+<bodytext>
+Sometimes it's useful to have explicit control over this sequence of calls within a <o>jit.gl.lua</o> script and <m>jit.gl.draw_begin</m> and <m>jit.gl.draw_end</m> enable this kind of control.  <m>jit.gl.draw_begin</m> sets up OpenGL state based on the object's ob3d attributes while <m>jit.gl.draw_end</m> reverses the process.  These calls must be used in pairs, otherwise OpenGL errors may occur.
+</bodytext>
+<code>gshape = jit.new(<span style="color:#9a32d2">"jit.gl.gridshape"</span>, this.drawto)
+gshape.automatic = 0
+
+<span style="color:#be230d;">function</span> draw()
+   <span style="color:#0c7f3d;">-- equivalent to gshape:draw()</span>
+   jit.gl.draw_begin(gshape)
+   gshape:drawraw()
+   jit.gl.draw_end(gshape)
+<span style="color:#be230d;">end</span>
+</code>
+<header2>Vector Math Functions</header2>
+<bodytext>
+The vector math functions in <o>jit.gl.lua</o> are located in the <m>vec</m> module and are organized into six categories.  These categories are:
+<ul>
+<li>vec.vec2</li>
+<li>vec.vec3</li>
+<li>vec.vec4</li>
+<li>vec.quat</li>
+<li>vec.mat3</li>
+<li>vec.mat4</li>
+</ul>
+For more detailed documentation on the <m>vec</m> module, see the <link module="lua" name="jit_gl_lua_vector_math" type="vignette"><i>jit.gl.lua Vector Math Overview</i></link>
+</bodytext>
+
+<header2>OpenGL Bindings</header2>
+<bodytext>
+Detailed documentation on each function in the OpenGL module can be found on the <link module="lua" name="jit_gl_lua_opengl_bindings" type="vignette"><i>jit.gl.lua OpenGL Bindings</i></link> page.  There are also bindings for the OpenGL Utility (GLU) functions at <link module="lua" name="jit_gl_lua_opengl_glu_bindings" type="vignette"><i>jit.gl.lua OpenGL GLU Bindings</i></link>.  This section describes common usage and techniques.
+</bodytext>
+<bodytext>
+The OpenGL bindings in <o>jit.gl.lua</o> enable direct access to OpenGL commands.  Nearly all of the OpenGL commands 
+are available through the bindings.  Wherever possible the arguments to an OpenGL function in Lua match the arguments 
+described in the OpenGL man page for that command.  Since OpenGL is a C interface, type information and the number of 
+arguments  a command must take are fixed.  Lua does not have this restriction, so in an effort to simplify the interface 
+into OpenGL, functions that only vary based on type and the number of arguments have been collapsed into a single function.  
+For example, the OpenGL command for specifiying a vertex of geometry as the following variations:
+</bodytext>
+<code>void glVertex2s(GLshort x, GLshort y);
+void glVertex2i(GLint x, GLint y);
+void glVertex2f(GLfloat x, GLfloat y);
+void glVertex2d(GLdouble x, GLdouble y);
+void glVertex3s(GLshort x, GLshort y, GLshort z);
+void glVertex3i(GLint x, GLint y, GLint z);
+void glVertex3f(GLfloat x, GLfloat y, GLfloat z);
+void glVertex3d(GLdouble x, GLdouble y, GLdouble z);
+void glVertex4s(GLshort x, GLshort y, GLshort z, GLshort w);
+void glVertex4i(GLint x, GLint y, GLint z, GLint w);
+void glVertex4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+void glVertex4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+</code>
+<bodytext>
+In Lua, all of the variations are contained within a single function:
+</bodytext>
+<code><span style="color:#0c7f3d;">-- The same function, different number of arguments</span>
+gl.Vertex(x, y)
+gl.Vertex(x, y, z)
+gl.Vertex(x, y, z, w)
+</code>
+<bodytext>
+In OpenGL, enumerations play an important role for specifying different modes of behavior.  An enumeration is simply a number with a particular meaning.  For example, OpenGL has a lot of functionality that can be enabled and disabled such as depth testing, blending, etc.  To enable or disable a particular bit functionality, an enumeration specifiying the functionality is passed to the glEnable or glDisable command.  In C this looks like:
+</bodytext>
+<code>glEnable(GL_DEPTH_TEST);
+glDisable(GL_BLEND);
+</code>
+<bodytext>
+The Lua bindings for OpenGL also have enumerations.  These are stored in the same location as all of the OpenGL functions, which is simply a giant table.  Often times it is convenient to have the Lua code look as much like the C code as possible so that when copying example code or switching between C and Lua there is minimal cognitive overhead.  We can do this by aliasing the OpenGL module table to the variable 'GL'.  When <o>jit.gl.lua</o> loads a script, it autmatically makes available the <m>opengl</m> table, which contains all of the OpenGL functions and enumerations.  The following idiom allows us to write code that more closely resembles C-style OpenGL code:
+</bodytext>
+<code><span style="color:#0c7f3d;">-- set the OpenGL module to the variable 'gl'</span>
+<span style="color:#be230d;">local</span> gl = require(<span style="color:#9a32d2">"opengl"</span>)
+<span style="color:#0c7f3d;">-- alias the OpenGL module to the variable 'GL' to emulate the C enumeration style</span>
+<span style="color:#be230d;">local</span> GL = gl
+
+<span style="color:#be230d;">function</span> draw()
+   gl.Enable(GL.DEPTH_TEST)
+   gl.Disable(GL.BLEND)
+	
+   <span style="color:#0c7f3d;">-- draw some geometry</span>
+<span style="color:#be230d;">end</span>
+</code>
+<header2>Color Functions</header2>
+<bodytext>
+In addition to the OpenGL module, <o>jit.gl.lua</o> also has a color module built in.  The color module contains funtions for translating betwee RGB space and Hue-Saturation-Luminance (HSL) space.  It also contains a large number of pre-defined color values.  The color values are given in RGB form.  Here are some examples:
+</bodytext>
+<code>chocolate = {<span style="color:#1b39f5;">0.823529</span>, <span style="color:#1b39f5;">0.411765</span>, <span style="color:#1b39f5;">0.117647</span>}
+lightcoral = {<span style="color:#1b39f5;">0.941176</span>, <span style="color:#1b39f5;">0.501961</span>, <span style="color:#1b39f5;">0.501961</span>}
+slateblue = {<span style="color:#1b39f5;">0.415686</span>, <span style="color:#1b39f5;">0.352941</span>, <span style="color:#1b39f5;">0.803922</span>}
+</code>
+<bodytext>
+There are 115 colors in total.  For the full list, see the <link module="lua" name="jit_gl_lua_color_bindings" type="vignette"><i>jit.gl.lua Color Bindings</i></link> documentation.
+</bodytext>
+<bodytext>
+The main functions in the color module are <m>RGBtoHSL</m> and <m>HSLtoRGB</m>.  While colors in both spaces are defined by three values, an optional fourth value representing the alpha channel can also be passed in.  The alpha channel is not involved in any of the calculations, but is simply passed through untouched.
+</bodytext>
+<code>hsl = RGBtoHSL(rgb)
+hsl = RGBtoHSL(r, g, b)
+hsla = RGBtoHSL(rgba)
+hsla = RGBtoHSL(r, g, b, a)
+
+rgb = HSLtoRGB(hsl)
+rgb = HSLtoRGB(h, s, l)
+rgba = HSLtoRGB(hsla)
+rgba = HSLtoRGB(h, s, l, a)
+</code>
+<bodytext>
+For example, the code below converts an RGBA color to an HSLA color, lightens it, and then gets back the result into RGBA space.
+</bodytext>
+<code>color = {<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0.2</span>, <span style="color:#1b39f5;">0.2</span>, <span style="color:#1b39f5;">0.5</span>}
+hsla = RGBtoHSL(color)
+<span style="color:#0c7f3d;">-- lighten the color</span>
+hsla[<span style="color:#1b39f5;">3</span>] = hsla[<span style="color:#1b39f5;">3</span>]*<span style="color:#1b39f5;">1.1</span>
+color = HSLtoRGB(hsla)
+</code>
+<bodytext>
+The other three functions in the color module are for manipulating HSL colors.  They are designed so that the color manipulation functions can be chained without having to assign any results to a variable.  These functions are <m>hue</m>, <m>saturate</m>, and <m>lighten</m>.
+</bodytext>
+<code>res = hue(hsla, hue_offset)
+res = saturate(hsla, saturation_scale)
+res = lighten(hsla, luminance_scale)
+</code>
+<bodytext>
+<m>hue</m> offsets the hue of an HSLA color by a given amount.  <m>saturate</m> and <m>lighten</m> scale the saturation and luminance components of an HSLA color respective.
+</bodytext>
+<code><span style="color:#0c7f3d;">-- lighten the color</span>
+color = HSLtoRGB(lighten(RGBtoHSL{<span style="color:#1b39f5;">1</span>, <span style="color:#1b39f5;">0.2</span>, <span style="color:#1b39f5;">0.2</span>, <span style="color:#1b39f5;">0.5</span>}, <span style="color:#1b39f5;">1.1</span>))
+</code>
+</vignette>

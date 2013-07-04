@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Dragging Attributes">
+	<header1>
+	Dragging Attributes
+	</header1>
+<bodytext>
+	To create a <o>message</o> box with an attribute name and dollar-sign arguments, you can drag attribute names out of the inspector. Here's how.
+</bodytext>
+<bluebox>
+	<header2>
+		Creating a message box from the inspector by dragging
+	</header2>
+	<ul>
+		<li>Position the <link type="vignette" module="core" name="inspector">inspector window</link> so that you can see part of the patcher where you want to create a message box.</li>
+		<li>Click on an attribute name and drag it into the patcher window.</li>
+	</ul>
+<bodytext>
+	<img src="images/dragging_attributes1.png" />
+</bodytext>
+<ul>
+	<li>If you want to connect the message box to an object, release the mouse button when the attribute is on top of an object box.</li></ul>
+	<bodytext>
+		<img src="images/dragging_attributes2.png" />
+	</bodytext>
+	<ul><li>If you just want to put the message box in the patcher so you can connect it yourself later, release the mouse button where you want the message to be created.</li></ul>
+	<bodytext>
+		<img src="images/dragging_attributes3.png" />
+	</bodytext>
+	<ul><li>If you want the current values of the attribute to be copied into the message box instead of dollar-sign arguments, hold down the option key when releasing the mouse button.</li></ul>
+	<bodytext>
+		<img src="images/dragging_attributes4.png" />
+	</bodytext>
+</bluebox>
+</vignette>
+

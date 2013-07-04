@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Common Box Attributes">
+	<header1>
+	Common Box Attributes
+	</header1>
+	<bodytext>
+	Every Max object has a common set of attributes related to its appearance, known as the <i>common box attributes</i>. These attributes include the position of the box in a patcher window and whether the box is hidden when the patcher is locked. You can view and edit these attributes in the <link module="core" name="inspector" type="vignette">Inspector</link>.
+</bodytext>
+	<bodytext>
+	The <link module="max" name="jbox" type="refpage">reference page for common box attributes</link> describes each of the attributes in detail.
+</bodytext>
+</vignette>

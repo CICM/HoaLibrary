@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources64/hoaFreeverb/AmbisonicsFreeverb.h"
+#include "../../Sources/hoaFreeverb/AmbisonicsFreeverb.h"
 
 extern "C" 
 {
@@ -121,7 +121,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL			(c, "fspread", 0, "First spread");
 	CLASS_ATTR_ORDER			(c, "fspread", 0, "5");
 	CLASS_ATTR_ACCESSORS		(c, "fspread", NULL, first_spread_set);
-	CLASS_ATTR_DEFAULT			(c, "fspread", 0, "0.");
+	CLASS_ATTR_DEFAULT			(c, "fspread", 0, "0.2");
 	CLASS_ATTR_SAVE				(c, "fspread", 1);
     
     CLASS_ATTR_FLOAT			(c, "lspread", 0, t_freeverb, f_late_spread);
@@ -129,7 +129,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL			(c, "lspread", 0, "Late spread");
 	CLASS_ATTR_ORDER			(c, "lspread", 0, "6");
 	CLASS_ATTR_ACCESSORS		(c, "lspread", NULL, late_spread_set);
-	CLASS_ATTR_DEFAULT			(c, "lspread", 0, "0.");
+	CLASS_ATTR_DEFAULT			(c, "lspread", 0, "0.2");
 	CLASS_ATTR_SAVE				(c, "lspread", 1);
     
 	CLASS_ATTR_LONG				(c, "freeze", 0, t_freeverb, f_freeze);
@@ -166,13 +166,16 @@ void *freeverb_new(t_symbol *s, long argc, t_atom *argv)
         x->f_freeverb->setSpread(0.2);
         x->f_freeverb->setmode(0);
         
+        
 		object_method(x, gensym("size"), NULL, NULL);
         object_method(x, gensym("damp"), NULL, NULL);
         object_method(x, gensym("dry"), NULL, NULL);
         object_method(x, gensym("wet"), NULL, NULL);
-        object_method(x, gensym("fspread"), NULL, NULL);
-        object_method(x, gensym("lspread"), NULL, NULL);
+        //object_method(x, gensym("fspread"), NULL, NULL);
+        //object_method(x, gensym("lspread"), NULL, NULL);
         object_method(x, gensym("freeze"), NULL, NULL);
+        
+        x->f_first_spread = x->f_late_spread = 0.2;
         
 		dsp_setup((t_pxobject *)x, x->f_freeverb->getNumberOfInputs());
 		for (int i = 0; i < x->f_freeverb->getNumberOfOutputs(); i++)
@@ -277,7 +280,7 @@ t_max_err first_spread_set(t_freeverb *x, t_object *attr, long argc, t_atom *arg
 		x->f_freeverb->setDirectionalSpread(atom_getlong(argv));
 	else if(atom_gettype(argv) == A_FLOAT)
 		x->f_freeverb->setDirectionalSpread(atom_getfloat(argv));
-    
+        
 	x->f_first_spread = x->f_freeverb->getDirectionalSpread();
 	return 0;
 }

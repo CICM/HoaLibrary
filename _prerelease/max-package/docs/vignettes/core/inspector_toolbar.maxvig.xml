@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Inspector Toolbar">
+	<header1>
+		The Inspector Toolbar
+	</header1>
+	<bodytext>
+		The <i>Modify Selected Item</i> button displays a pop-up menu
+		of commands for modifying a selected attribute.
+	</bodytext>
+	<bodytext>
+		<img src="images/inspector_toolbar1.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show/Hide Attribute Names</i> button toggles the display
+		of an additinoal column in the Inspector that displays the
+		programmatic names for an object's attributes.
+	</bodytext>
+	<bodytext>
+		<img src="images/inspector_toolbar2.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show In Reference</i> button is used to open the
+		<link module="core" name="docrefpages_about" type="vignette">Object Reference</link>
+		for a selected object.
+	</bodytext>
+	<bodytext>
+		<img src="images/inspector_toolbar3.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Freeze Attribute</i> and <i>Unfreeze Attribute</i> buttons are 
+		are used when 
+		<link module="core" name="freezing_attributes" type="vignette">freezing/unfreezing attributes</link> -
+		storing current attribute values as the saved value of the attribute, immune from 
+		any changes to the attribute's value. 
+	</bodytext>
+	<bodytext>
+		<img src="images/inspector_toolbar4.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Make Attribute in Patcher</i> button lets you create an 
+		<o>atrui</o>
+		object that displays the specified attribute of a selected object.
+	</bodytext>
+	<bodytext>
+		<img src="images/inspector_toolbar5.png"/>
+	</bodytext>
+</vignette>

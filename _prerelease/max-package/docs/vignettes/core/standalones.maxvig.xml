@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Standalones">
+	<header1>
+	Standalones
+	</header1>
+		<bodytext>
+			Creating a <i>standalone application</i> in Max involves combining a
+			<link type="vignette" module="core" name="collectives">collective</link>
+			with the Max Runtime application.
+			The resulting file looks and acts like a standard Macintosh or Windows application. You don’t need either Max or the Max
+			Runtime installed on your computer to run them.
+		</bodytext>
+<ul>
+	<li><link type="vignette" module="core" name="standalone_building">Building Standalones</link></li>
+	<li><link type="vignette" module="core" name="standalone_object">Configuring Standalone Options</link></li>
+	<li><link type="vignette" module="core" name="standalone_platform_mac">Mac Platform Information</link></li>
+	<li><link type="vignette" module="core" name="standalone_platform_win">Windows Platform Information</link></li>
+	<li><link type="vignette" module="core" name="standalone_rewire">ReWire and Standalones</link></li>
+	<li><link type="vignette" module="core" name="standalone_searchpath">Search Paths in Standalones</link></li>
+</ul>
+</vignette>

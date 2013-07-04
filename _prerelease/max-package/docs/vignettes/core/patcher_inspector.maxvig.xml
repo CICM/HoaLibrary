@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Patcher Inspector">
+	<header1>
+	The Patcher Inspector
+	</header1>
+	<bodytext>
+			The <i>patcher inspector</i> lets you edit settings for a patcher window that control
+			how it will behave when you open it. While some of the settings are similar to the patching settings in the
+			<link module="core" name="preferences_window" type="vignette">preferences window</link>,
+			patcher inspector settings are applied to a single patcher document.
+		</bodytext>
+	<bodytext>
+			You open the patcher inspector window by choosing <b>Patcher Inspector</b> from the View menu when a patcher you want to edit is the active window.
+		</bodytext>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Getting information about a Patcher Inspector setting
+	</header2>
+		<ul>
+			<li>
+			Position your cursor over the Setting column of any row in the window. A brief description of
+			the setting will be shown in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</li>
+		</ul>
+	</bluebox>
+</vignette>

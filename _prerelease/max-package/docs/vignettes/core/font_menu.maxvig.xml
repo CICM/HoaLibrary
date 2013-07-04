@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Font Menu">
+	<header1>
+	The Font Menu
+	</header1>
+<bodytext>
+The <i>font menu</i> collects recently used and favorite fonts for rapid access when using an inspector. Font names are added automatically to the Recently Used section of the font menu as you choose them in the <link type="vignette" module="core" name="font_panel">font panel</link>. 
+</bodytext>
+<br />
+<bluebox>
+<header2>
+Adding a favorite font to the menu
+</header2>
+	<ul>
+	<li>
+		Choose a font for an attribute or preference setting, either by using the font menu or the <link type="vignette" module="core" name="font_panel">font panel</link>.
+	</li>
+	<li>Click the Value column of the inspector to open the font menu. Choose <b>Add "fontname" to Favorites</b> from the menu (it's the last item).</li>
+		<li>The next time you use a font menu, the added font will appear in the Favorites section of the font menu.</li>
+	</ul>
+</bluebox>
+<br />
+<bodytext>
+	If the font being added to the favorites is already in the list, <b>Add "fontname" to Favorites</b> will be disabled.
+</bodytext>
+</vignette>

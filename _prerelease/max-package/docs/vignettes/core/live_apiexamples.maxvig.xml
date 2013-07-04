@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Live API Examples">
+<a name="tutorialpatches" />
+	<header1>
+	Live API Examples
+	</header1>
+<bodytext>
+	The Live API examples are presented as a series of
+	Live Sets. The sets provide content and specific configurations that show off the Live API, so we advise opening the sets before trying the example devices in your own set. The example devices are fully functional but in some cases require specific hardware or Live document configurations before they will do anything.
+</bodytext>
+<br />
+<bluebox>
+<header2>
+	Finding the Live API examples
+</header2>
+	<ul>
+	<li>
+		Click on the a File brower button in Live's File browser and
+		choose <b>Library</b> from the pull-down Bookmarks menu to
+		show the Library.
+	</li>
+	<bodytext>
+	<img src="images/finding-tutorials1.png" />
+	</bodytext>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Lessons</b> to show 
+		The lesson materials.
+	</li>
+	<bodytext>
+	<img src="images/finding-tutorials2.png" />
+	</bodytext>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Sets</b>to show the 
+		Max for Live Lessons sets. Each
+		lesson will be displayed as a session document.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/finding-tutorials3.png" />
+	</bodytext>
+	<bodytext>
+		To load a tutorial, double-click on a Live
+		session document. The Live API tutorials are <b>Apple Remote</b>, <b>Clip-Operations</b>, <b>CS Step Sequencer</b>, <b>MIDI-Note-Operations</b>, and <b>Video-Theremin</b>. 
+	</bodytext>
+</bluebox>
+<br />
+<header2>
+	Live API example descriptions
+</header2>
+	<ul>
+	<li>
+		<b>Apple Remote</b>: Demonstrates how to use an Apple Remote to control clip navigation and triggering
+	</li>
+	<li>
+		<b>Clip-Operations</b>: Manipulations on MIDI and audio clips
+	</li>
+	<li>
+		<b>CS Step Sequencer</b>: A step sequencer that interfaces with control surfaces such as the APC-40
+	</li>
+	<li>
+		<b>MIDI-Note-Operations</b>: Powerful editing of MIDI note sequences
+	</li>
+	<li>
+		<b>Video-Theremin</b>: Using Jitter-based video input to control an audio instrument
+	</li>
+	</ul>	
+	</vignette>

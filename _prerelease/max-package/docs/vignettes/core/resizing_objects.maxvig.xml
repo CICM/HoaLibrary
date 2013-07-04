@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Resizing and Scaling Objects">
+	<header1>
+	Resizing Objects
+	</header1>
+<bodytext>
+	To resize an object in patching mode, click and drag on its grow box in the lower right-hand corner.
+</bodytext>
+<bodytext>
+	<img src="images/scale1.png" />
+</bodytext>
+<bodytext>
+ To resize an object in <link type="vignette" module="core" name="presentation_mode">presentation mode</link>, click on any resize handle around the outside of the box when it is selected.
+</bodytext>
+<bodytext>
+	<img src="images/scale2.png" />
+</bodytext>
+<bodytext>
+In addition to the normal resizing mode, there are two other modes invoked by holding down keys while resizing. Shift-resize preserves the aspect ratio of the box. This is particularly useful when resizing a text object, as the font size will change as you resize the box. Holding down the command (Mac) or ctrl (Windows) key while resizing snaps the edge(s) you are changing to the <link type="vignette" module="core" name="grid">edit grid</link>, whether or not Snap to Grid is enabled.
+</bodytext>
+<header1>
+Scaling a Group of Objects
+</header1>
+<bodytext>
+	The Scale and Scale Spacing commands work by placing a rectangle around the selected objects. Objects and patch cords are adjusted to fit inside the rectangle as you change its size.
+</bodytext>
+	<bluebox>
+	<header2>
+		Using the Scale command
+	</header2>
+		<ul>
+		<li>
+			Select the objects you wish to scale.
+		</li>
+		<li>
+			Choose <b>Scale...</b> from the Edit menu.
+			A grouping box will appear around the selected objects.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/arranging_and_aligning5.png"  />
+		</bodytext>
+		<ul>
+			<li>
+			Drag on any of the grouping box's handles to 
+			resize every selected object as well as the space between the objects.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/arranging_and_aligning6.png"  />
+		</bodytext>
+		<ul>
+					<li>
+				To remove the scaling rectangle, change the selection or choose <b>Scale...</b> again.
+				</li>
+		</ul>
+	</bluebox>
+		<br /><space/>
+	<bluebox>
+	<header2>
+		Using the Scale Spacing command
+	</header2>
+		<ul>
+		<li>
+			Select the objects you wish to scale.
+		</li>
+		<li>
+		Choose <b>Scale Spacing...</b> from the Edit menu.
+		A grouping box will appear around the selected objects.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/arranging_and_aligning5.png"  />
+		</bodytext>
+		<ul>
+		<li>
+		Drag on any of the grouping box's handles to adjust the spacing between the selected objects without changing their size.
+		</li>
+
+		</ul>
+		<bodytext>
+			<img src="images/arranging_and_aligning7.png"  />
+		</bodytext>
+<ul>
+			<li>
+		To remove the scaling rectangle, change the selection or choose <b>Scale Spacing...</b> again.
+		</li>
+</ul>
+	</bluebox>
+</vignette>

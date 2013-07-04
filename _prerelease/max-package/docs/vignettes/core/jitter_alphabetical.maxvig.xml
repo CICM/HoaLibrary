@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Jitter Object Alphabetical Listing"><header1>
+		An Alphabetical Listing of all Jitter Objects
+		</header1><bodytext>
+						Here is an alphabetical listing of all Jitter objects. Click on any
+						letter of the alphabet to see a listing of objects that begin with
+						that letter. To see the 
+						<link anchor="refman" module="core" name="help_docs" type="vignette">Reference page</link> 
+						for any object, click on its name.
+				</bodytext><bodytext><link anchor="symbol" module="core" name="jitter_alphabetical" type="vignette">Symbol</link> 
+			<link anchor="a" module="core" name="jitter_alphabetical" type="vignette">A</link> 
+			<link anchor="b" module="core" name="jitter_alphabetical" type="vignette">B</link> 
+			<link anchor="c" module="core" name="jitter_alphabetical" type="vignette">C</link> 
+			<link anchor="d" module="core" name="jitter_alphabetical" type="vignette">D</link> 
+			<link anchor="e" module="core" name="jitter_alphabetical" type="vignette">E</link> 
+			<link anchor="f" module="core" name="jitter_alphabetical" type="vignette">F</link> 
+			<link anchor="g" module="core" name="jitter_alphabetical" type="vignette">G</link> 
+			<link anchor="h" module="core" name="jitter_alphabetical" type="vignette">H</link> 
+			<link anchor="i" module="core" name="jitter_alphabetical" type="vignette">I</link> 
+			<link anchor="j" module="core" name="jitter_alphabetical" type="vignette">J</link> 
+			<link anchor="k" module="core" name="jitter_alphabetical" type="vignette">K</link> 
+			<link anchor="l" module="core" name="jitter_alphabetical" type="vignette">L</link> 
+			<link anchor="m" module="core" name="jitter_alphabetical" type="vignette">M</link> 
+			<link anchor="n" module="core" name="jitter_alphabetical" type="vignette">N</link> 
+			<link anchor="o" module="core" name="jitter_alphabetical" type="vignette">O</link> 
+			<link anchor="p" module="core" name="jitter_alphabetical" type="vignette">P</link> 
+			<link anchor="q" module="core" name="jitter_alphabetical" type="vignette">Q</link> 
+			<link anchor="r" module="core" name="jitter_alphabetical" type="vignette">R</link> 
+			<link anchor="s" module="core" name="jitter_alphabetical" type="vignette">S</link> 
+			<link anchor="t" module="core" name="jitter_alphabetical" type="vignette">T</link> 
+			<link anchor="u" module="core" name="jitter_alphabetical" type="vignette">U</link> 
+			<link anchor="v" module="core" name="jitter_alphabetical" type="vignette">V</link> 
+			<link anchor="w" module="core" name="jitter_alphabetical" type="vignette">W</link> 
+			<link anchor="x" module="core" name="jitter_alphabetical" type="vignette">X</link> 
+			<link anchor="y" module="core" name="jitter_alphabetical" type="vignette">Y</link> 
+			<link anchor="x" module="core" name="jitter_alphabetical" type="vignette">Z</link> 
+				</bodytext><a name="symbol"/><bodytext>
+		</bodytext><header2>
+	Symbol
+	</header2><o>jit.3m</o>
+	 
+			<a name="a"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	A
+	</header2>
+			<o>jit.alphablend</o>
+	 
+			<o>jit.altern</o>
+	 
+			<o>jit.ameba</o>	
+	 
+			<o>jit.anim.drive</o>
+	 
+			<o>jit.anim.node</o>
+	 
+			<o>jit.anim.path</o>
+	 
+			<o>jit.argb2ayuv</o>
+	 
+			<o>jit.argb2grgb</o>
+	 
+			<o>jit.argb2uyvy</o>
+	 
+			<o>jit.avc</o>
+	 
+			<o>jit.avg4</o>
+	 
+			<o>jit.axis2quat</o>
+	 
+			<o>jit.ayuv2argb</o>
+	 
+			<o>jit.ayuv2luma</o>
+	 
+			<o>jit.ayuv2uyvy</o>
+	 
+			<a name="b"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	B
+	</header2>
+			<o>jit.bfg</o>
+	 
+			<o>jit.brass</o>
+	 
+			<o>jit.brcosa</o>
+	 
+			<o>jit.brcosa</o>
+	 
+			<o>jit.broadcast</o>
+	 
+			<o>jit.bsort</o>
+	 
+			<o>jit.buffer~</o>
+	 
+			<a name="c"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	C
+	</header2>
+			<o>jit.catch~</o>
+	 
+			<o>jit.cellblock</o>
+	 
+			<o>jit.change</o>
+	 
+			<o>jit.charmap</o>
+	 
+			<o>jit.chromakey</o>
+	 
+			<o>jit.clip</o>
+	 
+			<o>jit.coerce</o>
+	 
+			<o>jit.colorspace</o>
+	 
+			<o>jit.concat</o>
+	 
+			<o>jit.convolve</o>
+	 
+			<o>jit.conway</o>
+	 
+			<o>jit.cycle</o>
+	 
+			<a name="d"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	D
+	</header2>
+			<o>jit.demultiplex</o>
+	 
+			<o>jit.desktop</o>
+	 
+			<o>jit.dimmap</o>
+	 
+			<o>jit.dimop</o>
+	 
+			<o>jit.displays</o>
+	 
+			<o>jit.dx.grab</o>
+	 
+			<o>jit.dx.videoout</o>
+	 
+			<a name="e"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	E
+	</header2>
+			<o>jit.eclipse</o>
+	 
+			<o>jit.euler2quat</o>
+	 
+			<o>jit.expr</o>
+	 
+			<a name="f"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	F
+	</header2>
+			<o>jit.fastblur</o>
+	 
+			<o>jit.fft</o>
+	 
+			<o>jit.fill</o>
+	 
+			<o>jit.findbounds</o>
+	 
+			<o>jit.fluoride</o>
+	 
+			<o>jit.fprint</o>
+	 
+			<o>jit.fpsgui</o>
+	 
+			<o>jit.freeframe</o>
+	 
+			<a name="g"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	G
+	</header2>
+			<o>jit.gen</o>
+	 
+			<o>jit.gencoord</o>
+	 
+			<o>jit.gl.asyncread</o>
+	 
+			<o>jit.gl.camera</o>
+	 
+			<o>jit.gl.cubemap</o>
+	 
+			<o>jit.gl.graph</o>
+	 
+			<o>jit.gl.gridshape</o>
+	 
+			<o>jit.gl.handle</o>
+	 
+			<o>jit.gl.imageunit</o>
+	 
+			<o>jit.gl.isosurf</o>
+	 
+			<o>jit.gl.light</o>
+	 
+			<o>jit.gl.lua</o>
+	 
+			<o>jit.gl.material</o>		
+	 
+			<o>jit.gl.mesh</o>
+	 
+			<o>jit.gl.model</o>
+	 
+			<o>jit.gl.multiple</o>		
+	 
+			<o>jit.gl.node</o>
+	 
+			<o>jit.gl.nurbs</o>
+	 
+			<o>jit.gl.path</o>
+	 
+			<o>jit.gl.physdraw</o>
+	 
+			<o>jit.gl.pix</o>		
+	 
+			<o>jit.gl.plato</o>
+	 
+			<o>jit.gl.render</o>
+	 
+			<o>jit.gl.shader</o>
+	 
+			<o>jit.gl.sketch</o>
+	 
+			<o>jit.gl.slab</o>
+	 
+			<o>jit.gl.text2d</o>
+	 
+			<o>jit.gl.text3d</o>
+	 
+			<o>jit.gl.texture</o>
+	 
+			<o>jit.gl.videoplane</o>
+	 
+			<o>jit.gl.volume</o>
+	 
+			<o>jit.glop</o>
+	 
+			<o>jit.glue</o>
+	 
+			<o>jit.grab</o>
+	 
+			<o>jit.gradient</o>
+	 
+			<o>jit.graph</o>
+	 
+			<o>jit.grgb2argb</o>
+	 
+			<a name="h"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	H
+	</header2>
+			<o>jit.hatch</o>		
+	 
+			<o>jit.hello</o>
+	 
+			<o>jit.histogram</o>
+	 
+			<o>jit.hsl2rgb</o>
+	 
+			<o>jit.hue</o>
+	 
+			<a name="i"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	I
+	</header2>
+			<o>jit.iter</o>
+	 
+			<a name="j"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	J
+	</header2>
+			<a name="k"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	K
+	</header2>
+			<o>jit.keyscreen</o>
+	 
+			<a name="l"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	L
+	</header2>
+			<o>jit.la.determinant</o>
+	 
+			<o>jit.la.diagproduct</o>
+	 
+			<o>jit.la.inverse</o>
+	 
+			<o>jit.la.mult</o>
+	 
+			<o>jit.la.trace</o>
+	 
+			<o>jit.la.uppertri</o>
+	 
+			<o>jit.lcd</o>
+	 
+			<o>jit.linden</o>
+	 
+			<o>jit.luma2ayuv</o>
+	 
+			<o>jit.luma2uyvy</o>
+	 
+			<o>jit.lumakey</o>
+	 
+			<a name="m"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	M
+	</header2>
+			<o>jit.map</o>
+	 
+			<o>jit.matrix</o>
+	 
+			<o>jit.matrixinfo</o>
+	 
+			<o>jit.matrixset</o>
+	 
+			<o>jit.mgraphics</o>
+	 
+			<o>jit.multiplex</o>
+	 
+			<o>jit.mxform2d</o>
+	 
+			<a name="n"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	N
+	</header2>
+			<o>jit.net.recv</o>
+	 
+			<o>jit.net.send</o>
+	 
+			<o>jit.noise</o>
+	 
+			<o>jit.normalize</o>
+	 
+			<a name="o"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	O
+	</header2>
+		
+			<o>jit.obref</o>
+	 
+			<o>jit.op</o>
+	 
+			<o>jit.openexr</o>
+	 
+			<a name="p"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	P
+	</header2>
+			<o>jit.p.bounds</o>
+	 
+			<o>jit.p.shiva</o>
+	 
+			<o>jit.p.vishnu</o>
+	 
+			<o>jit.pack</o>
+	 
+			<o>jit.path</o>
+	 
+			<o>jit.peek~</o>
+	 
+			<o>jit.phys.6dof</o>	
+	 
+			<o>jit.phys.barslide</o>
+	 
+			<o>jit.phys.body</o>
+	 
+			<o>jit.phys.conetwist</o>
+	 
+			<o>jit.phys.hinge</o>
+	 
+			<o>jit.phys.multiple</o>
+	 
+			<o>jit.phys.picker</o>
+	 
+			<o>jit.phys.point2point</o>
+	 
+			<o>jit.phys.world</o>
+	 
+			<o>jit.pix</o>
+	 
+			<o>jit.planeop</o>		
+	 
+			<o>jit.plot</o>
+	 
+			<o>jit.plume</o>
+	 
+			<o>jit.plur</o>
+	 
+			<o>jit.poke~</o>
+	 
+			<o>jit.print</o>
+	 
+			<o>jit.pwindow</o>
+	 
+			<a name="q"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	Q
+	</header2>
+			<o>jit.qball</o>
+	 
+			<o>jit.qfaker</o>
+	 
+			<o>jit.qt.broadcast</o>
+	 
+			<o>jit.qt.effect</o>
+	 
+			<o>jit.qt.grab</o>
+	 
+			<o>jit.qt.movie</o>
+	 
+			<o>jit.qt.record</o>
+	 
+			<o>jit.qt.videoout</o>
+	 
+			<o>jit.quat</o>
+	 
+			<o>jit.quat2axis</o>
+	 
+			<o>jit.quat2euler</o>
+	 
+			<a name="r"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	R
+	</header2>
+			<o>jit.release~</o>
+	 
+			<o>jit.repos</o>
+	 
+			<o>jit.resamp</o>
+	 
+			<o>jit.reverse</o>
+	 
+			<o>jit.rgb2hsl</o>
+	 
+			<o>jit.rgb2luma</o>
+	 
+			<o>jit.robcross</o>
+	 
+			<o>jit.rota</o>
+	 
+			<o>jit.roy</o>
+	 
+			<o>jit.rubix</o>
+	 
+			<a name="s"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	S
+	</header2>
+			<o>jit.scalebias</o>
+	 
+			<o>jit.scanoffset</o>
+	 
+			<o>jit.scanslide</o>
+	 
+			<o>jit.scanwrap</o>
+	 
+			<o>jit.scissors</o>
+	 
+			<o>jit.scope</o>
+	 
+			<o>jit.shade</o>
+	 
+			<o>jit.slide</o>
+	 
+			<o>jit.sobel</o>
+	 
+			<o>spigot~</o>
+	 
+			<o>jit.spill</o>
+	 
+			<o>jit.split</o>
+	 
+			<o>jit.sprinkle</o>
+	 
+			<o>jit.str.fromsymbol</o>
+	 
+			<o>jit.str.op</o>
+	 
+			<o>jit.str.regexp</o>
+	 
+			<o>jit.str.tosymbol</o>
+	 
+			<o>jit.streak</o>
+	 
+			<o>jit.submatrix</o>
+	 
+			<a name="t"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	T
+	</header2>
+			<o>jit.textfile</o>
+	 
+			<o>jit.thin</o>
+	 
+			<o>jit.tiffany</o>
+	 
+			<o>jit.traffic</o>
+	 
+			<o>jit.transpose</o>
+	 
+			<o>jit.turtle</o>
+	 
+			<a name="u"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	U
+	</header2>
+			<o>jit.uldl</o>
+	 
+			<o>jit.unpack</o>
+	 
+			<o>jit.uyvy2argb</o>
+	 
+			<o>jit.uyvy2ayuv</o>
+	 
+			<o>jit.uyvy2luma</o>
+	 
+			<a name="v"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	V
+	</header2>
+			<o>jit.vcr</o>
+	 
+			<a name="w"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	W
+	</header2>
+			<o>jit.wake</o>
+	 
+			<o>jit.window</o>
+	 
+			<a name="x"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	X
+	</header2>
+			<o>jit.xfade</o>
+	 
+			<a name="y"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	Y
+	</header2>
+			<a name="x"/>
+		<bodytext>
+		</bodytext>
+	<header2>
+	Z
+	</header2>
+</vignette>

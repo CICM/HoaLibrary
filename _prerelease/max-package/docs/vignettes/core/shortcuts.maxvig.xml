@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="shortcuts">
+	<header1>
+	Shortcuts
+	</header1>
+	<header2>
+	Window management
+	</header2>
+	<ul>
+		<li>
+			Command-click (Macintosh) or Control-click (Windows) in any white space to lock or
+			unlock the Patcher window (if it is editable).
+		</li>
+		<li>
+			Option-click (Macintosh) or Alt-click (Windows) on a window's close box to close
+			all windows except the Max window.
+		</li>
+	</ul>
+	<header2>
+	Working with the Object Explorer
+	</header2>
+	<ul>
+		<li>
+			You can use the up/down/left/right arrow keys to move horizontally 
+			or vertically among icons and category tabs in the 
+			<link module="core" name="object_explorer" type="vignette">Object Explorer</link>.
+		</li>
+		<li>
+			Double-clicking on a selected object will create and instance of the object
+			in the center of your patcher window.
+		</li>
+	</ul>
+	<header2>
+	Selecting a patch cord or objects and patch cords
+	</header2>
+	<ul>
+		<li>
+			Option-drag (Macintosh) or Alt-drag (Windows) a rectangle around a patch
+			cord or set of patch cords and objects to select all the objects and patch
+			cords in the area you drag over.
+		</li>
+	</ul>
+	<header2>
+	Moving Max objects in the Patcher window
+	</header2>
+	<ul>
+		<li>
+			Click on any object in an unlocked Patcher window to select it, and hold down
+			the Shift key while dragging the object. The selected object will be constrained
+			to move in only horizontally or vertically. If the object being dragged is connected to another object, shift-dragging will snap the object when the connection between the two objects is vertical.
+		</li>
+		<li>
+			Click on any object in an unlocked Patcher window to select it. Use the arrow keys
+			to move a selected object will move in any direction by 1 pixel or the default value
+			if you have chosen Snap To Grid from the Options menu.
+		</li>
+		<li>
+			To temporarily disable alignment guides and Snap to Grid when moving objects,
+			click on any object(s) in an unlocked Patcher window to select and hold down
+			the Command key (Macintosh) or Control key (Windows) while dragging the object(s).
+		</li>
+		</ul>
+	<header2>
+	Duplicating objects
+	</header2>
+	<ul>
+		<li>
+			Click on any object in an unlocked Patcher window to select them, then
+			Option-click (Macintosh) or Alt-click (Windows) on the object and drag to
+			duplicate the object.
+		</li>
+		<li>
+			Immediately after duplicating an object by choosing <b>Duplicate</b> from the Edit menu, you can use the mouse to move the duplicated object in any
+			direction from the original. Subsequent <b>Duplicate</b> commands will distribute the new objects with the same spacing.
+		</li>
+	</ul>
+	<header2>
+	Using user interface objects in an unlocked Patcher window
+	</header2>
+	<ul>
+		<li>
+			Hold down the Command (Macintosh) or Control (Windows) key while clicking
+			on a user interface object (such as a number box, slider, or toggle). The
+			object will behave as though the Patcher window were locked (i.e. you can
+			toggle switches, set numbers, move faders, etc.).
+		</li>
+	</ul>
+	<header2>
+	Presentation Mode shortcuts
+	</header2>
+	<ul>
+		<li>
+			Option-command-E (Macintosh) or Alt-control-E (Windows) will
+			toggle between Patching and Presentation Modes.
+		</li>
+	</ul>
+	<header2>
+	Viewing help files and reference pages
+	</header2>
+	<ul>
+		<li>
+			Option-click (Macintosh) or Alt-click (Windows) on 
+			an object box in an unlocked Patcher window to view an object’s help file.
+		</li>
+	</ul>
+	<header2>
+	Object editing shortcuts
+	</header2>
+	<ul>
+		<li>
+			Hold down the Command (Macintosh) key or Control (Windows) key and
+			double-click on any <o>coll</o> or <o>table</o> object or subpatcher
+			in any unlocked patcher window to view its contents.
+		</li>
+	</ul>
+	<header2>
+	Inspector shortcuts
+	</header2>
+	<ul>
+		<li>
+			Position your cursor on the left edge of the object, and use the
+			<link module="core" name="circular_object_menu" type="vignette">Circular object menu</link>
+			when it appears to show the object Inspector.
+		</li>
+		<li>
+			You can select rows of the inspector with the up and down arrow keys, or type the first few letters of an attribute name to move to that row. Once a row has been selected, pressing the Return key will start editing the text of the attribute.
+		</li>
+		<li>
+			The Cut, Copy, and Paste keyboard shortcuts using the Command keys (Macintosh)
+			or the Control keys (Windows) work in the text fields of any object's Inspector window.
+		</li>
+	</ul>
+	<header2>
+	Finding all instances of a send, receive or value object
+	</header2>
+	<ul>
+		<li>
+			Double-click on a  <o>send</o>, <o>receive</o>, or <o>value</o> object
+			to show a contextual menu that lists of all instances of these objects,
+			followed by the name of the patcher windows in which they are used. When you choose the desired instance from the menu, the patcher window will be opened (if necessary) and the object will be highlighted.
+		</li>
+	</ul>
+</vignette>

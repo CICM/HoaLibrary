@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Audio Filtering">
+
+
+	<header1>Audio Filtering</header1>
+
+	<bodytext>
+	  Filtering digital audio can mean many things, but most commonly refers to attenuating (reducing) or boosting (increasing) the gain (volume level) at some frequencies but not at other frequencies.  
+	  The classic filter <i>response</i> types are
+ 	</bodytext>
+  <ul>
+    <li><b>lowpass</b>: low frequencies pass through, high frequencies are eliminated                        </li>
+    <li><b>highpass</b>: only high frequencies pass through                                                  </li>
+    <li><b>bandpass</b>: some frequencies in the middle pass through, lows and highs are attenuated)         </li>
+    <li><b>bandstop</b> or notch: frequencies in the middle are attenuated, leaving only the lows and highs. </li>
+  </ul>
+  <br />
+
+  
+  <header2>Black Box Filters</header2>
+ 	<bodytext>
+    Max offers several all-in-one filter objects.  
+    These objects hide the gory details of how the filters work and simply provide a couple of high-level attributes for controlling the filter.  
+    While not as flexible as the "open box" solution described below, these provide the easiest way to perform rudimentary filtering on audio signals.
+  </bodytext>
+  <ul>
+    <li><o>onepole~</o> : the simplest lowpass filter, with a gradual transition               </li>
+    <li><o>lores~</o>   : a lowpass pass filter with a resonant peak, and a steeper transition </li>
+    <li><o>reson~</o>   : a simple bandpass filter                                             </li>
+  </ul>
+ 	<bodytext>
+    All of these filters may be used to produce the 'opposite' response using the <o>-~</o> object.  
+    This means you can achieve a highpass response from a lowpass filter, or bandstop response from a bandpass filter.  
+    This was the subject of the <a href="http://cycling74.com/2011/04/12/week-5/">Did You Know series #5</a>.
+  </bodytext>
+  <bodytext>
+    The <o>fffb~</o> object is simply a group of <o>reson~</o> objects internally.  You can visualize the <o>fffb~</o> object as being somewhat like a band-separator for a graphic equalizer.  
+  </bodytext>
+  <br />
+	
+  
+  <header2>"Open Box" Filters</header2>
+ 	<bodytext>
+    More flexibility is afforded where the basic filtering process is separated from the mechanism used to create the internal filtering parameters.  
+    The <o>biquad~</o> and <o>cascade~</o> objects both filter audio using a set of low-level <i>coefficients</i>.  
+    The coefficients are simply numbers generated using mathematical algorithms to make the filter work in some prescribed way.
+  </bodytext>
+  <bodytext>
+    The number of coefficients required for a filter is related to it's <i>order</i>.  
+    A simplification of filter order might say that for a higher order of filter, more complex or dramatic the filter responses may be attained.  
+    For a first or second order filter, you can use the <o>biquad~</o> object.  For higher order filters you must use the <o>cascade~</o> object.
+  </bodytext>
+  <bodytext>
+    The challenge for these filters is generating the correct coefficients to attain a desired result.  Max provides several objects to calculate the coefficients for various filter responses.
+  </bodytext>
+    <ul>
+      <li><o>filtergraph~</o>: a user interface object/widget that provides an interactive means to control the filter specification, usually for 2nd-order filters                               </li>
+      <li><o>filtercoeff~</o>: an object that generates the coefficients for 2nd-order filters (<o>biquad~</o>) at audio signal rate                                                                     </li>
+      <li><o>filterdesign</o>: generates the coefficients for filters up to 200th-order, which can be realized with the <o>cascade~</o> object (or the <o>biquad~</o> object in the case of 2nd-order filters). </li>
+    </ul>
+  <bodytext>
+    Of these options, the <o>filtergraph~</o> is the most easily accessible object, whereas the <o>filterdesign</o> object offers the most control and flexibility.
+  </bodytext>
+  
+  
+  <header2>Using the filterdesign object</header2>
+ 	<bodytext>
+    The simplest way to use a <o>filterdesign</o> object is to simply create it and connect it to a <o>cascade~</o> object.
+    Quite often, however, it is useful to attain the characteristics of a the filter you've created, and to visualize the impact of the filter.
+    By connecting the output of a <o>filterdesign</o> object to the input of a <o>filterdetail</o> object, we are able to access the said characteristics.
+    This includes the filter's magnitude (gain) response and group delay (phase distortion).
+  </bodytext>
+  <bodytext>
+    The output of the <o>filterdetail</o> outlets are simply lists of numbers.  
+    To visualize these, the lists can be sent to a <o>multislider</o> or <o>plot~</o> object.
+    The <o>plot~</o> object offers a number of features that make it ideally suited to visualizing the output of <o>filterdetail</o>.
+  </bodytext>
+  <bodytext>
+    The filter is designed as a function of its attributes.  
+  </bodytext>
+  <bodytext>
+    The <b>response</b> attribute defines the response type of the filter which may be lowpass, highpass, bandpass, or bandstop.  
+  </bodytext>
+  <bodytext>
+    The <b>frequency</b> attribute sets the cutoff frequency.  
+    By default this value is expressed in Hertz, based upon Max's audio sample rate.  
+    The sample rate may be over-ridden with a sample rate of your choosing with the <b>samplerate</b> attribute.  
+    The object maybe define the cutoff frequency in units other than hertz by setting the <b>units</b> attribute.  
+    If the filter is a bandpass or bandstop filter, then there will be two cutoff frequencies defining the two edges of the band.  
+    In this case the attribute is set with a list of two numbers.
+  </bodytext>
+  <bodytext>
+    The <b>order</b> attribute will define the order of the filter.  
+    A higher order can achieve a steeper transition from the passband to the stopband, greater attenuation in the stopband, and a flatter passband, depending upon the filter topology.  
+    However, this higher order also comes at a cost: the CPU usage for the <o>cascade~</o> object will be higher with a higher-order filter, the phase distortion will be greater, 
+    there could be more latency in the filter, and the <o>filterdesign</o> object itself will demand more cpu resources to calculate the coefficients.
+  </bodytext>
+  <bodytext>
+    The <b>topology</b> attribute of the filter will select between several different ways of organizing the poles and zeroes of the filter.  
+    Each topology has slightly different characteristics which are traded-off to achieve a particular goal.
+  </bodytext>
+  
+  
+  <header2>Butterworth</header2>
+ 	<bodytext>
+    The Butterworth topology provides a flat passband.  
+    Once the transition band begins to attenuate the signal it continues to decrease until it gets to zero (DSP nerds say that this is "monotonically decreasing").  
+    There is some phase distortion with this filter, but less than for either of the Chebyshev Types.  
+    The easiest way to visualize the distortion is to look at the <b>group delay</b> output of the <o>filterdetail</o> object.
+  </bodytext>
+  
+  <header2>Chebyshev Type I</header2>
+ 	<bodytext>
+    The Chebyshev Type I topology offers the steepest transition band of any of the current options in the <o>filterdesign</o> object.  
+    Like the Butterworth filter, it is monotonically decreasing in the stopband.  
+    However, the passband is not flat.  
+    This means that not all frequencies in the passband will have the same gain applied to them.  
+  </bodytext>
+  <bodytext>
+    The peak-to-peak magnitude of the ripples can be controlled in this topology using the <b>passband_ripple</b> attribute, defined in decibels.  
+    By default this is set to 0.5 db.  
+    All other things held equal, greater amounts of ripple will give a steeper transition from passband to stopband.
+  </bodytext>
+  <bodytext>
+    Generally speaking, there is also more phase distortion in the passband of the Chebyshev Type I filter than the Butterworth of Chebyshev Type II.  
+    This may or may not matter depending on the application.  
+    This is the tradeoff for having the steepest filter at the minimum cost.
+  </bodytext>
+  
+  <header2>Chebyshev Type II</header2>
+ 	<bodytext>
+    The Chebyshev Type II topology offers a steeper transition than the Butterworth, but not generally not as steep as the Chebyshev Type I.  
+    The passband is flat, like Butterworth but contrasting with Chebyshev Type I, but there are ripples in the stopband.
+  </bodytext>
+  <bodytext>
+    Like the Chebyshev Type I, the magnitude of the ripples may be traded-off against the steepness of the transition.  
+    This is controlled by setting the <b>stopband_attenuation</b> attribute to the value in decibels that defines the minimum amount of attenuation required.  
+    All frequencies in the stopband will then be attenuated by this amount or greater.  
+    Less stopband attenuation will result in a filter with a steeper transition if all other variables are held equal.
+  </bodytext>
+  <bodytext>
+    For musical purposes, the ripples in the stopband are often considered innocuous because they are attenuated to a point where they are not audible.  
+    The Chebyshev Type II provides the steepest filter while keeping the passband flat.  
+    For this reason, it is the default filter topology for the <o>filterdesign</o> object.
+  </bodytext>
+  <bodytext>
+    One caveat when working with the Chebyshev Type II filter is that the cutoff frequency is not defined in the same manner as for most classical filters.  
+    Typically, filters are designed where a cutoff frequency is defined to be the point where the magnitude has decreased to 3 decibels lower than the passband magnitude.  
+    In constrast, the Chebyshev Type II is designed for its stopband.  
+    The <b>frequency</b> attribute in this case defines the point at which the <b>stopband_attenuation</b> is first reached.
+  </bodytext>
+  
+  <br />
+	
+  
+  <header2>Additional Filter Responses</header2>
+  
+  <header2>Allpass Filters</header2>
+ 	<bodytext>
+    Allpass filters have a flat magnitude response, meaning that all frequencies pass through with unaltered gain.  
+    The phase, however, is altered.  
+    It is possible to define your own allpass filter for <o>biquad~</o> or <o>cascade~</o> by simply providing the feedforward (numerator) coefficients in the reverse order of the feedback (denominator) coefficients.  
+    Max also offers two pre-built allpass filters.
+  </bodytext>
+  <bodytext>
+    The <o>allpass~</o> object implements a generic allpass filter.  
+    With a delay time of 1 sample, it is a canonical first-order allpass filter.  
+    With higher delay times it takes on some of the response characteristics of higher-ordered allpass filters, but still applies only a single coefficient.  
+    This yields a stair-stepped phase response with the number of steps numbering roughly half the number of samples of delay.  
+    The steepness of the steps (the amount of phase distortion at the equally-spaced intervals) is determined by the amount of feedback.
+  </bodytext>
+  <bodytext>
+    The <o>phaseshift~</o> object implements a 2nd-order allpass filter.  
+    Rather than specifying the raw coefficients to the filter, you specify the frequency at which you want phase shift to be centered, and the steepness of the transition.  
+    The object then calculates the coefficients internally.
+  </bodytext>
+  
+  
+  <header2>Comb Filters</header2>
+ 	<bodytext>
+    Max's <o>comb~</o> and <o>teeth~</o> objects implement comb filters.  
+    In their simplest form, comb filters are merely delays with feedback, using smallish delay times to yield a rich and resonant effect.  
+    It is also possible to re-create this effect using using the <o>tapin~</o> and <o>tapout~</o> objects, provided that you have a small enough signal vector size set in Max's preferences.
+  </bodytext>
+  <bodytext>
+    The magnitude response of comb filters is composed of many, equally-spaced, peaks and a valleys repeated across the spectrum.  
+    The help patcher for the <o>filterdetail</o> object demonstrates some of the possibilities.
+  </bodytext>
+  
+  
+  <br />
+  
+</vignette>

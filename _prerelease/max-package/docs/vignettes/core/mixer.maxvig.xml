@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Mixer Engine">
+	<header1>
+		The Mixer Engine
+	</header1>
+	<bodytext>
+		Earlier versions of Max compiled all audio patchers into a single 
+		DSP chain. This meant 
+		that audio patching required a rebuild of 
+		the entire DSP signal chain whenever objects
+		or connections were 
+		added or removed. Max now includes a Mixer Engine which separates 
+		every 
+		top-level patcher into its own DSP chain which can be 
+		compiled and loaded into the engine.
+	</bodytext>
+	<bodytext>
+		The isolation of DSP chains gives Max the flexibility to use multiple 
+		processors to process separate top level patchers (similar to the 
+		way in which some DAW environments send separate tracks to separate 
+		processors). The Mixer Engine lets separate patchers remain separate - 
+		as one patcher is running, another patcher can be opened, closed, or 
+		edited without stopping the global DSP chain.
+	</bodytext>
+	<bodytext>
+		This allows each top-level patcher to be controlled separately - individual 
+		patchers have their 
+		own gain, CPU monitoring, and routing controls.
+		The 
+		patcher toolbar 
+		contains a Mixer button
+		for opening a small window 
+		for mixer controls, CPU metering, and other useful audio features.
+	</bodytext>
+	<bluebox>
+		<header2>
+		Showing the Mixer
+	</header2>
+		<ul>
+			<li>
+			Click on the Mixer button in the patcher toolbar to display the Mixer control panel
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/mixer_show.png"/>
+		</bodytext>
+		<ul>
+			<li>
+			To hide the Mixer control panel, click on the Mixer button in the patcher toolbar
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<header2>
+		The Mixer Control Panel
+	</header2>
+	<bodytext>
+		The Mixer control panel contains controls you can use to control the volume 
+		of the top level patcher, as well as muting or soloing the patcher. You can 
+		also access the 
+		Audio Status Window,
+		enable/disable audio, and enable and monitor audio crossfading for the patcher.
+	</bodytext>
+	<a name="multidac"/>
+	<bodytext>
+		By default, the Mixer control panel contains controls for a single
+		<o>dac~</o>
+		or 
+		<o>ezdac~</o> 
+		object in your patcher window. You can add additional
+		<o>dac~</o>
+		objects to your patch using a symbol argument that names
+		the 
+		<o>dac~</o>
+		object. Adding an additional named
+		<o>dac~</o>
+		object will create a new set of Mixer controls. If two
+		<o>dac~</o>
+		instances in a patcher hierarchy have the same name they will be on
+		the same "bus" and share controls.
+	</bodytext>
+	<bodytext>
+		<img src="images/mixer_two_dacs.png"/>
+	</bodytext>
+	<bluebox>
+		<header2>
+			Controlling Mixer output
+	</header2>
+		<ul>
+			<li>
+			Click on the Mixer button in the patcher toolbar to display the Mixer 
+			control panel.
+		</li>
+			<li>
+			Click and drag on the volume knob to set the output volume for the 
+			patcher window. The current output amplitude in dB will be displayed.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/mixer_output_volume.png"/>
+		</bodytext>
+		<ul>
+			<li>
+			Click on the M (Mute) or S (Solo) buttons to mute or solo the 
+			output from the patcher.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/mixer_mutesolo.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+		Controlling System Audio
+	</header2>
+		<ul>
+			<li>
+			Click on the Mixer button in the patcher toolbar to display the 
+			Mixer control panel.
+		</li>
+			<li>
+			Click on the gear button to display or hide the
+			Audio Status window.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/mixer_audio_status.png"/>
+		</bodytext>
+		<ul>
+			<li>
+			Click on the on/off button to toggle global audio processing. 
+			When audio is on, the Mixer button in the toolbar changes color 
+			to indicate that audio is on, and the percentage of CPU usage is displayed.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/mixer_audio_on.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<space/>
+	<header2>
+			Mixer latency
+	</header2>
+	<bodytext>
+			The Mixer Engine allows you to patch without audible interruptions in audio output by
+			introducing an amount of latency to the patch's output. The amount of latency is intended
+			to provide enough time to rebuild a new DSP signal chain while the current signal chain
+			is active, and then to crossfade to the newly created signal chain (the amount of latency 
+			required will vary with the complexity of the DSP signal chain). Mixer latency is specified 
+			in milliseconds, and is be applied to the Mixer engine for every top-level patcher.
+		</bodytext>
+	<bodytext>
+			The Mixer contains three buttons that let you set the state of the Mixer for the patcher
+			window.
+		</bodytext>
+	<bodytext>
+		<img src="images/mixer_latency.png"/>
+	</bodytext>
+	<a name="crossfademode"/>
+	<ul>
+		<li>
+			The <i>Off</i> button disables Mixer crossfading. If Mixer crossfading is off, 
+			Max will fade out the old patcher and fade in the new patcher rather than performing a
+			crossfade.
+		</li>
+		<li>
+			The <i>On</i> button enables Mixer crossfading and will use the 
+			<link anchor="mixerlatency" module="core" name="mixer_preferences" type="vignette">Mixer crossfade latency</link>
+			to perform crossfading. If the latency value is set to 0, Max will fade out the old 
+			patcher and fade in the new patcher rather than performing a crossfade. If Mixer crossfading
+			is enabled, the current latency will be displayed.
+		</li>
+		<li>
+			The <i>Auto</i> button allows you to introduce Mixer latency only when you
+			are editing - it enables Mixer crossfading the first time an edit is made
+			and while audio is running. The extra latency will always be reset 
+			back to zero when audio is stopped and started again. This is the default
+			setting for the Mixer.
+		</li>
+	</ul>
+	<bodytext><link anchor="mixerlatency" module="core" name="mixer_preferences" type="vignette">Mixer crossfade latency</link> 
+			and 
+			<link anchor="mixerramptimes" module="core" name="mixer_preferences" type="vignette">Mixer ramp time</link>
+			are set using the 
+			<link module="core" name="mixer_preferences" type="vignette">Mixer Preferences</link>
+			.
+		</bodytext>
+	<bluebox>
+		<header2>
+			Controlling Audio Crossfading
+	</header2>
+		<ul>
+			<li>
+			Click on the Mixer button in the patcher toolbar to display 
+			the Mixer control panel.
+		</li>
+			<li>
+			Click on the Off, On, or Auto buttons to control Mixer audio 
+			crossfading while patching. 
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+</vignette>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="File Preferences">
+	<header1>
+	File Preferences
+	</header1>
+		<bodytext>
+			The File Preferences window lets you add folders to the Max <link type="vignette" module="core" name="search_path">search path</link>.
+		</bodytext>
+	<bluebox>
+	<header2>
+	Adding a folder to the Max search path
+	</header2>
+		<ul>
+		<li>
+			Choose <b>File Preferences...</b> from the Options menu to show
+			the File Preferences window.
+			</li>
+		<li>Click on the Add [+] button in the File
+			Preferences window toolbar. A new line will appear in the File
+			Preferences window.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/file_preferences_window5.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Click the <b>Choose...</b> button in the Path column and select a folder from the file dialog.
+			The pathname of the folder will appear in the Path column and the
+			folder will be added to your search path.
+			<br />
+			<br />
+			You can also add a path name manually by double-clicking in the value column of an entry you've added.
+		</li>
+		<li>
+			If you want subfolders of the folder you added to the search path to be searched, make sure the checkbox in the Subfolders column is checked. If you only want the folder you added to the search path to be searched, uncheck its checkbox in the Subfolders column.
+		</li>
+		<li>
+			You can give the entry you add to the search path a name in the Name column. However, this name has no functional importance and is only for your future reference.
+		</li>
+		</ul>
+	</bluebox>
+	<br /><space/>
+		<bodytext>
+			<b>Note:</b> On the Mac, the folder you add to the search path can be an alias to another folder, but it cannot contain aliases. Aliased subfolders are ignored. On Windows there is no support for folder shortcuts.
+		</bodytext>
+	<bluebox>
+	<header2>
+	Removing a folder from the Max search path
+	</header2>
+		<ul>
+		<li>
+			Choose <b>File Preferences...</b> from the Options menu to show
+			the File Preferences window.
+		</li>
+		<li>
+			Click on a user entry in the File Preferences window to select it, then click on the
+			Remove button in the File Preferences window toolbar. The selected entry will be removed from the search path.
+		</li>
+		</ul>
+	</bluebox>
+			<br />
+	<bluebox>
+	<header2>
+	Locating a folder in your search path
+	</header2>
+		<ul>
+		<li>
+			Choose <b>File Preferences...</b> from the Options menu to show
+			the File Preferences window.</li>
+		<li>
+			Click on a user entry in the File Preferences window to select it, then click on the
+			Reveal in Finder / Reveal in Explorer button in the File Preferences window toolbar. A Macintosh Finder or Windows
+			Explorer window will open, showing the folder you selected.
+		</li>
+		</ul>
+	</bluebox>
+</vignette>
+			

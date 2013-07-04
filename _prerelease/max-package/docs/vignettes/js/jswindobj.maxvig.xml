@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Wind Object">
+<header1>
+The Wind Object
+</header1>
+<bodytext>
+The Wind object is a property of a Patcher that represents its window. You cannot create a new Wind or access other types of windows such as that of a Max table object.
+</bodytext>
+<header2>Wind Properties</header2>
+<code>
+  <b>assoc</b> (<i>Patcher, get</i>)
+</code>
+<bodytext>
+The Patcher object associated with the window.
+</bodytext>
+<code>
+  <b>assocclass</b> (<i>String, get</i>)
+</code>
+<bodytext>
+The Max class of the object associated with the window.
+</bodytext>
+<code>
+  <b>dirty</b> (<i>Boolean, get/set</i>)
+</code>
+<bodytext>
+Has the window’s contents been modified? This property is read-only in the runtime version of Max.
+</bodytext>
+<code>
+  <b>hasgrow</b> (<i>Boolean, get/set</i>)
+</code>
+<bodytext>
+Does the window have a grow area?
+</bodytext>
+<code>
+  <b>hashorizscroll</b> (<i>Boolean, get</i>)
+</code>
+<bodytext>
+Does the window have a horizontal scroll bar?
+</bodytext>
+<code>
+  <b>hasvertscroll</b> (<i>Boolean, get</i>)
+</code>
+<bodytext>
+Does the window have a vertical scroll bar?
+</bodytext>
+<code>
+  <b>haszoom</b> (<i>Boolean, get/set</i>)
+</code>
+<bodytext>
+Does the window have a zoom box?
+</bodytext>
+<code>
+  <b>hastitlebar</b> (<i>Boolean, get/set</i>)
+</code>
+<bodytext>
+Does the window have a window title bar?
+</bodytext>
+<code>
+  <b>location</b> (<i>Array, get/set</i>)
+</code>
+<bodytext>
+An array of four coordinates (left, top, right, bottom) representing the window’s location in global coordinates.
+</bodytext>
+<code>
+  <b>next</b> (<i>Wind, get</i>)
+</code>
+<bodytext>
+The Wind object of the next patcher visible in the application’s list of windows The first Wind object can be accessed using the frontpatcher property of the Max object (as max.frontpatcher.wind).
+</bodytext>
+<code>
+  <b>size</b> (<i>Array, get/set</i>)
+</code>
+<bodytext>
+An array of two coordinates (width, height) representing the window’s size.
+</bodytext>
+<code>
+  <b>title</b> (<i>String, get/set</i>)
+</code>
+<bodytext>
+The window’s title.
+</bodytext>
+<code>
+  <b>visible</b> (<i>Boolean, get/set</i>)
+</code>
+<bodytext>
+Can you see the window?
+</bodytext>
+<bodytext>
+Wind Methods
+</bodytext>
+<code>
+  <b>bringtofront</b> (<i></i>)
+</code>
+<bodytext>
+Moves the window in front of all other windows
+</bodytext>
+<code>
+  <b>scrollto</b> (<i>x, y</i>)
+</code>
+<bodytext>
+  Scrolls the window so that <i>x</i> and <i>y</i> are at the top-left corner.
+</bodytext>
+<code>
+  <b>sendtoback</b> (<i></i>)
+</code>
+<bodytext>
+Moves the window behind all other windows
+</bodytext>
+<code>
+  <b>setlocation</b> (<i>left,top,bottom,right</i>)
+</code>
+<bodytext>
+Set the global location of the window according to the coordinates passed in as arguments
+</bodytext>
+</vignette>

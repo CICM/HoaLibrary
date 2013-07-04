@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="MIDI Effect Building Blocks">
+	<header1>
+		MIDI Effect Building Blocks
+	</header1>
+<bodytext>
+	The 
+	<a href="https://www.ableton.com/en/packs/max-live-building-tools/">Max for Live Building Tools</a>
+	Live Pack contains a set of fully
+	functional Audio and MIDI effect devices that provide examples of various 
+	kinds of operations and processes. You can use these patches 
+	in series in your Live Session, or edit and recombine them to 
+	make your own devices. 
+</bodytext>	
+<bodytext>
+	Live Suite owners can download this Live Pack by choosing <b>Your Account > Your Packs</b>
+	when logged in to the Ableton website and clicking on the download button to the Live Pack.
+	To install the Live Pack, double-click on the <i>.alp</i> file
+</bodytext>
+<bluebox>
+<header2>
+	Finding the MIDI Effect Building Blocks
+</header2>
+	<ul>
+	<li>
+		After you have installed the Live Pack,
+		click on the Packs button in Live's File browser to display
+		the list of currently installed Live Packs. In the column to the
+		right, click on the arrow to the left of the M4L Building Tools
+		folder to show the Live Pack contents.
+	</li>
+	</ul>
+<!-- There is currently no pack to install, and so I can't get a screenshot. Commented out.
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Presets</b>.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>MIDI Effects</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Max MIDI Effect</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Tools</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Building Blocks</b> to show 
+		Building Blocks.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/midibuildingblocks1.png" />
+	</bodytext>
+-->
+</bluebox>
+<br />
+	<header2>
+	Overview of the MIDI Effect Building Blocks
+	</header2>
+	<ul>
+	<li>
+		<b>Max ANotePlayer </b>: a utility that functions as a keyboard
+	</li>
+	<li>
+		<b>Max Humanizer </b>: Each incoming MIDI note is delayed a random amount of time.
+	</li>
+	<li>
+		<b>Max NoteScalar </b>: Some examples of different ways to fill a table object in order to scale incoming MIDI notes
+	</li>
+	<li>
+		<b>Max PitchScalar </b>: The behavior of this device imitates the behavior of Live's Scale MIDI effect
+	</li>
+	<li>
+		<b>Max SimpleEcho </b>: Repeat a MIDI note with decreasing velocities
+	</li>
+	</ul>
+	</vignette>

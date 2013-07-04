@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Advanced MSP topics">
+	<header1>
+	Advanced MSP Topics
+	</header1>
+	<bodytext>
+	Additional resources for advanced topics are available on the following pages:
+</bodytext>
+	<ul>
+		<li>
+			<link module="core" name="messages_to_dsp" type="vignette">Messages to <o>dsp</o></link>
+		</li>
+		<li>
+			<link module="core" name="audio_filtering" type="vignette">Advanced audio filtering tools</link>
+		</li>
+		<li>
+			<link module="core" name="maxtime" type="vignette">Specifying 'musical' Time in Max</link>
+		</li>
+		<li>
+			<link module="core" name="rewire" type="vignette">Using Max with ReWire</link>
+		</li>
+	</ul>
+</vignette>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Arranging and aligning objects">
+	<header1>
+	Arranging and aligning objects
+	</header1>
+<ul>
+	<li><link type="vignette" module="core" name="grid">Using the edit grid</link></li>
+	<li><link type="vignette" module="core" name="aligning_objects">Aligning objects</link></li>
+	<li><link type="vignette" module="core" name="distributing_objects">Distributing objects</link></li>
+	<li><link type="vignette" module="core" name="aligning_patchcords">Aligning patch cords</link></li>
+	<li><link type="vignette" module="core" name="resizing_objects">Resizing and Scaling objects</link></li>
+	<li><link type="vignette" module="core" name="object_ordering">Changing front-to-back ordering</link></li>
+	<li><link type="vignette" module="core" name="background">Using the background layer</link></li>
+</ul>
+</vignette>

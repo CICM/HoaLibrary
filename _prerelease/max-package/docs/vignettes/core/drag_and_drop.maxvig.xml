@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="File Browser Drag and Drop">
+	<header1>
+	File Browser Drag and Drop
+	</header1>
+<bodytext>
+	Once you find files in the file browser, you can quickly incorporate them into patchers by dragging them. Files can be dragged <i>into patchers</i> as well as <i>onto objects</i>. Below are some common tasks you can accomplish with drag and drop.
+</bodytext>
+<bluebox>
+	<header2>
+		Creating objects from the file browser
+	</header2>
+<ul>
+	<li>
+		Click on an object file in the file browser and
+		drag into any empty space in an unlocked patcher window. You’ll see a translucent
+		copy of the row from the file browser appear in the window when
+		you drag the file into it.
+	<br />
+		When you release your mouse, a instance of the object will appear in the patcher.
+	</li>
+	</ul>
+</bluebox>
+	<br /><space/>
+<bluebox>
+<header2>
+Creating read file messages for media files from the file browser
+</header2>
+	<ul>
+	<li>
+		Click on a media file an imagefile, an audiofile, or a moviefile in the File
+		Browser browser display area and drag into any white space in an unlocked Patcher
+		Window. You’ll see a translucent copy of the row from the File Browser appear in
+		the unlocked patcher window when you drag your cursor into it.
+		<br />
+		When you release your mouse, a message box will appear in the Patcher Window that
+		contains the Max message used to load the media file (e.g. <m>read</m><space/><bi>&lt;moviefile name&gt;</bi>,
+		<m>open</m><space/><bi>&lt;audiofile name&gt;</bi>).
+	</li>
+	<li>
+		You'll need to add a patch cord to connect newly created message box
+	</li>
+	</ul>
+	<bodytext>
+		Holding down the Option key (Macintosh) or Alt key (Windows) while dragging will
+		show a pop-up menu. Although the contents of the menu will vary depending on what type of
+		media file you choose, you are basically presented with the choice of creating a
+		<link type="refpage" name="message">message box</link> with the necessary message to load the file, or to instantiate a
+		Max object that loads the media file.
+	</bodytext>
+</bluebox>
+	<br /><space/>
+<bluebox>
+<header2>
+Loading QuickTime movies from the file browser
+</header2>
+	<ul>
+	<li>
+		Click on a moviefile in the file browser and drag onto any <o>jit.qt.movie</o>
+		object in a locked or unlocked patcher window. You’ll see a translucent copy of the row from
+		the File Browser appear in the unlocked patcher window when you drag your cursor into it.
+	<br />
+		When you release your mouse, the QuickTIme movies will be read into the <o>jit.qt.movie</o>
+		just as if you had used the <m>read</m> message.
+	</li>
+	</ul>
+</bluebox>
+	<br /><space/>
+<bluebox>
+<header2>
+Loading audiofiles into MSP objects from the file browser
+</header2>
+	<ul>
+	<li>
+		Click on an audiofile in the file browser and drag onto any  <o>buffer~</o>, <o>waveform~</o>, or
+		<o>sfplay~</o> object in a locked or unlocked Patcher Window. You’ll see a translucent copy
+		of the row from the File Browser appear in the unlocked patcher window when you drag your
+		cursor into it.
+		<br />>
+		When you release the mouse button, the audiofiles will be read into a <o>buffer~</o> object as if you had
+		used the <m>replace</m> message or into an <o>sfplay~</o> object as if you had used the <m>open</m> message.
+	</li>
+	</ul>
+	<bodytext>
+		Holding down the option key (Mac) or control key (Windows) while dragging will
+		show a pop-up menu. You can choose to create a <link type="refpage" name="message">message box</link> with the necessary
+		message to load the file, or to instantiate a
+		<o>buffer~</o> or <o>sfplay~</o> object that loads the media file.
+	</bodytext>
+</bluebox>
+	<br /><space/>
+<bluebox>
+<header2>
+Loading image files from the file browser
+</header2>
+	<ul>
+	<li>
+		Click on an image file in the file browser and drag onto any <o>fpic</o> or <o>jit.qt.movie</o>
+		object in a locked or unlocked Patcher Window. You’ll see a translucent copy of the row from the File Browser
+		appear in the unlocked patcher window when you drag your cursor into it.
+		<br />
+		When you release the mouse button, the image file will be read into a the <o>fpic</o> or <o>jit.qt.movie</o> object as if you had used the read message.
+	</li>
+	</ul>
+	<bodytext>
+		Holding down the option key (Mac) or Alt key (Windows) while dragging will
+		show a pop-up menu. You can choose to create a <link type="refpage" name="message">message box</link> with the necessary
+		message to load the file, create an <o>fpic</o> object that loads the media file, or
+		create an embedded image.
+	</bodytext>
+</bluebox>
+	<br /><space/>
+<bluebox>
+<header2>
+Creating menus from the file browser
+</header2>
+	<ul>
+	<li>
+		Click on a folder in the file browser and drag into any white space in an unlocked Patcher
+		Window. When you You’ll see a translucent copy of the row from the File Browser appear in
+		the unlocked patcher window when you drag your cursor into it.
+		When you release your mouse, a <o>umenu</o> object will appear that contains
+		the names of all the files in the folder.
+	</li>
+	</ul>
+	<bodytext>
+		Holding down the option key (Mac) or Alt key (Windows) while dragging will
+		show a pop-up menu. You can choose to create a <link type="refpage" name="message">message box</link> with the necessary
+		message to load the file, create an <o>fpic</o> object that loads the media file, or
+		create an embedded image.
+	</bodytext>
+</bluebox>
+	<br /><space/>
+<bluebox>
+<header2>
+Loading a patcher into a bpatcher from the file browser
+</header2>
+	<ul>
+	<li>
+		Click on the name of a patcher file in the file browser 
+		area and drag onto any <o>bpatcher</o> object in an unlocked patcher window. 
+		When you release the mouse button, the patcher file will be loaded into the <o>bpatcher</o> 
+		object, or will replace any patcher file currently loaded.
+	</li>
+	</ul>
+</bluebox>
+</vignette>

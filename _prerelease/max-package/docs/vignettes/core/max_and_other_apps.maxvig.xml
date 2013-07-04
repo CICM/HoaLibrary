@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Using Max with Other Applications">
+	<header1>
+	Using Max with Other Applications
+	</header1>
+		<bodytext>
+			The Max application has two <i>virtual sources</i> — two sets of inputs and outputs
+			that let you send MIDI data to and from other programs that are running on your computer.
+			<link type="vignette" module="core" name="midi_setup_window">MIDI Setup Window</link>
+			displays of these virtual sources.
+		</bodytext>
+		<bodytext>
+			The output devices “from Max 1” and “from Max 2” are <i>virtual sources</i> of
+			MIDI for other programs. You can select them MIDI inputs in another application
+			and your application will receive MIDI data from Max.
+		</bodytext>
+		<bodytext>
+			The input devices “to Max 1” and “to Max 2” are <i>virtual destinations</i> — sources
+			of MIDI input to Max from other programs. In order to use them, you must select
+			“to Max 1” or “to Max 2” as MIDI output devices in another application.
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Sending MIDI data to Max from another application
+	</header2>
+		<ul>
+		<li>
+			Start the Max application
+		</li>
+		<li>
+			Choose <b>MIDI Setup...</b> from the Edit menu to show the MIDI Setup Window.
+		</li>
+		<li>
+			Verify that the input sources “to Max 1” and “to Max 2” are on (i.e.
+			that the “on” checkboxes are checked).
+		</li>
+		<li>
+			Start the application you want to send MIDI data from.
+		</li>
+		<li>
+			In the other application, set the MIDI output source to either
+			“to Max 1” or “to Max 2.”
+		</li>
+		</ul>
+		<bodytext>
+			The following example shows how to select “to Max 1” as a MIDI
+			output destination in Ableton Live using the MIDI channel strip:
+		</bodytext>
+		<bodytext>
+			<img src="images/max_and_other_apps1.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Double-click on any Max object (midiin, ctlin, notein, etc.) you’re using as an
+			MIDI source in your patch and select the source you set for MIDI output in your
+			other application (either “to Max 1” or “to Max 2”) from the pop-up
+			menu as the MIDI input source.
+		</li>
+		</ul>
+		<bodytext>
+			The following example shows how to select “to Max 1” as a MIDI input
+			destination in a Max patch:
+		</bodytext>
+		<bodytext>
+			<img src="images/max_and_other_apps2.png"  />
+		</bodytext>
+		<bodytext>
+			Max will now receive MIDI data sent from your other application.
+		</bodytext>
+	</bluebox>
+		<br /><space/>
+	<bluebox>
+	<header2>
+	Sending MIDI data from Max to another application
+	</header2>
+		<ul>
+		<li>
+			Start the Max application.
+		</li>
+		<li>
+			Choose <b>MIDI Setup...</b> from the Edit menu to show the MIDI Setup Window.
+		</li>
+		<li>
+			Verify that the output sources “from Max 1” and “from Max 2” are on
+			(i.e. that the “on” checkboxes are checked).
+		</li>
+		<li>
+			Start the application you want to send MIDI data to.
+		</li>
+		<li>
+			In the other application, set the MIDI input source to either “from Max 1” or “from Max 2.”
+		</li>
+		</ul>
+		<bodytext>
+			The following example shows how to select “from Max 1” as a MIDI input
+			destination in Ableton Live using the MIDI channel strip:
+		</bodytext>
+		<bodytext>
+			<img src="images/max_and_other_apps3.png"  />
+		</bodytext>
+		<ul>
+		<li>
+			Double-click on any Max MIDI output object (noteout, midiout, ctlout, etc.) you’re
+			using as an MIDI output in your patch and select the source you set for MIDI input in
+			your other application (either “from Max 1” or “from Max 2”) from the pop-up
+			menu as the MIDI output source.
+		</li>
+		</ul>
+		<bodytext>
+			The following example shows how to select “from Max 1” as a MIDI output destination in a Max patch:
+		</bodytext>
+		<bodytext>
+			<img src="images/max_and_other_apps4.png"  />
+		</bodytext>
+		<bodytext>
+			Max will now send MIDI data to your other application.
+		</bodytext>
+	</bluebox>
+	<br />
+		<bodytext>
+			By default, Max creates two “virtual” MIDI ports for both input and output.
+			To create additional virtual ports to your MIDI system in addition to
+			to/from Max 1 and to/from Max 2, you will need to send
+			<link type="vignette" module="core" name="messages_to_max">messages to the Max application</link>.
+			At the present time, CoreMIDI is the only driver which supports the creation of virtual MIDI ports.
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Adding Additional Virtual MIDI Ports
+	</header2>
+		<ul>
+		<li>
+			Double-click anywhere in an unlocked Patcher window to show the Object Explorer
+		</li>
+		<li>
+			Click on the message box icon. The Object Explorer will disappear and a message box will appear with an active text cursor.
+		</li>
+		<li>
+		<bodytext>
+			To create a virtual input port, type
+		</bodytext>
+		<bodytext>
+			<m>;#SM createinport</m><space/><bi>&lt;portname&gt; &lt;drivername&gt;</bi>
+		</bodytext>
+		<bodytext>
+			into the message box, replacing <i>&lt;portname&gt;</i> with the name
+			you want to give to your virtual input port and <i>&lt;drivername&gt;</i>
+			with the name of the driver you want to use.
+		</bodytext>
+		<bodytext>
+			Note that the message starts with a semicolon.
+		</bodytext>
+		</li>
+		<li>
+			Lock the patcher window, and click in the message box to send the message to Max.
+		</li>
+		</ul>
+	</bluebox>
+	<br />
+		<bodytext>
+			The process for creating virtual output ports is the same, except that you type
+		</bodytext>
+		<bodytext>
+			<m>;#SM createoutport</m><space/><bi>&lt;portname&gt; &lt;drivername&gt;</bi>
+		</bodytext>
+		<bodytext>
+			into the message box.
+		</bodytext>
+		<bodytext>
+			Virtual MIDI ports are not saved with your other Max setup preferences; they must be recreated whenever you restart Max. You can do this by adding a loadbang object and a message box to your Max patch.
+		</bodytext>
+			
+</vignette>
+			

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Previewing Files">
+<header1>
+Previewing Files
+</header1>
+	<bodytext>
+		The file browser <i>preview pane</i>, located in the lower portion of the file browser window, provides you with in-depth information about a file.
+	</bodytext>
+	<br /><space/>
+<bluebox>
+<header2>
+Showing the Preview Pane
+</header2>
+	<ul>
+	<li>
+		Click the the Show Preview button in the toolbar to show the Preview area. 
+		The preview area will be displayed and the toolbar icon label will change to 
+		Hide Toolbar.
+	</li>
+	</ul>
+	<bodytext>
+		<img src="images/file_browser10.png"  />
+	</bodytext>
+</bluebox>
+	<br /><space/>
+	<bodytext>
+		The visual contents of the preview pane will vary according to the 
+		type of file you have selected.
+	</bodytext>
+	<ul>
+	<li>
+		Media files such as audio files and QuickTime movies permit you to watch and/or listen to the file.
+	</li>
+	<li>
+		Image files will display a small copy of the image.
+	</li>
+	<li>
+		The contents of documentation files will be displayed in the preview area. You can open the document in a separate window by double-clicking on its name.
+	</li>
+	<li>
+		Max object files provide links to open the object's help file and reference page, as well as a brief description of what the object does.
+	</li>
+	<li>
+		All other types of files or folders will list information such as type, location, and modification date.
+	</li>
+	</ul>
+</vignette>

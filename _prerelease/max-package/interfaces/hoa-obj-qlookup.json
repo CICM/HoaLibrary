@@ -58,34 +58,52 @@
       "pic": "hoa.control.svg"
     }
   },
-  "hoa.encoder~": {
-    "digest": "Output PI value",
-    "module": "msp",
+
+  "hoa.recomposer": {
     "category": [
-      "High Order Ambisonics Library"
-    ]
+      "U/I"
+    ],
+    "digest": "A Graphical User Interface to manipulate virtual microphones",
+    "module": "max",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.recomposer",
+      "pic": "hoa.recomposer.svg"
+    }
   },
-  "hoa.decoder~": {
-    "digest": "An ambisonic decoder",
-    "module": "msp",
+
+  "hoa.gain~": {
     "category": [
-      "High Order Ambisonics Library"
-    ]
+      "U/I"
+    ],
+    "digest": "A multichannel gain GUI",
+    "module": "max",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.gain~",
+      "pic": "hoa.gain~.svg"
+    }
   },
-  "hoa.rotate~": {
-    "digest": "An ambisonic soundfield rotation external",
-    "module": "msp",
+
+  "hoa.space": {
     "category": [
-      "High Order Ambisonics Library"
-    ]
+      "U/I"
+    ],
+    "digest": "A Graphical User Interface to design ambisonics space",
+    "module": "max",
+    "palette": {
+      "category": [
+        "High Order Ambisonics Library"
+      ],
+      "action": "hoa.space",
+      "pic": "hoa.space.svg"
+    }
   },
-  "hoa.plug~": {
-    "digest": "A patcher that duplicates patcher for hoa process",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
+
   "hoa.connect": {
     "digest": "Utility to connect the hoa objects together",
     "module": "max",
@@ -93,69 +111,7 @@
       "High Order Ambisonics Library"
     ]
   },
-  "hoa.dac~": {
-    "digest": "A custom dac~ object with mathlab syntax",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.binaural~": {
-    "digest": "A binaural decoder for ambisonic soundfield",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.projector~": {
-    "digest": "An ambisonic projection external",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.recomposer~": {
-    "digest": "Fisheye operation in the plane wave domain",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.record~": {
-    "digest": "hoa version of the sfrecord~ vanilla object",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.play~": {
-    "digest": "hoa version of the sfplay~ vanilla object",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.optim~": {
-    "digest": "An ambisonic optimization external",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.pi": {
-    "digest": "Output PI value",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.stereo~": {
-    "digest": "Output PI value",
-    "module": "max",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
+
   "hoa.convolve~": {
     "digest": "An ambisonics zero latency convolution external",
     "module": "msp",
@@ -163,22 +119,128 @@
       "High Order Ambisonics Library"
     ]
   },
-  "hoa.irconverter~": {
-    "digest": "An impulse response converter for ambisonics processing",
+
+  "hoa.dac~": {
+    "digest": "A custom dac~ object with mathlab syntax",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
     ]
   },
+
+  "hoa.decoder~": {
+    "digest": "An ambisonic decoder",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.encoder~": {
+    "digest": "An ambisonic Encoder",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.freeverb~": {
+    "digest": "An ambisonics Freeverb",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.gigaverb~": {
+    "digest": "An ambisonics Gigaverb",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+  
+  "hoa.optim~": {
+    "digest": "An ambisonic optimization external",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.pi": {
+    "digest": "Output PI value",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+  "hoa.pi~": {
+    "digest": "Output PI value (signal version)",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.play~": {
+    "digest": "hoa version of the sfplay~ vanilla object",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+  
+  "hoa.plug~": {
+    "digest": "A patcher that duplicates patcher for hoa process",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.projector~": {
+    "digest": "An ambisonic projection external",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.recomposer~": {
+    "digest": "Fisheye operation in the plane wave domain",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.record~": {
+    "digest": "hoa version of the sfrecord~ vanilla object",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.rotate~": {
+    "digest": "An ambisonic soundfield rotation external",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.vector~": {
+    "digest": "A Soundfield Energy and Velocity calculator",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
   "hoa.wider~": {
     "digest": "A fractional ambisonics order simulator",
-    "module": "msp",
-    "category": [
-      "High Order Ambisonics Library"
-    ]
-  },
-  "hoa.halo~": {
-    "digest": "A soundfield part hilighter",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"

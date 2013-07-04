@@ -89,6 +89,7 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv);
 
 void connect_free(t_connect *x);
 void connect_bang(t_connect *x);
+void connect_assist(t_connect *x, void *b, long m, long a, char *s);
 void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
 void connect_attach(t_connect *x);
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);

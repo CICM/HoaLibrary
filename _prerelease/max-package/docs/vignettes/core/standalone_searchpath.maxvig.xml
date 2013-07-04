@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Search Paths in Standalones">
+	<header1>
+	Search Paths in Standalones
+	</header1>
+	<bodytext>
+		A standalone application you create with Max searches for files in a slightly different order
+		than that used in the Max
+		<link anchor="searchpath" module="core" name="file_preferences_window" type="vignette">search path</link>
+		when you’re editing patches. If you want to include non-standard Max objects or other types of files, you’ll need to understand
+		how search paths and
+		<link module="core" name="file_preferences_window" type="vignette">File Preferences </link>
+		work in standalone applications.
+	</bodytext>
+	<bodytext>
+		In a standalone application, here is the order in which folders in the standalone package (Macintosh) or folder (Windows) will be searched:
+	</bodytext>
+	<bodytext>
+		1. The collective file (and any other open collective files)
+	</bodytext>
+	<bodytext>
+		2. The support folder
+	</bodytext>
+	<bodytext>
+		You can add additional locations to this list by checking the Utilize Search Path option in the <o>standalone</o> object's
+		<link module="core" name="inspector" type="vignette">Inspector</link>.
+	</bodytext>
+	<bodytext>
+		On Macintosh systems, checking  the Utilize Search Path option, does the following for the search path of a standalone:
+	</bodytext>
+	<ul>
+		<li>
+		Adds all of the folders inside of the folder containing the standalone application (i.e., the Contents folder and all of its subfolders).
+	</li>
+		<li>
+		Adds the Cycling '74 folder. A Cycling '74 folder at the same location as the application is  used if it exists. If it does not, the
+		location <i>/Library/Application Support/Cycling ’74</i> is used if it exists.
+	</li>
+	</ul>
+	<bodytext>
+		On Windows systems, checking  the Utilize Search Path option, does the following for the search path of a standalone:
+	</bodytext>
+	<ul>
+		<li>
+		Adds all of the folders inside of the application folder (i.e. the folder containing YourApplication.exe).
+	</li>
+		<li>
+		Adds the Cycling '74 folder. A Cycling '74 folder at the same location as the application is  used if it exists. If it does not, the location
+		<i>c:\Program Files\Common Files\Cycling '74\</i> is used if it exists.
+	</li>
+	</ul>
+	<bodytext>
+		You can use the Utilize Search Path option to aid in testing your standalone application.
+	</bodytext>
+	<bodytext>
+		If some of the supporting files used by Max objects in your patch will not be included in the collective itself,
+		check the Search for Files Not in the Application's Collective option. (It is checked by default.) Unchecking this option
+		can be useful for ensuring that you have included all necessary files in the collective that you are making into a standalone
+		application. If you create your application with this option turned off, your application will not look outside the collective
+		for any files it cannot find, such as missing sequences or coll files that your application attempts to load. So, you can make your
+		application with Search for Files Not in the Application's Collective unchecked, and then run it to see if it works properly.
+		If your application is unable to find a file that it needs, you will get an error message to that effect, and you will know
+		that you have to rebuild your standalone application.
+		In some cases, however, you may want your application to look for a file outside of the collective. For example, you may want it to look for a MIDI file that can be supplied by the user of your application. In that case, you will naturally want the Search for Files Not in the Application's Collective option to be on. Please also note that this feature restricts itself to looking in folders nested only three levels deep.
+	</bodytext>
+	<bodytext>
+		When your application searches for files outside the collective, you can control where it looks with the Utilize Search Path in
+		Preferences File option. If this option is on (which it is by default), your application will use the search path settings
+		stored in the Max 4 Preferences file instead of using the default search path. You can instruct your application to use its
+		own Preferences file instead of the default Max 4 Preferences by supplying a preferences file name in this field. If the
+		Utilize Search Path in Preferences File is checked and you type in a name other than the default Max 4 Preferences, your
+		application will make its own unique preferences file (in ~<i>/Library/Preferences</i>, where ~ represents your home
+		directory) the first time it is run. From then on, your application will use that preferences file to recall the settings
+		for options such as
+		<link anchor="overdrive" module="core" name="scheduler_settings" type="vignette">Overdrive</link>
+		or
+		All Windows Active (Windows systems only).
+	</bodytext>
+	<bluebox>
+		<header2>
+	Testing your standalone
+	</header2>
+		<ul>
+			<li>
+			Click and drag on the <o>standalone</o> object to select it and click on the Inspector icon in the
+			Patcher toolbar to show its Inspector. Click the checked box for the Utilize Search Path setting
+			to disable it, and build your application. If you see any errors indicating  <m>no such object</m> or
+			<m>can’t find files</m> in the Max window when you launch the program, you will know which supporting
+			files you have not properly included.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<space/>
+	<bluebox>
+		<header2>
+	Checking the current file paths in use
+	</header2>
+		<ul>
+			<li>
+			Add a message box containing the message <m>&lt;; max paths&gt;</m> to your patch and then Command-click (Macintosh)
+			or Control-click (Windows) on the message box. The current file paths in use will be printed to the Max window.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<bodytext>
+			On Macintosh systems, the Finder uses a four-character ID to distinguish one application from another, including Max and Max Runtime.
+			When you create a standalone, a default generic creator (????) is assigned to the application automatically. Can use the <o>standalone</o>
+			object Inspector to change this to a unique ID.
+		</bodytext>
+</vignette>

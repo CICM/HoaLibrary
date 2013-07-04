@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Basic Techniques">
+	<header1>
+Basic Techniques
+</header1>
+	<bodytext>
+In this section, we describe some general information about writing Javascript code for 
+the <o>js</o> and <o>jsui</o> objects. 
+</bodytext>
+	<header2>
+Arguments
+</header2>
+	<bodytext>
+After supplying a filename after the word js, you can type in additional 
+arguments; these are available to your script’s global code or any function 
+in an array property called jsarguments[]. jsarguments[0] is the filename of 
+your script, jsarguments[1] is the first typed-in argument. jsarguments.length 
+is the number of typed-in arguments plus one. In other words, if there are no 
+typed-in arguments, the value of jsarguments.length will be 1.
+</bodytext>
+	<bodytext>
+The <o>jsui</o> inspector contains an arguments field: enter the arguments 
+you wish to use here. The first argument you type into the field can be accessed as jsarguments[1].
+</bodytext>
+	<header2>How Input to the js Object is Handled</header2>
+	<bodytext>
+For most messages, a message received in an inlet of the Max <o>js</o> object 
+will invoke a method with the same name defined for the Javascript <b>jsthis</b> object, 
+passing anything after the beginning symbol as arguments to the function. Within Max, 
+sending the message foo 1 2 3 to the <o>js</o> object invokes the foo() method of 
+the <b>jsthis</b> object; in other words, it looks for a function property of <b>jsthis</b> 
+called foo, passing 1, 2, and 3 as arguments to the function. If foo were defined as 
+follows, the output in the Max window would be 1 2 3.
+</bodytext>
+	<code>
+function foo(a,b,c)
+  {
+    post(a,b,c);
+  }
+</code>
+	<bodytext>
+post() is a function of the <o>js</o> object that writes the value of one or more 
+Javascript items to the Max window, described in more detail in 
+<link anchor="jsthismethods" module="js" name="jsglobal" type="vignette">the jsthis Methods</link> section.
+</bodytext>
+	<header2>
+Special Function Names
+</header2>
+	<code>
+  msg_int, msg_float
+</code>
+	<bodytext>
+To define a function to respond to a number, you need to name the function msg_int or msg_float. 
+</bodytext>
+	<bodytext>
+		<b>Example:</b>
+	</bodytext>
+	<code>
+  function msg_int(a)
+  {
+    post(a);
+  }
+</code>
+	<bodytext>
+If you define only msg_int(), any float received will be truncated and passed 
+to msg_int(). Similarly, if only msg_float() exists, an int received  will be 
+passed to the msg_float() function.
+</bodytext>
+	<bodytext>
+ list
+</bodytext>
+	<bodytext>
+To handle Max lists, i.e., a message that begins with a number, call your function list. 
+In implementing a list function, you’ll probably want to use the Javascript arguments 
+property, since otherwise you couldn’t handle input of varying length. 
+</bodytext>
+	<bodytext>
+		<b>Example:</b>
+	</bodytext>
+	<code>
+  function list(a)
+  {
+    post("the list contains",arguments.length, "elements");
+  }
+</code>
+	<bodytext>
+You can define an anything() function that will run if no specific function 
+is found to match the message symbol received by the <o>js</o> object. If you 
+want to know the name of the message that invoked the function, use the messagename 
+property. If you want to know what inlet received the message, use the inlet property. 
+Both of these properties are discussed in 
+<link anchor="jsthisproperties" module="js" name="jsglobal" type="vignette"><b>jsthis</b> Properties</link>.
+</bodytext>
+	<code>
+  loadbang
+</code>
+	<bodytext>
+To invoke a function when a patcher file containing the <o>js</o> or <o>jsui</o> object 
+is loaded, define a function called loadbang(). This function will not be called when you 
+instantiate a new <o>js</o> or <o>jsui</o> object and add it to a patcher; it will only be 
+called when a pre-existing patcher file containing a <o>js</o> object is loaded - in other 
+words, at the same time that loadbang objects in a patcher are sending out bangs. You may 
+wish to test the loadbangdisabled property of the max object and do nothing in your loadbang 
+function if it is true. See 
+<link module="js" name="jsmaxobj" type="vignette">the Max Object</link>.
+for more information.
+</bodytext>
+	<code>
+  getvalueof
+</code>
+	<bodytext>
+Defining a function called getvalueof() permits <o>pattr</o> and related objects 
+to attach to and query an object's current value. The value of an object returned 
+can be a Number, a String, or an Array of numbers and/or Strings. 
+</bodytext>
+	<bodytext>
+		<b>Example:</b>
+	</bodytext>
+	<code>
+  var myvalue = 0.25;
+  function getvalueof()
+  {
+    return myvalue;
+  }
+</code>
+	<code>
+setvalueof
+</code>
+	<bodytext>
+Defining a function called setvalueof() permits <o>pattr</o> and related objects to 
+attach to and set an object's current value, passed as argument(s) to the function. 
+Values passed will be of type Number or String. For a value that consists of more 
+than one Number or String, the setvalueof() method will receive multiple arguments. 
+The <b>jsthis</b> object’s arrayfromargs() method is useful to handle values that 
+can contain a variable number of elements. 
+</bodytext>
+	<bodytext>
+		<b>Example:</b>
+	</bodytext>
+	<code>
+  function setvalueof(v)
+  {
+    myvalue = v;
+  }
+</code>
+	<code>
+  save
+</code>
+	<bodytext>
+Defining a function called save() allows your script to embed state in a patcher 
+file containing your <o>js</o> object. You can then restore the state when the patcher is reloaded.
+</bodytext>
+	<bodytext>
+Saving your state consists of storing a set of messages that your script will 
+receive shortly after the <o>js</o> object containing it is recreated. These 
+messages are stored using a special method of <b>jsthis</b> called embedmessage 
+that only works inside your save function. An example will make this scheme clearer.
+</bodytext>
+	<bodytext>
+Suppose you have a message cowbells that sets the number of cowbells your object currently has:
+</bodytext>
+	<code>
+  var numcowbells = 1;
+  function cowbells(a)
+  {
+    numcowbells = a;
+  }
+</code>
+	<bodytext>
+When the patch containing the <o>js</o> object is saved, you would like to preserve the current 
+number of cowbells, so you define a save() function as follows:
+</bodytext>
+	<code>
+  function save()
+  {
+    embedmessage("cowbells",numcowbells);
+  }
+</code>
+	<bodytext>
+Suppose the saved number of cowbells is 5. When it is reloaded, the <o>js</o> object 
+will call your cowbell function with an argument of 5.
+</bodytext>
+	<bodytext>
+The first argument to embedmessage is the name of the function you want to call 
+as a string. Additional arguments to embedmessage supply the arguments to this 
+function. These additional arguments will typically be the values of the state you want to save.
+</bodytext>
+	<bodytext>
+See the description of the embedmessage message to the <b>jsthis</b> object
+<link anchor="embedmessage" module="js" name="jsglobal" type="vignette">here</link>.
+</bodytext>
+	<code>
+  notifydeleted
+</code>
+	<bodytext>
+the notifydeleted method is called when the js/jsui object is freed.
+</bodytext>
+	<code>
+  function notifydeleted()
+</code>
+	<header2>Reserved Words</header2>
+	<bodytext>
+The Max <o>js</o> object also responds to special messages that control 
+the object itself, such as open, read, etc. Refer to the <o>js</o> and <o>jsui</o> pages 
+in the Max Reference manual for details. If you define, for example, a function 
+named read inside your script, it can’t be executed directly via a message sent to 
+the <o>js</o> object. However, you can still name a function read and call the function 
+from another Javascript function you define/
+</bodytext>
+	<header2>Global Code</header2>
+	<bodytext>
+Global code, as we’ve mentioned before, consists of any Javascript statements 
+that exist outside of any function definition. Your global code is always executed 
+when your script is loaded or recompiled after you edit it. When a <o>js</o> or <o>jsui</o> object 
+is being created, the global code is executed before the object is completely created. It won’t 
+have any inlets or outlets, nor does it know about its context within a patcher. This means you 
+can use the global code to define how many inlets and/or outlets you’d like to have.  However, 
+it also means that, since outlets don’t exist yet, you can’t use them. If you want to perform 
+some kind of initialization after your object has outlets, you’ll need to write a loadbang() function 
+mentioned in the previous section.
+</bodytext>
+	<bodytext>
+What to do in your global code:
+</bodytext>
+	<ul>
+		<li>
+Set the number of inlets and outlets you would like (see <o>js</o> Object Properties).
+</li>
+		<li>
+Access the arguments the user typed in with the jsarguments[] property.
+</li>
+		<li>
+Set up the assistance for your inlets and outlets.
+</li>
+		<li>
+Create and initialize global variables/
+</li>
+		<li>
+Use the Max object to access and control the global application environment.
+</li>
+	</ul>
+	<bodytext>
+What not to do:
+</bodytext>
+	<ul>
+		<li>
+Send things out your outlets.
+</li>
+		<li>
+Refer to your object’s Patcher (see 
+<link module="js" name="jspatcherobject" type="vignette">the Patcher Object</link>
+for more information).
+</li>
+	</ul>
+	<header2>
+Private (Local) Functions
+</header2>
+	<bodytext>
+If you do not want a method to be invoked outside of Javascript via a message 
+to <o>js</o> from Max, you can set its local property to 1. For example, suppose 
+the function foo() is not something we wish to expose to the outside world.
+</bodytext>
+	<code>
+  foo.local = 1;
+  function foo()
+  {
+    post("what does Pd *really* stand for?");
+  }
+</code>
+	<bodytext>
+Now, when we send the message foo to the <o>js</o> object, we see the following error in the Max window:
+</bodytext>
+	<bodytext>
+error: js: function foo is private
+</bodytext>
+</vignette>

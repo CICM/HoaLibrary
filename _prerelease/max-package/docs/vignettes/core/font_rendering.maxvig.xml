@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Font Rendering">
+	<header1>
+	Font Rendering
+	</header1>
+	<bodytext>
+		Max provides the choice of using cross-platform font rendering or the font rendering technology of each native platform. The option is a global setting that applies to almost all text displayed by the software. Rare exceptions include certain Jitter objects such as <o>jit.lcd</o> and <o>jit.gl.text2d</o> which use native font display exclusively.
+	</bodytext>
+<bluebox>
+	<header2>
+	Using Native Font Rendering
+	</header2>
+		<ul>
+			<li>
+				Open the preferences window by choosing <b>Preferences</b> from the Max menu (Mac) or Options menu (Windows).
+			</li>
+			<li>
+				Click the Font tab.
+			</li>
+			<li>
+				Enable Native Font Rendering by clicking in the checkbox in the value column for this setting.
+			</li>
+		</ul>
+</bluebox>
+		<br />
+<bluebox>
+	<header2>
+	Controlling Subpixel Anti-Aliasing
+	</header2>
+	<bodytext>
+		A feature of the Mac OS and Windows font rendering technology is <i>subpixel anti-aliasing</i>, which uses the properties of LCD displays to enhance the perceived sharpness of text. If you look closely at subpixel anti-aliased text, you can see that, for example, what appears to be black text at a distance is actually made up of colored dots. While this may enhance the appearance of text at smaller sizes, some people find it looks worse as the text size becomes larger. And other people can't stand subpixel anti-aliasing at any size. Max provides a way to set the maximum font size that will be displayed using subpixel anti-aliasing, called <i>Max Font Size for Native Subpixel Antialiasing</i>.
+	</bodytext>
+		<ul>
+			<li>
+				Open the preferences window by choosing <b>Preferences</b> from the Max menu (Mac) or Options menu (Windows).
+			</li>
+			<li>
+				Click the Font tab.
+			</li>
+			<li>
+				Click in the Value column for the Max Font Size for Native Subpixel Antialiasing setting. Type in a desired font size in points. Font sizes above this value will not use sub-pixel antialiasing. If you want to disable sub-pixel anti-aliasing for all fonts, you can use a value of 0.
+			</li>
+		</ul>
+	</bluebox>
+<br />
+</vignette>
+

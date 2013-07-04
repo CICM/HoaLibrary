@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Platform-Specific Compatibility">
+	<header1>
+	Platform-Specific Compatibility Issues
+	</header1>
+	<br /><space />
+	<header2>
+		Windows Unicode Import of Mac Files
+	</header2>
+		<bodytext>
+			Windows version of Max may not be able to import Max 4 files with 
+			font-specific text encodings properly (click 
+			<link type="vignette" module="core" name="unicode_conversion">here</link>
+			for more information on Unicode text converson).
+			The Max 4 Windows version cannot read these files either.
+		</bodytext>
+	<header2>
+		Windows SDI vs. MDI Interface
+	</header2>
+		<bodytext>
+			Max uses the Windows SDI (Single Document Interface) model, where 
+			each window has its own menu bar. Older versions of Max (version 4 and earlier)
+			used the MDI (Multiple Document 
+			Interface) model, where there is an overall frame around all the 
+			application's windows, and the frame contains the menu bar. In the 
+			SDI model, closing all windows will quit the application. In the MDI 
+			model, you can close all the document windows but you must explicitly 
+			choose <b>Exit</b> from the File menu to quit the entire application.
+		</bodytext>	
+</vignette>

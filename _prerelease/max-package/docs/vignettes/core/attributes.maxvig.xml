@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Attributes">
+			
+	<header1>
+	Attributes
+	</header1>
+<ul>
+	<li><link type="vignette" module="core" name="attributes_intro">Introduction to Attributes</link></li>
+	<li><link type="vignette" module="core" name="attributes_stdbox">Common Box Attributes</link></li>
+	<li><link type="vignette" module="core" name="attributes_inspecting">Inspecting Attributes</link></li>
+	<li><link type="vignette" module="core" name="freezing_attributes">Freezing Attributes</link></li>
+	<li><link type="vignette" module="core" name="dragging_attributes">Patching by Dragging Attributes</link></li>
+</ul>	
+</vignette>

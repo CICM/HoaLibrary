@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Assistance">
+	<header1>
+	Assistance
+	</header1>
+	<bodytext><i>Assistance</i> refers to the description of an object's 
+	inlets and outlets. When <b>Assistance</b> is checked in the Options 
+	menu, descriptive captions appear near an inlet or outlet 
+	as you mouse over it.
+</bodytext>
+	<bodytext>
+		<img src="images/assistance1.png"/>
+	</bodytext>
+	<bodytext>
+	As you move the mouse over an object's inlets you'll notice that some are blue 
+	and some are red. <i>Blue</i> inlets are known as "cold" inlets. They do 
+	not produce any output (out the object's outlets) directly. <i>Red</i> inlets 
+	are "hot" inlets and can produce output when you send a message into them. 
+</bodytext>
+	<bodytext>
+	If you make a 
+	<link module="core" name="subpatchers" type="vignette">subpatcher</link> 
+	or 
+	<link module="core" name="abstractions" type="vignette">abstraction</link>, 
+	you can 
+	<link module="core" name="assistance_authoring" type="vignette">add your own assistance messages</link> to describe the patcher's inlets and outlets.
+</bodytext>
+</vignette>

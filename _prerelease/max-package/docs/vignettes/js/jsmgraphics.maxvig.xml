@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="MGraphics Quick Start Guide">
+
+<header1>
+		Required initialization and Routines
+</header1>
+<bodytext>
+		In order for you to use the mgraphics system within the <o>jsui</o> object, you need to have the following lines of code somewhere within the global section of your code:
+</bodytext>
+<code>
+mgraphics.init();
+mgraphics.relative_coords = 1;
+mgraphics.autofill = 0;
+</code>
+<bodytext>
+		Every call to the mgraphics system requires the preface of the ‘mgraphics.’ identifier, which makes sure that the call is routed properly. The mgraphics.init() call sets up all of the internal state variables and pointers for the mgraphics subsystem. The setting for mgraphics.relative_coords determines which coordinate system will be used (more on this later…). Finally, setting mgraphics.autofill to zero tells the system to not automatically fill geometry when you use the stroke() functions, although you can fill them in manually if you wish.
+</bodytext>
+<bodytext>
+		The only function that you are required to provide is a paint() function, which is where you put your drawing code (or function calls that do the drawing). This function is called every time that the <o>jsui</o> object decides that the object needs to draw itself.  You can also force a repaint by calling the function mgraphics.redraw().
+</bodytext>
+<bodytext>
+		So, a simple paint method might look like this:
+</bodytext>
+<code>
+function paint() {
+	mgraphics.rectangle(-.2, .2, .2, -.2);
+	mgraphics.fill();
+}
+</code>
+<header1>
+		Line and Shape Drawing Concepts
+</header1>
+<bodytext>
+		Drawing functions within the mgraphics system all take the same form:
+</bodytext>
+<ul>
+<li>
+		Set the colors and line sizes that will be used to sketch and/or fill a segment of the drawing.
+</li>
+<li>
+		Create a path using coordinate points within your display area that describes the segment. 
+</li>
+<li>
+		Call a function that executes the path drawing. 
+</li>
+</ul>
+<bodytext>
+		So, a typical drawing routine might look like this:
+</bodytext>
+<code>
+with (mgraphics) {
+set_source_rgba(.2, .2, .2, 1.);
+set_line_width(.03);
+move_to(-1.0, -1.0);
+line_to(1.0, 1.0);
+stroke();
+}
+</code>
+<bodytext>
+		In this case, we’ve set the line color to a fairly dark, completely opaque color, defined a medium width line, moved to one location and drew to another using a “stroke” execution. Notice the use of the “with” qualifier – this lets us use a number of mgraphics routines without having to use the mgraphics prefix on each function call.
+</bodytext>
+<bodytext>
+		You can find the available path creation routines listed below. 
+		Remember that these are part of the mgraphics subsystem, so the either need to be performed inside of a ‘with (mgraphics)’ block, or use the ‘mgraphics.’ prefix.
+</bodytext>
+<bodytext>
+		The biggest question you should have about the above code is “What are the coordinates that you are using for the drawing?” That question gives us the change to discuss the two coordinate systems that are available for the mgraphics system.
+</bodytext>
+<header1>
+		The mgraphics Coordinate Systems
+</header1>
+<bodytext>
+		The mgraphics system supports two coordinate systems, as determined by the mgraphics.relative_coords setting described above. When the relative_coords setting is 0, the mgraphics system uses a pixel-based coordinate system. In this scenario, the origin (0,0) is at the top-left, with positive numbers moving to the right and bottom. Therefore, if the display area of the <o>jsui</o> object is a 400x200 rectangle, you could draw a large “X” in this area with the following paint method:
+</bodytext>
+<code>
+function paint() {
+	with (mgraphics) {
+	move_to(0, 0);	// the top-left
+		line_to(400,200);	// the bottom-right
+		stroke();		// draw it
+
+		move_to(400,0);	// the top-right
+		line_to(0, 200);	// the bottom-left
+		stroke();
+	}
+}
+</code>
+<bodytext>
+		This works fine if you know that your <o>jsui</o> display area will be exactly 400x200, or if you want the object to clip information that is outside of its range. However, if you want to scale your drawing to the size of the display area, your paint routine would have to have a lot of scaling code built in.
+</bodytext>
+<bodytext>
+		An alternate to using this scaling math is to use the relative coordinate system (set using the mgraphics.relative_coords value to 1). This allows you to work with a standard number range and let the mgraphics system place it on the screen for you.
+</bodytext>
+<bodytext>
+		The coordinates for your drawing area are based off an origin located at the center of the rectangular display area. Positions moving to the right or toward the top are given positive number, while positions moving to the left or toward the bottom are given negative numbers. The vertical number range is always from -1.0 (bottom) through +1.0 (top), but the left and right extents vary based on the aspect ratio of the display area.
+</bodytext>
+<bodytext>
+		It is probably easiest to see this with some code. The following <o>jsui</o> code will draw an “X” in the middle of the <o>jsui</o> display area, and will automatically resize to fit the drawing space. However, if the display area is not square, the end-points will not reach to the corners.
+</bodytext>
+<code>
+mgraphics.init();
+mgraphics.relative_coords = 1;
+mgraphics.autofill = 0;
+
+function paint() {
+	with (mgraphics) {
+		move_to(-1.0, -1.0);	// the bottom-left
+		line_to(1.0, 1.0);	// the top-right
+		stroke();			// draw it
+
+		move_to(1.0, -1.0);	// the bottom-right
+		line_to(-1.0, 1.0);	// the top-left
+		stroke();			// draw it
+	}
+}
+</code>
+<bodytext>
+		In order to make the lines reach all the way to the corners (regardless of the aspect ratio of the display area), we need to calculate the aspect ratio and alter the X coordinates to suit. Here is a simple example of that calculation put to use:
+</bodytext>
+<code>
+mgraphics.init();
+mgraphics.relative_coords = 1;
+mgraphics.autofill = 0;
+
+function paint() {
+	var aspect = calcAspect();
+
+	with (mgraphics) {
+		move_to(-1.0 * aspect, -1.0);// the bottom-left
+		line_to(1.0 * aspect, 1.0);	// the top-right
+		stroke();				// draw it
+
+		move_to(1.0 * aspect, -1.0);	// the bottom-right
+		line_to(-1.0 * aspect, 1.0);	// the top-left
+		stroke();				// draw it
+	}
+}
+
+function calcAspect() {
+	var width = this.box.rect[2] - this.box.rect[0];
+	var height = this.box.rect[3] - this.box.rect[1];
+	return width/height;
+}
+</code>
+<bodytext>
+		With this change using the aspect calculation (width divided by height), our “X” figure now occupies the entire drawing area regardless of the size of the object.
+</bodytext>
+<header1>
+		General mgraphics Routines and Settings
+</header1>
+<header2>
+		Setup Values
+</header2>
+<bodytext>
+		autosketch = <i>[0/1]</i>;
+</bodytext>
+<bodytext>
+		When autosketch is set to “1”, the drawing commands will immediately be drawn without waiting a drawing execution command. While this is convenient, it is less flexible than working with autosketch set to “0”.
+</bodytext>
+<bodytext>
+		autopaint = <i>[0/1]</i>;
+</bodytext>
+<bodytext>
+		&lt;unknown use…&gt;
+</bodytext>
+<bodytext>
+		autofill = <i>[0/1]</i>;
+</bodytext>
+<bodytext>
+		When autofill is set to “1”, any shape command will immediately be filled without requiring a fill execution command. While this is convenient, it is less flexible than working with autofill set to “0”.
+</bodytext>
+<bodytext>
+		relative_coords = <i>[0/1]</i>;
+</bodytext>
+<bodytext>
+		As described in the narrative above, the relative_coords setting determines whether the locations in the drawing area range from 0,0 through the size in pixels (relative_coords = 0), or if the drawing area ranges from (-aspect, 1.0) through (aspect, -1.0).
+</bodytext>
+<header2>
+		Setup, State and Execution Routines
+</header2>
+<code>
+<b>init</b>();
+</code>
+<bodytext>
+		The init routine is the first thing that an mgraphics-based Javascript program needs to call. It initializes the library, sets up the internal mgraphics variables and prepares the <o>jsui</o> object for drawing.
+</bodytext>
+<code>
+<b>redraw</b>();
+</code>
+<bodytext>
+		Force a redraw of the display area by calling the paint() function.
+</bodytext>
+<code>
+<b>restore</b>();
+</code>
+<bodytext>
+		Restore the Mgraphics system to a previously saved state.
+</bodytext>
+<code>
+<b>save</b>();
+</code>
+<bodytext>
+		Save the current Mgraphics state for later restoration. This is particularly useful when doing multiple transformations or matrix manipulation of the user space.
+</bodytext>
+<code>
+position = <b>user_to_device</b>(<i>location</i>);
+</code>
+<bodytext>
+		Given a user location (such as from get_current_point()), returns the device location. This helps find one’s position even with transform matrices in place.
+</bodytext>
+<code>
+location = <b>device_to_user</b>(<i>position</i>);
+</code>
+<bodytext>
+		Given a device position, returns the user space location. This will determine a location despite user space deformation (using matrix transforms).
+</bodytext>
+<header2>
+		Query Routines
+</header2>
+<code>
+<b>in_fill</b>();
+</code>
+<bodytext>
+		Given a fillable path, determine if a point is within the fill zone. Returns 0 (false) or 1 (true).
+</bodytext>
+<code>
+<b>fill_extent</b>();
+</code>
+<bodytext>
+		Determine the enclosing rectangle for the current fill area. Returns an array that contains the top/left and bottom/right points of the fill area.
+</bodytext>
+<code>
+<b>get_current_point</b>();
+</code>
+<bodytext>
+		Returns an array with the current X and Y coordinates of the path ending position.
+</bodytext>
+<header1>
+		Path Setup and Creation Routines
+</header1>
+<header2>		
+		Setup Routines
+</header2>
+<bodytext>
+		The following routine set up the look of lines and shapes that are drawn. These need to be called before the path segments are drawn.
+</bodytext>
+<code>
+<b>set_line_cap</b>(<i>line_cap</i>);
+</code>
+<bodytext>
+		Set the appearance of the end-point of a drawn line. The options are
+		<i>butt</i>,
+		<i>round</i>,
+		or
+		<i>square</i>.
+</bodytext>
+<code>
+<b>get_line_cap</b>();
+</code>
+<bodytext>
+		Retrieve the appearance attribute of the current line_cap setting. The returned value is the same as the values used by set_line_cap.
+</bodytext>
+<code>
+<b>set_line_join</b>(<i>line_join</i>);
+</code>
+<bodytext>
+		Set the appearance of the connection point between lines. The options are
+		<i>miter</i>,
+		<i>round</i>,
+		or
+		<i>bevel</i>.
+</bodytext>
+<code>
+<b>get_line_join</b>();
+</code>
+<bodytext>
+		Retrieve the appearance attribute of the current line_join setting. The returned value is the same as the values used by set_line_join.
+</bodytext>
+<code>
+<b>set_line_width</b>(<i>width</i>);
+</code>
+<bodytext>
+		Set the width of path lines drawn using the stroke() function. The width value is dependent on the coordinate system in use.
+</bodytext>
+<code>
+<b>get_line_width</b>();
+</code>
+<bodytext>
+		Retrieve the current line width as a floating-point number.
+</bodytext>
+<header2>
+		Path Creation Routines
+</header2>
+<bodytext>
+		The following routines are used for creating/extending a path for drawing execution.
+</bodytext>
+<code>
+<b>arc</b>(<i>xc, yc, radius, angle1, angle2</i>);
+</code>
+<bodytext>
+		Add a circular, clockwise, arc to the current path.
+</bodytext>
+<bodytext>
+		<i>xc</i>: The horizontal coordinate of the arc's center.<br/>
+		<i>yc</i>: The vertical coordinate of the arc's center.<br/>
+		<i>radius</i>: The radius of the arc.<br/>
+		<i>angle1</i>: The starting angle of the arc in radians. Zero radians is center right (positive x axis).<br/>
+		<i>angle2</i>: The terminal angle of the arc in radians. Zero radians is center right (positive x axis).
+</bodytext>
+<code>
+<b>arc_negative</b>(<i>xc, yc, radius, angle1, angle2</i>);
+</code>
+<bodytext>
+		Add a circular, counter-clockwise, arc to the current path.
+</bodytext>
+<bodytext>
+		<i>xc</i>: The horizontal coordinate of the arc's center.<br/>
+		<i>yc</i>: The vertical coordinate of the arc's center.<br/>
+		<i>radius</i>: The radius of the arc.<br/>
+		<i>angle1</i>: The starting angle of the arc in radians. Zero radians is center right (positive x axis).<br/>
+		<i>angle2</i>: The terminal angle of the arc in radians. Zero radians is center right (positive x axis).
+</bodytext>
+<code>
+<b>ovalarc</b>(<i>xc, yc, radiusx, radiusy, angle1, angle2</i>);
+</code>
+<bodytext>
+		Add a non-circular arc to the current path.
+</bodytext>
+<bodytext>
+		<i>xc</i>: The horizontal coordinate of the arc's center.<br/>
+		<i>yc</i>: The vertical coordinate of the arc's center.<br/>
+		<i>radiusx</i>: The horizontal radius of the arc.<br/>
+		<i>radiusy</i>: The vertical radius of the arc.<br/>
+		<i>angle1</i>: The starting angle of the arc in radians. Zero radians is center right (positive x axis).<br/>
+		<i>angle2</i>: The terminal angle of the arc in radians. Zero radians is center right (positive x axis).
+</bodytext>
+<code>
+<b>curve_to</b>(<i>x1, y1, x2, y2, x3, y3</i>);
+</code>
+<bodytext>
+		Add a cubic Bezier spline to the current path.
+</bodytext>
+<bodytext>
+		<i>x1</i>: The first control point.<br/>
+		<i>y1</i>: The first control point.<br/>
+		<i>x2</i>: The second control point.<br/>
+		<i>y2</i>: The second control point.<br/>
+		<i>x3</i>: The destination point.<br/>
+		<i>y3</i>: The destination point.
+</bodytext>
+<code>
+<b>rel_curve_to</b>(<i>x1, y1, x2, y2, x3, y3</i>);
+</code>
+<bodytext>
+		Add a cubic Bezier spline to the current path, using coordinates relative to the current point.
+</bodytext>
+<bodytext>
+		<i>x1</i>: The first control point.<br/>
+		<i>y1</i>: The first control point.<br/>
+		<i>x2</i>: The second control point.<br/>
+		<i>y2</i>: The second control point.<br/>
+		<i>x3</i>: The destination point.<br/>
+		<i>y3</i>: The destination point.
+</bodytext>
+<code>
+<b>line_to</b>(<i>x, y</i>);
+</code>
+<bodytext>
+		Add a line segment to the current path.
+</bodytext>
+<bodytext>
+		<i>x</i>: The destination point.<br/>
+		<i>y</i>: The destination point.
+</bodytext>
+<code>
+<b>rel_line_to</b>(<i>x, y</i>);
+</code>
+<bodytext>
+		Add a line segment to the current path, using coordinates relative to the current point.
+</bodytext>
+<bodytext>
+		<i>x</i>: The destination point.<br/>
+		<i>y</i>: The destination point.
+</bodytext>
+<code>
+<b>move_to</b>(<i>x, y</i>);	
+</code>
+<bodytext>
+		Move the cursor to a new point and begin a new subpath.
+</bodytext>
+<bodytext>
+		<i>x</i>: The new location.<br/>
+		<i>y</i>: The new location.
+</bodytext>
+<code>
+<b>rel_move_to</b>(<i>x, y</i>); 
+</code>
+<bodytext>
+		Move the cursor to a new point and begin a new subpath, using coordinates relative to the current point.
+</bodytext>
+<bodytext>
+		<i>x</i>: The new location.<br/>
+		<i>y</i>: The new location.
+</bodytext>
+<code>
+<b>rectangle</b>(<i>x, y, width, height</i>);
+</code>
+<bodytext>
+		Add a closed rectangle path in the context.
+</bodytext>
+<bodytext>
+		<i>x</i>: The horizontal origin.<br/>
+		<i>y</i>: The vertical origin.<br/>
+		<i>width</i>: The width of the rect.<br/>
+		<i>height</i>: The height of the rect.
+</bodytext>
+<code>
+<b>rectangle_rounded</b>(<i>x, y, width, height, ovalwidth, ovalheight</i>);
+</code>
+<bodytext>
+		Add a closed rounded-rectangle path in the context.
+</bodytext>
+<bodytext>
+		<i>x</i>: The horizontal origin.<br/>
+		<i>y</i>: The vertical origin.<br/>
+		<i>width</i>: The width of the rect.<br/>
+		<i>height</i>: The height of the rect.<br/>
+		<i>ovalwidth</i>: The width of the oval used for the round corners.<br/>
+		<i>ovalheight</i>: The height of the oval used for the round corners. 
+</bodytext>
+<code>
+<b>ellipse</b>(<i>x, y, width, height</i>);
+</code>
+<bodytext>
+		Add a closed elliptical path in the context.
+</bodytext>
+<bodytext>
+		<i>x</i>: The horizontal origin.<br/>
+		<i>y</i>: The vertical origin.<br/>
+		<i>width</i>: The width of the rect.<br/>
+		<i>height</i>: The height of the rect.
+</bodytext>
+<code>
+<b>close_path</b>();
+</code>
+<bodytext>
+		Create a line that connects the current path point to the origin of the path, thereby closing the path into a fill-able shape.
+</bodytext>
+<header2>
+		Utility Routines
+</header2>
+<code>
+<b>copy_path</b>();
+</code>
+<bodytext>
+		Returns a copy of the current path to be stored and reused at a later time.
+</bodytext>
+<code>
+<b>append_path</b>(<i>path</i>);
+</code>
+<bodytext>
+		Appends a stored path to the current path at the current end point.
+</bodytext>
+<code>
+push_group();
+</code>
+<bodytext>
+		Define a starting point for a path execution group. This group can be used for creating an image from a set of path functions without actually drawing the results to the screen.
+</bodytext>
+<code>
+image = <b>pop_group</b>();
+</code>
+<bodytext>
+		Complete a path execution group, returning the results as an Image object. This image can be used for later drawing of the group results.
+</bodytext>
+<header1>
+		Path Execution Routines
+</header1>
+<code>
+<b>path_roundcorners</b>(<i>radius</i>);
+</code>
+<bodytext>
+		Using the current path, round the corners to the radius provided (or as close as possible given the path’s angle).
+</bodytext>
+<code>
+<b>stroke</b>();
+</code>
+<bodytext>
+		Draw the outline of the path with the color and line size chosen. When the drawing is complete, the path is deleted.
+</bodytext>
+<code>
+<b>stroke_preserve</b>();
+</code>
+<bodytext>
+		Draw the outline of the path with the color and line size chosen, but do not destroy the path when completed. This is useful for situations where you need to both fill a path and draw its outline.
+</bodytext>
+<code>
+<b>stroke_with_alpha</b>(<i>alpha</i>);
+</code>
+<bodytext>
+		Draw the outline of the path with the color and line size chosen, but override the alpha value of the color with a new alpha channel value. This allows you to change transparency without resetting the color values.
+</bodytext>
+<code>
+<b>stroke_preserve_with_alpha</b>(<i>alpha</i>);
+</code>
+<bodytext>
+		A combination of the above two routines, this will draw the line, preserve the path, and override the alpha value in a single routine call.
+</bodytext>
+<code>
+<b>fill</b>();
+</code>
+<bodytext>
+		Fill the path with the current source color. When the fill is completed, the path will be destroyed.
+</bodytext>
+<code>
+<b>fill_preserve</b>(); 
+</code>
+<bodytext>
+		Fill the path with the current source color, but do not destroy the path when the fill is completed.
+</bodytext>
+<code>
+<b>fill_with_alpha</b>(<i>alpha</i>);
+</code>
+<bodytext>
+		Fill the path with the current source color, but override the alpha value for a fill-specific transparency.
+</bodytext>
+<code>
+<b>fill_preserve_with_alpha</b>(<i>alpha</i>);
+</code>
+<bodytext>
+		A combination of the two previous routines, this fills the path with the source color, but overrides the alpha value. It does not destroy the path when the fill is complete.
+</bodytext>
+<header1>
+		Transformation Routines
+</header1>
+<code>
+<b>set_source_rgba</b>(<i>red, green, blue, alpha</i>);
+</code>
+<bodytext>
+		Set the color and alpha channels to be used for drawing routines.
+</bodytext>
+<code>
+<b>set_source_rgb</b>(<i>red, green, blue</i>);
+</code>
+<bodytext>
+		Set the color channels to be used for drawing routines. Since the alpha channel is not provide, it is defaulted to completely opaque.
+</bodytext>
+<code>
+<b>scale_source_rgba</b>(<i>sc_red, sc_green, sc_blue, sc_alpha</i>);
+</code>
+<bodytext>
+		Create a transform for the color and alpha channels using scale amounts to determine a color multiplier (either positive or negative). Note: One of the set_source_* routines must be called to apply this transform to an actual color.
+</bodytext>
+<code>
+<b>translate_source_rgba</b>(<i>t_red, t_green, t_blue, t_alpha</i>);
+</code>
+<bodytext>
+		Create a transform for the color and alpha channels by absolute delta amounts to determine a color offset (either positive or negative). Note: One of the set_source_* routines must be called to apply this transform to an actual color.
+</bodytext>
+<code>
+<b>scale</b>(<i>sc_x, sc_y</i>);
+</code>
+<bodytext>
+		Modifies the transform matrix that scales all X and Y values by the values provided. 
+</bodytext>
+<bodytext>
+		Note: This affects everything from size to location, and also scales line widths.
+</bodytext>
+<code>
+<b>rotate</b>(<i>rot</i>);
+</code>
+<bodytext>
+		Modifies the transform matrix by rotating it. The rotation values is in radians (2-pi for a complete rotation).
+</bodytext>
+<code>
+<b>translate</b>(<i>t_x, t_y</i>);
+</code>
+<bodytext>
+		Modifies the transform matrix by moving it by absolute (positive or negative) delta amounts. 
+</bodytext>
+<code>
+<b>transform</b>(<i>xx, xy, yx, yy, x0, y0</i>);
+</code>
+<bodytext>
+		Directly modify the transform matrix (and therefore the user space) using six values. The xx and yy values provide scaling support, xy and yx provide rotational warping, and x0 and y0 provide location offset.
+</bodytext>
+<code>
+<b>set_matrix</b>(<i>xx, xy, yx, yy, x0, y0</i>);
+</code>
+<bodytext>
+		Directly set the tranform matrix for the current drawing context.
+</bodytext>
+<code>
+array = <b>get_matrix</b>();
+</code>
+<bodytext>
+		Retrieve the current transform matrix for the current drawing context.
+</bodytext>
+<code>
+<b>identity_matrix</b>();
+</code>
+<bodytext>
+		Revert the transform matrix to default (normal) values. 
+</bodytext>
+<header1>
+		Font Routines
+</header1>
+<code>
+fontlist = <b>getfontlist</b>();
+</code>
+<bodytext>
+		Returns a Javascript array where each value is the text name of a font installed on your system. You can determine the length of the array by using the variable <i>fontlist.length</i>. 
+</bodytext>
+<code>
+<b>select_font_face</b>(<i>fontname</i>);
+</code>
+<bodytext>
+		Sets the current font face by name.
+</bodytext>
+<code>
+<b>set_font_size</b>(<i>fontsize</i>);
+</code>
+<bodytext>
+		Sets the current font size, using either an integer or floating-point value.
+</bodytext>
+<code>
+<b>text_path</b>(<i>display_text</i>);
+</code>
+<bodytext>
+		Create a path that uses the display text, the current font and the current size. The result is subject to all of the transforms ordinarily available to paths.
+</bodytext>
+<code>
+<b>show_text</b>(<i>display_text</i>);
+</code>
+<bodytext>
+		Places the display text in the drawing area at the current location, and using the current font and size. Since a path is not being created, it does not conform to the transformations otherwise available with paths.
+</bodytext>
+<code>
+<b>font_extents</b>();
+</code>
+<bodytext>
+		Returns an array with three values: ascent, descent and height.
+</bodytext>
+<code>
+<b>text_measure</b>(<i>text</i>);
+</code>
+<bodytext>
+		Returns an array with two values: width and height. This is the measurement of the provided text using the current font and size. 
+</bodytext>
+<header1>
+		Pattern Routines
+</header1>
+<code>
+name = <b>pattern_create_linear</b>(<i>x1, y1, x2, y2</i>);
+</code>
+<bodytext>
+		Create a linear gradient, with an influence point for each gradient section. When in relative_coordinate mode, these influence points still need to be defined in pixels rather than relative coordinates.
+</bodytext>
+<bodytext>
+		This routine returns a pattern object value that is used by other functions.
+</bodytext>
+<code>
+pattern = <b>pattern_create_radial</b>(<i>x1, y1, rad1, x2, y2, rad2</i>);
+</code>
+<bodytext>
+		Create a radial gradient, with an influence point for each gradient section. When in relative_coordinate mode, these influence points still need to be defined in pixels rather than relative coordinates.
+</bodytext>
+<bodytext>
+		This routine returns a pattern object value that is used by other functions.
+</bodytext>
+<code>
+pattern = <b>pattern_create_rgba</b>(<i>red, green, blue, alpha</i>);
+</code>
+<bodytext>
+		Create a solid color pattern.
+</bodytext>
+<code>
+pattern = <b>pattern_create_for_surface</b>(<i>image</i>);
+</code>
+<bodytext>
+		Create a pattern using an image for the background. Repeating patterns depends on the extend value set using the set_extend() function.
+</bodytext>
+<code>
+value = <b>pattern.get_extend</b>();
+</code>
+<bodytext>
+		Returns the extend value of the pattern. Options include: “none”, “repeat”, “reflect”, and “pad”.
+</bodytext>
+<code>
+<b>pattern.set_extend</b>(<i>extend_type</i>);
+</code>
+<bodytext>
+		Determines how the pattern will be created when there is more space than available information. Options include: “none”, “repeat”, “reflect”, and “pad”.
+</bodytext>
+<code>
+value = <b>pattern.get_matrix</b>();
+</code>
+<bodytext>
+		Returns the current transform matrix for the pattern
+</bodytext>
+<code>
+<b>pattern.set_matrix</b>(<i>xx, xy, yx, yy, x0, y0</i>);
+</code>
+<bodytext>
+		Directly sets the transform matrix used in the creation of the pattern.
+</bodytext>
+<code>
+<b>pattern.add_color_stop_rgba</b>(<i>index, red, green, blue, alpha</i>);
+</code>
+<bodytext>
+		A function called on a previously created pattern, the add_color_stop_rgba will define a color value for one of the influence points of the pattern. The index parameter determine which influence point is being defined.
+</bodytext>
+<code>
+<b>pattern.identity_matrix</b>();
+</code>
+<bodytext>
+		Revert the user space transform matrix to its default (normal) orientation.
+</bodytext>
+<code>
+<b>pattern.rotate</b>(<i>rotation</i>);
+</code>
+<bodytext>
+		Apply a rotation transform on the user space in which the pattern is displayed.
+</bodytext>
+<code>
+<b>pattern.scale</b>(<i>x, y</i>);
+</code>
+<bodytext>
+		Scale the pattern by a factor in both X and Y coordinate spaces.
+</bodytext>
+<code>
+<b>pattern.translate</b>(<i>x, y</i>);
+</code>
+<bodytext>
+		Apply a translation transform (spatial offset) on the user space in which the pattern is displayed.
+</bodytext>
+<code>
+<b>set_source</b>(<i>pattern</i>);
+</code>
+<bodytext>
+		Sets the pattern to be used for the next fill() call. The name parameter must be a previously created pattern.
+</bodytext>
+<code>
+value = <b>pattern.get_type</b>();
+</code>
+<bodytext>
+		Returns the type of pattern that was created.
+</bodytext>
+<header1>
+		Image and Surface Routines
+</header1>
+<code>
+instance = <b>new MGraphics</b>(<i>width, height</i>);
+</code>
+<bodytext>
+		Creates a new Mgraphics instance, which can be used as a drawing context for creating saved or persistent images. To move the contents of an MGraphic instance into a Image object, you just pass the MGraphic into the Image during instantiation (myImage = new Image(mgraphic_instance)).
+</bodytext>
+<code>
+<b>image_surface_draw</b>(<i>myImage [,source_top, source_left, source_width, source_height]</i>);
+</code>
+<bodytext>
+		Place an image (typically stored as an Image object) into the current surface. The drawing is placed at the top-left of the drawing context, changeable using a transform matrix or translate function. You can also choose the section of the image to draw using four optional arguments that describe a rectangle taken from the image.
+</bodytext>
+<code>
+<b>svg_render</b>(<i>filename</i>);
+</code>
+<bodytext>
+		Render an SVG file into the current user context.
+</bodytext>
+<code>
+<b>set_source_surface</b>(<i>surface</i>);
+</code>
+<bodytext>
+		Sets the provided surface as the source for drawing routines.
+</bodytext>
+
+
+</vignette>

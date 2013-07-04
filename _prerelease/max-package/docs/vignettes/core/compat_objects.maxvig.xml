@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Compatibility: Object-Specific Changes">
+	<header1>
+	Object-Specific Changes
+	</header1>
+	<br /><space />
+		<bodytext>
+			This is a list, sorted alphabetically, of discontinued objects, or changes to 
+			object features or messages in Max 6.
+		</bodytext>
+
+		<header2>
+			jit.cellblock
+		</header2>		
+		<bodytext>	
+			The <o>jit.cellblock</o> object no longer supports the <m>read</m> or <m>write</m>
+			messages.  Saving and restoring contents should be done by using the <m>refer</m>
+			message to attach to a <o>coll</o> object, which can be saved or restored. 
+		</bodytext>
+		<bodytext>
+			Due to changes in the underlying technology, all rows in a <o>jit.cellblock</o> object
+			must be the same height, so setting a single row's height using the <m>row n height n</m> 
+			message is no longer supported, and the message is ignored.
+		</bodytext>
+		
+		<header2>
+			vst~
+		</header2>
+
+		<bodytext>
+			The <o>vst~</o> object will not open VST plug-ins created with Max. As 
+			an alternative, you could change your plug-in to an abstraction and load 
+			it with the <o>poly~</o> object, which supports dynamic patcher loading.
+		</bodytext>
+	
+
+</vignette>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Max for Live Object Alphabetical Listing">
+	<header1>
+		An Alphabetical Listing of all Max for Live Objects
+		</header1>
+				<bodytext>
+						Most Max for Live objects begin with the prefix <b>live.</b> -- click on the letters of the alphabet listed below to see objects whose name begins with that letter. To see the 
+						<link type="vignette" module="core" name="help_docs" anchor="refman">Reference page</link> 
+						for any object, click on its name.
+				</bodytext>
+				<bodytext>
+			<link type="vignette" module="core" name="live_alphabetical" anchor="a">A</link>&#160; 
+			<link type="vignette" module="core" name="live_alphabetical" anchor="b">B</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="c">C</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="d">D</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="g">G</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="l">L</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="m">M</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="n">N</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="o">O</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="p">P</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="r">R</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="s">S</link>&#160;
+			<link type="vignette" module="core" name="live_alphabetical" anchor="t">T</link>&#160;
+</bodytext>			
+			<a name="a" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	A
+	</header2>
+			<o>live.arrows</o>
+	&#160;
+			<a name="b" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	B
+	</header2>
+			<o>live.button</o>
+	&#160;
+			<a name="c" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	C
+	</header2>
+			<o>chucker~</o>
+	&#160;
+			<o>live.colors</o>
+	&#160;
+			<a name="d" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	D
+	</header2>
+			<o>ddg.mono</o>
+	&#160;
+			<o>live.dial</o>
+	&#160;
+			<o>live.drop</o>
+	&#160;
+			<a name="g" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	G
+	</header2>
+			<o>live.gain~</o>
+	&#160;
+			<o>live.grid</o>
+	&#160;
+			<a name="l" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	L
+	</header2>
+			<o>live.line</o>
+	&#160;
+			<a name="m" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	M
+	</header2>
+			<o>live.menu</o>
+	&#160;
+			<o>live.meter~</o>
+	&#160;
+			<o>midiselect</o>
+	&#160;
+			<a name="n" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	N
+	</header2>
+			<o>live.numbox</o>
+	&#160;
+			<a name="o" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	O
+	</header2>
+			<o>live.object</o>
+	&#160;
+			<o>live.observer</o>
+	&#160;
+			<a name="p" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	P
+	</header2>
+			<o>live.param~</o>
+	&#160;
+			<o>live.path</o>
+	&#160;
+			<a name="r" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	R
+	</header2>
+			<o>live.remote~</o>
+	&#160;
+			<a name="s" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	S
+	</header2>
+			<o>live.slider</o>
+	&#160;
+			<o>live.step</o>
+	&#160;
+			<a name="t" />
+		<bodytext>
+			</bodytext>
+	<header2>
+	T
+	</header2>
+			<o>live.tab</o>
+	&#160;
+			<o>live.text</o>
+	&#160;
+			<o>live.thisdevice</o>
+	&#160;
+			<o>live.toggle</o>
+	&#160;
+</vignette>

@@ -62,10 +62,11 @@ long Freeverb::getVectorSize()
 void Freeverb::setSamplingRate(long aSamplingRate)
 {
     m_sampling_rate = aSamplingRate;
+    
     for(int i = 0; i < numcombs; i++)
-        m_comb_filter[i]->setBufferSizeMax((combtuning[i] + 46) * ((double)m_sampling_rate / 44100.));
+        m_comb_filter[i]->setBufferSizeMax((long)((combtuning[i] + 47) * (double)m_sampling_rate / 44100.));
     for(int i = 0; i < numallpasses; i++)
-        m_allpass_filter[i]->setBufferSize((long)((allpasstuning[i] + 46) * m_sampling_rate / 44100.));
+        m_allpass_filter[i]->setBufferSizeMax((long)((allpasstuning[i] + 47) * (double)m_sampling_rate / 44100.));
     
     setDirectionalSpread(m_directional_spread);
     setDiffuseSpread(m_diffuse_spread);

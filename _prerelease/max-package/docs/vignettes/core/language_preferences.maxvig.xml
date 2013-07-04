@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Language Settings">
+	<header1>
+	Language Settings
+	</header1>
+	<bodytext>
+			The Language category of the
+			<link module="core" name="preferences_window" type="vignette">Preferences Window</link>
+			lists the currently available language choices.
+		</bodytext>
+	<bodytext>
+		<b>Note: At this time, only English is available.</b>
+	</bodytext>
+</vignette>

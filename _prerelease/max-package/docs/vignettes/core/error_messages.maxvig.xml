@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Error Messages">
+	<header1>
+	Errors and Error Messages
+	</header1>
+	<header2>
+	Error Messages
+	</header2>
+		<bodytext>
+			Max prints an error report in the Max window when you make a programming mistake.
+		</bodytext>
+		<bodytext>
+			(picture)
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Tracing an error message
+	</header2>
+		<ul>
+		<li>
+			Click on the error message you want to trace in the Max window. The
+		error message will be highlighted.</li>
+		<li>
+			Click on the Show Object icon on the Max window toolbar. The Max object
+		associated with the error message will appear, highlighted with a green tinge.</li>
+		</ul>
+		<bodytext>
+			(picture)
+		</bodytext>
+		<bodytext>
+			If the object is contained in a subpatch, the subpatch will open in an
+			unlocked Patcher window.
+		</bodytext></bluebox>
+	<br />
+	<header2>
+	Scheduler and Timer Errors
+	</header2>
+		<bodytext>
+			When you make an error while programming with Max that requires your immediate
+			attention, the error is reported in a dialog box.
+		</bodytext>
+		<bodytext>
+			<img src="images/error_messages1.png"  />
+		</bodytext>
+		<bodytext>
+			The most common of these errors is a Stack Overflow.
+		</bodytext>
+		<bodytext>
+			It is possible to get Max working so hard it does not have time to respond
+			to your commands (say, if you have a number of metro objects sending out bang
+			messages as fast as they can, or if you have created a loop that overloads
+			Max, causing a Stack Overflow error). When this happens, you may need to stop
+			the Max scheduler, restart the scheduler, or both.
+		</bodytext>
+	<br />
+	<bluebox>
+	<header2>
+	Stopping the Max scheduler
+	</header2>
+		<ul>
+		<li>
+			Hold down the Command key (Macintosh) or the Control key (Windows) and type
+			a period. The scheduler will be stopped
+		</li>
+		</ul>
+		<bodytext>
+			When Max's timer is stopped, you will see a message in a dialog box.
+		</bodytext>
+		<bodytext>
+			<img src="images/error_messages2.png"  />
+		</bodytext>
+	</bluebox>
+	<br />
+	<bluebox>
+	<header2>
+	Starting the Max scheduler
+	</header2>
+		<ul>
+		<li>
+			Choose <b>Resume</b> from the Edit menu. The Max scheduler will restart.
+		</li>
+		</ul>
+	</bluebox>
+	<br />
+	<header2>
+	Error Message Listings
+	</header2>
+		<bodytext>
+			Below is a list of error messages you may encounter, along with likely causes
+			of each message.
+		</bodytext>
+		<bodytext>
+			<m>"$" variable out of range></m>
+		</bodytext>
+		<bodytext>
+			Occurs when you refer to an argument number out of the range $1 - $9 in a message
+			sent to a <o>message</o> box.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;filename&gt;</bi><m>: error opening file (and variations)</m>.
+		</bodytext>
+		<bodytext>
+			An error occurred opening a file that was properly located. Most likely the
+			file or media has a problem.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: </m><bi>&lt;filename&gt;</bi><m>: can't open</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a patch is loading or when an object is created that reads its data from
+			a separate file. The file that was to be read in automatically was not found in
+			Max's search path or was not a type of file that the object is capable of opening. The
+			erroneous filename has usually been specified as an argument to an object such as
+			coll, seq or table. Make sure that the file is in Max's search path.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: bad argument</m>
+		</bodytext>
+		<bodytext>
+			Occurs when creating a new object with typed-in arguments. There is something
+			wrong with what you typed after the name of an object. Usually the object is
+			expecting a symbol, and you typed in a number, or vice versa. Check the object's
+			argument specification list on the Reference page.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: bad arguments for message</m><space/><bi>&lt;message&gt;</bi>
+		</bodytext>
+		<bodytext>
+			Occurs when an object receives a message that it understands, but one of the
+			arguments in the message is not what the receiving object expected. Usually the
+			object was expecting a symbol argument and got a number, or vice versa. Check
+			the object's input list on the Reference page.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: doesn't understand</m><space/><bi>&lt;message selector&gt;</bi>
+		</bodytext>
+		<bodytext>
+			Occurs when an object receives a message that it doesn't expect. It is possible
+			to make patch cord connections that will result in improper messages being
+			sent to an inlet. For example, Max will let you connect the outlet of a
+			<o>message</o> box to almost any inlet, because there's no way of knowing what
+			message will come out of the outlet. In such a case, the error does not
+			become evident until you test the program and the message is actually sent.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: message too long</m><space/><bi>&lt;message&gt;</bi>
+		</bodytext>
+		<bodytext>
+			A message was sent that contained more elements than the object can
+			handle.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: missing arguments for message <bi>&lt;message&gt;</bi><space/></m>
+		</bodytext>
+		<bodytext>
+			Occurs when an object receives a message that it understands, but one or
+			more of the expected arguments in the message is missing. Check the object's
+			input description on the Reference page.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: No such object</m>
+		</bodytext>
+		<bodytext>
+			Occurs when creating a new object or loading a document. When you are editing a
+			patcher, and you type the name of a nonexistent object into an object box (or
+			the name of an object or subpatch that is not in Max's search path), Max
+			produces this error message.
+		</bodytext>
+		<bodytext>
+			When you open a document that contains an object that Max cannot find (either
+			because it is not located in Max's search path or because it just doesn't exist),
+			Max displays the object as if it existed, except that the object name is
+			surrounded by a dotted outline in the object box, and an error message is
+			printed in the Max window. This preserves the connections to the object box
+			in case you can retype the object to create it properly.
+		</bodytext>
+		<bodytext>
+			(picture)
+		</bodytext>
+		<bodytext>
+			A similar box is created when a user interface object referenced inside a
+			file cannot be located.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>: fragment file not found</m>
+		</bodytext>
+		<bodytext>
+			This error occurs when a collective references an external object that
+			has been improperly stored in the collective. It should not happen with
+			the current version of Max.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;objectname&gt;</bi><m>:</m><space/><bi>&lt;filename&gt;</bi><m>: file not found</m>
+		</bodytext>
+		<bodytext>
+			This error occurs when a file name is either passed to an object as the
+			argument to a <m>read</m> message or stored within an object saved within a
+			patcher. The file cannot be located, either within Max's search path
+			or with its full pathname.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;symbol&gt;</bi><m>: bad arg types</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a patch is running and a symbol is received in the inlet
+			of a bitwise operator such as &amp;, |, &lt;, or &gt;. Make sure
+			that only number messages are sent to bitwise operators.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;symbol</bi>&gt;<m>: no such object</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a message is sent to a <o>send</o> object, or to a message
+			box that contains a semicolon followed by the name of a receiver,
+			and there is no <o>receive</o> object with the name specified in the
+			<o>send</o> object or <o>message</o> box.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;number&gt;</bi><m>: not a symbol</m>
+		</bodytext>
+		<bodytext>
+			Occurs when the element that follows a semicolon in a <link type="refpage" name="message">message box</link>
+			(specifying a receiver for the message) is not a symbol.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;filename&gt;</bi><m>: bad magic number</m>
+		</bodytext>
+		<bodytext>
+			<bi>&lt;filename&gt;</bi><m>: corrupt binary format file</m>
+		</bodytext>
+		<bodytext>
+			The file you tried to open is corrupted or is not a properly
+			formatted Max document. Restore the file from a backup copy if available.
+		</bodytext>
+		<bodytext>
+			<bi>&lt;filename&gt;</bi><m>: error creating file</m>
+		</bodytext>
+		<bodytext>
+			There was an error writing a file; the disk may be write-protected or full
+		</bodytext>
+		<bodytext>
+			<bi>&lt;filename&gt;</bi><m>: out of memory writing file</m>
+		</bodytext>
+		<bodytext>
+			There is insufficient memory to write the file you're trying to
+			save. If possible, close other files and windows that don't
+			relate to the file you're saving.
+		</bodytext>
+		<bodytext>
+			<m>ad: Floating point exceptions were caught</m><space/><bi>&lt;number of exceptions&gt;</bi>
+		</bodytext>
+		<bodytext>
+			(Windows only) This message is sent to the max window when audio is stopped
+			if floating point exceptions were caught while processing audio. The tells
+			you how many exceptions were caught to give you an indication of the severity
+			of the problem. This can be triggered by underflow of float-ing point
+			operations causing denormal numbers to be generated. You may want to try
+			modifying your patcher to cause the exceptions to stop as it may affect the performance.
+		</bodytext>
+		<bodytext>
+			<m>ad_mme: unable to open wave input device. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_mme: unable to open wave output device. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_mme: unable to start output. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_mme: unable to start input. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_mme: stopping due to error. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_mme: No MME input or output devices found. </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) Please check that you have the latest driver update for
+			your audio device. Please exit all other audio applications, reboot if
+			necessary, and try again. Also, please check your settings in the Audio
+			Status window to insure appropriate choices are selected for Input Device,
+			Output Device, Sampling Rate, IO Vector Size, and Signal Vector Size.
+			If the problem persists, contact Cycling '74 support.
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: can't create directsound object. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: can't create directsoundcapture object. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: Failed to set cooperative level to priority. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: Failed to create primary buffer. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: Failed to set format of primary buffer. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: failed to create output DirectSoundBuffer. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_ds: No directsound input or output devices found. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: unable to Play output buffer. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: unable to Start input buffer. </m>
+		</bodytext>
+		<bodytext>
+			<m>ad_directsound: stopping due to error. </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) Please check that you have the latest driver
+			update for your audio device. Please exit all other audio
+			applications, reboot if necessary, and try again. Also,
+			please check your settings in the Audio Status window to insure
+			appropriate choices are selected for Input Device, Output Device,
+			Sampling Rate, IO Vector Size, and Signal Vector Size. If the
+			problem persists, contact Cycling '74 support.
+		</bodytext>
+		<bodytext>
+			<m>ASIOCreateBuffers error </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) A problem was encountered initializing the
+			ASIO device. Please check that you have the latest driver
+			update from your audio device manufacturer. Please also try
+			different settings for the device buffer sizes and latency in
+			the control panel for your audio device provided by your device
+			manufacturer. Check that another audio application is not using
+			the audio device. Also check that the audio device is not the default
+			audio device for Windows System Sounds.
+		</bodytext>
+		<bodytext>
+			<m>bad message</m>
+		</bodytext>
+		<bodytext>
+			Same as <bi>&lt;objectname&gt;</bi><m>: doesn't understand</m><space/><bi>&lt;message selector&gt;</bi>.
+		</bodytext>
+		<bodytext>
+			<m>bad receiver</m>
+		</bodytext>
+		<bodytext>
+			Same as <bi>&lt;objectname&gt;</bi><m>: doesn't understand</m><space/><bi>&lt;message selector&gt;</bi>.
+		</bodytext>
+		<bodytext>
+			<m>bag | float | int | pack | table: missing or incorrect arguments to send</m>
+		</bodytext>
+		<bodytext>
+			Occurs when the patch is running and a <o>bag</o>, <o>float</o>, <o>int</o>, <o>pack</o>, or <o>table</o> object
+			receives a <m>send</m> message without an argument, or with an argument that is not a
+			symbol or is not the name of an existing <o>receive</o> object.
+		</bodytext>
+		<bodytext>
+			<m>can't connect</m><space/><bi>&lt;objectname&gt;</bi><space/><m>to </m><bi>&lt;objectname&gt;</bi>
+		</bodytext>
+		<bodytext>
+			Advisory message produced when you try to connect an outlet to an inlet that doesn't
+			understand the message sent by the outlet. You will also notice that the inlet was
+			not highlighted when you dragged the mouse over it.
+		</bodytext>
+		<bodytext>
+			<m>can't fragload</m><space/><bi>&lt;objectname&gt;</bi><m>: missing </m><bi>&lt;libraryname&gt;</bi><m>, err</m><space/><bi>&lt;number&gt;</bi>
+		</bodytext>
+		<bodytext>
+			An external object that depends upon a particular shared library was not loaded
+			because the shared library is not available. You'll see this error if you try to
+			use an object for MSP with the non-MSP version of Max (the missing library will
+			be called MaxAudioLib in this case) or if you try to use some external objects
+			created for an earlier version of Max. Otherwise, to solve this problem, you
+			may need to relocate the shared library or update your system.
+		</bodytext>
+		<bodytext>
+			<m>check failed: t_newptr in overdrive</m>
+		</bodytext>
+		<bodytext>
+			This message occurs when an object attempts to allocate too much memory at
+			interrupt level. Unless it represents a bug in the object, it may mean that you'll
+			have to modify your patch to use a <o>defer</o> object where memory is being allocated.
+			One example would be attempting to store large lists of data in a <o>coll</o> object.
+			See the <o>defer</o> Reference page for more details.
+		</bodytext>
+		<bodytext>
+			<m>check failed: <bi>&lt;message&gt;</bi><space/></m>
+		</bodytext>
+		<bodytext>
+			Occurs when there is a bug in the Max application or in an external object.
+			Please report the con tents and context of any such message to Cycling '74.
+		</bodytext>
+		<bodytext>
+			<m>could not load QuickTime function: </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) A necessary QuickTime function was not found. Make sure
+			you have installed QuickTime for Windows and chosen a complete install
+			of all optional components.
+		</bodytext>
+		<bodytext>
+			<m>Error loading external file</m><space/><bi>&lt;filename&gt;</bi>
+		</bodytext>
+		<bodytext>
+			Occurs when Max is installing an external object in the startup folder. The external
+			object file is damaged. Try restoring a copy from the original disk.
+		</bodytext>
+		<bodytext>
+			<m>funbuff: bad file type</m>
+		</bodytext>
+		<bodytext>
+			<m>funbuff: file not found</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a patch is loaded or when a <o>funbuff</o> object is created that
+			reads in from a separate file. There was an error in reading a file into
+			a <o>funbuff</o> object, either because the file was not in the proper format (it must
+			start with the word <m>funbuff</m>, followed by a space-separated list of numbers)
+			or because a Max or text file with that name could not be found. Ensure
+			that the file is in located in Max's search path, and that it is in the proper format.
+		</bodytext>
+		<bodytext>
+			<m>grab: can only connect to leftmost inlet</m>
+		</bodytext>
+		<bodytext>
+			Occurs when you try to connect the right outlet of a <o>grab</o> object to the wrong
+			inlet of another object. The right outlet of the <o>grab</o> object should be connected only to
+			the leftmost inlet of other objects.
+		</bodytext>
+		<bodytext>
+			<m>graphic: </m><space/><bi>&lt;name&gt;</bi><space/><m>already exists</m>
+		</bodytext>
+		<bodytext>
+			Occurs when you create a graphic object with a name that has already been
+			taken by another object, such as a <o>table</o> or <o>send</o>/<o>receive</o> object pair.
+		</bodytext>
+		<bodytext>
+			<m>inlet: wrong message or type</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a patch is running and an object receives a message that it
+			doesn't expect in some inlet other than the left inlet.
+		</bodytext>
+		<bodytext>
+			<m>midi_mme: unable to open midi input device </m>
+		</bodytext>
+		<bodytext>
+			<m>midi_mme: unable to open output device </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) Max was unable to open the MIDI input or output device.
+			Please exit from all other MIDI applications and try again.
+		</bodytext>
+		<bodytext>
+			<m>MSP/ASIO: Unexpected error loading driver </m>
+		</bodytext>
+		<bodytext>
+			<m>MSP/ASIO: error loading ASIO driver for </m>
+		</bodytext>
+		<bodytext>
+			<m>MSP ASIO: Error loading driver </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) A problem was encountered loading the ASIO driver.
+			Please check that you have the latest driver update from your audio
+			device manufacturer. Check that another audio application is not
+			using the audio device. Also check that the audio device is not the
+			default audio device for Windows System Sounds.
+		</bodytext>
+		<bodytext>
+			<m>MSP ASIO: initialization error </m>
+		</bodytext>
+		<bodytext>
+			<m>MSP/ASIO: can't deal with bufsize</m>
+		</bodytext>
+		<bodytext>
+			<m>MSP/ASIO: data format</m><space/><bi>&lt;format&gt;</bi><space/><m>not supported</m>
+		</bodytext>
+		<bodytext>
+			<m>MSP/ASIO: driver start error </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) A problem was encountered initializing the ASIO device.
+			Please check that you have the latest driver update from your audio
+			device manufacturer. Please also try different settings for the device
+			buffer sizes and latency in the control panel for your audio device
+			provided by your device manufacturer. Check that another audio application
+			is not using the audio device. Also check that the audio device is not the
+			default audio device for Windows System Sounds.
+		</bodytext>
+		<bodytext>
+			<m>No help available for</m><space/><bi>&lt;objectname&gt;</bi>.
+		</bodytext>
+		<bodytext>
+			A help file in the max-help folder cannot be located for the named object.
+			Restore the help file from your original Max disks.
+		</bodytext>
+		<bodytext>
+			<m>no resource</m><space/><bi>&lt;filename&gt;</bi>
+		</bodytext>
+		<bodytext>
+			This error occurs when you are testing a standalone application and the
+			Search for Missing Files option has been turned off. The named object or
+			file has not been included in the collective from which the standalone
+			was created, and since the runtime Max is not going to look for the file,
+			it declares it missing after it was not found inside the standalone as a resource.
+		</bodytext>
+		<bodytext>
+			<m>not enough memory to open</m><space/><bi>&lt;filename&gt;</bi>
+		</bodytext>
+		<bodytext>
+			<bi>&lt;filename&gt;</bi><m>: can't load, out of memory</m>
+		</bodytext>
+		<bodytext>
+			The file is too large to be opened. Note that to open a patcher
+			file you need more memory than would be required to actually use the file.
+		</bodytext>
+		<bodytext>
+			<m>object box has comma or semicolon: </m>
+		</bodytext>
+		<bodytext>
+			Indicates that you typed a comma or a semicolon character into an object
+			box. If this error occurs when reading in a patch, it is likely that the
+			file is damaged.
+		</bodytext>
+		<bodytext>
+			<m>offscreen buffer couldn't be allocated</m>
+		</bodytext>
+		<bodytext>
+			Insufficient memory available when working with objects in a graphic window
+		</bodytext>
+		<bodytext>
+			<m>patcher: unknown script keyword</m><space/><bi>&lt;keyword&gt;</bi>
+		</bodytext>
+		<bodytext>
+			A keyword argument to the script message to sent to the <o>thispatcher</o> object
+			is not recognized.
+		</bodytext>
+		<bodytext>
+			<m>patcher connect: inlet</m><space/><bi>&lt;number&gt;</bi><space/><m>out of range</m>
+		</bodytext>
+		<bodytext>
+			Occurs when editing the name or arguments of an object that has already
+			been created in a patcher, and patch cords that used to be connected to
+			the object can no longer be connected. Changing the contents of the object
+			box may change an object's number of inlets or outlets, or Max may be unable
+			to create the object at all if you type in the wrong thing.
+		</bodytext>
+		<bodytext>
+			<m>QT images not supported in 8-bit color mode</m>
+		</bodytext>
+		<bodytext>
+			(Windows only) You are trying to load a QuickTime image but your display
+			resolution is set to 8- bit color depth. Change your Display Settings to
+			increase your Color Depth, preferably to 24 or 32 bits.
+		</bodytext>
+		<bodytext>
+			<m>read failed</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a file is read into an object. Max encountered an error
+			reading a file and could not load in the data. Check to make sure that
+			the file is in the proper format for the object reading it in.
+		</bodytext>
+		<bodytext>
+			<m>rescopy: failed to add</m><space/><bi>XXXX N</bi>, <m>error</m><space/><bi>N</bi>
+		</bodytext>
+		<bodytext>
+			Occurs when installing an external object. This message (especially if you
+			see a lot of them) may indicate a problem with the Max Temp file used to store
+			resources for external objects. If you only see one or two of these errors, it
+			may be a resource missing in the object or a conflict between two or more
+			objects attempting to use the same ID number. If <bi>XXXX</bi> is STR#, this
+			problem only affects the strings shown when getting assistance on an object
+			and should not be considered a major problem.
+		</bodytext>
+		<bodytext>
+			<m>rescopy: failed to get</m><space/><bi>&lt;resource type&gt;</bi><space/><bi>&lt;ID number&gt;</bi>
+		</bodytext>
+		<bodytext>
+			Occurs when installing an external object. The external object file is
+			corrupted. Restore a new copy of the external object from your original disk.
+		</bodytext>
+		<bodytext>
+			<m>script: </m><space/><bi>&lt;keyword&gt;</bi><m>: variable</m><space/><bi>&lt;variablename&gt;</bi><space/><m>empty</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a script message to the <o>thispatcher</o> object references a
+			variable that is no longer assigned to an object.
+		</bodytext>
+		<bodytext>
+			<m>script: </m><space/><bi>&lt;keyword&gt;</bi><m>: no variable</m><space/><bi>&lt;variablename&gt;</bi>
+		</bodytext>
+		<bodytext>
+			Occurs when a script message to the <o>thispatcher</o> object references a
+			variable that has not yet been defined or given a value.
+		</bodytext>
+		<bodytext>
+			<m>script: instance</m><space/><bi>&lt;number&gt;</bi><space/><m>of</m><space/><bi>&lt;objectname&gt;</bi><space/><m>not found</m>
+		</bodytext>
+		<bodytext>
+			Occurs when using the <m>nth</m> script message to the <o>thispatcher</o> object and the
+			specified index is greater than the number of objects of the specified
+			class in the patcher.
+		</bodytext>
+		<bodytext>
+			<m>script: name</m><space/><bi>&lt;variablename&gt;</bi><space/><m>already in use</m>
+		</bodytext>
+		<bodytext>
+			Occurs when a script message to the <o>thispatcher</o> object attempts to assign an
+			object to a variable name that is already been used. This error will not occur if
+			you choose <b>Name...</b> from the Object menu to assign a name to an object.
+		</bodytext>
+		<bodytext>
+			<m>send: </m><space/><bi>&lt;symbol</bi>&gt;<m>: already exists</m>
+		</bodytext>
+		<bodytext>
+			<m>receive:</m><space/><bi>&lt;symbol</bi>&gt;<m>: already exists</m>
+		</bodytext>
+		<bodytext>
+			Occurs when you type in a name as an argument to a <o>send</o> or <o>receive</o> object
+			which is already being used for a <o>table</o> object or some other object.
+		</bodytext>
+		<bodytext>
+			<m>sxformat: illegal type in message</m>
+		</bodytext>
+		<bodytext>
+			Occurs when the patch is running and some message other than an int is
+			received in the inlet of an <o>sxformat</o> object.
+		</bodytext>
+		<bodytext>
+			<m>text:</m><space/><bi>&lt;filename&gt;</bi><m>: file is protected</m>
+		</bodytext>
+		<bodytext>
+			You have tried to open a Max binary patcher file protected against editing as text
+		</bodytext>
+		<bodytext>
+			<m>textbox: bad args</m>
+		</bodytext>
+		<bodytext>
+			Occurs when opening a Max document. The document has been damaged.
+		</bodytext>
+		<bodytext>
+			<m>Unable to load MaxQuickTime.dll. Error code. </m>
+		</bodytext>
+		<bodytext>
+			(Windows only) A required component of Max was missing. Try reinstalling to see if
+			it fixes the problem. If not please contact Cycling '74 support and provide the
+			message and that was reported.
+		</bodytext>
+		<bodytext>
+			<m>warning: extra arguments for message</m>
+		</bodytext>
+		<bodytext>
+			Occurs when an object is given more typed-in arguments than it expects, or
+			when too many arguments are present in an incoming message. Usually this is
+			just a warning of something that is not quite right but is basically harmless.
+		</bodytext>
+		<bodytext>
+			<m>warning:</m><space/><bi>&lt;objectname&gt;</bi><m>: no port</m><space/><bi>&lt;symbol</bi>&gt;, <m>using</m><space/><bi>&lt;default port&gt;</bi>
+		</bodytext>
+		<bodytext>
+			Occurs when a port argument is typed into the object box of a MIDI object,
+			and the port name is not currently valid. The valid port names are listed
+			in the MIDI Setup dialog box. The default port is the first name in the
+			device list in the MIDI Setup dialog.
+		</bodytext>
+			
+			
+</vignette>
+			

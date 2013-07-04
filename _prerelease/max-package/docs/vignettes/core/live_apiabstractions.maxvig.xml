@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Live API Abstractions">
+	<header1>
+	Live API Abstractions
+	</header1>
+<bodytext>
+	Max 6.1 contains a set of helpful
+	<link type="vignette" module="core" name="abstractions">abstractions</link>
+	that demonstrate how to interact with the
+	Live API in the devices you create. These abstractions provide programming examples
+	and starting points for constructing your own patches that interact directly
+	with the Live application. They are grouped by the part of a Live Session 
+	they can access and control.
+</bodytext>	
+<br />
+<bluebox>
+<header2>
+	Finding the Live API example abstractions
+</header2>
+<bodytext>
+	The Live API example can be found in the Max application folder:
+</bodytext>
+	<ul>
+	<li>
+		Open the <i>patches</i> folder in your Max application folder. Locate the <i>m4l-patches</i>, 
+		open it, and open the <i>LiveAPI Resources</i> folder located inside to find the patches
+		listed below.
+	</li>
+	<li>If you are reading this documentation within Max you can just click on the links below to open the abstractions.
+	</li>
+	</ul>
+</bluebox>
+<br />
+<header2>
+	Global Abstractions
+	</header2>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.api.ObserveTransport.maxpat/M4L.api.ObserveTransport.maxpat">M4L.api.ObserveTransport.maxpat</a>: Monitors the status of Live's transport (is the song playing or not).
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.ToggleTransport.maxpat/M4L.api.ToggleTransport.maxpat">M4L.api.ToggleTransport.maxpat</a>: : Stops Live's transport when the song is playing - start it if not.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SaveInteger.maxpat/M4L.api.SaveInteger.maxpat">M4L.api.SaveInteger.maxpat</a>: Saves an integer number with the Live set and restores it without letting anything through when set.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SaveLivePath.maxpat/M4L.api.SaveLivePath.maxpat">M4L.api.SaveLivePath.maxpat</a>: Stores a path in a Live set.
+	</li>
+	</ul>
+
+	<header2>
+	Track Abstractions
+	</header2>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetAllTrackIds.maxpat/M4L.api.GetAllTrackIds.maxpat">M4L.api.GetAllTrackIds.maxpat</a>: Creates a list of all track IDs.
+	</li>	
+	<li>
+		<a href="max:openfilefront/M4L.api.GetVisibleTrackCount.maxpat/M4L.api.GetVisibleTrackCount.maxpat">M4L.api.GetVisibleTrackCount.maxpat</a>: Gets the number of the visible tracks in the current Live set.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetSelectedTrackIndex.maxpat/M4L.api.GetSelectedTrackIndex.maxpat">M4L.api.GetSelectedTrackIndex.maxpat</a>: Gets the index of the currently selected (highlighted) track in the Live set.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SetSelectedTrackIndex.maxpat/M4L.api.SetSelectedTrackIndex.maxpat">M4L.api.SetSelectedTrackIndex.maxpat</a>: Sets the selected track to a given index. The index will be mapped against the list of visible tracks.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectMasterTrack.maxpat/M4L.api.SelectMasterTrack.maxpat">M4L.api.SelectMasterTrack.maxpat</a>: Selects the Master Track of the current Live set.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectNextTrack.maxpat/M4L.api.SelectNextTrack.maxpat">M4L.api.SelectNextTrack.maxpat</a>: A bang message selects the next track in the current Live Set.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectPreviousTrack.maxpat/M4L.api.SelectPreviousTrack.maxpat">M4L.api.SelectPreviousTrack.maxpat</a>: A bang message selects the previous track in the current Live Set.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.ChangeTrackVolume.maxpat/M4L.api.ChangeTrackVolume.maxpat">M4L.api.ChangeTrackVolume.maxpat</a>: Changes the volume of the currently selected track by a given value.
+	</li>
+	</ul>
+
+	<header2>
+	Scene Abstractions
+	</header2>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.api.FireSelectedScene.maxpat/M4L.api.FireSelectedScene.maxpat">M4L.api.FireSelectedScene.maxpat</a>: Fires the currently selected Scene.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetSceneCount.maxpat/M4L.api.GetSceneCount.maxpat">M4L.api.GetSceneCount.maxpat</a>: Gets the total number of scenes in the current Live Set.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetSelectedSceneIndex.maxpat/M4L.api.GetSelectedSceneIndex.maxpat">M4L.api.GetSelectedSceneIndex.maxpat</a>: Gets the index of the currently selected/highlighted scene.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectNextScene.maxpat/M4L.api.SelectNextScene.maxpat">M4L.api.SelectNextScene.maxpat</a>: Selects the scene next to the currently selected/highlighted one.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectPreviousScene.maxpat/M4L.api.SelectPreviousScene.maxpat">M4L.api.SelectPreviousScene.maxpat</a>: Selects the scene previous to the currently selected/highlighted one.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SetSelectedSceneIndex.maxpat/M4L.api.SetSelectedSceneIndex.maxpat">M4L.api.SetSelectedSceneIndex.maxpat</a>: Sets the selected scene to a given index.
+	</li>
+	</ul>
+
+	<header2>
+	Clip Abstractions
+	</header2>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.api.FireSelectedClip.maxpat/M4L.api.FireSelectedClip.maxpat">M4L.api.FireSelectedClip.maxpat</a>: Fires the clip that is determined by the currently selected (highlighted) scene and track.
+	</li>
+	</ul>
+
+	<header2>
+	Note Abstractions
+	</header2>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetSelectedNotes.maxpat/M4L.api.GetSelectedNotes.maxpat">M4L.api.GetSelectedNotes.maxpat</a>: Locates the clip that is currently selected in the Clip View, read out all its selected MIDI notes and fill them into a Jitter Matrix.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.ReplaceSelectedNotes.maxpat/M4L.api.ReplaceSelectedNotes.maxpat">M4L.api.ReplaceSelectedNotes.maxpat</a>: Replaces any selected MIDI notes
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.ReverseNotes.maxpat/M4L.api.ReverseNotes.maxpat">M4L.api.ReverseNotes.maxpat</a>: Reverses an input matrix of MIDI notes
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.InvertNotes.maxpat/M4L.api.InvertNotes.maxpat">M4L.api.InvertNotes.maxpat</a>: Inverts an input matrix of MIDI notes
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.MoveInScale.maxpat/M4L.api.MoveInScale.maxpat">M4L.api.MoveInScale.maxpat</a>: Moves a selection of MIDI notes without leaving the given scale
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.BuildChord.maxpat/M4L.api.BuildChord.maxpat">M4L.api.BuildChord.maxpat</a>: Builds a chord on each input note
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.BuildArpeggio.maxpat/M4L.api.BuildArpeggio.maxpat">M4L.api.BuildArpeggio.maxpat</a>: Builds an arpeggio on each input note
+	</li>
+	</ul>
+
+	<header2>
+	Device Abstractions
+	</header2>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.api.DeviceParameter.maxpat/M4L.api.DeviceParameter.maxpat">M4L.api.DeviceParameter.maxpat</a>: This patch represents a Live device parameter. It accepts a parameter ID as input and can set and get values in unscaled and raw format and output its min/max values.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.DeviceParameterRemote.maxpat/M4L.api.DeviceParameterRemote.maxpat">M4L.api.DeviceParameterRemote.maxpat</a>: This patch represents a device parameter
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetAllDeviceIds.maxpat/M4L.api.GetAllDeviceIds.maxpat">M4L.api.GetAllDeviceIds.maxpat</a>: Takes a list of track IDs as input, scan all those tracks for their devices and output a list of device IDs.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetDeviceNames.maxpat/M4L.api.GetDeviceNames.maxpat">M4L.api.GetDeviceNames.maxpat</a>: Takes a list of device ids as input and generate two lists of device names, one with no special format and the other ready to be input into a <o>umenu</o> object.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetParameterNames.maxpat/M4L.api.GetParameterNames.maxpat">M4L.api.GetParameterNames.maxpat</a>: Takes a list of parameter ids as input and generate two lists of parameter names, one with no special format and the other ready to be input into a <o>umenu</o> object.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectDevice.maxpat/M4L.api.SelectDevice.maxpat">M4L.api.SelectDevice.maxpat</a>: Builds a menu of all available devices. 
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectParameter.maxpat/M4L.api.SelectParameter.maxpat">M4L.api.SelectParameter.maxpat</a>: Creates a list of all available parameters and fills it into a <o>umenu</o> object. Use this patch inside a <o>bpatcher</o> object to display the menu. Outputs the id of the selected parameter (to be input in a <a href="max:openfilefront/M4L.api.DeviceParameter.maxpat/M4L.api.DeviceParameter.maxpat">M4L.api.DeviceParameter.maxpat</a> object).
+	</li>
+	</ul>
+
+	<header2>
+	Cue Point Abstractions
+	</header2>
+	<ul>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetCuePoints.maxpat/M4L.api.GetCuePoints.maxpat">M4L.api.GetCuePoints.maxpat</a>: Creates a list of all cue points.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.GetCuePointNames.maxpat/M4L.api.GetCuePointNames.maxpat">M4L.api.GetCuePointNames.maxpat</a>: Generates lists of cue point names.
+	</li>
+	<li>
+		<a href="max:openfilefront/M4L.api.SelectCuePoint.maxpat/M4L.api.SelectCuePoint.maxpat">M4L.api.SelectCuePoint.maxpat</a>: Builds a menu of all available cue points. 
+	</li>
+	</ul>
+	
+</vignette>

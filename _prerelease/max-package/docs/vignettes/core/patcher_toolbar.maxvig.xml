@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="The Patcher Window Toolbar">
+	<header1>
+	The Patcher Window Toolbar
+	</header1>
+	<bodytext>
+		The <i>Lock/unlock</i> button toggles the locked state of the patcher window.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar1.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Patcher Windows</i> button lets you open a 
+		<link module="core" name="patcher_views" type="vignette">new view of the patcher window</link>
+		.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar2.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show Object Explorer</i> button is used to open the
+		<link module="core" name="object_explorer" type="vignette">Object Explorer</link>.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar3.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show Key Commands</i> button opens a menu that shows you Max 
+		<link module="core" name="keycommands" type="vignette">keyboard command shortcuts</link>.
+	</bodytext>
+	<bodytext>
+		<img src="images/toolbar_shortcuts.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Presentation Mode/Patching Mode</i> button lets you choose whether to view the patcher in patching or
+		<link module="core" name="presentation_mode" type="vignette">presentation mode</link>.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar4.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Inspector</i> button is used to open an object’s
+		<link module="core" name="inspector" type="vignette">Inspector</link>.
+		This button is enabled when an object in the patcher window is selected.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar5.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Enable Debugging</i> button is used to enable
+		<link module="core" name="debugging" type="vignette">debugging</link>.
+		When debugging is enabled, the execution of a patch will stop at any active 
+		<link module="core" name="watchpoints" type="vignette">breakpoints</link>.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar6.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show Grid/Hide Grid</i> button shows or hides the 
+		<link module="core" name="grid" type="vignette">grid</link>.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar7.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show Mixer/Hide Mixer</i> button shows or hides the 
+		<link anchor="controlpanel" module="core" name="grid" type="vignette">Mixer control panel</link>
+		for the patcher window. This button is enabled when the patcher window contains an MSP object.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar8.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show Status Bar/Hide Status Bar</i> button shows or hides the 
+		<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar9.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Show Sidebar/Hide Sidebar</i> button shows or hides the 
+		<link module="core" name="sidebar" type="vignette">Sidebar</link>.
+	</bodytext>
+	<bodytext>
+		<img src="images/patcher_window_toolbar10.png"/>
+	</bodytext>
+	<header1>
+	The Max for Live Patcher Window Toolbar
+	</header1>
+	<bodytext>
+		When using Max for Live, additional icons will appear in the Patcher Window
+		toolbar.
+	</bodytext>
+	<bodytext>
+		The <i>Freeze Device</i> button icon toggles whether or not a Max for 
+		Live device is currently 
+		<link module="core" name="live_freezing" type="vignette">frozen</link>
+		(and thus cannot be edited).
+	</bodytext>
+	<bodytext>
+		<img src="images/m4l-toolbar1.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Conflict Icon</i> is generally greyed out. 
+		It will only be highlighted if you open a 
+		<link module="core" name="live_freezing" type="vignette">frozen Max for Live device</link>
+		for editing whose contents conflict with the files that you have on your disk.
+		If this icon is highlighted, you will need to 
+		<link module="core" name="live_resolveconflicts" type="vignette">resolve any conflicts</link> 
+		before you can unfreeze the device.
+	</bodytext>
+	<bodytext>
+		<img src="images/m4l-toolbar2.png"/>
+	</bodytext>
+	<bodytext>
+		The <i>Preview Mode</i> button icon toggles whether or not a Max for 
+		icon is used to toggle between having the effect processing done within 
+		the Live application or within Max while you are editing or developing 
+		a device.
+	</bodytext>
+	<bodytext>
+		<img src="images/m4l-toolbar3.png"/>
+	</bodytext>
+</vignette>

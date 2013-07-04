@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Audio Effect Tools">
+	<header1>
+		Audio Effect Tools
+	</header1>
+<bodytext>
+	In addition to the
+	<link type="vignette" module="core" name="live_resources_exampledevices"><b>Max for Live example devices</b></link>, 
+	the 
+	<a href="https://www.ableton.com/en/packs/max-live-building-tools/">Max for Live Building Tools</a>
+	Live Pack contains a set of fully
+	functional Audio Effect devices that provide examples of various 
+	kinds of operations and processes. You can use these patches 
+	in series in your Live Session, or edit and recombine them to 
+	make your own devices. 
+</bodytext>	
+<bodytext>
+	Live Suite owners can download this Live Pack by choosing <b>Your Account > Your Packs</b>
+	when logged in to the Ableton website and clicking on the download button to the Live Pack.
+	To install the Live Pack, double-click on the <i>.alp</i> file
+</bodytext>
+<bluebox>
+<header2>
+	Finding the Audio Effect Building Blocks
+</header2>
+	<ul>
+	<li>
+		After you have installed the Live Pack,
+		click on the Packs button in Live's File browser to display
+		the list of currently installed Live Packs. In the column to the
+		right, click on the arrow to the left of the M4L Building Tools
+		folder to show the Live Pack contents.
+	</li>
+	</ul>
+	<br />
+</bluebox>
+<!-- commented out until the Building Block stuff is actually up to screenshoot
+<header2>
+	Finding the Audio Effect Tools
+</header2>
+	<ul>
+	<li>
+		Click on a File button in Live's File browser and
+		choose <b>Library</b> from the pull-down Bookmarks menu to
+		show the Library.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Presets</b>.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Audio Effects</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Max Audio Effect</b> to show the folder's contents.
+	</li>
+	<li>
+		Click on the arrow to the left
+		of the folder marked <b>Tools</b> to show the folder's contents.
+	</li>
+	<li>
+		The example devices are listed in the Tools folder 
+		beneath the Building Blocks folder. Each example device is
+		contained in its own folder, along with a number of presets.
+	</li>
+	</ul>
+	<bodytext>
+	<img src="images/moreaudioexamples1.png" />
+	</bodytext>
+</bluebox>
+-->
+<br />
+	<header2>
+	Audio Effect Tools Overview
+	</header2>
+	<ul>
+	<li>
+		<b>Max AutoFilter</b>: One-band filter controlled by signal envelope following
+	</li>
+	<li>
+		<b>Max AutoRingMod</b>: A ring modulator controlled by signal envelope following
+	</li>
+	<li>
+		<b>Max CombFilterMulti</b>: Five comb filters in a single device
+	</li>
+	<li>
+		<b>Max Compressor</b>: A stereo compression object
+	</li>
+	<li>
+		<b>Max CutKiller</b>: A signal hacker based on the CutHacker Building Block that can be synced to Live's transport
+	</li>
+	<li>
+		<b>Max DelayMultiBand</b>: A "double" shelving filter and 3 delay lines
+	</li>
+	<li>
+		<b>Max DelayTaps</b>: Up to 32 delay taps
+	</li>
+	<li>
+		<b>Max DopplerPan</b>: A Doppler effect synced to Live's tempo
+	</li>
+	<li>
+		<b>Max EffectMatrix</b>: Multiple effects in a single device
+	</li>
+	<li>
+		<b>Max EnvelopeFollower</b>: Envelope following/smoothing/mapping
+	</li>
+	<li>
+		<b>Max EqGraphic31</b>: A 31 band graphic equalizer
+	</li>
+	<li>
+		<b>Max EqParametric4</b>: A four-band parametric equalizer
+	</li>
+	<li>
+		<b>Max EqShelving</b>: A "double" shelving filter
+	</li>
+	<li>
+		<b>Max SignalAnalyzer</b>: A Fast Fourier Filter Bank signal analyzer similar to Live's Spectrum device
+	</li>
+	<li>
+		<b>Max SpectralDelay</b>: An FFT-based delay line
+	</li>
+	<li>
+		<b>Max SpectralHarm</b>: An FFT-based frequency shifter
+	</li>
+
+	</ul>
+
+	</vignette>

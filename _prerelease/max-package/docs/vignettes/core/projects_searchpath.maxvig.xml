@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Project Search Paths">
+	<header1>Project Search Paths</header1>
+	<bodytext>Previous versions of Max used a single global search path for locating files used by the application. For instance, the &quot;patches&quot; folder inside the Max application folder was typically used to store patchers, media files, 3rd party externals and help files, and so on. Projects provide new means for controlling how Max searches for files.</bodytext>
+	<bodytext>Within a project, patchers and other kinds of files may be marked either 'global' or 'local'. Global means "use the version of this file found in Max's global search path, if available". Local means "use the version of this file found in a project-maintained search path, if available". Plus, you have the option to "publish" a file to the global search path, or to "localize" a file to your project's search path.
+	</bodytext>
+	<bodytext>
+		The project-local search path consists of a number of elements.<br />
+		<b>Project-local folders</b>:<br/>Projects maintain a folder on your hard drive (typically found at ~/Documents/Max/Projects (Mac) or (User Folder)\My Documents\Max\Projects (Win)). The contents of this folder (and its subfolders) are preferentially searched when Max is looking for files requested by project members. New files added to a project are created inside this folder by default, and you can manually add files to it, too.<br />
+		<b>'Singleton' folders</b>:<br/>Projects can reference files which are neither in the Max global search path, nor in the Project folder. When searching for files, the folders containing these 'singletons' are searched (non-recursively), as well.<br />
+		<b>Project search paths</b>:<br/>Projects also maintain a list of additional folders to be searched when locating project assets. This list works similarly to the list found in Max's <link name="file_preferences_window" type="vignette" module="core">File Preferences...</link> window, but is used only by the project.<br />
+		When resolving files from a project, the following search path order is used:
+		<ul>
+			<li>If the file is marked local in the Project window:
+				<ul>
+					<li>project-local folders</li>
+					<li>singleton folders</li>
+					<li>project search paths</li>
+					<li>Max's global search path</li>
+				</ul>
+			</li>
+			<li>If the file is marked global in the Project window:
+				<ul>
+					<li>Max's global search path</li>
+					<li>project-local folders</li>
+					<li>singleton folders</li>
+					<li>project search paths</li>
+				</ul>
+			</li>
+			<li>Implicit dependencies are always presumed to be local. If no local version can be found, the global version will be used.</li>
+		</ul>
+	</bodytext>
+	<bluebox>Local and global state for implicit dependencies does not persist across Project loads. You must <link name="projects_addingfiles" type="vignette" module="core">explicitly add</link> the dependency in question to your Project before the state will be saved.</bluebox>
+</vignette>

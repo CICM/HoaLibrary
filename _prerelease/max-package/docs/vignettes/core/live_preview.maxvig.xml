@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Preview Mode">
+	<header1>
+	Preview Mode
+	</header1>
+<bodytext>
+	After opening a Live device in Max for editing, there are two copies of the device -- the one you are editing and the one inserted into a track in Live. <i>Preview Mode</i> permits you to listen to the device you are editing while Live runs in the background. The copy of the device inserted in the Live track is disabled. 
+</bodytext>
+<bodytext>
+	Audio, MIDI, timing, and messages (including <link type="vignette" module="core" name="live_api">Live API</link> commands) are sent between Max and Live in order to make this happen.
+</bodytext>
+<bodytext>
+	Preview Mode is always enabled when you begin to edit a device in Max.
+</bodytext>
+<bluebox>
+<header2>
+	Enabling and Disabling Preview Mode
+</header2>
+	<ul>
+	<bodytext>The preview mode icon in the patcher window toolbar shows the preview state for each device. When the icon is green, preview mode is enabled.
+	</bodytext>
+	<bodytext>
+	<img src="images/live_preview_on.png" />
+	</bodytext>
+	<bodytext>
+		Another clue that preview mode is active is that the edited device appears grayed out in Live.
+	</bodytext>
+	<bodytext>
+	<img src="images/live_preview_gray.png" />
+	</bodytext>
+	<li>To toggle preview mode, click the preview icon. When preview mode is disabled, the icon in the toolbar is gray.</li>
+	<bodytext>
+	<img src="images/live_preview_off.png" />
+	</bodytext>
+	<bodytext>
+		In addition, the device's user interface in Live regains its normal appearance.
+	</bodytext>
+	<bodytext>
+	<img src="images/live_preview_notgray.png" />
+</bodytext>
+<li>You can also turn preview mode off by clicking the edit button in the Live device's title bar. However, this also has the effect of closing the device in the editor.</li>
+</ul>
+</bluebox>
+<br />
+<header2>
+	Uses of Preview Mode
+</header2>
+<ul>
+	<li>You can turn preview mode off as you are editing a device to compare the edited version of a device with the original version.</li>
+	<li>You can turn preview mode off after saving a device to see how its user interface appears in the Live device view.</li>
+	<li>Preview mode will increase the latency of a Live device slightly. Turn preview mode off to hear the device with its original defined latency.</li>
+</ul>
+<header2>
+	Preview Mode Caveats
+</header2>
+<ul>
+	<li>The memory state of Max objects is not made consistent between devices as you enable and disable preview mode. For instance, if you change a number box to 74 in a device in Live and then edit the device, the number box will be set to zero when the edited version is opened.</li>
+	<li>However, <link type="vignette" module="core" name="live_parameters">parameter state</link> will be updated when toggling preview mode. If you set a <o>live.dial</o> to 47 in Max, then disable preview mode, the dial will be updated to 47 in Live. If you then set the dial to 61 in Live, then enable preview mode again, the dial will be updated to 61 in Max.</li>
+	<li>Changes to parameter values in Max while in preview mode are undoable in Live.</li>
+	<li>Preview mode implements communicating between a <o>send</o> object in Live and a <o>receive</o> object in Max (or vice versa), but the performance of the communication will be reduced compared to the performance of <o>send</o> and <o>receive</o> within a single application.</li>
+	<li>The <o>grab</o> object cannot communicate with a <o>receive</o> object unless both objects are in the same device, so you cannot use <o>grab</o> to communicate between devices in preview mode.</li>
+	<li>Some Max objects monopolize a resource on your computer. The <o>udpreceive</o> object, for example, reserves a UDP port for itself so that no one else can access the port. This has the potential to create problems when you have two <o>udpreceive</o> objects in two copies of the same device. In this specific case, we have made the UDP objects release the port when they are disabled as a result of a preview mode switch. However, other third-party objects with similar resource-monopolizing issues may not work properly with preview mode.</li>
+	<li>Max objects that share data via symbolic names, such as <o>table</o>, <o>coll</o>, and <o>buffer~</o>, do not share data across the boundary between Max and Live. For instance, if you have sample data loaded into a <o>buffer~</o> object named <m>toto</m> in Live, and you edit another device with a <o>buffer~</o> object named <m>toto</m>, the <o>buffer~</o> object in the device in Max will not share data with the object in Live.</li>
+	
+</ul>
+</vignette>

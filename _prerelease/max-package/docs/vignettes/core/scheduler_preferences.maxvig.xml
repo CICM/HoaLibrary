@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Scheduler Preferences">
+	<header1>
+	Scheduler Preferences
+	</header1>
+	<bodytext>
+			Max provides you with several options that allow you to fine-tune the Max application’s
+			scheduler parameters to reflect your needs. You can adjust the rates at which the Max
+			application updates the interface, choose to prioritize the handling of audio processing,
+			and optimize the servicing of Max’s high and low-priority queues.
+		</bodytext>
+	<bodytext>
+			With the exception of enabling or disabling Overdrive, most Max users will find that the
+			default scheduler settings are sufficient for their use; these settings are provided for
+			advanced users.
+		</bodytext>
+	<bluebox>
+		<header2>
+			Displaying Scheduler Preferences
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Preferences</b> from the Max menu (Macintosh) or the Options menu (Windows) to show the 
+			<link module="core" name="preferences_window" type="vignette">Preferences Window</link>. 
+			Scroll to the <b>Scheduler</b> category of the preferences listings.
+		</li>
+		</ul>
+		<bodytext>
+			<img src="images/advanced_scheduler_settings.png"/>
+		</bodytext>
+	</bluebox>
+	<br/>
+	<space/>
+	<br/>
+	<bluebox>
+		<header2>
+	Getting information about a Scheduler setting
+	</header2>
+		<ul>
+			<li>
+			Move the mouse over the Setting column of any row in the Preferences window. A brief description of
+			the setting will be shown in the
+			Patcher window's 
+			<link module="core" name="status_bar" type="vignette">Status Bar</link>.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<header2>
+	Overdrive
+	</header2>
+	<bodytext>
+			When <i>Overdrive</i> is enabled, Max gives priority to timing and MIDI processing
+			over screen drawing and user interface tasks such as responding to mouse clicks.
+			As a general rule: if you are primarily going to be using Max for MIDI or audio processing, Overdrive
+			should be enabled. If you are primarily going to be using Jitter, Overdrive should be disabled. In addition, the debugging features of Max only work if overdrive is disabled.
+		</bodytext>
+	<br/>
+	<bluebox>
+		<header2>
+	Enabling/disabling Overdrive
+	</header2>
+		<ul>
+			<li>
+			Choose <b>Overdrive</b> from the Options menu to toggle the current setting.
+		</li>
+		</ul>
+	</bluebox>
+	<br/>
+	<header2>
+	Advanced Scheduler Settings
+</header2>
+	<bodytext><link module="core" name="advanced_scheduler" type="vignette">Click here</link> to read about the more advanced scheduler and performance settings.
+</bodytext>
+</vignette>

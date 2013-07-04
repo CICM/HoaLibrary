@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Opening the Inspector">
+	<header1>
+	Opening the Inspector
+	</header1>
+<bodytext>
+	There are several ways to show the inspector window for an object:
+</bodytext>
+<ul><li>Position the mouse on the left side of the object until the inspector button appears. Click the button.</li></ul>
+	<bodytext>
+		<img src="images/inspector_opening1.png" />
+	</bodytext>
+	<ul><li>When one or more objects are selected, click the Inspector button in the patcher window toolbar</li></ul>
+	<bodytext>
+		<img src="images/inspector_opening2.png" />
+	</bodytext>
+	<ul><li>When one or more objects are selected, choose <b>Inspector</b> from the Object menu</li>
+	<li>Leave the inspector window off to one side of the patcher you're using. Then just select objects and they'll appear in the inspector.</li>
+</ul>
+</vignette>

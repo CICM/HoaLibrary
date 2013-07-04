@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Gen Common Operators" order="3">
+<header1>
+	Gen Common Operators
+</header1>
+	<bodytext>
+			The following Gen operators are common to all
+			of Max's Gen family of objects. They can be used as operators in the 
+			<o>gen~</o>
+			, 
+			<o>jit.gen</o>
+			, 
+			<o>jit.pix</o>
+			, and 
+			<o>jit.gl.pix</o>
+			objects.
+		</bodytext>
+
+<!--Begin Gen Operators-->
+<header2>
+	Comparison
+</header2>
+<ul>
+<li>
+	<m>!=, neq</m> :
+	Not equal operator
+</li>
+<li>
+	<m>!=p, neqp</m> :
+	Not equal/pass operator
+</li>
+<li>
+	<m>&lt;, lt</m> :
+	Less than operator
+</li>
+<li>
+	<m>&lt;=, lte</m> :
+	Less than or equals operator
+</li>
+<li>
+	<m>&lt;=p, ltep</m> :
+	Pass less than or equals operator
+</li>
+<li>
+	<m>&lt;p, ltp</m> :
+	Pass less than operator
+</li>
+<li>
+	<m>==, eq</m> :
+	Equal operator
+</li>
+<li>
+	<m>==p, eqp</m> :
+	Equal/pass operator
+</li>
+<li>
+	<m>&gt;, gt</m> :
+	Greater than operator
+</li>
+<li>
+	<m>&gt;=, gte</m> :
+	Greater than or equals operator
+</li>
+<li>
+	<m>&gt;=p, gtep</m> :
+	Pass greater than or equals operator
+</li>
+<li>
+	<m>&gt;p, gtp</m> :
+	Pass greater than operator
+</li>
+<li>
+	<m>max, maximum</m> :
+	The maximum of the inputs
+</li>
+<li>
+	<m>min, minimum</m> :
+	The minimum of the inputs
+</li>
+<li>
+	<m>step</m> :
+	Returns not(in1 &lt; in2)
+</li>
+
+</ul>
+<header2>
+	Constant
+</header2>
+<ul>
+<li>
+	<m>DEGTORAD, degtorad</m> :
+	The constant value of DEGTORAD
+</li>
+<li>
+	<m>E, e</m> :
+	The constant value of e
+</li>
+<li>
+	<m>HALFPI, halfpi</m> :
+	The constant value of halfpi
+</li>
+<li>
+	<m>INVPI, invpi</m> :
+	The constant value of invpi
+</li>
+<li>
+	<m>LN10, ln10</m> :
+	The constant value of LN10
+</li>
+<li>
+	<m>LN2, ln2</m> :
+	The constant value of LN2
+</li>
+<li>
+	<m>LOG10E, log10e</m> :
+	The constant value of log10e
+</li>
+<li>
+	<m>LOG2E, log2e</m> :
+	The constant value of LOG2E
+</li>
+<li>
+	<m>PI, pi</m> :
+	The constant value of PI
+</li>
+<li>
+	<m>RADTODEG, radtodeg</m> :
+	The constant value of radtodeg
+</li>
+<li>
+	<m>SQRT1_2, sqrt1_2</m> :
+	The constant value of SQRT1_2
+</li>
+<li>
+	<m>SQRT2, sqrt2</m> :
+	The constant value of SQRT2
+</li>
+<li>
+	<m>TWOPI, twopi</m> :
+	The constant value of TWOPI
+</li>
+<li>
+	<m>constant</m> :
+	A constant value
+</li>
+<li>
+	<m>f, float</m> :
+	constant float / convert to float
+</li>
+<li>
+	<m>i, int</m> :
+	constant integer / convert to integer
+</li>
+
+</ul>
+<header2>
+	Declare
+</header2>
+<ul>
+<li>
+	<m>Param, param</m> :
+	An externally modifiable, named parameter
+</li>
+
+</ul>
+<header2>
+	Expression
+</header2>
+<ul>
+<li>
+	<m>expr</m> :
+	An expression
+</li>
+
+</ul>
+<header2>
+	Ignore
+</header2>
+<ul>
+<li>
+	<m>pass</m> :
+	Passes the value through unchanged
+</li>
+
+</ul>
+<header2>
+	Input-output
+</header2>
+<ul>
+<li>
+	<m>in</m> :
+	Gen patcher input
+</li>
+<li>
+	<m>out</m> :
+	Send output from a gen patcher
+</li>
+
+</ul>
+<header2>
+	Logic
+</header2>
+<ul>
+<li>
+	<m>!, not</m> :
+	logical negation operator
+</li>
+<li>
+	<m>&amp;&amp;, and</m> :
+	Logical and operator
+</li>
+<li>
+	<m>^^, xor</m> :
+	Logical xor operator
+</li>
+<li>
+	<m>bool</m> :
+	constant boolean / convert to boolean
+</li>
+<li>
+	<m>or, ||</m> :
+	Logical or operator
+</li>
+
+</ul>
+<header2>
+	Math
+</header2>
+<ul>
+<li>
+	<m>!%, rmod</m> :
+	Reverse modulo (remainder of second input / first input)
+</li>
+<li>
+	<m>!-, rsub</m> :
+	Reverse subtraction (subtract second input from first)
+</li>
+<li>
+	<m>!/, rdiv</m> :
+	Reverse division (divide second input by first)
+</li>
+<li>
+	<m>%, mod</m> :
+	Modulo inputs (remainder of first input / second input)
+</li>
+<li>
+	<m>*, mul</m> :
+	Multiply inputs
+</li>
+<li>
+	<m>+, add</m> :
+	Add inputs
+</li>
+<li>
+	<m>-, sub</m> :
+	Subtract inputs
+</li>
+<li>
+	<m>/, div</m> :
+	Divide inputs
+</li>
+<li>
+	<m>absdiff</m> :
+	Compute the absolute difference between two inputs
+</li>
+<li>
+	<m>cartopol</m> :
+	Convert Cartesian values to polar
+</li>
+<li>
+	<m>neg</m> :
+	Negate input
+</li>
+<li>
+	<m>poltocar</m> :
+	Convert polar values to Cartesian
+</li>
+
+</ul>
+<header2>
+	Numeric
+</header2>
+<ul>
+<li>
+	<m>abs</m> :
+	The absolute value of the input
+</li>
+<li>
+	<m>ceil</m> :
+	Round the value up to the next higher integer
+</li>
+<li>
+	<m>floor, trunc</m> :
+	Round the value down to the next lower integer
+</li>
+<li>
+	<m>fract</m> :
+	Return only the fractional component
+</li>
+<li>
+	<m>sign</m> :
+	Return the sign of the input
+</li>
+
+</ul>
+<header2>
+	Powers
+</header2>
+<ul>
+<li>
+	<m>exp</m> :
+	Raise the mathemtatical value e to a power
+</li>
+<li>
+	<m>exp2</m> :
+	Raise 2 to a power
+</li>
+<li>
+	<m>ln, log</m> :
+	The natural logarithm
+</li>
+<li>
+	<m>log10</m> :
+	The logarithm base 10 of the input
+</li>
+<li>
+	<m>log2</m> :
+	The logarithm base 2 of the input
+</li>
+<li>
+	<m>pow</m> :
+	Raise in1 to the power of in2
+</li>
+<li>
+	<m>sqrt</m> :
+	The square root of the input
+</li>
+
+</ul>
+<header2>
+	Range
+</header2>
+<ul>
+<li>
+	<m>clamp, clip</m> :
+	Clamp values in a specified range
+</li>
+<li>
+	<m>fold</m> :
+	Fold input to a range within a low and high output value
+</li>
+<li>
+	<m>scale</m> :
+	Map an the input range of values to an output range
+</li>
+<li>
+	<m>wrap</m> :
+	Wrap input to a range within a low and high output value
+</li>
+
+</ul>
+<header2>
+	Route
+</header2>
+<ul>
+<li>
+	<m>?, switch</m> :
+	Conditional ternary operator
+</li>
+<li>
+	<m>gate</m> :
+	Select between a number of outputs
+</li>
+<li>
+	<m>mix</m> :
+	Linear crossfade of inputs
+</li>
+<li>
+	<m>r, receive</m> :
+	Receive values from a named send.
+</li>
+<li>
+	<m>s, send</m> :
+	Send values to a named receive.
+</li>
+<li>
+	<m>selector</m> :
+	Select between a number of inputs
+</li>
+<li>
+	<m>smoothstep</m> :
+	Smoothed fade of inputs
+</li>
+
+</ul>
+<header2>
+	Subpatcher
+</header2>
+<ul>
+<li>
+	<m>gen</m> :
+	Gen subpatcher
+</li>
+<li>
+	<m>setparam</m> :
+	Set a subpatcher param
+</li>
+
+</ul>
+<header2>
+	Trigonometry
+</header2>
+<ul>
+<li>
+	<m>acos</m> :
+	The arc cosine of the input (returns radians)
+</li>
+<li>
+	<m>acosh</m> :
+	The inverse hyperbolic cosine of the input
+</li>
+<li>
+	<m>asin</m> :
+	The arc sine of the input (returns radians)
+</li>
+<li>
+	<m>asinh</m> :
+	The inverse hyperbolic sine of the input
+</li>
+<li>
+	<m>atan</m> :
+	The arc tangent of the input (returns radians)
+</li>
+<li>
+	<m>atan2</m> :
+	The arctangent of the input coordinate
+</li>
+<li>
+	<m>atanh</m> :
+	The inverse hyperbolic tangent of the input
+</li>
+<li>
+	<m>cos</m> :
+	The cosine of the input (in radians)
+</li>
+<li>
+	<m>cosh</m> :
+	The hyperbolic cosine of the input
+</li>
+<li>
+	<m>degrees</m> :
+	convert radians to degrees
+</li>
+<li>
+	<m>hypot</m> :
+	The hypoteneuse
+</li>
+<li>
+	<m>radians</m> :
+	convert degrees to radians
+</li>
+<li>
+	<m>sin</m> :
+	The sine of the input (in radians)
+</li>
+<li>
+	<m>sinh</m> :
+	The hyperbolic sine of the input
+</li>
+<li>
+	<m>tan</m> :
+	The tangent of the input (in radians)
+</li>
+<li>
+	<m>tanh</m> :
+	The hyperbolic tangent of the input
+</li>
+
+</ul>
+<header2>
+	Waveform
+</header2>
+<ul>
+<li>
+	<m>noise</m> :
+	A random number generator
+</li>
+
+</ul>
+
+<!--End Gen Operators-->
+
+</vignette>

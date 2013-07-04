@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Sharing Max for Live Devices">
+<header1>
+	Sharing Max for Live Devices
+</header1>
+<bodytext>
+	To create Live devices that you can give to other people, you'll need to 
+	ensure the device is packaged with all the files it needs. We call this 
+	<link type="vignette" module="core" name="live_freezing">freezing</link> 
+	a device. 
+</bodytext>
+<bodytext>
+	<b>Note</b>: The use of the term <i>freezing</i> here should not be confused with the Max concept of 
+	<link type="vignette" module="core" name="freezing_attributes">frozen attributes</link>
+	or "frozen tracks" in Ableton Live.
+</bodytext>
+<bodytext>
+	Basic freezing is explained 
+	<link type="vignette" module="core" name="live_freezing">here</link>. 
+	If your device opens files during its operation (such as a folder of samples 
+	or images), you may need to add these files as 
+	<link type="vignette" module="core" name="live_dependencies">dependencies</link> 
+	before freezing.
+</bodytext>
+<bodytext>
+	Once you freeze a device, it cannot be edited. You'll need to 
+	<link type="vignette" module="core" name="live_unfreezing">unfreeze</link> it first.
+</bodytext>
+<bodytext>
+	If you open a frozen device for editing and see this icon in the patcher toolbar
+</bodytext>
+	<img src="images/live_conflict_warning.png" />
+<bodytext>
+	you'll need to 
+	<link type="vignette" module="core" name="live_resolveconflicts">resolve any conflicts</link> 
+	between the files in the frozen device and those you have on disk before you can unfreeze.
+</bodytext>
+</vignette>

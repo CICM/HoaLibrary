@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet href="_c74_vig.xsl" type="text/xsl"?>
+<vignette name="Key Commands">
+	<header1>
+	Key Commands
+	</header1>
+		<bodytext>
+			You can use a single key press to create objects in a patcher, as follows:
+			<br />
+			<br />
+			<ul>
+			<li>
+				<b>b</b>: <o>button</o>
+			</li>
+			<li>
+				<b>c</b>: <o>comment</o>
+			</li>
+			<li>
+				<b>f</b>: floating point <link type="refpage" name="flonum">number box</link>.
+			</li>
+			<li>
+				<b>i</b>: integer <link type="refpage" name="number">number box</link>.
+			</li>
+			<li>
+				<b>j</b>: object box containing "jit." for creating Jitter objects.
+			</li>
+			<li>
+				<b>l</b>: object box containing "live." for creating Live objects.
+			</li>
+			<li>
+				<b>m</b>: <link type="refpage" name="message">message box</link>
+			</li>
+			<li>
+				<b>n</b>: new object box
+			</li>
+			<li>
+				<b>p</b>: shows the 
+				<link type="vignette" module="core" name="object_explorer">Object Explorer</link>.
+			</li>
+			<li>
+				<b>P</b>: A capital letter "P" will create an object box containing the
+				message <m>newobj @presentation 1 @text</m> and a cursor. When you type the
+				name of an object (e.g. dial) and hit a carriage return, the object will 
+				transform itself into a copy of the object whose name you type in, and the object
+				will be automatically added to the 
+				<link type="vignette" module="core" name="presentation_mode">Presentation Layer</link>.
+			</li>
+			<li>
+				<b>t</b>: <o>toggle</o>.
+			</li>
+			<li>
+				<b>x</b>: shows a menu describing the key commands.
+			</li>			
+			</ul>
+		</bodytext>
+</vignette>
