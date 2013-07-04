@@ -176,7 +176,7 @@ double AmbisonicsViewer::getBiggestLobe_x(long anIndex)
     long index = m_biggest_lobe_index1 + anIndex;
     if(index >= NUMBEROFCIRCLEPOINTS_UI)
         index -= NUMBEROFCIRCLEPOINTS_UI;
-	return m_vector_x[Tools::clip(index, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
+	return m_vector_x[(int)Tools::clip(index, 0, (NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
 double AmbisonicsViewer::getBiggestLobe_y(long anIndex)
@@ -184,12 +184,12 @@ double AmbisonicsViewer::getBiggestLobe_y(long anIndex)
 	long index = m_biggest_lobe_index1 + anIndex;
     if(index >= NUMBEROFCIRCLEPOINTS_UI)
         index -= NUMBEROFCIRCLEPOINTS_UI;
-	return m_vector_y[Tools::clip(index, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
+	return m_vector_y[(int)Tools::clip(index, 0, (NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
 double AmbisonicsViewer::getContributions(long anIndex)
 {
-	return m_contributions[Tools::clip(anIndex, long(0), long(NUMBEROFCIRCLEPOINTS_UI - 1))];
+	return m_contributions[(int)Tools::clip(anIndex, 0, (NUMBEROFCIRCLEPOINTS_UI - 1))];
 }
 
 double AmbisonicsViewer::getAbscisseValue(long anIndex)

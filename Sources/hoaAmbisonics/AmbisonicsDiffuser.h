@@ -23,45 +23,72 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "CicmFilterFixedDelay.h"
+#ifndef DEF_AMBISONICSDIFFUSER
+#define DEF_AMBISONICSDIFFUSER
 
-FilterFixedDelay::FilterFixedDelay(long aBufferSize) : Filter()
+#include "Ambisonics.h"
+
+class AmbisonicsDiffuser : public Ambisonics
 {
-    m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
-	m_buffer_size = m_buffer_size_max;
+protected:
+    double  m_diffuse_factor;
 
-	m_ramp = 0;
-}
 
-void FilterFixedDelay::setBufferSizeMax(long aBufferSize)
-{
-	Cicm_Free(m_buffer);
-    m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
-	m_buffer_size = m_buffer_size_max;
+public:
+	AmbisonicsDiffuser(long anOrder = 1, long aVectorSize = 0, long aSamplingRate = 44100.);
+    void setDiffuseFactor(double aWidenValue);
     
-    m_ramp = 0;
-}
+	~AmbisonicsDiffuser();
+	
+	/* Perform sample by sample */
+	inline void process(float* inputs, float* outputs)
+	{	
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			outputs[i] = inputs[i];
+	}
+    
+    /* Perform sample by sample */
+	inline void process(double* inputs, double* outputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			outputs[i] = inputs[i];
+	}
+	
+	/* Perform block sample */
+	inline void process(float** inputs, float** outputs)
+	{
+        float* input_pointor;
+        float* output_pointor;
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            input_pointor = inputs[i];
+            output_pointor = outputs[i];
+			for(int j = 0; j < m_vector_size; j++)
+            {
+				output_pointor[j] = input_pointor[j];
+			}
+		}
+	}
+    
+    /* Perform block sample */
+	inline void process(double** inputs, double** outputs)
+	{
+        double* input_pointor;
+        double* output_pointor;
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            input_pointor = inputs[i];
+            output_pointor = outputs[i];
+			for(int j = 0; j < m_vector_size; j++)
+            {
+				output_pointor[j] = input_pointor[j];
+			}
+		}
+	}
+};
 
-long FilterFixedDelay::getBufferSizeMax()
-{
-	return m_buffer_size_max;
-}
 
-void FilterFixedDelay::setBufferSize(long aBufferSize)
-{
-    m_buffer_size = Tools::clip(aBufferSize, (long)1, m_buffer_size_max);
-    if(m_ramp >= m_buffer_size)
-        m_ramp -= m_buffer_size;
-}
 
-long FilterFixedDelay::getBufferSize()
-{
-	return m_buffer_size;
-}
+#endif
 
-FilterFixedDelay::~FilterFixedDelay()
-{
-    Cicm_Free(m_buffer);
-}
+

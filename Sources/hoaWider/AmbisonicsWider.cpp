@@ -60,6 +60,12 @@ void AmbisonicsWider::computeWidenVector()
 	}
 }
 
+void AmbisonicsWider::setWidenValueBoth(double aWidenValue)
+{
+    setWidenValue(aWidenValue);
+    setWidenValue((float)aWidenValue);
+}
+
 void AmbisonicsWider::setWidenValue(double aWidenValue)
 {
 	m_widen_value = Tools::clip(aWidenValue, 0., 1.);
@@ -97,12 +103,6 @@ void AmbisonicsWider::setVectorSize(long aVectorSize)
     Cicm_Vector_Float_Malloc(m_weight_vector_float, m_vector_size);
     Cicm_Vector_Double_Malloc(m_scale_vector_double, m_vector_size);
     Cicm_Vector_Double_Malloc(m_weight_vector_double, m_vector_size);
-}
-
-void AmbisonicsWider::setWidenValueBoth(double aWidenValue)
-{
-    setWidenValue(aWidenValue);
-    setWidenValue((float)aWidenValue);
 }
 
 AmbisonicsWider::~AmbisonicsWider()

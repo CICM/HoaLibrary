@@ -33,6 +33,7 @@
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaEncoder/AmbisonicsEncoder.h"
 #include "hoaFreeverb/AmbisonicsFreeverb.h"
+#include "hoaFilter/AmbisonicsFilter.h"
 #include "hoaGigaverb/AmbisonicsGigaverb.h"
 #include "hoaMap/AmbisonicMultiMaps.h"
 #include "hoaMap/AmbisonicSourcesManager.h"

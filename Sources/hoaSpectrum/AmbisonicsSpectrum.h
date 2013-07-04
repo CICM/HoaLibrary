@@ -80,9 +80,9 @@ public:
     
 	inline void process(double** inputs)
 	{
-        for(int j = 0; j < m_number_of_loudspeakers; j++)
+        for(int i = 0; i < m_filter.size(); i++)
         {
-            for(int i = 0; i < m_filter.size(); i++)
+            for(int j = 0; j < m_number_of_loudspeakers; j++)
             {
                 m_filter[i][j]->process(inputs[j], m_filtered_signal_double[i][j]);
             }

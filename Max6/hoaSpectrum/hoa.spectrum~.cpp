@@ -145,14 +145,42 @@ void *spectrum_new(t_symbol *s, int argc, t_atom *argv)
 	x->j_box.z_box.b_firstin = (t_object *)x;
 	dsp_setupjbox((t_pxjbox *)x, 16);
     x->f_spectrum = new AmbisonicsSpectrum(16, 3, sys_getblksize(), sys_getsr());
-	
+	x->j_box.z_misc = Z_NO_INPLACE;
+    
 	x->f_clock = clock_new(x,(method)spectrum_tick);
 	x->f_startclock = 0;
     
     attr_dictionary_process(x, d);
 	
 	jbox_ready((t_jbox *)x);
-	
+    
+    double m_frequency_factor = tan(CICM_PI * 250. / 44100.);
+    double m_q_value = 1.;
+    
+    double norm = 1. / (double)(1. + m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor);
+    double m_coeff_a0 = m_frequency_factor / m_q_value * norm;
+    double m_coeff_a1 = 0.;
+    double m_coeff_a2 = -(m_frequency_factor / m_q_value * norm);
+    double m_coeff_b1 = 2 * (m_frequency_factor * m_frequency_factor - 1) * norm;
+    double m_coeff_b2 = (1 - m_frequency_factor / m_q_value + m_frequency_factor * m_frequency_factor) * norm;
+	post("%f", m_coeff_a0);
+    post("%f", m_coeff_a1);
+    post("%f", m_coeff_a2);
+    post("%f", m_coeff_b1);
+    post("%f", m_coeff_b2);
+    
+    double m_delay_one = 0., m_delay_two = 0.;
+    double input, output;
+    for(int i = 0; i < 128; i++)
+    {
+        input = cos(i);
+        post("%i : %f", i, input);
+        output = input * m_coeff_a0 + m_delay_one;
+        m_delay_one = input * m_coeff_a1 + m_delay_two - m_coeff_b1 * output;
+        m_delay_two = input * m_coeff_a2 - m_coeff_b2 * output;
+        post("%i : %f", i, output);
+    }
+    
 	return (x);
 }
 
@@ -161,7 +189,7 @@ void spectrum_dsp64(t_spectrum *x, t_object *dsp64, short *count, double sampler
 {
     x->f_spectrum->setVectorSize(maxvectorsize);
     x->f_spectrum->setSamplingRate(samplerate);
-    
+  
 	object_method(dsp64, gensym("dsp_add64"), x, spectrum_perform64, 0, NULL);
 	x->f_startclock = 1;
 }
@@ -180,12 +208,6 @@ void spectrum_perform64(t_spectrum *x, t_object *dsp64, double **ins, long numin
 void spectrum_tick(t_spectrum *x)
 {
     x->f_spectrum->tick();
-    for(int i = 0; i < x->f_spectrum->getNumberOfBands(); i++)
-    {
-        post("%i amp %f", x->f_spectrum->getAmplitude(i));
-        post("%i abs %f", x->f_spectrum->getAbscissa(i));
-        post("%i ord %f", x->f_spectrum->getOrdinate(i));
-    }
 	if (sys_getdspstate())
 		clock_fdelay(x->f_clock, 100.);
 }

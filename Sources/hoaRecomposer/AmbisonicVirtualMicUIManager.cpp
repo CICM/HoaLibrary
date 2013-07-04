@@ -104,7 +104,7 @@ void AmbisonicVirtualMicUIManager::setAngleInRadian(const int _index, double _ra
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICS)].setAngleInRadian(_radian);
+        m_mic[(int)Tools::clip(_index, 0, MAX_MICS)].setAngleInRadian(_radian);
     }
 }
 void AmbisonicVirtualMicUIManager::setAngleInDegree(const int _index, double _degree)
@@ -116,7 +116,7 @@ void AmbisonicVirtualMicUIManager::setAngleInDegree(const int _index, double _de
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICS)].setAngleInDegree(_degree);
+        m_mic[(int)Tools::clip(_index, 0, MAX_MICS)].setAngleInDegree(_degree);
     }
 }
 void AmbisonicVirtualMicUIManager::setDistance(const int _index, double _distance)
@@ -128,7 +128,7 @@ void AmbisonicVirtualMicUIManager::setDistance(const int _index, double _distanc
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICS)].setDistance(_distance);
+        m_mic[(int)Tools::clip(_index, 0, MAX_MICS)].setDistance(_distance);
     }
 }
 
@@ -148,7 +148,7 @@ void AmbisonicVirtualMicUIManager::setWiderValue(const int _index, double _wider
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICS)].setWiderValue(_widerValue);
+        m_mic[(int)Tools::clip(_index, 0, MAX_MICS)].setWiderValue(_widerValue);
     }
 }
 
@@ -161,7 +161,7 @@ void AmbisonicVirtualMicUIManager::setSelected(const int _index, int _selectedSt
     }
     else
     {
-        m_mic[Tools::clip(_index, 0, MAX_MICS)].setSelected(_selectedState);
+        m_mic[(int)Tools::clip(_index, 0, MAX_MICS)].setSelected(_selectedState);
     }
 }
 
@@ -270,7 +270,7 @@ void AmbisonicVirtualMicUIManager::setFisheyeStartAngle(const int _micIndex)
             m_mic[i].setFisheyeStartAngle();
     }
     else
-        m_mic[Tools::clip(_micIndex, 0, MAX_MICS)].setFisheyeStartAngle();
+        m_mic[(int)Tools::clip(_micIndex, 0, MAX_MICS)].setFisheyeStartAngle();
 }
 
 void AmbisonicVirtualMicUIManager::setFisheyeStartAngle(const int _micIndex, double _radian)
@@ -284,7 +284,7 @@ void AmbisonicVirtualMicUIManager::setFisheyeStartAngle(const int _micIndex, dou
         for (int i=0; i<MAX_MICS; i++)
             m_mic[i].setFisheyeStartAngle(_radian);
     else
-        m_mic[Tools::clip(_micIndex, 0, MAX_MICS)].setFisheyeStartAngle(_radian);
+        m_mic[(int)Tools::clip(_micIndex, 0, MAX_MICS)].setFisheyeStartAngle(_radian);
 }
 
 void AmbisonicVirtualMicUIManager::setAngleCartesianCoordinate(const int _micIndex, double _abscissa, double _ordinate)
@@ -293,7 +293,7 @@ void AmbisonicVirtualMicUIManager::setAngleCartesianCoordinate(const int _micInd
         for (int i=0; i<MAX_MICS; i++)
             m_mic[i].setAngleCartesianCoordinate(_abscissa, _ordinate);
     else
-        m_mic[Tools::clip(_micIndex, 0, MAX_MICS)].setAngleCartesianCoordinate(_abscissa, _ordinate);
+        m_mic[(int)Tools::clip(_micIndex, 0, MAX_MICS)].setAngleCartesianCoordinate(_abscissa, _ordinate);
 }
 
 

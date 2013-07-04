@@ -87,7 +87,7 @@ class Tools
 public:
 	Tools();
 	~Tools();
-	template<typename Type> static Type clip(Type aValue, Type aMinimum = 0, Type aMaximum = 1)
+	inline static double clip(double aValue, double aMinimum = 0, double aMaximum = 1)
 	{
 		if(aValue < aMinimum)
 			aValue = aMinimum;
@@ -104,12 +104,12 @@ public:
 			*aValue = aMaximum;
 	}
 
-	template<typename Type> static Type clip_min(Type aValue, Type aMinimum = 0)
+	inline static double clip_min(double aValue, double aMinimum = 0)
 	{
         return (aValue > aMinimum) ? aValue : aMinimum;
 	}
 
-	template<typename Type> static Type clip_max(Type aValue, Type aMaximum = 0)
+	inline static double clip_max(double aValue, double aMaximum = 0)
 	{
         return (aValue < aMaximum) ? aValue : aMaximum;
 	}
@@ -126,17 +126,17 @@ public:
 		return aValue;
 	}
 
-	template<typename Type> static Type log2(Type n)
+	inline static double log2(double n)
 	{
 		return log((double)n) / log(2.);
 	}
 
-	template<typename Type> static Type radius(Type x, Type y)
+	inline static double radius(double x, double y)
 	{
 		return sqrt(x*x + y*y);
 	}
 
-	template<typename Type> static Type angle(Type x, Type y)
+	inline static double angle(double x, double y)
 	{
 		return atan2(y, x);
 	}

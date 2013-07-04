@@ -25,7 +25,7 @@
 
 #include "Ambisonics.h"
 
-Ambisonics::Ambisonics(long anOrder, long aVectorSize, double aSamplingRate)
+Ambisonics::Ambisonics(long anOrder, long aVectorSize, long aSamplingRate)
 {
 	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;

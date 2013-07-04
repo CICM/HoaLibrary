@@ -31,12 +31,12 @@
 class FilterDiffuser : public Filter
 {
 private:
-    double	m_coefficient;
+    double              m_coefficient;
     
-	double*	m_buffer;
-	long	m_buffer_size;
-    long	m_buffer_size_max;
-	long	m_ramp;
+	Cicm_Vector_Double	m_buffer;
+	long                m_buffer_size;
+    long                m_buffer_size_max;
+	long                m_ramp;
 
 public:
 	FilterDiffuser(long aBufferSize, double aCoefficient);

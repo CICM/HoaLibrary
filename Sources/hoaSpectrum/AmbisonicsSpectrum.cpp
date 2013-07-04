@@ -103,6 +103,7 @@ void AmbisonicsSpectrum::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, boo
         {
             m_filter[i].push_back(new FilterBiquad(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));
             m_filter[i][j]->setGain(1.);
+            m_filter[i][j]->setQValue(1.);
             m_filtered_signal_double[i][j]  = NULL;
             m_filtered_signal_float[i][j]   = NULL;
         }
@@ -115,14 +116,6 @@ void AmbisonicsSpectrum::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, boo
         m_filter[m_filter.size()-1][j]->setType(Cicm_Biquad_Highpass);
         m_filter[m_filter.size()-1][j]->setQValue(1.);
     }
-    for(int i = 1; i < m_filter.size()-1; i++)
-    {
-        for(int j = 0; j < m_number_of_loudspeakers; j++)
-        {
-            m_filter[i][j]->setType(Cicm_Biquad_Bandpass);
-            m_filter[i][j]->setQValue(1.);
-        }
-    }
     if(m_filter.size() == 1)
     {
         for(int j = 0; j < m_number_of_loudspeakers; j++)
@@ -131,13 +124,13 @@ void AmbisonicsSpectrum::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, boo
             m_filter[0][j]->setQValue(1.);
         }
     }
-    setSamplingRate(m_sampling_rate);
     setVectorSize(m_vector_size);
+    setSamplingRate(m_sampling_rate);
 }
 
 void AmbisonicsSpectrum::initializeFrequencyBands()
 {
-    if(m_filter.size() >= 1)
+    if(m_filter.size() == 1)
     {
         m_frequency[0] = 2400.;
     }
@@ -181,15 +174,21 @@ void AmbisonicsSpectrum::setFrequencyBand(long anIndex, double aFrequency)
     if (anIndex >= 0 && anIndex < m_filter.size())
     {
         m_frequency[anIndex] = Tools::clip(aFrequency, 20., (double)m_sampling_rate / 2.);
-        Tools::sortVector(m_frequency, 5);
+        Tools::sortVector(m_frequency, m_filter.size());
     }
-    setSamplingRate(m_sampling_rate);
+    for(int i = 0; i < m_filter.size(); i++)
+    {
+        for(int j = 0; j < m_number_of_loudspeakers; j++)
+        {
+            m_filter[i][j]->setCutoffFrequency(m_frequency[i]);
+        }
+    }
 }
 
 double AmbisonicsSpectrum::getFrequencyBand(long anIndex)
 {
     if (anIndex >= 0 && anIndex < m_filter.size())
-        return m_frequency[anIndex];
+        return m_filter[anIndex][0]->getCutoffFrequency();//m_frequency[anIndex];
     else
         return NULL;
 }
@@ -204,6 +203,7 @@ void AmbisonicsSpectrum::setVectorSize(long aVectorSize)
     {
         for(int j = 0; j < m_number_of_loudspeakers; j++)
         {
+            m_filter[i][j]->setVectorSize(m_vector_size);
             if(m_filtered_signal_double[i][j])
                 Cicm_Free(m_filtered_signal_double[i][j]);
             if(m_filtered_signal_float[i][j])
@@ -223,6 +223,12 @@ void AmbisonicsSpectrum::setSamplingRate(long aSamplingRate)
         for(int j = 0; j < m_number_of_loudspeakers; j++)
         {
             m_filter[i][j]->setSamplingRate(m_sampling_rate);
+        }
+    }
+    for(int i = 0; i < m_filter.size(); i++)
+    {
+        for(int j = 0; j < m_number_of_loudspeakers; j++)
+        {
             m_filter[i][j]->setCutoffFrequency(m_frequency[i]);
         }
     }

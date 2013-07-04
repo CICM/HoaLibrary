@@ -8,11 +8,11 @@
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
+ *  - Redistributions may not be sold, nor may they be used in a commercial product or activity.
  *  - Redistributions of source code must retain the above copyright notice, 
- *		this list of conditions and the following disclaimer.
+ *      this list of conditions and the following disclaimer.
  *  - Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *      this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
  *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
@@ -23,45 +23,21 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "CicmFilterFixedDelay.h"
+#include "AmbisonicsDiffuser.h"
 
-FilterFixedDelay::FilterFixedDelay(long aBufferSize) : Filter()
+AmbisonicsDiffuser::AmbisonicsDiffuser(long anOrder, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
-    m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
-	m_buffer_size = m_buffer_size_max;
 
-	m_ramp = 0;
 }
 
-void FilterFixedDelay::setBufferSizeMax(long aBufferSize)
+void AmbisonicsDiffuser::setDiffuseFactor(double aWidenValue)
 {
-	Cicm_Free(m_buffer);
-    m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
-	m_buffer_size = m_buffer_size_max;
+	m_diffuse_factor = Tools::clip(aWidenValue, 0., 1.);
     
-    m_ramp = 0;
 }
 
-long FilterFixedDelay::getBufferSizeMax()
+AmbisonicsDiffuser::~AmbisonicsDiffuser()
 {
-	return m_buffer_size_max;
+	;
 }
 
-void FilterFixedDelay::setBufferSize(long aBufferSize)
-{
-    m_buffer_size = Tools::clip(aBufferSize, (long)1, m_buffer_size_max);
-    if(m_ramp >= m_buffer_size)
-        m_ramp -= m_buffer_size;
-}
-
-long FilterFixedDelay::getBufferSize()
-{
-	return m_buffer_size;
-}
-
-FilterFixedDelay::~FilterFixedDelay()
-{
-    Cicm_Free(m_buffer);
-}

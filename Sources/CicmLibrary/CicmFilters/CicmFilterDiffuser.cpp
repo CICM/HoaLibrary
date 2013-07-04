@@ -28,11 +28,11 @@
 FilterDiffuser::FilterDiffuser(long aBufferSize, double aCoefficient) : Filter()
 {
    
-	m_buffer_size_max = Tools::clip_min(aBufferSize, (long)2);
+	m_buffer_size_max = Tools::clip_min(aBufferSize, 2);
+    Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
 	m_buffer = new double[m_buffer_size_max];
 	m_buffer_size = m_buffer_size_max;
-	for(int i = 0; i < m_buffer_size_max; i++)
-		m_buffer[i] = 0.;
+
 	m_ramp = 0;
     setCoefficient(aCoefficient);
 }
@@ -49,13 +49,10 @@ double FilterDiffuser::getCoefficient()
 
 void FilterDiffuser::setBufferSizeMax(long aBufferSize)
 {
-	free(m_buffer);
-    m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
+	Cicm_Free(m_buffer);
+    Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
 	m_buffer = new double[m_buffer_size_max];
 	m_buffer_size = m_buffer_size_max;
-	for(int i = 0; i < m_buffer_size_max; i++)
-		m_buffer[i] = 0.;
-    
     m_ramp = 0;
 }
 
@@ -66,7 +63,7 @@ long FilterDiffuser::getBufferSizeMax()
 
 void FilterDiffuser::setBufferSize(long aBufferSize)
 {
-    m_buffer_size = Tools::clip(aBufferSize, (long)1, m_buffer_size_max);
+    m_buffer_size = Tools::clip(aBufferSize, 1, m_buffer_size_max);
     if(m_ramp >= m_buffer_size)
         m_ramp -= m_buffer_size;
 }
@@ -78,5 +75,5 @@ long FilterDiffuser::getBufferSize()
 
 FilterDiffuser::~FilterDiffuser()
 {
-	free(m_buffer);
+	Cicm_Free(m_buffer);
 }

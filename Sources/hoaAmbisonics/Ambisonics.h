@@ -41,7 +41,7 @@ protected:
     long	m_sampling_rate;
 
 public:
-	Ambisonics(long anOrder = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
+	Ambisonics(long anOrder = 1, long aVectorSize = 0, long aSamplingRate = 44100.);
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
