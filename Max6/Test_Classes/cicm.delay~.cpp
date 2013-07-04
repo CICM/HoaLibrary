@@ -36,7 +36,8 @@ typedef struct _CicmDelay
 {
 	t_pxobject				f_ob;			
 	FilterDelay*            f_delay;
-
+    double                  f_delay_time;
+    
 } t_CicmDelay;
 
 void *CicmDelay_new(t_symbol *s, long argc, t_atom *argv);
@@ -44,10 +45,6 @@ void CicmDelay_free(t_CicmDelay *x);
 void CicmDelay_assist(t_CicmDelay *x, void *b, long m, long a, char *s);
 void CicmDelay_float(t_CicmDelay *x, double f);
 void CicmDelay_int(t_CicmDelay *x, long n);
-
-void CicmDelay_dsp(t_CicmDelay *x, t_signal **sp, short *count);
-t_int *CicmDelay_perform(t_int *w);
-t_int *CicmDelay_perform_offset(t_int *w);
 
 void CicmDelay_dsp64(t_CicmDelay *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void CicmDelay_perform64(t_CicmDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -62,7 +59,6 @@ int main(void)
 	
 	class_addmethod(c, (method)CicmDelay_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)CicmDelay_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)CicmDelay_dsp,		"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)CicmDelay_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)CicmDelay_assist,	"assist",	A_CANT, 0);
 	
@@ -86,7 +82,7 @@ void *CicmDelay_new(t_symbol *s, long argc, t_atom *argv)
 			
 		x->f_delay	= new FilterDelay(delayMax, sys_getmaxblksize(), sys_getsr());
 		
-		dsp_setup((t_pxobject *)x, 1);
+		dsp_setup((t_pxobject *)x, 2);
         outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -107,28 +103,35 @@ void CicmDelay_int(t_CicmDelay *x, long n)
 void CicmDelay_dsp64(t_CicmDelay *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_delay->setVectorSize(maxvectorsize);
-	if(count[x->f_delay->getNumberOfInputs() - 1])
-		object_method(dsp64, gensym("dsp_add64"), x, CicmDelay_perform64, 0, NULL);
-	else
-		object_method(dsp64, gensym("dsp_add64"), x, CicmDelay_perform64_offset, 0, NULL);
+    x->f_delay->setSamplingRate(samplerate);
+    
+    object_method(dsp64, gensym("dsp_add64"), x, CicmDelay_perform64, 0, NULL);
 }
 
 void CicmDelay_perform64(t_CicmDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_delay->process(ins, outs, ins[numins - 1]);
+    for (int i = 0; i < sampleframes; i++)
+    {
+        x->f_delay->write(ins[0][i]);
+        outs[0][i] = x->f_delay->read_no_ms(ins[1][i]);
+    }
 }
 
 void CicmDelay_perform64_offset(t_CicmDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{    
-	x->f_delay->process(ins, outs);
+{
+    for (int i = 0; i < sampleframes; i++)
+    {
+        x->f_delay->write(ins[0][i]);
+        outs[0][i] = x->f_delay->read_linear_ms(x->f_delay_time);
+    }
 }
 
 void CicmDelay_assist(t_CicmDelay *x, void *b, long m, long a, char *s)
 {
-	if( a == x->f_delay->getNumberOfInputs() - 1)
+	if(m == ASSIST_INLET)
 		sprintf(s,"(Signal or delay) Widen value");
 	else
-		sprintf(s,"(Signal) %s", x->f_delay->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) aa");
 }
 
 void CicmDelay_free(t_CicmDelay *x)

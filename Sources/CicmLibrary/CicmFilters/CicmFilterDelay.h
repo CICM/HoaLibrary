@@ -66,7 +66,7 @@ class FilterDelay : public Filter
     
     double read_no_sample(long aDelay)
     {
-        Tools::clip(aDelay, 0, m_size);
+        aDelay = Tools::clip(aDelay, 0, m_size-1);
         aDelay = m_ramp - aDelay;
         if(aDelay < 0)
             aDelay += m_size;
@@ -75,7 +75,7 @@ class FilterDelay : public Filter
     
     double read_no_ms(double aDelay)
     {
-        return read_no_sample(aDelay * m_sampling_rate);
+        return read_no_sample(aDelay * m_sampling_rate / 1000.);
     }
     
     void read_no_sample(long* delays, double* outputs)
@@ -103,6 +103,48 @@ class FilterDelay : public Filter
     }
     
     /*******************************************/
+    /******** Read Cosinus Interpolation *******/
+    /*******************************************/
+    
+    double read_cosinus_sample(double aDelay)
+    {
+        long	floorPart	= aDelay;
+        double	decimalPart = aDelay - floorPart;
+        double  alpha = (1. - cos(decimalPart * CICM_PI)) / 2.;
+
+        return read_no_sample(aDelay) * (1. - alpha) + read_no_sample(aDelay - 1) * alpha;
+    }
+    
+    double read_cosinus_ms(double aDelay)
+    {
+        return read_cosinus_sample(aDelay * m_sampling_rate / 1000.);
+    }
+    
+    void read_cosinus_sample(double* delays, double* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cosinus_sample(delays[i]);
+    }
+    
+    void read_cosinus_sample(float* delays, float* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cosinus_sample(delays[i]);
+    }
+    
+    void read_lcosinus_ms(double* delays, double* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cosinus_ms(delays[i]);
+    }
+    
+    void read_cosinus_ms(float* delays, float* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cosinus_ms(delays[i]);
+    }
+    
+    /*******************************************/
     /******** Read Linear Interpolation ********/
     /*******************************************/
     
@@ -110,12 +152,12 @@ class FilterDelay : public Filter
     {
         long	floorPart	= aDelay;
         double	decimalPart = aDelay - floorPart;
-        return read_no_sample(aDelay) * (1. - decimalPart) + read_no_sample(aDelay - 1) * decimalPart;
+        return read_no_sample(aDelay) * (1. - decimalPart) + read_no_sample(aDelay + 1) * decimalPart;
     }
     
     double read_linear_ms(double aDelay)
     {
-        return read_linear_sample(aDelay * m_sampling_rate);
+        return read_linear_sample(aDelay * m_sampling_rate / 1000.);
     }
     
     void read_linear_sample(double* delays, double* outputs)
@@ -133,13 +175,68 @@ class FilterDelay : public Filter
     void read_linear_ms(double* delays, double* outputs)
     {
         for(int i = 0; i < m_vector_size; i++)
-            outputs[i] = read_linear_sample(delays[i]);
+            outputs[i] = read_linear_ms(delays[i]);
     }
     
     void read_linear_ms(float* delays, float* outputs)
     {
         for(int i = 0; i < m_vector_size; i++)
-            outputs[i] = read_linear_sample(delays[i]);
+            outputs[i] = read_linear_ms(delays[i]);
+    }
+    
+    /*******************************************/
+    /******** Read Cubic Interpolation *********/
+    /*******************************************/
+    
+    double read_cubic_sample(double aDelay)
+    {
+        if(aDelay < 1.)
+            aDelay = 1;
+        int		floorPart	= aDelay;
+        double	decimalPart = aDelay - floorPart;
+        double	one, two, thr, fou, alpha;
+        alpha = decimalPart * decimalPart;
+        
+        fou = read_no_sample(aDelay - 2);
+        thr = read_no_sample(aDelay - 1);
+        two = read_no_sample(aDelay);
+        one = read_no_sample(aDelay - 1);
+        
+        double a0 = fou - thr - one + two;
+        double a1 = one - two - a0;
+        double a2 = thr - one;
+        double a3 = two;
+        
+        return a0 * decimalPart * alpha + a1 * alpha + a2 * decimalPart + a3;
+    }
+    
+    double read_cubic_ms(double aDelay)
+    {
+        return read_cubic_sample(aDelay * m_sampling_rate / 1000.);
+    }
+    
+    void read_cubic_sample(double* delays, double* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cubic_sample(delays[i]);
+    }
+    
+    void read_cubic_sample(float* delays, float* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cubic_sample(delays[i]);
+    }
+    
+    void read_cubic_ms(double* delays, double* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cubic_ms(delays[i]);
+    }
+    
+    void read_cubic_ms(float* delays, float* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_cubic_ms(delays[i]);
     }
 
     /*******************************************/
@@ -148,14 +245,16 @@ class FilterDelay : public Filter
 
     double read_quadratic_sample(double aDelay)
     {
+        if(aDelay < 1.)
+            aDelay = 1;
         int		floorPart	= aDelay;
         double	decimalPart = aDelay - floorPart;
         double	one, two, thr, fou, oneMthr, alpha;
         
-        fou = read_no_sample(aDelay - 3);
-        thr = read_no_sample(aDelay - 2);
-        two = read_no_sample(aDelay - 1);
-        one = read_no_sample(aDelay);
+        fou = read_no_sample(aDelay - 2);
+        thr = read_no_sample(aDelay - 1);
+        two = read_no_sample(aDelay);
+        one = read_no_sample(aDelay - 1);
         oneMthr = thr - two;
         alpha = 5. / 3.;
         
@@ -164,7 +263,7 @@ class FilterDelay : public Filter
     
     double read_quadratic_ms(double aDelay)
     {
-        return read_quadratic_sample(aDelay * m_sampling_rate);
+        return read_quadratic_sample(aDelay * m_sampling_rate / 1000.);
     }
     
     void read_quadratic_sample(double* delays, double* outputs)
@@ -197,16 +296,17 @@ class FilterDelay : public Filter
     
     double read_lagrange_sample(double aDelay)
     {
-        int i, j;
-        long floorPart  = aDelay;
-        double decimalPart = aDelay - floorPart + 1.;
-        long tmpIndex;
-        double output, weight;
+        long    floorPart  = aDelay;
+        double  decimalPart = aDelay - floorPart + 1.;
+        int     tmpIndex;
+        double  output = 0.;
+        double  weight;
         
-        for (i = 0, output = 0.; i < 4; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             tmpIndex = floorPart - 1 + i;
-            for (j = 0, weight = 1.; j < 4; ++j) 
+            weight = 1.;
+            for (int j = 0; j < 4; ++j)
             {
                 if (j != i) 
                     weight *= (decimalPart - j) / (double)(i - j);
@@ -216,6 +316,35 @@ class FilterDelay : public Filter
         }
         
         return output;
+    }
+    
+    double read_lagrange_ms(double aDelay)
+    {
+        return read_lagrange_sample(aDelay * m_sampling_rate / 1000.);
+    }
+    
+    void read_lagrange_sample(double* delays, double* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_lagrange_sample(delays[i]);
+    }
+    
+    void read_lagrange_sample(float* delays, float* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_lagrange_sample(delays[i]);
+    }
+    
+    void read_lagrange_ms(double* delays, double* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_lagrange_ms(delays[i]);
+    }
+    
+    void read_lagrange_ms(float* delays, float* outputs)
+    {
+        for(int i = 0; i < m_vector_size; i++)
+            outputs[i] = read_lagrange_ms(delays[i]);
     }
     
 	~FilterDelay();
