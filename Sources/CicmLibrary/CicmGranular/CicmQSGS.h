@@ -32,13 +32,13 @@
 
 #include "../CicmFilters/CicmFilterDelay.h"
 #include "../CicmEnvelope/CicmEnvelope.h"
-#include "../CicmLines/CicmLine2.h"
+#include "../CicmLines/CicmLine.h"
 
 class CicmQsgs
 {
 protected:
     CicmFilterDelay*    m_delay;
-    CicmLine2*          m_line;
+    CicmLine*           m_line;
     CicmEnvelope*       m_envelope;
     
     double  m_grain_size;
@@ -48,15 +48,14 @@ protected:
     
     double  m_delay_rand;
     double  m_bypass;
+    double  m_feedback_real;
     
     double  m_buffer;
     long	m_vector_size;
     long	m_sampling_rate;
-    
-    long m_ramp2;
 
 public:
-	CicmQsgs(long aVectorSize = 1, double aSamplingRate = 44100.);
+	CicmQsgs(double aMaximumDelay = 5000., long aVectorSize = 1, double aSamplingRate = 44100.);
     
     void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
@@ -74,27 +73,31 @@ public:
     double getFeedback();
     double getRarefaction();
 	
-
 	~CicmQsgs();
-	
-	/* Perform sample by sample */
+    
+	/**********************************/
+	/**** Perform sample by sample ****/
+    /**********************************/
+    
 	inline float process(float input)
 	{
         float output;
         float ramp = m_line->process();
         float gain = m_envelope->getValueRelative(ramp);
         
-        m_delay->write(input + m_buffer * m_feedback);
+        m_delay->write(input + m_buffer * m_feedback_real);
         
         if(ramp >= 1.)
         {
             m_line->setCoefficientDirect(0.f);
             m_line->setCoefficient(1.f);
             m_delay_rand = Tools::getRandf(0.f, m_delay_time);
-            if(Tools::getRandf(0.f, 1.f) < m_rarefaction)
+            if(Tools::getRandf(0.f, 1.f) > m_rarefaction)
                 m_bypass = 1;
             else
-                m_bypass = 0;            
+                m_bypass = 0;
+            
+            m_feedback_real = m_feedback;
         }
         gain *= m_bypass;
 		
@@ -109,40 +112,41 @@ public:
         double ramp = m_line->process();
         double gain = m_envelope->getValueRelative(ramp);
         
-        m_delay->write(input + m_buffer * m_feedback);
-        
         if(ramp >= 1.)
         {
-            m_line->setCoefficientDirect(0.);
-            m_line->setCoefficient(1.);
-            m_delay_rand = Tools::getRandd(0., m_delay_time);
-            if(Tools::getRandd(0., 1.) < m_rarefaction)
-                m_bypass = 1.;
+            m_line->setRampInMs(m_grain_size);
+            m_line->setCoefficientDirect(0.f);
+            m_line->setCoefficient(1.f);
+            m_delay_rand = Tools::getRandf(0.f, m_delay_time);
+            if(Tools::getRandf(0.f, 1.f) > m_rarefaction)
+                m_bypass = 1;
             else
-                m_bypass = 0.;
+                m_bypass = 0;
+            
+            m_feedback_real = m_feedback;
         }
+        
+        m_delay->write(input + m_buffer * m_feedback_real);
         gain *= m_bypass;
-		
         m_buffer = m_delay->read_no_ms(m_delay_rand) * gain;
         output = input * 0.02 * gain + m_buffer;
         return output;
 	}
+    
+    /**********************************/
+	/****** Perform block sample ******/
+    /**********************************/
 	
-	/* Perform block sample */
 	inline void process(float* inputs, float* outputs)
 	{
         for(int i = 0; i < m_vector_size; i++)
-        {
-            outputs[i] = inputs[i];
-        }
+            outputs[i] = process(inputs[i]);
 	}
     
 	inline void process(double* inputs, double* outputs)
 	{
         for(int i = 0; i < m_vector_size; i++)
-        {
-            outputs[i] = inputs[i];
-        }
+            outputs[i] = process(inputs[i]);
 	}
 };
 

@@ -32,6 +32,7 @@ class CicmLine{
 	
 private:
 	long        m_vector_size;
+    long        m_sampling_rate;
     
     double      m_value_old;
 	double      m_value_new;
@@ -40,14 +41,20 @@ private:
     long        m_ramp;
     
 public:
-    CicmLine(long aRamp = 4410, long aVectorSize = 0);
+    CicmLine(long aTimeInSample = 4410, long aVectorSize = 0, long aSamplingRate = 44100);
+    CicmLine(double aTimeInMs = 100., long aVectorSize = 0, long aSamplingRate = 44100);
     
-    double  getVectorSize();
-    long    getRamp();
+    long    getVectorSize();
+    long    getSamplingRate();
+    long    getRampInSample();
+    double  getRampInMs();
     double  getCoefficient();
     
+    void setSamplingRate(long aSamplingRate);
     void setVectorSize(long aVectorSize);
-    void setRamp(long aNumberOfSample);
+    
+    void setRampInSample(long aTimeInSample);
+    void setRampInMs(double aTimeInMs);
     void setCoefficientDirect(double aCoefficient);
     void setCoefficient(double aCoefficient);
     void setCoefficientAngleDirect(double anAngle);

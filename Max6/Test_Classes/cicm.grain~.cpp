@@ -36,7 +36,10 @@ typedef struct _CicmGrain
 {
 	t_pxobject	f_ob;
 	CicmQsgs*   f_grain;
-    double      f_grain_time;
+    double      f_grain_size;
+    double      f_delay_time;
+    double      f_feedback;
+    double      f_rarefaction;
     
 } t_CicmGrain;
 
@@ -46,10 +49,15 @@ void CicmGrain_assist(t_CicmGrain *x, void *b, long m, long a, char *s);
 void CicmGrain_float(t_CicmGrain *x, double f);
 void CicmGrain_int(t_CicmGrain *x, long n);
 
+t_max_err size_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv);
+t_max_err delay_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv);
+t_max_err feedback_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv);
+t_max_err rarefaction_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv);
+
 void CicmGrain_dsp64(t_CicmGrain *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void CicmGrain_perform64(t_CicmGrain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void CicmGrain_perform64_offset(t_CicmGrain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void *CicmGrain_class;
+
+t_class* CicmGrain_class;
 
 int main(void)
 {	
@@ -61,32 +69,68 @@ int main(void)
 	class_addmethod(c, (method)CicmGrain_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)CicmGrain_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)CicmGrain_assist,	"assist",	A_CANT, 0);
+    
+    CLASS_ATTR_DOUBLE			(c, "size", 0, t_CicmGrain, f_grain_size);
+	CLASS_ATTR_CATEGORY			(c, "size", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "size", 0, "Grain size (ms)");
+	CLASS_ATTR_ORDER			(c, "size", 0, "1");
+	CLASS_ATTR_ACCESSORS		(c, "size", NULL, size_set);
+	CLASS_ATTR_SAVE				(c, "size", 1);
+    
+	CLASS_ATTR_DOUBLE			(c, "delay", 0, t_CicmGrain, f_delay_time);
+	CLASS_ATTR_CATEGORY			(c, "delay", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "delay", 0, "Delay time (ms)");
+	CLASS_ATTR_ORDER			(c, "delay", 0, "2");
+	CLASS_ATTR_ACCESSORS		(c, "delay", NULL, delay_set);
+	CLASS_ATTR_SAVE				(c, "delay", 1);
+    
+    CLASS_ATTR_DOUBLE			(c, "feedback", 0, t_CicmGrain, f_feedback);
+	CLASS_ATTR_CATEGORY			(c, "feedback", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "feedback", 0, "Feedback");
+	CLASS_ATTR_ORDER			(c, "feedback", 0, "3");
+	CLASS_ATTR_ACCESSORS		(c, "feedback", NULL, feedback_set);
+	CLASS_ATTR_SAVE				(c, "feedback", 1);
+    
+    CLASS_ATTR_DOUBLE			(c, "rarefaction", 0, t_CicmGrain, f_rarefaction);
+	CLASS_ATTR_CATEGORY			(c, "rarefaction", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "rarefaction", 0, "Rarefaction");
+	CLASS_ATTR_ORDER			(c, "rarefaction", 0, "4");
+	CLASS_ATTR_ACCESSORS		(c, "rarefaction", NULL, rarefaction_set);
+	CLASS_ATTR_SAVE				(c, "rarefaction", 1);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	CicmGrain_class = c;
 	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	//class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
 void *CicmGrain_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_CicmGrain *x = NULL;
-	long delayMax = sys_getsr();
-	x = (t_CicmGrain *)object_alloc((t_class*)CicmGrain_class);
+    t_dictionary *d = NULL;
+	double delayMax = sys_getsr() * 5;
+	x = (t_CicmGrain *)object_alloc(CicmGrain_class);
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
-			delayMax	= atom_getlong(argv);
+		if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+			delayMax	= atom_getfloat(argv);
 			
-		x->f_grain	= new CicmQsgs(sys_getmaxblksize(), sys_getsr());
-		x->f_grain->setRarefaction(1.);
+		x->f_grain	= new CicmQsgs(delayMax, sys_getmaxblksize(), sys_getsr());
         
-		dsp_setup((t_pxobject *)x, 2);
+        x->f_grain_size = x->f_grain->getGrainSize();
+        x->f_delay_time = x->f_grain->getDelayTime();
+        x->f_feedback   = x->f_grain->getFeedback();
+        x->f_rarefaction= x->f_grain->getRarefaction();
+        
+		dsp_setup((t_pxobject *)x, 1);
         outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
+        d = (t_dictionary *)gensym("#D")->s_thing;
+        if (d) attr_dictionary_process(x, d);
+        attr_args_process(x, argc, argv);
 	}
 	return (x);
 }
@@ -111,18 +155,15 @@ void CicmGrain_dsp64(t_CicmGrain *x, t_object *dsp64, short *count, double sampl
 
 void CicmGrain_perform64(t_CicmGrain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    for (int i = 0; i < sampleframes; i++)
-    {
-        outs[0][i] = x->f_grain->process(ins[0][i]);
-    }
+    x->f_grain->process(ins[0], outs[0]);
 }
 
 void CicmGrain_assist(t_CicmGrain *x, void *b, long m, long a, char *s)
 {
 	if(m == ASSIST_INLET)
-		sprintf(s,"(Signal or delay) Widen value");
+		sprintf(s,"(Signal or messages) Clean Signal");
 	else
-		sprintf(s,"(Signal) aa");
+		sprintf(s,"(Signal) Granulated Signal");
 }
 
 void CicmGrain_free(t_CicmGrain *x)
@@ -130,4 +171,42 @@ void CicmGrain_free(t_CicmGrain *x)
 	dsp_free((t_pxobject *)x);
 	delete x->f_grain;
 }
+
+t_max_err size_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_grain->setGrainSize(atom_getfloat(argv));
+    
+	x->f_grain_size = x->f_grain->getGrainSize();
+	return MAX_ERR_NONE;
+}
+
+t_max_err delay_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_grain->setDelayTime(atom_getfloat(argv));
+    
+	x->f_delay_time = x->f_grain->getDelayTime();
+	return MAX_ERR_NONE;
+}
+
+t_max_err feedback_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_grain->setFeedback(atom_getfloat(argv));
+    
+	x->f_feedback = x->f_grain->getFeedback();
+	return MAX_ERR_NONE;
+}
+
+t_max_err rarefaction_set(t_CicmGrain *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_grain->setRarefaction(atom_getfloat(argv));
+    
+	x->f_rarefaction = x->f_grain->getRarefaction();
+	return MAX_ERR_NONE;
+}
+
+
 

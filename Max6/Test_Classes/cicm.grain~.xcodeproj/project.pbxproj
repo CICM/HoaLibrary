@@ -43,8 +43,6 @@
 		8F3190221786BBCE00F5CF5F /* CicmLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F318FF51786BBCE00F5CF5F /* CicmLibrary.h */; };
 		8F3190231786BBCE00F5CF5F /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F318FF71786BBCE00F5CF5F /* CicmLine.cpp */; };
 		8F3190241786BBCE00F5CF5F /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F318FF81786BBCE00F5CF5F /* CicmLine.h */; };
-		8F3190251786BBCE00F5CF5F /* CicmLine2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F318FF91786BBCE00F5CF5F /* CicmLine2.cpp */; };
-		8F3190261786BBCE00F5CF5F /* CicmLine2.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F318FFA1786BBCE00F5CF5F /* CicmLine2.h */; };
 		8F3190271786BBCE00F5CF5F /* CicmFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F318FFC1786BBCE00F5CF5F /* CicmFreeverb.cpp */; };
 		8F3190281786BBCE00F5CF5F /* CicmFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F318FFD1786BBCE00F5CF5F /* CicmFreeverb.h */; };
 		8F3190291786BBCE00F5CF5F /* CicmGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F318FFE1786BBCE00F5CF5F /* CicmGigaverb.cpp */; };
@@ -94,8 +92,6 @@
 		8F318FF51786BBCE00F5CF5F /* CicmLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLibrary.h; sourceTree = "<group>"; };
 		8F318FF71786BBCE00F5CF5F /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
 		8F318FF81786BBCE00F5CF5F /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
-		8F318FF91786BBCE00F5CF5F /* CicmLine2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine2.cpp; sourceTree = "<group>"; };
-		8F318FFA1786BBCE00F5CF5F /* CicmLine2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine2.h; sourceTree = "<group>"; };
 		8F318FFC1786BBCE00F5CF5F /* CicmFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFreeverb.cpp; sourceTree = "<group>"; };
 		8F318FFD1786BBCE00F5CF5F /* CicmFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFreeverb.h; sourceTree = "<group>"; };
 		8F318FFE1786BBCE00F5CF5F /* CicmGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmGigaverb.cpp; sourceTree = "<group>"; };
@@ -222,8 +218,6 @@
 			children = (
 				8F318FF71786BBCE00F5CF5F /* CicmLine.cpp */,
 				8F318FF81786BBCE00F5CF5F /* CicmLine.h */,
-				8F318FF91786BBCE00F5CF5F /* CicmLine2.cpp */,
-				8F318FFA1786BBCE00F5CF5F /* CicmLine2.h */,
 			);
 			path = CicmLines;
 			sourceTree = "<group>";
@@ -266,7 +260,6 @@
 				8F3190211786BBCE00F5CF5F /* CicmQSGS.h in Headers */,
 				8F3190221786BBCE00F5CF5F /* CicmLibrary.h in Headers */,
 				8F3190241786BBCE00F5CF5F /* CicmLine.h in Headers */,
-				8F3190261786BBCE00F5CF5F /* CicmLine2.h in Headers */,
 				8F3190281786BBCE00F5CF5F /* CicmFreeverb.h in Headers */,
 				8F31902A1786BBCE00F5CF5F /* CicmGigaverb.h in Headers */,
 				8F31902B1786BBCE00F5CF5F /* CicmTuning.h in Headers */,
@@ -365,7 +358,6 @@
 				8F31901E1786BBCE00F5CF5F /* CicmOnePole.cpp in Sources */,
 				8F3190201786BBCE00F5CF5F /* CicmQSGS.cpp in Sources */,
 				8F3190231786BBCE00F5CF5F /* CicmLine.cpp in Sources */,
-				8F3190251786BBCE00F5CF5F /* CicmLine2.cpp in Sources */,
 				8F3190271786BBCE00F5CF5F /* CicmFreeverb.cpp in Sources */,
 				8F3190291786BBCE00F5CF5F /* CicmGigaverb.cpp in Sources */,
 				8F31902E1786BBEB00F5CF5F /* cicm.grain~.cpp in Sources */,
