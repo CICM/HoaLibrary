@@ -516,8 +516,12 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 	double y1, y2, rotateAngle;
     t_jmatrix transform;
     t_jrgba black, white;
-    double contrastBlack = 0.12;
-    double contrastWhite = 0.08;
+    
+    //double contrastBlack = 0.12;
+    //double contrastWhite = 0.08;
+    
+    double contrastBlack = 0.14;
+    double contrastWhite = 0.06;
     
     black = white = x->f_colorBackground;
     black.red = Tools::clip_min(black.red -= contrastBlack);
@@ -536,20 +540,19 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 		for(i = 5; i > 0; i--)
 		{
             //inner shadow
-            jgraphics_set_line_width(g, 2);
+            jgraphics_set_line_width(g, 1);
             jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, x->f_center.x+0.5, x->f_center.y+0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_arc(g, long(x->f_center.x)+0.5, long(x->f_center.y)+0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
             jgraphics_stroke(g);
             jgraphics_set_line_width(g, 1);
             jgraphics_set_source_jrgba(g, &black);
-            jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_arc(g, long(x->f_center.x)-0.5, long(x->f_center.y)-0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
             jgraphics_stroke(g);
 		}
 		/* Axes */
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
-        jgraphics_set_source_jrgba(g, &black);
-		//for(i = 0; i < 12; i++)
+
         for(i = 0; i < (x->f_order * 2 + 2) ; i++)
 		{
             rotateAngle = ( (double)i/(x->f_order * 2 + 2) * CICM_2PI ) - ( 0.5/(x->f_order * 2 + 2) * CICM_2PI );
@@ -558,15 +561,16 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 			y1 = 1. / 6. * x->f_rayonGlobal;
 			y2 = 5. / 6. * x->f_rayonGlobal;
 			
-            if ( (rotateAngle <= CICM_PI && rotateAngle > 0.) )
+            /* Inner shadow */
+            if ( Tools::isInsideDeg( Tools::radToDeg(rotateAngle), 46., -135.) )
             {
-                jgraphics_move_to(g, -0.5, y1-0.5);
-                jgraphics_line_to(g, -0.5, y2-0.5);
+                jgraphics_move_to(g, -0.5, long(y1));
+                jgraphics_line_to(g, -0.5, long(y2));
             }
             else
             {
-                jgraphics_move_to(g, 0.5, y1+0.5);
-                jgraphics_line_to(g, 0.5, y2+0.5);
+                jgraphics_move_to(g, 0.5, long(y1));
+                jgraphics_line_to(g, 0.5, long(y2));
             }
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);

@@ -16,8 +16,6 @@
 		2CD238FD1779BE2300B9F472 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CD238F71779BE2300B9F472 /* Planewaves.cpp */; };
 		2CD238FE1779BE2300B9F472 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD238F81779BE2300B9F472 /* Planewaves.h */; };
 		2CD239271779BE3600B9F472 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD239001779BE3600B9F472 /* CicmDefine.h */; };
-		2CD239411779BE3600B9F472 /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2391C1779BE3600B9F472 /* CicmLine.cpp */; };
-		2CD239421779BE3600B9F472 /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD2391D1779BE3600B9F472 /* CicmLine.h */; };
 		2CD2394A1779BE3600B9F472 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CD239261779BE3600B9F472 /* CicmTools.h */; };
 		8F0E7DDD177B0B1D00E53608 /* hoa.scope~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F0E7DDC177B0B1D00E53608 /* hoa.scope~.cpp */; };
 /* End PBXBuildFile section */
@@ -34,8 +32,6 @@
 		2CD238F71779BE2300B9F472 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
 		2CD238F81779BE2300B9F472 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
 		2CD239001779BE3600B9F472 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
-		2CD2391C1779BE3600B9F472 /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
-		2CD2391D1779BE3600B9F472 /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
 		2CD239261779BE3600B9F472 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.scope~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.scope~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F0E7DDC177B0B1D00E53608 /* hoa.scope~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.scope~.cpp"; sourceTree = "<group>"; };
@@ -111,8 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				2CD239001779BE3600B9F472 /* CicmDefine.h */,
-				2CD2391C1779BE3600B9F472 /* CicmLine.cpp */,
-				2CD2391D1779BE3600B9F472 /* CicmLine.h */,
 				2CD239261779BE3600B9F472 /* CicmTools.h */,
 			);
 			name = CicmLibrary;
@@ -130,7 +124,6 @@
 				2CD238FC1779BE2300B9F472 /* AmbisonicsViewer.h in Headers */,
 				2CD238FE1779BE2300B9F472 /* Planewaves.h in Headers */,
 				2CD239271779BE3600B9F472 /* CicmDefine.h in Headers */,
-				2CD239421779BE3600B9F472 /* CicmLine.h in Headers */,
 				2CD2394A1779BE3600B9F472 /* CicmTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,7 +205,6 @@
 				2CD238F91779BE2300B9F472 /* Ambisonics.cpp in Sources */,
 				2CD238FB1779BE2300B9F472 /* AmbisonicsViewer.cpp in Sources */,
 				2CD238FD1779BE2300B9F472 /* Planewaves.cpp in Sources */,
-				2CD239411779BE3600B9F472 /* CicmLine.cpp in Sources */,
 				8F0E7DDD177B0B1D00E53608 /* hoa.scope~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
