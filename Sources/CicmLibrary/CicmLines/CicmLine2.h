@@ -26,7 +26,7 @@
 #ifndef DEF_CicmLine2_h
 #define DEF_CicmLine2_h
 
-#include "../CicmLibrary/CicmTools.h"
+#include "../CicmTools.h"
 #define DEF_RAMPSIZE_IN_MS 20 // 882 samples at 44.1k samplerate
 
 class CicmLine2{
@@ -45,7 +45,7 @@ private:
     void setValueStep();
     
 public:
-	CicmLine2(long aVectorSize = 512, double aSampleRate = 44100, double _rampSizeInMs = DEF_RAMPSIZE_IN_MS);
+	CicmLine2(long aVectorSize = 1, double aSampleRate = 44100, double _rampSizeInMs = DEF_RAMPSIZE_IN_MS);
 	inline double getValue()               {return m_value_new;}
     inline double getSampleRate()          {return m_sampling_rate;}
     inline long   getVectorSize()          {return m_vector_size;}
