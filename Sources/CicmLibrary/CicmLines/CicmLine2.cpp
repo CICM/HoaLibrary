@@ -59,10 +59,7 @@ void CicmLine2::setCoefficient(double aCoefficient)
 void CicmLine2::setSampleRate(double aSampleRate)
 {
 	m_sampling_rate = aSampleRate;
-    //if (m_mode)
-        setRampTimeInMs(m_ramptime_in_ms);
-    //else
-        //setRampTimeInSamps(m_ramptime_in_samps);
+    setRampTimeInMs(m_ramptime_in_ms);
     setValueStep();
     m_counter = 0;
 }

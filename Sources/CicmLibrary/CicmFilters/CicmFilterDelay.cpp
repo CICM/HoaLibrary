@@ -20,19 +20,19 @@
 
 #include "CicmFilterDelay.h"
 
-FilterDelay::FilterDelay(long aBufferSize, long aVectorSize, long aSamplingRate) : Filter(aVectorSize, aSamplingRate)
+CicmFilterDelay::CicmFilterDelay(long aBufferSize, long aVectorSize, long aSamplingRate) : Filter(aVectorSize, aSamplingRate)
 {
 	m_buffer = NULL;
     setBufferSizeInSample(aBufferSize);
 }
 
-FilterDelay::FilterDelay(double aBufferSize, long aVectorSize, long aSamplingRate) : Filter(aVectorSize, aSamplingRate)
+CicmFilterDelay::CicmFilterDelay(double aBufferSize, long aVectorSize, long aSamplingRate) : Filter(aVectorSize, aSamplingRate)
 {
     m_buffer = NULL;
     setBufferSizeInMs(aBufferSize);
 }
 
-void FilterDelay::setBufferSizeInSample(long aBufferSize)
+void CicmFilterDelay::setBufferSizeInSample(long aBufferSize)
 {
     if(m_buffer)
         Cicm_Free(m_buffer);
@@ -41,7 +41,7 @@ void FilterDelay::setBufferSizeInSample(long aBufferSize)
     m_ramp = 0;
 }
 
-void FilterDelay::setBufferSizeInMs(double aBufferSize)
+void CicmFilterDelay::setBufferSizeInMs(double aBufferSize)
 {
     if(m_buffer)
         Cicm_Free(m_buffer);
@@ -50,7 +50,7 @@ void FilterDelay::setBufferSizeInMs(double aBufferSize)
     m_ramp = 0;
 }
 
-FilterDelay::~FilterDelay()
+CicmFilterDelay::~CicmFilterDelay()
 {
 	if(m_buffer)
         Cicm_Free(m_buffer);

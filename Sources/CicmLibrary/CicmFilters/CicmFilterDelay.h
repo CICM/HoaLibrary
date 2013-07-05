@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef DEF_FILTERDELAY
-#define DEF_FILTERDELAY
+#ifndef DEF_CICM_FILTER_DELAY
+#define DEF_CICM_FILTER_DELAY
 
 #include "CicmFilter.h"
 
-class FilterDelay : public Filter
+class CicmFilterDelay : public Filter
 {
 	private:
 	
@@ -32,8 +32,8 @@ class FilterDelay : public Filter
 	
 	public:
 	
-	FilterDelay(long aBufferSize, long aVectorSize = 1, long aSamplingRate = 44100);
-    FilterDelay(double aBufferSize, long aVectorSize = 1, long aSamplingRate = 44100);
+	CicmFilterDelay(long aBufferSize, long aVectorSize = 1, long aSamplingRate = 44100);
+    CicmFilterDelay(double aBufferSize, long aVectorSize = 1, long aSamplingRate = 44100);
     
     void    setBufferSizeInSample(long aBufferSize);
     void    setBufferSizeInMs(double aBufferSize);
@@ -47,7 +47,7 @@ class FilterDelay : public Filter
         if(++m_ramp == m_size)
             m_ramp = 0;
     }
-    
+    /*
     inline void write(double* samples)
     {
         for(int i = 0; i < m_vector_size; i++)
@@ -59,7 +59,7 @@ class FilterDelay : public Filter
         for(int i = 0; i < m_vector_size; i++)
             write(samples[i]);
     }
-    
+    */
     /*******************************************/
     /*********** Read No Interpolation *********/
     /*******************************************/
@@ -77,7 +77,7 @@ class FilterDelay : public Filter
     {
         return read_no_sample(aDelay * m_sampling_rate / 1000.);
     }
-    
+    /*
     void read_no_sample(long* delays, double* outputs)
     {
         for(int i = 0; i < m_vector_size; i++)
@@ -101,7 +101,7 @@ class FilterDelay : public Filter
         for(int i = 0; i < m_vector_size; i++)
             outputs[i] = read_no_ms(delays[i]);
     }
-    
+    */
     /*******************************************/
     /******** Read Cosinus Interpolation *******/
     /*******************************************/
@@ -119,7 +119,7 @@ class FilterDelay : public Filter
     {
         return read_cosinus_sample(aDelay * m_sampling_rate / 1000.);
     }
-    
+    /*
     void read_cosinus_sample(double* delays, double* outputs)
     {
         for(int i = 0; i < m_vector_size; i++)
@@ -143,7 +143,7 @@ class FilterDelay : public Filter
         for(int i = 0; i < m_vector_size; i++)
             outputs[i] = read_cosinus_ms(delays[i]);
     }
-    
+    */
     /*******************************************/
     /******** Read Linear Interpolation ********/
     /*******************************************/
@@ -159,7 +159,7 @@ class FilterDelay : public Filter
     {
         return read_linear_sample(aDelay * m_sampling_rate / 1000.);
     }
-    
+    /*
     void read_linear_sample(double* delays, double* outputs)
     {
         for(int i = 0; i < m_vector_size; i++)
@@ -183,7 +183,7 @@ class FilterDelay : public Filter
         for(int i = 0; i < m_vector_size; i++)
             outputs[i] = read_linear_ms(delays[i]);
     }
-    
+    */
     /*******************************************/
     /******** Read Cubic Interpolation *********/
     /*******************************************/
@@ -209,7 +209,7 @@ class FilterDelay : public Filter
         
         return a0 * decimalPart * alpha + a1 * alpha + a2 * decimalPart + a3;
     }
-    
+    /*
     double read_cubic_ms(double aDelay)
     {
         return read_cubic_sample(aDelay * m_sampling_rate / 1000.);
@@ -238,7 +238,7 @@ class FilterDelay : public Filter
         for(int i = 0; i < m_vector_size; i++)
             outputs[i] = read_cubic_ms(delays[i]);
     }
-
+    */
     /*******************************************/
     /****** Read Quadratic Interpolation *******/
     /*******************************************/
@@ -260,7 +260,7 @@ class FilterDelay : public Filter
         
         return two + decimalPart * (oneMthr - alpha * (1. - decimalPart) * ((fou - one - 3. * oneMthr) * decimalPart + (fou + 2. * one - 3. * two)));
     }
-    
+    /*
     double read_quadratic_ms(double aDelay)
     {
         return read_quadratic_sample(aDelay * m_sampling_rate / 1000.);
@@ -289,7 +289,7 @@ class FilterDelay : public Filter
         for(int i = 0; i < m_vector_size; i++)
             outputs[i] = read_quadratic_sample(delays[i]);
     }
-    
+    */
     /*******************************************/
     /******* Read Lagrange Interpolation *******/
     /*******************************************/
@@ -322,7 +322,7 @@ class FilterDelay : public Filter
     {
         return read_lagrange_sample(aDelay * m_sampling_rate / 1000.);
     }
-    
+    /*
     void read_lagrange_sample(double* delays, double* outputs)
     {
         for(int i = 0; i < m_vector_size; i++)
@@ -346,8 +346,8 @@ class FilterDelay : public Filter
         for(int i = 0; i < m_vector_size; i++)
             outputs[i] = read_lagrange_ms(delays[i]);
     }
-    
-	~FilterDelay();
+    */
+	~CicmFilterDelay();
 };
 
 #endif

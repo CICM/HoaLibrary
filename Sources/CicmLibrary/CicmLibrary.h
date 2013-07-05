@@ -23,13 +23,14 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_HOA_LIBRARY
-#define DEF_HOA_LIBRARY
+#ifndef DEF_CICM_LIBRARY
+#define DEF_CICM_LIBRARY
 
 #include "CicmDefine.h"
 #include "CicmTools.h"
 
 #include "CicmFilters/CicmFilterDelay.h"
+#include "CicmGranular/CicmQSGS.h"
 
 #endif
 
