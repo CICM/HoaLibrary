@@ -25,20 +25,38 @@
 
 #include "CicmLine.h"
 
-CicmLine::CicmLine(long aRamp, long aVectorSize)
+CicmLine::CicmLine(long aTimeInSample, long aVectorSize, long aSamplingRate)
 {
     m_value_old = 0.;
     m_value_new = 0.;
     m_value_step = 0.;
     m_counter = 0;
     
-    setRamp(aRamp);
     setVectorSize(aVectorSize);
+    setSamplingRate(aSamplingRate);
+    setRampInSample(aTimeInSample);
 }
 
-double CicmLine::getVectorSize()
+CicmLine::CicmLine(double aTimeInMs, long aVectorSize, long aSamplingRate)
+{
+    m_value_old = 0.;
+    m_value_new = 0.;
+    m_value_step = 0.;
+    m_counter = 0;
+    
+    setVectorSize(aVectorSize);
+    setSamplingRate(aSamplingRate);
+    setRampInMs(aTimeInMs);
+}
+
+long CicmLine::getVectorSize()
 {
 	return m_vector_size;    
+}
+
+long CicmLine::getSamplingRate()
+{
+    return m_sampling_rate;
 }
 
 double CicmLine::getCoefficient()
@@ -46,14 +64,24 @@ double CicmLine::getCoefficient()
     return m_value_new;
 }
 
-long CicmLine::getRamp()
+long CicmLine::getRampInSample()
 {
     return m_ramp;
 }
 
-void CicmLine::setRamp(long aNumberOfSample)
+double CicmLine::getRampInMs()
 {
-    m_ramp = Tools::clip_min(aNumberOfSample, (long)1);
+    return m_ramp / m_sampling_rate * 1000.;
+}
+
+void CicmLine::setRampInSample(long aTimeInSample)
+{
+    m_ramp = Tools::clip_min(aTimeInSample, (long)1);
+}
+
+void CicmLine::setRampInMs(double aTimeInMs)
+{
+    setRampInSample(aTimeInMs * m_sampling_rate / 1000.);
 }
 
 void CicmLine::setCoefficientDirect(double aCoefficient)
@@ -102,6 +130,11 @@ void CicmLine::setCoefficientAngle(double anAngle)
 void CicmLine::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
+}
+
+void CicmLine::setSamplingRate(long aSamplingRate)
+{
+	m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
 }
 
 CicmLine::~CicmLine()

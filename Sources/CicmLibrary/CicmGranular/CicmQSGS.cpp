@@ -25,13 +25,14 @@
 
 #include "CicmQSGS.h"
 
-CicmQsgs::CicmQsgs(long aVectorSize, double aSamplingRate)
+CicmQsgs::CicmQsgs(double aMaximumDelay, long aVectorSize, double aSamplingRate)
 {
+    aMaximumDelay = Tools::clip_min(aMaximumDelay, 1);
     m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     
-	m_delay = new CicmFilterDelay(5 * m_sampling_rate, m_vector_size, m_sampling_rate);
-    m_line  = new CicmLine2(m_vector_size, m_sampling_rate);
+	m_delay = new CicmFilterDelay(aMaximumDelay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
+    m_line  = new CicmLine(m_vector_size, m_sampling_rate);
     m_envelope = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Hanning);
     m_line->setCoefficientDirect(Tools::getRandd(0., 1));
     m_line->setCoefficient(1.);
@@ -42,9 +43,7 @@ CicmQsgs::CicmQsgs(long aVectorSize, double aSamplingRate)
     setFeedback(0.8);
     m_delay_rand = Tools::getRandf(0.f, m_delay_time);
     m_bypass = 0.;
-    
-    m_envelope->setType(Cicm_Envelope_Hanning);
-    m_ramp2 = 0;
+    m_feedback_real = m_feedback;
 }
 
 long CicmQsgs::getVectorSize()
@@ -87,14 +86,13 @@ void CicmQsgs::setVectorSize(long aVectorSize)
 void CicmQsgs::setSamplingRate(long aSamplingRate)
 {
 	m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
-    m_line->setSampleRate(m_sampling_rate);
+    m_line->setSamplingRate(m_sampling_rate);
     m_delay->setSamplingRate(m_sampling_rate);
 }
 
 void CicmQsgs::setGrainSize(double aGrainSize)
 {
     m_grain_size = Tools::clip_min(aGrainSize, 0.);
-    m_line->setRampTimeInMs(m_grain_size);
 }
 
 void CicmQsgs::setDelayTime(double aDelayTime)
