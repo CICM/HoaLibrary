@@ -26,7 +26,8 @@
 #ifndef DEF_AMBISONICSMAP
 #define DEF_AMBISONICSMAP
 
-#include "../CicmLibrary/CicmLine.h"
+//#include "../CicmLibrary/CicmLibrary.h"
+#include "../CicmLibrary/CicmLines/CicmLine.h"
 #include "../CicmLibrary/CicmFilters/CicmFilterOnePole.h"
 #include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaEncoder/AmbisonicsEncoder.h"

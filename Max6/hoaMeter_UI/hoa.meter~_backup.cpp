@@ -703,32 +703,11 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
                     {
                         if (x->f_number_of_loudspeakers > 1) {
                             if ( x->f_number_of_loudspeakers < 24  && (x->f_speakerWidth[i] > 14.5)) {
-                                
-                                double tmpdeg1 = 0, tmpdeg2 = 0, tmprad = 0;
-                                
-                                if (x->f_fill_direction == 0) { // inside
-                                    tmpdeg1 = deg1+(0.008 * (j+4) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (j+4) * x->f_metersize);
-                                    tmprad = x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2;
-                                } else { // outside
-                                    tmpdeg1 = deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmprad = x->f_rayonInt+(j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2;
-                                }
-                                if (tmpdeg1 < tmpdeg2)  jgraphics_arc(g, 0, 1, tmprad,  tmpdeg1, tmpdeg2);
-                                else
-                                {
-                                    jgraphics_arc(g, 0, 1, tmprad, tmpdeg2, tmpdeg1);
-                                    //jgraphics_arc_negative(g, 0, 0, tmprad, tmpdeg1, tmpdeg2);
-                                }
-                                
-                                /*
                                 if (x->f_fill_direction == 0) { // inside
                                     jgraphics_arc(g, 0, 1, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1+(0.008 * (j+4) * x->f_metersize), deg2-(0.008 * (j+4) * x->f_metersize) );
                                 } else { // outside
                                     jgraphics_arc(g, 0, 1, x->f_rayonInt+(j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2, deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize), deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize) );
                                 }
-                                */
                             }
                             else {
                                 if (x->f_fill_direction == 0) { // inside
@@ -749,33 +728,12 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
                     else
                     {
                         if (x->f_number_of_loudspeakers > 1) {
-                            if ( x->f_number_of_loudspeakers < 24  && (x->f_speakerWidth[i] > 14.5))
-                            {
-                                double tmpdeg1 = 0, tmpdeg2 = 0, tmprad = 0;
-                                
-                                if (x->f_fill_direction == 0) { // inside
-                                    tmpdeg1 = deg1+(0.008 * (j+4) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (j+4) * x->f_metersize);
-                                    tmprad = x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2;
-                                } else { // outside
-                                    tmpdeg1 = deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                    tmprad = x->f_rayonInt+(j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2;
-                                }
-                                if (tmpdeg1 < tmpdeg2)  jgraphics_arc(g, 0, -1, tmprad,  tmpdeg1, tmpdeg2);
-                                else
-                                {
-                                    jgraphics_arc(g, 0, -1, tmprad, tmpdeg2, tmpdeg1);
-                                    //jgraphics_arc_negative(g, 0, 0, tmprad, tmpdeg1, tmpdeg2);
-                                }
-                                
-                                /*
+                            if ( x->f_number_of_loudspeakers < 24  && (x->f_speakerWidth[i] > 14.5)) {
                                 if (x->f_fill_direction == 0) { // inside
                                     jgraphics_arc(g, 0, -1, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1+(0.008 * (j+4) * x->f_metersize), deg2-(0.008 * (j+4) * x->f_metersize) );
                                 } else { // outside
                                     jgraphics_arc(g, 0, -1, x->f_rayonInt+(j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2, deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize), deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize) );
                                 }
-                                */
                             }
                             else {
                                 if (x->f_fill_direction == 0) { // inside
@@ -804,30 +762,11 @@ void draw_skelton(t_meter *x,  t_object *view, t_rect *rect)
                     jgraphics_set_line_cap(g, (x->f_number_of_loudspeakers < 24 && (x->f_speakerWidth[i] > 14.5)) ? JGRAPHICS_LINE_CAP_ROUND : JGRAPHICS_LINE_CAP_BUTT);
                     if (x->f_number_of_loudspeakers > 1) {
                         if ( x->f_number_of_loudspeakers < 24  && (x->f_speakerWidth[i] > 14.5)) {
-                            double tmpdeg1 = 0, tmpdeg2 = 0, tmprad = 0;
-                            
-                            if (x->f_fill_direction == 0) { // inside
-                                tmpdeg1 = deg1+(0.008 * (j+4) * x->f_metersize);
-                                tmpdeg2 = deg2-(0.008 * (j+4) * x->f_metersize);
-                                tmprad = x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2;
-                            } else { // outside
-                                tmpdeg1 = deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                tmpdeg2 = deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize);
-                                tmprad = x->f_rayonInt+(j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2;
-                            }
-                            if (tmpdeg1 < tmpdeg2)  jgraphics_arc(g, 0, 0, tmprad,  tmpdeg1, tmpdeg2);
-                            else
-                            {
-                                jgraphics_arc(g, 0, 0, tmprad, tmpdeg2, tmpdeg1);
-                                //jgraphics_arc_negative(g, 0, 0, tmprad, tmpdeg1, tmpdeg2);
-                            }
-                            /*
                             if (x->f_fill_direction == 0) { // inside
                                 jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2, deg1+(0.008 * (j+4) * x->f_metersize), deg2-(0.008 * (j+4) * x->f_metersize) );
                             } else { // outside
                                 jgraphics_arc(g, 0, 0, x->f_rayonInt+(j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2, deg1+(0.008 * (x->f_numleds+3-(j)) * x->f_metersize), deg2-(0.008 * (x->f_numleds+3-(j)) * x->f_metersize) );
                             }
-                            */
                         }
                         else {
                             if (x->f_fill_direction == 0) { // inside
@@ -977,26 +916,11 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
 						jgraphics_set_line_width(g, ledStroke);
 						
 						if (nLoudSpeak > 1) {
-							if ( nLoudSpeak < 24 && (x->f_speakerWidth[i] > 14.5 ))
-                            {
-                                double tmpdeg1 = 0, tmpdeg2 = 0, tmprad = 0;
-                                
+							if ( nLoudSpeak < 24 && (x->f_speakerWidth[i] > 14.5)) {
                                 if (x->f_fill_direction == 0) { // inside
-                                    tmpdeg1 = deg1+(0.01 * (j+4) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.01 * (j+4) * x->f_metersize);
-                                    tmprad = x->f_rayonExt - (j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2;
+                                    jgraphics_arc(g, 0, 0, x->f_rayonExt-(j*ledOffset) - ledMargin*2 - x->f_strokeWidth*2,  deg1+(0.01 * (j+4) * x->f_metersize), deg2-(0.01 * (j+4) * x->f_metersize));
                                 } else { // outside
-                                    tmpdeg1 = deg1+(0.01 * (nbLed+3-(j)) * x->f_metersize);
-                                    tmpdeg2 = deg2-(0.01 * (nbLed+3-(j)) * x->f_metersize);
-                                    tmprad = x->f_rayonInt + (j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2;
-                                }
-                                if (tmpdeg1 < tmpdeg2)  jgraphics_arc(g, 0, 0, tmprad,  tmpdeg1, tmpdeg2);
-                                else
-                                {
-                                    jgraphics_arc(g, 0, 0, tmprad, tmpdeg2, tmpdeg1);
-                                    //jgraphics_arc(g, 0, tmprad, x->f_strokeWidth*2, 0, CICM_2PI);
-                                    //jgraphics_fill(g);
-                                    //jgraphics_arc_negative(g, 0, 0, tmprad, tmpdeg1, tmpdeg2);
+                                    jgraphics_arc(g, 0, 0, x->f_rayonInt + (j*ledOffset) + ledMargin*2 + x->f_strokeWidth*2,  deg1+(0.01 * (nbLed+3-(j)) * x->f_metersize), deg2-(0.01 * (nbLed+3-(j)) * x->f_metersize));
                                 }
 							}
 							else {
@@ -1029,27 +953,14 @@ void draw_meter(t_meter *x, t_object *view, t_rect *rect)
                 jgraphics_set_line_width(g, ledStroke);
                 
                 if (nLoudSpeak > 1) {
-                    
-                    if ( nLoudSpeak < 24 && (x->f_speakerWidth[i] > 14.5 ))
-                    {
-                        double tmpdeg1 = 0, tmpdeg2 = 0, tmprad = 0;
-                        
+                    if ( nLoudSpeak < 24  && (x->f_speakerWidth[i] > 14.5)) {
                         if (x->f_fill_direction == 0) { // inside
-                            tmpdeg1 = deg1+(0.01 * (nbLed+1) * x->f_metersize);
-                            tmpdeg2 = deg2-(0.01 * (nbLed+1) * x->f_metersize);
-                            tmprad = x->f_rayonInt + ledMargin*2 + x->f_strokeWidth;
+                            jgraphics_arc(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth,  deg1+(0.01 * (nbLed+1) * x->f_metersize), deg2-(0.01 * (nbLed+1) * x->f_metersize));
                         } else { // outside
-                            tmpdeg1 = deg1+(0.008 * 3 * x->f_metersize);
-                            tmpdeg2 = deg2-(0.008 * 3 * x->f_metersize);
-                            tmprad = x->f_rayonExt - ledMargin*2 - x->f_strokeWidth;
+                            jgraphics_arc(g, 0, 0, x->f_rayonExt - ledMargin*2 - x->f_strokeWidth,  deg1+(0.008 * 3 * x->f_metersize), deg2-(0.008 * 3 * x->f_metersize));
                         }
-                        
-                        if (tmpdeg1 < tmpdeg2)  jgraphics_arc(g, 0, 0, tmprad,  tmpdeg1, tmpdeg2);
-                        else jgraphics_arc_negative(g, 0, 0, tmprad,  tmpdeg1, tmpdeg2);
                     }
-                    
-                    else
-                    {
+                    else {
                         if (x->f_fill_direction == 0) { // inside
                             jgraphics_arc_negative(g, 0, 0, x->f_rayonInt + ledMargin*2 + x->f_strokeWidth, deg2, deg1);
                         } else { // outside

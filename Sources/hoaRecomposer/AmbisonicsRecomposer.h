@@ -29,6 +29,7 @@
 #include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaEncoder/AmbisonicsEncoder.h"
 #include "../HoaWider/AmbisonicsWider.h"
+#include "../CicmLibrary/CicmLines/CicmLine.h"
 
 enum
 {

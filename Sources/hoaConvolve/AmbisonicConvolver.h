@@ -27,7 +27,7 @@
 #define DEF_AMBISONICCONVOLUTION
 
 #include "../hoaAmbisonics/Ambisonics.h"
-#include "../CicmLibrary/CicmLine.h"
+#include "../CicmLibrary/CicmLines/CicmLine.h"
 #include "../CicmLibrary/CicmFilters/CicmFilterConvolutionZero.h"
 
 class AmbisonicConvolver : public Ambisonics

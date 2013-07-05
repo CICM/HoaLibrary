@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0AA3B5178700C000876AFC /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AA3B1178700C000876AFC /* CicmLine.cpp */; };
+		2C0AA3B6178700C000876AFC /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0AA3B2178700C000876AFC /* CicmLine.h */; };
+		2C0AA3B7178700C000876AFC /* CicmLine2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AA3B3178700C000876AFC /* CicmLine2.cpp */; };
+		2C0AA3B8178700C000876AFC /* CicmLine2.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C0AA3B4178700C000876AFC /* CicmLine2.h */; };
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
 		8F30D6B0172FA02D00257D26 /* cicm.delay~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D6AF172FA02D00257D26 /* cicm.delay~.cpp */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
@@ -40,10 +44,6 @@
 		8FE205B71785DADC001ACF8F /* CicmOnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE2058F1785DADC001ACF8F /* CicmOnePole.cpp */; };
 		8FE205B81785DADC001ACF8F /* CicmOnePole.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE205901785DADC001ACF8F /* CicmOnePole.h */; };
 		8FE205B91785DADC001ACF8F /* CicmLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE205911785DADC001ACF8F /* CicmLibrary.h */; };
-		8FE205BA1785DADC001ACF8F /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE205921785DADC001ACF8F /* CicmLine.cpp */; };
-		8FE205BB1785DADC001ACF8F /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE205931785DADC001ACF8F /* CicmLine.h */; };
-		8FE205BC1785DADC001ACF8F /* CicmLine2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE205941785DADC001ACF8F /* CicmLine2.cpp */; };
-		8FE205BD1785DADC001ACF8F /* CicmLine2.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE205951785DADC001ACF8F /* CicmLine2.h */; };
 		8FE205BE1785DADC001ACF8F /* CicmFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE205971785DADC001ACF8F /* CicmFreeverb.cpp */; };
 		8FE205BF1785DADC001ACF8F /* CicmFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FE205981785DADC001ACF8F /* CicmFreeverb.h */; };
 		8FE205C01785DADC001ACF8F /* CicmGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FE205991785DADC001ACF8F /* CicmGigaverb.cpp */; };
@@ -53,6 +53,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C0AA3B1178700C000876AFC /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
+		2C0AA3B2178700C000876AFC /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
+		2C0AA3B3178700C000876AFC /* CicmLine2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine2.cpp; sourceTree = "<group>"; };
+		2C0AA3B4178700C000876AFC /* CicmLine2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine2.h; sourceTree = "<group>"; };
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* cicm.delay~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cicm.delay~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F30D6AF172FA02D00257D26 /* cicm.delay~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "cicm.delay~.cpp"; sourceTree = "<group>"; };
@@ -87,10 +91,6 @@
 		8FE2058F1785DADC001ACF8F /* CicmOnePole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmOnePole.cpp; sourceTree = "<group>"; };
 		8FE205901785DADC001ACF8F /* CicmOnePole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmOnePole.h; sourceTree = "<group>"; };
 		8FE205911785DADC001ACF8F /* CicmLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLibrary.h; sourceTree = "<group>"; };
-		8FE205921785DADC001ACF8F /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
-		8FE205931785DADC001ACF8F /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
-		8FE205941785DADC001ACF8F /* CicmLine2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine2.cpp; sourceTree = "<group>"; };
-		8FE205951785DADC001ACF8F /* CicmLine2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine2.h; sourceTree = "<group>"; };
 		8FE205971785DADC001ACF8F /* CicmFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFreeverb.cpp; sourceTree = "<group>"; };
 		8FE205981785DADC001ACF8F /* CicmFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFreeverb.h; sourceTree = "<group>"; };
 		8FE205991785DADC001ACF8F /* CicmGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmGigaverb.cpp; sourceTree = "<group>"; };
@@ -133,6 +133,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2C0AA3B0178700C000876AFC /* CicmLines */ = {
+			isa = PBXGroup;
+			children = (
+				2C0AA3B1178700C000876AFC /* CicmLine.cpp */,
+				2C0AA3B2178700C000876AFC /* CicmLine.h */,
+				2C0AA3B3178700C000876AFC /* CicmLine2.cpp */,
+				2C0AA3B4178700C000876AFC /* CicmLine2.h */,
+			);
+			path = CicmLines;
+			sourceTree = "<group>";
+		};
 		8FE205721785DADC001ACF8F /* CicmLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,10 +151,7 @@
 				8FE205741785DADC001ACF8F /* CicmFft */,
 				8FE205771785DADC001ACF8F /* CicmFilters */,
 				8FE205911785DADC001ACF8F /* CicmLibrary.h */,
-				8FE205921785DADC001ACF8F /* CicmLine.cpp */,
-				8FE205931785DADC001ACF8F /* CicmLine.h */,
-				8FE205941785DADC001ACF8F /* CicmLine2.cpp */,
-				8FE205951785DADC001ACF8F /* CicmLine2.h */,
+				2C0AA3B0178700C000876AFC /* CicmLines */,
 				8FE205961785DADC001ACF8F /* CicmReverb */,
 				8FE2059C1785DADC001ACF8F /* CicmTools.h */,
 			);
@@ -227,12 +235,12 @@
 				8FE205B61785DADC001ACF8F /* CicmFilterOnePole.h in Headers */,
 				8FE205B81785DADC001ACF8F /* CicmOnePole.h in Headers */,
 				8FE205B91785DADC001ACF8F /* CicmLibrary.h in Headers */,
-				8FE205BB1785DADC001ACF8F /* CicmLine.h in Headers */,
-				8FE205BD1785DADC001ACF8F /* CicmLine2.h in Headers */,
 				8FE205BF1785DADC001ACF8F /* CicmFreeverb.h in Headers */,
 				8FE205C11785DADC001ACF8F /* CicmGigaverb.h in Headers */,
 				8FE205C21785DADC001ACF8F /* CicmTuning.h in Headers */,
 				8FE205C31785DADC001ACF8F /* CicmTools.h in Headers */,
+				2C0AA3B6178700C000876AFC /* CicmLine.h in Headers */,
+				2C0AA3B8178700C000876AFC /* CicmLine2.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,10 +333,10 @@
 				8FE205B31785DADC001ACF8F /* CicmFilterFixedDelay.cpp in Sources */,
 				8FE205B51785DADC001ACF8F /* CicmFilterOnePole.cpp in Sources */,
 				8FE205B71785DADC001ACF8F /* CicmOnePole.cpp in Sources */,
-				8FE205BA1785DADC001ACF8F /* CicmLine.cpp in Sources */,
-				8FE205BC1785DADC001ACF8F /* CicmLine2.cpp in Sources */,
 				8FE205BE1785DADC001ACF8F /* CicmFreeverb.cpp in Sources */,
 				8FE205C01785DADC001ACF8F /* CicmGigaverb.cpp in Sources */,
+				2C0AA3B5178700C000876AFC /* CicmLine.cpp in Sources */,
+				2C0AA3B7178700C000876AFC /* CicmLine2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

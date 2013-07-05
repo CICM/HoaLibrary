@@ -28,7 +28,7 @@
 
 #include "../CicmLibrary/CicmDefine.h"
 #include "../CicmLibrary/CicmTools.h"
-#include "../CicmLibrary/CicmLine.h"
+#include "../CicmLibrary/CicmLines/CicmLine.h"
 
 class Planewaves
 {
