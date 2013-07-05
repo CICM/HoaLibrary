@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8F24A1AC1785BADF00734954 /* hoa.meter~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F24A1AB1785BADF00734954 /* hoa.meter~.cpp */; };
+		8F24A1AC1785BADF00734954 /* hoa.spectrum~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F24A1AB1785BADF00734954 /* hoa.spectrum~.cpp */; };
 		8F43576C17646ADC00FFA649 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F43576B17646ADC00FFA649 /* Accelerate.framework */; };
 		8F43576E17646AEF00FFA649 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F43576D17646AEF00FFA649 /* MaxAudioAPI.framework */; };
 		8FBCEABB177EF7190066B3BF /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FBCEA40177EF7190066B3BF /* CicmDefine.h */; };
@@ -115,7 +115,7 @@
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		22CF119D0EE9A82E0054F513 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = SOURCE_ROOT; };
 		2FBBEAE508F335360078DB84 /* hoa.spectrum~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.spectrum~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F24A1AB1785BADF00734954 /* hoa.meter~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.meter~.cpp"; sourceTree = "<group>"; };
+		8F24A1AB1785BADF00734954 /* hoa.spectrum~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.spectrum~.cpp"; sourceTree = "<group>"; };
 		8F43576B17646ADC00FFA649 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F43576D17646AEF00FFA649 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8FBCEA40177EF7190066B3BF /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
@@ -238,7 +238,7 @@
 				8F43576D17646AEF00FFA649 /* MaxAudioAPI.framework */,
 				8F43576B17646ADC00FFA649 /* Accelerate.framework */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
-				8F24A1AB1785BADF00734954 /* hoa.meter~.cpp */,
+				8F24A1AB1785BADF00734954 /* hoa.spectrum~.cpp */,
 				8FBCEA3E177EF7190066B3BF /* Sources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
@@ -752,7 +752,7 @@
 				8FBCEB18177EF7190066B3BF /* AmbisonicStars.cpp in Sources */,
 				8FBCEB1A177EF7190066B3BF /* AmbisonicsVector.cpp in Sources */,
 				8FBCEB1C177EF7190066B3BF /* AmbisonicsWider.cpp in Sources */,
-				8F24A1AC1785BADF00734954 /* hoa.meter~.cpp in Sources */,
+				8F24A1AC1785BADF00734954 /* hoa.spectrum~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

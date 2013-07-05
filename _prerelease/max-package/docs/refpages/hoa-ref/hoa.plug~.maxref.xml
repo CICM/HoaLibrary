@@ -16,10 +16,10 @@
 	<!--METADATA-->
 	<metadatalist>
 		<metadata name="author">
-			hoa.library by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+			HoaLibrary by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
 		</metadata>
 		<metadata name="tag">
-			Ambisonic spatialization.
+			Ambisonics spatialization.
 		</metadata>
 	</metadatalist>
     
@@ -49,12 +49,12 @@
     
 	<!--ARGUMENTS-->
 	<objarglist>
-		<objarg id="0" name="ambisonic-order" type="int" optional="0">
+		<objarg id="0" name="ambisonics-order" type="int" optional="0">
 			<digest>
-				Ambisonic order.
+				Ambisonics order.
 			</digest>
 			<description>
-				Ambisonic order.
+				Sets the Ambisonics order.
 			</description>
 		</objarg>
 		<objarg id="1" name="patcher-name" type="int" optional="0">
@@ -135,13 +135,13 @@
 	</examplelist>
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.binaural~" />
 		<seealso name="hoa.connect" />
 		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />
 		<seealso name="hoa.encoder~" />
+		<seealso name="hoa.gain~" />
 		<seealso name="hoa.freeverb~" />
 		<seealso name="hoa.gigaverb~" />
 		<seealso name="hoa.map" />
@@ -153,13 +153,13 @@
         <seealso name="hoa.play~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
+        <seealso name="hoa.recomposer" />
         <seealso name="hoa.recomposer~" />
         <seealso name="hoa.record~" />
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.space" />
         <seealso name="hoa.space~" />
-        <seealso name="hoa.stereo~" />
         <seealso name="hoa.vector~" />
         <seealso name="hoa.wider~" />
 	</seealsolist>

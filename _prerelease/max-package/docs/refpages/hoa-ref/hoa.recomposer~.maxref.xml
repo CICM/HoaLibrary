@@ -16,10 +16,10 @@
 	<!--METADATA-->
 	<metadatalist>
 		<metadata name="author">
-			hoa.library by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+			HoaLibrary by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
 		</metadata>
 		<metadata name="tag">
-			Ambisonic spatialization.
+			Ambisonics spatialization.
 		</metadata>
 	</metadatalist>
     
@@ -57,12 +57,12 @@
     
 	<!--ARGUMENTS-->
 	<objarglist>
-		<objarg id="0" name="ambisonic-order" type="int" optional="0">
+		<objarg id="0" name="ambisonics-order" type="int" optional="0">
 			<digest>
-				ambisonic order
+				Ambisonics order
 			</digest>
 			<description>
-				ambisonic order
+				Sets the Ambisonics order
 			</description>
 		</objarg>
 		<objarg id="1" name="loudspeaker-number" type="int" optional="0">
@@ -86,23 +86,68 @@
                 Harmonics signal inputs.
 			</description>
 		</method>
+		<method name="fisheye-factor">
+			<arglist />
+			<digest>
+				Set the FishEye Factor (0-1) (only in fisheye mode).
+			</digest>
+			<description>
+                Set the FishEye Factor (0-1) (only in fisheye mode).
+			</description>
+		</method>
+		<method name="angles">
+			<arglist />
+			<digest>
+				Set the Microphones Angles. (only in free mode).
+			</digest>
+			<description>
+                Set the Microphones Angles. (only in free mode).
+			</description>
+		</method>
+		<method name="directivities">
+			<arglist />
+			<digest>
+				Set the Microphones Directivities. (only in free mode)
+			</digest>
+			<description>
+                Set the Microphones Directivities. (only in free mode)
+			</description>
+		</method>
 	</methodlist>
     
 	<!--ATTRIBUTES-->
-	<attributelist />
+	<attributelist>
+		<attribute name="mode" type="int" size="1">
+			<digest>
+				Set the Mode (0 = fixe, 1 = fisheye, 2 = free).
+			</digest>
+			<description>
+				Set the Mode (0 = fixe, 1 = fisheye, 2 = free).
+            </description>
+		</attribute>
+		<attribute name="ramp" type="float" size="1">
+			<digest>
+				Set the Ramp Time (ms) (only for free mode).
+			</digest>
+			<description>
+				Set the Ramp Time (ms) (only for free mode).
+            </description>
+		</attribute>
+	</attributelist>
+
 	<!--EXAMPLE-->
 	<examplelist>
 		<example img="" />
 	</examplelist>
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.binaural~" />
 		<seealso name="hoa.connect" />
 		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />
 		<seealso name="hoa.encoder~" />
+		<seealso name="hoa.gain~" />
 		<seealso name="hoa.freeverb~" />
 		<seealso name="hoa.gigaverb~" />
 		<seealso name="hoa.map" />
@@ -114,13 +159,13 @@
         <seealso name="hoa.play~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
+        <seealso name="hoa.recomposer" />
         <seealso name="hoa.recomposer~" />
         <seealso name="hoa.record~" />
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.space" />
         <seealso name="hoa.space~" />
-        <seealso name="hoa.stereo~" />
         <seealso name="hoa.vector~" />
         <seealso name="hoa.wider~" />
 	</seealsolist>

@@ -36,7 +36,8 @@ AmbisonicsSpectrum::AmbisonicsSpectrum(long aNumberOfLoudspeakers, long aNumberO
     m_ordinate = NULL;
     m_temp_amplitude_value = NULL;
     m_loudspeakers_values = NULL;
-    m_vector = new AmbisonicsVector(m_number_of_loudspeakers, m_vector_size, m_sampling_rate);
+    //m_vector = new AmbisonicsVector(m_number_of_loudspeakers, m_vector_size, m_sampling_rate);
+    m_vector = new AmbisonicsVector(m_number_of_loudspeakers, Hoa_Cartesian, m_vector_size);
     setNumberOfBands(aNumberOfBands);
 }
 

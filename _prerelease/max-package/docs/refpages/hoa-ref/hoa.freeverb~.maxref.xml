@@ -16,7 +16,7 @@
 	<!--METADATA-->
 	<metadatalist>
 		<metadata name="author">
-			hoa.library by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+			HoaLibrary by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
 		</metadata>
 		<metadata name="tag">
 			Ambisonics spatialization.
@@ -49,12 +49,12 @@
     
 	<!--ARGUMENTS-->
 	<objarglist>
-		<objarg name="ambisonic-order" type="int" optional="0">
+		<objarg name="ambisonics-order" type="int" optional="0">
 			<digest>
-				ambisonic order.
+				Ambisonics order.
 			</digest>
 			<description>
-				Set the ambisonic order.
+				Sets the ambisonics order.
 			</description>
 		</objarg>
 	</objarglist>
@@ -90,20 +90,20 @@
 				Set the Damping Value (0-1).
 			</description>
 		</attribute>
-		<attribute name="wet" get="1" set="1" type="float" size="1">
-			<digest>
-				Wet Value.
-			</digest>
-			<description>
-				Set the Wet Value (0-1).
-			</description>
-		</attribute>
 		<attribute name="dry" get="1" set="1" type="float" size="1">
 			<digest>
 				Dry Value.
 			</digest>
 			<description>
 				Set the Dry Value (0-1).
+			</description>
+		</attribute>
+		<attribute name="wet" get="1" set="1" type="float" size="1">
+			<digest>
+				Wet Value.
+			</digest>
+			<description>
+				Set the Wet Value (0-1).
 			</description>
 		</attribute>
 		<attribute name="freeze" get="1" set="1" type="int" size="1">
@@ -114,6 +114,22 @@
 				1 Freeze, 0 unFreeze the Reverberation.
 			</description>
 		</attribute>
+		<attribute name="fspread" get="1" set="1" type="float" size="1">
+			<digest>
+				First spread (0-1).
+			</digest>
+			<description>
+				Set the First spread factor (0-1).
+			</description>
+		</attribute>
+		<attribute name="lspread" get="1" set="1" type="float" size="1">
+			<digest>
+				Late spread (0-1).
+			</digest>
+			<description>
+				Set the Late spread factor (0-1).
+			</description>
+		</attribute>
 	</attributelist>
 	<!--EXAMPLE-->
 	<examplelist>
@@ -121,13 +137,13 @@
 	</examplelist>
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.binaural~" />
 		<seealso name="hoa.connect" />
 		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />
 		<seealso name="hoa.encoder~" />
+		<seealso name="hoa.gain~" />
 		<seealso name="hoa.freeverb~" />
 		<seealso name="hoa.gigaverb~" />
 		<seealso name="hoa.map" />
@@ -139,13 +155,13 @@
         <seealso name="hoa.play~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
+        <seealso name="hoa.recomposer" />
         <seealso name="hoa.recomposer~" />
         <seealso name="hoa.record~" />
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.space" />
         <seealso name="hoa.space~" />
-        <seealso name="hoa.stereo~" />
         <seealso name="hoa.vector~" />
         <seealso name="hoa.wider~" />
 	</seealsolist>

@@ -16,10 +16,10 @@
 	<!--METADATA-->
 	<metadatalist>
 		<metadata name="author">
-			hoa.library by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+			HoaLibrary by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
 		</metadata>
 		<metadata name="tag">
-			Ambisonic spatialization.
+			Ambisonics spatialization.
 		</metadata>
 		<metadata name="tag">
 			MSP
@@ -40,7 +40,7 @@
 			</description>
 		</inlet>
 	</inletlist>
-    <palette category="Audio" action="hoa.meter~" pic="hoa.meter~.svg" />
+    <palette category="Ambisonics, Audio" action="hoa.meter~" pic="hoa.meter~.svg" />
 	<!--ARGUMENTS-->
 	<objarglist />
     
@@ -57,33 +57,11 @@
                 Audio input : from right to left (0 to n loudspeaker).
 			</description>
 		</method>
-		<method name="offset" type="float">
-			<arglist>
-				<arg name="offset" optional="0" type="float" />
-			</arglist>
-			<digest>
-				Offset of loudspeakers.
-			</digest>
-			<description>
-                Offset of loudspeakers - degree - (-180° 180°).
-			</description>
-		</method>
-		<method name="interval" type="float">
-			<arglist>
-				<arg name="refresh-interval-time" optional="0" type="float" />
-			</arglist>
-			<digest>
-				Refresh interval time (ms).
-			</digest>
-			<description>
-				Refresh interval time (ms).
-			</description>
-		</method>
 	</methodlist>
     
 	<!--ATTRIBUTES-->
 	<attributelist>
-		<attribute name="ls" type="int" size="1">
+		<attribute name="loudspeakers" type="int" size="1">
 			<digest>
 				Number of loudspeakers.
 			</digest>
@@ -91,12 +69,12 @@
 				Specify the Number of loudspeakers.
             </description>
 		</attribute>
-		<attribute name="ls_angles" type="list" size="1">
+		<attribute name="angles" type="list" size="1">
 			<digest>
 				Angles of Loudspeakers.
 			</digest>
 			<description>
-				Angles of Loudspeakers.
+				Set the Angles of Loudspeakers.
             </description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="list" size="1" value="Value" />
@@ -104,13 +82,21 @@
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 			</attributelist>
 		</attribute>
-		<attribute name="offset" type="int" size="1">
+		<attribute name="offset" type="float" size="1">
 			<digest>
 				Offset of loudspeakers.
 			</digest>
 			<description>
 				Offset of loudspeakers in degree (-180° to 180°).
             </description>
+		</attribute>
+		<attribute name="interval" type="float" size="1">
+			<digest>
+				Refresh interval time (ms).
+			</digest>
+			<description>
+				Refresh interval time (ms).
+			</description>
 		</attribute>
 		<attribute name="dbperled" get="1" set="1" type="int" size="1">
 			<digest>
@@ -127,7 +113,7 @@
 				<attribute name="save" get="1" set="1" type="int" size="1" value="1" />
 			</attributelist>
 		</attribute>
-		<attribute name="leds_bg" type="float" size="1">
+		<attribute name="leds_bg" type="int" size="1">
 			<digest>
 				Draw Leds Background.
 			</digest>
@@ -138,15 +124,48 @@
 				<attribute name="leds_bg" type="int" size="1" value="1" />
 			</attributelist>
 		</attribute>
-		<attribute name="energy" type="float" size="1">
+		<attribute name="drawvector" type="int" size="1">
 			<digest>
-				Draw Energy Vector.
+				Draw Vector (0 = none | 1 = energy | 2 = velocity | 3 = both).
 			</digest>
 			<description>
-				Draw Energy Vector.
+				Draw Vector (0 = none | 1 = energy | 2 = velocity | 3 = both).
             </description>
 			<attributelist>
-				<attribute name="energy" type="int" size="1" value="1" />
+				<attribute name="draw-type" type="int" size="1" value="1" />
+			</attributelist>
+		</attribute>
+		<attribute name="drawmborder" type="int" size="1">
+			<digest>
+				Draw Meter Borders (0 = none | 1 = Circles | 2 = Axes | 3 = both).
+			</digest>
+			<description>
+				Draw Meter Borders (0 = none | 1 = Circles | 2 = Axes | 3 = both).
+            </description>
+			<attributelist>
+				<attribute name="draw-type" type="int" size="1" value="1" />
+			</attributelist>
+		</attribute>
+		<attribute name="orientation" type="int" size="1">
+			<digest>
+				Meter Fill Orientation (0 = inside | 1 = outside).
+			</digest>
+			<description>
+				Meter Fill Orientation (0 = inside | 1 = outside).
+            </description>
+			<attributelist>
+				<attribute name="orientation" type="int" size="1" value="1" />
+			</attributelist>
+		</attribute>
+		<attribute name="rotation" type="int" size="1">
+			<digest>
+				Rotation of Loudspeakers (0 = clockwise | 1 = anti-clockwise).
+			</digest>
+			<description>
+				Rotation of Loudspeakers (0 = clockwise | 1 = anti-clockwise).
+            </description>
+			<attributelist>
+				<attribute name="rotation" type="int" size="1" value="1" />
 			</attributelist>
 		</attribute>
 		<attribute name="metersize" type="float" size="1">
@@ -317,13 +336,13 @@
 	</examplelist>
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.binaural~" />
 		<seealso name="hoa.connect" />
 		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />
 		<seealso name="hoa.encoder~" />
+		<seealso name="hoa.gain~" />
 		<seealso name="hoa.freeverb~" />
 		<seealso name="hoa.gigaverb~" />
 		<seealso name="hoa.map" />
@@ -335,13 +354,13 @@
         <seealso name="hoa.play~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
+        <seealso name="hoa.recomposer" />
         <seealso name="hoa.recomposer~" />
         <seealso name="hoa.record~" />
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.space" />
         <seealso name="hoa.space~" />
-        <seealso name="hoa.stereo~" />
         <seealso name="hoa.vector~" />
         <seealso name="hoa.wider~" />
 	</seealsolist>

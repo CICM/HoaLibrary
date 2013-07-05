@@ -41,7 +41,7 @@ public:
     void setMode(bool aMode);
     
 	~AmbisonicsVector();
-	
+    
 	/* Perform sample by sample */
 	inline void process(double* anInput, double *anOutput)
 	{

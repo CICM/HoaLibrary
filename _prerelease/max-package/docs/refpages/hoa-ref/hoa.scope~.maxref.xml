@@ -11,15 +11,15 @@
 		<o>
 			hoa.scope~
 		</o>
-        displays the harmonics of an ambisonic soundfield on a circle. The number of harmonics is defined at the object creation with the attribute @order and create (order * 2 + 1) inputs (ex : type hoa.scope~ @order 7).
+        displays the harmonics of an ambisonic soundfield on a angles. The number of harmonics is defined at the object creation with the attribute @order and create (order * 2 + 1) inputs (ex : type hoa.scope~ @order 7).
 	</description>
 	<!--METADATA-->
 	<metadatalist>
 		<metadata name="author">
-			hoa.library by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+			HoaLibrary by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
 		</metadata>
 		<metadata name="tag">
-			Ambisonic spatialization.
+			Ambisonics spatialization.
 		</metadata>
 	</metadatalist>
     
@@ -36,6 +36,8 @@
 	</inletlist>
     
 	<!--OUTLETS-->
+
+	<palette category="ambisonics" action="hoa.scope~" pic="hoa.scope~.svg" />
     
 	<!--ARGUMENTS-->
 	<objarglist>
@@ -52,26 +54,74 @@
 				harmonics signals inputs.
 			</description>
 		</method>
-		<method name="interval" type="int" size="1">
-			<arglist />
-			<digest>
-				Refresh Interval time (ms).
-			</digest>
-			<description>
-				Refresh Interval time (ms).
-			</description>
-		</method>
 	</methodlist>
     
 	<!--ATTRIBUTES-->
 	<attributelist>
 		<attribute name="order" type="int" size="1">
 			<digest>
-				Harmonics number.
+				Ambisonics order.
 			</digest>
 			<description>
-				Harmonics number.
+				Sets the Ambisonics order.
             </description>
+		</attribute>
+		<attribute name="drawcircle" type="int" size="1">
+			<digest>
+				Draw Circle.
+			</digest>
+			<description>
+				Draw Circle.
+            </description>
+		</attribute>
+		<attribute name="drawangles" type="int" size="1">
+			<digest>
+				Draw Angles.
+			</digest>
+			<description>
+				Draw Angles.
+            </description>
+		</attribute>
+		<attribute name="drawcontrib" type="int" size="1">
+			<digest>
+				Draw Contributions.
+			</digest>
+			<description>
+				Draw Contributions.
+            </description>
+		</attribute>
+		<attribute name="gain" type="float" size="1">
+			<digest>
+				Gain Factor.
+			</digest>
+			<description>
+				Set the Gain Factor.
+            </description>
+		</attribute>
+		<attribute name="mode" type="int" size="1">
+			<digest>
+				Process Mode (0 = Peak | 1 = Average).
+			</digest>
+			<description>
+				Set Process Mode (0 = Peak | 1 = Average).
+            </description>
+		</attribute>
+		<attribute name="bufsize" type="int" size="1">
+			<digest>
+				Buffer Size (in Samps). (only in Average Mode).
+			</digest>
+			<description>
+				Buffer Size (in Samps). (only in Average Mode).
+            </description>
+		</attribute>
+		<attribute name="interval" type="int" size="1">
+			<arglist />
+			<digest>
+				Refresh Interval Time (ms).
+			</digest>
+			<description>
+				Refresh Interval Time (ms).
+			</description>
 		</attribute>
 		<attribute name="bgcolor">
 			<digest>
@@ -136,13 +186,13 @@
 	</examplelist>
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.binaural~" />
 		<seealso name="hoa.connect" />
 		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />
 		<seealso name="hoa.encoder~" />
+		<seealso name="hoa.gain~" />
 		<seealso name="hoa.freeverb~" />
 		<seealso name="hoa.gigaverb~" />
 		<seealso name="hoa.map" />
@@ -154,13 +204,13 @@
         <seealso name="hoa.play~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
+        <seealso name="hoa.recomposer" />
         <seealso name="hoa.recomposer~" />
         <seealso name="hoa.record~" />
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.space" />
         <seealso name="hoa.space~" />
-        <seealso name="hoa.stereo~" />
         <seealso name="hoa.vector~" />
         <seealso name="hoa.wider~" />
 	</seealsolist>

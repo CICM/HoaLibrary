@@ -129,7 +129,7 @@
   },
 
   "hoa.decoder~": {
-    "digest": "An ambisonic decoder",
+    "digest": "An ambisonics decoder",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -137,7 +137,7 @@
   },
 
   "hoa.encoder~": {
-    "digest": "An ambisonic Encoder",
+    "digest": "An ambisonics Encoder",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -154,6 +154,14 @@
 
   "hoa.gigaverb~": {
     "digest": "An ambisonics Gigaverb",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.map~": {
+    "digest": "An ambisonics multisource spatializer",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -225,6 +233,14 @@
 
   "hoa.rotate~": {
     "digest": "An ambisonic soundfield rotation external",
+    "module": "msp",
+    "category": [
+      "High Order Ambisonics Library"
+    ]
+  },
+
+  "hoa.space~": {
+    "digest": "A planewave soundfield gain",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"

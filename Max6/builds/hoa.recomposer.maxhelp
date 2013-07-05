@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1059.0, 690.0 ],
+		"rect" : [ 2.0, 54.0, 1014.0, 696.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1059.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -269,7 +269,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1059.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -588,8 +588,13 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 15,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 277.0, 260.0, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : 0,
+										"ramp" : 20.0
+									}
+,
 									"text" : "hoa.recomposer~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -972,7 +977,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 242.5, 260.0, 19.0 ],
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
@@ -1863,7 +1868,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1059.0, 664.0 ],
+						"rect" : [ 2.0, 80.0, 1014.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5259,7 +5264,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 644.75, 273.5, 219.785767, 31.0 ],
+									"patching_rect" : [ 644.75, 273.5, 221.0, 31.0 ],
 									"text" : "angles 0. 0.785398 1.570796 2.356194 3.141593 3.926991 4.712389 5.497787"
 								}
 
@@ -5438,7 +5443,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 852.535767, 119.0, 130.285767, 33.0 ],
+									"patching_rect" : [ 852.535767, 119.0, 132.0, 33.0 ],
 									"text" : "int + float list => index, directivity value",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[7]"
@@ -6128,8 +6133,13 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 15,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 374.5, 260.0, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : 0,
+										"ramp" : 20.0
+									}
+,
 									"text" : "hoa.recomposer~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -6444,7 +6454,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 320.0, 260.0, 19.0 ],
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
@@ -7780,7 +7790,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1059.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7897,7 +7907,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 44.0, 591.0, 232.0, 31.0 ],
-									"text" : "-0.75175 0.033648 0.819046 1.604445 2.39 -3.107944 -2.322546 -1.537148"
+									"text" : "-0.75175 0.033648 0.819047 1.604445 2.39 -3.107944 -2.322546 -1.537148"
 								}
 
 							}
@@ -8137,7 +8147,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u157000410"
+									"varname" : "u820004550"
 								}
 
 							}
@@ -8365,7 +8375,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1059.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -8782,8 +8792,13 @@
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 15,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 277.0, 260.0, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : 0,
+										"ramp" : 20.0
+									}
+,
 									"text" : "hoa.recomposer~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -9142,7 +9157,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 15,
 									"numoutlets" : 16,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 242.5, 260.0, 19.0 ],
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
@@ -10112,7 +10127,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1059.0, 664.0 ],
+						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -10205,6 +10220,10 @@
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "hoa.projector~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "hoa.decoder~.mxo",
 				"type" : "iLaX"
 			}
@@ -10218,6 +10237,10 @@
 			}
 , 			{
 				"name" : "hoa.connect.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.recomposer~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

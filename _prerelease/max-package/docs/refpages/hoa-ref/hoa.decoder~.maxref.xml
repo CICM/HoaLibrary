@@ -11,15 +11,15 @@
 		<o>
 			hoa.decoder~ 
 		</o>
-        decodes an ambisonic soundfield for a given number of loudspeakers.
+        decodes an ambisonics soundfield for a given number of loudspeakers or configurations (eg. ambisonics | binaural | 5.1 | stereo..).
 	</description>
 	<!--METADATA-->
 	<metadatalist>
 		<metadata name="author">
-			hoa.library by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
+			HoaLibrary by Julien Colafrancesco, Pierre Guillot, Eliott Paris.
 		</metadata>
 		<metadata name="tag">
-			Ambisonic spatialization.
+			Ambisonics spatialization.
 		</metadata>
 	</metadatalist>
     
@@ -49,21 +49,12 @@
     
 	<!--ARGUMENTS-->
 	<objarglist>
-		<objarg id="0" name="ambisonic-order" type="int" optional="0">
+		<objarg id="0" name="ambisonics-order" type="int" optional="0">
 			<digest>
 				Ambisonics order.
 			</digest>
 			<description>
 				Ambisonics order.
-			</description>
-		</objarg>
-		<objarg id="1" name="loudspeaker-number" type="int" optional="0">
-			<digest>
-				number of loudspeakers.
-			</digest>
-			<description>
-				Number of loudspeakers.
-				must be equal or superior to the number of harmonics (2 * ambisonic-order + 1).
 			</description>
 		</objarg>
 	</objarglist>
@@ -82,20 +73,82 @@
 	</methodlist>
     
 	<!--ATTRIBUTES-->
-	<attributelist />
+	<!--ATTRIBUTES-->
+	<attributelist>
+		<attribute name="mode" get="1" set="1" type="symbol" size="1">
+			<digest>
+				Decoding mode (ambisonis | binaural | irregular).
+			</digest>
+			<description>
+				Set the Decoding mode (ambisonics | binaural | irregular) : <br/>
+					- ambisonics for a regular loudspeakers repartition over a circular array. <br/>
+					- binaural for headphones. <br/>
+					- irregular for an irregular loudspeakers repartition over a circular array (eg. 5.1, stereo...). FYI : irregular decoding degrades the soundfield restitution compared to ambisonics decoding. The soundfield energy is no more homogeneous all over the circle. <br/>
+				The default mode is ambisonics for an array of 2 * order + 2 loudspeakers.
+			</description>
+		</attribute>
+		<attribute name="loudspeakers" get="1" set="1" type="int" size="1">
+			<digest>
+				Number of Loudspeakers.
+			</digest>
+			<description>
+				Set The number of Loudspeakers. <br/>
+				 	- In ambisonics mode the number of Loudspeakers must be at least equal to (2 * order) + 1 . <br/>
+				 	- In binaural mode the number of Loudspeakers is automatically fixed at 2 . <br/>
+				 	- In irregular mode the number of Loudspeakers can be set to 1. (mono), 2. (stereo), 3. (Dolby surround), 4. (Quadriphonie), 5.1, 6.1, 7.1., 8., .. <br/>
+				The default mode is ambisonics for an array of 2 * order + 2 loudspeakers.
+			</description>
+		</attribute>
+		<attribute name="pinnaesize" get="1" set="1" type="symbol" size="1">
+			<digest>
+				Set the Pinnae Size. (small | large). (only for binaural mode).
+			</digest>
+			<description>
+				Set the Pinnae Size. (small | large). (only for binaural mode).<br/>
+				The default binaural pinnasize is small.
+			</description>
+		</attribute>
+		<attribute name="angles" get="1" set="1" type="float [varsize]" size="1">
+			<digest>
+				Set the Angles of Loudspeakers. (only for irregular mode).
+			</digest>
+			<description>
+				Set the Angles of Loudspeakers. (only for irregular mode).
+			</description>
+		</attribute>
+		<attribute name="restitution" get="1" set="1" type="symbol" size="1">
+			<digest>
+				Set the Restitution Mode (panning | projection). (only for irregular mode).
+			</digest>
+			<description>
+				Set the Restitution Mode (panning | projection). (only for irregular mode). <br/>
+				The optimization can be done by amplitude panning (panning - default) or by virtualizing low directivity microphones (projection). The efficiency of the process depends of the configuration. Generally, you should use panning optimization when loudspeakers are not equally display over the circle and projection in the other case.
+			</description>
+		</attribute>
+		<attribute name="autoconnect" get="1" set="1" type="int" size="1">
+			<digest>
+				Turn on/off the autoconnect mode.
+			</digest>
+			<description>
+				Turn on/off the autoconnect mode. <br/>
+				When the autoconnect mode is set to 1, and you change dynamically the number of loudspeakers or the loudspeakers angles, a message will automatically be sent to the <o>hoa.meter~</o>, <o>hoa.gain~</o> and <o>hoa.dac~</o> objects to adapt their behaviors and reconnect them together for you.
+			</description>
+		</attribute>
+	</attributelist>
+
 	<!--EXAMPLE-->
 	<examplelist>
 		<example img="" />
 	</examplelist>
 	<!--SEEALSO-->
 	<seealsolist>
-		<seealso name="hoa.binaural~" />
 		<seealso name="hoa.connect" />
 		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />
 		<seealso name="hoa.encoder~" />
+		<seealso name="hoa.gain~" />
 		<seealso name="hoa.freeverb~" />
 		<seealso name="hoa.gigaverb~" />
 		<seealso name="hoa.map" />
@@ -107,13 +160,13 @@
         <seealso name="hoa.play~" />
         <seealso name="hoa.plug~" />
         <seealso name="hoa.projector~" />
+        <seealso name="hoa.recomposer" />
         <seealso name="hoa.recomposer~" />
         <seealso name="hoa.record~" />
         <seealso name="hoa.rotate~" />
         <seealso name="hoa.scope~" />
         <seealso name="hoa.space" />
         <seealso name="hoa.space~" />
-        <seealso name="hoa.stereo~" />
         <seealso name="hoa.vector~" />
         <seealso name="hoa.wider~" />
 	</seealsolist>
