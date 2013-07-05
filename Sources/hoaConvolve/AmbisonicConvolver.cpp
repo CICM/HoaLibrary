@@ -36,8 +36,8 @@ AmbisonicConvolver::AmbisonicConvolver(long anOrder, long aSamplingFrequency, lo
     }
 	m_wet_vector = new double[1];
     m_dry_vector = new double[1];
-    m_wet_line = new CicmLine();
-    m_dry_line = new CicmLine();
+    m_wet_line = new CicmLine(50.);
+    m_dry_line = new CicmLine(50.);
     m_wet_line->setCoefficientDirect(1.);
     m_dry_line->setCoefficientDirect(0.);
 	setWetValue(1);

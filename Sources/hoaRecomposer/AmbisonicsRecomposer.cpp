@@ -34,8 +34,8 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
     {
         m_encoders.push_back(new AmbisonicsEncoder(m_order, Hoa_Basic, m_vector_size));
         m_widers.push_back(new AmbisonicsWider(m_order, m_vector_size));
-        m_lines.push_back(new CicmLine(4410, m_vector_size));
-        m_wider_lines.push_back(new CicmLine(4410, m_vector_size));
+        m_lines.push_back(new CicmLine((long)4410, m_vector_size));
+        m_wider_lines.push_back(new CicmLine((long)4410, m_vector_size));
         
         double angle = ((double)i / (double)(m_number_of_microphones)) * CICM_2PI;
         m_encoders[i]->setAzimuthBoth(angle);
@@ -176,8 +176,8 @@ void AmbisonicsRecomposer::setRamp(long aNumberOfSample)
 {
     for(int i = 0; i < m_number_of_microphones; i++)
     {
-        m_lines[i]->setRamp(aNumberOfSample);
-        m_wider_lines[i]->setRamp(aNumberOfSample);
+        m_lines[i]->setRampInSample(aNumberOfSample);
+        m_wider_lines[i]->setRampInSample(aNumberOfSample);
     }
 }
 

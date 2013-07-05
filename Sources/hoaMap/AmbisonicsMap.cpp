@@ -210,13 +210,14 @@ void AmbisonicsMap::setCoordinatesOrdinateLine(double anOrdinate)
 
 void AmbisonicsMap::setRamp(long aNumberOfSample)
 {
-    m_line_one->setRamp(aNumberOfSample);
-    m_line_two->setRamp(aNumberOfSample);
+    m_line_one->setRampInSample(aNumberOfSample);
+    m_line_two->setRampInSample(aNumberOfSample);
 }
 
 long AmbisonicsMap::getRamp()
 {
-    return m_line_one->getRamp();
+    return m_line_one->getRampInSample();
+    //return m_line_one->getRamp();
 }
 
 AmbisonicsMap::~AmbisonicsMap()
