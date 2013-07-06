@@ -29,9 +29,10 @@ enum
     Cicm_Envelope_Hanning = 1,
     Cicm_Envelope_Hamming = 2,
     Cicm_Envelope_Tukey = 3,
-    Cicm_Envelope_Cosinus = 4,
-    Cicm_Envelope_Lanczos = 5,
-    Cicm_Envelope_Triangular = 6,
+    Cicm_Envelope_Halfsinus = 4,
+    Cicm_Envelope_Sinus = 5,
+    Cicm_Envelope_Lanczos,
+    Cicm_Envelope_Triangular,
     Cicm_Envelope_Bartlett,
     Cicm_Envelope_Gaussian,
     Cicm_Envelope_BartlettHann,
@@ -61,7 +62,8 @@ public:
 	void hanning();
 	void hamming();
 	void tukey(double a0 = 0.5);
-	void cosinus();
+	void halfsinus();
+    void sinus();
 	void lanczos();
 	void triangular();
 	void bartlett();

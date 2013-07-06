@@ -23,100 +23,62 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "CicmDecorrelation.h"
+#include "CicmRingModulation.h"
 
-CicmDecorrelation::CicmDecorrelation(double aMaximumDelay, long aVectorSize, double aSamplingRate)
+CicmRingModulation::CicmRingModulation(long aVectorSize, double aSamplingRate)
 {
-    aMaximumDelay = Tools::clip_min(aMaximumDelay, 1);
     m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     
-	m_delay     = new CicmFilterDelay(aMaximumDelay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
     m_line      = new CicmLine(m_vector_size, m_sampling_rate);
-    m_envelope  = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Halfsinus);
+    m_envelope  = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Sinus);
     
-    m_line->setCoefficientDirect(0.);
-    m_line->setCoefficient(0.);
-    m_line->setRampInMs(20.);
-    
-    m_current_delay = 0;
-    m_delay_time_one = aMaximumDelay;
-    m_delay_time_two = aMaximumDelay;
-    m_new_delay      = aMaximumDelay;
-    m_max_gain = m_envelope->getValueRelative(0.5);
+    m_line->setCoefficientDirect(0.25);
+    m_line->setCoefficient(1.);
+    m_line->setRampInMs(1000.);
 }
 
-long CicmDecorrelation::getVectorSize()
+long CicmRingModulation::getVectorSize()
 {
 	return m_vector_size;
 }
 
-long CicmDecorrelation::getSamplingRate()
+long CicmRingModulation::getSamplingRate()
 {
 	return m_sampling_rate;
 }
 
-long CicmDecorrelation::getDelayTimeInSample()
+double CicmRingModulation::getFrequency()
 {
-    if(m_current_delay == 0)
-        return m_delay_time_one;
-    else
-        return m_delay_time_two;
+    return m_frequency;
 }
 
-double CicmDecorrelation::getDelayTimeInMs()
-{
-    return (double)getDelayTimeInSample() / (double)m_sampling_rate * 1000.;
-}
-
-long CicmDecorrelation::getRampInSample()
-{
-    return m_line->getRampInSample();
-}
-
-double CicmDecorrelation::getRampInMs()
-{
-    return m_line->getRampInMs();
-}
-
-void CicmDecorrelation::setVectorSize(long aVectorSize)
+void CicmRingModulation::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
     m_line->setVectorSize(m_vector_size);
-    m_delay->setVectorSize(m_vector_size);
 }
 
-void CicmDecorrelation::setSamplingRate(long aSamplingRate)
+void CicmRingModulation::setSamplingRate(long aSamplingRate)
 {
 	m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
     m_line->setSamplingRate(m_sampling_rate);
-    m_delay->setSamplingRate(m_sampling_rate);
 }
 
-void CicmDecorrelation::setDelayTimeInSample(long aDelayInSample)
+void CicmRingModulation::setFrequency(double aFrequency)
 {
-    m_new_delay = Tools::clip_min(aDelayInSample, 0);
+    m_frequency = Tools::clip_min(fabs(aFrequency), 0.);
+    m_line->setRampInMs(1. / m_frequency * 1000.);
 }
 
-void CicmDecorrelation::setDelayTimeInMs(double aDelayInMs)
+CicmRingModulation::~CicmRingModulation()
 {
-    setDelayTimeInSample(aDelayInMs * (double)m_sampling_rate / 1000.);
-}
-
-void CicmDecorrelation::setRampInSample(long aRampInSample)
-{
-    m_line->setRampInSample(aRampInSample);
-}
-
-void CicmDecorrelation::setRampInMs(double aRampInMs)
-{
-    m_line->setRampInMs(aRampInMs);
-}
-
-CicmDecorrelation::~CicmDecorrelation()
-{
-	delete m_delay;
     delete m_line;
     delete m_envelope;
 }
+
+
+
+
+
 
