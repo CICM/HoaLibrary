@@ -216,6 +216,29 @@ void CicmEnvelope::normalize()
         m_buffer[i] /= (double)m_size * CICM_2PI;
 }
 
+long CicmEnvelope::getType()
+{
+    return m_type;
+}
+
+void CicmEnvelope::write(double* aBuffer, long aSize)
+{
+    setSize(aSize);
+    m_type = Cicm_Envelope_Personnal;
+    Cicm_Vector_Double_Copy(aBuffer, m_buffer, m_size);
+    for(int i = 0; i < m_size; i++)
+        m_buffer_float[i] = m_buffer[i];    
+}
+
+void CicmEnvelope::write(float* aBuffer, long aSize)
+{
+    setSize(aSize);
+    m_type = Cicm_Envelope_Personnal;
+    Cicm_Vector_Float_Copy(aBuffer, m_buffer_float, m_size);
+    for(int i = 0; i < m_size; i++)
+        m_buffer[i] = m_buffer_float[i];
+}
+
 CicmEnvelope::~CicmEnvelope()
 {
 	Cicm_Free(m_buffer);

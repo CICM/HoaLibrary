@@ -71,7 +71,7 @@ long CicmLine::getRampInSample()
 
 double CicmLine::getRampInMs()
 {
-    return m_ramp / m_sampling_rate * 1000.;
+    return ((double)m_ramp / (double)m_sampling_rate) * 1000.;
 }
 
 void CicmLine::setRampInSample(long aTimeInSample)
@@ -81,7 +81,7 @@ void CicmLine::setRampInSample(long aTimeInSample)
 
 void CicmLine::setRampInMs(double aTimeInMs)
 {
-    setRampInSample(aTimeInMs * m_sampling_rate / 1000.);
+    setRampInSample(aTimeInMs * (double)m_sampling_rate / 1000.);
 }
 
 void CicmLine::setCoefficientDirect(double aCoefficient)

@@ -23,115 +23,97 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "CicmQSGS.h"
+#include "CicmDecorrelation.h"
 
-CicmQsgs::CicmQsgs(double aMaximumDelay, long aVectorSize, double aSamplingRate)
+CicmDecorrelation::CicmDecorrelation(double aMaximumDelay, long aVectorSize, double aSamplingRate)
 {
     aMaximumDelay = Tools::clip_min(aMaximumDelay, 1);
     m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     
-	m_delay = new CicmFilterDelay(aMaximumDelay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
-    m_line  = new CicmLine(m_vector_size, m_sampling_rate);
-    m_envelope = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Hanning);
-    m_line->setCoefficientDirect(Tools::getRandd(0., 1));
-    m_line->setCoefficient(1.);
+	m_delay     = new CicmFilterDelay(aMaximumDelay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
+    m_line      = new CicmLine(m_vector_size, m_sampling_rate);
+    m_envelope  = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Cosinus);
     
-    setGrainSize(100.);
-    setDelayTime(1000.);
-    setRarefaction(0.2);
-    setFeedback(0.8);
-    m_delay_rand = Tools::getRandf(0.f, m_delay_time);
-    m_bypass = 0.;
-    m_feedback_real = m_feedback;
+    m_line->setCoefficientDirect(0.);
+    m_line->setCoefficient(0.);
+    m_line->setRampInMs(20.);
+    
+    m_current_delay = 0;
+    m_delay_time_one = aMaximumDelay;
+    m_delay_time_two = aMaximumDelay;
+    m_new_delay      = aMaximumDelay;
+    m_max_gain = m_envelope->getValueRelative(0.5);
 }
 
-long CicmQsgs::getVectorSize()
+long CicmDecorrelation::getVectorSize()
 {
 	return m_vector_size;
 }
 
-long CicmQsgs::getSamplingRate()
+long CicmDecorrelation::getSamplingRate()
 {
 	return m_sampling_rate;
 }
 
-double CicmQsgs::getGrainSize()
+long CicmDecorrelation::getDelayTimeInSample()
 {
-    return m_grain_size;
+    if(m_current_delay == 0)
+        return m_delay_time_one;
+    else
+        return m_delay_time_two;
 }
 
-double CicmQsgs::getDelayTime()
+double CicmDecorrelation::getDelayTimeInMs()
 {
-    return m_delay_time;
+    return (double)getDelayTimeInSample() / (double)m_sampling_rate * 1000.;
 }
 
-double CicmQsgs::getFeedback()
+long CicmDecorrelation::getRampInSample()
 {
-    return m_feedback;
+    return m_line->getRampInSample();
 }
 
-double CicmQsgs::getRarefaction()
+double CicmDecorrelation::getRampInMs()
 {
-    return m_rarefaction;
+    return m_line->getRampInMs();
 }
 
-long CicmQsgs::getWidowFunction()
-{
-    return m_envelope->getType();
-}
-
-void CicmQsgs::setVectorSize(long aVectorSize)
+void CicmDecorrelation::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
     m_line->setVectorSize(m_vector_size);
     m_delay->setVectorSize(m_vector_size);
 }
 
-void CicmQsgs::setSamplingRate(long aSamplingRate)
+void CicmDecorrelation::setSamplingRate(long aSamplingRate)
 {
 	m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
     m_line->setSamplingRate(m_sampling_rate);
     m_delay->setSamplingRate(m_sampling_rate);
 }
 
-void CicmQsgs::setGrainSize(double aGrainSize)
+void CicmDecorrelation::setDelayTimeInSample(long aDelayInSample)
 {
-    m_grain_size = Tools::clip_min(aGrainSize, 0.);
+    m_new_delay = Tools::clip_min(aDelayInSample, 0);
 }
 
-void CicmQsgs::setDelayTime(double aDelayTime)
+void CicmDecorrelation::setDelayTimeInMs(double aDelayInMs)
 {
-    m_delay_time = Tools::clip(aDelayTime, 0., 5000.);
+    setDelayTimeInSample(aDelayInMs * (double)m_sampling_rate / 1000.);
 }
 
-void CicmQsgs::setFeedback(double aFeedback)
+void CicmDecorrelation::setRampInSample(long aRampInSample)
 {
-    m_feedback = Tools::clip(aFeedback, 0., 1.);
+    m_line->setRampInSample(aRampInSample);
 }
 
-void CicmQsgs::setRarefaction(double aRarefaction)
+void CicmDecorrelation::setRampInMs(double aRampInMs)
 {
-    m_rarefaction = Tools::clip(aRarefaction, 0., 1.);
+    m_line->setRampInMs(aRampInMs);
 }
 
-
-void CicmQsgs::setWindowFunction(long aEnvelopeType)
-{
-    m_envelope->setType(aEnvelopeType);
-}
-
-void CicmQsgs::writeWidowFunction(double* aBuffer, long aSize)
-{
-    m_envelope->write(aBuffer, aSize);
-}
-
-void CicmQsgs::writeWidowFunction(float* aBuffer, long aSize)
-{
-    m_envelope->write(aBuffer, aSize);
-}
-
-CicmQsgs::~CicmQsgs()
+CicmDecorrelation::~CicmDecorrelation()
 {
 	delete m_delay;
     delete m_line;
