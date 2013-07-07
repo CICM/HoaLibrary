@@ -28,15 +28,28 @@
 
 #include "Ambisonics.h"
 
+enum
+{
+    Hoa_No_Encoding = 0,
+    Hoa_Post_Encoding = 1,
+};
+
 class AmbisonicsDiffuser : public Ambisonics
 {
 protected:
     double  m_diffuse_factor;
-
+    bool    m_mode;
+    bool    m_encoding_compensation;
 
 public:
-	AmbisonicsDiffuser(long anOrder = 1, long aVectorSize = 0, long aSamplingRate = 44100.);
-    void setDiffuseFactor(double aWidenValue);
+	AmbisonicsDiffuser(long anOrder = 1, bool aMode = Hoa_Post_Encoding, long aVectorSize = 0, long aSamplingRate = 44100.);
+    
+    void    setDiffuseFactor(double aDiffuseValue);
+    void    setEncodingCompensation(bool OnOff);
+    
+    bool    getMode();
+    double  getDiffuseFactor();
+    bool    getEncodingCompensation();
     
 	~AmbisonicsDiffuser();
 	
