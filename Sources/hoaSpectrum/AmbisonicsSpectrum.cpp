@@ -252,7 +252,6 @@ double AmbisonicsSpectrum::getAbscissa(long aBandIndex)
     double radius = Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
     double angle = Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
     return Tools::abscisse(radius, angle);
-    //return m_abscissa[aBandIndex];
 }
 
 double AmbisonicsSpectrum::getOrdinate(long aBandIndex)
@@ -261,7 +260,18 @@ double AmbisonicsSpectrum::getOrdinate(long aBandIndex)
     double radius = Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
     double angle = Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
     return Tools::ordinate(radius, angle);
-    //return m_ordinate[aBandIndex];
+}
+
+double AmbisonicsSpectrum::getRadius(long aBandIndex)
+{
+    aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
+    return Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
+}
+
+double AmbisonicsSpectrum::getAngle(long aBandIndex)
+{
+    aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
+    return Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
 }
 
 
