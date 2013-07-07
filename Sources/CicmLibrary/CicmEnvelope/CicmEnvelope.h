@@ -29,14 +29,16 @@ enum
     Cicm_Envelope_Hanning = 1,
     Cicm_Envelope_Hamming = 2,
     Cicm_Envelope_Tukey = 3,
-    Cicm_Envelope_Cosinus = 4,
-    Cicm_Envelope_Lanczos = 5,
-    Cicm_Envelope_Triangular = 6,
+    Cicm_Envelope_Halfsinus = 4,
+    Cicm_Envelope_Sinus = 5,
+    Cicm_Envelope_Lanczos,
+    Cicm_Envelope_Triangular,
     Cicm_Envelope_Bartlett,
     Cicm_Envelope_Gaussian,
     Cicm_Envelope_BartlettHann,
     Cicm_Envelope_Blackman,
-    Cicm_Envelope_Kaizer   
+    Cicm_Envelope_Kaizer,
+    Cicm_Envelope_Personnal
 };
 
 class CicmEnvelope
@@ -51,14 +53,17 @@ private:
     void normalize();
 public:
 	CicmEnvelope(long aSize = 1024, long aType = Cicm_Envelope_Hanning, bool fft_normalization = 0);
+    
 	void setSize(long aWindowSize);
 	void setType(long aType, double a0 = -1., double a1 = -1., double a2 = -1., bool fft_normalization = 0);
-
+    long getType();
+    
 	void square();
 	void hanning();
 	void hamming();
 	void tukey(double a0 = 0.5);
-	void cosinus();
+	void halfsinus();
+    void sinus();
 	void lanczos();
 	void triangular();
 	void bartlett();
@@ -66,6 +71,10 @@ public:
 	void bartlettHann(double a0 = 0.62, double a1 = 0.48, double a2 = 0.38);
 	void blackman(double a0 = 0.16);
 	void kaiser(double a0 = 3.);
+    void write(double* aBuffer, long aSize);
+    void write(float* aBuffer, long aSize);
+    
+    ~CicmEnvelope();
     
     inline double getValue(long anIndex)
     {
@@ -89,7 +98,7 @@ public:
         Cicm_Matrix_Vector_Float_Mul(inputs, m_buffer_float, output, m_size);
     }
 	
-	~CicmEnvelope();
+	
 };
 
 #endif

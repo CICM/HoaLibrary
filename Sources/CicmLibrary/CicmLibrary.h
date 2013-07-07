@@ -30,7 +30,9 @@
 #include "CicmTools.h"
 
 #include "CicmFilters/CicmFilterDelay.h"
+#include "CicmDelay/CicmDecorrelation.h"
 #include "CicmGranular/CicmQSGS.h"
+#include "CicmAmplitude/CicmRingModulation.h"
 
 #endif
 

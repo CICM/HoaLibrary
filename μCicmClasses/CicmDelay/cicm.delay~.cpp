@@ -35,8 +35,8 @@ extern "C"
 typedef struct _CicmDelay 
 {
 	t_pxobject				f_ob;			
-	FilterDelay*            f_delay;
-    double                  f_delay_time;
+	CicmDecorrelation*      f_delay;
+    double                  f_ramp_time;
     
 } t_CicmDelay;
 
@@ -46,10 +46,12 @@ void CicmDelay_assist(t_CicmDelay *x, void *b, long m, long a, char *s);
 void CicmDelay_float(t_CicmDelay *x, double f);
 void CicmDelay_int(t_CicmDelay *x, long n);
 
+t_max_err ramp_set(t_CicmDelay *x, t_object *attr, long argc, t_atom *argv);
+
 void CicmDelay_dsp64(t_CicmDelay *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void CicmDelay_perform64(t_CicmDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void CicmDelay_perform64_offset(t_CicmDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void *CicmDelay_class;
+
+t_class* CicmDelay_class;
 
 int main(void)
 {	
@@ -61,43 +63,66 @@ int main(void)
 	class_addmethod(c, (method)CicmDelay_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)CicmDelay_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)CicmDelay_assist,	"assist",	A_CANT, 0);
+    
+    CLASS_ATTR_DOUBLE			(c, "ramp", 0, t_CicmDelay, f_ramp_time);
+	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
+	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp time (ms)");
+	CLASS_ATTR_ORDER			(c, "ramp", 0, "1");
+	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
+	CLASS_ATTR_SAVE				(c, "ramp", 1);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	CicmDelay_class = c;
 	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	class_findbyname(CLASS_NOBOX, gensym("cicm.grain~"));
 	return 0;
 }
 
 void *CicmDelay_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_CicmDelay *x = NULL;
-	long delayMax = sys_getsr();
-	x = (t_CicmDelay *)object_alloc((t_class*)CicmDelay_class);
+    t_dictionary *d = NULL;
+    
+	double delayMax = sys_getsr() * 5;
+    double initialDelay = 0;
+	x = (t_CicmDelay *)object_alloc(CicmDelay_class);
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
-			delayMax	= atom_getlong(argv);
+		if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+			delayMax	= atom_getfloat(argv);
+        if(atom_gettype(argv+1) == A_LONG || atom_gettype(argv+1) == A_FLOAT)
+			initialDelay	= atom_getfloat(argv+1);
 			
-		x->f_delay	= new FilterDelay(delayMax, sys_getmaxblksize(), sys_getsr());
-		
-		dsp_setup((t_pxobject *)x, 2);
+		x->f_delay	= new CicmDecorrelation(delayMax, sys_getmaxblksize(), sys_getsr());
+		x->f_delay->setDelayTimeInMs(initialDelay);
+        post("delay ms %f", x->f_delay->getDelayTimeInMs());
+        x->f_ramp_time = x->f_delay->getRampInMs();
+        post("%f", x->f_delay->getRampInMs());
+		dsp_setup((t_pxobject *)x, 1);
         outlet_new(x, "signal");
 		
-		x->f_ob.z_misc = Z_NO_INPLACE;
+        x->f_ob.z_misc = Z_NO_INPLACE;
+        d = (t_dictionary *)gensym("#D")->s_thing;
+        if (d) attr_dictionary_process(x, d);
+        attr_args_process(x, argc, argv);
+        
 	}
 	return (x);
 }
 
 void CicmDelay_float(t_CicmDelay *x, double f)
 {
-	;
+    post("delay ms %f", x->f_delay->getDelayTimeInMs());
+	x->f_delay->setDelayTimeInMs(f);
+    post("delay ms %f", x->f_delay->getDelayTimeInMs());
 }
 
 void CicmDelay_int(t_CicmDelay *x, long n)
 {
-	;
+    post("delay sample %ld", x->f_delay->getDelayTimeInSample());
+	x->f_delay->setDelayTimeInSample(n);
+    post("delay sample %ld", x->f_delay->getDelayTimeInSample());
 }
 
 void CicmDelay_dsp64(t_CicmDelay *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -110,28 +135,16 @@ void CicmDelay_dsp64(t_CicmDelay *x, t_object *dsp64, short *count, double sampl
 
 void CicmDelay_perform64(t_CicmDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    for (int i = 0; i < sampleframes; i++)
-    {
-        x->f_delay->write(ins[0][i]);
-        outs[0][i] = x->f_delay->read_no_ms(ins[1][i]);
-    }
+    x->f_delay->process(ins[0], outs[0]);
 }
 
-void CicmDelay_perform64_offset(t_CicmDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for (int i = 0; i < sampleframes; i++)
-    {
-        x->f_delay->write(ins[0][i]);
-        outs[0][i] = x->f_delay->read_linear_ms(x->f_delay_time);
-    }
-}
 
 void CicmDelay_assist(t_CicmDelay *x, void *b, long m, long a, char *s)
 {
 	if(m == ASSIST_INLET)
-		sprintf(s,"(Signal or delay) Widen value");
+		sprintf(s,"(Signal or message) Clean Signal");
 	else
-		sprintf(s,"(Signal) aa");
+		sprintf(s,"(Signal) Delayed Signal");
 }
 
 void CicmDelay_free(t_CicmDelay *x)
@@ -139,4 +152,18 @@ void CicmDelay_free(t_CicmDelay *x)
 	dsp_free((t_pxobject *)x);
 	delete x->f_delay;
 }
+
+t_max_err ramp_set(t_CicmDelay *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_delay->setRampInMs(atom_getfloat(argv));
+    post("%f", atom_getfloat(argv));
+    post("%f", x->f_delay->getRampInMs());
+	x->f_ramp_time = x->f_delay->getRampInMs();
+	return MAX_ERR_NONE;
+}
+
+
+
+
 

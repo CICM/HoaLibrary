@@ -65,9 +65,13 @@ void CicmEnvelope::setType(long aType, double a0, double a1, double a2, bool fft
 		else
 			tukey();
 	}
-	else if(m_type == Cicm_Envelope_Cosinus)
+	else if(m_type == Cicm_Envelope_Halfsinus)
     {
-		cosinus();
+		halfsinus();
+    }
+    else if(m_type == Cicm_Envelope_Sinus)
+    {
+		sinus();
     }
 	else if(m_type == Cicm_Envelope_Lanczos)
     {
@@ -153,10 +157,16 @@ void CicmEnvelope::tukey(double a0)
     }
 }
 
-void CicmEnvelope::cosinus()
+void CicmEnvelope::halfsinus()
 {
 	for(int i = 0; i < m_size; i++)
 		m_buffer[i] = sin((CICM_PI * (double)i) / (double)(m_size - 1));
+}
+
+void CicmEnvelope::sinus()
+{
+	for(int i = 0; i < m_size; i++)
+		m_buffer[i] = sin((CICM_2PI * (double)i) / (double)(m_size - 1));
 }
 
 void CicmEnvelope::lanczos()
@@ -214,6 +224,29 @@ void CicmEnvelope::normalize()
 {
     for(int i = 0; i < m_size; i++)
         m_buffer[i] /= (double)m_size * CICM_2PI;
+}
+
+long CicmEnvelope::getType()
+{
+    return m_type;
+}
+
+void CicmEnvelope::write(double* aBuffer, long aSize)
+{
+    setSize(aSize);
+    m_type = Cicm_Envelope_Personnal;
+    Cicm_Vector_Double_Copy(aBuffer, m_buffer, m_size);
+    for(int i = 0; i < m_size; i++)
+        m_buffer_float[i] = m_buffer[i];    
+}
+
+void CicmEnvelope::write(float* aBuffer, long aSize)
+{
+    setSize(aSize);
+    m_type = Cicm_Envelope_Personnal;
+    Cicm_Vector_Float_Copy(aBuffer, m_buffer_float, m_size);
+    for(int i = 0; i < m_size; i++)
+        m_buffer[i] = m_buffer_float[i];
 }
 
 CicmEnvelope::~CicmEnvelope()

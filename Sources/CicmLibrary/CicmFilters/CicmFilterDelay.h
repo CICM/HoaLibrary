@@ -67,7 +67,7 @@ class CicmFilterDelay : public Filter
     double read_no_sample(long aDelay)
     {
         aDelay = Tools::clip(aDelay, 0, m_size-1);
-        aDelay = m_ramp - aDelay;
+        aDelay = m_ramp - aDelay - 1;
         if(aDelay < 0)
             aDelay += m_size;
         return m_buffer[aDelay];

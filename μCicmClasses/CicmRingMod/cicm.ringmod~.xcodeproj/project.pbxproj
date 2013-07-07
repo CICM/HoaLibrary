@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		8F30D6B0172FA02D00257D26 /* cicm.delay~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D6AF172FA02D00257D26 /* cicm.delay~.cpp */; };
+		8F30D6B0172FA02D00257D26 /* cicm.ringmod~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D6AF172FA02D00257D26 /* cicm.ringmod~.cpp */; };
 		8FDBCF701787F7050089F713 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FDBCF3E1787F7050089F713 /* CicmDefine.h */; };
 		8FDBCF711787F7050089F713 /* CicmDecorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FDBCF401787F7050089F713 /* CicmDecorrelation.cpp */; };
 		8FDBCF721787F7050089F713 /* CicmDecorrelation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FDBCF411787F7050089F713 /* CicmDecorrelation.h */; };
@@ -52,14 +52,16 @@
 		8FDBCF981787F7050089F713 /* CicmGigaverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FDBCF6D1787F7050089F713 /* CicmGigaverb.h */; };
 		8FDBCF991787F7050089F713 /* CicmTuning.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FDBCF6E1787F7050089F713 /* CicmTuning.h */; };
 		8FDBCF9A1787F7050089F713 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FDBCF6F1787F7050089F713 /* CicmTools.h */; };
+		8FDBCF9E178861480089F713 /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FDBCF9C178861480089F713 /* CicmRingModulation.cpp */; };
+		8FDBCF9F178861480089F713 /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FDBCF9D178861480089F713 /* CicmRingModulation.h */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
 		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2FBBEAE508F335360078DB84 /* cicm.delay~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cicm.delay~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F30D6AF172FA02D00257D26 /* cicm.delay~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "cicm.delay~.cpp"; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* cicm.ringmod~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cicm.ringmod~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F30D6AF172FA02D00257D26 /* cicm.ringmod~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "cicm.ringmod~.cpp"; sourceTree = "<group>"; };
 		8FDBCF3E1787F7050089F713 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
 		8FDBCF401787F7050089F713 /* CicmDecorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmDecorrelation.cpp; sourceTree = "<group>"; };
 		8FDBCF411787F7050089F713 /* CicmDecorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDecorrelation.h; sourceTree = "<group>"; };
@@ -103,6 +105,8 @@
 		8FDBCF6D1787F7050089F713 /* CicmGigaverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmGigaverb.h; sourceTree = "<group>"; };
 		8FDBCF6E1787F7050089F713 /* CicmTuning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTuning.h; sourceTree = "<group>"; };
 		8FDBCF6F1787F7050089F713 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
+		8FDBCF9C178861480089F713 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
+		8FDBCF9D178861480089F713 /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
 		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +130,7 @@
 				8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */,
 				8FE028B4172A837B00BD68AA /* Accelerate.framework */,
 				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
-				8F30D6AF172FA02D00257D26 /* cicm.delay~.cpp */,
+				8F30D6AF172FA02D00257D26 /* cicm.ringmod~.cpp */,
 				8FDBCF3D1787F7050089F713 /* CicmLibrary */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
@@ -136,7 +140,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* cicm.delay~.mxo */,
+				2FBBEAE508F335360078DB84 /* cicm.ringmod~.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				8FDBCF3E1787F7050089F713 /* CicmDefine.h */,
+				8FDBCF9B178861480089F713 /* CicmAmplitude */,
 				8FDBCF3F1787F7050089F713 /* CicmDelay */,
 				8FDBCF421787F7050089F713 /* CicmEnvelope */,
 				8FDBCF451787F7050089F713 /* CicmFft */,
@@ -248,6 +253,15 @@
 			path = CicmReverb;
 			sourceTree = "<group>";
 		};
+		8FDBCF9B178861480089F713 /* CicmAmplitude */ = {
+			isa = PBXGroup;
+			children = (
+				8FDBCF9C178861480089F713 /* CicmRingModulation.cpp */,
+				8FDBCF9D178861480089F713 /* CicmRingModulation.h */,
+			);
+			path = CicmAmplitude;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -279,6 +293,7 @@
 				8FDBCF981787F7050089F713 /* CicmGigaverb.h in Headers */,
 				8FDBCF991787F7050089F713 /* CicmTuning.h in Headers */,
 				8FDBCF9A1787F7050089F713 /* CicmTools.h in Headers */,
+				8FDBCF9F178861480089F713 /* CicmRingModulation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +316,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* cicm.delay~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* cicm.ringmod~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -312,7 +327,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "cicm.delay~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "cicm.ringmod~" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -357,7 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F30D6B0172FA02D00257D26 /* cicm.delay~.cpp in Sources */,
+				8F30D6B0172FA02D00257D26 /* cicm.ringmod~.cpp in Sources */,
 				8FDBCF711787F7050089F713 /* CicmDecorrelation.cpp in Sources */,
 				8FDBCF731787F7050089F713 /* CicmEnvelope.cpp in Sources */,
 				8FDBCF751787F7050089F713 /* CicmFft.cpp in Sources */,
@@ -377,6 +392,7 @@
 				8FDBCF931787F7050089F713 /* CicmLine.cpp in Sources */,
 				8FDBCF951787F7050089F713 /* CicmFreeverb.cpp in Sources */,
 				8FDBCF971787F7050089F713 /* CicmGigaverb.cpp in Sources */,
+				8FDBCF9E178861480089F713 /* CicmRingModulation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +438,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "cicm.delay~";
+				PRODUCT_NAME = "cicm.ringmod~";
 			};
 			name = Development;
 		};
@@ -449,14 +465,14 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "cicm.delay~";
+				PRODUCT_NAME = "cicm.ringmod~";
 			};
 			name = Deployment;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "cicm.delay~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "cicm.ringmod~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,
