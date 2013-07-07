@@ -58,7 +58,7 @@ public:
     void setSamplingRate(long aSamplingRate);
     void setDelayTimeInSample(long aDelayInSample);
     void setDelayTimeInMs(double aDelayInMs);
-    void setRampInSample(long aDelayInSample);
+    void setRampInSample(long aRampInSample);
     void setRampInMs(double aRampInMs);
     
 	long getVectorSize();

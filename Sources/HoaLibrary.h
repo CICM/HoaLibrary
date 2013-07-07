@@ -31,6 +31,7 @@
 
 #include "hoaAmbisonics/AmbisonicsViewer.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
+#include "hoaDelay/AmbisonicsDelay.h"
 #include "hoaEncoder/AmbisonicsEncoder.h"
 #include "hoaFreeverb/AmbisonicsFreeverb.h"
 #include "hoaFilter/AmbisonicsFilter.h"

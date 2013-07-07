@@ -25,15 +25,39 @@
 
 #include "AmbisonicsDiffuser.h"
 
-AmbisonicsDiffuser::AmbisonicsDiffuser(long anOrder, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsDiffuser::AmbisonicsDiffuser(long anOrder, bool aMode, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
+    m_mode = Tools::clip(aMode, Hoa_No_Encoding, Hoa_Post_Encoding);
+    if(m_mode == Hoa_No_Encoding)
+        m_number_of_inputs = 1;
 
+    m_encoding_compensation = 0;
+    m_diffuse_factor = 1.;
 }
 
-void AmbisonicsDiffuser::setDiffuseFactor(double aWidenValue)
+bool AmbisonicsDiffuser::getMode()
 {
-	m_diffuse_factor = Tools::clip(aWidenValue, 0., 1.);
-    
+    return m_mode;
+}
+
+double AmbisonicsDiffuser::getDiffuseFactor()
+{
+    return m_diffuse_factor;
+}
+
+bool AmbisonicsDiffuser::getEncodingCompensation()
+{
+    return m_encoding_compensation;
+}
+
+void AmbisonicsDiffuser::setDiffuseFactor(double aDiffuseValue)
+{
+	m_diffuse_factor = Tools::clip(aDiffuseValue, 0., 1.);
+}
+
+void AmbisonicsDiffuser::setEncodingCompensation(bool OnOff)
+{
+    m_encoding_compensation = Tools::clip(OnOff, 0, 1);
 }
 
 AmbisonicsDiffuser::~AmbisonicsDiffuser()

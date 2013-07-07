@@ -27,11 +27,6 @@
 #define DEF_AMBISONICS
 
 #include "../CicmLibrary/CicmLibrary.h"
-/*
-#include "../CicmLibrary/CicmDefine.h"
-#include "../CicmLibrary/CicmTools.h"
-#include "../CicmLibrary/CicmLine.h"
-*/
 
 class Ambisonics
 {
