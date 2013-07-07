@@ -36,7 +36,6 @@ AmbisonicsSpectrum::AmbisonicsSpectrum(long aNumberOfLoudspeakers, long aNumberO
     m_ordinate = NULL;
     m_temp_amplitude_value = NULL;
     m_loudspeakers_values = NULL;
-    //m_vector = new AmbisonicsVector(m_number_of_loudspeakers, m_vector_size, m_sampling_rate);
     m_vector = new AmbisonicsVector(m_number_of_loudspeakers, Hoa_Cartesian, m_vector_size);
     setNumberOfBands(aNumberOfBands);
 }
@@ -125,6 +124,7 @@ void AmbisonicsSpectrum::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, boo
             m_filter[0][j]->setQValue(1.);
         }
     }
+    m_vector->setNumberOfLoudspeakers(aNumberOfLoudspeakers);
     setVectorSize(m_vector_size);
     setSamplingRate(m_sampling_rate);
 }
@@ -249,13 +249,19 @@ double AmbisonicsSpectrum::getAmplitude(long aBandIndex)
 double AmbisonicsSpectrum::getAbscissa(long aBandIndex)
 {
     aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
-    return m_abscissa[aBandIndex];
+    double radius = Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
+    double angle = Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
+    return Tools::abscisse(radius, angle);
+    //return m_abscissa[aBandIndex];
 }
 
 double AmbisonicsSpectrum::getOrdinate(long aBandIndex)
 {
     aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
-    return m_ordinate[aBandIndex];
+    double radius = Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
+    double angle = Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
+    return Tools::ordinate(radius, angle);
+    //return m_ordinate[aBandIndex];
 }
 
 

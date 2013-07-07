@@ -109,8 +109,7 @@ public:
         {
             for(int j = 0; j < m_number_of_loudspeakers; j++)
             {
-                //m_loudspeakers_values[j] = m_filtered_signal_double[i][j][m_vector_size-1];
-                m_loudspeakers_values[j] = m_filtered_signal_double[i][j][0];
+                m_loudspeakers_values[j] = m_filtered_signal_double[i][j][m_vector_size-1];
             }
             m_vector->process(m_loudspeakers_values, m_vector_values);
             m_abscissa[i] = m_vector_values[2];

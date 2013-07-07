@@ -86,7 +86,6 @@ void spectrum_output(t_spectrum *x);
 t_max_err spectrum_notify(t_spectrum *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 t_max_err number_of_loudspeakers_set(t_spectrum *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_of_loudspeakers_set(t_spectrum *x, void *attr, long ac, t_atom *av);
-t_max_err set_attr_nbands(t_spectrum *x, void *attr, long ac, t_atom *av);
 
 void spectrum_resize_inlet(t_spectrum *x, long lastNumberOfOutlet);
 
@@ -136,11 +135,9 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE				(c, "angles", 1);
 	CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
     
-    CLASS_ATTR_LONG				(c, "nbands", 0, t_spectrum, f_number_of_bands);
-    CLASS_ATTR_ACCESSORS		(c, "nbands", NULL, set_attr_nbands);
-    CLASS_ATTR_ORDER			(c, "nbands", 0, "3");
-	CLASS_ATTR_LABEL			(c, "nbands", 0, "Number of frequency bands");
-    CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "nbands", 0, "3");
+    CLASS_ATTR_LONG				(c, "rotation", 0, t_spectrum, f_number_of_bands);
+    CLASS_ATTR_ORDER			(c, "rotation", 0, "3");
+	CLASS_ATTR_LABEL			(c, "rotation", 0, "Number of frequency bands");;
     
     CLASS_ATTR_LONG				(c, "interval", 0, t_spectrum, f_interval);
 	CLASS_ATTR_ORDER			(c, "interval", 0, "4");
@@ -170,30 +167,30 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER			(c, "bordercolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"bordercolor", 0, "0.25 0.25 0.25 1");
 	
-	CLASS_ATTR_RGBA				(c, "bandcolor1", 0, t_spectrum, f_color_bands[0]);
-	CLASS_ATTR_LABEL			(c, "bandcolor1", 0, "Band 1 Color");
-	CLASS_ATTR_ORDER			(c, "bandcolor1", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"bandcolor1", 0, "0.9 0. 0. 0.8");
+	CLASS_ATTR_RGBA				(c, "lbcolor", 0, t_spectrum, f_color_bands[0]);
+	CLASS_ATTR_LABEL			(c, "lbcolor", 0, "Cold Signal Color");
+	CLASS_ATTR_ORDER			(c, "lbcolor", 0, "4");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"lbcolor", 0, "0.9 0. 0. 0.8");
 	
-	CLASS_ATTR_RGBA				(c, "bandcolor2", 0, t_spectrum, f_color_bands[1]);
-	CLASS_ATTR_LABEL			(c, "bandcolor2", 0, "Band 2 Color");
-	CLASS_ATTR_ORDER			(c, "bandcolor2", 0, "5");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bandcolor2", 0, "0.6 0.73 0. 0.8");
+	CLASS_ATTR_RGBA				(c, "tepidcolor", 0, t_spectrum, f_color_bands[1]);
+	CLASS_ATTR_LABEL			(c, "tepidcolor", 0, "Tepid Signal Color");
+	CLASS_ATTR_ORDER			(c, "tepidcolor", 0, "5");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "tepidcolor", 0, "0.6 0.73 0. 0.8");
 	
-	CLASS_ATTR_RGBA				(c, "bandcolor3", 0, t_spectrum, f_color_bands[2]);
-	CLASS_ATTR_LABEL			(c, "bandcolor3", 0, "Band 3 Color");
-	CLASS_ATTR_ORDER			(c, "bandcolor3", 0, "6");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bandcolor3", 0, ".85 .85 0. 0.8");
+	CLASS_ATTR_RGBA				(c, "warmcolor", 0, t_spectrum, f_color_bands[2]);
+	CLASS_ATTR_LABEL			(c, "warmcolor", 0, "Warm Signal Color");
+	CLASS_ATTR_ORDER			(c, "warmcolor", 0, "6");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "warmcolor", 0, ".85 .85 0. 0.8");
 	
-	CLASS_ATTR_RGBA				(c, "bandcolor4", 0, t_spectrum, f_color_bands[3]);
-	CLASS_ATTR_LABEL			(c, "bandcolor4", 0, "Band 4 Color");
-	CLASS_ATTR_ORDER			(c, "bandcolor4", 0, "7");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bandcolor4", 0, "1. 0.6 0. 0.8");
+	CLASS_ATTR_RGBA				(c, "hotcolor", 0, t_spectrum, f_color_bands[3]);
+	CLASS_ATTR_LABEL			(c, "hotcolor", 0, "Hot Signal Color");
+	CLASS_ATTR_ORDER			(c, "hotcolor", 0, "7");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "hotcolor", 0, "1. 0.6 0. 0.8");
 	
-	CLASS_ATTR_RGBA				(c, "bandcolor5", 0, t_spectrum, f_color_bands[4]);
-	CLASS_ATTR_LABEL			(c, "bandcolor5", 0, "Band 5 Color");
-	CLASS_ATTR_ORDER			(c, "bandcolor5", 0, "8");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bandcolor5", 0, "1. 0. 0. 0.8");
+	CLASS_ATTR_RGBA				(c, "overcolor", 0, t_spectrum, f_color_bands[4]);
+	CLASS_ATTR_LABEL			(c, "overcolor", 0, "Overload Signal Color");
+	CLASS_ATTR_ORDER			(c, "overcolor", 0, "8");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "overcolor", 0, "1. 0. 0. 0.8");
 	
     CLASS_STICKY_ATTR_CLEAR(c, "style");
     CLASS_STICKY_CATEGORY_CLEAR(c);
@@ -312,22 +309,6 @@ t_max_err angles_of_loudspeakers_set(t_spectrum *x, void *attr, long ac, t_atom 
     return MAX_ERR_NONE;
 }
 
-t_max_err set_attr_nbands(t_spectrum *x, void *attr, long ac, t_atom *av)
-{
-    if (ac && av)
-    {
-        if(atom_gettype(av) == A_FLOAT || atom_gettype(av) == A_LONG)
-            x->f_spectrum->setNumberOfBands(atom_getlong(av));
-        
-        x->f_number_of_bands = x->f_spectrum->getNumberOfBands();
-    
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("spectrum_layer"));
-        jbox_redraw((t_jbox *)x);
-    }
-    
-    return MAX_ERR_NONE;
-}
-
 void spectrum_dsp64(t_spectrum *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     x->f_spectrum->setVectorSize(maxvectorsize);
@@ -405,7 +386,7 @@ t_max_err spectrum_notify(t_spectrum *x, t_symbol *s, t_symbol *msg, void *sende
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 		}
-		else if(name == gensym("bandcolor1") || name == gensym("bandcolor2") || name == gensym("bandcolor3") || name == gensym("bandcolor4") || name == gensym("bandcolor5") || name == gensym("nbands"))
+		else if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overcolor") || name == gensym("numleds"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("spectrum_layer"));
 		}
@@ -463,60 +444,13 @@ void draw_background(t_spectrum *x,  t_object *view, t_rect *rect)
 
 void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
 {
-    t_jpattern *pattern;
     t_jmatrix transform;
-    t_jrgba zeroColor = {0., 0., 0., 0.};
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("spectrum_layer"), rect->width, rect->height);
 	if (g)
 	{
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
         jgraphics_set_matrix(g, &transform);
         
-        
-        for(int i = 0; i < x->f_spectrum->getNumberOfBands(); i++)
-        {
-            //pattern = jgraphics_pattern_create_radial(x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, 0, 0, x->f_circleExtRadius, 0);
-            
-            pattern = jgraphics_pattern_create_radial(x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, 0, 0, 0, x->f_circleExtRadius);
-            
-            jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha);
-            
-            //jgraphics_pattern_add_color_stop_rgba(pattern, 0.3*x->f_spectrum->getAmplitude(i), x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha - 0.4);
-            
-            jgraphics_pattern_add_color_stop_rgba(pattern, 0.8 * x->f_spectrum->getAmplitude(i), zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
-            
-            jgraphics_pattern_add_color_stop_rgba(pattern, 1., zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
-            
-            jgraphics_set_source(g, pattern);
-            jgraphics_arc(g, 0, 0, x->f_circleExtRadius, 0, CICM_2PI);
-            jgraphics_fill(g);
-        }
-        
-        /*
-        pattern = jgraphics_pattern_create_radial(0, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, 0, 0, x->f_circleExtRadius, 0);
-        
-        jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha);
-        
-        //jgraphics_pattern_add_color_stop_rgba(pattern, 0.3*x->f_spectrum->getAmplitude(i), x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha - 0.4);
-        
-        jgraphics_pattern_add_color_stop_rgba(pattern, 1., zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
-        
-        jgraphics_set_source(g, pattern);
-        jgraphics_arc(g, 0, 0, x->f_circleExtRadius, 0, CICM_2PI);
-        jgraphics_fill(g);
-        */
-        /*
-        pattern = jgraphics_pattern_create_radial(0, 50, 0, 50, x->f_circleExtRadius, 0);
-        jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_color_bands[0].red, x->f_color_bands[0].green, x->f_color_bands[0].blue, x->f_color_bands[0].alpha);
-        jgraphics_pattern_add_color_stop_rgba(pattern, 0.5, x->f_color_bands[1].red, x->f_color_bands[1].green, x->f_color_bands[1].blue, x->f_color_bands[1].alpha);
-        jgraphics_pattern_add_color_stop_rgba(pattern, 1., x->f_color_bands[2].red, x->f_color_bands[2].green, x->f_color_bands[2].blue, x->f_color_bands[2].alpha);
-        
-        jgraphics_set_source(g, pattern);
-        jgraphics_arc(g, 0, 0, x->f_circleExtRadius, 0, CICM_2PI);
-        jgraphics_fill(g);
-        */
-        
-        /*
         jgraphics_set_line_width(g, 1.);
         
         
@@ -535,8 +469,6 @@ void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
             jgraphics_arc(g, x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, point_size * x->f_spectrum->getAmplitude(i) + 5, 0., JGRAPHICS_2PI);
             jgraphics_fill(g);
         }
-        */
-        jgraphics_pattern_destroy(pattern);
 		jbox_end_layer((t_object*)x, view, gensym("spectrum_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("spectrum_layer"), 0., 0.);
