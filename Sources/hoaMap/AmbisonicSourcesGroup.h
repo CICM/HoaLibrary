@@ -26,8 +26,6 @@
 #ifndef DEF_AMBISONICSOURCESGROUP
 #define DEF_AMBISONICSOURCESGROUP
 
-#include "cicmTools.h"
-#include "AmbisonicSource.h"
 /*
 class SourcesGroup
 {

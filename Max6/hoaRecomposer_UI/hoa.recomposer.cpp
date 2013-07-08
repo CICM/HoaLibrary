@@ -39,7 +39,7 @@ extern "C"
 #define MIN_MICS 3
 #define DEF_MICS 8
 
-#include "../../Sources/hoaRecomposer/AmbisonicVirtualMicUIManager.h"
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct  _HoaRecomposerUI
 {

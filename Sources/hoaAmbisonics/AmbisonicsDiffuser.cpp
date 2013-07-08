@@ -52,12 +52,14 @@ bool AmbisonicsDiffuser::getEncodingCompensation()
 
 void AmbisonicsDiffuser::setDiffuseFactor(double aDiffuseValue)
 {
-	m_diffuse_factor = Tools::clip(aDiffuseValue, 0., 1.);
+    if(m_mode == Hoa_Post_Encoding)
+        m_diffuse_factor = Tools::clip(aDiffuseValue, 0., 1.);
 }
 
 void AmbisonicsDiffuser::setEncodingCompensation(bool OnOff)
 {
-    m_encoding_compensation = Tools::clip(OnOff, 0, 1);
+    if(m_mode == Hoa_Post_Encoding)
+        m_encoding_compensation = Tools::clip(OnOff, 0, 1);
 }
 
 AmbisonicsDiffuser::~AmbisonicsDiffuser()

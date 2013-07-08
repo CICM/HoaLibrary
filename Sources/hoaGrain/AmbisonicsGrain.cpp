@@ -23,19 +23,53 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_CICM_LIBRARY
-#define DEF_CICM_LIBRARY
+#include "AmbisonicsGrain.h"
 
-#include "CicmDefine.h"
-#include "CicmTools.h"
+AmbisonicsGrain::AmbisonicsGrain(long anOrder, bool aMode, double aMaximumDelayInMs,long aVectorSize, long aSamplingRate) : AmbisonicsDiffuser( anOrder, aMode, aVectorSize, aSamplingRate)
+{
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain.push_back(new CicmQsgs(aMaximumDelayInMs, aVectorSize, aSamplingRate));
+    }
+}
 
-#include "CicmFilters/CicmFilterDelay.h"
-#include "CicmDelay/CicmDecorrelation.h"
-#include "CicmGranular/CicmQSGS.h"
-#include "CicmAmplitude/CicmRingModulation.h"
-#include "CicmLines/CicmLine.h"
-#include "CicmReverb/CicmFreeverb.h"
+void AmbisonicsGrain::setGrainSize(double aGrainSize)
+{
+    
+}
 
-#endif
+void AmbisonicsGrain::setDelayTime(double aDelayTime)
+{
+    
+}
 
+void AmbisonicsGrain::setFeedback(double aFeedback)
+{
+    
+}
+
+void AmbisonicsGrain::setRarefaction(double aRarefaction)
+{
+    
+}
+
+void AmbisonicsGrain::setWindowFunction(long aEnvelopeType)
+{
+    
+}
+
+void AmbisonicsGrain::writeWidowFunction(double* aBuffer, long aSize)
+{
+    
+}
+
+void AmbisonicsGrain::writeWidowFunction(float* aBuffer, long aSize)
+{
+    
+}
+
+AmbisonicsGrain::~AmbisonicsGrain()
+{
+	m_grain.clear();
+}
 

@@ -23,8 +23,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AMBISONISCDELAY
-#define DEF_AMBISONISCDELAY
+#ifndef DEF_AMBISONICSDELAY
+#define DEF_AMBISONICSDELAY
 
 #include "../HoaAmbisonics/AmbisonicsDiffuser.h"
 

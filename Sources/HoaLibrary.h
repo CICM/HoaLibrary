@@ -26,9 +26,6 @@
 #ifndef DEF_HOA_LIBRARY
 #define DEF_HOA_LIBRARY
 
-#include "CicmLibrary/CicmDefine.h"
-#include "CicmLibrary/CicmTools.h"
-
 #include "hoaAmbisonics/AmbisonicsViewer.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaDelay/AmbisonicsDelay.h"
@@ -45,6 +42,7 @@
 #include "hoaOptim/AmbisonicsOptim.h"
 #include "hoaProjector/AmbisonicsProjector.h"
 #include "hoaRecomposer/AmbisonicsRecomposer.h"
+#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
 #include "hoaRotate/AmbisonicsRotate.h"
 #include "hoaSpace/AmbisonicSpace.h"
 #include "hoaSpectrum/AmbisonicsSpectrum.h"

@@ -26,9 +26,7 @@
 #ifndef DEF_PLANEWAVES
 #define DEF_PLANEWAVES
 
-#include "../CicmLibrary/CicmDefine.h"
-#include "../CicmLibrary/CicmTools.h"
-#include "../CicmLibrary/CicmLines/CicmLine.h"
+#include "../CicmLibrary/CicmLibrary.h"
 
 class Planewaves
 {

@@ -23,18 +23,92 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_CICM_LIBRARY
-#define DEF_CICM_LIBRARY
+#ifndef DEF_AMBISONICSGRAIN
+#define DEF_AMBISONICSGRAIN
 
-#include "CicmDefine.h"
-#include "CicmTools.h"
+#include "../HoaAmbisonics/AmbisonicsDiffuser.h"
 
-#include "CicmFilters/CicmFilterDelay.h"
-#include "CicmDelay/CicmDecorrelation.h"
-#include "CicmGranular/CicmQSGS.h"
-#include "CicmAmplitude/CicmRingModulation.h"
-#include "CicmLines/CicmLine.h"
-#include "CicmReverb/CicmFreeverb.h"
+class AmbisonicsGrain : public AmbisonicsDiffuser
+{
+private:
+    vector <CicmQsgs*> m_grain;
+    
+public:
+	AmbisonicsGrain(long anOrder = 1, bool aMode = Hoa_Post_Encoding, double aMaximumDelayInMs = 5000., long aVectorSize = 0,  long aSamplingRate = 44100);
+    
+    void setVectorSize(long aVectorSize);
+    void setSamplingRate(long aSamplingRate);
+    
+    void setGrainSize(double aGrainSize);
+    void setDelayTime(double aDelayTime);
+    void setFeedback(double aFeedback);
+    void setRarefaction(double aRarefaction);
+    
+    void setWindowFunction(long aEnvelopeType);
+    void writeWidowFunction(double* aBuffer, long aSize);
+    void writeWidowFunction(float* aBuffer, long aSize);
+    
+    double getGrainSize();
+    double getDelayTime();
+    double getFeedback();
+    double getRarefaction();
+    
+    long   getWidowFunction();
+    
+	~AmbisonicsGrain();
+	
+    /****************************/
+	/* Perform sample by sample */
+    /****************************/
+
+    inline void process(double aInputs, double* aOutputs)
+	{
+        
+	}
+    
+	inline void process(double* aInputs, double* aOutputs)
+	{
+        
+	}
+    
+    inline void process(float aInputs, float* aOutputs)
+	{
+		
+	}
+    
+    inline void process(float* aInputs, float* aOutputs)
+	{
+                    
+	}
+    
+
+    /************************/
+	/* Perform block sample */
+    /************************/
+    
+	inline void process(double* aInputs, double** aOutputs)
+	{
+        
+	}
+    
+    inline void process(double** aInputs, double** aOutputs)
+	{
+        
+	}
+    
+    inline void process(float* aInputs, float** aOutputs)
+	{
+        
+	}
+    
+    inline void process(float** aInputs, float** aOutputs)
+	{
+        
+	}
+
+};
+
+
 
 #endif
 

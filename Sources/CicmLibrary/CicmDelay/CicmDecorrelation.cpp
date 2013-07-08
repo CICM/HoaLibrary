@@ -37,7 +37,7 @@ CicmDecorrelation::CicmDecorrelation(double aMaximumDelay, long aVectorSize, dou
     
     m_line->setCoefficientDirect(0.);
     m_line->setCoefficient(0.);
-    m_line->setRampInMs(20.);
+    m_line->setRampInMs(100.);
     
     m_current_delay = 0;
     m_delay_time_one = aMaximumDelay;

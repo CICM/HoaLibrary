@@ -32,7 +32,7 @@ extern "C"
 	#include "z_dsp.h"
 }
 
-typedef struct _HoaDelay
+typedef struct _HoaGrain
 {
 	t_pxobject			f_ob;			
 	AmbisonicsDelay*	f_AmbiDelay;
@@ -41,50 +41,50 @@ typedef struct _HoaDelay
     double              f_diffuse_factor;
     long                f_encoding_compensation;
     
-} t_HoaDelay;
+} t_HoaGrain;
 
-void *HoaDelay_new(t_symbol *s, long argc, t_atom *argv);
-void HoaDelay_free(t_HoaDelay *x);
-void HoaDelay_assist(t_HoaDelay *x, void *b, long m, long a, char *s);
-void HoaDelay_float(t_HoaDelay *x, double f);
-void HoaDelay_int(t_HoaDelay *x, long n);
+void *HoaGrain_new(t_symbol *s, long argc, t_atom *argv);
+void HoaGrain_free(t_HoaGrain *x);
+void HoaGrain_assist(t_HoaGrain *x, void *b, long m, long a, char *s);
+void HoaGrain_float(t_HoaGrain *x, double f);
+void HoaGrain_int(t_HoaGrain *x, long n);
 
-t_max_err ramp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv);
-t_max_err diff_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv);
-t_max_err comp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv);
+t_max_err ramp_set(t_HoaGrain *x, t_object *attr, long argc, t_atom *argv);
+t_max_err diff_set(t_HoaGrain *x, t_object *attr, long argc, t_atom *argv);
+t_max_err comp_set(t_HoaGrain *x, t_object *attr, long argc, t_atom *argv);
 
-void HoaDelay_dsp64(t_HoaDelay *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void HoaDelay_perform64_no(t_HoaDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaDelay_perform64_post(t_HoaDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaGrain_dsp64(t_HoaGrain *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void HoaGrain_perform64_no(t_HoaGrain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaGrain_perform64_post(t_HoaGrain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_class* HoaDelay_class;
+t_class* HoaGrain_class;
 
 int main(void)
 {	
 	t_class *c;
 	
-	c = class_new("hoa.delay~", (method)HoaDelay_new, (method)dsp_free, (long)sizeof(t_HoaDelay), 0L, A_GIMME, 0);
+	c = class_new("hoa.delay~", (method)HoaGrain_new, (method)dsp_free, (long)sizeof(t_HoaGrain), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaDelay_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)HoaDelay_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)HoaDelay_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaDelay_assist,		"assist",	A_CANT, 0);
+	class_addmethod(c, (method)HoaGrain_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)HoaGrain_int,		"int",		A_LONG, 0);
+	class_addmethod(c, (method)HoaGrain_dsp64,		"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)HoaGrain_assist,		"assist",	A_CANT, 0);
     
-    CLASS_ATTR_DOUBLE			(c, "ramp", 0, t_HoaDelay, f_ramp_time);
+    CLASS_ATTR_DOUBLE			(c, "ramp", 0, t_HoaGrain, f_ramp_time);
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp time (ms)");
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "1");
 	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
     
-    CLASS_ATTR_DOUBLE			(c, "diffusion", 0, t_HoaDelay, f_diffuse_factor);
+    CLASS_ATTR_DOUBLE			(c, "diffusion", 0, t_HoaGrain, f_diffuse_factor);
 	CLASS_ATTR_CATEGORY			(c, "diffusion", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "diffusion", 0, "Diffusion factor");
 	CLASS_ATTR_ORDER			(c, "diffusion", 0, "2");
 	CLASS_ATTR_ACCESSORS		(c, "diffusion", NULL, diff_set);
 	CLASS_ATTR_SAVE				(c, "diffusion", 1);
     
-    CLASS_ATTR_LONG             (c, "compensation", 0, t_HoaDelay, f_encoding_compensation);
+    CLASS_ATTR_LONG             (c, "compensation", 0, t_HoaGrain, f_encoding_compensation);
 	CLASS_ATTR_CATEGORY			(c, "compensation", 0, "Behavior");
     CLASS_ATTR_STYLE_LABEL      (c, "compensation", 0, "onoff", "Encoding compensation")
 	CLASS_ATTR_ORDER			(c, "compensation", 0, "3");
@@ -93,21 +93,21 @@ int main(void)
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
-	HoaDelay_class = c;
+	HoaGrain_class = c;
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *HoaDelay_new(t_symbol *s, long argc, t_atom *argv)
+void *HoaGrain_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_HoaDelay *x = NULL;
+	t_HoaGrain *x = NULL;
     t_dictionary *d = NULL;
     
 	int order = 4;
     bool mode = 1;
     double maxdelay = 5. * sys_getsr();
-	x = (t_HoaDelay *)object_alloc(HoaDelay_class);
+	x = (t_HoaGrain *)object_alloc(HoaGrain_class);
 	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
@@ -141,38 +141,38 @@ void *HoaDelay_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
-void HoaDelay_float(t_HoaDelay *x, double f)
+void HoaGrain_float(t_HoaGrain *x, double f)
 {
 	x->f_AmbiDelay->setDelayTimeInMs(f);
 }
 
-void HoaDelay_int(t_HoaDelay *x, long n)
+void HoaGrain_int(t_HoaGrain *x, long n)
 {
 	x->f_AmbiDelay->setDelayTimeInSample(n);
 }
 
-void HoaDelay_dsp64(t_HoaDelay *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void HoaGrain_dsp64(t_HoaGrain *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_AmbiDelay->setVectorSize(maxvectorsize);
     x->f_AmbiDelay->setSamplingRate(samplerate);
     if(x->f_AmbiDelay->getMode() == Hoa_No_Encoding)
-        object_method(dsp64, gensym("dsp_add64"), x, HoaDelay_perform64_no, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, HoaGrain_perform64_no, 0, NULL);
     else
-        object_method(dsp64, gensym("dsp_add64"), x, HoaDelay_perform64_post, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, HoaGrain_perform64_post, 0, NULL);
         
 }
 
-void HoaDelay_perform64_no(t_HoaDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void HoaGrain_perform64_no(t_HoaGrain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	x->f_AmbiDelay->process(ins[0], outs);
 }
 
-void HoaDelay_perform64_post(t_HoaDelay *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void HoaGrain_perform64_post(t_HoaGrain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	x->f_AmbiDelay->process(ins, outs);
 }
 
-void HoaDelay_assist(t_HoaDelay *x, void *b, long m, long a, char *s)
+void HoaGrain_assist(t_HoaGrain *x, void *b, long m, long a, char *s)
 {
 	if(m == ASSIST_INLET && a == 0)
 		sprintf(s,"(Signal, float or int) %s and delay", x->f_AmbiDelay->getHarmonicsName(a).c_str());
@@ -180,13 +180,13 @@ void HoaDelay_assist(t_HoaDelay *x, void *b, long m, long a, char *s)
 		sprintf(s,"(Signal) %s", x->f_AmbiDelay->getHarmonicsName(a).c_str());
 }
 
-void HoaDelay_free(t_HoaDelay *x)
+void HoaGrain_free(t_HoaGrain *x)
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_AmbiDelay;
 }
 
-t_max_err ramp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv)
+t_max_err ramp_set(t_HoaGrain *x, t_object *attr, long argc, t_atom *argv)
 {
     if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
 		x->f_AmbiDelay->setRampInMs(atom_getfloat(argv));
@@ -195,7 +195,7 @@ t_max_err ramp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv)
 	return MAX_ERR_NONE;
 }
 
-t_max_err diff_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv)
+t_max_err diff_set(t_HoaGrain *x, t_object *attr, long argc, t_atom *argv)
 {
     if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
 		x->f_AmbiDelay->setDiffuseFactor(atom_getfloat(argv));
@@ -205,7 +205,7 @@ t_max_err diff_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv)
 }
 
 
-t_max_err comp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv)
+t_max_err comp_set(t_HoaGrain *x, t_object *attr, long argc, t_atom *argv)
 {
     if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
 		x->f_AmbiDelay->setEncodingCompensation(atom_getfloat(argv));

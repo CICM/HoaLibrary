@@ -23,11 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/CicmLibrary/cicmTools.h"
-#include "../../Sources/hoaRecomposer/AmbisonicsRecomposer.h"
-#include "../../Sources/hoaAmbisonics/AmbisonicsViewer.h"
-
-#define MAX_MICS 256
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {

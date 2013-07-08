@@ -26,7 +26,7 @@
 #ifndef DEF_AMBISONICSOURCESMANAGER
 #define DEF_AMBISONICSOURCESMANAGER
 
-#include "cicmTools.h"
+#include "../hoaAmbisonics/Ambisonics.h"
 
 class SourcesManager
 {
