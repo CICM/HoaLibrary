@@ -431,7 +431,140 @@ void spectrum_paint(t_spectrum *x, t_object *view)
 void draw_background(t_spectrum *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
+    t_jmatrix transform;
+    t_jrgba black, white;
+    int nInnerCircles = 4;
+    double contrastBlack = 0.08;
+    double contrastWhite = 0.08;
+    black = white = x->f_color_circle_background;
+    black.red = Tools::clip_min(black.red -= contrastBlack);
+    black.green = Tools::clip_min(black.green -= contrastBlack);
+    black.blue = Tools::clip_min(black.blue -= contrastBlack);
     
+    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
+    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
+    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
+    
+    double dashes[2] = {6, 4};
+	
+	if (g)
+	{
+        jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+        jgraphics_set_matrix(g, &transform);
+        
+        jgraphics_set_source_jrgba(g, &x->f_color_circle_background);
+        jgraphics_arc(g, 0, 0, x->f_circleExtRadius,  0., JGRAPHICS_2PI);
+        jgraphics_fill(g);
+        
+        jgraphics_set_line_width(g, 3.);
+        jgraphics_set_source_jrgba(g, &black);
+        jgraphics_arc(g, 0, 0, x->f_circleExtRadius-1,  0., JGRAPHICS_2PI);
+        jgraphics_stroke(g);
+        
+        jgraphics_set_line_width(g, 2.);
+        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_arc(g, 0, 0, x->f_circleExtRadius-1,  0., JGRAPHICS_2PI);
+        jgraphics_stroke(g);
+        
+        dashes[0] = (x->f_circleExtRadius/nInnerCircles)*0.25 ;
+        dashes[1] = (x->f_circleExtRadius/nInnerCircles)*0.5 ;
+        jgraphics_set_dash(g, dashes, 2, 0);
+        
+        jgraphics_set_line_width(g, 1.);
+        for (int i = nInnerCircles-1; i > 0; i--)
+        {
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_arc(g, 0.5, -0.5, (x->f_circleExtRadius/nInnerCircles) * double(i),  0., JGRAPHICS_2PI);
+            jgraphics_stroke(g);
+            
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_arc(g, -0.5, 0.5, (x->f_circleExtRadius/nInnerCircles) * double(i),  0., JGRAPHICS_2PI);
+            jgraphics_stroke(g);
+        }
+        
+        dashes[0] = (x->f_circleExtRadius/nInnerCircles)*0.5 ;
+        dashes[1] = (x->f_circleExtRadius/nInnerCircles)*0.5 ;
+        
+        jgraphics_set_dash(g, dashes, 2, 0);
+        jgraphics_set_line_width(g, 1.);
+        
+        // top
+        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_move_to(g, 0.5, long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, 0.5, x->f_circleExtRadius - 4);
+        jgraphics_stroke(g);
+        
+        jgraphics_set_source_jrgba(g, &black);
+        jgraphics_set_line_width(g, 1.);
+        jgraphics_move_to(g, -0.5, long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, -0.5, x->f_circleExtRadius - 4);
+        jgraphics_stroke(g);
+        
+        // bottom
+        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_move_to(g, 0.5, - long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, 0.5, - x->f_circleExtRadius + 4);
+        jgraphics_stroke(g);
+        
+        jgraphics_set_source_jrgba(g, &black);
+        jgraphics_set_line_width(g, 1.);
+        jgraphics_move_to(g, -0.5, - long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, -0.5, - x->f_circleExtRadius + 4);
+        jgraphics_stroke(g);
+        
+        jgraphics_rotate(g, -CICM_PI2);
+        
+        // top
+        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_move_to(g, 0.5, long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, 0.5, x->f_circleExtRadius - 4);
+        jgraphics_stroke(g);
+        
+        jgraphics_set_source_jrgba(g, &black);
+        jgraphics_set_line_width(g, 1.);
+        jgraphics_move_to(g, -0.5, long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, -0.5, x->f_circleExtRadius - 4);
+        jgraphics_stroke(g);
+        
+        // bottom
+        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_move_to(g, 0.5, - long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, 0.5, - x->f_circleExtRadius + 4);
+        jgraphics_stroke(g);
+        
+        jgraphics_set_source_jrgba(g, &black);
+        jgraphics_set_line_width(g, 1.);
+        jgraphics_move_to(g, -0.5, - long( (x->f_circleExtRadius/nInnerCircles)*0.25 ));
+        jgraphics_line_to(g, -0.5, - x->f_circleExtRadius + 4);
+        jgraphics_stroke(g);
+        
+        /*
+        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_circleExtRadius,  0., JGRAPHICS_2PI);
+        jgraphics_fill(g);
+        
+        jgraphics_set_source_jrgba(g, &black);
+        jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_circleExtRadius,  0., JGRAPHICS_2PI);
+        jgraphics_stroke(g);
+         
+        */
+        
+		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
+	}
+	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
+}
+
+void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
+{
+    t_jpattern *pattern;
+    t_jmatrix transform;
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("spectrum_layer"), rect->width, rect->height);
+    t_pt coord;
+    
+    t_jrgba white = {1., 1., 1., 0.15};
+    t_jrgba black = {0., 0., 0., 0.3};
+    t_jrgba zeroColor = {0., 0., 0., 0.};
+    /*
     t_jrgba black, white;
     double contrastBlack = 0.12;
     double contrastWhite = 0.08;
@@ -443,99 +576,82 @@ void draw_background(t_spectrum *x,  t_object *view, t_rect *rect)
     white.red = Tools::clip_max(white.red += contrastWhite, 1.);
     white.green = Tools::clip_max(white.green += contrastWhite, 1.);
     white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
-	
-	if (g)
-	{
-        jgraphics_set_line_width(g, 1.);
-        
-        jgraphics_set_source_jrgba(g, &white);
-        jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_circleExtRadius,  0., JGRAPHICS_2PI);
-        jgraphics_fill(g);
-        
-        jgraphics_set_source_jrgba(g, &black);
-        jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_circleExtRadius,  0., JGRAPHICS_2PI);
-        jgraphics_stroke(g);
-        
-		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
-	}
-	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
-}
-
-void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
-{
-    t_jpattern *pattern;
-    t_jmatrix transform;
-    t_jrgba zeroColor = {0., 0., 0., 0.};
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("spectrum_layer"), rect->width, rect->height);
+    */
+    
 	if (g)
 	{
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
         jgraphics_set_matrix(g, &transform);
         
+        /*
+        coord.x = x->f_circleExtRadius * 0.25;
+        coord.y = x->f_circleExtRadius * -0.25;
         
+        jgraphics_translate(g, coord.x, coord.y);
+        
+        pattern = jgraphics_pattern_create_radial(0, 0, 0, x->f_circleExtRadius, x->f_circleExtRadius, 0);
+        
+        jgraphics_pattern_add_color_stop_rgba(pattern, 0., black.red, black.green, black.blue, black.alpha);
+        
+        jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
+                                              zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
+        
+        jgraphics_set_source(g, pattern);
+        jgraphics_translate(g, -coord.x, -coord.y);
+        jgraphics_arc(g, 0, 0, x->f_circleExtRadius-1, 0, CICM_2PI);
+        jgraphics_fill(g);
+        */
+        
+        jgraphics_set_line_width(g, 1);
         for(int i = 0; i < x->f_spectrum->getNumberOfBands(); i++)
         {
-            //pattern = jgraphics_pattern_create_radial(x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, 0, 0, x->f_circleExtRadius, 0);
+            coord.x = x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius;
+            coord.y = x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius;
             
-            pattern = jgraphics_pattern_create_radial(x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, 0, 0, 0, x->f_circleExtRadius);
+            jgraphics_translate(g, coord.x, coord.y);
             
-            jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha);
+            pattern = jgraphics_pattern_create_radial(0, 0, 0, x->f_circleExtRadius, x->f_circleExtRadius, 0);
             
-            //jgraphics_pattern_add_color_stop_rgba(pattern, 0.3*x->f_spectrum->getAmplitude(i), x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha - 0.4);
+            jgraphics_pattern_add_color_stop_rgba(pattern, 0.,
+                                                  x->f_color_bands[i].red,
+                                                  x->f_color_bands[i].green,
+                                                  x->f_color_bands[i].blue,
+                                                  x->f_color_bands[i].alpha);
             
-            jgraphics_pattern_add_color_stop_rgba(pattern, 0.8 * x->f_spectrum->getAmplitude(i), zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
             
-            jgraphics_pattern_add_color_stop_rgba(pattern, 1., zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
+            jgraphics_pattern_add_color_stop_rgba(pattern, 0.7 * x->f_spectrum->getAmplitude(i),
+                                                  zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
+            
+            
+            jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
+                                                  zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
             
             jgraphics_set_source(g, pattern);
-            jgraphics_arc(g, 0, 0, x->f_circleExtRadius, 0, CICM_2PI);
+            jgraphics_translate(g, -coord.x, -coord.y);
+            jgraphics_arc(g, 0, 0, x->f_circleExtRadius-3, 0, CICM_2PI);
             jgraphics_fill(g);
+            
         }
         
         /*
-        pattern = jgraphics_pattern_create_radial(0, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, 0, 0, x->f_circleExtRadius, 0);
+        coord.x = x->f_circleExtRadius * -0.5;
+        coord.y = x->f_circleExtRadius * 0.5;
         
-        jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha);
+        jgraphics_translate(g, coord.x, coord.y);
         
-        //jgraphics_pattern_add_color_stop_rgba(pattern, 0.3*x->f_spectrum->getAmplitude(i), x->f_color_bands[i].red, x->f_color_bands[i].green, x->f_color_bands[i].blue, x->f_color_bands[i].alpha - 0.4);
+        pattern = jgraphics_pattern_create_radial(0, 0, 0, x->f_circleExtRadius, x->f_circleExtRadius, 0);
         
-        jgraphics_pattern_add_color_stop_rgba(pattern, 1., zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
+        jgraphics_pattern_add_color_stop_rgba(pattern, 0., white.red, white.green, white.blue, white.alpha);
         
-        jgraphics_set_source(g, pattern);
-        jgraphics_arc(g, 0, 0, x->f_circleExtRadius, 0, CICM_2PI);
-        jgraphics_fill(g);
-        */
-        /*
-        pattern = jgraphics_pattern_create_radial(0, 50, 0, 50, x->f_circleExtRadius, 0);
-        jgraphics_pattern_add_color_stop_rgba(pattern, 0., x->f_color_bands[0].red, x->f_color_bands[0].green, x->f_color_bands[0].blue, x->f_color_bands[0].alpha);
-        jgraphics_pattern_add_color_stop_rgba(pattern, 0.5, x->f_color_bands[1].red, x->f_color_bands[1].green, x->f_color_bands[1].blue, x->f_color_bands[1].alpha);
-        jgraphics_pattern_add_color_stop_rgba(pattern, 1., x->f_color_bands[2].red, x->f_color_bands[2].green, x->f_color_bands[2].blue, x->f_color_bands[2].alpha);
+        jgraphics_pattern_add_color_stop_rgba(pattern, 1.,
+                                              zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
         
         jgraphics_set_source(g, pattern);
-        jgraphics_arc(g, 0, 0, x->f_circleExtRadius, 0, CICM_2PI);
+        jgraphics_translate(g, -coord.x, -coord.y);
+        jgraphics_arc(g, 0, 0, x->f_circleExtRadius-1, 0, CICM_2PI);
         jgraphics_fill(g);
         */
         
-        /*
-        jgraphics_set_line_width(g, 1.);
-        
-        
-        double maxAmp = 0.;
-        for(int i = 0; i < x->f_spectrum->getNumberOfBands(); i++)
-        {
-            maxAmp = Tools::max(maxAmp, x->f_spectrum->getAmplitude(i));
-        }
-        
-        
-        double point_size =  (x->f_circleExtRadius) / (20.* maxAmp) ;
-        
-        for(int i = 0; i < x->f_spectrum->getNumberOfBands(); i++)
-        {
-            jgraphics_set_source_jrgba(g, &x->f_color_bands[i]);
-            jgraphics_arc(g, x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius, x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius, point_size * x->f_spectrum->getAmplitude(i) + 5, 0., JGRAPHICS_2PI);
-            jgraphics_fill(g);
-        }
-        */
         jgraphics_pattern_destroy(pattern);
 		jbox_end_layer((t_object*)x, view, gensym("spectrum_layer"));
 	}
