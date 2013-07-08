@@ -145,7 +145,6 @@
 		<seealso name="hoa.encoder~" />
 		<seealso name="hoa.gain~" />
 		<seealso name="hoa.freeverb~" />
-		<seealso name="hoa.gigaverb~" />
 		<seealso name="hoa.map" />
 		<seealso name="hoa.map~" />
         <seealso name="hoa.meter~" />

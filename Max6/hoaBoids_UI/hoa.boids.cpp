@@ -43,7 +43,7 @@ extern "C"
 #include "ext_parameter.h"
 }
 
-#include "../CicmLibrary/CicmTools.h"
+#include "../../Sources/CicmLibrary/CicmTools.h"
 #include "BoidsManager.h"
 
 #define DEF_REFRESH_TIME 20

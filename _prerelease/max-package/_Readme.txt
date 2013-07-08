@@ -6,6 +6,7 @@ It has been elaborated to facilitate the use of the sphericals harmonics and the
 Thus, they should be able to let their creativity run free.
 ------------------------------------------------------------------------------------------
 
+HoaLibrary v1.3
 
 -----------------
 MANUAL INSTALLATION :
@@ -23,9 +24,11 @@ There are two packages folder you may use. One is called 'packages' in your Max 
 
 Feedback are welcome.
 
-jcolafrancesco@gmail.com
-guillotpierre6@gmail.com
-eliottparis@gmail.com
------------------
+ - cicm.mshparisnord@gmail.com
 
-http://www.mshparisnord.fr/hoalibrary/contacts/
+ - jcolafrancesco@gmail.com
+ - guillotpierre6@gmail.com
+ - eliottparis@gmail.com
+
+ => http://www.mshparisnord.fr/hoalibrary/en/
+-----------------

@@ -950,7 +950,7 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
-					"offset" : [ -2636.0, 0.0 ],
+					"offset" : [ -1313.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
@@ -1268,7 +1268,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.plug~"
+									"text" : "hoa.space"
 								}
 
 							}
@@ -1383,7 +1383,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 8,
+										"count" : 7,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.projector~" ]
@@ -1410,10 +1410,6 @@
 											}
 , 											{
 												"key" : 6,
-												"value" : [ "hoa.gigaverb~" ]
-											}
-, 											{
-												"key" : 7,
 												"value" : [ "hoa.vector~" ]
 											}
  ]
@@ -1550,7 +1546,7 @@
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 27,
+										"count" : 26,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.encoder~" ]
@@ -1645,18 +1641,14 @@
 											}
 , 											{
 												"key" : 23,
-												"value" : [ "hoa.gigaverb~" ]
-											}
-, 											{
-												"key" : 24,
 												"value" : [ "hoa.space" ]
 											}
 , 											{
-												"key" : 25,
+												"key" : 24,
 												"value" : [ "hoa.space~" ]
 											}
 , 											{
-												"key" : 26,
+												"key" : 25,
 												"value" : [ "hoa.vector~" ]
 											}
  ]
@@ -2063,7 +2055,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.projector~", "hoa.recomposer~", "hoa.convolve~", "hoa.map~", "hoa.space~", "hoa.freeverb~", "hoa.gigaverb~", "hoa.vector~" ]
+									"tabs" : [ "hoa.projector~", "hoa.recomposer~", "hoa.convolve~", "hoa.map~", "hoa.space~", "hoa.freeverb~", "hoa.vector~" ]
 								}
 
 							}
@@ -2219,7 +2211,7 @@
 									"rounded" : 6.0,
 									"spacing_x" : 20.0,
 									"spacing_y" : 5.0,
-									"tabs" : [ "hoa.encoder~", "hoa.decoder~", "hoa.rotate~", "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.pi", "hoa.pi~", "hoa.scope~", "hoa.projector~", "hoa.recomposer~", "hoa.recomposer", "hoa.meter~", "hoa.gain~", "hoa.record~", "hoa.play~", "hoa.optim~", "hoa.map", "hoa.map~", "hoa.control", "hoa.convolve~", "hoa.wider~", "hoa.freeverb~", "hoa.gigaverb~", "hoa.space", "hoa.space~", "hoa.vector~" ]
+									"tabs" : [ "hoa.encoder~", "hoa.decoder~", "hoa.rotate~", "hoa.plug~", "hoa.connect", "hoa.dac~", "hoa.pi", "hoa.pi~", "hoa.scope~", "hoa.projector~", "hoa.recomposer~", "hoa.recomposer", "hoa.meter~", "hoa.gain~", "hoa.record~", "hoa.play~", "hoa.optim~", "hoa.map", "hoa.map~", "hoa.control", "hoa.convolve~", "hoa.wider~", "hoa.freeverb~", "hoa.space", "hoa.space~", "hoa.vector~" ]
 								}
 
 							}
