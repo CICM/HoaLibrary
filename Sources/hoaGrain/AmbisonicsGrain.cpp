@@ -23,47 +23,53 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsDiffuser.h"
+#include "AmbisonicsGrain.h"
 
-AmbisonicsDiffuser::AmbisonicsDiffuser(long anOrder, bool aMode, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsGrain::AmbisonicsGrain(long anOrder, bool aMode, double aMaximumDelayInMs,long aVectorSize, long aSamplingRate) : AmbisonicsDiffuser( anOrder, aMode, aVectorSize, aSamplingRate)
 {
-    m_mode = Tools::clip(aMode, Hoa_No_Encoding, Hoa_Post_Encoding);
-    if(m_mode == Hoa_No_Encoding)
-        m_number_of_inputs = 1;
-
-    m_encoding_compensation = 0;
-    m_diffuse_factor = 1.;
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain.push_back(new CicmQsgs(aMaximumDelayInMs, aVectorSize, aSamplingRate));
+    }
 }
 
-bool AmbisonicsDiffuser::getMode()
+void AmbisonicsGrain::setGrainSize(double aGrainSize)
 {
-    return m_mode;
+    
 }
 
-double AmbisonicsDiffuser::getDiffuseFactor()
+void AmbisonicsGrain::setDelayTime(double aDelayTime)
 {
-    return m_diffuse_factor;
+    
 }
 
-bool AmbisonicsDiffuser::getEncodingCompensation()
+void AmbisonicsGrain::setFeedback(double aFeedback)
 {
-    return m_encoding_compensation;
+    
 }
 
-void AmbisonicsDiffuser::setDiffuseFactor(double aDiffuseValue)
+void AmbisonicsGrain::setRarefaction(double aRarefaction)
 {
-    if(m_mode == Hoa_Post_Encoding)
-        m_diffuse_factor = Tools::clip(aDiffuseValue, 0., 1.);
+    
 }
 
-void AmbisonicsDiffuser::setEncodingCompensation(bool OnOff)
+void AmbisonicsGrain::setWindowFunction(long aEnvelopeType)
 {
-    if(m_mode == Hoa_Post_Encoding)
-        m_encoding_compensation = Tools::clip(OnOff, 0, 1);
+    
 }
 
-AmbisonicsDiffuser::~AmbisonicsDiffuser()
+void AmbisonicsGrain::writeWidowFunction(double* aBuffer, long aSize)
 {
-	;
+    
+}
+
+void AmbisonicsGrain::writeWidowFunction(float* aBuffer, long aSize)
+{
+    
+}
+
+AmbisonicsGrain::~AmbisonicsGrain()
+{
+	m_grain.clear();
 }
 

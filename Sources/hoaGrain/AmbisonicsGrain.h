@@ -23,47 +23,93 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsDiffuser.h"
+#ifndef DEF_AMBISONICSGRAIN
+#define DEF_AMBISONICSGRAIN
 
-AmbisonicsDiffuser::AmbisonicsDiffuser(long anOrder, bool aMode, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+#include "../HoaAmbisonics/AmbisonicsDiffuser.h"
+
+class AmbisonicsGrain : public AmbisonicsDiffuser
 {
-    m_mode = Tools::clip(aMode, Hoa_No_Encoding, Hoa_Post_Encoding);
-    if(m_mode == Hoa_No_Encoding)
-        m_number_of_inputs = 1;
+private:
+    vector <CicmQsgs*> m_grain;
+    
+public:
+	AmbisonicsGrain(long anOrder = 1, bool aMode = Hoa_Post_Encoding, double aMaximumDelayInMs = 5000., long aVectorSize = 0,  long aSamplingRate = 44100);
+    
+    void setVectorSize(long aVectorSize);
+    void setSamplingRate(long aSamplingRate);
+    
+    void setGrainSize(double aGrainSize);
+    void setDelayTime(double aDelayTime);
+    void setFeedback(double aFeedback);
+    void setRarefaction(double aRarefaction);
+    
+    void setWindowFunction(long aEnvelopeType);
+    void writeWidowFunction(double* aBuffer, long aSize);
+    void writeWidowFunction(float* aBuffer, long aSize);
+    
+    double getGrainSize();
+    double getDelayTime();
+    double getFeedback();
+    double getRarefaction();
+    
+    long   getWidowFunction();
+    
+	~AmbisonicsGrain();
+	
+    /****************************/
+	/* Perform sample by sample */
+    /****************************/
 
-    m_encoding_compensation = 0;
-    m_diffuse_factor = 1.;
-}
+    inline void process(double aInputs, double* aOutputs)
+	{
+        
+	}
+    
+	inline void process(double* aInputs, double* aOutputs)
+	{
+        
+	}
+    
+    inline void process(float aInputs, float* aOutputs)
+	{
+		
+	}
+    
+    inline void process(float* aInputs, float* aOutputs)
+	{
+                    
+	}
+    
 
-bool AmbisonicsDiffuser::getMode()
-{
-    return m_mode;
-}
+    /************************/
+	/* Perform block sample */
+    /************************/
+    
+	inline void process(double* aInputs, double** aOutputs)
+	{
+        
+	}
+    
+    inline void process(double** aInputs, double** aOutputs)
+	{
+        
+	}
+    
+    inline void process(float* aInputs, float** aOutputs)
+	{
+        
+	}
+    
+    inline void process(float** aInputs, float** aOutputs)
+	{
+        
+	}
 
-double AmbisonicsDiffuser::getDiffuseFactor()
-{
-    return m_diffuse_factor;
-}
+};
 
-bool AmbisonicsDiffuser::getEncodingCompensation()
-{
-    return m_encoding_compensation;
-}
 
-void AmbisonicsDiffuser::setDiffuseFactor(double aDiffuseValue)
-{
-    if(m_mode == Hoa_Post_Encoding)
-        m_diffuse_factor = Tools::clip(aDiffuseValue, 0., 1.);
-}
 
-void AmbisonicsDiffuser::setEncodingCompensation(bool OnOff)
-{
-    if(m_mode == Hoa_Post_Encoding)
-        m_encoding_compensation = Tools::clip(OnOff, 0, 1);
-}
+#endif
 
-AmbisonicsDiffuser::~AmbisonicsDiffuser()
-{
-	;
-}
 

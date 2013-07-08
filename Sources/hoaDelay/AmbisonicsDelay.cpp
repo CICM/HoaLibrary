@@ -58,8 +58,11 @@ double AmbisonicsDelay::getRampInMs()
 
 void AmbisonicsDelay::setDiffuseFactor(double aDiffuseValue)
 {
-	m_diffuse_factor = Tools::clip(aDiffuseValue, 0., 1.);
-    setDelayTimeInMs(m_delay_time);
+    if(m_mode == Hoa_Post_Encoding)
+    {
+        m_diffuse_factor = Tools::clip(aDiffuseValue, 0., 1.);
+        setDelayTimeInMs(m_delay_time);
+    }
 }
 
 void AmbisonicsDelay::setDelayTimeInSample(long aDelayInSample)
