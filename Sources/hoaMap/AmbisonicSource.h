@@ -27,7 +27,6 @@
 #ifndef DEF_AMBISONICSOURCE
 #define DEF_AMBISONICSOURCE
 
-#include "cicmTools.h"
 /*
 class Source
 {

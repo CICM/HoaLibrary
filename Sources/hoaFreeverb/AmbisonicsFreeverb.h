@@ -27,7 +27,6 @@
 #define DEF_AMBISONICSFREEVERB
 
 #include "../HoaAmbisonics/Ambisonics.h"
-#include "../CicmLibrary/CicmReverb/CicmFreeverb.h"
 
 class AmbisonicsFreeverb : public Ambisonics
 {

@@ -26,7 +26,6 @@
 #ifndef DEF_AMBISONICSOURCESPRESET
 #define DEF_AMBISONICSOURCESPRESET
 
-#include "cicmTools.h"
 #include "AmbisonicSourcesManager.h"
 
 class SourcesPreset

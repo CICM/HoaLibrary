@@ -41,9 +41,7 @@ extern "C" {
 #endif
 }
 
-#include "../../Sources/CicmLibrary/CicmDefine.h"
-#include "../../Sources/CicmLibrary/CicmTools.h"
-#include "../../Sources/CicmLibrary/CicmLine2.h"
+#include "../../Sources/HoaLibrary.h"
 
 #define MAX_IO 64
 #define MIN_IO 1
@@ -86,7 +84,7 @@ typedef struct _hoaGain
     t_jrgba     j_intknobcolor;
     
     // gain
-    CicmLine2*   f_amp;
+    CicmLine*   f_amp;
     char        f_inputMode;
     float       f_range[2];
     double      j_valdB;
@@ -324,7 +322,7 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.z_box.b_firstin = (t_object *)x;
     
-    x->f_amp = new CicmLine2(sys_getblksize(), sys_getsr(), x->f_interp);
+    x->f_amp = new CicmLine(x->f_interp, sys_getblksize(), sys_getsr());
     
     // inputs
 	dsp_setupjbox((t_pxjbox *)x, x->f_numberOfChannels + 1);
@@ -512,7 +510,7 @@ void hoaGain_dsp(t_hoaGain *x, t_signal **sp, short *count)
 	for(i = 2; i < pointer_count; i++)
 		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
     
-    x->f_amp->setSampleRate(sp[0]->s_sr);
+    x->f_amp->setSamplingRate(sp[0]->s_sr);
     x->f_amp->setVectorSize(sp[0]->s_n);
 	
 	dsp_addv(hoaGain_perform, pointer_count, (void **)sigvec);
@@ -538,7 +536,7 @@ t_int *hoaGain_perform(t_int *w)
 }
 void hoaGain_dsp64(t_hoaGain *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    x->f_amp->setSampleRate(samplerate);
+    x->f_amp->setSamplingRate(samplerate);
     x->f_amp->setVectorSize(maxvectorsize);
     object_method(dsp64, gensym("dsp_add64"), x, hoaGain_perform64, 0, NULL);
 }
@@ -812,8 +810,8 @@ t_max_err hoaGain_setattr_interp(t_hoaGain *x, t_object *attr, long ac, t_atom *
 	double d;
 	if (ac && av) {
 		d = atom_getfloat(av);
-        x->f_amp->setRampTimeInMs(d);
-        x->f_interp = x->f_amp->getRampTimeInMs();
+        x->f_amp->setRampInMs(d);
+        x->f_interp = x->f_amp->getRampInMs();
 	}
 	return MAX_ERR_NONE;
 }

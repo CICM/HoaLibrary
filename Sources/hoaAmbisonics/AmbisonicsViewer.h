@@ -26,7 +26,7 @@
 #ifndef DEF_AmbisonicsViewer
 #define DEF_AmbisonicsViewer
 
-#include "../CicmLibrary/CicmTools.h"
+#include "../CicmLibrary/CicmLibrary.h"
 
 class AmbisonicsViewer
 {

@@ -26,7 +26,6 @@
 #ifndef DEF_AMBISONICSOURCESTRAJECTORY
 #define DEF_AMBISONICSOURCESTRAJECTORY
 
-#include "cicmTools.h"
 #include "AmbisonicSourcesPreset.h"
 
 class SourcesTrajectory : public SourcesPreset
