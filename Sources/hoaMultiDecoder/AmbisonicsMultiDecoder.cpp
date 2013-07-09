@@ -101,7 +101,7 @@ void AmbisonicsMultiDecoder::setRestitutionMode(long aResitutionMode)
 
 long AmbisonicsMultiDecoder::getRestitutionMode()
 {
-    return 0;m_restitution->getRestitutionMode();
+    return m_restitution->getRestitutionMode();
 }
 
 void AmbisonicsMultiDecoder::setLoudspeakerAngle(long anIndex, double anAngle)
