@@ -280,17 +280,9 @@
 				8FE7C7C2178AD19000617EEC /* Sources */,
 				8FBA1507177C7CB9002848B6 /* HrtfDatabase */,
 				8FBCB947177326E700052D58 /* hoa.decoder~.cpp */,
-				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
-			sourceTree = "<group>";
-		};
-		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
 		};
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
