@@ -32,12 +32,6 @@ extern "C"
 #include "z_dsp.h"
 }
 
-enum recomposerMode {
-    FIXE = 0,
-    FISHEYE,
-    FREE
-};
-
 typedef struct _HoaRecomposer
 {
 	t_pxobject					f_ob;
@@ -45,8 +39,7 @@ typedef struct _HoaRecomposer
     
 	long						f_inputNumber;
 	long						f_outputNumber;
-    //t_atom_long                 f_mode;
-    t_symbol*                   f_mode;
+    t_atom_long                 f_mode;
     double                      f_ramp_time;
     
 } t_HoaRecomposer;
@@ -90,9 +83,9 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)HoaRecomposer_wide,          "directivities",     A_GIMME,0);
     class_addmethod(c, (method)HoaRecomposer_float,         "float",    A_FLOAT,0);
     
-    CLASS_ATTR_SYM              (c,"mode", 0, t_HoaRecomposer, f_mode);
+    CLASS_ATTR_LONG             (c,"mode", 0, t_HoaRecomposer, f_mode);
 	CLASS_ATTR_LABEL			(c,"mode", 0, "Mode");
-    CLASS_ATTR_ENUM             (c,"mode", 0, "fixe fisheye free");
+    CLASS_ATTR_ENUMINDEX3       (c,"mode", 0, "fixe", "fisheye", "free");
 	CLASS_ATTR_CATEGORY			(c,"mode", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"mode", NULL, HoaRecomposer_set_attr_mode);
     CLASS_ATTR_ORDER			(c,"mode", 0,  "1");
@@ -129,7 +122,7 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
         
         /* Base Attributes */
         x->f_ramp_time = 20;
-        x->f_mode = gensym("fixe");
+        x->f_mode = 0;
         
 		x->f_ambiRecomposer	= new AmbisonicsRecomposer(order, inputs);
         x->f_ambiRecomposer->setRamp(20. * sys_getsr());
@@ -141,7 +134,7 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
         
         d = (t_dictionary *)gensym("#D")->s_thing;
         if (d) attr_dictionary_process(x, d);
-        object_attr_setdisabled((t_object *)x, gensym("ramp"), (x->f_mode == gensym("fixe")) ? 1 : 0);
+        object_attr_setdisabled((t_object *)x, gensym("ramp"), (x->f_mode == 0) ? 1 : 0);
 	}
 	return (x);
 }
@@ -182,7 +175,7 @@ void HoaRecomposer_float(t_HoaRecomposer *x, double f)
 
 t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc && argv && (atom_gettype(argv) == A_SYM))
+    if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
         int dspState = sys_getdspobjdspstate((t_object*)x);
         if(dspState)
@@ -190,20 +183,13 @@ t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long a
         
         long lastNumberOfInputs = x->f_ambiRecomposer->getNumberOfInputs();
         
-        t_symbol* newModeSym = atom_getsym(argv);
-        
-        post("modeSym = %s", newModeSym->s_name);
-        int newModeInt = 0;
-        newModeInt = (newModeSym == gensym("free")) ? FREE : (newModeSym == gensym("fisheye")) ? FISHEYE : 0;
-        x->f_ambiRecomposer->setMode(newModeInt);
-        
-        post("mode = %i", newModeInt);
-        
-        newModeInt = x->f_ambiRecomposer->getMode();
-        x->f_mode = (newModeInt == FREE) ? gensym("free") : (newModeInt == FISHEYE) ? gensym("fisheye") : gensym("fixe");
+        x->f_ambiRecomposer->setMode(atom_getfloat(argv));
+        x->f_mode = x->f_ambiRecomposer->getMode();
         
         if (lastNumberOfInputs != x->f_ambiRecomposer->getNumberOfInputs())
         {
+            
+            
             t_object *b = NULL;
             object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
             object_method(b, gensym("dynlet_begin"));
