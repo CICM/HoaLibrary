@@ -94,7 +94,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SYM              (c, "mode", 0, t_HoaDecode, f_mode);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "mode", 0, "Mode");
-    CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonics \" \"binaural \" \"irregular");
+    CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonics binaural irregular");
 	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, configuration_set);
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
     CLASS_ATTR_SAVE             (c, "mode", 1);
@@ -303,7 +303,7 @@ t_max_err loudspeakers_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *ar
 /* Binaural */
 t_max_err pinnaesize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(atom_gettype(argv) == A_SYM && (atom_getsym(argv) == gensym("large") || atom_getsym(argv) == gensym(" large")))
+    if(atom_gettype(argv) == A_SYM && (atom_getsym(argv) == gensym("large") || atom_getsym(argv) == gensym("Large")))
         x->f_AmbisonicsDecoder->setPinnaeSize(Hoa_Large);
     else
         x->f_AmbisonicsDecoder->setPinnaeSize(Hoa_Small);
@@ -318,7 +318,7 @@ t_max_err pinnaesize_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv
 /* Irregular */
 t_max_err restitution_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(atom_getsym(argv) == gensym("projection") || atom_getsym(argv) == gensym(" projection"))
+    if(atom_getsym(argv) == gensym("projection") || atom_getsym(argv) == gensym("Projection"))
         x->f_AmbisonicsDecoder->setRestitutionMode(Hoa_Microphone_Simulation);
     else
         x->f_AmbisonicsDecoder->setRestitutionMode(Hoa_Amplitude_Panning);

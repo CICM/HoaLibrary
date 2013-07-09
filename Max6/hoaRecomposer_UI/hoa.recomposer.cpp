@@ -932,7 +932,7 @@ void draw_fishEye(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 void draw_rect_selection(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 {
     t_jrgba fillColor = x->f_color_selection;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("rectselecion_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("rectselection_layer"), rect->width, rect->height);
     fillColor.alpha = Tools::clip_min(fillColor.alpha - 0.2);
 	
 	if (g && x->f_rectSelectionExist)
@@ -945,9 +945,9 @@ void draw_rect_selection(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         jgraphics_set_line_width(g, 2);
         jgraphics_stroke(g);
 		
-		jbox_end_layer((t_object*)x, view, gensym("rectselecion_layer"));
+		jbox_end_layer((t_object*)x, view, gensym("rectselection_layer"));
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("rectselecion_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, gensym("rectselection_layer"), 0., 0.);
 }
 //========================= Mouse Methods :
 
@@ -1191,7 +1191,7 @@ void end_rect_selection(t_HoaRecomposerUI *x, t_pt pt)
         }
     }
     x->f_rectSelectionExist = false;
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("rectselecion_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("rectselection_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
     jbox_redraw((t_jbox *)x);
@@ -1222,7 +1222,7 @@ void do_rect_selection(t_HoaRecomposerUI *x, t_pt pt)
         x->f_rectSelection.y = x->f_rectSelectionBegin.y - x->f_rectSelection.height;
     }
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("rectselecion_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("rectselection_layer"));
     jbox_redraw((t_jbox *)x);
 }
 
