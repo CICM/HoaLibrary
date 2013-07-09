@@ -83,7 +83,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SYM              (c, "mode", 0, t_HoaMap, f_mode);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "mode", 0, "Coordinates Types");
-    CLASS_ATTR_ENUM             (c, "mode", 0, "polar cartesian ");
+    CLASS_ATTR_ENUM             (c, "mode", 0, "polar cartesian");
 	CLASS_ATTR_ORDER			(c, "mode", 0, "1");
 	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, HoaMap_mode);
 	CLASS_ATTR_SAVE				(c, "mode", 1);

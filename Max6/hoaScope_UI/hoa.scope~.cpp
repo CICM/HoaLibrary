@@ -132,7 +132,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_FILTER_MIN		(c, "gain", 1.);
 	CLASS_ATTR_DEFAULT			(c, "gain", 0, "1.");
 	CLASS_ATTR_SAVE				(c, "gain", 1);
-	
+	/*
     CLASS_ATTR_LONG             (c, "mode", 0, t_scope, f_process_mode);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
     CLASS_ATTR_ENUMINDEX2       (c, "mode", 0, "Peak", "Average");
@@ -148,10 +148,10 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c, "bufsize", 0, "Buffer Size (in samps)");
 	CLASS_ATTR_DEFAULT			(c, "bufsize", 0, "128");
 	CLASS_ATTR_SAVE				(c, "bufsize", 1);
-    
+    */
 	CLASS_ATTR_LONG             (c, "interval", 0, t_scope, f_interval);
 	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Behavior");
-	CLASS_ATTR_ORDER			(c, "interval", 0, "5");
+	CLASS_ATTR_ORDER			(c, "interval", 0, "3");
 	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "100");
@@ -246,6 +246,8 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
     x->f_sampleCounter = 0;
     x->f_normalize = 1.;
 	x->j_box.z_box.b_firstin = (t_object *)x;
+    x->f_process_mode = 0;
+    x->f_bufsize = 128;
 	dsp_setupjbox((t_pxjbox *)x, x->f_order * 2 + 1);
 	
 	x->f_clock = clock_new(x,(method)scope_tick);
