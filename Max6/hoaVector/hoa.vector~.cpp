@@ -80,7 +80,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SYM					(c, "output", 0, t_HoaVector, f_output_mode);
 	CLASS_ATTR_CATEGORY				(c, "output", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "output", 0, "1");
-    CLASS_ATTR_ENUM                 (c, "output", 0, "polar \" cartesian");
+    CLASS_ATTR_ENUM                 (c, "output", 0, "polar cartesian");
     CLASS_ATTR_ACCESSORS            (c, "output", NULL, mode_set);
 	CLASS_ATTR_LABEL                (c, "output", 0, "Coordinates type");
 	CLASS_ATTR_DEFAULT				(c, "output", 0, "1");
@@ -173,7 +173,7 @@ t_max_err mode_set(t_HoaVector *x, t_object *attr, long ac, t_atom *av)
     {
         if(atom_gettype(av) == A_SYM)
         {
-            if(atom_getsym(av) == gensym("cartesian") || atom_getsym(av) == gensym(" cartesian"))
+            if(atom_getsym(av) == gensym("cartesian"))
                 x->f_ambiVector->setMode(Hoa_Cartesian);
             else
                 x->f_ambiVector->setMode(Hoa_Polar);
