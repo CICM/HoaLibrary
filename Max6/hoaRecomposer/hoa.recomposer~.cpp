@@ -32,12 +32,6 @@ extern "C"
 #include "z_dsp.h"
 }
 
-enum recomposerMode {
-    FIXE = 0,
-    FISHEYE,
-    FREE
-};
-
 typedef struct _HoaRecomposer
 {
 	t_pxobject					f_ob;
@@ -128,17 +122,20 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
 			inputs	= atom_getlong(argv+1);
         
         /* Base Attributes */
-        x->f_ramp_time = 20;
+        
+		x->f_ambiRecomposer	= new AmbisonicsRecomposer(order, inputs, Hoa_Fixe, sys_getblksize(), sys_getsr());
+        x->f_ambiRecomposer->setRampInMs(20.);
+        
+        x->f_ramp_time = x->f_ambiRecomposer->getRampInMs();
         x->f_mode = gensym("fixe");
         
-		x->f_ambiRecomposer	= new AmbisonicsRecomposer(order, inputs);
-        x->f_ambiRecomposer->setRamp(20. * sys_getsr());
 		dsp_setup((t_pxobject *)x, x->f_ambiRecomposer->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiRecomposer->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
         
 		x->f_ob.z_misc = Z_NO_INPLACE;
         
+        attr_args_process(x, argc, argv);
         d = (t_dictionary *)gensym("#D")->s_thing;
         if (d) attr_dictionary_process(x, d);
         object_attr_setdisabled((t_object *)x, gensym("ramp"), (x->f_mode == gensym("fixe")) ? 1 : 0);
@@ -182,25 +179,27 @@ void HoaRecomposer_float(t_HoaRecomposer *x, double f)
 
 t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc && argv && (atom_gettype(argv) == A_SYM))
+    long lastNumberOfInputs = x->f_ambiRecomposer->getNumberOfInputs();
+    
+    if(argc && argv)
     {
         int dspState = sys_getdspobjdspstate((t_object*)x);
         if(dspState)
             object_method(gensym("dsp")->s_thing, gensym("stop"));
         
-        long lastNumberOfInputs = x->f_ambiRecomposer->getNumberOfInputs();
+        if(atom_gettype(argv) == A_SYM)
+        {
+            t_symbol* newModeSym = atom_getsym(argv);
+            int newModeInt = (newModeSym == gensym("free")) ? Hoa_Free : (newModeSym == gensym("fisheye")) ? Hoa_Fisheye : 0;
+            x->f_ambiRecomposer->setMode(newModeInt);
+        }
+        else if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+        {
+            x->f_ambiRecomposer->setMode(atom_getfloat(argv));
+        }
         
-        t_symbol* newModeSym = atom_getsym(argv);
-        
-        post("modeSym = %s", newModeSym->s_name);
-        int newModeInt = 0;
-        newModeInt = (newModeSym == gensym("free")) ? FREE : (newModeSym == gensym("fisheye")) ? FISHEYE : 0;
-        x->f_ambiRecomposer->setMode(newModeInt);
-        
-        post("mode = %i", newModeInt);
-        
-        newModeInt = x->f_ambiRecomposer->getMode();
-        x->f_mode = (newModeInt == FREE) ? gensym("free") : (newModeInt == FISHEYE) ? gensym("fisheye") : gensym("fixe");
+        int newModeInt = x->f_ambiRecomposer->getMode();
+        x->f_mode = (newModeInt == Hoa_Free) ? gensym("free") : (newModeInt == Hoa_Fisheye) ? gensym("fisheye") : gensym("fixe");
         
         if (lastNumberOfInputs != x->f_ambiRecomposer->getNumberOfInputs())
         {
@@ -215,10 +214,6 @@ t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long a
             object_attr_setdisabled((t_object *)x, gensym("ramp"), 1);
         else
             object_attr_setdisabled((t_object *)x, gensym("ramp"), 0);
-        /*
-         if(dspState)
-         object_method(gensym("dsp")->s_thing, gensym("start"));
-         */
     }
     return MAX_ERR_NONE;
 }
@@ -227,8 +222,8 @@ t_max_err HoaRecomposer_ramp(t_HoaRecomposer *x, t_object *attr, long argc, t_at
 {
     if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        x->f_ambiRecomposer->setRamp(atom_getfloat(argv) * sys_getsr()  / 1000.);
-        x->f_ramp_time = Tools::clip_min((float)atom_getfloat(argv), 0.f);
+        x->f_ambiRecomposer->setRampInMs(atom_getfloat(argv));
+        x->f_ramp_time = x->f_ambiRecomposer->getRampInMs();
     }
     return MAX_ERR_NONE;
 }
@@ -236,6 +231,7 @@ t_max_err HoaRecomposer_ramp(t_HoaRecomposer *x, t_object *attr, long argc, t_at
 void HoaRecomposer_dsp64(t_HoaRecomposer *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiRecomposer->setVectorSize(maxvectorsize);
+    x->f_ambiRecomposer->setSamplingRate(samplerate);
     
     if (x->f_ambiRecomposer->getMode() == Hoa_Free)
         object_method(dsp64, gensym("dsp_add64"), x, HoaRecomposer_perform64_free, 0, NULL);

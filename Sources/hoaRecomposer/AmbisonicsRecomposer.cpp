@@ -25,7 +25,7 @@
 
 #include "AmbisonicsRecomposer.h"
 
-AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophones, long aVectorSize, long aMode) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophones, long aMode, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {
 	m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, m_number_of_harmonics);
     m_number_of_outputs = m_number_of_harmonics;
@@ -34,8 +34,8 @@ AmbisonicsRecomposer::AmbisonicsRecomposer(long anOrder, long aNumberOfMicrophon
     {
         m_encoders.push_back(new AmbisonicsEncoder(m_order, Hoa_Basic, m_vector_size));
         m_widers.push_back(new AmbisonicsWider(m_order, m_vector_size));
-        m_lines.push_back(new CicmLine((long)4410, m_vector_size));
-        m_wider_lines.push_back(new CicmLine((long)4410, m_vector_size));
+        m_lines.push_back(new CicmLine((long)4410, m_vector_size, m_sampling_rate));
+        m_wider_lines.push_back(new CicmLine((long)4410, m_vector_size, m_sampling_rate));
         
         double angle = ((double)i / (double)(m_number_of_microphones)) * CICM_2PI;
         m_encoders[i]->setAzimuthBoth(angle);
@@ -172,12 +172,34 @@ void AmbisonicsRecomposer::setVectorSize(long aVectorSize)
     }
 }
 
-void AmbisonicsRecomposer::setRamp(long aNumberOfSample)
+void AmbisonicsRecomposer::setSamplingRate(long aSamplingRate)
+{
+    Ambisonics::setSamplingRate(aSamplingRate);
+    
+    for(int i = 0; i < m_number_of_microphones; i++)
+    {
+        m_encoders[i]->setSamplingRate(aSamplingRate);
+        m_lines[i]->setSamplingRate(aSamplingRate);
+        m_widers[i]->setSamplingRate(aSamplingRate);
+        m_wider_lines[i]->setSamplingRate(aSamplingRate);
+    }
+}
+
+void AmbisonicsRecomposer::setRampInSample(long aNumberOfSample)
 {
     for(int i = 0; i < m_number_of_microphones; i++)
     {
         m_lines[i]->setRampInSample(aNumberOfSample);
         m_wider_lines[i]->setRampInSample(aNumberOfSample);
+    }
+}
+
+void AmbisonicsRecomposer::setRampInMs(double aTimeInMs)
+{
+    for(int i = 0; i < m_number_of_microphones; i++)
+    {
+        m_lines[i]->setRampInMs(aTimeInMs);
+        m_wider_lines[i]->setRampInMs(aTimeInMs);
     }
 }
 
@@ -217,5 +239,20 @@ AmbisonicsRecomposer::~AmbisonicsRecomposer()
     Cicm_Free(m_recomposer_matrix_double);
 }
 
-
+double AmbisonicsRecomposer::getFishEyeFactor()
+{
+    return m_fishEyeFactor;
+}
+long AmbisonicsRecomposer::getRampInSample()
+{
+    return m_lines[0]->getRampInSample();
+}
+double AmbisonicsRecomposer::getRampInMs()
+{
+    return m_lines[0]->getRampInMs();
+}
+long AmbisonicsRecomposer::getMode()
+{
+    return m_mode;
+}
 

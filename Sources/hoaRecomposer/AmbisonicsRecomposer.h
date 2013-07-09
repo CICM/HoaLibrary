@@ -69,10 +69,12 @@ private:
     
     void computeMatrix(double aFishEyeFactor);
 public:
-	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aVectorSize = 0, long aMode = Hoa_Fixe);
+	AmbisonicsRecomposer(long anOrder = 1, long aNumberOfMicrophones = 4, long aMode = Hoa_Fixe, long aVectorSize = 0, long aSamplingRate = 44100);
     
     void setVectorSize(long aVectorSize);
-    void setRamp(long aNumberOfSample);
+    void setSamplingRate(long aSamplingRate);
+    void setRampInSample(long aNumberOfSample);
+    void setRampInMs(double aTimeInMs);
     void setMode(long aMode);
     void setFishEyeFactor(double aFishEyeFactor);
 	void setMicrophoneAngle(long anIndex, double anAngle);
@@ -81,8 +83,10 @@ public:
     
     double getMicrophoneAngle(long anIndex);
     double getMicrophoneWide(long anIndex);
-    inline double getFishEyeFactor() {return m_fishEyeFactor;}
-    inline long getMode() {return m_mode;}
+    double getFishEyeFactor();
+    long getRampInSample();
+    double getRampInMs();
+    long getMode();
     std::string getMicrophonesName(long anIndex);
     
 	~AmbisonicsRecomposer();
