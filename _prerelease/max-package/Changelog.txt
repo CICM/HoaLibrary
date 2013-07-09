@@ -22,6 +22,7 @@ New FEATURES:
  - hoa.vector~ : custom angles.
  - hoa.map : clear method, various bug fixed.
  - hoa.map~Ê: 1 source => signal coord
+ - hoa.dac~Ê: can take a symbol as first arg for bus creation (like vanilla dac~)
 
 ------------------------
 version 1.2

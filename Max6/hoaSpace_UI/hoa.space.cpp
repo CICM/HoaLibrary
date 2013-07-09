@@ -87,6 +87,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv);
 void space_free(t_space *x);
 void space_assist(t_space *x, void *b, long m, long a, char *s);
 void space_preset(t_space *x);
+void space_bang(t_space *x);
 
 t_max_err space_notify(t_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *params);
@@ -107,6 +108,7 @@ void space_rotate_points(t_space *x, t_object *patcherview, t_pt pt, long modifi
 void space_retract_points(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 
 void space_compute(t_space *x);
+void space_output(t_space *x);
 
 /* Paint *********************************************/
 void space_paint(t_space *x, t_object *view);
@@ -128,6 +130,7 @@ int C74_EXPORT main()
 	class_addmethod(c, (method)space_assist,          "assist",         A_CANT,	0);
 	class_addmethod(c, (method)space_paint,           "paint",          A_CANT,	0);
 	class_addmethod(c, (method)space_notify,          "notify",         A_CANT, 0);
+    class_addmethod(c, (method)space_bang,            "bang",           A_CANT, 0);
 	class_addmethod(c, (method)space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_down,      "mousedown",      A_CANT, 0);
     class_addmethod(c, (method)space_mousemove,       "mousemove",      A_CANT, 0);
@@ -288,6 +291,11 @@ void space_getdrawparams(t_space *x, t_object *patcherview, t_jboxdrawparams *pa
     params->d_bordercolor = x->f_color_border_box;
 	params->d_borderthickness = 1;
 	params->d_cornersize = 6;
+}
+
+void space_bang(t_space *x)
+{
+    space_compute(x);
 }
 
 /**********************************************************/
@@ -836,8 +844,13 @@ void space_compute(t_space *x)
     jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_points_layer"));
     jbox_redraw((t_jbox *)x);
     
-    outlet_int(x->f_outInfos, x->f_number_of_microphones);
+    space_output(x);
+}
 
+void space_output(t_space *x)
+{
+    outlet_int(x->f_outInfos, x->f_number_of_microphones);
+    
     for(int i = 0; i < x->f_number_of_microphones; i++)
         atom_setfloat(x->f_tempory_values+i, x->f_microphonesValues[i]);
     

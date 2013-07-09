@@ -68,7 +68,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SYM				(c, "optim", 0, t_HoaOptim, f_optim_mode);
 	CLASS_ATTR_CATEGORY			(c, "optim", 0, "Behavior");
 	CLASS_ATTR_LABEL			(c, "optim", 0, "Optimization");
-    CLASS_ATTR_ENUM             (c, "optim", 0, "basic \" \"maxRe \" \"inPhase");
+    CLASS_ATTR_ENUM             (c, "optim", 0, "basic maxRe inPhase");
 	CLASS_ATTR_ORDER			(c, "optim", 0, "1");
 	CLASS_ATTR_ACCESSORS		(c, "optim", NULL, HoaOptim_optim);
 	CLASS_ATTR_SAVE				(c, "optim", 1);

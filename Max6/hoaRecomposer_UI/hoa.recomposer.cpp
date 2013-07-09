@@ -408,8 +408,8 @@ void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *
             {
                 for(int i = 1; i < ac ; i++)
                 {
-                    if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG) && atom_getlong(av + i) != 0 )
-                        x->f_mics->resetAngles(atom_getlong(av + i) - 1);
+                    if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG))
+                        x->f_mics->resetAngles(atom_getlong(av + i));
                 }
             }
             else
@@ -423,8 +423,8 @@ void HoaRecomposerUI_reset(t_HoaRecomposerUI *x, t_symbol *s, short ac, t_atom *
             {
                 for(int i = 1; i < ac ; i++)
                 {
-                    if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG) && atom_getlong(av + i) != 0 )
-                        x->f_mics->resetWides(atom_getlong(av + i) - 1);
+                    if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG))
+                        x->f_mics->resetWides(atom_getlong(av + i));
                 }
             }
             else
@@ -714,7 +714,7 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
             mic_angle = CICM_2PI - (x->f_mics->getAngleInRadian(i) + CICM_PI2);
             x1 = long(Tools::abscisse(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
             y1 = long(Tools::ordinate(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
-            sprintf(text,"%i", i+1);
+            sprintf(text,"%i", i);
 			jtextlayout_set(jtl, text, jf, x1 - fontsize * 1.5, y1 - 10, fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
             jtextlayout_draw(jtl, g);
         }

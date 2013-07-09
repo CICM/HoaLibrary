@@ -99,7 +99,7 @@ void *dac_new(t_symbol *s, int argc, t_atom *argv)
 			//channels[count++] = argv[i];
 		}
 	}
-	x = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count, channels);
+	x = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count + symPrepend, channels);
 	
 	return x;
 }	
