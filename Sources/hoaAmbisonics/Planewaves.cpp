@@ -136,6 +136,11 @@ void Planewaves::computeConfiguration(bool standardOnOff)
         for (int i = 0; i < (long)m_number_of_loudspeakers; i++)
             m_angles_of_loudspeakers[i] = (double)i / (double)(m_number_of_loudspeakers) * CICM_2PI;
     }
+    for (int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
+        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
+    }
 }
 
 void Planewaves::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff)
@@ -156,12 +161,6 @@ void Planewaves::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standa
     m_abscissa_of_loudspeakers  = new double[m_number_of_loudspeakers];
     m_ordinate_of_loudspeakers  = new double[m_number_of_loudspeakers];
     computeConfiguration(standardOnOff);
-    
-    for (int i = 0; i < m_number_of_loudspeakers; i++)
-    {
-        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
-        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
-    }
 }
 
 void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
@@ -172,6 +171,11 @@ void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
         m_angles_of_loudspeakers[anIndex] = anAngle;
     }
     Tools::sortVector(m_angles_of_loudspeakers, m_number_of_loudspeakers);
+    for (int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
+        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
+    }
 }
 
 void Planewaves::setVectorSize(long aVectorSize)
