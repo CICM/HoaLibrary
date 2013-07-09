@@ -11,7 +11,7 @@
 		<o>
 			hoa.pi
 		</o>
-        is for peoples that never remember more than 4 decimals or want to initialize a good Pi number.
+        is for people that never remember more than 4 decimals or want to initialize a good Pi number.
 	</description>
 	<!--METADATA-->
 	<metadatalist>
@@ -108,7 +108,6 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="hoa.connect" />
-		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />

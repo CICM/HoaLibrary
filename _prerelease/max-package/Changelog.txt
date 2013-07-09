@@ -13,7 +13,7 @@ New FEATURES:
  - hoa.stereo~, hoa.binaural => (removed) now merged in the "all in one" hoa.decoder~ object.
  - hoa.meter~ : dynamic inlets, draw overled like vanilla meter~, draw and outputs energy and velocity vectors coords, graphics bug fixed, output peak value for each loudspeakers. assist inlet shows LS angles.
  - hoa.recomposer~ : 3 mode (fixe | fisheye | free), now takes angles and directivities messages as input.
- - hoa.scope~ : dynamic inlets (order), 2 modes (peak | average),
+ - hoa.scope~ : dynamic inlets (order).
  - hoa.freeverb~ : spread factors added.
  - hoa.gigaverb~ : removed.
  - hoa.control : removed.

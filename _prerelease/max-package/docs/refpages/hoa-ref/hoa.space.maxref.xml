@@ -73,6 +73,15 @@
 				Set all the Virtuals Microphones coefficients with a float list. (Set one coefficients with an index and a float)
 			</description>
 		</method>
+		<method name="bang">
+			<arglist />
+			<digest>
+				Outputs Current Values.
+			</digest>
+			<description>
+				Outputs Current Values.
+			</description>
+		</method>
 		<method name="(mouse)">
 			<digest>
 				Click and drag to change values
@@ -175,7 +184,6 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="hoa.connect" />
-		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />

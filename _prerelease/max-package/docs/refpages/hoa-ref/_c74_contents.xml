@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <root>
 	<refpage name='hoa.connect.maxref.xml' />
-	<refpage name='hoa.control.maxref.xml' />
 	<refpage name='hoa.convolve~.maxref.xml' />
 	<refpage name='hoa.dac~.maxref.xml' />
 	<refpage name='hoa.decoder~.maxref.xml' />

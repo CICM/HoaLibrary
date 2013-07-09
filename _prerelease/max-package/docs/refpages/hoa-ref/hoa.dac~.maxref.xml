@@ -162,7 +162,6 @@
 	<!--SEEALSO-->
 	<seealsolist>
 		<seealso name="hoa.connect" />
-		<seealso name="hoa.control" />
 		<seealso name="hoa.convolve~" />
 		<seealso name="hoa.dac~" />
 		<seealso name="hoa.decoder~" />
