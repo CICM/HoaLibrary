@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 2,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 76.0, 44.0, 599.0, 630.0 ],
@@ -28,6 +29,18 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"args" : [ "@size", 0 ],
+					"id" : "obj-25",
+					"maxclass" : "bpatcher",
+					"name" : "hoa.helpcredit.maxpat",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 8.0, 587.0, 548.0, 23.0 ]
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
@@ -54,35 +67,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 24.0, 105.0, 55.0, 30.0 ],
 					"text" : ";\rdsp start"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
-					"frgb" : 0.0,
-					"id" : "obj-22",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 587.0, 497.0, 19.0 ],
-					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-					"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-					"id" : "obj-28",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 587.0, 497.0, 19.0 ],
-					"rounded" : 6,
-					"shadow" : -1
 				}
 
 			}
@@ -199,8 +183,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 400.0, 164.0, 247.0, 101.0 ],
@@ -1113,8 +1098,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
@@ -1268,8 +1254,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 2,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 400.0, 299.0, 249.0, 238.0 ],
@@ -2684,7 +2671,7 @@
 					"destination" : [ "obj-14", 13 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 547.071411, 504.0, 285.0, 504.0, 285.0, 270.0, 248.0, 270.0 ],
+					"midpoints" : [ 547.071429, 504.0, 285.0, 504.0, 285.0, 270.0, 248.0, 270.0 ],
 					"source" : [ "obj-42", 13 ]
 				}
 
@@ -2695,7 +2682,7 @@
 					"destination" : [ "obj-14", 12 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 530.642883, 504.0, 285.0, 504.0, 285.0, 270.0, 231.5, 270.0 ],
+					"midpoints" : [ 530.642857, 504.0, 285.0, 504.0, 285.0, 270.0, 231.5, 270.0 ],
 					"source" : [ "obj-42", 12 ]
 				}
 
@@ -2706,7 +2693,7 @@
 					"destination" : [ "obj-14", 11 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 514.214294, 504.0, 285.0, 504.0, 285.0, 270.0, 215.0, 270.0 ],
+					"midpoints" : [ 514.214286, 504.0, 285.0, 504.0, 285.0, 270.0, 215.0, 270.0 ],
 					"source" : [ "obj-42", 11 ]
 				}
 
@@ -2717,7 +2704,7 @@
 					"destination" : [ "obj-14", 10 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 497.785706, 504.0, 285.0, 504.0, 285.0, 270.0, 198.5, 270.0 ],
+					"midpoints" : [ 497.785714, 504.0, 285.0, 504.0, 285.0, 270.0, 198.5, 270.0 ],
 					"source" : [ "obj-42", 10 ]
 				}
 
@@ -2728,7 +2715,7 @@
 					"destination" : [ "obj-14", 9 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 481.357147, 504.0, 285.0, 504.0, 285.0, 270.0, 182.0, 270.0 ],
+					"midpoints" : [ 481.357143, 504.0, 285.0, 504.0, 285.0, 270.0, 182.0, 270.0 ],
 					"source" : [ "obj-42", 9 ]
 				}
 
@@ -2739,7 +2726,7 @@
 					"destination" : [ "obj-14", 8 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 464.928558, 504.0, 285.0, 504.0, 285.0, 270.0, 165.5, 270.0 ],
+					"midpoints" : [ 464.928571, 504.0, 285.0, 504.0, 285.0, 270.0, 165.5, 270.0 ],
 					"source" : [ "obj-42", 8 ]
 				}
 
@@ -2761,7 +2748,7 @@
 					"destination" : [ "obj-14", 6 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 432.071442, 504.0, 285.0, 504.0, 285.0, 270.0, 132.5, 270.0 ],
+					"midpoints" : [ 432.071429, 504.0, 285.0, 504.0, 285.0, 270.0, 132.5, 270.0 ],
 					"source" : [ "obj-42", 6 ]
 				}
 
@@ -2772,7 +2759,7 @@
 					"destination" : [ "obj-14", 5 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 415.642853, 504.0, 285.0, 504.0, 285.0, 270.0, 116.0, 270.0 ],
+					"midpoints" : [ 415.642857, 504.0, 285.0, 504.0, 285.0, 270.0, 116.0, 270.0 ],
 					"source" : [ "obj-42", 5 ]
 				}
 
@@ -2783,7 +2770,7 @@
 					"destination" : [ "obj-14", 4 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 399.214294, 504.0, 285.0, 504.0, 285.0, 270.0, 99.5, 270.0 ],
+					"midpoints" : [ 399.214286, 504.0, 285.0, 504.0, 285.0, 270.0, 99.5, 270.0 ],
 					"source" : [ "obj-42", 4 ]
 				}
 
@@ -2794,7 +2781,7 @@
 					"destination" : [ "obj-14", 3 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 382.785706, 504.0, 285.0, 504.0, 285.0, 270.0, 83.0, 270.0 ],
+					"midpoints" : [ 382.785714, 504.0, 285.0, 504.0, 285.0, 270.0, 83.0, 270.0 ],
 					"source" : [ "obj-42", 3 ]
 				}
 
@@ -2805,7 +2792,7 @@
 					"destination" : [ "obj-14", 2 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 366.357147, 504.0, 285.0, 504.0, 285.0, 270.0, 66.5, 270.0 ],
+					"midpoints" : [ 366.357143, 504.0, 285.0, 504.0, 285.0, 270.0, 66.5, 270.0 ],
 					"source" : [ "obj-42", 2 ]
 				}
 
@@ -2816,7 +2803,7 @@
 					"destination" : [ "obj-14", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 349.928558, 504.0, 285.0, 504.0, 285.0, 270.0, 50.0, 270.0 ],
+					"midpoints" : [ 349.928571, 504.0, 285.0, 504.0, 285.0, 270.0, 50.0, 270.0 ],
 					"source" : [ "obj-42", 1 ]
 				}
 
@@ -2853,16 +2840,30 @@
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "hoa.plug~.maxref.xml",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../docs/refpages/hoa-ref",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.mixer~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/effects",
-				"patcherrelativepath" : "../effects",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
+				"patcherrelativepath" : "../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/MaxMsp/Max6/Cycling '74/HoaLibrary/others",
-				"patcherrelativepath" : "../others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpcredit.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
