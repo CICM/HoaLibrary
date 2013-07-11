@@ -97,7 +97,7 @@ public:
         {
             m_line->setCoefficientDirect(0.f);
             m_line->setCoefficient(1.f);
-            m_delay_rand = Tools::getRandf(0.f, m_delay_time);
+            m_delay_rand = Tools::getRandf(1.f, m_delay_time);
             if(Tools::getRandf(0.f, 1.f) > m_rarefaction)
                 m_bypass = 1;
             else
@@ -123,7 +123,7 @@ public:
             m_line->setRampInMs(m_grain_size);
             m_line->setCoefficientDirect(0.f);
             m_line->setCoefficient(1.f);
-            m_delay_rand = Tools::getRandf(0.f, m_delay_time);
+            m_delay_rand = Tools::getRandf(1.f, m_delay_time);
             if(Tools::getRandf(0.f, 1.f) > m_rarefaction)
                 m_bypass = 1;
             else

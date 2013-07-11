@@ -27,11 +27,13 @@
 
 AmbisonicsDelay::AmbisonicsDelay(long anOrder, bool aMode, double aMaximumDelayInMs,long aVectorSize, long aSamplingRate) : AmbisonicsDiffuser( anOrder, aMode, aVectorSize, aSamplingRate)
 {
+    m_maximum_delay = Tools::clip_min(aMaximumDelayInMs, 1.);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        m_delay.push_back(new CicmDecorrelation(aMaximumDelayInMs, aVectorSize, aSamplingRate));
+        m_delay.push_back(new CicmDecorrelation(aMaximumDelayInMs, m_vector_size, m_sampling_rate));
+        m_line.push_back(new CicmLine(20., m_vector_size, m_sampling_rate));
+        m_line[i]->setCoefficientDirect(1.);
     }
-    m_gain = new bool[m_number_of_harmonics];
     
     setDelayTimeInMs(aMaximumDelayInMs);
 }
@@ -73,18 +75,18 @@ void AmbisonicsDelay::setDelayTimeInSample(long aDelayInSample)
 void AmbisonicsDelay::setDelayTimeInMs(double aDelayInMs)
 {
     double delay;
-    m_delay_time = Tools::clip_min(aDelayInMs, 0);
+    m_delay_time = Tools::clip(aDelayInMs, 0, m_maximum_delay);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         if(m_diffuse_factor <= (1. - ((double)(i+1) / (double)m_number_of_harmonics)))
         {
             delay = 0.;
-            m_gain[i] = 1.;
+            m_line[i]->setCoefficient(1.);
         }
         else
         {
             delay = m_delay_time * ((double)(i+1) / (double)m_number_of_harmonics);
-            m_gain[i] = 0.;
+            m_line[i]->setCoefficient(0.);
         }
         m_delay[i]->setDelayTimeInMs(delay);
     }
@@ -112,6 +114,7 @@ void AmbisonicsDelay::setVectorSize(long aVectorSize)
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_delay[i]->setVectorSize(m_vector_size);
+        m_line[i]->setVectorSize(m_vector_size);
     }
 }
 
@@ -121,6 +124,7 @@ void AmbisonicsDelay::setSamplingRate(long aSamplingRate)
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_delay[i]->setSamplingRate(m_sampling_rate);
+        m_line[i]->setSamplingRate(m_sampling_rate);
     }
     setDelayTimeInMs(m_delay_time);
 }
@@ -128,6 +132,6 @@ void AmbisonicsDelay::setSamplingRate(long aSamplingRate)
 AmbisonicsDelay::~AmbisonicsDelay()
 {
 	m_delay.clear();
-    Cicm_Free(m_gain);
+    m_line.clear();
 }
 

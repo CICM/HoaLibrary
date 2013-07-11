@@ -32,15 +32,18 @@ CicmEnvelope::CicmEnvelope(long aSize, long aType, bool fft_normalization)
 void CicmEnvelope::setSize(long aSize)
 {
     aSize = Tools::clip_min(aSize, 1);
-    if(m_buffer)
-        Cicm_Free(m_buffer);
-    if(m_buffer_float)
-        Cicm_Free(m_buffer_float);
+    if(aSize != m_size)
+    {
+        if(m_buffer)
+            Cicm_Free(m_buffer);
+        if(m_buffer_float)
+            Cicm_Free(m_buffer_float);
         
-    m_size = aSize;
-    Cicm_Vector_Double_Malloc(m_buffer, m_size);
-    Cicm_Vector_Float_Malloc(m_buffer_float, m_size);
-    setType(m_type);
+        m_size = aSize;
+        Cicm_Vector_Double_Malloc(m_buffer, m_size);
+        Cicm_Vector_Float_Malloc(m_buffer_float, m_size);
+        setType(m_type);
+    }
 }
 
 void CicmEnvelope::setType(long aType, double a0, double a1, double a2, bool fft_normalization)
