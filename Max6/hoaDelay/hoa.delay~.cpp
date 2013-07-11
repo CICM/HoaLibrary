@@ -38,6 +38,7 @@ typedef struct _HoaDelay
 	AmbisonicsDelay*	f_AmbiDelay;
     
     double              f_ramp_time;
+    double              f_delay;
     double              f_diffuse_factor;
     long                f_encoding_compensation;
     
@@ -50,6 +51,7 @@ void HoaDelay_float(t_HoaDelay *x, double f);
 void HoaDelay_int(t_HoaDelay *x, long n);
 
 t_max_err ramp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv);
+t_max_err delay_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv);
 t_max_err diff_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv);
 t_max_err comp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv);
 
@@ -77,19 +79,26 @@ int main(void)
 	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, ramp_set);
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
     
+    CLASS_ATTR_LONG             (c, "compensation", 0, t_HoaDelay, f_encoding_compensation);
+	CLASS_ATTR_CATEGORY			(c, "compensation", 0, "Behavior");
+    CLASS_ATTR_STYLE_LABEL      (c, "compensation", 0, "onoff", "Encoding compensation")
+	CLASS_ATTR_ORDER			(c, "compensation", 0, "2");
+	CLASS_ATTR_ACCESSORS		(c, "compensation", NULL, comp_set);
+	CLASS_ATTR_SAVE				(c, "compensation", 1);
+    
+    CLASS_ATTR_DOUBLE			(c, "delay", 0, t_HoaDelay, f_delay);
+	CLASS_ATTR_CATEGORY			(c, "delay", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "delay", 0, "Delay time (ms)");
+	CLASS_ATTR_ORDER			(c, "delay", 0, "1");
+	CLASS_ATTR_ACCESSORS		(c, "delay", NULL, delay_set);
+	CLASS_ATTR_SAVE				(c, "delay", 1);
+    
     CLASS_ATTR_DOUBLE			(c, "diffusion", 0, t_HoaDelay, f_diffuse_factor);
-	CLASS_ATTR_CATEGORY			(c, "diffusion", 0, "Behavior");
+	CLASS_ATTR_CATEGORY			(c, "diffusion", 0, "Parameters");
 	CLASS_ATTR_LABEL			(c, "diffusion", 0, "Diffusion factor");
 	CLASS_ATTR_ORDER			(c, "diffusion", 0, "2");
 	CLASS_ATTR_ACCESSORS		(c, "diffusion", NULL, diff_set);
 	CLASS_ATTR_SAVE				(c, "diffusion", 1);
-    
-    CLASS_ATTR_LONG             (c, "compensation", 0, t_HoaDelay, f_encoding_compensation);
-	CLASS_ATTR_CATEGORY			(c, "compensation", 0, "Behavior");
-    CLASS_ATTR_STYLE_LABEL      (c, "compensation", 0, "onoff", "Encoding compensation")
-	CLASS_ATTR_ORDER			(c, "compensation", 0, "3");
-	CLASS_ATTR_ACCESSORS		(c, "compensation", NULL, comp_set);
-	CLASS_ATTR_SAVE				(c, "compensation", 1);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -106,7 +115,7 @@ void *HoaDelay_new(t_symbol *s, long argc, t_atom *argv)
     
 	int order = 4;
     bool mode = 1;
-    double maxdelay = 5. * sys_getsr();
+    double maxdelay = 5000.;
 	x = (t_HoaDelay *)object_alloc(HoaDelay_class);
 	if (x)
 	{
@@ -126,6 +135,7 @@ void *HoaDelay_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_ramp_time = x->f_AmbiDelay->getRampInMs();
         x->f_diffuse_factor = x->f_AmbiDelay->getDiffuseFactor();
         x->f_encoding_compensation = x->f_AmbiDelay->getEncodingCompensation();
+        x->f_delay = x->f_AmbiDelay->getDelayTimeInMs();
         
         if(x->f_AmbiDelay->getMode() == Hoa_No_Encoding)
         {
@@ -143,12 +153,16 @@ void *HoaDelay_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaDelay_float(t_HoaDelay *x, double f)
 {
-	x->f_AmbiDelay->setDelayTimeInMs(f);
+    t_atom av[1];
+    atom_setfloat(av, f);
+	object_method(x, gensym("delay"), 1, av);
 }
 
 void HoaDelay_int(t_HoaDelay *x, long n)
 {
-	x->f_AmbiDelay->setDelayTimeInSample(n);
+	t_atom av[1];
+    atom_setlong(av, n);
+	object_method(x, gensym("delay"), 1, av);
 }
 
 void HoaDelay_dsp64(t_HoaDelay *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -211,6 +225,17 @@ t_max_err comp_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv)
 		x->f_AmbiDelay->setEncodingCompensation(atom_getfloat(argv));
     
 	x->f_encoding_compensation = x->f_AmbiDelay->getEncodingCompensation();
+	return MAX_ERR_NONE;
+}
+
+t_max_err delay_set(t_HoaDelay *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(atom_gettype(argv) == A_LONG)
+		x->f_AmbiDelay->setDelayTimeInSample(atom_getlong(argv));
+    else if(atom_gettype(argv) == A_FLOAT)
+        x->f_AmbiDelay->setDelayTimeInMs(atom_getfloat(argv));
+    
+	x->f_delay = x->f_AmbiDelay->getDelayTimeInMs();
 	return MAX_ERR_NONE;
 }
 

@@ -31,9 +31,11 @@
 class AmbisonicsDelay : public AmbisonicsDiffuser
 {
 private:
+    
     vector <CicmDecorrelation*> m_delay;
+    vector <CicmLine*>          m_line;
     double                      m_delay_time;
-    bool*                       m_gain;
+    double                      m_maximum_delay;
     
 public:
 	AmbisonicsDelay(long anOrder = 1, bool aMode = Hoa_Post_Encoding, double aMaximumDelayInMs = 5000., long aVectorSize = 0,  long aSamplingRate = 44100);
@@ -67,12 +69,14 @@ public:
 	{
         if(m_encoding_compensation)
         {
+            double gain;
             for(int i =0; i < m_number_of_harmonics; i++)
             {
-                if(m_gain[i])
-                    aOutputs[i] = m_delay[i]->process(aInputs[i]);
-                else
-                    aOutputs[i] = m_delay[i]->process(aInputs[0]);
+                gain = m_line[i]->process();
+                aInputs[i] *= gain;
+                aInputs[i] += (1. - gain) * aInputs[0];
+  
+                aOutputs[i] = m_delay[i]->process(aInputs[i]);
             }
         }
         else
@@ -94,12 +98,14 @@ public:
 	{
         if(m_encoding_compensation)
         {
+            float gain;
             for(int i =0; i < m_number_of_harmonics; i++)
             {
-                if(m_gain[i])
-                    aOutputs[i] = m_delay[i]->process(aInputs[i]);
-                else
-                    aOutputs[i] = m_delay[i]->process(aInputs[0]);
+                gain = m_line[i]->process();
+                aInputs[i] *= gain;
+                aInputs[i] += (1. - gain) * aInputs[0];
+                
+                aOutputs[i] = m_delay[i]->process(aInputs[i]);
             }
         }
         else
@@ -118,7 +124,7 @@ public:
     
 	inline void process(double* aInputs, double** aOutputs)
 	{
-        for(int i =0; i < m_number_of_harmonics; i++)
+        for(int i = 0; i < m_number_of_harmonics; i++)
             m_delay[i]->process(aInputs, aOutputs[i]);
 	}
     
@@ -126,12 +132,24 @@ public:
 	{
         if(m_encoding_compensation)
         {
-            for(int i =0; i < m_number_of_harmonics; i++)
+            double gain;
+            double signal;
+            double* input_zero;
+            double* input;
+            double* output;
+            input_zero = aInputs[0];
+            for(int i = 0; i < m_number_of_harmonics; i++)
             {
-                if(m_gain[i])
-                    m_delay[i]->process(aInputs[i], aOutputs[i]);
-                else
-                    m_delay[i]->process(aInputs[0], aOutputs[i]);
+                input = aInputs[i];
+                output= aOutputs[i];
+                for(int j = 0; j < m_vector_size; j++)
+                {
+                    gain = m_line[i]->process();
+                    signal = input[j] * gain;
+                    signal += (1. - gain) * input_zero[j];
+                    
+                    output[j] = m_delay[i]->process(signal);
+                }
             }
         }
         else
@@ -153,12 +171,24 @@ public:
 	{
         if(m_encoding_compensation)
         {
-            for(int i =0; i < m_number_of_harmonics; i++)
+            float gain;
+            float signal;
+            float* input_zero;
+            float* input;
+            float* output;
+            input_zero = aInputs[0];
+            for(int i = 0; i < m_number_of_harmonics; i++)
             {
-                if(m_gain[i])
-                    m_delay[i]->process(aInputs[i], aOutputs[i]);
-                else
-                    m_delay[i]->process(aInputs[0], aOutputs[i]);
+                input = aInputs[i];
+                output= aOutputs[i];
+                for(int j = 0; j < m_vector_size; j++)
+                {
+                    gain = m_line[i]->process();
+                    signal = input[j] * gain;
+                    signal += (1. - gain) * input_zero[j];
+                    
+                    output[j] = m_delay[i]->process(signal);
+                }
             }
         }
         else
