@@ -33,6 +33,12 @@ class AmbisonicsGrain : public AmbisonicsDiffuser
 private:
     vector <CicmQsgs*> m_grain;
     
+    double  m_maximum_delay_time;
+    double  m_grain_size;
+    double  m_delay_time;
+    double  m_feedback;
+    double  m_rarefaction;
+    
 public:
 	AmbisonicsGrain(long anOrder = 1, bool aMode = Hoa_Post_Encoding, double aMaximumDelayInMs = 5000., long aVectorSize = 0,  long aSamplingRate = 44100);
     
@@ -52,8 +58,10 @@ public:
     double getDelayTime();
     double getFeedback();
     double getRarefaction();
-    
     long   getWidowFunction();
+    
+    double getGrainSizeFromIndex(long anIndex);
+    double getDelayTimeFromIndex(long anIndex);
     
 	~AmbisonicsGrain();
 	
@@ -63,22 +71,34 @@ public:
 
     inline void process(double aInputs, double* aOutputs)
 	{
-        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            aOutputs[i] = m_grain[i]->process(aInputs);
+        }
 	}
     
 	inline void process(double* aInputs, double* aOutputs)
 	{
-        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            aOutputs[i] = m_grain[i]->process(aInputs[i]);
+        }
 	}
     
     inline void process(float aInputs, float* aOutputs)
 	{
-		
+		for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            aOutputs[i] = m_grain[i]->process(aInputs);
+        }
 	}
     
     inline void process(float* aInputs, float* aOutputs)
 	{
-                    
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            aOutputs[i] = m_grain[i]->process(aInputs[i]);
+        }
 	}
     
 
@@ -88,22 +108,34 @@ public:
     
 	inline void process(double* aInputs, double** aOutputs)
 	{
-        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            m_grain[i]->process(aInputs, aOutputs[i]);
+        }
 	}
     
     inline void process(double** aInputs, double** aOutputs)
 	{
-        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            m_grain[i]->process(aInputs[i], aOutputs[i]);
+        }
 	}
     
     inline void process(float* aInputs, float** aOutputs)
 	{
-        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            m_grain[i]->process(aInputs, aOutputs[i]);
+        }
 	}
     
     inline void process(float** aInputs, float** aOutputs)
 	{
-        
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            m_grain[i]->process(aInputs[i], aOutputs[i]);
+        }
 	}
 
 };

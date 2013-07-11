@@ -37,8 +37,9 @@ CicmQsgs::CicmQsgs(double aMaximumDelay, long aVectorSize, double aSamplingRate)
     m_line->setCoefficientDirect(Tools::getRandd(0., 1));
     m_line->setCoefficient(1.);
     
+    m_buffer = 0.;
     setGrainSize(100.);
-    setDelayTime(1000.);
+    setDelayTime(aMaximumDelay);
     setRarefaction(0.2);
     setFeedback(0.8);
     m_delay_rand = Tools::getRandf(0.f, m_delay_time);
@@ -114,7 +115,6 @@ void CicmQsgs::setRarefaction(double aRarefaction)
 {
     m_rarefaction = Tools::clip(aRarefaction, 0., 1.);
 }
-
 
 void CicmQsgs::setWindowFunction(long aEnvelopeType)
 {

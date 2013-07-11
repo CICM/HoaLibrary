@@ -27,45 +27,138 @@
 
 AmbisonicsGrain::AmbisonicsGrain(long anOrder, bool aMode, double aMaximumDelayInMs,long aVectorSize, long aSamplingRate) : AmbisonicsDiffuser( anOrder, aMode, aVectorSize, aSamplingRate)
 {
+    m_maximum_delay_time = Tools::clip_min(aMaximumDelayInMs, 0);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        m_grain.push_back(new CicmQsgs(aMaximumDelayInMs, aVectorSize, aSamplingRate));
+        m_grain.push_back(new CicmQsgs(m_maximum_delay_time, m_vector_size, m_sampling_rate));
     }
+    setGrainSize(100.);
+    setDelayTime(m_maximum_delay_time);
+    setFeedback(0.8);
+    setRarefaction(0.2);
+}
+
+double AmbisonicsGrain::getGrainSize()
+{
+    return m_grain_size;
+}
+
+double AmbisonicsGrain::getDelayTime()
+{
+    return m_delay_time;
+}
+
+double AmbisonicsGrain::getFeedback()
+{
+    return m_feedback;
+}
+
+double AmbisonicsGrain::getRarefaction()
+{
+    return m_rarefaction;
+}
+
+long AmbisonicsGrain::getWidowFunction()
+{
+    return m_grain[0]->getWidowFunction();
+}
+
+double AmbisonicsGrain::getGrainSizeFromIndex(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_harmonics)
+        return m_grain[anIndex]->getGrainSize();
+    else
+        return NULL;
+}
+
+double AmbisonicsGrain::getDelayTimeFromIndex(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_harmonics)
+        return m_grain[anIndex]->getDelayTime();
+    else
+        return NULL;
 }
 
 void AmbisonicsGrain::setGrainSize(double aGrainSize)
 {
-    
+    m_grain_size = Tools::clip_min(aGrainSize, 0);
+    double grain_size;
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        grain_size = m_grain_size * (1. - ((double)(i+1) / (double)m_number_of_harmonics));
+        m_grain[i]->setGrainSize(grain_size);
+    }
 }
 
 void AmbisonicsGrain::setDelayTime(double aDelayTime)
 {
-    
+    m_delay_time = Tools::clip(aDelayTime, 0, m_maximum_delay_time);
+    double delay_time;
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        delay_time = m_delay_time * ((double)(i+1) / (double)m_number_of_harmonics);
+        m_grain[i]->setDelayTime(delay_time);
+    }    
 }
 
 void AmbisonicsGrain::setFeedback(double aFeedback)
 {
-    
+    m_feedback = Tools::clip(aFeedback, 0., 1.);
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain[i]->setFeedback(m_feedback);
+    }
 }
 
 void AmbisonicsGrain::setRarefaction(double aRarefaction)
 {
-    
+    m_rarefaction = Tools::clip(aRarefaction, 0., 1.);
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain[i]->setRarefaction(m_rarefaction);
+    }
 }
 
 void AmbisonicsGrain::setWindowFunction(long aEnvelopeType)
 {
-    
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain[i]->setWindowFunction(aEnvelopeType);
+    }
 }
 
 void AmbisonicsGrain::writeWidowFunction(double* aBuffer, long aSize)
 {
-    
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain[i]->writeWidowFunction(aBuffer, aSize);
+    }
 }
 
 void AmbisonicsGrain::writeWidowFunction(float* aBuffer, long aSize)
 {
-    
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain[i]->writeWidowFunction(aBuffer, aSize);
+    }
+}
+
+void AmbisonicsGrain::setVectorSize(long aVectorSize)
+{
+    AmbisonicsDiffuser::setVectorSize(aVectorSize);
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain[i]->setVectorSize(m_vector_size);
+    }
+}
+
+void AmbisonicsGrain::setSamplingRate(long aSamplingRate)
+{
+    AmbisonicsDiffuser::setSamplingRate(aSamplingRate);
+    for(int i = 0; i < m_number_of_harmonics; i++)
+    {
+        m_grain[i]->setSamplingRate(m_sampling_rate);
+    }
 }
 
 AmbisonicsGrain::~AmbisonicsGrain()
