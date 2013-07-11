@@ -264,7 +264,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 312.5625, 10.75, 262.0, 32.0 ],
-					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012-13 CICM / Universite Paris 8",
+					"text" : "Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 - 2013 CICM / Universite Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
 
@@ -950,6 +950,7 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
+					"offset" : [ -660.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
@@ -2825,7 +2826,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 13.9375, 88.5, 666.6875, 74.0 ],
-					"text" : "The hoa.library is a set of externals that encodes a signal in ambisonic spherical harmonics and decodes the ambisonic soundfield for a circle array of loudspeakers. This library allows you to synthesize, transform and modulate sound fields. It has been elaborated to facilitate the use of the sphericals harmonics and the routing in the ambisonics domain.",
+					"text" : "Hoa Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffused sound field synthesis, perspective distorsion or spatial filtering.",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"
 				}
