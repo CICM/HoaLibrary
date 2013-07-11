@@ -67,8 +67,23 @@ void CicmRingModulation::setSamplingRate(long aSamplingRate)
 
 void CicmRingModulation::setFrequency(double aFrequency)
 {
-    m_frequency = Tools::clip_min(fabs(aFrequency), 0.);
-    m_line->setRampInMs(1. / m_frequency * 1000.);
+    double frequency = Tools::clip_min(fabs(aFrequency), 0.);
+    if(frequency == 0)
+    {
+        m_line->setCoefficient(0.25);
+        m_frequency = 0;
+    }
+    else if(m_frequency == 0 && frequency!= 0)
+    {
+        m_line->setCoefficient(1.);
+        m_frequency = frequency;
+        m_line->setRampInMs(1. / m_frequency * 1000.);
+    }
+    else
+    {
+        m_frequency = frequency;
+        m_line->setRampInMs(1. / m_frequency * 1000.);
+    }
 }
 
 CicmRingModulation::~CicmRingModulation()

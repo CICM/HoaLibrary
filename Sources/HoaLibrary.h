@@ -42,6 +42,7 @@
 #include "hoaOptim/AmbisonicsOptim.h"
 #include "hoaProjector/AmbisonicsProjector.h"
 #include "hoaRecomposer/AmbisonicsRecomposer.h"
+#include "hoaRingModulation/AmbisonicsRingModulation.h"
 #include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
 #include "hoaRotate/AmbisonicsRotate.h"
 #include "hoaSpace/AmbisonicSpace.h"
