@@ -27,23 +27,35 @@
 
 BoidsManager::BoidsManager()
 {
-    m_numberOfBoids = 4;
+    m_numBoids = 4;
+	m_numNeighbors = 2;
+    m_flyRect.top = 1.;
+    m_flyRect.left = -1.;
+    m_flyRect.bottom = -1.;
+    m_flyRect.right = 1.;
+    m_minSpeed = 0.15;
+	m_maxSpeed = 0.25;
+	m_centerWeight = 0.25;
+	m_attractWeight = 0.3;
+	m_matchWeight = 0.1;
+	m_avoidWeight = 0.1;
+	m_wallsWeight = 0.5;
+	m_edgeDist = 0.5;
+	m_speedupFactor = 0.1;
+	m_inertiaFactor = 0.2;
+	m_accelFactor = 0.1;
+	m_prefDist = 0.25;
+	m_prefDistSqr = 0;
+	m_centerPt.x = 0;
+    m_centerPt.y = 0;
+	m_attractPt.x = 0;
+    m_attractPt.y = 0;
     
-    m_centroid_x = m_centroid_y = 0.;
-    m_avgvelocity_x = m_avgvelocity_y = 0.;
+    m_d2r = CICM_PI/180.0;
+    m_r2d = 180.0/CICM_PI;
     
-    m_separation = 0.03;
-    m_alignment = 0.05;
-    m_coherence = 0.02;
-    m_inertia = 0.5;
-    m_friction = 0.5;
-    //m_septhresh = 0.1;
-    m_septhresh = 1.;
-    m_maxvel = 0.05;
-    m_gravity = 0.;
-    m_gravpoint_x = m_gravpoint_y = 0.;
-    
-    setNumberOfBoids(m_numberOfBoids);
+    setNumberOfBoids(m_numBoids);
+    initFlock();
 }
 
 BoidsManager::~BoidsManager()
@@ -51,232 +63,576 @@ BoidsManager::~BoidsManager()
     ;
 }
 
-void BoidsManager::setNumberOfBoids(long _numberOfBoids)
+void BoidsManager::initFlock()
 {
-    // clip agentcount to range 1.-100.
-	m_numberOfBoids = Tools::clip(_numberOfBoids, long(1), long(100));
+    m_numNeighbors		= kNumNeighbors;
+	m_minSpeed			= kMinSpeed;
+	m_maxSpeed			= kMaxSpeed;
+	m_centerWeight		= kCenterWeight;
+	m_attractWeight		= kAttractWeight;
+	m_matchWeight		= kMatchWeight;
+	m_avoidWeight		= kAvoidWeight;
+	m_wallsWeight		= kWallsWeight;
+	m_edgeDist			= kEdgeDist;
+	m_speedupFactor		= kSpeedupFactor;
+	m_inertiaFactor		= kInertiaFactor;
+	m_accelFactor		= kAccelFactor;
+	m_prefDist			= kPrefDist;
+	m_prefDistSqr		= kPrefDist * kPrefDist;
+	m_flyRect.top		= kFlyRectTop;
+	m_flyRect.left		= kFlyRectLeft;
+	m_flyRect.bottom	= kFlyRectBottom;
+	m_flyRect.right		= kFlyRectRight;
+	m_attractPt.x		= (kFlyRectLeft + kFlyRectRight) * 0.5;
+	m_attractPt.y		= (kFlyRectTop + kFlyRectBottom) * 0.5;
     
-    m_birds.resize(m_numberOfBoids);
-    
-	for (int i=0; i < m_numberOfBoids; i++)
-	{
-        // start with random position/velocity
-        m_birds[i].x  = Tools::getRandd(m_gravpoint_x - 1., m_gravpoint_x + 1.);
-        m_birds[i].y  = Tools::getRandd(m_gravpoint_y - 1., m_gravpoint_y + 1.);
-        m_birds[i].vx = Tools::getRandd(-0.05, 0.05);
-        m_birds[i].vy = Tools::getRandd(-0.05, 0.05);
-	}
+	resetBoids();
 }
 
-void BoidsManager::update()
+void BoidsManager::update() // FlightStep();
 {
-	double cx, cy, cvx, cvy;
-    cx = cy = cvx = cvy = 0.;
+	Velocity		goCenterVel;
+	Velocity		goAttractVel;
+	Velocity		matchNeighborVel;
+	Velocity		avoidWallsVel;
+	Velocity		avoidNeighborVel;
+	float			avoidNeighborSpeed;
+	const Velocity	zeroVel	= {0.0, 0.0};
+	short			i;
     
-	for (int i=0; i < m_numberOfBoids; i++)
-	{
-        birdUpdate(i);
+	m_centerPt = FindFlockCenter();
+    
+    // save position and velocity
+	for (i = 0; i <  m_numBoids; i++)
+    {
+		m_boids[i].oldPos.x = m_boids[i].newPos.x;
+		m_boids[i].oldPos.y = m_boids[i].newPos.y;
 		
-		// calculate current frame's average position/velocity
-		cx += m_birds[i].x;
-		cy += m_birds[i].y;
-		cvx += m_birds[i].vx;
-		cvy += m_birds[i].vy;
+		m_boids[i].oldDir.x = m_boids[i].newDir.x;
+		m_boids[i].oldDir.y = m_boids[i].newDir.y;
 	}
     
-	m_centroid_x = cx/m_numberOfBoids;
-	m_centroid_y = cy/m_numberOfBoids;
-	m_avgvelocity_x = cvx/m_numberOfBoids;
-	m_avgvelocity_y = cvy/m_numberOfBoids;
-	
-	//outlet(2,"bang");
-	//outlet(1, m_centroid_x, m_centroid_y, m_avgvelocity_x, m_avgvelocity_y);
-	
-    /*
-	for (int i=0; i<m_numberOfBoids; i++) {
-		outlet(0,m_birds[i].x,m_birds[i].y, m_birds[i].vx,m_birds[i].vy);
+	for (i = 0; i < m_numBoids; i++)
+    {
+        // get all velocity components
+		if (m_numNeighbors > 0)
+        {
+			avoidNeighborSpeed = MatchAndAvoidNeighbors(i,&matchNeighborVel, &avoidNeighborVel);
+		}
+        else
+        {
+			matchNeighborVel = zeroVel;
+			avoidNeighborVel = zeroVel;
+			avoidNeighborSpeed = 0;
+		}
+        
+		goCenterVel = SeekPoint(i, m_centerPt);
+		goAttractVel = SeekPoint(i, m_attractPt);
+		avoidWallsVel = AvoidWalls(i);
+        
+		// compute resultant velocity using weights and inertia
+		m_boids[i].newDir.x = m_inertiaFactor * (m_boids[i].oldDir.x) +
+        (m_centerWeight * goCenterVel.x +
+         m_attractWeight * goAttractVel.x +
+         m_matchWeight * matchNeighborVel.x +
+         m_avoidWeight * avoidNeighborVel.x +
+         m_wallsWeight * avoidWallsVel.x) / m_inertiaFactor;
+		m_boids[i].newDir.y = m_inertiaFactor * (m_boids[i].oldDir.y) +
+        (m_centerWeight * goCenterVel.y +
+         m_attractWeight * goAttractVel.y +
+         m_matchWeight * matchNeighborVel.y +
+         m_avoidWeight * avoidNeighborVel.y +
+         m_wallsWeight * avoidWallsVel.y) / m_inertiaFactor;
+
+        // normalize velocity so its length is unity
+		NormalizeVelocity(&(m_boids[i].newDir));
+        
+		// set to avoidNeighborSpeed bounded by minSpeed and maxSpeed
+		if ((avoidNeighborSpeed >= m_minSpeed) &&
+            (avoidNeighborSpeed <= m_maxSpeed))
+			m_boids[i].speed = avoidNeighborSpeed;
+		else if (avoidNeighborSpeed > m_maxSpeed)
+			m_boids[i].speed = m_maxSpeed;
+		else
+			m_boids[i].speed = m_minSpeed;
+        
+		// calculate new position, applying speedupFactor
+		m_boids[i].newPos.x += m_boids[i].newDir.x * m_boids[i].speed * (m_speedupFactor / 100.0);
+		m_boids[i].newPos.y += m_boids[i].newDir.y * m_boids[i].speed * (m_speedupFactor / 100.0);
+        
 	}
-    */
 }
 
-void BoidsManager::birdUpdate(int _index)
+Point2d BoidsManager::FindFlockCenter()
 {
-    if (!Tools::isInside(_index, int(0), int(m_birds.size()))) return;
-    Bird* a = &m_birds[_index];
-	double px, py;
-	
-	// save current velocity for inertia calc
-	px = a->vx;
-	py = a->vy;
+	double			totalH = 0, totalV = 0;
+	Point3d			centerPoint;
+	register short	i;
     
-    birdSeparate(_index);
-    birdAlign(_index);
-    birdCohere(_index);
-    birdGravitate(_index);
-	
-	// inertia
-	a->vx = px*m_inertia + a->vx*(1.-m_inertia);
-	a->vy = py*m_inertia + a->vy*(1.-m_inertia);
-	
-	// velocity limit
-	a->vx = Tools::clip(a->vx,-m_maxvel,m_maxvel);
-	a->vy = Tools::clip(a->vy,-m_maxvel,m_maxvel);
-    
-    // Random test
-	a->vx = Tools::clip(Tools::getRandd(-0.01, 0.01) + a->vx,-m_maxvel,m_maxvel);
-	a->vy = Tools::clip(Tools::getRandd(-0.01, 0.01) + a->vy,-m_maxvel,m_maxvel);
-    
-	// update position based on velocity and friction
-	a->x += a->vx*(1.-m_friction);
-	a->y += a->vy*(1.-m_friction);
-}
-
-// rules
-
-void BoidsManager::birdSeparate(int _index)
-{
-    if (!Tools::isInside(_index, int(0), int(m_birds.size()))) return;
-    Bird* a = &m_birds[_index];
-    
-	double dx,dy,proxscale, mag;
-	
-	// run from positions of neighbors
-	for (int i=0; i < m_numberOfBoids; i++)
+	for (i = 0 ; i <  m_numBoids; i++)
 	{
-		if (i != _index)
-		{
-			dx = m_birds[i].x - a->x;
-			dy = m_birds[i].y - a->y;
-			
-			if ((fabs(dx) > 0.0001) && (fabs(dy) > 0.0001))
-				mag = (dx*dx+dy*dy); // cheap mag, no sqrt
-			else
-				mag = 0.01;
-			
-			if (mag < m_septhresh) {
-				if (mag < 0.0001)
-					//proxscale = 8;
-                    proxscale = 1000;
-				else
-                    proxscale = Tools::clip(m_septhresh/(m_septhresh-(m_septhresh-mag)), 0.,1000.);
-					//proxscale = Tools::clip(m_septhresh/(m_septhresh-(m_septhresh-mag)), 0.,8.);
-				a->vx -= dx*m_separation*proxscale;
-				a->vy -= dy*m_separation*proxscale;
+		totalH += m_boids[i].oldPos.x;
+		totalV += m_boids[i].oldPos.y;
+	}
+	centerPoint.x = (double)	(totalH / m_numBoids);
+	centerPoint.y = (double)	(totalV / m_numBoids);
+    
+	return(centerPoint);
+}
+
+float BoidsManager::MatchAndAvoidNeighbors(short theBoid, Velocity *matchNeighborVel, Velocity *avoidNeighborVel)
+{
+	short			i, j, neighbor;
+	double			distSqr;
+	double			dist, distH, distV;
+	double			tempSpeed;
+	short			numClose = 0;
+	Velocity		totalVel = {0.0,0.0};
+    
+	/**********************/
+	/* Find the neighbors */
+	/**********************/
+    
+	/* special case of one neighbor */
+	if (m_numNeighbors == 1) {
+		m_boids[theBoid].neighborDistSqr[0] = kMaxLong;
+        
+		for (i = 0; i < m_numBoids; i++)
+        {
+			if (i != theBoid)
+            {
+				distSqr = DistSqrToPt(m_boids[theBoid].oldPos, m_boids[i].oldPos);
+				
+				/* if this one is closer than the closest so far, then remember it */
+				if (m_boids[theBoid].neighborDistSqr[0] > distSqr)
+                {
+					m_boids[theBoid].neighborDistSqr[0] = distSqr;
+					m_boids[theBoid].neighbor[0] = i;
+				}
 			}
 		}
 	}
-}
-
-void BoidsManager::birdAlign(int _index)
-{
-    if (!Tools::isInside(_index, int(0), int(m_birds.size()))) return;
-    Bird* a = &m_birds[_index];
-	double dvx,dvy;
-	
-	// conform to velocities towards average velocity
-	dvx = m_avgvelocity_x - a->vx;
-	dvy = m_avgvelocity_y - a->vy;
+	/* more than one neighbor */
+	else
+    {
+		for (j = 0; j < m_numNeighbors; j++)
+			m_boids[theBoid].neighborDistSqr[j] = kMaxLong;
+		
+		for (i = 0 ; i < m_numBoids; i++)
+        {
+			/* if this one is not me... */
+			if (i != theBoid)
+            {
+				distSqr = DistSqrToPt(m_boids[theBoid].oldPos, m_boids[i].oldPos);
+                
+				/* if distSqr is less than the distance at the bottom of the array, sort into array */
+				if (distSqr < m_boids[theBoid].neighborDistSqr[m_numNeighbors-1])
+                {
+					j = m_numNeighbors - 1;
+                    
+					/* sort distSqr in to keep array in size order, smallest first */
+					while ((distSqr < m_boids[theBoid].neighborDistSqr[j-1]) && (j > 0))
+                    {
+						m_boids[theBoid].neighborDistSqr[j] = m_boids[theBoid].neighborDistSqr[j - 1];
+						m_boids[theBoid].neighbor[j] = m_boids[theBoid].neighbor[j - 1];
+						j--;
+					}
+					m_boids[theBoid].neighborDistSqr[j] = distSqr;
+					m_boids[theBoid].neighbor[j] = i;
+				}
+			}
+		}
+	}
     
-	a->vx += dvx*m_alignment;
-	a->vy += dvy*m_alignment;
-}
-
-void BoidsManager::birdCohere(int _index)
-{
-    if (!Tools::isInside(_index, int(0), int(m_birds.size()))) return;
-    Bird* a = &m_birds[_index];
-	double dx,dy;
+	/*********************************/
+	/* Match and avoid the neighbors */
+	/*********************************/
     
-	// move towards center of mass
-	dx = m_centroid_x - a->x;
-	dy = m_centroid_y - a->y;
+	matchNeighborVel->x = 0;
+	matchNeighborVel->y = 0;
 	
-	a->vx += dx*m_coherence;
-	a->vy += dy*m_coherence;
+	// set tempSpeed to old speed
+	tempSpeed = m_boids[theBoid].speed;
+	
+	for (i = 0; i < m_numNeighbors; i++) {
+		neighbor = m_boids[theBoid].neighbor[i];
+		
+		// calculate matchNeighborVel by averaging the neighbor velocities
+		matchNeighborVel->x += m_boids[neighbor].oldDir.x;
+		matchNeighborVel->y += m_boids[neighbor].oldDir.y;
+        
+		// if distance is less than preferred distance, then neighbor influences boid
+		distSqr = m_boids[theBoid].neighborDistSqr[i];
+		if (distSqr < m_prefDistSqr)
+        {
+			dist = sqrt(distSqr);
+            
+			distH = m_boids[neighbor].oldPos.x - m_boids[theBoid].oldPos.x;
+			distV = m_boids[neighbor].oldPos.y - m_boids[theBoid].oldPos.y;
+			
+			if(dist == 0.0) dist = 0.0000001;
+			totalVel.x = totalVel.x - distH - (distH * ((float) m_prefDist / (dist)));
+			totalVel.y = totalVel.y - distV - (distV * ((float) m_prefDist / (dist)));
+            
+			numClose++;
+		}
+        
+        // adjust speed
+		if (InFront(&(m_boids[theBoid]), &(m_boids[neighbor])))
+        {
+			if (distSqr < m_prefDistSqr)
+				tempSpeed /= (m_accelFactor / 100.0);
+			else
+				tempSpeed *= (m_accelFactor / 100.0);
+		}
+		else
+        {
+			if (distSqr < m_prefDistSqr)
+				tempSpeed *= (m_accelFactor / 100.0);
+			else
+				tempSpeed /= (m_accelFactor / 100.0);
+		}
+	}
+	if (numClose)
+    {
+		avoidNeighborVel->x = totalVel.x / numClose;
+		avoidNeighborVel->y = totalVel.y / numClose;
+		NormalizeVelocity(matchNeighborVel);
+	}
+	else {
+		avoidNeighborVel->x = 0;
+		avoidNeighborVel->y = 0;
+	}
+	return(tempSpeed);
 }
 
-void BoidsManager::birdGravitate(int _index)
+
+Velocity BoidsManager::SeekPoint(short theBoid, Point2d seekPt)
 {
-    if (!Tools::isInside(_index, int(0), int(m_birds.size()))) return;
-    Bird* a = &m_birds[_index];
-	double dx,dy;
+	Velocity	tempDir;
+	tempDir.x = seekPt.x - m_boids[theBoid].oldPos.x;
+	tempDir.y = seekPt.y - m_boids[theBoid].oldPos.y;
+	NormalizeVelocity(&tempDir);
+	return(tempDir);
+}
+
+
+Velocity BoidsManager::AvoidWalls(short theBoid)
+{
+	Point2d		testPoint;
+	Velocity	tempVel = {0.0, 0.0};
     
-	// move towards center
-	dx = m_gravpoint_x - a->x;
-	dy = m_gravpoint_y - a->y;
+	/* calculate test point in front of the nose of the boid */
+	/* distance depends on the boid's speed and the avoid edge constant */
+	testPoint.x = m_boids[theBoid].oldPos.x + m_boids[theBoid].oldDir.x * m_boids[theBoid].speed * m_edgeDist;
+	testPoint.y = m_boids[theBoid].oldPos.y + m_boids[theBoid].oldDir.y * m_boids[theBoid].speed * m_edgeDist;
+    
+	/* if test point is out of the left (right) side of m_flyRect, */
+	/* return a positive (negative) horizontal velocity component */
+	if (testPoint.x < m_flyRect.left)
+		tempVel.x = fabs(m_boids[theBoid].oldDir.x);
+	else if (testPoint.x > m_flyRect.right)
+		tempVel.x = - fabs(m_boids[theBoid].oldDir.x);
+    
+	/* same with top and bottom */
+	if (testPoint.y < m_flyRect.top)
+		tempVel.y = fabs(m_boids[theBoid].oldDir.y);
+	else if (testPoint.y > m_flyRect.bottom)
+		tempVel.y = - fabs(m_boids[theBoid].oldDir.y);
 	
-	a->vx += dx*m_gravity;
-	a->vy += dy*m_gravity;
+	return(tempVel);
 }
 
-void BoidsManager::setSeparation(double _separation)
+
+//Boolean BoidsManager::InFront(BoidPtr theBoid, BoidPtr neighbor)
+Boolean BoidsManager::InFront(Boid* theBoid, Boid* neighbor)
 {
-    //m_separation = Tools::clip(_separation,0.,1.)*0.1;
-    m_separation = Tools::clip(_separation,0.,1.)*100000;
+	double	grad, intercept;
+	Boolean result;
+	
+    /*
+     Find the gradient and y-intercept of a line passing through theBoid's oldPos
+     perpendicular to its direction of motion.  Another boid is in front of theBoid
+     if it is to the right or left of this linedepending on whether theBoid is moving
+     right or left.  However, if theBoid is travelling vertically then just compare
+     their vertical coordinates.
+     */
+    
+	// xy plane
+	
+	// if theBoid is not travelling vertically...
+	if (theBoid->oldDir.x != 0)
+    {
+		// calculate gradient of a line _perpendicular_ to its direction (hence the minus)
+		grad = -theBoid->oldDir.y / theBoid->oldDir.x;
+        if(grad == 0.0) grad = 0.00001;
+		
+		// calculate where this line hits the y axis (from y = mx + c)
+		intercept = theBoid->oldPos.y - (grad * theBoid->oldPos.x);
+        
+		/* compare the horizontal position of the neighbor boid with */
+		/* the point on the line that has its vertical coordinate */
+		if (neighbor->oldPos.x >= ((neighbor->oldPos.y - intercept) / grad))
+        {
+			/* return true if the first boid's horizontal movement is +ve */
+			result = (theBoid->oldDir.x > 0);
+            
+			if (result==0) return 0;
+			else goto next;
+			
+		} else
+        {
+			/* return true if the first boid's horizontal movement is +ve */
+			result = (theBoid->oldDir.x < 0);
+			if (result==0) return 0;
+			else goto next;
+		}
+	}
+	/* else theBoid is travelling vertically, so just compare vertical coordinates */
+	else if (theBoid->oldDir.y > 0) {
+		result = (neighbor->oldPos.y > theBoid->oldPos.y);
+		if ( result == 0 ) return 0;
+        else goto next;
+	}
+    else
+    {
+		result = (neighbor->oldPos.y < theBoid->oldPos.y);
+		if ( result == 0 ) return 0;
+        else goto next;
+	}
+next:
+	return 1;
 }
 
-void BoidsManager::setAlignment(double _alignment)
+void BoidsManager::NormalizeVelocity(Velocity *direction)
 {
-    m_alignment = Tools::clip(_alignment,0.,1.)*0.1;
+	float	hypot;
+	
+	hypot = sqrt(direction->x * direction->x + direction->y * direction->y);
+    
+	if (hypot != 0.0)
+    {
+		direction->x = direction->x / hypot;
+		direction->y = direction->y / hypot;
+	}
 }
 
-void BoidsManager::setCoherence(double _coherence)
+double BoidsManager::DistSqrToPt(Point2d firstPoint, Point2d secondPoint)
 {
-    m_coherence = Tools::clip(_coherence,0.,1.)*0.1;
+	double	a, b;
+	a = firstPoint.x - secondPoint.x;
+	b = firstPoint.y - secondPoint.y;
+	return(a * a + b * b);
 }
 
-void BoidsManager::setFriction(double _friction)
+
+
+
+void BoidsManager::boid_set_pos(long index, double posX, double posY)
 {
-    m_friction = Tools::clip(_friction,0.,1.);
+    if (!Tools::isInside(index, long(0), m_numBoids-1)) return;
+    
+    // set ith boid to place
+    m_boids[index].oldPos.x = m_boids[index].newPos.x = posX;
+    m_boids[index].oldPos.y = m_boids[index].newPos.y = posY;
 }
 
-void BoidsManager::setInertia(double _inertia)
+
+void BoidsManager::boid_set_dir(long index, double dirX, double dirY)
 {
-    m_inertia = Tools::clip(_inertia,0.,1.);
+    if (!Tools::isInside(index, long(0), m_numBoids-1)) return;
+    
+    // set ith boid to place
+    m_boids[index].oldDir.x = m_boids[index].newDir.x = dirX;
+    m_boids[index].oldDir.y = m_boids[index].newDir.y = dirY;
 }
 
-void BoidsManager::setSepThresh(double _septhresh)
+void BoidsManager::boid_set_speed(long index, double speed)
 {
-    //m_septhresh = Tools::clip(_septhresh,0.,1.)*0.5;
+    if (!Tools::isInside(index, long(0), m_numBoids-1)) return;
+    
+    m_boids[index].speed = speed;
 }
 
-void BoidsManager::setMaxVel(double _maxvel)
+void BoidsManager::boid_set_speedinv(long index)
 {
-    m_maxvel = Tools::clip(_maxvel,0.,1.)*0.1;
+    if (!Tools::isInside(index, long(0), m_numBoids-1)) return;
+    
+    m_boids[index].speed *= -1;
 }
 
-void BoidsManager::setGravity(double _gravity)
+
+void BoidsManager::resetBoids()
 {
-    m_gravity = Tools::clip(_gravity,-1.,1.)*0.1;
+    long i, j;
+	double rndAngle;
+	
+    // init everything to 0.0
+	for (i = 0; i <  m_boids.size(); i++)
+    {
+		m_boids[i].oldPos.x = 0.0;
+		m_boids[i].oldPos.y = 0.0;
+        
+		m_boids[i].newPos.x = 0.0;
+		m_boids[i].newPos.y = 0.0;
+		
+		m_boids[i].oldDir.x = 0.0;
+		m_boids[i].oldDir.y = 0.0;
+		
+		m_boids[i].newDir.x = 0.0;
+		m_boids[i].newDir.y = 0.0;
+		
+		m_boids[i].speed = 0.0;
+		
+		for(j=0; j < MAX_NEIGHBORS;j++)
+        {
+			m_boids[i].neighbor[j] = 0;
+			m_boids[i].neighborDistSqr[j] = 0.0;
+		}
+	}
+    
+    // set the initial locations and velocities of the boids
+	for (i = 0; i <  m_boids.size(); i++)
+    {
+        // set random location within flyRect
+		m_boids[i].newPos.x = m_boids[i].oldPos.x = Tools::getRand(m_flyRect.right,m_flyRect.left);
+		m_boids[i].newPos.y = m_boids[i].oldPos.y = Tools::getRand(m_flyRect.bottom, m_flyRect.top);
+        
+        // set velocity from random angle
+		rndAngle = Tools::getRand(0, 360) * m_d2r;
+		m_boids[i].newDir.x = sin(rndAngle);
+		m_boids[i].newDir.y = cos(rndAngle);
+		m_boids[i].speed = (kMaxSpeed + kMinSpeed) * 0.5;
+	}
 }
 
-void BoidsManager::setGravPoint_x(double _gravPoint_x)
+void BoidsManager::setNumberOfBoids(long _numberOfBoids)
 {
-    //m_gravpoint_x = Tools::clip(_gravPoint_x,0.,1.);
-    m_gravpoint_x = _gravPoint_x;
+    // clip agentcount to range 1.-100.
+	m_numBoids = Tools::clip(_numberOfBoids, long(1), long(100));
+    
+    m_boids.resize(m_numBoids);
+    
+	for (int i=0; i < m_numBoids; i++)
+	{
+        // start with random position/velocity
+        m_boids[i].newPos.x  = Tools::getRandd(m_attractPt.x - 1., m_attractPt.x + 1.);
+        m_boids[i].newPos.y  = Tools::getRandd(m_attractPt.y - 1., m_attractPt.y + 1.);
+        m_boids[i].newDir.x = Tools::getRandd(-0.05, 0.05);
+        m_boids[i].newDir.y = Tools::getRandd(-0.05, 0.05);
+	}
 }
 
-void BoidsManager::setGravPoint_y(double _gravPoint_y)
+void BoidsManager::setNumberOfNeighbors(long _numberOfNeighbors)
 {
-    //m_gravpoint_y = Tools::clip(_gravPoint_y,0.,1.);
-    m_gravpoint_y = _gravPoint_y;
+    m_numNeighbors = Tools::clip(_numberOfNeighbors, 0, MAX_NEIGHBORS);
 }
 
-void BoidsManager::setGravPoint(double _gravPoint_x, double _gravPoint_y)
+//void BoidsManager::setFlyRect(double left, double right, double top, double bottom)
+//{
+//    m_flyRect.left = left;
+//    m_flyRect.right = right;
+//    m_flyRect.top = top;
+//    m_flyRect.bottom = bottom;
+//}
+
+void BoidsManager::setFlyRect(double topLeft_X, double topLeft_Y, double bottomRight_X, double bottomRight_Y)
 {
-    setGravPoint_x(_gravPoint_x);
-    setGravPoint_y(_gravPoint_y);
+    m_flyRect.left = topLeft_X;
+    m_flyRect.right = bottomRight_X;
+    m_flyRect.top = bottomRight_Y;
+    m_flyRect.bottom = topLeft_Y;
+}
+
+void BoidsManager::setMinSpeed(double _minSpeed)
+{
+    m_minSpeed = Tools::clip_min(_minSpeed, 0.000001);
+}
+
+void BoidsManager::setMaxSpeed(double _maxSpeed)
+{
+    m_maxSpeed = _maxSpeed;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setCenterWeight(double _centerWeight)
+{
+    m_centerWeight = _centerWeight;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setAttractWeight(double _attractWeight)
+{
+    m_attractWeight = _attractWeight;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setMatchWeight(double _matchWeight)
+{
+    m_matchWeight = _matchWeight;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setAvoidWeight(double _avoidWeight)
+{
+    m_avoidWeight = _avoidWeight;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setWallsWeight(double _wallWeight)
+{
+    m_wallsWeight = _wallWeight;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setEdgeDistance(double _edgeDistance)
+{
+    m_edgeDist = _edgeDistance;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setSpeedupFactor(double _speedupFactor)
+{
+    m_speedupFactor = _speedupFactor;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setInertiaFactor(double _inertiaFactor)
+{
+    m_inertiaFactor = Tools::clip_min(_inertiaFactor, 0.000001);//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setAccelFactor(double _accelFactor)
+{
+    m_accelFactor = Tools::clip_min(_accelFactor, 0.000001);//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setPrefDistance(double _prefDistance)
+{
+    m_prefDist = _prefDistance;//Tools::clip(_mode, 0, 2);
+    m_prefDistSqr = m_prefDist * m_prefDist;
+}
+
+void BoidsManager::setPrefDistanceSqr(double _prefDistanceSqr)
+{
+    m_prefDistSqr = _prefDistanceSqr;//Tools::clip(_mode, 0, 2);
+}
+
+void BoidsManager::setCenterPt(double _center_X, double _center_Y)
+{
+    m_centerPt.x = _center_X;//Tools::clip(_mode, 0, 2);
+    m_centerPt.y = _center_Y;
+}
+
+void BoidsManager::setAttractPt(double _attract_X, double _attract_Y)
+{
+    m_attractPt.x = _attract_X;//Tools::clip(_mode, 0, 2);
+    m_attractPt.y = _attract_Y;
 }
 
 // GETTERS :
 
-void BoidsManager::getBirdCoord(long _index, double* _birdArrayCoord)
+int BoidsManager::getBoidCoord(long _index, double* _BoidArrayCoord)
 {
-    _birdArrayCoord[0] = _birdArrayCoord[1] = NULL;
-    if (Tools::isInside(_index, long(0), long(m_birds.size())))
+    _BoidArrayCoord[0] = _BoidArrayCoord[1] = NULL;
+    if (Tools::isInside(_index, long(0), long(m_boids.size())))
     {
-        _birdArrayCoord[0] = m_birds.at(_index).x;
-        _birdArrayCoord[1] = m_birds.at(_index).y;
+        _BoidArrayCoord[0] = m_boids.at(_index).newPos.x;
+        _BoidArrayCoord[1] = m_boids.at(_index).newPos.y;
+        return 1;
     }
+    return 0; // bad index
 }
 

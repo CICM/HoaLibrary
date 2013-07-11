@@ -21,6 +21,7 @@
 		2C9A1C421767404500F75BDC /* hoa.boids.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.boids.cpp; sourceTree = "<group>"; };
 		2C9A1C541767421700F75BDC /* BoidsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoidsManager.cpp; sourceTree = "<group>"; };
 		2C9A1C551767421700F75BDC /* BoidsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoidsManager.h; sourceTree = "<group>"; };
+		2C9BA310178D84A100041269 /* Boids2d.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = Boids2d.c; path = boids2d/Boids2d.c; sourceTree = "<group>"; };
 		2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.boids.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.boids.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -45,6 +46,7 @@
 				2C9A1C541767421700F75BDC /* BoidsManager.cpp */,
 				2C9A1C551767421700F75BDC /* BoidsManager.h */,
 				2C386F71178A1E56001A8A1A /* CicmTools.h */,
+				2C9BA310178D84A100041269 /* Boids2d.c */,
 				2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);

@@ -68,20 +68,27 @@ typedef struct  _hoaboids
     t_jrgba		f_colorBackgroundInside;
     t_jrgba     f_colorBorder;
     t_jrgba     f_colorSelection;
-    t_jrgba     f_colorBirds;
+    t_jrgba     f_colorBoids;
     t_jrgba     f_colorAttractor;
+    t_jrgba     f_colorFlyrect;
     
     // param :
-    long   f_numberOfBirds;
-    double f_separation;
-    double f_alignment;
-    double f_coherence;
-    double f_inertia;
-    double f_friction;
-    double f_septhresh;
-    double f_maxvel;
-    double f_gravity;
-    double f_gravpoint[2];
+    long   f_numberOfBoids;
+    long   f_neighbors;
+	double f_minspeed;
+	double f_maxspeed;
+	double f_center;
+	double f_attract;
+	double f_match;
+	double f_avoid;
+	double f_wall; //f_repel;
+	double f_edgedist;
+	double f_speed;
+	double f_inertia;
+	double f_accel;
+	double f_prefdist;
+	double f_flyrect[4];
+	double f_attractpt[2];
     
     double f_refreshInterval;
     
@@ -99,19 +106,37 @@ void hoaboids_getdrawparams(t_hoaboids *x, t_object *patcherview, t_jboxdrawpara
 void hoaboids_assist(t_hoaboids *x, void *b, long m, long a, char *s);
 t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
+// preset - pattr
+void hoaboids_preset(t_hoaboids *x);
+t_max_err hoaboids_setvalueof(t_hoaboids *x, long ac, t_atom *av);
+t_max_err hoaboids_getvalueof(t_hoaboids *x, long *ac, t_atom **av);
+
 // attr setters :
-t_max_err hoaboids_setAttr_gravpoint(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_nbirds(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_attractpoint(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_nBoids(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_separation(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_alignment(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_coherence(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_flyrect(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_neighbors(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_mode(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_minspeed(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_maxspeed(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_center(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_attract(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_match(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_avoid(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_wall(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_edgedist(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_speed(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_inertia(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_friction(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_septhresh(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_maxvel(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaboids_setAttr_gravity(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_accel(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoaboids_setAttr_prefdist(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
+
 void hoaboids_setGravityPoint(t_hoaboids *x, double gx, double gy);
+
+void boid_set_pos(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv);
+void boid_set_dir(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv);
+void boid_set_speed(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv);
+void boid_set_speedinv(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv);
 
 void hoaboids_tick(t_hoaboids *x);
 
@@ -128,6 +153,7 @@ void hoaboids_paint(t_hoaboids *x, t_object *view);
 void draw_background(t_hoaboids *x, t_object *view, t_rect *rect);
 void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect);
 void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect);
+void draw_flyrect(t_hoaboids *x,  t_object *view, t_rect *rect);
 
 void hoaboids_mousedown(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoaboids_mousedrag(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -151,6 +177,17 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) hoaboids_paint,            "paint",         A_CANT,	0);
 	class_addmethod(c, (method) hoaboids_getdrawparams,    "getdrawparams", A_CANT, 0);
 	class_addmethod(c, (method) hoaboids_notify,           "notify",		A_CANT, 0);
+    
+    class_addmethod(c, (method) hoaboids_preset,           "preset",                  0);
+    class_addmethod(c, (method) hoaboids_getvalueof,       "getvalueof",    A_CANT,   0);
+	class_addmethod(c, (method) hoaboids_setvalueof,       "setvalueof",    A_CANT,   0);
+    
+    class_addmethod(c, (method) boid_set_pos,              "set_pos",		A_GIMME, 0);
+    class_addmethod(c, (method) boid_set_dir,              "set_dir",		A_GIMME, 0);
+    class_addmethod(c, (method) boid_set_speed,            "set_speed",		A_GIMME, 0);
+    class_addmethod(c, (method) boid_set_speedinv,         "set_speedinv",	A_GIMME, 0);
+    
+    class_addmethod(c, (method) hoaboids_notify,           "notify",		A_CANT, 0);
     
     class_addmethod(c, (method) hoaboids_start,            "start",         0);
     class_addmethod(c, (method) hoaboids_stop,             "stop",          0);
@@ -195,12 +232,12 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
     
-    CLASS_ATTR_RGBA				(c, "birdscolor", 0, t_hoaboids, f_colorBirds);
-	CLASS_ATTR_CATEGORY			(c, "birdscolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "birdscolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "birdscolor", 0, "Birds Color");
-	CLASS_ATTR_ORDER			(c, "birdscolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "birdscolor", 0, "0.2 0.2 0.2 0.9");
+    CLASS_ATTR_RGBA				(c, "Boidscolor", 0, t_hoaboids, f_colorBoids);
+	CLASS_ATTR_CATEGORY			(c, "Boidscolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "Boidscolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "Boidscolor", 0, "Boids Color");
+	CLASS_ATTR_ORDER			(c, "Boidscolor", 0, "4");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "Boidscolor", 0, "0.2 0.2 0.2 0.9");
     
     CLASS_ATTR_RGBA				(c, "attractorcolor", 0, t_hoaboids, f_colorAttractor);
 	CLASS_ATTR_CATEGORY			(c, "attractorcolor", 0, "Color");
@@ -208,6 +245,12 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c, "attractorcolor", 0, "Attractor Color");
 	CLASS_ATTR_ORDER			(c, "attractorcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "attractorcolor", 0, "0.8 0.5 0.5 0.9");
+    
+    CLASS_ATTR_RGBA				(c, "flyrectcolor", 0, t_hoaboids, f_colorFlyrect);
+	CLASS_ATTR_CATEGORY			(c, "flyrectcolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "flyrectcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "flyrectcolor", 0, "Fly Rectangle Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "flyrectcolor", 0, "0.25 0.25 0.25 0.9");
 	
     /* Behavior */
 	CLASS_ATTR_LONG				(c,"outputmode", 0, t_hoaboids, f_output_mode);
@@ -228,75 +271,90 @@ int C74_EXPORT main()
     
     /* hoa.boids */
     CLASS_STICKY_CATEGORY(c, 0, "hoa.boids");
-    CLASS_ATTR_DOUBLE_ARRAY     (c,"gravpoint", 0, t_hoaboids, f_gravpoint, 2);
-    CLASS_ATTR_ACCESSORS		(c,"gravpoint", NULL, hoaboids_setAttr_gravpoint);
-	CLASS_ATTR_LABEL			(c,"gravpoint", 0,   "Gravity Point");
-	CLASS_ATTR_DEFAULT          (c,"gravpoint", 0,   "0. 0.");
-    CLASS_ATTR_ORDER			(c,"gravpoint", 0,   "1");
-    CLASS_ATTR_SAVE             (c,"gravpoint", 1);
+    CLASS_ATTR_DOUBLE_ARRAY     (c,"attractpoint", 0, t_hoaboids, f_attractpt, 2);
+    CLASS_ATTR_ACCESSORS		(c,"attractpoint", NULL, hoaboids_setAttr_attractpoint);
+	CLASS_ATTR_LABEL			(c,"attractpoint", 0,   "Attraction Point");
+	CLASS_ATTR_DEFAULT          (c,"attractpoint", 0,   "0. 0.");
+    CLASS_ATTR_SAVE             (c,"attractpoint", 1);
     
-    CLASS_ATTR_LONG             (c,"nbirds", 0, t_hoaboids, f_numberOfBirds);
-    CLASS_ATTR_ACCESSORS		(c,"nbirds", NULL, hoaboids_setAttr_nbirds);
-	CLASS_ATTR_LABEL			(c,"nbirds", 0,   "Number of Birds");
-	CLASS_ATTR_DEFAULT          (c,"nbirds", 0,   "4");
-    CLASS_ATTR_ORDER			(c,"nbirds", 0,   "1");
-    CLASS_ATTR_SAVE             (c,"nbirds", 1);
+    CLASS_ATTR_LONG             (c,"nboids", 0, t_hoaboids, f_numberOfBoids);
+    CLASS_ATTR_ACCESSORS		(c,"nboids", NULL, hoaboids_setAttr_nBoids);
+	CLASS_ATTR_LABEL			(c,"nboids", 0,   "Number of Boids");
+	CLASS_ATTR_DEFAULT          (c,"nboids", 0,   "4");
+    CLASS_ATTR_SAVE             (c,"nboids", 1);
     
-    CLASS_ATTR_DOUBLE			(c,"separation", 0, t_hoaboids, f_separation);
-    CLASS_ATTR_ACCESSORS		(c,"separation", NULL, hoaboids_setAttr_separation);
-	CLASS_ATTR_LABEL			(c,"separation", 0,   "Separation");
-	CLASS_ATTR_DEFAULT          (c,"separation", 0,   "0.03");
-    CLASS_ATTR_ORDER			(c,"separation", 0,   "1");
-    CLASS_ATTR_SAVE             (c,"separation", 1);
+    CLASS_ATTR_DOUBLE_ARRAY     (c,"flyrect", 0, t_hoaboids, f_flyrect, 4);
+    CLASS_ATTR_ACCESSORS		(c,"flyrect", NULL, hoaboids_setAttr_flyrect);
+	CLASS_ATTR_LABEL			(c,"flyrect", 0,   "Flying Rectangle");
+	CLASS_ATTR_DEFAULT          (c,"flyrect", 0,   "-5. 5. 5. -5");
+    CLASS_ATTR_SAVE             (c,"flyrect", 1);
     
-    CLASS_ATTR_DOUBLE			(c,"alignment", 0, t_hoaboids, f_alignment);
-    CLASS_ATTR_ACCESSORS		(c,"alignment", NULL, hoaboids_setAttr_alignment);
-	CLASS_ATTR_LABEL			(c,"alignment", 0,   "Alignment");
-	CLASS_ATTR_DEFAULT          (c,"alignment", 0,   "0.05");
-    CLASS_ATTR_ORDER			(c,"alignment", 0,   "2");
-    CLASS_ATTR_SAVE             (c,"alignment", 1);
+    CLASS_ATTR_LONG             (c,"neigbhors", 0, t_hoaboids, f_neighbors);
+    CLASS_ATTR_ACCESSORS		(c,"neigbhors", NULL, hoaboids_setAttr_neighbors);
+	CLASS_ATTR_LABEL			(c,"neigbhors", 0,   "Number Of Neighbors");
+	CLASS_ATTR_DEFAULT          (c,"neigbhors", 0,   "4");
+    CLASS_ATTR_SAVE             (c,"neigbhors", 1);
     
-    CLASS_ATTR_DOUBLE			(c,"coherence", 0, t_hoaboids, f_coherence);
-    CLASS_ATTR_ACCESSORS		(c,"coherence", NULL, hoaboids_setAttr_coherence);
-	CLASS_ATTR_LABEL			(c,"coherence", 0,   "Coherence");
-	CLASS_ATTR_DEFAULT          (c,"coherence", 0,   "0.02");
-    CLASS_ATTR_ORDER			(c,"coherence", 0,   "3");
-    CLASS_ATTR_SAVE             (c,"coherence", 1);
+    CLASS_ATTR_DOUBLE			(c,"minspeed", 0, t_hoaboids, f_minspeed);
+    CLASS_ATTR_ACCESSORS		(c,"minspeed", NULL, hoaboids_setAttr_minspeed);
+	CLASS_ATTR_LABEL			(c,"minspeed", 0,   "Minimum Speed");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"minspeed", 0,   "0.15");
+    
+    CLASS_ATTR_DOUBLE			(c,"maxspeed", 0, t_hoaboids, f_maxspeed);
+    CLASS_ATTR_ACCESSORS		(c,"maxspeed", NULL, hoaboids_setAttr_maxspeed);
+	CLASS_ATTR_LABEL			(c,"maxspeed", 0,   "Maximum Speed");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"maxspeed", 0,   "0.25");
+    
+    CLASS_ATTR_DOUBLE			(c,"center", 0, t_hoaboids, f_center);
+    CLASS_ATTR_ACCESSORS		(c,"center", NULL, hoaboids_setAttr_center);
+	CLASS_ATTR_LABEL			(c,"center", 0,   "Flock Centering");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"center", 0,   "0.25");
+    
+    CLASS_ATTR_DOUBLE			(c,"attract", 0, t_hoaboids, f_attract);
+    CLASS_ATTR_ACCESSORS		(c,"attract", NULL, hoaboids_setAttr_attract);
+	CLASS_ATTR_LABEL			(c,"attract", 0,   "Attraction Point Seeking");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"attract", 0,   "0.3");
+    
+    CLASS_ATTR_DOUBLE			(c,"match", 0, t_hoaboids, f_match);
+    CLASS_ATTR_ACCESSORS		(c,"match", NULL, hoaboids_setAttr_match);
+	CLASS_ATTR_LABEL			(c,"match", 0,   "Neighbors Velocity Matching");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"match", 0,   "0.1");
+    
+    CLASS_ATTR_DOUBLE			(c,"avoid", 0, t_hoaboids, f_avoid);
+    CLASS_ATTR_ACCESSORS		(c,"avoid", NULL, hoaboids_setAttr_avoid);
+	CLASS_ATTR_LABEL			(c,"avoid", 0,   "Neighbors Avoidance");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"avoid", 0,   "0.1");
+    
+    CLASS_ATTR_DOUBLE			(c,"wall", 0, t_hoaboids, f_wall);
+    CLASS_ATTR_ACCESSORS		(c,"wall", NULL, hoaboids_setAttr_wall);
+	CLASS_ATTR_LABEL			(c,"wall", 0,   "Wall Avoidance");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"wall", 0,   "0.5");
+    
+    CLASS_ATTR_DOUBLE			(c,"edgedist", 0, t_hoaboids, f_edgedist);
+    CLASS_ATTR_ACCESSORS		(c,"edgedist", NULL, hoaboids_setAttr_edgedist);
+	CLASS_ATTR_LABEL			(c,"edgedist", 0,   "Vision Distance to Avoid Wall Edges");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"edgedist", 0,   "0.5");
+    
+    CLASS_ATTR_DOUBLE			(c,"speed", 0, t_hoaboids, f_speed);
+    CLASS_ATTR_ACCESSORS		(c,"speed", NULL, hoaboids_setAttr_speed);
+	CLASS_ATTR_LABEL			(c,"speed", 0,   "Animation Speed");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"speed", 0,   "0.1");
     
     CLASS_ATTR_DOUBLE			(c,"inertia", 0, t_hoaboids, f_inertia);
     CLASS_ATTR_ACCESSORS		(c,"inertia", NULL, hoaboids_setAttr_inertia);
-	CLASS_ATTR_LABEL			(c,"inertia", 0,   "Inertia");
-	CLASS_ATTR_DEFAULT          (c,"inertia", 0,   "0.5");
-    CLASS_ATTR_ORDER			(c,"inertia", 0,   "4");
-    CLASS_ATTR_SAVE             (c,"inertia", 1);
+	CLASS_ATTR_LABEL			(c,"inertia", 0,   "Willingness to Change Speed & Direction");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"inertia", 0,   "0.2");
     
-    CLASS_ATTR_DOUBLE			(c,"friction", 0, t_hoaboids, f_friction);
-    CLASS_ATTR_ACCESSORS		(c,"friction", NULL, hoaboids_setAttr_friction);
-	CLASS_ATTR_LABEL			(c,"friction", 0,   "Friction");
-	CLASS_ATTR_DEFAULT          (c,"friction", 0,   "0.5");
-    CLASS_ATTR_ORDER			(c,"friction", 0,   "5");
-    CLASS_ATTR_SAVE             (c,"friction", 1);
+    CLASS_ATTR_DOUBLE			(c,"accel", 0, t_hoaboids, f_accel);
+    CLASS_ATTR_ACCESSORS		(c,"accel", NULL, hoaboids_setAttr_accel);
+	CLASS_ATTR_LABEL			(c,"accel", 0,   "Neighbor Avoidance Accelerate or Decelerate Rate");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"accel", 0,   "0.1");
     
-    CLASS_ATTR_DOUBLE			(c,"septhresh", 0, t_hoaboids, f_septhresh);
-    CLASS_ATTR_ACCESSORS		(c,"septhresh", NULL, hoaboids_setAttr_septhresh);
-	CLASS_ATTR_LABEL			(c,"septhresh", 0,   "SepThresh");
-	CLASS_ATTR_DEFAULT          (c,"septhresh", 0,   "0.1");
-    CLASS_ATTR_ORDER			(c,"septhresh", 0,   "6");
-    CLASS_ATTR_SAVE             (c,"septhresh", 1);
+    CLASS_ATTR_DOUBLE			(c,"prefdist", 0, t_hoaboids, f_prefdist);
+    CLASS_ATTR_ACCESSORS		(c,"prefdist", NULL, hoaboids_setAttr_prefdist);
+	CLASS_ATTR_LABEL			(c,"prefdist", 0,   "Preferred Distance from Neighbors");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"prefdist", 0,   "0.25");
     
-    CLASS_ATTR_DOUBLE			(c,"maxvel", 0, t_hoaboids, f_maxvel);
-    CLASS_ATTR_ACCESSORS		(c,"maxvel", NULL, hoaboids_setAttr_maxvel);
-	CLASS_ATTR_LABEL			(c,"maxvel", 0,   "Max Velocity");
-	CLASS_ATTR_DEFAULT          (c,"maxvel", 0,   "0.05");
-    CLASS_ATTR_ORDER			(c,"maxvel", 0,   "7");
-    CLASS_ATTR_SAVE             (c,"maxvel", 1);
-    
-    CLASS_ATTR_DOUBLE			(c,"gravity", 0, t_hoaboids, f_gravity);
-    CLASS_ATTR_ACCESSORS		(c,"gravity", NULL, hoaboids_setAttr_gravity);
-	CLASS_ATTR_LABEL			(c,"gravity", 0,   "Gravity");
-	CLASS_ATTR_DEFAULT          (c,"gravity", 0,   "0.03");
-    CLASS_ATTR_ORDER			(c,"gravity", 0,   "8");
-    CLASS_ATTR_SAVE             (c,"gravity", 1);
     CLASS_STICKY_CATEGORY_CLEAR(c);
     
 	class_register(CLASS_BOX, c);
@@ -403,18 +461,107 @@ void hoaboids_int(t_hoaboids *x, long v)
 }
 
 
+// --------------------- //
+
+
+void hoaboids_preset(t_hoaboids *x)
+{
+    void* z;
+    if(!(z = gensym("_preset")->s_thing))
+        return;
+    
+    binbuf_vinsert(z, gensym("ossl")->s_name, x, object_classname(x), gensym("nboids"), x->f_numberOfBoids);
+    binbuf_vinsert(z, gensym("ossff")->s_name, x, object_classname(x), gensym("attractpoint"), x->f_attractpt[0], x->f_attractpt[1]);
+    binbuf_vinsert(z, gensym("ossffff")->s_name, x, object_classname(x), gensym("flyrect"),
+                   x->f_flyrect[0], x->f_flyrect[1],
+                   x->f_flyrect[2], x->f_flyrect[3]);
+    binbuf_vinsert(z, gensym("ossl")->s_name, x, object_classname(x), gensym("neigbhors"), x->f_neighbors);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("minspeed"), x->f_minspeed);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("maxspeed"), x->f_maxspeed);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("center"), x->f_center);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("attract"), x->f_attract);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("match"), x->f_match);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("avoid"), x->f_avoid);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("wall"), x->f_wall);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("edgedist"), x->f_edgedist);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("speed"), x->f_speed);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("inertia"), x->f_inertia);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("accel"), x->f_accel);
+    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("prefdist"), x->f_prefdist);
+}
+
+t_max_err hoaboids_setvalueof(t_hoaboids *x, long ac, t_atom *av)
+{
+    /*
+    if (ac && av) {
+        
+        long index, i;
+        for (i = index = 0; (index < x->f_numberOfMic) && (i <= ac); index++, i+=3)
+        {
+            x->f_mics->setAngleCartesianCoordinate(index, atom_getfloat(av+i), atom_getfloat(av+i+1));
+            x->f_mics->setWiderValue(index, atom_getfloat(av+i+2));
+        }
+        
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("text_layer"));
+        jbox_redraw((t_jbox *)x);
+        
+        HoaRecomposerUI_output(x);
+	}
+	return MAX_ERR_NONE;
+    */
+}
+
+// get a list of mic value : (x, y, wider)*numberOfMicrophone
+t_max_err hoaboids_getvalueof(t_hoaboids *x, long *ac, t_atom **av)
+{
+    /*
+    if (ac && av)
+    {
+        if (*ac && *av)
+        {
+            long index, i;
+            for (i = index = 0; index < x->f_numberOfMic; index++, i+=3)
+            {
+                atom_setfloat(*av+i, x->f_mics->getAbscissa(index) );
+                atom_setfloat(*av+i+1, x->f_mics->getOrdinate(index) );
+                atom_setfloat(*av+i+2, x->f_mics->getWiderValue(index) );
+            }
+		}
+        else
+        {
+            *ac = (x->f_numberOfMic*3);
+			*av = (t_atom *)getbytes( (x->f_numberOfMic*3) * sizeof(t_atom));
+            long index, i;
+            for (i = index = 0; index < x->f_numberOfMic; index++, i+=3)
+            {
+                atom_setfloat(*av+i, x->f_mics->getAbscissa(index) );
+                atom_setfloat(*av+i+1, x->f_mics->getOrdinate(index) );
+                atom_setfloat(*av+i+2, x->f_mics->getWiderValue(index) );
+            }
+        }
+    }
+	return MAX_ERR_NONE;
+    */
+}
+
+// --------------------- //
+
 t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
         x->f_zoom_factor = Tools::clip(float(atom_getfloat(argv)), float(MIN_ZOOM), float(MAX_ZOOM));
     
     jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
+    jbox_redraw((t_jbox *)x);
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_gravpoint(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoaboids_setAttr_attractpoint(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 2 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG) && (atom_gettype(argv+1) == A_FLOAT || atom_gettype(argv+1) == A_LONG))
     {
@@ -427,103 +574,221 @@ t_max_err hoaboids_setAttr_gravpoint(t_hoaboids *x, t_object *attr, long argc, t
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_nbirds(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoaboids_setAttr_nBoids(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        x->f_numberOfBirds = Tools::clip(long(atom_getlong(argv)), long(0), long(100));
-        x->f_boids_manager->setNumberOfBoids(x->f_numberOfBirds);
+        x->f_numberOfBoids = Tools::clip(long(atom_getlong(argv)), long(0), long(100));
+        x->f_boids_manager->setNumberOfBoids(x->f_numberOfBoids);
     }
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_separation(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoaboids_setAttr_flyrect(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+    if(argc && argv)
     {
-        x->f_separation = Tools::clip(double(atom_getfloat(argv)), double(0), double(10));
-        x->f_boids_manager->setSeparation(x->f_separation);
+        for (int i = 0; i < argc; i++) {
+            if (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
+                x->f_flyrect[i] = Tools::clip(double(atom_getfloat(argv+i)), double(-10), double(10));
+        }
+        x->f_boids_manager->setFlyRect(x->f_flyrect[0], x->f_flyrect[1], x->f_flyrect[2], x->f_flyrect[3]);
+        
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
+        jbox_redraw((t_jbox *)x);
     }
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_alignment(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoaboids_setAttr_neighbors(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT))
     {
-        x->f_alignment = Tools::clip(double(atom_getfloat(argv)), double(0), double(1));
-        x->f_boids_manager->setAlignment(x->f_alignment);
+        x->f_boids_manager->setNumberOfNeighbors(atom_getlong(argv));
+        x->f_neighbors = x->f_boids_manager->getNumberOfNeighbors();
     }
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_coherence(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoaboids_setAttr_minspeed(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        x->f_coherence = Tools::clip(double(atom_getfloat(argv)), double(0), double(1));
-        x->f_boids_manager->setCoherence(x->f_coherence);
+        x->f_boids_manager->setMinSpeed(atom_getfloat(argv));
+        x->f_minspeed = x->f_boids_manager->getMinSpeed();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_maxspeed(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setMaxSpeed(atom_getfloat(argv));
+        x->f_maxspeed = x->f_boids_manager->getMaxSpeed();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_center(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setCenterWeight(atom_getfloat(argv));
+        x->f_center = x->f_boids_manager->getCenterWeight();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_attract(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setAttractWeight(atom_getfloat(argv));
+        x->f_attract = x->f_boids_manager->getAttractWeight();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_match(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setMatchWeight(atom_getfloat(argv));
+        x->f_match = x->f_boids_manager->getMatchWeight();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_avoid(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setAvoidWeight(atom_getfloat(argv));
+        x->f_avoid = x->f_boids_manager->getAvoidWeight();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_wall(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setWallsWeight(atom_getfloat(argv));
+        x->f_wall = x->f_boids_manager->getWallsWeight();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_edgedist(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setEdgeDistance(atom_getfloat(argv));
+        x->f_edgedist = x->f_boids_manager->getEdgeDistance();
+    }
+    return MAX_ERR_NONE;
+}
+
+t_max_err hoaboids_setAttr_speed(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+    {
+        x->f_boids_manager->setSpeedupFactor(atom_getfloat(argv));
+        x->f_speed = x->f_boids_manager->getSpeedupFactor();
     }
     return MAX_ERR_NONE;
 }
 
 t_max_err hoaboids_setAttr_inertia(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        x->f_inertia = Tools::clip(double(atom_getfloat(argv)), double(0), double(1));
-        x->f_boids_manager->setInertia(x->f_inertia);
+        x->f_boids_manager->setInertiaFactor(atom_getfloat(argv));
+        x->f_inertia = x->f_boids_manager->getInertiaFactor();
     }
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_friction(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoaboids_setAttr_accel(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        x->f_friction = Tools::clip(double(atom_getfloat(argv)), double(0), double(1));
-        x->f_boids_manager->setFriction(x->f_friction);
+        x->f_boids_manager->setAccelFactor(atom_getfloat(argv));
+        x->f_accel = x->f_boids_manager->getAccelFactor();
     }
     return MAX_ERR_NONE;
 }
 
-t_max_err hoaboids_setAttr_septhresh(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoaboids_setAttr_prefdist(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        x->f_septhresh = Tools::clip(double(atom_getfloat(argv)), double(0), double(1));
-        x->f_boids_manager->setSepThresh(x->f_septhresh);
-    }
-    return MAX_ERR_NONE;
-}
-
-t_max_err hoaboids_setAttr_maxvel(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
-{
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
-    {
-        x->f_maxvel = Tools::clip(double(atom_getfloat(argv)), double(0), double(1));
-        x->f_boids_manager->setMaxVel(x->f_maxvel);
-    }
-    return MAX_ERR_NONE;
-}
-
-t_max_err hoaboids_setAttr_gravity(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
-{
-    if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
-    {
-        x->f_gravity = Tools::clip(double(atom_getfloat(argv)), double(-1.), double(1.));
-        x->f_boids_manager->setGravity(x->f_gravity);
+        x->f_boids_manager->setPrefDistance(atom_getfloat(argv));
+        x->f_prefdist = x->f_boids_manager->getPrefDistance();
     }
     return MAX_ERR_NONE;
 }
 
 void hoaboids_setGravityPoint(t_hoaboids *x, double gx, double gy)
 {
-    //x->f_gravpoint[0] = gx/x->f_zoom_factor;
-    //x->f_gravpoint[1] = gy/x->f_zoom_factor;
-    x->f_gravpoint[0] = gx;
-    x->f_gravpoint[1] = gy;
-    x->f_boids_manager->setGravPoint(x->f_gravpoint[0], x->f_gravpoint[1]);
+    x->f_attractpt[0] = gx;
+    x->f_attractpt[1] = gy;
+    x->f_boids_manager->setAttractPt(x->f_attractpt[0], x->f_attractpt[1]);
+    
+    object_attr_touch((t_object*)x, gensym("attractpoint"));
+}
+
+void boid_set_pos(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv)
+{
+	//receives index posx posy
+	
+	if( argc >= 3 && argv )
+    {
+        for (int i=0; i < argc; i++)
+            if ( !(atom_gettype(argv+i) == A_LONG) || (atom_gettype(argv+i) == A_FLOAT) )
+                return;
+        
+        x->f_boids_manager->boid_set_pos(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+	}
+}
+
+void boid_set_dir(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv)
+{
+	//receives index dirx diry
+	
+	if( argc >= 3 && argv )
+    {
+        for (int i=0; i < argc; i++)
+            if ( !(atom_gettype(argv+i) == A_LONG) || (atom_gettype(argv+i) == A_FLOAT) )
+                return;
+        
+        x->f_boids_manager->boid_set_dir(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+	}
+}
+
+void boid_set_speed(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv)
+{
+	//receives index speed
+    if( argc >= 2 && argv )
+    {
+        for (int i=0; i < argc; i++)
+            if ( !(atom_gettype(argv+i) == A_LONG) || (atom_gettype(argv+i) == A_FLOAT) )
+                return;
+        
+        x->f_boids_manager->boid_set_speed(atom_getlong(argv), atom_getfloat(argv+1));
+	}
+}
+
+void boid_set_speedinv(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv)
+{
+	//receives index
+    if( argc && argv )
+    {
+        if ( !(atom_gettype(argv) == A_LONG) || (atom_gettype(argv) == A_FLOAT) )
+            return;
+        x->f_boids_manager->boid_set_speedinv(atom_getlong(argv));
+	}
 }
 
 
@@ -539,19 +804,25 @@ t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sende
         }
         else if(name == gensym("fontname") || name == gensym("fontface") || name == gensym("fontsize"))
         {
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
         }
         else if(name == gensym("zoom"))
         {
             jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
+        }
+        else if(name == gensym("attractorcolor"))
+        {
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
+        }
+        else if(name == gensym("flyrectcolor"))
+        {
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
         }
         jbox_redraw((t_jbox *)x);
     }
-    
-    
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
@@ -562,20 +833,21 @@ t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sende
 void hoaboids_bang(t_hoaboids *x)
 {
     t_atom av[4];
-    double birdCoord[2];
-    //x->f_boids_manager->update();
-    
+    double BoidCoord[2];
+        
     for (int i=0; i < x->f_boids_manager->getNumberOfBoids(); i++)
     {
-        x->f_boids_manager->getBirdCoord(i, birdCoord);
-        atom_setlong(av, i);
-        atom_setsym(av+1, gensym("cartesian"));
-        atom_setfloat(av+2, birdCoord[0]);
-        atom_setfloat(av+3, birdCoord[1]);
-        outlet_list(x->f_out_sources, 0L, 4, av);
+        if(x->f_boids_manager->getBoidCoord(i, BoidCoord))
+        {
+            atom_setlong(av, i);
+            atom_setsym(av+1, gensym("cartesian"));
+            atom_setfloat(av+2, BoidCoord[0]);
+            atom_setfloat(av+3, BoidCoord[1]);
+            outlet_list(x->f_out_sources, 0L, 4, av);
+        }
     }
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
     jbox_redraw((t_jbox *)x);
 }
 
@@ -594,6 +866,7 @@ void hoaboids_paint(t_hoaboids *x, t_object *view)
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	x->rect = rect;
 	draw_background(x, view, &rect);
+    draw_flyrect(x, view, &rect);
     draw_attractor(x, view, &rect);
     draw_boids(x, view, &rect);
 }
@@ -707,36 +980,94 @@ void draw_background(t_hoaboids *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
 }
 
+void draw_flyrect(t_hoaboids *x,  t_object *view, t_rect *rect)
+{
+    t_jgraphics *g;
+    t_jmatrix transform;
+    double w = rect->width;
+    double cornerSize = 3;
+    
+    double dashes[2] = {5, 5};
+    
+    t_pt topLeft, bottomRight;
+    
+    topLeft.x = x->f_flyrect[0] * (w*0.5) * x->f_zoom_factor;
+    topLeft.y = x->f_flyrect[1] * (w*0.5) * x->f_zoom_factor;
+    bottomRight.x = x->f_flyrect[2] * (w*0.5) * x->f_zoom_factor;
+    bottomRight.y = x->f_flyrect[3] * (w*0.5) * x->f_zoom_factor;
+    
+	g = jbox_start_layer((t_object *)x, view, gensym("flyrect_layer"), w, rect->height);
+	
+	if (g)
+    {
+        jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
+		jgraphics_set_matrix(g, &transform);
+        
+        jgraphics_set_source_jrgba(g, &x->f_colorFlyrect);
+        
+        jgraphics_arc(g, topLeft.x, topLeft.y, cornerSize, 0, CICM_2PI);
+        jgraphics_fill(g);
+        
+        jgraphics_arc(g, bottomRight.x, bottomRight.y, cornerSize, 0, CICM_2PI);
+        jgraphics_fill(g);
+        
+        jgraphics_set_line_width(g, 1);
+        jgraphics_set_dash(g, dashes, 2, 0);
+        
+        //top
+        jgraphics_move_to(g, topLeft.x + cornerSize*1.5, long(topLeft.y)+0.5);
+        jgraphics_line_to(g, bottomRight.x, long(topLeft.y)+0.5);
+        jgraphics_stroke(g);
+        
+        //right
+        jgraphics_move_to(g, long(bottomRight.x)+0.5, topLeft.y);
+        jgraphics_line_to(g, long(bottomRight.x)+0.5, bottomRight.y + cornerSize*1.5);
+        jgraphics_stroke(g);
+        
+        //bottom
+        jgraphics_move_to(g, topLeft.x, long(bottomRight.y)+0.5);
+        jgraphics_line_to(g, bottomRight.x - cornerSize*1.5, long(bottomRight.y)+0.5);
+        jgraphics_stroke(g);
+        
+        //left
+        jgraphics_move_to(g, long(topLeft.x)+0.5, topLeft.y - cornerSize*1.5);
+        jgraphics_line_to(g, long(topLeft.x)+0.5, bottomRight.y);
+        jgraphics_stroke(g);
+        
+		jbox_end_layer((t_object*)x, view, gensym("flyrect_layer"));
+	}
+	jbox_paint_layer((t_object *)x, view, gensym("flyrect_layer"), 0., 0.);
+}
+
 void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
 {
     t_jgraphics *g;
     t_jmatrix transform;
     double w = rect->width;
     double h = rect->height;
-    double birdCoord[2];
+    double BoidCoord[2];
 		
-	if ((g = jbox_start_layer((t_object *)x, view, gensym("birds_layer"), rect->width, rect->height)))
+	if ((g = jbox_start_layer((t_object *)x, view, gensym("Boids_layer"), rect->width, rect->height)))
     {
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
 		jgraphics_set_matrix(g, &transform);
         
-        //jgraphics_set_line_width(g, 1);
-        
-        jgraphics_set_source_jrgba(g, &x->f_colorBirds);
+        jgraphics_set_source_jrgba(g, &x->f_colorBoids);
         
         for (int i=0; i < x->f_boids_manager->getNumberOfBoids(); i++)
         {
-            x->f_boids_manager->getBirdCoord(i, birdCoord);
-            //post("%i x = %f y = %f", i, birdCoord[0], birdCoord[1]);
-            birdCoord[0] *= (w*0.5) * x->f_zoom_factor;
-            birdCoord[1] *= (h*0.5) * x->f_zoom_factor;
-            jgraphics_arc(g, birdCoord[0], birdCoord[1], 3, 0, CICM_2PI);
-            jgraphics_fill(g);
+            if(x->f_boids_manager->getBoidCoord(i, BoidCoord))
+            {
+                BoidCoord[0] *= (w*0.5) * x->f_zoom_factor;
+                BoidCoord[1] *= (h*0.5) * x->f_zoom_factor;
+                jgraphics_arc(g, BoidCoord[0], BoidCoord[1], 3, 0, CICM_2PI);
+                jgraphics_fill(g);
+            }
         }
         
-		jbox_end_layer((t_object*)x, view, gensym("birds_layer"));
+		jbox_end_layer((t_object*)x, view, gensym("Boids_layer"));
     }
-	jbox_paint_layer((t_object *)x, view, gensym("birds_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, gensym("Boids_layer"), 0., 0.);
 }
 
 
@@ -747,11 +1078,8 @@ void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect)
     double w = rect->width;
     double h = rect->height;
     
-    //double attPosX = x->f_cursor_position.x * ( (w*0.5) * x->f_zoom_factor);
-    //double attPosY = x->f_cursor_position.y * ( (h*0.5) * x->f_zoom_factor);
-    
-    double attPosX = x->f_gravpoint[0] * ( (w*0.5) * x->f_zoom_factor);
-    double attPosY = x->f_gravpoint[1] * ( (h*0.5) * x->f_zoom_factor);
+    double attPosX = x->f_attractpt[0] * ( (w*0.5) * x->f_zoom_factor);
+    double attPosY = x->f_attractpt[1] * ( (h*0.5) * x->f_zoom_factor);
 		
 	if ((g = jbox_start_layer((t_object *)x, view, gensym("attractor_layer"), rect->width, rect->height)))
     {
@@ -761,7 +1089,6 @@ void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect)
         jgraphics_set_line_width(g, 1);
         
         jgraphics_arc(g, attPosX, attPosY, 5, 0, CICM_2PI);
-        //jgraphics_arc(g, x->f_cursor_position.x, x->f_cursor_position.y, 5, 0, CICM_2PI);
         
         jgraphics_set_source_jrgba(g, &x->f_colorAttractor);
         jgraphics_fill(g);
@@ -818,7 +1145,7 @@ void hoaboids_mouseup(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifi
         clock_unset(x->f_clock);
     */
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
 }
@@ -831,7 +1158,7 @@ void hoaboids_mousewheel(t_hoaboids *x, t_object *patcherview, t_pt pt, long mod
         x->f_zoom_factor = Tools::clip(newZoom, MIN_ZOOM, MAX_ZOOM);
         object_notify(x, _sym_modified, NULL);
         jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
         jbox_redraw((t_jbox *)x);
 	}
@@ -854,7 +1181,7 @@ void hoaboids_mousemove(t_hoaboids *x, t_object *patcherview, t_pt pt, long modi
     */
 
     /*
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("birds_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
     */
