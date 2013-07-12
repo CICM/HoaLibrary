@@ -580,6 +580,8 @@ t_max_err hoaboids_setAttr_nBoids(t_hoaboids *x, t_object *attr, long argc, t_at
     {
         x->f_numberOfBoids = Tools::clip(long(atom_getlong(argv)), long(0), long(100));
         x->f_boids_manager->setNumberOfBoids(x->f_numberOfBoids);
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+        jbox_redraw((t_jbox *)x);
     }
     return MAX_ERR_NONE;
 }
@@ -590,7 +592,8 @@ t_max_err hoaboids_setAttr_flyrect(t_hoaboids *x, t_object *attr, long argc, t_a
     {
         for (int i = 0; i < argc; i++) {
             if (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
-                x->f_flyrect[i] = Tools::clip(double(atom_getfloat(argv+i)), double(-10), double(10));
+                x->f_flyrect[i] = atom_getfloat(argv+i);
+                //x->f_flyrect[i] = Tools::clip(double(atom_getfloat(argv+i)), double(-10), double(10));
         }
         x->f_boids_manager->setFlyRect(x->f_flyrect[0], x->f_flyrect[1], x->f_flyrect[2], x->f_flyrect[3]);
         
@@ -813,6 +816,10 @@ t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sende
             jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
         }
+        else if (name == gensym("nboids") || name == gensym("boidscolor"))
+        {
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+        }
         else if(name == gensym("attractorcolor"))
         {
             jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
@@ -837,7 +844,7 @@ void hoaboids_bang(t_hoaboids *x)
         
     for (int i=0; i < x->f_boids_manager->getNumberOfBoids(); i++)
     {
-        if(x->f_boids_manager->getBoidCoord(i, BoidCoord))
+        if(x->f_boids_manager->getBoidPosCoord(i, BoidCoord))
         {
             atom_setlong(av, i);
             atom_setsym(av+1, gensym("cartesian"));
@@ -986,11 +993,8 @@ void draw_flyrect(t_hoaboids *x,  t_object *view, t_rect *rect)
     t_jmatrix transform;
     double w = rect->width;
     double cornerSize = 3;
-    
     double dashes[2] = {5, 5};
-    
     t_pt topLeft, bottomRight;
-    
     topLeft.x = x->f_flyrect[0] * (w*0.5) * x->f_zoom_factor;
     topLeft.y = x->f_flyrect[1] * (w*0.5) * x->f_zoom_factor;
     bottomRight.x = x->f_flyrect[2] * (w*0.5) * x->f_zoom_factor;
@@ -1045,7 +1049,22 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
     t_jmatrix transform;
     double w = rect->width;
     double h = rect->height;
-    double BoidCoord[2];
+    double BoidPos[2];
+    double BoidDir[2];
+    double BoidAngle;
+    double BoidSize = 10;
+    
+    t_jrgba black, white;
+    
+    double contrastBlack = 0.12;
+    double contrastWhite = 0.08;
+    black = white = x->f_colorBoids;
+    black.red = Tools::clip_min(black.red -= contrastBlack);
+    black.green = Tools::clip_min(black.green -= contrastBlack);
+    black.blue = Tools::clip_min(black.blue -= contrastBlack);
+    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
+    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
+    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
 		
 	if ((g = jbox_start_layer((t_object *)x, view, gensym("Boids_layer"), rect->width, rect->height)))
     {
@@ -1056,12 +1075,38 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
         
         for (int i=0; i < x->f_boids_manager->getNumberOfBoids(); i++)
         {
-            if(x->f_boids_manager->getBoidCoord(i, BoidCoord))
+            if(x->f_boids_manager->getBoidPosCoord(i, BoidPos))
             {
-                BoidCoord[0] *= (w*0.5) * x->f_zoom_factor;
-                BoidCoord[1] *= (h*0.5) * x->f_zoom_factor;
-                jgraphics_arc(g, BoidCoord[0], BoidCoord[1], 3, 0, CICM_2PI);
+                BoidPos[0] *= (w*0.5) * x->f_zoom_factor;
+                BoidPos[1] *= (h*0.5) * x->f_zoom_factor;
+                
+                x->f_boids_manager->getBoidDirCoord(i, BoidDir);
+                BoidAngle = Tools::angle(BoidDir[0], BoidDir[1])-CICM_PI2;
+                
+                jgraphics_translate(g, BoidPos[0], BoidPos[1]);
+                jgraphics_rotate(g, BoidAngle);
+                
+                jgraphics_set_source_jrgba(g, Tools::isInsideDeg(Tools::radToDeg(BoidAngle), 45, -135) ? &x->f_colorBoids : &white);
+                jgraphics_move_to(g, 0, -BoidSize*0.2);
+                jgraphics_line_to(g, 0, BoidSize*0.5);
+                jgraphics_line_to(g, -BoidSize*0.4, -BoidSize*0.4);
+                jgraphics_line_to(g, 0, -BoidSize*0.2);
                 jgraphics_fill(g);
+                
+                jgraphics_set_source_jrgba(g, !Tools::isInsideDeg(Tools::radToDeg(BoidAngle), 45, -135) ? &x->f_colorBoids : &white);
+                jgraphics_move_to(g, 0, -BoidSize*0.2);
+                jgraphics_line_to(g, 0, BoidSize*0.5);
+                jgraphics_line_to(g, BoidSize*0.4, -BoidSize*0.4);
+                jgraphics_line_to(g, 0, -BoidSize*0.2);
+                jgraphics_fill(g);
+                
+                jgraphics_set_source_jrgba(g, &black);
+                jgraphics_move_to(g, 0, -BoidSize*0.2);
+                jgraphics_line_to(g, 0, BoidSize*0.5);
+                jgraphics_fill(g);
+                
+                jgraphics_rotate(g, -BoidAngle);
+                jgraphics_translate(g, -BoidPos[0], -BoidPos[1]);
             }
         }
         

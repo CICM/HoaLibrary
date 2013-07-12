@@ -54,6 +54,8 @@ BoidsManager::BoidsManager()
     m_d2r = CICM_PI/180.0;
     m_r2d = 180.0/CICM_PI;
     
+    m_boids.resize(m_numBoids);
+    
     setNumberOfBoids(m_numBoids);
     initFlock();
 }
@@ -166,7 +168,7 @@ void BoidsManager::update() // FlightStep();
 Point2d BoidsManager::FindFlockCenter()
 {
 	double			totalH = 0, totalV = 0;
-	Point3d			centerPoint;
+	Point2d			centerPoint;
 	register short	i;
     
 	for (i = 0 ; i <  m_numBoids; i++)
@@ -343,8 +345,6 @@ Velocity BoidsManager::AvoidWalls(short theBoid)
 	return(tempVel);
 }
 
-
-//Boolean BoidsManager::InFront(BoidPtr theBoid, BoidPtr neighbor)
 Boolean BoidsManager::InFront(Boid* theBoid, Boid* neighbor)
 {
 	double	grad, intercept;
@@ -508,33 +508,30 @@ void BoidsManager::resetBoids()
 
 void BoidsManager::setNumberOfBoids(long _numberOfBoids)
 {
-    // clip agentcount to range 1.-100.
-	m_numBoids = Tools::clip(_numberOfBoids, long(1), long(100));
+    _numberOfBoids = Tools::clip_min(_numberOfBoids, long(1));
     
-    m_boids.resize(m_numBoids);
-    
-	for (int i=0; i < m_numBoids; i++)
-	{
-        // start with random position/velocity
-        m_boids[i].newPos.x  = Tools::getRandd(m_attractPt.x - 1., m_attractPt.x + 1.);
-        m_boids[i].newPos.y  = Tools::getRandd(m_attractPt.y - 1., m_attractPt.y + 1.);
-        m_boids[i].newDir.x = Tools::getRandd(-0.05, 0.05);
-        m_boids[i].newDir.y = Tools::getRandd(-0.05, 0.05);
-	}
+    if (_numberOfBoids != m_numBoids)
+    {
+        long lastNumOfBoids = m_boids.size();
+        m_numBoids = _numberOfBoids;
+        m_boids.resize(m_numBoids);
+        if ( m_numBoids > lastNumOfBoids ) {
+            for (int i = lastNumOfBoids; i < m_numBoids; i++)
+            {
+                // start with random position/velocity
+                m_boids[i].newPos.x  = Tools::getRandd(m_attractPt.x - 1., m_attractPt.x + 1.);
+                m_boids[i].newPos.y  = Tools::getRandd(m_attractPt.y - 1., m_attractPt.y + 1.);
+                m_boids[i].newDir.x = Tools::getRandd(-0.05, 0.05);
+                m_boids[i].newDir.y = Tools::getRandd(-0.05, 0.05);
+            }
+        }
+    }
 }
 
 void BoidsManager::setNumberOfNeighbors(long _numberOfNeighbors)
 {
     m_numNeighbors = Tools::clip(_numberOfNeighbors, 0, MAX_NEIGHBORS);
 }
-
-//void BoidsManager::setFlyRect(double left, double right, double top, double bottom)
-//{
-//    m_flyRect.left = left;
-//    m_flyRect.right = right;
-//    m_flyRect.top = top;
-//    m_flyRect.bottom = bottom;
-//}
 
 void BoidsManager::setFlyRect(double topLeft_X, double topLeft_Y, double bottomRight_X, double bottomRight_Y)
 {
@@ -551,42 +548,42 @@ void BoidsManager::setMinSpeed(double _minSpeed)
 
 void BoidsManager::setMaxSpeed(double _maxSpeed)
 {
-    m_maxSpeed = _maxSpeed;//Tools::clip(_mode, 0, 2);
+    m_maxSpeed = Tools::clip_min(_maxSpeed, m_minSpeed);
 }
 
 void BoidsManager::setCenterWeight(double _centerWeight)
 {
-    m_centerWeight = _centerWeight;//Tools::clip(_mode, 0, 2);
+    m_centerWeight = Tools::clip(_centerWeight, 0., 1.);
 }
 
 void BoidsManager::setAttractWeight(double _attractWeight)
 {
-    m_attractWeight = _attractWeight;//Tools::clip(_mode, 0, 2);
+    m_attractWeight = Tools::clip(_attractWeight, 0., 1.);
 }
 
 void BoidsManager::setMatchWeight(double _matchWeight)
 {
-    m_matchWeight = _matchWeight;//Tools::clip(_mode, 0, 2);
+    m_matchWeight = _matchWeight;
 }
 
 void BoidsManager::setAvoidWeight(double _avoidWeight)
 {
-    m_avoidWeight = _avoidWeight;//Tools::clip(_mode, 0, 2);
+    m_avoidWeight = Tools::clip(_avoidWeight, 0., 1.);
 }
 
 void BoidsManager::setWallsWeight(double _wallWeight)
 {
-    m_wallsWeight = _wallWeight;//Tools::clip(_mode, 0, 2);
+    m_wallsWeight = _wallWeight;
 }
 
 void BoidsManager::setEdgeDistance(double _edgeDistance)
 {
-    m_edgeDist = _edgeDistance;//Tools::clip(_mode, 0, 2);
+    m_edgeDist = _edgeDistance;
 }
 
 void BoidsManager::setSpeedupFactor(double _speedupFactor)
 {
-    m_speedupFactor = _speedupFactor;//Tools::clip(_mode, 0, 2);
+    m_speedupFactor = Tools::clip_min(_speedupFactor, 0.);
 }
 
 void BoidsManager::setInertiaFactor(double _inertiaFactor)
@@ -624,13 +621,25 @@ void BoidsManager::setAttractPt(double _attract_X, double _attract_Y)
 
 // GETTERS :
 
-int BoidsManager::getBoidCoord(long _index, double* _BoidArrayCoord)
+int BoidsManager::getBoidPosCoord(long _index, double* _BoidArrayCoord)
 {
     _BoidArrayCoord[0] = _BoidArrayCoord[1] = NULL;
     if (Tools::isInside(_index, long(0), long(m_boids.size())))
     {
         _BoidArrayCoord[0] = m_boids.at(_index).newPos.x;
         _BoidArrayCoord[1] = m_boids.at(_index).newPos.y;
+        return 1;
+    }
+    return 0; // bad index
+}
+
+int BoidsManager::getBoidDirCoord(long _index, double* _BoidArrayCoord)
+{
+    _BoidArrayCoord[0] = _BoidArrayCoord[1] = NULL;
+    if (Tools::isInside(_index, long(0), long(m_boids.size())))
+    {
+        _BoidArrayCoord[0] = m_boids.at(_index).newDir.x;
+        _BoidArrayCoord[1] = m_boids.at(_index).newDir.y;
         return 1;
     }
     return 0; // bad index

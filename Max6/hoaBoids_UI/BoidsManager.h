@@ -64,7 +64,7 @@ typedef struct Velocity {
 typedef struct Point2d {
 	double		x;
 	double		y;
-} Point3d;
+} Point2d;
 
 typedef struct Box2D {
 	double		left, right;
@@ -170,7 +170,8 @@ public:
     inline double getAttractPt_abscissa()   {return m_attractPt.x;}
     inline double getAttractPt_ordinate()   {return m_attractPt.y;}
     
-    int getBoidCoord(long _index, double* _BoidArrayCoord);
+    int getBoidPosCoord(long _index, double* _BoidArrayCoord);
+    int getBoidDirCoord(long _index, double* _BoidArrayCoord);
 };
 
 #endif /* defined(__hoa_boids__BoidsManager__) */
