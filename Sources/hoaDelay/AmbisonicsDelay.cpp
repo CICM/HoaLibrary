@@ -30,7 +30,7 @@ AmbisonicsDelay::AmbisonicsDelay(long anOrder, bool aMode, double aMaximumDelayI
     m_maximum_delay = Tools::clip_min(aMaximumDelayInMs, 1.);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        m_delay.push_back(new CicmDecorrelation(aMaximumDelayInMs, m_vector_size, m_sampling_rate));
+        m_delay.push_back(new CicmDecorrelation(m_maximum_delay, m_vector_size, m_sampling_rate));
         m_line.push_back(new CicmLine(20., m_vector_size, m_sampling_rate));
         m_line[i]->setCoefficientDirect(1.);
     }

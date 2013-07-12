@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources64/hoaMapProcessor/AmbisonicMultiMaps.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {

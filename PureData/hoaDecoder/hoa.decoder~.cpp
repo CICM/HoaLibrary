@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources64/hoaMultiDecoder/AmbisonicsMultiDecoder.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
@@ -59,7 +59,7 @@ void setup_hoa0x2edecoder_tilde(void)
     
     hoa_decoder_class = c;
     CLASS_MAINSIGNALIN(hoa_decoder_class, hoa_decoder, f);
-    post("hoa.library (version 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris with the participation of Manuel Deneu");
+    post("hoa.library (version 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
 	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
 }
 }
@@ -94,8 +94,11 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         
         
         sprintf(hrtfPath, "%s/HrtfDatabase/", canvas_getcurrentdir()->s_name);
+        x->f_ambisonics_decoder	= new AmbisonicsMultiDecoder(order, numberOfLoudspeakers, mode, pinnaesize, hrtfPath, sys_getblksize(), sys_getsr());
         
-		x->f_ambisonics_decoder = new AmbisonicsMultiDecoder(order, hrtfPath, pinnaesize, 64, 44100, mode, numberOfLoudspeakers, numberOfLoudspeakers, offset);
+        x->f_ambisonics_decoder->setMode(mode);
+        x->f_ambisonics_decoder->setNumberOfLoudspeakers(numberOfLoudspeakers);
+        x->f_ambisonics_decoder->setPinnaeSize(pinnaesize);
         x->f_ambisonics_decoder->setRestitutionMode(decmode);
         
         for (int i = 0; i < x->f_ambisonics_decoder->getNumberOfInputs()-1; i++)

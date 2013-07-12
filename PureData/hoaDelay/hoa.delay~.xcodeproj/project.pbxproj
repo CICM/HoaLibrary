@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5913847715DAA4A50029AD16 /* hoa.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5913847615DAA4A50029AD16 /* hoa.encoder~.cpp */; };
 		8F4DD8A0178FD49C006ABA38 /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4DD80A178FD49C006ABA38 /* CicmRingModulation.cpp */; };
 		8F4DD8A1178FD49C006ABA38 /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4DD80B178FD49C006ABA38 /* CicmRingModulation.h */; };
 		8F4DD8A2178FD49C006ABA38 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4DD80C178FD49C006ABA38 /* CicmDefine.h */; };
@@ -126,12 +125,12 @@
 		8F4DD913178FD49C006ABA38 /* AmbisonicsVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4DD89C178FD49C006ABA38 /* AmbisonicsVector.h */; };
 		8F4DD914178FD49C006ABA38 /* AmbisonicsWider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4DD89E178FD49C006ABA38 /* AmbisonicsWider.cpp */; };
 		8F4DD915178FD49C006ABA38 /* AmbisonicsWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4DD89F178FD49C006ABA38 /* AmbisonicsWider.h */; };
+		8F4DD919178FD962006ABA38 /* hoa.delay~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4DD918178FD962006ABA38 /* hoa.delay~.cpp */; };
 		8FF140F71770C1A80033763B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FF140F61770C1A80033763B /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5913846F15DAA36D0029AD16 /* hoa.encoder~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "hoa.encoder~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5913847615DAA4A50029AD16 /* hoa.encoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.encoder~.cpp"; sourceTree = "<group>"; };
+		5913846F15DAA36D0029AD16 /* hoa.delay~.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "hoa.delay~.pd_darwin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F4DD80A178FD49C006ABA38 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
 		8F4DD80B178FD49C006ABA38 /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
 		8F4DD80C178FD49C006ABA38 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
@@ -250,6 +249,7 @@
 		8F4DD89C178FD49C006ABA38 /* AmbisonicsVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsVector.h; sourceTree = "<group>"; };
 		8F4DD89E178FD49C006ABA38 /* AmbisonicsWider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsWider.cpp; sourceTree = "<group>"; };
 		8F4DD89F178FD49C006ABA38 /* AmbisonicsWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsWider.h; sourceTree = "<group>"; };
+		8F4DD918178FD962006ABA38 /* hoa.delay~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.delay~.cpp"; sourceTree = "<group>"; };
 		8FF140F61770C1A80033763B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -269,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				8FF140F61770C1A80033763B /* Accelerate.framework */,
-				5913847615DAA4A50029AD16 /* hoa.encoder~.cpp */,
+				8F4DD918178FD962006ABA38 /* hoa.delay~.cpp */,
 				8F4DD807178FD49C006ABA38 /* Sources */,
 				5913847015DAA36D0029AD16 /* Products */,
 			);
@@ -278,7 +278,7 @@
 		5913847015DAA36D0029AD16 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5913846F15DAA36D0029AD16 /* hoa.encoder~.pd_darwin */,
+				5913846F15DAA36D0029AD16 /* hoa.delay~.pd_darwin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -756,9 +756,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5913846E15DAA36D0029AD16 /* hoa.encoder~ */ = {
+		5913846E15DAA36D0029AD16 /* hoa.delay~ */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.encoder~" */;
+			buildConfigurationList = 5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.delay~" */;
 			buildPhases = (
 				5913846B15DAA36D0029AD16 /* Sources */,
 				5913846C15DAA36D0029AD16 /* Frameworks */,
@@ -768,9 +768,9 @@
 			);
 			dependencies = (
 			);
-			name = "hoa.encoder~";
+			name = "hoa.delay~";
 			productName = pd1;
-			productReference = 5913846F15DAA36D0029AD16 /* hoa.encoder~.pd_darwin */;
+			productReference = 5913846F15DAA36D0029AD16 /* hoa.delay~.pd_darwin */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -781,7 +781,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.encoder~" */;
+			buildConfigurationList = 5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.delay~" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -793,7 +793,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5913846E15DAA36D0029AD16 /* hoa.encoder~ */,
+				5913846E15DAA36D0029AD16 /* hoa.delay~ */,
 			);
 		};
 /* End PBXProject section */
@@ -803,7 +803,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5913847715DAA4A50029AD16 /* hoa.encoder~.cpp in Sources */,
 				8F4DD8A0178FD49C006ABA38 /* CicmRingModulation.cpp in Sources */,
 				8F4DD8A3178FD49C006ABA38 /* CicmDecorrelation.cpp in Sources */,
 				8F4DD8A5178FD49C006ABA38 /* CicmEnvelope.cpp in Sources */,
@@ -860,6 +859,7 @@
 				8F4DD910178FD49C006ABA38 /* AmbisonicStars.cpp in Sources */,
 				8F4DD912178FD49C006ABA38 /* AmbisonicsVector.cpp in Sources */,
 				8F4DD914178FD49C006ABA38 /* AmbisonicsWider.cpp in Sources */,
+				8F4DD919178FD962006ABA38 /* hoa.delay~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,7 +916,7 @@
 					"-undefined",
 					dynamic_lookup,
 				);
-				PRODUCT_NAME = "hoa.encoder~";
+				PRODUCT_NAME = "hoa.delay~";
 				SYMROOT = builds;
 				USER_HEADER_SEARCH_PATHS = "/Applications/Pd-0.43-2.app/Contents/Resources/src/ ../../Sources/**";
 				VALID_ARCHS = i386;
@@ -926,7 +926,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.encoder~" */ = {
+		5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.delay~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5913847215DAA36D0029AD16 /* Release */,
@@ -934,7 +934,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.encoder~" */ = {
+		5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.delay~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5913847515DAA36D0029AD16 /* Release */,

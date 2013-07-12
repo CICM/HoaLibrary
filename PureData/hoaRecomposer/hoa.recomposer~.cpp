@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources64/hoaRecomposerProcessor/AmbisonicsRecomposer.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
