@@ -55,7 +55,7 @@ protected:
     long	m_sampling_rate;
 
 public:
-	CicmQsgs(double aMaximumDelay = 5000., long aVectorSize = 1, double aSamplingRate = 44100.);
+	CicmQsgs(double aMaximumDelay = 5000., long aVectorSize = 1, long aSamplingRate = 44100);
     
     void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
@@ -76,7 +76,8 @@ public:
     double getDelayTime();
     double getFeedback();
     double getRarefaction();
-    
+    double getMaximumSizeInMs();
+    long   getMaximumSizeInSample();
     long   getWidowFunction();
 	
 	~CicmQsgs();
@@ -93,8 +94,9 @@ public:
         
         m_delay->write(input + m_buffer * m_feedback_real);
         
-        if(ramp >= 1.)
+        if(ramp >= 1.f)
         {
+            m_line->setRampInMs(m_grain_size);
             m_line->setCoefficientDirect(0.f);
             m_line->setCoefficient(1.f);
             m_delay_rand = Tools::getRandf(1.f, m_delay_time);

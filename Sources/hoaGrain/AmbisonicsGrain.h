@@ -59,7 +59,8 @@ public:
     double getFeedback();
     double getRarefaction();
     long   getWidowFunction();
-    
+    double getMaximumSizeInMs();
+    long   getMaximumSizeInSample();
     double getGrainSizeFromIndex(long anIndex);
     double getDelayTimeFromIndex(long anIndex);
     

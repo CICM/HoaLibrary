@@ -41,6 +41,7 @@ protected:
     CicmLine*           m_line;
     CicmEnvelope*       m_envelope;
     double              m_value;
+    double              m_maximum_delay;
     
     long    m_delay_time_one;
     long    m_delay_time_two;
@@ -52,7 +53,7 @@ protected:
     double  m_max_gain;
 
 public:
-	CicmDecorrelation(double aMaximumDelay = 5000., long aVectorSize = 1, double aSamplingRate = 44100.);
+	CicmDecorrelation(double aMaximumDelay = 5000., long aVectorSize = 1, long aSamplingRate = 44100);
     
     void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
@@ -93,6 +94,7 @@ public:
         }
         
         m_delay->write(input);
+        
         return m_delay->read_no_sample(m_delay_time_one) * gain + m_delay->read_no_sample(m_delay_time_two) * (m_max_gain - gain);
 	}
     

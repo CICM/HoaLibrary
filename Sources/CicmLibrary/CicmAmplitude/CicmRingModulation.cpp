@@ -30,7 +30,7 @@ CicmRingModulation::CicmRingModulation(long aVectorSize, double aSamplingRate)
     m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     
-    m_line      = new CicmLine(m_vector_size, m_sampling_rate);
+    m_line      = new CicmLine(1000., m_vector_size, m_sampling_rate);
     m_envelope  = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Sinus);
     
     m_line->setCoefficientDirect(0.25);

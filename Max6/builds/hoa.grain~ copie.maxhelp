@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 63.0, 75.0, 1218.0, 724.0 ],
+		"rect" : [ 23.0, 77.0, 1218.0, 724.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -612,9 +612,9 @@
 					"saved_object_attributes" : 					{
 						"buffer" : "window",
 						"delay" : 5000.0,
-						"feedback" : 1.0,
-						"rarefaction" : 0.0,
-						"size" : 11.0
+						"feedback" : 0.98,
+						"rarefaction" : 0.005,
+						"size" : 52.0
 					}
 ,
 					"text" : "hoa.grain~ 7 no @buffer window"

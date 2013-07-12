@@ -85,7 +85,7 @@ public:
     inline double getValueRelative(double aPosition)
     {
         aPosition = Tools::clip(aPosition, 0., 1.);
-        return m_buffer[(int)(aPosition * (m_size-1))];
+        return m_buffer[(long)(aPosition * (m_size-1))];
     }
     
     inline void applyEnvelope(double* inputs, double* output)

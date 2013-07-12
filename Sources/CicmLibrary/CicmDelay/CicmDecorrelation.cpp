@@ -25,14 +25,14 @@
 
 #include "CicmDecorrelation.h"
 
-CicmDecorrelation::CicmDecorrelation(double aMaximumDelay, long aVectorSize, double aSamplingRate)
+CicmDecorrelation::CicmDecorrelation(double aMaximumDelay, long aVectorSize, long aSamplingRate)
 {
-    aMaximumDelay = Tools::clip_min(aMaximumDelay, 1);
-    m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
+    m_maximum_delay = Tools::clip_min(aMaximumDelay, 1);
+    m_sampling_rate = Tools::clip_min(aSamplingRate, 1);
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     
-	m_delay     = new CicmFilterDelay(aMaximumDelay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
-    m_line      = new CicmLine(m_vector_size, m_sampling_rate);
+	m_delay     = new CicmFilterDelay(m_maximum_delay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
+    m_line      = new CicmLine(100., m_vector_size, m_sampling_rate);
     m_envelope  = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Halfsinus);
     
     m_line->setCoefficientDirect(0.);
@@ -91,6 +91,7 @@ void CicmDecorrelation::setSamplingRate(long aSamplingRate)
 	m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
     m_line->setSamplingRate(m_sampling_rate);
     m_delay->setSamplingRate(m_sampling_rate);
+    m_delay->setBufferSizeInMs(m_maximum_delay);
 }
 
 void CicmDecorrelation::setDelayTimeInSample(long aDelayInSample)
