@@ -47,6 +47,13 @@ class CicmFilterDelay : public Filter
         if(++m_ramp == m_size)
             m_ramp = 0;
     }
+    
+    inline void write(float aSample)
+    {
+        m_buffer[m_ramp] = aSample;
+        if(++m_ramp == m_size)
+            m_ramp = 0;
+    }
     /*
     inline void write(double* samples)
     {
@@ -64,7 +71,7 @@ class CicmFilterDelay : public Filter
     /*********** Read No Interpolation *********/
     /*******************************************/
     
-    double read_no_sample(long aDelay)
+    inline double read_no_sample(long aDelay)
     {
         aDelay = Tools::clip(aDelay, 0, m_size-1);
         aDelay = m_ramp - aDelay - 1;
@@ -73,9 +80,23 @@ class CicmFilterDelay : public Filter
         return m_buffer[aDelay];
     }
     
-    double read_no_ms(double aDelay)
+    inline double read_no_ms(double aDelay)
     {
-        return read_no_sample(aDelay * m_sampling_rate / 1000.);
+        return read_no_sample((long)(aDelay * m_sampling_rate / 1000.));
+    }
+    
+    inline float read_no_sample(int aDelay)
+    {
+        aDelay = Tools::clip(aDelay, 0, m_size-1);
+        aDelay = m_ramp - aDelay - 1;
+        if(aDelay < 0)
+            aDelay += m_size;
+        return m_buffer[aDelay];
+    }
+    
+    inline float read_no_ms(float aDelay)
+    {
+        return read_no_sample((int)(aDelay * m_sampling_rate / 1000.));
     }
     /*
     void read_no_sample(long* delays, double* outputs)
@@ -112,7 +133,7 @@ class CicmFilterDelay : public Filter
         double	decimalPart = aDelay - floorPart;
         double  alpha = (1. - cos(decimalPart * CICM_PI)) / 2.;
 
-        return read_no_sample(aDelay) * (1. - alpha) + read_no_sample(aDelay - 1) * alpha;
+        return read_no_sample((long)aDelay) * (1. - alpha) + read_no_sample((long)(aDelay - 1)) * alpha;
     }
     
     double read_cosinus_ms(double aDelay)
@@ -152,7 +173,7 @@ class CicmFilterDelay : public Filter
     {
         long	floorPart	= aDelay;
         double	decimalPart = aDelay - floorPart;
-        return read_no_sample(aDelay) * (1. - decimalPart) + read_no_sample(aDelay + 1) * decimalPart;
+        return read_no_sample((long)aDelay) * (1. - decimalPart) + read_no_sample((long)aDelay + 1) * decimalPart;
     }
     
     double read_linear_ms(double aDelay)
@@ -197,10 +218,10 @@ class CicmFilterDelay : public Filter
         double	one, two, thr, fou, alpha;
         alpha = decimalPart * decimalPart;
         
-        fou = read_no_sample(aDelay - 2);
-        thr = read_no_sample(aDelay - 1);
-        two = read_no_sample(aDelay);
-        one = read_no_sample(aDelay - 1);
+        fou = read_no_sample((long)aDelay - 2);
+        thr = read_no_sample((long)aDelay - 1);
+        two = read_no_sample((long)aDelay);
+        one = read_no_sample((long)aDelay - 1);
         
         double a0 = fou - thr - one + two;
         double a1 = one - two - a0;
@@ -251,10 +272,10 @@ class CicmFilterDelay : public Filter
         double	decimalPart = aDelay - floorPart;
         double	one, two, thr, fou, oneMthr, alpha;
         
-        fou = read_no_sample(aDelay - 2);
-        thr = read_no_sample(aDelay - 1);
-        two = read_no_sample(aDelay);
-        one = read_no_sample(aDelay - 1);
+        fou = read_no_sample((long)aDelay - 2);
+        thr = read_no_sample((long)aDelay - 1);
+        two = read_no_sample((long)aDelay);
+        one = read_no_sample((long)aDelay - 1);
         oneMthr = thr - two;
         alpha = 5. / 3.;
         
@@ -298,7 +319,7 @@ class CicmFilterDelay : public Filter
     {
         long    floorPart  = aDelay;
         double  decimalPart = aDelay - floorPart + 1.;
-        int     tmpIndex;
+        long    tmpIndex;
         double  output = 0.;
         double  weight;
         
