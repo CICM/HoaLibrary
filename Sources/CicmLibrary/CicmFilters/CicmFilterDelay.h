@@ -37,6 +37,9 @@ class CicmFilterDelay : public Filter
     
     void    setBufferSizeInSample(long aBufferSize);
     void    setBufferSizeInMs(double aBufferSize);
+    
+    long    getBufferSizeInSample();
+    double  getBufferSizeInMs();
     /*******************************************/
     /****************   Write   ****************/
     /*******************************************/

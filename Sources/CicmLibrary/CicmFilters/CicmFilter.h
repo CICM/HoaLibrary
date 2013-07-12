@@ -36,7 +36,7 @@ protected:
     long	m_sampling_rate;
 
 public:
-	Filter(long aVectorSize = 0, double aSamplingRate = 44100.);
+	Filter(long aVectorSize = 0, long aSamplingRate = 44100);
 	long getVectorSize();
 	long getSamplingRate();
     

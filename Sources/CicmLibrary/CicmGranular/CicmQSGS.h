@@ -55,7 +55,7 @@ protected:
     long	m_sampling_rate;
 
 public:
-	CicmQsgs(double aMaximumDelay = 5000., long aVectorSize = 1, double aSamplingRate = 44100.);
+	CicmQsgs(double aMaximumDelay = 5000., long aVectorSize = 1, long aSamplingRate = 44100);
     
     void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
@@ -76,7 +76,8 @@ public:
     double getDelayTime();
     double getFeedback();
     double getRarefaction();
-    
+    double getMaximumSizeInMs();
+    long   getMaximumSizeInSample();
     long   getWidowFunction();
 	
 	~CicmQsgs();

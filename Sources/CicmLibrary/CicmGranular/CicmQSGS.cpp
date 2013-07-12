@@ -25,13 +25,13 @@
 
 #include "CicmQSGS.h"
 
-CicmQsgs::CicmQsgs(double aMaximumDelay, long aVectorSize, double aSamplingRate)
+CicmQsgs::CicmQsgs(double aMaximumDelay, long aVectorSize, long aSamplingRate)
 {
     aMaximumDelay = Tools::clip_min(aMaximumDelay, 1);
-    m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
+    m_sampling_rate = Tools::clip_min(aSamplingRate, 1);
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     
-	m_delay = new CicmFilterDelay(aMaximumDelay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
+	m_delay = new CicmFilterDelay((double)(aMaximumDelay), m_vector_size, m_sampling_rate);
     m_line  = new CicmLine(m_vector_size, m_sampling_rate);
     m_envelope = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Hanning);
     m_line->setCoefficientDirect(Tools::getRandd(0., 1));
@@ -80,6 +80,16 @@ double CicmQsgs::getRarefaction()
 long CicmQsgs::getWidowFunction()
 {
     return m_envelope->getType();
+}
+
+double CicmQsgs::getMaximumSizeInMs()
+{
+    return m_delay->getBufferSizeInMs();
+}
+
+long CicmQsgs::getMaximumSizeInSample()
+{
+    return m_delay->getBufferSizeInSample();
 }
 
 void CicmQsgs::setVectorSize(long aVectorSize)

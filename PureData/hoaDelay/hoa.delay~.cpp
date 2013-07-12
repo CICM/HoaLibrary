@@ -125,7 +125,7 @@ t_int *hoa_delay_perform_post(t_int *w)
 {
 	hoa_delay *x	= (hoa_delay *)(w[1]);
 	
-	x->f_ambisonics_delay->process(x->f_inputs, x->f_outputs_real);
+	x->f_ambisonics_delay->process(x->f_inputs, x->f_outputs);
 
     for(int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
         Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_delay->getVectorSize());
@@ -137,7 +137,7 @@ t_int *hoa_delay_perform_no(t_int *w)
 {
 	hoa_delay *x	= (hoa_delay *)(w[1]);
 	
-	x->f_ambisonics_delay->process(x->f_inputs[0], x->f_outputs_real);
+	x->f_ambisonics_delay->process(x->f_inputs[0], x->f_outputs);
 
     for(int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
         Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_delay->getVectorSize());

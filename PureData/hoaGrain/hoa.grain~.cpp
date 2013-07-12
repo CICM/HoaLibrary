@@ -38,6 +38,10 @@ typedef struct hoa_grain
     t_float**           f_inputs;
     t_float**           f_outputs;
     t_float**           f_outputs_real;
+    
+    int                 f_number_of_samples;
+    t_float*            f_buffer;
+    t_symbol*           f_buffer_name;
    
 } hoa_grain;
 
@@ -50,6 +54,7 @@ void hoa_grain_feed(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv);
 void hoa_grain_rare(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv);
 void hoa_grain_diff(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv);
 void hoa_grain_comp(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_grain_buffer_set(hoa_grain *x, t_symbol *s);
 
 void hoa_grain_dsp(hoa_grain *x, t_signal **sp, short *count);
 t_int *hoa_grain_perform_post(t_int *w);
@@ -64,13 +69,12 @@ void setup_hoa0x2egrain_tilde(void)
     t_class *c;
     c = class_new(gensym("hoa.grain~"), (t_newmethod)hoa_grain_new,(t_method)hoa_grain_free, sizeof(hoa_grain), 0L, A_GIMME, 0);
     
-    class_addmethod(c, (t_method)hoa_grain_dsp,     gensym("dsp"),          A_CANT, 0);
+    class_addmethod(c, (t_method)hoa_grain_dsp,     gensym("dsp"),          A_CANT,  0);
     class_addmethod(c, (t_method)hoa_grain_size,    gensym("size"),         A_GIMME, 0);
     class_addmethod(c, (t_method)hoa_grain_delay,   gensym("delay"),        A_GIMME, 0);
     class_addmethod(c, (t_method)hoa_grain_feed,    gensym("feedback"),     A_GIMME, 0);
     class_addmethod(c, (t_method)hoa_grain_rare,    gensym("rarefaction"),  A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_grain_comp,    gensym("comp"),         A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_grain_diff,    gensym("diff"),         A_GIMME, 0);
+    class_addmethod(c, (t_method)hoa_grain_buffer_set,gensym("set"),        A_SYMBOL,0);
     
     hoa_grain_class = c;
     CLASS_MAINSIGNALIN(hoa_grain_class, hoa_grain, f);
@@ -86,11 +90,15 @@ void *hoa_grain_new(t_symbol *s, long argc, t_atom *argv)
     x = (hoa_grain *)pd_new(hoa_grain_class);
 	if (x)
 	{
+        x->f_buffer_name = NULL;
+        x->f_number_of_samples = 0;
+
         order = atom_getint(argv);
         if(atom_getsymbol(argv+1) == gensym("no"))
             mode = 0;
+        x->f_buffer_name = atom_getsymbol(argv+2);
         
-		x->f_ambisonics_grain = new AmbisonicsGrain(order, mode, 5000., (int)sys_getblksize(), (int)sys_getsr());
+		x->f_ambisonics_grain = new AmbisonicsGrain(order, mode, 5000., (long)sys_getblksize(), (long)sys_getsr());
         
         for (int i = 0; i < x->f_ambisonics_grain->getNumberOfInputs()-1; i++)
             inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
@@ -109,8 +117,9 @@ void *hoa_grain_new(t_symbol *s, long argc, t_atom *argv)
 void hoa_grain_dsp(hoa_grain *x, t_signal **sp, short *count)
 {
 	x->f_ambisonics_grain->setVectorSize((int)sp[0]->s_n);
-    x->f_ambisonics_grain->setSamplingRate((int)sp[0]->s_sr);
+    x->f_ambisonics_grain->setSamplingRate((int)44100);
     
+    hoa_grain_buffer_set(x, x->f_buffer_name);
     for(int i = 0; i < x->f_ambisonics_grain->getNumberOfInputs(); i++)
         x->f_inputs[i] = sp[i]->s_vec;
     for(int i = 0; i < x->f_ambisonics_grain->getNumberOfOutputs(); i++)
@@ -149,6 +158,11 @@ t_int *hoa_grain_perform_no(t_int *w)
 void hoa_grain_size(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv)
 {
     x->f_ambisonics_grain->setGrainSize(atom_getfloat(argv));
+    post("size %f", x->f_ambisonics_grain->getGrainSize());
+    for(int i = 0; i < x->f_ambisonics_grain->getNumberOfHarmonics(); i++)
+    {
+        post("%i size %f", i, x->f_ambisonics_grain->getGrainSizeFromIndex(i));
+    }
 }
 
 void hoa_grain_delay(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv)
@@ -166,14 +180,24 @@ void hoa_grain_feed(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv)
     x->f_ambisonics_grain->setFeedback(atom_getfloat(argv));
 }
 
-void hoa_grain_diff(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_grain_buffer_set(hoa_grain *x, t_symbol *s)
 {
-    x->f_ambisonics_grain->setDiffuseFactor(atom_getfloat(argv));
-}
-
-void hoa_grain_comp(hoa_grain *x, t_symbol *sym, long argc, t_atom *argv)
-{
-    x->f_ambisonics_grain->setEncodingCompensation(atom_getint(argv));
+    t_garray *a = NULL;
+    x->f_buffer_name = s;
+    if (!(a = (t_garray *)pd_findbyclass(x->f_buffer_name, garray_class)))
+    {
+        x->f_buffer = 0;
+        x->f_number_of_samples = 0;
+    }
+    else if (!garray_getfloatarray(a, &x->f_number_of_samples, &x->f_buffer))
+    {
+        x->f_buffer = 0;
+        x->f_number_of_samples = 0;
+    }
+    else
+    {
+        x->f_ambisonics_grain->writeWidowFunction(x->f_buffer, x->f_number_of_samples);
+    }
 }
 
 void hoa_grain_free(hoa_grain *x)

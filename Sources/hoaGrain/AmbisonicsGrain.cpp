@@ -27,7 +27,7 @@
 
 AmbisonicsGrain::AmbisonicsGrain(long anOrder, bool aMode, double aMaximumDelayInMs,long aVectorSize, long aSamplingRate) : AmbisonicsDiffuser( anOrder, aMode, aVectorSize, aSamplingRate)
 {
-    m_maximum_delay_time = Tools::clip_min(aMaximumDelayInMs, 0);
+    m_maximum_delay_time = Tools::clip_min(aMaximumDelayInMs, 1);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_grain.push_back(new CicmQsgs(m_maximum_delay_time, m_vector_size, m_sampling_rate));
@@ -77,6 +77,16 @@ double AmbisonicsGrain::getDelayTimeFromIndex(long anIndex)
         return m_grain[anIndex]->getDelayTime();
     else
         return NULL;
+}
+
+double AmbisonicsGrain::getMaximumSizeInMs()
+{
+    return m_grain[0]->getMaximumSizeInMs();
+}
+
+long AmbisonicsGrain::getMaximumSizeInSample()
+{
+    return m_grain[0]->getMaximumSizeInSample();
 }
 
 void AmbisonicsGrain::setGrainSize(double aGrainSize)

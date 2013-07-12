@@ -25,7 +25,7 @@
 
 #include "CicmFilter.h"
 
-Filter::Filter(long aVectorSize, double aSamplingRate)
+Filter::Filter(long aVectorSize, long aSamplingRate)
 {
 	setVectorSize(aVectorSize);
     setSamplingRate(aSamplingRate);
@@ -48,7 +48,7 @@ void Filter::setVectorSize(long aVectorSize)
 
 void Filter::setSamplingRate(long aSamplingRate)
 {
-	m_sampling_rate = Tools::clip_min(aSamplingRate, long(1));
+	m_sampling_rate = Tools::clip_min(aSamplingRate, 1);
 }
 
 Filter::~Filter()

@@ -23,13 +23,25 @@
 CicmFilterDelay::CicmFilterDelay(long aBufferSize, long aVectorSize, long aSamplingRate) : Filter(aVectorSize, aSamplingRate)
 {
 	m_buffer = NULL;
+    m_size = NULL;
     setBufferSizeInSample(aBufferSize);
 }
 
 CicmFilterDelay::CicmFilterDelay(double aBufferSize, long aVectorSize, long aSamplingRate) : Filter(aVectorSize, aSamplingRate)
 {
     m_buffer = NULL;
+    m_size = NULL;
     setBufferSizeInMs(aBufferSize);
+}
+
+long CicmFilterDelay::getBufferSizeInSample()
+{
+    return m_size;
+}
+
+double  CicmFilterDelay::getBufferSizeInMs()
+{
+    return (double)m_size / (double)m_sampling_rate * 1000.;
 }
 
 void CicmFilterDelay::setBufferSizeInSample(long aBufferSize)
@@ -45,7 +57,7 @@ void CicmFilterDelay::setBufferSizeInMs(double aBufferSize)
 {
     if(m_buffer)
         Cicm_Free(m_buffer);
-    m_size = Tools::clip_min(aBufferSize, 1) * m_sampling_rate;
+    m_size = (long)((Tools::clip_min(aBufferSize, 1)+1) * (double)m_sampling_rate / 1000.);
     Cicm_Vector_Double_Malloc(m_buffer, m_size);
     m_ramp = 0;
 }
