@@ -95,7 +95,7 @@ void AmbisonicsGrain::setGrainSize(double aGrainSize)
     double grain_size;
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        grain_size = m_grain_size * (1. - ((double)(i+1) / (double)m_number_of_harmonics));
+        grain_size = m_grain_size * (1. - ((double)(i) / (double)m_number_of_harmonics));
         m_grain[i]->setGrainSize(grain_size);
     }
 }

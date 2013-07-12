@@ -94,8 +94,9 @@ public:
         
         m_delay->write(input + m_buffer * m_feedback_real);
         
-        if(ramp >= 1.)
+        if(ramp >= 1.f)
         {
+            m_line->setRampInMs(m_grain_size);
             m_line->setCoefficientDirect(0.f);
             m_line->setCoefficient(1.f);
             m_delay_rand = Tools::getRandf(1.f, m_delay_time);

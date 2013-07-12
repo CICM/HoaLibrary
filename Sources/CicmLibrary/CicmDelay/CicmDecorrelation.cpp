@@ -32,7 +32,7 @@ CicmDecorrelation::CicmDecorrelation(double aMaximumDelay, long aVectorSize, lon
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     
 	m_delay     = new CicmFilterDelay(m_maximum_delay * m_sampling_rate / 1000., m_vector_size, m_sampling_rate);
-    m_line      = new CicmLine(m_vector_size, m_sampling_rate);
+    m_line      = new CicmLine(100., m_vector_size, m_sampling_rate);
     m_envelope  = new CicmEnvelope(m_sampling_rate, Cicm_Envelope_Halfsinus);
     
     m_line->setCoefficientDirect(0.);

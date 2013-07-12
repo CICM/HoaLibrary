@@ -117,7 +117,7 @@ void *hoa_grain_new(t_symbol *s, long argc, t_atom *argv)
 void hoa_grain_dsp(hoa_grain *x, t_signal **sp, short *count)
 {
 	x->f_ambisonics_grain->setVectorSize((int)sp[0]->s_n);
-    x->f_ambisonics_grain->setSamplingRate((int)44100);
+    x->f_ambisonics_grain->setSamplingRate((int)sp[0]->s_sr);
     
     hoa_grain_buffer_set(x, x->f_buffer_name);
     for(int i = 0; i < x->f_ambisonics_grain->getNumberOfInputs(); i++)
@@ -196,6 +196,7 @@ void hoa_grain_buffer_set(hoa_grain *x, t_symbol *s)
     }
     else
     {
+        post("%i", x->f_number_of_samples);
         x->f_ambisonics_grain->writeWidowFunction(x->f_buffer, x->f_number_of_samples);
     }
 }
