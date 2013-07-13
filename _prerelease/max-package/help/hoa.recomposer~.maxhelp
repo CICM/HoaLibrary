@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 751.0, 669.0 ],
+						"rect" : [ 100.0, 126.0, 751.0, 669.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -232,7 +232,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -512,7 +512,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "Fish", "eye", "operation", "in", "the", "plane", "wave", "domain" ],
+									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonics", "recomposer", "external" ],
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -1150,11 +1150,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 751.0, 669.0 ],
+						"rect" : [ 0.0, 26.0, 751.0, 669.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1332,7 +1332,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -1569,7 +1569,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "Fish", "eye", "operation", "in", "the", "plane", "wave", "domain" ],
+									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonics", "recomposer", "external" ],
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -1605,7 +1605,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 73.0, 483.0, 33.0 ],
-									"text" : "hoa.recomposer~, used in fisheye mode (@mode fisheye), allows you to perform an operation  similar to the visual \"fisheye\" effect by distorsion of the sound field perspective.",
+									"text" : "hoa.recomposer~, used in fisheye mode (@mode fisheye), allows you to perform an operation similar to the visual \"fisheye\" effect by distorsion of the sound field perspective.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -2207,7 +2207,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -2235,6 +2235,37 @@
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-17",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 363.0, 403.25, 127.0, 60.0 ],
+									"text" : "Fixe mode simply recomposes the sound field without any transformation.",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-18",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 363.0, 403.25, 127.0, 60.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-1",
@@ -2242,7 +2273,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 472.0, 417.25, 45.0, 32.0 ],
+									"patching_rect" : [ 502.0, 417.25, 45.0, 32.0 ],
 									"text" : "Gains \n(0 - 1)"
 								}
 
@@ -2257,7 +2288,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 437.0, 224.5, 78.0, 32.0 ],
+									"patching_rect" : [ 467.0, 224.5, 78.0, 32.0 ],
 									"text" : "Delays in ms\n(0 - 5000)"
 								}
 
@@ -2285,7 +2316,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 399.0, 337.0, 98.0, 19.0 ],
+									"patching_rect" : [ 429.0, 337.0, 98.0, 19.0 ],
 									"text" : "vexpr $f1 * 5000."
 								}
 
@@ -2303,7 +2334,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 514.0, 224.5, 175.5, 175.5 ]
+									"patching_rect" : [ 544.0, 224.5, 175.5, 175.5 ]
 								}
 
 							}
@@ -2319,7 +2350,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 514.0, 417.25, 175.5, 175.5 ]
+									"patching_rect" : [ 544.0, 417.25, 175.5, 175.5 ]
 								}
 
 							}
@@ -2361,7 +2392,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 514.0, -2.0, 58.0, 19.0 ],
+									"patching_rect" : [ 544.0, -2.0, 58.0, 19.0 ],
 									"text" : "loadbang"
 								}
 
@@ -2377,7 +2408,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
-									"patching_rect" : [ 514.0, 30.25, 175.5, 175.5 ],
+									"patching_rect" : [ 544.0, 30.25, 175.5, 175.5 ],
 									"sources_parameters" : [ "source", 0, -1.587302, -2.148962, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 1.961742, -1.562882, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"zoom" : 0.35
 								}
@@ -2513,7 +2544,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -2619,7 +2650,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 524.5, -2.0, 51.0, 19.0 ],
+									"patching_rect" : [ 554.5, -2.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -2646,7 +2677,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 524.5, 28.0, 99.0, 19.0 ],
+									"patching_rect" : [ 554.5, 28.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -2657,7 +2688,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "Fish", "eye", "operation", "in", "the", "plane", "wave", "domain" ],
+									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonics", "recomposer", "external" ],
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -2693,7 +2724,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 73.0, 490.0, 33.0 ],
-									"text" : "hoa.recomposer~ recomposes a plane wave decomposition into circular harmonics. There're three mode, fixe (default), fisheye and free.",
+									"text" : "hoa.recomposer~ recomposes a plane wave decomposition into circular harmonics and applies sound field transformations. There're three mode, fixe (default), fisheye and free.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -2869,7 +2900,7 @@
 									"destination" : [ "obj-7", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 523.5, 220.0, 348.0, 220.0, 348.0, 138.0, 328.0, 138.0 ],
+									"midpoints" : [ 553.5, 220.0, 348.0, 220.0, 348.0, 138.0, 328.0, 138.0 ],
 									"source" : [ "obj-11", 0 ]
 								}
 
@@ -3368,7 +3399,7 @@
 									"destination" : [ "obj-15", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 523.5, 594.0, 348.0, 594.0, 348.0, 378.0, 328.0, 378.0 ],
+									"midpoints" : [ 553.5, 594.0, 345.0, 594.0, 345.0, 378.0, 328.0, 378.0 ],
 									"source" : [ "obj-21", 0 ]
 								}
 
@@ -3378,7 +3409,7 @@
 									"destination" : [ "obj-34", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 408.5, 357.0, 348.0, 357.0, 348.0, 264.0, 18.666687, 264.0 ],
+									"midpoints" : [ 438.5, 357.0, 348.0, 357.0, 348.0, 264.0, 18.666687, 264.0 ],
 									"source" : [ "obj-3", 0 ]
 								}
 
@@ -3532,7 +3563,7 @@
 									"destination" : [ "obj-3", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 523.5, 402.0, 502.0, 402.0, 502.0, 324.0, 408.5, 324.0 ],
+									"midpoints" : [ 553.5, 402.0, 532.0, 402.0, 532.0, 324.0, 438.5, 324.0 ],
 									"source" : [ "obj-4", 0 ]
 								}
 
@@ -3542,7 +3573,7 @@
 									"destination" : [ "obj-16", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 534.0, 19.0, 534.0, 19.0 ],
+									"midpoints" : [ 564.0, 19.0, 564.0, 19.0 ],
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -3752,7 +3783,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

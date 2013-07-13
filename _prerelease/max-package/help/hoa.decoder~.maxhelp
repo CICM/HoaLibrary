@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 138.0, 61.0, 770.0, 689.0 ],
+		"rect" : [ 100.0, 100.0, 770.0, 689.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 138.0, 87.0, 770.0, 663.0 ],
+						"rect" : [ 100.0, 126.0, 770.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +71,21 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"attr" : "angles",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-10",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 487.5, 286.0, 274.0, 19.0 ],
+									"text_width" : 59.69
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"args" : [ "@size", 0 ],
 									"id" : "obj-5",
@@ -216,51 +231,6 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-37",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 628.5, 298.0, 55.0, 19.0 ],
-									"text" : "zl.slice 1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-36",
-									"linecount" : 6,
-									"maxclass" : "textedit",
-									"numinlets" : 1,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "int", "", "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 628.5, 272.0, 136.0, 19.0 ],
-									"text" : "0. 30. 110. 250. 330.\n\n0.\n\n\n\n"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-27",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 628.5, 325.0, 90.0, 19.0 ],
-									"text" : "prepend angles"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"channels" : 5,
 									"id" : "obj-40",
 									"maxclass" : "hoa.gain~",
@@ -282,8 +252,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 461.0, 134.5, 293.0, 60.0 ],
-									"text" : "First attribute of irregular mode is the number of loudspeakers. It knows the standard : 1. (mono), 2. (stereo), 3. (Dolby surround), 4. (Quadriphonie), 5.1, 6.1, 7.1., 8., .. (default : 5.1).",
+									"patching_rect" : [ 461.0, 134.5, 306.0, 60.0 ],
+									"text" : "First attribute of irregular mode is the number of loudspeakers. It knows the standard : 1. (mono), 2. (stereo), 3. (surround), 4. (quadriphonie), 5.1, 6.1, 7.1., 8., .. (default : 5.1).",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
 								}
@@ -361,7 +331,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -521,7 +491,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -572,7 +542,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -1013,7 +983,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -1454,7 +1424,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -1895,7 +1865,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -2463,7 +2433,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonic", "decoder." ],
+									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonics", "decoder." ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -2566,6 +2536,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-46",
 									"maxclass" : "newobj",
 									"numinlets" : 0,
@@ -2576,7 +2547,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -2704,6 +2675,7 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"hidden" : 1,
 									"id" : "obj-31",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -2735,7 +2707,7 @@
 										"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"mode" : "irregular",
 										"pinnaesize" : "small",
-										"restitution" : "panning",
+										"restitution" : "projection",
 										"yls" : 5,
 										"zls" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 									}
@@ -2766,6 +2738,16 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-12", 14 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 497.0, 336.0, 453.0, 336.0, 453.0, 288.0, 382.532287, 288.0 ],
+									"source" : [ "obj-10", 0 ]
 								}
 
 							}
@@ -2858,16 +2840,6 @@
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-25", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-12", 14 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 638.0, 381.0, 453.0, 381.0, 453.0, 288.0, 382.532287, 288.0 ],
-									"source" : [ "obj-27", 0 ]
 								}
 
 							}
@@ -3052,24 +3024,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-34", 1 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-37", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-36", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-27", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-37", 1 ]
 								}
 
 							}
@@ -3345,7 +3299,7 @@
 								"patchline" : 								{
 									"destination" : [ "obj-31", 0 ],
 									"disabled" : 0,
-									"hidden" : 0,
+									"hidden" : 1,
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -3415,7 +3369,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -3600,7 +3554,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -3760,7 +3714,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -3811,7 +3765,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -4252,7 +4206,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -4693,7 +4647,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -5134,7 +5088,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -5731,7 +5685,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonic", "decoder." ],
+									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonics", "decoder." ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -5845,7 +5799,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -6566,7 +6520,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -6898,7 +6852,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonic", "decoder." ],
+									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonics", "decoder." ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -7012,7 +6966,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -8133,7 +8087,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -8159,6 +8113,37 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-15",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 6.4375, 287.0, 149.0, 33.0 ],
+									"text" : "Argument is the order of decomposition",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[3]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-17",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 6.4375, 287.0, 149.0, 33.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"args" : [ "@size", 0 ],
 									"id" : "obj-13",
@@ -8481,12 +8466,11 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-18",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.4375, 67.5, 595.3125, 33.0 ],
-									"text" : "hoa.decoder~ decodes an ambisonics soundfield for several loudspeakers configuration or for headphones. First argument is the order of the ambisonic soundfield.",
+									"patching_rect" : [ 6.4375, 67.5, 595.3125, 20.0 ],
+									"text" : "hoa.decoder~ decodes an ambisonics sound field for several loudspeakers configurations or for headphones. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -8500,7 +8484,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 6.4375, 67.5, 595.3125, 33.0 ],
+									"patching_rect" : [ 6.4375, 67.5, 595.3125, 20.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -8579,7 +8563,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -8975,7 +8959,7 @@
 									"destination" : [ "obj-38", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 382.532288, 228.0, 382.532287, 228.0 ],
+									"midpoints" : [ 382.532287, 228.0, 382.532287, 228.0 ],
 									"source" : [ "obj-32", 14 ]
 								}
 
@@ -8997,7 +8981,7 @@
 									"destination" : [ "obj-38", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 352.808777, 228.0, 352.808776, 228.0 ],
+									"midpoints" : [ 352.808776, 228.0, 352.808776, 228.0 ],
 									"source" : [ "obj-32", 12 ]
 								}
 
@@ -9030,7 +9014,7 @@
 									"destination" : [ "obj-38", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 308.223511, 228.0, 308.22351, 228.0 ],
+									"midpoints" : [ 308.22351, 228.0, 308.22351, 228.0 ],
 									"source" : [ "obj-32", 9 ]
 								}
 
@@ -9063,7 +9047,7 @@
 									"destination" : [ "obj-38", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 263.638245, 228.0, 263.638244, 228.0 ],
+									"midpoints" : [ 263.638244, 228.0, 263.638244, 228.0 ],
 									"source" : [ "obj-32", 6 ]
 								}
 
@@ -9085,7 +9069,7 @@
 									"destination" : [ "obj-38", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 233.914734, 228.0, 233.914733, 228.0 ],
+									"midpoints" : [ 233.914733, 228.0, 233.914733, 228.0 ],
 									"source" : [ "obj-32", 4 ]
 								}
 
@@ -9096,7 +9080,7 @@
 									"destination" : [ "obj-38", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 219.052979, 228.0, 219.052978, 228.0 ],
+									"midpoints" : [ 219.052978, 228.0, 219.052978, 228.0 ],
 									"source" : [ "obj-32", 3 ]
 								}
 
@@ -9118,7 +9102,7 @@
 									"destination" : [ "obj-38", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 189.329468, 228.0, 189.329467, 228.0 ],
+									"midpoints" : [ 189.329467, 228.0, 189.329467, 228.0 ],
 									"source" : [ "obj-32", 1 ]
 								}
 
@@ -9684,7 +9668,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

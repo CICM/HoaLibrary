@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
@@ -163,7 +163,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "HoaLibrary", "@width", 290 ],
+					"args" : [ "@obj-name", "HoaLibrary", "@width", 290, "@obj-desc", "High Order Ambisonics Library " ],
 					"id" : "obj-8",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -333,10 +333,12 @@
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
+					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 33.6875, 552.5, 604.375, 23.0 ],
+					"patching_rect" : [ 33.6875, 552.5, 604.375, 57.0 ],
+					"text" : "hoa.granular~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending on the orders to generate a granular sound field.",
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -475,7 +477,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -570,151 +572,6 @@
 							}
 , 							{
 								"box" : 								{
-									"coll_data" : 									{
-										"count" : 35,
-										"data" : [ 											{
-												"key" : "hoa.encoder~",
-												"value" : [ "hoa.encoder~ creates the spherical harmonics of a signal depending of an given order and the position on a circle." ]
-											}
-, 											{
-												"key" : "hoa.decoder~",
-												"value" : [ "hoa.decoder~ decodes an ambisonics soundfield for a given number of loudspeakers or configuration. (ex. ambisonics | binaural | 5.1 | stereo ..)" ]
-											}
-, 											{
-												"key" : "hoa.rotate~",
-												"value" : [ "hoa.rotate~ allows you to rotate the ambisonics soundfield." ]
-											}
-, 											{
-												"key" : "hoa.plug~",
-												"value" : [ "hoa.plug~ facilitates the modularization of patches for ambisonics processing." ]
-											}
-, 											{
-												"key" : "hoa.connect",
-												"value" : [ "hoa.connect helps you to connect the hoa externals together." ]
-											}
-, 											{
-												"key" : "hoa.dac~",
-												"value" : [ "hoa.dac~ makes easier the setting of the channels. It works like a dac~ object but you can use the matlab syntax to set the loudspeakers routing." ]
-											}
-, 											{
-												"key" : "hoa.pi",
-												"value" : [ "hoa.pi is for peoples that never remember more than 4 decimals or want to initialize a good Pi number. " ]
-											}
-, 											{
-												"key" : "hoa.pi~",
-												"value" : [ "hoa.pi~ is a signal version of the hoa.pi object" ]
-											}
-, 											{
-												"key" : "hoa.scope~",
-												"value" : [ "hoa.scope~ displays the harmonics of an ambisonic soundfield on a circle." ]
-											}
-, 											{
-												"key" : "hoa.projector~",
-												"value" : [ "hoa.projector~ discretizes the ambisonic soundfield into an array of virtual loudspeakers and gives an access to a new sound domain." ]
-											}
-, 											{
-												"key" : "hoa.recomposer~",
-												"value" : [ "hoa.recomposer~ recomposes a plane wave decomposition into circular harmonics and allows you to perform effects like a fish eye operation." ]
-											}
-, 											{
-												"key" : "hoa.meter~",
-												"value" : [ "hoa.meter~ displays the peak levels for a circular array of loudspeakers. It computes and displays the energy and velocity vector." ]
-											}
-, 											{
-												"key" : "hoa.record~",
-												"value" : [ "hoa.record~ creates a sfrecord~ object with the best arguments to record of an ambisonics soundfield." ]
-											}
-, 											{
-												"key" : "hoa.play~",
-												"value" : [ "hoa.play~ creates an sfplay~ object with the best arguments to play of an ambisonics soundfield." ]
-											}
-, 											{
-												"key" : "hoa.optim~",
-												"value" : [ "hoa.optim~ applies optimizations to the circular harmonics." ]
-											}
-, 											{
-												"key" : "hoa.map",
-												"value" : [ "hoa.map allows you to spatialize several sources on a 2D plane. Used with hoa.map~ the source spatialization has never been so easy." ]
-											}
-, 											{
-												"key" : "hoa.map~",
-												"value" : [ "hoa.map~ is a tool that encodes several sources in the circular harmonics domain. It's easy to use and works with hoa.map." ]
-											}
-, 											{
-												"key" : "hoa.control",
-												"value" : [ "hoa.control displays the representation of the harmonics of an encoded ponctual sound for a given order optimization azimuth value and wide value. It can be used to understand of the encoding behavior as the optimization and fractionnal order effect (wider)" ]
-											}
-, 											{
-												"key" : "hoa.convolve~",
-												"value" : [ "hoa.convolve~ uses time domain and frequency domain filtering to apply reveberation on harmonics dependant signals. The zero latency convolution is optimized with an algorithm based on the Gardner algorithm." ]
-											}
-, 											{
-												"key" : "hoa.wider~",
-												"value" : [ "hoa.wider~ can be used to make more wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes." ]
-											}
-, 											{
-												"key" : "hoa.delay~",
-												"value" : [ "hoa.delay~ allows you to delay the differents harmonics." ]
-											}
-, 											{
-												"key" : "hoa.grain~",
-												"value" : [ "hoa.grain~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending to the orders to generate a granular sound field." ]
-											}
-, 											{
-												"key" : "hoa.mirror~",
-												"value" : [ "hoa.mirror~ applies a weight on the negatives harmonics to add the mirror image of a soundfield to itself. " ]
-											}
-, 											{
-												"key" : "hoa.mixer~",
-												"value" : [ "hoa.mixer~ helps to understand ambisonics and the behavior of the circular harmonics." ]
-											}
-, 											{
-												"key" : "hoa.freeverb~",
-												"value" : [ "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process." ]
-											}
-, 											{
-												"key" : "hoa.gigaverb~",
-												"value" : [ "hoa.gigaverb~ is based on Juhana Sadeharju reverberation model that uses delay lines and filters to create a larger reverberation than the freeverb algorithm and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process." ]
-											}
-, 											{
-												"key" : "hoa.space",
-												"value" : [ "hoa.space allows you to draw and set vitual microphones coefficients that can transform your ambisonics soundfields with the hoa.space~ object in the plane wave domain." ]
-											}
-, 											{
-												"key" : "hoa.space~",
-												"value" : [ "hoa.space~ allows you to apply gain to the virtual microphones. There is a hoa.space object embed in hoa.space~ to facilitate the modulation of the soundfield. Look at the hoa.space's help for more informations." ]
-											}
-, 											{
-												"key" : "hoa.vector~",
-												"value" : [ "hoa.vector~ display the coordinates of the velocity vector and the energy vector that caractérize a soundfield." ]
-											}
-, 											{
-												"key" : "hoa.am~",
-												"value" : [ "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending on their number." ]
-											}
-, 											{
-												"key" : "hoa.closer~",
-												"value" : [ "hoa.closer~ weights the harmonics depending to their number and the radius value. It's based on the cicmtool ambipan~ external." ]
-											}
-, 											{
-												"key" : "hoa.decorrelation~",
-												"value" : [ "hoa.decorrelation~ allows you to delay the differents harmonics depending on the harmonic number to decorrelate the harmonics and generate a diffuse soundfield." ]
-											}
-, 											{
-												"key" : "hoa.granular~",
-												"value" : [ "hoa.granular~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending on the orders to generate a granular sound field." ]
-											}
-, 											{
-												"key" : "hoa.recomposer",
-												"value" : [ "hoa.recomposer is a GUI to manipulate virtual microphones to warp the soundfield" ]
-											}
-, 											{
-												"key" : "hoa.gain~",
-												"value" : [ "hoa.gain~ is a GUI to control a multichannel gain" ]
-											}
- ]
-									}
-,
 									"color" : [ 0.590533, 0.704632, 0.839216, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 16.680918,
@@ -725,10 +582,10 @@
 									"outlettype" : [ "", "", "", "" ],
 									"patching_rect" : [ 27.0, 174.333344, 120.0, 25.0 ],
 									"saved_object_attributes" : 									{
-										"embed" : 1
+										"embed" : 0
 									}
 ,
-									"text" : "coll description"
+									"text" : "coll objectdesc"
 								}
 
 							}
@@ -950,18 +807,18 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
-					"offset" : [ -660.0, 0.0 ],
+					"offset" : [ -3300.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 202.0, 317.0, 604.0, 287.0 ],
+						"rect" : [ 203.0, 311.0, 605.0, 287.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -982,6 +839,20 @@
 						"digest" : "",
 						"tags" : "",
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 14.0,
+									"id" : "obj-54",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 3986.0, 299.0, 70.0, 20.0 ],
+									"text" : "renumber"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
@@ -1283,44 +1154,40 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.encoder~"
+									"text" : "hoa.granular~"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"coll_data" : 									{
-										"count" : 8,
+										"count" : 7,
 										"data" : [ 											{
 												"key" : 0,
 												"value" : [ "hoa.am~" ]
 											}
 , 											{
 												"key" : 1,
-												"value" : [ "hoa.closer~" ]
-											}
-, 											{
-												"key" : 2,
 												"value" : [ "hoa.delay~" ]
 											}
 , 											{
-												"key" : 3,
+												"key" : 2,
 												"value" : [ "hoa.decorrelation~" ]
 											}
 , 											{
-												"key" : 4,
+												"key" : 3,
 												"value" : [ "hoa.grain~" ]
 											}
 , 											{
-												"key" : 5,
+												"key" : 4,
 												"value" : [ "hoa.mirror~" ]
 											}
 , 											{
-												"key" : 6,
+												"key" : 5,
 												"value" : [ "hoa.mixer~" ]
 											}
 , 											{
-												"key" : 7,
+												"key" : 6,
 												"value" : [ "hoa.granular~" ]
 											}
  ]
@@ -1693,7 +1560,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -2023,7 +1890,7 @@
 									"rounded" : 0.0,
 									"spacing_x" : 15.0,
 									"spacing_y" : 15.0,
-									"tabs" : [ "hoa.am~", "hoa.closer~", "hoa.delay~", "hoa.decorrelation~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.granular~" ]
+									"tabs" : [ "hoa.am~", "hoa.delay~", "hoa.decorrelation~", "hoa.grain~", "hoa.mirror~", "hoa.mixer~", "hoa.granular~" ]
 								}
 
 							}
@@ -2747,6 +2614,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-39", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-54", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-3", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -2766,7 +2642,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 44.6875, 231.5, 604.375, 287.0 ]
+					"patching_rect" : [ 46.15625, 226.257935, 604.375, 287.0 ]
 				}
 
 			}
@@ -2826,7 +2702,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 13.9375, 88.5, 666.6875, 74.0 ],
-					"text" : "Hoa Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffused sound field synthesis, perspective distorsion or spatial filtering.",
+					"text" : "Hoa Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering.",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"
 				}
@@ -3017,6 +2893,13 @@
 			}
  ],
 		"dependency_cache" : [ 			{
+				"name" : "objectdesc.txt",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../misc/others",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"patcherrelativepath" : "../../misc/others",
