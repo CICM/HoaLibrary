@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 92.0, 47.0, 963.0, 777.0 ],
+		"rect" : [ 100.0, 100.0, 840.0, 777.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 92.0, 73.0, 963.0, 751.0 ],
+						"rect" : [ 100.0, 126.0, 840.0, 751.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -127,7 +127,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -328,7 +328,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -531,7 +531,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -674,7 +674,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -971,7 +971,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 579.5, 310.0, 228.0, 19.0 ]
+									"patching_rect" : [ 444.5, 310.0, 228.0, 19.0 ]
 								}
 
 							}
@@ -985,7 +985,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 579.5, 342.5, 170.594971, 19.0 ]
+									"patching_rect" : [ 444.5, 342.5, 170.594971, 19.0 ]
 								}
 
 							}
@@ -999,7 +999,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 579.5, 249.0, 175.0, 19.0 ]
+									"patching_rect" : [ 444.5, 249.0, 175.0, 19.0 ]
 								}
 
 							}
@@ -1013,7 +1013,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 579.5, 150.0, 281.5, 60.0 ],
+									"patching_rect" : [ 444.5, 150.0, 281.5, 60.0 ],
 									"text" : "Vector is usefull to caracterize the sound field degradation. Use different configuration, optimization etc.. to see difference between resitutions.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -1028,7 +1028,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 579.5, 150.0, 281.5, 60.0 ],
+									"patching_rect" : [ 444.5, 150.0, 281.5, 60.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -1044,7 +1044,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 579.5, 220.0, 168.0, 19.0 ]
+									"patching_rect" : [ 444.5, 220.0, 168.0, 19.0 ]
 								}
 
 							}
@@ -1058,7 +1058,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 579.5, 280.0, 150.0, 19.0 ]
+									"patching_rect" : [ 444.5, 280.0, 150.0, 19.0 ]
 								}
 
 							}
@@ -1073,7 +1073,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 40.09494, 299.0, 239.540085, 19.0 ],
 									"saved_object_attributes" : 									{
-										"optim" : "inPhase"
+										"optim" : "basic"
 									}
 ,
 									"text" : "hoa.optim~ 7"
@@ -1290,7 +1290,7 @@
 										"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"mode" : "irregular",
 										"pinnaesize" : "small",
-										"restitution" : "panning",
+										"restitution" : "projection",
 										"yls" : 5,
 										"zls" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 									}
@@ -1314,7 +1314,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -1622,7 +1622,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 589.0, 270.0, 291.0, 270.0, 291.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 270.0, 291.0, 270.0, 291.0, 330.0, 270.59494, 330.0 ],
 									"source" : [ "obj-14", 0 ]
 								}
 
@@ -1671,7 +1671,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 589.0, 363.0, 291.0, 363.0, 291.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 363.0, 291.0, 363.0, 291.0, 330.0, 270.59494, 330.0 ],
 									"source" : [ "obj-21", 0 ]
 								}
 
@@ -1681,7 +1681,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 589.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 330.0, 270.59494, 330.0 ],
 									"source" : [ "obj-24", 0 ]
 								}
 
@@ -2018,7 +2018,7 @@
 									"destination" : [ "obj-3", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 589.0, 240.0, 291.0, 240.0, 291.0, 285.0, 270.135025, 285.0 ],
+									"midpoints" : [ 454.0, 240.0, 291.0, 240.0, 291.0, 285.0, 270.135025, 285.0 ],
 									"source" : [ "obj-45", 0 ]
 								}
 
@@ -2092,7 +2092,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 589.0, 300.0, 291.0, 300.0, 291.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 300.0, 291.0, 300.0, 291.0, 330.0, 270.59494, 330.0 ],
 									"source" : [ "obj-9", 0 ]
 								}
 
@@ -2134,11 +2134,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 963.0, 751.0 ],
+						"rect" : [ 0.0, 26.0, 840.0, 751.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2169,7 +2169,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 319.5, 204.0, 79.0, 19.0 ],
+									"patching_rect" : [ 454.5, 204.0, 79.0, 19.0 ],
 									"text" : "loadmess 0.7"
 								}
 
@@ -2183,7 +2183,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 187.59169, 414.5, 91.799988, 19.0 ],
+									"patching_rect" : [ 322.591675, 414.5, 91.799988, 19.0 ],
 									"text" : "Energy vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -2198,7 +2198,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.258362, 414.5, 94.725014, 19.0 ],
+									"patching_rect" : [ 175.258362, 414.5, 94.725014, 19.0 ],
 									"text" : "Velocity vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -2212,7 +2212,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 187.59169, 414.5, 94.725014, 19.0 ],
+									"patching_rect" : [ 322.591675, 414.5, 94.725014, 19.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -2226,7 +2226,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.258362, 414.5, 91.799988, 19.0 ],
+									"patching_rect" : [ 175.258362, 414.5, 91.799988, 19.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -2253,7 +2253,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 319.5, 353.0, 42.0, 19.0 ],
+									"patching_rect" : [ 454.5, 353.0, 42.0, 19.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -2270,7 +2270,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 319.5, 243.0, 50.0, 19.0 ]
+									"patching_rect" : [ 454.5, 243.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -2284,7 +2284,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 375.5, 243.0, 266.0, 33.0 ],
+									"patching_rect" : [ 510.5, 243.0, 266.0, 33.0 ],
 									"text" : "The radius of the vector caracterize the angular resolution of a source.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -2299,7 +2299,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 375.5, 243.0, 266.0, 33.0 ],
+									"patching_rect" : [ 510.5, 243.0, 266.0, 33.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -2312,7 +2312,7 @@
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 150.0, 150.0, 45.0, 45.0 ]
+									"patching_rect" : [ 285.0, 150.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -2325,7 +2325,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 39.75, 174.0, 42.0, 19.0 ],
+									"patching_rect" : [ 174.75, 174.0, 42.0, 19.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -2340,7 +2340,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.75, 580.0, 260.0, 87.0 ],
+									"patching_rect" : [ 465.75, 580.0, 260.0, 87.0 ],
 									"text" : "The velocity vector (blue) caracterize th phase propagation.\nThe energy vector (red) gives the \"perceptive\" direction of the source.\nThe signal vector (green) gives the \"ideal\" direction of the source.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -2355,7 +2355,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.75, 580.0, 260.0, 87.0 ],
+									"patching_rect" : [ 465.75, 580.0, 260.0, 87.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -2371,7 +2371,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 319.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 454.5, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -2386,7 +2386,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 399.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 534.5, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -2400,7 +2400,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 319.5, 414.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 414.5, 99.0, 19.0 ],
 									"text" : "Signal vector :"
 								}
 
@@ -2413,7 +2413,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 319.5, 414.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 414.5, 99.0, 19.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -2428,7 +2428,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 319.5, 383.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 383.5, 99.0, 19.0 ],
 									"text" : "poltocar~"
 								}
 
@@ -2442,7 +2442,7 @@
 									"maxclass" : "scope~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 39.764286, 503.5, 240.0, 240.0 ],
+									"patching_rect" : [ 174.764282, 503.5, 240.0, 240.0 ],
 									"triglevel" : 1.99
 								}
 
@@ -2457,7 +2457,7 @@
 									"maxclass" : "scope~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.09494, 503.5, 240.0, 240.0 ],
+									"patching_rect" : [ 175.09494, 503.5, 240.0, 240.0 ],
 									"triglevel" : 1.99
 								}
 
@@ -2472,7 +2472,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 286.338623, 118.0, 79.0, 19.0 ],
+									"patching_rect" : [ 421.338623, 118.0, 79.0, 19.0 ],
 									"text" : "loadmess 0.2"
 								}
 
@@ -2486,7 +2486,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 246.338638, 204.0, 59.0, 19.0 ],
+									"patching_rect" : [ 381.338623, 204.0, 59.0, 19.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -2500,7 +2500,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 39.750004, 303.0, 240.34494, 19.0 ],
+									"patching_rect" : [ 174.75, 303.0, 240.34494, 19.0 ],
 									"text" : "hoa.wider~ 7"
 								}
 
@@ -2514,7 +2514,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 286.338623, 175.0, 72.0, 19.0 ],
+									"patching_rect" : [ 421.338623, 175.0, 72.0, 19.0 ],
 									"text" : "phasor~ 0.2"
 								}
 
@@ -2528,7 +2528,7 @@
 									"maxclass" : "scope~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 39.764286, 503.5, 240.0, 240.0 ],
+									"patching_rect" : [ 174.764282, 503.5, 240.0, 240.0 ],
 									"triglevel" : 1.99
 								}
 
@@ -2543,7 +2543,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 261.258362, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 396.258362, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -2558,7 +2558,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 187.59169, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 322.591675, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -2573,7 +2573,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 113.925026, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 248.925034, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -2588,7 +2588,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 40.450001, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 175.449997, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -2602,7 +2602,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 377.5, 240.0, 19.0 ],
+									"patching_rect" : [ 175.09494, 377.5, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"loudspeakers" : 16,
@@ -2682,7 +2682,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 39.75, 235.0, 225.588638, 19.0 ],
+									"patching_rect" : [ 174.75, 235.0, 225.588638, 19.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -2696,7 +2696,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 334.0, 240.0, 19.0 ],
+									"patching_rect" : [ 175.09494, 334.0, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -2729,7 +2729,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -2835,7 +2835,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 419.0, 105.0, 51.0, 19.0 ],
+									"patching_rect" : [ 554.0, 109.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -2862,7 +2862,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 419.0, 135.0, 99.0, 19.0 ],
+									"patching_rect" : [ 554.0, 135.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -2881,7 +2881,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 286.338623, 141.0, 50.0, 19.0 ]
+									"patching_rect" : [ 421.338623, 141.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -2891,7 +2891,7 @@
 									"destination" : [ "obj-23", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 255.838638, 231.0, 291.0, 231.0, 291.0, 336.0, 409.0, 336.0 ],
+									"midpoints" : [ 390.838623, 231.0, 426.0, 231.0, 426.0, 336.0, 544.0, 336.0 ],
 									"source" : [ "obj-1", 0 ]
 								}
 
@@ -3144,7 +3144,7 @@
 									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 409.0, 488.0, 270.264286, 488.0 ],
+									"midpoints" : [ 544.0, 488.0, 405.264282, 488.0 ],
 									"source" : [ "obj-23", 1 ]
 								}
 
@@ -3154,7 +3154,7 @@
 									"destination" : [ "obj-19", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 329.0, 489.0, 49.264286, 489.0 ],
+									"midpoints" : [ 464.0, 489.0, 184.264282, 489.0 ],
 									"source" : [ "obj-23", 0 ]
 								}
 
@@ -3350,7 +3350,7 @@
 									"destination" : [ "obj-39", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 428.5, 126.0, 428.5, 126.0 ],
+									"midpoints" : [ 563.5, 126.0, 563.5, 126.0 ],
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -3387,7 +3387,7 @@
 									"destination" : [ "obj-8", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 329.0, 288.0, 270.594944, 288.0 ],
+									"midpoints" : [ 464.0, 288.0, 405.59494, 288.0 ],
 									"source" : [ "obj-7", 0 ]
 								}
 
@@ -3579,11 +3579,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 963.0, 751.0 ],
+						"rect" : [ 0.0, 26.0, 840.0, 751.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3623,7 +3623,7 @@
 									"maxclass" : "ezdac~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 150.0, 150.0, 45.0, 45.0 ]
+									"patching_rect" : [ 285.0, 150.0, 45.0, 45.0 ]
 								}
 
 							}
@@ -3636,7 +3636,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 39.75, 174.0, 42.0, 19.0 ],
+									"patching_rect" : [ 174.75, 174.0, 42.0, 19.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -3651,7 +3651,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.75, 580.0, 260.0, 87.0 ],
+									"patching_rect" : [ 465.75, 580.0, 260.0, 87.0 ],
 									"text" : "The velocity vector (blue) caracterize the phase propagation.\nThe energy vector (red) gives the \"perceptive\" direction of the source.\nThe signal vector (green) gives the \"ideal\" direction of the source.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -3666,7 +3666,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.75, 580.0, 260.0, 87.0 ],
+									"patching_rect" : [ 465.75, 580.0, 260.0, 87.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -3681,7 +3681,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 319.5, 350.0, 42.0, 19.0 ],
+									"patching_rect" : [ 454.5, 350.0, 42.0, 19.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -3696,7 +3696,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 319.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 454.5, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -3711,7 +3711,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 399.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 534.5, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -3725,7 +3725,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 319.5, 414.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 414.5, 99.0, 19.0 ],
 									"text" : "Signal vector :"
 								}
 
@@ -3738,7 +3738,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 319.5, 414.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 414.5, 99.0, 19.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -3753,7 +3753,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 319.5, 383.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 383.5, 99.0, 19.0 ],
 									"text" : "poltocar~"
 								}
 
@@ -3767,7 +3767,7 @@
 									"maxclass" : "scope~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.258362, 503.5, 240.0, 240.0 ],
+									"patching_rect" : [ 175.258362, 503.5, 240.0, 240.0 ],
 									"triglevel" : 1.99
 								}
 
@@ -3782,7 +3782,7 @@
 									"maxclass" : "scope~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.258362, 503.5, 240.0, 240.0 ],
+									"patching_rect" : [ 175.258362, 503.5, 240.0, 240.0 ],
 									"triglevel" : 1.99
 								}
 
@@ -3797,7 +3797,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 300.75, 117.0, 79.0, 19.0 ],
+									"patching_rect" : [ 435.75, 117.0, 79.0, 19.0 ],
 									"text" : "loadmess 0.2"
 								}
 
@@ -3811,7 +3811,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 260.75, 203.0, 59.0, 19.0 ],
+									"patching_rect" : [ 395.75, 203.0, 59.0, 19.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -3825,7 +3825,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 187.59169, 414.5, 91.799988, 19.0 ],
+									"patching_rect" : [ 322.591675, 414.5, 91.799988, 19.0 ],
 									"text" : "Energy vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -3840,7 +3840,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.258362, 414.5, 94.725014, 19.0 ],
+									"patching_rect" : [ 175.258362, 414.5, 94.725014, 19.0 ],
 									"text" : "Velocity vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -3855,7 +3855,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 39.750004, 303.0, 240.0, 19.0 ],
+									"patching_rect" : [ 174.75, 303.0, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"optim" : "inPhase"
 									}
@@ -3873,7 +3873,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 300.75, 174.0, 72.0, 19.0 ],
+									"patching_rect" : [ 435.75, 174.0, 72.0, 19.0 ],
 									"text" : "phasor~ 0.2"
 								}
 
@@ -3887,7 +3887,7 @@
 									"maxclass" : "scope~",
 									"numinlets" : 2,
 									"numoutlets" : 0,
-									"patching_rect" : [ 39.764286, 503.5, 240.0, 240.0 ],
+									"patching_rect" : [ 174.764282, 503.5, 240.0, 240.0 ],
 									"triglevel" : 1.99
 								}
 
@@ -3902,7 +3902,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 261.258362, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 396.258362, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -3917,7 +3917,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 187.59169, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 322.591675, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -3932,7 +3932,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 113.925026, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 248.925034, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -3947,7 +3947,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 40.450001, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 175.449997, 448.5, 56.0, 19.0 ],
 									"sig" : 0.0
 								}
 
@@ -3961,7 +3961,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.258362, 377.5, 240.0, 19.0 ],
+									"patching_rect" : [ 175.258362, 377.5, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 24.0, 48.0, 72.0, 96.0, 120.0, 144.0, 168.0, 192.0, 216.0, 240.0, 264.0, 288.0, 312.0, 336.0 ],
 										"loudspeakers" : 15,
@@ -4012,7 +4012,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 62.0, 669.0, 47.0 ],
-									"text" : "hoa.vector~ display the coordinates of the velocity vector and the energy vector that caracterize a sound field. It's an useful tool to analyse restitution quality For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.",
+									"text" : "hoa.vector~ displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -4041,7 +4041,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 39.75, 235.0, 240.000015, 19.0 ],
+									"patching_rect" : [ 174.75, 235.0, 240.000015, 19.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -4055,7 +4055,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 334.0, 240.0, 19.0 ],
+									"patching_rect" : [ 175.09494, 334.0, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 24.0, 48.0, 72.0, 96.0, 120.0, 144.0, 168.0, 192.0, 216.0, 240.0, 264.0, 288.0, 312.0, 336.0 ],
 										"autoconnect" : 1,
@@ -4088,7 +4088,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -4194,7 +4194,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 419.0, 105.0, 51.0, 19.0 ],
+									"patching_rect" : [ 554.0, 105.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -4221,7 +4221,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 419.0, 135.0, 99.0, 19.0 ],
+									"patching_rect" : [ 554.0, 135.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -4240,7 +4240,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 300.75, 140.0, 50.0, 19.0 ]
+									"patching_rect" : [ 435.75, 140.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -4252,7 +4252,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 187.59169, 414.5, 94.725014, 19.0 ],
+									"patching_rect" : [ 322.591675, 414.5, 94.725014, 19.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -4266,7 +4266,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.258362, 414.5, 91.799988, 19.0 ],
+									"patching_rect" : [ 175.258362, 414.5, 91.799988, 19.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -4278,7 +4278,7 @@
 									"destination" : [ "obj-23", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 270.25, 231.0, 291.0, 231.0, 291.0, 336.0, 409.0, 336.0 ],
+									"midpoints" : [ 405.25, 231.0, 426.0, 231.0, 426.0, 336.0, 544.0, 336.0 ],
 									"source" : [ "obj-1", 0 ]
 								}
 
@@ -4513,7 +4513,7 @@
 									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 409.0, 488.0, 270.758362, 488.0 ],
+									"midpoints" : [ 544.0, 488.0, 405.758362, 488.0 ],
 									"source" : [ "obj-23", 1 ]
 								}
 
@@ -4523,7 +4523,7 @@
 									"destination" : [ "obj-19", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 329.0, 489.0, 49.758362, 489.0 ],
+									"midpoints" : [ 464.0, 489.0, 184.758362, 489.0 ],
 									"source" : [ "obj-23", 0 ]
 								}
 
@@ -4728,7 +4728,7 @@
 									"destination" : [ "obj-39", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
-									"midpoints" : [ 428.5, 126.0, 428.5, 126.0 ],
+									"midpoints" : [ 563.5, 126.0, 563.5, 126.0 ],
 									"source" : [ "obj-46", 0 ]
 								}
 
@@ -4929,11 +4929,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 963.0, 751.0 ],
+						"rect" : [ 0.0, 26.0, 840.0, 751.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,

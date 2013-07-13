@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 488.0, 111.0, 821.0, 647.0 ],
+		"rect" : [ 100.0, 100.0, 821.0, 647.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 488.0, 137.0, 821.0, 621.0 ],
+						"rect" : [ 100.0, 126.0, 821.0, 621.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +71,66 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-9",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 627.5, 211.5, 105.0, 20.0 ],
+									"text" : "Angle of rotation :",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[3]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-13",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 627.5, 211.5, 105.0, 20.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-2",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 219.5, 211.5, 105.0, 20.0 ],
+									"text" : "Angle of rotation :",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-5",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 219.5, 211.5, 105.0, 20.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"args" : [ "@size", 0 ],
 									"id" : "obj-25",
@@ -220,7 +280,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -420,7 +480,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.rotate~", "@obj-desc", "An", "ambisonic", "soundfield", "rotation", "external" ],
+									"args" : [ "@obj-name", "hoa.rotate~", "@obj-desc", "An", "ambisonics", "sound", "field", "rotation", "external" ],
 									"id" : "obj-15",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -451,12 +511,11 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-32",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 8.5, 69.0, 497.0, 33.0 ],
-									"text" : "hoa.rotate~ apply a rotation on the ambisonic soundfield. The last inlet set the angle of the rotation.",
+									"patching_rect" : [ 8.5, 69.0, 335.0, 20.0 ],
+									"text" : "hoa.rotate~ applies a rotation on the ambisonics sound field.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -470,7 +529,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 8.5, 69.0, 495.0, 34.0 ],
+									"patching_rect" : [ 8.5, 69.0, 335.0, 20.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -1218,7 +1277,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -1271,28 +1330,28 @@
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_7.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others/hoa.helpout",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others/hoa.helpout",
+				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}

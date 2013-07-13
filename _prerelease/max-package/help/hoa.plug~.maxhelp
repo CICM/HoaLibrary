@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 26.0, 51.0, 1037.0, 679.0 ],
+		"rect" : [ 31.0, 100.0, 1037.0, 679.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -44,11 +44,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 26.0, 77.0, 1037.0, 653.0 ],
+						"rect" : [ 0.0, 26.0, 1037.0, 653.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -137,7 +137,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "patcher", "that", "duplicates", "patcher", "for", "hoa", "processings." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -226,7 +226,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -412,7 +412,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -464,7 +464,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -788,7 +788,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -1140,7 +1140,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -1484,7 +1484,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "patcher", "that", "duplicates", "patcher", "for", "hoa", "processings." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -1520,7 +1520,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 73.5, 615.0, 47.0 ],
-									"text" : "hoa.plug~ sends different kind of arguments to the subpatcher that you can receive with patcherargs object. First arguments that you receive in the left outlet are the harmomic number and the global order. This is useful to adapt process on spherical harmonics. Other arguments attributes work like classical patcher's arguments and attributes",
+									"text" : "hoa.plug~ sends different kind of arguments to the subpatcher that you can receive with patcherargs object. First arguments that you receive in the left outlet are the harmomic number and the global order. Other arguments attributes work like classical patcher's arguments and attributes",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -1657,7 +1657,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -2672,7 +2672,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -2730,12 +2730,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-39",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 468.0, 400.0, 176.0, 45.0 ],
-									"text" : "First argument is the number of loudspeakers or virtual microphones"
+									"patching_rect" : [ 468.0, 400.0, 176.0, 32.0 ],
+									"text" : "First argument is the number of  virtual microphones"
 								}
 
 							}
@@ -2747,7 +2747,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 468.0, 400.0, 176.0, 45.0 ],
+									"patching_rect" : [ 468.0, 400.0, 176.0, 32.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -2848,7 +2848,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 106.5, 441.0, 343.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"mode" : 0,
+										"mode" : "fixe",
 										"ramp" : 20.0
 									}
 ,
@@ -2900,7 +2900,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "patcher", "that", "duplicates", "patcher", "for", "hoa", "processings." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -2936,7 +2936,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 73.5, 619.0, 33.0 ],
-									"text" : "The \"out\" mode works libe the \"post\" mode but in the plane wave domain or after the hoa.decoder~ object. It's useful to apply process on a set of virtual microphones or loudspeakers.",
+									"text" : "The \"out\" mode works in the plane wave domain. It's useful tool to create processings on a set of virtual microphones signals.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -3044,7 +3044,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -4398,7 +4398,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -4495,7 +4495,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "patcher", "that", "duplicates", "patcher", "for", "hoa", "processings." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -4531,7 +4531,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 73.5, 596.0, 33.0 ],
-									"text" : "The \"pre\" mode works with the \"split\" mode of the hoa.encoder~. It works like \"no\" mode but it vectorizes process before the encoder. It is useful when you want to create a process on  the order dependant's signals.",
+									"text" : "The \"pre\" mode works with the \"split\" mode of the hoa.encoder~. It works like \"no\" mode but it vectorizes processing before the encoder. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -4566,7 +4566,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -4925,7 +4925,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -5561,7 +5561,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -5671,7 +5671,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -6814,7 +6814,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "patcher", "that", "duplicates", "patcher", "for", "hoa", "processings." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -6845,12 +6845,12 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-34",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 73.5, 618.0, 47.0 ],
-									"text" : "The \"post\" mode means that hoa.plug~ keeps in parallel all the process, each signal is independant. Each inlet correspond to one subpatcher. It is a useful tool to perform process in the spherical harmonic's domain without duplicate the patches.",
+									"patching_rect" : [ 10.0, 73.5, 612.0, 33.0 ],
+									"text" : "The \"post\" mode means that hoa.plug~ keeps in parallel all the processings, each signal is independant. Each inlet correspond to one subpatcher.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -6864,7 +6864,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 73.5, 618.0, 47.0 ],
+									"patching_rect" : [ 10.0, 73.5, 612.0, 33.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -6958,7 +6958,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -8283,7 +8283,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -8363,7 +8363,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -8636,7 +8636,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -9340,7 +9340,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "patcher", "that", "duplicates", "patcher", "for", "hoa", "processings." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -9371,12 +9371,11 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-34",
-									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 73.5, 623.0, 33.0 ],
-									"text" : "The \"no\" mode means that hoa.plug~ splits the inputs to all the subpatchs. It could be seen like a tool to facilitate the creation of new kind of encoders. It's really useful to create diffused soundfields.",
+									"patching_rect" : [ 10.0, 73.5, 623.0, 20.0 ],
+									"text" : "The \"no\" mode means that hoa.plug~ splits the inputs to all the subpatchs.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -9390,7 +9389,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 10.0, 73.5, 623.0, 33.0 ],
+									"patching_rect" : [ 10.0, 73.5, 623.0, 20.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -9513,7 +9512,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -10228,11 +10227,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1037.0, 653.0 ],
+						"rect" : [ 31.0, 126.0, 1037.0, 653.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -10310,7 +10309,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "partcher", "that", "duplicates", "patcher", "for", "hoa", "process." ],
+									"args" : [ "@obj-name", "hoa.plug~", "@obj-desc", "A", "patcher", "that", "duplicates", "patcher", "for", "hoa", "processings." ],
 									"id" : "obj-30",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -10346,7 +10345,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 73.5, 626.0, 47.0 ],
-									"text" : "hoa.plug~ helps the modularization of patches for ambisonic process. Number of inlets and outlets depends on number of inlets and outlets objects within its subpatch window, ambisonic order and 1st argument.\nSecond argument is the name of the patcher to load and 3rd argument is the mode pre, no or post encoding.",
+									"text" : "hoa.plug~ helps the modularization of patches for ambisonics processing. Number of inlets and outlets depends on number of inlets and outlets objects within its subpatch window, ambisonic order and 1st argument.\nSecond argument is the name of the patcher to load and 3rd argument is the mode pre, no or post encoding.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -10627,7 +10626,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -11605,7 +11604,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

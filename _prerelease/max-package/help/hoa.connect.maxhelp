@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 343.0, 64.0, 559.0, 563.0 ],
+		"rect" : [ 100.0, 100.0, 559.0, 563.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -44,11 +44,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 343.0, 90.0, 559.0, 537.0 ],
+						"rect" : [ 0.0, 26.0, 559.0, 537.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -184,7 +184,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 255.0, 366.0, 254.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"mode" : 0,
+										"mode" : "fixe",
 										"ramp" : 20.0
 									}
 ,
@@ -262,7 +262,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -1730,11 +1730,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 559.0, 537.0 ],
+						"rect" : [ 100.0, 126.0, 559.0, 537.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1809,7 +1809,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.4375, 64.5, 522.0, 47.0 ],
-									"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" or \"click-select\" the objects in order then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. ",
+									"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" or \"click-select\" the objects in order then bang the hoa.connect to connect the objects together. 1st argument is the ambisonics order and the 2nd is the number of decoder outputs and dac inlets. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -2202,7 +2202,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

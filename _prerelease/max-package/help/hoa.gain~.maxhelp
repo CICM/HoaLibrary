@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 179.0, 44.0, 672.0, 649.0 ],
+		"rect" : [ 100.0, 100.0, 672.0, 649.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -45,7 +45,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -555,7 +555,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -1038,7 +1038,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -1154,7 +1154,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u689005721"
+									"varname" : "u362000213"
 								}
 
 							}
@@ -1349,7 +1349,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -2231,7 +2231,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -2558,11 +2558,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 179.0, 70.0, 672.0, 623.0 ],
+						"rect" : [ 100.0, 126.0, 672.0, 623.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2723,7 +2723,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -2907,10 +2907,10 @@
 									"patching_rect" : [ 39.687492, 342.838226, 271.898102, 26.0 ],
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
-											"parameter_shortname" : "hoa.gain~",
 											"parameter_longname" : "hoa.gain~",
-											"parameter_initial" : [ 0, 0.0 ],
+											"parameter_shortname" : "hoa.gain~",
 											"parameter_type" : 3,
+											"parameter_initial" : [ 0, 0.0 ],
 											"parameter_invisible" : 1
 										}
 
@@ -3074,7 +3074,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -4253,7 +4253,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

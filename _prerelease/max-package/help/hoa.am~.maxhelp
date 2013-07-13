@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 19.0, 98.0, 667.0, 574.0 ],
+		"rect" : [ 100.0, 100.0, 667.0, 574.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -122,7 +122,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -269,7 +269,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 113.0, 287.5, 33.0 ],
+					"patching_rect" : [ 7.0, 113.0, 291.0, 33.0 ],
 					"text" : "@freq set the initial amplitude modulation frequency.\n@factor set the initial factor between 0 and 1.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[4]"
@@ -445,12 +445,11 @@
 					"fontsize" : 12.0,
 					"frgb" : 0.0,
 					"id" : "obj-21",
-					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 70.0, 540.0, 33.0 ],
-					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the spherical harmonics signal depending on their number.",
+					"patching_rect" : [ 7.0, 70.0, 538.0, 20.0 ],
+					"text" : "hoa.am~ creates a diffuse soundfield by modulating the amplitude of the circular harmonics signals.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[1]"
 				}
@@ -464,7 +463,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 7.0, 70.0, 540.0, 33.0 ],
+					"patching_rect" : [ 7.0, 70.0, 538.0, 20.0 ],
 					"rounded" : 15,
 					"shadow" : -1
 				}
@@ -485,7 +484,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

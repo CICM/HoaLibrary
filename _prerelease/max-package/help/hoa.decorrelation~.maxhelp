@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 715.0, 96.0, 614.0, 560.0 ],
+		"rect" : [ 100.0, 100.0, 614.0, 560.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -42,7 +42,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -361,7 +361,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.decorrelation~", "@obj-desc", "An", "ambisonics", "soundfield", "decorrelator." ],
+					"args" : [ "@obj-name", "hoa.decorrelation~", "@obj-desc", "An", "ambisonics", "sound", "field", "decorrelator." ],
 					"id" : "obj-18",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",
@@ -409,7 +409,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 70.0, 540.0, 33.0 ],
-					"text" : "hoa.decorrelation~ allows you to delay the differents harmonics depending on the harmonic number to decorrelate the harmonics and generate a diffuse soundfield.",
+					"text" : "hoa.decorrelation~ allows you to delay the differents harmonics depending on the harmonic number to decorrelate the harmonics and generate a diffuse sound field.",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[1]"
 				}
@@ -444,7 +444,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

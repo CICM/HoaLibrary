@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
@@ -44,11 +44,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 584.0, 695.0 ],
+						"rect" : [ 0.0, 26.0, 584.0, 695.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -245,7 +245,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -1194,11 +1194,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 584.0, 695.0 ],
+						"rect" : [ 100.0, 126.0, 584.0, 695.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1221,6 +1221,37 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-2",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 59.949997, 245.0, 149.0, 33.0 ],
+									"text" : "Argument is the order of decomposition",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[3]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-3",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 59.949997, 245.0, 149.0, 33.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"args" : [ "@size", 0 ],
 									"id" : "obj-25",
 									"maxclass" : "bpatcher",
@@ -1241,7 +1272,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 59.949997, 231.0, 202.0, 33.0 ],
+									"patching_rect" : [ 367.5, 238.0, 202.0, 33.0 ],
 									"text" : "The azimuth position. (0 -  2π) can be set with signal or float values",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -1256,7 +1287,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 59.949997, 231.0, 202.0, 33.0 ],
+									"patching_rect" : [ 367.5, 238.0, 202.0, 33.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -1300,7 +1331,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 62.0, 483.0, 33.0 ],
-									"text" : "hoa.encoder~ creates the circular harmonics of a signal depending of a given order \n(arg 1) and a position on a circle (last inlet).",
+									"text" : "hoa.encoder~ encodes a signal in the circular harmonics domain depending on an order of decomposition and an angle.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -1490,7 +1521,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -2335,7 +2366,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,

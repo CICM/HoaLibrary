@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
+			"revision" : 3,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 34.0, 56.0, 849.0, 617.0 ],
+		"rect" : [ 100.0, 100.0, 849.0, 617.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -166,7 +166,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 7.0, 73.0, 483.0, 33.0 ],
-					"text" : "hoa.mirror~ applies a weight on the negatives harmonics to create the mirror image of a soundfield to itself. ",
+					"text" : "hoa.mirror~ applies a weight on the negatives harmonics to create the mirror image of a sound field to itself. ",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[1]"
 				}
@@ -291,7 +291,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
@@ -342,7 +342,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
+											"revision" : 3,
 											"architecture" : "x64"
 										}
 ,
@@ -379,7 +379,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -835,7 +835,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -1192,7 +1192,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 2,
+															"revision" : 3,
 															"architecture" : "x64"
 														}
 ,
@@ -2176,7 +2176,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
+							"revision" : 3,
 							"architecture" : "x64"
 						}
 ,
