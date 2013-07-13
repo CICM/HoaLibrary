@@ -172,6 +172,7 @@ public:
     
     int getBoidPosCoord(long _index, double* _BoidArrayCoord);
     int getBoidDirCoord(long _index, double* _BoidArrayCoord);
+    int getFlockCenterCoord(long _index, double* _BoidArrayCoord);
 };
 
 #endif /* defined(__hoa_boids__BoidsManager__) */

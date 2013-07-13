@@ -44,21 +44,6 @@
     }
   },
 
-  "hoa.control": {
-    "category": [
-      "U/I"
-    ],
-    "digest": "A Graphical User Interface tool to control a super encoder set",
-    "module": "max",
-    "palette": {
-      "category": [
-        "High Order Ambisonics Library"
-      ],
-      "action": "hoa.control",
-      "pic": "hoa.control.svg"
-    }
-  },
-
   "hoa.recomposer": {
     "category": [
       "U/I"

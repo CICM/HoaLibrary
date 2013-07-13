@@ -94,6 +94,9 @@ typedef struct  _hoaboids
     
     double      f_size_source;
 	double		f_zoom_factor;
+    
+    // interaction :
+    int cmdKeyPressed;
 
 } t_hoaboids;
 
@@ -140,6 +143,7 @@ void boid_set_speedinv(t_hoaboids *x, t_symbol *s, long argc, t_atom *argv);
 
 void hoaboids_tick(t_hoaboids *x);
 
+void hoaboids_reset(t_hoaboids *x);
 void hoaboids_start(t_hoaboids *x);
 void hoaboids_stop(t_hoaboids *x);
 void hoaboids_float(t_hoaboids *x, double v);
@@ -182,6 +186,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method) hoaboids_getvalueof,       "getvalueof",    A_CANT,   0);
 	class_addmethod(c, (method) hoaboids_setvalueof,       "setvalueof",    A_CANT,   0);
     
+    class_addmethod(c, (method) hoaboids_reset,              "reset",		A_NOTHING, 0);
     class_addmethod(c, (method) boid_set_pos,              "set_pos",		A_GIMME, 0);
     class_addmethod(c, (method) boid_set_dir,              "set_dir",		A_GIMME, 0);
     class_addmethod(c, (method) boid_set_speed,            "set_speed",		A_GIMME, 0);
@@ -232,12 +237,12 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
     
-    CLASS_ATTR_RGBA				(c, "Boidscolor", 0, t_hoaboids, f_colorBoids);
-	CLASS_ATTR_CATEGORY			(c, "Boidscolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "Boidscolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "Boidscolor", 0, "Boids Color");
-	CLASS_ATTR_ORDER			(c, "Boidscolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "Boidscolor", 0, "0.2 0.2 0.2 0.9");
+    CLASS_ATTR_RGBA				(c, "boidscolor", 0, t_hoaboids, f_colorBoids);
+	CLASS_ATTR_CATEGORY			(c, "boidscolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "boidscolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "boidscolor", 0, "Boids Color");
+	CLASS_ATTR_ORDER			(c, "boidscolor", 0, "4");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "boidscolor", 0, "0.2 0.2 0.2 0.9");
     
     CLASS_ATTR_RGBA				(c, "attractorcolor", 0, t_hoaboids, f_colorAttractor);
 	CLASS_ATTR_CATEGORY			(c, "attractorcolor", 0, "Color");
@@ -427,7 +432,7 @@ void hoaboids_assist(t_hoaboids *x, void *b, long m, long a, char *s)
 
 void hoaboids_getdrawparams(t_hoaboids *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-    params->d_boxfillcolor = x->f_colorBackground;
+    params->d_boxfillcolor = x->f_colorBackgroundInside;
     params->d_bordercolor =  x->f_colorBorder;
 	params->d_borderthickness = 1;
 	params->d_cornersize = CORNERSIZE;
@@ -458,6 +463,13 @@ void hoaboids_float(t_hoaboids *x, double v)
 void hoaboids_int(t_hoaboids *x, long v)
 {
     (v == 0) ? hoaboids_stop(x) : hoaboids_start(x);
+}
+
+void hoaboids_reset(t_hoaboids *x)
+{
+    x->f_boids_manager->resetBoids();
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
+    jbox_redraw((t_jbox *)x);
 }
 
 
@@ -554,7 +566,7 @@ t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom
         x->f_zoom_factor = Tools::clip(float(atom_getfloat(argv)), float(MIN_ZOOM), float(MAX_ZOOM));
     
     jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
     jbox_redraw((t_jbox *)x);
@@ -580,7 +592,7 @@ t_max_err hoaboids_setAttr_nBoids(t_hoaboids *x, t_object *attr, long argc, t_at
     {
         x->f_numberOfBoids = Tools::clip(long(atom_getlong(argv)), long(0), long(100));
         x->f_boids_manager->setNumberOfBoids(x->f_numberOfBoids);
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
         jbox_redraw((t_jbox *)x);
     }
     return MAX_ERR_NONE;
@@ -807,18 +819,18 @@ t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sende
         }
         else if(name == gensym("fontname") || name == gensym("fontface") || name == gensym("fontsize"))
         {
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
         }
         else if(name == gensym("zoom"))
         {
             jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
         }
         else if (name == gensym("nboids") || name == gensym("boidscolor"))
         {
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
         }
         else if(name == gensym("attractorcolor"))
         {
@@ -840,21 +852,31 @@ t_max_err hoaboids_notify(t_hoaboids *x, t_symbol *s, t_symbol *msg, void *sende
 void hoaboids_bang(t_hoaboids *x)
 {
     t_atom av[4];
-    double BoidCoord[2];
-        
+    double coords[2];
+    
+    // output Flock barycenter :
+    coords[0] = x->f_boids_manager->getCenterPt_abscissa();
+    coords[1] = x->f_boids_manager->getCenterPt_ordinate();
+    atom_setsym(av, gensym("barycenter"));
+    atom_setsym(av+1, gensym("car"));
+    atom_setfloat(av+2, coords[0]);
+    atom_setfloat(av+3, coords[1]);
+    outlet_list(x->f_out_infos, 0L, 4, av);
+    
+    // output boid (cartesians) Coordinates :
     for (int i=0; i < x->f_boids_manager->getNumberOfBoids(); i++)
     {
-        if(x->f_boids_manager->getBoidPosCoord(i, BoidCoord))
+        if(x->f_boids_manager->getBoidPosCoord(i, coords))
         {
             atom_setlong(av, i);
-            atom_setsym(av+1, gensym("cartesian"));
-            atom_setfloat(av+2, BoidCoord[0]);
-            atom_setfloat(av+3, BoidCoord[1]);
+            atom_setsym(av+1, gensym("car"));
+            atom_setfloat(av+2, coords[0]);
+            atom_setfloat(av+3, coords[1]);
             outlet_list(x->f_out_sources, 0L, 4, av);
         }
     }
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
     jbox_redraw((t_jbox *)x);
 }
 
@@ -880,10 +902,12 @@ void hoaboids_paint(t_hoaboids *x, t_object *view)
 
 void draw_background(t_hoaboids *x,  t_object *view, t_rect *rect)
 {
-    t_jgraphics *g, *g2, *g3;
-    t_jsurface *s1, *s2;
+    t_jgraphics *g;
     t_jrgba black, white;
     double w = rect->width;
+    double h = rect->height;
+    t_pt ctr = {w*0.5, h*0.5};
+    double maxctr = Tools::max(w, h)*0.5;
     
     double contrastBlack = 0.12;
     double contrastWhite = 0.08;
@@ -895,92 +919,74 @@ void draw_background(t_hoaboids *x,  t_object *view, t_rect *rect)
     white.green = Tools::clip_max(white.green += contrastWhite, 1.);
     white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
     
-	g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), w, rect->height);
+	g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), w, h);
 	
 	if (g)
     {
-        s1 = jgraphics_image_surface_create(JGRAPHICS_FORMAT_ARGB32, int(w), int(w));
-        g2 = jgraphics_create(s1);
+        /*
+        jgraphics_set_source_jrgba(g, &x->f_colorBackgroundInside);
+        jgraphics_set_line_width(g, 1);
+        jgraphics_arc(g, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor),  0., JGRAPHICS_2PI);
+        jgraphics_fill(g);
+        */
         
-        s2 = jgraphics_image_surface_create(JGRAPHICS_FORMAT_ARGB32, int(w), int(w));
-        g3 = jgraphics_create(s2);
-        
-        jgraphics_set_source_jrgba(g3, &x->f_colorBackgroundInside);
-        jgraphics_set_line_width(g3, 1);
-        jgraphics_arc(g3, w / 2., w / 2., (w / 2.) * (1./MIN_ZOOM * x->f_zoom_factor),  0., JGRAPHICS_2PI);
-        jgraphics_fill(g3);
-        
-        double ecart = x->f_zoom_factor * w / 2.;
+        double ecart = x->f_zoom_factor * maxctr;
         if(ecart < 10 && ecart >= 5) ecart *= 4;
         else if(ecart < 5 && ecart > 2.5) ecart *= 8;
         else if(ecart < 2.5) ecart *= 16;
         ecart = int(ecart);
         
-		for(double i = 0; i < w / 2.; i += ecart)
+		for(double i = 0; i < maxctr; i += ecart)
         {
-            jgraphics_set_line_width(g3, 1);
-            jgraphics_set_source_jrgba(g3, &white);
-            jgraphics_move_to(g3, 0., w / 2. - i);
-            jgraphics_line_to(g3, w, w / 2. - i);
-            jgraphics_move_to(g3, 0., w / 2. + i);
-            jgraphics_line_to(g3, w, w / 2. + i);
-            jgraphics_move_to(g3, w / 2. - i, 0.);
-            jgraphics_line_to(g3, w / 2. - i, w);
-            jgraphics_move_to(g3, w / 2. + i, 0.);
-            jgraphics_line_to(g3, w / 2. + i, w);
-            jgraphics_set_line_width(g3, 1);
-            jgraphics_scale(g3, 0.25, 0.25); // tricks to draw a 0.25 line width
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 4, 4);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_move_to(g, 0., long(ctr.y - i) + 0.5);
+            jgraphics_line_to(g, w,  long(ctr.y - i) + 0.5);
+            jgraphics_move_to(g, 0., long(ctr.y + i) + 0.5);
+            jgraphics_line_to(g, w,  long(ctr.y + i) + 0.5);
+            jgraphics_move_to(g, long(ctr.x - i) + 0.5, 0.);
+            jgraphics_line_to(g, long(ctr.x - i) + 0.5, w);
+            jgraphics_move_to(g, long(ctr.x + i) + 0.5, 0.);
+            jgraphics_line_to(g, long(ctr.x + i) + 0.5, w);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_scale(g, 0.5, 0.5); // tricks to draw a 0.5 line width
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 2, 2);
             
-            jgraphics_set_line_width(g3, 1);
-            jgraphics_set_source_jrgba(g3, &black);
-            jgraphics_move_to(g3, 0. - 0.5, w / 2. - i - 0.5);
-            jgraphics_line_to(g3, w - 0.5, w / 2. - i - 0.5);
-            jgraphics_move_to(g3, 0. - 0.5, w / 2. + i - 0.5);
-            jgraphics_line_to(g3, w - 0.5, w / 2. + i - 0.5);
-            jgraphics_move_to(g3, w / 2. - i - 0.5, 0. - 0.5);
-            jgraphics_line_to(g3, w / 2. - i - 0.5, w - 0.5);
-            jgraphics_move_to(g3, w / 2. + i - 0.5, 0. - 0.5);
-            jgraphics_line_to(g3, w / 2. + i - 0.5, w - 0.5);
-            jgraphics_set_line_width(g3, 2);
-            jgraphics_scale(g3, 0.25, 0.25);
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 4, 4);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_move_to(g, 0. - 0.5, long(ctr.y - i) - 0.5);
+            jgraphics_line_to(g, w - 0.5, long(ctr.y - i) - 0.5);
+            jgraphics_move_to(g, 0. - 0.5, long(ctr.y + i) - 0.5);
+            jgraphics_line_to(g, w - 0.5, long(ctr.y + i) - 0.5);
+            jgraphics_move_to(g, long(ctr.x - i) - 0.5, 0. - 0.5);
+            jgraphics_line_to(g, long(ctr.x - i) - 0.5, w - 0.5);
+            jgraphics_move_to(g, long(ctr.x + i) - 0.5, 0. - 0.5);
+            jgraphics_line_to(g, long(ctr.x + i) - 0.5, w - 0.5);
+            jgraphics_set_line_width(g, 2);
+            jgraphics_scale(g, 0.25, 0.25);
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 4, 4);
         }
         
-        /* Circles */
-        double radius = x->f_zoom_factor * w / 10.;
+        // Circles //
+        double radius = x->f_zoom_factor * (maxctr*2) / 10.;
         for(int i = 5; i > 0; i--)
         {
-            jgraphics_set_line_width(g3, 1);
-            jgraphics_set_source_jrgba(g3, &white);
-            jgraphics_arc(g3, w / 2, w / 2, (double)i * radius - 1,  0., JGRAPHICS_2PI);
-            jgraphics_scale(g3, 0.5, 0.5); // tricks to draw a 0.5 line width
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 2, 2);
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_arc(g, long(ctr.x)+0.5, long(ctr.y)+0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
+            jgraphics_scale(g, 0.5, 0.5); // tricks to draw a 0.5 line width
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 2, 2);
             
-            jgraphics_set_line_width(g3, 2);
-            jgraphics_set_source_jrgba(g3, &black);
-            jgraphics_arc(g3, w / 2 - 0.5, w / 2 - 0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
-            jgraphics_scale(g3, 0.5, 0.5);
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 2, 2);
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_arc(g, long(ctr.x) - 0.5, long(ctr.y) - 0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
+            jgraphics_scale(g, 0.5, 0.5);
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 2, 2);
         }
-        
-        /* clip jgraphics_3 to circle */
-        jgraphics_destroy(g3);
-        jgraphics_set_source_surface(g2, s2, 0, 0);
-        jgraphics_surface_destroy(s2);
-        jgraphics_arc(g2, w / 2., w / 2., (w / 2.) * (1./MIN_ZOOM * x->f_zoom_factor) - (BORDERTHICK*2),  0., CICM_2PI);
-        jgraphics_fill(g2);
-        
-        /* clip jgraphics_2 to rounded rect */
-        jgraphics_destroy(g2);
-        jgraphics_set_source_surface(g, s1, 0, 0);
-        jgraphics_surface_destroy(s1);
-        jgraphics_rectangle_rounded(g, 0, 0, w, rect->height, CORNERSIZE, CORNERSIZE);
-        jgraphics_fill(g);
         
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
@@ -1051,6 +1057,7 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
     double h = rect->height;
     double BoidPos[2];
     double BoidDir[2];
+    t_pt flockCenter;
     double BoidAngle;
     double BoidSize = 10;
     
@@ -1066,7 +1073,7 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
     white.green = Tools::clip_max(white.green += contrastWhite, 1.);
     white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
 		
-	if ((g = jbox_start_layer((t_object *)x, view, gensym("Boids_layer"), rect->width, rect->height)))
+	if ((g = jbox_start_layer((t_object *)x, view, gensym("boids_layer"), rect->width, rect->height)))
     {
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
 		jgraphics_set_matrix(g, &transform);
@@ -1108,11 +1115,19 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
                 jgraphics_rotate(g, -BoidAngle);
                 jgraphics_translate(g, -BoidPos[0], -BoidPos[1]);
             }
+            
+            /*
+            flockCenter.x = x->f_boids_manager->getCenterPt_abscissa() * (w*0.5) * x->f_zoom_factor;
+            flockCenter.y = x->f_boids_manager->getCenterPt_ordinate() * (w*0.5) * x->f_zoom_factor;
+            jgraphics_set_source_jrgba(g, &x->f_colorFlyrect);
+            jgraphics_arc(g, flockCenter.x, flockCenter.y, 5, 0, CICM_2PI);
+            jgraphics_fill(g);
+            */
         }
         
-		jbox_end_layer((t_object*)x, view, gensym("Boids_layer"));
+		jbox_end_layer((t_object*)x, view, gensym("boids_layer"));
     }
-	jbox_paint_layer((t_object *)x, view, gensym("Boids_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, gensym("boids_layer"), 0., 0.);
 }
 
 
@@ -1122,6 +1137,7 @@ void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect)
     t_jmatrix transform;
     double w = rect->width;
     double h = rect->height;
+    double attSize = 5;
     
     double attPosX = x->f_attractpt[0] * ( (w*0.5) * x->f_zoom_factor);
     double attPosY = x->f_attractpt[1] * ( (h*0.5) * x->f_zoom_factor);
@@ -1131,12 +1147,20 @@ void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect)
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
 		jgraphics_set_matrix(g, &transform);
         
-        jgraphics_set_line_width(g, 1);
-        
-        jgraphics_arc(g, attPosX, attPosY, 5, 0, CICM_2PI);
-        
         jgraphics_set_source_jrgba(g, &x->f_colorAttractor);
-        jgraphics_fill(g);
+        
+        jgraphics_set_line_width(g, 1);
+        jgraphics_move_to(g, attPosX - attSize*0.5, attPosY - attSize*0.5);
+        jgraphics_line_to(g, attPosX + attSize*0.5, attPosY + attSize*0.5);
+        jgraphics_stroke(g);
+        
+        jgraphics_move_to(g, attPosX - attSize*0.5, attPosY + attSize*0.5);
+        jgraphics_line_to(g, attPosX + attSize*0.5, attPosY - attSize*0.5);
+        jgraphics_stroke(g);
+        
+        //jgraphics_set_line_width(g, 2);
+        jgraphics_arc(g, attPosX, attPosY, attSize, 0, CICM_2PI);
+        jgraphics_stroke(g);
         
 		jbox_end_layer((t_object*)x, view, gensym("attractor_layer"));
     }
@@ -1180,19 +1204,15 @@ void hoaboids_mousedrag(t_hoaboids *x, t_object *patcherview, t_pt pt, long modi
 
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
-    //hoaboids_bang(x);
 }
 
 void hoaboids_mouseup(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     /*
-    if(x->f_source_trajectory)
-        clock_unset(x->f_clock);
-    */
-    
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
+    */
 }
 
 void hoaboids_mousewheel(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
@@ -1201,10 +1221,12 @@ void hoaboids_mousewheel(t_hoaboids *x, t_object *patcherview, t_pt pt, long mod
     {
 		double newZoom = x->f_zoom_factor + y_inc / 100.;
         x->f_zoom_factor = Tools::clip(newZoom, MIN_ZOOM, MAX_ZOOM);
+        object_attr_touch((t_object*)x, gensym("zoom"));
         object_notify(x, _sym_modified, NULL);
         jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
         jbox_redraw((t_jbox *)x);
 	}
 }
@@ -1216,6 +1238,7 @@ void hoaboids_mouseenter(t_hoaboids *x, t_object *patcherview, t_pt pt, long mod
 
 void hoaboids_mousemove(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
 {
+    x->cmdKeyPressed = 0;
     /*
     coordinatesCartesian cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
@@ -1226,7 +1249,7 @@ void hoaboids_mousemove(t_hoaboids *x, t_object *patcherview, t_pt pt, long modi
     */
 
     /*
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("Boids_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
     */
@@ -1239,7 +1262,7 @@ void hoaboids_mouseleave(t_hoaboids *x, t_object *patcherview, t_pt pt, long mod
 
 long hoaboids_key(t_hoaboids *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
 {
-	post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
+	//post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
     int filter = 0;
 	return filter;	// returns 1 if you want to filter it from the key object (otherwise return 0)
 }

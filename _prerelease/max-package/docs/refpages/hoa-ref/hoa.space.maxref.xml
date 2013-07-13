@@ -11,7 +11,7 @@
 		<o>
 			hoa.space
 		</o>
-        allows you to draw and set vitual microphones coefficients that can transform your ambisonics soundfields with the <o>hoa.space~</o> object in the plane wave domain.
+		allows you to draw spatial filtering and apply gains to the virtual microphones signals.
 	</description>
 	<!--METADATA-->
 	<metadatalist>

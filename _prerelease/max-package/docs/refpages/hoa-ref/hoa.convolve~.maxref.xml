@@ -11,7 +11,7 @@
 		<o>
 			hoa.convolve~
 		</o>
-        uses time and frequency domain filtering to apply reveberation on harmonics dependant signals. The zero latency convolution is optimized with an algorithm based on the Gardner algorithm.
+        uses time and frequency domain filtering to apply reveberation on harmonics dependant signals. The zero latency convolution is optimized with an algorithm based on the Gardner's one.
 	</description>
 	<!--METADATA-->
 	<metadatalist>
@@ -101,7 +101,7 @@
 				Buffer Channel.
 			</digest>
 			<description>
-				Set the <o>buffer~</o> object channel to be used by <o>hoa.convolve~</o>
+				Sets the <o>buffer~</o> object channel to be used by <o>hoa.convolve~</o>
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
@@ -114,7 +114,7 @@
 				Dry factor.
 			</digest>
 			<description>
-				Set the Dry factor.
+				Sets the Dry factor.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
@@ -127,7 +127,7 @@
 				Wet factor.
 			</digest>
 			<description>
-				Set the Wet factor.
+				Sets the Wet factor.
 			</description>
 			<attributelist>
 				<attribute name="category" get="1" set="1" type="symbol" size="1" value="Behavior" />
@@ -138,7 +138,7 @@
 	</attributelist>
 	<!--EXAMPLE-->
 	<examplelist>
-		<example caption="hoa.convolve~ used with a small order is an efficient tool to reduce CPU usage. At first order, it computes only three zero latency convolutions and allows to output on an infinity of loudspeakers."/>
+		<example caption="hoa.convolve~ used with a small order is an efficient tool to reduce CPU. At first order, it computes only three zero latency convolutions and allows to output on an infinity of loudspeakers."/>
 	</examplelist>
 	<!--SEEALSO-->
 	<seealsolist>

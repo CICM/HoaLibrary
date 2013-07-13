@@ -11,7 +11,7 @@
 		<o>
 			hoa.recomposer
 		</o>
-        helps you to place virtual microphones on the scene to warp the soundfield. (can be used to control the <o>hoa.recomposer~</o> object).
+        helps you to manipulate virtual microphones and control sound field transformations. (may be used to control the <o>hoa.recomposer~</o> object).
 	</description>
 	<!--METADATA-->
 	<metadatalist>
