@@ -47,6 +47,7 @@
 #include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
 #include "hoaRotate/AmbisonicsRotate.h"
 #include "hoaSpace/AmbisonicSpace.h"
+#include "hoaStars/AmbisonicsStars.h"
 #include "hoaSpectrum/AmbisonicsSpectrum.h"
 #include "hoaWider/AmbisonicsWider.h"
 #include "hoaVector/AmbisonicsVector.h"

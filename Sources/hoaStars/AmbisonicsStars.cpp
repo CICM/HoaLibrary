@@ -22,29 +22,12 @@
  * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-/*
 
-#ifndef DEF_AMBISONICSTAR
-#define DEF_AMBISONICSTAR
+#include "AmbisonicsStars.h"
 
-#include "../hoaMap/AmbisonicSource.h"
-
-class Star : public Source
+Star::Star(long deadOrAlive, double aRadius, double anAngle, double aRadiusPrincipal, double aRadiusSecondary, double aAngleEllipse)
 {
-private:
-    double                  m_radius_principal;
-    double                  m_radius_secondary;
-    double                  m_angle_ellipse;
-    
-    Star*                   m_sun;
-    std::vector <long>      m_satellites;
-    
-public:
-    Star(long deadOrAlive, double aRadius = 0., double anAngle = 0., double aRadiusPrincipal = 0., double aRadiusSecondary = 0., double aAngleEllipse = 0.);
-    
-	
-	~Star();
-};
+    ;
+}
 
-#endif
-*/
+

@@ -46,7 +46,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
+						"rect" : [ 131.0, 70.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -68,6 +68,21 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"hidden" : 1,
+									"id" : "obj-2",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"patching_rect" : [ 7.0, -47.0, 60.0, 20.0 ],
+									"text" : "loadbang"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -504,6 +519,15 @@
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-12", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-56", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-2", 0 ]
 								}
 
 							}
@@ -5966,7 +5990,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 131.0, 70.0, 896.0, 771.0 ],
+						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7006,35 +7030,35 @@
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../misc/others",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../misc/others",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.amp~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
-				"patcherrelativepath" : "../../patchers/operators",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/operators",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.pencoder~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
-				"patcherrelativepath" : "../../patchers/effects",
+				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
