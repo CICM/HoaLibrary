@@ -11,8 +11,7 @@
 		<o>
 			hoa.dac~
 		</o>
-        makes easier audio channels settings. It works like <o>dac~</o> but you can use matlab syntax ":" to set loudspeakers routing.
-
+        makes easier audio channels settings. It works like the vanilla <o>dac~</o> object but you can use matlab syntax ":" to set loudspeakers routing.
 	</description>
 	<!--METADATA-->
 	<metadatalist>

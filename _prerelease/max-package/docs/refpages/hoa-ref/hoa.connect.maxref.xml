@@ -44,7 +44,7 @@
 				Ambisonic order
 			</digest>
 			<description>
-				Set the ambisonic order.
+				Sets the ambisonic order.
 			</description>
 		</objarg>
 		<objarg id="1" name="loudspeaker-number" type="int" optional="0">

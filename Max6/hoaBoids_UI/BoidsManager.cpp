@@ -159,9 +159,12 @@ void BoidsManager::update() // FlightStep();
 			m_boids[i].speed = m_minSpeed;
         
 		// calculate new position, applying speedupFactor
+        m_boids[i].newPos.x += m_boids[i].newDir.x * m_boids[i].speed * m_speedupFactor;
+		m_boids[i].newPos.y += m_boids[i].newDir.y * m_boids[i].speed * m_speedupFactor;
+        /*
 		m_boids[i].newPos.x += m_boids[i].newDir.x * m_boids[i].speed * (m_speedupFactor / 100.0);
 		m_boids[i].newPos.y += m_boids[i].newDir.y * m_boids[i].speed * (m_speedupFactor / 100.0);
-        
+        */
 	}
 }
 
@@ -171,13 +174,14 @@ Point2d BoidsManager::FindFlockCenter()
 	Point2d			centerPoint;
 	register short	i;
     
-	for (i = 0 ; i <  m_numBoids; i++)
+	for (i = 0 ; i < m_numBoids; i++)
 	{
 		totalH += m_boids[i].oldPos.x;
 		totalV += m_boids[i].oldPos.y;
 	}
-	centerPoint.x = (double)	(totalH / m_numBoids);
-	centerPoint.y = (double)	(totalV / m_numBoids);
+    
+	centerPoint.x = (double) (totalH / m_numBoids);
+	centerPoint.y = (double) (totalV / m_numBoids);
     
 	return(centerPoint);
 }
@@ -583,22 +587,23 @@ void BoidsManager::setEdgeDistance(double _edgeDistance)
 
 void BoidsManager::setSpeedupFactor(double _speedupFactor)
 {
-    m_speedupFactor = Tools::clip_min(_speedupFactor, 0.);
+    //m_speedupFactor = Tools::clip_min(_speedupFactor, 0.);
+    m_speedupFactor = Tools::clip(_speedupFactor, 0., 1.);
 }
 
 void BoidsManager::setInertiaFactor(double _inertiaFactor)
 {
-    m_inertiaFactor = Tools::clip_min(_inertiaFactor, 0.000001);//Tools::clip(_mode, 0, 2);
+    m_inertiaFactor = Tools::clip_min(_inertiaFactor, 0.000001);
 }
 
 void BoidsManager::setAccelFactor(double _accelFactor)
 {
-    m_accelFactor = Tools::clip_min(_accelFactor, 0.000001);//Tools::clip(_mode, 0, 2);
+    m_accelFactor = Tools::clip_min(_accelFactor, 0.000001);
 }
 
 void BoidsManager::setPrefDistance(double _prefDistance)
 {
-    m_prefDist = _prefDistance;//Tools::clip(_mode, 0, 2);
+    m_prefDist = Tools::clip_min(_prefDistance, 0.);
     m_prefDistSqr = m_prefDist * m_prefDist;
 }
 
@@ -609,7 +614,7 @@ void BoidsManager::setPrefDistanceSqr(double _prefDistanceSqr)
 
 void BoidsManager::setCenterPt(double _center_X, double _center_Y)
 {
-    m_centerPt.x = _center_X;//Tools::clip(_mode, 0, 2);
+    m_centerPt.x = _center_X;
     m_centerPt.y = _center_Y;
 }
 

@@ -8,7 +8,7 @@
 		A multichannel gain~ object.
 	</digest>
 	<description>
-		<o>hoa.gain~</o> is a multichannels version of the <o>gain~</o> object.
+		<o>hoa.gain~</o> is a multichannel version of the <o>gain~</o> object.
 	</description>
 	<!--METADATA-->
 	<metadatalist>
