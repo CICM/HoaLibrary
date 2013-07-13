@@ -23,11 +23,29 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicStars.h"
-/*
-Star::Star(long deadOrAlive, double aRadius, double anAngle, double aRadiusPrincipal, double aRadiusSecondary, double aAngleEllipse) : Source(deadOrAlive, aRadius, anAngle)
+
+#ifndef DEF_AMBISONICSSTARS
+#define DEF_AMBISONICSSTARS
+
+#include "../hoaAmbisonics/Ambisonics.h"
+
+class Star
 {
-    ;
-}
- */
+private:
+    double                  m_radius_principal;
+    double                  m_radius_secondary;
+    double                  m_angle_ellipse;
+    
+    Star*                   m_sun;
+    std::vector <long>      m_satellites;
+    
+public:
+    Star(long deadOrAlive, double aRadius = 0., double anAngle = 0., double aRadiusPrincipal = 0., double aRadiusSecondary = 0., double aAngleEllipse = 0.);
+    
+	
+	~Star();
+};
+
+#endif
+
 
