@@ -23,11 +23,29 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsStars.h"
 
-Star::Star(long deadOrAlive, double aRadius, double anAngle, double aRadiusPrincipal, double aRadiusSecondary, double aAngleEllipse)
+#ifndef DEF_AMBISONICSPLANETARYSYSTEM
+#define DEF_AMBISONICSPLANETARYSYSTEM
+
+#include "AmbisonicsSatellite.h"
+
+class PlanetarySystem
 {
-    ;
-}
+private:
+    double                                 m_galaxy_limit;
+    Star*                                  m_sun;
+    std::map<int, Satellite*>              m_satellites;
+    std::map<int, Satellite*>::iterator    m_iterator;
+    
+public:
+    PlanetarySystem(double aSunRadius = 0., double anSunAngle = 0., double aGalaxyLimit = -1.);
+    
+    void addSatellites();
+    void removeSatellites();
+    
+	~PlanetarySystem();
+};
+
+#endif
 
 
