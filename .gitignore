@@ -9,6 +9,13 @@ JuceLibraryCode/
 ## Visual Studio
 #################
 
+*.suo
+*.pdb
+*.sdf
+*.user
+*.ipch
+sysbuild/
+
 #################
 ## XCode
 #################
