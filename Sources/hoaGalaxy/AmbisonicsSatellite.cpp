@@ -25,7 +25,7 @@
 
 #include "AmbisonicsSatellite.h"
 
-Satellite::Satellite(Star* aCentralStar, double anEllipticAngle, double aRadiusPrincipal, double aRadiusSecondary)
+Satellite::Satellite(Star* aCentralStar, double anEllipticAngle, double aRadiusPrincipal, double aRadiusSecondary) : Star(0., 0.)
 {
     m_central_star = aCentralStar;
     m_radius_principal = 0.;
@@ -45,8 +45,8 @@ void Satellite::setEllipse(double anEllipticAngle, double aRadiusPrincipal, doub
 
 void Satellite::setRadiusPrincipal(double aRadius)
 {
-    if(m_central_star->getMaximumRadius() >= 0)
-        m_radius_principal = Tools::clip(aRadius, 0., m_central_star->getMaximumRadius() - m_central_star->getRadius());
+    if(m_galaxy_limit >= 0)
+        m_radius_principal = Tools::clip(aRadius, 0., m_galaxy_limit - m_central_star->getRadius());
     else
         m_radius_principal = Tools::clip_min(aRadius, 0.);
     
@@ -68,6 +68,16 @@ void Satellite::setRadiusSecondary(double aRadius)
 void Satellite::setEllipticAngle(double anAngle)
 {
     m_elliptic_angle = Tools::radianWrap(anAngle);
+}
+
+void setEllipseCoordinatePolar(double anAbscissa, double anOrdinate)
+{
+    
+}
+
+void setEllipseCoordinateCartesian(double anAbscissa, double anOrdinate)
+{
+    
 }
 
 void Satellite::setStartingAngle(double anAngle)

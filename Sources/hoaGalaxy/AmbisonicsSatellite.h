@@ -39,8 +39,6 @@ private:
     double                  m_rotation_time;
     
     Star*                   m_central_star;
-    std::vector<Satellite*> m_satellites;
-    
 public:
     Satellite(Star* aCentralStar, double anEllipticAngle = 0., double aRadiusPrincipal = 0., double aRadiusSecondary = 0.);
 
@@ -48,6 +46,9 @@ public:
 	void setRadiusPrincipal(double aRadius);
     void setRadiusSecondary(double aRadius);
     void setEllipticAngle(double anAngle);
+    void setEllipseCoordinatePolar(double anAbscissa, double anOrdinate);
+    void setEllipseCoordinateCartesian(double anAbscissa, double anOrdinate);
+    
     void setStartingAngle(double anAngle);
     void setRotationTime(double aTimeInMs);
     

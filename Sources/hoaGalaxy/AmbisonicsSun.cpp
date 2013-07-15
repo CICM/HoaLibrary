@@ -23,28 +23,17 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsPlanetarySystem.h"
+#include "AmbisonicsSun.h"
 
-PlanetarySystem::PlanetarySystem(double aSunRadius, double anSunAngle, double aGalaxyLimit)
+Sun::Sun(double aRadius, double anAngle, double aMaximumRadius) : Star(aRadius, anAngle, aMaximumRadius)
 {
-    m_galaxy_limit = aGalaxyLimit;
-    m_sun = new Star(aSunRadius, anSunAngle, aGalaxyLimit);
-    m_sun->setDescription("Sun");
-    m_sun->setColor(1., 1., 0., 1.);
+    Star::setColor(1., 1., 0., 1.);
+    Star::setDescription("Sun");
 }
 
-void PlanetarySystem::addSatellites()
+Sun::~Sun()
 {
-    m_satellites[m_satellites.size()] = new Satellite(m_sun);
+    ;
 }
+ 
 
-void PlanetarySystem::removeSatellites()
-{
-    
-}
-
-PlanetarySystem::~PlanetarySystem()
-{
-    delete m_sun;
-    m_satellites.clear();
-}

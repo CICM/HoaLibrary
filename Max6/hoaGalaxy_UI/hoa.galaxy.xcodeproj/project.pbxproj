@@ -85,7 +85,7 @@
 		8F3D69FF1792FCC1000D2709 /* AmbisonicsSatellite.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D69771792FCC1000D2709 /* AmbisonicsSatellite.h */; };
 		8F3D6A001792FCC1000D2709 /* AmbisonicsStar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D69781792FCC1000D2709 /* AmbisonicsStar.cpp */; };
 		8F3D6A011792FCC1000D2709 /* AmbisonicsStar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D69791792FCC1000D2709 /* AmbisonicsStar.h */; };
-		8F3D6A021792FCC1000D2709 /* AmbisonicsPlanetarySystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D697A1792FCC1000D2709 /* AmbisonicsPlanetarySystem.cpp */; };
+		8F3D6A021792FCC1000D2709 /* AmbisonicsPlanetarySystemGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D697A1792FCC1000D2709 /* AmbisonicsPlanetarySystemGlobal.cpp */; };
 		8F3D6A031792FCC1000D2709 /* AmbisonicsPlanetarySystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D697B1792FCC1000D2709 /* AmbisonicsPlanetarySystem.h */; };
 		8F3D6A041792FCC1000D2709 /* AmbisonicsGrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D697D1792FCC1000D2709 /* AmbisonicsGrain.cpp */; };
 		8F3D6A051792FCC1000D2709 /* AmbisonicsGrain.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D697E1792FCC1000D2709 /* AmbisonicsGrain.h */; };
@@ -132,6 +132,10 @@
 		8F3D6A2E1792FCC1000D2709 /* AmbisonicsVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D69B31792FCC1000D2709 /* AmbisonicsVector.h */; };
 		8F3D6A2F1792FCC1000D2709 /* AmbisonicsWider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D69B51792FCC1000D2709 /* AmbisonicsWider.cpp */; };
 		8F3D6A301792FCC1000D2709 /* AmbisonicsWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D69B61792FCC1000D2709 /* AmbisonicsWider.h */; };
+		8F3D6A3217933B33000D2709 /* AmbisonicsPlanetarySystemSun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D6A3117933B33000D2709 /* AmbisonicsPlanetarySystemSun.cpp */; };
+		8F3D6A3817934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D6A3717934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp */; };
+		8F3D6A3B17934568000D2709 /* AmbisonicsSun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D6A3917934568000D2709 /* AmbisonicsSun.cpp */; };
+		8F3D6A3C17934568000D2709 /* AmbisonicsSun.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D6A3A17934568000D2709 /* AmbisonicsSun.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -215,7 +219,7 @@
 		8F3D69771792FCC1000D2709 /* AmbisonicsSatellite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsSatellite.h; sourceTree = "<group>"; };
 		8F3D69781792FCC1000D2709 /* AmbisonicsStar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsStar.cpp; sourceTree = "<group>"; };
 		8F3D69791792FCC1000D2709 /* AmbisonicsStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsStar.h; sourceTree = "<group>"; };
-		8F3D697A1792FCC1000D2709 /* AmbisonicsPlanetarySystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystem.cpp; sourceTree = "<group>"; };
+		8F3D697A1792FCC1000D2709 /* AmbisonicsPlanetarySystemGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystemGlobal.cpp; sourceTree = "<group>"; };
 		8F3D697B1792FCC1000D2709 /* AmbisonicsPlanetarySystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsPlanetarySystem.h; sourceTree = "<group>"; };
 		8F3D697D1792FCC1000D2709 /* AmbisonicsGrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsGrain.cpp; sourceTree = "<group>"; };
 		8F3D697E1792FCC1000D2709 /* AmbisonicsGrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsGrain.h; sourceTree = "<group>"; };
@@ -262,6 +266,10 @@
 		8F3D69B31792FCC1000D2709 /* AmbisonicsVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsVector.h; sourceTree = "<group>"; };
 		8F3D69B51792FCC1000D2709 /* AmbisonicsWider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsWider.cpp; sourceTree = "<group>"; };
 		8F3D69B61792FCC1000D2709 /* AmbisonicsWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsWider.h; sourceTree = "<group>"; };
+		8F3D6A3117933B33000D2709 /* AmbisonicsPlanetarySystemSun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystemSun.cpp; sourceTree = "<group>"; };
+		8F3D6A3717934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystemSatellites.cpp; sourceTree = "<group>"; };
+		8F3D6A3917934568000D2709 /* AmbisonicsSun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsSun.cpp; sourceTree = "<group>"; };
+		8F3D6A3A17934568000D2709 /* AmbisonicsSun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsSun.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -540,10 +548,14 @@
 			children = (
 				8F3D69741792FCC1000D2709 /* AmbisonicsGalaxy.cpp */,
 				8F3D69751792FCC1000D2709 /* AmbisonicsGalaxy.h */,
-				8F3D697A1792FCC1000D2709 /* AmbisonicsPlanetarySystem.cpp */,
+				8F3D6A3717934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp */,
+				8F3D6A3117933B33000D2709 /* AmbisonicsPlanetarySystemSun.cpp */,
+				8F3D697A1792FCC1000D2709 /* AmbisonicsPlanetarySystemGlobal.cpp */,
 				8F3D697B1792FCC1000D2709 /* AmbisonicsPlanetarySystem.h */,
 				8F3D69761792FCC1000D2709 /* AmbisonicsSatellite.cpp */,
 				8F3D69771792FCC1000D2709 /* AmbisonicsSatellite.h */,
+				8F3D6A3917934568000D2709 /* AmbisonicsSun.cpp */,
+				8F3D6A3A17934568000D2709 /* AmbisonicsSun.h */,
 				8F3D69781792FCC1000D2709 /* AmbisonicsStar.cpp */,
 				8F3D69791792FCC1000D2709 /* AmbisonicsStar.h */,
 			);
@@ -763,6 +775,7 @@
 				8F3D6A2C1792FCC1000D2709 /* AmbisonicsSpectrum.h in Headers */,
 				8F3D6A2E1792FCC1000D2709 /* AmbisonicsVector.h in Headers */,
 				8F3D6A301792FCC1000D2709 /* AmbisonicsWider.h in Headers */,
+				8F3D6A3C17934568000D2709 /* AmbisonicsSun.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,7 +889,7 @@
 				8F3D69FC1792FCC1000D2709 /* AmbisonicsGalaxy.cpp in Sources */,
 				8F3D69FE1792FCC1000D2709 /* AmbisonicsSatellite.cpp in Sources */,
 				8F3D6A001792FCC1000D2709 /* AmbisonicsStar.cpp in Sources */,
-				8F3D6A021792FCC1000D2709 /* AmbisonicsPlanetarySystem.cpp in Sources */,
+				8F3D6A021792FCC1000D2709 /* AmbisonicsPlanetarySystemGlobal.cpp in Sources */,
 				8F3D6A041792FCC1000D2709 /* AmbisonicsGrain.cpp in Sources */,
 				8F3D6A071792FCC1000D2709 /* AmbisonicMultiMaps.cpp in Sources */,
 				8F3D6A091792FCC1000D2709 /* AmbisonicsMap.cpp in Sources */,
@@ -899,6 +912,9 @@
 				8F3D6A2B1792FCC1000D2709 /* AmbisonicsSpectrum.cpp in Sources */,
 				8F3D6A2D1792FCC1000D2709 /* AmbisonicsVector.cpp in Sources */,
 				8F3D6A2F1792FCC1000D2709 /* AmbisonicsWider.cpp in Sources */,
+				8F3D6A3217933B33000D2709 /* AmbisonicsPlanetarySystemSun.cpp in Sources */,
+				8F3D6A3817934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp in Sources */,
+				8F3D6A3B17934568000D2709 /* AmbisonicsSun.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,7 +49,7 @@ extern "C"
 typedef struct  _galaxy
 {
 	t_jbox		j_box;
-    Galaxy*     f_galaxy;
+    PlanetarySystem*     f_galaxy;
     
 	void*		f_out;
 	void*		f_outInfos;
@@ -185,7 +185,7 @@ void *galaxy_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_GROWY
 			;
     
-    x->f_galaxy = new Galaxy();
+    x->f_galaxy = new PlanetarySystem();
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
     

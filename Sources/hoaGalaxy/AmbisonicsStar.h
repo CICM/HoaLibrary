@@ -31,18 +31,17 @@
 
 class Star
 {
-private:
+protected:
     
     double          m_radius;
     double          m_angle;
 	color           m_color;
     std::string     m_description;
-
-    double          m_maximum_radius;
     bool            m_muted;
     
+    double          m_galaxy_limit;    
 public:
-    Star(double aRadius = 0., double anAngle = 0., double aMaximumRadius = -1.);
+    Star(double aRadius = 0., double anAngle = 0., double aGalaxyLimit = -1.);
     
     void setCoordinatesPolar(double aRadius, double anAngle);
     void setRadius(double aRadius);
@@ -50,10 +49,11 @@ public:
     void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
     void setAbscissa(double anAbscissa);
     void setOrdinate(double anOrdinate);
+    
     void setColor(double red, double green, double blue, double alpha);
     void setDescription(std::string aDescription);
-    void setMute(bool muted);
-    void setMaximumRadius(double aMaximumRadius);
+    void setMuted(bool muted);
+    void setGalaxyLimit(double aGalaxyLimit);
     
     double      getRadius();
     double      getAngle();
@@ -61,9 +61,9 @@ public:
     double      getOrdinate();
     color       getColor();
     std::string getDescription();
-    bool        getMute();
-    double      getMaximumRadius();
-    double      getDistanceToBorder(double anAngle);
+    bool        getMuted();
+    double      getGalaxyLimit();
+    double      getDistanceToGalaxyLimit(double anAngle);
 
 	
 	~Star();

@@ -25,13 +25,13 @@
 
 #include "AmbisonicsStar.h"
 
-Star::Star(double aRadius, double anAngle, double aMaximumRadius)
+Star::Star(double aRadius, double anAngle, double aGalaxyLimit)
 {
     setCoordinatesPolar(aRadius, anAngle);
     setColor(0.2, 0.2, 0.2, 1.);
     setDescription("Star");
-    setMute(0);
-    setMaximumRadius(aMaximumRadius);
+    setMuted(0);
+    setGalaxyLimit(aGalaxyLimit);
 }
 
 void Star::setCoordinatesPolar(double aRadius, double anAngle)
@@ -42,10 +42,10 @@ void Star::setCoordinatesPolar(double aRadius, double anAngle)
 
 void Star::setRadius(double aRadius)
 {
-    if(m_maximum_radius >= 0)
+    if(m_galaxy_limit >= 0)
     {
-        if(aRadius > m_maximum_radius)
-            aRadius = m_maximum_radius;
+        if(aRadius > m_galaxy_limit)
+            aRadius = m_galaxy_limit;
     }
     m_radius = Tools::clip_min(aRadius, 0.);
 }
@@ -75,9 +75,9 @@ void Star::setOrdinate(double anOrdinate)
     setAngle(Tools::angle(abscissa, anOrdinate) - CICM_PI2);
 }
 
-void Star::setMaximumRadius(double aMaximumRadius)
+void Star::setGalaxyLimit(double aGalaxyLimit)
 {
-    m_maximum_radius = aMaximumRadius;
+    m_galaxy_limit = aGalaxyLimit;
     setRadius(m_radius);
     setAngle(m_angle);
 }
@@ -95,7 +95,7 @@ void Star::setDescription(std::string aDescription)
     m_description = aDescription;
 }
 
-void Star::setMute(bool muted)
+void Star::setMuted(bool muted)
 {
     m_muted = Tools::clip(muted, 0, 1);
 }
@@ -130,21 +130,23 @@ std::string Star::getDescription()
     return m_description;
 }
 
-bool Star::getMute()
+bool Star::getMuted()
 {
     return m_muted;
 }
 
-double Star::getMaximumRadius()
+double Star::getGalaxyLimit()
 {
-    return m_maximum_radius;
+    return m_galaxy_limit;
 }
 
-double Star::getDistanceToBorder(double anAngle)
+double Star::getDistanceToGalaxyLimit(double anAngle)
 {
     anAngle = Tools::radianWrap(anAngle);
-    if(m_maximum_radius >= 0.)
-        return Tools::distance_euclidean(getAbscissa(), getOrdinate(), Tools::abscisse(m_maximum_radius, anAngle+ CICM_PI2), Tools::ordinate(m_maximum_radius, anAngle+ CICM_PI2));
+    if(m_galaxy_limit >= 0.)
+    {
+        return Tools::distance_euclidean(getAbscissa(), getOrdinate(), Tools::abscisse(m_galaxy_limit, anAngle+ CICM_PI2), Tools::ordinate(m_galaxy_limit, anAngle+ CICM_PI2));
+    }
     else
         return -1;
 }

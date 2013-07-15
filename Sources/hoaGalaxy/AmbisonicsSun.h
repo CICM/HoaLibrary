@@ -24,24 +24,20 @@
  */
 
 
-#ifndef DEF_AMBISONICSGALAXY
-#define DEF_AMBISONICSGALAXY
+#ifndef DEF_AMBISONICSSUN
+#define DEF_AMBISONICSSUN
 
-#include "AmbisonicsPlanetarySystem.h"
+#include "AmbisonicsStar.h"
 
-class Galaxy
+class Sun : public Star
 {
-private:    
-    double                                   m_galaxy_limit;
-    std::map<std::string, PlanetarySystem*>  m_planetary_system;
+private:
+    
     
 public:
-    Galaxy(double aGalaxyLimit = -1.);
-    
-    void addPlanetarySystem();
-    void removePlanetarySystem();
-    
-	~Galaxy();
+    Sun(double aRadius = 0., double anAngle = 0., double aMaximumRadius = -1.);
+	
+	~Sun();
 };
 
 #endif

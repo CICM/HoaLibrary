@@ -23,27 +23,67 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#ifndef DEF_AMBISONICSGALAXY
-#define DEF_AMBISONICSGALAXY
-
 #include "AmbisonicsPlanetarySystem.h"
 
-class Galaxy
+/**************************************/
+/********** GLOBAL FUNCTION ***********/
+/**************************************/
+
+PlanetarySystem::PlanetarySystem(double aSunRadius, double anSunAngle, double aGalaxyLimit)
 {
-private:    
-    double                                   m_galaxy_limit;
-    std::map<std::string, PlanetarySystem*>  m_planetary_system;
-    
-public:
-    Galaxy(double aGalaxyLimit = -1.);
-    
-    void addPlanetarySystem();
-    void removePlanetarySystem();
-    
-	~Galaxy();
-};
+    m_galaxy_limit = aGalaxyLimit;
+    m_sun = new Sun(aSunRadius, anSunAngle, aGalaxyLimit);
+}
 
-#endif
+void PlanetarySystem::setColor(double red, double green, double blue, double alpha)
+{
+    m_color.red =  Tools::clip(red, 0., 1.);
+    m_color.green =  Tools::clip(green, 0., 1.);
+    m_color.blue =  Tools::clip(blue, 0., 1.);
+    m_color.alpha =  Tools::clip(alpha, 0., 1.);
+}
 
+void PlanetarySystem::setDescription(std::string aDescription)
+{
+    m_description = aDescription;
+}
 
+void PlanetarySystem::setMuted(bool muted)
+{
+    m_sun->setMuted(muted);
+    for(m_iterator = m_satellites.begin(); m_iterator != m_satellites.end(); m_iterator++)
+    {
+        m_iterator->second->setMuted(muted);
+    }
+}
+
+color PlanetarySystem::getColor()
+{
+    return m_color;
+}
+
+std::string PlanetarySystem::getDescription()
+{
+    return m_description;
+}
+
+bool PlanetarySystem::getMuted()
+{
+    if(!m_sun->getMuted())
+        return 0;
+    else
+    {
+        for (m_iterator = m_satellites.begin(); m_iterator != m_satellites.end(); m_iterator++)
+        {
+            if(m_iterator->second->getMuted() == 0)
+                return 0;
+        }
+    }
+    return 1;
+}
+
+PlanetarySystem::~PlanetarySystem()
+{
+    delete m_sun;
+    m_satellites.clear();
+}

@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1195.0, 706.0 ],
+		"rect" : [ 0.0, 44.0, 1239.0, 706.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1195.0, 680.0 ],
+						"rect" : [ 0.0, 70.0, 1239.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -151,7 +151,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 42.0, 657.0, 234.0, 17.0 ],
-									"text" : "49 car 3.159062 -6.213699"
+									"text" : "49 cartesian -0.183012 8.650132"
 								}
 
 							}
@@ -2605,9 +2605,9 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 15,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 693.0, 369.0, 221.3125, 45.0 ],
-									"text" : "hoa.plug~ 7 hoa.granulate~ no @name granular @size 400 @delay 3000 @feedback 0.9 @rarefaction 0."
+									"text" : "hoa.plug~ 7 hoa.granular~ no @name granular @size 400 @delay 3000 @feedback 0.9 @rarefaction 0."
 								}
 
 							}
@@ -2793,15 +2793,14 @@
 , 							{
 								"box" : 								{
 									"accel" : 0.000001,
-									"attract" : 0.73,
+									"attract" : 0.25,
 									"attractorcolor" : [ 0.366512, 0.416858, 0.8, 1.0 ],
-									"attractpoint" : [ 0.265467, 1.3898 ],
-									"avoid" : 1.0,
-									"boidscolor" : [ 0.265146, 0.279994, 0.265865, 1.0 ],
+									"attractpoint" : [ -1.718771, 18.960618 ],
+									"avoid" : 0.88,
 									"center" : 0.0,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"edgedist" : 1.0,
-									"flyrect" : [ -26.8, 14.0, 25.2, -25.0 ],
+									"edgedist" : 0.71,
+									"flyrect" : [ -10.0, 10.0, 10.0, -10.0 ],
 									"flyrectcolor" : [ 0.660555, 0.278493, 0.311128, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -2810,7 +2809,7 @@
 									"match" : 1.0,
 									"maxclass" : "hoa.boids",
 									"maxspeed" : 1.21,
-									"minspeed" : 0.5,
+									"minspeed" : 0.34,
 									"nboids" : 50,
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -2820,7 +2819,7 @@
 									"prefdist" : 1.0,
 									"speed" : 1.0,
 									"wall" : 1.0,
-									"zoom" : 0.03
+									"zoom" : 0.07
 								}
 
 							}
@@ -6790,7 +6789,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1195.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 1239.0, 680.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -6838,15 +6837,29 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.plug~.maxref.xml",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs/refpages/hoa-ref",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.granular~.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -6864,6 +6877,10 @@
 			}
 , 			{
 				"name" : "hoa.decoder~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.plug~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
