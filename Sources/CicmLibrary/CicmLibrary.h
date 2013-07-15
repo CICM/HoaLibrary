@@ -26,7 +26,11 @@
 #ifndef DEF_CICM_LIBRARY
 #define DEF_CICM_LIBRARY
 
-#include "CicmDefine.h"
+#ifdef WIN_VERSION
+#include "CicmDefineWindows.h"
+#else MAC_VERSION
+#include "CicmDefineMac.h"
+
 #include "CicmTools.h"
 
 #include "CicmFilters/CicmFilterDelay.h"
