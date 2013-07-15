@@ -20,7 +20,7 @@
 #ifndef DEF_CICM_ENVELOPE
 #define DEF_CICM_ENVELOPE
 
-#include "../CicmDefine.h"
+#include "../CicmDefineMac.h"
 #include "../CicmTools.h"
 
 enum

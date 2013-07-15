@@ -26,8 +26,8 @@
 #ifndef DEF_AMBISONICSPACE
 #define DEF_AMBISONICSPACE
 
-#include "../CicmLibrary/CicmDefine.h"
-#include "../CicmLibrary/CicmTools.h"
+#include "../HoaAmbisonics/Ambisonics.h"
+
 #define RAMP_SAMPLE 4410
 
 class AmbisonicSpace{
