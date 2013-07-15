@@ -78,7 +78,7 @@
     "category": [
       "U/I"
     ],
-    "digest": "A Graphical User Interface to design ambisonics space",
+    "digest": "A Graphical User Interface to design ambisonic space",
     "module": "max",
     "palette": {
       "category": [
@@ -98,7 +98,7 @@
   },
 
   "hoa.convolve~": {
-    "digest": "An ambisonics zero latency convolution external",
+    "digest": "An ambisonic zero latency convolution external",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -114,7 +114,7 @@
   },
 
   "hoa.decoder~": {
-    "digest": "An ambisonics decoder",
+    "digest": "An ambisonic decoder",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -122,7 +122,7 @@
   },
 
   "hoa.encoder~": {
-    "digest": "An ambisonics Encoder",
+    "digest": "An ambisonic Encoder",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -130,7 +130,7 @@
   },
 
   "hoa.freeverb~": {
-    "digest": "An ambisonics Freeverb",
+    "digest": "An ambisonic Freeverb",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -138,7 +138,7 @@
   },
 
   "hoa.gigaverb~": {
-    "digest": "An ambisonics Gigaverb",
+    "digest": "An ambisonic Gigaverb",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -146,7 +146,7 @@
   },
 
   "hoa.map~": {
-    "digest": "An ambisonics multisource spatializer",
+    "digest": "An ambisonic multisource spatializer",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"
@@ -241,7 +241,7 @@
   },
 
   "hoa.wider~": {
-    "digest": "A fractional ambisonics order simulator",
+    "digest": "A fractional ambisonic order simulator",
     "module": "msp",
     "category": [
       "High Order Ambisonics Library"

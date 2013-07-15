@@ -200,7 +200,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.optim~", "@obj-desc", "An", "ambisonics", "optimization", "external." ],
+									"args" : [ "@obj-name", "hoa.optim~", "@obj-desc", "An", "ambisonic", "optimization", "external." ],
 									"id" : "obj-20",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -236,7 +236,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 78.0, 487.0, 33.0 ],
-									"text" : "hoa.optim~ weights the circular harmonics signals depending to the ambisonics optimization. It can be \"basic\" for no optimization, \"maxRe\" or \"inPhase\".",
+									"text" : "hoa.optim~ weights the circular harmonics signals depending to the ambisonic optimization. It can be \"basic\" for no optimization, \"maxRe\" or \"inPhase\".",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -604,7 +604,7 @@
 										"loudspeakers" : 16,
 										"ls" : 16,
 										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 16,

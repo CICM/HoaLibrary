@@ -512,7 +512,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonics", "recomposer", "external" ],
+									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonic", "recomposer", "external" ],
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -1569,7 +1569,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonics", "recomposer", "external" ],
+									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonic", "recomposer", "external" ],
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -2688,7 +2688,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonics", "recomposer", "external" ],
+									"args" : [ "@obj-name", "hoa.recomposer~", "@obj-desc", "An", "ambisonic", "recomposer", "external" ],
 									"id" : "obj-29",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",

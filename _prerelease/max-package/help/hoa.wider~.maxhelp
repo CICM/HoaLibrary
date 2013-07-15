@@ -865,7 +865,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.wider~", "@obj-desc", "A", "fractional", "ambisonics", "orders", "simulator." ],
+									"args" : [ "@obj-name", "hoa.wider~", "@obj-desc", "A", "fractional", "ambisonic", "orders", "simulator." ],
 									"id" : "obj-11",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",

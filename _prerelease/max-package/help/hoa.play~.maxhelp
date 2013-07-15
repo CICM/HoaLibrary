@@ -83,7 +83,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.play~", "@obj-desc", "A", "custom", "sfplay~", "object", "for", "ambisonics." ],
+									"args" : [ "@obj-name", "hoa.play~", "@obj-desc", "A", "custom", "sfplay~", "object", "for", "ambisonic." ],
 									"id" : "obj-6",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -118,7 +118,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 76.0, 517.0, 20.0 ],
-									"text" : "hoa.play~ creates an sfplay~ object with the best arguments to play an ambisonics sound field.",
+									"text" : "hoa.play~ creates an sfplay~ object with the best arguments to play an ambisonic sound field.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -368,7 +368,7 @@
 										"loudspeakers" : 16,
 										"ls" : 16,
 										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 16,
