@@ -24,24 +24,47 @@
  */
 
 
-#ifndef DEF_AMBISONICSSTARS
-#define DEF_AMBISONICSSTARS
+#ifndef DEF_AMBISONICSSTAR
+#define DEF_AMBISONICSSTAR
 
 #include "../hoaAmbisonics/Ambisonics.h"
 
 class Star
 {
-private:
-    double                  m_radius_principal;
-    double                  m_radius_secondary;
-    double                  m_angle_ellipse;
+protected:
     
-    Star*                   m_sun;
-    std::vector <long>      m_satellites;
+    double          m_radius;
+    double          m_angle;
+	color           m_color;
+    std::string     m_description;
+    bool            m_muted;
     
+    double          m_galaxy_limit;    
 public:
-    Star(long deadOrAlive, double aRadius = 0., double anAngle = 0., double aRadiusPrincipal = 0., double aRadiusSecondary = 0., double aAngleEllipse = 0.);
+    Star(double aRadius = 0., double anAngle = 0., double aGalaxyLimit = -1.);
     
+    void setCoordinatesPolar(double aRadius, double anAngle);
+    void setRadius(double aRadius);
+    void setAngle(double anAngle);
+    void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
+    void setAbscissa(double anAbscissa);
+    void setOrdinate(double anOrdinate);
+    
+    void setColor(double red, double green, double blue, double alpha);
+    void setDescription(std::string aDescription);
+    void setMuted(bool muted);
+    void setGalaxyLimit(double aGalaxyLimit);
+    
+    double      getRadius();
+    double      getAngle();
+    double      getAbscissa();
+    double      getOrdinate();
+    color       getColor();
+    std::string getDescription();
+    bool        getMuted();
+    double      getGalaxyLimit();
+    double      getDistanceToGalaxyLimit(double anAngle);
+
 	
 	~Star();
 };

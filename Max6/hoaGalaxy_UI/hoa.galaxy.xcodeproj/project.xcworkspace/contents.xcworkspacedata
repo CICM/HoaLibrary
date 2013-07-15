@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:hoa.stars.xcodeproj">
+      location = "self:hoa.galaxy.xcodeproj">
    </FileRef>
 </Workspace>

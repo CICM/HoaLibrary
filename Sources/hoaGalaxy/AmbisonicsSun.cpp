@@ -8,11 +8,11 @@
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
- *  - Redistributions may not be sold, nor may they be used in a commercial product or activity.
+ *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
  *  - Redistributions of source code must retain the above copyright notice, 
- *      this list of conditions and the following disclaimer.
+ *		this list of conditions and the following disclaimer.
  *  - Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
  *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
@@ -23,34 +23,17 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_HOA_LIBRARY
-#define DEF_HOA_LIBRARY
+#include "AmbisonicsSun.h"
 
-#include "hoaAmbisonics/AmbisonicsViewer.h"
-#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaDelay/AmbisonicsDelay.h"
-#include "hoaEncoder/AmbisonicsEncoder.h"
-#include "hoaFreeverb/AmbisonicsFreeverb.h"
-#include "hoaFilter/AmbisonicsFilter.h"
-#include "hoaGrain/AmbisonicsGrain.h"
-#include "hoaMap/AmbisonicMultiMaps.h"
-#include "hoaMap/AmbisonicSourcesManager.h"
-#include "hoaMap/AmbisonicSourcesPreset.h"
-#include "hoaMap/AmbisonicSourcesTrajectory.h"
-#include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
-#include "hoaOptim/AmbisonicsOptim.h"
-#include "hoaProjector/AmbisonicsProjector.h"
-#include "hoaRecomposer/AmbisonicsRecomposer.h"
-#include "hoaRingModulation/AmbisonicsRingModulation.h"
-#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
-#include "hoaRotate/AmbisonicsRotate.h"
-#include "hoaSpace/AmbisonicSpace.h"
-#include "hoaGalaxy/AmbisonicsGalaxy.h"
-#include "hoaSpectrum/AmbisonicsSpectrum.h"
-#include "hoaWider/AmbisonicsWider.h"
-#include "hoaVector/AmbisonicsVector.h"
+Sun::Sun(double aRadius, double anAngle, double aMaximumRadius) : Star(aRadius, anAngle, aMaximumRadius)
+{
+    Star::setColor(1., 1., 0., 1.);
+    Star::setDescription("Sun");
+}
 
-#endif
-
+Sun::~Sun()
+{
+    ;
+}
+ 
 

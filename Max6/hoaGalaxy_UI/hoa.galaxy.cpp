@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../CicmLibrary/cicmTools.h"
+#include "../../Sources/HoaLibrary.h"
 
 
 #define MAX_ZOOM 1.
@@ -46,12 +46,14 @@ extern "C"
     #include "ext_parameter.h"
 }
 
-typedef struct  _stars
+typedef struct  _galaxy
 {
 	t_jbox		j_box;
+    PlanetarySystem*     f_galaxy;
+    
 	void*		f_out;
 	void*		f_outInfos;
-
+    
 	long		f_mode;
 	long		f_order;
 	int			f_shadow;
@@ -69,89 +71,89 @@ typedef struct  _stars
 
     t_rect		f_ellipse_start;
 
-} t_stars;
+} t_galaxy;
 
-t_class *stars_class;
+t_class *galaxy_class;
 
-void *stars_new(t_symbol *s, int argc, t_atom *argv);
-void stars_free(t_stars *x);
-void stars_assist(t_stars *x, void *b, long m, long a, char *s);
-void stars_preset(t_stars *x);
-t_max_err stars_zoom(t_stars *x, t_object *attr, long argc, t_atom *argv);
+void *galaxy_new(t_symbol *s, int argc, t_atom *argv);
+void galaxy_free(t_galaxy *x);
+void galaxy_assist(t_galaxy *x, void *b, long m, long a, char *s);
+void galaxy_preset(t_galaxy *x);
+t_max_err galaxy_zoom(t_galaxy *x, t_object *attr, long argc, t_atom *argv);
 
-t_max_err stars_notify(t_stars *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-void stars_getdrawparams(t_stars *x, t_object *patcherview, t_jboxdrawparams *params);
-t_max_err number_of_microphones_set(t_stars *x, t_object *attr, long argc, t_atom *argv);
-t_max_err coefficients_set(t_stars *x, t_object *attr, long ac, t_atom *av);
+t_max_err galaxy_notify(t_galaxy *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void galaxy_getdrawparams(t_galaxy *x, t_object *patcherview, t_jboxdrawparams *params);
+t_max_err number_of_microphones_set(t_galaxy *x, t_object *attr, long argc, t_atom *argv);
+t_max_err coefficients_set(t_galaxy *x, t_object *attr, long ac, t_atom *av);
 
-t_max_err stars_setvalueof(t_stars *x, long ac, t_atom *av);
-t_max_err stars_getvalueof(t_stars *x, long *ac, t_atom **av);
+t_max_err galaxy_setvalueof(t_galaxy *x, long ac, t_atom *av);
+t_max_err galaxy_getvalueof(t_galaxy *x, long *ac, t_atom **av);
 
 /* Interaction ***************************************/
-void stars_mouse_down(t_stars *x, t_object *patcherview, t_pt pt, long modifiers);
-void stars_mouse_drag(t_stars *x, t_object *patcherview, t_pt pt, long modifiers);
-void stars_mouse_enddrag(t_stars *x, t_object *patcherview, t_pt pt, long modifiers);
-void stars_mouse_wheel(t_stars *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
+void galaxy_mouse_down(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers);
+void galaxy_mouse_drag(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers);
+void galaxy_mouse_enddrag(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers);
+void galaxy_mouse_wheel(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
 
 /* Paint *********************************************/
-void stars_paint(t_stars *x, t_object *view);
-void draw_background(t_stars *x, t_object *view, t_rect *rect);
-void draw_ellipse(t_stars *x,  t_object *view, t_rect *rect);
+void galaxy_paint(t_galaxy *x, t_object *view);
+void draw_background(t_galaxy *x, t_object *view, t_rect *rect);
+void draw_ellipse(t_galaxy *x,  t_object *view, t_rect *rect);
 
 int C74_EXPORT main()
 {
 	t_class *c;
     common_symbols_init();
     
-	c = class_new("hoa.stars", (method)stars_new, (method)stars_free, (short)sizeof(t_stars), 0L, A_GIMME, 0);
+	c = class_new("hoa.galaxy", (method)galaxy_new, (method)galaxy_free, (short)sizeof(t_galaxy), 0L, A_GIMME, 0);
 
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
 
-	class_addmethod(c, (method)stars_assist,          "assist",         A_CANT,	0);
-	class_addmethod(c, (method)stars_paint,           "paint",          A_CANT,	0);
-	class_addmethod(c, (method)stars_notify,          "notify",         A_CANT, 0);
-	class_addmethod(c, (method)stars_getdrawparams,   "getdrawparams",  A_CANT, 0);
-	class_addmethod(c, (method)stars_mouse_down,      "mousedown",      A_CANT, 0);
-	class_addmethod(c, (method)stars_mouse_drag,      "mousedrag",      A_CANT, 0);
-    class_addmethod(c, (method)stars_mouse_enddrag,   "mouseup",        A_CANT, 0);
-    class_addmethod(c, (method)stars_mouse_wheel,     "mousewheel",     A_CANT, 0);
+	class_addmethod(c, (method)galaxy_assist,          "assist",         A_CANT,	0);
+	class_addmethod(c, (method)galaxy_paint,           "paint",          A_CANT,	0);
+	class_addmethod(c, (method)galaxy_notify,          "notify",         A_CANT, 0);
+	class_addmethod(c, (method)galaxy_getdrawparams,   "getdrawparams",  A_CANT, 0);
+	class_addmethod(c, (method)galaxy_mouse_down,      "mousedown",      A_CANT, 0);
+	class_addmethod(c, (method)galaxy_mouse_drag,      "mousedrag",      A_CANT, 0);
+    class_addmethod(c, (method)galaxy_mouse_enddrag,   "mouseup",        A_CANT, 0);
+    class_addmethod(c, (method)galaxy_mouse_wheel,     "mousewheel",     A_CANT, 0);
     
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
 
     /* Colors */
-	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_stars, f_colorBackground);
+	CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_galaxy, f_colorBackground);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bgcolor", 0, "Background Outside Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor", 0, "0.9 0.9 0.9 1.");
     
-    CLASS_ATTR_RGBA                 (c, "bgcolor2", 0, t_stars, f_colorBackgroundInside);
+    CLASS_ATTR_RGBA                 (c, "bgcolor2", 0, t_galaxy, f_colorBackgroundInside);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor2", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bgcolor2", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bgcolor2", 0, "Background Inside Color");
 	CLASS_ATTR_ORDER                (c, "bgcolor2", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bgcolor2", 0, "0.75 0.75 0.75 1.");
     
-    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_stars, f_colorBorder);
+    CLASS_ATTR_RGBA                 (c, "bdcolor", 0, t_galaxy, f_colorBorder);
 	CLASS_ATTR_CATEGORY             (c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER                (c, "bdcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "bdcolor", 0, "0.5 0.5 0.5 1.");
     
-    CLASS_ATTR_RGBA                 (c, "selcolor", 0, t_stars, f_colorSelection);
+    CLASS_ATTR_RGBA                 (c, "selcolor", 0, t_galaxy, f_colorSelection);
 	CLASS_ATTR_CATEGORY             (c, "selcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "selcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "selcolor", 0, "Selection Color");
 	CLASS_ATTR_ORDER                (c, "selcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "selcolor", 0, "0.36 0.37 0.7 0.5");
     
-    CLASS_ATTR_DOUBLE               (c,"zoom", 0,   t_stars, f_zoom_factor);
-    CLASS_ATTR_ACCESSORS            (c,"zoom", NULL, stars_zoom);
+    CLASS_ATTR_DOUBLE               (c,"zoom", 0,   t_galaxy, f_zoom_factor);
+    CLASS_ATTR_ACCESSORS            (c,"zoom", NULL, galaxy_zoom);
 	CLASS_ATTR_LABEL                (c,"zoom", 0,   "Zoom");
 	CLASS_ATTR_CATEGORY             (c,"zoom", 0,   "Behavior");
 	CLASS_ATTR_DEFAULT              (c,"zoom", 0,   "0.35");
@@ -160,22 +162,22 @@ int C74_EXPORT main()
 	
 	
 	class_register(CLASS_BOX, c);
-	stars_class = c;
+	galaxy_class = c;
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *stars_new(t_symbol *s, int argc, t_atom *argv)
+void *galaxy_new(t_symbol *s, int argc, t_atom *argv)
 {
-	t_stars *x =  NULL; 
+	t_galaxy *x =  NULL; 
 	t_dictionary *d;
 	long flags;
 	
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 
-	x = (t_stars *)object_alloc(stars_class);
+	x = (t_galaxy *)object_alloc(galaxy_class);
 	flags = 0 
 			| JBOX_DRAWFIRSTIN 
 			| JBOX_DRAWINLAST
@@ -183,7 +185,7 @@ void *stars_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_GROWY
 			;
     
-
+    x->f_galaxy = new PlanetarySystem();
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
     
@@ -196,13 +198,14 @@ void *stars_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }			
 
-void stars_free(t_stars *x)
+void galaxy_free(t_galaxy *x)
 {
 	jbox_free((t_jbox *)x);
+    delete x->f_galaxy;
 
 }
 
-void stars_assist(t_stars *x, void *b, long m, long a, char *s)
+void galaxy_assist(t_galaxy *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 	{
@@ -217,7 +220,7 @@ void stars_assist(t_stars *x, void *b, long m, long a, char *s)
 	}
 }
 
-t_max_err stars_notify(t_stars *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err galaxy_notify(t_galaxy *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 	if (msg == gensym("attr_modified"))
@@ -247,7 +250,7 @@ t_max_err stars_notify(t_stars *x, t_symbol *s, t_symbol *msg, void *sender, voi
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
-void stars_getdrawparams(t_stars *x, t_object *patcherview, t_jboxdrawparams *params)
+void galaxy_getdrawparams(t_galaxy *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_borderthickness = 2;
 	params->d_cornersize = 12;
@@ -263,7 +266,7 @@ void stars_getdrawparams(t_stars *x, t_object *patcherview, t_jboxdrawparams *pa
 /*                      Dessin                            */
 /**********************************************************/
 
-t_max_err stars_zoom(t_stars *x, t_object *attr, long argc, t_atom *argv)
+t_max_err galaxy_zoom(t_galaxy *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
         x->f_zoom_factor = Tools::clip(float(atom_getfloat(argv)), float(MIN_ZOOM), float(MAX_ZOOM));
@@ -274,7 +277,7 @@ t_max_err stars_zoom(t_stars *x, t_object *attr, long argc, t_atom *argv)
     return MAX_ERR_NONE;
 }
 
-void stars_paint(t_stars *x, t_object *view)
+void galaxy_paint(t_galaxy *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
@@ -292,7 +295,7 @@ void stars_paint(t_stars *x, t_object *view)
     draw_ellipse(x, view, &rect);
 }
 
-void draw_background(t_stars *x,  t_object *view, t_rect *rect)
+void draw_background(t_galaxy *x,  t_object *view, t_rect *rect)
 {
     t_jgraphics *g, *g2, *g3;
     t_jsurface *s1, *s2;
@@ -401,7 +404,7 @@ void draw_background(t_stars *x,  t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
 }
 
-void draw_ellipse(t_stars *x,  t_object *view, t_rect *rect)
+void draw_ellipse(t_galaxy *x,  t_object *view, t_rect *rect)
 {
     t_jgraphics *g;
     t_jrgba black;
@@ -431,7 +434,7 @@ void draw_ellipse(t_stars *x,  t_object *view, t_rect *rect)
 /*                      Souris                            */
 /**********************************************************/
 
-void stars_mouse_down(t_stars *x, t_object *patcherview, t_pt pt, long modifiers)
+void galaxy_mouse_down(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_ellipse_start.width    = 0.;
     x->f_ellipse_start.height   = 0.;
@@ -443,7 +446,7 @@ void stars_mouse_down(t_stars *x, t_object *patcherview, t_pt pt, long modifiers
     jbox_redraw((t_jbox *)x);
 }
 
-void stars_mouse_drag(t_stars *x, t_object *patcherview, t_pt pt, long modifiers)
+void galaxy_mouse_drag(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_ellipse_start.width    = pt.x - x->f_ellipse_start.x;
     x->f_ellipse_start.height   = pt.y - x->f_ellipse_start.y;
@@ -452,12 +455,12 @@ void stars_mouse_drag(t_stars *x, t_object *patcherview, t_pt pt, long modifiers
     jbox_redraw((t_jbox *)x);
 }
 
-void stars_mouse_enddrag(t_stars *x, t_object *patcherview, t_pt pt, long modifiers)
+void galaxy_mouse_enddrag(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     ;
 }
 
-void stars_mouse_wheel(t_stars *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
+void galaxy_mouse_wheel(t_galaxy *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc)
 {
 	if (modifiers == eAltKey)
     {
