@@ -83,7 +83,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.record~", "@obj-desc", "A", "custom", "record~", "object", "for", "ambisonics" ],
+									"args" : [ "@obj-name", "hoa.record~", "@obj-desc", "A", "custom", "record~", "object", "for", "ambisonic" ],
 									"id" : "obj-10",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -119,7 +119,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 10.0, 76.0, 493.0, 33.0 ],
-									"text" : "hoa.record~ creates an sfrecord~ object with the best arguments to record an ambisonics sound field. The limit defined by Max is 15 inputs, then the maximum order can be 7.",
+									"text" : "hoa.record~ creates an sfrecord~ object with the best arguments to record an ambisonic sound field. The limit defined by Max is 15 inputs, then the maximum order can be 7.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}

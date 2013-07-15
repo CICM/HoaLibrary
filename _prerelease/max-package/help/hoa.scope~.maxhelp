@@ -136,7 +136,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.scope~", "@obj-desc", "An", "ambisonics", "harmonic", "scope" ],
+									"args" : [ "@obj-name", "hoa.scope~", "@obj-desc", "An", "ambisonic", "harmonic", "scope" ],
 									"id" : "obj-31",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -171,7 +171,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 8.0, 69.0, 414.0, 20.0 ],
-									"text" : "hoa.scope~ displays the harmonics of an ambisonics sound field on a circle.",
+									"text" : "hoa.scope~ displays the harmonics of an ambisonic sound field on a circle.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -1374,7 +1374,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.scope~", "@obj-desc", "An", "ambisonics", "harmonic", "scope" ],
+									"args" : [ "@obj-name", "hoa.scope~", "@obj-desc", "An", "ambisonic", "harmonic", "scope" ],
 									"id" : "obj-5",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",

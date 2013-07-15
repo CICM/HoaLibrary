@@ -94,7 +94,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_SYM              (c, "mode", 0, t_HoaDecode, f_mode);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "mode", 0, "Mode");
-    CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonics binaural irregular");
+    CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonic binaural irregular");
 	CLASS_ATTR_ACCESSORS		(c, "mode", NULL, configuration_set);
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
     CLASS_ATTR_SAVE             (c, "mode", 1);
@@ -258,7 +258,7 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
         else
         {
             x->f_AmbisonicsDecoder->setMode(Hoa_Ambisonics);
-            x->f_mode = gensym("ambisonics");
+            x->f_mode = gensym("ambisonic");
 
             object_attr_setdisabled((t_object *)x, gensym("angles"), 1);
             object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 1);

@@ -2544,7 +2544,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.space", "@obj-desc", "A", "graphic", "user", "interface", "to", "design", "ambisonics", "space" ],
+									"args" : [ "@obj-name", "hoa.space", "@obj-desc", "A", "graphic", "user", "interface", "to", "design", "ambisonic", "space" ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -7216,7 +7216,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.space", "@obj-desc", "A", "graphic", "user", "interface", "to", "design", "ambisonics", "space" ],
+									"args" : [ "@obj-name", "hoa.space", "@obj-desc", "A", "graphic", "user", "interface", "to", "design", "ambisonic", "space" ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -11665,7 +11665,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.space", "@obj-desc", "A", "graphic", "user", "interface", "to", "design", "ambisonics", "space" ],
+									"args" : [ "@obj-name", "hoa.space", "@obj-desc", "A", "graphic", "user", "interface", "to", "design", "ambisonic", "space" ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",

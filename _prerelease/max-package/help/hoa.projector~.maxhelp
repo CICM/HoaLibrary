@@ -304,7 +304,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.projector~", "@obj-desc", "An", "ambisonics", "projection", "external" ],
+									"args" : [ "@obj-name", "hoa.projector~", "@obj-desc", "An", "ambisonic", "projection", "external" ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -339,7 +339,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 8.0, 69.0, 487.0, 20.0 ],
-									"text" : "hoa.projector~ discretizes the ambisonics sound field into an array of virtual microphones.",
+									"text" : "hoa.projector~ discretizes the ambisonic sound field into an array of virtual microphones.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}

@@ -480,7 +480,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.rotate~", "@obj-desc", "An", "ambisonics", "sound", "field", "rotation", "external" ],
+									"args" : [ "@obj-name", "hoa.rotate~", "@obj-desc", "An", "ambisonic", "sound", "field", "rotation", "external" ],
 									"id" : "obj-15",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -515,7 +515,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 8.5, 69.0, 335.0, 20.0 ],
-									"text" : "hoa.rotate~ applies a rotation on the ambisonics sound field.",
+									"text" : "hoa.rotate~ applies a rotation on the ambisonic sound field.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
