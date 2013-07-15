@@ -330,6 +330,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c,"avoid", 0,   "Neighbors Avoidance");
 	CLASS_ATTR_DEFAULT_SAVE     (c,"avoid", 0,   "0.1");
     
+    /*
     CLASS_ATTR_DOUBLE			(c,"wall", 0, t_hoaboids, f_wall);
     CLASS_ATTR_ACCESSORS		(c,"wall", NULL, hoaboids_setAttr_wall);
 	CLASS_ATTR_LABEL			(c,"wall", 0,   "Wall Avoidance");
@@ -339,7 +340,8 @@ int C74_EXPORT main()
     CLASS_ATTR_ACCESSORS		(c,"edgedist", NULL, hoaboids_setAttr_edgedist);
 	CLASS_ATTR_LABEL			(c,"edgedist", 0,   "Vision Distance to Avoid Wall Edges");
 	CLASS_ATTR_DEFAULT_SAVE     (c,"edgedist", 0,   "0.5");
-    
+    */
+     
     CLASS_ATTR_DOUBLE			(c,"speed", 0, t_hoaboids, f_speed);
     CLASS_ATTR_ACCESSORS		(c,"speed", NULL, hoaboids_setAttr_speed);
 	CLASS_ATTR_LABEL			(c,"speed", 0,   "Animation Speed");
@@ -494,8 +496,8 @@ void hoaboids_preset(t_hoaboids *x)
     binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("attract"), x->f_attract);
     binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("match"), x->f_match);
     binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("avoid"), x->f_avoid);
-    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("wall"), x->f_wall);
-    binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("edgedist"), x->f_edgedist);
+    //binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("wall"), x->f_wall);
+    //binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("edgedist"), x->f_edgedist);
     binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("speed"), x->f_speed);
     binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("inertia"), x->f_inertia);
     binbuf_vinsert(z, gensym("ossf")->s_name, x, object_classname(x), gensym("accel"), x->f_accel);

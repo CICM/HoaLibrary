@@ -361,7 +361,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.decorrelation~", "@obj-desc", "An", "ambisonics", "sound", "field", "decorrelator." ],
+					"args" : [ "@obj-name", "hoa.decorrelation~", "@obj-desc", "An", "ambisonic", "sound", "field", "decorrelator." ],
 					"id" : "obj-18",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",

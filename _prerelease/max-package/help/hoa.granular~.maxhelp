@@ -2400,7 +2400,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.granular~", "@obj-desc", "Another", "ambisonics", "granular", "synthesizer." ],
+					"args" : [ "@obj-name", "hoa.granular~", "@obj-desc", "Another", "ambisonic", "granular", "synthesizer." ],
 					"id" : "obj-41",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",

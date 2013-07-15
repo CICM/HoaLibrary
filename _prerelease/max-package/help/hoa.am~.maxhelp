@@ -414,7 +414,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.am~", "@obj-desc", "An", "ambisonics", "soundfield", "amplitude", "modulation." ],
+					"args" : [ "@obj-name", "hoa.am~", "@obj-desc", "An", "ambisonic", "soundfield", "amplitude", "modulation." ],
 					"id" : "obj-18",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",

@@ -95,7 +95,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.delay~", "@obj-desc", "An", "ambisonics", "harmonic", "delay." ],
+					"args" : [ "@obj-name", "hoa.delay~", "@obj-desc", "An", "ambisonic", "harmonic", "delay." ],
 					"id" : "obj-18",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",

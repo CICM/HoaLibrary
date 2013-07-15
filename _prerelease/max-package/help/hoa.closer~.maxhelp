@@ -80,7 +80,7 @@
 			}
 , 			{
 				"box" : 				{
-					"args" : [ "@obj-name", "hoa.closer~", "@obj-desc", "An", "ambisonics", "distance", "simulator." ],
+					"args" : [ "@obj-name", "hoa.closer~", "@obj-desc", "An", "ambisonic", "distance", "simulator." ],
 					"id" : "obj-16",
 					"maxclass" : "bpatcher",
 					"name" : "hoa.helpheader.maxpat",

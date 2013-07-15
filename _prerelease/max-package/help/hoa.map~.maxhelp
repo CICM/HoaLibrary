@@ -3507,7 +3507,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.map~", "@obj-desc", "An", "ambisonics", "multisource", "spatializer" ],
+									"args" : [ "@obj-name", "hoa.map~", "@obj-desc", "An", "ambisonic", "multisource", "spatializer" ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",

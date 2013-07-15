@@ -696,7 +696,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.freeverb~", "@obj-desc", "An", "implementation", "of", "the", "freeverb", "algorithm", "for", "ambisonics." ],
+									"args" : [ "@obj-name", "hoa.freeverb~", "@obj-desc", "An", "implementation", "of", "the", "freeverb", "algorithm", "for", "ambisonic." ],
 									"id" : "obj-17",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -717,7 +717,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.625, 68.0, 693.0, 33.0 ],
-									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters adapted to ambisonics domain.",
+									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters adapted to ambisonic domain.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}

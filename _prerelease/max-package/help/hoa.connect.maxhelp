@@ -658,7 +658,7 @@
 										"loudspeakers" : 16,
 										"ls" : 16,
 										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 16,
@@ -1809,7 +1809,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 4.4375, 64.5, 522.0, 47.0 ],
-									"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" or \"click-select\" the objects in order then bang the hoa.connect to connect the objects together. 1st argument is the ambisonics order and the 2nd is the number of decoder outputs and dac inlets. ",
+									"text" : "hoa.connect helps to connect the hoa externals together. You must \"drag-select\" or \"click-select\" the objects in order then bang the hoa.connect to connect the objects together. 1st argument is the ambisonic order and the 2nd is the number of decoder outputs and dac inlets. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -1886,7 +1886,7 @@
 										"loudspeakers" : 16,
 										"ls" : 16,
 										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 16,

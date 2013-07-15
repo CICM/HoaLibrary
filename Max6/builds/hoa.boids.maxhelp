@@ -80,7 +80,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 294.5, 657.0, 234.0, 17.0 ],
-									"text" : "barycenter car -1.5544 -7.746724"
+									"text" : "barycenter car nan nan"
 								}
 
 							}
@@ -137,6 +137,18 @@
 											"number" : 10,
 											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 0.265467, 1.3898, 8, "obj-18", "hoa.boids", "flyrect", -26.799999, 14.0, 25.200001, -25.0, 5, "obj-18", "hoa.boids", "neigbhors", 4, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.0, 5, "obj-18", "hoa.boids", "attract", 0.73, 5, "obj-18", "hoa.boids", "match", 1.0, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 1.0, 5, "obj-18", "hoa.boids", "edgedist", 1.0, 5, "obj-18", "hoa.boids", "speed", 1.0, 5, "obj-18", "hoa.boids", "inertia", 0.446, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 1.0 ]
 										}
+, 										{
+											"number" : 11,
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", -0.014303, 0.018916, 8, "obj-18", "hoa.boids", "flyrect", -24.700001, 14.0, 25.200001, -25.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 1.0, 5, "obj-18", "hoa.boids", "attract", 0.25, 5, "obj-18", "hoa.boids", "match", 6.18, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 1000.0, 5, "obj-18", "hoa.boids", "edgedist", 0.0, 5, "obj-18", "hoa.boids", "speed", 0.03, 5, "obj-18", "hoa.boids", "inertia", 1.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.8 ]
+										}
+, 										{
+											"number" : 12,
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 2.668975, 1.386841, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 1.0, 5, "obj-18", "hoa.boids", "attract", 0.25, 5, "obj-18", "hoa.boids", "match", 6.18, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 0.0, 5, "obj-18", "hoa.boids", "edgedist", 0.0, 5, "obj-18", "hoa.boids", "speed", 0.14, 5, "obj-18", "hoa.boids", "inertia", 1.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.8 ]
+										}
+, 										{
+											"number" : 13,
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", -1.297383, 1.729229, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 2, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 0.259, 5, "obj-18", "hoa.boids", "attract", 0.68, 5, "obj-18", "hoa.boids", "match", -0.76, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 1000000.0, 5, "obj-18", "hoa.boids", "edgedist", 0.0, 5, "obj-18", "hoa.boids", "speed", 0.062, 5, "obj-18", "hoa.boids", "inertia", 2.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.89 ]
+										}
  ]
 								}
 
@@ -151,7 +163,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 42.0, 657.0, 234.0, 17.0 ],
-									"text" : "49 car 3.159062 -6.213699"
+									"text" : "1 car nan nan"
 								}
 
 							}
@@ -180,20 +192,6 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 381.0, 376.0, 88.0, 17.0 ],
 									"text" : "flyrect -1 1 1 -1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"attr" : "wall",
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-63",
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 486.5, 252.0, 150.0, 19.0 ]
 								}
 
 							}
@@ -236,20 +234,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 486.5, 162.0, 150.0, 19.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"attr" : "edgedist",
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-58",
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 166.5, 252.0, 150.0, 19.0 ]
 								}
 
 							}
@@ -2694,7 +2678,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "attract",
+									"attr" : "accel",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-19",
@@ -2702,7 +2686,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 328.5, 252.0, 150.0, 19.0 ]
+									"patching_rect" : [ 486.5, 136.0, 150.0, 19.0 ]
 								}
 
 							}
@@ -2793,34 +2777,31 @@
 , 							{
 								"box" : 								{
 									"accel" : 0.000001,
-									"attract" : 0.73,
+									"attract" : 0.354,
 									"attractorcolor" : [ 0.366512, 0.416858, 0.8, 1.0 ],
-									"attractpoint" : [ 0.265467, 1.3898 ],
-									"avoid" : 1.0,
+									"attractpoint" : [ -0.07966, 0.105357 ],
+									"avoid" : 0.57,
 									"boidscolor" : [ 0.265146, 0.279994, 0.265865, 1.0 ],
-									"center" : 0.0,
+									"center" : 0.4,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"edgedist" : 1.0,
-									"flyrect" : [ -26.8, 14.0, 25.2, -25.0 ],
 									"flyrectcolor" : [ 0.660555, 0.278493, 0.311128, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-18",
-									"inertia" : 0.446,
-									"match" : 1.0,
+									"inertia" : 1.0,
+									"match" : 0.0,
 									"maxclass" : "hoa.boids",
-									"maxspeed" : 1.21,
+									"maxspeed" : 1.0,
 									"minspeed" : 0.5,
-									"nboids" : 50,
+									"neigbhors" : 2,
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 37.0, 315.625, 307.875, 307.875 ],
-									"prefdist" : 1.0,
-									"speed" : 1.0,
-									"wall" : 1.0,
-									"zoom" : 0.03
+									"prefdist" : 0.83,
+									"speed" : 0.08,
+									"zoom" : 0.158
 								}
 
 							}
@@ -6328,15 +6309,6 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-58", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-18", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
 									"source" : [ "obj-59", 0 ]
 								}
 
@@ -6509,15 +6481,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-62", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-18", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-63", 0 ]
 								}
 
 							}

@@ -2433,7 +2433,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonics", "decoder." ],
+									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonic", "decoder." ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -2454,7 +2454,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.4375, 67.5, 599.3125, 47.0 ],
-									"text" : "hoa.decoder~ uses two methods to reproduce the surround soundfield over an irregular array of loudspeakers and allows you to decode the ambisonics soundfield for any number of loudspeakers. As a balance of a degradation of the soundfield restitution, loudspeaker system is no more restricted.",
+									"text" : "hoa.decoder~ uses two methods to reproduce the surround soundfield over an irregular array of loudspeakers and allows you to decode the ambisonic sound field for any number of loudspeakers. As a balance of a degradation of the soundfield restitution, loudspeaker system is no more restricted.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -5685,7 +5685,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonics", "decoder." ],
+									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonic", "decoder." ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -5706,7 +5706,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.4375, 67.5, 598.0, 33.0 ],
-									"text" : "hoa.decoder~ virtualizes ambisonics soundfield for two headspeakers. It uses hrtf to perform FIR filtering on the incoming signal. Hrtf are extracted from the \"sipic hrtf database\". Binaural works up to the order 35.",
+									"text" : "hoa.decoder~ virtualizes ambisonic soundfield for two headspeakers. It uses hrtf to perform FIR filtering on the incoming signal. Hrtf are extracted from the \"sipic hrtf database\". Binaural works up to the order 35.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -6726,7 +6726,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 456.0, 126.0, 303.0, 47.0 ],
-									"text" : "First attribute of ambisonics mode is the number of loudspeakers, it must be egual or higher to the number of harmonics : 2 * order + 1, (default : order * 2 +2)\n",
+									"text" : "First attribute of ambisonic mode is the number of loudspeakers, it must be egual or higher to the number of harmonics : 2 * order + 1, (default : order * 2 +2)\n",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
 								}
@@ -6852,7 +6852,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonics", "decoder." ],
+									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonic", "decoder." ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -6873,7 +6873,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.4375, 67.5, 617.0, 47.0 ],
-									"text" : "hoa.decoder~ decodes an ambisonics soundfield for a circular array of loudspeakers. It's the most efficient decoding (cpu and \"quality\" of soundfield restitution) but the number and the repartition of loudspeakers are restricted by the founding principles of ambisonics. ",
+									"text" : "hoa.decoder~ decodes an ambisonic soundfield for a circular array of loudspeakers. It's the most efficient decoding (cpu and \"quality\" of soundfield restitution) but the number and the repartition of loudspeakers are restricted by the founding principles of ambisonic. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -7124,14 +7124,14 @@
 										"loudspeakers" : 16,
 										"ls" : 16,
 										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 16,
 										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
-									"text" : "hoa.decoder~ 7 @mode ambisonics"
+									"text" : "hoa.decoder~ 7 @mode ambisonic"
 								}
 
 							}
@@ -8068,7 +8068,7 @@
 						"tags" : ""
 					}
 ,
-					"text" : "p ambisonics"
+					"text" : "p ambisonic"
 				}
 
 			}
@@ -8252,7 +8252,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 441.75, 337.0, 210.0, 84.0 ],
-									"text" : "The default mode is ambisonics for an array of  2 * order  + 2 loudspeakers. The default binaural pinnasize is small and the default irregular configuration is 5.1 standard multicanal configuration.\n"
+									"text" : "The default mode is ambisonic for an array of  2 * order  + 2 loudspeakers. The default binaural pinnasize is small and the default irregular configuration is 5.1 standard multicanal configuration.\n"
 								}
 
 							}
@@ -8280,7 +8280,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 511.25, 127.0, 224.0, 87.0 ],
-									"text" : "Mode : \n- ambisonics for a regular loudspeakers repartition over a circular array\n- binaural for headphones\n- irregular for an irregular loudspeakers repartition over a circular array",
+									"text" : "Mode : \n- ambisonic for a regular loudspeakers repartition over a circular array\n- binaural for headphones\n- irregular for an irregular loudspeakers repartition over a circular array",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
 								}
@@ -8381,7 +8381,7 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-37",
-									"items" : [ "ambisonics", ",", "binaural", ",", "irregular" ],
+									"items" : [ "ambisonic", ",", "binaural", ",", "irregular" ],
 									"maxclass" : "umenu",
 									"numinlets" : 1,
 									"numoutlets" : 3,
@@ -8450,7 +8450,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonics", "decoder." ],
+									"args" : [ "@obj-name", "hoa.decoder~", "@obj-desc", "An", "ambisonic", "decoder." ],
 									"id" : "obj-16",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -8470,7 +8470,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 6.4375, 67.5, 595.3125, 20.0 ],
-									"text" : "hoa.decoder~ decodes an ambisonics sound field for several loudspeakers configurations or for headphones. ",
+									"text" : "hoa.decoder~ decodes an ambisonic sound field for several loudspeakers configurations or for headphones. ",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -8721,7 +8721,7 @@
 										"loudspeakers" : 16,
 										"ls" : 16,
 										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 16,

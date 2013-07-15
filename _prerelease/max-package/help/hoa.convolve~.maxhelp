@@ -1833,7 +1833,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.convolve~", "@obj-desc", "An", "ambisonics", "zero", "latency", "convolution", "reverberation" ],
+									"args" : [ "@obj-name", "hoa.convolve~", "@obj-desc", "An", "ambisonic", "zero", "latency", "convolution", "reverberation" ],
 									"id" : "obj-17",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",

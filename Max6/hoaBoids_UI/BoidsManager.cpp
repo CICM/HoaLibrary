@@ -28,36 +28,13 @@
 BoidsManager::BoidsManager()
 {
     m_numBoids = 4;
-	m_numNeighbors = 2;
-    m_flyRect.top = 1.;
-    m_flyRect.left = -1.;
-    m_flyRect.bottom = -1.;
-    m_flyRect.right = 1.;
-    m_minSpeed = 0.15;
-	m_maxSpeed = 0.25;
-	m_centerWeight = 0.25;
-	m_attractWeight = 0.3;
-	m_matchWeight = 0.1;
-	m_avoidWeight = 0.1;
-	m_wallsWeight = 0.5;
-	m_edgeDist = 0.5;
-	m_speedupFactor = 0.1;
-	m_inertiaFactor = 0.2;
-	m_accelFactor = 0.1;
-	m_prefDist = 0.25;
-	m_prefDistSqr = 0;
-	m_centerPt.x = 0;
-    m_centerPt.y = 0;
-	m_attractPt.x = 0;
-    m_attractPt.y = 0;
+    m_boids.resize(m_numBoids);
     
     m_d2r = CICM_PI/180.0;
     m_r2d = 180.0/CICM_PI;
     
-    m_boids.resize(m_numBoids);
-    
-    setNumberOfBoids(m_numBoids);
     initFlock();
+    setNumberOfBoids(m_numBoids);
 }
 
 BoidsManager::~BoidsManager()
@@ -577,17 +554,16 @@ void BoidsManager::setAvoidWeight(double _avoidWeight)
 
 void BoidsManager::setWallsWeight(double _wallWeight)
 {
-    m_wallsWeight = _wallWeight;
+    m_wallsWeight = Tools::clip_min(_wallWeight, 0.);
 }
 
 void BoidsManager::setEdgeDistance(double _edgeDistance)
 {
-    m_edgeDist = _edgeDistance;
+    m_edgeDist = Tools::clip_min(_edgeDistance, 0.);
 }
 
 void BoidsManager::setSpeedupFactor(double _speedupFactor)
 {
-    //m_speedupFactor = Tools::clip_min(_speedupFactor, 0.);
     m_speedupFactor = Tools::clip(_speedupFactor, 0., 1.);
 }
 
