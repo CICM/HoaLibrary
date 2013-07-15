@@ -26,6 +26,11 @@
 #ifndef DEF_HOA_LIBRARY
 #define DEF_HOA_LIBRARY
 
+#ifdef WIN_VERSION
+#include "hoaEncoder/AmbisonicsEncoder.h"
+#include "hoaRotate/AmbisonicsRotate.h"
+
+#else MAC_VERSION
 #include "hoaAmbisonics/AmbisonicsViewer.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaDelay/AmbisonicsDelay.h"
@@ -51,6 +56,7 @@
 #include "hoaWider/AmbisonicsWider.h"
 #include "hoaVector/AmbisonicsVector.h"
 
+#endif
 #endif
 
 

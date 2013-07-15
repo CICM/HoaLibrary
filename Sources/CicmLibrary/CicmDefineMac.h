@@ -98,8 +98,8 @@
 #define Cicm_Matrix_Vector_Float_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmul(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 #define Cicm_Matrix_Vector_Double_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmulD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 
-#define Cicm_Vector_Scalar_Float_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, scalar, vectorDest, 1, size)
-#define Cicm_Vector_Scalar_Double_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, scalar, vectorDest, 1, size)
+#define Cicm_Vector_Scalar_Float_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, &scalar, vectorDest, 1, size)
+#define Cicm_Vector_Scalar_Double_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, &scalar, vectorDest, 1, size)
 
 #define Cicm_Vector_Vector_Float_Mul(vectorOne, vectorDest, size) cblas_sdot(size, vectorOne, 1, vectorDest, 1)
 #define Cicm_Vector_Vector_Double_Mul(vectorOne, vectorDest, size) cblas_ddot(size, vectorOne, 1, vectorDest, 1)

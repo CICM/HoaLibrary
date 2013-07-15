@@ -28,9 +28,10 @@
 
 #ifdef WIN_VERSION
 #include "CicmDefineWindows.h"
+#include "CicmTools.h"
+
 #else MAC_VERSION
 #include "CicmDefineMac.h"
-
 #include "CicmTools.h"
 
 #include "CicmFilters/CicmFilterDelay.h"
@@ -39,6 +40,8 @@
 #include "CicmAmplitude/CicmRingModulation.h"
 #include "CicmLines/CicmLine.h"
 #include "CicmReverb/CicmFreeverb.h"
+#endif
+
 
 #endif
 
