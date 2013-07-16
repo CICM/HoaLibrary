@@ -44,7 +44,7 @@ extern "C"
 }
 
 #include "../../Sources/CicmLibrary/CicmTools.h"
-#include "BoidsManager.h"
+#include "../../Sources/HoaBoids/BoidsManager.h"
 
 #define DEF_REFRESH_TIME 20
 
@@ -52,12 +52,10 @@ typedef struct  _hoaboids
 {
 	t_jbox          j_box;
 	t_rect          rect;
-	t_jfont*        jfont;
     void*           f_clock;
     
     t_atom_long f_output_mode;
 	void*		f_out_sources;
-    void*		f_out_groups;
     void*		f_out_infos;
     
     BoidsManager*  f_boids_manager;
@@ -186,7 +184,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method) hoaboids_getvalueof,       "getvalueof",    A_CANT,   0);
 	class_addmethod(c, (method) hoaboids_setvalueof,       "setvalueof",    A_CANT,   0);
     
-    class_addmethod(c, (method) hoaboids_reset,              "reset",		A_NOTHING, 0);
+    class_addmethod(c, (method) hoaboids_reset,            "reset",		A_NOTHING, 0);
     class_addmethod(c, (method) boid_set_pos,              "set_pos",		A_GIMME, 0);
     class_addmethod(c, (method) boid_set_dir,              "set_dir",		A_GIMME, 0);
     class_addmethod(c, (method) boid_set_speed,            "set_speed",		A_GIMME, 0);
@@ -395,14 +393,11 @@ void *hoaboids_new(t_symbol *s, int argc, t_atom *argv)
     x->j_box.b_firstin = (t_object*) x;
     
     x->f_out_infos      = listout(x);
-    x->f_out_groups     = listout(x);
 	x->f_out_sources    = listout(x);
     
     x->f_refreshInterval = DEF_REFRESH_TIME;
 	
     x->f_clock = clock_new(x,(method)hoaboids_tick);
-    //clock_set(x->f_clock, x->f_refreshInterval);
-	x->jfont = jfont_create(jbox_get_fontname((t_object *)x)->s_name, (t_jgraphics_font_slant)jbox_get_font_slant((t_object *)x), (t_jgraphics_font_weight)jbox_get_font_weight((t_object *)x), jbox_get_fontsize((t_object *)x));
     
 	attr_dictionary_process(x, d);
 	jbox_ready(&x->j_box);
@@ -412,7 +407,6 @@ void *hoaboids_new(t_symbol *s, int argc, t_atom *argv)
 void hoaboids_free(t_hoaboids *x)
 {
 	jbox_free(&x->j_box);
-    jfont_destroy(x->jfont);
     freeobject((t_object *)x->f_clock);
     delete x->f_boids_manager;
 }

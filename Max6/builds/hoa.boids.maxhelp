@@ -80,7 +80,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 294.5, 657.0, 234.0, 17.0 ],
-									"text" : "barycenter car nan nan"
+									"text" : "barycenter car -1.302845 -1.200935"
 								}
 
 							}
@@ -119,35 +119,35 @@
 									"patching_rect" : [ 370.0, 440.0, 100.0, 40.0 ],
 									"preset_data" : [ 										{
 											"number" : 1,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 4, 6, "obj-18", "hoa.boids", "attractpoint", 1.370614, 1.30551, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.22, 5, "obj-18", "hoa.boids", "attract", 0.28, 5, "obj-18", "hoa.boids", "match", 0.92, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 29.0, 5, "obj-18", "hoa.boids", "edgedist", 0.48, 5, "obj-18", "hoa.boids", "speed", 37.0, 5, "obj-18", "hoa.boids", "inertia", 0.5, 5, "obj-18", "hoa.boids", "accel", 0.39, 5, "obj-18", "hoa.boids", "prefdist", 0.25 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 4, 6, "obj-18", "hoa.boids", "attractpoint", 1.370614, 1.30551, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.22, 5, "obj-18", "hoa.boids", "attract", 0.28, 5, "obj-18", "hoa.boids", "match", 0.92, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 1.0, 5, "obj-18", "hoa.boids", "inertia", 0.5, 5, "obj-18", "hoa.boids", "accel", 0.39, 5, "obj-18", "hoa.boids", "prefdist", 0.25 ]
 										}
 , 										{
 											"number" : 2,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 4, 6, "obj-18", "hoa.boids", "attractpoint", -1.7, 1.241, 8, "obj-18", "hoa.boids", "flyrect", -2.0, 2.0, 2.0, -2.0, 5, "obj-18", "hoa.boids", "neigbhors", 4, 5, "obj-18", "hoa.boids", "minspeed", 0.69, 5, "obj-18", "hoa.boids", "maxspeed", 1.17, 5, "obj-18", "hoa.boids", "center", 0.51, 5, "obj-18", "hoa.boids", "attract", 0.156, 5, "obj-18", "hoa.boids", "match", 0.97, 5, "obj-18", "hoa.boids", "avoid", 1.26, 5, "obj-18", "hoa.boids", "wall", 25.4, 5, "obj-18", "hoa.boids", "edgedist", 0.56, 5, "obj-18", "hoa.boids", "speed", 41.0, 5, "obj-18", "hoa.boids", "inertia", 0.63, 5, "obj-18", "hoa.boids", "accel", 0.63, 5, "obj-18", "hoa.boids", "prefdist", 0.17 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 4, 6, "obj-18", "hoa.boids", "attractpoint", -1.7, 1.241, 8, "obj-18", "hoa.boids", "flyrect", -2.0, 2.0, 2.0, -2.0, 5, "obj-18", "hoa.boids", "neigbhors", 4, 5, "obj-18", "hoa.boids", "minspeed", 0.69, 5, "obj-18", "hoa.boids", "maxspeed", 1.17, 5, "obj-18", "hoa.boids", "center", 0.51, 5, "obj-18", "hoa.boids", "attract", 0.156, 5, "obj-18", "hoa.boids", "match", 0.97, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 1.0, 5, "obj-18", "hoa.boids", "inertia", 0.63, 5, "obj-18", "hoa.boids", "accel", 0.63, 5, "obj-18", "hoa.boids", "prefdist", 0.17 ]
 										}
 , 										{
 											"number" : 3,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 4, 6, "obj-18", "hoa.boids", "attractpoint", 2.604167, -2.915982, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.22, 5, "obj-18", "hoa.boids", "attract", 0.28, 5, "obj-18", "hoa.boids", "match", 0.92, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 29.0, 5, "obj-18", "hoa.boids", "edgedist", 0.48, 5, "obj-18", "hoa.boids", "speed", 56.0, 5, "obj-18", "hoa.boids", "inertia", 0.5, 5, "obj-18", "hoa.boids", "accel", 0.39, 5, "obj-18", "hoa.boids", "prefdist", 0.25 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 4, 6, "obj-18", "hoa.boids", "attractpoint", 2.604167, -2.915982, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.22, 5, "obj-18", "hoa.boids", "attract", 0.28, 5, "obj-18", "hoa.boids", "match", 0.92, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 1.0, 5, "obj-18", "hoa.boids", "inertia", 0.5, 5, "obj-18", "hoa.boids", "accel", 0.39, 5, "obj-18", "hoa.boids", "prefdist", 0.25 ]
 										}
 , 										{
 											"number" : 9,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 0.265467, 1.3898, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 4, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.0, 5, "obj-18", "hoa.boids", "attract", 0.73, 5, "obj-18", "hoa.boids", "match", 1.0, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 1.0, 5, "obj-18", "hoa.boids", "edgedist", 1.0, 5, "obj-18", "hoa.boids", "speed", 12.5, 5, "obj-18", "hoa.boids", "inertia", 0.446, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 1.0 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 0.265467, 1.3898, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 4, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.0, 5, "obj-18", "hoa.boids", "attract", 0.73, 5, "obj-18", "hoa.boids", "match", 1.0, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 1.0, 5, "obj-18", "hoa.boids", "inertia", 0.446, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 1.0 ]
 										}
 , 										{
 											"number" : 10,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 0.265467, 1.3898, 8, "obj-18", "hoa.boids", "flyrect", -26.799999, 14.0, 25.200001, -25.0, 5, "obj-18", "hoa.boids", "neigbhors", 4, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.0, 5, "obj-18", "hoa.boids", "attract", 0.73, 5, "obj-18", "hoa.boids", "match", 1.0, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 1.0, 5, "obj-18", "hoa.boids", "edgedist", 1.0, 5, "obj-18", "hoa.boids", "speed", 1.0, 5, "obj-18", "hoa.boids", "inertia", 0.446, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 1.0 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 0.265467, 1.3898, 8, "obj-18", "hoa.boids", "flyrect", -26.799999, 14.0, 25.200001, -25.0, 5, "obj-18", "hoa.boids", "neigbhors", 4, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.21, 5, "obj-18", "hoa.boids", "center", 0.0, 5, "obj-18", "hoa.boids", "attract", 0.73, 5, "obj-18", "hoa.boids", "match", 1.0, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 1.0, 5, "obj-18", "hoa.boids", "inertia", 0.446, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 1.0 ]
 										}
 , 										{
 											"number" : 11,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", -0.014303, 0.018916, 8, "obj-18", "hoa.boids", "flyrect", -24.700001, 14.0, 25.200001, -25.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 1.0, 5, "obj-18", "hoa.boids", "attract", 0.25, 5, "obj-18", "hoa.boids", "match", 6.18, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 1000.0, 5, "obj-18", "hoa.boids", "edgedist", 0.0, 5, "obj-18", "hoa.boids", "speed", 0.03, 5, "obj-18", "hoa.boids", "inertia", 1.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.8 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", -0.014303, 0.018916, 8, "obj-18", "hoa.boids", "flyrect", -24.700001, 14.0, 25.200001, -25.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 1.0, 5, "obj-18", "hoa.boids", "attract", 0.25, 5, "obj-18", "hoa.boids", "match", 6.18, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 0.03, 5, "obj-18", "hoa.boids", "inertia", 1.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.8 ]
 										}
 , 										{
 											"number" : 12,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 2.668975, 1.386841, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 1.0, 5, "obj-18", "hoa.boids", "attract", 0.25, 5, "obj-18", "hoa.boids", "match", 6.18, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 0.0, 5, "obj-18", "hoa.boids", "edgedist", 0.0, 5, "obj-18", "hoa.boids", "speed", 0.14, 5, "obj-18", "hoa.boids", "inertia", 1.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.8 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", 2.668975, 1.386841, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 1, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 1.0, 5, "obj-18", "hoa.boids", "attract", 0.25, 5, "obj-18", "hoa.boids", "match", 6.18, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 0.14, 5, "obj-18", "hoa.boids", "inertia", 1.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.8 ]
 										}
 , 										{
 											"number" : 13,
-											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", -1.297383, 1.729229, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 2, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 0.259, 5, "obj-18", "hoa.boids", "attract", 0.68, 5, "obj-18", "hoa.boids", "match", -0.76, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "wall", 1000000.0, 5, "obj-18", "hoa.boids", "edgedist", 0.0, 5, "obj-18", "hoa.boids", "speed", 0.062, 5, "obj-18", "hoa.boids", "inertia", 2.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.89 ]
+											"data" : [ 5, "obj-18", "hoa.boids", "nboids", 50, 6, "obj-18", "hoa.boids", "attractpoint", -1.297383, 1.729229, 8, "obj-18", "hoa.boids", "flyrect", -5.0, 5.0, 5.0, -5.0, 5, "obj-18", "hoa.boids", "neigbhors", 2, 5, "obj-18", "hoa.boids", "minspeed", 0.5, 5, "obj-18", "hoa.boids", "maxspeed", 1.0, 5, "obj-18", "hoa.boids", "center", 0.259, 5, "obj-18", "hoa.boids", "attract", 0.68, 5, "obj-18", "hoa.boids", "match", -0.76, 5, "obj-18", "hoa.boids", "avoid", 1.0, 5, "obj-18", "hoa.boids", "speed", 0.062, 5, "obj-18", "hoa.boids", "inertia", 2.0, 5, "obj-18", "hoa.boids", "accel", 0.000001, 5, "obj-18", "hoa.boids", "prefdist", 0.89 ]
 										}
  ]
 								}
@@ -163,7 +163,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 42.0, 657.0, 234.0, 17.0 ],
-									"text" : "1 car nan nan"
+									"text" : "3 car 0.361831 -3.968564"
 								}
 
 							}
@@ -2611,7 +2611,7 @@
 										"loudspeakers" : 16,
 										"ls" : 16,
 										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 16,
@@ -2777,30 +2777,31 @@
 , 							{
 								"box" : 								{
 									"accel" : 0.000001,
-									"attract" : 0.354,
+									"attract" : 0.68,
 									"attractorcolor" : [ 0.366512, 0.416858, 0.8, 1.0 ],
-									"attractpoint" : [ -0.07966, 0.105357 ],
-									"avoid" : 0.57,
+									"attractpoint" : [ -1.297383, 1.729229 ],
+									"avoid" : 1.0,
 									"boidscolor" : [ 0.265146, 0.279994, 0.265865, 1.0 ],
-									"center" : 0.4,
+									"center" : 0.259,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"flyrectcolor" : [ 0.660555, 0.278493, 0.311128, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-18",
-									"inertia" : 1.0,
-									"match" : 0.0,
+									"inertia" : 2.0,
+									"match" : -0.76,
 									"maxclass" : "hoa.boids",
 									"maxspeed" : 1.0,
 									"minspeed" : 0.5,
+									"nboids" : 50,
 									"neigbhors" : 2,
 									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "list", "list", "list" ],
+									"numoutlets" : 2,
+									"outlettype" : [ "list", "list" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 37.0, 315.625, 307.875, 307.875 ],
-									"prefdist" : 0.83,
-									"speed" : 0.08,
+									"prefdist" : 0.89,
+									"speed" : 0.062,
 									"zoom" : 0.158
 								}
 
@@ -5868,7 +5869,7 @@
 									"destination" : [ "obj-70", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-18", 2 ]
+									"source" : [ "obj-18", 1 ]
 								}
 
 							}
