@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 44.0, 1280.0, 706.0 ],
+		"rect" : [ 0.0, 44.0, 838.0, 706.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -46,7 +46,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1280.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -545,7 +545,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1280.0, 680.0 ],
+						"rect" : [ 0.0, 70.0, 838.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -576,8 +576,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 558.599976, 466.0, 244.5, 32.0 ],
-									"text" : "Relations entre l'ordre de décomposition et le nombre minimum de haut-parleurs",
+									"patching_rect" : [ 558.599976, 466.0, 251.0, 32.0 ],
+									"text" : "Relations between the order of decomposition and the minimum number of loudspeakers.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -724,12 +724,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-47",
-									"linecount" : 24,
+									"linecount" : 21,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 807.0, 317.0 ],
-									"text" : "En ambisonie, le décodage est l'opération qui consiste à synthetiser les signaux attribués aux haut-parleurs. Comme dans toute les techniques de spatialisation, cette opération comporte des avantages et certaines restrictions.\n\nL'ambisonie permet de synthetiser plusieurs champs sonores et de les restituer via une seule opération de  décodage offrant ainsi l'avantage de pouvoir encoder une multitude de sources tout en utilisant qu'un seul décodage et ainsi diminuer le CPU.\n\nSéparer ces deux processus, permet non seulement de réaliser de nombreuse opérations dans le domaine des harmoniques circualires mais aussi de pouvoir enregistrer le champ sonore dans le domaine des harmoniques circulaires pour par la suite le restituer sur différentes configurations de haut-parleurs.\n\nL'ambisonie offre un rendu homogène du champ sonore. Contrairement à d'autres techniques de spatialisation où la résolution angulaire des sources sonores varie en fonction de la direction de la source, l'ambisonie offre une résolution angulaire constante sur l'ensemble du cercle quite à diminuer la qualité de resitution.\n\nLe système de restitution en ambisonie est restreint par l'ordre de décomposition et par les principes acoustiques sous-jacents à ces techniques. Le nombre de haut-parleurs doit être inférieur ou égal au nombre d'harmoniques. Ainsi le nombre minimum de haut-parleurs est de 3 pour un ordre de décomposition 1. De plus, les haut-parleurs doivent être placés sur un cercle et à distance égale les uns des autres. Notons néanmoins que toutes ces restrictions peuvent être contournées au détriment de la qualité de restitution du champ sonore. Ainsi, il est possible de projeter le champ sonore sur des sytèmes allant de la stéréophonie à une infinité de haut-parleurs en passant par toutes les configurations irrégulières telles que le 5.1. (voir l'objet hoa.decoder~)\n\nEn ambisonie, l'auditeur doit être idéalement placé au cente du cercle sinon l'image du champ sonore est déformée. Notons néanmoins que l'utilisation des optimisations maxRe et inPhase (voir l'objet hoa.optim~) permettent de pallier cette contrainte au détriment de la résolution spatiale et offrent ainsi la possibilité d'un auditoire répandu sur l'ensemble du cercle.",
+									"patching_rect" : [ 7.0, 83.0, 810.0, 279.0 ],
+									"text" : "In ambisonics, decoding is the operation which consists in synthesizing the signals assigned to the loudspeakers. As in any spatial techniques, this operation has advantages and limitations.\n\nThe ambisonics can synthesize various sound fields and restore them via a single decoding operation offering the advantage of being able to encode a variety of sources while using one decoding and thus reduce the CPU.\n\nSeparate these two processes can not only perform many operations in the field of circular harmonics but also to record the sound field in the field of harmonics circulars thereafter, restore it on different configurations of speakers.\n\nThe ambisonics offers a seamless rendering of the sound field. Unlike other techniques where the angular spatial resolution of the sound sources depends on the direction of the source, ambisonics provides a constant angular resolution across the circle quite diminish the quality of restitution.\n\nThe restitution system in ambisonics is restricted by the order of decomposition and acoustic principles underlying these techniques. The number of loudspeakers must be smaller than or equal to the number of harmonics. Thus the minimum number of loudspeakers is 3 for an order of decomposition of 1. In addition, the loudspeakers must be placed on a circle at equal distance from each other. However, note that these restrictions can be circumvented at the expense of the quality of reproduction of the sound field. Thus, it is possible to project the sound field of systems ranging from stereo to an infinity of loudspeakers through all irregular configurations such as 5.1. (see hoa.decoder~ object).\n\nIn ambisonics, the auditor should be ideally placed in the very center of the circle or the sound field image will be distorted. Note however that the use of the maxRe or inPhase optimizations (see hoa.optim~ object) are used to overcome this constraint at the expense of spatial resolution and offer the possibility of an audience spread across the circle.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -742,7 +742,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 807.0, 317.0 ],
+									"patching_rect" : [ 7.0, 83.0, 807.0, 279.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -774,7 +774,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 688.599976, 529.0, 95.0, 32.0 ],
-									"text" : "Nombre de haut-parleurs"
+									"text" : "Number of loudspeakers :"
 								}
 
 							}
@@ -826,12 +826,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-32",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 688.599976, 656.0, 114.5, 45.0 ],
-									"text" : "Ordre de décomposition maximum (optimal)"
+									"patching_rect" : [ 688.599976, 656.0, 120.0, 32.0 ],
+									"text" : "Maximum (optimal) decomposition order :"
 								}
 
 							}
@@ -858,7 +858,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 688.599976, 656.0, 114.5, 45.0 ],
+									"patching_rect" : [ 688.599976, 656.0, 114.5, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -918,7 +918,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 558.599976, 656.0, 103.0, 32.0 ],
-									"text" : "Nombre minimum de haut-parleurs"
+									"text" : "Minimum number of loudspeakers."
 								}
 
 							}
@@ -947,7 +947,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 558.599976, 529.0, 102.0, 32.0 ],
-									"text" : "Ordre de décomposition"
+									"text" : "decomposition order :"
 								}
 
 							}
@@ -1686,7 +1686,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1280.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1758,8 +1758,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 442.375, 419.5, 217.0, 45.0 ],
-									"text" : "Calcul des gains et synthèse des signaux dépendant des harmoniques pour une ordre de décomposition 7",
+									"patching_rect" : [ 442.375, 419.5, 229.0, 45.0 ],
+									"text" : "Calculation of gains and synthesis of harmonics dependent signals for an order of decomposition 7.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1788,8 +1788,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 470.375, 346.0, 54.625, 32.0 ],
-									"text" : "Signal à encoder",
+									"patching_rect" : [ 470.375, 346.0, 60.0, 32.0 ],
+									"text" : "Signal to encode",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1819,7 +1819,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 267.424988, 478.5, 78.075012, 32.0 ],
-									"text" : "Harmonique \n1",
+									"text" : "Harmonic\n1",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1835,7 +1835,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 162.699982, 478.5, 78.075012, 32.0 ],
-									"text" : "Harmonique -1",
+									"text" : "Harmonic\n-1",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1851,7 +1851,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 59.0, 478.5, 76.125, 32.0 ],
-									"text" : "Harmonique 0",
+									"text" : "Harmonic\n0",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1862,11 +1862,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-35",
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 300.5, 397.0, 97.625, 19.0 ],
-									"text" : "Calcul des gains",
+									"patching_rect" : [ 300.5, 397.0, 97.625, 32.0 ],
+									"text" : "Calculation of gains",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1949,8 +1950,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 814.0, 110.0 ],
-									"text" : "En ambisonie, encoder une source sonore consiste consiste à donner un caractère ponctuel sur le plan spatial à la source sonore. La source sonore, une fois restituée, peut, suite à cette opération, être perceptivement définie comme provenant d’un point précis de l’espace.\n\nEncoder une source sonore dans le domaine des harmoniques circulaires revient à synthétiser les signaux dépendant des harmoniques circulaires en fonction de l'angle d'incidence que l'on souhaite donner à la source sonore. \n\nCette opération consiste à attribuer le signal de la source sonore à encoder à chacun des signaux dépendant des harmoniques circulaires et à appliquer un gain à chacun de ces signaux en fonction de l'indice de l'harmonique dont ils dépendent et de l'angle d'encodage.",
+									"patching_rect" : [ 7.0, 68.0, 815.0, 110.0 ],
+									"text" : "In ambisonics, encode a sound source consists of giving a punctual character in a spatial meaning to the sound source. The sound source, once restored, can, following this operation, be perceptually defined as coming from a specific point in space.\n\nEncode a sound source in the circular harmonics field returns to synthesize circular harmonics dependent signals depending on the angle of incidence given to the sound source.\n\nThis operation consists in assigning the signal from the sound source to be encoded to each of the circular harmonics dependent signals and applying a gain to each of these signals as a function of the indices of the harmonic which they depend on and of the encoding angle.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -1994,8 +1995,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 59.0, 346.0, 54.625, 32.0 ],
-									"text" : "Signal à encoder",
+									"patching_rect" : [ 59.0, 346.0, 60.0, 32.0 ],
+									"text" : "Signal to encode",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2052,7 +2053,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 672.375, 465.5, 113.25, 19.0 ],
-									"text" : "dblclick pour ouvrir",
+									"text" : "dblclick to open",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2068,7 +2069,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 694.75, 346.0, 126.25, 32.0 ],
-									"text" : "Angle d'encodage en radian",
+									"text" : "encoding angle in radian",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2126,7 +2127,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 208.0, 399.0, 97.0 ],
-									"text" : "Pour un ordre de décomposition 1, le champ sonore est représenté par 3 harmoniques circulaires. Les gains à appliqués aux signaux dépendant des harmoniques dépendant de l'angle d'encodage :\n\nLe gain de l'harmonique 0 est 1.\nLe gain de l'harmonique -1 est le sinus de l'angle.\nLe gain de l'harmonique 1 est le cosinus de l'angle.",
+									"text" : "For a decomposition order of one, the sound field is represented by three circular harmonics. The gains of harmonics dependent signals depends on the encoding angle :\n\nThe gain of the harmonic 0 is 1.\nThe gain of the harmonic -1 is equal to the sinus of the angle.\nThe gain of the harmonic 1 is equal to the cosinus of the angle.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2142,7 +2143,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 204.375, 346.0, 126.25, 32.0 ],
-									"text" : "Angle d'encodage en radian",
+									"text" : "encoding angle in radian",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2326,7 +2327,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 429.0, 208.0, 392.0, 71.0 ],
-									"text" : "Pour une décompostion à des ordres supérieurs, les gain G des harmoniques d'indice i et d'ordre n et selon un angle θ sont :\n\nSi i > 0,\nG(n,θ)= cos⁡(nθ)\n",
+									"text" : "For decomposition at higher orders, the gain G of the harmonics of order i and index n and at an angle θ are:\n\nIf i > 0,\nG(n,θ) = cos⁡(nθ)\n",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2342,7 +2343,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 429.0, 273.0, 198.0, 32.0 ],
-									"text" : "Sinon\nG(n,θ)= sin⁡(nθ)\n",
+									"text" : "else\nG(n,θ) = sin⁡(nθ)\n",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2712,7 +2713,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 1280.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2797,7 +2798,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 233.5, 361.0, 20.0, 20.0 ]
+									"patching_rect" : [ 247.5, 361.0, 20.0, 20.0 ]
 								}
 
 							}
@@ -2807,12 +2808,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-4",
-									"linecount" : 12,
+									"linecount" : 11,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 809.650024, 162.0 ],
-									"text" : "L'ordre de décomposition influence sur la qualité de resititution du champ sonore. Plus l'ordre de décomposition est élevé, plus le champ sonore est représenté par un nombre important d'harmoniques circulaires et plus la \"résolution spatiale\" du champ sonore augmente. \n\nLa \"qualité\" ou la \"pertinence\" des traitements ambisoniques varie en fonction de la résolution spatiale. Lors de l'encodage d'une source sonore dans le domaine des harmoniques circulaires, la précision avec laquelle l'auditeur perçoit une source sonore dépend ainsi de la résolution spatiale du champ sonore. \n\nPlus l'ordre de décomposition augmente, plus l'auditeur pourra définir avec précision la direction d'une source sonore. Il est d'usage de parlé de \"résolution angulaire\" afin de qualifié la précision avec laquelle l'auditeur perçoit une source sonore.\n\nLa \"résolution spatiale\" est une notion plus générale permettant de qualifier des champs sonores plus variés et plus complexes où le champ sonore n'est pas forcément composé de sources sonores ponctuelles sur lesquelles nous reviendrons par la suite.",
+									"patching_rect" : [ 7.0, 68.0, 809.650024, 149.0 ],
+									"text" : "The order of decomposition affects the quality of the sound field resititution. More the order of decomposition is high, more the sound field is represented by a large number of circular harmonics and the \"spatial resolution\" of the sound field increases.\n\n\"Quality\" or \"relevance\" of ambisonic processings varies depending on the spatial resolution. During the encoding of a sound source in the circular harmonics field, the precision with which the listener perceives a sound source depends on the spatial resolution of the sound field.\n\nMore the decomposition order increases, more the listener can clearly define the direction of a sound source. It is customary to talk about \"angular resolution\" to describe the precision with which the listener perceives a sound source.\n\nThe \"spatial resolution\" is a broader concept to qualify more varied and complex sound field where sound field is not necessarily composed of punctual source sources (eg. diffuse sound field).",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2825,7 +2826,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 809.650024, 162.0 ],
+									"patching_rect" : [ 7.0, 68.0, 809.650024, 149.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -2841,7 +2842,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 252.5, 330.0, 70.0, 19.0 ],
+									"patching_rect" : [ 266.5, 330.0, 70.0, 19.0 ],
 									"text" : "loadmess 7"
 								}
 
@@ -3123,7 +3124,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 252.5, 390.0, 69.0, 19.0 ],
+									"patching_rect" : [ 266.5, 390.0, 69.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -3153,7 +3154,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "int", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 252.5, 361.0, 50.0, 19.0 ]
+									"patching_rect" : [ 266.5, 361.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -3168,7 +3169,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 693.650024, 426.0, 123.0, 45.0 ],
-									"text" : "Ordres fractionnaire :\n0 - ordre minimal\n1 - ordre maximal",
+									"text" : "fractional orders :\n0 - minimal order\n1 - maximal order",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3226,7 +3227,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 431.650024, 372.0, 42.0, 19.0 ],
+									"patching_rect" : [ 431.650024, 390.0, 42.0, 19.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -3269,8 +3270,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 236.5, 323.0, 95.0, 32.0 ],
-									"text" : "Ordre maximum actif :",
+									"patching_rect" : [ 250.5, 323.0, 95.0, 32.0 ],
+									"text" : "Maximum working order:",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3281,12 +3282,12 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-8",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 431.650024, 310.0, 317.250031, 45.0 ],
-									"text" : "Il est  possible d'envisager des ordres fractionnaires, grâce auxquels la résolution angulaire d'une source sonore augmente de manière linéaire.",
+									"patching_rect" : [ 431.650024, 323.0, 323.0, 32.0 ],
+									"text" : "It is possible to consider fractional orders, through which the angular resolution of a sound source increases linearly.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3315,8 +3316,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 310.0, 209.0, 45.0 ],
-									"text" : "La résolution spatiale augmente de manière logarithmique avec l'ordre de décomposition. ",
+									"patching_rect" : [ 7.0, 323.0, 209.0, 45.0 ],
+									"text" : "The spatial resolution increases logarithmically with the decomposition order.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3330,7 +3331,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 25.0, 372.0, 42.0, 19.0 ],
+									"patching_rect" : [ 25.0, 390.0, 42.0, 19.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -3360,7 +3361,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 264.0, 809.650024, 32.0 ],
-									"text" : "Cet exemple permet de varier l'ordre de décompostion en annulant les contributions des harmoniques circulaires supérieures à un certain ordre, ce qui engendre une diminution de la résolution spatiale du champ sonore et dans le cas d'une source sonore ponctuelle, une diminution de la réolution angulaire.",
+									"text" : "This example change the order of decomposition by canceling the contributions of circular harmonics above a certain order, which causes a decrease in the spatial resolution of the sound field, and in the case of a punctual sound source, a decrease of the angular resolution.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3401,7 +3402,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 236.5, 323.0, 93.0, 32.0 ],
+									"patching_rect" : [ 250.5, 323.0, 93.0, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -3415,7 +3416,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 310.0, 209.0, 45.0 ],
+									"patching_rect" : [ 7.0, 323.0, 209.0, 45.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -3429,7 +3430,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 431.650024, 310.0, 317.250031, 45.0 ],
+									"patching_rect" : [ 431.650024, 323.0, 317.250031, 32.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -3786,7 +3787,7 @@
 									"destination" : [ "obj-7", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 262.0, 416.0, 35.0, 416.0, 35.0, 421.0, 34.5, 421.0 ],
+									"midpoints" : [ 276.0, 416.0, 35.0, 416.0, 35.0, 421.0, 34.5, 421.0 ],
 									"source" : [ "obj-32", 0 ]
 								}
 
@@ -4078,7 +4079,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1280.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4109,7 +4110,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 290.0, 814.0, 19.0 ],
-									"presentation_rect" : [ 377.0, 352.0, 0.0, 0.0 ],
 									"text" : "In this example, each signal dependent on a circular harmonic is controlled independently to enhance the spatial characteristics of circular harmonics.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -4124,7 +4124,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 290.0, 814.0, 19.0 ],
-									"presentation_rect" : [ 377.0, 352.0, 0.0, 0.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -5554,7 +5553,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 68.0, 814.0, 201.0 ],
+									"patching_rect" : [ 7.0, 68.0, 817.0, 201.0 ],
 									"text" : "Circular harmonics are dependent on an order n and an index i and take as variable an angle α in radian.\n\nEach order n includes a so-called negative harmonic whose index is n and a positive harmonic whose index is -n except 0, which has only one harmonic index 0 considered positive. \n\nThese circular functions can be represented on a two-dimensional space. Depending on the angle α, the functions are positive (red) or negative (blue).\n\nThe decomposition of a sound field in the circular harmonics field used by ambisonics technology is performed according to an order of decomposition N.\n\nA given decomposition order N \"includes\" all less than or equal to N (order 0 to N). The sound field is then encoded by 2 n +1 harmonics whose indices range are from -n to n and are usually interleaved.\n\nSo, for an order of decomposition 7, there are 15 harmonics whose indices are : 0, -1, 1, -2, 2, -3, 3, ... , -7, 7.\n\nHarmonic 0 is omnidirectional, The number of lobes and their directivities increases proportionally as the harmonics order increase.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -5967,7 +5966,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1280.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,

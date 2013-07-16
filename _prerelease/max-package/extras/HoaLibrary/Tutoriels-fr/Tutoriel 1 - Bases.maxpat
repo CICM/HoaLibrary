@@ -545,7 +545,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
+						"rect" : [ 131.0, 70.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -729,7 +729,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 68.0, 807.0, 317.0 ],
-									"text" : "En ambisonie, le décodage est l'opération qui consiste à synthetiser les signaux attribués aux haut-parleurs. Comme dans toute les techniques de spatialisation, cette opération comporte des avantages et certaines restrictions.\n\nL'ambisonie permet de synthetiser plusieurs champs sonores et de les restituer via une seule opération de  décodage offrant ainsi l'avantage de pouvoir encoder une multitude de sources tout en utilisant qu'un seul décodage et ainsi diminuer le CPU.\n\nSéparer ces deux processus, permet non seulement de réaliser de nombreuse opérations dans le domaine des harmoniques circualires mais aussi de pouvoir enregistrer le champ sonore dans le domaine des harmoniques circulaires pour par la suite le restituer sur différentes configurations de haut-parleurs.\n\nL'ambisonie offre un rendu homogène du champ sonore. Contrairement à d'autres techniques de spatialisation où la résolution angulaire des sources sonores varie en fonction de la direction de la source, l'ambisonie offre une résolution angulaire constante sur l'ensemble du cercle quite à diminuer la qualité de resitution.\n\nLe système de restitution en ambisonie est restreint par l'ordre de décomposition et par les principes acoustiques sous-jacents à ces techniques. Le nombre de haut-parleurs doit être inférieur ou égal au nombre d'harmoniques. Ainsi le nombre minimum de haut-parleurs est de 3 pour un ordre de décomposition 1. De plus, les haut-parleurs doivent être placés sur un cercle et à distance égale les uns des autres. Notons néanmoins que toutes ces restrictions peuvent être contournées au détriment de la qualité de restitution du champ sonore. Ainsi, il est possible de projeter le champ sonore sur des sytèmes allant de la stéréophonie à une infinité de haut-parleurs en passant par toutes les configurations irrégulières telles que le 5.1. (voir l'objet hoa.decoder~)\n\nEn ambisonie, l'auditeur doit être idéalement placé au cente du cercle sinon l'image du champ sonore est déformée. Notons néanmoins que l'utilisation des optimisations maxRe et inPhase (voir l'objet hoa.optim~) permettent de pallier cette contrainte au détriment de la résolution spatiale et offrent ainsi la possibilité d'un auditoire répandu sur l'ensemble du cercle.",
+									"text" : "En ambisonie, le décodage est l'opération qui consiste à synthetiser les signaux attribués aux haut-parleurs. Comme dans toute les techniques de spatialisation, cette opération comporte des avantages et certaines restrictions.\n\nL'ambisonie permet de synthetiser plusieurs champs sonores et de les restituer via une seule opération de  décodage offrant ainsi l'avantage de pouvoir encoder une multitude de sources tout en utilisant qu'un seul décodage et ainsi diminuer le CPU.\n\nSéparer ces deux processus, permet non seulement de réaliser de nombreuse opérations dans le domaine des harmoniques circulaires mais aussi de pouvoir enregistrer le champ sonore dans le domaine des harmoniques circulaires pour par la suite le restituer sur différentes configurations de haut-parleurs.\n\nL'ambisonie offre un rendu homogène du champ sonore. Contrairement à d'autres techniques de spatialisation où la résolution angulaire des sources sonores varie en fonction de la direction de la source, l'ambisonie offre une résolution angulaire constante sur l'ensemble du cercle quite à diminuer la qualité de restitution.\n\nLe système de restitution en ambisonie est restreint par l'ordre de décomposition et par les principes acoustiques sous-jacents à ces techniques. Le nombre de haut-parleurs doit être inférieur ou égal au nombre d'harmoniques. Ainsi le nombre minimum de haut-parleurs est de 3 pour un ordre de décomposition 1. De plus, les haut-parleurs doivent être placés sur un cercle et à distance égale les uns des autres. Notons néanmoins que toutes ces restrictions peuvent être contournées au détriment de la qualité de restitution du champ sonore. Ainsi, il est possible de projeter le champ sonore sur des sytèmes allant de la stéréophonie à une infinité de haut-parleurs en passant par toutes les configurations irrégulières telles que le 5.1. (voir l'objet hoa.decoder~)\n\nEn ambisonie, l'auditeur doit être idéalement placé au centre du cercle sinon l'image du champ sonore est déformée. Notons néanmoins que l'utilisation des optimisations maxRe et inPhase (voir l'objet hoa.optim~) permettent de pallier cette contrainte au détriment de la résolution spatiale et offrent ainsi la possibilité d'un auditoire répandu sur l'ensemble du cercle.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2126,7 +2126,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 208.0, 399.0, 97.0 ],
-									"text" : "Pour un ordre de décomposition 1, le champ sonore est représenté par 3 harmoniques circulaires. Les gains à appliqués aux signaux dépendant des harmoniques dépendant de l'angle d'encodage :\n\nLe gain de l'harmonique 0 est 1.\nLe gain de l'harmonique -1 est le sinus de l'angle.\nLe gain de l'harmonique 1 est le cosinus de l'angle.",
+									"text" : "Pour un ordre de décomposition 1, le champ sonore est représenté par 3 harmoniques circulaires. Les gains à appliquer aux signaux dépendant des harmoniques dépendent de l'angle d'encodage :\n\nLe gain de l'harmonique 0 est 1.\nLe gain de l'harmonique -1 est le sinus de l'angle.\nLe gain de l'harmonique 1 est le cosinus de l'angle.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -2812,7 +2812,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.0, 68.0, 809.650024, 162.0 ],
-									"text" : "L'ordre de décomposition influence sur la qualité de resititution du champ sonore. Plus l'ordre de décomposition est élevé, plus le champ sonore est représenté par un nombre important d'harmoniques circulaires et plus la \"résolution spatiale\" du champ sonore augmente. \n\nLa \"qualité\" ou la \"pertinence\" des traitements ambisoniques varie en fonction de la résolution spatiale. Lors de l'encodage d'une source sonore dans le domaine des harmoniques circulaires, la précision avec laquelle l'auditeur perçoit une source sonore dépend ainsi de la résolution spatiale du champ sonore. \n\nPlus l'ordre de décomposition augmente, plus l'auditeur pourra définir avec précision la direction d'une source sonore. Il est d'usage de parlé de \"résolution angulaire\" afin de qualifié la précision avec laquelle l'auditeur perçoit une source sonore.\n\nLa \"résolution spatiale\" est une notion plus générale permettant de qualifier des champs sonores plus variés et plus complexes où le champ sonore n'est pas forcément composé de sources sonores ponctuelles sur lesquelles nous reviendrons par la suite.",
+									"text" : "L'ordre de décomposition influence sur la qualité de resititution du champ sonore. Plus l'ordre de décomposition est élevé, plus le champ sonore est représenté par un nombre important d'harmoniques circulaires et plus la \"résolution spatiale\" du champ sonore augmente. \n\nLa \"qualité\" ou la \"pertinence\" des traitements ambisoniques varie en fonction de la résolution spatiale. Lors de l'encodage d'une source sonore dans le domaine des harmoniques circulaires, la précision avec laquelle l'auditeur perçoit une source sonore dépend ainsi de la résolution spatiale du champ sonore. \n\nPlus l'ordre de décomposition augmente, plus l'auditeur pourra définir avec précision la direction d'une source sonore. Il est d'usage de parler de \"résolution angulaire\" afin de qualifié la précision avec laquelle l'auditeur perçoit une source sonore.\n\nLa \"résolution spatiale\" est une notion plus générale permettant de qualifier des champs sonores plus variés et plus complexes où le champ sonore n'est pas forcément composé de sources sonores ponctuelles sur lesquelles nous reviendrons par la suite.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -3359,8 +3359,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 264.0, 809.650024, 32.0 ],
-									"text" : "Cet exemple permet de varier l'ordre de décompostion en annulant les contributions des harmoniques circulaires supérieures à un certain ordre, ce qui engendre une diminution de la résolution spatiale du champ sonore et dans le cas d'une source sonore ponctuelle, une diminution de la réolution angulaire.",
+									"patching_rect" : [ 7.0, 264.0, 817.0, 32.0 ],
+									"text" : "Cet exemple permet de varier l'ordre de décomposition en annulant les contributions des harmoniques circulaires supérieures à un certain ordre, ce qui engendre une diminution de la résolution spatiale du champ sonore et dans le cas d'une source sonore ponctuelle, une diminution de la résolution angulaire.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
@@ -4078,7 +4078,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 131.0, 70.0, 896.0, 771.0 ],
+						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,

@@ -66,6 +66,13 @@ typedef struct Point2d {
 	double		y;
 } Point2d;
 
+/*
+typedef struct Box2D {
+	double		left, right;
+	double		top, bottom;
+} Box2D;
+*/
+
 typedef struct Box2D {
 	double		left, right;
 	double		top, bottom;

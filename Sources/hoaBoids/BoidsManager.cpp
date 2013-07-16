@@ -402,7 +402,7 @@ double BoidsManager::DistSqrToPt(Point2d firstPoint, Point2d secondPoint)
 }
 
 
-
+// --------- //
 
 void BoidsManager::boid_set_pos(long index, double posX, double posY)
 {
