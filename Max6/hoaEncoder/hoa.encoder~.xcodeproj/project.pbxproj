@@ -956,6 +956,11 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 				PRODUCT_NAME = "hoa.encoder~";
@@ -984,6 +989,11 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(C74SUPPORT)/max-includes\"",
+					"\"$(C74SUPPORT)/msp-includes\"",
+					"\"$(C74SUPPORT)/jit-includes\"",
+				);
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
 				PRODUCT_NAME = "hoa.encoder~";

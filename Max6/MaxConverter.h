@@ -41,25 +41,39 @@ extern "C"
 #include "ext_parameter.h"
 }
 
-t_jrgba cicmColorToMaxColor(color aCicmColor)
-{
-    t_jrgba maxColor;
-    maxColor.red = aCicmColor.red;
-    maxColor.green = aCicmColor.green;
-    maxColor.blue = aCicmColor.blue;
-    maxColor.alpha = aCicmColor.alpha;
-    return maxColor;
-}
+class CicmMax {
+public:
+    static t_jrgba cicmColorToMaxColor(color aCicmColor)
+    {
+        t_jrgba maxColor;
+        maxColor.red = aCicmColor.red;
+        maxColor.green = aCicmColor.green;
+        maxColor.blue = aCicmColor.blue;
+        maxColor.alpha = aCicmColor.alpha;
+        return maxColor;
+    }
+    
+    static t_jrgba jrgba_addContrast(t_jrgba baseColor, double contrast, bool preserveAlpha = true)
+    {
+        t_jrgba maxColor = baseColor;
+        maxColor.red = Tools::clip(maxColor.red += contrast, 0., 1.);
+        maxColor.green = Tools::clip(maxColor.green += contrast, 0., 1.);
+        maxColor.blue = Tools::clip(maxColor.blue += contrast, 0., 1.);
+        if(!preserveAlpha)
+            maxColor.alpha = Tools::clip(maxColor.alpha += contrast, 0., 1.);
+        return maxColor;
+    }
+    
+    static double cicmAbscissaToMaxAbscissa(double aCicmAbscissa, t_rect* aMaxRect, double aZoomfactor = 1.)
+    {
+        return aMaxRect->width / 2. + aZoomfactor * aCicmAbscissa * aMaxRect->width / 2.;
+    }
+    
+    static double cicmAbscissaToMaxOrdinate(double aCicmOrdinate, t_rect* aMaxRect, double aZoomfactor = 1.)
+    {
+        return aMaxRect->height / 2. + aZoomfactor * aCicmOrdinate * aMaxRect->height / -2.;
+    }
+    
+};
 
-double cicmAbscissaToMaxAbscissa(double aCicmAbscissa, t_rect* aMaxRect, double aZoomfactor = 1.)
-{
-    return aMaxRect->width / 2. + aZoomfactor * aCicmAbscissa * aMaxRect->width / 2.;
-}
-
-double cicmAbscissaToMaxOrdinate(double aCicmOrdinate, t_rect* aMaxRect, double aZoomfactor = 1.)
-{
-    return aMaxRect->height / 2. + aZoomfactor * aCicmOrdinate * aMaxRect->height / -2.;
-}
-
-
-#endif
+#endif /* defined(DEF_MAX_CONVERTER) */

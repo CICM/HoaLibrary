@@ -33,8 +33,8 @@
 // initial flight parameters
 const short			kNumBoids		= 12;	// number of boids
 const short			kNumNeighbors	= 2;	// must be <= kMaxNeighbors
-const double 		kMinSpeed		= 0.15;	// boids' minimum speed
-const double		kMaxSpeed		= 0.25;	// boids' maximum speed
+const double 		kMinSpeed		= 0.5;	// boids' minimum speed
+const double		kMaxSpeed		= 1.;	// boids' maximum speed
 const double		kCenterWeight	= 0.25;	// bflock centering
 const double		kAttractWeight	= 0.300;// attraction point seeking
 const double		kMatchWeight	= 0.100;// neighbors velocity matching
@@ -42,7 +42,7 @@ const double		kAvoidWeight	= 0.10;	// neighbors avoidance
 //const double		kWallsWeight	= 0.500;// wall avoidance [210]
 const double		kWallsWeight	= 10000;// wall avoidance [210]
 const double		kEdgeDist		= 0.;	// vision distance to avoid wall edges [5]
-const double		kSpeedupFactor	= 0.100;// alter animation speed
+const double		kSpeedupFactor	= 0.5;// alter animation speed
 const double		kInertiaFactor	= 0.20;	// willingness to change speed & direction
 const double		kAccelFactor	= 0.100;// neighbor avoidance accelerate or decelerate rate
 const double		kPrefDist		= 0.25;	// preferred distance from neighbors
@@ -164,7 +164,6 @@ public:
     inline double getInertiaFactor()        {return m_inertiaFactor;}
     inline double getAccelFactor()          {return m_accelFactor;}
     inline double getPrefDistance()         {return m_prefDist;}
-    inline double getPrefDistanceSqr()      {return m_prefDistSqr;}
     inline double getCenterPt_abscissa()    {return m_centerPt.x;}
     inline double getCenterPt_ordinate()    {return m_centerPt.y;}
     inline double getAttractPt_abscissa()   {return m_attractPt.x;}
