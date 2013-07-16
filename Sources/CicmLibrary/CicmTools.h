@@ -33,10 +33,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
 #include <math.h>
-
 #include <string>
+
 using namespace std;
 
 #define CICM_PI  (3.141592653589793238462643383279502884)

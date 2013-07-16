@@ -29,8 +29,9 @@
 #ifdef WIN_VERSION
 #include "CicmDefineWindows.h"
 #include "CicmTools.h"
+#endif
 
-#else MAC_VERSION
+#ifdef __APPLE__
 #include "CicmDefineMac.h"
 #include "CicmTools.h"
 

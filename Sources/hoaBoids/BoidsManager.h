@@ -26,9 +26,7 @@
 #ifndef __hoa_boids__BoidsManager__
 #define __hoa_boids__BoidsManager__
 
-#include "../CicmLibrary/CicmTools.h"
-#include <iostream>
-#include <vector.h>
+#include "../hoaAmbisonics/Ambisonics.h"
 
 
 class Bird {
