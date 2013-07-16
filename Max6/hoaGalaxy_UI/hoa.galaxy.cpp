@@ -46,6 +46,8 @@ extern "C"
     #include "ext_parameter.h"
 }
 
+#include "../MaxConverter.h"
+
 typedef struct  _galaxy
 {
 	t_jbox		j_box;
@@ -98,6 +100,7 @@ void galaxy_mouse_wheel(t_galaxy *x, t_object *patcherview, t_pt pt, long modifi
 /* Paint *********************************************/
 void galaxy_paint(t_galaxy *x, t_object *view);
 void draw_background(t_galaxy *x, t_object *view, t_rect *rect);
+void draw_stars(t_galaxy *x,  t_object *view, t_rect *rect);
 void draw_ellipse(t_galaxy *x,  t_object *view, t_rect *rect);
 
 int C74_EXPORT main()
@@ -185,7 +188,7 @@ void *galaxy_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_GROWY
 			;
     
-    x->f_galaxy = new PlanetarySystem();
+    x->f_galaxy = new PlanetarySystem(1., 0.);
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
     
@@ -293,6 +296,7 @@ void galaxy_paint(t_galaxy *x, t_object *view)
 	
 	draw_background(x, view, &rect);
     draw_ellipse(x, view, &rect);
+    draw_stars(x, view, &rect);
 }
 
 void draw_background(t_galaxy *x,  t_object *view, t_rect *rect)
@@ -429,6 +433,27 @@ void draw_ellipse(t_galaxy *x,  t_object *view, t_rect *rect)
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("ellipse_layer"), 0., 0.);
 }
+
+void draw_stars(t_galaxy *x,  t_object *view, t_rect *rect)
+{
+    t_jgraphics *g;
+    t_jrgba star_color;
+    
+	g = jbox_start_layer((t_object *)x, view, gensym("star_layer"), rect->width, rect->height);
+	x->f_galaxy->setSunRadius(1.);
+	if (g)
+    {
+        star_color = cicmColorToMaxColor(x->f_galaxy->getSunColor());
+        jgraphics_set_source_jrgba(g, &star_color);
+        jgraphics_arc(g, cicmAbscissaToMaxAbscissa(x->f_galaxy->getSunAbscissa(), rect, x->f_zoom_factor), cicmAbscissaToMaxOrdinate(x->f_galaxy->getSunOrdinate(), rect, x->f_zoom_factor), 15,  0., JGRAPHICS_2PI);
+        jgraphics_fill(g);
+        jgraphics_fill(g);
+        
+		jbox_end_layer((t_object*)x, view, gensym("star_layer"));
+	}
+	jbox_paint_layer((t_object *)x, view, gensym("star_layer"), 0., 0.);
+}
+
 
 /**********************************************************/
 /*                      Souris                            */

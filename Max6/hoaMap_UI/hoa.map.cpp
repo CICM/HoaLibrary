@@ -285,7 +285,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
     x->j_box.b_firstin = (t_object*) x;
-    
+        
     x->f_out_infos      = listout(x);
     x->f_out_groups     = listout(x);
 	x->f_out_sources    = listout(x);
@@ -299,7 +299,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	attr_dictionary_process(x, d);
     t_atom *av = NULL;
     long ac = 0;
-    
+        
     dictionary_copyatoms(d, gensym("trajectory_parameters"), &ac, &av);
     hoamap_parameters_trajectory(x, ac, av);
     if (av && ac)

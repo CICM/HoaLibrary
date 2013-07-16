@@ -26,7 +26,7 @@
 #ifndef DEF_FFT
 #define DEF_FFT
 
-#include "../CicmDefine.h"
+#include "../CicmDefineMac.h"
 #include "../CicmTools.h"
 
 class Cicm_Fft

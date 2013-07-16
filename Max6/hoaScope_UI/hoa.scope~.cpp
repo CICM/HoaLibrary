@@ -23,7 +23,10 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C" {
+#include "../../Sources/HoaLibrary.h"
+
+extern "C"
+{
 #include "ext.h"
 #include "ext_obex.h"
 #include "jpatcher_api.h"
@@ -34,7 +37,7 @@ extern "C" {
 #include "ext_globalsymbol.h"
 }
 
-#include "../../Sources/hoaAmbisonics/AmbisonicsViewer.h"
+
 
 typedef struct  _scope 
 {
@@ -77,9 +80,6 @@ void scope_free(t_scope *x);
 void scope_assist(t_scope *x, void *b, long m, long a, char *s);
 void scope_tick(t_scope *x);
 
-void scope_dsp(t_scope *x, t_signal **sp, short *count);
-t_int *scope_perform(t_int *w);
-
 void scope_dsp64(t_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
@@ -106,7 +106,6 @@ int C74_EXPORT main()
 	class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 
-	class_addmethod(c, (method)scope_dsp,			"dsp",			A_CANT, 0);
 	class_addmethod(c, (method)scope_dsp64,			"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)scope_assist,		"assist",		A_CANT,	0);
 	class_addmethod(c, (method)scope_paint,			"paint",		A_CANT,	0);
@@ -347,64 +346,6 @@ void scope_perform64(t_scope *x, t_object *dsp64, double **ins, long numins, dou
 	}
 }
 
-void scope_dsp(t_scope *x, t_signal **sp, short *count)
-{
-	int i;
-	int pointer_count;
-	t_int **sigvec;
-	
-	pointer_count = (x->f_order * 2 + 1) + 2;
-	
-	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
-	for(i = 0; i < pointer_count; i++)
-		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
-	
-	sigvec[0] = (t_int *)x;
-	sigvec[1] = (t_int *)sp[0]->s_n;
-	for(i = 2; i < pointer_count; i++)
-		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-	
-	dsp_addv(scope_perform, pointer_count, (void **)sigvec);
-	
-	free(sigvec);
-	x->f_startclock = 1;
-}
-
-t_int *scope_perform(t_int *w)
-{
-	t_scope *x			 = (t_scope *)(w[1]);
-	t_int	sampleframes = (t_int)(w[2]);
-	t_float	**ins		 = (t_float **)w+3;
-    int i, j;
-    for(i = 0; i < (x->f_order * 2 + 1); i++)
-    {
-        if (x->f_process_mode == 1) // average
-        {
-            for(j = 0; j < sampleframes; j++)
-            {
-                x->f_averageHarmo[i] += ins[i][j];
-                x->f_sampleCounter++;
-                if (x->f_sampleCounter >= x->f_bufsize)
-                {
-                    x->f_harmonicsValues[i] = x->f_averageHarmo[i] / x->f_bufsize;
-                    x->f_averageHarmo[i] = x->f_sampleCounter = 0.;
-                }
-            }
-        }
-        else
-        {
-            x->f_harmonicsValues[i] = ins[i][0]; // first sample only
-        }
-    }
-	
-	if (x->f_startclock) 
-	{
-		x->f_startclock = 0;
-		clock_delay(x->f_clock,0);
-	}
-	return (w + (x->f_order * 2 + 1) + 3);
-}
-
 void scope_tick(t_scope *x)
 {
     x->f_viewer->processContribAndRep(x->f_harmonicsValues);
@@ -428,20 +369,7 @@ void scope_free(t_scope *x)
 
 void scope_assist(t_scope *x, void *b, long m, long a, char *s)
 {
-	long harmonicIndex = 0;
-	if (m == ASSIST_INLET) 
-	{
-		if (a == 0)
-			harmonicIndex = 0;
-		else 
-		{
-			harmonicIndex = (a - 1) / 2 + 1;
-			if (a % 2 == 1) 
-				harmonicIndex = - harmonicIndex;
-		}
-		sprintf(s,"(Signal) Harmonic %ld", harmonicIndex); 	
-	}
-
+    sprintf(s,"(Signal) %s", x->f_viewer->getHarmonicsName(a).c_str());
 }
 
 t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)

@@ -26,7 +26,7 @@
 #ifndef DEF_FILTER
 #define DEF_FILTER
 
-#include "../CicmDefine.h"
+#include "../CicmDefineMac.h"
 #include "../CicmTools.h"
 
 class Filter

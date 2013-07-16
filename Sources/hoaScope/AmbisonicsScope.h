@@ -23,41 +23,55 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_HOA_LIBRARY
-#define DEF_HOA_LIBRARY
+#ifndef DEF_AMBISONICSSCOPE
+#define DEF_AMBISONICSSCOPE
 
-#ifdef __WIN32__
-#include "hoaEncoder/AmbisonicsEncoder.h"
-#include "hoaRotate/AmbisonicsRotate.h"
+#include "../HoaAmbisonics/AmbisonicsViewer.h"
+
+class AmbisonicsScope : public AmbisonicsViewer
+{	
+private:
+    double  m_normalize_factor;
+    
+public:
+	AmbisonicsScope(long anOrder = 1, long aVectorSize = 0, long aSamplingRate = 44100.);
+    
+	~AmbisonicsScope();
+    
+	/* Perform sample by sample */
+	inline void process(double* anInput)
+	{
+        for(int i = 0; i < m_number_of_harmonics ; i++)
+        {
+            m_harmonics_values[i] = anInput[i] * m_normalize_factor;
+        }
+    }
+    
+    inline void process(float* anInput)
+	{
+        for(int i = 0; i < m_number_of_harmonics ; i++)
+        {
+            m_harmonics_values[i] = anInput[i] * m_normalize_factor;
+        }
+	}
+	
+	/* Perform sample block */
+	inline void process(double** anInputVector)
+	{
+        for(int i = 0; i < m_number_of_harmonics ; i++)
+        {
+            m_harmonics_values[i] = anInputVector[i][m_vector_size-1] * m_normalize_factor;
+        }
+	}
+    
+    inline void process(float** anInputVector)
+	{
+        for(int i = 0; i < m_number_of_harmonics ; i++)
+        {
+            m_harmonics_values[i] = anInputVector[i][m_vector_size-1] * m_normalize_factor;
+        }
+    }
+	
+};
+
 #endif
-
-#ifdef __APPLE__
-#include "hoaAmbisonics/AmbisonicsViewer.h"
-#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaDelay/AmbisonicsDelay.h"
-#include "hoaEncoder/AmbisonicsEncoder.h"
-#include "hoaFreeverb/AmbisonicsFreeverb.h"
-#include "hoaFilter/AmbisonicsFilter.h"
-#include "hoaGrain/AmbisonicsGrain.h"
-#include "hoaMap/AmbisonicMultiMaps.h"
-#include "hoaMap/AmbisonicSourcesManager.h"
-#include "hoaMap/AmbisonicSourcesPreset.h"
-#include "hoaMap/AmbisonicSourcesTrajectory.h"
-#include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
-#include "hoaOptim/AmbisonicsOptim.h"
-#include "hoaProjector/AmbisonicsProjector.h"
-#include "hoaRecomposer/AmbisonicsRecomposer.h"
-#include "hoaRingModulation/AmbisonicsRingModulation.h"
-#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
-#include "hoaRotate/AmbisonicsRotate.h"
-#include "hoaSpace/AmbisonicSpace.h"
-#include "hoaGalaxy/AmbisonicsGalaxy.h"
-#include "hoaSpectrum/AmbisonicsSpectrum.h"
-#include "hoaWider/AmbisonicsWider.h"
-#include "hoaVector/AmbisonicsVector.h"
-
-#endif
-#endif
-
-

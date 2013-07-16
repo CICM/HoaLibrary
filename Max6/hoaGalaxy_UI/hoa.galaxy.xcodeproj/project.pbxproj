@@ -136,6 +136,7 @@
 		8F3D6A3817934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D6A3717934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp */; };
 		8F3D6A3B17934568000D2709 /* AmbisonicsSun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3D6A3917934568000D2709 /* AmbisonicsSun.cpp */; };
 		8F3D6A3C17934568000D2709 /* AmbisonicsSun.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3D6A3A17934568000D2709 /* AmbisonicsSun.h */; };
+		8F55390517948A88003EFD28 /* MaxConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F55390417948A88003EFD28 /* MaxConverter.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -270,6 +271,7 @@
 		8F3D6A3717934266000D2709 /* AmbisonicsPlanetarySystemSatellites.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystemSatellites.cpp; sourceTree = "<group>"; };
 		8F3D6A3917934568000D2709 /* AmbisonicsSun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsSun.cpp; sourceTree = "<group>"; };
 		8F3D6A3A17934568000D2709 /* AmbisonicsSun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsSun.h; sourceTree = "<group>"; };
+		8F55390417948A88003EFD28 /* MaxConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxConverter.h; path = ../MaxConverter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 				2C14E247174FBB9300EB2644 /* Accelerate.framework */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
 				2CB801E7172979DB00A74F1A /* hoa.galaxy.cpp */,
+				8F55390417948A88003EFD28 /* MaxConverter.h */,
 				8F3D691B1792FCC1000D2709 /* Sources */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
@@ -776,6 +779,7 @@
 				8F3D6A2E1792FCC1000D2709 /* AmbisonicsVector.h in Headers */,
 				8F3D6A301792FCC1000D2709 /* AmbisonicsWider.h in Headers */,
 				8F3D6A3C17934568000D2709 /* AmbisonicsSun.h in Headers */,
+				8F55390517948A88003EFD28 /* MaxConverter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,7 +38,7 @@ extern "C"
 typedef struct _freeverb
 {
 	t_pxobject          f_ob;	
-	AmbisonicsFreeverb	*f_freeverb;
+	AmbisonicsFreeverb* f_freeverb;
 	long                f_freeze;
 	float               f_size;
 	float               f_damp;
@@ -61,9 +61,6 @@ t_max_err first_spread_set(t_freeverb *x, t_object *attr, long argc, t_atom *arg
 t_max_err late_spread_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
 t_max_err freeze_set(t_freeverb *x, t_object *attr, long argc, t_atom *argv);
 
-void freeverb_dsp(t_freeverb *x, t_signal **sp, short *count);
-t_int *freeverb_perform(t_int *w);
-
 void freeverb_dsp64(t_freeverb *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void freeverb_perform64(t_freeverb *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
@@ -75,7 +72,6 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.freeverb~", (method)freeverb_new, (method)freeverb_free, (long)sizeof(t_freeverb ), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)freeverb_dsp,		"dsp",			A_CANT, 0);
 	class_addmethod(c, (method)freeverb_dsp64,		"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)freeverb_assist,		"assist",		A_CANT, 0);
     class_addmethod(c, (method)freeverb_spread,		"spread",		A_GIMME, 0);
@@ -171,8 +167,8 @@ void *freeverb_new(t_symbol *s, long argc, t_atom *argv)
         object_method(x, gensym("damp"), NULL, NULL);
         object_method(x, gensym("dry"), NULL, NULL);
         object_method(x, gensym("wet"), NULL, NULL);
-        //object_method(x, gensym("fspread"), NULL, NULL);
-        //object_method(x, gensym("lspread"), NULL, NULL);
+        object_method(x, gensym("fspread"), NULL, NULL);
+        object_method(x, gensym("lspread"), NULL, NULL);
         object_method(x, gensym("freeze"), NULL, NULL);
         
         x->f_first_spread = x->f_late_spread = 0.2;
@@ -185,24 +181,6 @@ void *freeverb_new(t_symbol *s, long argc, t_atom *argv)
 		attr_args_process(x, argc, argv);
 	}
 	return (x);
-}
-
-void freeverb_dsp(t_freeverb *x, t_signal **sp, short *count)
-{
-	x->f_freeverb->setVectorSize(sp[0]->s_n);
-    x->f_freeverb->setSamplingRate(sp[0]->s_sr);
-	dsp_add(freeverb_perform, 3, x, sp[0]->s_vec, sp[1]->s_vec);
-}
-
-t_int *freeverb_perform(t_int *w)
-{
-	t_freeverb*	x	= (t_freeverb *)(w[1]);
-	float**		ins	= (float **)(w+2);
-	float**		outs= (float **)(w+3);
-
-	x->f_freeverb->process(ins, outs);
-
-	return (w + 4);
 }
 
 void freeverb_dsp64(t_freeverb *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)

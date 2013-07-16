@@ -38,9 +38,6 @@ typedef struct _HoaEncode
 {
 	t_pxobject					f_ob;			
 	AmbisonicsEncoder			*f_ambiEncoder;
-	
-	long						f_inputNumber;
-	long						f_outputNumber;
 } t_HoaEncode;
 
 
@@ -50,12 +47,6 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s);
 
 void HoaEncode_float(t_HoaEncode *x, double f);
 void HoaEncode_int(t_HoaEncode *x, long n);
-
-void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count);
-t_int *HoaEncode_perform(t_int *w);
-t_int *HoaEncode_performOffset(t_int *w);
-t_int *HoaEncode_performVec(t_int *w);
-t_int *HoaEncode_performOffsetVec(t_int *w);
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -75,7 +66,6 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)HoaEncode_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)HoaEncode_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)HoaEncode_dsp,		"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaEncode_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaEncode_assist,	"assist",	A_CANT, 0);
 	
@@ -129,17 +119,18 @@ void HoaEncode_int(t_HoaEncode *x, long n)
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	x->f_ambiEncoder->setVectorSize(maxvectorsize);
-	x->f_inputNumber = x->f_ambiEncoder->getNumberOfInputs();
+	x->f_ambiEncoder->setSamplingRate(samplerate);
+    
 	if(x->f_ambiEncoder->getMode() == Hoa_Split)
 	{
-		if(count[x->f_inputNumber - 1])
+		if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
 			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64vec, 0, NULL);
 		else
 			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64Offsetvec, 0, NULL);
 	}
 	else 
 	{
-		if(count[x->f_inputNumber - 1])
+		if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
 			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64, 0, NULL);
 		else
 			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64Offset, 0, NULL);
@@ -149,7 +140,7 @@ void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double sampl
 
 void HoaEncode_perform64vec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiEncoder->process(ins, outs, ins[x->f_inputNumber-1]);
+	x->f_ambiEncoder->process(ins, outs, ins[x->f_ambiEncoder->getNumberOfInputs()-1]);
 }
 
 void HoaEncode_perform64Offsetvec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -165,101 +156,6 @@ void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long num
 void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	x->f_ambiEncoder->process(ins[0], outs);
-}
-
-
-void HoaEncode_dsp(t_HoaEncode *x, t_signal **sp, short *count)
-{
-	int i;
-	int pointer_count;
-	t_int **sigvec;
-	
-	x->f_ambiEncoder->setVectorSize(sp[0]->s_n);
-	x->f_inputNumber = x->f_ambiEncoder->getNumberOfInputs();
-	x->f_outputNumber = x->f_ambiEncoder->getNumberOfOutputs();
-	if(x->f_ambiEncoder->getMode() == Hoa_Split)
-	{
-		pointer_count = x->f_outputNumber + 2 + x->f_inputNumber;
-		
-		sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
-		for(i = 0; i < pointer_count; i++)
-			sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
-		
-		sigvec[0] = (t_int *)x;
-		sigvec[1] = (t_int *)sp[0]->s_n;
-		for(i = 2; i < pointer_count; i++)
-			sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-		if(count[x->f_inputNumber-1])
-			dsp_addv(HoaEncode_performVec, pointer_count, (void **)sigvec);
-		else
-			dsp_addv(HoaEncode_performOffsetVec, pointer_count, (void **)sigvec);
-		
-		free(sigvec);
-	}
-	else
-	{
-		pointer_count = x->f_outputNumber + 2 + x->f_inputNumber;
-		
-		sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
-		for(i = 0; i < pointer_count; i++)
-			sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
-		
-		sigvec[0] = (t_int *)x;
-		sigvec[1] = (t_int *)sp[0]->s_n;
-		for(i = 2; i < pointer_count; i++)
-			sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-		if(count[x->f_inputNumber - 1])
-			dsp_addv(HoaEncode_perform, pointer_count, (void **)sigvec);
-		else
-			dsp_addv(HoaEncode_performOffset, pointer_count, (void **)sigvec);
-		
-		free(sigvec);
-	}
-}
-
-t_int *HoaEncode_perform(t_int *w)
-{
-	t_HoaEncode *x			= (t_HoaEncode *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
-	x->f_ambiEncoder->process(ins[0], outs, ins[1]);
-
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
-}
-
-t_int *HoaEncode_performOffset(t_int *w)
-{
-	t_HoaEncode *x			= (t_HoaEncode *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
-	x->f_ambiEncoder->process(ins[0], outs);
-	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
-}
-
-
-t_int *HoaEncode_performVec(t_int *w)
-{
-	t_HoaEncode *x			= (t_HoaEncode *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
-	x->f_ambiEncoder->process(ins, outs, ins[x->f_inputNumber-1]);
-	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
-}
-
-t_int *HoaEncode_performOffsetVec(t_int *w)
-{
-	t_HoaEncode *x			= (t_HoaEncode *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-
-	x->f_ambiEncoder->process(ins, outs);
-	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
 }
 
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)

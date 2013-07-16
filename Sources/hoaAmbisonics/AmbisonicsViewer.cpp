@@ -25,14 +25,10 @@
 
 #include "AmbisonicsViewer.h"
 
-AmbisonicsViewer::AmbisonicsViewer(long anOrder, double offset)
+AmbisonicsViewer::AmbisonicsViewer(long anOrder, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {	
-	m_order					= Tools::clip_min(anOrder, long(1));
-	m_number_of_harmonics	= m_order * 2 + 1;
-    m_representation_offset = offset;
     m_biggest_contribution = 0;
-	
-    m_harmonics_basis           = new double*[m_number_of_harmonics];
+    m_harmonics_basis      = new double*[m_number_of_harmonics];
     
 	for (int i = 0; i <= m_number_of_harmonics ; i++)
 		m_harmonics_basis[i]	= new double[NUMBEROFCIRCLEPOINTS_UI];
@@ -53,8 +49,8 @@ void AmbisonicsViewer::computeTrigo()
 	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++) 
 	{
 		double azimuth = (double)i * CICM_2PI / (double)(NUMBEROFCIRCLEPOINTS_UI);
-        m_cosinus_buffer[i] = cos(CICM_2PI - azimuth + m_representation_offset);
-		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth + m_representation_offset);
+        m_cosinus_buffer[i] = cos(CICM_2PI - azimuth);
+		m_sinus_buffer[i]	= sin(CICM_2PI - azimuth);
 	}
 }
 
