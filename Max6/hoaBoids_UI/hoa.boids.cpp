@@ -43,7 +43,6 @@ extern "C"
 #include "ext_parameter.h"
 }
 
-#include "../../Sources/CicmLibrary/CicmTools.h"
 #include "../../Sources/HoaBoids/BoidsManager.h"
 
 #define DEF_REFRESH_TIME 20
@@ -1053,7 +1052,7 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
     double h = rect->height;
     double BoidPos[2];
     double BoidDir[2];
-    t_pt flockCenter;
+    //t_pt flockCenter;
     double BoidAngle;
     double BoidSize = 10;
     
