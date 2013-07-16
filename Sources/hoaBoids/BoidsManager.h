@@ -28,7 +28,6 @@
 
 #include "../hoaAmbisonics/Ambisonics.h"
 
-
 class Bird {
 public:
     double x, y, vx, vy;
