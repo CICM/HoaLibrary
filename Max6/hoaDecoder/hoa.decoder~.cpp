@@ -25,7 +25,7 @@
 
 #define MAX_SPEAKER 256
 
-#include "../../Sources/hoaMultiDecoder/AmbisonicsMultiDecoder.h"
+#include "../../Sources/hoaLibrary.h"
 
 extern "C"
 {
@@ -167,7 +167,7 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         x->f_pinna_size = gensym("small");
         x->f_resitution_mode = gensym("panning");
         x->f_send_config =1;
-#ifdef __APPLE__
+#ifdef MAC_VERSION
         // OSX only : access to the hoa.binaural~ bundle
         CFBundleRef hoaBinaural_bundle = CFBundleGetBundleWithIdentifier(CFSTR("com.cicm.hoa-decoder-"));
         CFURLRef hoaBinaural_ref = CFBundleCopyBundleURL(hoaBinaural_bundle);
@@ -176,6 +176,14 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         assert(res);
         // Built the complete resource path
         std::string absoluteHrtfFilePath = std::string((const char*)bundle_path) + std::string("/Contents/Resources/") + std::string("HrtfDatabase/");
+#endif
+#ifdef WIN_VERSION
+        //HMODULE handle = LoadLibrary("hoa.decoder~.mxe");
+		HMODULE handle = LoadLibrary("hoa.decoder~.mxe64");
+		char bundle_path[512];
+		GetModuleFileName(handle, bundle_path, 512);
+        std::string absoluteHrtfFilePath = std::string((const char*)bundle_path) + std::string("HrtfDatabase/");// + std::string("/Contents/Resources/") + std::string("HrtfDatabase/");
+		FreeLibrary(handle);
 #endif
 		x->f_AmbisonicsDecoder	= new AmbisonicsMultiDecoder(order, x->f_number_of_loudspeakers, Hoa_Ambisonics, Hoa_Small, absoluteHrtfFilePath, sys_getblksize(), sys_getsr());
         

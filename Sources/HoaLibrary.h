@@ -29,6 +29,7 @@
 #ifdef WIN_VERSION
 #include "hoaEncoder/AmbisonicsEncoder.h"
 #include "hoaRotate/AmbisonicsRotate.h"
+#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
 
 #else MAC_VERSION
 #include "hoaAmbisonics/AmbisonicsViewer.h"
@@ -43,7 +44,6 @@
 #include "hoaMap/AmbisonicSourcesPreset.h"
 #include "hoaMap/AmbisonicSourcesTrajectory.h"
 #include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
 #include "hoaOptim/AmbisonicsOptim.h"
 #include "hoaProjector/AmbisonicsProjector.h"
 #include "hoaRecomposer/AmbisonicsRecomposer.h"
