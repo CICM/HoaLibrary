@@ -26,9 +26,7 @@
 #ifndef DEF_AMBISONICSRESTITUTION
 #define DEF_AMBISONICSRESTITUTION
 
-#include "../hoaAmbisonics/Ambisonics.h"
 #include "../hoaDecoder/AmbisonicsDecoder.h"
-#include "../hoaEncoder/AmbisonicsEncoder.h"
 
 enum
 {

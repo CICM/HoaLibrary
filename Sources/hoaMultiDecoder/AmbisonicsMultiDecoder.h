@@ -26,17 +26,15 @@
 #ifndef DEF_AMBISONICSMULTIDECODER
 #define DEF_AMBISONICSMULTIDECODER
 
+#include "../hoaBinaural/AmbisonicsBinaural.h"
+#include "../hoaRestitution/AmbisonicsRestitution.h"
+
 enum
 {
     Hoa_Ambisonics = 0,
     Hoa_Binaural,
     Hoa_Restitution
 };
-
-#include "../hoaAmbisonics/Ambisonics.h"
-#include "../hoaBinaural/AmbisonicsBinaural.h"
-#include "../hoaDecoder/AmbisonicsDecoder.h"
-#include "../hoaRestitution/AmbisonicsRestitution.h"
 
 class AmbisonicsMultiDecoder : public Ambisonics
 {
@@ -59,8 +57,8 @@ public:
     
     void    setPinnaeSize(long aPinnaSize);
     long    getPinnaeSize();
-    long    getGetHrtfLoaded(){return m_binaural->getGetHrtfLoaded();};
-    long    getHrtfSize(){return m_binaural->getHrtfSize();};
+	long    getGetHrtfLoaded(){return m_binaural->getGetHrtfLoaded();};
+	long    getHrtfSize(){return m_binaural->getHrtfSize();};
     
     void    setRestitutionMode(long aResitutionMode);
     long    getRestitutionMode();
@@ -82,7 +80,7 @@ public:
         else if(m_mode == Hoa_Binaural)
             m_binaural->process(aInputs, aOutputs);
         else
-            m_restitution->process(aInputs, aOutputs);
+			m_restitution->process(aInputs, aOutputs);
 	}
     
     inline void process(float** aInputs, float** aOutputs)
@@ -92,7 +90,7 @@ public:
         else if(m_mode == Hoa_Binaural)
             m_binaural->process(aInputs, aOutputs);
         else
-            m_restitution->process(aInputs, aOutputs);
+           m_restitution->process(aInputs, aOutputs);
 	}
 };
 

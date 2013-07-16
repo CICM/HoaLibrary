@@ -26,7 +26,6 @@
 #ifndef DEF_CICM_TOOLS
 #define DEF_CICM_TOOLS
 
-
 #include <iostream>
 #include <vector>
 #include <map>
@@ -98,7 +97,7 @@ public:
 		return aValue;
 	}
     
-    template<typename Type> static void clip(Type *aValue, Type aMinimum = 0, Type aMaximum = 1)
+    static void clip(double *aValue, double aMinimum = 0, double aMaximum = 1)
 	{
 		if(*aValue < aMinimum)
 			*aValue = aMinimum;
@@ -116,7 +115,7 @@ public:
         return (aValue < aMaximum) ? aValue : aMaximum;
 	}
 
-	template<typename Type> static Type clip_power_of_two(Type aValue)
+	static long clip_power_of_two(long aValue)
 	{
 		if(aValue < 2)
 		aValue = 2;
@@ -143,17 +142,17 @@ public:
 		return atan2(y, x);
 	}
 
-	template<typename Type> static Type ordinate(Type radius, Type angle)
+	static double ordinate(double radius, double angle)
 	{
 		return radius * sin(angle);
 	}
 
-	template<typename Type> static Type abscisse(Type radius, Type angle)
+	static double abscisse(double radius, double angle)
 	{
 		return radius * cos(angle);
 	}
 	
-	template<typename Type> static Type distance_euclidean(Type x1, Type y1, Type x2, Type y2)
+	static double distance_euclidean(double x1, double y1, double x2, double y2)
 	{
 		return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}
@@ -259,7 +258,7 @@ public:
         return datas;
     }
     
-    template<typename Type> static bool isInside(Type val, Type v1, Type v2)
+    static bool isInside(double val, double v1, double v2)
 	{
         return (v1 <= v2) ? (val >= v1 && val <= v2) : (val >= v2 && val <= v1);
 	}
@@ -274,14 +273,20 @@ public:
         return isInside(degreeWrap(degree-loDeg), double(0), degreeWrap(hiDeg-loDeg));
 	}
     
-    template<typename Type> static Type max(Type v1, Type v2)
+    static double cicm_max(double v1, double v2)
 	{
-        return (v2 >= v1) ? v2 : v1;
+		if(v1 > v2)
+			return v1;
+		else
+			return v2;
 	}
     
-    template<typename Type> static Type min(Type v1, Type v2)
+    static double cicm_min(double v1, double v2)
 	{
-        return (v1 <= v2) ? v1 : v2;
+        if(v1 < v2)
+			return v1;
+		else
+			return v2;
 	}
     
     static double radianInterp(double _step, double _startRad, double _endRad)
@@ -340,9 +345,9 @@ public:
         return denom == 0. ? 0. : num/denom;
     }
     
-    template<typename Type> static void sortVector(Type* array, int size)
+    static void sortVector(double* array, int size)
     {
-        Type tmp;
+        double tmp;
         int i,j;
         for(i = 0;i < size ; i++)
         {

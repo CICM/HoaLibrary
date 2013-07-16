@@ -26,9 +26,10 @@
 #ifndef DEF_HOA_LIBRARY
 #define DEF_HOA_LIBRARY
 
-#ifdef __WIN32__
+#ifdef _WINDOWS
 #include "hoaEncoder/AmbisonicsEncoder.h"
 #include "hoaRotate/AmbisonicsRotate.h"
+#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
 #endif
 
 #ifdef __APPLE__

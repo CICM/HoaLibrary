@@ -35,6 +35,16 @@ AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, long
     m_number_of_inputs    = m_number_of_harmonics;
     m_number_of_outputs = 2;
     
+	m_loudspeakers_configurations[0] = 3;
+	m_loudspeakers_configurations[1] = 4;
+	m_loudspeakers_configurations[2] = 6;
+	m_loudspeakers_configurations[3] = 8;
+	m_loudspeakers_configurations[4] = 9;
+	m_loudspeakers_configurations[5] = 12;
+	m_loudspeakers_configurations[6] = 18;
+	m_loudspeakers_configurations[7] = 24;
+	m_loudspeakers_configurations[8] = 36;
+	m_loudspeakers_configurations[9] = 72;
     /* Check The Best Number Of Virtual Loudspeakers For HRTFs */
 	m_number_of_loudspeakers = m_loudspeakers_configurations[0];
 	for (int i = 0; i < 10; i++)

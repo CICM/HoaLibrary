@@ -25,8 +25,6 @@
 
 #define MAX_SPEAKER 256
 
-#include "../../Sources/hoaLibrary.h"
-
 extern "C"
 {
 #include "ext.h"
@@ -42,6 +40,7 @@ extern "C"
 #include "z_dsp.h"
 }
 
+#include "../../Sources/hoaLibrary.h"
 
 typedef struct _HoaDecode 
 {
@@ -141,7 +140,6 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "autoconnect", 0, "7");
     CLASS_ATTR_SAVE             (c, "autoconnect", 1);
     
-    
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	HoaDecode_class = c;
@@ -182,14 +180,16 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		HMODULE handle = LoadLibrary("hoa.decoder~.mxe64");
 		char bundle_path[512];
 		GetModuleFileName(handle, bundle_path, 512);
-        std::string absoluteHrtfFilePath = std::string((const char*)bundle_path) + std::string("HrtfDatabase/");// + std::string("/Contents/Resources/") + std::string("HrtfDatabase/");
+        std::string absoluteHrtfFilePath = std::string((const char*)bundle_path);
+		absoluteHrtfFilePath.erase(absoluteHrtfFilePath.size()-18, 18);
+		absoluteHrtfFilePath.append("HrtfDatabase/");
 		FreeLibrary(handle);
 #endif
 		x->f_AmbisonicsDecoder	= new AmbisonicsMultiDecoder(order, x->f_number_of_loudspeakers, Hoa_Ambisonics, Hoa_Small, absoluteHrtfFilePath, sys_getblksize(), sys_getsr());
         
-        for(int i = 0; i < x->f_number_of_loudspeakers; i++)
+		for(int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfLoudspeakers(); i++)
             x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
-      
+		
         object_attr_setdisabled((t_object *)x, gensym("angles"), 1);
         object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 1);
         object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 0);
@@ -242,7 +242,7 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_method(gensym("dsp")->s_thing, gensym("stop"));
         
         long numOutlet = x->f_AmbisonicsDecoder->getNumberOfOutputs();
-      
+		
         if(atom_getsym(argv) == gensym("binaural") || atom_getsym(argv) == gensym(" binaural"))
         {
             x->f_AmbisonicsDecoder->setMode(Hoa_Binaural);
@@ -272,7 +272,7 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 1);
             object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 0);
             object_attr_setdisabled((t_object *)x, gensym("restitution"), 1);
-        }
+		}
         
         HoaDecode_resize_outlet(x, numOutlet);
         x->f_number_of_loudspeakers = x->f_AmbisonicsDecoder->getNumberOfOutputs();
@@ -365,9 +365,10 @@ void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet)
     int dspState = sys_getdspobjdspstate((t_object*)x);
     if(dspState)
         object_method(gensym("dsp")->s_thing, gensym("stop"));
-    
+   
     t_object *b = NULL;
-    object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+	
+	object_obex_lookup(x, gensym("#B"), (t_object **)&b);
     object_method(b, gensym("dynlet_begin"));
     
     if(lastNumberOfOutlet > x->f_AmbisonicsDecoder->getNumberOfOutputs())
@@ -384,7 +385,9 @@ void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet)
             outlet_append((t_object*)x, NULL, gensym("signal"));
         }
     }
+	
     object_method(b, gensym("dynlet_end"));
+	
     if(x->f_send_config)
     {
         HoaDecode_send_configuration(x);

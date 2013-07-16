@@ -26,9 +26,11 @@
 #ifndef DEF_CICM_LIBRARY
 #define DEF_CICM_LIBRARY
 
-#ifdef WIN_VERSION
-#include "CicmDefineWindows.h"
+#ifdef _WINDOWS
+
 #include "CicmTools.h"
+#include "CicmDefineWindows.h"
+
 #endif
 
 #ifdef __APPLE__

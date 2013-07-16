@@ -11,7 +11,7 @@
  *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
  *  - Redistributions of source code must retain the above copyright notice, 
  *		this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,
+ *  - Redistributions in binary form must reproduce the above copyright notice,Z
  *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
  *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
  * 
@@ -78,6 +78,7 @@ int C74_EXPORT main(void)
         post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
         postons = 1;
     }
+	intel_init();
 	return 0;
 }
 
@@ -103,6 +104,7 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
 	}
+
 	return (x);
 }
 
