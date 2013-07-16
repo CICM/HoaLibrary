@@ -138,10 +138,6 @@ void BoidsManager::update() // FlightStep();
 		// calculate new position, applying speedupFactor
         m_boids[i].newPos.x += m_boids[i].newDir.x * m_boids[i].speed * m_speedupFactor;
 		m_boids[i].newPos.y += m_boids[i].newDir.y * m_boids[i].speed * m_speedupFactor;
-        /*
-		m_boids[i].newPos.x += m_boids[i].newDir.x * m_boids[i].speed * (m_speedupFactor / 100.0);
-		m_boids[i].newPos.y += m_boids[i].newDir.y * m_boids[i].speed * (m_speedupFactor / 100.0);
-        */
 	}
 }
 
@@ -264,16 +260,17 @@ float BoidsManager::MatchAndAvoidNeighbors(short theBoid, Velocity *matchNeighbo
 		if (InFront(&(m_boids[theBoid]), &(m_boids[neighbor])))
         {
 			if (distSqr < m_prefDistSqr)
-				tempSpeed /= (m_accelFactor / 100.0);
+                tempSpeed /= m_accelFactor;
+				//tempSpeed /= (m_accelFactor / 100.0);
 			else
-				tempSpeed *= (m_accelFactor / 100.0);
+				tempSpeed *= m_accelFactor;
 		}
 		else
         {
 			if (distSqr < m_prefDistSqr)
-				tempSpeed *= (m_accelFactor / 100.0);
+				tempSpeed *= m_accelFactor;
 			else
-				tempSpeed /= (m_accelFactor / 100.0);
+				tempSpeed /= m_accelFactor;
 		}
 	}
 	if (numClose)
@@ -359,30 +356,28 @@ Boolean BoidsManager::InFront(Boid* theBoid, Boid* neighbor)
 			result = (theBoid->oldDir.x > 0);
             
 			if (result==0) return 0;
-			else goto next;
+			else return 1;
 			
 		} else
         {
 			/* return true if the first boid's horizontal movement is +ve */
 			result = (theBoid->oldDir.x < 0);
 			if (result==0) return 0;
-			else goto next;
+			else return 1;
 		}
 	}
 	/* else theBoid is travelling vertically, so just compare vertical coordinates */
 	else if (theBoid->oldDir.y > 0) {
 		result = (neighbor->oldPos.y > theBoid->oldPos.y);
 		if ( result == 0 ) return 0;
-        else goto next;
+        else return 1;
 	}
     else
     {
 		result = (neighbor->oldPos.y < theBoid->oldPos.y);
 		if ( result == 0 ) return 0;
-        else goto next;
+        else return 1;
 	}
-next:
-	return 1;
 }
 
 void BoidsManager::NormalizeVelocity(Velocity *direction)
@@ -544,7 +539,8 @@ void BoidsManager::setAttractWeight(double _attractWeight)
 
 void BoidsManager::setMatchWeight(double _matchWeight)
 {
-    m_matchWeight = Tools::clip_min(_matchWeight, 0.);
+    //m_matchWeight = Tools::clip_min(_matchWeight, 0.);
+    m_matchWeight = Tools::clip(_matchWeight, 0., 1.);
 }
 
 void BoidsManager::setAvoidWeight(double _avoidWeight)
@@ -574,18 +570,13 @@ void BoidsManager::setInertiaFactor(double _inertiaFactor)
 
 void BoidsManager::setAccelFactor(double _accelFactor)
 {
-    m_accelFactor = Tools::clip_min(_accelFactor, 0.000001);
+    m_accelFactor = Tools::clip(_accelFactor, 0.000001, 1.);
 }
 
 void BoidsManager::setPrefDistance(double _prefDistance)
 {
     m_prefDist = Tools::clip_min(_prefDistance, 0.);
     m_prefDistSqr = m_prefDist * m_prefDist;
-}
-
-void BoidsManager::setPrefDistanceSqr(double _prefDistanceSqr)
-{
-    m_prefDistSqr = _prefDistanceSqr;
 }
 
 void BoidsManager::setCenterPt(double _center_X, double _center_Y)

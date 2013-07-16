@@ -107,13 +107,13 @@ void AmbisonicsDecoder::computeMatrix()
             }
             else if(index > 0)
             {
-                double value = cos(fabs(index) * angle) / (double)(m_order+1.);
+                double value = cos(fabs((double)index) * angle) / (double)(m_order+1.);
                 Cicm_Matrix_Float_Set(m_decoder_matrix_float, i, j, m_number_of_harmonics, value);
                 Cicm_Matrix_Double_Set(m_decoder_matrix_double, i, j, m_number_of_harmonics, value);
             }
 			else if(index < 0)
             {
-                double value = sin(fabs(index) * angle) / (double)(m_order+1.);
+                double value = sin(fabs((double)index) * angle) / (double)(m_order+1.);
                 Cicm_Matrix_Float_Set(m_decoder_matrix_float, i, j, m_number_of_harmonics, value);
                 Cicm_Matrix_Double_Set(m_decoder_matrix_double, i, j, m_number_of_harmonics, value);
             }

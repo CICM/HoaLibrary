@@ -11,6 +11,7 @@
 		2C47E80C17945FAC0064CAFB /* BoidsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C47E80A17945FAC0064CAFB /* BoidsManager.h */; };
 		2C6E3332171047C000BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */; };
 		2C9A1C4C1767404500F75BDC /* hoa.boids.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A1C421767404500F75BDC /* hoa.boids.cpp */; };
+		2CBC85D31795472300D39052 /* MaxConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBC85D21795472300D39052 /* MaxConverter.h */; };
 		2CF61A471712D0620062A8EA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
@@ -19,6 +20,7 @@
 		2C47E80A17945FAC0064CAFB /* BoidsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoidsManager.h; sourceTree = "<group>"; };
 		2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2C9A1C421767404500F75BDC /* hoa.boids.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.boids.cpp; sourceTree = "<group>"; };
+		2CBC85D21795472300D39052 /* MaxConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxConverter.h; path = ../MaxConverter.h; sourceTree = "<group>"; };
 		2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.boids.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.boids.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -40,6 +42,7 @@
 			children = (
 				2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */,
 				2C9A1C421767404500F75BDC /* hoa.boids.cpp */,
+				2CBC85D21795472300D39052 /* MaxConverter.h */,
 				2C47E80817945FAC0064CAFB /* hoaBoids */,
 				2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
@@ -73,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C47E80C17945FAC0064CAFB /* BoidsManager.h in Headers */,
+				2CBC85D31795472300D39052 /* MaxConverter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

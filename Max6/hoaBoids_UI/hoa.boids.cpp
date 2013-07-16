@@ -44,6 +44,7 @@ extern "C"
 }
 
 #include "../../Sources/HoaBoids/BoidsManager.h"
+#include "../MaxConverter.h"
 
 #define DEF_REFRESH_TIME 20
 
@@ -112,6 +113,7 @@ t_max_err hoaboids_setvalueof(t_hoaboids *x, long ac, t_atom *av);
 t_max_err hoaboids_getvalueof(t_hoaboids *x, long *ac, t_atom **av);
 
 // attr setters :
+t_max_err hoaboids_setAttr_refreshTime(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_attractpoint(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_nBoids(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom *argv);
@@ -172,7 +174,7 @@ int C74_EXPORT main()
 	c = class_new("hoa.boids", (method)hoaboids_new, (method)hoaboids_free, (short)sizeof(t_hoaboids), 0L, A_GIMME, 0);
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
-	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
+	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
 	
 	class_addmethod(c, (method) hoaboids_assist,           "assist",		A_CANT,	0);
 	class_addmethod(c, (method) hoaboids_paint,            "paint",         A_CANT,	0);
@@ -273,6 +275,13 @@ int C74_EXPORT main()
     
     /* hoa.boids */
     CLASS_STICKY_CATEGORY(c, 0, "hoa.boids");
+    
+    CLASS_ATTR_DOUBLE           (c,"refresh", 0, t_hoaboids, f_refreshInterval);
+    CLASS_ATTR_ACCESSORS		(c,"refresh", NULL, hoaboids_setAttr_refreshTime);
+	CLASS_ATTR_LABEL			(c,"refresh", 0,   "refresh time in ms");
+	CLASS_ATTR_DEFAULT          (c,"refresh", 0,   "20.");
+    CLASS_ATTR_SAVE             (c,"refresh", 1);
+    
     CLASS_ATTR_DOUBLE_ARRAY     (c,"attractpoint", 0, t_hoaboids, f_attractpt, 2);
     CLASS_ATTR_ACCESSORS		(c,"attractpoint", NULL, hoaboids_setAttr_attractpoint);
 	CLASS_ATTR_LABEL			(c,"attractpoint", 0,   "Attraction Point");
@@ -338,7 +347,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c,"edgedist", 0,   "Vision Distance to Avoid Wall Edges");
 	CLASS_ATTR_DEFAULT_SAVE     (c,"edgedist", 0,   "0.5");
     */
-     
+    
     CLASS_ATTR_DOUBLE			(c,"speed", 0, t_hoaboids, f_speed);
     CLASS_ATTR_ACCESSORS		(c,"speed", NULL, hoaboids_setAttr_speed);
 	CLASS_ATTR_LABEL			(c,"speed", 0,   "Animation Speed");
@@ -554,6 +563,13 @@ t_max_err hoaboids_getvalueof(t_hoaboids *x, long *ac, t_atom **av)
 }
 
 // --------------------- //
+
+t_max_err hoaboids_setAttr_refreshTime(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(argc >= 1 && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
+        x->f_refreshInterval = Tools::clip_min(atom_getfloat(argv), 10.);
+    return MAX_ERR_NONE;
+}
 
 t_max_err hoaboids_setAttr_zoom(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
@@ -898,33 +914,18 @@ void hoaboids_paint(t_hoaboids *x, t_object *view)
 void draw_background(t_hoaboids *x,  t_object *view, t_rect *rect)
 {
     t_jgraphics *g;
-    t_jrgba black, white;
     double w = rect->width;
     double h = rect->height;
     t_pt ctr = {w*0.5, h*0.5};
     double maxctr = Tools::max(w, h)*0.5;
     
-    double contrastBlack = 0.12;
-    double contrastWhite = 0.08;
-    black = white = x->f_colorBackgroundInside;
-    black.red = Tools::clip_min(black.red -= contrastBlack);
-    black.green = Tools::clip_min(black.green -= contrastBlack);
-    black.blue = Tools::clip_min(black.blue -= contrastBlack);
-    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
-    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
-    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
+    t_jrgba black = CicmMax::jrgba_addContrast(x->f_colorBackgroundInside, -0.12, true);
+    t_jrgba white = CicmMax::jrgba_addContrast(x->f_colorBackgroundInside, 0.08, true);
     
 	g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), w, h);
 	
 	if (g)
     {
-        /*
-        jgraphics_set_source_jrgba(g, &x->f_colorBackgroundInside);
-        jgraphics_set_line_width(g, 1);
-        jgraphics_arc(g, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor),  0., JGRAPHICS_2PI);
-        jgraphics_fill(g);
-        */
-        
         double ecart = x->f_zoom_factor * maxctr;
         if(ecart < 10 && ecart >= 5) ecart *= 4;
         else if(ecart < 5 && ecart > 2.5) ecart *= 8;
@@ -1056,17 +1057,8 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
     double BoidAngle;
     double BoidSize = 10;
     
-    t_jrgba black, white;
-    
-    double contrastBlack = 0.12;
-    double contrastWhite = 0.08;
-    black = white = x->f_colorBoids;
-    black.red = Tools::clip_min(black.red -= contrastBlack);
-    black.green = Tools::clip_min(black.green -= contrastBlack);
-    black.blue = Tools::clip_min(black.blue -= contrastBlack);
-    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
-    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
-    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
+    t_jrgba black = CicmMax::jrgba_addContrast(x->f_colorBoids, -0.12, true);
+    t_jrgba white = CicmMax::jrgba_addContrast(x->f_colorBoids, 0.12, true);
 		
 	if ((g = jbox_start_layer((t_object *)x, view, gensym("boids_layer"), rect->width, rect->height)))
     {
@@ -1088,21 +1080,21 @@ void draw_boids(t_hoaboids *x,  t_object *view, t_rect *rect)
                 jgraphics_translate(g, BoidPos[0], BoidPos[1]);
                 jgraphics_rotate(g, BoidAngle);
                 
-                jgraphics_set_source_jrgba(g, Tools::isInsideDeg(Tools::radToDeg(BoidAngle), 45, -135) ? &x->f_colorBoids : &white);
+                jgraphics_set_source_jrgba(g, Tools::isInsideDeg(Tools::radToDeg(BoidAngle), 45, -135) ? &black : &white);
                 jgraphics_move_to(g, 0, -BoidSize*0.2);
                 jgraphics_line_to(g, 0, BoidSize*0.5);
                 jgraphics_line_to(g, -BoidSize*0.4, -BoidSize*0.4);
                 jgraphics_line_to(g, 0, -BoidSize*0.2);
                 jgraphics_fill(g);
                 
-                jgraphics_set_source_jrgba(g, !Tools::isInsideDeg(Tools::radToDeg(BoidAngle), 45, -135) ? &x->f_colorBoids : &white);
+                jgraphics_set_source_jrgba(g, !Tools::isInsideDeg(Tools::radToDeg(BoidAngle), 45, -135) ? &black : &white);
                 jgraphics_move_to(g, 0, -BoidSize*0.2);
                 jgraphics_line_to(g, 0, BoidSize*0.5);
                 jgraphics_line_to(g, BoidSize*0.4, -BoidSize*0.4);
                 jgraphics_line_to(g, 0, -BoidSize*0.2);
                 jgraphics_fill(g);
                 
-                jgraphics_set_source_jrgba(g, &black);
+                jgraphics_set_source_jrgba(g, &x->f_colorBoids);
                 jgraphics_move_to(g, 0, -BoidSize*0.2);
                 jgraphics_line_to(g, 0, BoidSize*0.5);
                 jgraphics_fill(g);

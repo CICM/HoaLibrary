@@ -47,6 +47,7 @@
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseIntelIPP>Sequential</UseIntelIPP>
+    <UseIntelMKL>Parallel</UseIntelMKL>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -280,6 +281,7 @@
     <ClCompile Include="hoa.encoder~.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefineMac.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefineWindows.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />

@@ -28,14 +28,28 @@
 #define DEF_CICM_DEFINE
 
 #include <ipps.h>
+#include <ippm.h>
+#include <mkl.h>
 
 static Ipp32f	float_filled_1[16384] = {1};
 static Ipp64f	double_filled_1[16384] = {1};
 
+static void intel_init()
+{
+	for(int i = 0; i < 16384; i++)
+	{
+		float_filled_1[i] = 1.;
+		double_filled_1[i] = 1.;
+	}
+}
+
 #define Cicm_Float			Ipp32f
 #define Cicm_Vector_Float	Ipp32f*
+#define Cicm_Matrix_Float	Ipp32f*
+
 #define Cicm_Double			Ipp64f
 #define Cicm_Vector_Double	Ipp64f*
+#define Cicm_Matrix_Double  Ipp64f*
 
 #define Cicm_Float_Packed			Ipp32f
 #define Cicm_Float_Fft_Handle		IppsFFTSpec_R_32f
@@ -50,14 +64,17 @@ static Ipp64f	double_filled_1[16384] = {1};
 #define	Cicm_Vector_Float_Malloc(pointeur, length) pointeur = ippsMalloc_32f(length)
 #define	Cicm_Vector_Double_Malloc(pointeur, length) pointeur = ippsMalloc_64f(length)
 
+#define	Cicm_Matrix_Float_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)ippsMalloc_32f(number_of_rows * columns_size);
+#define	Cicm_Matrix_Double_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)ippsMalloc_64f(number_of_rows * columns_size);
+
+
 /**************** FREE *****************/
 #define Cicm_Free(pointor) ippsFree(pointor); pointor = NULL;
 
-/**************** SET ******************
-
-
-#define Cicm_signal_clear(source, length) ippsZero_32f(source, length)
-#define Cicm_signal_dot(source1, source2, dest, length) ippsDotProd_32f(source1, source2, length, dest)
+/**************** SET ******************/
+#define Cicm_Matrix_Float_Set(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
+#define Cicm_Matrix_Double_Set(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
+/*
 #define Cicm_packed_mul(source1, source2, dest, length) ippsMulPack_32f(source1, source2, dest, length)
 
 #define Cicm_fft_get_size(order, spectrumSize, initSize, bufferSize) ippsFFTGetSize_R_32f(order, IPP_FFT_NODIV_BY_ANY, ippAlgHintFast, spectrumSize, initSize, bufferSize)
@@ -77,16 +94,16 @@ static Ipp64f	double_filled_1[16384] = {1};
 #define Cicm_Matrix_Vector_Float_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmov(matrixSource+row_number * size, vectorDest, size, 1, size, size)
 #define Cicm_Matrix_Vector_Double_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmovD(matrixSource+row_number * size, vectorDest, size, 1, size, size)
 
-/**************** PRODUCT *************
-#define Cicm_Matrix_Vector_Float_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_sgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1.f, matrix, column_size, vectorSource, 1, 0.f, vectorDest, 1)
-#define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_dgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1., matrix, column_size, vectorSource, 1, 0., vectorDest, 1)
+/**************** PRODUCT *************/
+#define Cicm_Matrix_Vector_Float_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) int sizeOfType = sizeof(Ipp32f); ippmMul_mv_32f(matrix, sizeOfType * column_size, sizeOfType, column_size, number_of_rows, vectorSource, sizeOfType, column_size, vectorDest, sizeOfType)
+#define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) int sizeOfType = sizeof(Ipp64f); ippmMul_mv_64f(matrix, sizeOfType * column_size, sizeOfType, column_size, number_of_rows, vectorSource, sizeOfType, column_size, vectorDest, sizeOfType)
 
-#define Cicm_Matrix_Matrix_Float_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1.f, matrixOne, number_of_rowsOne, matrixTwo, number_of_rowsOne, 0.f, matrixDest, number_of_rowsOne);
-#define Cicm_Matrix_Matrix_Double_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1., matrixOne, number_of_rowsOne, matrixTwo, column_sizeOne, 0., matrixDest, column_sizetwo);
+#define Cicm_Matrix_Matrix_Float_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) int sizeOfType = sizeof(Ipp32f); ippmMul_mm_32f(matrixOne, sizeOfType * column_sizetwo, sizeOfType, column_sizetwo, number_of_rowsOne, matrixTwo, sizeOfType, sizeOfType, 
 
-/**************** DOT PRODUCT *********
-#define Cicm_Vector_Float_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotpr(vectorOne, 1, vectorTwo, 1, scalarDest, size)
-#define Cicm_Vector_Double_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotprD(vectorOne, 1, vectorTwo, 1, scalarDest, size)
+/**************** DOT PRODUCT *********/
+
+#define Cicm_Vector_Float_Dot_Product(vectorOne, vectorTwo, scalarDest, size) ippsDotProd_32f(vectorOne, vectorTwo, size, scalarDest)
+#define Cicm_Vector_Double_Dot_Product(vectorOne, vectorTwo, scalarDest, size) ippsDotProd_64f(vectorOne, vectorTwo, size, scalarDest)
 
 /**************** MUL *****************/
 #define Cicm_Matrix_Vector_Float_Mul(vectorOne, vectorTwo, vectorDest, size) ippsMul_32f(vectorOne, vectorTwo, vectorDest, size);
@@ -102,7 +119,6 @@ static Ipp64f	double_filled_1[16384] = {1};
 
 #define Cicm_Vector_Float_Add(vectorOne, vectorDest, size) ippsAdd_32f_I(vectorOne, vectorDest, size)
 #define Cicm_Vector_Double_Add(vectorOne, vectorDest, size) ippsAdd_64f_I(vectorOne, vectorDest, size)
-
 
 /************* MUL AND ADD ************/
 
@@ -123,9 +139,10 @@ static Ipp64f	double_filled_1[16384] = {1};
 #define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
 #define Cicm_Vector_Double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, low, high, vectorDest, 1, size);
 
-/**************** CLEAR ***************
-#define Cicm_Vector_Float_Clear(source, length) vDSP_vclr(source, 1, length)
-#define Cicm_Vector_Double_Clear(source, length) vDSP_vclrD(source, 1, length)
+/**************** CLEAR ***************/
+
+#define Cicm_Vector_Float_Clear(source, length) ippsZero_32f(source, length)
+#define Cicm_Vector_Double_Clear(source, length) ippsZero_64f(source, length)
 
 /* Matrix Transpose *
  #define  Cicm_Matrix_Transpose_Float(matrixSource, matrixDest, rowDest, columnDest) vDSP_mtrans(&matrixSource[0][0], 1, &matrixDest[0][0], 1, rowDest, columnDest);
