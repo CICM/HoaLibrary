@@ -54,14 +54,14 @@ public:
 	~AmbisonicsDecoder();
 	
 	/* Perform sample by sample */    
-	inline void process(double* aHarmonicsInputVector, double* aLoudspeakersOutputVector)
+	inline void process(double* anInput, double* anOutput)
 	{
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, aHarmonicsInputVector, aLoudspeakersOutputVector, m_number_of_outputs, m_number_of_harmonics);
+        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
-    inline void process(float* anHarmonicsInputVector, float* aLoudspeakersOutputVector)
+    inline void process(float* anInput, float* anOutput)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, anHarmonicsInputVector, aLoudspeakersOutputVector,  m_number_of_outputs, m_number_of_harmonics);
+        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, anInput, anOutput,  m_number_of_outputs, m_number_of_harmonics);
 	}
 	
 	/* Perform block sample */

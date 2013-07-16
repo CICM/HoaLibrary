@@ -47,6 +47,8 @@
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseIntelIPP>Sequential</UseIntelIPP>
+    <UseIntelMKL>Parallel</UseIntelMKL>
+    <UseILP64Interfaces>false</UseILP64Interfaces>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -275,8 +277,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="..\..\..\..\SDKs\MaxSDK-6.1.1\c74support\max-includes\common\commonsyms.c" />
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonics.cpp" />
-    <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicsEncoder.cpp" />
+    <ClCompile Include="..\..\Sources\hoaBinaural\AmbisonicsBinaural.cpp" />
+    <ClCompile Include="..\..\Sources\hoaDecoder\AmbisonicsDecoder.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMultiDecoder\AmbisonicsMultiDecoder.cpp" />
+    <ClCompile Include="..\..\Sources\hoaRestitution\AmbisonicsRestitution.cpp" />
     <ClCompile Include="hoa.decoder~.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -284,8 +290,11 @@
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonics.h" />
-    <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicsEncoder.h" />
+    <ClInclude Include="..\..\Sources\hoaBinaural\AmbisonicsBinaural.h" />
+    <ClInclude Include="..\..\Sources\hoaDecoder\AmbisonicsDecoder.h" />
     <ClInclude Include="..\..\Sources\HoaLibrary.h" />
+    <ClInclude Include="..\..\Sources\hoaMultiDecoder\AmbisonicsMultiDecoder.h" />
+    <ClInclude Include="..\..\Sources\hoaRestitution\AmbisonicsRestitution.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
