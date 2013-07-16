@@ -26,15 +26,12 @@
 #ifndef DEF_AmbisonicsViewer
 #define DEF_AmbisonicsViewer
 
-#include "../CicmLibrary/CicmLibrary.h"
+#include "Ambisonics.h"
 
-class AmbisonicsViewer
+class AmbisonicsViewer : public Ambisonics
 {
 	
 private:
-	long		m_order;
-	long		m_number_of_harmonics;
-    double      m_representation_offset;
 
 	long		m_biggest_contribution_index;
 	long		m_biggest_distance_index1;
@@ -51,7 +48,6 @@ private:
     long        m_biggest_lobe_index1;
     long        m_biggest_lobe_vector_size;
 
-	double*		m_harmonics_values;
 	double		m_vector_x[NUMBEROFCIRCLEPOINTS_UI];
 	double		m_vector_y[NUMBEROFCIRCLEPOINTS_UI];
 	int         m_vector_color[NUMBEROFCIRCLEPOINTS_UI];
@@ -62,10 +58,13 @@ private:
 	void	computeContribution();
 	void	computeMaximumDistance();
     void	computeBiggestLobe();
+    
+protected :
+    Cicm_Vector_Double	m_harmonics_values;
 	
 public:
-	AmbisonicsViewer(long anOrder, double offset = 0.);
-    inline long getOrder() {return m_order;}
+	AmbisonicsViewer(long anOrder, long aVectorSize = 0, long aSamplingRate = 44100);
+    
 	double  getBiggestContribution();
 	long    getBiggestContributionIndex();
 	double  getContributions(long anIndex);
@@ -78,8 +77,8 @@ public:
     long    getBiggestLobeNbPoint();
     double  getBiggestLobe_x(long anIndex);
     double  getBiggestLobe_y(long anIndex);
+    
 	~AmbisonicsViewer();
-	
     
 	template<typename Type> void process(Type* anInputs)
 	{

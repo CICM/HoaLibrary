@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		2C6AC45A177F3A9700F63FC2 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6AC459177F3A9700F63FC2 /* MaxAudioAPI.framework */; };
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		2CF61A931712F2250062A8EA /* hoa.pi~.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CF61A921712F2250062A8EA /* hoa.pi~.c */; };
+		8FB37D7C17951AED0001898B /* hoa.pi~.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FB37D7B17951AED0001898B /* hoa.pi~.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C6AC459177F3A9700F63FC2 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2CF61A921712F2250062A8EA /* hoa.pi~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.pi~.c"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.pi~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.pi~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FB37D7B17951AED0001898B /* hoa.pi~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.pi~.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +36,7 @@
 			children = (
 				2C6AC459177F3A9700F63FC2 /* MaxAudioAPI.framework */,
 				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
-				2CF61A921712F2250062A8EA /* hoa.pi~.c */,
+				8FB37D7B17951AED0001898B /* hoa.pi~.c */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CF61A931712F2250062A8EA /* hoa.pi~.c in Sources */,
+				8FB37D7C17951AED0001898B /* hoa.pi~.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +166,6 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -184,7 +183,6 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../c74support/msp-includes\"",
 					"\"$(SRCROOT)/../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes\"",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

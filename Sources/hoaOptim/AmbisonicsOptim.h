@@ -82,7 +82,7 @@ public:
         {
             input_pointor = inputs[i];
             output_pointor = outputs[i];
-            Cicm_Vector_Scalar_Float_Mul(input_pointor, m_optim_vector_float+i, output_pointor, m_vector_size);
+            Cicm_Vector_Scalar_Float_Mul(input_pointor, m_optim_vector_float[i], output_pointor, m_vector_size);
 		}
 	}
     
@@ -95,7 +95,7 @@ public:
         {
             input_pointor = inputs[i];
             output_pointor = outputs[i];
-			Cicm_Vector_Scalar_Double_Mul(input_pointor, m_optim_vector_double+i, output_pointor, m_vector_size);
+			Cicm_Vector_Scalar_Double_Mul(input_pointor, m_optim_vector_double[i], output_pointor, m_vector_size);
 		}
 	}
 };

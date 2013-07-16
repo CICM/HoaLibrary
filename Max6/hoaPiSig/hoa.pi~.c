@@ -42,11 +42,6 @@ void pi_float(t_pi *x, double n) ;
 void pi_assist(t_pi *x, void *b, long m, long a, char *s);
 void *pi_new(t_symbol *s, int argc, t_atom *argv);
 
-void pi_dsp(t_pi *x, t_signal **sp, short *count);
-t_int *pi_perform(t_int *w);
-t_int *pi_perform_phase(t_int *w);
-t_int *pi_perform_offset(t_int *w);
-
 void pi_dsp64(t_pi *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void pi_perform64(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void pi_perform64_phase(t_pi *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -63,8 +58,7 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)pi_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)pi_float,	"float",	A_FLOAT, 0);
     class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
-    class_addmethod(c, (method)pi_dsp,      "dsp",	A_CANT, 0);
-	class_addmethod(c, (method)pi_dsp64,	"dsp64",A_CANT, 0);
+	class_addmethod(c, (method)pi_dsp64,	"dsp64",    A_CANT, 0);
 	
     class_dspinit(c);
 	class_register(CLASS_BOX, c);
@@ -123,61 +117,6 @@ void pi_perform64_offset(t_pi *x, t_object *dsp64, double **ins, long numins, do
     int i;
     for(i = 0; i < sampleframes; i++)
         outs[0][i] = CICM_PI * x->p_value;
-}
-
-void pi_dsp(t_pi *x, t_signal **sp, short *count)
-{	
-	if(count[0])
-		dsp_add(pi_perform, 4, x, sp[0]->s_vec, sp[2]->s_vec, sp[0]->s_n);
-    else if(count[1])
-		dsp_add(pi_perform_phase, 4, x, sp[1]->s_vec, sp[2]->s_vec, sp[0]->s_n);
-	else
-		dsp_add(pi_perform_offset, 3, x, sp[2]->s_vec, sp[0]->s_n);
-}
-
-t_int *pi_perform(t_int *w)
-{
-    t_pi *x = (t_pi *)(w[1]);
-	t_float *in = (t_float *)(w[2]);
-	t_float *out = (t_float *)(w[3]);
-	int n = (int)w[4];
-	
-	while (n--)
-    {
-        x->p_value = *in++;
-		*out++ = x->p_value * PI;
-    }
-    
-	return w + 5;
-}
-
-t_int *pi_perform_phase(t_int *w)
-{
-    t_pi *x = (t_pi *)(w[1]);
-	t_float *in = (t_float *)(w[2]);
-	t_float *out = (t_float *)(w[3]);
-	int n = (int)w[4];
-	
-	while (n--)
-    {
-		*out++ = (x->p_value * PI) * *in++;
-    }
-    
-	return w + 5;
-}
-
-t_int *pi_perform_offset(t_int *w)
-{
-	t_pi *x = (t_pi *)(w[1]);
-	t_float *out = (t_float *)(w[2]);
-	int n = (int)w[3];
-	
-	while (n--)
-    {
-		*out++ = x->p_value * PI;
-    }
-    
-	return w + 4;
 }
 
 void pi_assist(t_pi *x, void *b, long m, long a, char *s)

@@ -23,41 +23,43 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_HOA_LIBRARY
-#define DEF_HOA_LIBRARY
+#ifndef DEF_MAX_CONVERTER
+#define DEF_MAX_CONVERTER
 
-#ifdef __WIN32__
-#include "hoaEncoder/AmbisonicsEncoder.h"
-#include "hoaRotate/AmbisonicsRotate.h"
+#include "../Sources/HoaLibrary.h"
+extern "C"
+{
+#include "ext.h"
+#include "ext_obex.h"
+#include "ext_common.h"
+#include "jpatcher_api.h"
+#include "jgraphics.h"
+#include "jpatcher_syms.h"
+#include "ext_dictionary.h"
+#include "ext_globalsymbol.h"
+#include "commonsyms.h"
+#include "ext_parameter.h"
+}
+
+t_jrgba cicmColorToMaxColor(color aCicmColor)
+{
+    t_jrgba maxColor;
+    maxColor.red = aCicmColor.red;
+    maxColor.green = aCicmColor.green;
+    maxColor.blue = aCicmColor.blue;
+    maxColor.alpha = aCicmColor.alpha;
+    return maxColor;
+}
+
+double cicmAbscissaToMaxAbscissa(double aCicmAbscissa, t_rect* aMaxRect, double aZoomfactor = 1.)
+{
+    return aMaxRect->width / 2. + aZoomfactor * aCicmAbscissa * aMaxRect->width / 2.;
+}
+
+double cicmAbscissaToMaxOrdinate(double aCicmOrdinate, t_rect* aMaxRect, double aZoomfactor = 1.)
+{
+    return aMaxRect->height / 2. + aZoomfactor * aCicmOrdinate * aMaxRect->height / -2.;
+}
+
+
 #endif
-
-#ifdef __APPLE__
-#include "hoaAmbisonics/AmbisonicsViewer.h"
-#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaDelay/AmbisonicsDelay.h"
-#include "hoaEncoder/AmbisonicsEncoder.h"
-#include "hoaFreeverb/AmbisonicsFreeverb.h"
-#include "hoaFilter/AmbisonicsFilter.h"
-#include "hoaGrain/AmbisonicsGrain.h"
-#include "hoaMap/AmbisonicMultiMaps.h"
-#include "hoaMap/AmbisonicSourcesManager.h"
-#include "hoaMap/AmbisonicSourcesPreset.h"
-#include "hoaMap/AmbisonicSourcesTrajectory.h"
-#include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
-#include "hoaOptim/AmbisonicsOptim.h"
-#include "hoaProjector/AmbisonicsProjector.h"
-#include "hoaRecomposer/AmbisonicsRecomposer.h"
-#include "hoaRingModulation/AmbisonicsRingModulation.h"
-#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
-#include "hoaRotate/AmbisonicsRotate.h"
-#include "hoaSpace/AmbisonicSpace.h"
-#include "hoaGalaxy/AmbisonicsGalaxy.h"
-#include "hoaSpectrum/AmbisonicsSpectrum.h"
-#include "hoaWider/AmbisonicsWider.h"
-#include "hoaVector/AmbisonicsVector.h"
-
-#endif
-#endif
-
-

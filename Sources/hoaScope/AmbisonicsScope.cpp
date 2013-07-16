@@ -23,41 +23,14 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_HOA_LIBRARY
-#define DEF_HOA_LIBRARY
+#include "AmbisonicsScope.h"
 
-#ifdef __WIN32__
-#include "hoaEncoder/AmbisonicsEncoder.h"
-#include "hoaRotate/AmbisonicsRotate.h"
-#endif
+AmbisonicsScope::AmbisonicsScope(long anOrder, long aVectorSize, long aSamplingRate) : AmbisonicsViewer(anOrder, aVectorSize, aSamplingRate)
+{
+    ;
+}
 
-#ifdef __APPLE__
-#include "hoaAmbisonics/AmbisonicsViewer.h"
-#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaDelay/AmbisonicsDelay.h"
-#include "hoaEncoder/AmbisonicsEncoder.h"
-#include "hoaFreeverb/AmbisonicsFreeverb.h"
-#include "hoaFilter/AmbisonicsFilter.h"
-#include "hoaGrain/AmbisonicsGrain.h"
-#include "hoaMap/AmbisonicMultiMaps.h"
-#include "hoaMap/AmbisonicSourcesManager.h"
-#include "hoaMap/AmbisonicSourcesPreset.h"
-#include "hoaMap/AmbisonicSourcesTrajectory.h"
-#include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
-#include "hoaOptim/AmbisonicsOptim.h"
-#include "hoaProjector/AmbisonicsProjector.h"
-#include "hoaRecomposer/AmbisonicsRecomposer.h"
-#include "hoaRingModulation/AmbisonicsRingModulation.h"
-#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
-#include "hoaRotate/AmbisonicsRotate.h"
-#include "hoaSpace/AmbisonicSpace.h"
-#include "hoaGalaxy/AmbisonicsGalaxy.h"
-#include "hoaSpectrum/AmbisonicsSpectrum.h"
-#include "hoaWider/AmbisonicsWider.h"
-#include "hoaVector/AmbisonicsVector.h"
-
-#endif
-#endif
-
-
+AmbisonicsScope::~AmbisonicsScope()
+{
+	;
+}

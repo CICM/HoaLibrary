@@ -98,8 +98,8 @@
 #define Cicm_Matrix_Vector_Float_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmul(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 #define Cicm_Matrix_Vector_Double_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmulD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 
-#define Cicm_Vector_Scalar_Float_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, scalar, vectorDest, 1, size)
-#define Cicm_Vector_Scalar_Double_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, scalar, vectorDest, 1, size)
+#define Cicm_Vector_Scalar_Float_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, &scalar, vectorDest, 1, size)
+#define Cicm_Vector_Scalar_Double_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, &scalar, vectorDest, 1, size)
 
 #define Cicm_Vector_Vector_Float_Mul(vectorOne, vectorDest, size) cblas_sdot(size, vectorOne, 1, vectorDest, 1)
 #define Cicm_Vector_Vector_Double_Mul(vectorOne, vectorDest, size) cblas_ddot(size, vectorOne, 1, vectorDest, 1)
@@ -114,6 +114,15 @@
 
 #define Cicm_Vector_Scalar_Float_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsadd(vectorSource, 1, scalar, vectorDest, 1, size);
 #define Cicm_Vector_Scalar_Double_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsaddD(vectorSource, 1, scalar, vectorDest, 1, size);
+
+
+/************* MUL AND ADD ************/
+
+#define Cicm_Vector_Vector_Float_Mul_And_Add(vectorOne, vectorTwo, vectorDest, size) vDSP_vma(vectorOne, 1, vectorTwo, 1, vectorDest, 1, vectorDest, 1, size)
+#define Cicm_Vector_Vector_Double_Mul_And_Add(vectorOne, vectorTwo, vectorDest, size) vDSP_vmaD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, vectorDest, 1, size)
+
+#define Cicm_Vector_Scalar_Float_Mul_And_Add(vectorOne, scalar, vectorDest, size) vDSP_vmsa(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
+#define Cicm_Vector_Scalar_Double_Mul_And_Add(vectorOne, scalar, vectorDest, size) vDSP_vmsaD(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
 
 /**************** CLIP  ***************/
 #define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
@@ -145,8 +154,8 @@
 #define Cicm_Vector_Float_Sinus vvsinf
 #define Cicm_Vector_Double_Cosinus vvcos
 #define Cicm_Vector_Double_Sinus vvsin
-#define Cicm_Vector_Float_SinCos vvsincosf
-#define Cicm_Vector_Double_SinCos vvsincos
+#define Cicm_Vector_Float_SinCos(sinVector, cosVector, angleVector, size) vvsincosf(sinVector, cosVector, angleVector, &size)
+#define Cicm_Vector_Double_SinCos(sinVector, cosVector, angleVector, size) vvsincos(sinVector, cosVector, angleVector, &size)
 
 #endif
 

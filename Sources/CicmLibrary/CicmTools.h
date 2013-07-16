@@ -26,16 +26,17 @@
 #ifndef DEF_CICM_TOOLS
 #define DEF_CICM_TOOLS
 
+
 #include <iostream>
 #include <vector>
 #include <map>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
 #include <math.h>
-using namespace std;
 #include <string>
+
+using namespace std;
 
 #define CICM_PI  (3.141592653589793238462643383279502884)
 #define CICM_2PI (6.283185307179586476925286766559005)
