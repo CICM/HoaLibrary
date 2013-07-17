@@ -46,10 +46,10 @@ const double		kSpeedupFactor	= 0.5;// alter animation speed
 const double		kInertiaFactor	= 0.20;	// willingness to change speed & direction
 const double		kAccelFactor	= 0.100;// neighbor avoidance accelerate or decelerate rate
 const double		kPrefDist		= 0.25;	// preferred distance from neighbors
-const double		kFlyRectTop		= 1.0;	// fly rect boundaries
-const double		kFlyRectLeft	= -1.0;
-const double		kFlyRectBottom	= -1.0;
-const double		kFlyRectRight	= 1.0;
+const double		kFlyRectTopLeft_X       = -5.0;	// fly rect boundaries
+const double		kFlyRectTopLeft_Y       = 5.0;
+const double		kFlyRectBottomRight_X	= 5.0;
+const double		kFlyRectBottomRight_Y	= -5.0;
 
 
 #define	MAX_NEIGHBORS 4
@@ -66,16 +66,9 @@ typedef struct Point2d {
 	double		y;
 } Point2d;
 
-/*
 typedef struct Box2D {
-	double		left, right;
-	double		top, bottom;
-} Box2D;
-*/
-
-typedef struct Box2D {
-	double		left, right;
-	double		top, bottom;
+    Point2d     topLeft;
+    Point2d     bottomRight;
 } Box2D;
 
 class Boid {
@@ -155,17 +148,13 @@ public:
     
     inline long   getNumberOfBoids()        {return m_numBoids;}
     inline long   getNumberOfNeighbors()    {return m_numNeighbors;}
-    inline double getFlyRect_Left()         {return m_flyRect.left;}
-    inline double getFlyRect_Right()        {return m_flyRect.right;}
-    inline double getFlyRect_Top()          {return m_flyRect.top;}
-    inline double getFlyRect_Bottom()       {return m_flyRect.bottom;}
     inline double getMinSpeed()             {return m_minSpeed;}
     inline double getMaxSpeed()             {return m_maxSpeed;}
     inline double getCenterWeight()         {return m_centerWeight;}
     inline double getAttractWeight()        {return m_attractWeight;}
     inline double getMatchWeight()          {return m_matchWeight;}
     inline double getAvoidWeight()          {return m_avoidWeight;}
-    inline double getWallsWeight()           {return m_wallsWeight;}
+    inline double getWallsWeight()          {return m_wallsWeight;}
     inline double getEdgeDistance()         {return m_edgeDist;}
     inline double getSpeedupFactor()        {return m_speedupFactor;}
     inline double getInertiaFactor()        {return m_inertiaFactor;}
@@ -175,6 +164,10 @@ public:
     inline double getCenterPt_ordinate()    {return m_centerPt.y;}
     inline double getAttractPt_abscissa()   {return m_attractPt.x;}
     inline double getAttractPt_ordinate()   {return m_attractPt.y;}
+    inline double getFlyRect_topLeft_X()    {return m_flyRect.topLeft.x;}
+    inline double getFlyRect_topLeft_Y()    {return m_flyRect.topLeft.y;}
+    inline double getFlyRect_bottomRight_X(){return m_flyRect.bottomRight.x;}
+    inline double getFlyRect_bottomRight_Y(){return m_flyRect.bottomRight.y;}
     
     int getBoidPosCoord(long _index, double* _BoidArrayCoord);
     int getBoidDirCoord(long _index, double* _BoidArrayCoord);

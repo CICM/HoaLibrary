@@ -115,13 +115,27 @@ public:
         return (aValue < aMaximum) ? aValue : aMaximum;
 	}
 
-	static long clip_power_of_two(long aValue)
+    /*
+	static int clip_power_of_two(int aValue)
 	{
 		if(aValue < 2)
 		aValue = 2;
 		else if(aValue&(aValue-1) != 0)
 		{
 			while (aValue&(aValue-1) != 0) 
+				aValue--;
+		}
+		return aValue;
+	}
+    */
+    
+    static int clip_power_of_two(int aValue)
+	{
+		if(aValue < 2)
+            aValue = 2;
+		else if(aValue&((aValue-1) != 0))
+		{
+			while (aValue&((aValue-1) != 0))
 				aValue--;
 		}
 		return aValue;

@@ -58,12 +58,14 @@ void BoidsManager::initFlock()
 	m_accelFactor		= kAccelFactor;
 	m_prefDist			= kPrefDist;
 	m_prefDistSqr		= kPrefDist * kPrefDist;
-	m_flyRect.top		= kFlyRectTop;
-	m_flyRect.left		= kFlyRectLeft;
-	m_flyRect.bottom	= kFlyRectBottom;
-	m_flyRect.right		= kFlyRectRight;
-	m_attractPt.x		= (kFlyRectLeft + kFlyRectRight) * 0.5;
-	m_attractPt.y		= (kFlyRectTop + kFlyRectBottom) * 0.5;
+    
+    m_flyRect.topLeft.x     = kFlyRectTopLeft_X;	// fly rect boundaries
+    m_flyRect.topLeft.y     = kFlyRectTopLeft_Y;
+    m_flyRect.bottomRight.x = kFlyRectBottomRight_X;
+    m_flyRect.bottomRight.y = kFlyRectBottomRight_Y;
+
+	m_attractPt.x		= (kFlyRectTopLeft_X + kFlyRectBottomRight_X) * 0.5;
+	m_attractPt.y		= (kFlyRectBottomRight_Y + kFlyRectTopLeft_Y) * 0.5;
     
 	resetBoids();
 }
@@ -309,16 +311,16 @@ Velocity BoidsManager::AvoidWalls(short theBoid)
     
 	/* if test point is out of the left (right) side of m_flyRect, */
 	/* return a positive (negative) horizontal velocity component */
-	if (testPoint.x < m_flyRect.left)
+	if (testPoint.x < m_flyRect.topLeft.x)
 		tempVel.x = fabs(m_boids[theBoid].oldDir.x);
-	else if (testPoint.x > m_flyRect.right)
+	else if (testPoint.x > m_flyRect.bottomRight.x)
 		tempVel.x = - fabs(m_boids[theBoid].oldDir.x);
     
 	/* same with top and bottom */
-	if (testPoint.y < m_flyRect.top)
-		tempVel.y = fabs(m_boids[theBoid].oldDir.y);
-	else if (testPoint.y > m_flyRect.bottom)
+    if (testPoint.y > m_flyRect.topLeft.y)
 		tempVel.y = - fabs(m_boids[theBoid].oldDir.y);
+    else if (testPoint.y < m_flyRect.bottomRight.y)
+		tempVel.y = fabs(m_boids[theBoid].oldDir.y);
 	
 	return(tempVel);
 }
@@ -471,8 +473,8 @@ void BoidsManager::resetBoids()
 	for (i = 0; i <  m_boids.size(); i++)
     {
         // set random location within flyRect
-		m_boids[i].newPos.x = m_boids[i].oldPos.x = Tools::getRand(m_flyRect.right,m_flyRect.left);
-		m_boids[i].newPos.y = m_boids[i].oldPos.y = Tools::getRand(m_flyRect.bottom, m_flyRect.top);
+		m_boids[i].newPos.x = m_boids[i].oldPos.x = Tools::getRand(m_flyRect.topLeft.x, m_flyRect.bottomRight.x);
+		m_boids[i].newPos.y = m_boids[i].oldPos.y = Tools::getRand(m_flyRect.bottomRight.y, m_flyRect.topLeft.y);
         
         // set velocity from random angle
 		rndAngle = Tools::getRand(0, 360) * m_d2r;
@@ -511,10 +513,10 @@ void BoidsManager::setNumberOfNeighbors(long _numberOfNeighbors)
 
 void BoidsManager::setFlyRect(double topLeft_X, double topLeft_Y, double bottomRight_X, double bottomRight_Y)
 {
-    m_flyRect.left = topLeft_X;
-    m_flyRect.right = bottomRight_X;
-    m_flyRect.top = bottomRight_Y;
-    m_flyRect.bottom = topLeft_Y;
+    m_flyRect.topLeft.x     = Tools::cicm_min(topLeft_X, bottomRight_X);
+    m_flyRect.topLeft.y     = Tools::cicm_max(topLeft_Y, bottomRight_Y);
+    m_flyRect.bottomRight.x = Tools::cicm_max(topLeft_X, bottomRight_X);
+    m_flyRect.bottomRight.y = Tools::cicm_min(topLeft_Y, bottomRight_Y);
 }
 
 void BoidsManager::setMinSpeed(double _minSpeed)

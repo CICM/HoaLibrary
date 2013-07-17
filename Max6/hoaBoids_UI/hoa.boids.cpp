@@ -269,7 +269,7 @@ int C74_EXPORT main()
     CLASS_ATTR_ACCESSORS		(c,"zoom", NULL, hoaboids_setAttr_zoom);
 	CLASS_ATTR_LABEL			(c,"zoom", 0,   "Zoom");
 	CLASS_ATTR_CATEGORY			(c,"zoom", 0,   "Behavior");
-	CLASS_ATTR_DEFAULT          (c,"zoom", 0,   "0.35");
+	CLASS_ATTR_DEFAULT          (c,"zoom", 0,   "0.15");
     CLASS_ATTR_ORDER			(c,"zoom", 0,   "2");
     CLASS_ATTR_SAVE             (c,"zoom", 1);
     
@@ -303,18 +303,18 @@ int C74_EXPORT main()
     CLASS_ATTR_LONG             (c,"neigbhors", 0, t_hoaboids, f_neighbors);
     CLASS_ATTR_ACCESSORS		(c,"neigbhors", NULL, hoaboids_setAttr_neighbors);
 	CLASS_ATTR_LABEL			(c,"neigbhors", 0,   "Number Of Neighbors");
-	CLASS_ATTR_DEFAULT          (c,"neigbhors", 0,   "4");
+	CLASS_ATTR_DEFAULT          (c,"neigbhors", 0,   "2");
     CLASS_ATTR_SAVE             (c,"neigbhors", 1);
     
     CLASS_ATTR_DOUBLE			(c,"minspeed", 0, t_hoaboids, f_minspeed);
     CLASS_ATTR_ACCESSORS		(c,"minspeed", NULL, hoaboids_setAttr_minspeed);
 	CLASS_ATTR_LABEL			(c,"minspeed", 0,   "Minimum Speed");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"minspeed", 0,   "0.15");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"minspeed", 0,   "0.5");
     
     CLASS_ATTR_DOUBLE			(c,"maxspeed", 0, t_hoaboids, f_maxspeed);
     CLASS_ATTR_ACCESSORS		(c,"maxspeed", NULL, hoaboids_setAttr_maxspeed);
 	CLASS_ATTR_LABEL			(c,"maxspeed", 0,   "Maximum Speed");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"maxspeed", 0,   "0.25");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"maxspeed", 0,   "1.");
     
     CLASS_ATTR_DOUBLE			(c,"center", 0, t_hoaboids, f_center);
     CLASS_ATTR_ACCESSORS		(c,"center", NULL, hoaboids_setAttr_center);
@@ -329,12 +329,12 @@ int C74_EXPORT main()
     CLASS_ATTR_DOUBLE			(c,"match", 0, t_hoaboids, f_match);
     CLASS_ATTR_ACCESSORS		(c,"match", NULL, hoaboids_setAttr_match);
 	CLASS_ATTR_LABEL			(c,"match", 0,   "Neighbors Velocity Matching");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"match", 0,   "0.1");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"match", 0,   "0.5");
     
     CLASS_ATTR_DOUBLE			(c,"avoid", 0, t_hoaboids, f_avoid);
     CLASS_ATTR_ACCESSORS		(c,"avoid", NULL, hoaboids_setAttr_avoid);
 	CLASS_ATTR_LABEL			(c,"avoid", 0,   "Neighbors Avoidance");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"avoid", 0,   "0.1");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"avoid", 0,   "0.5");
     
     /*
     CLASS_ATTR_DOUBLE			(c,"wall", 0, t_hoaboids, f_wall);
@@ -351,22 +351,22 @@ int C74_EXPORT main()
     CLASS_ATTR_DOUBLE			(c,"speed", 0, t_hoaboids, f_speed);
     CLASS_ATTR_ACCESSORS		(c,"speed", NULL, hoaboids_setAttr_speed);
 	CLASS_ATTR_LABEL			(c,"speed", 0,   "Animation Speed");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"speed", 0,   "0.1");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"speed", 0,   "0.2");
     
     CLASS_ATTR_DOUBLE			(c,"inertia", 0, t_hoaboids, f_inertia);
     CLASS_ATTR_ACCESSORS		(c,"inertia", NULL, hoaboids_setAttr_inertia);
 	CLASS_ATTR_LABEL			(c,"inertia", 0,   "Willingness to Change Speed & Direction");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"inertia", 0,   "0.2");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"inertia", 0,   "0.5");
     
     CLASS_ATTR_DOUBLE			(c,"accel", 0, t_hoaboids, f_accel);
     CLASS_ATTR_ACCESSORS		(c,"accel", NULL, hoaboids_setAttr_accel);
 	CLASS_ATTR_LABEL			(c,"accel", 0,   "Neighbor Avoidance Accelerate or Decelerate Rate");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"accel", 0,   "0.1");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"accel", 0,   "0.4");
     
     CLASS_ATTR_DOUBLE			(c,"prefdist", 0, t_hoaboids, f_prefdist);
     CLASS_ATTR_ACCESSORS		(c,"prefdist", NULL, hoaboids_setAttr_prefdist);
 	CLASS_ATTR_LABEL			(c,"prefdist", 0,   "Preferred Distance from Neighbors");
-	CLASS_ATTR_DEFAULT_SAVE     (c,"prefdist", 0,   "0.25");
+	CLASS_ATTR_DEFAULT_SAVE     (c,"prefdist", 0,   "0.5");
     
     CLASS_STICKY_CATEGORY_CLEAR(c);
     
@@ -611,14 +611,19 @@ t_max_err hoaboids_setAttr_nBoids(t_hoaboids *x, t_object *attr, long argc, t_at
 
 t_max_err hoaboids_setAttr_flyrect(t_hoaboids *x, t_object *attr, long argc, t_atom *argv)
 {
+    double tempFlyRect[4] = {0};
     if(argc && argv)
     {
-        for (int i = 0; i < argc; i++) {
+        for (int i = 0; i < argc; i++)
+        {
             if (atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
-                x->f_flyrect[i] = atom_getfloat(argv+i);
-                //x->f_flyrect[i] = Tools::clip(double(atom_getfloat(argv+i)), double(-10), double(10));
+                tempFlyRect[i] = atom_getfloat(argv+i);
         }
-        x->f_boids_manager->setFlyRect(x->f_flyrect[0], x->f_flyrect[1], x->f_flyrect[2], x->f_flyrect[3]);
+        x->f_boids_manager->setFlyRect(tempFlyRect[0], tempFlyRect[1], tempFlyRect[2], tempFlyRect[3]);
+        x->f_flyrect[0] = x->f_boids_manager->getFlyRect_topLeft_X();
+        x->f_flyrect[1] = x->f_boids_manager->getFlyRect_topLeft_Y();
+        x->f_flyrect[2] = x->f_boids_manager->getFlyRect_bottomRight_X();
+        x->f_flyrect[3] = x->f_boids_manager->getFlyRect_bottomRight_Y();
         
         jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
         jbox_redraw((t_jbox *)x);
@@ -917,7 +922,7 @@ void draw_background(t_hoaboids *x,  t_object *view, t_rect *rect)
     double w = rect->width;
     double h = rect->height;
     t_pt ctr = {w*0.5, h*0.5};
-    double maxctr = Tools::max(w, h)*0.5;
+    double maxctr = Tools::cicm_max(w, h)*0.5;
     
     t_jrgba black = CicmMax::jrgba_addContrast(x->f_colorBackgroundInside, -0.12, true);
     t_jrgba white = CicmMax::jrgba_addContrast(x->f_colorBackgroundInside, 0.08, true);
