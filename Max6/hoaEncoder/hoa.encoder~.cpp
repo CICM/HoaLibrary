@@ -78,7 +78,7 @@ int C74_EXPORT main(void)
         post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
         postons = 1;
     }
-	intel_init();
+
 	return 0;
 }
 

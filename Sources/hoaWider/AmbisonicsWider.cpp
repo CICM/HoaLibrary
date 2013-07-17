@@ -75,7 +75,7 @@ void AmbisonicsWider::setWidenValue(double aWidenValue)
     double one  = 1.;
     
     Cicm_Vector_Scalar_Double_Sum(m_minus_vector_double+1, &scale, m_harmonics_double, m_number_of_harmonics-1);
-    Cicm_Matrix_Vector_Double_Mul(m_dot_vector_double+1, m_harmonics_double, m_harmonics_double, m_number_of_harmonics-1);
+    Cicm_Vector_Vector_Double_Mul(m_dot_vector_double+1, m_harmonics_double, m_harmonics_double, m_number_of_harmonics-1);
     Cicm_Vector_Double_Clip(m_harmonics_double, &zero, &one, m_harmonics_double, m_number_of_harmonics-1);
 }
 
@@ -88,7 +88,7 @@ void AmbisonicsWider::setWidenValue(float aWidenValue)
     float one  = 1.f;
     
     Cicm_Vector_Scalar_Float_Sum(m_minus_vector_float+1, &scale, m_harmonics_float, m_number_of_harmonics-1);
-    Cicm_Matrix_Vector_Float_Mul(m_dot_vector_float+1, m_harmonics_float, m_harmonics_float, m_number_of_harmonics-1);
+    Cicm_Vector_Vector_Float_Mul(m_dot_vector_float+1, m_harmonics_float, m_harmonics_float, m_number_of_harmonics-1);
     Cicm_Vector_Float_Clip(m_harmonics_float, &zero, &one, m_harmonics_float, m_number_of_harmonics-1);
 }
 

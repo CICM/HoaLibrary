@@ -355,7 +355,7 @@ double AmbisonicVirtualMicUIManager::getClosestDefMicDistance(double _angleInRad
     double distance = CICM_2PI;
     
     for (int i = 0; i < m_numberOfMics; i++)
-        distance = Tools::min(distance, Tools::radianClosestDistance(angle, m_defaultAngles[i]));
+        distance = Tools::cicm_min(distance, Tools::radianClosestDistance(angle, m_defaultAngles[i]));
     
     return distance;
 }

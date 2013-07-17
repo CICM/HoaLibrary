@@ -59,18 +59,18 @@ public:
     /* Perform sample by sample */
 	inline void process(float* inputs, float* outputs)
 	{
-        Cicm_Matrix_Vector_Float_Mul(inputs, m_optim_vector_float, outputs, m_number_of_harmonics);
+        Cicm_Vector_Vector_Float_Mul(inputs, m_optim_vector_float, outputs, m_number_of_harmonics);
 	}
     
     /* Perform sample by sample */
 	inline void process(double* inputs, double* outputs)
 	{
-		Cicm_Matrix_Vector_Double_Mul(inputs, m_optim_vector_double, outputs, m_number_of_harmonics);
+		Cicm_Vector_Vector_Double_Mul(inputs, m_optim_vector_double, outputs, m_number_of_harmonics);
 	}
     
     inline void process(double* ioVector)
 	{
-		Cicm_Matrix_Vector_Double_Mul(ioVector, m_optim_vector_double, ioVector, m_number_of_harmonics);
+		Cicm_Vector_Vector_Double_Mul(ioVector, m_optim_vector_double, ioVector, m_number_of_harmonics);
 	}
 	
 	/* Perform block sample */

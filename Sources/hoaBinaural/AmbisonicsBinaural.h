@@ -99,7 +99,6 @@ public:
                         m_impluse_matrix, m_number_of_harmonics,
                         m_input_matrix,  m_vector_size,
                         0., m_result_matrix,  m_vector_size);
-            //Cicm_Matrix_Matrix_Double_Product(m_impluse_matrix, m_input_matrix, m_result_matrix, (m_impulse_size * 2), m_vector_size, m_number_of_harmonics);
             /* Write On The Tempory Vectors And The Outputs Vectors */
             for (int j = 0; j < m_vector_size; j++)
             {
@@ -129,11 +128,11 @@ public:
     
 	inline void process(float** aInputs, float** aOutputs)
 	{
-		/*
+
         if(m_hrtf_loaded == 1)
         {
             float* input;
-            /* Record Inputs vectors In The Matrix *
+            /* Record Inputs vectors In The Matrix */
             for (int i = 0; i < m_number_of_harmonics; i++)
             {
                 input = aInputs[i];
@@ -147,7 +146,7 @@ public:
                         m_input_matrix,  m_vector_size,
                         0., m_result_matrix,  m_vector_size);
             
-            /* Write On The Tempory Vectors And The Outputs Vectors *
+            /* Write On The Tempory Vectors And The Outputs Vectors */
             for (int j = 0; j < m_vector_size; j++)
             {
                 cblas_saxpy(m_impulse_size,1.f, m_result_matrix+j+m_vector_size*m_impulse_size, m_vector_size, m_linear_vector_left  + j, 1);
@@ -156,7 +155,7 @@ public:
                 aOutputs[0][j] = m_linear_vector_left[j];
                 aOutputs[1][j] = m_linear_vector_right[j];
             }
-            /* Record The Tempory Vectors *
+            /* Record The Tempory Vectors */
             cblas_scopy(m_impulse_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
             cblas_scopy(m_impulse_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
             
@@ -170,7 +169,7 @@ public:
                 aOutputs[0][j] = 0.;
                 aOutputs[1][j] = 0.;
             }
-        }*/
+        }
 	}
 
 };

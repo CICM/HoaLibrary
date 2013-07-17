@@ -93,8 +93,8 @@ public:
         {
             Cicm_Vector_Scalar_Double_Mul(aTheta, j, m_angles_double, m_vector_size);
             Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, size);
-            Cicm_Matrix_Vector_Double_Mul(anInput, m_sin_double, anOutputs[i-1], size);
-            Cicm_Matrix_Vector_Double_Mul(anInput, m_cos_double, anOutputs[i], size);
+            Cicm_Vector_Vector_Double_Mul(anInput, m_sin_double, anOutputs[i-1], size);
+            Cicm_Vector_Vector_Double_Mul(anInput, m_cos_double, anOutputs[i], size);
         }
 	}
 	
@@ -117,8 +117,8 @@ public:
         {
             Cicm_Vector_Scalar_Float_Mul(aTheta, j, m_angles_float, m_vector_size);
             Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, size);
-            Cicm_Matrix_Vector_Float_Mul(anInput, m_sin_float, anOutputs[i-1], size);
-            Cicm_Matrix_Vector_Float_Mul(anInput, m_cos_float, anOutputs[i], size);
+            Cicm_Vector_Vector_Float_Mul(anInput, m_sin_float, anOutputs[i-1], size);
+            Cicm_Vector_Vector_Float_Mul(anInput, m_cos_float, anOutputs[i], size);
         }
 	}
 	
@@ -167,8 +167,8 @@ public:
         {
             Cicm_Vector_Scalar_Double_Mul(aTheta, j, m_angles_double, m_vector_size);
             Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, size);
-            Cicm_Matrix_Vector_Double_Mul(anInputs[(int)j], m_sin_double, anOutputs[i-1], size);
-            Cicm_Matrix_Vector_Double_Mul(anInputs[(int)j], m_cos_double, anOutputs[i], size);
+            Cicm_Vector_Vector_Double_Mul(anInputs[(int)j], m_sin_double, anOutputs[i-1], size);
+            Cicm_Vector_Vector_Double_Mul(anInputs[(int)j], m_cos_double, anOutputs[i], size);
         }
 	}
 	
@@ -190,8 +190,8 @@ public:
         {
             Cicm_Vector_Scalar_Float_Mul(aTheta, j, m_angles_float, m_vector_size);
             Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, size);
-            Cicm_Matrix_Vector_Float_Mul(anInputs[(int)j], m_sin_float, anOutputs[i-1], size);
-            Cicm_Matrix_Vector_Float_Mul(anInputs[(int)j], m_cos_float, anOutputs[i], size);
+            Cicm_Vector_Vector_Float_Mul(anInputs[(int)j], m_sin_float, anOutputs[i-1], size);
+            Cicm_Vector_Vector_Float_Mul(anInputs[(int)j], m_cos_float, anOutputs[i], size);
         }
 	}
 	
