@@ -261,7 +261,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
         x->f_averageHarmo[i] = 0.;
     }
     
-    //attr_dictionary_process(x, d);
+    attr_dictionary_process(x, d);
 	
 	jbox_ready((t_jbox *)x);
 	
@@ -435,11 +435,9 @@ void scope_paint(t_scope *x, t_object *view)
 	x->f_rayonCircle = x->f_rayonGlobal / 6;
 	
 	if (x->f_drawCircle) draw_background(x, view, &rect);
-	/*
     if (x->f_drawAngles) draw_angles(x, view, &rect);
     if (x->f_drawContributions) draw_contribution(x, view, &rect);
     draw_harmonics(x, view, &rect);
-	*/
 }
 
 void draw_background(t_scope *x,  t_object *view, t_rect *rect)

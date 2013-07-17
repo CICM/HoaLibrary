@@ -95,6 +95,9 @@ typedef struct  _hoaboids
     
     // interaction :
     int cmdKeyPressed;
+    int mouseIsOverRect;
+    int mouseIsOverTopLeftRect;
+    int mouseIsOverBottomRightRect;
 
 } t_hoaboids;
 
@@ -1006,6 +1009,8 @@ void draw_flyrect(t_hoaboids *x,  t_object *view, t_rect *rect)
     topLeft.y = x->f_flyrect[1] * (w*0.5) * x->f_zoom_factor;
     bottomRight.x = x->f_flyrect[2] * (w*0.5) * x->f_zoom_factor;
     bottomRight.y = x->f_flyrect[3] * (w*0.5) * x->f_zoom_factor;
+    t_jrgba innerColor = x->f_colorFlyrect;
+    innerColor.alpha = Tools::clip_min(innerColor.alpha -= 0.4, 0.1);
     
 	g = jbox_start_layer((t_object *)x, view, gensym("flyrect_layer"), w, rect->height);
 	
@@ -1022,6 +1027,19 @@ void draw_flyrect(t_hoaboids *x,  t_object *view, t_rect *rect)
         jgraphics_arc(g, bottomRight.x, bottomRight.y, cornerSize, 0, CICM_2PI);
         jgraphics_fill(g);
         
+        if (x->mouseIsOverRect)
+        {
+            jgraphics_set_source_jrgba(g, &innerColor);
+            jgraphics_move_to(g, long(topLeft.x)+0.5,     long(topLeft.y)+0.5);
+            jgraphics_line_to(g, long(bottomRight.x)+0.5, long(topLeft.y)+0.5);
+            jgraphics_line_to(g, long(bottomRight.x)+0.5, long(bottomRight.y)+0.5);
+            jgraphics_line_to(g, long(topLeft.x)+0.5,     long(bottomRight.y)+0.5);
+            jgraphics_line_to(g, long(topLeft.x)+0.5,     long(topLeft.y)+0.5);
+            jgraphics_close_path(g);
+            jgraphics_fill(g);
+        }
+        
+        jgraphics_set_source_jrgba(g, &x->f_colorFlyrect);
         jgraphics_set_line_width(g, 1);
         jgraphics_set_dash(g, dashes, 2, 0);
         
@@ -1225,19 +1243,61 @@ void hoaboids_mousewheel(t_hoaboids *x, t_object *patcherview, t_pt pt, long mod
 
 void hoaboids_mouseenter(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    ;
+    //post("modifiers : %ld", modifiers);
 }
 
 void hoaboids_mousemove(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-    x->cmdKeyPressed = 0;
+{    
+    x->cmdKeyPressed = x->mouseIsOverRect = x->mouseIsOverTopLeftRect = x->mouseIsOverBottomRightRect = 0;
+    
+    if (modifiers == 1)
+    {
+        x->cmdKeyPressed = 1;
+        
+        t_pt topLeft = {x->f_flyrect[0], x->f_flyrect[1]};
+        t_pt bottomRight = {x->f_flyrect[2], x->f_flyrect[3]};
+        topLeft = CicmMax::cartCoordsToMaxPt(topLeft, &x->rect, x->f_zoom_factor);
+        bottomRight = CicmMax::cartCoordsToMaxPt(bottomRight, &x->rect, x->f_zoom_factor);
+        if ( Tools::isInside(pt.x, topLeft.x, bottomRight.x) &&
+            Tools::isInside(pt.y, bottomRight.y, topLeft.y)) {
+            x->mouseIsOverRect = 1;
+        }
+        
+        if ( Tools::isInside(pt.x, topLeft.x-5, topLeft.x+5) &&
+            Tools::isInside(pt.y, bottomRight.y-5, bottomRight.y+5))
+        {
+            x->mouseIsOverRect = 0;
+            x->mouseIsOverTopLeftRect = 1;
+        }
+        else if ( Tools::isInside(pt.x, bottomRight.x-5, bottomRight.x+5) &&
+                 Tools::isInside(pt.y, topLeft.y-5, topLeft.y+5))
+        {
+            x->mouseIsOverRect = 0;
+            x->mouseIsOverBottomRightRect = 1;
+        }
+    }
+    
+    if ( x->mouseIsOverRect )
+        jmouse_setcursor(patcherview, (t_object*)x, JMOUSE_CURSOR_RESIZE_FOURWAY);
+    else if ( x->mouseIsOverTopLeftRect )
+        jmouse_setcursor(patcherview, (t_object*)x, JMOUSE_CURSOR_RESIZE_TOPLEFTCORNER);
+    else if ( x->mouseIsOverBottomRightRect )
+        jmouse_setcursor(patcherview, (t_object*)x, JMOUSE_CURSOR_RESIZE_BOTTOMRIGHTCORNER);
+    else
+        jmouse_setcursor(patcherview, (t_object*)x, JMOUSE_CURSOR_ARROW);
+    
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
+    jbox_redraw((t_jbox *)x);
+    
     /*
-    coordinatesCartesian cursor;
-    cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
-    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.) / x->f_zoom_factor;
-    double ditanceSelected = (x->f_size_source / x->rect.width * 2.) / x->f_zoom_factor;
-    x->f_cursor_position.x = cursor.x;
-    x->f_cursor_position.y = cursor.y;
+    t_pt zoomedCarCursor = CicmMax::maxPtToCartCoords(pt, &x->rect, x->f_zoom_factor);
+    
+    if ( Tools::isInside(zoomedCarCursor.x, x->f_flyrect[0], x->f_flyrect[2]) &&
+         Tools::isInside(zoomedCarCursor.y, x->f_flyrect[3], x->f_flyrect[1])) {
+        x->mouseIsOverRect = 1;
+    }
+    
+    if (modifiers == 1) x->cmdKeyPressed = 1;
     */
 
     /*

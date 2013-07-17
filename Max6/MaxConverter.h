@@ -64,6 +64,38 @@ public:
         return maxColor;
     }
     
+    static t_pt maxPtToCartCoords(t_pt pt, t_rect* aMaxRect, double aZoomfactor = 1.)
+    {
+        t_pt cartPt = pt;
+        cartPt.x = ((cartPt.x / aMaxRect->width * 2.) - 1.) / aZoomfactor;
+        cartPt.y = ((-cartPt.y / aMaxRect->height * 2.) + 1.) / aZoomfactor;
+        return cartPt;
+    }
+    
+    static t_pt maxPtToCartCoords(double x, double y, t_rect* aMaxRect, double aZoomfactor = 1.)
+    {
+        t_pt cartPt = {x, y};
+        cartPt.x = ((cartPt.x / aMaxRect->width * 2.) - 1.) / aZoomfactor;
+        cartPt.y = ((-cartPt.y / aMaxRect->height * 2.) + 1.) / aZoomfactor;
+        return cartPt;
+    }
+    
+    static t_pt cartCoordsToCartMaxPt(t_pt pt, t_rect* aMaxRect, double aZoomfactor = 1.)
+    {
+        t_pt maxPt = pt;
+        maxPt.x *= (aMaxRect->width*0.5) * aZoomfactor;
+        maxPt.y *= (aMaxRect->height*0.5) * aZoomfactor;
+        return maxPt;
+    }
+    
+    static t_pt cartCoordsToMaxPt(t_pt pt, t_rect* aMaxRect, double aZoomfactor = 1.)
+    {
+        t_pt maxPt = pt;
+        maxPt.x = (maxPt.x * (aMaxRect->width*0.5) * aZoomfactor) + (aMaxRect->width*0.5);
+        maxPt.y = (maxPt.y * (aMaxRect->height*0.5) * aZoomfactor)+ (aMaxRect->width*0.5);
+        return maxPt;
+    }
+    
     static double cicmAbscissaToMaxAbscissa(double aCicmAbscissa, t_rect* aMaxRect, double aZoomfactor = 1.)
     {
         return aMaxRect->width / 2. + aZoomfactor * aCicmAbscissa * aMaxRect->width / 2.;
