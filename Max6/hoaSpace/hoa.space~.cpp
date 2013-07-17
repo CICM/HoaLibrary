@@ -23,7 +23,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//#include "AmbisonicSpace.h"
 #include "../../Sources/HoaLibrary.h"
 
 extern "C"
@@ -68,7 +67,6 @@ void *HoaSpace_class;
 
 int C74_EXPORT main(void)
 {	
-    common_symbols_init();
 	t_class *c;
 	
 	c = class_new("hoa.space~", (method)HoaSpace_new, (method)HoaSpace_free, (long)sizeof(t_HoaSpace), 0L, A_GIMME, 0);
@@ -243,7 +241,7 @@ t_max_err HoaSpace_notify(t_HoaSpace *x, t_symbol *s, t_symbol *msg, void *sende
             x->f_patcherview = NULL;
         }
 	}
-	else if (msg == _sym_modified)
+	else if (msg == gensym("modified"))
     {
 		if (sender == x->f_ui)
         {

@@ -54,7 +54,7 @@ void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numin
 void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void *HoaWider_class;
 
-int main(void)
+int C74_EXPORT main(void)
 {	
 	t_class *c;
 	

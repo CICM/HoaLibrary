@@ -27,9 +27,17 @@
 #define DEF_HOA_LIBRARY
 
 #ifdef _WINDOWS
+#include "hoaAmbisonics/AmbisonicsViewer.h"
+
 #include "hoaEncoder/AmbisonicsEncoder.h"
 #include "hoaRotate/AmbisonicsRotate.h"
 #include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
+
+#include "hoaRecomposer/AmbisonicsRecomposer.h"
+
+#include "hoaSpace/AmbisonicSpace.h"
+#include "hoaVector/AmbisonicsVector.h"
+#include "hoaWider/AmbisonicsWider.h"
 #endif
 
 #ifdef __APPLE__

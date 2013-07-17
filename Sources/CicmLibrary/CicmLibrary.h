@@ -29,12 +29,13 @@
 #ifdef _WINDOWS
 
 #include "CicmTools.h"
-#include "CicmDefineWindows.h"
+#include "CicmDefine_INTEL.h"
+#include "CicmLines/CicmLine.h"
 
 #endif
 
 #ifdef __APPLE__
-#include "CicmDefineMac.h"
+#include "CicmDefine_VDSP.h"
 #include "CicmTools.h"
 
 #include "CicmFilters/CicmFilterDelay.h"

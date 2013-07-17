@@ -29,7 +29,6 @@
 #include "../HoaAmbisonics/Ambisonics.h"
 #include "../hoaEncoder/AmbisonicsEncoder.h"
 #include "../HoaWider/AmbisonicsWider.h"
-#include "../CicmLibrary/CicmLines/CicmLine.h"
 
 enum
 {
@@ -249,7 +248,7 @@ public:
 	inline void processFisheye(double** aInputs, double** aOutputs, double* fisheyeFactor)
 	{
         double clip[2] = {0.,1.};
-        Cicm_Vector_Double_Clip(fisheyeFactor, &clip[0], &clip[1], fisheyeFactor, m_vector_size);
+        Cicm_Vector_Double_Clip(fisheyeFactor, clip[0], clip[1], fisheyeFactor, m_vector_size);
         double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         
         m_encoders[0]->setAzimuth(0.);
@@ -268,7 +267,7 @@ public:
     inline void processFisheye(float** aInputs, float** aOutputs, float* fisheyeFactor)
 	{
         float clip[2] = {0.,1.};
-        Cicm_Vector_Float_Clip(fisheyeFactor, &clip[0], &clip[1], fisheyeFactor, m_vector_size);
+        Cicm_Vector_Float_Clip(fisheyeFactor, clip[0], clip[1], fisheyeFactor, m_vector_size);
         double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         
         m_encoders[0]->setAzimuth(0.f);

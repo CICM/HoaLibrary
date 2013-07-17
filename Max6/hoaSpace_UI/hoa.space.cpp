@@ -23,6 +23,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#define MAX_MICS 256
+
 #include "../../Sources/HoaLibrary.h"
 
 extern "C"
@@ -120,7 +122,6 @@ void draw_cursor(t_space *x, t_object *view, t_rect *rect);
 int C74_EXPORT main()
 {
 	t_class *c;
-    common_symbols_init();
     
 	c = class_new("hoa.space", (method)space_new, (method)space_free, (short)sizeof(t_space), 0L, A_GIMME, 0);
 
@@ -257,7 +258,7 @@ void space_assist(t_space *x, void *b, long m, long a, char *s)
 		if (a == 0)
 			sprintf(s,"(List) Virtual microphones coefficients");
         else if (a == 1)
-			sprintf(s,"(int) Nuber of Virtual microphones");
+			sprintf(s,"(int) Number of Virtual microphones");
 	}
 }
 
@@ -917,7 +918,7 @@ t_max_err coefficients_set(t_space *x, t_object *attr, long ac, t_atom *av)
                 x->f_microphonesValues[atom_getlong(av)] = Tools::clip((double)atom_getfloat(av+1), 0., 1.);
         }
         
-        object_notify(x, _sym_modified, NULL);
+        object_notify(x, gensym("modified"), NULL);
     }
     
     space_compute(x);
