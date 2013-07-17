@@ -261,7 +261,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
         x->f_averageHarmo[i] = 0.;
     }
     
-    attr_dictionary_process(x, d);
+    //attr_dictionary_process(x, d);
 	
 	jbox_ready((t_jbox *)x);
 	
@@ -303,7 +303,7 @@ void scope_resize_inputs(t_scope *x, long newNumberOfInput)
 {
     newNumberOfInput = Tools::clip_min(newNumberOfInput, long(1));
     t_object *b = NULL;
-    object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+	object_obex_lookup(x, gensym("#B"), (t_object **)&b);
     object_method(b, gensym("dynlet_begin"));
     dsp_resize((t_pxobject*)x, newNumberOfInput);
     object_method(b, gensym("dynlet_end"));
@@ -435,9 +435,11 @@ void scope_paint(t_scope *x, t_object *view)
 	x->f_rayonCircle = x->f_rayonGlobal / 6;
 	
 	if (x->f_drawCircle) draw_background(x, view, &rect);
+	/*
     if (x->f_drawAngles) draw_angles(x, view, &rect);
     if (x->f_drawContributions) draw_contribution(x, view, &rect);
     draw_harmonics(x, view, &rect);
+	*/
 }
 
 void draw_background(t_scope *x,  t_object *view, t_rect *rect)

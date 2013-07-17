@@ -69,7 +69,6 @@ t_class *HoaVector_class;
 
 int C74_EXPORT main(void)
 {	
-    common_symbols_init();
 	t_class *c;
 	
 	c = class_new("hoa.vector~", (method)HoaVector_new, (method)HoaVector_free, (long)sizeof(t_HoaVector), 0L, A_GIMME, 0);
@@ -233,7 +232,7 @@ void HoaVector_resize_inlet(t_HoaVector *x, long lastNumberOfOutlet)
         object_method(gensym("dsp")->s_thing, gensym("stop"));
     
     t_object *b = NULL;
-    object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+    object_obex_lookup(x, gensym("#B"), (t_object **)&b);
     object_method(b, gensym("dynlet_begin"));
     
     dsp_resize((t_pxobject*)x, x->f_ambiVector->getNumberOfInputs());

@@ -30,6 +30,7 @@
 
 #include "CicmTools.h"
 #include "CicmDefine_INTEL.h"
+#include "CicmLines/CicmLine.h"
 
 #endif
 

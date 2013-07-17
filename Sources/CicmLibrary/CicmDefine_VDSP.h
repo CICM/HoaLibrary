@@ -115,8 +115,8 @@
 #define Cicm_Vector_Scalar_Double_Mul_And_Add(vectorOne, scalar, vectorDest, size) vDSP_vmsaD(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
 
 /**************** CLIP  ***************/
-#define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
-#define Cicm_Vector_Double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, low, high, vectorDest, 1, size);
+#define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, &low, &high, vectorDest, 1, size);
+#define Cicm_Vector_Double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, &low, &high, vectorDest, 1, size);
 
 /**************** CLEAR ***************/
 #define Cicm_Vector_Float_Clear(source, length) vDSP_vclr(source, 1, length)

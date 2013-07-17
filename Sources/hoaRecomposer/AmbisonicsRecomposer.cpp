@@ -84,13 +84,13 @@ void AmbisonicsRecomposer::computeMatrix(double aFishEyeFactor)
             int index = getHarmonicIndex(j);
             if(index > 0)
             {
-                double value = cos(fabs(index) * angle);
+                double value = cos(fabs((double)index) * angle);
                 Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
                 Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
             }
 			else if(index < 0)
             {
-                double value = sin(fabs(index) * angle);
+                double value = sin(fabs((double)index) * angle);
                 Cicm_Matrix_Float_Set(m_recomposer_matrix_float, j, i, m_number_of_microphones, value);
                 Cicm_Matrix_Double_Set(m_recomposer_matrix_double, j, i, m_number_of_microphones, value);
             }

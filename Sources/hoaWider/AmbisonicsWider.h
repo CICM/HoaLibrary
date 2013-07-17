@@ -134,7 +134,7 @@ public:
 	{
         double  zero = 0.;
         double  one  = 1.;
-        Cicm_Vector_Double_Clip(aWidenValues, &zero, &one, aWidenValues, m_vector_size);
+        Cicm_Vector_Double_Clip(aWidenValues, zero, one, aWidenValues, m_vector_size);
         for(int i = 0; i < m_vector_size; i++)
              m_weight_vector_double[i] = (1. - aWidenValues[i]) * m_order_weight_double + 1.;
         Cicm_Vector_Scalar_Double_Mul(aWidenValues, m_order_weight_double, m_scale_vector_double, m_vector_size);
@@ -144,9 +144,9 @@ public:
         
         for(int i = 1; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Scalar_Double_Sum(m_scale_vector_double, &m_minus_vector_double[i], m_weight_vector_double, m_vector_size);
+            Cicm_Vector_Scalar_Double_Sum(m_scale_vector_double, m_minus_vector_double[i], m_weight_vector_double, m_vector_size);
             Cicm_Vector_Scalar_Double_Mul(m_weight_vector_double, m_dot_vector_double[i], m_weight_vector_double, m_vector_size);
-            Cicm_Vector_Double_Clip(m_weight_vector_double, &zero, &one, m_weight_vector_double, m_vector_size);
+            Cicm_Vector_Double_Clip(m_weight_vector_double, zero, one, m_weight_vector_double, m_vector_size);
             Cicm_Vector_Vector_Double_Mul(aOutputs[i], m_weight_vector_double, aOutputs[i], m_vector_size);
         }
         
@@ -158,7 +158,7 @@ public:
 	{
         float  zero = 0.f;
         float  one  = 1.f;
-        Cicm_Vector_Float_Clip(aWidenValues, &zero, &one, aWidenValues, m_vector_size);
+        Cicm_Vector_Float_Clip(aWidenValues, zero, one, aWidenValues, m_vector_size);
         for(int i = 0; i < m_vector_size; i++)
             m_weight_vector_float[i] = (1. - aWidenValues[i]) * m_order_weight_double + 1.;
         Cicm_Vector_Scalar_Float_Mul(aWidenValues, m_order_weight_float, m_scale_vector_float, m_vector_size);
@@ -168,9 +168,9 @@ public:
         
         for(int i = 1; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Scalar_Float_Sum(m_scale_vector_float, &m_minus_vector_float[i], m_weight_vector_float, m_vector_size);
+            Cicm_Vector_Scalar_Float_Sum(m_scale_vector_float, m_minus_vector_float[i], m_weight_vector_float, m_vector_size);
             Cicm_Vector_Scalar_Float_Mul(m_weight_vector_float, m_dot_vector_float[i], m_weight_vector_float, m_vector_size);
-            Cicm_Vector_Float_Clip(m_weight_vector_float, &zero, &one, m_weight_vector_float, m_vector_size);
+            Cicm_Vector_Float_Clip(m_weight_vector_float, zero, one, m_weight_vector_float, m_vector_size);
             Cicm_Vector_Vector_Float_Mul(aOutputs[i], m_weight_vector_float, aOutputs[i], m_vector_size);
         }
         

@@ -29,6 +29,7 @@
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseIntelIPP>Sequential</UseIntelIPP>
+    <UseIntelMKL>Sequential</UseIntelMKL>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -277,8 +278,8 @@
   <ItemGroup>
     <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonics.cpp" />
-    <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicsEncoder.cpp" />
-    <ClCompile Include="hoa.encoder~.cpp" />
+    <ClCompile Include="..\..\Sources\hoaWider\AmbisonicsWider.cpp" />
+    <ClCompile Include="hoa.wider~.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_BLAS_FFTW.h" />
@@ -287,8 +288,8 @@
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonics.h" />
-    <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicsEncoder.h" />
     <ClInclude Include="..\..\Sources\HoaLibrary.h" />
+    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicsWider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
