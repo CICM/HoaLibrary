@@ -53,14 +53,8 @@ void HoaRecomposer_wide(t_HoaRecomposer *x, t_symbol *s, short ac, t_atom *av);
 t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long argc, t_atom *argv);
 t_max_err HoaRecomposer_ramp(t_HoaRecomposer *x, t_object *attr, long argc, t_atom *argv);
 void HoaRecomposer_float(t_HoaRecomposer *x, double d);
-
 t_max_err HoaRecomposer_notify(t_HoaRecomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
-void HoaRecomposer_dsp(t_HoaRecomposer *x, t_signal **sp, short *count);
-t_int *HoaRecomposer_perform_free(t_int *w);
-t_int *HoaRecomposer_perform_fixe(t_int *w);
-t_int *HoaRecomposer_perform_fisheye(t_int *w);
-t_int *HoaRecomposer_perform_fisheye_offset(t_int *w);
 
 void HoaRecomposer_dsp64(t_HoaRecomposer *x,t_object *dsp64,short *count, double samplerate, long maxvectorsize, long flags);
 void HoaRecomposer_perform64_free(t_HoaRecomposer *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -77,7 +71,7 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.recomposer~", (method)HoaRecomposer_new, (method)HoaRecomposer_free, (long)sizeof(t_HoaRecomposer), 0L, A_GIMME, 0);
 	;
-	class_addmethod(c, (method)HoaRecomposer_dsp,			"dsp",		A_CANT, 0);
+
 	class_addmethod(c, (method)HoaRecomposer_dsp64,			"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaRecomposer_assist,		"assist",	A_CANT, 0);
 	class_addmethod(c, (method)HoaRecomposer_angle,         "angles",    A_GIMME,0);
@@ -264,86 +258,6 @@ void HoaRecomposer_perform64_fisheye(t_HoaRecomposer *x, t_object *dsp64, double
 void HoaRecomposer_perform64_fisheye_offset(t_HoaRecomposer *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     x->f_ambiRecomposer->processFisheye(ins, outs);
-}
-
-
-void HoaRecomposer_dsp(t_HoaRecomposer *x, t_signal **sp, short *count)
-{
-	int i;
-	int pointer_count;
-	t_int **sigvec;
-	
-	x->f_ambiRecomposer->setVectorSize(sp[0]->s_n);
-	x->f_inputNumber = x->f_ambiRecomposer->getNumberOfInputs();
-	x->f_outputNumber = x->f_ambiRecomposer->getNumberOfOutputs();
-	pointer_count = x->f_inputNumber + x->f_outputNumber + 2;
-    
-	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
-	for(i = 0; i < pointer_count; i++)
-		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
-	
-	sigvec[0] = (t_int *)x;
-	sigvec[1] = (t_int *)sp[0]->s_n;
-	for(i = 2; i < pointer_count; i++)
-		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-	
-    if (x->f_ambiRecomposer->getMode() == Hoa_Free)
-        dsp_addv(HoaRecomposer_perform_free, pointer_count, (void **)sigvec);
-    else if(x->f_ambiRecomposer->getMode() == Hoa_Fixe)
-        dsp_addv(HoaRecomposer_perform_fixe, pointer_count, (void **)sigvec);
-    else
-    {
-        if(count[x->f_ambiRecomposer->getNumberOfInputs()-1])
-            dsp_addv(HoaRecomposer_perform_fisheye, pointer_count, (void **)sigvec);
-        else
-            dsp_addv(HoaRecomposer_perform_fisheye_offset, pointer_count, (void **)sigvec);
-    }
-    
-	free(sigvec);
-}
-
-t_int *HoaRecomposer_perform_free(t_int *w)
-{
-	t_HoaRecomposer *x		= (t_HoaRecomposer *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
-    x->f_ambiRecomposer->processFree(ins, outs);
-	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
-}
-
-t_int *HoaRecomposer_perform_fixe(t_int *w)
-{
-	t_HoaRecomposer *x		= (t_HoaRecomposer *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
-    x->f_ambiRecomposer->processFixe(ins, outs);
-	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
-}
-
-t_int *HoaRecomposer_perform_fisheye(t_int *w)
-{
-	t_HoaRecomposer *x		= (t_HoaRecomposer *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
-    x->f_ambiRecomposer->processFisheye(ins, outs, ins[x->f_inputNumber-1]);
-	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
-}
-
-t_int *HoaRecomposer_perform_fisheye_offset(t_int *w)
-{
-	t_HoaRecomposer *x		= (t_HoaRecomposer *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_inputNumber;
-	
-    x->f_ambiRecomposer->processFisheye(ins, outs);
-	
-	return (w + x->f_outputNumber + x->f_inputNumber + 3);
 }
 
 void HoaRecomposer_assist(t_HoaRecomposer *x, void *b, long m, long a, char *s)
