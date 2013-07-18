@@ -228,9 +228,8 @@ AmbisonicsRecomposer::~AmbisonicsRecomposer()
         Cicm_Free(m_harmonics_matrix_float[i]);
         Cicm_Free(m_harmonics_matrix_double[i]);
     }
-	
-    Cicm_Free(m_harmonics_matrix_float);
-    Cicm_Free(m_harmonics_matrix_double);
+	free(m_harmonics_matrix_float);
+	free(m_harmonics_matrix_double);
     
     Cicm_Free(m_harmonics_vector_float);
     Cicm_Free(m_harmonics_vector_double);

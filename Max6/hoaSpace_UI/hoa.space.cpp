@@ -866,7 +866,7 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
             {
 				
                 delete x->f_viewer;
-                //delete x->f_recomposer;
+                delete x->f_recomposer;
                 
                 x->f_number_of_microphones  = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_MICS);
 				
