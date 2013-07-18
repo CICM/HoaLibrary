@@ -63,7 +63,7 @@ protected :
     Cicm_Vector_Double	m_harmonics_values;
 	
 public:
-	AmbisonicsViewer(long anOrder, long aVectorSize = 0, long aSamplingRate = 44100);
+	AmbisonicsViewer(long anOrder, long aVectorSize = 2, long aSamplingRate = 44100);
     
 	double  getBiggestContribution();
 	long    getBiggestContributionIndex();

@@ -53,13 +53,13 @@ void AmbisonicsProjector::computeMatrix()
 			
 			if (index < 0)
             {
-                double value = sin(fabs(index) * angle);
+                double value = sin(fabs((double)index) * angle);
                 m_decoder_matrix_float[i * m_number_of_harmonics + j]    = value / (double)(m_order+1.);
                 m_decoder_matrix_double[i * m_number_of_harmonics + j]   = value / (double)(m_order+1.);
             }
 			else
             {
-                double value = cos(fabs(index) * angle);
+                double value = cos(fabs((double)index) * angle);
                 m_decoder_matrix_float[i * m_number_of_harmonics + j]    = value / (double)(m_order+1.);
                 m_decoder_matrix_double[i * m_number_of_harmonics + j]   = value / (double)(m_order+1.);
             }

@@ -28,17 +28,17 @@
 AmbisonicsViewer::AmbisonicsViewer(long anOrder, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
 {	
     m_biggest_contribution = 0;
-    m_harmonics_basis      = new double*[m_number_of_harmonics];
+    m_harmonics_basis = new double*[m_number_of_harmonics];
     
-	for (int i = 0; i <= m_number_of_harmonics ; i++)
-		m_harmonics_basis[i]	= new double[NUMBEROFCIRCLEPOINTS_UI];
+	for (int i = 0; i < m_number_of_harmonics ; i++)
+		m_harmonics_basis[i] = new double[NUMBEROFCIRCLEPOINTS_UI];
 
 	m_harmonics_values = new double[m_number_of_harmonics];
-    
+    for(int i = 0; i < m_number_of_harmonics; i++)
+		m_harmonics_values[i] = 0.;
+
 	computeTrigo();
 	computeBasis();
-	for(int i = 0; i < m_number_of_harmonics; i++)
-		m_harmonics_values[i] = 0.;
     
 	computeContribution();
 	computeRepresentation();
@@ -94,18 +94,29 @@ void AmbisonicsViewer::computeContribution()
 void AmbisonicsViewer::computeRepresentation()
 {
     double fabscontrib = 0.;
-	for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
-    {
-        fabscontrib = fabs(m_contributions[i]);
-        m_vector_x[i] = (m_sinus_buffer[i] * fabscontrib) / m_biggest_contribution;
-        m_vector_y[i] = (m_cosinus_buffer[i] * fabscontrib) / m_biggest_contribution;
+	if(m_biggest_contribution == 0.)
+	{
+		for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+		{
+			m_vector_x[i] = m_vector_y[i] = 0.;
+			m_vector_color[i] = -1;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+		{
+			fabscontrib = fabs(m_contributions[i]);
+		
+			m_vector_x[i] = (m_sinus_buffer[i] * fabscontrib) / m_biggest_contribution;
+			m_vector_y[i] = (m_cosinus_buffer[i] * fabscontrib) / m_biggest_contribution;
         
-        if(m_contributions[i] > 0.)
-            m_vector_color[i] = 1;
-        else
-            m_vector_color[i] = -1;
-    }
-
+			if(m_contributions[i] > 0.)
+				m_vector_color[i] = 1;
+			else
+				m_vector_color[i] = -1;
+		}
+	}
 }
 
 void AmbisonicsViewer::computeMaximumDistance()
@@ -234,7 +245,7 @@ long AmbisonicsViewer::getBiggestDistanceIndex2()
 AmbisonicsViewer::~AmbisonicsViewer()
 {
 	free(m_harmonics_values);
-	for (int i = 0; i <= m_number_of_harmonics ; i++)
+	for (int i = 0; i < m_number_of_harmonics ; i++)
 		free(m_harmonics_basis[i]);
 	free(m_harmonics_basis);
 }

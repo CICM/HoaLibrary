@@ -277,19 +277,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
-    <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonics.cpp" />
-    <ClCompile Include="..\..\Sources\hoaRotate\AmbisonicsRotate.cpp" />
-    <ClCompile Include="hoa.rotate~.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_BLAS_FFTW.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_INTEL.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_VDSP.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonics.h" />
-    <ClInclude Include="..\..\Sources\HoaLibrary.h" />
-    <ClInclude Include="..\..\Sources\hoaRotate\AmbisonicsRotate.h" />
+    <ClCompile Include="hoa.record~.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

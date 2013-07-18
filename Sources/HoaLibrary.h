@@ -33,7 +33,11 @@
 #include "hoaRotate/AmbisonicsRotate.h"
 #include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
 
+#include "hoaMeter/AmbisonicsMeter.h"
+#include "hoaOptim/AmbisonicsOptim.h"
+#include "hoaProjector/AmbisonicsProjector.h"
 #include "hoaRecomposer/AmbisonicsRecomposer.h"
+#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
 
 #include "hoaSpace/AmbisonicSpace.h"
 #include "hoaVector/AmbisonicsVector.h"

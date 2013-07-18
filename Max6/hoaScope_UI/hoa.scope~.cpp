@@ -252,7 +252,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_clock = clock_new(x,(method)scope_tick);
 	x->f_startclock = 0;
     
-    x->f_viewer = new AmbisonicsViewer(x->f_order);
+	x->f_viewer = new AmbisonicsViewer(x->f_order);
 	x->f_harmonicsValues = new double[x->f_order * 2 + 1];
     x->f_averageHarmo = new double[x->f_order * 2 + 1];
     for (int i = 0; i < x->f_order * 2 + 1; i++)
@@ -261,7 +261,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
         x->f_averageHarmo[i] = 0.;
     }
     
-    //attr_dictionary_process(x, d);
+    attr_dictionary_process(x, d);
 	
 	jbox_ready((t_jbox *)x);
 	
@@ -275,7 +275,7 @@ t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
     {
         if (atom_gettype(av) == A_LONG)
         {
-            d = Tools::clip_min( long(atom_getlong(av)), long(1));
+            d = Tools::clip_min(long(atom_getlong(av)), long(1));
             if (d != x->f_order)
             {
                 int dspState = sys_getdspobjdspstate((t_object*)x);
@@ -434,12 +434,13 @@ void scope_paint(t_scope *x, t_object *view)
 	x->f_rayonAngle = 5. / 6. * x->f_rayonGlobal + x->f_fontsize * 1.5;
 	x->f_rayonCircle = x->f_rayonGlobal / 6;
 	
-	if (x->f_drawCircle) draw_background(x, view, &rect);
-	/*
-    if (x->f_drawAngles) draw_angles(x, view, &rect);
-    if (x->f_drawContributions) draw_contribution(x, view, &rect);
+	if (x->f_drawCircle) 
+		draw_background(x, view, &rect);
+    if (x->f_drawAngles) 
+		draw_angles(x, view, &rect);
+    if (x->f_drawContributions)
+		draw_contribution(x, view, &rect);
     draw_harmonics(x, view, &rect);
-	*/
 }
 
 void draw_background(t_scope *x,  t_object *view, t_rect *rect)

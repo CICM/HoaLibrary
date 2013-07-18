@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsRecomposer.h"
+#include "../../Sources/HoaLibrary.h"
 
 extern "C"
 {
@@ -204,7 +204,7 @@ t_max_err HoaRecomposer_set_attr_mode(t_HoaRecomposer *x, t_object *attr, long a
         if (lastNumberOfInputs != x->f_ambiRecomposer->getNumberOfInputs())
         {
             t_object *b = NULL;
-            object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+			object_obex_lookup(x, gensym("#B"), (t_object **)&b);
             object_method(b, gensym("dynlet_begin"));
             dsp_resize((t_pxobject*)x, x->f_ambiRecomposer->getNumberOfInputs());
             object_method(b, gensym("dynlet_end"));

@@ -510,7 +510,7 @@ void meter_tick(t_meter *x)
 void meter_output(t_meter *x)
 {
     long nbChannels = x->f_meter->getNumberOfInputs();
-    t_atom	av_peaks[nbChannels];
+    t_atom*	av_peaks = new t_atom[nbChannels];
     t_atom	av_vectors[4];
     
     for (int i=0; i<nbChannels; i++)
@@ -522,6 +522,7 @@ void meter_output(t_meter *x)
     atom_setfloat(av_vectors+2, x->f_meter->getVelocityVectorAbscissa());
     atom_setfloat(av_vectors+3, x->f_meter->getVelocityVectorOrdinate());
     outlet_list(x->f_vector_outlet, NULL, 4, av_vectors);
+	free(av_peaks);
 }
 
 void meter_free(t_meter *x)
@@ -1154,7 +1155,7 @@ void meter_resize_inlet(t_meter *x, long lastNumberOfOutlet)
         object_method(gensym("dsp")->s_thing, gensym("stop"));
     
     t_object *b = NULL;
-    object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+	object_obex_lookup(x, gensym("#B"), (t_object **)&b);
     object_method(b, gensym("dynlet_begin"));
     
     dsp_resize((t_pxobject*)x, x->f_number_of_loudspeakers);

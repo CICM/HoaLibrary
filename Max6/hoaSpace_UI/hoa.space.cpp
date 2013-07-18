@@ -145,14 +145,14 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
-
+	/*
     CLASS_ATTR_LONG					(c, "nmics", 0, t_space, f_number_of_microphones);
 	CLASS_ATTR_CATEGORY				(c, "nmics", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "nmics", 0, "1");
 	CLASS_ATTR_LABEL				(c, "nmics", 0, "Number of virtuals microphones");
 	CLASS_ATTR_ACCESSORS			(c, "nmics", NULL, number_of_microphones_set);
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nmics", 0,"8");
-
+	*/
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_MICS);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
@@ -227,8 +227,6 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
-    
-    //x->f_number_of_microphones = dictionary_getlong(d, gensym("nmics"), &x->f_number_of_microphones);
 
     x->f_outInfos   = outlet_new(x, NULL);
     x->f_out        = listout(x);

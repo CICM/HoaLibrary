@@ -460,7 +460,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
             }
             else
             {
-                double list[ac];
+                double* list = new double[ac];
                 for(int i = 0; i < ac - isSet ; i++)
                 {
                     if (i > MAX_MICS-1) return;
@@ -469,6 +469,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
                     } else list[i] = 0;
                 }
                 x->f_mics->setAnglesInRadian(list, ac);
+				free(list);
             }
         }
         else if ( name == gensym("directivities") )
@@ -482,7 +483,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
             }
             else
             {
-                double list[ac];
+                double* list = new double[ac];
                 for(int i = 0; i < ac - isSet ; i++)
                 {
                     if (i > MAX_MICS-1) return;
@@ -491,6 +492,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
                     } else list[i] = 0;
                 }
                 x->f_mics->setWiderValues(list, ac);
+				free(list);
             }
         }
     }
@@ -555,13 +557,13 @@ void HoaRecomposerUI_outputAndNotifyChange(t_HoaRecomposerUI *x)
 void notifyChange(t_HoaRecomposerUI *x)
 {
     // pattrstorage change notification
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
 }
 
 void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
 {
     int nmics = x->f_mics->getNumberOfMics();
-	t_atom	av_left[nmics];
+	t_atom*	av_left = new t_atom[nmics];
     t_atom  av_right[2];
     
     // number of microphones
@@ -580,6 +582,7 @@ void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
         atom_setfloat(av_left+i, x->f_mics->getWiderValue(i));
     }
     outlet_anything(x->f_out, gensym("directivities"), nmics, av_left);
+	free(av_left);
 }
 
 //========================= Notify Methods :
@@ -587,8 +590,8 @@ void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
 t_max_err HoaRecomposerUI_notify(t_HoaRecomposerUI *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
-	//if (msg == gensym("attr_modified"))
-    if (msg == _sym_attr_modified)
+
+    if (msg == gensym("attr_modified"))
 	 {
          name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
          if(name == gensym("nmics"))
