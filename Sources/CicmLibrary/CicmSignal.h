@@ -23,25 +23,20 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_CICM_LIBRARY
-#define DEF_CICM_LIBRARY
-
-#include "CicmSignal.h"
+#ifndef DEF_CICM_SIGNAL
+#define DEF_CICM_SIGNAL
 
 #ifdef _WINDOWS
 
-#include "CicmLines/CicmLine.h"
+#include "CicmTools.h"
+#include "CicmDefine_INTEL.h"
 
 #endif
 
 #ifdef __APPLE__
+#include "CicmDefine_VDSP.h"
+#include "CicmTools.h"
 
-#include "CicmFilters/CicmFilterDelay.h"
-#include "CicmDelay/CicmDecorrelation.h"
-#include "CicmGranular/CicmQSGS.h"
-#include "CicmAmplitude/CicmRingModulation.h"
-#include "CicmLines/CicmLine.h"
-#include "CicmReverb/CicmFreeverb.h"
 #endif
 
 

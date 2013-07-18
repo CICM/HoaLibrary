@@ -40,6 +40,7 @@ private:
 	Cicm_Vector_Float	m_angles_float;
 	Cicm_Vector_Float	m_cos_float;
     Cicm_Vector_Float	m_sin_float;
+    
     Cicm_Vector_Double	m_angles_double;
 	Cicm_Vector_Double	m_cos_double;
     Cicm_Vector_Double	m_sin_double;
@@ -50,48 +51,54 @@ public:
 	long    getMode();
     
     void    setVectorSize(long aVectorSize);
-	void	setAzimuth(double aTheta);
-    void    setAzimuth(float aTheta);
-    void	setAzimuthBoth(double aTheta);
+	void	setAzimuth(double anAngle);
+    void    setAzimuth(float anAngle);
+    void	setAzimuthBoth(double anAngle);
 
 	~AmbisonicsEncoder();
     
+    /********************************************************************/
     /**************************** Basic Mode ****************************/
+    /********************************************************************/
+    
+    /****************************/
 	/* Perform sample by sample */
-	
-	inline void process(double anInput, double* anOutputs, double aTheta)
+	/****************************/
+    
+	inline void process(double anInput, double* anOutputs, double anAngle)
 	{
-		setAzimuth((double)aTheta);
+		setAzimuth((double)anAngle);
 		return process(anInput, anOutputs);
 	}
 	
 	inline void process(double anInput, double* anOutputs)
 	{
         Cicm_Vector_Scalar_Double_Mul(m_ambisonics_coeffs_double, anInput, anOutputs, m_number_of_harmonics);
-        anOutputs[0] = anInput;
 	}
     
-    inline void process(float anInput, float* anOutputs, float aTheta)
+    inline void process(float anInput, float* anOutputs, float anAngle)
 	{
-		setAzimuth((float)aTheta);
+		setAzimuth((float)anAngle);
 		return process(anInput, anOutputs);
 	}
 	
 	inline void process(float anInput, float* anOutputs)
 	{
         Cicm_Vector_Scalar_Float_Mul(m_ambisonics_coeffs_float, anInput, anOutputs, m_number_of_harmonics);
-        anOutputs[0] = anInput;
 	}
 	
-    /* Perform sample block */    
-	inline void process(double* anInput, double** anOutputs, double* aTheta)
+    /****************************/
+    /*** Perform sample block ***/
+    /****************************/
+    
+	inline void process(double* anInput, double** anOutputs, double* anAngle)
 	{
         Cicm_Vector_Double_Copy(anInput, anOutputs[0], m_vector_size);
         double j = 1;
         int size = m_vector_size;
         for (int i = 2; i < m_number_of_harmonics; i += 2, j++)
         {
-            Cicm_Vector_Scalar_Double_Mul(aTheta, j, m_angles_double, m_vector_size);
+            Cicm_Vector_Scalar_Double_Mul(anAngle, j, m_angles_double, size);
             Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, size);
             Cicm_Vector_Vector_Double_Mul(anInput, m_sin_double, anOutputs[i-1], size);
             Cicm_Vector_Vector_Double_Mul(anInput, m_cos_double, anOutputs[i], size);
@@ -101,21 +108,20 @@ public:
 	inline void process(double* anInput, double** anOutputs)
 	{
 		Cicm_Vector_Double_Copy(anInput, anOutputs[0], m_vector_size);
-        for (int i = 2; i < m_number_of_harmonics; i += 2)
+        for (int i = 1; i < m_number_of_harmonics; i ++)
         {
-            Cicm_Vector_Scalar_Double_Mul(anInput, m_ambisonics_coeffs_double[i-1], anOutputs[i-1], m_vector_size);
             Cicm_Vector_Scalar_Double_Mul(anInput, m_ambisonics_coeffs_double[i], anOutputs[i], m_vector_size);
         }
 	}
     
-    inline void process(float* anInput, float** anOutputs, float* aTheta)
+    inline void process(float* anInput, float** anOutputs, float* anAngle)
 	{
         Cicm_Vector_Float_Copy(anInput, anOutputs[0], m_vector_size);
         float j = 1;
         int size = m_vector_size;
         for (int i = 2; i < m_number_of_harmonics; i += 2, j++)
         {
-            Cicm_Vector_Scalar_Float_Mul(aTheta, j, m_angles_float, m_vector_size);
+            Cicm_Vector_Scalar_Float_Mul(anAngle, j, m_angles_float, size);
             Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, size);
             Cicm_Vector_Vector_Float_Mul(anInput, m_sin_float, anOutputs[i-1], size);
             Cicm_Vector_Vector_Float_Mul(anInput, m_cos_float, anOutputs[i], size);
@@ -125,18 +131,69 @@ public:
 	inline void process(float* anInput, float** anOutputs)
 	{
 		Cicm_Vector_Float_Copy(anInput, anOutputs[0], m_vector_size);
+        for (int i = 1; i < m_number_of_harmonics; i ++)
+        {
+            Cicm_Vector_Scalar_Float_Mul(anInput, m_ambisonics_coeffs_float[i], anOutputs[i], m_vector_size);
+        }
+	}
+    
+    /****************************/
+    /* Perform add sample block */
+    /****************************/
+    
+	inline void processAdd(double* anInput, double** anOutputs, double* anAngle)
+	{
+        Cicm_Vector_Double_Add(anInput, anOutputs[0], m_vector_size);
+        double j = 1;
+        for (int i = 2, size = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
+        {
+            Cicm_Vector_Scalar_Double_Mul(anAngle, j, m_angles_double, size);
+            Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, size);
+            Cicm_Vector_Vector_Double_Mul_And_Add(anInput, m_sin_double, anOutputs[i-1], size);
+            Cicm_Vector_Vector_Double_Mul_And_Add(anInput, m_cos_double, anOutputs[i], size);
+        }
+	}
+    
+    inline void processAdd(double* anInput, double** anOutputs)
+	{
+		Cicm_Vector_Double_Add(anInput, anOutputs[0], m_vector_size);
         for (int i = 2; i < m_number_of_harmonics; i += 2)
         {
-            Cicm_Vector_Scalar_Float_Mul(anInput, m_ambisonics_coeffs_float[i-1], anOutputs[i-1], m_vector_size);
-            Cicm_Vector_Scalar_Float_Mul(anInput, m_ambisonics_coeffs_float[i], anOutputs[i], m_vector_size);
+            /* Trick for INTEL where scalar mul and add don't exist for double precision */
+            Cicm_Vector_Scalar_Double_Mul(anInput, m_ambisonics_coeffs_double[i], m_cos_double, m_vector_size);
+            Cicm_Vector_Double_Add(m_cos_double, anOutputs[i], m_vector_size);
+            Cicm_Vector_Scalar_Double_Mul(anInput, m_ambisonics_coeffs_double[i-1], m_sin_double, m_vector_size);
+            Cicm_Vector_Double_Add(m_sin_double, anOutputs[i-1], m_vector_size);
+        }
+	}
+    
+    inline void processAdd(float* anInput, float** anOutputs, float* anAngle)
+	{
+        Cicm_Vector_Float_Add(anInput, anOutputs[0], m_vector_size);
+        float j = 1;
+        for (int i = 2, size = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
+        {
+            Cicm_Vector_Scalar_Float_Mul(anAngle, j, m_angles_float, size);
+            Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, size);
+            Cicm_Vector_Vector_Float_Mul_And_Add(anInput, m_sin_float, anOutputs[i-1], size);
+            Cicm_Vector_Vector_Float_Mul_And_Add(anInput, m_cos_float, anOutputs[i], size);
+        }
+	}
+    
+    inline void processAdd(float* anInput, float** anOutputs)
+	{
+		Cicm_Vector_Float_Add(anInput, anOutputs[0], m_vector_size);
+        for (int i = 1; i < m_number_of_harmonics; i ++)
+        {
+            Cicm_Vector_Scalar_Float_Mul_And_Add(anInput, m_ambisonics_coeffs_float[i], anOutputs[i], m_vector_size);
         }
 	}
     
     /********** SPLIT ************************/
     /* Perform sample by sample - Split Mode */
-	inline void process(double* anInputs, double* anOutputs, double aTheta)
+	inline void process(double* anInputs, double* anOutputs, double anAngle)
 	{
-		setAzimuth((double)aTheta);
+		setAzimuth((double)anAngle);
 		return process(anInputs, anOutputs);
 	}
 	
@@ -146,9 +203,9 @@ public:
 			anOutputs[i] = m_ambisonics_coeffs_double[i] * anInputs[abs(getHarmonicIndex(i))];
 	}
     
-    inline void process(float* anInputs, float* anOutputs, float aTheta)
+    inline void process(float* anInputs, float* anOutputs, float anAngle)
 	{
-		setAzimuth((float)aTheta);
+		setAzimuth((float)anAngle);
 		return process(anInputs, anOutputs);
 	}
 	
@@ -158,14 +215,17 @@ public:
 			anOutputs[i] = m_ambisonics_coeffs_float[i] * anInputs[abs(getHarmonicIndex(i))];
 	}
     
+    /*************************************/
 	/* Perform sample block - Split Mode */
-	inline void process(double** anInputs, double** anOutputs, double* aTheta)
+    /*************************************/
+    
+	inline void process(double** anInputs, double** anOutputs, double* anAngle)
 	{
         Cicm_Vector_Double_Copy(anInputs[0], anOutputs[0], m_vector_size);
         double j = 1;
         for (int i = 2, size = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
         {
-            Cicm_Vector_Scalar_Double_Mul(aTheta, j, m_angles_double, m_vector_size);
+            Cicm_Vector_Scalar_Double_Mul(anAngle, j, m_angles_double, m_vector_size);
             Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, size);
             Cicm_Vector_Vector_Double_Mul(anInputs[(int)j], m_sin_double, anOutputs[i-1], size);
             Cicm_Vector_Vector_Double_Mul(anInputs[(int)j], m_cos_double, anOutputs[i], size);
@@ -182,13 +242,13 @@ public:
         }
 	}
     
-    inline void process(float** anInputs, float** anOutputs, float* aTheta)
+    inline void process(float** anInputs, float** anOutputs, float* anAngle)
 	{
         Cicm_Vector_Float_Copy(anInputs[0], anOutputs[0], m_vector_size);
         float j = 1;
         for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
         {
-            Cicm_Vector_Scalar_Float_Mul(aTheta, j, m_angles_float, m_vector_size);
+            Cicm_Vector_Scalar_Float_Mul(anAngle, j, m_angles_float, m_vector_size);
             Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, size);
             Cicm_Vector_Vector_Float_Mul(anInputs[(int)j], m_sin_float, anOutputs[i-1], size);
             Cicm_Vector_Vector_Float_Mul(anInputs[(int)j], m_cos_float, anOutputs[i], size);
@@ -205,52 +265,6 @@ public:
         }
 	}
 	
-    /* Perform add sample block */
-	inline void processAdd(double* anInput, double** anOutputs, double* aTheta)
-	{
-        Cicm_Vector_Double_Add(anInput, anOutputs[0], m_vector_size);
-        double j = 1;
-        for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
-        {
-            Cicm_Vector_Scalar_Double_Mul(aTheta, j, m_angles_double, m_vector_size);
-            Cicm_Vector_Double_SinCos(m_sin_double, m_cos_double, m_angles_double, size);
-            Cicm_Vector_Vector_Double_Mul_And_Add(anInput, m_sin_double, anOutputs[i-1], size);
-            Cicm_Vector_Vector_Double_Mul_And_Add(anInput, m_cos_double, anOutputs[i], size);
-        }
-	}
-    
-    inline void processAdd(double* anInput, double** anOutputs)
-	{
-		Cicm_Vector_Double_Add(anInput, anOutputs[0], m_vector_size);
-        for (int i = 2; i < m_number_of_harmonics; i += 2)
-        {
-            Cicm_Vector_Scalar_Double_Mul_And_Add(anInput, m_ambisonics_coeffs_double[i-1], anOutputs[i-1], m_vector_size);
-            Cicm_Vector_Scalar_Double_Mul_And_Add(anInput, m_ambisonics_coeffs_double[i], anOutputs[i], m_vector_size);
-        }
-	}
-    
-    inline void processAdd(float* anInput, float** anOutputs, float* aTheta)
-	{
-        Cicm_Vector_Float_Add(anInput, anOutputs[0], m_vector_size);
-        float j = 1;
-        for (int i = 2, size  = m_vector_size; i < m_number_of_harmonics; i += 2, j++)
-        {
-            Cicm_Vector_Scalar_Float_Mul(aTheta, j, m_angles_float, m_vector_size);
-            Cicm_Vector_Float_SinCos(m_sin_float, m_cos_float, m_angles_float, size);
-            Cicm_Vector_Vector_Float_Mul_And_Add(anInput, m_sin_float, anOutputs[i-1], size);
-            Cicm_Vector_Vector_Float_Mul_And_Add(anInput, m_cos_float, anOutputs[i], size);
-        }
-	}
-    
-    inline void processAdd(float* anInput, float** anOutputs)
-	{
-		Cicm_Vector_Float_Add(anInput, anOutputs[0], m_vector_size);
-        for (int i = 2; i < m_number_of_harmonics; i += 2)
-        {
-            Cicm_Vector_Scalar_Float_Mul_And_Add(anInput, m_ambisonics_coeffs_float[i-1], anOutputs[i-1], m_vector_size);
-            Cicm_Vector_Scalar_Float_Mul_And_Add(anInput, m_ambisonics_coeffs_float[i], anOutputs[i], m_vector_size);
-        }
-	}	
 };
 
 #endif
