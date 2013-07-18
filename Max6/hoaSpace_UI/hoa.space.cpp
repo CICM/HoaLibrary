@@ -145,14 +145,14 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT				(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
-	/*
+
     CLASS_ATTR_LONG					(c, "nmics", 0, t_space, f_number_of_microphones);
 	CLASS_ATTR_CATEGORY				(c, "nmics", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "nmics", 0, "1");
 	CLASS_ATTR_LABEL				(c, "nmics", 0, "Number of virtuals microphones");
 	CLASS_ATTR_ACCESSORS			(c, "nmics", NULL, number_of_microphones_set);
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nmics", 0,"8");
-	*/
+	
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_MICS);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
@@ -864,19 +864,20 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
         {
             if(atom_getlong(argv) != x->f_number_of_microphones)
             {
+				
                 delete x->f_viewer;
-                delete x->f_recomposer;
+                //delete x->f_recomposer;
                 
                 x->f_number_of_microphones  = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_MICS);
+				
                 if(x->f_number_of_microphones % 2 == 0)
                     x->f_order              = (x->f_number_of_microphones - 2) / 2;
                 else
                     x->f_order              = (x->f_number_of_microphones - 1) / 2;
                 x->f_number_of_harmonics    = x->f_order * 2 + 1;
-                
+               
                 x->f_viewer         = new AmbisonicsViewer(x->f_order);
-                x->f_recomposer		= new AmbisonicsRecomposer(x->f_order, x->f_number_of_microphones);
-                
+                x->f_recomposer		= new AmbisonicsRecomposer(x->f_order, x->f_number_of_microphones, Hoa_Fixe);
                 
                 jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
                 space_compute(x);

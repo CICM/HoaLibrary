@@ -222,11 +222,13 @@ AmbisonicsRecomposer::~AmbisonicsRecomposer()
     
     Cicm_Free(m_angles_vector_float);
     Cicm_Free(m_angles_vector_double);
+	
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         Cicm_Free(m_harmonics_matrix_float[i]);
         Cicm_Free(m_harmonics_matrix_double[i]);
     }
+	
     Cicm_Free(m_harmonics_matrix_float);
     Cicm_Free(m_harmonics_matrix_double);
     

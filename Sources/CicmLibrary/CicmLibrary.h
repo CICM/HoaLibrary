@@ -31,6 +31,7 @@
 #ifdef _WINDOWS
 
 #include "CicmLines/CicmLine.h"
+#include "CicmReverb/CicmFreeverb.h"
 
 #endif
 

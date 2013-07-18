@@ -164,7 +164,6 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
 
 int C74_EXPORT main()
 {
-    //common_symbols_init();
     hoa_textfield_init();
 	t_class *c;
     
@@ -172,7 +171,6 @@ int C74_EXPORT main()
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
-    //jbox_initclass(c, JBOX_COLOR | JBOX_FONTATTR);
 	
 	class_addmethod(c, (method) hoamap_assist,           "assist",		A_CANT,	0);
 	class_addmethod(c, (method) hoamap_paint,            "paint",		A_CANT,	0);
@@ -371,7 +369,7 @@ void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
 	char ps[MAX_PATH_CHARS];
     char ps_dotjson[MAX_PATH_CHARS];
     int forgot_dotjson = 0;
-	//long type;
+	
     t_fourcc outtype;
     t_fourcc filetypelist = 'pSto';
 	short savelock;
@@ -435,8 +433,8 @@ void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
             object_free(d);
         }
     }
-	savelock = lockout_set(1);
-	lockout_set(savelock);
+	//savelock = lockout_set(1);
+	//ockout_set(savelock);
     //object_post((t_object *)x, "read file : %s", forgot_dotjson ? ps_dotjson : ps);
 }
 
@@ -485,8 +483,8 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *sym, long argc, t_atom *argv)
     {
         object_free(d);
     }
-	savelock = lockout_set(1);
-	lockout_set(savelock);
+	//savelock = lockout_set(1);
+	//lockout_set(savelock);
     //object_post((t_object *)x, "write file : %s", ps);
 }
 
@@ -515,7 +513,7 @@ void hoamap_clearAll(t_hoamap *x)
 {
     x->f_source_manager->clearAll();
     
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_redraw((t_jbox *)x);
@@ -560,7 +558,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 if(atom_getsym(av+2) == gensym("remove"))
                 {
                     x->f_source_manager->sourceSetDescription(atom_getlong(av), "");
-                    object_notify(x, _sym_modified, NULL);
+                    object_notify(x, gensym("modified"), NULL);
                     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
                     jbox_redraw((t_jbox *)x);
                     return;
@@ -592,7 +590,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         }
         
     }
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_redraw((t_jbox *)x);
@@ -651,7 +649,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 if(atom_getsym(av+2) == gensym("remove"))
                 {
                     x->f_source_manager->groupSetDescription(atom_getlong(av), "");
-                    object_notify(x, _sym_modified, NULL);
+                    object_notify(x, gensym("modified"), NULL);
                     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
                     jbox_redraw((t_jbox *)x);
                     return;
@@ -683,7 +681,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         }
     }
     
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_redraw((t_jbox *)x);
@@ -746,7 +744,7 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             x->f_source_preset->recallFractionalSlot(x->f_source_manager, (double)atom_getfloat(av));
     }
     
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_redraw((t_jbox *)x);
@@ -786,7 +784,7 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             x->f_source_trajectory->playTrajectory(x->f_source_manager, (double)atom_getfloat(av));
     }
     
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_redraw((t_jbox *)x);
@@ -1211,13 +1209,13 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
             {
                 x->f_source_manager->sourceSetDescription(x->f_index_of_source_to_color, (char *)data);
                 jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-                object_notify(x, _sym_modified, NULL);
+                object_notify(x, gensym("modified"), NULL);
             }
             else if(x->f_index_of_group_to_color > -1)
             {
                 x->f_source_manager->groupSetDescription(x->f_index_of_group_to_color, (char *)data);
                 jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
-                object_notify(x, _sym_modified, NULL);
+                object_notify(x, gensym("modified"), NULL);
             }
         }
         jbox_redraw((t_jbox *)x);
@@ -1239,13 +1237,13 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                     {
                         x->f_source_manager->sourceSetColor(x->f_index_of_source_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
                         jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-                        object_notify(x, _sym_modified, NULL);
+                        object_notify(x, gensym("modified"), NULL);
                     }
                     else if(x->f_index_of_group_to_color > -1)
                     {
                         x->f_source_manager->groupSetColor(x->f_index_of_group_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
                         jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
-                        object_notify(x, _sym_modified, NULL);
+                        object_notify(x, gensym("modified"), NULL);
                     }
                     else if(x->f_index_of_source_to_color == -2)
                     {
@@ -1254,7 +1252,7 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                         x->f_colorBackground.blue = atom_getfloat(av+2);
                         x->f_colorBackground.alpha = atom_getfloat(av+3);
                         jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-                        object_notify(x, _sym_modified, NULL);
+                        object_notify(x, gensym("modified"), NULL);
                     }
                     
                 }
@@ -1552,7 +1550,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
     double w = rect->width;
     double h = rect->height;
     t_pt ctr = {w*0.5, h*0.5};
-    double maxctr = Tools::max(w, h)*0.5;
+    double maxctr = Tools::cicm_max(w, h)*0.5;
     
     double contrastBlack = 0.12;
     double contrastWhite = 0.08;
@@ -1907,7 +1905,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     coordinatesCartesian cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
-    double maxwh = Tools::max(x->rect.width, x->rect.height);
+    double maxwh = Tools::cicm_max(x->rect.width, x->rect.height);
     double ditanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
@@ -2176,7 +2174,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
     
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
     jbox_redraw((t_jbox *)x);
@@ -2239,7 +2237,7 @@ void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
     {
 		double newZoom = x->f_zoom_factor + y_inc / 100.;
         x->f_zoom_factor = Tools::clip(newZoom, MIN_ZOOM, MAX_ZOOM);
-        object_notify(x, _sym_modified, NULL);
+        object_notify(x, gensym("modified"), NULL);
         jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
@@ -2257,7 +2255,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     coordinatesCartesian cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
-    double maxwh = Tools::max(x->rect.width, x->rect.height);
+    double maxwh = Tools::cicm_max(x->rect.width, x->rect.height);
     double ditanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
@@ -2401,10 +2399,7 @@ void hoamap_text_field(t_hoamap *x)
 
 void hoa_textfield_init(void)
 {
-	t_class *c;
-	
-	//jpatcher_syms_init();
-	
+	t_class *c;	
 	c = class_new("hoa.textfield",
 				  (method)textfield_new,
 				  (method)textfield_free,
