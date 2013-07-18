@@ -28,7 +28,7 @@
 AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, long aNumberOfLoudspeakers, long aResitutionMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
     m_number_of_virtual_loudspeakers = m_number_of_harmonics+1;
-    m_decoder = new AmbisonicsDecoder(m_order, m_number_of_virtual_loudspeakers, 0);
+    m_decoder = new AmbisonicsDecoder(m_order, m_number_of_virtual_loudspeakers, m_vector_size);
     
     Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_virtual_loudspeakers);
     Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_virtual_loudspeakers);
@@ -65,8 +65,8 @@ void AmbisonicsRestitution::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, 
     /* Free memories */
     if(m_loudspeakers_gains_vector_float && m_loudspeakers_gains_vector_double)
     {
-        Cicm_Free(m_loudspeakers_gains_vector_double);
-        Cicm_Free(m_loudspeakers_gains_vector_float);
+        free(m_loudspeakers_gains_vector_double);
+        free(m_loudspeakers_gains_vector_float);
     }
     if(m_angles_of_loudspeakers)
         free(m_angles_of_loudspeakers);
@@ -74,7 +74,8 @@ void AmbisonicsRestitution::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, 
     /* Alloc memories */
     m_loudspeakers_gains_vector_float   = new Cicm_Vector_Float[m_number_of_real_loudspeakers];
     m_loudspeakers_gains_vector_double  = new Cicm_Vector_Double[m_number_of_real_loudspeakers];
-    m_angles_of_loudspeakers = new double[m_number_of_real_loudspeakers];
+	Cicm_Vector_Double_Malloc(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
+   
     for(int i = 0; i < m_number_of_real_loudspeakers; i++)
     {
         Cicm_Vector_Float_Malloc(m_loudspeakers_gains_vector_float[i], m_number_of_virtual_loudspeakers);
@@ -310,17 +311,22 @@ void AmbisonicsRestitution::computeMicrophoneSimulation()
 
 AmbisonicsRestitution::~AmbisonicsRestitution()
 {
-    Cicm_Free(m_vector_float_input);
-    Cicm_Free(m_vector_double_input);
-    Cicm_Free(m_loudspeakers_vector_float);
-    Cicm_Free(m_loudspeakers_vector_double);
-    for(int i = 0; i < m_number_of_real_loudspeakers; i++)
+	if(m_vector_float_input)
+		Cicm_Free(m_vector_float_input)
+	if(m_vector_double_input)
+		Cicm_Free(m_vector_double_input);
+	if(m_loudspeakers_vector_float)
+		Cicm_Free(m_loudspeakers_vector_float);
+	if(m_loudspeakers_vector_double)
+		Cicm_Free(m_loudspeakers_vector_double);
+	for(int i = 0; i < m_number_of_real_loudspeakers; i++)
     {
         Cicm_Free(m_loudspeakers_gains_vector_double[i]);
         Cicm_Free(m_loudspeakers_gains_vector_float[i]);
     }
-    Cicm_Free(m_loudspeakers_gains_vector_double);
-    Cicm_Free(m_loudspeakers_gains_vector_float);
-    free(m_angles_of_loudspeakers);
+    free(m_loudspeakers_gains_vector_double);
+    free(m_loudspeakers_gains_vector_float);
+	if(m_angles_of_loudspeakers)
+		free(m_angles_of_loudspeakers);
 	delete m_decoder;
 }

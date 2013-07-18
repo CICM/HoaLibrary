@@ -272,11 +272,16 @@ AmbisonicsBinaural::~AmbisonicsBinaural()
         Cicm_Free(m_linear_vector_left);
     if(m_linear_vector_right)
         Cicm_Free(m_linear_vector_right);
+	
     for(int i = 0; i < m_number_of_loudspeakers; i++)
 	{
-        free(m_impulse_left[i]);
-        free(m_impulse_right[i]);
+		if(m_impulse_left[i])
+			free(m_impulse_left[i]);
+		if(m_impulse_right[i])
+			free(m_impulse_right[i]);
     }
+	free(m_impulse_left);
+	free(m_impulse_right);
 }
 
 
