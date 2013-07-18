@@ -100,7 +100,7 @@ t_max_err space_setvalueof(t_space *x, long ac, t_atom *av);
 t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av);
 
 /* Interaction ***************************************/
-void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_mouse_move(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_drag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_enddrag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -134,7 +134,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method)space_bang,            "bang",           A_CANT, 0);
 	class_addmethod(c, (method)space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_down,      "mousedown",      A_CANT, 0);
-    class_addmethod(c, (method)space_mousemove,       "mousemove",      A_CANT, 0);
+    class_addmethod(c, (method)space_mouse_move,       "mousemove",      A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_drag,      "mousedrag",      A_CANT, 0);
     class_addmethod(c, (method)space_mouse_enddrag,   "mouseup",        A_CANT, 0);
     class_addmethod(c, (method)space_preset,          "preset",         0);
@@ -644,9 +644,8 @@ void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
 /*                      Souris                            */
 /**********************************************************/
 
-void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
+void space_mouse_move(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    //post("mod : %ld", modifiers);
     double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
     double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
     double radius   = Tools::radius(mapped_x, mapped_y);
@@ -655,7 +654,7 @@ void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
     x->f_mousepos.x = radius;
     x->f_mousepos.y = angle;
     
-    if(modifiers == 132) // ctrl : rotation
+    if(modifiers == 132 || modifiers == 5) // ctrl : rotation
     {
         x->f_cursorType = 2;
     }
@@ -690,8 +689,7 @@ void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers
             x->f_mode_values[i] = x->f_microphonesValues[i];
         }
     }
-    //else if(radius > 0.9)
-    else if(modifiers == 148) // ctrl
+    else if(modifiers == 148 || modifiers == 21) // ctrl
     {
         x->f_mode = 1;
         x->f_rotation_max = 0.;
