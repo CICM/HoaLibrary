@@ -216,7 +216,7 @@ void CicmEnvelope::blackman(double a0)
 
 void CicmEnvelope::kaiser(double a0)
 {
-	a0 = Tools::clip(a0, 0., 10.);
+	//a0 = Tools::clip(a0, 0., 10.);
     /*
 	for(int i = 0; i < m_size; i++)
 		m_buffer[i] = gsl_sf_bessel_I0(CICM_PI * a0 * sqrt((1. - pow(((2. * (double)i) / (double)(m_size - 1)) - 1., 2.)))) / gsl_sf_bessel_I0(CICM_PI * a0);

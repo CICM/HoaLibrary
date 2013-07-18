@@ -142,7 +142,6 @@
 #define Cicm_Vector_Vector_Double_Mul_And_Add(vectorOne, vectorTwo, vectorDest, size) ippsAddProduct_64f(vectorOne, vectorTwo, vectorDest, size)
 
 #define Cicm_Vector_Scalar_Float_Mul_And_Add(vectorOne, scalar, vectorDest, size) ippsAddProductC_32f(vectorOne, scalar, vectorDest, size)
-#define Cicm_Vector_Scalar_Double_Mul_And_Add(vectorOne, scalar, vectorDest, size)// Cicm_Vector_Scalar_Double_Mul(vectorOne, scalar, vectorDest, size);
 
 /****************************************/
 /***************** CLIP  ****************/
