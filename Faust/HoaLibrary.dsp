@@ -11,7 +11,7 @@ declare copyright "2012-2013 Guillot, Paris, Colafrancesco, CICM labex art H2H, 
 import("math.lib");
 
 //----------------------------------------------------------------------------//
-//------------------------ Ambisonic functions -------------------------------//
+//------------------------------ HOA functions -------------------------------//
 //----------------------------------------------------------------------------//
 
 // encoder : encodes a signal in the circular harmonics domain depending on an order of decomposition and an angle.
@@ -42,13 +42,21 @@ encoder(n, x, a) = encoder(n-1, x, a), x*sin(n*a), x*cos(n*a);
 //----------------------------------------------------------------------------//
 
 decoder(n, p)	= par(i, 2*n+1, _) <: par(i, p, speaker(n, 2*PI*i/p))
- with {
+with 
+{
    speaker(n,a)	= /(2), par(i, 2*n, _), encoder(n,2/(2*n+1),a) : dot(2*n+1);
- };
+};
 
 // Usage : n is the order and p the number of loudspeakers
 // Exemple : decoder(3,8)
-// Informations :  Number of loudspeakers must be greater or equal to 2n+1. It's souhaitable to use 2n+2 loudspeakers.		   
+// Informations :  Number of loudspeakers must be greater or equal to 2n+1. It's souhaitable to use 2n+2 loudspeakers.
+
+
+
+//----------------------------------------------------------------------------//
+//------------------------ Ambisonic decoder stereo --------------------------//
+//----------------------------------------------------------------------------//
+
 
 
 
@@ -144,20 +152,25 @@ with
 
 // Usage : n is the order, x the signal, r the radius and a the angle 
 // Exemple : map(3, signal, radius, angle)
-// Informations : It similute the distance of the source by applying a gain on the signal and a wider processing on the soundfield.
+// Informations : It simulate the distance of the source by applying a gain on the signal and a wider processing on the soundfield.
 
 
 
 //----------------------------------------------------------------------------//
 //-------------------------- Ambisonic rotate --------------------------------//
 //----------------------------------------------------------------------------//
-
-rotate(n, a) = par(i, 2*n+1, optim(i, n, _))
+// TO DO !!!!
+rotate(n, a) = par(i, 2*n+1, _) <: par(i, 2*n+1, rotation(i, a))
+with
+{
+	rotation(i, a) =  _ * 1;
+};
 
 
 //----------------------------------------------------------------------------//
 //---------------------------- Ambisonic exemple -----------------------------//
 //----------------------------------------------------------------------------//
+
 
 process(x, a, r) = map(1, x, a, r) : optimInPhase(1) : decoder(1, 4); //
 
