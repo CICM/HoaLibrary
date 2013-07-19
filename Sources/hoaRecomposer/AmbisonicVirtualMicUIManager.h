@@ -23,8 +23,13 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __hoa_recomposer__AmbisonicVirtualMicUIManager__
-#define __hoa_recomposer__AmbisonicVirtualMicUIManager__
+#ifndef DEF_AMBISONICSVIRTUALMICUIMANAGER
+#define DEF_AMBISONICSVIRTUALMICUIMANAGER
+
+
+#define MAX_MICS 64
+#define MIN_MICS 3
+#define DEF_MICS 8
 
 #include "AmbisonicVirtualMicUI.h"
 

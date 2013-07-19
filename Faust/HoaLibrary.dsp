@@ -1,0 +1,168 @@
+declare name "HOA";
+declare title "High Order Ambisonics library";
+
+declare author "Pierre Guillot";
+declare author "Eliott Paris";
+declare author "Julien Colafrancesco";
+
+declare copyright "2012-2013 Guillot, Paris, Colafrancesco, CICM labex art H2H, U. Paris 8";
+
+
+import("math.lib");
+
+//----------------------------------------------------------------------------//
+//------------------------ Ambisonic functions -------------------------------//
+//----------------------------------------------------------------------------//
+
+// encoder : encodes a signal in the circular harmonics domain depending on an order of decomposition and an angle.
+
+// decoder : decodes an ambisonics sound field for several loudspeakers configurations or for headphones. 
+
+// optimBasic, optimMaxRe, optimInPhase : weights the circular harmonics signals depending to the ambisonics optimization. It can be "basic" for no optimization, "maxRe" or "inPhase".
+
+// wider : can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes.
+
+// map : encodes a source with distance compensation.
+
+
+//----------------------------------------------------------------------------//
+//------------------------ Ambisonic encoder ---------------------------------//
+//----------------------------------------------------------------------------//
+
+encoder(0, x, a) = x;
+encoder(n, x, a) = encoder(n-1, x, a), x*sin(n*a), x*cos(n*a);
+
+// Usage : n is the order, x is the signal and a the angle in radiant
+// Exemple : encoder(3, signal, angle)
+
+
+
+//----------------------------------------------------------------------------//
+//------------------------ Ambisonic decoder ---------------------------------//
+//----------------------------------------------------------------------------//
+
+decoder(n, p)	= par(i, 2*n+1, _) <: par(i, p, speaker(n, 2*PI*i/p))
+ with {
+   speaker(n,a)	= /(2), par(i, 2*n, _), encoder(n,2/(2*n+1),a) : dot(2*n+1);
+ };
+
+// Usage : n is the order and p the number of loudspeakers
+// Exemple : decoder(3,8)
+// Informations :  Number of loudspeakers must be greater or equal to 2n+1. It's souhaitable to use 2n+2 loudspeakers.		   
+
+
+
+//----------------------------------------------------------------------------//
+//-------------------------- Ambisonic Optim ---------------------------------//
+//----------------------------------------------------------------------------//
+
+//--------------------------------Basic---------------------------------------//
+optimBasic(n)	= par(i, 2*n+1, _);
+
+// Usage : n is the order
+// Exemple : optimBasic(3)
+// Informations : The basic optimization has no effect and should be used for a perfect circle of loudspeakers with one listener at the perfect center loudspeakers array.
+
+//--------------------------------maxRe---------------------------------------//
+
+optimMaxRe(n)	= par(i, 2*n+1, optim(i, n, _))
+ with {
+   	optim(i, n, _)= _ * cos(indexabs  / (2*n+1) * PI)
+	with {
+		numberOfharmonics = 2 *n + 1;
+		indexabs = (int)((i - 1) / 2 + 1);
+	};
+ };
+
+// Usage : n is the order
+// Exemple : optimMaxRe(3)
+// Informations : The maxRe optimization optimize energy vector. It should be used for an auditory confined in the center of the loudspeakers array.
+
+//-------------------------------inPhase--------------------------------------//
+
+optimInPhase(n)	= par(i, 2*n+1, optim(i, n, _))
+with 
+{
+   	optim(i, n, _)= _ * (fact(n)^2.) / (fact(n+indexabs) * fact(n-indexabs))
+	with 
+	{
+		indexabs = (int)((i - 1) / 2 + 1);
+		fact(0) = 1;
+		fact(n) = n * fact(n-1);
+	};
+ };
+
+// Usage : n is the order
+// Exemple : optimInPhase(3)
+// Informations : The inPhase Optimization optimize energy vector and put all loudspeakers signals in phase. It should be used for an auditory
+
+
+
+//----------------------------------------------------------------------------//
+//-------------------------- Ambisonic wider ---------------------------------//
+//----------------------------------------------------------------------------//
+
+
+wider(n, w)	= par(i, 2*n+1, perform(n, w, i, _))
+with 
+{	
+	perform(n, w, i, _) = _ * (log(n+1) * (1 - w) + 1) * clipweight
+	with
+	{
+		clipweight = weighter(n, w, i) * (weighter(n, w, i) > 0) * (weighter(n, w, i) <= 1) + (weighter(n, w, i) > 1)
+		with
+		{
+			weighter(n, w, 0) = 1.;
+			weighter(n, w, i) = (((w * log(n+1)) - log(indexabs)) / (log(indexabs+1) - log(indexabs)))
+			with 
+				{
+					indexabs = (int)((i - 1) / 2 + 1);
+				};
+		};
+	};
+};
+
+// Usage : n is the order and w the widen value between 0 - 1
+// Exemple : wider(3, w)
+// Informations : It can be used to wide the diffusion of a localised sound. The order depending signals are weighted to simulate fractional order. When w = 0, there's only the harmonic 0 and the sound is omnidirectionnal, when w = 1, the processing have no effect and the sound field have the highest spatial resolution. From 0 to 1, harmonics appear in a logarithmic way to have linear changes. Wider is used to simulate sources inside the loudspeakers array.
+
+
+
+//----------------------------------------------------------------------------//
+//---------------------------- Ambisonic map ---------------------------------//
+//----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------
+// Ambisonic closer - Distance simulation
+// usage : closer(3, input, angle, radius) where 3 is the order and the angle is in radiant
+map(n, x, r, a)	= encoder(n, x * volume(r), a) : wider(n, ouverture(r))
+with
+{
+	volume(r) = 1. / (r * r * (r > 1) + (r < 1));
+	ouverture(r) = r * (r < 1) + (r > 1);
+};
+
+// Usage : n is the order, x the signal, r the radius and a the angle 
+// Exemple : map(3, signal, radius, angle)
+// Informations : It similute the distance of the source by applying a gain on the signal and a wider processing on the soundfield.
+
+
+
+//----------------------------------------------------------------------------//
+//-------------------------- Ambisonic rotate --------------------------------//
+//----------------------------------------------------------------------------//
+
+rotate(n, a) = par(i, 2*n+1, optim(i, n, _))
+
+
+//----------------------------------------------------------------------------//
+//---------------------------- Ambisonic exemple -----------------------------//
+//----------------------------------------------------------------------------//
+
+process(x, a, r) = map(1, x, a, r) : optimInPhase(1) : decoder(1, 4); //
+
+
+
+
+
+
