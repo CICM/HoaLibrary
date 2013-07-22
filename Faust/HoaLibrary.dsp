@@ -24,6 +24,8 @@ import("math.lib");
 
 // map : encodes a source with distance compensation.
 
+// rotate : applies a rotation of the sound field.
+
 
 //----------------------------------------------------------------------------//
 //------------------------ Ambisonic encoder ---------------------------------//
@@ -50,7 +52,6 @@ with
 // Usage : n is the order and p the number of loudspeakers
 // Exemple : decoder(3,8)
 // Informations :  Number of loudspeakers must be greater or equal to 2n+1. It's souhaitable to use 2n+2 loudspeakers.
-
 
 
 //----------------------------------------------------------------------------//
@@ -140,9 +141,7 @@ with
 //---------------------------- Ambisonic map ---------------------------------//
 //----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------
-// Ambisonic closer - Distance simulation
-// usage : closer(3, input, angle, radius) where 3 is the order and the angle is in radiant
+
 map(n, x, r, a)	= encoder(n, x * volume(r), a) : wider(n, ouverture(r))
 with
 {
@@ -150,7 +149,7 @@ with
 	ouverture(r) = r * (r < 1) + (r > 1);
 };
 
-// Usage : n is the order, x the signal, r the radius and a the angle 
+// Usage : n is the order, x the signal, r the radius and a the angle in radiant
 // Exemple : map(3, signal, radius, angle)
 // Informations : It simulate the distance of the source by applying a gain on the signal and a wider processing on the soundfield.
 
@@ -159,20 +158,32 @@ with
 //----------------------------------------------------------------------------//
 //-------------------------- Ambisonic rotate --------------------------------//
 //----------------------------------------------------------------------------//
-// TO DO !!!!
+
+
 rotate(n, a) = par(i, 2*n+1, _) <: par(i, 2*n+1, rotation(i, a))
 with
 {
-	rotation(i, a) =  _ * 1;
+	rotation(i, a) = (par(j, 2*n+1, gain1(i, j, a)), par(j, 2*n+1, gain2(i, j, a)), par(j, 2*n+1, gain3(i, j, a)) :> _)
+	with
+	{	
+		indexabs = (int)((i - 1) / 2 + 1);
+		gain1(i, j, a) = _ * cos(a * indexabs) * (j == i);
+		gain2(i, j, a) = _ * sin(a * indexabs) * (j-1 == i) * (j != 0) * (i%2 == 1);
+		gain3(i, j, a) = (_ * sin(a * indexabs)) * (j+1 == i) * (j != 0) * (i%2 == 0);
+	};
 };
 
+
+// Usage : n is the order, a the angle in radiant
+// Exemple : rotate(3, angle)
+// Informations : It applies a rotation of the sound field.
 
 //----------------------------------------------------------------------------//
 //---------------------------- Ambisonic exemple -----------------------------//
 //----------------------------------------------------------------------------//
 
 
-process(x, a, r) = map(1, x, a, r) : optimInPhase(1) : decoder(1, 4); //
+process(a) = rotate(1, a); //rotate
 
 
 

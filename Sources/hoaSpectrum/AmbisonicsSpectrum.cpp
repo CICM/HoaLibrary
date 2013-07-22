@@ -274,6 +274,44 @@ double AmbisonicsSpectrum::getAngle(long aBandIndex)
     return Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
 }
 
+double AmbisonicsSpectrum::getLogAmplitude(long aBandIndex)
+{
+    aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
+    double amplitude = m_amplitude[aBandIndex] / (m_frequency[aBandIndex] / m_frequency[0]);
+    return amplitude;
+}
+
+double AmbisonicsSpectrum::getLogAbscissa(long aBandIndex)
+{
+    aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
+    double radius = Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
+    radius *= radius * radius;
+    double angle = Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
+    return Tools::abscisse(radius, angle);
+}
+
+double AmbisonicsSpectrum::getLogOrdinate(long aBandIndex)
+{
+    aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
+    double radius = Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
+    radius *= radius * radius;
+    double angle = Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
+    return Tools::ordinate(radius, angle);
+}
+
+double AmbisonicsSpectrum::getLogRadius(long aBandIndex)
+{
+    aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
+    double radius = Tools::radius(m_abscissa[aBandIndex], m_ordinate[aBandIndex]);
+    return radius * radius * radius;
+}
+
+double AmbisonicsSpectrum::getLogAngle(long aBandIndex)
+{
+    aBandIndex = Tools::clip(aBandIndex, (long)0, (long)m_filter.size());
+    return Tools::angle(m_abscissa[aBandIndex], m_ordinate[aBandIndex]) + CICM_PI2;
+}
+
 
 AmbisonicsSpectrum::~AmbisonicsSpectrum()
 {

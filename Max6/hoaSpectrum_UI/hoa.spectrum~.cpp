@@ -366,8 +366,8 @@ void spectrum_output(t_spectrum *x)
     for (int i = 0; i < x->f_spectrum->getNumberOfBands(); i++)
     {
         atom_setfloat(amplitude+i, x->f_spectrum->getAmplitude(i));
-        atom_setfloat(vectors+i*2,   x->f_spectrum->getAbscissa(i));
-        atom_setfloat(vectors+i*2+1, x->f_spectrum->getOrdinate(i));
+        atom_setfloat(vectors+i*2,   x->f_spectrum->getLogAbscissa(i));
+        atom_setfloat(vectors+i*2+1, x->f_spectrum->getLogOrdinate(i));
     }
     
     outlet_list(x->f_amplitude_outlet, NULL, x->f_spectrum->getNumberOfBands(), amplitude);
@@ -422,7 +422,7 @@ void spectrum_paint(t_spectrum *x, t_object *view)
     x->f_rect = rect;
 	x->f_center.x = rect.width * .5;
 	x->f_center.y = rect.height * .5;
-    x->f_circleExtRadius = Tools::min(rect.width, rect.height)*0.5 - 3;
+    x->f_circleExtRadius = Tools::cicm_min(rect.width, rect.height)*0.5 - 3;
 	
 	draw_background(x, view, &rect);
     draw_spectrum(x, view, &rect);
@@ -561,8 +561,8 @@ void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("spectrum_layer"), rect->width, rect->height);
     t_pt coord;
     
-    t_jrgba white = {1., 1., 1., 0.15};
-    t_jrgba black = {0., 0., 0., 0.3};
+    //t_jrgba white = {1., 1., 1., 0.15};
+    //t_jrgba black = {0., 0., 0., 0.3};
     t_jrgba zeroColor = {0., 0., 0., 0.};
     /*
     t_jrgba black, white;
@@ -605,8 +605,8 @@ void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
         jgraphics_set_line_width(g, 1);
         for(int i = 0; i < x->f_spectrum->getNumberOfBands(); i++)
         {
-            coord.x = x->f_spectrum->getAbscissa(i) * x->f_circleExtRadius;
-            coord.y = x->f_spectrum->getOrdinate(i) * x->f_circleExtRadius;
+            coord.x = x->f_spectrum->getLogAbscissa(i) * x->f_circleExtRadius * 1.2;
+            coord.y = x->f_spectrum->getLogOrdinate(i) * x->f_circleExtRadius * 1.2;
             
             jgraphics_translate(g, coord.x, coord.y);
             
@@ -619,7 +619,7 @@ void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
                                                   x->f_color_bands[i].alpha);
             
             
-            jgraphics_pattern_add_color_stop_rgba(pattern, 0.7 * x->f_spectrum->getAmplitude(i),
+            jgraphics_pattern_add_color_stop_rgba(pattern, 0.7 * x->f_spectrum->getLogAmplitude(i),
                                                   zeroColor.red, zeroColor.green, zeroColor.blue, zeroColor.alpha);
             
             
