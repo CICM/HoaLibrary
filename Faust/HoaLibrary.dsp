@@ -16,7 +16,9 @@ import("math.lib");
 
 // encoder : encodes a signal in the circular harmonics domain depending on an order of decomposition and an angle.
 
-// decoder : decodes an ambisonics sound field for several loudspeakers configurations or for headphones. 
+// decoder : decodes an ambisonics sound field for several loudspeakers configurations. 
+
+// decoderStereo : decodes an ambisonics sound field for stereophonic configuration. 
 
 // optimBasic, optimMaxRe, optimInPhase : weights the circular harmonics signals depending to the ambisonics optimization. It can be "basic" for no optimization, "maxRe" or "inPhase".
 
@@ -58,7 +60,29 @@ with
 //------------------------ Ambisonic decoder stereo --------------------------//
 //----------------------------------------------------------------------------//
 
+decoderStereo(n) = decoder(n, p) <: (par(i, 2*n+2, gainLeft(360 * i / p)) :> _), (par(i, 2*n+2, gainRight(360 * i / p)) :> _)
+with 
+{
+	p = 2*n+2;
+	
+   	gainLeft(a) =  _ * sin(ratio_minus + ratio_cortex)
+	with 
+	{
+		ratio_minus = PI*.5 * abs( (30 + a) / 60 * ((a <= 30)) + (a - 330) / 60 * (a >= 330) );
+		ratio_cortex= PI*.5 * abs( (120 + a) / 150 * (a > 30) * (a <= 180));
+	};
 
+	gainRight(a) =  _ * sin(ratio_minus + ratio_cortex)
+	with 
+	{
+		ratio_minus = PI*.5 * abs( (390 - a) / 60 * (a >= 330) + (30 - a) / 60 * (a <= 30) );
+		ratio_cortex= PI*.5 * abs( (180 - a) / 150 * (a < 330) * (a >= 180));
+	};
+};
+
+// Usage : n is the order
+// Exemple : decoderStereo(3,8)
+// Informations : An "home made" ambisonic decoder for stereophonic resitution (30° - 330°) : Sound field lose energy aound 180°. You should use inPhase optimization with ponctual sources.
 
 
 //----------------------------------------------------------------------------//
@@ -66,6 +90,7 @@ with
 //----------------------------------------------------------------------------//
 
 //--------------------------------Basic---------------------------------------//
+
 optimBasic(n)	= par(i, 2*n+1, _);
 
 // Usage : n is the order
@@ -111,7 +136,6 @@ with
 //-------------------------- Ambisonic wider ---------------------------------//
 //----------------------------------------------------------------------------//
 
-
 wider(n, w)	= par(i, 2*n+1, perform(n, w, i, _))
 with 
 {	
@@ -141,7 +165,6 @@ with
 //---------------------------- Ambisonic map ---------------------------------//
 //----------------------------------------------------------------------------//
 
-
 map(n, x, r, a)	= encoder(n, x * volume(r), a) : wider(n, ouverture(r))
 with
 {
@@ -158,7 +181,6 @@ with
 //----------------------------------------------------------------------------//
 //-------------------------- Ambisonic rotate --------------------------------//
 //----------------------------------------------------------------------------//
-
 
 rotate(n, a) = par(i, 2*n+1, _) <: par(i, 2*n+1, rotation(i, a))
 with
@@ -183,7 +205,7 @@ with
 //----------------------------------------------------------------------------//
 
 
-process(a) = rotate(1, a); //rotate
+process = decoderStereo(1);
 
 
 
