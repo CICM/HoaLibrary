@@ -42,7 +42,7 @@ private:
     long                m_number_of_virtual_loudspeakers;
     long                m_number_of_real_loudspeakers;
     
-    double*             m_angles_of_loudspeakers;
+    Cicm_Vector_Double  m_angles_of_loudspeakers;
     
 	AmbisonicsDecoder*  m_decoder;
     

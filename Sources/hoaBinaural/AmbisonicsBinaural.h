@@ -47,8 +47,8 @@ private:
     
 	bool		m_hrtf_loaded;
     
-	double**            m_impulse_left;
-	double**            m_impulse_right;
+	Cicm_Vector_Double* m_impulse_left;
+	Cicm_Vector_Double* m_impulse_right;
 	long                m_impulse_size;
 	AmbisonicsDecoder* m_decoder;
 

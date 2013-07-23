@@ -100,7 +100,7 @@ t_max_err space_setvalueof(t_space *x, long ac, t_atom *av);
 t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av);
 
 /* Interaction ***************************************/
-void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void space_mouse_move(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_drag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
 void space_mouse_enddrag(t_space *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -134,7 +134,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method)space_bang,            "bang",           A_CANT, 0);
 	class_addmethod(c, (method)space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_down,      "mousedown",      A_CANT, 0);
-    class_addmethod(c, (method)space_mousemove,       "mousemove",      A_CANT, 0);
+    class_addmethod(c, (method)space_mouse_move,       "mousemove",      A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_drag,      "mousedrag",      A_CANT, 0);
     class_addmethod(c, (method)space_mouse_enddrag,   "mouseup",        A_CANT, 0);
     class_addmethod(c, (method)space_preset,          "preset",         0);
@@ -152,7 +152,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL				(c, "nmics", 0, "Number of virtuals microphones");
 	CLASS_ATTR_ACCESSORS			(c, "nmics", NULL, number_of_microphones_set);
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nmics", 0,"8");
-
+	
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_MICS);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
@@ -227,8 +227,6 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
-    
-    //x->f_number_of_microphones = dictionary_getlong(d, gensym("nmics"), &x->f_number_of_microphones);
 
     x->f_outInfos   = outlet_new(x, NULL);
     x->f_out        = listout(x);
@@ -646,9 +644,8 @@ void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
 /*                      Souris                            */
 /**********************************************************/
 
-void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
+void space_mouse_move(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    //post("mod : %ld", modifiers);
     double mapped_x = (pt.x - x->f_center.x) / x->f_center.x;
     double mapped_y = (pt.y - x->f_center.y) / x->f_center.y * -1.;
     double radius   = Tools::radius(mapped_x, mapped_y);
@@ -657,7 +654,7 @@ void space_mousemove(t_space *x, t_object *patcherview, t_pt pt, long modifiers)
     x->f_mousepos.x = radius;
     x->f_mousepos.y = angle;
     
-    if(modifiers == 132) // ctrl : rotation
+    if(modifiers == 132 || modifiers == 5) // ctrl : rotation
     {
         x->f_cursorType = 2;
     }
@@ -692,8 +689,7 @@ void space_mouse_down(t_space *x, t_object *patcherview, t_pt pt, long modifiers
             x->f_mode_values[i] = x->f_microphonesValues[i];
         }
     }
-    //else if(radius > 0.9)
-    else if(modifiers == 148) // ctrl
+    else if(modifiers == 148 || modifiers == 21) // ctrl
     {
         x->f_mode = 1;
         x->f_rotation_max = 0.;
@@ -866,19 +862,20 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
         {
             if(atom_getlong(argv) != x->f_number_of_microphones)
             {
+				
                 delete x->f_viewer;
                 delete x->f_recomposer;
                 
                 x->f_number_of_microphones  = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_MICS);
+				
                 if(x->f_number_of_microphones % 2 == 0)
                     x->f_order              = (x->f_number_of_microphones - 2) / 2;
                 else
                     x->f_order              = (x->f_number_of_microphones - 1) / 2;
                 x->f_number_of_harmonics    = x->f_order * 2 + 1;
-                
+               
                 x->f_viewer         = new AmbisonicsViewer(x->f_order);
-                x->f_recomposer		= new AmbisonicsRecomposer(x->f_order, x->f_number_of_microphones);
-                
+                x->f_recomposer		= new AmbisonicsRecomposer(x->f_order, x->f_number_of_microphones, Hoa_Fixe);
                 
                 jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
                 space_compute(x);

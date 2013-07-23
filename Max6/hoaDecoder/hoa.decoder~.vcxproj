@@ -286,7 +286,7 @@
     <ClCompile Include="hoa.decoder~.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefineWindows.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_INTEL.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonics.h" />

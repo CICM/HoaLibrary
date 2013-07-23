@@ -102,8 +102,7 @@ void notifyChange(t_HoaRecomposerUI *x);
 void HoaRecomposerUI_outputAndNotifyChange(t_HoaRecomposerUI *x);
 
 // mouse/key methods
-void HoaRecomposerUI_mouseleave(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_mouseenter(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
+
 void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mousedown2(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mouseup(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -460,7 +459,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
             }
             else
             {
-                double list[ac];
+                double* list = new double[ac];
                 for(int i = 0; i < ac - isSet ; i++)
                 {
                     if (i > MAX_MICS-1) return;
@@ -469,6 +468,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
                     } else list[i] = 0;
                 }
                 x->f_mics->setAnglesInRadian(list, ac);
+				free(list);
             }
         }
         else if ( name == gensym("directivities") )
@@ -482,7 +482,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
             }
             else
             {
-                double list[ac];
+                double* list = new double[ac];
                 for(int i = 0; i < ac - isSet ; i++)
                 {
                     if (i > MAX_MICS-1) return;
@@ -491,6 +491,7 @@ void HoaRecomposerUI_set(t_HoaRecomposerUI *x, t_symbol *s, long ac, t_atom *av)
                     } else list[i] = 0;
                 }
                 x->f_mics->setWiderValues(list, ac);
+				free(list);
             }
         }
     }
@@ -555,13 +556,13 @@ void HoaRecomposerUI_outputAndNotifyChange(t_HoaRecomposerUI *x)
 void notifyChange(t_HoaRecomposerUI *x)
 {
     // pattrstorage change notification
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
 }
 
 void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
 {
     int nmics = x->f_mics->getNumberOfMics();
-	t_atom	av_left[nmics];
+	t_atom*	av_left = new t_atom[nmics];
     t_atom  av_right[2];
     
     // number of microphones
@@ -580,6 +581,7 @@ void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
         atom_setfloat(av_left+i, x->f_mics->getWiderValue(i));
     }
     outlet_anything(x->f_out, gensym("directivities"), nmics, av_left);
+	free(av_left);
 }
 
 //========================= Notify Methods :
@@ -587,8 +589,8 @@ void HoaRecomposerUI_output(t_HoaRecomposerUI *x)
 t_max_err HoaRecomposerUI_notify(t_HoaRecomposerUI *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
-	//if (msg == gensym("attr_modified"))
-    if (msg == _sym_attr_modified)
+
+    if (msg == gensym("attr_modified"))
 	 {
          name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
          if(name == gensym("nmics"))
@@ -951,20 +953,10 @@ void draw_rect_selection(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 }
 //========================= Mouse Methods :
 
-void HoaRecomposerUI_mouseenter(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-	//post("mouseenter");
-}
-
-void HoaRecomposerUI_mouseleave(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
-{
-	//post("mouseleave");
-}
-
 void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
 {    
     //-- modifiers :
-    //post("modifiers : %ld", modifiers);
+    // post("modifiers : %ld", modifiers);
     // 16 : rien
     // 17 : cmd
     // 18 : shift
@@ -983,7 +975,7 @@ void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
     }
     
     // ctrl => set selected mics fisheyes start angle at the current angle :
-    if (modifiers == 148)
+    if (modifiers == 148 || modifiers == 21)
     {
         t_pt ptCart = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
         x->f_last_mouseDragRadius = Tools::radius(ptCart.x, ptCart.y);
@@ -999,11 +991,12 @@ void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
     }
     else if (isMouseDownOverAMic == -1 )
     {
-        if (modifiers == 17)
+        if (modifiers == 17 || modifiers == 24)
         {
             begin_rect_selection(x, pt);
         }
-        else if (modifiers == 16) {
+        else if (modifiers == 16) 
+		{
             x->f_mics->setSelected(-1, 0); // tout deselectionné
         }
     }
@@ -1016,7 +1009,7 @@ void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
                 x->f_mics->setSelected(isMouseDownOverAMic, 1);
             }
         }
-        else if (modifiers == 17) // cmd
+        else if (modifiers == 17 || modifiers == 24) // cmd
         {
             x->f_mics->setSelected(isMouseDownOverAMic, -1);
         }
@@ -1040,7 +1033,7 @@ void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
     {
         do_rect_selection(x, pt);
     }
-    else if (modifiers == 148 || x->f_showFishEye) // ctrl => do a fisheye
+    else if (modifiers == 148 || x->f_showFishEye || modifiers == 21) // ctrl => do a fisheye
     {
         double fisheyeAngle = x->f_mics->getFisheyeDestAngle();
         double factor = Tools::isInsideRad(angleDrag, fisheyeAngle-CICM_PI2, fisheyeAngle+CICM_PI2) ? 1 : -1;
@@ -1164,7 +1157,7 @@ long HoaRecomposerUI_key(t_HoaRecomposerUI *x, t_object *patcherview, long keyco
 {	
 	//post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
     int filter = 0;
-	if (keycode == 97 && modifiers == 1 && textcharacter == 0) // cmd+a -> select all;
+	if ((keycode == 97 && modifiers == 1 && textcharacter == 0)  || (keycode == 97 && modifiers == 5 && textcharacter == 1)) // cmd+a -> select all;
     {
 		x->f_mics->setSelected(-1, 1); // tout selectionné
         jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));

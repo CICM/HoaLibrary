@@ -30,12 +30,20 @@
 #include "hoaAmbisonics/AmbisonicsViewer.h"
 
 #include "hoaEncoder/AmbisonicsEncoder.h"
+#include "hoaFreeverb/AmbisonicsFreeverb.h"
 #include "hoaRotate/AmbisonicsRotate.h"
 #include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
 
+#include "hoaMap/AmbisonicMultiMaps.h"
+#include "hoaMap/AmbisonicSourcesTrajectory.h"
+#include "hoaMeter/AmbisonicsMeter.h"
+#include "hoaOptim/AmbisonicsOptim.h"
+#include "hoaProjector/AmbisonicsProjector.h"
 #include "hoaRecomposer/AmbisonicsRecomposer.h"
+#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
 
 #include "hoaSpace/AmbisonicSpace.h"
+
 #include "hoaVector/AmbisonicsVector.h"
 #include "hoaWider/AmbisonicsWider.h"
 #endif

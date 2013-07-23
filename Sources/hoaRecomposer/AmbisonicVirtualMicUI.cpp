@@ -36,7 +36,6 @@ AmbisonicVirtualMicUI::AmbisonicVirtualMicUI()
     
     m_encoder           = new AmbisonicsEncoder(m_order);
 	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
-    //m_optim				= new AmbisonicsOptim(m_order);
 	m_wider				= new AmbisonicsWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     
@@ -47,7 +46,6 @@ AmbisonicVirtualMicUI::~AmbisonicVirtualMicUI()
     free (m_harmonicsValues);
 	delete m_encoder;
 	delete m_viewer;
-	//delete m_optim;
 	delete m_wider;
 }
 
@@ -56,7 +54,6 @@ void AmbisonicVirtualMicUI::compute()
 {
     m_encoder->process(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);
     m_wider->process(m_harmonicsValues, Tools::clip(m_widerValue, double(0.0000001), double(1)));
-    //m_optim->process(m_harmonicsValues);
     m_viewer->processBigLob(m_harmonicsValues);
 }
 
@@ -67,23 +64,26 @@ void AmbisonicVirtualMicUI::setOrder(long _order)
     free (m_harmonicsValues);
 	delete m_encoder;
 	delete m_viewer;
-	//delete m_optim;
 	delete m_wider;
     
     m_order = Tools::clip_min(_order, long(1));
     m_encoder           = new AmbisonicsEncoder(m_order);
 	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
-    //m_optim				= new AmbisonicsOptim(m_order);
-	m_wider				= new AmbisonicsWider(m_order);
+   	m_wider				= new AmbisonicsWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     
     compute();
 }
 
-void AmbisonicVirtualMicUI::setAngleInRadian(double _radian)
+void AmbisonicVirtualMicUI::setAngleInRadian(double anAngleInRadian)
 {
-    m_angleInRadian = Tools::wrap(_radian, 0, CICM_2PI);
+    m_angleInRadian = Tools::wrap(anAngleInRadian, 0, CICM_2PI);
     compute();
+}
+
+void AmbisonicVirtualMicUI::setAngleInDegree(double anAngleInDegree)
+{
+    setAngleInRadian(Tools::degToRad(anAngleInDegree));
 }
 
 void AmbisonicVirtualMicUI::rotateAngleInRadian(double _deltaRadian)

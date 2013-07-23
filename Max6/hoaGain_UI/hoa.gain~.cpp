@@ -89,7 +89,7 @@ typedef struct _hoaGain
     float       f_range[2];
     double      j_valdB;
     double      j_defaultValuedB;
-    
+    double		f_gain[16384];
     //inputs/output
     void*       f_inlet_val;
     void*       f_outlet_infos;
@@ -110,8 +110,7 @@ void *hoaGain_stdargs(t_dictionary *d, t_symbol *s, long argc, t_atom *argv);
 void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv);
 void HoaGain_reconnect_outlet(t_hoaGain *x);
 /* DSP ------------------------------------- */
-void hoaGain_dsp(t_hoaGain *x, t_signal **sp, short *count);
-t_int *hoaGain_perform(t_int *w);
+
 void hoaGain_dsp64(t_hoaGain *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoaGain_perform64(t_hoaGain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoaGain_tick(t_hoaGain *x);
@@ -162,9 +161,7 @@ void hoaGain_drawPopupValue(t_hoaGain *x);
 
 int C74_EXPORT main()
 {
-	t_class *c; 
-
-	common_symbols_init();
+	t_class *c;
 
 	c = class_new("hoa.gain~", (method)hoaGain_new, (method)hoaGain_free, sizeof(t_hoaGain), (method)NULL, A_GIMME, 0L);
 
@@ -173,7 +170,6 @@ int C74_EXPORT main()
     class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_FIXWIDTH | JBOX_COLOR );
     
-    class_addmethod (c, (method) hoaGain_dsp,                 "dsp",                  A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_dsp64,               "dsp64",                A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_paint,               "paint",                A_CANT, 0);
 	class_addmethod (c, (method) hoaGain_int,                 "int",                  A_LONG, 0);
@@ -437,7 +433,7 @@ void hoaGain_setInputModeValue(t_hoaGain *x, double value, bool outputTheValue)
         
     hoaGain_set_gain(x);
 	if (outputTheValue)
-		object_notify(x, _sym_modified, NULL);
+		object_notify(x, gensym("modified"), NULL);
     
     jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
 	jbox_redraw((t_jbox *)x);
@@ -449,7 +445,7 @@ void hoaGain_float_dB(t_hoaGain *x, double dBValue)
     x->j_val = hoaGain_constrain_real_value(x, dBValue) - x->j_min;
     x->j_valdB = x->j_val + x->j_min;
     hoaGain_set_gain(x);
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
 	jbox_redraw((t_jbox *)x);
     
@@ -462,7 +458,7 @@ void hoaGain_set_dB(t_hoaGain *x, double dBValue)
     x->j_val = hoaGain_constrain_real_value(x, dBValue) - x->j_min;
     x->j_valdB = x->j_val + x->j_min;
     hoaGain_set_gain(x);
-    object_notify(x, _sym_modified, NULL);
+    object_notify(x, gensym("modified"), NULL);
     jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
 	jbox_redraw((t_jbox *)x);    
 }
@@ -493,47 +489,7 @@ void hoaGain_free(t_hoaGain *x)
 }
 
 /* DSP ------------------------------------- */
-void hoaGain_dsp(t_hoaGain *x, t_signal **sp, short *count)
-{
-    int i;
-	int pointer_count;
-	t_int **sigvec;
-	
-	pointer_count = x->f_numberOfChannels*2 + 3;
-	
-	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
-	for(i = 0; i < pointer_count; i++)
-		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
-	
-	sigvec[0] = (t_int *)x;
-	sigvec[1] = (t_int *)sp[0]->s_n;
-	for(i = 2; i < pointer_count; i++)
-		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-    
-    x->f_amp->setSamplingRate(sp[0]->s_sr);
-    x->f_amp->setVectorSize(sp[0]->s_n);
-	
-	dsp_addv(hoaGain_perform, pointer_count, (void **)sigvec);
-	
-	free(sigvec);
-}
-t_int *hoaGain_perform(t_int *w)
-{
-    t_hoaGain *x			= (t_hoaGain *)(w[1]);
-	t_int	sampleframes= (t_int)(w[2]);
-	t_float	**ins		= (t_float **)w+3;
-    t_float	**outs		= (t_float **)w+3+x->f_numberOfChannels+1;
-    
-    int i;
-    t_float line[sampleframes];
-    
-    x->f_amp->process(line);
-    
-    for(i = 0; i < x->f_numberOfChannels; i++)
-        Cicm_Matrix_Vector_Float_Mul(ins[i], line, outs[i], sampleframes);
 
-	return (w + x->f_numberOfChannels*2 + 4);
-}
 void hoaGain_dsp64(t_hoaGain *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     x->f_amp->setSamplingRate(samplerate);
@@ -542,13 +498,10 @@ void hoaGain_dsp64(t_hoaGain *x, t_object *dsp64, short *count, double samplerat
 }
 void hoaGain_perform64(t_hoaGain *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int i;
-    double line[sampleframes];
+	x->f_amp->process(x->f_gain);
     
-    x->f_amp->process(line);
-    
-    for(i = 0; i < x->f_numberOfChannels; i++)
-        Cicm_Matrix_Vector_Double_Mul(ins[i], line, outs[i], sampleframes);
+    for(int i = 0; i < x->f_numberOfChannels; i++)
+        Cicm_Vector_Vector_Double_Mul(ins[i], x->f_gain, outs[i], sampleframes);
 }
 
 void hoaGain_set_gain(t_hoaGain *x)
@@ -841,7 +794,7 @@ void hoaGain_resize_io(t_hoaGain *x, long newNumberOfChannel)
             object_method(gensym("dsp")->s_thing, gensym("stop"));
         
         t_object *b = NULL;
-        object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
+		object_obex_lookup(x, gensym("#B"), (t_object **)&b);
         object_method(b, gensym("dynlet_begin"));
         
         dsp_resize((t_pxobject*)x, newNumberOfChannel+1);
@@ -1108,12 +1061,15 @@ t_max_err hoaGain_notify(t_hoaGain *x, t_symbol *s, t_symbol *msg, void *sender,
 	t_atom *argv = NULL;
 	t_symbol *name;
 	
-	if (msg == _sym_attr_modified) {
-		name = (t_symbol *)object_method((t_object *)data,_sym_getname);
-		if (name == _sym_color) {
-			object_attr_getvalueof(x, _sym_color, &argc, &argv);
-			if (argc && argv) {
-				object_attr_setvalueof(x, _sym_bgcolor, argc, argv);
+	if (msg == gensym("attr_modified")) 
+	{
+		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
+		if (name == gensym("color")) 
+		{
+			object_attr_getvalueof(x, gensym("color"), &argc, &argv);
+			if (argc && argv) 
+			{
+				object_attr_setvalueof(x, gensym("bgcolor"), argc, argv);
 				sysmem_freeptr(argv);
 			}
 		}

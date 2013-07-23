@@ -23,7 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#include "AmbisonicsProjector.h"
+#include "../../Sources/HoaLibrary.h"
 extern "C"
 {
 	#include "ext.h"

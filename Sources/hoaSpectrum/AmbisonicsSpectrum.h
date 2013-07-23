@@ -64,6 +64,13 @@ public:
     double getOrdinate(long aBandIndex);
     double getRadius(long aBandIndex);
     double getAngle(long aBandIndex);
+    
+    double getLogAmplitude(long aBandIndex);
+    double getLogAbscissa(long aBandIndex);
+    double getLogOrdinate(long aBandIndex);
+    double getLogRadius(long aBandIndex);
+    double getLogAngle(long aBandIndex);
+    
     double getFrequencyBand(long anIndex);
     long   getNumberOfBands();
     
