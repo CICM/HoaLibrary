@@ -39,10 +39,11 @@
 
 #define Cicm_Complex_Float DSPComplex
 #define Cicm_Complex_Packed_Float DSPSplitComplex
-#define Cicm_Fft_Handle FFTSetup
 
 #define Cicm_Complex_Double DSPComplexD
 #define Cicm_Complex_Packed_Double DSPSplitComplexD
+
+#define Cicm_Fft_Handle FFTSetup
 
 /**************** ALLOCATION *****************/
 #define	Cicm_Vector_Float_Malloc(vector, size) vector = (Cicm_Vector_Float)calloc(size, sizeof(Cicm_Float))
