@@ -325,10 +325,10 @@ Velocity BoidsManager::AvoidWalls(short theBoid)
 	return(tempVel);
 }
 
-Boolean BoidsManager::InFront(Boid* theBoid, Boid* neighbor)
+bool BoidsManager::InFront(Boid* theBoid, Boid* neighbor)
 {
 	double	grad, intercept;
-	Boolean result;
+	bool result;
 	
     /*
      Find the gradient and y-intercept of a line passing through theBoid's oldPos
