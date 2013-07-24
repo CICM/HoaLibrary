@@ -1183,34 +1183,73 @@ void draw_attractor(t_hoaboids *x,  t_object *view, t_rect *rect)
 
 void hoaboids_mousedown(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    t_pt cursor;
-    cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
-    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.) / x->f_zoom_factor;
-    hoaboids_setGravityPoint(x, cursor.x, cursor.y);
-    x->f_cursor_position.x = cursor.x;
-    x->f_cursor_position.y = cursor.y;
+    t_pt zoomedCarCursor = CicmMax::maxPtToCartCoords(pt, &x->rect, x->f_zoom_factor);
+    
+    if ( x->mouseIsOverRect )
+    {
+        
+    }
+    else if ( x->mouseIsOverTopLeftRect )
+    {
+        
+    }
+    else if ( x->mouseIsOverBottomRightRect )
+    {
+        
+    }
+    else
+    {
+        hoaboids_setGravityPoint(x, zoomedCarCursor.x, zoomedCarCursor.y);
+    }
+    
+    x->f_cursor_position.x = zoomedCarCursor.x;
+    x->f_cursor_position.y = zoomedCarCursor.y;
     
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
-    
-    /*
-    hoaboids_mousedrag(x, patcherview, pt, modifiers);
-    */
-    /*
-    if(x->f_source_trajectory->getRecording())
-        clock_set(x->f_clock, 100);
-    */
 }
 
 
 void hoaboids_mousedrag(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    t_pt cursor;
-    cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
-    cursor.y = ((-pt.y / x->rect.width * 2.) + 1.) / x->f_zoom_factor;
-    hoaboids_setGravityPoint(x, cursor.x, cursor.y);
-    x->f_cursor_position.x = cursor.x;
-    x->f_cursor_position.y = cursor.y;
+    t_pt zoomedCarCursor = CicmMax::maxPtToCartCoords(pt, &x->rect, x->f_zoom_factor);
+    t_pt dragDelta = {zoomedCarCursor.x - x->f_cursor_position.x, zoomedCarCursor.y - x->f_cursor_position.y};
+    t_atom flyrect[4];
+    
+    if ( x->mouseIsOverRect )
+    {
+        atom_setfloat(flyrect,   x->f_boids_manager->getFlyRect_topLeft_X() + dragDelta.x);
+        atom_setfloat(flyrect+1, x->f_boids_manager->getFlyRect_topLeft_Y() + dragDelta.y);
+        atom_setfloat(flyrect+2, x->f_boids_manager->getFlyRect_bottomRight_X() + dragDelta.x);
+        atom_setfloat(flyrect+3, x->f_boids_manager->getFlyRect_bottomRight_Y() + dragDelta.y);        
+        hoaboids_setAttr_flyrect(x, NULL, 4, flyrect);
+        object_attr_touch((t_object*)x, gensym("flyrect"));
+    }
+    else if ( x->mouseIsOverTopLeftRect )
+    {
+        atom_setfloat(flyrect,   x->f_boids_manager->getFlyRect_topLeft_X() + dragDelta.x);
+        atom_setfloat(flyrect+1, x->f_boids_manager->getFlyRect_topLeft_Y() + dragDelta.y);
+        atom_setfloat(flyrect+2, x->f_boids_manager->getFlyRect_bottomRight_X());
+        atom_setfloat(flyrect+3, x->f_boids_manager->getFlyRect_bottomRight_Y());
+        hoaboids_setAttr_flyrect(x, NULL, 4, flyrect);
+        object_attr_touch((t_object*)x, gensym("flyrect"));
+    }
+    else if ( x->mouseIsOverBottomRightRect )
+    {
+        atom_setfloat(flyrect,   x->f_boids_manager->getFlyRect_topLeft_X());
+        atom_setfloat(flyrect+1, x->f_boids_manager->getFlyRect_topLeft_Y());
+        atom_setfloat(flyrect+2, x->f_boids_manager->getFlyRect_bottomRight_X() + dragDelta.x);
+        atom_setfloat(flyrect+3, x->f_boids_manager->getFlyRect_bottomRight_Y() + dragDelta.y);
+        hoaboids_setAttr_flyrect(x, NULL, 4, flyrect);
+        object_attr_touch((t_object*)x, gensym("flyrect"));
+    }
+    else
+    {
+        hoaboids_setGravityPoint(x, zoomedCarCursor.x, zoomedCarCursor.y);
+    }
+    
+    x->f_cursor_position.x = zoomedCarCursor.x;
+    x->f_cursor_position.y = zoomedCarCursor.y;
 
     jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
     jbox_redraw((t_jbox *)x);
@@ -1258,19 +1297,20 @@ void hoaboids_mousemove(t_hoaboids *x, t_object *patcherview, t_pt pt, long modi
         t_pt bottomRight = {x->f_flyrect[2], x->f_flyrect[3]};
         topLeft = CicmMax::cartCoordsToMaxPt(topLeft, &x->rect, x->f_zoom_factor);
         bottomRight = CicmMax::cartCoordsToMaxPt(bottomRight, &x->rect, x->f_zoom_factor);
+        
         if ( Tools::isInside(pt.x, topLeft.x, bottomRight.x) &&
-            Tools::isInside(pt.y, bottomRight.y, topLeft.y)) {
+            Tools::isInside(pt.y, topLeft.y, bottomRight.y)) {
             x->mouseIsOverRect = 1;
         }
         
         if ( Tools::isInside(pt.x, topLeft.x-5, topLeft.x+5) &&
-            Tools::isInside(pt.y, bottomRight.y-5, bottomRight.y+5))
+            Tools::isInside(pt.y, topLeft.y-5, topLeft.y+5))
         {
             x->mouseIsOverRect = 0;
             x->mouseIsOverTopLeftRect = 1;
         }
         else if ( Tools::isInside(pt.x, bottomRight.x-5, bottomRight.x+5) &&
-                 Tools::isInside(pt.y, topLeft.y-5, topLeft.y+5))
+                 Tools::isInside(pt.y, bottomRight.y-5, bottomRight.y+5))
         {
             x->mouseIsOverRect = 0;
             x->mouseIsOverBottomRightRect = 1;
@@ -1288,23 +1328,6 @@ void hoaboids_mousemove(t_hoaboids *x, t_object *patcherview, t_pt pt, long modi
     
     jbox_invalidate_layer((t_object *)x, NULL, gensym("flyrect_layer"));
     jbox_redraw((t_jbox *)x);
-    
-    /*
-    t_pt zoomedCarCursor = CicmMax::maxPtToCartCoords(pt, &x->rect, x->f_zoom_factor);
-    
-    if ( Tools::isInside(zoomedCarCursor.x, x->f_flyrect[0], x->f_flyrect[2]) &&
-         Tools::isInside(zoomedCarCursor.y, x->f_flyrect[3], x->f_flyrect[1])) {
-        x->mouseIsOverRect = 1;
-    }
-    
-    if (modifiers == 1) x->cmdKeyPressed = 1;
-    */
-
-    /*
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("boids_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("attractor_layer"));
-    jbox_redraw((t_jbox *)x);
-    */
 }
 
 void hoaboids_mouseleave(t_hoaboids *x, t_object *patcherview, t_pt pt, long modifiers)

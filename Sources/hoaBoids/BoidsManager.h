@@ -120,7 +120,7 @@ public:
     Velocity AvoidWalls(short theBoid);
     double DistSqrToPt(Point2d firstPoint, Point2d secondPoint);
     void NormalizeVelocity(Velocity *direction);
-    Boolean InFront(Boid* theBoid, Boid* neighbor);
+    bool InFront(Boid* theBoid, Boid* neighbor);
     
     void boid_set_pos(long index, double posX, double posY);
     void boid_set_dir(long index, double dirX, double dirY);

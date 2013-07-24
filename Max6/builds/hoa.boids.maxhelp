@@ -162,10 +162,7 @@
 									"inertia" : 2.0,
 									"match" : 0.0,
 									"maxclass" : "hoa.boids",
-									"maxspeed" : 1.0,
-									"minspeed" : 0.5,
 									"nboids" : 15,
-									"neigbhors" : 2,
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "list" ],
@@ -201,8 +198,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "signal", "signal", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 561.5, 407.0, 119.0, 23.0 ],
-									"presentation_rect" : [ 528.0, 451.0, 0.0, 0.0 ]
+									"patching_rect" : [ 561.5, 407.0, 119.0, 23.0 ]
 								}
 
 							}
@@ -7041,7 +7037,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 95.875, 645.0, 234.0, 17.0 ],
-									"text" : "barycenter car 1.000687 -0.665751"
+									"text" : "barycenter car 1.537049 -1.191109"
 								}
 
 							}
@@ -7128,7 +7124,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 22.0, 620.0, 234.0, 17.0 ],
-									"text" : "9 car 0.25939 -3.297337"
+									"text" : "9 car 1.883024 -1.4468"
 								}
 
 							}
@@ -7387,20 +7383,17 @@
 									"accel" : 0.000001,
 									"attract" : 1.0,
 									"attractorcolor" : [ 0.366512, 0.416858, 0.8, 1.0 ],
+									"attractpoint" : [ 1.252381, -1.021269 ],
 									"avoid" : 0.73,
 									"boidscolor" : [ 0.190122, 0.178494, 0.517957, 1.0 ],
 									"center" : 0.0,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"flyrect" : [ -6.0, 6.0, 6.0, -6.0 ],
 									"flyrectcolor" : [ 0.660555, 0.278493, 0.311128, 1.0 ],
 									"id" : "obj-18",
 									"inertia" : 2.0,
 									"match" : 0.0,
 									"maxclass" : "hoa.boids",
-									"maxspeed" : 1.0,
-									"minspeed" : 0.5,
 									"nboids" : 10,
-									"neigbhors" : 2,
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "list" ],

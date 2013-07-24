@@ -39,7 +39,7 @@ private:
 #ifdef CICM_VDSP
 	Cicm_Fft_Handle		m_fft_handle;
 #endif
-#ifdef CICM_IPPS
+#ifdef _WINDOWS
 	int					m_spec_size;
 	int					m_init_size;
 	int					m_buff_size;
@@ -73,7 +73,7 @@ inline void Cicm_Fft::forward(Cicm_Vector_Float aRealVector, Cicm_Complex_Packed
 	vDSP_ctoz((Cicm_Complex_Float *)aRealVector, 2, anPackedVector, 1, m_array_size); 
 	Cicm_fft_forward(m_fft_handle, anPackedVector, m_order);
 #endif
-#ifdef CICM_IPPS
+#ifdef _WINDOWS
 	Cicm_fft_forward(aRealVector, anPackedVector, m_fft_handle, m_fft_buff);
 #endif
 #ifdef CICM_FFTW_GSL

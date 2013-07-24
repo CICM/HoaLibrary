@@ -36,7 +36,7 @@ Cicm_Fft::Cicm_Fft(long aWindowSize)
 #ifdef CICM_VDSP
 	m_fft_handle = Cicm_fft_init_handle(m_order);
 #endif
-#ifdef CICM_IPPS
+#ifdef _WINDOWS
 	Cicm_fft_get_size(m_order, &m_spec_size, &m_init_size, &m_buff_size);
 	m_fft_buff = Cicm_buffer_malloc(m_buff_size);
 	m_fft_init = Cicm_buffer_malloc(m_init_size);
@@ -77,7 +77,7 @@ Cicm_Fft::~Cicm_Fft()
 #ifdef CICM_VDSP
 	Cicm_fft_free_handle(m_fft_handle);
 #endif
-#ifdef CICM_IPPS
+#ifdef _WINDOWS
 	Cicm_free(m_fft_buff);
 	Cicm_free(m_fft_init);
 	Cicm_free(m_fft_spec);

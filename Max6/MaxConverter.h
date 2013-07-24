@@ -91,8 +91,10 @@ public:
     static t_pt cartCoordsToMaxPt(t_pt pt, t_rect* aMaxRect, double aZoomfactor = 1.)
     {
         t_pt maxPt = pt;
+        //maxPt.x = (maxPt.x * (aMaxRect->width*0.5) * aZoomfactor) + (aMaxRect->width*0.5);
+        //maxPt.y = (maxPt.y * (aMaxRect->height*0.5) * aZoomfactor)+ (aMaxRect->width*0.5);
         maxPt.x = (maxPt.x * (aMaxRect->width*0.5) * aZoomfactor) + (aMaxRect->width*0.5);
-        maxPt.y = (maxPt.y * (aMaxRect->height*0.5) * aZoomfactor)+ (aMaxRect->width*0.5);
+        maxPt.y = -1*(maxPt.y * (aMaxRect->height*0.5) * aZoomfactor)+ (aMaxRect->height*0.5);
         return maxPt;
     }
     
