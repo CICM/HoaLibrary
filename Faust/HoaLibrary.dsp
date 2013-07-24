@@ -16,9 +16,9 @@ import("math.lib");
 
 // encoder : encodes a signal in the circular harmonics domain depending on an order of decomposition and an angle.
 
-// decoder : decodes an ambisonics sound field for several loudspeakers configurations. 
+// decoder : decodes an ambisonics sound field for a circular array of loudspeakers. 
 
-// decoderStereo : decodes an ambisonics sound field for stereophonic configuration. 
+// decoderStereo : decodes an ambisonic sound field for stereophonic configuration. 
 
 // optimBasic, optimMaxRe, optimInPhase : weights the circular harmonics signals depending to the ambisonics optimization. It can be "basic" for no optimization, "maxRe" or "inPhase".
 
@@ -83,6 +83,12 @@ with
 // Usage : n is the order
 // Exemple : decoderStereo(3,8)
 // Informations : An "home made" ambisonic decoder for stereophonic resitution (30° - 330°) : Sound field lose energy aound 180°. You should use inPhase optimization with ponctual sources.
+
+
+//----------------------------------------------------------------------------//
+//------------------------ Ambisonic decoder quadri --------------------------//
+//----------------------------------------------------------------------------//
+
 
 
 //----------------------------------------------------------------------------//
@@ -198,14 +204,33 @@ with
 
 // Usage : n is the order, a the angle in radiant
 // Exemple : rotate(3, angle)
-// Informations : It applies a rotation of the sound field.
+// Informations : It rotates the sound field.
 
 //----------------------------------------------------------------------------//
 //---------------------------- Ambisonic exemple -----------------------------//
 //----------------------------------------------------------------------------//
 
+import("filter.lib") ;
 
-process = decoderStereo(1);
+interTime = nentry("Interpolation Time", 100., 0., 1000., 0.1) / 1000.;
+x1 = hslider("Abscissa : Source 1", 0., -2, 2, 0.001) : smooth(tau2pole(interTime));
+x2 = hslider("Abscissa : Source 2", -0.75, -2, 2, 0.001) : smooth(tau2pole(interTime));
+x3 = hslider("Abscissa : Source 3", 0.75, -2, 2, 0.001) : smooth(tau2pole(interTime));
+//z1 = tgroup("Absissa",(x1,x2,x3));
+y1 = hslider("Ordinate : Source 1", 1., -2, 2, 0.001) : smooth(tau2pole(interTime));
+y2 = hslider("Ordinate : Source 2", -0.75, -2, 2, 0.001) : smooth(tau2pole(interTime));
+y3 = hslider("Ordinate : Source 3", -0.75, -2, 2, 0.001) : smooth(tau2pole(interTime));
+//z2 = tgroup("Ordinate",(y1,y2,y3));
+
+r1 = sqrt(x1*x1 + y1*y1);
+r2 = sqrt(x2*x2 + y2*y2);
+r3 = sqrt(x3*x3 + y3*y3);
+
+a1 = atan2(y1, x1);
+a2 = atan2(y2, x2);
+a3 = atan2(y3, x3);
+
+process(sig1,sig2,sig3) = map(7, sig1, r1, a1), map(7, sig2, r2, a2), map(7, sig3, r3, a3) :> optimInPhase(7) : decoderStereo(7);
 
 
 
