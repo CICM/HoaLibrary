@@ -24,6 +24,7 @@ nbSpeakers_Label("nbSpeakers")//,
     
     // Setting size of our plug :
     setSize (bg.getWidth(), bg.getHeight());
+    //setSize (500, 500);
     
     addAndMakeVisible (&nbSources_Label);
     addAndMakeVisible (&nbSpeakers_Label);

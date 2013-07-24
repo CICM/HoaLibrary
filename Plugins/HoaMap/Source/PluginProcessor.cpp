@@ -62,7 +62,9 @@ HoaMapAudioProcessor::HoaMapAudioProcessor()
     for(int i = 0; i < MAX_LOUDSPEAKERS; i++)
     {
         m_harmonics_vector_one[i] = new float[1];
+        m_harmonics_vector_one[i] = NULL;
         m_harmonics_vector_two[i] = new float[1];
+        m_harmonics_vector_two[i] = NULL;
     }
 }
 
@@ -290,14 +292,16 @@ void HoaMapAudioProcessor::numChannelsChanged()
 //==============================================================================
 void HoaMapAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-    //m_ambisonic_tool->setNumberOfSources(m_number_of_sources);
+    numChannelsChanged();
     m_ambisonic_tool->setVectorSize(samplesPerBlock);
     m_ambisonic_rotator->setVectorSize(samplesPerBlock);
     m_ambisonic_decoder->setVectorSize(samplesPerBlock);
     for(int i = 0; i < MAX_LOUDSPEAKERS; i++)
     {
-        free(m_harmonics_vector_one[i]);
-        free(m_harmonics_vector_two[i]);
+        if(m_harmonics_vector_one[i])
+           free(m_harmonics_vector_one[i]);
+        if(m_harmonics_vector_two[i])
+            free(m_harmonics_vector_two[i]);
         m_harmonics_vector_one[i] = new float[samplesPerBlock];
         m_harmonics_vector_two[i] = new float[samplesPerBlock];
     }

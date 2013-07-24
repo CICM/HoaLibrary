@@ -204,8 +204,7 @@ with
 //---------------------------- Ambisonic exemple -----------------------------//
 //----------------------------------------------------------------------------//
 
-
-process = decoderStereo(1);
+process(x, r, a) = map(7, x, r, a) : optimInPhase(7) : decoderStereo(7);
 
 
 
