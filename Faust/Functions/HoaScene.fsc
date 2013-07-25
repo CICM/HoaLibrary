@@ -1,0 +1,5 @@
+<!DOCTYPE GraphicsSceneFaust>
+<SceneRoot>
+ <Scene sceneHeight="747.5" viewZoom="0.9999999403953552" sceneX="-361.5" sceneY="-515" sceneWidth="626" viewX="-2.000000119209297" viewY="-141.0000084042554"/>
+ <Item DomFaustItemRectWidth="282" ItemX="-151" ItemY="-391" ItemZ="4" file="/Users/Pierre/SourceTree/HoaLibrary/Faust/Functions/HoaLibrary.dsp" DomFaustItemRectHeight="282"/>
+</SceneRoot>
