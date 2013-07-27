@@ -180,7 +180,7 @@ with
 
 // Usage : n is the order, x the signal, r the radius and a the angle in radiant
 // Exemple : map(3, signal, radius, angle)
-// Informations : It simulate the distance of the source by applying a gain on the signal and a wider processing on the soundfield.
+// Informations : It simulates the distance of the source by applying a gain on the signal and a wider processing on the sound field.
 
 
 

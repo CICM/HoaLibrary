@@ -48,6 +48,7 @@ void hoa_recomposer_wide(hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 void hoa_recomposer_dsp(hoa_recomposer *x, t_signal **sp, short *count);
 t_int *hoa_recomposer_perform(t_int *w);
 t_int *hoa_recomposer_perform_fisheye(t_int *w);
+t_int *hoa_recomposer_perform_free(t_int *w);
 
 t_class *hoa_recomposer_class;
 
@@ -104,7 +105,15 @@ void hoa_recomposer_dsp(hoa_recomposer *x, t_signal **sp, short *count)
 {
 	x->f_ambisonics_recomposer->setVectorSize(sp[0]->s_n);
 
-    if(x->f_ambisonics_recomposer->getMode() == 1)
+    if(x->f_ambisonics_recomposer->getMode() == 2)
+    {
+        for(int i = 0; i < x->f_ambisonics_recomposer->getNumberOfInputs()+1; i++)
+            x->f_inputs[i] = sp[i]->s_vec;
+        for(int i = 0; i < x->f_ambisonics_recomposer->getNumberOfOutputs(); i++)
+            x->f_outputs_real[i] = sp[i+x->f_ambisonics_recomposer->getNumberOfInputs()+1]->s_vec;
+        dsp_add(hoa_recomposer_perform_free, 1, x);
+    }
+    else if(x->f_ambisonics_recomposer->getMode() == 1)
     {
         for(int i = 0; i < x->f_ambisonics_recomposer->getNumberOfInputs()+1; i++)
             x->f_inputs[i] = sp[i]->s_vec;
@@ -126,7 +135,7 @@ t_int *hoa_recomposer_perform(t_int *w)
 {
 	hoa_recomposer *x	= (hoa_recomposer *)(w[1]);
 	
-	x->f_ambisonics_recomposer->process(x->f_inputs, x->f_outputs);
+	x->f_ambisonics_recomposer->processFixe(x->f_inputs, x->f_outputs);
     for(int i = 0; i < x->f_ambisonics_recomposer->getNumberOfOutputs(); i++)
         Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_recomposer->getVectorSize());
 
@@ -137,7 +146,18 @@ t_int *hoa_recomposer_perform_fisheye(t_int *w)
 {
 	hoa_recomposer *x	= (hoa_recomposer *)(w[1]);
 	
-	x->f_ambisonics_recomposer->process(x->f_inputs, x->f_outputs, x->f_inputs[x->f_ambisonics_recomposer->getNumberOfInputs()]);
+	x->f_ambisonics_recomposer->processFisheye(x->f_inputs, x->f_outputs, x->f_inputs[x->f_ambisonics_recomposer->getNumberOfInputs()]);
+    for(int i = 0; i < x->f_ambisonics_recomposer->getNumberOfOutputs(); i++)
+        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_recomposer->getVectorSize());
+    
+	return (w + 2);
+}
+
+t_int *hoa_recomposer_perform_free(t_int *w)
+{
+	hoa_recomposer *x	= (hoa_recomposer *)(w[1]);
+	
+	x->f_ambisonics_recomposer->processFree(x->f_inputs, x->f_outputs);
     for(int i = 0; i < x->f_ambisonics_recomposer->getNumberOfOutputs(); i++)
         Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_recomposer->getVectorSize());
     
