@@ -1,6 +1,6 @@
 ------------------------
 
-For an overview of hoa.library and new features in version 1.2, please refer to the 'hoa.library overview' patch in the extra folder.
+For an overview of HoaLibrary and new features in the last version, please refer to the 'HoaLibrary overview' patch in the extra folder.
 
 ------------------------
 version 1.3

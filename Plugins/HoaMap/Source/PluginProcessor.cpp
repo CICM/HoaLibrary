@@ -317,8 +317,10 @@ void HoaMapAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& m
     float** channelArray = buffer.getArrayOfChannels();
     
     m_ambisonic_tool->process(channelArray, m_harmonics_vector_one);
-    m_ambisonic_rotator->process(m_harmonics_vector_one, m_harmonics_vector_two);
-    m_ambisonic_decoder->process(m_harmonics_vector_two, channelArray);
+    //m_ambisonic_rotator->process(m_harmonics_vector_one, m_harmonics_vector_two);
+    //m_ambisonic_decoder->process(m_harmonics_vector_two, channelArray);
+    m_ambisonic_decoder->process(m_harmonics_vector_one, channelArray);
+
 }
 
 //==============================================================================

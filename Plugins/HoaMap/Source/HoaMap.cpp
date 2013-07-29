@@ -41,7 +41,8 @@ HoaMap::~HoaMap()
 
 HoaMap::Source::Source() : Point<float>()
 {
-    m_factor = 1.5;
+    //m_factor = 1.5;
+    m_factor = 1.;
     m_azimuth = m_radius = 0;
 }
 

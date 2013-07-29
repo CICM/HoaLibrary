@@ -73,7 +73,6 @@ typedef struct  _hoamap
 	t_jfont*        jfont;
     void*           f_clock;
     
-    t_atom_long f_output_mode;
 	void*		f_out_sources;
     void*		f_out_groups;
     void*		f_out_infos;
@@ -106,6 +105,11 @@ typedef struct  _hoamap
     
     t_rect		f_rect_selection;
 	int			f_rect_selection_exist;
+    
+    // options :
+    t_atom_long f_output_mode;
+    //t_atom_long f_autogroup;
+    
 } t_hoamap;
 
 t_class *hoamap_class;

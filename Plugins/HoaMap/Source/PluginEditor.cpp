@@ -37,10 +37,13 @@ nbSpeakers_Label("nbSpeakers")//,
     //addAndMakeVisible (configButton = new ToggleButton (String::empty));
     //configButton->addListener(this);
     
+    
     addAndMakeVisible (configPannel = new ConfigComponent() );
     configPannel->setClosedBounds(getWidth()-25, 5, 20, 20);
     configPannel->setOpenedBounds(5, 5, getWidth()-10, getHeight()-10);
+    configPannel->hide();
     configPannel->addChangeListener(this);
+    
     
     //add the draggable-number-box sliders :
     addAndMakeVisible (&speakerOffset_Slider);
