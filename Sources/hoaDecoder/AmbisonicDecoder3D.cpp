@@ -23,9 +23,9 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicEncoder3D.h"
+#include "AmbisonicDecoder3D.h"
 
-AmbisonicEncoder3D::AmbisonicEncoder3D(long anOrder, long aVectorSize, long aSamlingRate) : Ambisonic3D(anOrder, aVectorSize, aSamlingRate)
+AmbisonicDecoder3D::AmbisonicDecoder3D(long anOrder, long aVectorSize, long aSamlingRate) : Ambisonic3D(anOrder, aVectorSize, aSamlingRate)
 {
     m_number_of_inputs = 3;
     
@@ -50,7 +50,7 @@ AmbisonicEncoder3D::AmbisonicEncoder3D(long anOrder, long aVectorSize, long aSam
     setCoordinates(0., 0.);
 }
 
-void AmbisonicEncoder3D::computeMatrices()
+void AmbisonicDecoder3D::computeMatrices()
 {
     // AZIMUTH //
     for(long i = 0; i < m_number_of_harmonics; i++)
@@ -111,7 +111,7 @@ void AmbisonicEncoder3D::computeMatrices()
 	}
 }
 /*
-void AmbisonicEncoder3D::computeNormalization()
+void AmbisonicDecoder3D::computeNormalization()
 {
     for(long i = 0; i < m_number_of_harmonics; i++)
     {
@@ -125,13 +125,13 @@ void AmbisonicEncoder3D::computeNormalization()
     }
 }
 */
-void AmbisonicEncoder3D::setCoordinates(double anAzimuth, double anElevation)
+void AmbisonicDecoder3D::setCoordinates(double anAzimuth, double anElevation)
 {
     setAzimuth(anAzimuth);
     setElevation(anElevation);
 }
 
-void AmbisonicEncoder3D::setAzimuth(double anAzimuth)
+void AmbisonicDecoder3D::setAzimuth(double anAzimuth)
 {
     int index = (int)((Tools::radianWrap(anAzimuth) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
@@ -140,7 +140,7 @@ void AmbisonicEncoder3D::setAzimuth(double anAzimuth)
     }
 }
 
-void AmbisonicEncoder3D::setElevation(double anElevation)
+void AmbisonicDecoder3D::setElevation(double anElevation)
 {
 	int index = (int)((Tools::radianWrap(anElevation) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
@@ -149,7 +149,7 @@ void AmbisonicEncoder3D::setElevation(double anElevation)
     }
 }
 
-void AmbisonicEncoder3D::setVectorSize(long aVectorSize)
+void AmbisonicDecoder3D::setVectorSize(long aVectorSize)
 {
     Ambisonic3D::setVectorSize(aVectorSize);
     
@@ -165,7 +165,7 @@ void AmbisonicEncoder3D::setVectorSize(long aVectorSize)
     Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
 }
 
-std::string AmbisonicEncoder3D::getInputName(long anIndex)
+std::string AmbisonicDecoder3D::getInputName(long anIndex)
 {
     if(anIndex == 0)
         return "Input";
@@ -177,7 +177,7 @@ std::string AmbisonicEncoder3D::getInputName(long anIndex)
         return "None";
 }
 
-AmbisonicEncoder3D::~AmbisonicEncoder3D()
+AmbisonicDecoder3D::~AmbisonicDecoder3D()
 {
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
