@@ -49,10 +49,10 @@ private:
 public:
 	AmbisonicEncoder3D(long anOrder = 1, long aVectorSize = 2, long aSamlingRate = 44100);
 
-	inline void	setAzimuth(double anAzimuth);
-    inline void	setElevation(double anElevation);
-    inline void setCoordinates(double anAzimuth, double anElevation);
-    void setVectorSize(long aVectorSize);
+	void	setAzimuth(double anAzimuth);
+    void	setElevation(double anElevation);
+    void    setCoordinates(double anAzimuth, double anElevation);
+    void    setVectorSize(long aVectorSize);
     std::string  getInputName(long anIndex);
     
 	~AmbisonicEncoder3D();

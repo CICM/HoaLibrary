@@ -406,11 +406,11 @@ public:
         return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
     }
     
-    static double radianWrap(double anAngle)
+    static inline double radianWrap(double anAngle)
     {
         while(anAngle < 0.)
             anAngle += CICM_2PI;
-        while(anAngle > CICM_2PI)
+        while(anAngle >= CICM_2PI)
             anAngle -= CICM_2PI;
         
         return anAngle;

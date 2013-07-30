@@ -50,7 +50,9 @@ void HoaEncode_int(t_HoaEncode *x, long n);
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaEncode_perform64_azimuth(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaEncode_perform64_elevation(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaEncode_perform64_azimuth_elevation(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_class *HoaEncode_class;
     
@@ -73,7 +75,7 @@ int C74_EXPORT main(void)
     
     if (!postons)
     {
-        post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+        post("hoa.library (version 1.4) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
         post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
         postons = 1;
     }
@@ -97,8 +99,6 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
-		
-		x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 
 	return (x);
@@ -133,33 +133,44 @@ void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double sampl
 	x->f_ambiEncoder->setVectorSize(maxvectorsize);
 	x->f_ambiEncoder->setSamplingRate(samplerate);
     
-    if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
-        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64, 0, NULL);
+    if(count[x->f_ambiEncoder->getNumberOfInputs() - 1] && count[x->f_ambiEncoder->getNumberOfInputs() - 2])
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64_azimuth_elevation, 0, NULL);
+    else if(!count[x->f_ambiEncoder->getNumberOfInputs() - 1] && count[x->f_ambiEncoder->getNumberOfInputs() - 2])
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64_azimuth, 0, NULL);
+    else if(count[x->f_ambiEncoder->getNumberOfInputs() - 1] && !count[x->f_ambiEncoder->getNumberOfInputs() - 2])
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64_elevation, 0, NULL);
     else
-        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64Offset, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64, 0, NULL);
+}
+
+void HoaEncode_perform64_azimuth_elevation(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	x->f_ambiEncoder->processAzimtuhElevation(outs, ins[1], ins[2]);
+}
+
+void HoaEncode_perform64_azimuth(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	x->f_ambiEncoder->processAzimtuh(outs, ins[1]);
+}
+
+void HoaEncode_perform64_elevation(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	x->f_ambiEncoder->processElevation(outs, ins[2]);
 }
 
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	//x->f_ambiEncoder->process(ins[0], outs, ins[1]);
-}
-
-void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-	x->f_ambiEncoder->process(ins[0], outs);
+	x->f_ambiEncoder->process(outs);
 }
 
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 {
-	
-	if (m == ASSIST_INLET) 
+    if (m == ASSIST_INLET)
 	{
         if(a == 0)
-            sprintf(s,"(Signal) Input");
-        else if(a == 1)
-            sprintf(s,"(Signal or float) Azimuth");
+            sprintf(s,"(Signal) %s", x->f_ambiEncoder->getInputName(a).c_str());
         else
-            sprintf(s,"(Signal or float) Elevation");
+            sprintf(s,"(Signal or float) %s", x->f_ambiEncoder->getInputName(a).c_str());
 	} 
 	else 
 	{

@@ -221,7 +221,7 @@
 		8FF4AFF417A2A3FA00C2B435 /* AmbisonicsEncoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsEncoder.cpp; sourceTree = "<group>"; };
 		8FF4AFF517A2A3FA00C2B435 /* AmbisonicsEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsEncoder.h; sourceTree = "<group>"; };
 		8FF4AFF617A2A3FA00C2B435 /* AmbisonicEncoder3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncoder3D.cpp; sourceTree = "<group>"; };
-		8FF4AFF717A2A3FA00C2B435 /* AmbisonicEncoder3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicEncoder3D.h; sourceTree = "<group>"; };
+		8FF4AFF717A2A3FA00C2B435 /* AmbisonicEncoder3D.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = AmbisonicEncoder3D.h; sourceTree = "<group>"; };
 		8FF4AFF917A2A3FA00C2B435 /* AmbisonicsFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsFilter.cpp; sourceTree = "<group>"; };
 		8FF4AFFA17A2A3FA00C2B435 /* AmbisonicsFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsFilter.h; sourceTree = "<group>"; };
 		8FF4AFFC17A2A3FA00C2B435 /* AmbisonicsFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsFreeverb.cpp; sourceTree = "<group>"; };

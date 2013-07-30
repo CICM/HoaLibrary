@@ -1,5 +1,5 @@
 <!DOCTYPE GraphicsSceneFaust>
 <SceneRoot>
- <Scene sceneHeight="747.5" viewZoom="0.9999999403953552" sceneX="-361.5" sceneY="-515" sceneWidth="626" viewX="-2.000000119209297" viewY="-105.0000062584881"/>
- <Item DomFaustItemRectWidth="262" ItemX="-201" ItemY="-313" ItemZ="5" file="/Users/Pierre/SourceTree/HoaLibrary/Faust/Examples/Noise_Map.dsp" DomFaustItemRectHeight="262"/>
+ <Scene sceneHeight="864" viewZoom="0.9999999403953552" sceneX="-361.5" sceneY="-631.5" sceneWidth="626" viewX="-40.00000238418593" viewY="-120.0000071525578"/>
+ <Item DomFaustItemRectWidth="492" ItemX="-262.5" ItemY="-593" ItemZ="5" file="/Users/Pierre/SourceTree/HoaLibrary/Faust/Examples/Noise_Map.dsp" DomFaustItemRectHeight="492"/>
 </SceneRoot>
