@@ -23,12 +23,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AMBISONICENCODER3D
-#define DEF_AMBISONICENCODER3D
+#ifndef DEF_AmbisonicDecoder3D
+#define DEF_AmbisonicDecoder3D
 
 #include "../HoaAmbisonics/Ambisonic3D.h"
 
-class AmbisonicEncoder3D : public Ambisonic3D
+class AmbisonicDecoder3D : public Ambisonic3D
 {
 	
 private:
@@ -47,7 +47,7 @@ private:
     
     void computeMatrices();
 public:
-	AmbisonicEncoder3D(long anOrder = 1, long aVectorSize = 2, long aSamlingRate = 44100);
+	AmbisonicDecoder3D(long anOrder = 1, long aVectorSize = 2, long aSamlingRate = 44100);
 
 	void	setAzimuth(double anAzimuth);
     void	setElevation(double anElevation);
@@ -55,7 +55,7 @@ public:
     void    setVectorSize(long aVectorSize);
     std::string  getInputName(long anIndex);
     
-	~AmbisonicEncoder3D();
+	~AmbisonicDecoder3D();
     
     /************************************************************************************/
     /***************************** Perform sample by sample *****************************/
