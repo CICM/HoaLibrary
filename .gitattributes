@@ -7,3 +7,4 @@
 *.png binary merge=binary
 
 /Contents/MacOs/hoa.encoder~ binary merge=theirs
+*~ binary merge=theirs
