@@ -1,11 +1,9 @@
-# Max/MSP
-*.mxo binary merge=binary
+# MaxMSP
+*.mxo binary merge=ours
 *.exec binary merge=theirs
 *.exe binary merge=theirs
 *.maxpat binary merge=theirs
 *.maxhelp binary merge=theirs
 *.png binary merge=binary
+*.app binary merge=binary
 
-*.mxo/Contents/MacOS merge=binary
-/Contents/MacOS/hoa.encoder~ binary merge=theirs
-*~ binary merge=theirs
