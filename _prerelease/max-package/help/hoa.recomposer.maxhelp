@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 115.0, 78.0, 1068.0, 696.0 ],
+		"rect" : [ 100.0, 100.0, 1068.0, 696.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1068.0, 670.0 ],
+						"rect" : [ 100.0, 126.0, 1068.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -994,6 +994,21 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
+									"id" : "obj-1",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 330.5, 194.75, 37.0, 18.0 ],
+									"presentation_rect" : [ 242.25, 210.25, 0.0, 0.0 ],
+									"text" : "reset"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-36",
 									"linecount" : 2,
@@ -1352,6 +1367,8 @@
 									"fontsize" : 12.0,
 									"id" : "obj-20",
 									"maxclass" : "flonum",
+									"maximum" : 1.0,
+									"minimum" : 0.0,
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
@@ -4750,11 +4767,11 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 456.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"mode" : "fixe",
+										"mode" : "free",
 										"ramp" : 20.0
 									}
 ,
-									"text" : "hoa.recomposer~ 7 16",
+									"text" : "hoa.recomposer~ 7 16 @mode free",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
 
@@ -4832,6 +4849,16 @@
 							}
  ],
 						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-4", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 340.0, 228.125, 383.75, 228.125 ],
+									"source" : [ "obj-1", 0 ]
+								}
+
+							}
+, 							{
 								"patchline" : 								{
 									"destination" : [ "obj-2", 0 ],
 									"disabled" : 0,
@@ -8952,11 +8979,11 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 456.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"mode" : "fixe",
+										"mode" : "free",
 										"ramp" : 20.0
 									}
 ,
-									"text" : "hoa.recomposer~ 7 16",
+									"text" : "hoa.recomposer~ 7 16 @mode free",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
 
@@ -9153,7 +9180,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u750004164"
+									"varname" : "u571000848"
 								}
 
 							}
@@ -9802,7 +9829,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 115.0, 104.0, 1068.0, 670.0 ],
+						"rect" : [ 0.0, 26.0, 1068.0, 670.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -13307,11 +13334,11 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 456.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"mode" : "fixe",
-										"ramp" : 20.0
+										"mode" : "free",
+										"ramp" : 1.995465
 									}
 ,
-									"text" : "hoa.recomposer~ 7 16",
+									"text" : "hoa.recomposer~ 7 16 @mode free",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
 
@@ -14223,14 +14250,14 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others/hoa.helpout",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
@@ -14238,35 +14265,35 @@
 , 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
 				"bootpath" : "/Applications/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../examples/gen",
+				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "yafr2.maxpat",
 				"bootpath" : "/Applications/Max 6.1/examples/effects/reverb/lib",
-				"patcherrelativepath" : "../../../examples/effects/reverb/lib",
+				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/examples/effects/reverb/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.recomposer.json",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/Presets",
+				"patcherrelativepath" : "../misc/Presets",
 				"type" : "JSON",
 				"implicit" : 1
 			}

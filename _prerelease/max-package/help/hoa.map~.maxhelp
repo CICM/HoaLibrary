@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 96.0, 100.0, 1047.0, 486.0 ],
+		"rect" : [ 100.0, 100.0, 1047.0, 486.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 96.0, 126.0, 1047.0, 460.0 ],
+						"rect" : [ 100.0, 126.0, 1047.0, 460.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -187,11 +187,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-5",
+									"lock" : 1,
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 766.0, 183.0, 165.0, 19.0 ]
+									"patching_rect" : [ 766.0, 183.0, 121.0, 19.0 ],
+									"text_width" : 52.0
 								}
 
 							}
@@ -240,7 +242,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 15.0, 121.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, -0.102012, -0.374577, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.918112, -0.043037, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, 1.568441, 1.372386, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.357044, -0.884639, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, -1.016936, -0.435147, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 1.224149, -0.502093, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, 0.653517, 1.311816, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.24228, -1.177925, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
 									"zoom" : 0.522812
 								}
@@ -4012,8 +4014,8 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -4040,15 +4042,15 @@
 			}
 , 			{
 				"name" : "hoa.helpout_3.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others/hoa.helpout",
-				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others/hoa.helpout",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
-				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}

@@ -6,7 +6,8 @@ For an overview of HoaLibrary and new features in the last version, please refer
 version 1.3
 ------------------------
 
-New FEATURES:
+Bug Fixed and New Features:
+
  - hoa.gain~ : 	new GUI Object.
  - hoa.recomposer : new GUI Object.
  - hoa.decoder~ : dynamic number of loudspeakers, 3 restitution modes (ambisonics | binaural | irregular), automatically reconnect patchlines to hoa.meter~, hoa.gain~, hoa.dac~, hoa.vector~ when configuration has changed. less CPU usage.
