@@ -23,9 +23,7 @@ sysbuild/
 ## XCode
 #################
 xcuserdata/
-
-*.build/
-*.gcda
+builds/
 
 # Mac crap
 .DS_Store

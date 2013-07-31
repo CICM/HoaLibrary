@@ -304,7 +304,7 @@ void HoaRecomposerUI_getdrawparams(t_HoaRecomposerUI *x, t_object *patcherview, 
 void HoaRecomposerUI_free(t_HoaRecomposerUI *x)
 {
 	jbox_free(&x->j_box);
-    delete x->f_mics;
+ 
 }
 
 void HoaRecomposerUI_assist(t_HoaRecomposerUI *x, void *b, long m, long a, char *s)
