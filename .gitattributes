@@ -1,0 +1,6 @@
+# Max/MSP
+*.mxo binary merge=theirs
+*.maxpat binary merge=theirs
+*.maxhelp binary merge=theirs
+
+*.png binary merge=binary
