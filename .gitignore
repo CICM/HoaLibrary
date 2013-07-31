@@ -2,7 +2,7 @@
 ## Juce
 #################
 
-*.component
+
 JuceLibraryCode/
 
 #################
@@ -23,9 +23,13 @@ sysbuild/
 ## XCode
 #################
 xcuserdata/
-builds/
+
+*.build/
+*.gcda
 
 # Mac crap
 .DS_Store
 
+*.mode1V3
+*.pbxuser
 
