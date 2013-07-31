@@ -25,171 +25,37 @@
 
 #include "AmbisonicDecoder3D.h"
 
-AmbisonicDecoder3D::AmbisonicDecoder3D(long anOrder, long aVectorSize, long aSamlingRate) : Ambisonic3D(anOrder, aVectorSize, aSamlingRate)
+AmbisonicDecoder3D::AmbisonicDecoder3D(long anOrder, long aNumberOfLoudspeakers, long aVectorSize, long aSamlingRate) : Ambisonic3D(anOrder, aVectorSize, aSamlingRate)
 {
-    m_number_of_inputs = 3;
+    if (aNumberOfLoudspeakers < m_number_of_harmonics)
+        aNumberOfLoudspeakers = m_number_of_harmonics;
+    m_number_of_outputs = m_number_of_harmonics;
     
-    m_azimuth_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
-    m_elevation_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
-    for(int i = 0; i < m_number_of_harmonics; i++)
-    {
-        Cicm_Vector_Double_Malloc(m_azimuth_matrix[i], NUMBEROFCIRCLEPOINTS);
-        Cicm_Vector_Double_Malloc(m_elevation_matrix[i], NUMBEROFCIRCLEPOINTS);
-    }
-    Cicm_Vector_Float_Malloc(m_azimuth_float, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_azimuth_double, m_number_of_harmonics);
-    Cicm_Vector_Float_Malloc(m_elevation_float, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_elevation_double, m_number_of_harmonics);
-    
-    
-    m_index_vector = new int[m_vector_size];
-    Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
+    m_decoder_matrix = NULL;
     
     computeMatrices();
-    setCoordinates(0., 0.);
 }
 
 void AmbisonicDecoder3D::computeMatrices()
 {
-    // AZIMUTH //
-    for(long i = 0; i < m_number_of_harmonics; i++)
+    AmbisonicEncoder3D* encoder  = new AmbisonicEncoder3D(m_order);
+    double* harmonics_vector = new double[m_number_of_harmonics];
+    if(m_decoder_matrix)
+        Cicm_Free(m_decoder_matrix);
+    Cicm_Matrix_Double_Malloc(m_decoder_matrix, m_number_of_outputs, m_number_of_harmonics);
+    for(int  i = 0; i < m_number_of_outputs; i++)
     {
-        for(long j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
+        double azimuth  = 0;
+        double elevation = 0;
+        encoder->processAzimtuhElevation(harmonics_vector, azimuth, elevation);
+        for(int j = 0; j < m_number_of_harmonics; j++)
         {
-            double azimuth = (double)j * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS;
-            if(getHarmonicIndex(i) == 0)
-                m_azimuth_matrix[i][j] = 1.;
-            else if(getHarmonicIndex(i) < 0)
-                m_azimuth_matrix[i][j] =  sin(-getHarmonicIndex(i) * azimuth);
-            else
-                m_azimuth_matrix[i][j] =  cos(getHarmonicIndex(i) * azimuth);
+            Cicm_Matrix_Double_Set(m_decoder_matrix, i, j, m_number_of_harmonics, harmonics_vector[j]);
         }
     }
-    // ELEVATION //
-    for(long i = 0; i < m_number_of_harmonics; i++)
-    {
-        for(long j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
-        {
-            double elevation = (double)j * CICM_2PI / (double)NUMBEROFCIRCLEPOINTS;
-            double pmm = 1.0;
-            if(abs(getHarmonicIndex(i)) > 0)
-            {
-                double somx2 = sqrt((1. - cos(elevation)) * (1. + cos(elevation)));
-                double fact = 1.;
-                for(int i = 1; i <= getHarmonicIndex(i); ++i)
-                {
-                    pmm*= (-fact)*somx2;
-                    fact+= 2.0;
-                }
-            }
-            if(getHarmonicOrder(i) == abs(getHarmonicIndex(i)))
-            {
-                m_elevation_matrix[i][j] = pmm;
-            }
-            else
-            {
-                double pmmpl = cos(elevation) * (2. * abs(getHarmonicIndex(i)) + 1.) * pmm;
-                if(getHarmonicOrder(i) == abs(getHarmonicIndex(i))+1)
-                {
-                    m_elevation_matrix[i][j] = pmmpl;
-                }
-                else
-                {
-                    double pll = 0.0;
-                    for(int ll = abs(getHarmonicIndex(i))+2; ll <= getHarmonicOrder(i); ++ll)
-                    {
-                        pll = ((2. * ll - 1.) * cos(elevation) * pmmpl - (ll + getHarmonicIndex(i) - 1.) * pmm) / (ll - abs(getHarmonicIndex(i)));
-                        pmm = pmmpl;
-                        pmmpl = pll;
-                    }
-                    m_elevation_matrix[i][j] = pll;
-                }
-                
-            }
-        }
-	}
-}
-/*
-void AmbisonicDecoder3D::computeNormalization()
-{
-    for(long i = 0; i < m_number_of_harmonics; i++)
-    {
-        double factor = (2 * getHarmonicOrder(i) + 1) / (CICM_2PI * 2);
-        m_normalization_double[i] = factor * Tools::factoriel(getHarmonicOrder(i) - getHarmonicIndex(i)) / Tools::factoriel(getHarmonicOrder(i) + getHarmonicIndex(i));
-        if (getHarmonicIndex(i) != 0)
-        {
-            m_normalization_double[i] *= sqrt(2.);
-        }
-        m_normalization_float[i] = m_normalization_double[i];
-    }
-}
-*/
-void AmbisonicDecoder3D::setCoordinates(double anAzimuth, double anElevation)
-{
-    setAzimuth(anAzimuth);
-    setElevation(anElevation);
-}
-
-void AmbisonicDecoder3D::setAzimuth(double anAzimuth)
-{
-    int index = (int)((Tools::radianWrap(anAzimuth) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
-    for(int i = 0; i < m_number_of_harmonics; i++)
-    {
-        m_azimuth_float[i] = m_azimuth_double[i] = m_azimuth_matrix[i][index];
-    }
-}
-
-void AmbisonicDecoder3D::setElevation(double anElevation)
-{
-	int index = (int)((Tools::radianWrap(anElevation) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
-    for(int i = 0; i < m_number_of_harmonics; i++)
-    {
-        m_elevation_float[i] = m_elevation_double[i] = m_elevation_matrix[i][index];
-    }
-}
-
-void AmbisonicDecoder3D::setVectorSize(long aVectorSize)
-{
-    Ambisonic3D::setVectorSize(aVectorSize);
-    
-    if(m_index_vector)
-        free(m_index_vector);
-    if(m_vector_double)
-        Cicm_Free(m_vector_double);
-    if(m_vector_float)
-        Cicm_Free(m_vector_float);
-    
-    m_index_vector = new int[m_vector_size];
-    Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
-}
-
-std::string AmbisonicDecoder3D::getInputName(long anIndex)
-{
-    if(anIndex == 0)
-        return "Input";
-    else if(anIndex == 1)
-        return "Azimuth";
-    else if(anIndex == 2)
-        return "Elevation";
-    else
-        return "None";
 }
 
 AmbisonicDecoder3D::~AmbisonicDecoder3D()
 {
-    for(int i = 0; i < m_number_of_harmonics; i++)
-    {
-        Cicm_Free(m_azimuth_matrix[i]);
-        Cicm_Free(m_elevation_matrix[i]);
-    }
-    Cicm_Free(m_azimuth_matrix);
-    Cicm_Free(m_elevation_matrix);
-    Cicm_Free(m_azimuth_float);
-    Cicm_Free(m_azimuth_double);
-    Cicm_Free(m_elevation_float);
-    Cicm_Free(m_elevation_double);
-    Cicm_Free(m_vector_float);
-    Cicm_Free(m_vector_double);
+    Cicm_Free(m_decoder_matrix);
 }
