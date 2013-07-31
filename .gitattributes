@@ -6,5 +6,5 @@
 *.maxhelp binary merge=theirs
 *.png binary merge=binary
 
-/Contents/MacOs/hoa.encoder~ binary merge=theirs
+/Contents/MacOS/hoa.encoder~ binary merge=theirs
 *~ binary merge=theirs
