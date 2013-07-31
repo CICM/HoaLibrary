@@ -8,7 +8,7 @@ declare author "Julien Colafrancesco";
 declare copyright "2012-2013 Guillot, Paris, Colafrancesco, CICM labex art H2H, U. Paris 8";
 
 
-import("math.lib");
+//import("math.lib");
 
 //----------------------------------------------------------------------------//
 //------------------------------ HOA functions -------------------------------//
@@ -206,7 +206,6 @@ with
 
 
 process = decoderStereo(1);
-
 
 
 
