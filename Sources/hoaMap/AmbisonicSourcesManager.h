@@ -28,6 +28,7 @@
 
 #include "../hoaAmbisonics/Ambisonics.h"
 
+
 class SourcesManager
 {
 	
@@ -71,6 +72,8 @@ private:
         long   getGroupIndex(long anIndex);
         long   isOwnedByGroup(long aGroupIndex);
         long   getMute();
+        
+
         
         ~Source();
     };
@@ -128,6 +131,9 @@ private:
         std::string getDescription();
         color  getColor();
         long   getMute();
+        
+        int compare(const SourcesGroup* a, const SourcesGroup *b);
+
         
         ~SourcesGroup();
     };
@@ -204,7 +210,12 @@ public:
     color groupGetColor(long anIndex);
     std::string groupGetDescription(long anIndex);
 	long groupGetMute(long anIndex);
+    
+    int groupCompare(long groupIndexA, const long groupIndexB);
+    
 	~SourcesManager();
 };
+
+
 
 #endif

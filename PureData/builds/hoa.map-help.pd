@@ -1,0 +1,82 @@
+#N canvas 183 22 1032 752 10;
+#X obj -472 -142 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map 3
+12 0 18 -204280 -1 0;
+#X text -467 -121 A Graphic user interface to spatialize sources on
+a map;
+#X text -315 11 Removes an existing source;
+#X text -318 -65 Moves (and creates \, if needed) a source using cartesian
+coords at (x=0 \, y=0);
+#X text -316 -29 Moves (and creates \, if needed) a source using polar
+coords at (r=0 \, theta=Pi);
+#X msg -439 49 group 0 set 0 1;
+#X text -317 48 Sets (and creates \, if needed) a group of existing
+sources;
+#X text -319 81 Removes an existing group;
+#X text -318 112 Removes an existing group;
+#X msg -437 82 group 0 car 2 2;
+#X obj -465 153 hoa.map sources 0 0.8 -0.833333 1 -0.633333 0.133333
+;
+#X obj -269 565 print grp;
+#X msg -447 -22 source 1 pol 1 3.14;
+#X obj -466 565 print sources;
+#X text 90 -51 by clicking on & dragging it.;
+#X text 89 -25 You can create a group by selecting multiples sources
+;
+#X text 90 -12 on the map.;
+#X text 89 18 You can zoom into the map by holding alt or shift while
+;
+#X text 90 33 dragging the mouse.;
+#X text -452 -91 Messages :;
+#X text 90 -93 UI :;
+#X text 89 -64 You can move a source or a group with the mouse;
+#X obj -44 485 hoa.optim~ 3 inPhase;
+#X obj -44 450 hoa.map~ 3 2 -------;
+#X obj -44 398 noise~;
+#X obj 24 399 osc~ 250;
+#X obj -44 519 hoa.decoder~ 3 8 ---;
+#X text -44 381 source 0;
+#X text 22 380 source 1;
+#X obj -44 558 sigToList~ _________;
+#X obj 104 149 hoa.meter 8;
+#X msg -449 -60 source 3 car 0 0;
+#X msg -436 113 group 0 remove;
+#X msg -442 13 source 2 remove;
+#X text 89 -133 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X msg -32 245 \; pd dsp 1;
+#X msg -32 283 \; pd dsp 0;
+#X connect 5 0 10 0;
+#X connect 9 0 10 0;
+#X connect 10 0 13 0;
+#X connect 10 0 23 0;
+#X connect 10 1 11 0;
+#X connect 12 0 10 0;
+#X connect 22 0 26 0;
+#X connect 22 1 26 1;
+#X connect 22 2 26 2;
+#X connect 22 3 26 3;
+#X connect 22 4 26 4;
+#X connect 22 5 26 5;
+#X connect 22 6 26 6;
+#X connect 23 0 22 0;
+#X connect 23 1 22 1;
+#X connect 23 2 22 2;
+#X connect 23 3 22 3;
+#X connect 23 4 22 4;
+#X connect 23 5 22 5;
+#X connect 23 6 22 6;
+#X connect 24 0 23 0;
+#X connect 25 0 23 1;
+#X connect 26 0 29 0;
+#X connect 26 1 29 1;
+#X connect 26 2 29 2;
+#X connect 26 3 29 3;
+#X connect 26 4 29 4;
+#X connect 26 5 29 5;
+#X connect 26 6 29 6;
+#X connect 26 7 29 7;
+#X connect 29 0 30 0;
+#X connect 31 0 10 0;
+#X connect 32 0 10 0;
+#X connect 33 0 10 0;
+#X coords 0 752 1 751 85 60 0;
