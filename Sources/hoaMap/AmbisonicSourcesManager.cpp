@@ -667,6 +667,35 @@ long SourcesManager::groupGetMute(long anIndex)
     return 0;
 }
 
+int SourcesManager::SourcesGroup::compare(const SourcesGroup* a, const SourcesGroup *b)
+{
+    auto leftIt = a->m_sources.begin();
+    auto rightIt = b->m_sources.begin();
+    auto diff = 0;
+    while (leftIt != a->m_sources.end() && rightIt != b->m_sources.end())
+    {
+        if (*leftIt != *rightIt)
+        {
+            diff++;
+        }
+        leftIt++;
+        rightIt++;
+    }
+    
+    if (0 == diff && (leftIt != a->m_sources.end() || rightIt != b->m_sources.end()))
+    {
+        diff = 1;
+    }
+    
+    return diff;
+}
+
+int SourcesManager::groupCompare(long groupIndexA, const long groupIndexB)
+{
+    
+    return m_groups[groupIndexA]->compare(m_groups[groupIndexA], m_groups[groupIndexB]);
+}
+
 /************************************/
 
 SourcesManager::~SourcesManager()
