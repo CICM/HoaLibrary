@@ -2,7 +2,6 @@
 ## Juce
 #################
 
-*.component
 JuceLibraryCode/
 
 #################
@@ -32,18 +31,3 @@ xcuserdata/
 
 *.mode1V3
 *.pbxuser
-
-HoaPackage/
-*.mxo
-*.mxe
-*.mpkg
-*.msi
-*.dmg
-*.o
-*.d
-*.dia
-*.dat
-*.rsrc
-*.dep
-
-

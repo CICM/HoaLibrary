@@ -223,7 +223,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
 			;
     
 	x->f_viewer				= new AmbisonicsViewer(1);
-    x->f_recomposer         = new AmbisonicsRecomposer(1, 3);
+    x->f_recomposer         = new AmbisonicsRecomposer(1, 3, Hoa_Fixe);
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
@@ -570,13 +570,11 @@ void draw_harmonics(t_space *x,  t_object *view, t_rect *rect)
                 if(x->f_microphonesValues[i] > max)
                     max = x->f_microphonesValues[i];
             }
-            //normalize = max / x->f_viewer->getBiggestContribution();
             normalize = max;
             
             
             if(x->f_mode == 1)
                 normalize = x->f_rotation_max;
-                //normalize = x->f_rotation_max / x->f_viewer->getBiggestContribution();
             
             double factor = x->f_rayonExtCircle * normalize;
             

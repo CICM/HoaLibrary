@@ -304,7 +304,7 @@ void HoaRecomposerUI_getdrawparams(t_HoaRecomposerUI *x, t_object *patcherview, 
 void HoaRecomposerUI_free(t_HoaRecomposerUI *x)
 {
 	jbox_free(&x->j_box);
-    delete x->f_mics;
+ 
 }
 
 void HoaRecomposerUI_assist(t_HoaRecomposerUI *x, void *b, long m, long a, char *s)
@@ -744,6 +744,8 @@ void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
         jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
         
+        jgraphics_rotate(g, CICM_PI2);
+        
         for (int i = 0; i < x->f_numberOfMic; i++) {
             if(x->f_mics->getBiggestContribution(i) != 0.)
             {
@@ -764,6 +766,8 @@ void draw_harmonics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
                 jgraphics_stroke(g);
             }
         }
+        
+        jgraphics_rotate(g, -CICM_PI2);
         
 		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
 	}

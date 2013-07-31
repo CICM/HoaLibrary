@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 131.0, 44.0, 896.0, 797.0 ],
+		"rect" : [ 175.0, 83.0, 896.0, 797.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -68,6 +68,54 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-13",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 78.825012, 6.0, 324.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Représentation de l'Espace",
+									"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
+									"varname" : "autohelp_top_title[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-8",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 80.825012, 8.0, 316.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Représentation de l'Espace",
+									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+									"varname" : "autohelp_top_title[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", " ", "@obj-desc", " " ],
+									"id" : "obj-56",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -424,18 +472,6 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "Hoa", "Tutoriel", "Bases", 1, ":", "Représentation", "de", "l'espace", "@obj-desc", "" ],
-									"id" : "obj-56",
-									"maxclass" : "bpatcher",
-									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 7.180877,
 									"hidden" : 1,
@@ -545,7 +581,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 131.0, 70.0, 896.0, 771.0 ],
+						"rect" : [ 175.0, 109.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -567,6 +603,54 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-29",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 78.825012, 6.0, 304.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Décodage ambisonique",
+									"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
+									"varname" : "autohelp_top_title[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-14",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 80.825012, 8.0, 316.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Décodage ambisonique",
+									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+									"varname" : "autohelp_top_title[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", " ", "@obj-desc", " " ],
+									"id" : "obj-46",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -688,18 +772,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 497.0, 16.0, 327.0, 36.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "Hoa", "Tutoriel", "Bases", 5, ":", "Décodage", "du", "champ", "sonore", "@obj-desc", "" ],
-									"id" : "obj-15",
-									"maxclass" : "bpatcher",
-									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
 								}
 
 							}
@@ -1709,6 +1781,54 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-29",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 78.825012, 6.0, 304.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Encodage ambisonique",
+									"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
+									"varname" : "autohelp_top_title[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-45",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 80.825012, 8.0, 316.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Encodage ambisonique",
+									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+									"varname" : "autohelp_top_title[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", " ", "@obj-desc", " " ],
+									"id" : "obj-46",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
@@ -1909,18 +2029,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 497.0, 16.0, 327.0, 36.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "Hoa", "Tutoriel", "Bases", 4, ":", "Encodage", "d'une", "source", "sonore", "@obj-desc", "" ],
-									"id" : "obj-29",
-									"maxclass" : "bpatcher",
-									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
 								}
 
 							}
@@ -2735,6 +2843,54 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-10",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 78.825012, 6.0, 304.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Résolution spatiale",
+									"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
+									"varname" : "autohelp_top_title[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-29",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 80.825012, 8.0, 316.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Résolution spatiale",
+									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+									"varname" : "autohelp_top_title[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", " ", "@obj-desc", " " ],
+									"id" : "obj-35",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
@@ -2855,18 +3011,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 497.0, 16.0, 327.0, 36.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "Hoa", "Tutoriel", "Bases", 3, ":", "Résolution", "spatiale", "@obj-desc", "" ],
-									"id" : "obj-29",
-									"maxclass" : "bpatcher",
-									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
 								}
 
 							}
@@ -4101,6 +4245,54 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-23",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 78.825012, 6.0, 304.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Harmoniques et ordre",
+									"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
+									"varname" : "autohelp_top_title[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-29",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 80.825012, 8.0, 316.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Harmoniques et ordre",
+									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+									"varname" : "autohelp_top_title[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", " ", "@obj-desc", " " ],
+									"id" : "obj-35",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
@@ -4455,18 +4647,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 497.0, 16.0, 327.0, 36.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "Hoa", "Tutoriel", "Bases", 2, ":", "Harmoniques", "et", "ordre", "de", "décomposition", "@obj-desc", "" ],
-									"id" : "obj-29",
-									"maxclass" : "bpatcher",
-									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 6.0, 482.0, 56.0 ]
 								}
 
 							}
@@ -5989,6 +6169,54 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-13",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 78.825012, 6.0, 255.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : Introduction",
+									"textcolor" : [ 0.999903, 1.0, 0.99983, 1.0 ],
+									"varname" : "autohelp_top_title[1]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 3,
+									"fontname" : "Arial",
+									"fontsize" : 20.871338,
+									"frgb" : 0.0,
+									"id" : "obj-8",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 80.825012, 8.0, 255.0, 53.0 ],
+									"text" : "Hoa Tutorial 1 - Bases : introduction",
+									"textcolor" : [ 0.0, 0.0, 0.0, 0.5 ],
+									"varname" : "autohelp_top_title[2]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"args" : [ "@obj-name", " ", "@obj-desc", " " ],
+									"id" : "obj-56",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpheader.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-7",
@@ -6112,18 +6340,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 497.0, 16.0, 327.0, 36.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "Hoa", "Tutoriel", "Bases", ":", "Introduction", "@obj-desc", "" ],
-									"id" : "obj-56",
-									"maxclass" : "bpatcher",
-									"name" : "hoa.helpheader.maxpat",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 6.0, 483.0, 56.0 ]
 								}
 
 							}
@@ -7004,14 +7220,14 @@
  ],
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
-				"name" : "hoa.helpheader.maxpat",
+				"name" : "hoa.helpcredit.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.helpcredit.maxpat",
+				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"patcherrelativepath" : "../../../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"type" : "JSON",

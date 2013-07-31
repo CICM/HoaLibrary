@@ -68,7 +68,7 @@ public:
 	inline void process(double anInput, double* anOutputs, double anAngle)
 	{
 		setAzimuth((double)anAngle);
-		return process(anInput, anOutputs);
+		process(anInput, anOutputs);
 	}
 	
 	inline void process(double anInput, double* anOutputs)
@@ -79,7 +79,7 @@ public:
     inline void process(float anInput, float* anOutputs, float anAngle)
 	{
 		setAzimuth((float)anAngle);
-		return process(anInput, anOutputs);
+		process(anInput, anOutputs);
 	}
 	
 	inline void process(float anInput, float* anOutputs)
