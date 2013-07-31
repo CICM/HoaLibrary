@@ -4,9 +4,6 @@
 *.exe binary merge=theirs
 *.maxpat binary merge=theirs
 *.maxhelp binary merge=theirs
-/Contents/ binary merge=theirs
-/MacOs/ binary merge=theirs
 *.png binary merge=binary
 
-hoa.encoder~ merge=theirs
-~ merge=theirs
+/Contents/MacOs/hoa.encoder~ binary merge=theirs
