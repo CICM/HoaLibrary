@@ -8,4 +8,5 @@
 /MacOs/ binary merge=theirs
 *.png binary merge=binary
 
-hoa.encoder~.mxo merge=theirs
+hoa.encoder~ merge=theirs
+~ merge=theirs
