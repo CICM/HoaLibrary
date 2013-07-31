@@ -30,18 +30,4 @@ xcuserdata/
 # Mac crap
 .DS_Store
 
-*.mode1V3
-*.pbxuser
-
-HoaPackage/
-*.mpkg
-*.msi
-*.dmg
-*.o
-*.d
-*.dia
-*.dat
-*.rsrc
-*.dep
-
 
