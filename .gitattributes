@@ -1,6 +1,5 @@
 # Max/MSP
 *.mxo binary merge=theirs
-*~.mxo binary merge=theirs
 *.exec binary merge=theirs
 *.exe binary merge=theirs
 *.maxpat binary merge=theirs
@@ -8,3 +7,5 @@
 /Contents/ binary merge=theirs
 /MacOs/ binary merge=theirs
 *.png binary merge=binary
+
+hoa.encoder~ merge=theirs
