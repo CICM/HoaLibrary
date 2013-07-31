@@ -2,7 +2,7 @@
 ## Juce
 #################
 
-
+*.component
 JuceLibraryCode/
 
 #################
@@ -32,4 +32,3 @@ xcuserdata/
 
 *.mode1V3
 *.pbxuser
-
