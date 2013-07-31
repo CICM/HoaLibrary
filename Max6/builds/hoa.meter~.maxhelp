@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 84.0, 44.0, 838.0, 702.0 ],
+		"rect" : [ 100.0, 100.0, 838.0, 702.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -71,16 +71,13 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"hidden" : 1,
+									"args" : [ "@size", 1 ],
 									"id" : "obj-13",
-									"maxclass" : "newobj",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 153.0, 125.0, 86.0, 20.0 ],
-									"text" : "loadmess -0.2"
+									"numoutlets" : 0,
+									"patching_rect" : [ 494.5, 16.0, 325.0, 35.0 ]
 								}
 
 							}
@@ -470,7 +467,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 659.0, 107.0, 49.0, 20.0 ]
+									"patching_rect" : [ 604.0, 133.0, 49.0, 20.0 ]
 								}
 
 							}
@@ -499,37 +496,6 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 378.0, 163.0, 300.0, 20.0 ],
 									"text" : "hoa.encoder~ 3"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-60",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 521.0, 297.0, 205.0, 33.0 ],
-									"text" : "For futher informations on vectors, please look at hoa.vector~help.",
-									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
-									"varname" : "autohelp_top_description[2]"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-38",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 506.0, 282.0, 235.0, 66.0 ],
-									"rounded" : 15,
-									"shadow" : -1
 								}
 
 							}
@@ -695,37 +661,7 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-20",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "multichannel", "circular", "peak", "meter." ],
+									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -1146,7 +1082,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 298.5, 107.0, 49.0, 20.0 ]
+									"patching_rect" : [ 241.5, 133.0, 49.0, 20.0 ]
 								}
 
 							}
@@ -1180,7 +1116,7 @@
 										"loudspeakers" : 8,
 										"ls" : 8,
 										"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 8,
@@ -1241,15 +1177,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-8", 0 ],
-									"disabled" : 0,
-									"hidden" : 1,
-									"source" : [ "obj-13", 0 ]
 								}
 
 							}
@@ -1752,6 +1679,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-8", 0 ],
+									"disabled" : 0,
+									"hidden" : 1,
+									"source" : [ "obj-53", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-2", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1808,7 +1744,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 84.0, 70.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1830,6 +1766,18 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"args" : [ "@size", 1 ],
+									"id" : "obj-14",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 494.5, 16.0, 325.0, 35.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -2070,37 +2018,7 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-6",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "multichannel", "circular", "peak", "meter." ],
+									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-8",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -2943,6 +2861,18 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"args" : [ "@size", 1 ],
+									"id" : "obj-11",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 494.5, 16.0, 325.0, 35.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
@@ -3018,37 +2948,7 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-22",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "multichannel", "circular", "peak", "meter." ],
+									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-26",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -3170,6 +3070,34 @@
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 507.0, 169.0, 75.0, 20.0 ],
 									"text" : "loadmess 0."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-23",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 667.0, 316.0, 19.0, 20.0 ],
+									"text" : "="
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-15",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 702.0, 316.0, 103.0, 18.0 ],
+									"text" : "-30 0 30 -110 110"
 								}
 
 							}
@@ -3537,20 +3465,20 @@
 									"id" : "obj-3",
 									"maxclass" : "newobj",
 									"numinlets" : 5,
-									"numoutlets" : 5,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
+									"numoutlets" : 6,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 31.0, 198.0, 424.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
+										"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0, 330.0 ],
 										"autoconnect" : 1,
-										"loudspeakers" : 5,
-										"ls" : 5,
-										"ls_angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
+										"loudspeakers" : 6,
+										"ls" : 6,
+										"ls_angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0, 330.0 ],
 										"mode" : "irregular",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
-										"yls" : 5,
-										"zls" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ]
+										"yls" : 6,
+										"zls" : [ 0.0, 72.0, 144.0, 216.0, 288.0, 330.0 ]
 									}
 ,
 									"text" : "hoa.decoder~ 2"
@@ -3610,6 +3538,16 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-14", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 711.5, 342.0, 516.5, 342.0 ],
+									"source" : [ "obj-15", 0 ]
 								}
 
 							}
@@ -3880,7 +3818,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 100.0, 126.0, 838.0, 676.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3902,6 +3840,18 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"args" : [ "@size", 1 ],
+									"id" : "obj-5",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 494.5, 16.0, 325.0, 35.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -3932,37 +3882,7 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-5",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "multichannel", "circular", "peak", "meter." ],
+									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -4325,6 +4245,18 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"args" : [ "@size", 1 ],
+									"id" : "obj-2",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 494.5, 16.0, 325.0, 35.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"hidden" : 1,
@@ -4415,36 +4347,6 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-5",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-4",
 									"local" : 1,
 									"maxclass" : "ezdac~",
@@ -4470,7 +4372,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "multichannel", "circular", "peak", "meter." ],
+									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-21",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -5104,6 +5006,18 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"args" : [ "@size", 1 ],
+									"id" : "obj-3",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 494.5, 16.0, 325.0, 35.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
@@ -5207,37 +5121,7 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-9",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "multichannel", "circular", "peak", "meter." ],
+									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-10",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -5795,6 +5679,18 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"args" : [ "@size", 1 ],
+									"id" : "obj-4",
+									"maxclass" : "bpatcher",
+									"name" : "hoa.helpcredit.maxpat",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 494.5, 16.0, 325.0, 35.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"hidden" : 1,
@@ -6044,37 +5940,7 @@
 							}
 , 							{
 								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"frgb" : 0.0,
-									"id" : "obj-43",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
-									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-20",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 17.5, 257.0, 32.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "multichannel", "circular", "peak", "meter." ],
+									"args" : [ "@obj-name", "hoa.meter~", "@obj-desc", "A", "circular", "version", "of", "the", "meter~", "with", "sound", "field", "descriptor." ],
 									"id" : "obj-15",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -6249,8 +6115,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 493.0, 580.0, 83.0, 18.0 ],
-									"text" : "orientation $1"
+									"patching_rect" : [ 493.0, 581.0, 58.0, 18.0 ],
+									"text" : "fill_dir $1"
 								}
 
 							}
@@ -6291,8 +6157,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 493.0, 516.0, 67.0, 18.0 ],
-									"text" : "rotation $1"
+									"patching_rect" : [ 493.0, 516.0, 75.0, 18.0 ],
+									"text" : "ls_rot_dir $1"
 								}
 
 							}
@@ -6754,7 +6620,7 @@
 										"loudspeakers" : 32,
 										"ls" : 32,
 										"ls_angles" : [ 0.0, 11.25, 22.5, 33.75, 45.0, 56.25, 67.5, 78.75, 90.0, 101.25, 112.5, 123.75, 135.0, 146.25, 157.5, 168.75, 180.0, 191.25, 202.5, 213.75, 225.0, 236.25, 247.5, 258.75, 270.0, 281.25, 292.5, 303.75, 315.0, 326.25, 337.5, 348.75 ],
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"yls" : 32,
@@ -7641,15 +7507,22 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.helpcredit.maxpat",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
+				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/packages/HoaLibrary-1.3/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
