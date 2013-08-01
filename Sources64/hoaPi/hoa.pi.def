@@ -1,0 +1,4 @@
+LIBRARY hoa.pi.mxe
+
+EXPORTS
+	main
