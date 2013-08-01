@@ -97,12 +97,12 @@ void *HoaWider_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaWider_float(t_HoaWider *x, double f)
 {
-	x->f_AmbisonicsWider->setWidenValueBoth(f);
+	x->f_AmbisonicsWider->setWidenValue(f);
 }
 
 void HoaWider_int(t_HoaWider *x, long n)
 {
-	x->f_AmbisonicsWider->setWidenValueBoth(n);
+	x->f_AmbisonicsWider->setWidenValue(n);
 }
 
 void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)

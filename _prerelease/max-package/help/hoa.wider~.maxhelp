@@ -363,7 +363,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 248.0, 75.0, 51.0, 19.0 ],
+									"patching_rect" : [ 248.0, 75.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -390,7 +390,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 248.0, 105.0, 99.0, 19.0 ],
+									"patching_rect" : [ 248.0, 105.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -776,7 +776,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 311.333374, 187.0, 55.0, 19.0 ],
+									"patching_rect" : [ 311.333374, 187.0, 55.0, 20.0 ],
 									"text" : "hoa.pi 0."
 								}
 
@@ -814,7 +814,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 372.333374, 206.0, 95.0, 32.0 ],
+									"patching_rect" : [ 372.333374, 206.0, 95.0, 33.0 ],
 									"text" : "Fractional order\n(0 - 1)"
 								}
 
@@ -831,7 +831,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 372.333374, 246.0, 50.0, 19.0 ]
+									"patching_rect" : [ 372.333374, 246.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -844,7 +844,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 372.333374, 279.0, 70.0, 19.0 ],
+									"patching_rect" : [ 372.333374, 279.0, 70.0, 20.0 ],
 									"text" : "pack 0. 100"
 								}
 
@@ -884,7 +884,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 538.0, 497.0, 19.0 ],
+									"patching_rect" : [ 7.0, 538.0, 497.0, 20.0 ],
 									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -914,7 +914,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 73.0, 483.0, 33.0 ],
+									"patching_rect" : [ 7.0, 73.0, 483.0, 34.0 ],
 									"text" : "hoa.wider~ can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -944,7 +944,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 22.000008, 329.0, 329.0, 19.0 ],
+									"patching_rect" : [ 22.000008, 329.0, 329.0, 20.0 ],
 									"text" : "hoa.wider~ 7"
 								}
 
@@ -958,7 +958,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 22.0, 230.0, 308.333374, 19.0 ],
+									"patching_rect" : [ 22.0, 230.0, 308.333374, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -1084,7 +1084,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 382.0, 163.0, 51.0, 19.0 ],
+									"patching_rect" : [ 382.0, 163.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -1111,7 +1111,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 382.0, 193.0, 99.0, 19.0 ],
+									"patching_rect" : [ 382.0, 193.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -1130,7 +1130,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 311.333374, 151.0, 50.0, 19.0 ]
+									"patching_rect" : [ 311.333374, 151.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -1343,6 +1343,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-21", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-22", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-6", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1519,16 +1528,6 @@
 								}
 
 							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-21", 15 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 381.833374, 324.0, 341.500008, 324.0 ],
-									"source" : [ "obj-9", 0 ]
-								}
-
-							}
  ]
 					}
 ,
@@ -1618,74 +1617,81 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../../Downloads",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/docs/refpages/hoa-ref",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.pwider~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/patchers/effects",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/patchers/effects",
 				"patcherrelativepath" : "../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.encoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.wider~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.wider~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.scope~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.gain~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.gain~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.meter~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.decoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.plug~.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}

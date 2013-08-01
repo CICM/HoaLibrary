@@ -96,12 +96,12 @@ class Tools
 public:
 	Tools();
 	~Tools();
-	inline static double clip(double aValue, double aMinimum = 0, double aMaximum = 1)
+	inline static double clip(const double aValue, const double aMinimum = 0, const double aMaximum = 1)
 	{
 		if(aValue < aMinimum)
-			aValue = aMinimum;
+			return aMinimum;
 		else if(aValue > aMaximum)
-			aValue = aMaximum;
+			return aMaximum;
 		return aValue;
 	}
     

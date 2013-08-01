@@ -28,94 +28,87 @@
 AmbisonicsWider::AmbisonicsWider(long anOrder, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
     m_number_of_inputs = m_number_of_harmonics + 1;
-    Cicm_Vector_Float_Malloc  (m_scale_vector_float, m_vector_size);
-    Cicm_Vector_Float_Malloc  (m_weight_vector_float, m_vector_size);
-    Cicm_Vector_Double_Malloc (m_scale_vector_double, m_vector_size);
-    Cicm_Vector_Double_Malloc (m_weight_vector_double, m_vector_size);
+
+	m_wider_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
+	for(int i = 0; i < m_number_of_harmonics; i++)
+	{
+		Cicm_Vector_Double_Malloc(m_wider_matrix[i], MAX_WIDER_SIZE);
+	}
+	Cicm_Vector_Float_Malloc(m_harmonics_vector_float, m_number_of_harmonics);
+	Cicm_Vector_Double_Malloc(m_harmonics_vector_double, m_number_of_harmonics);
+	m_index_vector = NULL;
+	m_vector_float = NULL;
+    m_vector_double = NULL;
 	computeWidenVector();
 	setWidenValue(1.);
 }
 
 void AmbisonicsWider::computeWidenVector()
-{
-    Cicm_Vector_Float_Malloc  (m_minus_vector_float, m_number_of_harmonics);
-    Cicm_Vector_Float_Malloc  (m_dot_vector_float, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc (m_minus_vector_double, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc (m_dot_vector_double, m_number_of_harmonics);
-    Cicm_Vector_Float_Malloc  (m_harmonics_float, m_number_of_harmonics - 1);
-    Cicm_Vector_Double_Malloc (m_harmonics_double, m_number_of_harmonics - 1);
-    
-	m_order_weight_double = log((double)(m_order + 1));
-    m_order_weight_float = m_order_weight_double;
+{    
+	double weight_order = log((double)(m_order + 1));
+   
+	for(int j = 0; j < MAX_WIDER_SIZE; j++)
+	{
+		m_wider_matrix[0][j] = (1. - ((double)j / (double)(MAX_WIDER_SIZE-1))) * weight_order + 1.;
+	}
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
-		m_minus_vector_double[i] =  Tools::clip_min(log((double)abs(getHarmonicIndex(i))), 0.);
-        m_minus_vector_double[i] = -m_minus_vector_double[i];
-        m_minus_vector_float[i]  =  m_minus_vector_double[i];
+		double minus =  Tools::clip_min(log((double)getHarmonicOrder(i)), 0.);
+        minus = -minus;
         
-		m_dot_vector_double[i]	= Tools::clip_min(log((double)abs(getHarmonicIndex(i)) + 1.), 0.);
-		m_dot_vector_double[i] += m_minus_vector_double[i];
-		m_dot_vector_double[i]  = 1. / m_dot_vector_double[i];
-        m_dot_vector_float[i]   = m_dot_vector_double[i];
+		double dot	= Tools::clip_min(log((double)getHarmonicOrder(i) + 1.), 0.);
+		dot += minus;
+		dot  = 1. / dot;
+       
+		for(int j = 0; j < MAX_WIDER_SIZE; j++)
+		{
+			double weight = (1. - ((double)j / (double)(MAX_WIDER_SIZE-1))) * weight_order + 1.;
+			double scale = ((double)j / (double)(MAX_WIDER_SIZE-1)) * weight_order;
+			double new_weight = (minus + scale) * dot;
+			new_weight = Tools::clip(new_weight, 0., 1.);
+			m_wider_matrix[i][j] = new_weight * weight;
+		}
 	}
-}
-
-void AmbisonicsWider::setWidenValueBoth(double aWidenValue)
-{
-    setWidenValue(aWidenValue);
-    setWidenValue((float)aWidenValue);
+	
 }
 
 void AmbisonicsWider::setWidenValue(double aWidenValue)
 {
 	m_widen_value = Tools::clip(aWidenValue, 0., 1.);
-    m_weight_double = (1. - m_widen_value) * m_order_weight_double + 1.;
-    double scale = m_widen_value * m_order_weight_double;
-    double zero = 0.;
-    double one  = 1.;
-    
-    Cicm_Vector_Scalar_Double_Sum(m_minus_vector_double+1, scale, m_harmonics_double, m_number_of_harmonics-1);
-    Cicm_Vector_Vector_Double_Mul(m_dot_vector_double+1, m_harmonics_double, m_harmonics_double, m_number_of_harmonics-1);
-    Cicm_Vector_Double_Clip(m_harmonics_double, zero, one, m_harmonics_double, m_number_of_harmonics-1);
-}
-
-void AmbisonicsWider::setWidenValue(float aWidenValue)
-{
-	m_widen_value = Tools::clip(aWidenValue, 0.f, 1.f);
-    m_weight_float = (1. - m_widen_value) * m_order_weight_float + 1.;
-    float scale = m_widen_value * m_order_weight_float;
-    float zero = 0.f;
-    float one  = 1.f;
-    
-    Cicm_Vector_Scalar_Float_Sum(m_minus_vector_float+1, scale, m_harmonics_float, m_number_of_harmonics-1);
-    Cicm_Vector_Vector_Float_Mul(m_dot_vector_float+1, m_harmonics_float, m_harmonics_float, m_number_of_harmonics-1);
-    Cicm_Vector_Float_Clip(m_harmonics_float, zero, one, m_harmonics_float, m_number_of_harmonics-1);
+	for(int i = 0; i < m_number_of_harmonics; i++)
+	{
+		m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(m_widen_value*(double)(MAX_WIDER_SIZE-1))];
+	}
 }
 
 void AmbisonicsWider::setVectorSize(long aVectorSize)
 {
-    Cicm_Free(m_scale_vector_float);
-    Cicm_Free(m_weight_vector_float);
-    Cicm_Free(m_scale_vector_double);
-    Cicm_Free(m_weight_vector_double);
-	m_vector_size = Tools::clip_power_of_two(aVectorSize);
-    Cicm_Vector_Float_Malloc(m_scale_vector_float, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_weight_vector_float, m_vector_size);
-    Cicm_Vector_Double_Malloc(m_scale_vector_double, m_vector_size);
-    Cicm_Vector_Double_Malloc(m_weight_vector_double, m_vector_size);
+	Ambisonics::setVectorSize(aVectorSize);
+	if(m_index_vector)
+		free(m_index_vector);
+	if(m_vector_double)
+		Cicm_Free(m_vector_double);
+	if(m_vector_float)
+		Cicm_Free(m_vector_float);
+	m_index_vector = new int[m_vector_size];
+	Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
+	Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
 }
 
 AmbisonicsWider::~AmbisonicsWider()
 {
-	Cicm_Free(m_scale_vector_float);
-    Cicm_Free(m_weight_vector_float);
-    Cicm_Free(m_scale_vector_double);
-    Cicm_Free(m_weight_vector_double);
-    Cicm_Free(m_minus_vector_float);
-    Cicm_Free(m_dot_vector_float);
-    Cicm_Free(m_harmonics_float);
-    Cicm_Free(m_minus_vector_double);
-    Cicm_Free(m_dot_vector_double);
-    Cicm_Free(m_harmonics_double);
+	for(int i = 0; i < MAX_WIDER_SIZE; i++)
+	{
+		Cicm_Free(m_wider_matrix[i]);
+	}
+	Cicm_Free(m_wider_matrix);
+	Cicm_Free(m_harmonics_vector_double);
+	Cicm_Free(m_harmonics_vector_float);
+	if(m_index_vector)
+		free(m_index_vector);
+	if(m_vector_double)
+		Cicm_Free(m_vector_double);
+	if(m_vector_float)
+		Cicm_Free(m_vector_float);
 }
 
