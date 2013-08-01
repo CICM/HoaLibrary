@@ -186,7 +186,7 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		FreeLibrary(handle);
 #endif
 		x->f_AmbisonicsDecoder	= new AmbisonicsMultiDecoder(order, x->f_number_of_loudspeakers, Hoa_Ambisonics, Hoa_Small, absoluteHrtfFilePath, sys_getblksize(), sys_getsr());
-        
+		
 		for(int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfLoudspeakers(); i++)
             x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
 		
@@ -252,6 +252,9 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 0);
             object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 1);
             object_attr_setdisabled((t_object *)x, gensym("restitution"), 1);
+
+			if(!x->f_AmbisonicsDecoder->getGetHrtfLoaded())
+				object_error((t_object *)x, "Hrtf not loaded");
         }
         else if(atom_getsym(argv) == gensym("irregular") || atom_getsym(argv) == gensym(" irregular"))
         {
