@@ -1,66 +1,47 @@
-/*
+/**
+ * HoaLibrary : A High Order Ambisonics Library
+ * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.
  *
- * Copyright (C) 2012 Julien Colafrancesco & CICM_PIerre Guillot, Universite Paris 8
+ * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Contacts : cicm.mshparisnord@gmail.com
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ *
+ *  - Redistributions may not be sold, nor may they be used in a commercial product or activity.
+ *  - Redistributions of source code must retain the above copyright notice, 
+ *      this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright notice,
+ *      this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
  * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Library General Public License as published 
- * by the Free Software Foundation; either version 2 of the License.
- * 
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public 
- * License for more details.
- *
- * You should have received a copy of the GNU Library General Public License 
- * along with this library; if not, write to the Free Software Foundation, 
- * Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "AmbisonicConvolver.h"
 
-AmbisonicConvolver::AmbisonicConvolver(long anOrder, long aSamplingFrequency, long aVectorSize)
-{
-	m_order					= Tools::clip_min(anOrder, (long)1);
-	m_number_of_harmonics	= m_order * 2 + 1;
-	m_number_of_inputs		= m_number_of_harmonics;
-	m_number_of_outputs		= m_number_of_harmonics;
-    
+AmbisonicConvolver::AmbisonicConvolver(long anOrder, long aSamplingFrequency, long aVectorSize) : Ambisonics(anOrder, aVectorSize, aSamplingFrequency)
+{    
 	m_impulse_response      = new float[1];
     m_impulse_response_size = 1;
 
 	for(int i = 0; i < m_number_of_harmonics; i++)
     {
-		m_convolution.push_back(new ZeroLatencyConvolver());
+		m_convolution.push_back(new FilterConvolutionZero());
     }
 	m_wet_vector = new double[1];
     m_dry_vector = new double[1];
-    m_wet_line = new AmbisonicLine();
-    m_dry_line = new AmbisonicLine();
+    m_wet_line = new CicmLine(50.);
+    m_dry_line = new CicmLine(50.);
     m_wet_line->setCoefficientDirect(1.);
     m_dry_line->setCoefficientDirect(0.);
 	setWetValue(1);
     setDryValue(0.);
-}
-
-long AmbisonicConvolver::getOrder()
-{
-	return m_order;
-}
-
-long AmbisonicConvolver::getNumberOfHarmonics()
-{
-	return m_number_of_harmonics;
-}
-
-long AmbisonicConvolver::getNumberOfInputs()
-{
-	return m_number_of_inputs;
-}
-
-long AmbisonicConvolver::getNumberOfOutputs()
-{
-	return m_number_of_outputs;
 }
 
 void AmbisonicConvolver::setVectorSize(long aVectorSize)
@@ -72,21 +53,6 @@ void AmbisonicConvolver::setVectorSize(long aVectorSize)
     m_wet_vector = new double[m_vector_size];
     free(m_dry_vector);
     m_dry_vector = new double[m_vector_size];
-}
-
-long AmbisonicConvolver::getVectorSize()
-{
-	return m_vector_size;
-}
-
-void AmbisonicConvolver::setSamplingFrequency(long aSamplingFrequency)
-{
-    m_sampling_frequency = aSamplingFrequency;
-}
-
-long AmbisonicConvolver::getSamplingFrequency()
-{
-    return m_sampling_frequency;
 }
 
 void AmbisonicConvolver::setWetValue(double aGain)

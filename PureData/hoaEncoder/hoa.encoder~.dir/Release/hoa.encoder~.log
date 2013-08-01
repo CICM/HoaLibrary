@@ -1,0 +1,17 @@
+﻿La génération a démarré 31/07/2013 23:19:18.
+     1>Projet "C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\hoa.encoder~.vcxproj" sur le nœud 2 (build cible(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(299,5): warning MSB8004: Le répertoire Output ne se termine pas par une barre oblique finale.  Cette instance de build ajoutera une barre oblique, comme requis, pour permettre l'évaluation correcte du répertoire Output.
+     1>InitializeBuildStatus:
+         Mise à jour de l'horodatage "hoa.encoder~.dir\Release\hoa.encoder~.unsuccessfulbuild".
+       MakeDirsForCl:
+         Création du répertoire "C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\Release".
+       ClCompile:
+         Toutes les sorties sont à jour.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\builds\hoa.encoder~.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:/Program Files (x86)/pd/bin" /LIBPATH:"C:/Program Files (x86)/pd/bin/Release" mkl_intel_c_dll.lib mkl_sequential_dll.lib mkl_core_dll.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib pd.lib /DEF:"C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/hoa.encoder~.def" /MANIFEST /ManifestFile:"hoa.encoder~.dir\Release\hoa.encoder~.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Release/hoa.encoder~.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Release/hoa.encoder~.lib" /MACHINE:X86 /DLL "hoa.encoder~.dir\Release\hoa.encoder~.obj"  /machine:X86 
+     1>LINK : fatal error LNK1181: impossible d'ouvrir le fichier en entrée 'pd.lib'
+     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\hoa.encoder~.vcxproj" terminée (build cible(s)) -- ÉCHEC.
+
+ÉCHEC de la build.
+
+Temps écoulé 00:00:00.20

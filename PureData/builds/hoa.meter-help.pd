@@ -1,0 +1,42 @@
+#N canvas 101 22 985 701 10;
+#X obj -416 -124 noise~;
+#X obj -416 -10 hoa.decoder~ 3 8 ambisonics;
+#X obj -416 43 sigToList~ _______________;
+#X obj -416 -66 hoa.encoder~ 3 ______________;
+#X obj -245 -126 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -416 79 hoa.meter 8;
+#X text -248 43 <-- Subpatch;
+#X obj -465 -195 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.meter
+3 12 0 18 -204280 -1 0;
+#X text -460 -174 A circular meter with sound field descriptor;
+#X text -146 -91 Parameters :;
+#X text -124 -69 hoa.meter nb-of-speakers;
+#X text -145 -37 Input :;
+#X text -123 -15 list of floats (size = nb-of-speakers);
+#X text -145 36 Open the 'sigToList~' patch to see how convert a set
+o signals into a float list.;
+#X text -186 -129 <-- Change the azimuth of the source;
+#X text -372 -126 <-- a source;
+#X text 94 -187 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X msg 122 -123 \; pd dsp 1;
+#X msg 122 -85 \; pd dsp 0;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 1 1 2 1;
+#X connect 1 2 2 2;
+#X connect 1 3 2 3;
+#X connect 1 4 2 4;
+#X connect 1 5 2 5;
+#X connect 1 6 2 6;
+#X connect 1 7 2 7;
+#X connect 2 0 5 0;
+#X connect 3 0 1 0;
+#X connect 3 1 1 1;
+#X connect 3 2 1 2;
+#X connect 3 3 1 3;
+#X connect 3 4 1 4;
+#X connect 3 5 1 5;
+#X connect 3 6 1 6;
+#X connect 4 0 3 1;

@@ -1,7 +1,0 @@
-;hoa.stereo~.def
-
-LIBRARY hoa.stereo~.mxe
-
-EXPORTS
-	main
-

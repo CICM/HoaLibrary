@@ -1,7 +1,0 @@
-;hoa.decoder~.def
-
-LIBRARY hoa.decoder~.mxe
-
-EXPORTS
-	main
-

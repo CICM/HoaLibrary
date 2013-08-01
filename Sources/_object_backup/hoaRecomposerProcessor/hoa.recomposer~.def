@@ -1,7 +1,0 @@
-;hoa.recomposer~.def
-
-LIBRARY hoa.recomposer~.mxe
-
-EXPORTS
-	main
-

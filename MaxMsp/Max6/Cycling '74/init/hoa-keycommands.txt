@@ -1,2 +1,0 @@
-max definecommand h patcher inserttextobj hoa.;
-max definecommandinstructions patcher h "hoa object";
