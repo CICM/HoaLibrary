@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="filmAVI">
+</Property><Property Name="Fichier solution" Value="C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\filmAVI.sln">
+</Property><Property Name="Date" Value="mercredi 31 juillet 2013">
+</Property><Property Name="Time" Value="23:26">
+</Property></Properties><Event ErrorLevel="0" Project="filmAVI" Source="filmAVI.vcproj" Description="Converting project file 'C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\filmAVI.vcproj'.">
+</Event><Event ErrorLevel="0" Project="filmAVI" Source="..\..\..\build\win-vs2008\VFW.vsprops" Description="Converting propertysheet file 'C:\Users\Pierre\Documents\GitHub\build\win-vs2008\VFW.vsprops' for configuration 'Release|Win32'.">
+</Event><Event ErrorLevel="2" Project="filmAVI" Source="..\..\..\build\win-vs2008\VFW.vsprops" Description="File 'C:\Users\Pierre\Documents\GitHub\build\win-vs2008\VFW.vsprops' was not found.">
+</Event><Event ErrorLevel="0" Project="filmAVI" Source="..\..\..\build\win-vs2008\plugin.vsprops" Description="Converting propertysheet file 'C:\Users\Pierre\Documents\GitHub\build\win-vs2008\plugin.vsprops' for configuration 'Release|Win32'.">
+</Event><Event ErrorLevel="2" Project="filmAVI" Source="..\..\..\build\win-vs2008\plugin.vsprops" Description="File 'C:\Users\Pierre\Documents\GitHub\build\win-vs2008\plugin.vsprops' was not found.">
+</Event><Event ErrorLevel="1" Project="filmAVI" Source="filmAVI.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="filmAVI" Source="..\..\..\build\win-vs2008\plugin.vsprops" Description="Converting propertysheet file 'C:\Users\Pierre\Documents\GitHub\build\win-vs2008\plugin.vsprops' for configuration 'ReleaseDummy|Win32'.">
+</Event><Event ErrorLevel="2" Project="filmAVI" Source="..\..\..\build\win-vs2008\plugin.vsprops" Description="File 'C:\Users\Pierre\Documents\GitHub\build\win-vs2008\plugin.vsprops' was not found.">
+</Event><Event ErrorLevel="0" Project="filmAVI" Source="filmAVI.vcproj" Description="Done converting to new project file 'C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\filmAVI.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="filmAVI" Source="filmAVI.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="filmAVI.sln" Description="Solution correctement convertie">
+</Event><Event ErrorLevel="3" Project="" Source="filmAVI.sln" Description="Converted">
+</Event></UpgradeLog>

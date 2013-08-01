@@ -28,7 +28,7 @@
 
 #ifdef _WINDOWS
 #include "hoaAmbisonics/AmbisonicsViewer.h"
-#include "hoaConvolve/AmbisonicConvolver.h"
+//#include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaEncoder/AmbisonicsEncoder.h"
 #include "hoaFreeverb/AmbisonicsFreeverb.h"
 #include "hoaRotate/AmbisonicsRotate.h"
