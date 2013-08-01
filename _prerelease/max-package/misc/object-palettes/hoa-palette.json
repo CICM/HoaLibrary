@@ -99,34 +99,6 @@
                     "destrect" : [ 0.000000, 0.000000, 0.000000, 0.000000 ], 
                     "patching_rect" : [ 250.000000, 250.000000, 250.000000, 250.000000 ], 
                     "autofit" : 1, 
-                    "id" : "hoa.control", 
-                    "ignoreclick" : 0, 
-                    "hidden" : 0,
-                    "fontname" : "Courier", 
-                    "pic" : "hoa.control.svg", 
-                    "xoffset" : 0.000000, 
-                    "yoffset" : 0.000000, 
-                    "background" : 0, 
-                    "presentation_rect" : [ 0.000000, 0.000000, 0.000000, 0.000000 ], 
-                    "fontsize" : 14.000000, 
-
-                    "instance_attributes" : 
-                    {
-                        "palette_category" : [ "HoaLib", "Interface", "Recent" ], 
-                        "palette_caption" : "hoa.control",
-                        "palette_action" : "hoa.control" 
-                    }
-            }
-        },
-        {
-            "box" : 
-            { 
-                    "maxclass" : "fpic",
-                    "boxalpha" : 1.000000, 
-                    "presentation" : 0, 
-                    "destrect" : [ 0.000000, 0.000000, 0.000000, 0.000000 ], 
-                    "patching_rect" : [ 250.000000, 250.000000, 250.000000, 250.000000 ], 
-                    "autofit" : 1, 
                     "id" : "hoa.space", 
                     "ignoreclick" : 0, 
                     "hidden" : 0,
