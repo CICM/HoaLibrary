@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 3,
+			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 516.0, 136.0, 288.0, 300.0 ],
+		"rect" : [ 941.0, 336.0, 288.0, 300.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -26,7 +27,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.send",
+		"title" : "hoa.send (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -36,8 +37,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 111.75, 150.0, 103.0, 20.0 ],
-					"text" : "sprintf hoa_%s%i"
+					"patching_rect" : [ 111.75, 150.0, 77.0, 20.0 ],
+					"text" : "sprintf %s%i"
 				}
 
 			}
@@ -51,7 +52,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 82.0, 269.5, 164.0, 18.0 ],
-					"text" : "hoa_fou0"
+					"text" : "tango-2147483648"
 				}
 
 			}
@@ -106,7 +107,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 111.75, 123.0, 45.0, 20.0 ],
+					"patching_rect" : [ 111.75, 120.0, 78.25, 20.0 ],
 					"text" : "pak s i"
 				}
 
@@ -313,8 +314,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }

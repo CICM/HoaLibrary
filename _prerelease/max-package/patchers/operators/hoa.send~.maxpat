@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 3,
+			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 137.0, 362.0, 360.0, 309.0 ],
+		"rect" : [ 557.0, 322.0, 360.0, 309.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -26,7 +27,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.send~ (-4)",
+		"title" : "hoa.send~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -50,8 +51,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 16.0, 270.0, 132.0, 18.0 ],
-					"text" : "hoa_signal_charlie-4"
+					"patching_rect" : [ 16.0, 270.0, 180.0, 18.0 ],
+					"text" : "tango-2147483648"
 				}
 
 			}
@@ -120,8 +121,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.0, 127.0, 114.0, 20.0 ],
-					"text" : "pack #0_hoasig i"
+					"patching_rect" : [ 129.0, 120.0, 51.0, 20.0 ],
+					"text" : "pack s i"
 				}
 
 			}
@@ -235,7 +236,7 @@
 					"destination" : [ "obj-27", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 179.5, 114.0, 233.5, 114.0 ],
+					"midpoints" : [ 179.5, 114.0, 170.5, 114.0 ],
 					"source" : [ "obj-12", 0 ]
 				}
 

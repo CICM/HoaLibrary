@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 3,
+			"architecture" : "x64"
 		}
 ,
 		"rect" : [ 353.0, 367.0, 235.0, 329.0 ],
@@ -26,7 +27,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.receive",
+		"title" : "hoa.receive (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -51,7 +52,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 50.0, 290.0, 128.5, 18.0 ],
-					"text" : "hoa_fou0"
+					"text" : "tango7"
 				}
 
 			}
@@ -90,8 +91,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 13.75, 121.0, 78.25, 20.0 ],
-					"text" : "pack s i"
+					"patching_rect" : [ 13.75, 120.0, 78.25, 20.0 ],
+					"text" : "pak s i"
 				}
 
 			}
@@ -118,8 +119,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 13.75, 153.0, 103.0, 20.0 ],
-					"text" : "sprintf hoa_%s%i"
+					"patching_rect" : [ 13.75, 150.0, 77.0, 20.0 ],
+					"text" : "sprintf %s%i"
 				}
 
 			}
@@ -301,8 +302,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }

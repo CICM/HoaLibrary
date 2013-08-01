@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 821.0, 647.0 ],
+		"rect" : [ 82.0, 100.0, 821.0, 647.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 821.0, 621.0 ],
+						"rect" : [ 82.0, 126.0, 821.0, 621.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -75,12 +75,42 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
+									"id" : "obj-14",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 218.0, 211.5, 105.0, 20.0 ],
+									"text" : "Angle source 1 :",
+									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
+									"varname" : "autohelp_top_description[4]"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.94324, 0.954082, 0.954082, 1.0 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-17",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 218.0, 211.5, 105.0, 20.0 ],
+									"rounded" : 15,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
 									"id" : "obj-9",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 627.5, 211.5, 105.0, 20.0 ],
-									"text" : "Angle of rotation :",
+									"patching_rect" : [ 625.5, 211.5, 105.0, 20.0 ],
+									"text" : "Angle source 2 :",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
 								}
@@ -94,7 +124,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 627.5, 211.5, 105.0, 20.0 ],
+									"patching_rect" : [ 625.5, 211.5, 105.0, 20.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -109,7 +139,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 219.5, 211.5, 105.0, 20.0 ],
+									"patching_rect" : [ 516.75, 306.0, 105.0, 20.0 ],
 									"text" : "Angle of rotation :",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -124,7 +154,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 219.5, 211.5, 105.0, 20.0 ],
+									"patching_rect" : [ 516.75, 306.0, 105.0, 20.0 ],
 									"rounded" : 15,
 									"shadow" : -1
 								}
@@ -152,7 +182,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 732.5, 103.0, 79.0, 19.0 ],
+									"patching_rect" : [ 732.5, 103.0, 79.0, 20.0 ],
 									"text" : "loadmess 1.5"
 								}
 
@@ -167,7 +197,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 324.5, 103.0, 79.0, 19.0 ],
+									"patching_rect" : [ 324.5, 103.0, 79.0, 20.0 ],
 									"text" : "loadmess 0.5"
 								}
 
@@ -181,7 +211,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 529.75, 398.0, 59.0, 19.0 ],
+									"patching_rect" : [ 529.75, 398.0, 59.0, 20.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -196,7 +226,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 732.5, 139.5, 50.0, 19.0 ]
+									"patching_rect" : [ 732.5, 139.5, 50.0, 20.0 ]
 								}
 
 							}
@@ -209,7 +239,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 732.5, 175.5, 61.0, 19.0 ],
+									"patching_rect" : [ 732.5, 175.5, 61.0, 20.0 ],
 									"text" : "hoa.pi 1.5"
 								}
 
@@ -224,7 +254,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 732.5, 211.5, 50.0, 19.0 ]
+									"patching_rect" : [ 732.5, 211.5, 50.0, 20.0 ]
 								}
 
 							}
@@ -238,7 +268,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 324.5, 139.5, 50.0, 19.0 ]
+									"patching_rect" : [ 324.5, 139.5, 50.0, 20.0 ]
 								}
 
 							}
@@ -386,7 +416,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 502.75, 6.0, 51.0, 19.0 ],
+									"patching_rect" : [ 502.75, 6.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -413,7 +443,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 502.75, 36.0, 99.0, 19.0 ],
+									"patching_rect" : [ 502.75, 36.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -431,7 +461,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 324.5, 175.5, 61.0, 19.0 ],
+									"patching_rect" : [ 324.5, 175.5, 61.0, 20.0 ],
 									"text" : "hoa.pi 0.5"
 								}
 
@@ -459,7 +489,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 422.5, 250.0, 329.0, 19.0 ],
+									"patching_rect" : [ 422.5, 250.0, 329.0, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -545,7 +575,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 529.75, 306.0, 79.0, 19.0 ],
+									"patching_rect" : [ 529.75, 306.0, 79.0, 20.0 ],
 									"text" : "loadmess 0.2"
 								}
 
@@ -560,7 +590,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 529.75, 338.0, 50.0, 19.0 ]
+									"patching_rect" : [ 529.75, 338.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -573,7 +603,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 529.75, 368.0, 72.0, 19.0 ],
+									"patching_rect" : [ 529.75, 368.0, 72.0, 20.0 ],
 									"text" : "phasor~ 0.2"
 								}
 
@@ -588,7 +618,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 324.5, 211.5, 50.0, 19.0 ]
+									"patching_rect" : [ 324.5, 211.5, 50.0, 20.0 ]
 								}
 
 							}
@@ -601,7 +631,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 14.5, 250.0, 329.0, 19.0 ],
+									"patching_rect" : [ 14.5, 250.0, 329.0, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -615,7 +645,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 128.0, 385.0, 329.0, 19.0 ],
+									"patching_rect" : [ 128.0, 385.0, 329.0, 20.0 ],
 									"text" : "hoa.rotate~ 7"
 								}
 
@@ -1329,67 +1359,74 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../../Downloads",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.rotate~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.rotate~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.encoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.scope~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.gain~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.gain~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.meter~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.decoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi~.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}

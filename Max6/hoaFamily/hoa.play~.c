@@ -31,7 +31,7 @@ void *play_class;
 
 void *play_new(t_symbol *s, int argc, t_atom *argv);
 
-int main(void)
+int C74_EXPORT main(void)
 {
 	t_class *c;
 
