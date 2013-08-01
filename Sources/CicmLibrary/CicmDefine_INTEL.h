@@ -58,8 +58,8 @@
 #define	Cicm_Vector_Float_Malloc(vector, length) vector = ippsMalloc_32f(length)
 #define	Cicm_Vector_Double_Malloc(vector, length) vector = ippsMalloc_64f(length)
 
-#define	Cicm_Matrix_Float_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)ippsMalloc_32f(number_of_rows * columns_size); Cicm_Vector_Float_Clear(matrix, number_of_rows * columns_size);
-#define	Cicm_Matrix_Double_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)ippsMalloc_64f(number_of_rows * columns_size); Cicm_Vector_Double_Clear(matrix, number_of_rows * columns_size);
+#define	Cicm_Matrix_Float_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)ippsMalloc_32f(number_of_rows * columns_size);
+#define	Cicm_Matrix_Double_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)ippsMalloc_64f(number_of_rows * columns_size);
 
 /****************************************/
 /**************** FREE *****************/
