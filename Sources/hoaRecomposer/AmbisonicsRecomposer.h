@@ -27,8 +27,8 @@
 #define DEF_AMBISONICSRECOMPOSER
 
 #include "../HoaAmbisonics/Ambisonics.h"
-#include "../hoaEncoder/AmbisonicsEncoder.h"
-#include "../HoaWider/AmbisonicsWider.h"
+#include "../hoaEncoder/AmbisonicEncoder.h"
+#include "../HoaWider/AmbisonicWider.h"
 
 enum
 {
@@ -58,9 +58,9 @@ private:
     Cicm_Vector_Float*          m_harmonics_matrix_float;
     Cicm_Vector_Double*         m_harmonics_matrix_double;
     
-	vector<AmbisonicsEncoder*>  m_encoders;
+	vector<AmbisonicEncoder*>  m_encoders;
     vector<CicmLine*>           m_lines;
-    vector<AmbisonicsWider*>    m_widers;
+    vector<AmbisonicWider*>    m_widers;
     vector<CicmLine*>           m_wider_lines;
     
     long                        m_mode;
@@ -251,7 +251,7 @@ public:
         Cicm_Vector_Double_Clip(fisheyeFactor, clip[0], clip[1], fisheyeFactor, m_vector_size);
         double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         
-        m_encoders[0]->setAzimuth(0.);
+        m_encoders[0]->setAngle(0.);
         m_encoders[0]->process(aInputs[0], aOutputs);
         
         for(int i = 1; i < m_number_of_microphones; i++)
@@ -270,7 +270,7 @@ public:
         Cicm_Vector_Float_Clip(fisheyeFactor, clip[0], clip[1], fisheyeFactor, m_vector_size);
         double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         
-        m_encoders[0]->setAzimuth(0.f);
+        m_encoders[0]->setAngle(0.f);
         m_encoders[0]->process(aInputs[0], aOutputs);
         
         for(int i = 1; i < m_number_of_microphones; i++)

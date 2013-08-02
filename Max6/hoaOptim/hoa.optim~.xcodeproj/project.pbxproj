@@ -110,8 +110,8 @@
 		8FB37E7E17951C780001898B /* AmbisonicsMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB37DF617951C780001898B /* AmbisonicsMeter.h */; };
 		8FB37E7F17951C780001898B /* AmbisonicsMultiDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB37DF817951C780001898B /* AmbisonicsMultiDecoder.cpp */; };
 		8FB37E8017951C780001898B /* AmbisonicsMultiDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB37DF917951C780001898B /* AmbisonicsMultiDecoder.h */; };
-		8FB37E8117951C780001898B /* AmbisonicsOptim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB37DFB17951C780001898B /* AmbisonicsOptim.cpp */; };
-		8FB37E8217951C780001898B /* AmbisonicsOptim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB37DFC17951C780001898B /* AmbisonicsOptim.h */; };
+		8FB37E8117951C780001898B /* AmbisonicOptim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB37DFB17951C780001898B /* AmbisonicOptim.cpp */; };
+		8FB37E8217951C780001898B /* AmbisonicOptim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB37DFC17951C780001898B /* AmbisonicOptim.h */; };
 		8FB37E8317951C780001898B /* AmbisonicsProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB37DFE17951C780001898B /* AmbisonicsProjector.cpp */; };
 		8FB37E8417951C780001898B /* AmbisonicsProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB37DFF17951C780001898B /* AmbisonicsProjector.h */; };
 		8FB37E8517951C780001898B /* AmbisonicsRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB37E0117951C780001898B /* AmbisonicsRecomposer.cpp */; };
@@ -243,8 +243,8 @@
 		8FB37DF617951C780001898B /* AmbisonicsMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsMeter.h; sourceTree = "<group>"; };
 		8FB37DF817951C780001898B /* AmbisonicsMultiDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsMultiDecoder.cpp; sourceTree = "<group>"; };
 		8FB37DF917951C780001898B /* AmbisonicsMultiDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsMultiDecoder.h; sourceTree = "<group>"; };
-		8FB37DFB17951C780001898B /* AmbisonicsOptim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsOptim.cpp; sourceTree = "<group>"; };
-		8FB37DFC17951C780001898B /* AmbisonicsOptim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsOptim.h; sourceTree = "<group>"; };
+		8FB37DFB17951C780001898B /* AmbisonicOptim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicOptim.cpp; sourceTree = "<group>"; };
+		8FB37DFC17951C780001898B /* AmbisonicOptim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicOptim.h; sourceTree = "<group>"; };
 		8FB37DFE17951C780001898B /* AmbisonicsProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsProjector.cpp; sourceTree = "<group>"; };
 		8FB37DFF17951C780001898B /* AmbisonicsProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsProjector.h; sourceTree = "<group>"; };
 		8FB37E0117951C780001898B /* AmbisonicsRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRecomposer.cpp; sourceTree = "<group>"; };
@@ -610,8 +610,8 @@
 		8FB37DFA17951C780001898B /* hoaOptim */ = {
 			isa = PBXGroup;
 			children = (
-				8FB37DFB17951C780001898B /* AmbisonicsOptim.cpp */,
-				8FB37DFC17951C780001898B /* AmbisonicsOptim.h */,
+				8FB37DFB17951C780001898B /* AmbisonicOptim.cpp */,
+				8FB37DFC17951C780001898B /* AmbisonicOptim.h */,
 			);
 			path = hoaOptim;
 			sourceTree = "<group>";
@@ -761,7 +761,7 @@
 				8FB37E7C17951C780001898B /* AmbisonicSourcesTrajectory.h in Headers */,
 				8FB37E7E17951C780001898B /* AmbisonicsMeter.h in Headers */,
 				8FB37E8017951C780001898B /* AmbisonicsMultiDecoder.h in Headers */,
-				8FB37E8217951C780001898B /* AmbisonicsOptim.h in Headers */,
+				8FB37E8217951C780001898B /* AmbisonicOptim.h in Headers */,
 				8FB37E8417951C780001898B /* AmbisonicsProjector.h in Headers */,
 				8FB37E8617951C780001898B /* AmbisonicsRecomposer.h in Headers */,
 				8FB37E8817951C780001898B /* AmbisonicVirtualMicUI.h in Headers */,
@@ -899,7 +899,7 @@
 				8FB37E7B17951C780001898B /* AmbisonicSourcesTrajectory.cpp in Sources */,
 				8FB37E7D17951C780001898B /* AmbisonicsMeter.cpp in Sources */,
 				8FB37E7F17951C780001898B /* AmbisonicsMultiDecoder.cpp in Sources */,
-				8FB37E8117951C780001898B /* AmbisonicsOptim.cpp in Sources */,
+				8FB37E8117951C780001898B /* AmbisonicOptim.cpp in Sources */,
 				8FB37E8317951C780001898B /* AmbisonicsProjector.cpp in Sources */,
 				8FB37E8517951C780001898B /* AmbisonicsRecomposer.cpp in Sources */,
 				8FB37E8717951C780001898B /* AmbisonicVirtualMicUI.cpp in Sources */,

@@ -54,7 +54,7 @@
 #include "hoaAmbisonics/AmbisonicsViewer.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaDelay/AmbisonicsDelay.h"
-#include "hoaEncoder/AmbisonicsEncoder.h"
+#include "hoaEncoder/AmbisonicEncoder.h"
 #include "hoaFreeverb/AmbisonicsFreeverb.h"
 #include "hoaFilter/AmbisonicsFilter.h"
 #include "hoaGrain/AmbisonicsGrain.h"
@@ -64,7 +64,7 @@
 #include "hoaMap/AmbisonicSourcesTrajectory.h"
 #include "hoaMeter/AmbisonicsMeter.h"
 #include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
-#include "hoaOptim/AmbisonicsOptim.h"
+#include "hoaOptim/AmbisonicOptim.h"
 #include "hoaProjector/AmbisonicsProjector.h"
 #include "hoaRecomposer/AmbisonicsRecomposer.h"
 #include "hoaRingModulation/AmbisonicsRingModulation.h"
@@ -73,7 +73,7 @@
 #include "hoaSpace/AmbisonicSpace.h"
 #include "hoaGalaxy/AmbisonicsGalaxy.h"
 #include "hoaSpectrum/AmbisonicsSpectrum.h"
-#include "hoaWider/AmbisonicsWider.h"
+#include "hoaWider/AmbisonicWider.h"
 #include "hoaVector/AmbisonicsVector.h"
 
 #endif

@@ -37,7 +37,7 @@ int postons = 0;
 typedef struct _HoaEncode 
 {
 	t_pxobject					f_ob;			
-	AmbisonicsEncoder			*f_ambiEncoder;
+	AmbisonicEncoder			*f_ambiEncoder;
 } t_HoaEncode;
 
 
@@ -97,7 +97,7 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv + 1) == A_SYM && atom_getsym(argv + 1) == gensym("split"))
 			mode = Hoa_Split;
 		
-		x->f_ambiEncoder = new AmbisonicsEncoder(order, mode, sys_getblksize());
+		x->f_ambiEncoder = new AmbisonicEncoder(order, mode, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
@@ -111,12 +111,12 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaEncode_float(t_HoaEncode *x, double f)
 {
-	x->f_ambiEncoder->setAzimuthBoth(f);
+	x->f_ambiEncoder->setAngle(f);
 }
 
 void HoaEncode_int(t_HoaEncode *x, long n)
 {
-	x->f_ambiEncoder->setAzimuthBoth(n);
+	x->f_ambiEncoder->setAngle(n);
 }
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -143,12 +143,12 @@ void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double sampl
 
 void HoaEncode_perform64vec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiEncoder->process(ins, outs, ins[x->f_ambiEncoder->getNumberOfInputs()-1]);
+	x->f_ambiEncoder->processSplit(ins, outs, ins[x->f_ambiEncoder->getNumberOfInputs()-1]);
 }
 
 void HoaEncode_perform64Offsetvec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiEncoder->process(ins, outs);
+	x->f_ambiEncoder->processSplit(ins, outs);
 }
 
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)

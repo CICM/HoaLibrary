@@ -99,6 +99,8 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
+        
+        x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 
 	return (x);
@@ -145,22 +147,22 @@ void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double sampl
 
 void HoaEncode_perform64_azimuth_elevation(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiEncoder->processAzimtuhElevation(outs, ins[1], ins[2]);
+	x->f_ambiEncoder->processAzimtuhElevation(ins[0], outs, ins[1], ins[2]);
 }
 
 void HoaEncode_perform64_azimuth(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiEncoder->processAzimtuh(outs, ins[1]);
+	x->f_ambiEncoder->processAzimtuh(ins[0], outs, ins[1]);
 }
 
 void HoaEncode_perform64_elevation(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiEncoder->processElevation(outs, ins[2]);
+	x->f_ambiEncoder->processElevation(ins[0], outs, ins[2]);
 }
 
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiEncoder->process(outs);
+	x->f_ambiEncoder->process(ins[0], outs);
 }
 
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)

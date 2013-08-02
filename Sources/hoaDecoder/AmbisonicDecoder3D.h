@@ -29,17 +29,32 @@
 #include "../hoaEncoder/AmbisonicEncoder3D.h"
 #include "../HoaAmbisonics/Ambisonic3D.h"
 
+enum
+{
+    Hoa_Half_Sphere = 0,
+    Hoa_Full_Sphere,
+};
+
 class AmbisonicDecoder3D : public Ambisonic3D
 {
 	
 private:
-    Cicm_Matrix_Double   m_decoder_matrix;
+    bool                m_shape;
+    Cicm_Matrix_Double  m_decoder_matrix_double;
+    Cicm_Matrix_Float   m_decoder_matrix_float;
+    
+    Cicm_Matrix_Double  m_harmonics_vector_double;
+    Cicm_Vector_Float   m_harmonics_vector_float;
+    
+    Cicm_Matrix_Double  m_outputs_vector_double;
+    Cicm_Vector_Float   m_outputs_vector_float;
     
     void computeMatrices();
 public:
-	AmbisonicDecoder3D(long anOrder = 1, long aNumberOfLoudspeakers = 0, long aVectorSize = 2, long aSamlingRate = 44100);
-
-    void    setVectorSize(long aVectorSize);
+	AmbisonicDecoder3D(long anOrder = 1, long aNumberOfLoudspeakers = 4, bool aShape = Hoa_Full_Sphere, long aVectorSize = 2, long aSamlingRate = 44100);
+    
+    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool aShape = Hoa_Full_Sphere);
+    void setLoudspeakerPosition(long anIndex, double anAzimuth, double anElevation);
     
 	~AmbisonicDecoder3D();
     
@@ -49,14 +64,14 @@ public:
 
     /*********************************** Out Of Place ***********************************/
     
-    inline void process(float anInput, float* anOutput)
+    inline void process(const float* anInput, float* anOutput)
     {
-       
+       Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
-    inline void process(double anInput, double* anOutput)
+    inline void process(const double* anInput, double* anOutput)
     {
-        
+        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     /************************************* In Place *************************************/
@@ -64,12 +79,14 @@ public:
     
     inline void process(float* anInputOutput)
     {
-       
+        Cicm_Vector_Float_Copy(anInputOutput, m_harmonics_vector_float, m_number_of_harmonics);
+        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, m_harmonics_vector_float, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     inline void process(double* anInputOutput)
     {
-        
+        Cicm_Vector_Double_Copy(anInputOutput, m_harmonics_vector_double, m_number_of_harmonics);
+        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, m_harmonics_vector_double, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     /************************************************************************************/
@@ -78,14 +95,36 @@ public:
     
     /*********************************** Out Of Place ***********************************/
     
-    inline void process(float* anInput, float** anOutput)
+    inline void process(float** anInput, float** anOutput)
     {
-        
+        for(int i = 0; i < m_vector_size; i++)
+		{
+            for(int j = 0; j < m_number_of_harmonics; j++)
+            {
+                m_harmonics_vector_float[j] = anInput[j][i];
+            }
+            process(m_harmonics_vector_float, m_outputs_vector_float);
+            for(int j = 0; j < m_number_of_outputs; j++)
+            {
+                anOutput[j][i] = m_outputs_vector_float[j];
+            }
+		}
     }
     
-    inline void process(double* anInput, double** anOutput)
+    inline void process(double** anInput, double** anOutput)
     {
-        
+        for(int i = 0; i < m_vector_size; i++)
+		{
+            for(int j = 0; j < m_number_of_harmonics; j++)
+            {
+                m_harmonics_vector_double[j] = anInput[j][i];
+            }
+            process(m_harmonics_vector_double, m_outputs_vector_double);
+            for(int j = 0; j < m_number_of_outputs; j++)
+            {
+                anOutput[j][i] = m_outputs_vector_double[j];
+            }
+		}
     }
     
     /************************************* In Place *************************************/
@@ -93,12 +132,34 @@ public:
        
     inline void process(float** anInputOutput)
     {
-        
+        for(int i = 0; i < m_vector_size; i++)
+		{
+            for(int j = 0; j < m_number_of_harmonics; j++)
+            {
+                m_harmonics_vector_float[j] = anInputOutput[j][i];
+            }
+            process(m_harmonics_vector_float, m_outputs_vector_float);
+            for(int j = 0; j < m_number_of_outputs; j++)
+            {
+                anInputOutput[j][i] = m_outputs_vector_float[j];
+            }
+		}
     }
     
     inline void process(double** anInputOutput)
     {
-        
+        for(int i = 0; i < m_vector_size; i++)
+		{
+            for(int j = 0; j < m_number_of_harmonics; j++)
+            {
+                m_harmonics_vector_double[j] = anInputOutput[j][i];
+            }
+            process(m_harmonics_vector_double, m_outputs_vector_double);
+            for(int j = 0; j < m_number_of_outputs; j++)
+            {
+                anInputOutput[j][i] = m_outputs_vector_double[j];
+            }
+		}
     }
 };
 #endif

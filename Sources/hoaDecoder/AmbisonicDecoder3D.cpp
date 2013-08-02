@@ -25,37 +25,93 @@
 
 #include "AmbisonicDecoder3D.h"
 
-AmbisonicDecoder3D::AmbisonicDecoder3D(long anOrder, long aNumberOfLoudspeakers, long aVectorSize, long aSamlingRate) : Ambisonic3D(anOrder, aVectorSize, aSamlingRate)
-{
-    if (aNumberOfLoudspeakers < m_number_of_harmonics)
-        aNumberOfLoudspeakers = m_number_of_harmonics;
-    m_number_of_outputs = m_number_of_harmonics;
+AmbisonicDecoder3D::AmbisonicDecoder3D(long anOrder, long aNumberOfLoudspeakers, bool aShape, long aVectorSize, long aSamlingRate) : Ambisonic3D(anOrder, aVectorSize, aSamlingRate)
+{    
+    m_decoder_matrix_double = NULL;
+    m_decoder_matrix_float = NULL;
+    m_outputs_vector_double = NULL;
+    m_outputs_vector_float = NULL;
     
-    m_decoder_matrix = NULL;
-    
-    computeMatrices();
+    Cicm_Vector_Double_Malloc(m_harmonics_vector_double, m_number_of_harmonics);
+    Cicm_Vector_Float_Malloc(m_harmonics_vector_float, m_number_of_harmonics);
+
+    setNumberOfLoudspeakers(aNumberOfLoudspeakers, aShape);
 }
 
 void AmbisonicDecoder3D::computeMatrices()
 {
     AmbisonicEncoder3D* encoder  = new AmbisonicEncoder3D(m_order);
     double* harmonics_vector = new double[m_number_of_harmonics];
-    if(m_decoder_matrix)
-        Cicm_Free(m_decoder_matrix);
-    Cicm_Matrix_Double_Malloc(m_decoder_matrix, m_number_of_outputs, m_number_of_harmonics);
-    for(int  i = 0; i < m_number_of_outputs; i++)
+    
+    if(m_decoder_matrix_double)
+        Cicm_Free(m_decoder_matrix_double);
+    if(m_decoder_matrix_float)
+        Cicm_Free(m_decoder_matrix_float);
+    
+    Cicm_Matrix_Double_Malloc(m_decoder_matrix_double, m_number_of_outputs, m_number_of_harmonics);
+    Cicm_Matrix_Float_Malloc(m_decoder_matrix_float, m_number_of_outputs, m_number_of_harmonics);
+    
+    for(int i = 0; i < m_number_of_outputs; i++)
     {
-        double azimuth  = 0;
-        double elevation = 0;
-        encoder->processAzimtuhElevation(harmonics_vector, azimuth, elevation);
+        double azimuth  = (double)i / (double)m_number_of_outputs * CICM_2PI;
+        double elevation = (double)i / (double)m_number_of_outputs * CICM_2PI;
+        encoder->processAzimtuhElevation(0.5, harmonics_vector, azimuth, elevation);
         for(int j = 0; j < m_number_of_harmonics; j++)
         {
-            Cicm_Matrix_Double_Set(m_decoder_matrix, i, j, m_number_of_harmonics, harmonics_vector[j]);
+            if(getHarmonicIndex(i) == 0)
+            {
+                Cicm_Matrix_Double_Set(m_decoder_matrix_double, i, j, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+                Cicm_Matrix_Float_Set(m_decoder_matrix_float, i, j, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+            }
+            else
+            {
+                Cicm_Matrix_Double_Set(m_decoder_matrix_double, i, j, m_number_of_harmonics, harmonics_vector[j]);
+                Cicm_Matrix_Float_Set(m_decoder_matrix_float, i, j, m_number_of_harmonics, harmonics_vector[j]);
+            }
         }
     }
 }
 
+void AmbisonicDecoder3D::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool aShape)
+{
+    m_shape = Tools::clip(aShape, Hoa_Half_Sphere, Hoa_Full_Sphere);
+    aNumberOfLoudspeakers = Tools::clip_min(aNumberOfLoudspeakers, 4);
+    if(m_shape == Hoa_Full_Sphere)
+    {
+        if(aNumberOfLoudspeakers < m_number_of_harmonics)
+            aNumberOfLoudspeakers = m_number_of_harmonics;
+    }
+    else
+    {
+        if(aNumberOfLoudspeakers < m_number_of_harmonics / 2)
+            aNumberOfLoudspeakers = m_number_of_harmonics / 2;
+    }
+    m_number_of_outputs = m_number_of_harmonics;
+    if(m_outputs_vector_double)
+        Cicm_Free(m_outputs_vector_double);
+    if(m_outputs_vector_float)
+        Cicm_Free(m_outputs_vector_float);
+    
+    Cicm_Vector_Double_Malloc(m_outputs_vector_double, m_number_of_outputs);
+    Cicm_Vector_Float_Malloc(m_outputs_vector_float, m_number_of_outputs);
+    computeMatrices();
+}
+
+void AmbisonicDecoder3D::setLoudspeakerPosition(long anIndex, double anAzimuth, double anElevation)
+{
+    ;
+}
+
 AmbisonicDecoder3D::~AmbisonicDecoder3D()
 {
-    Cicm_Free(m_decoder_matrix);
+    Cicm_Free(m_decoder_matrix_double);
+    Cicm_Free(m_decoder_matrix_float);
+    Cicm_Free(m_harmonics_vector_double);
+    Cicm_Free(m_harmonics_vector_float);
+    Cicm_Free(m_outputs_vector_double);
+    Cicm_Free(m_outputs_vector_float);
+    
 }
+
+
+

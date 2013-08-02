@@ -30,14 +30,14 @@
 #include "../CicmLibrary/CicmLines/CicmLine.h"
 #include "../CicmLibrary/CicmFilters/CicmFilterOnePole.h"
 #include "../HoaAmbisonics/Ambisonics.h"
-#include "../hoaEncoder/AmbisonicsEncoder.h"
-#include "../hoaWider/AmbisonicsWider.h"
+#include "../hoaEncoder/AmbisonicEncoder.h"
+#include "../hoaWider/AmbisonicWider.h"
 
 class AmbisonicsMap : public Ambisonics
 {
 private:
-    AmbisonicsEncoder*  m_encoder;
-    AmbisonicsWider*    m_wider;
+    AmbisonicEncoder*  m_encoder;
+    AmbisonicWider*    m_wider;
     
     bool                m_air_absorption;
     FilterOnePole*      m_low_pass_filter;

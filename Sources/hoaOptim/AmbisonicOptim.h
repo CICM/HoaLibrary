@@ -23,8 +23,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AMBISONICSOPTIM
-#define DEF_AMBISONICSOPTIM
+#ifndef DEF_AMBISONICOPTIMISAZION
+#define DEF_AMBISONICOPTIMISAZION
 
 enum
 {
@@ -36,7 +36,7 @@ enum
 
 #include "../HoaAmbisonics/Ambisonics.h"
 
-class AmbisonicsOptim : public Ambisonics
+class AmbisonicOptim : public Ambisonics
 {
 	
 private:
@@ -50,11 +50,11 @@ private:
 	void computeInPhaseOptim();
 	
 public:
-	AmbisonicsOptim(long anOrder = 1, long anOptimMode = Hoa_InPhase_Optim, long aVectorSize = 0);
+	AmbisonicOptim(long anOrder = 1, long anOptimMode = Hoa_InPhase_Optim, long aVectorSize = 0);
 	long getOptimMode();
 	void setOptimMode(long anOptim);
 
-	~AmbisonicsOptim();
+	~AmbisonicOptim();
 	
     /* Perform sample by sample */
 	inline void process(float* inputs, float* outputs)

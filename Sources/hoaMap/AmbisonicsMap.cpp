@@ -29,8 +29,8 @@ AmbisonicsMap::AmbisonicsMap(long anOrder, long aRampSample, long aVectorSize, l
 {
 	m_number_of_inputs		= 1;
 
-    m_encoder   = new AmbisonicsEncoder(m_order);
-    m_wider     = new AmbisonicsWider(m_order);
+    m_encoder   = new AmbisonicEncoder(m_order);
+    m_wider     = new AmbisonicWider(m_order);
     m_line_one  = new CicmLine(aRampSample);
     m_line_two  = new CicmLine(aRampSample);
     m_line_thr  = new CicmLine(aRampSample);

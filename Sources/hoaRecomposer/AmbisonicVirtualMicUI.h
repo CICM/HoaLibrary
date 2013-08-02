@@ -26,10 +26,10 @@
 #ifndef DEF_AMBISONICSVIRTUALMICUI
 #define DEF_AMBISONICSVIRTUALMICUI
 
-#include "../hoaEncoder/AmbisonicsEncoder.h"
+#include "../hoaEncoder/AmbisonicEncoder.h"
 #include "../hoaAmbisonics/AmbisonicsViewer.h"
-#include "../hoaOptim/AmbisonicsOptim.h"
-#include "../hoaWider/AmbisonicsWider.h"
+#include "../hoaOptim/AmbisonicOptim.h"
+#include "../hoaWider/AmbisonicWider.h"
 
 class AmbisonicVirtualMicUI
 {
@@ -42,8 +42,8 @@ private:
     double  m_fisheyeEndAngleInRadian;
     
     int                  m_order;
-    AmbisonicsEncoder*   m_encoder;
-	AmbisonicsWider*     m_wider;
+    AmbisonicEncoder*   m_encoder;
+	AmbisonicWider*     m_wider;
     AmbisonicsViewer*    m_viewer;
     double*              m_harmonicsValues;
     

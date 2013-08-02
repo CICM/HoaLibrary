@@ -23,9 +23,9 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsWider.h"
+#include "AmbisonicWider.h"
 
-AmbisonicsWider::AmbisonicsWider(long anOrder, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
     m_number_of_inputs = m_number_of_harmonics + 1;
 
@@ -43,7 +43,7 @@ AmbisonicsWider::AmbisonicsWider(long anOrder, long aVectorSize) : Ambisonics(an
 	setWidenValue(1.);
 }
 
-void AmbisonicsWider::computeWidenVector()
+void AmbisonicWider::computeWidenVector()
 {    
 	double weight_order = log((double)(m_order + 1));
    
@@ -72,16 +72,16 @@ void AmbisonicsWider::computeWidenVector()
 	
 }
 
-void AmbisonicsWider::setWidenValue(double aWidenValue)
+void AmbisonicWider::setWidenValue(double aWidenValue)
 {
-	m_widen_value = Tools::clip(aWidenValue, 0., 1.);
+	double widenValue = Tools::clip(aWidenValue, 0., 1.);
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
-		m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(m_widen_value*(double)(MAX_WIDER_SIZE-1))];
+		m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(widenValue*(double)(MAX_WIDER_SIZE-1))];
 	}
 }
 
-void AmbisonicsWider::setVectorSize(long aVectorSize)
+void AmbisonicWider::setVectorSize(long aVectorSize)
 {
 	Ambisonics::setVectorSize(aVectorSize);
 	if(m_index_vector)
@@ -95,7 +95,7 @@ void AmbisonicsWider::setVectorSize(long aVectorSize)
 	Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
 }
 
-AmbisonicsWider::~AmbisonicsWider()
+AmbisonicWider::~AmbisonicWider()
 {
 	for(int i = 0; i < MAX_WIDER_SIZE; i++)
 	{

@@ -23,21 +23,21 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "AmbisonicsOptim.h"
+#include "AmbisonicOptim.h"
 
-AmbisonicsOptim::AmbisonicsOptim(long anOrder, long anOptimMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicOptim::AmbisonicOptim(long anOrder, long anOptimMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
 {
 	Cicm_Vector_Float_Malloc(m_optim_vector_float, m_number_of_harmonics);
     Cicm_Vector_Double_Malloc(m_optim_vector_double, m_number_of_harmonics);
 	setOptimMode(anOptimMode);
 }
 
-long AmbisonicsOptim::getOptimMode()
+long AmbisonicOptim::getOptimMode()
 {
     return m_optimMode;
 }
 
-void AmbisonicsOptim::setOptimMode(long anOptim)
+void AmbisonicOptim::setOptimMode(long anOptim)
 {
 	if(anOptim != m_optimMode)
 	{
@@ -54,14 +54,14 @@ void AmbisonicsOptim::setOptimMode(long anOptim)
     }
 }
 
-void AmbisonicsOptim::computeBasicOptim()
+void AmbisonicOptim::computeBasicOptim()
 {
 	m_optimMode = Hoa_Basic_Optim;
 	for (int i = 0; i < m_number_of_harmonics; i++)
 		m_optim_vector_double[i] = 1.;
 }
 
-void AmbisonicsOptim::computeReOptim()
+void AmbisonicOptim::computeReOptim()
 {
 	m_optimMode = Hoa_MaxRe_Optim;
 	for (int i = 0; i < m_number_of_harmonics; i++)
@@ -74,7 +74,7 @@ void AmbisonicsOptim::computeReOptim()
 	
 }
 
-void AmbisonicsOptim::computeInPhaseOptim()
+void AmbisonicOptim::computeInPhaseOptim()
 {
 	m_optimMode = Hoa_InPhase_Optim;
 
@@ -89,7 +89,7 @@ void AmbisonicsOptim::computeInPhaseOptim()
 	}
 }
 
-AmbisonicsOptim::~AmbisonicsOptim()
+AmbisonicOptim::~AmbisonicOptim()
 {
 	Cicm_Free(m_optim_vector_float);
     Cicm_Free(m_optim_vector_double);

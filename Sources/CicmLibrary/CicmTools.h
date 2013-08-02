@@ -406,14 +406,15 @@ public:
         return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
     }
     
-    static inline double radianWrap(double anAngle)
+    static inline double radianWrap(const double anAngle)
     {
-        while(anAngle < 0.)
-            anAngle += CICM_2PI;
-        while(anAngle >= CICM_2PI)
-            anAngle -= CICM_2PI;
+        double angle = anAngle;
+        while(angle < 0.)
+            angle += CICM_2PI;
+        while(angle >= CICM_2PI)
+            angle -= CICM_2PI;
         
-        return anAngle;
+        return angle;
     }
     
     static double radianDistance(double anAngle1, double anAngle2)

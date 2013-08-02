@@ -85,7 +85,7 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
 			order	= atom_getfloat(argv);
 		
-       		x->f_AmbisonicsDecoder	= new AmbisonicsMultiDecoder(order, x->f_number_of_loudspeakers, Hoa_Ambisonics, Hoa_Small, absoluteHrtfFilePath, sys_getblksize(), sys_getsr());
+        x->f_AmbisonicsDecoder	= new AmbisonicDecoder3D(order);
         
         /* DSP Setup */
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicsDecoder->getNumberOfInputs());
@@ -115,8 +115,8 @@ void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 		sprintf(s,"(Signal) %s",x->f_AmbisonicsDecoder->getHarmonicsName(a).c_str());
-	else
-        sprintf(s,"(Signal) %s",x->f_AmbisonicsDecoder->getLoudspeakerName(a).c_str());
+	//else
+        //sprintf(s,"(Signal) %s",x->f_AmbisonicsDecoder->getLoudspeakerName(a).c_str());
 }
 
 void HoaDecode_free(t_HoaDecode *x)
