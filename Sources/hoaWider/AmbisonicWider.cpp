@@ -32,7 +32,7 @@ AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize) : Ambisonics(anOr
 	m_wider_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
-		Cicm_Vector_Double_Malloc(m_wider_matrix[i], MAX_WIDER_SIZE);
+		Cicm_Vector_Double_Malloc(m_wider_matrix[i], NUMBEROFLINEARPOINTS);
 	}
 	Cicm_Vector_Float_Malloc(m_harmonics_vector_float, m_number_of_harmonics);
 	Cicm_Vector_Double_Malloc(m_harmonics_vector_double, m_number_of_harmonics);
@@ -47,9 +47,9 @@ void AmbisonicWider::computeWidenVector()
 {    
 	double weight_order = log((double)(m_order + 1));
    
-	for(int j = 0; j < MAX_WIDER_SIZE; j++)
+	for(int j = 0; j < NUMBEROFLINEARPOINTS; j++)
 	{
-		m_wider_matrix[0][j] = (1. - ((double)j / (double)(MAX_WIDER_SIZE-1))) * weight_order + 1.;
+		m_wider_matrix[0][j] = (1. - ((double)j / (double)(NUMBEROFLINEARPOINTS-1))) * weight_order + 1.;
 	}
 	for(int i = 1; i < m_number_of_harmonics; i++)
 	{
@@ -60,10 +60,10 @@ void AmbisonicWider::computeWidenVector()
 		dot += minus;
 		dot  = 1. / dot;
        
-		for(int j = 0; j < MAX_WIDER_SIZE; j++)
+		for(int j = 0; j < NUMBEROFLINEARPOINTS; j++)
 		{
-			double weight = (1. - ((double)j / (double)(MAX_WIDER_SIZE-1))) * weight_order + 1.;
-			double scale = ((double)j / (double)(MAX_WIDER_SIZE-1)) * weight_order;
+			double weight = (1. - ((double)j / (double)(NUMBEROFLINEARPOINTS-1))) * weight_order + 1.;
+			double scale = ((double)j / (double)(NUMBEROFLINEARPOINTS-1)) * weight_order;
 			double new_weight = (minus + scale) * dot;
 			new_weight = Tools::clip(new_weight, 0., 1.);
 			m_wider_matrix[i][j] = new_weight * weight;
@@ -77,7 +77,7 @@ void AmbisonicWider::setWidenValue(double aWidenValue)
 	double widenValue = Tools::clip(aWidenValue, 0., 1.);
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
-		m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(widenValue*(double)(MAX_WIDER_SIZE-1))];
+		m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(widenValue*(double)(NUMBEROFLINEARPOINTS-1))];
 	}
 }
 
@@ -97,7 +97,7 @@ void AmbisonicWider::setVectorSize(long aVectorSize)
 
 AmbisonicWider::~AmbisonicWider()
 {
-	for(int i = 0; i < MAX_WIDER_SIZE; i++)
+	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
 		Cicm_Free(m_wider_matrix[i]);
 	}

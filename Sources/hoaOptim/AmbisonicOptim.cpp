@@ -32,6 +32,18 @@ AmbisonicOptim::AmbisonicOptim(long anOrder, long anOptimMode, long aVectorSize)
 	setOptimMode(anOptimMode);
 }
 
+double AmbisonicOptim::getCoefficient(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_harmonics)
+    {
+        return m_optim_vector_double[anIndex];
+    }
+    else
+    {
+        return 0.;
+    }
+}
+
 long AmbisonicOptim::getOptimMode()
 {
     return m_optimMode;

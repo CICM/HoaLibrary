@@ -35,7 +35,7 @@ extern "C"
 typedef struct _HoaRecomposer
 {
 	t_pxobject					f_ob;
-	AmbisonicsRecomposer*       f_ambiRecomposer;
+	AmbisonicRecomposer*       f_ambiRecomposer;
     
 	long						f_inputNumber;
 	long						f_outputNumber;
@@ -84,14 +84,13 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c,"mode", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"mode", NULL, HoaRecomposer_set_attr_mode);
     CLASS_ATTR_ORDER			(c,"mode", 0,  "1");
+    CLASS_ATTR_SAVE             (c,"mode", 1);
     
     CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_HoaRecomposer, f_ramp_time);
-	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time (ms)");
+	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time in milliseconds");
 	CLASS_ATTR_CATEGORY			(c,"ramp", 0, "Behavior");
     CLASS_ATTR_ACCESSORS		(c,"ramp", NULL, HoaRecomposer_ramp);
     CLASS_ATTR_ORDER			(c,"ramp", 0,  "2");
-    
-    CLASS_ATTR_SAVE             (c,"mode", 1);
     CLASS_ATTR_SAVE             (c,"ramp", 1);
     
 	class_dspinit(c);
@@ -117,7 +116,7 @@ void *HoaRecomposer_new(t_symbol *s, long argc, t_atom *argv)
         
         /* Base Attributes */
         
-		x->f_ambiRecomposer	= new AmbisonicsRecomposer(order, inputs, Hoa_Fixe, sys_getblksize(), sys_getsr());
+		x->f_ambiRecomposer	= new AmbisonicRecomposer(order, inputs, Hoa_Fixe, sys_getblksize(), sys_getsr());
         x->f_ambiRecomposer->setRampInMs(20.);
         
         x->f_ramp_time = x->f_ambiRecomposer->getRampInMs();

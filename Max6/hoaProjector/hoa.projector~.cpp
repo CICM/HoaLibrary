@@ -23,45 +23,42 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-#include "../../Sources/HoaLibrary.h"
-extern "C"
-{
-	#include "ext.h"
-	#include "ext_obex.h"
-	#include "z_dsp.h"
-}
+#include "../MaxConverter.h"
 
 typedef struct _HoaProjector
 {
-	t_pxobject					f_ob;			
-	AmbisonicsProjector			*f_AmbisonicsProjector;
+	t_pxobject			f_ob;			
+	AmbisonicProjector	*f_AmbisonicProjector;
+    t_atom_long         f_number_of_loudspeakers;
 
-	int							f_ninputs;
-	int							f_noutputs;
 } t_HoaProjector;
 
 void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv);
 void HoaProjector_free(t_HoaProjector *x);
 void HoaProjector_assist(t_HoaProjector *x, void *b, long m, long a, char *s);
 
-void HoaProjector_dsp(t_HoaProjector *x, t_signal **sp, short *count);
-t_int *HoaProjector_perform(t_int *w);
-
 void HoaProjector_dsp64(t_HoaProjector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaProjector_perform64(t_HoaProjector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void *HoaProjector_class;
+t_max_err loudspeakers_set(t_HoaProjector *x, t_object *attr, long argc, t_atom *argv);
+
+t_class* HoaProjector_class;
 
 int C74_EXPORT main(void)
 {	
-
 	t_class *c;
 	
 	c = class_new("hoa.projector~", (method)HoaProjector_new, (method)dsp_free, (long)sizeof(t_HoaProjector), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaProjector_dsp,			"dsp",		A_CANT, 0);
 	class_addmethod(c, (method)HoaProjector_dsp64,			"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaProjector_assist,			"assist",	A_CANT, 0);
+    
+    CLASS_ATTR_LONG                 (c, "loudspeakers", 0, t_HoaProjector, f_number_of_loudspeakers);
+	CLASS_ATTR_CATEGORY             (c, "loudspeakers", 0, "Behavior");
+    CLASS_ATTR_LABEL                (c, "loudspeakers", 0, "Number of Loudspeakers");
+	CLASS_ATTR_ACCESSORS            (c, "loudspeakers", NULL, loudspeakers_set);
+    CLASS_ATTR_ORDER                (c, "loudspeakers", 0, "1");
+    CLASS_ATTR_SAVE                 (c, "loudspeakers", 1);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -74,86 +71,66 @@ int C74_EXPORT main(void)
 void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaProjector *x = NULL;
-	int order = 4, outputs = 9;
-    x = (t_HoaProjector *)object_alloc((t_class*)HoaProjector_class);
+    t_dictionary *d;
+	int order = 4;
+    x = (t_HoaProjector *)object_alloc(HoaProjector_class);
 	if (x)
 	{
 		if(atom_gettype(argv) == A_LONG)
 			order	= atom_getlong(argv);
-		if(atom_gettype(argv+1) == A_LONG)
-			outputs	= atom_getlong(argv+1);
 		
-		x->f_AmbisonicsProjector	= new AmbisonicsProjector(order, outputs, sys_getblksize());
-		
-		dsp_setup((t_pxobject *)x, x->f_AmbisonicsProjector->getNumberOfInputs());
-		for (int i = 0; i < x->f_AmbisonicsProjector->getNumberOfOutputs(); i++)
+		x->f_AmbisonicProjector	= new AmbisonicProjector(order, 10, sys_getblksize());
+		x->f_number_of_loudspeakers = x->f_AmbisonicProjector->getNumberOfLoudspeakers();
+        
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicProjector->Ambisonics::getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicProjector->Planewaves::getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
 		
-	
+        x->f_ob.z_misc = Z_NO_INPLACE;
+        d = (t_dictionary *)gensym("#D")->s_thing;
+        if (d) attr_dictionary_process(x, d);
 	}
 	return (x);
 }
 
 void HoaProjector_dsp64(t_HoaProjector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_AmbisonicsProjector->setVectorSize(maxvectorsize);
-	object_method(dsp64, gensym("dsp_add64"), x, HoaProjector_perform64, 0, NULL);
+	x->f_AmbisonicProjector->setVectorSize(maxvectorsize);
+    object_method(dsp64, gensym("dsp_add64"), x, HoaProjector_perform64, 0, NULL);
 }
 
 void HoaProjector_perform64(t_HoaProjector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_AmbisonicsProjector->process(ins, outs);
-}
-
-void HoaProjector_dsp(t_HoaProjector *x, t_signal **sp, short *count)
-{
-	int i;
-	int pointer_count;
-	t_int **sigvec;
-	
-	x->f_ninputs = x->f_AmbisonicsProjector->getNumberOfInputs();
-	x->f_noutputs = x->f_AmbisonicsProjector->getNumberOfOutputs();
-	x->f_AmbisonicsProjector->setVectorSize(sp[0]->s_n);
-	pointer_count = x->f_AmbisonicsProjector->getNumberOfInputs() + x->f_AmbisonicsProjector->getNumberOfOutputs() + 2;
-	
-	sigvec  = (t_int **)malloc(pointer_count * sizeof(t_int *));
-	for(i = 0; i < pointer_count; i++)
-		sigvec[i] = (t_int *)malloc(sizeof(t_int));
-	
-	sigvec[0] = (t_int *)x;
-	sigvec[1] = (t_int *)sp[0]->s_n;
-	for(i = 2; i < pointer_count; i++)
-		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-	
-	dsp_addv(HoaProjector_perform, pointer_count, (void **)sigvec);
-	
-	free(sigvec);
-}
-
-t_int *HoaProjector_perform(t_int *w)
-{
-	t_HoaProjector *x		= (t_HoaProjector *)(w[1]);	
-	t_float		**ins	= (t_float **)w+3;
-	t_float		**outs	= (t_float **)w+3+x->f_ninputs;
-
-	x->f_AmbisonicsProjector->process(ins, outs);
-	
-	return (w + x->f_noutputs + x->f_ninputs + 3);
+	x->f_AmbisonicProjector->process(ins, outs);
 }
 
 void HoaProjector_assist(t_HoaProjector *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 	{
-		sprintf(s,"(Signal) Harmonic %ld", x->f_AmbisonicsProjector->getHarmonicIndex(a));
+		sprintf(s,"(Signal) %s", x->f_AmbisonicProjector->getHarmonicsName(a).c_str());
 	}
 	else 
-		sprintf(s,"(Signal) Virtual Microphone %ld", a);			
+		sprintf(s,"(Signal) %s",  x->f_AmbisonicProjector->getLoudspeakerName(a).c_str());
+}
+
+t_max_err loudspeakers_set(t_HoaProjector *x, t_object *attr, long argc, t_atom *argv)
+{
+    t_atom* state = CicmMax::dsp_stop((t_object *)x);
+    
+    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+        x->f_AmbisonicProjector->setNumberOfLoudspeakers(atom_getfloat(argv));
+    x->f_number_of_loudspeakers = x->f_AmbisonicProjector->getNumberOfLoudspeakers();
+    
+    CicmMax::resize_outlet((t_object *)x, x->f_AmbisonicProjector->getNumberOfLoudspeakers());
+    CicmMax::dsp_start(state);
+    
+    return MAX_ERR_NONE;
 }
 
 void HoaProjector_free(t_HoaProjector *x)
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_AmbisonicsProjector);
+	free(x->f_AmbisonicProjector);
 }
 

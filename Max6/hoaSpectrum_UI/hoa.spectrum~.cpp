@@ -21,24 +21,8 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "../MaxConverter.h"
 
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "ext_path.h"
-#include "ext_common.h"
-#include "jpatcher_api.h"
-#include "jgraphics.h"
-#include "jpatcher_syms.h"
-#include "ext_dictionary.h"
-#include "ext_globalsymbol.h"
-#include "ext_parameter.h"
-#include "z_dsp.h"
-}
-
-#define MAX_SPEAKER 64
 #define DEF_SPEAKER 8
 #define MAX_FREQ_BANDS 5
 #define OVERLED_DRAWTIME 1000
@@ -68,7 +52,7 @@ typedef struct  _spectrum
     void*       f_vector_outlet;
     void*       f_amplitude_outlet;
 	
-    AmbisonicsSpectrum* f_spectrum;
+    AmbisonicSpectrum* f_spectrum;
 } t_spectrum;
 
 t_class *spectrum_class;
@@ -87,8 +71,6 @@ t_max_err spectrum_notify(t_spectrum *x, t_symbol *s, t_symbol *msg, void *sende
 t_max_err number_of_loudspeakers_set(t_spectrum *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_of_loudspeakers_set(t_spectrum *x, void *attr, long ac, t_atom *av);
 t_max_err set_attr_nbands(t_spectrum *x, void *attr, long ac, t_atom *av);
-
-void spectrum_resize_inlet(t_spectrum *x, long lastNumberOfOutlet);
 
 /* Paint ------------------------------------- */
 void spectrum_getdrawparams(t_spectrum *x, t_object *patcherview, t_jboxdrawparams *params);
@@ -126,20 +108,17 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL			(c, "loudspeakers", 0, "Number of Loudspeakers");
 	CLASS_ATTR_SAVE				(c, "loudspeakers", 1);
     CLASS_ATTR_DEFAULT          (c, "loudspeakers", 0, "8");
-	CLASS_ATTR_ALIAS            (c, "loudspeakers", "ls");
-    CLASS_ATTR_ALIAS            (c, "loudspeakers", "channels");
     
 	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_spectrum,f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
 	CLASS_ATTR_SAVE				(c, "angles", 1);
-	CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
     
     CLASS_ATTR_LONG				(c, "nbands", 0, t_spectrum, f_number_of_bands);
     CLASS_ATTR_ACCESSORS		(c, "nbands", NULL, set_attr_nbands);
     CLASS_ATTR_ORDER			(c, "nbands", 0, "3");
-	CLASS_ATTR_LABEL			(c, "nbands", 0, "Number of frequency bands");
+	CLASS_ATTR_LABEL			(c, "nbands", 0, "Number of Frequency Bands");
     CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "nbands", 0, "3");
     
     CLASS_ATTR_LONG				(c, "interval", 0, t_spectrum, f_interval);
@@ -231,7 +210,7 @@ void *spectrum_new(t_symbol *s, int argc, t_atom *argv)
     x->f_amplitude_outlet = listout(x);
     x->f_vector_outlet = listout(x);
     
-    x->f_spectrum = new AmbisonicsSpectrum(x->f_number_of_loudspeakers, x->f_number_of_bands, sys_getmaxblksize(), sys_getsr());
+    x->f_spectrum = new AmbisonicSpectrum(x->f_number_of_loudspeakers, x->f_number_of_bands, sys_getmaxblksize(), sys_getsr());
     
     dictionary_getlong(d, gensym("loudspeakers"), &x->f_number_of_loudspeakers);
     
@@ -260,30 +239,21 @@ t_max_err number_of_loudspeakers_set(t_spectrum *x, t_object *attr, long argc, t
 {
     if(argc && argv)
     {
-        int dspState = sys_getdspobjdspstate((t_object*)x);
-        if(dspState)
-            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        t_atom* state = CicmMax::dsp_stop((t_object *)x);
         
         if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
-            x->f_number_of_loudspeakers = Tools::clip(long(atom_getfloat(argv)), long(1), long(MAX_SPEAKER));
+            x->f_number_of_loudspeakers = Tools::clip(atom_getfloat(argv), 1, MAX_SPEAKER);
                 
         if (x->f_number_of_loudspeakers == 1)
-            object_attr_setdisabled((t_object*)x, gensym("ls_angles"), 1);
+            object_attr_setdisabled((t_object*)x, gensym("angles"), 1);
         else
-            object_attr_setdisabled((t_object*)x, gensym("ls_angles"), 0);
+            object_attr_setdisabled((t_object*)x, gensym("angles"), 0);
         
         x->f_spectrum->setNumberOfLoudspeakers(x->f_number_of_loudspeakers);
-        spectrum_resize_inlet(x, x->f_number_of_loudspeakers);
         
-        if(dspState)
-            object_method(gensym("dsp")->s_thing, gensym("start"));
+        CicmMax::resize_inlet((t_object *)x, x->f_spectrum->getNumberOfInputs());
+        CicmMax::dsp_start(state);
         
-        long    argc = x->f_number_of_loudspeakers;
-        t_atom* argv = new t_atom[argc];
-        for(int i = 0; i < argc; i++)
-            atom_setfloat(argv+i, ((double)i / (double)x->f_number_of_loudspeakers) * 360.);
-        
-        object_method(x, gensym("angles"), argc, argv);
         object_attr_touch((t_object *)x, gensym("angles"));
     }
     return NULL;
@@ -656,22 +626,5 @@ void draw_spectrum(t_spectrum *x, t_object *view, t_rect *rect)
 		jbox_end_layer((t_object*)x, view, gensym("spectrum_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("spectrum_layer"), 0., 0.);
-}
-
-void spectrum_resize_inlet(t_spectrum *x, long lastNumberOfOutlet)
-{
-    int dspState = sys_getdspobjdspstate((t_object*)x);
-    if(dspState)
-        object_method(gensym("dsp")->s_thing, gensym("stop"));
-    
-    t_object *b = NULL;
-    object_obex_lookup(x, _sym_pound_B, (t_object **)&b);
-    object_method(b, gensym("dynlet_begin"));
-    
-    dsp_resize((t_pxobject*)x, x->f_number_of_loudspeakers);
-    object_method(b, gensym("dynlet_end"));
-
-    if(dspState)
-        object_method(gensym("dsp")->s_thing, gensym("start"));
 }
 

@@ -28,8 +28,6 @@
 
 #include "../HoaAmbisonics/Ambisonics.h"
 
-#define MAX_ENCODER_SIZE 36000
-
 class AmbisonicEncoder : public Ambisonics
 {
 	
@@ -79,7 +77,7 @@ public:
 	{
 		double angle = Tools::radianWrap(anAngle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(MAX_ENCODER_SIZE-1))];
+            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		process(anInput, outputs);
 	}
     
@@ -87,7 +85,7 @@ public:
 	{
         float angle = Tools::radianWrap(anAngle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(MAX_ENCODER_SIZE-1))];
+            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		process(anInput, outputs);
 	}
 		
@@ -140,7 +138,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
         Cicm_Vector_Double_Copy((double* )inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
@@ -159,7 +157,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
         Cicm_Vector_Float_Copy((float* )inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
@@ -192,7 +190,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -211,7 +209,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -249,7 +247,7 @@ public:
 	{
 		float angle = Tools::radianWrap(anAngle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(MAX_ENCODER_SIZE-1))];
+            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		process(anInput, outputs);
 	}
     
@@ -257,7 +255,7 @@ public:
 	{
         double angle = Tools::radianWrap(anAngle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(MAX_ENCODER_SIZE-1))];
+            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		process(anInput, outputs);
 	}
     
@@ -284,7 +282,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
         Cicm_Vector_Double_Add(inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
@@ -304,7 +302,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
         Cicm_Vector_Float_Add(inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
@@ -345,7 +343,7 @@ public:
 	{
 		double angle = Tools::radianWrap(anAngle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(MAX_ENCODER_SIZE-1))];
+            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		return processSplit(inputs, outputs);
 	}
 	
@@ -353,7 +351,7 @@ public:
 	{
 		float angle = Tools::radianWrap(anAngle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(MAX_ENCODER_SIZE-1))];
+            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		return processSplit(inputs, outputs);
 	}
     
@@ -380,7 +378,7 @@ public:
         int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
         Cicm_Vector_Double_Copy((double* )inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
@@ -399,7 +397,7 @@ public:
         int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(MAX_ENCODER_SIZE-1);
+			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
         Cicm_Vector_Float_Copy((float* )inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{

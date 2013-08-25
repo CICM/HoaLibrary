@@ -112,7 +112,7 @@ double Star::getAngle()
 
 double Star::getAbscissa()
 {
-    return Tools::abscisse(m_radius, m_angle + CICM_PI2);
+    return Tools::abscissa(m_radius, m_angle + CICM_PI2);
 }
 
 double Star::getOrdinate()
@@ -145,7 +145,7 @@ double Star::getDistanceToGalaxyLimit(double anAngle)
     anAngle = Tools::radianWrap(anAngle);
     if(m_galaxy_limit >= 0.)
     {
-        return Tools::distance_euclidean(getAbscissa(), getOrdinate(), Tools::abscisse(m_galaxy_limit, anAngle+ CICM_PI2), Tools::ordinate(m_galaxy_limit, anAngle+ CICM_PI2));
+        return Tools::distance_euclidean(getAbscissa(), getOrdinate(), Tools::abscissa(m_galaxy_limit, anAngle+ CICM_PI2), Tools::ordinate(m_galaxy_limit, anAngle+ CICM_PI2));
     }
     else
         return -1;

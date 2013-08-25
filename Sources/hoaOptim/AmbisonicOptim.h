@@ -51,9 +51,11 @@ private:
 	
 public:
 	AmbisonicOptim(long anOrder = 1, long anOptimMode = Hoa_InPhase_Optim, long aVectorSize = 0);
+    
+    double getCoefficient(long anIndex);
 	long getOptimMode();
 	void setOptimMode(long anOptim);
-
+    
 	~AmbisonicOptim();
 	
     /* Perform sample by sample */

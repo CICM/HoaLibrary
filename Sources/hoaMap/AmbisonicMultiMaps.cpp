@@ -35,7 +35,7 @@ AmbisonicsMultiMaps::AmbisonicsMultiMaps(long anOrder, long aNumberOfSources,lon
     
     for(int i = 0; i < m_number_of_sources; i++)
     {
-        m_maps.push_back(new AmbisonicsMap(m_order, m_vector_size));
+        m_maps.push_back(new AmbisonicMap(m_order, m_vector_size));
         setCoordinatesPolar(i, 1., 0.);
         m_mute[i] = 0;
     }

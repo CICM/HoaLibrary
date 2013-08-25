@@ -72,7 +72,7 @@ public:
      double getAngleInDegree() {return Tools::radToDeg(m_angleInRadian);}
      double getWiderValue() {return m_widerValue;}
      double getFisheyeStartAngle() { return m_fisheyeStartAngleInRadian; }
-     double getAbscissa() {return Tools::abscisse(m_distance, m_angleInRadian);}
+     double getAbscissa() {return Tools::abscissa(m_distance, m_angleInRadian);}
      double getOrdinate() {return Tools::ordinate(m_distance, m_angleInRadian);}
     
     //viewer :

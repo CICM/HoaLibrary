@@ -28,7 +28,7 @@
 AmbisonicsMeter::AmbisonicsMeter(long aNumberOfChannels, long aVectorSize, double aSamplingRate) : Planewaves(aNumberOfChannels, aVectorSize, aSamplingRate)
 {
 	
-    m_vectors = new AmbisonicsVector(m_number_of_loudspeakers, Hoa_Cartesian, aVectorSize);
+    m_vectors = new AmbisonicVector(m_number_of_loudspeakers, aVectorSize);
     for(int i = 0; i < 4; i++)
         m_vector_coordinates_double[i] = m_vector_coordinates_float[i] = 0.;
     

@@ -23,12 +23,10 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AMBISONISCWIDER
-#define DEF_AMBISONISCWIDER
+#ifndef DEF_AMBISONICWIDER
+#define DEF_AMBISONICWIDER
 
 #include "../HoaAmbisonics/Ambisonics.h"
-
-#define MAX_WIDER_SIZE 10000
 
 class AmbisonicWider : public Ambisonics
 {
@@ -70,7 +68,7 @@ public:
 	{
         double widenValue = Tools::clip(aWidenValue, 0., 1.);
         for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(widenValue*(double)(MAX_WIDER_SIZE-1))];
+            m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(widenValue*(double)(NUMBEROFLINEARPOINTS-1))];
         process(inputs, outputs);
 	}
     
@@ -78,7 +76,7 @@ public:
 	{
         float widenValue = Tools::clip(aWidenValue, 0., 1.);
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_wider_matrix[i][(int)(widenValue*(double)(MAX_WIDER_SIZE-1))];
+            m_harmonics_vector_float[i] = m_wider_matrix[i][(int)(widenValue*(double)(NUMBEROFLINEARPOINTS-1))];
 		process(inputs, outputs);
 	}
     
@@ -98,7 +96,7 @@ public:
 	{
         double widenValue = Tools::clip(aWidenValue, 0., 1.);
         for(int i = 0; i < m_number_of_harmonics; i++)
-           m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(widenValue*(double)(MAX_WIDER_SIZE-1))];
+           m_harmonics_vector_double[i] = m_wider_matrix[i][(int)(widenValue*(double)(NUMBEROFLINEARPOINTS-1))];
         process(ioVector);
 	}
 
@@ -106,7 +104,7 @@ public:
 	{
         float widenValue = Tools::clip(aWidenValue, 0., 1.);
         for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_wider_matrix[i][(int)(widenValue*(double)(MAX_WIDER_SIZE-1))];
+            m_harmonics_vector_float[i] = m_wider_matrix[i][(int)(widenValue*(double)(NUMBEROFLINEARPOINTS-1))];
         process(ioVector);
 	}
 
@@ -133,7 +131,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(MAX_WIDER_SIZE-1);
+			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_wider_matrix[i];
@@ -151,7 +149,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(MAX_WIDER_SIZE-1);
+			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_wider_matrix[i];
@@ -183,7 +181,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(MAX_WIDER_SIZE-1);
+			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_wider_matrix[i];
@@ -201,7 +199,7 @@ public:
 		int index;
 		Cicm_Vector_Double pointor;
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(MAX_WIDER_SIZE-1);
+			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_wider_matrix[i];

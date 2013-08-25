@@ -27,9 +27,12 @@
 
 Planewaves::Planewaves(long aNumberOfLoudspeakers, long aVectorSize, double aSamplingRate)
 {
-    m_angles_of_loudspeakers = NULL;
-    m_abscissa_of_loudspeakers = NULL;
-    m_ordinate_of_loudspeakers = NULL;
+    m_angles_of_loudspeakers_double = NULL;
+    m_angles_of_loudspeakers_float  = NULL;
+    m_abscissa_of_loudspeakers_double = NULL;
+    m_abscissa_of_loudspeakers_float  = NULL;
+    m_ordinate_of_loudspeakers_double = NULL;
+    m_ordinate_of_loudspeakers_float  = NULL;
     
 	setVectorSize(aVectorSize);
     setSamplingRate(aSamplingRate);
@@ -64,7 +67,23 @@ long Planewaves::getNumberOfLoudspeakers()
 double Planewaves::getLoudspeakerAngle(long anIndex)
 {
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
-        return m_angles_of_loudspeakers[anIndex] / CICM_2PI * 360.;
+        return m_angles_of_loudspeakers_double[anIndex] / CICM_2PI * 360.;
+    else
+        return 0.;
+}
+
+double Planewaves::getLoudspeakerAbscissa(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
+        return m_abscissa_of_loudspeakers_double[anIndex];
+    else
+        return 0.;
+}
+
+double Planewaves::getLoudspeakerOrdinate(long anIndex)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
+        return m_ordinate_of_loudspeakers_double[anIndex];
     else
         return 0.;
 }
@@ -72,7 +91,7 @@ double Planewaves::getLoudspeakerAngle(long anIndex)
 std::string Planewaves::getLoudspeakerName(long anIndex)
 {
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
-        return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(m_angles_of_loudspeakers[anIndex]/ CICM_2PI * 360.) + "°";
+        return "Channel " + Tools::intToString(anIndex) + " : " + Tools::floatToStringOneDecimal(m_angles_of_loudspeakers_double[anIndex]/ CICM_2PI * 360.) + "°";
     else
         return "No channel";
 }
@@ -83,63 +102,64 @@ void Planewaves::computeConfiguration(bool standardOnOff)
     {
         if(m_number_of_loudspeakers == 1)          // Mono //
         {
-            m_angles_of_loudspeakers[0] = 0.;
+            m_angles_of_loudspeakers_double[0] = 0.;
         }
         else if(m_number_of_loudspeakers == 2)     // Stereo //
         {
-            m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 330. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[0] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[1] = 330. / 360. * CICM_2PI;
         }
         else if(m_number_of_loudspeakers == 3)     // Dolby Surround //
         {
-            m_angles_of_loudspeakers[0] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 180. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 330. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[0] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[1] = 180. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[2] = 330. / 360. * CICM_2PI;
         }
         else if(m_number_of_loudspeakers == 4)     // Quadriphonic //
         {
-            m_angles_of_loudspeakers[0] = 45. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 135. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 225. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 315. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[0] = 45. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[1] = 135. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[2] = 225. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[3] = 315. / 360. * CICM_2PI;
         }
         else if(m_number_of_loudspeakers == 5)     // Surround 5.1 //
         {
-            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 250. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[4] = 330. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[0] = 0. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[1] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[2] = 110. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[3] = 250. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[4] = 330. / 360. * CICM_2PI;
         }
         else if(m_number_of_loudspeakers == 6)     // Surround 6.1 //
         {
-            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 180. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[4] = 250. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[5] = 330. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[0] = 0. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[1] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[2] = 110. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[3] = 180. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[4] = 250. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[5] = 330. / 360. * CICM_2PI;
         }
         else if(m_number_of_loudspeakers == 7)     // Surround 7.1 //
         {
-            m_angles_of_loudspeakers[0] = 0. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[1] = 30. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[2] = 110. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[3] = 135 / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[4] = 225 / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[5] = 250. / 360. * CICM_2PI;
-            m_angles_of_loudspeakers[6] = 330. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[0] = 0. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[1] = 30. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[2] = 110. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[3] = 135 / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[4] = 225 / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[5] = 250. / 360. * CICM_2PI;
+            m_angles_of_loudspeakers_double[6] = 330. / 360. * CICM_2PI;
         }
     }
     else                   // Ambisonics base //
     {
         for (int i = 0; i < (long)m_number_of_loudspeakers; i++)
-            m_angles_of_loudspeakers[i] = (double)i / (double)(m_number_of_loudspeakers) * CICM_2PI;
+            m_angles_of_loudspeakers_double[i] = (double)i / (double)(m_number_of_loudspeakers) * CICM_2PI;
     }
     for (int i = 0; i < m_number_of_loudspeakers; i++)
     {
-        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
-        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
+        m_angles_of_loudspeakers_float[i] = m_angles_of_loudspeakers_double[i];
+        m_abscissa_of_loudspeakers_float[i] = m_abscissa_of_loudspeakers_double[i] = Tools::abscissa(1., m_angles_of_loudspeakers_double[i]);
+        m_ordinate_of_loudspeakers_float[i] = m_ordinate_of_loudspeakers_double[i] = Tools::ordinate(1., m_angles_of_loudspeakers_double[i]);
     }
 }
 
@@ -149,17 +169,27 @@ void Planewaves::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standa
     m_number_of_inputs          = m_number_of_loudspeakers;
 	m_number_of_outputs         = m_number_of_loudspeakers;
     
-    if(m_angles_of_loudspeakers)
-        free(m_angles_of_loudspeakers);
-    if(m_abscissa_of_loudspeakers)
-        free(m_abscissa_of_loudspeakers);
-    if(m_ordinate_of_loudspeakers)
-        free(m_ordinate_of_loudspeakers);
+    if(m_angles_of_loudspeakers_double)
+        Cicm_Free(m_angles_of_loudspeakers_double);
+    if(m_abscissa_of_loudspeakers_double)
+        Cicm_Free(m_abscissa_of_loudspeakers_double);
+    if(m_ordinate_of_loudspeakers_double)
+        Cicm_Free(m_ordinate_of_loudspeakers_double);
+    if(m_angles_of_loudspeakers_float)
+        Cicm_Free(m_angles_of_loudspeakers_float);
+    if(m_abscissa_of_loudspeakers_float)
+        Cicm_Free(m_abscissa_of_loudspeakers_float);
+    if(m_ordinate_of_loudspeakers_float)
+        Cicm_Free(m_ordinate_of_loudspeakers_float);
     
     /* Define standard configuration */
-    m_angles_of_loudspeakers    = new double[m_number_of_loudspeakers];
-    m_abscissa_of_loudspeakers  = new double[m_number_of_loudspeakers];
-    m_ordinate_of_loudspeakers  = new double[m_number_of_loudspeakers];
+    Cicm_Vector_Double_Malloc(m_angles_of_loudspeakers_double, m_number_of_loudspeakers);
+    Cicm_Vector_Double_Malloc(m_abscissa_of_loudspeakers_double, m_number_of_loudspeakers);
+    Cicm_Vector_Double_Malloc(m_ordinate_of_loudspeakers_double, m_number_of_loudspeakers);
+    Cicm_Vector_Float_Malloc(m_angles_of_loudspeakers_float, m_number_of_loudspeakers);
+    Cicm_Vector_Float_Malloc(m_abscissa_of_loudspeakers_float, m_number_of_loudspeakers);
+    Cicm_Vector_Float_Malloc(m_ordinate_of_loudspeakers_float, m_number_of_loudspeakers);
+
     computeConfiguration(standardOnOff);
 }
 
@@ -168,13 +198,16 @@ void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
     {
         anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
-        m_angles_of_loudspeakers[anIndex] = anAngle;
+        m_angles_of_loudspeakers_double[anIndex] = anAngle;
     }
-    Tools::sortVector(m_angles_of_loudspeakers, m_number_of_loudspeakers);
+    
+    Tools::sortVector(m_angles_of_loudspeakers_double, m_number_of_loudspeakers);
+    
     for (int i = 0; i < m_number_of_loudspeakers; i++)
     {
-        m_abscissa_of_loudspeakers[i] = Tools::abscisse(1., m_angles_of_loudspeakers[i]);
-        m_ordinate_of_loudspeakers[i] = Tools::ordinate(1., m_angles_of_loudspeakers[i]);
+        m_angles_of_loudspeakers_float[i] = m_angles_of_loudspeakers_double[i];
+        m_abscissa_of_loudspeakers_float[i] = m_abscissa_of_loudspeakers_double[i] = Tools::abscissa(1., m_angles_of_loudspeakers_double[i]);
+        m_ordinate_of_loudspeakers_float[i] = m_ordinate_of_loudspeakers_double[i] = Tools::ordinate(1., m_angles_of_loudspeakers_double[i]);
     }
 }
 
@@ -185,13 +218,22 @@ void Planewaves::setVectorSize(long aVectorSize)
 
 void Planewaves::setSamplingRate(long aSamplingRate)
 {
-	m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
+	m_sampling_rate = Tools::clip_min(aSamplingRate, 1);
 }
 
 Planewaves::~Planewaves()
 {
-	free(m_angles_of_loudspeakers);
-    free(m_abscissa_of_loudspeakers);
-    free(m_ordinate_of_loudspeakers);
+	if(m_angles_of_loudspeakers_double)
+        Cicm_Free(m_angles_of_loudspeakers_double);
+    if(m_abscissa_of_loudspeakers_double)
+        Cicm_Free(m_abscissa_of_loudspeakers_double);
+    if(m_ordinate_of_loudspeakers_double)
+        Cicm_Free(m_ordinate_of_loudspeakers_double);
+    if(m_angles_of_loudspeakers_float)
+        Cicm_Free(m_angles_of_loudspeakers_float);
+    if(m_abscissa_of_loudspeakers_float)
+        Cicm_Free(m_abscissa_of_loudspeakers_float);
+    if(m_ordinate_of_loudspeakers_float)
+        Cicm_Free(m_ordinate_of_loudspeakers_float);
 }
 

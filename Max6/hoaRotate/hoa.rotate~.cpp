@@ -35,7 +35,7 @@ extern "C"
 typedef struct _HoaRotate 
 {
 	t_pxobject					f_ob;			
-	AmbisonicsRotate			*f_ambiRotate;
+	AmbisonicRotate			*f_ambiRotate;
 
 } t_HoaRotate;
 
@@ -81,7 +81,7 @@ void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		
-		x->f_ambiRotate = new AmbisonicsRotate(order, sys_getblksize());
+		x->f_ambiRotate = new AmbisonicRotate(order, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiRotate->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiRotate->getNumberOfOutputs(); i++) 

@@ -27,8 +27,9 @@
 #define DEF_MAX_CONVERTER
 
 #include "../Sources/HoaLibrary.h"
+
 extern "C"
-{
+{    
 #include "ext.h"
 #include "ext_obex.h"
 #include "ext_common.h"
@@ -39,9 +40,14 @@ extern "C"
 #include "ext_globalsymbol.h"
 #include "commonsyms.h"
 #include "ext_parameter.h"
+#include "jpatcher_syms.h"
+#include "z_dsp.h"
 }
 
-class CicmMax {
+#define MAX_SPEAKER 256
+
+class CicmMax
+{
 public:
     static t_jrgba cicmColorToMaxColor(color aCicmColor)
     {
@@ -106,6 +112,185 @@ public:
     static double cicmAbscissaToMaxOrdinate(double aCicmOrdinate, t_rect* aMaxRect, double aZoomfactor = 1.)
     {
         return aMaxRect->height / 2. + aZoomfactor * aCicmOrdinate * aMaxRect->height / -2.;
+    }
+    
+    /**************************************************************************************/
+    /*********************************** DSP UPDATE ***************************************/
+    /**************************************************************************************/
+    
+    static t_atom* dsp_stop(t_object* x)
+    {
+        t_atom* state = new t_atom[1];
+        if(!sys_getdspobjdspstate((t_object *)x))
+        {
+            atom_setsym(state, gensym("dsp_off"));
+        }
+        else
+        {
+            t_object* patch = NULL;
+            t_object* dac = NULL;
+     
+            if(object_obex_lookup(x, gensym("#P"), (t_object **)&patch))
+            {
+                t_object* box;
+                box = jpatcher_get_firstobject(patch);
+                while(box)
+                {
+                    if(object_classname(jbox_get_object(box)) == gensym("dac~") || object_classname(jbox_get_object(box)) == gensym("ezdac~") || object_classname(jbox_get_object(box)) == gensym("adc~") || object_classname(jbox_get_object(box)) == gensym("ezadc~"))
+                    {
+                        dac = jbox_get_object(box);
+                    }
+                    
+                    box = jbox_get_nextobject(box);
+                }
+            }
+            if(dac == NULL)
+            {
+                atom_setsym(state, gensym("dsp_on"));
+            }
+            else
+            {
+                atom_setobj(state, dac);
+            }
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        }
+        return state;
+    }
+    
+    static void dsp_start(t_atom* x)
+    {
+        if(atom_gettype(x) == A_SYM && atom_getsym(x) == gensym("dsp_off"))
+        {
+            free(x);
+            return;
+        }
+        else if(atom_gettype(x) == A_SYM && atom_getsym(x) == gensym("dsp_on"))
+        {
+            free(x);
+            object_method(gensym("dsp")->s_thing, gensym("start"));
+        }
+        else if(atom_gettype(x) == A_OBJ)
+        {
+            object_method(x, gensym("startwindow"));
+            free(x);
+        }
+    }
+    
+    static void resize_inlet(t_object* x, long aNumberOfInlet)
+    {
+        int dspState = sys_getdspobjdspstate((t_object *)x);
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        
+        if(aNumberOfInlet <= 0)
+            aNumberOfInlet = 1;
+        
+        t_object *b = NULL;
+        object_obex_lookup(x, gensym("#B"), (t_object **)&b);
+        object_method(b, gensym("dynlet_begin"));
+        
+        dsp_resize((t_pxobject*)x, aNumberOfInlet);
+        object_method(b, gensym("dynlet_end"));
+    }
+    
+    static void resize_outlet(t_object* x, long aNumberOfOutlet)
+    {
+        int dspState = sys_getdspobjdspstate((t_object *)x);
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        
+        if(aNumberOfOutlet <= 0)
+            aNumberOfOutlet = 1;
+        
+        long num_outlet = outlet_count((t_object *)x);
+        
+        t_object *b = NULL;
+        
+        object_obex_lookup(x, gensym("#B"), (t_object **)&b);
+        object_method(b, gensym("dynlet_begin"));
+        
+        if(num_outlet > aNumberOfOutlet)
+        {
+            for(int i = num_outlet; i > aNumberOfOutlet; i--)
+            {
+                outlet_delete(outlet_nth((t_object*)x, i-1));
+            }
+        }
+        else if(num_outlet < aNumberOfOutlet)
+        {
+            for(int i = num_outlet; i < aNumberOfOutlet; i++)
+            {
+                outlet_append((t_object*)x, NULL, gensym("signal"));
+            }
+        }
+        
+        object_method(b, gensym("dynlet_end"));
+    }
+    
+    static void connect_outlet(t_object* x)
+    {
+        t_object *patcher;
+        t_object *object_outlet;
+        t_object *object_inlet;
+        t_object *line;
+        t_max_err err;
+        
+        err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        err = object_obex_lookup(x, gensym("#B"), (t_object **)&object_outlet);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+        {
+            if (jpatchline_get_box1(line) == object_outlet)
+            {
+                object_inlet = jpatchline_get_box2(line);
+                if(outlet_count(jbox_get_object(object_inlet)) == outlet_count((t_object *)x))
+                {
+                    for(int i = 0; i < outlet_count((t_object *)x); i++)
+                    {
+                        t_atom msg[4];
+                        t_atom rv;
+                        
+                        atom_setobj(msg, object_outlet);
+                        atom_setlong(msg + 1, i);
+                        atom_setobj(msg + 2, object_inlet);
+                        atom_setlong(msg + 3, i);
+                        
+                        object_method_typed(patcher , gensym("connect"), 4, msg, &rv);
+                    }
+                }
+            }
+        }
+    }
+    
+    static void rename_object(t_object* x, int argc, t_atom* argv)
+    {
+        t_max_err   err;
+        t_object    *jbox_object;
+        char        name[256];
+        char        tempory[256];
+        
+        err = object_obex_lookup(x, gensym("#B"), (t_object **)&jbox_object);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        strcpy(name, jbox_get_maxclass(jbox_object)->s_name);
+        for(int i = 0; i < argc; i++)
+        {
+            if(atom_gettype(argv+i) == A_SYM)
+                sprintf(tempory, " %s", atom_getsym(argv+i)->s_name);
+            else if(atom_gettype(argv+i) == A_LONG)
+                sprintf(tempory, " %ld", (long)atom_getlong(argv+i));
+            else if(atom_gettype(argv+i) == A_FLOAT)
+                sprintf(tempory, " %f", atom_getfloat(argv+i));
+            
+            strcat(name, tempory);
+        }
+        object_method(jbox_get_textfield((t_object *)jbox_object), gensym("settext"), name);
     }
     
 };

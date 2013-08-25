@@ -36,7 +36,7 @@ AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aMode, long aVectorSize) :
     m_encoder_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
-		Cicm_Vector_Double_Malloc(m_encoder_matrix[i], MAX_ENCODER_SIZE);
+		Cicm_Vector_Double_Malloc(m_encoder_matrix[i], NUMBEROFCIRCLEPOINTS);
 	}
 	Cicm_Vector_Float_Malloc(m_harmonics_vector_float, m_number_of_harmonics);
 	Cicm_Vector_Double_Malloc(m_harmonics_vector_double, m_number_of_harmonics);
@@ -49,13 +49,13 @@ AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aMode, long aVectorSize) :
 	{
         if(getHarmonicIndex(i) >= 0)
         {
-            for(int j = 0; j < MAX_ENCODER_SIZE; j++)
-                m_encoder_matrix[i][j] = cos((double)getHarmonicOrder(i) * (((double)j / (double)MAX_ENCODER_SIZE) * (double)CICM_2PI));
+            for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
+                m_encoder_matrix[i][j] = cos((double)getHarmonicOrder(i) * (((double)j / (double)NUMBEROFCIRCLEPOINTS) * (double)CICM_2PI));
         }
         else
         {
-            for(int j = 0; j < MAX_ENCODER_SIZE; j++)
-                m_encoder_matrix[i][j] = sin((double)getHarmonicOrder(i) * (((double)j / (double)MAX_ENCODER_SIZE) * (double)CICM_2PI));
+            for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
+                m_encoder_matrix[i][j] = sin((double)getHarmonicOrder(i) * (((double)j / (double)NUMBEROFCIRCLEPOINTS) * (double)CICM_2PI));
         }
     }
 	setAngle(0.);
@@ -70,7 +70,7 @@ void AmbisonicEncoder::setAngle(double anAngle)
 {
     float angle = Tools::radianWrap(anAngle) / CICM_2PI;
     for(int i = 0; i < m_number_of_harmonics; i++)
-        m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(MAX_ENCODER_SIZE-1))];
+        m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
 }
 
 void AmbisonicEncoder::setVectorSize(long aVectorSize)
@@ -89,7 +89,7 @@ void AmbisonicEncoder::setVectorSize(long aVectorSize)
 
 AmbisonicEncoder::~AmbisonicEncoder()
 {
-	for(int i = 0; i < MAX_ENCODER_SIZE; i++)
+	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
 		Cicm_Free(m_encoder_matrix[i]);
 	}

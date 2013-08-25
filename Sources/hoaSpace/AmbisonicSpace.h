@@ -26,75 +26,116 @@
 #ifndef DEF_AMBISONICSPACE
 #define DEF_AMBISONICSPACE
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Planewaves.h"
 
 #define RAMP_SAMPLE 4410
 
-class AmbisonicSpace{
-	
+class AmbisonicSpace : public Planewaves
+{
 private:
-	long		m_number_of_microphones;
-	long		m_number_of_inputs;
-	long		m_number_of_outputs;
-	long		m_vector_size;
+    vector <CicmLine*>   m_lines;
+    Cicm_Vector_Float	m_vector_float;
+    Cicm_Vector_Double	m_vector_double;
     
-    double*      m_microphones_coefficients_old;
-	double*      m_microphones_coefficients_new;
-    double*      m_microphones_coefficients_step;
-    long        m_counter;
 public:
-	AmbisonicSpace(long aNumberOfMicrophones, long aVectorSize = 0);
+	AmbisonicSpace(long aNumberOfLoudspeakers, long aVectorSize = 0, long aSamplingRate = 44100);
 	
-	long getNumberOfMicrophones();
-	long getNumberOfInputs();
-	long getNumberOfOutputs();
-	long getVectorSize();
     double  getCoefficient(long anIndex);
+    long    getRampInSample();
+    double  getRampInMs();
 
     void setCoefficient(long anIndex, double aCoefficient);
     void setCoefficient(double* aCoefficientVector);
     void setCoefficient(float* aCoefficientVector);
+    void setRampInSample(long aTimeInSample);
+    void setRampInMs(double aTimeInMs);
 	void setVectorSize(long aVectorSize);
+    void setSamplingRate(long aSamplingRate);
+    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff = 0);
+    
 	~AmbisonicSpace();
 	
-	/* Perform sample by sample */
-	template<typename Type> void process(Type* anInput, Type *anOutput)
+	/************************************************************************************/
+    /***************************** Perform sample by sample *****************************/
+    /************************************************************************************/
+    
+    /*********************************** Out Of Place ***********************************/
+    
+	inline void process(const double* inputs, double* outputs)
 	{
-		for (int i = 0; i < m_number_of_microphones; i++)
+		for (int i = 0; i < m_number_of_loudspeakers; i++)
 		{
-            m_microphones_coefficients_old[i] += m_microphones_coefficients_step[i];
-			anOutput[i]	= anInput[i] * m_microphones_coefficients_old[i];
+            outputs[i] = m_lines[i]->process() * inputs[i];
 		}
-        if(m_counter++ >= RAMP_SAMPLE)
-        {
-            for (int i = 0; i < m_number_of_microphones; i++)
-            {
-                m_microphones_coefficients_step[i] = 0.;
-                m_microphones_coefficients_old[i] = m_microphones_coefficients_new[i];
-            }
-            m_counter = 0;
-        }
+	}
+    
+    inline void process(const float* inputs, float* outputs)
+	{
+		for (int i = 0; i < m_number_of_loudspeakers; i++)
+		{
+            outputs[i] = m_lines[i]->process() * inputs[i];
+		}
 	}
 	
-	/* Perform sample block */	
-	template<typename Type> void process(Type** anInputVector, Type** anOutputVector)
+    /************************************* In Place *************************************/
+    
+    inline void process(double* ioVector)
 	{
-        for(int j = 0; j < m_vector_size; j++)
+        for (int i = 0; i < m_number_of_loudspeakers; i++)
 		{
-            for (int i = 0; i < m_number_of_microphones; i++)
-            {
-                m_microphones_coefficients_old[i] += m_microphones_coefficients_step[i];
-                anOutputVector[i][j]	= anInputVector[i][j] * m_microphones_coefficients_old[i];
-            }
-            if(m_counter++ >= RAMP_SAMPLE)
-            {
-                for (int i = 0; i < m_number_of_microphones; i++)
-                {
-                    m_microphones_coefficients_step[i] = 0.;
-                    m_microphones_coefficients_old[i] = m_microphones_coefficients_new[i];
-                }
-                m_counter = 0;
-            }
+            ioVector[i] *= m_lines[i]->process();
+		}
+	}
+    
+    inline void process(float* ioVector)
+	{
+        for (int i = 0; i < m_number_of_loudspeakers; i++)
+		{
+            ioVector[i] *= m_lines[i]->process();
+		}
+	}
+    
+	/************************************************************************************/
+    /******************************* Perform sample block *******************************/
+    /************************************************************************************/
+    
+    /*********************************** Out Of Place ***********************************/
+    
+    inline void process(const double* const* inputs, double** outputs)
+	{
+		for (int i = 0; i < m_number_of_loudspeakers; i++)
+		{
+            m_lines[i]->process(m_vector_double);
+            Cicm_Vector_Vector_Double_Mul(inputs[i], m_vector_double, outputs[i], m_vector_size);
+		}
+	}
+    
+    inline void process(const float* const* inputs, float** outputs)
+	{
+        for (int i = 0; i < m_number_of_loudspeakers; i++)
+		{
+            m_lines[i]->process(m_vector_float);
+            Cicm_Vector_Vector_Float_Mul(inputs[i], m_vector_float, outputs[i], m_vector_size);
+		}
+	}
+    
+    /************************************* In Place *************************************/
+    
+    inline void process(double** ioVectors)
+	{
+		for (int i = 0; i < m_number_of_loudspeakers; i++)
+		{
+            m_lines[i]->process(m_vector_double);
+            Cicm_Vector_Double_Mul(m_vector_double, ioVectors[i], m_vector_size);
+		}
+	}
+    
+    inline void process(float** ioVectors)
+	{
+        for (int i = 0; i < m_number_of_loudspeakers; i++)
+		{
+            m_lines[i]->process(m_vector_float);
+            Cicm_Vector_Float_Mul(m_vector_float, ioVectors[i], m_vector_size);
 		}
 	}
 	
