@@ -33,7 +33,6 @@ typedef struct _pi
 {	
 	t_pxobject  p_ob;
 	double      p_value;
-
 } t_pi;
 
 void pi_bang(t_pi *x);
