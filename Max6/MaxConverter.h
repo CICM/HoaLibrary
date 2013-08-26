@@ -46,6 +46,18 @@ extern "C"
 
 #define MAX_SPEAKER 256
 
+typedef struct _Hoa
+{
+    long    order;
+    double  color_positive[4];
+	double  color_negative[4];
+    long    auto_connect;
+    
+    long    argc;
+    t_atom* argv;
+    
+} t_Hoa;
+
 class CicmMax
 {
 public:
@@ -112,6 +124,157 @@ public:
     static double cicmAbscissaToMaxOrdinate(double aCicmOrdinate, t_rect* aMaxRect, double aZoomfactor = 1.)
     {
         return aMaxRect->height / 2. + aZoomfactor * aCicmOrdinate * aMaxRect->height / -2.;
+    }
+    
+    /**************************************************************************************/
+    /****************************** AMBISONIC CLASS INIT **********************************/
+    /**************************************************************************************/
+    
+    static void hoa_init(t_object* x, t_Hoa* ambisonic, long argc, t_atom* argv)
+    {
+        if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+        {
+            ambisonic->order = (long)atom_getfloat(argv);
+        }
+        ambisonic->argc = argc;
+        ambisonic->argv = new t_atom[ambisonic->argc];
+        for(int i = 0; i < ambisonic->argc; i++)
+            ambisonic->argv[i] = argv[i];
+        
+        OBJ_ATTR_LONG           ((t_object *)x,"order", 0, ambisonic->order);
+        OBJ_ATTR_ATTR_FORMAT    ((t_object *)x,"order","label",    USESYM(symbol),0,"s",gensym_tr("Ambisonic Order"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"order","category", USESYM(symbol),0,str_tr("HoaLibrary"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"order","order",    USESYM(long),  0,"1");
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"order","save",     USESYM(long),  1,"1");
+    
+        ambisonic->color_positive[0] = 0.;
+        ambisonic->color_positive[1] = 0.;
+        ambisonic->color_positive[2] = 1.;
+        ambisonic->color_positive[3] = 1.;
+        OBJ_ATTR_DOUBLE_ARRAY   ((t_object *)x,"poscolor", 0, 4, ambisonic->color_positive);
+        OBJ_ATTR_ATTR_FORMAT    ((t_object *)x,"poscolor","label",    USESYM(symbol), 0,"s",gensym_tr("Positive Color"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"poscolor","style",    USESYM(symbol), 0,"rgba");
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"poscolor","category", USESYM(symbol), 0,str_tr("HoaLibrary"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"poscolor","order",    USESYM(long),   0,"2");
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"poscolor","save",     USESYM(long),   0,"1");
+        
+        ambisonic->color_negative[0] = 1.;
+        ambisonic->color_negative[1] = 0.;
+        ambisonic->color_negative[2] = 0.;
+        ambisonic->color_negative[3] = 1.;
+        OBJ_ATTR_DOUBLE_ARRAY   ((t_object *)x,"negcolor", 0, 4, ambisonic->color_negative);
+        OBJ_ATTR_ATTR_FORMAT    ((t_object *)x,"negcolor","label",    USESYM(symbol),0,"s",gensym_tr("Negative Color"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"negcolor","style",    USESYM(symbol),0,"rgba");
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"negcolor","category", USESYM(symbol),0,str_tr("HoaLibrary"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"negcolor","order",    USESYM(long),  0,"3");
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"negcolor","save",     USESYM(long),  1,"1");
+        
+        ambisonic->auto_connect = 1;
+        OBJ_ATTR_LONG           ((t_object *)x,"autoconnect", 0, ambisonic->auto_connect);
+        OBJ_ATTR_ATTR_FORMAT    ((t_object *)x,"autoconnect","label",    USESYM(symbol),0,"s",gensym_tr("Auto Connection"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"autoconnect","style",    USESYM(symbol),0,"onoff");
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"autoconnect","category", USESYM(symbol),0,str_tr("HoaLibrary"));
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"autoconnect","order",    USESYM(long),  0,"4");
+        OBJ_ATTR_ATTR_PARSE     ((t_object *)x,"autoconnect","save",     USESYM(long),  1,"1");
+    }
+    
+    static void connect_outlet_harmonics(t_object* x)
+    {
+        t_object *patcher;
+        t_object *object_outlet;
+        t_object *object_inlet;
+        t_object *line;
+        t_max_err err;
+        
+        err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        err = object_obex_lookup(x, gensym("#B"), (t_object **)&object_outlet);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+        {
+            if (jpatchline_get_box1(line) == object_outlet && jpatchline_get_outletnum(line) == 0)
+            {
+                object_inlet = jpatchline_get_box2(line);
+                if(object_attr_getlong(x, gensym("order")) <= object_attr_getlong(object_inlet, gensym("order")) && jpatchline_get_inletnum(line) == 0)
+                {
+                    for(int i = 0; i < object_attr_getlong(x, gensym("order")) * 2 + 1; i++)
+                    {
+                        t_atom msg[4];
+                        t_atom rv;
+                        
+                        atom_setobj(msg, object_outlet);
+                        atom_setlong(msg + 1, i);
+                        atom_setobj(msg + 2, object_inlet);
+                        atom_setlong(msg + 3, i);
+                        
+                        object_method_typed(patcher, gensym("connect"), 4, msg, &rv);
+                    }
+                }
+            }
+        }
+    }
+    
+    static void color_outlet_chords(t_object* x)
+    {
+        t_object *patcher;
+        t_object *object_outlet;
+        t_object *line;
+        t_max_err err;
+        t_jrgba   color;
+        
+        err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        err = object_obex_lookup(x, gensym("#B"), (t_object **)&object_outlet);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+        {
+            if (jpatchline_get_box1(line) == object_outlet)
+            {
+                if(jpatchline_get_outletnum(line)%2 == 0)
+                {
+                    object_attr_getjrgba(x, gensym("poscolor"), &color);
+                }
+                else
+                {
+                    object_attr_getjrgba(x, gensym("negcolor"), &color);
+                }
+                jpatchline_set_color(line, &color);
+            }
+        }
+    }
+    
+    static void rename_object(t_object* x, int argc, t_atom* argv)
+    {
+        t_max_err   err;
+        t_object    *jbox_object;
+        char        name[256];
+        char        tempory[256];
+        
+        err = object_obex_lookup(x, gensym("#B"), (t_object **)&jbox_object);
+        if (err != MAX_ERR_NONE)
+            return;
+        
+        strcpy(name, jbox_get_maxclass(jbox_object)->s_name);
+        for(int i = 0; i < argc; i++)
+        {
+            if(atom_gettype(argv+i) == A_SYM)
+                sprintf(tempory, " %s", atom_getsym(argv+i)->s_name);
+            else if(atom_gettype(argv+i) == A_LONG)
+                sprintf(tempory, " %ld", (long)atom_getlong(argv+i));
+            else if(atom_gettype(argv+i) == A_FLOAT)
+                sprintf(tempory, " %f", atom_getfloat(argv+i));
+            
+            strcat(name, tempory);
+        }
+        object_method(jbox_get_textfield((t_object *)jbox_object), gensym("settext"), name);
     }
     
     /**************************************************************************************/
@@ -248,7 +411,7 @@ public:
             if (jpatchline_get_box1(line) == object_outlet)
             {
                 object_inlet = jpatchline_get_box2(line);
-                if(outlet_count(jbox_get_object(object_inlet)) == outlet_count((t_object *)x))
+                if(outlet_count(jbox_get_object(object_inlet)) >= outlet_count((t_object *)x))
                 {
                     for(int i = 0; i < outlet_count((t_object *)x); i++)
                     {
@@ -267,31 +430,7 @@ public:
         }
     }
     
-    static void rename_object(t_object* x, int argc, t_atom* argv)
-    {
-        t_max_err   err;
-        t_object    *jbox_object;
-        char        name[256];
-        char        tempory[256];
-        
-        err = object_obex_lookup(x, gensym("#B"), (t_object **)&jbox_object);
-        if (err != MAX_ERR_NONE)
-            return;
-        
-        strcpy(name, jbox_get_maxclass(jbox_object)->s_name);
-        for(int i = 0; i < argc; i++)
-        {
-            if(atom_gettype(argv+i) == A_SYM)
-                sprintf(tempory, " %s", atom_getsym(argv+i)->s_name);
-            else if(atom_gettype(argv+i) == A_LONG)
-                sprintf(tempory, " %ld", (long)atom_getlong(argv+i));
-            else if(atom_gettype(argv+i) == A_FLOAT)
-                sprintf(tempory, " %f", atom_getfloat(argv+i));
-            
-            strcat(name, tempory);
-        }
-        object_method(jbox_get_textfield((t_object *)jbox_object), gensym("settext"), name);
-    }
+    
     
 };
 

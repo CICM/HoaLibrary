@@ -170,6 +170,7 @@ void HoaVector_free(t_HoaVector* x)
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_ambiVector;
+    free(x->f_argv);
 }
 
 t_max_err vector_set(t_HoaVector *x, t_object *attr, long ac, t_atom *av)
@@ -198,6 +199,14 @@ t_max_err vector_set(t_HoaVector *x, t_object *attr, long ac, t_atom *av)
             else
                 CicmMax::resize_outlet((t_object *)x, 2);
             
+            for(int i = 0; i < x->f_argc; i++)
+            {
+                if(atom_gettype(x->f_argv+i) == A_SYM && x->f_argc > i && atom_getsym(x->f_argv+i) == gensym("@vector") && atom_gettype(x->f_argv+i+1) == A_SYM)
+                {
+                    atom_setsym(x->f_argv+i+1, x->f_vector_mode);
+                }
+            }
+            CicmMax::rename_object((t_object *)x, x->f_argc, x->f_argv);
             CicmMax::dsp_start(state);
         }
     }

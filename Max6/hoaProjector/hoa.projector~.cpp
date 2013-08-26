@@ -29,8 +29,10 @@ typedef struct _HoaProjector
 {
 	t_pxobject			f_ob;			
 	AmbisonicProjector	*f_AmbisonicProjector;
+    long                    f_argc;
+    t_atom*                 f_argv;
+    
     t_atom_long         f_number_of_loudspeakers;
-
 } t_HoaProjector;
 
 void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv);
@@ -76,10 +78,13 @@ void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv)
     x = (t_HoaProjector *)object_alloc(HoaProjector_class);
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
-			order	= atom_getlong(argv);
-		
-		x->f_AmbisonicProjector	= new AmbisonicProjector(order, 10, sys_getblksize());
+        x->f_number_of_loudspeakers = 10;
+		if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+			order	= atom_getfloat(argv);
+		if(atom_gettype(argv+1) == A_LONG || atom_gettype(argv+1) == A_FLOAT)
+			x->f_number_of_loudspeakers	= atom_getfloat(argv+1);
+        
+		x->f_AmbisonicProjector	= new AmbisonicProjector(order, x->f_number_of_loudspeakers, sys_getblksize());
 		x->f_number_of_loudspeakers = x->f_AmbisonicProjector->getNumberOfLoudspeakers();
         
 		dsp_setup((t_pxobject *)x, x->f_AmbisonicProjector->Ambisonics::getNumberOfInputs());
@@ -89,6 +94,11 @@ void *HoaProjector_new(t_symbol *s, long argc, t_atom *argv)
         x->f_ob.z_misc = Z_NO_INPLACE;
         d = (t_dictionary *)gensym("#D")->s_thing;
         if (d) attr_dictionary_process(x, d);
+        
+        x->f_argc = argc;
+        x->f_argv = new t_atom[x->f_argc];
+        for(int i = 0; i < x->f_argc; i++)
+            x->f_argv[i] = argv[i];
 	}
 	return (x);
 }
@@ -114,6 +124,13 @@ void HoaProjector_assist(t_HoaProjector *x, void *b, long m, long a, char *s)
 		sprintf(s,"(Signal) %s",  x->f_AmbisonicProjector->getLoudspeakerName(a).c_str());
 }
 
+void HoaProjector_free(t_HoaProjector *x)
+{
+	dsp_free((t_pxobject *)x);
+	free(x->f_AmbisonicProjector);
+    free(x->f_argv);
+}
+
 t_max_err loudspeakers_set(t_HoaProjector *x, t_object *attr, long argc, t_atom *argv)
 {
     t_atom* state = CicmMax::dsp_stop((t_object *)x);
@@ -123,14 +140,16 @@ t_max_err loudspeakers_set(t_HoaProjector *x, t_object *attr, long argc, t_atom 
     x->f_number_of_loudspeakers = x->f_AmbisonicProjector->getNumberOfLoudspeakers();
     
     CicmMax::resize_outlet((t_object *)x, x->f_AmbisonicProjector->getNumberOfLoudspeakers());
+    
+    if(atom_gettype(x->f_argv+1) == A_LONG)
+        atom_setlong(x->f_argv+1, x->f_AmbisonicProjector->getNumberOfLoudspeakers());
+    else if(atom_gettype(x->f_argv+1) == A_FLOAT)
+        atom_setfloat(x->f_argv+1, (float)x->f_AmbisonicProjector->getNumberOfLoudspeakers());
+    
+    CicmMax::rename_object((t_object *)x, x->f_argc, x->f_argv);
     CicmMax::dsp_start(state);
     
     return MAX_ERR_NONE;
 }
 
-void HoaProjector_free(t_HoaProjector *x)
-{
-	dsp_free((t_pxobject *)x);
-	free(x->f_AmbisonicProjector);
-}
 

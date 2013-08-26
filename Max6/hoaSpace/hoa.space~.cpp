@@ -27,10 +27,13 @@
 
 typedef struct _HoaSpace
 {
-	t_pxobject					f_ob;
-	AmbisonicSpace				*f_ambiSpace;
-    long                        f_number_of_loudspeakers;
-    double                      f_ramp_time;
+	t_pxobject		f_ob;
+	AmbisonicSpace	*f_ambiSpace;
+    long            f_argc;
+    t_atom*         f_argv;
+    
+    long            f_number_of_loudspeakers;
+    double          f_ramp_time;
 } t_HoaSpace;
 
 void *HoaSpace_new(t_symbol *s, long argc, t_atom *argv);
@@ -44,7 +47,7 @@ t_max_err ramp_set(t_HoaSpace *x, t_object *attr, long argc, t_atom *argv);
 void HoaSpace_dsp64(t_HoaSpace* x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaSpace_perform64(t_HoaSpace* x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void *HoaSpace_class;
+t_class* HoaSpace_class;
 
 int C74_EXPORT main(void)
 {	
@@ -82,16 +85,17 @@ int C74_EXPORT main(void)
 void *HoaSpace_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_HoaSpace* x = NULL;
-	int	anNumberOfMicrophones = 8;
     t_dictionary *d;
     
-    x = (t_HoaSpace*)object_alloc((t_class*)HoaSpace_class);
+    x = (t_HoaSpace*)object_alloc(HoaSpace_class);
 	if (x)
 	{
+        x->f_number_of_loudspeakers = 10;
 		if(atom_gettype(argv) == A_LONG)
-			anNumberOfMicrophones = atom_getlong(argv);
+			x->f_number_of_loudspeakers = atom_getlong(argv);
 		
-		x->f_ambiSpace = new AmbisonicSpace(anNumberOfMicrophones, sys_getblksize(), sys_getsr());
+		x->f_ambiSpace = new AmbisonicSpace(x->f_number_of_loudspeakers, sys_getblksize(), sys_getsr());
+        x->f_number_of_loudspeakers = x->f_ambiSpace->getNumberOfLoudspeakers();
 		x->f_ramp_time = x->f_ambiSpace->getRampInMs();
         
 		dsp_setup((t_pxobject *)x, x->f_ambiSpace->getNumberOfInputs());
@@ -103,6 +107,11 @@ void *HoaSpace_new(t_symbol *s, long argc, t_atom *argv)
         attr_args_process(x, argc, argv);
         d = (t_dictionary *)gensym("#D")->s_thing;
         if (d) attr_dictionary_process(x, d);
+        
+        x->f_argc = argc;
+        x->f_argv = new t_atom[x->f_argc];
+        for(int i = 0; i < x->f_argc; i++)
+            x->f_argv[i] = argv[i];
 	}
 	return (x);
 }
@@ -154,6 +163,14 @@ t_max_err loudspeakers_set(t_HoaSpace *x, t_object *attr, long argc, t_atom *arg
     
     CicmMax::resize_inlet((t_object *)x, x->f_ambiSpace->getNumberOfInputs());
     CicmMax::resize_outlet((t_object *)x, x->f_ambiSpace->getNumberOfOutputs());
+    
+    if(atom_gettype(x->f_argv) == A_LONG)
+        atom_setlong(x->f_argv, x->f_ambiSpace->getNumberOfLoudspeakers());
+    else if(atom_gettype(x->f_argv) == A_FLOAT)
+        atom_setfloat(x->f_argv, (float)x->f_ambiSpace->getNumberOfLoudspeakers());
+    
+    CicmMax::rename_object((t_object *)x, x->f_argc, x->f_argv);
+
     CicmMax::dsp_start(state);
     
     return MAX_ERR_NONE;
@@ -173,6 +190,7 @@ void HoaSpace_free(t_HoaSpace* x)
 {
 	dsp_free((t_pxobject *)x);
 	free(x->f_ambiSpace);
+    free(x->f_argv);
 }
 
 

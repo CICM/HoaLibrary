@@ -34,7 +34,7 @@ extern "C"
 
 typedef struct _HoaWider 
 {
-	t_pxobject				f_ob;			
+	t_pxobject			f_ob;			
 	AmbisonicWider*		f_AmbisonicWider;
 
 } t_HoaWider;
