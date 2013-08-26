@@ -123,7 +123,7 @@ public:
     /**************************************************/
     /**************************************************/
     
-	inline void process(double* inputs, double* outputs)
+	inline void process(const double* inputs, double* outputs)
 	{
         double input, output;
         for(int i = 0; i < m_vector_size; i++)

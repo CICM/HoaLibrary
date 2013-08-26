@@ -10,123 +10,137 @@
 		2C0AA616178730B300876AFC /* hoa.space~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AA615178730B300876AFC /* hoa.space~.cpp */; };
 		2C6E3332171047C000BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */; };
 		2CF61A471712D0620062A8EA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */; };
-		8FAB8844178AF74200B7A1AE /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87B1178AF74200B7A1AE /* CicmRingModulation.cpp */; };
-		8FAB8845178AF74200B7A1AE /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87B2178AF74200B7A1AE /* CicmRingModulation.h */; };
-		8FAB8846178AF74200B7A1AE /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87B3178AF74200B7A1AE /* CicmDefine.h */; };
-		8FAB8847178AF74200B7A1AE /* CicmDecorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87B5178AF74200B7A1AE /* CicmDecorrelation.cpp */; };
-		8FAB8848178AF74200B7A1AE /* CicmDecorrelation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87B6178AF74200B7A1AE /* CicmDecorrelation.h */; };
-		8FAB8849178AF74200B7A1AE /* CicmEnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87B8178AF74200B7A1AE /* CicmEnvelope.cpp */; };
-		8FAB884A178AF74200B7A1AE /* CicmEnvelope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87B9178AF74200B7A1AE /* CicmEnvelope.h */; };
-		8FAB884B178AF74200B7A1AE /* CicmFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87BB178AF74200B7A1AE /* CicmFft.cpp */; };
-		8FAB884C178AF74200B7A1AE /* CicmFft.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87BC178AF74200B7A1AE /* CicmFft.h */; };
-		8FAB884D178AF74200B7A1AE /* CicmFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87BE178AF74200B7A1AE /* CicmFilter.cpp */; };
-		8FAB884E178AF74200B7A1AE /* CicmFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87BF178AF74200B7A1AE /* CicmFilter.h */; };
-		8FAB884F178AF74200B7A1AE /* CicmFilterAllpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87C0178AF74200B7A1AE /* CicmFilterAllpass.cpp */; };
-		8FAB8850178AF74200B7A1AE /* CicmFilterAllpass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87C1178AF74200B7A1AE /* CicmFilterAllpass.h */; };
-		8FAB8851178AF74200B7A1AE /* CicmFilterBiquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87C2178AF74200B7A1AE /* CicmFilterBiquad.cpp */; };
-		8FAB8852178AF74200B7A1AE /* CicmFilterBiquad.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87C3178AF74200B7A1AE /* CicmFilterBiquad.h */; };
-		8FAB8853178AF74200B7A1AE /* CicmFilterComb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87C4178AF74200B7A1AE /* CicmFilterComb.cpp */; };
-		8FAB8854178AF74200B7A1AE /* CicmFilterComb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87C5178AF74200B7A1AE /* CicmFilterComb.h */; };
-		8FAB8855178AF74200B7A1AE /* CicmFilterConvolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87C6178AF74200B7A1AE /* CicmFilterConvolution.cpp */; };
-		8FAB8856178AF74200B7A1AE /* CicmFilterConvolution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87C7178AF74200B7A1AE /* CicmFilterConvolution.h */; };
-		8FAB8857178AF74200B7A1AE /* CicmFilterConvolutionZero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87C8178AF74200B7A1AE /* CicmFilterConvolutionZero.cpp */; };
-		8FAB8858178AF74200B7A1AE /* CicmFilterConvolutionZero.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87C9178AF74200B7A1AE /* CicmFilterConvolutionZero.h */; };
-		8FAB8859178AF74200B7A1AE /* CicmFilterDamper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87CA178AF74200B7A1AE /* CicmFilterDamper.h */; };
-		8FAB885A178AF74200B7A1AE /* CicmFilterDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87CB178AF74200B7A1AE /* CicmFilterDelay.cpp */; };
-		8FAB885B178AF74200B7A1AE /* CicmFilterDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87CC178AF74200B7A1AE /* CicmFilterDelay.h */; };
-		8FAB885C178AF74200B7A1AE /* CicmFilterDiffuser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87CD178AF74200B7A1AE /* CicmFilterDiffuser.cpp */; };
-		8FAB885D178AF74200B7A1AE /* CicmFilterDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87CE178AF74200B7A1AE /* CicmFilterDiffuser.h */; };
-		8FAB885E178AF74200B7A1AE /* CicmFilterFir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87CF178AF74200B7A1AE /* CicmFilterFir.cpp */; };
-		8FAB885F178AF74200B7A1AE /* CicmFilterFir.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87D0178AF74200B7A1AE /* CicmFilterFir.h */; };
-		8FAB8860178AF74200B7A1AE /* CicmFilterFixedDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87D1178AF74200B7A1AE /* CicmFilterFixedDelay.cpp */; };
-		8FAB8861178AF74200B7A1AE /* CicmFilterFixedDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87D2178AF74200B7A1AE /* CicmFilterFixedDelay.h */; };
-		8FAB8862178AF74200B7A1AE /* CicmFilterOnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87D3178AF74200B7A1AE /* CicmFilterOnePole.cpp */; };
-		8FAB8863178AF74200B7A1AE /* CicmFilterOnePole.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87D4178AF74200B7A1AE /* CicmFilterOnePole.h */; };
-		8FAB8864178AF74200B7A1AE /* CicmOnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87D5178AF74200B7A1AE /* CicmOnePole.cpp */; };
-		8FAB8865178AF74200B7A1AE /* CicmOnePole.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87D6178AF74200B7A1AE /* CicmOnePole.h */; };
-		8FAB8866178AF74200B7A1AE /* CicmQSGS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87D8178AF74200B7A1AE /* CicmQSGS.cpp */; };
-		8FAB8867178AF74200B7A1AE /* CicmQSGS.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87D9178AF74200B7A1AE /* CicmQSGS.h */; };
-		8FAB8868178AF74200B7A1AE /* CicmLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87DA178AF74200B7A1AE /* CicmLibrary.h */; };
-		8FAB8869178AF74200B7A1AE /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87DC178AF74200B7A1AE /* CicmLine.cpp */; };
-		8FAB886A178AF74200B7A1AE /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87DD178AF74200B7A1AE /* CicmLine.h */; };
-		8FAB886B178AF74200B7A1AE /* CicmFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87DF178AF74200B7A1AE /* CicmFreeverb.cpp */; };
-		8FAB886C178AF74200B7A1AE /* CicmFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87E0178AF74200B7A1AE /* CicmFreeverb.h */; };
-		8FAB886D178AF74200B7A1AE /* CicmGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87E1178AF74200B7A1AE /* CicmGigaverb.cpp */; };
-		8FAB886E178AF74200B7A1AE /* CicmGigaverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87E2178AF74200B7A1AE /* CicmGigaverb.h */; };
-		8FAB886F178AF74200B7A1AE /* CicmTuning.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87E3178AF74200B7A1AE /* CicmTuning.h */; };
-		8FAB8870178AF74200B7A1AE /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87E4178AF74200B7A1AE /* CicmTools.h */; };
-		8FAB8871178AF74200B7A1AE /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87E6178AF74200B7A1AE /* Ambisonics.cpp */; };
-		8FAB8872178AF74200B7A1AE /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87E7178AF74200B7A1AE /* Ambisonics.h */; };
-		8FAB8873178AF74200B7A1AE /* AmbisonicsDiffuser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87E8178AF74200B7A1AE /* AmbisonicsDiffuser.cpp */; };
-		8FAB8874178AF74200B7A1AE /* AmbisonicsDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87E9178AF74200B7A1AE /* AmbisonicsDiffuser.h */; };
-		8FAB8875178AF74200B7A1AE /* AmbisonicsViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87EA178AF74200B7A1AE /* AmbisonicsViewer.cpp */; };
-		8FAB8876178AF74200B7A1AE /* AmbisonicsViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87EB178AF74200B7A1AE /* AmbisonicsViewer.h */; };
-		8FAB8877178AF74200B7A1AE /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87EC178AF74200B7A1AE /* Planewaves.cpp */; };
-		8FAB8878178AF74200B7A1AE /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87ED178AF74200B7A1AE /* Planewaves.h */; };
-		8FAB8879178AF74200B7A1AE /* AmbisonicsBinaural.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87EF178AF74200B7A1AE /* AmbisonicsBinaural.cpp */; };
-		8FAB887A178AF74200B7A1AE /* AmbisonicsBinaural.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87F0178AF74200B7A1AE /* AmbisonicsBinaural.h */; };
-		8FAB887B178AF74200B7A1AE /* BoidsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87F2178AF74200B7A1AE /* BoidsManager.cpp */; };
-		8FAB887C178AF74200B7A1AE /* BoidsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87F3178AF74200B7A1AE /* BoidsManager.h */; };
-		8FAB887D178AF74200B7A1AE /* AmbisonicConvolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87F5178AF74200B7A1AE /* AmbisonicConvolver.cpp */; };
-		8FAB887E178AF74200B7A1AE /* AmbisonicConvolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87F6178AF74200B7A1AE /* AmbisonicConvolver.h */; };
-		8FAB887F178AF74200B7A1AE /* AmbisonicsDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87F8178AF74200B7A1AE /* AmbisonicsDecoder.cpp */; };
-		8FAB8880178AF74200B7A1AE /* AmbisonicsDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87F9178AF74200B7A1AE /* AmbisonicsDecoder.h */; };
-		8FAB8881178AF74200B7A1AE /* AmbisonicsDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87FB178AF74200B7A1AE /* AmbisonicsDelay.cpp */; };
-		8FAB8882178AF74200B7A1AE /* AmbisonicsDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87FC178AF74200B7A1AE /* AmbisonicsDelay.h */; };
-		8FAB8883178AF74200B7A1AE /* AmbisonicsEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB87FE178AF74200B7A1AE /* AmbisonicsEncoder.cpp */; };
-		8FAB8884178AF74200B7A1AE /* AmbisonicsEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB87FF178AF74200B7A1AE /* AmbisonicsEncoder.h */; };
-		8FAB8885178AF74200B7A1AE /* AmbisonicsFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8801178AF74200B7A1AE /* AmbisonicsFilter.cpp */; };
-		8FAB8886178AF74200B7A1AE /* AmbisonicsFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8802178AF74200B7A1AE /* AmbisonicsFilter.h */; };
-		8FAB8887178AF74200B7A1AE /* AmbisonicsFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8804178AF74200B7A1AE /* AmbisonicsFreeverb.cpp */; };
-		8FAB8888178AF74200B7A1AE /* AmbisonicsFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8805178AF74200B7A1AE /* AmbisonicsFreeverb.h */; };
-		8FAB8889178AF74200B7A1AE /* AmbisonicsGigaverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8807178AF74200B7A1AE /* AmbisonicsGigaverb.cpp */; };
-		8FAB888A178AF74200B7A1AE /* AmbisonicsGigaverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8808178AF74200B7A1AE /* AmbisonicsGigaverb.h */; };
-		8FAB888B178AF74200B7A1AE /* AmbisonicsGrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB880A178AF74200B7A1AE /* AmbisonicsGrain.cpp */; };
-		8FAB888C178AF74200B7A1AE /* AmbisonicsGrain.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB880B178AF74200B7A1AE /* AmbisonicsGrain.h */; };
-		8FAB888D178AF74200B7A1AE /* HoaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB880C178AF74200B7A1AE /* HoaLibrary.h */; };
-		8FAB888E178AF74200B7A1AE /* AmbisonicMultiMaps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB880E178AF74200B7A1AE /* AmbisonicMultiMaps.cpp */; };
-		8FAB888F178AF74200B7A1AE /* AmbisonicMultiMaps.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB880F178AF74200B7A1AE /* AmbisonicMultiMaps.h */; };
-		8FAB8890178AF74200B7A1AE /* AmbisonicsMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8810178AF74200B7A1AE /* AmbisonicsMap.cpp */; };
-		8FAB8891178AF74200B7A1AE /* AmbisonicsMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8811178AF74200B7A1AE /* AmbisonicsMap.h */; };
-		8FAB8892178AF74200B7A1AE /* AmbisonicSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8812178AF74200B7A1AE /* AmbisonicSource.cpp */; };
-		8FAB8893178AF74200B7A1AE /* AmbisonicSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8813178AF74200B7A1AE /* AmbisonicSource.h */; };
-		8FAB8894178AF74200B7A1AE /* AmbisonicSourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8814178AF74200B7A1AE /* AmbisonicSourcesGroup.cpp */; };
-		8FAB8895178AF74200B7A1AE /* AmbisonicSourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8815178AF74200B7A1AE /* AmbisonicSourcesGroup.h */; };
-		8FAB8896178AF74200B7A1AE /* AmbisonicSourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8816178AF74200B7A1AE /* AmbisonicSourcesManager.cpp */; };
-		8FAB8897178AF74200B7A1AE /* AmbisonicSourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8817178AF74200B7A1AE /* AmbisonicSourcesManager.h */; };
-		8FAB8898178AF74200B7A1AE /* AmbisonicSourcesPreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8818178AF74200B7A1AE /* AmbisonicSourcesPreset.cpp */; };
-		8FAB8899178AF74200B7A1AE /* AmbisonicSourcesPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8819178AF74200B7A1AE /* AmbisonicSourcesPreset.h */; };
-		8FAB889A178AF74200B7A1AE /* AmbisonicSourcesTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB881A178AF74200B7A1AE /* AmbisonicSourcesTrajectory.cpp */; };
-		8FAB889B178AF74200B7A1AE /* AmbisonicSourcesTrajectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB881B178AF74200B7A1AE /* AmbisonicSourcesTrajectory.h */; };
-		8FAB889C178AF74200B7A1AE /* AmbisonicsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB881D178AF74200B7A1AE /* AmbisonicsMeter.cpp */; };
-		8FAB889D178AF74200B7A1AE /* AmbisonicsMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB881E178AF74200B7A1AE /* AmbisonicsMeter.h */; };
-		8FAB889E178AF74200B7A1AE /* AmbisonicsMultiDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8820178AF74200B7A1AE /* AmbisonicsMultiDecoder.cpp */; };
-		8FAB889F178AF74200B7A1AE /* AmbisonicsMultiDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8821178AF74200B7A1AE /* AmbisonicsMultiDecoder.h */; };
-		8FAB88A0178AF74200B7A1AE /* AmbisonicsOptim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8823178AF74200B7A1AE /* AmbisonicsOptim.cpp */; };
-		8FAB88A1178AF74200B7A1AE /* AmbisonicsOptim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8824178AF74200B7A1AE /* AmbisonicsOptim.h */; };
-		8FAB88A2178AF74200B7A1AE /* AmbisonicsProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8826178AF74200B7A1AE /* AmbisonicsProjector.cpp */; };
-		8FAB88A3178AF74200B7A1AE /* AmbisonicsProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8827178AF74200B7A1AE /* AmbisonicsProjector.h */; };
-		8FAB88A4178AF74200B7A1AE /* AmbisonicsRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8829178AF74200B7A1AE /* AmbisonicsRecomposer.cpp */; };
-		8FAB88A5178AF74200B7A1AE /* AmbisonicsRecomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB882A178AF74200B7A1AE /* AmbisonicsRecomposer.h */; };
-		8FAB88A6178AF74200B7A1AE /* AmbisonicVirtualMicUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB882B178AF74200B7A1AE /* AmbisonicVirtualMicUI.cpp */; };
-		8FAB88A7178AF74200B7A1AE /* AmbisonicVirtualMicUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB882C178AF74200B7A1AE /* AmbisonicVirtualMicUI.h */; };
-		8FAB88A8178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB882D178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.cpp */; };
-		8FAB88A9178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB882E178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.h */; };
-		8FAB88AA178AF74200B7A1AE /* AmbisonicsRestitution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8830178AF74200B7A1AE /* AmbisonicsRestitution.cpp */; };
-		8FAB88AB178AF74200B7A1AE /* AmbisonicsRestitution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8831178AF74200B7A1AE /* AmbisonicsRestitution.h */; };
-		8FAB88AC178AF74200B7A1AE /* AmbisonicsRotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8833178AF74200B7A1AE /* AmbisonicsRotate.cpp */; };
-		8FAB88AD178AF74200B7A1AE /* AmbisonicsRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8834178AF74200B7A1AE /* AmbisonicsRotate.h */; };
-		8FAB88AE178AF74200B7A1AE /* AmbisonicSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8836178AF74200B7A1AE /* AmbisonicSpace.cpp */; };
-		8FAB88AF178AF74200B7A1AE /* AmbisonicSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8837178AF74200B7A1AE /* AmbisonicSpace.h */; };
-		8FAB88B0178AF74200B7A1AE /* AmbisonicsSpectrum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8839178AF74200B7A1AE /* AmbisonicsSpectrum.cpp */; };
-		8FAB88B1178AF74200B7A1AE /* AmbisonicsSpectrum.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB883A178AF74200B7A1AE /* AmbisonicsSpectrum.h */; };
-		8FAB88B2178AF74200B7A1AE /* AmbisonicStars.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB883C178AF74200B7A1AE /* AmbisonicStars.cpp */; };
-		8FAB88B3178AF74200B7A1AE /* AmbisonicStars.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB883D178AF74200B7A1AE /* AmbisonicStars.h */; };
-		8FAB88B4178AF74200B7A1AE /* AmbisonicsVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB883F178AF74200B7A1AE /* AmbisonicsVector.cpp */; };
-		8FAB88B5178AF74200B7A1AE /* AmbisonicsVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8840178AF74200B7A1AE /* AmbisonicsVector.h */; };
-		8FAB88B6178AF74200B7A1AE /* AmbisonicsWider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB8842178AF74200B7A1AE /* AmbisonicsWider.cpp */; };
-		8FAB88B7178AF74200B7A1AE /* AmbisonicsWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAB8843178AF74200B7A1AE /* AmbisonicsWider.h */; };
+		8F7CCFAF17C23907003A01B8 /* MaxConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7CCFAE17C23907003A01B8 /* MaxConverter.h */; };
 		8FC9B331175EA3EC0006E4BB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC9B330175EA3EC0006E4BB /* Accelerate.framework */; };
+		8FCE86EE17CA271700A603D4 /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE864717CA271700A603D4 /* CicmRingModulation.cpp */; };
+		8FCE86EF17CA271700A603D4 /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE864817CA271700A603D4 /* CicmRingModulation.h */; };
+		8FCE86F017CA271700A603D4 /* CicmDefine_BLAS_FFTW.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE864917CA271700A603D4 /* CicmDefine_BLAS_FFTW.h */; };
+		8FCE86F117CA271700A603D4 /* CicmDefine_INTEL.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE864A17CA271700A603D4 /* CicmDefine_INTEL.h */; };
+		8FCE86F217CA271700A603D4 /* CicmDefine_VDSP.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE864B17CA271700A603D4 /* CicmDefine_VDSP.h */; };
+		8FCE86F317CA271700A603D4 /* CicmDecorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE864D17CA271700A603D4 /* CicmDecorrelation.cpp */; };
+		8FCE86F417CA271700A603D4 /* CicmDecorrelation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE864E17CA271700A603D4 /* CicmDecorrelation.h */; };
+		8FCE86F517CA271700A603D4 /* CicmEnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE865017CA271700A603D4 /* CicmEnvelope.cpp */; };
+		8FCE86F617CA271700A603D4 /* CicmEnvelope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE865117CA271700A603D4 /* CicmEnvelope.h */; };
+		8FCE86F717CA271700A603D4 /* CicmFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE865317CA271700A603D4 /* CicmFft.cpp */; };
+		8FCE86F817CA271700A603D4 /* CicmFft.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE865417CA271700A603D4 /* CicmFft.h */; };
+		8FCE86F917CA271700A603D4 /* CicmFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE865617CA271700A603D4 /* CicmFilter.cpp */; };
+		8FCE86FA17CA271700A603D4 /* CicmFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE865717CA271700A603D4 /* CicmFilter.h */; };
+		8FCE86FB17CA271700A603D4 /* CicmFilterAllpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE865817CA271700A603D4 /* CicmFilterAllpass.cpp */; };
+		8FCE86FC17CA271700A603D4 /* CicmFilterAllpass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE865917CA271700A603D4 /* CicmFilterAllpass.h */; };
+		8FCE86FD17CA271700A603D4 /* CicmFilterBiquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE865A17CA271700A603D4 /* CicmFilterBiquad.cpp */; };
+		8FCE86FE17CA271700A603D4 /* CicmFilterBiquad.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE865B17CA271700A603D4 /* CicmFilterBiquad.h */; };
+		8FCE86FF17CA271700A603D4 /* CicmFilterComb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE865C17CA271700A603D4 /* CicmFilterComb.cpp */; };
+		8FCE870017CA271700A603D4 /* CicmFilterComb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE865D17CA271700A603D4 /* CicmFilterComb.h */; };
+		8FCE870117CA271700A603D4 /* CicmFilterConvolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE865E17CA271700A603D4 /* CicmFilterConvolution.cpp */; };
+		8FCE870217CA271700A603D4 /* CicmFilterConvolution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE865F17CA271700A603D4 /* CicmFilterConvolution.h */; };
+		8FCE870317CA271700A603D4 /* CicmFilterConvolutionZero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE866017CA271700A603D4 /* CicmFilterConvolutionZero.cpp */; };
+		8FCE870417CA271700A603D4 /* CicmFilterConvolutionZero.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866117CA271700A603D4 /* CicmFilterConvolutionZero.h */; };
+		8FCE870517CA271700A603D4 /* CicmFilterDamper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866217CA271700A603D4 /* CicmFilterDamper.h */; };
+		8FCE870617CA271700A603D4 /* CicmFilterDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE866317CA271700A603D4 /* CicmFilterDelay.cpp */; };
+		8FCE870717CA271700A603D4 /* CicmFilterDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866417CA271700A603D4 /* CicmFilterDelay.h */; };
+		8FCE870817CA271700A603D4 /* CicmFilterDiffuser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE866517CA271700A603D4 /* CicmFilterDiffuser.cpp */; };
+		8FCE870917CA271700A603D4 /* CicmFilterDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866617CA271700A603D4 /* CicmFilterDiffuser.h */; };
+		8FCE870A17CA271700A603D4 /* CicmFilterFir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE866717CA271700A603D4 /* CicmFilterFir.cpp */; };
+		8FCE870B17CA271700A603D4 /* CicmFilterFir.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866817CA271700A603D4 /* CicmFilterFir.h */; };
+		8FCE870C17CA271700A603D4 /* CicmFilterFixedDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE866917CA271700A603D4 /* CicmFilterFixedDelay.cpp */; };
+		8FCE870D17CA271700A603D4 /* CicmFilterFixedDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866A17CA271700A603D4 /* CicmFilterFixedDelay.h */; };
+		8FCE870E17CA271700A603D4 /* CicmFilterOnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE866B17CA271700A603D4 /* CicmFilterOnePole.cpp */; };
+		8FCE870F17CA271700A603D4 /* CicmFilterOnePole.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866C17CA271700A603D4 /* CicmFilterOnePole.h */; };
+		8FCE871017CA271700A603D4 /* CicmOnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE866D17CA271700A603D4 /* CicmOnePole.cpp */; };
+		8FCE871117CA271700A603D4 /* CicmOnePole.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE866E17CA271700A603D4 /* CicmOnePole.h */; };
+		8FCE871217CA271700A603D4 /* CicmQSGS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE867017CA271700A603D4 /* CicmQSGS.cpp */; };
+		8FCE871317CA271700A603D4 /* CicmQSGS.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867117CA271700A603D4 /* CicmQSGS.h */; };
+		8FCE871417CA271700A603D4 /* CicmLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867217CA271700A603D4 /* CicmLibrary.h */; };
+		8FCE871517CA271700A603D4 /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE867417CA271700A603D4 /* CicmLine.cpp */; };
+		8FCE871617CA271700A603D4 /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867517CA271700A603D4 /* CicmLine.h */; };
+		8FCE871717CA271700A603D4 /* CicmFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE867717CA271700A603D4 /* CicmFreeverb.cpp */; };
+		8FCE871817CA271700A603D4 /* CicmFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867817CA271700A603D4 /* CicmFreeverb.h */; };
+		8FCE871917CA271700A603D4 /* CicmTuning.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867917CA271700A603D4 /* CicmTuning.h */; };
+		8FCE871A17CA271700A603D4 /* CicmSignal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867A17CA271700A603D4 /* CicmSignal.h */; };
+		8FCE871B17CA271700A603D4 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867B17CA271700A603D4 /* CicmTools.h */; };
+		8FCE871C17CA271700A603D4 /* Ambisonic3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE867D17CA271700A603D4 /* Ambisonic3D.cpp */; };
+		8FCE871D17CA271700A603D4 /* Ambisonic3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE867E17CA271700A603D4 /* Ambisonic3D.h */; };
+		8FCE871E17CA271700A603D4 /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE867F17CA271700A603D4 /* Ambisonics.cpp */; };
+		8FCE871F17CA271700A603D4 /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE868017CA271700A603D4 /* Ambisonics.h */; };
+		8FCE872017CA271700A603D4 /* AmbisonicsDiffuser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE868117CA271700A603D4 /* AmbisonicsDiffuser.cpp */; };
+		8FCE872117CA271700A603D4 /* AmbisonicsDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE868217CA271700A603D4 /* AmbisonicsDiffuser.h */; };
+		8FCE872217CA271700A603D4 /* AmbisonicsViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE868317CA271700A603D4 /* AmbisonicsViewer.cpp */; };
+		8FCE872317CA271700A603D4 /* AmbisonicsViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE868417CA271700A603D4 /* AmbisonicsViewer.h */; };
+		8FCE872417CA271700A603D4 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE868517CA271700A603D4 /* Planewaves.cpp */; };
+		8FCE872517CA271700A603D4 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE868617CA271700A603D4 /* Planewaves.h */; };
+		8FCE872617CA271700A603D4 /* AmbisonicsBinaural.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE868817CA271700A603D4 /* AmbisonicsBinaural.cpp */; };
+		8FCE872717CA271700A603D4 /* AmbisonicsBinaural.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE868917CA271700A603D4 /* AmbisonicsBinaural.h */; };
+		8FCE872817CA271700A603D4 /* BoidsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE868B17CA271700A603D4 /* BoidsManager.cpp */; };
+		8FCE872917CA271700A603D4 /* BoidsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE868C17CA271700A603D4 /* BoidsManager.h */; };
+		8FCE872A17CA271700A603D4 /* AmbisonicConvolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE868E17CA271700A603D4 /* AmbisonicConvolver.cpp */; };
+		8FCE872B17CA271700A603D4 /* AmbisonicConvolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE868F17CA271700A603D4 /* AmbisonicConvolver.h */; };
+		8FCE872C17CA271700A603D4 /* AmbisonicDecoder3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE869117CA271700A603D4 /* AmbisonicDecoder3D.cpp */; };
+		8FCE872D17CA271700A603D4 /* AmbisonicDecoder3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE869217CA271700A603D4 /* AmbisonicDecoder3D.h */; };
+		8FCE872E17CA271700A603D4 /* AmbisonicsDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE869317CA271700A603D4 /* AmbisonicsDecoder.cpp */; };
+		8FCE872F17CA271700A603D4 /* AmbisonicsDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE869417CA271700A603D4 /* AmbisonicsDecoder.h */; };
+		8FCE873017CA271700A603D4 /* AmbisonicsDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE869617CA271700A603D4 /* AmbisonicsDelay.cpp */; };
+		8FCE873117CA271700A603D4 /* AmbisonicsDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE869717CA271700A603D4 /* AmbisonicsDelay.h */; };
+		8FCE873217CA271700A603D4 /* AmbisonicEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE869917CA271700A603D4 /* AmbisonicEncoder.cpp */; };
+		8FCE873317CA271700A603D4 /* AmbisonicEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE869A17CA271700A603D4 /* AmbisonicEncoder.h */; };
+		8FCE873417CA271700A603D4 /* AmbisonicEncoder3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE869B17CA271700A603D4 /* AmbisonicEncoder3D.cpp */; };
+		8FCE873517CA271700A603D4 /* AmbisonicEncoder3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE869C17CA271700A603D4 /* AmbisonicEncoder3D.h */; };
+		8FCE873617CA271700A603D4 /* AmbisonicsFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE869E17CA271700A603D4 /* AmbisonicsFilter.cpp */; };
+		8FCE873717CA271700A603D4 /* AmbisonicsFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE869F17CA271700A603D4 /* AmbisonicsFilter.h */; };
+		8FCE873817CA271700A603D4 /* AmbisonicsFreeverb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86A117CA271700A603D4 /* AmbisonicsFreeverb.cpp */; };
+		8FCE873917CA271700A603D4 /* AmbisonicsFreeverb.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86A217CA271700A603D4 /* AmbisonicsFreeverb.h */; };
+		8FCE873A17CA271700A603D4 /* AmbisonicsGalaxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86A417CA271700A603D4 /* AmbisonicsGalaxy.cpp */; };
+		8FCE873B17CA271700A603D4 /* AmbisonicsGalaxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86A517CA271700A603D4 /* AmbisonicsGalaxy.h */; };
+		8FCE873C17CA271700A603D4 /* AmbisonicsPlanetarySystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86A617CA271700A603D4 /* AmbisonicsPlanetarySystem.h */; };
+		8FCE873D17CA271700A603D4 /* AmbisonicsPlanetarySystemGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86A717CA271700A603D4 /* AmbisonicsPlanetarySystemGlobal.cpp */; };
+		8FCE873E17CA271700A603D4 /* AmbisonicsPlanetarySystemSatellites.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86A817CA271700A603D4 /* AmbisonicsPlanetarySystemSatellites.cpp */; };
+		8FCE873F17CA271700A603D4 /* AmbisonicsPlanetarySystemSun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86A917CA271700A603D4 /* AmbisonicsPlanetarySystemSun.cpp */; };
+		8FCE874017CA271700A603D4 /* AmbisonicsSatellite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86AA17CA271700A603D4 /* AmbisonicsSatellite.cpp */; };
+		8FCE874117CA271700A603D4 /* AmbisonicsSatellite.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86AB17CA271700A603D4 /* AmbisonicsSatellite.h */; };
+		8FCE874217CA271700A603D4 /* AmbisonicsStar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86AC17CA271700A603D4 /* AmbisonicsStar.cpp */; };
+		8FCE874317CA271700A603D4 /* AmbisonicsStar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86AD17CA271700A603D4 /* AmbisonicsStar.h */; };
+		8FCE874417CA271700A603D4 /* AmbisonicsSun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86AE17CA271700A603D4 /* AmbisonicsSun.cpp */; };
+		8FCE874517CA271700A603D4 /* AmbisonicsSun.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86AF17CA271700A603D4 /* AmbisonicsSun.h */; };
+		8FCE874617CA271700A603D4 /* AmbisonicsGrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86B117CA271700A603D4 /* AmbisonicsGrain.cpp */; };
+		8FCE874717CA271700A603D4 /* AmbisonicsGrain.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86B217CA271700A603D4 /* AmbisonicsGrain.h */; };
+		8FCE874817CA271700A603D4 /* HoaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86B317CA271700A603D4 /* HoaLibrary.h */; };
+		8FCE874917CA271700A603D4 /* AmbisonicMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86B517CA271700A603D4 /* AmbisonicMap.cpp */; };
+		8FCE874A17CA271700A603D4 /* AmbisonicMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86B617CA271700A603D4 /* AmbisonicMap.h */; };
+		8FCE874B17CA271700A603D4 /* AmbisonicMultiMaps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86B717CA271700A603D4 /* AmbisonicMultiMaps.cpp */; };
+		8FCE874C17CA271700A603D4 /* AmbisonicMultiMaps.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86B817CA271700A603D4 /* AmbisonicMultiMaps.h */; };
+		8FCE874D17CA271700A603D4 /* AmbisonicSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86B917CA271700A603D4 /* AmbisonicSource.cpp */; };
+		8FCE874E17CA271700A603D4 /* AmbisonicSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86BA17CA271700A603D4 /* AmbisonicSource.h */; };
+		8FCE874F17CA271700A603D4 /* AmbisonicSourcesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86BB17CA271700A603D4 /* AmbisonicSourcesGroup.cpp */; };
+		8FCE875017CA271700A603D4 /* AmbisonicSourcesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86BC17CA271700A603D4 /* AmbisonicSourcesGroup.h */; };
+		8FCE875117CA271700A603D4 /* AmbisonicSourcesManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86BD17CA271700A603D4 /* AmbisonicSourcesManager.cpp */; };
+		8FCE875217CA271700A603D4 /* AmbisonicSourcesManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86BE17CA271700A603D4 /* AmbisonicSourcesManager.h */; };
+		8FCE875317CA271700A603D4 /* AmbisonicSourcesPreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86BF17CA271700A603D4 /* AmbisonicSourcesPreset.cpp */; };
+		8FCE875417CA271700A603D4 /* AmbisonicSourcesPreset.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86C017CA271700A603D4 /* AmbisonicSourcesPreset.h */; };
+		8FCE875517CA271700A603D4 /* AmbisonicSourcesTrajectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86C117CA271700A603D4 /* AmbisonicSourcesTrajectory.cpp */; };
+		8FCE875617CA271700A603D4 /* AmbisonicSourcesTrajectory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86C217CA271700A603D4 /* AmbisonicSourcesTrajectory.h */; };
+		8FCE875717CA271700A603D4 /* AmbisonicsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86C417CA271700A603D4 /* AmbisonicsMeter.cpp */; };
+		8FCE875817CA271700A603D4 /* AmbisonicsMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86C517CA271700A603D4 /* AmbisonicsMeter.h */; };
+		8FCE875917CA271700A603D4 /* AmbisonicsMultiDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86C717CA271700A603D4 /* AmbisonicsMultiDecoder.cpp */; };
+		8FCE875A17CA271700A603D4 /* AmbisonicsMultiDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86C817CA271700A603D4 /* AmbisonicsMultiDecoder.h */; };
+		8FCE875B17CA271700A603D4 /* AmbisonicOptim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86CA17CA271700A603D4 /* AmbisonicOptim.cpp */; };
+		8FCE875C17CA271700A603D4 /* AmbisonicOptim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86CB17CA271700A603D4 /* AmbisonicOptim.h */; };
+		8FCE875D17CA271700A603D4 /* AmbisonicProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86CD17CA271700A603D4 /* AmbisonicProjector.cpp */; };
+		8FCE875E17CA271700A603D4 /* AmbisonicProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86CE17CA271700A603D4 /* AmbisonicProjector.h */; };
+		8FCE876517CA271700A603D4 /* AmbisonicsRestitution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86D717CA271700A603D4 /* AmbisonicsRestitution.cpp */; };
+		8FCE876617CA271700A603D4 /* AmbisonicsRestitution.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86D817CA271700A603D4 /* AmbisonicsRestitution.h */; };
+		8FCE876717CA271700A603D4 /* AmbisonicsRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86DA17CA271700A603D4 /* AmbisonicsRingModulation.cpp */; };
+		8FCE876817CA271700A603D4 /* AmbisonicsRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86DB17CA271700A603D4 /* AmbisonicsRingModulation.h */; };
+		8FCE876917CA271700A603D4 /* AmbisonicRotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86DD17CA271700A603D4 /* AmbisonicRotate.cpp */; };
+		8FCE876A17CA271700A603D4 /* AmbisonicRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86DE17CA271700A603D4 /* AmbisonicRotate.h */; };
+		8FCE876B17CA271700A603D4 /* AmbisonicsScope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86E017CA271700A603D4 /* AmbisonicsScope.cpp */; };
+		8FCE876C17CA271700A603D4 /* AmbisonicsScope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86E117CA271700A603D4 /* AmbisonicsScope.h */; };
+		8FCE876D17CA271700A603D4 /* AmbisonicSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86E317CA271700A603D4 /* AmbisonicSpace.cpp */; };
+		8FCE876E17CA271700A603D4 /* AmbisonicSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86E417CA271700A603D4 /* AmbisonicSpace.h */; };
+		8FCE876F17CA271700A603D4 /* AmbisonicSpectrum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86E617CA271700A603D4 /* AmbisonicSpectrum.cpp */; };
+		8FCE877017CA271700A603D4 /* AmbisonicSpectrum.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86E717CA271700A603D4 /* AmbisonicSpectrum.h */; };
+		8FCE877117CA271700A603D4 /* AmbisonicVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86E917CA271700A603D4 /* AmbisonicVector.cpp */; };
+		8FCE877217CA271700A603D4 /* AmbisonicVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86EA17CA271700A603D4 /* AmbisonicVector.h */; };
+		8FCE877317CA271700A603D4 /* AmbisonicWider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FCE86EC17CA271700A603D4 /* AmbisonicWider.cpp */; };
+		8FCE877417CA271700A603D4 /* AmbisonicWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FCE86ED17CA271700A603D4 /* AmbisonicWider.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,123 +148,137 @@
 		2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.space~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.space~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FAB87B1178AF74200B7A1AE /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
-		8FAB87B2178AF74200B7A1AE /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
-		8FAB87B3178AF74200B7A1AE /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
-		8FAB87B5178AF74200B7A1AE /* CicmDecorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmDecorrelation.cpp; sourceTree = "<group>"; };
-		8FAB87B6178AF74200B7A1AE /* CicmDecorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDecorrelation.h; sourceTree = "<group>"; };
-		8FAB87B8178AF74200B7A1AE /* CicmEnvelope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmEnvelope.cpp; sourceTree = "<group>"; };
-		8FAB87B9178AF74200B7A1AE /* CicmEnvelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmEnvelope.h; sourceTree = "<group>"; };
-		8FAB87BB178AF74200B7A1AE /* CicmFft.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFft.cpp; sourceTree = "<group>"; };
-		8FAB87BC178AF74200B7A1AE /* CicmFft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFft.h; sourceTree = "<group>"; };
-		8FAB87BE178AF74200B7A1AE /* CicmFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilter.cpp; sourceTree = "<group>"; };
-		8FAB87BF178AF74200B7A1AE /* CicmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilter.h; sourceTree = "<group>"; };
-		8FAB87C0178AF74200B7A1AE /* CicmFilterAllpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterAllpass.cpp; sourceTree = "<group>"; };
-		8FAB87C1178AF74200B7A1AE /* CicmFilterAllpass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterAllpass.h; sourceTree = "<group>"; };
-		8FAB87C2178AF74200B7A1AE /* CicmFilterBiquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterBiquad.cpp; sourceTree = "<group>"; };
-		8FAB87C3178AF74200B7A1AE /* CicmFilterBiquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterBiquad.h; sourceTree = "<group>"; };
-		8FAB87C4178AF74200B7A1AE /* CicmFilterComb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterComb.cpp; sourceTree = "<group>"; };
-		8FAB87C5178AF74200B7A1AE /* CicmFilterComb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterComb.h; sourceTree = "<group>"; };
-		8FAB87C6178AF74200B7A1AE /* CicmFilterConvolution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterConvolution.cpp; sourceTree = "<group>"; };
-		8FAB87C7178AF74200B7A1AE /* CicmFilterConvolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterConvolution.h; sourceTree = "<group>"; };
-		8FAB87C8178AF74200B7A1AE /* CicmFilterConvolutionZero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterConvolutionZero.cpp; sourceTree = "<group>"; };
-		8FAB87C9178AF74200B7A1AE /* CicmFilterConvolutionZero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterConvolutionZero.h; sourceTree = "<group>"; };
-		8FAB87CA178AF74200B7A1AE /* CicmFilterDamper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterDamper.h; sourceTree = "<group>"; };
-		8FAB87CB178AF74200B7A1AE /* CicmFilterDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterDelay.cpp; sourceTree = "<group>"; };
-		8FAB87CC178AF74200B7A1AE /* CicmFilterDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterDelay.h; sourceTree = "<group>"; };
-		8FAB87CD178AF74200B7A1AE /* CicmFilterDiffuser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterDiffuser.cpp; sourceTree = "<group>"; };
-		8FAB87CE178AF74200B7A1AE /* CicmFilterDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterDiffuser.h; sourceTree = "<group>"; };
-		8FAB87CF178AF74200B7A1AE /* CicmFilterFir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterFir.cpp; sourceTree = "<group>"; };
-		8FAB87D0178AF74200B7A1AE /* CicmFilterFir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterFir.h; sourceTree = "<group>"; };
-		8FAB87D1178AF74200B7A1AE /* CicmFilterFixedDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterFixedDelay.cpp; sourceTree = "<group>"; };
-		8FAB87D2178AF74200B7A1AE /* CicmFilterFixedDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterFixedDelay.h; sourceTree = "<group>"; };
-		8FAB87D3178AF74200B7A1AE /* CicmFilterOnePole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterOnePole.cpp; sourceTree = "<group>"; };
-		8FAB87D4178AF74200B7A1AE /* CicmFilterOnePole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterOnePole.h; sourceTree = "<group>"; };
-		8FAB87D5178AF74200B7A1AE /* CicmOnePole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmOnePole.cpp; sourceTree = "<group>"; };
-		8FAB87D6178AF74200B7A1AE /* CicmOnePole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmOnePole.h; sourceTree = "<group>"; };
-		8FAB87D8178AF74200B7A1AE /* CicmQSGS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmQSGS.cpp; sourceTree = "<group>"; };
-		8FAB87D9178AF74200B7A1AE /* CicmQSGS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmQSGS.h; sourceTree = "<group>"; };
-		8FAB87DA178AF74200B7A1AE /* CicmLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLibrary.h; sourceTree = "<group>"; };
-		8FAB87DC178AF74200B7A1AE /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
-		8FAB87DD178AF74200B7A1AE /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
-		8FAB87DF178AF74200B7A1AE /* CicmFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFreeverb.cpp; sourceTree = "<group>"; };
-		8FAB87E0178AF74200B7A1AE /* CicmFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFreeverb.h; sourceTree = "<group>"; };
-		8FAB87E1178AF74200B7A1AE /* CicmGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmGigaverb.cpp; sourceTree = "<group>"; };
-		8FAB87E2178AF74200B7A1AE /* CicmGigaverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmGigaverb.h; sourceTree = "<group>"; };
-		8FAB87E3178AF74200B7A1AE /* CicmTuning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTuning.h; sourceTree = "<group>"; };
-		8FAB87E4178AF74200B7A1AE /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
-		8FAB87E6178AF74200B7A1AE /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonics.cpp; sourceTree = "<group>"; };
-		8FAB87E7178AF74200B7A1AE /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonics.h; sourceTree = "<group>"; };
-		8FAB87E8178AF74200B7A1AE /* AmbisonicsDiffuser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDiffuser.cpp; sourceTree = "<group>"; };
-		8FAB87E9178AF74200B7A1AE /* AmbisonicsDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDiffuser.h; sourceTree = "<group>"; };
-		8FAB87EA178AF74200B7A1AE /* AmbisonicsViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsViewer.cpp; sourceTree = "<group>"; };
-		8FAB87EB178AF74200B7A1AE /* AmbisonicsViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsViewer.h; sourceTree = "<group>"; };
-		8FAB87EC178AF74200B7A1AE /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
-		8FAB87ED178AF74200B7A1AE /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
-		8FAB87EF178AF74200B7A1AE /* AmbisonicsBinaural.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsBinaural.cpp; sourceTree = "<group>"; };
-		8FAB87F0178AF74200B7A1AE /* AmbisonicsBinaural.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsBinaural.h; sourceTree = "<group>"; };
-		8FAB87F2178AF74200B7A1AE /* BoidsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoidsManager.cpp; sourceTree = "<group>"; };
-		8FAB87F3178AF74200B7A1AE /* BoidsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoidsManager.h; sourceTree = "<group>"; };
-		8FAB87F5178AF74200B7A1AE /* AmbisonicConvolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicConvolver.cpp; sourceTree = "<group>"; };
-		8FAB87F6178AF74200B7A1AE /* AmbisonicConvolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicConvolver.h; sourceTree = "<group>"; };
-		8FAB87F8178AF74200B7A1AE /* AmbisonicsDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDecoder.cpp; sourceTree = "<group>"; };
-		8FAB87F9178AF74200B7A1AE /* AmbisonicsDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDecoder.h; sourceTree = "<group>"; };
-		8FAB87FB178AF74200B7A1AE /* AmbisonicsDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDelay.cpp; sourceTree = "<group>"; };
-		8FAB87FC178AF74200B7A1AE /* AmbisonicsDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDelay.h; sourceTree = "<group>"; };
-		8FAB87FE178AF74200B7A1AE /* AmbisonicsEncoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsEncoder.cpp; sourceTree = "<group>"; };
-		8FAB87FF178AF74200B7A1AE /* AmbisonicsEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsEncoder.h; sourceTree = "<group>"; };
-		8FAB8801178AF74200B7A1AE /* AmbisonicsFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsFilter.cpp; sourceTree = "<group>"; };
-		8FAB8802178AF74200B7A1AE /* AmbisonicsFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsFilter.h; sourceTree = "<group>"; };
-		8FAB8804178AF74200B7A1AE /* AmbisonicsFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsFreeverb.cpp; sourceTree = "<group>"; };
-		8FAB8805178AF74200B7A1AE /* AmbisonicsFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsFreeverb.h; sourceTree = "<group>"; };
-		8FAB8807178AF74200B7A1AE /* AmbisonicsGigaverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsGigaverb.cpp; sourceTree = "<group>"; };
-		8FAB8808178AF74200B7A1AE /* AmbisonicsGigaverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsGigaverb.h; sourceTree = "<group>"; };
-		8FAB880A178AF74200B7A1AE /* AmbisonicsGrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsGrain.cpp; sourceTree = "<group>"; };
-		8FAB880B178AF74200B7A1AE /* AmbisonicsGrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsGrain.h; sourceTree = "<group>"; };
-		8FAB880C178AF74200B7A1AE /* HoaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaLibrary.h; sourceTree = "<group>"; };
-		8FAB880E178AF74200B7A1AE /* AmbisonicMultiMaps.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicMultiMaps.cpp; sourceTree = "<group>"; };
-		8FAB880F178AF74200B7A1AE /* AmbisonicMultiMaps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicMultiMaps.h; sourceTree = "<group>"; };
-		8FAB8810178AF74200B7A1AE /* AmbisonicsMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsMap.cpp; sourceTree = "<group>"; };
-		8FAB8811178AF74200B7A1AE /* AmbisonicsMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsMap.h; sourceTree = "<group>"; };
-		8FAB8812178AF74200B7A1AE /* AmbisonicSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSource.cpp; sourceTree = "<group>"; };
-		8FAB8813178AF74200B7A1AE /* AmbisonicSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSource.h; sourceTree = "<group>"; };
-		8FAB8814178AF74200B7A1AE /* AmbisonicSourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesGroup.cpp; sourceTree = "<group>"; };
-		8FAB8815178AF74200B7A1AE /* AmbisonicSourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesGroup.h; sourceTree = "<group>"; };
-		8FAB8816178AF74200B7A1AE /* AmbisonicSourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesManager.cpp; sourceTree = "<group>"; };
-		8FAB8817178AF74200B7A1AE /* AmbisonicSourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesManager.h; sourceTree = "<group>"; };
-		8FAB8818178AF74200B7A1AE /* AmbisonicSourcesPreset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesPreset.cpp; sourceTree = "<group>"; };
-		8FAB8819178AF74200B7A1AE /* AmbisonicSourcesPreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesPreset.h; sourceTree = "<group>"; };
-		8FAB881A178AF74200B7A1AE /* AmbisonicSourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesTrajectory.cpp; sourceTree = "<group>"; };
-		8FAB881B178AF74200B7A1AE /* AmbisonicSourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesTrajectory.h; sourceTree = "<group>"; };
-		8FAB881D178AF74200B7A1AE /* AmbisonicsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsMeter.cpp; sourceTree = "<group>"; };
-		8FAB881E178AF74200B7A1AE /* AmbisonicsMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsMeter.h; sourceTree = "<group>"; };
-		8FAB8820178AF74200B7A1AE /* AmbisonicsMultiDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsMultiDecoder.cpp; sourceTree = "<group>"; };
-		8FAB8821178AF74200B7A1AE /* AmbisonicsMultiDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsMultiDecoder.h; sourceTree = "<group>"; };
-		8FAB8823178AF74200B7A1AE /* AmbisonicsOptim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsOptim.cpp; sourceTree = "<group>"; };
-		8FAB8824178AF74200B7A1AE /* AmbisonicsOptim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsOptim.h; sourceTree = "<group>"; };
-		8FAB8826178AF74200B7A1AE /* AmbisonicsProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsProjector.cpp; sourceTree = "<group>"; };
-		8FAB8827178AF74200B7A1AE /* AmbisonicsProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsProjector.h; sourceTree = "<group>"; };
-		8FAB8829178AF74200B7A1AE /* AmbisonicsRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRecomposer.cpp; sourceTree = "<group>"; };
-		8FAB882A178AF74200B7A1AE /* AmbisonicsRecomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRecomposer.h; sourceTree = "<group>"; };
-		8FAB882B178AF74200B7A1AE /* AmbisonicVirtualMicUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVirtualMicUI.cpp; sourceTree = "<group>"; };
-		8FAB882C178AF74200B7A1AE /* AmbisonicVirtualMicUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicVirtualMicUI.h; sourceTree = "<group>"; };
-		8FAB882D178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVirtualMicUIManager.cpp; sourceTree = "<group>"; };
-		8FAB882E178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicVirtualMicUIManager.h; sourceTree = "<group>"; };
-		8FAB8830178AF74200B7A1AE /* AmbisonicsRestitution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRestitution.cpp; sourceTree = "<group>"; };
-		8FAB8831178AF74200B7A1AE /* AmbisonicsRestitution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRestitution.h; sourceTree = "<group>"; };
-		8FAB8833178AF74200B7A1AE /* AmbisonicsRotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRotate.cpp; sourceTree = "<group>"; };
-		8FAB8834178AF74200B7A1AE /* AmbisonicsRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRotate.h; sourceTree = "<group>"; };
-		8FAB8836178AF74200B7A1AE /* AmbisonicSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSpace.cpp; sourceTree = "<group>"; };
-		8FAB8837178AF74200B7A1AE /* AmbisonicSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSpace.h; sourceTree = "<group>"; };
-		8FAB8839178AF74200B7A1AE /* AmbisonicsSpectrum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsSpectrum.cpp; sourceTree = "<group>"; };
-		8FAB883A178AF74200B7A1AE /* AmbisonicsSpectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsSpectrum.h; sourceTree = "<group>"; };
-		8FAB883C178AF74200B7A1AE /* AmbisonicStars.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicStars.cpp; sourceTree = "<group>"; };
-		8FAB883D178AF74200B7A1AE /* AmbisonicStars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicStars.h; sourceTree = "<group>"; };
-		8FAB883F178AF74200B7A1AE /* AmbisonicsVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsVector.cpp; sourceTree = "<group>"; };
-		8FAB8840178AF74200B7A1AE /* AmbisonicsVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsVector.h; sourceTree = "<group>"; };
-		8FAB8842178AF74200B7A1AE /* AmbisonicsWider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsWider.cpp; sourceTree = "<group>"; };
-		8FAB8843178AF74200B7A1AE /* AmbisonicsWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsWider.h; sourceTree = "<group>"; };
+		8F7CCFAE17C23907003A01B8 /* MaxConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxConverter.h; path = ../MaxConverter.h; sourceTree = "<group>"; };
 		8FC9B330175EA3EC0006E4BB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8FCE864717CA271700A603D4 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
+		8FCE864817CA271700A603D4 /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
+		8FCE864917CA271700A603D4 /* CicmDefine_BLAS_FFTW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine_BLAS_FFTW.h; sourceTree = "<group>"; };
+		8FCE864A17CA271700A603D4 /* CicmDefine_INTEL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine_INTEL.h; sourceTree = "<group>"; };
+		8FCE864B17CA271700A603D4 /* CicmDefine_VDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine_VDSP.h; sourceTree = "<group>"; };
+		8FCE864D17CA271700A603D4 /* CicmDecorrelation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmDecorrelation.cpp; sourceTree = "<group>"; };
+		8FCE864E17CA271700A603D4 /* CicmDecorrelation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDecorrelation.h; sourceTree = "<group>"; };
+		8FCE865017CA271700A603D4 /* CicmEnvelope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmEnvelope.cpp; sourceTree = "<group>"; };
+		8FCE865117CA271700A603D4 /* CicmEnvelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmEnvelope.h; sourceTree = "<group>"; };
+		8FCE865317CA271700A603D4 /* CicmFft.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFft.cpp; sourceTree = "<group>"; };
+		8FCE865417CA271700A603D4 /* CicmFft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFft.h; sourceTree = "<group>"; };
+		8FCE865617CA271700A603D4 /* CicmFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilter.cpp; sourceTree = "<group>"; };
+		8FCE865717CA271700A603D4 /* CicmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilter.h; sourceTree = "<group>"; };
+		8FCE865817CA271700A603D4 /* CicmFilterAllpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterAllpass.cpp; sourceTree = "<group>"; };
+		8FCE865917CA271700A603D4 /* CicmFilterAllpass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterAllpass.h; sourceTree = "<group>"; };
+		8FCE865A17CA271700A603D4 /* CicmFilterBiquad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterBiquad.cpp; sourceTree = "<group>"; };
+		8FCE865B17CA271700A603D4 /* CicmFilterBiquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterBiquad.h; sourceTree = "<group>"; };
+		8FCE865C17CA271700A603D4 /* CicmFilterComb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterComb.cpp; sourceTree = "<group>"; };
+		8FCE865D17CA271700A603D4 /* CicmFilterComb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterComb.h; sourceTree = "<group>"; };
+		8FCE865E17CA271700A603D4 /* CicmFilterConvolution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterConvolution.cpp; sourceTree = "<group>"; };
+		8FCE865F17CA271700A603D4 /* CicmFilterConvolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterConvolution.h; sourceTree = "<group>"; };
+		8FCE866017CA271700A603D4 /* CicmFilterConvolutionZero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterConvolutionZero.cpp; sourceTree = "<group>"; };
+		8FCE866117CA271700A603D4 /* CicmFilterConvolutionZero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterConvolutionZero.h; sourceTree = "<group>"; };
+		8FCE866217CA271700A603D4 /* CicmFilterDamper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterDamper.h; sourceTree = "<group>"; };
+		8FCE866317CA271700A603D4 /* CicmFilterDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterDelay.cpp; sourceTree = "<group>"; };
+		8FCE866417CA271700A603D4 /* CicmFilterDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterDelay.h; sourceTree = "<group>"; };
+		8FCE866517CA271700A603D4 /* CicmFilterDiffuser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterDiffuser.cpp; sourceTree = "<group>"; };
+		8FCE866617CA271700A603D4 /* CicmFilterDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterDiffuser.h; sourceTree = "<group>"; };
+		8FCE866717CA271700A603D4 /* CicmFilterFir.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterFir.cpp; sourceTree = "<group>"; };
+		8FCE866817CA271700A603D4 /* CicmFilterFir.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterFir.h; sourceTree = "<group>"; };
+		8FCE866917CA271700A603D4 /* CicmFilterFixedDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterFixedDelay.cpp; sourceTree = "<group>"; };
+		8FCE866A17CA271700A603D4 /* CicmFilterFixedDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterFixedDelay.h; sourceTree = "<group>"; };
+		8FCE866B17CA271700A603D4 /* CicmFilterOnePole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFilterOnePole.cpp; sourceTree = "<group>"; };
+		8FCE866C17CA271700A603D4 /* CicmFilterOnePole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFilterOnePole.h; sourceTree = "<group>"; };
+		8FCE866D17CA271700A603D4 /* CicmOnePole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmOnePole.cpp; sourceTree = "<group>"; };
+		8FCE866E17CA271700A603D4 /* CicmOnePole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmOnePole.h; sourceTree = "<group>"; };
+		8FCE867017CA271700A603D4 /* CicmQSGS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmQSGS.cpp; sourceTree = "<group>"; };
+		8FCE867117CA271700A603D4 /* CicmQSGS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmQSGS.h; sourceTree = "<group>"; };
+		8FCE867217CA271700A603D4 /* CicmLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLibrary.h; sourceTree = "<group>"; };
+		8FCE867417CA271700A603D4 /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
+		8FCE867517CA271700A603D4 /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
+		8FCE867717CA271700A603D4 /* CicmFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmFreeverb.cpp; sourceTree = "<group>"; };
+		8FCE867817CA271700A603D4 /* CicmFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmFreeverb.h; sourceTree = "<group>"; };
+		8FCE867917CA271700A603D4 /* CicmTuning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTuning.h; sourceTree = "<group>"; };
+		8FCE867A17CA271700A603D4 /* CicmSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmSignal.h; sourceTree = "<group>"; };
+		8FCE867B17CA271700A603D4 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
+		8FCE867D17CA271700A603D4 /* Ambisonic3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic3D.cpp; sourceTree = "<group>"; };
+		8FCE867E17CA271700A603D4 /* Ambisonic3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic3D.h; sourceTree = "<group>"; };
+		8FCE867F17CA271700A603D4 /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonics.cpp; sourceTree = "<group>"; };
+		8FCE868017CA271700A603D4 /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonics.h; sourceTree = "<group>"; };
+		8FCE868117CA271700A603D4 /* AmbisonicsDiffuser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDiffuser.cpp; sourceTree = "<group>"; };
+		8FCE868217CA271700A603D4 /* AmbisonicsDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDiffuser.h; sourceTree = "<group>"; };
+		8FCE868317CA271700A603D4 /* AmbisonicsViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsViewer.cpp; sourceTree = "<group>"; };
+		8FCE868417CA271700A603D4 /* AmbisonicsViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsViewer.h; sourceTree = "<group>"; };
+		8FCE868517CA271700A603D4 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		8FCE868617CA271700A603D4 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		8FCE868817CA271700A603D4 /* AmbisonicsBinaural.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsBinaural.cpp; sourceTree = "<group>"; };
+		8FCE868917CA271700A603D4 /* AmbisonicsBinaural.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsBinaural.h; sourceTree = "<group>"; };
+		8FCE868B17CA271700A603D4 /* BoidsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoidsManager.cpp; sourceTree = "<group>"; };
+		8FCE868C17CA271700A603D4 /* BoidsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoidsManager.h; sourceTree = "<group>"; };
+		8FCE868E17CA271700A603D4 /* AmbisonicConvolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicConvolver.cpp; sourceTree = "<group>"; };
+		8FCE868F17CA271700A603D4 /* AmbisonicConvolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicConvolver.h; sourceTree = "<group>"; };
+		8FCE869117CA271700A603D4 /* AmbisonicDecoder3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicDecoder3D.cpp; sourceTree = "<group>"; };
+		8FCE869217CA271700A603D4 /* AmbisonicDecoder3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicDecoder3D.h; sourceTree = "<group>"; };
+		8FCE869317CA271700A603D4 /* AmbisonicsDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDecoder.cpp; sourceTree = "<group>"; };
+		8FCE869417CA271700A603D4 /* AmbisonicsDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDecoder.h; sourceTree = "<group>"; };
+		8FCE869617CA271700A603D4 /* AmbisonicsDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDelay.cpp; sourceTree = "<group>"; };
+		8FCE869717CA271700A603D4 /* AmbisonicsDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDelay.h; sourceTree = "<group>"; };
+		8FCE869917CA271700A603D4 /* AmbisonicEncoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncoder.cpp; sourceTree = "<group>"; };
+		8FCE869A17CA271700A603D4 /* AmbisonicEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicEncoder.h; sourceTree = "<group>"; };
+		8FCE869B17CA271700A603D4 /* AmbisonicEncoder3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncoder3D.cpp; sourceTree = "<group>"; };
+		8FCE869C17CA271700A603D4 /* AmbisonicEncoder3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicEncoder3D.h; sourceTree = "<group>"; };
+		8FCE869E17CA271700A603D4 /* AmbisonicsFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsFilter.cpp; sourceTree = "<group>"; };
+		8FCE869F17CA271700A603D4 /* AmbisonicsFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsFilter.h; sourceTree = "<group>"; };
+		8FCE86A117CA271700A603D4 /* AmbisonicsFreeverb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsFreeverb.cpp; sourceTree = "<group>"; };
+		8FCE86A217CA271700A603D4 /* AmbisonicsFreeverb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsFreeverb.h; sourceTree = "<group>"; };
+		8FCE86A417CA271700A603D4 /* AmbisonicsGalaxy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsGalaxy.cpp; sourceTree = "<group>"; };
+		8FCE86A517CA271700A603D4 /* AmbisonicsGalaxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsGalaxy.h; sourceTree = "<group>"; };
+		8FCE86A617CA271700A603D4 /* AmbisonicsPlanetarySystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsPlanetarySystem.h; sourceTree = "<group>"; };
+		8FCE86A717CA271700A603D4 /* AmbisonicsPlanetarySystemGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystemGlobal.cpp; sourceTree = "<group>"; };
+		8FCE86A817CA271700A603D4 /* AmbisonicsPlanetarySystemSatellites.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystemSatellites.cpp; sourceTree = "<group>"; };
+		8FCE86A917CA271700A603D4 /* AmbisonicsPlanetarySystemSun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsPlanetarySystemSun.cpp; sourceTree = "<group>"; };
+		8FCE86AA17CA271700A603D4 /* AmbisonicsSatellite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsSatellite.cpp; sourceTree = "<group>"; };
+		8FCE86AB17CA271700A603D4 /* AmbisonicsSatellite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsSatellite.h; sourceTree = "<group>"; };
+		8FCE86AC17CA271700A603D4 /* AmbisonicsStar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsStar.cpp; sourceTree = "<group>"; };
+		8FCE86AD17CA271700A603D4 /* AmbisonicsStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsStar.h; sourceTree = "<group>"; };
+		8FCE86AE17CA271700A603D4 /* AmbisonicsSun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsSun.cpp; sourceTree = "<group>"; };
+		8FCE86AF17CA271700A603D4 /* AmbisonicsSun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsSun.h; sourceTree = "<group>"; };
+		8FCE86B117CA271700A603D4 /* AmbisonicsGrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsGrain.cpp; sourceTree = "<group>"; };
+		8FCE86B217CA271700A603D4 /* AmbisonicsGrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsGrain.h; sourceTree = "<group>"; };
+		8FCE86B317CA271700A603D4 /* HoaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaLibrary.h; sourceTree = "<group>"; };
+		8FCE86B517CA271700A603D4 /* AmbisonicMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicMap.cpp; sourceTree = "<group>"; };
+		8FCE86B617CA271700A603D4 /* AmbisonicMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicMap.h; sourceTree = "<group>"; };
+		8FCE86B717CA271700A603D4 /* AmbisonicMultiMaps.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicMultiMaps.cpp; sourceTree = "<group>"; };
+		8FCE86B817CA271700A603D4 /* AmbisonicMultiMaps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicMultiMaps.h; sourceTree = "<group>"; };
+		8FCE86B917CA271700A603D4 /* AmbisonicSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSource.cpp; sourceTree = "<group>"; };
+		8FCE86BA17CA271700A603D4 /* AmbisonicSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSource.h; sourceTree = "<group>"; };
+		8FCE86BB17CA271700A603D4 /* AmbisonicSourcesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesGroup.cpp; sourceTree = "<group>"; };
+		8FCE86BC17CA271700A603D4 /* AmbisonicSourcesGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesGroup.h; sourceTree = "<group>"; };
+		8FCE86BD17CA271700A603D4 /* AmbisonicSourcesManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesManager.cpp; sourceTree = "<group>"; };
+		8FCE86BE17CA271700A603D4 /* AmbisonicSourcesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesManager.h; sourceTree = "<group>"; };
+		8FCE86BF17CA271700A603D4 /* AmbisonicSourcesPreset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesPreset.cpp; sourceTree = "<group>"; };
+		8FCE86C017CA271700A603D4 /* AmbisonicSourcesPreset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesPreset.h; sourceTree = "<group>"; };
+		8FCE86C117CA271700A603D4 /* AmbisonicSourcesTrajectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSourcesTrajectory.cpp; sourceTree = "<group>"; };
+		8FCE86C217CA271700A603D4 /* AmbisonicSourcesTrajectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSourcesTrajectory.h; sourceTree = "<group>"; };
+		8FCE86C417CA271700A603D4 /* AmbisonicsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsMeter.cpp; sourceTree = "<group>"; };
+		8FCE86C517CA271700A603D4 /* AmbisonicsMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsMeter.h; sourceTree = "<group>"; };
+		8FCE86C717CA271700A603D4 /* AmbisonicsMultiDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsMultiDecoder.cpp; sourceTree = "<group>"; };
+		8FCE86C817CA271700A603D4 /* AmbisonicsMultiDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsMultiDecoder.h; sourceTree = "<group>"; };
+		8FCE86CA17CA271700A603D4 /* AmbisonicOptim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicOptim.cpp; sourceTree = "<group>"; };
+		8FCE86CB17CA271700A603D4 /* AmbisonicOptim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicOptim.h; sourceTree = "<group>"; };
+		8FCE86CD17CA271700A603D4 /* AmbisonicProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicProjector.cpp; sourceTree = "<group>"; };
+		8FCE86CE17CA271700A603D4 /* AmbisonicProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicProjector.h; sourceTree = "<group>"; };
+		8FCE86D717CA271700A603D4 /* AmbisonicsRestitution.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRestitution.cpp; sourceTree = "<group>"; };
+		8FCE86D817CA271700A603D4 /* AmbisonicsRestitution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRestitution.h; sourceTree = "<group>"; };
+		8FCE86DA17CA271700A603D4 /* AmbisonicsRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRingModulation.cpp; sourceTree = "<group>"; };
+		8FCE86DB17CA271700A603D4 /* AmbisonicsRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRingModulation.h; sourceTree = "<group>"; };
+		8FCE86DD17CA271700A603D4 /* AmbisonicRotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicRotate.cpp; sourceTree = "<group>"; };
+		8FCE86DE17CA271700A603D4 /* AmbisonicRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicRotate.h; sourceTree = "<group>"; };
+		8FCE86E017CA271700A603D4 /* AmbisonicsScope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsScope.cpp; sourceTree = "<group>"; };
+		8FCE86E117CA271700A603D4 /* AmbisonicsScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsScope.h; sourceTree = "<group>"; };
+		8FCE86E317CA271700A603D4 /* AmbisonicSpace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSpace.cpp; sourceTree = "<group>"; };
+		8FCE86E417CA271700A603D4 /* AmbisonicSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSpace.h; sourceTree = "<group>"; };
+		8FCE86E617CA271700A603D4 /* AmbisonicSpectrum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicSpectrum.cpp; sourceTree = "<group>"; };
+		8FCE86E717CA271700A603D4 /* AmbisonicSpectrum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicSpectrum.h; sourceTree = "<group>"; };
+		8FCE86E917CA271700A603D4 /* AmbisonicVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVector.cpp; sourceTree = "<group>"; };
+		8FCE86EA17CA271700A603D4 /* AmbisonicVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicVector.h; sourceTree = "<group>"; };
+		8FCE86EC17CA271700A603D4 /* AmbisonicWider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicWider.cpp; sourceTree = "<group>"; };
+		8FCE86ED17CA271700A603D4 /* AmbisonicWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicWider.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,7 +301,8 @@
 				8FC9B330175EA3EC0006E4BB /* Accelerate.framework */,
 				2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */,
 				2C0AA615178730B300876AFC /* hoa.space~.cpp */,
-				8FAB87AE178AF74200B7A1AE /* Sources */,
+				8F7CCFAE17C23907003A01B8 /* MaxConverter.h */,
+				8FCE864417CA271700A603D4 /* Sources */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
@@ -287,390 +316,403 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8FAB87AE178AF74200B7A1AE /* Sources */ = {
+		8FCE864417CA271700A603D4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87AF178AF74200B7A1AE /* CicmLibrary */,
-				8FAB87E5178AF74200B7A1AE /* hoaAmbisonics */,
-				8FAB87EE178AF74200B7A1AE /* hoaBinaural */,
-				8FAB87F1178AF74200B7A1AE /* hoaBoids */,
-				8FAB87F4178AF74200B7A1AE /* hoaConvolve */,
-				8FAB87F7178AF74200B7A1AE /* hoaDecoder */,
-				8FAB87FA178AF74200B7A1AE /* hoaDelay */,
-				8FAB87FD178AF74200B7A1AE /* hoaEncoder */,
-				8FAB8800178AF74200B7A1AE /* hoaFilter */,
-				8FAB8803178AF74200B7A1AE /* hoaFreeverb */,
-				8FAB8806178AF74200B7A1AE /* hoaGigaverb */,
-				8FAB8809178AF74200B7A1AE /* hoaGrain */,
-				8FAB880C178AF74200B7A1AE /* HoaLibrary.h */,
-				8FAB880D178AF74200B7A1AE /* hoaMap */,
-				8FAB881C178AF74200B7A1AE /* hoaMeter */,
-				8FAB881F178AF74200B7A1AE /* hoaMultiDecoder */,
-				8FAB8822178AF74200B7A1AE /* hoaOptim */,
-				8FAB8825178AF74200B7A1AE /* hoaProjector */,
-				8FAB8828178AF74200B7A1AE /* hoaRecomposer */,
-				8FAB882F178AF74200B7A1AE /* hoaRestitution */,
-				8FAB8832178AF74200B7A1AE /* hoaRotate */,
-				8FAB8835178AF74200B7A1AE /* hoaSpace */,
-				8FAB8838178AF74200B7A1AE /* hoaSpectrum */,
-				8FAB883B178AF74200B7A1AE /* hoaStars */,
-				8FAB883E178AF74200B7A1AE /* hoaVector */,
-				8FAB8841178AF74200B7A1AE /* hoaWider */,
+				8FCE864517CA271700A603D4 /* CicmLibrary */,
+				8FCE867C17CA271700A603D4 /* hoaAmbisonics */,
+				8FCE868717CA271700A603D4 /* hoaBinaural */,
+				8FCE868A17CA271700A603D4 /* hoaBoids */,
+				8FCE868D17CA271700A603D4 /* hoaConvolve */,
+				8FCE869017CA271700A603D4 /* hoaDecoder */,
+				8FCE869517CA271700A603D4 /* hoaDelay */,
+				8FCE869817CA271700A603D4 /* hoaEncoder */,
+				8FCE869D17CA271700A603D4 /* hoaFilter */,
+				8FCE86A017CA271700A603D4 /* hoaFreeverb */,
+				8FCE86A317CA271700A603D4 /* hoaGalaxy */,
+				8FCE86B017CA271700A603D4 /* hoaGrain */,
+				8FCE86B317CA271700A603D4 /* HoaLibrary.h */,
+				8FCE86B417CA271700A603D4 /* hoaMap */,
+				8FCE86C317CA271700A603D4 /* hoaMeter */,
+				8FCE86C617CA271700A603D4 /* hoaMultiDecoder */,
+				8FCE86C917CA271700A603D4 /* hoaOptim */,
+				8FCE86CC17CA271700A603D4 /* hoaProjector */,
+				8FCE86D617CA271700A603D4 /* hoaRestitution */,
+				8FCE86D917CA271700A603D4 /* hoaRingModulation */,
+				8FCE86DC17CA271700A603D4 /* hoaRotate */,
+				8FCE86DF17CA271700A603D4 /* hoaScope */,
+				8FCE86E217CA271700A603D4 /* hoaSpace */,
+				8FCE86E517CA271700A603D4 /* hoaSpectrum */,
+				8FCE86E817CA271700A603D4 /* hoaVector */,
+				8FCE86EB17CA271700A603D4 /* hoaWider */,
 			);
 			name = Sources;
 			path = ../../Sources;
 			sourceTree = "<group>";
 		};
-		8FAB87AF178AF74200B7A1AE /* CicmLibrary */ = {
+		8FCE864517CA271700A603D4 /* CicmLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87B0178AF74200B7A1AE /* CicmAmplitude */,
-				8FAB87B3178AF74200B7A1AE /* CicmDefine.h */,
-				8FAB87B4178AF74200B7A1AE /* CicmDelay */,
-				8FAB87B7178AF74200B7A1AE /* CicmEnvelope */,
-				8FAB87BA178AF74200B7A1AE /* CicmFft */,
-				8FAB87BD178AF74200B7A1AE /* CicmFilters */,
-				8FAB87D7178AF74200B7A1AE /* CicmGranular */,
-				8FAB87DA178AF74200B7A1AE /* CicmLibrary.h */,
-				8FAB87DB178AF74200B7A1AE /* CicmLines */,
-				8FAB87DE178AF74200B7A1AE /* CicmReverb */,
-				8FAB87E4178AF74200B7A1AE /* CicmTools.h */,
+				8FCE864617CA271700A603D4 /* CicmAmplitude */,
+				8FCE864917CA271700A603D4 /* CicmDefine_BLAS_FFTW.h */,
+				8FCE864A17CA271700A603D4 /* CicmDefine_INTEL.h */,
+				8FCE864B17CA271700A603D4 /* CicmDefine_VDSP.h */,
+				8FCE864C17CA271700A603D4 /* CicmDelay */,
+				8FCE864F17CA271700A603D4 /* CicmEnvelope */,
+				8FCE865217CA271700A603D4 /* CicmFft */,
+				8FCE865517CA271700A603D4 /* CicmFilters */,
+				8FCE866F17CA271700A603D4 /* CicmGranular */,
+				8FCE867217CA271700A603D4 /* CicmLibrary.h */,
+				8FCE867317CA271700A603D4 /* CicmLines */,
+				8FCE867617CA271700A603D4 /* CicmReverb */,
+				8FCE867A17CA271700A603D4 /* CicmSignal.h */,
+				8FCE867B17CA271700A603D4 /* CicmTools.h */,
 			);
 			path = CicmLibrary;
 			sourceTree = "<group>";
 		};
-		8FAB87B0178AF74200B7A1AE /* CicmAmplitude */ = {
+		8FCE864617CA271700A603D4 /* CicmAmplitude */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87B1178AF74200B7A1AE /* CicmRingModulation.cpp */,
-				8FAB87B2178AF74200B7A1AE /* CicmRingModulation.h */,
+				8FCE864717CA271700A603D4 /* CicmRingModulation.cpp */,
+				8FCE864817CA271700A603D4 /* CicmRingModulation.h */,
 			);
 			path = CicmAmplitude;
 			sourceTree = "<group>";
 		};
-		8FAB87B4178AF74200B7A1AE /* CicmDelay */ = {
+		8FCE864C17CA271700A603D4 /* CicmDelay */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87B5178AF74200B7A1AE /* CicmDecorrelation.cpp */,
-				8FAB87B6178AF74200B7A1AE /* CicmDecorrelation.h */,
+				8FCE864D17CA271700A603D4 /* CicmDecorrelation.cpp */,
+				8FCE864E17CA271700A603D4 /* CicmDecorrelation.h */,
 			);
 			path = CicmDelay;
 			sourceTree = "<group>";
 		};
-		8FAB87B7178AF74200B7A1AE /* CicmEnvelope */ = {
+		8FCE864F17CA271700A603D4 /* CicmEnvelope */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87B8178AF74200B7A1AE /* CicmEnvelope.cpp */,
-				8FAB87B9178AF74200B7A1AE /* CicmEnvelope.h */,
+				8FCE865017CA271700A603D4 /* CicmEnvelope.cpp */,
+				8FCE865117CA271700A603D4 /* CicmEnvelope.h */,
 			);
 			path = CicmEnvelope;
 			sourceTree = "<group>";
 		};
-		8FAB87BA178AF74200B7A1AE /* CicmFft */ = {
+		8FCE865217CA271700A603D4 /* CicmFft */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87BB178AF74200B7A1AE /* CicmFft.cpp */,
-				8FAB87BC178AF74200B7A1AE /* CicmFft.h */,
+				8FCE865317CA271700A603D4 /* CicmFft.cpp */,
+				8FCE865417CA271700A603D4 /* CicmFft.h */,
 			);
 			path = CicmFft;
 			sourceTree = "<group>";
 		};
-		8FAB87BD178AF74200B7A1AE /* CicmFilters */ = {
+		8FCE865517CA271700A603D4 /* CicmFilters */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87BE178AF74200B7A1AE /* CicmFilter.cpp */,
-				8FAB87BF178AF74200B7A1AE /* CicmFilter.h */,
-				8FAB87C0178AF74200B7A1AE /* CicmFilterAllpass.cpp */,
-				8FAB87C1178AF74200B7A1AE /* CicmFilterAllpass.h */,
-				8FAB87C2178AF74200B7A1AE /* CicmFilterBiquad.cpp */,
-				8FAB87C3178AF74200B7A1AE /* CicmFilterBiquad.h */,
-				8FAB87C4178AF74200B7A1AE /* CicmFilterComb.cpp */,
-				8FAB87C5178AF74200B7A1AE /* CicmFilterComb.h */,
-				8FAB87C6178AF74200B7A1AE /* CicmFilterConvolution.cpp */,
-				8FAB87C7178AF74200B7A1AE /* CicmFilterConvolution.h */,
-				8FAB87C8178AF74200B7A1AE /* CicmFilterConvolutionZero.cpp */,
-				8FAB87C9178AF74200B7A1AE /* CicmFilterConvolutionZero.h */,
-				8FAB87CA178AF74200B7A1AE /* CicmFilterDamper.h */,
-				8FAB87CB178AF74200B7A1AE /* CicmFilterDelay.cpp */,
-				8FAB87CC178AF74200B7A1AE /* CicmFilterDelay.h */,
-				8FAB87CD178AF74200B7A1AE /* CicmFilterDiffuser.cpp */,
-				8FAB87CE178AF74200B7A1AE /* CicmFilterDiffuser.h */,
-				8FAB87CF178AF74200B7A1AE /* CicmFilterFir.cpp */,
-				8FAB87D0178AF74200B7A1AE /* CicmFilterFir.h */,
-				8FAB87D1178AF74200B7A1AE /* CicmFilterFixedDelay.cpp */,
-				8FAB87D2178AF74200B7A1AE /* CicmFilterFixedDelay.h */,
-				8FAB87D3178AF74200B7A1AE /* CicmFilterOnePole.cpp */,
-				8FAB87D4178AF74200B7A1AE /* CicmFilterOnePole.h */,
-				8FAB87D5178AF74200B7A1AE /* CicmOnePole.cpp */,
-				8FAB87D6178AF74200B7A1AE /* CicmOnePole.h */,
+				8FCE865617CA271700A603D4 /* CicmFilter.cpp */,
+				8FCE865717CA271700A603D4 /* CicmFilter.h */,
+				8FCE865817CA271700A603D4 /* CicmFilterAllpass.cpp */,
+				8FCE865917CA271700A603D4 /* CicmFilterAllpass.h */,
+				8FCE865A17CA271700A603D4 /* CicmFilterBiquad.cpp */,
+				8FCE865B17CA271700A603D4 /* CicmFilterBiquad.h */,
+				8FCE865C17CA271700A603D4 /* CicmFilterComb.cpp */,
+				8FCE865D17CA271700A603D4 /* CicmFilterComb.h */,
+				8FCE865E17CA271700A603D4 /* CicmFilterConvolution.cpp */,
+				8FCE865F17CA271700A603D4 /* CicmFilterConvolution.h */,
+				8FCE866017CA271700A603D4 /* CicmFilterConvolutionZero.cpp */,
+				8FCE866117CA271700A603D4 /* CicmFilterConvolutionZero.h */,
+				8FCE866217CA271700A603D4 /* CicmFilterDamper.h */,
+				8FCE866317CA271700A603D4 /* CicmFilterDelay.cpp */,
+				8FCE866417CA271700A603D4 /* CicmFilterDelay.h */,
+				8FCE866517CA271700A603D4 /* CicmFilterDiffuser.cpp */,
+				8FCE866617CA271700A603D4 /* CicmFilterDiffuser.h */,
+				8FCE866717CA271700A603D4 /* CicmFilterFir.cpp */,
+				8FCE866817CA271700A603D4 /* CicmFilterFir.h */,
+				8FCE866917CA271700A603D4 /* CicmFilterFixedDelay.cpp */,
+				8FCE866A17CA271700A603D4 /* CicmFilterFixedDelay.h */,
+				8FCE866B17CA271700A603D4 /* CicmFilterOnePole.cpp */,
+				8FCE866C17CA271700A603D4 /* CicmFilterOnePole.h */,
+				8FCE866D17CA271700A603D4 /* CicmOnePole.cpp */,
+				8FCE866E17CA271700A603D4 /* CicmOnePole.h */,
 			);
 			path = CicmFilters;
 			sourceTree = "<group>";
 		};
-		8FAB87D7178AF74200B7A1AE /* CicmGranular */ = {
+		8FCE866F17CA271700A603D4 /* CicmGranular */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87D8178AF74200B7A1AE /* CicmQSGS.cpp */,
-				8FAB87D9178AF74200B7A1AE /* CicmQSGS.h */,
+				8FCE867017CA271700A603D4 /* CicmQSGS.cpp */,
+				8FCE867117CA271700A603D4 /* CicmQSGS.h */,
 			);
 			path = CicmGranular;
 			sourceTree = "<group>";
 		};
-		8FAB87DB178AF74200B7A1AE /* CicmLines */ = {
+		8FCE867317CA271700A603D4 /* CicmLines */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87DC178AF74200B7A1AE /* CicmLine.cpp */,
-				8FAB87DD178AF74200B7A1AE /* CicmLine.h */,
+				8FCE867417CA271700A603D4 /* CicmLine.cpp */,
+				8FCE867517CA271700A603D4 /* CicmLine.h */,
 			);
 			path = CicmLines;
 			sourceTree = "<group>";
 		};
-		8FAB87DE178AF74200B7A1AE /* CicmReverb */ = {
+		8FCE867617CA271700A603D4 /* CicmReverb */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87DF178AF74200B7A1AE /* CicmFreeverb.cpp */,
-				8FAB87E0178AF74200B7A1AE /* CicmFreeverb.h */,
-				8FAB87E1178AF74200B7A1AE /* CicmGigaverb.cpp */,
-				8FAB87E2178AF74200B7A1AE /* CicmGigaverb.h */,
-				8FAB87E3178AF74200B7A1AE /* CicmTuning.h */,
+				8FCE867717CA271700A603D4 /* CicmFreeverb.cpp */,
+				8FCE867817CA271700A603D4 /* CicmFreeverb.h */,
+				8FCE867917CA271700A603D4 /* CicmTuning.h */,
 			);
 			path = CicmReverb;
 			sourceTree = "<group>";
 		};
-		8FAB87E5178AF74200B7A1AE /* hoaAmbisonics */ = {
+		8FCE867C17CA271700A603D4 /* hoaAmbisonics */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87E6178AF74200B7A1AE /* Ambisonics.cpp */,
-				8FAB87E7178AF74200B7A1AE /* Ambisonics.h */,
-				8FAB87E8178AF74200B7A1AE /* AmbisonicsDiffuser.cpp */,
-				8FAB87E9178AF74200B7A1AE /* AmbisonicsDiffuser.h */,
-				8FAB87EA178AF74200B7A1AE /* AmbisonicsViewer.cpp */,
-				8FAB87EB178AF74200B7A1AE /* AmbisonicsViewer.h */,
-				8FAB87EC178AF74200B7A1AE /* Planewaves.cpp */,
-				8FAB87ED178AF74200B7A1AE /* Planewaves.h */,
+				8FCE867D17CA271700A603D4 /* Ambisonic3D.cpp */,
+				8FCE867E17CA271700A603D4 /* Ambisonic3D.h */,
+				8FCE867F17CA271700A603D4 /* Ambisonics.cpp */,
+				8FCE868017CA271700A603D4 /* Ambisonics.h */,
+				8FCE868117CA271700A603D4 /* AmbisonicsDiffuser.cpp */,
+				8FCE868217CA271700A603D4 /* AmbisonicsDiffuser.h */,
+				8FCE868317CA271700A603D4 /* AmbisonicsViewer.cpp */,
+				8FCE868417CA271700A603D4 /* AmbisonicsViewer.h */,
+				8FCE868517CA271700A603D4 /* Planewaves.cpp */,
+				8FCE868617CA271700A603D4 /* Planewaves.h */,
 			);
 			path = hoaAmbisonics;
 			sourceTree = "<group>";
 		};
-		8FAB87EE178AF74200B7A1AE /* hoaBinaural */ = {
+		8FCE868717CA271700A603D4 /* hoaBinaural */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87EF178AF74200B7A1AE /* AmbisonicsBinaural.cpp */,
-				8FAB87F0178AF74200B7A1AE /* AmbisonicsBinaural.h */,
+				8FCE868817CA271700A603D4 /* AmbisonicsBinaural.cpp */,
+				8FCE868917CA271700A603D4 /* AmbisonicsBinaural.h */,
 			);
 			path = hoaBinaural;
 			sourceTree = "<group>";
 		};
-		8FAB87F1178AF74200B7A1AE /* hoaBoids */ = {
+		8FCE868A17CA271700A603D4 /* hoaBoids */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87F2178AF74200B7A1AE /* BoidsManager.cpp */,
-				8FAB87F3178AF74200B7A1AE /* BoidsManager.h */,
+				8FCE868B17CA271700A603D4 /* BoidsManager.cpp */,
+				8FCE868C17CA271700A603D4 /* BoidsManager.h */,
 			);
 			path = hoaBoids;
 			sourceTree = "<group>";
 		};
-		8FAB87F4178AF74200B7A1AE /* hoaConvolve */ = {
+		8FCE868D17CA271700A603D4 /* hoaConvolve */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87F5178AF74200B7A1AE /* AmbisonicConvolver.cpp */,
-				8FAB87F6178AF74200B7A1AE /* AmbisonicConvolver.h */,
+				8FCE868E17CA271700A603D4 /* AmbisonicConvolver.cpp */,
+				8FCE868F17CA271700A603D4 /* AmbisonicConvolver.h */,
 			);
 			path = hoaConvolve;
 			sourceTree = "<group>";
 		};
-		8FAB87F7178AF74200B7A1AE /* hoaDecoder */ = {
+		8FCE869017CA271700A603D4 /* hoaDecoder */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87F8178AF74200B7A1AE /* AmbisonicsDecoder.cpp */,
-				8FAB87F9178AF74200B7A1AE /* AmbisonicsDecoder.h */,
+				8FCE869117CA271700A603D4 /* AmbisonicDecoder3D.cpp */,
+				8FCE869217CA271700A603D4 /* AmbisonicDecoder3D.h */,
+				8FCE869317CA271700A603D4 /* AmbisonicsDecoder.cpp */,
+				8FCE869417CA271700A603D4 /* AmbisonicsDecoder.h */,
 			);
 			path = hoaDecoder;
 			sourceTree = "<group>";
 		};
-		8FAB87FA178AF74200B7A1AE /* hoaDelay */ = {
+		8FCE869517CA271700A603D4 /* hoaDelay */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87FB178AF74200B7A1AE /* AmbisonicsDelay.cpp */,
-				8FAB87FC178AF74200B7A1AE /* AmbisonicsDelay.h */,
+				8FCE869617CA271700A603D4 /* AmbisonicsDelay.cpp */,
+				8FCE869717CA271700A603D4 /* AmbisonicsDelay.h */,
 			);
 			path = hoaDelay;
 			sourceTree = "<group>";
 		};
-		8FAB87FD178AF74200B7A1AE /* hoaEncoder */ = {
+		8FCE869817CA271700A603D4 /* hoaEncoder */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB87FE178AF74200B7A1AE /* AmbisonicsEncoder.cpp */,
-				8FAB87FF178AF74200B7A1AE /* AmbisonicsEncoder.h */,
+				8FCE869917CA271700A603D4 /* AmbisonicEncoder.cpp */,
+				8FCE869A17CA271700A603D4 /* AmbisonicEncoder.h */,
+				8FCE869B17CA271700A603D4 /* AmbisonicEncoder3D.cpp */,
+				8FCE869C17CA271700A603D4 /* AmbisonicEncoder3D.h */,
 			);
 			path = hoaEncoder;
 			sourceTree = "<group>";
 		};
-		8FAB8800178AF74200B7A1AE /* hoaFilter */ = {
+		8FCE869D17CA271700A603D4 /* hoaFilter */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8801178AF74200B7A1AE /* AmbisonicsFilter.cpp */,
-				8FAB8802178AF74200B7A1AE /* AmbisonicsFilter.h */,
+				8FCE869E17CA271700A603D4 /* AmbisonicsFilter.cpp */,
+				8FCE869F17CA271700A603D4 /* AmbisonicsFilter.h */,
 			);
 			path = hoaFilter;
 			sourceTree = "<group>";
 		};
-		8FAB8803178AF74200B7A1AE /* hoaFreeverb */ = {
+		8FCE86A017CA271700A603D4 /* hoaFreeverb */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8804178AF74200B7A1AE /* AmbisonicsFreeverb.cpp */,
-				8FAB8805178AF74200B7A1AE /* AmbisonicsFreeverb.h */,
+				8FCE86A117CA271700A603D4 /* AmbisonicsFreeverb.cpp */,
+				8FCE86A217CA271700A603D4 /* AmbisonicsFreeverb.h */,
 			);
 			path = hoaFreeverb;
 			sourceTree = "<group>";
 		};
-		8FAB8806178AF74200B7A1AE /* hoaGigaverb */ = {
+		8FCE86A317CA271700A603D4 /* hoaGalaxy */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8807178AF74200B7A1AE /* AmbisonicsGigaverb.cpp */,
-				8FAB8808178AF74200B7A1AE /* AmbisonicsGigaverb.h */,
+				8FCE86A417CA271700A603D4 /* AmbisonicsGalaxy.cpp */,
+				8FCE86A517CA271700A603D4 /* AmbisonicsGalaxy.h */,
+				8FCE86A617CA271700A603D4 /* AmbisonicsPlanetarySystem.h */,
+				8FCE86A717CA271700A603D4 /* AmbisonicsPlanetarySystemGlobal.cpp */,
+				8FCE86A817CA271700A603D4 /* AmbisonicsPlanetarySystemSatellites.cpp */,
+				8FCE86A917CA271700A603D4 /* AmbisonicsPlanetarySystemSun.cpp */,
+				8FCE86AA17CA271700A603D4 /* AmbisonicsSatellite.cpp */,
+				8FCE86AB17CA271700A603D4 /* AmbisonicsSatellite.h */,
+				8FCE86AC17CA271700A603D4 /* AmbisonicsStar.cpp */,
+				8FCE86AD17CA271700A603D4 /* AmbisonicsStar.h */,
+				8FCE86AE17CA271700A603D4 /* AmbisonicsSun.cpp */,
+				8FCE86AF17CA271700A603D4 /* AmbisonicsSun.h */,
 			);
-			path = hoaGigaverb;
+			path = hoaGalaxy;
 			sourceTree = "<group>";
 		};
-		8FAB8809178AF74200B7A1AE /* hoaGrain */ = {
+		8FCE86B017CA271700A603D4 /* hoaGrain */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB880A178AF74200B7A1AE /* AmbisonicsGrain.cpp */,
-				8FAB880B178AF74200B7A1AE /* AmbisonicsGrain.h */,
+				8FCE86B117CA271700A603D4 /* AmbisonicsGrain.cpp */,
+				8FCE86B217CA271700A603D4 /* AmbisonicsGrain.h */,
 			);
 			path = hoaGrain;
 			sourceTree = "<group>";
 		};
-		8FAB880D178AF74200B7A1AE /* hoaMap */ = {
+		8FCE86B417CA271700A603D4 /* hoaMap */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB880E178AF74200B7A1AE /* AmbisonicMultiMaps.cpp */,
-				8FAB880F178AF74200B7A1AE /* AmbisonicMultiMaps.h */,
-				8FAB8810178AF74200B7A1AE /* AmbisonicsMap.cpp */,
-				8FAB8811178AF74200B7A1AE /* AmbisonicsMap.h */,
-				8FAB8812178AF74200B7A1AE /* AmbisonicSource.cpp */,
-				8FAB8813178AF74200B7A1AE /* AmbisonicSource.h */,
-				8FAB8814178AF74200B7A1AE /* AmbisonicSourcesGroup.cpp */,
-				8FAB8815178AF74200B7A1AE /* AmbisonicSourcesGroup.h */,
-				8FAB8816178AF74200B7A1AE /* AmbisonicSourcesManager.cpp */,
-				8FAB8817178AF74200B7A1AE /* AmbisonicSourcesManager.h */,
-				8FAB8818178AF74200B7A1AE /* AmbisonicSourcesPreset.cpp */,
-				8FAB8819178AF74200B7A1AE /* AmbisonicSourcesPreset.h */,
-				8FAB881A178AF74200B7A1AE /* AmbisonicSourcesTrajectory.cpp */,
-				8FAB881B178AF74200B7A1AE /* AmbisonicSourcesTrajectory.h */,
+				8FCE86B517CA271700A603D4 /* AmbisonicMap.cpp */,
+				8FCE86B617CA271700A603D4 /* AmbisonicMap.h */,
+				8FCE86B717CA271700A603D4 /* AmbisonicMultiMaps.cpp */,
+				8FCE86B817CA271700A603D4 /* AmbisonicMultiMaps.h */,
+				8FCE86B917CA271700A603D4 /* AmbisonicSource.cpp */,
+				8FCE86BA17CA271700A603D4 /* AmbisonicSource.h */,
+				8FCE86BB17CA271700A603D4 /* AmbisonicSourcesGroup.cpp */,
+				8FCE86BC17CA271700A603D4 /* AmbisonicSourcesGroup.h */,
+				8FCE86BD17CA271700A603D4 /* AmbisonicSourcesManager.cpp */,
+				8FCE86BE17CA271700A603D4 /* AmbisonicSourcesManager.h */,
+				8FCE86BF17CA271700A603D4 /* AmbisonicSourcesPreset.cpp */,
+				8FCE86C017CA271700A603D4 /* AmbisonicSourcesPreset.h */,
+				8FCE86C117CA271700A603D4 /* AmbisonicSourcesTrajectory.cpp */,
+				8FCE86C217CA271700A603D4 /* AmbisonicSourcesTrajectory.h */,
 			);
 			path = hoaMap;
 			sourceTree = "<group>";
 		};
-		8FAB881C178AF74200B7A1AE /* hoaMeter */ = {
+		8FCE86C317CA271700A603D4 /* hoaMeter */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB881D178AF74200B7A1AE /* AmbisonicsMeter.cpp */,
-				8FAB881E178AF74200B7A1AE /* AmbisonicsMeter.h */,
+				8FCE86C417CA271700A603D4 /* AmbisonicsMeter.cpp */,
+				8FCE86C517CA271700A603D4 /* AmbisonicsMeter.h */,
 			);
 			path = hoaMeter;
 			sourceTree = "<group>";
 		};
-		8FAB881F178AF74200B7A1AE /* hoaMultiDecoder */ = {
+		8FCE86C617CA271700A603D4 /* hoaMultiDecoder */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8820178AF74200B7A1AE /* AmbisonicsMultiDecoder.cpp */,
-				8FAB8821178AF74200B7A1AE /* AmbisonicsMultiDecoder.h */,
+				8FCE86C717CA271700A603D4 /* AmbisonicsMultiDecoder.cpp */,
+				8FCE86C817CA271700A603D4 /* AmbisonicsMultiDecoder.h */,
 			);
 			path = hoaMultiDecoder;
 			sourceTree = "<group>";
 		};
-		8FAB8822178AF74200B7A1AE /* hoaOptim */ = {
+		8FCE86C917CA271700A603D4 /* hoaOptim */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8823178AF74200B7A1AE /* AmbisonicsOptim.cpp */,
-				8FAB8824178AF74200B7A1AE /* AmbisonicsOptim.h */,
+				8FCE86CA17CA271700A603D4 /* AmbisonicOptim.cpp */,
+				8FCE86CB17CA271700A603D4 /* AmbisonicOptim.h */,
 			);
 			path = hoaOptim;
 			sourceTree = "<group>";
 		};
-		8FAB8825178AF74200B7A1AE /* hoaProjector */ = {
+		8FCE86CC17CA271700A603D4 /* hoaProjector */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8826178AF74200B7A1AE /* AmbisonicsProjector.cpp */,
-				8FAB8827178AF74200B7A1AE /* AmbisonicsProjector.h */,
+				8FCE86CD17CA271700A603D4 /* AmbisonicProjector.cpp */,
+				8FCE86CE17CA271700A603D4 /* AmbisonicProjector.h */,
 			);
 			path = hoaProjector;
 			sourceTree = "<group>";
 		};
-		8FAB8828178AF74200B7A1AE /* hoaRecomposer */ = {
+		8FCE86D617CA271700A603D4 /* hoaRestitution */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8829178AF74200B7A1AE /* AmbisonicsRecomposer.cpp */,
-				8FAB882A178AF74200B7A1AE /* AmbisonicsRecomposer.h */,
-				8FAB882B178AF74200B7A1AE /* AmbisonicVirtualMicUI.cpp */,
-				8FAB882C178AF74200B7A1AE /* AmbisonicVirtualMicUI.h */,
-				8FAB882D178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.cpp */,
-				8FAB882E178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.h */,
-			);
-			path = hoaRecomposer;
-			sourceTree = "<group>";
-		};
-		8FAB882F178AF74200B7A1AE /* hoaRestitution */ = {
-			isa = PBXGroup;
-			children = (
-				8FAB8830178AF74200B7A1AE /* AmbisonicsRestitution.cpp */,
-				8FAB8831178AF74200B7A1AE /* AmbisonicsRestitution.h */,
+				8FCE86D717CA271700A603D4 /* AmbisonicsRestitution.cpp */,
+				8FCE86D817CA271700A603D4 /* AmbisonicsRestitution.h */,
 			);
 			path = hoaRestitution;
 			sourceTree = "<group>";
 		};
-		8FAB8832178AF74200B7A1AE /* hoaRotate */ = {
+		8FCE86D917CA271700A603D4 /* hoaRingModulation */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8833178AF74200B7A1AE /* AmbisonicsRotate.cpp */,
-				8FAB8834178AF74200B7A1AE /* AmbisonicsRotate.h */,
+				8FCE86DA17CA271700A603D4 /* AmbisonicsRingModulation.cpp */,
+				8FCE86DB17CA271700A603D4 /* AmbisonicsRingModulation.h */,
+			);
+			path = hoaRingModulation;
+			sourceTree = "<group>";
+		};
+		8FCE86DC17CA271700A603D4 /* hoaRotate */ = {
+			isa = PBXGroup;
+			children = (
+				8FCE86DD17CA271700A603D4 /* AmbisonicRotate.cpp */,
+				8FCE86DE17CA271700A603D4 /* AmbisonicRotate.h */,
 			);
 			path = hoaRotate;
 			sourceTree = "<group>";
 		};
-		8FAB8835178AF74200B7A1AE /* hoaSpace */ = {
+		8FCE86DF17CA271700A603D4 /* hoaScope */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8836178AF74200B7A1AE /* AmbisonicSpace.cpp */,
-				8FAB8837178AF74200B7A1AE /* AmbisonicSpace.h */,
+				8FCE86E017CA271700A603D4 /* AmbisonicsScope.cpp */,
+				8FCE86E117CA271700A603D4 /* AmbisonicsScope.h */,
+			);
+			path = hoaScope;
+			sourceTree = "<group>";
+		};
+		8FCE86E217CA271700A603D4 /* hoaSpace */ = {
+			isa = PBXGroup;
+			children = (
+				8FCE86E317CA271700A603D4 /* AmbisonicSpace.cpp */,
+				8FCE86E417CA271700A603D4 /* AmbisonicSpace.h */,
 			);
 			path = hoaSpace;
 			sourceTree = "<group>";
 		};
-		8FAB8838178AF74200B7A1AE /* hoaSpectrum */ = {
+		8FCE86E517CA271700A603D4 /* hoaSpectrum */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8839178AF74200B7A1AE /* AmbisonicsSpectrum.cpp */,
-				8FAB883A178AF74200B7A1AE /* AmbisonicsSpectrum.h */,
+				8FCE86E617CA271700A603D4 /* AmbisonicSpectrum.cpp */,
+				8FCE86E717CA271700A603D4 /* AmbisonicSpectrum.h */,
 			);
 			path = hoaSpectrum;
 			sourceTree = "<group>";
 		};
-		8FAB883B178AF74200B7A1AE /* hoaStars */ = {
+		8FCE86E817CA271700A603D4 /* hoaVector */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB883C178AF74200B7A1AE /* AmbisonicStars.cpp */,
-				8FAB883D178AF74200B7A1AE /* AmbisonicStars.h */,
-			);
-			path = hoaStars;
-			sourceTree = "<group>";
-		};
-		8FAB883E178AF74200B7A1AE /* hoaVector */ = {
-			isa = PBXGroup;
-			children = (
-				8FAB883F178AF74200B7A1AE /* AmbisonicsVector.cpp */,
-				8FAB8840178AF74200B7A1AE /* AmbisonicsVector.h */,
+				8FCE86E917CA271700A603D4 /* AmbisonicVector.cpp */,
+				8FCE86EA17CA271700A603D4 /* AmbisonicVector.h */,
 			);
 			path = hoaVector;
 			sourceTree = "<group>";
 		};
-		8FAB8841178AF74200B7A1AE /* hoaWider */ = {
+		8FCE86EB17CA271700A603D4 /* hoaWider */ = {
 			isa = PBXGroup;
 			children = (
-				8FAB8842178AF74200B7A1AE /* AmbisonicsWider.cpp */,
-				8FAB8843178AF74200B7A1AE /* AmbisonicsWider.h */,
+				8FCE86EC17CA271700A603D4 /* AmbisonicWider.cpp */,
+				8FCE86ED17CA271700A603D4 /* AmbisonicWider.h */,
 			);
 			path = hoaWider;
 			sourceTree = "<group>";
@@ -682,67 +724,75 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FAB8845178AF74200B7A1AE /* CicmRingModulation.h in Headers */,
-				8FAB8846178AF74200B7A1AE /* CicmDefine.h in Headers */,
-				8FAB8848178AF74200B7A1AE /* CicmDecorrelation.h in Headers */,
-				8FAB884A178AF74200B7A1AE /* CicmEnvelope.h in Headers */,
-				8FAB884C178AF74200B7A1AE /* CicmFft.h in Headers */,
-				8FAB884E178AF74200B7A1AE /* CicmFilter.h in Headers */,
-				8FAB8850178AF74200B7A1AE /* CicmFilterAllpass.h in Headers */,
-				8FAB8852178AF74200B7A1AE /* CicmFilterBiquad.h in Headers */,
-				8FAB8854178AF74200B7A1AE /* CicmFilterComb.h in Headers */,
-				8FAB8856178AF74200B7A1AE /* CicmFilterConvolution.h in Headers */,
-				8FAB8858178AF74200B7A1AE /* CicmFilterConvolutionZero.h in Headers */,
-				8FAB8859178AF74200B7A1AE /* CicmFilterDamper.h in Headers */,
-				8FAB885B178AF74200B7A1AE /* CicmFilterDelay.h in Headers */,
-				8FAB885D178AF74200B7A1AE /* CicmFilterDiffuser.h in Headers */,
-				8FAB885F178AF74200B7A1AE /* CicmFilterFir.h in Headers */,
-				8FAB8861178AF74200B7A1AE /* CicmFilterFixedDelay.h in Headers */,
-				8FAB8863178AF74200B7A1AE /* CicmFilterOnePole.h in Headers */,
-				8FAB8865178AF74200B7A1AE /* CicmOnePole.h in Headers */,
-				8FAB8867178AF74200B7A1AE /* CicmQSGS.h in Headers */,
-				8FAB8868178AF74200B7A1AE /* CicmLibrary.h in Headers */,
-				8FAB886A178AF74200B7A1AE /* CicmLine.h in Headers */,
-				8FAB886C178AF74200B7A1AE /* CicmFreeverb.h in Headers */,
-				8FAB886E178AF74200B7A1AE /* CicmGigaverb.h in Headers */,
-				8FAB886F178AF74200B7A1AE /* CicmTuning.h in Headers */,
-				8FAB8870178AF74200B7A1AE /* CicmTools.h in Headers */,
-				8FAB8872178AF74200B7A1AE /* Ambisonics.h in Headers */,
-				8FAB8874178AF74200B7A1AE /* AmbisonicsDiffuser.h in Headers */,
-				8FAB8876178AF74200B7A1AE /* AmbisonicsViewer.h in Headers */,
-				8FAB8878178AF74200B7A1AE /* Planewaves.h in Headers */,
-				8FAB887A178AF74200B7A1AE /* AmbisonicsBinaural.h in Headers */,
-				8FAB887C178AF74200B7A1AE /* BoidsManager.h in Headers */,
-				8FAB887E178AF74200B7A1AE /* AmbisonicConvolver.h in Headers */,
-				8FAB8880178AF74200B7A1AE /* AmbisonicsDecoder.h in Headers */,
-				8FAB8882178AF74200B7A1AE /* AmbisonicsDelay.h in Headers */,
-				8FAB8884178AF74200B7A1AE /* AmbisonicsEncoder.h in Headers */,
-				8FAB8886178AF74200B7A1AE /* AmbisonicsFilter.h in Headers */,
-				8FAB8888178AF74200B7A1AE /* AmbisonicsFreeverb.h in Headers */,
-				8FAB888A178AF74200B7A1AE /* AmbisonicsGigaverb.h in Headers */,
-				8FAB888C178AF74200B7A1AE /* AmbisonicsGrain.h in Headers */,
-				8FAB888D178AF74200B7A1AE /* HoaLibrary.h in Headers */,
-				8FAB888F178AF74200B7A1AE /* AmbisonicMultiMaps.h in Headers */,
-				8FAB8891178AF74200B7A1AE /* AmbisonicsMap.h in Headers */,
-				8FAB8893178AF74200B7A1AE /* AmbisonicSource.h in Headers */,
-				8FAB8895178AF74200B7A1AE /* AmbisonicSourcesGroup.h in Headers */,
-				8FAB8897178AF74200B7A1AE /* AmbisonicSourcesManager.h in Headers */,
-				8FAB8899178AF74200B7A1AE /* AmbisonicSourcesPreset.h in Headers */,
-				8FAB889B178AF74200B7A1AE /* AmbisonicSourcesTrajectory.h in Headers */,
-				8FAB889D178AF74200B7A1AE /* AmbisonicsMeter.h in Headers */,
-				8FAB889F178AF74200B7A1AE /* AmbisonicsMultiDecoder.h in Headers */,
-				8FAB88A1178AF74200B7A1AE /* AmbisonicsOptim.h in Headers */,
-				8FAB88A3178AF74200B7A1AE /* AmbisonicsProjector.h in Headers */,
-				8FAB88A5178AF74200B7A1AE /* AmbisonicsRecomposer.h in Headers */,
-				8FAB88A7178AF74200B7A1AE /* AmbisonicVirtualMicUI.h in Headers */,
-				8FAB88A9178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.h in Headers */,
-				8FAB88AB178AF74200B7A1AE /* AmbisonicsRestitution.h in Headers */,
-				8FAB88AD178AF74200B7A1AE /* AmbisonicsRotate.h in Headers */,
-				8FAB88AF178AF74200B7A1AE /* AmbisonicSpace.h in Headers */,
-				8FAB88B1178AF74200B7A1AE /* AmbisonicsSpectrum.h in Headers */,
-				8FAB88B3178AF74200B7A1AE /* AmbisonicStars.h in Headers */,
-				8FAB88B5178AF74200B7A1AE /* AmbisonicsVector.h in Headers */,
-				8FAB88B7178AF74200B7A1AE /* AmbisonicsWider.h in Headers */,
+				8F7CCFAF17C23907003A01B8 /* MaxConverter.h in Headers */,
+				8FCE86EF17CA271700A603D4 /* CicmRingModulation.h in Headers */,
+				8FCE86F017CA271700A603D4 /* CicmDefine_BLAS_FFTW.h in Headers */,
+				8FCE86F117CA271700A603D4 /* CicmDefine_INTEL.h in Headers */,
+				8FCE86F217CA271700A603D4 /* CicmDefine_VDSP.h in Headers */,
+				8FCE86F417CA271700A603D4 /* CicmDecorrelation.h in Headers */,
+				8FCE86F617CA271700A603D4 /* CicmEnvelope.h in Headers */,
+				8FCE86F817CA271700A603D4 /* CicmFft.h in Headers */,
+				8FCE86FA17CA271700A603D4 /* CicmFilter.h in Headers */,
+				8FCE86FC17CA271700A603D4 /* CicmFilterAllpass.h in Headers */,
+				8FCE86FE17CA271700A603D4 /* CicmFilterBiquad.h in Headers */,
+				8FCE870017CA271700A603D4 /* CicmFilterComb.h in Headers */,
+				8FCE870217CA271700A603D4 /* CicmFilterConvolution.h in Headers */,
+				8FCE870417CA271700A603D4 /* CicmFilterConvolutionZero.h in Headers */,
+				8FCE870517CA271700A603D4 /* CicmFilterDamper.h in Headers */,
+				8FCE870717CA271700A603D4 /* CicmFilterDelay.h in Headers */,
+				8FCE870917CA271700A603D4 /* CicmFilterDiffuser.h in Headers */,
+				8FCE870B17CA271700A603D4 /* CicmFilterFir.h in Headers */,
+				8FCE870D17CA271700A603D4 /* CicmFilterFixedDelay.h in Headers */,
+				8FCE870F17CA271700A603D4 /* CicmFilterOnePole.h in Headers */,
+				8FCE871117CA271700A603D4 /* CicmOnePole.h in Headers */,
+				8FCE871317CA271700A603D4 /* CicmQSGS.h in Headers */,
+				8FCE871417CA271700A603D4 /* CicmLibrary.h in Headers */,
+				8FCE871617CA271700A603D4 /* CicmLine.h in Headers */,
+				8FCE871817CA271700A603D4 /* CicmFreeverb.h in Headers */,
+				8FCE871917CA271700A603D4 /* CicmTuning.h in Headers */,
+				8FCE871A17CA271700A603D4 /* CicmSignal.h in Headers */,
+				8FCE871B17CA271700A603D4 /* CicmTools.h in Headers */,
+				8FCE871D17CA271700A603D4 /* Ambisonic3D.h in Headers */,
+				8FCE871F17CA271700A603D4 /* Ambisonics.h in Headers */,
+				8FCE872117CA271700A603D4 /* AmbisonicsDiffuser.h in Headers */,
+				8FCE872317CA271700A603D4 /* AmbisonicsViewer.h in Headers */,
+				8FCE872517CA271700A603D4 /* Planewaves.h in Headers */,
+				8FCE872717CA271700A603D4 /* AmbisonicsBinaural.h in Headers */,
+				8FCE872917CA271700A603D4 /* BoidsManager.h in Headers */,
+				8FCE872B17CA271700A603D4 /* AmbisonicConvolver.h in Headers */,
+				8FCE872D17CA271700A603D4 /* AmbisonicDecoder3D.h in Headers */,
+				8FCE872F17CA271700A603D4 /* AmbisonicsDecoder.h in Headers */,
+				8FCE873117CA271700A603D4 /* AmbisonicsDelay.h in Headers */,
+				8FCE873317CA271700A603D4 /* AmbisonicEncoder.h in Headers */,
+				8FCE873517CA271700A603D4 /* AmbisonicEncoder3D.h in Headers */,
+				8FCE873717CA271700A603D4 /* AmbisonicsFilter.h in Headers */,
+				8FCE873917CA271700A603D4 /* AmbisonicsFreeverb.h in Headers */,
+				8FCE873B17CA271700A603D4 /* AmbisonicsGalaxy.h in Headers */,
+				8FCE873C17CA271700A603D4 /* AmbisonicsPlanetarySystem.h in Headers */,
+				8FCE874117CA271700A603D4 /* AmbisonicsSatellite.h in Headers */,
+				8FCE874317CA271700A603D4 /* AmbisonicsStar.h in Headers */,
+				8FCE874517CA271700A603D4 /* AmbisonicsSun.h in Headers */,
+				8FCE874717CA271700A603D4 /* AmbisonicsGrain.h in Headers */,
+				8FCE874817CA271700A603D4 /* HoaLibrary.h in Headers */,
+				8FCE874A17CA271700A603D4 /* AmbisonicMap.h in Headers */,
+				8FCE874C17CA271700A603D4 /* AmbisonicMultiMaps.h in Headers */,
+				8FCE874E17CA271700A603D4 /* AmbisonicSource.h in Headers */,
+				8FCE875017CA271700A603D4 /* AmbisonicSourcesGroup.h in Headers */,
+				8FCE875217CA271700A603D4 /* AmbisonicSourcesManager.h in Headers */,
+				8FCE875417CA271700A603D4 /* AmbisonicSourcesPreset.h in Headers */,
+				8FCE875617CA271700A603D4 /* AmbisonicSourcesTrajectory.h in Headers */,
+				8FCE875817CA271700A603D4 /* AmbisonicsMeter.h in Headers */,
+				8FCE875A17CA271700A603D4 /* AmbisonicsMultiDecoder.h in Headers */,
+				8FCE875C17CA271700A603D4 /* AmbisonicOptim.h in Headers */,
+				8FCE875E17CA271700A603D4 /* AmbisonicProjector.h in Headers */,
+				8FCE876617CA271700A603D4 /* AmbisonicsRestitution.h in Headers */,
+				8FCE876817CA271700A603D4 /* AmbisonicsRingModulation.h in Headers */,
+				8FCE876A17CA271700A603D4 /* AmbisonicRotate.h in Headers */,
+				8FCE876C17CA271700A603D4 /* AmbisonicsScope.h in Headers */,
+				8FCE876E17CA271700A603D4 /* AmbisonicSpace.h in Headers */,
+				8FCE877017CA271700A603D4 /* AmbisonicSpectrum.h in Headers */,
+				8FCE877217CA271700A603D4 /* AmbisonicVector.h in Headers */,
+				8FCE877417CA271700A603D4 /* AmbisonicWider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,61 +872,67 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C0AA616178730B300876AFC /* hoa.space~.cpp in Sources */,
-				8FAB8844178AF74200B7A1AE /* CicmRingModulation.cpp in Sources */,
-				8FAB8847178AF74200B7A1AE /* CicmDecorrelation.cpp in Sources */,
-				8FAB8849178AF74200B7A1AE /* CicmEnvelope.cpp in Sources */,
-				8FAB884B178AF74200B7A1AE /* CicmFft.cpp in Sources */,
-				8FAB884D178AF74200B7A1AE /* CicmFilter.cpp in Sources */,
-				8FAB884F178AF74200B7A1AE /* CicmFilterAllpass.cpp in Sources */,
-				8FAB8851178AF74200B7A1AE /* CicmFilterBiquad.cpp in Sources */,
-				8FAB8853178AF74200B7A1AE /* CicmFilterComb.cpp in Sources */,
-				8FAB8855178AF74200B7A1AE /* CicmFilterConvolution.cpp in Sources */,
-				8FAB8857178AF74200B7A1AE /* CicmFilterConvolutionZero.cpp in Sources */,
-				8FAB885A178AF74200B7A1AE /* CicmFilterDelay.cpp in Sources */,
-				8FAB885C178AF74200B7A1AE /* CicmFilterDiffuser.cpp in Sources */,
-				8FAB885E178AF74200B7A1AE /* CicmFilterFir.cpp in Sources */,
-				8FAB8860178AF74200B7A1AE /* CicmFilterFixedDelay.cpp in Sources */,
-				8FAB8862178AF74200B7A1AE /* CicmFilterOnePole.cpp in Sources */,
-				8FAB8864178AF74200B7A1AE /* CicmOnePole.cpp in Sources */,
-				8FAB8866178AF74200B7A1AE /* CicmQSGS.cpp in Sources */,
-				8FAB8869178AF74200B7A1AE /* CicmLine.cpp in Sources */,
-				8FAB886B178AF74200B7A1AE /* CicmFreeverb.cpp in Sources */,
-				8FAB886D178AF74200B7A1AE /* CicmGigaverb.cpp in Sources */,
-				8FAB8871178AF74200B7A1AE /* Ambisonics.cpp in Sources */,
-				8FAB8873178AF74200B7A1AE /* AmbisonicsDiffuser.cpp in Sources */,
-				8FAB8875178AF74200B7A1AE /* AmbisonicsViewer.cpp in Sources */,
-				8FAB8877178AF74200B7A1AE /* Planewaves.cpp in Sources */,
-				8FAB8879178AF74200B7A1AE /* AmbisonicsBinaural.cpp in Sources */,
-				8FAB887B178AF74200B7A1AE /* BoidsManager.cpp in Sources */,
-				8FAB887D178AF74200B7A1AE /* AmbisonicConvolver.cpp in Sources */,
-				8FAB887F178AF74200B7A1AE /* AmbisonicsDecoder.cpp in Sources */,
-				8FAB8881178AF74200B7A1AE /* AmbisonicsDelay.cpp in Sources */,
-				8FAB8883178AF74200B7A1AE /* AmbisonicsEncoder.cpp in Sources */,
-				8FAB8885178AF74200B7A1AE /* AmbisonicsFilter.cpp in Sources */,
-				8FAB8887178AF74200B7A1AE /* AmbisonicsFreeverb.cpp in Sources */,
-				8FAB8889178AF74200B7A1AE /* AmbisonicsGigaverb.cpp in Sources */,
-				8FAB888B178AF74200B7A1AE /* AmbisonicsGrain.cpp in Sources */,
-				8FAB888E178AF74200B7A1AE /* AmbisonicMultiMaps.cpp in Sources */,
-				8FAB8890178AF74200B7A1AE /* AmbisonicsMap.cpp in Sources */,
-				8FAB8892178AF74200B7A1AE /* AmbisonicSource.cpp in Sources */,
-				8FAB8894178AF74200B7A1AE /* AmbisonicSourcesGroup.cpp in Sources */,
-				8FAB8896178AF74200B7A1AE /* AmbisonicSourcesManager.cpp in Sources */,
-				8FAB8898178AF74200B7A1AE /* AmbisonicSourcesPreset.cpp in Sources */,
-				8FAB889A178AF74200B7A1AE /* AmbisonicSourcesTrajectory.cpp in Sources */,
-				8FAB889C178AF74200B7A1AE /* AmbisonicsMeter.cpp in Sources */,
-				8FAB889E178AF74200B7A1AE /* AmbisonicsMultiDecoder.cpp in Sources */,
-				8FAB88A0178AF74200B7A1AE /* AmbisonicsOptim.cpp in Sources */,
-				8FAB88A2178AF74200B7A1AE /* AmbisonicsProjector.cpp in Sources */,
-				8FAB88A4178AF74200B7A1AE /* AmbisonicsRecomposer.cpp in Sources */,
-				8FAB88A6178AF74200B7A1AE /* AmbisonicVirtualMicUI.cpp in Sources */,
-				8FAB88A8178AF74200B7A1AE /* AmbisonicVirtualMicUIManager.cpp in Sources */,
-				8FAB88AA178AF74200B7A1AE /* AmbisonicsRestitution.cpp in Sources */,
-				8FAB88AC178AF74200B7A1AE /* AmbisonicsRotate.cpp in Sources */,
-				8FAB88AE178AF74200B7A1AE /* AmbisonicSpace.cpp in Sources */,
-				8FAB88B0178AF74200B7A1AE /* AmbisonicsSpectrum.cpp in Sources */,
-				8FAB88B2178AF74200B7A1AE /* AmbisonicStars.cpp in Sources */,
-				8FAB88B4178AF74200B7A1AE /* AmbisonicsVector.cpp in Sources */,
-				8FAB88B6178AF74200B7A1AE /* AmbisonicsWider.cpp in Sources */,
+				8FCE86EE17CA271700A603D4 /* CicmRingModulation.cpp in Sources */,
+				8FCE86F317CA271700A603D4 /* CicmDecorrelation.cpp in Sources */,
+				8FCE86F517CA271700A603D4 /* CicmEnvelope.cpp in Sources */,
+				8FCE86F717CA271700A603D4 /* CicmFft.cpp in Sources */,
+				8FCE86F917CA271700A603D4 /* CicmFilter.cpp in Sources */,
+				8FCE86FB17CA271700A603D4 /* CicmFilterAllpass.cpp in Sources */,
+				8FCE86FD17CA271700A603D4 /* CicmFilterBiquad.cpp in Sources */,
+				8FCE86FF17CA271700A603D4 /* CicmFilterComb.cpp in Sources */,
+				8FCE870117CA271700A603D4 /* CicmFilterConvolution.cpp in Sources */,
+				8FCE870317CA271700A603D4 /* CicmFilterConvolutionZero.cpp in Sources */,
+				8FCE870617CA271700A603D4 /* CicmFilterDelay.cpp in Sources */,
+				8FCE870817CA271700A603D4 /* CicmFilterDiffuser.cpp in Sources */,
+				8FCE870A17CA271700A603D4 /* CicmFilterFir.cpp in Sources */,
+				8FCE870C17CA271700A603D4 /* CicmFilterFixedDelay.cpp in Sources */,
+				8FCE870E17CA271700A603D4 /* CicmFilterOnePole.cpp in Sources */,
+				8FCE871017CA271700A603D4 /* CicmOnePole.cpp in Sources */,
+				8FCE871217CA271700A603D4 /* CicmQSGS.cpp in Sources */,
+				8FCE871517CA271700A603D4 /* CicmLine.cpp in Sources */,
+				8FCE871717CA271700A603D4 /* CicmFreeverb.cpp in Sources */,
+				8FCE871C17CA271700A603D4 /* Ambisonic3D.cpp in Sources */,
+				8FCE871E17CA271700A603D4 /* Ambisonics.cpp in Sources */,
+				8FCE872017CA271700A603D4 /* AmbisonicsDiffuser.cpp in Sources */,
+				8FCE872217CA271700A603D4 /* AmbisonicsViewer.cpp in Sources */,
+				8FCE872417CA271700A603D4 /* Planewaves.cpp in Sources */,
+				8FCE872617CA271700A603D4 /* AmbisonicsBinaural.cpp in Sources */,
+				8FCE872817CA271700A603D4 /* BoidsManager.cpp in Sources */,
+				8FCE872A17CA271700A603D4 /* AmbisonicConvolver.cpp in Sources */,
+				8FCE872C17CA271700A603D4 /* AmbisonicDecoder3D.cpp in Sources */,
+				8FCE872E17CA271700A603D4 /* AmbisonicsDecoder.cpp in Sources */,
+				8FCE873017CA271700A603D4 /* AmbisonicsDelay.cpp in Sources */,
+				8FCE873217CA271700A603D4 /* AmbisonicEncoder.cpp in Sources */,
+				8FCE873417CA271700A603D4 /* AmbisonicEncoder3D.cpp in Sources */,
+				8FCE873617CA271700A603D4 /* AmbisonicsFilter.cpp in Sources */,
+				8FCE873817CA271700A603D4 /* AmbisonicsFreeverb.cpp in Sources */,
+				8FCE873A17CA271700A603D4 /* AmbisonicsGalaxy.cpp in Sources */,
+				8FCE873D17CA271700A603D4 /* AmbisonicsPlanetarySystemGlobal.cpp in Sources */,
+				8FCE873E17CA271700A603D4 /* AmbisonicsPlanetarySystemSatellites.cpp in Sources */,
+				8FCE873F17CA271700A603D4 /* AmbisonicsPlanetarySystemSun.cpp in Sources */,
+				8FCE874017CA271700A603D4 /* AmbisonicsSatellite.cpp in Sources */,
+				8FCE874217CA271700A603D4 /* AmbisonicsStar.cpp in Sources */,
+				8FCE874417CA271700A603D4 /* AmbisonicsSun.cpp in Sources */,
+				8FCE874617CA271700A603D4 /* AmbisonicsGrain.cpp in Sources */,
+				8FCE874917CA271700A603D4 /* AmbisonicMap.cpp in Sources */,
+				8FCE874B17CA271700A603D4 /* AmbisonicMultiMaps.cpp in Sources */,
+				8FCE874D17CA271700A603D4 /* AmbisonicSource.cpp in Sources */,
+				8FCE874F17CA271700A603D4 /* AmbisonicSourcesGroup.cpp in Sources */,
+				8FCE875117CA271700A603D4 /* AmbisonicSourcesManager.cpp in Sources */,
+				8FCE875317CA271700A603D4 /* AmbisonicSourcesPreset.cpp in Sources */,
+				8FCE875517CA271700A603D4 /* AmbisonicSourcesTrajectory.cpp in Sources */,
+				8FCE875717CA271700A603D4 /* AmbisonicsMeter.cpp in Sources */,
+				8FCE875917CA271700A603D4 /* AmbisonicsMultiDecoder.cpp in Sources */,
+				8FCE875B17CA271700A603D4 /* AmbisonicOptim.cpp in Sources */,
+				8FCE875D17CA271700A603D4 /* AmbisonicProjector.cpp in Sources */,
+				8FCE876517CA271700A603D4 /* AmbisonicsRestitution.cpp in Sources */,
+				8FCE876717CA271700A603D4 /* AmbisonicsRingModulation.cpp in Sources */,
+				8FCE876917CA271700A603D4 /* AmbisonicRotate.cpp in Sources */,
+				8FCE876B17CA271700A603D4 /* AmbisonicsScope.cpp in Sources */,
+				8FCE876D17CA271700A603D4 /* AmbisonicSpace.cpp in Sources */,
+				8FCE876F17CA271700A603D4 /* AmbisonicSpectrum.cpp in Sources */,
+				8FCE877117CA271700A603D4 /* AmbisonicVector.cpp in Sources */,
+				8FCE877317CA271700A603D4 /* AmbisonicWider.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

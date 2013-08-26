@@ -316,17 +316,17 @@ void SourcesManager::SourcesGroup::shiftCartesian(double anAbscissa, double anOr
 
 void SourcesManager::SourcesGroup::setCoordinatesPolar(double aRadius, double anAngle)
 {
-    setCoordinatesCartesian(Tools::abscisse(aRadius, anAngle), Tools::ordinate(aRadius, anAngle));
+    setCoordinatesCartesian(Tools::abscissa(aRadius, anAngle), Tools::ordinate(aRadius, anAngle));
 }
 
 void SourcesManager::SourcesGroup::setRadius(double aRadius)
 {
-    setCoordinatesCartesian(Tools::abscisse(aRadius, getAngle()), Tools::ordinate(aRadius, getAngle()));
+    setCoordinatesCartesian(Tools::abscissa(aRadius, getAngle()), Tools::ordinate(aRadius, getAngle()));
 }
 
 void SourcesManager::SourcesGroup::setAngle(double anAngle)
 {
-    setCoordinatesCartesian(Tools::abscisse(getRadius(), anAngle), Tools::ordinate(getRadius(), anAngle));
+    setCoordinatesCartesian(Tools::abscissa(getRadius(), anAngle), Tools::ordinate(getRadius(), anAngle));
 }
 
 void SourcesManager::SourcesGroup::setCoordinatesCartesian(double anAbscissa, double anOrdinate)

@@ -25,91 +25,115 @@
 
 #include "AmbisonicSpace.h"
 
-AmbisonicSpace::AmbisonicSpace(long aNumberOfMicrophones, long aVectorSize)
+AmbisonicSpace::AmbisonicSpace(long aNumberOfLoudspeakers, long aVectorSize, long aSamplingRate) : Planewaves(aNumberOfLoudspeakers, aVectorSize, aSamplingRate)
 {
-	m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, (long)3);
-	m_number_of_inputs		= m_number_of_microphones;
-	m_number_of_outputs		= m_number_of_microphones;
-	
-    m_microphones_coefficients_old = new double[m_number_of_microphones];
-    m_microphones_coefficients_new = new double[m_number_of_microphones];
-    m_microphones_coefficients_step = new double[m_number_of_microphones];
-    for(int i = 0; i < m_number_of_microphones; i++)
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
-        m_microphones_coefficients_old[i] = 1.;
-        m_microphones_coefficients_new[i] = 1.;
-        m_microphones_coefficients_step[i] = 0.;
+        m_lines.push_back(new CicmLine(100., m_vector_size, m_sampling_rate));
+        m_lines[i]->setCoefficientDirect(1.);
     }
-    m_counter = 0;
-    setVectorSize(aVectorSize);
-}
-
-long AmbisonicSpace::getNumberOfMicrophones()
-{
-	return m_number_of_microphones;
-}
-
-long AmbisonicSpace::getNumberOfInputs()
-{
-	return m_number_of_inputs;
-}
-
-long AmbisonicSpace::getNumberOfOutputs()
-{
-	return m_number_of_outputs;
-}
-
-long AmbisonicSpace::getVectorSize()
-{
-	return m_vector_size;   
+    m_vector_float = NULL;
+    m_vector_double = NULL;
 }
 
 double AmbisonicSpace::getCoefficient(long anIndex)
 {
-    if(anIndex >= 0 && anIndex < m_number_of_microphones)
-       return m_microphones_coefficients_new[anIndex];
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
+       return m_lines[anIndex]->getCoefficient();
     else
         return NULL;
 }
 
+long AmbisonicSpace::getRampInSample()
+{
+    return m_lines[0]->getRampInSample();
+}
+
+double AmbisonicSpace::getRampInMs()
+{
+    return m_lines[0]->getRampInMs();
+}
+
 void AmbisonicSpace::setCoefficient(long anIndex, double aCoefficient)
 {
-    if(anIndex >= 0 && anIndex < m_number_of_microphones)
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
     {
-        m_microphones_coefficients_new[anIndex] = aCoefficient;
-        m_microphones_coefficients_step[anIndex] = (m_microphones_coefficients_new[anIndex] - m_microphones_coefficients_old[anIndex]) / (double)RAMP_SAMPLE;
+        m_lines[anIndex]->setCoefficient(Tools::clip(aCoefficient, 0., 1.));
     }
-    m_counter = 0;
 }
 
 void AmbisonicSpace::setCoefficient(double* aCoefficientVector)
 {
-    for(int i = 0; i < m_number_of_microphones; i++)
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
-        m_microphones_coefficients_new[i] = aCoefficientVector[i];
-        m_microphones_coefficients_step[i] =(m_microphones_coefficients_new[i] - m_microphones_coefficients_old[i]) / (double)RAMP_SAMPLE;
+        m_lines[i]->setCoefficient(Tools::clip(aCoefficientVector[i], 0., 1.));
     }
-    m_counter = 0;
 }
 
 void AmbisonicSpace::setCoefficient(float* aCoefficientVector)
 {
-    for(int i = 0; i < m_number_of_microphones; i++)
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
-        m_microphones_coefficients_new[i] = aCoefficientVector[i];
-        m_microphones_coefficients_step[i] = (m_microphones_coefficients_new[i] - m_microphones_coefficients_old[i]) / (double)RAMP_SAMPLE;
+        m_lines[i]->setCoefficient(Tools::clip(aCoefficientVector[i], 0., 1.));
     }
-    m_counter = 0;
 }
 
 void AmbisonicSpace::setVectorSize(long aVectorSize)
 {
-	m_vector_size = Tools::clip_power_of_two(aVectorSize);
+    Planewaves::setVectorSize(aVectorSize);
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_lines[i]->setVectorSize(m_vector_size);
+    }
+    if(m_vector_double)
+		Cicm_Free(m_vector_double);
+	if(m_vector_float)
+		Cicm_Free(m_vector_float);
+    Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
+	Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
+}
+
+void AmbisonicSpace::setSamplingRate(long aSamplingRate)
+{
+    Planewaves::setSamplingRate(aSamplingRate);
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_lines[i]->setSamplingRate(m_sampling_rate);
+    }
+}
+
+void AmbisonicSpace::setRampInSample(long aTimeInSample)
+{
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_lines[i]->setRampInSample(aTimeInSample);
+    }
+}
+
+void AmbisonicSpace::setRampInMs(double aTimeInMs)
+{
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_lines[i]->setRampInMs(aTimeInMs);
+    }
+}
+
+void AmbisonicSpace::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff)
+{
+    Planewaves::setNumberOfLoudspeakers(aNumberOfLoudspeakers);
+    m_lines.clear();
+    for(int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_lines.push_back(new CicmLine(100., m_vector_size, m_sampling_rate));
+        m_lines[i]->setCoefficientDirect(1.);
+    }
 }
 
 AmbisonicSpace::~AmbisonicSpace()
 {
-	free(m_microphones_coefficients_old);
-    free(m_microphones_coefficients_new);
-    free(m_microphones_coefficients_step);
+	m_lines.clear();
+    if(m_vector_double)
+		Cicm_Free(m_vector_double);
+	if(m_vector_float)
+		Cicm_Free(m_vector_float);
 }

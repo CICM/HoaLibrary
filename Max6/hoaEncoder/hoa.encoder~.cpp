@@ -23,39 +23,34 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
-
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-}
+#include "../MaxConverter.h"
 
 int postons = 0;
 
 typedef struct _HoaEncode 
 {
-	t_pxobject					f_ob;			
-	AmbisonicsEncoder			*f_ambiEncoder;
+	t_pxobject			f_ob;
+    t_Hoa               f_hoa;
+	AmbisonicEncoder    *f_ambiEncoder;
+
 } t_HoaEncode;
 
 
 void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv);
 void HoaEncode_free(t_HoaEncode *x);
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s);
+void HoaEncode_connect(t_HoaEncode *x);
 
 void HoaEncode_float(t_HoaEncode *x, double f);
 void HoaEncode_int(t_HoaEncode *x, long n);
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaEncode_perform64vec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaEncode_perform64Offsetvec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaEncode_perform64_offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+
+t_max_err HoaEncode_notify(t_HoaEncode *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 t_class *HoaEncode_class;
-    
 
 int C74_EXPORT main(void)
 {	
@@ -68,12 +63,15 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)HoaEncode_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)HoaEncode_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaEncode_assist,	"assist",	A_CANT, 0);
-	
+    class_addmethod(c, (method)HoaEncode_notify,    "notify",   A_CANT, 0);
+    class_addmethod(c, (method)NULL,                "anything",	A_GIMME, 0);
+    
+
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
     
-    if (!postons)
+    if(!postons)
     {
         post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
         post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
@@ -85,24 +83,17 @@ int C74_EXPORT main(void)
 
 void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_HoaEncode *x = NULL;
-	int	order = 4;
-	int mode = Hoa_Basic;
-    x = (t_HoaEncode *)object_alloc(HoaEncode_class);
+    t_HoaEncode *x = (t_HoaEncode *)object_alloc(HoaEncode_class);
 	if (x)
 	{		
-		if(atom_gettype(argv) == A_LONG)
-			order = atom_getlong(argv);
-		
-		if(atom_gettype(argv + 1) == A_SYM && atom_getsym(argv + 1) == gensym("split"))
-			mode = Hoa_Split;
-		
-		x->f_ambiEncoder = new AmbisonicsEncoder(order, mode, sys_getblksize());
+		CicmMax::hoa_init((t_object *)x, &x->f_hoa, argc, argv);
+		x->f_ambiEncoder = new AmbisonicEncoder(x->f_hoa.order, Hoa_Basic, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
-		
+        
+        object_attach_byptr_register(x, x, CLASS_BOX);
 		x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 
@@ -111,12 +102,12 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaEncode_float(t_HoaEncode *x, double f)
 {
-	x->f_ambiEncoder->setAzimuthBoth(f);
+	x->f_ambiEncoder->setAngle(f);
 }
 
 void HoaEncode_int(t_HoaEncode *x, long n)
 {
-	x->f_ambiEncoder->setAzimuthBoth(n);
+	x->f_ambiEncoder->setAngle(n);
 }
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -124,31 +115,10 @@ void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double sampl
 	x->f_ambiEncoder->setVectorSize(maxvectorsize);
 	x->f_ambiEncoder->setSamplingRate(samplerate);
     
-	if(x->f_ambiEncoder->getMode() == Hoa_Split)
-	{
-		if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
-			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64vec, 0, NULL);
-		else
-			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64Offsetvec, 0, NULL);
-	}
-	else 
-	{
-		if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
-			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64, 0, NULL);
-		else
-			object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64Offset, 0, NULL);
-	}
-
-}
-
-void HoaEncode_perform64vec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-	x->f_ambiEncoder->process(ins, outs, ins[x->f_ambiEncoder->getNumberOfInputs()-1]);
-}
-
-void HoaEncode_perform64Offsetvec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-	x->f_ambiEncoder->process(ins, outs);
+    if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64, 0, NULL);
+    else
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64_offset, 0, NULL);
 }
 
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -156,32 +126,19 @@ void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long num
 	x->f_ambiEncoder->process(ins[0], outs, ins[1]);
 }
 
-void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void HoaEncode_perform64_offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	x->f_ambiEncoder->process(ins[0], outs);
 }
 
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 {
-	
 	if (m == ASSIST_INLET) 
 	{
-		if(x->f_ambiEncoder->getMode() == Hoa_Split)
-		{
-			if(a < x->f_ambiEncoder->getOrder() + 1)
-			{
-				sprintf(s,"(Signal) Order %ld", a);
-			}
-			else 
-				sprintf(s,"(Signal or float) Angle");
-		}
-		else
-		{
-			if(a == 0)
-				sprintf(s,"(Signal) Input");
-			else
-				sprintf(s,"(Signal or float) Angle");
-		}
+        if(a == 0)
+            sprintf(s,"(Signal) Input");
+        else
+            sprintf(s,"(Signal or float) Angle");
 	} 
 	else 
 	{
@@ -189,10 +146,47 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 	}
 }
 
+t_max_err HoaEncode_notify(t_HoaEncode *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+{
+    if (msg == gensym("attr_modified"))
+	{
+		t_symbol* attr_name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
+        if (attr_name == gensym("order"))
+        {
+            if(object_attr_getlong(x, gensym("order")) != x->f_ambiEncoder->getOrder())
+            {
+                t_atom* state = CicmMax::dsp_stop((t_object *)x);
+                delete(x->f_ambiEncoder);
+                x->f_ambiEncoder = new AmbisonicEncoder(object_attr_getlong(x, gensym("order")), Hoa_Basic, sys_getblksize());
+                
+                                if(atom_gettype(x->f_hoa.argv) == A_LONG || atom_gettype(x->f_hoa.argv) == A_FLOAT)
+                    atom_setlong(x->f_hoa.argv, (long)x->f_ambiEncoder->getOrder());
+                
+                CicmMax::resize_outlet((t_object *)x, x->f_ambiEncoder->getNumberOfOutputs());
+                CicmMax::rename_object((t_object *)x, x->f_hoa.argc, x->f_hoa.argv);
+                if(object_attr_getlong(x, gensym("autoconnect")))
+                {
+                    CicmMax::connect_outlet_harmonics((t_object *)x);
+                    CicmMax::color_outlet_chords((t_object *)x);
+                }
+                
+                object_attr_setlong(x, gensym("order"), x->f_ambiEncoder->getOrder());
+                CicmMax::dsp_start(state);
+            }
+        }
+        else if(attr_name == gensym("poscolor") || attr_name == gensym("negcolor"))
+        {
+            CicmMax::color_outlet_chords((t_object *)x);
+        }
+        
+    }
+    return MAX_ERR_NONE;
+}
 
 void HoaEncode_free(t_HoaEncode *x) 
 {
 	dsp_free((t_pxobject *)x);
 	delete(x->f_ambiEncoder);
+    free(x->f_hoa.argv);
 }
 

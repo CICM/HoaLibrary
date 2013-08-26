@@ -49,8 +49,11 @@ using namespace std;
 #define CICM_2PI (6.283185307179586476925286766559005)
 #define CICM_PI2 (1.57079632679489661923132169163975144)
 #define CICM_PI4 (0.785398163397448309615660845819875721)
+
+#define NUMBEROFLINEARPOINTS 10000
 #define NUMBEROFCIRCLEPOINTS 36000
 #define NUMBEROFCIRCLEPOINTS_UI 360
+
 
 // check maxversion
 #define MAXVERSION maxversion()
@@ -164,12 +167,12 @@ public:
 		return atan2(y, x);
 	}
 
-	static double ordinate(double radius, double angle)
+	inline static double ordinate(const double radius, const double angle)
 	{
 		return radius * sin(angle);
 	}
 
-	static double abscisse(double radius, double angle)
+    inline static double abscissa(const double radius, const double angle)
 	{
 		return radius * cos(angle);
 	}
@@ -406,14 +409,15 @@ public:
         return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
     }
     
-    static inline double radianWrap(double anAngle)
+    static inline double radianWrap(const double anAngle)
     {
-        while(anAngle < 0.)
-            anAngle += CICM_2PI;
-        while(anAngle >= CICM_2PI)
-            anAngle -= CICM_2PI;
+        double angle = anAngle;
+        while(angle < 0.)
+            angle += CICM_2PI;
+        while(angle >= CICM_2PI)
+            angle -= CICM_2PI;
         
-        return anAngle;
+        return angle;
     }
     
     static double radianDistance(double anAngle1, double anAngle2)

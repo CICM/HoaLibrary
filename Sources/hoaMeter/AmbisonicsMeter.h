@@ -26,12 +26,12 @@
 #ifndef DEF_AMBISONICSMETER
 #define DEF_AMBISONICSMETER
 
-#include "../hoaVector/AmbisonicsVector.h"
+#include "../hoaVector/AmbisonicVector.h"
 
 class AmbisonicsMeter : public Planewaves
 {
 protected:
-    AmbisonicsVector*   m_vectors;
+    AmbisonicVector*   m_vectors;
     
     Cicm_Vector_Double m_loudspeakers_amplitudes;
     Cicm_Vector_Double m_loudspeakers_peaks;

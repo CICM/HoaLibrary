@@ -23,23 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define MAX_MICS 256
-
-#include "../../Sources/HoaLibrary.h"
-
-extern "C"
-{
-	#include "ext.h"
-	#include "ext_obex.h"
-    #include "ext_common.h"
-	#include "jpatcher_api.h"
-	#include "jgraphics.h"
-	#include "jpatcher_syms.h"
-	#include "ext_dictionary.h"
-	#include "ext_globalsymbol.h"
-    #include "commonsyms.h"
-    #include "ext_parameter.h"
-}
+#include "../MaxConverter.h"
 
 typedef struct  _space
 {
@@ -71,10 +55,10 @@ typedef struct  _space
 	AmbisonicsViewer*        f_viewer;
     AmbisonicsRecomposer*    f_recomposer;
 
-	double                  f_harmonicsValues[MAX_MICS];
-    double                  f_mode_values[MAX_MICS];
-    double                  f_microphonesValues[MAX_MICS];
-    t_atom                  f_tempory_values[MAX_MICS];
+	double                  f_harmonicsValues[MAX_SPEAKER];
+    double                  f_mode_values[MAX_SPEAKER];
+    double                  f_microphonesValues[MAX_SPEAKER];
+    t_atom                  f_tempory_values[MAX_SPEAKER];
     long                    f_number_of_harmonics;
     t_atom_long             f_number_of_microphones;
     double                  f_reference_angle;
@@ -153,7 +137,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_ACCESSORS			(c, "nmics", NULL, number_of_microphones_set);
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nmics", 0,"8");
 	
-    CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_MICS);
+    CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_SPEAKER);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
 	CLASS_ATTR_LABEL                (c, "coeffs", 0, "Virtuals microphones coefficients");
@@ -316,8 +300,8 @@ t_max_err space_setvalueof(t_space *x, long ac, t_atom *av)
 {
 	if (ac && av)
     {
-        if(ac > MAX_MICS)
-            ac = MAX_MICS;
+        if(ac > MAX_SPEAKER)
+            ac = MAX_SPEAKER;
         for (int i = 0; i < ac; i++)
         {
             if(atom_gettype(av+i) == A_FLOAT)
@@ -335,8 +319,8 @@ t_max_err space_getvalueof(t_space *x, long *ac, t_atom **av)
 		if (*ac && *av)
         {
             int limit = *ac;
-            if (limit > MAX_MICS)
-                limit = MAX_MICS;
+            if (limit > MAX_SPEAKER)
+                limit = MAX_SPEAKER;
             
             for (int i = 0; i < limit; i++)
                 atom_setfloat(*av+i, (float)x->f_microphonesValues[i]);
@@ -630,7 +614,7 @@ void draw_microphones_points(t_space *x,  t_object *view, t_rect *rect)
         {
             jgraphics_set_source_jrgba(g, &x->f_color_points);
             double angle = loudspeaker_angle * (double)(i) + CICM_PI2;
-            jgraphics_arc(g, Tools::abscisse(x->f_microphonesValues[i] * factor1 + factor2, angle), Tools::ordinate(x->f_microphonesValues[i] * factor1 + factor2, angle), 3.,  0., JGRAPHICS_2PI);
+            jgraphics_arc(g, Tools::abscissa(x->f_microphonesValues[i] * factor1 + factor2, angle), Tools::ordinate(x->f_microphonesValues[i] * factor1 + factor2, angle), 3.,  0., JGRAPHICS_2PI);
             jgraphics_fill(g);
         }
 		jbox_end_layer((t_object*)x, view, gensym("microphones_points_layer"));
@@ -769,7 +753,7 @@ void space_draw_points(t_space *x, t_object *patcherview, t_pt pt, long modifier
     }
     else
     {
-        double center_x = Tools::abscisse(x->f_rayonCircle, angle - CICM_PI2 + CICM_PI);
+        double center_x = Tools::abscissa(x->f_rayonCircle, angle - CICM_PI2 + CICM_PI);
         mapped_x = mapped_x - center_x;
         double center_y = Tools::ordinate(x->f_rayonCircle, angle - CICM_PI2 + CICM_PI);
         mapped_y = -mapped_y - center_y;
@@ -864,7 +848,7 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
                 delete x->f_viewer;
                 delete x->f_recomposer;
                 
-                x->f_number_of_microphones  = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_MICS);
+                x->f_number_of_microphones  = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_SPEAKER);
 				
                 if(x->f_number_of_microphones % 2 == 0)
                     x->f_order              = (x->f_number_of_microphones - 2) / 2;
@@ -891,7 +875,7 @@ t_max_err coefficients_set(t_space *x, t_object *attr, long ac, t_atom *av)
         {
             if(x->f_mode == 0 || x->f_mode == 2)
             {
-                for (int i = 0; i < ac && i < MAX_MICS; i++)
+                for (int i = 0; i < ac && i < MAX_SPEAKER; i++)
                 {
                     if(atom_gettype(av+i) == A_FLOAT)
                         x->f_microphonesValues[i] = Tools::clip((double)atom_getfloat(av + i), 0., 1.);
@@ -900,7 +884,7 @@ t_max_err coefficients_set(t_space *x, t_object *attr, long ac, t_atom *av)
             }
             else
             {
-                for (int i = 0; i < ac && i < MAX_MICS; i++)
+                for (int i = 0; i < ac && i < MAX_SPEAKER; i++)
                 {   
                     x->f_microphonesValues[i] = atom_getfloat(av + i);
                 }

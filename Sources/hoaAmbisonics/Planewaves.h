@@ -35,9 +35,13 @@ protected:
 	long	m_number_of_inputs;
     long    m_number_of_loudspeakers;
     
-    double*     m_angles_of_loudspeakers;
-    double*     m_abscissa_of_loudspeakers;
-    double*     m_ordinate_of_loudspeakers;
+    Cicm_Vector_Double     m_angles_of_loudspeakers_double;
+    Cicm_Vector_Double     m_abscissa_of_loudspeakers_double;
+    Cicm_Vector_Double     m_ordinate_of_loudspeakers_double;
+    
+    Cicm_Vector_Float     m_angles_of_loudspeakers_float;
+    Cicm_Vector_Float     m_abscissa_of_loudspeakers_float;
+    Cicm_Vector_Float     m_ordinate_of_loudspeakers_float;
     
 	long	m_vector_size;
     long	m_sampling_rate;
@@ -50,6 +54,8 @@ public:
 	long            getNumberOfOutputs();
     long            getNumberOfLoudspeakers();
     double          getLoudspeakerAngle(long anIndex);
+    double          getLoudspeakerAbscissa(long anIndex);
+    double          getLoudspeakerOrdinate(long anIndex);
     std::string     getLoudspeakerName(long anIndex);
 	long            getVectorSize();
 	long            getSamplingRate();

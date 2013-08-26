@@ -26,13 +26,13 @@
 #ifndef DEF_AMBISONICMULTIMAPS
 #define DEF_AMBISONICMULTIMAPS
 
-#include "AmbisonicsMap.h"
+#include "AmbisonicMap.h"
 
 class AmbisonicsMultiMaps : public Ambisonics
 {
 	
 private:
-    vector <AmbisonicsMap*> m_maps;
+    vector <AmbisonicMap*> m_maps;
     long    m_number_of_sources;
     long    m_first_source;
     
@@ -66,72 +66,83 @@ public:
     
 	~AmbisonicsMultiMaps();
 	
-	/* Perform sample by sample */
-	void process(float* aInputs, float* aOutputs)
+	/************************************************************************************/
+    /*********************************** MULTISOURCES ***********************************/
+    /************************************************************************************/
+    
+	/************************************************************************************/
+    /***************************** Perform sample by sample *****************************/
+    /************************************************************************************/
+    
+    /*********************************** Out Of Place ***********************************/
+    
+	inline void process(const float* inputs, float* outputs)
 	{
-        Cicm_Vector_Float_Clear(aOutputs, m_number_of_harmonics);
+        Cicm_Vector_Float_Clear(outputs, m_number_of_harmonics);
         if(m_first_source >= 0)
         {
-            m_maps[m_first_source]->process(aInputs[m_first_source], aOutputs);
+            m_maps[m_first_source]->process(inputs[m_first_source], outputs);
             for(int i = m_first_source+1; i < m_number_of_sources; i++)
             {
                 if(m_mute[i])
-                    m_maps[i]->processAdd(aInputs[i], aOutputs);
+                    m_maps[i]->processAdd(inputs[i], outputs);
             }
         }
     }
     
-    void process(double* aInputs, double* aOutputs)
+    inline void process(const double* inputs, double* outputs)
 	{
-        Cicm_Vector_Double_Clear(aOutputs, m_number_of_harmonics);
+        Cicm_Vector_Double_Clear(outputs, m_number_of_harmonics);
 		if(m_first_source >= 0)
         {
-            m_maps[m_first_source]->process(aInputs[m_first_source], aOutputs);
+            m_maps[m_first_source]->process(inputs[m_first_source], outputs);
             for(int i = m_first_source+1; i < m_number_of_sources; i++)
             {
                 if(m_mute[i])
-                   m_maps[i]->processAdd(aInputs[i], aOutputs);
+                   m_maps[i]->processAdd(inputs[i], outputs);
             }
         }
     }
     
-	/***************************************/
-	/******** Perform block sample *********/
-    /***************************************/
+	/************************************************************************************/
+    /******************************* Perform sample block *******************************/
+    /************************************************************************************/
     
-	inline void process(float** aInputs, float** aOutputs)
+    /*********************************** Out Of Place ***********************************/
+    
+	inline void process(const float* const* inputs, float** outputs)
 	{        
 		if(m_first_source != m_number_of_sources)
         {
-            m_maps[m_first_source]->process(aInputs[m_first_source], aOutputs);
+            m_maps[m_first_source]->process(inputs[m_first_source], outputs);
             for(int i = m_first_source+1; i < m_number_of_sources; i++)
             {
                 if(!m_mute[i])
-                    m_maps[i]->processAdd(aInputs[i], aOutputs);
+                    m_maps[i]->processAdd(inputs[i], outputs);
             }
         }
         else
         {
             for(int i = 0; i < m_number_of_harmonics; i++)
-                Cicm_Vector_Float_Clear(aOutputs[i], m_vector_size);
+                Cicm_Vector_Float_Clear(outputs[i], m_vector_size);
         }
 	}
     
-    inline void process(double** aInputs, double** aOutputs)
+    inline void process(const double* const* inputs, double** outputs)
 	{
 		if(m_first_source != m_number_of_sources)
         {
-            m_maps[m_first_source]->process(aInputs[m_first_source], aOutputs);
+            m_maps[m_first_source]->process(inputs[m_first_source], outputs);
             for(int i = m_first_source+1; i < m_number_of_sources; i++)
             {
                 if(!m_mute[i])
-                    m_maps[i]->processAdd(aInputs[i], aOutputs);
+                    m_maps[i]->processAdd(inputs[i], outputs);
             }
         }
         else
         {
             for(int i = 0; i < m_number_of_harmonics; i++)
-                Cicm_Vector_Double_Clear(aOutputs[i], m_vector_size);
+                Cicm_Vector_Double_Clear(outputs[i], m_vector_size);
         }
 	}
     

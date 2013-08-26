@@ -65,8 +65,8 @@
 #define Cicm_Matrix_Double_Set(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
 
 /**************** COPY *****************/
-#define Cicm_Vector_Float_Copy(vectorSource, vectorDest, size) vDSP_mmov(vectorSource, vectorDest, size, 1, size, size)
-#define Cicm_Vector_Double_Copy(vectorSource, vectorDest, size) vDSP_mmovD(vectorSource, vectorDest, size, 1, size, size)
+#define Cicm_Vector_Float_Copy(vectorSource, vectorDest, size) cblas_scopy(size, vectorSource, 1, vectorDest, 1);
+#define Cicm_Vector_Double_Copy(vectorSource, vectorDest, size) cblas_dcopy(size, vectorSource, 1, vectorDest, 1);
 
 #define Cicm_Vector_Matrix_Float_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmov(vectorSource, matrixDest+ row_number * size, size, 1, size, size)
 #define Cicm_Vector_Matrix_Double_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmovD(vectorSource, matrixDest+row_number * size, size, 1, size, size)
@@ -76,15 +76,17 @@
 
 /**************** PRODUCT *************/
 #define Cicm_Matrix_Vector_Float_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_sgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1.f, matrix, column_size, vectorSource, 1, 0.f, vectorDest, 1)
+
 #define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_dgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1., matrix, column_size, vectorSource, 1, 0., vectorDest, 1)
 
-#define Cicm_Matrix_Matrix_Float_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1.f, matrixOne, number_of_rowsOne, matrixTwo, number_of_rowsOne, 0.f, matrixDest, number_of_rowsOne);
-#define Cicm_Matrix_Matrix_Double_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1., matrixOne, number_of_rowsOne, matrixTwo, column_sizeOne, 0., matrixDest, column_sizetwo);
+#define Cicm_Matrix_Matrix_Float_Product(matrix, matrixIn, matrixOut, number_of_rows, column_size_1, column_size_2) cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rows, column_size_1, column_size_2, 1., matrix, column_size_2, matrixIn, column_size_1, 0., matrixOut, column_size_1)
+
+#define Cicm_Matrix_Matrix_Double_Product(matrix, matrixIn, matrixOut, number_of_rows, column_size_1, column_size_2) cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rows, column_size_1, column_size_2, 1., matrix, column_size_2, matrixIn, column_size_1, 0., matrixOut, column_size_1)
 
 /**************** DOT PRODUCT *********/
-#define Cicm_Vector_Float_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotpr(vectorOne, 1, vectorTwo, 1, scalarDest, size)
-#define Cicm_Vector_Double_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotprD(vectorOne, 1, vectorTwo, 1, scalarDest, size)
+#define Cicm_Vector_Float_Dot_Product(vectorOne, vectorTwo, scalarDest, size) scalarDest = cblas_sdot(size, vectorOne, 1, vectorTwo, 1)
 
+#define Cicm_Vector_Double_Dot_Product(vectorOne, vectorTwo, scalarDest, size) scalarDest = cblas_ddot(size, vectorOne, 1, vectorTwo, 1)
 /**************** MUL *****************/
 #define Cicm_Vector_Vector_Float_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmul(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 #define Cicm_Vector_Vector_Double_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmulD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
@@ -100,9 +102,11 @@
 #define Cicm_Vector_Double_Add(vectorOne, vectorDest, size) cblas_daxpy(size, 1., vectorOne, 1, vectorDest, 1)
 
 /**************** SUM *****************/
-#define Cicm_Vector_Float_Sum(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
-#define Cicm_Vector_Double_Sum(source1, source2, dest, length) vDSP_vaddD(source1, 1, source2, 1, dest, 1, length)
 
+#define Cicm_Vector_Float_Sum(vector, dest, length)  vDSP_sve(vector, 1 , &dest, length)
+#define Cicm_Vector_Double_Sum(vector, dest, length) vDSP_sveD(vector, 1 , &dest, length)
+
+// A CHANGER DE NOM //
 #define Cicm_Vector_Scalar_Float_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsadd(vectorSource, 1, &scalar, vectorDest, 1, size);
 #define Cicm_Vector_Scalar_Double_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsaddD(vectorSource, 1, &scalar, vectorDest, 1, size);
 
@@ -139,13 +143,5 @@
 
 #define Cicm_fft_forward(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_FORWARD)
 #define Cicm_fft_inverse(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
-
-/* Sinus and Cosinus */
-#define Cicm_Vector_Float_Cosinus vvcosf
-#define Cicm_Vector_Float_Sinus vvsinf
-#define Cicm_Vector_Double_Cosinus vvcos
-#define Cicm_Vector_Double_Sinus vvsin
-#define Cicm_Vector_Float_SinCos(sinVector, cosVector, angleVector, size) vvsincosf(sinVector, cosVector, angleVector, &size)
-#define Cicm_Vector_Double_SinCos(sinVector, cosVector, angleVector, size) vvsincos(sinVector, cosVector, angleVector, &size)
 
 #endif

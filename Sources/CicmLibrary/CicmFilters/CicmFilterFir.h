@@ -46,7 +46,7 @@ public:
     {
         Cicm_Float result;
         m_input_vector[--m_index] = anInput;
-        Cicm_Vector_Float_Dot_Product(m_input_vector+m_index, m_fir_vector, &result, m_fir_size);
+        Cicm_Vector_Float_Dot_Product(m_input_vector+m_index, m_fir_vector, result, m_fir_size);
         if(m_index <= 0)
         {
             m_index = m_fir_size;

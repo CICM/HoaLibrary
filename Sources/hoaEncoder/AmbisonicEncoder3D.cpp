@@ -109,6 +109,22 @@ void AmbisonicEncoder3D::computeMatrices()
             }
         }
 	}
+    /*
+    for(long i = 0; i < m_number_of_harmonics; i++)
+    {
+        double normalization;
+        double factor = (double)(2 * getHarmonicOrder(i) + 1) / (CICM_2PI * 2);
+        normalization = factor * Tools::factoriel(getHarmonicOrder(i) - getHarmonicIndex(i)) / Tools::factoriel(getHarmonicOrder(i) + getHarmonicIndex(i));
+        if (getHarmonicIndex(i) != 0)
+        {
+            normalization *= sqrt(2.);
+        }
+        for(long j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
+        {
+            m_azimuth_matrix[i][j] *= normalization;
+            m_elevation_matrix[i][j] *= normalization;
+        }
+    }*/
 }
 /*
 void AmbisonicEncoder3D::computeNormalization()

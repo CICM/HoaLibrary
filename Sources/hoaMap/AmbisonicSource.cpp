@@ -146,7 +146,7 @@ double SourcesManager::Source::getAngle()
 
 double SourcesManager::Source::getAbscissa()
 {
-    return Tools::abscisse(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
+    return Tools::abscissa(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
 }
 
 double SourcesManager::Source::getOrdinate()
