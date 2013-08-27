@@ -34,7 +34,8 @@ private:
     
 public:
     MaxWider(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL) : MaxAmbisonic(aParentObject, argc, argv){};
-    void realloc_ambisonic(){m_parent->f_ambi = new AmbisonicWider(object_attr_getlong(m_parent, gensym("order")), sys_getblksize());}
+    void realloc_ambisonic()
+    {m_parent->f_ambi = new AmbisonicWider(object_attr_getlong(m_parent, gensym("order")), sys_getblksize());}
     ~MaxWider(){};
 };
 

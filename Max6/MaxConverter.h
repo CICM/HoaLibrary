@@ -294,6 +294,14 @@ public:
             }
         }
     }
+    
+    static bool is_dsp(t_object* x)
+    {
+        if(object_classname(x)->s_name[strlen(object_classname(x)->s_name)-1] == '~')
+            return 1;
+        else
+            return 0;
+    }
 };
 
 #endif /* defined(DEF_MAX_CONVERTER) */

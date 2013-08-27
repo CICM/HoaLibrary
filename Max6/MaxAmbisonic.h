@@ -57,7 +57,7 @@ protected:
     t_object**  m_object_to_keep;
     
     long        m_line_selected;
-    t_object*   m_object_to_connect;
+    t_object*   m_line_to_connect;
     
 public:
     MaxAmbisonic(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL);
@@ -68,7 +68,8 @@ public:
     void attach_to_notification();
     
     void connect_outlets();
-    void connect_outlet_with_line(t_object* line);
+    void connect_outlets_with_line(t_object* line);
+    void connect_inlets_with_line(t_object* line);
     
     void color_inlets();
     void color_outlets();

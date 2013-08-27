@@ -83,6 +83,10 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 		
         defer_low(x, (method)hoa_wider_attach, NULL, NULL, NULL);
 		x->f_ob.z_misc = Z_NO_INPLACE;
+        
+        t_dictionary* d = (t_dictionary *)gensym("#D")->s_thing;
+        if (d) attr_dictionary_process(x, d);
+        attr_args_process(x, argc, argv);
 	}
 	return (x);
 }
@@ -136,10 +140,19 @@ void hoa_wider_connect(t_hoa_wider *x, t_symbol *s, long argc, t_atom* argv)
         x->f_ambi_max->connect_outlets();
         x->f_ambi_max->color_outlets();
     }
-    else if(atom_gettype(argv) == A_OBJ)
+    else if(argc == 2 && atom_gettype(argv) == A_OBJ)
     {
-        x->f_ambi_max->connect_outlet_with_line((t_object *)atom_getobj(argv));
-        x->f_ambi_max->color_outlets();
+        if(atom_getsym(argv+1) == gensym("outlet"))
+        {
+            x->f_ambi_max->connect_outlets_with_line((t_object *)atom_getobj(argv));
+            x->f_ambi_max->color_outlets();
+        }
+        else if(atom_getsym(argv+1) == gensym("inlet"))
+        {
+            x->f_ambi_max->connect_inlets_with_line((t_object *)atom_getobj(argv));
+            x->f_ambi_max->color_inlets();
+        }
+            
     }
 }
 

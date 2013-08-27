@@ -28,14 +28,6 @@
 MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
 {
 	m_parent = aParentObject;
-    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
-    {
-        m_order = (long)atom_getfloat(argv);
-    }
-    m_number_of_box_text_items = argc;
-    m_box_text_items = new t_atom[m_number_of_box_text_items];
-    for(int i = 0; i < m_number_of_box_text_items; i++)
-        m_box_text_items[i] = argv[i];
     
     OBJ_ATTR_LONG           ((t_object *)m_parent,"order", 0, m_order);
     OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"order","label",    USESYM(symbol),0,"s",gensym_tr("Ambisonic Order"));
@@ -72,6 +64,15 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","category", USESYM(symbol),0,str_tr("HoaLibrary"));
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","order",    USESYM(long),  0,"4");
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","save",     USESYM(long),  1,"1");
+    
+    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+    {
+        m_order = (long)atom_getfloat(argv);
+    }
+    m_number_of_box_text_items = argc;
+    m_box_text_items = new t_atom[m_number_of_box_text_items];
+    for(int i = 0; i < m_number_of_box_text_items; i++)
+        m_box_text_items[i] = argv[i];
     
     m_line_selected = 0;
     m_number_of_object_to_keep = 0;
@@ -118,18 +119,36 @@ void MaxAmbisonic::connect_outlets()
     }
 }
 
-void MaxAmbisonic::connect_outlet_with_line(t_object* line)
+void MaxAmbisonic::connect_outlets_with_line(t_object* line)
 {
-    t_object *inlet_object;    
-    t_max_err err = object_obex_lookup(jpatchline_get_box2(line), gensym("#B"), (t_object **)&inlet_object);
+    t_object *obj;
+    t_max_err err = object_obex_lookup(jpatchline_get_box2(line), gensym("#B"), (t_object **)&obj);
     if (err != MAX_ERR_NONE)
         return;
     
-    int number_of_harmonics = m_order * 2 + 1;
+    if(CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))) && inlet_count(jbox_get_object(obj)) == m_order * 2 + 1)
+    {
+        CicmMax::connect_lines(m_patcher, m_box, obj, m_order * 2 + 1);
+    }
     
-    CicmMax::connect_lines(m_patcher, m_box, inlet_object, number_of_harmonics);
     m_line_selected = 0;
-    m_object_to_connect = NULL;
+    m_line_to_connect = NULL;
+}
+
+void MaxAmbisonic::connect_inlets_with_line(t_object* line)
+{
+    t_object *obj;
+    t_max_err err = object_obex_lookup(jpatchline_get_box1(line), gensym("#B"), (t_object **)&obj);
+    if (err != MAX_ERR_NONE)
+        return;
+    
+    if(CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))) && outlet_count(jbox_get_object(obj)) == m_order * 2 + 1)
+    {
+        CicmMax::connect_lines(m_patcher, obj, m_box, m_order * 2 + 1);
+    }
+    
+    m_line_selected = 0;
+    m_line_to_connect = NULL;
 }
 
 void MaxAmbisonic::color_inlets()
@@ -137,8 +156,9 @@ void MaxAmbisonic::color_inlets()
     t_jrgba   color;
     for (t_object* line = jpatcher_get_firstline(m_patcher); line; line = jpatchline_get_nextline(line))
     {
-        if(jpatchline_get_box2(line) == m_box && jpatchline_get_inletnum(line) < m_order * 2 + 1)
+        if(jpatchline_get_box2(line) == m_box && jpatchline_get_inletnum(line) < m_order * 2 + 1 && CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))))
         {
+
             if(jpatchline_get_inletnum(line) % 2 == 0)
                 object_attr_getjrgba(m_parent, gensym("poscolor"), &color);
             else
@@ -154,9 +174,9 @@ void MaxAmbisonic::color_outlets()
     t_jrgba   color;
     for (t_object* line = jpatcher_get_firstline(m_patcher); line; line = jpatchline_get_nextline(line))
     {
-        if(jpatchline_get_box1(line) == m_box && jpatchline_get_outletnum(line) < m_order * 2 + 1)
+        if(jpatchline_get_box1(line) == m_box && jpatchline_get_outletnum(line) < m_order * 2 + 1 && CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))))
         {
-            if(jpatchline_get_inletnum(line) % 2 == 0)
+            if(jpatchline_get_outletnum(line) % 2 == 0)
                 object_attr_getjrgba(m_parent, gensym("poscolor"), &color);
             else
                 object_attr_getjrgba(m_parent, gensym("negcolor"), &color);
@@ -245,9 +265,13 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
             
             if(attr_name == gensym("dirty") && jkeyboard_getcurrentmodifiers() == 8)
             {
-                t_atom obj[1];
-                atom_setobj(obj, m_object_to_connect);
-                defer_low(m_parent, object_getmethod(m_parent, gensym("connect")), gensym("connect"), 1, obj);
+                t_atom obj[2];
+                atom_setobj(obj, m_line_to_connect);
+                if(jpatchline_get_box2(m_line_to_connect) == m_box)
+                    atom_setsym(obj+1, gensym("inlet"));
+                else
+                    atom_setsym(obj+1, gensym("outlet"));
+                defer_low(m_parent, object_getmethod(m_parent, gensym("connect")), gensym("connect"), 2, obj);
             }
             else if(attr_name == gensym("selectedlines"))
             {
@@ -258,20 +282,21 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
                 
                 if(ac && atom_gettype(av) == A_OBJ)
                 {
-                    t_object* this_object;
                     t_object* line = (t_object *)atom_getobj(av);
                     
-                    object_obex_lookup(m_parent, gensym("#B"), (t_object **)&this_object);
-                    
-                    if(ac && jpatchline_get_box1(line) == this_object)
+                    if(ac && (jpatchline_get_box1(line) == m_box || jpatchline_get_box2(line) == m_box))
                     {
                         m_line_selected = 1;
-                        m_object_to_connect = line;
+                        m_line_to_connect = line;
                         if(jkeyboard_getcurrentmodifiers() == 24)
                         {
-                            t_atom obj[1];
-                            atom_setobj(obj, m_object_to_connect);
-                            defer_low(m_parent, object_getmethod(m_parent, gensym("connect")), gensym("connect"), 1, obj);
+                            t_atom obj[2];
+                            atom_setobj(obj, m_line_to_connect);
+                            if(jpatchline_get_box2(m_line_to_connect) == m_box)
+                                atom_setsym(obj+1, gensym("inlet"));
+                            else
+                                atom_setsym(obj+1, gensym("outlet"));
+                            defer_low(m_parent, object_getmethod(m_parent, gensym("connect")), gensym("connect"), 2, obj);
                         }
                     }
                 }
@@ -279,7 +304,7 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
             else
             {
                 m_line_selected = 0;
-                m_object_to_connect = NULL;
+                m_line_to_connect = NULL;
             }            
         }
     }
