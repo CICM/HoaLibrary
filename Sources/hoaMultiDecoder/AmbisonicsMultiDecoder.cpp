@@ -25,7 +25,7 @@
 
 #include "AmbisonicsMultiDecoder.h"
 
-AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, long aNumberOfLoudspeakers, long aMode, long aPinnaeSize, std::string aRootPath, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsMultiDecoder::AmbisonicsMultiDecoder(long anOrder, long aNumberOfLoudspeakers, long aMode, long aPinnaeSize, std::string aRootPath, long aVectorSize, long aSamplingRate) : Ambisonic(anOrder, aVectorSize, aSamplingRate)
 {
 	m_decoder = new AmbisonicsDecoder(m_order, aNumberOfLoudspeakers, m_vector_size);
     m_binaural = new AmbisonicsBinaural(m_order, aRootPath, aPinnaeSize, m_vector_size, m_sampling_rate);
@@ -38,8 +38,8 @@ void AmbisonicsMultiDecoder::setMode(long aMode)
     if(aMode == Hoa_Restitution)
     {
         m_mode = Hoa_Restitution;
-        m_restitution->Ambisonics::setVectorSize(m_vector_size);
-        m_restitution->Ambisonics::setSamplingRate(m_sampling_rate);
+        m_restitution->Ambisonic::setVectorSize(m_vector_size);
+        m_restitution->Ambisonic::setSamplingRate(m_sampling_rate);
 		m_number_of_outputs = m_restitution->getNumberOfOutputs();
     }
     else if(aMode == Hoa_Binaural)
@@ -127,7 +127,7 @@ void AmbisonicsMultiDecoder::setVectorSize(long aVectorSize)
     m_vector_size = Tools::clip_power_of_two(aVectorSize);
     if(m_mode == Hoa_Restitution)
     {
-       m_restitution->Ambisonics::setVectorSize(m_vector_size);
+       m_restitution->Ambisonic::setVectorSize(m_vector_size);
     }
     else if(m_mode == Hoa_Binaural)
     {
@@ -144,7 +144,7 @@ void AmbisonicsMultiDecoder::setSamplingRate(long aSamplingRate)
     m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
     if(m_mode == Hoa_Restitution)
     {
-        m_restitution->Ambisonics::setSamplingRate(m_sampling_rate);
+        m_restitution->Ambisonic::setSamplingRate(m_sampling_rate);
     }
     else if(m_mode == Hoa_Binaural)
     {

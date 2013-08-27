@@ -34,7 +34,7 @@ enum
     Hoa_Large
 };
 
-class AmbisonicsBinaural : public Ambisonics
+class AmbisonicsBinaural : public Ambisonic
 {
 	
 private:

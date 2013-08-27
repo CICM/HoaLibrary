@@ -25,7 +25,7 @@
 
 #include "AmbisonicConvolver.h"
 
-AmbisonicConvolver::AmbisonicConvolver(long anOrder, long aSamplingFrequency, long aVectorSize) : Ambisonics(anOrder, aVectorSize, aSamplingFrequency)
+AmbisonicConvolver::AmbisonicConvolver(long anOrder, long aSamplingFrequency, long aVectorSize) : Ambisonic(anOrder, aVectorSize, aSamplingFrequency)
 {    
 	m_impulse_response      = new float[1];
     m_impulse_response_size = 1;

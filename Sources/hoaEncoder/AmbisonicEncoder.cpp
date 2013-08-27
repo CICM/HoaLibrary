@@ -25,7 +25,7 @@
 
 #include "AmbisonicEncoder.h"
 
-AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aMode, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
     m_mode = Tools::clip(aMode, (long)0, (long)1);
 	if(m_mode == Hoa_Split)
@@ -75,7 +75,7 @@ void AmbisonicEncoder::setAngle(double anAngle)
 
 void AmbisonicEncoder::setVectorSize(long aVectorSize)
 {
-	Ambisonics::setVectorSize(aVectorSize);
+	Ambisonic::setVectorSize(aVectorSize);
 	if(m_index_vector)
 		free(m_index_vector);
 	if(m_vector_double)

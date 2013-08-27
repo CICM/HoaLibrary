@@ -25,7 +25,7 @@
 
 #include "AmbisonicsDecoder.h"
 
-AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfLoudspeakers, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfLoudspeakers, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
     Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_harmonics);
     Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_harmonics);

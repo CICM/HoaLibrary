@@ -23,12 +23,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AMBISONICS
-#define DEF_AMBISONICS
+#ifndef DEF_AMBISONIC
+#define DEF_AMBISONIC
 
 #include "../CicmLibrary/CicmLibrary.h"
 
-class Ambisonics
+class Ambisonic
 {
 protected:
 	long	m_order;
@@ -39,7 +39,7 @@ protected:
     long	m_sampling_rate;
 
 public:
-	Ambisonics(long anOrder = 1, long aVectorSize = 2, long aSamplingRate = 44100.);
+	Ambisonic(long anOrder = 1, long aVectorSize = 2, long aSamplingRate = 44100.);
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
@@ -53,7 +53,7 @@ public:
 	void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
 
-	~Ambisonics();
+	~Ambisonic();
 	
 	/* Perform sample by sample */
 	inline void process(float* inputs, float* outputs)

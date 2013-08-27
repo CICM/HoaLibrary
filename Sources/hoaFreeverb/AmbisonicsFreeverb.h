@@ -26,9 +26,9 @@
 #ifndef DEF_AMBISONICSFREEVERB
 #define DEF_AMBISONICSFREEVERB
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Ambisonic.h"
 
-class AmbisonicsFreeverb : public Ambisonics
+class AmbisonicsFreeverb : public Ambisonic
 {
 private:
     

@@ -26,9 +26,9 @@
 #ifndef DEF_AMBISONICWIDER
 #define DEF_AMBISONICWIDER
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Ambisonic.h"
 
-class AmbisonicWider : public Ambisonics
+class AmbisonicWider : public Ambisonic
 {
 private:
     Cicm_Vector_Double*	m_wider_matrix;

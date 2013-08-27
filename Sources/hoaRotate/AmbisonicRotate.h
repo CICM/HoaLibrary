@@ -26,9 +26,9 @@
 #ifndef DEF_AMBISONICROTATE
 #define DEF_AMBISONICROTATE
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Ambisonic.h"
 
-class AmbisonicRotate : public Ambisonics
+class AmbisonicRotate : public Ambisonic
 {
 	
 private:    

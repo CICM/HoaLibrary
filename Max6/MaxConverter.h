@@ -117,6 +117,32 @@ public:
     }
     
     /**************************************************************************************/
+    /*********************************** CONNECTION ***************************************/
+    /**************************************************************************************/
+    
+    static inline void connect_line(t_object* patcher, t_object* outlet_object, int outlet_index, t_object* inlet_object, int inlet_index)
+    {
+        t_atom msg[4];
+        t_atom rv;
+        
+        atom_setobj(msg, outlet_object);
+        atom_setlong(msg + 1, outlet_index);
+        atom_setobj(msg + 2, inlet_object);
+        atom_setlong(msg + 3, inlet_index);
+        
+        object_method_typed(patcher, gensym("connect"), 4, msg, &rv);
+    }
+    
+    static inline void connect_lines(t_object* patcher, t_object* outlet_object, t_object* inlet_object, int number_of_lines)
+    {
+        for(int i = 0; i < number_of_lines; i++)
+        {
+            connect_line(patcher, outlet_object, i, inlet_object, i);
+        }
+    }
+    
+    
+    /**************************************************************************************/
     /*********************************** DSP UPDATE ***************************************/
     /**************************************************************************************/
     

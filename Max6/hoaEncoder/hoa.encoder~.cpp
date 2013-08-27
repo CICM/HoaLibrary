@@ -39,15 +39,14 @@ typedef struct _HoaEncode
 void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv);
 void HoaEncode_free(t_HoaEncode *x);
 void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s);
-
 void HoaEncode_float(t_HoaEncode *x, double f);
 void HoaEncode_int(t_HoaEncode *x, long n);
+void HoaEncode_connect(t_HoaEncode *x);
+t_max_err HoaEncode_notify(t_HoaEncode *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void HoaEncode_perform64_offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-
-t_max_err HoaEncode_notify(t_HoaEncode *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 t_class *HoaEncode_class;
 
@@ -63,7 +62,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)HoaEncode_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaEncode_assist,	"assist",	A_CANT, 0);
     class_addmethod(c, (method)HoaEncode_notify,    "notify",   A_CANT, 0);    
-
+    class_addmethod(c, (method)HoaEncode_connect,   "connect",  0);
+    
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	HoaEncode_class = c;
@@ -140,6 +140,12 @@ void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
 	{
 		sprintf(s,"(Signal) %s", x->f_ambiEncoder->getHarmonicsName(a).c_str());
 	}
+}
+
+void HoaEncode_connect(t_HoaEncode *x)
+{
+    ambisonic_connect_outlet((t_object *)x);
+    ambisonic_color_outlet((t_object *)x);
 }
 
 t_max_err HoaEncode_notify(t_HoaEncode *x, t_symbol *s, t_symbol *msg, void *sender, void *data)

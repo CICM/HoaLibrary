@@ -34,7 +34,7 @@ enum
     Hoa_Microphone_Simulation
 };
 
-class AmbisonicsRestitution : public Ambisonics
+class AmbisonicsRestitution : public Ambisonic
 {
 	
 private:

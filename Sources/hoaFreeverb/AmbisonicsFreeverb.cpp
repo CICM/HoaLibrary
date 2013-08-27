@@ -25,7 +25,7 @@
 
 #include "AmbisonicsFreeverb.h"
 
-AmbisonicsFreeverb::AmbisonicsFreeverb(long anOrder, long aVectorSize, double aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsFreeverb::AmbisonicsFreeverb(long anOrder, long aVectorSize, double aSamplingRate) : Ambisonic(anOrder, aVectorSize, aSamplingRate)
 {
     m_diffuse = 0;
     for(int i = 0; i < m_number_of_harmonics; i++)

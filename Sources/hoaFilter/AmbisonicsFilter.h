@@ -26,10 +26,10 @@
 #ifndef DEF_AMBISONICSFILTER
 #define DEF_AMBISONICSFILTER
 
-#include "../hoaAmbisonics/Ambisonics.h"
+#include "../hoaAmbisonics/Ambisonic.h"
 #include "../CicmLibrary/CicmFilters/CicmFilterBiquad.h"
 
-class AmbisonicsFilter : public Ambisonics
+class AmbisonicsFilter : public Ambisonic
 {
 	
 private:

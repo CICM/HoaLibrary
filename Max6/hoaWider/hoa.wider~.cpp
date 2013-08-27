@@ -23,19 +23,13 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
-
-extern "C"
-{
-	#include "ext.h"
-	#include "ext_obex.h"
-	#include "z_dsp.h"
-}
+#include "../MaxAmbisonic.h"
 
 typedef struct _HoaWider 
 {
-	t_pxobject			f_ob;			
-	AmbisonicWider*		f_AmbisonicWider;
+	t_pxobject			f_ob;
+    MaxAmbisonic*       f_ambiMax;
+	AmbisonicWider*		f_ambiWider;
 
 } t_HoaWider;
 
@@ -44,6 +38,9 @@ void HoaWider_free(t_HoaWider *x);
 void HoaWider_assist(t_HoaWider *x, void *b, long m, long a, char *s);
 void HoaWider_float(t_HoaWider *x, double f);
 void HoaWider_int(t_HoaWider *x, long n);
+void HoaWider_attach(t_HoaWider *x);
+void HoaWider_connect(t_HoaWider *x, t_symbol *s, long argc, t_atom* argv);
+t_max_err HoaWider_notify(t_HoaWider *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -60,6 +57,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)HoaWider_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)HoaWider_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)HoaWider_assist,		"assist",	A_CANT, 0);
+    class_addmethod(c, (method)HoaWider_notify,     "notify",   A_CANT, 0);
+    class_addmethod(c, (method)HoaWider_connect,    "connect",  A_GIMME, 0);
 	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -71,39 +70,41 @@ int C74_EXPORT main(void)
 
 void *HoaWider_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_HoaWider *x = NULL;
-	int order = 4;
-	x = (t_HoaWider *)object_alloc((t_class*)HoaWider_class);
+	t_HoaWider *x = (t_HoaWider *)object_alloc((t_class*)HoaWider_class);
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
-			order	= atom_getlong(argv);
-			
-		x->f_AmbisonicWider	= new AmbisonicWider(order,  sys_getblksize());
+        x->f_ambiMax    = new MaxAmbisonic((t_object *)x, argc, argv);
+		x->f_ambiWider	= new AmbisonicWider(x->f_ambiMax->getOrder(),  sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_AmbisonicWider->getNumberOfInputs());
-		for (int i = 0; i < x->f_AmbisonicWider->getNumberOfOutputs(); i++) 
+		dsp_setup((t_pxobject *)x, x->f_ambiWider->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambiWider->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
+        defer_low(x, (method)HoaWider_attach, NULL, NULL, NULL);
 		x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 	return (x);
 }
 
+void HoaWider_attach(t_HoaWider *x)
+{
+	x->f_ambiMax->attach_to_notification();
+}
+
 void HoaWider_float(t_HoaWider *x, double f)
 {
-	x->f_AmbisonicWider->setWidenValue(f);
+	x->f_ambiWider->setWidenValue(f);
 }
 
 void HoaWider_int(t_HoaWider *x, long n)
 {
-	x->f_AmbisonicWider->setWidenValue(n);
+	x->f_ambiWider->setWidenValue(n);
 }
 
 void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_AmbisonicWider->setVectorSize(maxvectorsize);
-	if(count[x->f_AmbisonicWider->getNumberOfInputs() - 1])
+	x->f_ambiWider->setVectorSize(maxvectorsize);
+	if(count[x->f_ambiWider->getNumberOfInputs() - 1])
 		object_method(dsp64, gensym("dsp_add64"), x, HoaWider_perform64, 0, NULL);
 	else
 		object_method(dsp64, gensym("dsp_add64"), x, HoaWider_perform64_offset, 0, NULL);
@@ -111,25 +112,83 @@ void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double sampler
 
 void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_AmbisonicWider->process(ins, outs, ins[numins - 1]);
+	x->f_ambiWider->process(ins, outs, ins[numins - 1]);
 }
 
 void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {    
-	x->f_AmbisonicWider->process(ins, outs);
+	x->f_ambiWider->process(ins, outs);
 }
 
 void HoaWider_assist(t_HoaWider *x, void *b, long m, long a, char *s)
 {
-	if( a == x->f_AmbisonicWider->getNumberOfInputs() - 1)
+	if( a == x->f_ambiWider->getNumberOfInputs() - 1)
 		sprintf(s,"(Signal or float) Widen value");
 	else
-		sprintf(s,"(Signal) %s", x->f_AmbisonicWider->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) %s", x->f_ambiWider->getHarmonicsName(a).c_str());
 }
+
+void HoaWider_connect(t_HoaWider *x, t_symbol *s, long argc, t_atom* argv)
+{
+    if(!argc)
+    {
+        x->f_ambiMax->connect_outlets();
+        x->f_ambiMax->color_outlets();
+    }
+    else if(atom_gettype(argv) == A_OBJ)
+    {
+        x->f_ambiMax->connect_outlet_with_line((t_object *)atom_getobj(argv));
+        x->f_ambiMax->color_outlets();
+    }
+}
+
+t_max_err HoaWider_notify(t_HoaWider *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+{
+    if(msg == gensym("attr_modified"))
+	{
+		t_symbol* attr_name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
+        if(attr_name == gensym("order"))
+        {
+            if(object_attr_getlong(x, gensym("order")) != x->f_ambiWider->getOrder())
+            {
+                t_atom* state = CicmMax::dsp_stop((t_object *)x);
+                
+                //ambisonic_keep_inlet_objects((t_hoa_object *)x, x->f_ambiWider->getNumberOfInputs()-1);
+                delete(x->f_ambiWider);
+                x->f_ambiWider = new AmbisonicWider(object_attr_getlong(x, gensym("order")), sys_getblksize());
+                x->f_ambiMax->setOrder(x->f_ambiWider->getOrder());
+                
+                CicmMax::resize_inlet((t_object *)x, x->f_ambiWider->getNumberOfInputs());
+                CicmMax::resize_outlet((t_object *)x, x->f_ambiWider->getNumberOfOutputs());
+                x->f_ambiMax->rename_box();
+                
+                if(object_attr_getlong(x, gensym("autoconnect")))
+                {
+                    HoaWider_connect(x, NULL, NULL, NULL);
+                    //ambisonic_connect_keep_objects((t_hoa_object *)x, x->f_ambiWider->getNumberOfInputs()-1);
+                }
+                
+                object_attr_setlong(x, gensym("order"), x->f_ambiWider->getOrder());
+                CicmMax::dsp_start(state);
+            }
+        }
+        else if(attr_name == gensym("poscolor") || attr_name == gensym("negcolor"))
+        {
+    
+            x->f_ambiMax->color_outlets();
+            x->f_ambiMax->color_inlets();
+        }
+    }
+    //ambisonic_notify((t_hoa_object *)x, msg, sender, data);
+    
+    return x->f_ambiMax->notify(s, msg, sender, data);
+}
+
 
 void HoaWider_free(t_HoaWider *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_AmbisonicWider;
+	delete x->f_ambiWider;
+    delete x->f_ambiMax;
 }
 

@@ -26,7 +26,7 @@
 #ifndef DEF_AMBISONICSDIFFUSER
 #define DEF_AMBISONICSDIFFUSER
 
-#include "Ambisonics.h"
+#include "Ambisonic.h"
 
 enum
 {
@@ -34,7 +34,7 @@ enum
     Hoa_Post_Encoding = 1,
 };
 
-class AmbisonicsDiffuser : public Ambisonics
+class AmbisonicsDiffuser : public Ambisonic
 {
 protected:
     double  m_diffuse_factor;

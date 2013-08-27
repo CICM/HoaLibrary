@@ -26,11 +26,11 @@
 #ifndef DEF_AMBISONICMAP
 #define DEF_AMBISONICMAP
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Ambisonic.h"
 #include "../hoaEncoder/AmbisonicEncoder.h"
 #include "../hoaWider/AmbisonicWider.h"
 
-class AmbisonicMap : public Ambisonics
+class AmbisonicMap : public Ambisonic
 {
 private:
     AmbisonicEncoder*  m_encoder;

@@ -26,7 +26,7 @@
 #ifndef DEF_AMBISONICRECOMPOSER
 #define DEF_AMBISONICRECOMPOSER
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Ambisonic.h"
 #include "../hoaAmbisonics/Planewaves.h"
 #include "../hoaEncoder/AmbisonicEncoder.h"
 #include "../HoaWider/AmbisonicWider.h"
@@ -38,7 +38,7 @@ enum
     Hoa_Free
 };
 
-class AmbisonicRecomposer : public Ambisonics//, public Planewaves
+class AmbisonicRecomposer : public Ambisonic//, public Planewaves
 {
 	
 private:

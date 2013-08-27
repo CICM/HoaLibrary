@@ -34,9 +34,9 @@ enum
 };
 
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Ambisonic.h"
 
-class AmbisonicOptim : public Ambisonics
+class AmbisonicOptim : public Ambisonic
 {
 	
 private:

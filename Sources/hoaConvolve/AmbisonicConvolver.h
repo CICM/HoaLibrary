@@ -26,11 +26,11 @@
 #ifndef DEF_AMBISONICCONVOLUTION
 #define DEF_AMBISONICCONVOLUTION
 
-#include "../hoaAmbisonics/Ambisonics.h"
+#include "../hoaAmbisonics/Ambisonic.h"
 #include "../CicmLibrary/CicmLines/CicmLine.h"
 #include "../CicmLibrary/CicmFilters/CicmFilterConvolutionZero.h"
 
-class AmbisonicConvolver : public Ambisonics
+class AmbisonicConvolver : public Ambisonic
 {
 	
 private:

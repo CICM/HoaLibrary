@@ -25,7 +25,7 @@
 
 #include "AmbisonicWider.h"
 
-AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
     m_number_of_inputs = m_number_of_harmonics + 1;
 
@@ -83,7 +83,7 @@ void AmbisonicWider::setWidenValue(double aWidenValue)
 
 void AmbisonicWider::setVectorSize(long aVectorSize)
 {
-	Ambisonics::setVectorSize(aVectorSize);
+	Ambisonic::setVectorSize(aVectorSize);
 	if(m_index_vector)
 		free(m_index_vector);
 	if(m_vector_double)

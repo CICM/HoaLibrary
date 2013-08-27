@@ -26,7 +26,7 @@
 #ifndef DEF_AMBISONICSOURCESMANAGER
 #define DEF_AMBISONICSOURCESMANAGER
 
-#include "../hoaAmbisonics/Ambisonics.h"
+#include "../hoaAmbisonics/Ambisonic.h"
 
 
 class SourcesManager

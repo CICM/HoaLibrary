@@ -25,7 +25,7 @@
 
 #include "AmbisonicMap.h"
 
-AmbisonicMap::AmbisonicMap(long anOrder, long aRampSample, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicMap::AmbisonicMap(long anOrder, long aRampSample, long aVectorSize, long aSamplingRate) : Ambisonic(anOrder, aVectorSize, aSamplingRate)
 {
 	m_number_of_inputs		= 1;
 

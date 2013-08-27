@@ -26,7 +26,7 @@
 #include "AmbisonicsFilter.h"
 
 AmbisonicsFilter::AmbisonicsFilter(long anOrder, long aVectorSize, long aSamplingRate)
-: Ambisonics(anOrder, aVectorSize, aSamplingRate)
+: Ambisonic(anOrder, aVectorSize, aSamplingRate)
 {
     m_vector_sum_double = NULL;
     m_vector_sum_float  = NULL;
@@ -119,7 +119,7 @@ void AmbisonicsFilter::setVectorSize(long aVectorSize)
     if(m_vector_sum_float)
         Cicm_Free(m_vector_sum_float);
     
-    Ambisonics::setVectorSize(aVectorSize);
+    Ambisonic::setVectorSize(aVectorSize);
     Cicm_Vector_Double_Malloc(m_vector_sum_double, m_vector_size);
     Cicm_Vector_Float_Malloc(m_vector_sum_float, m_vector_size);
     for(int i = 0; i < m_filter.size(); i++)
@@ -130,7 +130,7 @@ void AmbisonicsFilter::setVectorSize(long aVectorSize)
 
 void AmbisonicsFilter::setSamplingRate(long aSamplingRate)
 {
-	Ambisonics::setSamplingRate(aSamplingRate);
+	Ambisonic::setSamplingRate(aSamplingRate);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_filter[0]->setSamplingRate(m_sampling_rate);

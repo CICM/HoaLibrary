@@ -26,9 +26,9 @@
 #ifndef DEF_AmbisonicsViewer
 #define DEF_AmbisonicsViewer
 
-#include "Ambisonics.h"
+#include "Ambisonic.h"
 
-class AmbisonicsViewer : public Ambisonics
+class AmbisonicsViewer : public Ambisonic
 {
 	
 private:

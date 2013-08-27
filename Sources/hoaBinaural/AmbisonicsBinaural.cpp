@@ -26,7 +26,7 @@
 #include "AmbisonicsBinaural.h"
 
 
-AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, long aPinnaeSize, double aSamplingRate, long aVectorSize) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsBinaural::AmbisonicsBinaural(long anOrder, std::string aRootPath, long aPinnaeSize, double aSamplingRate, long aVectorSize) : Ambisonic(anOrder, aVectorSize, aSamplingRate)
 {
     /* Limit Order Due To HRTFs Discretization */
     if (m_order > 35)

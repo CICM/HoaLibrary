@@ -28,7 +28,7 @@
 
 #include "AmbisonicMap.h"
 
-class AmbisonicsMultiMaps : public Ambisonics
+class AmbisonicsMultiMaps : public Ambisonic
 {
 	
 private:

@@ -25,7 +25,7 @@
 
 #include "AmbisonicOptim.h"
 
-AmbisonicOptim::AmbisonicOptim(long anOrder, long anOptimMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicOptim::AmbisonicOptim(long anOrder, long anOptimMode, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
 	Cicm_Vector_Float_Malloc(m_optim_vector_float, m_number_of_harmonics);
     Cicm_Vector_Double_Malloc(m_optim_vector_double, m_number_of_harmonics);

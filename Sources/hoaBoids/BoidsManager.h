@@ -27,7 +27,7 @@
 #ifndef __hoa_boids__BoidsManager__
 #define __hoa_boids__BoidsManager__
 
-#include "../../Sources/hoaAmbisonics/Ambisonics.h"
+#include "../../Sources/hoaAmbisonics/Ambisonic.h"
 
 
 // initial flight parameters

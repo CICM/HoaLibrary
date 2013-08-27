@@ -23,9 +23,9 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Ambisonics.h"
+#include "Ambisonic.h"
 
-Ambisonics::Ambisonics(long anOrder, long aVectorSize, long aSamplingRate)
+Ambisonic::Ambisonic(long anOrder, long aVectorSize, long aSamplingRate)
 {
 	m_order					= Tools::clip_min(anOrder, (long)1);
 	m_number_of_harmonics	= m_order * 2 + 1;
@@ -36,37 +36,37 @@ Ambisonics::Ambisonics(long anOrder, long aVectorSize, long aSamplingRate)
     setSamplingRate(aSamplingRate);
 }
 
-long Ambisonics::getOrder()
+long Ambisonic::getOrder()
 {
 	return m_order;
 }
 
-long Ambisonics::getNumberOfHarmonics()
+long Ambisonic::getNumberOfHarmonics()
 {
 	return m_number_of_harmonics;
 }
 
-long Ambisonics::getNumberOfInputs()
+long Ambisonic::getNumberOfInputs()
 {
 	return m_number_of_inputs;
 }
 
-long Ambisonics::getNumberOfOutputs()
+long Ambisonic::getNumberOfOutputs()
 {
 	return m_number_of_outputs;
 }
 
-long Ambisonics::getVectorSize()
+long Ambisonic::getVectorSize()
 {
 	return m_vector_size;
 }
 
-long Ambisonics::getSamplingRate()
+long Ambisonic::getSamplingRate()
 {
 	return m_sampling_rate;
 }
 
-long Ambisonics::getHarmonicIndex(long anIndex)
+long Ambisonic::getHarmonicIndex(long anIndex)
 {
     int index;
     if (anIndex == 0)
@@ -82,22 +82,22 @@ long Ambisonics::getHarmonicIndex(long anIndex)
         return 0;
 }
 
-long Ambisonics::getHarmonicOrder(long anIndex)
+long Ambisonic::getHarmonicOrder(long anIndex)
 {
     return abs(getHarmonicIndex(anIndex));
 }
 
-void Ambisonics::setVectorSize(long aVectorSize)
+void Ambisonic::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
 }
 
-void Ambisonics::setSamplingRate(long aSamplingRate)
+void Ambisonic::setSamplingRate(long aSamplingRate)
 {
 	m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
 }
 
-std::string Ambisonics::getHarmonicsName(long anIndex)
+std::string Ambisonic::getHarmonicsName(long anIndex)
 {
     if(anIndex >= 0 && anIndex < m_number_of_harmonics)
         return "Harmonic " + Tools::intToString(getHarmonicIndex(anIndex));
@@ -106,7 +106,7 @@ std::string Ambisonics::getHarmonicsName(long anIndex)
 }
 
 
-Ambisonics::~Ambisonics()
+Ambisonic::~Ambisonic()
 {
 	;
 }

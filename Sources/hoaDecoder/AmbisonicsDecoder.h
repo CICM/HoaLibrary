@@ -26,9 +26,9 @@
 #ifndef DEF_AMBISONICSDECODER
 #define DEF_AMBISONICSDECODER
 
-#include "../HoaAmbisonics/Ambisonics.h"
+#include "../HoaAmbisonics/Ambisonic.h"
 
-class AmbisonicsDecoder : public Ambisonics
+class AmbisonicsDecoder : public Ambisonic
 {
 	
 private:

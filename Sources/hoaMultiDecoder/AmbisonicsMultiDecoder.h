@@ -36,7 +36,7 @@ enum
     Hoa_Restitution
 };
 
-class AmbisonicsMultiDecoder : public Ambisonics
+class AmbisonicsMultiDecoder : public Ambisonic
 {
 	
 private:

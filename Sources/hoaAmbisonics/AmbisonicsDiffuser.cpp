@@ -25,7 +25,7 @@
 
 #include "AmbisonicsDiffuser.h"
 
-AmbisonicsDiffuser::AmbisonicsDiffuser(long anOrder, bool aMode, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsDiffuser::AmbisonicsDiffuser(long anOrder, bool aMode, long aVectorSize, long aSamplingRate) : Ambisonic(anOrder, aVectorSize, aSamplingRate)
 {
     m_mode = Tools::clip(aMode, Hoa_No_Encoding, Hoa_Post_Encoding);
     if(m_mode == Hoa_No_Encoding)

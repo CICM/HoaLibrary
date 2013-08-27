@@ -25,7 +25,7 @@
 
 #include "AmbisonicsViewer.h"
 
-AmbisonicsViewer::AmbisonicsViewer(long anOrder, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsViewer::AmbisonicsViewer(long anOrder, long aVectorSize, long aSamplingRate) : Ambisonic(anOrder, aVectorSize, aSamplingRate)
 {	
     m_biggest_contribution = 0;
     m_harmonics_basis = new double*[m_number_of_harmonics];

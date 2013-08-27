@@ -25,7 +25,7 @@
 
 #include "AmbisonicsRestitution.h"
 
-AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, long aNumberOfLoudspeakers, long aResitutionMode, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, long aNumberOfLoudspeakers, long aResitutionMode, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
     m_number_of_virtual_loudspeakers = m_number_of_harmonics+1;
     m_decoder = new AmbisonicsDecoder(m_order, m_number_of_virtual_loudspeakers, m_vector_size);

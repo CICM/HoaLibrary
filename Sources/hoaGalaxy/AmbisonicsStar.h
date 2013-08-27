@@ -27,7 +27,7 @@
 #ifndef DEF_AMBISONICSSTAR
 #define DEF_AMBISONICSSTAR
 
-#include "../hoaAmbisonics/Ambisonics.h"
+#include "../hoaAmbisonics/Ambisonic.h"
 
 class Star
 {

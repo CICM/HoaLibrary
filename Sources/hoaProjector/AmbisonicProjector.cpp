@@ -25,7 +25,7 @@
 
 #include "AmbisonicProjector.h"
 
-AmbisonicProjector::AmbisonicProjector(long anOrder, long aNumberOfLoudspeakers, long aVectorSize) : Ambisonics(anOrder, aVectorSize), Planewaves(aNumberOfLoudspeakers, aVectorSize)
+AmbisonicProjector::AmbisonicProjector(long anOrder, long aNumberOfLoudspeakers, long aVectorSize) : Ambisonic(anOrder, aVectorSize), Planewaves(aNumberOfLoudspeakers, aVectorSize)
 {        
     m_decoder_matrix_float = NULL;
     m_decoder_matrix_double = NULL;
@@ -77,8 +77,8 @@ void AmbisonicProjector::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
         aNumberOfLoudspeakers = m_number_of_harmonics;
     Planewaves::setNumberOfLoudspeakers(aNumberOfLoudspeakers, 0);
     
-    Planewaves::m_number_of_inputs = Ambisonics::m_number_of_inputs;
-    Ambisonics::m_number_of_outputs = Planewaves::m_number_of_outputs;
+    Planewaves::m_number_of_inputs = Ambisonic::m_number_of_inputs;
+    Ambisonic::m_number_of_outputs = Planewaves::m_number_of_outputs;
     
     if(m_decoder_matrix_float)
         Cicm_Free(m_decoder_matrix_float);
@@ -93,7 +93,7 @@ void AmbisonicProjector::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
 void AmbisonicProjector::setVectorSize(long aVectorSize)
 {
     Planewaves::setVectorSize(aVectorSize);
-    Ambisonics::setVectorSize(aVectorSize);
+    Ambisonic::setVectorSize(aVectorSize);
     
     if(m_input_matrix_float)
         Cicm_Free(m_input_matrix_float);
@@ -104,10 +104,10 @@ void AmbisonicProjector::setVectorSize(long aVectorSize)
     if(m_output_matrix_double)
         Cicm_Free(m_output_matrix_double);
     
-    Cicm_Matrix_Float_Malloc(m_input_matrix_float, m_number_of_harmonics, Ambisonics::m_vector_size);
-    Cicm_Matrix_Double_Malloc(m_input_matrix_double, m_number_of_harmonics, Ambisonics::m_vector_size);
-    Cicm_Matrix_Float_Malloc(m_output_matrix_float, m_number_of_loudspeakers, Ambisonics::m_vector_size);
-    Cicm_Matrix_Double_Malloc(m_output_matrix_double, m_number_of_loudspeakers, Ambisonics::m_vector_size);
+    Cicm_Matrix_Float_Malloc(m_input_matrix_float, m_number_of_harmonics, Ambisonic::m_vector_size);
+    Cicm_Matrix_Double_Malloc(m_input_matrix_double, m_number_of_harmonics, Ambisonic::m_vector_size);
+    Cicm_Matrix_Float_Malloc(m_output_matrix_float, m_number_of_loudspeakers, Ambisonic::m_vector_size);
+    Cicm_Matrix_Double_Malloc(m_output_matrix_double, m_number_of_loudspeakers, Ambisonic::m_vector_size);
 }
 
 AmbisonicProjector::~AmbisonicProjector()

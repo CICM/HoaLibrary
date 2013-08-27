@@ -25,7 +25,7 @@
 
 #include "AmbisonicRotate.h"
 
-AmbisonicRotate::AmbisonicRotate(long anOrder, long aVectorSize) : Ambisonics(anOrder, aVectorSize)
+AmbisonicRotate::AmbisonicRotate(long anOrder, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
 	m_number_of_inputs		= m_number_of_harmonics + 1;
 	
