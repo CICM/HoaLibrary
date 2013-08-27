@@ -25,7 +25,7 @@
 
 #include "MaxAmbisonic.h"
 
-MaxAmbisonic::MaxAmbisonic(t_object* aParentObject, long argc, t_atom* argv)
+MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
 {
 	m_parent = aParentObject;
     if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
@@ -87,6 +87,7 @@ void MaxAmbisonic::setOrder(long anOrder)
 {
     m_order = anOrder;
     atom_setlong(m_box_text_items, m_order);
+    object_attr_touch((t_object *)m_parent, gensym("order"));
 }
 
 void MaxAmbisonic::attach_to_notification()
@@ -171,7 +172,9 @@ void MaxAmbisonic::rename_box()
     char        tempory[256];
 
     strcpy(name, jbox_get_maxclass(m_box)->s_name);
-    for(int i = 0; i < m_number_of_box_text_items; i++)
+    sprintf(tempory, " %ld", m_order);
+    strcat(name, tempory);
+    for(int i = 1; i < m_number_of_box_text_items; i++)
     {
         if(atom_gettype(m_box_text_items+i) == A_SYM)
             sprintf(tempory, " %s", atom_getsym(m_box_text_items+i)->s_name);
@@ -187,6 +190,40 @@ void MaxAmbisonic::rename_box()
 
 t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
+    if(msg == gensym("attr_modified"))
+	{
+		t_symbol* attr_name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
+        if(attr_name == gensym("order"))
+        {
+            if(object_attr_getlong(m_parent, gensym("order")) != m_parent->f_ambi->getOrder())
+            {
+                t_atom* state = CicmMax::dsp_stop((t_object *)m_parent);
+                
+                delete(m_parent->f_ambi);
+                realloc_ambisonic();
+                m_order = m_parent->f_ambi->getOrder();
+                
+                CicmMax::resize_inlet((t_object *)m_parent, m_parent->f_ambi->getNumberOfInputs());
+                CicmMax::resize_outlet((t_object *)m_parent, m_parent->f_ambi->getNumberOfOutputs());
+                rename_box();
+                
+                if(object_attr_getlong(m_parent, gensym("autoconnect")))
+                {
+                    object_method(m_parent, gensym("connect"));
+                }
+                
+                object_attr_setlong(m_parent, gensym("order"), m_parent->f_ambi->getOrder());
+                CicmMax::dsp_start(state);
+            }
+        }
+        else if(attr_name == gensym("poscolor") || attr_name == gensym("negcolor"))
+        {
+            
+            color_outlets();
+            color_inlets();
+        }
+    }
+
     if(msg == gensym("connect"))
     {
         connect_outlets();

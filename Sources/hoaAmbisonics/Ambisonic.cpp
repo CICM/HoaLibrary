@@ -105,6 +105,16 @@ std::string Ambisonic::getHarmonicsName(long anIndex)
         return "No harmonic";
 }
 
+std::string Ambisonic::getInputName(long anIndex)
+{
+    return getHarmonicsName(anIndex);
+}
+
+std::string Ambisonic::getOutputName(long anIndex)
+{
+    return getHarmonicsName(anIndex);
+}
+
 
 Ambisonic::~Ambisonic()
 {

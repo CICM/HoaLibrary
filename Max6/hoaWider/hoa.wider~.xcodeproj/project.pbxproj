@@ -141,6 +141,7 @@
 		8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4892D417CA314100E19032 /* AmbisonicWider.h */; };
 		8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48935C17CB716100E19032 /* MaxAmbisonic.h */; };
 		8F89EB7D17CCA7F000D532B7 /* MaxAmbisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */; };
+		8F89EB8317CCDFE000D532B7 /* MaxWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F89EB8217CCDFE000D532B7 /* MaxWider.h */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
 		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
@@ -281,6 +282,7 @@
 		8F4892D417CA314100E19032 /* AmbisonicWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicWider.h; sourceTree = "<group>"; };
 		8F48935C17CB716100E19032 /* MaxAmbisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxAmbisonic.h; path = ../MaxAmbisonic.h; sourceTree = "<group>"; };
 		8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaxAmbisonic.cpp; path = ../MaxAmbisonic.cpp; sourceTree = "<group>"; };
+		8F89EB8217CCDFE000D532B7 /* MaxWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxWider.h; sourceTree = "<group>"; };
 		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -305,9 +307,10 @@
 				8FE028B4172A837B00BD68AA /* Accelerate.framework */,
 				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
 				8F3E474617CBAEC400AD445C /* hoa.wider~.cpp */,
-				8F48922917CA313500E19032 /* MaxConverter.h */,
 				8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */,
 				8F48935C17CB716100E19032 /* MaxAmbisonic.h */,
+				8F89EB8217CCDFE000D532B7 /* MaxWider.h */,
+				8F48922917CA313500E19032 /* MaxConverter.h */,
 				8F48922B17CA314100E19032 /* Sources */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
@@ -800,6 +803,7 @@
 				8F48935917CA314100E19032 /* AmbisonicVector.h in Headers */,
 				8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */,
 				8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */,
+				8F89EB8317CCDFE000D532B7 /* MaxWider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

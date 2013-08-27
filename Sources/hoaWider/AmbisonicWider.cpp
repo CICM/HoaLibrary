@@ -43,6 +43,19 @@ AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize) : Ambisonic(anOrd
 	setWidenValue(1.);
 }
 
+std::string AmbisonicWider::getInputName(long anIndex)
+{
+    if(anIndex == m_number_of_inputs-1)
+        return "Widen value";
+    else
+        return Ambisonic::getHarmonicsName(anIndex);
+}
+
+std::string AmbisonicWider::getOutputName(long anIndex)
+{
+    return Ambisonic::getHarmonicsName(anIndex);
+}
+
 void AmbisonicWider::computeWidenVector()
 {    
 	double weight_order = log((double)(m_order + 1));

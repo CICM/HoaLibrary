@@ -76,14 +76,14 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-3",
 									"maxclass" : "newobj",
-									"numinlets" : 16,
-									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"numinlets" : 18,
+									"numoutlets" : 17,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 35.357143, 417.0, 221.5, 19.0 ],
 									"saved_object_attributes" : 									{
 										"autoconnect" : 1,
 										"negcolor" : [ 0.999743, 0.0, 0.0, 1.0 ],
-										"order" : 7,
+										"order" : 8,
 										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
 									}
 ,
@@ -325,13 +325,13 @@
 									"id" : "obj-34",
 									"maxclass" : "newobj",
 									"numinlets" : 2,
-									"numoutlets" : 15,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"numoutlets" : 17,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 39.75, 285.0, 222.199997, 19.0 ],
 									"saved_object_attributes" : 									{
 										"autoconnect" : 1,
 										"negcolor" : [ 0.944143, 0.0, 0.0, 1.0 ],
-										"order" : 7,
+										"order" : 8,
 										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
 									}
 ,
@@ -1204,6 +1204,26 @@
 , 							{
 								"patchline" : 								{
 									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"destination" : [ "obj-3", 16 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-34", 16 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
+									"destination" : [ "obj-3", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-34", 15 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-3", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1213,7 +1233,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.999743, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-3", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1233,7 +1253,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.999743, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-3", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1253,7 +1273,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.999743, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-3", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1273,7 +1293,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.999743, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-3", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1293,7 +1313,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.999743, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-3", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1313,7 +1333,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.999743, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-3", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1333,7 +1353,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.999743, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.944143, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-3", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,

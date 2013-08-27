@@ -46,6 +46,10 @@ public:
     
 	void setWidenValue(double aWidenValue);
 	void setVectorSize(long aVectorSize);
+    
+    std::string  getInputName(long anIndex);
+    std::string  getOutputName(long anIndex);
+    
 	~AmbisonicWider();
 	
 	/************************************************************************************/

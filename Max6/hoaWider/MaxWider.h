@@ -23,63 +23,19 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_MAX_AMBISONIC
-#define DEF_MAX_AMBISONIC
+#ifndef DEF_MAX_WIDER
+#define DEF_MAX_WIDER
 
-#include "MaxConverter.h"
+#include "../MaxAmbisonic.h"
 
-typedef struct _hoa_object
+class MaxWider : public MaxAmbisonic
 {
-	t_pxobject			f_ob;
-	Ambisonic*          f_ambi;
-    
-} t_hoa_object;
-
-class MaxAmbisonic
-{
-protected:
-    t_hoa_object*   m_parent;
-    
-    long        m_order;
-    double      m_color_positive[4];
-	double      m_color_negative[4];
-    long        m_auto_connect;
-    
-    long        m_number_of_box_text_items;
-    t_atom*     m_box_text_items;
-    
-    t_object*   m_box;
-    t_object*   m_patcher;
-    t_object*   m_patcherview;
-    
-    
-    long        m_number_of_object_to_keep;
-    t_object**  m_object_to_keep;
-    
-    long        m_line_selected;
-    t_object*   m_object_to_connect;
+private:
     
 public:
-    MaxAmbisonic(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL);
-    
-    long getOrder();
-    void setOrder(long anOrder);
-    
-    void attach_to_notification();
-    
-    void connect_outlets();
-    void connect_outlet_with_line(t_object* line);
-    
-    void color_inlets();
-    void color_outlets();
-    
-    void rename_box();
-    
-    virtual void realloc_ambisonic() = 0;
-    
-    t_max_err notify(t_symbol *s, t_symbol *msg, void *sender, void *data);
-    
-    virtual ~MaxAmbisonic();
+    MaxWider(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL) : MaxAmbisonic(aParentObject, argc, argv){};
+    void realloc_ambisonic(){m_parent->f_ambi = new AmbisonicWider(object_attr_getlong(m_parent, gensym("order")), sys_getblksize());}
+    ~MaxWider(){};
 };
 
 #endif
