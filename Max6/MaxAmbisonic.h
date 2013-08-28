@@ -52,9 +52,8 @@ protected:
     t_object*   m_patcher;
     t_object*   m_patcherview;
     
-    
-    long        m_number_of_object_to_keep;
-    t_object**  m_object_to_keep;
+    vector <t_object*>  m_retained_objects;
+    vector <long>       m_retained_outlets;
     
     long        m_line_selected;
     t_object*   m_line_to_connect;
@@ -68,11 +67,14 @@ public:
     void attach_to_notification();
     
     void connect_outlets();
+    void connect_inlets();
     void connect_outlets_with_line(t_object* line);
     void connect_inlets_with_line(t_object* line);
-    
     void color_inlets();
     void color_outlets();
+    void retain_objects();
+    void relink_objects();
+    void clear_last_inlet();
     
     void rename_box();
     

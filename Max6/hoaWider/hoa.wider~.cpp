@@ -139,6 +139,8 @@ void hoa_wider_connect(t_hoa_wider *x, t_symbol *s, long argc, t_atom* argv)
     {
         x->f_ambi_max->connect_outlets();
         x->f_ambi_max->color_outlets();
+        x->f_ambi_max->connect_inlets();
+        x->f_ambi_max->color_inlets();
     }
     else if(argc == 2 && atom_gettype(argv) == A_OBJ)
     {

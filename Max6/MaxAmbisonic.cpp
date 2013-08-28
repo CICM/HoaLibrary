@@ -75,8 +75,6 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
         m_box_text_items[i] = argv[i];
     
     m_line_selected = 0;
-    m_number_of_object_to_keep = 0;
-    m_object_to_keep = NULL;
 }
 
 long MaxAmbisonic::getOrder()
@@ -104,17 +102,20 @@ void MaxAmbisonic::connect_outlets()
 {
     for(t_object* line = jpatcher_get_firstline(m_patcher); line; line = jpatchline_get_nextline(line))
     {
-        if (jpatchline_get_box1(line) == m_box && jpatchline_get_outletnum(line) == 0)
+        if (jpatchline_get_box1(line) == m_box && inlet_count(jbox_get_object(jpatchline_get_box2(line))) >= m_order * 2 + 1)
         {
-            t_object* object_inlet = jpatchline_get_box2(line);
-            if(object_attr_getlong(object_inlet, gensym("order")) != 0 && jpatchline_get_inletnum(line) == 0)
-            {
-                int number_of_harmonics = m_order * 2 + 1;
-                if(object_attr_getlong(object_inlet, gensym("order")) * 2 + 1 < number_of_harmonics)
-                    number_of_harmonics = object_attr_getlong(object_inlet, gensym("order")) * 2 + 1;
-                
-                CicmMax::connect_lines(m_patcher, m_box, object_inlet, number_of_harmonics);
-            }
+            CicmMax::connect_lines(m_patcher, m_box, jpatchline_get_box2(line), m_order * 2 + 1);
+        }
+    }
+}
+
+void MaxAmbisonic::connect_inlets()
+{
+    for(t_object* line = jpatcher_get_firstline(m_patcher); line; line = jpatchline_get_nextline(line))
+    {
+        if (jpatchline_get_box2(line) == m_box && outlet_count(jbox_get_object(jpatchline_get_box1(line))) >= m_order * 2 + 1)
+        {
+            CicmMax::connect_lines(m_patcher, jpatchline_get_box1(line), m_box, m_order * 2 + 1);
         }
     }
 }
@@ -126,11 +127,11 @@ void MaxAmbisonic::connect_outlets_with_line(t_object* line)
     if (err != MAX_ERR_NONE)
         return;
     
-    if(CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))) && inlet_count(jbox_get_object(obj)) == m_order * 2 + 1)
+    if(CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))) && inlet_count(jbox_get_object(obj)) >= m_order * 2 + 1)
     {
         CicmMax::connect_lines(m_patcher, m_box, obj, m_order * 2 + 1);
     }
-    
+
     m_line_selected = 0;
     m_line_to_connect = NULL;
 }
@@ -142,7 +143,7 @@ void MaxAmbisonic::connect_inlets_with_line(t_object* line)
     if (err != MAX_ERR_NONE)
         return;
     
-    if(CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))) && outlet_count(jbox_get_object(obj)) == m_order * 2 + 1)
+    if(CicmMax::is_dsp(jbox_get_object(jpatchline_get_box1(line))) && outlet_count(jbox_get_object(obj)) >= m_order * 2 + 1)
     {
         CicmMax::connect_lines(m_patcher, obj, m_box, m_order * 2 + 1);
     }
@@ -208,6 +209,47 @@ void MaxAmbisonic::rename_box()
     object_method(jbox_get_textfield((t_object *)m_box), gensym("settext"), name);
 }
 
+void MaxAmbisonic::retain_objects()
+{
+    m_retained_objects.clear();
+    m_retained_outlets.clear();
+    t_object* old_line = NULL;
+    for (t_object* line = jpatcher_get_firstline(m_patcher); line; line = jpatchline_get_nextline(line))
+    {
+        if(old_line)
+            CicmMax::disconnect_line(m_patcher, jpatchline_get_box1(old_line), jpatchline_get_outletnum(old_line), m_box, m_order * 2 + 1);
+        if(jpatchline_get_box2(line) == m_box && jpatchline_get_inletnum(line) == m_order * 2 + 1)
+        {            
+            m_retained_objects.push_back(jpatchline_get_box1(line));
+            m_retained_outlets.push_back(jpatchline_get_outletnum(line));
+            old_line = line;
+        }
+    }
+    if(old_line)
+        CicmMax::disconnect_line(m_patcher, jpatchline_get_box1(old_line), jpatchline_get_outletnum(old_line), m_box, m_order * 2 + 1);
+}
+
+void MaxAmbisonic::relink_objects()
+{
+    for(int i = 0; i < m_retained_objects.size(); i++)
+    {
+        CicmMax::connect_line(m_patcher, m_retained_objects[i], m_retained_outlets[i], m_box, m_order * 2 + 1);
+    }
+    m_retained_objects.clear();
+    m_retained_outlets.clear();
+}
+
+void MaxAmbisonic::clear_last_inlet()
+{
+    for (t_object* line = jpatcher_get_firstline(m_patcher); line; line = jpatchline_get_nextline(line))
+    {
+        if(jpatchline_get_box2(line) == m_box && jpatchline_get_inletnum(line) == m_order * 2 + 1)
+        {
+            CicmMax::disconnect_line(m_patcher, jpatchline_get_box1(line), jpatchline_get_outletnum(line), m_box, m_order * 2 + 1);
+        }
+    }
+}
+
 t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
     if(msg == gensym("attr_modified"))
@@ -218,7 +260,7 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
             if(object_attr_getlong(m_parent, gensym("order")) != m_parent->f_ambi->getOrder())
             {
                 t_atom* state = CicmMax::dsp_stop((t_object *)m_parent);
-                
+                retain_objects();
                 delete(m_parent->f_ambi);
                 realloc_ambisonic();
                 m_order = m_parent->f_ambi->getOrder();
@@ -227,6 +269,8 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
                 CicmMax::resize_outlet((t_object *)m_parent, m_parent->f_ambi->getNumberOfOutputs());
                 rename_box();
                 
+                clear_last_inlet();
+                relink_objects();
                 if(object_attr_getlong(m_parent, gensym("autoconnect")))
                 {
                     object_method(m_parent, gensym("connect"));

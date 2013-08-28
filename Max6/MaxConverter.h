@@ -141,6 +141,20 @@ public:
         }
     }
     
+    static inline void disconnect_line(t_object* patcher, t_object* outlet_object, int outlet_index, t_object* inlet_object, int inlet_index)
+    {
+        t_atom msg[4];
+        t_atom rv;
+        
+        atom_setobj(msg, outlet_object);
+        atom_setlong(msg + 1, outlet_index);
+        atom_setobj(msg + 2, inlet_object);
+        atom_setlong(msg + 3, inlet_index);
+        
+        object_method_typed(patcher, gensym("disconnect"), 4, msg, &rv);
+    }
+    
+    
     
     /**************************************************************************************/
     /*********************************** DSP UPDATE ***************************************/
