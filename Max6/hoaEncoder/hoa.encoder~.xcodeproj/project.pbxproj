@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		2CFE07DA17104EE200972936 /* hoa.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE07D717104EE200972936 /* hoa.encoder~.cpp */; };
 		8F48922A17CA313500E19032 /* MaxConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48922917CA313500E19032 /* MaxConverter.h */; };
 		8F4892D517CA314100E19032 /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F48922E17CA314100E19032 /* CicmRingModulation.cpp */; };
 		8F4892D617CA314100E19032 /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48922F17CA314100E19032 /* CicmRingModulation.h */; };
@@ -58,8 +57,8 @@
 		8F48930217CA314100E19032 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48926217CA314100E19032 /* CicmTools.h */; };
 		8F48930317CA314100E19032 /* Ambisonic3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F48926417CA314100E19032 /* Ambisonic3D.cpp */; };
 		8F48930417CA314100E19032 /* Ambisonic3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48926517CA314100E19032 /* Ambisonic3D.h */; };
-		8F48930517CA314100E19032 /* Ambisonics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F48926617CA314100E19032 /* Ambisonics.cpp */; };
-		8F48930617CA314100E19032 /* Ambisonics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48926717CA314100E19032 /* Ambisonics.h */; };
+		8F48930517CA314100E19032 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F48926617CA314100E19032 /* Ambisonic.cpp */; };
+		8F48930617CA314100E19032 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48926717CA314100E19032 /* Ambisonic.h */; };
 		8F48930717CA314100E19032 /* AmbisonicsDiffuser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F48926817CA314100E19032 /* AmbisonicsDiffuser.cpp */; };
 		8F48930817CA314100E19032 /* AmbisonicsDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48926917CA314100E19032 /* AmbisonicsDiffuser.h */; };
 		8F48930917CA314100E19032 /* AmbisonicsViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F48926A17CA314100E19032 /* AmbisonicsViewer.cpp */; };
@@ -139,14 +138,16 @@
 		8F48935917CA314100E19032 /* AmbisonicVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4892D117CA314100E19032 /* AmbisonicVector.h */; };
 		8F48935A17CA314100E19032 /* AmbisonicWider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4892D317CA314100E19032 /* AmbisonicWider.cpp */; };
 		8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4892D417CA314100E19032 /* AmbisonicWider.h */; };
-		8F48935D17CB716100E19032 /* MaxHoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48935C17CB716100E19032 /* MaxHoa.h */; };
+		8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48935C17CB716100E19032 /* MaxAmbisonic.h */; };
+		8F89EB7D17CCA7F000D532B7 /* MaxAmbisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */; };
+		8F89EB8F17CF723700D532B7 /* MaxEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F89EB8E17CF723700D532B7 /* MaxEncoder.h */; };
+		8F89EB9117CF723E00D532B7 /* hoa.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB9017CF723E00D532B7 /* hoa.encoder~.cpp */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
 		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2CFE07D717104EE200972936 /* hoa.encoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.encoder~.cpp"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.encoder~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.encoder~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F48922917CA313500E19032 /* MaxConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxConverter.h; path = ../MaxConverter.h; sourceTree = "<group>"; };
 		8F48922E17CA314100E19032 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
@@ -197,8 +198,8 @@
 		8F48926217CA314100E19032 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
 		8F48926417CA314100E19032 /* Ambisonic3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic3D.cpp; sourceTree = "<group>"; };
 		8F48926517CA314100E19032 /* Ambisonic3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic3D.h; sourceTree = "<group>"; };
-		8F48926617CA314100E19032 /* Ambisonics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonics.cpp; sourceTree = "<group>"; };
-		8F48926717CA314100E19032 /* Ambisonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonics.h; sourceTree = "<group>"; };
+		8F48926617CA314100E19032 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		8F48926717CA314100E19032 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
 		8F48926817CA314100E19032 /* AmbisonicsDiffuser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDiffuser.cpp; sourceTree = "<group>"; };
 		8F48926917CA314100E19032 /* AmbisonicsDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDiffuser.h; sourceTree = "<group>"; };
 		8F48926A17CA314100E19032 /* AmbisonicsViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsViewer.cpp; sourceTree = "<group>"; };
@@ -278,7 +279,10 @@
 		8F4892D117CA314100E19032 /* AmbisonicVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicVector.h; sourceTree = "<group>"; };
 		8F4892D317CA314100E19032 /* AmbisonicWider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicWider.cpp; sourceTree = "<group>"; };
 		8F4892D417CA314100E19032 /* AmbisonicWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicWider.h; sourceTree = "<group>"; };
-		8F48935C17CB716100E19032 /* MaxHoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxHoa.h; path = ../MaxHoa.h; sourceTree = "<group>"; };
+		8F48935C17CB716100E19032 /* MaxAmbisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxAmbisonic.h; path = ../MaxAmbisonic.h; sourceTree = "<group>"; };
+		8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaxAmbisonic.cpp; path = ../MaxAmbisonic.cpp; sourceTree = "<group>"; };
+		8F89EB8E17CF723700D532B7 /* MaxEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxEncoder.h; sourceTree = "<group>"; };
+		8F89EB9017CF723E00D532B7 /* hoa.encoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.encoder~.cpp"; sourceTree = "<group>"; };
 		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -302,9 +306,11 @@
 				8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */,
 				8FE028B4172A837B00BD68AA /* Accelerate.framework */,
 				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
-				2CFE07D717104EE200972936 /* hoa.encoder~.cpp */,
+				8F89EB9017CF723E00D532B7 /* hoa.encoder~.cpp */,
+				8F89EB8E17CF723700D532B7 /* MaxEncoder.h */,
+				8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */,
+				8F48935C17CB716100E19032 /* MaxAmbisonic.h */,
 				8F48922917CA313500E19032 /* MaxConverter.h */,
-				8F48935C17CB716100E19032 /* MaxHoa.h */,
 				8F48922B17CA314100E19032 /* Sources */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
@@ -475,8 +481,8 @@
 			children = (
 				8F48926417CA314100E19032 /* Ambisonic3D.cpp */,
 				8F48926517CA314100E19032 /* Ambisonic3D.h */,
-				8F48926617CA314100E19032 /* Ambisonics.cpp */,
-				8F48926717CA314100E19032 /* Ambisonics.h */,
+				8F48926617CA314100E19032 /* Ambisonic.cpp */,
+				8F48926717CA314100E19032 /* Ambisonic.h */,
 				8F48926817CA314100E19032 /* AmbisonicsDiffuser.cpp */,
 				8F48926917CA314100E19032 /* AmbisonicsDiffuser.h */,
 				8F48926A17CA314100E19032 /* AmbisonicsViewer.cpp */,
@@ -756,7 +762,7 @@
 				8F48930117CA314100E19032 /* CicmSignal.h in Headers */,
 				8F48930217CA314100E19032 /* CicmTools.h in Headers */,
 				8F48930417CA314100E19032 /* Ambisonic3D.h in Headers */,
-				8F48930617CA314100E19032 /* Ambisonics.h in Headers */,
+				8F48930617CA314100E19032 /* Ambisonic.h in Headers */,
 				8F48930817CA314100E19032 /* AmbisonicsDiffuser.h in Headers */,
 				8F48930A17CA314100E19032 /* AmbisonicsViewer.h in Headers */,
 				8F48930C17CA314100E19032 /* Planewaves.h in Headers */,
@@ -796,7 +802,8 @@
 				8F48935717CA314100E19032 /* AmbisonicSpectrum.h in Headers */,
 				8F48935917CA314100E19032 /* AmbisonicVector.h in Headers */,
 				8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */,
-				8F48935D17CB716100E19032 /* MaxHoa.h in Headers */,
+				8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */,
+				8F89EB8F17CF723700D532B7 /* MaxEncoder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,7 +882,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CFE07DA17104EE200972936 /* hoa.encoder~.cpp in Sources */,
 				8F4892D517CA314100E19032 /* CicmRingModulation.cpp in Sources */,
 				8F4892DA17CA314100E19032 /* CicmDecorrelation.cpp in Sources */,
 				8F4892DC17CA314100E19032 /* CicmEnvelope.cpp in Sources */,
@@ -896,7 +902,7 @@
 				8F4892FC17CA314100E19032 /* CicmLine.cpp in Sources */,
 				8F4892FE17CA314100E19032 /* CicmFreeverb.cpp in Sources */,
 				8F48930317CA314100E19032 /* Ambisonic3D.cpp in Sources */,
-				8F48930517CA314100E19032 /* Ambisonics.cpp in Sources */,
+				8F48930517CA314100E19032 /* Ambisonic.cpp in Sources */,
 				8F48930717CA314100E19032 /* AmbisonicsDiffuser.cpp in Sources */,
 				8F48930917CA314100E19032 /* AmbisonicsViewer.cpp in Sources */,
 				8F48930B17CA314100E19032 /* Planewaves.cpp in Sources */,
@@ -937,6 +943,8 @@
 				8F48935617CA314100E19032 /* AmbisonicSpectrum.cpp in Sources */,
 				8F48935817CA314100E19032 /* AmbisonicVector.cpp in Sources */,
 				8F48935A17CA314100E19032 /* AmbisonicWider.cpp in Sources */,
+				8F89EB7D17CCA7F000D532B7 /* MaxAmbisonic.cpp in Sources */,
+				8F89EB9117CF723E00D532B7 /* hoa.encoder~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

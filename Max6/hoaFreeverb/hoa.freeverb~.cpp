@@ -68,9 +68,7 @@ t_class *freeverb_class;
 
 int C74_EXPORT main(void)
 {	
-	t_class *c;
-	
-	c = class_new("hoa.freeverb~", (method)freeverb_new, (method)freeverb_free, (long)sizeof(t_freeverb ), 0L, A_GIMME, 0);
+	t_class *c = class_new("hoa.freeverb~",(method)freeverb_new,(method)freeverb_free,(long)sizeof(t_freeverb),0L,A_GIMME,0);
 	
 	class_addmethod(c, (method)freeverb_dsp64,		"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)freeverb_assist,		"assist",		A_CANT, 0);
@@ -135,6 +133,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_DEFAULT			(c, "freeze", 0, "0");
 	CLASS_ATTR_SAVE				(c, "freeze", 1);
 
+    class_hoainit(c);
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	freeverb_class = c;

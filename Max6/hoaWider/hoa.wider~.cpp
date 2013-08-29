@@ -35,37 +35,28 @@ typedef struct _hoa_wider
 
 void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_wider_free(t_hoa_wider *x);
-void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s);
 void hoa_wider_float(t_hoa_wider *x, double f);
 void hoa_wider_int(t_hoa_wider *x, long n);
-void hoa_wider_attach(t_hoa_wider *x);
-void hoa_wider_connect(t_hoa_wider *x, t_symbol *s, long argc, t_atom* argv);
-t_max_err hoa_wider_notify(t_hoa_wider *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
 void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_wider_perform64(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_wider_perform64_offset(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_wider_perform64(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
+void hoa_wider_perform64_o(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
 
 t_class* hoa_wider_class;
 
 int C74_EXPORT main(void)
 {	
-	t_class *c;
-	
-	c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
+	t_class *c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
 	
 	class_addmethod(c, (method)hoa_wider_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_wider_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)hoa_wider_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)hoa_wider_assist,	"assist",	A_CANT, 0);
-    class_addmethod(c, (method)hoa_wider_notify,    "notify",   A_CANT, 0);
-    class_addmethod(c, (method)hoa_wider_connect,   "connect",  A_GIMME, 0);
 	
+    class_hoainit(c);
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	hoa_wider_class = c;
-	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+
 	return 0;
 }
 
@@ -80,20 +71,9 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_ambi_wider->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambi_wider->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
-		
-        defer_low(x, (method)hoa_wider_attach, NULL, NULL, NULL);
 		x->f_ob.z_misc = Z_NO_INPLACE;
-        
-        t_dictionary* d = (t_dictionary *)gensym("#D")->s_thing;
-        if (d) attr_dictionary_process(x, d);
-        attr_args_process(x, argc, argv);
 	}
 	return (x);
-}
-
-void hoa_wider_attach(t_hoa_wider *x)
-{
-	x->f_ambi_max->attach_to_notification();
 }
 
 void hoa_wider_float(t_hoa_wider *x, double f)
@@ -112,55 +92,17 @@ void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double sampl
 	if(count[x->f_ambi_wider->getNumberOfInputs() - 1])
 		object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64, 0, NULL);
 	else
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64_offset, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64_o, 0, NULL);
 }
 
-void hoa_wider_perform64(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_wider_perform64(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
 {
-	x->f_ambi_wider->process(ins, outs, ins[numins - 1]);
+	x->f_ambi_wider->process(ins, outs, ins[ni - 1]);
 }
 
-void hoa_wider_perform64_offset(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_wider_perform64_o(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
 {    
 	x->f_ambi_wider->process(ins, outs);
-}
-
-void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s)
-{
-    if (a != x->f_ambi_wider->getNumberOfInputs()-1 )
-		sprintf(s,"(Signal) %s", x->f_ambi_wider->getHarmonicsName(a).c_str());
-	else
-		sprintf(s,"(Signal or float) Widen value");
-}
-
-void hoa_wider_connect(t_hoa_wider *x, t_symbol *s, long argc, t_atom* argv)
-{
-    if(!argc)
-    {
-        x->f_ambi_max->connect_outlets();
-        x->f_ambi_max->color_outlets();
-        x->f_ambi_max->connect_inlets();
-        x->f_ambi_max->color_inlets();
-    }
-    else if(argc == 2 && atom_gettype(argv) == A_OBJ)
-    {
-        if(atom_getsym(argv+1) == gensym("outlet"))
-        {
-            x->f_ambi_max->connect_outlets_with_line((t_object *)atom_getobj(argv));
-            x->f_ambi_max->color_outlets();
-        }
-        else if(atom_getsym(argv+1) == gensym("inlet"))
-        {
-            x->f_ambi_max->connect_inlets_with_line((t_object *)atom_getobj(argv));
-            x->f_ambi_max->color_inlets();
-        }
-            
-    }
-}
-
-t_max_err hoa_wider_notify(t_hoa_wider *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
-{
-    return x->f_ambi_max->notify(s, msg, sender, data);
 }
 
 void hoa_wider_free(t_hoa_wider *x)

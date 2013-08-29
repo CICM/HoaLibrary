@@ -23,50 +23,45 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../MaxHoa.h"
+#include "MaxEncoder.h"
 
 int postons = 0;
 
-typedef struct _HoaEncode 
+typedef struct _hoa_encoder 
 {
 	t_pxobject			f_ob;
-    t_ambisonic         f_hoa;
-	AmbisonicEncoder    *f_ambiEncoder;
+	AmbisonicEncoder*   f_ambi_encoder;
+    MaxEncoder*         f_ambi_max;
+    
+} t_hoa_encoder;
 
-} t_HoaEncode;
 
+void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_encoder_free(t_hoa_encoder *x);
+void hoa_encoder_float(t_hoa_encoder *x, double f);
+void hoa_encoder_int(t_hoa_encoder *x, long n);
 
-void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv);
-void HoaEncode_free(t_HoaEncode *x);
-void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s);
-void HoaEncode_float(t_HoaEncode *x, double f);
-void HoaEncode_int(t_HoaEncode *x, long n);
-void HoaEncode_connect(t_HoaEncode *x);
-t_max_err HoaEncode_notify(t_HoaEncode *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_encoder_perform64(t_hoa_encoder *x, t_object *dsp64, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
+void hoa_encoder_perform64_o(t_hoa_encoder *x, t_object *dsp64, double **ins, long ni, double **outs, long no,long sf,long f,void *up);
 
-void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaEncode_perform64_offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-
-t_class *HoaEncode_class;
+t_class *hoa_encoder_class;
 
 int C74_EXPORT main(void)
 {	
 
 	t_class *c;
 	
-	c = class_new("hoa.encoder~", (method)HoaEncode_new, (method)HoaEncode_free, (long)sizeof(t_HoaEncode), 0L, A_GIMME, 0);
+	c = class_new("hoa.encoder~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaEncode_float,		"float",	A_FLOAT,0);
-	class_addmethod(c, (method)HoaEncode_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)HoaEncode_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaEncode_assist,	"assist",	A_CANT, 0);
-    class_addmethod(c, (method)HoaEncode_notify,    "notify",   A_CANT, 0);    
-    class_addmethod(c, (method)HoaEncode_connect,   "connect",  0);
+	class_addmethod(c, (method)hoa_encoder_float,	"float",	A_FLOAT,0);
+	class_addmethod(c, (method)hoa_encoder_int,		"int",		A_LONG, 0);
+	class_addmethod(c, (method)hoa_encoder_dsp64,	"dsp64",	A_CANT, 0);
     
+    class_hoainit(c);
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
-	HoaEncode_class = c;
+	hoa_encoder_class = c;
     
     if(!postons)
     {
@@ -78,16 +73,16 @@ int C74_EXPORT main(void)
 	return 0;
 }
 
-void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 {
-    t_HoaEncode *x = (t_HoaEncode *)object_alloc(HoaEncode_class);
+    t_hoa_encoder *x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
 	if (x)
 	{		
-		ambisonic_new((t_object *)x, &x->f_hoa, argc, argv);
-		x->f_ambiEncoder = new AmbisonicEncoder(x->f_hoa.order, Hoa_Basic, sys_getblksize());
+		x->f_ambi_max   = new MaxEncoder((t_hoa_object *)x, argc, argv);
+		x->f_ambi_encoder = new AmbisonicEncoder(x->f_ambi_max->getOrder(), Hoa_Basic, sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
-		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
+		dsp_setup((t_pxobject *)x, x->f_ambi_encoder->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambi_encoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
         
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -96,100 +91,41 @@ void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
-void HoaEncode_float(t_HoaEncode *x, double f)
+void hoa_encoder_float(t_hoa_encoder *x, double f)
 {
-	x->f_ambiEncoder->setAngle(f);
+	x->f_ambi_encoder->setAngle(f);
 }
 
-void HoaEncode_int(t_HoaEncode *x, long n)
+void hoa_encoder_int(t_hoa_encoder *x, long n)
 {
-	x->f_ambiEncoder->setAngle(n);
+	x->f_ambi_encoder->setAngle(n);
 }
 
-void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambiEncoder->setVectorSize(maxvectorsize);
-	x->f_ambiEncoder->setSamplingRate(samplerate);
+	x->f_ambi_encoder->setVectorSize(maxvectorsize);
+	x->f_ambi_encoder->setSamplingRate(samplerate);
     
-    if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
-        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64, 0, NULL);
+    if(count[x->f_ambi_encoder->getNumberOfInputs() - 1])
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64, 0, NULL);
     else
-        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64_offset, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_o, 0, NULL);
 }
 
-void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_encoder_perform64(t_hoa_encoder *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
 {
-	x->f_ambiEncoder->process(ins[0], outs, ins[1]);
+	x->f_ambi_encoder->process(ins[0], outs, ins[1]);
 }
 
-void HoaEncode_perform64_offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_encoder_perform64_o(t_hoa_encoder *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *u)
 {
-	x->f_ambiEncoder->process(ins[0], outs);
+	x->f_ambi_encoder->process(ins[0], outs);
 }
 
-void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
-{
-	if (m == ASSIST_INLET) 
-	{
-        if(a == 0)
-            sprintf(s,"(Signal) Input");
-        else
-            sprintf(s,"(Signal or float) Angle");
-	} 
-	else 
-	{
-		sprintf(s,"(Signal) %s", x->f_ambiEncoder->getHarmonicsName(a).c_str());
-	}
-}
-
-void HoaEncode_connect(t_HoaEncode *x)
-{
-    ambisonic_connect_outlet((t_object *)x);
-    ambisonic_color_outlet((t_object *)x);
-}
-
-t_max_err HoaEncode_notify(t_HoaEncode *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
-{
-    if(msg == gensym("attr_modified"))
-	{
-		t_symbol* attr_name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
-        if(attr_name == gensym("order"))
-        {
-            if(object_attr_getlong(x, gensym("order")) != x->f_ambiEncoder->getOrder())
-            {
-                t_atom* state = CicmMax::dsp_stop((t_object *)x);
-                delete(x->f_ambiEncoder);
-                x->f_ambiEncoder = new AmbisonicEncoder(object_attr_getlong(x, gensym("order")), Hoa_Basic, sys_getblksize());
-                
-                                if(atom_gettype(x->f_hoa.argv) == A_LONG || atom_gettype(x->f_hoa.argv) == A_FLOAT)
-                    atom_setlong(x->f_hoa.argv, (long)x->f_ambiEncoder->getOrder());
-                
-                CicmMax::resize_outlet((t_object *)x, x->f_ambiEncoder->getNumberOfOutputs());
-                ambisonic_rename_object((t_object *)x, x->f_hoa.argc, x->f_hoa.argv);
-                if(object_attr_getlong(x, gensym("autoconnect")))
-                {
-                    ambisonic_connect_outlet((t_object *)x);
-                    ambisonic_color_outlet((t_object *)x);
-                }
-                
-                object_attr_setlong(x, gensym("order"), x->f_ambiEncoder->getOrder());
-                CicmMax::dsp_start(state);
-            }
-        }
-        else if(attr_name == gensym("poscolor") || attr_name == gensym("negcolor"))
-        {
-            ambisonic_color_outlet((t_object *)x);
-        }        
-    }
-    ambisonic_notify((t_object *)x, &x->f_hoa, msg, sender, data);
-
-    return MAX_ERR_NONE;
-}
-
-void HoaEncode_free(t_HoaEncode *x) 
+void hoa_encoder_free(t_hoa_encoder *x) 
 {
 	dsp_free((t_pxobject *)x);
-	delete(x->f_ambiEncoder);
-    ambisonic_free((t_object *)x, &x->f_hoa);
+	delete x->f_ambi_encoder;
+    delete x->f_ambi_max;
 }
 

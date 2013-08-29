@@ -23,17 +23,17 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_MAX_ROTATE
-#define DEF_MAX_ROTATE
+#ifndef DEF_MAX_ENCODER
+#define DEF_MAX_ENCODER
 
 #include "../MaxAmbisonic.h"
 
-class MaxRotate : public MaxAmbisonic
+class MaxEncoder : public MaxAmbisonic
 {
 private:
     
 public:
-    MaxRotate(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL) : MaxAmbisonic(aParentObject, argc, argv)
+    MaxEncoder(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL) : MaxAmbisonic(aParentObject, argc, argv)
     {
         rename_box();
     }
@@ -45,7 +45,7 @@ public:
     
     void realloc_ambisonic()
     {
-        m_parent->f_ambi = new AmbisonicRotate(object_attr_getlong(m_parent, gensym("order")), sys_getblksize());
+        m_parent->f_ambi = new AmbisonicEncoder(object_attr_getlong(m_parent, gensym("order")), Hoa_Basic, sys_getblksize());
     }
     
     char* add_text()
@@ -53,7 +53,7 @@ public:
         return NULL;
     }
     
-    ~MaxRotate(){};
+    ~MaxEncoder(){};
 };
 
 #endif

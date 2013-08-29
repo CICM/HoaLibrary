@@ -383,7 +383,8 @@ MaxAmbisonic::~MaxAmbisonic()
 
 void class_hoainit(t_class* c)
 {
-    class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
+    if(c->c_sym != gensym("hoa.encoder~"))
+        class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
     class_addmethod(c, (method)hoa_notify,   "notify",   A_CANT, 0);
     class_addmethod(c, (method)hoa_save,     "appendtodictionary",    A_CANT, 0);
     class_addmethod(c, (method)hoa_connect,  "connect",  A_GIMME, 0);
