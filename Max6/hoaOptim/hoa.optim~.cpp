@@ -30,7 +30,7 @@ typedef struct _hoa_optim
 	t_pxobject          f_ob;			
 	AmbisonicOptim*		f_ambi_optim;
     MaxOptim*           f_ambi_max;
-    
+    t_symbol*           f_optim_mode;
 } t_hoa_optim;
 
 void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv);
@@ -39,12 +39,22 @@ void hoa_optim_free(t_hoa_optim *x);
 void hoa_optim_dsp64(t_hoa_optim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_optim_perform64(t_hoa_optim *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f, void *up);
 
+t_max_err hoa_optim_optim(t_hoa_optim *x, t_object *attr, long argc, t_atom *argv);
+
 t_class *hoa_optim_class;
 
 int C74_EXPORT main(void)
 {	
 	t_class *c = class_new("hoa.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (long)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
-	class_addmethod(c, (method)hoa_optim_dsp64,     "dsp64",	A_CANT, 0);    
+	class_addmethod(c, (method)hoa_optim_dsp64,     "dsp64",	A_CANT, 0);
+    
+    CLASS_ATTR_SYM				(c, "optim", 0, t_hoa_optim, f_optim_mode);
+	CLASS_ATTR_CATEGORY			(c, "optim", 0, "HoaLibrary");
+	CLASS_ATTR_LABEL			(c, "optim", 0, "Optimization");
+    CLASS_ATTR_ENUM             (c, "optim", 0, "basic maxRe inPhase");
+	CLASS_ATTR_ORDER			(c, "optim", 0, "2");
+	CLASS_ATTR_ACCESSORS		(c, "optim", NULL, hoa_optim_optim);
+	CLASS_ATTR_SAVE				(c, "optim", 1);
     
     class_hoainit(c);
 	class_dspinit(c);				
@@ -59,8 +69,9 @@ void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv)
 	t_hoa_optim *x = (t_hoa_optim *)object_alloc(hoa_optim_class);
 	if (x)
 	{
+        x->f_optim_mode = gensym("inPhase");
         x->f_ambi_max   = new MaxOptim((t_hoa_object *)x, argc, argv);
-		x->f_ambi_optim	= new AmbisonicOptim(x->f_ambi_max->getOrder(), x->f_ambi_max->getOptim(), sys_getblksize());
+		x->f_ambi_optim	= new AmbisonicOptim(x->f_ambi_max->getOrder(), Hoa_InPhase_Optim, sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambi_optim->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambi_optim->getNumberOfOutputs(); i++) 
@@ -87,5 +98,28 @@ void hoa_optim_free(t_hoa_optim *x)
 	dsp_free((t_pxobject *)x);
 	delete x->f_ambi_optim;
     delete x->f_ambi_max;
+}
+
+t_max_err hoa_optim_optim(t_hoa_optim *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(atom_gettype(argv) == A_SYM)
+	{
+        if(atom_getsym(argv) == gensym("maxRe"))
+            x->f_ambi_optim->setOptimMode(Hoa_MaxRe_Optim);
+        else if(atom_getsym(argv) == gensym("inPhase"))
+            x->f_ambi_optim->setOptimMode(Hoa_InPhase_Optim);
+        else
+            x->f_ambi_optim->setOptimMode(Hoa_Basic_Optim);
+	}
+    else if(atom_gettype(argv) == A_LONG)
+        x->f_ambi_optim->setOptimMode(atom_getlong(argv));
+    
+    if(x->f_ambi_optim->getOptimMode() == Hoa_MaxRe_Optim)
+        x->f_optim_mode = gensym("maxRe");
+    else if(x->f_ambi_optim->getOptimMode() == Hoa_InPhase_Optim)
+        x->f_optim_mode = gensym("inPhase");
+    else
+        x->f_optim_mode = gensym("basic");
+    return NULL;
 }
 

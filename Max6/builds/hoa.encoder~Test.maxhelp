@@ -125,12 +125,12 @@
 									"saved_object_attributes" : 									{
 										"autoconnect" : 1,
 										"negcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
-										"optim" : "maxRe",
+										"optim" : "inPhase",
 										"order" : 7,
 										"poscolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 									}
 ,
-									"text" : "hoa.optim~ 7 maxRe"
+									"text" : "hoa.optim~ 7"
 								}
 
 							}
@@ -394,7 +394,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 38.750004, 284.0, 223.199997, 19.0 ],
+									"patching_rect" : [ 38.750004, 284.0, 208.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"autoconnect" : 1,
 										"negcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
@@ -402,7 +402,7 @@
 										"poscolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 									}
 ,
-									"text" : "hoa.encoder~ 7"
+									"text" : "hoa.encoder~ 7 Salut Nounou !!!"
 								}
 
 							}
@@ -459,7 +459,7 @@
 									"destination" : [ "obj-34", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 554.5, 270.0, 252.450001, 270.0 ],
+									"midpoints" : [ 554.5, 270.0, 237.250004, 270.0 ],
 									"source" : [ "obj-10", 0 ]
 								}
 
@@ -499,7 +499,7 @@
 									"destination" : [ "obj-34", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 531.5, 270.0, 252.450001, 270.0 ],
+									"midpoints" : [ 531.5, 270.0, 237.250004, 270.0 ],
 									"source" : [ "obj-11", 0 ]
 								}
 
@@ -712,7 +712,7 @@
 									"destination" : [ "obj-34", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 487.5, 270.0, 252.450001, 270.0 ],
+									"midpoints" : [ 487.5, 270.0, 237.250004, 270.0 ],
 									"source" : [ "obj-2", 0 ]
 								}
 
@@ -1220,7 +1220,7 @@
 									"destination" : [ "obj-34", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 509.5, 270.0, 252.450001, 270.0 ],
+									"midpoints" : [ 509.5, 270.0, 237.250004, 270.0 ],
 									"source" : [ "obj-5", 0 ]
 								}
 

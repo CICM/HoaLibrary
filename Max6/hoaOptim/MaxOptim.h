@@ -31,66 +31,24 @@
 class MaxOptim: public MaxAmbisonic
 {
 private:
-    t_symbol* m_optim;
-    
+
 public:
     MaxOptim(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL) : MaxAmbisonic(aParentObject, argc, argv)
     {
-        m_optim = gensym("inPhase");
-        if(argc >= 2 && atom_gettype(argv+1) == A_SYM)
-        {
-            if(atom_getsym(argv+1) == gensym("basic") || atom_getsym(argv+1) == gensym("maxRe"))
-                m_optim = atom_getsym(argv+1);
-        }
-        OBJ_ATTR_SYM            ((t_object *)m_parent,"optim", 0, m_optim);
-        OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"optim","label",    USESYM(symbol),0,"s",gensym_tr("Optimization"));
-        OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","category", USESYM(symbol),0,str_tr("HoaLibrary"));
-        OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","style",    USESYM(symbol),0,"enum");
-        OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","enumvals", USESYM(atom),  0,"basic maxRe inPhase");
-        OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","order",    USESYM(long),  0,"2");
-        OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","save",     USESYM(long),  1,"1");
-        
-        rename_box();
+        ;
     }
     
     void realloc_ambisonic()
     {
-        m_parent->f_ambi = new AmbisonicOptim(object_attr_getlong(m_parent, gensym("order")), Hoa_InPhase_Optim, sys_getblksize());
-        attr_notification(gensym("optim"));
+        long optim = Hoa_InPhase_Optim;
+        if(object_attr_getsym(m_parent, gensym("optim")) == gensym("maxRe"))
+            optim = Hoa_MaxRe_Optim;
+        else if(object_attr_getsym(m_parent, gensym("optim")) == gensym("basic"))
+            optim = Hoa_Basic_Optim;
+        
+        m_parent->f_ambi = new AmbisonicOptim(object_attr_getlong(m_parent, gensym("order")), optim, sys_getblksize());
     }
-    
-    void attr_notification(t_symbol* name)
-    {
-        if(name == gensym("optim"))
-        {
-            AmbisonicOptim* optim = (AmbisonicOptim*)m_parent->f_ambi;
-            m_optim = object_attr_getsym(m_parent, gensym("optim"));
-            if(m_optim == gensym("basic"))
-                optim->setOptimMode(Hoa_Basic_Optim);
-            else if(m_optim == gensym("maxRe"))
-                optim->setOptimMode(Hoa_MaxRe_Optim);
-            else
-                optim->setOptimMode(Hoa_InPhase_Optim);
-            rename_box();
-        }
-    }
-    
-    long getOptim()
-    {
-        m_optim = object_attr_getsym(m_parent, gensym("optim"));
-        if(m_optim == gensym("basic"))
-            return Hoa_Basic_Optim;
-        else if(m_optim == gensym("maxRe"))
-            return Hoa_MaxRe_Optim;
-        else
-            return Hoa_InPhase_Optim;
-    }
-    
-    char* add_text()
-    {
-        return m_optim->s_name;
-    }
-    
+   
     ~MaxOptim(){};
 };
 

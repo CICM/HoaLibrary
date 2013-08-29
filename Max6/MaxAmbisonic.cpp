@@ -68,13 +68,25 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","order",    USESYM(long),  0,"4");
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","save",     USESYM(long),  1,"1");
     
-    m_number_of_box_text_items = argc;
-    m_box_text_items = new t_atom[m_number_of_box_text_items];
-    for(int i = 0; i < m_number_of_box_text_items; i++)
-        m_box_text_items[i] = argv[i];
+    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+    {
+        m_number_of_box_text_items = argc;
+        m_box_text_items = new t_atom[m_number_of_box_text_items];
+        for(int i = 0; i < m_number_of_box_text_items; i++)
+            m_box_text_items[i] = argv[i];
+    }
+    else
+    {
+        m_number_of_box_text_items = argc+1;
+        m_box_text_items = new t_atom[m_number_of_box_text_items];
+        atom_setlong(m_box_text_items, m_order);
+        for(int i = 1; i < m_number_of_box_text_items; i++)
+            m_box_text_items[i] = argv[i-1];
+    }    
     
     m_line_selected = 0;
     defer_low(m_parent, (method)hoa_attach, NULL, argc, argv);
+    rename_box();
 }
 
 long MaxAmbisonic::getOrder()
@@ -112,10 +124,17 @@ void MaxAmbisonic::save_to_dictionary(t_dictionary* d)
         strcpy(name, object_classname(m_parent)->s_name);
         sprintf(tempory, " %ld", m_order);
         strcat(name, tempory);
-        if(add_text())
+        
+        for(int i = 1; i < m_number_of_box_text_items; i++)
         {
-            strcat(name, " ");
-            strcat(name, add_text());
+            if(atom_gettype(m_box_text_items+i) == A_SYM)
+                sprintf(tempory, " %s", atom_getsym(m_box_text_items+i)->s_name);
+            else if(atom_gettype(m_box_text_items+i) == A_LONG)
+                sprintf(tempory, " %ld", (long)atom_getlong(m_box_text_items+i));
+            else if(atom_gettype(m_box_text_items+i) == A_FLOAT)
+                sprintf(tempory, " %f", atom_getfloat(m_box_text_items+i));
+            
+            strcat(name, tempory);
         }
         dictionary_appendstring(d, gensym("text"), name);
     }
@@ -218,10 +237,17 @@ void MaxAmbisonic::rename_box()
     strcpy(name, object_classname(m_parent)->s_name);
     sprintf(tempory, " %ld", m_order);
     strcat(name, tempory);
-    if(add_text())
+    
+    for(int i = 1; i < m_number_of_box_text_items; i++)
     {
-        strcat(name, " ");
-        strcat(name, add_text());
+        if(atom_gettype(m_box_text_items+i) == A_SYM)
+            sprintf(tempory, " %s", atom_getsym(m_box_text_items+i)->s_name);
+        else if(atom_gettype(m_box_text_items+i) == A_LONG)
+            sprintf(tempory, " %ld", (long)atom_getlong(m_box_text_items+i));
+        else if(atom_gettype(m_box_text_items+i) == A_FLOAT)
+            sprintf(tempory, " %f", atom_getfloat(m_box_text_items+i));
+        
+        strcat(name, tempory);
     }
     
     defer_low(m_parent, (method)CicmMax::rename_box, gensym(name), NULL, NULL);
@@ -305,7 +331,6 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
             color_outlets();
             color_inlets();
         }
-        attr_notification(attr_name);
     }
 
     if(msg == gensym("connect"))

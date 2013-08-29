@@ -80,8 +80,6 @@ public:
     void rename_box();
     
     virtual void realloc_ambisonic() = 0;
-    virtual char* add_text() = 0;
-    virtual void attr_notification(t_symbol* name) = 0;
     t_max_err notify(t_symbol *s, t_symbol *msg, void *sender, void *data);
     
     virtual ~MaxAmbisonic();

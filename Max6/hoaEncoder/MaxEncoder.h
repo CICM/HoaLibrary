@@ -35,22 +35,12 @@ private:
 public:
     MaxEncoder(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL) : MaxAmbisonic(aParentObject, argc, argv)
     {
-        rename_box();
-    }
-    
-    void attr_notification(t_symbol* name)
-    {
         ;
     }
     
     void realloc_ambisonic()
     {
         m_parent->f_ambi = new AmbisonicEncoder(object_attr_getlong(m_parent, gensym("order")), Hoa_Basic, sys_getblksize());
-    }
-    
-    char* add_text()
-    {
-        return NULL;
     }
     
     ~MaxEncoder(){};
