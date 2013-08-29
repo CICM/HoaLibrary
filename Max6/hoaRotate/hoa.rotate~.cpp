@@ -23,118 +23,152 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
-
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-}
+#include "MaxRotate.h"
 
 typedef struct _HoaRotate 
 {
-	t_pxobject					f_ob;			
-	AmbisonicRotate			*f_ambiRotate;
+	t_pxobject          f_ob;
+	AmbisonicRotate*    f_ambi_rotate;
+    MaxRotate*          f_ambi_max;
+    
+} t_hoa_rotate;
 
-} t_HoaRotate;
+void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_rotate_free(t_hoa_rotate *x);
+void hoa_rotate_assist(t_hoa_rotate *x, void *b, long m, long a, char *s);
+void hoa_rotate_float(t_hoa_rotate *x, double f);
+void hoa_rotate_int(t_hoa_rotate *x, long n);
+void hoa_rotate_attach(t_hoa_rotate *x);
+void hoa_rotate_connect(t_hoa_rotate *x, t_symbol *s, long argc, t_atom* argv);
+t_max_err hoa_rotate_notify(t_hoa_rotate *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
-void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv);
-void HoaRotate_free(t_HoaRotate *x);
-void HoaRotate_assist(t_HoaRotate *x, void *b, long m, long a, char *s);
-void HoaRotate_float(t_HoaRotate *x, double f);
-void HoaRotate_int(t_HoaRotate *x, long n);
+void hoa_rotate_dsp64(t_hoa_rotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_rotate_perform64(t_hoa_rotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_rotate_perform64Offset(t_hoa_rotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void HoaRotate_dsp64(t_HoaRotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void HoaRotate_perform64(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void HoaRotate_perform64Offset(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-
-t_class* HoaRotate_class;
+t_class* hoa_rotate_class;
 
 int C74_EXPORT main(void)
 {	
 
 	t_class *c;
 	
-	c = class_new("hoa.rotate~", (method)HoaRotate_new, (method)HoaRotate_free, (long)sizeof(t_HoaRotate), 0L, A_GIMME, 0);
+	c = class_new("hoa.rotate~", (method)hoa_rotate_new, (method)hoa_rotate_free, (long)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaRotate_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)HoaRotate_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)HoaRotate_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaRotate_assist,	"assist",	A_CANT, 0);
-	
+	class_addmethod(c, (method)hoa_rotate_float,	"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_rotate_int,		"int",		A_LONG, 0);
+	class_addmethod(c, (method)hoa_rotate_dsp64,	"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_rotate_assist,	"assist",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_rotate_notify,   "notify",   A_CANT, 0);
+    class_addmethod(c, (method)hoa_rotate_connect,  "connect",  A_GIMME, 0);
+    
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
-	HoaRotate_class = c;
+	hoa_rotate_class = c;
 	
 	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_HoaRotate *x = NULL;
-	int	order = 4;
-    x = (t_HoaRotate *)object_alloc(HoaRotate_class);
+	t_hoa_rotate *x = (t_hoa_rotate *)object_alloc(hoa_rotate_class);
+    
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
-			order = atom_getlong(argv);
+		x->f_ambi_max   = new MaxRotate((t_hoa_object *)x, argc, argv);
+		x->f_ambi_rotate = new AmbisonicRotate(atom_getfloat(argv), sys_getblksize());
 		
-		x->f_ambiRotate = new AmbisonicRotate(order, sys_getblksize());
-		
-		dsp_setup((t_pxobject *)x, x->f_ambiRotate->getNumberOfInputs());
-		for (int i = 0; i < x->f_ambiRotate->getNumberOfOutputs(); i++) 
+		dsp_setup((t_pxobject *)x, x->f_ambi_rotate->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambi_rotate->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
+        defer_low(x, (method)hoa_rotate_attach, NULL, NULL, NULL);
 		x->f_ob.z_misc = Z_NO_INPLACE;
+        
+        t_dictionary* d = (t_dictionary *)gensym("#D")->s_thing;
+        if (d) attr_dictionary_process(x, d);
+        attr_args_process(x, argc, argv);
 	}
 	return (x);
 }
 
-void HoaRotate_float(t_HoaRotate *x, double f)
+void hoa_rotate_attach(t_hoa_rotate *x)
 {
-	x->f_ambiRotate->setAzimuth(f);
+	x->f_ambi_max->attach_to_notification();
 }
 
-void HoaRotate_int(t_HoaRotate *x, long n)
+void hoa_rotate_float(t_hoa_rotate *x, double f)
 {
-	x->f_ambiRotate->setAzimuth(n);
+	x->f_ambi_rotate->setAzimuth(f);
 }
 
-void HoaRotate_dsp64(t_HoaRotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_rotate_int(t_hoa_rotate *x, long n)
 {
-	x->f_ambiRotate->setVectorSize(maxvectorsize);
-	if(count[x->f_ambiRotate->getNumberOfInputs() - 1])
-		object_method(dsp64, gensym("dsp_add64"), x, HoaRotate_perform64, 0, NULL);
+	x->f_ambi_rotate->setAzimuth(n);
+}
+
+void hoa_rotate_dsp64(t_hoa_rotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+{
+	x->f_ambi_rotate->setVectorSize(maxvectorsize);
+	if(count[x->f_ambi_rotate->getNumberOfInputs() - 1])
+		object_method(dsp64, gensym("dsp_add64"), x, hoa_rotate_perform64, 0, NULL);
 	else
-		object_method(dsp64, gensym("dsp_add64"), x, HoaRotate_perform64Offset, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, hoa_rotate_perform64Offset, 0, NULL);
 }
 
-void HoaRotate_perform64(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_rotate_perform64(t_hoa_rotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiRotate->process(ins, outs, ins[x->f_ambiRotate->getNumberOfInputs() - 1]);
+	x->f_ambi_rotate->process(ins, outs, ins[x->f_ambi_rotate->getNumberOfInputs() - 1]);
 }
 
-void HoaRotate_perform64Offset(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_rotate_perform64Offset(t_hoa_rotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambiRotate->process(ins, outs);
+	x->f_ambi_rotate->process(ins, outs);
 }
 								  
-void HoaRotate_assist(t_HoaRotate *x, void *b, long m, long a, char *s)
+void hoa_rotate_assist(t_hoa_rotate *x, void *b, long m, long a, char *s)
 {
-	if (a != x->f_ambiRotate->getNumberOfInputs()-1 )
-	{
-		sprintf(s,"(Signal) %s", x->f_ambiRotate->getHarmonicsName(a).c_str());
-	}
+	if (a != x->f_ambi_rotate->getNumberOfInputs()-1 )
+		sprintf(s,"(Signal) %s", x->f_ambi_rotate->getHarmonicsName(a).c_str());
 	else
 		sprintf(s,"(Signal or float) Azimuth"); 	
 }
 
+void hoa_rotate_connect(t_hoa_rotate *x, t_symbol *s, long argc, t_atom* argv)
+{
+    if(!argc)
+    {
+        x->f_ambi_max->connect_outlets();
+        x->f_ambi_max->color_outlets();
+        x->f_ambi_max->connect_inlets();
+        x->f_ambi_max->color_inlets();
+    }
+    else if(argc == 2 && atom_gettype(argv) == A_OBJ)
+    {
+        if(atom_getsym(argv+1) == gensym("outlet"))
+        {
+            x->f_ambi_max->connect_outlets_with_line((t_object *)atom_getobj(argv));
+            x->f_ambi_max->color_outlets();
+        }
+        else if(atom_getsym(argv+1) == gensym("inlet"))
+        {
+            x->f_ambi_max->connect_inlets_with_line((t_object *)atom_getobj(argv));
+            x->f_ambi_max->color_inlets();
+        }
+        
+    }
+}
 
-void HoaRotate_free(t_HoaRotate *x)
+t_max_err hoa_rotate_notify(t_hoa_rotate *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+{
+    return x->f_ambi_max->notify(s, msg, sender, data);
+}
+
+void hoa_rotate_free(t_hoa_rotate *x)
 {
 	dsp_free((t_pxobject *)x);
-	free(x->f_ambiRotate);
+	delete x->f_ambi_rotate;
+    delete x->f_ambi_max;
 }
 

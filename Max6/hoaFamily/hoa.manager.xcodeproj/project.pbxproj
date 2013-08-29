@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
-		8F48922A17CA313500E19032 /* MaxConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48922917CA313500E19032 /* MaxConverter.h */; };
+		8F3E474717CBAEC400AD445C /* hoa.manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E474617CBAEC400AD445C /* hoa.manager.cpp */; };
 		8F4892D517CA314100E19032 /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F48922E17CA314100E19032 /* CicmRingModulation.cpp */; };
 		8F4892D617CA314100E19032 /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48922F17CA314100E19032 /* CicmRingModulation.h */; };
 		8F4892D717CA314100E19032 /* CicmDefine_BLAS_FFTW.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48923017CA314100E19032 /* CicmDefine_BLAS_FFTW.h */; };
@@ -140,16 +140,15 @@
 		8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4892D417CA314100E19032 /* AmbisonicWider.h */; };
 		8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48935C17CB716100E19032 /* MaxAmbisonic.h */; };
 		8F89EB7D17CCA7F000D532B7 /* MaxAmbisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */; };
-		8F89EB8317CCDFE000D532B7 /* MaxRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F89EB8217CCDFE000D532B7 /* MaxRotate.h */; };
-		8F89EB8917CE265900D532B7 /* hoa.rotate~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB8817CE265900D532B7 /* hoa.rotate~.cpp */; };
+		8F89EB8717CE232800D532B7 /* MaxConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F89EB8617CE232800D532B7 /* MaxConverter.h */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
 		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
-		2FBBEAE508F335360078DB84 /* hoa.rotate~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.rotate~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F48922917CA313500E19032 /* MaxConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxConverter.h; path = ../MaxConverter.h; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* hoa.manager.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.manager.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F3E474617CBAEC400AD445C /* hoa.manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.manager.cpp; sourceTree = "<group>"; };
 		8F48922E17CA314100E19032 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
 		8F48922F17CA314100E19032 /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
 		8F48923017CA314100E19032 /* CicmDefine_BLAS_FFTW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine_BLAS_FFTW.h; sourceTree = "<group>"; };
@@ -281,8 +280,7 @@
 		8F4892D417CA314100E19032 /* AmbisonicWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicWider.h; sourceTree = "<group>"; };
 		8F48935C17CB716100E19032 /* MaxAmbisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxAmbisonic.h; path = ../MaxAmbisonic.h; sourceTree = "<group>"; };
 		8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaxAmbisonic.cpp; path = ../MaxAmbisonic.cpp; sourceTree = "<group>"; };
-		8F89EB8217CCDFE000D532B7 /* MaxRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxRotate.h; sourceTree = "<group>"; };
-		8F89EB8817CE265900D532B7 /* hoa.rotate~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.rotate~.cpp"; sourceTree = "<group>"; };
+		8F89EB8617CE232800D532B7 /* MaxConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxConverter.h; path = ../MaxConverter.h; sourceTree = "<group>"; };
 		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -306,11 +304,10 @@
 				8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */,
 				8FE028B4172A837B00BD68AA /* Accelerate.framework */,
 				2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */,
-				8F89EB8817CE265900D532B7 /* hoa.rotate~.cpp */,
+				8F3E474617CBAEC400AD445C /* hoa.manager.cpp */,
+				8F89EB8617CE232800D532B7 /* MaxConverter.h */,
 				8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */,
 				8F48935C17CB716100E19032 /* MaxAmbisonic.h */,
-				8F89EB8217CCDFE000D532B7 /* MaxRotate.h */,
-				8F48922917CA313500E19032 /* MaxConverter.h */,
 				8F48922B17CA314100E19032 /* Sources */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
@@ -320,7 +317,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* hoa.rotate~.mxo */,
+				2FBBEAE508F335360078DB84 /* hoa.manager.mxo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -733,7 +730,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F48922A17CA313500E19032 /* MaxConverter.h in Headers */,
 				8F4892D617CA314100E19032 /* CicmRingModulation.h in Headers */,
 				8F4892D717CA314100E19032 /* CicmDefine_BLAS_FFTW.h in Headers */,
 				8F4892D817CA314100E19032 /* CicmDefine_INTEL.h in Headers */,
@@ -803,7 +799,7 @@
 				8F48935917CA314100E19032 /* AmbisonicVector.h in Headers */,
 				8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */,
 				8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */,
-				8F89EB8317CCDFE000D532B7 /* MaxRotate.h in Headers */,
+				8F89EB8717CE232800D532B7 /* MaxConverter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,7 +822,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* hoa.rotate~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* hoa.manager.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -837,7 +833,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.rotate~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.manager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -943,8 +939,8 @@
 				8F48935617CA314100E19032 /* AmbisonicSpectrum.cpp in Sources */,
 				8F48935817CA314100E19032 /* AmbisonicVector.cpp in Sources */,
 				8F48935A17CA314100E19032 /* AmbisonicWider.cpp in Sources */,
+				8F3E474717CBAEC400AD445C /* hoa.manager.cpp in Sources */,
 				8F89EB7D17CCA7F000D532B7 /* MaxAmbisonic.cpp in Sources */,
-				8F89EB8917CE265900D532B7 /* hoa.rotate~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,7 +991,7 @@
 				);
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "hoa.rotate~";
+				PRODUCT_NAME = hoa.manager;
 				SDKROOT = "";
 			};
 			name = Development;
@@ -1028,7 +1024,7 @@
 				);
 				LLVM_LTO = YES;
 				OTHER_LDFLAGS = "$(C74_SYM_LINKER_FLAGS)";
-				PRODUCT_NAME = "hoa.rotate~";
+				PRODUCT_NAME = hoa.manager;
 				SDKROOT = "";
 			};
 			name = Deployment;
@@ -1036,7 +1032,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.rotate~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

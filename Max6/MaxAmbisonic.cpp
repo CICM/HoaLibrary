@@ -29,6 +29,9 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
 {
 	m_parent = aParentObject;
     
+    m_order = 1;
+    if(argc && (atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT))
+        m_order = atom_getfloat(argv);
     OBJ_ATTR_LONG           ((t_object *)m_parent,"order", 0, m_order);
     OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"order","label",    USESYM(symbol),0,"s",gensym_tr("Ambisonic Order"));
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"order","category", USESYM(symbol),0,str_tr("HoaLibrary"));
@@ -65,16 +68,13 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","order",    USESYM(long),  0,"4");
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","save",     USESYM(long),  1,"1");
     
-    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
-    {
-        m_order = (long)atom_getfloat(argv);
-    }
     m_number_of_box_text_items = argc;
     m_box_text_items = new t_atom[m_number_of_box_text_items];
     for(int i = 0; i < m_number_of_box_text_items; i++)
         m_box_text_items[i] = argv[i];
     
     m_line_selected = 0;
+    defer_low(m_parent, (method)hoa_attach, NULL, argc, argv);
 }
 
 long MaxAmbisonic::getOrder()
@@ -89,13 +89,36 @@ void MaxAmbisonic::setOrder(long anOrder)
     object_attr_touch((t_object *)m_parent, gensym("order"));
 }
 
-void MaxAmbisonic::attach_to_notification()
+void MaxAmbisonic::attach()
 {
     object_attach_byptr_register(m_parent, m_parent, CLASS_BOX);
     object_obex_lookup(m_parent, gensym("#P"), (t_object **)&m_patcher);
     object_obex_lookup(m_parent, gensym("#B"), (t_object **)&m_box);
     m_patcherview = jpatcher_get_firstview(m_patcher);
     object_attach_byptr_register(m_parent, m_patcherview, CLASS_NOBOX);
+    
+    t_dictionary* d = (t_dictionary *)gensym("#D")->s_thing;
+    if (d) attr_dictionary_process(m_parent, d);
+    attr_args_process(m_parent, m_number_of_box_text_items, m_box_text_items);
+}
+
+void MaxAmbisonic::save_to_dictionary(t_dictionary* d)
+{
+    if(d)
+    {
+        char        name[256];
+        char        tempory[256];
+        
+        strcpy(name, jbox_get_maxclass(m_box)->s_name);
+        sprintf(tempory, " %ld", m_order);
+        strcat(name, tempory);
+        if(add_text())
+        {
+            strcat(name, " ");
+            strcat(name, add_text());
+        }
+        dictionary_appendstring(d, gensym("text"), name);
+    }
 }
 
 void MaxAmbisonic::connect_outlets()
@@ -195,18 +218,14 @@ void MaxAmbisonic::rename_box()
     strcpy(name, jbox_get_maxclass(m_box)->s_name);
     sprintf(tempory, " %ld", m_order);
     strcat(name, tempory);
-    for(int i = 1; i < m_number_of_box_text_items; i++)
+    if(add_text())
     {
-        if(atom_gettype(m_box_text_items+i) == A_SYM)
-            sprintf(tempory, " %s", atom_getsym(m_box_text_items+i)->s_name);
-        else if(atom_gettype(m_box_text_items+i) == A_LONG)
-            sprintf(tempory, " %ld", (long)atom_getlong(m_box_text_items+i));
-        else if(atom_gettype(m_box_text_items+i) == A_FLOAT)
-            sprintf(tempory, " %f", atom_getfloat(m_box_text_items+i));
-        
-        strcat(name, tempory);
+        strcat(name, " ");
+        strcat(name, add_text());
     }
+    patcherview_set_locked(m_patcherview, 0);
     object_method(jbox_get_textfield((t_object *)m_box), gensym("settext"), name);
+    patcherview_set_locked(m_patcherview, 1);
 }
 
 void MaxAmbisonic::retain_objects()
@@ -263,8 +282,9 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
                 retain_objects();
                 delete(m_parent->f_ambi);
                 realloc_ambisonic();
-                m_order = m_parent->f_ambi->getOrder();
                 
+                m_order = m_parent->f_ambi->getOrder();
+
                 CicmMax::resize_inlet((t_object *)m_parent, m_parent->f_ambi->getNumberOfInputs());
                 CicmMax::resize_outlet((t_object *)m_parent, m_parent->f_ambi->getNumberOfOutputs());
                 rename_box();
@@ -286,6 +306,7 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
             color_outlets();
             color_inlets();
         }
+        attr_notification(attr_name);
     }
 
     if(msg == gensym("connect"))
@@ -360,4 +381,64 @@ MaxAmbisonic::~MaxAmbisonic()
 	free(m_box_text_items);
     object_detach_byptr(m_parent, m_patcherview);
 }
+
+void class_hoainit(t_class* c)
+{
+    class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
+    class_addmethod(c, (method)hoa_notify,   "notify",   A_CANT, 0);
+    class_addmethod(c, (method)hoa_save,     "appendtodictionary",    A_CANT, 0);
+    class_addmethod(c, (method)hoa_connect,  "connect",  A_GIMME, 0);
+    class_addmethod(c, (method)hoa_assist,   "assist",	A_CANT, 0);
+}
+
+t_max_err hoa_notify(t_hoa_object_all *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+{
+    return x->f_ambi_max->notify(s, msg, sender, data);
+}
+
+void hoa_save(t_hoa_object_all *x, t_dictionary *d)
+{
+    x->f_ambi_max->save_to_dictionary(d);
+}
+
+void hoa_attach(t_hoa_object_all *x, t_symbol *s, long argc, t_atom *argv)
+{
+	x->f_ambi_max->attach();
+}
+
+void hoa_connect(t_hoa_object_all *x, t_symbol *s, long argc, t_atom* argv)
+{
+    if(!argc)
+    {
+        x->f_ambi_max->connect_outlets();
+        x->f_ambi_max->color_outlets();
+        x->f_ambi_max->connect_inlets();
+        x->f_ambi_max->color_inlets();
+    }
+    else if(argc == 2 && atom_gettype(argv) == A_OBJ)
+    {
+        if(atom_getsym(argv+1) == gensym("outlet"))
+        {
+            x->f_ambi_max->connect_outlets_with_line((t_object *)atom_getobj(argv));
+            x->f_ambi_max->color_outlets();
+        }
+        else if(atom_getsym(argv+1) == gensym("inlet"))
+        {
+            x->f_ambi_max->connect_inlets_with_line((t_object *)atom_getobj(argv));
+            x->f_ambi_max->color_inlets();
+        }
+        
+    }
+}
+
+void hoa_assist(t_hoa_object_all *x, void *b, long m, long a, char *s)
+{
+	sprintf(s,"(Signal) %s", x->f_ambi_optim->getHarmonicsName(a).c_str());
+}
+
+
+
+
+
+
 

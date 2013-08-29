@@ -23,130 +23,69 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "MaxOptim.h"
 
-extern "C"
+typedef struct _hoa_optim
 {
-	#include "ext.h"
-	#include "ext_obex.h"
-	#include "z_dsp.h"
-}
-
-
-typedef struct _HoaOptim 
-{
-	t_pxobject				f_ob;			
-	AmbisonicOptim*		f_AmbisonicOptim;
-    t_symbol*               f_optim_mode;
+	t_pxobject          f_ob;			
+	AmbisonicOptim*		f_ambi_optim;
+    MaxOptim*           f_ambi_max;
     
-} t_HoaOptim;
+} t_hoa_optim;
 
-void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv);
-void HoaOptim_free(t_HoaOptim *x);
-void HoaOptim_assist(t_HoaOptim *x, void *b, long m, long a, char *s);
-t_max_err HoaOptim_optim(t_HoaOptim *x, t_object *attr, long argc, t_atom *argv);
+void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_optim_free(t_hoa_optim *x);
 
-void HoaOptim_dsp64(t_HoaOptim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void HoaOptim_perform64(t_HoaOptim *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_optim_dsp64(t_hoa_optim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_optim_perform64(t_hoa_optim *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f, void *up);
 
-t_class *HoaOptim_class;
+t_class *hoa_optim_class;
 
 int C74_EXPORT main(void)
 {	
-
-	t_class *c;
-	
-	c = class_new("hoa.optim~", (method)HoaOptim_new, (method)dsp_free, (long)sizeof(t_HoaOptim), 0L, A_GIMME, 0);
-	
-	class_addmethod(c, (method)HoaOptim_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaOptim_assist,		"assist",	A_CANT, 0);
+	t_class *c = class_new("hoa.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (long)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
+	class_addmethod(c, (method)hoa_optim_dsp64,     "dsp64",	A_CANT, 0);    
     
-    CLASS_ATTR_SYM				(c, "optim", 0, t_HoaOptim, f_optim_mode);
-	CLASS_ATTR_CATEGORY			(c, "optim", 0, "Behavior");
-	CLASS_ATTR_LABEL			(c, "optim", 0, "Optimization");
-    CLASS_ATTR_ENUM             (c, "optim", 0, "basic maxRe inPhase");
-	CLASS_ATTR_ORDER			(c, "optim", 0, "1");
-	CLASS_ATTR_ACCESSORS		(c, "optim", NULL, HoaOptim_optim);
-	CLASS_ATTR_SAVE				(c, "optim", 1);
-	
+    class_hoainit(c);
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
-	HoaOptim_class = c;
+	hoa_optim_class = c;
 	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *HoaOptim_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_HoaOptim *x = NULL;
-    t_dictionary *d = NULL;
-	int order = 4;
-    
-    x = (t_HoaOptim *)object_alloc(HoaOptim_class);
+	t_hoa_optim *x = (t_hoa_optim *)object_alloc(hoa_optim_class);
 	if (x)
 	{
-		if(atom_gettype(argv) == A_LONG)
-			order	= atom_getlong(argv);
-        
-        x->f_optim_mode = gensym("inPhase");
-		x->f_AmbisonicOptim	= new AmbisonicOptim(order, Hoa_InPhase_Optim, sys_getblksize());
+        x->f_ambi_max   = new MaxOptim((t_hoa_object *)x, argc, argv);
+		x->f_ambi_optim	= new AmbisonicOptim(x->f_ambi_max->getOrder(), x->f_ambi_max->getOptim(), sys_getblksize());
 		
-		dsp_setup((t_pxobject *)x, x->f_AmbisonicOptim->getNumberOfInputs());
-		for (int i = 0; i < x->f_AmbisonicOptim->getNumberOfOutputs(); i++) 
+		dsp_setup((t_pxobject *)x, x->f_ambi_optim->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambi_optim->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
-        
-        d = (t_dictionary *)gensym("#D")->s_thing;
-        if (d) attr_dictionary_process(x, d);
-        attr_args_process(x, argc, argv);
 	}
 	return (x);
 }
 
-void HoaOptim_dsp64(t_HoaOptim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_optim_dsp64(t_hoa_optim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_AmbisonicOptim->setVectorSize(maxvectorsize);
-	object_method(dsp64, gensym("dsp_add64"), x, HoaOptim_perform64, 0, NULL);
+	x->f_ambi_optim->setVectorSize(maxvectorsize);
+	object_method(dsp64, gensym("dsp_add64"), x, hoa_optim_perform64, 0, NULL);
 }
 
-void HoaOptim_perform64(t_HoaOptim *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_optim_perform64(t_hoa_optim *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f, void *up)
 {
-	x->f_AmbisonicOptim->process(ins, outs);
+	x->f_ambi_optim->process(ins, outs);
 }
 
-void HoaOptim_assist(t_HoaOptim *x, void *b, long m, long a, char *s)
-{
-	sprintf(s,"(Signal) %s", x->f_AmbisonicOptim->getHarmonicsName(a).c_str());
-}
-
-t_max_err HoaOptim_optim(t_HoaOptim *x, t_object *attr, long argc, t_atom *argv)
-{
-	if(atom_gettype(argv) == A_SYM)
-	{
-        if(atom_getsym(argv) == gensym("maxRe"))
-            x->f_AmbisonicOptim->setOptimMode(Hoa_MaxRe_Optim);
-        else if(atom_getsym(argv) == gensym("inPhase"))
-            x->f_AmbisonicOptim->setOptimMode(Hoa_InPhase_Optim);
-        else
-            x->f_AmbisonicOptim->setOptimMode(Hoa_Basic_Optim);
-	}
-    else if(atom_gettype(argv) == A_LONG)
-        x->f_AmbisonicOptim->setOptimMode(atom_getlong(argv));
-    
-    if(x->f_AmbisonicOptim->getOptimMode() == Hoa_MaxRe_Optim)
-        x->f_optim_mode = gensym("maxRe");
-    else if(x->f_AmbisonicOptim->getOptimMode() == Hoa_InPhase_Optim)
-        x->f_optim_mode = gensym("inPhase");
-    else
-        x->f_optim_mode = gensym("basic");
-    return NULL;
-}
-
-void HoaOptim_free(t_HoaOptim *x)
+void hoa_optim_free(t_hoa_optim *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete(x->f_AmbisonicOptim);
+	delete x->f_ambi_optim;
+    delete x->f_ambi_max;
 }
 

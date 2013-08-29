@@ -64,7 +64,8 @@ public:
     long getOrder();
     void setOrder(long anOrder);
     
-    void attach_to_notification();
+    void attach();
+    void save_to_dictionary(t_dictionary* d);
     
     void connect_outlets();
     void connect_inlets();
@@ -79,10 +80,30 @@ public:
     void rename_box();
     
     virtual void realloc_ambisonic() = 0;
-    
+    virtual char* add_text() = 0;
+    virtual void attr_notification(t_symbol* name) = 0;
     t_max_err notify(t_symbol *s, t_symbol *msg, void *sender, void *data);
     
     virtual ~MaxAmbisonic();
 };
+
+/**************************************************************************************/
+/*************************** HOA CLASS FUNCTION ***************************************/
+/**************************************************************************************/
+
+typedef struct _hoa_object_all
+{
+	t_pxobject          f_ob;
+	AmbisonicOptim*		f_ambi_optim;
+    MaxAmbisonic*       f_ambi_max;
+    
+} t_hoa_object_all;
+
+void class_hoainit(t_class* c);
+t_max_err hoa_notify(t_hoa_object_all *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void hoa_save(t_hoa_object_all *x, t_dictionary *d);
+void hoa_attach(t_hoa_object_all *x, t_symbol *s, long argc, t_atom *argv);
+void hoa_connect(t_hoa_object_all *x, t_symbol *s, long argc, t_atom* argv);
+void hoa_assist(t_hoa_object_all *x, void *b, long m, long a, char *s);
 
 #endif

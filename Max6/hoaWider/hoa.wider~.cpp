@@ -52,7 +52,7 @@ int C74_EXPORT main(void)
 {	
 	t_class *c;
 	
-	c = class_new("hoa.wider~", (method)hoa_wider_new, (method)dsp_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
+	c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
 	
 	class_addmethod(c, (method)hoa_wider_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_wider_int,		"int",		A_LONG, 0);
@@ -127,10 +127,10 @@ void hoa_wider_perform64_offset(t_hoa_wider *x, t_object *dsp64, double **ins, l
 
 void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s)
 {
-	if(m == ASSIST_INLET)
-		sprintf(s,"(Signal) %s", x->f_ambi_wider->getInputName(a).c_str());
+    if (a != x->f_ambi_wider->getNumberOfInputs()-1 )
+		sprintf(s,"(Signal) %s", x->f_ambi_wider->getHarmonicsName(a).c_str());
 	else
-		sprintf(s,"(Signal) %s", x->f_ambi_wider->getOutputName(a).c_str());
+		sprintf(s,"(Signal or float) Widen value");
 }
 
 void hoa_wider_connect(t_hoa_wider *x, t_symbol *s, long argc, t_atom* argv)
@@ -162,7 +162,6 @@ t_max_err hoa_wider_notify(t_hoa_wider *x, t_symbol *s, t_symbol *msg, void *sen
 {
     return x->f_ambi_max->notify(s, msg, sender, data);
 }
-
 
 void hoa_wider_free(t_hoa_wider *x)
 {
