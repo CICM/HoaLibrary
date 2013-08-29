@@ -109,7 +109,7 @@ void MaxAmbisonic::save_to_dictionary(t_dictionary* d)
         char        name[256];
         char        tempory[256];
         
-        strcpy(name, jbox_get_maxclass(m_box)->s_name);
+        strcpy(name, object_classname(m_parent)->s_name);
         sprintf(tempory, " %ld", m_order);
         strcat(name, tempory);
         if(add_text())
@@ -215,7 +215,7 @@ void MaxAmbisonic::rename_box()
     char        name[256];
     char        tempory[256];
 
-    strcpy(name, jbox_get_maxclass(m_box)->s_name);
+    strcpy(name, object_classname(m_parent)->s_name);
     sprintf(tempory, " %ld", m_order);
     strcat(name, tempory);
     if(add_text())
@@ -223,9 +223,8 @@ void MaxAmbisonic::rename_box()
         strcat(name, " ");
         strcat(name, add_text());
     }
-    patcherview_set_locked(m_patcherview, 0);
-    object_method(jbox_get_textfield((t_object *)m_box), gensym("settext"), name);
-    patcherview_set_locked(m_patcherview, 1);
+    
+    defer_low(m_parent, (method)CicmMax::rename_box, gensym(name), NULL, NULL);
 }
 
 void MaxAmbisonic::retain_objects()

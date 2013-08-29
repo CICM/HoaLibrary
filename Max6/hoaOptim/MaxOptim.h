@@ -39,7 +39,8 @@ public:
         m_optim = gensym("inPhase");
         if(argc >= 2 && atom_gettype(argv+1) == A_SYM)
         {
-            m_optim = atom_getsym(argv+1);
+            if(atom_getsym(argv+1) == gensym("basic") || atom_getsym(argv+1) == gensym("maxRe"))
+                m_optim = atom_getsym(argv+1);
         }
         OBJ_ATTR_SYM            ((t_object *)m_parent,"optim", 0, m_optim);
         OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"optim","label",    USESYM(symbol),0,"s",gensym_tr("Optimization"));
@@ -48,6 +49,8 @@ public:
         OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","enumvals", USESYM(atom),  0,"basic maxRe inPhase");
         OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","order",    USESYM(long),  0,"2");
         OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"optim","save",     USESYM(long),  1,"1");
+        
+        rename_box();
     }
     
     void realloc_ambisonic()

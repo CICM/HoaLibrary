@@ -316,6 +316,19 @@ public:
         else
             return 0;
     }
+    
+    static void rename_box(t_object* object, t_symbol* text)
+    {
+        t_object* patcher;
+        t_object* box;
+        t_object* patcherview;
+        
+        object_obex_lookup(object, gensym("#P"), (t_object **)&patcher);
+        object_obex_lookup(object, gensym("#B"), (t_object **)&box);
+        patcherview = jpatcher_get_firstview(patcher);
+        object_method(jbox_get_textfield((t_object *)box), gensym("settext"), text->s_name);
+        object_notify(patcherview, gensym("dirty"), NULL);
+    }
 };
 
 #endif /* defined(DEF_MAX_CONVERTER) */

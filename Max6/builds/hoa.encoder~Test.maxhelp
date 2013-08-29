@@ -72,6 +72,28 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-19",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 3,
+									"outlettype" : [ "signal", "signal", "signal" ],
+									"patching_rect" : [ 346.0, 520.0, 125.0, 19.0 ],
+									"saved_object_attributes" : 									{
+										"autoconnect" : 1,
+										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+										"optim" : "inPhase",
+										"order" : 1,
+										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
+									}
+,
+									"text" : "hoa.optim~ 1 inPhase"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"attr" : "optim",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
