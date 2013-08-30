@@ -110,8 +110,6 @@ int getTkColorFromRGB(t_jrgb val)
         << std::setbase(16) << std::setiosflags(std::ios_base::uppercase) << std::setw(2) << std::setfill('0') << G 
         << std::setbase(16) << std::setiosflags(std::ios_base::uppercase) << std::setw(2) << std::setfill('0') << B ;
     std::string str=oss.str();
-    post("%i %i %i",R,G,B);
-    post("R %s",str.c_str());
     
     
     return (int) hexdec(str.c_str());
