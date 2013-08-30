@@ -106,7 +106,7 @@ public:
 		for (int i = 0; i < m_number_of_loudspeakers; i++)
 		{
             m_lines[i]->process(m_vector_double);
-            Cicm_Vector_Vector_Double_Mul(inputs[i], m_vector_double, outputs[i], m_vector_size);
+            cicm_product_vec_vec_d(inputs[i], m_vector_double, outputs[i], m_vector_size);
 		}
 	}
     
@@ -115,7 +115,7 @@ public:
         for (int i = 0; i < m_number_of_loudspeakers; i++)
 		{
             m_lines[i]->process(m_vector_float);
-            Cicm_Vector_Vector_Float_Mul(inputs[i], m_vector_float, outputs[i], m_vector_size);
+            cicm_product_vec_vec_f(inputs[i], m_vector_float, outputs[i], m_vector_size);
 		}
 	}
     
@@ -126,7 +126,7 @@ public:
 		for (int i = 0; i < m_number_of_loudspeakers; i++)
 		{
             m_lines[i]->process(m_vector_double);
-            Cicm_Vector_Double_Mul(m_vector_double, ioVectors[i], m_vector_size);
+            cicm_product_vec_d(m_vector_double, ioVectors[i], m_vector_size);
 		}
 	}
     
@@ -135,7 +135,7 @@ public:
         for (int i = 0; i < m_number_of_loudspeakers; i++)
 		{
             m_lines[i]->process(m_vector_float);
-            Cicm_Vector_Float_Mul(m_vector_float, ioVectors[i], m_vector_size);
+            cicm_product_vec_f(m_vector_float, ioVectors[i], m_vector_size);
 		}
 	}
 	

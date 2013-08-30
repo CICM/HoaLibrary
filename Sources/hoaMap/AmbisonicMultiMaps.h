@@ -78,7 +78,7 @@ public:
     
 	inline void process(const float* inputs, float* outputs)
 	{
-        Cicm_Vector_Float_Clear(outputs, m_number_of_harmonics);
+        cicm_clear_vec_f(outputs, m_number_of_harmonics);
         if(m_first_source >= 0)
         {
             m_maps[m_first_source]->process(inputs[m_first_source], outputs);
@@ -92,7 +92,7 @@ public:
     
     inline void process(const double* inputs, double* outputs)
 	{
-        Cicm_Vector_Double_Clear(outputs, m_number_of_harmonics);
+        cicm_clear_vec_d(outputs, m_number_of_harmonics);
 		if(m_first_source >= 0)
         {
             m_maps[m_first_source]->process(inputs[m_first_source], outputs);
@@ -124,7 +124,7 @@ public:
         else
         {
             for(int i = 0; i < m_number_of_harmonics; i++)
-                Cicm_Vector_Float_Clear(outputs[i], m_vector_size);
+                cicm_clear_vec_f(outputs[i], m_vector_size);
         }
 	}
     
@@ -142,7 +142,7 @@ public:
         else
         {
             for(int i = 0; i < m_number_of_harmonics; i++)
-                Cicm_Vector_Double_Clear(outputs[i], m_vector_size);
+                cicm_clear_vec_d(outputs[i], m_vector_size);
         }
 	}
     

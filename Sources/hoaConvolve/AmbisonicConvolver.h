@@ -39,8 +39,8 @@ private:
 	double		m_dry;
     double*		m_wet_vector;
 	double*		m_dry_vector;
-    CicmLine* m_wet_line;
-    CicmLine* m_dry_line;
+    CicmLine*   m_wet_line;
+    CicmLine*   m_dry_line;
     
     float*      m_impulse_response;
     long        m_impulse_response_size;
@@ -65,27 +65,117 @@ public:
 	void	setImpulseResponse(float* anImpulResponse, long aSize);
 	~AmbisonicConvolver();
 
-	/* Perform sample by sample */
-	template<typename Type> void process(Type* aInputs, Type* aOutputs)
+	/************************************************************************************/
+    /***************************** Perform sample by sample *****************************/
+    /************************************************************************************/
+    
+    /*********************************** Out Of Place ***********************************/
+    
+    inline void process(const double* inputs, double* outputs)
 	{
 		for(int j = 0; j < m_number_of_harmonics; j++)
-			aOutputs[j] = m_convolution[j]->process(aInputs[j]) * m_wet_line->process() + m_dry_line->process() * aInputs[j];
+        {
+			outputs[j] = m_convolution[j]->process(inputs[j]) * m_wet_line->process() + m_dry_line->process() * inputs[j];
+        }
+	}
+    
+	inline void process(const float* inputs, float* outputs)
+	{
+		for(int j = 0; j < m_number_of_harmonics; j++)
+        {
+			outputs[j] = m_convolution[j]->process(inputs[j]) * m_wet_line->process() + m_dry_line->process() * inputs[j];
+        }
 	}
 	
-	/* Perform sample block */
-	template<typename Type> void process(Type** aInputs, Type** aOutputs)
+    /************************************* In Place *************************************/
+    
+    inline void process(double* ioVector)
+    {
+        for(int j = 0; j < m_number_of_harmonics; j++)
+        {
+			ioVector[j] = m_convolution[j]->process(ioVector[j]) * m_wet_line->process() + m_dry_line->process() * ioVector[j];
+        }
+    }
+    
+    inline void process(float* ioVector)
+    {
+        for(int j = 0; j < m_number_of_harmonics; j++)
+        {
+			ioVector[j] = m_convolution[j]->process(ioVector[j]) * m_wet_line->process() + m_dry_line->process() * ioVector[j];
+        }
+    }
+    
+	/************************************************************************************/
+    /******************************* Perform sample block *******************************/
+    /************************************************************************************/
+    
+    /*********************************** Out Of Place ***********************************/
+    
+    inline void process(const double* const* inputs, double** outputs)
 	{
-        Type *InputVector, *OutputVector;
+        const double* input;
+        double* output;
         m_wet_line->process(m_wet_vector);
         m_dry_line->process(m_dry_vector);
 		for(int i = 0; i < m_number_of_harmonics; i++)
 		{
-            InputVector = aInputs[i];
-            OutputVector = aOutputs[i];
+            input = inputs[i];
+            output = outputs[i];
 			for(int j = 0; j < m_vector_size; j++)
-				OutputVector[j] = m_convolution[i]->process(InputVector[j]) * m_wet_vector[j] + m_dry_vector[j] * InputVector[j];
+            {
+				output[j] = m_convolution[i]->process(input[j]) * m_wet_vector[j] + m_dry_vector[j] * input[j];
+            }
 		}
 	}
+    
+	inline void process(const float* const* inputs, float** outputs)
+	{
+        const float* input;
+        float* output;
+        m_wet_line->process(m_wet_vector);
+        m_dry_line->process(m_dry_vector);
+		for(int i = 0; i < m_number_of_harmonics; i++)
+		{
+            input = inputs[i];
+            output = outputs[i];
+			for(int j = 0; j < m_vector_size; j++)
+            {
+				output[j] = m_convolution[i]->process(input[j]) * m_wet_vector[j] + m_dry_vector[j] * input[j];
+            }
+		}
+	}
+    
+    /************************************* In Place *************************************/
+    
+    inline void process(double** ioVector)
+    {
+        double* vec;
+        m_wet_line->process(m_wet_vector);
+        m_dry_line->process(m_dry_vector);
+		for(int i = 0; i < m_number_of_harmonics; i++)
+		{
+            vec = ioVector[i];
+			for(int j = 0; j < m_vector_size; j++)
+            {
+				vec[j] = m_convolution[i]->process(vec[j]) * m_wet_vector[j] + m_dry_vector[j] * vec[j];
+            }
+		}
+    }
+    
+    inline void process(float** ioVector)
+    {
+        float* vec;
+        m_wet_line->process(m_wet_vector);
+        m_dry_line->process(m_dry_vector);
+		for(int i = 0; i < m_number_of_harmonics; i++)
+		{
+            vec = ioVector[i];
+			for(int j = 0; j < m_vector_size; j++)
+            {
+				vec[j] = m_convolution[i]->process(vec[j]) * m_wet_vector[j] + m_dry_vector[j] * vec[j];
+            }
+		}
+    }
 	
 };
 

@@ -99,6 +99,11 @@ class Tools
 public:
 	Tools();
 	~Tools();
+    
+    /************************************************************************************/
+    /*********************************** CLIPPING ***************************************/
+    /************************************************************************************/
+    
 	inline static double clip(const double aValue, const double aMinimum = 0, const double aMaximum = 1)
 	{
 		if(aValue < aMinimum)
@@ -106,14 +111,6 @@ public:
 		else if(aValue > aMaximum)
 			return aMaximum;
 		return aValue;
-	}
-    
-    static void clip(double *aValue, double aMinimum = 0, double aMaximum = 1)
-	{
-		if(*aValue < aMinimum)
-			*aValue = aMinimum;
-		else if(*aValue > aMaximum)
-			*aValue = aMaximum;
 	}
 
 	inline static double clip_min(double aValue, double aMinimum = 0)
@@ -124,6 +121,59 @@ public:
 	inline static double clip_max(double aValue, double aMaximum = 0)
 	{
         return (aValue < aMaximum) ? aValue : aMaximum;
+	}
+    
+    // ?????? //
+    static void clip(double* aValue, double aMinimum = 0, double aMaximum = 1)
+	{
+		if(*aValue < aMinimum)
+			*aValue = aMinimum;
+		else if(*aValue > aMaximum)
+			*aValue = aMaximum;
+	}
+    
+    static inline void clip(double* vector, long aSize, double aMinimum = 0., double aMaximum = 1.)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
+	}
+    
+    static inline void clip(float* vector, long aSize, float aMinimum = 0.f, double aMaximum = 1.f)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
+	}
+    
+    static inline void clip(int* vector, long aSize, int aMinimum = 0, int aMaximum = 1)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
+	}
+    
+    static inline void clip(long* vector, long aSize, long aMinimum = 0, long aMaximum = 1)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
 	}
 
     /*
@@ -151,6 +201,31 @@ public:
 		}
 		return aValue;
 	}
+    
+    /************************************************************************************/
+    /*********************************** SUM ********************************************/
+    /************************************************************************************/
+    
+    static double sum(double* input, long size)
+	{
+        double sum = 0;
+        for(int i = 0; i < size; i++)
+        {
+            sum += input[i];
+        }
+        return sum;
+    }
+    
+    static float sum(float* input, long size)
+	{
+        float sum = 0;
+        for(int i = 0; i < size; i++)
+        {
+            sum += input[i];
+        }
+        return sum;
+    }
+    
 
 	inline static double log2(double n)
 	{

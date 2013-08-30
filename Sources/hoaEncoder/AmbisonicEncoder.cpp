@@ -36,10 +36,10 @@ AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aMode, long aVectorSize) :
     m_encoder_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
-		Cicm_Vector_Double_Malloc(m_encoder_matrix[i], NUMBEROFCIRCLEPOINTS);
+		cicm_malloc_vec_d(m_encoder_matrix[i], NUMBEROFCIRCLEPOINTS);
 	}
-	Cicm_Vector_Float_Malloc(m_harmonics_vector_float, m_number_of_harmonics);
-	Cicm_Vector_Double_Malloc(m_harmonics_vector_double, m_number_of_harmonics);
+	cicm_malloc_vec_f(m_harmonics_vector_float, m_number_of_harmonics);
+	cicm_malloc_vec_d(m_harmonics_vector_double, m_number_of_harmonics);
     
     m_index_vector = NULL;
 	m_vector_float = NULL;
@@ -79,27 +79,27 @@ void AmbisonicEncoder::setVectorSize(long aVectorSize)
 	if(m_index_vector)
 		free(m_index_vector);
 	if(m_vector_double)
-		Cicm_Free(m_vector_double);
+		cicm_free(m_vector_double);
 	if(m_vector_float)
-		Cicm_Free(m_vector_float);
+		cicm_free(m_vector_float);
 	m_index_vector = new int[m_vector_size];
-	Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
-	Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
+	cicm_malloc_vec_f(m_vector_float, m_vector_size);
+	cicm_malloc_vec_d(m_vector_double, m_vector_size);
 }
 
 AmbisonicEncoder::~AmbisonicEncoder()
 {
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
-		Cicm_Free(m_encoder_matrix[i]);
+		cicm_free(m_encoder_matrix[i]);
 	}
-	Cicm_Free(m_encoder_matrix);
-	Cicm_Free(m_harmonics_vector_double);
-	Cicm_Free(m_harmonics_vector_float);
+	cicm_free(m_encoder_matrix);
+	cicm_free(m_harmonics_vector_double);
+	cicm_free(m_harmonics_vector_float);
 	if(m_index_vector)
 		free(m_index_vector);
 	if(m_vector_double)
-		Cicm_Free(m_vector_double);
+		cicm_free(m_vector_double);
 	if(m_vector_float)
-		Cicm_Free(m_vector_float);
+		cicm_free(m_vector_float);
 }

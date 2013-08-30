@@ -170,25 +170,25 @@ void Planewaves::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standa
 	m_number_of_outputs         = m_number_of_loudspeakers;
     
     if(m_angles_of_loudspeakers_double)
-        Cicm_Free(m_angles_of_loudspeakers_double);
+        cicm_free(m_angles_of_loudspeakers_double);
     if(m_abscissa_of_loudspeakers_double)
-        Cicm_Free(m_abscissa_of_loudspeakers_double);
+        cicm_free(m_abscissa_of_loudspeakers_double);
     if(m_ordinate_of_loudspeakers_double)
-        Cicm_Free(m_ordinate_of_loudspeakers_double);
+        cicm_free(m_ordinate_of_loudspeakers_double);
     if(m_angles_of_loudspeakers_float)
-        Cicm_Free(m_angles_of_loudspeakers_float);
+        cicm_free(m_angles_of_loudspeakers_float);
     if(m_abscissa_of_loudspeakers_float)
-        Cicm_Free(m_abscissa_of_loudspeakers_float);
+        cicm_free(m_abscissa_of_loudspeakers_float);
     if(m_ordinate_of_loudspeakers_float)
-        Cicm_Free(m_ordinate_of_loudspeakers_float);
+        cicm_free(m_ordinate_of_loudspeakers_float);
     
     /* Define standard configuration */
-    Cicm_Vector_Double_Malloc(m_angles_of_loudspeakers_double, m_number_of_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_abscissa_of_loudspeakers_double, m_number_of_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_ordinate_of_loudspeakers_double, m_number_of_loudspeakers);
-    Cicm_Vector_Float_Malloc(m_angles_of_loudspeakers_float, m_number_of_loudspeakers);
-    Cicm_Vector_Float_Malloc(m_abscissa_of_loudspeakers_float, m_number_of_loudspeakers);
-    Cicm_Vector_Float_Malloc(m_ordinate_of_loudspeakers_float, m_number_of_loudspeakers);
+    cicm_malloc_vec_d(m_angles_of_loudspeakers_double, m_number_of_loudspeakers);
+    cicm_malloc_vec_d(m_abscissa_of_loudspeakers_double, m_number_of_loudspeakers);
+    cicm_malloc_vec_d(m_ordinate_of_loudspeakers_double, m_number_of_loudspeakers);
+    cicm_malloc_vec_f(m_angles_of_loudspeakers_float, m_number_of_loudspeakers);
+    cicm_malloc_vec_f(m_abscissa_of_loudspeakers_float, m_number_of_loudspeakers);
+    cicm_malloc_vec_f(m_ordinate_of_loudspeakers_float, m_number_of_loudspeakers);
 
     computeConfiguration(standardOnOff);
 }
@@ -224,16 +224,16 @@ void Planewaves::setSamplingRate(long aSamplingRate)
 Planewaves::~Planewaves()
 {
 	if(m_angles_of_loudspeakers_double)
-        Cicm_Free(m_angles_of_loudspeakers_double);
+        cicm_free(m_angles_of_loudspeakers_double);
     if(m_abscissa_of_loudspeakers_double)
-        Cicm_Free(m_abscissa_of_loudspeakers_double);
+        cicm_free(m_abscissa_of_loudspeakers_double);
     if(m_ordinate_of_loudspeakers_double)
-        Cicm_Free(m_ordinate_of_loudspeakers_double);
+        cicm_free(m_ordinate_of_loudspeakers_double);
     if(m_angles_of_loudspeakers_float)
-        Cicm_Free(m_angles_of_loudspeakers_float);
+        cicm_free(m_angles_of_loudspeakers_float);
     if(m_abscissa_of_loudspeakers_float)
-        Cicm_Free(m_abscissa_of_loudspeakers_float);
+        cicm_free(m_abscissa_of_loudspeakers_float);
     if(m_ordinate_of_loudspeakers_float)
-        Cicm_Free(m_ordinate_of_loudspeakers_float);
+        cicm_free(m_ordinate_of_loudspeakers_float);
 }
 

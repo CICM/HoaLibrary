@@ -113,7 +113,7 @@ public:
             wide  = m_wider_lines[i]->process();
             m_encoders[i]->process(aInputs[i], m_harmonics_vector_double, angle);
             m_widers[i]->process(m_harmonics_vector_double, wide);
-            Cicm_Vector_Double_Add(m_harmonics_vector_double, aOutputs, m_number_of_harmonics);
+            cicm_add_vec_vec_d(m_harmonics_vector_double, aOutputs, m_number_of_harmonics);
         }
 	}
     
@@ -129,7 +129,7 @@ public:
             wide  = m_wider_lines[i]->process();
             m_encoders[i]->process(aInputs[i], m_harmonics_vector_float, angle);
             m_widers[i]->process(m_harmonics_vector_float, m_harmonics_vector_float, wide);
-            Cicm_Vector_Float_Add(m_harmonics_vector_float, aOutputs, m_number_of_harmonics);
+            cicm_add_vec_vec_f(m_harmonics_vector_float, aOutputs, m_number_of_harmonics);
         }
 	}
 	
@@ -153,7 +153,7 @@ public:
             m_widers[i]->process(m_harmonics_matrix_double, m_angles_vector_double);
             for(int k = 0; k < m_number_of_harmonics; k++)
             {
-                Cicm_Vector_Double_Add(m_harmonics_matrix_double[k], aOutputs[k], m_vector_size);
+                cicm_add_vec_vec_d(m_harmonics_matrix_double[k], aOutputs[k], m_vector_size);
             }
         }
 	}
@@ -172,7 +172,7 @@ public:
             m_widers[i]->process(m_harmonics_matrix_float, m_harmonics_matrix_float, m_angles_vector_float);
             for(int k = 0; k < m_number_of_harmonics; k++)
             {
-                Cicm_Vector_Float_Add(m_harmonics_matrix_float[k], aOutputs[k], m_vector_size);
+                cicm_add_vec_vec_f(m_harmonics_matrix_float[k], aOutputs[k], m_vector_size);
             }
         }
 	}
@@ -184,12 +184,12 @@ public:
     /* Perform sample by sample */
     inline void processFisheye(double* aInputs, double* aOutputs)
 	{
-        Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+        cicm_product_mat_vec_d(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
 	}
     
     inline void processFisheye(float* aInputs, float* aOutputs)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+        cicm_product_mat_vec_f(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
 	}
     
     inline void processFisheye(double* aInputs, double* aOutputs, double fisheyeFactor)
@@ -204,7 +204,7 @@ public:
         {
             angle = Tools::radianInterp(fisheyeFactor, 0., distanceBetwenTwoDefMics * (float)i);
             m_encoders[i]->process(aInputs[i], m_harmonics_vector_double, angle);
-            Cicm_Vector_Double_Add(m_harmonics_vector_double, aOutputs, m_number_of_harmonics);
+            cicm_add_vec_vec_d(m_harmonics_vector_double, aOutputs, m_number_of_harmonics);
         }
 	}
     
@@ -219,7 +219,7 @@ public:
         {
             angle = Tools::radianInterp(fisheyeFactor, 0., distanceBetwenTwoDefMics * (float)i);
             m_encoders[i]->process(aInputs[i], m_harmonics_vector_float, angle);
-            Cicm_Vector_Float_Add(m_harmonics_vector_float, aOutputs, m_number_of_harmonics);
+            cicm_add_vec_vec_f(m_harmonics_vector_float, aOutputs, m_number_of_harmonics);
         }
 	}
     
@@ -258,8 +258,7 @@ public:
     
 	inline void processFisheye(double** aInputs, double** aOutputs, double* fisheyeFactor)
 	{
-        double clip[2] = {0.,1.};
-        Cicm_Vector_Double_Clip(fisheyeFactor, clip[0], clip[1], fisheyeFactor, m_vector_size);
+        Tools::clip(fisheyeFactor, m_vector_size, 0., 1.);
         double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_loudspeakers;
         
         m_encoders[0]->setAngle(0.);
@@ -277,8 +276,7 @@ public:
     
     inline void processFisheye(float** aInputs, float** aOutputs, float* fisheyeFactor)
 	{
-        float clip[2] = {0.,1.};
-        Cicm_Vector_Float_Clip(fisheyeFactor, clip[0], clip[1], fisheyeFactor, m_vector_size);
+        Tools::clip(fisheyeFactor, m_vector_size, 0.f, 1.f);
         double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_loudspeakers;
         
         m_encoders[0]->setAngle(0.f);
@@ -302,12 +300,12 @@ public:
     /* Perform sample by sample */
     inline void processFixe(double* aInputs, double* aOutputs)
 	{
-         Cicm_Matrix_Vector_Double_Product(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+         cicm_product_mat_vec_d(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
 	}
     
     inline void processFixe(float* aInputs, float* aOutputs)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+        cicm_product_mat_vec_f(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
 	}
     
     /* Perform sample block */

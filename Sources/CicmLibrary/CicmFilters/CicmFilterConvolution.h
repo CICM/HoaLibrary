@@ -42,6 +42,7 @@ private:
 
 	Cicm_Fft*			m_fft_instance;
     Cicm_Fft*			m_fft_response;
+    
     Cicm_Vector_Float*		m_real_vector;
 	Cicm_Vector_Float		m_buffer;
 	Cicm_Complex_Packed_Float*		m_input_complexes;
@@ -54,10 +55,10 @@ public:
     void clear();
     long getNumberOfInstances(){return m_number_of_instances;};
 	
-    inline Cicm_Float process(Cicm_Float anInput)
+    inline float process(const float input)
     { 
-        Cicm_Float result = m_real_vector[0][m_ramp];
-        m_real_vector[0][m_ramp] = anInput;
+        float result = m_real_vector[0][m_ramp];
+        m_real_vector[0][m_ramp] = input;
         
         if(m_ramp % m_hope_size == 0 && m_ramp != 0)
         {
@@ -70,14 +71,14 @@ public:
                 m_fft_instance->inverse(m_output_complexes, m_real_vector[index]);
                 
                 if(index < m_number_of_instances - 1)
-                    Cicm_Vector_Float_Add(m_real_vector[index+1], m_real_vector[index], m_window_size);
+                    cicm_add_vec_vec_f(m_real_vector[index+1], m_real_vector[index], m_window_size);
             }
         }
         m_ramp++;
         if(m_ramp >= m_array_size)
         {
-            Cicm_Vector_Float_Copy(m_real_vector[0]+m_array_size, m_buffer, m_array_size);
-            Cicm_Vector_Float_Clear(m_real_vector[0]+m_array_size, m_array_size);
+            cicm_copy_vec_vec_f(m_real_vector[0]+m_array_size, m_buffer, m_array_size);
+            cicm_clear_vec_f(m_real_vector[0]+m_array_size, m_array_size);
             m_fft_instance->forward(m_real_vector[0], m_input_complexes);
             
             Cicm_packed_mul(m_input_complexes, m_impul_complexes[0], m_output_complexes, m_array_size);
@@ -85,8 +86,8 @@ public:
             
             m_fft_instance->inverse(m_output_complexes, m_real_vector[0]);
             if(m_number_of_instances > 1)
-                Cicm_Vector_Float_Add(m_real_vector[1], m_real_vector[0], m_window_size);
-            Cicm_Vector_Float_Add(m_buffer, m_real_vector[0], m_array_size);
+                cicm_add_vec_vec_f(m_real_vector[1], m_real_vector[0], m_window_size);
+            cicm_add_vec_vec_f(m_buffer, m_real_vector[0], m_array_size);
             m_ramp = 0;
         }
         

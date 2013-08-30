@@ -60,12 +60,12 @@ public:
     
 	inline void process(const double* inputs, double* outputs)
 	{
-		Cicm_Vector_Vector_Double_Mul(inputs, m_harmonics_vector_double, outputs, m_number_of_harmonics);
+		cicm_product_vec_vec_d(inputs, m_harmonics_vector_double, outputs, m_number_of_harmonics);
 	}
     
     inline void process(float* inputs, float* outputs)
 	{
-		Cicm_Vector_Vector_Float_Mul(inputs, m_harmonics_vector_float, outputs, m_number_of_harmonics);
+		cicm_product_vec_vec_f(inputs, m_harmonics_vector_float, outputs, m_number_of_harmonics);
 	}
     
 	inline void process(double* inputs, double* outputs, const double aWidenValue)
@@ -88,12 +88,12 @@ public:
     
     inline void process(double* ioVector)
 	{
-        Cicm_Vector_Double_Mul(m_harmonics_vector_double, ioVector, m_number_of_harmonics);
+        cicm_product_vec_d(m_harmonics_vector_double, ioVector, m_number_of_harmonics);
 	}
     
     inline void process(float* ioVector)
 	{
-        Cicm_Vector_Float_Mul(m_harmonics_vector_float, ioVector, m_number_of_harmonics);
+        cicm_product_vec_f(m_harmonics_vector_float, ioVector, m_number_of_harmonics);
 	}
     
     inline void process(double* ioVector, double aWidenValue)
@@ -121,13 +121,13 @@ public:
 	inline void process(const double* const* inputs, double** outputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Double_Mul(inputs[i], m_harmonics_vector_double[i], outputs[i], m_vector_size);
+			cicm_product_vec_sca_vec_d(inputs[i], m_harmonics_vector_double[i], outputs[i], m_vector_size);
 	}
     
     inline void process(const float* const* inputs, float** outputs)
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Float_Mul(inputs[i], m_harmonics_vector_float[i], outputs[i], m_vector_size);
+			cicm_product_vec_sca_vec_f(inputs[i], m_harmonics_vector_float[i], outputs[i], m_vector_size);
 	}
 
 	inline void process(const double* const* inputs, double** outputs, const double* widenValues)
@@ -144,7 +144,7 @@ public:
 				index = m_index_vector[j];
 				m_vector_double[j] = pointor[index];
 			}
-			Cicm_Vector_Vector_Double_Mul(inputs[i], m_vector_double, outputs[i], m_vector_size);
+			cicm_product_vec_vec_d(inputs[i], m_vector_double, outputs[i], m_vector_size);
 		}
 	}
     
@@ -162,7 +162,7 @@ public:
 				index = m_index_vector[j];
 				m_vector_float[j] = pointor[index];
 			}
-			Cicm_Vector_Vector_Float_Mul(inputs[i], m_vector_float, outputs[i], m_vector_size);
+			cicm_product_vec_vec_f(inputs[i], m_vector_float, outputs[i], m_vector_size);
 		}
 	}
     
@@ -171,13 +171,13 @@ public:
     inline void process(double** ioVectors)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Double_Mul(ioVectors[i], m_harmonics_vector_double[i], ioVectors[i], m_vector_size);
+			cicm_product_vec_sca_vec_d(ioVectors[i], m_harmonics_vector_double[i], ioVectors[i], m_vector_size);
 	}
     
     inline void process(float** ioVectors)
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Float_Mul(ioVectors[i], m_harmonics_vector_float[i], ioVectors[i], m_vector_size);
+			cicm_product_vec_sca_vec_f(ioVectors[i], m_harmonics_vector_float[i], ioVectors[i], m_vector_size);
 	}
     
 	inline void process(double** ioVectors, const double* widenValues)
@@ -194,7 +194,7 @@ public:
 				index = m_index_vector[j];
 				m_vector_double[j] = pointor[index];
 			}
-			Cicm_Vector_Double_Mul(m_vector_double, ioVectors[i], m_vector_size);
+			cicm_product_vec_d(m_vector_double, ioVectors[i], m_vector_size);
 		}
 	}
     
@@ -212,7 +212,7 @@ public:
 				index = m_index_vector[j];
 				m_vector_float[j] = pointor[index];
 			}
-			Cicm_Vector_Float_Mul(m_vector_float, ioVectors[i], m_vector_size);
+			cicm_product_vec_f(m_vector_float, ioVectors[i], m_vector_size);
 		}
 	}
 };

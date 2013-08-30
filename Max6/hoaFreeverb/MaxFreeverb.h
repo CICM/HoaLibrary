@@ -23,29 +23,34 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_CICM_LIBRARY
-#define DEF_CICM_LIBRARY
+#ifndef DEF_MAX_FREEVERB
+#define DEF_MAX_FREEVERB
 
-#include "CicmDefine.h"
+#include "../MaxAmbisonic.h"
 
-#ifdef _WINDOWS
-
-#include "CicmLines/CicmLine.h"
-#include "CicmReverb/CicmFreeverb.h"
+class MaxFreeverb : public MaxAmbisonic
+{
+private:
+    
+public:
+    MaxFreeverb(t_hoa_object* aParentObject, long argc = 0, t_atom* argv = NULL) : MaxAmbisonic(aParentObject, argc, argv)
+    {
+        ;
+    }
+    
+    void realloc_ambisonic()
+    {
+        m_parent->f_ambi = new AmbisonicFreeverb(object_attr_getlong(m_parent, gensym("order")), sys_getblksize());
+        object_attr_setfloat(m_parent, gensym("size"), object_attr_getfloat(m_parent, gensym("size")));
+        object_attr_setfloat(m_parent, gensym("damp"), object_attr_getfloat(m_parent, gensym("damp")));
+        object_attr_setfloat(m_parent, gensym("dry"), object_attr_getfloat(m_parent, gensym("dry")));
+        object_attr_setfloat(m_parent, gensym("wet"), object_attr_getfloat(m_parent, gensym("wet")));
+        object_attr_setfloat(m_parent, gensym("fspread"), object_attr_getfloat(m_parent, gensym("fspread")));
+        object_attr_setfloat(m_parent, gensym("lspread"), object_attr_getfloat(m_parent, gensym("lspread")));
+        object_attr_setlong(m_parent, gensym("freeze"), object_attr_getlong(m_parent, gensym("freeze")));
+    }
+    
+    ~MaxFreeverb(){};
+};
 
 #endif
-
-#ifdef __APPLE__
-
-#include "CicmFilters/CicmFilterDelay.h"
-#include "CicmDelay/CicmDecorrelation.h"
-#include "CicmGranular/CicmQSGS.h"
-#include "CicmAmplitude/CicmRingModulation.h"
-#include "CicmLines/CicmLine.h"
-#include "CicmReverb/CicmFreeverb.h"
-#endif
-
-
-#endif
-
-

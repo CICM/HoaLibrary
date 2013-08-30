@@ -108,13 +108,13 @@ public:
                 aOutputs[0][j] = m_linear_vector_left[j];
                 aOutputs[1][j] = m_linear_vector_right[j];
             }
-			//Cicm_Vector_Double_Add(m_linear_vector_left+m_vector_size, m_linear_vector_left, m_impulse_size-1);
-			//Cicm_Vector_Double_Add(m_linear_vector_right+m_vector_size, m_linear_vector_right, m_impulse_size-1);
+			//cicm_add_vec_vec_d(m_linear_vector_left+m_vector_size, m_linear_vector_left, m_impulse_size-1);
+			//cicm_add_vec_vec_d(m_linear_vector_right+m_vector_size, m_linear_vector_right, m_impulse_size-1);
             cblas_scopy(m_impulse_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
             cblas_scopy(m_impulse_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
 
-            Cicm_Vector_Float_Clear(m_linear_vector_left+m_impulse_size-1, m_vector_size);
-            Cicm_Vector_Float_Clear(m_linear_vector_right+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_left+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_right+m_impulse_size-1, m_vector_size);
         }
         else
         {
@@ -159,8 +159,8 @@ public:
             cblas_scopy(m_impulse_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
             cblas_scopy(m_impulse_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
             
-            Cicm_Vector_Float_Clear(m_linear_vector_left+m_impulse_size-1, m_vector_size);
-            Cicm_Vector_Float_Clear(m_linear_vector_right+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_left+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_right+m_impulse_size-1, m_vector_size);
         }
         else
         {

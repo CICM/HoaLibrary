@@ -28,7 +28,7 @@
 FilterFixedDelay::FilterFixedDelay(long aBufferSize) : Filter()
 {
     m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
+	cicm_malloc_vec_d(m_buffer, m_buffer_size_max);
 	m_buffer_size = m_buffer_size_max;
 
 	m_ramp = 0;
@@ -36,9 +36,9 @@ FilterFixedDelay::FilterFixedDelay(long aBufferSize) : Filter()
 
 void FilterFixedDelay::setBufferSizeMax(long aBufferSize)
 {
-	Cicm_Free(m_buffer);
+	cicm_free(m_buffer);
     m_buffer_size_max = Tools::clip_min(aBufferSize, (long)1);
-	Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
+	cicm_malloc_vec_d(m_buffer, m_buffer_size_max);
 	m_buffer_size = m_buffer_size_max;
     
     m_ramp = 0;
@@ -63,5 +63,5 @@ long FilterFixedDelay::getBufferSize()
 
 FilterFixedDelay::~FilterFixedDelay()
 {
-    Cicm_Free(m_buffer);
+    cicm_free(m_buffer);
 }

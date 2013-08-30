@@ -66,12 +66,12 @@ public:
     
     inline void process(const float* anInput, float* anOutput)
     {
-       Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
+       cicm_product_mat_vec_f(m_decoder_matrix_float, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     inline void process(const double* anInput, double* anOutput)
     {
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_product_mat_vec_d(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     /************************************* In Place *************************************/
@@ -79,14 +79,14 @@ public:
     
     inline void process(float* anInputOutput)
     {
-        Cicm_Vector_Float_Copy(anInputOutput, m_harmonics_vector_float, m_number_of_harmonics);
-        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, m_harmonics_vector_float, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_copy_vec_vec_f(anInputOutput, m_harmonics_vector_float, m_number_of_harmonics);
+        cicm_product_mat_vec_f(m_decoder_matrix_float, m_harmonics_vector_float, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     inline void process(double* anInputOutput)
     {
-        Cicm_Vector_Double_Copy(anInputOutput, m_harmonics_vector_double, m_number_of_harmonics);
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, m_harmonics_vector_double, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_copy_vec_vec_d(anInputOutput, m_harmonics_vector_double, m_number_of_harmonics);
+        cicm_product_mat_vec_d(m_decoder_matrix_double, m_harmonics_vector_double, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     /************************************************************************************/

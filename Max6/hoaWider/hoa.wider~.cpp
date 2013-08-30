@@ -66,7 +66,7 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 	if (x)
 	{
         x->f_ambi_max   = new MaxWider((t_hoa_object *)x, argc, argv);
-		x->f_ambi_wider	= new AmbisonicWider(atom_getfloat(argv),  sys_getblksize());
+		x->f_ambi_wider	= new AmbisonicWider(x->f_ambi_max->getOrder(),  sys_getblksize());
         
 		dsp_setup((t_pxobject *)x, x->f_ambi_wider->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambi_wider->getNumberOfOutputs(); i++)

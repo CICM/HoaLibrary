@@ -49,14 +49,25 @@ public:
     long getNumberOfFFTs(){return m_ffts_useds;};
     long getNumberOfInstance(){return m_fft[m_number_of_ffts-1]->getNumberOfInstances();};
     
-    inline Cicm_Float process(Cicm_Float anInput)
+    inline double process(const double input)
     {
-        Cicm_Float result = m_fir->process(anInput);
+        float inp = input;
+        float result = m_fir->process(inp);
         
         for(int i = 0; i < m_ffts_useds; i++)
-			result += m_fft[i]->process(anInput);
+			result += m_fft[i]->process(inp);
         
-        return  result;
+        return result;
+    }
+    
+    inline float process(const float input)
+    {
+        float result = m_fir->process(input);
+        
+        for(int i = 0; i < m_ffts_useds; i++)
+			result += m_fft[i]->process(input);
+        
+        return result;
     }
     
 	~FilterConvolutionZero();

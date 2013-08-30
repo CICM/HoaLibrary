@@ -101,14 +101,14 @@ public:
     
     inline void process(float anInput, float* anOutput)
     {
-        Cicm_Vector_Scalar_Float_Mul(m_azimuth_float, anInput, anOutput, m_number_of_harmonics);
-        Cicm_Vector_Float_Mul(m_elevation_float, anOutput, m_number_of_harmonics);
+        cicm_product_vec_sca_vec_f(m_azimuth_float, anInput, anOutput, m_number_of_harmonics);
+        cicm_product_vec_f(m_elevation_float, anOutput, m_number_of_harmonics);
     }
     
     inline void process(double anInput, double* anOutput)
     {
-        Cicm_Vector_Scalar_Double_Mul(m_azimuth_double, anInput, anOutput, m_number_of_harmonics);
-        Cicm_Vector_Double_Mul(m_elevation_double, anOutput, m_number_of_harmonics);
+        cicm_product_vec_sca_vec_d(m_azimuth_double, anInput, anOutput, m_number_of_harmonics);
+        cicm_product_vec_d(m_elevation_double, anOutput, m_number_of_harmonics);
     }
     
     /************************************* In Place *************************************/
@@ -151,14 +151,14 @@ public:
     
     inline void process(float* anInputOutput)
     {
-        Cicm_Vector_Scalar_Float_Mul(m_azimuth_float, anInputOutput[0], anInputOutput, m_number_of_harmonics);
-        Cicm_Vector_Float_Mul(m_elevation_float, anInputOutput, m_number_of_harmonics);
+        cicm_product_vec_sca_vec_f(m_azimuth_float, anInputOutput[0], anInputOutput, m_number_of_harmonics);
+        cicm_product_vec_f(m_elevation_float, anInputOutput, m_number_of_harmonics);
     }
     
     inline void process(double* anInputOutput)
     {
-        Cicm_Vector_Scalar_Double_Mul(m_azimuth_double, anInputOutput[0], anInputOutput, m_number_of_harmonics);
-        Cicm_Vector_Double_Mul(m_elevation_double, anInputOutput, m_number_of_harmonics);
+        cicm_product_vec_sca_vec_d(m_azimuth_double, anInputOutput[0], anInputOutput, m_number_of_harmonics);
+        cicm_product_vec_d(m_elevation_double, anInputOutput, m_number_of_harmonics);
     }
     
     /************************************************************************************/
@@ -172,7 +172,7 @@ public:
         int index;
         Cicm_Vector_Double vector1;
         Cicm_Vector_Double vector2;
-        Cicm_Vector_Float_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_f(anInput, anOutput[0], m_vector_size);
         for(int i = 0; i < m_vector_size; i++)
         {
             m_index_vector[i] = (Tools::radianWrap(anElevation[i]) / CICM_2PI) * NUMBEROFCIRCLEPOINTS;
@@ -186,7 +186,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_float[j] = vector1[index] * vector2[index];
             }
-            Cicm_Vector_Vector_Float_Mul(anInput, m_vector_float, anOutput[i], m_vector_size);
+            cicm_product_vec_vec_f(anInput, m_vector_float, anOutput[i], m_vector_size);
         }
     }
     
@@ -195,7 +195,7 @@ public:
         int index;
         Cicm_Vector_Double vector1;
         Cicm_Vector_Double vector2;
-        Cicm_Vector_Double_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_d(anInput, anOutput[0], m_vector_size);
         for(int i = 0; i < m_vector_size; i++)
         {
             m_index_vector[i] = (Tools::radianWrap(anElevation[i]) / CICM_2PI) * NUMBEROFCIRCLEPOINTS;
@@ -209,7 +209,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_double[j] = vector1[index] * vector2[index];
             }
-            Cicm_Vector_Vector_Double_Mul(anInput, m_vector_double, anOutput[i], m_vector_size);
+            cicm_product_vec_vec_d(anInput, m_vector_double, anOutput[i], m_vector_size);
         }
     }
     
@@ -218,7 +218,7 @@ public:
         int index;
         float elevation;
         Cicm_Vector_Double vector1;
-        Cicm_Vector_Float_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_f(anInput, anOutput[0], m_vector_size);
         for(int i = 0; i < m_vector_size; i++)
         {
             m_index_vector[i] = (Tools::radianWrap(anAzimuth[i]) / CICM_2PI) * NUMBEROFCIRCLEPOINTS;
@@ -232,7 +232,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_float[j] = vector1[index] * elevation;
             }
-            Cicm_Vector_Vector_Float_Mul(anInput, m_vector_float, anOutput[i], m_vector_size);
+            cicm_product_vec_vec_f(anInput, m_vector_float, anOutput[i], m_vector_size);
         }
     }
     
@@ -241,7 +241,7 @@ public:
         int index;
         double elevation;
         Cicm_Vector_Double vector1;
-        Cicm_Vector_Double_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_d(anInput, anOutput[0], m_vector_size);
         for(int i = 0; i < m_vector_size; i++)
         {
             m_index_vector[i] = (Tools::radianWrap(anAzimuth[i]) / CICM_2PI) * NUMBEROFCIRCLEPOINTS;
@@ -255,7 +255,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_double[j] = vector1[index] * elevation;
             }
-            Cicm_Vector_Vector_Double_Mul(anInput, m_vector_double, anOutput[i], m_vector_size);
+            cicm_product_vec_vec_d(anInput, m_vector_double, anOutput[i], m_vector_size);
         }
     }
     
@@ -264,7 +264,7 @@ public:
         int index;
         float azimtuh;
         Cicm_Vector_Double vector1;
-        Cicm_Vector_Float_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_f(anInput, anOutput[0], m_vector_size);
         for(long i = 0; i < m_vector_size; i++)
         {
             m_index_vector[i] = (Tools::radianWrap(anElevation[i]) / CICM_2PI) * NUMBEROFCIRCLEPOINTS;
@@ -278,7 +278,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_float[j] = vector1[index] * azimtuh;
             }
-            Cicm_Vector_Vector_Float_Mul(anInput, m_vector_float, anOutput[i], m_vector_size);
+            cicm_product_vec_vec_f(anInput, m_vector_float, anOutput[i], m_vector_size);
         }
     }
     
@@ -287,7 +287,7 @@ public:
         int index;
         double azimtuh;
         Cicm_Vector_Double vector1;
-        Cicm_Vector_Double_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_d(anInput, anOutput[0], m_vector_size);
         for(long i = 0; i < m_vector_size; i++)
         {
             m_index_vector[i] = (Tools::radianWrap(anElevation[i]) / CICM_2PI) * NUMBEROFCIRCLEPOINTS;
@@ -301,29 +301,29 @@ public:
                 index = m_index_vector[j];
                 m_vector_double[j] = vector1[index] * azimtuh;
             }
-            Cicm_Vector_Vector_Double_Mul(anInput, m_vector_double, anOutput[i], m_vector_size);
+            cicm_product_vec_vec_d(anInput, m_vector_double, anOutput[i], m_vector_size);
         }
     }
 
     inline void process(float* anInput, float** anOutput)
     {
         float factor;
-        Cicm_Vector_Float_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_f(anInput, anOutput[0], m_vector_size);
         for(long i = 1; i < m_number_of_harmonics; i++)
         {
             factor = m_azimuth_double[i] * m_elevation_double[i];
-            Cicm_Vector_Scalar_Float_Mul(anInput, factor, anOutput[i], m_vector_size);
+            cicm_product_vec_sca_vec_f(anInput, factor, anOutput[i], m_vector_size);
         }
     }
     
     inline void process(double* anInput, double** anOutput)
     {
         double factor;
-        Cicm_Vector_Double_Copy(anInput, anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_d(anInput, anOutput[0], m_vector_size);
         for(long i = 1; i < m_number_of_harmonics; i++)
         {
             factor = m_azimuth_double[i] * m_elevation_double[i];
-            Cicm_Vector_Scalar_Double_Mul(anInput, factor, anOutput[i], m_vector_size);
+            cicm_product_vec_sca_vec_d(anInput, factor, anOutput[i], m_vector_size);
         }
     }
     
@@ -348,7 +348,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_float[j] = vector1[index] * vector2[index];
             }
-            Cicm_Vector_Vector_Float_Mul(intput, m_vector_float, anInputOutput[i], m_vector_size);
+            cicm_product_vec_vec_f(intput, m_vector_float, anInputOutput[i], m_vector_size);
         }
     }
     
@@ -371,7 +371,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_double[j] = vector1[index] * vector2[index];
             }
-            Cicm_Vector_Vector_Double_Mul(intput, m_vector_double, anInputOutput[i], m_vector_size);
+            cicm_product_vec_vec_d(intput, m_vector_double, anInputOutput[i], m_vector_size);
         }
     }
     
@@ -394,7 +394,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_float[j] = vector1[index] * elevation;
             }
-            Cicm_Vector_Vector_Float_Mul(intput, m_vector_float, anInputOutput[i], m_vector_size);
+            cicm_product_vec_vec_f(intput, m_vector_float, anInputOutput[i], m_vector_size);
         }
     }
     
@@ -417,7 +417,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_double[j] = vector1[index] * elevation;
             }
-            Cicm_Vector_Vector_Double_Mul(intput, m_vector_double, anInputOutput[i], m_vector_size);
+            cicm_product_vec_vec_d(intput, m_vector_double, anInputOutput[i], m_vector_size);
         }
     }
     
@@ -440,7 +440,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_float[j] = vector1[index] * azimtuh;
             }
-            Cicm_Vector_Vector_Float_Mul(intput, m_vector_float, anInputOutput[i], m_vector_size);
+            cicm_product_vec_vec_f(intput, m_vector_float, anInputOutput[i], m_vector_size);
         }
     }
     
@@ -463,7 +463,7 @@ public:
                 index = m_index_vector[j];
                 m_vector_double[j] = vector1[index] * azimtuh;
             }
-            Cicm_Vector_Vector_Double_Mul(intput, m_vector_double, anInputOutput[i], m_vector_size);
+            cicm_product_vec_vec_d(intput, m_vector_double, anInputOutput[i], m_vector_size);
         }
     }
     
@@ -474,7 +474,7 @@ public:
         for(long i = 1; i < m_number_of_harmonics; i++)
         {
             factor = m_azimuth_double[i] * m_elevation_double[i];
-            Cicm_Vector_Scalar_Float_Mul(intput, factor, anInputOutput[i], m_vector_size);
+            cicm_product_vec_sca_vec_f(intput, factor, anInputOutput[i], m_vector_size);
         }
     }
     
@@ -485,7 +485,7 @@ public:
         for(long i = 1; i < m_number_of_harmonics; i++)
         {
             factor = m_azimuth_double[i] * m_elevation_double[i];
-            Cicm_Vector_Scalar_Double_Mul(intput, factor, anInputOutput[i], m_vector_size);
+            cicm_product_vec_sca_vec_d(intput, factor, anInputOutput[i], m_vector_size);
         }
     }
 };

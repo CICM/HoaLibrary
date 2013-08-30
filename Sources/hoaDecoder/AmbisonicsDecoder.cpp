@@ -27,8 +27,8 @@
 
 AmbisonicsDecoder::AmbisonicsDecoder(long anOrder, long aNumberOfLoudspeakers, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
-    Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_harmonics);
+    cicm_malloc_vec_f(m_vector_float_input, m_number_of_harmonics);
+    cicm_malloc_vec_d(m_vector_double_input, m_number_of_harmonics);
     
     m_decoder_matrix_float  = NULL;
     m_decoder_matrix_double = NULL;
@@ -44,20 +44,20 @@ void AmbisonicsDecoder::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
     if(m_number_of_loudspeakers != m_number_of_outputs)
     {
         if(m_decoder_matrix_float)
-            Cicm_Free(m_decoder_matrix_float);
+            cicm_free(m_decoder_matrix_float);
         if(m_decoder_matrix_double)
-            Cicm_Free(m_decoder_matrix_double);
+            cicm_free(m_decoder_matrix_double);
         if(m_vector_float_output)
-            Cicm_Free(m_vector_float_output);
+            cicm_free(m_vector_float_output);
         if(m_vector_double_output)
-            Cicm_Free(m_vector_double_output);
+            cicm_free(m_vector_double_output);
         
         m_number_of_loudspeakers = m_number_of_outputs;
         
-        Cicm_Matrix_Float_Malloc(m_decoder_matrix_float, m_number_of_outputs, m_number_of_harmonics);
-        Cicm_Matrix_Double_Malloc(m_decoder_matrix_double, m_number_of_outputs, m_number_of_harmonics);
-        Cicm_Vector_Float_Malloc(m_vector_float_output, m_number_of_outputs);
-        Cicm_Vector_Double_Malloc(m_vector_double_output, m_number_of_outputs);
+        cicm_malloc_mat_f(m_decoder_matrix_float, m_number_of_outputs, m_number_of_harmonics);
+        cicm_malloc_mat_d(m_decoder_matrix_double, m_number_of_outputs, m_number_of_harmonics);
+        cicm_malloc_vec_f(m_vector_float_output, m_number_of_outputs);
+        cicm_malloc_vec_d(m_vector_double_output, m_number_of_outputs);
         computeMatrix();
     }
 }
@@ -102,20 +102,20 @@ void AmbisonicsDecoder::computeMatrix()
             int index = getHarmonicIndex(j);
             if(j == 0)
             {
-                Cicm_Matrix_Float_Set(m_decoder_matrix_float, i, j, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
-                Cicm_Matrix_Double_Set(m_decoder_matrix_double, i, j, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+                cicm_set_mat_f(m_decoder_matrix_float, i, j, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
+                cicm_set_mat_d(m_decoder_matrix_double, i, j, m_number_of_harmonics, 0.5 / (double)(m_order+1.));
             }
             else if(index > 0)
             {
                 double value = cos(fabs((double)index) * angle) / (double)(m_order+1.);
-                Cicm_Matrix_Float_Set(m_decoder_matrix_float, i, j, m_number_of_harmonics, value);
-                Cicm_Matrix_Double_Set(m_decoder_matrix_double, i, j, m_number_of_harmonics, value);
+                cicm_set_mat_f(m_decoder_matrix_float, i, j, m_number_of_harmonics, value);
+                cicm_set_mat_d(m_decoder_matrix_double, i, j, m_number_of_harmonics, value);
             }
 			else if(index < 0)
             {
                 double value = sin(fabs((double)index) * angle) / (double)(m_order+1.);
-                Cicm_Matrix_Float_Set(m_decoder_matrix_float, i, j, m_number_of_harmonics, value);
-                Cicm_Matrix_Double_Set(m_decoder_matrix_double, i, j, m_number_of_harmonics, value);
+                cicm_set_mat_f(m_decoder_matrix_float, i, j, m_number_of_harmonics, value);
+                cicm_set_mat_d(m_decoder_matrix_double, i, j, m_number_of_harmonics, value);
             }
 		}
     }
@@ -123,12 +123,12 @@ void AmbisonicsDecoder::computeMatrix()
 
 AmbisonicsDecoder::~AmbisonicsDecoder()
 {
-    Cicm_Free(m_vector_float_input);
-    Cicm_Free(m_vector_double_input);
+    cicm_free(m_vector_float_input);
+    cicm_free(m_vector_double_input);
     
-    Cicm_Free(m_decoder_matrix_float);
-    Cicm_Free(m_decoder_matrix_double);
-    Cicm_Free(m_vector_float_output);
-    Cicm_Free(m_vector_double_output);
+    cicm_free(m_decoder_matrix_float);
+    cicm_free(m_decoder_matrix_double);
+    cicm_free(m_vector_float_output);
+    cicm_free(m_vector_double_output);
 }
 

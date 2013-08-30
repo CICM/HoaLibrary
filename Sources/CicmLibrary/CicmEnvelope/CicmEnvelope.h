@@ -89,12 +89,12 @@ public:
     
     inline void applyEnvelope(double* inputs, double* output)
     {
-        Cicm_Vector_Vector_Double_Mul(inputs, m_buffer, output, m_size);
+        cicm_product_vec_vec_d(inputs, m_buffer, output, m_size);
     }
     
     inline void applyEnvelope(float* inputs, float* output)
     {
-        Cicm_Vector_Vector_Float_Mul(inputs, m_buffer_float, output, m_size);
+        cicm_product_vec_vec_f(inputs, m_buffer_float, output, m_size);
     }
 	
 	

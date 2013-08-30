@@ -30,8 +30,8 @@ AmbisonicsFilter::AmbisonicsFilter(long anOrder, long aVectorSize, long aSamplin
 {
     m_vector_sum_double = NULL;
     m_vector_sum_float  = NULL;
-    Cicm_Vector_Double_Malloc(m_frequency, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_gain, m_number_of_harmonics);
+    cicm_malloc_vec_d(m_frequency, m_number_of_harmonics);
+    cicm_malloc_vec_d(m_gain, m_number_of_harmonics);
     m_filter.push_back(new FilterBiquad(Cicm_Biquad_Lowshelf, m_vector_size, m_sampling_rate));
     m_filter[0]->setQValue(1.);
     m_filter[0]->setGain(1.);
@@ -115,13 +115,13 @@ double AmbisonicsFilter::getDiffusion()
 void AmbisonicsFilter::setVectorSize(long aVectorSize)
 {
     if(m_vector_sum_double)
-        Cicm_Free(m_vector_sum_double);
+        cicm_free(m_vector_sum_double);
     if(m_vector_sum_float)
-        Cicm_Free(m_vector_sum_float);
+        cicm_free(m_vector_sum_float);
     
     Ambisonic::setVectorSize(aVectorSize);
-    Cicm_Vector_Double_Malloc(m_vector_sum_double, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_vector_sum_float, m_vector_size);
+    cicm_malloc_vec_d(m_vector_sum_double, m_vector_size);
+    cicm_malloc_vec_f(m_vector_sum_float, m_vector_size);
     for(int i = 0; i < m_filter.size(); i++)
     {
         m_filter[i]->setVectorSize(m_vector_size);
@@ -153,8 +153,8 @@ AmbisonicsFilter::~AmbisonicsFilter()
 {
     m_filter.clear();
     if(m_frequency)
-        Cicm_Free(m_frequency);
+        cicm_free(m_frequency);
     if(m_gain)
-        Cicm_Free(m_gain);
+        cicm_free(m_gain);
 }
 

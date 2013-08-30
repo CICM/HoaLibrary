@@ -56,12 +56,12 @@ public:
 	/* Perform sample by sample */    
 	inline void process(double* anInput, double* anOutput)
 	{
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_product_mat_vec_d(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     inline void process(float* anInput, float* anOutput)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, anInput, anOutput,  m_number_of_outputs, m_number_of_harmonics);
+        cicm_product_mat_vec_f(m_decoder_matrix_float, anInput, anOutput,  m_number_of_outputs, m_number_of_harmonics);
 	}
 	
 	/* Perform block sample */

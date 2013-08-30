@@ -120,7 +120,7 @@ std::string Ambisonic3D::getHarmonicsName(long anIndex)
 
 Ambisonic3D::~Ambisonic3D()
 {
-	Cicm_Free(m_harmonics_indices);
-    Cicm_Free(m_harmonics_orders);
+	cicm_free(m_harmonics_indices);
+    cicm_free(m_harmonics_orders);
 }
 

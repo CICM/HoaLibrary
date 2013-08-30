@@ -59,25 +59,25 @@ public:
     
 	inline void process(const double* inputs, double* outputs)
 	{
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, inputs, outputs,m_number_of_loudspeakers,m_number_of_harmonics);
+        cicm_product_mat_vec_d(m_decoder_matrix_double, inputs, outputs,m_number_of_loudspeakers,m_number_of_harmonics);
     }
     
     inline void process(const float* inputs, float* outputs)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, inputs, outputs, m_number_of_loudspeakers, m_number_of_harmonics);
+        cicm_product_mat_vec_f(m_decoder_matrix_float, inputs, outputs, m_number_of_loudspeakers, m_number_of_harmonics);
 	}
     
     /************************************* In Place *************************************/
     
     inline void process(double* ioVectors)
     {
-        Cicm_Vector_Double_Copy(ioVectors, m_input_matrix_double, m_number_of_harmonics);
+        cicm_copy_vec_vec_d(ioVectors, m_input_matrix_double, m_number_of_harmonics);
         process(m_input_matrix_double, ioVectors);
     }
     
     inline void process(float* ioVectors)
     {
-        Cicm_Vector_Float_Copy(ioVectors, m_input_matrix_float, m_number_of_harmonics);
+        cicm_copy_vec_vec_f(ioVectors, m_input_matrix_float, m_number_of_harmonics);
         process(m_input_matrix_float, ioVectors);
     }
 	
@@ -91,12 +91,12 @@ public:
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Double_Copy(inputs[i], m_input_matrix_double+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_d(inputs[i], m_input_matrix_double+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
         }
-        Cicm_Matrix_Matrix_Double_Product(m_decoder_matrix_double, m_input_matrix_double, m_output_matrix_double, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
+        cicm_product_mat_mat_d(m_decoder_matrix_double, m_input_matrix_double, m_output_matrix_double, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
         for(int i = 0; i < m_number_of_loudspeakers; i++)
         {
-            Cicm_Vector_Double_Copy(m_output_matrix_double+i*Ambisonic::m_vector_size, outputs[i], Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_d(m_output_matrix_double+i*Ambisonic::m_vector_size, outputs[i], Ambisonic::m_vector_size);
         }        
 	}
     
@@ -104,12 +104,12 @@ public:
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Float_Copy(inputs[i], m_input_matrix_float+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_f(inputs[i], m_input_matrix_float+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
         }
-        Cicm_Matrix_Matrix_Float_Product(m_decoder_matrix_float, m_input_matrix_float, m_output_matrix_float, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
+        cicm_product_mat_mat_f(m_decoder_matrix_float, m_input_matrix_float, m_output_matrix_float, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
         for(int i = 0; i < m_number_of_loudspeakers; i++)
         {
-            Cicm_Vector_Float_Copy(m_output_matrix_float+i*Ambisonic::m_vector_size, outputs[i], Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_f(m_output_matrix_float+i*Ambisonic::m_vector_size, outputs[i], Ambisonic::m_vector_size);
         }
 	}
     
@@ -119,12 +119,12 @@ public:
     {
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Double_Copy(ioVectors[i], m_input_matrix_double+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_d(ioVectors[i], m_input_matrix_double+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
         }
-        Cicm_Matrix_Matrix_Double_Product(m_decoder_matrix_double, m_input_matrix_double, m_output_matrix_double, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
+        cicm_product_mat_mat_d(m_decoder_matrix_double, m_input_matrix_double, m_output_matrix_double, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
         for(int i = 0; i < m_number_of_loudspeakers; i++)
         {
-            Cicm_Vector_Double_Copy(m_output_matrix_double+i*Ambisonic::m_vector_size, ioVectors[i], Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_d(m_output_matrix_double+i*Ambisonic::m_vector_size, ioVectors[i], Ambisonic::m_vector_size);
         }
     }
     
@@ -132,12 +132,12 @@ public:
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Float_Copy(ioVectors[i], m_input_matrix_float+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_f(ioVectors[i], m_input_matrix_float+i*Ambisonic::m_vector_size, Ambisonic::m_vector_size);
         }
-        Cicm_Matrix_Matrix_Float_Product(m_decoder_matrix_float, m_input_matrix_float, m_output_matrix_float, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
+        cicm_product_mat_mat_f(m_decoder_matrix_float, m_input_matrix_float, m_output_matrix_float, m_number_of_loudspeakers, Ambisonic::m_vector_size, m_number_of_harmonics);
         for(int i = 0; i < m_number_of_loudspeakers; i++)
         {
-            Cicm_Vector_Float_Copy(m_output_matrix_float+i*Ambisonic::m_vector_size, ioVectors[i], Ambisonic::m_vector_size);
+            cicm_copy_vec_vec_f(m_output_matrix_float+i*Ambisonic::m_vector_size, ioVectors[i], Ambisonic::m_vector_size);
         }
 	}
 };
