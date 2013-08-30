@@ -100,6 +100,76 @@ static void hoaRecomposer_draw_erase(t_HoaRecomposerUI *x, t_glist *glist);
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
 //                  DRAW
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
+static void draw_fishEye(t_HoaRecomposerUI *x,  t_glist *glist)
+{
+    int xpos=text_xpix(&x->x_gui.x_obj, glist);
+    int ypos=text_ypix(&x->x_gui.x_obj, glist);
+    t_canvas *canvas=glist_getcanvas(glist);
+    
+    t_pt cartFisheyeDest,
+         cart;
+    
+    double micAngle, w;
+    w = x->x_gui.x_w;
+    
+    double dashes[2] = {4, 4};
+
+	if (x->f_showFishEye)
+    {
+        
+//        jgraphics_set_source_jrgba(g, &x->f_fisheyecolor);
+//        jgraphics_set_line_width(g, 1);
+//        jgraphics_set_dash(g, dashes, 2, 0);
+
+        cartFisheyeDest.x = Tools::abscisse(x->f_micRadius, x->f_fisheyeAngle);
+        cartFisheyeDest.y = Tools::ordinate(x->f_micRadius, x->f_fisheyeAngle);
+        cartFisheyeDest.x = (cartFisheyeDest.x + (w*0.5));
+        cartFisheyeDest.y = ( (w - cartFisheyeDest.y) - (w*0.5) );
+        
+        for (int i=0; i < x->f_numberOfMic; i++)
+        {
+            if (x->f_mics->isSelected(i))
+            {
+                micAngle = x->f_mics->getAngleInRadian(i);
+                cart.x = (int) Tools::abscisse(x->f_micRadius, micAngle + CICM_PI2);
+                cart.y = (int)  Tools::ordinate(x->f_micRadius, micAngle + CICM_PI2);
+                cart.x = (int) (cart.x + (w*0.5));
+                cart.y = (int) ( (w - cart.y) - (w*0.5) );
+                post("%i %i %i %i",
+                                    cart.x,
+                                    cart.y,
+                                    cartFisheyeDest.x,
+                                    cartFisheyeDest.y);
+                // jgraphics_move_to(g, cartFisheyeDest.x, cartFisheyeDest.y);
+                // jgraphics_line_to(g, cart.x, cart.y);
+                
+                sys_vgui(".x%lx.c create line %d %d %d %d -fill #%6.6x -tag %lxFISH%d \n",
+                         canvas,
+                         xpos+cartFisheyeDest.x,
+                         ypos+cartFisheyeDest.x,
+                         xpos+cart.x,
+                         ypos+cart.y,
+                         getTkColorFromRGB(x->f_fisheyecolor),
+                         x,
+                         i
+                         );
+                
+                
+                
+                
+//                jgraphics_stroke(g);
+//                jgraphics_arc(g, cart.x, cart.y, 2, 0, CICM_2PI);
+//                jgraphics_fill(g);
+            }
+        }
+        
+//        jgraphics_arc(g, cartFisheyeDest.x, cartFisheyeDest.y, 4, 0, CICM_2PI);
+//        jgraphics_fill(g);
+        
+		
+	}
+}
+
 static void draw_background(t_HoaRecomposerUI *x,  t_glist *glist)
 {
 
@@ -174,34 +244,53 @@ static void draw_background(t_HoaRecomposerUI *x,  t_glist *glist)
                  x,
                  i
                  );
-
-  
-/*        jgraphics_translate(g, 0, -x->f_micRadius);
-        jgraphics_rotate(g, -mic_angle*i);
-            
-        jgraphics_rotate(g, mic_angle*i);
-        jgraphics_translate(g, 0, x->f_micRadius);
-        jgraphics_move_to(g, 0, -hpSize*0.8);
-        jgraphics_line_to(g, 0, hpSize*0.8);
-        jgraphics_set_source_jrgba(g, &HpMarkerColor);
-        jgraphics_stroke(g);
-        jgraphics_translate(g, 0, -x->f_micRadius);
-        jgraphics_rotate(g, -mic_angle*i);
- */
+        /*
+        sys_vgui(".x%lx.c create line %d %d %d %d -fill #%6.6x -tag %lxMIC20%d \n",
+                 canvas,
+                 cX,
+                 cY-hpSize,
+                 cX,
+                 cY+hpSize,
+                 getTkColorFromRGB(HpMarkerColor),
+                 x,
+                 i
+                 );
+         */
     }
-/*
+
     // center crosshair
+    // tags CROSS00, CROSS01,CROSS10, CROSS11,
+    
     for (int i=0; i<2; i++)
     {
-        jgraphics_set_source_jrgba(g, i == 0 ? &shadLight : &shadDark);
-        jgraphics_move_to(g, 5.5, 5.5+i);
-        jgraphics_line_to(g, -5.5, -5.5+i);
-        jgraphics_move_to(g, -5.5, 5.5+i);
-        jgraphics_line_to(g, 5.5, -5.5+i);
-        jgraphics_stroke(g);
+        t_jrgba color = (i==0? shadLight : shadDark);
+        
+        sys_vgui(".x%lx.c create line %d %d %d %d -fill #%6.6x -tag %lxCROSS0%d \n",
+                 canvas,
+                 xpos+(x->x_gui.x_w)/2 + 5,
+                 ypos+(x->x_gui.x_h)/2 + 5 +i,
+                 xpos+(x->x_gui.x_w)/2 - 5,
+                 ypos+(x->x_gui.x_h)/2 - 5 +i,
+                 getTkColorFromRGB(color),
+                 x,
+                 i
+                 );
+
+        sys_vgui(".x%lx.c create line %d %d %d %d -fill #%6.6x -tag %lxCROSS1%d \n",
+                 canvas,
+                 xpos+(x->x_gui.x_w)/2 - 5,
+                 ypos+(x->x_gui.x_h)/2 + 5 +i,
+                 xpos+(x->x_gui.x_w)/2 + 5,
+                 ypos+(x->x_gui.x_h)/2 - 5 +i,
+                 getTkColorFromRGB(color),
+                 x,
+                 i
+                 );
+        
+
     }
 		
-*/
+
 
 }
 
@@ -288,6 +377,32 @@ static void hoaRecomposer_draw_move(t_HoaRecomposerUI *x, t_glist *glist)
     }
 
     
+    for (int i=0; i<2; i++)
+    {
+    
+        
+        sys_vgui(".x%lx.c coords %lxCROSS0%d %d %d %d %d \n",
+                 canvas,
+                 x,
+                 i,
+                 xpos+(x->x_gui.x_w)/2 + 5,
+                 ypos+(x->x_gui.x_h)/2 + 5 +i,
+                 xpos+(x->x_gui.x_w)/2 - 5,
+                 ypos+(x->x_gui.x_h)/2 - 5 +i
+                 );
+        
+        sys_vgui(".x%lx.c coords %lxCROSS1%d %d %d %d %d  \n",
+                 canvas,
+                 x,
+                 i,
+                 xpos+(x->x_gui.x_w)/2 - 5,
+                 ypos+(x->x_gui.x_h)/2 + 5 +i,
+                 xpos+(x->x_gui.x_w)/2 + 5,
+                 ypos+(x->x_gui.x_h)/2 - 5 +i
+                 );
+    }
+
+    
     
 
 }
@@ -335,6 +450,7 @@ static void hoaRecomposer_draw_new(t_HoaRecomposerUI *x, t_glist *glist)
              );
     
     draw_background(x, glist);
+    draw_fishEye(x, glist); 
 }
 
 static void hoaRecomposer_draw_select(t_HoaRecomposerUI *x, t_glist *glist)
@@ -373,6 +489,22 @@ static void hoaRecomposer_draw_erase(t_HoaRecomposerUI *x, t_glist *glist)
     {
         sys_vgui(".x%lx.c delete %lxMIC%d\n", canvas, x,i);
     }
+    
+    for (int i=0; i<2; i++)
+    {
+        sys_vgui(".x%lx.c delete %lxCROSS0%d \n",
+                 canvas,
+                 x,
+                 i
+                 );
+        
+        sys_vgui(".x%lx.c delete %lxCROSS1%d \n",
+                 canvas,
+                 x,
+                 i
+                 );
+    }
+
 }
 
 /* ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** ***** */
