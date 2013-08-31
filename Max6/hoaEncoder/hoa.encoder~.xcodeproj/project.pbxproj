@@ -139,6 +139,7 @@
 		8F48935A17CA314100E19032 /* AmbisonicWider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F4892D317CA314100E19032 /* AmbisonicWider.cpp */; };
 		8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F4892D417CA314100E19032 /* AmbisonicWider.h */; };
 		8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F48935C17CB716100E19032 /* MaxAmbisonic.h */; };
+		8F5CEAEE17D0F7F800BCB286 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F5CEAED17D0F7F800BCB286 /* CicmDefine.h */; };
 		8F89EB7D17CCA7F000D532B7 /* MaxAmbisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */; };
 		8F89EB8F17CF723700D532B7 /* MaxEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F89EB8E17CF723700D532B7 /* MaxEncoder.h */; };
 		8F89EB9117CF723E00D532B7 /* hoa.encoder~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB9017CF723E00D532B7 /* hoa.encoder~.cpp */; };
@@ -280,6 +281,7 @@
 		8F4892D317CA314100E19032 /* AmbisonicWider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicWider.cpp; sourceTree = "<group>"; };
 		8F4892D417CA314100E19032 /* AmbisonicWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicWider.h; sourceTree = "<group>"; };
 		8F48935C17CB716100E19032 /* MaxAmbisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaxAmbisonic.h; path = ../MaxAmbisonic.h; sourceTree = "<group>"; };
+		8F5CEAED17D0F7F800BCB286 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
 		8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaxAmbisonic.cpp; path = ../MaxAmbisonic.cpp; sourceTree = "<group>"; };
 		8F89EB8E17CF723700D532B7 /* MaxEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxEncoder.h; sourceTree = "<group>"; };
 		8F89EB9017CF723E00D532B7 /* hoa.encoder~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.encoder~.cpp"; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				8F48923017CA314100E19032 /* CicmDefine_BLAS_FFTW.h */,
 				8F48923117CA314100E19032 /* CicmDefine_INTEL.h */,
 				8F48923217CA314100E19032 /* CicmDefine_VDSP.h */,
+				8F5CEAED17D0F7F800BCB286 /* CicmDefine.h */,
 				8F48923317CA314100E19032 /* CicmDelay */,
 				8F48923617CA314100E19032 /* CicmEnvelope */,
 				8F48923917CA314100E19032 /* CicmFft */,
@@ -804,6 +807,7 @@
 				8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */,
 				8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */,
 				8F89EB8F17CF723700D532B7 /* MaxEncoder.h in Headers */,
+				8F5CEAEE17D0F7F800BCB286 /* CicmDefine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,10 +32,10 @@ class FilterFir : public Filter
 {
 protected:
 	
-	Cicm_Vector_Float	m_input_vector_float;
-	Cicm_Vector_Float	m_fir_vector_float;
-    Cicm_Vector_Double	m_input_vector_double;
-	Cicm_Vector_Double	m_fir_vector_double;
+	cicm_vector_float	m_input_vector_float;
+	cicm_vector_float	m_fir_vector_float;
+    cicm_vector_double	m_input_vector_double;
+	cicm_vector_double	m_fir_vector_double;
 	long			m_fir_size;
 	long			m_input_size;
 	int             m_index;;
@@ -43,8 +43,8 @@ protected:
 public:
 	FilterFir(long anImpulseSize = 128);
     
-	void	setImpulseResponse(Cicm_Vector_Float anImpulseResponse);
-    void    setImpulseResponse(Cicm_Vector_Double anImpulseResponse);
+	void	setImpulseResponse(cicm_vector_float anImpulseResponse);
+    void    setImpulseResponse(cicm_vector_double anImpulseResponse);
     
     inline float process(float input)
     {

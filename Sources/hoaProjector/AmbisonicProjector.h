@@ -34,13 +34,13 @@ class AmbisonicProjector : public Ambisonic, public Planewaves
 	
 private:
 	
-	Cicm_Matrix_Float    m_decoder_matrix_float;
-    Cicm_Matrix_Double   m_decoder_matrix_double;
+	cicm_matrix_float    m_decoder_matrix_float;
+    cicm_matrix_double   m_decoder_matrix_double;
     
-    Cicm_Matrix_Float    m_input_matrix_float;
-    Cicm_Matrix_Double   m_input_matrix_double;
-    Cicm_Matrix_Float    m_output_matrix_float;
-    Cicm_Matrix_Double   m_output_matrix_double;
+    cicm_matrix_float    m_input_matrix_float;
+    cicm_matrix_double   m_input_matrix_double;
+    cicm_matrix_float    m_output_matrix_float;
+    cicm_matrix_double   m_output_matrix_double;
     
 	void computeMatrix();
     

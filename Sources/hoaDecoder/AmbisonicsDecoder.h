@@ -33,12 +33,12 @@ class AmbisonicsDecoder : public Ambisonic
 	
 private:
     long                 m_number_of_loudspeakers;
-	Cicm_Matrix_Float    m_decoder_matrix_float;
-    Cicm_Matrix_Double   m_decoder_matrix_double;
-    Cicm_Vector_Float    m_vector_float_input;
-    Cicm_Vector_Float    m_vector_float_output;
-    Cicm_Vector_Double   m_vector_double_input;
-    Cicm_Vector_Double   m_vector_double_output;
+	cicm_matrix_float    m_decoder_matrix_float;
+    cicm_matrix_double   m_decoder_matrix_double;
+    cicm_vector_float    m_vector_float_input;
+    cicm_vector_float    m_vector_float_output;
+    cicm_vector_double   m_vector_double_input;
+    cicm_vector_double   m_vector_double_output;
     
 	void computeMatrix();
 

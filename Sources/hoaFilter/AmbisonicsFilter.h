@@ -35,12 +35,12 @@ class AmbisonicsFilter : public Ambisonic
 private:
     
     vector <FilterBiquad*>              m_filter;
-    Cicm_Vector_Double                  m_frequency;
-    Cicm_Vector_Double                  m_gain;
+    cicm_vector_double                  m_frequency;
+    cicm_vector_double                  m_gain;
     double                              m_diffuse_factor;
         
-    Cicm_Vector_Double                  m_vector_sum_double;
-    Cicm_Vector_Float                   m_vector_sum_float;
+    cicm_vector_double                  m_vector_sum_double;
+    cicm_vector_float                   m_vector_sum_float;
     void initializeFrequencyBands();
     
 public:

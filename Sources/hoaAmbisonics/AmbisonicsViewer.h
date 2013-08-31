@@ -60,7 +60,7 @@ private:
     void	computeBiggestLobe();
     
 protected :
-    Cicm_Vector_Double	m_harmonics_values;
+    cicm_vector_double	m_harmonics_values;
 	
 public:
 	AmbisonicsViewer(long anOrder, long aVectorSize = 2, long aSamplingRate = 44100);

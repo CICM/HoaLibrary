@@ -35,13 +35,13 @@ protected:
 	long	m_number_of_inputs;
     long    m_number_of_loudspeakers;
     
-    Cicm_Vector_Double     m_angles_of_loudspeakers_double;
-    Cicm_Vector_Double     m_abscissa_of_loudspeakers_double;
-    Cicm_Vector_Double     m_ordinate_of_loudspeakers_double;
+    cicm_vector_double     m_angles_of_loudspeakers_double;
+    cicm_vector_double     m_abscissa_of_loudspeakers_double;
+    cicm_vector_double     m_ordinate_of_loudspeakers_double;
     
-    Cicm_Vector_Float     m_angles_of_loudspeakers_float;
-    Cicm_Vector_Float     m_abscissa_of_loudspeakers_float;
-    Cicm_Vector_Float     m_ordinate_of_loudspeakers_float;
+    cicm_vector_float     m_angles_of_loudspeakers_float;
+    cicm_vector_float     m_abscissa_of_loudspeakers_float;
+    cicm_vector_float     m_ordinate_of_loudspeakers_float;
     
 	long	m_vector_size;
     long	m_sampling_rate;

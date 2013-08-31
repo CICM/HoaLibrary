@@ -40,7 +40,7 @@ public:
     
     void realloc_ambisonic()
     {
-        m_parent->f_ambi = new AmbisonicEncoder(object_attr_getlong(m_parent, gensym("order")), Hoa_Basic, sys_getblksize());
+        m_parent->f_ambi = new AmbisonicEncoder(object_attr_getlong(m_parent, gensym("order")), sys_getblksize());
     }
     
     ~MaxEncoder(){};

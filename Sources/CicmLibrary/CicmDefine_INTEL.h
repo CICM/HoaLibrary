@@ -35,19 +35,19 @@
 /**************** TYPES *****************/
 /****************************************/
 
-#define Cicm_Float              Ipp32f
-#define Cicm_Vector_Float       Ipp32f*
-#define Cicm_Matrix_Float       Ipp32f*
+#define float              Ipp32f
+#define cicm_vector_float       Ipp32f*
+#define cicm_matrix_float       Ipp32f*
 
-#define Cicm_Double             Ipp64f
-#define Cicm_Vector_Double      Ipp64f*
-#define Cicm_Matrix_Double      Ipp64f*
+#define double             Ipp64f
+#define cicm_vector_double      Ipp64f*
+#define cicm_matrix_double      Ipp64f*
 
-#define Cicm_Float_Packed       Ipp32f
-#define Cicm_Float_Fft_Handle	IppsFFTSpec_R_32f
-#define Cicm_Float_Fft_Buffer	Ipp8u
+#define float_Packed       Ipp32f
+#define float_Fft_Handle	IppsFFTSpec_R_32f
+#define float_Fft_Buffer	Ipp8u
 
-#define Cicm_Double_Packed      Ipp64f
+#define double_Packed      Ipp64f
 #define Cicm_Fft_Handle         IppsFFTSpec_R_64f
 #define Cicm_Fft_Buffer         Ipp8u
 
@@ -58,8 +58,8 @@
 #define	cicm_malloc_vec_f(vector, length) vector = ippsMalloc_32f(length)
 #define	cicm_malloc_vec_d(vector, length) vector = ippsMalloc_64f(length)
 
-#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)ippsMalloc_32f(number_of_rows * columns_size); cicm_clear_vec_f(matrix, number_of_rows * columns_size);
-#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)ippsMalloc_64f(number_of_rows * columns_size); cicm_clear_vec_d(matrix, number_of_rows * columns_size);
+#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_float)ippsMalloc_32f(number_of_rows * columns_size); cicm_clear_vec_f(matrix, number_of_rows * columns_size);
+#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_double)ippsMalloc_64f(number_of_rows * columns_size); cicm_clear_vec_d(matrix, number_of_rows * columns_size);
 
 /****************************************/
 /**************** FREE *****************/
@@ -147,8 +147,8 @@
 /***************** CLIP  ****************/
 /****************************************/
 
-#define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) ippsThreshold_LT_32f(vectorsource, vectorDest, size, low); ippsThreshold_GT_32f(vectorsource, vectorDest, high, low);
-#define Cicm_Vector_Double_Clip(vectorsource, low, high, vectorDest, size) ippsThreshold_LT_64f(vectorsource, vectorDest, size, low); ippsThreshold_GT_64f(vectorsource, vectorDest, high, low);
+#define cicm_vector_float_Clip(vectorsource, low, high, vectorDest, size) ippsThreshold_LT_32f(vectorsource, vectorDest, size, low); ippsThreshold_GT_32f(vectorsource, vectorDest, high, low);
+#define cicm_vector_double_Clip(vectorsource, low, high, vectorDest, size) ippsThreshold_LT_64f(vectorsource, vectorDest, size, low); ippsThreshold_GT_64f(vectorsource, vectorDest, high, low);
 
 /****************************************/
 /***************** CLEAR ****************/
@@ -161,8 +161,8 @@
 /**************** SIN COS ***************/
 /****************************************/
 
-#define Cicm_Vector_Float_SinCos(sinResult, cosResult, angle, size) vsSinCos(size, angle, sinResult, cosResult);
-#define Cicm_Vector_Double_SinCos(sinResult, cosResult, angle, size) vdSinCos(size, angle, sinResult, cosResult);
+#define cicm_vector_float_SinCos(sinResult, cosResult, angle, size) vsSinCos(size, angle, sinResult, cosResult);
+#define cicm_vector_double_SinCos(sinResult, cosResult, angle, size) vdSinCos(size, angle, sinResult, cosResult);
 
 /*
  

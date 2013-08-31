@@ -197,7 +197,7 @@ void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
 {
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
     {
-        anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
+        anAngle = Tools::radian_wrap(anAngle / 360. * CICM_2PI);
         m_angles_of_loudspeakers_double[anIndex] = anAngle;
     }
     

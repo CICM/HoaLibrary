@@ -43,15 +43,15 @@ private:
 	Cicm_Fft*			m_fft_instance;
     Cicm_Fft*			m_fft_response;
     
-    Cicm_Vector_Float*		m_real_vector;
-	Cicm_Vector_Float		m_buffer;
+    cicm_vector_float*		m_real_vector;
+	cicm_vector_float		m_buffer;
 	Cicm_Complex_Packed_Float*		m_input_complexes;
 	Cicm_Complex_Packed_Float**		m_impul_complexes;
 	Cicm_Complex_Packed_Float*		m_output_complexes;
 	
 public:
 	FilterConvolution(long aWindowSize = 1024, long aNumberOfInstances = 2);
-	void loadImpulseResponse(Cicm_Vector_Float anImpulseResponse);
+	void loadImpulseResponse(cicm_vector_float anImpulseResponse);
     void clear();
     long getNumberOfInstances(){return m_number_of_instances;};
 	

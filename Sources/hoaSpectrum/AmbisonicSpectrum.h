@@ -37,17 +37,17 @@ private:
     AmbisonicVector*                   m_vector;
  
     vector <vector <FilterBiquad*> >    m_filter;
-    Cicm_Vector_Float**                 m_filtered_signal_float;
-    Cicm_Vector_Double**                m_filtered_signal_double;
-    Cicm_Vector_Double                  m_frequency;
+    cicm_vector_float**                 m_filtered_signal_float;
+    cicm_vector_double**                m_filtered_signal_double;
+    cicm_vector_double                  m_frequency;
     
-    Cicm_Vector_Double                  m_amplitude;
-    Cicm_Vector_Double                  m_abscissa;
-    Cicm_Vector_Double                  m_ordinate;
+    cicm_vector_double                  m_amplitude;
+    cicm_vector_double                  m_abscissa;
+    cicm_vector_double                  m_ordinate;
     
     double                              m_vector_values[2];
     double*                             m_loudspeakers_values;
-    Cicm_Vector_Double                  m_temp_amplitude_value;
+    cicm_vector_double                  m_temp_amplitude_value;
     void initializeFrequencyBands();
     
 public:
@@ -83,7 +83,7 @@ public:
     
 	inline void process(const double* const* inputs)
 	{
-        Cicm_Vector_Double* tab_point;
+        cicm_vector_double* tab_point;
         for(int i = 0; i < m_filter.size(); i++)
         {
             tab_point = m_filtered_signal_double[i];
@@ -94,7 +94,7 @@ public:
         }
         
         double amplitude;
-        Cicm_Vector_Double* vect_point;
+        cicm_vector_double* vect_point;
         for(int i = 0; i < m_filter.size(); i++)
         {
             vect_point = m_filtered_signal_double[i];
@@ -113,7 +113,7 @@ public:
     
     inline void tick()
     {
-        Cicm_Vector_Double* vect_point;
+        cicm_vector_double* vect_point;
         for(int i = 0; i < m_filter.size(); i++)
         {
             vect_point = m_filtered_signal_double[i];

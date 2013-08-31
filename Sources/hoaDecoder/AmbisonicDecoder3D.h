@@ -40,14 +40,14 @@ class AmbisonicDecoder3D : public Ambisonic3D
 	
 private:
     bool                m_shape;
-    Cicm_Matrix_Double  m_decoder_matrix_double;
-    Cicm_Matrix_Float   m_decoder_matrix_float;
+    cicm_matrix_double  m_decoder_matrix_double;
+    cicm_matrix_float   m_decoder_matrix_float;
     
-    Cicm_Matrix_Double  m_harmonics_vector_double;
-    Cicm_Vector_Float   m_harmonics_vector_float;
+    cicm_matrix_double  m_harmonics_vector_double;
+    cicm_vector_float   m_harmonics_vector_float;
     
-    Cicm_Matrix_Double  m_outputs_vector_double;
-    Cicm_Vector_Float   m_outputs_vector_float;
+    cicm_matrix_double  m_outputs_vector_double;
+    cicm_vector_float   m_outputs_vector_float;
     
     void computeMatrices();
 public:

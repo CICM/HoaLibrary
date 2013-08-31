@@ -48,7 +48,7 @@ void FilterConvolutionZero::setImpulseResponse(float* anImpulseResponse, long aS
     /* TIME CONVOLUTION *******************************************/
     if(aSize > 0 && aSize <= m_minimum_size)
     {
-        Cicm_Float *datas  = new Cicm_Float[m_minimum_size];
+        float *datas  = new float[m_minimum_size];
         for(int i = 0; i < m_minimum_size; i++)
         {
             if(i < aSize)
@@ -75,7 +75,7 @@ void FilterConvolutionZero::setImpulseResponse(float* anImpulseResponse, long aS
         }
         else if(aSize > offset &&  aSize < windowSize + offset)
         {
-            Cicm_Float *datas  = new Cicm_Float[windowSize];
+            float *datas  = new float[windowSize];
             for(int j = 0; j < windowSize; j++)
             {
                 if(j + offset < aSize)
@@ -95,7 +95,7 @@ void FilterConvolutionZero::setImpulseResponse(float* anImpulseResponse, long aS
     {
         long numberOfFFT = ((double)(aSize - offset) / (double)m_maximum_size) + 1;
         long dataSize = numberOfFFT * m_maximum_size;
-        Cicm_Float *datas  = new Cicm_Float[dataSize];
+        float *datas  = new float[dataSize];
         if(numberOfFFT != m_fft[m_number_of_ffts-1]->getNumberOfInstances())
         {
             m_fft.pop_back();

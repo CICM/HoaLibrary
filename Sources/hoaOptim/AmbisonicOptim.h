@@ -42,8 +42,8 @@ class AmbisonicOptim : public Ambisonic
 private:
 	long m_optimMode;
 	
-    Cicm_Vector_Float	m_optim_vector_float;
-	Cicm_Vector_Double	m_optim_vector_double;
+    cicm_vector_float	m_optim_vector_float;
+	cicm_vector_double	m_optim_vector_double;
     
 	void computeBasicOptim();
 	void computeReOptim();

@@ -64,8 +64,8 @@ void AmbisonicSpectrum::setNumberOfBands(long aNumberOfBands)
          for(int i = 0; i < aNumberOfBands; i++)
             m_filter.push_back(vector <FilterBiquad*>());
         
-        m_filtered_signal_double = new Cicm_Vector_Double*[m_filter.size()];
-        m_filtered_signal_float = new Cicm_Vector_Float*[m_filter.size()];
+        m_filtered_signal_double = new cicm_vector_double*[m_filter.size()];
+        m_filtered_signal_float = new cicm_vector_float*[m_filter.size()];
         
         for(int i = 0; i < m_filter.size(); i++)
         {
@@ -97,8 +97,8 @@ void AmbisonicSpectrum::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool
         if(m_filtered_signal_float[i])
             cicm_free(m_filtered_signal_float[i]);
         
-        m_filtered_signal_double[i] = new Cicm_Vector_Double[m_number_of_loudspeakers];
-        m_filtered_signal_float[i]  = new Cicm_Vector_Float[m_number_of_loudspeakers];
+        m_filtered_signal_double[i] = new cicm_vector_double[m_number_of_loudspeakers];
+        m_filtered_signal_float[i]  = new cicm_vector_float[m_number_of_loudspeakers];
         for(int j = 0; j < m_number_of_loudspeakers; j++)
         {
             m_filter[i].push_back(new FilterBiquad(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));

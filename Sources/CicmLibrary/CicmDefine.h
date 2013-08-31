@@ -29,7 +29,8 @@
 
 #include "CicmTools.h"
 
-#ifdef __ACCELERATE__
+#ifdef __APPLE__
+#include <Accelerate/Accelerate.h>
 #include "CicmDefine_VDSP.h"
 #endif
 
@@ -37,13 +38,11 @@
 /************************************* TYPES ****************************************/
 /************************************************************************************/
 
-#define Cicm_Float float
-#define Cicm_Vector_Float  float*
-#define Cicm_Matrix_Float  float*
+#define cicm_vector_float  float*
+#define cicm_matrix_float  float*
 
-#define Cicm_Double double
-#define Cicm_Vector_Double  double*
-#define Cicm_Matrix_Double  double*
+#define cicm_vector_double  double*
+#define cicm_matrix_double  double*
 
 /************************************************************************************/
 /************************************* MALLOC ***************************************/
@@ -51,13 +50,13 @@
 
 /******************************* Vector *********************************************/
 
-#define	cicm_malloc_vec_f(vector, vector_size) vector = (Cicm_Vector_Float)calloc(vector_size, sizeof(Cicm_Float))
-#define	cicm_malloc_vec_d(vector, vector_size) vector = (Cicm_Vector_Double)calloc(vector_size, sizeof(Cicm_Double))
+#define	cicm_malloc_vec_f(vector, vector_size) vector = (cicm_vector_float)calloc(vector_size, sizeof(float))
+#define	cicm_malloc_vec_d(vector, vector_size) vector = (cicm_vector_double)calloc(vector_size, sizeof(double))
 
 /******************************* Matrix *********************************************/
 
-#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)calloc(number_of_rows * columns_size, sizeof(Cicm_Float) );
-#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)calloc(number_of_rows * columns_size, sizeof(Cicm_Double));
+#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_float)calloc(number_of_rows * columns_size, sizeof(float) );
+#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_double)calloc(number_of_rows * columns_size, sizeof(double));
 
 /************************************************************************************/
 /************************************* FREE *****************************************/
@@ -146,15 +145,20 @@
 #define cicm_product_vec_sca_vec_f(vector_source, scalar, vector_destination, vector_size) {cicm_copy_vec_vec_f(vector_source, vector_destination, vector_size); cicm_product_vec_sca_f(vector_destination, scalar, vector_size);}
 #define cicm_product_vec_sca_vec_d(vector_source, scalar, vector_destination, vector_size) {cicm_copy_vec_vec_d(vector_source, vector_destination, vector_size); cicm_product_vec_sca_d(vector_destination, scalar, vector_size);}
 
-/******************************* Vector In Place ************************************/
+/******************************* Vector and Vector In Place ************************************/
 
-#define cicm_product_vec_f(vector_source, vector_destination, vector_size) cblas_sdot(vector_size, vector_source, 1, vector_destination, 1)
-#define cicm_product_vec_d(vector_source, vector_destination, vector_size) cblas_ddot(vector_size, vector_source, 1, vector_destination, 1)
+#define cicm_product_vec_f(vector_source, vector_destination, vector_size) \
+for(int cicm_i = 0; cicm_i < vector_size; cicm_i++){*(vector_destination+cicm_i) *= *(vector_source+cicm_i);}
+#define cicm_product_vec_d(vector_source, vector_destination, vector_size) \
+for(int cicm_i = 0; cicm_i < vector_size; cicm_i++){*(vector_destination+cicm_i) *= *(vector_source+cicm_i);}
 
 /******************************* Vector And Vector **********************************/
 
-#define cicm_product_vec_vec_f(vector_source_1, vector_source_2, vector_destination, vector_size) {cicm_copy_vec_vec_f(vector_source_1, vector_destination, vector_size); cicm_product_vec_f(vector_source_2, vector_destination, vector_size);}
-#define cicm_product_vec_vec_d(vector_source_1, vector_source_2, vector_destination, vector_size) {cicm_copy_vec_vec_d(vector_source_1, vector_destination, vector_size); cicm_product_vec_d(vector_source_2, vector_destination, vector_size);}
+#define cicm_product_vec_vec_f(vector_source_1, vector_source_2, vector_destination, vector_size) \
+for(int cicm_i = 0; cicm_i < vector_size; cicm_i++){*(vector_destination+cicm_i) = *(vector_source_1+cicm_i) * *(vector_source_2+cicm_i);}
+
+#define cicm_product_vec_vec_d(vector_source_1, vector_source_2, vector_destination, vector_size) \
+for(int cicm_i = 0; cicm_i < vector_size; cicm_i++){*(vector_destination+cicm_i) = *(vector_source_1+cicm_i) * *(vector_source_2+cicm_i);}
 
 /******************************* Vector And Matrix **********************************/
 
@@ -182,35 +186,5 @@
 
 #define cicm_product_sum_vec_sca_vec_f(vector_source, scalar, vector_destination, vector_size) cblas_saxpy(vector_size, scalar, vector_source, 1, vector_destination, 1)
 #define cicm_product_sum_vec_sca_vec_d(vector_source, scalar, vector_destination, vector_size) cblas_daxpy(vector_size, scalar, vector_source, 1, vector_destination, 1)
-
-/************************************************************************************/
-/************************************* FFT ******************************************/
-/************************************************************************************/
-
-#define Cicm_Complex_Float DSPComplex
-#define Cicm_Complex_Packed_Float DSPSplitComplex
-
-#define Cicm_Complex_Double DSPComplexD
-#define Cicm_Complex_Packed_Double DSPSplitComplexD
-
-#define Cicm_Fft_Handle FFTSetup
-
-#define	Cicm_Complex_Packed_Float_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Float *)malloc(sizeof(Cicm_Complex_Packed_Float)); packedComplex[0].realp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float)); packedComplex[0].imagp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float));
-
-#define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (Cicm_Vector_Double)malloc(size * sizeof(Cicm_Double)); packedComplex[0].imagp = (Cicm__Vector_Double *)malloc(size * sizeof(Cicm_Double));
-
-
-#define cicm_free_Complex_Packed(vector) free(vector[0].realp); free(vector[0].imagp);
-
-#define Cicm_fft_init_handle(order) vDSP_create_fftsetup(order, FFT_RADIX2)
-#define	cicm_free_packed(pointeur) free(pointeur[0].realp) free(pointeur[0].imagp)
-
-#define Cicm_fft_free_handle vDSP_destroy_fftsetup
-
-#define Cicm_packed_mul(source1, source2, dest, length) vDSP_zvmul(source1, 1, source2, 1, dest, 1, length, 1)
-#define Cicm_packed_clear(source, length) vDSP_vclr(source[0].imagp, 1, length); vDSP_vclr(source[0].realp, 1, length);
-
-#define Cicm_fft_forward(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_FORWARD)
-#define Cicm_fft_inverse(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
 
 #endif

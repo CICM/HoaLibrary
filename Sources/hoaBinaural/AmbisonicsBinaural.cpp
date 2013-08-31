@@ -142,8 +142,8 @@ long AmbisonicsBinaural::loadImpulses()
     if(!m_impluse_matrix)
         return 0;
     
-    Cicm_Vector_Double HarmonicVector;
-    Cicm_Vector_Double LoudspeakersVector;
+    cicm_vector_double HarmonicVector;
+    cicm_vector_double LoudspeakersVector;
     cicm_malloc_vec_d(HarmonicVector, m_number_of_harmonics);
     cicm_malloc_vec_d(LoudspeakersVector, m_number_of_loudspeakers);
 

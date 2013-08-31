@@ -31,14 +31,14 @@
 class AmbisonicWider : public Ambisonic
 {
 private:
-    Cicm_Vector_Double*	m_wider_matrix;
+    cicm_vector_double*	m_wider_matrix;
 
-	Cicm_Vector_Float	m_harmonics_vector_float;
-    Cicm_Vector_Double	m_harmonics_vector_double;
+	cicm_vector_float	m_harmonics_vector_float;
+    cicm_vector_double	m_harmonics_vector_double;
     
     int*				m_index_vector;
-	Cicm_Vector_Float	m_vector_float;
-    Cicm_Vector_Double	m_vector_double;
+	cicm_vector_float	m_vector_float;
+    cicm_vector_double	m_vector_double;
     
 	void computeWidenVector();
 public:
@@ -133,7 +133,7 @@ public:
 	inline void process(const double* const* inputs, double** outputs, const double* widenValues)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
 		for(int i = 0; i < m_vector_size; i++)
 			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)
@@ -151,7 +151,7 @@ public:
     inline void process(const float* const* inputs, float** outputs, const float* widenValues)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
 		for(int i = 0; i < m_vector_size; i++)
 			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)
@@ -183,7 +183,7 @@ public:
 	inline void process(double** ioVectors, const double* widenValues)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
 		for(int i = 0; i < m_vector_size; i++)
 			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)
@@ -201,7 +201,7 @@ public:
     inline void process(float** ioVectors, const float* widenValues)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
 		for(int i = 0; i < m_vector_size; i++)
 			m_index_vector[i] = Tools::clip(widenValues[i], 0., 1.) * (double)(NUMBEROFLINEARPOINTS-1);
 		for(int i = 0; i < m_number_of_harmonics; i++)

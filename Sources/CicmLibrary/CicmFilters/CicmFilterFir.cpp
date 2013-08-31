@@ -37,7 +37,7 @@ FilterFir::FilterFir(long anImpulseSize)
 	m_index = m_fir_size;
 }
 
-void FilterFir::setImpulseResponse(Cicm_Vector_Float anImpulseResponse)
+void FilterFir::setImpulseResponse(cicm_vector_float anImpulseResponse)
 {
 	cicm_copy_vec_vec_f(anImpulseResponse, m_fir_vector_float, m_fir_size);
     for(int i = 0; i < m_fir_size; i++)
@@ -46,7 +46,7 @@ void FilterFir::setImpulseResponse(Cicm_Vector_Float anImpulseResponse)
     }
 }
 
-void FilterFir::setImpulseResponse(Cicm_Vector_Double anImpulseResponse)
+void FilterFir::setImpulseResponse(cicm_vector_double anImpulseResponse)
 {
 	cicm_copy_vec_vec_d(anImpulseResponse, m_fir_vector_double, m_fir_size);
     for(int i = 0; i < m_fir_size; i++)

@@ -34,8 +34,8 @@ class AmbisonicSpace : public Planewaves
 {
 private:
     vector <CicmLine*>   m_lines;
-    Cicm_Vector_Float	m_vector_float;
-    Cicm_Vector_Double	m_vector_double;
+    cicm_vector_float	m_vector_float;
+    cicm_vector_double	m_vector_double;
     
 public:
 	AmbisonicSpace(long aNumberOfLoudspeakers, long aVectorSize = 0, long aSamplingRate = 44100);

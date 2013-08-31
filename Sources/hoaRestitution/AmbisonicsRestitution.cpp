@@ -72,8 +72,8 @@ void AmbisonicsRestitution::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, 
         free(m_angles_of_loudspeakers);
     
     /* Alloc memories */
-    m_loudspeakers_gains_vector_float   = new Cicm_Vector_Float[m_number_of_real_loudspeakers];
-    m_loudspeakers_gains_vector_double  = new Cicm_Vector_Double[m_number_of_real_loudspeakers];
+    m_loudspeakers_gains_vector_float   = new cicm_vector_float[m_number_of_real_loudspeakers];
+    m_loudspeakers_gains_vector_double  = new cicm_vector_double[m_number_of_real_loudspeakers];
 	cicm_malloc_vec_d(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
    
     for(int i = 0; i < m_number_of_real_loudspeakers; i++)
@@ -163,7 +163,7 @@ void AmbisonicsRestitution::setLoudspeakerAngle(long anIndex, double anAngle)
 {
     if(anIndex >= 0 && anIndex < m_number_of_real_loudspeakers)
     {
-        anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
+        anAngle = Tools::radian_wrap(anAngle / 360. * CICM_2PI);
         m_angles_of_loudspeakers[anIndex] = anAngle;
     }
     Tools::sortVector(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);

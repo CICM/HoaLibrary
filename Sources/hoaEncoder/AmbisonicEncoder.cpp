@@ -25,15 +25,11 @@
 
 #include "AmbisonicEncoder.h"
 
-AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aMode, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
+AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
-    m_mode = Tools::clip(aMode, (long)0, (long)1);
-	if(m_mode == Hoa_Split)
-		m_number_of_inputs	= m_order + 2;
-	else
-		m_number_of_inputs	= 2;
+    m_number_of_inputs	= 2;
     
-    m_encoder_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
+    m_encoder_matrix = new cicm_vector_double[m_number_of_harmonics];
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
 		cicm_malloc_vec_d(m_encoder_matrix[i], NUMBEROFCIRCLEPOINTS);
@@ -61,16 +57,11 @@ AmbisonicEncoder::AmbisonicEncoder(long anOrder, long aMode, long aVectorSize) :
 	setAngle(0.);
 }
 
-long AmbisonicEncoder::getMode()
-{
-	return m_mode;
-}
-
 void AmbisonicEncoder::setAngle(double anAngle)
 {
-    float angle = Tools::radianWrap(anAngle) / CICM_2PI;
+    int index = Tools::radian_wrap(anAngle) * CICM_1OVER2PI_RATIO;
     for(int i = 0; i < m_number_of_harmonics; i++)
-        m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
+        m_harmonics_vector_float[i] = m_harmonics_vector_double[i] = m_encoder_matrix[i][index];
 }
 
 void AmbisonicEncoder::setVectorSize(long aVectorSize)

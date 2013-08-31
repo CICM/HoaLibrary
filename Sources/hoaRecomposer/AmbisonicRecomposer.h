@@ -44,20 +44,20 @@ class AmbisonicRecomposer : public Ambisonic//, public Planewaves
 private:
     long                        m_number_of_loudspeakers;
     
-    Cicm_Matrix_Float           m_recomposer_matrix_float;
-    Cicm_Matrix_Double          m_recomposer_matrix_double;
+    cicm_matrix_float           m_recomposer_matrix_float;
+    cicm_matrix_double          m_recomposer_matrix_double;
     
-	Cicm_Vector_Float           m_harmonics_vector_float;
-    Cicm_Vector_Double          m_harmonics_vector_double;
+	cicm_vector_float           m_harmonics_vector_float;
+    cicm_vector_double          m_harmonics_vector_double;
     
-    Cicm_Vector_Float           m_microphones_vector_float;
-    Cicm_Vector_Double          m_microphones_vector_double;
+    cicm_vector_float           m_microphones_vector_float;
+    cicm_vector_double          m_microphones_vector_double;
     
-    Cicm_Vector_Float           m_angles_vector_float;
-    Cicm_Vector_Double          m_angles_vector_double;
+    cicm_vector_float           m_angles_vector_float;
+    cicm_vector_double          m_angles_vector_double;
     
-    Cicm_Vector_Float*          m_harmonics_matrix_float;
-    Cicm_Vector_Double*         m_harmonics_matrix_double;
+    cicm_vector_float*          m_harmonics_matrix_float;
+    cicm_vector_double*         m_harmonics_matrix_double;
     
 	vector<AmbisonicEncoder*>  m_encoders;
     vector<CicmLine*>           m_lines;

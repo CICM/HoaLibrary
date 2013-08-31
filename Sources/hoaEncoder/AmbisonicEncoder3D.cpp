@@ -29,8 +29,8 @@ AmbisonicEncoder3D::AmbisonicEncoder3D(long anOrder, long aVectorSize, long aSam
 {
     m_number_of_inputs = 3;
     
-    m_azimuth_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
-    m_elevation_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
+    m_azimuth_matrix = new cicm_vector_double[m_number_of_harmonics];
+    m_elevation_matrix = new cicm_vector_double[m_number_of_harmonics];
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         cicm_malloc_vec_d(m_azimuth_matrix[i], NUMBEROFCIRCLEPOINTS);
@@ -149,7 +149,7 @@ void AmbisonicEncoder3D::setCoordinates(double anAzimuth, double anElevation)
 
 void AmbisonicEncoder3D::setAzimuth(double anAzimuth)
 {
-    int index = (int)((Tools::radianWrap(anAzimuth) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
+    int index = (int)((Tools::radian_wrap(anAzimuth) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_azimuth_float[i] = m_azimuth_double[i] = m_azimuth_matrix[i][index];
@@ -158,7 +158,7 @@ void AmbisonicEncoder3D::setAzimuth(double anAzimuth)
 
 void AmbisonicEncoder3D::setElevation(double anElevation)
 {
-	int index = (int)((Tools::radianWrap(anElevation) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
+	int index = (int)((Tools::radian_wrap(anElevation) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_elevation_float[i] = m_elevation_double[i] = m_elevation_matrix[i][index];

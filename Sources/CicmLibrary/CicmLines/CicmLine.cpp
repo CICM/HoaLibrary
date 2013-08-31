@@ -100,22 +100,22 @@ void CicmLine::setCoefficient(double aCoefficient)
 
 void CicmLine::setCoefficientAngleDirect(double anAngle)
 {
-    m_value_old = m_value_new = Tools::radianWrap(anAngle);
+    m_value_old = m_value_new = Tools::radian_wrap(anAngle);
     m_value_step = 0.;
     m_counter = 0;
 }
 
 void CicmLine::setCoefficientAngle(double anAngle)
 {
-    m_value_new = Tools::radianWrap(anAngle);
-    m_value_old = Tools::radianWrap(m_value_old);
+    m_value_new = Tools::radian_wrap(anAngle);
+    m_value_old = Tools::radian_wrap(m_value_old);
     if(Tools::radianDistance(m_value_old, m_value_new) <= CICM_PI)
     {
         m_value_step = (m_value_new - m_value_old) / (double)m_ramp;
     }
     else
     {
-        if(m_value_new > Tools::radianWrap(m_value_old))
+        if(m_value_new > Tools::radian_wrap(m_value_old))
         {
             m_value_step = ((m_value_new - CICM_2PI) - m_value_old) / (double)m_ramp;
         }

@@ -29,7 +29,7 @@ AmbisonicWider::AmbisonicWider(long anOrder, long aVectorSize) : Ambisonic(anOrd
 {
     m_number_of_inputs = m_number_of_harmonics + 1;
 
-	m_wider_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
+	m_wider_matrix = new cicm_vector_double[m_number_of_harmonics];
 	for(int i = 0; i < m_number_of_harmonics; i++)
 	{
 		cicm_malloc_vec_d(m_wider_matrix[i], NUMBEROFLINEARPOINTS);

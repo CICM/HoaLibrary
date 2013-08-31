@@ -72,7 +72,7 @@ double AmbisonicsDecoder::getLoudspeakerAngle(long anIndex)
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
     {
         double angle = CICM_2PI * ((double)anIndex / (double)(m_number_of_outputs));
-        angle = Tools::radianWrap(angle);
+        angle = Tools::radian_wrap(angle);
         return Tools::radToDeg(angle);
     }
     else
@@ -96,7 +96,7 @@ void AmbisonicsDecoder::computeMatrix()
     for (int i = 0; i < m_number_of_outputs; i++)
 	{
 		double angle = CICM_2PI * ((double)i / (double)(m_number_of_outputs));
-        angle = Tools::radianWrap(angle);
+        angle = Tools::radian_wrap(angle);
 		for (int j = 0; j < m_number_of_harmonics; j++)
 		{
             int index = getHarmonicIndex(j);

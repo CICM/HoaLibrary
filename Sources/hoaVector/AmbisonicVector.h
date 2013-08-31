@@ -32,11 +32,11 @@ class AmbisonicVector : public Planewaves
 {	
 private:
 
-    Cicm_Vector_Double  m_loudspeakers_double;
-    Cicm_Vector_Float   m_loudspeakers_float;
+    cicm_vector_double  m_loudspeakers_double;
+    cicm_vector_float   m_loudspeakers_float;
     
-    Cicm_Vector_Float	m_vector_float;
-    Cicm_Vector_Double	m_vector_double;
+    cicm_vector_float	m_vector_float;
+    cicm_vector_double	m_vector_double;
     
     double       m_outputs_double[4];
     float        m_outputs_float[4];

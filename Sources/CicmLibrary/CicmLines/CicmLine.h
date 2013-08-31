@@ -26,7 +26,7 @@
 #ifndef DEF_CICMLINE
 #define DEF_CICMLINE
 
-#include "../CicmSignal.h"
+#include "../CicmDefine.h"
 
 class CicmLine{
 	

@@ -27,13 +27,13 @@
 #ifndef DEF_CICM_DEFINE
 #define DEF_CICM_DEFINE
 
-#define Cicm_Float float
-#define Cicm_Vector_Float  float*
-#define Cicm_Matrix_Float  float*
+#define float float
+#define cicm_vector_float  float*
+#define cicm_matrix_float  float*
 
-#define Cicm_Double double
-#define Cicm_Vector_Double  double*
-#define Cicm_Matrix_Double  double*
+#define double double
+#define cicm_vector_double  double*
+#define cicm_matrix_double  double*
 
 #define Cicm_Complex_Float DSPComplex
 #define Cicm_Complex_Packed_Float DSPSplitComplex
@@ -43,15 +43,15 @@
 #define Cicm_Complex_Packed_Double DSPSplitComplexD
 
 /**************** ALLOCATION *****************/
-#define	cicm_malloc_vec_f(vector, size) vector = (Cicm_Vector_Float)calloc(size, sizeof(Cicm_Float))
-#define	cicm_malloc_vec_d(vector, size) vector = (Cicm_Vector_Double)calloc(size, sizeof(Cicm_Double))
+#define	cicm_malloc_vec_f(vector, size) vector = (cicm_vector_float)calloc(size, sizeof(float))
+#define	cicm_malloc_vec_d(vector, size) vector = (cicm_vector_double)calloc(size, sizeof(double))
 
-#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)calloc(number_of_rows * columns_size, sizeof(Cicm_Float) );
-#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)calloc(number_of_rows * columns_size, sizeof(Cicm_Double));
+#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_float)calloc(number_of_rows * columns_size, sizeof(float) );
+#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_double)calloc(number_of_rows * columns_size, sizeof(double));
 
-#define	Cicm_Complex_Packed_Float_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Float *)malloc(sizeof(Cicm_Complex_Packed_Float)); packedComplex[0].realp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float)); packedComplex[0].imagp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float));
+#define	Cicm_Complex_Packed_Float_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Float *)malloc(sizeof(Cicm_Complex_Packed_Float)); packedComplex[0].realp = (cicm_vector_float)malloc(size * sizeof(float)); packedComplex[0].imagp = (cicm_vector_float)malloc(size * sizeof(float));
 
-#define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (Cicm_Vector_Double)malloc(size * sizeof(Cicm_Double)); packedComplex[0].imagp = (Cicm__Vector_Double *)malloc(size * sizeof(Cicm_Double));
+#define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (cicm_vector_double)malloc(size * sizeof(double)); packedComplex[0].imagp = (Cicm__Vector_Double *)malloc(size * sizeof(double));
 
 /**************** FREE *****************/
 #define cicm_free(pointor) free(pointor); pointor = NULL;
@@ -113,8 +113,8 @@
 #define cicm_product_sum_vec_sca_vec_d(vectorOne, scalar, vectorDest, size) vDSP_vmsaD(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
 
 /**************** CLIP  ***************/
-#define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
-#define Cicm_Vector_Double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, low, high, vectorDest, 1, size);
+#define cicm_vector_float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
+#define cicm_vector_double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, low, high, vectorDest, 1, size);
 
 /**************** CLEAR ***************/
 #define cicm_clear_vec_f(source, length) vDSP_vclr(source, 1, length)
@@ -138,16 +138,16 @@
 #define Cicm_fft_inverse(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
 
 /* Sinus and Cosinus */
-#define Cicm_Vector_Float_Cosinus vvcosf
-#define Cicm_Vector_Float_Sinus vvsinf
-#define Cicm_Vector_Double_Cosinus vvcos
-#define Cicm_Vector_Double_Sinus vvsin
-#define Cicm_Vector_Float_SinCos(sinVector, cosVector, angleVector, size) vvsincosf(sinVector, cosVector, angleVector, &size)
-#define Cicm_Vector_Double_SinCos(sinVector, cosVector, angleVector, size) vvsincos(sinVector, cosVector, angleVector, &size)
+#define cicm_vector_float_Cosinus vvcosf
+#define cicm_vector_float_Sinus vvsinf
+#define cicm_vector_double_Cosinus vvcos
+#define cicm_vector_double_Sinus vvsin
+#define cicm_vector_float_SinCos(sinVector, cosVector, angleVector, size) vvsincosf(sinVector, cosVector, angleVector, &size)
+#define cicm_vector_double_SinCos(sinVector, cosVector, angleVector, size) vvsincos(sinVector, cosVector, angleVector, &size)
 
 #endif
 
-#ifdef CICM_DOUBLE
+#ifdef double
 
 #define Cicm_Signal float
 #define Cicm_Packed DSPSplitComplex
@@ -176,7 +176,7 @@
 
 #include <ipps.h>
 
-#ifdef CICM_FLOAT
+#ifdef float
 
 #define Cicm_Signal			Ipp32f
 #define Cicm_Packed			Ipp32f
@@ -202,7 +202,7 @@
 #define Cicm_fft_free_handle ippsFFTFree_R_32f
 #endif
 
-#ifdef CICM_DOUBLE
+#ifdef double
 
 #define Cicm_Signal			Ipp64f
 #define Cicm_Packed			Ipp64f
@@ -235,7 +235,7 @@
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
 
-#ifdef CICM_FLOAT
+#ifdef float
 #include <fftw3.h>
 static void packed_mul(float* x, float* y, float* out, long aLength)
 {
@@ -278,7 +278,7 @@ static void packed_mul(float* x, float* y, float* out, long aLength)
 
 #endif
 
-#ifdef CICM_DOUBLE
+#ifdef double
 static void packed_mul(double* x, double* y, double* out, long aLength)
 {
 	double a, b, c, d;

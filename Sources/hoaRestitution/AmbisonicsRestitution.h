@@ -42,17 +42,17 @@ private:
     long                m_number_of_virtual_loudspeakers;
     long                m_number_of_real_loudspeakers;
     
-    Cicm_Vector_Double  m_angles_of_loudspeakers;
+    cicm_vector_double  m_angles_of_loudspeakers;
     
 	AmbisonicsDecoder*  m_decoder;
     
-    Cicm_Vector_Float   m_vector_float_input;
-    Cicm_Vector_Double  m_vector_double_input;
-    Cicm_Vector_Float   m_loudspeakers_vector_float;
-    Cicm_Vector_Double  m_loudspeakers_vector_double;
+    cicm_vector_float   m_vector_float_input;
+    cicm_vector_double  m_vector_double_input;
+    cicm_vector_float   m_loudspeakers_vector_float;
+    cicm_vector_double  m_loudspeakers_vector_double;
     
-    Cicm_Vector_Float*  m_loudspeakers_gains_vector_float;
-    Cicm_Vector_Double* m_loudspeakers_gains_vector_double;
+    cicm_vector_float*  m_loudspeakers_gains_vector_float;
+    cicm_vector_double* m_loudspeakers_gains_vector_double;
     
     void computeAmplitudePanning();
     void computeMicrophoneSimulation();

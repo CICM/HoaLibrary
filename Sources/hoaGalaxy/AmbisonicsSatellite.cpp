@@ -67,7 +67,7 @@ void Satellite::setRadiusSecondary(double aRadius)
 
 void Satellite::setEllipticAngle(double anAngle)
 {
-    m_elliptic_angle = Tools::radianWrap(anAngle);
+    m_elliptic_angle = Tools::radian_wrap(anAngle);
 }
 
 void setEllipseCoordinatePolar(double anAbscissa, double anOrdinate)
