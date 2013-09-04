@@ -35,12 +35,12 @@ class AmbisonicsFilter : public Ambisonic
 private:
     
     vector <FilterBiquad*>              m_filter;
-    Cicm_Vector_Double                  m_frequency;
-    Cicm_Vector_Double                  m_gain;
+    cicm_vector_double                  m_frequency;
+    cicm_vector_double                  m_gain;
     double                              m_diffuse_factor;
         
-    Cicm_Vector_Double                  m_vector_sum_double;
-    Cicm_Vector_Float                   m_vector_sum_float;
+    cicm_vector_double                  m_vector_sum_double;
+    cicm_vector_float                   m_vector_sum_float;
     void initializeFrequencyBands();
     
 public:
@@ -87,23 +87,23 @@ public:
         for(int i = 1; i < m_number_of_harmonics - 2; i++)
         {
             gain = 1. - m_gain[i];
-            Cicm_Vector_Scalar_Double_Mul(inputs[0], m_gain[i], m_vector_sum_double, m_vector_size);
-            Cicm_Vector_Scalar_Double_Mul(inputs[i], gain, inputs[i], m_vector_size);
+            cicm_product_vec_sca_vec_d(inputs[0], m_gain[i], m_vector_sum_double, m_vector_size);
+            cicm_product_vec_sca_vec_d(inputs[i], gain, inputs[i], m_vector_size);
             // ATTENTION //
-            Cicm_Vector_Double_Add(inputs[i], m_vector_sum_double, m_vector_size);
+            cicm_add_vec_vec_d(inputs[i], m_vector_sum_double, m_vector_size);
             
             m_filter[i*2]->process(m_vector_sum_double, m_vector_sum_double);
             m_filter[i*2-1]->process(m_vector_sum_double, outputs[i]);
         }
         gain = 1. - m_gain[m_number_of_harmonics-2];
-        Cicm_Vector_Scalar_Double_Mul(inputs[0], m_gain[m_number_of_harmonics-2], m_vector_sum_double, m_vector_size);
-        Cicm_Vector_Scalar_Double_Mul(inputs[m_number_of_harmonics-2], gain, inputs[m_number_of_harmonics-2], m_vector_size);
+        cicm_product_vec_sca_vec_d(inputs[0], m_gain[m_number_of_harmonics-2], m_vector_sum_double, m_vector_size);
+        cicm_product_vec_sca_vec_d(inputs[m_number_of_harmonics-2], gain, inputs[m_number_of_harmonics-2], m_vector_size);
         // ATTENTION //
-        Cicm_Vector_Double_Add(inputs[m_number_of_harmonics-2], m_vector_sum_double, m_vector_size);
+        cicm_add_vec_vec_d(inputs[m_number_of_harmonics-2], m_vector_sum_double, m_vector_size);
         m_filter[(m_number_of_harmonics-1)*2-3]->process(inputs[m_number_of_harmonics-2], outputs[m_number_of_harmonics-2]);
         gain = 1. - m_gain[m_number_of_harmonics-1];
-        Cicm_Vector_Scalar_Double_Mul(inputs[0], m_gain[m_number_of_harmonics-1], m_vector_sum_double, m_vector_size);
-        Cicm_Vector_Scalar_Double_Mul(inputs[m_number_of_harmonics-1], gain, inputs[m_number_of_harmonics-1], m_vector_size);
+        cicm_product_vec_sca_vec_d(inputs[0], m_gain[m_number_of_harmonics-1], m_vector_sum_double, m_vector_size);
+        cicm_product_vec_sca_vec_d(inputs[m_number_of_harmonics-1], gain, inputs[m_number_of_harmonics-1], m_vector_size);
         m_filter[(m_number_of_harmonics-1)*2-2]->process(inputs[m_number_of_harmonics-1], outputs[m_number_of_harmonics-1]);
 
         

@@ -32,25 +32,42 @@ class FilterFir : public Filter
 {
 protected:
 	
-	Cicm_Vector_Float	m_input_vector;
-	Cicm_Vector_Float	m_fir_vector;
+	cicm_vector_float	m_input_vector_float;
+	cicm_vector_float	m_fir_vector_float;
+    cicm_vector_double	m_input_vector_double;
+	cicm_vector_double	m_fir_vector_double;
 	long			m_fir_size;
 	long			m_input_size;
 	int             m_index;;
 
 public:
 	FilterFir(long anImpulseSize = 128);
-	void	setImpulseResponse(Cicm_Vector_Float anImpulseResponse);
-	
-    inline Cicm_Float process(Cicm_Float anInput)
+    
+	void	setImpulseResponse(cicm_vector_float anImpulseResponse);
+    void    setImpulseResponse(cicm_vector_double anImpulseResponse);
+    
+    inline float process(float input)
     {
-        Cicm_Float result;
-        m_input_vector[--m_index] = anInput;
-        Cicm_Vector_Float_Dot_Product(m_input_vector+m_index, m_fir_vector, result, m_fir_size);
+        float result;
+        m_input_vector_float[--m_index] = input;
+        cicm_dot_product_f(m_input_vector_float+m_index, m_fir_vector_float, result, m_fir_size);
         if(m_index <= 0)
         {
             m_index = m_fir_size;
-            Cicm_Vector_Float_Copy(m_input_vector, m_input_vector+m_fir_size, m_fir_size);
+            cicm_copy_vec_vec_f(m_input_vector_float, m_input_vector_float+m_fir_size, m_fir_size);
+        }
+        return result;
+    }
+    
+    inline double process(double input)
+    {
+        double result;
+        m_input_vector_double[--m_index] = input;
+        cicm_dot_product_d(m_input_vector_double+m_index, m_fir_vector_double, result, m_fir_size);
+        if(m_index <= 0)
+        {
+            m_index = m_fir_size;
+            cicm_copy_vec_vec_d(m_input_vector_double, m_input_vector_double+m_fir_size, m_fir_size);
         }
         return result;
     }

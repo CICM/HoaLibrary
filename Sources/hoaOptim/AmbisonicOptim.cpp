@@ -27,8 +27,8 @@
 
 AmbisonicOptim::AmbisonicOptim(long anOrder, long anOptimMode, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
-	Cicm_Vector_Float_Malloc(m_optim_vector_float, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_optim_vector_double, m_number_of_harmonics);
+	cicm_malloc_vec_f(m_optim_vector_float, m_number_of_harmonics);
+    cicm_malloc_vec_d(m_optim_vector_double, m_number_of_harmonics);
 	setOptimMode(anOptimMode);
 }
 
@@ -103,7 +103,7 @@ void AmbisonicOptim::computeInPhaseOptim()
 
 AmbisonicOptim::~AmbisonicOptim()
 {
-	Cicm_Free(m_optim_vector_float);
-    Cicm_Free(m_optim_vector_double);
+	cicm_free(m_optim_vector_float);
+    cicm_free(m_optim_vector_double);
 }
 

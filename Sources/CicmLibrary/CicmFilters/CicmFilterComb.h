@@ -63,7 +63,7 @@ public:
 		double	getDelay();
 		~FilterComb();
     
-    inline double process(double anInput)
+    inline double process(const double anInput)
     {
         double output = m_buffer[m_ramp];
         m_filterstore = (output * m_damp2) + (m_filterstore * m_damp1);
@@ -74,7 +74,7 @@ public:
         return output;
     }
     
-    inline double process(float anInput)
+    inline double process(const float anInput)
     {
         float output = m_buffer[m_ramp];
         m_filterstore = (output * m_damp2) + (m_filterstore * m_damp1);

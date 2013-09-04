@@ -32,11 +32,11 @@ class AmbisonicVector : public Planewaves
 {	
 private:
 
-    Cicm_Vector_Double  m_loudspeakers_double;
-    Cicm_Vector_Float   m_loudspeakers_float;
+    cicm_vector_double  m_loudspeakers_double;
+    cicm_vector_float   m_loudspeakers_float;
     
-    Cicm_Vector_Float	m_vector_float;
-    Cicm_Vector_Double	m_vector_double;
+    cicm_vector_float	m_vector_float;
+    cicm_vector_double	m_vector_double;
     
     double       m_outputs_double[4];
     float        m_outputs_float[4];
@@ -59,18 +59,18 @@ public:
         double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0.;
         double energySum = 0., energyAbscissa = 0., energyOrdinate = 0.;
         
-        Cicm_Vector_Double_Copy(inputs, m_vector_double, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Sum(m_vector_double, veclocitySum, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_abscissa_of_loudspeakers_double, velocityAbscissa,m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_ordinate_of_loudspeakers_double, velocityOrdinate,m_number_of_loudspeakers);
+        cicm_copy_vec_vec_d(inputs, m_vector_double, m_number_of_loudspeakers);
+        veclocitySum = Tools::sum(m_vector_double, m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_abscissa_of_loudspeakers_double, velocityAbscissa,m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_ordinate_of_loudspeakers_double, velocityOrdinate,m_number_of_loudspeakers);
         
         
         for(int i = 0; i < m_number_of_loudspeakers; i++)
             m_vector_double[i] *= m_vector_double[i];
         
-        Cicm_Vector_Double_Sum(m_vector_double, energySum, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_abscissa_of_loudspeakers_double, energyAbscissa, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_ordinate_of_loudspeakers_double, energyOrdinate, m_number_of_loudspeakers);
+        energySum = Tools::sum(m_vector_double, m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_abscissa_of_loudspeakers_double, energyAbscissa, m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_ordinate_of_loudspeakers_double, energyOrdinate, m_number_of_loudspeakers);
         
         if(veclocitySum != 0. && energySum != 0.)
         {
@@ -96,10 +96,10 @@ public:
 	{
         double veclocitySum = 0., velocityAbscissa = 0., velocityOrdinate = 0.;
         
-        Cicm_Vector_Double_Copy(inputs, m_vector_double, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Sum(m_vector_double, veclocitySum, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_abscissa_of_loudspeakers_double, velocityAbscissa,m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_ordinate_of_loudspeakers_double, velocityOrdinate,m_number_of_loudspeakers);
+        cicm_copy_vec_vec_d(inputs, m_vector_double, m_number_of_loudspeakers);
+        veclocitySum = Tools::sum(m_vector_double, m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_abscissa_of_loudspeakers_double, velocityAbscissa,m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_ordinate_of_loudspeakers_double, velocityOrdinate,m_number_of_loudspeakers);
         
         if(veclocitySum != 0. )
         {
@@ -119,14 +119,14 @@ public:
 	{
         double energySum = 0., energyAbscissa = 0., energyOrdinate = 0.;
         
-        Cicm_Vector_Double_Copy(inputs, m_vector_double, m_number_of_loudspeakers);
+        cicm_copy_vec_vec_d(inputs, m_vector_double, m_number_of_loudspeakers);
         for(int i = 0; i < m_number_of_loudspeakers; i++)
         {
             m_vector_double[i] *= m_vector_double[i];
         }
-        Cicm_Vector_Double_Sum(m_vector_double, energySum, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_abscissa_of_loudspeakers_double, energyAbscissa, m_number_of_loudspeakers);
-        Cicm_Vector_Double_Dot_Product(m_vector_double, m_ordinate_of_loudspeakers_double, energyOrdinate, m_number_of_loudspeakers);
+        energySum = Tools::sum(m_vector_double, m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_abscissa_of_loudspeakers_double, energyAbscissa, m_number_of_loudspeakers);
+        cicm_dot_product_d(m_vector_double, m_ordinate_of_loudspeakers_double, energyOrdinate, m_number_of_loudspeakers);
         
         if(energySum != 0.)
         {
@@ -149,14 +149,14 @@ public:
         float energySum = 0.;
         float energyAbscissa = 0., energyOrdinate = 0.;
         
-        Cicm_Vector_Float_Sum(inputs, veclocitySum, m_number_of_loudspeakers);
-        Cicm_Vector_Float_Dot_Product(inputs, m_abscissa_of_loudspeakers_float, velocityAbscissa, m_number_of_loudspeakers);
-        Cicm_Vector_Float_Dot_Product(inputs, m_ordinate_of_loudspeakers_float, velocityOrdinate, m_number_of_loudspeakers);
+        veclocitySum = Tools::sum(m_vector_double, m_number_of_loudspeakers);
+        cicm_dot_product_f(inputs, m_abscissa_of_loudspeakers_float, velocityAbscissa, m_number_of_loudspeakers);
+        cicm_dot_product_f(inputs, m_ordinate_of_loudspeakers_float, velocityOrdinate, m_number_of_loudspeakers);
         
-        Cicm_Vector_Float_Mul(inputs, inputs, m_number_of_loudspeakers);
-        Cicm_Vector_Float_Sum(inputs, energySum, m_number_of_loudspeakers);
-        Cicm_Vector_Float_Dot_Product(inputs, m_abscissa_of_loudspeakers_float, energyAbscissa, m_number_of_loudspeakers);
-        Cicm_Vector_Float_Dot_Product(inputs, m_ordinate_of_loudspeakers_float, energyOrdinate, m_number_of_loudspeakers);
+        cicm_product_vec_f(inputs, inputs, m_number_of_loudspeakers);
+        energySum = Tools::sum(m_vector_double, m_number_of_loudspeakers);
+        cicm_dot_product_f(inputs, m_abscissa_of_loudspeakers_float, energyAbscissa, m_number_of_loudspeakers);
+        cicm_dot_product_f(inputs, m_ordinate_of_loudspeakers_float, energyOrdinate, m_number_of_loudspeakers);
         
         if(veclocitySum != 0. && energySum != 0.)
         {

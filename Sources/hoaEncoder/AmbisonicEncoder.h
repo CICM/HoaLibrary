@@ -23,8 +23,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AmbisonicEncoder
-#define DEF_AmbisonicEncoder
+#ifndef DEF_AMBISONICENCODER
+#define DEF_AMBISONICENCODER
 
 #include "../HoaAmbisonics/Ambisonic.h"
 
@@ -32,22 +32,18 @@ class AmbisonicEncoder : public Ambisonic
 {
 	
 private:
-	long m_mode;
-	
-	Cicm_Vector_Double*	m_encoder_matrix;
+	cicm_vector_double*	m_encoder_matrix;
     
-	Cicm_Vector_Float	m_harmonics_vector_float;
-    Cicm_Vector_Double	m_harmonics_vector_double;
+	cicm_vector_float	m_harmonics_vector_float;
+    cicm_vector_double	m_harmonics_vector_double;
     
     int*				m_index_vector;
-	Cicm_Vector_Float	m_vector_float;
-    Cicm_Vector_Double	m_vector_double;
+	cicm_vector_float	m_vector_float;
+    cicm_vector_double	m_vector_double;
     
 public:
-	AmbisonicEncoder(long anOrder = 1, long aMode = Hoa_Basic, long aVectorSize = 0);
+	AmbisonicEncoder(long anOrder = 1, long aVectorSize = 0);
 
-	long    getMode();
-    
     void    setVectorSize(long aVectorSize);
 	void	setAngle(double anAngle);
     
@@ -63,30 +59,34 @@ public:
     
     /*********************************** Out Of Place ***********************************/
     
-    inline void process(const double anInput, double* outputs)
+    inline void process(const double input, double* outputs)
 	{
-        Cicm_Vector_Scalar_Double_Mul(m_harmonics_vector_double, anInput, outputs, m_number_of_harmonics);
+        cicm_product_vec_sca_vec_d(m_harmonics_vector_double, input, outputs, m_number_of_harmonics);
 	}
 
-    inline void process(const float anInput, float* outputs)
+    inline void process(const float input, float* outputs)
 	{
-        Cicm_Vector_Scalar_Float_Mul(m_harmonics_vector_float, anInput, outputs, m_number_of_harmonics);
+        cicm_product_vec_sca_vec_f(m_harmonics_vector_float, input, outputs, m_number_of_harmonics);
 	}
     
-    inline void process(const double anInput, double* outputs, const double anAngle)
+    inline void process(const double input, double* outputs, const double angle)
 	{
-		double angle = Tools::radianWrap(anAngle) / CICM_2PI;
+		int index = Tools::radian_wrap(angle) * CICM_1OVER2PI_RATIO;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
-		process(anInput, outputs);
+        {
+            m_harmonics_vector_double[i] = m_encoder_matrix[i][index];
+        }
+		process(input, outputs);
 	}
     
-    inline void process(const float anInput, float* outputs, const float anAngle)
+    inline void process(const float input, float* outputs, const float angle)
 	{
-        float angle = Tools::radianWrap(anAngle) / CICM_2PI;
+        int index = Tools::radian_wrap(angle) * CICM_1OVER2PI_RATIO;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
-		process(anInput, outputs);
+        {
+            m_harmonics_vector_float[i] = m_encoder_matrix[i][index];
+        }
+		process(input, outputs);
 	}
 		
     /************************************* In Place *************************************/
@@ -103,16 +103,16 @@ public:
         process(input, ioVector);
 	}
     
-    inline void process(double* ioVector, const double anAngle)
+    inline void process(double* ioVector, const double angle)
 	{
 		double input = ioVector[0];
-        process(input, ioVector, anAngle);
+        process(input, ioVector, angle);
 	}
     
-    inline void process(float* ioVector, const float anAngle)
+    inline void process(float* ioVector, const float angle)
 	{
         float input = ioVector[0];
-        process(input, ioVector, anAngle);
+        process(input, ioVector, angle);
 	}
     
     /************************************************************************************/
@@ -124,22 +124,26 @@ public:
     inline void process(const double* inputs, double** outputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Double_Mul(inputs, m_harmonics_vector_double[i], outputs[i], m_vector_size);
+			cicm_product_vec_sca_vec_d(inputs, m_harmonics_vector_double[i], outputs[i], m_vector_size);
 	}
     
     inline void process(const float* inputs, float** outputs)
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Float_Mul(inputs, m_harmonics_vector_float[i], outputs[i], m_vector_size);
+			cicm_product_vec_sca_vec_f(inputs, m_harmonics_vector_float[i], outputs[i], m_vector_size);
 	}
     
-	inline void process(const double* inputs, double** outputs, const double* angleValues)
+	inline void process(const double* inputs, double** outputs, const double* angles)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
+        
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
-        Cicm_Vector_Double_Copy((double* )inputs, outputs[0], m_vector_size);
+        {
+			*(m_index_vector+i) = Tools::radian_wrap(*(angles+i)) * CICM_1OVER2PI_RATIO;
+        }
+        
+        cicm_copy_vec_vec_d((double* )inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -148,17 +152,21 @@ public:
 				index = m_index_vector[j];
 				m_vector_double[j] = pointor[index];
 			}
-			Cicm_Vector_Vector_Double_Mul(inputs, m_vector_double, outputs[i], m_vector_size);
+			cicm_product_vec_vec_d(inputs, m_vector_double, outputs[i], m_vector_size);
 		}
 	}
     
-    inline void process(const float* inputs, float** outputs, const float* angleValues)
+    inline void process(const float* inputs, float** outputs, const float* angles)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
+        
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
-        Cicm_Vector_Float_Copy((float* )inputs, outputs[0], m_vector_size);
+        {
+			*(m_index_vector+i) = Tools::radian_wrap(*(angles+i)) * CICM_1OVER2PI_RATIO;
+        }
+        
+        cicm_copy_vec_vec_f(inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -167,7 +175,7 @@ public:
 				index = m_index_vector[j];
 				m_vector_float[j] = pointor[index];
 			}
-			Cicm_Vector_Vector_Float_Mul(inputs, m_vector_float, outputs[i], m_vector_size);
+			cicm_product_vec_vec_f(inputs, m_vector_float, outputs[i], m_vector_size);
 		}
 	}
     
@@ -175,22 +183,26 @@ public:
     
     inline void process(double** ioVectors)
 	{
-		for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Double_Mul(ioVectors[0], m_harmonics_vector_double[i], ioVectors[i], m_vector_size);
+		for(int i = 1; i < m_number_of_harmonics; i++)
+			cicm_product_vec_sca_vec_d(ioVectors[0], m_harmonics_vector_double[i], ioVectors[i], m_vector_size);
 	}
     
     inline void process(float** ioVectors)
 	{
-        for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Float_Mul(ioVectors[0], m_harmonics_vector_float[i], ioVectors[i], m_vector_size);
+        for(int i = 1; i < m_number_of_harmonics; i++)
+			cicm_product_vec_sca_vec_f(ioVectors[0], m_harmonics_vector_float[i], ioVectors[i], m_vector_size);
 	}
     
-	inline void process(double** ioVectors, const double* angleValues)
+	inline void process(double** ioVectors, const double* angles)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
+        
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
+        {
+			m_index_vector[i] = Tools::radian_wrap(angles[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
+        }
+        
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -199,17 +211,21 @@ public:
 				index = m_index_vector[j];
 				m_vector_double[j] = pointor[index];
 			}
-            Cicm_Vector_Double_Copy(ioVectors[0], ioVectors[i], m_vector_size);
-			Cicm_Vector_Double_Mul(m_vector_double, ioVectors[i], m_vector_size);
+            cicm_copy_vec_vec_d(ioVectors[0], ioVectors[i], m_vector_size);
+			cicm_product_vec_d(m_vector_double, ioVectors[i], m_vector_size);
 		}
 	}
     
-    inline void process(float** ioVectors, const float* angleValues)
+    inline void process(float** ioVectors, const float* angles)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
+        
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
+        {
+			m_index_vector[i] = Tools::radian_wrap(angles[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
+        }
+        
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -218,8 +234,8 @@ public:
 				index = m_index_vector[j];
 				m_vector_float[j] = pointor[index];
 			}
-            Cicm_Vector_Float_Copy(ioVectors[0], ioVectors[i], m_vector_size);
-			Cicm_Vector_Float_Mul(m_vector_float, ioVectors[i], m_vector_size);
+            cicm_copy_vec_vec_f(ioVectors[0], ioVectors[i], m_vector_size);
+			cicm_product_vec_f(m_vector_float, ioVectors[i], m_vector_size);
 		}
 	}
     
@@ -235,27 +251,27 @@ public:
     
     inline void processAdd(double anInput, double* outputs)
 	{
-        Cicm_Vector_Scalar_Double_Mul_And_Add(m_harmonics_vector_double, anInput, outputs, m_number_of_harmonics);
+        cicm_product_sum_vec_sca_vec_d(m_harmonics_vector_double, anInput, outputs, m_number_of_harmonics);
 	}
     
     inline void processAdd(float anInput, float* outputs)
 	{
-        Cicm_Vector_Scalar_Float_Mul_And_Add(m_harmonics_vector_float, anInput, outputs, m_number_of_harmonics);
+        cicm_product_sum_vec_sca_vec_f(m_harmonics_vector_float, anInput, outputs, m_number_of_harmonics);
 	}
     
-    inline void processAdd(const double anInput, double* outputs, const double anAngle)
+    inline void processAdd(const double anInput, double* outputs, const double angle)
 	{
-		float angle = Tools::radianWrap(anAngle) / CICM_2PI;
+		float angle_value = Tools::radian_wrap(angle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
+            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle_value*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		process(anInput, outputs);
 	}
     
-    inline void processAdd(const float anInput, float* outputs, const float anAngle)
+    inline void processAdd(const float anInput, float* outputs, const float angle)
 	{
-        double angle = Tools::radianWrap(anAngle) / CICM_2PI;
+        double angle_value = Tools::radian_wrap(angle) / CICM_2PI;
 		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
+            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle_value*(double)(NUMBEROFCIRCLEPOINTS-1))];
 		process(anInput, outputs);
 	}
     
@@ -268,22 +284,26 @@ public:
     inline void processAdd(double* inputs, double** outputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Double_Mul_And_Add(inputs, m_harmonics_vector_double[i], outputs[i], m_vector_size);
+			cicm_product_sum_vec_sca_vec_d(inputs, m_harmonics_vector_double[i], outputs[i], m_vector_size);
 	}
     
     inline void processAdd(float* inputs, float** outputs)
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Float_Mul_And_Add(inputs, m_harmonics_vector_float[i], outputs[i], m_vector_size);
+			cicm_product_sum_vec_sca_vec_f(inputs, m_harmonics_vector_float[i], outputs[i], m_vector_size);
 	}
     
-	inline void processAdd(const double* inputs, double** outputs, const double* angleValues)
+	inline void processAdd(const double* inputs, double** outputs, const double* angles)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
+        
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
-        Cicm_Vector_Double_Add(inputs, outputs[0], m_vector_size);
+        {
+			m_index_vector[i] = Tools::radian_wrap(angles[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
+        }
+        
+        cicm_add_vec_vec_d(inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -292,18 +312,22 @@ public:
 				index = m_index_vector[j];
 				m_vector_double[j] = pointor[index];
 			}
-			Cicm_Vector_Double_Mul(inputs, m_vector_double, m_vector_size);
-            Cicm_Vector_Double_Add(m_vector_double, outputs[i], m_vector_size);
+			cicm_product_vec_d(inputs, m_vector_double, m_vector_size);
+            cicm_add_vec_vec_d(m_vector_double, outputs[i], m_vector_size);
 		}
 	}
     
-    inline void processAdd(const float* inputs, float** outputs, const float* angleValues)
+    inline void processAdd(const float* inputs, float** outputs, const float* angles)
 	{
 		int index;
-		Cicm_Vector_Double pointor;
+		cicm_vector_double pointor;
+        
 		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
-        Cicm_Vector_Float_Add(inputs, outputs[0], m_vector_size);
+        {
+			m_index_vector[i] = Tools::radian_wrap(angles[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
+        }
+        
+        cicm_add_vec_vec_f(inputs, outputs[0], m_vector_size);
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
@@ -312,105 +336,10 @@ public:
 				index = m_index_vector[j];
 				m_vector_float[j] = pointor[index];
 			}
-			Cicm_Vector_Float_Mul(inputs, m_vector_float, m_vector_size);
-            Cicm_Vector_Float_Add(m_vector_float, outputs[i], m_vector_size);
+			cicm_product_vec_f(inputs, m_vector_float, m_vector_size);
+            cicm_add_vec_vec_f(m_vector_float, outputs[i], m_vector_size);
 		}
-	}
-    
-    /********************************************************************/
-    /**************************** Add Mode ******************************/
-    /********************************************************************/
-    
-    /************************************************************************************/
-    /***************************** Perform sample by sample *****************************/
-    /************************************************************************************/
-    
-    /*********************************** Out Of Place ***********************************/
-    
-    inline void processSplit(double* inputs, double* outputs)
-	{
-		for (int i = 0; i < m_number_of_harmonics; i++)
-			outputs[i] = m_harmonics_vector_double[i] * inputs[getHarmonicOrder(i)];
-	}
-    
-    inline void processSplit(float* inputs, float* outputs)
-	{
-		for (int i = 0; i < m_number_of_harmonics; i++)
-			outputs[i] = m_harmonics_vector_double[i] * inputs[getHarmonicOrder(i)];
-	}
-    
-	inline void processSplit(double* inputs, double* outputs, double anAngle)
-	{
-		double angle = Tools::radianWrap(anAngle) / CICM_2PI;
-		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_double[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
-		return processSplit(inputs, outputs);
-	}
-	
-    inline void processSplit(float* inputs, float* outputs, float anAngle)
-	{
-		float angle = Tools::radianWrap(anAngle) / CICM_2PI;
-		for(int i = 0; i < m_number_of_harmonics; i++)
-            m_harmonics_vector_float[i] = m_encoder_matrix[i][(int)(angle*(double)(NUMBEROFCIRCLEPOINTS-1))];
-		return processSplit(inputs, outputs);
-	}
-    
-    /************************************************************************************/
-    /******************************* Perform sample block *******************************/
-    /************************************************************************************/
-    
-    /*********************************** Out Of Place ***********************************/
-    
-    inline void processSplit(const double* const* inputs, double** outputs)
-	{
-		for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Double_Mul(inputs[getHarmonicOrder(i)], m_harmonics_vector_double[i], outputs[i], m_vector_size);
-	}
-    
-    inline void processSplit(const float* const* inputs, float** outputs)
-	{
-        for(int i = 0; i < m_number_of_harmonics; i++)
-			Cicm_Vector_Scalar_Float_Mul(inputs[getHarmonicOrder(i)], m_harmonics_vector_float[i], outputs[i], m_vector_size);
-	}
-    
-    inline void processSplit(const double* const* inputs, double** outputs, const double* angleValues)
-	{
-        int index;
-		Cicm_Vector_Double pointor;
-		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
-        Cicm_Vector_Double_Copy((double* )inputs, outputs[0], m_vector_size);
-		for(int i = 1; i < m_number_of_harmonics; i++)
-		{
-			pointor = m_encoder_matrix[i];
-			for(int j = 0; j < m_vector_size; j++)
-			{
-				index = m_index_vector[j];
-				m_vector_double[j] = pointor[index];
-			}
-			Cicm_Vector_Vector_Double_Mul(inputs[getHarmonicOrder(i)], m_vector_double, outputs[i], m_vector_size);
-		}
-	}
-
-    inline void processSplit(const float* const* inputs, float** outputs, const float* angleValues)
-	{
-        int index;
-		Cicm_Vector_Double pointor;
-		for(int i = 0; i < m_vector_size; i++)
-			m_index_vector[i] = Tools::radianWrap(angleValues[i]) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS-1);
-        Cicm_Vector_Float_Copy((float* )inputs, outputs[0], m_vector_size);
-		for(int i = 1; i < m_number_of_harmonics; i++)
-		{
-			pointor = m_encoder_matrix[i];
-			for(int j = 0; j < m_vector_size; j++)
-			{
-				index = m_index_vector[j];
-				m_vector_float[j] = pointor[index];
-			}
-			Cicm_Vector_Vector_Float_Mul(inputs[getHarmonicOrder(i)], m_vector_float, outputs[i], m_vector_size);
-		}
-    }
-	
+	}    
 };
 
 #endif

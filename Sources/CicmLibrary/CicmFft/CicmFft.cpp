@@ -78,15 +78,15 @@ Cicm_Fft::~Cicm_Fft()
 	Cicm_fft_free_handle(m_fft_handle);
 #endif
 #ifdef _WINDOWS
-	Cicm_free(m_fft_buff);
-	Cicm_free(m_fft_init);
-	Cicm_free(m_fft_spec);
+	cicm_free(m_fft_buff);
+	cicm_free(m_fft_init);
+	cicm_free(m_fft_spec);
 	Cicm_fft_free_handle(m_fft_handle);
 #endif
 #ifdef CICM_FFTW_GSL
 	Cicm_fft_free_handle(m_handle_forward);
 	Cicm_fft_free_handle(m_handle_inverse);
-	Cicm_free(m_real_vector);
-	Cicm_free(m_complex_vector);
+	cicm_free(m_real_vector);
+	cicm_free(m_complex_vector);
 #endif
 }

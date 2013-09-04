@@ -27,13 +27,13 @@
 #ifndef DEF_CICM_DEFINE
 #define DEF_CICM_DEFINE
 
-#define Cicm_Float float
-#define Cicm_Vector_Float  float*
-#define Cicm_Matrix_Float  float*
+#define float float
+#define cicm_vector_float  float*
+#define cicm_matrix_float  float*
 
-#define Cicm_Double double
-#define Cicm_Vector_Double  double*
-#define Cicm_Matrix_Double  double*
+#define double double
+#define cicm_vector_double  double*
+#define cicm_matrix_double  double*
 
 #define Cicm_Complex_Float DSPComplex
 #define Cicm_Complex_Packed_Float DSPSplitComplex
@@ -43,82 +43,82 @@
 #define Cicm_Complex_Packed_Double DSPSplitComplexD
 
 /**************** ALLOCATION *****************/
-#define	Cicm_Vector_Float_Malloc(vector, size) vector = (Cicm_Vector_Float)calloc(size, sizeof(Cicm_Float))
-#define	Cicm_Vector_Double_Malloc(vector, size) vector = (Cicm_Vector_Double)calloc(size, sizeof(Cicm_Double))
+#define	cicm_malloc_vec_f(vector, size) vector = (cicm_vector_float)calloc(size, sizeof(float))
+#define	cicm_malloc_vec_d(vector, size) vector = (cicm_vector_double)calloc(size, sizeof(double))
 
-#define	Cicm_Matrix_Float_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Float)calloc(number_of_rows * columns_size, sizeof(Cicm_Float) );
-#define	Cicm_Matrix_Double_Malloc(matrix, number_of_rows, columns_size) matrix = (Cicm_Matrix_Double)calloc(number_of_rows * columns_size, sizeof(Cicm_Double));
+#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_float)calloc(number_of_rows * columns_size, sizeof(float) );
+#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_double)calloc(number_of_rows * columns_size, sizeof(double));
 
-#define	Cicm_Complex_Packed_Float_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Float *)malloc(sizeof(Cicm_Complex_Packed_Float)); packedComplex[0].realp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float)); packedComplex[0].imagp = (Cicm_Vector_Float)malloc(size * sizeof(Cicm_Float));
+#define	Cicm_Complex_Packed_Float_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Float *)malloc(sizeof(Cicm_Complex_Packed_Float)); packedComplex[0].realp = (cicm_vector_float)malloc(size * sizeof(float)); packedComplex[0].imagp = (cicm_vector_float)malloc(size * sizeof(float));
 
-#define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (Cicm_Vector_Double)malloc(size * sizeof(Cicm_Double)); packedComplex[0].imagp = (Cicm__Vector_Double *)malloc(size * sizeof(Cicm_Double));
+#define	Cicm_Complex_Packed_Double_Malloc(packedComplex, size) packedComplex = (Cicm_Complex_Packed_Double *)malloc(sizeof(Cicm_Complex_Packed_Double)); packedComplex[0].realp = (cicm_vector_double)malloc(size * sizeof(double)); packedComplex[0].imagp = (Cicm__Vector_Double *)malloc(size * sizeof(double));
 
 /**************** FREE *****************/
-#define Cicm_Free(pointor) free(pointor); pointor = NULL;
-#define Cicm_Free_Complex_Packed(vector) free(vector[0].realp); free(vector[0].imagp);
+#define cicm_free(pointor) free(pointor); pointor = NULL;
+#define cicm_free_Complex_Packed(vector) free(vector[0].realp); free(vector[0].imagp);
 
 /**************** SET ******************/
-#define Cicm_Matrix_Float_Set(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
-#define Cicm_Matrix_Double_Set(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
+#define cicm_set_mat_f(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
+#define cicm_set_mat_d(matrix, i, j, column_size, value) matrix[i * column_size + j] = value
 
 /**************** COPY *****************/
-#define Cicm_Vector_Float_Copy(vectorSource, vectorDest, size) vDSP_mmov(vectorSource, vectorDest, size, 1, size, size)
-#define Cicm_Vector_Double_Copy(vectorSource, vectorDest, size) vDSP_mmovD(vectorSource, vectorDest, size, 1, size, size)
+#define cicm_copy_vec_vec_f(vectorSource, vectorDest, size) vDSP_mmov(vectorSource, vectorDest, size, 1, size, size)
+#define cicm_copy_vec_vec_d(vectorSource, vectorDest, size) vDSP_mmovD(vectorSource, vectorDest, size, 1, size, size)
 
-#define Cicm_Vector_Matrix_Float_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmov(vectorSource, matrixDest+ row_number * size, size, 1, size, size)
-#define Cicm_Vector_Matrix_Double_Copy(vectorSource, matrixDest, row_number, size) vDSP_mmovD(vectorSource, matrixDest+row_number * size, size, 1, size, size)
+#define cicm_copy_vec_mat_f(vectorSource, matrixDest, row_number, size) vDSP_mmov(vectorSource, matrixDest+ row_number * size, size, 1, size, size)
+#define cicm_copy_vec_mat_d(vectorSource, matrixDest, row_number, size) vDSP_mmovD(vectorSource, matrixDest+row_number * size, size, 1, size, size)
 
-#define Cicm_Matrix_Vector_Float_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmov(matrixSource+row_number * size, vectorDest, size, 1, size, size)
-#define Cicm_Matrix_Vector_Double_Copy(matrixSource, vectorDest, row_number, size) vDSP_mmovD(matrixSource+row_number * size, vectorDest, size, 1, size, size)
+#define cicm_copy_mat_vec_f(matrixSource, vectorDest, row_number, size) vDSP_mmov(matrixSource+row_number * size, vectorDest, size, 1, size, size)
+#define cicm_copy_mat_vec_d(matrixSource, vectorDest, row_number, size) vDSP_mmovD(matrixSource+row_number * size, vectorDest, size, 1, size, size)
 
 /**************** PRODUCT *************/
-#define Cicm_Matrix_Vector_Float_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_sgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1.f, matrix, column_size, vectorSource, 1, 0.f, vectorDest, 1)
-#define Cicm_Matrix_Vector_Double_Product(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_dgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1., matrix, column_size, vectorSource, 1, 0., vectorDest, 1)
+#define cicm_product_mat_vec_f(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_sgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1.f, matrix, column_size, vectorSource, 1, 0.f, vectorDest, 1)
+#define cicm_product_mat_vec_d(matrix, vectorSource, vectorDest, number_of_rows, column_size) cblas_dgemv(CblasRowMajor, CblasNoTrans, number_of_rows, column_size, 1., matrix, column_size, vectorSource, 1, 0., vectorDest, 1)
 
-#define Cicm_Matrix_Matrix_Float_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1.f, matrixOne, number_of_rowsOne, matrixTwo, number_of_rowsOne, 0.f, matrixDest, number_of_rowsOne);
-#define Cicm_Matrix_Matrix_Double_Product(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1., matrixOne, number_of_rowsOne, matrixTwo, column_sizeOne, 0., matrixDest, column_sizetwo);
+#define cicm_product_mat_mat_f(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1.f, matrixOne, number_of_rowsOne, matrixTwo, number_of_rowsOne, 0.f, matrixDest, number_of_rowsOne);
+#define cicm_product_mat_mat_d(matrixOne, matrixTwo, matrixDest, number_of_rowsOne, column_sizetwo, column_sizeOne) cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, number_of_rowsOne, column_sizetwo, column_sizeOne, 1., matrixOne, number_of_rowsOne, matrixTwo, column_sizeOne, 0., matrixDest, column_sizetwo);
 
 /**************** DOT PRODUCT *********/
-#define Cicm_Vector_Float_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotpr(vectorOne, 1, vectorTwo, 1, scalarDest, size)
-#define Cicm_Vector_Double_Dot_Product(vectorOne, vectorTwo, scalarDest, size) vDSP_dotprD(vectorOne, 1, vectorTwo, 1, scalarDest, size)
+#define cicm_dot_product_f(vectorOne, vectorTwo, scalarDest, size) vDSP_dotpr(vectorOne, 1, vectorTwo, 1, scalarDest, size)
+#define cicm_dot_product_d(vectorOne, vectorTwo, scalarDest, size) vDSP_dotprD(vectorOne, 1, vectorTwo, 1, scalarDest, size)
 
 /**************** MUL *****************/
-#define Cicm_Vector_Vector_Float_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmul(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
-#define Cicm_Vector_Vector_Double_Mul(vectorOne, vectorTwo, vectorDest, size) vDSP_vmulD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
+#define cicm_product_vec_vec_f(vectorOne, vectorTwo, vectorDest, size) vDSP_vmul(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
+#define cicm_product_vec_vec_d(vectorOne, vectorTwo, vectorDest, size) vDSP_vmulD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, size);
 
-#define Cicm_Vector_Scalar_Float_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, &scalar, vectorDest, 1, size)
-#define Cicm_Vector_Scalar_Double_Mul(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, &scalar, vectorDest, 1, size)
+#define cicm_product_vec_sca_vec_f(vectorSource, scalar, vectorDest, size) vDSP_vsmul(vectorSource, 1, &scalar, vectorDest, 1, size)
+#define cicm_product_vec_sca_vec_d(vectorSource, scalar, vectorDest, size) vDSP_vsmulD(vectorSource, 1, &scalar, vectorDest, 1, size)
 
-#define Cicm_Vector_Float_Mul(vectorOne, vectorDest, size) cblas_sdot(size, vectorOne, 1, vectorDest, 1)
-#define Cicm_Vector_Double_Mul(vectorOne, vectorDest, size) cblas_ddot(size, vectorOne, 1, vectorDest, 1)
+#define cicm_product_vec_f(vectorOne, vectorDest, size) cblas_sdot(size, vectorOne, 1, vectorDest, 1)
+#define cicm_product_vec_d(vectorOne, vectorDest, size) cblas_ddot(size, vectorOne, 1, vectorDest, 1)
 
 /**************** ADD *****************/
-#define Cicm_Vector_Float_Add(vectorOne, vectorDest, size) cblas_saxpy(size, 1.f, vectorOne, 1, vectorDest, 1)
-#define Cicm_Vector_Double_Add(vectorOne, vectorDest, size) cblas_daxpy(size, 1., vectorOne, 1, vectorDest, 1)
+#define cicm_add_vec_vec_f(vectorOne, vectorDest, size) cblas_saxpy(size, 1.f, vectorOne, 1, vectorDest, 1)
+#define cicm_add_vec_vec_d(vectorOne, vectorDest, size) cblas_daxpy(size, 1., vectorOne, 1, vectorDest, 1)
 
 /**************** SUM *****************/
-#define Cicm_Vector_Float_Sum(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
-#define Cicm_Vector_Double_Sum(source1, source2, dest, length) vDSP_vaddD(source1, 1, source2, 1, dest, 1, length)
+#define cicm_sum_vector_f(source1, source2, dest, length) vDSP_vadd(source1, 1, source2, 1, dest, 1, length)
+#define cicm_sum_vector_d(source1, source2, dest, length) vDSP_vaddD(source1, 1, source2, 1, dest, 1, length)
 
-#define Cicm_Vector_Scalar_Float_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsadd(vectorSource, 1, scalar, vectorDest, 1, size);
-#define Cicm_Vector_Scalar_Double_Sum(vectorSource, scalar, vectorDest, size) vDSP_vsaddD(vectorSource, 1, scalar, vectorDest, 1, size);
+#define cicm_add_sca_vec_vec_f(vectorSource, scalar, vectorDest, size) vDSP_vsadd(vectorSource, 1, scalar, vectorDest, 1, size);
+#define cicm_add_sca_vec_vec_d(vectorSource, scalar, vectorDest, size) vDSP_vsaddD(vectorSource, 1, scalar, vectorDest, 1, size);
 
 
 /************* MUL AND ADD ************/
 
-#define Cicm_Vector_Vector_Float_Mul_And_Add(vectorOne, vectorTwo, vectorDest, size) vDSP_vma(vectorOne, 1, vectorTwo, 1, vectorDest, 1, vectorDest, 1, size)
-#define Cicm_Vector_Vector_Double_Mul_And_Add(vectorOne, vectorTwo, vectorDest, size) vDSP_vmaD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, vectorDest, 1, size)
+#define cicm_product_sum_vec_vec_vec_f(vectorOne, vectorTwo, vectorDest, size) vDSP_vma(vectorOne, 1, vectorTwo, 1, vectorDest, 1, vectorDest, 1, size)
+#define cicm_product_sum_vec_vec_vec_d(vectorOne, vectorTwo, vectorDest, size) vDSP_vmaD(vectorOne, 1, vectorTwo, 1, vectorDest, 1, vectorDest, 1, size)
 
-#define Cicm_Vector_Scalar_Float_Mul_And_Add(vectorOne, scalar, vectorDest, size) vDSP_vmsa(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
-#define Cicm_Vector_Scalar_Double_Mul_And_Add(vectorOne, scalar, vectorDest, size) vDSP_vmsaD(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
+#define cicm_product_sum_vec_sca_vec_f(vectorOne, scalar, vectorDest, size) vDSP_vmsa(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
+#define cicm_product_sum_vec_sca_vec_d(vectorOne, scalar, vectorDest, size) vDSP_vmsaD(vectorOne, 1, vectorDest, 1, &scalar, vectorDest, 1, size);
 
 /**************** CLIP  ***************/
-#define Cicm_Vector_Float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
-#define Cicm_Vector_Double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, low, high, vectorDest, 1, size);
+#define cicm_vector_float_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclip(vectorsource, 1, low, high, vectorDest, 1, size);
+#define cicm_vector_double_Clip(vectorsource, low, high, vectorDest, size) vDSP_vclipD(vectorsource, 1, low, high, vectorDest, 1, size);
 
 /**************** CLEAR ***************/
-#define Cicm_Vector_Float_Clear(source, length) vDSP_vclr(source, 1, length)
-#define Cicm_Vector_Double_Clear(source, length) vDSP_vclrD(source, 1, length)
+#define cicm_clear_vec_f(source, length) vDSP_vclr(source, 1, length)
+#define cicm_clear_vec_d(source, length) vDSP_vclrD(source, 1, length)
 
 /* Matrix Transpose */
  #define  Cicm_Matrix_Transpose_Float(matrixSource, matrixDest, rowDest, columnDest) vDSP_mtrans(&matrixSource[0][0], 1, &matrixDest[0][0], 1, rowDest, columnDest);
@@ -127,7 +127,7 @@
 /***/
 
 #define Cicm_fft_init_handle(order) vDSP_create_fftsetup(order, FFT_RADIX2)
-#define	Cicm_free_packed(pointeur) free(pointeur[0].realp) free(pointeur[0].imagp)
+#define	cicm_free_packed(pointeur) free(pointeur[0].realp) free(pointeur[0].imagp)
 
 #define Cicm_fft_free_handle vDSP_destroy_fftsetup
 
@@ -138,16 +138,16 @@
 #define Cicm_fft_inverse(fft_handle, complex, order) vDSP_fft_zrip(fft_handle, complex, 1, order, FFT_INVERSE)
 
 /* Sinus and Cosinus */
-#define Cicm_Vector_Float_Cosinus vvcosf
-#define Cicm_Vector_Float_Sinus vvsinf
-#define Cicm_Vector_Double_Cosinus vvcos
-#define Cicm_Vector_Double_Sinus vvsin
-#define Cicm_Vector_Float_SinCos(sinVector, cosVector, angleVector, size) vvsincosf(sinVector, cosVector, angleVector, &size)
-#define Cicm_Vector_Double_SinCos(sinVector, cosVector, angleVector, size) vvsincos(sinVector, cosVector, angleVector, &size)
+#define cicm_vector_float_Cosinus vvcosf
+#define cicm_vector_float_Sinus vvsinf
+#define cicm_vector_double_Cosinus vvcos
+#define cicm_vector_double_Sinus vvsin
+#define cicm_vector_float_SinCos(sinVector, cosVector, angleVector, size) vvsincosf(sinVector, cosVector, angleVector, &size)
+#define cicm_vector_double_SinCos(sinVector, cosVector, angleVector, size) vvsincos(sinVector, cosVector, angleVector, &size)
 
 #endif
 
-#ifdef CICM_DOUBLE
+#ifdef double
 
 #define Cicm_Signal float
 #define Cicm_Packed DSPSplitComplex
@@ -158,7 +158,7 @@
 #define	Cicm_packed_malloc(pointeur, length) pointeur.realp = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal)); pointeur.imagp = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal));
 
 #define Cicm_fft_init_handle(order) vDSP_create_fftsetup(order, FFT_RADIX2)
-#define	Cicm_free free
+#define	cicm_free free
 #define Cicm_fft_free_handle vDSP_destroy_fftsetup
 
 #define Cicm_signal_copy(source, dest, length) vDSP_mmov(source, dest, length, 1, length, length)
@@ -176,7 +176,7 @@
 
 #include <ipps.h>
 
-#ifdef CICM_FLOAT
+#ifdef float
 
 #define Cicm_Signal			Ipp32f
 #define Cicm_Packed			Ipp32f
@@ -187,7 +187,7 @@
 #define	Cicm_packed_malloc(pointeur, length) pointeur = ippsMalloc_32f(length)
 
 #define	Cicm_buffer_malloc ippsMalloc_8u
-#define	Cicm_free ippsFree
+#define	cicm_free ippsFree
 
 #define Cicm_signal_clear(source, length) ippsZero_32f(source, length)
 #define Cicm_signal_add(source1, source2, dest, length) ippsAdd_32f(source1, source2, dest, length)
@@ -202,7 +202,7 @@
 #define Cicm_fft_free_handle ippsFFTFree_R_32f
 #endif
 
-#ifdef CICM_DOUBLE
+#ifdef double
 
 #define Cicm_Signal			Ipp64f
 #define Cicm_Packed			Ipp64f
@@ -213,7 +213,7 @@
 #define	Cicm_packed_malloc(pointeur, length) pointeur = ippsMalloc_64f(length)
 
 #define	Cicm_buffer_malloc ippsMalloc_8u
-#define	Cicm_free ippsFree
+#define	cicm_free ippsFree
 
 #define Cicm_signal_clear(source, length) ippsZero_64f(source, length)
 #define Cicm_signal_add(source1, source2, dest, length) ippsAdd_64f(source1, source2, dest, length)
@@ -235,7 +235,7 @@
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
 
-#ifdef CICM_FLOAT
+#ifdef float
 #include <fftw3.h>
 static void packed_mul(float* x, float* y, float* out, long aLength)
 {
@@ -260,7 +260,7 @@ static void packed_mul(float* x, float* y, float* out, long aLength)
 
 #define	Cicm_signal_malloc(pointeur, length) pointeur = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal))
 #define	Cicm_packed_malloc(pointeur, length) pointeur = (Cicm_Packed *)malloc(length * sizeof(Cicm_Packed))
-#define	Cicm_free free
+#define	cicm_free free
 
 #define Cicm_signal_clear(source, length) gsl_vector_float_set_zero(&gsl_vector_float_view_array(source, length).vector)
 #define Cicm_signal_add(source1, dest, none, length) gsl_vector_float_add(&gsl_vector_float_view_array(dest, length).vector,&gsl_vector_float_view_array(source1, length).vector)
@@ -278,7 +278,7 @@ static void packed_mul(float* x, float* y, float* out, long aLength)
 
 #endif
 
-#ifdef CICM_DOUBLE
+#ifdef double
 static void packed_mul(double* x, double* y, double* out, long aLength)
 {
 	double a, b, c, d;
@@ -302,7 +302,7 @@ static void packed_mul(double* x, double* y, double* out, long aLength)
 
 #define	Cicm_signal_malloc(pointeur, length) pointeur = (Cicm_Signal *)malloc(length * sizeof(Cicm_Signal))
 #define	Cicm_packed_malloc(pointeur, length) pointeur = (Cicm_Packed *)malloc(length * sizeof(Cicm_Packed))
-#define	Cicm_free free
+#define	cicm_free free
 
 #define Cicm_signal_clear(source, length) gsl_vector_set_zero(&gsl_vector_view_array(source, length).vector)
 #define Cicm_signal_add(source1, dest, none, length) gsl_vector_add(&gsl_vector_view_array(dest, length).vector,&gsl_vector_view_array(source1, length).vector)

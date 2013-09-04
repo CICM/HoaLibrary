@@ -54,6 +54,9 @@ using namespace std;
 #define NUMBEROFCIRCLEPOINTS 36000
 #define NUMBEROFCIRCLEPOINTS_UI 360
 
+// A mieux definir //
+#define CICM_2PI_RATIO CICM_2PI * (double)NUMBEROFCIRCLEPOINTS
+#define CICM_1OVER2PI_RATIO 5729.41879637
 
 // check maxversion
 #define MAXVERSION maxversion()
@@ -66,12 +69,6 @@ enum
 {
     Hoa_Polar  = 0,
     Hoa_Cartesian
-};
-
-enum
-{
-    Hoa_Basic  = 0,
-    Hoa_Split
 };
 
 typedef struct  coordinatesPolar
@@ -99,6 +96,11 @@ class Tools
 public:
 	Tools();
 	~Tools();
+    
+    /************************************************************************************/
+    /*********************************** CLIPPING ***************************************/
+    /************************************************************************************/
+    
 	inline static double clip(const double aValue, const double aMinimum = 0, const double aMaximum = 1)
 	{
 		if(aValue < aMinimum)
@@ -106,14 +108,6 @@ public:
 		else if(aValue > aMaximum)
 			return aMaximum;
 		return aValue;
-	}
-    
-    static void clip(double *aValue, double aMinimum = 0, double aMaximum = 1)
-	{
-		if(*aValue < aMinimum)
-			*aValue = aMinimum;
-		else if(*aValue > aMaximum)
-			*aValue = aMaximum;
 	}
 
 	inline static double clip_min(double aValue, double aMinimum = 0)
@@ -124,6 +118,60 @@ public:
 	inline static double clip_max(double aValue, double aMaximum = 0)
 	{
         return (aValue < aMaximum) ? aValue : aMaximum;
+	}
+    
+    /* ??????????????????
+    static void clip(double* aValue, double aMinimum = 0, double aMaximum = 1)
+	{
+		if(*aValue < aMinimum)
+			*aValue = aMinimum;
+		else if(*aValue > aMaximum)
+			*aValue = aMaximum;
+	}
+    */
+    
+    static inline void clip(double* vector, long aSize, double aMinimum = 0., double aMaximum = 1.)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
+	}
+    
+    static inline void clip(float* vector, long aSize, float aMinimum = 0.f, double aMaximum = 1.f)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
+	}
+    
+    static inline void clip(int* vector, long aSize, int aMinimum = 0, int aMaximum = 1)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
+	}
+    
+    static inline void clip(long* vector, long aSize, long aMinimum = 0, long aMaximum = 1)
+	{
+        for(int i = 0; i < aSize; i++)
+        {
+            if(vector[i] < aMinimum)
+                vector[i] = aMinimum;
+            else if(vector[i] > aMaximum)
+                vector[i] = aMaximum;
+        }
 	}
 
     /*
@@ -151,6 +199,31 @@ public:
 		}
 		return aValue;
 	}
+    
+    /************************************************************************************/
+    /*********************************** SUM ********************************************/
+    /************************************************************************************/
+    
+    static double sum(double* input, long size)
+	{
+        double sum = 0;
+        for(int i = 0; i < size; i++)
+        {
+            sum += input[i];
+        }
+        return sum;
+    }
+    
+    static float sum(float* input, long size)
+	{
+        float sum = 0;
+        for(int i = 0; i < size; i++)
+        {
+            sum += input[i];
+        }
+        return sum;
+    }
+    
 
 	inline static double log2(double n)
 	{
@@ -290,7 +363,7 @@ public:
     
     static bool isInsideRad(double radian, double loRad, double hiRad)
 	{
-        return isInside(radianWrap(radian-loRad), double(0), radianWrap(hiRad-loRad));
+        return isInside(radian_wrap(radian-loRad), double(0), radian_wrap(hiRad-loRad));
 	}
     
     static bool isInsideDeg(double degree, double loDeg, double hiDeg)
@@ -316,22 +389,22 @@ public:
     
     static double radianInterp(double _step, double _startRad, double _endRad)
     {
-        _startRad = radianWrap(_startRad);
-        _endRad   = radianWrap(_endRad);
+        _startRad = radian_wrap(_startRad);
+        _endRad   = radian_wrap(_endRad);
         
-        if ( radianWrap(_endRad - _startRad) <= CICM_PI ) // anti-clockwise
+        if ( radian_wrap(_endRad - _startRad) <= CICM_PI ) // anti-clockwise
         {
             if (_endRad - _startRad >= 0)
-                return radianWrap( _startRad + _step*(_endRad - _startRad) );
+                return radian_wrap( _startRad + _step*(_endRad - _startRad) );
             else
-                return radianWrap( _startRad + _step*( (_endRad+CICM_2PI) - _startRad) );
+                return radian_wrap( _startRad + _step*( (_endRad+CICM_2PI) - _startRad) );
         }
         else // clockwise
         {
             if (_endRad - _startRad <= 0)
-                return radianWrap( _startRad + _step*(_endRad - _startRad) );
+                return radian_wrap( _startRad + _step*(_endRad - _startRad) );
             else
-                return radianWrap( _startRad - _step*( (_startRad+CICM_2PI) - _endRad) );
+                return radian_wrap( _startRad - _step*( (_startRad+CICM_2PI) - _endRad) );
         }
     }
     
@@ -409,7 +482,7 @@ public:
         return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
     }
     
-    static inline double radianWrap(const double anAngle)
+    static inline double radian_wrap(const double anAngle)
     {
         double angle = anAngle;
         while(angle < 0.)
@@ -419,12 +492,17 @@ public:
         
         return angle;
     }
-    
+    /*
+    static inline double radian_wrap(const double anAngle)
+    {
+        return fmod(anAngle, CICM_2PI) + CICM_PI;
+    }
+    */
     static double radianDistance(double anAngle1, double anAngle2)
     {
         double distance;
-        anAngle1 = radianWrap(anAngle1);
-        anAngle2 = radianWrap(anAngle2);
+        anAngle1 = radian_wrap(anAngle1);
+        anAngle2 = radian_wrap(anAngle2);
         if(anAngle1 > anAngle2)
             distance = anAngle1 - anAngle2;
         else
@@ -436,8 +514,8 @@ public:
     static double radianClosestDistance(double anAngle1, double anAngle2)
     {
         double minRad, maxRad;
-        anAngle1 = radianWrap(anAngle1);
-        anAngle2 = radianWrap(anAngle2);
+        anAngle1 = radian_wrap(anAngle1);
+        anAngle2 = radian_wrap(anAngle2);
         minRad = min(anAngle1, anAngle2);
         maxRad = max(anAngle1, anAngle2);
         

@@ -20,7 +20,7 @@
 #ifndef DEF_CICM_ENVELOPE
 #define DEF_CICM_ENVELOPE
 
-#include "../CicmSignal.h"
+#include "../CicmDefine.h"
 
 enum
 {
@@ -46,8 +46,8 @@ class CicmEnvelope
 private:
 	long                    m_size;
 	long                    m_type;
-	Cicm_Vector_Double      m_buffer;
-    Cicm_Vector_Float       m_buffer_float;
+	cicm_vector_double      m_buffer;
+    cicm_vector_float       m_buffer_float;
     
     void normalize();
 public:
@@ -87,14 +87,14 @@ public:
         return m_buffer[(long)(aPosition * (m_size-1))];
     }
     
-    inline void applyEnvelope(double* inputs, double* output)
+    inline void applyEnvelope(double* inputs)
     {
-        Cicm_Vector_Vector_Double_Mul(inputs, m_buffer, output, m_size);
+        cicm_product_vec_d(m_buffer, inputs, m_size);
     }
     
-    inline void applyEnvelope(float* inputs, float* output)
+    inline void applyEnvelope(float* inputs)
     {
-        Cicm_Vector_Vector_Float_Mul(inputs, m_buffer_float, output, m_size);
+        cicm_product_vec_f(m_buffer_float, inputs, m_size);
     }
 	
 	

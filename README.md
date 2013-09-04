@@ -10,8 +10,9 @@
 
 ### Dependencies : 
 
-Mac OsX : Apple Accelerate <br />
-Windows : Intel Composer XE
+ALL PLATEFORM : BLAS and ATLAS <br />
+You could use GSL, Apple Accelerate or Intel Composer XE
+
 
 ### Licence : 
 

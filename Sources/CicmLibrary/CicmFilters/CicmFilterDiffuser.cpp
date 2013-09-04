@@ -29,7 +29,7 @@ FilterDiffuser::FilterDiffuser(long aBufferSize, double aCoefficient) : Filter()
 {
    
 	m_buffer_size_max = Tools::clip_min(aBufferSize, 2);
-    Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
+    cicm_malloc_vec_d(m_buffer, m_buffer_size_max);
 	m_buffer = new double[m_buffer_size_max];
 	m_buffer_size = m_buffer_size_max;
 
@@ -49,8 +49,8 @@ double FilterDiffuser::getCoefficient()
 
 void FilterDiffuser::setBufferSizeMax(long aBufferSize)
 {
-	Cicm_Free(m_buffer);
-    Cicm_Vector_Double_Malloc(m_buffer, m_buffer_size_max);
+	cicm_free(m_buffer);
+    cicm_malloc_vec_d(m_buffer, m_buffer_size_max);
 	m_buffer = new double[m_buffer_size_max];
 	m_buffer_size = m_buffer_size_max;
     m_ramp = 0;
@@ -75,5 +75,5 @@ long FilterDiffuser::getBufferSize()
 
 FilterDiffuser::~FilterDiffuser()
 {
-	Cicm_Free(m_buffer);
+	cicm_free(m_buffer);
 }

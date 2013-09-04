@@ -26,7 +26,7 @@
 #ifndef DEF_FFT
 #define DEF_FFT
 
-#include "../CicmSignal.h"
+#include "../CicmDefine.h"
 
 class Cicm_Fft
 {
@@ -58,8 +58,8 @@ private:
 	
 public:
 	Cicm_Fft(long aWindowSize = 1024);
-	inline void forward(Cicm_Vector_Float aRealVector, Cicm_Complex_Packed_Float* anPackedVector);
-	inline void inverse(Cicm_Complex_Packed_Float* anPackedVector, Cicm_Vector_Float aRealVector);
+	inline void forward(cicm_vector_float aRealVector, Cicm_Complex_Packed_Float* anPackedVector);
+	inline void inverse(Cicm_Complex_Packed_Float* anPackedVector, cicm_vector_float aRealVector);
 	long	getWindowSize();
 	long	getArraySize();
 	long	getOrder();
@@ -67,7 +67,7 @@ public:
 	~Cicm_Fft();
 };
 
-inline void Cicm_Fft::forward(Cicm_Vector_Float aRealVector, Cicm_Complex_Packed_Float *anPackedVector)
+inline void Cicm_Fft::forward(cicm_vector_float aRealVector, Cicm_Complex_Packed_Float *anPackedVector)
 {
 #ifdef CICM_VDSP
 	vDSP_ctoz((Cicm_Complex_Float *)aRealVector, 2, anPackedVector, 1, m_array_size); 
@@ -83,7 +83,7 @@ inline void Cicm_Fft::forward(Cicm_Vector_Float aRealVector, Cicm_Complex_Packed
 #endif
 }
 
-inline void Cicm_Fft::inverse(Cicm_Complex_Packed_Float *anPackedVector, Cicm_Vector_Float aRealVector)
+inline void Cicm_Fft::inverse(Cicm_Complex_Packed_Float *anPackedVector, cicm_vector_float aRealVector)
 {
 #ifdef CICM_VDSP
 	Cicm_fft_inverse(m_fft_handle, anPackedVector, m_order);

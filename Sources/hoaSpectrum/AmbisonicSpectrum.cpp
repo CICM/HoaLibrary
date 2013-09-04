@@ -47,36 +47,36 @@ void AmbisonicSpectrum::setNumberOfBands(long aNumberOfBands)
     {
         m_filter.clear();
         if(m_filtered_signal_double)
-            Cicm_Free(m_filtered_signal_double);
+            cicm_free(m_filtered_signal_double);
         if(m_filtered_signal_float)
-            Cicm_Free(m_filtered_signal_float);
+            cicm_free(m_filtered_signal_float);
         if(m_amplitude)
-            Cicm_Free(m_amplitude);
+            cicm_free(m_amplitude);
         if(m_frequency)
-            Cicm_Free(m_frequency);
+            cicm_free(m_frequency);
         if(m_abscissa)
-            Cicm_Free(m_abscissa);
+            cicm_free(m_abscissa);
         if(m_ordinate)
-            Cicm_Free(m_ordinate);
+            cicm_free(m_ordinate);
         if(m_temp_amplitude_value)
-            Cicm_Free(m_temp_amplitude_value);
+            cicm_free(m_temp_amplitude_value);
         
          for(int i = 0; i < aNumberOfBands; i++)
             m_filter.push_back(vector <FilterBiquad*>());
         
-        m_filtered_signal_double = new Cicm_Vector_Double*[m_filter.size()];
-        m_filtered_signal_float = new Cicm_Vector_Float*[m_filter.size()];
+        m_filtered_signal_double = new cicm_vector_double*[m_filter.size()];
+        m_filtered_signal_float = new cicm_vector_float*[m_filter.size()];
         
         for(int i = 0; i < m_filter.size(); i++)
         {
             m_filtered_signal_double[i] = NULL;
             m_filtered_signal_float[i]  = NULL;
         }
-        Cicm_Vector_Double_Malloc(m_amplitude, m_filter.size());
-        Cicm_Vector_Double_Malloc(m_frequency, m_filter.size());
-        Cicm_Vector_Double_Malloc(m_abscissa, m_filter.size());
-        Cicm_Vector_Double_Malloc(m_ordinate, m_filter.size());
-        Cicm_Vector_Double_Malloc(m_temp_amplitude_value, m_filter.size());
+        cicm_malloc_vec_d(m_amplitude, m_filter.size());
+        cicm_malloc_vec_d(m_frequency, m_filter.size());
+        cicm_malloc_vec_d(m_abscissa, m_filter.size());
+        cicm_malloc_vec_d(m_ordinate, m_filter.size());
+        cicm_malloc_vec_d(m_temp_amplitude_value, m_filter.size());
     }
     initializeFrequencyBands();
     setNumberOfLoudspeakers(m_number_of_loudspeakers);
@@ -87,18 +87,18 @@ void AmbisonicSpectrum::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool
 {
     Planewaves::setNumberOfLoudspeakers(aNumberOfLoudspeakers, standardOnOff);
     if(m_loudspeakers_values);
-        Cicm_Free(m_loudspeakers_values);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_values, m_number_of_loudspeakers);
+        cicm_free(m_loudspeakers_values);
+    cicm_malloc_vec_d(m_loudspeakers_values, m_number_of_loudspeakers);
     for(int i = 0; i < m_filter.size(); i++)
     {
         m_filter[i].clear();
         if(m_filtered_signal_double[i])
-            Cicm_Free(m_filtered_signal_double[i]);
+            cicm_free(m_filtered_signal_double[i]);
         if(m_filtered_signal_float[i])
-            Cicm_Free(m_filtered_signal_float[i]);
+            cicm_free(m_filtered_signal_float[i]);
         
-        m_filtered_signal_double[i] = new Cicm_Vector_Double[m_number_of_loudspeakers];
-        m_filtered_signal_float[i]  = new Cicm_Vector_Float[m_number_of_loudspeakers];
+        m_filtered_signal_double[i] = new cicm_vector_double[m_number_of_loudspeakers];
+        m_filtered_signal_float[i]  = new cicm_vector_float[m_number_of_loudspeakers];
         for(int j = 0; j < m_number_of_loudspeakers; j++)
         {
             m_filter[i].push_back(new FilterBiquad(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));
@@ -206,12 +206,12 @@ void AmbisonicSpectrum::setVectorSize(long aVectorSize)
         {
             m_filter[i][j]->setVectorSize(m_vector_size);
             if(m_filtered_signal_double[i][j])
-                Cicm_Free(m_filtered_signal_double[i][j]);
+                cicm_free(m_filtered_signal_double[i][j]);
             if(m_filtered_signal_float[i][j])
-                Cicm_Free(m_filtered_signal_float[i][j]);
+                cicm_free(m_filtered_signal_float[i][j]);
             
-            Cicm_Vector_Double_Malloc(m_filtered_signal_double[i][j], m_vector_size);
-            Cicm_Vector_Float_Malloc(m_filtered_signal_float[i][j], m_vector_size);
+            cicm_malloc_vec_d(m_filtered_signal_double[i][j], m_vector_size);
+            cicm_malloc_vec_f(m_filtered_signal_float[i][j], m_vector_size);
         }
     }
 }
@@ -319,20 +319,20 @@ AmbisonicSpectrum::~AmbisonicSpectrum()
     m_filter.clear();
     
     if(m_filtered_signal_double)
-        Cicm_Free(m_filtered_signal_double);
+        cicm_free(m_filtered_signal_double);
     if(m_filtered_signal_float)
-        Cicm_Free(m_filtered_signal_float);
+        cicm_free(m_filtered_signal_float);
     if(m_amplitude)
-        Cicm_Free(m_amplitude);
+        cicm_free(m_amplitude);
     if(m_frequency)
-        Cicm_Free(m_frequency);
+        cicm_free(m_frequency);
     if(m_abscissa)
-        Cicm_Free(m_abscissa);
+        cicm_free(m_abscissa);
     if(m_ordinate)
-        Cicm_Free(m_ordinate);
+        cicm_free(m_ordinate);
     if(m_loudspeakers_values)
-        Cicm_Free(m_loudspeakers_values);
+        cicm_free(m_loudspeakers_values);
     if(m_temp_amplitude_value)
-        Cicm_Free(m_temp_amplitude_value);    
+        cicm_free(m_temp_amplitude_value);    
 }
 

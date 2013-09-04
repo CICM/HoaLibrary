@@ -25,8 +25,6 @@
 
 #include "MaxEncoder.h"
 
-int postons = 0;
-
 typedef struct _hoa_encoder 
 {
 	t_pxobject			f_ob;
@@ -62,13 +60,6 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_encoder_class = c;
-    
-    if(!postons)
-    {
-        post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-        post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
-        postons = 1;
-    }
 
 	return 0;
 }
@@ -79,7 +70,7 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 	if (x)
 	{		
 		x->f_ambi_max   = new MaxEncoder((t_hoa_object *)x, argc, argv);
-		x->f_ambi_encoder = new AmbisonicEncoder(x->f_ambi_max->getOrder(), Hoa_Basic, sys_getblksize());
+		x->f_ambi_encoder = new AmbisonicEncoder(x->f_ambi_max->getOrder(), sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_ambi_encoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_ambi_encoder->getNumberOfOutputs(); i++)

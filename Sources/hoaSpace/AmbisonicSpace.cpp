@@ -86,11 +86,11 @@ void AmbisonicSpace::setVectorSize(long aVectorSize)
         m_lines[i]->setVectorSize(m_vector_size);
     }
     if(m_vector_double)
-		Cicm_Free(m_vector_double);
+		cicm_free(m_vector_double);
 	if(m_vector_float)
-		Cicm_Free(m_vector_float);
-    Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
-	Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
+		cicm_free(m_vector_float);
+    cicm_malloc_vec_f(m_vector_float, m_vector_size);
+	cicm_malloc_vec_d(m_vector_double, m_vector_size);
 }
 
 void AmbisonicSpace::setSamplingRate(long aSamplingRate)
@@ -133,7 +133,7 @@ AmbisonicSpace::~AmbisonicSpace()
 {
 	m_lines.clear();
     if(m_vector_double)
-		Cicm_Free(m_vector_double);
+		cicm_free(m_vector_double);
 	if(m_vector_float)
-		Cicm_Free(m_vector_float);
+		cicm_free(m_vector_float);
 }

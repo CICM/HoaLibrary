@@ -120,6 +120,7 @@ t_max_err hoa_optim_optim(t_hoa_optim *x, t_object *attr, long argc, t_atom *arg
         x->f_optim_mode = gensym("inPhase");
     else
         x->f_optim_mode = gensym("basic");
+    
     return NULL;
 }
 

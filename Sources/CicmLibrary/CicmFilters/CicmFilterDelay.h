@@ -27,7 +27,7 @@ class CicmFilterDelay : public Filter
 	private:
 	
 	long                m_size;
-    Cicm_Vector_Double  m_buffer;
+    cicm_vector_double  m_buffer;
 	long                m_ramp;
 	
 	public:

@@ -81,12 +81,12 @@ void AmbisonicProjector::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
     Ambisonic::m_number_of_outputs = Planewaves::m_number_of_outputs;
     
     if(m_decoder_matrix_float)
-        Cicm_Free(m_decoder_matrix_float);
+        cicm_free(m_decoder_matrix_float);
     if(m_decoder_matrix_double)
-        Cicm_Free(m_decoder_matrix_double);
+        cicm_free(m_decoder_matrix_double);
     
-    Cicm_Matrix_Float_Malloc(m_decoder_matrix_float, m_number_of_loudspeakers, m_number_of_harmonics);
-    Cicm_Matrix_Double_Malloc(m_decoder_matrix_double, m_number_of_loudspeakers, m_number_of_harmonics);
+    cicm_malloc_mat_f(m_decoder_matrix_float, m_number_of_loudspeakers, m_number_of_harmonics);
+    cicm_malloc_mat_d(m_decoder_matrix_double, m_number_of_loudspeakers, m_number_of_harmonics);
     computeMatrix();
 }
 
@@ -96,33 +96,33 @@ void AmbisonicProjector::setVectorSize(long aVectorSize)
     Ambisonic::setVectorSize(aVectorSize);
     
     if(m_input_matrix_float)
-        Cicm_Free(m_input_matrix_float);
+        cicm_free(m_input_matrix_float);
     if(m_input_matrix_double)
-        Cicm_Free(m_input_matrix_double);
+        cicm_free(m_input_matrix_double);
     if(m_output_matrix_float)
-        Cicm_Free(m_output_matrix_float);
+        cicm_free(m_output_matrix_float);
     if(m_output_matrix_double)
-        Cicm_Free(m_output_matrix_double);
+        cicm_free(m_output_matrix_double);
     
-    Cicm_Matrix_Float_Malloc(m_input_matrix_float, m_number_of_harmonics, Ambisonic::m_vector_size);
-    Cicm_Matrix_Double_Malloc(m_input_matrix_double, m_number_of_harmonics, Ambisonic::m_vector_size);
-    Cicm_Matrix_Float_Malloc(m_output_matrix_float, m_number_of_loudspeakers, Ambisonic::m_vector_size);
-    Cicm_Matrix_Double_Malloc(m_output_matrix_double, m_number_of_loudspeakers, Ambisonic::m_vector_size);
+    cicm_malloc_mat_f(m_input_matrix_float, m_number_of_harmonics, Ambisonic::m_vector_size);
+    cicm_malloc_mat_d(m_input_matrix_double, m_number_of_harmonics, Ambisonic::m_vector_size);
+    cicm_malloc_mat_f(m_output_matrix_float, m_number_of_loudspeakers, Ambisonic::m_vector_size);
+    cicm_malloc_mat_d(m_output_matrix_double, m_number_of_loudspeakers, Ambisonic::m_vector_size);
 }
 
 AmbisonicProjector::~AmbisonicProjector()
 {
     if(m_decoder_matrix_float)
-        Cicm_Free(m_decoder_matrix_float);
+        cicm_free(m_decoder_matrix_float);
     if(m_decoder_matrix_double)
-        Cicm_Free(m_decoder_matrix_double);
+        cicm_free(m_decoder_matrix_double);
     if(m_input_matrix_float)
-        Cicm_Free(m_input_matrix_float);
+        cicm_free(m_input_matrix_float);
     if(m_input_matrix_double)
-        Cicm_Free(m_input_matrix_double);
+        cicm_free(m_input_matrix_double);
     if(m_output_matrix_float)
-        Cicm_Free(m_output_matrix_float);
+        cicm_free(m_output_matrix_float);
     if(m_output_matrix_double)
-        Cicm_Free(m_output_matrix_double);
+        cicm_free(m_output_matrix_double);
 }
 

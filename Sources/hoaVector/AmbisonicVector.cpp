@@ -31,8 +31,8 @@ AmbisonicVector::AmbisonicVector(long aNumberOfLoudspeakers, long aVectorSize) :
     m_vector_float = NULL;
     m_vector_double = NULL;
     
-    Cicm_Vector_Double_Malloc(m_loudspeakers_double, m_number_of_loudspeakers);
-    Cicm_Vector_Float_Malloc(m_loudspeakers_float, m_number_of_loudspeakers);
+    cicm_malloc_vec_d(m_loudspeakers_double, m_number_of_loudspeakers);
+    cicm_malloc_vec_f(m_loudspeakers_float, m_number_of_loudspeakers);
 }
 
 std::string AmbisonicVector::getVectorName(long anIndex)
@@ -51,19 +51,19 @@ void AmbisonicVector::setVectorSize(long aVectorSize)
 {
 	Planewaves::setVectorSize(aVectorSize);
 	if(m_vector_double)
-		Cicm_Free(m_vector_double);
+		cicm_free(m_vector_double);
 	if(m_vector_float)
-		Cicm_Free(m_vector_float);
-	Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
-	Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
+		cicm_free(m_vector_float);
+	cicm_malloc_vec_f(m_vector_float, m_vector_size);
+	cicm_malloc_vec_d(m_vector_double, m_vector_size);
 }
 
 AmbisonicVector::~AmbisonicVector()
 {
-    Cicm_Free(m_loudspeakers_double);
-    Cicm_Free(m_loudspeakers_float);
+    cicm_free(m_loudspeakers_double);
+    cicm_free(m_loudspeakers_float);
     if(m_vector_double)
-		Cicm_Free(m_vector_double);
+		cicm_free(m_vector_double);
 	if(m_vector_float)
-		Cicm_Free(m_vector_float);
+		cicm_free(m_vector_float);
 }

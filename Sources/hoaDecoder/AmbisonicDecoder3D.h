@@ -40,14 +40,14 @@ class AmbisonicDecoder3D : public Ambisonic3D
 	
 private:
     bool                m_shape;
-    Cicm_Matrix_Double  m_decoder_matrix_double;
-    Cicm_Matrix_Float   m_decoder_matrix_float;
+    cicm_matrix_double  m_decoder_matrix_double;
+    cicm_matrix_float   m_decoder_matrix_float;
     
-    Cicm_Matrix_Double  m_harmonics_vector_double;
-    Cicm_Vector_Float   m_harmonics_vector_float;
+    cicm_matrix_double  m_harmonics_vector_double;
+    cicm_vector_float   m_harmonics_vector_float;
     
-    Cicm_Matrix_Double  m_outputs_vector_double;
-    Cicm_Vector_Float   m_outputs_vector_float;
+    cicm_matrix_double  m_outputs_vector_double;
+    cicm_vector_float   m_outputs_vector_float;
     
     void computeMatrices();
 public:
@@ -66,12 +66,12 @@ public:
     
     inline void process(const float* anInput, float* anOutput)
     {
-       Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
+       cicm_product_mat_vec_f(m_decoder_matrix_float, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     inline void process(const double* anInput, double* anOutput)
     {
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_product_mat_vec_d(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     /************************************* In Place *************************************/
@@ -79,14 +79,14 @@ public:
     
     inline void process(float* anInputOutput)
     {
-        Cicm_Vector_Float_Copy(anInputOutput, m_harmonics_vector_float, m_number_of_harmonics);
-        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, m_harmonics_vector_float, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_copy_vec_vec_f(anInputOutput, m_harmonics_vector_float, m_number_of_harmonics);
+        cicm_product_mat_vec_f(m_decoder_matrix_float, m_harmonics_vector_float, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     inline void process(double* anInputOutput)
     {
-        Cicm_Vector_Double_Copy(anInputOutput, m_harmonics_vector_double, m_number_of_harmonics);
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, m_harmonics_vector_double, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_copy_vec_vec_d(anInputOutput, m_harmonics_vector_double, m_number_of_harmonics);
+        cicm_product_mat_vec_d(m_decoder_matrix_double, m_harmonics_vector_double, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     /************************************************************************************/

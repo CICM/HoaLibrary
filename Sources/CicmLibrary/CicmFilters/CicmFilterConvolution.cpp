@@ -35,29 +35,29 @@ FilterConvolution::FilterConvolution(long aWindowSize, long aNumberOfInstances)
 	m_hope_size		= m_array_size / m_number_of_instances;		
 	m_ramp = 0;
 
-    m_real_vector		= new Cicm_Vector_Float[m_number_of_instances];
+    m_real_vector		= new cicm_vector_float[m_number_of_instances];
 	m_impul_complexes	= new Cicm_Complex_Packed_Float*[m_number_of_instances];
 	
 	Cicm_Complex_Packed_Float_Malloc(m_input_complexes, m_window_size);
 	Cicm_Complex_Packed_Float_Malloc(m_output_complexes, m_window_size);
-	Cicm_Vector_Float_Malloc(m_buffer, m_array_size);
+	cicm_malloc_vec_f(m_buffer, m_array_size);
 	
 	Cicm_packed_clear(m_input_complexes, m_window_size);
 	Cicm_packed_clear(m_output_complexes, m_window_size);;
     
 	for(int i = 0; i < m_number_of_instances; i++)
 	{
-		Cicm_Vector_Float_Malloc(m_real_vector[i], m_window_size);
+		cicm_malloc_vec_f(m_real_vector[i], m_window_size);
 		Cicm_Complex_Packed_Float_Malloc(m_impul_complexes[i], m_window_size);
 		Cicm_packed_clear(m_impul_complexes[i], m_window_size);
 	}
 	
 }
 
-void FilterConvolution::loadImpulseResponse(Cicm_Vector_Float anImpulseResponse)
+void FilterConvolution::loadImpulseResponse(cicm_vector_float anImpulseResponse)
 {
-	Cicm_Vector_Float real;
-	Cicm_Vector_Float_Malloc(real, m_window_size);
+	cicm_vector_float real;
+	cicm_malloc_vec_f(real, m_window_size);
   
 	for(int i = 0; i < m_number_of_instances; i++)
 	{
@@ -71,24 +71,24 @@ void FilterConvolution::loadImpulseResponse(Cicm_Vector_Float anImpulseResponse)
 		m_fft_response->forward(real, m_impul_complexes[i]);
         
 	}
-	Cicm_Free(real);
+	cicm_free(real);
 }
 
 void FilterConvolution::clear()
 {
     for(int i = 0; i < m_number_of_instances; i++)
-		Cicm_Vector_Float_Clear(m_real_vector[i], m_window_size);
+		cicm_clear_vec_f(m_real_vector[i], m_window_size);
 }
 
 FilterConvolution::~FilterConvolution()
 {
-	Cicm_Free(m_buffer);
-	Cicm_Free(m_input_complexes);
-	Cicm_Free(m_output_complexes);
+	cicm_free(m_buffer);
+	cicm_free(m_input_complexes);
+	cicm_free(m_output_complexes);
 	for(int i = 0; i < m_number_of_instances; i++)
 	{
-		Cicm_Free(m_real_vector[i]);
-		Cicm_Free(m_impul_complexes[i]);
+		cicm_free(m_real_vector[i]);
+		cicm_free(m_impul_complexes[i]);
 	}
 	free(m_real_vector);
 	free(m_impul_complexes);

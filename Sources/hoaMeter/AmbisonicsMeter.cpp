@@ -54,14 +54,14 @@ void AmbisonicsMeter::setNumberOfLoudspeakers(long aNumberOfChannels)
     m_number_of_outputs		= 0;
     
     if(m_loudspeakers_amplitudes)
-        Cicm_Free(m_loudspeakers_amplitudes);
+        cicm_free(m_loudspeakers_amplitudes);
     if(m_loudspeakers_peaks)
-        Cicm_Free(m_loudspeakers_peaks);
+        cicm_free(m_loudspeakers_peaks);
     if(m_loudspeakers_energies)
-        Cicm_Free(m_loudspeakers_energies);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_amplitudes, m_number_of_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_peaks, m_number_of_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_energies, m_number_of_loudspeakers);
+        cicm_free(m_loudspeakers_energies);
+    cicm_malloc_vec_d(m_loudspeakers_amplitudes, m_number_of_loudspeakers);
+    cicm_malloc_vec_d(m_loudspeakers_peaks, m_number_of_loudspeakers);
+    cicm_malloc_vec_d(m_loudspeakers_energies, m_number_of_loudspeakers);
     
     for(int i = 0; i < m_number_of_loudspeakers; i++)
     {
@@ -132,10 +132,10 @@ AmbisonicsMeter::~AmbisonicsMeter()
 {
     delete m_vectors;
 	if(m_loudspeakers_amplitudes)
-        Cicm_Free(m_loudspeakers_amplitudes);
+        cicm_free(m_loudspeakers_amplitudes);
     if(m_loudspeakers_peaks)
-        Cicm_Free(m_loudspeakers_peaks);
+        cicm_free(m_loudspeakers_peaks);
     if(m_loudspeakers_energies)
-        Cicm_Free(m_loudspeakers_energies);
+        cicm_free(m_loudspeakers_energies);
 }
 

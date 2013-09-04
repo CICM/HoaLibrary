@@ -142,6 +142,7 @@
 		8F89EB7D17CCA7F000D532B7 /* MaxAmbisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */; };
 		8F89EB8B17CE2AF300D532B7 /* MaxOptim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F89EB8A17CE2AF300D532B7 /* MaxOptim.h */; };
 		8F89EB8D17CE2AF800D532B7 /* hoa.optim~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F89EB8C17CE2AF800D532B7 /* hoa.optim~.cpp */; };
+		8F89ECCA17D0E9D300D532B7 /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F89ECC917D0E9D300D532B7 /* CicmDefine.h */; };
 		8FE028B5172A837B00BD68AA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B4172A837B00BD68AA /* Accelerate.framework */; };
 		8FE028B7172A839B00BD68AA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */; };
 /* End PBXBuildFile section */
@@ -283,6 +284,7 @@
 		8F89EB7C17CCA7F000D532B7 /* MaxAmbisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaxAmbisonic.cpp; path = ../MaxAmbisonic.cpp; sourceTree = "<group>"; };
 		8F89EB8A17CE2AF300D532B7 /* MaxOptim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaxOptim.h; sourceTree = "<group>"; };
 		8F89EB8C17CE2AF800D532B7 /* hoa.optim~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.optim~.cpp"; sourceTree = "<group>"; };
+		8F89ECC917D0E9D300D532B7 /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
 		8FE028B4172A837B00BD68AA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8FE028B6172A839B00BD68AA /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -366,6 +368,7 @@
 				8F48923017CA314100E19032 /* CicmDefine_BLAS_FFTW.h */,
 				8F48923117CA314100E19032 /* CicmDefine_INTEL.h */,
 				8F48923217CA314100E19032 /* CicmDefine_VDSP.h */,
+				8F89ECC917D0E9D300D532B7 /* CicmDefine.h */,
 				8F48923317CA314100E19032 /* CicmDelay */,
 				8F48923617CA314100E19032 /* CicmEnvelope */,
 				8F48923917CA314100E19032 /* CicmFft */,
@@ -804,6 +807,7 @@
 				8F48935B17CA314100E19032 /* AmbisonicWider.h in Headers */,
 				8F48935D17CB716100E19032 /* MaxAmbisonic.h in Headers */,
 				8F89EB8B17CE2AF300D532B7 /* MaxOptim.h in Headers */,
+				8F89ECCA17D0E9D300D532B7 /* CicmDefine.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

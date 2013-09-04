@@ -30,10 +30,10 @@ AmbisonicsRestitution::AmbisonicsRestitution(long anOrder, long aNumberOfLoudspe
     m_number_of_virtual_loudspeakers = m_number_of_harmonics+1;
     m_decoder = new AmbisonicsDecoder(m_order, m_number_of_virtual_loudspeakers, m_vector_size);
     
-    Cicm_Vector_Float_Malloc(m_vector_float_input, m_number_of_virtual_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_vector_double_input, m_number_of_virtual_loudspeakers);
-    Cicm_Vector_Float_Malloc(m_loudspeakers_vector_float, m_number_of_virtual_loudspeakers);
-    Cicm_Vector_Double_Malloc(m_loudspeakers_vector_double, m_number_of_virtual_loudspeakers);
+    cicm_malloc_vec_f(m_vector_float_input, m_number_of_virtual_loudspeakers);
+    cicm_malloc_vec_d(m_vector_double_input, m_number_of_virtual_loudspeakers);
+    cicm_malloc_vec_f(m_loudspeakers_vector_float, m_number_of_virtual_loudspeakers);
+    cicm_malloc_vec_d(m_loudspeakers_vector_double, m_number_of_virtual_loudspeakers);
     
     m_loudspeakers_gains_vector_float   = NULL;
     m_loudspeakers_gains_vector_double  = NULL;
@@ -72,14 +72,14 @@ void AmbisonicsRestitution::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, 
         free(m_angles_of_loudspeakers);
     
     /* Alloc memories */
-    m_loudspeakers_gains_vector_float   = new Cicm_Vector_Float[m_number_of_real_loudspeakers];
-    m_loudspeakers_gains_vector_double  = new Cicm_Vector_Double[m_number_of_real_loudspeakers];
-	Cicm_Vector_Double_Malloc(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
+    m_loudspeakers_gains_vector_float   = new cicm_vector_float[m_number_of_real_loudspeakers];
+    m_loudspeakers_gains_vector_double  = new cicm_vector_double[m_number_of_real_loudspeakers];
+	cicm_malloc_vec_d(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
    
     for(int i = 0; i < m_number_of_real_loudspeakers; i++)
     {
-        Cicm_Vector_Float_Malloc(m_loudspeakers_gains_vector_float[i], m_number_of_virtual_loudspeakers);
-        Cicm_Vector_Double_Malloc(m_loudspeakers_gains_vector_double[i], m_number_of_virtual_loudspeakers);
+        cicm_malloc_vec_f(m_loudspeakers_gains_vector_float[i], m_number_of_virtual_loudspeakers);
+        cicm_malloc_vec_d(m_loudspeakers_gains_vector_double[i], m_number_of_virtual_loudspeakers);
     }
     
     /* Define standard configuration */
@@ -163,7 +163,7 @@ void AmbisonicsRestitution::setLoudspeakerAngle(long anIndex, double anAngle)
 {
     if(anIndex >= 0 && anIndex < m_number_of_real_loudspeakers)
     {
-        anAngle = Tools::radianWrap(anAngle / 360. * CICM_2PI);
+        anAngle = Tools::radian_wrap(anAngle / 360. * CICM_2PI);
         m_angles_of_loudspeakers[anIndex] = anAngle;
     }
     Tools::sortVector(m_angles_of_loudspeakers, m_number_of_real_loudspeakers);
@@ -312,17 +312,17 @@ void AmbisonicsRestitution::computeMicrophoneSimulation()
 AmbisonicsRestitution::~AmbisonicsRestitution()
 {
 	if(m_vector_float_input)
-		Cicm_Free(m_vector_float_input)
+		cicm_free(m_vector_float_input)
 	if(m_vector_double_input)
-		Cicm_Free(m_vector_double_input);
+		cicm_free(m_vector_double_input);
 	if(m_loudspeakers_vector_float)
-		Cicm_Free(m_loudspeakers_vector_float);
+		cicm_free(m_loudspeakers_vector_float);
 	if(m_loudspeakers_vector_double)
-		Cicm_Free(m_loudspeakers_vector_double);
+		cicm_free(m_loudspeakers_vector_double);
 	for(int i = 0; i < m_number_of_real_loudspeakers; i++)
     {
-        Cicm_Free(m_loudspeakers_gains_vector_double[i]);
-        Cicm_Free(m_loudspeakers_gains_vector_float[i]);
+        cicm_free(m_loudspeakers_gains_vector_double[i]);
+        cicm_free(m_loudspeakers_gains_vector_float[i]);
     }
     free(m_loudspeakers_gains_vector_double);
     free(m_loudspeakers_gains_vector_float);

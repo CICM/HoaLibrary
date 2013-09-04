@@ -48,7 +48,7 @@ public:
     double	getFeedback();
     ~FilterAllpass();
     
-    inline double process(double anInput)
+    inline double process(const double anInput)
     {
         double output = -anInput + m_buffer[m_ramp];
         m_buffer[m_ramp] = anInput + (m_buffer[m_ramp] * m_feedback);
@@ -58,7 +58,7 @@ public:
         return output;
     }
     
-    inline float process(float anInput)
+    inline float process(const float anInput)
     {
         float output = -anInput + m_buffer[m_ramp];
         m_buffer[m_ramp] = anInput + (m_buffer[m_ramp] * m_feedback);

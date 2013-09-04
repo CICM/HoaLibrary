@@ -42,8 +42,8 @@ class AmbisonicOptim : public Ambisonic
 private:
 	long m_optimMode;
 	
-    Cicm_Vector_Float	m_optim_vector_float;
-	Cicm_Vector_Double	m_optim_vector_double;
+    cicm_vector_float	m_optim_vector_float;
+	cicm_vector_double	m_optim_vector_double;
     
 	void computeBasicOptim();
 	void computeReOptim();
@@ -61,18 +61,18 @@ public:
     /* Perform sample by sample */
 	inline void process(float* inputs, float* outputs)
 	{
-        Cicm_Vector_Vector_Float_Mul(inputs, m_optim_vector_float, outputs, m_number_of_harmonics);
+        cicm_product_vec_vec_f(inputs, m_optim_vector_float, outputs, m_number_of_harmonics);
 	}
     
     /* Perform sample by sample */
 	inline void process(double* inputs, double* outputs)
 	{
-		Cicm_Vector_Vector_Double_Mul(inputs, m_optim_vector_double, outputs, m_number_of_harmonics);
+		cicm_product_vec_vec_d(inputs, m_optim_vector_double, outputs, m_number_of_harmonics);
 	}
     
     inline void process(double* ioVector)
 	{
-		Cicm_Vector_Vector_Double_Mul(ioVector, m_optim_vector_double, ioVector, m_number_of_harmonics);
+		cicm_product_vec_vec_d(ioVector, m_optim_vector_double, ioVector, m_number_of_harmonics);
 	}
 	
 	/* Perform block sample */
@@ -84,7 +84,7 @@ public:
         {
             input_pointor = inputs[i];
             output_pointor = outputs[i];
-            Cicm_Vector_Scalar_Float_Mul(input_pointor, m_optim_vector_float[i], output_pointor, m_vector_size);
+            cicm_product_vec_sca_vec_f(input_pointor, m_optim_vector_float[i], output_pointor, m_vector_size);
 		}
 	}
     
@@ -97,7 +97,7 @@ public:
         {
             input_pointor = inputs[i];
             output_pointor = outputs[i];
-			Cicm_Vector_Scalar_Double_Mul(input_pointor, m_optim_vector_double[i], output_pointor, m_vector_size);
+			cicm_product_vec_sca_vec_d(input_pointor, m_optim_vector_double[i], output_pointor, m_vector_size);
 		}
 	}
 };

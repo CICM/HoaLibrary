@@ -36,31 +36,31 @@ AmbisonicMap::AmbisonicMap(long anOrder, long aRampSample, long aVectorSize, lon
     m_line_thr  = new CicmLine(aRampSample);
     m_line_fou  = new CicmLine(aRampSample);
     
-    Cicm_Vector_Float_Malloc(m_harmonics_float, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_harmonics_double, m_number_of_harmonics);
+    cicm_malloc_vec_f(m_harmonics_float, m_number_of_harmonics);
+    cicm_malloc_vec_d(m_harmonics_double, m_number_of_harmonics);
     
     m_harmonics_matrix_float  = new float*[m_number_of_harmonics];
     m_harmonics_matrix_double = new double*[m_number_of_harmonics];
     for (int i = 0; i < m_number_of_harmonics; i++)
     {
-        Cicm_Vector_Float_Malloc(m_harmonics_matrix_float[i], 1);
-        Cicm_Vector_Double_Malloc(m_harmonics_matrix_double[i], 1);
+        cicm_malloc_vec_f(m_harmonics_matrix_float[i], 1);
+        cicm_malloc_vec_d(m_harmonics_matrix_double[i], 1);
     }
     
     m_vector_float = NULL;
     m_vector_double = NULL;
     
-    Cicm_Vector_Float_Malloc(m_gains_float, 1);
-    Cicm_Vector_Float_Malloc(m_radius_float, 1);
-    Cicm_Vector_Float_Malloc(m_azimuth_float, 1);
-    Cicm_Vector_Float_Malloc(m_abscissa_float, 1);
-    Cicm_Vector_Float_Malloc(m_ordinate_float, 1);
+    cicm_malloc_vec_f(m_gains_float, 1);
+    cicm_malloc_vec_f(m_radius_float, 1);
+    cicm_malloc_vec_f(m_azimuth_float, 1);
+    cicm_malloc_vec_f(m_abscissa_float, 1);
+    cicm_malloc_vec_f(m_ordinate_float, 1);
     
-    Cicm_Vector_Double_Malloc(m_gains_double, 1);
-    Cicm_Vector_Double_Malloc(m_radius_double, 1);
-    Cicm_Vector_Double_Malloc(m_azimuth_double, 1);
-    Cicm_Vector_Double_Malloc(m_abscissa_double, 1);
-    Cicm_Vector_Double_Malloc(m_ordinate_double, 1);
+    cicm_malloc_vec_d(m_gains_double, 1);
+    cicm_malloc_vec_d(m_radius_double, 1);
+    cicm_malloc_vec_d(m_azimuth_double, 1);
+    cicm_malloc_vec_d(m_abscissa_double, 1);
+    cicm_malloc_vec_d(m_ordinate_double, 1);
     
     setVectorSize(aVectorSize);
     
@@ -82,40 +82,40 @@ void AmbisonicMap::setVectorSize(long aVectorSize)
     m_line_thr->setVectorSize(m_vector_size);
     m_line_fou->setVectorSize(m_vector_size);
     
-    Cicm_Free(m_gains_double);
-    Cicm_Free(m_gains_float);
-    Cicm_Free(m_radius_float);
-    Cicm_Free(m_radius_double);
-    Cicm_Free(m_azimuth_float);
-    Cicm_Free(m_azimuth_double);
-    Cicm_Free(m_abscissa_double);
-    Cicm_Free(m_abscissa_float);
-    Cicm_Free(m_ordinate_float);
-    Cicm_Free(m_ordinate_double);
-    Cicm_Vector_Float_Malloc(m_gains_float, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_radius_float, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_azimuth_float, m_vector_size);
-    Cicm_Vector_Double_Malloc(m_gains_double, m_vector_size);
-    Cicm_Vector_Double_Malloc(m_radius_double, m_vector_size);
-    Cicm_Vector_Double_Malloc(m_azimuth_double, m_vector_size);
-    Cicm_Vector_Double_Malloc(m_abscissa_double, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_abscissa_float, m_vector_size);
-    Cicm_Vector_Double_Malloc(m_ordinate_double, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_ordinate_float, m_vector_size);
+    cicm_free(m_gains_double);
+    cicm_free(m_gains_float);
+    cicm_free(m_radius_float);
+    cicm_free(m_radius_double);
+    cicm_free(m_azimuth_float);
+    cicm_free(m_azimuth_double);
+    cicm_free(m_abscissa_double);
+    cicm_free(m_abscissa_float);
+    cicm_free(m_ordinate_float);
+    cicm_free(m_ordinate_double);
+    cicm_malloc_vec_f(m_gains_float, m_vector_size);
+    cicm_malloc_vec_f(m_radius_float, m_vector_size);
+    cicm_malloc_vec_f(m_azimuth_float, m_vector_size);
+    cicm_malloc_vec_d(m_gains_double, m_vector_size);
+    cicm_malloc_vec_d(m_radius_double, m_vector_size);
+    cicm_malloc_vec_d(m_azimuth_double, m_vector_size);
+    cicm_malloc_vec_d(m_abscissa_double, m_vector_size);
+    cicm_malloc_vec_f(m_abscissa_float, m_vector_size);
+    cicm_malloc_vec_d(m_ordinate_double, m_vector_size);
+    cicm_malloc_vec_f(m_ordinate_float, m_vector_size);
     for (int i = 0; i < m_number_of_harmonics; i++)
     {
-        Cicm_Free(m_harmonics_matrix_float[i]);
-        Cicm_Free(m_harmonics_matrix_double[i]);
-        Cicm_Vector_Float_Malloc(m_harmonics_matrix_float[i], m_vector_size);
-        Cicm_Vector_Double_Malloc(m_harmonics_matrix_double[i], m_vector_size);
+        cicm_free(m_harmonics_matrix_float[i]);
+        cicm_free(m_harmonics_matrix_double[i]);
+        cicm_malloc_vec_f(m_harmonics_matrix_float[i], m_vector_size);
+        cicm_malloc_vec_d(m_harmonics_matrix_double[i], m_vector_size);
     }
     
     if(m_vector_double)
-		Cicm_Free(m_vector_double);
+		cicm_free(m_vector_double);
 	if(m_vector_float)
-		Cicm_Free(m_vector_float);
-	Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
-	Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
+		cicm_free(m_vector_float);
+	cicm_malloc_vec_f(m_vector_float, m_vector_size);
+	cicm_malloc_vec_d(m_vector_double, m_vector_size);
 }
 
 void AmbisonicMap::setSamplingRate(long aSamplingRate)
@@ -233,24 +233,24 @@ AmbisonicMap::~AmbisonicMap()
     delete m_line_thr;
     delete m_line_fou;
     
-    Cicm_Free(m_abscissa_double);
-    Cicm_Free(m_abscissa_float);
-    Cicm_Free(m_ordinate_float);
-    Cicm_Free(m_ordinate_double);
-    Cicm_Free(m_gains_float);
-    Cicm_Free(m_gains_double);
-    Cicm_Free(m_harmonics_float);
-    Cicm_Free(m_harmonics_double);
-    Cicm_Free(m_radius_float);
-    Cicm_Free(m_radius_double);
-    Cicm_Free(m_azimuth_float);
-    Cicm_Free(m_azimuth_double);
+    cicm_free(m_abscissa_double);
+    cicm_free(m_abscissa_float);
+    cicm_free(m_ordinate_float);
+    cicm_free(m_ordinate_double);
+    cicm_free(m_gains_float);
+    cicm_free(m_gains_double);
+    cicm_free(m_harmonics_float);
+    cicm_free(m_harmonics_double);
+    cicm_free(m_radius_float);
+    cicm_free(m_radius_double);
+    cicm_free(m_azimuth_float);
+    cicm_free(m_azimuth_double);
     for (int i = 0; i < m_number_of_harmonics; i++)
     {
-        Cicm_Free(m_harmonics_matrix_float[i]);
-        Cicm_Free(m_harmonics_matrix_double[i]);
+        cicm_free(m_harmonics_matrix_float[i]);
+        cicm_free(m_harmonics_matrix_double[i]);
     }
-    Cicm_Free(m_harmonics_matrix_float);
-    Cicm_Free(m_harmonics_matrix_double);
+    cicm_free(m_harmonics_matrix_float);
+    cicm_free(m_harmonics_matrix_double);
 }
 

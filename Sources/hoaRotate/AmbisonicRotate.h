@@ -88,7 +88,7 @@ public:
 	/* Perform sample block */
 	void process(double** anInput, double** anOutput, double *aTheta)
 	{
-        Cicm_Vector_Double_Copy(anInput[0], anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_d(anInput[0], anOutput[0], m_vector_size);
 		for(int j = 0; j < m_vector_size; j++)
 		{
 			setAzimuth(aTheta[j]);
@@ -102,7 +102,7 @@ public:
 	
 	void process(double** anInput, double **anOutput)
 	{
-        Cicm_Vector_Double_Copy(anInput[0], anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_d(anInput[0], anOutput[0], m_vector_size);
 		for (int i = 1; i <= m_order; i++)
 		{
 			for(int j = 0; j < m_vector_size; j++)
@@ -116,7 +116,7 @@ public:
     
     void process(float** anInput, float **anOutput, float *aTheta)
 	{
-        Cicm_Vector_Float_Copy(anInput[0], anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_f(anInput[0], anOutput[0], m_vector_size);
         for(int j = 0; j < m_vector_size; j++)
 		{
 			setAzimuth(aTheta[j]);
@@ -130,7 +130,7 @@ public:
     
     void process(float** anInput, float **anOutput)
 	{
-        Cicm_Vector_Float_Copy(anInput[0], anOutput[0], m_vector_size);
+        cicm_copy_vec_vec_f(anInput[0], anOutput[0], m_vector_size);
 		for (int i = 1; i <= m_order; i++)
 		{
 			for(int j = 0; j < m_vector_size; j++)

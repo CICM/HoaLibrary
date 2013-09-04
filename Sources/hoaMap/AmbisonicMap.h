@@ -50,26 +50,26 @@ private:
     double              m_wide;
     double              m_gain;
     
-    Cicm_Vector_Double  m_gains_double;
-    Cicm_Vector_Float   m_gains_float;
+    cicm_vector_double  m_gains_double;
+    cicm_vector_float   m_gains_float;
     
-    Cicm_Vector_Double  m_harmonics_double;
-    Cicm_Vector_Float   m_harmonics_float;
+    cicm_vector_double  m_harmonics_double;
+    cicm_vector_float   m_harmonics_float;
     
-    Cicm_Vector_Double*  m_harmonics_matrix_double;
-    Cicm_Vector_Float*   m_harmonics_matrix_float;
+    cicm_vector_double*  m_harmonics_matrix_double;
+    cicm_vector_float*   m_harmonics_matrix_float;
     
-    Cicm_Vector_Double  m_radius_double;
-    Cicm_Vector_Float   m_radius_float;
-    Cicm_Vector_Double  m_azimuth_double;
-    Cicm_Vector_Float   m_azimuth_float;
-    Cicm_Vector_Double  m_abscissa_double;
-    Cicm_Vector_Float   m_abscissa_float;
-    Cicm_Vector_Double  m_ordinate_double;
-    Cicm_Vector_Float   m_ordinate_float;
+    cicm_vector_double  m_radius_double;
+    cicm_vector_float   m_radius_float;
+    cicm_vector_double  m_azimuth_double;
+    cicm_vector_float   m_azimuth_float;
+    cicm_vector_double  m_abscissa_double;
+    cicm_vector_float   m_abscissa_float;
+    cicm_vector_double  m_ordinate_double;
+    cicm_vector_float   m_ordinate_float;
     
-    Cicm_Vector_Float	m_vector_float;
-    Cicm_Vector_Double	m_vector_double;
+    cicm_vector_float	m_vector_float;
+    cicm_vector_double	m_vector_double;
     
 public:
 	AmbisonicMap(long anOrder = 1, long aRampSample = 4410, long aVectorSize = 0, long aSamplingRate = 44100);
@@ -124,7 +124,7 @@ public:
         setCoordinatesPolar(m_line_one->process(), m_line_two->process());  
 		m_encoder->process(input * m_gain, m_harmonics_float, m_azimuth);
         m_wider->process(m_harmonics_float);
-        Cicm_Vector_Float_Add(m_harmonics_float, outputs, m_number_of_harmonics);
+        cicm_add_vec_vec_f(m_harmonics_float, outputs, m_number_of_harmonics);
 	}
     
     inline void processAdd(const double input, double* outputs)
@@ -132,7 +132,7 @@ public:
         setCoordinatesPolar(m_line_one->process(), m_line_two->process());
         m_encoder->process(input * m_gain, m_harmonics_float, m_azimuth);
         m_wider->process(m_harmonics_float);
-        Cicm_Vector_Double_Add(m_harmonics_double, outputs, m_number_of_harmonics);
+        cicm_add_vec_vec_d(m_harmonics_double, outputs, m_number_of_harmonics);
 	}
     
     /************************************************************************************/
@@ -188,7 +188,7 @@ public:
         m_wider->process(m_harmonics_matrix_float, m_radius_float);
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Float_Add(m_harmonics_matrix_float[i], outputs[i], m_vector_size);
+            cicm_add_vec_vec_f(m_harmonics_matrix_float[i], outputs[i], m_vector_size);
         }
 	}
     
@@ -208,7 +208,7 @@ public:
         
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            Cicm_Vector_Double_Add(m_harmonics_matrix_double[i], outputs[i], m_vector_size);
+            cicm_add_vec_vec_d(m_harmonics_matrix_double[i], outputs[i], m_vector_size);
         }
 	}
     

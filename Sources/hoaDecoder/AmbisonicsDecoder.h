@@ -33,12 +33,12 @@ class AmbisonicsDecoder : public Ambisonic
 	
 private:
     long                 m_number_of_loudspeakers;
-	Cicm_Matrix_Float    m_decoder_matrix_float;
-    Cicm_Matrix_Double   m_decoder_matrix_double;
-    Cicm_Vector_Float    m_vector_float_input;
-    Cicm_Vector_Float    m_vector_float_output;
-    Cicm_Vector_Double   m_vector_double_input;
-    Cicm_Vector_Double   m_vector_double_output;
+	cicm_matrix_float    m_decoder_matrix_float;
+    cicm_matrix_double   m_decoder_matrix_double;
+    cicm_vector_float    m_vector_float_input;
+    cicm_vector_float    m_vector_float_output;
+    cicm_vector_double   m_vector_double_input;
+    cicm_vector_double   m_vector_double_output;
     
 	void computeMatrix();
 
@@ -56,12 +56,12 @@ public:
 	/* Perform sample by sample */    
 	inline void process(double* anInput, double* anOutput)
 	{
-        Cicm_Matrix_Vector_Double_Product(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
+        cicm_product_mat_vec_d(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
     
     inline void process(float* anInput, float* anOutput)
 	{
-        Cicm_Matrix_Vector_Float_Product(m_decoder_matrix_float, anInput, anOutput,  m_number_of_outputs, m_number_of_harmonics);
+        cicm_product_mat_vec_f(m_decoder_matrix_float, anInput, anOutput,  m_number_of_outputs, m_number_of_harmonics);
 	}
 	
 	/* Perform block sample */

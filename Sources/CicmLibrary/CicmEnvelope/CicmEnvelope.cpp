@@ -35,13 +35,13 @@ void CicmEnvelope::setSize(long aSize)
     if(aSize != m_size)
     {
         if(m_buffer)
-            Cicm_Free(m_buffer);
+            cicm_free(m_buffer);
         if(m_buffer_float)
-            Cicm_Free(m_buffer_float);
+            cicm_free(m_buffer_float);
         
         m_size = aSize;
-        Cicm_Vector_Double_Malloc(m_buffer, m_size);
-        Cicm_Vector_Float_Malloc(m_buffer_float, m_size);
+        cicm_malloc_vec_d(m_buffer, m_size);
+        cicm_malloc_vec_f(m_buffer_float, m_size);
         setType(m_type);
     }
 }
@@ -238,7 +238,7 @@ void CicmEnvelope::write(double* aBuffer, long aSize)
 {
     setSize(aSize);
     m_type = Cicm_Envelope_Personnal;
-    Cicm_Vector_Double_Copy(aBuffer, m_buffer, m_size);
+    cicm_copy_vec_vec_d(aBuffer, m_buffer, m_size);
     for(int i = 0; i < m_size; i++)
         m_buffer_float[i] = m_buffer[i];    
 }
@@ -247,15 +247,15 @@ void CicmEnvelope::write(float* aBuffer, long aSize)
 {
     setSize(aSize);
     m_type = Cicm_Envelope_Personnal;
-    Cicm_Vector_Float_Copy(aBuffer, m_buffer_float, m_size);
+    cicm_copy_vec_vec_f(aBuffer, m_buffer_float, m_size);
     for(int i = 0; i < m_size; i++)
         m_buffer[i] = m_buffer_float[i];
 }
 
 CicmEnvelope::~CicmEnvelope()
 {
-	Cicm_Free(m_buffer);
-    Cicm_Free(m_buffer_float);
+	cicm_free(m_buffer);
+    cicm_free(m_buffer_float);
 }
 
 

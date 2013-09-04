@@ -29,22 +29,22 @@ AmbisonicEncoder3D::AmbisonicEncoder3D(long anOrder, long aVectorSize, long aSam
 {
     m_number_of_inputs = 3;
     
-    m_azimuth_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
-    m_elevation_matrix = new Cicm_Vector_Double[m_number_of_harmonics];
+    m_azimuth_matrix = new cicm_vector_double[m_number_of_harmonics];
+    m_elevation_matrix = new cicm_vector_double[m_number_of_harmonics];
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        Cicm_Vector_Double_Malloc(m_azimuth_matrix[i], NUMBEROFCIRCLEPOINTS);
-        Cicm_Vector_Double_Malloc(m_elevation_matrix[i], NUMBEROFCIRCLEPOINTS);
+        cicm_malloc_vec_d(m_azimuth_matrix[i], NUMBEROFCIRCLEPOINTS);
+        cicm_malloc_vec_d(m_elevation_matrix[i], NUMBEROFCIRCLEPOINTS);
     }
-    Cicm_Vector_Float_Malloc(m_azimuth_float, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_azimuth_double, m_number_of_harmonics);
-    Cicm_Vector_Float_Malloc(m_elevation_float, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(m_elevation_double, m_number_of_harmonics);
+    cicm_malloc_vec_f(m_azimuth_float, m_number_of_harmonics);
+    cicm_malloc_vec_d(m_azimuth_double, m_number_of_harmonics);
+    cicm_malloc_vec_f(m_elevation_float, m_number_of_harmonics);
+    cicm_malloc_vec_d(m_elevation_double, m_number_of_harmonics);
     
     
     m_index_vector = new int[m_vector_size];
-    Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
+    cicm_malloc_vec_d(m_vector_double, m_vector_size);
+    cicm_malloc_vec_f(m_vector_float, m_vector_size);
     
     computeMatrices();
     setCoordinates(0., 0.);
@@ -149,7 +149,7 @@ void AmbisonicEncoder3D::setCoordinates(double anAzimuth, double anElevation)
 
 void AmbisonicEncoder3D::setAzimuth(double anAzimuth)
 {
-    int index = (int)((Tools::radianWrap(anAzimuth) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
+    int index = (int)((Tools::radian_wrap(anAzimuth) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_azimuth_float[i] = m_azimuth_double[i] = m_azimuth_matrix[i][index];
@@ -158,7 +158,7 @@ void AmbisonicEncoder3D::setAzimuth(double anAzimuth)
 
 void AmbisonicEncoder3D::setElevation(double anElevation)
 {
-	int index = (int)((Tools::radianWrap(anElevation) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
+	int index = (int)((Tools::radian_wrap(anElevation) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         m_elevation_float[i] = m_elevation_double[i] = m_elevation_matrix[i][index];
@@ -172,13 +172,13 @@ void AmbisonicEncoder3D::setVectorSize(long aVectorSize)
     if(m_index_vector)
         free(m_index_vector);
     if(m_vector_double)
-        Cicm_Free(m_vector_double);
+        cicm_free(m_vector_double);
     if(m_vector_float)
-        Cicm_Free(m_vector_float);
+        cicm_free(m_vector_float);
     
     m_index_vector = new int[m_vector_size];
-    Cicm_Vector_Double_Malloc(m_vector_double, m_vector_size);
-    Cicm_Vector_Float_Malloc(m_vector_float, m_vector_size);
+    cicm_malloc_vec_d(m_vector_double, m_vector_size);
+    cicm_malloc_vec_f(m_vector_float, m_vector_size);
 }
 
 std::string AmbisonicEncoder3D::getInputName(long anIndex)
@@ -197,15 +197,15 @@ AmbisonicEncoder3D::~AmbisonicEncoder3D()
 {
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        Cicm_Free(m_azimuth_matrix[i]);
-        Cicm_Free(m_elevation_matrix[i]);
+        cicm_free(m_azimuth_matrix[i]);
+        cicm_free(m_elevation_matrix[i]);
     }
-    Cicm_Free(m_azimuth_matrix);
-    Cicm_Free(m_elevation_matrix);
-    Cicm_Free(m_azimuth_float);
-    Cicm_Free(m_azimuth_double);
-    Cicm_Free(m_elevation_float);
-    Cicm_Free(m_elevation_double);
-    Cicm_Free(m_vector_float);
-    Cicm_Free(m_vector_double);
+    cicm_free(m_azimuth_matrix);
+    cicm_free(m_elevation_matrix);
+    cicm_free(m_azimuth_float);
+    cicm_free(m_azimuth_double);
+    cicm_free(m_elevation_float);
+    cicm_free(m_elevation_double);
+    cicm_free(m_vector_float);
+    cicm_free(m_vector_double);
 }

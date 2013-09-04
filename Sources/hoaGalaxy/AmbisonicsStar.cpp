@@ -52,7 +52,7 @@ void Star::setRadius(double aRadius)
 
 void Star::setAngle(double anAngle)
 {
-    m_angle = Tools::radianWrap(anAngle);
+    m_angle = Tools::radian_wrap(anAngle);
 }
 
 void Star::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
@@ -142,7 +142,7 @@ double Star::getGalaxyLimit()
 
 double Star::getDistanceToGalaxyLimit(double anAngle)
 {
-    anAngle = Tools::radianWrap(anAngle);
+    anAngle = Tools::radian_wrap(anAngle);
     if(m_galaxy_limit >= 0.)
     {
         return Tools::distance_euclidean(getAbscissa(), getOrdinate(), Tools::abscissa(m_galaxy_limit, anAngle+ CICM_PI2), Tools::ordinate(m_galaxy_limit, anAngle+ CICM_PI2));

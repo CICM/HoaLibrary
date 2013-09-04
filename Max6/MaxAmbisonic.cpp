@@ -406,10 +406,21 @@ MaxAmbisonic::~MaxAmbisonic()
     object_detach_byptr(m_parent, m_patcherview);
 }
 
+int postons = 0;
+
 void class_hoainit(t_class* c)
 {
     if(c->c_sym != gensym("hoa.encoder~"))
         class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
+    else
+    {
+        if(!postons)
+        {
+            post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+            post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
+            postons = 1;
+        }
+    }
     class_addmethod(c, (method)hoa_notify,   "notify",   A_CANT, 0);
     class_addmethod(c, (method)hoa_save,     "appendtodictionary",    A_CANT, 0);
     class_addmethod(c, (method)hoa_connect,  "connect",  A_GIMME, 0);

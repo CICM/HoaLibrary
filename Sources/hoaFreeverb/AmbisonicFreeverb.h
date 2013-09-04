@@ -23,43 +23,35 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_FREEVERB
-#define DEF_FREEVERB
+#ifndef DEF_AMBISONICFREEVERB
+#define DEF_AMBISONICFREEVERB
 
+#include "../HoaAmbisonics/Ambisonic.h"
 
-#include "CicmTuning.h"
-#include "../CicmFilters/CicmFilterAllpass.h"
-#include "../CicmFilters/CicmFilterComb.h"
-
-class Freeverb
+class AmbisonicFreeverb : public Ambisonic
 {
 private:
-    long    m_sampling_rate;
-    long    m_vector_size;
     
 	double	m_gain;
     double  m_wet;
     double  m_dry;
-	double	roomsize, roomsize1;
-	double	damp, damp1;
+	double	roomsize;
+	double	damp;
 	double	mode;
-    
+    double  m_diffuse;
+    vector <Freeverb*> m_freeverb;
     double  m_diffuse_spread;
     double  m_directional_spread;
-    vector <FilterComb*>    m_comb_filter;
-    vector <FilterAllpass*> m_allpass_filter;
-
+    
 	void	update();
 
 public:
-	Freeverb();
-
-    void	setSamplingRate(long aSamplingRate);
-	long	getSamplingRate();
-    void	setVectorSize(long aVectorSize);
-    long	getVectorSize();
+	AmbisonicFreeverb(long anOrder = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
     
-    void	setDryValue(double value);
+    void	setVectorSize(long aVectorSize);
+    void	setSamplingRate(long aSamplingRate);
+    
+ 	void	setDryValue(double value);
 	double	getDryValue();
     void	setWetValue(double value);
 	double	getWetValue();
@@ -69,8 +61,6 @@ public:
 	double	getdamp();
 	void	setmode(double value);
 	double	getmode();
-    void	setAllpassFeedback(double value);
-	double	getAllpassFeedback();
     void	setSpread(double value);
     void	setDiffuseSpread(double value);
     void	setDirectionalSpread(double value);
@@ -83,39 +73,39 @@ public:
     
     /*********************************** Out Of Place ***********************************/
     
-    inline float process(const float input)
+    inline void	process(const float* inputs, float* outputs)
     {
-        float input_val;
-        float output = 0.f;
-        input_val = input;
-        input_val *= m_gain;
-
-        for(int j = 0; j < numcombs; j++)
-            output += m_comb_filter[j]->process(input_val);
-        
-        for(int j = 0; j < numallpasses; j++)
-            output = m_allpass_filter[j]->process(output);
-        output *= m_wet;
-        output += input * m_dry;
-        return output;
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            outputs[i] = m_freeverb[i]->process(inputs[i]);
+        }
     };
     
-    inline double process(const double input)
+    inline void	process(const double* inputs, double* outputs)
     {
-        double input_val;
-        double output = 0.;
-        input_val = input;
-        input_val *= m_gain;
-
-        for(int j = 0; j < numcombs; j++)
-            output += m_comb_filter[j]->process(input_val);
-        
-        for(int j = 0; j < numallpasses; j++)
-            output = m_allpass_filter[j]->process(output);
-        output *= m_wet;
-        output += input * m_dry;
-        return output;
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            outputs[i] = m_freeverb[i]->process(inputs[i]);
+        }
+    }
+    
+    /************************************* In Place *************************************/
+    
+    inline void	process(float* ioVectors)
+    {
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            ioVectors[i] = m_freeverb[i]->process(ioVectors[i]);
+        }
     };
+    
+    inline void	process(double* ioVectors)
+    {
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            ioVectors[i] = m_freeverb[i]->process(ioVectors[i]);
+        }
+    }
     
     /************************************************************************************/
     /******************************* Perform sample block *******************************/
@@ -123,41 +113,53 @@ public:
     
     /*********************************** Out Of Place ***********************************/
     
-	inline void	process(const float* input, float* output)
+	inline void	process(const float* const* inputs, float** outputs)
     {
-        for(int i = 0; i < m_vector_size; i++)
+        const float* input;
+        float* output;
+        for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            output[i] = process(input[i]);
+            input = inputs[i];
+            output = outputs[i];
+            m_freeverb[i]->process(input, output);
         }
     };
     
-    inline void	process(const double* input, double* output)
+    inline void	process(const double* const* inputs, double** outputs)
     {
-        for(int i = 0; i < m_vector_size; i++)
+        const double* input;
+        double* output;
+        for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            output[i] = process(input[i]);
+            input = inputs[i];
+            output = outputs[i];
+            m_freeverb[i]->process(input, output);
         }
-    };
+    }
     
     /************************************* In Place *************************************/
     
-    inline void	process(float* ioVectors)
-    {
-        for(int i = 0; i < m_vector_size; i++)
+    inline void process(float** ioVectors)
+	{
+		float* ioVec;
+        for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            ioVectors[i] = process(ioVectors[i]);
+            ioVec = ioVectors[i];
+            m_freeverb[i]->process(ioVec);
         }
-    };
+	}
     
-    inline void	process(double* ioVectors)
-    {
-        for(int i = 0; i < m_vector_size; i++)
+    inline void process(double** ioVectors)
+	{
+		double* ioVec;
+        for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            ioVectors[i] = process(ioVectors[i]);
+            ioVec = ioVectors[i];
+            m_freeverb[i]->process(ioVec);
         }
-    };
-    
-	~Freeverb();
+	}
+
+	~AmbisonicFreeverb();
 };
 
 

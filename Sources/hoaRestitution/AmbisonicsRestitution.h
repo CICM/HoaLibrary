@@ -42,17 +42,17 @@ private:
     long                m_number_of_virtual_loudspeakers;
     long                m_number_of_real_loudspeakers;
     
-    Cicm_Vector_Double  m_angles_of_loudspeakers;
+    cicm_vector_double  m_angles_of_loudspeakers;
     
 	AmbisonicsDecoder*  m_decoder;
     
-    Cicm_Vector_Float   m_vector_float_input;
-    Cicm_Vector_Double  m_vector_double_input;
-    Cicm_Vector_Float   m_loudspeakers_vector_float;
-    Cicm_Vector_Double  m_loudspeakers_vector_double;
+    cicm_vector_float   m_vector_float_input;
+    cicm_vector_double  m_vector_double_input;
+    cicm_vector_float   m_loudspeakers_vector_float;
+    cicm_vector_double  m_loudspeakers_vector_double;
     
-    Cicm_Vector_Float*  m_loudspeakers_gains_vector_float;
-    Cicm_Vector_Double* m_loudspeakers_gains_vector_double;
+    cicm_vector_float*  m_loudspeakers_gains_vector_float;
+    cicm_vector_double* m_loudspeakers_gains_vector_double;
     
     void computeAmplitudePanning();
     void computeMicrophoneSimulation();
@@ -77,7 +77,7 @@ public:
         m_decoder->process(aInputs, m_loudspeakers_vector_double);
         for(int i = 0; i < m_number_of_real_loudspeakers; i++)
         {
-            Cicm_Vector_Double_Dot_Product(m_loudspeakers_vector_double, m_loudspeakers_gains_vector_double[i], aOutputs[i], m_number_of_virtual_loudspeakers);
+            cicm_dot_product_d(m_loudspeakers_vector_double, m_loudspeakers_gains_vector_double[i], aOutputs[i], m_number_of_virtual_loudspeakers);
         }
 	}
     
@@ -86,7 +86,7 @@ public:
         m_decoder->process(aInputs, m_loudspeakers_vector_float);
         for(int i = 0; i < m_number_of_real_loudspeakers; i++)
         {
-            Cicm_Vector_Float_Dot_Product(m_loudspeakers_vector_float, m_loudspeakers_gains_vector_float[i], aOutputs[i], m_number_of_virtual_loudspeakers);
+            cicm_dot_product_f(m_loudspeakers_vector_float, m_loudspeakers_gains_vector_float[i], aOutputs[i], m_number_of_virtual_loudspeakers);
         }
 	}
 	
@@ -102,7 +102,7 @@ public:
             m_decoder->process(m_vector_double_input, m_loudspeakers_vector_double);
             for(int j = 0; j < m_number_of_real_loudspeakers; j++)
             {
-                Cicm_Vector_Double_Dot_Product(m_loudspeakers_vector_double, m_loudspeakers_gains_vector_double[j], aOutputs[j][i], m_number_of_virtual_loudspeakers);
+                cicm_dot_product_d(m_loudspeakers_vector_double, m_loudspeakers_gains_vector_double[j], aOutputs[j][i], m_number_of_virtual_loudspeakers);
             }
         }
 	}
@@ -118,7 +118,7 @@ public:
             m_decoder->process(m_vector_float_input, m_loudspeakers_vector_float);
             for(int j = 0; j < m_number_of_real_loudspeakers; j++)
             {
-                Cicm_Vector_Float_Dot_Product(m_loudspeakers_vector_float, m_loudspeakers_gains_vector_float[j], aOutputs[j][i], m_number_of_virtual_loudspeakers);
+                cicm_dot_product_f(m_loudspeakers_vector_float, m_loudspeakers_gains_vector_float[j], aOutputs[j][i], m_number_of_virtual_loudspeakers);
             }
         }
 	}

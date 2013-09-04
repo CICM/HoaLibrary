@@ -30,18 +30,35 @@ FilterFir::FilterFir(long anImpulseSize)
 	m_fir_size		= anImpulseSize;
 	m_input_size	= m_fir_size * 2 - 1;
 
-	Cicm_Vector_Float_Malloc(m_fir_vector, m_fir_size);
-	Cicm_Vector_Float_Malloc(m_input_vector, m_input_size);
+	cicm_malloc_vec_f(m_fir_vector_float, m_fir_size);
+	cicm_malloc_vec_f(m_input_vector_float, m_input_size);
+    cicm_malloc_vec_d(m_fir_vector_double, m_fir_size);
+	cicm_malloc_vec_d(m_input_vector_double, m_input_size);
 	m_index = m_fir_size;
 }
 
-void FilterFir::setImpulseResponse(Cicm_Vector_Float anImpulseResponse)
+void FilterFir::setImpulseResponse(cicm_vector_float anImpulseResponse)
 {
-	Cicm_Vector_Float_Copy(anImpulseResponse, m_fir_vector, m_fir_size);
+	cicm_copy_vec_vec_f(anImpulseResponse, m_fir_vector_float, m_fir_size);
+    for(int i = 0; i < m_fir_size; i++)
+    {
+        m_fir_vector_double[i] = m_fir_vector_float[i];
+    }
+}
+
+void FilterFir::setImpulseResponse(cicm_vector_double anImpulseResponse)
+{
+	cicm_copy_vec_vec_d(anImpulseResponse, m_fir_vector_double, m_fir_size);
+    for(int i = 0; i < m_fir_size; i++)
+    {
+        m_fir_vector_float[i] = m_fir_vector_double[i];
+    }
 }
 
 FilterFir::~FilterFir()
 {
-	Cicm_Free(m_fir_vector);
-	Cicm_Free(m_input_vector);
+	cicm_free(m_fir_vector_float);
+	cicm_free(m_input_vector_float);
+    cicm_free(m_fir_vector_double);
+	cicm_free(m_input_vector_double);
 }

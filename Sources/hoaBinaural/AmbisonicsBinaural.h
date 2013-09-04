@@ -47,20 +47,20 @@ private:
     
 	bool		m_hrtf_loaded;
     
-	Cicm_Vector_Double* m_impulse_left;
-	Cicm_Vector_Double* m_impulse_right;
+	cicm_vector_double* m_impulse_left;
+	cicm_vector_double* m_impulse_right;
 	long                m_impulse_size;
 	AmbisonicsDecoder* m_decoder;
 
-    Cicm_Matrix_Float   m_input_matrix;
-    Cicm_Matrix_Float   m_impluse_matrix;
-    Cicm_Matrix_Float   m_result_matrix;
+    cicm_matrix_float   m_input_matrix;
+    cicm_matrix_float   m_impluse_matrix;
+    cicm_matrix_float   m_result_matrix;
     
-    Cicm_Matrix_Float   m_result_matrix_left;
-    Cicm_Matrix_Float   m_result_matrix_right;
+    cicm_matrix_float   m_result_matrix_left;
+    cicm_matrix_float   m_result_matrix_right;
     
-    Cicm_Vector_Float   m_linear_vector_left;
-    Cicm_Vector_Float   m_linear_vector_right;
+    cicm_vector_float   m_linear_vector_left;
+    cicm_vector_float   m_linear_vector_right;
 
     long	loadImpulses();
 	long	matrixResize(long aVectorSize);
@@ -108,13 +108,13 @@ public:
                 aOutputs[0][j] = m_linear_vector_left[j];
                 aOutputs[1][j] = m_linear_vector_right[j];
             }
-			//Cicm_Vector_Double_Add(m_linear_vector_left+m_vector_size, m_linear_vector_left, m_impulse_size-1);
-			//Cicm_Vector_Double_Add(m_linear_vector_right+m_vector_size, m_linear_vector_right, m_impulse_size-1);
+			//cicm_add_vec_vec_d(m_linear_vector_left+m_vector_size, m_linear_vector_left, m_impulse_size-1);
+			//cicm_add_vec_vec_d(m_linear_vector_right+m_vector_size, m_linear_vector_right, m_impulse_size-1);
             cblas_scopy(m_impulse_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
             cblas_scopy(m_impulse_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
 
-            Cicm_Vector_Float_Clear(m_linear_vector_left+m_impulse_size-1, m_vector_size);
-            Cicm_Vector_Float_Clear(m_linear_vector_right+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_left+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_right+m_impulse_size-1, m_vector_size);
         }
         else
         {
@@ -159,8 +159,8 @@ public:
             cblas_scopy(m_impulse_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
             cblas_scopy(m_impulse_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
             
-            Cicm_Vector_Float_Clear(m_linear_vector_left+m_impulse_size-1, m_vector_size);
-            Cicm_Vector_Float_Clear(m_linear_vector_right+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_left+m_impulse_size-1, m_vector_size);
+            cicm_clear_vec_f(m_linear_vector_right+m_impulse_size-1, m_vector_size);
         }
         else
         {

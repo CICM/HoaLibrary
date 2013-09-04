@@ -133,22 +133,22 @@ long AmbisonicsBinaural::loadImpulses()
     /* Write Hrtfs To The Matrix */
     if(m_impluse_matrix)
     {
-        Cicm_Free(m_impluse_matrix);
+        cicm_free(m_impluse_matrix);
         m_impluse_matrix = NULL;
     }
     
     
-    Cicm_Matrix_Float_Malloc(m_impluse_matrix, m_impulse_size * 2, m_number_of_harmonics);
+    cicm_malloc_mat_f(m_impluse_matrix, m_impulse_size * 2, m_number_of_harmonics);
     if(!m_impluse_matrix)
         return 0;
     
-    Cicm_Vector_Double HarmonicVector;
-    Cicm_Vector_Double LoudspeakersVector;
-    Cicm_Vector_Double_Malloc(HarmonicVector, m_number_of_harmonics);
-    Cicm_Vector_Double_Malloc(LoudspeakersVector, m_number_of_loudspeakers);
+    cicm_vector_double HarmonicVector;
+    cicm_vector_double LoudspeakersVector;
+    cicm_malloc_vec_d(HarmonicVector, m_number_of_harmonics);
+    cicm_malloc_vec_d(LoudspeakersVector, m_number_of_loudspeakers);
 
-	Cicm_Vector_Double_Clear(HarmonicVector, m_number_of_harmonics);
-    Cicm_Vector_Double_Clear(LoudspeakersVector, m_number_of_loudspeakers);
+	cicm_clear_vec_d(HarmonicVector, m_number_of_harmonics);
+    cicm_clear_vec_d(LoudspeakersVector, m_number_of_loudspeakers);
 	
     HarmonicVector[0]=1;
 	for(int harmonicIndex = 0; harmonicIndex < m_number_of_harmonics; harmonicIndex++)
@@ -174,8 +174,8 @@ long AmbisonicsBinaural::loadImpulses()
 		}
 	}
     
-    Cicm_Free(HarmonicVector);
-    Cicm_Free(LoudspeakersVector);
+    cicm_free(HarmonicVector);
+    cicm_free(LoudspeakersVector);
     return 1;
 }
 
@@ -215,22 +215,22 @@ long AmbisonicsBinaural::matrixResize(long aVectorSize)
 {
     m_hrtf_loaded = 0;
     if(m_input_matrix)
-        Cicm_Free(m_input_matrix);
+        cicm_free(m_input_matrix);
     m_input_matrix = NULL;
     if(m_result_matrix)
-        Cicm_Free(m_result_matrix);
+        cicm_free(m_result_matrix);
     m_result_matrix = NULL;
     if(m_linear_vector_left)
-        Cicm_Free(m_linear_vector_left);
+        cicm_free(m_linear_vector_left);
     m_linear_vector_left = NULL;
     if(m_linear_vector_right)
-        Cicm_Free(m_linear_vector_right);
+        cicm_free(m_linear_vector_right);
     m_linear_vector_right = NULL;
     
-    Cicm_Matrix_Float_Malloc(m_input_matrix, m_number_of_harmonics, aVectorSize);
-    Cicm_Matrix_Float_Malloc(m_result_matrix, m_impulse_size * 2, aVectorSize);
-    Cicm_Vector_Float_Malloc(m_linear_vector_left, aVectorSize + m_impulse_size - 1);
-    Cicm_Vector_Float_Malloc(m_linear_vector_right, aVectorSize + m_impulse_size - 1);
+    cicm_malloc_mat_f(m_input_matrix, m_number_of_harmonics, aVectorSize);
+    cicm_malloc_mat_f(m_result_matrix, m_impulse_size * 2, aVectorSize);
+    cicm_malloc_vec_f(m_linear_vector_left, aVectorSize + m_impulse_size - 1);
+    cicm_malloc_vec_f(m_linear_vector_right, aVectorSize + m_impulse_size - 1);
     
     m_result_matrix_right   = m_result_matrix+aVectorSize*m_impulse_size;
     m_result_matrix_left    = m_result_matrix;
@@ -263,15 +263,15 @@ AmbisonicsBinaural::~AmbisonicsBinaural()
 {
     delete m_decoder;
 	if(m_input_matrix)
-        Cicm_Free(m_input_matrix);
+        cicm_free(m_input_matrix);
     if(m_result_matrix)
-        Cicm_Free(m_result_matrix);
+        cicm_free(m_result_matrix);
     if(m_impluse_matrix)
-        Cicm_Free(m_impluse_matrix);
+        cicm_free(m_impluse_matrix);
     if(m_linear_vector_left)
-        Cicm_Free(m_linear_vector_left);
+        cicm_free(m_linear_vector_left);
     if(m_linear_vector_right)
-        Cicm_Free(m_linear_vector_right);
+        cicm_free(m_linear_vector_right);
 	
     for(int i = 0; i < m_number_of_loudspeakers; i++)
 	{

@@ -33,11 +33,11 @@ class AmbisonicsMeter : public Planewaves
 protected:
     AmbisonicVector*   m_vectors;
     
-    Cicm_Vector_Double m_loudspeakers_amplitudes;
-    Cicm_Vector_Double m_loudspeakers_peaks;
-    Cicm_Vector_Double m_loudspeakers_energies;
-    Cicm_Double        m_vector_coordinates_double[4];
-    Cicm_Float         m_vector_coordinates_float[4];
+    cicm_vector_double m_loudspeakers_amplitudes;
+    cicm_vector_double m_loudspeakers_peaks;
+    cicm_vector_double m_loudspeakers_energies;
+    double        m_vector_coordinates_double[4];
+    float         m_vector_coordinates_float[4];
     
 public:
 	AmbisonicsMeter(long aNumberOfChannel = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
