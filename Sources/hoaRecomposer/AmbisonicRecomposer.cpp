@@ -25,7 +25,7 @@
 
 #include "AmbisonicRecomposer.h"
 
-AmbisonicRecomposer::AmbisonicRecomposer(long anOrder, long aNumberOfMicrophones, long aMode, long aVectorSize, long aSamplingRate) : Ambisonics(anOrder, aVectorSize, aSamplingRate), Planwaves(aNumberOfMicrophones, aVectorSize, aSamplingRate)
+AmbisonicRecomposer::AmbisonicRecomposer(long anOrder, long aNumberOfMicrophones, long aMode, long aVectorSize, long aSamplingRate) : Ambisonic(anOrder, aVectorSize, aSamplingRate), Planwaves(aNumberOfMicrophones, aVectorSize, aSamplingRate)
 {
 	m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, m_number_of_harmonics);
     Planewaves::m_number_of_outputs = m_number_of_harmonics;
