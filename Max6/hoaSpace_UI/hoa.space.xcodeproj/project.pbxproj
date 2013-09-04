@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2C14E248174FBB9300EB2644 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C14E247174FBB9300EB2644 /* Accelerate.framework */; };
 		2C14E24A174FBBBB00EB2644 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C14E249174FBBBB00EB2644 /* MaxAudioAPI.framework */; };
+		2C4D33A217D75CF200A3AE8C /* AmbisonicRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C4D33A017D75CF200A3AE8C /* AmbisonicRecomposer.cpp */; };
+		2C4D33A317D75CF200A3AE8C /* AmbisonicRecomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C4D33A117D75CF200A3AE8C /* AmbisonicRecomposer.h */; };
 		2CB801F3172979DB00A74F1A /* hoa.space.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB801E7172979DB00A74F1A /* hoa.space.cpp */; };
 		8FB7ADE417C0F5750011C71B /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB7AD3D17C0F5750011C71B /* CicmRingModulation.cpp */; };
 		8FB7ADE517C0F5750011C71B /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB7AD3E17C0F5750011C71B /* CicmRingModulation.h */; };
@@ -123,8 +125,6 @@
 		8FB7AE5217C0F5750011C71B /* AmbisonicOptim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB7ADC117C0F5750011C71B /* AmbisonicOptim.h */; };
 		8FB7AE5317C0F5750011C71B /* AmbisonicsProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB7ADC317C0F5750011C71B /* AmbisonicsProjector.cpp */; };
 		8FB7AE5417C0F5750011C71B /* AmbisonicsProjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB7ADC417C0F5750011C71B /* AmbisonicsProjector.h */; };
-		8FB7AE5517C0F5750011C71B /* AmbisonicsRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB7ADC617C0F5750011C71B /* AmbisonicsRecomposer.cpp */; };
-		8FB7AE5617C0F5750011C71B /* AmbisonicsRecomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB7ADC717C0F5750011C71B /* AmbisonicsRecomposer.h */; };
 		8FB7AE5717C0F5750011C71B /* AmbisonicVirtualMicUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB7ADC817C0F5750011C71B /* AmbisonicVirtualMicUI.cpp */; };
 		8FB7AE5817C0F5750011C71B /* AmbisonicVirtualMicUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB7ADC917C0F5750011C71B /* AmbisonicVirtualMicUI.h */; };
 		8FB7AE5917C0F5750011C71B /* AmbisonicVirtualMicUIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB7ADCA17C0F5750011C71B /* AmbisonicVirtualMicUIManager.cpp */; };
@@ -152,6 +152,8 @@
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		2C14E247174FBB9300EB2644 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2C14E249174FBBBB00EB2644 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.1/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		2C4D33A017D75CF200A3AE8C /* AmbisonicRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicRecomposer.cpp; sourceTree = "<group>"; };
+		2C4D33A117D75CF200A3AE8C /* AmbisonicRecomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicRecomposer.h; sourceTree = "<group>"; };
 		2CB801E7172979DB00A74F1A /* hoa.space.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.space.cpp; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.space.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.space.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FB7AD3D17C0F5750011C71B /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
@@ -267,8 +269,6 @@
 		8FB7ADC117C0F5750011C71B /* AmbisonicOptim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicOptim.h; sourceTree = "<group>"; };
 		8FB7ADC317C0F5750011C71B /* AmbisonicsProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsProjector.cpp; sourceTree = "<group>"; };
 		8FB7ADC417C0F5750011C71B /* AmbisonicsProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsProjector.h; sourceTree = "<group>"; };
-		8FB7ADC617C0F5750011C71B /* AmbisonicsRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRecomposer.cpp; sourceTree = "<group>"; };
-		8FB7ADC717C0F5750011C71B /* AmbisonicsRecomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRecomposer.h; sourceTree = "<group>"; };
 		8FB7ADC817C0F5750011C71B /* AmbisonicVirtualMicUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVirtualMicUI.cpp; sourceTree = "<group>"; };
 		8FB7ADC917C0F5750011C71B /* AmbisonicVirtualMicUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicVirtualMicUI.h; sourceTree = "<group>"; };
 		8FB7ADCA17C0F5750011C71B /* AmbisonicVirtualMicUIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVirtualMicUIManager.cpp; sourceTree = "<group>"; };
@@ -660,8 +660,8 @@
 		8FB7ADC517C0F5750011C71B /* hoaRecomposer */ = {
 			isa = PBXGroup;
 			children = (
-				8FB7ADC617C0F5750011C71B /* AmbisonicsRecomposer.cpp */,
-				8FB7ADC717C0F5750011C71B /* AmbisonicsRecomposer.h */,
+				2C4D33A017D75CF200A3AE8C /* AmbisonicRecomposer.cpp */,
+				2C4D33A117D75CF200A3AE8C /* AmbisonicRecomposer.h */,
 				8FB7ADC817C0F5750011C71B /* AmbisonicVirtualMicUI.cpp */,
 				8FB7ADC917C0F5750011C71B /* AmbisonicVirtualMicUI.h */,
 				8FB7ADCA17C0F5750011C71B /* AmbisonicVirtualMicUIManager.cpp */,
@@ -809,7 +809,6 @@
 				8FB7AE5017C0F5750011C71B /* AmbisonicsMultiDecoder.h in Headers */,
 				8FB7AE5217C0F5750011C71B /* AmbisonicOptim.h in Headers */,
 				8FB7AE5417C0F5750011C71B /* AmbisonicsProjector.h in Headers */,
-				8FB7AE5617C0F5750011C71B /* AmbisonicsRecomposer.h in Headers */,
 				8FB7AE5817C0F5750011C71B /* AmbisonicVirtualMicUI.h in Headers */,
 				8FB7AE5A17C0F5750011C71B /* AmbisonicVirtualMicUIManager.h in Headers */,
 				8FB7AE5C17C0F5750011C71B /* AmbisonicsRestitution.h in Headers */,
@@ -821,6 +820,7 @@
 				8FB7AE6817C0F5750011C71B /* AmbisonicVector.h in Headers */,
 				8FB7AE6A17C0F5750011C71B /* AmbisonicWider.h in Headers */,
 				8FB7AE6C17C0F59B0011C71B /* MaxConverter.h in Headers */,
+				2C4D33A317D75CF200A3AE8C /* AmbisonicRecomposer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,7 +952,6 @@
 				8FB7AE4F17C0F5750011C71B /* AmbisonicsMultiDecoder.cpp in Sources */,
 				8FB7AE5117C0F5750011C71B /* AmbisonicOptim.cpp in Sources */,
 				8FB7AE5317C0F5750011C71B /* AmbisonicsProjector.cpp in Sources */,
-				8FB7AE5517C0F5750011C71B /* AmbisonicsRecomposer.cpp in Sources */,
 				8FB7AE5717C0F5750011C71B /* AmbisonicVirtualMicUI.cpp in Sources */,
 				8FB7AE5917C0F5750011C71B /* AmbisonicVirtualMicUIManager.cpp in Sources */,
 				8FB7AE5B17C0F5750011C71B /* AmbisonicsRestitution.cpp in Sources */,
@@ -963,6 +962,7 @@
 				8FB7AE6517C0F5750011C71B /* AmbisonicSpectrum.cpp in Sources */,
 				8FB7AE6717C0F5750011C71B /* AmbisonicVector.cpp in Sources */,
 				8FB7AE6917C0F5750011C71B /* AmbisonicWider.cpp in Sources */,
+				2C4D33A217D75CF200A3AE8C /* AmbisonicRecomposer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

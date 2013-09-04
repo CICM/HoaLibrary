@@ -53,7 +53,7 @@ typedef struct  _space
     int         f_cursorType;
 
 	AmbisonicsViewer*        f_viewer;
-    AmbisonicsRecomposer*    f_recomposer;
+    AmbisonicRecomposer*    f_recomposer;
 
 	double                  f_harmonicsValues[MAX_SPEAKER];
     double                  f_mode_values[MAX_SPEAKER];
@@ -207,7 +207,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
 			;
     
 	x->f_viewer				= new AmbisonicsViewer(1);
-    x->f_recomposer         = new AmbisonicsRecomposer(1, 3, Hoa_Fixe);
+    x->f_recomposer         = new AmbisonicRecomposer(1, 3, Hoa_Fixe);
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
@@ -857,7 +857,7 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
                 x->f_number_of_harmonics    = x->f_order * 2 + 1;
                
                 x->f_viewer         = new AmbisonicsViewer(x->f_order);
-                x->f_recomposer		= new AmbisonicsRecomposer(x->f_order, x->f_number_of_microphones, Hoa_Fixe);
+                x->f_recomposer		= new AmbisonicRecomposer(x->f_order, x->f_number_of_microphones, Hoa_Fixe);
                 
                 jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
                 space_compute(x);
