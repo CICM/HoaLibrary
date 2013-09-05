@@ -469,19 +469,6 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 
 	if (g) 
 	{
-		/* Circles */
-		for(i = 5; i > 0; i--)
-		{
-            //inner shadow
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, long(x->f_center.x)+0.5, long(x->f_center.y)+0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
-            jgraphics_stroke(g);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &black);
-            jgraphics_arc(g, long(x->f_center.x)-0.5, long(x->f_center.y)-0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
-            jgraphics_stroke(g);
-		}
 		/* Axes */
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
@@ -493,17 +480,17 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 			
 			y1 = 1. / 6. * x->f_rayonGlobal;
 			y2 = 5. / 6. * x->f_rayonGlobal;
-			
+            			
             /* Inner shadow */
             if ( Tools::isInsideDeg( Tools::radToDeg(rotateAngle), 46., -135.) )
             {
-                jgraphics_move_to(g, -0.5, long(y1));
-                jgraphics_line_to(g, -0.5, long(y2));
+                jgraphics_move_to(g, -1, long(y1));
+                jgraphics_line_to(g, -1, long(y2));
             }
             else
             {
-                jgraphics_move_to(g, 0.5, long(y1));
-                jgraphics_line_to(g, 0.5, long(y2));
+                jgraphics_move_to(g, 1, long(y1));
+                jgraphics_line_to(g, 1, long(y2));
             }
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
@@ -517,6 +504,24 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 			
 			jgraphics_rotate(g, -rotateAngle);
 		}
+        
+        jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center.x, x->f_center.y);
+		jgraphics_set_matrix(g, &transform);
+        
+        /* Circles */
+        for(i = 5; i > 0; i--)
+		{
+            //inner shadow
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_arc(g, 1, 1, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_arc(g, 0, 0, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_stroke(g);
+		}
+        
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
