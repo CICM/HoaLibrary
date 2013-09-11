@@ -198,9 +198,9 @@ void color_patchline(t_connect *x)
 		if (validConditionColor(obj) == 1)
 		{ 
 			if (jpatchline_get_inletnum(line) % 2 == 1) 
-				jpatchline_set_color(line, &x->f_colorPositiv);
+				jpatchline_set_color(line, &x->f_colorNegativ);
 			else
-				jpatchline_set_color(line, &x->f_colorNegativ);			
+				jpatchline_set_color(line, &x->f_colorPositiv);
 		}
 		else if (validConditionColor(obj) == 2)
 		{ 
