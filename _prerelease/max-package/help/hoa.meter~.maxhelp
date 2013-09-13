@@ -1712,7 +1712,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 100.0, 126.0, 838.0, 676.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1925,7 +1925,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 401.0, 310.0, 250.0, 20.0 ],
+									"patching_rect" : [ 401.0, 310.0, 234.0, 20.0 ],
 									"text_width" : 75.0
 								}
 
@@ -3488,7 +3488,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,

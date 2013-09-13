@@ -469,19 +469,6 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 
 	if (g) 
 	{
-		/* Circles */
-		for(i = 5; i > 0; i--)
-		{
-            //inner shadow
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, long(x->f_center.x)+0.5, long(x->f_center.y)+0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
-            jgraphics_stroke(g);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &black);
-            jgraphics_arc(g, long(x->f_center.x)-0.5, long(x->f_center.y)-0.5, (double)i * x->f_rayonCircle,  0., CICM_2PI);
-            jgraphics_stroke(g);
-		}
 		/* Axes */
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
@@ -493,17 +480,17 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 			
 			y1 = 1. / 6. * x->f_rayonGlobal;
 			y2 = 5. / 6. * x->f_rayonGlobal;
-			
+            			
             /* Inner shadow */
             if ( Tools::isInsideDeg( Tools::radToDeg(rotateAngle), 46., -135.) )
             {
-                jgraphics_move_to(g, -0.5, long(y1));
-                jgraphics_line_to(g, -0.5, long(y2));
+                jgraphics_move_to(g, -1, long(y1));
+                jgraphics_line_to(g, -1, long(y2));
             }
             else
             {
-                jgraphics_move_to(g, 0.5, long(y1));
-                jgraphics_line_to(g, 0.5, long(y2));
+                jgraphics_move_to(g, 1, long(y1));
+                jgraphics_line_to(g, 1, long(y2));
             }
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
@@ -517,6 +504,24 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 			
 			jgraphics_rotate(g, -rotateAngle);
 		}
+        
+        jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center.x, x->f_center.y);
+		jgraphics_set_matrix(g, &transform);
+        
+        /* Circles */
+        for(i = 5; i > 0; i--)
+		{
+            //inner shadow
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_arc(g, 1, 1, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_stroke(g);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_arc(g, 0, 0, (double)i * x->f_rayonCircle,  0., CICM_2PI);
+            jgraphics_stroke(g);
+		}
+        
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
 	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
@@ -578,7 +583,6 @@ void draw_contribution(t_scope *x,  t_object *view, t_rect *rect)
 			sprintf(text,"%.2f", (float)(i * biggestcontrib));
 			jtextlayout_set(jtl, text, jf, x1 - x->f_fontsize * 2, y1 - i * x->f_rayonCircle, x->f_fontsize * 4, x->f_fontsize, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
 			jtextlayout_draw(jtl, g);
-			
 		}
 		jbox_end_layer((t_object*)x, view, gensym("contrib_layer"));
 		jtextlayout_destroy(jtl);
@@ -691,26 +695,33 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
             negPathLen = pathLength;
             
             // draw harmonics :
-            if (posPathLen || negPathLen) {
+            if (posPathLen || negPathLen)
+            {
                 jgraphics_new_path(g);
                 jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
                 jgraphics_set_matrix(g, &transform);
                 
                 // shadows
+                jgraphics_translate(g, 1, 1); // decalage de l'ombre
                 if (posPathLen) jgraphics_append_path(g, posHarmPath);
-                //if (negPathLen) jgraphics_append_path(g, negHarmPath);
+                if (negPathLen) jgraphics_append_path(g, negHarmPath);
                 jgraphics_set_source_jrgba(g, &shadcolor);
                 jgraphics_stroke(g);
+                jgraphics_translate(g, -1, -1); // annulation du decalage
                 
-                jgraphics_translate(g, 1, 1);
                 // harmocolor
-                if (posPathLen) jgraphics_append_path(g, posHarmPath);
-                jgraphics_set_source_jrgba(g, &x->f_colorPositif);
-                jgraphics_stroke(g);
-                
-                if (negPathLen) jgraphics_append_path(g, negHarmPath);
-                jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
-                jgraphics_stroke(g);
+                if (posPathLen)
+                {
+                    jgraphics_append_path(g, posHarmPath);
+                    jgraphics_set_source_jrgba(g, &x->f_colorPositif);
+                    jgraphics_stroke(g);
+                }
+                if (negPathLen)
+                {
+                    jgraphics_append_path(g, negHarmPath);
+                    jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
+                    jgraphics_stroke(g);
+                }
             }
 		}
 		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
