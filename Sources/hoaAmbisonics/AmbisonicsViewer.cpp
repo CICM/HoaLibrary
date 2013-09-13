@@ -29,7 +29,7 @@ AmbisonicsViewer::AmbisonicsViewer(long anOrder, long aVectorSize, long aSamplin
 {	
     m_biggest_contribution = 0;
     m_harmonics_basis = new double*[m_number_of_harmonics];
-    
+    m_number_of_outputs = 0;
 	for (int i = 0; i < m_number_of_harmonics ; i++)
 		m_harmonics_basis[i] = new double[NUMBEROFCIRCLEPOINTS_UI];
 

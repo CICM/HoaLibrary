@@ -1,23 +1,16 @@
-#N canvas 449 42 1032 752 10;
+#N canvas 183 22 1032 752 10;
 #X obj 215 582 print sources;
 #X obj 654 47 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 300 256;
+-262144 -1 -1 0 256;
 #X msg 689 120 patching_rect 0 0 \$1 \$1;
 #X obj 245 175 hoa.map @patching_rect { 0 0 300 300 } @bgcolor { 0.9
 0.9 0.9 1 } @bgcolor2 { 0.75 0.75 0.75 1 } @bdcolor { 0 0 0 1 } @selcolor
-{ 0.36 0.36 0.37 0.5 } @outputmode { 0 } @zoom { 0.277677 } sources_parameters
-{ source 0 2.10934 0.984357 0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.19316
--2.06855 0 0.2 0.2 0.2 1 s_nosymbol } groups_parameters { group 0 2
-0 1 0 0.2 0.2 0.2 1 s_nosymbol } slots_parameters { slot 0 source 0
--1.60508 -1.11746 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.76064 1.2611
-0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
-slot 1 source 0 -1.54413 1.7473 0 0.2 0.2 0.2 1 s_nosymbol source 1
-1.70667 -2.15365 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
-0.2 1 s_nosymbol slot 2 source 0 -1.54413 1.7473 0 0.2 0.2 0.2 1 s_nosymbol
-source 1 -2.17397 -1.7473 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1
-0 0.2 0.2 0.2 1 s_nosymbol };
+{ 0.36 0.36 0.37 0.5 } @outputmode { 0 } @zoom { 0.328125 } sources_parameters
+{ source 0 -1.60508 -1.11746 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.76064
+1.2611 0 0.2 0.2 0.2 1 s_nosymbol } groups_parameters { group 0 2 0
+1 0 0.2 0.2 0.2 1 s_nosymbol };
 #X obj 414 55 nbx 10 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0.277677 256;
+-262144 -1 -1 0 256;
 #X msg 381 104 zoom \$1;
 #X obj 187 90 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -262144 -1 -1 0 256;
@@ -35,10 +28,10 @@ source 1 -2.17397 -1.7473 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1
 #X msg 796 149 0;
 #X msg 809 179 1;
 #X msg 818 214 2;
-#X msg 520 120 source 1 car 0 -1;
+#X msg 520 121 source 1 car 0 -1;
 #X msg 121 173 room_col 0;
-#X obj 229 178 vsl 15 294 0 127 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 8200 1;
+#X obj 202 201 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
 #X obj 186 363 / 128;
 #X obj 659 392 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -262144 -1 -1 0 256;
@@ -60,15 +53,7 @@ source 1 -2.17397 -1.7473 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1
 #X obj 760 267 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X msg 606 335 clear all;
-#X msg 306 111 slot write /Users/Pierre/SourceTree/HoaLibrary/PureData/builds/zaza.pd
-;
-#X msg 85 80 slot read;
-#X msg 71 503 slot read /Users/Pierre/SourceTree/HoaLibrary/PureData/builds/zaza.pd
-;
-#X msg 70 131 slot write /Users/Pierre/Desktop/save.pd;
-#X obj 63 168 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 294 256;
-#X msg 106 249 size 15 \$1;
+#X msg 260 111 slot write;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 0 0;
@@ -103,9 +88,4 @@ source 1 -2.17397 -1.7473 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1
 #X connect 34 0 33 0;
 #X connect 35 0 3 0;
 #X connect 36 0 3 0;
-#X connect 37 0 3 0;
-#X connect 38 0 3 0;
-#X connect 39 0 3 0;
-#X connect 40 0 41 0;
-#X connect 41 0 21 0;
 #X coords 0 752 1 751 85 60 0;

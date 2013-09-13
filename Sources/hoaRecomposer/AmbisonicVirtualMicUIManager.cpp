@@ -227,7 +227,7 @@ void AmbisonicVirtualMicUIManager::setSelectedMicsWiderValueWithRadiusDelta(doub
 
 void AmbisonicVirtualMicUIManager::setFisheyeDestAngle(double _angleInRadian)
 {
-    m_fisheyeDestAngleInRadian = Tools::radianWrap(_angleInRadian);
+    m_fisheyeDestAngleInRadian = Tools::radian_wrap(_angleInRadian);
     m_fisheyeStep = 0;
 }
 
@@ -301,22 +301,22 @@ void AmbisonicVirtualMicUIManager::setAngleCartesianCoordinate(const int _micInd
 
 double AmbisonicVirtualMicUIManager::radianInterp(double _step, double _startRad, double _endRad)
 {
-    double start = Tools::radianWrap(_startRad);
-    double end   = Tools::radianWrap(_endRad);
+    double start = Tools::radian_wrap(_startRad);
+    double end   = Tools::radian_wrap(_endRad);
     
-    if ( Tools::radianWrap(end - start) <= CICM_PI ) // anti-clockwise
+    if ( Tools::radian_wrap(end - start) <= CICM_PI ) // anti-clockwise
     {
         if (end - start >= 0)
-            return Tools::radianWrap( start + _step*(end - start) );
+            return Tools::radian_wrap( start + _step*(end - start) );
         else
-            return Tools::radianWrap( start + _step*( (end+CICM_2PI) - start) );
+            return Tools::radian_wrap( start + _step*( (end+CICM_2PI) - start) );
     }
     else // clockwise
     {
         if (end - start <= 0)
-            return Tools::radianWrap( start + _step*(end - start) );
+            return Tools::radian_wrap( start + _step*(end - start) );
         else
-            return Tools::radianWrap( start - _step*( (start+CICM_2PI) - end) );
+            return Tools::radian_wrap( start - _step*( (start+CICM_2PI) - end) );
     }
 }
 
@@ -327,7 +327,7 @@ double AmbisonicVirtualMicUIManager::getClosestDefMicAngle(const int _micIndex)
 
 double AmbisonicVirtualMicUIManager::getClosestDefMicAngle(double _angleInRadian)
 {
-    double angle = Tools::radianWrap(_angleInRadian);
+    double angle = Tools::radian_wrap(_angleInRadian);
     double distance = CICM_2PI;
     double tempDistance, closestAngle;
     closestAngle = angle;
@@ -351,7 +351,7 @@ double AmbisonicVirtualMicUIManager::getClosestDefMicDistance(const int _micInde
 
 double AmbisonicVirtualMicUIManager::getClosestDefMicDistance(double _angleInRadian)
 {
-    double angle = Tools::radianWrap(_angleInRadian);
+    double angle = Tools::radian_wrap(_angleInRadian);
     double distance = CICM_2PI;
     
     for (int i = 0; i < m_numberOfMics; i++)

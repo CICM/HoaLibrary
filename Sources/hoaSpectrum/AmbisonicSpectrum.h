@@ -128,7 +128,7 @@ public:
             m_temp_amplitude_value[i] = 0.;
         }
     }
-    
+
 };
 
 #endif

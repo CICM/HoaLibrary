@@ -148,7 +148,7 @@ void CicmEnvelope::hamming()
 
 void CicmEnvelope::tukey(double a0)
 {
-	a0 = Tools::clip(a0);
+	a0 = Tools::clip(a0, 0., 1.);
 	for(int i = 0; i < m_size; i++)
     {
 		if(i <= ((a0 * (double)(m_size - 1)) / 2.))
@@ -200,16 +200,16 @@ void CicmEnvelope::gaussian(double a0)
 
 void CicmEnvelope::bartlettHann(double a0, double a1, double a2)
 {
-	a0 = Tools::clip(a0);
-	a1 = Tools::clip(a1);
-	a2 = Tools::clip(a2);
+	a0 = Tools::clip(a0, 0., 1.);
+	a1 = Tools::clip(a1, 0., 1.);
+	a2 = Tools::clip(a2, 0., 1.);
 	for(int i = 0; i < m_size; i++)
 		m_buffer[i] = a0 - a1 * fabs(((double)i / (double)(m_size - 1)) - 0.5) - a2 * cos((2.0 * CICM_PI *(double)i) / (double)(m_size - 1));
 }
 
 void CicmEnvelope::blackman(double a0)
 {
-	a0 = Tools::clip(a0);
+	a0 = Tools::clip(a0, 0., 1.);
 	for(int i = 0; i < m_size; i++)
 		m_buffer[i] = ((1. - a0) / 2.) - (0.5 * cos(2.0 * CICM_PI * (double)i / (double)(m_size - 1))) + ((a0 / 2.) * cos(4.0 * CICM_PI * (double)i / (double)(m_size - 1)));
 }

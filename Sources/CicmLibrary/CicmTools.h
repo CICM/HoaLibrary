@@ -101,7 +101,7 @@ public:
     /*********************************** CLIPPING ***************************************/
     /************************************************************************************/
     
-	inline static double clip(const double aValue, const double aMinimum = 0, const double aMaximum = 1)
+	inline static double clip(double aValue, const double aMinimum, const double aMaximum)
 	{
 		if(aValue < aMinimum)
 			return aMinimum;

@@ -150,9 +150,9 @@ public:
 			for(int j = 0; j < m_vector_size; j++)
 			{
 				index = m_index_vector[j];
-				m_vector_double[j] = pointor[index];
+				outputs[i][j] = pointor[index] * inputs[j];
 			}
-			cicm_product_vec_vec_d(inputs, m_vector_double, outputs[i], m_vector_size);
+			//cicm_product_vec_vec_d(inputs, m_vector_double, outputs[i], m_vector_size);
 		}
 	}
     

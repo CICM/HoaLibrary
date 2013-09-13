@@ -1,0 +1,73 @@
+#N canvas 262 69 985 701 10;
+#X obj -375 -67 hoa.encoder~ 3 ______________;
+#X obj -245 -126 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -465 -195 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.meter
+3 12 0 18 -204280 -1 0;
+#X text -460 -174 A circular meter with sound field descriptor;
+#X text -372 -126 <-- a source;
+#X text 94 -187 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X msg 121 -122 \; pd dsp 1;
+#X msg 122 -85 \; pd dsp 0;
+#X obj -416 79 hoa.meter~ @patching_rect { 0 0 400 400 } @leds_bg {
+1 } @drawvector { 1 } @drawmborder { 3 } @metersize { 0.8 } @orientation
+{ 0 } @loudspeakers { 8 } @angles { 0 45 90 135 180 225 270 315 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @offset { 0 } @rotation {
+1 } @interval { 50 } @dbperled { 3 } @nhotleds { 3 } @ntepidleds {
+3 } @nwarmleds { 3 } @numleds { 12 } @bgcolor { 0.55 0.55 0.55 1 }
+@mbgcolor { 0.4 0.4 0.4 1 } @bordercolor { 0.25 0.25 0.25 1 } @coldcolor
+{ 0 0.6 0 0.8 } @tepidcolor { 0.6 0.73 0 0.8 } @warmcolor { 0.85 0.85
+0 0.8 } @hotcolor { 1 0.6 0 0.8 } @overcolor { 1 0 0 0.8 } @energycolor
+{ 0 0 1 0.8 } @velocitycolor { 1 0 0 0.8 };
+#X msg 101 104 patching_rect 0 0 \$1 \$1;
+#X obj 150 60 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj -318 -105 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 1 256;
+#X msg -50 -31 loudspeakers 8;
+#X obj -23 -147 hoa.pi 2;
+#X obj -23 -176 loadbang;
+#X obj -74 -118 *~;
+#X obj -74 -205 phasor~ -0.3;
+#X text -36 -117 angle;
+#X obj -416 -124 sig~;
+#X msg -39 15 loudspeakers 3;
+#X msg -286 -133 1;
+#X msg 29 -15 loudspeakers 16;
+#X msg 26 40 loudspeakers 24;
+#X msg 24 84 loudspeakers 50;
+#X obj -314 -10 hoa.decoder~ 3 8 ambisonics ----------;
+#X msg 31 153 drawvector 1;
+#X connect 0 0 24 0;
+#X connect 0 1 24 1;
+#X connect 0 2 24 2;
+#X connect 0 3 24 3;
+#X connect 0 4 24 4;
+#X connect 0 5 24 5;
+#X connect 0 6 24 6;
+#X connect 1 0 0 1;
+#X connect 9 0 8 0;
+#X connect 10 0 9 0;
+#X connect 11 0 18 0;
+#X connect 12 0 8 0;
+#X connect 13 0 15 1;
+#X connect 14 0 13 0;
+#X connect 15 0 0 1;
+#X connect 16 0 15 0;
+#X connect 18 0 0 0;
+#X connect 18 0 8 1;
+#X connect 19 0 8 0;
+#X connect 20 0 11 0;
+#X connect 21 0 8 0;
+#X connect 22 0 8 0;
+#X connect 23 0 8 0;
+#X connect 24 0 8 0;
+#X connect 24 2 8 2;
+#X connect 24 3 8 3;
+#X connect 24 4 8 4;
+#X connect 24 5 8 5;
+#X connect 24 6 8 6;
+#X connect 24 7 8 7;
+#X connect 25 0 8 0;

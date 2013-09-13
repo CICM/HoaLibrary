@@ -53,7 +53,7 @@ typedef struct  _space
     int         f_cursorType;
 
 	AmbisonicsViewer*        f_viewer;
-    AmbisonicsRecomposer*    f_recomposer;
+    AmbisonicRecomposer*    f_recomposer;
 
 	double                  f_harmonicsValues[MAX_SPEAKER];
     double                  f_mode_values[MAX_SPEAKER];
@@ -118,7 +118,7 @@ int C74_EXPORT main()
     class_addmethod(c, (method)space_bang,            "bang",           A_CANT, 0);
 	class_addmethod(c, (method)space_getdrawparams,   "getdrawparams",  A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_down,      "mousedown",      A_CANT, 0);
-    class_addmethod(c, (method)space_mouse_move,       "mousemove",      A_CANT, 0);
+    class_addmethod(c, (method)space_mouse_move,      "mousemove",      A_CANT, 0);
 	class_addmethod(c, (method)space_mouse_drag,      "mousedrag",      A_CANT, 0);
     class_addmethod(c, (method)space_mouse_enddrag,   "mouseup",        A_CANT, 0);
     class_addmethod(c, (method)space_preset,          "preset",         0);
@@ -143,7 +143,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_LABEL                (c, "coeffs", 0, "Virtuals microphones coefficients");
     CLASS_ATTR_ACCESSORS			(c, "coeffs", NULL, coefficients_set);
 	CLASS_ATTR_DEFAULT              (c, "coeffs", 0, "666.");
-	CLASS_ATTR_SAVE                 (c, "coeffs", 1);
+	CLASS_ATTR_SAVE                 (c, "coeffs", 0);
     
 	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_space, f_color_background);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
@@ -207,7 +207,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
 			;
     
 	x->f_viewer				= new AmbisonicsViewer(1);
-    x->f_recomposer         = new AmbisonicsRecomposer(1, 3, Hoa_Fixe);
+    x->f_recomposer         = new AmbisonicRecomposer(1, 3, Hoa_Fixe);
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
@@ -215,6 +215,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_outInfos   = outlet_new(x, NULL);
     x->f_out        = listout(x);
 
+    jpopupmenu_setfont(<#t_jpopupmenu *menu#>, <#t_jfont *font#>)
 	attr_dictionary_process(x, d);
 	jbox_ready((t_jbox *)x);
 
@@ -447,57 +448,45 @@ void draw_cursor(t_space *x, t_object *view, t_rect *rect)
 
 void draw_background(t_space *x,  t_object *view, t_rect *rect)
 {
-	int i;
-	double y1, y2, rotateAngle;
-	t_jmatrix transform;
-    
-    t_jrgba black, white;
-    double contrastBlack = 0.12;
-    double contrastWhite = 0.08;
-    
-    black = white = x->f_color_circleInner;
-    black.red = Tools::clip_min(black.red -= contrastBlack);
-    black.green = Tools::clip_min(black.green -= contrastBlack);
-    black.blue = Tools::clip_min(black.blue -= contrastBlack);
-    
-    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
-    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
-    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
-
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
 	
 	if (g) 
 	{
-        /* Gros cercle */
-		jgraphics_arc(g, x->f_center.x, x->f_center.y, x->f_rayonExtCircle,  0., JGRAPHICS_2PI);
+        t_jmatrix transform;
+        jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+		jgraphics_set_matrix(g, &transform);
+        
+        t_jrgba black  = CicmMax::jrgba_addContrast(x->f_color_circleInner, -0.12);
+        t_jrgba white  = CicmMax::jrgba_addContrast(x->f_color_circleInner, 0.08);
+        
+        /* Gros cercle ***********************************/
+		jgraphics_arc(g, 0., 0., x->f_rayonExtCircle,  0., JGRAPHICS_2PI);
 		jgraphics_set_source_jrgba(g, &x->f_color_circleInner);
 		jgraphics_fill(g);
 		
-		/* Circles ***************************************/
-		for(i = x->f_nbCircleToDraw; i > 0; i--)
+		/* Petits cercles ********************************/
+		for(int i = x->f_nbCircleToDraw; i > 0; i--)
 		{
-            /* Inner shadow */
+            /* Ombres */
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, x->f_center.x + 0.5, x->f_center.y + 0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+            jgraphics_arc(g, 0.5, 0.5, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
             jgraphics_stroke(g);
             
 			/* Circle color */
 			jgraphics_set_line_width(g, 1);
 			jgraphics_set_source_jrgba(g, &black);
-			jgraphics_arc(g, x->f_center.x, x->f_center.y, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
+			jgraphics_arc(g, 0, 0, (double)i * x->f_rayonCircle,  0., JGRAPHICS_2PI);
 			jgraphics_stroke(g);
 		}
 
 		/* Axes *******************************************/
 		jgraphics_set_source_jrgba(g, &black);
 		
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-		jgraphics_set_matrix(g, &transform);
-        
-		for(i = 0; i < x->f_number_of_microphones; i++)
+		for(int i = 0; i < x->f_number_of_microphones; i++)
 		{
-			rotateAngle = (double)i/ (double)x->f_number_of_microphones * CICM_2PI - CICM_2PI / ((double)x->f_number_of_microphones * 2.);
+            double y1, y2, rotateAngle;
+			rotateAngle = (double)i / (double)x->f_number_of_microphones * CICM_2PI - CICM_PI / (double)x->f_number_of_microphones;
 			jgraphics_rotate(g, rotateAngle);
             
             y1 = 1. / x->f_nbCircleToDraw * x->f_rayonExtCircle;
@@ -857,7 +846,7 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
                 x->f_number_of_harmonics    = x->f_order * 2 + 1;
                
                 x->f_viewer         = new AmbisonicsViewer(x->f_order);
-                x->f_recomposer		= new AmbisonicsRecomposer(x->f_order, x->f_number_of_microphones, Hoa_Fixe);
+                x->f_recomposer		= new AmbisonicRecomposer(x->f_order, x->f_number_of_microphones, Hoa_Fixe);
                 
                 jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
                 space_compute(x);

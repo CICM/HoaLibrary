@@ -32,17 +32,18 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
     m_order = 1;
     if(argc && (atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT))
         m_order = atom_getfloat(argv);
-    OBJ_ATTR_LONG           ((t_object *)m_parent,"order", 0, m_order);
+    
+    OBJ_ATTR_LONG           ((t_object *)m_parent,"order", 0, &m_order);
     OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"order","label",    USESYM(symbol),0,"s",gensym_tr("Ambisonic Order"));
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"order","category", USESYM(symbol),0,str_tr("HoaLibrary"));
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"order","order",    USESYM(long),  0,"1");
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"order","save",     USESYM(long),  1,"1");
-    
+
     m_color_positive[0] = 0.;
     m_color_positive[1] = 0.;
     m_color_positive[2] = 1.;
     m_color_positive[3] = 1.;
-    OBJ_ATTR_DOUBLE_ARRAY   ((t_object *)m_parent,"poscolor", 0, 4, m_color_positive);
+    OBJ_ATTR_DOUBLE_ARRAY   ((t_object *)m_parent,"poscolor", 0, 4, &m_color_positive);
     OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"poscolor","label",    USESYM(symbol), 0,"s",gensym_tr("Positive Color"));
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"poscolor","style",    USESYM(symbol), 0,"rgba");
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"poscolor","category", USESYM(symbol), 0,str_tr("HoaLibrary"));
@@ -53,7 +54,7 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
     m_color_negative[1] = 0.;
     m_color_negative[2] = 0.;
     m_color_negative[3] = 1.;
-    OBJ_ATTR_DOUBLE_ARRAY   ((t_object *)m_parent,"negcolor", 0, 4, m_color_negative);
+    OBJ_ATTR_DOUBLE_ARRAY   ((t_object *)m_parent,"negcolor", 0, 4, &m_color_negative);
     OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"negcolor","label",    USESYM(symbol),0,"s",gensym_tr("Negative Color"));
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"negcolor","style",    USESYM(symbol),0,"rgba");
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"negcolor","category", USESYM(symbol),0,str_tr("HoaLibrary"));
@@ -61,7 +62,7 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"negcolor","save",     USESYM(long),  1,"1");
     
     m_auto_connect = 1;
-    OBJ_ATTR_LONG           ((t_object *)m_parent,"autoconnect", 0, m_auto_connect);
+    OBJ_ATTR_LONG           ((t_object *)m_parent,"autoconnect", 0, &m_auto_connect);
     OBJ_ATTR_ATTR_FORMAT    ((t_object *)m_parent,"autoconnect","label",    USESYM(symbol),0,"s",gensym_tr("Auto Connection"));
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","style",    USESYM(symbol),0,"onoff");
     OBJ_ATTR_ATTR_PARSE     ((t_object *)m_parent,"autoconnect","category", USESYM(symbol),0,str_tr("HoaLibrary"));
@@ -82,7 +83,7 @@ MaxAmbisonic::MaxAmbisonic(t_hoa_object* aParentObject, long argc, t_atom* argv)
         atom_setlong(m_box_text_items, m_order);
         for(int i = 1; i < m_number_of_box_text_items; i++)
             m_box_text_items[i] = argv[i-1];
-    }    
+    }
     
     m_line_selected = 0;
     defer_low(m_parent, (method)hoa_attach, NULL, argc, argv);
@@ -112,6 +113,7 @@ void MaxAmbisonic::attach()
     t_dictionary* d = (t_dictionary *)gensym("#D")->s_thing;
     if (d) attr_dictionary_process(m_parent, d);
     attr_args_process(m_parent, m_number_of_box_text_items, m_box_text_items);
+    object_attr_setlong(m_parent, gensym("order"), m_parent->f_ambi->getOrder());
 }
 
 void MaxAmbisonic::save_to_dictionary(t_dictionary* d)
@@ -301,8 +303,10 @@ t_max_err MaxAmbisonic::notify(t_symbol *s, t_symbol *msg, void *sender, void *d
 		t_symbol* attr_name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
         if(attr_name == gensym("order"))
         {
-            if(object_attr_getlong(m_parent, gensym("order")) != m_parent->f_ambi->getOrder())
+            if( object_attr_getlong(m_parent, gensym("order")) != m_parent->f_ambi->getOrder())
             {
+                
+                post("%ld", m_order);
                 t_atom* state = CicmMax::dsp_stop((t_object *)m_parent);
                 retain_objects();
                 delete(m_parent->f_ambi);
@@ -472,8 +476,11 @@ void hoa_assist(t_hoa_object_all *x, void *b, long m, long a, char *s)
 	sprintf(s,"(Signal) %s", x->f_ambi_optim->getHarmonicsName(a).c_str());
 }
 
-
-
+t_max_err hoa_attr_order_set(t_object *x, t_object *attr, long argc, t_atom *argv)
+{
+    post("hi");
+    return NULL;
+}
 
 
 

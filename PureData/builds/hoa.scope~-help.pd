@@ -1,0 +1,55 @@
+#N canvas 322 109 1032 752 10;
+#X obj 609 108 hoa.pi 2;
+#X obj 609 79 loadbang;
+#X obj 558 137 *~;
+#X obj 558 54 phasor~ 0.1;
+#X text 269 125 source;
+#X text 592 135 angle;
+#X msg 579 160 \; pd dsp 1;
+#X msg 579 198 \; pd dsp 0;
+#X obj 267 254 hoa.scope~ @patching_rect { 0 0 298 298 } @order { 7
+} @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles { 1 }
+@drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7
+0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0
+0 1 1 };
+#X msg 41 237 patching_rect 0 0 \$1 \$1;
+#X obj 41 189 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 298 256;
+#X obj 267 148 sig~ 1;
+#X msg 127 163 order \$1;
+#X obj 127 136 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 7 256;
+#X obj 127 74 loadbang;
+#X msg 127 108 7;
+#X obj 267 197 hoa.encoder~ 7 ----------------------------------;
+#X obj 41 113 loadbang;
+#X msg 41 147 298;
+#X connect 0 0 2 1;
+#X connect 1 0 0 0;
+#X connect 2 0 16 1;
+#X connect 3 0 2 0;
+#X connect 9 0 8 0;
+#X connect 10 0 9 0;
+#X connect 11 0 16 0;
+#X connect 12 0 8 0;
+#X connect 13 0 12 0;
+#X connect 14 0 15 0;
+#X connect 15 0 13 0;
+#X connect 16 0 8 0;
+#X connect 16 1 8 1;
+#X connect 16 2 8 2;
+#X connect 16 3 8 3;
+#X connect 16 4 8 4;
+#X connect 16 5 8 5;
+#X connect 16 6 8 6;
+#X connect 16 7 8 7;
+#X connect 16 8 8 8;
+#X connect 16 9 8 9;
+#X connect 16 10 8 10;
+#X connect 16 11 8 11;
+#X connect 16 12 8 12;
+#X connect 16 13 8 13;
+#X connect 16 14 8 14;
+#X connect 17 0 18 0;
+#X connect 18 0 10 0;
+#X coords 0 752 1 751 85 60 0;

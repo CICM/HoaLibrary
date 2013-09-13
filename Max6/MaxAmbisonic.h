@@ -103,5 +103,6 @@ void hoa_save(t_hoa_object_all *x, t_dictionary *d);
 void hoa_attach(t_hoa_object_all *x, t_symbol *s, long argc, t_atom *argv);
 void hoa_connect(t_hoa_object_all *x, t_symbol *s, long argc, t_atom* argv);
 void hoa_assist(t_hoa_object_all *x, void *b, long m, long a, char *s);
+t_max_err hoa_attr_order_set(t_object *x, t_object *attr, long argc, t_atom *argv);
 
 #endif

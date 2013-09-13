@@ -38,11 +38,11 @@ enum
     Hoa_Free
 };
 
-class AmbisonicRecomposer : public Ambisonic//, public Planewaves
+class AmbisonicRecomposer : public Ambisonic
 {
 	
 private:
-    long                        m_number_of_loudspeakers;
+    long                        m_number_of_microphones;
     
     cicm_matrix_float           m_recomposer_matrix_float;
     cicm_matrix_double          m_recomposer_matrix_double;
@@ -107,7 +107,7 @@ public:
         double wide     = m_wider_lines[0]->process();
         m_encoders[0]->process(aInputs[0], aOutputs, angle);
         m_widers[0]->process(aOutputs, aOutputs, wide);
-		for(int i = 1; i < m_number_of_loudspeakers; i++)
+		for(int i = 1; i < m_number_of_microphones; i++)
         {
             angle = m_lines[i]->process();
             wide  = m_wider_lines[i]->process();
@@ -123,7 +123,7 @@ public:
         float wide  = m_wider_lines[0]->process();
         m_encoders[0]->process(aInputs[0], aOutputs, angle);
         m_widers[0]->process(aOutputs, aOutputs, wide);
-		for(int i = 1; i < m_number_of_loudspeakers; i++)
+		for(int i = 1; i < m_number_of_microphones; i++)
         {
             angle = m_lines[i]->process();
             wide  = m_wider_lines[i]->process();
@@ -145,7 +145,7 @@ public:
         m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_double);
         m_wider_lines[0]->process(m_angles_vector_double);
         m_widers[0]->process(aOutputs, aOutputs, m_angles_vector_double);
-        for(int i = 1; i < m_number_of_loudspeakers; i++)
+        for(int i = 1; i < m_number_of_microphones; i++)
         {
             m_lines[i]->process(m_angles_vector_double);
             m_encoders[i]->process(aInputs[i], m_harmonics_matrix_double, m_angles_vector_double);
@@ -164,7 +164,7 @@ public:
         m_encoders[0]->process(aInputs[0], aOutputs, m_angles_vector_float);
         m_wider_lines[0]->process(m_angles_vector_float);
         m_widers[0]->process(aOutputs, aOutputs, m_angles_vector_float);
-        for(int i = 1; i < m_number_of_loudspeakers; i++)
+        for(int i = 1; i < m_number_of_microphones; i++)
         {
             m_lines[i]->process(m_angles_vector_float);
             m_encoders[i]->process(aInputs[i], m_harmonics_matrix_float, m_angles_vector_float);
@@ -184,23 +184,23 @@ public:
     /* Perform sample by sample */
     inline void processFisheye(double* aInputs, double* aOutputs)
 	{
-        cicm_product_mat_vec_d(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+        cicm_product_mat_vec_d(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     inline void processFisheye(float* aInputs, float* aOutputs)
 	{
-        cicm_product_mat_vec_f(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+        cicm_product_mat_vec_f(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     inline void processFisheye(double* aInputs, double* aOutputs, double fisheyeFactor)
 	{
         
         Tools::clip(fisheyeFactor, 0., 1.);
-        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_loudspeakers;
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         double angle = 0;
         m_encoders[0]->process(aInputs[0], aOutputs, angle);
         
-        for(int i = 1; i < m_number_of_loudspeakers; i++)
+        for(int i = 1; i < m_number_of_microphones; i++)
         {
             angle = Tools::radianInterp(fisheyeFactor, 0., distanceBetwenTwoDefMics * (float)i);
             m_encoders[i]->process(aInputs[i], m_harmonics_vector_double, angle);
@@ -211,11 +211,11 @@ public:
     inline void processFisheye(float* aInputs, float* aOutputs, float fisheyeFactor)
 	{
         Tools::clip(fisheyeFactor, 0.f, 1.f);
-        float distanceBetwenTwoDefMics = CICM_2PI / m_number_of_loudspeakers;
+        float distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         float angle = 0;
         m_encoders[0]->process(aInputs[0], aOutputs, angle);
         
-        for(int i = 1; i < m_number_of_loudspeakers; i++)
+        for(int i = 1; i < m_number_of_microphones; i++)
         {
             angle = Tools::radianInterp(fisheyeFactor, 0., distanceBetwenTwoDefMics * (float)i);
             m_encoders[i]->process(aInputs[i], m_harmonics_vector_float, angle);
@@ -228,7 +228,7 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
 		{
-            for(int j = 0; j < m_number_of_loudspeakers; j++)
+            for(int j = 0; j < m_number_of_microphones; j++)
             {
                 m_microphones_vector_double[j] = aInputs[j][i];
             }
@@ -244,7 +244,7 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
 		{
-            for(int j = 0; j < m_number_of_loudspeakers; j++)
+            for(int j = 0; j < m_number_of_microphones; j++)
             {
                 m_microphones_vector_float[j] = aInputs[j][i];
             }
@@ -259,12 +259,12 @@ public:
 	inline void processFisheye(double** aInputs, double** aOutputs, double* fisheyeFactor)
 	{
         Tools::clip(fisheyeFactor, m_vector_size, 0., 1.);
-        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_loudspeakers;
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         
         m_encoders[0]->setAngle(0.);
         m_encoders[0]->process(aInputs[0], aOutputs);
         
-        for(int i = 1; i < m_number_of_loudspeakers; i++)
+        for(int i = 1; i < m_number_of_microphones; i++)
         {
             for (int j = 0; j < m_vector_size; j++)
             {
@@ -277,12 +277,12 @@ public:
     inline void processFisheye(float** aInputs, float** aOutputs, float* fisheyeFactor)
 	{
         Tools::clip(fisheyeFactor, m_vector_size, 0.f, 1.f);
-        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_loudspeakers;
+        double distanceBetwenTwoDefMics = CICM_2PI / m_number_of_microphones;
         
         m_encoders[0]->setAngle(0.f);
         m_encoders[0]->process(aInputs[0], aOutputs);
         
-        for(int i = 1; i < m_number_of_loudspeakers; i++)
+        for(int i = 1; i < m_number_of_microphones; i++)
         {
             for (int j = 0; j < m_vector_size; j++)
             {
@@ -300,12 +300,12 @@ public:
     /* Perform sample by sample */
     inline void processFixe(double* aInputs, double* aOutputs)
 	{
-         cicm_product_mat_vec_d(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+         cicm_product_mat_vec_d(m_recomposer_matrix_double, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     inline void processFixe(float* aInputs, float* aOutputs)
 	{
-        cicm_product_mat_vec_f(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_loudspeakers);
+        cicm_product_mat_vec_f(m_recomposer_matrix_float, aInputs, aOutputs, m_number_of_harmonics, m_number_of_microphones);
 	}
     
     /* Perform sample block */
@@ -313,7 +313,7 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
 		{
-            for(int j = 0; j < m_number_of_loudspeakers; j++)
+            for(int j = 0; j < m_number_of_microphones; j++)
             {
                 m_microphones_vector_double[j] = aInputs[j][i];
             }
@@ -329,7 +329,7 @@ public:
 	{
         for(int i = 0; i < m_vector_size; i++)
 		{
-            for(int j = 0; j < m_number_of_loudspeakers; j++)
+            for(int j = 0; j < m_number_of_microphones; j++)
             {
                 m_microphones_vector_float[j] = aInputs[j][i];
             }
