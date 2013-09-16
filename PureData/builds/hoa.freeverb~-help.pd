@@ -1,156 +1,120 @@
-#N canvas 245 119 893 567 10;
-#X obj -305 -335 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.freeverb~
+#N canvas 245 119 980 616 10;
+#X obj -405 -436 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.freeverb~
 3 12 0 18 -204280 -1 0;
-#X text -129 178 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
-#X obj -95 -90 hoa.freeverb~ 3 ---------;
-#X obj -95 -135 hoa.map~ 3 2 ------------;
-#X msg 130 -152 wet \$1;
-#X obj 130 -185 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0.96 256;
-#X obj 207 -183 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 -0.87 256;
-#X msg 207 -150 dry \$1;
-#X obj 52 -187 phasor~ 1.33;
-#X obj 278 -180 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0.554 256;
-#X msg 278 -147 damp \$1;
-#X obj 348 -184 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0.8 256;
-#X msg 347 -151 size \$1;
-#X obj 426 -184 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0.5 256;
-#X msg 425 -151 spread \$1;
-#X obj 219 -93 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X msg 218 -60 freeze \$1;
-#X obj -117 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -118 13 atodb~;
-#X obj -100 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -101 13 atodb~;
-#X obj -134 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -135 13 atodb~;
-#X obj -83 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -84 13 atodb~;
-#X obj -32 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -33 13 atodb~;
-#X obj -49 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -50 13 atodb~;
-#X obj -66 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -67 13 atodb~;
-#X obj -135 -14 dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
-#X obj 2 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 1 13 atodb~;
-#X obj 19 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 18 13 atodb~;
-#X obj -15 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -16 13 atodb~;
-#X obj 36 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 35 13 atodb~;
-#X obj 87 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 86 13 atodb~;
-#X obj 70 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 69 13 atodb~;
-#X obj 53 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 52 13 atodb~;
-#X obj 121 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 120 13 atodb~;
-#X obj 104 41 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 103 13 atodb~;
-#X obj -135 -45 hoa.decoder~ 3 16 -------------------------;
-#X text -302 -313 An implementation of the freeverb algorithm for ambisonics.
+#X obj -95 -191 hoa.freeverb~ 3 ---------;
+#X obj -95 -256 hoa.map~ 3 2 ------------;
+#X msg 150 -273 wet \$1;
+#X obj 150 -306 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X obj 227 -304 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X msg 227 -271 dry \$1;
+#X obj 52 -308 phasor~ 1.33;
+#X obj 291 -304 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X msg 291 -271 damp \$1;
+#X obj 434 -301 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X msg 433 -268 size \$1;
+#X obj -249 -95 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0.63 256;
+#X msg -250 -62 spread \$1;
+#X msg -261 -173 freeze \$1;
+#X obj -141 124 dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
+#X obj -141 93 hoa.decoder~ 3 16 -------------------------;
+#X text -402 -414 An implementation of the freeverb algorithm for ambisonics.
 ;
-#X text -300 -285 hoa.freeverb~ is based on Schroeder/Moorer reverberation
+#X obj -382 -103 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0.9 256;
+#X msg -382 -63 fspread \$1;
+#X msg -276 -295 0 pol 1 0;
+#X msg -198 -298 1 pol 1 3.1416;
+#X obj -276 -324 loadbang;
+#X obj -95 -308 phasor~ 1;
+#X msg 4 -385 \; pd dsp 1;
+#X msg 96 -383 \; pd dsp 0;
+#X text 154 -414 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text 154 -430 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -261 -211 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text -266 -237 Freeze the reverb;
+#X text 150 -330 Wet / Dry (0 -1);
+#X text 271 -327 Damping value (0 - 1);
+#X text 408 -328 Size of the room (0 - 1);
+#X text -400 -386 hoa.freeverb~ is based on Schroeder/Moorer reverberation
 model that uses eight parallel comb filters and four cascaded allpass
-filters and adapted to ambisonics domain. The number of comb filters
-depends on the harmonics order to optimize the process.;
-#X obj -95 -187 phasor~ 1;
-#X obj 404 -111 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0.94 256;
-#X msg 404 -71 fspread \$1;
-#X msg -276 -174 0 pol 1 0;
-#X msg -198 -177 1 pol 1 3.1416;
-#X obj -206 -202 loadbang;
-#X connect 2 0 50 0;
-#X connect 2 1 50 1;
-#X connect 2 2 50 2;
-#X connect 2 3 50 3;
-#X connect 2 4 50 4;
-#X connect 2 5 50 5;
-#X connect 2 6 50 6;
-#X connect 3 0 2 0;
-#X connect 3 1 2 1;
-#X connect 3 2 2 2;
-#X connect 3 3 2 3;
-#X connect 3 4 2 4;
-#X connect 3 5 2 5;
-#X connect 3 6 2 6;
-#X connect 4 0 2 0;
-#X connect 5 0 4 0;
-#X connect 6 0 7 0;
-#X connect 7 0 2 0;
-#X connect 8 0 3 1;
-#X connect 9 0 10 0;
-#X connect 10 0 2 0;
-#X connect 11 0 12 0;
-#X connect 12 0 2 0;
-#X connect 13 0 14 0;
-#X connect 14 0 2 0;
-#X connect 15 0 16 0;
-#X connect 16 0 2 0;
-#X connect 18 0 17 0;
-#X connect 20 0 19 0;
+filters adapted to ambisonic domain.;
+#X text -409 -130 First spread (0 - 1);
+#X text -269 -132 Late spread (0 - 1);
+#X obj -131 -143 hoa.scope~ @order [ 3 ] @patching_rect { 0 0 225 225
+} @order { 3 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles
+{ 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor
+{ 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
+{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 3 } @gain { 1 }
+@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
+{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
+@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
+{ 0 0 225 225 } @order { 3 } @gain { 1 } @interval { 100 } @drawcircle
+{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
+1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
+1 0 0 1 } @nhcolor { 0 0 1 1 };
+#X connect 1 0 16 0;
+#X connect 1 0 36 0;
+#X connect 1 1 16 1;
+#X connect 1 1 36 1;
+#X connect 1 2 16 2;
+#X connect 1 2 36 2;
+#X connect 1 3 16 3;
+#X connect 1 3 36 3;
+#X connect 1 4 16 4;
+#X connect 1 4 36 4;
+#X connect 1 5 16 5;
+#X connect 1 5 36 5;
+#X connect 1 6 16 6;
+#X connect 1 6 36 6;
+#X connect 2 0 1 0;
+#X connect 2 1 1 1;
+#X connect 2 2 1 2;
+#X connect 2 3 1 3;
+#X connect 2 4 1 4;
+#X connect 2 5 1 5;
+#X connect 2 6 1 6;
+#X connect 3 0 1 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 1 0;
+#X connect 7 0 2 1;
+#X connect 8 0 9 0;
+#X connect 9 0 1 0;
+#X connect 10 0 11 0;
+#X connect 11 0 1 0;
+#X connect 12 0 13 0;
+#X connect 13 0 1 0;
+#X connect 14 0 1 0;
+#X connect 16 0 15 0;
+#X connect 16 1 15 1;
+#X connect 16 2 15 2;
+#X connect 16 3 15 3;
+#X connect 16 4 15 4;
+#X connect 16 5 15 5;
+#X connect 16 6 15 6;
+#X connect 16 7 15 7;
+#X connect 16 8 15 8;
+#X connect 16 9 15 9;
+#X connect 16 10 15 10;
+#X connect 16 11 15 11;
+#X connect 16 12 15 12;
+#X connect 16 13 15 13;
+#X connect 16 14 15 14;
+#X connect 16 15 15 15;
+#X connect 18 0 19 0;
+#X connect 19 0 1 0;
+#X connect 20 0 2 0;
+#X connect 21 0 2 0;
+#X connect 22 0 20 0;
 #X connect 22 0 21 0;
-#X connect 24 0 23 0;
-#X connect 26 0 25 0;
-#X connect 28 0 27 0;
-#X connect 30 0 29 0;
-#X connect 33 0 32 0;
-#X connect 35 0 34 0;
-#X connect 37 0 36 0;
-#X connect 39 0 38 0;
-#X connect 41 0 40 0;
-#X connect 43 0 42 0;
-#X connect 45 0 44 0;
-#X connect 47 0 46 0;
-#X connect 49 0 48 0;
-#X connect 50 0 22 0;
-#X connect 50 0 31 0;
-#X connect 50 1 18 0;
-#X connect 50 1 31 1;
-#X connect 50 2 20 0;
-#X connect 50 2 31 2;
-#X connect 50 3 24 0;
-#X connect 50 3 31 3;
-#X connect 50 4 30 0;
-#X connect 50 4 31 4;
-#X connect 50 5 28 0;
-#X connect 50 5 31 5;
-#X connect 50 6 26 0;
-#X connect 50 6 31 6;
-#X connect 50 7 31 7;
-#X connect 50 7 37 0;
-#X connect 50 8 31 8;
-#X connect 50 8 33 0;
-#X connect 50 9 31 9;
-#X connect 50 9 35 0;
-#X connect 50 10 31 10;
-#X connect 50 10 39 0;
-#X connect 50 11 31 11;
-#X connect 50 11 45 0;
-#X connect 50 12 31 12;
-#X connect 50 12 43 0;
-#X connect 50 13 31 13;
-#X connect 50 13 41 0;
-#X connect 50 14 31 14;
-#X connect 50 14 49 0;
-#X connect 50 15 31 15;
-#X connect 50 15 47 0;
-#X connect 53 0 3 0;
-#X connect 54 0 55 0;
-#X connect 55 0 2 0;
-#X connect 56 0 3 0;
-#X connect 57 0 3 0;
-#X connect 58 0 56 0;
-#X connect 58 0 57 0;
-#X coords 0 567 1 566 100 60 0;
+#X connect 23 0 2 0;
+#X connect 28 0 14 0;
+#X coords 0 616 1 615 100 60 0;

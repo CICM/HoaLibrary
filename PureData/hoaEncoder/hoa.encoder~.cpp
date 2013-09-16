@@ -23,102 +23,52 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.encoder.h"
 
-extern "C"
+extern "C" void setup_hoa0x2eencoder_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_encoder
-{
-    t_object            f_obj;
-    AmbisonicsEncoder	*f_ambisonics_encoder;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-} hoa_encoder;
-
-void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_encoder_free(hoa_encoder *x);
-
-void hoa_encoder_dsp(hoa_encoder *x, t_signal **sp, short *count);
-t_int *hoa_encoder_perform(t_int *w);
-
-t_class *hoa_encoder_class;
-
-extern "C"
-{
-void setup_hoa0x2eencoder_tilde(void)
-{
-    t_class* c;
-    c = class_new(gensym("hoa.encoder~"), (t_newmethod)hoa_encoder_new,(t_method)hoa_encoder_free, sizeof(hoa_encoder), 0L, A_GIMME, 0);
+    t_eclass *c;
+    c = class_new("hoa.encoder~", (method)hoa_encoder_new,(method)hoa_encoder_free, sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
     
-    class_addmethod(c, (t_method)hoa_encoder_dsp,		gensym("dsp"),		A_CANT, 0);
+    class_dspinit(c);
     
+    class_addmethod(c, (method)hoa_encoder_dsp,     "dsp",		A_CANT, 0);
+    
+    class_register(CLASS_BOX, c);
     hoa_encoder_class = c;
-    CLASS_MAINSIGNALIN(hoa_encoder_class, hoa_encoder, f);
-}
 }
 
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_encoder *x = NULL;
+    t_hoa_encoder *x = NULL;
 	int	order = 4;
-
-    x = (hoa_encoder *)pd_new(hoa_encoder_class);
+    
+    x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
 	if (x)
 	{
         order = atom_getint(argv);
         
-		x->f_ambisonics_encoder = new AmbisonicsEncoder(order);
+		x->f_ambi_encoder = new AmbisonicEncoder(order, sys_getblksize());
+        dsp_setupjbox((t_jbox *)x, x->f_ambi_encoder->getNumberOfInputs(), x->f_ambi_encoder->getNumberOfOutputs());
         
-        for (int i = 0; i < x->f_ambisonics_encoder->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_encoder->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_encoder->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_encoder->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_encoder->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_encoder->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
+        x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 	return (x);
 }
 
-void hoa_encoder_dsp(hoa_encoder *x, t_signal **sp, short *count)
+void hoa_encoder_dsp(t_hoa_encoder *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_encoder->setVectorSize(sp[0]->s_n);
-
-    for(int i = 0; i < x->f_ambisonics_encoder->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_encoder->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_encoder->getNumberOfInputs()]->s_vec;
-
-    dsp_add(hoa_encoder_perform, 1, x);
+	x->f_ambi_encoder->setVectorSize(maxvectorsize);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_encoder_perform, 0, NULL);
 }
 
-t_int *hoa_encoder_perform(t_int *w)
+void hoa_encoder_perform(t_hoa_encoder *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_encoder *x	= (hoa_encoder *)(w[1]);
-	
-	x->f_ambisonics_encoder->process(x->f_inputs[0], x->f_outputs, x->f_inputs[1]);
-    for(int i = 0; i < x->f_ambisonics_encoder->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_encoder->getVectorSize());
-    
-	return (w + 2);
+	x->f_ambi_encoder->process(ins[0], outs, ins[1]);
 }
 
-void hoa_encoder_free(hoa_encoder *x)
+void hoa_encoder_free(t_hoa_encoder *x)
 {
-	for(int i = 0; i < x->f_ambisonics_encoder->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_encoder);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_encoder);
 }

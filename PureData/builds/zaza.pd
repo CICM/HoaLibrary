@@ -1,8 +1,0 @@
-slots_parameters { slot 0 source 0 -1.60508 -1.11746 0 0.2 0.2 0.2
-1 s_nosymbol source 1 1.76064 1.2611 0 0.2 0.2 0.2 1 s_nosymbol group
-0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol slot 1 source 0 -1.54413 1.7473
-0 0.2 0.2 0.2 1 s_nosymbol source 1 1.70667 -2.15365 0 0.2 0.2 0.2
-1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol slot 2 source
-0 -1.54413 1.7473 0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.17397 -1.7473
-0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
-} 

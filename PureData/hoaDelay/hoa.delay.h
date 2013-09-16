@@ -24,27 +24,34 @@
  *
  */
 
-#ifndef DEF_HOA_MAP_TILDE_PD
-#define DEF_HOA_MAP_TILDE_PD
+#ifndef DEF_HOA_FREEVERB_TILDE_PD
+#define DEF_HOA_FREEVERB_TILDE_PD
 
 #include "../../../PdEnhanced/Sources/pd_enhanced.h"
 #include "../../Sources/HoaLibrary.h"
 
-typedef struct _hoa_map
+
+typedef struct _hoa_delay
 {
     t_jbox              f_ob;
-    AmbisonicsMultiMaps *f_ambi_map;
-    bool				f_mode_bool;
-} t_hoa_map;
+    AmbisonicsDelay*    f_ambi_delay;
+    
+} t_hoa_delay;
 
-void *hoa_map_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_map_free(t_hoa_map *x);
-void hoa_map_list(t_hoa_map *x, t_symbol *s, long argc, t_atom *argv);
+void *hoa_delay_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_delay_free(t_hoa_delay *x);
 
-void hoa_map_dsp(t_hoa_map *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_map_perform(t_hoa_map *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
-void hoa_map_perform_onesource(t_hoa_map *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_delay_ramp(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_time_ms(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_time_sample(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_diff(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_comp(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
 
-t_eclass *hoa_map_class;
+void hoa_delay_dsp(t_hoa_delay *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_delay_perform_post(t_hoa_delay *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_delay_perform_no(t_hoa_delay *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_delay_class;
+
 
 #endif

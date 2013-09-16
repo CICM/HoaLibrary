@@ -23,161 +23,93 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.delay.h"
 
-extern "C"
+extern "C" void setup_hoa0x2edelay_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_delay
-{
-    t_object            f_obj;
-    AmbisonicsDelay     *f_ambisonics_delay;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-   
-} hoa_delay;
-
-void *hoa_delay_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_delay_free(hoa_delay *x);
-
-void hoa_delay_ramp(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_delay_time_ms(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_delay_time_sample(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_delay_diff(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_delay_comp(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
-
-void hoa_delay_dsp(hoa_delay *x, t_signal **sp, short *count);
-t_int *hoa_delay_perform_post(t_int *w);
-t_int *hoa_delay_perform_no(t_int *w);
-
-t_class *hoa_delay_class;
-
-extern "C"
-{
-void setup_hoa0x2edelay_tilde(void)
-{
-    t_class *c;
-    c = class_new(gensym("hoa.delay~"), (t_newmethod)hoa_delay_new,(t_method)hoa_delay_free, sizeof(hoa_delay), 0L, A_GIMME, 0);
+    t_eclass *c;
+    c = class_new("hoa.delay~", (method)hoa_delay_new,(method)hoa_delay_free, sizeof(t_hoa_delay), 0L, A_GIMME, 0);
     
-    class_addmethod(c, (t_method)hoa_delay_dsp,     gensym("dsp"),          A_CANT, 0);
-    class_addmethod(c, (t_method)hoa_delay_ramp,    gensym("ramp"),         A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_delay_comp,    gensym("comp"),         A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_delay_time_ms,    gensym("ms"),        A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_delay_time_sample,gensym("sample"),    A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_delay_diff,    gensym("diff"),         A_GIMME, 0);
+    class_dspinit(c);
+    class_addmethod(c, (method)hoa_delay_dsp,           "dsp",          A_CANT, 0);
+    class_addmethod(c, (method)hoa_delay_ramp,          "ramp",         A_GIMME, 0);
+    class_addmethod(c, (method)hoa_delay_comp,          "comp",         A_GIMME, 0);
+    class_addmethod(c, (method)hoa_delay_time_ms,       "ms",           A_GIMME, 0);
+    class_addmethod(c, (method)hoa_delay_time_sample,   "sample",       A_GIMME, 0);
+    class_addmethod(c, (method)hoa_delay_diff,          "diff",         A_GIMME, 0);
     
+    class_register(CLASS_BOX, c);
     hoa_delay_class = c;
-    CLASS_MAINSIGNALIN(hoa_delay_class, hoa_delay, f);
-}
 }
 
 void *hoa_delay_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_delay *x = NULL;
+	t_hoa_delay *x = NULL;
     int order = 4;
     bool mode = 1;
     double maxdelay = 5000.;
     
-    x = (hoa_delay *)pd_new(hoa_delay_class);
-	if (x)
-	{
-        order = atom_getint(argv);
-        if(atom_getsymbol(argv+1) == gensym("no"))
-            mode = 0;
-        
-		x->f_ambisonics_delay = new AmbisonicsDelay(order, mode, maxdelay, (int)sys_getblksize(), (int)sys_getsr());
-        
-        for (int i = 0; i < x->f_ambisonics_delay->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_delay->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_delay->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_delay->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
+    x = (t_hoa_delay *)object_alloc(hoa_delay_class);
+	order = atom_getint(argv);
+    if(atom_getsym(argv+1) == gensym("no"))
+        mode = 0;
+    
+    x->f_ambi_delay = new AmbisonicsDelay(order, mode, maxdelay, (int)sys_getblksize(), (int)sys_getsr());
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_delay->getNumberOfInputs(), x->f_ambi_delay->getNumberOfOutputs());
+    
+    x->f_ob.z_misc = Z_NO_INPLACE;
+    
 	return (x);
 }
 
-void hoa_delay_dsp(hoa_delay *x, t_signal **sp, short *count)
+void hoa_delay_dsp(t_hoa_delay *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_delay->setVectorSize((int)sp[0]->s_n);
-    x->f_ambisonics_delay->setSamplingRate((int)sp[0]->s_sr);
+	x->f_ambi_delay->setVectorSize(maxvectorsize);
+    x->f_ambi_delay->setSamplingRate(samplerate);
     
-    for(int i = 0; i < x->f_ambisonics_delay->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_delay->getNumberOfInputs()]->s_vec;
-    
-    if(x->f_ambisonics_delay->getMode() == Hoa_Post_Encoding)
-        dsp_add(hoa_delay_perform_post, 1, x);
-    else if(x->f_ambisonics_delay->getMode() == Hoa_No_Encoding)
-        dsp_add(hoa_delay_perform_no, 1, x);
+    if(x->f_ambi_delay->getMode() == Hoa_Post_Encoding)
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_delay_perform_post, 0, NULL);
+    else if(x->f_ambi_delay->getMode() == Hoa_No_Encoding)
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_delay_perform_no, 0, NULL);
 }
 
-t_int *hoa_delay_perform_post(t_int *w)
+void hoa_delay_perform_post(t_hoa_delay *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_delay *x	= (hoa_delay *)(w[1]);
-	
-	x->f_ambisonics_delay->process(x->f_inputs, x->f_outputs);
-
-    for(int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_delay->getVectorSize());
-
-	return (w + 2);
+    x->f_ambi_delay->process(ins, outs);
 }
 
-t_int *hoa_delay_perform_no(t_int *w)
+void hoa_delay_perform_no(t_hoa_delay *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_delay *x	= (hoa_delay *)(w[1]);
-	
-	x->f_ambisonics_delay->process(x->f_inputs[0], x->f_outputs);
-
-    for(int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_delay->getVectorSize());
-    
-	return (w + 2);
+    x->f_ambi_delay->process(ins[0], outs);
 }
 
-void hoa_delay_ramp(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_delay_ramp(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_delay->setRampInMs(atom_getfloat(argv));
+    x->f_ambi_delay->setRampInMs(atom_getfloat(argv));
 }
 
-void hoa_delay_diff(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_delay_diff(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_delay->setDiffuseFactor(atom_getfloat(argv));
+    x->f_ambi_delay->setDiffuseFactor(atom_getfloat(argv));
 }
 
-void hoa_delay_comp(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_delay_comp(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_delay->setEncodingCompensation(atom_getint(argv));
+    x->f_ambi_delay->setEncodingCompensation(atom_getint(argv));
 }
 
-void hoa_delay_time_ms(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_delay_time_ms(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_delay->setDelayTimeInMs(atom_getfloat(argv));
+    x->f_ambi_delay->setDelayTimeInMs(atom_getfloat(argv));
 }
 
-void hoa_delay_time_sample(hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_delay_time_sample(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_delay->setDelayTimeInSample(atom_getint(argv));
+    x->f_ambi_delay->setDelayTimeInSample(atom_getint(argv));
 }
 
-void hoa_delay_free(hoa_delay *x)
+void hoa_delay_free(t_hoa_delay *x)
 {
-	for(int i = 0; i < x->f_ambisonics_delay->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_delay);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_delay);
 }

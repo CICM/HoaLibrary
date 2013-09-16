@@ -23,162 +23,105 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
-
-extern "C"
-{
-#include "../m_pd.h"
-}
-
-typedef struct hoa_freeverb
-{
-    t_object            f_obj;
-    AmbisonicsFreeverb *f_ambisonics_freeverb;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-   
-} hoa_freeverb;
-
-void *hoa_freeverb_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_freeverb_free(hoa_freeverb *x);
-
-void hoa_freeverb_size(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_freeverb_damp(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_freeverb_dry(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_freeverb_wet(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_freeverb_spread(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_freeverb_fspread(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_freeverb_lspread(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_freeverb_freeze(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
-
-void hoa_freeverb_dsp(hoa_freeverb *x, t_signal **sp, short *count);
-t_int *hoa_freeverb_perform(t_int *w);
-
-t_class *hoa_freeverb_class;
+#include "hoa.freeverb.h"
 
 extern "C"
 {
 void setup_hoa0x2efreeverb_tilde(void)
 {
-    t_class *c;
-    c = class_new(gensym("hoa.freeverb~"), (t_newmethod)hoa_freeverb_new,(t_method)hoa_freeverb_free, sizeof(hoa_freeverb), 0L, A_GIMME, 0);
+    t_eclass *c;
+    c = class_new("hoa.freeverb~", (method)hoa_freeverb_new,(method)hoa_freeverb_free, sizeof(t_hoa_freeverb), 0L, A_GIMME, 0);
     
-    class_addmethod(c, (t_method)hoa_freeverb_dsp,     gensym("dsp"),		A_CANT, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_size,    gensym("size"),		A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_damp,    gensym("damp"),		A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_dry,     gensym("dry"),		A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_wet,     gensym("wet"),		A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_fspread, gensym("fspread"),	A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_lspread, gensym("lspread"),	A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_spread,  gensym("spread"),	A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_freeverb_freeze,  gensym("freeze"),	A_GIMME, 0);
+    class_dspinit(c);
     
+    class_addmethod(c, (method)hoa_freeverb_dsp,     "dsp",		A_CANT, 0);
+    class_addmethod(c, (method)hoa_freeverb_size,    "size",	A_GIMME, 0);
+    class_addmethod(c, (method)hoa_freeverb_damp,    "damp",	A_GIMME, 0);
+    class_addmethod(c, (method)hoa_freeverb_dry,     "dry",		A_GIMME, 0);
+    class_addmethod(c, (method)hoa_freeverb_wet,     "wet",		A_GIMME, 0);
+    class_addmethod(c, (method)hoa_freeverb_fspread, "fspread",	A_GIMME, 0);
+    class_addmethod(c, (method)hoa_freeverb_lspread, "lspread",	A_GIMME, 0);
+    class_addmethod(c, (method)hoa_freeverb_spread,  "spread",	A_GIMME, 0);
+    class_addmethod(c, (method)hoa_freeverb_freeze,  "freeze",	A_GIMME, 0);
+    
+    class_register(CLASS_BOX, c);
     hoa_freeverb_class = c;
-    CLASS_MAINSIGNALIN(hoa_freeverb_class, hoa_freeverb, f);
 }
 }
 
 void *hoa_freeverb_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_freeverb *x = NULL;
+	t_hoa_freeverb *x = NULL;
 	int	order = 4;
     
-    x = (hoa_freeverb *)pd_new(hoa_freeverb_class);
+    x = (t_hoa_freeverb *)object_alloc(hoa_freeverb_class);
 	if (x)
 	{
         order = atom_getint(argv);
         
-		x->f_ambisonics_freeverb = new AmbisonicsFreeverb(order);
+		x->f_ambi_freeverb = new AmbisonicFreeverb(order, sys_getblksize(), sys_getsr());
+        dsp_setupjbox((t_jbox *)x, x->f_ambi_freeverb->getNumberOfInputs(), x->f_ambi_freeverb->getNumberOfOutputs());
         
-        for (int i = 0; i < x->f_ambisonics_freeverb->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_freeverb->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_freeverb->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_freeverb->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_freeverb->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_freeverb->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
+        x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 	return (x);
 }
 
-void hoa_freeverb_dsp(hoa_freeverb *x, t_signal **sp, short *count)
+void hoa_freeverb_dsp(t_hoa_freeverb *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_freeverb->setVectorSize(sp[0]->s_n);
+	x->f_ambi_freeverb->setVectorSize(maxvectorsize);
+    x->f_ambi_freeverb->setSamplingRate(samplerate);
 
-    x->f_ambisonics_freeverb->setVectorSize(sp[0]->s_n);
-    
-    for(int i = 0; i < x->f_ambisonics_freeverb->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_freeverb->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_freeverb->getNumberOfInputs()]->s_vec;
-    
-    dsp_add(hoa_freeverb_perform, 1, x);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_freeverb_perform, 0, NULL);
 }
 
-t_int *hoa_freeverb_perform(t_int *w)
+void hoa_freeverb_perform(t_hoa_freeverb *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_freeverb *x	= (hoa_freeverb *)(w[1]);
-	
-	x->f_ambisonics_freeverb->process(x->f_inputs, x->f_outputs);
-    for(int i = 0; i < x->f_ambisonics_freeverb->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_freeverb->getVectorSize());
-
-	return (w + 2);
+    x->f_ambi_freeverb->process(ins, outs);
 }
 
-void hoa_freeverb_size(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_size(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setroomsize(atom_getfloat(argv));
+    x->f_ambi_freeverb->setroomsize(atom_getfloat(argv));
 }
 
-void hoa_freeverb_damp(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_damp(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setdamp(atom_getfloat(argv));
+    x->f_ambi_freeverb->setdamp(atom_getfloat(argv));
 }
 
-void hoa_freeverb_dry(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_dry(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setDryValue(atom_getfloat(argv));
+    x->f_ambi_freeverb->setDryValue(atom_getfloat(argv));
 }
 
-void hoa_freeverb_wet(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_wet(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setWetValue(atom_getfloat(argv));
+    x->f_ambi_freeverb->setWetValue(atom_getfloat(argv));
 }
 
-void hoa_freeverb_spread(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_spread(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setSpread(atom_getfloat(argv));
+    x->f_ambi_freeverb->setSpread(atom_getfloat(argv));
 }
 
-void hoa_freeverb_fspread(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_fspread(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setDirectionalSpread(atom_getfloat(argv));
+    x->f_ambi_freeverb->setDirectionalSpread(atom_getfloat(argv));
 }
 
-void hoa_freeverb_lspread(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_lspread(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setDiffuseSpread(atom_getfloat(argv));
+    x->f_ambi_freeverb->setDiffuseSpread(atom_getfloat(argv));
 }
 
-void hoa_freeverb_freeze(hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
+void hoa_freeverb_freeze(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv)
 {
-    x->f_ambisonics_freeverb->setmode(atom_getfloat(argv));
+    x->f_ambi_freeverb->setmode(atom_getfloat(argv));
 }
 
-void hoa_freeverb_free(hoa_freeverb *x)
+void hoa_freeverb_free(t_hoa_freeverb *x)
 {
-	for(int i = 0; i < x->f_ambisonics_freeverb->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_freeverb);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_freeverb);
 }
