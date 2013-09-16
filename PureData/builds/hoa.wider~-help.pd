@@ -1,136 +1,138 @@
-#N canvas 547 22 574 530 10;
-#X obj -255 -380 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.wider~
+#N canvas 231 133 941 655 10;
+#X obj -255 -375 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.wider~
 3 12 0 18 -204280 -1 0;
-#X text -228 87 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
-#X obj -105 -253 noise~;
-#X obj 76 -294 loadbang;
-#X obj -87 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -88 -83 atodb~;
-#X obj -70 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -71 -83 atodb~;
-#X obj -104 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -105 -83 atodb~;
-#X obj -53 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -54 -83 atodb~;
-#X obj -2 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -3 -83 atodb~;
-#X obj -19 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -20 -83 atodb~;
-#X obj -36 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -37 -83 atodb~;
-#X obj -105 -110 dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
-#X obj 32 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 31 -83 atodb~;
-#X obj 49 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 48 -83 atodb~;
-#X obj 15 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 14 -83 atodb~;
-#X obj 66 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 65 -83 atodb~;
-#X obj 117 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 116 -83 atodb~;
-#X obj 100 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 99 -83 atodb~;
-#X obj 83 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 82 -83 atodb~;
-#X obj 151 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 150 -83 atodb~;
-#X obj 134 -55 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 133 -83 atodb~;
-#X msg 76 -270 1;
-#X obj 76 -242 hoa.pi 1;
-#X obj -105 -176 hoa.wider~ 7 ------------------------------;
-#X obj 212 -239 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0 256;
-#X text -250 -330 hoa.wider~ can be used to wide the diffusion of a
+#X obj -2 -248 noise~;
+#X obj 235 -309 loadbang;
+#X obj 0 112 dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
+#X obj 235 -237 hoa.pi 1;
+#X obj 349 -279 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0.75 256;
+#X text -240 -325 hoa.wider~ can be used to wide the diffusion of a
 localised sound. The order depending signals are weighted and appear
 in a logarithmic way to have linear changes.;
-#X text -252 -358 A fractional ambisonics orders simulator;
-#X text 142 -261 Widen value between 0 and 1;
-#X obj -105 -141 hoa.decoder~ 7 16 -------------------------;
-#X obj -105 -206 hoa.encoder~ 7 -------------------------;
-#X connect 2 0 45 0;
-#X connect 3 0 37 0;
-#X connect 5 0 4 0;
-#X connect 7 0 6 0;
-#X connect 9 0 8 0;
+#X obj 302 -96 hoa.scope~ @patching_rect { 0 0 225 225 } @order { 7
+} @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles { 1 }
+@drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7
+0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0
+0 1 1 };
+#X msg -143 -255 \; pd dsp 1;
+#X msg -143 -211 \; pd dsp 0;
+#X obj 349 -216 line~;
+#X msg 349 -246 \$1 20;
+#X obj -239 -2 hoa.meter~ @patching_rect { 0 0 225 225 } @leds_bg {
+1 } @drawvector { 1 } @drawmborder { 3 } @metersize { 0.8 } @orientation
+{ 0 } @loudspeakers { 16 } @angles { 0 22.5 45 67.5 90 112.5 135 157.5
+180 202.5 225 247.5 270 292.5 315 337.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+} @offset { 0 } @rotation { 1 } @interval { 50 } @dbperled { 3 } @nhotleds
+{ 3 } @ntepidleds { 3 } @nwarmleds { 3 } @numleds { 12 } @bgcolor {
+0.55 0.55 0.55 1 } @mbgcolor { 0.4 0.4 0.4 1 } @bordercolor { 0.25
+0.25 0.25 1 } @coldcolor { 0 0.6 0 0.8 } @tepidcolor { 0.6 0.73 0 0.8
+} @warmcolor { 0.85 0.85 0 0.8 } @hotcolor { 1 0.6 0 0.8 } @overcolor
+{ 1 0 0 0.8 } @energycolor { 0 0 1 0.8 } @velocitycolor { 1 0 0 0.8
+};
+#X text 83 174 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+;
+#X text 83 158 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj 349 -329 loadbang;
+#X msg 349 -305 0.75;
+#X msg 235 -285 1;
+#X obj 235 -259 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 1 256;
+#X obj -2 -201 hoa.encoder~ 7 -------------------------;
+#X obj -2 -175 hoa.wider~ 7 ------------------------------;
+#X obj -2 -103 hoa.decoder~ 7 16 -------------------------;
+#X obj 407 -287 cnv 15 100 40 empty \$0-pddp.cnv.header empty 3 12
+0 18 -204280 -1 0;
+#X text 410 -273 between 0 and 1;
+#X text 410 -285 Widen value;
+#X text -252 -353 A fractional ambisonic orders simulator;
+#X connect 1 0 19 0;
+#X connect 2 0 17 0;
+#X connect 4 0 19 1;
+#X connect 5 0 11 0;
+#X connect 10 0 20 15;
 #X connect 11 0 10 0;
-#X connect 13 0 12 0;
-#X connect 15 0 14 0;
-#X connect 17 0 16 0;
-#X connect 20 0 19 0;
-#X connect 22 0 21 0;
-#X connect 24 0 23 0;
-#X connect 26 0 25 0;
-#X connect 28 0 27 0;
-#X connect 30 0 29 0;
-#X connect 32 0 31 0;
-#X connect 34 0 33 0;
-#X connect 36 0 35 0;
-#X connect 37 0 38 0;
-#X connect 38 0 45 1;
-#X connect 39 0 44 0;
-#X connect 39 1 44 1;
-#X connect 39 2 44 2;
-#X connect 39 3 44 3;
-#X connect 39 4 44 4;
-#X connect 39 5 44 5;
-#X connect 39 6 44 6;
-#X connect 39 7 44 7;
-#X connect 39 8 44 8;
-#X connect 39 9 44 9;
-#X connect 39 10 44 10;
-#X connect 39 11 44 11;
-#X connect 39 12 44 12;
-#X connect 39 13 44 13;
-#X connect 39 14 44 14;
-#X connect 40 0 39 15;
-#X connect 44 0 9 0;
-#X connect 44 0 18 0;
-#X connect 44 1 5 0;
-#X connect 44 1 18 1;
-#X connect 44 2 7 0;
-#X connect 44 2 18 2;
-#X connect 44 3 11 0;
-#X connect 44 3 18 3;
-#X connect 44 4 17 0;
-#X connect 44 4 18 4;
-#X connect 44 5 15 0;
-#X connect 44 5 18 5;
-#X connect 44 6 13 0;
-#X connect 44 6 18 6;
-#X connect 44 7 18 7;
-#X connect 44 7 24 0;
-#X connect 44 8 18 8;
-#X connect 44 8 20 0;
-#X connect 44 9 18 9;
-#X connect 44 9 22 0;
-#X connect 44 10 18 10;
-#X connect 44 10 26 0;
-#X connect 44 11 18 11;
-#X connect 44 11 32 0;
-#X connect 44 12 18 12;
-#X connect 44 12 30 0;
-#X connect 44 13 18 13;
-#X connect 44 13 28 0;
-#X connect 44 14 18 14;
-#X connect 44 14 36 0;
-#X connect 44 15 18 15;
-#X connect 44 15 34 0;
-#X connect 45 0 39 0;
-#X connect 45 1 39 1;
-#X connect 45 2 39 2;
-#X connect 45 3 39 3;
-#X connect 45 4 39 4;
-#X connect 45 5 39 5;
-#X connect 45 6 39 6;
-#X connect 45 7 39 7;
-#X connect 45 8 39 8;
-#X connect 45 9 39 9;
-#X connect 45 10 39 10;
-#X connect 45 11 39 11;
-#X connect 45 12 39 12;
-#X connect 45 13 39 13;
-#X connect 45 14 39 14;
-#X coords 0 530 1 529 100 60 0;
+#X connect 15 0 16 0;
+#X connect 16 0 5 0;
+#X connect 17 0 18 0;
+#X connect 18 0 4 0;
+#X connect 19 0 20 0;
+#X connect 19 1 20 1;
+#X connect 19 2 20 2;
+#X connect 19 3 20 3;
+#X connect 19 4 20 4;
+#X connect 19 5 20 5;
+#X connect 19 6 20 6;
+#X connect 19 7 20 7;
+#X connect 19 8 20 8;
+#X connect 19 9 20 9;
+#X connect 19 10 20 10;
+#X connect 19 11 20 11;
+#X connect 19 12 20 12;
+#X connect 19 13 20 13;
+#X connect 19 14 20 14;
+#X connect 20 0 7 0;
+#X connect 20 0 21 0;
+#X connect 20 1 7 1;
+#X connect 20 1 21 1;
+#X connect 20 2 7 2;
+#X connect 20 2 21 2;
+#X connect 20 3 7 3;
+#X connect 20 3 21 3;
+#X connect 20 4 7 4;
+#X connect 20 4 21 4;
+#X connect 20 5 7 5;
+#X connect 20 5 21 5;
+#X connect 20 6 7 6;
+#X connect 20 6 21 6;
+#X connect 20 7 7 7;
+#X connect 20 7 21 7;
+#X connect 20 8 7 8;
+#X connect 20 8 21 8;
+#X connect 20 9 7 9;
+#X connect 20 9 21 9;
+#X connect 20 10 7 10;
+#X connect 20 10 21 10;
+#X connect 20 11 7 11;
+#X connect 20 11 21 11;
+#X connect 20 12 7 12;
+#X connect 20 12 21 12;
+#X connect 20 13 7 13;
+#X connect 20 13 21 13;
+#X connect 20 14 7 14;
+#X connect 20 14 21 14;
+#X connect 21 0 3 0;
+#X connect 21 0 12 0;
+#X connect 21 1 3 1;
+#X connect 21 1 12 1;
+#X connect 21 2 3 2;
+#X connect 21 2 12 2;
+#X connect 21 3 3 3;
+#X connect 21 3 12 3;
+#X connect 21 4 3 4;
+#X connect 21 4 12 4;
+#X connect 21 5 3 5;
+#X connect 21 5 12 5;
+#X connect 21 6 3 6;
+#X connect 21 6 12 6;
+#X connect 21 7 3 7;
+#X connect 21 7 12 7;
+#X connect 21 8 3 8;
+#X connect 21 8 12 8;
+#X connect 21 9 3 9;
+#X connect 21 9 12 9;
+#X connect 21 10 3 10;
+#X connect 21 10 12 10;
+#X connect 21 11 3 11;
+#X connect 21 11 12 11;
+#X connect 21 12 3 12;
+#X connect 21 12 12 12;
+#X connect 21 13 3 13;
+#X connect 21 13 12 13;
+#X connect 21 14 3 14;
+#X connect 21 14 12 14;
+#X connect 21 15 3 15;
+#X connect 21 15 12 15;
+#X coords 0 655 1 654 100 60 0;

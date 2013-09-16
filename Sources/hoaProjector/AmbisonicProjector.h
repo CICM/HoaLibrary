@@ -47,6 +47,8 @@ private:
 public:
 	AmbisonicProjector(long anOrder = 1, long aNumberOfLoudspeakers = 3, long aVectorSize = 0);
     
+    long    getNumberOfInputs();
+	long    getNumberOfOutputs();
     void    setNumberOfLoudspeakers(long aNumberOfLoudspeakers);
     void    setVectorSize(long aVectorSize);
 	~AmbisonicProjector();

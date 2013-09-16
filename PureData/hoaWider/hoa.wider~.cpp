@@ -23,101 +23,52 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.wider~.h"
 
-extern "C"
+
+extern "C" void setup_hoa0x2ewider_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_wider
-{
-    t_object            f_obj;
-    AmbisonicsWider     *f_ambisonics_wider;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-} hoa_wider;
-
-void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_wider_free(hoa_wider *x);
-
-void hoa_wider_dsp(hoa_wider *x, t_signal **sp, short *count);
-t_int *hoa_wider_perform(t_int *w);
-
-t_class *hoa_wider_class;
-
-extern "C"
-{
-void setup_hoa0x2ewider_tilde(void)
-{
-    t_class* c;
-    c = class_new(gensym("hoa.wider~"), (t_newmethod)hoa_wider_new,(t_method)hoa_wider_free, sizeof(hoa_wider), 0L, A_GIMME, 0);
+    t_eclass* c;
     
-    class_addmethod(c, (t_method)hoa_wider_dsp,		gensym("dsp"),		A_CANT, 0);
+    c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (short)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
+    
+	class_dspinit(c);
+    
+	class_addmethod(c, (method)hoa_wider_dsp,       "dsp",      A_CANT, 0);
+    
+    class_register(CLASS_BOX, c);
     hoa_wider_class = c;
-    CLASS_MAINSIGNALIN(hoa_wider_class, hoa_wider, f);
-}
 }
 
 void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_wider *x = NULL;
+	t_hoa_wider *x = NULL;
 	int	order = 4;
-
-    x = (hoa_wider *)pd_new(hoa_wider_class);
-	if (x)
-	{
-        order = atom_getint(argv);
-        
-		x->f_ambisonics_wider = new AmbisonicsWider(order);
-        
-        for (int i = 0; i < x->f_ambisonics_wider->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_wider->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_wider->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_wider->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_wider->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_wider->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
+    
+	 x = (t_hoa_wider *)object_alloc(hoa_wider_class);
+    
+    order = atom_getint(argv);
+    x->f_ambi_wider = new AmbisonicWider(order, sys_getblksize());
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_wider->getNumberOfInputs(), x->f_ambi_wider->getNumberOfOutputs());
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
 	return (x);
 }
 
-void hoa_wider_dsp(hoa_wider *x, t_signal **sp, short *count)
+void hoa_wider_dsp(t_hoa_wider *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_wider->setVectorSize(sp[0]->s_n);
-
-    for(int i = 0; i < x->f_ambisonics_wider->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_wider->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_wider->getNumberOfInputs()]->s_vec;
-
-    dsp_add(hoa_wider_perform, 1, x);
+	x->f_ambi_wider->setVectorSize(maxvectorsize);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_wider_perform, 0, NULL);
 }
 
-t_int *hoa_wider_perform(t_int *w)
+void hoa_wider_perform(t_hoa_wider *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_wider *x	= (hoa_wider *)(w[1]);
-	
-	x->f_ambisonics_wider->process(x->f_inputs, x->f_outputs, x->f_inputs[x->f_ambisonics_wider->getNumberOfInputs()-1]);
-    for(int i = 0; i < x->f_ambisonics_wider->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_wider->getVectorSize());
-    
-	return (w + 2);
+	x->f_ambi_wider->process(ins, outs, ins[x->f_ambi_wider->getNumberOfInputs()-1]);
 }
 
-void hoa_wider_free(hoa_wider *x)
+void hoa_wider_free(t_hoa_wider *x)
 {
-	for(int i = 0; i < x->f_ambisonics_wider->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_wider);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_wider);
 }

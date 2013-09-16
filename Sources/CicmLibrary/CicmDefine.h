@@ -155,7 +155,10 @@ for(int cicm_i = 0; cicm_i < vector_size; cicm_i++){*(vector_destination+cicm_i)
 /******************************* Vector And Vector **********************************/
 
 #define cicm_product_vec_vec_f(vector_source_1, vector_source_2, vector_destination, vector_size) \
-for(int cicm_i = 0; cicm_i < vector_size; cicm_i++){*(vector_destination+cicm_i) = *(vector_source_1+cicm_i) * *(vector_source_2+cicm_i);}
+for(int cicm_i = 0; cicm_i < vector_size; cicm_i++) \
+{ \
+    *(vector_destination+cicm_i) = *(vector_source_1+cicm_i) * *(vector_source_2+cicm_i); \
+}
 
 #define cicm_product_vec_vec_d(vector_source_1, vector_source_2, vector_destination, vector_size) \
 for(int cicm_i = 0; cicm_i < vector_size; cicm_i++){*(vector_destination+cicm_i) = *(vector_source_1+cicm_i) * *(vector_source_2+cicm_i);}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:hoaSpace_UI/hoa.space.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaScope_UI/hoa.scope~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaMeter_UI/hoa.meter~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaMap_UI/hoa.map.xcodeproj">
+   </FileRef>
+</Workspace>

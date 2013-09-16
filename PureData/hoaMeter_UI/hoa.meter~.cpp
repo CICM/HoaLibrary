@@ -21,97 +21,7 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../../Pdease/Sources/m_epd.h"
-#include "../../Sources/HoaLibrary.h"
-
-#define MAX_SPEAKER 64
-#define DEF_SPEAKER 8
-#define OVERLED_DRAWTIME 1000
-
-typedef struct  _meter
-{
-	t_jbox      j_box;
-    t_rect      f_rect;
-	
-	t_clock*	f_clock;
-	int			f_startclock;
-	long        f_interval;
-    
-    long        f_number_of_loudspeakers;
-	double      f_offset_of_loudspeakers;
-	
-	long		f_dbperled;
-	long		f_nhotleds;
-	long		f_ntepidleds;
-	long		f_nwarmleds;
-	long		f_number_of_leds;
-	
-	double		f_angles_of_loudspeakers[MAX_SPEAKER];
-	double		f_angles_to_draw[MAX_SPEAKER];
-	double		f_width_of_loudspeakers[MAX_SPEAKER];
-    long		f_drawOverLedleftTime[MAX_SPEAKER];
-	
-	t_jrgba		f_colorBackground;
-	t_jrgba		f_colorMeterBg;
-	t_jrgba		f_colorBorder;
-	t_jrgba		f_colorMeterBorder;
-	t_jrgba		f_colorColdSignal;
-	t_jrgba		f_colorTepidSignal;
-	t_jrgba		f_colorWarmSignal;
-	t_jrgba		f_colorHotSignal;
-	t_jrgba		f_colorOverSignal;
-	
-	t_jrgba		f_colorEnergy;
-	t_jrgba		f_colorVelocity;
-	
-	t_pt		f_center;
-	double		f_rayonMax;
-	double		f_rayonCircle;
-	double		f_fontsize;
-	
-	double		f_strokeWidth;
-	double		f_rayonExt;
-	double		f_rayonInt;
-    
-	long         f_leds_bg;
-    long         f_drawvector;
-    long         f_drawmborder;
-	double       f_metersize;
-    long         f_speakers_dir_of_rotation;
-    long         f_fill_direction;
-    
-    void*               f_vector_outlet;
-    void*               f_peaks_outlet;
-	
-    AmbisonicsMeter*     f_meter;
-} t_meter;
-
-t_eclass *meter_class;
-
-extern "C" void setup_hoa0x2emeter_tilde(void);
-void *meter_new(t_symbol *s, int argc, t_atom *argv);
-void meter_free(t_meter *x);
-void meter_assist(t_meter *x, void *b, long m, long a, char *s);
-
-void meter_dsp(t_meter *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
-void meter_perform(t_meter *x, t_object *d, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
-void meter_tick(t_meter *x);
-void meter_output(t_meter *x);
-
-t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_atom *argv);
-t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av);
-
-/* Paint ------------------------------------- */
-void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params);
-void meter_paint(t_meter *x, t_object *view);
-void draw_background(t_meter *x, t_object *view, t_rect *rect);
-void draw_meter(t_meter *x,  t_object *view, t_rect *rect);
-void draw_vector_energy(t_meter *x, t_object *view, t_rect *rect);
-void draw_vector_velocity(t_meter *x, t_object *view, t_rect *rect);
-void draw_angle(t_meter *x,  t_object *view, t_rect *rect);
-void draw_skelton(t_meter *x,  t_object *view, t_rect *rect);
-void draw_separator(t_meter *x,  t_object *view, t_rect *rect);
+#include "hoa.meter~.h"
 
 extern "C" void setup_hoa0x2emeter_tilde(void)
 {
@@ -136,11 +46,11 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 	CLASS_ATTR_DEFAULT			(c, "leds_bg", 0, "1");
 	CLASS_ATTR_SAVE				(c, "leds_bg", 1);
 	
-	CLASS_ATTR_LONG				(c, "drawvector", 0, t_meter, f_drawvector);
-	CLASS_ATTR_ORDER			(c, "drawvector", 0, "2");
-    CLASS_ATTR_LABEL            (c, "drawvector", 0, "Draw Vectors");
-	CLASS_ATTR_DEFAULT			(c, "drawvector", 0, "1");
-	CLASS_ATTR_SAVE				(c, "drawvector", 1);
+	CLASS_ATTR_LONG				(c, "vectors", 0, t_meter, f_drawvector);
+	CLASS_ATTR_ORDER			(c, "vectors", 0, "2");
+    CLASS_ATTR_LABEL            (c, "vectors", 0, "Vectors");
+	CLASS_ATTR_DEFAULT			(c, "vectors", 0, "1");
+	CLASS_ATTR_SAVE				(c, "vectors", 1);
     
     CLASS_ATTR_LONG				(c, "drawmborder", 0, t_meter, f_drawmborder);
 	CLASS_ATTR_ORDER			(c, "drawmborder", 0, "3");
@@ -302,21 +212,19 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	x->j_box.b_firstin = (t_object *)x;
     
 	dsp_setupjbox((t_jbox *)x, x->f_number_of_loudspeakers, 0);
+    
     x->f_peaks_outlet = listout(x);
     x->f_vector_outlet = listout(x);
     
     x->f_meter = new AmbisonicsMeter(x->f_number_of_loudspeakers);
     
-    //dictionary_getlong(d, gensym("channels"), &x->f_number_of_loudspeakers);
-    
     x->f_meter->setNumberOfLoudspeakers(x->f_number_of_loudspeakers);
     x->f_number_of_loudspeakers = x->f_meter->getNumberOfInputs();
     
-	attr_dictionary_process(x, d);
-	
-	x->f_clock = clock_new(x,(t_method)meter_tick);
+    x->f_clock = clock_new(x,(t_method)meter_tick);
 	x->f_startclock = 0;
-	
+    
+	attr_dictionary_process(x, d);	
 	jbox_ready((t_jbox *)x);
     
 	
@@ -335,24 +243,27 @@ t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_at
 {
     if(argc && argv)
     {
-        int dspState = canvas_suspend_dsp();
-        
-        if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
-            x->f_number_of_loudspeakers = Tools::clip(long(atom_getfloat(argv)), long(1), long(MAX_SPEAKER));
-        
-        x->f_meter->setNumberOfLoudspeakers(x->f_number_of_loudspeakers);
-        jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
-        
-        canvas_resume_dsp(dspState);
-        
-        long    argc = x->f_number_of_loudspeakers;
-        t_atom* argv = new t_atom[argc];
-        for(int i = 0; i < argc; i++)
-            atom_setfloat(argv+i, ((double)i / (double)x->f_number_of_loudspeakers) * 360.);
-        
-        
-        angles_of_loudspeakers_set(x, NULL, argc, argv);
-        //object_eattr_touch((t_object *)x, gensym("angles"));
+        if(atom_gettype(argv) == A_FLOAT)
+        {
+            long d = Tools::clip(atom_getfloat(argv), 1, MAX_SPEAKER);
+            if(d != x->f_meter->getNumberOfLoudspeakers())
+            {
+                int dspState = canvas_suspend_dsp();
+                x->f_meter->setNumberOfLoudspeakers(d);
+                
+                x->f_number_of_loudspeakers = x->f_meter->getNumberOfLoudspeakers();
+                
+                long    ac = x->f_number_of_loudspeakers;
+                t_atom* av = new t_atom[ac];
+                for(int i = 0; i < ac; i++)
+                    atom_setfloat(av+i, ((double)i / (double)x->f_number_of_loudspeakers) * 360.);
+                
+                angles_of_loudspeakers_set(x, NULL, ac, av);
+                jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
+               
+                canvas_resume_dsp(dspState);
+            }
+        }
     }
     return NULL;
 }
@@ -369,7 +280,7 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
         
     }
     
-    for (int i=0; i < x->f_meter->getNumberOfInputs(); i++)
+    for (int i = 0; i < x->f_meter->getNumberOfLoudspeakers(); i++)
     {
         x->f_angles_of_loudspeakers[i] = x->f_meter->getLoudspeakerAngle(i);
     }
@@ -429,7 +340,7 @@ void meter_tick(t_meter *x)
     meter_output(x);
     
     double peak;
-    for (int i=0; i<x->f_meter->getNumberOfInputs(); i++)
+    for (int i = 0; i<x->f_number_of_loudspeakers; i++)
     {
         peak = x->f_meter->getLoudspeakerEnergy(i); // dB (negatif) de -240 à 0;
         if ( peak >= 0. ) x->f_drawOverLedleftTime[i] = OVERLED_DRAWTIME;
@@ -441,6 +352,7 @@ void meter_tick(t_meter *x)
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
 	jbox_redraw((t_jbox *)x);
+    
 	if (sys_getdspstate())
 		clock_delay(x->f_clock, x->f_interval);
 }
@@ -467,7 +379,6 @@ void meter_free(t_meter *x)
 {
 	dsp_freejbox((t_jbox *)x);
     clock_free(x->f_clock);
-	jbox_free((t_jbox *)x);
     delete x->f_meter;
 }
 
@@ -486,34 +397,32 @@ void meter_assist(t_meter *x, void *b, long m, long a, char *s)
 
 t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
-	t_symbol *name;
 	if (msg == gensym("attr_modified"))
 	{
-		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
-		if(name == gensym("mbgcolor") || name == gensym("leds_bg") || name == gensym("drawmborder"))
+		if(s == gensym("mbgcolor") || s == gensym("leds_bg") || s == gensym("drawmborder"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("separator_layer"));
 		}
-		else if(name == gensym("cicolor") || name == gensym("coldcolor") || name == gensym("tepidcolor") || name == gensym("warmcolor") || name == gensym("hotcolor") || name == gensym("overcolor") || name == gensym("numleds"))
+		else if(s == gensym("cicolor") || s == gensym("coldcolor") || s == gensym("tepidcolor") || s == gensym("warmcolor") || s == gensym("hotcolor") || s == gensym("overcolor") || s == gensym("numleds"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("separator_layer"));
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 		}
-        else if(name == gensym("drawvector"))
+        else if(s == gensym("vectors"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
 		}
-		else if(name == gensym("energycolor"))
+		else if(s == gensym("energycolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
 		}
-        else if(name == gensym("velocitycolor"))
+        else if(s == gensym("velocitycolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
 		}
-		else if(name == gensym("offset") || name == gensym("metersize") || name == gensym("ls_rot_dir") || name == gensym("fill_dir"))
+		else if(s == gensym("offset") || s == gensym("metersize") || s == gensym("ls_rot_dir") || s == gensym("fill_dir"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("skelton_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("separator_layer"));
@@ -521,13 +430,13 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
 		}
-		else if(name == gensym("dbperled") || name == gensym("nhotleds") || name == gensym("ntepidleds") || name == gensym("nwarmleds"))
+		else if(s == gensym("dbperled") || s == gensym("nhotleds") || s == gensym("ntepidleds") || s == gensym("nwarmleds"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 		}
 		jbox_redraw((t_jbox *)x);
 	}
-	return jbox_notify((t_jbox *)x, s, msg, sender, data);
+	return 0;
 }
 
 void meter_paint(t_meter *x, t_object *view)
@@ -668,7 +577,7 @@ void draw_separator(t_meter *x,  t_object *view, t_rect *rect)
 		double coso, sino, angle, x1, y1, x2, y2;
 		for(int i = 0; i < x->f_number_of_loudspeakers; i++)
 		{
-            double rotateAngle = x->f_angles_to_draw[i] + x->f_offset_of_loudspeakers + (x->f_width_of_loudspeakers[i] / 2.);
+            double rotateAngle = x->f_angles_to_draw[i] + x->f_offset_of_loudspeakers + (x->f_width_of_loudspeakers[i] / 2.) + 90.;
 
 			if(x->f_number_of_loudspeakers != 1)
             {
@@ -835,9 +744,19 @@ void draw_vector_energy(t_meter *x, t_object *view, t_rect *rect)
         
         rayon = x->f_rayonInt * 0.85;
         angle = x->f_meter->getEnergyVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
-		
-		double x1 = Tools::abscissa(rayon, angle + CICM_PI2);
-        double y1 = Tools::ordinate(rayon, angle + CICM_PI2);
+		double x1;
+		double y1;
+        
+        if(x->f_speakers_dir_of_rotation)
+        {
+            x1 = Tools::abscissa(rayon, angle + CICM_PI2);
+            y1 = Tools::ordinate(rayon, angle + CICM_PI2);
+        }
+        else
+        {
+            x1 = Tools::abscissa(rayon, -angle + CICM_PI2);
+            y1 = Tools::ordinate(rayon, -angle + CICM_PI2);
+        }
 		jgraphics_move_to(g, 0, 0);
 		jgraphics_line_to(g, x1, y1);
         jgraphics_stroke(g);
@@ -870,9 +789,19 @@ void draw_vector_velocity(t_meter *x, t_object *view, t_rect *rect)
         
         rayon = x->f_rayonInt * 0.85;
         angle = x->f_meter->getEnergyVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
-		
-		double x1 = Tools::abscissa(rayon, angle + CICM_PI2);
-        double y1 = Tools::ordinate(rayon, angle + CICM_PI2);
+		double x1;
+		double y1;
+        
+		if(x->f_speakers_dir_of_rotation)
+        {
+            x1 = Tools::abscissa(rayon, angle + CICM_PI2);
+            y1 = Tools::ordinate(rayon, angle + CICM_PI2);
+        }
+        else
+        {
+            x1 = Tools::abscissa(rayon, -angle + CICM_PI2);
+            y1 = Tools::ordinate(rayon, -angle + CICM_PI2);
+        }
 		jgraphics_move_to(g, 0, 0);
 		jgraphics_line_to(g, x1, y1);
         jgraphics_stroke(g);

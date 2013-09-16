@@ -1,231 +1,270 @@
-#N canvas 493 204 893 567 10;
-#X obj -255 -335 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map~ 3
+#N canvas 309 128 942 667 10;
+#X obj -525 -425 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map~ 3
 12 0 18 -204280 -1 0;
-#X text -79 178 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
-#X obj -118 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -119 40 atodb~;
-#X obj -101 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -134 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -84 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -68 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -51 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -34 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -17 68 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -102 40 atodb~;
-#X obj -135 40 atodb~;
-#X obj -85 40 atodb~;
-#X obj -69 40 atodb~;
-#X obj -52 40 atodb~;
-#X obj -35 40 atodb~;
-#X obj -18 40 atodb~;
-#X obj -135 -20 hoa.optim~ 3 inPhase;
-#X obj -135 -55 hoa.map~ 3 2 -------;
-#X obj 201 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 200 41 atodb~;
-#X obj 218 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 185 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 235 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 251 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 268 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 285 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 302 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 217 41 atodb~;
-#X obj 184 41 atodb~;
-#X obj 234 41 atodb~;
-#X obj 250 41 atodb~;
-#X obj 267 41 atodb~;
-#X obj 284 41 atodb~;
-#X obj 301 41 atodb~;
-#X obj 184 -19 hoa.optim~ 3 inPhase;
-#X obj 411 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 410 41 atodb~;
-#X obj 428 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 395 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 445 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 461 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 478 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 495 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 512 69 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 427 41 atodb~;
-#X obj 394 41 atodb~;
-#X obj 444 41 atodb~;
-#X obj 460 41 atodb~;
-#X obj 477 41 atodb~;
-#X obj 494 41 atodb~;
-#X obj 511 41 atodb~;
-#X obj 394 -9 hoa.optim~ 3 inPhase;
-#X obj 184 -44 hoa.map~ 3 1 pol ---;
-#X obj 394 -44 hoa.map~ 3 1 car ---;
-#X obj -135 -107 noise~;
-#X obj 184 -97 noise~;
-#X obj 242 -123 phasor~ 0.2;
-#X obj 242 -90 *~ 2;
-#X obj 301 -76 *~ 2;
-#X obj 322 -109 hoa.pi 2;
-#X obj 322 -133 loadbang;
-#X obj 452 -106 *~ 2;
-#X obj 511 -66 *~ 2;
-#X obj -226 -149 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj -405 -90 hoa.optim~ 3 inPhase;
+#X obj -405 -125 hoa.map~ 3 2 -------;
+#X obj -86 -109 hoa.optim~ 3 inPhase;
+#X obj 204 -99 hoa.optim~ 3 inPhase;
+#X obj -405 -177 noise~;
+#X obj -86 -187 noise~;
+#X obj 31 -247 phasor~ 0.2;
+#X obj -28 -180 *~ 2;
+#X obj 31 -166 *~ 2;
+#X obj 52 -199 hoa.pi 2;
+#X obj 52 -223 loadbang;
+#X obj 262 -196 *~ 2;
+#X obj 321 -156 *~ 2;
+#X obj -496 -219 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X obj -181 -168 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+#X obj -451 -238 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X msg -226 -87 0 pol \$1 \$2;
-#X obj -226 -118 pack 1 0;
-#X obj -226 -169 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X msg -496 -157 0 pol \$1 \$2;
+#X obj -496 -188 pack 1 0;
+#X obj -476 -239 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 54 -139 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 99 -168 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 54 -108 pack 1 0;
-#X obj 54 -161 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj -216 -209 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -171 -238 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -216 -178 pack 1 0;
+#X obj -216 -231 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X msg 54 -77 1 car \$1 \$2;
-#X obj -18 -107 osc~ 250;
-#X obj 452 -138 osc~ 0.13;
-#X obj 511 -108 osc~ 0.25;
-#X obj 394 -77 phasor~ 220;
-#X text -252 -313 An ambisonics sources spatializer;
-#X text -160 -219 hoa.map~'s syntax for multisource mode : index \,
-coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
-\, coordinate two (angle or ordinate);
-#X obj -135 14 hoa.decoder~ 3 8 ---;
-#X text -250 -285 hoa.map~ is an ambisonics encoder that uses fractionnal
+#X msg -216 -147 1 car \$1 \$2;
+#X obj -288 -177 osc~ 250;
+#X obj 262 -228 osc~ 0.13;
+#X obj 321 -198 osc~ 0.25;
+#X obj 204 -167 phasor~ 220;
+#X text -522 -403 An ambisonics sources spatializer;
+#X obj -405 -56 hoa.decoder~ 3 8 ---;
+#X text -520 -375 hoa.map~ is an ambisonics encoder that uses fractionnal
 orders and amplitude variation to simulate sources distances. First
 argument is the order and second argument is the number of sources.
 ;
-#X text 224 -243 With one source \, you can drive it with signals.
+#X text -46 -293 With one source \, you can drive it with signals.
 Set pol to use polar coordinates (radius and angle) and car to use
 cartesian corrdinates (abscissa and ordinate).;
-#X text -165 -148 radius;
-#X text -122 -170 angle;
-#X text 155 -172 ordinate;
-#X text 111 -140 abscissa;
-#X text -135 -124 source 0;
-#X text -20 -126 source 1;
-#X text 184 -115 source;
-#X text 243 -63 radius;
-#X text 311 -64 angle;
-#X text 542 -63 ordinate;
-#X text 458 -61 abscissa;
-#X text 392 -94 source;
-#X obj 184 15 hoa.decoder~ 3 8 ---;
-#X obj 394 15 hoa.decoder~ 3 8 ---;
-#X connect 3 0 2 0;
-#X connect 11 0 4 0;
-#X connect 12 0 5 0;
-#X connect 13 0 6 0;
-#X connect 14 0 7 0;
-#X connect 15 0 8 0;
-#X connect 16 0 9 0;
-#X connect 17 0 10 0;
-#X connect 18 0 81 0;
-#X connect 18 1 81 1;
-#X connect 18 2 81 2;
-#X connect 18 3 81 3;
-#X connect 18 4 81 4;
-#X connect 18 5 81 5;
-#X connect 18 6 81 6;
-#X connect 19 0 18 0;
-#X connect 19 1 18 1;
-#X connect 19 2 18 2;
-#X connect 19 3 18 3;
-#X connect 19 4 18 4;
-#X connect 19 5 18 5;
-#X connect 19 6 18 6;
-#X connect 21 0 20 0;
-#X connect 29 0 22 0;
-#X connect 30 0 23 0;
-#X connect 31 0 24 0;
-#X connect 32 0 25 0;
-#X connect 33 0 26 0;
-#X connect 34 0 27 0;
-#X connect 35 0 28 0;
-#X connect 36 0 96 0;
-#X connect 36 1 96 1;
-#X connect 36 2 96 2;
-#X connect 36 3 96 3;
-#X connect 36 4 96 4;
-#X connect 36 5 96 5;
-#X connect 36 6 96 6;
-#X connect 38 0 37 0;
-#X connect 46 0 39 0;
-#X connect 47 0 40 0;
-#X connect 48 0 41 0;
-#X connect 49 0 42 0;
-#X connect 50 0 43 0;
-#X connect 51 0 44 0;
-#X connect 52 0 45 0;
-#X connect 53 0 97 0;
-#X connect 53 1 97 1;
-#X connect 53 2 97 2;
-#X connect 53 3 97 3;
-#X connect 53 4 97 4;
-#X connect 53 5 97 5;
-#X connect 53 6 97 6;
-#X connect 54 0 36 0;
-#X connect 54 1 36 1;
-#X connect 54 2 36 2;
-#X connect 54 3 36 3;
-#X connect 54 4 36 4;
-#X connect 54 5 36 5;
-#X connect 54 6 36 6;
-#X connect 55 0 53 0;
-#X connect 55 1 53 1;
-#X connect 55 2 53 2;
-#X connect 55 3 53 3;
-#X connect 55 4 53 4;
-#X connect 55 5 53 5;
-#X connect 55 6 53 6;
-#X connect 56 0 19 0;
-#X connect 57 0 54 0;
-#X connect 58 0 59 0;
-#X connect 58 0 60 0;
-#X connect 59 0 54 1;
-#X connect 60 0 54 2;
-#X connect 61 0 60 1;
-#X connect 62 0 61 0;
-#X connect 63 0 55 1;
-#X connect 64 0 55 2;
-#X connect 65 0 68 0;
-#X connect 66 0 68 1;
-#X connect 66 0 69 0;
-#X connect 67 0 19 0;
-#X connect 68 0 67 0;
-#X connect 69 0 65 0;
-#X connect 70 0 72 0;
-#X connect 71 0 72 1;
-#X connect 71 0 73 0;
-#X connect 72 0 74 0;
-#X connect 73 0 70 0;
-#X connect 74 0 19 0;
-#X connect 75 0 19 1;
-#X connect 76 0 63 0;
-#X connect 77 0 64 0;
-#X connect 78 0 55 0;
-#X connect 81 0 12 0;
-#X connect 81 1 3 0;
-#X connect 81 2 11 0;
-#X connect 81 3 13 0;
-#X connect 81 4 14 0;
-#X connect 81 5 15 0;
-#X connect 81 6 16 0;
-#X connect 81 7 17 0;
-#X connect 96 0 30 0;
-#X connect 96 1 21 0;
-#X connect 96 2 29 0;
-#X connect 96 3 31 0;
-#X connect 96 4 32 0;
-#X connect 96 5 33 0;
-#X connect 96 6 34 0;
-#X connect 96 7 35 0;
-#X connect 97 0 47 0;
-#X connect 97 1 38 0;
-#X connect 97 2 46 0;
-#X connect 97 3 48 0;
-#X connect 97 4 49 0;
-#X connect 97 5 50 0;
-#X connect 97 6 51 0;
-#X connect 97 7 52 0;
-#X coords 0 567 1 566 100 60 0;
+#X text -435 -218 radius;
+#X text -392 -240 angle;
+#X text -115 -262 ordinate;
+#X text -159 -210 abscissa;
+#X text -405 -194 source 0;
+#X text -290 -196 source 1;
+#X text -86 -205 source;
+#X text -27 -153 radius;
+#X text 41 -154 angle;
+#X text 352 -153 ordinate;
+#X text 268 -151 abscissa;
+#X text 202 -184 source;
+#X obj -86 -75 hoa.decoder~ 3 8 ---;
+#X obj 204 -75 hoa.decoder~ 3 8 ---;
+#X text -430 -309 hoa.map~'s syntax for multisource mode : index \,
+coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
+\, coordinate two (angle or ordinate).;
+#X text 41 -401 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+;
+#X text 41 -417 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -454 -6 hoa.meter~ @loudspeakers [ 8 ] @patching_rect [ 0 0
+225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize
+[ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles [ 0 45 90 135
+180 225 270 315 288 324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset
+[ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds [
+3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [ 0.55
+0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
+0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
+@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+];
+#X msg 322 -344 \; pd dsp 1;
+#X msg 323 -307 \; pd dsp 0;
+#X obj -86 -46 dac~ 1 2 3 4 5 6 7 8;
+#X obj -131 -6 hoa.meter~ @loudspeakers [ 8 ] @patching_rect [ 0 0
+225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize
+[ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles [ 0 45 90 135
+180 225 270 315 288 324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset
+[ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds [
+3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [ 0.55
+0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
+0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
+@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+];
+#X obj 156 -6 hoa.meter~ @loudspeakers [ 8 ] @patching_rect [ 0 0 225
+225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize [
+0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles [ 0 45 90 135
+180 225 270 315 288 324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset
+[ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds [
+3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [ 0.55
+0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
+0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
+@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+];
+#X obj -86 -134 hoa.map~ 3 1 @mode [ 0 ];
+#X obj 204 -134 hoa.map~ 3 1 @mode [ 1 ];
+#X text -390 -260 You should look at hoa.map (GUI)!;
+#X obj -28 -220 osc~ 0.1;
+#X connect 1 0 29 0;
+#X connect 1 1 29 1;
+#X connect 1 2 29 2;
+#X connect 1 3 29 3;
+#X connect 1 4 29 4;
+#X connect 1 5 29 5;
+#X connect 1 6 29 6;
+#X connect 2 0 1 0;
+#X connect 2 1 1 1;
+#X connect 2 2 1 2;
+#X connect 2 3 1 3;
+#X connect 2 4 1 4;
+#X connect 2 5 1 5;
+#X connect 2 6 1 6;
+#X connect 3 0 44 0;
+#X connect 3 1 44 1;
+#X connect 3 2 44 2;
+#X connect 3 3 44 3;
+#X connect 3 4 44 4;
+#X connect 3 5 44 5;
+#X connect 3 6 44 6;
+#X connect 4 0 45 0;
+#X connect 4 1 45 1;
+#X connect 4 2 45 2;
+#X connect 4 3 45 3;
+#X connect 4 4 45 4;
+#X connect 4 5 45 5;
+#X connect 4 6 45 6;
+#X connect 5 0 2 0;
+#X connect 6 0 55 0;
+#X connect 7 0 9 0;
+#X connect 8 0 55 1;
+#X connect 9 0 55 2;
+#X connect 10 0 9 1;
+#X connect 11 0 10 0;
+#X connect 12 0 56 1;
+#X connect 13 0 56 2;
+#X connect 14 0 17 0;
+#X connect 15 0 17 1;
+#X connect 15 0 18 0;
+#X connect 16 0 2 0;
+#X connect 17 0 16 0;
+#X connect 18 0 14 0;
+#X connect 19 0 21 0;
+#X connect 20 0 21 1;
+#X connect 20 0 22 0;
+#X connect 21 0 23 0;
+#X connect 22 0 19 0;
+#X connect 23 0 2 0;
+#X connect 24 0 2 1;
+#X connect 25 0 12 0;
+#X connect 26 0 13 0;
+#X connect 27 0 56 0;
+#X connect 29 0 49 0;
+#X connect 29 1 49 1;
+#X connect 29 2 49 2;
+#X connect 29 3 49 3;
+#X connect 29 4 49 4;
+#X connect 29 5 49 5;
+#X connect 29 6 49 6;
+#X connect 29 7 49 7;
+#X connect 44 0 52 0;
+#X connect 44 0 53 0;
+#X connect 44 1 52 1;
+#X connect 44 1 53 1;
+#X connect 44 2 52 2;
+#X connect 44 2 53 2;
+#X connect 44 3 52 3;
+#X connect 44 3 53 3;
+#X connect 44 4 52 4;
+#X connect 44 4 53 4;
+#X connect 44 5 52 5;
+#X connect 44 5 53 5;
+#X connect 44 6 52 6;
+#X connect 44 6 53 6;
+#X connect 44 7 52 7;
+#X connect 44 7 53 7;
+#X connect 45 0 54 0;
+#X connect 45 1 54 1;
+#X connect 45 2 54 2;
+#X connect 45 3 54 3;
+#X connect 45 4 54 4;
+#X connect 45 5 54 5;
+#X connect 45 6 54 6;
+#X connect 45 7 54 7;
+#X connect 55 0 3 0;
+#X connect 55 1 3 1;
+#X connect 55 2 3 2;
+#X connect 55 3 3 3;
+#X connect 55 4 3 4;
+#X connect 55 5 3 5;
+#X connect 55 6 3 6;
+#X connect 56 0 4 0;
+#X connect 56 1 4 1;
+#X connect 56 2 4 2;
+#X connect 56 3 4 3;
+#X connect 56 4 4 4;
+#X connect 56 5 4 5;
+#X connect 56 6 4 6;
+#X connect 58 0 8 0;
+#X coords 0 667 1 666 100 60 0;

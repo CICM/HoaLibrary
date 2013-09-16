@@ -37,6 +37,16 @@ AmbisonicProjector::AmbisonicProjector(long anOrder, long aNumberOfLoudspeakers,
     setNumberOfLoudspeakers(aNumberOfLoudspeakers);
 }
 
+long AmbisonicProjector::getNumberOfInputs()
+{
+    return Ambisonic::getNumberOfInputs();
+}
+
+long AmbisonicProjector::getNumberOfOutputs()
+{
+    return Planewaves::getNumberOfOutputs();
+}
+
 void AmbisonicProjector::computeMatrix()
 {
     for (int i = 0; i < m_number_of_loudspeakers; i++)

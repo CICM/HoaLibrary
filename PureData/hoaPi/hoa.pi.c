@@ -24,7 +24,7 @@
  */
 
 
-#include "../m_pd.h"
+#include "m_pd.h"
 #define CICM_PI  (3.141592653589793238462643383279502884)
 
 typedef struct _pi 

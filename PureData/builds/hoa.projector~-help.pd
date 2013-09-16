@@ -1,158 +1,124 @@
-#N canvas 547 22 756 692 10;
-#X obj -255 -350 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.projector~
+#N canvas 102 36 974 575 10;
+#X obj -255 -473 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.projector~
 3 12 0 18 -204280 -1 0;
-#X text -210 281 hoalibrary | Julien Colafrancesco \, Pierre Guillot
-& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
-#X obj -211 -171 hoa.encoder~ 4 ----;
-#X obj -211 -219 noise~;
-#X obj -49 -231 hoa.pi 2;
-#X obj -49 -260 loadbang;
-#X obj 14 -115 hoa.projector~ 4 10;
-#X obj 14 -171 hoa.encoder~ 4 ----;
-#X obj 176 -231 hoa.pi 2;
-#X obj 176 -260 loadbang;
-#X obj 125 -287 loadbang;
-#X obj 235 -171 hoa.encoder~ 4 ----;
-#X obj 397 -231 hoa.pi 2;
-#X obj 397 -260 loadbang;
-#X obj 235 -219 phasor~ 330;
-#X obj 346 -287 loadbang;
-#X msg 346 -260 0.666;
-#X msg 125 -260 0.333;
-#X obj 125 -202 *;
-#X obj -100 -202 *;
-#X obj 346 -202 *;
-#X obj -100 -230 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X obj 125 -231 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0.333 256;
-#X obj 346 -230 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0.666 256;
-#X obj 11 20 hoa.recomposer~ 4 10;
-#X obj 13 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 12 118 atodb~;
-#X obj 29 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj -3 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 46 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 62 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 78 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 95 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 111 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 28 118 atodb~;
-#X obj -4 118 atodb~;
-#X obj 45 118 atodb~;
-#X obj 61 118 atodb~;
-#X obj 77 118 atodb~;
-#X obj 94 118 atodb~;
-#X obj 110 118 atodb~;
-#X obj -4 89 dac~ 1 2 3 4 5 6 7 8 9 10;
-#X obj 127 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 144 146 vu 10 80 empty empty -1 -8 0 4 -66577 -1 1 0;
-#X obj 126 118 atodb~;
-#X obj 143 118 atodb~;
-#X obj 14 -219 osc~ 220;
-#X obj -4 56 hoa.decoder~ 4 10 -------;
-#X text -253 -308 hoa.projector~ discretizes the ambisonic soundfield
+#X obj -236 -228 hoa.projector~ 4 10;
+#X obj -236 -284 hoa.encoder~ 4 ----;
+#X obj -74 -344 hoa.pi 2;
+#X obj -74 -373 loadbang;
+#X obj 129 -35 hoa.recomposer~ 4 10;
+#X obj 114 34 dac~ 1 2 3 4 5 6 7 8 9 10;
+#X obj -236 -332 osc~ 220;
+#X obj 114 1 hoa.decoder~ 4 10 -------;
+#X text -253 -431 hoa.projector~ discretizes the ambisonic soundfield
 into an array of virtual loudspeakers and gives a access to plane wave
 domain.;
-#X text 142 21 Use hoa.recomposer to come back to harmonics domain.
+#X text -252 -451 A plane wave decomposer;
+#X msg 0 -275 \; pd dsp 1;
+#X msg 0 -237 \; pd dsp 0;
+#X text -57 67 Use hoa.recomposer~ to come back to harmonics domain.
 ;
-#X text 128 -68 Look to hoa.recomposer~ help or hoa.space~ help for
-futher informations and soundfield transformations.;
-#X text -252 -328 A plane wave decomposer;
-#X connect 2 0 6 0;
-#X connect 2 1 6 1;
-#X connect 2 2 6 2;
-#X connect 2 3 6 3;
-#X connect 2 4 6 4;
-#X connect 2 5 6 5;
-#X connect 2 6 6 6;
-#X connect 2 7 6 7;
-#X connect 2 8 6 8;
-#X connect 3 0 2 0;
-#X connect 4 0 19 1;
-#X connect 5 0 4 0;
-#X connect 6 0 24 0;
-#X connect 6 1 24 1;
-#X connect 6 2 24 2;
-#X connect 6 3 24 3;
-#X connect 6 4 24 4;
-#X connect 6 5 24 5;
-#X connect 6 6 24 6;
-#X connect 6 7 24 7;
-#X connect 6 8 24 8;
-#X connect 6 9 24 9;
-#X connect 7 0 6 0;
-#X connect 7 1 6 1;
-#X connect 7 2 6 2;
-#X connect 7 3 6 3;
-#X connect 7 4 6 4;
-#X connect 7 5 6 5;
-#X connect 7 6 6 6;
-#X connect 7 7 6 7;
-#X connect 7 8 6 8;
-#X connect 8 0 18 1;
-#X connect 9 0 8 0;
-#X connect 10 0 17 0;
-#X connect 11 0 6 0;
-#X connect 11 1 6 1;
-#X connect 11 2 6 2;
-#X connect 11 3 6 3;
-#X connect 11 4 6 4;
-#X connect 11 5 6 5;
-#X connect 11 6 6 6;
-#X connect 11 7 6 7;
-#X connect 11 8 6 8;
-#X connect 12 0 20 1;
-#X connect 13 0 12 0;
-#X connect 14 0 11 0;
-#X connect 15 0 16 0;
-#X connect 16 0 23 0;
-#X connect 17 0 22 0;
-#X connect 18 0 7 1;
-#X connect 19 0 2 1;
-#X connect 20 0 11 1;
-#X connect 21 0 19 0;
-#X connect 22 0 18 0;
-#X connect 23 0 20 0;
-#X connect 24 0 47 0;
-#X connect 24 1 47 1;
-#X connect 24 2 47 2;
-#X connect 24 3 47 3;
-#X connect 24 4 47 4;
-#X connect 24 5 47 5;
-#X connect 24 6 47 6;
-#X connect 24 7 47 7;
-#X connect 24 8 47 8;
-#X connect 26 0 25 0;
-#X connect 34 0 27 0;
-#X connect 35 0 28 0;
-#X connect 36 0 29 0;
-#X connect 37 0 30 0;
-#X connect 38 0 31 0;
-#X connect 39 0 32 0;
-#X connect 40 0 33 0;
-#X connect 44 0 42 0;
-#X connect 45 0 43 0;
-#X connect 46 0 7 0;
-#X connect 47 0 41 0;
-#X connect 47 0 35 0;
-#X connect 47 1 41 1;
-#X connect 47 1 26 0;
-#X connect 47 2 41 2;
-#X connect 47 2 34 0;
-#X connect 47 3 41 3;
-#X connect 47 3 36 0;
-#X connect 47 4 41 4;
-#X connect 47 4 37 0;
-#X connect 47 5 41 5;
-#X connect 47 5 38 0;
-#X connect 47 6 41 6;
-#X connect 47 6 39 0;
-#X connect 47 7 41 7;
-#X connect 47 7 40 0;
-#X connect 47 8 41 8;
-#X connect 47 8 44 0;
-#X connect 47 9 41 9;
-#X connect 47 9 45 0;
-#X coords 0 692 1 691 100 60 0;
+#X text 311 -444 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text 311 -460 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -236 -195 delwrite~ del_proj1 1000;
+#X text -11 -364 Here you can transform the sound field (apply delay
+\, reverb \, gain etc... on the virtual microphones signals). Look
+to hoa.recomposer~ help or hoa.space~ help for futher informations
+and soundfield transformations.;
+#X obj -224 -173 delwrite~ del_proj2 1000;
+#X obj -211 -151 delwrite~ del_proj3 1000;
+#X obj -199 -131 delwrite~ del_proj4 1000;
+#X obj -187 -109 delwrite~ del_proj5 1000;
+#X obj -174 -87 delwrite~ del_proj6 1000;
+#X obj -159 -65 delwrite~ del_proj7 1000;
+#X obj -147 -45 delwrite~ del_proj8 1000;
+#X obj -135 -23 delwrite~ del_proj9 1000;
+#X obj -122 -1 delwrite~ del_proj10 1000;
+#X obj 150 -240 delread~ del_proj3 400;
+#X obj 162 -220 delread~ del_proj4 300;
+#X obj 137 -262 delread~ del_proj2 600;
+#X obj 174 -198 delread~ del_proj5 200;
+#X obj 187 -176 delread~ del_proj6 100;
+#X obj 202 -154 delread~ del_proj7 200;
+#X obj 214 -134 delread~ del_proj8 300;
+#X obj 226 -112 delread~ del_proj9 400;
+#X obj 239 -90 delread~ del_proj10 600;
+#X obj -125 -315 *~;
+#X obj -125 -394 phasor~ 0.4;
+#X obj 125 -284 delread~ del_proj1 1000;
+#X obj 438 -218 hoa.meter~ @patching_rect { 0 0 225 225 } @leds_bg
+{ 1 } @drawvector { 1 } @drawmborder { 3 } @metersize { 0.8 } @orientation
+{ 0 } @loudspeakers { 10 } @angles { 0 36 72 108 144 180 216 252 288
+324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @offset { 0 } @rotation
+{ 1 } @interval { 50 } @dbperled { 3 } @nhotleds { 3 } @ntepidleds
+{ 3 } @nwarmleds { 3 } @numleds { 12 } @bgcolor { 0.55 0.55 0.55 1
+} @mbgcolor { 0.4 0.4 0.4 1 } @bordercolor { 0.25 0.25 0.25 1 } @coldcolor
+{ 0 0.6 0 0.8 } @tepidcolor { 0.6 0.73 0 0.8 } @warmcolor { 0.85 0.85
+0 0.8 } @hotcolor { 1 0.6 0 0.8 } @overcolor { 1 0 0 0.8 } @energycolor
+{ 0 0 1 0.8 } @velocitycolor { 1 0 0 0.8 };
+#X connect 1 0 16 0;
+#X connect 1 1 18 0;
+#X connect 1 2 19 0;
+#X connect 1 3 20 0;
+#X connect 1 4 21 0;
+#X connect 1 5 22 0;
+#X connect 1 6 23 0;
+#X connect 1 7 24 0;
+#X connect 1 8 25 0;
+#X connect 1 9 26 0;
+#X connect 2 0 1 0;
+#X connect 2 1 1 1;
+#X connect 2 2 1 2;
+#X connect 2 3 1 3;
+#X connect 2 4 1 4;
+#X connect 2 5 1 5;
+#X connect 2 6 1 6;
+#X connect 2 7 1 7;
+#X connect 2 8 1 8;
+#X connect 3 0 36 1;
+#X connect 4 0 3 0;
+#X connect 5 0 8 0;
+#X connect 5 1 8 1;
+#X connect 5 2 8 2;
+#X connect 5 3 8 3;
+#X connect 5 4 8 4;
+#X connect 5 5 8 5;
+#X connect 5 6 8 6;
+#X connect 5 7 8 7;
+#X connect 5 8 8 8;
+#X connect 7 0 2 0;
+#X connect 8 0 6 0;
+#X connect 8 0 39 0;
+#X connect 8 1 6 1;
+#X connect 8 1 39 1;
+#X connect 8 2 6 2;
+#X connect 8 2 39 2;
+#X connect 8 3 6 3;
+#X connect 8 3 39 3;
+#X connect 8 4 6 4;
+#X connect 8 4 39 4;
+#X connect 8 5 6 5;
+#X connect 8 5 39 5;
+#X connect 8 6 6 6;
+#X connect 8 6 39 6;
+#X connect 8 7 6 7;
+#X connect 8 7 39 7;
+#X connect 8 8 6 8;
+#X connect 8 8 39 8;
+#X connect 8 9 6 9;
+#X connect 8 9 39 9;
+#X connect 27 0 5 2;
+#X connect 28 0 5 3;
+#X connect 29 0 5 1;
+#X connect 30 0 5 4;
+#X connect 31 0 5 5;
+#X connect 32 0 5 6;
+#X connect 33 0 5 7;
+#X connect 34 0 5 8;
+#X connect 35 0 5 9;
+#X connect 36 0 2 1;
+#X connect 37 0 36 0;
+#X connect 38 0 5 0;
+#X coords 0 575 1 574 100 60 0;

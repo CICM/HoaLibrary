@@ -23,112 +23,15 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../cicm_pd/_cicm_pd.h"
-#include "../../Sources/HoaLibrary.h"
-
-#define MAX_ZOOM 1.
-#define MIN_ZOOM 0.01
-
-#define CORNERSIZE 8
-#define BORDERTHICK 2
-
-typedef struct  _hoamap
-{
-	t_jbox          j_box;
-	t_rect          rect;
-	t_jfont*        jfont;
-    t_clock*        f_clock;
-    
-	void*		f_out_sources;
-    void*		f_out_groups;
-    void*		f_out_infos;
-    
-    SourcesManager*     f_source_manager;
-    SourcesPreset*      f_source_preset;
-    SourcesTrajectory*  f_source_trajectory;
-    
-    t_pt        f_cursor_position;
-    long        f_index_of_selected_source;
-    long        f_index_of_selected_group;
-    long        f_index_of_source_to_remove;
-    long        f_index_of_group_to_remove;
-    long        f_index_of_source_to_color;
-    long        f_index_of_group_to_color;
-    
-    t_jrgba		f_colorBackground;
-    t_jrgba		f_colorBackgroundInside;
-    t_jrgba     f_colorBorder;
-    t_jrgba     f_colorSelection;
-    
-    int         f_cartConstrain;
-    
-    double      f_size_source;
-	double		f_zoom_factor;
-    
-    t_rect		f_rect_selection;
-	int			f_rect_selection_exist;
-    
-    long    f_output_mode;
-    
-} t_hoamap;
-
-t_class *hoamap_class;
-
-extern "C" void setup_hoa0x2map(void);
-void *hoamap_new(t_symbol *s, int argc, t_atom *argv);
-void hoamap_free(t_hoamap *x);
-void hoamap_tick(t_hoamap *x);
-void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params);
-void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
-t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
-void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid, t_pt pt);
-
-void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av);
-void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av);
-void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av);
-void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av);
-void hoamap_source_save(t_hoamap *x, t_binbuf *d);
-void hoamap_group_save(t_hoamap *x, t_binbuf *d);
-void hoamap_slot_save(t_hoamap *x, t_binbuf *d);
-void hoamap_trajectory_save(t_hoamap *x, t_binbuf *d);
-void hoamap_jsave(t_hoamap *x, t_binbuf *d);
-
-void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv);
-void hoamap_dowrite(t_hoamap *x, t_symbol *s, long argc, t_atom *argv);
-void hoamap_tick(t_hoamap *x);
-
-void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av);
-void hoamap_bang(t_hoamap *x);
-void hoamap_infos(t_hoamap *x);
-void hoamap_clear_all(t_hoamap *x);
-
-/* Paint Methods */
-void hoamap_paint(t_hoamap *x, t_object *view);
-void draw_background(t_hoamap *x, t_object *view, t_rect *rect);
-void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect);
-void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect);
-void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect);
-
-void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers);
-void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
-long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
+#include "hoa.map.h"
 
 extern "C" void setup_hoa0x2emap(void)
 {
-	t_class *c;
+	t_eclass *c;
     
 	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, sizeof(t_hoamap), 0L, A_GIMME, 0);
     
-	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
+	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
     
     class_addmethod(c, (method) hoamap_assist,          "assist",           A_CANT,     0);
 	class_addmethod(c, (method) hoamap_paint,           "paint",            A_CANT,     0);
@@ -241,10 +144,9 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
         x->f_index_of_selected_source = -1;
         x->f_index_of_selected_group = -1;
         
-        
-        x->f_out_infos      = listout(x);
-        x->f_out_groups     = listout(x);
-        x->f_out_sources    = listout(x);
+        x->f_out_sources    = (t_outlet *)listout(x);
+        x->f_out_groups     = (t_outlet *)listout(x);
+        x->f_out_infos      = (t_outlet *)listout(x);
        
         x->f_clock = clock_new(x,(t_method)hoamap_tick);
        
@@ -1115,20 +1017,18 @@ t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 
 t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
-	t_symbol *name;
     if (msg == gensym("attr_modified"))
     {
-        name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
-        if(name == gensym("bgcolor") || name == gensym("bgcolor2") )
+        if(s == gensym("bgcolor") || s == gensym("bgcolor2") )
         {
             jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
         }
-        else if(name == gensym("fontname") || name == gensym("fontface") || name == gensym("fontsize"))
+        else if(s == gensym("fontname") || s == gensym("fontface") || s == gensym("fontsize"))
         {
             jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
         }
-        else if(name == gensym("zoom"))
+        else if(s == gensym("zoom"))
         {
             jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
             jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
@@ -1526,7 +1426,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                 descriptionPositionY = sourcePositionY - x->f_size_source - font_size - 1.;
 
                 jtextlayout_settextcolor(jtl, &sourceColor);
-                jtextlayout_set(jtl, description, x->jfont, descriptionPositionX, descriptionPositionY, font_size * 10., font_size * 2., CICM_TEXT_LEFT, CICM_TEXT_NOWRAP);
+                jtextlayout_set(jtl, description, x->jfont, descriptionPositionX, descriptionPositionY, font_size * 10., font_size * 2., ETEXT_LEFT, ETEXT_NOWRAP);
                 jtextlayout_draw(jtl, g);
 			
                 if (x->f_index_of_selected_source == i)
@@ -1545,13 +1445,13 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                         groupPositionY = (-x->f_source_manager->groupGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
                        
                         jgraphics_line_to(g, groupPositionX, groupPositionY);
-                        jgraphics_fill(g);
+                        jgraphics_stroke(g);
                     }
                 }
                               
                 if(!x->f_source_manager->sourceGetMute(i))
                 {
-                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, font_size * 10., font_size * 2., CICM_TEXT_CENTER, CICM_TEXT_NOWRAP);
+                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, font_size * 10., font_size * 2., ETEXT_CENTER, ETEXT_NOWRAP);
                     jtextlayout_draw(jtl, g);
                     jgraphics_set_source_jrgba(g, &sourceColor); 
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
@@ -1560,7 +1460,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                 if(x->f_source_manager->sourceGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor);
-                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, font_size * 10., font_size * 2., CICM_TEXT_CENTER, CICM_TEXT_NOWRAP);
+                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, font_size * 10., font_size * 2., ETEXT_CENTER, ETEXT_NOWRAP);
                     jtextlayout_draw(jtl, g);
                     t_jrgba red = {1., 0., 0., 1.};
                     jgraphics_set_source_jrgba(g, &red); 
@@ -1568,7 +1468,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_stroke(g);
                     jgraphics_move_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI2 / 2.));
                     jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_PI2 * 5. / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI * 5. / 4.));
-                    jgraphics_fill(g);
+                    jgraphics_stroke(g);
                 }
                 
             }
@@ -1628,7 +1528,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 descriptionPositionY = sourcePositionY - x->f_size_source - fontSize - 1.;
                 
                 jtextlayout_settextcolor(jtl, &sourceColor);
-                jtextlayout_set(jtl, description, x->jfont, descriptionPositionX, descriptionPositionY, fontSize * 10., fontSize * 2., CICM_TEXT_LEFT, CICM_TEXT_NOWRAP);
+                jtextlayout_set(jtl, description, x->jfont, descriptionPositionX, descriptionPositionY, fontSize * 10., fontSize * 2., ETEXT_LEFT, ETEXT_NOWRAP);
                 jtextlayout_draw(jtl, g);
                 
                 if (x->f_index_of_selected_group == i)
@@ -1644,7 +1544,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                         double groupPositionX = (x->f_source_manager->sourceGetAbscissa(groupIndex) * x->f_zoom_factor + 1.) * ctr.x;
                         double groupPositionY = (-x->f_source_manager->sourceGetOrdinate(groupIndex) * x->f_zoom_factor + 1.) * ctr.y;
                         jgraphics_line_to(g, groupPositionX, groupPositionY);
-                        jgraphics_fill(g);
+                        jgraphics_stroke(g);
                     }
                 }
                 jgraphics_set_source_jrgba(g, &sourceColor);
@@ -1654,7 +1554,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_set_source_jrgba(g, &sourceColor);
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.,  0., JGRAPHICS_2PI);
                     jgraphics_stroke(g);
-                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, fontSize * 10., fontSize * 2., CICM_TEXT_CENTER, CICM_TEXT_NOWRAP);
+                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, fontSize * 10., fontSize * 2., ETEXT_CENTER, ETEXT_NOWRAP);
                     jtextlayout_draw(jtl, g);
                 
                 }
@@ -1662,7 +1562,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 if(x->f_source_manager->groupGetMute(i))
                 {
                     jgraphics_stroke(g);
-                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, fontSize * 10., fontSize * 2., CICM_TEXT_CENTER, CICM_TEXT_NOWRAP);
+                    jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, fontSize * 10., fontSize * 2., ETEXT_CENTER, ETEXT_NOWRAP);
                     jtextlayout_draw(jtl, g);
                     t_jrgba red = {1., 0., 0., 1.};
                     jgraphics_set_source_jrgba(g, &red);
@@ -1672,7 +1572,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     {
                         jgraphics_move_to(g, sourcePositionX, sourcePositionY);
                         jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
-                        jgraphics_fill(g);
+                        jgraphics_stroke(g);
                     }
                     
                 }
@@ -1898,7 +1798,7 @@ void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid, t_pt pt)
                     {
                         check = 1;
                         x->f_index_of_selected_source = i;
-                        hoamap_mousedrag(x, (t_object *)x->j_box.x_glist, pt, modifiers);
+                        hoamap_mousedrag(x, (t_object *)x->j_box.e_glist, pt, 0);
                     }
                 }
                 break;

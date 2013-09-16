@@ -23,101 +23,52 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.projector.h"
 
-extern "C"
+extern "C" void setup_hoa0x2eprojector_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_projector
-{
-    t_object            f_obj;
-    AmbisonicsProjector *f_ambisonics_projector;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-} hoa_projector;
-
-void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_projector_free(hoa_projector *x);
-
-void hoa_projector_dsp(hoa_projector *x, t_signal **sp, short *count);
-t_int *hoa_projector_perform(t_int *w);
-
-t_class *hoa_projector_class;
-
-extern "C"
-{
-void setup_hoa0x2eprojector_tilde(void)
-{
-    t_class* c;
-    c = class_new(gensym("hoa.projector~"), (t_newmethod)hoa_projector_new,(t_method)hoa_projector_free, sizeof(hoa_projector), 0L, A_GIMME, 0);
+    t_eclass* c;
     
-    class_addmethod(c, (t_method)hoa_projector_dsp,		gensym("dsp"),		A_CANT, 0);
+    c = class_new("hoa.projector~", (method)hoa_projector_new, (method)hoa_projector_free, (short)sizeof(t_hoa_projector), 0L, A_GIMME, 0);
+    
+	class_dspinit(c);
+    
+	class_addmethod(c, (method)hoa_projector_dsp,     "dsp",      A_CANT, 0);
+    
     hoa_projector_class = c;
-    CLASS_MAINSIGNALIN(hoa_projector_class, hoa_projector, f);
-}
 }
 
 void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_projector *x = NULL;
+    t_hoa_projector *x = NULL;
 	int	order = 4;
     int microphones = 10;
-    x = (hoa_projector *)pd_new(hoa_projector_class);
-	if (x)
-	{
-        order = atom_getint(argv);
-        microphones = atom_getint(argv+1);
-		x->f_ambisonics_projector = new AmbisonicsProjector(order, microphones);
-        
-        for (int i = 0; i < x->f_ambisonics_projector->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_projector->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_projector->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_projector->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_projector->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_projector->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
+    
+    x = (t_hoa_projector *)object_alloc(hoa_projector_class);
+    
+    order = atom_getint(argv);
+    microphones = atom_getint(argv+1);
+    x->f_ambi_projector = new AmbisonicProjector(order, microphones, sys_getblksize());
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_projector->getNumberOfInputs(), x->f_ambi_projector->getNumberOfOutputs());
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
 	return (x);
 }
 
-void hoa_projector_dsp(hoa_projector *x, t_signal **sp, short *count)
+void hoa_projector_dsp(t_hoa_projector *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_projector->setVectorSize(sp[0]->s_n);
-
-    for(int i = 0; i < x->f_ambisonics_projector->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_projector->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_projector->getNumberOfInputs()]->s_vec;
-
-    dsp_add(hoa_projector_perform, 1, x);
+	x->f_ambi_projector->setVectorSize(maxvectorsize);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_projector_perform, 0, NULL);
 }
 
-t_int *hoa_projector_perform(t_int *w)
+void hoa_projector_perform(t_hoa_projector *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_projector *x	= (hoa_projector *)(w[1]);
-	
-	x->f_ambisonics_projector->process(x->f_inputs, x->f_outputs);
-    for(int i = 0; i < x->f_ambisonics_projector->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_projector->getVectorSize());
-    
-	return (w + 2);
+    x->f_ambi_projector->process(ins, outs);
 }
 
-void hoa_projector_free(hoa_projector *x)
+void hoa_projector_free(t_hoa_projector *x)
 {
-	for(int i = 0; i < x->f_ambisonics_projector->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_projector);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_projector);
 }

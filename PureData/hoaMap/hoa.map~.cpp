@@ -23,149 +23,87 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.map.h"
 
-extern "C"
+extern "C" void setup_hoa0x2emap_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_map
-{
-    t_object            f_obj;
-    AmbisonicsMultiMaps *f_ambisonics_map;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-    bool				f_mode_bool;
-} hoa_map;
-
-void *hoa_map_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_map_free(hoa_map *x);
-void hoa_map_list(hoa_map *x, t_symbol *s, long argc, t_atom *argv);
-
-void hoa_map_dsp(hoa_map *x, t_signal **sp, short *count);
-t_int *hoa_map_perform(t_int *w);
-t_int *hoa_map_perform_polar(t_int *w);
-t_int *hoa_map_perform_cartesian(t_int *w);
-
-t_class *hoa_map_class;
-
-extern "C"
-{
-void setup_hoa0x2emap_tilde(void)
-{
-    t_class *c;
-    c = class_new(gensym("hoa.map~"), (t_newmethod)hoa_map_new,(t_method)hoa_map_free, sizeof(hoa_map), 0L, A_GIMME, 0);
+    t_eclass* c;
     
-    class_addmethod(c, (t_method)hoa_map_dsp,     gensym("dsp"),		A_CANT, 0);
-    class_addlist(c, (t_method)hoa_map_list);
+    c = class_new("hoa.map~", (method)hoa_map_new, (method)hoa_map_free, (short)sizeof(t_hoa_map), 0L, A_GIMME, 0);
     
+	class_dspinit(c);
+    
+	class_addmethod(c, (method)hoa_map_dsp,     "dsp",      A_CANT, 0);
+    class_addmethod(c, (method)hoa_map_list,    "list",     A_GIMME, 0);
+    
+    CLASS_ATTR_LONG             (c, "mode", 0, t_hoa_map, f_mode_bool);
+	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
+	CLASS_ATTR_ORDER			(c, "mode", 0, "1");
+	CLASS_ATTR_LABEL			(c, "mode", 0, "Optim mode");
+	CLASS_ATTR_FILTER_CLIP      (c, "mode", 0, 1);
+	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
+    
+    class_register(CLASS_BOX, c);
     hoa_map_class = c;
-    CLASS_MAINSIGNALIN(hoa_map_class, hoa_map, f);
-}
 }
 
 void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_map *x = NULL;
+    t_hoa_map *x = NULL;
+    t_dictionary *d;
 	int	order = 4;
-    int numberOfSources = 10;
+    int numberOfSources = 2;
     
-    x = (hoa_map *)pd_new(hoa_map_class);
-	if (x)
-	{
-        x->f_mode_bool = 0;
-        order = atom_getint(argv);
-        numberOfSources = atom_getint(argv+1);
-        if(atom_getsymbol(argv+2) == gensym("cartesian") || atom_getsymbol(argv+2) == gensym("car"))
-            x->f_mode_bool = 1;
-        
-		x->f_ambisonics_map = new AmbisonicsMultiMaps(order, numberOfSources);
-        
-        for (int i = 0; i < x->f_ambisonics_map->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_map->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_map->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_map->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_map->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_map->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
+    x = (t_hoa_map *)object_alloc(hoa_map_class);
+    
+    order = atom_getint(argv);
+    numberOfSources = atom_getint(argv+1);
+    x->f_ambi_map = new AmbisonicsMultiMaps(order, numberOfSources, 4100, sys_getblksize());
+    x->f_ambi_map->setRamp(4100);
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_map->getNumberOfInputs(), x->f_ambi_map->getNumberOfOutputs());
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
+    d = object_dictionaryarg(argc,argv);
+    attr_dictionary_process(x, d);
+    
 	return (x);
 }
 
-void hoa_map_dsp(hoa_map *x, t_signal **sp, short *count)
+void hoa_map_dsp(t_hoa_map *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_map->setVectorSize(sp[0]->s_n);
-
-    for(int i = 0; i < x->f_ambisonics_map->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_map->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_map->getNumberOfInputs()]->s_vec;
-    
-    if (x->f_ambisonics_map->getNumberOfSources() == 1 && x->f_mode_bool == 0)
-        dsp_add(hoa_map_perform_polar, 1, x);
-    else if (x->f_ambisonics_map->getNumberOfSources() == 1 && x->f_mode_bool == 1)
-        dsp_add(hoa_map_perform_cartesian, 1, x);
+	x->f_ambi_map->setVectorSize(maxvectorsize);
+    if (x->f_ambi_map->getNumberOfSources() == 1)
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_perform_onesource, 0, NULL);
     else
-        dsp_add(hoa_map_perform, 1, x);
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_map_perform, 0, NULL);
 }
 
-t_int *hoa_map_perform(t_int *w)
+void hoa_map_perform(t_hoa_map *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_map *x	= (hoa_map *)(w[1]);
-	
-	x->f_ambisonics_map->process(x->f_inputs, x->f_outputs);
-    for(int i = 0; i < x->f_ambisonics_map->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_map->getVectorSize());
-
-	return (w + 2);
+	x->f_ambi_map->process(ins, outs);
 }
 
-t_int *hoa_map_perform_polar(t_int *w)
+void hoa_map_perform_onesource(t_hoa_map *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_map *x	= (hoa_map *)(w[1]);
-	
-	x->f_ambisonics_map->processPolar(x->f_inputs[0], x->f_outputs, x->f_inputs[1], x->f_inputs[2]);
-    for(int i = 0; i < x->f_ambisonics_map->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_map->getVectorSize());
-    
-	return (w + 2);
+    if(x->f_mode_bool)
+        x->f_ambi_map->processCartesian(ins[0], outs, ins[1], ins[2]);
+    else
+        x->f_ambi_map->processPolar(ins[0], outs, ins[1], ins[2]);
 }
 
-t_int *hoa_map_perform_cartesian(t_int *w)
-{
-	hoa_map *x	= (hoa_map *)(w[1]);
-	
-	x->f_ambisonics_map->processCartesian(x->f_inputs[0], x->f_outputs, x->f_inputs[1], x->f_inputs[2]);
-    for(int i = 0; i < x->f_ambisonics_map->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_map->getVectorSize());
-    
-	return (w + 2);
-}
-
-void hoa_map_list(hoa_map *x, t_symbol *s, long argc, t_atom *argv)
+void hoa_map_list(t_hoa_map *x, t_symbol *s, long argc, t_atom *argv)
 {
     if(atom_getsymbol(argv+1) == gensym("car") || atom_getsymbol(argv+1) == gensym("cartesian"))
-        x->f_ambisonics_map->setCoordinatesCartesian(atom_getint(argv), atom_getfloat(argv+2), atom_getfloat(argv+3));
+        x->f_ambi_map->setCoordinatesCartesian(atom_getint(argv), atom_getfloat(argv+2), atom_getfloat(argv+3));
     else if(atom_getsymbol(argv+1) == gensym("pol") || atom_getsymbol(argv+1) == gensym("polar"))
-        x->f_ambisonics_map->setCoordinatesPolar(atom_getint(argv), atom_getfloat(argv+2), atom_getfloat(argv+3));
+        x->f_ambi_map->setCoordinatesPolar(atom_getint(argv), atom_getfloat(argv+2), atom_getfloat(argv+3));
     else if (atom_getsymbol(argv+1) == gensym("mute"))
-        x->f_ambisonics_map->setMuted(atom_getint(argv), atom_getint(argv+2));
+        x->f_ambi_map->setMuted(atom_getint(argv), atom_getint(argv+2));
 }
 
-void hoa_map_free(hoa_map *x)
+void hoa_map_free(t_hoa_map *x)
 {
-	for(int i = 0; i < x->f_ambisonics_map->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_map);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_map);
 }

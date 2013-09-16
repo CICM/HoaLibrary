@@ -23,101 +23,52 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.rotate.h"
 
-extern "C"
+extern "C" void setup_hoa0x2erotate_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_rotate
-{
-    t_object            f_obj;
-    AmbisonicsRotate	*f_ambisonics_rotate;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-} hoa_rotate;
-
-void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_rotate_free(hoa_rotate *x);
-
-void hoa_rotate_dsp(hoa_rotate *x, t_signal **sp, short *count);
-t_int *hoa_rotate_perform(t_int *w);
-
-t_class *hoa_rotate_class;
-
-extern "C"
-{
-void setup_hoa0x2erotate_tilde(void)
-{
-    t_class* c;
-    c = class_new(gensym("hoa.rotate~"), (t_newmethod)hoa_rotate_new,(t_method)hoa_rotate_free, sizeof(hoa_rotate), 0L, A_GIMME, 0);
+    t_eclass* c;
     
-    class_addmethod(c, (t_method)hoa_rotate_dsp,		gensym("dsp"),		A_CANT, 0);
+    c = class_new("hoa.rotate~",(method)hoa_rotate_new,(method)hoa_rotate_free, (short)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
+    
+	class_dspinit(c);
+
+	class_addmethod(c, (method)hoa_rotate_dsp, "dsp", A_CANT, 0);
+    
+    class_register(CLASS_BOX, c);
     hoa_rotate_class = c;
-    CLASS_MAINSIGNALIN(hoa_rotate_class, hoa_rotate, f);
-}
 }
 
 void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_rotate *x = NULL;
+    t_hoa_rotate *x = NULL;
 	int	order = 4;
-
-    x = (hoa_rotate *)pd_new(hoa_rotate_class);
-	if (x)
-	{
-        order = atom_getint(argv);
-        
-		x->f_ambisonics_rotate = new AmbisonicsRotate(order);
-        
-        for (int i = 0; i < x->f_ambisonics_rotate->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_rotate->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_rotate->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_rotate->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_rotate->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_rotate->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
+    
+    x = (t_hoa_rotate *)object_alloc(hoa_rotate_class);
+    
+    order = atom_getint(argv);
+    x->f_ambi_rotate = new AmbisonicRotate(order, sys_getblksize());
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_rotate->getNumberOfInputs(), x->f_ambi_rotate->getNumberOfOutputs());
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
 	return (x);
 }
 
-void hoa_rotate_dsp(hoa_rotate *x, t_signal **sp, short *count)
+void hoa_rotate_dsp(t_hoa_rotate *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_rotate->setVectorSize(sp[0]->s_n);
-
-    for(int i = 0; i < x->f_ambisonics_rotate->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_rotate->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_rotate->getNumberOfInputs()]->s_vec;
-
-    dsp_add(hoa_rotate_perform, 1, x);
+	x->f_ambi_rotate->setVectorSize(maxvectorsize);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_rotate_perform, 0, NULL);
 }
 
-t_int *hoa_rotate_perform(t_int *w)
+void hoa_rotate_perform(t_hoa_rotate *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_rotate *x	= (hoa_rotate *)(w[1]);
-	
-	x->f_ambisonics_rotate->process(x->f_inputs, x->f_outputs, x->f_inputs[x->f_ambisonics_rotate->getNumberOfInputs()-1]);
-    for(int i = 0; i < x->f_ambisonics_rotate->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_rotate->getVectorSize());
-    
-	return (w + 2);
+	x->f_ambi_rotate->process(ins, outs, ins[x->f_ambi_rotate->getNumberOfInputs()-1]);
 }
 
-void hoa_rotate_free(hoa_rotate *x)
+
+void hoa_rotate_free(t_hoa_rotate *x)
 {
-	for(int i = 0; i < x->f_ambisonics_rotate->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_rotate);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_rotate);
 }

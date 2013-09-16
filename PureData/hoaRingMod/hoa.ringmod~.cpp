@@ -23,146 +23,117 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.ringmod.h"
 
-extern "C"
+
+extern "C" void setup_hoa0x2eringmod_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_ringmod
-{
-    t_object            f_obj;
-    AmbisonicsRingModulation* f_ambisonics_ringmod;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-   
-} hoa_ringmod;
-
-void *hoa_ringmod_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_ringmod_free(hoa_ringmod *x);
-
-void hoa_ringmod_freq(hoa_ringmod *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_ringmod_diff(hoa_ringmod *x, t_symbol *sym, long argc, t_atom *argv);
-void hoa_ringmod_comp(hoa_ringmod *x, t_symbol *sym, long argc, t_atom *argv);
-
-void hoa_ringmod_dsp(hoa_ringmod *x, t_signal **sp, short *count);
-t_int *hoa_ringmod_perform_post(t_int *w);
-t_int *hoa_ringmod_perform_no(t_int *w);
-
-t_class *hoa_ringmod_class;
-
-extern "C"
-{
-void setup_hoa0x2eringmod_tilde(void)
-{
-    t_class *c;
-    c = class_new(gensym("hoa.ringmod~"), (t_newmethod)hoa_ringmod_new,(t_method)hoa_ringmod_free, sizeof(hoa_ringmod), 0L, A_GIMME, 0);
+    t_eclass* c;
     
-    class_addmethod(c, (t_method)hoa_ringmod_dsp,     gensym("dsp"),          A_CANT, 0);
-    class_addmethod(c, (t_method)hoa_ringmod_freq,    gensym("freq"),         A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_ringmod_comp,    gensym("comp"),         A_GIMME, 0);
-    class_addmethod(c, (t_method)hoa_ringmod_diff,    gensym("diff"),         A_GIMME, 0);
+    c = class_new("hoa.ringmod~", (method)hoa_ringmod_new, (method)hoa_ringmod_free, (short)sizeof(t_hoa_ringmod), 0L, A_GIMME, 0);
     
+	class_dspinit(c);
+    
+	class_addmethod(c, (method)hoa_ringmod_dsp,     "dsp",      A_CANT, 0);
+    
+    CLASS_ATTR_LONG             (c, "compensation", 0, t_hoa_ringmod, f_encoding_compensation);
+	CLASS_ATTR_CATEGORY			(c, "compensation", 0, "Behavior");
+    CLASS_ATTR_STYLE            (c, "compensation", 0, "onoff");
+    CLASS_ATTR_LABEL            (c, "compensation", 0, "Encoding compensation");
+	CLASS_ATTR_ORDER			(c, "compensation", 0, "1");
+	CLASS_ATTR_ACCESSORS		(c, "compensation", NULL, comp_set);
+    
+    CLASS_ATTR_DOUBLE			(c, "frequency", 0, t_hoa_ringmod, f_frequency);
+	CLASS_ATTR_CATEGORY			(c, "frequency", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "frequency", 0, "Frequency (Hz)");
+	CLASS_ATTR_ORDER			(c, "frequency", 0, "1");
+	CLASS_ATTR_ACCESSORS		(c, "frequency", NULL, freq_set);
+    
+    CLASS_ATTR_DOUBLE			(c, "diffusion", 0, t_hoa_ringmod, f_diffuse_factor);
+	CLASS_ATTR_CATEGORY			(c, "diffusion", 0, "Parameters");
+	CLASS_ATTR_LABEL			(c, "diffusion", 0, "Diffusion factor");
+	CLASS_ATTR_ORDER			(c, "diffusion", 0, "2");
+	CLASS_ATTR_ACCESSORS		(c, "diffusion", NULL, diff_set);
+    
+    class_register(CLASS_BOX, c);
     hoa_ringmod_class = c;
-    CLASS_MAINSIGNALIN(hoa_ringmod_class, hoa_ringmod, f);
-}
+
 }
 
 void *hoa_ringmod_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_ringmod *x = NULL;
-    int order = 4;
+    t_hoa_ringmod *x = NULL;
+    t_dictionary *d;
+	int	order = 4;
     bool mode = 1;
     
-    x = (hoa_ringmod *)pd_new(hoa_ringmod_class);
-	if (x)
-	{
-        order = atom_getint(argv);
-        if(atom_getsymbol(argv+1) == gensym("no"))
-            mode = 0;
-        
-		x->f_ambisonics_ringmod = new AmbisonicsRingModulation(order, mode, (int)sys_getblksize(), (int)sys_getsr());
-        
-        for (int i = 0; i < x->f_ambisonics_ringmod->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_ringmod->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_ringmod->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_ringmod->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_ringmod->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_ringmod->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
+    x = (t_hoa_ringmod *)object_alloc(hoa_ringmod_class);
+    
+    order = atom_getint(argv);
+    if(atom_getsym(argv+1) == gensym("no"))
+        mode = 0;
+    
+    x->f_ambi_ringmod = new AmbisonicsRingModulation(order, mode, sys_getblksize(), sys_getsr());
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_ringmod->getNumberOfInputs(), x->f_ambi_ringmod->getNumberOfOutputs());
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
+    d = object_dictionaryarg(argc,argv);
+    attr_dictionary_process(x, d);
+    
 	return (x);
 }
 
-void hoa_ringmod_dsp(hoa_ringmod *x, t_signal **sp, short *count)
+void hoa_ringmod_dsp(t_hoa_ringmod *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_ringmod->setVectorSize((int)sp[0]->s_n);
-    x->f_ambisonics_ringmod->setSamplingRate((int)sp[0]->s_sr);
+	x->f_ambi_ringmod->setVectorSize(maxvectorsize);
+    x->f_ambi_ringmod->setSamplingRate(samplerate);
     
-    for(int i = 0; i < x->f_ambisonics_ringmod->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_ringmod->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_ringmod->getNumberOfInputs()]->s_vec;
+    if(x->f_ambi_ringmod->getMode() == Hoa_Post_Encoding)
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_ringmod_perform_post, 0, NULL);
+    else if(x->f_ambi_ringmod->getMode() == Hoa_No_Encoding)
+        object_method(dsp, gensym("dsp_add"), x, (method)hoa_ringmod_perform_no, 0, NULL);
+}
+
+void hoa_ringmod_perform_post(t_hoa_ringmod *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
+{
+	x->f_ambi_ringmod->process(ins, outs);
+}
+
+void hoa_ringmod_perform_no(t_hoa_ringmod *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
+{
+	x->f_ambi_ringmod->process(ins[0], outs);
+}
+
+void hoa_ringmod_free(t_hoa_ringmod *x)
+{
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_ringmod);
+}
+
+t_max_err diff_set(t_hoa_ringmod *x, t_object *attr, long argc, t_atom *argv)
+{
+    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_ambi_ringmod->setDiffuseFactor(atom_getfloat(argv));
     
-    if(x->f_ambisonics_ringmod->getMode() == Hoa_Post_Encoding)
-        dsp_add(hoa_ringmod_perform_post, 1, x);
-    else if(x->f_ambisonics_ringmod->getMode() == Hoa_No_Encoding)
-        dsp_add(hoa_ringmod_perform_no, 1, x);
+	x->f_diffuse_factor = x->f_ambi_ringmod->getDiffuseFactor();
+	return 0;
 }
 
-t_int *hoa_ringmod_perform_post(t_int *w)
+t_max_err comp_set(t_hoa_ringmod *x, t_object *attr, long argc, t_atom *argv)
 {
-	hoa_ringmod *x	= (hoa_ringmod *)(w[1]);
-	
-	x->f_ambisonics_ringmod->process(x->f_inputs, x->f_outputs);
-
-    for(int i = 0; i < x->f_ambisonics_ringmod->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_ringmod->getVectorSize());
-
-	return (w + 2);
-}
-
-t_int *hoa_ringmod_perform_no(t_int *w)
-{
-	hoa_ringmod *x	= (hoa_ringmod *)(w[1]);
-	
-	x->f_ambisonics_ringmod->process(x->f_inputs[0], x->f_outputs);
-
-    for(int i = 0; i < x->f_ambisonics_ringmod->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_ringmod->getVectorSize());
+    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_ambi_ringmod->setEncodingCompensation(atom_getfloat(argv));
     
-	return (w + 2);
+	x->f_encoding_compensation = x->f_ambi_ringmod->getEncodingCompensation();
+	return 0;
 }
 
-void hoa_ringmod_freq(hoa_ringmod *x, t_symbol *sym, long argc, t_atom *argv)
+t_max_err freq_set(t_hoa_ringmod *x, t_object *attr, long argc, t_atom *argv)
 {
-    x->f_ambisonics_ringmod->setFrequency(atom_getfloat(argv));
-}
-
-void hoa_ringmod_diff(hoa_ringmod *x, t_symbol *sym, long argc, t_atom *argv)
-{
-    x->f_ambisonics_ringmod->setDiffuseFactor(atom_getfloat(argv));
-}
-
-void hoa_ringmod_comp(hoa_ringmod *x, t_symbol *sym, long argc, t_atom *argv)
-{
-    x->f_ambisonics_ringmod->setEncodingCompensation(atom_getint(argv));
-}
-
-void hoa_ringmod_free(hoa_ringmod *x)
-{
-	for(int i = 0; i < x->f_ambisonics_ringmod->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_ringmod);
+    if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+		x->f_ambi_ringmod->setFrequency(atom_getfloat(argv));
+    
+	x->f_frequency = x->f_ambi_ringmod->getFrequency();
+	return 0;
 }

@@ -23,108 +23,88 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.optim.h"
 
-extern "C"
+extern "C" void setup_hoa0x2eoptim_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_optim
-{
-    t_object            f_obj;
-    AmbisonicsOptim     *f_ambisonics_optim;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-} hoa_optim;
-
-void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_optim_free(hoa_optim *x);
-
-void hoa_optim_dsp(hoa_optim *x, t_signal **sp, short *count);
-t_int *hoa_optim_perform(t_int *w);
-
-t_class *hoa_optim_class;
-
-extern "C"
-{
-void setup_hoa0x2eoptim_tilde(void)
-{
-    t_class *c;
-    c = class_new(gensym("hoa.optim~"), (t_newmethod)hoa_optim_new,(t_method)hoa_optim_free, sizeof(hoa_optim), 0L, A_GIMME, 0);
+    t_eclass* c;
     
-    class_addmethod(c, (t_method)hoa_optim_dsp,		gensym("dsp"),		A_CANT, 0);
+    c = class_new("hoa.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (short)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
+    
+	class_dspinit(c);
+    
+	class_addmethod(c, (method)hoa_optim_dsp,     "dsp",      A_CANT, 0);
+    
+    CLASS_ATTR_LONG             (c, "mode", 0, t_hoa_optim, f_mode);
+    CLASS_ATTR_ACCESSORS        (c, "mode", (method)NULL,(method)optim_setattr_mode);
+	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
+	CLASS_ATTR_ORDER			(c, "mode", 0, "1");
+	CLASS_ATTR_LABEL			(c, "mode", 0, "Optim mode");
+	CLASS_ATTR_FILTER_CLIP      (c, "mode", 0, 2);
+	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
+    
+    class_register(CLASS_BOX, c);
     hoa_optim_class = c;
-    CLASS_MAINSIGNALIN(hoa_optim_class, hoa_optim, f);
-}
 }
 
 void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_optim *x = NULL;
+    t_hoa_optim *x = NULL;
+    t_dictionary *d;
 	int	order = 4;
-    int optim = Hoa_InPhase_Optim;
-    x = (hoa_optim *)pd_new(hoa_optim_class);
-	if (x)
-	{
-        order = atom_getint(argv);
-        if(atom_getsymbol(argv+1) == gensym("basic"))
-        {
-            optim = Hoa_Basic_Optim;
-        }
-        else if(atom_getsymbol(argv+1) == gensym("maxRe"))
-        {
-            optim = Hoa_MaxRe_Optim;
-        }
-		x->f_ambisonics_optim = new AmbisonicsOptim(order, optim);
-        
-        for (int i = 0; i < x->f_ambisonics_optim->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_optim->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_optim->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_optim->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_optim->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_optim->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
-	return (x);
-}
-
-void hoa_optim_dsp(hoa_optim *x, t_signal **sp, short *count)
-{
-	x->f_ambisonics_optim->setVectorSize(sp[0]->s_n);
-
-    for(int i = 0; i < x->f_ambisonics_optim->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_optim->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_optim->getNumberOfInputs()]->s_vec;
-
-    dsp_add(hoa_optim_perform, 1, x);
-}
-
-t_int *hoa_optim_perform(t_int *w)
-{
-	hoa_optim *x	= (hoa_optim *)(w[1]);
-	
-	x->f_ambisonics_optim->process(x->f_inputs, x->f_outputs);
-    for(int i = 0; i < x->f_ambisonics_optim->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_optim->getVectorSize());
     
-	return (w + 2);
+    x = (t_hoa_optim *)object_alloc(hoa_optim_class);
+    
+    order = atom_getint(argv);
+    x->f_mode = Hoa_InPhase_Optim;
+    x->f_ambi_optim = new AmbisonicOptim(order, x->f_mode, sys_getblksize());
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_optim->getNumberOfInputs(), x->f_ambi_optim->getNumberOfOutputs());
+    x->f_mode = x->f_ambi_optim->getOptimMode();
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
+    d = object_dictionaryarg(argc,argv);
+    attr_dictionary_process(x, d);
+	
+   	return (x);
 }
 
-void hoa_optim_free(hoa_optim *x)
+t_max_err optim_setattr_mode(t_hoa_optim *x, t_object *attr, long ac, t_atom *av)
 {
-	for(int i = 0; i < x->f_ambisonics_optim->getNumberOfOutputs(); i++)
+	if (ac && av)
     {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_optim);
+        if (atom_gettype(av) == A_SYM)
+        {
+            if(atom_getsym(av) == gensym("basic"))
+                atom_setlong(av, Hoa_Basic_Optim);
+            else if(atom_getsym(av) == gensym("maxRe"))
+                atom_setlong(av, Hoa_MaxRe_Optim);
+            else if(atom_getsym(av) == gensym("inPhase"))
+                atom_setlong(av, Hoa_InPhase_Optim);
+        }
+        if (atom_gettype(av) == A_LONG)
+        {
+            long d = Tools::clip(long(atom_getlong(av)), 0, 2);
+            x->f_ambi_optim->setOptimMode(d);
+             x->f_mode = x->f_ambi_optim->getOptimMode();
+        }
+	}
+	return 0;
+}
+
+void hoa_optim_dsp(t_hoa_optim *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
+{
+	x->f_ambi_optim->setVectorSize(maxvectorsize);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_optim_perform, 0, NULL);
+}
+
+void hoa_optim_perform(t_hoa_optim *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
+{
+	x->f_ambi_optim->process(ins, outs);
+}
+
+void hoa_optim_free(t_hoa_optim *x)
+{
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_optim);
 }

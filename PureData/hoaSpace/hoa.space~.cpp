@@ -23,117 +23,66 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.space.h"
 
-extern "C"
+extern "C" void setup_hoa0x2espace_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_space
-{
-    t_object            f_obj;
-    AmbisonicSpace      *f_ambisonics_space;
-    t_float             f;
-    t_float**           f_inputs;
-    t_float**           f_outputs;
-    t_float**           f_outputs_real;
-} hoa_space;
-
-void *hoa_space_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_space_free(hoa_space *x);
-void hoa_space_list(hoa_space *x, t_symbol *s, short ac, t_atom *av);
-
-void hoa_space_dsp(hoa_space *x, t_signal **sp, short *count);
-t_int *hoa_space_perform(t_int *w);
-
-t_class *hoa_space_class;
-
-extern "C"
-{
-void setup_hoa0x2espace_tilde(void)
-{
-    t_class* c;
-    c = class_new(gensym("hoa.space~"), (t_newmethod)hoa_space_new,(t_method)hoa_space_free, sizeof(hoa_space), 0L, A_GIMME, 0);
+    t_eclass* c;
+    c = class_new("hoa.space~", (method)hoa_space_new, (method)hoa_space_free, (short)sizeof(t_hoa_space), 0L, A_GIMME, 0);
     
-    class_addmethod(c, (t_method)hoa_space_dsp,		gensym("dsp"),		A_CANT, 0);
-    class_addlist(c, hoa_space_list);
+    class_dspinit(c);
+    class_addmethod(c, (method)hoa_space_dsp,   "dsp",      A_CANT, 0);
+    class_addmethod(c, (method)hoa_space_list,  "coeffs",   A_GIMME,0);
+    class_addmethod(c, (method)hoa_space_list,  "list",     A_GIMME,0);
     
+	class_register(CLASS_BOX, c);
     hoa_space_class = c;
-    CLASS_MAINSIGNALIN(hoa_space_class, hoa_space, f);
-}
 }
 
 void *hoa_space_new(t_symbol *s, long argc, t_atom *argv)
-{
-	hoa_space *x = NULL;
-	int	microphones = 10;
-
-    x = (hoa_space *)pd_new(hoa_space_class);
-	if (x)
-	{
-        microphones = atom_getint(argv);
-        
-		x->f_ambisonics_space = new AmbisonicSpace(microphones);
-        
-        for (int i = 0; i < x->f_ambisonics_space->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_space->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_space->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_space->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_space->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_space->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
+{  
+    t_hoa_space *x = NULL;
+	int	number_of_channels = 4;
+    
+    x = (t_hoa_space *)object_alloc(hoa_space_class);
+    
+    number_of_channels = atom_getint(argv);
+    x->f_ambi_space = new AmbisonicSpace(number_of_channels, sys_getblksize());
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_space->getNumberOfInputs(), x->f_ambi_space->getNumberOfOutputs());
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
 	return (x);
 }
 
-void hoa_space_dsp(hoa_space *x, t_signal **sp, short *count)
+void hoa_space_dsp(t_hoa_space *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambisonics_space->setVectorSize(sp[0]->s_n);
-
-    for(int i = 0; i < x->f_ambisonics_space->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_space->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_space->getNumberOfInputs()]->s_vec;
-
-    dsp_add(hoa_space_perform, 1, x);
+	x->f_ambi_space->setVectorSize(maxvectorsize);
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_space_perform, 0, NULL);
 }
 
-t_int *hoa_space_perform(t_int *w)
+void hoa_space_perform(t_hoa_space *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	hoa_space *x	= (hoa_space *)(w[1]);
-	
-	x->f_ambisonics_space->process(x->f_inputs, x->f_outputs);
-    for(int i = 0; i < x->f_ambisonics_space->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_space->getVectorSize());
-    
-	return (w + 2);
+	x->f_ambi_space->process(ins, outs);
 }
 
-void hoa_space_list(hoa_space *x, t_symbol *s, short ac, t_atom *av)
+void hoa_space_list(t_hoa_space *x, t_symbol *s, short ac, t_atom *av)
 {
     if(ac == 2)
-        x->f_ambisonics_space->setCoefficient(atom_getint(av), atom_getfloat(av+1));
+    {
+        x->f_ambi_space->setCoefficient(atom_getint(av), atom_getfloat(av+1));
+    }
     else
     {
         for(int i = 0; i < ac; i++)
         {
-            x->f_ambisonics_space->setCoefficient(i, atom_getfloat(av+i));
+            x->f_ambi_space->setCoefficient(i, atom_getfloat(av+i));
         }
     }
 }
 
-void hoa_space_free(hoa_space *x)
+void hoa_space_free(t_hoa_space *x)
 {
-	for(int i = 0; i < x->f_ambisonics_space->getNumberOfOutputs(); i++)
-    {
-        free(x->f_outputs[i]);
-    }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_space);
+	dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_space);
 }
