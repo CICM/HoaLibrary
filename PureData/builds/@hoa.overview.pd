@@ -1,0 +1,31 @@
+#N canvas 63 50 562 543 10;
+#X obj -334 -428 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.library
+3 12 0 18 -204280 -1 0;
+#X text -320 54 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X text -331 -406 High Order Ambisonics Library;
+#X text -327 -386 Hoa Library allows musicians and composers to synthesize
+\, transform and render sound fields in a creative and artistic way.
+This library facilitates the understanding and the appropriation of
+key concepts of ambisonics. Thanks to original graphical interfaces
+a lot of new signal processing are allowed like diffuse sound field
+synthesis \, perspective distorsion or spatial filtering.;
+#X obj -317 -267 hoa.encoder~-help;
+#X obj -317 -237 hoa.decoder~-help;
+#X obj -317 -207 hoa.optim~-help;
+#X obj -317 -177 hoa.rotate~-help;
+#X obj -317 -147 hoa.wider~-help;
+#X obj -317 -117 hoa.map~-help;
+#X obj -317 -87 hoa.map-help;
+#X obj -317 -57 hoa.scope~-help;
+#X obj -317 -27 hoa.pi-help;
+#X obj -177 -267 hoa.projector~-help;
+#X obj -177 -237 hoa.recomposer~-help;
+#X obj -177 -207 hoa.space~-help;
+#X obj -177 -177 hoa.space-help;
+#X obj -177 -147 hoa.meter~-help;
+#X obj -177 -117 hoa.freeverb~-help;
+#X obj -177 -87 hoa.grain~-help;
+#X obj -177 -57 hoa.delay~-help;
+#X obj -177 -27 hoa.ringmod~-help;
+#X coords 0 543 1 542 100 60 0;
