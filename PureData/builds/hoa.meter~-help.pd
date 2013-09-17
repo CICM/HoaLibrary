@@ -107,12 +107,21 @@
 [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 1 ] @rotation [ 0 ] @interval [ 20 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
 #X obj -113 -357 hoa.pi 2;
 #X obj -113 -386 loadbang;
 #X obj -207 -325 *~;
 #X obj -207 -354 phasor~ -0.3;
-#X obj -432 -266 hoa.decoder~ 3 8 ambisonics ----------;
 #X text -550 -393 hoa.meter~ displays the peak levels for a circurlar
 array of loudspeakers. It computes and displays the energy and velocity
 vectors.;
@@ -217,60 +226,61 @@ vectors.;
 #X obj -54 247 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj -113 272 print vector coordinates;
-#X connect 4 0 89 0;
-#X connect 4 1 91 0;
+#X obj -432 -266 hoa.decoder~ 3 ambisonics 8 ----------;
+#X connect 4 0 88 0;
+#X connect 4 1 90 0;
 #X connect 5 0 7 1;
 #X connect 6 0 5 0;
-#X connect 7 0 12 1;
+#X connect 7 0 11 1;
 #X connect 8 0 7 0;
-#X connect 9 0 4 0;
-#X connect 9 1 4 1;
-#X connect 9 2 4 2;
-#X connect 9 3 4 3;
-#X connect 9 4 4 4;
-#X connect 9 5 4 5;
-#X connect 9 6 4 6;
-#X connect 9 7 4 7;
-#X connect 11 0 12 0;
-#X connect 12 0 9 0;
-#X connect 12 1 9 1;
-#X connect 12 2 9 2;
-#X connect 12 3 9 3;
-#X connect 12 4 9 4;
-#X connect 12 5 9 5;
-#X connect 12 6 9 6;
-#X connect 17 0 15 0;
-#X connect 18 0 17 0;
-#X connect 19 0 20 0;
-#X connect 20 0 15 0;
-#X connect 23 0 4 0;
-#X connect 24 0 15 0;
-#X connect 25 0 24 0;
-#X connect 28 0 29 0;
-#X connect 29 0 27 0;
-#X connect 35 0 36 0;
-#X connect 36 0 27 0;
-#X connect 37 0 27 0;
-#X connect 39 0 37 0;
-#X connect 43 0 44 0;
-#X connect 44 0 42 0;
-#X connect 50 0 15 0;
-#X connect 51 0 15 0;
-#X connect 53 0 55 0;
-#X connect 55 0 27 0;
-#X connect 58 0 27 0;
-#X connect 59 0 58 0;
-#X connect 62 0 42 0;
-#X connect 64 0 62 0;
-#X connect 65 0 66 0;
-#X connect 66 0 42 0;
-#X connect 68 0 69 0;
-#X connect 69 0 42 0;
-#X connect 71 0 72 0;
-#X connect 72 0 42 0;
-#X connect 74 0 75 0;
-#X connect 75 0 42 0;
-#X connect 89 0 88 0;
-#X connect 90 0 89 1;
-#X connect 91 0 93 0;
-#X connect 92 0 91 1;
+#X connect 10 0 11 0;
+#X connect 11 0 93 0;
+#X connect 11 1 93 1;
+#X connect 11 2 93 2;
+#X connect 11 3 93 3;
+#X connect 11 4 93 4;
+#X connect 11 5 93 5;
+#X connect 11 6 93 6;
+#X connect 16 0 14 0;
+#X connect 17 0 16 0;
+#X connect 18 0 19 0;
+#X connect 19 0 14 0;
+#X connect 22 0 4 0;
+#X connect 23 0 14 0;
+#X connect 24 0 23 0;
+#X connect 27 0 28 0;
+#X connect 28 0 26 0;
+#X connect 34 0 35 0;
+#X connect 35 0 26 0;
+#X connect 36 0 26 0;
+#X connect 38 0 36 0;
+#X connect 42 0 43 0;
+#X connect 43 0 41 0;
+#X connect 49 0 14 0;
+#X connect 50 0 14 0;
+#X connect 52 0 54 0;
+#X connect 54 0 26 0;
+#X connect 57 0 26 0;
+#X connect 58 0 57 0;
+#X connect 61 0 41 0;
+#X connect 63 0 61 0;
+#X connect 64 0 65 0;
+#X connect 65 0 41 0;
+#X connect 67 0 68 0;
+#X connect 68 0 41 0;
+#X connect 70 0 71 0;
+#X connect 71 0 41 0;
+#X connect 73 0 74 0;
+#X connect 74 0 41 0;
+#X connect 88 0 87 0;
+#X connect 89 0 88 1;
+#X connect 90 0 92 0;
+#X connect 91 0 90 1;
+#X connect 93 0 4 0;
+#X connect 93 1 4 1;
+#X connect 93 2 4 2;
+#X connect 93 3 4 3;
+#X connect 93 4 4 4;
+#X connect 93 5 4 5;
+#X connect 93 6 4 6;
+#X connect 93 7 4 7;

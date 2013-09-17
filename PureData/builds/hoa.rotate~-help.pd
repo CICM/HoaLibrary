@@ -20,7 +20,6 @@
 ambisonic soundfield. The last inlet set the azimuth of the rotation.
 ;
 #X text 265 -214 Angle of rotation in radian;
-#X obj -56 122 hoa.decoder~ 4 10 -------;
 #X text 177 50 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
 #X text 177 34 hoalibrary | Julien Colafrancesco \, Pierre Guillot
@@ -38,7 +37,12 @@ ambisonic soundfield. The last inlet set the azimuth of the rotation.
 0 225 225 } @order { 4 } @gain { 1 } @interval { 100 } @drawcircle
 { 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
 1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 };
+1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
+{ 4 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
+1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
+0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
+{ 0 0 1 1 };
+#X obj -56 122 hoa.decoder~ 4 0 10 -----;
 #X connect 1 0 15 0;
 #X connect 1 1 15 1;
 #X connect 1 2 15 2;
@@ -67,31 +71,31 @@ ambisonic soundfield. The last inlet set the azimuth of the rotation.
 #X connect 11 0 15 9;
 #X connect 12 0 11 0;
 #X connect 14 0 5 1;
-#X connect 15 0 18 0;
+#X connect 15 0 22 0;
 #X connect 15 0 23 0;
-#X connect 15 1 18 1;
+#X connect 15 1 22 1;
 #X connect 15 1 23 1;
-#X connect 15 2 18 2;
+#X connect 15 2 22 2;
 #X connect 15 2 23 2;
-#X connect 15 3 18 3;
+#X connect 15 3 22 3;
 #X connect 15 3 23 3;
-#X connect 15 4 18 4;
+#X connect 15 4 22 4;
 #X connect 15 4 23 4;
-#X connect 15 5 18 5;
+#X connect 15 5 22 5;
 #X connect 15 5 23 5;
-#X connect 15 6 18 6;
+#X connect 15 6 22 6;
 #X connect 15 6 23 6;
-#X connect 15 7 18 7;
+#X connect 15 7 22 7;
 #X connect 15 7 23 7;
-#X connect 15 8 18 8;
-#X connect 18 0 8 0;
-#X connect 18 1 8 1;
-#X connect 18 2 8 2;
-#X connect 18 3 8 3;
-#X connect 18 4 8 4;
-#X connect 18 5 8 5;
-#X connect 18 6 8 6;
-#X connect 18 7 8 7;
-#X connect 18 8 8 8;
-#X connect 18 9 8 9;
+#X connect 15 8 23 8;
+#X connect 23 0 8 0;
+#X connect 23 1 8 1;
+#X connect 23 2 8 2;
+#X connect 23 3 8 3;
+#X connect 23 4 8 4;
+#X connect 23 5 8 5;
+#X connect 23 6 8 6;
+#X connect 23 7 8 7;
+#X connect 23 8 8 8;
+#X connect 23 9 8 9;
 #X coords 0 651 1 650 100 60 0;

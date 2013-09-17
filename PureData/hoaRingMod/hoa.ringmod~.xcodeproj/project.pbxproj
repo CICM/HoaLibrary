@@ -99,6 +99,8 @@
 		8F26F13017E62DAB005FCB97 /* AmbisonicRotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F26F12E17E62DAB005FCB97 /* AmbisonicRotate.h */; };
 		8F26F13317E62EE0005FCB97 /* hoa.ringmod.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F26F13117E62EE0005FCB97 /* hoa.ringmod.h */; };
 		8F26F13417E62EE0005FCB97 /* hoa.ringmod~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F26F13217E62EE0005FCB97 /* hoa.ringmod~.cpp */; };
+		8F26F1B217E85E48005FCB97 /* AmbisonicsRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F26F1B017E85E48005FCB97 /* AmbisonicsRingModulation.cpp */; };
+		8F26F1B317E85E48005FCB97 /* AmbisonicsRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F26F1B117E85E48005FCB97 /* AmbisonicsRingModulation.h */; };
 		8FB6367A17D3CAA90070AE49 /* AmbisonicRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6367417D3CAA90070AE49 /* AmbisonicRecomposer.cpp */; };
 		8FB6367B17D3CAA90070AE49 /* AmbisonicRecomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB6367517D3CAA90070AE49 /* AmbisonicRecomposer.h */; };
 		8FB6367C17D3CAA90070AE49 /* AmbisonicVirtualMicUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6367617D3CAA90070AE49 /* AmbisonicVirtualMicUI.cpp */; };
@@ -207,6 +209,8 @@
 		8F26F12E17E62DAB005FCB97 /* AmbisonicRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicRotate.h; sourceTree = "<group>"; };
 		8F26F13117E62EE0005FCB97 /* hoa.ringmod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hoa.ringmod.h; sourceTree = "<group>"; };
 		8F26F13217E62EE0005FCB97 /* hoa.ringmod~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.ringmod~.cpp"; sourceTree = "<group>"; };
+		8F26F1B017E85E48005FCB97 /* AmbisonicsRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsRingModulation.cpp; sourceTree = "<group>"; };
+		8F26F1B117E85E48005FCB97 /* AmbisonicsRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsRingModulation.h; sourceTree = "<group>"; };
 		8FB6367417D3CAA90070AE49 /* AmbisonicRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicRecomposer.cpp; sourceTree = "<group>"; };
 		8FB6367517D3CAA90070AE49 /* AmbisonicRecomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicRecomposer.h; sourceTree = "<group>"; };
 		8FB6367617D3CAA90070AE49 /* AmbisonicVirtualMicUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVirtualMicUI.cpp; sourceTree = "<group>"; };
@@ -241,7 +245,6 @@
 				8F26F13117E62EE0005FCB97 /* hoa.ringmod.h */,
 				8F0C158417E3E2D100593A58 /* Sources */,
 				8F16082717D3269700CE8933 /* Sources */,
-				8F26F12C17E62DAB005FCB97 /* hoaRotate */,
 				5913847015DAA36D0029AD16 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -348,6 +351,8 @@
 		8F16082717D3269700CE8933 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8F26F1AF17E85E48005FCB97 /* hoaRingModulation */,
+				8F26F12C17E62DAB005FCB97 /* hoaRotate */,
 				8F16082817D3269700CE8933 /* CicmLibrary */,
 				8F16086017D3269700CE8933 /* hoaAmbisonics */,
 				8F16089917D3269700CE8933 /* HoaLibrary.h */,
@@ -510,8 +515,16 @@
 				8F26F12D17E62DAB005FCB97 /* AmbisonicRotate.cpp */,
 				8F26F12E17E62DAB005FCB97 /* AmbisonicRotate.h */,
 			);
-			name = hoaRotate;
-			path = ../../Sources/hoaRotate;
+			path = hoaRotate;
+			sourceTree = "<group>";
+		};
+		8F26F1AF17E85E48005FCB97 /* hoaRingModulation */ = {
+			isa = PBXGroup;
+			children = (
+				8F26F1B017E85E48005FCB97 /* AmbisonicsRingModulation.cpp */,
+				8F26F1B117E85E48005FCB97 /* AmbisonicsRingModulation.h */,
+			);
+			path = hoaRingModulation;
 			sourceTree = "<group>";
 		};
 		8FB6367317D3CAA90070AE49 /* hoaRecomposer */ = {
@@ -608,6 +621,7 @@
 				8F26F12717E4D069005FCB97 /* AmbisonicSpace.h in Headers */,
 				8F26F13017E62DAB005FCB97 /* AmbisonicRotate.h in Headers */,
 				8F26F13317E62EE0005FCB97 /* hoa.ringmod.h in Headers */,
+				8F26F1B317E85E48005FCB97 /* AmbisonicsRingModulation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +724,7 @@
 				8F26F12617E4D069005FCB97 /* AmbisonicSpace.cpp in Sources */,
 				8F26F12F17E62DAB005FCB97 /* AmbisonicRotate.cpp in Sources */,
 				8F26F13417E62EE0005FCB97 /* hoa.ringmod~.cpp in Sources */,
+				8F26F1B217E85E48005FCB97 /* AmbisonicsRingModulation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

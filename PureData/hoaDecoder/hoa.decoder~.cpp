@@ -23,131 +23,144 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../../Sources/HoaLibrary.h"
+#include "hoa.decoder.h"
 
-extern "C"
+extern "C" void setup_hoa0x2edecoder_tilde(void)
 {
-#include "../m_pd.h"
-}
-
-typedef struct hoa_decoder
-{
-    t_object                f_obj;
-    AmbisonicsMultiDecoder	*f_ambisonics_decoder;
-    t_float                 f;
-    t_float**               f_inputs;
-    t_float**               f_outputs;
-    t_float**               f_outputs_real;
-} hoa_decoder;
-
-void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_decoder_free(hoa_decoder *x);
-
-void hoa_decoder_dsp(hoa_decoder *x, t_signal **sp, short *count);
-t_int *hoa_decoder_perform(t_int *w);
-
-t_class *hoa_decoder_class;
-
-extern "C"
-{
-void setup_hoa0x2edecoder_tilde(void)
-{
-    t_class* c;
-    c = class_new(gensym("hoa.decoder~"), (t_newmethod)hoa_decoder_new,(t_method)hoa_decoder_free, sizeof(hoa_decoder), 0L, A_GIMME, 0);
+    t_eclass* c;
     
-    class_addmethod(c, (t_method)hoa_decoder_dsp,		gensym("dsp"),		A_CANT, 0);
+    c = class_new("hoa.decoder~", (method)hoa_decoder_new, (method)hoa_decoder_free, (short)sizeof(t_hoa_decoder), 0L, A_GIMME, 0);
     
+	class_dspinit(c);
+    
+    class_addmethod(c, (method)hoa_decoder_dsp,           "dsp",          A_CANT,  0);
+    
+    CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_hoa_decoder, f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
+	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, decoder_setattr_angles);
+	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
+	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "angles", 1);
+    
+    CLASS_ATTR_LONG				(c, "pinnae", 0 , t_hoa_decoder, f_pinnae);
+    CLASS_ATTR_ACCESSORS		(c, "pinnae", NULL, decoder_setattr_pinnae);
+	CLASS_ATTR_LABEL			(c, "pinnae", 0, "Number of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "pinnae", 1);
+    CLASS_ATTR_DEFAULT          (c, "pinnae", 0, "8");
+    
+    CLASS_ATTR_LONG             (c, "restitution", 0, t_hoa_decoder, f_restitution_mode);
+	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
+    CLASS_ATTR_LABEL            (c, "restitution", 0, "Restitution Mode");
+	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, decoder_setattr_restitution);
+    CLASS_ATTR_ORDER            (c, "restitution", 0, "6");
+    CLASS_ATTR_SAVE             (c, "restitution", 1);
+    
+    class_register(CLASS_BOX, c);
     hoa_decoder_class = c;
-    CLASS_MAINSIGNALIN(hoa_decoder_class, hoa_decoder, f);
+    
     post("hoa.library (version 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
 	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
-}
 }
 
 void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 {
-	hoa_decoder *x = NULL;
+    
+    t_hoa_decoder *x = NULL;
+    t_dictionary *d;
 	int	order = 4;
-    float numberOfLoudspeakers = 10;
-    int mode = Hoa_Ambisonics;
-    int pinnaesize = Hoa_Small;
-    float offset = 0.f;
-    int decmode= Hoa_Amplitude_Panning;
-    
+    int mode = Hoa_Dec_Ambisonic;
+    int number_of_loudspeakers = 10;
     char hrtfPath[256];
-    x = (hoa_decoder *)pd_new(hoa_decoder_class);
-	if (x)
-	{
-        order = atom_getint(argv);
-        numberOfLoudspeakers = atom_getfloat(argv+1);
-        if(atom_getsymbol(argv+2) == gensym("binaural"))
-            mode = Hoa_Binaural;
-        else if(atom_getsymbol(argv+2) == gensym("irregular"))
-            mode = Hoa_Restitution;
-        
-        if (mode == Hoa_Ambisonics)
-            offset = atom_getfloat(argv+3);
-        else if (mode == Hoa_Binaural && atom_getsymbol(argv+3) == gensym("large"))
-            pinnaesize = Hoa_Large;
-        else if (mode == Hoa_Restitution && atom_getsymbol(argv+3) == gensym("projection"))
-            decmode = Hoa_Microphone_Simulation;
-        
-        
-        sprintf(hrtfPath, "%s/HrtfDatabase/", canvas_getcurrentdir()->s_name);
-        x->f_ambisonics_decoder	= new AmbisonicsMultiDecoder(order, numberOfLoudspeakers, mode, pinnaesize, hrtfPath, sys_getblksize(), sys_getsr());
-        
-        x->f_ambisonics_decoder->setMode(mode);
-        x->f_ambisonics_decoder->setNumberOfLoudspeakers(numberOfLoudspeakers);
-        x->f_ambisonics_decoder->setPinnaeSize(pinnaesize);
-        x->f_ambisonics_decoder->setRestitutionMode(decmode);
-        
-        for (int i = 0; i < x->f_ambisonics_decoder->getNumberOfInputs()-1; i++)
-            inlet_new(&x->f_obj, &x->f_obj.ob_pd, &s_signal, &s_signal);
-        for (int i = 0; i < x->f_ambisonics_decoder->getNumberOfOutputs(); i++)
-			outlet_new(&x->f_obj, &s_signal);
-        
-        x->f_outputs        = new float*[x->f_ambisonics_decoder->getNumberOfOutputs()];
-        x->f_outputs_real   = new float*[x->f_ambisonics_decoder->getNumberOfOutputs()];
-        x->f_inputs         = new float*[x->f_ambisonics_decoder->getNumberOfInputs()];
-        for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfOutputs(); i++)
-            x->f_outputs[i] = new float[8192];
-	}
-	return (x);
-}
-
-void hoa_decoder_dsp(hoa_decoder *x, t_signal **sp, short *count)
-{
-	x->f_ambisonics_decoder->setVectorSize((long)sp[0]->s_n);
-    x->f_ambisonics_decoder->setSamplingRate((long)sp[0]->s_sr);
+    sprintf(hrtfPath, "%s/HrtfDatabase/", canvas_getcurrentdir()->s_name);
     
-    for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfInputs(); i++)
-        x->f_inputs[i] = sp[i]->s_vec;
-    for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfOutputs(); i++)
-        x->f_outputs_real[i] = sp[i+x->f_ambisonics_decoder->getNumberOfInputs()]->s_vec;
-
-    dsp_add(hoa_decoder_perform, 1, x);
-}
-
-t_int *hoa_decoder_perform(t_int *w)
-{
-	hoa_decoder *x	= (hoa_decoder *)(w[1]);
-	
-	x->f_ambisonics_decoder->process(x->f_inputs, x->f_outputs);
+    x = (t_hoa_decoder *)object_alloc(hoa_decoder_class);
     
-    for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfOutputs(); i++)
-        Cicm_Vector_Float_Copy(x->f_outputs[i], x->f_outputs_real[i], x->f_ambisonics_decoder->getVectorSize());
-    
-	return (w + 2);
-}
-
-void hoa_decoder_free(hoa_decoder *x)
-{
-	for(int i = 0; i < x->f_ambisonics_decoder->getNumberOfOutputs(); i++)
+    order = atom_getint(argv);
+    if (atom_gettype(argv+1) == A_SYM)
     {
-        free(x->f_outputs[i]);
+        if(atom_getsym(argv+1) == gensym("ambisonic"))
+            mode = Hoa_Dec_Ambisonic;
+        else if(atom_getsym(argv+1) == gensym("binaural"))
+            mode = Hoa_Dec_Binaural;
+        else if(atom_getsym(argv+1) == gensym("irregular"))
+            mode = Hoa_Dec_Irregular;
     }
-    free(x->f_outputs);
-    free(x->f_inputs);
-    free(x->f_outputs_real);
-	delete(x->f_ambisonics_decoder);
+    else if(atom_gettype(argv+1) == A_LONG)
+    {
+        mode = pd_clip_minmax(atom_getlong(argv+1), 0, 2);
+    }
+    if(atom_gettype(argv+2) == A_LONG)
+        number_of_loudspeakers = atom_getint(argv+2);
+    
+    x->f_ambi_decoder = new AmbisonicsMultiDecoder(order, number_of_loudspeakers, mode, Hoa_Small, hrtfPath, sys_getblksize(), sys_getsr());
+    
+    dsp_setupjbox((t_jbox *)x, x->f_ambi_decoder->getNumberOfInputs(), x->f_ambi_decoder->getNumberOfOutputs());
+    
+	x->f_ob.z_misc = Z_NO_INPLACE;
+    
+    d = object_dictionaryarg(argc,argv);
+    attr_dictionary_process(x, d);
+    
+    return (x);
+}
+
+t_max_err decoder_setattr_angles(t_hoa_decoder *x, void *attr, long ac, t_atom *av)
+{
+    if (ac && av)
+    {
+        for(int i = 0; i < ac && i < x->f_ambi_decoder->getNumberOfLoudspeakers(); i++)
+        {
+            if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
+                x->f_ambi_decoder->setLoudspeakerAngle(i, atom_getfloat(av+i));
+        }
+    }
+    return 0;
+}
+
+t_max_err decoder_setattr_pinnae(t_hoa_decoder *x, void *attr, long ac, t_atom *av)
+{
+    if (atom_gettype(av) == A_LONG)
+    {
+        long d = Tools::clip(long(atom_getlong(av)), 0, 1);
+        if(d != x->f_ambi_decoder->getPinnaeSize())
+        {
+            int dspState = canvas_suspend_dsp();
+            x->f_ambi_decoder->setPinnaeSize(d);            
+            canvas_resume_dsp(dspState);
+        }
+    }
+    return 0;
+}
+
+t_max_err decoder_setattr_restitution(t_hoa_decoder *x, void *attr, long ac, t_atom *av)
+{
+    if (atom_gettype(av) == A_LONG)
+    {
+        long d = Tools::clip(long(atom_getlong(av)), 0, 1);
+        if(d != x->f_ambi_decoder->getRestitutionMode())
+        {
+            int dspState = canvas_suspend_dsp();
+            x->f_ambi_decoder->setRestitutionMode(d);
+            canvas_resume_dsp(dspState);
+        }
+    }
+    return 0;
+}
+
+void hoa_decoder_dsp(t_hoa_decoder *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
+{
+	x->f_ambi_decoder->setVectorSize(maxvectorsize);
+    x->f_ambi_decoder->setSamplingRate(samplerate);
+    
+    object_method(dsp, gensym("dsp_add"), x, (method)hoa_decoder_perform, 0, NULL);
+}
+
+void hoa_decoder_perform(t_hoa_decoder *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
+{
+	x->f_ambi_decoder->process(ins, outs);
+}
+
+void hoa_decoder_free(t_hoa_decoder *x)
+{
+    dsp_freejbox((t_jbox *)x);
+	delete(x->f_ambi_decoder);
 }

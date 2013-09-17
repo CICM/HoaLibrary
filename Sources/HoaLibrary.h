@@ -47,11 +47,11 @@
 #endif
 
 #ifdef __APPLE__
-
+/*
 #include "hoaAmbisonics/Ambisonic3D.h"
 #include "hoaDecoder/AmbisonicDecoder3D.h"
 #include "hoaEncoder/AmbisonicEncoder3D.h"
-
+*/
 #include "hoaAmbisonics/AmbisonicsViewer.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaDelay/AmbisonicsDelay.h"

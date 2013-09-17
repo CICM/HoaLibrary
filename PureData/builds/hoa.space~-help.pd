@@ -10,7 +10,6 @@
 -262144 -1 -1 0 256;
 #X obj 111 173 hoa.recomposer~ 4 10;
 #X obj 96 252 dac~ 1 2 3 4 5 6 7 8 9 10;
-#X obj 96 219 hoa.decoder~ 4 10 -------;
 #X text -45 34 a index and a float :;
 #X msg -198 40 \; pd dsp 1;
 #X msg -198 84 \; pd dsp 0;
@@ -151,7 +150,17 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 } @bgcolor { 0.7 0.7 0.7 1 } @bordercolor { 0.5 0.5 0.5
 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor { 0 0 0 1 } @circolor { 0.7
-0.7 0.7 1 };
+0.7 0.7 1 } @patching_rect [ 0 0 225 225 ] @channels [ 10 ] @coeffs
+[ 1 0.186085 0 0 0 0 0 0 1 0.767857 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1
+] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor
+[ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ];
 #X obj 95 -94 osc~ 220;
 #X obj 332 -283 loadbang;
 #X text -227 307 Eliott Paris © 2012-2013 CICM / Universite Paris
@@ -165,7 +174,11 @@
 0 1 1 } @patching_rect { 0 0 225 225 } @order { 4 } @gain { 1 } @interval
 { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor
 { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0
-0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 };
+0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0
+0 225 225 } @order { 4 } @gain { 1 } @interval { 100 } @drawcircle
+{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
+1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
+1 0 0 1 } @nhcolor { 0 0 1 1 };
 #X text -49 22 Set one coefficient with;
 #X msg 177 -140 1000;
 #X msg 177 -221 30;
@@ -183,6 +196,7 @@ Gain between 0 and 1;
 the gains together.;
 #X text -230 -238 Use hoa.space (without ~) to change the gains.;
 #X obj -241 -255 loadbang;
+#X obj 96 219 hoa.decoder~ 4 0 10 -----;
 #X connect 1 0 2 0;
 #X connect 1 1 2 1;
 #X connect 1 2 2 2;
@@ -206,67 +220,67 @@ the gains together.;
 #X connect 3 0 2 0;
 #X connect 4 0 3 0;
 #X connect 5 0 3 1;
-#X connect 6 0 8 0;
-#X connect 6 0 31 0;
-#X connect 6 1 8 1;
-#X connect 6 1 31 1;
-#X connect 6 2 8 2;
-#X connect 6 2 31 2;
-#X connect 6 3 8 3;
-#X connect 6 3 31 3;
-#X connect 6 4 8 4;
-#X connect 6 4 31 4;
-#X connect 6 5 8 5;
-#X connect 6 5 31 5;
-#X connect 6 6 8 6;
-#X connect 6 6 31 6;
-#X connect 6 7 8 7;
-#X connect 6 7 31 7;
-#X connect 6 8 8 8;
-#X connect 6 8 31 8;
-#X connect 8 0 7 0;
-#X connect 8 1 7 1;
-#X connect 8 2 7 2;
-#X connect 8 3 7 3;
-#X connect 8 4 7 4;
-#X connect 8 5 7 5;
-#X connect 8 6 7 6;
-#X connect 8 7 7 7;
-#X connect 8 8 7 8;
-#X connect 8 9 7 9;
-#X connect 12 0 1 0;
-#X connect 12 1 1 1;
-#X connect 12 2 1 2;
-#X connect 12 3 1 3;
-#X connect 12 4 1 4;
-#X connect 12 5 1 5;
-#X connect 12 6 1 6;
-#X connect 12 7 1 7;
-#X connect 12 8 1 8;
-#X connect 15 0 14 0;
-#X connect 16 0 14 0;
-#X connect 17 0 14 0;
-#X connect 18 0 21 0;
-#X connect 19 0 20 0;
-#X connect 20 0 12 0;
-#X connect 21 0 12 0;
+#X connect 6 0 30 0;
+#X connect 6 0 44 0;
+#X connect 6 1 30 1;
+#X connect 6 1 44 1;
+#X connect 6 2 30 2;
+#X connect 6 2 44 2;
+#X connect 6 3 30 3;
+#X connect 6 3 44 3;
+#X connect 6 4 30 4;
+#X connect 6 4 44 4;
+#X connect 6 5 30 5;
+#X connect 6 5 44 5;
+#X connect 6 6 30 6;
+#X connect 6 6 44 6;
+#X connect 6 7 30 7;
+#X connect 6 7 44 7;
+#X connect 6 8 30 8;
+#X connect 6 8 44 8;
+#X connect 11 0 1 0;
+#X connect 11 1 1 1;
+#X connect 11 2 1 2;
+#X connect 11 3 1 3;
+#X connect 11 4 1 4;
+#X connect 11 5 1 5;
+#X connect 11 6 1 6;
+#X connect 11 7 1 7;
+#X connect 11 8 1 8;
+#X connect 14 0 13 0;
+#X connect 15 0 13 0;
+#X connect 16 0 13 0;
+#X connect 17 0 20 0;
+#X connect 18 0 19 0;
+#X connect 19 0 11 0;
+#X connect 20 0 11 0;
+#X connect 21 0 23 0;
 #X connect 22 0 24 0;
-#X connect 23 0 25 0;
-#X connect 24 0 12 0;
-#X connect 25 0 12 0;
-#X connect 26 0 2 0;
-#X connect 27 0 12 0;
-#X connect 28 0 15 0;
-#X connect 28 0 33 0;
-#X connect 28 0 34 0;
-#X connect 28 0 35 0;
-#X connect 28 0 36 0;
-#X connect 28 0 38 0;
+#X connect 23 0 11 0;
+#X connect 24 0 11 0;
+#X connect 25 0 2 0;
+#X connect 26 0 11 0;
+#X connect 27 0 14 0;
+#X connect 27 0 32 0;
+#X connect 27 0 33 0;
+#X connect 27 0 34 0;
+#X connect 27 0 35 0;
+#X connect 27 0 37 0;
+#X connect 32 0 17 0;
 #X connect 33 0 18 0;
-#X connect 34 0 19 0;
+#X connect 34 0 21 0;
 #X connect 35 0 22 0;
-#X connect 36 0 23 0;
-#X connect 37 0 27 0;
-#X connect 38 0 37 0;
-#X connect 44 0 26 0;
+#X connect 36 0 26 0;
+#X connect 37 0 36 0;
+#X connect 43 0 25 0;
+#X connect 44 0 7 0;
+#X connect 44 1 7 1;
+#X connect 44 2 7 2;
+#X connect 44 3 7 3;
+#X connect 44 4 7 4;
+#X connect 44 5 7 5;
+#X connect 44 6 7 6;
+#X connect 44 7 7 7;
+#X connect 44 8 7 8;
+#X connect 44 9 7 9;
 #X coords 0 715 1 714 100 60 0;

@@ -24,8 +24,8 @@
  *
  */
 
-#ifndef DEF_HOA_FREEVERB_TILDE_PD
-#define DEF_HOA_FREEVERB_TILDE_PD
+#ifndef DEF_HOA_DELAY_TILDE_PD
+#define DEF_HOA_DELAY_TILDE_PD
 
 #include "../../../PdEnhanced/Sources/pd_enhanced.h"
 #include "../../Sources/HoaLibrary.h"

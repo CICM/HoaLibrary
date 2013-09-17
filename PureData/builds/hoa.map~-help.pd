@@ -35,7 +35,6 @@
 #X obj 321 -198 osc~ 0.25;
 #X obj 204 -167 phasor~ 220;
 #X text -522 -403 An ambisonics sources spatializer;
-#X obj -405 -56 hoa.decoder~ 3 8 ---;
 #X text -520 -375 hoa.map~ is an ambisonics encoder that uses fractionnal
 orders and amplitude variation to simulate sources distances. First
 argument is the order and second argument is the number of sources.
@@ -55,8 +54,6 @@ cartesian corrdinates (abscissa and ordinate).;
 #X text 352 -153 ordinate;
 #X text 268 -151 abscissa;
 #X text 202 -184 source;
-#X obj -86 -75 hoa.decoder~ 3 8 ---;
-#X obj 204 -75 hoa.decoder~ 3 8 ---;
 #X text -430 -309 hoa.map~'s syntax for multisource mode : index \,
 coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
 \, coordinate two (angle or ordinate).;
@@ -85,6 +82,16 @@ coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
 [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
 #X msg 322 -344 \; pd dsp 1;
 #X msg 323 -307 \; pd dsp 0;
@@ -99,6 +106,16 @@ coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
 @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
 [ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
@@ -162,18 +179,31 @@ coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
 [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+] @patching_rect [ 0 0 225 225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
+[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
+3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
+] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
+0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
 #X obj -86 -134 hoa.map~ 3 1 @mode [ 0 ];
 #X obj 204 -134 hoa.map~ 3 1 @mode [ 1 ];
 #X text -390 -260 You should look at hoa.map (GUI)!;
 #X obj -28 -220 osc~ 0.1;
-#X connect 1 0 29 0;
-#X connect 1 1 29 1;
-#X connect 1 2 29 2;
-#X connect 1 3 29 3;
-#X connect 1 4 29 4;
-#X connect 1 5 29 5;
-#X connect 1 6 29 6;
+#X obj -405 -56 hoa.decoder~ 3 0 8 -;
+#X obj -86 -75 hoa.decoder~ 3 0 8 -;
+#X obj 204 -75 hoa.decoder~ 3 0 8 -;
+#X connect 1 0 56 0;
+#X connect 1 1 56 1;
+#X connect 1 2 56 2;
+#X connect 1 3 56 3;
+#X connect 1 4 56 4;
+#X connect 1 5 56 5;
+#X connect 1 6 56 6;
 #X connect 2 0 1 0;
 #X connect 2 1 1 1;
 #X connect 2 2 1 2;
@@ -181,29 +211,29 @@ coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
 #X connect 2 4 1 4;
 #X connect 2 5 1 5;
 #X connect 2 6 1 6;
-#X connect 3 0 44 0;
-#X connect 3 1 44 1;
-#X connect 3 2 44 2;
-#X connect 3 3 44 3;
-#X connect 3 4 44 4;
-#X connect 3 5 44 5;
-#X connect 3 6 44 6;
-#X connect 4 0 45 0;
-#X connect 4 1 45 1;
-#X connect 4 2 45 2;
-#X connect 4 3 45 3;
-#X connect 4 4 45 4;
-#X connect 4 5 45 5;
-#X connect 4 6 45 6;
+#X connect 3 0 57 0;
+#X connect 3 1 57 1;
+#X connect 3 2 57 2;
+#X connect 3 3 57 3;
+#X connect 3 4 57 4;
+#X connect 3 5 57 5;
+#X connect 3 6 57 6;
+#X connect 4 0 58 0;
+#X connect 4 1 58 1;
+#X connect 4 2 58 2;
+#X connect 4 3 58 3;
+#X connect 4 4 58 4;
+#X connect 4 5 58 5;
+#X connect 4 6 58 6;
 #X connect 5 0 2 0;
-#X connect 6 0 55 0;
+#X connect 6 0 52 0;
 #X connect 7 0 9 0;
-#X connect 8 0 55 1;
-#X connect 9 0 55 2;
+#X connect 8 0 52 1;
+#X connect 9 0 52 2;
 #X connect 10 0 9 1;
 #X connect 11 0 10 0;
-#X connect 12 0 56 1;
-#X connect 13 0 56 2;
+#X connect 12 0 53 1;
+#X connect 13 0 53 2;
 #X connect 14 0 17 0;
 #X connect 15 0 17 1;
 #X connect 15 0 18 0;
@@ -219,52 +249,52 @@ coordinate type (polar or cartesian) \, coordinate one (radius or abscissa)
 #X connect 24 0 2 1;
 #X connect 25 0 12 0;
 #X connect 26 0 13 0;
-#X connect 27 0 56 0;
-#X connect 29 0 49 0;
-#X connect 29 1 49 1;
-#X connect 29 2 49 2;
-#X connect 29 3 49 3;
-#X connect 29 4 49 4;
-#X connect 29 5 49 5;
-#X connect 29 6 49 6;
-#X connect 29 7 49 7;
-#X connect 44 0 52 0;
-#X connect 44 0 53 0;
-#X connect 44 1 52 1;
-#X connect 44 1 53 1;
-#X connect 44 2 52 2;
-#X connect 44 2 53 2;
-#X connect 44 3 52 3;
-#X connect 44 3 53 3;
-#X connect 44 4 52 4;
-#X connect 44 4 53 4;
-#X connect 44 5 52 5;
-#X connect 44 5 53 5;
-#X connect 44 6 52 6;
-#X connect 44 6 53 6;
-#X connect 44 7 52 7;
-#X connect 44 7 53 7;
-#X connect 45 0 54 0;
-#X connect 45 1 54 1;
-#X connect 45 2 54 2;
-#X connect 45 3 54 3;
-#X connect 45 4 54 4;
-#X connect 45 5 54 5;
-#X connect 45 6 54 6;
-#X connect 45 7 54 7;
-#X connect 55 0 3 0;
-#X connect 55 1 3 1;
-#X connect 55 2 3 2;
-#X connect 55 3 3 3;
-#X connect 55 4 3 4;
-#X connect 55 5 3 5;
-#X connect 55 6 3 6;
-#X connect 56 0 4 0;
-#X connect 56 1 4 1;
-#X connect 56 2 4 2;
-#X connect 56 3 4 3;
-#X connect 56 4 4 4;
-#X connect 56 5 4 5;
-#X connect 56 6 4 6;
-#X connect 58 0 8 0;
+#X connect 27 0 53 0;
+#X connect 52 0 3 0;
+#X connect 52 1 3 1;
+#X connect 52 2 3 2;
+#X connect 52 3 3 3;
+#X connect 52 4 3 4;
+#X connect 52 5 3 5;
+#X connect 52 6 3 6;
+#X connect 53 0 4 0;
+#X connect 53 1 4 1;
+#X connect 53 2 4 2;
+#X connect 53 3 4 3;
+#X connect 53 4 4 4;
+#X connect 53 5 4 5;
+#X connect 53 6 4 6;
+#X connect 55 0 8 0;
+#X connect 56 0 46 0;
+#X connect 56 1 46 1;
+#X connect 56 2 46 2;
+#X connect 56 3 46 3;
+#X connect 56 4 46 4;
+#X connect 56 5 46 5;
+#X connect 56 6 46 6;
+#X connect 56 7 46 7;
+#X connect 57 0 49 0;
+#X connect 57 0 50 0;
+#X connect 57 1 49 1;
+#X connect 57 1 50 1;
+#X connect 57 2 49 2;
+#X connect 57 2 50 2;
+#X connect 57 3 49 3;
+#X connect 57 3 50 3;
+#X connect 57 4 49 4;
+#X connect 57 4 50 4;
+#X connect 57 5 49 5;
+#X connect 57 5 50 5;
+#X connect 57 6 49 6;
+#X connect 57 6 50 6;
+#X connect 57 7 49 7;
+#X connect 57 7 50 7;
+#X connect 58 0 51 0;
+#X connect 58 1 51 1;
+#X connect 58 2 51 2;
+#X connect 58 3 51 3;
+#X connect 58 4 51 4;
+#X connect 58 5 51 5;
+#X connect 58 6 51 6;
+#X connect 58 7 51 7;
 #X coords 0 667 1 666 100 60 0;

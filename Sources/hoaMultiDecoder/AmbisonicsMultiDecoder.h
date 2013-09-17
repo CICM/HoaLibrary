@@ -31,9 +31,9 @@
 
 enum
 {
-    Hoa_Ambisonics = 0,
-    Hoa_Binaural,
-    Hoa_Restitution
+    Hoa_Dec_Ambisonic = 0,
+    Hoa_Dec_Binaural,
+    Hoa_Dec_Irregular
 };
 
 class AmbisonicsMultiDecoder : public Ambisonic
@@ -47,7 +47,7 @@ private:
     AmbisonicsRestitution*  m_restitution;
 
 public:
-	AmbisonicsMultiDecoder(long anOrder = 1, long aNumberOfLoudspeakers = 4, long aMode = Hoa_Ambisonics, long aPinnaSize = Hoa_Small, std::string aRootPath = "", long aVectorSize = 0, long aSamplingRate = 44100);
+	AmbisonicsMultiDecoder(long anOrder = 1, long aNumberOfLoudspeakers = 4, long aMode = Hoa_Dec_Ambisonic, long aPinnaSize = Hoa_Small, std::string aRootPath = "", long aVectorSize = 0, long aSamplingRate = 44100);
     
     void    setMode(long aMode);
     long    getMode();
@@ -75,9 +75,9 @@ public:
 	/* Perform block sample */
 	inline void process(double** aInputs, double** aOutputs)
 	{
-        if(m_mode == Hoa_Ambisonics)
+        if(m_mode == Hoa_Dec_Ambisonic)
             m_decoder->process(aInputs, aOutputs);
-        else if(m_mode == Hoa_Binaural)
+        else if(m_mode == Hoa_Dec_Binaural)
             m_binaural->process(aInputs, aOutputs);
         else
 			m_restitution->process(aInputs, aOutputs);
@@ -85,9 +85,9 @@ public:
     
     inline void process(float** aInputs, float** aOutputs)
 	{
-        if(m_mode == Hoa_Ambisonics)
+        if(m_mode == Hoa_Dec_Ambisonic)
             m_decoder->process(aInputs, aOutputs);
-        else if(m_mode == Hoa_Binaural)
+        else if(m_mode == Hoa_Dec_Binaural)
             m_binaural->process(aInputs, aOutputs);
         else
            m_restitution->process(aInputs, aOutputs);
