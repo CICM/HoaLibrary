@@ -221,7 +221,6 @@ void AmbisonicMap::setRamp(long aNumberOfSample)
 long AmbisonicMap::getRamp()
 {
     return m_line_one->getRampInSample();
-    //return m_line_one->getRamp();
 }
 
 AmbisonicMap::~AmbisonicMap()

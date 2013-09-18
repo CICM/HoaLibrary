@@ -141,6 +141,7 @@ private:
     std::vector <Source*>       m_sources;
     std::vector <SourcesGroup*> m_groups;
     long                        m_existence;
+    double                      m_zoom; // For VST Audio Plugin //
     void checkMute();
 public:
 	SourcesManager(double aMaximumLimitValue = -1., long deadOrAlive = 1);
@@ -154,6 +155,8 @@ public:
     long getNumberOfGroups();
     double getLimitMaximum();
     long getExistence();
+    void setZoom(double aZoomValue);
+    double getZoom();
     
     /* Source */
 	void sourceSetPolar(long anIndex, double aRadius, double anAngle);
