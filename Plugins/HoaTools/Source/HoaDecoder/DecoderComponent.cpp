@@ -156,25 +156,5 @@ void DecoderEditor::paint(Graphics& g)
     }
 }
 
-/************************************************************************************/
-/***************************** OPTION ***********************************************/
-/************************************************************************************/
-
-OptimEditor::OptimEditor(DecoderProcessor * aDecoderProcessor)
-{
-    m_decoder   = aDecoderProcessor->getDecoder();
-    m_meter     = aDecoderProcessor->getMeter();
-    m_optim     = aDecoderProcessor->getOptim();
-}
-
-OptimEditor::~OptimEditor()
-{
-    ;
-}
-
-void OptimEditor::paint(Graphics& g)
-{
-    
-}
 
 

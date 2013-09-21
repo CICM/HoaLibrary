@@ -5,7 +5,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "HoaMap/MapComponent.h"
 #include "HoaDecoder/DecoderComponent.h"
-
+#include "HoaLookAndFeel.h"
 enum
 {
     gui_mode_map = 0,

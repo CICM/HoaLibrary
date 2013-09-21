@@ -69,19 +69,5 @@ public:
     void timerCallback();
 };
 
-class OptimEditor : public Component
-{
-private:
-    AmbisonicsMultiDecoder* m_decoder;
-    AmbisonicsMeter*        m_meter;
-    AmbisonicOptim*         m_optim;
-    
-public:
-    OptimEditor(DecoderProcessor * aDecoderProcessor);
-    ~OptimEditor();
-    
-    void paint (Graphics&);
-};
-
 
 #endif

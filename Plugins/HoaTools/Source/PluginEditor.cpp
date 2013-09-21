@@ -31,9 +31,8 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_processor = ownerFilter;
     m_map       = new MapEditor(aMapProcessor);
     m_decoder   = new DecoderEditor(aDecoderProcessor);
-    m_switch    = new ShapeButton(String(""), Colour::fromRGBA(0,0,0,0), Colour::fromRGBA(50, 50, 50, 50), Colour::fromRGBA(50, 50, 50, 125));
-    
-    if(m_processor->getGui() == gui_mode_map)
+    m_optim_processor = aDecoderProcessor->getOptim();
+    if(ownerFilter->getGui() == gui_mode_map)
     {
         addAndMakeVisible(m_map);
         m_map->setSize(495, 495);
@@ -54,10 +53,23 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
         m_map->setBounds(501, 375, 124, 124);
     }
     
-    addAndMakeVisible(m_switch);
+    addAndMakeVisible(m_optim_menu = new ComboBox());
+    m_optim_menu->setEditableText(false);
+    m_optim_menu->setJustificationType(Justification::centredLeft);
+    m_optim_menu->setTextWhenNoChoicesAvailable("(no choices)");
+    m_optim_menu->addItem("Optim : Basic", 1);
+    m_optim_menu->addItem("Optim : MaxRe", 2);
+    m_optim_menu->addItem("Optim : InPhase", 3);
+    m_optim_menu->addListener(this);
+    m_optim_menu->setSelectedId(m_optim_processor->getOptimMode()+1);
+    m_optim_menu->setBounds(501, 2., 122, 15);
+    
+    m_optim_menu->setLookAndFeel(&LookAndFeel);
+   
+    addAndMakeVisible(m_switch    = new ShapeButton(String(""), Colour::fromRGBA(0,0,0,0), Colour::fromRGBA(50, 50, 50, 50), Colour::fromRGBA(50, 50, 50, 125)));
     m_switch->setSize(123, 123);
     m_switch->setBounds(501, 375, 124, 124);
-    m_switch->addListener(this);
+    m_switch->addListener(this);    
     
     setSize(625, 500);
 }
@@ -76,6 +88,24 @@ void HoaToolsAudioProcessorEditor::paint(Graphics& g)
     g.setColour(Colours::grey);
     g.drawLine(500, 124, 625, 124, 2.5);
 }
+
+HoaToolsAudioProcessorEditor::~HoaToolsAudioProcessorEditor()
+{
+    delete m_map;
+    delete m_decoder;
+    delete m_optim_menu;
+    delete m_switch;
+}
+
+
+void HoaToolsAudioProcessorEditor::comboBoxChanged(ComboBox* aComboBox)
+{
+    if (aComboBox == m_optim_menu)
+    {
+        m_optim_processor->setOptimMode(m_optim_menu->getSelectedId()-1);
+    }
+}
+
 
 void HoaToolsAudioProcessorEditor::buttonClicked(Button* button)
 {
@@ -97,13 +127,6 @@ void HoaToolsAudioProcessorEditor::buttonClicked(Button* button)
     }
 }
 
-
-HoaToolsAudioProcessorEditor::~HoaToolsAudioProcessorEditor()
-{
-    delete m_map;
-    delete m_decoder;
-    delete m_switch;
-}
 
 
 

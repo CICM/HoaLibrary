@@ -26,6 +26,8 @@
 		61743509BACB6D97F08B22D6 /* PluginProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACB741FCE4C7F16C5BE7E55 /* PluginProcessor.cpp */; };
 		6D641CF8CC04BE1C9B0554CF /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AC95D85E037E800BA2BD61 /* CoreAudio.framework */; };
 		7358525D9CAF7B942017E5B7 /* juce_data_structures.mm in Sources */ = {isa = PBXBuildFile; fileRef = 829E2D60D492C27E7707AC72 /* juce_data_structures.mm */; };
+		8F38322F17ED9C42003407E1 /* OptionComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F38322D17ED9C42003407E1 /* OptionComponent.cpp */; };
+		8F38323217EDB6AA003407E1 /* HoaLookAndFeel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F38323017EDB6AA003407E1 /* HoaLookAndFeel.cpp */; };
 		8F7E152B17E8D739008FEE9C /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E148117E8D739008FEE9C /* CicmRingModulation.cpp */; };
 		8F7E152C17E8D739008FEE9C /* CicmDecorrelation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E148817E8D739008FEE9C /* CicmDecorrelation.cpp */; };
 		8F7E152D17E8D739008FEE9C /* CicmEnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E148B17E8D739008FEE9C /* CicmEnvelope.cpp */; };
@@ -581,6 +583,10 @@
 		8EB87DB59EC937E9FB091FAB /* juce_ShapeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ShapeButton.h; path = ../../../../../../SDKs/Juce/modules/juce_gui_basics/buttons/juce_ShapeButton.h; sourceTree = SOURCE_ROOT; };
 		8EE89B5C2AA86417A6C45E1C /* juce_MidiOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_MidiOutput.h; path = ../../../../../../SDKs/Juce/modules/juce_audio_devices/midi_io/juce_MidiOutput.h; sourceTree = SOURCE_ROOT; };
 		8F23F2F340685ABBF2BE0599 /* juce_ScopedWriteLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ScopedWriteLock.h; path = ../../../../../../SDKs/Juce/modules/juce_core/threads/juce_ScopedWriteLock.h; sourceTree = SOURCE_ROOT; };
+		8F38322D17ED9C42003407E1 /* OptionComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OptionComponent.cpp; sourceTree = "<group>"; };
+		8F38322E17ED9C42003407E1 /* OptionComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionComponent.h; sourceTree = "<group>"; };
+		8F38323017EDB6AA003407E1 /* HoaLookAndFeel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HoaLookAndFeel.cpp; path = ../../Source/HoaLookAndFeel.cpp; sourceTree = "<group>"; };
+		8F38323117EDB6AA003407E1 /* HoaLookAndFeel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoaLookAndFeel.h; path = ../../Source/HoaLookAndFeel.h; sourceTree = "<group>"; };
 		8F4002E0835BC38D973B79DD /* juce_android_Threads.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_android_Threads.cpp; path = ../../../../../../SDKs/Juce/modules/juce_core/native/juce_android_Threads.cpp; sourceTree = SOURCE_ROOT; };
 		8F7E148117E8D739008FEE9C /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
 		8F7E148217E8D739008FEE9C /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
@@ -1995,10 +2001,13 @@
 		88A863BECD613F7071DCC937 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8F38323017EDB6AA003407E1 /* HoaLookAndFeel.cpp */,
+				8F38323117EDB6AA003407E1 /* HoaLookAndFeel.h */,
 				EACB741FCE4C7F16C5BE7E55 /* PluginProcessor.cpp */,
 				B58C66D7070B0535B5119048 /* PluginProcessor.h */,
 				0F10D615B2A05574A0D689AD /* PluginEditor.cpp */,
 				F7B2CF3A7B54470FF27BF249 /* PluginEditor.h */,
+				8F38322C17ED9C42003407E1 /* HoaOption */,
 				8F7E157317E9D48E008FEE9C /* HoaDecoder */,
 				8F7E156C17E9BAE8008FEE9C /* HoaMap */,
 			);
@@ -2041,6 +2050,16 @@
 				41E31D747D3B6FF22E9E41FE /* juce_ValueTree.h */,
 			);
 			name = values;
+			sourceTree = "<group>";
+		};
+		8F38322C17ED9C42003407E1 /* HoaOption */ = {
+			isa = PBXGroup;
+			children = (
+				8F38322D17ED9C42003407E1 /* OptionComponent.cpp */,
+				8F38322E17ED9C42003407E1 /* OptionComponent.h */,
+			);
+			name = HoaOption;
+			path = ../../Source/HoaOption;
 			sourceTree = "<group>";
 		};
 		8F7E147E17E8D739008FEE9C /* Sources */ = {
@@ -3337,6 +3356,8 @@
 				8F7E156B17E8D739008FEE9C /* AmbisonicWider.cpp in Sources */,
 				8F7E157217E9C0E6008FEE9C /* MapComponent.cpp in Sources */,
 				8F7E157617E9D48E008FEE9C /* DecoderComponent.cpp in Sources */,
+				8F38322F17ED9C42003407E1 /* OptionComponent.cpp in Sources */,
+				8F38323217EDB6AA003407E1 /* HoaLookAndFeel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
