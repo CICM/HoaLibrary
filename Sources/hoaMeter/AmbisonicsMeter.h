@@ -39,6 +39,9 @@ protected:
     double        m_vector_coordinates_double[4];
     float         m_vector_coordinates_float[4];
     
+    cicm_vector_double m_loudspeakers_angles_mapped;
+    cicm_vector_double m_loudspeakers_angles_width;
+    
 public:
 	AmbisonicsMeter(long aNumberOfChannel = 1, long aVectorSize = 0, double aSamplingRate = 44100.);
     
@@ -55,6 +58,12 @@ public:
     double       getVelocityVectorAbscissa();
     double       getVelocityVectorOrdinate();
     double       getVelocityVectorAngle();
+    
+    double       getLoudspeakerAngleMapped(long anIndex);
+    double       getLoudspeakerWidth(long anIndex);
+    double       getLoudspeakerAngleRadian(long anIndex);
+    double       getLoudspeakerAngleMappedRadian(long anIndex);
+    double       getLoudspeakerWidthRadian(long anIndex);
     std::string  getChannelName(long anIndex);
 
 	~AmbisonicsMeter();

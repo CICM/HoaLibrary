@@ -29,7 +29,6 @@ SourcesManager::SourcesManager(double aMaximumLimitValue, long deadOrAlive)
 {
     setExistence(deadOrAlive);
     setMaximumRadius(aMaximumLimitValue);
-    setZoom(1.);
 }
 
 void SourcesManager::setExistence(long deadOrAlive)
@@ -73,16 +72,6 @@ void SourcesManager::setMaximumRadius(double aLimitValue)
 double SourcesManager::getLimitMaximum()
 {
     return m_maximum_radius;
-}
-
-void SourcesManager::setZoom(double aZoomValue)
-{
-    m_zoom = Tools::clip_min(aZoomValue, 0);
-}
-
-double SourcesManager::getZoom()
-{
-    return m_zoom;
 }
 
 long SourcesManager::getMaximumIndexOfSource()

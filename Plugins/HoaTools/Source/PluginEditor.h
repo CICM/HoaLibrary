@@ -3,21 +3,24 @@
 #define PLUGINEDITOR_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "PluginMap.h"
+#include "HoaMap/MapComponent.h"
+#include "HoaDecoder/DecoderComponent.h"
 #include "PluginProcessor.h"
 
-class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public Timer
+
+class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public ButtonListener
 {
 private:
-    SourcesManager* m_sources_manager;
-    MapComponent*   m_map;
-    
+    HoaToolsAudioProcessor* m_processor;
+    MapEditor*              m_map;
+    DecoderEditor*          m_decoder;
+    ShapeButton*            m_switch;
 public:
-    HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter, SourcesManager* aSourcesManger);
+    HoaToolsAudioProcessorEditor(HoaToolsAudioProcessor* ownerFilter, MapProcessor* aMapProcessor, DecoderProcessor* aDecoderProcessor);
     ~HoaToolsAudioProcessorEditor();
 
     void paint(Graphics& g);
-    void timerCallback();
+    void buttonClicked(Button* button);
 };
 
 

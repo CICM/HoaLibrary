@@ -3,17 +3,27 @@
 #define PLUGINPROCESSOR_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "../../../Sources/HoaLibrary.h"
-#include "HoaMap/MapProcessor.h"
+#include "HoaMap/MapComponent.h"
+#include "HoaDecoder/DecoderComponent.h"
 
-class HoaToolsAudioProcessor  : public AudioProcessor
+enum
+{
+    gui_mode_map = 0,
+    gui_mode_meter,
+};
+
+class HoaToolsAudioProcessor  : public AudioProcessor, public ChangeBroadcaster
 {
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaToolsAudioProcessor)
-    float**                     m_harmonics_matrix;
-    MapProcessor*   m_map;
-    AmbisonicsMultiDecoder*     m_decoder;
     
+    long                        m_order;
+    long                        m_number_of_harmonics;
+    bool                        m_can_process;
+    long                        m_gui;
+    float**                     m_harmonics_matrix;
+    MapProcessor*               m_map;
+    DecoderProcessor*           m_decoder;
 public:
     HoaToolsAudioProcessor();
     ~HoaToolsAudioProcessor();
@@ -25,14 +35,19 @@ public:
 
     AudioProcessorEditor* createEditor();
     bool hasEditor() const;
+    long getGui(){return m_gui;};
+    void setGui(long aMode){m_gui = aMode;};
     
     const String getName() const;
 
     int getNumParameters();
-
     float getParameter (int index);
     void setParameter (int index, float newValue);
-
+    float getParameterMin(int index);
+    float getParameterMax(int index);
+    float getParameterDefault(int index);
+    int getParameterNumSteps(int parameterIndex);
+    float getParameterDefaultValue (int parameterIndex);
     const String getParameterName (int index);
     const String getParameterText (int index);
 

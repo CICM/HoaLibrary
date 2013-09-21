@@ -1,66 +1,88 @@
+/**
+ * HoaLibrary : A High Order Ambisonics Library
+ * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.
+ *
+ * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Contacts : cicm.mshparisnord@gmail.com
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ *
+ *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
+ *  - Redistributions of source code must retain the above copyright notice,
+ *		this list of conditions and the following disclaimer.
+ *  - Redistributions in binary form must reproduce the above copyright notice,Z
+ *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 #include "MapComponent.h"
-
-MapComponent::MapComponent(SourcesManager* aSourcesManger)
-{
-    m_sources_manager   = new SourcesManager(-1, 1);
-    m_map               = new AmbisonicsMultiMaps(1);
-    m_souce_selected    = -1;
-    m_sources_size      = 0.08;
-    m_background_invalidate = 1;
-}
-
-MapComponent::~MapComponent()
-{
-    delete m_sources_manager;
-    delete m_map;
-}
 
 /************************************************************************************/
 /***************************** PROCESSOR ********************************************/
 /************************************************************************************/
 
-void MapComponent::setNumberOfChannels(long aNumberOfInputs, long aNumberOfOuputs)
+MapProcessor::MapProcessor()
 {
-    long order;
-    if(aNumberOfOuputs % 2 == 0)
-        order = aNumberOfOuputs / 2 - 1;
-    else
-        order = aNumberOfOuputs / 2;
-    
-    if(order != m_map->getOrder())
+    m_sources_manager   = new SourcesManager(-1, 1);
+    m_map               = new AmbisonicsMultiMaps(1);
+    m_zoom              = 0.5;
+    m_order             = m_map->getOrder();
+    m_number_of_harmonics = m_map->getNumberOfHarmonics();
+    m_number_of_sources = m_map->getNumberOfSources();
+}
+
+
+MapProcessor::~MapProcessor()
+{
+    delete m_sources_manager;
+    delete m_map;
+}
+
+void MapProcessor::setConfiguation(long anOrder, long aNumberOfSource)
+{
+    if(anOrder != m_order)
     {
         if(m_map)
             delete m_map;
-        m_map       = new AmbisonicsMultiMaps(order, aNumberOfInputs, 0, 512, 44100);
+        m_map = new AmbisonicsMultiMaps(anOrder, aNumberOfSource, 0, 512, 44100);
+        m_order             = m_map->getOrder();
+        m_number_of_harmonics = m_map->getNumberOfHarmonics();
+        m_number_of_sources = m_map->getNumberOfSources();
     }
-    if(aNumberOfInputs != m_map->getNumberOfSources())
+    if(aNumberOfSource != m_number_of_sources)
     {
         if(m_map)
             delete m_map;
-        m_map = new AmbisonicsMultiMaps(order, aNumberOfInputs, 0, 512, 44100);
-        if(aNumberOfInputs > m_sources_manager->getNumberOfSources())
-        {
-            for(int i = m_sources_manager->getNumberOfSources(); i < aNumberOfInputs; i++)
-            {
-                m_sources_manager->sourceSetPolar(0, 1., CICM_2PI / (double)aNumberOfInputs * (double)i);
-            }
-        }
-        else if(aNumberOfInputs < m_sources_manager->getNumberOfSources())
-        {
-            for(int i = m_sources_manager->getNumberOfSources(); i > aNumberOfInputs; i--)
-            {
-                m_sources_manager->sourceRemove(i-1);
-            }
-        }
+        m_map = new AmbisonicsMultiMaps(m_order, aNumberOfSource, 0, 512, 44100);
+        m_order             = m_map->getOrder();
+        m_number_of_harmonics = m_map->getNumberOfHarmonics();
+        m_number_of_sources = m_map->getNumberOfSources();
     }
-    for(int i = 0; i < aNumberOfInputs; i++)
+    for(int i = 0; i < m_number_of_sources; i++)
+    {
+        if(!m_sources_manager->sourceGetExistence(i))
+            m_sources_manager->sourceSetPolar(i, 1., CICM_2PI / (double)m_number_of_sources * (double)i);
+    }
+    for(int i = m_number_of_sources; i < m_sources_manager->getMaximumIndexOfSource(); i++)
+    {
+        m_sources_manager->sourceRemove(i);
+    }
+        
+    for(int i = 0; i < m_number_of_sources; i++)
     {
         m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
     }
 }
 
-void MapComponent::prepareToPlay(long aSampleRate, long aVectorSize)
+void MapProcessor::prepareToPlay(long aSampleRate, long aVectorSize)
 {
     m_map->setSamplingRate(aSampleRate);
     m_map->setVectorSize(aVectorSize);
@@ -68,20 +90,39 @@ void MapComponent::prepareToPlay(long aSampleRate, long aVectorSize)
 }
 
 
-void MapComponent::process(float** inputs, float** outputs)
+void MapProcessor::process(float** inputs, float** outputs)
 {
     m_map->process(inputs, outputs);
-    for(int i = 0; i < m_map->getNumberOfSources(); i++)
+    for(int i = 0; i < m_number_of_sources; i++)
     {
         m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
     }
+}
+
+void MapProcessor::setZoom(float aZoomvalue)
+{
+    m_zoom = Tools::clip(aZoomvalue, 0.01, 1.);
 }
 
 /************************************************************************************/
 /***************************** EDITOR ***********************************************/
 /************************************************************************************/
 
-void MapComponent::mouseMove(const MouseEvent &event)
+MapEditor::MapEditor(MapProcessor* aMapProcessor)
+{
+    m_map_processor     = aMapProcessor;
+    m_sources_manager   = m_map_processor->getSourceManager();
+    m_souce_selected    = -1;
+    m_sources_size      = 15.;
+}
+
+
+MapEditor::~MapEditor()
+{
+    ;
+}
+
+void MapEditor::mouseMove(const MouseEvent &event)
 {
     Point<float> source;
     Point<float> mouse = event.getPosition().toFloat();
@@ -90,8 +131,8 @@ void MapComponent::mouseMove(const MouseEvent &event)
     m_souce_selected = -1;
     for (int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
     {
-        source.setXY(m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
-        if(mouse.getDistanceFrom(source) < m_sources_size * 0.5)
+        source.setXY(m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom());
+        if(mouse.getDistanceFrom(source) < m_sources_size * 0.002)
         {
             m_souce_selected = i;
             setMouseCursor(MouseCursor::PointingHandCursor);
@@ -99,9 +140,10 @@ void MapComponent::mouseMove(const MouseEvent &event)
             return;
         }
     }
+    repaint();
     setMouseCursor(MouseCursor::NormalCursor);
 }
-void MapComponent::mouseDown(const MouseEvent &event)
+void MapEditor::mouseDown(const MouseEvent &event)
 {
     Point<float> source;
     Point<float> mouse = event.getPosition().toFloat();
@@ -110,8 +152,8 @@ void MapComponent::mouseDown(const MouseEvent &event)
     m_souce_selected = -1;
     for (int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
     {
-        source.setXY(m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
-        if(mouse.getDistanceFrom(source) < m_sources_size * 0.5)
+        source.setXY(m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom());
+        if(mouse.getDistanceFrom(source) < m_sources_size * 0.002)
         {
             m_souce_selected = i;
             setMouseCursor(MouseCursor::PointingHandCursor);
@@ -119,9 +161,10 @@ void MapComponent::mouseDown(const MouseEvent &event)
             return;
         }
     }
+    repaint();
     setMouseCursor(MouseCursor::NormalCursor);
 }
-void MapComponent::mouseDrag(const MouseEvent &event)
+void MapEditor::mouseDrag(const MouseEvent &event)
 {
     Point<float> source;
     Point<float> mouse = event.getPosition().toFloat();
@@ -129,74 +172,93 @@ void MapComponent::mouseDrag(const MouseEvent &event)
     
     if(m_souce_selected != -1)
     {
-        m_sources_manager->sourceSetCartesian(m_souce_selected, mouse.getX(), mouse.getY());
+        m_sources_manager->sourceSetCartesian(m_souce_selected, mouse.getX() / m_map_processor->getZoom(), mouse.getY() / m_map_processor->getZoom());
         repaint();
     }
 }
 
-void MapComponent::mouseWheelMove(const MouseEvent& event, const MouseWheelDetails& wheel)
+void MapEditor::mouseWheelMove(const MouseEvent& event, const MouseWheelDetails& wheel)
 {
-    if(event.mods.isShiftDown() && wheel.deltaX)
+    m_map_processor->setZoom(m_map_processor->getZoom() + wheel.deltaY);
+    repaint();
+    if(event.mods.isShiftDown() || event.mods.isCtrlDown() || event.mods.isCommandDown())
     {
-        m_sources_manager->setZoom(m_sources_manager->getZoom() + wheel.deltaX);
-        m_background_invalidate = 1;
-        repaint();
+       
     }
 }
 
-void MapComponent::mouseUp(const MouseEvent &event)
+void MapEditor::mouseUp(const MouseEvent &event)
 {
     ;
 }
 
-void MapComponent::paint(Graphics& g)
+void MapEditor::paint(Graphics& g)
 {
     draw_background(g);
     draw_sources(g);
 }
 
-void MapComponent::draw_background(Graphics& g)
+void MapEditor::draw_background(Graphics& g)
 {
-    if(m_background_invalidate)
+    float center = getWidth() * 0.5;
+    
+    for(int i = 1; i <= 5; i++)
     {
-        Path backgroung;
-        g.addTransform(AffineTransform::fromTargetPoints(-1, 1, 0, 0, 1, 1, getWidth(), 0, 1, -1, getWidth(), getWidth()));
-        
-        backgroung.addRectangle(-1., -1., 1., 1.);
+        float width = center * (i / 5.) * m_map_processor->getZoom();
+        float start = center - width;
+        g.setColour(Colours::white);
+        g.drawEllipse(start + 0.5, start + 0.5, width * 2., width * 2., 2.);
         g.setColour(Colours::grey);
-        g.fillPath(backgroung);
-        
-        g.setColour(Colours::black);
-        g.strokePath(backgroung, 0.01);
-        backgroung.clear();
-        backgroung.addEllipse(- m_sources_manager->getZoom() / 2., - m_sources_manager->getZoom() / 2., m_sources_manager->getZoom() / 2., m_sources_manager->getZoom() / 2.);
-        g.strokePath(backgroung, 0.01);
+        g.drawEllipse(start, start, width * 2., width * 2., 1.);
     }
-    m_background_invalidate = 0;
+    
+    float ecart = m_map_processor->getZoom() * center;
+    if(ecart < 10. && ecart >= 5.)
+        ecart *= 2.;
+    else if(ecart < 5. && ecart > 2.5)
+        ecart *= 4.;
+    else if(ecart < 2.5)
+        ecart *= 8.;
+    ecart = (int)ecart;
+    
+    for(float i = 0; i < center; i += ecart)
+    {
+        g.setColour(Colours::white);
+        g.drawLine(0.5, center - i + 0.5, getWidth() + 0.5, center - i + 0.5, 2.);
+        g.drawLine(0.5, center + i + 0.5, getWidth() + 0.5, center + i + 0.5, 2.);
+        g.drawLine(center - i + 0.5, getWidth() - i + 0.5, center - i + 0.5, getWidth() + 0.5, 2.);
+        g.drawLine(center + i + 0.5, getWidth() + i + 0.5, center + i + 0.5, getWidth() + 0.5, 2.);
+
+        g.setColour(Colours::grey);
+        g.drawLine(0., center - i, getWidth(), center - i, 1.);
+        g.drawLine(0.,  center + i, getWidth(), center + i, 1.);
+        g.drawLine(center - i,  0., center - i, getWidth(), 1.);
+        g.drawLine(center + i,  0., center + i, getWidth(), 1.);
+    }
 }
 
-void MapComponent::draw_sources(Graphics& g)
+void MapEditor::draw_sources(Graphics& g)
 {
-    Path source;
-    float source_thickness = m_sources_size * 0.1;
-    g.addTransform(AffineTransform::fromTargetPoints(-1, 1, 0, 0, 1, 1, getWidth(), 0, 1, -1, getWidth(), getWidth()));
+    float source_thickness = 1.;
+    float center = getWidth() * 0.5;
     for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
     {
-        float source_x = m_sources_manager->sourceGetAbscissa(i) / m_sources_manager->getZoom();
-        float source_y =m_sources_manager->sourceGetOrdinate(i) / m_sources_manager->getZoom();
+        g.setColour(Colour(0xff444444));        
+        float source_x = m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom() * center + center;
+        float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom() * center + center;
+        
         
         if (i == m_souce_selected)
             source_thickness *= 1.5;
+        else
+            source_thickness = 1.;
         
-        g.setColour( Colour(0xff444444) );
+        g.fillEllipse(source_x - m_sources_size * 0.35, source_y - m_sources_size * 0.35, m_sources_size * 0.7, m_sources_size * 0.7);
+        g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
         
-        source.addCentredArc(source_x, source_y, m_sources_size * 0.35, m_sources_size * 0.35, 0, 0, CICM_2PI);
-        g.fillPath(source);
-        source.clear();
-    
-        source.startNewSubPath(source_x, source_y - m_sources_size * 0.5);
-        source.addCentredArc(source_x, source_y, m_sources_size * 0.5, m_sources_size * 0.5, 0, 0, CICM_2PI);
-        g.strokePath(source, source_thickness);
+        g.setFont(11);
+        g.setColour(Colours::black);
+        g.drawText(String(i+1), source_x - m_sources_size * 0.35, source_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), FALSE);
     }
 }
 
