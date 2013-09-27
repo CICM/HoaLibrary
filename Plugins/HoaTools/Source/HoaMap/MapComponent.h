@@ -28,6 +28,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "../../../Sources/HoaLibrary.h"
+#include "HoaLookAndFeel.h"
 
 class MapProcessor
 {
@@ -52,18 +53,29 @@ public:
     long getNumberOfSources(){return m_number_of_sources;};
     float getZoom(){return m_zoom;};
     SourcesManager* getSourceManager(){return m_sources_manager;};
+    AmbisonicsMultiMaps* getMap(){return m_map;};
 };
 
-class MapEditor:public Component
+class MapEditor : public Component
 {
 private:
     MapProcessor*   m_map_processor;
     SourcesManager* m_sources_manager;
+
     double          m_sources_size;
     long            m_souce_selected;
+    long            m_group_selected;
+    
+    long             m_drag_mode;
+    bool             m_selected;
+    Rectangle<float> m_selection;;
     
     void draw_background(Graphics& g);
     void draw_sources(Graphics& g);
+    void draw_groups(Graphics& g);
+    void draw_selection(Graphics& g);
+    
+    HoaLookAndFeel          LookAndFeel;
 public:
     MapEditor(MapProcessor* aMapProcessor);
     ~MapEditor();

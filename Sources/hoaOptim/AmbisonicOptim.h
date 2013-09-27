@@ -100,6 +100,15 @@ public:
 			cicm_product_vec_sca_vec_d(input_pointor, m_optim_vector_double[i], output_pointor, m_vector_size);
 		}
 	}
+    
+    inline void process(float** ioVector)
+	{
+        for(int i = 0; i < m_number_of_harmonics; i++)
+        {
+            cicm_product_vec_sca_f(ioVector[i], m_optim_vector_float[i], m_vector_size);
+		}
+	}
+
 };
 
 

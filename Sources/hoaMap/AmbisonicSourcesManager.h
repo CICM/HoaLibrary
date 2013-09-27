@@ -156,6 +156,13 @@ public:
     long getExistence();
     
     /* Source */
+    void sourceNewPolar(double aRadius, double anAngle);
+	void sourceNewRadius(double aRadius);
+    void sourceNewAngle(double anAngle);
+    void sourceNewCartesian(double anAbscissa, double anOrdinate);
+	void sourceNewAbscissa(double anAbscissa);
+	void sourceNewOrdinate(double anOrdinate);
+    
 	void sourceSetPolar(long anIndex, double aRadius, double anAngle);
 	void sourceSetRadius(long anIndex, double aRadius);
     void sourceSetAngle(long anIndex, double anAngle);
@@ -196,7 +203,7 @@ public:
     long groupGetNumberOfSources(long aGroupIndex);
     long groupGetSourceIndex(long aGroupIndex, long aSourceIndex);
     void groupSetMute(long anIndex, long aValue);
-    
+    void groupClean();
 	void groupSetRelativePolar(long aGroupIndex, double aRadius, double anAngle);
 	void groupSetRelativeRadius(long aGroupIndex, double aRadius);
     void groupSetRelativeAngle(long aGroupIndex, double anAngle);
@@ -210,6 +217,8 @@ public:
     color groupGetColor(long anIndex);
     std::string groupGetDescription(long anIndex);
 	long groupGetMute(long anIndex);
+    long groupGetIfSourceMuted(long anIndex);
+    long groupGetNextIndex();
     
     int groupCompare(long groupIndexA, const long groupIndexB);
     

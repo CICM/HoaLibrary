@@ -35,6 +35,7 @@ private:
     long                    m_order;
     long                    m_number_of_harmonics;
     long                    m_number_of_loudspeakers;
+    
     AmbisonicsMultiDecoder* m_decoder;
     AmbisonicsMeter*        m_meter;
     AmbisonicOptim*         m_optim;
@@ -58,11 +59,10 @@ public:
 class DecoderEditor : public Component, public Timer
 {
 private:
-    DecoderProcessor* m_decoder_processor;
     AmbisonicsMeter*  m_meter;
 
 public:
-    DecoderEditor(DecoderProcessor * aDecoderProcessor);
+    DecoderEditor(AmbisonicsMeter * aMeter);
     ~DecoderEditor();
     
     void paint (Graphics&);

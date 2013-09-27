@@ -43,7 +43,7 @@ private:
 public:
 	AmbisonicsMultiMaps(long anOrder = 1, long aNumberOfSources = 1, long aRampSample = 4410, long aVectorSize = 0, long aSamplingRate = 0);
     
-
+    
     long     getNumberOfSources();
     long     getMuted(long aSourceIndex);
     double   getRadius(long aSourceIndex);
@@ -53,6 +53,7 @@ public:
     
 	void setVectorSize(long aVectorSize);
     
+    void setNumberOfSources(long aNumberOfSources);
     void setCoordinatesPolar(long aSourceIndex, double aRadius, double anAzimuth);
     void setCoordinatesRadius(long aSourceIndex, double aRadius);
     void setCoordinatesAzimuth(long aSourceIndex,double anAzimuth);

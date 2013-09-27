@@ -95,7 +95,7 @@ public:
     //==============================================================================
     /** Fills the background of a popup menu component. */
     virtual void drawPopupMenuBackground (Graphics& g, int width, int height);
-    
+    /*
     virtual void drawPopupMenuItem (Graphics&,
                                     int width, int height,
                                     bool isSeparator,
@@ -106,7 +106,7 @@ public:
                                     const String& text,
                                     const String& shortcutKeyText,
                                     Image* image,
-                                    const Colour* const textColour);
+                                    const Colour* const textColour);*/
 
     virtual void drawMenuBarBackground (Graphics& g, int width, int height,
                                         bool isMouseOverBar,

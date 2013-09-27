@@ -88,10 +88,9 @@ void DecoderProcessor::process(float** inputs, float** outputs)
 /***************************** EDITOR ***********************************************/
 /************************************************************************************/
 
-DecoderEditor::DecoderEditor(DecoderProcessor * aDecoderProcessor)
+DecoderEditor::DecoderEditor(AmbisonicsMeter * aMeter)
 {
-    m_decoder_processor = aDecoderProcessor;
-    m_meter             = m_decoder_processor->getMeter();
+    m_meter = aMeter;
     startTimer(20);
 }
 

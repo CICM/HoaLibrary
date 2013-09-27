@@ -4,20 +4,13 @@
 
 HoaToolsAudioProcessor::HoaToolsAudioProcessor()
 {
-    m_can_process = 0;
-    m_order = 1;
-    m_number_of_harmonics = 3;
-    m_map               = new MapProcessor();
-    m_decoder           = new DecoderProcessor();
-    m_harmonics_matrix  = m_harmonics_matrix = new float*[3];
+    m_processor         = new HoaProcessor();
     m_gui               = gui_mode_map;
 }
 
 HoaToolsAudioProcessor::~HoaToolsAudioProcessor()
 {
-    delete m_map;
-    delete m_decoder;
-    free(m_harmonics_matrix);
+    delete m_processor;
 }
 
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
@@ -32,7 +25,7 @@ const String HoaToolsAudioProcessor::getName() const
 
 AudioProcessorEditor* HoaToolsAudioProcessor::createEditor()
 {
-    return new HoaToolsAudioProcessorEditor(this, m_map, m_decoder);
+    return new HoaToolsAudioProcessorEditor(this, m_processor);
 }
 
 bool HoaToolsAudioProcessor::hasEditor() const
@@ -46,13 +39,13 @@ bool HoaToolsAudioProcessor::hasEditor() const
 
 int HoaToolsAudioProcessor::getNumParameters()
 {
-    return m_map->getNumberOfSources() + m_decoder->getNumberOfLoudspeakers() +1;
+    return m_processor->getNumberOfSources() * 3;
 }
 
 float HoaToolsAudioProcessor::getParameter(int index)
 {
     if(index == 0)
-        return m_decoder->getOrder();
+        return m_processor->getOrder();
     else
         return 1.;
     
@@ -63,10 +56,12 @@ void HoaToolsAudioProcessor::setParameter(int index, float newValue)
 {
     if(index == 0)
     {
-        suspendProcessing(1);
-        m_decoder->setConfiguation(index, m_decoder->getNumberOfLoudspeakers());
-        m_map->setConfiguation(index, m_map->getNumberOfSources());
-    }    
+        ;
+    }
+    if(index == 1)
+    {
+        ;
+    }
 }
 
 float HoaToolsAudioProcessor::getParameterMin(int index)
@@ -106,10 +101,43 @@ const String HoaToolsAudioProcessor::getParameterName (int index)
 {
     if(index == 0)
         return String("Ambisonic Order");
+    else if(index == 1)
+        return String("Number of sources Order");
+    
     if(index % 2 == 0)
         return String("abscissa");
     else
         return String("ordiante");
+}
+
+String HoaToolsAudioProcessor::getParameterLabel(int index) const
+{
+    if(index == 0)
+        return String();
+    else if(index == 1)
+        return String();
+    else
+        return String("bof");
+}
+
+bool HoaToolsAudioProcessor::isParameterAutomatable (int index) const
+{
+    if(index == 0)
+        return false;
+    else if(index == 1)
+        return false;
+    else
+        return true;
+}
+
+bool HoaToolsAudioProcessor::isMetaParameter(int index) const
+{
+    if(index == 0)
+        return true;
+    else if(index == 1)
+        return true;
+    else
+        return false;
 }
 
 const String HoaToolsAudioProcessor::getParameterText (int index)
@@ -129,71 +157,40 @@ void HoaToolsAudioProcessor::numChannelsChanged()
 {
     AudioProcessorEditor* Editor = NULL;
     
-    if(getNumOutputChannels() % 2 == 0)
-        m_order = getNumOutputChannels() / 2 - 1;
-    else
-        m_order = getNumOutputChannels() / 2;
-    if(m_order < 1)
-        m_order = 1;
-    
-    m_number_of_harmonics = 2 * m_order + 1;
-    
-    m_map->setConfiguation(m_order, getNumInputChannels());
-    m_decoder->setConfiguation(m_order, getNumOutputChannels());
-    
-    if(m_harmonics_matrix)
-        free(m_harmonics_matrix);
-    m_harmonics_matrix = new float*[m_number_of_harmonics];
+    if(getNumInputChannels() < m_processor->getNumberOfSources())
+        ;
+    if(getNumOutputChannels() < m_processor->getNumberOfLoudspeakers())
+    {
+        ;
+    }
     
     Editor = getActiveEditor();
     if(Editor)
         Editor->repaint();
-    
+    bool state = isSuspended();
+    if(state)
+        suspendProcessing(true);
     updateHostDisplay();
+    if(state)
+        suspendProcessing(false);
 }
 
 void HoaToolsAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-    numChannelsChanged();
-    m_map->prepareToPlay(sampleRate, samplesPerBlock);
-    m_decoder->prepareToPlay(sampleRate, samplesPerBlock);
-    for(int i = 0; i < m_number_of_harmonics; i++)
-    {
-        m_harmonics_matrix[i] = new float[samplesPerBlock];
-    }
-    m_can_process = 1;
-    if(m_number_of_harmonics != m_map->getNumberOfHarmonics() || m_number_of_harmonics != m_decoder->getNumberOfHarmonics())
-        m_can_process = 0;
-    else if(getNumInputChannels() != m_map->getNumberOfSources() || getNumOutputChannels() != m_decoder->getNumberOfLoudspeakers())
-        m_can_process = 0;
+    m_processor->prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void HoaToolsAudioProcessor::releaseResources()
 {
-    for(int i = 0; i < m_number_of_harmonics; i++)
-    {
-        free(m_harmonics_matrix[i]);
-    }
+    
 }
 
 void HoaToolsAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    float** iovector = buffer.getArrayOfChannels();
-    if(m_can_process)
-    {
-        m_map->process(iovector, m_harmonics_matrix);
-        m_decoder->process(m_harmonics_matrix, iovector);
-    }
-    else
-    {
-        for(int i = 0; i < getNumOutputChannels(); i++)
-        {
-            for(int j = 0; j < buffer.getNumSamples(); j++)
-            {
-                iovector[i][j] = 0.;
-            }
-        }
-    }
+    m_processor->process(buffer.getArrayOfChannels());
+    setNumberOfInputs(m_processor->getSourceManager()->getNumberOfSources());
+    setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
+    m_processor->postProcess();
 }
 
 /************************************************************************************/
@@ -204,10 +201,13 @@ void HoaToolsAudioProcessor::getStateInformation(MemoryBlock& destData)
 {
     XmlElement xml("HoaToolsSettings");
     
-    xml.setAttribute("Order", (int)m_decoder->getOrder());
-    xml.setAttribute("DecodingMode", 0);
+    xml.setAttribute("Order", (int)m_processor->getOrder());    
+    xml.setAttribute("NumberOfSources", (int)m_processor->getNumberOfSources());
+    xml.setAttribute("NumberOfLoudspeakers", (int)m_processor->getNumberOfLoudspeakers());
+    xml.setAttribute("OffsetOfLoudspeakers", (int)m_processor->getOffsetOfLoudspeakers());
+    xml.setAttribute("Optimization", (int)m_processor->getOptimization());
     
-    copyXmlToBinary (xml, destData);
+    copyXmlToBinary(xml, destData);
 }
 
 void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
@@ -218,7 +218,13 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
     {
         if (xmlState->hasTagName("HoaToolsSettings"))
         {
-            m_decoder->setConfiguation(xmlState->getIntAttribute("uiWidth"), 1);
+            m_processor->setOrder(xmlState->getIntAttribute("Order"));
+            m_processor->setNumberOfSources(xmlState->getIntAttribute("NumberOfSources"));
+            m_processor->setNumberOfLoudspeakers(xmlState->getIntAttribute("NumberOfLoudspeakers"));
+            m_processor->setOffsetOfLoudspeakers(xmlState->getIntAttribute("OffsetOfLoudspeakers"));
+            m_processor->setOptimization(xmlState->getIntAttribute("Optimization"));
+            setNumberOfInputs(m_processor->getNumberOfSources());
+            setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
         }
     }
 }
@@ -229,12 +235,16 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
 
 const String HoaToolsAudioProcessor::getInputChannelName (int channelIndex) const
 {
-    return String (channelIndex + 1);
+    char text[256];
+    sprintf(text, "Source %i", channelIndex+1);
+    return String(text);
 }
 
 const String HoaToolsAudioProcessor::getOutputChannelName (int channelIndex) const
 {
-    return String (channelIndex + 1);
+    char text[256];
+    sprintf(text, "Loudspeaker %i", channelIndex+1);
+    return String(text);
 }
 
 bool HoaToolsAudioProcessor::isInputChannelStereoPair (int index) const

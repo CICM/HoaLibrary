@@ -136,6 +136,78 @@ void SourcesManager::sourceRemove(long anIndex)
     }
 }
 
+void SourcesManager::sourceNewPolar(double aRadius, double anAngle)
+{
+    for (int i = 0; i < getMaximumIndexOfSource()+2; i++)
+    {
+        if(!sourceGetExistence(i))
+        {
+            sourceSetPolar(i, aRadius, anAngle);
+            return;
+        }
+    }
+}
+
+void SourcesManager::sourceNewRadius(double aRadius)
+{
+    for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+    {
+        if(!sourceGetExistence(i))
+        {
+            sourceSetRadius(i, aRadius);
+            return;
+        }
+    }
+}
+
+void SourcesManager::sourceNewAngle(double anAngle)
+{
+    for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+    {
+        if(!sourceGetExistence(i))
+        {
+            sourceSetAngle(i, anAngle);
+            return;
+        }
+    }
+}
+
+void SourcesManager::sourceNewCartesian(double anAbscissa, double anOrdinate)
+{
+    for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+    {
+        if(!sourceGetExistence(i))
+        {
+            sourceSetCartesian(i, anAbscissa, anOrdinate);
+            return;
+        }
+    }
+}
+
+void SourcesManager::sourceNewAbscissa(double anAbscissa)
+{
+    for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+    {
+        if(!sourceGetExistence(i))
+        {
+            sourceSetAbscissa(i, anAbscissa);
+            return;
+        }
+    }
+}
+
+void SourcesManager::sourceNewOrdinate(double anOrdinate)
+{
+    for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+    {
+        if(!sourceGetExistence(i))
+        {
+            sourceSetOrdinate(i, anOrdinate);
+            return;
+        }
+    }
+}
+
 void SourcesManager::sourceSetPolar(long anIndex, double aRadius, double anAngle)
 {
     sourceSetRadius(anIndex, aRadius);
@@ -665,6 +737,77 @@ long SourcesManager::groupGetMute(long anIndex)
         return m_groups[anIndex]->getMute();
     }
     return 0;
+}
+
+long SourcesManager::groupGetIfSourceMuted(long anIndex)
+{
+    if(anIndex < m_groups.size() && anIndex >= 0)
+    {
+        for(long i = 0; i < groupGetNumberOfSources(anIndex); i++)
+        {
+            if(sourceGetMute(groupGetSourceIndex(anIndex, i)))
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+long SourcesManager::groupGetNextIndex()
+{
+    if(getNumberOfGroups() != 0)
+    {
+        for(int i = 0; i < getMaximumIndexOfGroup()+2; i++)
+        {
+            if(!groupGetExistence(i))
+            {
+                return i;
+            }
+        }
+    }
+    return getMaximumIndexOfGroup();
+}
+
+void SourcesManager::groupClean()
+{
+    for(int i = 0; i < getNumberOfGroups(); i++)
+    {
+        if (groupGetExistence(i))
+        {
+            for(int j = 0; j < getNumberOfGroups(); j++)
+            {
+                if (i != j && groupGetExistence(j))
+                {
+                    if(groupGetNumberOfSources(i) == groupGetNumberOfSources(j))
+                    {
+                        int check = 0;
+                        for(int k = 0; k < groupGetNumberOfSources(i); k++)
+                        {
+                            for(int l = 0; l < groupGetNumberOfSources(i); l++)
+                            {
+                                if(groupGetSourceIndex(i, k) == groupGetSourceIndex(j, l))
+                                    check++;
+                            }
+                        }
+                        if(check == groupGetNumberOfSources(j))
+                            groupRemove(j);
+                    }
+                }
+            }
+        }
+    }
+    
+    for(int i = 0; i < getNumberOfGroups(); i++)
+    {
+        if(groupGetExistence(i))
+        {
+            if(groupGetNumberOfSources(i) < 2)
+            {
+                groupRemove(i);
+            }
+        }
+    }
 }
 
 int SourcesManager::SourcesGroup::compare(const SourcesGroup* a, const SourcesGroup *b)
