@@ -23,12 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C"
-{
-    #include "../../../PdEnhanced/Sources/pd_enhanced.h"
-}
-#include "../../Sources/HoaLibrary.h"
-
+#include "../hoaLibrary/hoa.library_pd.h"
 
 #define NUMBER_OF_CIRCLES 5
 #define MAX_CHANNELS 250
@@ -269,7 +264,7 @@ void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawpa
 {
     params->d_boxfillcolor = x->f_color_background;
     params->d_bordercolor = x->f_color_border_box;
-	params->d_borderthickness = 4;
+	params->d_borderthickness = 2;
 	params->d_cornersize = 2;
 }
 

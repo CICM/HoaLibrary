@@ -66,7 +66,6 @@
 		8F16090B17D3269700CE8933 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F16086917D3269700CE8933 /* Planewaves.cpp */; };
 		8F16090C17D3269700CE8933 /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F16086A17D3269700CE8933 /* Planewaves.h */; };
 		8F16093117D3269700CE8933 /* HoaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F16089917D3269700CE8933 /* HoaLibrary.h */; };
-		8F26F11817E44B12005FCB97 /* hoa.map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F26F11717E44B12005FCB97 /* hoa.map.h */; };
 		8F2E9DD6180A838000237119 /* eattr.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2E9DB4180A838000237119 /* eattr.h */; };
 		8F2E9DD7180A838000237119 /* eattr_attr.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F2E9DB5180A838000237119 /* eattr_attr.c */; };
 		8F2E9DD8180A838000237119 /* eattr_getter.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F2E9DB6180A838000237119 /* eattr_getter.c */; };
@@ -185,7 +184,6 @@
 		8F16086917D3269700CE8933 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
 		8F16086A17D3269700CE8933 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
 		8F16089917D3269700CE8933 /* HoaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaLibrary.h; sourceTree = "<group>"; };
-		8F26F11717E44B12005FCB97 /* hoa.map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hoa.map.h; sourceTree = "<group>"; };
 		8F2E9DB4180A838000237119 /* eattr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eattr.h; sourceTree = "<group>"; };
 		8F2E9DB5180A838000237119 /* eattr_attr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = eattr_attr.c; sourceTree = "<group>"; };
 		8F2E9DB6180A838000237119 /* eattr_getter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = eattr_getter.c; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 			children = (
 				59FB02F717A7FAA9001E977D /* Accelerate.framework */,
 				8FCD209317DE0AB5009B685B /* hoa.map.cpp */,
-				8F26F11717E44B12005FCB97 /* hoa.map.h */,
 				8F2E9DB2180A838000237119 /* Sources */,
 				8F16082717D3269700CE8933 /* Sources */,
 				5913847015DAA36D0029AD16 /* Products */,
@@ -636,7 +633,6 @@
 				8FCD20AD17DE108D009B685B /* AmbisonicSourcesManager.h in Headers */,
 				8FCD20AF17DE108D009B685B /* AmbisonicSourcesPreset.h in Headers */,
 				8FCD20B117DE108D009B685B /* AmbisonicSourcesTrajectory.h in Headers */,
-				8F26F11817E44B12005FCB97 /* hoa.map.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

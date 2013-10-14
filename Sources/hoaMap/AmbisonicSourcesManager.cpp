@@ -137,7 +137,7 @@ void SourcesManager::sourceRemove(long anIndex)
         {
              indexOfGroup = m_sources[anIndex]->getGroupIndex(i);
             
-            if(indexOfGroup >= 0 && indexOfGroup < getNumberOfGroups());
+            if(indexOfGroup >= 0 && indexOfGroup < getNumberOfGroups())
                m_groups[indexOfGroup]->removeSource(anIndex);
         }
         for(int i = 0; i < numberOfGroups; i++)

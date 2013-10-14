@@ -23,7 +23,30 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.decoder.h"
+#define MAX_SPEAKER 256
+
+#include "../hoaLibrary/hoa.library_pd.h"
+
+typedef struct _hoa_decoder
+{
+    t_jbox                f_ob;
+    AmbisonicsMultiDecoder* f_ambi_decoder;
+    double		f_angles_of_loudspeakers[MAX_SPEAKER];
+    long        f_restitution_mode;
+    long        f_pinnae;
+} t_hoa_decoder;
+
+void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_decoder_free(t_hoa_decoder *x);
+
+void hoa_decoder_dsp(t_hoa_decoder *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_decoder_perform(t_hoa_decoder *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_max_err decoder_setattr_angles(t_hoa_decoder *x, void *attr, long ac, t_atom *av);
+t_max_err decoder_setattr_pinnae(t_hoa_decoder *x, void *attr, long ac, t_atom *av);
+t_max_err decoder_setattr_restitution(t_hoa_decoder *x, void *attr, long ac, t_atom *av);
+
+t_eclass *hoa_decoder_class;
 
 extern "C" void setup_hoa0x2edecoder_tilde(void)
 {
@@ -32,10 +55,9 @@ extern "C" void setup_hoa0x2edecoder_tilde(void)
     c = class_new("hoa.decoder~", (method)hoa_decoder_new, (method)hoa_decoder_free, (short)sizeof(t_hoa_decoder), 0L, A_GIMME, 0);
     
 	class_dspinit(c);
-    
     class_addmethod(c, (method)hoa_decoder_dsp,           "dsp",          A_CANT,  0);
     
-    CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_hoa_decoder, f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
+    CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles",0,t_hoa_decoder,f_angles_of_loudspeakers,f_number_of_loudspeakers, MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, decoder_setattr_angles);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
@@ -56,9 +78,6 @@ extern "C" void setup_hoa0x2edecoder_tilde(void)
     
     class_register(CLASS_BOX, c);
     hoa_decoder_class = c;
-    
-    post("hoa.library (version 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-	post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
 }
 
 void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)

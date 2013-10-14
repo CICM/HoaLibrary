@@ -23,7 +23,24 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.map.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
+typedef struct _hoa_map
+{
+    t_jbox              f_ob;
+    AmbisonicsMultiMaps *f_ambi_map;
+    bool				f_mode_bool;
+} t_hoa_map;
+
+void *hoa_map_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_map_free(t_hoa_map *x);
+void hoa_map_list(t_hoa_map *x, t_symbol *s, long argc, t_atom *argv);
+
+void hoa_map_dsp(t_hoa_map *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_map_perform(t_hoa_map *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_map_perform_onesource(t_hoa_map *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_map_class;
 
 extern "C" void setup_hoa0x2emap_tilde(void)
 {
@@ -39,7 +56,7 @@ extern "C" void setup_hoa0x2emap_tilde(void)
     CLASS_ATTR_LONG             (c, "mode", 0, t_hoa_map, f_mode_bool);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
 	CLASS_ATTR_ORDER			(c, "mode", 0, "1");
-	CLASS_ATTR_LABEL			(c, "mode", 0, "Optim mode");
+	CLASS_ATTR_LABEL			(c, "mode", 0, "Coordinate mode");
 	CLASS_ATTR_FILTER_CLIP      (c, "mode", 0, 1);
 	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
     

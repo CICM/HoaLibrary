@@ -23,11 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C"
-{
-#include "../../../PdEnhanced/Sources/pd_enhanced.h"
-}
-#include "../../Sources/HoaLibrary.h"
+#include "../hoaLibrary/hoa.library_pd.h"
 
 
 typedef struct  _scope
@@ -65,7 +61,6 @@ typedef struct  _scope
 
 t_eclass *scope_class;
 
-extern "C" void setup_hoa0x2escope_tilde(void);
 void *scope_new(t_symbol *s, int argc, t_atom *argv);
 void scope_free(t_scope *x);
 void scope_assist(t_scope *x, void *b, long m, long a, char *s);

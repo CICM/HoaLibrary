@@ -24,12 +24,13 @@
  */
 
 
-#include "m_pd.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
 #define CICM_PI  (3.141592653589793238462643383279502884)
 
 typedef struct _pi 
 {	
-	t_object p_ob;
+	t_jbox p_ob;
 	double p_value;	
 } t_pi;
 
@@ -37,26 +38,25 @@ void pi_bang(t_pi *x);
 void pi_float(t_pi *x, float n);
 void *pi_new(t_symbol *s, int argc, t_atom *argv);
 
-t_class *pi_class;
+t_eclass *pi_class;
 
-void setup_hoa0x2epi(void)
+extern "C" void setup_hoa0x2epi(void)
 {
-    t_class* c;
-    c = class_new(gensym("hoa.pi"), (t_newmethod)pi_new,(t_method)NULL, sizeof(t_pi), 0L, A_GIMME, 0);
-    
-    class_addbang(c, pi_bang);
-    class_addfloat(c, pi_float);
-    
+    t_eclass* c;
+    c = class_new("hoa.pi", (method)pi_new,(method)NULL, sizeof(t_pi), 0L, A_GIMME, 0);
+    class_addmethod(c, (method)pi_bang,     "bang",      A_CANT, 0);
+    class_addmethod(c, (method)pi_float,     "float",      A_FLOAT, 0);
+
     pi_class = c;
 }
 
 void *pi_new(t_symbol *s, int argc, t_atom *argv)
 {
-    t_pi *x = (t_pi *)pd_new(pi_class);
+    t_pi *x = (t_pi *)object_alloc(pi_class);
 	x->p_value = 1.;
     x->p_value = atom_getfloat(argv);
 
-    outlet_new(&x->p_ob, &s_float);
+    outlet_new(&x->p_ob.e_obj, &s_float);
 	
 	return(x);
 }
@@ -64,7 +64,7 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
 
 void pi_bang(t_pi *x) 
 {
-    outlet_float(x->p_ob.ob_outlet, CICM_PI * x->p_value);
+    outlet_float(x->p_ob.e_obj.ob_outlet, CICM_PI * x->p_value);
 }
 
 void pi_float(t_pi *x, float n)

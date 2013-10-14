@@ -23,12 +23,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extern "C"
-{
-    #include "../../../PdEnhanced/Sources/pd_enhanced.h"
-}
-
-#include "../../Sources/HoaLibrary.h"
+#include "../hoaLibrary/hoa.library_pd.h"
 
 typedef struct _hoa_wider
 {

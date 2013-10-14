@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:hoaLibrary/hoa.library.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:hoaWider/hoa.wider~.xcodeproj">
    </FileRef>
    <FileRef
@@ -36,5 +39,23 @@
    </FileRef>
    <FileRef
       location = "group:hoaMap_UI/hoa.map.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaMap/hoa.map~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaGrain/hoa.grain~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaFreeverb/hoa.freeverb~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaEncoder/hoa.encoder~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaDelay/hoa.delay~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaDecoder/hoa.decoder~.xcodeproj">
    </FileRef>
 </Workspace>

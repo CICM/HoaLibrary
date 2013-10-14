@@ -22,11 +22,7 @@
  */
 
 
-extern "C"
-{
-#include "../../../PdEnhanced/Sources/pd_enhanced.h"
-}
-#include "../../Sources/HoaLibrary.h"
+#include "../hoaLibrary/hoa.library_pd.h"
 
 #define MAX_SPEAKER 64
 #define DEF_SPEAKER 8
