@@ -29,6 +29,7 @@ SourcesManager::SourcesManager(double aMaximumLimitValue, long deadOrAlive)
 {
     setExistence(deadOrAlive);
     setMaximumRadius(aMaximumLimitValue);
+    m_zoom = 1.;
 }
 
 void SourcesManager::setExistence(long deadOrAlive)
@@ -69,6 +70,16 @@ void SourcesManager::setMaximumRadius(double aLimitValue)
         m_groups[i]->setMaximumRadius(m_maximum_radius);
 }
 
+void SourcesManager::setZoom(double aZoom)
+{
+    m_zoom = Tools::clip(aZoom, 1. / m_maximum_radius, 1.);
+}
+
+double SourcesManager::getZoom()
+{
+    return m_zoom;
+}
+
 double SourcesManager::getLimitMaximum()
 {
     return m_maximum_radius;
@@ -76,7 +87,13 @@ double SourcesManager::getLimitMaximum()
 
 long SourcesManager::getMaximumIndexOfSource()
 {
-    return  m_sources.size();
+    long index = 0;
+    for (int i = 0; i < m_sources.size(); i++)
+    {
+        if(sourceGetExistence(i))
+            index = i;
+    }
+    return  index;
 }
 
 long SourcesManager::getNumberOfSources()
@@ -100,7 +117,7 @@ long SourcesManager::getNumberOfGroups()
     long numberOfGroups = 0;
     for(int i = 0; i < m_groups.size(); i++)
     {
-        if (m_groups[i]->getNumberOfSources())
+        if (m_groups[i]->getExistence())
             numberOfGroups++;
     }
     return  numberOfGroups;

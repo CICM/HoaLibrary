@@ -23,7 +23,25 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.rotate.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/pd_enhanced.h"
+}
+#include "../../Sources/HoaLibrary.h"
+
+typedef struct _hoa_rotate
+{
+    t_jbox           f_ob;
+    AmbisonicRotate	*f_ambi_rotate;
+} t_hoa_rotate;
+
+void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_rotate_free(t_hoa_rotate *x);
+
+void hoa_rotate_dsp(t_hoa_rotate *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_rotate_perform(t_hoa_rotate *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_rotate_class;
 
 extern "C" void setup_hoa0x2erotate_tilde(void)
 {

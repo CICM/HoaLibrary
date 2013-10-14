@@ -4,8 +4,8 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "HoaMap/MapComponent.h"
-#include "HoaDecoder/DecoderComponent.h"
-#include "HoaOption/OptionComponent.h"
+#include "HoaMeter/MeterComponent.h"
+
 #include "PluginProcessor.h"
 #include "HoaComponent.h"
 
@@ -14,14 +14,9 @@ class HoaToolsAudioProcessorEditor  : public AudioProcessorEditor, public ComboB
 private:
     HoaToolsAudioProcessor* m_processor;
     HoaProcessor*           m_hoa_processor;
-    
-    MapProcessor*           m_m_proc;
-    AmbisonicOptim*         m_optim_processor;
-    AmbisonicsMultiMaps*    m_map_processor;
-    AmbisonicsMultiDecoder* m_decoder_processor;
-    SourcesManager*         m_sources_manager;
+
     MapEditor*              m_map;
-    DecoderEditor*          m_decoder;
+    MeterEditor*            m_meter;
     
     ShapeButton*            m_switch;
     

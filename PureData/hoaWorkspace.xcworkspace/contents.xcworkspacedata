@@ -2,10 +2,34 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:hoaWider/hoa.wider~.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:hoaSpace_UI/hoa.space.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:hoaSpace/hoa.space~.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:hoaScope_UI/hoa.scope~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaRotate/hoa.rotate~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaRingMod/hoa.ringmod~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaRecomposer/hoa.recomposer~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaProjector/hoa.projector~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaPi/hoa.pi.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaOptim/hoa.optim~.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:hoaMeter_UI/hoa.meter~.xcodeproj">

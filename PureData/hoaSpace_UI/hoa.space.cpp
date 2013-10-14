@@ -23,7 +23,81 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.space.h"
+extern "C"
+{
+    #include "../../../PdEnhanced/Sources/pd_enhanced.h"
+}
+#include "../../Sources/HoaLibrary.h"
+
+
+#define NUMBER_OF_CIRCLES 5
+#define MAX_CHANNELS 250
+
+typedef struct _hoa_space
+{
+    t_jbox                  j_box;
+    AmbisonicsViewer*       f_viewer;
+    AmbisonicRecomposer*    f_recomposer;
+    
+    t_outlet*   f_out;
+    
+    t_jrgba		f_color_background;
+	t_jrgba		f_color_border_box;
+    t_jrgba		f_color_inner_circle;
+    t_jrgba		f_color_points;
+    t_jrgba     f_color_harmonics;
+    
+    t_rect		f_center;
+    t_pt        f_mousepos;
+    long		f_mode;
+    
+    long        f_number_of_microphones;
+    
+    double		f_radius_global;
+	double		f_radius_circle;
+    double      f_radius_ext_circle;
+    
+	double      f_harmonicsValues[MAX_CHANNELS];
+    double      f_mode_values[MAX_CHANNELS];
+    double      f_microphonesValues[MAX_CHANNELS];
+    t_atom      f_tempory_values[MAX_CHANNELS];
+    
+    double      f_reference_angle;
+    double      f_rotation_max;
+    double      f_retractation;
+    
+} t_hoa_space;
+
+t_eclass *hoa_space_class;
+
+extern "C" void setup_hoa0x2espace(void);
+void *hoa_space_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_space_free(t_hoa_space *x);
+void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s);
+void hoa_space_bang(t_hoa_space *x);;
+void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawparams *params);
+void hoa_space_oksize(t_hoa_space *x, t_rect *newrect);
+
+t_max_err hoa_space_channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+t_max_err hoa_space_coefficients_set(t_hoa_space *x, t_object *attr, long ac, t_atom *av);
+
+void hoa_space_paint(t_hoa_space *x, t_object *view);
+void hoa_space_draw_background(t_hoa_space *x, t_object *view, t_rect *rect);
+void hoa_space_draw_microphones(t_hoa_space *x, t_object *view, t_rect *rect);
+void hoa_space_draw_harmonics(t_hoa_space *x, t_object *view, t_rect *rect);
+
+void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_space_mouse_enddrag(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+
+void hoa_space_draw_points(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_space_rotate_points(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_space_retract_points(t_hoa_space *x, t_object *patcherview, t_pt pt, long modifiers);
+
+void hoa_space_compute(t_hoa_space *x);
+void hoa_space_output(t_hoa_space *x);
 
 extern "C" void setup_hoa0x2espace(void)
 {
@@ -37,24 +111,25 @@ extern "C" void setup_hoa0x2espace(void)
     class_addmethod(c, (method)hoa_space_notify,        "notify",           A_CANT, 0);
     class_addmethod(c, (method)hoa_space_bang,          "bang",             A_CANT, 0);
     class_addmethod(c, (method)hoa_space_getdrawparams, "getdrawparams",    A_CANT, 0);
+    class_addmethod(c, (method)hoa_space_oksize,        "oksize",           A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_down,    "mousedown",        A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_move,    "mousemove",        A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_drag,    "mousedrag",        A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_enddrag, "mouseup",          A_CANT, 0);
-    class_addmethod(c, (method)hoa_space_coefficients_set,"list",             A_GIMME,0);
+    class_addmethod(c, (method)hoa_space_coefficients_set,"list",           A_GIMME,0);
     
     CLASS_ATTR_DEFAULT		(c, "patching_rect", 0, "0 0 225 225");
 	CLASS_ATTR_INVISIBLE	(c, "color", 0);
 	CLASS_ATTR_INVISIBLE	(c, "textcolor", 0);
     
-    CLASS_ATTR_LONG         (c, "channels", 0, t_hoa_space, f_number_of_microphones);
-	CLASS_ATTR_CATEGORY		(c, "channels", 0, "Behavior");
-	CLASS_ATTR_ORDER		(c, "channels", 0, "1");
-	CLASS_ATTR_LABEL		(c, "channels", 0, "Number of channels");
-	CLASS_ATTR_ACCESSORS	(c, "channels", NULL, hoa_space_channels_set);
-    CLASS_ATTR_DEFAULT      (c, "channels", 0, "8");
-	CLASS_ATTR_SAVE         (c, "channels", 0);
-    CLASS_ATTR_PAINT        (c, "channels", 0);
+    CLASS_ATTR_LONG             (c, "channels", 0, t_hoa_space, f_number_of_microphones);
+	CLASS_ATTR_CATEGORY         (c, "channels", 0, "Behavior");
+	CLASS_ATTR_ORDER            (c, "channels", 0, "1");
+	CLASS_ATTR_LABEL            (c, "channels", 0, "Number of channels");
+	CLASS_ATTR_ACCESSORS        (c, "channels", NULL, hoa_space_channels_set);
+    CLASS_ATTR_DEFAULT          (c, "channels", 0, "8");
+	CLASS_ATTR_SAVE             (c, "channels", 0);
+    CLASS_ATTR_PAINT            (c, "channels", 0);
     
     CLASS_ATTR_DOUBLE_VARSIZE      (c, "coeffs", 0, t_hoa_space, f_microphonesValues, f_number_of_microphones, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
@@ -119,7 +194,6 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     x = (t_hoa_space *)object_alloc(hoa_space_class);
     if (x)
     {
-        
         if (!(d = object_dictionaryarg(argc,argv)))
             return NULL;
         
@@ -136,7 +210,7 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
         x->j_box.b_firstin = (t_object *)x;
         x->f_viewer                 = new AmbisonicsViewer(1);
         x->f_recomposer             = new AmbisonicRecomposer(1, 4);
-        x->f_out  = listout(x);
+        x->f_out                    = listout(x);
         x->f_number_of_microphones  = 4;
         
         attr_dictionary_process(x, d);
@@ -188,15 +262,26 @@ t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sen
         }
         jbox_redraw((t_jbox *)x);
 	}
-	return 0;
+	return ebox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
 void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawparams *params)
 {
     params->d_boxfillcolor = x->f_color_background;
     params->d_bordercolor = x->f_color_border_box;
-	params->d_borderthickness = 1;
-	params->d_cornersize = 6;
+	params->d_borderthickness = 4;
+	params->d_cornersize = 2;
+}
+
+void hoa_space_oksize(t_hoa_space *x, t_rect *newrect)
+{
+    newrect->width = pd_clip_min(newrect->width, 15.);
+    newrect->height = pd_clip_min(newrect->height, 15.);
+    
+    if(newrect->height > newrect->width)
+        newrect->width = newrect->height;
+    else
+        newrect->height = newrect->width;
 }
 
 void hoa_space_bang(t_hoa_space *x)
@@ -236,31 +321,29 @@ void hoa_space_draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
     if (g)
 	{
         t_jmatrix transform;
-        jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+        jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center.x, x->f_center.y);
 		jgraphics_set_matrix(g, &transform);
         
         t_jrgba black  = jrgba_addContrast(x->f_color_inner_circle, -0.12);
         t_jrgba white  = jrgba_addContrast(x->f_color_inner_circle, 0.08);
-    
-		jgraphics_arc(g, 0., 0., x->f_radius_ext_circle,  0., JGRAPHICS_2PI);
-		jgraphics_set_source_jrgba(g, &x->f_color_inner_circle);
+        
+        jgraphics_set_source_jrgba(g, &x->f_color_inner_circle);
+		jgraphics_arc(g, 0., 0., x->f_radius_ext_circle,  0.f, JGRAPHICS_2PI);
 		jgraphics_fill(g);
 		
 		for(int i = NUMBER_OF_CIRCLES; i > 0; i--)
 		{
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, -0.5, -0.5, (double)i * x->f_radius_circle,  0., JGRAPHICS_2PI);
+            jgraphics_arc(g, -0.5, -0.5, (double)i * x->f_radius_circle,  0.f, JGRAPHICS_2PI);
             jgraphics_stroke(g);
             
 			jgraphics_set_line_width(g, 1);
 			jgraphics_set_source_jrgba(g, &black);
-			jgraphics_arc(g, 0, 0, (double)i * x->f_radius_circle,  0., JGRAPHICS_2PI);
+			jgraphics_arc(g, 0, 0, (double)i * x->f_radius_circle,  0.f, JGRAPHICS_2PI);
 			jgraphics_stroke(g);
 		}
         
-        jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
-		jgraphics_set_matrix(g, &transform);
 		double coso, sino, angle, x1, y1, x2, y2, rad1, rad2, offset;
         offset = CICM_PI / (double)x->f_number_of_microphones;
         rad1 = 1. / (double)NUMBER_OF_CIRCLES * x->f_radius_ext_circle;
@@ -270,8 +353,8 @@ void hoa_space_draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
 		{
             jgraphics_set_source_jrgba(g, &white);
             angle = i * CICM_2PI / (double)x->f_number_of_microphones + offset + CICM_PI2;
-            coso = cos(angle);
-            sino = sin(angle);
+            coso = cosf(angle);
+            sino = sinf(angle);
             x1 = rad1 * coso;
             y1 = rad1 * sino;
             x2 = rad2 * coso;
@@ -357,10 +440,10 @@ void hoa_space_draw_harmonics(t_hoa_space *x, t_object *view, t_rect *rect)
             double factor = x->f_radius_ext_circle * normalize;
             
 			jgraphics_set_source_jrgba(g, &x->f_color_harmonics);
-			for(int i = 0; i < NUMBEROFCIRCLEPOINTS; i += 5)
+			for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i += 5)
 			{
 				
-				if (i == NUMBEROFCIRCLEPOINTS-1)
+				if (i == NUMBEROFCIRCLEPOINTS_UI-1)
                 {
 					jgraphics_line_to(g, beginCoord.x, beginCoord.y );
 				}
@@ -405,20 +488,20 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     x->f_mousepos.x = radius;
     x->f_mousepos.y = angle;
     
-    if(modifiers == 132 || modifiers == 5)
+    if(modifiers == EMOD_SHIFT)
     {
         x->f_mode = 2;
-        canvas_setcursor(glist_getcanvas((t_glist *)patcherview), 5);
+        jmouse_setcursor(patcherview, (t_jbox *)x, 2);
     }
-    else if(modifiers == 2)
+    else if(modifiers == EMOD_ALT)
     {
         x->f_mode = 1;
-        canvas_setcursor(glist_getcanvas((t_glist *)patcherview), 2);
+        jmouse_setcursor(patcherview, (t_jbox *)x, 5);
     }
     else
     {
         x->f_mode = 0;
-        canvas_setcursor(glist_getcanvas((t_glist *)patcherview), 1);
+        jmouse_setcursor(patcherview, (t_jbox *)x, 1);
     }
 }
 
@@ -429,7 +512,7 @@ void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     double radius   = Tools::radius(mapped_x, mapped_y);
     double angle    = Tools::angle(mapped_x, mapped_y) - CICM_PI2;
     
-    if(modifiers == 18)
+    if(modifiers == EMOD_SHIFT)
     {
         x->f_mode = 2;
         x->f_retractation = radius;
@@ -438,7 +521,7 @@ void hoa_space_mouse_down(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
             x->f_mode_values[i] = x->f_microphonesValues[i];
         }
     }
-    else if(modifiers == 148 || modifiers == 21) // ctrl
+    else if(modifiers == EMOD_ALT)
     {
         x->f_mode = 1;
         x->f_rotation_max = 0.;

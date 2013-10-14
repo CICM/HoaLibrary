@@ -1,117 +1,15 @@
-#N canvas 262 69 1130 744 10;
+#N canvas 262 69 1129 588 10;
 #X obj -555 -435 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.meter~
 3 12 0 18 -204280 -1 0;
 #X text -550 -414 A circular meter with sound field descriptor;
 #X msg -529 -308 \; pd dsp 1;
 #X msg -528 -271 \; pd dsp 0;
-#X obj -506 -161 hoa.meter~ @patching_rect { 0 0 400 400 } @leds_bg
-{ 1 } @drawvector { 1 } @drawmborder { 3 } @metersize { 0.8 } @orientation
-{ 0 } @loudspeakers { 9 } @angles { 0 40 80 120 160 200 240 280 320
-135 150 165 180 195 210 225 240 255 270 285 300 315 330 345 172.8 180
-187.2 194.4 201.6 208.8 216 223.2 230.4 237.6 244.8 252 259.2 266.4
-273.6 280.8 288 295.2 302.4 309.6 316.8 324 331.2 338.4 345.6 352.8
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @offset { 0 } @rotation { 1 } @interval
-{ 50 } @dbperled { 3 } @nhotleds { 3 } @ntepidleds { 3 } @nwarmleds
-{ 3 } @numleds { 12 } @bgcolor { 0.55 0.55 0.55 1 } @mbgcolor { 0.4
-0.4 0.4 1 } @bordercolor { 0.25 0.25 0.25 1 } @coldcolor { 0 0.6 0
-0.8 } @tepidcolor { 0.6 0.73 0 0.8 } @warmcolor { 0.85 0.85 0 0.8 }
-@hotcolor { 1 0.6 0 0.8 } @overcolor { 1 0 0 0.8 } @energycolor { 0
-0 1 0.8 } @velocitycolor { 1 0 0 0.8 } @patching_rect [ 0 0 400 400
-] @leds_bg [ 1 ] @drawvector [ 1 ] @drawmborder [ 3 ] @metersize [
-0.8 ] @orientation [ 0 ] @loudspeakers [ 4 ] @angles [ 0 90 180 270
-160 200 240 280 320 202.5 225 247.5 270 292.5 315 337.5 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled
-[ 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [
-12 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @drawvector [ 1 ] @drawmborder
-[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+#X obj -432 -194 hoa.meter~ @patching_rect [ -432 -194 230 230 ] @size
+[ 230 230 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 8 ] @angles
 [ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @drawvector [ 1 ] @drawmborder
-[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @drawvector [ 1 ] @drawmborder
-[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 20 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled
-[ 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [
-12 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @drawvector [ 1 ] @drawmborder
-[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 320 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 ] @offset [ 1 ] @rotation [ 1 ] @interval [ 20 ] @dbperled
-[ 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [
-12 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 1 ] @rotation [ 1 ] @interval [ 20 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 1 ] @rotation [ 1 ] @interval [ 20 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 1 ] @rotation [ 0 ] @interval [ 20 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 1 ] @rotation [ 0 ] @interval [ 20 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 400 400 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 1 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 1 ] @rotation [ 0 ] @interval [ 20 ] @dbperled [
+0 0 0 ] @offset [ 0 ] @rotation [ 0 ] @interval [ 20 ] @dbperled [
 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
 [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
@@ -125,162 +23,133 @@
 #X text -550 -393 hoa.meter~ displays the peak levels for a circurlar
 array of loudspeakers. It computes and displays the energy and velocity
 vectors.;
-#X obj -432 -331 sig~ 1;
 #X obj -432 -297 hoa.encoder~ 3 _________----------____;
 #X text 31 -411 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
 #X text 31 -427 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
 #X obj 98 -230 send meter;
-#X text 51 -363 The attributes (saved with the object) :;
-#X msg 228 -278 loudspeakers \$1;
-#X obj 228 -305 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
+#X text 51 -383 The attributes (saved with the object) :;
+#X msg 158 -298 loudspeakers \$1;
+#X obj 158 -325 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 1 256;
-#X obj 57 -310 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#X obj 57 -330 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -262144 -1 -1 0 256;
-#X msg 57 -270 patching_rect 0 0 \$1 \$1;
-#X text 52 -336 Size of the box;
-#X text 220 -336 Number of channels;
-#X obj -531 -216 receive meter;
-#X msg -36 -270 leds_bg \$1;
-#X obj -36 -304 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-0 1;
-#X text -85 -325 Draw leds background;
-#X obj 236 -86 send meter;
-#X obj -26 -157 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X msg -26 -137 vectors \$1;
-#X text -75 -231 Draw vectors;
-#X text -75 -216 0 : None;
-#X text -75 -202 1 : Energy;
-#X text -75 -187 2 : Velocity;
-#X text -75 -173 2 : Both;
-#X obj 104 -172 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-0 1;
-#X msg 104 -138 drawmborder \$1;
-#X msg 238 -135 metersize \$1;
-#X text 230 -193 Meter Circle Size;
-#X obj 238 -168 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X text 75 -193 Draw meter border;
-#X text 295 -171 (0 -1);
-#X obj -62 46 send meter;
-#X obj -55 -79 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X msg -55 -45 orientation \$1;
-#X text -84 -100 Meter Fill Orientation;
-#X text -24 -83 0 : Inside;
-#X text -24 -65 1 : Outside;
+#X text 52 -356 Size of the box;
+#X text 150 -356 Number of channels;
+#X obj -432 -239 receive meter;
+#X obj 182 -209 nbx 5 14 0 3 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X msg 182 -189 vectors \$1;
+#X text 258 -223 Draw vectors;
+#X text 258 -208 0 : None;
+#X text 258 -194 1 : Energy;
+#X text 258 -179 2 : Velocity;
+#X obj 93 -14 send meter;
 #X text 355 -338 Angles of loudspeakers;
 #X text 354 -326 (degrees);
-#X msg 335 -278 angles 20 22.5 13 56 60 78 90 123;
-#X msg 278 -244 angles 0 45 90 135 180 225 270 315;
-#X text 312 -302 Sometimes need a lot of clicks... sorry;
-#X obj 376 -159 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
-#X text 368 -190 Angle offset;
-#X msg 376 -132 offset \$1;
-#X text 445 -190 (degrees);
-#X text 369 -93 Rotation of Loudspeakers;
-#X msg 377 -35 rotation \$1;
-#X obj 377 -68 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X text 400 -77 0 : Clockwise;
-#X text 400 -59 1 : Anti-Clockwise;
-#X msg 87 -7 interval \$1;
-#X text 79 -65 Refresh Interval in Milliseconds;
-#X obj 87 -37 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 171 -4 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
-#X msg 171 23 numleds \$1;
-#X text 163 -35 Total Number of Leds;
-#X obj 223 76 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
-#X msg 223 103 nhotleds \$1;
-#X text 215 45 Number of Hot Leds;
-#X obj 93 140 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
-#X msg 93 167 ntepidleds \$1;
-#X text 85 109 Number of Tepid Leds;
-#X obj -51 155 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
-#X msg -51 182 nwarmleds \$1;
-#X text -59 124 Number of Warm Leds;
-#X text 359 11 Colors :;
-#X msg 360 35 bgcolor \$1 \$2 \$3 \$4;
-#X msg 360 55 mbgcolor \$1 \$2 \$3 \$4;
-#X msg 360 75 bordercolor \$1 \$2 \$3 \$4;
-#X msg 360 95 coldcolor \$1 \$2 \$3 \$4;
-#X msg 360 115 tepidcolor \$1 \$2 \$3 \$4;
-#X msg 360 135 warmcolor \$1 \$2 \$3 \$4;
-#X msg 360 155 hotcolor \$1 \$2 \$3 \$4;
-#X msg 360 175 overcolor \$1 \$2 \$3 \$4;
-#X msg 360 195 energycolor \$1 \$2 \$3 \$4;
-#X msg 360 215 velocitycolor \$1 \$2 \$3 \$4;
-#X obj -506 273 print peaks values;
-#X obj -506 246 spigot;
-#X obj -447 247 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+#X msg 315 -298 angles 20 22.5 13 56 60 78 90 123;
+#X msg 298 -264 angles 0 45 90 135 180 225 270 315;
+#X obj -40 -318 nbx 5 14 -360 360 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X text -48 -349 Angle offset;
+#X msg -40 -291 offset \$1;
+#X text -43 -336 (degrees);
+#X text -168 -261 Rotation of Loudspeakers;
+#X msg -160 -203 rotation \$1;
+#X obj -160 -236 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
 0 1;
-#X obj -113 246 spigot;
-#X obj -54 247 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X text -137 -245 0 : Clockwise;
+#X text -137 -227 1 : Anti-Clockwise;
+#X msg -153 -68 interval \$1;
+#X text -161 -126 Refresh Interval in Milliseconds;
+#X obj -153 -98 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj 97 -79 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X msg 97 -52 numleds \$1;
+#X text 89 -110 Total Number of Leds;
+#X obj 375 -84 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X msg 375 -57 nhotleds \$1;
+#X text 367 -115 Number of Hot Leds;
+#X obj 245 -90 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X msg 245 -63 ntepidleds \$1;
+#X text 237 -121 Number of Tepid Leds;
+#X obj -31 -74 nbx 5 14 1 64 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X msg -31 -47 nwarmleds \$1;
+#X text -39 -105 Number of Warm Leds;
+#X text 179 -9 Colors :;
+#X msg 180 15 bgcolor \$1 \$2 \$3 \$4;
+#X msg 180 35 mbgcolor \$1 \$2 \$3 \$4;
+#X msg 180 55 bordercolor \$1 \$2 \$3 \$4;
+#X msg 180 75 coldcolor \$1 \$2 \$3 \$4;
+#X msg 180 95 tepidcolor \$1 \$2 \$3 \$4;
+#X msg 330 15 warmcolor \$1 \$2 \$3 \$4;
+#X msg 330 35 hotcolor \$1 \$2 \$3 \$4;
+#X msg 330 55 overcolor \$1 \$2 \$3 \$4;
+#X msg 330 75 energycolor \$1 \$2 \$3 \$4;
+#X msg 330 95 velocitycolor \$1 \$2 \$3 \$4;
+#X obj -432 100 print peaks values;
+#X obj -432 73 spigot;
+#X obj -399 51 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj -113 272 print vector coordinates;
+#X obj -207 74 spigot;
+#X obj -174 51 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj -207 100 print vector coordinates;
 #X obj -432 -266 hoa.decoder~ 3 ambisonics 8 ----------;
-#X connect 4 0 88 0;
-#X connect 4 1 90 0;
+#X obj -431 -329 sig~ 1.3;
+#X text 258 -165 3 : Both;
+#X msg 57 -290 size \$1 \$1;
+#X connect 4 0 68 0;
+#X connect 4 1 70 0;
 #X connect 5 0 7 1;
 #X connect 6 0 5 0;
-#X connect 7 0 11 1;
+#X connect 7 0 10 1;
 #X connect 8 0 7 0;
-#X connect 10 0 11 0;
-#X connect 11 0 93 0;
-#X connect 11 1 93 1;
-#X connect 11 2 93 2;
-#X connect 11 3 93 3;
-#X connect 11 4 93 4;
-#X connect 11 5 93 5;
-#X connect 11 6 93 6;
-#X connect 16 0 14 0;
-#X connect 17 0 16 0;
-#X connect 18 0 19 0;
-#X connect 19 0 14 0;
-#X connect 22 0 4 0;
-#X connect 23 0 14 0;
-#X connect 24 0 23 0;
-#X connect 27 0 28 0;
-#X connect 28 0 26 0;
-#X connect 34 0 35 0;
-#X connect 35 0 26 0;
-#X connect 36 0 26 0;
-#X connect 38 0 36 0;
-#X connect 42 0 43 0;
+#X connect 10 0 73 0;
+#X connect 10 1 73 1;
+#X connect 10 2 73 2;
+#X connect 10 3 73 3;
+#X connect 10 4 73 4;
+#X connect 10 5 73 5;
+#X connect 10 6 73 6;
+#X connect 15 0 13 0;
+#X connect 16 0 15 0;
+#X connect 17 0 76 0;
+#X connect 20 0 4 0;
+#X connect 21 0 22 0;
+#X connect 22 0 13 0;
+#X connect 30 0 13 0;
+#X connect 31 0 13 0;
+#X connect 32 0 34 0;
+#X connect 34 0 13 0;
+#X connect 37 0 13 0;
+#X connect 38 0 37 0;
+#X connect 41 0 27 0;
 #X connect 43 0 41 0;
-#X connect 49 0 14 0;
-#X connect 50 0 14 0;
-#X connect 52 0 54 0;
-#X connect 54 0 26 0;
-#X connect 57 0 26 0;
-#X connect 58 0 57 0;
-#X connect 61 0 41 0;
-#X connect 63 0 61 0;
-#X connect 64 0 65 0;
-#X connect 65 0 41 0;
-#X connect 67 0 68 0;
-#X connect 68 0 41 0;
-#X connect 70 0 71 0;
-#X connect 71 0 41 0;
-#X connect 73 0 74 0;
-#X connect 74 0 41 0;
-#X connect 88 0 87 0;
-#X connect 89 0 88 1;
-#X connect 90 0 92 0;
-#X connect 91 0 90 1;
-#X connect 93 0 4 0;
-#X connect 93 1 4 1;
-#X connect 93 2 4 2;
-#X connect 93 3 4 3;
-#X connect 93 4 4 4;
-#X connect 93 5 4 5;
-#X connect 93 6 4 6;
-#X connect 93 7 4 7;
+#X connect 44 0 45 0;
+#X connect 45 0 27 0;
+#X connect 47 0 48 0;
+#X connect 48 0 27 0;
+#X connect 50 0 51 0;
+#X connect 51 0 27 0;
+#X connect 53 0 54 0;
+#X connect 54 0 27 0;
+#X connect 68 0 67 0;
+#X connect 69 0 68 1;
+#X connect 70 0 72 0;
+#X connect 71 0 70 1;
+#X connect 73 0 4 0;
+#X connect 73 1 4 1;
+#X connect 73 2 4 2;
+#X connect 73 3 4 3;
+#X connect 73 4 4 4;
+#X connect 73 5 4 5;
+#X connect 73 6 4 6;
+#X connect 73 7 4 7;
+#X connect 74 0 10 0;
+#X connect 76 0 13 0;

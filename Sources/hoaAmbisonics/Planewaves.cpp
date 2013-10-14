@@ -193,7 +193,7 @@ void Planewaves::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standa
     computeConfiguration(standardOnOff);
 }
 
-void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
+void Planewaves::setLoudspeakerAngleDegrees(long anIndex, double anAngle)
 {
     if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
     {
@@ -210,6 +210,56 @@ void Planewaves::setLoudspeakerAngle(long anIndex, double anAngle)
         m_ordinate_of_loudspeakers_float[i] = m_ordinate_of_loudspeakers_double[i] = Tools::ordinate(1., m_angles_of_loudspeakers_double[i]);
     }
 }
+
+void Planewaves::setLoudspeakerAngleRadians(long anIndex, double anAngle)
+{
+    if(anIndex >= 0 && anIndex < m_number_of_loudspeakers)
+    {
+        m_angles_of_loudspeakers_double[anIndex] = Tools::radian_wrap(anAngle);
+    }
+    
+    Tools::sortVector(m_angles_of_loudspeakers_double, m_number_of_loudspeakers);
+    
+    for (int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_angles_of_loudspeakers_float[i] = m_angles_of_loudspeakers_double[i];
+        m_abscissa_of_loudspeakers_float[i] = m_abscissa_of_loudspeakers_double[i] = Tools::abscissa(1., m_angles_of_loudspeakers_double[i]);
+        m_ordinate_of_loudspeakers_float[i] = m_ordinate_of_loudspeakers_double[i] = Tools::ordinate(1., m_angles_of_loudspeakers_double[i]);
+    }
+}
+
+void Planewaves::setLoudspeakerAnglesDegrees(long aSize, double* angles)
+{
+    for(int i = 0; i < aSize && i < m_number_of_loudspeakers; i++)
+        m_angles_of_loudspeakers_double[i] = Tools::radian_wrap(angles[i]  / 360. * CICM_2PI);
+    
+    Tools::sortVector(m_angles_of_loudspeakers_double, m_number_of_loudspeakers);
+    
+    for (int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_angles_of_loudspeakers_float[i] = m_angles_of_loudspeakers_double[i];
+        m_abscissa_of_loudspeakers_float[i] = m_abscissa_of_loudspeakers_double[i] = Tools::abscissa(1., m_angles_of_loudspeakers_double[i]);
+        m_ordinate_of_loudspeakers_float[i] = m_ordinate_of_loudspeakers_double[i] = Tools::ordinate(1., m_angles_of_loudspeakers_double[i]);
+    }
+        
+}
+
+void Planewaves::setLoudspeakerAnglesRadians(long aSize, double* angles)
+{
+    for(int i = 0; i < aSize || i < m_number_of_loudspeakers; i++)
+        m_angles_of_loudspeakers_double[i] = Tools::radian_wrap(angles[i]);
+    
+    Tools::sortVector(m_angles_of_loudspeakers_double, m_number_of_loudspeakers);
+    
+    for (int i = 0; i < m_number_of_loudspeakers; i++)
+    {
+        m_angles_of_loudspeakers_float[i] = m_angles_of_loudspeakers_double[i];
+        m_abscissa_of_loudspeakers_float[i] = m_abscissa_of_loudspeakers_double[i] = Tools::abscissa(1., m_angles_of_loudspeakers_double[i]);
+        m_ordinate_of_loudspeakers_float[i] = m_ordinate_of_loudspeakers_double[i] = Tools::ordinate(1., m_angles_of_loudspeakers_double[i]);
+    }
+    
+}
+
 
 void Planewaves::setVectorSize(long aVectorSize)
 {

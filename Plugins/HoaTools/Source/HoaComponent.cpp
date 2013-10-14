@@ -36,7 +36,6 @@ HoaProcessor::HoaProcessor()
     m_decoding_mode         = Hoa_Dec_Ambisonic;
     m_optimization          = Hoa_InPhase_Optim;
     m_offset_of_loudspeakers= 0.;
-    m_zoom                  = 0.5;
     m_maximum_order         = 1;
     m_maximum_number_of_loudspeakers = 64;
     m_minimum_number_of_loudspeakers = 3;
@@ -76,6 +75,24 @@ void HoaProcessor::setOrder(long anOrder)
 void HoaProcessor::setNumberOfSources(long aNumberOfSources)
 {
     m_number_of_sources = Tools::clip(aNumberOfSources, 1, 64);
+    if(m_number_of_sources != m_sources_manager->getNumberOfSources())
+    {
+        if(m_number_of_sources > m_sources_manager->getNumberOfSources())
+        {
+            while(m_sources_manager->getNumberOfSources() != m_number_of_sources)
+            {
+                m_sources_manager->sourceNewPolar(1., Random().nextDouble() * CICM_2PI);
+            }
+
+        }
+        else
+        {
+            while(m_sources_manager->getNumberOfSources() != m_number_of_sources+1)
+            {
+                m_sources_manager->sourceRemove(m_sources_manager->getMaximumIndexOfSource());
+            }
+        }
+    }
 }
 
 void HoaProcessor::setNumberOfLoudspeakers(long aNumberOfLoudspeakers)
@@ -111,11 +128,6 @@ void HoaProcessor::setAngleOfLoudspeaker(long anIndex, double anAngle)
     
 }
 
-void HoaProcessor::setZoom(double aZoom)
-{
-    m_zoom = Tools::clip(aZoom, MIN_ZOOM, 1.);
-}
-
 void HoaProcessor::prepareToPlay(long aSampleRate, long aVectorSize)
 {
     m_map->setSamplingRate(aSampleRate);
@@ -136,7 +148,7 @@ void HoaProcessor::prepareToPlay(long aSampleRate, long aVectorSize)
     }
 }
 
-inline void HoaProcessor::process(float** iovector)
+void HoaProcessor::process(float** iovector)
 {
     m_map->process(iovector, m_harmonics_matrix);
     m_rotate->process(m_harmonics_matrix);
@@ -148,10 +160,16 @@ inline void HoaProcessor::process(float** iovector)
         m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
         m_map->setMuted(i, m_sources_manager->sourceGetMute(i));
     }
+    m_rotate->setAzimuth(m_offset_of_loudspeakers / 360. * CICM_2PI + CICM_PI2);
+    m_optim->setOptimMode(m_optimization);
 }
 
-inline void HoaProcessor::postProcess()
+void HoaProcessor::postProcess()
 {
+    if(m_sources_manager->getNumberOfSources() != m_number_of_sources)
+    {
+        m_number_of_sources = m_sources_manager->getNumberOfSources();
+    }
     if(m_order != m_decoder->getOrder())
     {
         delete m_map;
@@ -163,8 +181,6 @@ inline void HoaProcessor::postProcess()
         m_rotate    = new AmbisonicRotate(m_order);
         m_optim     = new AmbisonicOptim(m_order, Hoa_InPhase_Optim);
         m_decoder   = new AmbisonicsMultiDecoder(m_order, m_number_of_loudspeakers);
-        m_rotate->setAzimuth(m_offset_of_loudspeakers / 360. * CICM_2PI + CICM_PI2);
-        
     }
     if(m_number_of_sources != m_map->getNumberOfSources())
     {
@@ -174,9 +190,7 @@ inline void HoaProcessor::postProcess()
     {
         m_decoder->setNumberOfLoudspeakers(m_number_of_loudspeakers);
         m_meter->setNumberOfLoudspeakers(m_number_of_loudspeakers);
-    }
-    m_optim->setOptimMode(m_optimization);
-    
+    }    
 }
 
 void HoaProcessor::releaseResources()

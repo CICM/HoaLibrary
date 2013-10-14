@@ -23,97 +23,18 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define MIN_ZOOM 0.01
 #include "MapComponent.h"
 
-/************************************************************************************/
-/***************************** PROCESSOR ********************************************/
-/************************************************************************************/
-
-MapProcessor::MapProcessor()
-{
-    m_sources_manager   = new SourcesManager(1. / (double)MIN_ZOOM - 5., 1);
-    m_map               = new AmbisonicsMultiMaps(1);
-    m_zoom              = 0.5;
-    m_order             = m_map->getOrder();
-    m_number_of_harmonics = m_map->getNumberOfHarmonics();
-    m_number_of_sources = m_map->getNumberOfSources();
-}
-
-
-MapProcessor::~MapProcessor()
-{
-    delete m_sources_manager;
-    delete m_map;
-}
-
-void MapProcessor::setConfiguation(long anOrder, long aNumberOfSource)
-{
-    if(anOrder != m_order)
-    {
-        if(m_map)
-            delete m_map;
-        m_map = new AmbisonicsMultiMaps(anOrder, aNumberOfSource, 0, 512, 44100);
-        m_order             = m_map->getOrder();
-        m_number_of_harmonics = m_map->getNumberOfHarmonics();
-        m_number_of_sources = m_map->getNumberOfSources();
-    }
-    if(aNumberOfSource != m_number_of_sources)
-    {
-        if(m_map)
-            delete m_map;
-        m_map = new AmbisonicsMultiMaps(m_order, aNumberOfSource, 0, 512, 44100);
-        m_order             = m_map->getOrder();
-        m_number_of_harmonics = m_map->getNumberOfHarmonics();
-        m_number_of_sources = m_map->getNumberOfSources();
-    }
-    for(int i = 0; i < m_number_of_sources; i++)
-    {
-        if(!m_sources_manager->sourceGetExistence(i))
-            m_sources_manager->sourceSetPolar(i, 1., CICM_2PI / (double)m_number_of_sources * (double)i);
-    }
-    for(int i = m_number_of_sources; i < m_sources_manager->getMaximumIndexOfSource(); i++)
-    {
-        m_sources_manager->sourceRemove(i);
-    }
-        
-    for(int i = 0; i < m_number_of_sources; i++)
-    {
-        m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
-    }
-}
-
-void MapProcessor::prepareToPlay(long aSampleRate, long aVectorSize)
-{
-    m_map->setSamplingRate(aSampleRate);
-    m_map->setVectorSize(aVectorSize);
-    m_map->setRamp(aVectorSize);
-}
-
-
-void MapProcessor::process(float** inputs, float** outputs)
-{
-    m_map->process(inputs, outputs);
-    for(int i = 0; i < m_number_of_sources; i++)
-    {
-        m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
-        m_map->setMuted(i, m_sources_manager->sourceGetMute(i));
-    }
-}
-
-void MapProcessor::setZoom(float aZoomvalue)
-{
-    m_zoom = Tools::clip(aZoomvalue, MIN_ZOOM, 1.);
-}
+#define MIN_ZOOM 0.05
 
 /************************************************************************************/
 /***************************** EDITOR ***********************************************/
 /************************************************************************************/
 
-MapEditor::MapEditor(MapProcessor* aMapProcessor)
+MapEditor::MapEditor(SourcesManager* aSourceManager, AudioProcessor* aProcessor)
 {
-    m_map_processor     = aMapProcessor;
-    m_sources_manager   = m_map_processor->getSourceManager();
+    m_sources_manager   = aSourceManager;
+    m_processor         = aProcessor;
     
     m_souce_selected    = -1;
     m_group_selected    = -1;
@@ -140,7 +61,7 @@ void MapEditor::mouseMove(const MouseEvent &event)
     {
         if(m_sources_manager->sourceGetExistence(i))
         {
-            point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom());
+            point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom());
             if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
             {
                 m_souce_selected = i;
@@ -154,7 +75,7 @@ void MapEditor::mouseMove(const MouseEvent &event)
     {
         if(m_sources_manager->groupGetExistence(i))
         {
-            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_map_processor->getZoom());
+            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom());
             if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
             {
                 m_group_selected = i;
@@ -201,7 +122,7 @@ void MapEditor::mouseDown(const MouseEvent &event)
     }
     for (int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
     {
-        point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom());
+        point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom());
         if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
         {
             if(event.mods.isRightButtonDown())
@@ -223,6 +144,7 @@ void MapEditor::mouseDown(const MouseEvent &event)
                 }
                 else if(choice == 3)
                 {
+                    m_processor->beginParameterChangeGesture(i*3+3);
                     if(m_sources_manager->sourceGetMute(i))
                     {
                         m_sources_manager->sourceSetMute(i, 0);
@@ -231,6 +153,7 @@ void MapEditor::mouseDown(const MouseEvent &event)
                     {
                         m_sources_manager->sourceSetMute(i, 1);
                     }
+                    m_processor->endParameterChangeGesture(i*3+3);
                 }
             }
             else
@@ -247,7 +170,7 @@ void MapEditor::mouseDown(const MouseEvent &event)
     {
         if(m_sources_manager->groupGetExistence(i))
         {
-            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_map_processor->getZoom());
+            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom());
             if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
             {
                 if(event.mods.isRightButtonDown())
@@ -274,11 +197,27 @@ void MapEditor::mouseDown(const MouseEvent &event)
                     }
                     else if(choice == 4)
                     {
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->beginParameterChangeGesture(i*3+3);
+                        }
                         m_sources_manager->groupSetMute(i, 0);
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->endParameterChangeGesture(i*3+3);
+                        }
                     }
                     else if(choice == 5)
                     {
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->beginParameterChangeGesture(i*3+3);
+                        }
                         m_sources_manager->groupSetMute(i, 1);
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->endParameterChangeGesture(i*3+3);
+                        }
                     }
                 }
                 else
@@ -303,7 +242,7 @@ void MapEditor::mouseDown(const MouseEvent &event)
         const int choice = Popup.show();
         if(choice == 2)
         {
-            m_sources_manager->sourceNewCartesian(mouse.getX() / m_map_processor->getZoom(), mouse.getY() / m_map_processor->getZoom());
+            m_sources_manager->sourceNewCartesian(mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
         }
         else if(choice == 3)
         {
@@ -327,9 +266,11 @@ void MapEditor::mouseDrag(const MouseEvent &event)
     
     if(m_souce_selected != -1)
     {
+        m_processor->beginParameterChangeGesture(m_souce_selected*3);
+        
         if (m_drag_mode == 1)
         {
-            m_sources_manager->sourceSetRadius(m_souce_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_map_processor->getZoom());
+            m_sources_manager->sourceSetRadius(m_souce_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom());
         }
         else if(m_drag_mode == 2)
         {
@@ -337,16 +278,17 @@ void MapEditor::mouseDrag(const MouseEvent &event)
         }
         else if(m_drag_mode == 3)
         {
-            m_sources_manager->sourceSetAbscissa(m_souce_selected, mouse.getX() / m_map_processor->getZoom());
+            m_sources_manager->sourceSetAbscissa(m_souce_selected, mouse.getX() / m_sources_manager->getZoom());
         }
         else if(m_drag_mode == 4)
         {
-            m_sources_manager->sourceSetOrdinate(m_souce_selected, mouse.getY() / m_map_processor->getZoom());
+            m_sources_manager->sourceSetOrdinate(m_souce_selected, mouse.getY() / m_sources_manager->getZoom());
         }
         else
         {
-            m_sources_manager->sourceSetCartesian(m_souce_selected, mouse.getX() / m_map_processor->getZoom(), mouse.getY() / m_map_processor->getZoom());
+            m_sources_manager->sourceSetCartesian(m_souce_selected, mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
         }
+        m_processor->endParameterChangeGesture(m_souce_selected*3);
         repaint();
         return;
     }
@@ -354,7 +296,7 @@ void MapEditor::mouseDrag(const MouseEvent &event)
     {
         if (m_drag_mode == 1)
         {
-            m_sources_manager->groupSetRelativeRadius(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_map_processor->getZoom());
+            m_sources_manager->groupSetRelativeRadius(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom());
         }
         else if(m_drag_mode == 2)
         {
@@ -362,19 +304,19 @@ void MapEditor::mouseDrag(const MouseEvent &event)
         }
         else if(m_drag_mode == 3)
         {
-            m_sources_manager->groupSetAbscissa(m_group_selected, mouse.getX() / m_map_processor->getZoom());
+            m_sources_manager->groupSetAbscissa(m_group_selected, mouse.getX() / m_sources_manager->getZoom());
         }
         else if(m_drag_mode == 4)
         {
-            m_sources_manager->groupSetOrdinate(m_group_selected, mouse.getY() / m_map_processor->getZoom());
+            m_sources_manager->groupSetOrdinate(m_group_selected, mouse.getY() / m_sources_manager->getZoom());
         }
         else if(m_drag_mode == 5)
         {
-            m_sources_manager->groupSetRelativePolar(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_map_processor->getZoom(), mouse.getAngleToPoint(Point<float>(0., 0.)) + CICM_PI2);
+            m_sources_manager->groupSetRelativePolar(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom(), mouse.getAngleToPoint(Point<float>(0., 0.)) + CICM_PI2);
         }
         else
         {
-            m_sources_manager->groupSetCartesian(m_group_selected, mouse.getX() / m_map_processor->getZoom(), mouse.getY() / m_map_processor->getZoom());
+            m_sources_manager->groupSetCartesian(m_group_selected, mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
         }
         repaint();
         return;
@@ -391,7 +333,7 @@ void MapEditor::mouseWheelMove(const MouseEvent& event, const MouseWheelDetails&
 {
     if(event.mods.isShiftDown())
     {
-        m_map_processor->setZoom(m_map_processor->getZoom() + wheel.deltaY);
+        m_sources_manager->setZoom(m_sources_manager->getZoom() + wheel.deltaY);
         repaint();
     }
 }
@@ -406,8 +348,8 @@ void MapEditor::mouseUp(const MouseEvent &event)
         {
             if(m_sources_manager->sourceGetExistence(i))
             {
-                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom() * center + center;
-                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom() * center + center;
+                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
                 if(m_selection.contains(source_x, source_y))
                 {
                     m_sources_manager->groupSetSource(groupIndex, i);
@@ -424,13 +366,13 @@ void MapEditor::paint(Graphics& g)
 {
     float center = getWidth() /2.;
     
-    if(center / m_map_processor->getZoom() > center / MIN_ZOOM * m_map_processor->getZoom() - 5)
+    if(center / m_sources_manager->getZoom() > center / MIN_ZOOM * m_sources_manager->getZoom() - 5)
     {
         Path P;
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_map_processor->getZoom() - 4, center / MIN_ZOOM * m_map_processor->getZoom() - 4, 0, 0, CICM_2PI);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, 0, 0, CICM_2PI);
         g.strokePath(P, 1);
         P.clear();
-        P.addCentredArc(center, center, center / MIN_ZOOM * m_map_processor->getZoom() - 5, center / MIN_ZOOM * m_map_processor->getZoom() - 5, 0, 0, CICM_2PI);
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, 0, 0, CICM_2PI);
         g.reduceClipRegion (P, AffineTransform::identity);
     }
     
@@ -446,7 +388,7 @@ void MapEditor::draw_background(Graphics& g)
     
     for(int i = 1; i <= 5; i++)
     {
-        float width = center * (i / 5.) * m_map_processor->getZoom();
+        float width = center * (i / 5.) * m_sources_manager->getZoom();
         float start = center - width;
         g.setColour(Colours::white);
         g.drawEllipse(start + 0.5, start + 0.5, width * 2., width * 2., 2.);
@@ -454,7 +396,7 @@ void MapEditor::draw_background(Graphics& g)
         g.drawEllipse(start, start, width * 2., width * 2., 1.);
     }
     
-    float ecart = m_map_processor->getZoom() * center;
+    float ecart = m_sources_manager->getZoom() * center;
     if(ecart < 10. && ecart >= 5.)
         ecart *= 2.;
     else if(ecart < 5. && ecart > 2.5)
@@ -488,8 +430,8 @@ void MapEditor::draw_sources(Graphics& g)
         if(m_sources_manager->sourceGetExistence(i))
         {
             g.setColour(Colour(0xff444444));
-            float source_x = m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom() * center + center;
-            float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom() * center + center;
+            float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+            float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
             
             g.fillEllipse(source_x - m_sources_size * 0.35, source_y - m_sources_size * 0.35, m_sources_size * 0.7, m_sources_size * 0.7);
             
@@ -499,8 +441,8 @@ void MapEditor::draw_sources(Graphics& g)
                 for(int j = 0; j < m_sources_manager->sourceGetNumberOfGroups(i); j++)
                 {
                     int group_index = m_sources_manager->sourceGetGroupIndex(i, j);
-                    float group_x = m_sources_manager->groupGetAbscissa(group_index) * m_map_processor->getZoom() * center + center;
-                    float group_y = -m_sources_manager->groupGetOrdinate(group_index) * m_map_processor->getZoom() * center + center;
+                    float group_x = m_sources_manager->groupGetAbscissa(group_index) * m_sources_manager->getZoom() * center + center;
+                    float group_y = -m_sources_manager->groupGetOrdinate(group_index) * m_sources_manager->getZoom() * center + center;
                     g.drawLine(source_x, source_y, group_x, group_y);
                 }
                 
@@ -539,8 +481,8 @@ void MapEditor::draw_groups(Graphics& g)
         if(m_sources_manager->groupGetExistence(i))
         {
             g.setColour(Colour(0xff444444));
-            float group_x = m_sources_manager->groupGetAbscissa(i) * m_map_processor->getZoom() * center + center;
-            float group_y = -m_sources_manager->groupGetOrdinate(i) * m_map_processor->getZoom() * center + center;
+            float group_x = m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+            float group_y = -m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
             
             g.fillEllipse(group_x - m_sources_size * 0.15, group_y - m_sources_size * 0.15, m_sources_size * 0.3, m_sources_size * 0.3);
             if (i == m_group_selected)
@@ -549,8 +491,8 @@ void MapEditor::draw_groups(Graphics& g)
                 for(int j = 0; j < m_sources_manager->groupGetNumberOfSources(i); j++)
                 {
                     int source_index = m_sources_manager->groupGetSourceIndex(i, j);
-                    float source_x = m_sources_manager->sourceGetAbscissa(source_index) * m_map_processor->getZoom() * center + center;
-                    float source_y = -m_sources_manager->sourceGetOrdinate(source_index) * m_map_processor->getZoom() * center + center;
+                    float source_x = m_sources_manager->sourceGetAbscissa(source_index) * m_sources_manager->getZoom() * center + center;
+                    float source_y = -m_sources_manager->sourceGetOrdinate(source_index) * m_sources_manager->getZoom() * center + center;
                     g.drawLine(group_x, group_y, source_x, source_y);
                 }
                 
@@ -593,8 +535,8 @@ void MapEditor::draw_selection(Graphics& g)
         {
             if(m_sources_manager->sourceGetExistence(i))
             {
-                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom() * center + center;
-                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom() * center + center;
+                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
                 if(m_selection.contains(source_x, source_y))
                 {                    
                     g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, 1.);

@@ -141,6 +141,8 @@ private:
     std::vector <Source*>       m_sources;
     std::vector <SourcesGroup*> m_groups;
     long                        m_existence;
+    double                      m_zoom;
+    
     void checkMute();
 public:
 	SourcesManager(double aMaximumLimitValue = -1., long deadOrAlive = 1);
@@ -148,12 +150,14 @@ public:
     void clearAll();
     void setMaximumRadius(double aLimitValue);
     void setExistence(long deadOrAlive);
+    void setZoom(double aZoom);
     long getMaximumIndexOfSource();
     long getNumberOfSources();
     long getMaximumIndexOfGroup();
     long getNumberOfGroups();
     double getLimitMaximum();
     long getExistence();
+    double getZoom();
     
     /* Source */
     void sourceNewPolar(double aRadius, double anAngle);

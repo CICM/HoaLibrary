@@ -151,10 +151,66 @@ double AmbisonicsMeter::getLoudspeakerWidthRadian(long anIndex)
         return 0.;
 }
 
-void AmbisonicsMeter::setLoudspeakerAngle(long anIndex, double anAngle)
+void AmbisonicsMeter::setLoudspeakerAngleDegrees(long anIndex, double anAngle)
 {
-    Planewaves::setLoudspeakerAngle(anIndex, anAngle);
-    m_vectors->setLoudspeakerAngle(anIndex, anAngle);
+    Planewaves::setLoudspeakerAngleDegrees(anIndex, anAngle);
+    m_vectors->setLoudspeakerAngleDegrees(anIndex, anAngle);
+    
+    double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
+	for(int i = 0; i < m_number_of_loudspeakers; i++)
+	{
+		curAngle = m_angles_of_loudspeakers_double[i];
+		if (i != 0)
+            prevAngle = m_angles_of_loudspeakers_double[i-1];
+		else
+            prevAngle = m_angles_of_loudspeakers_double[m_number_of_loudspeakers-1];
+		if (i != m_number_of_loudspeakers-1)
+            nextAngle = m_angles_of_loudspeakers_double[i+1];
+		else
+            nextAngle = m_angles_of_loudspeakers_double[0];
+		
+		prevPortion = (curAngle - prevAngle);
+		nextPortion = (nextAngle - curAngle);
+		
+		if (nextPortion < 0.)
+            nextPortion += CICM_2PI;
+		if (prevPortion < 0.)
+            prevPortion += CICM_2PI;
+		
+		m_loudspeakers_angles_width[i] = (prevPortion + nextPortion)*0.5;
+		m_loudspeakers_angles_mapped[i] = (curAngle - prevPortion*0.5) + m_loudspeakers_angles_width[i]*0.5;
+	}
+}
+
+void AmbisonicsMeter::setLoudspeakerAnglesDegrees(long aSize, double* angles)
+{
+    Planewaves::setLoudspeakerAnglesDegrees(aSize, angles);
+    m_vectors->setLoudspeakerAnglesDegrees(aSize, angles);
+    
+    double curAngle, prevAngle, nextAngle, prevPortion, nextPortion;
+	for(int i = 0; i < m_number_of_loudspeakers; i++)
+	{
+		curAngle = m_angles_of_loudspeakers_double[i];
+		if (i != 0)
+            prevAngle = m_angles_of_loudspeakers_double[i-1];
+		else
+            prevAngle = m_angles_of_loudspeakers_double[m_number_of_loudspeakers-1];
+		if (i != m_number_of_loudspeakers-1)
+            nextAngle = m_angles_of_loudspeakers_double[i+1];
+		else
+            nextAngle = m_angles_of_loudspeakers_double[0];
+		
+		prevPortion = (curAngle - prevAngle);
+		nextPortion = (nextAngle - curAngle);
+		
+		if (nextPortion < 0.)
+            nextPortion += CICM_2PI;
+		if (prevPortion < 0.)
+            prevPortion += CICM_2PI;
+		
+		m_loudspeakers_angles_width[i] = (prevPortion + nextPortion)*0.5;
+		m_loudspeakers_angles_mapped[i] = (curAngle - prevPortion*0.5) + m_loudspeakers_angles_width[i]*0.5;
+	}
 }
 
 double AmbisonicsMeter::getLoudspeakerPeaks(long anIndex)

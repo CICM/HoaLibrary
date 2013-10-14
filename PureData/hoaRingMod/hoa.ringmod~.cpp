@@ -23,8 +23,34 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.ringmod.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/pd_enhanced.h"
+}
+#include "../../Sources/HoaLibrary.h"
 
+
+typedef struct _hoa_ringmod
+{
+    t_jbox            f_ob;
+    AmbisonicsRingModulation* f_ambi_ringmod;
+    double            f_frequency;
+    double            f_diffuse_factor;
+    long              f_encoding_compensation;
+} t_hoa_ringmod;
+
+void *hoa_ringmod_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_ringmod_free(t_hoa_ringmod *x);
+
+t_max_err freq_set(t_hoa_ringmod *x, t_object *attr, long argc, t_atom *argv);
+t_max_err diff_set(t_hoa_ringmod *x, t_object *attr, long argc, t_atom *argv);
+t_max_err comp_set(t_hoa_ringmod *x, t_object *attr, long argc, t_atom *argv);
+
+void hoa_ringmod_dsp(t_hoa_ringmod *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_ringmod_perform_post(t_hoa_ringmod *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_ringmod_perform_no(t_hoa_ringmod *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass* hoa_ringmod_class;
 
 extern "C" void setup_hoa0x2eringmod_tilde(void)
 {

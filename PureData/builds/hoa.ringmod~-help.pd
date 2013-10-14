@@ -22,108 +22,19 @@
 8;
 #X text 323 -321 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X obj -105 -5 hoa.scope~ @patching_rect { 0 0 225 225 } @order { 7
-} @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles { 1 }
-@drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7
-0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0
-0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 } @interval
-{ 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor
-{ 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0
-0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0
-0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 };
+#X obj -105 -5 hoa.scope~ @patching_rect [ -105 -5 225 225 ] @size
+[ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
 #X obj -105 -117 hoa.encoder~ 7 ----------------------;
-#X obj 400 -7 hoa.scope~ @patching_rect { 0 0 225 225 } @order { 7
-} @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles { 1 }
-@drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7
-0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0
-0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 } @interval
-{ 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor
-{ 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0
-0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0
-0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 };
+#X obj 400 -7 hoa.scope~ @patching_rect [ 400 -7 225 225 ] @size [
+225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
 #X msg 242 -226 \; pd dsp 1;
 #X msg 242 -188 \; pd dsp 0;
 #X msg -212 -204 compensation \$1;

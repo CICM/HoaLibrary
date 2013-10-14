@@ -5,6 +5,7 @@
 HoaToolsAudioProcessor::HoaToolsAudioProcessor()
 {
     m_processor         = new HoaProcessor();
+    m_source_manager    = m_processor->getSourceManager();
     m_gui               = gui_mode_map;
 }
 
@@ -44,108 +45,141 @@ int HoaToolsAudioProcessor::getNumParameters()
 
 float HoaToolsAudioProcessor::getParameter(int index)
 {
-    if(index == 0)
-        return m_processor->getOrder();
+    if((index + 1) % 3 == 0)
+        return m_source_manager->sourceGetMute(index / 3);
+    else if((index + 2) % 3 == 0)
+        return m_source_manager->sourceGetOrdinate(index / 3) / 10. - 0.5;
     else
-        return 1.;
-    
-    return 0.0f;
+        return m_source_manager->sourceGetAbscissa(index / 3) / 10. - 0.5;
 }
 
 void HoaToolsAudioProcessor::setParameter(int index, float newValue)
 {
-    if(index == 0)
+    if((index + 1) % 3 == 0)
     {
-        ;
+        newValue += 0.5;
+        m_source_manager->sourceSetMute(index / 3, newValue);
     }
-    if(index == 1)
-    {
-        ;
-    }
+    else if((index + 2) % 3 == 0)
+        m_source_manager->sourceSetOrdinate(index / 3, (newValue - 0.5) * 20.);
+    else
+        m_source_manager->sourceSetAbscissa(index / 3, (newValue - 0.5) * 20.);
+    
+    AudioProcessorEditor* Editor = NULL;
+    Editor = getActiveEditor();
+    if(Editor)
+        Editor->repaint();
 }
 
 float HoaToolsAudioProcessor::getParameterMin(int index)
 {
-    if(index == 0)
-    {
-        return 1;
-    }
-    return 0.;
+    if((index + 1) % 3 == 0)
+        return 0;
+    else if((index + 2) % 3 == 0)
+        return -10.;
+    else
+        return -10.;
 }
 
 float HoaToolsAudioProcessor::getParameterMax(int index)
 {
-    if(index == 0)
-    {
+    if((index + 1) % 3 == 0)
         return 1;
-    }
-    return 1.;
+    else if((index + 2) % 3 == 0)
+        return 10.;
+    else
+        return 10.;
 }
 
 float HoaToolsAudioProcessor::getParameterDefault(int index)
 {
-    return 0.3;
+    if((index + 1) % 3 == 0)
+        return 0;
+    else if((index + 2) % 3 == 0)
+        return 0.;
+    else
+        return 0.;
 }
 
-int HoaToolsAudioProcessor::getParameterNumSteps(int parameterIndex)
+int HoaToolsAudioProcessor::getParameterNumSteps(int index)
 {
-    
+    if((index + 1) % 3 == 0)
+        return 1;
+    else if((index + 2) % 3 == 0)
+        return 0.001;
+    else
+        return 0.001;
 }
 
-float HoaToolsAudioProcessor::getParameterDefaultValue (int parameterIndex)
+float HoaToolsAudioProcessor::getParameterDefaultValue (int index)
 {
-    
+    if((index + 1) % 3 == 0)
+        return 0;
+    else if((index + 2) % 3 == 0)
+        return 0.;
+    else
+        return 0.;
 }
 
 const String HoaToolsAudioProcessor::getParameterName (int index)
 {
-    if(index == 0)
-        return String("Ambisonic Order");
-    else if(index == 1)
-        return String("Number of sources Order");
-    
-    if(index % 2 == 0)
-        return String("abscissa");
+    char text[256];
+    if((index + 1) % 3 == 0)
+        sprintf(text, "Mute     %i : ", index / 3 + 1);
+    else if((index + 2) % 3 == 0)
+        sprintf(text, "Ordinate %i : ", index / 3 + 1);
     else
-        return String("ordiante");
+        sprintf(text, "Abscissa %i : ", index / 3 + 1);
+       
+    return String(text);
 }
 
 String HoaToolsAudioProcessor::getParameterLabel(int index) const
 {
-    if(index == 0)
-        return String();
-    else if(index == 1)
-        return String();
+    char text[256];
+    if((index + 1) % 3 == 0)
+    {
+        if (m_source_manager->sourceGetMute(index / 3))
+            sprintf(text, "Muted");
+        else
+           sprintf(text, "Unmuted"); 
+        
+    }
+    else if((index + 2) % 3 == 0)
+        sprintf(text, "%f", m_source_manager->sourceGetOrdinate(index / 3));
     else
-        return String("bof");
+        sprintf(text, "%f", m_source_manager->sourceGetAbscissa(index / 3));
+    
+    return String(text);
 }
 
 bool HoaToolsAudioProcessor::isParameterAutomatable (int index) const
 {
-    if(index == 0)
-        return false;
-    else if(index == 1)
-        return false;
-    else
-        return true;
+    return true;
 }
 
 bool HoaToolsAudioProcessor::isMetaParameter(int index) const
 {
-    if(index == 0)
-        return true;
-    else if(index == 1)
-        return true;
-    else
-        return false;
+    return false;
 }
 
 const String HoaToolsAudioProcessor::getParameterText (int index)
 {
-    if(index % 2 == 0)
-        return String("relative");
+    char text[256];
+    if((index + 1) % 3 == 0)
+    {
+        if (m_source_manager->sourceGetMute(index / 3))
+            sprintf(text, "Muted");
+        else
+            sprintf(text, "Unmuted");
+        
+    }
+    else if((index + 2) % 3 == 0)
+        sprintf(text, "%f", m_source_manager->sourceGetOrdinate(index / 3));
     else
-        return String("phase");
+        sprintf(text, "%f", m_source_manager->sourceGetAbscissa(index / 3));
+    
+    return String(text);
 }
 
 /************************************************************************************/
@@ -158,11 +192,14 @@ void HoaToolsAudioProcessor::numChannelsChanged()
     AudioProcessorEditor* Editor = NULL;
     
     if(getNumInputChannels() < m_processor->getNumberOfSources())
-        ;
+    {
+        m_processor->setNumberOfSources(getNumInputChannels());
+    }
     if(getNumOutputChannels() < m_processor->getNumberOfLoudspeakers())
     {
-        ;
+        m_processor->setNumberOfLoudspeakers(getNumOutputChannels());
     }
+    m_processor->postProcess();
     
     Editor = getActiveEditor();
     if(Editor)
@@ -185,10 +222,10 @@ void HoaToolsAudioProcessor::releaseResources()
     
 }
 
-void HoaToolsAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
+void HoaToolsAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
     m_processor->process(buffer.getArrayOfChannels());
-    setNumberOfInputs(m_processor->getSourceManager()->getNumberOfSources());
+    setNumberOfInputs(m_processor->getNumberOfSources());
     setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
     m_processor->postProcess();
 }
@@ -206,6 +243,7 @@ void HoaToolsAudioProcessor::getStateInformation(MemoryBlock& destData)
     xml.setAttribute("NumberOfLoudspeakers", (int)m_processor->getNumberOfLoudspeakers());
     xml.setAttribute("OffsetOfLoudspeakers", (int)m_processor->getOffsetOfLoudspeakers());
     xml.setAttribute("Optimization", (int)m_processor->getOptimization());
+    xml.setAttribute("Zoom", (double)m_processor->getSourceManager()->getZoom());
     
     copyXmlToBinary(xml, destData);
 }
@@ -223,6 +261,8 @@ void HoaToolsAudioProcessor::setStateInformation (const void* data, int sizeInBy
             m_processor->setNumberOfLoudspeakers(xmlState->getIntAttribute("NumberOfLoudspeakers"));
             m_processor->setOffsetOfLoudspeakers(xmlState->getIntAttribute("OffsetOfLoudspeakers"));
             m_processor->setOptimization(xmlState->getIntAttribute("Optimization"));
+            m_processor->getSourceManager()->setZoom(xmlState->getDoubleAttribute("Zoom"));
+            
             setNumberOfInputs(m_processor->getNumberOfSources());
             setNumberOfOutputs(m_processor->getNumberOfLoudspeakers());
         }

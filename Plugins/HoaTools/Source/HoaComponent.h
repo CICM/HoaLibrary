@@ -43,7 +43,6 @@ private:
     long                    m_maximum_order;
     long                    m_maximum_number_of_loudspeakers;
     long                    m_minimum_number_of_loudspeakers;
-    double                  m_zoom;
 
     SourcesManager*         m_sources_manager;
     AmbisonicsMultiMaps*    m_map;
@@ -67,8 +66,8 @@ public:
     void setZoom(double aZoom);
     
     void prepareToPlay(long aSampleRate, long aVectorSize);
-    inline void process(float** iovector);
-    inline void postProcess();
+    void process(float** iovector);
+    void postProcess();
     void releaseResources();
     
     long getOrder(){return m_order;};
@@ -82,7 +81,6 @@ public:
     long getOptimization(){return m_optimization;};
     double getOffsetOfLoudspeakers(){return m_offset_of_loudspeakers;};
     double getAngleOfLoudspeaker(long anIndex){return m_angles_of_loudspeakers[(int)Tools::clip(anIndex, 0, 255)];};
-    double getZoom(){return m_zoom;};
     
     AmbisonicsMeter*    getMeter(){return m_meter;};
     SourcesManager*     getSourceManager(){return m_sources_manager;};

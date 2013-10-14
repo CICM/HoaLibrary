@@ -57,7 +57,7 @@ void FilterConvolutionZero::setImpulseResponse(float* anImpulseResponse, long aS
                 datas[i] = 0.;
         }
         m_fir->setImpulseResponse(datas);
-        free(datas);
+        delete [] datas;
     }
     else if(aSize > m_minimum_size)
         m_fir->setImpulseResponse(anImpulseResponse);

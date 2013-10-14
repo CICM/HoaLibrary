@@ -23,7 +23,27 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.space.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/pd_enhanced.h"
+}
+#include "../../Sources/HoaLibrary.h"
+
+
+typedef struct _hoa_space
+{
+    t_jbox              f_ob;
+    AmbisonicSpace      *f_ambi_space;
+} t_hoa_space;
+
+void *hoa_space_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_space_free(t_hoa_space *x);
+void hoa_space_list(t_hoa_space *x, t_symbol *s, short ac, t_atom *av);
+
+void hoa_space_dsp(t_hoa_space *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_space_perform(t_hoa_space *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_space_class;
 
 extern "C" void setup_hoa0x2espace_tilde(void)
 {

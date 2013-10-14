@@ -31,13 +31,9 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_processor = ownerFilter;
     m_hoa_processor = aHoaProcessor;
     
-    m_m_proc    = aMapProcessor;
-    m_map       = new MapEditor(aMapProcessor);
-    m_decoder   = new DecoderEditor(aDecoderProcessor);
-    m_optim_processor = aDecoderProcessor->getOptim();
-    m_map_processor = aMapProcessor->getMap();
-    m_decoder_processor = aDecoderProcessor->getDecoder();
-    m_sources_manager   = aMapProcessor->getSourceManager();
+    m_map       = new MapEditor(m_hoa_processor->getSourceManager(), ownerFilter);
+    m_meter     = new MeterEditor(m_hoa_processor->getMeter());
+
     HoaFont.setHeight(11.);
     HoaFont.setBold(1);
     
@@ -47,15 +43,15 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
         m_map->setSize(495, 495);
         m_map->setBounds(2.5, 2.5, 495, 495);
     
-        addAndMakeVisible(m_decoder);
-        m_decoder->setSize(123, 123);
-        m_decoder->setBounds(501, 375, 124, 124);
+        addAndMakeVisible(m_meter);
+        m_meter->setSize(123, 123);
+        m_meter->setBounds(501, 375, 124, 124);
     }
     else
     {        
-        addAndMakeVisible(m_decoder);
-        m_decoder->setSize(495, 495);
-        m_decoder->setBounds(2.5, 2.5, 495, 495);
+        addAndMakeVisible(m_meter);
+        m_meter->setSize(495, 495);
+        m_meter->setBounds(2.5, 2.5, 495, 495);
         
         addAndMakeVisible(m_map);
         m_map->setSize(123, 123);
@@ -76,7 +72,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_order_menu->setTextBoxStyle(Slider::TextBoxLeft, false, 35, 11);
     m_order_menu->setBounds(581, 5, 50, 12);
     m_order_menu->setRange(0, 64, 1);
-    m_order = (int)m_decoder_processor->getOrder();
+    m_order = (int)m_hoa_processor->getOrder();
     m_order_menu->getValueObject().referTo(m_order);
     m_order.addListener(this);
     
@@ -94,7 +90,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_sources_menu->setTextBoxStyle(Slider::TextBoxLeft, false, 35, 11);
     m_sources_menu->setBounds(581, 25, 50, 12);
     m_sources_menu->setRange(0, 64, 1);
-    m_nunber_of_sources = (int)m_m_proc->getNumberOfSources();
+    m_nunber_of_sources = (int)m_hoa_processor->getNumberOfSources();
     m_sources_menu->getValueObject().referTo(m_nunber_of_sources);
     m_nunber_of_sources.addListener(this);
     
@@ -112,7 +108,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_loudspeakers_menu->setTextBoxStyle(Slider::TextBoxLeft, false, 35, 11);
     m_loudspeakers_menu->setBounds(581, 45, 50, 12);
     m_loudspeakers_menu->setRange(0, 64, 1);
-    m_nunber_of_loudspeakers = (int)m_decoder_processor->getNumberOfLoudspeakers();
+    m_nunber_of_loudspeakers = (int)m_hoa_processor->getNumberOfLoudspeakers();
     m_loudspeakers_menu->getValueObject().referTo(m_nunber_of_loudspeakers);
     m_nunber_of_loudspeakers.addListener(this);
     
@@ -127,7 +123,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_decoder_menu->addItem("Decoding : Binaural", 2);
     m_decoder_menu->addItem("Decoding : Irregular", 3);
     m_decoder_menu->addListener(this);
-    m_decoder_menu->setSelectedId(m_optim_processor->getOptimMode()+1);
+    m_decoder_menu->setSelectedId(m_hoa_processor->getDecodingMode()+1);
     m_decoder_menu->setBounds(501, 77, 122, 15);
     m_decoder_menu->setLookAndFeel(&LookAndFeel);
     
@@ -142,7 +138,7 @@ HoaToolsAudioProcessorEditor::HoaToolsAudioProcessorEditor(HoaToolsAudioProcesso
     m_optim_menu->addItem("Optim : MaxRe", 2);
     m_optim_menu->addItem("Optim : InPhase", 3);
     m_optim_menu->addListener(this);
-    m_optim_menu->setSelectedId(m_optim_processor->getOptimMode()+1);
+    m_optim_menu->setSelectedId(m_hoa_processor->getOptimization()+1);
     m_optim_menu->setBounds(501, 92, 122, 15);
     m_optim_menu->setLookAndFeel(&LookAndFeel);    
     
@@ -180,7 +176,7 @@ void HoaToolsAudioProcessorEditor::paint(Graphics& g)
 HoaToolsAudioProcessorEditor::~HoaToolsAudioProcessorEditor()
 {
     delete m_map;
-    delete m_decoder;
+    delete m_meter;
     delete m_optim_menu;
     delete m_order_menu;
     delete m_offset_menu;
@@ -192,27 +188,11 @@ void HoaToolsAudioProcessorEditor::valueChanged(Value& aValue)
 {
     if(aValue == m_nunber_of_sources)
     {
-        if(m_sources_menu->getValue() != m_m_proc->getNumberOfSources())
-        {
-            if(m_m_proc->getNumberOfSources() > m_sources_menu->getValue())
-            {
-                for(int i = m_sources_menu->getValue(); i < m_m_proc->getNumberOfSources(); i++)
-                {
-                    m_sources_manager->sourceRemove(i);
-                }
-            }
-            else
-            {
-                for(int i = m_m_proc->getNumberOfSources(); i < m_sources_menu->getValue(); i++)
-                {
-                    m_sources_manager->sourceNewCartesian(0., 1.);
-                }
-            }
-            m_nunber_of_sources = (int)m_sources_manager->getNumberOfSources();
-        }
+        m_hoa_processor->setNumberOfSources(m_sources_menu->getValue());
     }
-    else
+    else if(aValue == m_nunber_of_loudspeakers)
     {
+        m_hoa_processor->setNumberOfLoudspeakers(m_loudspeakers_menu->getValue());
     }
 }
 
@@ -220,16 +200,7 @@ void HoaToolsAudioProcessorEditor::comboBoxChanged(ComboBox* aComboBox)
 {
     if(aComboBox == m_optim_menu)
     {
-        bool state = m_processor->isSuspended();
-        if(state)
-            m_processor->suspendProcessing(state);
-        m_optim_processor->setOptimMode(m_optim_menu->getSelectedId()-1);
-        if(state)
-            m_processor->suspendProcessing(false);
-    }
-    else if(aComboBox == m_optim_menu)
-    {
-        ;
+        m_hoa_processor->setOptimization(m_optim_menu->getSelectedId()-1);
     }
     else if(aComboBox == m_decoder_menu)
     {
@@ -242,8 +213,8 @@ void HoaToolsAudioProcessorEditor::buttonClicked(Button* aButton)
 {
     if(m_processor->getGui() == gui_mode_map)
     {
-        m_decoder->setSize(495, 495);
-        m_decoder->setBounds(2.5, 2.5, 495, 495);
+        m_meter->setSize(495, 495);
+        m_meter->setBounds(2.5, 2.5, 495, 495);
         m_map->setSize(123, 123);
         m_map->setBounds(501, 375, 124, 124);
         m_processor->setGui(gui_mode_meter);
@@ -252,8 +223,8 @@ void HoaToolsAudioProcessorEditor::buttonClicked(Button* aButton)
     {
         m_map->setSize(495, 495);
         m_map->setBounds(2.5, 2.5, 495, 495);
-        m_decoder->setSize(123, 123);
-        m_decoder->setBounds(501, 375, 124, 124);
+        m_meter->setSize(123, 123);
+        m_meter->setBounds(501, 375, 124, 124);
         m_processor->setGui(gui_mode_map);
     }
 }

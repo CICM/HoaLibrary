@@ -3,8 +3,6 @@
 #define PLUGINPROCESSOR_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "HoaMap/MapComponent.h"
-#include "HoaDecoder/DecoderComponent.h"
 #include "HoaLookAndFeel.h"
 #include "HoaComponent.h"
 
@@ -21,6 +19,7 @@ private:
     
     long                        m_gui;
     HoaProcessor*               m_processor;
+    SourcesManager*             m_source_manager;
     
 public:
     HoaToolsAudioProcessor();
