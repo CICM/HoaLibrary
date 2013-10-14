@@ -61,8 +61,11 @@ public:
 	long            getSamplingRate();
 
     void setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff = 0);
-    void setLoudspeakerAngle(long anIndex, double anAngle);
-
+    void setLoudspeakerAngleDegrees(long anIndex, double anAngle);
+    void setLoudspeakerAngleRadians(long anIndex, double anAngle);
+    void setLoudspeakerAnglesDegrees(long aSize, double* angles);
+    void setLoudspeakerAnglesRadians(long asize, double* angles);
+    
 	void setVectorSize(long aVectorSize);
     void setSamplingRate(long aSamplingRate);
 

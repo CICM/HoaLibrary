@@ -23,7 +23,21 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.projector.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
+typedef struct _hoa_projector
+{
+    t_jbox              f_ob;
+    AmbisonicProjector* f_ambi_projector;
+} t_hoa_projector;
+
+void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_projector_free(t_hoa_projector *x);
+
+void hoa_projector_dsp(t_hoa_projector *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_projector_perform(t_hoa_projector *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_projector_class;
 
 extern "C" void setup_hoa0x2eprojector_tilde(void)
 {
@@ -35,6 +49,7 @@ extern "C" void setup_hoa0x2eprojector_tilde(void)
     
 	class_addmethod(c, (method)hoa_projector_dsp,     "dsp",      A_CANT, 0);
     
+    class_register(CLASS_BOX, c);
     hoa_projector_class = c;
 }
 
@@ -69,6 +84,6 @@ void hoa_projector_perform(t_hoa_projector *x, t_object *dsp, float **ins, long 
 
 void hoa_projector_free(t_hoa_projector *x)
 {
-	dsp_freejbox((t_jbox *)x);
-	delete(x->f_ambi_projector);
+	//dsp_freejbox((t_jbox *)x);
+	//delete(x->f_ambi_projector);
 }

@@ -23,7 +23,26 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.recomposer.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
+typedef struct _hoa_recomposer
+{
+    t_jbox              f_ob;
+    AmbisonicRecomposer *f_ambi_recomposer;
+} t_hoa_recomposer;
+
+void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_recomposer_free(t_hoa_recomposer *x);
+
+void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
+void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
+
+t_eclass *hoa_recomposer_class;
+
+void hoa_recomposer_dsp(t_hoa_recomposer *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_recomposer_perform(t_hoa_recomposer *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_recomposer_perform_fisheye(t_hoa_recomposer *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_recomposer_perform_free(t_hoa_recomposer *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
 
 extern "C" void setup_hoa0x2erecomposer_tilde(void)
 {
@@ -36,14 +55,6 @@ extern "C" void setup_hoa0x2erecomposer_tilde(void)
 	class_addmethod(c, (method)hoa_recomposer_dsp,     "dsp",      A_CANT, 0);
     class_addmethod(c, (method)hoa_recomposer_angle,   "angle",    A_GIMME,0);
     class_addmethod(c, (method)hoa_recomposer_wide,    "wide",      A_GIMME,0);
-
-    CLASS_ATTR_LONG             (c, "mode", 0, t_hoa_recomposer, f_mode);
-    CLASS_ATTR_ACCESSORS        (c, "mode", (method)NULL,(method)recomposer_setattr_mode);
-	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
-	CLASS_ATTR_ORDER			(c, "mode", 0, "1");
-	CLASS_ATTR_LABEL			(c, "mode", 0, "Recomposition mode");
-	CLASS_ATTR_FILTER_CLIP      (c, "mode", 0, 2);
-	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
     
     class_register(CLASS_BOX, c);
     hoa_recomposer_class = c;
@@ -55,15 +66,27 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
     t_dictionary *d;
 	int	order = 4;
     int microphones = 10;
-    
+    int mode = Hoa_Fixe;
     x = (t_hoa_recomposer *)object_alloc(hoa_recomposer_class);
     
     order = atom_getint(argv);
     microphones = atom_getint(argv+1);
-    x->f_mode = Hoa_Fixe;
-    x->f_ambi_recomposer = new AmbisonicRecomposer(order, microphones, x->f_mode, sys_getblksize(), sys_getsr());
+    if (atom_gettype(argv+2) == A_SYM)
+    {
+        if(atom_getsym(argv+2) == gensym("fixe"))
+            mode = Hoa_Fixe;
+        else if(atom_getsym(argv+2) == gensym("fisheye"))
+            mode = Hoa_Fisheye;
+        else if(atom_getsym(argv+2) == gensym("free"))
+            mode = Hoa_Free;
+    }
+    if (atom_gettype(argv+2) == A_LONG)
+    {
+        mode = Tools::clip(long(atom_getlong(argv+2)), 0, 2);
+    }
+    x->f_ambi_recomposer = new AmbisonicRecomposer(order, microphones, mode, sys_getblksize(), sys_getsr());
+    
     dsp_setupjbox((t_jbox *)x, x->f_ambi_recomposer->getNumberOfInputs(), x->f_ambi_recomposer->getNumberOfOutputs());
-    x->f_mode = x->f_ambi_recomposer->getMode();
     
 	x->f_ob.z_misc = Z_NO_INPLACE;
     
@@ -71,45 +94,6 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
     attr_dictionary_process(x, d);
 	
    	return (x);
-}
-
-t_max_err recomposer_setattr_mode(t_hoa_recomposer *x, t_object *attr, long ac, t_atom *av)
-{
-	if (ac && av)
-    {
-        if (atom_gettype(av) == A_SYM)
-        {
-            if(atom_getsym(av) == gensym("fixe"))
-                atom_setlong(av, Hoa_Fixe);
-            else if(atom_getsym(av) == gensym("fisheye"))
-                atom_setlong(av, Hoa_Fisheye);
-            else if(atom_getsym(av) == gensym("free"))
-                atom_setlong(av, Hoa_Free);
-        }
-        if (atom_gettype(av) == A_LONG)
-        {
-            long d = Tools::clip(long(atom_getlong(av)), 0, 2);
-            if (d != x->f_mode)
-            {
-                
-                long order = x->f_ambi_recomposer->getOrder();
-                long microphones = x->f_ambi_recomposer->getNumberOfInputs();
-                if(x->f_mode == Hoa_Fisheye)
-                    microphones--;
-                
-                int dspState = canvas_suspend_dsp();
-                delete x->f_ambi_recomposer;
-                x->f_ambi_recomposer = new AmbisonicRecomposer(order, microphones, d, sys_getblksize(), sys_getsr());
-                
-                x->f_mode = x->f_ambi_recomposer->getMode();
-                
-                jbox_resize_inputs((t_jbox *)x, x->f_ambi_recomposer->getNumberOfInputs());
-                
-                canvas_resume_dsp(dspState);
-            }
-        }
-	}
-	return 0;
 }
 
 void hoa_recomposer_dsp(t_hoa_recomposer *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)

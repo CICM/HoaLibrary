@@ -23,7 +23,63 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.scope~.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
+
+typedef struct  _scope
+{
+	t_jbox      j_box;
+	
+	t_clock*	f_clock;
+	int			f_startclock;
+	long        f_interval;
+	long        f_order;
+    
+    long        f_drawCircle;
+    long        f_drawContributions;
+    long        f_drawAngles;
+    float       f_normalize;
+	
+	t_jrgba		f_colorBackground;
+    t_jrgba     f_bordercolor;
+	t_jrgba		f_colorText;
+	t_jrgba		f_colorNegatif;
+	t_jrgba		f_colorPositif;
+	
+	t_rect		f_center;
+	double		f_rayonGlobal;
+	double		f_rayonAngle;
+	double		f_rayonCircle;
+	double		f_fontsize;
+    
+    AmbisonicsViewer* f_viewer;
+    double*     f_harmonicsValues;
+    long        f_sampleCounter;
+    double*     f_averageHarmo;
+    
+} t_scope;
+
+t_eclass *scope_class;
+
+void *scope_new(t_symbol *s, int argc, t_atom *argv);
+void scope_free(t_scope *x);
+void scope_assist(t_scope *x, void *b, long m, long a, char *s);
+void scope_tick(t_scope *x);
+
+void scope_dsp(t_scope *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void scope_perform(t_scope *x, t_object *d, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+long scope_oksize(t_scope *x, t_rect *newrect);
+void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params);
+/* Paint *********************************************/
+void scope_paint(t_scope *x, t_object *view);
+void draw_background(t_scope *x, t_object *view, t_rect *rect);
+void draw_angles(t_scope *x,  t_object *view, t_rect *rect);
+void draw_contribution(t_scope *x,  t_object *view, t_rect *rect);
+void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect);
+
+t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av);
 
 extern "C" void setup_hoa0x2escope_tilde(void)
 {
@@ -103,12 +159,12 @@ extern "C" void setup_hoa0x2escope_tilde(void)
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.76 0.76 0.76 1.");
     
-    CLASS_ATTR_RGBA				(c, "bordercolor", 0, t_scope, f_bordercolor);
-	CLASS_ATTR_CATEGORY			(c, "bordercolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bordercolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bordercolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bordercolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bordercolor", 0, "0.7 0.7 0.7 1.");
+    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_scope, f_bordercolor);
+	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
+	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "2");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.7 0.7 0.7 1.");
 	
 	CLASS_ATTR_RGBA				(c, "txcolor", 0, t_scope, f_colorText);
 	CLASS_ATTR_CATEGORY			(c, "txcolor", 0, "Color");
@@ -503,7 +559,7 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
             x1 = x->f_viewer->getAbscisseValue(0) * factor + shadow;
             y1 = x->f_viewer->getOrdinateValue(0) * factor + shadow;
             jgraphics_line_to(g, x1, y1);
-            jgraphics_smooth_line(g);
+            //jgraphics_smooth_line(g);
             jgraphics_set_source_jrgba(g, &grey);
             jgraphics_stroke(g);
             
@@ -529,7 +585,7 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
                         jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
                     
                     jgraphics_line_to(g, x1, y1);
-                    jgraphics_smooth_line(g);
+                    //jgraphics_smooth_line(g);
                     jgraphics_stroke(g);
                     
                     
@@ -548,7 +604,7 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
             else
                 jgraphics_set_source_jrgba(g, &x->f_colorNegatif);
             
-            jgraphics_smooth_line(g);
+            //jgraphics_smooth_line(g);
             jgraphics_stroke(g);
 		}
 		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));

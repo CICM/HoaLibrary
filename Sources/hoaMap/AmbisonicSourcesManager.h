@@ -141,6 +141,8 @@ private:
     std::vector <Source*>       m_sources;
     std::vector <SourcesGroup*> m_groups;
     long                        m_existence;
+    double                      m_zoom;
+    
     void checkMute();
 public:
 	SourcesManager(double aMaximumLimitValue = -1., long deadOrAlive = 1);
@@ -148,14 +150,23 @@ public:
     void clearAll();
     void setMaximumRadius(double aLimitValue);
     void setExistence(long deadOrAlive);
+    void setZoom(double aZoom);
     long getMaximumIndexOfSource();
     long getNumberOfSources();
     long getMaximumIndexOfGroup();
     long getNumberOfGroups();
     double getLimitMaximum();
     long getExistence();
+    double getZoom();
     
     /* Source */
+    void sourceNewPolar(double aRadius, double anAngle);
+	void sourceNewRadius(double aRadius);
+    void sourceNewAngle(double anAngle);
+    void sourceNewCartesian(double anAbscissa, double anOrdinate);
+	void sourceNewAbscissa(double anAbscissa);
+	void sourceNewOrdinate(double anOrdinate);
+    
 	void sourceSetPolar(long anIndex, double aRadius, double anAngle);
 	void sourceSetRadius(long anIndex, double aRadius);
     void sourceSetAngle(long anIndex, double anAngle);
@@ -196,7 +207,7 @@ public:
     long groupGetNumberOfSources(long aGroupIndex);
     long groupGetSourceIndex(long aGroupIndex, long aSourceIndex);
     void groupSetMute(long anIndex, long aValue);
-    
+    void groupClean();
 	void groupSetRelativePolar(long aGroupIndex, double aRadius, double anAngle);
 	void groupSetRelativeRadius(long aGroupIndex, double aRadius);
     void groupSetRelativeAngle(long aGroupIndex, double anAngle);
@@ -210,6 +221,8 @@ public:
     color groupGetColor(long anIndex);
     std::string groupGetDescription(long anIndex);
 	long groupGetMute(long anIndex);
+    long groupGetIfSourceMuted(long anIndex);
+    long groupGetNextIndex();
     
     int groupCompare(long groupIndexA, const long groupIndexB);
     

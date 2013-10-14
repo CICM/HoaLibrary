@@ -23,7 +23,23 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.optim.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
+typedef struct _hoa_optim
+{
+    t_jbox            f_ob;
+    AmbisonicOptim*   f_ambi_optim;
+    long              f_mode;
+} t_hoa_optim;
+
+void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_optim_free(t_hoa_optim *x);
+
+void hoa_optim_dsp(t_hoa_optim *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_optim_perform(t_hoa_optim *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+t_max_err optim_setattr_mode(t_hoa_optim *x, t_object *attr, long ac, t_atom *av);
+
+t_eclass *hoa_optim_class;
 
 extern "C" void setup_hoa0x2eoptim_tilde(void)
 {

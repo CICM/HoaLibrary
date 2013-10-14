@@ -23,11 +23,33 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.freeverb.h"
+#include "../hoaLibrary/hoa.library_pd.h"
 
-extern "C"
+typedef struct _hoa_freeverb
 {
-void setup_hoa0x2efreeverb_tilde(void)
+    t_jbox            f_ob;
+    AmbisonicFreeverb*  f_ambi_freeverb;
+    
+} t_hoa_freeverb;
+
+void *hoa_freeverb_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_freeverb_free(t_hoa_freeverb *x);
+
+void hoa_freeverb_size(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_freeverb_damp(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_freeverb_dry(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_freeverb_wet(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_freeverb_spread(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_freeverb_fspread(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_freeverb_lspread(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_freeverb_freeze(t_hoa_freeverb *x, t_symbol *sym, long argc, t_atom *argv);
+
+void hoa_freeverb_dsp(t_hoa_freeverb *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_freeverb_perform(t_hoa_freeverb *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_freeverb_class;
+
+extern "C" void setup_hoa0x2efreeverb_tilde(void)
 {
     t_eclass *c;
     c = class_new("hoa.freeverb~", (method)hoa_freeverb_new,(method)hoa_freeverb_free, sizeof(t_hoa_freeverb), 0L, A_GIMME, 0);
@@ -46,7 +68,6 @@ void setup_hoa0x2efreeverb_tilde(void)
     
     class_register(CLASS_BOX, c);
     hoa_freeverb_class = c;
-}
 }
 
 void *hoa_freeverb_new(t_symbol *s, long argc, t_atom *argv)

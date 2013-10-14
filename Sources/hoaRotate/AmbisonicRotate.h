@@ -140,6 +140,26 @@ public:
 			}
 		}
 	}
+    
+    inline void process(float** anIOvector)
+	{
+        float   *negVector, *posVector;
+        float   negValue, posValue, cosinus, sinus;
+		for (int i = 1; i <= m_order; i++)
+		{
+            cosinus = m_harmonicCos[i-1];
+            sinus   = m_harmonicSin[i-1];
+            negVector = anIOvector[2*i];
+            posVector = anIOvector[2*i-1];
+			for(int j = 0; j < m_vector_size; j++)
+			{
+                negValue = anIOvector[2*i][j];
+                posValue = anIOvector[2*i-1][j];
+				negVector[j]	= cosinus * negValue - sinus * posValue;
+				posVector[j]	= sinus * negValue + cosinus * posValue;
+			}
+		}
+	}
 	
 };
 

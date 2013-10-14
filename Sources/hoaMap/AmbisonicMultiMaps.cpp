@@ -79,6 +79,31 @@ long AmbisonicsMultiMaps::getRamp()
     return m_maps[0]->getRamp();
 }
 
+void AmbisonicsMultiMaps::setNumberOfSources(long aNumberOfSources)
+{
+    if(aNumberOfSources > 0)
+    {
+        if(aNumberOfSources > m_number_of_sources)
+        {
+            for(int i = m_number_of_sources; i < aNumberOfSources; i++)
+            {
+                m_maps.push_back(new AmbisonicMap(m_order, m_vector_size));
+                setCoordinatesPolar(i, 1., 0.);
+                m_mute[i] = 0;
+            }
+        }
+        else
+        {
+            for(int i = m_number_of_sources; i > aNumberOfSources; i--)
+            {
+                m_maps.pop_back();
+            }
+        }
+        m_number_of_sources = m_maps.size();
+        setMuted(0, getMuted(0));
+    }
+}
+
 void AmbisonicsMultiMaps::setVectorSize(long aVectorSize)
 {
 	m_vector_size = Tools::clip_power_of_two(aVectorSize);
