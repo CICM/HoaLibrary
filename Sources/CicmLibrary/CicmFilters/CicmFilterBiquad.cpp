@@ -169,40 +169,40 @@ void FilterBiquad::computeCoefficients()
     {
         if (m_gain >= 0.)
         {
-            norm = 1 / (1 + sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor);
-            m_coeff_a0 = (1 + sqrt(2*gain) * m_frequency_factor + gain * m_frequency_factor * m_frequency_factor) * norm;
+            norm = 1 / (1 + sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor);
+            m_coeff_a0 = (1 + sqrt(2.*gain) * m_frequency_factor + gain * m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_a1 = 2 * (gain * m_frequency_factor * m_frequency_factor - 1) * norm;
             m_coeff_a2 = (1 - sqrt(2*gain) * m_frequency_factor + gain * m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_b1 = 2 * (m_frequency_factor * m_frequency_factor - 1) * norm;
-            m_coeff_b2 = (1 - sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
+            m_coeff_b2 = (1 - sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
         }
         else
         {
-            norm = 1 / (1 + sqrt(2*gain) * m_frequency_factor + gain * m_frequency_factor * m_frequency_factor);
-            m_coeff_a0 = (1 + sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
+            norm = 1 / (1 + sqrt(2.*gain) * m_frequency_factor + gain * m_frequency_factor * m_frequency_factor);
+            m_coeff_a0 = (1 + sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_a1 = 2 * (m_frequency_factor * m_frequency_factor - 1) * norm;
-            m_coeff_a2 = (1 - sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
+            m_coeff_a2 = (1 - sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_b1 = 2 * (gain * m_frequency_factor * m_frequency_factor - 1) * norm;
-            m_coeff_b2 = (1 - sqrt(2*gain) * m_frequency_factor + gain * m_frequency_factor * m_frequency_factor) * norm;
+            m_coeff_b2 = (1 - sqrt(2.*gain) * m_frequency_factor + gain * m_frequency_factor * m_frequency_factor) * norm;
         }
     }
     else if(m_type == Cicm_Biquad_Highshelf)
     {
         if (m_gain >= 0.)
         {
-            norm = 1 / (1 + sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor);
+            norm = 1 / (1 + sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor);
             m_coeff_a0 = (gain + sqrt(2*gain) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_a1 = 2 * (m_frequency_factor * m_frequency_factor - gain) * norm;
             m_coeff_a2 = (gain - sqrt(2*gain) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_b1 = 2 * (m_frequency_factor * m_frequency_factor - 1) * norm;
-            m_coeff_b2 = (1 - sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
+            m_coeff_b2 = (1 - sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
         }
         else
         {
             norm = 1 / (gain + sqrt(2*gain) * m_frequency_factor + m_frequency_factor * m_frequency_factor);
-            m_coeff_a0 = (1 + sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
+            m_coeff_a0 = (1 + sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_a1 = 2 * (m_frequency_factor * m_frequency_factor - 1) * norm;
-            m_coeff_a2 = (1 - sqrt(2) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
+            m_coeff_a2 = (1 - sqrt(2.) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
             m_coeff_b1 = 2 * (m_frequency_factor * m_frequency_factor - gain) * norm;
             m_coeff_b2 = (gain - sqrt(2*gain) * m_frequency_factor + m_frequency_factor * m_frequency_factor) * norm;
         }

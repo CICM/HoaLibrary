@@ -30,20 +30,20 @@
 #ifdef _WINDOWS
 #include "hoaAmbisonics/AmbisonicsViewer.h"
 //#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaEncoder/AmbisonicsEncoder.h"
+#include "hoaEncoder/AmbisonicEncoder.h"
 #include "hoaFreeverb/AmbisonicFreeverb.h"
 #include "hoaRotate/AmbisonicRotate.h"
-#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
-#include "hoaMap/AmbisonicMultiMaps.h"
+//#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
+//#include "hoaMap/AmbisonicMultiMaps.h"
 #include "hoaMap/AmbisonicSourcesTrajectory.h"
 #include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaOptim/AmbisonicsOptim.h"
+#include "hoaOptim/AmbisonicOptim.h"
 #include "hoaProjector/AmbisonicProjector.h"
-#include "hoaRecomposer/AmbisonicsRecomposer.h"
+#include "hoaRecomposer/AmbisonicRecomposer.h"
 #include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
 #include "hoaSpace/AmbisonicSpace.h"
 #include "hoaVector/AmbisonicVector.h"
-#include "hoaWider/AmbisonicsWider.h"
+#include "hoaWider/AmbisonicWider.h"
 #endif
 
 #ifdef __APPLE__
