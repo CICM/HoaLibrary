@@ -80,7 +80,7 @@ void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
 t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
-void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid, t_pt pt);
+void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid);
 
 void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av);
 void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av);
@@ -275,7 +275,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
          {
              ac = 0;
              free(av);
-             av = NULL;;
+             av = NULL;
          }
          dictionary_copyatoms(d, gensym("groups_parameters"), &ac, &av);
          hoamap_parameters_groups(x, ac, av);
@@ -1349,8 +1349,7 @@ void hoamap_paint(t_hoamap *x, t_object *view)
     t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	x->rect = rect;
-
-    /* Pas de groupes avec un nombre de source inférieur à 2 et pas de doublons de groupes */
+    
     x->f_source_manager->groupClean();
 	draw_background(x, view, &rect);
     draw_rect_selection(x, view, &rect);
@@ -1463,6 +1462,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
     {
         jtl = jtextlayout_create();
         jgraphics_set_line_width(g, 1.);
+    
 		for(i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
@@ -1475,7 +1475,6 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                 sourceColor.blue = x->f_source_manager->sourceGetColor(i).blue;
                 sourceColor.alpha = x->f_source_manager->sourceGetColor(i).alpha;
 
-                
                 if(x->f_source_manager->sourceGetDescription(i).c_str()[0])
                     sprintf(description,"%i : %s", i, x->f_source_manager->sourceGetDescription(i).c_str());
                 else
@@ -1516,7 +1515,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
                     jgraphics_stroke(g);
                 }
-                if(x->f_source_manager->sourceGetMute(i))
+                else
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor);
                     jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, font_size * 10., font_size * 2., ETEXT_CENTER, ETEXT_NOWRAP);
@@ -1707,13 +1706,14 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     }
     if(modifiers == EMOD_CMD)
     {
-        t_pt pos = pt;
+        t_pt pos = ebox_get_mouse_global_position((t_jbox *)x);
         x->f_index_of_source_to_remove = x->f_index_of_selected_source;
         x->f_index_of_group_to_remove = x->f_index_of_selected_group;
         
-        if(x->f_index_of_selected_group != -1) 
+        
+        if(x->f_index_of_selected_group != -1)
         {
-            t_jpopupmenu* popup = jpopupmenu_create(gensym("group"));
+            t_jpopupmenu* popup = jpopupmenu_create((t_jbox *)x, gensym("group"));
             jpopupmenu_setfont(popup, x->jfont);
             x->f_index_of_group_to_color = x->f_index_of_selected_group;
             x->f_index_of_selected_group = -1;
@@ -1728,7 +1728,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
         else if(x->f_index_of_selected_source != -1)
         {
-            t_jpopupmenu* popup = jpopupmenu_create(gensym("source"));
+            t_jpopupmenu* popup = jpopupmenu_create((t_jbox *)x, gensym("source"));
             jpopupmenu_setfont(popup, x->jfont);
             x->f_index_of_source_to_color = x->f_index_of_selected_source;
             x->f_index_of_selected_source = -1;
@@ -1745,7 +1745,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         }
         else
         {
-            t_jpopupmenu* popup = jpopupmenu_create(gensym("nothing"));
+            t_jpopupmenu* popup = jpopupmenu_create((t_jbox *)x, gensym("nothing"));
             jpopupmenu_setfont(popup, x->jfont);
             x->f_index_of_group_to_color = -1;
             x->f_index_of_source_to_color = -2;
@@ -1768,7 +1768,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         clock_set(x->f_clock, 20);
 }
 
-void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid, t_pt pt)
+void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid)
 {
     if(s == gensym("group"))
     {
@@ -1846,30 +1846,23 @@ void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid, t_pt pt)
     }
     else if(s ==gensym("nothing"))
     {
-        int check = 0;
         switch (itemid)
         {
             case 1:
             {
-                for(int i = 0; check == 0; i++)
-                {
-                    if (x->f_source_manager->sourceGetExistence(i) < 1)
-                    {
-                        check = 1;
-                        x->f_index_of_selected_source = i;
-                        //hoamap_mousedrag(x, (t_object *)x->j_box.e_glist, pt, 0);
-                    }
-                }
+                x->f_source_manager->sourceNewAbscissa(0.);
                 break;
             }
-            case 2: // Clear All
+            case 2:
             {
-                hoamap_clear_all(x);
+                x->f_source_manager->clearAll();
                 break;
             }
-            default:
-                break;
         }
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+        jbox_redraw((t_jbox *)x);
+        hoamap_bang(x);
     }
     
 }

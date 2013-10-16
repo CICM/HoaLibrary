@@ -12,94 +12,19 @@ a lot of new signal processing are allowed like diffuse sound field
 synthesis \, perspective distorsion or spatial filtering.;
 #X obj 802 -423 phasor~ 1.33;
 #X obj 649 -423 phasor~ 1;
-#X obj 379 -141 hoa.scope~ @order [ 3 ] @patching_rect { 0 0 225 225
-} @order { 3 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles
-{ 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor
-{ 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 3 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 3 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 3 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 3 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 3 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 184 184 } @order
-{ 3 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 184 184 } @order { 3 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 184 184 } @order { 3 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 184 184 } @order
-{ 3 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 184 184 } @order { 3 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 };
+#X obj 379 -141 hoa.scope~ @patching_rect [ 379 -141 184 184 ] @size
+[ 184 184 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 3 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
 #X obj 246 -592 hoa.pi 2;
 #X obj 261 -570 phasor~ 0.2;
 #X obj 246 -548 *~;
 #X obj 69 -164 hoa.optim~ 3 @mode [ inPhase ];
-#X obj 69 -82 hoa.meter~ @loudspeakers [ 8 ] @patching_rect [ 0 0 184
-184 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize [
-0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles [ 0 45 90 135
-180 225 270 315 288 324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset
-[ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds [
-3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [ 0.55
-0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
-0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
-@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 184 184 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 184 184 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 184 184 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-] @patching_rect [ 0 0 184 184 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder
-[ 3 ] @metersize [ 0.8 ] @orientation [ 0 ] @loudspeakers [ 8 ] @angles
+#X obj 69 -82 hoa.meter~ @patching_rect [ 69 -82 184 184 ] @size [
+184 184 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 8 ] @angles
 [ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
@@ -109,85 +34,27 @@ synthesis \, perspective distorsion or spatial filtering.;
 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
-#X obj 609 -625 hoa.map @patching_rect [ 0 0 184 184 ] @bgcolor [ 0.9
-0.9 0.9 1 ] @bgcolor2 [ 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor
-[ 0.36 0.37 0.37 0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters
-[ source 0 -0.900621 -1.73913 0 0.2 0.2 0.5 1 Tic source 1 1.36646
-1.21118 0 0.5 0.2 0.2 1 Tac ] groups_parameters [ group 0 2 0 1 0 0.2
-0.5 0.2 1 Nut ] @patching_rect [ 0 0 184 184 ] @bgcolor [ 0.9 0.9 0.9
-1 ] @bgcolor2 [ 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [
-0.36 0.37 0.37 0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters
-[ source 0 -0.52795 -0.714286 0 0.2 0.2 0.5 1 Tic source 1 -0.993789
-0.341615 0 0.5 0.2 0.2 1 Tac ] groups_parameters [ group 0 2 0 1 0
-0.2 0.5 0.2 1 Nut ] @patching_rect [ 0 0 184 184 ] @bgcolor [ 0.9 0.9
-0.9 1 ] @bgcolor2 [ 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor
-[ 0.36 0.37 0.37 0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters
-[ source 0 0.869565 -0.341615 0 0.2 0.2 0.5 1 Tic source 1 0.745342
-0.559006 0 0.5 0.2 0.2 1 Tac ] groups_parameters [ group 0 2 0 1 0
-0.2 0.5 0.2 1 Nut ] @patching_rect [ 0 0 184 184 ] @bgcolor [ 0.9 0.9
-0.9 1 ] @bgcolor2 [ 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor
-[ 0.36 0.37 0.37 0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters
-[ source 0 0.869565 -0.52795 0 0.2 0.2 0.5 1 Tic source 1 0.745342
-0.559006 0 0.5 0.2 0.2 1 Tac ] groups_parameters [ group 0 2 0 1 0
-0.2 0.5 0.2 1 Nut ] @patching_rect [ 0 0 184 184 ] @bgcolor [ 0.9 0.9
-0.9 1 ] @bgcolor2 [ 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor
-[ 0.36 0.37 0.37 0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters
-[ source 0 -1.21118 0.341615 0 0.2 0.2 0.5 1 Tic source 1 1.61491 1.02484
-0 0.5 0.2 0.2 1 Tac ] groups_parameters [ group 0 2 0 1 0 0.2 0.5 0.2
-1 Nut ];
-#X obj -336 -499 hoa.space @channels [ 8 ] @patching_rect [ 0 0 184
-184 ] @patching_rect [ 0 0 184 184 ] @channels [ 8 ] @coeffs [ 0.318392
-1 0.136865 0.0664183 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#X obj 609 -625 hoa.map @patching_rect [ 609 -625 184 184 ] @size [
+184 184 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
+0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.37 0.37
+0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters [ source
+0 -0.260094 -1.39751 0 0.2 0.2 0.5 1 Tic -354 -655 cnv 15 552 40 empty
+\$0-pddp.cnv.header hoa.library 3 ] groups_parameters [ group 0 2 0
+1 0 0.2 0.5 0.2 1 Nut ];
+#X obj -336 -499 hoa.space @patching_rect [ -336 -499 184 184 ] @size
+[ 184 184 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @channels [ 8 ] @coeffs [ 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ]
-@bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor
-[ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ] @patching_rect [ 0 0 184 184
-] @channels [ 8 ] @coeffs [ 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7
-0.7 0.7 1 ] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6
-1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ] @patching_rect
-[ 0 0 184 184 ] @channels [ 8 ] @coeffs [ 1 1 1 1 1 1 1 1 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ]
-@bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor
-[ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ] @patching_rect
-[ 0 0 184 184 ] @channels [ 8 ] @coeffs [ 0.131762 0.110343 1 0 0.0149294
-0.135529 0 0.126042 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor
-[ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ]
-@circolor [ 0.7 0.7 0.7 1 ] @patching_rect [ 0 0 184 184 ] @channels
-[ 8 ] @coeffs [ 0.296166 0 0 0 0 0.244804 1 1 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [
-0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4
-0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ];
+0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5 0.5
+1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7
+0.7 0.7 1 ];
 #X obj 70 -325 hoa.delay~ 3 post ************;
 #X obj -127 -239 hoa.recomposer~ 3 8 **********;
 #X obj -127 -291 hoa.space~ 8 *****************;
@@ -195,13 +62,12 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X obj -127 -462 hoa.grain~ 3 no **************;
 #X obj 70 -392 hoa.ringmod~ 3 post **********;
 #X obj 69 -517 hoa.encoder~ 3 ***************;
-#X obj 461 -481 hoa.pi 2;
+#X obj 476 -480 hoa.pi 2;
 #X obj 461 -437 *~;
 #X obj 649 -336 hoa.freeverb~ 3 **********;
 #X obj 649 -381 hoa.map~ 3 2 *************;
 #X obj 69 -571 noise~;
 #X obj 320 -365 hoa.wider~ 3 *************;
-#X obj 476 -459 phasor~ -0.2;
 #X obj 320 -406 hoa.encoder~ 3 *******;
 #X obj 557 -331 hoa.pi 0.25;
 #X obj 557 -360 loadbang;
@@ -213,24 +79,26 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X obj 69 -137 hoa.decoder~ 3 ambisonic 8 ---;
 #X obj 99 -105 dac~ 1 2 3 4 5 6 7 8;
 #X obj 69 -542 *~ 0.02;
-#X obj 320 -502 osc~ 220;
 #X obj 320 -470 *~ 0.3;
-#X obj 473 -388 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 -0.22 256;
+#X obj 473 -388 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
 #X obj 380 -257 hoa.rotate~ 3 ****************;
 #X obj -127 -488 *~ 0.3;
+#X obj 476 -504 loadbang;
+#X obj 461 -459 phasor~ -0.5;
+#X obj 320 -502 osc~ 330;
 #X connect 4 0 24 1;
 #X connect 5 0 24 0;
 #X connect 7 0 9 0;
 #X connect 8 0 9 1;
 #X connect 9 0 20 1;
-#X connect 10 0 36 0;
-#X connect 10 1 36 1;
-#X connect 10 2 36 2;
-#X connect 10 3 36 3;
-#X connect 10 4 36 4;
-#X connect 10 5 36 5;
-#X connect 10 6 36 6;
+#X connect 10 0 35 0;
+#X connect 10 1 35 1;
+#X connect 10 2 35 2;
+#X connect 10 3 35 3;
+#X connect 10 4 35 4;
+#X connect 10 5 35 5;
+#X connect 10 6 35 6;
 #X connect 12 0 24 0;
 #X connect 13 0 16 0;
 #X connect 14 0 10 0;
@@ -284,15 +152,15 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X connect 20 4 19 4;
 #X connect 20 5 19 5;
 #X connect 20 6 19 6;
-#X connect 21 0 22 0;
-#X connect 22 0 28 1;
-#X connect 23 0 42 0;
-#X connect 23 1 42 1;
-#X connect 23 2 42 2;
-#X connect 23 3 42 3;
-#X connect 23 4 42 4;
-#X connect 23 5 42 5;
-#X connect 23 6 42 6;
+#X connect 21 0 22 1;
+#X connect 22 0 27 1;
+#X connect 23 0 40 0;
+#X connect 23 1 40 1;
+#X connect 23 2 40 2;
+#X connect 23 3 40 3;
+#X connect 23 4 40 4;
+#X connect 23 5 40 5;
+#X connect 23 6 40 6;
 #X connect 24 0 23 0;
 #X connect 24 1 23 1;
 #X connect 24 2 23 2;
@@ -300,60 +168,61 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X connect 24 4 23 4;
 #X connect 24 5 23 5;
 #X connect 24 6 23 6;
-#X connect 25 0 38 0;
-#X connect 26 0 42 0;
-#X connect 26 1 42 1;
-#X connect 26 2 42 2;
-#X connect 26 3 42 3;
-#X connect 26 4 42 4;
-#X connect 26 5 42 5;
-#X connect 26 6 42 6;
-#X connect 27 0 22 1;
-#X connect 28 0 26 0;
-#X connect 28 1 26 1;
-#X connect 28 2 26 2;
-#X connect 28 3 26 3;
-#X connect 28 4 26 4;
-#X connect 28 5 26 5;
-#X connect 28 6 26 6;
-#X connect 29 0 42 7;
-#X connect 30 0 29 0;
-#X connect 31 0 7 0;
-#X connect 34 0 12 0;
-#X connect 35 0 43 0;
-#X connect 36 0 11 0;
-#X connect 36 0 37 0;
-#X connect 36 1 11 1;
-#X connect 36 1 37 1;
-#X connect 36 2 11 2;
-#X connect 36 2 37 2;
-#X connect 36 3 11 3;
-#X connect 36 3 37 3;
-#X connect 36 4 11 4;
-#X connect 36 4 37 4;
-#X connect 36 5 11 5;
-#X connect 36 5 37 5;
-#X connect 36 6 11 6;
-#X connect 36 6 37 6;
-#X connect 36 7 11 7;
-#X connect 36 7 37 7;
-#X connect 38 0 20 0;
-#X connect 39 0 40 0;
-#X connect 40 0 28 0;
-#X connect 41 0 26 7;
-#X connect 42 0 10 0;
-#X connect 42 0 6 0;
-#X connect 42 1 10 1;
-#X connect 42 1 6 1;
-#X connect 42 2 10 2;
-#X connect 42 2 6 2;
-#X connect 42 3 10 3;
-#X connect 42 3 6 3;
-#X connect 42 4 10 4;
-#X connect 42 4 6 4;
-#X connect 42 5 10 5;
-#X connect 42 5 6 5;
-#X connect 42 6 10 6;
-#X connect 42 6 6 6;
-#X connect 43 0 18 0;
+#X connect 25 0 37 0;
+#X connect 26 0 40 0;
+#X connect 26 1 40 1;
+#X connect 26 2 40 2;
+#X connect 26 3 40 3;
+#X connect 26 4 40 4;
+#X connect 26 5 40 5;
+#X connect 26 6 40 6;
+#X connect 27 0 26 0;
+#X connect 27 1 26 1;
+#X connect 27 2 26 2;
+#X connect 27 3 26 3;
+#X connect 27 4 26 4;
+#X connect 27 5 26 5;
+#X connect 27 6 26 6;
+#X connect 28 0 40 7;
+#X connect 29 0 28 0;
+#X connect 30 0 7 0;
+#X connect 33 0 12 0;
+#X connect 34 0 41 0;
+#X connect 35 0 11 0;
+#X connect 35 0 36 0;
+#X connect 35 1 11 1;
+#X connect 35 1 36 1;
+#X connect 35 2 11 2;
+#X connect 35 2 36 2;
+#X connect 35 3 11 3;
+#X connect 35 3 36 3;
+#X connect 35 4 11 4;
+#X connect 35 4 36 4;
+#X connect 35 5 11 5;
+#X connect 35 5 36 5;
+#X connect 35 6 11 6;
+#X connect 35 6 36 6;
+#X connect 35 7 11 7;
+#X connect 35 7 36 7;
+#X connect 37 0 20 0;
+#X connect 38 0 27 0;
+#X connect 39 0 26 7;
+#X connect 40 0 10 0;
+#X connect 40 0 6 0;
+#X connect 40 1 10 1;
+#X connect 40 1 6 1;
+#X connect 40 2 10 2;
+#X connect 40 2 6 2;
+#X connect 40 3 10 3;
+#X connect 40 3 6 3;
+#X connect 40 4 10 4;
+#X connect 40 4 6 4;
+#X connect 40 5 10 5;
+#X connect 40 5 6 5;
+#X connect 40 6 10 6;
+#X connect 40 6 6 6;
+#X connect 41 0 18 0;
+#X connect 42 0 21 0;
+#X connect 43 0 22 0;
+#X connect 44 0 38 0;
 #X coords 0 764 1 763 100 60 0;
