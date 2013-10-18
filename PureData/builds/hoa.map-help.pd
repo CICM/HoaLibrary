@@ -1,16 +1,14 @@
-#N canvas 458 43 1032 752 10;
+#N canvas 52 43 1032 752 10;
 #X obj 160 -153 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
-#X msg 160 -114 patching_rect 0 0 \$1 \$1;
 #X obj -474 -208 hoa.map @patching_rect [ -474 -208 300 300 ] @size
 [ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
 [ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.36 0.37
-0.5 ] @outputmode [ 0 ] @zoom [ 0.48 ] sources_parameters [ source
-0 0.40625 0.534722 1 0.2 0.2 0.2 1 s_nosymbol source 1 -0.684028 0.270833
-0 0.2 0.2 0.2 1 s_nosymbol     ,     ] groups_parameters [ group
-1 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol ] slots_parameters [ slot 0 slot
-1 slot 2 ];
+0.5 ] @outputmode [ 0 ] @zoom [ 0.532488 ] sources_parameters [ source
+0 -1.2565 -0.182599 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.222431 0.699634
+0 0.2 0.2 0.2 1 s_nosymbol ] groups_parameters [ group 0 2 0 1 0 0.2
+0.2 0.2 1 s_nosymbol ] slots_parameters [ slot 0 slot 1 slot 2 ];
 #X obj -545 -425 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map 3
 12 0 18 -204280 -1 0;
 #X text -540 -404 A graphic user interface to spatialize sources on
@@ -32,8 +30,8 @@ on it and select "Mute" or "Unmute".;
 #X obj -474 226 hoa.map~ 3 2 -------;
 #X obj -446 289 dac~ 1 2;
 #X obj -474 257 hoa.bin_sp_order3 --;
-#X msg -322 -290 \; pd dsp 1;
-#X msg -321 -253 \; pd dsp 0;
+#X msg -235 -291 \; pd dsp 1;
+#X msg -234 -254 \; pd dsp 0;
 #X text 21 -404 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
 #X text 21 -420 hoalibrary | Julien Colafrancesco \, Pierre Guillot
@@ -47,7 +45,7 @@ on it and select "Mute" or "Unmute".;
 #X obj -108 -145 hoa.map_mess;
 #X text -116 -18 Look here for outputs;
 #X obj -111 8 hoa.map_outs;
-#X obj -217 -232 receive maphelp;
+#X obj -474 -241 receive maphelp;
 #X text 158 -178 Appearance :;
 #X obj 160 118 send maphelp;
 #X text 228 -155 size;
@@ -67,35 +65,31 @@ on it and select "Mute" or "Unmute".;
 #X obj -263 191 *~ 300;
 #X obj -262 170 osc~ 33;
 #X obj -463 153 *~ 0.05;
-#X msg -469 -276 source 1 car 0 1;
-#X msg -475 -243 source 2 car 0 1;
-#X msg -247 -278 group 1 set 0 1;
-#X connect 0 0 1 0;
-#X connect 1 0 28 0;
-#X connect 2 0 10 0;
-#X connect 10 0 12 0;
-#X connect 10 1 12 1;
-#X connect 10 2 12 2;
-#X connect 10 3 12 3;
-#X connect 10 4 12 4;
-#X connect 10 5 12 5;
-#X connect 10 6 12 6;
-#X connect 12 0 11 0;
-#X connect 12 1 11 1;
-#X connect 26 0 2 0;
-#X connect 30 0 28 0;
-#X connect 34 0 28 0;
-#X connect 35 0 28 0;
-#X connect 37 0 28 0;
-#X connect 38 0 45 0;
-#X connect 39 0 42 0;
-#X connect 40 0 39 0;
-#X connect 41 0 39 1;
-#X connect 42 0 10 1;
-#X connect 43 0 40 0;
-#X connect 44 0 43 0;
-#X connect 45 0 10 0;
-#X connect 46 0 2 0;
-#X connect 47 0 2 0;
-#X connect 48 0 2 0;
+#X msg 160 -114 size \$1 \$1;
+#X text -119 -224 Mousewheel and alt to change the zoom.;
+#X connect 0 0 45 0;
+#X connect 1 0 9 0;
+#X connect 9 0 11 0;
+#X connect 9 1 11 1;
+#X connect 9 2 11 2;
+#X connect 9 3 11 3;
+#X connect 9 4 11 4;
+#X connect 9 5 11 5;
+#X connect 9 6 11 6;
+#X connect 11 0 10 0;
+#X connect 11 1 10 1;
+#X connect 25 0 1 0;
+#X connect 29 0 27 0;
+#X connect 33 0 27 0;
+#X connect 34 0 27 0;
+#X connect 36 0 27 0;
+#X connect 37 0 44 0;
+#X connect 38 0 41 0;
+#X connect 39 0 38 0;
+#X connect 40 0 38 1;
+#X connect 41 0 9 1;
+#X connect 42 0 39 0;
+#X connect 43 0 42 0;
+#X connect 44 0 9 0;
+#X connect 45 0 27 0;
 #X coords 0 752 1 751 85 60 0;

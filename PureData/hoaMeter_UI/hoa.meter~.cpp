@@ -324,7 +324,8 @@ t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_at
                 
                 angles_of_loudspeakers_set(x, NULL, ac, av);
                 jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
-               
+                jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
+                
                 canvas_resume_dsp(dspState);
             }
         }
