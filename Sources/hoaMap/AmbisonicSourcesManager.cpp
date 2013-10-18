@@ -101,7 +101,7 @@ long SourcesManager::getNumberOfSources()
     long numberOfSources = 0;
     for(int i = 0; i < m_sources.size(); i++)
     {
-        if (m_sources[i]->getExistence())
+        if(m_sources[i]->getExistence())
             numberOfSources++;
     }
     return  numberOfSources;

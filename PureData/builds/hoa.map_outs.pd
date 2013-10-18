@@ -3,31 +3,21 @@
 [ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
 [ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.36 0.37
-0.5 ] @outputmode [ 0 ] @zoom [ 0.312488 ] sources_parameters [ source
-0 -1.24805 1.18404 0 0.2 0.2 0.2 1 s_nosymbol           ] groups_parameters
-[ group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol ] slots_parameters [ slot
-0 slot 1 slot 2 slot 3 ] trajectory_parameters [ slot 0 slot 1 slot
-2 slot 3 slot 4 slot 5 slot 6 slot 7 slot 8 slot 9 slot 10 slot 11
-slot 12 slot 13 slot 14 slot 15 slot 16 slot 17 slot 18 slot 19 slot
-20 slot 21 slot 22 slot 23 slot 24 slot 25 slot 26 slot 27 slot 28
-slot 29 slot 30 slot 31 slot 32 slot 33 slot 34 slot 35 slot 36 slot
-37 slot 38 slot 39 slot 40 slot 41 slot 42 slot 43 slot 44 slot 45
-slot 46 slot 47 slot 48 slot 49 slot 50 slot 51 slot 52 slot 53 slot
-54 slot 55 slot 56 slot 57 slot 58 slot 59 slot 60 slot 61 slot 62
-slot 63 slot 64 slot 65 slot 66 slot 67 slot 68 slot 69 slot 70 slot
-71 slot 72 slot 73 slot 74 slot 75 slot 76 slot 77 slot 78 slot 79
-slot 80 slot 81 slot 82 slot 83 slot 84 slot 85 slot 86 slot 87 slot
-88 slot 89 slot 90 slot 91 slot 92 slot 93 slot 94 slot 95 slot 96
-];
-#X obj -538 -384 nbx 10 14 -1e+37 1e+37 0 0 empty empty empty 0 -8
-0 10 -262144 -1 -1 0.312488 256;
-#X msg -524 -352 zoom \$1;
-#X obj -541 -256 vsl 15 294 0 127 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 9228 1;
-#X obj -588 -171 / 128;
-#X text -537 -403 Set the zoom;
-#X obj -587 -364 loadbang;
-#X msg -587 -339 40;
+0.5 ] @outputmode [ 0 ] @zoom [ 0.312488 ] sources_parameters [  
+300 300 ] @fontname [ helvetica ] @fontweight ] slots_parameters [
+slot 0 slot 1 slot 2 slot 3 ] trajectory_parameters [ slot 0 slot 1
+slot 2 slot 3 slot 4 slot 5 slot 6 slot 7 slot 8 slot 9 slot 10 slot
+11 slot 12 slot 13 slot 14 slot 15 slot 16 slot 17 slot 18 slot 19
+slot 20 slot 21 slot 22 slot 23 slot 24 slot 25 slot 26 slot 27 slot
+28 slot 29 slot 30 slot 31 slot 32 slot 33 slot 34 slot 35 slot 36
+slot 37 slot 38 slot 39 slot 40 slot 41 slot 42 slot 43 slot 44 slot
+45 slot 46 slot 47 slot 48 slot 49 slot 50 slot 51 slot 52 slot 53
+slot 54 slot 55 slot 56 slot 57 slot 58 slot 59 slot 60 slot 61 slot
+62 slot 63 slot 64 slot 65 slot 66 slot 67 slot 68 slot 69 slot 70
+slot 71 slot 72 slot 73 slot 74 slot 75 slot 76 slot 77 slot 78 slot
+79 slot 80 slot 81 slot 82 slot 83 slot 84 slot 85 slot 86 slot 87
+slot 88 slot 89 slot 90 slot 91 slot 92 slot 93 slot 94 slot 95 slot
+96 ];
 #X obj -524 74 send map_outs_sources;
 #X obj -378 76 send map_outs_groups;
 #X obj -231 77 send map_outs_infos;
@@ -85,43 +75,37 @@ messages.;
 #X obj -102 -46 print source;
 #X obj -57 -15 print slot;
 #X obj -147 -147 route list;
-#X connect 0 0 8 0;
-#X connect 0 1 9 0;
-#X connect 0 2 10 0;
-#X connect 1 0 2 0;
-#X connect 2 0 0 0;
-#X connect 3 0 4 0;
-#X connect 4 0 1 0;
-#X connect 6 0 7 0;
-#X connect 7 0 3 0;
-#X connect 11 0 0 0;
-#X connect 13 0 0 0;
-#X connect 15 0 17 0;
-#X connect 17 0 19 0;
-#X connect 17 1 24 0;
-#X connect 19 0 20 0;
-#X connect 19 1 21 0;
-#X connect 19 2 22 0;
-#X connect 20 0 18 0;
-#X connect 24 0 25 0;
-#X connect 24 1 26 0;
-#X connect 24 2 27 0;
-#X connect 25 0 23 0;
-#X connect 28 0 0 0;
-#X connect 29 0 28 0;
-#X connect 30 0 32 0;
-#X connect 30 1 37 0;
-#X connect 32 0 33 0;
-#X connect 32 1 34 0;
-#X connect 32 2 35 0;
-#X connect 33 0 31 0;
-#X connect 37 0 38 0;
-#X connect 37 1 39 0;
-#X connect 37 2 40 0;
-#X connect 38 0 36 0;
-#X connect 41 0 30 0;
-#X connect 42 0 50 0;
-#X connect 47 0 46 0;
-#X connect 47 1 48 0;
-#X connect 47 2 49 0;
-#X connect 50 0 47 0;
+#X connect 0 0 1 0;
+#X connect 0 1 2 0;
+#X connect 0 2 3 0;
+#X connect 4 0 0 0;
+#X connect 6 0 0 0;
+#X connect 8 0 10 0;
+#X connect 10 0 12 0;
+#X connect 10 1 17 0;
+#X connect 12 0 13 0;
+#X connect 12 1 14 0;
+#X connect 12 2 15 0;
+#X connect 13 0 11 0;
+#X connect 17 0 18 0;
+#X connect 17 1 19 0;
+#X connect 17 2 20 0;
+#X connect 18 0 16 0;
+#X connect 21 0 0 0;
+#X connect 22 0 21 0;
+#X connect 23 0 25 0;
+#X connect 23 1 30 0;
+#X connect 25 0 26 0;
+#X connect 25 1 27 0;
+#X connect 25 2 28 0;
+#X connect 26 0 24 0;
+#X connect 30 0 31 0;
+#X connect 30 1 32 0;
+#X connect 30 2 33 0;
+#X connect 31 0 29 0;
+#X connect 34 0 23 0;
+#X connect 35 0 43 0;
+#X connect 40 0 39 0;
+#X connect 40 1 41 0;
+#X connect 40 2 42 0;
+#X connect 43 0 40 0;

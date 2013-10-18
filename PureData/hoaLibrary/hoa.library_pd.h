@@ -26,11 +26,12 @@
 #ifndef DEF_HOA_LIBRARY_PD
 #define DEF_HOA_LIBRARY_PD
 
-#include "../../Sources/HoaLibrary.h"
+
 extern "C"
 {
 #include "../../../PdEnhanced/Sources/pd_enhanced.h"
 }
+#include "../../Sources/HoaLibrary.h"
 
 extern "C" void setup_hoa0x2elibrary(void);
 
