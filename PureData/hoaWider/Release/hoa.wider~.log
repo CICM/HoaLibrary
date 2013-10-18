@@ -1,48 +1,5 @@
-﻿La génération a démarré 17/09/2013 23:46:44.
-     1>Projet "C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaWider\hoa.wider~.vcxproj" sur le nœud 2 (build cible(s)).
-     1>InitializeBuildStatus:
-         Mise à jour de l'horodatage "Release\hoa.wider~.unsuccessfulbuild".
-       ClCompile:
-         Toutes les sorties sont à jour.
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Release\hoa.wider~.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files (x86)\pd\bin" mkl_intel_c.lib mkl_sequential.lib mkl_core.lib "C:\Program Files (x86)\pd\bin" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\hoa.wider~.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaWider\Release\hoa.wider~.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Release\hoa.wider~.lib" /MACHINE:X86 /DLL Release\eattr_attr.obj
-         Release\eattr_getter.obj
-         Release\eattr_new.obj
-         Release\eattr_setter.obj
-         Release\ebox.obj
-         Release\ebox_draw.obj
-         Release\eclass.obj
-         Release\ecommon.obj
-         Release\egraphics.obj
-         Release\egraphics_color.obj
-         Release\egraphics_matrix.obj
-         Release\egraphics_paint.obj
-         Release\egraphics_path.obj
-         Release\egraphics_text.obj
-         Release\epopup.obj
-         Release\ewidget.obj
-         Release\CicmRingModulation.obj
-         Release\CicmDecorrelation.obj
-         Release\CicmEnvelope.obj
-         Release\CicmFilter.obj
-         Release\CicmFilterAllpass.obj
-         Release\CicmFilterBiquad.obj
-         Release\CicmFilterComb.obj
-         Release\CicmFilterDelay.obj
-         Release\CicmFilterDiffuser.obj
-         Release\CicmFilterFir.obj
-         Release\CicmFilterFixedDelay.obj
-         Release\CicmFilterOnePole.obj
-         Release\CicmOnePole.obj
-         Release\CicmQSGS.obj
-         Release\CicmLine.obj
-         Release\CicmFreeverb.obj
-         Release\Ambisonic.obj
-         Release\AmbisonicWider.obj
-         "Release\hoa.wider~.obj" /EXPORT:setup_hoa0x2ewider_tilde 
-     1>LINK : fatal error LNK1181: impossible d'ouvrir le fichier en entrée 'C:\Program Files (x86)\pd\bin.obj'
-     1>Génération du projet "C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaWider\hoa.wider~.vcxproj" terminée (build cible(s)) -- ÉCHEC.
-
-ÉCHEC de la build.
-
-Temps écoulé 00:00:00.21
+﻿  eattr_attr.obj : .netmodule ou module MSIL compilé avec /GL trouvé ; redémarrage de l'édition de liens avec /LTCG ; ajoutez /LTCG à la ligne de commande de l'édition de liens pour améliorer les performances de l'Éditeur de liens
+     Création de la bibliothèque ../builds/hoa.wider~.lib et de l'objet ../builds/hoa.wider~.exp
+  Génération de code en cours
+  Fin de la génération du code
+  hoa.wider~.vcxproj -> C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaWider\../builds/hoa.wider~.dll

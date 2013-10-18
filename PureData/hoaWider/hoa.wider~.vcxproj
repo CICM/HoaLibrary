@@ -11,22 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_attr.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_getter.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_new.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_setter.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox_draw.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\eclass\eclass.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_color.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_matrix.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_paint.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_path.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_text.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\epopup\epopup.cpp" />
-    <ClCompile Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.cpp" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_attr.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_getter.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_new.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_setter.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox_draw.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox_handle.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox_window.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eclass\eclass.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_color.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_forms.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_matrix.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_text.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\epopup\epopup.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.c" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.cpp" />
@@ -44,6 +45,9 @@
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.cpp" />
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicsViewer.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp" />
     <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp" />
     <ClCompile Include="hoa.wider~.cpp" />
   </ItemGroup>
@@ -61,6 +65,7 @@
     <ClInclude Include="..\..\..\PdEnhanced\Sources\pd_enhanced.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_BLAS_FFTW.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_INTEL.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.h" />
@@ -83,9 +88,11 @@
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmSignal.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h" />
-    <ClInclude Include="..\..\Sources\HoaLibrary.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicsViewer.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h" />
     <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h" />
-    <ClInclude Include="hoa.wider~.h" />
+    <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{079DD347-F5E0-4784-9BCE-AF551691BA41}</ProjectGuid>
@@ -116,38 +123,42 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../builds/</OutDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../builds/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>E:\pd\pd-0.35-1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\pd\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <Optimization>Disabled</Optimization>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386  /EXPORT:rossler_setup henon_setup ikeda_setup lorenz_setup %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>D:\downloads\pd\pd-0.35-test23\bin\pd.lib;D:\downloads\pd\pd-0.35-test23\bin\pthreadVC.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2ewider_tilde %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
-      <OutputFile>$(OutDir)cooled~.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>D:\downloads\pd\pd-0.35-test23\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\pd\src</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>NotSet</TargetMachine>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+      <OutputFile>../builds/$(ProjectName).dll</OutputFile>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -156,29 +167,29 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <OmitFramePointers>true</OmitFramePointers>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\pd\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level2</WarningLevel>
       <DebugInformationFormat>
       </DebugInformationFormat>
-      <CompileAs>CompileAsCpp</CompileAs>
+      <CompileAs>Default</CompileAs>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/EXPORT:setup_hoa0x2ewider_tilde %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>C:\Program Files (x86)\pd\bin;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2ewider_tilde %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../builds/$(ProjectName).dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\pd\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
