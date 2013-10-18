@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:hoaLibrary/hoa.library.xcodeproj">
+      location = "group:hoaLibrary/libhoa.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:hoaWider/hoa.wider~.xcodeproj">

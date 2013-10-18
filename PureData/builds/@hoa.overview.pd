@@ -39,22 +39,21 @@ synthesis \, perspective distorsion or spatial filtering.;
 [ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.37 0.37
 0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters [ source
-0 -0.260094 -1.39751 0 0.2 0.2 0.5 1 Tic -354 -655 cnv 15 552 40 empty
-\$0-pddp.cnv.header hoa.library 3 ] groups_parameters [ group 0 2 0
-1 0 0.2 0.5 0.2 1 Nut ];
+0 0.869565 0.248447 0 0.2 0.2 0.5 1 Tic source 1 -0.0310559 1.02484
+0 0.2 0.2 0.2 1 s_nosymbol ];
 #X obj -336 -499 hoa.space @patching_rect [ -336 -499 184 184 ] @size
 [ 184 184 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @channels [ 8 ] @coeffs [ 0 0 0 0 0 0
+[ regular ] @fontsize [ 11 ] @channels [ 8 ] @coeffs [ 0.382347 0.53433
+0.759026 0.51474 0.531958 0.35019 0.213793 0.583086 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5 0.5
-1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7
-0.7 0.7 1 ];
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor
+[ 0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4
+0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ];
 #X obj 70 -325 hoa.delay~ 3 post ************;
 #X obj -127 -239 hoa.recomposer~ 3 8 **********;
 #X obj -127 -291 hoa.space~ 8 *****************;
@@ -87,6 +86,7 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X obj 476 -504 loadbang;
 #X obj 461 -459 phasor~ -0.5;
 #X obj 320 -502 osc~ 330;
+#X obj -336 -521 loadbang;
 #X connect 4 0 24 1;
 #X connect 5 0 24 0;
 #X connect 7 0 9 0;
@@ -225,4 +225,5 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X connect 42 0 21 0;
 #X connect 43 0 22 0;
 #X connect 44 0 38 0;
+#X connect 45 0 13 0;
 #X coords 0 764 1 763 100 60 0;

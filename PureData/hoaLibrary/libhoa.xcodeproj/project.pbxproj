@@ -187,7 +187,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5913846F15DAA36D0029AD16 /* hoa.library.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = hoa.library.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		5913846F15DAA36D0029AD16 /* libhoa.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libhoa.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		59FB02F717A7FAA9001E977D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F26EF8F17E4498B005FCB97 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
 		8F26EF9017E4498B005FCB97 /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
@@ -382,14 +382,14 @@
 		5913846415DAA36D0029AD16 = {
 			isa = PBXGroup;
 			children = (
+				8F8245DB180BCCDE0080A749 /* hoa.library.cpp */,
+				8F8245FD180BCEC20080A749 /* hoa.library_pd.h */,
 				59FB02F717A7FAA9001E977D /* Accelerate.framework */,
 				8F8245D6180BCCDE0080A749 /* hoa.decoder~.cpp */,
 				8F8245D7180BCCDE0080A749 /* hoa.delay~.cpp */,
 				8F8245D8180BCCDE0080A749 /* hoa.encoder~.cpp */,
 				8F8245D9180BCCDE0080A749 /* hoa.freeverb~.cpp */,
 				8F8245DA180BCCDE0080A749 /* hoa.grain~.cpp */,
-				8F8245DB180BCCDE0080A749 /* hoa.library.cpp */,
-				8F8245FD180BCEC20080A749 /* hoa.library_pd.h */,
 				8F8245DC180BCCDE0080A749 /* hoa.map.cpp */,
 				8F8245DD180BCCDE0080A749 /* hoa.map~.cpp */,
 				8F8245DE180BCCDE0080A749 /* hoa.meter~.cpp */,
@@ -412,7 +412,7 @@
 		5913847015DAA36D0029AD16 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5913846F15DAA36D0029AD16 /* hoa.library.dylib */,
+				5913846F15DAA36D0029AD16 /* libhoa.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -994,9 +994,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5913846E15DAA36D0029AD16 /* hoa.library */ = {
+		5913846E15DAA36D0029AD16 /* libhoa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.library" */;
+			buildConfigurationList = 5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "libhoa" */;
 			buildPhases = (
 				5913846B15DAA36D0029AD16 /* Sources */,
 				5913846C15DAA36D0029AD16 /* Frameworks */,
@@ -1006,9 +1006,9 @@
 			);
 			dependencies = (
 			);
-			name = hoa.library;
+			name = libhoa;
 			productName = pd1;
-			productReference = 5913846F15DAA36D0029AD16 /* hoa.library.dylib */;
+			productReference = 5913846F15DAA36D0029AD16 /* libhoa.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -1019,7 +1019,7 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 			};
-			buildConfigurationList = 5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.library" */;
+			buildConfigurationList = 5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "libhoa" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1031,7 +1031,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5913846E15DAA36D0029AD16 /* hoa.library */,
+				5913846E15DAA36D0029AD16 /* libhoa */,
 			);
 		};
 /* End PBXProject section */
@@ -1177,6 +1177,7 @@
 		5913847515DAA36D0029AD16 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = /;
@@ -1197,7 +1198,7 @@
 					dynamic_lookup,
 				);
 				PRELINK_LIBS = "";
-				PRODUCT_NAME = hoa.library;
+				PRODUCT_NAME = libhoa;
 				USER_HEADER_SEARCH_PATHS = "/Developer/usr/include /usr/local/include";
 			};
 			name = Release;
@@ -1205,7 +1206,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "hoa.library" */ = {
+		5913846915DAA36D0029AD16 /* Build configuration list for PBXProject "libhoa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5913847215DAA36D0029AD16 /* Release */,
@@ -1213,7 +1214,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "hoa.library" */ = {
+		5913847315DAA36D0029AD16 /* Build configuration list for PBXNativeTarget "libhoa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5913847515DAA36D0029AD16 /* Release */,
