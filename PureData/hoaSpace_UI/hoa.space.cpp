@@ -31,7 +31,7 @@
 typedef struct _hoa_space
 {
     t_jbox                  j_box;
-    AmbisonicsViewer*       f_viewer;
+    AmbisonicViewer*       f_viewer;
     AmbisonicRecomposer*    f_recomposer;
     
     t_outlet*   f_out;
@@ -203,7 +203,7 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
         jbox_new((t_jbox *)x, 1, argc, argv);
         
         x->j_box.b_firstin = (t_object *)x;
-        x->f_viewer                 = new AmbisonicsViewer(1);
+        x->f_viewer                 = new AmbisonicViewer(1);
         x->f_recomposer             = new AmbisonicRecomposer(1, 4);
         x->f_out                    = listout(x);
         x->f_number_of_microphones  = 4;
@@ -709,7 +709,7 @@ t_max_err hoa_space_channels_set(t_hoa_space *x, t_object *attr, long argc, t_at
                 else
                     order = (x->f_number_of_microphones - 1) / 2;
                 
-                x->f_viewer         = new AmbisonicsViewer(order);
+                x->f_viewer         = new AmbisonicViewer(order);
                 x->f_recomposer		= new AmbisonicRecomposer(order, x->f_number_of_microphones, Hoa_Fixe);
                 
                 jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));

@@ -39,7 +39,63 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="hoa.wider~.cpp" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\estruct.h">
+      <Filter>PdEnhanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\pd_enhanced.h">
+      <Filter>PdEnhanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd.h">
+      <Filter>PdEnhanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd_max.h">
+      <Filter>PdEnhanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\eattr\eattr.h">
+      <Filter>PdEnhanced\eattr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ebox\ebox.h">
+      <Filter>PdEnhanced\ebox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\eclass\eclass.h">
+      <Filter>PdEnhanced\eclass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.h">
+      <Filter>PdEnhanced\ecommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.h">
+      <Filter>PdEnhanced\egraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epopup\epopup.h">
+      <Filter>PdEnhanced\epopup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.h">
+      <Filter>PdEnhanced\ewidget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmTuning.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h">
+      <Filter>HoaLibrary\hoaAmbisonics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h">
+      <Filter>HoaLibrary\hoaWider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_attr.c">
       <Filter>PdEnhanced\eattr</Filter>
     </ClCompile>
@@ -91,191 +147,15 @@
     <ClCompile Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.c">
       <Filter>PdEnhanced\ewidget</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilter.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFir.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterOnePole.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmOnePole.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.cpp">
       <Filter>HoaLibrary\CicmLibrary</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic.cpp">
       <Filter>HoaLibrary\hoaAmbisonics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.cpp">
-      <Filter>HoaLibrary\hoaAmbisonics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicsViewer.cpp">
-      <Filter>HoaLibrary\hoaAmbisonics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp">
-      <Filter>HoaLibrary\hoaAmbisonics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp">
       <Filter>HoaLibrary\hoaWider</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\pd_enhanced.h">
-      <Filter>PdEnhanced</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd.h">
-      <Filter>PdEnhanced</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd_max.h">
-      <Filter>PdEnhanced</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\estruct.h">
-      <Filter>PdEnhanced</Filter>
-    </ClInclude>
-    <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\eattr\eattr.h">
-      <Filter>PdEnhanced\eattr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\ebox\ebox.h">
-      <Filter>PdEnhanced\ebox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\eclass\eclass.h">
-      <Filter>PdEnhanced\eclass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.h">
-      <Filter>PdEnhanced\ecommon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.h">
-      <Filter>PdEnhanced\egraphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\epopup\epopup.h">
-      <Filter>PdEnhanced\epopup</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.h">
-      <Filter>PdEnhanced\ewidget</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_BLAS_FFTW.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_INTEL.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilter.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDamper.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFir.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterOnePole.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmOnePole.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmTuning.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmSignal.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h">
-      <Filter>HoaLibrary\CicmLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h">
-      <Filter>HoaLibrary\hoaAmbisonics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.h">
-      <Filter>HoaLibrary\hoaAmbisonics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicsViewer.h">
-      <Filter>HoaLibrary\hoaAmbisonics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h">
-      <Filter>HoaLibrary\hoaAmbisonics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h">
-      <Filter>HoaLibrary\hoaWider</Filter>
-    </ClInclude>
+    <ClCompile Include="hoa.wider~.cpp" />
   </ItemGroup>
 </Project>

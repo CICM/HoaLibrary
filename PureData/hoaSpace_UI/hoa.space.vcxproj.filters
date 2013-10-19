@@ -34,8 +34,17 @@
     <Filter Include="HoaLibrary\hoaAmbisonics">
       <UniqueIdentifier>{2a3d0c2b-db1a-4399-8019-a58138c8ba5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HoaLibrary\hoaWider">
+      <UniqueIdentifier>{e8c9db5f-a60f-4216-b51c-5aec4839a11c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="HoaLibrary\hoaEncoder">
       <UniqueIdentifier>{b6fb6ce8-2b74-4aad-bb0a-e6dce6c2f745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaLibrary\hoaRecomposer">
+      <UniqueIdentifier>{906a488b-e6ba-47e7-b271-9426287b5014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaLibrary\CicmLibrary\CicmLines">
+      <UniqueIdentifier>{7f61d59c-137e-477d-8fae-f07977848e70}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,15 +87,33 @@
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h">
       <Filter>HoaLibrary\CicmLibrary</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmTuning.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h">
       <Filter>HoaLibrary\CicmLibrary</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h">
       <Filter>HoaLibrary\hoaAmbisonics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h">
+      <Filter>HoaLibrary\hoaWider</Filter>
+    </ClInclude>
     <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
     <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.h">
       <Filter>HoaLibrary\hoaEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\hoaRecomposer\AmbisonicRecomposer.h">
+      <Filter>HoaLibrary\hoaRecomposer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h">
+      <Filter>HoaLibrary\hoaAmbisonics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\sources\hoaambisonics\AmbisonicViewer.h">
+      <Filter>HoaLibrary\hoaAmbisonics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.h">
+      <Filter>HoaLibrary\CicmLibrary\CicmLines</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +171,24 @@
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic.cpp">
       <Filter>HoaLibrary\hoaAmbisonics</Filter>
     </ClCompile>
-    <ClCompile Include="hoa.encoder~.cpp" />
+    <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp">
+      <Filter>HoaLibrary\hoaWider</Filter>
+    </ClCompile>
+    <ClCompile Include="hoa.space.cpp" />
     <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.cpp">
       <Filter>HoaLibrary\hoaEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sources\hoaRecomposer\AmbisonicRecomposer.cpp">
+      <Filter>HoaLibrary\hoaRecomposer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp">
+      <Filter>HoaLibrary\hoaAmbisonics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicViewer.cpp">
+      <Filter>HoaLibrary\hoaAmbisonics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp">
+      <Filter>HoaLibrary\CicmLibrary\CicmLines</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -23,12 +23,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef DEF_AmbisonicsViewer
-#define DEF_AmbisonicsViewer
+#ifndef DEF_AMBISONICVIEWER
+#define DEF_AMBISONICVIEWER
 
 #include "Ambisonic.h"
 
-class AmbisonicsViewer : public Ambisonic
+class AmbisonicViewer : public Ambisonic
 {
 	
 private:
@@ -63,7 +63,7 @@ protected :
     cicm_vector_double	m_harmonics_values;
 	
 public:
-	AmbisonicsViewer(long anOrder, long aVectorSize = 2, long aSamplingRate = 44100);
+	AmbisonicViewer(long anOrder, long aVectorSize = 2, long aSamplingRate = 44100);
     
 	double  getBiggestContribution();
 	long    getBiggestContributionIndex();
@@ -78,9 +78,20 @@ public:
     double  getBiggestLobe_x(long anIndex);
     double  getBiggestLobe_y(long anIndex);
     
-	~AmbisonicsViewer();
-    
-	template<typename Type> void process(Type* anInputs)
+	~AmbisonicViewer();
+
+	inline void process(float* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+
+		computeContribution();
+		computeRepresentation();
+		computeMaximumDistance();
+        computeBiggestLobe();
+	}
+
+	inline void process(double* anInputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			m_harmonics_values[i] = anInputs[i];
@@ -91,18 +102,17 @@ public:
         computeBiggestLobe();
 	}
     
-    template<typename Type> void processAll(Type* anInputs)
+    void processAll(float* anInputs)
 	{
-		for(int i = 0; i < m_number_of_harmonics; i++)
-			m_harmonics_values[i] = anInputs[i];
-        
-		computeContribution();
-		computeRepresentation();
-		computeMaximumDistance();
-        computeBiggestLobe();
+		process(anInputs);
+	}
+
+	void processAll(double* anInputs)
+	{
+		process(anInputs);
 	}
     
-    template<typename Type> inline void processContribAndRep(Type* anInputs)
+    inline void processContribAndRep(float* anInputs)
 	{
         for(int i = 0; i < m_number_of_harmonics; i++)
 			m_harmonics_values[i] = anInputs[i];
@@ -111,7 +121,26 @@ public:
 		computeRepresentation();
     }
     
-    template<typename Type> void processMaxDist(Type* anInputs)
+	inline void processContribAndRep(double* anInputs)
+	{
+        for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+        
+		computeContribution();
+		computeRepresentation();
+    }
+
+    inline void processMaxDist(float* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+        
+		computeContribution();
+		computeRepresentation();
+		computeMaximumDistance();
+	}
+
+	inline void processMaxDist(double* anInputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			m_harmonics_values[i] = anInputs[i];
@@ -121,7 +150,17 @@ public:
 		computeMaximumDistance();
 	}
     
-    template<typename Type> void processBigLob(Type* anInputs)
+    inline void processBigLob(float* anInputs)
+	{
+		for(int i = 0; i < m_number_of_harmonics; i++)
+			m_harmonics_values[i] = anInputs[i];
+        
+		computeContribution();
+		computeRepresentation();
+        computeBiggestLobe();
+	}
+
+	inline void processBigLob(double* anInputs)
 	{
 		for(int i = 0; i < m_number_of_harmonics; i++)
 			m_harmonics_values[i] = anInputs[i];

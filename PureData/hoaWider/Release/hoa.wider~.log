@@ -1,4 +1,25 @@
-﻿  eattr_attr.obj : .netmodule ou module MSIL compilé avec /GL trouvé ; redémarrage de l'édition de liens avec /LTCG ; ajoutez /LTCG à la ligne de commande de l'édition de liens pour améliorer les performances de l'Éditeur de liens
+﻿  hoa.wider~.cpp
+C:\Program Files (x86)\pd\src\m_pd.h(115): warning C4091: 'extern ' : ignoré à gauche de '_array' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(195): warning C4091: 'extern ' : ignoré à gauche de '_class' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(198): warning C4091: 'extern ' : ignoré à gauche de '_outlet' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(201): warning C4091: 'extern ' : ignoré à gauche de '_inlet' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(204): warning C4091: 'extern ' : ignoré à gauche de '_binbuf' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(207): warning C4091: 'extern ' : ignoré à gauche de '_clock' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(210): warning C4091: 'extern ' : ignoré à gauche de '_outconnect' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(213): warning C4091: 'extern ' : ignoré à gauche de '_glist' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(442): warning C4091: 'extern ' : ignoré à gauche de '_widgetbehavior' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(445): warning C4091: 'extern ' : ignoré à gauche de '_parentwidgetbehavior' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_pd.h(650): warning C4091: 'extern ' : ignoré à gauche de '_garray' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\m_imp.h(22): warning C4091: 'extern ' : ignoré à gauche de '_widgetbehavior' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\g_canvas.h(61): warning C4091: 'extern ' : ignoré à gauche de '_rtext' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\g_canvas.h(64): warning C4091: 'extern ' : ignoré à gauche de '_gtemplate' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\g_canvas.h(67): warning C4091: 'extern ' : ignoré à gauche de '_guiconnect' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\g_canvas.h(70): warning C4091: 'extern ' : ignoré à gauche de '_tscalar' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\g_canvas.h(73): warning C4091: 'extern ' : ignoré à gauche de '_canvasenvironment' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\g_canvas.h(76): warning C4091: 'extern ' : ignoré à gauche de '_fielddesc' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\g_canvas.h(80): warning C4091: 'extern ' : ignoré à gauche de '_magicGlass' quand aucune variable n'est déclarée
+C:\Program Files (x86)\pd\src\s_stuff.h(173): warning C4091: 'extern ' : ignoré à gauche de '_socketreceiver' quand aucune variable n'est déclarée
+  eattr_attr.obj : .netmodule ou module MSIL compilé avec /GL trouvé ; redémarrage de l'édition de liens avec /LTCG ; ajoutez /LTCG à la ligne de commande de l'édition de liens pour améliorer les performances de l'Éditeur de liens
      Création de la bibliothèque ../builds/hoa.wider~.lib et de l'objet ../builds/hoa.wider~.exp
   Génération de code en cours
   Fin de la génération du code

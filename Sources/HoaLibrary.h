@@ -27,7 +27,7 @@
 #define DEF_HOA_LIBRARY
 
 #ifdef _WINDOWS
-#include "hoaAmbisonics/AmbisonicsViewer.h"
+#include "hoaAmbisonics/AmbisonicViewer.h"
 //#include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaEncoder/AmbisonicEncoder.h"
 #include "hoaFreeverb/AmbisonicFreeverb.h"
@@ -51,7 +51,7 @@
 #include "hoaDecoder/AmbisonicDecoder3D.h"
 #include "hoaEncoder/AmbisonicEncoder3D.h"
 */
-#include "hoaAmbisonics/AmbisonicsViewer.h"
+#include "hoaAmbisonics/AmbisonicViewer.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaDelay/AmbisonicsDelay.h"
 #include "hoaEncoder/AmbisonicEncoder.h"

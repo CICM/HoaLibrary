@@ -26,6 +26,14 @@
 #ifndef DEF_HOA_LIBRARY_PD
 #define DEF_HOA_LIBRARY_PD
 
+#ifdef _WIN32
+#define MSW
+#endif
+
+#ifndef _WIN32
+#define sprintf_s sprintf
+#endif
+
 extern "C"
 {
 #include "../../../PdEnhanced/Sources/pd_enhanced.h"

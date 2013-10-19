@@ -28,9 +28,15 @@
     <ClInclude Include="..\..\..\PdEnhanced\Sources\pd_enhanced.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmTuning.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h" />
+    <ClInclude Include="..\..\sources\hoaambisonics\AmbisonicViewer.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h" />
     <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.h" />
+    <ClInclude Include="..\..\Sources\hoaRecomposer\AmbisonicRecomposer.h" />
+    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h" />
     <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
   </ItemGroup>
   <ItemGroup>
@@ -51,12 +57,17 @@
     <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_text.c" />
     <ClCompile Include="..\..\..\PdEnhanced\Sources\epopup\epopup.c" />
     <ClCompile Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.c" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp" />
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicViewer.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp" />
     <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.cpp" />
-    <ClCompile Include="hoa.encoder~.cpp" />
+    <ClCompile Include="..\..\Sources\hoaRecomposer\AmbisonicRecomposer.cpp" />
+    <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp" />
+    <ClCompile Include="hoa.space.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1C24AD7C-43C5-4B32-A62D-A53A4E8DCEC4}</ProjectGuid>
+    <ProjectGuid>{2ABE6DD6-8C0B-4819-9651-C9FE1F6B65F2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,7 +129,7 @@
       <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2eencoder_tilde </AdditionalOptions>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:nbx_tilde_setup %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -145,7 +156,7 @@
       <AdditionalIncludeDirectories>C:\Program Files (x86)\pd\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
       </PrecompiledHeader>
@@ -159,8 +170,8 @@
       <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2eencoder_tilde %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib;/LTCG;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2espace %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../builds/$(ProjectName).dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\pd\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -193,7 +204,7 @@
       <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2ewider_tilde %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2espace %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../builds/$(ProjectName).dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>

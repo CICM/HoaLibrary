@@ -5,10 +5,35 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="hoa.encoder~|Win32">
+      <Configuration>hoa.encoder~</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\eattr\eattr.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ebox\ebox.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\eclass\eclass.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd_max.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epopup\epopup.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\estruct.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\pd_enhanced.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmTuning.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h" />
+    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h" />
+    <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_attr.c" />
@@ -28,71 +53,10 @@
     <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_text.c" />
     <ClCompile Include="..\..\..\PdEnhanced\Sources\epopup\epopup.c" />
     <ClCompile Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.c" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilter.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFir.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterOnePole.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmOnePole.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp" />
-    <ClCompile Include="..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.cpp" />
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic.cpp" />
-    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.cpp" />
-    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicsViewer.cpp" />
-    <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp" />
     <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp" />
     <ClCompile Include="hoa.wider~.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\eattr\eattr.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\ebox\ebox.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\eclass\eclass.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd_max.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\epopup\epopup.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\estruct.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.h" />
-    <ClInclude Include="..\..\..\PdEnhanced\Sources\pd_enhanced.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_BLAS_FFTW.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_INTEL.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilter.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDamper.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFir.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterOnePole.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmOnePole.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmTuning.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmSignal.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h" />
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.h" />
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicsViewer.h" />
-    <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h" />
-    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h" />
-    <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{079DD347-F5E0-4784-9BCE-AF551691BA41}</ProjectGuid>
@@ -101,7 +65,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseIntelIPP>Sequential</UseIntelIPP>
+    <UseIntelMKL>Sequential</UseIntelMKL>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
     <UseIntelIPP>Sequential</UseIntelIPP>
     <UseIntelMKL>Sequential</UseIntelMKL>
   </PropertyGroup>
@@ -117,6 +87,9 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -126,7 +99,9 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../builds/</OutDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'">false</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../builds/</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'">../builds/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,7 +121,7 @@
       <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2ewider_tilde %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:nbx_tilde_setup %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib</AdditionalDependencies>
       <ShowProgress>LinkVerboseLib</ShowProgress>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -166,6 +141,40 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\pd\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level2</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2ewider_tilde %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../builds/$(ProjectName).dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\pd\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'">
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>

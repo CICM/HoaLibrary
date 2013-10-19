@@ -160,7 +160,7 @@ public:
 	{
 		int index;
 		cicm_vector_double pointor;
-        
+        cicm_vector_float out;	
 		for(int i = 0; i < m_vector_size; i++)
         {
 			*(m_index_vector+i) = Tools::radian_wrap(*(angles+i)) * CICM_1OVER2PI_RATIO;
@@ -170,12 +170,14 @@ public:
 		for(int i = 1; i < m_number_of_harmonics; i++)
 		{
 			pointor = m_encoder_matrix[i];
+			out		= outputs[i];
 			for(int j = 0; j < m_vector_size; j++)
 			{
 				index = m_index_vector[j];
-				m_vector_float[j] = pointor[index];
+				//m_vector_float[j] = pointor[index];
+				out[j] = pointor[index] * inputs[j];
 			}
-			cicm_product_vec_vec_f(inputs, m_vector_float, outputs[i], m_vector_size);
+			//cicm_product_vec_vec_f(inputs, m_vector_float, outputs[i], m_vector_size);
 		}
 	}
     
