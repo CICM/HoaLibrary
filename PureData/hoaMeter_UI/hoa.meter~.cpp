@@ -74,7 +74,6 @@ typedef struct  _meter
 
 t_eclass *meter_class;
 
-extern "C" void setup_hoa0x2emeter_tilde(void);
 void *meter_new(t_symbol *s, int argc, t_atom *argv);
 void meter_free(t_meter *x);
 void meter_assist(t_meter *x, void *b, long m, long a, char *s);

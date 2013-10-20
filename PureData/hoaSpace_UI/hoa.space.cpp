@@ -65,7 +65,6 @@ typedef struct _hoa_space
 
 t_eclass *hoa_space_class;
 
-extern "C" void setup_hoa0x2espace(void);
 void *hoa_space_new(t_symbol *s, int argc, t_atom *argv);
 void hoa_space_free(t_hoa_space *x);
 void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s);

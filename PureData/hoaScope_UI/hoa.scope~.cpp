@@ -52,7 +52,7 @@ typedef struct  _scope
 	double		f_rayonCircle;
 	double		f_fontsize;
     
-    AmbisonicsViewer* f_viewer;
+    AmbisonicViewer* f_viewer;
     double*     f_harmonicsValues;
     long        f_sampleCounter;
     double*     f_averageHarmo;
@@ -221,7 +221,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_clock              = clock_new(x, (t_method)scope_tick);
 	x->f_startclock         = 0;
     
-	x->f_viewer             = new AmbisonicsViewer(x->f_order);
+	x->f_viewer             = new AmbisonicViewer(x->f_order);
 	x->f_harmonicsValues    = new double[x->f_order * 2 + 1];
     x->f_averageHarmo       = new double[x->f_order * 2 + 1];
     for (int i = 0; i < x->f_order * 2 + 1; i++)
@@ -250,7 +250,7 @@ t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
                 free(x->f_harmonicsValues);
                 free(x->f_averageHarmo);
                 delete x->f_viewer;
-                x->f_viewer = new AmbisonicsViewer(d);
+                x->f_viewer = new AmbisonicViewer(d);
                 x->f_order = x->f_viewer->getOrder();
                 x->f_harmonicsValues    = new double[x->f_order * 2 + 1];
                 x->f_averageHarmo       = new double[x->f_order * 2 + 1];

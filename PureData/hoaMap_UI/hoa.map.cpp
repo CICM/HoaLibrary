@@ -1673,6 +1673,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
     double maxwh = Tools::cicm_max(x->rect.width, x->rect.height);
     double ditanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
+
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
     
@@ -1702,7 +1703,11 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             }
         }
     }
+#ifdef _MAC
     if(modifiers == EMOD_CMD)
+#elif _WINDOWS
+	if(modifiers == EMOD_CTRL)
+#endif
     {
         t_pt pos = ebox_get_mouse_global_position((t_jbox *)x);
         x->f_index_of_source_to_remove = x->f_index_of_selected_source;
@@ -1876,7 +1881,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
         if(modifiers == EMOD_SHIFT || modifiers == 404)
             x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
-        else if(modifiers == EMOD_CTRL || modifiers == 274)
+        else if(modifiers == EMOD_ALT || modifiers == 274)
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
         else
             x->f_source_manager->sourceSetCartesian(x->f_index_of_selected_source, cursor.x, cursor.y);
@@ -1885,9 +1890,9 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
         if(modifiers == EMOD_SHIFT || modifiers == 404)
             x->f_source_manager->groupSetRelativeAngle(x->f_index_of_selected_group, Tools::angle(cursor.x, cursor.y));
-        else if(modifiers == EMOD_CTRL || modifiers == 274)
+        else if(modifiers == EMOD_ALT || modifiers == 274)
             x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y));
-        else if(modifiers == EMOD_ALT)
+        else if(modifiers == EMOD_ALTSHIFT)
             x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y), Tools::angle(cursor.x, cursor.y));
         else
             x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);            

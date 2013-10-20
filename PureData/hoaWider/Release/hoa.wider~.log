@@ -1,4 +1,224 @@
-﻿  hoa.wider~.cpp
+﻿  eattr_attr.c
+  eattr_getter.c
+  eattr_new.c
+  eattr_setter.c
+  ebox.c
+  ebox_draw.c
+  ebox_handle.c
+  ebox_window.c
+  eclass.c
+  ecommon.c
+  egraphics.c
+  egraphics_color.c
+  egraphics_forms.c
+  egraphics_matrix.c
+  egraphics_text.c
+  epopup.c
+  ewidget.c
+  CicmRingModulation.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmamplitude\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.cpp(64): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmDecorrelation.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp(31): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp(43): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp(44): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp(45): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp(91): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp(99): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp(104): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+  CicmEnvelope.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmenvelope\CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.cpp(34): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.cpp(51): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilter.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilter.cpp(51): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilterAllpass.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.cpp(40): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.cpp(57): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilterBiquad.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp(29): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp(43): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp(51): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilterComb.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.cpp(42): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.cpp(60): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilterDelay.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.cpp(51): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilterDiffuser.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.cpp(31): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.cpp(66): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilterFir.cpp
+  CicmFilterFixedDelay.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.cpp(40): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.cpp(54): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFilterOnePole.cpp
+..\..\Sources\CicmLibrary\CicmFilters\CicmFilterOnePole.cpp(36): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmOnePole.cpp
+  CicmQSGS.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmgranular\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.cpp(31): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.cpp(104): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmLine.cpp
+..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp(79): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp(84): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp(137): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  CicmFreeverb.cpp
+..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.cpp(194): warning C4244: 'initialisation' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.cpp(204): warning C4244: 'initialisation' : conversion de 'double' en 'long', perte possible de données
+  Ambisonic.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaAmbisonics\Ambisonic.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaAmbisonics\Ambisonic.cpp(76): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+..\..\Sources\hoaAmbisonics\Ambisonic.cpp(97): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsDiffuser.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicViewer.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaAmbisonics\AmbisonicViewer.cpp(204): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaAmbisonics\AmbisonicViewer.cpp(210): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaAmbisonics\AmbisonicViewer.cpp(226): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  Planewaves.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaAmbisonics\Planewaves.cpp(38): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaAmbisonics\Planewaves.cpp(271): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  Compilation en cours...
+  AmbisonicsBinaural.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaBinaural\AmbisonicsBinaural.cpp(30): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaBinaural\AmbisonicsBinaural.cpp(184): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsDecoder.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaDecoder\AmbisonicsDecoder.cpp(43): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsDelay.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaDelay\AmbisonicsDelay.cpp(43): warning C4244: 'return' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicEncoder.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(74): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(84): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(143): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(166): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(205): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(228): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(305): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoaencoder\AmbisonicEncoder.h(329): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+..\..\Sources\hoaEncoder\AmbisonicEncoder.cpp(62): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+  AmbisonicFreeverb.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaFreeverb\AmbisonicFreeverb.cpp(29): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaFreeverb\AmbisonicFreeverb.cpp(45): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsFreeverb.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaFreeverb\AmbisonicsFreeverb.cpp(29): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaFreeverb\AmbisonicsFreeverb.cpp(45): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsGrain.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicMap.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(74): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(84): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(143): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(166): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(205): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(228): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(305): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(329): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(138): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(156): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(188): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(206): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+..\..\Sources\hoaMap\AmbisonicMap.cpp(123): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicMultiMaps.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(74): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(84): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(143): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(166): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(205): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(228): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(305): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaEncoder/AmbisonicEncoder.h(329): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(138): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(156): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(188): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoamap\../hoaWider/AmbisonicWider.h(206): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+..\..\Sources\hoaMap\AmbisonicMultiMaps.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicSource.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSource.cpp(30): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSource.cpp(46): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSource.cpp(119): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicSourcesGroup.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesGroup.cpp(41): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesGroup.cpp(383): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicSourcesManager.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesManager.cpp(37): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesManager.cpp(383): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicSourcesPreset.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesPreset.cpp(406): warning C4244: 'initialisation' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicSourcesTrajectory.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.cpp(36): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.cpp(41): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.cpp(84): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.cpp(95): warning C4244: 'initialisation' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.cpp(96): warning C4244: 'initialisation' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsMeter.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsMultiDecoder.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaMultiDecoder\AmbisonicsMultiDecoder.cpp(144): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicOptim.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaOptim\AmbisonicOptim.cpp(33): warning C4244: 'argument' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicProjector.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicRecomposer.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(74): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(84): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(143): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(166): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(205): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(228): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(305): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../hoaEncoder/AmbisonicEncoder.h(329): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../HoaWider/AmbisonicWider.h(138): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../HoaWider/AmbisonicWider.h(156): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../HoaWider/AmbisonicWider.h(188): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoarecomposer\../HoaWider/AmbisonicWider.h(206): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+..\..\Sources\hoaRecomposer\AmbisonicRecomposer.cpp(31): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaRecomposer\AmbisonicRecomposer.cpp(129): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicsRestitution.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaRestitution\AmbisonicsRestitution.cpp(42): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaRestitution\AmbisonicsRestitution.cpp(48): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+..\..\Sources\hoaRestitution\AmbisonicsRestitution.cpp(63): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  Compilation en cours...
+  AmbisonicsRingModulation.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicRotate.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicSpace.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicVector.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+  AmbisonicWider.cpp
+c:\users\pierre\documents\github\hoalibrary\sources\cicmlibrary\cicmdelay\../CicmEnvelope/CicmEnvelope.h(80): warning C4244: '=' : conversion de 'double' en 'long', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoawider\AmbisonicWider.h(138): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoawider\AmbisonicWider.h(156): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoawider\AmbisonicWider.h(188): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\pierre\documents\github\hoalibrary\sources\hoawider\AmbisonicWider.h(206): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+  hoa.wider~.cpp
 C:\Program Files (x86)\pd\src\m_pd.h(115): warning C4091: 'extern ' : ignoré à gauche de '_array' quand aucune variable n'est déclarée
 C:\Program Files (x86)\pd\src\m_pd.h(195): warning C4091: 'extern ' : ignoré à gauche de '_class' quand aucune variable n'est déclarée
 C:\Program Files (x86)\pd\src\m_pd.h(198): warning C4091: 'extern ' : ignoré à gauche de '_outlet' quand aucune variable n'est déclarée
@@ -19,7 +239,6 @@ C:\Program Files (x86)\pd\src\g_canvas.h(73): warning C4091: 'extern ' : ignor�
 C:\Program Files (x86)\pd\src\g_canvas.h(76): warning C4091: 'extern ' : ignoré à gauche de '_fielddesc' quand aucune variable n'est déclarée
 C:\Program Files (x86)\pd\src\g_canvas.h(80): warning C4091: 'extern ' : ignoré à gauche de '_magicGlass' quand aucune variable n'est déclarée
 C:\Program Files (x86)\pd\src\s_stuff.h(173): warning C4091: 'extern ' : ignoré à gauche de '_socketreceiver' quand aucune variable n'est déclarée
-  eattr_attr.obj : .netmodule ou module MSIL compilé avec /GL trouvé ; redémarrage de l'édition de liens avec /LTCG ; ajoutez /LTCG à la ligne de commande de l'édition de liens pour améliorer les performances de l'Éditeur de liens
      Création de la bibliothèque ../builds/hoa.wider~.lib et de l'objet ../builds/hoa.wider~.exp
   Génération de code en cours
   Fin de la génération du code
