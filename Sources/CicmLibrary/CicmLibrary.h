@@ -30,6 +30,10 @@
 
 #ifdef _WINDOWS
 
+#include "CicmFilters/CicmFilterDelay.h"
+#include "CicmDelay/CicmDecorrelation.h"
+#include "CicmGranular/CicmQSGS.h"
+#include "CicmAmplitude/CicmRingModulation.h"
 #include "CicmLines/CicmLine.h"
 #include "CicmReverb/CicmFreeverb.h"
 

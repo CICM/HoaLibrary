@@ -84,14 +84,27 @@
 /************************************************************************************/
 
 /******************************* Vector *********************************************/
-
+#ifdef _ATLAS
 #define cicm_clear_vec_f(vector, vector_size) catlas_sset(vector_size, 0.f, vector, 1)
 #define cicm_clear_vec_d(vector, vector_size) catlas_dset(vector_size, 0., vector, 1)
+#else
+#define cicm_clear_vec_f(vector, vector_size) \
+for(int cicm_i = 0; cicm_i < vector_size; cicm_i++) \
+{ \
+    *(vector+cicm_i) = 0.f; \
+}
 
+#define cicm_clear_vec_d(vector, vector_size) \
+for(int cicm_i = 0; cicm_i < vector_size; cicm_i++) \
+{ \
+    *(vector+cicm_i) = 0.; \
+}
+#endif
 /******************************* Matrix *********************************************/
-
+#ifdef _ATLAS
 #define cicm_clear_mat_f(matrix, row_number, columns_size) catlas_sset(row_number * columns_size, 0.f, vector, 1)
 #define cicm_clear_mat_d(matrix, row_number, columns_size) catlas_dset(row_number * columns_size, 0., vector, 1)
+#endif
 
 /************************************************************************************/
 /************************************* COPY *****************************************/
