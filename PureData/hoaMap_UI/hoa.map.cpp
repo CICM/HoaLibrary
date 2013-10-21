@@ -152,7 +152,7 @@ extern "C" void setup_hoa0x2emap(void)
 	class_addmethod(c, (method) hoamap_popup,            "popup",           A_CANT,     0);
     class_addmethod(c, (method) hoamap_jsave,            "jsave",           A_CANT,     0);
     
-	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
+	CLASS_ATTR_DEFAULT			(c, "size", 0, "300 300");
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
     

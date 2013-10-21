@@ -113,7 +113,7 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
     class_addmethod(c, (method) meter_getdrawparams, "getdrawparams", A_CANT, 0);
     class_addmethod(c, (method) meter_oksize,        "oksize",        A_CANT, 0);
     
-	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 225 225");
+	CLASS_ATTR_DEFAULT			(c, "size", 0, "225 225");
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	
 	CLASS_ATTR_LONG				(c, "vectors", 0, t_meter, f_drawvector);

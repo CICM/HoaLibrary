@@ -98,7 +98,7 @@ extern "C" void setup_hoa0x2escope_tilde(void)
 	class_addmethod(c, (method)scope_getdrawparams, "getdrawparams", A_CANT, 0);
 	class_addmethod(c, (method)scope_oksize,		"oksize",		A_CANT, 0);
 
-	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 225 225");
+	CLASS_ATTR_DEFAULT			(c, "size", 0, "225 225");
 
     CLASS_ATTR_LONG             (c, "order", 0, t_scope, f_order);
     CLASS_ATTR_ACCESSORS        (c, "order", (method)NULL,(method)scope_setattr_order);
