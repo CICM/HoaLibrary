@@ -1703,11 +1703,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             }
         }
     }
-#ifdef _MAC
+
     if(modifiers == EMOD_CMD)
-#elif _WINDOWS
-	if(modifiers == EMOD_CTRL)
-#endif
     {
         t_pt pos = ebox_get_mouse_global_position((t_jbox *)x);
         x->f_index_of_source_to_remove = x->f_index_of_selected_source;
