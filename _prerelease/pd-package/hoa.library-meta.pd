@@ -1,9 +1,0 @@
-#N canvas 423 278 200 200 10;
-#N canvas 419 334 420 300 META 1;
-#X text 10 40 VERSION 1;
-#X text 10 21 NAME hoa.library;
-#X text 10 124 DESCRIPTION A high order ambisonics library;
-#X text 10 144 LICENSE C. C.;
-#X text 10 65 AUTHOR Pierre Guillot \, Eliott Paris \, Julien Colafrancesco
-http://www.mshparisnord.fr/hoalibrary/en/;
-#X restore 10 10 pd META;
