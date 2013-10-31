@@ -27,6 +27,8 @@
 
 #include "../hoaLibrary/hoa.library_pd.h"
 
+bool postons = 0;
+
 typedef struct _hoa_decoder
 {
     t_jbox                f_ob;
@@ -75,6 +77,13 @@ extern "C" void setup_hoa0x2edecoder_tilde(void)
 	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, decoder_setattr_restitution);
     CLASS_ATTR_ORDER            (c, "restitution", 0, "6");
     CLASS_ATTR_SAVE             (c, "restitution", 1);
+    
+    if(!postons)
+    {
+        post("hoa.library (version beta 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+        post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
+        postons = 1;
+    }
     
     class_register(CLASS_BOX, c);
     hoa_decoder_class = c;
