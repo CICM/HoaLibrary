@@ -1,0 +1,235 @@
+#N canvas 61 0 1156 704 10;
+#X obj -336 -359 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.recomposer~
+3 12 0 18 -204280 -1 0;
+#X obj 162 -141 hoa.projector~ 4 10;
+#X obj 162 -199 hoa.encoder~ 4 ----;
+#X obj 324 -259 hoa.pi 2;
+#X obj 324 -288 loadbang;
+#X obj 273 -315 loadbang;
+#X msg 273 -288 0.333;
+#X obj 273 -230 *;
+#X obj 273 -259 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -262144 -1 -1 0.333 256;
+#X obj 144 110 dac~ 1 2 3 4 5 6 7 8 9 10;
+#X text -332 -336 A plane wave recomposer to harmonics domain;
+#X text -333 -316 hoa.recomposer~ recomposes a plane wave decomposition
+into circular harmonics.;
+#X text 588 -30 Fisheye factor between 0 and 1;
+#X obj -127 -181 nbx 5 14 0 9 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 7 256;
+#X obj -82 -212 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -262144 -1 -1 3.1 256;
+#X obj -127 -158 pack 0 0;
+#X msg -127 -135 angle \$1 \$2;
+#X text -141 -242 Set angles with an index of microphones;
+#X obj -224 -47 nbx 5 14 0 9 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 8 256;
+#X obj -179 -77 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X obj -224 -24 pack 0 0;
+#X text -248 -96 and a widen value (0 -1) :;
+#X text 222 -341 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text 222 -357 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text -332 -279 First argument is the order \, second argument is
+the number of channels (inputs) \, @mode [ value (int or sym)] set
+the decomposition mode.;
+#X text 399 -242 There's 3 modes : fixe (just recompostion without
+any "effect") \, fisheye (to apply a fisheye effect on soundfield)
+and free (that allows you to change angle and direcvity figures of
+"virtual microphones");
+#X obj 581 -12 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0.333 256;
+#X msg 442 -137 \; pd dsp 1;
+#X msg 442 -99 \; pd dsp 0;
+#X obj -128 148 hoa.scope~ @patching_rect [ -128 226 215.23 215.23
+] @size [ 215.23 215.23 ] @fontname [ helvetica ] @fontweight [ normal
+] @fontslant [ regular ] @fontsize [ 11 ] @order [ 4 ] @gain [ 1 ]
+@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
+[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
+[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 116 150 hoa.scope~ @patching_rect [ 116 228 215.23 215.23 ]
+@size [ 215.23 215.23 ] @fontname [ helvetica ] @fontweight [ normal
+] @fontslant [ regular ] @fontsize [ 11 ] @order [ 4 ] @gain [ 1 ]
+@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
+[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
+[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 162 -245 osc~ 220;
+#X obj -127 -201 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text -141 -230 and an angle (radian) :;
+#X obj -224 -69 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 356 150 hoa.scope~ @patching_rect [ 356 228 215.23 215.23 ]
+@size [ 215.23 215.23 ] @fontname [ helvetica ] @fontweight [ normal
+] @fontslant [ regular ] @fontsize [ 11 ] @order [ 4 ] @gain [ 1 ]
+@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
+[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
+[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 581 -75 loadbang;
+#X msg 581 -48 0.333;
+#X text 129 378 The soundfield is kept intact.;
+#X msg -224 -1 wide \$1 \$2;
+#X text 355 379 The sound field is squeezed (around 0 degrees following
+the fisheye factor).;
+#X text -234 373 The sound field is deformed by the simulation of virtual
+microphones with an irregular repartition over the circle and eclectic
+directivities.;
+#X text -248 -108 Set microphone directity with an index;
+#X obj -272 -191 loadbang;
+#X msg -272 -162 9;
+#X msg -231 -131 0.2;
+#X msg -308 -163 8;
+#X msg -290 -129 0;
+#X obj -6 -208 loadbang;
+#X msg -6 -179 5;
+#X msg 35 -148 0.3;
+#X msg -31 -149 7;
+#X msg 10 -118 3.1;
+#X obj 144 77 hoa.decoder~ 4 0 10 -----;
+#X obj -97 29 hoa.recomposer~ 4 10 free;
+#X obj 147 28 hoa.recomposer~ 4 10 fixe;
+#X obj 376 30 hoa.recomposer~ 4 10 fisheye;
+#X connect 1 0 54 0;
+#X connect 1 0 55 0;
+#X connect 1 0 56 0;
+#X connect 1 1 54 1;
+#X connect 1 1 55 1;
+#X connect 1 1 56 1;
+#X connect 1 2 54 2;
+#X connect 1 2 55 2;
+#X connect 1 2 56 2;
+#X connect 1 3 54 3;
+#X connect 1 3 55 3;
+#X connect 1 3 56 3;
+#X connect 1 4 54 4;
+#X connect 1 4 55 4;
+#X connect 1 4 56 4;
+#X connect 1 5 54 5;
+#X connect 1 5 55 5;
+#X connect 1 5 56 5;
+#X connect 1 6 54 6;
+#X connect 1 6 55 6;
+#X connect 1 6 56 6;
+#X connect 1 7 54 7;
+#X connect 1 7 55 7;
+#X connect 1 7 56 7;
+#X connect 1 8 54 8;
+#X connect 1 8 55 8;
+#X connect 1 8 56 8;
+#X connect 1 9 54 9;
+#X connect 1 9 55 9;
+#X connect 1 9 56 9;
+#X connect 2 0 1 0;
+#X connect 2 1 1 1;
+#X connect 2 2 1 2;
+#X connect 2 3 1 3;
+#X connect 2 4 1 4;
+#X connect 2 5 1 5;
+#X connect 2 6 1 6;
+#X connect 2 7 1 7;
+#X connect 2 8 1 8;
+#X connect 3 0 7 1;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 8 0;
+#X connect 7 0 2 1;
+#X connect 8 0 7 0;
+#X connect 13 0 15 0;
+#X connect 14 0 15 1;
+#X connect 14 0 32 0;
+#X connect 15 0 16 0;
+#X connect 16 0 54 0;
+#X connect 18 0 20 0;
+#X connect 19 0 20 1;
+#X connect 19 0 34 0;
+#X connect 20 0 39 0;
+#X connect 26 0 56 10;
+#X connect 31 0 2 0;
+#X connect 32 0 13 0;
+#X connect 34 0 18 0;
+#X connect 36 0 37 0;
+#X connect 37 0 26 0;
+#X connect 39 0 54 0;
+#X connect 43 0 44 0;
+#X connect 43 0 46 0;
+#X connect 44 0 18 0;
+#X connect 44 0 45 0;
+#X connect 45 0 19 0;
+#X connect 46 0 47 0;
+#X connect 46 0 18 0;
+#X connect 47 0 19 0;
+#X connect 48 0 49 0;
+#X connect 48 0 51 0;
+#X connect 49 0 50 0;
+#X connect 49 0 13 0;
+#X connect 50 0 14 0;
+#X connect 51 0 52 0;
+#X connect 51 0 13 0;
+#X connect 52 0 14 0;
+#X connect 53 0 9 0;
+#X connect 53 1 9 1;
+#X connect 53 2 9 2;
+#X connect 53 3 9 3;
+#X connect 53 4 9 4;
+#X connect 53 5 9 5;
+#X connect 53 6 9 6;
+#X connect 53 7 9 7;
+#X connect 53 8 9 8;
+#X connect 53 9 9 9;
+#X connect 54 0 29 0;
+#X connect 54 0 53 0;
+#X connect 54 1 29 1;
+#X connect 54 1 53 1;
+#X connect 54 2 29 2;
+#X connect 54 2 53 2;
+#X connect 54 3 29 3;
+#X connect 54 3 53 3;
+#X connect 54 4 29 4;
+#X connect 54 4 53 4;
+#X connect 54 5 29 5;
+#X connect 54 5 53 5;
+#X connect 54 6 29 6;
+#X connect 54 6 53 6;
+#X connect 54 7 29 7;
+#X connect 54 7 53 7;
+#X connect 54 8 29 8;
+#X connect 54 8 53 8;
+#X connect 55 0 30 0;
+#X connect 55 0 53 0;
+#X connect 55 1 30 1;
+#X connect 55 1 53 1;
+#X connect 55 2 30 2;
+#X connect 55 2 53 2;
+#X connect 55 3 30 3;
+#X connect 55 3 53 3;
+#X connect 55 4 30 4;
+#X connect 55 4 53 4;
+#X connect 55 5 30 5;
+#X connect 55 5 53 5;
+#X connect 55 6 30 6;
+#X connect 55 6 53 6;
+#X connect 55 7 30 7;
+#X connect 55 7 53 7;
+#X connect 55 8 30 8;
+#X connect 55 8 53 8;
+#X connect 56 0 35 0;
+#X connect 56 0 53 0;
+#X connect 56 1 35 1;
+#X connect 56 1 53 1;
+#X connect 56 2 35 2;
+#X connect 56 2 53 2;
+#X connect 56 3 35 3;
+#X connect 56 3 53 3;
+#X connect 56 4 35 4;
+#X connect 56 4 53 4;
+#X connect 56 5 35 5;
+#X connect 56 5 53 5;
+#X connect 56 6 35 6;
+#X connect 56 6 53 6;
+#X connect 56 7 35 7;
+#X connect 56 7 53 7;
+#X connect 56 8 35 8;
+#X connect 56 8 53 8;
+#X coords 0 704 1 703 100 60 0;
