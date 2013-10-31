@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 557.0, 322.0, 360.0, 309.0 ],
+		"rect" : [ 777.0, 304.0, 360.0, 309.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -27,7 +27,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.send~ (7)",
+		"title" : "hoa.send~ (1)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -37,7 +37,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.0, 196.0, 74.0, 20.0 ],
+					"patching_rect" : [ 144.0, 196.0, 74.0, 20.0 ],
 					"text" : "prepend set"
 				}
 
@@ -47,12 +47,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-35",
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 16.0, 270.0, 180.0, 18.0 ],
-					"text" : "tango-2147483648"
+					"patching_rect" : [ 16.0, 270.0, 132.0, 31.0 ],
+					"text" : "hoa_signal_tango-2147483648"
 				}
 
 			}
@@ -77,10 +78,10 @@
 					"id" : "obj-12",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
-					"patching_rect" : [ 170.0, 82.0, 59.0, 20.0 ],
-					"text" : "unpack 0"
+					"numoutlets" : 2,
+					"outlettype" : [ "int", "int" ],
+					"patching_rect" : [ 170.0, 82.0, 69.0, 20.0 ],
+					"text" : "unpack 0 0"
 				}
 
 			}
@@ -121,8 +122,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.0, 120.0, 51.0, 20.0 ],
-					"text" : "pack s i"
+					"patching_rect" : [ 129.0, 127.0, 60.0, 20.0 ],
+					"text" : "pack s 0"
 				}
 
 			}
@@ -163,8 +164,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 170.0, 52.0, 123.0, 20.0 ],
-					"text" : "patcherargs"
+					"patching_rect" : [ 170.0, 52.0, 175.0, 20.0 ],
+					"text" : "patcherargs @name hoaTango"
 				}
 
 			}
@@ -236,7 +237,6 @@
 					"destination" : [ "obj-27", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 179.5, 114.0, 170.5, 114.0 ],
 					"source" : [ "obj-12", 0 ]
 				}
 
@@ -273,7 +273,7 @@
 					"destination" : [ "obj-3", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 138.5, 226.0, 24.5, 226.0 ],
+					"midpoints" : [ 153.5, 226.0, 24.5, 226.0 ],
 					"source" : [ "obj-37", 0 ]
 				}
 

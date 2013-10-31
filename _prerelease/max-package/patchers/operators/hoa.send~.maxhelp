@@ -37,7 +37,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 419.0, 225.75, 74.0, 21.0 ],
+					"patching_rect" : [ 419.0, 225.75, 74.0, 20.0 ],
 					"text" : "set charlie"
 				}
 
@@ -51,7 +51,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 338.0, 225.75, 68.0, 21.0 ],
+					"patching_rect" : [ 338.0, 225.75, 68.0, 20.0 ],
 					"text" : "set tango"
 				}
 
@@ -65,7 +65,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 9,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "" ],
-					"patching_rect" : [ 338.0, 258.75, 149.0, 23.0 ],
+					"patching_rect" : [ 338.0, 258.75, 149.0, 22.0 ],
 					"text" : "hoa.plug~ 4 hoa.all no"
 				}
 
@@ -94,7 +94,7 @@
 					"numinlets" : 8,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 431.5, 342.75, 170.0, 39.0 ],
+					"patching_rect" : [ 431.5, 342.75, 170.0, 38.0 ],
 					"text" : "hoa.plug~ 8 hoa.receive~ out @name charlie"
 				}
 
@@ -109,8 +109,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 280.0, 150.75, 56.0, 23.0 ],
-					"sig" : 0.0
+					"patching_rect" : [ 280.0, 150.75, 56.0, 22.0 ],
+					"sig" : 2.9
 				}
 
 			}
@@ -137,7 +137,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 24.0, 150.75, 48.0, 23.0 ],
+					"patching_rect" : [ 24.0, 150.75, 48.0, 22.0 ],
 					"text" : "sig~ 1"
 				}
 
@@ -151,14 +151,14 @@
 					"numinlets" : 7,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 24.0, 223.75, 275.0, 23.0 ],
+					"patching_rect" : [ 24.0, 223.75, 275.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
 						"autoconnect" : 1,
 						"loudspeakers" : 8,
 						"ls" : 8,
 						"ls_angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-						"mode" : "ambisonics",
+						"mode" : "ambisonic",
 						"pinnaesize" : "small",
 						"restitution" : "panning",
 						"yls" : 8,
@@ -178,7 +178,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 7,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 24.0, 188.75, 275.0, 23.0 ],
+					"patching_rect" : [ 24.0, 188.75, 275.0, 22.0 ],
 					"text" : "hoa.encoder~ 3"
 				}
 
@@ -193,7 +193,7 @@
 					"numinlets" : 8,
 					"numoutlets" : 8,
 					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 24.0, 342.75, 170.0, 39.0 ],
+					"patching_rect" : [ 24.0, 342.75, 170.0, 38.0 ],
 					"text" : "hoa.plug~ 8 hoa.receive~ out @name tango"
 				}
 
@@ -206,7 +206,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 8,
 					"numoutlets" : 0,
-					"patching_rect" : [ 24.0, 300.75, 275.0, 23.0 ],
+					"patching_rect" : [ 24.0, 300.75, 275.0, 22.0 ],
 					"text" : "hoa.plug~ 8 hoa.send~ out @name tango"
 				}
 
@@ -298,7 +298,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 9.0, 58.0, 561.0, 34.0 ],
+					"patching_rect" : [ 9.0, 58.0, 561.0, 33.0 ],
 					"text" : "the hoa.plug~ syntaxe is : [order], [patcher name], [mode], and optionals [arguments] and/or [attributes]\n- in the context of this abstraction you should use @name attribute to set the object-name",
 					"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 					"varname" : "autohelp_top_description[6]"
@@ -328,7 +328,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 622.5, 223.75, 91.0, 23.0 ],
+					"patching_rect" : [ 622.5, 223.75, 91.0, 22.0 ],
 					"text" : "turn dac~ on",
 					"textcolor" : [ 0.326531, 0.326531, 0.326531, 1.0 ]
 				}
@@ -369,7 +369,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 494.0, 13.0, 257.0, 33.0 ],
+					"patching_rect" : [ 494.0, 13.0, 257.0, 32.0 ],
 					"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
 					"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 				}
@@ -849,61 +849,54 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa-icon-45.png",
-				"bootpath" : "/Users/Pierre/Downloads",
-				"patcherrelativepath" : "../../../../../../../Downloads",
-				"type" : "PNG ",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
 				"patcherrelativepath" : "../../docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.send~.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.receive~.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/patchers/operators",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.plug~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.plug~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.encoder~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.decoder~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.meter~.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}

@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 2,
-			"architecture" : "x86"
+			"revision" : 3,
+			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 152.0, 261.0, 998.0, 552.0 ],
+		"rect" : [ 282.0, 91.0, 998.0, 552.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -42,8 +42,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 764.0, 98.0, 640.0, 480.0 ],
@@ -509,11 +509,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 609.0, 70.0, 793.0, 670.0 ],
+						"rect" : [ 487.0, 70.0, 793.0, 670.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -572,8 +572,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 2,
-											"architecture" : "x86"
+											"revision" : 3,
+											"architecture" : "x64"
 										}
 ,
 										"rect" : [ 69.0, 145.0, 640.0, 480.0 ],
@@ -1507,6 +1507,7 @@
 									"destination" : [ "obj-1", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"midpoints" : [ 570.5, 233.0, 451.5, 233.0 ],
 									"source" : [ "obj-17", 0 ]
 								}
 
@@ -1516,6 +1517,7 @@
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"midpoints" : [ 570.5, 233.0, 328.5, 233.0 ],
 									"source" : [ "obj-17", 0 ]
 								}
 
@@ -1783,7 +1785,7 @@
 									"destination" : [ "obj-23", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 570.5, 264.0, 537.0, 264.0, 537.0, 414.0, 403.5, 414.0 ],
+									"midpoints" : [ 570.5, 269.0, 550.0, 269.0, 550.0, 393.0, 403.5, 393.0 ],
 									"source" : [ "obj-5", 0 ]
 								}
 
@@ -1793,7 +1795,7 @@
 									"destination" : [ "obj-8", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 570.5, 264.0, 527.0, 264.0, 527.0, 327.0, 527.5, 327.0 ],
+									"midpoints" : [ 570.5, 269.0, 527.0, 269.0, 527.0, 327.0, 527.5, 327.0 ],
 									"source" : [ "obj-5", 0 ]
 								}
 
@@ -2013,8 +2015,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 2,
-							"architecture" : "x86"
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 616.0, 107.0, 640.0, 480.0 ],
@@ -2306,7 +2308,7 @@
 					"destination" : [ "obj-2", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 671.700012, 290.0, 174.5, 290.0 ],
+					"midpoints" : [ 671.7, 290.0, 174.5, 290.0 ],
 					"source" : [ "obj-13", 1 ]
 				}
 
@@ -2316,7 +2318,7 @@
 					"destination" : [ "obj-22", 5 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 804.299988, 198.0, 549.0, 198.0, 549.0, 414.0, 354.5, 414.0 ],
+					"midpoints" : [ 804.3, 198.0, 549.0, 198.0, 549.0, 414.0, 354.5, 414.0 ],
 					"source" : [ "obj-13", 4 ]
 				}
 
@@ -2326,7 +2328,7 @@
 					"destination" : [ "obj-24", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 760.099976, 345.0, 294.5, 345.0 ],
+					"midpoints" : [ 760.1, 345.0, 294.5, 345.0 ],
 					"source" : [ "obj-13", 3 ]
 				}
 
@@ -2336,7 +2338,7 @@
 					"destination" : [ "obj-25", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 715.900024, 345.0, 234.5, 345.0 ],
+					"midpoints" : [ 715.9, 345.0, 234.5, 345.0 ],
 					"source" : [ "obj-13", 2 ]
 				}
 

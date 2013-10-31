@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 3,
+			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 585.0, 230.0, 427.0, 386.0 ],
+		"rect" : [ 704.0, 209.0, 285.0, 390.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -26,8 +27,23 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.mirror~ (7)",
+		"title" : "hoa.mirror~ (-3)",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
+					"id" : "obj-10",
+					"linecount" : 10,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 121.5, 223.0, 128.0, 141.0 ],
+					"text" : "If the negatives harmonics are equals to zero then a mirror image appears on the soundfield. Here, we play on the weight of the negatives harmonics to hide or reveal the mirror image."
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -109,21 +125,6 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 45.0, 210.0, 34.0, 20.0 ],
 					"text" : "gate"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"frgb" : 0.0,
-					"id" : "obj-10",
-					"linecount" : 7,
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 210.0, 150.0, 166.0, 100.0 ],
-					"text" : "If the negatives harmonics are equals to zero then a mirror image appears on the soundfield. Here, we play on the weight of the negatives harmonics to hide or reveal the mirror image."
 				}
 
 			}
@@ -426,8 +427,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }

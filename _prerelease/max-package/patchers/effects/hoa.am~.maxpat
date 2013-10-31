@@ -3,11 +3,12 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 8
+			"minor" : 1,
+			"revision" : 3,
+			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 656.0, 44.0, 719.0, 714.0 ],
+		"rect" : [ 286.0, 44.0, 719.0, 714.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -26,7 +27,7 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.am~ (0)",
+		"title" : "hoa.am~ (7)",
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
@@ -434,8 +435,9 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
+							"minor" : 1,
+							"revision" : 3,
+							"architecture" : "x64"
 						}
 ,
 						"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -729,7 +731,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 525.0, 5.0, 60.0, 20.0 ],
+					"patching_rect" : [ 525.0, 11.5, 60.0, 20.0 ],
 					"text" : "loadbang"
 				}
 
@@ -739,13 +741,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-58",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 525.0, 32.0, 169.5, 33.0 ],
-					"text" : "patcherargs @freq 22050 @factor 0.5"
+					"patching_rect" : [ 525.0, 38.5, 192.0, 20.0 ],
+					"text" : "patcherargs @freq 10 @factor 0.5"
 				}
 
 			}
@@ -1201,7 +1202,7 @@
 					"destination" : [ "obj-16", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 685.0, 78.0, 24.5, 78.0 ],
+					"midpoints" : [ 707.5, 78.0, 24.5, 78.0 ],
 					"source" : [ "obj-58", 1 ]
 				}
 
@@ -1211,7 +1212,7 @@
 					"destination" : [ "obj-47", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 685.0, 78.0, 288.3125, 78.0 ],
+					"midpoints" : [ 707.5, 78.0, 288.3125, 78.0 ],
 					"source" : [ "obj-58", 1 ]
 				}
 
@@ -1308,8 +1309,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [  ]
+ ]
 	}
 
 }

@@ -333,12 +333,10 @@
 					"fontsize" : 15.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
-					"linecount" : 3,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 33.6875, 552.5, 604.375, 57.0 ],
-					"text" : "hoa.granular~ synthesizes a diffuse sound field. It uses delay lines and amplitude modulation to create streams of grains. The parameters are scaled depending on the orders to generate a granular sound field.",
+					"patching_rect" : [ 31.6875, 552.5, 604.375, 23.0 ],
 					"textcolor" : [ 0.192668, 0.192697, 0.192653, 1.0 ]
 				}
 
@@ -351,7 +349,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 21.0625, 548.5, 6.0, 80.0 ],
+					"patching_rect" : [ 19.0625, 548.5, 6.0, 80.0 ],
 					"rounded" : 5
 				}
 
@@ -364,8 +362,8 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 18.0625, 544.5, 668.0, 87.0 ],
-					"rounded" : 15,
+					"patching_rect" : [ 16.0625, 544.5, 664.5625, 87.0 ],
+					"rounded" : 10,
 					"shadow" : -1
 				}
 
@@ -745,7 +743,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 38.5, 221.257935, 616.0, 5.0 ]
+					"patching_rect" : [ 38.5, 231.257935, 616.0, 5.0 ]
 				}
 
 			}
@@ -756,7 +754,7 @@
 					"maxclass" : "live.line",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 37.5, 220.257935, 616.0, 5.0 ]
+					"patching_rect" : [ 37.5, 230.257935, 616.0, 5.0 ]
 				}
 
 			}
@@ -807,7 +805,6 @@
 					"maxclass" : "bpatcher",
 					"numinlets" : 1,
 					"numoutlets" : 1,
-					"offset" : [ -3300.0, 0.0 ],
 					"outlettype" : [ "blank" ],
 					"patcher" : 					{
 						"fileversion" : 1,
@@ -818,7 +815,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 203.0, 311.0, 605.0, 287.0 ],
+						"rect" : [ 203.0, 328.0, 605.0, 287.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1154,7 +1151,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 355.0, 487.0, 177.0, 20.0 ],
-									"text" : "hoa.granular~"
+									"text" : "hoa.dac~"
 								}
 
 							}
@@ -2642,7 +2639,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 46.15625, 226.257935, 604.375, 287.0 ]
+					"patching_rect" : [ 46.15625, 243.257935, 604.375, 287.0 ]
 				}
 
 			}
@@ -2702,7 +2699,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 13.9375, 88.5, 666.6875, 74.0 ],
-					"text" : "Hoa Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering.",
+					"text" : "Hoa Library allows musicians and composers to synthesize, transform and render sound fields in a creative and artistic way. This library facilitates the understanding and the appropriation of key concepts of ambisonics. Thanks to original graphical interfaces a lot of new signal processing are allowed like diffuse sound field synthesis, perspective distorsion or spatial filtering...",
 					"textcolor" : [ 0.27596, 0.276002, 0.27594, 1.0 ],
 					"varname" : "autohelp_top_description"
 				}
@@ -2717,7 +2714,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 16.0625, 171.257935, 664.5625, 367.242065 ],
-					"rounded" : 15,
+					"rounded" : 10,
 					"shadow" : -1
 				}
 
@@ -2731,7 +2728,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 13.9375, 88.25, 666.6875, 74.25 ],
-					"rounded" : 15,
+					"rounded" : 10,
 					"shadow" : -1
 				}
 
@@ -2894,14 +2891,14 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "objectdesc.txt",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../misc/others",
 				"type" : "JSON",
 				"implicit" : 1

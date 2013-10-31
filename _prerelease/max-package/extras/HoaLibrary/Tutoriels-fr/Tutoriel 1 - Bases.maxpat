@@ -581,7 +581,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 54.0, 70.0, 896.0, 771.0 ],
+						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1758,7 +1758,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
+						"rect" : [ 54.0, 70.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1879,7 +1879,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 442.375, 419.5, 217.0, 45.0 ],
-									"text" : "Calcul des gains et synthèse des signaux dépendant des harmoniques pour une ordre de décomposition 7",
+									"text" : "Calcul des gains et synthèse des signaux dépendant des harmoniques pour un ordre de décomposition 7",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
 
