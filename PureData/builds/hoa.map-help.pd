@@ -1,4 +1,4 @@
-#N canvas 52 43 1032 752 10;
+#N canvas 350 57 1032 752 10;
 #X obj 160 -153 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
 #X obj -474 -208 hoa.map @patching_rect [ -474 -208 300 300 ] @size
@@ -67,6 +67,7 @@ on it and select "Mute" or "Unmute".;
 #X obj -463 153 *~ 0.05;
 #X msg 160 -114 size \$1 \$1;
 #X text -119 -224 Mousewheel and alt to change the zoom.;
+#X msg -346 -244 keydown zaza 10;
 #X connect 0 0 45 0;
 #X connect 1 0 9 0;
 #X connect 9 0 11 0;
@@ -92,4 +93,5 @@ on it and select "Mute" or "Unmute".;
 #X connect 43 0 42 0;
 #X connect 44 0 9 0;
 #X connect 45 0 27 0;
+#X connect 47 0 1 0;
 #X coords 0 752 1 751 85 60 0;

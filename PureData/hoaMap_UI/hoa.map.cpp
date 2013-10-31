@@ -1876,20 +1876,20 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	
 	if (x->f_index_of_selected_source != -1)
     {
-        if(modifiers == EMOD_SHIFT || modifiers == 404)
+        if(modifiers == EMOD_SHIFT)
             x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
-        else if(modifiers == EMOD_ALT || modifiers == 274)
+        else if(modifiers == EMOD_ALT)
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
         else
             x->f_source_manager->sourceSetCartesian(x->f_index_of_selected_source, cursor.x, cursor.y);
     }
     else if (x->f_index_of_selected_group != -1)
     {
-        if(modifiers == EMOD_SHIFT || modifiers == 404)
+        if(modifiers == EMOD_SHIFT)
             x->f_source_manager->groupSetRelativeAngle(x->f_index_of_selected_group, Tools::angle(cursor.x, cursor.y));
         else if(modifiers == EMOD_ALT || modifiers == 274)
             x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y));
-        else if(modifiers == EMOD_ALTSHIFT)
+        else if((modifiers & EMOD_ALT) && (modifiers & EMOD_SHIFT))
             x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y), Tools::angle(cursor.x, cursor.y));
         else
             x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);            
@@ -1991,6 +1991,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
+    
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
@@ -2007,9 +2008,14 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
             {
                 ditanceSelected = Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
                 x->f_index_of_selected_group = i;
+                
             }
         }
     }
+    if( x->f_index_of_selected_source != -1 ||  x->f_index_of_selected_group != -1)
+        ebox_set_cursor((t_jbox *)x, 4);
+    else
+        ebox_set_cursor((t_jbox *)x, 1);
 
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
