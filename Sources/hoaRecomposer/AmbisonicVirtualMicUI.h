@@ -28,7 +28,7 @@
 #define DEF_AMBISONICSVIRTUALMICUI
 
 #include "../hoaEncoder/AmbisonicEncoder.h"
-#include "../hoaAmbisonics/AmbisonicsViewer.h"
+#include "../hoaAmbisonics/AmbisonicViewer.h"
 #include "../hoaOptim/AmbisonicOptim.h"
 #include "../hoaWider/AmbisonicWider.h"
 
@@ -45,7 +45,7 @@ private:
     int                  m_order;
     AmbisonicEncoder*   m_encoder;
 	AmbisonicWider*     m_wider;
-    AmbisonicsViewer*    m_viewer;
+    AmbisonicViewer*    m_viewer;
     double*              m_harmonicsValues;
     
 public:

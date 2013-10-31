@@ -8,13 +8,27 @@ JuceLibraryCode/
 ## Visual Studio
 #################
 
-*.suo
+*.amplxeproj
+*.tlog
+*.obj
+*.log
+*.idb
 *.pdb
+*.lastbuildstate
+*.ipch
+*.opensdf
 *.sdf
 *.user
-*.ipch
+*.suo
+*.cache
+*.unsuccessfulbuild
+*.exp
+*.ilk
 *.rc
-*.amplxeproj
+*.manifest
+*.res
+*.obj
+
 
 sysbuild/
 

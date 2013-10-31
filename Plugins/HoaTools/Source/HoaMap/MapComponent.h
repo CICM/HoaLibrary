@@ -28,44 +28,30 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "../../../Sources/HoaLibrary.h"
+#include "HoaLookAndFeel.h"
 
-class MapProcessor
+class MapEditor : public Component
 {
 private:
-    long                    m_order;
-    long                    m_number_of_harmonics;
-    long                    m_number_of_sources;
-    double                  m_zoom;
-    SourcesManager*         m_sources_manager;
-    AmbisonicsMultiMaps*    m_map;
-public:
-    MapProcessor();
-    ~MapProcessor();
-    
-    void setConfiguation(long anOrder, long aNumberOfSources);
-    void prepareToPlay(long aSampleRate, long aVectorSize);
-    void process(float** inputs, float** outputs);
-    void setZoom(float aZoomvalue);
-    
-    long getOrder(){return m_order;};
-    long getNumberOfHarmonics(){return m_number_of_harmonics;};
-    long getNumberOfSources(){return m_number_of_sources;};
-    float getZoom(){return m_zoom;};
-    SourcesManager* getSourceManager(){return m_sources_manager;};
-};
-
-class MapEditor:public Component
-{
-private:
-    MapProcessor*   m_map_processor;
     SourcesManager* m_sources_manager;
+    AudioProcessor* m_processor;
+    
     double          m_sources_size;
     long            m_souce_selected;
+    long            m_group_selected;
+    
+    long             m_drag_mode;
+    bool             m_selected;
+    Rectangle<float> m_selection;;
     
     void draw_background(Graphics& g);
     void draw_sources(Graphics& g);
+    void draw_groups(Graphics& g);
+    void draw_selection(Graphics& g);
+    
+    HoaLookAndFeel          LookAndFeel;
 public:
-    MapEditor(MapProcessor* aMapProcessor);
+    MapEditor(SourcesManager* aSourceManager, AudioProcessor* aProcessor);
     ~MapEditor();
     
     void paint(Graphics& g);

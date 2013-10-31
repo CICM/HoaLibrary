@@ -1,0 +1,101 @@
+#N canvas 333 63 725 651 10;
+#X obj -163 -421 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.rotate~
+3 12 0 18 -204280 -1 0;
+#X obj -133 -259 hoa.encoder~ 4 ----;
+#X obj -133 -307 noise~;
+#X obj -22 -307 hoa.pi 2;
+#X obj -22 -336 loadbang;
+#X obj 43 -259 hoa.encoder~ 4 ----;
+#X obj 154 -331 loadbang;
+#X obj 43 -307 phasor~ 330;
+#X obj -56 154 dac~ 1 2 3 4 5 6 7 8 9 10;
+#X obj 282 -245 hoa.pi 2;
+#X obj 282 -274 loadbang;
+#X obj 231 -216 *~;
+#X obj 231 -299 phasor~ 0.1;
+#X text -160 -399 An ambisonic soundfield rotation external;
+#X obj 154 -302 hoa.pi 1;
+#X obj -56 -144 hoa.rotate~ 4 -----------;
+#X text -158 -371 hoa.rotate~ allows you to apply a rotation on the
+ambisonic soundfield. The last inlet set the azimuth of the rotation.
+;
+#X text 265 -214 Angle of rotation in radian;
+#X text 177 50 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+;
+#X text 177 34 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X msg 294 -130 \; pd dsp 1;
+#X msg 294 -92 \; pd dsp 0;
+#X obj -92 -114 hoa.scope~ @patching_rect { 0 0 225 225 } @order {
+4 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles { 1
+} @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7
+0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0
+0 1 1 } @patching_rect { 0 0 225 225 } @order { 4 } @gain { 1 } @interval
+{ 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor
+{ 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0
+0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0
+0 225 225 } @order { 4 } @gain { 1 } @interval { 100 } @drawcircle
+{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
+1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
+1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
+{ 4 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
+1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
+0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
+{ 0 0 1 1 };
+#X obj -56 122 hoa.decoder~ 4 0 10 -----;
+#X connect 1 0 15 0;
+#X connect 1 1 15 1;
+#X connect 1 2 15 2;
+#X connect 1 3 15 3;
+#X connect 1 4 15 4;
+#X connect 1 5 15 5;
+#X connect 1 6 15 6;
+#X connect 1 7 15 7;
+#X connect 1 8 15 8;
+#X connect 2 0 1 0;
+#X connect 3 0 1 1;
+#X connect 4 0 3 0;
+#X connect 5 0 15 0;
+#X connect 5 1 15 1;
+#X connect 5 2 15 2;
+#X connect 5 3 15 3;
+#X connect 5 4 15 4;
+#X connect 5 5 15 5;
+#X connect 5 6 15 6;
+#X connect 5 7 15 7;
+#X connect 5 8 15 8;
+#X connect 6 0 14 0;
+#X connect 7 0 5 0;
+#X connect 9 0 11 1;
+#X connect 10 0 9 0;
+#X connect 11 0 15 9;
+#X connect 12 0 11 0;
+#X connect 14 0 5 1;
+#X connect 15 0 22 0;
+#X connect 15 0 23 0;
+#X connect 15 1 22 1;
+#X connect 15 1 23 1;
+#X connect 15 2 22 2;
+#X connect 15 2 23 2;
+#X connect 15 3 22 3;
+#X connect 15 3 23 3;
+#X connect 15 4 22 4;
+#X connect 15 4 23 4;
+#X connect 15 5 22 5;
+#X connect 15 5 23 5;
+#X connect 15 6 22 6;
+#X connect 15 6 23 6;
+#X connect 15 7 22 7;
+#X connect 15 7 23 7;
+#X connect 15 8 23 8;
+#X connect 23 0 8 0;
+#X connect 23 1 8 1;
+#X connect 23 2 8 2;
+#X connect 23 3 8 3;
+#X connect 23 4 8 4;
+#X connect 23 5 8 5;
+#X connect 23 6 8 6;
+#X connect 23 7 8 7;
+#X connect 23 8 8 8;
+#X connect 23 9 8 9;
+#X coords 0 651 1 650 100 60 0;

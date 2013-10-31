@@ -27,9 +27,10 @@
 
 AmbisonicOptim::AmbisonicOptim(long anOrder, long anOptimMode, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
+    m_optimMode = -1;
 	cicm_malloc_vec_f(m_optim_vector_float, m_number_of_harmonics);
     cicm_malloc_vec_d(m_optim_vector_double, m_number_of_harmonics);
-	setOptimMode(anOptimMode);
+	setOptimMode(Tools::clip(anOptimMode, Hoa_Basic_Optim, Hoa_InPhase_Optim));
 }
 
 double AmbisonicOptim::getCoefficient(long anIndex)
@@ -59,11 +60,12 @@ void AmbisonicOptim::setOptimMode(long anOptim)
 			computeReOptim();
 		else
 			computeBasicOptim();
+        for (int i = 0; i < m_number_of_harmonics; i++)
+        {
+            m_optim_vector_float[i] = m_optim_vector_double[i];
+        }
+
 	}
-    for (int i = 0; i < m_number_of_harmonics; i++)
-    {
-        m_optim_vector_float[i] = m_optim_vector_double[i];
-    }
 }
 
 void AmbisonicOptim::computeBasicOptim()

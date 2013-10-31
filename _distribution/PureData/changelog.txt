@@ -1,0 +1,6 @@
+For an overview of hoa.library, please refer to the '@hoa.library overview' patch in the extra folder.
+
+------------------------
+version beta 1.0.0
+------------------------
+ - first version.

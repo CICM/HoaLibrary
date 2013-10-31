@@ -28,7 +28,7 @@
 AmbisonicRotate::AmbisonicRotate(long anOrder, long aVectorSize) : Ambisonic(anOrder, aVectorSize)
 {
 	m_number_of_inputs		= m_number_of_harmonics + 1;
-	
+	m_azimuth       = -1.;
 	m_harmonicCos   = new double[m_order];
 	m_harmonicSin   = new double[m_order];
 	m_cosLookUp     = new double[NUMBEROFCIRCLEPOINTS];
@@ -50,21 +50,25 @@ double AmbisonicRotate::getAzimuth()
 
 void AmbisonicRotate::setAzimuth(double aTheta)
 {
-	long tmpAngle;
-	if (aTheta < 0) 
-		aTheta = aTheta + ( -floor(aTheta/CICM_2PI)) * CICM_2PI;
-	double tmpTheta = aTheta;
-	m_azimuth = fmod(aTheta + CICM_2PI, CICM_2PI);
-	for(int i = 0; i < m_order; i++)
-	{
-		double angleFactor = tmpTheta*NUMBEROFCIRCLEPOINTS/(CICM_2PI);
-	
-		tmpAngle = (long)(angleFactor)%(NUMBEROFCIRCLEPOINTS-1);
-		m_harmonicSin[i] = m_sinLookUp[tmpAngle];
-		m_harmonicCos[i] = m_cosLookUp[tmpAngle];
-		
-		tmpTheta += aTheta;
-	}
+    if(aTheta != m_azimuth)
+    {
+        long tmpAngle;
+        if (aTheta < 0)
+            aTheta = aTheta + ( -floor(aTheta/CICM_2PI)) * CICM_2PI;
+        double tmpTheta = aTheta;
+        m_azimuth = fmod(aTheta + CICM_2PI, CICM_2PI);
+        for(int i = 0; i < m_order; i++)
+        {
+            double angleFactor = tmpTheta*NUMBEROFCIRCLEPOINTS/(CICM_2PI);
+            
+            tmpAngle = (long)(angleFactor)%(NUMBEROFCIRCLEPOINTS-1);
+            m_harmonicSin[i] = m_sinLookUp[tmpAngle];
+            m_harmonicCos[i] = m_cosLookUp[tmpAngle];
+            
+            tmpTheta += aTheta;
+        }
+        m_azimuth = aTheta;
+    }
 }
 
 

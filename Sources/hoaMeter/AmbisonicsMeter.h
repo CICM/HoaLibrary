@@ -47,8 +47,8 @@ public:
     
     void         setNumberOfLoudspeakers(long aNumberOfChannels);
     void         setVectorSize(long aVectorSize);
-    void         setLoudspeakerAngle(long anIndex, double anAngle);
-    //void         setLoudspeakerAngles(long len, double* angles);
+    void         setLoudspeakerAngleDegrees(long anIndex, double anAngle);
+    void         setLoudspeakerAnglesDegrees(long aSize, double* angles);
     
     double       getLoudspeakerPeaks(long anIndex);
     double       getLoudspeakerEnergy(long anIndex);

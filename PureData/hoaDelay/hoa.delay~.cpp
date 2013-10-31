@@ -23,7 +23,29 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.delay.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
+typedef struct _hoa_delay
+{
+    t_jbox              f_ob;
+    AmbisonicsDelay*    f_ambi_delay;
+    
+} t_hoa_delay;
+
+void *hoa_delay_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_delay_free(t_hoa_delay *x);
+
+void hoa_delay_ramp(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_time_ms(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_time_sample(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_diff(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+void hoa_delay_comp(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *argv);
+
+void hoa_delay_dsp(t_hoa_delay *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_delay_perform_post(t_hoa_delay *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+void hoa_delay_perform_no(t_hoa_delay *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_delay_class;
 
 extern "C" void setup_hoa0x2edelay_tilde(void)
 {

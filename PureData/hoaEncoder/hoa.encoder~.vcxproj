@@ -5,50 +5,75 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="hoa.encoder~|Win32">
+      <Configuration>hoa.encoder~</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|Win32">
-      <Configuration>MinSizeRel</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|Win32">
-      <Configuration>RelWithDebInfo</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\eattr\eattr.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ebox\ebox.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\eclass\eclass.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epd_max.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\epopup\epopup.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\estruct.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.h" />
+    <ClInclude Include="..\..\..\PdEnhanced\Sources\pd_enhanced.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h" />
+    <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.h" />
+    <ClInclude Include="..\hoaLibrary\hoa.library_pd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_attr.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_getter.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_new.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eattr\eattr_setter.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox_draw.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox_handle.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ebox\ebox_window.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\eclass\eclass.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ecommon\ecommon.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_color.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_forms.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_matrix.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\egraphics\egraphics_text.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\epopup\epopup.c" />
+    <ClCompile Include="..\..\..\PdEnhanced\Sources\ewidget\ewidget.c" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic.cpp" />
+    <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.cpp" />
+    <ClCompile Include="hoa.encoder~.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGUID>{6CA729B5-E634-41BA-BED9-CD64BCC9FB3B}</ProjectGUID>
+    <ProjectGuid>{1C24AD7C-43C5-4B32-A62D-A53A4E8DCEC4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <Platform>Win32</Platform>
-    <ProjectName>hoa.encoder~</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-    <UseIntelIPP>Sequential</UseIntelIPP>
-    <UseIntelMKL>Sequential</UseIntelMKL>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <UseIntelIPP>Sequential</UseIntelIPP>
     <UseIntelMKL>Sequential</UseIntelMKL>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <UseIntelIPP>Sequential</UseIntelIPP>
     <UseIntelMKL>Sequential</UseIntelMKL>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <UseIntelIPP>Sequential</UseIntelIPP>
     <UseIntelMKL>Sequential</UseIntelMKL>
@@ -56,231 +81,130 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">hoa.encoder~.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">hoa.encoder~</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../builds/</OutDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\builds</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">hoa.encoder~.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">hoa.encoder~</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">hoa.encoder~.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">hoa.encoder~</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.dll</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Pierre\Documents\GitHub\HoaLibrary\PureData\hoaEncoder\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">hoa.encoder~.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">hoa.encoder~</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.dll</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../builds/</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'">../builds/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\pd\src</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <Optimization>Disabled</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;MSW;CMAKE_INTDIR="Debug";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Debug</AssemblerListingLocation>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <ProgramDataBaseFileName>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Debug/hoa.encoder~.pdb</ProgramDataBaseFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <CallingConvention>Cdecl</CallingConvention>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <Optimization>Disabled</Optimization>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;MSW;CMAKE_INTDIR=\"Debug\";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
     <Link>
-      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;pd.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Program Files (x86)/pd/bin;C:/Program Files (x86)/pd/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2eencoder_tilde </AdditionalOptions>
+      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\pd\src</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Debug/hoa.encoder~.lib</ImportLibrary>
-      <ModuleDefinitionFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/hoa.encoder~.def</ModuleDefinitionFile>
-      <ProgramDataBaseFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Debug/hoa.encoder~.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
-      <Version>
-      </Version>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>NotSet</TargetMachine>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+      <OutputFile>../builds/$(ProjectName).dll</OutputFile>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+    </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <Optimization>MaxSpeed</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\pd\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level2</WarningLevel>
       <DebugInformationFormat>
       </DebugInformationFormat>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;MSW;CMAKE_INTDIR="Release";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>Release</AssemblerListingLocation>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <ProgramDataBaseFileName>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Release/hoa.encoder~.pdb</ProgramDataBaseFileName>
+      <CompileAs>Default</CompileAs>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
     </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;MSW;CMAKE_INTDIR=\"Release\";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
     <Link>
-      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;pd.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Program Files (x86)/pd/bin;C:/Program Files (x86)/pd/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <ImportLibrary>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Release/hoa.encoder~.lib</ImportLibrary>
-      <ModuleDefinitionFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/hoa.encoder~.def</ModuleDefinitionFile>
-      <ProgramDataBaseFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/Release/hoa.encoder~.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
-      <Version>
-      </Version>
-      <OutputFile>$(OutDir)$(TargetName).dll</OutputFile>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <Optimization>MinSpace</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;MSW;CMAKE_INTDIR="MinSizeRel";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>MinSizeRel</AssemblerListingLocation>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <ProgramDataBaseFileName>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/MinSizeRel/hoa.encoder~.pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;MSW;CMAKE_INTDIR=\"MinSizeRel\";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <Link>
-      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;pd.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Program Files (x86)/pd/bin;C:/Program Files (x86)/pd/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <ImportLibrary>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/MinSizeRel/hoa.encoder~.lib</ImportLibrary>
-      <ModuleDefinitionFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/hoa.encoder~.def</ModuleDefinitionFile>
-      <ProgramDataBaseFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/MinSizeRel/hoa.encoder~.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
-      <Version>
-      </Version>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <Optimization>MaxSpeed</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;MSW;CMAKE_INTDIR="RelWithDebInfo";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>RelWithDebInfo</AssemblerListingLocation>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <ProgramDataBaseFileName>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/RelWithDebInfo/hoa.encoder~.pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;MSW;CMAKE_INTDIR=\"RelWithDebInfo\";hoa_encoder__EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>C:/Program Files (x86)/pd/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <Link>
-      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;pd.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Program Files (x86)/pd/bin;C:/Program Files (x86)/pd/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2eencoder_tilde %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib;/LTCG;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../builds/$(ProjectName).dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\pd\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/RelWithDebInfo/hoa.encoder~.lib</ImportLibrary>
-      <ModuleDefinitionFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/hoa.encoder~.def</ModuleDefinitionFile>
-      <ProgramDataBaseFile>C:/Users/Pierre/Documents/GitHub/HoaLibrary/PureData/hoaEncoder/RelWithDebInfo/hoa.encoder~.pdb</ProgramDataBaseFile>
-      <SubSystem>Console</SubSystem>
-      <Version>
-      </Version>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
     </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-    </ProjectReference>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="hoa.encoder~.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_INTEL.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmSignal.h" />
-    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
-    <ClInclude Include="..\..\Sources\HoaLibrary.h" />
-  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='hoa.encoder~|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\pd\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NT;PD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level2</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386  /EXPORT:setup_hoa0x2ewider_tilde %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>C:\Program Files (x86)\pd\bin\pd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../builds/$(ProjectName).dll</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\pd\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

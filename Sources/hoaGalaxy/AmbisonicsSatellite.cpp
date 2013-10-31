@@ -50,7 +50,7 @@ void Satellite::setRadiusPrincipal(double aRadius)
     else
         m_radius_principal = Tools::clip_min(aRadius, 0.);
     
-    if(m_radius_principal < m_radius_secondary);
+    if(m_radius_principal < m_radius_secondary)
     {
         double aRadius = m_radius_principal;
         m_radius_principal = m_radius_secondary;

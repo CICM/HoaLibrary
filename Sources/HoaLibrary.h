@@ -27,22 +27,27 @@
 #define DEF_HOA_LIBRARY
 
 #ifdef _WINDOWS
-#include "hoaAmbisonics/AmbisonicsViewer.h"
+#include "hoaAmbisonics/AmbisonicViewer.h"
 //#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaEncoder/AmbisonicsEncoder.h"
+#include "hoaEncoder/AmbisonicEncoder.h"
+#include "hoaDelay/AmbisonicsDelay.h"
 #include "hoaFreeverb/AmbisonicFreeverb.h"
+#include "hoaFilter/AmbisonicsFilter.h"
+#include "hoaGrain/AmbisonicsGrain.h"
 #include "hoaRotate/AmbisonicRotate.h"
 #include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
 #include "hoaMap/AmbisonicMultiMaps.h"
 #include "hoaMap/AmbisonicSourcesTrajectory.h"
 #include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaOptim/AmbisonicsOptim.h"
+#include "hoaOptim/AmbisonicOptim.h"
 #include "hoaProjector/AmbisonicProjector.h"
-#include "hoaRecomposer/AmbisonicsRecomposer.h"
+#include "hoaRecomposer/AmbisonicRecomposer.h"
+#include "hoaRingModulation/AmbisonicsRingModulation.h"
 #include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
+#include "hoaRotate/AmbisonicRotate.h"
 #include "hoaSpace/AmbisonicSpace.h"
 #include "hoaVector/AmbisonicVector.h"
-#include "hoaWider/AmbisonicsWider.h"
+#include "hoaWider/AmbisonicWider.h"
 #endif
 
 #ifdef __APPLE__
@@ -51,7 +56,7 @@
 #include "hoaDecoder/AmbisonicDecoder3D.h"
 #include "hoaEncoder/AmbisonicEncoder3D.h"
 */
-#include "hoaAmbisonics/AmbisonicsViewer.h"
+#include "hoaAmbisonics/AmbisonicViewer.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaDelay/AmbisonicsDelay.h"
 #include "hoaEncoder/AmbisonicEncoder.h"

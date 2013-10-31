@@ -23,14 +23,27 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.wider~.h"
+#include "../hoaLibrary/hoa.library_pd.h"
 
+typedef struct _hoa_wider
+{
+    t_jbox          f_ob;
+    AmbisonicWider* f_ambi_wider;
+    
+} t_hoa_wider;
+
+void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_wider_free(t_hoa_wider *x);
+
+void hoa_wider_dsp(t_hoa_wider *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_wider_perform(t_hoa_wider *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_wider_class;
 
 extern "C" void setup_hoa0x2ewider_tilde(void)
 {
     t_eclass* c;
-    
-    c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (short)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
+    c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (short)sizeof(t_hoa_wider), 0, A_GIMME, 0);
     
 	class_dspinit(c);
     

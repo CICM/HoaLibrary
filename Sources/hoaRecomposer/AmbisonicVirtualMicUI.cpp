@@ -36,7 +36,7 @@ AmbisonicVirtualMicUI::AmbisonicVirtualMicUI()
     m_order = 7;
     
     m_encoder           = new AmbisonicEncoder(m_order);
-	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
+	m_viewer			= new AmbisonicViewer(m_order, -CICM_PI2);
 	m_wider				= new AmbisonicWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     
@@ -69,7 +69,7 @@ void AmbisonicVirtualMicUI::setOrder(long _order)
     
     m_order = Tools::clip_min(_order, long(1));
     m_encoder           = new AmbisonicEncoder(m_order);
-	m_viewer			= new AmbisonicsViewer(m_order, -CICM_PI2);
+	m_viewer			= new AmbisonicViewer(m_order, -CICM_PI2);
    	m_wider				= new AmbisonicWider(m_order);
 	m_harmonicsValues	= new double[m_order * 2 + 1];
     

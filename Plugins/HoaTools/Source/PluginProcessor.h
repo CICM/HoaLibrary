@@ -3,8 +3,8 @@
 #define PLUGINPROCESSOR_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "HoaMap/MapComponent.h"
-#include "HoaDecoder/DecoderComponent.h"
+#include "HoaLookAndFeel.h"
+#include "HoaComponent.h"
 
 enum
 {
@@ -17,13 +17,10 @@ class HoaToolsAudioProcessor  : public AudioProcessor, public ChangeBroadcaster
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HoaToolsAudioProcessor)
     
-    long                        m_order;
-    long                        m_number_of_harmonics;
-    bool                        m_can_process;
     long                        m_gui;
-    float**                     m_harmonics_matrix;
-    MapProcessor*               m_map;
-    DecoderProcessor*           m_decoder;
+    HoaProcessor*               m_processor;
+    SourcesManager*             m_source_manager;
+    
 public:
     HoaToolsAudioProcessor();
     ~HoaToolsAudioProcessor();
@@ -50,7 +47,10 @@ public:
     float getParameterDefaultValue (int parameterIndex);
     const String getParameterName (int index);
     const String getParameterText (int index);
-
+    String getParameterLabel(int index) const;
+    bool isParameterAutomatable (int index) const;
+    bool isMetaParameter(int index) const;
+    
     const String getInputChannelName (int channelIndex) const;
     const String getOutputChannelName (int channelIndex) const;
     bool isInputChannelStereoPair (int index) const;

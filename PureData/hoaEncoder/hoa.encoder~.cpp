@@ -23,7 +23,21 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "hoa.encoder.h"
+#include "../hoaLibrary/hoa.library_pd.h"
+
+typedef struct _hoa_encoder
+{
+    t_jbox            f_ob;
+    AmbisonicEncoder* f_ambi_encoder;
+} t_hoa_encoder;
+
+void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_encoder_free(t_hoa_encoder *x);
+
+void hoa_encoder_dsp(t_hoa_encoder *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_encoder_perform(t_hoa_encoder *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
+
+t_eclass *hoa_encoder_class;
 
 extern "C" void setup_hoa0x2eencoder_tilde(void)
 {

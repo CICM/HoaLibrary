@@ -76,7 +76,7 @@ class CicmFilterDelay : public Filter
     
     inline double read_no_sample(long aDelay)
     {
-        aDelay = Tools::clip(aDelay, 0, m_size-1);
+        aDelay = (long)Tools::clip(aDelay, 0, m_size - 1);
         aDelay = m_ramp - aDelay - 1;
         if(aDelay < 0)
             aDelay += m_size;
@@ -90,7 +90,7 @@ class CicmFilterDelay : public Filter
     
     inline float read_no_sample(int aDelay)
     {
-        aDelay = Tools::clip(aDelay, 0, m_size-1);
+        aDelay = (int)Tools::clip(aDelay, 0, m_size-1);
         aDelay = m_ramp - aDelay - 1;
         if(aDelay < 0)
             aDelay += m_size;
@@ -132,7 +132,7 @@ class CicmFilterDelay : public Filter
     
     double read_cosinus_sample(double aDelay)
     {
-        long	floorPart	= aDelay;
+        long	floorPart	= (long)aDelay;
         double	decimalPart = aDelay - floorPart;
         double  alpha = (1. - cos(decimalPart * CICM_PI)) / 2.;
 
@@ -174,7 +174,7 @@ class CicmFilterDelay : public Filter
     
     double read_linear_sample(double aDelay)
     {
-        long	floorPart	= aDelay;
+        long	floorPart	= (long)aDelay;
         double	decimalPart = aDelay - floorPart;
         return read_no_sample((long)aDelay) * (1. - decimalPart) + read_no_sample((long)aDelay + 1) * decimalPart;
     }
@@ -216,7 +216,7 @@ class CicmFilterDelay : public Filter
     {
         if(aDelay < 1.)
             aDelay = 1;
-        int		floorPart	= aDelay;
+        int		floorPart	= (int)aDelay;
         double	decimalPart = aDelay - floorPart;
         double	one, two, thr, fou, alpha;
         alpha = decimalPart * decimalPart;
@@ -271,7 +271,7 @@ class CicmFilterDelay : public Filter
     {
         if(aDelay < 1.)
             aDelay = 1;
-        int		floorPart	= aDelay;
+        int		floorPart	= (int)aDelay;
         double	decimalPart = aDelay - floorPart;
         double	one, two, thr, fou, oneMthr, alpha;
         
@@ -320,7 +320,7 @@ class CicmFilterDelay : public Filter
     
     double read_lagrange_sample(double aDelay)
     {
-        long    floorPart  = aDelay;
+        long    floorPart  = (long)aDelay;
         double  decimalPart = aDelay - floorPart + 1.;
         long    tmpIndex;
         double  output = 0.;

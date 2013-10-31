@@ -418,9 +418,9 @@ public:
         return degree / 360. * CICM_2PI;
     }
     
-    static long mstosamps(double ms, double samplerate=44100.)
+    static long mstosamps(double ms, double samplerate = 44100.)
     {
-        return samplerate * ms * 0.001;
+        return (long)(samplerate * ms * 0.001);
     }
     
     static double sampstoms(double s, double samplerate=44100.)

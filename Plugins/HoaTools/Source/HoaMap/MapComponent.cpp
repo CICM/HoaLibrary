@@ -25,95 +25,21 @@
 
 #include "MapComponent.h"
 
-/************************************************************************************/
-/***************************** PROCESSOR ********************************************/
-/************************************************************************************/
-
-MapProcessor::MapProcessor()
-{
-    m_sources_manager   = new SourcesManager(-1, 1);
-    m_map               = new AmbisonicsMultiMaps(1);
-    m_zoom              = 0.5;
-    m_order             = m_map->getOrder();
-    m_number_of_harmonics = m_map->getNumberOfHarmonics();
-    m_number_of_sources = m_map->getNumberOfSources();
-}
-
-
-MapProcessor::~MapProcessor()
-{
-    delete m_sources_manager;
-    delete m_map;
-}
-
-void MapProcessor::setConfiguation(long anOrder, long aNumberOfSource)
-{
-    if(anOrder != m_order)
-    {
-        if(m_map)
-            delete m_map;
-        m_map = new AmbisonicsMultiMaps(anOrder, aNumberOfSource, 0, 512, 44100);
-        m_order             = m_map->getOrder();
-        m_number_of_harmonics = m_map->getNumberOfHarmonics();
-        m_number_of_sources = m_map->getNumberOfSources();
-    }
-    if(aNumberOfSource != m_number_of_sources)
-    {
-        if(m_map)
-            delete m_map;
-        m_map = new AmbisonicsMultiMaps(m_order, aNumberOfSource, 0, 512, 44100);
-        m_order             = m_map->getOrder();
-        m_number_of_harmonics = m_map->getNumberOfHarmonics();
-        m_number_of_sources = m_map->getNumberOfSources();
-    }
-    for(int i = 0; i < m_number_of_sources; i++)
-    {
-        if(!m_sources_manager->sourceGetExistence(i))
-            m_sources_manager->sourceSetPolar(i, 1., CICM_2PI / (double)m_number_of_sources * (double)i);
-    }
-    for(int i = m_number_of_sources; i < m_sources_manager->getMaximumIndexOfSource(); i++)
-    {
-        m_sources_manager->sourceRemove(i);
-    }
-        
-    for(int i = 0; i < m_number_of_sources; i++)
-    {
-        m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
-    }
-}
-
-void MapProcessor::prepareToPlay(long aSampleRate, long aVectorSize)
-{
-    m_map->setSamplingRate(aSampleRate);
-    m_map->setVectorSize(aVectorSize);
-    m_map->setRamp(aVectorSize);
-}
-
-
-void MapProcessor::process(float** inputs, float** outputs)
-{
-    m_map->process(inputs, outputs);
-    for(int i = 0; i < m_number_of_sources; i++)
-    {
-        m_map->setCoordinatesCartesian(i, m_sources_manager->sourceGetAbscissa(i), m_sources_manager->sourceGetOrdinate(i));
-    }
-}
-
-void MapProcessor::setZoom(float aZoomvalue)
-{
-    m_zoom = Tools::clip(aZoomvalue, 0.01, 1.);
-}
+#define MIN_ZOOM 0.05
 
 /************************************************************************************/
 /***************************** EDITOR ***********************************************/
 /************************************************************************************/
 
-MapEditor::MapEditor(MapProcessor* aMapProcessor)
+MapEditor::MapEditor(SourcesManager* aSourceManager, AudioProcessor* aProcessor)
 {
-    m_map_processor     = aMapProcessor;
-    m_sources_manager   = m_map_processor->getSourceManager();
+    m_sources_manager   = aSourceManager;
+    m_processor         = aProcessor;
+    
     m_souce_selected    = -1;
+    m_group_selected    = -1;
     m_sources_size      = 15.;
+    m_selected          = 0;
 }
 
 
@@ -124,78 +50,336 @@ MapEditor::~MapEditor()
 
 void MapEditor::mouseMove(const MouseEvent &event)
 {
-    Point<float> source;
+    Point<float> point;
     Point<float> mouse = event.getPosition().toFloat();
     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1, getWidth(), 0, 1, 1, getWidth(), getWidth(), 1, -1));
     
-    m_souce_selected = -1;
-    for (int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+    m_selected          = 0;
+    m_souce_selected    = -1;
+    m_group_selected    = -1;
+    for (int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
     {
-        source.setXY(m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom());
-        if(mouse.getDistanceFrom(source) < m_sources_size * 0.002)
+        if(m_sources_manager->sourceGetExistence(i))
         {
-            m_souce_selected = i;
-            setMouseCursor(MouseCursor::PointingHandCursor);
-            repaint();
-            return;
+            point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom());
+            if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
+            {
+                m_souce_selected = i;
+                setMouseCursor(MouseCursor::PointingHandCursor);
+                repaint();
+                return;
+            }
         }
     }
+    for (int i = 0; i < m_sources_manager->getMaximumIndexOfGroup(); i++)
+    {
+        if(m_sources_manager->groupGetExistence(i))
+        {
+            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom());
+            if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
+            {
+                m_group_selected = i;
+                setMouseCursor(MouseCursor::PointingHandCursor);
+                repaint();
+                return;
+            }
+        }
+    }
+    m_drag_mode = 0;
     repaint();
     setMouseCursor(MouseCursor::NormalCursor);
 }
+
 void MapEditor::mouseDown(const MouseEvent &event)
 {
-    Point<float> source;
+    Point<float> point;
     Point<float> mouse = event.getPosition().toFloat();
+    Point<float> rect  = mouse;
     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1, getWidth(), 0, 1, 1, getWidth(), getWidth(), 1, -1));
     
-    m_souce_selected = -1;
+    m_selected          = 0;
+    m_souce_selected    = -1;
+    m_drag_mode         = 0;    
+    if(event.mods.isAltDown() && event.mods.isShiftDown())
+    {
+        m_drag_mode = 1;
+    }
+    else if(event.mods.isAltDown() && !event.mods.isShiftDown())
+    {
+        m_drag_mode = 2;
+    }
+    else if(event.mods.isCtrlDown() && event.mods.isShiftDown())
+    {
+        m_drag_mode = 3;
+    }
+    else if(event.mods.isCtrlDown() && !event.mods.isShiftDown())
+    {
+        m_drag_mode = 4;
+    }
+    else if(event.mods.isShiftDown())
+    {
+        m_drag_mode = 5;
+    }
     for (int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
     {
-        source.setXY(m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom());
-        if(mouse.getDistanceFrom(source) < m_sources_size * 0.002)
+        point.setXY(m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom());
+        if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
         {
-            m_souce_selected = i;
-            setMouseCursor(MouseCursor::PointingHandCursor);
+            if(event.mods.isRightButtonDown())
+            {
+                PopupMenu Popup;
+                Popup.setLookAndFeel(&LookAndFeel);
+                Popup.addItem(1, String("Source Menu"), false);
+                Popup.addSeparator();
+                Popup.addItem(2, String("Remove source"));
+                if(m_sources_manager->sourceGetMute(i))
+                    Popup.addItem(3, String("Unmute source"));
+                else
+                    Popup.addItem(3, String("Mute source"));
+                
+                const int choice = Popup.show();
+                if(choice == 2)
+                {
+                    m_sources_manager->sourceRemove(i);
+                }
+                else if(choice == 3)
+                {
+                    m_processor->beginParameterChangeGesture(i*3+3);
+                    if(m_sources_manager->sourceGetMute(i))
+                    {
+                        m_sources_manager->sourceSetMute(i, 0);
+                    }
+                    else
+                    {
+                        m_sources_manager->sourceSetMute(i, 1);
+                    }
+                    m_processor->endParameterChangeGesture(i*3+3);
+                }
+            }
+            else
+            {
+                m_souce_selected = i;
+                setMouseCursor(MouseCursor::PointingHandCursor);
+            }
             repaint();
             return;
         }
     }
+    
+    for (int i = 0; i < m_sources_manager->getMaximumIndexOfGroup(); i++)
+    {
+        if(m_sources_manager->groupGetExistence(i))
+        {
+            point.setXY(m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom(), m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom());
+            if(mouse.getDistanceFrom(point) < m_sources_size * 0.002)
+            {
+                if(event.mods.isRightButtonDown())
+                {
+                    PopupMenu Popup;
+                    Popup.setLookAndFeel(&LookAndFeel);
+                    Popup.addItem(1, String("Group Menu"), false);
+                    Popup.addSeparator();
+                    Popup.addItem(2, String("Remove group"));
+                    Popup.addItem(3, String("Remove group and sources"));
+                    if(m_sources_manager->groupGetMute(i) || m_sources_manager->groupGetIfSourceMuted(i) == 1)
+                        Popup.addItem(4, String("Unmute group"));
+                    if(!m_sources_manager->groupGetMute(i))
+                        Popup.addItem(5, String("Mute group"));
+                    
+                    const int choice = Popup.show();
+                    if(choice == 2)
+                    {
+                        m_sources_manager->groupRemove(i);
+                    }
+                    else if(choice == 3)
+                    {
+                        m_sources_manager->groupRemoveWithSources(i);
+                    }
+                    else if(choice == 4)
+                    {
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->beginParameterChangeGesture(i*3+3);
+                        }
+                        m_sources_manager->groupSetMute(i, 0);
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->endParameterChangeGesture(i*3+3);
+                        }
+                    }
+                    else if(choice == 5)
+                    {
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->beginParameterChangeGesture(i*3+3);
+                        }
+                        m_sources_manager->groupSetMute(i, 1);
+                        for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+                        {
+                            m_processor->endParameterChangeGesture(i*3+3);
+                        }
+                    }
+                }
+                else
+                {
+                    m_group_selected = i;
+                    setMouseCursor(MouseCursor::PointingHandCursor);
+                }
+                repaint();
+                return;
+            }
+        }
+    }
+    if(event.mods.isRightButtonDown())
+    {
+        PopupMenu Popup;
+        Popup.setLookAndFeel(&LookAndFeel);
+        Popup.addItem(1, String("Menu"), false);
+        Popup.addSeparator();
+        Popup.addItem(2, String("Add source"));
+        Popup.addItem(3, String("Clear all"));
+        
+        const int choice = Popup.show();
+        if(choice == 2)
+        {
+            m_sources_manager->sourceNewCartesian(mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
+        }
+        else if(choice == 3)
+        {
+            m_sources_manager->clearAll();
+        }
+    }
+    m_selected  = 1;
+    m_selection.setPosition(rect);
+    m_selection.setWidth(0);
+    m_selection.setHeight(0);
+    
     repaint();
     setMouseCursor(MouseCursor::NormalCursor);
 }
 void MapEditor::mouseDrag(const MouseEvent &event)
-{
+{    
     Point<float> source;
     Point<float> mouse = event.getPosition().toFloat();
+    Point<float> rect  = mouse;
     mouse.applyTransform(AffineTransform::fromTargetPoints(0, 0, -1, 1, getWidth(), 0, 1, 1, getWidth(), getWidth(), 1, -1));
     
     if(m_souce_selected != -1)
     {
-        m_sources_manager->sourceSetCartesian(m_souce_selected, mouse.getX() / m_map_processor->getZoom(), mouse.getY() / m_map_processor->getZoom());
+        m_processor->beginParameterChangeGesture(m_souce_selected*3);
+        
+        if (m_drag_mode == 1)
+        {
+            m_sources_manager->sourceSetRadius(m_souce_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom());
+        }
+        else if(m_drag_mode == 2)
+        {
+            m_sources_manager->sourceSetAngle(m_souce_selected, mouse.getAngleToPoint(Point<float>(0., 0.)));
+        }
+        else if(m_drag_mode == 3)
+        {
+            m_sources_manager->sourceSetAbscissa(m_souce_selected, mouse.getX() / m_sources_manager->getZoom());
+        }
+        else if(m_drag_mode == 4)
+        {
+            m_sources_manager->sourceSetOrdinate(m_souce_selected, mouse.getY() / m_sources_manager->getZoom());
+        }
+        else
+        {
+            m_sources_manager->sourceSetCartesian(m_souce_selected, mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
+        }
+        m_processor->endParameterChangeGesture(m_souce_selected*3);
         repaint();
+        return;
     }
+    if(m_group_selected != -1)
+    {
+        if (m_drag_mode == 1)
+        {
+            m_sources_manager->groupSetRelativeRadius(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom());
+        }
+        else if(m_drag_mode == 2)
+        {
+            m_sources_manager->groupSetRelativeAngle(m_group_selected, mouse.getAngleToPoint(Point<float>(0., 0.)) + CICM_PI2);
+        }
+        else if(m_drag_mode == 3)
+        {
+            m_sources_manager->groupSetAbscissa(m_group_selected, mouse.getX() / m_sources_manager->getZoom());
+        }
+        else if(m_drag_mode == 4)
+        {
+            m_sources_manager->groupSetOrdinate(m_group_selected, mouse.getY() / m_sources_manager->getZoom());
+        }
+        else if(m_drag_mode == 5)
+        {
+            m_sources_manager->groupSetRelativePolar(m_group_selected, mouse.getDistanceFrom(Point<float>(0., 0.)) / m_sources_manager->getZoom(), mouse.getAngleToPoint(Point<float>(0., 0.)) + CICM_PI2);
+        }
+        else
+        {
+            m_sources_manager->groupSetCartesian(m_group_selected, mouse.getX() / m_sources_manager->getZoom(), mouse.getY() / m_sources_manager->getZoom());
+        }
+        repaint();
+        return;
+    }
+    if(m_selected)
+    {
+        m_selection.setWidth(rect.getX() - m_selection.getX());
+        m_selection.setHeight(rect.getY() - m_selection.getY());
+        repaint();
+    }    
 }
 
 void MapEditor::mouseWheelMove(const MouseEvent& event, const MouseWheelDetails& wheel)
 {
-    m_map_processor->setZoom(m_map_processor->getZoom() + wheel.deltaY);
-    repaint();
-    if(event.mods.isShiftDown() || event.mods.isCtrlDown() || event.mods.isCommandDown())
+    if(event.mods.isShiftDown())
     {
-       
+        m_sources_manager->setZoom(m_sources_manager->getZoom() + wheel.deltaY);
+        repaint();
     }
 }
 
 void MapEditor::mouseUp(const MouseEvent &event)
 {
-    ;
+    if(m_selected)
+    {
+        float center = getWidth() * 0.5;
+        long groupIndex = m_sources_manager->groupGetNextIndex();
+        for(int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
+        {
+            if(m_sources_manager->sourceGetExistence(i))
+            {
+                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+                if(m_selection.contains(source_x, source_y))
+                {
+                    m_sources_manager->groupSetSource(groupIndex, i);
+                }
+            }
+        }
+        m_sources_manager->groupClean();
+    }
+    m_selected = 0;
+    repaint();
 }
 
 void MapEditor::paint(Graphics& g)
 {
+    float center = getWidth() /2.;
+    
+    if(center / m_sources_manager->getZoom() > center / MIN_ZOOM * m_sources_manager->getZoom() - 5)
+    {
+        Path P;
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, center / MIN_ZOOM * m_sources_manager->getZoom() - 4, 0, 0, CICM_2PI);
+        g.strokePath(P, 1);
+        P.clear();
+        P.addCentredArc(center, center, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, center / MIN_ZOOM * m_sources_manager->getZoom() - 5, 0, 0, CICM_2PI);
+        g.reduceClipRegion (P, AffineTransform::identity);
+    }
+    
     draw_background(g);
     draw_sources(g);
+    draw_groups(g);
+    draw_selection(g);
 }
 
 void MapEditor::draw_background(Graphics& g)
@@ -204,7 +388,7 @@ void MapEditor::draw_background(Graphics& g)
     
     for(int i = 1; i <= 5; i++)
     {
-        float width = center * (i / 5.) * m_map_processor->getZoom();
+        float width = center * (i / 5.) * m_sources_manager->getZoom();
         float start = center - width;
         g.setColour(Colours::white);
         g.drawEllipse(start + 0.5, start + 0.5, width * 2., width * 2., 2.);
@@ -212,7 +396,7 @@ void MapEditor::draw_background(Graphics& g)
         g.drawEllipse(start, start, width * 2., width * 2., 1.);
     }
     
-    float ecart = m_map_processor->getZoom() * center;
+    float ecart = m_sources_manager->getZoom() * center;
     if(ecart < 10. && ecart >= 5.)
         ecart *= 2.;
     else if(ecart < 5. && ecart > 2.5)
@@ -241,24 +425,126 @@ void MapEditor::draw_sources(Graphics& g)
 {
     float source_thickness = 1.;
     float center = getWidth() * 0.5;
-    for(int i = 0; i < m_sources_manager->getNumberOfSources(); i++)
+    for(int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
     {
-        g.setColour(Colour(0xff444444));        
-        float source_x = m_sources_manager->sourceGetAbscissa(i) * m_map_processor->getZoom() * center + center;
-        float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_map_processor->getZoom() * center + center;
-        
-        
-        if (i == m_souce_selected)
-            source_thickness *= 1.5;
-        else
-            source_thickness = 1.;
-        
-        g.fillEllipse(source_x - m_sources_size * 0.35, source_y - m_sources_size * 0.35, m_sources_size * 0.7, m_sources_size * 0.7);
-        g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
-        
-        g.setFont(11);
-        g.setColour(Colours::black);
-        g.drawText(String(i+1), source_x - m_sources_size * 0.35, source_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), FALSE);
+        if(m_sources_manager->sourceGetExistence(i))
+        {
+            g.setColour(Colour(0xff444444));
+            float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+            float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+            
+            g.fillEllipse(source_x - m_sources_size * 0.35, source_y - m_sources_size * 0.35, m_sources_size * 0.7, m_sources_size * 0.7);
+            
+            if (i == m_souce_selected)
+            {
+                source_thickness *= 1.5;
+                for(int j = 0; j < m_sources_manager->sourceGetNumberOfGroups(i); j++)
+                {
+                    int group_index = m_sources_manager->sourceGetGroupIndex(i, j);
+                    float group_x = m_sources_manager->groupGetAbscissa(group_index) * m_sources_manager->getZoom() * center + center;
+                    float group_y = -m_sources_manager->groupGetOrdinate(group_index) * m_sources_manager->getZoom() * center + center;
+                    g.drawLine(source_x, source_y, group_x, group_y);
+                }
+                
+                g.setColour(Colour(0xff444444).withAlpha(0.5f));
+                g.fillEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size, m_sources_size);
+            }
+            else
+            {
+                source_thickness = 1.;
+            }            
+            
+            if(m_sources_manager->sourceGetMute(i))
+            {
+                g.setColour(Colours::red);
+                g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
+                g.drawLine(source_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 / 2.), source_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI2 / 2.), source_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 * 5. / 2.), source_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI * 5. / 4.));
+            }
+            else
+            {
+                g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, source_thickness);
+            }
+            
+            g.setFont(11);
+            g.setColour(Colours::black);
+            g.drawText(String(i+1), source_x - m_sources_size * 0.35, source_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), FALSE);
+        }
     }
 }
+
+void MapEditor::draw_groups(Graphics& g)
+{
+    float group_thickness = 1.;
+    float center = getWidth() * 0.5;
+    for(int i = 0; i < m_sources_manager->getMaximumIndexOfGroup(); i++)
+    {
+        if(m_sources_manager->groupGetExistence(i))
+        {
+            g.setColour(Colour(0xff444444));
+            float group_x = m_sources_manager->groupGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+            float group_y = -m_sources_manager->groupGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+            
+            g.fillEllipse(group_x - m_sources_size * 0.15, group_y - m_sources_size * 0.15, m_sources_size * 0.3, m_sources_size * 0.3);
+            if (i == m_group_selected)
+            {
+                group_thickness *= 1.5;
+                for(int j = 0; j < m_sources_manager->groupGetNumberOfSources(i); j++)
+                {
+                    int source_index = m_sources_manager->groupGetSourceIndex(i, j);
+                    float source_x = m_sources_manager->sourceGetAbscissa(source_index) * m_sources_manager->getZoom() * center + center;
+                    float source_y = -m_sources_manager->sourceGetOrdinate(source_index) * m_sources_manager->getZoom() * center + center;
+                    g.drawLine(group_x, group_y, source_x, source_y);
+                }
+                
+                g.setColour(Colour(0xff444444).withAlpha(0.5f));
+                g.fillEllipse(group_x - m_sources_size * 0.5, group_y - m_sources_size * 0.5, m_sources_size, m_sources_size);
+            }
+            else
+            {
+                group_thickness = 1.;
+            }
+            
+            if(m_sources_manager->groupGetMute(i))
+            {
+                g.setColour(Colours::red);
+                g.drawEllipse(group_x - m_sources_size * 0.5, group_y - m_sources_size * 0.5, m_sources_size , m_sources_size, group_thickness);
+                g.drawLine(group_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 / 2.), group_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI2 / 2.), group_x + Tools::abscissa(m_sources_size * 0.5, CICM_PI2 * 5. / 2.), group_y + Tools::ordinate(m_sources_size * 0.5, CICM_PI * 5. / 4.));
+            }
+            else
+            {
+                g.drawEllipse(group_x - m_sources_size * 0.5, group_y - m_sources_size * 0.5, m_sources_size , m_sources_size, group_thickness);
+            }
+            
+            g.setFont(11);
+            g.setColour(Colours::black);
+            g.drawText(String(i+1), group_x - m_sources_size * 0.35, group_y - m_sources_size * 1.5,  m_sources_size, m_sources_size, Justification(4), FALSE);
+        }
+    }
+}
+
+void MapEditor::draw_selection(Graphics& g)
+{
+    if(m_selected)
+    {
+        float center = getWidth() * 0.5;
+        g.setColour(Colour::fromFloatRGBA(0., 0., 1., 0.5));
+        g.fillRect(m_selection);
+        
+        g.setColour(Colour::fromFloatRGBA(0., 1., 0., 0.5));
+        for(int i = 0; i < m_sources_manager->getMaximumIndexOfSource(); i++)
+        {
+            if(m_sources_manager->sourceGetExistence(i))
+            {
+                float source_x = m_sources_manager->sourceGetAbscissa(i) * m_sources_manager->getZoom() * center + center;
+                float source_y = -m_sources_manager->sourceGetOrdinate(i) * m_sources_manager->getZoom() * center + center;
+                if(m_selection.contains(source_x, source_y))
+                {                    
+                    g.drawEllipse(source_x - m_sources_size * 0.5, source_y - m_sources_size * 0.5, m_sources_size , m_sources_size, 1.);
+                }
+            }
+        }
+
+    }
+}
+
 

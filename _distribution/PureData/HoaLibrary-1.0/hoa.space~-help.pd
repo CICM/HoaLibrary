@@ -1,0 +1,286 @@
+#N canvas 302 64 930 715 10;
+#X obj -255 -327 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.space~
+3 12 0 18 -204280 -1 0;
+#X obj 114 -2 hoa.projector~ 4 10;
+#X obj 114 132 hoa.space~ 10 -----;
+#X obj -47 100 pack 0 0;
+#X obj -47 57 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj -2 76 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 111 173 hoa.recomposer~ 4 10;
+#X obj 96 252 dac~ 1 2 3 4 5 6 7 8 9 10;
+#X text -45 34 a index and a float :;
+#X msg -198 40 \; pd dsp 1;
+#X msg -198 84 \; pd dsp 0;
+#X obj 95 -53 hoa.grain~ 4 no grain_env;
+#N canvas 0 22 665 459 (subpatch) 0;
+#X array grain_env 44100 float 2;
+#X coords 0 1 44100 -1 200 140 1;
+#X restore 384 -90 graph;
+#X obj 384 -127 soundfiler;
+#X msg 411 -193 read -resize hanning.wav grain_env;
+#X msg 384 -214 read -resize triangle.wav grain_env;
+#X msg 424 -169 read -resize sinc5.wav grain_env;
+#X obj 177 -110 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1000 256;
+#X obj 177 -197 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 30 256;
+#X msg 177 -168 size \$1;
+#X msg 177 -83 delay \$1;
+#X obj 246 -195 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0.75 256;
+#X obj 247 -111 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0.4 256;
+#X msg 246 -165 feedback \$1;
+#X msg 247 -84 rarefaction \$1;
+#X obj -222 -214 hoa.space @patching_rect { 0 0 225 225 } @channels
+{ 10 } @coeffs { 1 0.989477 0.886238 0.897487 1 1 1 1 1 1 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @bgcolor
+{ 0.7 0.7 0.7 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor { 0 0 0 1 }
+@cicolorin { 0.7 0.7 0.7 1 } @borderboxcolor { 0.5 0.5 0.5 1 } @patching_rect
+{ 0 0 225 225 } @channels { 10 } @coeffs { 1 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+} @bgcolor { 0.7 0.7 0.7 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor
+{ 0 0 0 1 } @cicolorin { 0.7 0.7 0.7 1 } @borderboxcolor { 0.5 0.5
+0.5 1 } @patching_rect { 0 0 225 225 } @channels { 10 } @coeffs { 0.731887
+1 1 1 1 1 1 1 1 0.97786 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @bgcolor { 0.7 0.7 0.7 1 } @harmocolor
+{ 0 0.4 0.6 1 } @miccolor { 0 0 0 1 } @cicolorin { 0.7 0.7 0.7 1 }
+@borderboxcolor { 0.5 0.5 0.5 1 } @patching_rect { 0 0 225 225 } @channels
+{ 10 } @coeffs { 0.731887 1 1 1 1 1 1 1 1 0.97786 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @bgcolor {
+0.7 0.7 0.7 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor { 0 0 0 1 } @cicolorin
+{ 0.7 0.7 0.7 1 } @borderboxcolor { 0.5 0.5 0.5 1 } @patching_rect
+{ 0 0 225 225 } @channels { 10 } @coeffs { 0.731887 1 1 1 0.202518
+0.20609 1 1 1 0.97786 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 } @bgcolor { 0.7 0.7 0.7 1 } @harmocolor
+{ 0 0.4 0.6 1 } @miccolor { 0 0 0 1 } @cicolorin { 0.7 0.7 0.7 1 }
+@borderboxcolor { 0.5 0.5 0.5 1 } @patching_rect { 0 0 225 225 } @channels
+{ 10 } @coeffs { 0.416199 0.117063 0 0.806189 0.893 1 1 1 1 0.800541
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 } @bgcolor { 0.7 0.7 0.7 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor
+{ 0 0 0 1 } @cicolorin { 0.7 0.7 0.7 1 } @borderboxcolor { 0.5 0.5
+0.5 1 } @patching_rect { 0 0 225 225 } @channels { 10 } @coeffs { 0.0147744
+0.0546645 0.101251 0.154561 0.277822 0.473411 1 0.13749 0.37429 0.161191
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 } @bgcolor { 0.7 0.7 0.7 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor
+{ 0 0 0 1 } @cicolorin { 0.7 0.7 0.7 1 } @borderboxcolor { 0.5 0.5
+0.5 1 } @patching_rect { 0 0 225 225 } @channels { 10 } @coeffs { 1
+0.0233177 0.913401 0.906991 1 1 1 0.854621 0.652681 0.665176 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 }
+@bgcolor { 0.7 0.7 0.7 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor {
+0 0 0 1 } @cicolorin { 0.7 0.7 0.7 1 } @borderboxcolor { 0.5 0.5 0.5
+1 } @patching_rect { 0 0 225 225 } @channels { 10 } @coeffs { 1 1 0.985653
+1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 } @bgcolor { 0.7 0.7 0.7 1 } @harmocolor { 0 0.4
+0.6 1 } @miccolor { 0 0 0 1 } @cicolorin { 0.7 0.7 0.7 1 } @borderboxcolor
+{ 0.5 0.5 0.5 1 } @patching_rect { 0 0 225 225 } @channels { 10 } @coeffs
+{ 0.00541724 0.00382419 0.0096176 0 0 0 0.0634147 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @bgcolor
+{ 0.7 0.7 0.7 1 } @harmocolor { 0 0.4 0.6 1 } @miccolor { 0 0 0 1 }
+@cicolorin { 0.7 0.7 0.7 1 } @borderboxcolor { 0.5 0.5 0.5 1 } @patching_rect
+{ 0 0 225 225 } @channels { 10 } @coeffs { 1 0.186085 0 0 0 0 0 0 1
+0.767857 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 } @bgcolor { 0.7 0.7 0.7 1 } @bordercolor { 0.5 0.5 0.5
+1 } @harmocolor { 0 0.4 0.6 1 } @miccolor { 0 0 0 1 } @circolor { 0.7
+0.7 0.7 1 } @patching_rect [ 0 0 225 225 ] @channels [ 10 ] @coeffs
+[ 1 0.186085 0 0 0 0 0 0 1 0.767857 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1
+] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor
+[ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ];
+#X obj 95 -94 osc~ 220;
+#X obj 332 -283 loadbang;
+#X text -227 307 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -227 291 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj 386 68 hoa.scope~ @patching_rect { 0 0 225 225 } @order { 4
+} @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles { 1 }
+@drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7
+0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0
+0 1 1 } @patching_rect { 0 0 225 225 } @order { 4 } @gain { 1 } @interval
+{ 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor
+{ 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0
+0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0
+0 225 225 } @order { 4 } @gain { 1 } @interval { 100 } @drawcircle
+{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
+1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
+1 0 0 1 } @nhcolor { 0 0 1 1 };
+#X text -49 22 Set one coefficient with;
+#X msg 177 -140 1000;
+#X msg 177 -221 30;
+#X msg 246 -221 0.75;
+#X msg 247 -140 0.4;
+#X obj 95 -143 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 220 256;
+#X msg 95 -176 220;
+#X text -247 -286 hoa.space~ allows you to apply gain to virtual microphones
+placed arround the soud field.;
+#X text -252 -305 A spatial filter;
+#X text -207 146 Index from 0 to the number of virtual microphones.
+Gain between 0 and 1;
+#X text -207 201 You can use a list with a set of value to change all
+the gains together.;
+#X text -230 -238 Use hoa.space (without ~) to change the gains.;
+#X obj -241 -255 loadbang;
+#X obj 96 219 hoa.decoder~ 4 0 10 -----;
+#X connect 1 0 2 0;
+#X connect 1 1 2 1;
+#X connect 1 2 2 2;
+#X connect 1 3 2 3;
+#X connect 1 4 2 4;
+#X connect 1 5 2 5;
+#X connect 1 6 2 6;
+#X connect 1 7 2 7;
+#X connect 1 8 2 8;
+#X connect 1 9 2 9;
+#X connect 2 0 6 0;
+#X connect 2 1 6 1;
+#X connect 2 2 6 2;
+#X connect 2 3 6 3;
+#X connect 2 4 6 4;
+#X connect 2 5 6 5;
+#X connect 2 6 6 6;
+#X connect 2 7 6 7;
+#X connect 2 8 6 8;
+#X connect 2 9 6 9;
+#X connect 3 0 2 0;
+#X connect 4 0 3 0;
+#X connect 5 0 3 1;
+#X connect 6 0 30 0;
+#X connect 6 0 44 0;
+#X connect 6 1 30 1;
+#X connect 6 1 44 1;
+#X connect 6 2 30 2;
+#X connect 6 2 44 2;
+#X connect 6 3 30 3;
+#X connect 6 3 44 3;
+#X connect 6 4 30 4;
+#X connect 6 4 44 4;
+#X connect 6 5 30 5;
+#X connect 6 5 44 5;
+#X connect 6 6 30 6;
+#X connect 6 6 44 6;
+#X connect 6 7 30 7;
+#X connect 6 7 44 7;
+#X connect 6 8 30 8;
+#X connect 6 8 44 8;
+#X connect 11 0 1 0;
+#X connect 11 1 1 1;
+#X connect 11 2 1 2;
+#X connect 11 3 1 3;
+#X connect 11 4 1 4;
+#X connect 11 5 1 5;
+#X connect 11 6 1 6;
+#X connect 11 7 1 7;
+#X connect 11 8 1 8;
+#X connect 14 0 13 0;
+#X connect 15 0 13 0;
+#X connect 16 0 13 0;
+#X connect 17 0 20 0;
+#X connect 18 0 19 0;
+#X connect 19 0 11 0;
+#X connect 20 0 11 0;
+#X connect 21 0 23 0;
+#X connect 22 0 24 0;
+#X connect 23 0 11 0;
+#X connect 24 0 11 0;
+#X connect 25 0 2 0;
+#X connect 26 0 11 0;
+#X connect 27 0 14 0;
+#X connect 27 0 32 0;
+#X connect 27 0 33 0;
+#X connect 27 0 34 0;
+#X connect 27 0 35 0;
+#X connect 27 0 37 0;
+#X connect 32 0 17 0;
+#X connect 33 0 18 0;
+#X connect 34 0 21 0;
+#X connect 35 0 22 0;
+#X connect 36 0 26 0;
+#X connect 37 0 36 0;
+#X connect 43 0 25 0;
+#X connect 44 0 7 0;
+#X connect 44 1 7 1;
+#X connect 44 2 7 2;
+#X connect 44 3 7 3;
+#X connect 44 4 7 4;
+#X connect 44 5 7 5;
+#X connect 44 6 7 6;
+#X connect 44 7 7 7;
+#X connect 44 8 7 8;
+#X connect 44 9 7 9;
+#X coords 0 715 1 714 100 60 0;

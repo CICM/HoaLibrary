@@ -1,0 +1,126 @@
+#N canvas 392 84 645 607 10;
+#X obj -255 -325 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.encoder~
+3 12 0 18 -204280 -1 0;
+#X obj -247 -138 noise~;
+#X obj -33 -157 hoa.pi 2;
+#X obj -33 -186 loadbang;
+#X obj 222 -157 hoa.pi 2;
+#X obj 222 -186 loadbang;
+#X obj 171 -128 *~;
+#X obj 171 -211 phasor~ 0.1;
+#X obj -84 -128 *~;
+#X obj -84 -215 phasor~ -0.3;
+#X obj -247 -91 hoa.encoder~ 7 ----------------------------;
+#X obj 91 -92 hoa.encoder~ 7 ----------------------------;
+#X obj -95 12 dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
+#X text -252 -303 An ambisonics encoder;
+#X text 93 -168 source;
+#X text -249 -163 source;
+#X text -46 -127 angle;
+#X text 205 -130 angle;
+#X text -250 -285 hoa.encoder~ creates the circular harmonics of a
+signal depending of a given order.;
+#X obj -76 40 hoa.meter~ @loudspeakers 16 @patching_rect [ 0 0 225
+225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize [
+0.8 ] @orientation [ 0 ] @loudspeakers [ 16 ] @angles [ 0 22.5 45 67.5
+90 112.5 135 157.5 180 202.5 225 247.5 270 292.5 315 337.5 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50
+] @dbperled [ 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3
+] @numleds [ 12 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4
+0.4 1 ] @bordercolor [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8
+] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor
+[ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ]
+@velocitycolor [ 1 0 0 0.8 ] @patching_rect [ 0 0 225 225 ] @leds_bg
+[ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize [ 0.8 ] @orientation
+[ 0 ] @loudspeakers [ 16 ] @angles [ 0 22.5 45 67.5 90 112.5 135 157.5
+180 202.5 225 247.5 270 292.5 315 337.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds
+[ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [
+0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25
+0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8
+] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+];
+#X obj 91 -145 phasor~ 220;
+#X msg -208 -6 \; pd dsp 1;
+#X msg -206 49 \; pd dsp 0;
+#X text 84 -241 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+;
+#X text 84 -257 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj -95 -19 hoa.decoder~ 7 ambisonics 16 --------------;
+#X connect 1 0 10 0;
+#X connect 2 0 8 1;
+#X connect 3 0 2 0;
+#X connect 4 0 6 1;
+#X connect 5 0 4 0;
+#X connect 6 0 11 1;
+#X connect 7 0 6 0;
+#X connect 8 0 10 1;
+#X connect 9 0 8 0;
+#X connect 10 0 25 0;
+#X connect 10 1 25 1;
+#X connect 10 2 25 2;
+#X connect 10 3 25 3;
+#X connect 10 4 25 4;
+#X connect 10 5 25 5;
+#X connect 10 6 25 6;
+#X connect 10 7 25 7;
+#X connect 10 8 25 8;
+#X connect 10 9 25 9;
+#X connect 10 10 25 10;
+#X connect 10 11 25 11;
+#X connect 10 12 25 12;
+#X connect 10 13 25 13;
+#X connect 10 14 25 14;
+#X connect 11 0 25 0;
+#X connect 11 1 25 1;
+#X connect 11 2 25 2;
+#X connect 11 3 25 3;
+#X connect 11 4 25 4;
+#X connect 11 5 25 5;
+#X connect 11 6 25 6;
+#X connect 11 7 25 7;
+#X connect 11 8 25 8;
+#X connect 11 9 25 9;
+#X connect 11 10 25 10;
+#X connect 11 11 25 11;
+#X connect 11 12 25 12;
+#X connect 11 13 25 13;
+#X connect 11 14 25 14;
+#X connect 20 0 11 0;
+#X connect 25 0 12 0;
+#X connect 25 0 19 0;
+#X connect 25 1 12 1;
+#X connect 25 1 19 1;
+#X connect 25 2 12 2;
+#X connect 25 2 19 2;
+#X connect 25 3 12 3;
+#X connect 25 3 19 3;
+#X connect 25 4 12 4;
+#X connect 25 4 19 4;
+#X connect 25 5 12 5;
+#X connect 25 5 19 5;
+#X connect 25 6 12 6;
+#X connect 25 6 19 6;
+#X connect 25 7 12 7;
+#X connect 25 7 19 7;
+#X connect 25 8 12 8;
+#X connect 25 8 19 8;
+#X connect 25 9 12 9;
+#X connect 25 9 19 9;
+#X connect 25 10 12 10;
+#X connect 25 10 19 10;
+#X connect 25 11 12 11;
+#X connect 25 11 19 11;
+#X connect 25 12 12 12;
+#X connect 25 12 19 12;
+#X connect 25 13 12 13;
+#X connect 25 13 19 13;
+#X connect 25 14 12 14;
+#X connect 25 14 19 14;
+#X connect 25 15 12 15;
+#X connect 25 15 19 15;
+#X coords 0 607 1 606 100 60 0;
