@@ -39,22 +39,22 @@ synthesis \, perspective distorsion or spatial filtering.;
 [ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.37 0.37
 0.5 ] @outputmode [ 0 ] @zoom [ 0.35 ] sources_parameters [ source
-0 -0.465839 0.962733 0 0.2 0.2 0.5 1 Tic source 1 0.869565 0.931677
+0 -0.807453 0.776398 0 0.2 0.2 0.5 1 Tic source 1 0.838509 0.931677
 0 0.2 0.2 0.2 1 s_nosymbol ] groups_parameters [ group 0 2 0 1 0 0.2
 0.2 0.2 1 s_nosymbol ];
 #X obj -336 -487 hoa.space @patching_rect [ -336 -487 184 184 ] @size
 [ 184 184 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @channels [ 8 ] @coeffs [ 0.707052 0.444428
-0.0409261 0 1 0 0.227608 0.450496 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[ regular ] @fontsize [ 11 ] @channels [ 8 ] @coeffs [ 0.500022 0.515954
+0.510409 0.612189 0.668192 0.710497 0.449168 0.37973 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7
-1 ] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor
-[ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ];
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor
+[ 0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4
+0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ];
 #X obj 70 -313 hoa.delay~ 3 post ************;
 #X obj -127 -227 hoa.recomposer~ 3 8 **********;
 #X obj -127 -279 hoa.space~ 8 *****************;
@@ -78,7 +78,7 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X obj 69 -125 hoa.decoder~ 3 ambisonic 8 ---;
 #X obj 99 -93 dac~ 1 2 3 4 5 6 7 8;
 #X obj 473 -376 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0.42 256;
+-1 -1 0.7 256;
 #X obj 380 -245 hoa.rotate~ 3 ****************;
 #X obj -127 -476 *~ 0.3;
 #X obj 463 -492 loadbang;

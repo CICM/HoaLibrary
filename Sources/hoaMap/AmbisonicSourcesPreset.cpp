@@ -38,7 +38,7 @@ void SourcesPreset::copySourceManager(SourcesManager* aSouceManagerSource, Sourc
         aSouceManagerDestination->setExistence(1);
         aSouceManagerDestination->setMaximumRadius(aSouceManagerSource->getLimitMaximum());
         
-        for(long i = 0; i < aSouceManagerSource->getMaximumIndexOfSource(); i++)
+        for(long i = 0; i <= aSouceManagerSource->getMaximumIndexOfSource(); i++)
         {
             if(aSouceManagerSource->sourceGetExistence(i) == 1)
             {
@@ -49,7 +49,7 @@ void SourcesPreset::copySourceManager(SourcesManager* aSouceManagerSource, Sourc
                 aSouceManagerDestination->sourceSetMute(i, aSouceManagerSource->sourceGetMute(i));
             }
         }
-        for(long i = 0; i < aSouceManagerSource->getMaximumIndexOfGroup(); i++)
+        for(long i = 0; i <= aSouceManagerSource->getMaximumIndexOfGroup(); i++)
         {
             if(aSouceManagerSource->groupGetExistence(i) == 1)
             {
@@ -121,7 +121,7 @@ long SourcesPreset::interpolationSourceManager(SourcesManager* aSouceManagerSour
         aSouceManagerDestination->setExistence(1);
         aSouceManagerDestination->setMaximumRadius(aSouceManagerSourceOne->getLimitMaximum());
         
-        for(long i = 0; i < aSouceManagerSourceOne->getMaximumIndexOfSource(); i++)
+        for(long i = 0; i <= aSouceManagerSourceOne->getMaximumIndexOfSource(); i++)
         {
             if(aSouceManagerSourceOne->sourceGetExistence(i) == 1 && aSouceManagerSourceTwo->sourceGetExistence(i) == 1)
             {
@@ -145,7 +145,7 @@ long SourcesPreset::interpolationSourceManager(SourcesManager* aSouceManagerSour
             aSouceManagerDestination->sourceSetDescription(i, aSouceManagerSourceOne->sourceGetDescription(i));
             aSouceManagerDestination->sourceSetMute(i, aSouceManagerSourceOne->sourceGetMute(i));
         }
-        for(long i = 0; i < aSouceManagerSourceOne->getMaximumIndexOfGroup(); i++)
+        for(long i = 0; i <= aSouceManagerSourceOne->getMaximumIndexOfGroup(); i++)
         {
             if(aSouceManagerSourceOne->groupGetExistence(i) == 1)
             {
