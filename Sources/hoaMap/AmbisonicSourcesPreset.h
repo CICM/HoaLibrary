@@ -38,7 +38,7 @@ protected:
     void copySourceManager(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination);
     void copySource(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination, long aSourceIndex);
     void copyGroup(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination, long aGroupIndex);
-    void interpolationSourceManager(SourcesManager* aSouceManagerSourceOne, SourcesManager* aSouceManagerSourceTwo, SourcesManager* aSouceManagerDestination, double aFrac);
+    long interpolationSourceManager(SourcesManager* aSouceManagerSourceOne, SourcesManager* aSouceManagerSourceTwo, SourcesManager* aSouceManagerDestination, double aFrac);
     
 public:
 	SourcesPreset();
@@ -61,8 +61,8 @@ public:
     void storeGroupAtNextSlot(SourcesManager* aSouceManager,long aGroupIndex);
     
     void recallSlot(SourcesManager* aSouceManager, long anIndex);
-    void RecallFractionalSlot(SourcesManager* aSouceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex);
-    void recallFractionalSlot(SourcesManager* aSouceManager, double aFractionnalIndex);
+    void recallFractionalSlot(SourcesManager* aSouceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex);
+    long recallFractionalSlot(SourcesManager* aSouceManager, double aFractionnalIndex);
     
     long getMaximumIndexOfSlot();
     long getSlotExistence(long anIndex);

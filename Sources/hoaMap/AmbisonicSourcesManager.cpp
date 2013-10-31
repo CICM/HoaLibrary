@@ -37,16 +37,8 @@ void SourcesManager::setExistence(long deadOrAlive)
     m_existence = Tools::clip(deadOrAlive, (long)0, (long)1);
     if(m_existence == 0)
     {
-        long maxIndex = m_sources.size();
-        for(int i = 0; i < maxIndex; i++)
-        {
-            m_sources.pop_back();
-        }
-        maxIndex = m_groups.size();
-        for(int i = 0; i < maxIndex; i++)
-        {
-            m_groups.pop_back();
-        }
+		m_sources.clear();
+		m_groups.clear();
     }
 }
 

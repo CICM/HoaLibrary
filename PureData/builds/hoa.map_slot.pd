@@ -3,14 +3,14 @@
 [ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
 [ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.36 0.37
-0.5 ] @outputmode [ 0 ] @zoom [ 0.312488 ] sources_parameters [   [
--524 -318 300 300 ] @size [ ] slots_parameters [ slot 0 slot 1 slot
-2 slot 3 ];
+0.5 ] @outputmode [ 0 ] @zoom [ 0.01 ] sources_parameters [ source
+0 30.6667 -18 0 0.2 0.2 0.2 1 s_nosymbol ] slots_parameters [ slot
+0 slot 1 slot 2 slot 3 ];
 #X obj -429 -374 receive map_slot;
 #X text -190 -363 Store a preset at a defined slot;
 #X msg -188 -316 slot store \$1;
-#X obj -188 -340 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0 256;
+#X obj -188 -340 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
 #X msg -93 -301 slot storeagain;
 #X text -92 -338 Store again the last slot stored (overwrite);
 #X obj -191 -130 send map_slot;
@@ -21,57 +21,57 @@
 #X text -77 -199 Store the first empty slot (store at new end slot
 if need);
 #X msg -75 -164 slot storeempty;
-#X obj 184 -366 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 184 -366 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X obj 184 -238 send map_slot;
 #X text 182 -388 Copy a slot in another;
 #X msg 184 -322 slot copy \$1 \$1;
 #X obj 184 -343 pack 0 0;
-#X obj 245 -366 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 245 -366 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X text 310 -371 Insert a slot at index and increase nexts;
-#X obj 314 -348 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 314 -348 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X msg 314 -325 slot insert \$1;
 #X text 321 -291 Renumber slots : 0 \, 1 \, 2 \, 3...;
 #X msg 322 -267 slot renumber;
 #X text 374 -210 Remove a slot;
-#X obj 374 -194 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 374 -194 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X text 171 -209 Remove a slot and decrease nexts;
 #X msg 173 -171 slot delete \$1;
-#X obj 173 -194 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 173 -194 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X msg 374 -169 slot remove \$1;
 #X msg 474 -169 slot renumber;
 #X text 473 -196 Remove all slots;
 #X obj 173 -128 send map_slot;
-#X obj 203 -63 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 203 -63 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X obj 203 45 send map_slot;
 #X obj 203 -40 pack 0 0;
-#X obj 264 -63 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 264 -63 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X text 201 -105 Store a source at a defined slot;
 #X msg 203 -19 slot storesource \$1 \$1;
 #X text 200 -84 Slot;
 #X text 260 -84 Source index;
-#X obj 402 -63 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 402 -63 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X obj 402 -40 pack 0 0;
-#X obj 463 -63 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 463 -63 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X text 399 -84 Slot;
 #X text 400 -105 Store a group at a defined slot;
 #X text 459 -84 Group index;
 #X msg 402 -19 slot storesource \$1 \$1;
-#X obj -181 -67 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj -181 -67 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X msg -181 -23 slot \$1;
 #X text -183 -109 Recall a slot and interpolate;
 #X text -190 -97 between two consecutives slots;
 #X obj -181 7 send map_slot;
-#X obj 18 -65 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+#X obj 18 -65 nbx 5 14 0 1e+037 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
 #X text 9 -95 between two consecutives slots;
 #X obj 18 18 send map_slot;
@@ -93,6 +93,11 @@ but this is my name therefor it won't work...;
 \, recall \, make interpolation between differents presets. The presets
 are saved within the patcher when you save it and can be saved in text
 file to recall them later.;
+#X obj -388 100 print map;
+#X obj -259 -360 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg -302 -380 getinfo;
+#X connect 0 2 68 0;
 #X connect 1 0 0 0;
 #X connect 3 0 7 0;
 #X connect 4 0 3 0;
@@ -126,3 +131,5 @@ file to recall them later.;
 #X connect 57 0 56 0;
 #X connect 59 0 58 0;
 #X connect 63 0 62 0;
+#X connect 69 0 0 0;
+#X connect 70 0 0 0;

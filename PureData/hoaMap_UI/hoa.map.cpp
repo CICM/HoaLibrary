@@ -623,6 +623,7 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         if(atom_gettype(av) == A_SYM)
         {
             t_symbol *sym = atom_getsym(av);
+			
             if(sym == gensym("store"))
                 x->f_source_preset->storeSouceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
             else if(sym == gensym("storeagain"))
@@ -646,8 +647,10 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             else if(sym == gensym("clear"))
                 x->f_source_preset->clear();
             else if(sym == gensym("recall"))
-                x->f_source_preset->RecallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
-            else if(sym == gensym("read"))
+			{
+                x->f_source_preset->recallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
+			}
+			else if(sym == gensym("read"))
             {
                 t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
                 hoamap_doread(x, sym, 0, NULL);
@@ -665,7 +668,9 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 x->f_source_preset->storeGroupAtSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2));
         }
         else if(atom_gettype(av) == A_FLOAT)
+		{
             x->f_source_preset->recallFractionalSlot(x->f_source_manager, (double)atom_getfloat(av));
+		}
     }
     
     jbox_notify((t_jbox*)x, NULL, gensym("modified"), NULL, NULL);

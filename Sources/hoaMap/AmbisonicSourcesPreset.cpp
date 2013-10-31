@@ -113,7 +113,7 @@ void SourcesPreset::copyGroup(SourcesManager* aSouceManagerSource, SourcesManage
     }
 }
 
-void SourcesPreset::interpolationSourceManager(SourcesManager* aSouceManagerSourceOne, SourcesManager* aSouceManagerSourceTwo, SourcesManager* aSouceManagerDestination, double aFrac)
+long SourcesPreset::interpolationSourceManager(SourcesManager* aSouceManagerSourceOne, SourcesManager* aSouceManagerSourceTwo, SourcesManager* aSouceManagerDestination, double aFrac)
 {
     aSouceManagerDestination->setExistence(0);
     if(aSouceManagerSourceOne->getExistence() == 1 && aSouceManagerSourceTwo->getExistence() == 1)
@@ -165,7 +165,9 @@ void SourcesPreset::interpolationSourceManager(SourcesManager* aSouceManagerSour
                                                          aSouceManagerSourceOne->groupGetColor(i).alpha * (1. - aFrac) + aSouceManagerSourceTwo->groupGetColor(i).alpha * aFrac);
             }
         }
+		return 1;
     }
+	return 0;
 }
 
 /*************************************************************************************/
@@ -349,7 +351,7 @@ void SourcesPreset::recallSlot(SourcesManager* aSouceManager, long anIndex)
     }
 }
 
-void SourcesPreset::RecallFractionalSlot(SourcesManager* aSouceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex)
+void SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex)
 {
     if(anIndexSource >= 0 && anIndexSource < m_source_managers.size() && anIndexDestination >= 0 && anIndexDestination < m_source_managers.size())
     {
@@ -361,11 +363,10 @@ void SourcesPreset::RecallFractionalSlot(SourcesManager* aSouceManager, long anI
     }
 }
 
-void SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, double aFractionnalIndex)
+long SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, double aFractionnalIndex)
 {
-    
     if(m_source_managers.size() == 0)
-        return;
+        return 0;
     else if(m_source_managers.size() == 1)
     {
         for(long i = 0; i < m_source_managers.size(); i++)
@@ -373,7 +374,7 @@ void SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, double a
             if(m_source_managers[i]->getExistence())
             {
                 copySourceManager(m_source_managers[i], aSouceManager);
-                return;
+                return 1;
             }
         }
     }
@@ -384,7 +385,7 @@ void SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, double a
             if(m_source_managers[i]->getExistence())
             {
                 copySourceManager(m_source_managers[i], aSouceManager);
-                return;
+                return 1;
             }
         }
     }
@@ -395,7 +396,7 @@ void SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, double a
             if(m_source_managers[i]->getExistence())
             {
                 copySourceManager(m_source_managers[i], aSouceManager);
-                return;
+                return 1;
             }
         }
     }
@@ -419,7 +420,7 @@ void SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, double a
             {
                 copySourceManager(m_source_managers[indexOne], aSouceManager);
             }
-            return;
+            return 1;
         }
         else
         {
@@ -429,16 +430,18 @@ void SourcesPreset::recallFractionalSlot(SourcesManager* aSouceManager, double a
                     indexTwo  = i;
             }
             if(indexTwo == -1)
+			{
                 copySourceManager(m_source_managers[indexOne], aSouceManager);
+				return 1;
+			}
             else
             {
-                {
-                    double fracPart = Tools::clip((double)(aFractionnalIndex - (long)indexOne) / (double)(indexTwo - indexOne), 0., 1.);
-                    interpolationSourceManager(m_source_managers[indexOne], m_source_managers[indexTwo], aSouceManager, fracPart);
-                }
+				double fracPart = Tools::clip((double)(aFractionnalIndex - (long)indexOne) / (double)(indexTwo - indexOne), 0., 1.);
+                return interpolationSourceManager(m_source_managers[indexOne], m_source_managers[indexTwo], aSouceManager, fracPart);
             }
         }
     }
+	return 0;
 }
 
 long SourcesPreset::getMaximumIndexOfSlot()
