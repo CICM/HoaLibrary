@@ -4,24 +4,334 @@
 ] @fontslant [ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1
 ] @bgcolor2 [ 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36
 0.36 0.37 0.5 ] @outputmode [ 0 ] @zoom [ 0.312488 ] sources_parameters
-[ source 0 0.790543 1.5216 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.47088
-0.569141 0 0.2 0.2 0.2 1 s_nosymbol source 2 -0.20754 0.309505 0 0.2
-0.2 0.2 1 s_nosymbol 300 300 ] @fontname [ helvetica ] @fontweight
-[ groups_parameters ] groups_parameters [ group 0 2 0 1 0 0.2 0.2 0.2
-1 s_nosymbol group 1 2 2 3 0 0.2 0.2 0.2 1 s_nosymbol ] slots_parameters
-[ slot 0 slot 1 slot 2 slot 3 ] trajectory_parameters [ slot 0 slot
-1 slot 2 slot 3 slot 4 slot 5 slot 6 slot 7 slot 8 slot 9 slot 10 slot
-11 slot 12 slot 13 slot 14 slot 15 slot 16 slot 17 slot 18 slot 19
-slot 20 slot 21 slot 22 slot 23 slot 24 slot 25 slot 26 slot 27 slot
-28 slot 29 slot 30 slot 31 slot 32 slot 33 slot 34 slot 35 slot 36
-slot 37 slot 38 slot 39 slot 40 slot 41 slot 42 slot 43 slot 44 slot
-45 slot 46 slot 47 slot 48 slot 49 slot 50 slot 51 slot 52 slot 53
-slot 54 slot 55 slot 56 slot 57 slot 58 slot 59 slot 60 slot 61 slot
-62 slot 63 slot 64 slot 65 slot 66 slot 67 slot 68 slot 69 slot 70
-slot 71 slot 72 slot 73 slot 74 slot 75 slot 76 slot 77 slot 78 slot
-79 slot 80 slot 81 slot 82 slot 83 slot 84 slot 85 slot 86 slot 87
-slot 88 slot 89 slot 90 slot 91 slot 92 slot 93 slot 94 slot 95 slot
-96 ];
+[ source 0 1.48624 -2.03295 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.7922
+1.50934 0 0.2 0.2 0.2 1 s_nosymbol source 2 1.67561 2.6357 0 0.2 0.2
+0.2 1 s_nosymbol ] groups_parameters [ group 0 2 0 1 0 0.2 0.2 0.2
+1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol ] slots_parameters
+[ slot 0 slot 1 slot 2 slot 3 ] trajectory_parameters [ slot 0 source
+1 1.20479 -0.323453 0 0.2 0.2 0.2 1 s_nosymbol group 0 1 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 1 1 0 0.2 0.2 0.2 1 s_nosymbol slot 1 source
+1 1.23582 -0.235358 0 0.2 0.2 0.2 1 s_nosymbol group 0 1 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 1 1 0 0.2 0.2 0.2 1 s_nosymbol slot 2 source
+0 -0.938681 0.647345 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.22971 -0.291882
+0 0.2 0.2 0.2 1 s_nosymbol source 2 -0.164261 -1.74991 0 0.2 0.2 0.2
+1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1
+2 0 0.2 0.2 0.2 1 s_nosymbol slot 3 source 0 0.87472 1.61785 0 0.2
+0.2 0.2 1 s_nosymbol source 1 -0.244638 -1.94749 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 -2.45627 -0.0355927 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0
+1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol
+slot 4 source 0 2.49315 2.60182 0 0.2 0.2 0.2 1 s_nosymbol source 1
+-1.42867 -3.44244 0 0.2 0.2 0.2 1 s_nosymbol source 2 -4.0855 1.06033
+0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 5 source 0 3.62061
+2.66629 0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.47504 -3.90117 0 0.2
+0.2 0.2 1 s_nosymbol source 2 -4.65696 2.11273 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 6 source 0 4.9075 2.32056 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -3.81856 -4.03047 0 0.2 0.2 0.2 1 s_nosymbol source 2 -4.92426
+3.50771 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 7 source 0 5.37366
+2.103 0 0.2 0.2 0.2 1 s_nosymbol source 1 -4.33783 -3.9905 0 0.2 0.2
+0.2 1 s_nosymbol source 2 -4.93626 4.05441 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 8 source 0 5.62446 0.655244 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -5.11434 -2.70605 0 0.2 0.2 0.2 1 s_nosymbol source 2 -3.68001
+5.08862 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 9 source 0 4.86652
+-0.878098 0 0.2 0.2 0.2 1 s_nosymbol source 1 -4.97543 -0.968089 0
+0.2 0.2 0.2 1 s_nosymbol source 2 -1.81103 5.25939 0 0.2 0.2 0.2 1
+s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2
+0 0.2 0.2 0.2 1 s_nosymbol slot 10 source 0 3.56498 -1.93848 0 0.2
+0.2 0.2 1 s_nosymbol source 1 -4.14769 0.531071 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 -0.0565923 4.67494 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0
+1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol
+slot 11 source 0 2.70548 -1.91835 0 0.2 0.2 0.2 1 s_nosymbol source
+1 -3.33656 0.838092 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.418725 3.91159
+0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 12 source 0 1.95644
+-1.72448 0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.56431 0.941209 0 0.2
+0.2 0.2 1 s_nosymbol source 2 0.679678 3.15289 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 13 source 0 1.01171 -1.53645 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -1.60036 1.1372 0 0.2 0.2 0.2 1 s_nosymbol source
+2 1.13098 2.18121 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 14
+source 0 0.45248 -1.10193 0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.906125
+0.952753 0 0.2 0.2 0.2 1 s_nosymbol source 2 1.12455 1.41644 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 15 source 0 -0.0851382 -0.655007
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.187483 0.761397 0 0.2 0.2 0.2
+1 s_nosymbol source 2 1.18629 0.475038 0 0.2 0.2 0.2 1 s_nosymbol group
+0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1
+s_nosymbol slot 16 source 0 -0.145884 -0.316935 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 0.0286619 0.471651 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.963257
+0.0760208 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1
+s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 17 source
+0 -0.131336 -0.0909102 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.158738
+0.234716 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.69796 -0.341631 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 18 source 0 -0.154081 -0.0530054
+0 0.2 0.2 0.2 1 s_nosymbol source 1 0.218805 0.185052 0 0.2 0.2 0.2
+1 s_nosymbol source 2 0.581807 -0.519965 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 19 source 0 -0.167658 0.101898 0 0.2 0.2 0.2
+1 s_nosymbol source 1 0.314909 -0.0558168 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 -0.0292599 -0.813022 0 0.2 0.2 0.2 1 s_nosymbol group 0 2
+0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol
+slot 20 source 0 -0.1978 0.292318 0 0.2 0.2 0.2 1 s_nosymbol source
+1 0.391924 -0.271143 0 0.2 0.2 0.2 1 s_nosymbol source 2 -0.435772
+-0.866945 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1
+s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 21 source
+0 -0.0826179 0.650079 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.371455
+-0.684656 0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.02341 -0.756503 0
+0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 22 source 0 0.281716 1.02601
+0 0.2 0.2 0.2 1 s_nosymbol source 1 0.121776 -1.18135 0 0.2 0.2 0.2
+1 s_nosymbol source 2 -1.63228 -0.403204 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 23 source 0 0.725511 1.29545 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -0.224178 -1.5927 0 0.2 0.2 0.2 1 s_nosymbol source
+2 -2.10213 0.000805055 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2
+0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot
+24 source 0 1.02163 1.32288 0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.507999
+-1.72169 0 0.2 0.2 0.2 1 s_nosymbol source 2 -2.26396 0.336297 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 25 source 0 1.18064 1.23091
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.701986 -1.68915 0 0.2 0.2 0.2
+1 s_nosymbol source 2 -2.24817 0.584641 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 26 source 0 1.48018 0.802882 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -1.16873 -1.37886 0 0.2 0.2 0.2 1 s_nosymbol source
+2 -1.94528 1.22951 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 27
+source 0 1.5455 -0.0290282 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.56709
+-0.575425 0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.02062 1.90721 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 28 source 0 1.43831 -0.580842
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.67465 0.0219726 0 0.2 0.2 0.2
+1 s_nosymbol source 2 -0.273226 2.15124 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 29 source 0 1.38786 -1.1527 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -1.82842 0.610813 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.44056
+2.38107 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 30 source 0 1.45318
+-1.68014 0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.07237 1.09745 0 0.2
+0.2 0.2 1 s_nosymbol source 2 0.966908 2.669 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 31 source 0 1.48807 -1.87471 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -2.17284 1.27072 0 0.2 0.2 0.2 1 s_nosymbol source
+2 1.14395 2.78508 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 32
+source 0 1.35841 -1.97069 0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.08231
+1.4142 0 0.2 0.2 0.2 1 s_nosymbol source 2 1.32896 2.7017 0 0.2 0.2
+0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3
+0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 33 source 0 1.29673 -2.01181
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.03752 1.478 0 0.2 0.2 0.2 1
+s_nosymbol source 2 1.41198 2.65925 0 0.2 0.2 0.2 1 s_nosymbol group
+0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1
+s_nosymbol slot 34 source 0 1.32837 -1.99028 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -1.95007 1.55201 0 0.2 0.2 0.2 1 s_nosymbol source 2 1.51773
+2.67836 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 35 source 0 1.43504
+-2.03295 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.8434 1.50934 0 0.2
+0.2 0.2 1 s_nosymbol source 2 1.62441 2.6357 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 36 source 0 1.52038 -2.03295 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -1.75807 1.50934 0 0.2 0.2 0.2 1 s_nosymbol source
+2 1.70974 2.6357 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 37
+source 0 1.71239 -2.11829 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.56606
+1.424 0 0.2 0.2 0.2 1 s_nosymbol source 2 1.90175 2.55036 0 0.2 0.2
+0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3
+0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 38 source 0 1.90439 -2.18229
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.37405 1.36 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 2.09376 2.48636 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0
+0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol
+slot 39 source 0 2.11774 -2.28896 0 0.2 0.2 0.2 1 s_nosymbol source
+1 -1.16071 1.25333 0 0.2 0.2 0.2 1 s_nosymbol source 2 2.3071 2.37969
+0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 40 source 0 2.22441
+-2.45963 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.05404 1.08265 0 0.2
+0.2 0.2 1 s_nosymbol source 2 2.41377 2.20901 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 41 source 0 2.30974 -2.65164 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -0.968702 0.890647 0 0.2 0.2 0.2 1 s_nosymbol source
+2 2.49911 2.017 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 42
+source 0 2.33108 -3.03566 0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.947368
+0.506632 0 0.2 0.2 0.2 1 s_nosymbol source 2 2.52044 1.63299 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 43 source 0 2.30974 -3.22766
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.968702 0.314625 0 0.2 0.2 0.2
+1 s_nosymbol source 2 2.49911 1.44098 0 0.2 0.2 0.2 1 s_nosymbol group
+0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1
+s_nosymbol slot 44 source 0 2.05373 -3.46234 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -1.22471 0.079949 0 0.2 0.2 0.2 1 s_nosymbol source 2 2.2431
+1.20631 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 45 source 0 1.60572
+-3.52634 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.67273 0.0159466 0 0.2
+0.2 0.2 1 s_nosymbol source 2 1.79508 1.1423 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 46 source 0 1.00836 -3.46234 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -2.27009 0.079949 0 0.2 0.2 0.2 1 s_nosymbol source
+2 1.19772 1.20631 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 47
+source 0 0.581678 -3.22766 0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.69677
+0.314625 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.771039 1.44098 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 48 source 0 0.240331 -2.97165
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -3.03812 0.570634 0 0.2 0.2 0.2
+1 s_nosymbol source 2 0.429693 1.69699 0 0.2 0.2 0.2 1 s_nosymbol group
+0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1
+s_nosymbol slot 49 source 0 -0.0583469 -2.58764 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -3.33679 0.954649 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.131015
+2.08101 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 50 source 0 -0.101015
+-2.41697 0 0.2 0.2 0.2 1 s_nosymbol source 1 -3.37946 1.12532 0 0.2
+0.2 0.2 1 s_nosymbol source 2 0.0883464 2.25168 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 51 source 0 -0.0796813 -2.33163 0 0.2 0.2 0.2
+1 s_nosymbol source 1 -3.35813 1.21066 0 0.2 0.2 0.2 1 s_nosymbol source
+2 0.109681 2.33702 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 52
+source 0 0.0696579 -2.18229 0 0.2 0.2 0.2 1 s_nosymbol source 1 -3.20879
+1.36 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.25902 2.48636 0 0.2 0.2
+0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3
+0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 53 source 0 -0.141954 -2.05038
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -2.94294 1.61506 0 0.2 0.2 0.2
+1 s_nosymbol source 2 0.482412 2.32211 0 0.2 0.2 0.2 1 s_nosymbol group
+0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1
+s_nosymbol slot 54 source 0 -0.272721 -1.84634 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -2.65094 1.7347 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.608172
+2.09634 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 55 source 0 -0.557525
+-1.26167 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.77169 2.01225 0 0.2
+0.2 0.2 1 s_nosymbol source 2 0.888965 1.44408 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 56 source 0 -0.527184 -0.863228 0 0.2 0.2 0.2
+1 s_nosymbol source 1 -1.28647 1.92244 0 0.2 0.2 0.2 1 s_nosymbol source
+2 0.839058 1.02921 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2
+0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 57
+source 0 -0.361204 -0.427352 0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.786536
+1.68689 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.650768 0.586353 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 58 source 0 -0.201913 -0.187352
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.48895 1.49943 0 0.2 0.2 0.2
+1 s_nosymbol source 2 0.484331 0.340168 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 59 source 0 -0 0 0 0.2 0.2 0.2 1 s_nosymbol source
+1 0.507411 1.03377 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.164195 -0.026364
+0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 60 source 0 -0.00301491
+0.00168273 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.883678 0.642861 0
+0.2 0.2 0.2 1 s_nosymbol source 2 0.0859068 -0.064602 0 0.2 0.2 0.2
+1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1
+2 0 0.2 0.2 0.2 1 s_nosymbol slot 61 source 0 -0.0807838 0.291802 0
+0.2 0.2 0.2 1 s_nosymbol source 1 1.37371 -0.225514 0 0.2 0.2 0.2 1
+s_nosymbol source 2 0.0544988 -0.403145 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 62 source 0 -0.00316016 0.905573 0 0.2 0.2 0.2
+1 s_nosymbol source 1 1.81388 -0.830351 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 -0.133103 -1.0008 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1
+0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol
+slot 63 source 0 0.295585 1.28358 0 0.2 0.2 0.2 1 s_nosymbol source
+1 1.9024 -1.47381 0 0.2 0.2 0.2 1 s_nosymbol source 2 -0.503376 -1.32908
+0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 64 source 0 0.418793
+1.44586 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.95964 -1.70054 0 0.2
+0.2 0.2 1 s_nosymbol source 2 -0.652757 -1.471 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 65 source 0 0.458187 1.48262 0 0.2 0.2 0.2 1
+s_nosymbol source 1 1.96366 -1.76624 0 0.2 0.2 0.2 1 s_nosymbol source
+2 -0.698447 -1.50133 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2
+0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot
+66 source 0 0.893438 1.17122 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.19766
+-2.26529 0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.11739 -1.11299 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 67 source 0 1.14161 0.943325
+0 0.2 0.2 0.2 1 s_nosymbol source 1 0.655258 -2.48532 0 0.2 0.2 0.2
+1 s_nosymbol source 2 -1.34717 -0.835005 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 68 source 0 1.17788 0.873328 0 0.2 0.2 0.2 1
+s_nosymbol source 1 0.520769 -2.50202 0 0.2 0.2 0.2 1 s_nosymbol source
+2 -1.37639 -0.756024 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2
+0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot
+69 source 0 1.20883 0.774622 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.294874
+-2.51292 0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.4397 -0.629794 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 70 source 0 1.01682 0.795956
+0 0.2 0.2 0.2 1 s_nosymbol source 1 0.102867 -2.49159 0 0.2 0.2 0.2
+1 s_nosymbol source 2 -1.6317 -0.60846 0 0.2 0.2 0.2 1 s_nosymbol group
+0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1
+s_nosymbol slot 71 source 0 0.952816 0.81729 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 0.0388645 -2.47025 0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.69571
+-0.587126 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1
+s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 72 source
+0 0.696806 0.838624 0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.217145 -2.44892
+0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.95172 -0.565791 0 0.2 0.2 0.2
+1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1
+2 0 0.2 0.2 0.2 1 s_nosymbol slot 73 source 0 0.355459 0.923961 0 0.2
+0.2 0.2 1 s_nosymbol source 1 -0.558492 -2.36358 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 -2.29306 -0.480455 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0
+1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol
+slot 74 source 0 0.163452 0.987964 0 0.2 0.2 0.2 1 s_nosymbol source
+1 -0.750499 -2.29958 0 0.2 0.2 0.2 1 s_nosymbol source 2 -2.48507 -0.416452
+0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 75 source 0 -0.0712237
+1.24397 0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.985175 -2.04357 0 0.2
+0.2 0.2 1 s_nosymbol source 2 -2.71975 -0.160443 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 76 source 0 -0.15656 1.41465 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -1.07051 -1.87289 0 0.2 0.2 0.2 1 s_nosymbol source
+2 -2.80508 0.0102309 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2
+0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot
+77 source 0 -0.15656 1.71332 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.07051
+-1.57422 0 0.2 0.2 0.2 1 s_nosymbol source 2 -2.80508 0.308909 0 0.2
+0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group
+1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 78 source 0 0.0567811 2.20401
+0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.85717 -1.08353 0 0.2 0.2 0.2
+1 s_nosymbol source 2 -2.59174 0.799594 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 79 source 0 0.20612 2.50269 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -0.707831 -0.784853 0 0.2 0.2 0.2 1 s_nosymbol source 2 -2.4424
+1.09827 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 80 source 0 0.526133
+2.90804 0 0.2 0.2 0.2 1 s_nosymbol source 1 -0.387819 -0.379504 0 0.2
+0.2 0.2 1 s_nosymbol source 2 -2.12239 1.50362 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 81 source 0 0.846145 3.10004 0 0.2 0.2 0.2 1
+s_nosymbol source 1 -0.0678064 -0.187496 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 -1.80238 1.69563 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1
+0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol
+slot 82 source 0 1.35816 3.24938 0 0.2 0.2 0.2 1 s_nosymbol source
+1 0.444213 -0.0381574 0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.29036
+1.84497 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 83 source 0 1.89152
+3.14271 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.977567 -0.144828 0 0.2
+0.2 0.2 1 s_nosymbol source 2 -0.757004 1.7383 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 84 source 0 2.2542 2.80137 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 1.34025 -0.486175 0 0.2 0.2 0.2 1 s_nosymbol source 2 -0.394324
+1.39695 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 85 source 0 2.3822
+2.37468 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.46825 -0.912858 0 0.2
+0.2 0.2 1 s_nosymbol source 2 -0.266319 0.970268 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 86 source 0 2.42487 1.79866 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 1.51092 -1.48888 0 0.2 0.2 0.2 1 s_nosymbol source 2 -0.223651
+0.394245 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol
+group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 87 source 0 2.40354
+1.41465 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.48959 -1.87289 0 0.2
+0.2 0.2 1 s_nosymbol source 2 -0.244985 0.0102309 0 0.2 0.2 0.2 1 s_nosymbol
+group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2
+0.2 1 s_nosymbol slot 88 source 0 2.10486 1.32931 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 1.19091 -1.95823 0 0.2 0.2 0.2 1 s_nosymbol source 2 -0.543663
+-0.075106 0 0.2 0.2 0.2 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1
+s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 89 source
+0 1.63551 1.15864 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.721557 -2.1289
+0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.01301 -0.245779 0 0.2 0.2 0.2
+1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1
+2 0 0.2 0.2 0.2 1 s_nosymbol ];
 #X obj -580 107 send map_slot;
 #X obj -206 131 send map_slot;
 #X text -583 14 hoa.map needs an absolute path. Here is an example
@@ -42,7 +352,7 @@ be saved in a text file.;
 #X text 208 -292 2 (bis) - Set "record 0" (for safety);
 #X obj -183 -136 send map_traj;
 #X obj -183 -192 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0 256;
+-1 -1 0.4 256;
 #X msg -183 -168 trajectory \$1;
 #X msg -188 -286 trajectory record \$1;
 #X text 208 -277 3 - Replay with floats between 0 and 1;
