@@ -60,8 +60,10 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 
 ##### ToDo :
 
-- hoa.convolve~ : Update buffer~ for Max 6 SDK (low)
+- hoa.convolve~ : Update buffer~ for Max 6 SDK and windows version (low)
 - hoa.plug~ : Update dsp method for Max 6 SDK (low)
 - hoa.decoder~ : Find a solution for attributes order (medium)
 - hoa.spectrum~ : Clean (medium)
 - hoa.boids : Clean (medium)
+- hoa.recomposer : No fisheye preview on window
+- fftw for window

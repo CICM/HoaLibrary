@@ -36,7 +36,7 @@ Ambisonic3D::Ambisonic3D(long anOrder, long aVectorSize, long aSamplingRate)
     m_harmonics_orders      = new long[m_number_of_harmonics];
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        m_harmonics_orders[i] = sqrt(i);
+        m_harmonics_orders[i] = sqrtf((float)i);
         int index = i - (m_harmonics_orders[i]) * (m_harmonics_orders[i]);
       
         int index2 = (index - 1) / 2. + 1.;
