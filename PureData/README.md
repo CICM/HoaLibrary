@@ -9,11 +9,12 @@
 Dependencies : 
 
 Cblas (http://www.netlib.org/clapack/cblas/) (with Accelerate for Mac Os and/or IPP or GSL for all plateform).
+
 PdEnhanced (https://github.com/pierreguillot/PdEnhanced)
 
 ##### Licence : 
 
-The hoa.library in under the GNU Public License. If you'd like to avoid the restrictions of the GPL and use hoa.library for a closed-source product, you contact the CICM.
+The hoa.library in under the GNU Public License (http://www.gnu.org/copyleft/gpl.html). If you'd like to avoid the restrictions of the GPL and use hoa.library for a closed-source product, you contact the CICM.
 
 http://cicm.mshparisnord.org/
 
