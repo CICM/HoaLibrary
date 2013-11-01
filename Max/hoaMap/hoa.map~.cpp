@@ -1,29 +1,29 @@
 /**
  * HoaLibrary : A High Order Ambisonics Library
  * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
- * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Website  : http://www.mshparisnord.fr/HoaLibrary/
  * Contacts : cicm.mshparisnord@gmail.com
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * This file is part of HOA LIBRARY.
  *
- *  - Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice, 
- *      this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * HOA LIBRARY is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-//#include "AmbisonicMultiMaps.h"
 #include "../../Sources/HoaLibrary.h"
 
 extern "C"
@@ -54,9 +54,6 @@ void HoaMap_int(t_HoaMap *x, long n);
 t_max_err HoaMap_mode(t_HoaMap *x, t_object *attr, long argc, t_atom *argv);
 t_max_err HoaMap_ramp(t_HoaMap *x, t_object *attr, long argc, t_atom *argv);
 
-void HoaMap_dsp(t_HoaMap *x, t_signal **sp, short *count);
-t_int *HoaMap_perform(t_int *w);
-
 
 void HoaMap_dsp64(t_HoaMap *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaMap_perform64(t_HoaMap *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -73,7 +70,6 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.map~", (method)HoaMap_new, (method)dsp_free, (long)sizeof(t_HoaMap), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaMap_dsp,         "dsp",		A_CANT,  0);
 	class_addmethod(c, (method)HoaMap_dsp64,       "dsp64",     A_CANT,  0);
 	class_addmethod(c, (method)HoaMap_assist,      "assist",	A_CANT,  0);
     class_addmethod(c, (method)HoaMap_list,        "list",      A_GIMME, 0);
@@ -220,42 +216,6 @@ void HoaMap_perform64_azimuth(t_HoaMap *x, t_object *dsp64, double **ins, long n
         x->f_maps->processOrdinate(ins[0], outs, ins[2]);
     else
         x->f_maps->processAzimuth(ins[0], outs, ins[2]);
-}
-
-void HoaMap_dsp(t_HoaMap *x, t_signal **sp, short *count)
-{
-	int i;
-	int pointer_count;
-	t_int **sigvec;
-
-	x->f_maps->setVectorSize(sp[0]->s_n);
-	x->f_ninput = x->f_maps->getNumberOfInputs();
-	x->f_noutput = x->f_maps->getNumberOfOutputs();
-	pointer_count = x->f_maps->getNumberOfInputs() + x->f_maps->getNumberOfOutputs() + 2;
-	
-	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
-	for(i = 0; i < pointer_count; i++)
-		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
-	
-	sigvec[0] = (t_int *)x;
-	sigvec[1] = (t_int *)sp[0]->s_n;
-	for(i = 2; i < pointer_count; i++)
-		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-	
-	dsp_addv(HoaMap_perform, pointer_count, (void **)sigvec);
-	
-	free(sigvec);
-}
-
-t_int *HoaMap_perform(t_int *w)
-{
-	t_HoaMap *x			= (t_HoaMap *)(w[1]);	
-	t_float		**ins	= (t_float **)w+3;
-	t_float		**outs	= (t_float **)w+3+x->f_ninput;
-	
-	x->f_maps->process(ins, outs);
-	
-	return (w + x->f_ninput + x->f_noutput + 3);
 }
 
 void HoaMap_assist(t_HoaMap *x, void *b, long m, long a, char *s)

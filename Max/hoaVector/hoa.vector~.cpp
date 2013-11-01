@@ -78,7 +78,7 @@ int C74_EXPORT main(void)
     
     CLASS_ATTR_LONG                 (c, "channels", 0, t_HoaVector, f_number_of_loudspeakers);
 	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Behavior");
-    CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Loudspeakers");
+    CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, loudspeakers_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "2");
     CLASS_ATTR_SAVE                 (c, "channels", 1);
@@ -86,7 +86,7 @@ int C74_EXPORT main(void)
     
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "angles", 0, t_HoaVector, f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
 	CLASS_ATTR_CATEGORY             (c, "angles", 0, "Behavior");
-    CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Loudspeakers");
+    CLASS_ATTR_LABEL                (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "angles", NULL, angles_set);
     CLASS_ATTR_ORDER                (c, "angles", 0, "4");
 	CLASS_ATTR_SAVE                 (c, "angles", 1);

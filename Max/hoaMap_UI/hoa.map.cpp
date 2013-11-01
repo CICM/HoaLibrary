@@ -1,26 +1,27 @@
 /**
  * HoaLibrary : A High Order Ambisonics Library
  * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
- * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Website  : http://www.mshparisnord.fr/HoaLibrary/
  * Contacts : cicm.mshparisnord@gmail.com
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * This file is part of HOA LIBRARY.
  *
- *  - Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice, 
- *      this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * HOA LIBRARY is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #define MAX_ZOOM 1.
@@ -710,7 +711,7 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             else if(sym == gensym("clear"))
                 x->f_source_preset->clear();
             else if(sym == gensym("recall"))
-                x->f_source_preset->RecallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
+                x->f_source_preset->recallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
             else if(sym == gensym("read"))
             {
                 t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
@@ -1731,8 +1732,8 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_set_source_jrgba(g, &red); 
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
                     jgraphics_stroke(g);
-                    jgraphics_move_to(g, sourcePositionX + Tools::abscisse(x->f_size_source * 1., CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI2 / 2.));
-                    jgraphics_line_to(g, sourcePositionX + Tools::abscisse(x->f_size_source * 1., CICM_PI2 * 5. / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI * 5. / 4.));
+                    jgraphics_move_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI2 / 2.));
+                    jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_PI2 * 5. / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI * 5. / 4.));
                     jgraphics_stroke(g);
                 }
                 
@@ -1816,7 +1817,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 for(int j = 1; j < 4; j += 2)
                 {
                     jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                    jgraphics_line_to(g, sourcePositionX + Tools::abscisse(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.));
+                    jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.));
                 }
                 jgraphics_stroke(g);
                 if(!x->f_source_manager->groupGetMute(i))
@@ -1828,7 +1829,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     for(int j = 0; j < 2; j++)
                     {
                         jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + Tools::abscisse(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
+                        jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
                     }
                 }
                 jgraphics_stroke(g);
@@ -1841,7 +1842,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     for(int j = 0; j < 2; j++)
                     {
                         jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + Tools::abscisse(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
+                        jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
                     }
                     jgraphics_stroke(g);
                 }

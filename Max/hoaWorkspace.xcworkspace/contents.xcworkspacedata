@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:hoaConvolve/hoa.convolve~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaFamily/hoa.record~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaFamily/hoa.plug~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaFamily/hoa.play~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaFamily/hoa.dac~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaFamily/hoa.connect.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaGain_UI/hoa.gain~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaPiSig/hoa.pi~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaRecomposer_UI/hoa.recomposer.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaVector/hoa.vector~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaWider/hoa.wider~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaSpace_UI/hoa.space.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaSpace/hoa.space~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaScope_UI/hoa.scope~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaRotate/hoa.rotate~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaRecomposer/hoa.recomposer~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaProjector/hoa.projector~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaPi/hoa.pi.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaOptim/hoa.optim~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaMeter_UI/hoa.meter~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaMap_UI/hoa.map.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaMap/hoa.map~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaFreeverb/hoa.freeverb~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaEncoder/hoa.encoder~.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaDecoder/hoa.decoder~.xcodeproj">
+   </FileRef>
+</Workspace>

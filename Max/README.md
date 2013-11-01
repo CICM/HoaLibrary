@@ -21,3 +21,8 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 
 
 
+##### ToDo :
+
+- hoa.convolve~ : Update buffer~ for Max 6 SDK (low)
+- hoa.plug~ : Update dsp method for Max 6 SDK (low)
+- hoa.decoder~ : Find a solution for attributes order (medium)

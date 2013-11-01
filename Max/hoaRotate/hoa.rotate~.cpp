@@ -1,75 +1,91 @@
 /**
  * HoaLibrary : A High Order Ambisonics Library
  * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
- * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Website  : http://www.mshparisnord.fr/HoaLibrary/
  * Contacts : cicm.mshparisnord@gmail.com
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * This file is part of HOA LIBRARY.
  *
- *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice, 
- *		this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * HOA LIBRARY is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-#include "MaxRotate.h"
+#include "../../Sources/HoaLibrary.h"
+
+extern "C"
+{
+#include "ext.h"
+#include "ext_obex.h"
+#include "z_dsp.h"
+}
 
 typedef struct _HoaRotate 
 {
-	t_pxobject          f_ob;
-	AmbisonicRotate*    f_ambi_rotate;
-    MaxRotate*          f_ambi_max;
-    
-} t_hoa_rotate;
+	t_pxobject				f_ob;
+	AmbisonicRotate			*f_ambiRotate;
 
-void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_rotate_free(t_hoa_rotate *x);
-void hoa_rotate_float(t_hoa_rotate *x, double f);
-void hoa_rotate_int(t_hoa_rotate *x, long n);
+} t_HoaRotate;
 
-void hoa_rotate_dsp64(t_hoa_rotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_rotate_perform64(t_hoa_rotate *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f, void *up);
-void hoa_rotate_perform64_o(t_hoa_rotate *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
+void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv);
+void HoaRotate_free(t_HoaRotate *x);
+void HoaRotate_assist(t_HoaRotate *x, void *b, long m, long a, char *s);
+void HoaRotate_float(t_HoaRotate *x, double f);
+void HoaRotate_int(t_HoaRotate *x, long n);
 
-t_class* hoa_rotate_class;
+void HoaRotate_dsp64(t_HoaRotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void HoaRotate_perform64(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaRotate_perform64Offset(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+
+t_class* HoaRotate_class;
 
 int C74_EXPORT main(void)
 {	
-	t_class *c = class_new("hoa.rotate~",(method)hoa_rotate_new,(method)hoa_rotate_free,(long)sizeof(t_hoa_rotate),0L, A_GIMME, 0);
-	class_addmethod(c, (method)hoa_rotate_float,	"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_rotate_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)hoa_rotate_dsp64,	"dsp64",	A_CANT, 0);
-    
-    class_hoainit(c);
+
+	t_class *c;
+	
+	c = class_new("hoa.rotate~", (method)HoaRotate_new, (method)HoaRotate_free, (long)sizeof(t_HoaRotate), 0L, A_GIMME, 0);
+	
+	class_addmethod(c, (method)HoaRotate_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)HoaRotate_int,		"int",		A_LONG, 0);
+	class_addmethod(c, (method)HoaRotate_dsp64,		"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)HoaRotate_assist,	"assist",	A_CANT, 0);
+	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
-	hoa_rotate_class = c;
-
+	HoaRotate_class = c;
+	
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
+void *HoaRotate_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_hoa_rotate *x = (t_hoa_rotate *)object_alloc(hoa_rotate_class);
-    
+	t_HoaRotate *x = NULL;
+	int	order = 4;
+    x = (t_HoaRotate *)object_alloc(HoaRotate_class);
 	if (x)
 	{
-		x->f_ambi_max   = new MaxRotate((t_hoa_object *)x, argc, argv);
-		x->f_ambi_rotate = new AmbisonicRotate(x->f_ambi_max->getOrder(), sys_getblksize());
+		if(atom_gettype(argv) == A_LONG)
+			order = atom_getlong(argv);
 		
-		dsp_setup((t_pxobject *)x, x->f_ambi_rotate->getNumberOfInputs());
-		for (int i = 0; i < x->f_ambi_rotate->getNumberOfOutputs(); i++) 
+		x->f_ambiRotate = new AmbisonicRotate(order, sys_getblksize());
+		
+		dsp_setup((t_pxobject *)x, x->f_ambiRotate->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambiRotate->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
 		
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -77,39 +93,49 @@ void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
-void hoa_rotate_float(t_hoa_rotate *x, double f)
+void HoaRotate_float(t_HoaRotate *x, double f)
 {
-	x->f_ambi_rotate->setAzimuth(f);
+	x->f_ambiRotate->setAzimuth(f);
 }
 
-void hoa_rotate_int(t_hoa_rotate *x, long n)
+void HoaRotate_int(t_HoaRotate *x, long n)
 {
-	x->f_ambi_rotate->setAzimuth(n);
+	x->f_ambiRotate->setAzimuth(n);
 }
 
-void hoa_rotate_dsp64(t_hoa_rotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void HoaRotate_dsp64(t_HoaRotate *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambi_rotate->setVectorSize(maxvectorsize);
-	if(count[x->f_ambi_rotate->getNumberOfInputs() - 1])
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_rotate_perform64, 0, NULL);
+	x->f_ambiRotate->setVectorSize(maxvectorsize);
+	if(count[x->f_ambiRotate->getNumberOfInputs() - 1])
+		object_method(dsp64, gensym("dsp_add64"), x, HoaRotate_perform64, 0, NULL);
 	else
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_rotate_perform64_o, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, HoaRotate_perform64Offset, 0, NULL);
 }
 
-void hoa_rotate_perform64(t_hoa_rotate *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
+void HoaRotate_perform64(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambi_rotate->process(ins, outs, ins[x->f_ambi_rotate->getNumberOfInputs() - 1]);
+	x->f_ambiRotate->process(ins, outs, ins[x->f_ambiRotate->getNumberOfInputs() - 1]);
 }
 
-void hoa_rotate_perform64_o(t_hoa_rotate *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
+void HoaRotate_perform64Offset(t_HoaRotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambi_rotate->process(ins, outs);
+	x->f_ambiRotate->process(ins, outs);
+}
+								  
+void HoaRotate_assist(t_HoaRotate *x, void *b, long m, long a, char *s)
+{
+	if (a != x->f_ambiRotate->getNumberOfInputs()-1 )
+	{
+		sprintf(s,"(Signal) %s", x->f_ambiRotate->getHarmonicsName(a).c_str());
+	}
+	else
+		sprintf(s,"(Signal or float) Azimuth"); 	
 }
 
-void hoa_rotate_free(t_hoa_rotate *x)
+
+void HoaRotate_free(t_HoaRotate *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_ambi_rotate;
-    delete x->f_ambi_max;
+	free(x->f_ambiRotate);
 }
 

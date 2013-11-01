@@ -1,26 +1,27 @@
 /**
  * HoaLibrary : A High Order Ambisonics Library
  * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
- * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Website  : http://www.mshparisnord.fr/HoaLibrary/
  * Contacts : cicm.mshparisnord@gmail.com
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * This file is part of HOA LIBRARY.
  *
- *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice, 
- *		this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * HOA LIBRARY is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 extern "C"
@@ -197,11 +198,11 @@ int C74_EXPORT main()
 	CLASS_ATTR_ORDER			(c, "circlecolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "circlecolor", 0, "0.2 0.2 0.2 1.");
 	
-	CLASS_ATTR_RGBA				(c, "miccolor", 0, t_HoaRecomposerUI, f_colorMic);
-	CLASS_ATTR_STYLE			(c, "miccolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "miccolor", 0, "Microphone Color");
-	CLASS_ATTR_ORDER			(c, "miccolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "miccolor", 0, "0.5 0.5 0.5 1.");
+	CLASS_ATTR_RGBA				(c, "chacolor", 0, t_HoaRecomposerUI, f_colorMic);
+	CLASS_ATTR_STYLE			(c, "chacolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "chacolor", 0, "Channels Color");
+	CLASS_ATTR_ORDER			(c, "chacolor", 0, "4");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "chacolor", 0, "0.5 0.5 0.5 1.");
     
     CLASS_ATTR_RGBA				(c, "selmiccolor", 0, t_HoaRecomposerUI, f_colorMicSelected);
 	CLASS_ATTR_STYLE			(c, "selmiccolor", 0, "rgba");
@@ -240,12 +241,13 @@ int C74_EXPORT main()
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selmictextcolor", 0, "0.4 0.4 0.4 1.");
     CLASS_STICKY_CATEGORY_CLEAR(c);
 	
-	CLASS_ATTR_LONG				(c, "nmics",0, t_HoaRecomposerUI, f_numberOfMic);
-    CLASS_ATTR_CATEGORY			(c, "nmics",0,"Custom");
-	CLASS_ATTR_FILTER_CLIP		(c, "nmics", MIN_MICS, MAX_MICS);
-    CLASS_ATTR_ACCESSORS		(c, "nmics", NULL, set_numberOfMics);
-	CLASS_ATTR_LABEL			(c, "nmics", 0, "Number of Microphones");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"nmics",0,"8");
+	CLASS_ATTR_LONG				(c, "channels",0, t_HoaRecomposerUI, f_numberOfMic);
+    CLASS_ATTR_CATEGORY			(c, "channels",0,"Custom");
+	CLASS_ATTR_FILTER_CLIP		(c, "channels", MIN_MICS, MAX_MICS);
+    CLASS_ATTR_ACCESSORS		(c, "channels", NULL, set_numberOfMics);
+	CLASS_ATTR_LABEL			(c, "channels", 0, "Number of Channels");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"channels",0,"8");
+    CLASS_ATTR_ALIAS            (c, "channels", "loudspeakers");
 	
 	class_register(CLASS_BOX, c);
 	HoaRecomposerUI_class = c;
@@ -714,7 +716,7 @@ void draw_textMics(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         {
             jtextlayout_settextcolor(jtl, (x->f_mics->isSelected(i) || x->f_last_mouseMoveOverMic == i) ? &x->f_colorTextMicSelected : &x->f_colorTextMic);
             mic_angle = CICM_2PI - (x->f_mics->getAngleInRadian(i) + CICM_PI2);
-            x1 = long(Tools::abscisse(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
+            x1 = long(Tools::abscissa(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
             y1 = long(Tools::ordinate(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
             sprintf(text,"%i", i);
 			jtextlayout_set(jtl, text, jf, x1 - fontsize * 1.5, y1 - 10, fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
@@ -905,7 +907,7 @@ void draw_fishEye(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
         jgraphics_set_line_width(g, 1);
         jgraphics_set_dash(g, dashes, 2, 0);
         
-        cartFisheyeDest.x = Tools::abscisse(x->f_micRadius, x->f_fisheyeAngle);
+        cartFisheyeDest.x = Tools::abscissa(x->f_micRadius, x->f_fisheyeAngle);
         cartFisheyeDest.y = Tools::ordinate(x->f_micRadius, x->f_fisheyeAngle);
         cartFisheyeDest.x = (cartFisheyeDest.x + (w*0.5));
         cartFisheyeDest.y = ( (w - cartFisheyeDest.y) - (w*0.5) );
@@ -915,7 +917,7 @@ void draw_fishEye(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
             if (x->f_mics->isSelected(i))
             {
                 micAngle = x->f_mics->getAngleInRadian(i);
-                cart.x = Tools::abscisse(x->f_micRadius, micAngle + CICM_PI2);
+                cart.x = Tools::abscissa(x->f_micRadius, micAngle + CICM_PI2);
                 cart.y = Tools::ordinate(x->f_micRadius, micAngle + CICM_PI2);
                 cart.x = (cart.x + (w*0.5));
                 cart.y = ( (w - cart.y) - (w*0.5) );
@@ -1227,7 +1229,7 @@ bool isMicInsideRect(t_HoaRecomposerUI *x, int micIndex, t_rect rectSelection)
 {
     double w = x->rect.width;
     t_pt micPoint;
-    micPoint.x = Tools::abscisse(x->f_micRadius, x->f_mics->getAngleInRadian(micIndex) + CICM_PI2);
+    micPoint.x = Tools::abscissa(x->f_micRadius, x->f_mics->getAngleInRadian(micIndex) + CICM_PI2);
     micPoint.y = Tools::ordinate(x->f_micRadius, x->f_mics->getAngleInRadian(micIndex) + CICM_PI2);
     micPoint.x = (micPoint.x + (w*0.5));
     micPoint.y = ( (w - micPoint.y) - (w*0.5) );

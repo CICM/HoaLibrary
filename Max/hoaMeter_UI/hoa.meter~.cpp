@@ -1,24 +1,27 @@
 /**
- HoaLibrary : A High Order Ambisonics Library
- Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- All rights reserved.
- 
- Website  : http://www.mshparisnord.fr/hoalibrary/
- Contacts : cicm.mshparisnord@gmail.com
-
- Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
- 
- - Redistributions may not be sold, nor may they be used in a commercial product or activity.
- - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
- - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- 
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIALL DAMAGES
- (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
- AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * HoaLibrary : A High Order Ambisonics Library
+ * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.re Guillot, CICM - Université Paris 8
+ * All rights reserved.
+ *
+ * Website  : http://www.mshparisnord.fr/HoaLibrary/
+ * Contacts : cicm.mshparisnord@gmail.com
+ *
+ * This file is part of HOA LIBRARY.
+ *
+ * HOA LIBRARY is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include "../../Sources/HoaLibrary.h"
@@ -190,21 +193,19 @@ int C74_EXPORT main()
 	/* BEHAVIOR */
     CLASS_STICKY_CATEGORY       (c, 0, "Behavior");
     
-	CLASS_ATTR_LONG				(c, "loudspeakers", 0 , t_meter, f_number_of_loudspeakers);
-    CLASS_ATTR_ACCESSORS		(c, "loudspeakers", NULL, number_of_loudspeakers_set);
-	CLASS_ATTR_ORDER			(c, "loudspeakers", 0, "1");
-	CLASS_ATTR_LABEL			(c, "loudspeakers", 0, "Number of Loudspeakers");
-	CLASS_ATTR_SAVE				(c, "loudspeakers", 1);
-    CLASS_ATTR_DEFAULT          (c, "loudspeakers", 0, "8");
-	CLASS_ATTR_ALIAS            (c, "loudspeakers", "ls");
-    CLASS_ATTR_ALIAS            (c, "loudspeakers", "channels");
+	CLASS_ATTR_LONG				(c, "channels", 0 , t_meter, f_number_of_loudspeakers);
+    CLASS_ATTR_ACCESSORS		(c, "channels", NULL, number_of_loudspeakers_set);
+	CLASS_ATTR_ORDER			(c, "channels", 0, "1");
+	CLASS_ATTR_LABEL			(c, "channels", 0, "Number of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "channels", 1);
+    CLASS_ATTR_DEFAULT          (c, "channels", 0, "8");
+    CLASS_ATTR_ALIAS            (c, "channels", "loudspeakers");
     
 	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_meter,f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
 	CLASS_ATTR_SAVE				(c, "angles", 1);
-	CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
     
 	CLASS_ATTR_DOUBLE			(c, "offset", 0, t_meter, f_offsetOfLoudspeakers);
 	CLASS_ATTR_ORDER			(c, "offset", 0, "3");
@@ -427,7 +428,7 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
         for(int i = 0; i < ac && i < x->f_number_of_loudspeakers; i++)
         {
             if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
-                x->f_meter->setLoudspeakerAngle(i, atom_getfloat(av+i));
+                x->f_meter->setLoudspeakerAngleDegrees(i, atom_getfloat(av+i));
         }
         
     }

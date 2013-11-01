@@ -134,7 +134,7 @@ int C74_EXPORT main()
     CLASS_ATTR_LONG					(c, "channels", 0, t_space, f_number_of_microphones);
 	CLASS_ATTR_CATEGORY				(c, "channels", 0, "Behavior");
 	CLASS_ATTR_ORDER				(c, "channels", 0, "1");
-	CLASS_ATTR_LABEL				(c, "channels", 0, "Number of virtuals microphones");
+	CLASS_ATTR_LABEL				(c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS			(c, "channels", NULL, number_of_microphones_set);
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "channels", 0,"8");
 	CLASS_ATTR_ALIAS                (c, "channels", "loudspeakers");
@@ -142,7 +142,7 @@ int C74_EXPORT main()
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_SPEAKER);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
-	CLASS_ATTR_LABEL                (c, "coeffs", 0, "Virtuals microphones coefficients");
+	CLASS_ATTR_LABEL                (c, "coeffs", 0, "Channels coefficients");
     CLASS_ATTR_ACCESSORS			(c, "coeffs", NULL, coefficients_set);
 	CLASS_ATTR_DEFAULT              (c, "coeffs", 0, "666.");
 	CLASS_ATTR_SAVE                 (c, "coeffs", 0);

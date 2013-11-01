@@ -105,6 +105,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "channels", 0, "2");
     CLASS_ATTR_SAVE             (c, "channels", 1);
     CLASS_ATTR_ALIAS            (c, "channels", "loudspeakers");
+    CLASS_ATTR_ALIAS            (c, "channels", "ychannels");
     
     /* Binaural */
     CLASS_ATTR_SYM              (c, "pinnaesize", 0, t_HoaDecode, f_pinna_size);
@@ -122,6 +123,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
     CLASS_ATTR_ORDER            (c, "angles", 0, "5");
 	CLASS_ATTR_SAVE             (c, "angles", 1);
+    CLASS_ATTR_ALIAS            (c, "angles", "zchannels");
     
     CLASS_ATTR_SYM              (c, "restitution", 0, t_HoaDecode, f_resitution_mode);
 	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
