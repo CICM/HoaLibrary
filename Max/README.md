@@ -1,9 +1,9 @@
-### Hoa Library (A high order ambisonics library) for <a title="Max" href="http://cycling74.com/products/max/" target="_blank">Max </a> developed by <a title="Cycling' 74" href="http://cycling74.com/" target="_blank">Cycling' 74</a> </p>
+### Hoa Library (A high order ambisonics library) for <a title="Max" href="http://cycling74.com/products/max/" target="_blank">Max </a>
 
 
 ##### Version :
 
-Beta 1.03 for Max 6.1 (32 & 64 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>).
+Release 1.3 for Max 6.1 (32 & 64 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>).
 
 ##### Hoa for Max authors :
 
