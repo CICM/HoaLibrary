@@ -301,6 +301,8 @@
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp" />
     <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.cpp" />
     <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder3D.cpp" />
+    <ClCompile Include="..\..\Sources\hoaFreeverb\AmbisonicFreeverb.cpp" />
+    <ClCompile Include="..\..\Sources\hoaFreeverb\AmbisonicsFreeverb.cpp" />
     <ClCompile Include="..\..\Sources\hoaMap\AmbisonicMap.cpp" />
     <ClCompile Include="..\..\Sources\hoaMap\AmbisonicMultiMaps.cpp" />
     <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSource.cpp" />
@@ -318,7 +320,7 @@
     <ClCompile Include="..\..\Sources\hoaSpace\AmbisonicSpace.cpp" />
     <ClCompile Include="..\..\Sources\hoaVector\AmbisonicVector.cpp" />
     <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp" />
-    <ClCompile Include="hoa.map.cpp" />
+    <ClCompile Include="hoa.freeverb~.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.h" />
@@ -353,6 +355,8 @@
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h" />
     <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.h" />
     <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder3D.h" />
+    <ClInclude Include="..\..\Sources\hoaFreeverb\AmbisonicFreeverb.h" />
+    <ClInclude Include="..\..\Sources\hoaFreeverb\AmbisonicsFreeverb.h" />
     <ClInclude Include="..\..\Sources\HoaLibrary.h" />
     <ClInclude Include="..\..\Sources\hoaMap\AmbisonicMap.h" />
     <ClInclude Include="..\..\Sources\hoaMap\AmbisonicMultiMaps.h" />

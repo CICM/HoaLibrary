@@ -40,6 +40,7 @@
     <WholeProgramOptimization>PGOptimize</WholeProgramOptimization>
     <UseIntelTBB>true</UseIntelTBB>
     <InstrumentIntelTBB>true</InstrumentIntelTBB>
+    <UseIntelMKL>Sequential</UseIntelMKL>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -230,7 +231,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -277,7 +278,104 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilter.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFir.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterOnePole.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmOnePole.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\Ambisonic3D.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicViewer.cpp" />
+    <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp" />
+    <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.cpp" />
+    <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder3D.cpp" />
+    <ClCompile Include="..\..\Sources\hoaFreeverb\AmbisonicFreeverb.cpp" />
+    <ClCompile Include="..\..\Sources\hoaFreeverb\AmbisonicsFreeverb.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicMap.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicMultiMaps.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSource.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesGroup.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesManager.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesPreset.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.cpp" />
+    <ClCompile Include="..\..\Sources\hoaMeter\AmbisonicsMeter.cpp" />
+    <ClCompile Include="..\..\Sources\hoaOptim\AmbisonicOptim.cpp" />
+    <ClCompile Include="..\..\Sources\hoaProjector\AmbisonicProjector.cpp" />
+    <ClCompile Include="..\..\Sources\hoaRecomposer\AmbisonicRecomposer.cpp" />
+    <ClCompile Include="..\..\Sources\hoaRecomposer\AmbisonicVirtualMicUI.cpp" />
+    <ClCompile Include="..\..\Sources\hoaRecomposer\AmbisonicVirtualMicUIManager.cpp" />
+    <ClCompile Include="..\..\Sources\hoaRotate\AmbisonicRotate.cpp" />
+    <ClCompile Include="..\..\Sources\hoaSpace\AmbisonicSpace.cpp" />
+    <ClCompile Include="..\..\Sources\hoaVector\AmbisonicVector.cpp" />
+    <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp" />
     <ClCompile Include="hoa.connect.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_BLAS_FFTW.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_INTEL.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDefine_VDSP.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmDelay\CicmDecorrelation.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmEnvelope\CicmEnvelope.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilter.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDamper.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFir.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFixedDelay.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterOnePole.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmOnePole.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmGranular\CicmQSGS.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLibrary.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmLines\CicmLine.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmFreeverb.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmReverb\CicmTuning.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmSignal.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmTools.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Ambisonic3D.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicsDiffuser.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicViewer.h" />
+    <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h" />
+    <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.h" />
+    <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder3D.h" />
+    <ClInclude Include="..\..\Sources\hoaFreeverb\AmbisonicFreeverb.h" />
+    <ClInclude Include="..\..\Sources\hoaFreeverb\AmbisonicsFreeverb.h" />
+    <ClInclude Include="..\..\Sources\HoaLibrary.h" />
+    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicMap.h" />
+    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicMultiMaps.h" />
+    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSource.h" />
+    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesGroup.h" />
+    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesManager.h" />
+    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesPreset.h" />
+    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.h" />
+    <ClInclude Include="..\..\Sources\hoaMeter\AmbisonicsMeter.h" />
+    <ClInclude Include="..\..\Sources\hoaOptim\AmbisonicOptim.h" />
+    <ClInclude Include="..\..\Sources\hoaProjector\AmbisonicProjector.h" />
+    <ClInclude Include="..\..\Sources\hoaRecomposer\AmbisonicRecomposer.h" />
+    <ClInclude Include="..\..\Sources\hoaRecomposer\AmbisonicVirtualMicUI.h" />
+    <ClInclude Include="..\..\Sources\hoaRecomposer\AmbisonicVirtualMicUIManager.h" />
+    <ClInclude Include="..\..\Sources\hoaRotate\AmbisonicRotate.h" />
+    <ClInclude Include="..\..\Sources\hoaSpace\AmbisonicSpace.h" />
+    <ClInclude Include="..\..\Sources\hoaVector\AmbisonicVector.h" />
+    <ClInclude Include="..\..\Sources\hoaWider\AmbisonicWider.h" />
+    <ClInclude Include="hoa.connect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

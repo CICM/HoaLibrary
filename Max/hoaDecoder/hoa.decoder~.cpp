@@ -175,8 +175,12 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
         std::string absoluteHrtfFilePath = std::string((const char*)bundle_path) + std::string("/Contents/Resources/") + std::string("HrtfDatabase/");
 #endif
 #ifdef WIN_VERSION
-        //HMODULE handle = LoadLibrary("hoa.decoder~.mxe");
+
+#ifdef WIN64
 		HMODULE handle = LoadLibrary("hoa.decoder~.mxe64");
+#else
+		HMODULE handle = LoadLibrary("hoa.decoder~.mxe");
+#endif
 		char bundle_path[512];
 		GetModuleFileName(handle, bundle_path, 512);
         std::string absoluteHrtfFilePath = std::string((const char*)bundle_path);

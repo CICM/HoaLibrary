@@ -66,4 +66,7 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 - hoa.spectrum~ : Clean (medium)
 - hoa.boids : Clean (medium)
 - hoa.recomposer : No fisheye preview on window
+- hoa.meter~ : Angles negatifs
+- hoa.map : Last source not display ?
+- hoa.freeverb~ : click on audio on/off
 - fftw for window
