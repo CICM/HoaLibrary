@@ -285,6 +285,8 @@
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolution.cpp" />
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolutionZero.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.cpp" />
     <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterFir.cpp" />
@@ -300,6 +302,7 @@
     <ClCompile Include="..\..\Sources\hoaAmbisonics\AmbisonicViewer.cpp" />
     <ClCompile Include="..\..\Sources\hoaAmbisonics\Planewaves.cpp" />
     <ClCompile Include="..\..\Sources\hoaBinaural\AmbisonicsBinaural.cpp" />
+    <ClCompile Include="..\..\Sources\hoaConvolve\AmbisonicConvolver.cpp" />
     <ClCompile Include="..\..\Sources\hoaDecoder\AmbisonicDecoder3D.cpp" />
     <ClCompile Include="..\..\Sources\hoaDecoder\AmbisonicsDecoder.cpp" />
     <ClCompile Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.cpp" />
@@ -325,7 +328,7 @@
     <ClCompile Include="..\..\Sources\hoaSpace\AmbisonicSpace.cpp" />
     <ClCompile Include="..\..\Sources\hoaVector\AmbisonicVector.cpp" />
     <ClCompile Include="..\..\Sources\hoaWider\AmbisonicWider.cpp" />
-    <ClCompile Include="hoa.decoder~.cpp" />
+    <ClCompile Include="hoa.convolve~.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmAmplitude\CicmRingModulation.h" />
@@ -339,6 +342,8 @@
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterAllpass.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterBiquad.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterComb.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolution.h" />
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolutionZero.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDamper.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDelay.h" />
     <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterDiffuser.h" />
@@ -359,6 +364,7 @@
     <ClInclude Include="..\..\Sources\hoaAmbisonics\AmbisonicViewer.h" />
     <ClInclude Include="..\..\Sources\hoaAmbisonics\Planewaves.h" />
     <ClInclude Include="..\..\Sources\hoaBinaural\AmbisonicsBinaural.h" />
+    <ClInclude Include="..\..\Sources\hoaConvolve\AmbisonicConvolver.h" />
     <ClInclude Include="..\..\Sources\hoaDecoder\AmbisonicDecoder3D.h" />
     <ClInclude Include="..\..\Sources\hoaDecoder\AmbisonicsDecoder.h" />
     <ClInclude Include="..\..\Sources\hoaEncoder\AmbisonicEncoder.h" />

@@ -38,3 +38,6 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 - hoa.space~ : A spatial filter.
 - hoa.wider~ : A fractional ambisonic orders simulator.
 
+
+##### Objects :
+- hoa.meter~ : Bad initialization.

@@ -143,7 +143,16 @@
     <ClCompile Include="..\..\Sources\hoaRestitution\AmbisonicsRestitution.cpp">
       <Filter>HoaLibrary\hoaRestitution</Filter>
     </ClCompile>
-    <ClCompile Include="hoa.decoder~.cpp" />
+    <ClCompile Include="hoa.convolve~.cpp" />
+    <ClCompile Include="..\..\Sources\hoaConvolve\AmbisonicConvolver.cpp">
+      <Filter>HoaLibrary\hoaConvolve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolutionZero.cpp">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolution.cpp">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="HoaLibrary">
@@ -199,6 +208,9 @@
     </Filter>
     <Filter Include="HoaLibrary\hoaRestitution">
       <UniqueIdentifier>{97b59e30-6e29-43b6-a01c-5c60b5d8d477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HoaLibrary\hoaConvolve">
+      <UniqueIdentifier>{ea12f561-4820-4254-a111-ee8462e103d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -372,6 +384,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Sources\hoaRestitution\AmbisonicsRestitution.h">
       <Filter>HoaLibrary\hoaRestitution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\hoaConvolve\AmbisonicConvolver.h">
+      <Filter>HoaLibrary\hoaConvolve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolutionZero.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Sources\CicmLibrary\CicmFilters\CicmFilterConvolution.h">
+      <Filter>HoaLibrary\CicmLibrary</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
