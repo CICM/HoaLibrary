@@ -5,7 +5,7 @@
 
 Release 1.3 for Max 6.1 (32 & 64 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>).
 
-##### Hoa for Max authors :
+##### Authors (Hoa for Max) :
 
 Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
