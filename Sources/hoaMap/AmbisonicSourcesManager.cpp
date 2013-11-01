@@ -44,9 +44,10 @@ void SourcesManager::setExistence(long deadOrAlive)
 
 void SourcesManager::clearAll()
 {
-    for(int i = 0; i < getMaximumIndexOfSource(); i++)
+    
+    for(int i = 0; i <= getMaximumIndexOfSource(); i++)
         sourceRemove(i);
-    for(int i = 0; i < getMaximumIndexOfGroup(); i++)
+    for(int i = 0; i <= getMaximumIndexOfGroup(); i++)
         groupRemove(i);
 }
 
@@ -129,7 +130,7 @@ void SourcesManager::sourceRemove(long anIndex)
         {
             indexOfGroup = m_sources[anIndex]->getGroupIndex(i);
             
-            if(indexOfGroup >= 0 && indexOfGroup < getMaximumIndexOfGroup())
+            if(indexOfGroup >= 0 && indexOfGroup <= getMaximumIndexOfGroup())
             {
                 if(groupGetExistence(indexOfGroup))
                     m_groups[indexOfGroup]->removeSource(anIndex);
