@@ -23,100 +23,139 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "MaxEncoder.h"
+#include "../../Sources/HoaLibrary.h"
 
-typedef struct _hoa_encoder 
+extern "C"
 {
-	t_pxobject			f_ob;
-	AmbisonicEncoder*   f_ambi_encoder;
-    MaxEncoder*         f_ambi_max;
+#include "ext.h"
+#include "ext_obex.h"
+#include "z_dsp.h"
+}
+
+int postons = 0;
+
+typedef struct _HoaEncode 
+{
+	t_pxobject					f_ob;			
+	AmbisonicEncoder			*f_ambiEncoder;
+} t_HoaEncode;
+
+
+void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv);
+void HoaEncode_free(t_HoaEncode *x);
+void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s);
+
+void HoaEncode_float(t_HoaEncode *x, double f);
+void HoaEncode_int(t_HoaEncode *x, long n);
+
+void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaEncode_perform64vec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaEncode_perform64Offsetvec(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+
+t_class *HoaEncode_class;
     
-} t_hoa_encoder;
-
-
-void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_encoder_free(t_hoa_encoder *x);
-void hoa_encoder_float(t_hoa_encoder *x, double f);
-void hoa_encoder_int(t_hoa_encoder *x, long n);
-
-void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_encoder_perform64(t_hoa_encoder *x, t_object *dsp64, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
-void hoa_encoder_perform64_o(t_hoa_encoder *x, t_object *dsp64, double **ins, long ni, double **outs, long no,long sf,long f,void *up);
-
-t_class *hoa_encoder_class;
 
 int C74_EXPORT main(void)
 {	
 
 	t_class *c;
 	
-	c = class_new("hoa.encoder~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
+	c = class_new("hoa.encoder~", (method)HoaEncode_new, (method)HoaEncode_free, (long)sizeof(t_HoaEncode), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)hoa_encoder_float,	"float",	A_FLOAT,0);
-	class_addmethod(c, (method)hoa_encoder_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)hoa_encoder_dsp64,	"dsp64",	A_CANT, 0);
-    
-    class_hoainit(c);
+	class_addmethod(c, (method)HoaEncode_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)HoaEncode_int,		"int",		A_LONG, 0);
+	class_addmethod(c, (method)HoaEncode_dsp64,		"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)HoaEncode_assist,	"assist",	A_CANT, 0);
+	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
-	hoa_encoder_class = c;
+	HoaEncode_class = c;
+    
+    if (!postons)
+    {
+        post("hoa.library (version 1.3) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+        post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
+        postons = 1;
+    }
 
 	return 0;
 }
 
-void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
+void *HoaEncode_new(t_symbol *s, long argc, t_atom *argv)
 {
-    t_hoa_encoder *x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
+	t_HoaEncode *x = NULL;
+	int	order = 4;
+    x = (t_HoaEncode *)object_alloc(HoaEncode_class);
 	if (x)
 	{		
-		x->f_ambi_max   = new MaxEncoder((t_hoa_object *)x, argc, argv);
-		x->f_ambi_encoder = new AmbisonicEncoder(x->f_ambi_max->getOrder(), sys_getblksize());
+		if(atom_gettype(argv) == A_LONG)
+			order = atom_getlong(argv);
 		
-		dsp_setup((t_pxobject *)x, x->f_ambi_encoder->getNumberOfInputs());
-		for (int i = 0; i < x->f_ambi_encoder->getNumberOfOutputs(); i++)
+		x->f_ambiEncoder = new AmbisonicEncoder(order, sys_getblksize());
+		
+		dsp_setup((t_pxobject *)x, x->f_ambiEncoder->getNumberOfInputs());
+		for (int i = 0; i < x->f_ambiEncoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
-        
+		
 		x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 
 	return (x);
 }
 
-void hoa_encoder_float(t_hoa_encoder *x, double f)
+void HoaEncode_float(t_HoaEncode *x, double f)
 {
-	x->f_ambi_encoder->setAngle(f);
+	x->f_ambiEncoder->setAngle(f);
 }
 
-void hoa_encoder_int(t_hoa_encoder *x, long n)
+void HoaEncode_int(t_HoaEncode *x, long n)
 {
-	x->f_ambi_encoder->setAngle(n);
+	x->f_ambiEncoder->setAngle(n);
 }
 
-void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void HoaEncode_dsp64(t_HoaEncode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambi_encoder->setVectorSize(maxvectorsize);
-	x->f_ambi_encoder->setSamplingRate(samplerate);
+	x->f_ambiEncoder->setVectorSize(maxvectorsize);
+	x->f_ambiEncoder->setSamplingRate(samplerate);
     
-    if(count[x->f_ambi_encoder->getNumberOfInputs() - 1])
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64, 0, NULL);
+    if(count[x->f_ambiEncoder->getNumberOfInputs() - 1])
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64, 0, NULL);
     else
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_o, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, HoaEncode_perform64Offset, 0, NULL);
 }
 
-void hoa_encoder_perform64(t_hoa_encoder *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
+void HoaEncode_perform64(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambi_encoder->process(ins[0], outs, ins[1]);
+	x->f_ambiEncoder->process(ins[0], outs, ins[1]);
 }
 
-void hoa_encoder_perform64_o(t_hoa_encoder *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *u)
+void HoaEncode_perform64Offset(t_HoaEncode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambi_encoder->process(ins[0], outs);
+	x->f_ambiEncoder->process(ins[0], outs);
 }
 
-void hoa_encoder_free(t_hoa_encoder *x) 
+void HoaEncode_assist(t_HoaEncode *x, void *b, long m, long a, char *s)
+{
+	
+	if (m == ASSIST_INLET) 
+	{
+        if(a == 0)
+            sprintf(s,"(Signal) Input");
+        else
+            sprintf(s,"(Signal or float) Angle");
+	} 
+	else 
+	{
+		sprintf(s,"(Signal) %s", x->f_ambiEncoder->getHarmonicsName(a).c_str());
+	}
+}
+
+
+void HoaEncode_free(t_HoaEncode *x) 
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_ambi_encoder;
-    delete x->f_ambi_max;
+	delete(x->f_ambiEncoder);
 }
 

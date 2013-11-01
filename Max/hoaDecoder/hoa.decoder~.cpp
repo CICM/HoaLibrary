@@ -98,14 +98,13 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
     CLASS_ATTR_SAVE             (c, "mode", 1);
     
-    CLASS_ATTR_LONG             (c, "loudspeakers", 0, t_HoaDecode, f_number_of_loudspeakers);
-	CLASS_ATTR_CATEGORY			(c, "loudspeakers", 0, "Behavior");
-    CLASS_ATTR_LABEL            (c, "loudspeakers", 0, "Number of Loudspeakers");
-	CLASS_ATTR_ACCESSORS		(c, "loudspeakers", NULL, loudspeakers_set);
-    CLASS_ATTR_ORDER            (c, "loudspeakers", 0, "2");
-    CLASS_ATTR_SAVE             (c, "loudspeakers", 1);
-    CLASS_ATTR_ALIAS            (c, "loudspeakers", "ls");
-    CLASS_ATTR_ALIAS            (c, "loudspeakers", "yls");
+    CLASS_ATTR_LONG             (c, "channels", 0, t_HoaDecode, f_number_of_loudspeakers);
+	CLASS_ATTR_CATEGORY			(c, "channels", 0, "Behavior");
+    CLASS_ATTR_LABEL            (c, "channels", 0, "Number of Loudspeakers");
+	CLASS_ATTR_ACCESSORS		(c, "channels", NULL, loudspeakers_set);
+    CLASS_ATTR_ORDER            (c, "channels", 0, "2");
+    CLASS_ATTR_SAVE             (c, "channels", 1);
+    CLASS_ATTR_ALIAS            (c, "channels", "loudspeakers");
     
     /* Binaural */
     CLASS_ATTR_SYM              (c, "pinnaesize", 0, t_HoaDecode, f_pinna_size);
@@ -123,8 +122,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_set);
     CLASS_ATTR_ORDER            (c, "angles", 0, "5");
 	CLASS_ATTR_SAVE             (c, "angles", 1);
-    CLASS_ATTR_ALIAS            (c, "angles", "ls_angles");
-    CLASS_ATTR_ALIAS            (c, "angles", "zls");
     
     CLASS_ATTR_SYM              (c, "restitution", 0, t_HoaDecode, f_resitution_mode);
 	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
