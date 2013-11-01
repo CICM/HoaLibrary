@@ -2,7 +2,7 @@
 
 ##### Version :
 
-Beta 1.0, compatible with Pure Data 0.43.4 (32 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>) .
+Beta 1.0 for Pure Data 0.43.4 (32 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>) .
 
 ![Image Pd](https://raw.github.com/CICM/HoaLibrary/master/Ressources/PhotoPd.png "Pd Patch")
 
@@ -20,7 +20,7 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 
 ##### Objects :
 - hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
-- hoa.encoder~ : An ambisonics encoder.
+- hoa.encoder~ : An ambisonic encoder.
 - hoa.map~ : An ambisonic sources spatializer.
 - hoa.delay~ : An ambisonic sound field delay.
 - hoa.freeverb~ : An implementation of the freeverb algorithm for ambisonics.

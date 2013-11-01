@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------
 HoaLibrary by Julien Colafrancesco, Pierre Guillot & Eliott Paris at CICM / Université Paris 8 - 2012-2013
 -----------------
-The HoaLibrary (high order ambisonics library) is a two dimensional high order ambisonics processing set of externals and patches for Pure Data and Max. It allows you to synthesize, transform and modulate sound fields.
+The HoaLibrary (high order ambisonics library) is a two dimensional high order ambisonics processing set of externals and patches for Pure Data, Max, Faust and VST. It allows you to synthesize, transform and modulate sound fields.
 It has been elaborated to facilitate the use of the circular harmonics and the routing in the ambisonic domain for musicians and composers.  
 Thus, they should be able to let their creativity run free.
 ------------------------------------------------------------------------------------------
@@ -16,6 +16,8 @@ HoaLibrary beta v1.0
 MANUAL INSTALLATION :
 -----------------
 
+Pure data :
+
 This version is compatible with Pure Data 0.43.4 (32 bit) and higher
 
 Installation:
@@ -24,6 +26,8 @@ Installation:
  - 'plugins' folder default locations :
 	- Mac OsX : /Applications/Pd-extended.app/Contents/Resources/extra
 	- Windows : C:\Program Files (x86)\pd\extra
+
+
 -----------------
 
 Feedback are welcome.

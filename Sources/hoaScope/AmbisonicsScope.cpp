@@ -25,7 +25,7 @@
 
 #include "AmbisonicsScope.h"
 
-AmbisonicsScope::AmbisonicsScope(long anOrder, long aVectorSize, long aSamplingRate) : AmbisonicsViewer(anOrder, aVectorSize, aSamplingRate)
+AmbisonicsScope::AmbisonicsScope(long anOrder, long aVectorSize, long aSamplingRate) : AmbisonicViewer(anOrder, aVectorSize, aSamplingRate)
 {
     ;
 }

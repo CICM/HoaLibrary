@@ -166,8 +166,8 @@ void AmbisonicSpectrum::initializeFrequencyBands()
 
 void AmbisonicSpectrum::setLoudspeakerAngle(long anIndex, double anAngle)
 {
-    Planewaves::setLoudspeakerAngle(anIndex, anAngle);
-    m_vector->setLoudspeakerAngle(anIndex, anAngle);
+    Planewaves::setLoudspeakerAngleDegrees(anIndex, anAngle);
+    m_vector->setLoudspeakerAngleDegrees(anIndex, anAngle);
 }
 
 void AmbisonicSpectrum::setFrequencyBand(long anIndex, double aFrequency)

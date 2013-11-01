@@ -26,9 +26,9 @@
 #ifndef DEF_AMBISONICSSCOPE
 #define DEF_AMBISONICSSCOPE
 
-#include "../HoaAmbisonics/AmbisonicsViewer.h"
+#include "../hoaAmbisonics/AmbisonicViewer.h"
 
-class AmbisonicsScope : public AmbisonicsViewer
+class AmbisonicsScope : public AmbisonicViewer
 {	
 private:
     double  m_normalize_factor;

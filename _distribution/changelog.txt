@@ -1,9 +1,11 @@
-Max : For an overview of hoa.library and new features in version 1.2, please refer to the 'hoa.library overview' patch in the extra folder.
-Pd : For an overview of hoa.library, please refer to the '@hoa.overview' patch.
+
+HoaLibrary for MaxMSP, Pure Data, Faust and VST
 
 ------------------------ ------------------------
 		   Max Version 
 ------------------------ ------------------------
+
+Max : For an overview of hoa.library and new features in version 1.2, please refer to the 'hoa.library overview' patch in the extra folder.
 
 ------------------------
 version 1.2
@@ -73,6 +75,8 @@ version beta 1.0.0
 		    PD Version 
 ------------------------ ------------------------
 
+Pd : For an overview of hoa.library, please refer to the '@hoa.overview' patch.
+
 ------------------------
 version beta 1.0.0
 ------------------------
@@ -80,9 +84,9 @@ Systems :
 - Mac OsX (Pd 32 bit)
 - Windows (Pd 32 bit)
 
-Object :
+Objects :
 - hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
-- hoa.encoder~ : An ambisonics encoder.
+- hoa.encoder~ : An ambisonic encoder.
 - hoa.map~ : An ambisonic sources spatializer.
 - hoa.delay~ : An ambisonic sound field delay.
 - hoa.freeverb~ : An implementation of the freeverb algorithm for ambisonics.
@@ -97,10 +101,10 @@ Object :
 - hoa.rotate~ : An ambisonic sound field rotation external.
 - hoa.scope~ : An ambisonic harmonic scope.
 - hoa.space : A GUI to design ambisonic space.
-- hoa.space~ :A spatial filter.
+- hoa.space~ : A spatial filter.
 - hoa.wider~ : A fractional ambisonic orders simulator.
-
 Dependencies : 
 
-Cblas (http://www.netlib.org/clapack/cblas/) with Accelerate for Mac Os and Ipp for Windows.
+Cblas (http://www.netlib.org/clapack/cblas/) 
+You can use Accelerate for Mac Os and Ipp or GSL for all platforms.
 PdEnhanced (https://github.com/pierreguillot/PdEnhanced)
