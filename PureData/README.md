@@ -2,15 +2,15 @@
 
 ##### Version :
 
-Beta 1.0, compatible with Pure Data 0.43.4 (32 bit)
+Beta 1.0, compatible with Pure Data 0.43.4 (32 bit) (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>)
 
 ##### Plateform :
 
 Mac Os, Windows
 
-##### Authors :
+##### Hoa for Pure Data authors :
 
-Julien Colafrancesco, Pierre Guillot, Eliott Paris
+Pierre Guillot, Eliott Paris, Manuel Deneu
 
 ##### Dependencies : 
 
@@ -18,7 +18,7 @@ Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
 ##### Licence : 
 
-The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU Public License</a>. If you'd like to avoid the restrictions of the GPL and use hoa.library for a closed-source product, you contact the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a>.
+The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU Public License</a>. If you'd like to avoid the restrictions of the GPL and use Hoa Library for a closed-source product, you contact the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a>.
 
 ##### Object :
 - hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
