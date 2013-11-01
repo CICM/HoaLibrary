@@ -1,26 +1,27 @@
 /**
  * HoaLibrary : A High Order Ambisonics Library
  * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
- * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Website  : http://www.mshparisnord.fr/HoaLibrary/
  * Contacts : cicm.mshparisnord@gmail.com
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * This file is part of HOA LIBRARY.
  *
- *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice, 
- *		this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * HOA LIBRARY is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include "../../Sources/HoaLibrary.h"
@@ -66,7 +67,7 @@ typedef struct  _scope
 	double		f_rayonCircle;
 	double		f_fontsize;
     
-    AmbisonicsViewer* f_viewer;
+    AmbisonicViewer* f_viewer;
     double*     f_harmonicsValues;
     long        f_sampleCounter;
     double*     f_averageHarmo;
@@ -252,7 +253,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
 	x->f_clock = clock_new(x,(method)scope_tick);
 	x->f_startclock = 0;
     
-	x->f_viewer = new AmbisonicsViewer(x->f_order);
+	x->f_viewer = new AmbisonicViewer(x->f_order);
 	x->f_harmonicsValues = new double[x->f_order * 2 + 1];
     x->f_averageHarmo = new double[x->f_order * 2 + 1];
     for (int i = 0; i < x->f_order * 2 + 1; i++)
@@ -285,7 +286,7 @@ t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
                 free(x->f_harmonicsValues);
                 free(x->f_averageHarmo);
                 delete x->f_viewer;
-                x->f_viewer = new AmbisonicsViewer(d);
+                x->f_viewer = new AmbisonicViewer(d);
                 x->f_order = x->f_viewer->getOrder();
                 x->f_harmonicsValues = new double[x->f_order * 2 + 1];
                 x->f_averageHarmo = new double[x->f_order * 2 + 1];

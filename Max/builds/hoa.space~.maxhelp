@@ -72,39 +72,11 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"attr" : "ramp",
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-31",
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 427.0, 415.0, 158.300049, 19.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"attr" : "loudspeakers",
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-26",
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 394.0, 373.0, 150.0, 19.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"coeffs" : [ 1.0, 0.342028, 0.0, 0.0, 0.006727, 0.016842, 0.010732, 0.024917, 0.017273, 0.007622, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ],
+									"channels" : 16,
+									"coeffs" : [ 0.858972, 0.909518, 0.982855, 0.803061, 0.797251, 0.928427, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.098093, 0.255375, 0.61588 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-21",
 									"maxclass" : "hoa.space",
-									"nmics" : 16,
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "" ],
@@ -2714,11 +2686,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 152.399994, 362.0, 208.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"loudspeakers" : 16,
-										"ramp" : 100.0
-									}
-,
 									"text" : "hoa.space~ 16"
 								}
 
@@ -2767,14 +2734,11 @@
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
+										"channels" : 16,
 										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
-										"restitution" : "panning",
-										"yls" : 16,
-										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+										"restitution" : "panning"
 									}
 ,
 									"text" : "hoa.decoder~ 7 16"
@@ -3913,16 +3877,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-4", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 403.5, 393.0, 372.0, 393.0, 372.0, 348.0, 161.899994, 348.0 ],
-									"source" : [ "obj-26", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-3", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -4245,16 +4199,6 @@
 									"disabled" : 0,
 									"hidden" : 1,
 									"source" : [ "obj-3", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-4", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"midpoints" : [ 436.5, 435.0, 372.0, 435.0, 372.0, 348.0, 161.899994, 348.0 ],
-									"source" : [ "obj-31", 0 ]
 								}
 
 							}

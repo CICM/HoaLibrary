@@ -1,26 +1,27 @@
 /**
  * HoaLibrary : A High Order Ambisonics Library
  * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
- * Website  : http://www.mshparisnord.fr/hoalibrary/
+ * Website  : http://www.mshparisnord.fr/HoaLibrary/
  * Contacts : cicm.mshparisnord@gmail.com
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * This file is part of HOA LIBRARY.
  *
- *	- Redistributions may not be sold, nor may they be used in a commercial product or activity.
- *  - Redistributions of source code must retain the above copyright notice, 
- *		this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- *  - Neither the name of the CICM nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * HOA LIBRARY is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include "../MaxConverter.h"
@@ -52,7 +53,7 @@ typedef struct  _space
     t_pt        f_mousepos;
     int         f_cursorType;
 
-	AmbisonicsViewer*        f_viewer;
+	AmbisonicViewer*        f_viewer;
     AmbisonicRecomposer*    f_recomposer;
 
 	double                  f_harmonicsValues[MAX_SPEAKER];
@@ -130,13 +131,14 @@ int C74_EXPORT main()
 	CLASS_ATTR_INVISIBLE			(c, "color", 0);
 	CLASS_ATTR_INVISIBLE			(c, "textcolor", 0);
 
-    CLASS_ATTR_LONG					(c, "nmics", 0, t_space, f_number_of_microphones);
-	CLASS_ATTR_CATEGORY				(c, "nmics", 0, "Behavior");
-	CLASS_ATTR_ORDER				(c, "nmics", 0, "1");
-	CLASS_ATTR_LABEL				(c, "nmics", 0, "Number of virtuals microphones");
-	CLASS_ATTR_ACCESSORS			(c, "nmics", NULL, number_of_microphones_set);
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nmics", 0,"8");
-	
+    CLASS_ATTR_LONG					(c, "channels", 0, t_space, f_number_of_microphones);
+	CLASS_ATTR_CATEGORY				(c, "channels", 0, "Behavior");
+	CLASS_ATTR_ORDER				(c, "channels", 0, "1");
+	CLASS_ATTR_LABEL				(c, "channels", 0, "Number of virtuals microphones");
+	CLASS_ATTR_ACCESSORS			(c, "channels", NULL, number_of_microphones_set);
+	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "channels", 0,"8");
+	CLASS_ATTR_ALIAS                (c, "channels", "loudspeakers");
+    
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_space, f_microphonesValues, f_number_of_microphones, MAX_SPEAKER);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
@@ -206,7 +208,7 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
 			| JBOX_DRAWBACKGROUND
 			;
     
-	x->f_viewer				= new AmbisonicsViewer(1);
+	x->f_viewer				= new AmbisonicViewer(1);
     x->f_recomposer         = new AmbisonicRecomposer(1, 3, Hoa_Fixe);
     
 	jbox_new((t_jbox *)x, flags, argc, argv);
@@ -215,7 +217,6 @@ void *space_new(t_symbol *s, int argc, t_atom *argv)
     x->f_outInfos   = outlet_new(x, NULL);
     x->f_out        = listout(x);
 
-    jpopupmenu_setfont(<#t_jpopupmenu *menu#>, <#t_jfont *font#>)
 	attr_dictionary_process(x, d);
 	jbox_ready((t_jbox *)x);
 
@@ -845,7 +846,7 @@ t_max_err number_of_microphones_set(t_space *x, t_object *attr, long argc, t_ato
                     x->f_order              = (x->f_number_of_microphones - 1) / 2;
                 x->f_number_of_harmonics    = x->f_order * 2 + 1;
                
-                x->f_viewer         = new AmbisonicsViewer(x->f_order);
+                x->f_viewer         = new AmbisonicViewer(x->f_order);
                 x->f_recomposer		= new AmbisonicRecomposer(x->f_order, x->f_number_of_microphones, Hoa_Fixe);
                 
                 jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
