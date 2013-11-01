@@ -5,7 +5,31 @@ HoaLibrary for MaxMSP, Pure Data, Faust and VST
 		   Max Version 
 ------------------------ ------------------------
 
-Max : For an overview of hoa.library and new features in version 1.2, please refer to the 'hoa.library overview' patch in the extra folder.
+------------------------
+version 1.3
+------------------------
+
+Max : For an overview of hoa.library and new features in version 1.2, please refer to the 'hoa.overview' patch in the extra folder.
+
+
+Bug Fixed and New Features:
+
+ - hoa.gain~Ê: 	new GUI Object.
+ - hoa.recomposerÊ: new GUI Object.
+ - hoa.decoder~ : dynamic number of loudspeakers, 3 restitution modes (ambisonics | binaural | irregular), automatically reconnect patchlines to hoa.meter~, hoa.gain~, hoa.dac~, hoa.vector~ when configuration has changed. less CPU usage.
+ - hoa.stereo~, hoa.binaural => (removed) now merged in the "all in one" hoa.decoder~ object.
+ - hoa.meter~ : dynamic inlets, draw overled like vanilla meter~, draw and outputs energy and velocity vectors coords, graphics bug fixed, output peak value for each loudspeakers. assist inlet shows LS angles.
+ - hoa.recomposer~ : 3 mode (fixe | fisheye | free), now takes angles and directivities messages as input.
+ - hoa.scope~ : dynamic inlets (order).
+ - hoa.freeverb~ : spread factors added.
+ - hoa.gigaverb~ : removed.
+ - hoa.control : removed.
+ - hoa.space : GUI revisited, shadow color attr removed, ctrl+drag => rotate, shift+drag => change gain
+ - hoa.pi~ : phase inlet added.
+ - hoa.vector~ : custom angles.
+ - hoa.map : clear method, various bug fixed.
+ - hoa.map~Ê: 1 source => signal coord
+ - hoa.dac~Ê: can take a symbol as first arg for bus creation (like vanilla dac~)
 
 ------------------------
 version 1.2
