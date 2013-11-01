@@ -23,9 +23,26 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "../MaxConverter.h"
+#define MAX_SPEAKER 256
 
-typedef struct _HoaDecode
+extern "C"
+{
+#include "ext.h"
+#include "ext_obex.h"
+#include "ext_path.h"
+#include "ext_common.h"
+#include "jpatcher_api.h"
+#include "jgraphics.h"
+#include "jpatcher_syms.h"
+#include "ext_dictionary.h"
+#include "ext_globalsymbol.h"
+#include "ext_parameter.h"
+#include "z_dsp.h"
+}
+
+#include "../../Sources/hoaLibrary.h"
+
+typedef struct _HoaDecode 
 {
 	t_pxobject				f_ob;			
 	AmbisonicsMultiDecoder  *f_AmbisonicsDecoder;
@@ -46,8 +63,9 @@ typedef struct _HoaDecode
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv);
 void HoaDecode_free(t_HoaDecode *x);
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s);
-
+void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet);
 void HoaDecode_reconnect_outlet(t_HoaDecode *x);
+void HoaDecode_disconnect_outlet(t_HoaDecode *x);
 void HoaDecode_send_configuration(t_HoaDecode *x);
 void HoaDecode_send_angles(t_HoaDecode *x);
 
@@ -168,7 +186,7 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		FreeLibrary(handle);
 #endif
 		x->f_AmbisonicsDecoder	= new AmbisonicsMultiDecoder(order, x->f_number_of_loudspeakers, Hoa_Dec_Ambisonic, Hoa_Small, absoluteHrtfFilePath, sys_getblksize(), sys_getsr());
-		
+        
 		for(int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfLoudspeakers(); i++)
             x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
 		
@@ -219,7 +237,11 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
 {
 	if(atom_gettype(argv) == A_SYM)
 	{
-        t_atom* state = CicmMax::dsp_stop((t_object *)x);
+        int dspState = sys_getdspobjdspstate((t_object*)x);
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        
+        long numOutlet = x->f_AmbisonicsDecoder->getNumberOfOutputs();
 		
         if(atom_getsym(argv) == gensym("binaural") || atom_getsym(argv) == gensym(" binaural"))
         {
@@ -230,9 +252,6 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_setdisabled((t_object *)x, gensym("pinnaesize"), 0);
             object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 1);
             object_attr_setdisabled((t_object *)x, gensym("restitution"), 1);
-
-			if(!x->f_AmbisonicsDecoder->getGetHrtfLoaded())
-				object_error((t_object *)x, "Hrtf not loaded");
         }
         else if(atom_getsym(argv) == gensym("irregular") || atom_getsym(argv) == gensym(" irregular"))
         {
@@ -255,20 +274,12 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
             object_attr_setdisabled((t_object *)x, gensym("restitution"), 1);
 		}
         
-        CicmMax::resize_outlet((t_object *)x, x->f_AmbisonicsDecoder->getNumberOfOutputs());
-        
+        HoaDecode_resize_outlet(x, numOutlet);
         x->f_number_of_loudspeakers = x->f_AmbisonicsDecoder->getNumberOfOutputs();
         for(int i = 0; i < x->f_number_of_loudspeakers; i++)
             x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
         object_attr_touch((t_object *)x, gensym("loudspeakers"));
         object_attr_touch((t_object *)x, gensym("angles"));
-        
-        if(x->f_send_config)
-        {
-            HoaDecode_send_configuration(x);
-            CicmMax::connect_outlet((t_object *)x);
-        }
-        CicmMax::dsp_start(state);
 	}
     
     return NULL;
@@ -277,28 +288,23 @@ t_max_err configuration_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *a
 /* Ambisonics */
 t_max_err loudspeakers_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 {
+    int dspState = sys_getdspobjdspstate((t_object*)x);
+    if(dspState)
+        object_method(gensym("dsp")->s_thing, gensym("stop"));
+        
+    long numOutlet = x->f_AmbisonicsDecoder->getNumberOfOutputs();
+    
     if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        t_atom* state = CicmMax::dsp_stop((t_object *)x);
         x->f_AmbisonicsDecoder->setNumberOfLoudspeakers(atom_getfloat(argv));
-        CicmMax::resize_outlet((t_object *)x, x->f_AmbisonicsDecoder->getNumberOfOutputs());
-        
-        CicmMax::dsp_start(state);
     }
     
+    HoaDecode_resize_outlet(x, numOutlet);
     x->f_number_of_loudspeakers = x->f_AmbisonicsDecoder->getNumberOfOutputs();
     
     for(int i = 0; i < x->f_number_of_loudspeakers; i++)
         x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     object_attr_touch((t_object *)x, gensym("angles"));
-    
-    if(x->f_send_config)
-    {
-        HoaDecode_send_configuration(x);
-        HoaDecode_reconnect_outlet(x);
-    }
-    
-    
     return NULL;
 }
 
@@ -353,6 +359,41 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
 }
 
 /*******************************************************************/
+    
+void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet)
+{
+    int dspState = sys_getdspobjdspstate((t_object*)x);
+    if(dspState)
+        object_method(gensym("dsp")->s_thing, gensym("stop"));
+   
+    t_object *b = NULL;
+	
+	object_obex_lookup(x, gensym("#B"), (t_object **)&b);
+    object_method(b, gensym("dynlet_begin"));
+    
+    if(lastNumberOfOutlet > x->f_AmbisonicsDecoder->getNumberOfOutputs())
+    {
+        for(int i = lastNumberOfOutlet; i > x->f_AmbisonicsDecoder->getNumberOfOutputs(); i--)
+        {
+            outlet_delete(outlet_nth((t_object*)x, i-1));
+        }
+    }
+    else if(lastNumberOfOutlet < x->f_AmbisonicsDecoder->getNumberOfOutputs())
+    {
+        for(int i = lastNumberOfOutlet; i < x->f_AmbisonicsDecoder->getNumberOfOutputs(); i++)
+        {
+            outlet_append((t_object*)x, NULL, gensym("signal"));
+        }
+    }
+	
+    object_method(b, gensym("dynlet_end"));
+	
+    if(x->f_send_config)
+    {
+        HoaDecode_send_configuration(x);
+        HoaDecode_reconnect_outlet(x);
+    }
+}
 
 void HoaDecode_reconnect_outlet(t_HoaDecode *x)
 {
@@ -479,3 +520,39 @@ void HoaDecode_send_angles(t_HoaDecode *x)
     }
 }
 
+void HoaDecode_disconnect_outlet(t_HoaDecode *x)
+{
+	t_object *patcher;
+	t_object *decoder;
+    t_object *object;
+    t_object *line;
+	t_max_err err;
+    
+	err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+	err = object_obex_lookup(x, gensym("#B"), (t_object **)&decoder);
+	if (err != MAX_ERR_NONE)
+		return;
+	
+    for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line))
+    {
+        if (jpatchline_get_box1(line) == decoder)
+        {
+            object = jpatchline_get_box2(line);
+            if(jpatchline_get_inletnum(line) != 0 && jpatchline_get_outletnum(line) != 0)
+            {
+                t_atom msg[4];
+                t_atom rv;
+                    
+                atom_setobj(msg, decoder);
+                atom_setlong(msg + 1, jpatchline_get_outletnum(line));
+                atom_setobj(msg + 2, object);
+                atom_setlong(msg + 3, jpatchline_get_inletnum(line));
+                    
+                object_method_typed(patcher , gensym("disconnect"), 4, msg, &rv);
+            }
+        }
+    }
+}
