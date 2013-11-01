@@ -1623,7 +1623,6 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 
                 if(x->f_source_manager->groupGetMute(i))
                 {
-                    jgraphics_stroke(g);
                     jtextlayout_set(jtl, text, x->jfont, sourcePositionX, sourcePositionY, fontSize * 10., fontSize * 2., ETEXT_CENTER, ETEXT_NOWRAP);
                     jtextlayout_draw(jtl, g);
                     t_jrgba red = {1., 0., 0., 1.};
