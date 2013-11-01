@@ -1119,7 +1119,11 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 40.09494, 299.0, 239.540085, 19.0 ],
 									"saved_object_attributes" : 									{
-										"optim" : "inPhase"
+										"autoconnect" : 1,
+										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+										"optim" : "inPhase",
+										"order" : 7,
+										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
 									}
 ,
 									"text" : "hoa.optim~ 7"
@@ -1230,14 +1234,15 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-2",
 									"maxclass" : "newobj",
-									"numinlets" : 7,
-									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 368.5, 240.0, 19.0 ],
+									"numinlets" : 5,
+									"numoutlets" : 4,
+									"outlettype" : [ "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 40.09494, 383.5, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 51.428571, 102.857143, 154.285714, 205.714286, 257.142857, 308.571429 ],
-										"loudspeakers" : 7,
-										"vector" : "energy"
+										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
+										"channels" : 5,
+										"loudspeakers" : 5,
+										"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 									}
 ,
 									"text" : "hoa.vector~ 7 @vector energy"
@@ -1321,25 +1326,23 @@
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-12",
+									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 15,
-									"numoutlets" : 7,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 334.0, 240.0, 19.0 ],
+									"numoutlets" : 5,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 40.09494, 334.0, 239.540085, 32.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 30.0, 110.0, 135.0, 225.0, 250.0, 330.0 ],
+										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"autoconnect" : 1,
-										"loudspeakers" : 7,
-										"ls" : 7,
-										"ls_angles" : [ 0.0, 30.0, 110.0, 135.0, 225.0, 250.0, 330.0 ],
+										"channels" : 5,
+										"loudspeakers" : 5,
 										"mode" : "irregular",
 										"pinnaesize" : "small",
-										"restitution" : "panning",
-										"yls" : 7,
-										"zls" : [ 0.0, 30.0, 110.0, 135.0, 225.0, 250.0, 330.0 ]
+										"restitution" : "panning"
 									}
 ,
-									"text" : "hoa.decoder~ 7"
+									"text" : "hoa.decoder~ 7 @mode irregular @channels 5"
 								}
 
 							}
@@ -1516,15 +1519,15 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 30.0, 110.0, 135.0, 225.0, 250.0, 330.0 ],
-									"channels" : 7,
+									"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
+									"channels" : 5,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-53",
-									"loudspeakers" : 7,
-									"ls" : 7,
-									"ls_angles" : [ 0.0, 30.0, 110.0, 135.0, 225.0, 250.0, 330.0 ],
+									"loudspeakers" : 5,
+									"ls" : 5,
+									"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 									"maxclass" : "hoa.meter~",
-									"numinlets" : 7,
+									"numinlets" : 5,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 39.748627, 475.5, 240.0, 240.0 ]
@@ -1557,7 +1560,7 @@
 									"destination" : [ "obj-66", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 270.59494, 222.0, 24.0, 222.0, 24.0, 393.0, 49.248627, 393.0 ],
+									"midpoints" : [ 270.59494, 222.0, 291.0, 222.0, 291.0, 414.0, 49.248627, 414.0 ],
 									"source" : [ "obj-1", 0 ]
 								}
 
@@ -1568,24 +1571,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-10", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-2", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 6 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-2", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 5 ]
 								}
 
 							}
@@ -1631,24 +1616,6 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-53", 6 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 6 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-53", 5 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-12", 5 ]
 								}
 
 							}
@@ -1702,7 +1669,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 454.0, 270.0, 291.0, 270.0, 291.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 270.0, 291.0, 270.0, 291.0, 330.0, 270.135025, 330.0 ],
 									"source" : [ "obj-14", 0 ]
 								}
 
@@ -1712,7 +1679,7 @@
 									"destination" : [ "obj-5", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 270.59494, 414.0, 460.5, 414.0 ],
+									"midpoints" : [ 123.261607, 414.0, 460.5, 414.0 ],
 									"source" : [ "obj-2", 1 ]
 								}
 
@@ -1732,6 +1699,7 @@
 									"destination" : [ "obj-71", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
+									"midpoints" : [ 123.261607, 414.0, 279.0, 414.0, 279.0, 450.0, 270.59494, 450.0 ],
 									"source" : [ "obj-2", 1 ]
 								}
 
@@ -1751,7 +1719,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 454.0, 363.0, 291.0, 363.0, 291.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 363.0, 291.0, 363.0, 291.0, 330.0, 270.135025, 330.0 ],
 									"source" : [ "obj-21", 0 ]
 								}
 
@@ -1761,7 +1729,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 454.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 330.0, 270.135025, 330.0 ],
 									"source" : [ "obj-24", 0 ]
 								}
 
@@ -2190,7 +2158,7 @@
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 454.0, 300.0, 291.0, 300.0, 291.0, 330.0, 270.59494, 330.0 ],
+									"midpoints" : [ 454.0, 300.0, 291.0, 300.0, 291.0, 330.0, 270.135025, 330.0 ],
 									"source" : [ "obj-9", 0 ]
 								}
 
@@ -2703,8 +2671,9 @@
 									"patching_rect" : [ 175.09494, 377.5, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+										"channels" : 16,
 										"loudspeakers" : 16,
-										"vector" : "both"
+										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.vector~ 16"
@@ -2796,14 +2765,11 @@
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
+										"channels" : 16,
 										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
-										"restitution" : "panning",
-										"yls" : 16,
-										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+										"restitution" : "panning"
 									}
 ,
 									"text" : "hoa.decoder~ 7"
@@ -3953,7 +3919,11 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 174.75, 303.0, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"optim" : "inPhase"
+										"autoconnect" : 1,
+										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
+										"optim" : "inPhase",
+										"order" : 7,
+										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
 									}
 ,
 									"text" : "hoa.optim~ 7"
@@ -4060,8 +4030,9 @@
 									"patching_rect" : [ 175.258362, 377.5, 239.754868, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+										"channels" : 16,
 										"loudspeakers" : 16,
-										"vector" : "both"
+										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.vector~ 16"
@@ -4153,14 +4124,11 @@
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
+										"channels" : 16,
 										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
-										"restitution" : "panning",
-										"yls" : 16,
-										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+										"restitution" : "panning"
 									}
 ,
 									"text" : "hoa.decoder~ 7"

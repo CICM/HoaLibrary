@@ -23,92 +23,113 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "MaxWider.h"
+#include "../../Sources/HoaLibrary.h"
 
-typedef struct _hoa_wider 
+extern "C"
+{
+	#include "ext.h"
+	#include "ext_obex.h"
+	#include "z_dsp.h"
+}
+
+typedef struct _HoaWider 
 {
 	t_pxobject			f_ob;
-	AmbisonicWider*		f_ambi_wider;
-    MaxWider*           f_ambi_max;
-    
-} t_hoa_wider;
+	AmbisonicWider*		f_AmbisonicsWider;
 
-void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv);
-void hoa_wider_free(t_hoa_wider *x);
-void hoa_wider_float(t_hoa_wider *x, double f);
-void hoa_wider_int(t_hoa_wider *x, long n);
+} t_HoaWider;
 
-void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_wider_perform64(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
-void hoa_wider_perform64_o(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up);
+void *HoaWider_new(t_symbol *s, long argc, t_atom *argv);
+void HoaWider_free(t_HoaWider *x);
+void HoaWider_assist(t_HoaWider *x, void *b, long m, long a, char *s);
+void HoaWider_float(t_HoaWider *x, double f);
+void HoaWider_int(t_HoaWider *x, long n);
 
-t_class* hoa_wider_class;
+void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void *HoaWider_class;
 
 int C74_EXPORT main(void)
 {	
-	t_class *c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
+	t_class *c;
 	
-	class_addmethod(c, (method)hoa_wider_float,		"float",	A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_wider_int,		"int",		A_LONG, 0);
-	class_addmethod(c, (method)hoa_wider_dsp64,		"dsp64",	A_CANT, 0);
+	c = class_new("hoa.wider~", (method)HoaWider_new, (method)dsp_free, (long)sizeof(t_HoaWider), 0L, A_GIMME, 0);
 	
-    class_hoainit(c);
+	class_addmethod(c, (method)HoaWider_float,		"float",	A_FLOAT, 0);
+	class_addmethod(c, (method)HoaWider_int,		"int",		A_LONG, 0);
+	class_addmethod(c, (method)HoaWider_dsp64,		"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)HoaWider_assist,		"assist",	A_CANT, 0);
+	
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
-	hoa_wider_class = c;
-
+	HoaWider_class = c;
+	
+	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
+void *HoaWider_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_hoa_wider *x = (t_hoa_wider *)object_alloc(hoa_wider_class);
+	t_HoaWider *x = NULL;
+	int order = 4;
+	x = (t_HoaWider *)object_alloc((t_class*)HoaWider_class);
 	if (x)
 	{
-        x->f_ambi_max   = new MaxWider((t_hoa_object *)x, argc, argv);
-		x->f_ambi_wider	= new AmbisonicWider(x->f_ambi_max->getOrder(),  sys_getblksize());
-        
-		dsp_setup((t_pxobject *)x, x->f_ambi_wider->getNumberOfInputs());
-		for (int i = 0; i < x->f_ambi_wider->getNumberOfOutputs(); i++)
+		if(atom_gettype(argv) == A_LONG)
+			order	= atom_getlong(argv);
+			
+		x->f_AmbisonicsWider	= new AmbisonicWider(order,  sys_getblksize());
+		
+		dsp_setup((t_pxobject *)x, x->f_AmbisonicsWider->getNumberOfInputs());
+		for (int i = 0; i < x->f_AmbisonicsWider->getNumberOfOutputs(); i++) 
 			outlet_new(x, "signal");
+		
 		x->f_ob.z_misc = Z_NO_INPLACE;
 	}
 	return (x);
 }
 
-void hoa_wider_float(t_hoa_wider *x, double f)
+void HoaWider_float(t_HoaWider *x, double f)
 {
-	x->f_ambi_wider->setWidenValue(f);
+	x->f_AmbisonicsWider->setWidenValue(f);
 }
 
-void hoa_wider_int(t_hoa_wider *x, long n)
+void HoaWider_int(t_HoaWider *x, long n)
 {
-	x->f_ambi_wider->setWidenValue(n);
+	x->f_AmbisonicsWider->setWidenValue(n);
 }
 
-void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void HoaWider_dsp64(t_HoaWider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambi_wider->setVectorSize(maxvectorsize);
-	if(count[x->f_ambi_wider->getNumberOfInputs() - 1])
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64, 0, NULL);
+	x->f_AmbisonicsWider->setVectorSize(maxvectorsize);
+	if(count[x->f_AmbisonicsWider->getNumberOfInputs() - 1])
+		object_method(dsp64, gensym("dsp_add64"), x, HoaWider_perform64, 0, NULL);
 	else
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64_o, 0, NULL);
+		object_method(dsp64, gensym("dsp_add64"), x, HoaWider_perform64_offset, 0, NULL);
 }
 
-void hoa_wider_perform64(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
+void HoaWider_perform64(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_ambi_wider->process(ins, outs, ins[ni - 1]);
+	x->f_AmbisonicsWider->process(ins, outs, ins[numins - 1]);
 }
 
-void hoa_wider_perform64_o(t_hoa_wider *x, t_object *d, double **ins, long ni, double **outs, long no, long sf, long f,void *up)
+void HoaWider_perform64_offset(t_HoaWider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {    
-	x->f_ambi_wider->process(ins, outs);
+	x->f_AmbisonicsWider->process(ins, outs);
 }
 
-void hoa_wider_free(t_hoa_wider *x)
+void HoaWider_assist(t_HoaWider *x, void *b, long m, long a, char *s)
+{
+	if( a == x->f_AmbisonicsWider->getNumberOfInputs() - 1)
+		sprintf(s,"(Signal or float) Widen value");
+	else
+		sprintf(s,"(Signal) %s", x->f_AmbisonicsWider->getHarmonicsName(a).c_str());
+}
+
+void HoaWider_free(t_HoaWider *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_ambi_wider;
-    delete x->f_ambi_max;
+	delete x->f_AmbisonicsWider;
 }
 
