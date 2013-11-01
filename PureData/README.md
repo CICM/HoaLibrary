@@ -6,19 +6,15 @@ Beta 1.0, compatible with Pure Data 0.43.4 (32 bit)
 
 ##### Plateform :
 
-- Mac Os 
-- Windows
+Mac Os, Windows
 
 ##### Authors :
 
-- Julien Colafrancesco
-- Pierre Guillot
-- Eliott Paris
+Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
 ##### Dependencies : 
 
-- <a title="Cblas" href="http://www.netlib.org/clapack/cblas/" target="_blank">Cblas</a>
-- <a title="PdEnhanced" href="https://github.com/pierreguillot/PdEnhanced" target="_blank">PdEnhanced</a>
+<a title="Cblas" href="http://www.netlib.org/clapack/cblas/" target="_blank">Cblas</a>, <a title="PdEnhanced" href="https://github.com/pierreguillot/PdEnhanced" target="_blank">PdEnhanced</a>
 
 ##### Licence : 
 
