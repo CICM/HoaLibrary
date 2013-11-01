@@ -1,21 +1,44 @@
-### Hoa Library (A high order ambisonics library) for Pure Data
+### Hoa Library (A high order ambisonics library) for <a title="Pure Data" href="http://puredata.info/" target="_blank">Pure Data </a>
 
-<p>Sound space is one of the principal dimensions of the contemporary musical thought, specialy in the electroacoustic music domain but also in intermedia arts. In this context, the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a> has made spatialization its principal research axis. This project&#8217;s aim is to give to musician saptialization models based on high order ambisonics and sound fields synthesis. This project is developed in a part of the Paris 8 University <a title="CICM" href="http://www.labex-arts-h2h.fr/" target="_blank">LABEX 1rts H2H</a>. You can visit the official website : <a href="http://www.mshparisnord.fr/hoalibrary/" target="_blank"> HoaLibrary</a>.
+##### Version :
+
+###### Beta 1.0
+###### This version is compatible with Pure Data 0.43.4 (32 bit)
+
+##### Plateform :
+
+###### Mac Os and Windows
 
 ##### Authors :
 
 ###### Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
-Dependencies : 
+##### Dependencies : 
 
-Cblas (http://www.netlib.org/clapack/cblas/) (with Accelerate for Mac Os and/or IPP or GSL for all plateform).
-
-PdEnhanced (https://github.com/pierreguillot/PdEnhanced)
+###### Cblas (http://www.netlib.org/clapack/cblas/) (with Accelerate for Mac Os and/or IPP or GSL for all plateform).
+###### PdEnhanced (https://github.com/pierreguillot/PdEnhanced)
 
 ##### Licence : 
 
-The hoa.library in under the GNU Public License (http://www.gnu.org/copyleft/gpl.html). If you'd like to avoid the restrictions of the GPL and use hoa.library for a closed-source product, you contact the CICM.
+###### The hoa.library in under the GNU Public License (http://www.gnu.org/copyleft/gpl.html). If you'd like to avoid the restrictions of the GPL and use hoa.library for a closed-source product, you contact the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a>.
 
-http://cicm.mshparisnord.org/
-
+##### Object :
+- hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
+- hoa.encoder~ : An ambisonics encoder.
+- hoa.map~ : An ambisonic sources spatializer.
+- hoa.delay~ : An ambisonic sound field delay.
+- hoa.freeverb~ : An implementation of the freeverb algorithm for ambisonics.
+- hoa.grain~ : An ambisonic granular synthesizer.
+- hoa.map : A GUI to spatialize sources on a map.
+- hoa.meter~ : A circular meter with sound field descriptor.
+- hoa.optim~ : An ambisonic sound field optimization.
+- hoa.pi : A good pi number.
+- hoa.projector~ : A plane wave decomposer.
+- hoa.recomposer~ : A plane wave recomposer to harmonics domain.
+- hoa.ringmod~ : An ambisonic sound field ring modulation.
+- hoa.rotate~ : An ambisonic sound field rotation external.
+- hoa.scope~ : An ambisonic harmonic scope.
+- hoa.space : A GUI to design ambisonic space.
+- hoa.space~ :A spatial filter.
+- hoa.wider~ : A fractional ambisonic orders simulator.
 

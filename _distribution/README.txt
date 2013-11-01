@@ -16,7 +16,7 @@ HoaLibrary beta v1.0
 MANUAL INSTALLATION :
 -----------------
 
-This version is compatible with Pure Data 0.43.4 and higher
+This version is compatible with Pure Data 0.43.4 (32 bit) and higher
 
 Installation:
  - To install the HoaLibrary package, simply copy it to your 'extra' folder.

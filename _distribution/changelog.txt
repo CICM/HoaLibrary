@@ -77,8 +77,8 @@ version beta 1.0.0
 version beta 1.0.0
 ------------------------
 Systems : 
-- Mac OsX (32 bits)
-- Windows (32 bits)
+- Mac OsX (Pd 32 bit)
+- Windows (Pd 32 bit)
 
 Object :
 - hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
