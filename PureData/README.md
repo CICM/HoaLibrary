@@ -2,11 +2,9 @@
 
 ##### Version :
 
-Beta 1.0, compatible with Pure Data 0.43.4 (32 bit) (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>)
+Beta 1.0, compatible with Pure Data 0.43.4 (32 bit) on Mac Os and Windows plateforms (<a title="Download" href="http://www.mshparisnord.fr/hoalibrary/en/downloads/" target="_blank">Download</a>) .
 
-##### Plateform :
-
-Mac Os, Windows
+![Image Pd](https://github.com/CICM/HoaLibrary/blob/master/Ressources/PhotoPd.png "Pd Patch")
 
 ##### Hoa for Pure Data authors :
 
