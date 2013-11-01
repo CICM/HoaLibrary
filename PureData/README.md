@@ -2,25 +2,27 @@
 
 ##### Version :
 
-###### Beta 1.0
-###### This version is compatible with Pure Data 0.43.4 (32 bit)
+Beta 1.0, compatible with Pure Data 0.43.4 (32 bit)
 
 ##### Plateform :
 
-###### Mac Os and Windows
+- Mac Os 
+- Windows
 
 ##### Authors :
 
-###### Julien Colafrancesco, Pierre Guillot, Eliott Paris
+- Julien Colafrancesco
+- Pierre Guillot
+- Eliott Paris
 
 ##### Dependencies : 
 
-###### Cblas (http://www.netlib.org/clapack/cblas/) (with Accelerate for Mac Os and/or IPP or GSL for all plateform).
-###### PdEnhanced (https://github.com/pierreguillot/PdEnhanced)
+- <a title="Cblas" href="http://www.netlib.org/clapack/cblas/" target="_blank">Cblas</a>
+- <a title="PdEnhanced" href="https://github.com/pierreguillot/PdEnhanced" target="_blank">PdEnhanced</a>
 
 ##### Licence : 
 
-###### The hoa.library in under the GNU Public License (http://www.gnu.org/copyleft/gpl.html). If you'd like to avoid the restrictions of the GPL and use hoa.library for a closed-source product, you contact the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a>.
+The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU Public License</a>. If you'd like to avoid the restrictions of the GPL and use hoa.library for a closed-source product, you contact the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a>.
 
 ##### Object :
 - hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
