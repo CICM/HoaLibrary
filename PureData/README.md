@@ -20,7 +20,7 @@ Pierre Guillot, Eliott Paris, Manuel Deneu
 
 The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU Public License</a>. If you'd like to avoid the restrictions of the GPL and use Hoa Library for a closed-source product, you contact the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a>.
 
-##### Object :
+##### Objects :
 - hoa.decoder~ : An ambisonic decoder (ambisonic, binaural, irregular configurations).
 - hoa.encoder~ : An ambisonics encoder.
 - hoa.map~ : An ambisonic sources spatializer.
@@ -37,6 +37,6 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 - hoa.rotate~ : An ambisonic sound field rotation external.
 - hoa.scope~ : An ambisonic harmonic scope.
 - hoa.space : A GUI to design ambisonic space.
-- hoa.space~ :A spatial filter.
+- hoa.space~ : A spatial filter.
 - hoa.wider~ : A fractional ambisonic orders simulator.
 
