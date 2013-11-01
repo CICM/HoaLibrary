@@ -1855,7 +1855,7 @@ void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid)
         {
             case 1:
             {
-                x->f_source_manager->sourceNewAbscissa(0.);
+                x->f_source_manager->sourceNewCartesian(0., 0.);
                 break;
             }
             case 2:
