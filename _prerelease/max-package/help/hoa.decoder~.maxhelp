@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 15.0, 50.0, 772.0, 689.0 ],
+		"rect" : [ 100.0, 100.0, 772.0, 689.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 15.0, 76.0, 772.0, 663.0 ],
+						"rect" : [ 100.0, 126.0, 772.0, 663.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -210,6 +210,7 @@
 								"box" : 								{
 									"channels" : 5,
 									"id" : "obj-40",
+									"loudspeakers" : 5,
 									"maxclass" : "hoa.gain~",
 									"numinlets" : 6,
 									"numoutlets" : 6,
@@ -2414,8 +2415,6 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
 									"loudspeakers" : 5,
-									"ls" : 5,
-									"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 5,
 									"numoutlets" : 2,
@@ -2635,14 +2634,13 @@
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"autoconnect" : 1,
+										"channels" : 5,
 										"loudspeakers" : 5,
-										"ls" : 5,
-										"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"mode" : "irregular",
 										"pinnaesize" : "small",
 										"restitution" : "projection",
-										"yls" : 5,
-										"zls" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
+										"ychannels" : 5,
+										"zchannels" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7 @mode irregular"
@@ -3357,12 +3355,11 @@
 							}
 , 							{
 								"box" : 								{
-									"channels" : 2,
 									"id" : "obj-40",
 									"maxclass" : "hoa.gain~",
-									"numinlets" : 3,
-									"numoutlets" : 3,
-									"outlettype" : [ "signal", "signal", "" ],
+									"numinlets" : 9,
+									"numoutlets" : 9,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 164.967712, 335.935425, 227.064575, 19.0 ]
 								}
@@ -5574,16 +5571,15 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 90.0, 270.0 ],
+									"angles" : [ 0.0, 180.0 ],
 									"channels" : 2,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
 									"loudspeakers" : 2,
-									"ls" : 2,
-									"ls_angles" : [ 90.0, 270.0 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 2,
 									"numoutlets" : 2,
+									"offset" : 90.0,
 									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 164.967712, 363.935425, 227.064575, 227.064575 ]
 								}
@@ -5800,14 +5796,13 @@
 									"saved_object_attributes" : 									{
 										"angles" : [ 90.0, 270.0 ],
 										"autoconnect" : 1,
+										"channels" : 2,
 										"loudspeakers" : 2,
-										"ls" : 2,
-										"ls_angles" : [ 90.0, 270.0 ],
 										"mode" : "binaural",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
-										"yls" : 2,
-										"zls" : [ 90.0, 270.0 ]
+										"ychannels" : 2,
+										"zchannels" : [ 90.0, 270.0 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7 @mode binaural"
@@ -5859,7 +5854,7 @@
 									"destination" : [ "obj-40", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 382.532287, 330.0, 278.5, 330.0 ],
+									"midpoints" : [ 382.532287, 330.0, 200.475784, 330.0 ],
 									"source" : [ "obj-12", 1 ]
 								}
 
@@ -6221,7 +6216,7 @@
 									"destination" : [ "obj-14", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 278.5, 582.0, 382.532287, 582.0 ],
+									"midpoints" : [ 200.475784, 582.0, 382.532287, 582.0 ],
 									"source" : [ "obj-40", 1 ]
 								}
 
@@ -6241,7 +6236,7 @@
 									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 278.5, 360.0, 382.532287, 360.0 ],
+									"midpoints" : [ 200.475784, 360.0, 382.532287, 360.0 ],
 									"source" : [ "obj-40", 1 ]
 								}
 
@@ -6540,6 +6535,7 @@
 								"box" : 								{
 									"channels" : 16,
 									"id" : "obj-40",
+									"loudspeakers" : 16,
 									"maxclass" : "hoa.gain~",
 									"numinlets" : 17,
 									"numoutlets" : 17,
@@ -6685,13 +6681,11 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 1.0, 23.5, 46.0, 68.5, 91.0, 113.5, 136.0, 158.5, 181.0, 203.5, 226.0, 248.5, 271.0, 293.5, 316.0, 338.5 ],
+									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"channels" : 16,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
 									"loudspeakers" : 16,
-									"ls" : 16,
-									"ls_angles" : [ 1.0, 23.5, 46.0, 68.5, 91.0, 113.5, 136.0, 158.5, 181.0, 203.5, 226.0, 248.5, 271.0, 293.5, 316.0, 338.5 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 2,
@@ -6911,14 +6905,13 @@
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
+										"channels" : 16,
 										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
-										"yls" : 16,
-										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+										"ychannels" : 16,
+										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7 @mode ambisonic"
@@ -8048,6 +8041,7 @@
 								"box" : 								{
 									"channels" : 16,
 									"id" : "obj-40",
+									"loudspeakers" : 16,
 									"maxclass" : "hoa.gain~",
 									"numinlets" : 17,
 									"numoutlets" : 17,
@@ -8228,8 +8222,6 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
 									"loudspeakers" : 16,
-									"ls" : 16,
-									"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 2,
@@ -8449,14 +8441,13 @@
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
+										"channels" : 16,
 										"loudspeakers" : 16,
-										"ls" : 16,
-										"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
-										"yls" : 16,
-										"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+										"ychannels" : 16,
+										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7"
@@ -9422,14 +9413,14 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.soundcoat.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
@@ -9437,13 +9428,13 @@
 , 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
