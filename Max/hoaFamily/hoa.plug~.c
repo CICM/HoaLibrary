@@ -41,7 +41,7 @@ int C74_EXPORT main(void)
 	patcher = class_findbyname(CLASS_NOBOX, gensym("jpatcher"));
 	dblclickpatcher = class_method(patcher, gensym("dblclick"));
 	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 }
 
 void *plug_new(t_symbol *s, int argc, t_atom *argv)

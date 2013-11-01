@@ -73,7 +73,7 @@ void HoaConvolve_perform64(t_HoaConvolve *x, t_object *dsp64, double **ins, long
 
 void *HoaConvolve_class;
 
-int main(void)
+int C74_EXPORT main(void)
 {	
 
 	t_class *c;

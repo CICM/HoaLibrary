@@ -143,7 +143,7 @@ int C74_EXPORT main(void)
 	class_register(CLASS_BOX, c);	
 	HoaDecode_class = c;
 	
-	class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 	return 0;
 }
 

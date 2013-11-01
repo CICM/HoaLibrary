@@ -282,7 +282,7 @@ int C74_EXPORT main()
 	ps_slider = gensym("slider");
 	ps_preset = gensym("_preset");
     
-    class_findbyname(CLASS_NOBOX, gensym("hoa.encoder~"));
+    class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
     
 	return 0;
 }

@@ -32,7 +32,7 @@ extern "C"
 #include "z_dsp.h"
 }
 
-int postons = 0;
+static int postons = 0;
 
 typedef struct _HoaEncode 
 {
