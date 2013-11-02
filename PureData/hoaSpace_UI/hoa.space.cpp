@@ -97,6 +97,8 @@ void hoa_space_retract_points(t_hoa_space *x, t_object *patcherview, t_pt pt, lo
 void hoa_space_compute(t_hoa_space *x);
 void hoa_space_output(t_hoa_space *x);
 
+void hoa_space_anything(t_hoa_space *x, t_symbol *s, long argc, t_atom *argv);
+
 extern "C" void setup_hoa0x2espace(void)
 {
     t_eclass* c;
@@ -115,7 +117,8 @@ extern "C" void setup_hoa0x2espace(void)
     class_addmethod(c, (method)hoa_space_mouse_drag,    "mousedrag",        A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_enddrag, "mouseup",          A_CANT, 0);
     class_addmethod(c, (method)hoa_space_coefficients_set,"list",           A_GIMME,0);
-    
+    class_addmethod(c, (method)hoa_space_anything,		"anything",       A_GIMME,0);
+
     CLASS_ATTR_DEFAULT		(c, "size", 0, "225 225");
 	CLASS_ATTR_INVISIBLE	(c, "color", 0);
 	CLASS_ATTR_INVISIBLE	(c, "textcolor", 0);
@@ -239,6 +242,11 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
         jbox_ready((t_jbox *)x);
     }
     return (x);
+}
+
+void hoa_space_anything(t_hoa_space *x, t_symbol *s, long argc, t_atom *argv)
+{
+    //post("%s",s->s_name);
 }
 
 void hoa_space_free(t_hoa_space *x)
