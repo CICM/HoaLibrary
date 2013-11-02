@@ -42,16 +42,15 @@ of the circle.;
 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
 @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
-#X obj 241 155 hoa.meter~ @patching_rect [ 241 155 180 180 ] @size
+#X obj 237 155 hoa.meter~ @patching_rect [ 237 155 180 180 ] @size
 [ 180 180 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
 [ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 8 ] @angles
 [ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+0 0 0 ] @offset [ 0 ] @rotation [ 0 ] @interval [ 50 ] @bgcolor [ 0.55
+0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
+0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
+@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
 #X obj 3 155 hoa.meter~ @patching_rect [ 3 155 180 180 ] @size [ 180
@@ -59,23 +58,20 @@ of the circle.;
 ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 8 ] @angles [ 0 45
 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds
-[ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [
-0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25
-0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8
-] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-];
+] @offset [ 0 ] @rotation [ 0 ] @interval [ 50 ] @bgcolor [ 0.55 0.55
+0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25 0.25
+1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor
+[ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8
+] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8 ];
 #X obj -216 155 hoa.meter~ @patching_rect [ -216 155 180 180 ] @size
 [ 180 180 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
 [ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 8 ] @angles
 [ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [
-3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12
-] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
-[ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
-0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+0 0 0 ] @offset [ 0 ] @rotation [ 0 ] @interval [ 50 ] @bgcolor [ 0.55
+0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
+0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
+@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
 #X obj 268 132 hoa.decoder~ 3 0 8 -;
