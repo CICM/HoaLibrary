@@ -42,12 +42,6 @@ typedef struct  _meter
     long        f_number_of_loudspeakers;
 	double      f_offset_of_loudspeakers;
 	long        f_clockwise;
-    
-	long		f_dbperled;
-	long		f_nhotleds;
-	long		f_ntepidleds;
-	long		f_nwarmleds;
-	long		f_number_of_leds;
 	
 	double		f_angles_of_loudspeakers[MAX_SPEAKER];
     long		f_drawOverLedleftTime[MAX_SPEAKER];
@@ -155,41 +149,6 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "50");
 	CLASS_ATTR_SAVE				(c, "interval", 1);
-    
-	CLASS_ATTR_LONG				(c, "dbperled", 0, t_meter, f_dbperled);
-	CLASS_ATTR_ORDER			(c, "dbperled", 0, "4");
-	CLASS_ATTR_LABEL			(c, "dbperled", 0, "DeciBels per Led");
-	CLASS_ATTR_FILTER_CLIP		(c, "dbperled", 1, 12);
-	CLASS_ATTR_DEFAULT			(c, "dbperled", 0, "3");
-	CLASS_ATTR_SAVE				(c, "dbperled", 1);
-	
-	CLASS_ATTR_LONG				(c, "nhotleds", 0, t_meter, f_nhotleds);
-	CLASS_ATTR_ORDER			(c, "nhotleds", 0, "5");
-	CLASS_ATTR_LABEL			(c, "nhotleds", 0, "Number of Hot Leds");
-	CLASS_ATTR_FILTER_CLIP		(c, "nhotleds", 0, 20);
-	CLASS_ATTR_DEFAULT			(c, "nhotleds", 0, "3");
-	CLASS_ATTR_SAVE				(c, "nhotleds", 1);
-	
-	CLASS_ATTR_LONG				(c, "ntepidleds", 0, t_meter, f_ntepidleds);
-	CLASS_ATTR_ORDER			(c, "ntepidleds", 0, "6");
-	CLASS_ATTR_LABEL			(c, "ntepidleds", 0, "Number of Tepid Leds");
-	CLASS_ATTR_FILTER_CLIP		(c, "ntepidleds", 0, 20);
-	CLASS_ATTR_DEFAULT			(c, "ntepidleds", 0, "3");
-	CLASS_ATTR_SAVE				(c, "ntepidleds", 1);
-	
-	CLASS_ATTR_LONG				(c, "nwarmleds", 0, t_meter, f_nwarmleds);
-	CLASS_ATTR_ORDER			(c, "nwarmleds", 0, "7");
-	CLASS_ATTR_LABEL			(c, "nwarmleds", 0, "Number of Warm Leds");
-	CLASS_ATTR_FILTER_CLIP		(c, "nwarmleds", 0, 20);
-	CLASS_ATTR_DEFAULT			(c, "nwarmleds", 0, "3");
-	CLASS_ATTR_SAVE				(c, "nwarmleds", 1);
-	
-	CLASS_ATTR_LONG				(c, "numleds", 0, t_meter, f_number_of_leds);
-	CLASS_ATTR_ORDER			(c, "numleds", 0, "8");
-	CLASS_ATTR_LABEL			(c, "numleds", 0, "Total Number of Leds");
-	CLASS_ATTR_FILTER_CLIP		(c, "numleds", 10, 20);
-	CLASS_ATTR_DEFAULT			(c, "numleds", 0, "12");
-	CLASS_ATTR_SAVE				(c, "numleds", 1);
 	
 	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_meter, f_colorBackground);
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");

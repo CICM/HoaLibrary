@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 4.0, 100.0, 899.0, 486.0 ],
+		"rect" : [ 4.0, 100.0, 1046.0, 486.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 4.0, 126.0, 899.0, 460.0 ],
+						"rect" : [ 4.0, 126.0, 1046.0, 460.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -138,7 +138,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 789.0, 272.0, 196.0, 33.0 ],
+									"patching_rect" : [ 789.0, 272.0, 196.0, 32.0 ],
 									"text" : "open                  help patch to see more about this GUI",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -192,7 +192,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 766.0, 183.0, 121.0, 20.0 ],
+									"patching_rect" : [ 766.0, 183.0, 121.0, 19.0 ],
 									"text_width" : 52.0
 								}
 
@@ -206,7 +206,7 @@
 									"numinlets" : 7,
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 424.733307, 241.0, 329.0, 20.0 ],
+									"patching_rect" : [ 424.733307, 241.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"optim" : "inPhase"
 									}
@@ -242,7 +242,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 15.0, 121.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, 0.459056, 0.594541, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.561068, -0.553099, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.140267, -0.247061, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.446304, -0.655111, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, 0.459056, 0.594541, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.561068, -0.553099, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.140267, -0.247061, 0, 0.2, 0.2, 0.2, 1.0, "", null, null, null, null, null, null, null, null, null, null ],
 									"varname" : "hoa.map",
 									"zoom" : 0.522812
 								}
@@ -3220,7 +3220,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 424.733307, 132.0, 329.0, 20.0 ],
+									"patching_rect" : [ 424.733307, 132.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -3247,7 +3247,7 @@
 									"numinlets" : 4,
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 424.733307, 183.0, 329.0, 20.0 ],
+									"patching_rect" : [ 424.733307, 183.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"mode" : "cartesian",
 										"ramp" : 20.0
@@ -3294,7 +3294,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 2.5, 67.5, 529.0, 34.0 ],
+									"patching_rect" : [ 2.5, 67.5, 529.0, 33.0 ],
 									"text" : "hoa.map~ is a tool that encodes several sources in the spherical harmonics domain. It's easy to use and works with hoa.map. You should look at hoa.map's help for futher informations",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -3748,7 +3748,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 899.0, 460.0 ],
+						"rect" : [ 0.0, 26.0, 1046.0, 460.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -3796,88 +3796,70 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa-icon-45.png",
-				"bootpath" : "/Users/Pierre/Downloads",
-				"patcherrelativepath" : "../../../../../../Downloads",
-				"type" : "PNG ",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
-				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../../../../../../Program Files/Cycling '74/Max 6.1/examples/gen",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "yafr2.maxpat",
-				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
-				"patcherrelativepath" : "../../../../../../../../Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
+				"bootpath" : "/Applications/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_3.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.connect.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.connect.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.map~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.map~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.map.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.map.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.optim~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.optim~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "attrui.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.scope~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.scope~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.gain~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.gain~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.meter~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxe64",
-				"type" : "mx64"
-			}
-, 			{
-				"name" : "hoa.decoder~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.decoder~.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}
