@@ -48,6 +48,8 @@ typedef struct _hoa_space
     long		f_mode;
     
     long        f_number_of_microphones;
+    t_clock*    f_defer;
+    long        f_new_number;
     
     double		f_radius_global;
 	double		f_radius_circle;
@@ -73,6 +75,7 @@ void hoa_space_bang(t_hoa_space *x);;
 void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawparams *params);
 void hoa_space_oksize(t_hoa_space *x, t_rect *newrect);
 
+void hoa_space_do_channels_set(t_hoa_space *x);
 t_max_err hoa_space_channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 t_max_err hoa_space_coefficients_set(t_hoa_space *x, t_object *attr, long ac, t_atom *av);
@@ -124,7 +127,6 @@ extern "C" void setup_hoa0x2espace(void)
 	CLASS_ATTR_ACCESSORS        (c, "channels", NULL, hoa_space_channels_set);
     CLASS_ATTR_DEFAULT          (c, "channels", 0, "8");
 	CLASS_ATTR_SAVE             (c, "channels", 0);
-    CLASS_ATTR_PAINT            (c, "channels", 0);
     
     CLASS_ATTR_DOUBLE_VARSIZE      (c, "coeffs", 0, t_hoa_space, f_microphonesValues, f_number_of_microphones, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
@@ -185,13 +187,13 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
     t_hoa_space *x = NULL;
     t_dictionary *d;
 	long flags;
-    
+    long defc;
+    t_atom *defv;
     x = (t_hoa_space *)object_alloc(hoa_space_class);
     if (x)
     {
         if (!(d = object_dictionaryarg(argc,argv)))
             return NULL;
-        
         flags = 0
             | JBOX_DRAWFIRSTIN
             | JBOX_DRAWINLAST
@@ -203,12 +205,37 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
         jbox_new((t_jbox *)x, 1, argc, argv);
         
         x->j_box.b_firstin = (t_object *)x;
+        
+        
+        
         x->f_viewer                 = new AmbisonicViewer(1);
         x->f_recomposer             = new AmbisonicRecomposer(1, 4);
         x->f_out                    = listout(x);
         x->f_number_of_microphones  = 4;
+        x->f_new_number             = 4;
+        
+        x->f_defer             = clock_new(x, (t_method)hoa_space_do_channels_set);
         
         attr_dictionary_process(x, d);
+        
+        binbuf_copy_atoms(d, gensym("@channels"), &defc, &defv);
+        if(defc && defv)
+        {
+            x->f_new_number = Tools::clip(long(atom_getlong(defv)), (long)3, (long)MAX_CHANNELS);
+            hoa_space_do_channels_set(x);
+            defc = 0;
+            free(defv);
+            defv = NULL;
+        }
+        binbuf_copy_atoms(d, gensym("@coeffs"), &defc, &defv);
+        if(defc && defv)
+        {
+            hoa_space_coefficients_set(x, NULL, defc, defv);
+            defc = 0;
+            free(defv);
+            defv = NULL;
+        }
+        
         jbox_ready((t_jbox *)x);
     }
     return (x);
@@ -219,6 +246,7 @@ void hoa_space_free(t_hoa_space *x)
     jbox_free((t_jbox *)x);
     delete x->f_viewer;
     delete x->f_recomposer;
+    clock_free(x->f_defer);
 }
 
 void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s)
@@ -690,35 +718,42 @@ t_max_err hoa_space_coefficients_set(t_hoa_space *x, t_object *attr, long ac, t_
     return 0;
 }
 
+
 t_max_err hoa_space_channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
 {
     if (argc && argv)
     {
         if(atom_gettype(argv) == A_LONG)
         {
-            if(atom_getlong(argv) != x->f_number_of_microphones)
+            long new_number = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_CHANNELS);
+            if(new_number != x->f_number_of_microphones && new_number != x->f_new_number)
             {
-				long order;
-                delete x->f_viewer;
-                delete x->f_recomposer;
-                
-                x->f_number_of_microphones  = Tools::clip(long(atom_getlong(argv)), (long)3, (long)MAX_CHANNELS);
-				
-                if(x->f_number_of_microphones % 2 == 0)
-                    order = (x->f_number_of_microphones - 2) / 2;
-                else
-                    order = (x->f_number_of_microphones - 1) / 2;
-                
-                x->f_viewer         = new AmbisonicViewer(order);
-                x->f_recomposer		= new AmbisonicRecomposer(order, x->f_number_of_microphones, Hoa_Fixe);
-                
-                jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_layer"));
+                x->f_new_number = new_number;
+                clock_delay(x->f_defer, 50.);
             }
         }
     }
+    
 	return 0;
+}
+
+void hoa_space_do_channels_set(t_hoa_space *x)
+{
+    long order;
+    delete x->f_viewer;
+    delete x->f_recomposer;
+                
+    x->f_number_of_microphones  = x->f_new_number;
+    
+    if(x->f_number_of_microphones % 2 == 0)
+        order = (x->f_number_of_microphones - 2) / 2;
+    else
+        order = (x->f_number_of_microphones - 1) / 2;
+    
+    x->f_viewer         = new AmbisonicViewer(order);
+    x->f_recomposer		= new AmbisonicRecomposer(order, x->f_number_of_microphones, Hoa_Fixe);
+    hoa_space_coefficients_set(x, NULL, 0, NULL);
+    jbox_redraw((t_jbox *)x);
 }
 
 void hoa_space_compute(t_hoa_space *x)
