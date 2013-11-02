@@ -450,11 +450,15 @@ void draw_background(t_meter *x,  t_object *view, t_rect *rect)
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width * .5, rect->width * .5);
         jgraphics_set_matrix(g, &transform);
         
+		jgraphics_set_line_width(g, 1.);
+
 		jgraphics_set_source_jrgba(g, &x->f_colorMeterBg);
-		jgraphics_set_line_width(g, (x->f_radius_exterior - x->f_radius_interior) - 0.5f);
-        
-		jgraphics_arc(g, 0.f, 0.f, x->f_radius_exterior * 0.5f + x->f_radius_interior * 0.5f, 0., JGRAPHICS_2PI);
-		jgraphics_stroke(g);
+		jgraphics_arc(g, 0.f, 0.f, x->f_radius_exterior, 0., JGRAPHICS_2PI);
+		jgraphics_fill(g);
+
+		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		jgraphics_arc(g, 0.f, 0.f, x->f_radius_interior, 0., JGRAPHICS_2PI);
+		jgraphics_fill(g);
 		
         jgraphics_set_source_jrgba(g, &white);
         jgraphics_set_line_width(g, 1.f);
