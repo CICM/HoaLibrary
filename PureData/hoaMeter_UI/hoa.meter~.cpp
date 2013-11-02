@@ -125,12 +125,15 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 	CLASS_ATTR_LABEL			(c, "loudspeakers", 0, "Number of Loudspeakers");
 	CLASS_ATTR_SAVE				(c, "loudspeakers", 1);
     CLASS_ATTR_DEFAULT          (c, "loudspeakers", 0, "8");
+    CLASS_ATTR_PAINT            (c, "loudspeakers", 0);
     
 	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_meter,f_angles_of_loudspeakers, f_number_of_loudspeakers,MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
 	CLASS_ATTR_SAVE				(c, "angles", 1);
+    CLASS_ATTR_PAINT            (c, "angles", 0);
+    CLASS_ATTR_DEFAULT          (c, "angles", 0, "0 45 90 135 180 225 270 315");
     
 	CLASS_ATTR_DOUBLE			(c, "offset", 0, t_meter, f_offset_of_loudspeakers);
 	CLASS_ATTR_ORDER			(c, "offset", 0, "3");
@@ -221,7 +224,7 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
     | JBOX_GROWY
     ;
     
-    x->f_number_of_loudspeakers = 8;
+    x->f_number_of_loudspeakers = 1;
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
     
@@ -230,9 +233,7 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
     x->f_peaks_outlet = listout(x);
     x->f_vector_outlet = listout(x);
     
-    x->f_meter = new AmbisonicsMeter(x->f_number_of_loudspeakers);
-    
-    x->f_meter->setNumberOfLoudspeakers(x->f_number_of_loudspeakers);
+    x->f_meter = new AmbisonicsMeter(x->f_number_of_loudspeakers, sys_getblksize(), sys_getsr());
     x->f_number_of_loudspeakers = x->f_meter->getNumberOfInputs();
     
     x->f_clock = clock_new(x,(t_method)meter_tick);
@@ -241,7 +242,6 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	attr_dictionary_process(x, d);	
 	jbox_ready((t_jbox *)x);
     
-	
 	return (x);
 }
 
@@ -278,12 +278,7 @@ t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_at
                 
                 x->f_number_of_loudspeakers = x->f_meter->getNumberOfLoudspeakers();
                 
-                long    ac = x->f_number_of_loudspeakers;
-                t_atom* av = new t_atom[ac];
-                for(int i = 0; i < ac; i++)
-                    atom_setfloat(av+i, ((double)i / (double)x->f_number_of_loudspeakers) * 360.);
-                
-                angles_of_loudspeakers_set(x, NULL, ac, av);
+                angles_of_loudspeakers_set(x, NULL, NULL, NULL);
                 jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
                 jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
                 
@@ -308,17 +303,18 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
                 angles[i] = atom_getfloat(av+i);
             }
         }
+        x->f_meter->setLoudspeakerAnglesDegrees(ac, angles);
     }
-    x->f_meter->setLoudspeakerAnglesDegrees(ac, angles);
-    
     for(int i = 0; i < x->f_meter->getNumberOfLoudspeakers(); i++)
     {
         x->f_angles_of_loudspeakers[i] = x->f_meter->getLoudspeakerAngle(i);
     }
-    
+
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("leds_layers"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
+    
 	jbox_redraw((t_jbox *)x);
     return 0;
 }
@@ -360,7 +356,7 @@ void meter_tick(t_meter *x)
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("leds_layers"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
-	jbox_redraw((t_jbox *)x);
+  	jbox_redraw((t_jbox *)x);
     
 	if (sys_getdspstate())
 		clock_delay(x->f_clock, x->f_interval);
