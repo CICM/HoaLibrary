@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 255.0, 44.0, 1025.0, 806.0 ],
+		"rect" : [ 255.0, 99.0, 1025.0, 642.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -472,7 +472,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 1020.0, 266.0, 182.0, 112.0 ],
+						"rect" : [ 1020.0, 321.0, 182.0, 112.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1803,7 +1803,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 828.0, 266.0, 166.0, 83.0 ],
+						"rect" : [ 828.0, 321.0, 166.0, 83.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2010,7 +2010,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 632.0, 266.0, 166.0, 81.0 ],
+						"rect" : [ 632.0, 321.0, 166.0, 81.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2228,14 +2228,13 @@
 					"saved_object_attributes" : 					{
 						"angles" : [ 0.0, 60.0, 120.0, 180.0, 240.0, 300.0 ],
 						"autoconnect" : 1,
+						"channels" : 6,
 						"loudspeakers" : 6,
-						"ls" : 6,
-						"ls_angles" : [ 0.0, 60.0, 120.0, 180.0, 240.0, 300.0 ],
 						"mode" : "ambisonic",
 						"pinnaesize" : "small",
 						"restitution" : "panning",
-						"yls" : 6,
-						"zls" : [ 0.0, 60.0, 120.0, 180.0, 240.0, 300.0 ]
+						"ychannels" : 6,
+						"zchannels" : [ 0.0, 60.0, 120.0, 180.0, 240.0, 300.0 ]
 					}
 ,
 					"text" : "hoa.decoder~ 2"
@@ -2261,18 +2260,19 @@
 					"channels" : 6,
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"drawvector" : 0,
+					"hidden" : 1,
 					"id" : "obj-2",
 					"loudspeakers" : 6,
-					"ls" : 6,
-					"ls_angles" : [ 0.0, 60.0, 120.0, 180.0, 240.0, 300.0 ],
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 6,
 					"numoutlets" : 2,
 					"outlettype" : [ "list", "list" ],
-					"patching_rect" : [ 52.75, 494.049988, 108.949997, 108.949997 ],
+					"patching_rect" : [ 56.566666, 494.049988, 108.949997, 108.949997 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 199.018219, 2.0, 126.950531, 126.950531 ],
-					"varname" : "meter_object"
+					"varname" : "meter_object",
+					"yls" : 6,
+					"zls" : [ 0.0, 60.0, 120.0, 180.0, 240.0, 300.0 ]
 				}
 
 			}
@@ -2332,6 +2332,7 @@
 				"box" : 				{
 					"channels" : 6,
 					"id" : "obj-4",
+					"loudspeakers" : 6,
 					"maxclass" : "hoa.gain~",
 					"numinlets" : 7,
 					"numoutlets" : 7,

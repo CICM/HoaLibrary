@@ -781,6 +781,7 @@ t_max_err hoaGain_setattr_channels(t_hoaGain *x, t_object *attr, long ac, t_atom
             d = atom_getlong(av);
             hoaGain_resize_io(x, d);
             HoaGain_reconnect_outlet(x);
+            hoaGain_tometer(x, gensym("channels"), ac, av);
         }
 	}
 	return MAX_ERR_NONE;
@@ -1096,7 +1097,7 @@ void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
     t_object *line;
 	t_max_err err;
     
-    if(argc && argv && (s == gensym("loudspeakers") || s == gensym("angles") || s == gensym("offset") ))
+    if(argc && argv && ((s == gensym("loudspeakers") || s == gensym("angles") || s == gensym("offset") || s == gensym("channels"))))
     {
         err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
         if (err != MAX_ERR_NONE)
@@ -1110,11 +1111,8 @@ void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
             if (jpatchline_get_box1(line) == gain)
             {
                 object = jpatchline_get_box2(line);
-                if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~"))
-                {
-                    object_method_typed(jbox_get_object(object), s, argc, argv, NULL);
-                }
-                else if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+                t_symbol *classname = object_classname(jbox_get_object(object));
+                if(classname == gensym("hoa.meter~") || classname == gensym("hoa.gain~") || classname == gensym("hoa.vector~"))
                 {
                     object_method_typed(jbox_get_object(object), s, argc, argv, NULL);
                 }

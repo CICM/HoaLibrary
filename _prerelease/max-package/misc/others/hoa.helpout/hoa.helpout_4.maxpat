@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 255.0, 44.0, 1025.0, 806.0 ],
+		"rect" : [ 253.0, 183.0, 1025.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -562,6 +562,7 @@
 , 			{
 				"box" : 				{
 					"embed" : 1,
+					"hidden" : 1,
 					"id" : "obj-89",
 					"maxclass" : "bpatcher",
 					"name" : "Irregular.maxpat",
@@ -577,7 +578,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 1020.0, 266.0, 182.0, 112.0 ],
+						"rect" : [ 1018.0, 202.0, 182.0, 112.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1256,6 +1257,7 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-35",
+									"linecount" : 2,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
@@ -1263,8 +1265,9 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 406.0, 207.0, 136.0, 19.0 ],
 									"presentation" : 1,
+									"presentation_linecount" : 2,
 									"presentation_rect" : [ 6.0, 29.370811, 155.0, 19.0 ],
-									"text" : "0. 30 110. 250. 330."
+									"text" : "0. 36. 72. 108. 144. 180. 216. 252. 288. 324."
 								}
 
 							}
@@ -1908,7 +1911,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 828.0, 266.0, 166.0, 83.0 ],
+						"rect" : [ 826.0, 202.0, 166.0, 83.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2115,7 +2118,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 632.0, 266.0, 166.0, 81.0 ],
+						"rect" : [ 630.0, 202.0, 166.0, 81.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2333,14 +2336,13 @@
 					"saved_object_attributes" : 					{
 						"angles" : [ 0.0, 36.0, 72.0, 108.0, 144.0, 180.0, 216.0, 252.0, 288.0, 324.0 ],
 						"autoconnect" : 1,
+						"channels" : 10,
 						"loudspeakers" : 10,
-						"ls" : 10,
-						"ls_angles" : [ 0.0, 36.0, 72.0, 108.0, 144.0, 180.0, 216.0, 252.0, 288.0, 324.0 ],
 						"mode" : "ambisonic",
 						"pinnaesize" : "small",
 						"restitution" : "panning",
-						"yls" : 10,
-						"zls" : [ 0.0, 36.0, 72.0, 108.0, 144.0, 180.0, 216.0, 252.0, 288.0, 324.0 ]
+						"ychannels" : 10,
+						"zchannels" : [ 0.0, 36.0, 72.0, 108.0, 144.0, 180.0, 216.0, 252.0, 288.0, 324.0 ]
 					}
 ,
 					"text" : "hoa.decoder~ 4"
@@ -2368,8 +2370,6 @@
 					"drawvector" : 0,
 					"id" : "obj-2",
 					"loudspeakers" : 10,
-					"ls" : 10,
-					"ls_angles" : [ 0.0, 36.0, 72.0, 108.0, 144.0, 180.0, 216.0, 252.0, 288.0, 324.0 ],
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 10,
 					"numoutlets" : 2,
@@ -2377,7 +2377,9 @@
 					"patching_rect" : [ 52.75, 494.049988, 108.949997, 108.949997 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 199.018219, 2.0, 126.950531, 126.950531 ],
-					"varname" : "meter_object"
+					"varname" : "meter_object",
+					"yls" : 10,
+					"zls" : [ 0.0, 36.0, 72.0, 108.0, 144.0, 180.0, 216.0, 252.0, 288.0, 324.0 ]
 				}
 
 			}
@@ -2437,6 +2439,7 @@
 				"box" : 				{
 					"channels" : 10,
 					"id" : "obj-4",
+					"loudspeakers" : 10,
 					"maxclass" : "hoa.gain~",
 					"numinlets" : 11,
 					"numoutlets" : 11,

@@ -357,6 +357,7 @@ t_max_err angles_set(t_HoaDecode *x, t_object *attr, long argc, t_atom *argv)
         x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
     }
     
+    HoaDecode_send_configuration(x);
     HoaDecode_send_angles(x);
     return NULL;
 }
@@ -394,6 +395,7 @@ void HoaDecode_resize_outlet(t_HoaDecode *x, long lastNumberOfOutlet)
     if(x->f_send_config)
     {
         HoaDecode_send_configuration(x);
+        HoaDecode_send_angles(x);
         HoaDecode_reconnect_outlet(x);
     }
 }
@@ -457,31 +459,16 @@ void HoaDecode_send_configuration(t_HoaDecode *x)
         if (jpatchline_get_box1(line) == decoder)
         {
             object = jpatchline_get_box2(line);
-            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~") || object_classname(jbox_get_object(object)) == gensym("hoa.vector~"))
+            t_symbol* classname = object_classname(jbox_get_object(object));
+            if(classname == gensym("hoa.meter~") || classname == gensym("hoa.gain~") || classname == gensym("hoa.vector~"))
             {
                 long    argc = 1;
                 t_atom *argv = new t_atom[1];
                 atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfOutputs());
                 
-                object_method_typed(jbox_get_object(object), gensym("loudspeakers"), argc, argv, NULL);
-                
-                free(argv);
-                
-                argc = x->f_AmbisonicsDecoder->getNumberOfOutputs();
-                argv = new t_atom[argc];
-                
-                for(int i = 0; i < argc; i++)
-                    atom_setfloat(argv+i, x->f_AmbisonicsDecoder->getLoudspeakerAngle(i));
-                
-                object_method_typed(jbox_get_object(object), gensym("angles"), argc, argv, NULL);
-                free(argv);
-            }
-            if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
-            {
-                long argc = 1;
-                t_atom argv[1];
-                atom_setlong(argv, x->f_AmbisonicsDecoder->getNumberOfOutputs());
                 object_method_typed(jbox_get_object(object), gensym("channels"), argc, argv, NULL);
+                
+                free(argv);
             }
         }
     }
@@ -508,7 +495,8 @@ void HoaDecode_send_angles(t_HoaDecode *x)
         if (jpatchline_get_box1(line) == decoder)
         {
             object = jpatchline_get_box2(line);
-            if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~") || object_classname(jbox_get_object(object)) == gensym("hoa.gain~") || object_classname(jbox_get_object(object)) == gensym("hoa.vector~"))
+            t_symbol* classname = object_classname(jbox_get_object(object));
+            if(classname == gensym("hoa.meter~") || classname == gensym("hoa.gain~") || classname == gensym("hoa.vector~"))
             {                
                 long    argc = x->f_AmbisonicsDecoder->getNumberOfOutputs();
                 t_atom *argv = new t_atom[argc];
