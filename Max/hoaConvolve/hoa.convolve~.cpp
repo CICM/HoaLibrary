@@ -64,10 +64,6 @@ t_max_err dry_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err wet_set(t_HoaConvolve *x, t_object *attr, long argc, t_atom *argv);
 t_max_err HoaConvolve_notify(t_HoaConvolve *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 
-void HoaConvolve_dsp(t_HoaConvolve *x, t_signal **sp, short *count);
-t_int *HoaConvolve_perform(t_int *w);
-t_int *HoaConvolve_performOffset(t_int *w);
-
 void HoaConvolve_dsp64(t_HoaConvolve *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaConvolve_perform64(t_HoaConvolve *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
@@ -80,7 +76,6 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.convolve~", (method)HoaConvolve_new, (method)HoaConvolve_free, (long)sizeof(t_HoaConvolve), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaConvolve_dsp,			"dsp",		A_CANT,     0);
 	class_addmethod(c, (method)HoaConvolve_dsp64,		"dsp64",	A_CANT,     0);
 	class_addmethod(c, (method)HoaConvolve_assist,		"assist",	A_CANT,     0);
     class_addmethod(c, (method)HoaConvolve_notify,		"notify",	A_CANT,     0);
@@ -173,42 +168,6 @@ void HoaConvolve_dsp64(t_HoaConvolve *x, t_object *dsp64, short *count, double s
 void HoaConvolve_perform64(t_HoaConvolve *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	x->f_ambiConvolve->process(ins, outs);
-}
-
-void HoaConvolve_dsp(t_HoaConvolve *x, t_signal **sp, short *count)
-{
-	int i;
-	int pointer_count;
-	t_int **sigvec;
-	
-	x->f_ambiConvolve->setVectorSize(sp[0]->s_n);
-    if(x->f_ambiConvolve->getSamplingRate() != sp[0]->s_sr)
-        x->f_ambiConvolve->setSamplingRate(sp[0]->s_sr);
-    
-	pointer_count = x->f_ambiConvolve->getNumberOfInputs() + x->f_ambiConvolve->getNumberOfOutputs() + 2;
-	
-	sigvec  = (t_int **)calloc(pointer_count, sizeof(t_int *));
-	for(i = 0; i < pointer_count; i++)
-		sigvec[i] = (t_int *)calloc(1, sizeof(t_int));
-	
-	sigvec[0] = (t_int *)x;
-	sigvec[1] = (t_int *)sp[0]->s_n;
-	for(i = 2; i < pointer_count; i++)
-		sigvec[i] = (t_int *)sp[i - 2]->s_vec;
-
-	dsp_addv(HoaConvolve_perform, pointer_count, (void **)sigvec);
-	free(sigvec);
-}
-
-t_int *HoaConvolve_perform(t_int *w)
-{
-	t_HoaConvolve *x		= (t_HoaConvolve *)(w[1]);
-	t_float		**ins		= (t_float **)w+3;
-	t_float		**outs		= (t_float **)w+3+x->f_ambiConvolve->getNumberOfOutputs();
-	
-	x->f_ambiConvolve->process(ins, outs);
-	
-	return (w + x->f_ambiConvolve->getNumberOfInputs() + x->f_ambiConvolve->getNumberOfOutputs() + 3);
 }
 
 void HoaConvolve_assist(t_HoaConvolve *x, void *b, long m, long a, char *s)

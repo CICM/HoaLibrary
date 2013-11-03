@@ -790,6 +790,7 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 
 void hoamap_jsave(t_hoamap *x, t_dictionary *d)
 {
+    x->f_source_manager->groupClean();
     hoamap_source_save(x, d);
     hoamap_group_save(x, d);
     hoamap_slot_save(x, d);
@@ -803,7 +804,7 @@ void hoamap_source_save(t_hoamap *x, t_dictionary *d)
     av = new t_atom[ac];
     if(av && ac)
     {
-        for(long i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        for(long i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
@@ -811,13 +812,12 @@ void hoamap_source_save(t_hoamap *x, t_dictionary *d)
                 atom_setlong(av+j+1, i);
                 atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
                 atom_setfloat(av+j+3, x->f_source_manager->sourceGetOrdinate(i));
-                atom_setlong(av+j+4, x->f_source_manager->groupGetMute(i));
+                atom_setlong(av+j+4, x->f_source_manager->sourceGetMute(i));
                 atom_setfloat(av+j+5, x->f_source_manager->sourceGetColor(i).red);
                 atom_setfloat(av+j+6, x->f_source_manager->sourceGetColor(i).green);
                 atom_setfloat(av+j+7, x->f_source_manager->sourceGetColor(i).blue);
                 atom_setfloat(av+j+8, x->f_source_manager->sourceGetColor(i).alpha);
                 atom_setsym(av+j+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
-                
                 j += 10;
             }
         }
@@ -830,7 +830,7 @@ void hoamap_group_save(t_hoamap *x, t_dictionary *d)
 {
     t_atom *av;
     long ac = 0;
-    for(long i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    for(long i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
@@ -840,7 +840,7 @@ void hoamap_group_save(t_hoamap *x, t_dictionary *d)
     av = new t_atom[ac];
     if(av && ac)
     {
-        for(long i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        for(long i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
@@ -884,7 +884,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                 ac += 2;
                 x->f_source_preset->recallSlot(temporySourceManager, i);
                 ac += temporySourceManager->getNumberOfSources()*10;
-                for(long j = 0; j < temporySourceManager->getMaximumIndexOfGroup(); j++)
+                for(long j = 0; j <= temporySourceManager->getMaximumIndexOfGroup(); j++)
                 {
                     if(temporySourceManager->groupGetExistence(j))
                     {
@@ -904,7 +904,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                     atom_setlong(av+i+1, j);
                     x->f_source_preset->recallSlot(temporySourceManager, j);
                     i += 2;
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfSource(); k++)
+                    for(long k = 0; k <= temporySourceManager->getMaximumIndexOfSource(); k++)
                     {
                         if(temporySourceManager->sourceGetExistence(k))
                         {
@@ -922,7 +922,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                             i += 10;
                         }
                     }
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfGroup(); k++)
+                    for(long k = 0; k <= temporySourceManager->getMaximumIndexOfGroup(); k++)
                     {
                         if(temporySourceManager->groupGetExistence(k))
                         {
@@ -971,7 +971,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                 ac += 2;
                 x->f_source_trajectory->recallSlot(temporySourceManager, i);
                 ac += temporySourceManager->getNumberOfSources()*10;
-                for(long j = 0; j < temporySourceManager->getMaximumIndexOfGroup(); j++)
+                for(long j = 0; j <= temporySourceManager->getMaximumIndexOfGroup(); j++)
                 {
                     if(temporySourceManager->groupGetExistence(j))
                     {
@@ -991,7 +991,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                     atom_setlong(av+i+1, j);
                     x->f_source_trajectory->recallSlot(temporySourceManager, j);
                     i += 2;
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfSource(); k++)
+                    for(long k = 0; k <= temporySourceManager->getMaximumIndexOfSource(); k++)
                     {
                         if(temporySourceManager->sourceGetExistence(k))
                         {
@@ -1009,7 +1009,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                             i += 10;
                         }
                     }
-                    for(long k = 0; k < temporySourceManager->getMaximumIndexOfGroup(); k++)
+                    for(long k = 0; k <= temporySourceManager->getMaximumIndexOfGroup(); k++)
                     {
                         if(temporySourceManager->groupGetExistence(k))
                         {
@@ -1072,8 +1072,8 @@ void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
                 {
                     x->f_source_manager->groupSetSource(atom_getlong(av+i+1), atom_getlong(av+i+3+j));
                 }
-                if(atom_getlong(av+i+3+numberOfsource) == 1)
-                    x->f_source_manager->groupSetMute(atom_getlong(av+i+1), 1);
+                //if(atom_getlong(av+i+3+numberOfsource) == 1)
+                    //x->f_source_manager->groupSetMute(atom_getlong(av+i+1), 1);
                 x->f_source_manager->groupSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
                 x->f_source_manager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
                 i += numberOfsource + 7;
@@ -1285,7 +1285,7 @@ void hoamap_bang(t_hoamap *x)
 {
     t_atom av[4];
     atom_setsym(av+1, gensym("mute"));
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
@@ -1294,7 +1294,7 @@ void hoamap_bang(t_hoamap *x)
             outlet_list(x->f_out_sources, 0L, 3, av);
         }
     }
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
@@ -1306,7 +1306,7 @@ void hoamap_bang(t_hoamap *x)
     if(x->f_output_mode == 0)
     {
         atom_setsym(av+1, gensym("polar"));
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
@@ -1316,7 +1316,7 @@ void hoamap_bang(t_hoamap *x)
                 outlet_list(x->f_out_sources, 0L, 4, av);
             }
         }
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
@@ -1331,7 +1331,7 @@ void hoamap_bang(t_hoamap *x)
     else
     {
         atom_setsym(av+1, gensym("cartesian"));
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
@@ -1341,7 +1341,7 @@ void hoamap_bang(t_hoamap *x)
                 outlet_list(x->f_out_sources, 0L, 4, av);
             }
         }
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
@@ -1363,7 +1363,7 @@ void hoamap_infos(t_hoamap *x)
     
     /* Sources */
     long numberOfSource = 0;
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         
         if(x->f_source_manager->sourceGetExistence(i))
@@ -1379,7 +1379,7 @@ void hoamap_infos(t_hoamap *x)
     avIndex = new t_atom[numberOfSource+2];
     atom_setsym(avIndex, gensym("source"));
     atom_setsym(avIndex+1, gensym("index"));
-    for(int i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
@@ -1392,7 +1392,7 @@ void hoamap_infos(t_hoamap *x)
     
     atom_setsym(avMute, gensym("source"));
     atom_setsym(avMute+1, gensym("mute"));
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
@@ -1404,7 +1404,7 @@ void hoamap_infos(t_hoamap *x)
     
     /* Groups */
     long numberOfGroups = 0;
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
@@ -1419,7 +1419,7 @@ void hoamap_infos(t_hoamap *x)
     avIndex = new t_atom[numberOfGroups+2];
     atom_setsym(avIndex, gensym("group"));
     atom_setsym(avIndex+1, gensym("index"));
-    for(int i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    for(int i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
@@ -1442,7 +1442,7 @@ void hoamap_infos(t_hoamap *x)
     
     atom_setsym(avMute, gensym("group"));
     atom_setsym(avMute+1, gensym("mute"));
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
@@ -1492,42 +1492,8 @@ void hoamap_paint(t_hoamap *x, t_object *view)
 	x->rect = rect;
     
     /* Pas de groupes avec un nombre de source inférieur à 2 et pas de doublons de groupes */
-    for(int i = 0; i < x->f_source_manager->getNumberOfGroups(); i++)
-    {
-        if (x->f_source_manager->groupGetExistence(i))
-        {
-            if (x->f_source_manager->groupGetNumberOfSources(i) < 2)
-            {
-                x->f_source_manager->groupRemove(i);
-            }
-        }
-    }
-    for(int i = 0; i < x->f_source_manager->getNumberOfGroups(); i++)
-    {
-        if (x->f_source_manager->groupGetExistence(i))
-        {
-            for(int j = 0; j < x->f_source_manager->getNumberOfGroups(); j++)
-            {
-                if (i != j && x->f_source_manager->groupGetExistence(j))
-                {
-                    if(x->f_source_manager->groupGetNumberOfSources(i) == x->f_source_manager->groupGetNumberOfSources(j))
-                    {
-                        int check = 0;
-                        for(int k = 0; k < x->f_source_manager->groupGetNumberOfSources(i); k++)
-                        {
-                            for(int l = 0; l < x->f_source_manager->groupGetNumberOfSources(i); l++)
-                            {
-                                if(x->f_source_manager->groupGetSourceIndex(i, k) == x->f_source_manager->groupGetSourceIndex(j, l))
-                                    check++;
-                            }
-                        }
-                        if(check == x->f_source_manager->groupGetNumberOfSources(j))
-                            x->f_source_manager->groupRemove(j);
-                    }
-                }
-            }
-        }
-    }
+    
+    x->f_source_manager->groupClean();
     
 	draw_background(x, view, &rect);
     draw_sources(x, view, &rect);
@@ -1673,7 +1639,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
     {
         jtl = jtextlayout_create();
         jgraphics_set_line_width(g, x->f_size_source * 0.2);
-		for(i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+		for(i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
@@ -1772,7 +1738,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
     {
         jtl = jtextlayout_create();
         jgraphics_set_line_width(g, x->f_size_source * 0.2);
-		for(i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+		for(i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
             if(x->f_source_manager->groupGetExistence(i))
             {
@@ -1909,7 +1875,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     x->f_rect_selection_exist = -1;
     x->f_rect_selection.width = x->f_rect_selection.height = 0.;
         
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
         {
@@ -1920,7 +1886,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     
     if(x->f_index_of_selected_source == -1)
     {
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
             if(x->f_source_manager->groupGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
             {
@@ -2191,7 +2157,7 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
         double y1 = ((-x->f_rect_selection.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
         double y2 = (((-x->f_rect_selection.y - x->f_rect_selection.height) / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
         
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i) && indexOfNewGroup >= 0)
             {
@@ -2246,7 +2212,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     
     x->f_index_of_selected_source = -1;
     x->f_index_of_selected_group = -1;
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
         {
@@ -2256,7 +2222,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     }
     if(x->f_index_of_selected_source == -1)
     {
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfGroup(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
             if(x->f_source_manager->groupGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
             {
@@ -2283,7 +2249,7 @@ void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
 {
     int filter = 0;
-	if (keycode == 97 && modifiers == 1 && textcharacter == 0)
+	if (keycode == 97 && modifiers == 1 && textcharacter == 0) //cmd+a
     {
 		int indexOfNewGroup = -1;
         for(int i = 0; indexOfNewGroup == -1; i++)
@@ -2294,7 +2260,7 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
             }
         }
         
-        for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+        for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i) && indexOfNewGroup >= 0)
             {
@@ -2302,6 +2268,11 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
                 x->f_index_of_selected_group = indexOfNewGroup;
             }
         }
+        
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+        jbox_redraw((t_jbox *)x);
+        
         filter = 1;
 	}
 	return filter;
