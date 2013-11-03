@@ -36,32 +36,29 @@ for all configuration).;
 #X obj -305 63 hoa.optim~ 7 @mode [ maxRe ] --------------;
 #X obj 434 63 hoa.optim~ 7 @mode [ inPhase ] -----;
 #X obj -305 96 hoa.decoder~ 7 ambisonics 16 --------------;
-#X obj 382 91 hoa.decoder~ 7 irregular 5 @restitution [ panning ];
 #X obj -297 169 hoa.meter~ @patching_rect [ -297 169 225 225 ] @size
 [ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
 [ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 16 ] @angles
 [ 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270 292.5 315
 337.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval
-[ 50 ] @dbperled [ 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds
-[ 3 ] @numleds [ 12 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4
-0.4 0.4 1 ] @bordercolor [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0
-0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ]
-@hotcolor [ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor [ 0
-0 1 0.8 ] @velocitycolor [ 1 0 0 0.8 ];
-#X obj 422 170 hoa.meter~ @patching_rect [ 422 170 225 225 ] @size
-[ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 5 ] @angles
-[ 0 30 110 250 330 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ]
-@nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ]
-@bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
+[ 50 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor
 [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73
 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
-#X msg 560 16 angles 0 30 110 250 330;
+#X obj 422 170 hoa.meter~ @patching_rect [ 422 170 225 225 ] @size
+[ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 5 ] @angles
+[ 0 30 110 250 330 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @bgcolor [
+0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25
+0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8
+] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
+[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
+];
+#X msg 623 16 angles 0 30 110 250 330;
 #X text -320 -163 1st argument is the order.;
 #X text -321 -148 2nd argument is decoding mode : ambisonic or 0 \,
 binaural or 1 (for headphones) \, irregular or 2 (for an irregular
@@ -72,6 +69,9 @@ loudpspeakers array).;
 where all of them are to equal distance. The minimum number of loudspeakers
 is 2 * order + 1 (default : 2 * order + 2). The fourth argument is
 the offset of loudpeakers in degrees.;
+#X obj 623 -8 loadbang;
+#X obj 382 91 hoa.decoder~ 7 irregular 5 @restitution [ panning ] @angles
+[ 0 30 110 250 330 ];
 #X connect 2 0 4 1;
 #X connect 3 0 2 0;
 #X connect 4 0 6 1;
@@ -143,42 +143,43 @@ the offset of loudpeakers in degrees.;
 #X connect 21 12 23 12;
 #X connect 21 13 23 13;
 #X connect 21 14 23 14;
-#X connect 22 0 24 0;
-#X connect 22 1 24 1;
-#X connect 22 2 24 2;
-#X connect 22 3 24 3;
-#X connect 22 4 24 4;
-#X connect 22 5 24 5;
-#X connect 22 6 24 6;
-#X connect 22 7 24 7;
-#X connect 22 8 24 8;
-#X connect 22 9 24 9;
-#X connect 22 10 24 10;
-#X connect 22 11 24 11;
-#X connect 22 12 24 12;
-#X connect 22 13 24 13;
-#X connect 22 14 24 14;
-#X connect 23 0 25 0;
-#X connect 23 1 25 1;
-#X connect 23 2 25 2;
-#X connect 23 3 25 3;
-#X connect 23 4 25 4;
-#X connect 23 5 25 5;
-#X connect 23 6 25 6;
-#X connect 23 7 25 7;
-#X connect 23 8 25 8;
-#X connect 23 9 25 9;
-#X connect 23 10 25 10;
-#X connect 23 11 25 11;
-#X connect 23 12 25 12;
-#X connect 23 13 25 13;
-#X connect 23 14 25 14;
-#X connect 23 15 25 15;
-#X connect 24 0 26 0;
-#X connect 24 1 26 1;
-#X connect 24 2 26 2;
-#X connect 24 3 26 3;
-#X connect 24 4 26 4;
-#X connect 27 0 24 0;
-#X connect 27 0 26 0;
+#X connect 22 0 32 0;
+#X connect 22 1 32 1;
+#X connect 22 2 32 2;
+#X connect 22 3 32 3;
+#X connect 22 4 32 4;
+#X connect 22 5 32 5;
+#X connect 22 6 32 6;
+#X connect 22 7 32 7;
+#X connect 22 8 32 8;
+#X connect 22 9 32 9;
+#X connect 22 10 32 10;
+#X connect 22 11 32 11;
+#X connect 22 12 32 12;
+#X connect 22 13 32 13;
+#X connect 22 14 32 14;
+#X connect 23 0 24 0;
+#X connect 23 1 24 1;
+#X connect 23 2 24 2;
+#X connect 23 3 24 3;
+#X connect 23 4 24 4;
+#X connect 23 5 24 5;
+#X connect 23 6 24 6;
+#X connect 23 7 24 7;
+#X connect 23 8 24 8;
+#X connect 23 9 24 9;
+#X connect 23 10 24 10;
+#X connect 23 11 24 11;
+#X connect 23 12 24 12;
+#X connect 23 13 24 13;
+#X connect 23 14 24 14;
+#X connect 23 15 24 15;
+#X connect 26 0 25 0;
+#X connect 26 0 32 0;
+#X connect 31 0 26 0;
+#X connect 32 0 25 0;
+#X connect 32 1 25 1;
+#X connect 32 2 25 2;
+#X connect 32 3 25 3;
+#X connect 32 4 25 4;
 #X coords 0 689 1 688 100 60 0;

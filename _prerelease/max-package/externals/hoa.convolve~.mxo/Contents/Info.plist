@@ -31,9 +31,9 @@
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>12E55</string>
+	<string>12D75</string>
 	<key>DTSDKName</key>
-	<string></string>
+	<string>macosx10.8</string>
 	<key>DTXcode</key>
 	<string>0463</string>
 	<key>DTXcodeBuild</key>
