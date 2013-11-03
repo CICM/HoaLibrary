@@ -200,12 +200,14 @@ int C74_EXPORT main()
 	CLASS_ATTR_SAVE				(c, "channels", 1);
     CLASS_ATTR_DEFAULT          (c, "channels", 0, "8");
     CLASS_ATTR_ALIAS            (c, "channels", "loudspeakers");
+    CLASS_ATTR_ALIAS            (c, "channels", "yls");
     
 	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_meter,f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
-	CLASS_ATTR_SAVE				(c, "angles", 1);
+    CLASS_ATTR_SAVE				(c, "angles", 1);
+    CLASS_ATTR_ALIAS            (c, "angles", "zls");
     
 	CLASS_ATTR_DOUBLE			(c, "offset", 0, t_meter, f_offsetOfLoudspeakers);
 	CLASS_ATTR_ORDER			(c, "offset", 0, "3");
@@ -423,16 +425,21 @@ t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_at
 
 t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av)
 {
+    double* angles = new double[(int)Tools::clip_min(ac, 1)];
     if (ac && av)
     {
         for(int i = 0; i < ac && i < x->f_number_of_loudspeakers; i++)
         {
             if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
-                x->f_meter->setLoudspeakerAngleDegrees(i, atom_getfloat(av+i));
+                angles[i] = atom_getfloat(av+i);
+            else
+                angles[i] = 0.;
+            
         }
         
     }
     
+    x->f_meter->setLoudspeakerAnglesDegrees(ac, angles);
     for (int i=0; i < x->f_meter->getNumberOfInputs(); i++)
     {
         x->f_angles_of_loudspeakers[i] = x->f_meter->getLoudspeakerAngle(i);
@@ -464,6 +471,8 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("meter_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
 	jbox_redraw((t_jbox *)x);
+    
+    free(angles);
     return MAX_ERR_NONE;
 }
 

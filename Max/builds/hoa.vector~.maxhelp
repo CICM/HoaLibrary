@@ -1017,7 +1017,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 444.5, 310.0, 288.0, 19.0 ]
+									"patching_rect" : [ 444.5, 311.0, 288.0, 19.0 ]
 								}
 
 							}
@@ -1119,11 +1119,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 40.09494, 299.0, 239.540085, 19.0 ],
 									"saved_object_attributes" : 									{
-										"autoconnect" : 1,
-										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-										"optim" : "inPhase",
-										"order" : 7,
-										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
+										"optim" : "inPhase"
 									}
 ,
 									"text" : "hoa.optim~ 7"
@@ -1237,7 +1233,7 @@
 									"numinlets" : 5,
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 383.5, 240.0, 19.0 ],
+									"patching_rect" : [ 40.09494, 383.5, 239.540085, 19.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"channels" : 5,
@@ -1245,7 +1241,7 @@
 										"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 									}
 ,
-									"text" : "hoa.vector~ 7 @vector energy"
+									"text" : "hoa.vector~ 5"
 								}
 
 							}
@@ -1339,7 +1335,9 @@
 										"loudspeakers" : 5,
 										"mode" : "irregular",
 										"pinnaesize" : "small",
-										"restitution" : "panning"
+										"restitution" : "panning",
+										"ychannels" : 5,
+										"zchannels" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7 @mode irregular @channels 5"
@@ -1524,13 +1522,13 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-53",
 									"loudspeakers" : 5,
-									"ls" : 5,
-									"ls_angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 5,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 39.748627, 475.5, 240.0, 240.0 ]
+									"patching_rect" : [ 39.748627, 475.5, 240.0, 240.0 ],
+									"yls" : 5,
+									"zls" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 								}
 
 							}
@@ -1679,7 +1677,7 @@
 									"destination" : [ "obj-5", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 123.261607, 414.0, 460.5, 414.0 ],
+									"midpoints" : [ 123.108302, 414.0, 460.5, 414.0 ],
 									"source" : [ "obj-2", 1 ]
 								}
 
@@ -1699,7 +1697,7 @@
 									"destination" : [ "obj-71", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 123.261607, 414.0, 279.0, 414.0, 279.0, 450.0, 270.59494, 450.0 ],
+									"midpoints" : [ 123.108302, 414.0, 279.0, 414.0, 279.0, 450.0, 270.59494, 450.0 ],
 									"source" : [ "obj-2", 1 ]
 								}
 
@@ -2769,7 +2767,9 @@
 										"loudspeakers" : 16,
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
-										"restitution" : "panning"
+										"restitution" : "panning",
+										"ychannels" : 16,
+										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7"
@@ -3919,11 +3919,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 174.75, 303.0, 240.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"autoconnect" : 1,
-										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-										"optim" : "inPhase",
-										"order" : 7,
-										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
+										"optim" : "inPhase"
 									}
 ,
 									"text" : "hoa.optim~ 7"
@@ -4128,7 +4124,9 @@
 										"loudspeakers" : 16,
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
-										"restitution" : "panning"
+										"restitution" : "panning",
+										"ychannels" : 16,
+										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7"
