@@ -127,8 +127,35 @@ Objects :
 - hoa.space : A GUI to design ambisonic space.
 - hoa.space~ : A spatial filter.
 - hoa.wider~ : A fractional ambisonic orders simulator.
+
 Dependencies : 
 
 Cblas (http://www.netlib.org/clapack/cblas/) 
 You can use Accelerate for Mac Os and Ipp or GSL for all platforms.
 PdEnhanced (https://github.com/pierreguillot/PdEnhanced)
+
+------------------------ ------------------------
+		    Faust Version 
+------------------------ ------------------------
+
+------------------------
+version 1.1
+------------------------
+
+Functions :
+
+- decoderStereo : decodes an ambisonic sound field for stereophonic configuration. 
+- map : encodes a source with distance compensation.
+- rotate : applies a rotation of the sound field.
+
+------------------------
+version 1.0
+------------------------
+
+Functions :
+
+- encoder : encodes a signal in the circular harmonics domain depending on an order of decomposition and an angle.
+- decoder : decodes an ambisonics sound field for a circular array of loudspeakers. 
+- optimBasic, optimMaxRe, optimInPhase : weights the circular harmonics signals depending to the ambisonics optimization. It can be "basic" for no optimization, "maxRe" or "inPhase".
+- wider : can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes.
+

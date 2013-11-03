@@ -38,6 +38,20 @@ Installation:
 There are two packages folder you may use. One is called 'packages' in your Max folder. The other is called 'Max 6 Packages' in your Documents (Mac) or My Documents (Windows) folder.
 
 ----------------------------------
+Faust (HoaLibrary v1.1) :
+----------------------------------
+
+Installation:
+ - To install the HoaLibrary, simply copy the hoa.lib file to your 'faust' library folder.
+ - To uninstall this package, simply remove it from your 'faust' library folder.
+
+- 'faust' library folder default locations :
+	- Mac OsX : /usr/local/lib/faust
+	- Windows : with the faust application (.exe)
+
+Note that hoa.lib should be in the last faust distribution.
+
+----------------------------------
 
 Feedback are welcome.
 
