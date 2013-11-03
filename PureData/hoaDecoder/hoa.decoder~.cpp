@@ -64,20 +64,16 @@ extern "C" void setup_hoa0x2edecoder_tilde(void)
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, decoder_setattr_angles);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
-	CLASS_ATTR_SAVE				(c, "angles", 1);
     
     CLASS_ATTR_LONG				(c, "pinnae", 0 , t_hoa_decoder, f_pinnae);
     CLASS_ATTR_ACCESSORS		(c, "pinnae", NULL, decoder_setattr_pinnae);
 	CLASS_ATTR_LABEL			(c, "pinnae", 0, "Pinnae Size");
-	CLASS_ATTR_SAVE				(c, "pinnae", 1);
-    CLASS_ATTR_DEFAULT          (c, "pinnae", 0, "8");
     
     CLASS_ATTR_LONG             (c, "restitution", 0, t_hoa_decoder, f_restitution_mode);
 	CLASS_ATTR_CATEGORY			(c, "restitution", 0, "Behavior");
     CLASS_ATTR_LABEL            (c, "restitution", 0, "Restitution Mode");
 	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, decoder_setattr_restitution);
     CLASS_ATTR_ORDER            (c, "restitution", 0, "6");
-    CLASS_ATTR_SAVE             (c, "restitution", 1);
     
     if(!postons)
     {
@@ -121,7 +117,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         number_of_loudspeakers = atom_getint(argv+2);
     
     x->f_ambi_decoder = new AmbisonicsMultiDecoder(order, number_of_loudspeakers, mode, Hoa_Small, hrtfPath, sys_getblksize(), sys_getsr());
-    
+
     dsp_setupjbox((t_jbox *)x, x->f_ambi_decoder->getNumberOfInputs(), x->f_ambi_decoder->getNumberOfOutputs());
     
 	x->f_ob.z_misc = Z_NO_INPLACE;
@@ -134,14 +130,26 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 
 t_max_err decoder_setattr_angles(t_hoa_decoder *x, void *attr, long ac, t_atom *av)
 {
+    double* angles = new double[(int)pd_clip_min(ac, 1)];
     if (ac && av)
     {
         for(int i = 0; i < ac && i < x->f_ambi_decoder->getNumberOfLoudspeakers(); i++)
         {
             if(atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG)
-                x->f_ambi_decoder->setLoudspeakerAngle(i, atom_getfloat(av+i));
+                angles[i] = atom_getfloat(av+i);
+            else
+                angles[i] = 0.;
+                
         }
+        x->f_ambi_decoder->setLoudspeakersAngles(angles, ac);
     }
+    for(int i = 0; i < x->f_ambi_decoder->getNumberOfLoudspeakers(); i++)
+    {
+        x->f_angles_of_loudspeakers[i] = x->f_ambi_decoder->getLoudspeakerAngle(i);
+    }
+    
+    
+    free(angles);
     return 0;
 }
 
@@ -154,7 +162,7 @@ t_max_err decoder_setattr_pinnae(t_hoa_decoder *x, void *attr, long ac, t_atom *
     }
     if(atom_gettype(av) == A_SYM)
     {
-        if(atom_getsym(argv) == gensym("large"))
+        if(atom_getsym(av) == gensym("large"))
            d = 1;
         else
            d = 0;
@@ -165,6 +173,7 @@ t_max_err decoder_setattr_pinnae(t_hoa_decoder *x, void *attr, long ac, t_atom *
         x->f_ambi_decoder->setPinnaeSize(d);
         canvas_resume_dsp(dspState);
     }
+    
     return 0;
 }
 

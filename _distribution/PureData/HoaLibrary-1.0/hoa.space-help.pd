@@ -4,18 +4,17 @@
 #X obj -156 -197 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 719 -255 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
+10 -262144 -1 -1 12 256;
 #X msg 719 -222 channels \$1;
 #X obj 550 -261 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
 #X obj 705 -34 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
-#X msg -118 244 1 1 1 1 1 1 1 1 1 1 1 1 1;
+#X msg -118 244 0.904819 1 0.0370832 0.348502 0.807854 0.807854 0.976473
+0.853987 0.705692 0.653529 0.509649 0.382843 0.772379;
 #X msg -118 199 set \$1 \$2 \$3 \$4 \$5 \$5 \$6 \$7 \$8 \$9 \$10 \$11
 \$12;
 #X text 441 -311 The attributes (saved with the object) :;
-#X msg -17 -202 0.421363 0 0 0.0036886 0.118276 0.118276 0.128133 0.158461
-0.211106 0.299159 0.37552 0.420643 1;
 #X text 545 -287 Size of the box;
 #X text 712 -287 Number of channels;
 #X obj 552 -36 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
@@ -62,16 +61,18 @@ the hoa.space~ object in the plane wave domain.;
 #X msg 550 -220 size \$1 \$1;
 #X obj -114 -145 hoa.space @patching_rect [ -114 -145 300 300 ] @size
 [ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @channels [ 12 ] @coeffs [ 1 1 1 1 1 1
-1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[ regular ] @fontsize [ 11 ] @channels [ 12 ] @coeffs [ 0.876279 1
+1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797 0.0343521 0.0879706
+0.0036886 0 0 0.600701 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0 0 0 1 ] @harmocolor
-[ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7 0.7 0.7 1 ];
+0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0 0 0 1
+] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7
+0.7 0.7 1 ];
 #N canvas 277 320 494 344 META 0;
 #X text 12 35 LICENSE SIBSD;
 #X text 12 105 OUTLET_0 anything;
@@ -86,30 +87,34 @@ bang_op;
 #X text 12 75 INLET_0 anything set message yoh !;
 #X restore 335 -345 pd META;
 #X text -166 -326 A GUI to design ambisonic space;
-#X connect 1 0 44 0;
+#X obj -17 -250 loadbang;
+#X msg -17 -202 0.876279 1 1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797
+0.0343521 0.0879706 0.0634424;
+#X connect 1 0 43 0;
 #X connect 2 0 3 0;
-#X connect 3 0 33 0;
-#X connect 4 0 43 0;
-#X connect 5 0 15 0;
-#X connect 5 0 18 0;
+#X connect 3 0 32 0;
+#X connect 4 0 42 0;
+#X connect 5 0 14 0;
+#X connect 5 0 17 0;
 #X connect 7 0 6 0;
-#X connect 9 0 44 0;
-#X connect 12 0 14 0;
-#X connect 14 0 30 0;
-#X connect 15 0 17 0;
-#X connect 16 0 15 2;
-#X connect 17 0 30 0;
-#X connect 18 0 15 1;
-#X connect 18 0 16 0;
-#X connect 19 0 20 0;
-#X connect 20 0 30 0;
-#X connect 21 0 22 0;
-#X connect 22 0 36 0;
-#X connect 23 0 21 0;
-#X connect 23 0 12 0;
-#X connect 27 0 28 0;
-#X connect 28 0 36 0;
-#X connect 31 0 44 0;
-#X connect 35 0 23 0;
-#X connect 43 0 33 0;
-#X connect 44 0 7 0;
+#X connect 11 0 13 0;
+#X connect 13 0 29 0;
+#X connect 14 0 16 0;
+#X connect 15 0 14 2;
+#X connect 16 0 29 0;
+#X connect 17 0 14 1;
+#X connect 17 0 15 0;
+#X connect 18 0 19 0;
+#X connect 19 0 29 0;
+#X connect 20 0 21 0;
+#X connect 21 0 35 0;
+#X connect 22 0 20 0;
+#X connect 22 0 11 0;
+#X connect 26 0 27 0;
+#X connect 27 0 35 0;
+#X connect 30 0 43 0;
+#X connect 34 0 22 0;
+#X connect 42 0 32 0;
+#X connect 43 0 7 0;
+#X connect 46 0 47 0;
+#X connect 47 0 43 0;

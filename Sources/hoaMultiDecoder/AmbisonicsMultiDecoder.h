@@ -53,6 +53,7 @@ public:
     long    getMode();
     
     void    setNumberOfLoudspeakers(long aConfiguration);
+    
     long    getNumberOfLoudspeakers();
     
     void    setPinnaeSize(long aPinnaSize);
@@ -63,6 +64,7 @@ public:
     void    setRestitutionMode(long aResitutionMode);
     long    getRestitutionMode();
     
+    void    setLoudspeakersAngles(double* angles, long aNumberOfloudspeakers);
     void    setLoudspeakerAngle(long anIndex, double anAngle);
     double  getLoudspeakerAngle(long anIndex);
     

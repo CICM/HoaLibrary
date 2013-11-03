@@ -62,6 +62,7 @@ public:
     void    setRestitutionMode(long aResitutionMode);
     void    setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool standardOnOff = 1);
     void    setLoudspeakerAngle(long anIndex, double anAngle);
+    void    setLoudspeakersAngles(double* angles, long aNumberOfLoudspeakers);
     
     long    getRestitutionMode();
     double  getConfiguration();

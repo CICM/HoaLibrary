@@ -117,7 +117,7 @@ extern "C" void setup_hoa0x2espace(void)
     class_addmethod(c, (method)hoa_space_mouse_drag,    "mousedrag",        A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_enddrag, "mouseup",          A_CANT, 0);
     class_addmethod(c, (method)hoa_space_coefficients_set,"list",           A_GIMME,0);
-    class_addmethod(c, (method)hoa_space_anything,		"anything",       A_GIMME,0);
+    //class_addmethod(c, (method)hoa_space_anything,		"anything",       A_GIMME,0);
 
     CLASS_ATTR_DEFAULT		(c, "size", 0, "225 225");
 	CLASS_ATTR_INVISIBLE	(c, "color", 0);
@@ -138,7 +138,6 @@ extern "C" void setup_hoa0x2espace(void)
     CLASS_ATTR_ACCESSORS			(c, "coeffs", NULL, hoa_space_coefficients_set);
 	CLASS_ATTR_DEFAULT              (c, "coeffs", 0, "0.");
 	CLASS_ATTR_SAVE                 (c, "coeffs", 0);
-    CLASS_ATTR_PAINT                (c, "coeffs", 0);
     
 	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_hoa_space, f_color_background);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
@@ -696,7 +695,6 @@ void hoa_space_retract_points(t_hoa_space *x, t_object *patcherview, t_pt pt, lo
 
 t_max_err hoa_space_coefficients_set(t_hoa_space *x, t_object *attr, long ac, t_atom *av)
 {
-    
     if (ac && av)
     {
         if(atom_gettype(av) == A_FLOAT)
@@ -721,8 +719,10 @@ t_max_err hoa_space_coefficients_set(t_hoa_space *x, t_object *attr, long ac, t_
     } 
     x->f_recomposer->processFixe(x->f_microphonesValues, x->f_harmonicsValues);
     x->f_viewer->processContribAndRep(x->f_harmonicsValues);
+    
     jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+    jbox_redraw((t_jbox *)x);
     return 0;
 }
 
@@ -781,6 +781,9 @@ void hoa_space_output(t_hoa_space *x)
         atom_setfloat(x->f_tempory_values+i, x->f_microphonesValues[i]);
     
     outlet_list(x->f_out, 0L, x->f_number_of_microphones, x->f_tempory_values);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_layer"));
+    jbox_redraw((t_jbox *)x);
 }
 
 
