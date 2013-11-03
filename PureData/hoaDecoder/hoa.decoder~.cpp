@@ -68,7 +68,7 @@ extern "C" void setup_hoa0x2edecoder_tilde(void)
     
     CLASS_ATTR_LONG				(c, "pinnae", 0 , t_hoa_decoder, f_pinnae);
     CLASS_ATTR_ACCESSORS		(c, "pinnae", NULL, decoder_setattr_pinnae);
-	CLASS_ATTR_LABEL			(c, "pinnae", 0, "Number of Loudspeakers");
+	CLASS_ATTR_LABEL			(c, "pinnae", 0, "Pinnae Size");
 	CLASS_ATTR_SAVE				(c, "pinnae", 1);
     CLASS_ATTR_DEFAULT          (c, "pinnae", 0, "8");
     
@@ -147,15 +147,23 @@ t_max_err decoder_setattr_angles(t_hoa_decoder *x, void *attr, long ac, t_atom *
 
 t_max_err decoder_setattr_pinnae(t_hoa_decoder *x, void *attr, long ac, t_atom *av)
 {
-    if (atom_gettype(av) == A_LONG)
+    long d = 0;
+    if(atom_gettype(av) == A_LONG)
     {
-        long d = Tools::clip(long(atom_getlong(av)), 0, 1);
-        if(d != x->f_ambi_decoder->getPinnaeSize())
-        {
-            int dspState = canvas_suspend_dsp();
-            x->f_ambi_decoder->setPinnaeSize(d);            
-            canvas_resume_dsp(dspState);
-        }
+        d = Tools::clip(long(atom_getlong(av)), 0, 1);
+    }
+    if(atom_gettype(av) == A_SYM)
+    {
+        if(atom_getsym(argv) == gensym("large"))
+           d = 1;
+        else
+           d = 0;
+    }
+    if(d != x->f_ambi_decoder->getPinnaeSize())
+    {
+        int dspState = canvas_suspend_dsp();
+        x->f_ambi_decoder->setPinnaeSize(d);
+        canvas_resume_dsp(dspState);
     }
     return 0;
 }
