@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 255.0, 44.0, 1025.0, 806.0 ],
+		"rect" : [ 240.0, 188.0, 1025.0, 509.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -562,6 +562,7 @@
 , 			{
 				"box" : 				{
 					"embed" : 1,
+					"hidden" : 1,
 					"id" : "obj-89",
 					"maxclass" : "bpatcher",
 					"name" : "Irregular.maxpat",
@@ -577,7 +578,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 1020.0, 266.0, 182.0, 112.0 ],
+						"rect" : [ 1005.0, 236.0, 182.0, 112.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1256,6 +1257,7 @@
 									"fontsize" : 11.595187,
 									"frgb" : 0.0,
 									"id" : "obj-35",
+									"linecount" : 4,
 									"maxclass" : "textedit",
 									"numinlets" : 1,
 									"numoutlets" : 4,
@@ -1263,8 +1265,9 @@
 									"parameter_enable" : 0,
 									"patching_rect" : [ 406.0, 207.0, 136.0, 19.0 ],
 									"presentation" : 1,
+									"presentation_linecount" : 3,
 									"presentation_rect" : [ 6.0, 29.370811, 155.0, 19.0 ],
-									"text" : "0. 30 110. 250. 330."
+									"text" : "0. 22.5 45. 67.5 90. 112.5 135. 157.5 180. 202.5 225. 247.5 270. 292.5 315. 337.5"
 								}
 
 							}
@@ -1908,7 +1911,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 828.0, 266.0, 166.0, 83.0 ],
+						"rect" : [ 813.0, 236.0, 166.0, 83.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2115,7 +2118,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 632.0, 266.0, 166.0, 81.0 ],
+						"rect" : [ 617.0, 236.0, 166.0, 81.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2333,14 +2336,13 @@
 					"saved_object_attributes" : 					{
 						"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 						"autoconnect" : 1,
+						"channels" : 16,
 						"loudspeakers" : 16,
-						"ls" : 16,
-						"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 						"mode" : "ambisonic",
 						"pinnaesize" : "small",
 						"restitution" : "panning",
-						"yls" : 16,
-						"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+						"ychannels" : 16,
+						"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 					}
 ,
 					"text" : "hoa.decoder~ 7"
@@ -2368,8 +2370,6 @@
 					"drawvector" : 0,
 					"id" : "obj-2",
 					"loudspeakers" : 16,
-					"ls" : 16,
-					"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 16,
 					"numoutlets" : 2,
@@ -2377,7 +2377,9 @@
 					"patching_rect" : [ 52.75, 494.049988, 108.949997, 108.949997 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 199.018219, 2.0, 126.950531, 126.950531 ],
-					"varname" : "meter_object"
+					"varname" : "meter_object",
+					"yls" : 16,
+					"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 				}
 
 			}
@@ -2437,6 +2439,7 @@
 				"box" : 				{
 					"channels" : 16,
 					"id" : "obj-4",
+					"loudspeakers" : 16,
 					"maxclass" : "hoa.gain~",
 					"numinlets" : 17,
 					"numoutlets" : 17,

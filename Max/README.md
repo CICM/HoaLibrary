@@ -62,11 +62,9 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 
 - hoa.convolve~ : Update buffer~ for Max 6 SDK and windows version (low)
 - hoa.plug~ : Update dsp method for Max 6 SDK (low)
-- hoa.decoder~ : Find a solution for attributes order (medium)
+- hoa.decoder~ : Find a solution for attributes order (low)
 - hoa.spectrum~ : Clean (medium)
 - hoa.boids : Clean (medium)
 - hoa.recomposer : No fisheye preview on window
-- hoa.meter~ : Angles negatifs
-- hoa.map : Last source not display ?
 - hoa.freeverb~ : click on audio on/off
 - fftw for window

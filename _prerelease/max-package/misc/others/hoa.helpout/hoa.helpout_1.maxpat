@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 255.0, 44.0, 1025.0, 806.0 ],
+		"rect" : [ 196.0, 44.0, 1025.0, 544.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -448,7 +448,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 1020.0, 266.0, 182.0, 112.0 ],
+						"rect" : [ 961.0, 127.0, 182.0, 112.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1779,7 +1779,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 828.0, 266.0, 166.0, 83.0 ],
+						"rect" : [ 769.0, 127.0, 166.0, 83.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -1986,7 +1986,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 632.0, 266.0, 166.0, 81.0 ],
+						"rect" : [ 573.0, 127.0, 166.0, 81.0 ],
 						"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
@@ -2204,14 +2204,13 @@
 					"saved_object_attributes" : 					{
 						"angles" : [ 0.0, 90.0, 180.0, 270.0 ],
 						"autoconnect" : 1,
+						"channels" : 4,
 						"loudspeakers" : 4,
-						"ls" : 4,
-						"ls_angles" : [ 0.0, 90.0, 180.0, 270.0 ],
 						"mode" : "ambisonic",
 						"pinnaesize" : "small",
 						"restitution" : "panning",
-						"yls" : 4,
-						"zls" : [ 0.0, 90.0, 180.0, 270.0 ]
+						"ychannels" : 4,
+						"zchannels" : [ 0.0, 90.0, 180.0, 270.0 ]
 					}
 ,
 					"text" : "hoa.decoder~ 1"
@@ -2239,8 +2238,6 @@
 					"drawvector" : 0,
 					"id" : "obj-2",
 					"loudspeakers" : 4,
-					"ls" : 4,
-					"ls_angles" : [ 0.0, 90.0, 180.0, 270.0 ],
 					"maxclass" : "hoa.meter~",
 					"numinlets" : 4,
 					"numoutlets" : 2,
@@ -2248,7 +2245,9 @@
 					"patching_rect" : [ 52.75, 494.049988, 108.949997, 108.949997 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 199.018219, 2.0, 126.950531, 126.950531 ],
-					"varname" : "meter_object"
+					"varname" : "meter_object",
+					"yls" : 4,
+					"zls" : [ 0.0, 90.0, 180.0, 270.0 ]
 				}
 
 			}
@@ -2308,6 +2307,7 @@
 				"box" : 				{
 					"channels" : 4,
 					"id" : "obj-4",
+					"loudspeakers" : 4,
 					"maxclass" : "hoa.gain~",
 					"numinlets" : 5,
 					"numoutlets" : 5,
