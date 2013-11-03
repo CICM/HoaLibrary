@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 248.0, 48.0, 1014.0, 696.0 ],
+		"rect" : [ 0.0, 42.0, 1366.0, 650.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -265,7 +265,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 248.0, 74.0, 1014.0, 670.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -715,7 +715,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 841.5, 60.0, 51.0, 19.0 ],
+									"patching_rect" : [ 841.5, 60.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -742,7 +742,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 841.5, 90.0, 99.0, 19.0 ],
+									"patching_rect" : [ 841.5, 90.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -859,8 +859,6 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
 									"loudspeakers" : 16,
-									"ls" : 16,
-									"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 2,
@@ -955,7 +953,9 @@
 										"loudspeakers" : 16,
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
-										"restitution" : "panning"
+										"restitution" : "panning",
+										"ychannels" : 16,
+										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7 16",
@@ -973,10 +973,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 242.5, 260.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"loudspeakers" : 16
-									}
-,
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -1938,7 +1934,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2000,7 +1996,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 7.0, 99.0, 125.375, 125.375 ],
-									"sources_parameters" : [ "source", 0, 0.350741, -0.93037, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.1235, -1.114797, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, 0.087274, -1.141144, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, -0.097154, -1.00941, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, 0.350741, -0.93037, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -0.1235, -1.114797, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, 0.087274, -1.141144, 0, 0.2, 0.2, 0.2, 1.0, "", null, null, null, null, null, null, null, null, null, null ],
 									"varname" : "hoa.map",
 									"zoom" : 0.605469
 								}
@@ -6334,7 +6330,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 515.285767, 89.0, 51.0, 19.0 ],
+									"patching_rect" : [ 515.285767, 89.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -6361,7 +6357,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 515.285767, 119.0, 99.0, 19.0 ],
+									"patching_rect" : [ 515.285767, 119.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -6463,8 +6459,6 @@
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
 									"loudspeakers" : 16,
-									"ls" : 16,
-									"ls_angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 16,
 									"numoutlets" : 2,
@@ -6503,7 +6497,9 @@
 										"loudspeakers" : 16,
 										"mode" : "ambisonic",
 										"pinnaesize" : "small",
-										"restitution" : "panning"
+										"restitution" : "panning",
+										"ychannels" : 16,
+										"zchannels" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 									}
 ,
 									"text" : "hoa.decoder~ 7 16",
@@ -6521,10 +6517,6 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 7.0, 320.0, 260.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"loudspeakers" : 16
-									}
-,
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -7864,7 +7856,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -8220,7 +8212,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u016000537"
+									"varname" : "u877000537"
 								}
 
 							}
@@ -8447,7 +8439,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
+						"rect" : [ 0.0, 68.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -8495,7 +8487,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "list", "list", "list" ],
 									"patching_rect" : [ 7.0, 108.5, 192.5, 192.5 ],
-									"sources_parameters" : [ "source", 0, 0.11362, 0.97977, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -1.151024, 0.426488, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, 0.983063, 0.08398, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, -0.307928, -1.04893, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, 0.11362, 0.97977, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, -1.151024, 0.426488, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, 0.983063, 0.08398, 0, 0.2, 0.2, 0.2, 1.0, "", null, null, null, null, null, null, null, null, null, null ],
 									"varname" : "hoa.map",
 									"zoom" : 0.605469
 								}
@@ -11691,7 +11683,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 7.0, 308.0, 329.0, 19.0 ],
+									"patching_rect" : [ 7.0, 308.0, 329.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -11817,7 +11809,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 578.0, 204.0, 47.0 ],
+									"patching_rect" : [ 724.5, 578.0, 204.0, 48.0 ],
 									"text" : "Press cmd key when you drag to activate magnetism on dragged microphone.",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11833,7 +11825,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 528.0, 204.0, 33.0 ],
+									"patching_rect" : [ 724.5, 528.0, 204.0, 34.0 ],
 									"text" : "doubleclick on a mic to set it to the closest default mic angle.",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11849,7 +11841,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 383.5, 229.0, 127.0 ],
+									"patching_rect" : [ 724.5, 383.5, 229.0, 131.0 ],
 									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect\n - ctrl+click : lock fisheye start and destination angles value for the selected mics.\n - ctrl + drag : apply a \"fisheye effect\" to the selected microphones (drag from/to ficheye point from/to center of the circle)",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11865,7 +11857,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 240.0, 268.0, 33.0 ],
+									"patching_rect" : [ 722.5, 240.0, 268.0, 34.0 ],
 									"text" : "Change Microphones Wider value :\n - shift+drag : change selected mics wider value",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11881,7 +11873,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 192.0, 204.0, 33.0 ],
+									"patching_rect" : [ 724.5, 192.0, 204.0, 34.0 ],
 									"text" : "Move Microphones :\n - drag : Move selected mics angles",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11897,7 +11889,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 290.0, 204.0, 74.0 ],
+									"patching_rect" : [ 724.5, 290.0, 204.0, 75.0 ],
 									"text" : "Select Microphones :\n - cmd+a : select All\n - cmd+drag : rect selection\n - cmd+click on a mic to change this mic selection state",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11940,7 +11932,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 366.25, 195.75, 37.0, 18.0 ],
+									"patching_rect" : [ 375.0, 190.0, 37.0, 18.0 ],
 									"text" : "reset"
 								}
 
@@ -11949,6 +11941,7 @@
 								"box" : 								{
 									"bgcolor" : [ 0.298044, 0.298044, 0.298044, 1.0 ],
 									"bordercolor" : [ 0.196168, 0.196168, 0.196168, 1.0 ],
+									"channels" : 16,
 									"circlecolor" : [ 0.196078, 0.196078, 0.196078, 1.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"fisheyecolor" : [ 0.687659, 0.179729, 0.179729, 1.0 ],
@@ -11956,13 +11949,14 @@
 									"fontsize" : 14.0,
 									"harmonicscolor" : [ 0.501961, 0.501961, 0.501961, 0.27 ],
 									"id" : "obj-4",
+									"loudspeakers" : 16,
 									"maxclass" : "hoa.recomposer",
 									"mictextcolor" : [ 0.903256, 0.903256, 0.903256, 1.0 ],
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "list" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 366.25, 242.5, 313.0, 313.0 ],
+									"patching_rect" : [ 375.0, 238.0, 313.0, 313.0 ],
 									"rectselectcolor" : [ 0.386326, 0.519675, 0.8, 1.0 ],
 									"selmiccolor" : [ 0.857322, 0.857322, 0.857322, 1.0 ],
 									"selmictextcolor" : [ 0.397639, 0.397639, 0.397639, 1.0 ]
@@ -11978,7 +11972,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 456.0, 329.0, 19.0 ],
+									"patching_rect" : [ 7.0, 456.0, 329.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"mode" : "fixe",
 										"ramp" : 20.0
@@ -12110,7 +12104,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 841.5, 60.0, 51.0, 19.0 ],
+									"patching_rect" : [ 841.5, 60.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -12137,7 +12131,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 841.5, 90.0, 99.0, 19.0 ],
+									"patching_rect" : [ 841.5, 90.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -12212,11 +12206,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 398.5, 329.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"loudspeakers" : 16
-									}
-,
+									"patching_rect" : [ 7.0, 398.5, 329.0, 20.0 ],
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -12742,7 +12732,7 @@
 									"destination" : [ "obj-26", 15 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 375.75, 555.0, 348.0, 555.0, 348.0, 453.0, 326.5, 453.0 ],
+									"midpoints" : [ 384.5, 555.0, 348.0, 555.0, 348.0, 453.0, 326.5, 453.0 ],
 									"source" : [ "obj-4", 0 ]
 								}
 
@@ -12762,7 +12752,7 @@
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 375.75, 235.0, 375.75, 235.0 ],
+									"midpoints" : [ 384.5, 235.0, 384.5, 235.0 ],
 									"source" : [ "obj-8", 0 ]
 								}
 
@@ -12809,7 +12799,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1014.0, 670.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -12857,93 +12847,100 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../Downloads",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"bootpath" : "/Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
-				"bootpath" : "/Applications/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/examples/gen",
+				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "yafr2.maxpat",
-				"bootpath" : "/Applications/Max 6.1/examples/effects/reverb/lib",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/examples/effects/reverb/lib",
+				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
+				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.projector~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.projector~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.recomposer~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.recomposer~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.recomposer.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.recomposer.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.scope~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.gain~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.gain~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.meter~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.decoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.map~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.map~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.map.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.map.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.encoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}

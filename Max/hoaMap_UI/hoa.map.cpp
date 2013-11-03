@@ -1363,7 +1363,7 @@ void hoamap_infos(t_hoamap *x)
     
     /* Sources */
     long numberOfSource = 0;
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         
         if(x->f_source_manager->sourceGetExistence(i))
@@ -1379,7 +1379,7 @@ void hoamap_infos(t_hoamap *x)
     avIndex = new t_atom[numberOfSource+2];
     atom_setsym(avIndex, gensym("source"));
     atom_setsym(avIndex+1, gensym("index"));
-    for(int i = 0, j = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
@@ -1392,7 +1392,7 @@ void hoamap_infos(t_hoamap *x)
     
     atom_setsym(avMute, gensym("source"));
     atom_setsym(avMute+1, gensym("mute"));
-    for(int i = 0; i < x->f_source_manager->getMaximumIndexOfSource(); i++)
+    for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
         {
@@ -1491,7 +1491,9 @@ void hoamap_paint(t_hoamap *x, t_object *view)
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	x->rect = rect;
     
-    /* Pas de groupes avec un nombre de source inférieur à 2 et pas de doublons de groupes */
+	x->f_source_manager->groupClean();
+	
+    /* Pas de groupes avec un nombre de source inférieur à 2 et pas de doublons de groupes *
     for(int i = 0; i < x->f_source_manager->getNumberOfGroups(); i++)
     {
         if (x->f_source_manager->groupGetExistence(i))
@@ -1527,7 +1529,7 @@ void hoamap_paint(t_hoamap *x, t_object *view)
                 }
             }
         }
-    }
+    }*/
     
 	draw_background(x, view, &rect);
     draw_sources(x, view, &rect);

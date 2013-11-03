@@ -779,11 +779,11 @@ long SourcesManager::groupGetNextIndex()
 
 void SourcesManager::groupClean()
 {
-    for(int i = 0; i < getNumberOfGroups(); i++)
+    for(int i = 0; i <= getNumberOfGroups(); i++)
     {
         if(groupGetExistence(i))
         {
-            for(int j = 0; j < getNumberOfGroups(); j++)
+            for(int j = 0; j <= getNumberOfGroups(); j++)
             {
                 if (i != j && groupGetExistence(j))
                 {
