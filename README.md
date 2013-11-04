@@ -14,7 +14,7 @@ Julien Colafrancesco, Pierre Guillot, Eliott Paris
 
 <a title="Cblas" href="http://www.netlib.org/clapack/cblas/" target="_blank">Cblas</a>, you can use Gsl, Apple Accelerate or Intel Composer XE.
 
-##### Licence : 
+##### License : 
 
 The Hoa Library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gpl.html" target="_blank">GNU Public License</a>. If you'd like to avoid the restrictions of the GPL and use Hoa Library for a closed-source product, you contact the <a title="CICM" href="http://cicm.mshparisnord.org/" target="_blank">CICM</a>.
 
