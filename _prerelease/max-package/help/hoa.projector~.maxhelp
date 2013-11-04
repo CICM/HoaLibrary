@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 742.0, 706.0 ],
+		"rect" : [ 101.0, 78.0, 742.0, 706.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 742.0, 680.0 ],
+						"rect" : [ 101.0, 104.0, 742.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -79,7 +79,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 472.0, 432.25, 45.0, 32.0 ],
+									"patching_rect" : [ 472.0, 432.25, 45.0, 33.0 ],
 									"text" : "Gains \n(0 - 1)"
 								}
 
@@ -94,7 +94,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 437.0, 239.5, 78.0, 32.0 ],
+									"patching_rect" : [ 437.0, 239.5, 78.0, 33.0 ],
 									"text" : "Delays in ms\n(0 - 5000)"
 								}
 
@@ -108,7 +108,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 16,
 									"outlettype" : [ "float", "float", "float", "float", "float", "float", "float", "float", "float", "float", "float", "float", "float", "float", "float", "float" ],
-									"patching_rect" : [ 9.166687, 293.0, 328.333313, 19.0 ],
+									"patching_rect" : [ 9.166687, 293.0, 328.333313, 20.0 ],
 									"text" : "unpack 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0."
 								}
 
@@ -122,7 +122,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 399.0, 352.0, 98.0, 19.0 ],
+									"patching_rect" : [ 399.0, 352.0, 98.0, 20.0 ],
 									"text" : "vexpr $f1 * 5000."
 								}
 
@@ -171,7 +171,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 9.166687, 396.0, 328.333313, 19.0 ],
+									"patching_rect" : [ 9.166687, 396.0, 328.333313, 20.0 ],
 									"text" : "hoa.space~ 16"
 								}
 
@@ -185,7 +185,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 9.166687, 322.0, 328.333313, 19.0 ],
+									"patching_rect" : [ 9.166687, 322.0, 328.333313, 20.0 ],
 									"text" : "hoa.plug~ 16 hoa.delay~ out"
 								}
 
@@ -200,7 +200,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 514.0, 13.0, 58.0, 19.0 ],
+									"patching_rect" : [ 514.0, 13.0, 58.0, 20.0 ],
 									"text" : "loadbang"
 								}
 
@@ -259,7 +259,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 9.166687, 161.0, 328.333313, 19.0 ],
+									"patching_rect" : [ 9.166687, 161.0, 328.333313, 20.0 ],
 									"saved_object_attributes" : 									{
 										"mode" : "cartesian",
 										"ramp" : 100.0
@@ -341,7 +341,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 8.0, 69.0, 483.0, 33.0 ],
+									"patching_rect" : [ 8.0, 69.0, 483.0, 34.0 ],
 									"text" : "hoa.projector~ discretizes the ambisonic soundfield into an array of virtual loudspeakers and gives a access to a new sound domain.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -371,7 +371,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 8.5, 431.0, 329.0, 19.0 ],
+									"patching_rect" : [ 8.5, 431.0, 329.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"mode" : "fixe",
 										"ramp" : 20.0
@@ -390,7 +390,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 9.166687, 230.0, 328.333313, 19.0 ],
+									"patching_rect" : [ 9.166687, 230.0, 328.333313, 20.0 ],
 									"text" : "hoa.projector~ 7 16"
 								}
 
@@ -516,7 +516,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 524.5, 13.0, 51.0, 19.0 ],
+									"patching_rect" : [ 524.5, 13.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -543,7 +543,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 524.5, 43.0, 99.0, 19.0 ],
+									"patching_rect" : [ 524.5, 43.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -1049,6 +1049,16 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-15", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-15", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 523.5, 609.0, 348.0, 609.0, 348.0, 393.0, 328.0, 393.0 ],
+									"source" : [ "obj-21", 0 ]
 								}
 
 							}
@@ -1632,107 +1642,114 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../../Downloads",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.soundcoat.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"bootpath" : "/Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../../Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.soundgrain.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../_prerelease/max-package/docs/refpages/hoa-ref",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
+				"patcherrelativepath" : "../docs/refpages/hoa-ref",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.delay~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
-				"patcherrelativepath" : "../../_prerelease/max-package/patchers/effects",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/patchers/effects",
+				"patcherrelativepath" : "../patchers/effects",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.projector~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.projector~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.recomposer~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.recomposer~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.scope~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.gain~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.gain~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.meter~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.decoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.map~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.map~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.map.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.map.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.plug~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.plug~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.space~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.space~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.space.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.space.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}

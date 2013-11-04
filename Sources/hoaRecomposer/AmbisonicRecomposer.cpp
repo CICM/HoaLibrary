@@ -226,8 +226,8 @@ AmbisonicRecomposer::~AmbisonicRecomposer()
 	
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
-        cicm_free(m_harmonics_matrix_float[i]);
-        cicm_free(m_harmonics_matrix_double[i]);
+        free(m_harmonics_matrix_float[i]);
+        free(m_harmonics_matrix_double[i]);
     }
 	free(m_harmonics_matrix_float);
 	free(m_harmonics_matrix_double);

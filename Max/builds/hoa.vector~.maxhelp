@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 91.0, 51.0, 840.0, 777.0 ],
+		"rect" : [ 133.0, 96.0, 840.0, 555.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 91.0, 77.0, 840.0, 751.0 ],
+						"rect" : [ 133.0, 122.0, 840.0, 529.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -79,7 +79,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 340.844971, 448.0, 129.155029, 19.0 ],
+									"patching_rect" : [ 340.844971, 448.0, 129.155029, 20.0 ],
 									"text" : "cartopol~"
 								}
 
@@ -106,7 +106,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 294.5, 556.5, 281.5, 47.0 ],
+									"patching_rect" : [ 294.5, 556.5, 281.5, 48.0 ],
 									"text" : "These values are the distances between the ideals radius and angles and the perceptives radius and angles",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -145,7 +145,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 790.0, 239.0, 640.0, 480.0 ],
+										"rect" : [ 578.0, 239.0, 640.0, 480.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -187,7 +187,11 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "float" ],
-													"patching_rect" : [ 136.935791, 100.0, 61.0, 19.0 ],
+													"patching_rect" : [ 136.935791, 100.0, 61.0, 20.0 ],
+													"saved_object_attributes" : 													{
+														"loadout" : 1
+													}
+,
 													"text" : "hoa.pi 0.5"
 												}
 
@@ -201,7 +205,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 123.435791, 145.5, 32.5, 19.0 ],
+													"patching_rect" : [ 123.435791, 145.5, 32.5, 20.0 ],
 													"text" : "+~"
 												}
 
@@ -215,7 +219,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 2,
 													"outlettype" : [ "signal", "signal" ],
-													"patching_rect" : [ 50.0, 172.5, 92.435791, 19.0 ],
+													"patching_rect" : [ 50.0, 172.5, 92.435791, 20.0 ],
 													"text" : "poltocar~"
 												}
 
@@ -342,7 +346,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 39.748627, 454.5, 240.346313, 19.0 ],
+									"patching_rect" : [ 39.748627, 454.5, 240.346313, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -378,7 +382,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 781.0, 72.0, 640.0, 480.0 ],
+										"rect" : [ 408.0, 113.0, 640.0, 480.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -406,7 +410,11 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "float" ],
-													"patching_rect" : [ 143.5, 100.0, 61.0, 19.0 ],
+													"patching_rect" : [ 143.5, 100.0, 61.0, 20.0 ],
+													"saved_object_attributes" : 													{
+														"loadout" : 1
+													}
+,
 													"text" : "hoa.pi 0.5"
 												}
 
@@ -420,7 +428,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 130.0, 142.0, 32.5, 19.0 ],
+													"patching_rect" : [ 130.0, 142.0, 32.5, 20.0 ],
 													"text" : "+~"
 												}
 
@@ -434,7 +442,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 142.0, 42.0, 19.0 ],
+													"patching_rect" : [ 50.0, 142.0, 42.0, 20.0 ],
 													"text" : "sig~ 1"
 												}
 
@@ -448,7 +456,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 2,
 													"outlettype" : [ "signal", "signal" ],
-													"patching_rect" : [ 50.0, 172.5, 99.0, 19.0 ],
+													"patching_rect" : [ 50.0, 172.5, 99.0, 20.0 ],
 													"text" : "poltocar~"
 												}
 
@@ -545,7 +553,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 39.748627, 427.5, 240.0, 19.0 ],
+									"patching_rect" : [ 39.748627, 427.5, 240.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -581,7 +589,7 @@
 											"architecture" : "x64"
 										}
 ,
-										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
+										"rect" : [ 33.0, 75.0, 640.0, 480.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -609,7 +617,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 100.0, 37.0, 19.0 ],
+													"patching_rect" : [ 50.0, 100.0, 37.0, 20.0 ],
 													"text" : "!-~ 1."
 												}
 
@@ -659,7 +667,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 342.344971, 490.5, 56.0, 19.0 ],
+									"patching_rect" : [ 342.344971, 490.5, 56.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -752,7 +760,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 246.0, 32.5, 19.0 ],
+													"patching_rect" : [ 50.0, 246.0, 32.5, 20.0 ],
 													"text" : "/~"
 												}
 
@@ -766,7 +774,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 173.0, 34.0, 19.0 ],
+													"patching_rect" : [ 50.0, 173.0, 34.0, 20.0 ],
 													"text" : "+~ 1"
 												}
 
@@ -780,7 +788,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 169.75, 143.0, 59.0, 19.0 ],
+													"patching_rect" : [ 144.5, 135.0, 59.0, 20.0 ],
 													"text" : "hoa.pi~ 2"
 												}
 
@@ -794,7 +802,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 130.75, 182.0, 32.5, 19.0 ],
+													"patching_rect" : [ 99.0, 157.0, 32.5, 20.0 ],
 													"text" : "+~"
 												}
 
@@ -808,7 +816,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 137.0, 44.0, 19.0 ],
+													"patching_rect" : [ 50.0, 137.0, 44.0, 20.0 ],
 													"text" : "<=~ 0."
 												}
 
@@ -822,7 +830,7 @@
 													"numinlets" : 3,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 206.0, 68.0, 19.0 ],
+													"patching_rect" : [ 50.0, 206.0, 68.0, 20.0 ],
 													"text" : "selector~ 2"
 												}
 
@@ -836,7 +844,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 74.0, 90.0, 32.5, 19.0 ],
+													"patching_rect" : [ 74.0, 90.0, 32.5, 20.0 ],
 													"text" : "-~"
 												}
 
@@ -988,7 +996,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 452.0, 490.5, 49.0, 19.0 ],
+									"patching_rect" : [ 452.0, 490.5, 49.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -1017,7 +1025,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 444.5, 311.0, 288.0, 19.0 ]
+									"patching_rect" : [ 444.5, 311.0, 288.0, 20.0 ]
 								}
 
 							}
@@ -1031,7 +1039,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 444.5, 342.5, 170.594971, 19.0 ]
+									"patching_rect" : [ 444.5, 342.5, 170.594971, 20.0 ]
 								}
 
 							}
@@ -1045,7 +1053,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 444.5, 249.0, 175.0, 19.0 ]
+									"patching_rect" : [ 444.5, 249.0, 175.0, 20.0 ]
 								}
 
 							}
@@ -1059,7 +1067,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 444.5, 150.0, 281.5, 60.0 ],
+									"patching_rect" : [ 444.5, 150.0, 281.5, 62.0 ],
 									"text" : "Vector is usefull to caracterize the sound field degradation. Use different configuration, optimization etc.. to see difference between resitutions.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -1090,7 +1098,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 444.5, 220.0, 168.0, 19.0 ]
+									"patching_rect" : [ 444.5, 220.0, 168.0, 20.0 ]
 								}
 
 							}
@@ -1104,7 +1112,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 444.5, 280.0, 150.0, 19.0 ]
+									"patching_rect" : [ 444.5, 280.0, 150.0, 20.0 ]
 								}
 
 							}
@@ -1117,7 +1125,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 299.0, 239.540085, 19.0 ],
+									"patching_rect" : [ 40.09494, 299.0, 239.540085, 20.0 ],
 									"saved_object_attributes" : 									{
 										"optim" : "inPhase"
 									}
@@ -1136,7 +1144,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 342.344971, 523.5, 66.5, 19.0 ],
+									"patching_rect" : [ 342.344971, 523.5, 66.5, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -1151,7 +1159,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 452.0, 523.5, 66.5, 19.0 ],
+									"patching_rect" : [ 452.0, 523.5, 66.5, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -1176,7 +1184,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 39.75, 174.0, 42.0, 19.0 ],
+									"patching_rect" : [ 39.75, 174.0, 42.0, 20.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -1205,7 +1213,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 261.09494, 189.0, 59.0, 19.0 ],
+									"patching_rect" : [ 261.09494, 189.0, 59.0, 20.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -1219,7 +1227,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 301.09494, 160.0, 72.0, 19.0 ],
+									"patching_rect" : [ 301.09494, 160.0, 72.0, 20.0 ],
 									"text" : "phasor~ 0.2"
 								}
 
@@ -1233,7 +1241,7 @@
 									"numinlets" : 5,
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 383.5, 239.540085, 19.0 ],
+									"patching_rect" : [ 40.09494, 383.5, 239.540085, 20.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"channels" : 5,
@@ -1282,7 +1290,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 62.0, 669.0, 47.0 ],
+									"patching_rect" : [ 7.0, 62.0, 669.0, 48.0 ],
 									"text" : "hoa.vector~ display the coordinates of the velocity vector and the energy vector that caracterize a sound field. It's an useful tool to analyse restitution quality For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -1312,7 +1320,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 39.75, 235.0, 240.34494, 19.0 ],
+									"patching_rect" : [ 39.75, 235.0, 240.34494, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -1327,7 +1335,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 5,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 40.09494, 334.0, 239.540085, 32.0 ],
+									"patching_rect" : [ 40.09494, 334.0, 239.540085, 33.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"autoconnect" : 1,
@@ -1511,7 +1519,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 301.09494, 126.0, 50.0, 19.0 ]
+									"patching_rect" : [ 301.09494, 126.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -2202,7 +2210,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 840.0, 751.0 ],
+						"rect" : [ 0.0, 26.0, 840.0, 529.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2247,7 +2255,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 322.591675, 414.5, 91.799988, 19.0 ],
+									"patching_rect" : [ 322.591675, 414.5, 91.799988, 20.0 ],
 									"text" : "Energy vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -2262,7 +2270,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 175.258362, 414.5, 94.725014, 19.0 ],
+									"patching_rect" : [ 175.258362, 414.5, 94.725014, 20.0 ],
 									"text" : "Velocity vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -2317,7 +2325,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 454.5, 353.0, 42.0, 19.0 ],
+									"patching_rect" : [ 454.5, 353.0, 42.0, 20.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -2334,7 +2342,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 454.5, 243.0, 50.0, 19.0 ]
+									"patching_rect" : [ 454.5, 243.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -2348,7 +2356,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 510.5, 243.0, 266.0, 33.0 ],
+									"patching_rect" : [ 510.5, 243.0, 266.0, 34.0 ],
 									"text" : "The radius of the vector caracterize the angular resolution of a source.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[3]"
@@ -2389,7 +2397,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 174.75, 174.0, 42.0, 19.0 ],
+									"patching_rect" : [ 174.75, 174.0, 42.0, 20.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -2404,7 +2412,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 465.75, 580.0, 260.0, 87.0 ],
+									"patching_rect" : [ 465.75, 580.0, 260.0, 89.0 ],
 									"text" : "The velocity vector (blue) caracterize th phase propagation.\nThe energy vector (red) gives the \"perceptive\" direction of the source.\nThe signal vector (green) gives the \"ideal\" direction of the source.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -2435,7 +2443,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 454.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 454.5, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -2450,7 +2458,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 534.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 534.5, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -2464,7 +2472,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 454.5, 414.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 414.5, 99.0, 20.0 ],
 									"text" : "Signal vector :"
 								}
 
@@ -2492,7 +2500,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 454.5, 383.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 383.5, 99.0, 20.0 ],
 									"text" : "poltocar~"
 								}
 
@@ -2550,7 +2558,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 381.338623, 204.0, 59.0, 19.0 ],
+									"patching_rect" : [ 381.338623, 204.0, 59.0, 20.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -2564,7 +2572,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 174.75, 303.0, 240.34494, 19.0 ],
+									"patching_rect" : [ 174.75, 303.0, 240.34494, 20.0 ],
 									"text" : "hoa.wider~ 7"
 								}
 
@@ -2578,7 +2586,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 421.338623, 175.0, 72.0, 19.0 ],
+									"patching_rect" : [ 421.338623, 175.0, 72.0, 20.0 ],
 									"text" : "phasor~ 0.2"
 								}
 
@@ -2607,7 +2615,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 396.258362, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 396.258362, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -2622,7 +2630,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 322.591675, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 322.591675, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -2637,7 +2645,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 248.925034, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 248.925034, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -2652,7 +2660,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 175.449997, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 175.449997, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -2666,7 +2674,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 175.09494, 377.5, 240.0, 19.0 ],
+									"patching_rect" : [ 175.09494, 377.5, 240.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"channels" : 16,
@@ -2715,7 +2723,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 62.0, 669.0, 47.0 ],
+									"patching_rect" : [ 7.0, 62.0, 669.0, 48.0 ],
 									"text" : "hoa.vector~ display the coordinates of the velocity vector and the energy vector that caracterize a soundfield.it's an useful tool to analyse restitution quality For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -2745,7 +2753,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 174.75, 235.0, 225.588638, 19.0 ],
+									"patching_rect" : [ 174.75, 235.0, 225.588638, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -2759,7 +2767,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 175.09494, 334.0, 240.0, 19.0 ],
+									"patching_rect" : [ 175.09494, 334.0, 240.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -2943,7 +2951,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 421.338623, 141.0, 50.0, 19.0 ]
+									"patching_rect" : [ 421.338623, 141.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -3645,7 +3653,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 840.0, 751.0 ],
+						"rect" : [ 0.0, 26.0, 840.0, 529.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3698,7 +3706,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 174.75, 174.0, 42.0, 19.0 ],
+									"patching_rect" : [ 174.75, 174.0, 42.0, 20.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -3713,7 +3721,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 465.75, 580.0, 260.0, 87.0 ],
+									"patching_rect" : [ 465.75, 580.0, 260.0, 89.0 ],
 									"text" : "The velocity vector (blue) caracterize the phase propagation.\nThe energy vector (red) gives the \"perceptive\" direction of the source.\nThe signal vector (green) gives the \"ideal\" direction of the source.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[2]"
@@ -3743,7 +3751,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 454.5, 350.0, 42.0, 19.0 ],
+									"patching_rect" : [ 454.5, 350.0, 42.0, 20.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -3758,7 +3766,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 454.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 454.5, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -3773,7 +3781,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 534.5, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 534.5, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -3787,7 +3795,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 454.5, 414.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 414.5, 99.0, 20.0 ],
 									"text" : "Signal vector :"
 								}
 
@@ -3815,7 +3823,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 454.5, 383.5, 99.0, 19.0 ],
+									"patching_rect" : [ 454.5, 383.5, 99.0, 20.0 ],
 									"text" : "poltocar~"
 								}
 
@@ -3873,7 +3881,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 395.75, 203.0, 59.0, 19.0 ],
+									"patching_rect" : [ 395.75, 203.0, 59.0, 20.0 ],
 									"text" : "hoa.pi~ 2"
 								}
 
@@ -3887,7 +3895,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 322.591675, 414.5, 91.799988, 19.0 ],
+									"patching_rect" : [ 322.591675, 414.5, 91.799988, 20.0 ],
 									"text" : "Energy vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -3902,7 +3910,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 175.258362, 414.5, 94.725014, 19.0 ],
+									"patching_rect" : [ 175.258362, 414.5, 94.725014, 20.0 ],
 									"text" : "Velocity vector :",
 									"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 								}
@@ -3917,7 +3925,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 174.75, 303.0, 240.0, 19.0 ],
+									"patching_rect" : [ 174.75, 303.0, 240.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"optim" : "inPhase"
 									}
@@ -3935,7 +3943,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 435.75, 174.0, 72.0, 19.0 ],
+									"patching_rect" : [ 435.75, 174.0, 72.0, 20.0 ],
 									"text" : "phasor~ 0.2"
 								}
 
@@ -3964,7 +3972,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 396.258362, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 396.258362, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -3979,7 +3987,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 322.591675, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 322.591675, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -3994,7 +4002,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 248.925034, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 248.925034, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -4009,7 +4017,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "float" ],
-									"patching_rect" : [ 175.449997, 448.5, 56.0, 19.0 ],
+									"patching_rect" : [ 175.449997, 448.5, 56.0, 20.0 ],
 									"sig" : 0.0
 								}
 
@@ -4023,7 +4031,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 4,
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 175.258362, 377.5, 239.754868, 19.0 ],
+									"patching_rect" : [ 175.258362, 377.5, 239.754868, 20.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"channels" : 16,
@@ -4072,7 +4080,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 7.0, 62.0, 669.0, 47.0 ],
+									"patching_rect" : [ 7.0, 62.0, 669.0, 48.0 ],
 									"text" : "hoa.vector~ displays the coordinates of the velocity vector and the energy vector that characterize a sound field. It's an useful tool to analyse restitution quality. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -4102,7 +4110,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 174.75, 235.0, 240.000015, 19.0 ],
+									"patching_rect" : [ 174.75, 235.0, 240.000015, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -4116,7 +4124,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 175.09494, 334.0, 240.0, 19.0 ],
+									"patching_rect" : [ 175.09494, 334.0, 240.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -4300,7 +4308,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 435.75, 140.0, 50.0, 19.0 ]
+									"patching_rect" : [ 435.75, 140.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -5002,7 +5010,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 840.0, 751.0 ],
+						"rect" : [ 0.0, 26.0, 840.0, 529.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -5050,53 +5058,64 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../../Downloads",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.decoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.encoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.vector~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.vector~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.optim~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.optim~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.wider~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.wider~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.meter~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
-				"type" : "iLaX"
+				"name" : "attrui.mxe64",
+				"type" : "mx64"
+			}
+, 			{
+				"name" : "hoa.pi.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}
