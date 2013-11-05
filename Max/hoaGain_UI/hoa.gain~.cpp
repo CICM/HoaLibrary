@@ -46,7 +46,7 @@ extern "C" {
 #include "z_dsp.h"
 
 #ifdef WIN_VERSION
-	#include <float.h>
+	//#include <float.h>
 #endif
 }
 
@@ -98,7 +98,7 @@ typedef struct _hoaGain
     float       f_range[2];
     double      j_valdB;
     double      j_defaultValuedB;
-    double		f_gain[16384];
+    double*		f_gain;
     //inputs/output
     void*       f_inlet_val;
     void*       f_outlet_infos;
@@ -174,8 +174,7 @@ int C74_EXPORT main()
 
 	c = class_new("hoa.gain~", (method)hoaGain_new, (method)hoaGain_free, sizeof(t_hoaGain), (method)NULL, A_GIMME, 0L);
 
-	c->c_flags |= CLASS_FLAG_NEWDICTIONARY; // to specify dictionary constructor
-
+	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
     class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_FIXWIDTH | JBOX_COLOR );
     
@@ -321,7 +320,7 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
     x->j_defaultValuedB = 0;
     x->j_valdB = x->j_defaultValuedB;
     x->f_interp = 20;
-    
+    x->f_gain = new double[16384];
     x->f_numberOfChannels = 8;
     
     //dictionary_getlong(d, gensym("channels"), &x->f_numberOfChannels); // make sure we have the number of inputs before set up other args.
@@ -494,6 +493,7 @@ void hoaGain_free(t_hoaGain *x)
     dsp_freejbox((t_pxjbox *)x);
 	jbox_free((t_jbox *)x);
     delete x->f_amp;
+	free(x->f_gain);
 }
 
 /* DSP ------------------------------------- */

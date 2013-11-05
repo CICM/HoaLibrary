@@ -178,18 +178,26 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 
 #ifdef WIN64
 		HMODULE handle = LoadLibrary("hoa.decoder~.mxe64");
-#else
-		HMODULE handle = LoadLibrary("hoa.decoder~.mxe");
-#endif
 		char bundle_path[512];
 		GetModuleFileName(handle, bundle_path, 512);
         std::string absoluteHrtfFilePath = std::string((const char*)bundle_path);
 		absoluteHrtfFilePath.erase(absoluteHrtfFilePath.size()-18, 18);
 		absoluteHrtfFilePath.append("HrtfDatabase/");
 		FreeLibrary(handle);
+
+#else
+		HMODULE handle = LoadLibrary("hoa.decoder~.mxe");
+		char bundle_path[512];
+		GetModuleFileName(handle, bundle_path, 512);
+        std::string absoluteHrtfFilePath = std::string((const char*)bundle_path);
+		absoluteHrtfFilePath.erase(absoluteHrtfFilePath.size()-16, 16);
+		absoluteHrtfFilePath.append("HrtfDatabase/");
+		FreeLibrary(handle);
+		
+#endif
 #endif
 		x->f_AmbisonicsDecoder	= new AmbisonicsMultiDecoder(order, x->f_number_of_loudspeakers, Hoa_Dec_Ambisonic, Hoa_Small, absoluteHrtfFilePath, sys_getblksize(), sys_getsr());
-        
+
 		for(int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfLoudspeakers(); i++)
             x->f_angles_of_loudspeakers[i] = x->f_AmbisonicsDecoder->getLoudspeakerAngle(i);
 		
