@@ -27,24 +27,17 @@
 #ifndef DEF_AMBISONICSVIRTUALMICUIMANAGER
 #define DEF_AMBISONICSVIRTUALMICUIMANAGER
 
-
-#define MAX_MICS 64
-#define MIN_MICS 3
-#define DEF_MICS 8
-
 #include "AmbisonicVirtualMicUI.h"
 
 class AmbisonicVirtualMicUIManager
 {
 private:
-    long m_numberOfMics;
-    AmbisonicVirtualMicUI m_mic[MAX_MICS];
+    vector <AmbisonicVirtualMicUI*> m_mic;
     double* m_defaultAngles;
     double  m_fisheyeStep;
     double  m_fisheyeDestAngleInRadian;
-    double  m_distanceBetweenTwoDefMics;
     
-    inline int safeIndex(const int _index) {return Tools::clip(_index, 0, MAX_MICS-1);}
+    inline int safeIndex(const int _index) {return Tools::clip(_index, 0, m_mic.size()-1);}
     double radianInterp(double _step, double _startRad, double _endRad);
     void setDefaultAngles();
 public:
@@ -80,32 +73,32 @@ public:
     double        getClosestDefMicDistance(double _angleInRadian);
     int           getClosestMicIndex(double _angleInRadian); // non implemented
     int           getFarthestMicIndex(double _angleInRadian); // non implemented
-    inline double getDistanceBetweenTwoDefMics() { return m_distanceBetweenTwoDefMics; }
+    inline double getDistanceBetweenTwoDefMics() { return CICM_2PI / (double)m_mic.size(); }
     inline double getFisheyeDestAngle() { return m_fisheyeDestAngleInRadian; }
-    inline long   getNumberOfMics(){ return m_numberOfMics; }
+    inline long   getNumberOfMics(){ return m_mic.size(); }
     inline double getFisheyeStep() { return m_fisheyeStep; }
-    inline bool   isSelected(const int _micIndex) {return m_mic[safeIndex(_micIndex)].isSelected(); }
-    inline double getDistance(const int _micIndex) {return m_mic[safeIndex(_micIndex)].getDistance(); }
-    inline double getAngleInRadian(const int _micIndex) {return m_mic[safeIndex(_micIndex)].getAngleInRadian(); }
-    inline double getAngleInDegree(const int _micIndex) {return m_mic[safeIndex(_micIndex)].getAngleInDegree(); }
-    inline double getWiderValue(const int _micIndex) {return m_mic[safeIndex(_micIndex)].getWiderValue(); }
-    inline double getFisheyeStartAngle(const int _micIndex) { return m_mic[safeIndex(_micIndex)].getFisheyeStartAngle(); }
-    inline double getAbscissa(const int _micIndex) {return m_mic[safeIndex(_micIndex)].getAbscissa(); }
-    inline double getOrdinate(const int _micIndex) {return m_mic[safeIndex(_micIndex)].getOrdinate(); }
+    inline bool   isSelected(const int _micIndex) {return m_mic[safeIndex(_micIndex)]->isSelected(); }
+    inline double getDistance(const int _micIndex) {return m_mic[safeIndex(_micIndex)]->getDistance(); }
+    inline double getAngleInRadian(const int _micIndex) {return m_mic[safeIndex(_micIndex)]->getAngleInRadian(); }
+    inline double getAngleInDegree(const int _micIndex) {return m_mic[safeIndex(_micIndex)]->getAngleInDegree(); }
+    inline double getWiderValue(const int _micIndex) {return m_mic[safeIndex(_micIndex)]->getWiderValue(); }
+    inline double getFisheyeStartAngle(const int _micIndex) { return m_mic[safeIndex(_micIndex)]->getFisheyeStartAngle(); }
+    inline double getAbscissa(const int _micIndex) {return m_mic[safeIndex(_micIndex)]->getAbscissa(); }
+    inline double getOrdinate(const int _micIndex) {return m_mic[safeIndex(_micIndex)]->getOrdinate(); }
     
     //viewer :
-    inline double  getBiggestContribution(const int _micIndex) { return m_mic[safeIndex(_micIndex)].getBiggestContribution(); }
-	inline long    getBiggestContributionIndex(const int _micIndex) { return m_mic[safeIndex(_micIndex)].getBiggestContributionIndex(); }
-	inline double  getContributions(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)].getContributions(anIndex); }
-	inline double  getAbscisseValue(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)].getAbscisseValue(anIndex); }
-	inline double  getOrdinateValue(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)].getOrdinateValue(anIndex); }
-	inline int     getColor(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)].getColor(anIndex); }
-	inline double  getBiggestDistance(const int _micIndex) { return m_mic[safeIndex(_micIndex)].getBiggestDistance(); }
-	inline long    getBiggestDistanceIndex1(const int _micIndex) { return m_mic[safeIndex(_micIndex)].getBiggestDistanceIndex1(); }
-	inline long    getBiggestDistanceIndex2(const int _micIndex) { return m_mic[safeIndex(_micIndex)].getBiggestDistanceIndex2(); }
-    inline long    getBiggestLobeNbPoint(const int _micIndex) { return m_mic[safeIndex(_micIndex)].getBiggestLobeNbPoint(); }
-    inline double  getBiggestLobe_x(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)].getBiggestLobe_x(anIndex); }
-    inline double  getBiggestLobe_y(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)].getBiggestLobe_y(anIndex); }
+    inline double  getBiggestContribution(const int _micIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestContribution(); }
+	inline long    getBiggestContributionIndex(const int _micIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestContributionIndex(); }
+	inline double  getContributions(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)]->getContributions(anIndex); }
+	inline double  getAbscisseValue(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)]->getAbscisseValue(anIndex); }
+	inline double  getOrdinateValue(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)]->getOrdinateValue(anIndex); }
+	inline int     getColor(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)]->getColor(anIndex); }
+	inline double  getBiggestDistance(const int _micIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestDistance(); }
+	inline long    getBiggestDistanceIndex1(const int _micIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestDistanceIndex1(); }
+	inline long    getBiggestDistanceIndex2(const int _micIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestDistanceIndex2(); }
+    inline long    getBiggestLobeNbPoint(const int _micIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestLobeNbPoint(); }
+    inline double  getBiggestLobe_x(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestLobe_x(anIndex); }
+    inline double  getBiggestLobe_y(const int _micIndex, long anIndex) { return m_mic[safeIndex(_micIndex)]->getBiggestLobe_y(anIndex); }
 };
 
 #endif /* defined(__hoa_recomposer__AmbisonicVirtualMicManager__) */

@@ -2090,7 +2090,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		// Angle
 #ifdef _WINDOWS
 		if(modifiers == 24) // Alt
-#elif
+#else
 		if(modifiers == 148 || modifiers == 404)
 #endif
 			x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
@@ -2098,14 +2098,14 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		 // Radius
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift
-#elif
+#else
 		else if(modifiers == 18 || modifiers == 274)
 #endif
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
 		 // Angle + radius
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift
-#elif
+#else
 		else if (modifiers == 17)
 #endif
         {
@@ -2126,21 +2126,21 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 		// Angle
 #ifdef _WINDOWS
 		if(modifiers == 24) // Alt
-#elif
+#else
 		if(modifiers == 148 || modifiers == 404)
 #endif
             x->f_source_manager->groupSetRelativeAngle(x->f_index_of_selected_group, Tools::angle(cursor.x, cursor.y));
 		 // Radius
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift
-#elif
+#else
 		else if(modifiers == 18 || modifiers == 274)
 #endif
             x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y));
 		 // Angle + radius
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift
-#elif
+#else
 		else if (modifiers == 17)
 #endif
             x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y), Tools::angle(cursor.x, cursor.y));
@@ -2283,8 +2283,8 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
     int filter = 0;
 
 #ifdef _WINDOWS
-	if (keycode == 97 && modifiers == 5 && textcharacter == 1) // COntrol + a
-#elif
+	if (keycode == 97 && modifiers == 5 && textcharacter == 1) // Control + a
+#else
 	if (keycode == 97 && modifiers == 1 && textcharacter == 0) //cmd+a
 #endif
     {

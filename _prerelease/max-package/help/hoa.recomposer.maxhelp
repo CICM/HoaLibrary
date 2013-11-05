@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 42.0, 929.0, 650.0 ],
+		"rect" : [ 100.0, 100.0, 929.0, 650.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -745,7 +745,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 841.5, 60.0, 51.0, 20.0 ],
+									"patching_rect" : [ 841.5, 60.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -772,7 +772,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 841.5, 90.0, 99.0, 20.0 ],
+									"patching_rect" : [ 841.5, 90.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -6336,7 +6336,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 515.285767, 89.0, 51.0, 20.0 ],
+									"patching_rect" : [ 515.285767, 89.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -6363,7 +6363,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 515.285767, 119.0, 99.0, 20.0 ],
+									"patching_rect" : [ 515.285767, 119.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -8219,7 +8219,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u724000537"
+									"varname" : "u404000595"
 								}
 
 							}
@@ -8448,7 +8448,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 68.0, 929.0, 624.0 ],
+						"rect" : [ 100.0, 126.0, 929.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -11692,7 +11692,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 7.0, 308.0, 329.0, 20.0 ],
+									"patching_rect" : [ 7.0, 308.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -11790,7 +11790,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 572.0, 264.0, 34.0 ],
+									"patching_rect" : [ 722.5, 572.0, 264.0, 33.0 ],
 									"text" : "Press cmd key when you drag to activate magnetism on dragged microphone.",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11806,7 +11806,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 525.0, 264.0, 34.0 ],
+									"patching_rect" : [ 722.5, 525.0, 264.0, 33.0 ],
 									"text" : "doubleclick on a mic to set it to the closest default mic angle.",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11822,7 +11822,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 381.5, 274.0, 131.0 ],
+									"patching_rect" : [ 722.5, 381.5, 274.0, 127.0 ],
 									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect (alt+move for win).\n - ctrl+click : lock fisheye start and destination angles value for the selected mics (alt+click for win).\n - ctrl + drag : apply a \"fisheye effect\" to the selected microphones (drag from/to ficheye point from/to center of the circle) (alt+drag for win)",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11838,7 +11838,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 246.0, 268.0, 34.0 ],
+									"patching_rect" : [ 722.5, 246.0, 268.0, 33.0 ],
 									"text" : "Change Microphones Wider value :\n - shift+drag : change selected mics wider value",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11854,7 +11854,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 198.0, 265.5, 34.0 ],
+									"patching_rect" : [ 722.5, 198.0, 265.5, 33.0 ],
 									"text" : "Move Microphones :\n - drag : Move selected mics angles",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11870,7 +11870,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 293.0, 266.0, 75.0 ],
+									"patching_rect" : [ 722.5, 293.0, 266.0, 74.0 ],
 									"text" : "Select Microphones :\n - cmd+a : select All (ctrl+a for win)\n - cmd+drag : rect selection (ctrl+drag for win)\n - cmd+click on a mic to change this mic selection state (ctrl+click for win)",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11953,9 +11953,9 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 456.0, 329.0, 20.0 ],
+									"patching_rect" : [ 7.0, 456.0, 329.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"mode" : "fixe",
+										"mode" : "free",
 										"ramp" : 20.0
 									}
 ,
@@ -12085,7 +12085,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 841.5, 60.0, 51.0, 20.0 ],
+									"patching_rect" : [ 841.5, 60.0, 51.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -12112,7 +12112,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 841.5, 90.0, 99.0, 20.0 ],
+									"patching_rect" : [ 841.5, 90.0, 99.0, 19.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -12187,7 +12187,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 398.5, 329.0, 20.0 ],
+									"patching_rect" : [ 7.0, 398.5, 329.0, 19.0 ],
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -12856,100 +12856,93 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa-icon-45.png",
-				"bootpath" : "/Users/Pierre/Downloads",
-				"patcherrelativepath" : "../../../../../Downloads",
-				"type" : "PNG ",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
-				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/examples/gen",
+				"bootpath" : "/Applications/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "yafr2.maxpat",
-				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
-				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
+				"bootpath" : "/Applications/Max 6.1/examples/effects/reverb/lib",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/examples/effects/reverb/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.projector~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.projector~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.connect.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.connect.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.recomposer~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.recomposer~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.recomposer.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.recomposer.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.scope~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.scope~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.gain~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.gain~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.meter~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.meter~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.decoder~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.map~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.map~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.map.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.map.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.encoder~.mxo",
+				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.pi.mxe64",
-				"type" : "mx64"
+				"name" : "hoa.pi.mxo",
+				"type" : "iLaX"
 			}
  ]
 	}
