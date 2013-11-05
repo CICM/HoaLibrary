@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 100.0, 100.0, 838.0, 702.0 ],
+		"rect" : [ 0.0, 42.0, 1366.0, 650.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -342,7 +342,11 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "float" ],
-													"patching_rect" : [ 65.0, 125.0, 52.0, 19.0 ],
+													"patching_rect" : [ 65.0, 125.0, 52.0, 20.0 ],
+													"saved_object_attributes" : 													{
+														"loadout" : 1
+													}
+,
 													"text" : "hoa.pi 2"
 												}
 
@@ -356,7 +360,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 150.0, 33.5, 19.0 ],
+													"patching_rect" : [ 50.0, 150.0, 33.5, 20.0 ],
 													"text" : "*~"
 												}
 
@@ -370,7 +374,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 100.0, 72.0, 19.0 ],
+													"patching_rect" : [ 50.0, 100.0, 72.0, 20.0 ],
 													"text" : "phasor~ 0.2"
 												}
 
@@ -509,7 +513,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 141.0, 624.0, 67.0, 32.0 ],
+									"patching_rect" : [ 141.0, 624.0, 67.0, 33.0 ],
 									"text" : "Velocity \nvector (x/y)",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -539,7 +543,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 36.0, 624.0, 67.0, 32.0 ],
+									"patching_rect" : [ 36.0, 624.0, 67.0, 33.0 ],
 									"text" : "Energy \nvector (x/y)",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -568,7 +572,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 330.0, 535.0, 208.0, 19.0 ],
+									"patching_rect" : [ 330.0, 535.0, 208.0, 20.0 ],
 									"text" : "Peak values for each metering interval",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -696,7 +700,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 524.0, 33.0 ],
+									"patching_rect" : [ 4.0, 73.0, 524.0, 34.0 ],
 									"text" : "hoa.meter~ outputs in the left outlet a list of cartesians coordinates coresponding to the two different computed vectors, and in the right outlet the Peak values for each metering interval.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -957,7 +961,11 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "float" ],
-													"patching_rect" : [ 65.0, 125.0, 52.0, 19.0 ],
+													"patching_rect" : [ 65.0, 125.0, 52.0, 20.0 ],
+													"saved_object_attributes" : 													{
+														"loadout" : 1
+													}
+,
 													"text" : "hoa.pi 2"
 												}
 
@@ -971,7 +979,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 150.0, 33.5, 19.0 ],
+													"patching_rect" : [ 50.0, 150.0, 33.5, 20.0 ],
 													"text" : "*~"
 												}
 
@@ -985,7 +993,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 100.0, 72.0, 19.0 ],
+													"patching_rect" : [ 50.0, 100.0, 72.0, 20.0 ],
 													"text" : "phasor~ 0.2"
 												}
 
@@ -1743,7 +1751,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1786,7 +1794,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 401.0, 345.0, 234.0, 33.0 ],
+									"patching_rect" : [ 401.0, 345.0, 234.0, 34.0 ],
 									"text" : "Other attributes are exclusive to the hoa.meter~ :",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -1830,7 +1838,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 397.0, 137.0, 234.0, 33.0 ],
+									"patching_rect" : [ 397.0, 137.0, 234.0, 34.0 ],
 									"text" : "hoa.decoder~ and hoa.meters are linked together, they share attributes together :",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -1860,7 +1868,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 401.0, 541.5, 100.0, 33.0 ],
+									"patching_rect" : [ 401.0, 541.5, 100.0, 34.0 ],
 									"text" : "Rotation of loudspeakers",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -1906,7 +1914,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 401.0, 273.0, 140.0, 33.0 ],
+									"patching_rect" : [ 401.0, 273.0, 140.0, 34.0 ],
 									"text" : "Angles of loudspeakers (in degrees) : ",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -1966,7 +1974,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 401.0, 192.0, 132.0, 33.0 ],
+									"patching_rect" : [ 401.0, 192.0, 132.0, 34.0 ],
 									"text" : "Number of loudspeakers (1 - 64) : ",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -1982,7 +1990,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 401.0, 466.5, 100.0, 33.0 ],
+									"patching_rect" : [ 401.0, 466.5, 100.0, 34.0 ],
 									"text" : "Refresh Interval \n(ms) :",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -1998,7 +2006,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 401.0, 391.5, 132.0, 33.0 ],
+									"patching_rect" : [ 401.0, 391.5, 132.0, 34.0 ],
 									"text" : "Offset of loudspeakers (-180°  180°) : ",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -2052,7 +2060,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 558.0, 33.0 ],
+									"patching_rect" : [ 4.0, 73.0, 558.0, 34.0 ],
 									"text" : "hoa.meter~ displays the peak levels for a circurlar array of loudspeakers. It computes and displays the energy and velocity vectors.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -2095,6 +2103,7 @@
 									"drawvector" : 3,
 									"energycolor" : [ 0.0, 0.054688, 0.875, 1.0 ],
 									"id" : "obj-4",
+									"interval" : 26,
 									"loudspeakers" : 5,
 									"maxclass" : "hoa.meter~",
 									"numinlets" : 5,
@@ -2116,7 +2125,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 30.0, 256.0, 250.0, 19.0 ],
+									"patching_rect" : [ 30.0, 256.0, 250.0, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -2131,7 +2140,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 261.0, 131.0, 80.0, 19.0 ],
+									"patching_rect" : [ 261.0, 131.0, 80.0, 20.0 ],
 									"text" : "loadmess 0.1"
 								}
 
@@ -2146,7 +2155,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 261.0, 151.0, 50.0, 19.0 ]
+									"patching_rect" : [ 261.0, 151.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -2159,7 +2168,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 261.0, 177.0, 73.0, 19.0 ],
+									"patching_rect" : [ 261.0, 177.0, 73.0, 20.0 ],
 									"text" : "phasor~ 0.1"
 								}
 
@@ -2173,7 +2182,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 5,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 30.0, 306.0, 250.0, 19.0 ],
+									"patching_rect" : [ 30.0, 306.0, 250.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"autoconnect" : 1,
@@ -2311,7 +2320,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 642.0, 79.0, 52.0, 19.0 ],
+									"patching_rect" : [ 642.0, 79.0, 52.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -2338,7 +2347,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 642.0, 101.0, 100.0, 19.0 ],
+									"patching_rect" : [ 642.0, 101.0, 100.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -2774,7 +2783,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -2836,7 +2845,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 100.0, 126.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -2878,7 +2887,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 481.0, 19.0 ],
+									"patching_rect" : [ 4.0, 73.0, 481.0, 20.0 ],
 									"text" : "hoa.meter~ lets you set angles for each loudspeakers",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -2894,7 +2903,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 520.5, 523.5, 275.0, 32.0 ],
+									"patching_rect" : [ 520.5, 523.5, 275.0, 33.0 ],
 									"text" : "You can send this message either in hoa.decoder~ or in hoa.meter~ ",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -2924,7 +2933,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 520.5, 433.5, 276.0, 71.0 ],
+									"patching_rect" : [ 520.5, 433.5, 276.0, 73.0 ],
 									"text" : "\"angles\" message followed by a list of float sets the loudspeakers angles.\nEach angle can be set within -360° and 360° range.\nThe list will be sorted in ascending order between the equivalent 0 to 360° range.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -3209,7 +3218,7 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
+									"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 									"channels" : 5,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
@@ -3221,7 +3230,7 @@
 									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 31.0, 233.0, 424.0, 424.0 ],
 									"yls" : 5,
-									"zls" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ]
+									"zls" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 								}
 
 							}
@@ -3285,7 +3294,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "float" ],
-													"patching_rect" : [ 65.0, 125.0, 52.0, 19.0 ],
+													"patching_rect" : [ 65.0, 125.0, 52.0, 20.0 ],
 													"text" : "hoa.pi 2"
 												}
 
@@ -3299,7 +3308,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 150.0, 33.5, 19.0 ],
+													"patching_rect" : [ 50.0, 150.0, 33.5, 20.0 ],
 													"text" : "*~"
 												}
 
@@ -3313,7 +3322,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "signal" ],
-													"patching_rect" : [ 50.0, 100.0, 72.0, 19.0 ],
+													"patching_rect" : [ 50.0, 100.0, 72.0, 20.0 ],
 													"text" : "phasor~ 0.2"
 												}
 
@@ -3439,7 +3448,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 31.0, 198.0, 424.0, 20.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ],
+										"angles" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ],
 										"autoconnect" : 1,
 										"channels" : 5,
 										"loudspeakers" : 5,
@@ -3447,7 +3456,7 @@
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"ychannels" : 5,
-										"zchannels" : [ 0.0, 72.0, 144.0, 216.0, 288.0 ]
+										"zchannels" : [ 0.0, 30.0, 110.0, 250.0, 330.0 ]
 									}
 ,
 									"text" : "hoa.decoder~ 2 @mode irregular @loudspeakers 5"
@@ -3777,7 +3786,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 68.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -3819,7 +3828,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 554.0, 182.0, 44.0, 19.0 ],
+									"patching_rect" : [ 554.0, 182.0, 44.0, 20.0 ],
 									"text" : "Colors",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -3931,7 +3940,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 18.0, 150.0, 74.0, 22.0 ],
+									"patching_rect" : [ 18.0, 150.0, 74.0, 23.0 ],
 									"text" : "cycle~ 0.1"
 								}
 
@@ -3945,7 +3954,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 554.0, 347.0, 62.0, 22.0 ],
+									"patching_rect" : [ 554.0, 347.0, 62.0, 23.0 ],
 									"text" : "prepend"
 								}
 
@@ -3961,7 +3970,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 575.0, 285.0, 146.0, 22.0 ]
+									"patching_rect" : [ 575.0, 285.0, 146.0, 23.0 ]
 								}
 
 							}
@@ -3986,7 +3995,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 638.5, 315.0, 84.0, 22.0 ],
+									"patching_rect" : [ 638.5, 315.0, 84.0, 23.0 ],
 									"text" : "prepend set"
 								}
 
@@ -4018,7 +4027,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 575.0, 257.0, 70.0, 19.0 ],
+									"patching_rect" : [ 575.0, 257.0, 70.0, 20.0 ],
 									"text" : "loadmess 0"
 								}
 
@@ -4181,7 +4190,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -4826,10 +4835,50 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-1", 7 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 27.5, 240.0, 308.5, 240.0 ],
+									"source" : [ "obj-6", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 6 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 27.5, 240.0, 268.357143, 240.0 ],
+									"source" : [ "obj-6", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 5 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 27.5, 240.0, 228.214286, 240.0 ],
+									"source" : [ "obj-6", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 4 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 27.5, 240.0, 188.071429, 240.0 ],
+									"source" : [ "obj-6", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-1", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 27.5, 237.0, 147.928571, 237.0 ],
+									"midpoints" : [ 27.5, 240.0, 147.928571, 240.0 ],
 									"source" : [ "obj-6", 0 ]
 								}
 
@@ -4939,7 +4988,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5112,7 +5161,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 4.0, 73.0, 503.0, 33.0 ],
+									"patching_rect" : [ 4.0, 73.0, 503.0, 34.0 ],
 									"text" : "The number of loudspeakers could be defined at the object's creation with the attribute \"@ls\" ex : [hoa.meter~ @ls 8] or dynamically (Max6 only)",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -5600,7 +5649,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 838.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 1366.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -5717,7 +5766,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 549.625, 175.0, 19.0 ],
+									"patching_rect" : [ 613.0, 549.625, 175.0, 20.0 ],
 									"text" : "hoa.meter~ fill direction",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -5746,7 +5795,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 485.0, 175.0, 19.0 ],
+									"patching_rect" : [ 613.0, 485.0, 175.0, 20.0 ],
 									"text" : "hoa.meter~ direction of rotation",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -5775,7 +5824,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 416.0, 175.0, 19.0 ],
+									"patching_rect" : [ 613.0, 416.0, 175.0, 20.0 ],
 									"text" : "Draw or hide Meter Borders",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -5804,7 +5853,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 341.0, 175.0, 19.0 ],
+									"patching_rect" : [ 613.0, 341.0, 175.0, 20.0 ],
 									"text" : "Draw or hide vectors",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -5833,7 +5882,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 274.0, 175.0, 19.0 ],
+									"patching_rect" : [ 613.0, 274.0, 175.0, 20.0 ],
 									"text" : "Draw leds background.",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -5862,7 +5911,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 613.0, 203.0, 175.0, 19.0 ],
+									"patching_rect" : [ 613.0, 203.0, 175.0, 20.0 ],
 									"text" : "Change size of the interior circle",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -7446,60 +7495,71 @@
  ],
 		"lines" : [  ],
 		"parameters" : 		{
-			"obj-30::obj-21" : [ "toggle", "toggle", 0 ],
-			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
 			"obj-30::obj-28" : [ "umenu", "umenu", 0 ],
-			"obj-30::obj-19" : [ "flonum", "flonum", 0 ]
+			"obj-30::obj-38" : [ "umenu[1]", "umenu[1]", 0 ],
+			"obj-30::obj-19" : [ "flonum", "flonum", 0 ],
+			"obj-30::obj-21" : [ "toggle", "toggle", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../../Downloads",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.meter~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.encoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.decoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi~.mxo",
-				"type" : "iLaX"
+				"name" : "attrui.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.wider~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi~.mxe64",
+				"type" : "mx64"
+			}
+, 			{
+				"name" : "hoa.wider~.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}

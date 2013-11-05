@@ -2087,11 +2087,27 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 	
 	if (x->f_index_of_selected_source != -1)
     {
-        if(modifiers == 148 || modifiers == 404)
-            x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
-        else if(modifiers == 18 || modifiers == 274)
+		// Angle
+#ifdef _WINDOWS
+		if(modifiers == 24) // Alt
+#elif
+		if(modifiers == 148 || modifiers == 404)
+#endif
+			x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
+
+		 // Radius
+#ifdef _WINDOWS
+		else if(modifiers == 18) // Shift
+#elif
+		else if(modifiers == 18 || modifiers == 274)
+#endif
             x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
-        else if (modifiers == 17)
+		 // Angle + radius
+#ifdef _WINDOWS
+		else if(modifiers == 26) // Shift
+#elif
+		else if (modifiers == 17)
+#endif
         {
             if (fabs(mousedelta.x) >= fabs(mousedelta.y))
             {
@@ -2106,11 +2122,27 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     }
     else if (x->f_index_of_selected_group != -1)
     {
-        if(modifiers == 148 || modifiers == 404)
+
+		// Angle
+#ifdef _WINDOWS
+		if(modifiers == 24) // Alt
+#elif
+		if(modifiers == 148 || modifiers == 404)
+#endif
             x->f_source_manager->groupSetRelativeAngle(x->f_index_of_selected_group, Tools::angle(cursor.x, cursor.y));
-        else if(modifiers == 18 || modifiers == 274)
+		 // Radius
+#ifdef _WINDOWS
+		else if(modifiers == 18) // Shift
+#elif
+		else if(modifiers == 18 || modifiers == 274)
+#endif
             x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y));
-        else if(modifiers == 150)
+		 // Angle + radius
+#ifdef _WINDOWS
+		else if(modifiers == 26) // Shift
+#elif
+		else if (modifiers == 17)
+#endif
             x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y), Tools::angle(cursor.x, cursor.y));
         else
             x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);            
@@ -2249,7 +2281,12 @@ void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
 {
     int filter = 0;
+
+#ifdef _WINDOWS
+	if (keycode == 97 && modifiers == 5 && textcharacter == 1) // COntrol + a
+#elif
 	if (keycode == 97 && modifiers == 1 && textcharacter == 0) //cmd+a
+#endif
     {
 		int indexOfNewGroup = -1;
         for(int i = 0; indexOfNewGroup == -1; i++)

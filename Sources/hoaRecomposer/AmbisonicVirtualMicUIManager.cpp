@@ -35,7 +35,8 @@ AmbisonicVirtualMicUIManager::AmbisonicVirtualMicUIManager(long _numberOfMics)
 }
 AmbisonicVirtualMicUIManager::~AmbisonicVirtualMicUIManager()
 {
-    if (m_defaultAngles) delete m_defaultAngles;
+    if(m_defaultAngles) 
+		delete m_defaultAngles;
 }
 
 void AmbisonicVirtualMicUIManager::setNumberOfMics(long _numberOfMicrophones)

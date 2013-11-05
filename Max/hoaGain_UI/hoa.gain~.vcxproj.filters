@@ -101,27 +101,6 @@
     <ClCompile Include="..\..\Sources\hoaMeter\AmbisonicsMeter.cpp">
       <Filter>HoaLibrary\hoaMeter</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicMap.cpp">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicMultiMaps.cpp">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSource.cpp">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesGroup.cpp">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesManager.cpp">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesPreset.cpp">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.cpp">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClCompile>
     <ClCompile Include="hoa.gain~.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -294,27 +273,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Sources\hoaMeter\AmbisonicsMeter.h">
       <Filter>HoaLibrary\hoaMeter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicMap.h">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicMultiMaps.h">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSource.h">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesGroup.h">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesManager.h">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesPreset.h">
-      <Filter>HoaLibrary\hoaMap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Sources\hoaMap\AmbisonicSourcesTrajectory.h">
-      <Filter>HoaLibrary\hoaMap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

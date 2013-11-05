@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 95.0, 49.0, 820.0, 706.0 ],
+		"rect" : [ 100.0, 100.0, 820.0, 706.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 820.0, 680.0 ],
+						"rect" : [ 100.0, 126.0, 820.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -171,7 +171,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 8.0, 69.0, 604.0, 33.0 ],
+									"patching_rect" : [ 8.0, 69.0, 604.0, 34.0 ],
 									"text" : "hoa.scope~ displays the harmonics of an ambisonic soundfield on a circle. The number of harmonics is defined at the object creation with the attribute @order and create order * 2 + 1 inputs (ex : hoa.scope~ @order 7).",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
@@ -221,7 +221,11 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 318.0, 170.0, 52.0, 19.0 ],
+									"patching_rect" : [ 318.0, 170.0, 52.0, 20.0 ],
+									"saved_object_attributes" : 									{
+										"loadout" : 1
+									}
+,
 									"text" : "hoa.pi 2"
 								}
 
@@ -235,7 +239,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 303.5, 195.0, 33.5, 19.0 ],
+									"patching_rect" : [ 303.5, 195.0, 33.5, 20.0 ],
 									"text" : "*~"
 								}
 
@@ -250,7 +254,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 304.0, 90.0, 86.0, 19.0 ],
+									"patching_rect" : [ 304.0, 90.0, 86.0, 20.0 ],
 									"text" : "loadmess 0.05"
 								}
 
@@ -265,7 +269,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 304.0, 116.0, 50.0, 19.0 ]
+									"patching_rect" : [ 304.0, 116.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -278,7 +282,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 304.0, 146.0, 79.0, 19.0 ],
+									"patching_rect" : [ 304.0, 146.0, 79.0, 20.0 ],
 									"text" : "phasor~ 0.05"
 								}
 
@@ -292,14 +296,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 405.0, 225.0, 293.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"autoconnect" : 1,
-										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-										"order" : 7,
-										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
-									}
-,
+									"patching_rect" : [ 405.0, 225.0, 293.0, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -314,7 +311,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 405.0, 135.0, 86.0, 19.0 ],
+									"patching_rect" : [ 405.0, 135.0, 86.0, 20.0 ],
 									"text" : "loadmess 0.35"
 								}
 
@@ -329,7 +326,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 405.0, 165.0, 50.0, 19.0 ]
+									"patching_rect" : [ 405.0, 165.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -342,7 +339,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 405.0, 195.0, 69.0, 19.0 ],
+									"patching_rect" : [ 405.0, 195.0, 69.0, 20.0 ],
 									"text" : "cycle~ 0.35"
 								}
 
@@ -356,7 +353,11 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 694.0, 165.0, 52.0, 19.0 ],
+									"patching_rect" : [ 694.0, 165.0, 52.0, 20.0 ],
+									"saved_object_attributes" : 									{
+										"loadout" : 1
+									}
+,
 									"text" : "hoa.pi 2"
 								}
 
@@ -370,7 +371,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 679.0, 195.0, 33.5, 19.0 ],
+									"patching_rect" : [ 679.0, 195.0, 33.5, 20.0 ],
 									"text" : "*~"
 								}
 
@@ -385,7 +386,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 679.0, 73.0, 86.0, 19.0 ],
+									"patching_rect" : [ 679.0, 73.0, 86.0, 20.0 ],
 									"text" : "loadmess 0.09"
 								}
 
@@ -400,7 +401,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 679.0, 105.0, 50.0, 19.0 ]
+									"patching_rect" : [ 679.0, 105.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -413,7 +414,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 679.0, 135.0, 79.0, 19.0 ],
+									"patching_rect" : [ 679.0, 135.0, 79.0, 20.0 ],
 									"text" : "phasor~ 0.09"
 								}
 
@@ -428,7 +429,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 30.0, 135.0, 79.0, 19.0 ],
+									"patching_rect" : [ 30.0, 135.0, 79.0, 20.0 ],
 									"text" : "loadmess 0.1"
 								}
 
@@ -443,7 +444,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 30.0, 165.0, 50.0, 19.0 ]
+									"patching_rect" : [ 30.0, 165.0, 50.0, 20.0 ]
 								}
 
 							}
@@ -456,7 +457,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 30.0, 195.0, 63.0, 19.0 ],
+									"patching_rect" : [ 30.0, 195.0, 63.0, 20.0 ],
 									"text" : "cycle~ 0.1"
 								}
 
@@ -470,14 +471,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 30.0, 225.0, 293.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"autoconnect" : 1,
-										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-										"order" : 7,
-										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
-									}
-,
+									"patching_rect" : [ 30.0, 225.0, 293.0, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -603,7 +597,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 679.0, 394.0, 51.0, 19.0 ],
+									"patching_rect" : [ 679.0, 394.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -630,7 +624,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 679.0, 424.0, 99.0, 19.0 ],
+									"patching_rect" : [ 679.0, 424.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -1247,7 +1241,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 95.0, 75.0, 820.0, 680.0 ],
+						"rect" : [ 0.0, 26.0, 820.0, 680.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1463,7 +1457,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 356.0, 154.0, 48.0, 22.0 ],
+									"patching_rect" : [ 356.0, 154.0, 48.0, 23.0 ],
 									"text" : "sig~ 0"
 								}
 
@@ -1477,7 +1471,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 31.0, 154.0, 48.0, 22.0 ],
+									"patching_rect" : [ 31.0, 154.0, 48.0, 23.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -1602,7 +1596,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 499.0, 88.0, 51.0, 19.0 ],
+									"patching_rect" : [ 499.0, 88.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -1628,7 +1622,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 499.0, 118.0, 99.0, 19.0 ],
+									"patching_rect" : [ 499.0, 118.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -1646,14 +1640,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 31.0, 189.0, 344.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"autoconnect" : 1,
-										"negcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-										"order" : 7,
-										"poscolor" : [ 0.0, 0.0, 1.0, 1.0 ]
-									}
-,
+									"patching_rect" : [ 31.0, 189.0, 344.0, 20.0 ],
 									"text" : "hoa.encoder~ 7"
 								}
 
@@ -1686,7 +1673,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 507.0, 160.5, 150.0, 19.0 ],
+									"patching_rect" : [ 507.0, 160.5, 150.0, 20.0 ],
 									"text" : "Colors :"
 								}
 
@@ -1700,7 +1687,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 562.5, 254.5, 72.0, 19.0 ],
+									"patching_rect" : [ 562.5, 254.5, 72.0, 20.0 ],
 									"text" : "prepend set"
 								}
 
@@ -1714,7 +1701,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 507.0, 289.5, 53.0, 19.0 ],
+									"patching_rect" : [ 507.0, 289.5, 53.0, 20.0 ],
 									"text" : "prepend"
 								}
 
@@ -1744,7 +1731,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "int", "", "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 522.0, 227.5, 100.0, 19.0 ]
+									"patching_rect" : [ 522.0, 227.5, 100.0, 20.0 ]
 								}
 
 							}
@@ -1757,7 +1744,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 39.0, 100.0, 255.0, 22.0 ],
+									"patching_rect" : [ 39.0, 100.0, 255.0, 23.0 ],
 									"text" : "Custom colors :",
 									"underline" : 1
 								}
@@ -1773,7 +1760,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 522.0, 182.5, 70.0, 19.0 ],
+									"patching_rect" : [ 522.0, 182.5, 70.0, 20.0 ],
 									"text" : "loadmess 0"
 								}
 
@@ -2126,33 +2113,44 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../../Downloads",
+				"type" : "PNG ",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.scope~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.encoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi.mxe64",
+				"type" : "mx64"
+			}
+, 			{
+				"name" : "attrui.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}

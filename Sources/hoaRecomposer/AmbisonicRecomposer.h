@@ -60,9 +60,9 @@ private:
     cicm_vector_float*          m_harmonics_matrix_float;
     cicm_vector_double*         m_harmonics_matrix_double;
     
-	vector<AmbisonicEncoder*>  m_encoders;
+	vector<AmbisonicEncoder*>	m_encoders;
     vector<CicmLine*>           m_lines;
-    vector<AmbisonicWider*>    m_widers;
+    vector<AmbisonicWider*>		m_widers;
     vector<CicmLine*>           m_wider_lines;
     
     long                        m_mode;

@@ -221,24 +221,26 @@ AmbisonicRecomposer::~AmbisonicRecomposer()
     m_widers.clear();
     m_wider_lines.clear();
     
-    cicm_free(m_angles_vector_float);
-    cicm_free(m_angles_vector_double);
+    free(m_angles_vector_float);
+    free(m_angles_vector_double);
+	
 	
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         free(m_harmonics_matrix_float[i]);
         free(m_harmonics_matrix_double[i]);
     }
-	free(m_harmonics_matrix_float);
-	free(m_harmonics_matrix_double);
+	
+	//free(m_harmonics_matrix_float);
+	//free(m_harmonics_matrix_double);
     
-    cicm_free(m_harmonics_vector_float);
-    cicm_free(m_harmonics_vector_double);
-    cicm_free(m_microphones_vector_float);
-    cicm_free(m_microphones_vector_double);
+    free(m_harmonics_vector_float);
+    free(m_harmonics_vector_double);
+    free(m_microphones_vector_float);
+    free(m_microphones_vector_double);
     
-    cicm_free(m_recomposer_matrix_float);
-    cicm_free(m_recomposer_matrix_double);
+    free(m_recomposer_matrix_float);
+    free(m_recomposer_matrix_double);
 }
 
 double AmbisonicRecomposer::getFishEyeFactor()

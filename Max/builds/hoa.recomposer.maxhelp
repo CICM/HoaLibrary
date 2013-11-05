@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 55.0, 44.0, 1085.0, 702.0 ],
+		"rect" : [ 0.0, 42.0, 929.0, 650.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1085.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 929.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -265,7 +265,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 55.0, 70.0, 1085.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 929.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -294,7 +294,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 576.0, 209.0, 52.0 ],
+									"patching_rect" : [ 722.5, 572.0, 264.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -308,7 +308,117 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 526.0, 208.0, 38.0 ],
+									"patching_rect" : [ 722.5, 525.0, 264.0, 34.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-53",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 572.0, 264.0, 34.0 ],
+									"text" : "Press cmd key when you drag to activate magnetism on dragged microphone.",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-51",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 525.0, 264.0, 34.0 ],
+									"text" : "doubleclick on a mic to set it to the closest default mic angle.",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-45",
+									"linecount" : 9,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 381.5, 274.0, 131.0 ],
+									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect (alt+move for win).\n - ctrl+click : lock fisheye start and destination angles value for the selected mics (alt+click for win).\n - ctrl + drag : apply a \"fisheye effect\" to the selected microphones (drag from/to ficheye point from/to center of the circle) (alt+drag for win)",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-20",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 246.0, 268.0, 34.0 ],
+									"text" : "Change Microphones Wider value :\n - shift+drag : change selected mics wider value",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-12",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 198.0, 265.5, 34.0 ],
+									"text" : "Move Microphones :\n - drag : Move selected mics angles",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"frgb" : 0.0,
+									"id" : "obj-18",
+									"linecount" : 5,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 293.0, 266.0, 75.0 ],
+									"text" : "Select Microphones :\n - cmd+a : select All (ctrl+a for win)\n - cmd+drag : rect selection (ctrl+drag for win)\n - cmd+click on a mic to change this mic selection state (ctrl+click for win)",
+									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-6",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 198.0, 268.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -318,11 +428,11 @@
 								"box" : 								{
 									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
 									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-16",
+									"id" : "obj-7",
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 381.5, 234.0, 132.0 ],
+									"patching_rect" : [ 722.5, 246.0, 268.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -336,7 +446,21 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 288.0, 209.0, 79.0 ],
+									"patching_rect" : [ 722.5, 293.0, 266.0, 75.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-16",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 381.5, 264.0, 131.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -483,109 +607,13 @@
 , 							{
 								"box" : 								{
 									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-53",
-									"linecount" : 3,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 578.0, 204.0, 47.0 ],
-									"text" : "Press cmd key when you drag to activate magnetism on dragged microphone.",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-51",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 528.0, 204.0, 33.0 ],
-									"text" : "doubleclick on a mic to set it to the closest default mic angle.",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-45",
-									"linecount" : 9,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 383.5, 229.0, 127.0 ],
-									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect\n - ctrl+click : lock fisheye start and destination angles value for the selected mics.\n - ctrl + drag : apply a \"fisheye effect\" to the selected microphones (drag from/to ficheye point from/to center of the circle)",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-20",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 240.0, 268.0, 33.0 ],
-									"text" : "Change Microphones Wider value :\n - shift+drag : change selected mics wider value",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-12",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 192.0, 204.0, 33.0 ],
-									"text" : "Move Microphones :\n - drag : Move selected mics angles",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 12.0,
-									"frgb" : 0.0,
-									"id" : "obj-18",
-									"linecount" : 5,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 290.0, 204.0, 74.0 ],
-									"text" : "Select Microphones :\n - cmd+a : select All\n - cmd+drag : rect selection\n - cmd+click on a mic to change this mic selection state",
-									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-26",
 									"maxclass" : "newobj",
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 277.0, 260.0, 19.0 ],
+									"patching_rect" : [ 7.0, 277.0, 260.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"mode" : "fixe",
 										"ramp" : 20.0
@@ -717,7 +745,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 841.5, 60.0, 51.0, 19.0 ],
+									"patching_rect" : [ 841.5, 60.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -744,7 +772,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 841.5, 90.0, 99.0, 19.0 ],
+									"patching_rect" : [ 841.5, 90.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -762,7 +790,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 248.0, 172.0, 32.0, 19.0 ],
+									"patching_rect" : [ 248.0, 172.0, 32.0, 20.0 ],
 									"text" : "sig~"
 								}
 
@@ -777,7 +805,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 20.0, 257.0, 32.0 ],
+									"patching_rect" : [ 501.0, 20.0, 257.0, 33.0 ],
 									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -880,7 +908,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 366.25, 593.0, 32.5, 17.0 ],
+									"patching_rect" : [ 366.25, 593.0, 32.5, 18.0 ],
 									"text" : "stop"
 								}
 
@@ -894,7 +922,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 292.125, 593.0, 72.0, 17.0 ],
+									"patching_rect" : [ 292.125, 593.0, 72.0, 18.0 ],
 									"text" : "startwindow"
 								}
 
@@ -908,7 +936,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 248.0, 142.0, 65.0, 19.0 ],
+									"patching_rect" : [ 248.0, 142.0, 65.0, 20.0 ],
 									"text" : "hoa.pi -0.5"
 								}
 
@@ -949,7 +977,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 307.0, 260.0, 19.0 ],
+									"patching_rect" : [ 7.0, 307.0, 260.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"autoconnect" : 1,
@@ -976,7 +1004,7 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 242.5, 260.0, 19.0 ],
+									"patching_rect" : [ 7.0, 242.5, 260.0, 20.0 ],
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
 								}
@@ -991,37 +1019,9 @@
 									"numinlets" : 2,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 201.0, 260.0, 19.0 ],
+									"patching_rect" : [ 7.0, 201.0, 260.0, 20.0 ],
 									"text" : "hoa.encoder~ 7",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-6",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 190.0, 207.0, 37.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-7",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 238.0, 268.0, 36.0 ],
-									"rounded" : 6,
-									"shadow" : -1
 								}
 
 							}
@@ -1938,7 +1938,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1085.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 929.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -6336,7 +6336,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 515.285767, 89.0, 51.0, 19.0 ],
+									"patching_rect" : [ 515.285767, 89.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -6363,7 +6363,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 515.285767, 119.0, 99.0, 19.0 ],
+									"patching_rect" : [ 515.285767, 119.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -7115,7 +7115,7 @@
 									"destination" : [ "obj-19", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 128.966667, 447.0, 3.0, 447.0, 3.0, 492.0, 200.0, 492.0 ],
+									"midpoints" : [ 128.966667, 447.0, 3.0, 447.0, 3.0, 492.0, 127.2, 492.0 ],
 									"source" : [ "obj-27", 7 ]
 								}
 
@@ -7125,7 +7125,7 @@
 									"destination" : [ "obj-19", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 112.9, 447.0, 3.0, 447.0, 3.0, 492.0, 180.5, 492.0 ],
+									"midpoints" : [ 112.9, 447.0, 3.0, 447.0, 3.0, 492.0, 118.1, 492.0 ],
 									"source" : [ "obj-27", 6 ]
 								}
 
@@ -7135,7 +7135,7 @@
 									"destination" : [ "obj-19", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 96.833333, 447.0, 3.0, 447.0, 3.0, 492.0, 161.0, 492.0 ],
+									"midpoints" : [ 96.833333, 447.0, 3.0, 447.0, 3.0, 492.0, 109.0, 492.0 ],
 									"source" : [ "obj-27", 5 ]
 								}
 
@@ -7145,7 +7145,7 @@
 									"destination" : [ "obj-19", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 80.766667, 447.0, 3.0, 447.0, 3.0, 492.0, 141.5, 492.0 ],
+									"midpoints" : [ 80.766667, 447.0, 3.0, 447.0, 3.0, 492.0, 99.9, 492.0 ],
 									"source" : [ "obj-27", 4 ]
 								}
 
@@ -7155,7 +7155,7 @@
 									"destination" : [ "obj-19", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 64.7, 447.0, 3.0, 447.0, 3.0, 492.0, 122.0, 492.0 ],
+									"midpoints" : [ 64.7, 447.0, 3.0, 447.0, 3.0, 492.0, 90.8, 492.0 ],
 									"source" : [ "obj-27", 3 ]
 								}
 
@@ -7165,7 +7165,7 @@
 									"destination" : [ "obj-19", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 48.633333, 447.0, 3.0, 447.0, 3.0, 492.0, 102.5, 492.0 ],
+									"midpoints" : [ 48.633333, 447.0, 3.0, 447.0, 3.0, 492.0, 81.7, 492.0 ],
 									"source" : [ "obj-27", 2 ]
 								}
 
@@ -7175,7 +7175,7 @@
 									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"midpoints" : [ 32.566667, 447.0, 3.0, 447.0, 3.0, 492.0, 83.0, 492.0 ],
+									"midpoints" : [ 32.566667, 447.0, 3.0, 447.0, 3.0, 492.0, 72.6, 492.0 ],
 									"source" : [ "obj-27", 1 ]
 								}
 
@@ -7864,7 +7864,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1085.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 929.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -7974,12 +7974,12 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-7",
-									"linecount" : 5,
+									"linecount" : 4,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 44.0, 591.0, 232.0, 58.0 ],
+									"patching_rect" : [ 44.0, 591.0, 235.0, 60.0 ],
 									"text" : "0. 0.392699 0.785398 1.178098 1.570796 1.963495 2.356194 2.748894 3.141593 -2.748894 -2.356194 -1.963495 -1.570796 -1.178098 -0.785398 -0.392699"
 								}
 
@@ -8036,7 +8036,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 501.0, 20.0, 257.0, 32.0 ],
+									"patching_rect" : [ 501.0, 20.0, 257.0, 33.0 ],
 									"text" : "hoalibrary | Julien Colafrancesco, Pierre Guillot & Eliott Paris © 2012 CICM / Universite Paris 8",
 									"textcolor" : [ 0.317518, 0.317518, 0.317518, 1.0 ]
 								}
@@ -8219,7 +8219,7 @@
 									}
 ,
 									"text" : "autopattr",
-									"varname" : "u916001146"
+									"varname" : "u724000537"
 								}
 
 							}
@@ -8448,7 +8448,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1085.0, 676.0 ],
+						"rect" : [ 0.0, 68.0, 929.0, 624.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -11692,7 +11692,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 7.0, 308.0, 329.0, 19.0 ],
+									"patching_rect" : [ 7.0, 308.0, 329.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -11760,7 +11760,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 576.0, 209.0, 52.0 ],
+									"patching_rect" : [ 722.5, 572.0, 264.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -11774,35 +11774,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 526.0, 208.0, 38.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-16",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 381.5, 234.0, 132.0 ],
-									"rounded" : 6,
-									"shadow" : -1
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
-									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
-									"id" : "obj-5",
-									"maxclass" : "panel",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 288.0, 209.0, 79.0 ],
+									"patching_rect" : [ 722.5, 525.0, 264.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -11814,11 +11786,11 @@
 									"fontsize" : 12.0,
 									"frgb" : 0.0,
 									"id" : "obj-53",
-									"linecount" : 3,
+									"linecount" : 2,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 578.0, 204.0, 47.0 ],
+									"patching_rect" : [ 722.5, 572.0, 264.0, 34.0 ],
 									"text" : "Press cmd key when you drag to activate magnetism on dragged microphone.",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11834,7 +11806,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 528.0, 204.0, 33.0 ],
+									"patching_rect" : [ 722.5, 525.0, 264.0, 34.0 ],
 									"text" : "doubleclick on a mic to set it to the closest default mic angle.",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11850,8 +11822,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 383.5, 229.0, 127.0 ],
-									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect\n - ctrl+click : lock fisheye start and destination angles value for the selected mics.\n - ctrl + drag : apply a \"fisheye effect\" to the selected microphones (drag from/to ficheye point from/to center of the circle)",
+									"patching_rect" : [ 722.5, 381.5, 274.0, 131.0 ],
+									"text" : "Fisheye effect :\n - ctrl+move  : to have a preview of the effect (alt+move for win).\n - ctrl+click : lock fisheye start and destination angles value for the selected mics (alt+click for win).\n - ctrl + drag : apply a \"fisheye effect\" to the selected microphones (drag from/to ficheye point from/to center of the circle) (alt+drag for win)",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
 
@@ -11866,7 +11838,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 240.0, 268.0, 33.0 ],
+									"patching_rect" : [ 722.5, 246.0, 268.0, 34.0 ],
 									"text" : "Change Microphones Wider value :\n - shift+drag : change selected mics wider value",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11882,7 +11854,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 192.0, 204.0, 33.0 ],
+									"patching_rect" : [ 722.5, 198.0, 265.5, 34.0 ],
 									"text" : "Move Microphones :\n - drag : Move selected mics angles",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
@@ -11898,8 +11870,8 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 724.5, 290.0, 204.0, 74.0 ],
-									"text" : "Select Microphones :\n - cmd+a : select All\n - cmd+drag : rect selection\n - cmd+click on a mic to change this mic selection state",
+									"patching_rect" : [ 722.5, 293.0, 266.0, 75.0 ],
+									"text" : "Select Microphones :\n - cmd+a : select All (ctrl+a for win)\n - cmd+drag : rect selection (ctrl+drag for win)\n - cmd+click on a mic to change this mic selection state (ctrl+click for win)",
 									"textcolor" : [ 0.199818, 0.199818, 0.199818, 1.0 ]
 								}
 
@@ -11912,7 +11884,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 190.0, 207.0, 37.0 ],
+									"patching_rect" : [ 722.5, 198.0, 268.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -11926,7 +11898,7 @@
 									"maxclass" : "panel",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 722.5, 238.0, 268.0, 36.0 ],
+									"patching_rect" : [ 722.5, 246.0, 268.0, 34.0 ],
 									"rounded" : 6,
 									"shadow" : -1
 								}
@@ -11981,7 +11953,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 456.0, 329.0, 19.0 ],
+									"patching_rect" : [ 7.0, 456.0, 329.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"mode" : "fixe",
 										"ramp" : 20.0
@@ -12113,7 +12085,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 841.5, 60.0, 51.0, 19.0 ],
+									"patching_rect" : [ 841.5, 60.0, 51.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -12140,7 +12112,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 841.5, 90.0, 99.0, 19.0 ],
+									"patching_rect" : [ 841.5, 90.0, 99.0, 20.0 ],
 									"saved_object_attributes" : 									{
 										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ]
 									}
@@ -12215,9 +12187,37 @@
 									"numinlets" : 15,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 7.0, 398.5, 329.0, 19.0 ],
+									"patching_rect" : [ 7.0, 398.5, 329.0, 20.0 ],
 									"text" : "hoa.projector~ 7 16",
 									"textcolor" : [ 0.30138, 0.30138, 0.30138, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-5",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 293.0, 266.0, 75.0 ],
+									"rounded" : 6,
+									"shadow" : -1
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bgcolor" : [ 0.0, 0.0, 0.0, 0.05 ],
+									"bordercolor" : [ 0.235294, 0.235294, 0.235294, 0.2 ],
+									"id" : "obj-16",
+									"maxclass" : "panel",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 722.5, 381.5, 264.0, 131.0 ],
+									"rounded" : 6,
+									"shadow" : -1
 								}
 
 							}
@@ -12808,7 +12808,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1085.0, 676.0 ],
+						"rect" : [ 0.0, 26.0, 929.0, 624.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -12856,93 +12856,100 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "hoa-icon-45.png",
+				"bootpath" : "/Users/Pierre/Downloads",
+				"patcherrelativepath" : "../../../../../Downloads",
+				"type" : "PNG ",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
-				"patcherrelativepath" : "../misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
+				"patcherrelativepath" : "../../_prerelease/max-package/misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "littlefilter~.maxpat",
-				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"bootpath" : "/Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "poly.moogladderx2.maxpat",
-				"bootpath" : "/Applications/Max 6.1/examples/gen",
-				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/examples/gen",
+				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/gen",
+				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/examples/gen",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "yafr2.maxpat",
-				"bootpath" : "/Applications/Max 6.1/examples/effects/reverb/lib",
-				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/examples/effects/reverb/lib",
+				"bootpath" : "/Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
+				"patcherrelativepath" : "../../../../../../../Program Files/Cycling '74/Max 6.1/examples/effects/reverb/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
-				"patcherrelativepath" : "../misc/others",
+				"bootpath" : "/Users/Pierre/Documents/GitHub/HoaLibrary/_prerelease/max-package/misc/others",
+				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "hoa.projector~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.projector~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.connect.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.recomposer~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.recomposer~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.recomposer.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.recomposer.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.scope~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.scope~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.gain~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.gain~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.meter~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.meter~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.decoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.decoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.map~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.map~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.map.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.map.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.encoder~.mxe64",
+				"type" : "mx64"
 			}
 , 			{
-				"name" : "hoa.pi.mxo",
-				"type" : "iLaX"
+				"name" : "hoa.pi.mxe64",
+				"type" : "mx64"
 			}
  ]
 	}

@@ -23,26 +23,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+
+#include "../../Sources/HoaLibrary.h"
+
  
 #ifdef WIN_VERSION
-#define _CRT_SECURE_NO_DEPRECATE
+	//#define _CRT_SECURE_NO_DEPRECATE
 #endif
 
 extern "C" {
 #include "ext.h"
 #include "ext_obex.h"
+#include "ext_path.h"
 #include "ext_common.h"
 #include "jpatcher_api.h"
 #include "jgraphics.h"
+#include "jpatcher_syms.h"
+#include "ext_dictionary.h"
+#include "ext_globalsymbol.h"
 #include "ext_parameter.h"
 #include "z_dsp.h"
 
 #ifdef WIN_VERSION
-#include <float.h>
+	#include <float.h>
 #endif
 }
 
-#include "../../Sources/HoaLibrary.h"
+
 
 #define MAX_IO 64
 #define MIN_IO 1
@@ -333,7 +341,6 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
     
     hoaGain_set_dB(x, x->j_defaultValuedB);
     
-    
     jbox_ready((t_jbox *)x);
     x->j_box.z_misc = Z_NO_INPLACE;
     
@@ -357,7 +364,7 @@ void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s)
 	if (m==ASSIST_INLET)
     {
         if (a != x->f_numberOfChannels)
-            sprintf(s,"(signal) Audio Signal to be Scaled (ch %ld)", a+1);
+            sprintf(s,"(signal) Audio Signal to be scaled (ch %ld)", a+1);
         else
         {
             switch (x->f_inputMode) {
@@ -456,7 +463,6 @@ void hoaGain_float_dB(t_hoaGain *x, double dBValue)
 
 void hoaGain_set_dB(t_hoaGain *x, double dBValue)
 {
-    
     x->j_val = hoaGain_constrain_real_value(x, dBValue) - x->j_min;
     x->j_valdB = x->j_val + x->j_min;
     hoaGain_set_gain(x);
