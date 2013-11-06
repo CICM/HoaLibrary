@@ -72,6 +72,7 @@ public:
 	void    setVectorSize(long aVectorSize);
     void    setSamplingRate(long aSamplingRate);
     long    getGetHrtfLoaded(){return m_hrtf_loaded;};
+	std::string getHrtfPath(){return m_hrtf_full_path;};
     long    getHrtfSize(){return m_impulse_size;};
     long    getPinnaeSize(){return m_Pinnae_size;};
     double       getLoudspeakerAngle(long anIndex);

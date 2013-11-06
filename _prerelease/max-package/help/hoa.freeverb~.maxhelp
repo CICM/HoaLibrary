@@ -101,7 +101,7 @@
 									"name" : "hoa.helpout_7.maxpat",
 									"numinlets" : 15,
 									"numoutlets" : 0,
-									"patching_rect" : [ 30.0, 458.5, 329.0, 132.0 ]
+									"patching_rect" : [ 30.0, 455.5, 329.0, 132.0 ]
 								}
 
 							}
@@ -696,7 +696,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.freeverb~", "@obj-desc", "An", "implementation", "of", "the", "freeverb", "algorithm", "for", "ambisonic." ],
+									"args" : [ "@obj-name", "hoa.freeverb~", "@obj-desc", "An", "implementation", "of", "the", "freeverb", "algorithm", "for", "ambisonics." ],
 									"id" : "obj-17",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -717,7 +717,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 7.625, 68.0, 693.0, 33.0 ],
-									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters adapted to ambisonic domain.",
+									"text" : "hoa.freeverb~ is based on Schroeder/Moorer reverberation model that uses eight parallel comb filters and four cascaded allpass filters and adapted to ambisonics domain. The number of comb filters depends on the harmonics order to optimize the process.",
 									"textcolor" : [ 0.30292, 0.30292, 0.30292, 1.0 ],
 									"varname" : "autohelp_top_description[1]"
 								}
@@ -1104,7 +1104,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1114,7 +1114,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1124,7 +1124,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1134,7 +1134,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1144,7 +1144,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1154,7 +1154,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1164,7 +1164,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1174,7 +1174,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1184,7 +1184,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1194,7 +1194,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1204,7 +1204,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1214,7 +1214,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1224,7 +1224,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1234,7 +1234,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-4", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1244,7 +1244,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-4", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1301,7 +1301,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 14 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1311,7 +1311,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 13 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1321,7 +1321,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 12 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1331,7 +1331,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 11 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1341,7 +1341,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 10 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1351,7 +1351,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 9 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1361,7 +1361,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 8 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1371,7 +1371,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 7 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1381,7 +1381,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 6 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1391,7 +1391,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 5 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1401,7 +1401,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 4 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1411,7 +1411,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 3 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1421,7 +1421,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1431,7 +1431,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
 									"destination" : [ "obj-15", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1441,7 +1441,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 0.0, 0.0, 1.0, 1.0 ],
+									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-15", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1689,28 +1689,28 @@
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpaudio.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpout_7.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others/hoa.helpout",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others/hoa.helpout",
 				"patcherrelativepath" : "../misc/others/hoa.helpout",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hoa.helpcredit.maxpat",
-				"bootpath" : "/Applications/Max 6.1/packages/HoaLibrary-1.2.1/misc/others",
+				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/misc/others",
 				"patcherrelativepath" : "../misc/others",
 				"type" : "JSON",
 				"implicit" : 1

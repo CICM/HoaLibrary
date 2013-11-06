@@ -23,26 +23,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+
+#include "../../Sources/HoaLibrary.h"
+
  
 #ifdef WIN_VERSION
-#define _CRT_SECURE_NO_DEPRECATE
+	//#define _CRT_SECURE_NO_DEPRECATE
 #endif
 
 extern "C" {
 #include "ext.h"
 #include "ext_obex.h"
+#include "ext_path.h"
 #include "ext_common.h"
 #include "jpatcher_api.h"
 #include "jgraphics.h"
+#include "jpatcher_syms.h"
+#include "ext_dictionary.h"
+#include "ext_globalsymbol.h"
 #include "ext_parameter.h"
 #include "z_dsp.h"
 
 #ifdef WIN_VERSION
-#include <float.h>
+	//#include <float.h>
 #endif
 }
 
-#include "../../Sources/HoaLibrary.h"
+
 
 #define MAX_IO 64
 #define MIN_IO 1
@@ -90,7 +98,7 @@ typedef struct _hoaGain
     float       f_range[2];
     double      j_valdB;
     double      j_defaultValuedB;
-    double		f_gain[16384];
+    double*		f_gain;
     //inputs/output
     void*       f_inlet_val;
     void*       f_outlet_infos;
@@ -166,8 +174,7 @@ int C74_EXPORT main()
 
 	c = class_new("hoa.gain~", (method)hoaGain_new, (method)hoaGain_free, sizeof(t_hoaGain), (method)NULL, A_GIMME, 0L);
 
-	c->c_flags |= CLASS_FLAG_NEWDICTIONARY; // to specify dictionary constructor
-
+	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
     class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_FIXWIDTH | JBOX_COLOR );
     
@@ -313,7 +320,7 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
     x->j_defaultValuedB = 0;
     x->j_valdB = x->j_defaultValuedB;
     x->f_interp = 20;
-    
+    x->f_gain = new double[16384];
     x->f_numberOfChannels = 8;
     
     //dictionary_getlong(d, gensym("channels"), &x->f_numberOfChannels); // make sure we have the number of inputs before set up other args.
@@ -332,7 +339,6 @@ void *hoaGain_new(t_symbol *s, short argc, t_atom *argv)
     attr_dictionary_process(x,d); // handle attribute args
     
     hoaGain_set_dB(x, x->j_defaultValuedB);
-    
     
     jbox_ready((t_jbox *)x);
     x->j_box.z_misc = Z_NO_INPLACE;
@@ -357,7 +363,7 @@ void hoaGain_assist(t_hoaGain *x, void *b, long m, long a, char *s)
 	if (m==ASSIST_INLET)
     {
         if (a != x->f_numberOfChannels)
-            sprintf(s,"(signal) Audio Signal to be Scaled (ch %ld)", a+1);
+            sprintf(s,"(signal) Audio Signal to be scaled (ch %ld)", a+1);
         else
         {
             switch (x->f_inputMode) {
@@ -456,7 +462,6 @@ void hoaGain_float_dB(t_hoaGain *x, double dBValue)
 
 void hoaGain_set_dB(t_hoaGain *x, double dBValue)
 {
-    
     x->j_val = hoaGain_constrain_real_value(x, dBValue) - x->j_min;
     x->j_valdB = x->j_val + x->j_min;
     hoaGain_set_gain(x);
@@ -488,6 +493,7 @@ void hoaGain_free(t_hoaGain *x)
     dsp_freejbox((t_pxjbox *)x);
 	jbox_free((t_jbox *)x);
     delete x->f_amp;
+	free(x->f_gain);
 }
 
 /* DSP ------------------------------------- */
@@ -781,6 +787,7 @@ t_max_err hoaGain_setattr_channels(t_hoaGain *x, t_object *attr, long ac, t_atom
             d = atom_getlong(av);
             hoaGain_resize_io(x, d);
             HoaGain_reconnect_outlet(x);
+            hoaGain_tometer(x, gensym("channels"), ac, av);
         }
 	}
 	return MAX_ERR_NONE;
@@ -1096,7 +1103,7 @@ void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
     t_object *line;
 	t_max_err err;
     
-    if(argc && argv && (s == gensym("loudspeakers") || s == gensym("angles") || s == gensym("offset") ))
+    if(argc && argv && ((s == gensym("loudspeakers") || s == gensym("angles") || s == gensym("offset") || s == gensym("channels"))))
     {
         err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
         if (err != MAX_ERR_NONE)
@@ -1110,11 +1117,8 @@ void hoaGain_tometer(t_hoaGain *x, t_symbol *s, long argc, t_atom *argv)
             if (jpatchline_get_box1(line) == gain)
             {
                 object = jpatchline_get_box2(line);
-                if(object_classname(jbox_get_object(object)) == gensym("hoa.meter~"))
-                {
-                    object_method_typed(jbox_get_object(object), s, argc, argv, NULL);
-                }
-                else if(object_classname(jbox_get_object(object)) == gensym("hoa.gain~"))
+                t_symbol *classname = object_classname(jbox_get_object(object));
+                if(classname == gensym("hoa.meter~") || classname == gensym("hoa.gain~") || classname == gensym("hoa.vector~"))
                 {
                     object_method_typed(jbox_get_object(object), s, argc, argv, NULL);
                 }

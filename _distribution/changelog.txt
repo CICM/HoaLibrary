@@ -16,7 +16,7 @@ Bug Fixed and New Features:
 
  - hoa.gain~Ê: 	new GUI Object.
  - hoa.recomposerÊ: new GUI Object.
- - hoa.decoder~ : dynamic number of loudspeakers, 3 restitution modes (ambisonics | binaural | irregular), automatically reconnect patchlines to hoa.meter~, hoa.gain~, hoa.dac~, hoa.vector~ when configuration has changed. less CPU usage.
+ - hoa.decoder~ : dynamic number of loudspeakers, 3 restitution modes (ambisonics | binaural | irregular), automatic patchlines connection to hoa.meter~, hoa.gain~, hoa.dac~, hoa.vector~ when configuration has changed. less CPU usage.
  - hoa.stereo~, hoa.binaural => (removed) now merged in the "all in one" hoa.decoder~ object.
  - hoa.meter~ : dynamic inlets, draw overled like vanilla meter~, draw and outputs energy and velocity vectors coords, graphics bug fixed, output peak value for each loudspeakers. assist inlet shows LS angles.
  - hoa.recomposer~ : 3 mode (fixe | fisheye | free), now takes angles and directivities messages as input.

@@ -105,7 +105,6 @@ void HoaRecomposerUI_outputAndNotifyChange(t_HoaRecomposerUI *x);
 // mouse/key methods
 
 void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_mousedown2(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 void HoaRecomposerUI_mouseup(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
 long HoaRecomposerUI_key(t_HoaRecomposerUI *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 void HoaRecomposerUI_mousemove(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -306,7 +305,7 @@ void HoaRecomposerUI_getdrawparams(t_HoaRecomposerUI *x, t_object *patcherview, 
 void HoaRecomposerUI_free(t_HoaRecomposerUI *x)
 {
 	jbox_free(&x->j_box);
- 
+	delete x->f_mics;
 }
 
 void HoaRecomposerUI_assist(t_HoaRecomposerUI *x, void *b, long m, long a, char *s)
@@ -962,7 +961,7 @@ void draw_rect_selection(t_HoaRecomposerUI *x, t_object *view, t_rect *rect)
 void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
 {    
     //-- modifiers :
-    // post("modifiers : %ld", modifiers);
+    //post("modifiers : %ld", modifiers);
     // 16 : rien
     // 17 : cmd
     // 18 : shift
@@ -971,51 +970,57 @@ void HoaRecomposerUI_mousedown(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
     
     double w = x->rect.width;
     x->f_last_mouseDown = pt;
-    
+
     int isMouseDownOverAMic = -1;
     isMouseDownOverAMic = isPointOverAMic(x, &pt);
     
     
-    if (x->f_rectSelectionExist) {
+    if (x->f_rectSelectionExist) 
+	{
         end_rect_selection(x, pt);
     }
     
-    // ctrl => set selected mics fisheyes start angle at the current angle :
-    if (modifiers == 148 || modifiers == 21)
+	// Start fish eye
+#ifdef _WINDOWS
+   else if (modifiers == 8 || x->f_showFishEye)  // Alt
+#else
+	else if (modifiers == 148 || x->f_showFishEye)  // ctrl
+#endif
     {
         t_pt ptCart = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
         x->f_last_mouseDragRadius = Tools::radius(ptCart.x, ptCart.y);
         x->f_mics->setFisheyeStartAngle(-2);
         x->f_mics->setFisheyeDestAngle(x->f_fisheyeAngle - CICM_PI2);
-        /*
-        for (int i=0; i<x->f_numberOfMic; i++) {
-            if (x->f_mics->isSelected(i)) {
-                post("startAngle mic %ld = %f", i, x->f_mics->getFisheyeStartAngle(i));
-            }
-        }
-        */
     }
     else if (isMouseDownOverAMic == -1 )
     {
-        if (modifiers == 17 || modifiers == 24)
+#ifdef _WINDOWS
+		if (modifiers == 21)  // Control
+#else
+		if (modifiers == 17)  // Cmd
+#endif
         {
             begin_rect_selection(x, pt);
         }
-        else if (modifiers == 16) 
+        else if (modifiers == 16) // Nothing
 		{
             x->f_mics->setSelected(-1, 0); // tout deselectionné
         }
     }
     else
     {
-        if (modifiers == 16) // rien
+        if (modifiers == 16) // Nothing
         {
             if (!x->f_mics->isSelected(isMouseDownOverAMic)) {
                 x->f_mics->setSelected(-1, 0); // tout deselectionné
                 x->f_mics->setSelected(isMouseDownOverAMic, 1);
             }
         }
-        else if (modifiers == 17 || modifiers == 24) // cmd
+#ifdef _WINDOWS
+		else if (modifiers == 21)  // Control
+#else
+		else if (modifiers == 17)  // Cmd
+#endif
         {
             x->f_mics->setSelected(isMouseDownOverAMic, -1);
         }
@@ -1039,7 +1044,12 @@ void HoaRecomposerUI_mousedrag(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
     {
         do_rect_selection(x, pt);
     }
-    else if (modifiers == 148 || x->f_showFishEye || modifiers == 21) // ctrl => do a fisheye
+	// Fish eye
+#ifdef _WINDOWS
+   else if (modifiers == 8 || x->f_showFishEye)  // Alt
+#else
+	else if (modifiers == 148 || x->f_showFishEye)  // ctrl
+#endif
     {
         double fisheyeAngle = x->f_mics->getFisheyeDestAngle();
         double factor = Tools::isInsideRad(angleDrag, fisheyeAngle-CICM_PI2, fisheyeAngle+CICM_PI2) ? 1 : -1;
@@ -1106,9 +1116,9 @@ void HoaRecomposerUI_mouseup(t_HoaRecomposerUI *x, t_object *patcherview, t_pt p
 
 void HoaRecomposerUI_mousemove(t_HoaRecomposerUI *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    //post("modifier %ld", modifiers);
     double w = x->rect.width;
-    if ( (x->f_last_mouseMove.x != pt.x) || (x->f_last_mouseMove.y != pt.y) ) {
+    if ( (x->f_last_mouseMove.x != pt.x) || (x->f_last_mouseMove.y != pt.y) ) 
+	{
         x->f_last_mouseMoveOverMic = isPointOverAMic(x, &pt);
         x->f_last_mouseMove = pt;
         jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
@@ -1117,7 +1127,11 @@ void HoaRecomposerUI_mousemove(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
     }
     
     // fisheye :
-    if (modifiers == 132) // ctrl
+#ifdef _WINDOWS
+    if (modifiers == 8) // Alt
+#else
+	if (modifiers == 132) // Control
+#endif
     {
         x->f_showFishEye = 1;
         t_pt ptCart = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
@@ -1131,13 +1145,22 @@ void HoaRecomposerUI_mousemove(t_HoaRecomposerUI *x, t_object *patcherview, t_pt
         jbox_invalidate_layer((t_object *)x, NULL, gensym("fisheye_layer"));
         jbox_redraw((t_jbox *)x);
     }
-        
     
-    if (x->f_last_mouseMoveOverMic == -1 && modifiers == 1) // cmd
+	// Selection //
+#ifdef _WINDOWS
+    if (x->f_last_mouseMoveOverMic == -1 &&  modifiers == 5) // Control
+#else
+	if (x->f_last_mouseMoveOverMic == -1 && modifiers == 1) // cmd
+#endif
     {
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_CROSSHAIR);
     }
-    else if (modifiers == 132) // ctrl
+	// Fish eye //
+#ifdef _WINDOWS
+    else if (modifiers == 8) // Alt
+#else
+	else if (modifiers == 132) // ctrl
+#endif
     {
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_DRAGGINGHAND);
     }
@@ -1163,7 +1186,13 @@ long HoaRecomposerUI_key(t_HoaRecomposerUI *x, t_object *patcherview, long keyco
 {	
 	//post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
     int filter = 0;
-	if ((keycode == 97 && modifiers == 1 && textcharacter == 0)  || (keycode == 97 && modifiers == 5 && textcharacter == 1)) // cmd+a -> select all;
+
+	// Select all
+#ifdef _WINDOWS
+   if (keycode == 97 && modifiers == 5 && textcharacter == 1) // Control + a
+#else
+	if (keycode == 97 && modifiers == 1 && textcharacter == 0)  // cmd+a
+#endif
     {
 		x->f_mics->setSelected(-1, 1); // tout selectionné
         jbox_invalidate_layer((t_object *)x, NULL, gensym("mic_layer"));
@@ -1184,8 +1213,10 @@ void begin_rect_selection(t_HoaRecomposerUI *x, t_pt pt)
 
 void end_rect_selection(t_HoaRecomposerUI *x, t_pt pt)
 {
-    for (int i=0; i < x->f_numberOfMic; i++) {
-        if (isMicInsideRect(x, i, x->f_rectSelection)) {
+    for (int i=0; i < x->f_numberOfMic; i++)
+	{
+        if (isMicInsideRect(x, i, x->f_rectSelection)) 
+		{
             x->f_mics->setSelected(i, -1); // toggle selection state
         }
     }

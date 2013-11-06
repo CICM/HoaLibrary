@@ -31,10 +31,14 @@
 #include "CicmTools.h"
 
 #ifdef __APPLE__
+
 #include <Accelerate/Accelerate.h>
 #include "CicmDefine_VDSP.h"
+
 #endif
+
 #ifdef _WINDOWS
+
 #include <ipps.h>
 #include <ippm.h>
 #include <mkl.h>

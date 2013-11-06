@@ -8,7 +8,7 @@ Beta 1.0 for Pure Data 0.43.4 (32 bit) on Mac Os and Windows plateforms (<a titl
 
 ##### Authors (Hoa for Pure Data) :
 
-Pierre Guillot, Eliott Paris, Manuel Deneu
+Pierre Guillot, Eliott Paris
 
 ##### Dependencies : 
 

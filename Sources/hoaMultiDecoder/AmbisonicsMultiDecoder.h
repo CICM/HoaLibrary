@@ -59,6 +59,7 @@ public:
     void    setPinnaeSize(long aPinnaSize);
     long    getPinnaeSize();
 	long    getGetHrtfLoaded(){return m_binaural->getGetHrtfLoaded();};
+	std::string getHrtfPath(){return m_binaural->getHrtfPath();};
 	long    getHrtfSize(){return m_binaural->getHrtfSize();};
     
     void    setRestitutionMode(long aResitutionMode);
