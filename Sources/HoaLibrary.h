@@ -27,62 +27,44 @@
 #ifndef DEF_HOA_LIBRARY
 #define DEF_HOA_LIBRARY
 
-#ifdef _WINDOWS
-#include "hoaAmbisonics/AmbisonicViewer.h"
-//#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaEncoder/AmbisonicEncoder.h"
 #include "hoaDelay/AmbisonicsDelay.h"
+#include "hoaEncoder/AmbisonicEncoder.h"
 #include "hoaFreeverb/AmbisonicFreeverb.h"
 #include "hoaFilter/AmbisonicsFilter.h"
 #include "hoaGrain/AmbisonicsGrain.h"
+#include "hoaAmbisonics/AmbisonicViewer.h"
 #include "hoaRotate/AmbisonicRotate.h"
 #include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
-#include "hoaMap/AmbisonicMultiMaps.h"
-#include "hoaMap/AmbisonicSourcesTrajectory.h"
-#include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaOptim/AmbisonicOptim.h"
-#include "hoaProjector/AmbisonicProjector.h"
-#include "hoaRecomposer/AmbisonicRecomposer.h"
-#include "hoaRingModulation/AmbisonicsRingModulation.h"
-#include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
-#include "hoaRotate/AmbisonicRotate.h"
-#include "hoaSpace/AmbisonicSpace.h"
-#include "hoaVector/AmbisonicVector.h"
-#include "hoaWider/AmbisonicWider.h"
-#endif
-
-#ifdef __APPLE__
-/*
-#include "hoaAmbisonics/Ambisonic3D.h"
-#include "hoaDecoder/AmbisonicDecoder3D.h"
-#include "hoaEncoder/AmbisonicEncoder3D.h"
-*/
-#include "hoaAmbisonics/AmbisonicViewer.h"
-#include "hoaConvolve/AmbisonicConvolver.h"
-#include "hoaDelay/AmbisonicsDelay.h"
-#include "hoaEncoder/AmbisonicEncoder.h"
-#include "hoaFreeverb/AmbisonicFreeverb.h"
-#include "hoaFilter/AmbisonicsFilter.h"
-#include "hoaGrain/AmbisonicsGrain.h"
 #include "hoaMap/AmbisonicMultiMaps.h"
 #include "hoaMap/AmbisonicSourcesManager.h"
 #include "hoaMap/AmbisonicSourcesPreset.h"
 #include "hoaMap/AmbisonicSourcesTrajectory.h"
 #include "hoaMeter/AmbisonicsMeter.h"
-#include "hoaMultiDecoder/AmbisonicsMultiDecoder.h"
 #include "hoaOptim/AmbisonicOptim.h"
 #include "hoaProjector/AmbisonicProjector.h"
 #include "hoaRecomposer/AmbisonicRecomposer.h"
 #include "hoaRingModulation/AmbisonicsRingModulation.h"
 #include "hoaRecomposer/AmbisonicVirtualMicUIManager.h"
-#include "hoaRotate/AmbisonicRotate.h"
 #include "hoaSpace/AmbisonicSpace.h"
-#include "hoaGalaxy/AmbisonicsGalaxy.h"
-#include "hoaSpectrum/AmbisonicSpectrum.h"
 #include "hoaWider/AmbisonicWider.h"
 #include "hoaVector/AmbisonicVector.h"
 
+#ifdef __APPLE__
+
+#include "hoaConvolve/AmbisonicConvolver.h"
+#include "hoaGalaxy/AmbisonicsGalaxy.h"
+#include "hoaSpectrum/AmbisonicSpectrum.h"
+
 #endif
+
+#ifdef _HOA3D_
+
+#include "hoaAmbisonics/Ambisonic3D.h"
+#include "hoaDecoder/AmbisonicDecoder3D.h"
+#include "hoaEncoder/AmbisonicEncoder3D.h"
+ 
+#endif
+
 #endif
 
 
