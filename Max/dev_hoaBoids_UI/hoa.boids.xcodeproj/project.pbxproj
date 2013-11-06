@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2C47E80B17945FAC0064CAFB /* BoidsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C47E80917945FAC0064CAFB /* BoidsManager.cpp */; };
 		2C47E80C17945FAC0064CAFB /* BoidsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C47E80A17945FAC0064CAFB /* BoidsManager.h */; };
-		2C6E3332171047C000BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3331171047C000BA3BDC /* maxmspsdk.xcconfig */; };
 		2C9A1C4C1767404500F75BDC /* hoa.boids.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A1C421767404500F75BDC /* hoa.boids.cpp */; };
 		2CBC85D31795472300D39052 /* MaxConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBC85D21795472300D39052 /* MaxConverter.h */; };
 		2CF61A471712D0620062A8EA /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CF61A461712D0620062A8EA /* MaxAudioAPI.framework */; };
@@ -108,7 +107,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.boids" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -134,7 +133,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6E3332171047C000BA3BDC /* maxmspsdk.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,16 +164,14 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Development;
 		};
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Deployment;
 		};
