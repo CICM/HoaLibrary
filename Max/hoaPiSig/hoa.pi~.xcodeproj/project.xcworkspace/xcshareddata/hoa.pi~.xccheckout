@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D574DF00-E432-48EB-B200-634DB58442AA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>hoa.pi~</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7E2F53A0-B925-4087-A644-5BA679404DBB</key>
+		<string>https://github.com/CICM/HoaLibrary.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Max/hoaPiSig/hoa.pi~.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7E2F53A0-B925-4087-A644-5BA679404DBB</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/CICM/HoaLibrary.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7E2F53A0-B925-4087-A644-5BA679404DBB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7E2F53A0-B925-4087-A644-5BA679404DBB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HoaLibrary</string>
+		</dict>
+	</array>
+</dict>
+</plist>
