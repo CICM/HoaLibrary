@@ -1,35 +1,17 @@
-#N canvas 4 22 1256 818 10;
-#X obj 1025 294 hoa.scope~ @patching_rect [ 1025 294 181 181 ] @size
-[ 181 181 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @order [ 3 ] @gain [ 1 ] @interval [ 100
-] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
-0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
-@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
-#X msg 891 28 \; pd dsp 1;
-#X msg 893 83 \; pd dsp 0;
-#X obj 789 21 hoa.pi 2;
-#X obj 804 43 phasor~ 0.2;
-#X obj 789 65 *~;
-#X obj 632 116 hoa.encoder~ 3 ***************;
-#X obj 612 42 noise~;
-#X obj 789 -2 loadbang;
-#X obj 611 71 *~ 0.1;
-#X obj 825 75 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 641 172 hoa.optim~ 3 @mode [ inPhase ];
-#X msg 1127 137 angles 330 30;
-#X obj 670 36 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 1 174 hoa.map @patching_rect [ 1 174 300 300 ] @size [ 300 300
+#N canvas 0 22 1440 852 10;
+#X msg -58 110 \; pd dsp 1;
+#X msg -59 165 \; pd dsp 0;
+#X obj 27 9 hoa.map @patching_rect [ 27 9 286 286 ] @size [ 286 286
 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant [ regular
 ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [ 0.75 0.75
 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.37 0.37 0.5 ] @outputmode
-[ 0 ] @zoom [ 0.35 ] sources_parameters [ source 0 -1.42857 1.33333
-0 0.2 0.2 0.2 1 s_nosymbol source 1 1.2381 1.48571 0 0.2 0.2 0.2 1
-s_nosymbol source 2 1.9619 -1.29524 0 0.2 0.2 0.2 1 s_nosymbol source
-3 -1.44762 -1.06667 0 0.2 0.2 0.2 1 s_nosymbol ];
-#X msg 1 148 trajectory \$1;
-#X obj 354 503 hoa.meter~ @patching_rect [ 354 503 284 284 ] @size
+[ 0 ] @zoom [ 0.35 ] sources_parameters [ source 0 0 -0 0 0.2 0.2 0.2
+1 s_nosymbol source 1 -0.214386 1.27049 0 0.2 0.2 0.2 1 s_nosymbol
+source 2 -0.568503 -0.52839 0 0.2 0.2 0.2 1 s_nosymbol source 3 -1.43487
+0.452079 0 0.2 0.2 0.2 1 s_nosymbol ] groups_parameters [ group 0 4
+0 1 2 3 0 0.2 0.2 0.2 1 s_nosymbol ];
+#X msg 348 127 trajectory \$1;
+#X obj 354 506 hoa.meter~ @patching_rect [ 354 506 284 284 ] @size
 [ 284 284 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
 [ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 16 ] @angles
 [ 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270 292.5 315
@@ -40,120 +22,246 @@ s_nosymbol source 2 1.9619 -1.29524 0 0.2 0.2 0.2 1 s_nosymbol source
 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
 [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
 ];
-#X msg 33 699 size \$1 \$1;
-#X obj 32 680 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
 #X obj 354 374 hoa.optim~ 7 @mode [ inPhase ] ****************;
 #X obj 354 409 hoa.delay~ 7 post *****************************;
-#X obj 354 337 hoa.map~ 7 4 **********************************;
-#X msg 79 631 loudspeakers 16;
-#X obj 684 460 hoa.decoder~ 7 2 2 @angles [ 30 330 ] *********;
-#X obj 354 531 dac~ 1 ************************************** 2;
-#X obj 354 452 hoa.decoder~ 7 ambisonics 16 ******************;
-#X obj 347 271 sig~ 1;
-#X connect 3 0 5 0;
-#X connect 4 0 5 1;
-#X connect 5 0 6 1;
-#X connect 6 0 0 0;
-#X connect 6 0 11 0;
-#X connect 6 1 0 1;
-#X connect 6 1 11 1;
-#X connect 6 2 0 2;
-#X connect 6 2 11 2;
-#X connect 6 3 0 3;
-#X connect 6 3 11 3;
-#X connect 6 4 0 4;
-#X connect 6 4 11 4;
-#X connect 6 5 0 5;
-#X connect 6 5 11 5;
-#X connect 6 6 0 6;
-#X connect 6 6 11 6;
-#X connect 7 0 9 0;
-#X connect 8 0 3 0;
-#X connect 9 0 6 0;
-#X connect 10 0 4 0;
-#X connect 13 0 9 1;
-#X connect 14 0 21 0;
-#X connect 15 0 14 0;
-#X connect 17 0 16 0;
+#X obj 354 317 hoa.map~ 7 4 **********************************;
+#X obj 684 470 hoa.decoder~ 7 2 2 @angles [ 30 330 ] *********;
+#X obj 684 531 dac~ 1 ************************************** 2;
+#X obj 354 251 noise~ 1;
+#X obj 167 381 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X msg 167 416 ms \$1;
+#X obj 230 366 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X msg 230 398 diff \$1;
+#X obj 161 307 nbx 5 14 0 3 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 3 256;
+#X msg 161 339 mode \$1;
+#X msg 91 434 comp \$1;
+#X obj 91 405 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 354 472 hoa.decoder~ 7 ambisonics 16 ******************;
+#X obj 993 363 hoa.recomposer~ 7 16 fisheye ******************;
+#X obj 993 317 hoa.space~ 16 ******************************;
+#X obj 993 269 hoa.projector~ 7 16 ************************;
+#X obj 993 233 hoa.grain~ 7 no ****************************;
+#X obj 993 505 hoa.scope~ @patching_rect [ 993 505 286.01 286.01 ]
+@size [ 286.01 286.01 ] @fontname [ helvetica ] @fontweight [ normal
+] @fontslant [ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ]
+@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
+[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
+[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 1272 315 line~;
+#X msg 1272 281 \$1 100;
+#X obj 1272 244 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X obj 993 191 noise~ 1;
+#X obj 684 1 hoa.space @patching_rect [ 684 1 286 286 ] @size [ 286
+286 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant [ regular
+] @fontsize [ 11 ] @channels [ 16 ] @coeffs [ 0.411294 0.936836 0.461209
+0.456522 0.457972 0.518701 0.584219 0.743284 0.480277 0.453088 0.480165
+0.712236 0.719372 0.708777 0.722246 0.54059 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor
+[ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ]
+@circolor [ 0.7 0.7 0.7 1 ];
+#X obj 27 -14 r traj;
+#X obj 348 159 s traj;
+#X obj 38 505 hoa.scope~ @patching_rect [ 38 505 286.01 286.01 ] @size
+[ 286.01 286.01 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X connect 2 0 7 0;
+#X connect 3 0 31 0;
+#X connect 5 0 6 0;
+#X connect 5 1 6 1;
+#X connect 5 2 6 2;
+#X connect 5 3 6 3;
+#X connect 5 4 6 4;
+#X connect 5 5 6 5;
+#X connect 5 6 6 6;
+#X connect 5 7 6 7;
+#X connect 5 8 6 8;
+#X connect 5 9 6 9;
+#X connect 5 10 6 10;
+#X connect 5 11 6 11;
+#X connect 5 12 6 12;
+#X connect 5 13 6 13;
+#X connect 5 14 6 14;
+#X connect 6 0 8 0;
+#X connect 6 0 19 0;
+#X connect 6 0 32 0;
+#X connect 6 1 8 1;
+#X connect 6 1 19 1;
+#X connect 6 1 32 1;
+#X connect 6 2 8 2;
+#X connect 6 2 19 2;
+#X connect 6 2 32 2;
+#X connect 6 3 8 3;
+#X connect 6 3 19 3;
+#X connect 6 3 32 3;
+#X connect 6 4 8 4;
+#X connect 6 4 19 4;
+#X connect 6 4 32 4;
+#X connect 6 5 8 5;
+#X connect 6 5 19 5;
+#X connect 6 5 32 5;
+#X connect 6 6 8 6;
+#X connect 6 6 19 6;
+#X connect 6 6 32 6;
+#X connect 6 7 8 7;
+#X connect 6 7 19 7;
+#X connect 6 7 32 7;
+#X connect 6 8 8 8;
+#X connect 6 8 19 8;
+#X connect 6 8 32 8;
+#X connect 6 9 8 9;
+#X connect 6 9 19 9;
+#X connect 6 9 32 9;
+#X connect 6 10 8 10;
+#X connect 6 10 19 10;
+#X connect 6 10 32 10;
+#X connect 6 11 8 11;
+#X connect 6 11 19 11;
+#X connect 6 11 32 11;
+#X connect 6 12 8 12;
+#X connect 6 12 19 12;
+#X connect 6 12 32 12;
+#X connect 6 13 8 13;
+#X connect 6 13 19 13;
+#X connect 6 13 32 13;
+#X connect 6 14 8 14;
+#X connect 6 14 19 14;
+#X connect 6 14 32 14;
+#X connect 7 0 5 0;
+#X connect 7 1 5 1;
+#X connect 7 2 5 2;
+#X connect 7 3 5 3;
+#X connect 7 4 5 4;
+#X connect 7 5 5 5;
+#X connect 7 6 5 6;
+#X connect 7 7 5 7;
+#X connect 7 8 5 8;
+#X connect 7 9 5 9;
+#X connect 7 10 5 10;
+#X connect 7 11 5 11;
+#X connect 7 12 5 12;
+#X connect 7 13 5 13;
+#X connect 7 14 5 14;
+#X connect 8 0 9 0;
+#X connect 8 1 9 2;
+#X connect 10 0 7 0;
+#X connect 11 0 12 0;
+#X connect 12 0 6 0;
+#X connect 13 0 14 0;
+#X connect 14 0 6 0;
+#X connect 15 0 16 0;
+#X connect 16 0 5 0;
+#X connect 17 0 6 0;
 #X connect 18 0 17 0;
-#X connect 19 0 20 0;
-#X connect 19 1 20 1;
-#X connect 19 2 20 2;
-#X connect 19 3 20 3;
-#X connect 19 4 20 4;
-#X connect 19 5 20 5;
-#X connect 19 6 20 6;
-#X connect 19 7 20 7;
-#X connect 19 8 20 8;
-#X connect 19 9 20 9;
-#X connect 19 10 20 10;
-#X connect 19 11 20 11;
-#X connect 19 12 20 12;
-#X connect 19 13 20 13;
-#X connect 19 14 20 14;
-#X connect 20 0 25 0;
-#X connect 20 0 23 0;
-#X connect 20 1 25 1;
-#X connect 20 1 23 1;
-#X connect 20 2 25 2;
-#X connect 20 2 23 2;
-#X connect 20 3 25 3;
-#X connect 20 3 23 3;
-#X connect 20 4 25 4;
-#X connect 20 4 23 4;
-#X connect 20 5 25 5;
-#X connect 20 5 23 5;
-#X connect 20 6 25 6;
-#X connect 20 6 23 6;
-#X connect 20 7 25 7;
-#X connect 20 7 23 7;
-#X connect 20 8 25 8;
-#X connect 20 8 23 8;
-#X connect 20 9 25 9;
-#X connect 20 9 23 9;
-#X connect 20 10 25 10;
-#X connect 20 10 23 10;
-#X connect 20 11 25 11;
-#X connect 20 11 23 11;
-#X connect 20 12 25 12;
-#X connect 20 12 23 12;
-#X connect 20 13 25 13;
-#X connect 20 13 23 13;
-#X connect 20 14 25 14;
-#X connect 20 14 23 14;
-#X connect 21 0 19 0;
-#X connect 21 1 19 1;
-#X connect 21 2 19 2;
-#X connect 21 3 19 3;
-#X connect 21 4 19 4;
-#X connect 21 5 19 5;
-#X connect 21 6 19 6;
-#X connect 21 7 19 7;
-#X connect 21 8 19 8;
-#X connect 21 9 19 9;
-#X connect 21 10 19 10;
-#X connect 21 11 19 11;
-#X connect 21 12 19 12;
-#X connect 21 13 19 13;
-#X connect 21 14 19 14;
-#X connect 22 0 16 0;
-#X connect 23 0 24 0;
-#X connect 23 1 24 2;
-#X connect 25 0 16 0;
-#X connect 25 1 16 1;
-#X connect 25 2 16 2;
-#X connect 25 3 16 3;
-#X connect 25 4 16 4;
-#X connect 25 5 16 5;
-#X connect 25 6 16 6;
-#X connect 25 7 16 7;
-#X connect 25 8 16 8;
-#X connect 25 9 16 9;
-#X connect 25 10 16 10;
-#X connect 25 11 16 11;
-#X connect 25 12 16 12;
-#X connect 25 13 16 13;
-#X connect 25 14 16 14;
-#X connect 25 15 16 15;
-#X connect 26 0 21 0;
+#X connect 19 0 4 0;
+#X connect 19 1 4 1;
+#X connect 19 2 4 2;
+#X connect 19 3 4 3;
+#X connect 19 4 4 4;
+#X connect 19 5 4 5;
+#X connect 19 6 4 6;
+#X connect 19 7 4 7;
+#X connect 19 8 4 8;
+#X connect 19 9 4 9;
+#X connect 19 10 4 10;
+#X connect 19 11 4 11;
+#X connect 19 12 4 12;
+#X connect 19 13 4 13;
+#X connect 19 14 4 14;
+#X connect 19 15 4 15;
+#X connect 20 0 24 0;
+#X connect 20 0 8 0;
+#X connect 20 1 24 1;
+#X connect 20 1 8 1;
+#X connect 20 2 24 2;
+#X connect 20 2 8 2;
+#X connect 20 3 24 3;
+#X connect 20 3 8 3;
+#X connect 20 4 24 4;
+#X connect 20 4 8 4;
+#X connect 20 5 24 5;
+#X connect 20 5 8 5;
+#X connect 20 6 24 6;
+#X connect 20 6 8 6;
+#X connect 20 7 24 7;
+#X connect 20 7 8 7;
+#X connect 20 8 24 8;
+#X connect 20 8 8 8;
+#X connect 20 9 24 9;
+#X connect 20 9 8 9;
+#X connect 20 10 24 10;
+#X connect 20 10 8 10;
+#X connect 20 11 24 11;
+#X connect 20 11 8 11;
+#X connect 20 12 24 12;
+#X connect 20 12 8 12;
+#X connect 20 13 24 13;
+#X connect 20 13 8 13;
+#X connect 20 14 24 14;
+#X connect 20 14 8 14;
+#X connect 21 0 20 0;
+#X connect 21 1 20 1;
+#X connect 21 2 20 2;
+#X connect 21 3 20 3;
+#X connect 21 4 20 4;
+#X connect 21 5 20 5;
+#X connect 21 6 20 6;
+#X connect 21 7 20 7;
+#X connect 21 8 20 8;
+#X connect 21 9 20 9;
+#X connect 21 10 20 10;
+#X connect 21 11 20 11;
+#X connect 21 12 20 12;
+#X connect 21 13 20 13;
+#X connect 21 14 20 14;
+#X connect 21 15 20 15;
+#X connect 22 0 21 0;
+#X connect 22 1 21 1;
+#X connect 22 2 21 2;
+#X connect 22 3 21 3;
+#X connect 22 4 21 4;
+#X connect 22 5 21 5;
+#X connect 22 6 21 6;
+#X connect 22 7 21 7;
+#X connect 22 8 21 8;
+#X connect 22 9 21 9;
+#X connect 22 10 21 10;
+#X connect 22 11 21 11;
+#X connect 22 12 21 12;
+#X connect 22 13 21 13;
+#X connect 22 14 21 14;
+#X connect 22 15 21 15;
+#X connect 23 0 22 0;
+#X connect 23 1 22 1;
+#X connect 23 2 22 2;
+#X connect 23 3 22 3;
+#X connect 23 4 22 4;
+#X connect 23 5 22 5;
+#X connect 23 6 22 6;
+#X connect 23 7 22 7;
+#X connect 23 8 22 8;
+#X connect 23 9 22 9;
+#X connect 23 10 22 10;
+#X connect 23 11 22 11;
+#X connect 23 12 22 12;
+#X connect 23 13 22 13;
+#X connect 23 14 22 14;
+#X connect 25 0 20 16;
+#X connect 26 0 25 0;
+#X connect 27 0 26 0;
+#X connect 28 0 23 0;
+#X connect 29 0 21 0;
+#X connect 30 0 2 0;

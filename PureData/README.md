@@ -38,3 +38,6 @@ The hoa.library in under the <a title="GNU" href="http://www.gnu.org/copyleft/gp
 - hoa.space~ : A spatial filter.
 - hoa.wider~ : A fractional ambisonic orders simulator.
 
+##### ToDo :
+- hoa.meter~ : Initialization with anticlockwise.
+- hoa.space : Invalidate background layer when number of channels change.
