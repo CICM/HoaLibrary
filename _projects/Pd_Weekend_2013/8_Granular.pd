@@ -1,0 +1,103 @@
+#N canvas 0 22 1440 852 10;
+#X msg -58 80 \; pd dsp 1;
+#X msg -59 135 \; pd dsp 0;
+#X obj 684 440 hoa.decoder~ 7 2 2 @angles [ 30 330 ] *********;
+#X obj 684 501 dac~ 1 ************************************** 2;
+#X obj 1091 244 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj 1090 169 nbx 5 14 0.1 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0.1 256;
+#X msg 1090 203 size \$1;
+#X msg 1091 276 delay \$1;
+#X obj 1191 170 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X obj 1193 243 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X msg 1191 205 feedback \$1;
+#X msg 1193 275 rarefaction \$1;
+#X msg 1193 298 set grain_env;
+#X obj 993 475 hoa.scope~ @patching_rect [ 993 475 286.01 286.01 ]
+@size [ 286.01 286.01 ] @fontname [ helvetica ] @fontweight [ normal
+] @fontslant [ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ]
+@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
+[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
+[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 993 333 hoa.grain~ 7 no *******************************;
+#N canvas 162 292 517 361 envelope 0;
+#N canvas 0 22 665 459 (subpatch) 0;
+#X array grain_env 44100 float 2;
+#X coords 0 1 44100 -1 200 140 1;
+#X restore 2 50 graph;
+#X obj 89 -57 soundfiler;
+#X msg 244 -54 read -resize hanning.wav grain_env;
+#X msg 89 -81 read -resize triangle.wav grain_env;
+#X msg 95 -22 read -resize sinc5.wav grain_env;
+#X obj 184 -116 loadbang;
+#X obj 74 5 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 73 28 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 114 6 Sync;
+#X text 115 27 Hann;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X connect 5 0 2 0;
+#X connect 6 0 4 0;
+#X connect 7 0 2 0;
+#X coords 0 -1 1 1 210 200 2 0 0;
+#X restore 744 197 pd envelope;
+#N canvas 1101 147 450 300 Sound1 0;
+#X obj 111 264 outlet~;
+#X obj 111 202 readsf~;
+#X obj 111 134 loadbang;
+#X msg 111 175 open sound1.wav \, 1;
+#X obj 112 241 *~ 1.3;
+#X connect 1 0 4 0;
+#X connect 1 1 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 0 0;
+#X restore 993 129 pd Sound1;
+#X connect 2 0 3 0;
+#X connect 2 1 3 2;
+#X connect 4 0 7 0;
+#X connect 5 0 6 0;
+#X connect 6 0 14 0;
+#X connect 7 0 14 0;
+#X connect 8 0 10 0;
+#X connect 9 0 11 0;
+#X connect 10 0 14 0;
+#X connect 11 0 14 0;
+#X connect 12 0 14 0;
+#X connect 14 0 2 0;
+#X connect 14 0 13 0;
+#X connect 14 1 2 1;
+#X connect 14 1 13 1;
+#X connect 14 2 2 2;
+#X connect 14 2 13 2;
+#X connect 14 3 2 3;
+#X connect 14 3 13 3;
+#X connect 14 4 2 4;
+#X connect 14 4 13 4;
+#X connect 14 5 2 5;
+#X connect 14 5 13 5;
+#X connect 14 6 2 6;
+#X connect 14 6 13 6;
+#X connect 14 7 2 7;
+#X connect 14 7 13 7;
+#X connect 14 8 2 8;
+#X connect 14 8 13 8;
+#X connect 14 9 2 9;
+#X connect 14 9 13 9;
+#X connect 14 10 2 10;
+#X connect 14 10 13 10;
+#X connect 14 11 2 11;
+#X connect 14 11 13 11;
+#X connect 14 12 2 12;
+#X connect 14 12 13 12;
+#X connect 14 13 2 13;
+#X connect 14 13 13 13;
+#X connect 14 14 2 14;
+#X connect 14 14 13 14;
+#X connect 16 0 14 0;

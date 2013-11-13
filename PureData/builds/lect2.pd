@@ -1,0 +1,16 @@
+#N canvas 473 191 450 300 10;
+#X text 217 117 up;
+#X obj 159 160 triangle~;
+#X obj 265 97 sig~ 0.5;
+#X obj 177 87 loadbang;
+#X obj 149 136 phasor~ 0.03;
+#X msg 106 133 hi 1;
+#X msg 44 133 lo 0;
+#X obj 204 252 outlet~;
+#X connect 1 0 7 0;
+#X connect 2 0 1 1;
+#X connect 3 0 5 0;
+#X connect 3 0 6 0;
+#X connect 4 0 1 0;
+#X connect 5 0 1 0;
+#X connect 6 0 1 0;

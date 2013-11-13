@@ -30,56 +30,18 @@
 #X text 171 119 2nd argument is the mode :;
 #X text 201 138 post : after an encoder;
 #X text 200 155 no : no encoder (direct synthesis);
-#X obj -130 -25 hoa.scope~ @order [ 7 ] @patching_rect { 0 0 225 225
-} @order { 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles
-{ 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor
-{ 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 };
-#X obj 468 -35 hoa.scope~ @order [ 7 ] @patching_rect { 0 0 225 225
-} @order { 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles
-{ 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor
-{ 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 };
+#X obj -130 -25 hoa.scope~ @patching_rect [ -130 -25 225 225 ] @size
+[ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 468 -35 hoa.scope~ @patching_rect [ 468 -35 225 225 ] @size
+[ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
+[ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ] @interval [ 100
+] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
+0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
+@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
 #X obj -35 -153 hoa.delay~ 7 post -------------------------;
 #X obj 322 -176 hoa.delay~ 7 no ---------------------------;
 #X text -250 -394 hoa.delay~ allows you to delay the differents harmonics

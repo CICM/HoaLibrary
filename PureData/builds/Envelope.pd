@@ -1,0 +1,23 @@
+#N canvas 580 51 610 421 10;
+#N canvas 0 22 665 459 (subpatch) 0;
+#X array grain_env 44100 float 2;
+#X coords 0 1 44100 -1 200 140 1;
+#X restore 358 96 graph;
+#X obj 79 -67 soundfiler;
+#X msg 234 -64 read -resize hanning.wav grain_env;
+#X msg 79 -91 read -resize triangle.wav grain_env;
+#X msg 85 -32 read -resize sinc5.wav grain_env;
+#X obj 174 -126 loadbang;
+#X obj 361 34 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 360 57 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 401 35 Sync;
+#X text 402 56 Hann;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 1 0;
+#X connect 5 0 2 0;
+#X connect 6 0 4 0;
+#X connect 7 0 2 0;
+#X coords 0 421 1 420 220 220 0;
