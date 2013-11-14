@@ -761,6 +761,9 @@ void hoa_space_do_channels_set(t_hoa_space *x)
     x->f_viewer         = new AmbisonicViewer(order);
     x->f_recomposer		= new AmbisonicRecomposer(order, x->f_number_of_microphones, Hoa_Fixe);
     hoa_space_coefficients_set(x, NULL, 0, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("microphones_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
     jbox_redraw((t_jbox *)x);
 }
 

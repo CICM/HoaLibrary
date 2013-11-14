@@ -144,7 +144,7 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
     CLASS_ATTR_LONG				(c, "rotation", 0, t_meter, f_clockwise);
     CLASS_ATTR_ORDER			(c, "rotation", 0, "4");
 	CLASS_ATTR_LABEL			(c, "rotation", 0, "Rotation of Loudspeakers");
-    CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"rotation",0, "1");
+    CLASS_ATTR_DEFAULT_SAVE_PAINT(c,"rotation",0, "0");
     
     CLASS_ATTR_LONG				(c, "interval", 0, t_meter, f_interval);
 	CLASS_ATTR_ORDER			(c, "interval", 0, "5");

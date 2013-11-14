@@ -1,9 +1,0 @@
-#N canvas 855 254 450 300 10;
-#X obj 101 254 outlet~;
-#X obj 101 192 readsf~;
-#X obj 101 124 loadbang;
-#X msg 101 165 open sound2.wav \, 1;
-#X connect 1 0 0 0;
-#X connect 1 1 3 0;
-#X connect 2 0 3 0;
-#X connect 3 0 1 0;

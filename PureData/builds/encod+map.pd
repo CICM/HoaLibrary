@@ -1,6 +1,0 @@
-#N canvas 907 121 450 300 10;
-#X obj 97 90 hoa.encoder~ 7 -----------------;
-#X text 191 113 +;
-#X text 130 131 Distance compensation;
-#X obj 97 44 hoa.map~ 7 1 ___________________;
-#X text 190 66 =;
