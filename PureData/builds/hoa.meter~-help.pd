@@ -4,17 +4,16 @@
 #X text -550 -414 A circular meter with sound field descriptor;
 #X msg -529 -308 \; pd dsp 1;
 #X msg -528 -271 \; pd dsp 0;
-#X obj -432 -194 hoa.meter~ @patching_rect [ -432 -194 230 230 ] @size
-[ 230 230 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 8 ] @angles
-[ 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#X obj -432 -194 hoa.meter~ @size [ 231 231 ] @fontname [ helvetica
+] @fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @vectors
+[ 1 ] @loudspeakers [ 8 ] @angles [ 0 45 90 135 180 225 270 315 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 ] @offset [ 0 ] @rotation [ 0 ] @interval [ 20 ] @bgcolor [ 0.55
-0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
-0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
-@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-];
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [
+0 ] @interval [ 20 ] @bgcolor [ 0.55 0.55 0.55 1 ] @bordercolor [ 0.25
+0.25 0.25 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @coldcolor [ 0 0.6 0 0.8
+] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor
+[ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ]
+@velocitycolor [ 1 0 0 0.8 ];
 #X obj -113 -357 hoa.pi 2;
 #X obj -113 -386 loadbang;
 #X obj -207 -325 *~;

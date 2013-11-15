@@ -41,8 +41,8 @@ typedef struct  _scope
     long        f_drawAngles;
     float       f_normalize;
 	
-	t_jrgba		f_colorBackground;
-    t_jrgba     f_bordercolor;
+	t_jrgba		f_color_background;
+    t_jrgba     f_color_border_box;
 	t_jrgba		f_colorText;
 	t_jrgba		f_colorNegatif;
 	t_jrgba		f_colorPositif;
@@ -153,19 +153,17 @@ extern "C" void setup_hoa0x2escope_tilde(void)
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
 	
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_scope, f_colorBackground);
-	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
-	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.76 0.76 0.76 1.");
-    
-    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_scope, f_bordercolor);
-	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.7 0.7 0.7 1.");
+	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_scope, f_color_background);
+	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.7 0.7 0.7 1.");
+	
+    CLASS_ATTR_RGBA					(c, "bordercolor", 0, t_scope, f_color_border_box);
+	CLASS_ATTR_CATEGORY				(c, "bordercolor", 0, "Color");
+	CLASS_ATTR_STYLE                (c, "bordercolor", 0, "rgba");
+    CLASS_ATTR_LABEL				(c, "bordercolor", 0, "Border Box Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bordercolor", 0, "0.5 0.5 0.5 1.");
 	
 	CLASS_ATTR_RGBA				(c, "txcolor", 0, t_scope, f_colorText);
 	CLASS_ATTR_CATEGORY			(c, "txcolor", 0, "Color");
@@ -351,16 +349,16 @@ t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, voi
 
 void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params)
 {
+    params->d_boxfillcolor = x->f_color_background;
+    params->d_bordercolor = x->f_color_border_box;
 	params->d_borderthickness = 1;
 	params->d_cornersize = 8;
-    params->d_bordercolor = x->f_bordercolor;
-    params->d_boxfillcolor = x->f_colorBackground;
 }
 
 long scope_oksize(t_scope *x, t_rect *newrect)
 {
-	if (newrect->width < 20)
-		newrect->width = newrect->height = 20;
+	newrect->width = pd_clip_min(newrect->width, 30.);
+    newrect->height = pd_clip_min(newrect->height, 30.);
 	return 0;
 }
 
@@ -397,7 +395,7 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
     double contrastBlack = 0.14;
     double contrastWhite = 0.06;
     
-    black = white = x->f_colorBackground;
+    black = white = x->f_color_background;
     black.red = Tools::clip_min(black.red -= contrastBlack);
     black.green = Tools::clip_min(black.green -= contrastBlack);
     black.blue = Tools::clip_min(black.blue -= contrastBlack);

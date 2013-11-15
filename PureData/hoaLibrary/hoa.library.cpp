@@ -24,17 +24,41 @@
  *
  */
 
-#include "hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/pd_enhanced.h"
+}
+#include "../../Sources/HoaLibrary.h"
+
+extern "C" void hoa_setup(void);
+
+extern "C" void setup_hoa0x2edecoder_tilde(void);   // hoa.decoder~
+extern "C" void setup_hoa0x2edelay_tilde(void);     // hoa.delay~
+extern "C" void setup_hoa0x2eencoder_tilde(void);   // hoa.encoder~
+extern "C" void setup_hoa0x2efreeverb_tilde(void);  // hoa.freeverb~
+extern "C" void setup_hoa0x2egrain_tilde(void);     // hoa.grain~
+extern "C" void setup_hoa0x2emap_tilde(void);       // hoa.map~
+extern "C" void setup_hoa0x2emeter_tilde(void);     // hoa.meter~
+extern "C" void setup_hoa0x2eprojector_tilde(void); // hoa.projector~
+extern "C" void setup_hoa0x2erecomposer_tilde(void);// hoa.recomposer~
+extern "C" void setup_hoa0x2epi(void);              // hoa.pi
+extern "C" void setup_hoa0x2eringmod_tilde(void);   // hoa.ringmod~
+extern "C" void setup_hoa0x2espace_tilde(void);     // hoa.space~
+extern "C" void setup_hoa0x2ewider_tilde(void);     // hoa.wider~
+extern "C" void setup_hoa0x2espace(void);           // hoa.space
+extern "C" void setup_hoa0x2emap(void);              // hoa.map
+extern "C" void setup_hoa0x2erotate_tilde(void);    // hoa.rotate~
+extern "C" void setup_hoa0x2escope_tilde(void);     // hoa.scope~
+extern "C" void setup_hoa0x2eoptim_tilde(void);     // hoa.optim~
 
 typedef struct _hoa
 {
 	t_object x_obj;
 } t_hoa;
 
-static t_eclass* hoa_class;
+t_eclass* hoa_class;
 
-
-static void* hoa_new(t_symbol* s)
+void* hoa_new(t_symbol* s)
 {
     t_hoa *x = (t_hoa *)object_alloc(hoa_class);
     return (x);
