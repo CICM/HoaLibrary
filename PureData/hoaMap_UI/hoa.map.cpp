@@ -55,9 +55,9 @@ typedef struct  _hoamap
     long        f_index_of_source_to_color;
     long        f_index_of_group_to_color;
     
-    t_jrgba		f_colorBackground;
-    t_jrgba		f_colorBackgroundInside;
-    t_jrgba     f_colorBorder;
+    t_jrgba		f_color_background;
+    t_jrgba		f_color_backgroundInside;
+    t_jrgba     f_color_border_box;
     t_jrgba     f_colorSelection;
     
     int         f_cartConstrain;
@@ -78,6 +78,7 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv);
 void hoamap_free(t_hoamap *x);
 void hoamap_tick(t_hoamap *x);
 void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params);
+void hoamap_oksize(t_hoamap *x, t_rect *newrect);
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
 t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
@@ -132,6 +133,7 @@ extern "C" void setup_hoa0x2emap(void)
     class_addmethod(c, (method) hoamap_assist,          "assist",           A_CANT,     0);
 	class_addmethod(c, (method) hoamap_paint,           "paint",            A_CANT,     0);
 	class_addmethod(c, (method) hoamap_getdrawparams,   "getdrawparams",    A_CANT,     0);
+    class_addmethod(c, (method) hoamap_oksize,          "oksize",           A_CANT,     0);
 	class_addmethod(c, (method) hoamap_notify,          "notify",           A_CANT,     0);
     class_addmethod(c, (method) hoamap_bang,            "bang",             A_CANT,     0);
     class_addmethod(c, (method) hoamap_infos,           "getinfo",          A_CANT,     0);
@@ -153,31 +155,30 @@ extern "C" void setup_hoa0x2emap(void)
 	class_addmethod(c, (method) hoamap_popup,            "popup",           A_CANT,     0);
     class_addmethod(c, (method) hoamap_jsave,            "jsave",           A_CANT,     0);
     
-	CLASS_ATTR_DEFAULT			(c, "size", 0, "300 300");
+	CLASS_ATTR_DEFAULT			(c, "size", 0, "225 225");
 	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
     
     /* Colors */
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_colorBackground);
-	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Outside Color");
-	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 1.");
     
-    CLASS_ATTR_RGBA				(c, "bgcolor2", 0, t_hoamap, f_colorBackgroundInside);
+    CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_hoamap, f_color_background);
+	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.7 0.7 0.7 1.");
+	
+    CLASS_ATTR_RGBA					(c, "bordercolor", 0, t_hoamap, f_color_border_box);
+	CLASS_ATTR_CATEGORY				(c, "bordercolor", 0, "Color");
+	CLASS_ATTR_STYLE                (c, "bordercolor", 0, "rgba");
+    CLASS_ATTR_LABEL				(c, "bordercolor", 0, "Border Box Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bordercolor", 0, "0.5 0.5 0.5 1.");
+    
+    CLASS_ATTR_RGBA				(c, "bgcolor2", 0, t_hoamap, f_color_backgroundInside);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor2", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor2", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor2", 0, "Background Inside Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor2", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor2", 0, "0.75 0.75 0.75 1.");
-    
-    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoamap, f_colorBorder);
-	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "3");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0. 0. 0. 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor2", 0, "0.6 0.6 0.6 1.");
     
     CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoamap, f_colorSelection);
 	CLASS_ATTR_CATEGORY			(c, "selcolor", 0, "Color");
@@ -419,10 +420,16 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
 
 void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-    params->d_boxfillcolor = x->f_colorBackgroundInside;
-    params->d_bordercolor =  x->f_colorBorder;
+    params->d_boxfillcolor = x->f_color_background;
+    params->d_bordercolor = x->f_color_border_box;
 	params->d_borderthickness = 1;
-	params->d_cornersize = CORNERSIZE;
+	params->d_cornersize = 8;
+}
+
+void hoamap_oksize(t_hoamap *x, t_rect *newrect)
+{
+    newrect->width = pd_clip_min(newrect->width, 30.);
+    newrect->height = pd_clip_min(newrect->height, 30.);
 }
 
 void hoamap_tick(t_hoamap *x)
@@ -1368,10 +1375,10 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
     
 	if (g)
     {
-		t_jrgba outsideColor = x->f_colorBackgroundInside;
-		t_jrgba insideColor = x->f_colorBackground;
+		t_jrgba outsideColor = x->f_color_backgroundInside;
+		t_jrgba insideColor = x->f_color_background;
         
-        jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+        jgraphics_set_source_jrgba(g, &x->f_color_background);
         jgraphics_arc(g, rect->width / 2., rect->width / 2., (rect->width / 2.) * (1. / MIN_ZOOM * x->f_zoom_factor) - 1.,  0., JGRAPHICS_2PI);
         jgraphics_fill(g);
         
@@ -1381,12 +1388,12 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
         {
             
             jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+            jgraphics_set_source_jrgba(g, &x->f_color_background);
             jgraphics_arc(g, rect->width / 2 - 0.5, rect->width / 2 - 0.5, (double)i * radius - 1.,  0., JGRAPHICS_2PI);
             jgraphics_stroke(g);
             
             jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &x->f_colorBackgroundInside);
+            jgraphics_set_source_jrgba(g, &x->f_color_backgroundInside);
             jgraphics_arc(g, rect->width / 2, rect->width / 2, (double)i * radius - 1.,  0., JGRAPHICS_2PI);
             jgraphics_stroke(g);
             

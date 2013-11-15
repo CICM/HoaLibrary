@@ -117,7 +117,7 @@ extern "C" void setup_hoa0x2espace(void)
     class_addmethod(c, (method)hoa_space_mouse_drag,    "mousedrag",        A_CANT, 0);
     class_addmethod(c, (method)hoa_space_mouse_enddrag, "mouseup",          A_CANT, 0);
     class_addmethod(c, (method)hoa_space_coefficients_set,"list",           A_GIMME,0);
-    //class_addmethod(c, (method)hoa_space_anything,		"anything",       A_GIMME,0);
+    class_addmethod(c, (method)hoa_space_anything,		"anything",       A_GIMME,0);
 
     CLASS_ATTR_DEFAULT		(c, "size", 0, "225 225");
 	CLASS_ATTR_INVISIBLE	(c, "color", 0);
@@ -204,11 +204,9 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
             | JBOX_DRAWBACKGROUND
         ;
         
-        jbox_new((t_jbox *)x, 1, argc, argv);
+        jbox_new((t_jbox *)x, flags, argc, argv);
         
         x->j_box.b_firstin = (t_object *)x;
-        
-        
         
         x->f_viewer                 = new AmbisonicViewer(1);
         x->f_recomposer             = new AmbisonicRecomposer(1, 4);
@@ -245,7 +243,7 @@ void *hoa_space_new(t_symbol *s, int argc, t_atom *argv)
 
 void hoa_space_anything(t_hoa_space *x, t_symbol *s, long argc, t_atom *argv)
 {
-    //post("%s",s->s_name);
+    //post("any %s",s->s_name);
 }
 
 void hoa_space_free(t_hoa_space *x)
@@ -299,19 +297,14 @@ void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawpa
 {
     params->d_boxfillcolor = x->f_color_background;
     params->d_bordercolor = x->f_color_border_box;
-	params->d_borderthickness = 2;
-	params->d_cornersize = 2;
+	params->d_borderthickness = 1;
+	params->d_cornersize = 8;
 }
 
 void hoa_space_oksize(t_hoa_space *x, t_rect *newrect)
 {
-    newrect->width = pd_clip_min(newrect->width, 15.);
-    newrect->height = pd_clip_min(newrect->height, 15.);
-    
-    if(newrect->height > newrect->width)
-        newrect->width = newrect->height;
-    else
-        newrect->height = newrect->width;
+    newrect->width = pd_clip_min(newrect->width, 30.);
+    newrect->height = pd_clip_min(newrect->height, 30.);
 }
 
 void hoa_space_bang(t_hoa_space *x)
@@ -521,12 +514,12 @@ void hoa_space_mouse_move(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
     if(modifiers == EMOD_SHIFT)
     {
         x->f_mode = 2;
-        jmouse_setcursor(patcherview, (t_jbox *)x, 2);
+        jmouse_setcursor(patcherview, (t_jbox *)x, 10);
     }
     else if(modifiers == EMOD_ALT)
     {
         x->f_mode = 1;
-        jmouse_setcursor(patcherview, (t_jbox *)x, 5);
+        jmouse_setcursor(patcherview, (t_jbox *)x, 11);
     }
     else
     {

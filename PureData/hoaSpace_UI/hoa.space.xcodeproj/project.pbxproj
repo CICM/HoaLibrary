@@ -99,6 +99,8 @@
 		8F83FBE31801A2C6006DA25F /* ewidget.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F83FBC51801A2C6006DA25F /* ewidget.c */; };
 		8F83FBE41801A2C6006DA25F /* ewidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F83FBC61801A2C6006DA25F /* ewidget.h */; };
 		8F83FBE51801A2C6006DA25F /* pd_enhanced.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F83FBC71801A2C6006DA25F /* pd_enhanced.h */; };
+		8F88168618360438002FD5E2 /* ebox_patcher.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F88168518360438002FD5E2 /* ebox_patcher.c */; };
+		8FBB4B3D1834D6BA0092DF36 /* eboxflag.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FBB4B3C1834D6BA0092DF36 /* eboxflag.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +197,8 @@
 		8F83FBC51801A2C6006DA25F /* ewidget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ewidget.c; sourceTree = "<group>"; };
 		8F83FBC61801A2C6006DA25F /* ewidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ewidget.h; sourceTree = "<group>"; };
 		8F83FBC71801A2C6006DA25F /* pd_enhanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pd_enhanced.h; sourceTree = "<group>"; };
+		8F88168518360438002FD5E2 /* ebox_patcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ebox_patcher.c; sourceTree = "<group>"; };
+		8FBB4B3C1834D6BA0092DF36 /* eboxflag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eboxflag.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +418,7 @@
 				8F83FBAC1801A2C6006DA25F /* ebox_draw.c */,
 				8F83FBAD1801A2C6006DA25F /* ebox_window.c */,
 				8F247098180303D600736DFF /* ebox_handle.c */,
+				8F88168518360438002FD5E2 /* ebox_patcher.c */,
 			);
 			path = ebox;
 			sourceTree = "<group>";
@@ -432,6 +437,7 @@
 			children = (
 				8F83FBB21801A2C6006DA25F /* ecommon.c */,
 				8F83FBB31801A2C6006DA25F /* ecommon.h */,
+				8FBB4B3C1834D6BA0092DF36 /* eboxflag.h */,
 			);
 			path = ecommon;
 			sourceTree = "<group>";
@@ -525,6 +531,7 @@
 				8F72377618247E85002B03D6 /* AmbisonicEncoder.h in Headers */,
 				8F1608EB17D3269700CE8933 /* CicmFilterConvolutionZero.h in Headers */,
 				8F1608EC17D3269700CE8933 /* CicmFilterDamper.h in Headers */,
+				8FBB4B3D1834D6BA0092DF36 /* eboxflag.h in Headers */,
 				8F1608EE17D3269700CE8933 /* CicmFilterDelay.h in Headers */,
 				8F72377E18247EA3002B03D6 /* AmbisonicWider.h in Headers */,
 				8F83FBE21801A2C6006DA25F /* estruct.h in Headers */,
@@ -641,6 +648,7 @@
 				8F72376F18247E6A002B03D6 /* AmbisonicViewer.cpp in Sources */,
 				8F2470971803032E00736DFF /* hoa.space.cpp in Sources */,
 				8F72377D18247EA3002B03D6 /* AmbisonicWider.cpp in Sources */,
+				8F88168618360438002FD5E2 /* ebox_patcher.c in Sources */,
 				8F83FBE01801A2C6006DA25F /* epopup.c in Sources */,
 				8F83FBDD1801A2C6006DA25F /* egraphics_text.c in Sources */,
 				8F83FBD01801A2C6006DA25F /* ebox_window.c in Sources */,

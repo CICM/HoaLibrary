@@ -46,9 +46,9 @@ typedef struct  _meter
 	double		f_angles_of_loudspeakers[MAX_SPEAKER];
     long		f_drawOverLedleftTime[MAX_SPEAKER];
 	
-	t_jrgba		f_colorBackground;
+	t_jrgba		f_color_background;
 	t_jrgba		f_colorMeterBg;
-	t_jrgba		f_colorBorder;
+	t_jrgba		f_color_border_box;
 	t_jrgba		f_colorColdSignal;
 	t_jrgba		f_colorTepidSignal;
 	t_jrgba		f_colorWarmSignal;
@@ -153,20 +153,22 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "50");
 	CLASS_ATTR_SAVE				(c, "interval", 1);
 	
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_meter, f_colorBackground);
-	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
-	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.55 0.55 0.55 1.");
+    CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_meter, f_color_background);
+	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.7 0.7 0.7 1.");
+	
+    CLASS_ATTR_RGBA					(c, "bordercolor", 0, t_meter, f_color_border_box);
+	CLASS_ATTR_CATEGORY				(c, "bordercolor", 0, "Color");
+	CLASS_ATTR_STYLE                (c, "bordercolor", 0, "rgba");
+    CLASS_ATTR_LABEL				(c, "bordercolor", 0, "Border Box Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bordercolor", 0, "0.5 0.5 0.5 1.");
 	
 	CLASS_ATTR_RGBA				(c, "mbgcolor", 0, t_meter, f_colorMeterBg);
 	CLASS_ATTR_LABEL			(c, "mbgcolor", 0, "Meter Background Color");
 	CLASS_ATTR_ORDER			(c, "mbgcolor", 0, "2");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "mbgcolor", 0, "0.4 0.4 0.4 1.");
-	
-	CLASS_ATTR_RGBA				(c, "bordercolor", 0, t_meter, f_colorBorder);
-	CLASS_ATTR_LABEL			(c, "bordercolor", 0, "Box Border Color");
-	CLASS_ATTR_ORDER			(c, "bordercolor", 0, "3");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bordercolor", 0, "0.25 0.25 0.25 1");
 	
 	CLASS_ATTR_RGBA				(c, "coldcolor", 0, t_meter, f_colorColdSignal);
 	CLASS_ATTR_LABEL			(c, "coldcolor", 0, "Cold Signal Color");
@@ -245,24 +247,20 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
-void meter_oksize(t_meter *x, t_rect *newrect)
-{
-    newrect->width = pd_clip_min(newrect->width, 15.);
-    newrect->height = pd_clip_min(newrect->height, 15.);
-    
-    if(newrect->height > newrect->width)
-        newrect->width = newrect->height;
-    else
-        newrect->height = newrect->width;
-}
-
 void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-	params->d_borderthickness = 2;
+    params->d_boxfillcolor = x->f_color_background;
+    params->d_bordercolor = x->f_color_border_box;
+	params->d_borderthickness = 1;
 	params->d_cornersize = 8;
-    params->d_bordercolor = x->f_colorBorder;
-    params->d_boxfillcolor = x->f_colorBackground;
 }
+
+void meter_oksize(t_meter *x, t_rect *newrect)
+{
+    newrect->width = pd_clip_min(newrect->width, 30.);
+    newrect->height = pd_clip_min(newrect->height, 30.);
+}
+
 
 t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_atom *argv)
 {
@@ -452,7 +450,7 @@ void draw_background(t_meter *x,  t_object *view, t_rect *rect)
 		jgraphics_arc(g, 0.f, 0.f, x->f_radius_exterior, 0., JGRAPHICS_2PI);
 		jgraphics_fill(g);
 
-		jgraphics_set_source_jrgba(g, &x->f_colorBackground);
+		jgraphics_set_source_jrgba(g, &x->f_color_background);
 		jgraphics_arc(g, 0.f, 0.f, x->f_radius_interior, 0., JGRAPHICS_2PI);
 		jgraphics_fill(g);
 		
