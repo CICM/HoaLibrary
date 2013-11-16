@@ -84,6 +84,7 @@
 		8F2E9DEF180A838000237119 /* ewidget.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F2E9DD3180A838000237119 /* ewidget.c */; };
 		8F2E9DF0180A838000237119 /* ewidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2E9DD4180A838000237119 /* ewidget.h */; };
 		8F2E9DF1180A838000237119 /* pd_enhanced.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2E9DD5180A838000237119 /* pd_enhanced.h */; };
+		8F7CEFD81837B23500E99DE8 /* ebox_patcher.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F7CEFD71837B23500E99DE8 /* ebox_patcher.c */; };
 		8FAEEC6F18226A2F00D2DCA3 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAEEC6518226A2F00D2DCA3 /* Ambisonic.cpp */; };
 		8FAEEC7018226A2F00D2DCA3 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FAEEC6618226A2F00D2DCA3 /* Ambisonic.h */; };
 		8FAEEC7118226A2F00D2DCA3 /* Ambisonic3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FAEEC6718226A2F00D2DCA3 /* Ambisonic3D.cpp */; };
@@ -202,6 +203,7 @@
 		8F2E9DD3180A838000237119 /* ewidget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ewidget.c; sourceTree = "<group>"; };
 		8F2E9DD4180A838000237119 /* ewidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ewidget.h; sourceTree = "<group>"; };
 		8F2E9DD5180A838000237119 /* pd_enhanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pd_enhanced.h; sourceTree = "<group>"; };
+		8F7CEFD71837B23500E99DE8 /* ebox_patcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ebox_patcher.c; sourceTree = "<group>"; };
 		8FAEEC6518226A2F00D2DCA3 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		8FAEEC6618226A2F00D2DCA3 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
 		8FAEEC6718226A2F00D2DCA3 /* Ambisonic3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic3D.cpp; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				8F2E9DBB180A838000237119 /* ebox.h */,
 				8F2E9DBC180A838000237119 /* ebox_draw.c */,
 				8F2E9DBD180A838000237119 /* ebox_handle.c */,
+				8F7CEFD71837B23500E99DE8 /* ebox_patcher.c */,
 				8F2E9DBE180A838000237119 /* ebox_window.c */,
 			);
 			path = ebox;
@@ -737,6 +740,7 @@
 				8FCD20AC17DE108D009B685B /* AmbisonicSourcesManager.cpp in Sources */,
 				8FCD20AE17DE108D009B685B /* AmbisonicSourcesPreset.cpp in Sources */,
 				8F2E9DE4180A838000237119 /* egraphics.c in Sources */,
+				8F7CEFD81837B23500E99DE8 /* ebox_patcher.c in Sources */,
 				8F2E9DE0180A838000237119 /* eclass.c in Sources */,
 				8FAEEC6F18226A2F00D2DCA3 /* Ambisonic.cpp in Sources */,
 				8F2E9DD7180A838000237119 /* eattr_attr.c in Sources */,

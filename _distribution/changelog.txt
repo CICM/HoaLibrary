@@ -102,6 +102,16 @@ version beta 1.0.0
 Pd : For an overview of hoa.library, please refer to the '@hoa.overview' patch.
 
 ------------------------
+version beta 1.0.1
+------------------------
+
+- meter new visual
+- GUI optimized (no more lagging)
+- GUI resize with click and drag (bottom, right and right-bottom corner)
+- GUI inlets and outlets invisibles in runmode
+- GUI connection updated for every OS
+
+------------------------
 version beta 1.0.0
 ------------------------
 Systems : 
@@ -127,6 +137,7 @@ Objects :
 - hoa.space : A GUI to design ambisonic space.
 - hoa.space~ : A spatial filter.
 - hoa.wider~ : A fractional ambisonic orders simulator.
+
 
 Dependencies : 
 

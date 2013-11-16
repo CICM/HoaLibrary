@@ -207,6 +207,7 @@ void *scope_new(t_symbol *s, int argc, t_atom *argv)
             | JBOX_DRAWBACKGROUND
 			| JBOX_TRANSPARENT	
 			| JBOX_GROWY
+            | JBOX_IGNORELOCKCLICK
 			;
 	jbox_new((t_jbox *)x, flags, argc, argv);
     

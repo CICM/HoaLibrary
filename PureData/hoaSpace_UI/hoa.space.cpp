@@ -31,9 +31,9 @@
 
 typedef struct _hoa_space
 {
-    t_jbox                  j_box;
+    t_jbox                 j_box;
     AmbisonicViewer*       f_viewer;
-    AmbisonicRecomposer*    f_recomposer;
+    AmbisonicRecomposer*   f_recomposer;
     
     t_outlet*   f_out;
     
@@ -290,7 +290,7 @@ t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sen
         }
         jbox_redraw((t_jbox *)x);
 	}
-	return ebox_notify((t_jbox *)x, s, msg, sender, data);
+	return 0;
 }
 
 void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawparams *params)

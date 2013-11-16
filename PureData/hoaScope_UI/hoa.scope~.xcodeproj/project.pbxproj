@@ -84,6 +84,7 @@
 		8F2E9BD9180A791900237119 /* ewidget.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F2E9BBD180A791900237119 /* ewidget.c */; };
 		8F2E9BDA180A791900237119 /* ewidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2E9BBE180A791900237119 /* ewidget.h */; };
 		8F2E9BDB180A791900237119 /* pd_enhanced.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2E9BBF180A791900237119 /* pd_enhanced.h */; };
+		8F7CEFDC1837B24F00E99DE8 /* ebox_patcher.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F7CEFDB1837B24F00E99DE8 /* ebox_patcher.c */; };
 		8F8322D41834AE420075F8A4 /* AmbisonicWider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F8322D21834AE420075F8A4 /* AmbisonicWider.cpp */; };
 		8F8322D51834AE420075F8A4 /* AmbisonicWider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8322D31834AE420075F8A4 /* AmbisonicWider.h */; };
 		8F8322E11834AE5D0075F8A4 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F8322D71834AE5D0075F8A4 /* Ambisonic.cpp */; };
@@ -172,6 +173,7 @@
 		8F2E9BBD180A791900237119 /* ewidget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ewidget.c; sourceTree = "<group>"; };
 		8F2E9BBE180A791900237119 /* ewidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ewidget.h; sourceTree = "<group>"; };
 		8F2E9BBF180A791900237119 /* pd_enhanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pd_enhanced.h; sourceTree = "<group>"; };
+		8F7CEFDB1837B24F00E99DE8 /* ebox_patcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ebox_patcher.c; sourceTree = "<group>"; };
 		8F8322D21834AE420075F8A4 /* AmbisonicWider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicWider.cpp; sourceTree = "<group>"; };
 		8F8322D31834AE420075F8A4 /* AmbisonicWider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicWider.h; sourceTree = "<group>"; };
 		8F8322D71834AE5D0075F8A4 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				8F2E9BA6180A791900237119 /* ebox_draw.c */,
 				8F2E9BA7180A791900237119 /* ebox_handle.c */,
 				8F2E9BA8180A791900237119 /* ebox_window.c */,
+				8F7CEFDB1837B24F00E99DE8 /* ebox_patcher.c */,
 			);
 			path = ebox;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				8F8322E71834AE5D0075F8A4 /* AmbisonicViewer.cpp in Sources */,
 				8F2E9BC5180A791900237119 /* ebox.c in Sources */,
 				8F1608DA17D3269700CE8933 /* CicmDecorrelation.cpp in Sources */,
+				8F7CEFDC1837B24F00E99DE8 /* ebox_patcher.c in Sources */,
 				8F1608DC17D3269700CE8933 /* CicmEnvelope.cpp in Sources */,
 				8F1608DE17D3269700CE8933 /* CicmFft.cpp in Sources */,
 				8F1608E017D3269700CE8933 /* CicmFilter.cpp in Sources */,

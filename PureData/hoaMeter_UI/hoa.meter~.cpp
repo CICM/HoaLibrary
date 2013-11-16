@@ -47,7 +47,6 @@ typedef struct  _meter
     long		f_drawOverLedleftTime[MAX_SPEAKER];
 	
 	t_jrgba		f_color_background;
-	t_jrgba		f_colorMeterBg;
 	t_jrgba		f_color_border_box;
 	t_jrgba		f_colorColdSignal;
 	t_jrgba		f_colorTepidSignal;
@@ -165,11 +164,6 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
     CLASS_ATTR_LABEL				(c, "bordercolor", 0, "Border Box Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bordercolor", 0, "0.5 0.5 0.5 1.");
 	
-	CLASS_ATTR_RGBA				(c, "mbgcolor", 0, t_meter, f_colorMeterBg);
-	CLASS_ATTR_LABEL			(c, "mbgcolor", 0, "Meter Background Color");
-	CLASS_ATTR_ORDER			(c, "mbgcolor", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "mbgcolor", 0, "0.4 0.4 0.4 1.");
-	
 	CLASS_ATTR_RGBA				(c, "coldcolor", 0, t_meter, f_colorColdSignal);
 	CLASS_ATTR_LABEL			(c, "coldcolor", 0, "Cold Signal Color");
 	CLASS_ATTR_ORDER			(c, "coldcolor", 0, "4");
@@ -224,6 +218,7 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
     | JBOX_TRANSPARENT
     | JBOX_DRAWBACKGROUND
     | JBOX_GROWY
+    | JBOX_IGNORELOCKCLICK
     ;
     
     x->f_number_of_loudspeakers = 1;
@@ -436,8 +431,8 @@ void draw_background(t_meter *x,  t_object *view, t_rect *rect)
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
 	
-    t_jrgba black = cicm_rgba_addContrast(x->f_colorMeterBg,  -0.12);
-    t_jrgba white = cicm_rgba_addContrast(x->f_colorMeterBg,  0.08);
+    t_jrgba black = cicm_rgba_addContrast(x->f_color_background,  -0.12);
+    t_jrgba white = cicm_rgba_addContrast(x->f_color_background,  0.08);
     
 	if (g)
 	{
@@ -446,7 +441,7 @@ void draw_background(t_meter *x,  t_object *view, t_rect *rect)
         
 		jgraphics_set_line_width(g, 1.);
 
-		jgraphics_set_source_jrgba(g, &x->f_colorMeterBg);
+		jgraphics_set_source_jrgba(g, &x->f_color_background);
 		jgraphics_arc(g, 0.f, 0.f, x->f_radius_exterior, 0., JGRAPHICS_2PI);
 		jgraphics_fill(g);
 
@@ -518,7 +513,7 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
     float led_width = 0.5 / 16. * rect->width;
     float offset = x->f_offset_of_loudspeakers / 360. * CICM_2PI + CICM_PI2;
     
-    t_jrgba white = cicm_rgba_addContrast(x->f_colorMeterBg,  0.08);
+    t_jrgba white = cicm_rgba_addContrast(x->f_color_background,  -0.08);
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("leds_layers"), rect->width, rect->height);
     
 	if (g)
@@ -539,7 +534,7 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
             {
                 center_x = pd_abscissa(led_width * (2 - (j / 11.)), angle);
                 center_y = -pd_ordinate(led_width * (2 - (j / 11.)), angle);
-                radius    = (j + 3.33) * led_width;
+                radius    = (j + 2.33) * led_width;
                 
                 if(x->f_meter->getLoudspeakerEnergy(i) > dB)
                 {
