@@ -25,7 +25,7 @@
 #X obj 177 -110 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 1000 256;
 #X obj 177 -197 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 30 256;
+-1 -1 17 256;
 #X msg 177 -168 size \$1;
 #X msg 177 -83 delay \$1;
 #X obj 246 -195 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
@@ -34,19 +34,19 @@
 -1 -1 0.4 256;
 #X msg 246 -165 feedback \$1;
 #X msg 247 -84 rarefaction \$1;
-#X obj -241 -215 hoa.space @size [ 225 225 ] @fontname [ helvetica
+#X obj -241 -215 hoa.space @size [ 221 221 ] @fontname [ helvetica
 ] @fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @channels
-[ 10 ] @coeffs [ 1 0.962457 0.919313 0.806189 0.918966 0.952491 0.805036
-0.493504 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[ 10 ] @coeffs [ 0.302648 0.0619444 0.00550462 0 0.00405423 0.00521575
+0 0 0.437351 0.763057 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5
-0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor
-[ 0.7 0.7 0.7 1 ];
+0 0 0 0 0 0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor
+[ 0.5 0.5 0.5 1 ] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ]
+@circolor [ 0.7 0.7 0.7 1 ];
 #X obj 95 -94 osc~ 220;
 #X obj 332 -283 loadbang;
 #X text -227 307 Eliott Paris © 2012-2013 CICM / Universite Paris
@@ -55,10 +55,8 @@
 ;
 #X obj 386 68 hoa.scope~ @size [ 225 225 ] @fontname [ helvetica ]
 @fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @order
-[ 4 ] @gain [ 1 ] @interval [ 100 ] @drawcircle [ 1 ] @drawangles [
-1 ] @drawcontrib [ 1 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0.5 0.5
-0.5 1 ] @txcolor [ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0
-0 1 1 ];
+[ 4 ] @gain [ 1 ] @interval [ 100 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bdcolor
+[ 0.5 0.5 0.5 1 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
 #X text -49 22 Set one coefficient with;
 #X msg 177 -140 1000;
 #X msg 177 -221 30;
@@ -77,6 +75,8 @@ the gains together.;
 #X text -230 -238 Use hoa.space (without ~) to change the gains.;
 #X obj -241 -255 loadbang;
 #X obj 96 219 hoa.decoder~ 4 0 10 -----;
+#X msg 4 -116 set grain_env;
+#X obj 4 -148 loadbang;
 #X connect 1 0 2 0;
 #X connect 1 1 2 1;
 #X connect 1 2 2 2;
@@ -163,4 +163,6 @@ the gains together.;
 #X connect 44 7 7 7;
 #X connect 44 8 7 8;
 #X connect 44 9 7 9;
+#X connect 45 0 11 0;
+#X connect 46 0 45 0;
 #X coords 0 715 1 714 100 60 0;

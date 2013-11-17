@@ -56,11 +56,8 @@ typedef struct  _hoamap
     long        f_index_of_group_to_color;
     
     t_jrgba		f_color_background;
-    t_jrgba		f_color_backgroundInside;
     t_jrgba     f_color_border_box;
     t_jrgba     f_colorSelection;
-    
-    int         f_cartConstrain;
     
     double      f_size_source;
 	double		f_zoom_factor;
@@ -68,7 +65,7 @@ typedef struct  _hoamap
     t_rect		f_rect_selection;
 	int			f_rect_selection_exist;
     
-    long    f_output_mode;
+    long        f_output_mode;
     
 } t_hoamap;
 
@@ -156,10 +153,6 @@ extern "C" void setup_hoa0x2emap(void)
     class_addmethod(c, (method) hoamap_jsave,            "jsave",           A_CANT,     0);
     
 	CLASS_ATTR_DEFAULT			(c, "size", 0, "225 225");
-	CLASS_ATTR_INVISIBLE		(c, "color", 0);
-	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
-    
-    /* Colors */
     
     CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_hoamap, f_color_background);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
@@ -167,42 +160,34 @@ extern "C" void setup_hoa0x2emap(void)
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.7 0.7 0.7 1.");
 	
-    CLASS_ATTR_RGBA					(c, "bordercolor", 0, t_hoamap, f_color_border_box);
-	CLASS_ATTR_CATEGORY				(c, "bordercolor", 0, "Color");
-	CLASS_ATTR_STYLE                (c, "bordercolor", 0, "rgba");
-    CLASS_ATTR_LABEL				(c, "bordercolor", 0, "Border Box Color");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bordercolor", 0, "0.5 0.5 0.5 1.");
+    CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_hoamap, f_color_border_box);
+	CLASS_ATTR_CATEGORY				(c, "bdcolor", 0, "Color");
+	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
+    CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Box Color");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
     
-    CLASS_ATTR_RGBA				(c, "bgcolor2", 0, t_hoamap, f_color_backgroundInside);
-	CLASS_ATTR_CATEGORY			(c, "bgcolor2", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bgcolor2", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bgcolor2", 0, "Background Inside Color");
-	CLASS_ATTR_ORDER			(c, "bgcolor2", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor2", 0, "0.6 0.6 0.6 1.");
-    
-    CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoamap, f_colorSelection);
-	CLASS_ATTR_CATEGORY			(c, "selcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "selcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "selcolor", 0, "Selection Color");
-	CLASS_ATTR_ORDER			(c, "selcolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "selcolor", 0, "0.36 0.37 0.37 0.5");
+    CLASS_ATTR_RGBA                 (c, "selcolor", 0, t_hoamap, f_colorSelection);
+	CLASS_ATTR_CATEGORY             (c, "selcolor", 0, "Color");
+	CLASS_ATTR_STYLE                (c, "selcolor", 0, "rgba");
+	CLASS_ATTR_LABEL                (c, "selcolor", 0, "Selection Color");
+	CLASS_ATTR_ORDER                (c, "selcolor", 0, "4");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "selcolor", 0, "0.37 0.37 0.37 0.5");
 	
-    /* Behavior */
-	CLASS_ATTR_LONG				(c,"outputmode", 0, t_hoamap, f_output_mode);
-	CLASS_ATTR_LABEL			(c,"outputmode", 0, "Output Mode");
-	CLASS_ATTR_CATEGORY			(c,"outputmode", 0, "Behavior");
-	CLASS_ATTR_DEFAULT          (c,"outputmode", 0,  "0");
-    CLASS_ATTR_SAVE             (c,"outputmode", 1);
-    CLASS_ATTR_ORDER			(c,"outputmode", 0, "1");
+	CLASS_ATTR_LONG                 (c,"outputmode", 0, t_hoamap, f_output_mode);
+	CLASS_ATTR_LABEL                (c,"outputmode", 0, "Output Mode");
+	CLASS_ATTR_CATEGORY             (c,"outputmode", 0, "Behavior");
+	CLASS_ATTR_DEFAULT              (c,"outputmode", 0,  "0");
+    CLASS_ATTR_SAVE                 (c,"outputmode", 1);
+    CLASS_ATTR_ORDER                (c,"outputmode", 0, "1");
     
-	CLASS_ATTR_DOUBLE			(c,"zoom", 0, t_hoamap, f_zoom_factor);
-    CLASS_ATTR_ACCESSORS		(c,"zoom", NULL, hoamap_zoom);
-	CLASS_ATTR_LABEL			(c,"zoom", 0,   "Zoom");
-	CLASS_ATTR_CATEGORY			(c,"zoom", 0,   "Behavior");
-	CLASS_ATTR_DEFAULT          (c,"zoom", 0,   "0.35");
-    CLASS_ATTR_ORDER			(c,"zoom", 0,   "2");
-    CLASS_ATTR_SAVE             (c,"zoom", 0);
-    CLASS_ATTR_PAINT            (c,"zoom", 0);
+	CLASS_ATTR_DOUBLE               (c,"zoom", 0, t_hoamap, f_zoom_factor);
+    CLASS_ATTR_ACCESSORS            (c,"zoom", NULL, hoamap_zoom);
+	CLASS_ATTR_LABEL                (c,"zoom", 0,   "Zoom");
+	CLASS_ATTR_CATEGORY             (c,"zoom", 0,   "Behavior");
+	CLASS_ATTR_DEFAULT              (c,"zoom", 0,   "0.35");
+    CLASS_ATTR_ORDER                (c,"zoom", 0,   "2");
+    CLASS_ATTR_SAVE                 (c,"zoom", 0);
+    CLASS_ATTR_PAINT                (c,"zoom", 0);
     
     class_register(CLASS_NOBOX, c);
 	hoamap_class = c;
@@ -1373,11 +1358,9 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
 {
     t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
     
+    t_rgba black = rgba_addContrast(x->f_color_background, -0.14);
 	if (g)
     {
-		t_jrgba outsideColor = x->f_color_backgroundInside;
-		t_jrgba insideColor = x->f_color_background;
-        
         jgraphics_set_source_jrgba(g, &x->f_color_background);
         jgraphics_arc(g, rect->width / 2., rect->width / 2., (rect->width / 2.) * (1. / MIN_ZOOM * x->f_zoom_factor) - 1.,  0., JGRAPHICS_2PI);
         jgraphics_fill(g);
@@ -1393,7 +1376,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
             jgraphics_stroke(g);
             
             jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &x->f_color_backgroundInside);
+            jgraphics_set_source_jrgba(g, &black);
             jgraphics_arc(g, rect->width / 2, rect->width / 2, (double)i * radius - 1.,  0., JGRAPHICS_2PI);
             jgraphics_stroke(g);
             
@@ -1411,7 +1394,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
 		for(double i = 0; i < rect->width / 2.; i += ecart)
         {
             jgraphics_set_line_width(g, 2);
-            jgraphics_set_source_jrgba(g, &insideColor);
+            jgraphics_set_source_jrgba(g, &x->f_color_background);
             jgraphics_move_to(g, 0. - 0.5, rect->width / 2. - i - 0.5);
             jgraphics_line_to(g, rect->width - 0.5, rect->width / 2. - i - 0.5);
             jgraphics_stroke(g);
@@ -1426,7 +1409,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
             jgraphics_stroke(g);
             
             jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &outsideColor);
+            jgraphics_set_source_jrgba(g, &black);
             jgraphics_move_to(g, 0., rect->width / 2. - i);
             jgraphics_line_to(g, rect->width, rect->width / 2. - i);
             jgraphics_stroke(g);

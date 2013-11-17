@@ -20,29 +20,16 @@
 #X text 205 -130 angle;
 #X text -250 -285 hoa.encoder~ creates the circular harmonics of a
 signal depending of a given order.;
-#X obj -76 40 hoa.meter~ @loudspeakers 16 @patching_rect [ 0 0 225
-225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize [
-0.8 ] @orientation [ 0 ] @loudspeakers [ 16 ] @angles [ 0 22.5 45 67.5
-90 112.5 135 157.5 180 202.5 225 247.5 270 292.5 315 337.5 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval [ 50
-] @dbperled [ 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3
-] @numleds [ 12 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4
-0.4 1 ] @bordercolor [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8
-] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor
-[ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ]
-@velocitycolor [ 1 0 0 0.8 ] @patching_rect [ 0 0 225 225 ] @leds_bg
-[ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize [ 0.8 ] @orientation
-[ 0 ] @loudspeakers [ 16 ] @angles [ 0 22.5 45 67.5 90 112.5 135 157.5
+#X obj -76 40 hoa.meter~ @size [ 225 225 ] @fontname [ helvetica ]
+@fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @vectors
+[ 1 ] @loudspeakers [ 16 ] @angles [ 0 22.5 45 67.5 90 112.5 135 157.5
 180 202.5 225 247.5 270 292.5 315 337.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds
-[ 3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [
-0.55 0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25
-0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8
-] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-];
+] @offset [ 0 ] @rotation [ 1 ] @interval [ 50 ] @bgcolor [ 0.55 0.55
+0.55 1 ] @bordercolor [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0 0.8
+] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor
+[ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ]
+@velocitycolor [ 1 0 0 0.8 ];
 #X obj 91 -145 phasor~ 220;
 #X msg -208 -6 \; pd dsp 1;
 #X msg -206 49 \; pd dsp 0;
@@ -51,6 +38,20 @@ signal depending of a given order.;
 #X text 84 -257 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
 #X obj -95 -19 hoa.decoder~ 7 ambisonics 16 --------------;
+#N canvas 47 243 494 344 META 1;
+#X text 12 75 INLET_0 signal;
+#X text 12 95 INLET_1 float;
+#X text 12 25 LICENSE GPL;
+#X text 12 115 LIBRARY HOA;
+#X text 12 135 AUTHOR Pierre Guillot \, Eliott Paris \, Julien Colafrancesco
+;
+#X text 12 155 WEBSITE http://www.mshparisnord.fr/hoalibrary/;
+#X text 12 175 RELEASE_DATE 2013;
+#X text 12 195 HELP_PATCH_AUTHORS;
+#X text 12 5 KEYWORDS Ambisonics;
+#X text 12 45 DESCRIPTION creates the circular harmonics of a signal
+depending of a given order.;
+#X restore 167 246 pd META;
 #X connect 1 0 10 0;
 #X connect 2 0 8 1;
 #X connect 3 0 2 0;

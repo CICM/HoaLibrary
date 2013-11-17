@@ -110,6 +110,7 @@ version beta 1.0.1
 - GUI resize with click and drag (bottom, right and right-bottom corner)
 - GUI inlets and outlets invisibles in runmode
 - GUI connection updated for every OS
+- GUI in GOP works
 
 ------------------------
 version beta 1.0.0
