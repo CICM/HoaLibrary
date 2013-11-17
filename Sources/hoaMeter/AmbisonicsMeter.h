@@ -56,9 +56,11 @@ public:
     double       getEnergyVectorAbscissa();
     double       getEnergyVectorOrdinate();
     double       getEnergyVectorAngle();
+    double       getEnergyVectorRadius();
     double       getVelocityVectorAbscissa();
     double       getVelocityVectorOrdinate();
     double       getVelocityVectorAngle();
+    double       getVelocityVectorRadius();
     
     double       getLoudspeakerAngleMapped(long anIndex);
     double       getLoudspeakerWidth(long anIndex);

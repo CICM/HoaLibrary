@@ -335,7 +335,9 @@ void hoa_space_draw_center(t_hoa_space *x, t_object *view, t_rect *rect)
         jgraphics_set_source_jrgba(g, &black);
         jgraphics_arc(g, long(x->f_center)-0.5, long(x->f_center)-0.5, x->f_radius_circle,  0., CICM_2PI);
         jgraphics_stroke(g);
-        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_arc(g, long(x->f_center), long(x->f_center), x->f_radius_circle,  0., CICM_2PI);
+        jgraphics_stroke(g);
+        jgraphics_set_source_jrgba(g, &x->f_color_background);
         jgraphics_arc(g, long(x->f_center)+0.5, long(x->f_center)+0.5, x->f_radius_circle,  0., CICM_2PI);
         jgraphics_fill(g);
         jbox_end_layer((t_object*)x, view, gensym("center_layer"));
@@ -356,17 +358,20 @@ void hoa_space_draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
 	
     if (g)
 	{
+        jgraphics_set_line_width(g, 1);
+        jgraphics_set_source_jrgba(g, &white);
+        jgraphics_arc(g, long(x->f_center)-0.5, long(x->f_center)-0.5, x->f_radius_global,  0., CICM_2PI);
+        jgraphics_fill(g);
         
         /* Circles */
 		for(int i = 5; i > 0; i--)
 		{
             //inner shadow
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_source_jrgba(g, &black);
             jgraphics_arc(g, long(x->f_center)-0.5, long(x->f_center)-0.5, (double)i * x->f_radius_circle,  0., CICM_2PI);
             jgraphics_stroke(g);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &black);
+
+            jgraphics_set_source_jrgba(g, &x->f_color_background);
             jgraphics_arc(g, long(x->f_center)+0.5, long(x->f_center)+0.5, (double)i * x->f_radius_circle,  0., CICM_2PI);
             jgraphics_stroke(g);
 		}
@@ -377,7 +382,7 @@ void hoa_space_draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
         
 		for(int i = 0; i < x->f_number_of_microphones; i++)
 		{
-            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_set_source_jrgba(g, &black);
             angle = ((double)i / x->f_number_of_microphones * CICM_2PI ) - (0.5 / x->f_number_of_microphones * CICM_2PI);
             coso = cos(angle);
             sino = sin(angle);
@@ -398,7 +403,7 @@ void hoa_space_draw_background(t_hoa_space *x, t_object *view, t_rect *rect)
             }
             jgraphics_stroke(g);
             
-            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_set_source_jrgba(g, &x->f_color_background);
             jgraphics_move_to(g, x1, y1);
             jgraphics_line_to(g, x2, y2);
             jgraphics_stroke(g);

@@ -234,10 +234,12 @@ double AmbisonicsMeter::getEnergyVectorAbscissa()
 {
     return m_vector_coordinates_double[0];
 }
+
 double AmbisonicsMeter::getEnergyVectorOrdinate()
 {
     return m_vector_coordinates_double[1];
 }
+
 double AmbisonicsMeter::getEnergyVectorAngle()
 {
     if(m_vector_coordinates_double[0] == 0.)
@@ -245,20 +247,39 @@ double AmbisonicsMeter::getEnergyVectorAngle()
     return
         Tools::angle(m_vector_coordinates_double[0], m_vector_coordinates_double[1]);
 }
+
+double AmbisonicsMeter::getEnergyVectorRadius()
+{
+    if(m_vector_coordinates_double[0] == 0.)
+        return 0.;
+    return
+    Tools::radius(m_vector_coordinates_double[0], m_vector_coordinates_double[1]);
+}
+
 double AmbisonicsMeter::getVelocityVectorAbscissa()
 {
     return m_vector_coordinates_double[2];
 }
+
 double AmbisonicsMeter::getVelocityVectorOrdinate()
 {
     return m_vector_coordinates_double[3];
 }
+
 double AmbisonicsMeter::getVelocityVectorAngle()
 {
     if(m_vector_coordinates_double[2] == 0.)
         return 0.;
     return
     Tools::angle(m_vector_coordinates_double[2], m_vector_coordinates_double[3]);
+}
+
+double AmbisonicsMeter::getVelocityVectorRadius()
+{
+    if(m_vector_coordinates_double[2] == 0.)
+        return 0.;
+    return
+    Tools::radius(m_vector_coordinates_double[2], m_vector_coordinates_double[3]);
 }
 
 AmbisonicsMeter::~AmbisonicsMeter()

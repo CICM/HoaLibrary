@@ -1,5 +1,5 @@
 #N canvas 9 212 1440 501 10;
-#X obj 101 59 hoa.meter~ @size [ 225 225 ] @fontname [ helvetica ]
+#X obj 100 59 hoa.meter~ @size [ 225 225 ] @fontname [ helvetica ]
 @fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @vectors
 [ 1 ] @loudspeakers [ 8 ] @angles [ 0 45 90 135 180 225 270 315 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -12,13 +12,13 @@
 @fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @order
 [ 3 ] @gain [ 1 ] @interval [ 100 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bdcolor
 [ 0.5 0.5 0.5 1 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
-#X obj 782 59 hoa.map @size [ 225 225 ] @fontname [ helvetica ] @fontweight
+#X obj 784 59 hoa.map @size [ 225 225 ] @fontname [ helvetica ] @fontweight
 [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @bgcolor [ 0.7 0.7
-0.7 1 ] @bdcolor [ 0.5 0.5 0.5 1 ] @selcolor [ 0.36 0.37 0.37 0.5 ]
-@outputmode [ 0 ] @zoom [ 0.52 ] sources_parameters [ source 0 -0.846154
-0.487179 0 0.2 0.2 0.2 1 s_nosymbol source 1 0 -0 0 0.2 0.2 0.2 1 s_nosymbol
-] groups_parameters [ group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol ];
-#X obj 555 59 hoa.space @size [ 225 225 ] @fontname [ helvetica ] @fontweight
+0.7 1 ] @bdcolor [ 0.5 0.5 0.5 1 ] @outputmode [ 0 ] @zoom [ 0.52 ]
+sources_parameters [ source 0 -0.549545 -1.48333 0 0.2 0.2 0.2 1 s_nosymbol
+source 1 -1.52284 -0.147401 0 0.2 0.2 0.2 1 s_nosymbol ] groups_parameters
+[ group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol ];
+#X obj 556 59 hoa.space @size [ 225 225 ] @fontname [ helvetica ] @fontweight
 [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @channels [ 8 ]
 @coeffs [ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -45,5 +45,12 @@
 @circolor [ 0.7 0.7 0.7 1 ];
 #X coords 0 -1 1 1 300 300 1 0 0;
 #X restore 1053 75 pd gope;
-#X obj 515 366 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
+#X obj 113 251 hoa.meter~ @size [ 225 225 ] @fontname [ helvetica ]
+@fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @vectors
+[ 1 ] @loudspeakers [ 8 ] @angles [ 0 45 90 135 180 225 270 315 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [
+0 ] @interval [ 50 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bdcolor [ 0.5 0.5
+0.5 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor
+[ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8
+] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8 ];

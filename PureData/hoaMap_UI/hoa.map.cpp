@@ -57,7 +57,6 @@ typedef struct  _hoamap
     
     t_jrgba		f_color_background;
     t_jrgba     f_color_border_box;
-    t_jrgba     f_colorSelection;
     
     double      f_size_source;
 	double		f_zoom_factor;
@@ -165,13 +164,6 @@ extern "C" void setup_hoa0x2emap(void)
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
     CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Box Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
-    
-    CLASS_ATTR_RGBA                 (c, "selcolor", 0, t_hoamap, f_colorSelection);
-	CLASS_ATTR_CATEGORY             (c, "selcolor", 0, "Color");
-	CLASS_ATTR_STYLE                (c, "selcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "selcolor", 0, "Selection Color");
-	CLASS_ATTR_ORDER                (c, "selcolor", 0, "4");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "selcolor", 0, "0.37 0.37 0.37 0.5");
 	
 	CLASS_ATTR_LONG                 (c,"outputmode", 0, t_hoamap, f_output_mode);
 	CLASS_ATTR_LABEL                (c,"outputmode", 0, "Output Mode");
@@ -1446,7 +1438,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
     t_pt ctr = {w*0.5, h*0.5};
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("sources_layer"), rect->width, rect->height);
-	
+	t_jrgba color_sel = rgba_addContrast(x->f_color_background, -0.14);
     x->jfont = jfont_create(jbox_get_fontname((t_jbox *)x), jbox_get_font_slant((t_jbox *)x), gensym("normal"), jbox_get_fontsize((t_jbox *)x));
     x->f_size_source = jbox_get_fontsize((t_jbox *)x) / 1.5;
     font_size = jbox_get_fontsize((t_jbox *)x);
@@ -1483,7 +1475,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 			
                 if (x->f_index_of_selected_source == i)
                 {
-                    jgraphics_set_source_jrgba(g, &x->f_colorSelection);
+                    jgraphics_set_source_jrgba(g, &color_sel);
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., JGRAPHICS_2PI);
                     jgraphics_fill(g);
                     int groupIndex;
@@ -1550,6 +1542,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
     t_pt ctr = {w*0.5, h*0.5};
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("groups_layer"), w, h);
+    t_jrgba color_sel = rgba_addContrast(x->f_color_background, -0.14);
 	x->jfont = jfont_create(jbox_get_fontname((t_jbox *)x), jbox_get_font_slant((t_jbox *)x), gensym("bold"), jbox_get_fontsize((t_jbox *)x));
     x->f_size_source = jbox_get_fontsize((t_jbox *)x) / 1.5;
     fontSize = jbox_get_fontsize((t_jbox *)x);
@@ -1585,7 +1578,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 
                 if (x->f_index_of_selected_group == i)
                 {
-                    jgraphics_set_source_jrgba(g, &x->f_colorSelection);
+                    jgraphics_set_source_jrgba(g, &color_sel);
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., JGRAPHICS_2PI);
                     jgraphics_fill(g);
                     
@@ -1642,13 +1635,13 @@ void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g;
     g = jbox_start_layer((t_object *)x, view, gensym("rect_selection_layer"), rect->width, rect->height);
-
+    t_jrgba color_sel = rgba_addContrast(x->f_color_background, -0.14);
 	if (g)
     {
 		if (x->f_rect_selection_exist)
         {            
 			jgraphics_set_line_width(g, 1);
-			jgraphics_set_source_jrgba(g, &x->f_colorSelection);
+			jgraphics_set_source_jrgba(g, &color_sel);
 			jgraphics_rectangle(g, x->f_rect_selection.x, x->f_rect_selection.y, x->f_rect_selection.width, x->f_rect_selection.height);
 			jgraphics_fill(g);
 		}

@@ -36,7 +36,6 @@ typedef struct _pi
 	double      p_value;
 } t_pi;
 
-void pi_bang(t_pi *x);
 void pi_int(t_pi *x, long n);
 void pi_float(t_pi *x, double n) ;
 void pi_assist(t_pi *x, void *b, long m, long a, char *s);

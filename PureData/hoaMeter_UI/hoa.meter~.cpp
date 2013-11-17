@@ -91,8 +91,7 @@ void meter_oksize(t_meter *x, t_rect *newrect);
 void meter_paint(t_meter *x, t_object *view);
 void draw_background(t_meter *x, t_object *view, t_rect *rect);
 void draw_leds(t_meter *x,  t_object *view, t_rect *rect);
-void draw_vector_energy(t_meter *x, t_object *view, t_rect *rect);
-void draw_vector_velocity(t_meter *x, t_object *view, t_rect *rect);
+void draw_vectors(t_meter *x, t_object *view, t_rect *rect);
 
 extern "C" void setup_hoa0x2emeter_tilde(void)
 {
@@ -119,20 +118,18 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 	CLASS_ATTR_DEFAULT			(c, "vectors", 0, "1");
 	CLASS_ATTR_SAVE				(c, "vectors", 1);
     
-	CLASS_ATTR_LONG				(c, "loudspeakers", 0 , t_meter, f_number_of_loudspeakers);
-    CLASS_ATTR_ACCESSORS		(c, "loudspeakers", NULL, number_of_loudspeakers_set);
-	CLASS_ATTR_ORDER			(c, "loudspeakers", 0, "1");
-	CLASS_ATTR_LABEL			(c, "loudspeakers", 0, "Number of Loudspeakers");
-	CLASS_ATTR_SAVE				(c, "loudspeakers", 1);
-    CLASS_ATTR_DEFAULT          (c, "loudspeakers", 0, "8");
-    CLASS_ATTR_PAINT            (c, "loudspeakers", 0);
+	CLASS_ATTR_LONG				(c, "channels", 0 , t_meter, f_number_of_loudspeakers);
+    CLASS_ATTR_ACCESSORS		(c, "channels", NULL, number_of_loudspeakers_set);
+	CLASS_ATTR_ORDER			(c, "channels", 0, "1");
+	CLASS_ATTR_LABEL			(c, "channels", 0, "Number of Loudspeakers");
+	CLASS_ATTR_SAVE				(c, "channels", 1);
+    CLASS_ATTR_DEFAULT          (c, "channels", 0, "8");
     
 	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_meter,f_angles_of_loudspeakers, f_number_of_loudspeakers,MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
 	CLASS_ATTR_SAVE				(c, "angles", 1);
-    CLASS_ATTR_PAINT            (c, "angles", 0);
     CLASS_ATTR_DEFAULT          (c, "angles", 0, "0 45 90 135 180 225 270 315");
     
 	CLASS_ATTR_DOUBLE			(c, "offset", 0, t_meter, f_offset_of_loudspeakers);
@@ -206,6 +203,8 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 void *meter_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_meter *x =  NULL;
+    t_atom* av;
+    long ac;
 	t_dictionary *d;
 	long flags;
 	if (!(d = object_dictionaryarg(argc,argv)))
@@ -221,23 +220,27 @@ void *meter_new(t_symbol *s, int argc, t_atom *argv)
     | JBOX_GROWY
     | JBOX_IGNORELOCKCLICK
     ;
-    
+   
     x->f_number_of_loudspeakers = 1;
 	jbox_new((t_jbox *)x, flags, argc, argv);
 	x->j_box.b_firstin = (t_object *)x;
     
-	dsp_setupjbox((t_jbox *)x, x->f_number_of_loudspeakers, 0);
-    
-    x->f_peaks_outlet = listout(x);
-    x->f_vector_outlet = listout(x);
-    
+    dictionary_copyatoms(d, gensym("@channels"), &ac, &av);
+    if(ac && av)
+    {
+        x->f_number_of_loudspeakers = atom_getlong(av);
+    }
     x->f_meter = new AmbisonicsMeter(x->f_number_of_loudspeakers, sys_getblksize(), sys_getsr());
     x->f_number_of_loudspeakers = x->f_meter->getNumberOfInputs();
     
     x->f_clock = clock_new(x,(t_method)meter_tick);
 	x->f_startclock = 0;
     
-	attr_dictionary_process(x, d);	
+    dsp_setupjbox((t_jbox *)x, x->f_number_of_loudspeakers, 0);
+    x->f_peaks_outlet = listout(x);
+    x->f_vector_outlet = listout(x);
+    
+	attr_dictionary_process(x, d);
 	jbox_ready((t_jbox *)x);
     
 	return (x);
@@ -306,8 +309,7 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
 
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("leds_layers"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
+	jbox_invalidate_layer((t_object *)x, NULL, gensym("vectors_layer"));
     
 	jbox_redraw((t_jbox *)x);
     return 0;
@@ -352,8 +354,7 @@ void meter_tick(t_meter *x)
     }
     
 	jbox_invalidate_layer((t_object *)x, NULL, gensym("leds_layers"));
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
+	jbox_invalidate_layer((t_object *)x, NULL, gensym("vectors_layer"));
   	jbox_redraw((t_jbox *)x);
     
 	if (sys_getdspstate())
@@ -404,8 +405,7 @@ t_max_err meter_notify(t_meter *x, t_symbol *s, t_symbol *msg, void *sender, voi
 	{
 		jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("leds_layers"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("energy_vector_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("velocity_vector_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, gensym("vectors_layer"));
 		jbox_redraw((t_jbox *)x);
 	}
 	return 0;
@@ -421,11 +421,7 @@ void meter_paint(t_meter *x, t_object *view)
 	
 	draw_background(x, view, &rect);
     draw_leds(x, view, &rect);
-
-    if (x->f_drawvector == 2 || x->f_drawvector == 3)
-		draw_vector_velocity(x, view, &rect);
-	if (x->f_drawvector == 1 || x->f_drawvector == 3)
-		draw_vector_energy(x, view, &rect);
+    draw_vectors(x, view, &rect);
 }
 
 void draw_background(t_meter *x,  t_object *view, t_rect *rect)
@@ -539,7 +535,7 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
             {
                 center_x = pd_abscissa(led_width * (2 - (j / 11.)), angle);
                 center_y = -pd_ordinate(led_width * (2 - (j / 11.)), angle);
-                radius    = (j + 2.33) * led_width;
+                radius    = (j + 2.83) * led_width;
                 
                 if(x->f_meter->getLoudspeakerEnergy(i) > dB)
                 {
@@ -569,7 +565,7 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
             {
                 center_x = pd_abscissa(led_width * (2 - (-1 / 11.)), angle);
                 center_y = -pd_ordinate(led_width * (2 - (-1 / 11.)), angle);
-                radius    = (2.33) * led_width;
+                radius    = (1.83) * led_width;
                 jgraphics_set_source_jrgba(g, &x->f_color_over_signal);
                 jgraphics_set_line_width(g, led_width - pd_clip_min(360. / rect->width, 2.));
                 jgraphics_arc(g, center_x + rect->width * 0.5f, center_y + rect->width * 0.5f, radius, angle_start, angle_end);
@@ -581,93 +577,64 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
 	jbox_paint_layer((t_object *)x, view, gensym("leds_layers"), 0., 0.);
 }
 
-void draw_vector_energy(t_meter *x, t_object *view, t_rect *rect)
+void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
 {
-	double angle, rayon;
+	double angle, rayon, x1, y1, size;
 	t_jmatrix transform;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("energy_vector_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("vectors_layer"), rect->width, rect->height);
 	
 	if (g)
 	{
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width / 2., rect->width / 2.);
 		jgraphics_set_matrix(g, &transform);
-		
+		size = 1. / 64. * rect->width;
+        
 		/* Energy */
-		jgraphics_set_source_jrgba(g, &x->f_color_energy_vector);
-        
-        rayon = x->f_radius_circle * 0.85;
-        angle = x->f_meter->getEnergyVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
-		double x1;
-		double y1;
-        
-        if(!x->f_clockwise)
+        if(x->f_drawvector == 1 || x->f_drawvector == 3)
         {
-            x1 = Tools::abscissa(rayon, angle + CICM_PI2);
-            y1 = Tools::ordinate(rayon, angle + CICM_PI2);
-        }
-        else
+            jgraphics_set_source_jrgba(g, &x->f_color_energy_vector);
+            
+            rayon = x->f_meter->getEnergyVectorRadius() * x->f_radius_circle * 0.85;
+            angle = x->f_meter->getEnergyVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
+            
+            if(!x->f_clockwise)
+            {
+                x1 = Tools::abscissa(rayon, angle + CICM_PI2);
+                y1 = Tools::ordinate(rayon, angle + CICM_PI2);
+            }
+            else
+            {
+                x1 = Tools::abscissa(rayon, -angle + CICM_PI2);
+                y1 = Tools::ordinate(rayon, -angle + CICM_PI2);
+            }
+            jgraphics_arc(g, x1, y1, size, 0., JGRAPHICS_2PI);
+            jgraphics_fill(g);
+		}
+        if(x->f_drawvector == 2 || x->f_drawvector == 3)
         {
-            x1 = Tools::abscissa(rayon, -angle + CICM_PI2);
-            y1 = Tools::ordinate(rayon, -angle + CICM_PI2);
-        }
-		jgraphics_move_to(g, 0, 0);
-		jgraphics_line_to(g, x1, y1);
-        jgraphics_stroke(g);
+            jgraphics_set_source_jrgba(g, &x->f_color_velocity_vector);
+            
+            rayon = x->f_meter->getVelocityVectorRadius() * x->f_radius_circle * 0.85;
+            angle = x->f_meter->getVelocityVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
+            
+            if(!x->f_clockwise)
+            {
+                x1 = Tools::abscissa(rayon, angle + CICM_PI2);
+                y1 = Tools::ordinate(rayon, angle + CICM_PI2);
+            }
+            else
+            {
+                x1 = Tools::abscissa(rayon, -angle + CICM_PI2);
+                y1 = Tools::ordinate(rayon, -angle + CICM_PI2);
+            }
+            jgraphics_arc(g, x1, y1, size, 0., JGRAPHICS_2PI);
+            jgraphics_fill(g);
+		}
 		
-        jgraphics_arc(g, x1, y1, 2, 0., JGRAPHICS_2PI);
-		jgraphics_fill(g);
-		
-		/* Center */
-		jgraphics_arc(g, 0, 0, 3., 0., JGRAPHICS_2PI);
-		jgraphics_fill(g);
         
-		jbox_end_layer((t_object*)x, view, gensym("energy_vector_layer"));
+        
+		jbox_end_layer((t_object*)x, view, gensym("vectors_layer"));
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("energy_vector_layer"), 0., 0.);
-}
-
-void draw_vector_velocity(t_meter *x, t_object *view, t_rect *rect)
-{
-	double angle, rayon;
-	t_jmatrix transform;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("velocity_vector_layer"), rect->width, rect->height);
-	
-	if (g)
-	{
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, rect->width / 2., rect->width / 2.);
-		jgraphics_set_matrix(g, &transform);
-		
-		/* Velocity */
-		jgraphics_set_source_jrgba(g, &x->f_color_velocity_vector);
-        
-        rayon = x->f_radius_circle * 0.85;
-        angle = x->f_meter->getEnergyVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
-		double x1;
-		double y1;
-        
-		if(!x->f_clockwise)
-        {
-            x1 = Tools::abscissa(rayon, angle + CICM_PI2);
-            y1 = Tools::ordinate(rayon, angle + CICM_PI2);
-        }
-        else
-        {
-            x1 = Tools::abscissa(rayon, -angle + CICM_PI2);
-            y1 = Tools::ordinate(rayon, -angle + CICM_PI2);
-        }
-		jgraphics_move_to(g, 0, 0);
-		jgraphics_line_to(g, x1, y1);
-        jgraphics_stroke(g);
-		
-        jgraphics_arc(g, x1, y1, 2, 0., JGRAPHICS_2PI);
-		jgraphics_fill(g);
-		
-		/* Center */
-		jgraphics_arc(g, 0, 0, 3., 0., JGRAPHICS_2PI);
-		jgraphics_fill(g);
-        
-		jbox_end_layer((t_object*)x, view, gensym("velocity_vector_layer"));
-	}
-	jbox_paint_layer((t_object *)x, view, gensym("velocity_vector_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, gensym("vectors_layer"), 0., 0.);
 }
 
