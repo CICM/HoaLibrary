@@ -123,7 +123,7 @@ extern "C" void setup_hoa0x2espace(void)
     CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_space, f_number_of_microphones);
 	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "channels", 0, "1");
-	CLASS_ATTR_LABEL                (c, "channels", 0, "Number of channels");
+	CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, hoa_space_channels_set);
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "8");
 	CLASS_ATTR_SAVE                 (c, "channels", 0);
@@ -131,7 +131,7 @@ extern "C" void setup_hoa0x2espace(void)
     CLASS_ATTR_DOUBLE_VARSIZE       (c, "coeffs", 0, t_hoa_space, f_microphonesValues,f_number_of_microphones, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY             (c, "coeffs", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "coeffs", 0, "2");
-	CLASS_ATTR_LABEL                (c, "coeffs", 0, "Virtuals microphones coefficients");
+	CLASS_ATTR_LABEL                (c, "coeffs", 0, "Coefficients");
     CLASS_ATTR_ACCESSORS			(c, "coeffs", NULL, hoa_space_coefficients_set);
 	CLASS_ATTR_DEFAULT              (c, "coeffs", 0, "0.");
 	CLASS_ATTR_SAVE                 (c, "coeffs", 0);
@@ -145,27 +145,27 @@ extern "C" void setup_hoa0x2espace(void)
     CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_hoa_space, f_color_border_box);
 	CLASS_ATTR_CATEGORY				(c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
-    CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Box Color");
+    CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
     
-	CLASS_ATTR_RGBA					(c, "spacecolor", 0, t_hoa_space, f_color_harmonics);
-	CLASS_ATTR_CATEGORY				(c, "spacecolor", 0, "Color");
-	CLASS_ATTR_STYLE				(c, "spacecolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "spacecolor", 0, "Harmonics color");
-    CLASS_ATTR_DEFAULT              (c, "spacecolor", 0, "0. 0.4 0.6 1.");
-	CLASS_ATTR_SAVE                 (c, "spacecolor", 0);
+	CLASS_ATTR_RGBA					(c, "spacolor", 0, t_hoa_space, f_color_harmonics);
+	CLASS_ATTR_CATEGORY				(c, "spacolor", 0, "Color");
+	CLASS_ATTR_STYLE				(c, "spacolor", 0, "rgba");
+	CLASS_ATTR_LABEL				(c, "spacolor", 0, "Space Color");
+    CLASS_ATTR_DEFAULT              (c, "spacolor", 0, "0. 0.4 0.6 1.");
+	CLASS_ATTR_SAVE                 (c, "spacolor", 0);
     
 	CLASS_ATTR_RGBA					(c, "miccolor", 0, t_hoa_space, f_color_points);
 	CLASS_ATTR_CATEGORY				(c, "miccolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "miccolor", 0, "rgba");
-	CLASS_ATTR_LABEL				(c, "miccolor", 0, "Virtuals microphones color");
+	CLASS_ATTR_LABEL				(c, "miccolor", 0, "Points color");
 	CLASS_ATTR_DEFAULT              (c, "miccolor", 0, "0. 0. 0. 1.");
 	CLASS_ATTR_SAVE                 (c, "miccolor", 0);
     
 	CLASS_ATTR_RGBA					(c, "circolor", 0, t_hoa_space, f_color_inner_circle);
 	CLASS_ATTR_CATEGORY				(c, "circolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "circolor", 0, "rgba");
-    CLASS_ATTR_LABEL				(c, "circolor", 0, "Circle Inner Color");
+    CLASS_ATTR_LABEL				(c, "circolor", 0, "Circle Color");
 	CLASS_ATTR_DEFAULT              (c, "circolor", 0, "0.7 0.7 0.7 1.");
 	CLASS_ATTR_SAVE                 (c, "circolor", 0);
     

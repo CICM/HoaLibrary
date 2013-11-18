@@ -109,7 +109,7 @@ extern "C" void setup_hoa0x2escope_tilde(void)
 	CLASS_ATTR_LONG             (c, "interval", 0, t_scope, f_interval);
 	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Behavior");
 	CLASS_ATTR_ORDER			(c, "interval", 0, "3");
-	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval in Milliseconds");
+	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval (in ms)");
 	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
 	CLASS_ATTR_DEFAULT			(c, "interval", 0, "100");
 	CLASS_ATTR_SAVE				(c, "interval", 1);
@@ -123,20 +123,20 @@ extern "C" void setup_hoa0x2escope_tilde(void)
     CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_scope, f_color_border_box);
 	CLASS_ATTR_CATEGORY				(c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
-    CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Box Color");
+    CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
 	
 	CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_scope, f_color_positif);
 	CLASS_ATTR_CATEGORY             (c, "phcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "phcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "phcolor", 0, "Positifs Harmonics");
+	CLASS_ATTR_LABEL                (c, "phcolor", 0, "Positifs Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "phcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "phcolor", 0, "1. 0. 0. 1.");
 	
 	CLASS_ATTR_RGBA                 (c, "nhcolor", 0, t_scope, f_color_negatif);
 	CLASS_ATTR_CATEGORY             (c, "nhcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "nhcolor", 0, "rgba");
-	CLASS_ATTR_LABEL                (c, "nhcolor", 0, "Negatifs Harmonics");
+	CLASS_ATTR_LABEL                (c, "nhcolor", 0, "Negatifs Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "nhcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nhcolor", 0, "0. 0. 1. 1.");
 	
