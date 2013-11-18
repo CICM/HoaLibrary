@@ -14,7 +14,7 @@
 #X msg -438 -159 1;
 #X msg -413 -106 set 1024 1 1;
 #X obj -439 33 switch~ 1024 1 1;
-#X obj -237 -34 hoa.decoder~ 3 binaural @pinnae [ small ] -------------
+#X obj -237 -34 hoa.decoder~ 3 binaural @pinnae small-------------
 ;
 #X connect 2 0 13 0;
 #X connect 3 0 14 0;

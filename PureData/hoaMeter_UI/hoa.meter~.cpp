@@ -28,13 +28,11 @@
 #include "../hoaLibrary/hoa.library_pd.h"
 
 #define MAX_SPEAKER 64
-#define DEF_SPEAKER 8
-#define OVERLED_DRAWTIME 1000
 
 typedef struct  _meter
 {
-	t_jbox                j_box;
-	 AmbisonicsMeter*     f_meter;
+	t_jbox               j_box;
+    AmbisonicsMeter*     f_meter;
     
 	t_clock*	f_clock;
 	int			f_startclock;
@@ -62,11 +60,8 @@ typedef struct  _meter
 	float		f_radius_circle;
     long        f_drawvector;
     
-    
     t_outlet*    f_vector_outlet;
     t_outlet*    f_peaks_outlet;
-	
-   
 } t_meter;
 
 t_eclass *meter_class;
@@ -110,7 +105,6 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
     class_addmethod(c, (method) meter_oksize,        "oksize",        A_CANT, 0);
     
 	CLASS_ATTR_DEFAULT			(c, "size", 0, "225 225");
-	CLASS_ATTR_INVISIBLE		(c, "color", 0);
 	
 	CLASS_ATTR_LONG				(c, "vectors", 0, t_meter, f_drawvector);
 	CLASS_ATTR_ORDER			(c, "vectors", 0, "2");
@@ -125,7 +119,7 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 	CLASS_ATTR_SAVE				(c, "channels", 1);
     CLASS_ATTR_DEFAULT          (c, "channels", 0, "8");
     
-	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_meter,f_angles_of_loudspeakers, f_number_of_loudspeakers,MAX_SPEAKER);
+	CLASS_ATTR_DOUBLE_VARSIZE	(c, "angles", 0, t_meter, f_angles_of_loudspeakers, f_number_of_loudspeakers, MAX_SPEAKER);
 	CLASS_ATTR_ACCESSORS		(c, "angles", NULL, angles_of_loudspeakers_set);
 	CLASS_ATTR_ORDER			(c, "angles", 0, "2");
 	CLASS_ATTR_LABEL			(c, "angles", 0, "Angles of Loudspeakers");
@@ -197,6 +191,7 @@ extern "C" void setup_hoa0x2emeter_tilde(void)
 	CLASS_ATTR_ORDER			(c, "velocitycolor", 0, "9");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "velocitycolor", 0, "1. 0. 0. 0.8");
 	
+    class_register(CLASS_NOBOX, c);
 	meter_class = c;
 }
 
@@ -345,7 +340,7 @@ void meter_tick(t_meter *x)
     {
         peak = x->f_meter->getLoudspeakerEnergy(i);
         if(peak >= 0.)
-            x->f_over_leds_preserved[i] = OVERLED_DRAWTIME;
+            x->f_over_leds_preserved[i] = 1000;
         else
             x->f_over_leds_preserved[i] -= x->f_interval;
         

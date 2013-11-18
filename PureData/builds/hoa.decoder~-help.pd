@@ -30,28 +30,26 @@ avoid artefact. The hoa.decoder~ is packed in a subpatcher because
 the binaural decoding needs a bigger vector size than 64 due to matrix
 optimization (it depends on computer but 512 seems to be suffisant
 for all configuration).;
-#X obj -305 63 hoa.optim~ 7 @mode [ maxRe ] --------------;
-#X obj 434 73 hoa.optim~ 7 @mode [ inPhase ] -----;
+#X obj -305 63 hoa.optim~ 7 @mode maxRe --------------;
+#X obj 460 73 hoa.optim~ 7 @mode inPhase -----;
 #X obj -305 96 hoa.decoder~ 7 ambisonics 16 --------------;
-#X obj -305 137 hoa.meter~ @size [ 261 261 ] @fontname [ helvetica
-] @fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @vectors
-[ 1 ] @channels [ 16 ] @angles [ 0 22.5 45 67.5 90 112.5 135 157.5
-180 202.5 225 247.5 270 292.5 315 337.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#X obj -305 137 hoa.meter~ @size 261 261 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @vectors 1 @channels 16 @angles
+0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270 292.5 315
+337.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 @offset 0 @rotation 0 @interval 50
+@bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6 0 0.8
+@tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6
+0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1
+0 0 0.8;
+#X obj 433 140 hoa.meter~ @size 249 249 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @vectors 1 @channels 5 @angles
+0 30 110 250 330 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-] @offset [ 0 ] @rotation [ 0 ] @interval [ 50 ] @bgcolor [ 0.7 0.7
-0.7 1 ] @bdcolor [ 0.5 0.5 0.5 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor
-[ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6
-0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor
-[ 1 0 0 0.8 ];
-#X obj 433 140 hoa.meter~ @size [ 249 249 ] @fontname [ helvetica ]
-@fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @vectors
-[ 1 ] @channels [ 5 ] @angles [ 0 30 110 250 330 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [ 0 ] @interval
-[ 50 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bdcolor [ 0.5 0.5 0.5 1 ] @coldcolor
-[ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85
-0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor
-[ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8 ];
+@offset 0 @rotation 0 @interval 50 @bgcolor 0.7 0.7 0.7 1 @bdcolor
+0.5 0.5 0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
+0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
+0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X text -320 -163 1st argument is the order.;
 #X text -321 -148 2nd argument is decoding mode : ambisonic or 0 \,
 binaural or 1 (for headphones) \, irregular or 2 (for an irregular
@@ -64,8 +62,8 @@ is 2 * order + 1 (default : 2 * order + 2). The fourth argument is
 the offset of loudpeakers in degrees.;
 #X msg 91 175 pinnae small;
 #X msg 195 174 pinnae large;
-#X obj 382 101 hoa.decoder~ 7 irregular 5 @angles [ 0 30 110 250 330
-];
+#X obj 403 101 hoa.decoder~ 7 irregular 5 @angles 0 30 110 250 330
+;
 #N canvas 595 232 450 300 Sound4 0;
 #X obj 111 234 outlet~;
 #X obj 111 202 readsf~;
