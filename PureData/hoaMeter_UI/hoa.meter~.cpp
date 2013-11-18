@@ -594,7 +594,7 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
         {
             jgraphics_set_source_jrgba(g, &x->f_color_energy_vector);
             
-            rayon = x->f_meter->getEnergyVectorRadius() * x->f_radius_circle * 0.85;
+            rayon = Tools::clip(x->f_meter->getEnergyVectorRadius(), 0., 1.) * x->f_radius_circle * 0.85;
             angle = x->f_meter->getEnergyVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
             
             if(!x->f_clockwise)
@@ -614,7 +614,7 @@ void draw_vectors(t_meter *x, t_object *view, t_rect *rect)
         {
             jgraphics_set_source_jrgba(g, &x->f_color_velocity_vector);
             
-            rayon = x->f_meter->getVelocityVectorRadius() * x->f_radius_circle * 0.85;
+            rayon = Tools::clip(x->f_meter->getVelocityVectorRadius(), 0., 1.) * x->f_radius_circle * 0.85;
             angle = x->f_meter->getVelocityVectorAngle() + (x->f_offset_of_loudspeakers / 180.) * JGRAPHICS_PI;
             
             if(!x->f_clockwise)
