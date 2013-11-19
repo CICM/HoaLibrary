@@ -1,72 +1,70 @@
-#N canvas 350 0 1032 704 10;
-#X obj 160 -201 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
-0 10 -262144 -1 -1 0 256;
-#X obj -474 -256 hoa.map @patching_rect [ -474 -256 300 300 ] @size
-[ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
-0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.36 0.37
-0.5 ] @outputmode [ 0 ] @zoom [ 0.532488 ] sources_parameters [ source
-0 -1.2565 -0.182599 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.222431 0.699634
-0 0.2 0.2 0.2 1 s_nosymbol ] groups_parameters [ group 0 2 0 1 0 0.2
-0.2 0.2 1 s_nosymbol ] slots_parameters [ slot 0 slot 1 slot 2 ];
-#X obj -545 -473 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map 3
+#N canvas 350 22 1037 753 10;
+#X obj 160 -172 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj -474 -227 hoa.map @size 300 300 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @bgcolor 0.9 0.9 0.9 1 @bdcolor
+0 0 0 1 @outputmode 0 @zoom 0.78 sources_parameters source 0 0.28346
+-0.746637 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.507063 0.823139 0 0.2
+0.2 0.2 1 s_nosymbol groups_parameters group 0 2 0 1 0 0.2 0.2 0.2
+1 s_nosymbol slots_parameters slot 0 slot 1 slot 2;
+#X obj -545 -444 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map 3
 12 0 18 -204280 -1 0;
-#X text -540 -452 A graphic user interface to spatialize sources on
+#X text -540 -423 A graphic user interface to spatialize sources on
 a map.;
-#X text -540 -431 hoa.map allows you to spatialize several sources
+#X text -540 -402 hoa.map allows you to spatialize several sources
 on a plane. You can add and remove sources \, change coordinates \,
 add description and create groups.;
-#X text -537 -386 To move source or group \, click on it and drag it.
+#X text -537 -357 To move source or group \, click on it and drag it.
 Click and drag with shift to change the radius. Click and drag with
 shift and alt to change the angle.;
-#X text -146 -430 To create source \, click with cmd or alt on a "free"
+#X text -146 -401 To create source \, click with cmd or alt on a "free"
 zone then select "Add source" in the popup menu. To remove source \,
 idem and select "Remove source".;
-#X text -147 -381 To create group \, drag select a set of sources \,
+#X text -147 -352 To create group \, drag select a set of sources \,
 when mouse up the group will be created. To remove group \, click with
 cmd or alt on group then select "Remove group".;
-#X text -148 -335 To mute source or group \, click with cmd or alt
+#X text -148 -306 To mute source or group \, click with cmd or alt
 on it and select "Mute" or "Unmute".;
-#X obj -474 178 hoa.map~ 3 2 -------;
-#X obj -446 241 dac~ 1 2;
-#X obj -474 209 hoa.bin_sp_order3 --;
-#X msg -235 -339 \; pd dsp 1;
-#X msg -234 -302 \; pd dsp 0;
-#X text 21 -452 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+#X obj -474 207 hoa.map~ 3 2 -------;
+#X obj -446 270 dac~ 1 2;
+#X obj -474 238 hoa.bin_sp_order3 --;
+#X msg -235 -310 \; pd dsp 1;
+#X msg -234 -273 \; pd dsp 0;
+#X text 21 -423 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
-#X text 21 -468 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text 21 -439 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X text -461 56 Connect the first outlet to hoa.map~ !;
-#X text -113 -219 Look here for source and group messages;
-#X text -114 -167 Look here for presets;
-#X obj -109 -141 hoa.map_slot;
-#X text -115 -116 Look here for trajectories;
-#X obj -110 -90 hoa.map_traj;
-#X obj -108 -193 hoa.map_mess;
-#X text -116 -66 Look here for outputs;
-#X obj -111 -40 hoa.map_outs;
-#X obj -474 -289 receive maphelp;
-#X text 158 -226 Appearance :;
-#X obj 160 70 send maphelp;
-#X text 228 -203 size;
-#X msg 184 -107 bgcolor 0.2 0.2 0.2 1;
-#X text 184 -130 Background Outside Color;
-#X text 196 -85 Background Inside Color;
-#X text 206 -34 Border Inside Color;
-#X msg 206 -11 bordercolor 0.2 0.2 0.2 1;
-#X msg 196 -62 bgcolor2 0.8 0.8 0.8 1;
-#X text 206 17 Selection Color;
-#X msg 206 40 selcolor 0.2 0.2 0.2 1;
-#X obj -463 78 noise~ 220;
-#X obj -361 114 *~;
-#X obj -363 89 osc~ 220;
-#X obj -271 92 osc~ 95;
-#X obj -360 148 *~ 0.3;
-#X obj -263 143 *~ 300;
-#X obj -262 122 osc~ 33;
-#X obj -463 105 *~ 0.05;
-#X msg 160 -162 size \$1 \$1;
-#X text -119 -272 Mousewheel and alt to change the zoom.;
+#X text -461 85 Connect the first outlet to hoa.map~ !;
+#X text -113 -190 Look here for source and group messages;
+#X text -114 -138 Look here for presets;
+#X obj -109 -112 hoa.map_slot;
+#X text -115 -87 Look here for trajectories;
+#X obj -110 -61 hoa.map_traj;
+#X obj -108 -164 hoa.map_mess;
+#X text -116 -37 Look here for outputs;
+#X obj -111 -11 hoa.map_outs;
+#X obj -474 -260 receive maphelp;
+#X text 158 -197 Appearance :;
+#X obj 160 99 send maphelp;
+#X text 228 -174 size;
+#X msg 184 -78 bgcolor 0.2 0.2 0.2 1;
+#X text 184 -101 Background Outside Color;
+#X text 196 -56 Background Inside Color;
+#X text 206 -5 Border Inside Color;
+#X msg 206 18 bordercolor 0.2 0.2 0.2 1;
+#X msg 196 -33 bgcolor2 0.8 0.8 0.8 1;
+#X text 206 46 Selection Color;
+#X msg 206 69 selcolor 0.2 0.2 0.2 1;
+#X obj -463 107 noise~ 220;
+#X obj -361 143 *~;
+#X obj -363 118 osc~ 220;
+#X obj -271 121 osc~ 95;
+#X obj -360 177 *~ 0.3;
+#X obj -263 172 *~ 300;
+#X obj -262 151 osc~ 33;
+#X obj -463 134 *~ 0.05;
+#X msg 160 -133 size \$1 \$1;
+#X text -119 -243 Mousewheel and alt to change the zoom.;
 #X connect 0 0 45 0;
 #X connect 1 0 9 0;
 #X connect 9 0 11 0;
@@ -92,4 +90,4 @@ on it and select "Mute" or "Unmute".;
 #X connect 43 0 42 0;
 #X connect 44 0 9 0;
 #X connect 45 0 27 0;
-#X coords 0 704 1 703 85 60 0;
+#X coords 0 753 1 752 85 60 0;

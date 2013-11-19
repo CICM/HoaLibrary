@@ -46,28 +46,14 @@ and soundfield transformations.;
 #X obj -125 -315 *~;
 #X obj -125 -394 phasor~ 0.4;
 #X obj 125 -284 delread~ del_proj1 1000;
-#X obj 438 -218 hoa.meter~ @patching_rect { 0 0 225 225 } @leds_bg
-{ 1 } @drawvector { 1 } @drawmborder { 3 } @metersize { 0.8 } @orientation
-{ 0 } @loudspeakers { 10 } @angles { 0 36 72 108 144 180 216 252 288
-324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 } @offset { 0 } @rotation
-{ 1 } @interval { 50 } @dbperled { 3 } @nhotleds { 3 } @ntepidleds
-{ 3 } @nwarmleds { 3 } @numleds { 12 } @bgcolor { 0.55 0.55 0.55 1
-} @mbgcolor { 0.4 0.4 0.4 1 } @bordercolor { 0.25 0.25 0.25 1 } @coldcolor
-{ 0 0.6 0 0.8 } @tepidcolor { 0.6 0.73 0 0.8 } @warmcolor { 0.85 0.85
-0 0.8 } @hotcolor { 1 0.6 0 0.8 } @overcolor { 1 0 0 0.8 } @energycolor
-{ 0 0 1 0.8 } @velocitycolor { 1 0 0 0.8 } @patching_rect [ 0 0 225
-225 ] @leds_bg [ 1 ] @vectors [ 1 ] @drawmborder [ 3 ] @metersize [
-0.8 ] @orientation [ 0 ] @loudspeakers [ 10 ] @angles [ 0 36 72 108
-144 180 216 252 288 324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset
-[ 0 ] @rotation [ 1 ] @interval [ 50 ] @dbperled [ 3 ] @nhotleds [
-3 ] @ntepidleds [ 3 ] @nwarmleds [ 3 ] @numleds [ 12 ] @bgcolor [ 0.55
-0.55 0.55 1 ] @mbgcolor [ 0.4 0.4 0.4 1 ] @bordercolor [ 0.25 0.25
-0.25 1 ] @coldcolor [ 0 0.6 0 0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ]
-@warmcolor [ 0.85 0.85 0 0.8 ] @hotcolor [ 1 0.6 0 0.8 ] @overcolor
-[ 1 0 0 0.8 ] @energycolor [ 0 0 1 0.8 ] @velocitycolor [ 1 0 0 0.8
-];
+#X obj 438 -218 hoa.meter~ @size 225 225 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @vectors 1 @channels 10 @angles
+0 36 72 108 144 180 216 252 288 324 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 @offset 0 @rotation 1 @interval 50 @bgcolor 0.55 0.55 0.55
+1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73
+0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1
+0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X obj 114 1 hoa.decoder~ 4 0 10 -----;
 #X connect 1 0 15 0;
 #X connect 1 1 17 0;
@@ -129,7 +115,5 @@ and soundfield transformations.;
 #X connect 39 7 6 7;
 #X connect 39 7 38 7;
 #X connect 39 8 6 8;
-#X connect 39 8 38 8;
 #X connect 39 9 6 9;
-#X connect 39 9 38 9;
 #X coords 0 575 1 574 100 60 0;

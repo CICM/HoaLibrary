@@ -4,14 +4,14 @@
 #X obj -156 -197 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 719 -255 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 12 256;
+10 -262144 -1 -1 0 256;
 #X msg 719 -222 channels \$1;
 #X obj 550 -261 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
 10 -262144 -1 -1 0 256;
 #X obj 705 -34 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
 -1 -1 0 256;
-#X msg -118 244 0.904819 1 0.0370832 0.348502 0.807854 0.807854 0.976473
-0.853987 0.705692 0.653529 0.509649 0.382843 0.772379;
+#X msg -118 244 0.867963 1 1 0.900853 0.580247 0.580247 0.680957 0.845125
+0.889107 0.672648 0.564642 0.502203 0.44463;
 #X msg -118 199 set \$1 \$2 \$3 \$4 \$5 \$5 \$6 \$7 \$8 \$9 \$10 \$11
 \$12;
 #X text 441 -311 The attributes (saved with the object) :;
@@ -59,20 +59,18 @@ the hoa.space~ object in the plane wave domain.;
 #X text 313 219 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
 #X msg 550 -220 size \$1 \$1;
-#X obj -114 -145 hoa.space @patching_rect [ -114 -145 300 300 ] @size
-[ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @channels [ 12 ] @coeffs [ 0.876279 1
-1 1 0.0306693 0.0306693 0.0137424 0 0 0.017797 0.0343521 0.0879706
-0.0036886 0 0 0.600701 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#X obj -118 -145 hoa.space @size 300 300 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @channels 12 @coeffs 0.867963
+1 1 0.900853 0.580247 0.680957 0.845125 0.889107 0.672648 0.564642
+0.502203 0.44463 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor [ 0 0 0 1
-] @harmocolor [ 0 0.4 0.6 1 ] @miccolor [ 0 0 0 1 ] @circolor [ 0.7
-0.7 0.7 1 ];
+0 0 0 0 0 0 0 0 0 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @spacolor
+0 0.4 0.6 1 @miccolor 0 0 0 1 @circolor 0.7 0.7 0.7 1;
 #N canvas 277 320 494 344 META 0;
 #X text 12 35 LICENSE SIBSD;
 #X text 12 105 OUTLET_0 anything;

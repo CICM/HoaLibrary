@@ -1,14 +1,14 @@
 #N canvas 208 121 1205 608 10;
-#X obj -524 -318 hoa.map @patching_rect [ -524 -318 300 300 ] @size
-[ 300 300 ] @fontname [ helvetica ] @fontweight [ groups_parameters
-] @fontslant [ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1
-] @bgcolor2 [ 0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36
-0.36 0.37 0.5 ] @outputmode [ 0 ] @zoom [ 0.312488 ] sources_parameters
-[ source 0 1.48624 -2.03295 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.7922
+#X obj -524 -318 hoa.map @patching_rect  -524 -318 300 300  @size
+ 300 300  @fontname  helvetica  @fontweight  groups_parameters
+ @fontslant  regular  @fontsize  11  @bgcolor  0.9 0.9 0.9 1
+ @bgcolor2  0.75 0.75 0.75 1  @bdcolor  0 0 0 1  @selcolor  0.36
+0.36 0.37 0.5  @outputmode  0  @zoom  0.312488  sources_parameters
+ source 0 1.48624 -2.03295 0 0.2 0.2 0.2 1 s_nosymbol source 1 -1.7922
 1.50934 0 0.2 0.2 0.2 1 s_nosymbol source 2 1.67561 2.6357 0 0.2 0.2
-0.2 1 s_nosymbol ] groups_parameters [ group 0 2 0 1 0 0.2 0.2 0.2
-1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol ] slots_parameters
-[ slot 0 slot 1 slot 2 slot 3 ] trajectory_parameters [ slot 0 source
+0.2 1 s_nosymbol  groups_parameters  group 0 2 0 1 0 0.2 0.2 0.2
+1 s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol  slots_parameters
+ slot 0 slot 1 slot 2 slot 3  trajectory_parameters  slot 0 source
 1 1.20479 -0.323453 0 0.2 0.2 0.2 1 s_nosymbol group 0 1 1 0 0.2 0.2
 0.2 1 s_nosymbol group 1 1 1 0 0.2 0.2 0.2 1 s_nosymbol slot 1 source
 1 1.23582 -0.235358 0 0.2 0.2 0.2 1 s_nosymbol group 0 1 1 0 0.2 0.2
@@ -331,7 +331,7 @@ s_nosymbol group 1 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 89 source
 0 1.63551 1.15864 0 0.2 0.2 0.2 1 s_nosymbol source 1 0.721557 -2.1289
 0 0.2 0.2 0.2 1 s_nosymbol source 2 -1.01301 -0.245779 0 0.2 0.2 0.2
 1 s_nosymbol group 0 2 0 1 0 0.2 0.2 0.2 1 s_nosymbol group 1 3 0 1
-2 0 0.2 0.2 0.2 1 s_nosymbol ];
+2 0 0.2 0.2 0.2 1 s_nosymbol ;
 #X obj -580 107 send map_slot;
 #X obj -206 131 send map_slot;
 #X text -583 14 hoa.map needs an absolute path. Here is an example

@@ -26,22 +26,22 @@ ambisonic soundfield. The last inlet set the azimuth of the rotation.
 ;
 #X msg 294 -130 \; pd dsp 1;
 #X msg 294 -92 \; pd dsp 0;
-#X obj -92 -114 hoa.scope~ @patching_rect { 0 0 225 225 } @order {
-4 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles { 1
-} @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7
-0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0
-0 1 1 } @patching_rect { 0 0 225 225 } @order { 4 } @gain { 1 } @interval
-{ 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor
-{ 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0
-0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0
-0 225 225 } @order { 4 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 4 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 };
+#X obj -92 -114 hoa.scope~ @patching_rect  0 0 225 225  @order 
+4  @gain  1  @interval  100  @drawcircle  1  @drawangles  1
+ @drawcontrib  1  @bgcolor  0.76 0.76 0.76 1  @bordercolor  0.7
+0.7 0.7 1  @txcolor  0 0 0 7  @phcolor  1 0 0 1  @nhcolor  0
+0 1 1  @patching_rect  0 0 225 225  @order  4  @gain  1  @interval
+ 100  @drawcircle  1  @drawangles  1  @drawcontrib  1  @bgcolor
+ 0.76 0.76 0.76 1  @bordercolor  0.7 0.7 0.7 1  @txcolor  0 0
+0 7  @phcolor  1 0 0 1  @nhcolor  0 0 1 1  @patching_rect  0
+0 225 225  @order  4  @gain  1  @interval  100  @drawcircle
+ 1  @drawangles  1  @drawcontrib  1  @bgcolor  0.76 0.76 0.76
+1  @bordercolor  0.7 0.7 0.7 1  @txcolor  0 0 0 7  @phcolor 
+1 0 0 1  @nhcolor  0 0 1 1  @patching_rect  0 0 225 225  @order
+ 4  @gain  1  @interval  100  @drawcircle  1  @drawangles 
+1  @drawcontrib  1  @bgcolor  0.76 0.76 0.76 1  @bordercolor 
+0.7 0.7 0.7 1  @txcolor  0 0 0 7  @phcolor  1 0 0 1  @nhcolor
+ 0 0 1 1 ;
 #X obj -56 122 hoa.decoder~ 4 0 10 -----;
 #X connect 1 0 15 0;
 #X connect 1 1 15 1;

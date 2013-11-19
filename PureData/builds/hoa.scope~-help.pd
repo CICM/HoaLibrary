@@ -6,10 +6,10 @@
 #X text 229 -365 source;
 #X msg 355 -386 \; pd dsp 1;
 #X msg 355 -348 \; pd dsp 0;
-#X obj 227 -236 hoa.scope~ @size [ 297 297 ] @fontname [ helvetica
-] @fontweight [ normal ] @fontslant [ regular ] @fontsize [ 11 ] @order
-[ 7 ] @gain [ 1 ] @interval [ 20 ] @bgcolor [ 0.7 0.7 0.7 1 ] @bordercolor
-[ 0.5 0.5 0.5 1 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 227 -236 hoa.scope~ @size  297 297  @fontname  helvetica
+ @fontweight  normal  @fontslant  regular  @fontsize  11  @order
+ 7  @gain  1  @interval  20  @bgcolor  0.7 0.7 0.7 1  @bordercolor
+ 0.5 0.5 0.5 1  @phcolor  1 0 0 1  @nhcolor  0 0 1 1 ;
 #X obj 227 -342 sig~ 1;
 #X msg 110 -361 order \$1;
 #X obj 110 -388 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0

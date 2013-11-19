@@ -6,32 +6,27 @@
 #X obj 0 112 dac~ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
 #X obj 235 -237 hoa.pi 1;
 #X obj 349 -279 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
+-1 -1 0.75 256;
 #X text -240 -325 hoa.wider~ can be used to wide the diffusion of a
 localised sound. The order depending signals are weighted and appear
 in a logarithmic way to have linear changes.;
-#X obj 302 -96 hoa.scope~ @patching_rect [ 302 -96 225 225 ] @size
-[ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @order [ 7 ] @gain [ 1 ] @interval [ 100
-] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib [ 1 ] @bgcolor [
-0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor [ 0 0 0 7 ]
-@phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 302 -96 hoa.scope~ @size 225 225 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @order 7 @gain 1 @interval 100
+@bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7 0.7 0.7 1 @phcolor 1 0 0 1 @nhcolor
+0 0 1 1;
 #X msg -143 -255 \; pd dsp 1;
 #X msg -143 -211 \; pd dsp 0;
 #X obj 349 -216 line~;
 #X msg 349 -246 \$1 20;
-#X obj -238 -17 hoa.meter~ @patching_rect [ -238 -17 225 225 ] @size
-[ 225 225 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @vectors [ 1 ] @loudspeakers [ 16 ] @angles
-[ 0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270 292.5 315
+#X obj -238 -17 hoa.meter~ @size 225 225 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @vectors 1 @channels 16 @angles
+0 22.5 45 67.5 90 112.5 135 157.5 180 202.5 225 247.5 270 292.5 315
 337.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ] @offset [ 0 ] @rotation [ 1 ] @interval
-[ 50 ] @dbperled [ 3 ] @nhotleds [ 3 ] @ntepidleds [ 3 ] @nwarmleds
-[ 3 ] @numleds [ 12 ] @bgcolor [ 0.55 0.55 0.55 1 ] @mbgcolor [ 0.4
-0.4 0.4 1 ] @bordercolor [ 0.25 0.25 0.25 1 ] @coldcolor [ 0 0.6 0
-0.8 ] @tepidcolor [ 0.6 0.73 0 0.8 ] @warmcolor [ 0.85 0.85 0 0.8 ]
-@hotcolor [ 1 0.6 0 0.8 ] @overcolor [ 1 0 0 0.8 ] @energycolor [ 0
-0 1 0.8 ] @velocitycolor [ 1 0 0 0.8 ];
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 @offset 0 @rotation 0 @interval 50
+@bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor 0 0.6 0 0.8
+@tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor 1 0.6
+0 0.8 @overcolor 1 0 0 0.8 @energycolor 0 0 1 0.8 @velocitycolor 1
+0 0 0.8;
 #X text 83 174 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
 #X text 83 158 hoalibrary | Julien Colafrancesco \, Pierre Guillot
@@ -39,8 +34,8 @@ in a logarithmic way to have linear changes.;
 #X obj 349 -329 loadbang;
 #X msg 349 -305 0.75;
 #X msg 235 -285 1;
-#X obj 235 -259 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
-0 10 -262144 -1 -1 1 256;
+#X obj 235 -259 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 1 256;
 #X obj -2 -201 hoa.encoder~ 7 -------------------------;
 #X obj -2 -175 hoa.wider~ 7 ------------------------------;
 #X obj 407 -287 cnv 15 100 40 empty \$0-pddp.cnv.header empty 3 12

@@ -1,13 +1,13 @@
 #N canvas 64 88 1205 608 10;
-#X obj -524 -318 hoa.map @patching_rect [ -524 -318 300 300 ] @size
-[ 300 300 ] @fontname [ helvetica ] @fontweight [ normal ] @fontslant
-[ regular ] @fontsize [ 11 ] @bgcolor [ 0.9 0.9 0.9 1 ] @bgcolor2 [
-0.75 0.75 0.75 1 ] @bdcolor [ 0 0 0 1 ] @selcolor [ 0.36 0.36 0.37
-0.5 ] @outputmode [ 0 ] @zoom [ 0.46 ] sources_parameters [ source
+#X obj -524 -318 hoa.map @patching_rect  -524 -318 300 300  @size
+ 300 300  @fontname  helvetica  @fontweight  normal  @fontslant
+ regular  @fontsize  11  @bgcolor  0.9 0.9 0.9 1  @bgcolor2 
+0.75 0.75 0.75 1  @bdcolor  0 0 0 1  @selcolor  0.36 0.36 0.37
+0.5  @outputmode  0  @zoom  0.46  sources_parameters  source
 0 0.571659 0.101449 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.52818 -0.855073
 0 0.2 0.2 0.2 1 s_nosymbol source 2 0.117552 -1.37681 0 0.2 0.2 0.2
-1 s_nosymbol ] groups_parameters [ group 0 3 0 1 2 0 0.2 0.2 0.2 1
-s_nosymbol ] slots_parameters [ slot 0 source 0 0.449275 1.04348 0
+1 s_nosymbol  groups_parameters  group 0 3 0 1 2 0 0.2 0.2 0.2 1
+s_nosymbol  slots_parameters  slot 0 source 0 0.449275 1.04348 0
 0.2 0.2 0.2 1 s_nosymbol source 1 1.4058 0.0869566 0 0.2 0.2 0.2 1
 s_nosymbol source 2 -1.08696 -1.26087 0 0.2 0.2 0.2 1 s_nosymbol group
 0 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 1 source 0 -0.487923 1.47826
@@ -16,7 +16,7 @@ s_nosymbol source 2 -1.08696 -1.26087 0 0.2 0.2 0.2 1 s_nosymbol group
 group 0 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol slot 2 source 0 0.571659
 0.101449 0 0.2 0.2 0.2 1 s_nosymbol source 1 1.52818 -0.855073 0 0.2
 0.2 0.2 1 s_nosymbol source 2 0.117552 -1.37681 0 0.2 0.2 0.2 1 s_nosymbol
-group 0 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol ];
+group 0 3 0 1 2 0 0.2 0.2 0.2 1 s_nosymbol ;
 #X obj -429 -374 receive map_slot;
 #X text -190 -363 Store a preset at a defined slot;
 #X msg -188 -316 slot store \$1;

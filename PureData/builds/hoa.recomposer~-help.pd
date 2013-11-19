@@ -33,7 +33,7 @@ into circular harmonics.;
 #X text 222 -357 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
 #X text -332 -279 First argument is the order \, second argument is
-the number of channels (inputs) \, @mode [ value (int or sym)] set
+the number of channels (inputs) \, @mode  value (int or sym) set
 the decomposition mode.;
 #X text 399 -242 There's 3 modes : fixe (just recompostion without
 any "effect") \, fisheye (to apply a fisheye effect on soundfield)
@@ -43,30 +43,30 @@ and free (that allows you to change angle and direcvity figures of
 -1 -1 0.333 256;
 #X msg 442 -137 \; pd dsp 1;
 #X msg 442 -99 \; pd dsp 0;
-#X obj -128 148 hoa.scope~ @patching_rect [ -128 226 215.23 215.23
-] @size [ 215.23 215.23 ] @fontname [ helvetica ] @fontweight [ normal
-] @fontslant [ regular ] @fontsize [ 11 ] @order [ 4 ] @gain [ 1 ]
-@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
-[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
-[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
-#X obj 116 150 hoa.scope~ @patching_rect [ 116 228 215.23 215.23 ]
-@size [ 215.23 215.23 ] @fontname [ helvetica ] @fontweight [ normal
-] @fontslant [ regular ] @fontsize [ 11 ] @order [ 4 ] @gain [ 1 ]
-@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
-[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
-[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj -128 148 hoa.scope~ @patching_rect  -128 226 215.23 215.23
+ @size  215.23 215.23  @fontname  helvetica  @fontweight  normal
+ @fontslant  regular  @fontsize  11  @order  4  @gain  1 
+@interval  100  @drawcircle  1  @drawangles  1  @drawcontrib
+ 1  @bgcolor  0.76 0.76 0.76 1  @bdcolor  0.7 0.7 0.7 1  @txcolor
+ 0 0 0 7  @phcolor  1 0 0 1  @nhcolor  0 0 1 1 ;
+#X obj 116 150 hoa.scope~ @patching_rect  116 228 215.23 215.23 
+@size  215.23 215.23  @fontname  helvetica  @fontweight  normal
+ @fontslant  regular  @fontsize  11  @order  4  @gain  1 
+@interval  100  @drawcircle  1  @drawangles  1  @drawcontrib
+ 1  @bgcolor  0.76 0.76 0.76 1  @bdcolor  0.7 0.7 0.7 1  @txcolor
+ 0 0 0 7  @phcolor  1 0 0 1  @nhcolor  0 0 1 1 ;
 #X obj 162 -245 osc~ 220;
 #X obj -127 -201 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X text -141 -230 and an angle (radian) :;
 #X obj -224 -69 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 356 150 hoa.scope~ @patching_rect [ 356 228 215.23 215.23 ]
-@size [ 215.23 215.23 ] @fontname [ helvetica ] @fontweight [ normal
-] @fontslant [ regular ] @fontsize [ 11 ] @order [ 4 ] @gain [ 1 ]
-@interval [ 100 ] @drawcircle [ 1 ] @drawangles [ 1 ] @drawcontrib
-[ 1 ] @bgcolor [ 0.76 0.76 0.76 1 ] @bdcolor [ 0.7 0.7 0.7 1 ] @txcolor
-[ 0 0 0 7 ] @phcolor [ 1 0 0 1 ] @nhcolor [ 0 0 1 1 ];
+#X obj 356 150 hoa.scope~ @patching_rect  356 228 215.23 215.23 
+@size  215.23 215.23  @fontname  helvetica  @fontweight  normal
+ @fontslant  regular  @fontsize  11  @order  4  @gain  1 
+@interval  100  @drawcircle  1  @drawangles  1  @drawcontrib
+ 1  @bgcolor  0.76 0.76 0.76 1  @bdcolor  0.7 0.7 0.7 1  @txcolor
+ 0 0 0 7  @phcolor  1 0 0 1  @nhcolor  0 0 1 1 ;
 #X obj 581 -75 loadbang;
 #X msg 581 -48 0.333;
 #X text 129 378 The soundfield is kept intact.;

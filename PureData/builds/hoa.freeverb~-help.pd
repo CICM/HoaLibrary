@@ -47,22 +47,10 @@ model that uses eight parallel comb filters and four cascaded allpass
 filters adapted to ambisonic domain.;
 #X text -409 -130 First spread (0 - 1);
 #X text -269 -132 Late spread (0 - 1);
-#X obj -131 -143 hoa.scope~ @order [ 3 ] @patching_rect { 0 0 225 225
-} @order { 3 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles
-{ 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor
-{ 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 3 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 3 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect { 0 0 225 225 } @order
-{ 3 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles {
-1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor {
-0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 };
+#X obj -131 -140 hoa.scope~ @size 225 225 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @order 3 @gain 1 @interval 20
+@bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @phcolor 1 0 0 1 @nhcolor
+0 0 1 1;
 #X obj -141 93 hoa.decoder~ 3 ambisonic 16 ---------------;
 #X connect 1 0 35 0;
 #X connect 1 0 36 0;
@@ -70,14 +58,14 @@ filters adapted to ambisonic domain.;
 #X connect 1 1 36 1;
 #X connect 1 2 35 2;
 #X connect 1 2 36 2;
-#X connect 1 3 35 3;
 #X connect 1 3 36 3;
-#X connect 1 4 35 4;
+#X connect 1 3 35 3;
 #X connect 1 4 36 4;
-#X connect 1 5 35 5;
+#X connect 1 4 35 4;
 #X connect 1 5 36 5;
-#X connect 1 6 35 6;
+#X connect 1 5 35 5;
 #X connect 1 6 36 6;
+#X connect 1 6 35 6;
 #X connect 2 0 1 0;
 #X connect 2 1 1 1;
 #X connect 2 2 1 2;

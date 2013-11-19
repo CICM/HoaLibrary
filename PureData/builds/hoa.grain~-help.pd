@@ -66,26 +66,14 @@ sound field.;
 #X text 738 -281 post : after an encoder;
 #X text 737 -264 no : no encoder (direct synthesis);
 #X text 708 -247 3rd argument is the buffer name;
-#X obj -190 -25 hoa.scope~ @order [ 7 ] @patching_rect { 0 0 225 225
-} @order { 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles
-{ 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor
-{ 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 };
-#X obj 408 -35 hoa.scope~ @order [ 7 ] @patching_rect { 0 0 225 225
-} @order { 7 } @gain { 1 } @interval { 100 } @drawcircle { 1 } @drawangles
-{ 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor
-{ 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor
-{ 0 0 1 1 } @patching_rect { 0 0 225 225 } @order { 7 } @gain { 1 }
-@interval { 100 } @drawcircle { 1 } @drawangles { 1 } @drawcontrib
-{ 1 } @bgcolor { 0.76 0.76 0.76 1 } @bordercolor { 0.7 0.7 0.7 1 }
-@txcolor { 0 0 0 7 } @phcolor { 1 0 0 1 } @nhcolor { 0 0 1 1 } @patching_rect
-{ 0 0 225 225 } @order { 7 } @gain { 1 } @interval { 100 } @drawcircle
-{ 1 } @drawangles { 1 } @drawcontrib { 1 } @bgcolor { 0.76 0.76 0.76
-1 } @bordercolor { 0.7 0.7 0.7 1 } @txcolor { 0 0 0 7 } @phcolor {
-1 0 0 1 } @nhcolor { 0 0 1 1 };
+#X obj -190 -25 hoa.scope~ @size 225 225 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @order 7 @gain 1 @interval 100
+@bgcolor 0.76 0.76 0.76 1 @bdcolor 0.5 0.5 0.5 1 @phcolor 1 0 0 1 @nhcolor
+0 0 1 1;
+#X obj 408 -35 hoa.scope~ @size 225 225 @fontname helvetica @fontweight
+normal @fontslant regular @fontsize 11 @order 7 @gain 1 @interval 100
+@bgcolor 0.76 0.76 0.76 1 @bdcolor 0.5 0.5 0.5 1 @phcolor 1 0 0 1 @nhcolor
+0 0 1 1;
 #X text 570 -388 Feedback (0 - 1);
 #X text 566 -307 Rarefaction (0 - 1);
 #X text 732 -142 Change the envelope :;
