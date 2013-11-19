@@ -95,6 +95,8 @@
 		8F7237811824FE36002B03D6 /* AmbisonicViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F72377F1824FE36002B03D6 /* AmbisonicViewer.cpp */; };
 		8F7237821824FE36002B03D6 /* AmbisonicViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7237801824FE36002B03D6 /* AmbisonicViewer.h */; };
 		8F7CEFDA1837B24200E99DE8 /* ebox_patcher.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F7CEFD91837B24200E99DE8 /* ebox_patcher.c */; };
+		8FB54BE8183B70F500B9D546 /* erouter.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FB54BE6183B70F500B9D546 /* erouter.c */; };
+		8FB54BE9183B70F500B9D546 /* erouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB54BE7183B70F500B9D546 /* erouter.h */; };
 		8FB6367A17D3CAA90070AE49 /* AmbisonicRecomposer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6367417D3CAA90070AE49 /* AmbisonicRecomposer.cpp */; };
 		8FB6367B17D3CAA90070AE49 /* AmbisonicRecomposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB6367517D3CAA90070AE49 /* AmbisonicRecomposer.h */; };
 		8FB6367C17D3CAA90070AE49 /* AmbisonicVirtualMicUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6367617D3CAA90070AE49 /* AmbisonicVirtualMicUI.cpp */; };
@@ -204,6 +206,8 @@
 		8F72377F1824FE36002B03D6 /* AmbisonicViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicViewer.cpp; sourceTree = "<group>"; };
 		8F7237801824FE36002B03D6 /* AmbisonicViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicViewer.h; sourceTree = "<group>"; };
 		8F7CEFD91837B24200E99DE8 /* ebox_patcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ebox_patcher.c; sourceTree = "<group>"; };
+		8FB54BE6183B70F500B9D546 /* erouter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = erouter.c; sourceTree = "<group>"; };
+		8FB54BE7183B70F500B9D546 /* erouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = erouter.h; sourceTree = "<group>"; };
 		8FB6367417D3CAA90070AE49 /* AmbisonicRecomposer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicRecomposer.cpp; sourceTree = "<group>"; };
 		8FB6367517D3CAA90070AE49 /* AmbisonicRecomposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicRecomposer.h; sourceTree = "<group>"; };
 		8FB6367617D3CAA90070AE49 /* AmbisonicVirtualMicUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicVirtualMicUI.cpp; sourceTree = "<group>"; };
@@ -408,6 +412,7 @@
 		8F2E9D72180A836F00237119 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8FB54BE5183B70F500B9D546 /* erouter */,
 				8F2E9D73180A836F00237119 /* eattr */,
 				8F2E9D79180A836F00237119 /* ebox */,
 				8F2E9D7F180A836F00237119 /* eclass */,
@@ -498,6 +503,15 @@
 			path = ewidget;
 			sourceTree = "<group>";
 		};
+		8FB54BE5183B70F500B9D546 /* erouter */ = {
+			isa = PBXGroup;
+			children = (
+				8FB54BE6183B70F500B9D546 /* erouter.c */,
+				8FB54BE7183B70F500B9D546 /* erouter.h */,
+			);
+			path = erouter;
+			sourceTree = "<group>";
+		};
 		8FB6367317D3CAA90070AE49 /* hoaRecomposer */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,6 +575,7 @@
 				8F1608D617D3269700CE8933 /* CicmDefine.h in Headers */,
 				8F1608D717D3269700CE8933 /* CicmDefine_BLAS_FFTW.h in Headers */,
 				8F1608D817D3269700CE8933 /* CicmDefine_INTEL.h in Headers */,
+				8FB54BE9183B70F500B9D546 /* erouter.h in Headers */,
 				8F1608D917D3269700CE8933 /* CicmDefine_VDSP.h in Headers */,
 				8F2E9DAB180A836F00237119 /* epd_max.h in Headers */,
 				8F7237821824FE36002B03D6 /* AmbisonicViewer.h in Headers */,
@@ -674,6 +689,7 @@
 				8F2E9DA8180A836F00237119 /* egraphics_matrix.c in Sources */,
 				8F2E9D97180A836F00237119 /* eattr_attr.c in Sources */,
 				8F1608E617D3269700CE8933 /* CicmFilterComb.cpp in Sources */,
+				8FB54BE8183B70F500B9D546 /* erouter.c in Sources */,
 				8F2E9D99180A836F00237119 /* eattr_new.c in Sources */,
 				8F1608E817D3269700CE8933 /* CicmFilterConvolution.cpp in Sources */,
 				8F1608EA17D3269700CE8933 /* CicmFilterConvolutionZero.cpp in Sources */,

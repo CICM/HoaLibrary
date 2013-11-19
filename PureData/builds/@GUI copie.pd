@@ -41,7 +41,7 @@ normal @fontslant regular @fontsize 11 @vectors 1 @channels 8 @angles
 normal @fontslant regular @fontsize 11 @order 3 @gain 1 @interval 100
 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @phcolor 1 0 0 1 @nhcolor
 0 0 1 1;
-#X obj 100 59 hoa.meter~ @size 225 225 @fontname helvetica @fontweight
+#X obj 94 60 hoa.meter~ @size 225 225 @fontname helvetica @fontweight
 normal @fontslant regular @fontsize 11 @vectors 1 @channels 8 @angles
 0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

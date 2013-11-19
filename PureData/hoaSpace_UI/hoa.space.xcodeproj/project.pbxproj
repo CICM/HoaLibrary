@@ -58,6 +58,8 @@
 		8F16093117D3269700CE8933 /* HoaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F16089917D3269700CE8933 /* HoaLibrary.h */; };
 		8F2470971803032E00736DFF /* hoa.space.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F2470961803032E00736DFF /* hoa.space.cpp */; };
 		8F247099180303D600736DFF /* ebox_handle.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F247098180303D600736DFF /* ebox_handle.c */; };
+		8F2E8328183B4E19002F842C /* erouter.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F2E8327183B4E19002F842C /* erouter.c */; };
+		8F2E832A183B4E98002F842C /* erouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F2E8329183B4E98002F842C /* erouter.h */; };
 		8F72376918247E6A002B03D6 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F72375F18247E6A002B03D6 /* Ambisonic.cpp */; };
 		8F72376A18247E6A002B03D6 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F72376018247E6A002B03D6 /* Ambisonic.h */; };
 		8F72376D18247E6A002B03D6 /* AmbisonicsDiffuser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F72376318247E6A002B03D6 /* AmbisonicsDiffuser.cpp */; };
@@ -156,6 +158,8 @@
 		8F16089917D3269700CE8933 /* HoaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaLibrary.h; sourceTree = "<group>"; };
 		8F2470961803032E00736DFF /* hoa.space.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hoa.space.cpp; sourceTree = "<group>"; };
 		8F247098180303D600736DFF /* ebox_handle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ebox_handle.c; sourceTree = "<group>"; };
+		8F2E8327183B4E19002F842C /* erouter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = erouter.c; sourceTree = "<group>"; };
+		8F2E8329183B4E98002F842C /* erouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = erouter.h; sourceTree = "<group>"; };
 		8F72375F18247E6A002B03D6 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		8F72376018247E6A002B03D6 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
 		8F72376318247E6A002B03D6 /* AmbisonicsDiffuser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDiffuser.cpp; sourceTree = "<group>"; };
@@ -364,6 +368,15 @@
 			path = CicmReverb;
 			sourceTree = "<group>";
 		};
+		8F2E8326183B4E19002F842C /* erouter */ = {
+			isa = PBXGroup;
+			children = (
+				8F2E8329183B4E98002F842C /* erouter.h */,
+				8F2E8327183B4E19002F842C /* erouter.c */,
+			);
+			path = erouter;
+			sourceTree = "<group>";
+		};
 		8F72375E18247E6A002B03D6 /* hoaAmbisonics */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +402,7 @@
 				8F83FBB41801A2C6006DA25F /* egraphics */,
 				8F83FBBE1801A2C6006DA25F /* epd.h */,
 				8F83FBBF1801A2C6006DA25F /* epd_max.h */,
+				8F2E8326183B4E19002F842C /* erouter */,
 				8F83FBC01801A2C6006DA25F /* epopup */,
 				8F83FBC31801A2C6006DA25F /* estruct.h */,
 				8F83FBC41801A2C6006DA25F /* ewidget */,
@@ -545,6 +559,7 @@
 				8F83FBDE1801A2C6006DA25F /* epd.h in Headers */,
 				8F83FBE51801A2C6006DA25F /* pd_enhanced.h in Headers */,
 				8F1608FB17D3269700CE8933 /* CicmLibrary.h in Headers */,
+				8F2E832A183B4E98002F842C /* erouter.h in Headers */,
 				8F1608FD17D3269700CE8933 /* CicmLine.h in Headers */,
 				8F83FBD21801A2C6006DA25F /* eclass.h in Headers */,
 				8F1608FF17D3269700CE8933 /* CicmFreeverb.h in Headers */,
@@ -648,6 +663,7 @@
 				8F72376F18247E6A002B03D6 /* AmbisonicViewer.cpp in Sources */,
 				8F2470971803032E00736DFF /* hoa.space.cpp in Sources */,
 				8F72377D18247EA3002B03D6 /* AmbisonicWider.cpp in Sources */,
+				8F2E8328183B4E19002F842C /* erouter.c in Sources */,
 				8F88168618360438002FD5E2 /* ebox_patcher.c in Sources */,
 				8F83FBE01801A2C6006DA25F /* epopup.c in Sources */,
 				8F83FBDD1801A2C6006DA25F /* egraphics_text.c in Sources */,

@@ -91,6 +91,8 @@
 		8F8322E21834AE5D0075F8A4 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8322D81834AE5D0075F8A4 /* Ambisonic.h */; };
 		8F8322E71834AE5D0075F8A4 /* AmbisonicViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F8322DD1834AE5D0075F8A4 /* AmbisonicViewer.cpp */; };
 		8F8322E81834AE5D0075F8A4 /* AmbisonicViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8322DE1834AE5D0075F8A4 /* AmbisonicViewer.h */; };
+		8FB54BE3183B70E200B9D546 /* erouter.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FB54BE1183B70E200B9D546 /* erouter.c */; };
+		8FB54BE4183B70E200B9D546 /* erouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FB54BE2183B70E200B9D546 /* erouter.h */; };
 		8FF633B617E0EAD400482D46 /* hoa.scope~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF633B517E0EAD400482D46 /* hoa.scope~.cpp */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +182,8 @@
 		8F8322D81834AE5D0075F8A4 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
 		8F8322DD1834AE5D0075F8A4 /* AmbisonicViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicViewer.cpp; sourceTree = "<group>"; };
 		8F8322DE1834AE5D0075F8A4 /* AmbisonicViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicViewer.h; sourceTree = "<group>"; };
+		8FB54BE1183B70E200B9D546 /* erouter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = erouter.c; sourceTree = "<group>"; };
+		8FB54BE2183B70E200B9D546 /* erouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = erouter.h; sourceTree = "<group>"; };
 		8FF633B517E0EAD400482D46 /* hoa.scope~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.scope~.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -354,6 +358,7 @@
 				8F2E9BAF180A791900237119 /* egraphics */,
 				8F2E9BB6180A791900237119 /* epd.h */,
 				8F2E9BB7180A791900237119 /* epd_max.h */,
+				8FB54BE0183B70E200B9D546 /* erouter */,
 				8F2E9BB8180A791900237119 /* epopup */,
 				8F2E9BBB180A791900237119 /* estruct.h */,
 				8F2E9BBC180A791900237119 /* ewidget */,
@@ -457,6 +462,15 @@
 			path = hoaAmbisonics;
 			sourceTree = "<group>";
 		};
+		8FB54BE0183B70E200B9D546 /* erouter */ = {
+			isa = PBXGroup;
+			children = (
+				8FB54BE1183B70E200B9D546 /* erouter.c */,
+				8FB54BE2183B70E200B9D546 /* erouter.h */,
+			);
+			path = erouter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -493,6 +507,7 @@
 				8F1608F617D3269700CE8933 /* CicmFilterOnePole.h in Headers */,
 				8F8322D51834AE420075F8A4 /* AmbisonicWider.h in Headers */,
 				8F1608F817D3269700CE8933 /* CicmOnePole.h in Headers */,
+				8FB54BE4183B70E200B9D546 /* erouter.h in Headers */,
 				8F1608FA17D3269700CE8933 /* CicmQSGS.h in Headers */,
 				8F2E9BD4180A791900237119 /* epd.h in Headers */,
 				8F2E9BDB180A791900237119 /* pd_enhanced.h in Headers */,
@@ -574,6 +589,7 @@
 				8F1608E417D3269700CE8933 /* CicmFilterBiquad.cpp in Sources */,
 				8F1608E617D3269700CE8933 /* CicmFilterComb.cpp in Sources */,
 				8F1608E817D3269700CE8933 /* CicmFilterConvolution.cpp in Sources */,
+				8FB54BE3183B70E200B9D546 /* erouter.c in Sources */,
 				8F1608EA17D3269700CE8933 /* CicmFilterConvolutionZero.cpp in Sources */,
 				8F1608ED17D3269700CE8933 /* CicmFilterDelay.cpp in Sources */,
 				8F2E9BC9180A791900237119 /* ebox_window.c in Sources */,
