@@ -8,7 +8,8 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 314.0, 62.0, 648.0, 595.0 ],
+		"rect" : [ 278.0, 139.0, 255.0, 300.0 ],
+		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -326,7 +327,36 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
+						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-30",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 393.0, 10.0, 108.0, 20.0 ],
+									"text" : "r ps_analyse_stop"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-2",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 199.0, 10.0, 79.0, 20.0 ],
+									"text" : "r ps_analyse"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -826,6 +856,16 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-21", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 208.5, 30.0, 186.0, 30.0, 186.0, 21.0, 164.5, 21.0 ],
+									"source" : [ "obj-2", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-18", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -859,6 +899,16 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-29", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-12", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 402.5, 93.0, 164.5, 93.0 ],
+									"source" : [ "obj-30", 0 ]
 								}
 
 							}
@@ -2212,48 +2262,6 @@
 					"source" : [ "obj-65", 1 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "hoa.plug~.maxref.xml",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
-				"patcherrelativepath" : "../../SourceTree/HoaLibrary/_prerelease/max-package/docs/refpages/hoa-ref",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.decorrelation~.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
-				"patcherrelativepath" : "../../SourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.all.maxpat",
-				"bootpath" : "/Users/Pierre/SourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
-				"patcherrelativepath" : "../../SourceTree/HoaLibrary/_prerelease/max-package/patchers/operators",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.plug~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.encoder~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.pi~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.scope~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}

@@ -258,6 +258,7 @@ void meter_oksize(t_meter *x, t_rect *newrect)
 
 t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_atom *argv)
 {
+    t_atom* av;
     if(argc && argv)
     {
         if(atom_gettype(argv) == A_FLOAT)
@@ -269,8 +270,13 @@ t_max_err number_of_loudspeakers_set(t_meter *x, t_object *attr, long argc, t_at
                 x->f_meter->setNumberOfLoudspeakers(d);
                 
                 x->f_number_of_loudspeakers = x->f_meter->getNumberOfLoudspeakers();
+                av = new t_atom[x->f_number_of_loudspeakers];
+                for(int i = 0; i < x->f_number_of_loudspeakers; i++)
+                {
+                    atom_setfloat(av+i, x->f_meter->getLoudspeakerAngle(i));
+                }
                 
-                angles_of_loudspeakers_set(x, NULL, NULL, NULL);
+                angles_of_loudspeakers_set(x, NULL, x->f_number_of_loudspeakers, av);
                 jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
                 jbox_resize_inputs((t_jbox *)x, x->f_number_of_loudspeakers);
                 
@@ -286,6 +292,9 @@ t_max_err angles_of_loudspeakers_set(t_meter *x, void *attr, long ac, t_atom *av
     double angles[MAX_SPEAKER];
     if(ac > MAX_SPEAKER)
         ac = MAX_SPEAKER;
+    
+    post(" ");
+    postatom(ac, av);
     if(ac && av)
     {
         for(int i = 0; i < ac; i++)

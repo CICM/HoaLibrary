@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 59.0, 109.0, 1152.0, 650.0 ],
+		"rect" : [ 23.0, 139.0, 255.0, 300.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -139,12 +139,12 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 826.0, 433.0, 59.5, 20.0 ],
 					"restore" : 					{
-						"ps_size" : [ 400.0002 ],
-						"sp_space" : [ 1.0, 0.335179, 1.0, 1.0, 0.256488, 0.364783, 1.0, 0.645334, 1.0, 1.0, 1.0, 0.103205, 0.0, 1.0, 1.0, 0.952653 ]
+						"ps_size" : [ 298.931408 ],
+						"sp_space" : [ 1.0, 0.243921, 1.0, 0.991663, 0.499744, 0.364783, 0.991387, 0.761405, 1.0, 0.686107, 0.745225, 0.396597, 0.327233, 0.673117, 0.673117, 0.918273 ]
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u615010835"
+					"varname" : "u319001482"
 				}
 
 			}
@@ -162,7 +162,7 @@
 					"saved_object_attributes" : 					{
 						"client_rect" : [ 959, 70, 1432, 133 ],
 						"parameter_enable" : 0,
-						"storage_rect" : [ 200, 200, 800, 500 ]
+						"storage_rect" : [ 766, 44, 1220, 302 ]
 					}
 ,
 					"text" : "pattrstorage ps_vibraphone",
@@ -181,7 +181,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 686.0, 441.0, 52.0, 45.0 ],
-					"text" : "0.292893 0. 0. 0."
+					"text" : "0.66353 0.322521 0. 0."
 				}
 
 			}
@@ -231,7 +231,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 25.0, 69.0, 853.0, 741.0 ],
+						"rect" : [ 542.0, 51.0, 853.0, 741.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -250,7 +250,36 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
+						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-30",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 320.0, 40.0, 108.0, 20.0 ],
+									"text" : "r ps_analyse_stop"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-26",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 126.0, 40.0, 79.0, 20.0 ],
+									"text" : "r ps_analyse"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -1399,6 +1428,25 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 135.5, 87.0, 452.5, 87.0 ],
+									"source" : [ "obj-26", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-95", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-26", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-28", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1421,6 +1469,26 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-3", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-10", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 329.5, 264.0, 451.5, 264.0 ],
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-101", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 329.5, 267.0, 147.0, 267.0, 147.0, 264.0, 135.5, 264.0 ],
+									"source" : [ "obj-30", 0 ]
 								}
 
 							}
@@ -2057,7 +2125,7 @@
 , 			{
 				"box" : 				{
 					"channels" : 16,
-					"coeffs" : [ 1.0, 0.335179, 1.0, 1.0, 0.256488, 0.364783, 1.0, 0.645334, 1.0, 1.0, 1.0, 0.103205, 0.0, 1.0, 1.0, 0.952653 ],
+					"coeffs" : [ 1.0, 0.243921, 1.0, 0.991663, 0.499744, 0.364783, 0.991387, 0.761405, 1.0, 0.686107, 0.745225, 0.396597, 0.327233, 0.673117, 0.673117, 0.918273 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-114",
 					"loudspeakers" : 16,

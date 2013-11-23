@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 25.0, 69.0, 795.0, 781.0 ],
+		"rect" : [ 533.0, 139.0, 255.0, 300.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -137,11 +137,11 @@
 					"outlettype" : [ "", "", "", "" ],
 					"patching_rect" : [ 634.0, 81.0, 59.5, 20.0 ],
 					"restore" : 					{
-						"ps_recomposer" : [ 0.549523, 0.835478, 0.904121, 0.803243, 0.595651, 1.0, 0.829427, -0.558615, 0.888317, 0.707578, -0.706635, 1.0, -0.678359, -0.73473, 0.247302, -0.982916, 0.184056, 0.447886, -0.992648, -0.121034, 0.522802, 0.451346, -0.892349, 1.0, 0.074628, -0.997211, 1.0, 0.97039, -0.241543, 1.0, -0.906984, -0.421164, 0.473531, -0.361208, 0.932485, 0.203409, 0.953155, 0.302481, 1.0, -0.82337, 0.567505, 0.47416, -0.347314, -0.937749, 0.342375, 0.210641, 0.977564, 1.0 ]
+						"ps_recomposer" : [ 0.683488, 0.729962, 1.0, 0.803243, 0.595651, 0.821291, 0.933325, -0.359034, 0.515469, 0.937829, -0.347098, 0.546225, 0.164169, 0.986432, 1.0, -0.779459, 0.626454, 1.0, -0.51039, 0.859943, 1.0, -0.397327, -0.917677, 0.798358, -0.79172, -0.610884, 1.0, -0.195325, 0.980739, 1.0, -0.852887, -0.522095, 1.0, -0.654028, 0.75647, 0.724419, 0.980265, -0.197689, 0.522236, -0.56701, -0.823711, 1.0, 0.369534, -0.929217, 1.0, -0.973464, -0.228842, 1.0 ]
 					}
 ,
 					"text" : "autopattr",
-					"varname" : "u635010866"
+					"varname" : "u913001480"
 				}
 
 			}
@@ -572,7 +572,36 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
+						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-30",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 290.0, 31.0, 108.0, 20.0 ],
+									"text" : "r ps_analyse_stop"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 12.0,
+									"id" : "obj-26",
+									"maxclass" : "newobj",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 96.0, 31.0, 79.0, 20.0 ],
+									"text" : "r ps_analyse"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
@@ -1123,11 +1152,31 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-21", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 105.5, 63.0, 276.0, 63.0, 276.0, 0.0, 426.5, 0.0 ],
+									"source" : [ "obj-26", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-10", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
 									"midpoints" : [ 171.5, 210.0, 347.0, 210.0, 347.0, 117.0, 441.5, 117.0 ],
 									"source" : [ "obj-3", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"midpoints" : [ 299.5, 72.0, 426.5, 72.0 ],
+									"source" : [ "obj-30", 0 ]
 								}
 
 							}
@@ -2385,56 +2434,6 @@
 					"source" : [ "obj-99", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "zsa.easy_centroid~.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/Max/Packages/zsa.descriptors/misc",
-				"patcherrelativepath" : "../../Documents/Max/Packages/zsa.descriptors/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "zsa.abs_centroid~.maxpat",
-				"bootpath" : "/Users/Pierre/Documents/Max/Packages/zsa.descriptors/misc",
-				"patcherrelativepath" : "../../Documents/Max/Packages/zsa.descriptors/misc",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "ps_cymbales.json",
-				"bootpath" : "/Users/Pierre/Desktop/PercussionsStra",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.map~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.projector~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.recomposer~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.pi~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "zsa.centroid~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.recomposer.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.connect.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}
