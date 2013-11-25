@@ -12,29 +12,29 @@ nchnls = 8
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
 /** UDO HoaEnc3 - ordre 3 **/
 
-opcode HoaEnc3, aaaaaaa, ak
-ain, kangle xin
+opcode HoaEnc3, aaaaaaa, ax
+ain, xangle xin
 
 ah0 init 0
-ah0 = ain * cos(0*kangle)
+ah0 = ain * cos(0*xangle)
 
 ahn1 init 0
-ahn1 = ain * sin(1*kangle)
+ahn1 = ain * sin(1*xangle)
 
 ahn init 0
-ah1 = ain * cos(1*kangle)
+ah1 = ain * cos(1*xangle)
 
 ahn2 init 0
-ahn2 = ain * sin(2*kangle)
+ahn2 = ain * sin(2*xangle)
 
 ah2 init 0
-ah2 = ain * cos(2*kangle)
+ah2 = ain * cos(2*xangle)
 
 ahn3 init 0
-ahn3 = ain * sin(3*kangle)
+ahn3 = ain * sin(3*xangle)
 
 ah3 init 0
-ah3 = ain * cos(3*kangle)
+ah3 = ain * cos(3*xangle)
 
 
 xout ah0, ahn1, ah1, ahn2, ah2, ahn3, ah3
@@ -105,3 +105,20 @@ e
 </CsoundSynthesizer>
 
 ;[winxound_bookmarks,52,53]
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="nobackground">
+  <r>255</r>
+  <g>255</g>
+  <b>255</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>

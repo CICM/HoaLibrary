@@ -121,7 +121,7 @@ xout a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16
 instr 1
 
 
-ain oscil 500, 440, 1
+ain oscil 5, 440, 1
 kangle1 phasor 1
 
 kangle = kangle1 * 6.283185
@@ -129,6 +129,8 @@ kangle = kangle1 * 6.283185
 aL, aM, aN, aO, aP, aQ, aR, aS, aT, aU, aV, aW, aX, aY, aZ HoaEnc7 ain, kangle
 
 a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16 HoaDec7 aL, aM, aN, aO, aP, aQ, aR, aS, aT, aU, aV, aW, aX, aY, aZ
+
+
 
 outch 1, a1, 2, a2, 3, a3, 4, a4, 5, a5, 6, a6, 7, a7, 8, a8, 9, a9, 10, a10, 11, a11, 12, a12, 13, a13, 14, a14, 15, a15, 16, a16 
 
@@ -147,3 +149,20 @@ e
 </CsoundSynthesizer>
 
 ;[winxound_bookmarks,76,77]
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="nobackground">
+  <r>255</r>
+  <g>255</g>
+  <b>255</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>
