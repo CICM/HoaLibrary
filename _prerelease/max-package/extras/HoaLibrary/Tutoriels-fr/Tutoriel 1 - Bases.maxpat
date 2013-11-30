@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
+			"revision" : 5,
 			"architecture" : "x64"
 		}
 ,
@@ -42,7 +42,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
@@ -130,7 +130,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -574,11 +574,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
+						"rect" : [ 227.0, 70.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -1051,16 +1051,19 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
+									"channels" : 16,
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"drawvector" : 0,
 									"id" : "obj-21",
+									"loudspeakers" : 16,
 									"maxclass" : "hoa.meter~",
-									"numinlets" : 8,
+									"numinlets" : 16,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 175.0, 529.0, 225.0, 225.0 ],
-									"zls" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ]
+									"yls" : 16,
+									"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
 								}
 
 							}
@@ -1185,6 +1188,78 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-12", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 15 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 14 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 14 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 13 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 13 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 12 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 12 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 11 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 11 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 10 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 10 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 9 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 9 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-21", 8 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-16", 8 ]
 								}
 
 							}
@@ -1675,7 +1750,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
@@ -2737,7 +2812,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
@@ -2992,7 +3067,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -4272,7 +4347,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
@@ -4458,7 +4533,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -4734,7 +4809,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -4926,7 +5001,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -5564,7 +5639,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -6196,11 +6271,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 227.0, 70.0, 896.0, 771.0 ],
+						"rect" : [ 0.0, 26.0, 896.0, 771.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
