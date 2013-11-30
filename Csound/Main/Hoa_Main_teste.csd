@@ -10,13 +10,14 @@ nchnls = 8
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
-/** UDO HoaEnc3 - ordre 3 **/
+/** UDO HoaEnc **/
 
-opcode HoaEnc3, a[], ak
-ain, kangle xin
+opcode HoaEnc, a[], akk
+ain, kangle, kordre xin
 
-aHarmonic[] init 0
-index  =  0
+
+aHarmonic[] init kordre + 1 * 2
+index  init  0
 loop:
     	
     	if(index % 2 == 0) goto positif
@@ -29,13 +30,13 @@ negatif:
  
 	index = index+1
 	
-	if(index < 7) goto loop
+	if(index < kordre + 1) goto loop
 
-xout aHarmonic[0], aHarmonic[1], aHarmonic[1]
+xout aHarmonic[]
 
 endop
 
-/** UDO HoaEnc3 - ordre 3 **/
+/** UDO HoaEnc **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
 /** UDO HoaDec1 - ordre 3 **/

@@ -11,6 +11,8 @@ nchnls = 4
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
 /** UDO HoaEnc3 - ordre 1 **/
 
+#define HoaPi #6.283185#
+
 	opcode HoaEnc1, aaa, ak
 	
 ain, kangle xin 
@@ -28,6 +30,12 @@ ah1  = ain * cos(1*kangle)
 xout ah0, ahn1, ah1
 
 	endop
+	
+/** UDO HoaWider1 - ordre 1 **/
+/** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
+/** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
+
+
 
 /** UDO HoaEnc1 - ordre 1 **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
@@ -40,14 +48,16 @@ instr 1
 ain inch 1
 kangle chnget "angle"
 
-aX, aY, aZ HoaEnc1 ain, kangle
+aX, aY, aZ HoaEnc1 ain, kangle, kordre
 
+kordre = 1
+kindex[] = kordre + 1 * 2
 
-asig1 = 0.5
-asig2 = 0.25
+asig1 = kindex / 2
+asig2 = kindex / 4
 
-kangle1 = 0
-kangle2 = 1.570796
+kangle1 = 0    ; 0
+kangle2 = 1.570796 ; kindex[] * $HoaPi / ( korder + 1 * 2)
 kangle3 = 3.141592
 kangle4 = 4.712388
 
@@ -106,3 +116,20 @@ e
 </CsScore>
 </CsoundSynthesizer>
 
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="nobackground">
+  <r>255</r>
+  <g>255</g>
+  <b>255</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>

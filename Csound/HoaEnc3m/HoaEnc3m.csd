@@ -9,37 +9,28 @@ nchnls = 7
 
 /** UDO HoaEnc3 - ordre 3 **/
 
-opcode HoaEnc3m, aaaaaaa, aak
-
-setksmps 1
-
-ain, axangle, kdist xin
+opcode HoaEnc3, aaaaaaa, akk
+ain, kangle, kdist xin
 
 kg = 1/kdist^2
 
-ah0 init 0
-ah0 = ain * cos(0*axangle)
+aHarmonic[] init 0
+index  =  0
+loop:
+    	
+    	if(index % 2 == 0) goto positif
+	if(index % 2 != 0) goto negatif
+	
+positif:
+	aHarmonic[index] = ain * cos(index * kangle)
+negatif:
+    	aHarmonic[index] = ain * sin(abs(index) * kangle)
+ 
+	index = index+1
+	
+	if(index < 7) goto loop
 
-ahn1 init 0
-ahn1 = ain * sin(1*axangle)
-
-ahn init 0
-ah1 = ain * cos(1*axangle)
-
-ahn2 init 0
-ahn2 = ain * sin(2*axangle)
-
-ah2 init 0
-ah2 = ain * cos(2*axangle)
-
-ahn3 init 0
-ahn3 = ain * sin(3*axangle)
-
-ah3 init 0
-ah3 = ain * cos(3*axangle)
-
-
-xout ah0*kg, ahn1*kg, ah1*kg, ahn2*kg, ah2*kg, ahn3*kg, ah3*kg
+xout aHarmonic[0]*kg, aHarmonic[1]*kg, aHarmonic[2]*kg, aHarmonic[3]*kg, aHarmonic[4]*kg, aHarmonic[5]*kg, aHarmonic[6]*kg
 
 endop
 
@@ -52,7 +43,7 @@ ain inch 1
 axangle inch 2
 kdist chnget "dist"
 
-a1, a2, a3, a4, a5, a6, a7 HoaEnc3m ain, axangle, kdist
+a1, a2, a3, a4, a5, a6, a7 HoaEnc3 ain, axangle, kdist
 
 outch 1, a1, 2, a2, 3, a3, 4, a4, 5, a5, 6, a6, 7, a7
 
@@ -71,3 +62,20 @@ e
 
 </CsScore>
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="nobackground">
+  <r>255</r>
+  <g>255</g>
+  <b>255</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>
