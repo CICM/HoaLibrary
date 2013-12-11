@@ -32,14 +32,14 @@ negatif:
 	
 	if(index < kordre + 1) goto loop
 
-xout aHarmonic[0], aHarmonic[0], aHarmonic[0]
+xout aHarmonic
 
 endop
 
 /** UDO HoaEnc **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX **/
-/** UDO HoaDec1 - ordre 3 **
+/** UDO HoaDec1 - ordre 3 **/
 
 opcode HoaDec3, aaaaaaaa, aaaaaaa
 
@@ -79,9 +79,9 @@ instr 1
 ain inch 1
 kangle chnget "angle"
 
-HoaEnc3 ain, kangle
+aM, aN, aO, aP, aQ, aR, aS HoaEnc3 ain, kangle
 
-/*a1, a2, a3, a4, a5, a6, a7, a8 HoaDec3 aM, aN, aO, aP, aQ, aR, aS*/
+a1, a2, a3, a4, a5, a6, a7, a8 HoaDec3 aM, aN, aO, aP, aQ, aR, aS
 
 outch 1, a1, 2, a2, 3, a3, 4, a4, 5, a5, 6, a6, 7, a7, 8, a8
 
