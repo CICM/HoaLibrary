@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_grain
 {
-    t_jbox              f_ob;
+    t_edspobj           f_ob;
     AmbisonicsGrain*    f_ambi_grain;
     
     int                 f_number_of_samples;
@@ -58,46 +63,42 @@ extern "C" void setup_hoa0x2egrain_tilde(void)
 {    
     t_eclass* c;
     
-    c = class_new("hoa.grain~", (method)hoa_grain_new, (method)hoa_grain_free, (short)sizeof(t_hoa_grain), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.grain~", (method)hoa_grain_new, (method)hoa_grain_free, (short)sizeof(t_hoa_grain), 0L, A_GIMME, 0);
     
-	class_dspinit(c);
+	eclass_dspinit(c);
     
-    class_addmethod(c, (method)hoa_grain_dsp,           "dsp",          A_CANT,  0);
-    class_addmethod(c, (method)hoa_grain_size,          "size",         A_GIMME, 0);
-    class_addmethod(c, (method)hoa_grain_delay,         "delay",        A_GIMME, 0);
-    class_addmethod(c, (method)hoa_grain_feed,          "feedback",     A_GIMME, 0);
-    class_addmethod(c, (method)hoa_grain_rare,          "rarefaction",  A_GIMME, 0);
-    class_addmethod(c, (method)hoa_grain_buffer_set,    "set",        A_SYMBOL,0);
+    eclass_addmethod(c, (method)hoa_grain_dsp,           "dsp",          A_CANT,  0);
+    eclass_addmethod(c, (method)hoa_grain_size,          "size",         A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_grain_delay,         "delay",        A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_grain_feed,          "feedback",     A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_grain_rare,          "rarefaction",  A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_grain_buffer_set,    "set",        A_SYMBOL,0);
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
     hoa_grain_class = c;
 }
 
 void *hoa_grain_new(t_symbol *s, long argc, t_atom *argv)
 {
     t_hoa_grain *x = NULL;
-    t_dictionary *d;
 	int	order = 4;
     bool mode = 1;
     
-    x = (t_hoa_grain *)object_alloc(hoa_grain_class);
+    x = (t_hoa_grain *)eobj_new(hoa_grain_class);
     
     order = atom_getint(argv);
     if(atom_getsym(argv+1) == gensym("no"))
         mode = 0;
     
     x->f_ambi_grain = new AmbisonicsGrain(order, mode, 5000, sys_getblksize(), sys_getsr());
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_grain->getNumberOfInputs(), x->f_ambi_grain->getNumberOfOutputs());
+    eobj_dspsetup(x, x->f_ambi_grain->getNumberOfInputs(), x->f_ambi_grain->getNumberOfOutputs());
     hoa_grain_buffer_set(x, atom_getsymbol(argv+2));
     x->f_ambi_grain->setGrainSize(20.);
     x->f_ambi_grain->setDelayTime(100.);
     x->f_ambi_grain->setRarefaction(0.);
     x->f_ambi_grain->setFeedback(0.95);
     
-	x->f_ob.z_misc = Z_NO_INPLACE;
-    
-    d = object_dictionaryarg(argc,argv);
-    attr_dictionary_process(x, d);
+	x->f_ob.d_misc = E_NO_INPLACE;
     
     return (x);
 }
@@ -167,6 +168,6 @@ void hoa_grain_buffer_set(t_hoa_grain *x, t_symbol *s)
 
 void hoa_grain_free(t_hoa_grain *x)
 {
-	dsp_freejbox((t_jbox *)x);
-	delete(x->f_ambi_grain);
+    eobj_dspfree(x);
+    delete(x->f_ambi_grain);
 }

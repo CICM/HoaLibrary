@@ -5,23 +5,23 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>47F20C86-D590-4F21-84DD-85D7926E5E98</string>
+	<string>4C7633D6-8C8A-4495-A873-828290E18694</string>
 	<key>IDESourceControlProjectName</key>
-	<string>hoa.space</string>
+	<string>hoa.delay~</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>123F0024-6209-480B-8D21-00CAA7A7EF88</key>
+		<key>0D1092E7-FC82-482C-919A-817591BFB604</key>
 		<string>https://github.com/pierreguillot/PdEnhanced.git</string>
-		<key>B7B70853-40ED-46A4-8E38-E85E7F178909</key>
+		<key>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</key>
 		<string>https://github.com/CICM/HoaLibrary.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PureData/hoaSpace_UI/hoa.space.xcodeproj/project.xcworkspace</string>
+	<string>PureData/hoaDelay/hoa.delay~.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>123F0024-6209-480B-8D21-00CAA7A7EF88</key>
+		<key>0D1092E7-FC82-482C-919A-817591BFB604</key>
 		<string>../../../../../PdEnhanced</string>
-		<key>B7B70853-40ED-46A4-8E38-E85E7F178909</key>
+		<key>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -29,14 +29,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B7B70853-40ED-46A4-8E38-E85E7F178909</string>
+	<string>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B7B70853-40ED-46A4-8E38-E85E7F178909</string>
+			<string>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HoaLibrary</string>
 		</dict>
@@ -44,7 +44,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>123F0024-6209-480B-8D21-00CAA7A7EF88</string>
+			<string>0D1092E7-FC82-482C-919A-817591BFB604</string>
 			<key>IDESourceControlWCCName</key>
 			<string>PdEnhanced</string>
 		</dict>

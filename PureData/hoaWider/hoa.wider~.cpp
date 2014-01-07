@@ -28,7 +28,7 @@
 
 typedef struct _hoa_wider
 {
-    t_jbox          f_ob;
+    t_edspobj       f_ob;
     AmbisonicWider* f_ambi_wider;
     
 } t_hoa_wider;
@@ -44,13 +44,13 @@ t_eclass *hoa_wider_class;
 extern "C" void setup_hoa0x2ewider_tilde(void)
 {
     t_eclass* c;
-    c = class_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (short)sizeof(t_hoa_wider), 0, A_GIMME, 0);
+    c = eclass_new("hoa.wider~", (method)hoa_wider_new, (method)hoa_wider_free, (short)sizeof(t_hoa_wider), 0, A_GIMME, 0);
     
-	class_dspinit(c);
+	eclass_dspinit(c);
     
-	class_addmethod(c, (method)hoa_wider_dsp,       "dsp",      A_CANT, 0);
+	eclass_addmethod(c, (method)hoa_wider_dsp,       "dsp",      A_CANT, 0);
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
     hoa_wider_class = c;
 }
 
@@ -59,13 +59,13 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 	t_hoa_wider *x = NULL;
 	int	order = 4;
     
-	 x = (t_hoa_wider *)object_alloc(hoa_wider_class);
-    
+	 x = (t_hoa_wider *)eobj_new(hoa_wider_class);
+
     order = atom_getint(argv);
     x->f_ambi_wider = new AmbisonicWider(order, sys_getblksize());
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_wider->getNumberOfInputs(), x->f_ambi_wider->getNumberOfOutputs());
+    eobj_dspsetup(x, x->f_ambi_wider->getNumberOfInputs(), x->f_ambi_wider->getNumberOfOutputs());
     
-	x->f_ob.z_misc = Z_NO_INPLACE;
+	x->f_ob.d_misc = Z_NO_INPLACE;
     
 	return (x);
 }
@@ -83,6 +83,6 @@ void hoa_wider_perform(t_hoa_wider *x, t_object *dsp, float **ins, long ni, floa
 
 void hoa_wider_free(t_hoa_wider *x)
 {
-	dsp_freejbox((t_jbox *)x);
+    eobj_dspfree(x);
 	delete(x->f_ambi_wider);
 }

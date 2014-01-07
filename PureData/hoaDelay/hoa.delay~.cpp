@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_delay
 {
-    t_jbox              f_ob;
+    t_edspobj           f_ob;
     AmbisonicsDelay*    f_ambi_delay;
     
 } t_hoa_delay;
@@ -51,17 +56,17 @@ t_eclass *hoa_delay_class;
 extern "C" void setup_hoa0x2edelay_tilde(void)
 {
     t_eclass *c;
-    c = class_new("hoa.delay~", (method)hoa_delay_new,(method)hoa_delay_free, sizeof(t_hoa_delay), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.delay~", (method)hoa_delay_new,(method)hoa_delay_free, sizeof(t_hoa_delay), 0L, A_GIMME, 0);
     
-    class_dspinit(c);
-    class_addmethod(c, (method)hoa_delay_dsp,           "dsp",          A_CANT, 0);
-    class_addmethod(c, (method)hoa_delay_ramp,          "ramp",         A_GIMME, 0);
-    class_addmethod(c, (method)hoa_delay_comp,          "comp",         A_GIMME, 0);
-    class_addmethod(c, (method)hoa_delay_time_ms,       "ms",           A_GIMME, 0);
-    class_addmethod(c, (method)hoa_delay_time_sample,   "sample",       A_GIMME, 0);
-    class_addmethod(c, (method)hoa_delay_diff,          "diff",         A_GIMME, 0);
+    eclass_dspinit(c);
+    eclass_addmethod(c, (method)hoa_delay_dsp,           "dsp",          A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_delay_ramp,          "ramp",         A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_delay_comp,          "comp",         A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_delay_time_ms,       "ms",           A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_delay_time_sample,   "sample",       A_GIMME, 0);
+    eclass_addmethod(c, (method)hoa_delay_diff,          "diff",         A_GIMME, 0);
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
     hoa_delay_class = c;
 }
 
@@ -72,15 +77,15 @@ void *hoa_delay_new(t_symbol *s, long argc, t_atom *argv)
     bool mode = 1;
     double maxdelay = 5000.;
     
-    x = (t_hoa_delay *)object_alloc(hoa_delay_class);
+    x = (t_hoa_delay *)eobj_new(hoa_delay_class);
 	order = atom_getint(argv);
     if(atom_getsym(argv+1) == gensym("no"))
         mode = 0;
     
     x->f_ambi_delay = new AmbisonicsDelay(order, mode, maxdelay, (int)sys_getblksize(), (int)sys_getsr());
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_delay->getNumberOfInputs(), x->f_ambi_delay->getNumberOfOutputs());
+    eobj_dspsetup(x, x->f_ambi_delay->getNumberOfInputs(), x->f_ambi_delay->getNumberOfOutputs());
     
-    x->f_ob.z_misc = Z_NO_INPLACE;
+    x->f_ob.d_misc = E_NO_INPLACE;
     
 	return (x);
 }
@@ -133,6 +138,6 @@ void hoa_delay_time_sample(t_hoa_delay *x, t_symbol *sym, long argc, t_atom *arg
 
 void hoa_delay_free(t_hoa_delay *x)
 {
-	dsp_freejbox((t_jbox *)x);
+	eobj_dspfree(x);
 	delete(x->f_ambi_delay);
 }

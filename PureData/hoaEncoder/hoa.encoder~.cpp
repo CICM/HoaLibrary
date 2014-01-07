@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_encoder
 {
-    t_jbox            f_ob;
+    t_edspobj            f_ob;
     AmbisonicEncoder* f_ambi_encoder;
 } t_hoa_encoder;
 
@@ -43,13 +48,13 @@ t_eclass *hoa_encoder_class;
 extern "C" void setup_hoa0x2eencoder_tilde(void)
 {
     t_eclass *c;
-    c = class_new("hoa.encoder~", (method)hoa_encoder_new,(method)hoa_encoder_free, sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.encoder~", (method)hoa_encoder_new,(method)hoa_encoder_free, sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
     
-    class_dspinit(c);
+    eclass_dspinit(c);
     
-    class_addmethod(c, (method)hoa_encoder_dsp,     "dsp",		A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_encoder_dsp,     "dsp",		A_CANT, 0);
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
     hoa_encoder_class = c;
 }
 
@@ -58,15 +63,15 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
     t_hoa_encoder *x = NULL;
 	int	order = 4;
     
-    x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
+    x = (t_hoa_encoder *)eobj_new(hoa_encoder_class);
 	if (x)
 	{
         order = atom_getint(argv);
         
 		x->f_ambi_encoder = new AmbisonicEncoder(order, sys_getblksize());
-        dsp_setupjbox((t_jbox *)x, x->f_ambi_encoder->getNumberOfInputs(), x->f_ambi_encoder->getNumberOfOutputs());
+        eobj_dspsetup(x, x->f_ambi_encoder->getNumberOfInputs(), x->f_ambi_encoder->getNumberOfOutputs());
         
-        x->f_ob.z_misc = Z_NO_INPLACE;
+        x->f_ob.d_misc = E_NO_INPLACE;
 	}
 	return (x);
 }
@@ -84,6 +89,6 @@ void hoa_encoder_perform(t_hoa_encoder *x, t_object *dsp, float **ins, long ni, 
 
 void hoa_encoder_free(t_hoa_encoder *x)
 {
-	dsp_freejbox((t_jbox *)x);
+	eobj_dspfree(x);
 	delete(x->f_ambi_encoder);
 }

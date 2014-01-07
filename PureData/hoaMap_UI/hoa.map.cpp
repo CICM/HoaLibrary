@@ -24,7 +24,12 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
@@ -34,9 +39,9 @@
 
 typedef struct  _hoamap
 {
-	t_jbox          j_box;
+	t_ebox          j_box;
 	t_rect          rect;
-	t_jfont*        jfont;
+	t_efont*        jfont;
     t_clock*        f_clock;
     
 	t_outlet*		f_out_sources;
@@ -73,11 +78,11 @@ t_eclass *hoamap_class;
 void *hoamap_new(t_symbol *s, int argc, t_atom *argv);
 void hoamap_free(t_hoamap *x);
 void hoamap_tick(t_hoamap *x);
-void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params);
+void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_edrawparams *params);
 void hoamap_oksize(t_hoamap *x, t_rect *newrect);
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s);
-t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
+t_pd_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+t_pd_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv);
 void hoamap_popup(t_hoamap *x, t_symbol *s, long itemid);
 
 void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av);
@@ -122,36 +127,36 @@ extern "C" void setup_hoa0x2emap(void)
 {
 	t_eclass *c;
     
-	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, sizeof(t_hoamap), 0L, A_GIMME, 0);
+	c = eclass_new("hoa.map", (method)hoamap_new, (method)hoamap_free, sizeof(t_hoamap), 0L, A_GIMME, 0);
     
-	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
+    eclass_init(c, 0);
     
-    class_addmethod(c, (method) hoamap_assist,          "assist",           A_CANT,     0);
-	class_addmethod(c, (method) hoamap_paint,           "paint",            A_CANT,     0);
-	class_addmethod(c, (method) hoamap_getdrawparams,   "getdrawparams",    A_CANT,     0);
-    class_addmethod(c, (method) hoamap_oksize,          "oksize",           A_CANT,     0);
-	class_addmethod(c, (method) hoamap_notify,          "notify",           A_CANT,     0);
-    class_addmethod(c, (method) hoamap_bang,            "bang",             A_CANT,     0);
-    class_addmethod(c, (method) hoamap_infos,           "getinfo",          A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_assist,          "assist",           A_CANT,     0);
+	eclass_addmethod(c, (method) hoamap_paint,           "paint",            A_CANT,     0);
+	eclass_addmethod(c, (method) hoamap_getdrawparams,   "getdrawparams",    A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_oksize,          "oksize",           A_CANT,     0);
+	eclass_addmethod(c, (method) hoamap_notify,          "notify",           A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_bang,            "bang",             A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_infos,           "getinfo",          A_CANT,     0);
     
-    class_addmethod(c, (method) hoamap_source,           "source",           A_GIMME,    0);
-    class_addmethod(c, (method) hoamap_group,            "group",            A_GIMME,    0);
-    class_addmethod(c, (method) hoamap_slot,             "slot",             A_GIMME,    0);
-    class_addmethod(c, (method) hoamap_trajectory,       "trajectory",       A_GIMME,    0);
-    class_addmethod(c, (method) hoamap_clear_all,        "clear",            A_CANT ,    0);
+    eclass_addmethod(c, (method) hoamap_source,           "source",           A_GIMME,    0);
+    eclass_addmethod(c, (method) hoamap_group,            "group",            A_GIMME,    0);
+    eclass_addmethod(c, (method) hoamap_slot,             "slot",             A_GIMME,    0);
+    eclass_addmethod(c, (method) hoamap_trajectory,       "trajectory",       A_GIMME,    0);
+    eclass_addmethod(c, (method) hoamap_clear_all,        "clear",            A_CANT ,    0);
     
-    class_addmethod(c, (method) hoamap_mousedown,        "mousedown",       A_CANT,     0);
-    class_addmethod(c, (method) hoamap_mousedrag,        "mousedrag",       A_CANT,     0);
-    class_addmethod(c, (method) hoamap_mouseup,          "mouseup",         A_CANT,     0);
-    class_addmethod(c, (method) hoamap_mouseenter,       "mouseenter",      A_CANT,     0);
-    class_addmethod(c, (method) hoamap_mousemove,        "mousemove",       A_CANT,     0);
-    class_addmethod(c, (method) hoamap_mouseleave,       "mouseleave",      A_CANT,     0);
-    class_addmethod(c, (method) hoamap_mousewheel,		 "mousewheel",      A_CANT,     0);
-    class_addmethod(c, (method) hoamap_key,              "key",             A_CANT,     0);
-	class_addmethod(c, (method) hoamap_popup,            "popup",           A_CANT,     0);
-    class_addmethod(c, (method) hoamap_jsave,            "jsave",           A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mousedown,        "mousedown",       A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mousedrag,        "mousedrag",       A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mouseup,          "mouseup",         A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mouseenter,       "mouseenter",      A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mousemove,        "mousemove",       A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mouseleave,       "mouseleave",      A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mousewheel,		 "mousewheel",      A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_key,              "key",             A_CANT,     0);
+	eclass_addmethod(c, (method) hoamap_popup,            "popup",           A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_jsave,            "jsave",           A_CANT,     0);
     
-	CLASS_ATTR_DEFAULT			(c, "size", 0, "225 225");
+	CLASS_ATTR_DEFAULT              (c, "size", 0, "225 225");
     
     CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_hoamap, f_color_background);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
@@ -395,7 +400,7 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
     }
 }
 
-void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_edrawparams *params)
 {
     params->d_boxfillcolor = x->f_color_background;
     params->d_bordercolor = x->f_color_border_box;
@@ -1085,7 +1090,7 @@ void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
     }
 }
 
-t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
+t_pd_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
     {
@@ -1099,7 +1104,7 @@ t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
     return 0;
 }
 
-t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_pd_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
     if (msg == gensym("attr_modified"))
     {

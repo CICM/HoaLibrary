@@ -14,7 +14,7 @@ synthesis \, perspective distorsion or spatial filtering.;
 #X obj 639 -411 phasor~ 1;
 #X obj 300 -151 hoa.scope~ @size 184 184 @fontname helvetica @fontweight
 normal @fontslant regular @fontsize 11 @order 3 @gain 1 @interval 100
-@bgcolor 0.76 0.76 0.76 1 @bdcolor 0 0.5 0.5 0.5 @phcolor 1 0 0 1 @nhcolor
+@bgcolor 0.76 0.76 0.76 1 @bdcolor 0.5 0.5 0.5 1 @phcolor 1 0 0 1 @nhcolor
 0 0 1 1;
 #X obj 246 -580 hoa.pi 2;
 #X obj 261 -558 phasor~ 0.2;

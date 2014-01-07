@@ -226,6 +226,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_CATEGORY(c, "orientation", 0, "Appearance");
 	
 	CLASS_STICKY_CATEGORY(c, 0, "Color");
+    
 	CLASS_ATTR_RGBA_LEGACY(c, "bgcolor", "brgb", 0, t_hoaGain, j_brgba);
 	CLASS_ATTR_ALIAS(c,"bgcolor", "brgba");
 	CLASS_ATTR_DEFAULTNAME_SAVE_PAINT(c,"bgcolor",0,"0.35 0.35 0.35 1.");
@@ -1092,6 +1093,7 @@ t_max_err hoaGain_notify(t_hoaGain *x, t_symbol *s, t_symbol *msg, void *sender,
 		}
         jbox_redraw((t_jbox *)x);
 	}
+    
 	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
