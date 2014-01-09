@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_projector
 {
-    t_jbox              f_ob;
+    t_edspobj           f_ob;
     AmbisonicProjector* f_ambi_projector;
 } t_hoa_projector;
 
@@ -44,13 +49,14 @@ extern "C" void setup_hoa0x2eprojector_tilde(void)
 {
     t_eclass* c;
     
-    c = class_new("hoa.projector~", (method)hoa_projector_new, (method)hoa_projector_free, (short)sizeof(t_hoa_projector), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.projector~", (method)hoa_projector_new, (method)hoa_projector_free, (short)sizeof(t_hoa_projector), 0L, A_GIMME, 0);
     
-	class_dspinit(c);
+	eclass_dspinit(c);
     
-	class_addmethod(c, (method)hoa_projector_dsp,     "dsp",      A_CANT, 0);
+	eclass_addmethod(c, (method)hoa_projector_dsp,     "dsp",      A_CANT, 0);
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_projector_class = c;
 }
 
@@ -60,14 +66,12 @@ void *hoa_projector_new(t_symbol *s, long argc, t_atom *argv)
 	int	order = 4;
     int microphones = 10;
     
-    x = (t_hoa_projector *)object_alloc(hoa_projector_class);
+    x = (t_hoa_projector *)eobj_new(hoa_projector_class);
     
     order = atom_getint(argv);
     microphones = atom_getint(argv+1);
     x->f_ambi_projector = new AmbisonicProjector(order, microphones, sys_getblksize());
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_projector->getNumberOfInputs(), x->f_ambi_projector->getNumberOfOutputs());
-    
-	x->f_ob.z_misc = Z_NO_INPLACE;
+    eobj_dspsetup(x, x->f_ambi_projector->getNumberOfInputs(), x->f_ambi_projector->getNumberOfOutputs());
     
 	return (x);
 }
@@ -85,6 +89,6 @@ void hoa_projector_perform(t_hoa_projector *x, t_object *dsp, float **ins, long 
 
 void hoa_projector_free(t_hoa_projector *x)
 {
-	//dsp_freejbox((t_jbox *)x);
-	//delete(x->f_ambi_projector);
+	eobj_dspfree(x);
+	delete x->f_ambi_projector;
 }

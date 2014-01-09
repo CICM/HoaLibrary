@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_map
 {
-    t_jbox              f_ob;
+    t_edspobj           f_ob;
     AmbisonicsMultiMaps *f_ambi_map;
     bool				f_mode_bool;
 } t_hoa_map;
@@ -47,12 +52,12 @@ extern "C" void setup_hoa0x2emap_tilde(void)
 {
     t_eclass* c;
     
-    c = class_new("hoa.map~", (method)hoa_map_new, (method)hoa_map_free, (short)sizeof(t_hoa_map), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.map~", (method)hoa_map_new, (method)hoa_map_free, (short)sizeof(t_hoa_map), 0L, A_GIMME, 0);
     
-	class_dspinit(c);
+	eclass_dspinit(c);
     
-	class_addmethod(c, (method)hoa_map_dsp,     "dsp",      A_CANT, 0);
-    class_addmethod(c, (method)hoa_map_list,    "list",     A_GIMME, 0);
+	eclass_addmethod(c, (method)hoa_map_dsp,     "dsp",      A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_map_list,    "list",     A_GIMME, 0);
     
     CLASS_ATTR_LONG             (c, "mode", 0, t_hoa_map, f_mode_bool);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Behavior");
@@ -61,29 +66,32 @@ extern "C" void setup_hoa0x2emap_tilde(void)
 	CLASS_ATTR_FILTER_CLIP      (c, "mode", 0, 1);
 	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_map_class = c;
 }
 
 void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 {
     t_hoa_map *x = NULL;
-    t_dictionary *d;
+    t_binbuf *d;
 	int	order = 4;
     int numberOfSources = 2;
     
-    x = (t_hoa_map *)object_alloc(hoa_map_class);
+    if (!(d = binbuf_via_atoms(argc,argv)))
+		return NULL;
+    
+    x = (t_hoa_map *)eobj_new(hoa_map_class);
     
     order = atom_getint(argv);
     numberOfSources = atom_getint(argv+1);
     x->f_ambi_map = new AmbisonicsMultiMaps(order, numberOfSources, 4100, sys_getblksize());
     x->f_ambi_map->setRamp(4100);
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_map->getNumberOfInputs(), x->f_ambi_map->getNumberOfOutputs());
+    eobj_dspsetup(x, x->f_ambi_map->getNumberOfInputs(), x->f_ambi_map->getNumberOfOutputs());
     
-	x->f_ob.z_misc = Z_NO_INPLACE;
+	x->f_ob.d_misc = E_NO_INPLACE;
     
-    d = object_dictionaryarg(argc,argv);
-    attr_dictionary_process(x, d);
+    ebox_attrprocess_viabinbuf(x, d);
     
 	return (x);
 }
@@ -122,6 +130,6 @@ void hoa_map_list(t_hoa_map *x, t_symbol *s, long argc, t_atom *argv)
 
 void hoa_map_free(t_hoa_map *x)
 {
-	dsp_freejbox((t_jbox *)x);
+	eobj_dspfree(x);
 	delete(x->f_ambi_map);
 }

@@ -1,166 +1,162 @@
-#N canvas 302 64 930 715 10;
-#X obj -255 -327 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.space~
-3 12 0 18 -204280 -1 0;
-#X obj 114 -2 hoa.projector~ 4 10;
-#X obj 114 132 hoa.space~ 10 -----;
-#X obj -47 100 pack 0 0;
-#X obj -47 57 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj -2 76 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
-#X obj 111 173 hoa.recomposer~ 4 10;
-#X obj 96 252 dac~ 1 2 3 4 5 6 7 8 9 10;
-#X text -45 34 a index and a float :;
-#X msg -198 40 \; pd dsp 1;
-#X msg -198 84 \; pd dsp 0;
-#X obj 95 -53 hoa.grain~ 4 no grain_env;
+#N canvas 499 27 823 639 10;
+#X obj 0 0 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.space~ 3 12
+0 18 -204280 -1 0;
+#X msg 232 114 \; pd dsp 1;
+#X msg 232 154 \; pd dsp 0;
 #N canvas 0 22 665 459 (subpatch) 0;
 #X array grain_env 44100 float 2;
-#X coords 0 1 44100 -1 200 140 1;
-#X restore 384 -90 graph;
-#X obj 384 -127 soundfiler;
-#X msg 411 -193 read -resize hanning.wav grain_env;
-#X msg 384 -214 read -resize triangle.wav grain_env;
-#X msg 424 -169 read -resize sinc5.wav grain_env;
-#X obj 177 -110 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1000 256;
-#X obj 177 -197 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 505 256;
-#X msg 177 -168 size \$1;
-#X msg 177 -83 delay \$1;
-#X obj 246 -195 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
-#X obj 247 -111 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0 256;
-#X msg 246 -165 feedback \$1;
-#X msg 247 -84 rarefaction \$1;
-#X obj -241 -215 hoa.space @size 221 221 @fontname helvetica @fontweight
-normal @fontslant regular @fontsize 11 @channels 10 @coeffs 1 1 1 1
-1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @spacolor
-0 0.4 0.6 1 @miccolor 0 0 0 1 @circolor 0.7 0.7 0.7 1;
-#X obj 332 -283 loadbang;
-#X text -227 307 Eliott Paris © 2012-2013 CICM / Universite Paris
-8;
-#X text -227 291 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X coords 0 1 44100 -1 153 126 1 0 0;
+#X restore 559 241 graph;
+#X obj 559 184 soundfiler;
+#X msg 559 102 read -resize hanning.wav grain_env;
+#X msg 579 127 read -resize triangle.wav grain_env;
+#X msg 599 152 read -resize sinc5.wav grain_env;
+#X msg 330 146 size \$1;
+#X msg 330 280 delay \$1;
+#X msg 429 149 feedback \$1;
+#X msg 429 280 rarefaction \$1;
+#X obj 262 389 hoa.space @size 153 153 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send hoaspace~
+@presetname (null) @channels 10 @coeffs 0 1 0 0 1 0 1 0 0 1 @bgcolor
+0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @spacolor 0 0.4 0.6 1 @miccolor
+0 0 0 1 @circolor 0.7 0.7 0.7 1;
+#X obj 559 82 loadbang;
+#X text 297 595 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
-#X obj 386 68 hoa.scope~ @size 225 225 @fontname helvetica @fontweight
-normal @fontslant regular @fontsize 11 @order 4 @gain 1 @interval 100
-@bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @phcolor 1 0 0 1 @nhcolor
-0 0 1 1;
-#X text -49 22 Set one coefficient with;
-#X msg 177 -140 1000;
-#X msg 177 -221 30;
-#X msg 246 -221 0.75;
-#X msg 247 -140 0.4;
-#X obj 95 -143 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 602 256;
-#X msg 95 -176 220;
-#X text -247 -286 hoa.space~ allows you to apply gain to virtual microphones
-placed arround the soud field.;
-#X text -252 -305 A spatial filter;
-#X text -207 146 Index from 0 to the number of virtual microphones.
-Gain between 0 and 1;
-#X text -207 201 You can use a list with a set of value to change all
-the gains together.;
-#X text -230 -238 Use hoa.space (without ~) to change the gains.;
-#X obj -241 -255 loadbang;
-#X obj 96 219 hoa.decoder~ 4 0 10 -----;
-#X msg 4 -116 set grain_env;
-#X obj 4 -148 loadbang;
-#X obj 95 -94 osc~ 220;
-#X connect 1 0 2 0;
-#X connect 1 1 2 1;
-#X connect 1 2 2 2;
-#X connect 1 3 2 3;
-#X connect 1 4 2 4;
-#X connect 1 5 2 5;
-#X connect 1 6 2 6;
-#X connect 1 7 2 7;
-#X connect 1 8 2 8;
-#X connect 1 9 2 9;
-#X connect 2 0 6 0;
-#X connect 2 1 6 1;
-#X connect 2 2 6 2;
-#X connect 2 3 6 3;
-#X connect 2 4 6 4;
-#X connect 2 5 6 5;
-#X connect 2 6 6 6;
-#X connect 2 7 6 7;
-#X connect 2 8 6 8;
-#X connect 2 9 6 9;
-#X connect 3 0 2 0;
-#X connect 4 0 3 0;
-#X connect 5 0 3 1;
-#X connect 6 0 29 0;
-#X connect 6 0 43 0;
-#X connect 6 1 29 1;
-#X connect 6 1 43 1;
-#X connect 6 2 29 2;
-#X connect 6 2 43 2;
-#X connect 6 3 29 3;
-#X connect 6 3 43 3;
-#X connect 6 4 29 4;
-#X connect 6 4 43 4;
-#X connect 6 5 29 5;
-#X connect 6 5 43 5;
-#X connect 6 6 29 6;
-#X connect 6 6 43 6;
-#X connect 6 7 29 7;
-#X connect 6 7 43 7;
-#X connect 6 8 29 8;
-#X connect 6 8 43 8;
-#X connect 11 0 1 0;
-#X connect 11 1 1 1;
-#X connect 11 2 1 2;
-#X connect 11 3 1 3;
-#X connect 11 4 1 4;
-#X connect 11 5 1 5;
-#X connect 11 6 1 6;
-#X connect 11 7 1 7;
-#X connect 11 8 1 8;
-#X connect 14 0 13 0;
-#X connect 15 0 13 0;
-#X connect 16 0 13 0;
-#X connect 17 0 20 0;
-#X connect 18 0 19 0;
-#X connect 19 0 11 0;
-#X connect 20 0 11 0;
-#X connect 21 0 23 0;
-#X connect 22 0 24 0;
-#X connect 23 0 11 0;
-#X connect 24 0 11 0;
-#X connect 25 0 2 0;
-#X connect 26 0 14 0;
-#X connect 26 0 31 0;
-#X connect 26 0 32 0;
-#X connect 26 0 33 0;
-#X connect 26 0 34 0;
-#X connect 26 0 36 0;
-#X connect 31 0 17 0;
-#X connect 32 0 18 0;
-#X connect 33 0 21 0;
-#X connect 34 0 22 0;
-#X connect 35 0 46 0;
-#X connect 36 0 35 0;
-#X connect 42 0 25 0;
-#X connect 43 0 7 0;
-#X connect 43 1 7 1;
-#X connect 43 2 7 2;
-#X connect 43 3 7 3;
-#X connect 43 4 7 4;
-#X connect 43 5 7 5;
-#X connect 43 6 7 6;
-#X connect 43 7 7 7;
-#X connect 43 8 7 8;
-#X connect 43 9 7 9;
-#X connect 44 0 11 0;
-#X connect 45 0 44 0;
-#X connect 46 0 11 0;
-#X coords 0 715 1 714 100 60 0;
+#X text 297 579 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X obj 90 390 hoa.scope~ @size 153 153 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+4 @gain 1 @interval 100 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
+1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X text 3 22 A spatial filter;
+#X obj 262 359 loadbang;
+#X obj 90 163 osc~ 220;
+#X obj 13 266 r hoaspace~;
+#X obj 90 275 hoa.projector~ 4 10 -----;
+#X obj 90 309 hoa.space~ 10 -----------;
+#X obj 90 357 hoa.recomposer~ 4 10 ----;
+#X obj 93 566 hoa.decoder~ 4 0 10 ----;
+#X obj 93 598 hoa.dac~ 1:10 ----------;
+#X obj 90 135 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min (null) @max (null) @minmax (null) (null) @decimal 6 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 90 102 c.loadmess 220;
+#X obj 330 119 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 429 120 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 330 82 c.loadmess 20;
+#X obj 429 82 c.loadmess 0.75;
+#X obj 429 250 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 330 249 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 330 212 c.loadmess 1000;
+#X msg 629 184 set grain_env;
+#X obj 116 191 r hoagrain~;
+#X obj 330 314 s hoagrain~;
+#X obj 330 184 s hoagrain~;
+#X obj 429 212 c.loadmess 0.75;
+#X obj 629 210 s hoagrain~;
+#X text 0 41 hoa.space~ allows you to apply gain to virtual microphones
+placed arround the sound field.;
+#X text 428 434 hoa.space~ takes the number of channels as arguments.
+It receives lists with values between 0 and 1 that controles the gains
+of the channels.;
+#X text 427 479 The GUI hoa.space allows to control hoa.space~ and
+to visualize the soundfield transformations.;
+#X obj 90 225 hoa.grain~ 4 no grain_env;
+#X connect 5 0 4 0;
+#X connect 5 0 35 0;
+#X connect 6 0 4 0;
+#X connect 6 0 35 0;
+#X connect 7 0 4 0;
+#X connect 7 0 35 0;
+#X connect 8 0 38 0;
+#X connect 9 0 37 0;
+#X connect 10 0 38 0;
+#X connect 11 0 37 0;
+#X connect 13 0 5 0;
+#X connect 18 0 12 0;
+#X connect 19 0 44 0;
+#X connect 20 0 22 0;
+#X connect 21 0 22 0;
+#X connect 21 1 22 1;
+#X connect 21 2 22 2;
+#X connect 21 3 22 3;
+#X connect 21 4 22 4;
+#X connect 21 5 22 5;
+#X connect 21 6 22 6;
+#X connect 21 7 22 7;
+#X connect 21 8 22 8;
+#X connect 21 9 22 9;
+#X connect 22 0 23 0;
+#X connect 22 1 23 1;
+#X connect 22 2 23 2;
+#X connect 22 3 23 3;
+#X connect 22 4 23 4;
+#X connect 22 5 23 5;
+#X connect 22 6 23 6;
+#X connect 22 7 23 7;
+#X connect 22 8 23 8;
+#X connect 22 9 23 9;
+#X connect 23 0 16 0;
+#X connect 23 0 24 0;
+#X connect 23 1 16 1;
+#X connect 23 1 24 1;
+#X connect 23 2 16 2;
+#X connect 23 2 24 2;
+#X connect 23 3 16 3;
+#X connect 23 3 24 3;
+#X connect 23 4 16 4;
+#X connect 23 4 24 4;
+#X connect 23 5 16 5;
+#X connect 23 5 24 5;
+#X connect 23 6 16 6;
+#X connect 23 6 24 6;
+#X connect 23 7 16 7;
+#X connect 23 7 24 7;
+#X connect 23 8 16 8;
+#X connect 23 8 24 8;
+#X connect 24 0 25 0;
+#X connect 24 1 25 1;
+#X connect 24 2 25 2;
+#X connect 24 3 25 3;
+#X connect 24 4 25 4;
+#X connect 24 5 25 5;
+#X connect 24 6 25 6;
+#X connect 24 7 25 7;
+#X connect 24 8 25 8;
+#X connect 24 9 25 9;
+#X connect 26 0 19 0;
+#X connect 27 0 26 0;
+#X connect 28 0 8 0;
+#X connect 29 0 10 0;
+#X connect 30 0 28 0;
+#X connect 31 0 29 0;
+#X connect 32 0 11 0;
+#X connect 33 0 9 0;
+#X connect 34 0 33 0;
+#X connect 35 0 40 0;
+#X connect 36 0 44 0;
+#X connect 39 0 32 0;
+#X connect 44 0 21 0;
+#X connect 44 1 21 1;
+#X connect 44 2 21 2;
+#X connect 44 3 21 3;
+#X connect 44 4 21 4;
+#X connect 44 5 21 5;
+#X connect 44 6 21 6;
+#X connect 44 7 21 7;
+#X connect 44 8 21 8;
+#X coords 0 639 1 638 100 60 0;

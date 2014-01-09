@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_optim
 {
-    t_jbox            f_ob;
+    t_edspobj         f_ob;
     AmbisonicOptim*   f_ambi_optim;
     long              f_mode;
 } t_hoa_optim;
@@ -38,7 +43,7 @@ void hoa_optim_free(t_hoa_optim *x);
 
 void hoa_optim_dsp(t_hoa_optim *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_optim_perform(t_hoa_optim *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
-t_max_err optim_setattr_mode(t_hoa_optim *x, t_object *attr, long ac, t_atom *av);
+t_pd_err optim_setattr_mode(t_hoa_optim *x, t_object *attr, long ac, t_atom *av);
 
 t_eclass *hoa_optim_class;
 
@@ -46,11 +51,11 @@ extern "C" void setup_hoa0x2eoptim_tilde(void)
 {
     t_eclass* c;
     
-    c = class_new("hoa.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (short)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.optim~", (method)hoa_optim_new, (method)hoa_optim_free, (short)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
     
-	class_dspinit(c);
+	eclass_dspinit(c);
     
-	class_addmethod(c, (method)hoa_optim_dsp,     "dsp",      A_CANT, 0);
+	eclass_addmethod(c, (method)hoa_optim_dsp,     "dsp",      A_CANT, 0);
     
     CLASS_ATTR_LONG             (c, "mode", 0, t_hoa_optim, f_mode);
     CLASS_ATTR_ACCESSORS        (c, "mode", (method)NULL,(method)optim_setattr_mode);
@@ -60,33 +65,35 @@ extern "C" void setup_hoa0x2eoptim_tilde(void)
 	CLASS_ATTR_FILTER_CLIP      (c, "mode", 0, 2);
 	CLASS_ATTR_DEFAULT			(c, "mode", 0, "0");
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_optim_class = c;
 }
 
 void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv)
 {
     t_hoa_optim *x = NULL;
-    t_dictionary *d;
+    t_binbuf *d;
 	int	order = 4;
     
-    x = (t_hoa_optim *)object_alloc(hoa_optim_class);
+    if (!(d = binbuf_via_atoms(argc,argv)))
+		return NULL;
+    
+    x = (t_hoa_optim *)eobj_new(hoa_optim_class);
     
     order = atom_getint(argv);
     x->f_mode = Hoa_InPhase_Optim;
     x->f_ambi_optim = new AmbisonicOptim(order, x->f_mode, sys_getblksize());
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_optim->getNumberOfInputs(), x->f_ambi_optim->getNumberOfOutputs());
+    eobj_dspsetup(x, x->f_ambi_optim->getNumberOfInputs(), x->f_ambi_optim->getNumberOfOutputs());
     x->f_mode = x->f_ambi_optim->getOptimMode();
     
-	x->f_ob.z_misc = Z_NO_INPLACE;
+	x->f_ob.d_misc = E_NO_INPLACE;
+    ebox_attrprocess_viabinbuf(x, d);
     
-    d = object_dictionaryarg(argc,argv);
-    attr_dictionary_process(x, d);
-	
    	return (x);
 }
 
-t_max_err optim_setattr_mode(t_hoa_optim *x, t_object *attr, long ac, t_atom *av)
+t_pd_err optim_setattr_mode(t_hoa_optim *x, t_object *attr, long ac, t_atom *av)
 {
 	if (ac && av)
     {
@@ -122,6 +129,6 @@ void hoa_optim_perform(t_hoa_optim *x, t_object *dsp, float **ins, long ni, floa
 
 void hoa_optim_free(t_hoa_optim *x)
 {
-	dsp_freejbox((t_jbox *)x);
+	eobj_dspfree(x);
 	delete(x->f_ambi_optim);
 }

@@ -1,74 +1,106 @@
-#N canvas 262 69 663 638 10;
+#N canvas 487 113 779 636 10;
 #X obj -555 -435 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.meter~
 3 12 0 18 -204280 -1 0;
 #X text -550 -414 A circular meter with sound field descriptor;
-#X msg -529 -308 \; pd dsp 1;
-#X msg -528 -271 \; pd dsp 0;
-#X obj -432 -194 hoa.meter~ @size 231 231 @fontname helvetica @fontweight
-normal @fontslant regular @fontsize 11 @vectors 1 @channels 8 @angles
-0 45 90 135 180 225 270 315 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 @offset 0 @rotation 0 @interval 20 @bgcolor 0.55 0.55 0.55 1 @bdcolor
-0.5 0.5 0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
+#X msg -537 -107 \; pd dsp 1;
+#X msg -537 -70 \; pd dsp 0;
+#X obj -432 -194 hoa.meter~ @size 231 231 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive hoameter @send (null)
+@channels 5 @angles 0 30 110 250 330 @offset 0 @rotation Anti-Clockwise
+@vectors Both @interval 20 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5
+0.5 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
 0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
 0 0 1 0.8 @velocitycolor 1 0 0 0.8;
 #X obj -113 -357 hoa.pi 2;
 #X obj -113 -386 loadbang;
 #X obj -207 -325 *~;
-#X obj -207 -354 phasor~ -0.3;
 #X text -550 -393 hoa.meter~ displays the peak levels for a circurlar
 array of loudspeakers. It computes and displays the energy and velocity
 vectors.;
-#X obj -432 -297 hoa.encoder~ 3 _________----------____;
 #X text -454 161 Eliott Paris © 2012-2013 CICM / Universite Paris
 8;
 #X text -454 145 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X obj -432 -239 receive meter;
-#X text -138 -153 Draw vectors;
-#X text -138 -138 0 : None;
-#X text -138 -124 1 : Energy;
-#X text -138 -109 2 : Velocity;
-#X text -138 -211 Rotation of Loudspeakers;
-#X obj -432 100 print peaks values;
-#X obj -432 73 spigot;
-#X obj -399 51 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj -207 74 spigot;
-#X obj -174 51 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj -207 100 print vector coordinates;
-#X obj -432 -266 hoa.decoder~ 3 ambisonics 8 ----------;
-#X obj -431 -329 sig~ 1.3;
-#X text -138 -95 3 : Both;
-#X text -137 -195 0 : Clockwise;
-#X text -137 -177 1 : Anti-Clockwise;
-#X text -138 -236 The attributes informations :;
-#X text -137 -262 Look at the properties window.;
-#X connect 4 0 20 0;
-#X connect 4 1 22 0;
+#X obj -432 -297 hoa.encoder~ 3 -----------------------;
+#X obj -207 46 c.prepend set;
+#X obj -432 46 c.prepend set;
+#X msg -432 101 0.081288 0.051252 0.368229 0.922799 0.0551559;
+#X msg -207 81 -0.357473 -0.408975 -0.326571 -0.672238;
+#X text -414 74 Peak values :;
+#X obj -58 -176 s hoameter;
+#X obj -165 -247 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max 64 @minmax 1 64 @decimal 0 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -165 -214 channels \$1;
+#X text -119 56 Vectors coordinates :;
+#X obj -58 -247 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min -360 @max 360 @minmax -360 360 @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -58 -214 offset \$1;
+#X text -61 -278 Offset of;
+#X text -61 -268 channels;
+#X text 29 -268 channels;
+#X text 29 -278 Rotation of;
+#X msg 32 -214 rotation \$1;
+#X obj 32 -248 c.menu @size 100 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items Anti-Clockwise Clockwise @states 0 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -207 -354 phasor~ 0.3;
+#X obj -94 -46 s hoameter;
+#X text -161 -268 channels;
+#X text -161 -278 Number of;
+#X obj -178 -128 c.menu @size 100 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @hover 0 @items None Energy Velocity Both @states 0 0 0 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg -178 -94 vectors \$1;
+#X text -161 -158 Vectors to;
+#X text -161 -148 display;
+#X text -19 -140 Angles;
+#X obj -432 -236 hoa.decoder~ 3 irregular 5 -----------;
+#X msg -18 -118 angles 0 15 90 270 345;
+#X msg -1 -91 angles 0 30 110 250 330;
+#X obj -492 -275 r hoadec;
+#X obj -18 -46 s hoadec;
+#X obj -165 -304 c.loadmess 5;
+#X obj -178 -174 c.loadmess 3;
+#X obj -432 -329 noise~;
+#X connect 4 0 13 0;
+#X connect 4 1 12 0;
 #X connect 5 0 7 1;
 #X connect 6 0 5 0;
-#X connect 7 0 10 1;
-#X connect 8 0 7 0;
-#X connect 10 0 25 0;
-#X connect 10 1 25 1;
-#X connect 10 2 25 2;
-#X connect 10 3 25 3;
-#X connect 10 4 25 4;
-#X connect 10 5 25 5;
-#X connect 10 6 25 6;
-#X connect 13 0 4 0;
-#X connect 20 0 19 0;
-#X connect 21 0 20 1;
-#X connect 22 0 24 0;
-#X connect 23 0 22 1;
-#X connect 25 0 4 0;
-#X connect 25 1 4 1;
-#X connect 25 2 4 2;
-#X connect 25 3 4 3;
-#X connect 25 4 4 4;
-#X connect 25 5 4 5;
-#X connect 25 6 4 6;
-#X connect 25 7 4 7;
-#X connect 26 0 10 0;
+#X connect 7 0 11 1;
+#X connect 11 0 38 0;
+#X connect 11 1 38 1;
+#X connect 11 2 38 2;
+#X connect 11 3 38 3;
+#X connect 11 4 38 4;
+#X connect 11 5 38 5;
+#X connect 11 6 38 6;
+#X connect 12 0 15 0;
+#X connect 13 0 14 0;
+#X connect 18 0 19 0;
+#X connect 19 0 17 0;
+#X connect 21 0 22 0;
+#X connect 22 0 17 0;
+#X connect 27 0 17 0;
+#X connect 28 0 27 0;
+#X connect 29 0 7 0;
+#X connect 33 0 34 0;
+#X connect 34 0 30 0;
+#X connect 38 0 4 0;
+#X connect 38 1 4 1;
+#X connect 38 2 4 2;
+#X connect 38 3 4 3;
+#X connect 38 4 4 4;
+#X connect 39 0 30 0;
+#X connect 39 0 42 0;
+#X connect 40 0 30 0;
+#X connect 40 0 42 0;
+#X connect 41 0 38 0;
+#X connect 43 0 18 0;
+#X connect 44 0 33 0;
+#X connect 45 0 11 0;

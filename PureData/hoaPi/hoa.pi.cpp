@@ -25,14 +25,18 @@
  */
 
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
 
 #define CICM_PI  (3.141592653589793238462643383279502884)
 
 typedef struct _pi 
 {	
-	t_jbox p_ob;
-	double p_value;	
+	t_eobj p_ob;
+	double p_value;
+    t_outlet *p_outlet;
 } t_pi;
 
 void pi_bang(t_pi *x);
@@ -44,28 +48,29 @@ t_eclass *pi_class;
 extern "C" void setup_hoa0x2epi(void)
 {
     t_eclass* c;
-    c = class_new("hoa.pi", (method)pi_new,(method)NULL, sizeof(t_pi), 0L, A_GIMME, 0);
-    class_addmethod(c, (method)pi_bang,     "bang",      A_CANT, 0);
-    class_addmethod(c, (method)pi_float,     "float",      A_FLOAT, 0);
+    c = eclass_new("hoa.pi", (method)pi_new,(method)NULL, sizeof(t_pi), 0L, A_GIMME, 0);
+    eclass_addmethod(c, (method)pi_bang,     "bang",      A_CANT, 0);
+    eclass_addmethod(c, (method)pi_float,    "float",      A_FLOAT, 0);
 
+    eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     pi_class = c;
 }
 
 void *pi_new(t_symbol *s, int argc, t_atom *argv)
 {
-    t_pi *x = (t_pi *)object_alloc(pi_class);
+    t_pi *x = (t_pi *)eobj_new(pi_class);
 	x->p_value = 1.;
     x->p_value = atom_getfloat(argv);
+    x->p_outlet = floatout(x);
 
-    outlet_new(&x->p_ob.e_obj, &s_float);
-	
 	return(x);
 }
 
 
 void pi_bang(t_pi *x) 
 {
-    outlet_float(x->p_ob.e_obj.ob_outlet, CICM_PI * x->p_value);
+    outlet_float(x->p_outlet, (float)CICM_PI * x->p_value);
 }
 
 void pi_float(t_pi *x, float n)

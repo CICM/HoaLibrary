@@ -24,12 +24,17 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_space_t
 {
-    t_jbox              f_ob;
-    AmbisonicSpace      *f_ambi_space_t;
+    t_edspobj           f_ob;
+    AmbisonicSpace      *f_ambi_space;
 } t_hoa_space_t;
 
 void *hoa_space_t_new(t_symbol *s, long argc, t_atom *argv);
@@ -44,14 +49,15 @@ t_eclass *hoa_space_t_class;
 extern "C" void setup_hoa0x2espace_tilde(void)
 {
     t_eclass* c;
-    c = class_new("hoa.space~", (method)hoa_space_t_new, (method)hoa_space_t_free, (short)sizeof(t_hoa_space_t), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.space~", (method)hoa_space_t_new, (method)hoa_space_t_free, (short)sizeof(t_hoa_space_t), 0L, A_GIMME, 0);
     
-    class_dspinit(c);
-    class_addmethod(c, (method)hoa_space_t_dsp,   "dsp",      A_CANT, 0);
-    class_addmethod(c, (method)hoa_space_t_list,  "coeffs",   A_GIMME,0);
-    class_addmethod(c, (method)hoa_space_t_list,  "list",     A_GIMME,0);
+    eclass_dspinit(c);
+    eclass_addmethod(c, (method)hoa_space_t_dsp,   "dsp",      A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_space_t_list,  "coeffs",   A_GIMME,0);
+    eclass_addmethod(c, (method)hoa_space_t_list,  "list",     A_GIMME,0);
     
-	class_register(CLASS_BOX, c);
+	eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_space_t_class = c;
 }
 
@@ -60,45 +66,45 @@ void *hoa_space_t_new(t_symbol *s, long argc, t_atom *argv)
     t_hoa_space_t *x = NULL;
 	int	number_of_channels = 4;
     
-    x = (t_hoa_space_t *)object_alloc(hoa_space_t_class);
+    x = (t_hoa_space_t *)eobj_new(hoa_space_t_class);
     
     number_of_channels = atom_getint(argv);
-    x->f_ambi_space_t = new AmbisonicSpace(number_of_channels, sys_getblksize());
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_space_t->getNumberOfInputs(), x->f_ambi_space_t->getNumberOfOutputs());
+    x->f_ambi_space = new AmbisonicSpace(number_of_channels, sys_getblksize());
+    eobj_dspsetup(x, x->f_ambi_space->getNumberOfInputs(), x->f_ambi_space->getNumberOfOutputs());
     
-	x->f_ob.z_misc = Z_NO_INPLACE;
+	x->f_ob.d_misc = E_NO_INPLACE;
     
 	return (x);
 }
 
 void hoa_space_t_dsp(t_hoa_space_t *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_ambi_space_t->setVectorSize(maxvectorsize);
+	x->f_ambi_space->setVectorSize(maxvectorsize);
     object_method(dsp, gensym("dsp_add"), x, (method)hoa_space_t_perform, 0, NULL);
 }
 
 void hoa_space_t_perform(t_hoa_space_t *x, t_object *dsp, float **ins, long ni, float **outs, long no, long sf, long f,void *up)
 {
-	x->f_ambi_space_t->process(ins, outs);
+	x->f_ambi_space->process(ins, outs);
 }
 
 void hoa_space_t_list(t_hoa_space_t *x, t_symbol *s, short ac, t_atom *av)
 {
     if(ac == 2)
     {
-        x->f_ambi_space_t->setCoefficient(atom_getint(av), atom_getfloat(av+1));
+        x->f_ambi_space->setCoefficient(atom_getint(av), atom_getfloat(av+1));
     }
     else
     {
         for(int i = 0; i < ac; i++)
         {
-            x->f_ambi_space_t->setCoefficient(i, atom_getfloat(av+i));
+            x->f_ambi_space->setCoefficient(i, atom_getfloat(av+i));
         }
     }
 }
 
 void hoa_space_t_free(t_hoa_space_t *x)
 {
-	dsp_freejbox((t_jbox *)x);
-	delete(x->f_ambi_space_t);
+	eobj_dspfree(x);
+	delete(x->f_ambi_space);
 }

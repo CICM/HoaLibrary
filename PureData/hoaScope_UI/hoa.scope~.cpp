@@ -24,14 +24,19 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 
 typedef struct  _scope
 {
-	t_jbox           j_box;
+	t_edspbox   j_box;
     AmbisonicViewer* f_viewer;
-    double*          f_harmonics_values;
+    double*     f_harmonics_values;
     
 	t_clock*	f_clock;
 	int			f_startclock;
@@ -39,10 +44,10 @@ typedef struct  _scope
 	long        f_order;
     float       f_normalize;
 	
-	t_jrgba		f_color_background;
-    t_jrgba     f_color_border_box;
-	t_jrgba		f_color_negatif;
-	t_jrgba		f_color_positif;
+	t_rgba		f_color_background;
+    t_rgba      f_color_border_box;
+	t_rgba		f_color_negatif;
+	t_rgba		f_color_positif;
 	
 	float		f_center;
 	float		f_radius_global;
@@ -60,87 +65,99 @@ void scope_tick(t_scope *x);
 void scope_dsp(t_scope *x, t_object *dsp, short *count, double samplerate, long maxvectorsize, long flags);
 void scope_perform(t_scope *x, t_object *d, float **ins, long ni, float **outs, long no, long sf, long f,void *up);
 
-t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+t_pd_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 long scope_oksize(t_scope *x, t_rect *newrect);
-void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params);
+void scope_getdrawparams(t_scope *x, t_object *patcherview, t_edrawparams *params);
 
 void scope_paint(t_scope *x, t_object *view);
 void draw_background(t_scope *x, t_object *view, t_rect *rect);
 void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect);
 
-t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av);
+t_pd_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av);
 
 extern "C" void setup_hoa0x2escope_tilde(void)
 {
 	t_eclass *c;
 
-	c = class_new("hoa.scope~", (method)scope_new, (method)scope_free, (short)sizeof(t_scope), 0L, A_GIMME, 0);
+	c = eclass_new("hoa.scope~", (method)scope_new, (method)scope_free, (short)sizeof(t_scope), 0L, A_GIMME, 0);
 
-	class_dspinitjbox(c);
-    
-	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
-
-	class_addmethod(c, (method)scope_dsp,			"dsp",          A_CANT, 0);
-	class_addmethod(c, (method)scope_assist,		"assist",		A_CANT,	0);
-	class_addmethod(c, (method)scope_paint,			"paint",		A_CANT,	0);
-	class_addmethod(c, (method)scope_notify,		"notify",		A_CANT, 0);
-	class_addmethod(c, (method)scope_getdrawparams, "getdrawparams",A_CANT, 0);
-	class_addmethod(c, (method)scope_oksize,		"oksize",		A_CANT, 0);
-
-	CLASS_ATTR_DEFAULT			(c, "size", 0, "225 225");
-
-    CLASS_ATTR_LONG             (c, "order", 0, t_scope, f_order);
-    CLASS_ATTR_ACCESSORS        (c, "order", (method)NULL,(method)scope_setattr_order);
-	CLASS_ATTR_CATEGORY			(c, "order", 0, "Behavior");
-	CLASS_ATTR_ORDER			(c, "order", 0, "1");
-	CLASS_ATTR_LABEL			(c, "order", 0, "Ambisonic Order");
-	CLASS_ATTR_FILTER_MIN		(c, "order", 1);
-	CLASS_ATTR_DEFAULT			(c, "order", 0, "3");
-	CLASS_ATTR_SAVE				(c, "order", 1);
-    
-    CLASS_ATTR_FLOAT            (c, "gain", 0, t_scope, f_normalize);
-	CLASS_ATTR_CATEGORY			(c, "gain", 0, "Behavior");
-	CLASS_ATTR_ORDER			(c, "gain", 0, "2");
-	CLASS_ATTR_LABEL			(c, "gain", 0, "Gain factor");
-	CLASS_ATTR_FILTER_MIN		(c, "gain", 1.);
-	CLASS_ATTR_DEFAULT			(c, "gain", 0, "1.");
-	CLASS_ATTR_SAVE				(c, "gain", 1);
-
-	CLASS_ATTR_LONG             (c, "interval", 0, t_scope, f_interval);
-	CLASS_ATTR_CATEGORY			(c, "interval", 0, "Behavior");
-	CLASS_ATTR_ORDER			(c, "interval", 0, "3");
-	CLASS_ATTR_LABEL			(c, "interval", 0, "Refresh Interval (in ms)");
-	CLASS_ATTR_FILTER_MIN		(c, "interval", 20);
-	CLASS_ATTR_DEFAULT			(c, "interval", 0, "100");
-	CLASS_ATTR_SAVE				(c, "interval", 1);
+    eclass_dspinit(c);
+    eclass_init(c, 0);
 	
+	eclass_addmethod(c, (method)scope_dsp,              "dsp",          A_CANT, 0);
+	eclass_addmethod(c, (method)scope_assist,           "assist",		A_CANT,	0);
+	eclass_addmethod(c, (method)scope_paint,			"paint",		A_CANT,	0);
+	eclass_addmethod(c, (method)scope_notify,           "notify",		A_CANT, 0);
+	eclass_addmethod(c, (method)scope_getdrawparams,    "getdrawparams",A_CANT, 0);
+	eclass_addmethod(c, (method)scope_oksize,           "oksize",		A_CANT, 0);
+
+    CLASS_ATTR_INVISIBLE            (c, "fontname", 1);
+    CLASS_ATTR_INVISIBLE            (c, "fontweight", 1);
+    CLASS_ATTR_INVISIBLE            (c, "fontslant", 1);
+    CLASS_ATTR_INVISIBLE            (c, "fontsize", 1);
+    CLASS_ATTR_INVISIBLE            (c, "send", 1);
+	CLASS_ATTR_DEFAULT              (c, "size", 0, "225. 225.");
+
+    CLASS_ATTR_LONG                 (c, "order", 0, t_scope, f_order);
+    CLASS_ATTR_ACCESSORS            (c, "order", NULL, scope_setattr_order);
+	CLASS_ATTR_CATEGORY             (c, "order", 0, "Behavior");
+	CLASS_ATTR_ORDER                (c, "order", 0, "1");
+	CLASS_ATTR_LABEL                (c, "order", 0, "Ambisonic Order");
+	CLASS_ATTR_FILTER_MIN           (c, "order", 1);
+	CLASS_ATTR_DEFAULT              (c, "order", 0, "3");
+	CLASS_ATTR_SAVE                 (c, "order", 1);
+    CLASS_ATTR_STYLE                (c, "order", 1, "number");
+    
+    CLASS_ATTR_FLOAT                (c, "gain", 0, t_scope, f_normalize);
+	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Behavior");
+	CLASS_ATTR_ORDER                (c, "gain", 0, "2");
+	CLASS_ATTR_LABEL                (c, "gain", 0, "Gain factor");
+	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
+	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
+	CLASS_ATTR_SAVE                 (c, "gain", 1);
+    CLASS_ATTR_STYLE                (c, "gain", 1, "number");
+    
+	CLASS_ATTR_LONG                 (c, "interval", 0, t_scope, f_interval);
+	CLASS_ATTR_CATEGORY             (c, "interval", 0, "Behavior");
+	CLASS_ATTR_ORDER                (c, "interval", 0, "3");
+	CLASS_ATTR_LABEL                (c, "interval", 0, "Refresh Interval (in ms)");
+	CLASS_ATTR_FILTER_CLIP          (c, "interval", 20, 1000);
+	CLASS_ATTR_DEFAULT              (c, "interval", 0, "20");
+	CLASS_ATTR_SAVE                 (c, "interval", 1);
+	CLASS_ATTR_STYLE                (c, "interval", 1, "number");
+    
 	CLASS_ATTR_RGBA					(c, "bgcolor", 0, t_scope, f_color_background);
 	CLASS_ATTR_CATEGORY				(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE				(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL				(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bgcolor", 0, "0.7 0.7 0.7 1.");
-	
+	CLASS_ATTR_STYLE                (c, "bgcolor", 1, "color");
+    
     CLASS_ATTR_RGBA					(c, "bdcolor", 0, t_scope, f_color_border_box);
 	CLASS_ATTR_CATEGORY				(c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bdcolor", 0, "rgba");
     CLASS_ATTR_LABEL				(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
-	
+	CLASS_ATTR_STYLE                (c, "bdcolor", 1, "color");
+    
 	CLASS_ATTR_RGBA                 (c, "phcolor", 0, t_scope, f_color_positif);
 	CLASS_ATTR_CATEGORY             (c, "phcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "phcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "phcolor", 0, "Positifs Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "phcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "phcolor", 0, "1. 0. 0. 1.");
-	
+	CLASS_ATTR_STYLE                (c, "phcolor", 1, "color");
+    
 	CLASS_ATTR_RGBA                 (c, "nhcolor", 0, t_scope, f_color_negatif);
 	CLASS_ATTR_CATEGORY             (c, "nhcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "nhcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "nhcolor", 0, "Negatifs Harmonics Color");
 	CLASS_ATTR_ORDER                (c, "nhcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nhcolor", 0, "0. 0. 1. 1.");
-	
-    class_register(CLASS_NOBOX, c);
+	CLASS_ATTR_STYLE                (c, "nhcolor", 1, "color");
+    
+    eclass_register(CLASS_NOBOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
 	scope_class = c;
 	
 }
@@ -148,46 +165,37 @@ extern "C" void setup_hoa0x2escope_tilde(void)
 void *scope_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_scope *x =  NULL; 
-	t_dictionary *d;
+	t_binbuf *d;
 	long flags;
 	
-	if (!(d = object_dictionaryarg(argc,argv)))
+	if (!(d = binbuf_via_atoms(argc, argv)))
 		return NULL;
 
-	x = (t_scope *)object_alloc(scope_class);
-	flags = 0 
-			| JBOX_DRAWFIRSTIN 
-			| JBOX_DRAWINLAST
-            | JBOX_DRAWBACKGROUND
-			| JBOX_TRANSPARENT	
-			| JBOX_GROWY
-            | JBOX_IGNORELOCKCLICK
-			;
-	jbox_new((t_jbox *)x, flags, argc, argv);
-    
+	x = (t_scope *)eobj_new(scope_class);
     x->f_order = 1;
     x->f_normalize = 1.;
-	x->j_box.b_firstin = (t_object *)x;
-
-	dsp_setupjbox((t_jbox *)x, x->f_order * 2 + 1, 0);
-    
-	x->f_clock              = clock_new(x, (t_method)scope_tick);
 	x->f_startclock         = 0;
-    
-	x->f_viewer             = new AmbisonicViewer(x->f_order);
-	x->f_harmonics_values    = new double[x->f_order * 2 + 1];
-    for (int i = 0; i < x->f_order * 2 + 1; i++)
-    {
+	x->f_viewer             = new AmbisonicViewer(1);
+    x->f_clock              = clock_new(x, (t_method)scope_tick);
+    x->f_harmonics_values   = new double[3];
+    for(int i = 0; i < 3; i++)
         x->f_harmonics_values[i] = 0.;
-    }
-
-    attr_dictionary_process(x, d);
-	jbox_ready((t_jbox *)x);
+    eobj_dspsetup(x, x->f_order * 2 + 1, 0);
+    
+	flags = 0 
+			| EBOX_IGNORELOCKCLICK
+			| EBOX_GROWLINK
+			;
+	ebox_new((t_ebox *)x, flags);
+    
+    
+    ebox_attrprocess_viabinbuf(x, d);
+	ebox_ready((t_ebox *)x);
 	
 	return (x);
 }
 
-t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
+t_pd_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
 {
 	if (ac && av)
     {
@@ -197,14 +205,14 @@ t_max_err scope_setattr_order(t_scope *x, t_object *attr, long ac, t_atom *av)
             if (d != x->f_order)
             {
                 int dspState = canvas_suspend_dsp();
-                
+            
                 free(x->f_harmonics_values);
                 delete x->f_viewer;
                 x->f_viewer = new AmbisonicViewer(d);
                 x->f_order = x->f_viewer->getOrder();
                 x->f_harmonics_values    = new double[x->f_order * 2 + 1];
-                jbox_resize_inputs((t_jbox *)x, x->f_order * 2 + 1);
-                
+                eobj_resize_inputs((t_ebox *)x, x->f_order * 2 + 1);
+                canvas_update_dsp();
                 canvas_resume_dsp(dspState);
             }
         }
@@ -243,15 +251,15 @@ void scope_perform(t_scope *x, t_object *d, float **ins, long ni, float **outs, 
 void scope_tick(t_scope *x)
 {
     x->f_viewer->processContribAndRep(x->f_harmonics_values);
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
-	jbox_redraw((t_jbox *)x);
+	ebox_invalidate_layer((t_ebox *)x, gensym("harmonics_layer"));
+	ebox_redraw((t_ebox *)x);
     if (sys_getdspstate())
 		clock_delay(x->f_clock, x->f_interval);
 }
 
 void scope_free(t_scope *x)
 {
-	dsp_freejbox((t_jbox *)x);
+    ebox_free((t_ebox *)x);
     clock_free(x->f_clock);
     free(x->f_harmonics_values);
     delete x->f_viewer;
@@ -262,24 +270,25 @@ void scope_assist(t_scope *x, void *b, long m, long a, char *s)
     sprintf(s,"(Signal) %s", x->f_viewer->getHarmonicsName(a).c_str());
 }
 
-t_max_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_pd_err scope_notify(t_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	if (msg == gensym("attr_modified"))
 	{
 		if( s == gensym("bgcolor") || s == gensym("drawcircle") || s == gensym("order"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+			ebox_invalidate_layer((t_ebox *)x, gensym("background_layer"));
+            ebox_invalidate_layer((t_ebox *)x, gensym("harmonics_layer"));
 		}
 		else if(s == gensym("phcolor") || s == gensym("nhcolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+			ebox_invalidate_layer((t_ebox *)x, gensym("harmonics_layer"));
 		}
-		jbox_redraw((t_jbox *)x);
+		ebox_redraw((t_ebox *)x);
 	}
-	return jbox_notify((t_jbox *)x, s, msg, sender, data);
+	return 0;
 }
 
-void scope_getdrawparams(t_scope *x, t_object *patcherview, t_jboxdrawparams *params)
+void scope_getdrawparams(t_scope *x, t_object *patcherview, t_edrawparams *params)
 {
     params->d_boxfillcolor = x->f_color_background;
     params->d_bordercolor = x->f_color_border_box;
@@ -297,7 +306,7 @@ long scope_oksize(t_scope *x, t_rect *newrect)
 void scope_paint(t_scope *x, t_object *view)
 {
 	t_rect rect;
-	jbox_get_rect_for_view((t_object *)x, view, &rect);
+	ebox_get_rect_for_view((t_ebox *)x, &rect);
 	
 	x->f_center = rect.width * .5;
 	x->f_center = rect.height * .5;
@@ -314,35 +323,35 @@ void scope_paint(t_scope *x, t_object *view)
 
 void draw_background(t_scope *x,  t_object *view, t_rect *rect)
 {
-    t_jmatrix transform;
-    t_jrgba black, white;
+    t_matrix transform;
+    t_rgba black, white;
     
     black = rgba_addContrast(x->f_color_background, -0.14);
     white = rgba_addContrast(x->f_color_background, 0.06);
     
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
+	t_elayer *g = ebox_start_layer((t_ebox *)x, gensym("background_layer"), rect->width, rect->height);
 
 	if (g) 
 	{
 		for(int i = 5; i > 0; i--)
 		{
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, long(x->f_center)+0.5, long(x->f_center)+0.5, (double)i * x->f_radius_circle,  0., CICM_2PI);
-            jgraphics_stroke(g);
-            jgraphics_set_line_width(g, 1);
-            jgraphics_set_source_jrgba(g, &black);
-            jgraphics_arc(g, long(x->f_center)-0.5, long(x->f_center)-0.5, (double)i * x->f_radius_circle,  0., CICM_2PI);
-            jgraphics_stroke(g);
+            egraphics_set_line_width(g, 1);
+            egraphics_set_color_rgba(g, &white);
+            egraphics_arc(g, long(x->f_center)+0.5, long(x->f_center)+0.5, (double)i * x->f_radius_circle,  0., CICM_2PI);
+            egraphics_stroke(g);
+            egraphics_set_line_width(g, 1);
+            egraphics_set_color_rgba(g, &black);
+            egraphics_arc(g, long(x->f_center)-0.5, long(x->f_center)-0.5, (double)i * x->f_radius_circle,  0., CICM_2PI);
+            egraphics_stroke(g);
 		}
         
-        jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
-		jgraphics_set_matrix(g, &transform);
+        egraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
+		egraphics_set_matrix(g, &transform);
 		double coso, sino, angle, x1, y1, x2, y2;
 
 		for(int i = 0; i < (x->f_order * 2 + 2); i++)
 		{
-            jgraphics_set_source_jrgba(g, &white);
+            egraphics_set_color_rgba(g, &white);
             angle = ((double)i / (x->f_order * 2 + 2) * CICM_2PI ) - (0.5 / (x->f_order * 2 + 2) * CICM_2PI);
             coso = cos(angle);
             sino = sin(angle);
@@ -353,66 +362,66 @@ void draw_background(t_scope *x,  t_object *view, t_rect *rect)
             
             if(Tools::isInsideDeg(angle / CICM_2PI * 360., 45, 225))
             {
-                jgraphics_move_to(g, x1 - 0.5, y1 - 0.5);
-                jgraphics_line_to(g, x2 - 0.5, y2 - 0.5);
+                egraphics_move_to(g, x1 - 0.5, y1 - 0.5);
+                egraphics_line_to(g, x2 - 0.5, y2 - 0.5);
             }
             else
             {
-                jgraphics_move_to(g, x1 + 0.5, y1 + 0.5);
-                jgraphics_line_to(g, x2 + 0.5, y2 + 0.5);
+                egraphics_move_to(g, x1 + 0.5, y1 + 0.5);
+                egraphics_line_to(g, x2 + 0.5, y2 + 0.5);
             }
-            jgraphics_stroke(g);
+            egraphics_stroke(g);
             
-            jgraphics_set_source_jrgba(g, &black);
-            jgraphics_move_to(g, x1, y1);
-            jgraphics_line_to(g, x2, y2);
-            jgraphics_stroke(g);
+            egraphics_set_color_rgba(g, &black);
+            egraphics_move_to(g, x1, y1);
+            egraphics_line_to(g, x2, y2);
+            egraphics_stroke(g);
 			
 		}
 		
-		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
+		ebox_end_layer((t_ebox *)x, gensym("background_layer"));
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
+	ebox_paint_layer((t_ebox *)x, gensym("background_layer"), 0., 0.);
 }
 
 void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
 {
-    t_jmatrix transform;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
+    t_matrix transform;
+	t_elayer *g = ebox_start_layer((t_ebox *)x, gensym("harmonics_layer"), rect->width, rect->height);
     
 	if (g)
 	{
-        t_jrgba grey  = {0.5, 0.5, 0.5, 1.};
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
-		jgraphics_set_matrix(g, &transform);
+        t_rgba grey  = {0.5, 0.5, 0.5, 1.};
+		egraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
+		egraphics_set_matrix(g, &transform);
         
 		if(x->f_viewer->getBiggestContribution() > 0.)
 		{
-            jgraphics_set_line_width(g, 1.);
+            egraphics_set_line_width(g, 1.);
             double shadow = 1.;
             double x1;
             double y1;
             
             x1 = x->f_viewer->getAbscisseValue(0) * x->f_radius_global + shadow;
             y1 = x->f_viewer->getOrdinateValue(0) * x->f_radius_global + shadow;
-            jgraphics_move_to(g, x1, y1);
+            egraphics_move_to(g, x1, y1);
             for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i += 2)
 			{
                 x1 = x->f_viewer->getAbscisseValue(i) * x->f_radius_global + shadow;
                 y1 = x->f_viewer->getOrdinateValue(i) * x->f_radius_global  + shadow;
-                jgraphics_line_to(g, x1, y1);
+                egraphics_line_to(g, x1, y1);
             }
             x1 = x->f_viewer->getAbscisseValue(0) * x->f_radius_global + shadow;
             y1 = x->f_viewer->getOrdinateValue(0) * x->f_radius_global + shadow;
-            jgraphics_line_to(g, x1, y1);
-            jgraphics_set_source_jrgba(g, &grey);
-            jgraphics_stroke(g);
+            egraphics_line_to(g, x1, y1);
+            egraphics_set_color_rgba(g, &grey);
+            egraphics_stroke(g);
             
-            jgraphics_set_line_width(g, 1.);
+            egraphics_set_line_width(g, 1.);
             int color = x->f_viewer->getColor(0);
             x1 = x->f_viewer->getAbscisseValue(0) * x->f_radius_global;
             y1 = x->f_viewer->getOrdinateValue(0) * x->f_radius_global;
-            jgraphics_move_to(g, x1, y1);
+            egraphics_move_to(g, x1, y1);
             
 			for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i += 2)
 			{
@@ -420,37 +429,36 @@ void draw_harmonics(t_scope *x,  t_object *view, t_rect *rect)
                 {
                     x1 = x->f_viewer->getAbscisseValue(i) * x->f_radius_global;
                     y1 = x->f_viewer->getOrdinateValue(i) * x->f_radius_global;
-                    jgraphics_line_to(g, x1, y1);
+                    egraphics_line_to(g, x1, y1);
                 }
                 else
                 {
                     if(color == 1)
-                        jgraphics_set_source_jrgba(g, &x->f_color_positif);
+                        egraphics_set_color_rgba(g, &x->f_color_positif);
                     else
-                        jgraphics_set_source_jrgba(g, &x->f_color_negatif);
+                        egraphics_set_color_rgba(g, &x->f_color_negatif);
                     
-                    jgraphics_line_to(g, x1, y1);
-                    jgraphics_stroke(g);
+                    egraphics_line_to(g, x1, y1);
+                    egraphics_stroke(g);
                     
                     color = x->f_viewer->getColor(i);
                     x1 = x->f_viewer->getAbscisseValue(i) * x->f_radius_global;
                     y1 = x->f_viewer->getOrdinateValue(i) * x->f_radius_global;
-                    jgraphics_move_to(g, x1, y1);
+                    egraphics_move_to(g, x1, y1);
                 }
             }
             
             x1 = x->f_viewer->getAbscisseValue(0) * x->f_radius_global;
             y1 = x->f_viewer->getOrdinateValue(0) * x->f_radius_global;
-            jgraphics_line_to(g, x1, y1);
+            egraphics_line_to(g, x1, y1);
             if(color == 1)
-                jgraphics_set_source_jrgba(g, &x->f_color_positif);
+                egraphics_set_color_rgba(g, &x->f_color_positif);
             else
-                jgraphics_set_source_jrgba(g, &x->f_color_negatif);
-            
-            jgraphics_stroke(g);
+                egraphics_set_color_rgba(g, &x->f_color_negatif);
+            egraphics_stroke(g);
 		}
-		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
+		ebox_end_layer((t_ebox*)x, gensym("harmonics_layer"));
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
+	ebox_paint_layer((t_ebox *)x, gensym("harmonics_layer"), 0., 0.);
     
 }

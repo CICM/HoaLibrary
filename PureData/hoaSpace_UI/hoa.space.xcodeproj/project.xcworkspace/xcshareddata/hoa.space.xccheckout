@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D8F94C2F-25DD-4C7E-A5C9-26A407220D32</string>
+	<key>IDESourceControlProjectName</key>
+	<string>hoa.space</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>327A6D61-AD83-4864-969D-8FF147DD961B</key>
+		<string>https://github.com/CICM/HoaLibrary.git</string>
+		<key>A4F0E00D-B1D3-48DD-ADB9-44FC50786AB1</key>
+		<string>https://github.com/pierreguillot/PdEnhanced.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PureData/hoaSpace_UI/hoa.space.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>327A6D61-AD83-4864-969D-8FF147DD961B</key>
+		<string>../../../..</string>
+		<key>A4F0E00D-B1D3-48DD-ADB9-44FC50786AB1</key>
+		<string>../../../../../PdEnhanced</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/CICM/HoaLibrary.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>327A6D61-AD83-4864-969D-8FF147DD961B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>327A6D61-AD83-4864-969D-8FF147DD961B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HoaLibrary</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A4F0E00D-B1D3-48DD-ADB9-44FC50786AB1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PdEnhanced</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -33,8 +33,6 @@ extern "C"
 
 #define MAX_SPEAKER 256
 
-bool postons = 0;
-
 typedef struct _hoa_decoder
 {
     t_edspobj               f_ob;
@@ -81,14 +79,8 @@ extern "C" void setup_hoa0x2edecoder_tilde(void)
 	CLASS_ATTR_ACCESSORS		(c, "restitution", NULL, decoder_setattr_restitution);
     CLASS_ATTR_ORDER            (c, "restitution", 0, "6");
     
-    if(!postons)
-    {
-        post("hoa.library (version beta 1.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-        post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
-        postons = 1;
-    }
-    
     eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_decoder_class = c;
 }
 

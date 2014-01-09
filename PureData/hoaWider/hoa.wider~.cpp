@@ -24,7 +24,12 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_wider
 {
@@ -65,7 +70,7 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
     x->f_ambi_wider = new AmbisonicWider(order, sys_getblksize());
     eobj_dspsetup(x, x->f_ambi_wider->getNumberOfInputs(), x->f_ambi_wider->getNumberOfOutputs());
     
-	x->f_ob.d_misc = Z_NO_INPLACE;
+	x->f_ob.d_misc = E_NO_INPLACE;
     
 	return (x);
 }

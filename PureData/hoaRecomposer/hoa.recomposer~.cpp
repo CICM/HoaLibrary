@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_recomposer
 {
-    t_jbox              f_ob;
+    t_edspobj           f_ob;
     AmbisonicRecomposer *f_ambi_recomposer;
 } t_hoa_recomposer;
 
@@ -49,26 +54,26 @@ extern "C" void setup_hoa0x2erecomposer_tilde(void)
 {
     t_eclass* c;
     
-    c = class_new("hoa.recomposer~", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (short)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.recomposer~", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (short)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
     
-	class_dspinit(c);
+	eclass_dspinit(c);
     
-	class_addmethod(c, (method)hoa_recomposer_dsp,     "dsp",      A_CANT, 0);
-    class_addmethod(c, (method)hoa_recomposer_angle,   "angle",    A_GIMME,0);
-    class_addmethod(c, (method)hoa_recomposer_wide,    "wide",      A_GIMME,0);
+	eclass_addmethod(c, (method)hoa_recomposer_dsp,     "dsp",      A_CANT, 0);
+    eclass_addmethod(c, (method)hoa_recomposer_angle,   "angle",    A_GIMME,0);
+    eclass_addmethod(c, (method)hoa_recomposer_wide,    "wide",      A_GIMME,0);
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_recomposer_class = c;
 }
 
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
 {
     t_hoa_recomposer *x = NULL;
-    t_dictionary *d;
 	int	order = 4;
     int microphones = 10;
     int mode = Hoa_Fixe;
-    x = (t_hoa_recomposer *)object_alloc(hoa_recomposer_class);
+    x = (t_hoa_recomposer *)eobj_new(hoa_recomposer_class);
     
     order = atom_getint(argv);
     microphones = atom_getint(argv+1);
@@ -87,12 +92,9 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
     }
     x->f_ambi_recomposer = new AmbisonicRecomposer(order, microphones, mode, sys_getblksize(), sys_getsr());
     
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_recomposer->getNumberOfInputs(), x->f_ambi_recomposer->getNumberOfOutputs());
+    eobj_dspsetup(x, x->f_ambi_recomposer->getNumberOfInputs(), x->f_ambi_recomposer->getNumberOfOutputs());
     
-	x->f_ob.z_misc = Z_NO_INPLACE;
-    
-    d = object_dictionaryarg(argc,argv);
-    attr_dictionary_process(x, d);
+	x->f_ob.d_misc = E_NO_INPLACE;
 	
    	return (x);
 }
@@ -152,6 +154,6 @@ void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 
 void hoa_recomposer_free(t_hoa_recomposer *x)
 {
-	dsp_freejbox((t_jbox *)x);
+	eobj_dspfree(x);
 	delete(x->f_ambi_recomposer);
 }

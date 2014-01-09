@@ -1,0 +1,176 @@
+#N canvas 23 353 1098 554 10;
+#X obj -255 -533 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.delay~
+3 12 0 18 -204280 -1 0;
+#X obj -51 -380 hoa.pi 2;
+#X obj -51 -399 loadbang;
+#X obj -66 -361 *~;
+#X obj -66 -418 phasor~ -0.3;
+#X msg 193 -477 \; pd dsp 1;
+#X msg 192 -440 \; pd dsp 0;
+#X obj -225 -383 osc~ 220;
+#X obj 132 -363 osc~ 440;
+#X text -130 -25 Eliott Paris © 2012-2013 CICM / Universite Paris
+8;
+#X text -130 -41 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+;
+#X text 319 -212 1st argument is the order;
+#X text 319 -193 2nd argument is the mode :;
+#X text 349 -174 post : after an encoder;
+#X text 348 -157 no : no encoder (direct synthesis);
+#X obj -225 -260 hoa.scope~ @size 165 165 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+7 @gain 1 @interval 100 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
+1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 132 -260 hoa.scope~ @size 165 165 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @order
+7 @gain 1 @interval 100 @bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5
+1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj -48 -146 hoa.decoder~ 7 ambisonic 16;
+#X obj -48 -75 hoa.dac~ 1:16 -------------;
+#X obj -225 -339 hoa.encoder~ 7 ------------;
+#X obj 353 -467 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 452 -466 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 452 -336 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max 1 @minmax 0 1 @decimal 6 @bgcolor 0.75 0.75 0.75
+1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 353 -337 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0 @max (null) @minmax 0 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj 452 -374 c.loadmess 0.75;
+#X obj 132 -305 hoa.delay~ 7 no -----------;
+#X obj -225 -292 hoa.delay~ 7 post grain_env;
+#X text -252 -511 An ambisonic sound field decorrelator.;
+#X text -250 -493 hoa.delay~ allows you to delay the differents harmonics
+depending on the harmonic number to decorrelate the harmonics and generate
+a diffuse sound field.;
+#X obj -241 -408 r hoadelay~;
+#X obj 173 -334 r hoadelay~;
+#X obj 353 -272 s hoadelay~;
+#X msg 353 -440 ms \$1;
+#X msg 452 -437 sample \$1;
+#X obj 452 -504 c.loadmess 8820;
+#X msg 353 -306 ramp \$1;
+#X obj 353 -374 c.loadmess 100;
+#X msg 452 -306 diff \$1;
+#X obj 353 -402 s hoadelay~;
+#X obj 353 -504 c.loadmess 200;
+#X connect 1 0 3 1;
+#X connect 2 0 1 0;
+#X connect 3 0 19 1;
+#X connect 4 0 3 0;
+#X connect 7 0 19 0;
+#X connect 8 0 25 0;
+#X connect 17 0 18 0;
+#X connect 17 1 18 1;
+#X connect 17 2 18 2;
+#X connect 17 3 18 3;
+#X connect 17 4 18 4;
+#X connect 17 5 18 5;
+#X connect 17 6 18 6;
+#X connect 17 7 18 7;
+#X connect 17 8 18 8;
+#X connect 17 9 18 9;
+#X connect 17 10 18 10;
+#X connect 17 11 18 11;
+#X connect 17 12 18 12;
+#X connect 17 13 18 13;
+#X connect 17 14 18 14;
+#X connect 17 15 18 15;
+#X connect 19 0 26 0;
+#X connect 19 1 26 1;
+#X connect 19 2 26 2;
+#X connect 19 3 26 3;
+#X connect 19 4 26 4;
+#X connect 19 5 26 5;
+#X connect 19 6 26 6;
+#X connect 19 7 26 7;
+#X connect 19 8 26 8;
+#X connect 19 9 26 9;
+#X connect 19 10 26 10;
+#X connect 19 11 26 11;
+#X connect 19 12 26 12;
+#X connect 19 13 26 13;
+#X connect 19 14 26 14;
+#X connect 20 0 32 0;
+#X connect 21 0 33 0;
+#X connect 22 0 37 0;
+#X connect 23 0 35 0;
+#X connect 24 0 22 0;
+#X connect 25 0 16 0;
+#X connect 25 0 17 0;
+#X connect 25 1 16 1;
+#X connect 25 1 17 1;
+#X connect 25 2 16 2;
+#X connect 25 2 17 2;
+#X connect 25 3 16 3;
+#X connect 25 3 17 3;
+#X connect 25 4 16 4;
+#X connect 25 4 17 4;
+#X connect 25 5 16 5;
+#X connect 25 5 17 5;
+#X connect 25 6 16 6;
+#X connect 25 6 17 6;
+#X connect 25 7 16 7;
+#X connect 25 7 17 7;
+#X connect 25 8 16 8;
+#X connect 25 8 17 8;
+#X connect 25 9 16 9;
+#X connect 25 9 17 9;
+#X connect 25 10 16 10;
+#X connect 25 10 17 10;
+#X connect 25 11 16 11;
+#X connect 25 11 17 11;
+#X connect 25 12 16 12;
+#X connect 25 12 17 12;
+#X connect 25 13 16 13;
+#X connect 25 13 17 13;
+#X connect 25 14 16 14;
+#X connect 25 14 17 14;
+#X connect 26 0 15 0;
+#X connect 26 0 17 0;
+#X connect 26 1 15 1;
+#X connect 26 1 17 1;
+#X connect 26 2 15 2;
+#X connect 26 2 17 2;
+#X connect 26 3 15 3;
+#X connect 26 3 17 3;
+#X connect 26 4 15 4;
+#X connect 26 4 17 4;
+#X connect 26 5 15 5;
+#X connect 26 5 17 5;
+#X connect 26 6 15 6;
+#X connect 26 6 17 6;
+#X connect 26 7 15 7;
+#X connect 26 7 17 7;
+#X connect 26 8 15 8;
+#X connect 26 8 17 8;
+#X connect 26 9 15 9;
+#X connect 26 9 17 9;
+#X connect 26 10 15 10;
+#X connect 26 10 17 10;
+#X connect 26 11 15 11;
+#X connect 26 11 17 11;
+#X connect 26 12 15 12;
+#X connect 26 12 17 12;
+#X connect 26 13 15 13;
+#X connect 26 13 17 13;
+#X connect 26 14 15 14;
+#X connect 26 14 17 14;
+#X connect 29 0 26 0;
+#X connect 30 0 25 0;
+#X connect 32 0 38 0;
+#X connect 33 0 38 0;
+#X connect 34 0 21 0;
+#X connect 35 0 31 0;
+#X connect 36 0 23 0;
+#X connect 37 0 31 0;
+#X connect 39 0 20 0;
+#X coords 0 554 1 553 100 60 0;

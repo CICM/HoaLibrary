@@ -33,7 +33,7 @@ extern "C"
 
 typedef struct _hoa_encoder
 {
-    t_edspobj            f_ob;
+    t_edspobj         f_ob;
     AmbisonicEncoder* f_ambi_encoder;
 } t_hoa_encoder;
 
@@ -55,6 +55,7 @@ extern "C" void setup_hoa0x2eencoder_tilde(void)
     eclass_addmethod(c, (method)hoa_encoder_dsp,     "dsp",		A_CANT, 0);
     
     eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_encoder_class = c;
 }
 

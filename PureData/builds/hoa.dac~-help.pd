@@ -1,0 +1,15 @@
+#N canvas 117 42 1122 689 10;
+#X obj -325 -243 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.decoder~
+3 12 0 18 -204280 -1 0;
+#X text 243 -235 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+& Eliott Paris © 2012-2013 CICM / Universite Paris 8;
+#X text -322 -221 An ambisonic decoder;
+#X text -320 -193 hoa.decoder~ decodes an ambisonic sound field for
+several loudspeakers configurations or for headphones.;
+#X text -320 -163 1st argument is the order.;
+#X obj -120 100 noise~;
+#X msg 374 -177 \; pd dsp 1;
+#X msg 374 -139 \; pd dsp 0;
+#X obj 156 242 hoa.dac~ 1 2;
+#X obj -131 167 hoa.dac~ 1:8 ------------------, f 42;
+#X coords 0 689 1 688 100 60 0;

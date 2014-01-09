@@ -1,94 +1,94 @@
-#N canvas 312 69 1032 752 10;
-#X obj 569 -382 hoa.pi 2;
-#X obj 569 -411 loadbang;
-#X obj 518 -353 *~;
-#X obj 518 -436 phasor~ 0.1;
-#X text 229 -365 source;
-#X msg 355 -386 \; pd dsp 1;
-#X msg 355 -348 \; pd dsp 0;
-#X obj 227 -236 hoa.scope~ @size  297 297  @fontname  helvetica
- @fontweight  normal  @fontslant  regular  @fontsize  11  @order
- 7  @gain  1  @interval  20  @bgcolor  0.7 0.7 0.7 1  @bordercolor
- 0.5 0.5 0.5 1  @phcolor  1 0 0 1  @nhcolor  0 0 1 1 ;
-#X obj 227 -342 sig~ 1;
-#X msg 110 -361 order \$1;
-#X obj 110 -388 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
-10 -262144 -1 -1 0 256;
-#X obj 227 -293 hoa.encoder~ 7 ----------------------------------;
-#X obj 835 -150 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0 256;
-#X obj 681 -285 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0.7 256;
-#X text 675 -313 Background color;
-#X msg 681 -251 bgcolor \$1 \$1 \$1 1;
-#X obj 684 -150 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0 256;
-#X msg 681 -338 0.7;
-#X obj 826 -288 nbx 5 14 0 1 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 0 256;
-#X text 822 -314 Border color;
-#X obj 681 -373 loadbang;
-#X text 403 111 Eliott Paris © 2012-2013 CICM / Universite Paris 8
+#N canvas 216 124 580 521 10;
+#X obj 309 -665 hoa.pi 2;
+#X obj 309 -694 loadbang;
+#X obj 228 -622 *~;
+#X obj 228 -665 phasor~ 0.1;
+#X msg 428 -715 \; pd dsp 1;
+#X msg 428 -677 \; pd dsp 0;
+#X obj 27 -527 hoa.scope~ @size 207 207 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive hoascope @send (null)
+@order 7 @gain 1 @interval 20 @phcolor 1 0 2.38419e-07 1 @nhcolor 0 0.1 1 1;
+#X text 65 -288 Eliott Paris © 2012-2013 CICM / Universite Paris 8
 ;
-#X text 403 95 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text 65 -304 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X obj -18 -538 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.scope~
+#X obj -18 -769 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.scope~
 3 12 0 18 -204280 -1 0;
-#X obj 0 -364 nbx 5 14 1 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 1 256;
-#X msg 0 -337 gain \$1;
-#X obj 16 -259 nbx 5 14 20 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
--1 -1 20 256;
-#X msg 16 -232 interval \$1;
-#X text -3 -387 Gain factor;
-#X text 107 -410 Ambisonic Order;
-#X text -7 -293 Refresh Interval in ms;
-#X obj 773 -224 send scope;
-#X obj 782 -70 send scope;
-#X obj 104 -189 receive scope;
-#X text 678 -175 Positifs Harmonics color;
-#X msg 835 -116 nhcolor 0 0 \$1 1;
-#X text 830 -173 Negatifs Harmonics color;
-#X msg 684 -116 phcolor \$1 0 0 1;
-#X text -16 -516 An ambisonic harmonic scope;
-#X text -15 -496 hoa.scope~ displays the harmonics of an ambisonic
-sound field on a circle.;
-#X msg 826 -254 bdcolor \$1 \$1 \$1 1;
+#X text -16 -747 An ambisonic harmonic scope;
+#X obj 27 -582 hoa.encoder~ 7 -------------------;
+#X obj 273 -550 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max (null) @minmax 1 (null) @decimal 0 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 273 -524 order \$1;
+#X obj 363 -495 s hoascope;
+#X obj 273 -573 c.loadmess 7;
+#X obj 363 -550 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 1 @max (null) @minmax 1 (null) @decimal 6 @bgcolor 0.75
+0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 363 -524 gain \$1;
+#X obj 363 -573 c.loadmess 1;
+#X obj 453 -550 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 20 @max 1000 @minmax 20 1000 @decimal 0 @bgcolor 0.75 0.75
+0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X msg 453 -524 interval \$1;
+#X obj 412 -345 s hoascope;
+#X obj 272 -416 c.colorpanel @size 97 14 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @matrix 8 1 @reverse 0 @saturation 1 @hue 0 @lightness 0.5 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
+#X obj 272 -397 c.prepend phcolor;
+#X obj 412 -416 c.colorpanel @size 97 14 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @matrix 8 1 @reverse 0 @saturation 1 @hue 0.65 @lightness 0.5
+@bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1;
+#X text 271 -597 order :;
+#X text 271 -607 Ambisonic;
+#X text 361 -607 Gain :;
+#X text 451 -597 interval :;
+#X text 271 -447 color :;
+#X text 271 -457 Positive;
+#X text 411 -447 color :;
+#X text 411 -457 Negative;
+#X obj 27 -633 osc~ 0.1;
+#X text -15 -727 hoa.scope~ displays the circular harmonics of an ambisonic
+sound field on a disc.;
+#X text 451 -607 Refresh;
+#X obj 453 -573 c.loadmess 20;
+#X obj 412 -397 c.prepend nhcolor;
 #X connect 0 0 2 1;
 #X connect 1 0 0 0;
 #X connect 2 0 11 1;
 #X connect 3 0 2 0;
-#X connect 8 0 11 0;
-#X connect 9 0 7 0;
-#X connect 10 0 9 0;
-#X connect 11 0 7 0;
-#X connect 11 1 7 1;
-#X connect 11 2 7 2;
-#X connect 11 3 7 3;
-#X connect 11 4 7 4;
-#X connect 11 5 7 5;
-#X connect 11 6 7 6;
-#X connect 11 7 7 7;
-#X connect 11 8 7 8;
-#X connect 11 9 7 9;
-#X connect 11 10 7 10;
-#X connect 11 11 7 11;
-#X connect 11 12 7 12;
-#X connect 11 13 7 13;
-#X connect 11 14 7 14;
-#X connect 12 0 35 0;
-#X connect 13 0 15 0;
-#X connect 15 0 31 0;
-#X connect 16 0 37 0;
-#X connect 17 0 13 0;
-#X connect 18 0 40 0;
-#X connect 20 0 17 0;
-#X connect 24 0 25 0;
-#X connect 25 0 7 0;
-#X connect 26 0 27 0;
-#X connect 27 0 7 0;
-#X connect 33 0 7 0;
-#X connect 35 0 32 0;
-#X connect 37 0 32 0;
-#X connect 40 0 31 0;
-#X coords 0 752 1 751 85 60 0;
+#X connect 11 0 6 0;
+#X connect 11 1 6 1;
+#X connect 11 2 6 2;
+#X connect 11 3 6 3;
+#X connect 11 4 6 4;
+#X connect 11 5 6 5;
+#X connect 11 6 6 6;
+#X connect 11 7 6 7;
+#X connect 11 8 6 8;
+#X connect 11 9 6 9;
+#X connect 11 10 6 10;
+#X connect 11 11 6 11;
+#X connect 11 12 6 12;
+#X connect 11 13 6 13;
+#X connect 11 14 6 14;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 15 0 12 0;
+#X connect 16 0 17 0;
+#X connect 17 0 14 0;
+#X connect 18 0 16 0;
+#X connect 19 0 20 0;
+#X connect 20 0 14 0;
+#X connect 22 0 23 0;
+#X connect 23 0 21 0;
+#X connect 24 0 37 0;
+#X connect 33 0 11 0;
+#X connect 36 0 19 0;
+#X connect 37 0 21 0;
+#X coords 0 521 1 520 85 60 0;

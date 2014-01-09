@@ -24,11 +24,16 @@
  *
  */
 
-#include "../hoaLibrary/hoa.library_pd.h"
+extern "C"
+{
+#include "../../../PdEnhanced/Sources/cicm_wrapper.h"
+}
+
+#include "../../Sources/HoaLibrary.h"
 
 typedef struct _hoa_rotate
 {
-    t_jbox           f_ob;
+    t_edspobj       f_ob;
     AmbisonicRotate	*f_ambi_rotate;
 } t_hoa_rotate;
 
@@ -44,13 +49,14 @@ extern "C" void setup_hoa0x2erotate_tilde(void)
 {
     t_eclass* c;
     
-    c = class_new("hoa.rotate~",(method)hoa_rotate_new,(method)hoa_rotate_free, (short)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
+    c = eclass_new("hoa.rotate~",(method)hoa_rotate_new,(method)hoa_rotate_free, (short)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
     
-	class_dspinit(c);
+	eclass_dspinit(c);
 
-	class_addmethod(c, (method)hoa_rotate_dsp, "dsp", A_CANT, 0);
+	eclass_addmethod(c, (method)hoa_rotate_dsp, "dsp", A_CANT, 0);
     
-    class_register(CLASS_BOX, c);
+    eclass_register(CLASS_BOX, c);
+    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
     hoa_rotate_class = c;
 }
 
@@ -59,13 +65,13 @@ void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
     t_hoa_rotate *x = NULL;
 	int	order = 4;
     
-    x = (t_hoa_rotate *)object_alloc(hoa_rotate_class);
+    x = (t_hoa_rotate *)eobj_new(hoa_rotate_class);
     
     order = atom_getint(argv);
     x->f_ambi_rotate = new AmbisonicRotate(order, sys_getblksize());
-    dsp_setupjbox((t_jbox *)x, x->f_ambi_rotate->getNumberOfInputs(), x->f_ambi_rotate->getNumberOfOutputs());
+    eobj_dspsetup(x, x->f_ambi_rotate->getNumberOfInputs(), x->f_ambi_rotate->getNumberOfOutputs());
     
-	x->f_ob.z_misc = Z_NO_INPLACE;
+	x->f_ob.d_misc = E_NO_INPLACE;
     
 	return (x);
 }
@@ -84,6 +90,6 @@ void hoa_rotate_perform(t_hoa_rotate *x, t_object *dsp, float **ins, long ni, fl
 
 void hoa_rotate_free(t_hoa_rotate *x)
 {
-	dsp_freejbox((t_jbox *)x);
+	eobj_dspfree(x);
 	delete(x->f_ambi_rotate);
 }
