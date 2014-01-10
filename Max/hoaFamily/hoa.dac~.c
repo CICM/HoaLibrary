@@ -29,31 +29,42 @@
 #include "ext_common.h"
 #include "z_dsp.h"
 
-void *dac_class;
+typedef struct _hoa_dac
+{
+	t_pxobject        f_ob;
+    t_object          *f_dac;
+} t_hoa_dac;
 
-void *dac_new(t_symbol *s, int argc, t_atom *argv);
+t_class *hoa_dac_class;
+
+void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_dac_dsp64(t_hoa_dac *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_dac_anything(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv);
 
 int C74_EXPORT main(void)
 {
 	t_class *c;
 
-	c = class_new("hoa.dac~", (method)dac_new, (method)NULL, (short)sizeof(0), 0L, A_GIMME, 0);
+	c = class_new("hoa.dac~", (method)hoa_dac_new, (method)NULL, (short)sizeof(t_hoa_dac), 0L, A_GIMME, 0);
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
-	dac_class = c;
-	
+    
+    class_addmethod(c, (method)hoa_dac_anything,    "anything",	A_GIMME, 0);
+	class_addmethod(c, (method)hoa_dac_dsp64,		"dsp64",	A_CANT,  0);
+    
+	hoa_dac_class = c;
 	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 }
 
-void *dac_new(t_symbol *s, int argc, t_atom *argv)
+void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv)
 {
-	int i, j, count;
-	t_object *x;
+	int i, j, count = 0;
+	t_hoa_dac *x;
 	t_atom channels[512];
 	int min, max;
-	count = 0;
-    
     int symPrepend = 0;
+
+    x = (t_hoa_dac *)object_alloc(hoa_dac_class);
     
     if (argc && atom_gettype(argv) == A_SYM)
     {
@@ -97,12 +108,22 @@ void *dac_new(t_symbol *s, int argc, t_atom *argv)
 		else if(atom_gettype(argv + symPrepend + i) == A_LONG)
 		{
             atom_setlong(channels + symPrepend + count++, atom_getlong(argv + symPrepend + i));
-			//channels[count++] = argv[i];
 		}
 	}
-	x = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count + symPrepend, channels);
+    dsp_setup((t_pxobject *)x, count);
+	x->f_dac = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count + symPrepend, channels);
 	
 	return x;
-}	
+}
+
+void hoa_dac_dsp64(t_hoa_dac *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+{
+    object_method((t_object *)x->f_dac, gensym("dsp64"), dsp64, count, samplerate, maxvectorsize, flags);
+}
+
+void hoa_dac_anything(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
+{
+    object_method(x->f_dac, s, argc, argv);
+}
 
 

@@ -5,9 +5,9 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1303D090-C690-4F02-A7AA-18519C5B730F</string>
+	<string>D5FF41D7-5380-4024-A481-2BA227038D44</string>
 	<key>IDESourceControlProjectName</key>
-	<string>libhoaold</string>
+	<string>hoa.wider~</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0D1092E7-FC82-482C-919A-817591BFB604</key>
@@ -16,7 +16,7 @@
 		<string>https://github.com/CICM/HoaLibrary.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PureData/hoaLibrary/libhoaold.xcodeproj/project.xcworkspace</string>
+	<string>PureData/hoaWider/hoa.wider~.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0D1092E7-FC82-482C-919A-817591BFB604</key>

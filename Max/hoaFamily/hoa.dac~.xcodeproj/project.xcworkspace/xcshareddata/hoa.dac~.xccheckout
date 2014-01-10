@@ -5,23 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D697DD10-A57F-48DB-9228-C4E048A3FA12</string>
+	<string>583F45A3-7E26-4E98-BEF0-C5A53C5B4E0A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>libhoa</string>
+	<string>hoa.dac~</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>79CA4221-F667-4641-917F-A8871E355E89</key>
-		<string>https://github.com/pierreguillot/PdEnhanced.git</string>
-		<key>EE1F189A-333E-457F-A063-7BFE536A7747</key>
+		<key>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</key>
 		<string>https://github.com/CICM/HoaLibrary.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PureData/hoaLibrary/libhoa.xcodeproj/project.xcworkspace</string>
+	<string>Max/hoaFamily/hoa.dac~.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>79CA4221-F667-4641-917F-A8871E355E89</key>
-		<string>../../../../../PdEnhanced</string>
-		<key>EE1F189A-333E-457F-A063-7BFE536A7747</key>
+		<key>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -29,24 +25,16 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>EE1F189A-333E-457F-A063-7BFE536A7747</string>
+	<string>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>EE1F189A-333E-457F-A063-7BFE536A7747</string>
+			<string>1D975CD8-0DA1-43B1-AAE0-894A7DA35430</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HoaLibrary</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>79CA4221-F667-4641-917F-A8871E355E89</string>
-			<key>IDESourceControlWCCName</key>
-			<string>PdEnhanced</string>
 		</dict>
 	</array>
 </dict>
