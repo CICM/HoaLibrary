@@ -1,4 +1,4 @@
-#N canvas 103 126 1287 776 10;
+#N canvas 89 69 1287 776 10;
 #X obj -354 -643 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.library
 3 12 0 18 -204280 -1 0;
 #X text 224 -640 hoalibrary | Julien Colafrancesco \, Pierre Guillot
@@ -22,14 +22,14 @@ normal @fontslant roman @fontsize 11 @receive (null) @send Ð* @order
 #X obj 609 -613 hoa.map @size 184 184 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @outputmode 0 @zoom 0.35 sources_parameters
-source 0 -0.993789 0.714286 1 0 0.2 0.2 0.2 float source 1 0.0621118
--1.3354 0 0.2 0.2 0.2 1 groups_parameters groups_parameters group 0
-2 0 1 1 0.2 0.2 0.2 1 float;
+source 0 -0.993789 0.714286 1 0 0.2 0.2 0.2 float source 1 1.27329
+-1.02484 0 0.2 0.2 0.2 1 groups_parameters groups_parameters group
+0 2 0 1 1 0.2 0.2 0.2 1 float;
 #X obj -336 -487 hoa.space @size 184 184 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
-(null) @channels 8 @coeffs 1 1 1 1 1 1 1 1 @bgcolor 0.7 0.7 0.7 1 @bdcolor
-0.5 0.5 0.5 1 @spacolor 0 0.4 0.6 1 @miccolor 0 0 0 1 @circolor 0.7
-0.7 0.7 1;
+(null) @channels 8 @coeffs 1 1 1 0.906065 1 0.640123 0.772294 0.587037
+@bgcolor 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @spacolor 0 0.4 0.6 1
+@miccolor 0 0 0 1 @circolor 0.7 0.7 0.7 1;
 #X obj 70 -313 hoa.delay~ 3 post ************;
 #X obj -127 -227 hoa.recomposer~ 3 8 **********;
 #X obj -127 -279 hoa.space~ 8 *****************;
@@ -91,6 +91,7 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 -1 -1;
 #X obj 823 -586 key;
 #X obj 823 -567 sel 32;
+#X text 685 -9 Simon Richir;
 #X connect 4 0 22 1;
 #X connect 5 0 22 0;
 #X connect 7 0 9 0;

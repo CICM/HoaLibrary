@@ -1,10 +1,11 @@
-#N canvas 64 88 1205 608 10;
+#N canvas 88 151 1205 608 10;
 #X obj -494 -198 hoa.map @size 300 300 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode 0 @zoom 0.312488 sources_parameters
-source 0 1.85607 0.672026 0 0.2 0.2 0.2 1 "(null)" source 1 0.106671
-1.63206 0 0.2 0.2 0.2 1 "(null)" groups_parameters group 0 2 0 1
-0 0.2 0.2 0.2 1 "(null)" slots_parameters slot 0 slot 1 slot 2;
+source 0 1.85607 0.672026 0 0.2 0.2 0.2 1 source source 1 0.106671
+1.63206 0 0.7 0 0.6 1 'Jimi Hendrix' groups_parameters group 0 2 0
+1 0 0.2 0.9 0 1 'Band of Gypsys' slots_parameters slot 0 slot 1 slot
+2;
 #X obj -508 -264 nbx 10 14 -1e+37 1e+37 0 0 empty empty empty 0 -8
 0 10 -262144 -1 -1 0 256;
 #X msg -494 -232 zoom \$1;

@@ -1,0 +1,177 @@
+\hypertarget{class_ambisonic_map}{\section{Ambisonic\-Map Class Reference}
+\label{class_ambisonic_map}\index{Ambisonic\-Map@{Ambisonic\-Map}}
+}
+
+
+{\ttfamily \#include $<$Ambisonic\-Map.\-h$>$}
+
+Inheritance diagram for Ambisonic\-Map\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_ambisonic_map}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_ambisonic_map_a44db87a2d97aa5851b5fc81be2a33d08}{Ambisonic\-Map} (long an\-Order=1, long a\-Ramp\-Sample=4410, long a\-Vector\-Size=0, long a\-Sampling\-Rate=44100)
+\item 
+\hypertarget{class_ambisonic_map_a173c1954e24da00046a1868dc8201ba3}{void {\bfseries set\-Coordinates\-Polar} (double a\-Radius, double an\-Azimuth)}\label{class_ambisonic_map_a173c1954e24da00046a1868dc8201ba3}
+
+\item 
+\hypertarget{class_ambisonic_map_a7fe9ea5934a91cf6bdcac07ebb680e53}{void {\bfseries set\-Coordinates\-Radius} (double a\-Radius)}\label{class_ambisonic_map_a7fe9ea5934a91cf6bdcac07ebb680e53}
+
+\item 
+\hypertarget{class_ambisonic_map_a3eefae0187c16bd9cdf61cb6a4c10eba}{void {\bfseries set\-Coordinates\-Azimuth} (double an\-Azimuth)}\label{class_ambisonic_map_a3eefae0187c16bd9cdf61cb6a4c10eba}
+
+\item 
+\hypertarget{class_ambisonic_map_aa642c6d73f5fdb663313b07c33f39c2d}{void {\bfseries set\-Coordinates\-Cartesian} (double an\-Abscissa, double an\-Ordinate)}\label{class_ambisonic_map_aa642c6d73f5fdb663313b07c33f39c2d}
+
+\item 
+\hypertarget{class_ambisonic_map_a222f4b3ff1ec2cfadf4cc05bed587ae8}{void {\bfseries set\-Coordinates\-Abscissa} (double an\-Abscissa)}\label{class_ambisonic_map_a222f4b3ff1ec2cfadf4cc05bed587ae8}
+
+\item 
+\hypertarget{class_ambisonic_map_afa06748f24d27bda2e362ddf8939af41}{void {\bfseries set\-Coordinates\-Ordinate} (double an\-Ordinate)}\label{class_ambisonic_map_afa06748f24d27bda2e362ddf8939af41}
+
+\item 
+\hypertarget{class_ambisonic_map_a9c8dc8784e41832294317ed64066b4d4}{void {\bfseries set\-Coordinates\-Polar\-Line} (double a\-Radius, double an\-Azimuth)}\label{class_ambisonic_map_a9c8dc8784e41832294317ed64066b4d4}
+
+\item 
+\hypertarget{class_ambisonic_map_a35053d19e06f0a49f949dae2b70b3e2b}{void {\bfseries set\-Coordinates\-Radius\-Line} (double a\-Radius)}\label{class_ambisonic_map_a35053d19e06f0a49f949dae2b70b3e2b}
+
+\item 
+\hypertarget{class_ambisonic_map_aff1eec7d1bd6b06ab1d3d06e4ff27a94}{void {\bfseries set\-Coordinates\-Azimuth\-Line} (double an\-Azimuth)}\label{class_ambisonic_map_aff1eec7d1bd6b06ab1d3d06e4ff27a94}
+
+\item 
+\hypertarget{class_ambisonic_map_afe51515264b6e6823578f12ee8b0c03b}{void {\bfseries set\-Coordinates\-Cartesian\-Line} (double an\-Abscissa, double an\-Ordinate)}\label{class_ambisonic_map_afe51515264b6e6823578f12ee8b0c03b}
+
+\item 
+\hypertarget{class_ambisonic_map_aa762fa8f208f78c81231d2f5dad681d9}{void {\bfseries set\-Coordinates\-Abscissa\-Line} (double an\-Abscissa)}\label{class_ambisonic_map_aa762fa8f208f78c81231d2f5dad681d9}
+
+\item 
+\hypertarget{class_ambisonic_map_ab39c3105350c0e6c8399300d70a0b6ae}{void {\bfseries set\-Coordinates\-Ordinate\-Line} (double an\-Ordinate)}\label{class_ambisonic_map_ab39c3105350c0e6c8399300d70a0b6ae}
+
+\item 
+\hypertarget{class_ambisonic_map_a3d4cf14a86809505e4c11786faccecba}{void {\bfseries set\-Vector\-Size} (long a\-Vector\-Size)}\label{class_ambisonic_map_a3d4cf14a86809505e4c11786faccecba}
+
+\item 
+\hypertarget{class_ambisonic_map_aa275b5cfa4248ea84fd0e5c2da4e113c}{void {\bfseries set\-Sampling\-Rate} (long a\-Sampling\-Rate)}\label{class_ambisonic_map_aa275b5cfa4248ea84fd0e5c2da4e113c}
+
+\item 
+\hypertarget{class_ambisonic_map_a8628af240a10fe0c8ed455cf737a3f4e}{void {\bfseries set\-Ramp} (long a\-Number\-Of\-Sample)}\label{class_ambisonic_map_a8628af240a10fe0c8ed455cf737a3f4e}
+
+\item 
+\hypertarget{class_ambisonic_map_acd8abbb3ec6aa11bf0073882e3e1dd09}{long {\bfseries get\-Ramp} ()}\label{class_ambisonic_map_acd8abbb3ec6aa11bf0073882e3e1dd09}
+
+\item 
+\hypertarget{class_ambisonic_map_a0fc90adbab2ae9c07a86e1a45890f7ec}{void {\bfseries process} (const float input, float $\ast$outputs)}\label{class_ambisonic_map_a0fc90adbab2ae9c07a86e1a45890f7ec}
+
+\item 
+\hypertarget{class_ambisonic_map_a54e22a72aa5f5e248aa41e4880ce8cbd}{void {\bfseries process} (const double input, double $\ast$outputs)}\label{class_ambisonic_map_a54e22a72aa5f5e248aa41e4880ce8cbd}
+
+\item 
+\hypertarget{class_ambisonic_map_aea7d35fae8438f666b4eea5585a07f74}{void {\bfseries process\-Add} (const float input, float $\ast$outputs)}\label{class_ambisonic_map_aea7d35fae8438f666b4eea5585a07f74}
+
+\item 
+\hypertarget{class_ambisonic_map_a9abb827640018cfd1f5e86935f9092c7}{void {\bfseries process\-Add} (const double input, double $\ast$outputs)}\label{class_ambisonic_map_a9abb827640018cfd1f5e86935f9092c7}
+
+\item 
+\hypertarget{class_ambisonic_map_ad7cb34156a5d4d789f1479a1019d9c1c}{void {\bfseries process} (const float $\ast$inputs, float $\ast$$\ast$outputs)}\label{class_ambisonic_map_ad7cb34156a5d4d789f1479a1019d9c1c}
+
+\item 
+\hypertarget{class_ambisonic_map_a13109859dbeaa8a8dc3a8d06f5a4ae62}{void {\bfseries process} (const double $\ast$inputs, double $\ast$$\ast$outputs)}\label{class_ambisonic_map_a13109859dbeaa8a8dc3a8d06f5a4ae62}
+
+\item 
+\hypertarget{class_ambisonic_map_a4c88c3b760261a67db7f4e76dc8c17b9}{void {\bfseries process\-Add} (const float $\ast$inputs, float $\ast$$\ast$outputs)}\label{class_ambisonic_map_a4c88c3b760261a67db7f4e76dc8c17b9}
+
+\item 
+\hypertarget{class_ambisonic_map_a4d1eeb599f7506dbf7e93df519c4e0fb}{void {\bfseries process\-Add} (const double $\ast$inputs, double $\ast$$\ast$outputs)}\label{class_ambisonic_map_a4d1eeb599f7506dbf7e93df519c4e0fb}
+
+\item 
+\hypertarget{class_ambisonic_map_a7b674577b2834fe36ed20ea7f68877b1}{void {\bfseries process\-Polar} (float $\ast$a\-Inputs, float $\ast$$\ast$a\-Outputs, float $\ast$a\-Radius, float $\ast$an\-Anzimuth)}\label{class_ambisonic_map_a7b674577b2834fe36ed20ea7f68877b1}
+
+\item 
+\hypertarget{class_ambisonic_map_acb84274dee80c8b28cd5ad1575132f67}{void {\bfseries process\-Radius} (float $\ast$a\-Inputs, float $\ast$$\ast$a\-Outputs, float $\ast$a\-Radius)}\label{class_ambisonic_map_acb84274dee80c8b28cd5ad1575132f67}
+
+\item 
+\hypertarget{class_ambisonic_map_a01109c4d0fa5b3984e0f463a8264002d}{void {\bfseries process\-Azimuth} (float $\ast$a\-Inputs, float $\ast$$\ast$a\-Outputs, float $\ast$an\-Anzimuth)}\label{class_ambisonic_map_a01109c4d0fa5b3984e0f463a8264002d}
+
+\item 
+\hypertarget{class_ambisonic_map_a67b14d2943266ce16f5f5fc8e6da1c68}{void {\bfseries process\-Cartesian} (float $\ast$a\-Inputs, float $\ast$$\ast$a\-Outputs, float $\ast$an\-Abscissa, float $\ast$an\-Ordinate)}\label{class_ambisonic_map_a67b14d2943266ce16f5f5fc8e6da1c68}
+
+\item 
+\hypertarget{class_ambisonic_map_a34452565af2418a3928e1ddb171fd4af}{void {\bfseries process\-Abscissa} (float $\ast$a\-Inputs, float $\ast$$\ast$a\-Outputs, float $\ast$an\-Abscissa)}\label{class_ambisonic_map_a34452565af2418a3928e1ddb171fd4af}
+
+\item 
+\hypertarget{class_ambisonic_map_a8ebd185ed813b52d5abd1064e672bec3}{void {\bfseries process\-Ordinate} (float $\ast$a\-Inputs, float $\ast$$\ast$a\-Outputs, float $\ast$an\-Ordinate)}\label{class_ambisonic_map_a8ebd185ed813b52d5abd1064e672bec3}
+
+\item 
+\hypertarget{class_ambisonic_map_ad9f96367e92bbe1422becc8d311090f3}{void {\bfseries process\-Polar} (double $\ast$a\-Inputs, double $\ast$$\ast$a\-Outputs, double $\ast$a\-Radius, double $\ast$an\-Anzimuth)}\label{class_ambisonic_map_ad9f96367e92bbe1422becc8d311090f3}
+
+\item 
+\hypertarget{class_ambisonic_map_a0023e3e6d4a2e162de5ae646e0671453}{void {\bfseries process\-Radius} (double $\ast$a\-Inputs, double $\ast$$\ast$a\-Outputs, double $\ast$a\-Radius)}\label{class_ambisonic_map_a0023e3e6d4a2e162de5ae646e0671453}
+
+\item 
+\hypertarget{class_ambisonic_map_a692d7484672252d0d16273eaeab198ad}{void {\bfseries process\-Azimuth} (double $\ast$a\-Inputs, double $\ast$$\ast$a\-Outputs, double $\ast$an\-Anzimuth)}\label{class_ambisonic_map_a692d7484672252d0d16273eaeab198ad}
+
+\item 
+\hypertarget{class_ambisonic_map_a92e083331525ea4906b2691fd6725991}{void {\bfseries process\-Cartesian} (double $\ast$a\-Inputs, double $\ast$$\ast$a\-Outputs, double $\ast$an\-Abscissa, double $\ast$an\-Ordinate)}\label{class_ambisonic_map_a92e083331525ea4906b2691fd6725991}
+
+\item 
+\hypertarget{class_ambisonic_map_a615f5aeab5cd0b90920c7c4187b9600f}{void {\bfseries process\-Abscissa} (double $\ast$a\-Inputs, double $\ast$$\ast$a\-Outputs, double $\ast$an\-Abscissa)}\label{class_ambisonic_map_a615f5aeab5cd0b90920c7c4187b9600f}
+
+\item 
+\hypertarget{class_ambisonic_map_a2d1acd86706d4b3e6750a44c28f946da}{void {\bfseries process\-Ordinate} (double $\ast$a\-Inputs, double $\ast$$\ast$a\-Outputs, double $\ast$an\-Ordinate)}\label{class_ambisonic_map_a2d1acd86706d4b3e6750a44c28f946da}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/hoalibrary/}{\tt http\-://www.\-mshparisnord.\-fr/hoalibrary/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met\-:
+
+
+\begin{DoxyItemize}
+\item Redistributions may not be sold, nor may they be used in a commercial product or activity.
+\item Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+\item Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+\item Neither the name of the C\-I\-C\-M nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+\end{DoxyItemize}
+
+T\-H\-I\-S S\-O\-F\-T\-W\-A\-R\-E I\-S P\-R\-O\-V\-I\-D\-E\-D B\-Y T\-H\-E C\-O\-P\-Y\-R\-I\-G\-H\-T H\-O\-L\-D\-E\-R\-S A\-N\-D C\-O\-N\-T\-R\-I\-B\-U\-T\-O\-R\-S \char`\"{}\-A\-S I\-S\char`\"{} A\-N\-D A\-N\-Y E\-X\-P\-R\-E\-S\-S O\-R I\-M\-P\-L\-I\-E\-D W\-A\-R\-R\-A\-N\-T\-I\-E\-S, I\-N\-C\-L\-U\-D\-I\-N\-G, B\-U\-T N\-O\-T L\-I\-M\-I\-T\-E\-D T\-O, T\-H\-E I\-M\-P\-L\-I\-E\-D W\-A\-R\-R\-A\-N\-T\-I\-E\-S O\-F M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y A\-N\-D F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E A\-R\-E D\-I\-S\-C\-L\-A\-I\-M\-E\-D. I\-N N\-O E\-V\-E\-N\-T S\-H\-A\-L\-L T\-H\-E C\-O\-P\-Y\-R\-I\-G\-H\-T H\-O\-L\-D\-E\-R O\-R C\-O\-N\-T\-R\-I\-B\-U\-T\-O\-R\-S B\-E L\-I\-A\-B\-L\-E F\-O\-R A\-N\-Y D\-I\-R\-E\-C\-T, I\-N\-D\-I\-R\-E\-C\-T, I\-N\-C\-I\-D\-E\-N\-T\-A\-L, S\-P\-E\-C\-I\-A\-L, E\-X\-E\-M\-P\-L\-A\-R\-Y, O\-R C\-O\-N\-S\-E\-Q\-U\-E\-N\-T\-I\-A\-L D\-A\-M\-A\-G\-E\-S (I\-N\-C\-L\-U\-D\-I\-N\-G, B\-U\-T N\-O\-T L\-I\-M\-I\-T\-E\-D T\-O, P\-R\-O\-C\-U\-R\-E\-M\-E\-N\-T O\-F S\-U\-B\-S\-T\-I\-T\-U\-T\-E G\-O\-O\-D\-S O\-R S\-E\-R\-V\-I\-C\-E\-S; L\-O\-S\-S O\-F U\-S\-E, D\-A\-T\-A, O\-R P\-R\-O\-F\-I\-T\-S; O\-R B\-U\-S\-I\-N\-E\-S\-S I\-N\-T\-E\-R\-R\-U\-P\-T\-I\-O\-N) H\-O\-W\-E\-V\-E\-R C\-A\-U\-S\-E\-D A\-N\-D O\-N A\-N\-Y T\-H\-E\-O\-R\-Y O\-F L\-I\-A\-B\-I\-L\-I\-T\-Y, W\-H\-E\-T\-H\-E\-R I\-N C\-O\-N\-T\-R\-A\-C\-T, S\-T\-R\-I\-C\-T L\-I\-A\-B\-I\-L\-I\-T\-Y, O\-R T\-O\-R\-T (I\-N\-C\-L\-U\-D\-I\-N\-G N\-E\-G\-L\-I\-G\-E\-N\-C\-E O\-R O\-T\-H\-E\-R\-W\-I\-S\-E) A\-R\-I\-S\-I\-N\-G I\-N A\-N\-Y W\-A\-Y O\-U\-T O\-F T\-H\-E U\-S\-E O\-F T\-H\-I\-S S\-O\-F\-T\-W\-A\-R\-E, E\-V\-E\-N I\-F A\-D\-V\-I\-S\-E\-D O\-F T\-H\-E P\-O\-S\-S\-I\-B\-I\-L\-I\-T\-Y O\-F S\-U\-C\-H D\-A\-M\-A\-G\-E. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_ambisonic_map_a44db87a2d97aa5851b5fc81be2a33d08}{\index{Ambisonic\-Map@{Ambisonic\-Map}!Ambisonic\-Map@{Ambisonic\-Map}}
+\index{Ambisonic\-Map@{Ambisonic\-Map}!AmbisonicMap@{Ambisonic\-Map}}
+\subsubsection[{Ambisonic\-Map}]{\setlength{\rightskip}{0pt plus 5cm}Ambisonic\-Map\-::\-Ambisonic\-Map (
+\begin{DoxyParamCaption}
+\item[{long}]{an\-Order = {\ttfamily 1}, }
+\item[{long}]{a\-Ramp\-Sample = {\ttfamily 4410}, }
+\item[{long}]{a\-Vector\-Size = {\ttfamily 0}, }
+\item[{long}]{a\-Sampling\-Rate = {\ttfamily 44100}}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonic_map_a44db87a2d97aa5851b5fc81be2a33d08}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/hoalibrary/}{\tt http\-://www.\-mshparisnord.\-fr/hoalibrary/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met\-:
+
+
+\begin{DoxyItemize}
+\item Redistributions may not be sold, nor may they be used in a commercial product or activity.
+\item Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+\item Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+\item Neither the name of the C\-I\-C\-M nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+\end{DoxyItemize}
+
+T\-H\-I\-S S\-O\-F\-T\-W\-A\-R\-E I\-S P\-R\-O\-V\-I\-D\-E\-D B\-Y T\-H\-E C\-O\-P\-Y\-R\-I\-G\-H\-T H\-O\-L\-D\-E\-R\-S A\-N\-D C\-O\-N\-T\-R\-I\-B\-U\-T\-O\-R\-S \char`\"{}\-A\-S I\-S\char`\"{} A\-N\-D A\-N\-Y E\-X\-P\-R\-E\-S\-S O\-R I\-M\-P\-L\-I\-E\-D W\-A\-R\-R\-A\-N\-T\-I\-E\-S, I\-N\-C\-L\-U\-D\-I\-N\-G, B\-U\-T N\-O\-T L\-I\-M\-I\-T\-E\-D T\-O, T\-H\-E I\-M\-P\-L\-I\-E\-D W\-A\-R\-R\-A\-N\-T\-I\-E\-S O\-F M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y A\-N\-D F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E A\-R\-E D\-I\-S\-C\-L\-A\-I\-M\-E\-D. I\-N N\-O E\-V\-E\-N\-T S\-H\-A\-L\-L T\-H\-E C\-O\-P\-Y\-R\-I\-G\-H\-T H\-O\-L\-D\-E\-R O\-R C\-O\-N\-T\-R\-I\-B\-U\-T\-O\-R\-S B\-E L\-I\-A\-B\-L\-E F\-O\-R A\-N\-Y D\-I\-R\-E\-C\-T, I\-N\-D\-I\-R\-E\-C\-T, I\-N\-C\-I\-D\-E\-N\-T\-A\-L, S\-P\-E\-C\-I\-A\-L, E\-X\-E\-M\-P\-L\-A\-R\-Y, O\-R C\-O\-N\-S\-E\-Q\-U\-E\-N\-T\-I\-A\-L D\-A\-M\-A\-G\-E\-S (I\-N\-C\-L\-U\-D\-I\-N\-G, B\-U\-T N\-O\-T L\-I\-M\-I\-T\-E\-D T\-O, P\-R\-O\-C\-U\-R\-E\-M\-E\-N\-T O\-F S\-U\-B\-S\-T\-I\-T\-U\-T\-E G\-O\-O\-D\-S O\-R S\-E\-R\-V\-I\-C\-E\-S; L\-O\-S\-S O\-F U\-S\-E, D\-A\-T\-A, O\-R P\-R\-O\-F\-I\-T\-S; O\-R B\-U\-S\-I\-N\-E\-S\-S I\-N\-T\-E\-R\-R\-U\-P\-T\-I\-O\-N) H\-O\-W\-E\-V\-E\-R C\-A\-U\-S\-E\-D A\-N\-D O\-N A\-N\-Y T\-H\-E\-O\-R\-Y O\-F L\-I\-A\-B\-I\-L\-I\-T\-Y, W\-H\-E\-T\-H\-E\-R I\-N C\-O\-N\-T\-R\-A\-C\-T, S\-T\-R\-I\-C\-T L\-I\-A\-B\-I\-L\-I\-T\-Y, O\-R T\-O\-R\-T (I\-N\-C\-L\-U\-D\-I\-N\-G N\-E\-G\-L\-I\-G\-E\-N\-C\-E O\-R O\-T\-H\-E\-R\-W\-I\-S\-E) A\-R\-I\-S\-I\-N\-G I\-N A\-N\-Y W\-A\-Y O\-U\-T O\-F T\-H\-E U\-S\-E O\-F T\-H\-I\-S S\-O\-F\-T\-W\-A\-R\-E, E\-V\-E\-N I\-F A\-D\-V\-I\-S\-E\-D O\-F T\-H\-E P\-O\-S\-S\-I\-B\-I\-L\-I\-T\-Y O\-F S\-U\-C\-H D\-A\-M\-A\-G\-E. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Map/Ambisonic\-Map.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Map/Ambisonic\-Map.\-cpp\end{DoxyCompactItemize}

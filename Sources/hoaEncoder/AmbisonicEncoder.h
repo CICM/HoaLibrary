@@ -29,6 +29,10 @@
 
 #include "../HoaAmbisonics/Ambisonic.h"
 
+//!  An ambisonic encoder.
+/*!
+ The class encodes a signal in the circular harmonics domain depending of an angle (azimuth) and a given order.
+ */
 class AmbisonicEncoder : public Ambisonic
 {
 	
@@ -43,33 +47,58 @@ private:
     cicm_vector_double	m_vector_double;
     
 public:
+    //! The encoder constructor.
+    /*!
+     \param anOrder The ambisonic decomposition order.
+     \param aVectorSize The size of the samples block.
+     */
 	AmbisonicEncoder(long anOrder = 1, long aVectorSize = 0);
-
+    
+    //! The encoder destructor.
+    ~AmbisonicEncoder();
+    
+    //! The vector size setter.
+    /*!
+     \param aVectorSize The size of the samples block.
+     */
     void    setVectorSize(long aVectorSize);
+    
+    //! The angle setter.
+    /*!
+     \param anAngle The angle of encoding in radian.
+     */
 	void	setAngle(double anAngle);
     
-	~AmbisonicEncoder();
-    
     /********************************************************************/
-    /**************************** Basic Mode ****************************/
+    /****************************** PERFORM *****************************/
     /********************************************************************/
     
-    /************************************************************************************/
-    /***************************** Perform sample by sample *****************************/
-    /************************************************************************************/
-    
-    /*********************************** Out Of Place ***********************************/
-    
+    //! The sample by sample perform method - double precision - not in place.
+    /*!
+     \param input The input sample.
+     \param outputs The harmonics output array.
+     */
     inline void process(const double input, double* outputs)
 	{
         cicm_product_vec_sca_vec_d(m_harmonics_vector_double, input, outputs, m_number_of_harmonics);
 	}
-
+    
+    //! The sample by sample perform method - single precision - not in place.
+    /*!
+     \param input The input sample.
+     \param outputs The harmonics output array.
+     */
     inline void process(const float input, float* outputs)
 	{
         cicm_product_vec_sca_vec_f(m_harmonics_vector_float, input, outputs, m_number_of_harmonics);
 	}
     
+    //! The sample by sample perform method with angle - double precision - not in place.
+    /*!
+     \param input The input sample.
+     \param outputs The harmonics output array.
+     \param angle The angle of encoding in radian.
+     */
     inline void process(const double input, double* outputs, const double angle)
 	{
 		int index = Tools::radian_wrap(angle) * CICM_1OVER2PI_RATIO;
@@ -80,6 +109,12 @@ public:
 		process(input, outputs);
 	}
     
+    //! The sample by sample perform method with angle - single precision - not in place.
+    /*!
+     \param input The input sample.
+     \param outputs The harmonics output array.
+     \param angle The angle of encoding in radian.
+     */
     inline void process(const float input, float* outputs, const float angle)
 	{
         int index = Tools::radian_wrap(angle) * CICM_1OVER2PI_RATIO;
@@ -90,26 +125,43 @@ public:
 		process(input, outputs);
 	}
 		
-    /************************************* In Place *************************************/
-    
+
+    //! The sample by sample perform method - double precision - in place.
+    /*!
+     \param ioVector The input sample and harmonics output array.
+     */
     inline void process(double* ioVector)
 	{
         double input = ioVector[0];
         process(input, ioVector);
 	}
     
+    //! The sample by sample perform method - single precision - in place.
+    /*!
+     \param ioVector The input sample and harmonics output array.
+     */
     inline void process(float* ioVector)
 	{
         float input = ioVector[0];
         process(input, ioVector);
 	}
     
+    //! The sample by sample perform method with angle - double precision - in place.
+    /*!
+     \param ioVector The input sample and harmonics output array.
+     \param angle The angle of encoding in radian.
+     */
     inline void process(double* ioVector, const double angle)
 	{
 		double input = ioVector[0];
         process(input, ioVector, angle);
 	}
     
+    //! The sample by sample perform method with angle - double precision - in place.
+    /*!
+     \param ioVector The input sample and harmonics output array.
+     \param angle The angle of encoding in radian.
+     */
     inline void process(float* ioVector, const float angle)
 	{
         float input = ioVector[0];

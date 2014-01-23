@@ -1,0 +1,91 @@
+\hypertarget{class_filter}{\section{Filter Class Reference}
+\label{class_filter}\index{Filter@{Filter}}
+}
+
+
+{\ttfamily \#include $<$Cicm\-Filter.\-h$>$}
+
+Inheritance diagram for Filter\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=10.000000cm]{class_filter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_filter_a5c6deec2210aaa2664d512ec35a5dfc0}{Filter} (long a\-Vector\-Size=0, long a\-Sampling\-Rate=44100)
+\item 
+\hypertarget{class_filter_aa8f928748937e51095a22ce29c9c08c4}{long {\bfseries get\-Vector\-Size} ()}\label{class_filter_aa8f928748937e51095a22ce29c9c08c4}
+
+\item 
+\hypertarget{class_filter_aceb44fa5badb70e5f35fd7388288650b}{long {\bfseries get\-Sampling\-Rate} ()}\label{class_filter_aceb44fa5badb70e5f35fd7388288650b}
+
+\item 
+\hypertarget{class_filter_a8ee16a822086b1a96ac6b625c77d923d}{void {\bfseries set\-Vector\-Size} (long a\-Vector\-Size)}\label{class_filter_a8ee16a822086b1a96ac6b625c77d923d}
+
+\item 
+\hypertarget{class_filter_a02c21fa49f5a8837a1ece9db10722493}{void {\bfseries set\-Sampling\-Rate} (long a\-Sampling\-Rate)}\label{class_filter_a02c21fa49f5a8837a1ece9db10722493}
+
+\item 
+\hypertarget{class_filter_ac7f8d9d379dcc40e98d4204eac023f22}{float {\bfseries process} (float input)}\label{class_filter_ac7f8d9d379dcc40e98d4204eac023f22}
+
+\item 
+\hypertarget{class_filter_a2379f87a7f71d76069abfcc090aaa24c}{double {\bfseries process} (double input)}\label{class_filter_a2379f87a7f71d76069abfcc090aaa24c}
+
+\item 
+\hypertarget{class_filter_a250100634bd88b32db92b248cc49d2d7}{void {\bfseries process} (float $\ast$inputs, float $\ast$outputs)}\label{class_filter_a250100634bd88b32db92b248cc49d2d7}
+
+\item 
+\hypertarget{class_filter_ab5c77fb6f129588d6b1fedb51de1b12e}{void {\bfseries process} (double $\ast$inputs, double $\ast$outputs)}\label{class_filter_ab5c77fb6f129588d6b1fedb51de1b12e}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_filter_af9ca666c9fe182e676238dac04429954}{long {\bfseries m\-\_\-vector\-\_\-size}}\label{class_filter_af9ca666c9fe182e676238dac04429954}
+
+\item 
+\hypertarget{class_filter_a320edddf1bc2586ac19c9f5cd833bd82}{long {\bfseries m\-\_\-sampling\-\_\-rate}}\label{class_filter_a320edddf1bc2586ac19c9f5cd833bd82}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.\-re Guillot, C\-I\-C\-M -\/ Université Paris 8 All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/HoaLibrary/}{\tt http\-://www.\-mshparisnord.\-fr/\-Hoa\-Library/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+This file is part of H\-O\-A L\-I\-B\-R\-A\-R\-Y.
+
+H\-O\-A L\-I\-B\-R\-A\-R\-Y is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_filter_a5c6deec2210aaa2664d512ec35a5dfc0}{\index{Filter@{Filter}!Filter@{Filter}}
+\index{Filter@{Filter}!Filter@{Filter}}
+\subsubsection[{Filter}]{\setlength{\rightskip}{0pt plus 5cm}Filter\-::\-Filter (
+\begin{DoxyParamCaption}
+\item[{long}]{a\-Vector\-Size = {\ttfamily 0}, }
+\item[{long}]{a\-Sampling\-Rate = {\ttfamily 44100}}
+\end{DoxyParamCaption}
+)}}\label{class_filter_a5c6deec2210aaa2664d512ec35a5dfc0}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.\-re Guillot, C\-I\-C\-M -\/ Université Paris 8 All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/HoaLibrary/}{\tt http\-://www.\-mshparisnord.\-fr/\-Hoa\-Library/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+This file is part of H\-O\-A L\-I\-B\-R\-A\-R\-Y.
+
+H\-O\-A L\-I\-B\-R\-A\-R\-Y is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Cicm\-Library/\-Cicm\-Filters/Cicm\-Filter.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Cicm\-Library/\-Cicm\-Filters/Cicm\-Filter.\-cpp\end{DoxyCompactItemize}

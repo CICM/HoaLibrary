@@ -113,7 +113,6 @@
 		8FBD781B187AF079003146C6 /* epopup.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD77F7187AF079003146C6 /* epopup.c */; };
 		8FBD781C187AF079003146C6 /* epopup.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FBD77F8187AF079003146C6 /* epopup.h */; };
 		8FBD781D187AF079003146C6 /* estruct.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FBD77F9187AF079003146C6 /* estruct.h */; };
-		8FBD781E187AF079003146C6 /* pd_enhanced.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FBD77FB187AF079003146C6 /* pd_enhanced.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -224,7 +223,6 @@
 		8FBD77F7187AF079003146C6 /* epopup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = epopup.c; sourceTree = "<group>"; };
 		8FBD77F8187AF079003146C6 /* epopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = epopup.h; sourceTree = "<group>"; };
 		8FBD77F9187AF079003146C6 /* estruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = estruct.h; sourceTree = "<group>"; };
-		8FBD77FB187AF079003146C6 /* pd_enhanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pd_enhanced.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,7 +451,6 @@
 				8FBD77F6187AF079003146C6 /* epopup */,
 				8FBD77F9187AF079003146C6 /* estruct.h */,
 				8FBD77FA187AF079003146C6 /* ewidget */,
-				8FBD77FB187AF079003146C6 /* pd_enhanced.h */,
 			);
 			name = Sources;
 			path = ../../../PdEnhanced/Sources;
@@ -585,7 +582,6 @@
 				8F16090417D3269700CE8933 /* Ambisonic.h in Headers */,
 				8F16090617D3269700CE8933 /* Ambisonic3D.h in Headers */,
 				8F16090817D3269700CE8933 /* AmbisonicsDiffuser.h in Headers */,
-				8FBD781E187AF079003146C6 /* pd_enhanced.h in Headers */,
 				8FBD77FC187AF079003146C6 /* ebox.h in Headers */,
 				8F16090C17D3269700CE8933 /* Planewaves.h in Headers */,
 				8F16093117D3269700CE8933 /* HoaLibrary.h in Headers */,

@@ -52,8 +52,8 @@ extern "C" void setup_hoa0x2epi(void)
     eclass_addmethod(c, (method)pi_bang,     "bang",      A_CANT, 0);
     eclass_addmethod(c, (method)pi_float,    "float",      A_FLOAT, 0);
 
-    eclass_register(CLASS_BOX, c);
-    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    eclass_register(CLASS_OBJ, c);
+    hoa_post();
     pi_class = c;
 }
 

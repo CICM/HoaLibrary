@@ -53,7 +53,7 @@ extern "C" void setup_hoa0x2edac_tilde(void)
     CLASS_MAINSIGNALIN(c, t_hoa_dac, x_f);
     class_addmethod(c, (t_method)hoa_dac_dsp, gensym("dsp"), A_CANT, 0);
     hoa_dac_class = c;
-    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    hoa_post();
 }
 
 void *hoa_dac_new(t_symbol *s, long argc, t_atom *argv)

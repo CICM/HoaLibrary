@@ -185,8 +185,8 @@ extern "C" void setup_hoa0x2espace(void)
 	CLASS_ATTR_SAVE                 (c, "circolor", 0);
     CLASS_ATTR_STYLE                (c, "circolor", 0, "color");
     
-    eclass_register(CLASS_NOBOX, c);
-    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    eclass_register(CLASS_BOX, c);
+    hoa_post();
     hoa_space_class = c;
 }
 

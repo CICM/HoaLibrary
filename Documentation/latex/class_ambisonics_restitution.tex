@@ -1,0 +1,84 @@
+\hypertarget{class_ambisonics_restitution}{\section{Ambisonics\-Restitution Class Reference}
+\label{class_ambisonics_restitution}\index{Ambisonics\-Restitution@{Ambisonics\-Restitution}}
+}
+Inheritance diagram for Ambisonics\-Restitution\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_ambisonics_restitution}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_ambisonics_restitution_a287ce5a5b5d247af6c11e7bd0e50a4ab}{Ambisonics\-Restitution} (long an\-Order=1, long a\-Number\-Of\-Loudspeakers=5, long a\-Resitution\-Mode=Hoa\-\_\-\-Amplitude\-\_\-\-Panning, long a\-Vector\-Size=0)
+\item 
+\hypertarget{class_ambisonics_restitution_a26b720484714bfd5d838799a8bd14b15}{void {\bfseries set\-Restitution\-Mode} (long a\-Resitution\-Mode)}\label{class_ambisonics_restitution_a26b720484714bfd5d838799a8bd14b15}
+
+\item 
+\hypertarget{class_ambisonics_restitution_aa596940fef66d9e7094977533c981c7d}{void {\bfseries set\-Number\-Of\-Loudspeakers} (long a\-Number\-Of\-Loudspeakers, bool standard\-On\-Off=1)}\label{class_ambisonics_restitution_aa596940fef66d9e7094977533c981c7d}
+
+\item 
+\hypertarget{class_ambisonics_restitution_a6aafaf436e115524fc51eb5033bdf623}{void {\bfseries set\-Loudspeaker\-Angle} (long an\-Index, double an\-Angle)}\label{class_ambisonics_restitution_a6aafaf436e115524fc51eb5033bdf623}
+
+\item 
+\hypertarget{class_ambisonics_restitution_a936acf7cb829cbbad814f85e1c8d3150}{void {\bfseries set\-Loudspeakers\-Angles} (double $\ast$angles, long a\-Number\-Of\-Loudspeakers)}\label{class_ambisonics_restitution_a936acf7cb829cbbad814f85e1c8d3150}
+
+\item 
+\hypertarget{class_ambisonics_restitution_a1b15c63c310b10efc79628acc6e3e214}{long {\bfseries get\-Restitution\-Mode} ()}\label{class_ambisonics_restitution_a1b15c63c310b10efc79628acc6e3e214}
+
+\item 
+\hypertarget{class_ambisonics_restitution_a95681bf8b8f7751ef6b2a09a9b204969}{double {\bfseries get\-Configuration} ()}\label{class_ambisonics_restitution_a95681bf8b8f7751ef6b2a09a9b204969}
+
+\item 
+\hypertarget{class_ambisonics_restitution_aa951a434f4daa911e5b54c0893bf608f}{double {\bfseries get\-Loudspeaker\-Angle} (long an\-Index)}\label{class_ambisonics_restitution_aa951a434f4daa911e5b54c0893bf608f}
+
+\item 
+\hypertarget{class_ambisonics_restitution_a3bf0a676a9d45d40e1677ddd382b3d6d}{std\-::string {\bfseries get\-Loudspeaker\-Name} (long an\-Index)}\label{class_ambisonics_restitution_a3bf0a676a9d45d40e1677ddd382b3d6d}
+
+\item 
+\hypertarget{class_ambisonics_restitution_ae73551b98fc20ee4b162a2e4af70d83f}{void {\bfseries process} (double $\ast$a\-Inputs, double $\ast$a\-Outputs)}\label{class_ambisonics_restitution_ae73551b98fc20ee4b162a2e4af70d83f}
+
+\item 
+\hypertarget{class_ambisonics_restitution_a28ab9d40c20c9a93a5dc1a695ae733ab}{void {\bfseries process} (float $\ast$a\-Inputs, float $\ast$a\-Outputs)}\label{class_ambisonics_restitution_a28ab9d40c20c9a93a5dc1a695ae733ab}
+
+\item 
+\hypertarget{class_ambisonics_restitution_acebd4cc20eac6b8e6337fffaaba59466}{void {\bfseries process} (double $\ast$$\ast$a\-Inputs, double $\ast$$\ast$a\-Outputs)}\label{class_ambisonics_restitution_acebd4cc20eac6b8e6337fffaaba59466}
+
+\item 
+\hypertarget{class_ambisonics_restitution_a07a0aab6e3a35be52d562413d8f7856c}{void {\bfseries process} (float $\ast$$\ast$a\-Inputs, float $\ast$$\ast$a\-Outputs)}\label{class_ambisonics_restitution_a07a0aab6e3a35be52d562413d8f7856c}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_ambisonics_restitution_a287ce5a5b5d247af6c11e7bd0e50a4ab}{\index{Ambisonics\-Restitution@{Ambisonics\-Restitution}!Ambisonics\-Restitution@{Ambisonics\-Restitution}}
+\index{Ambisonics\-Restitution@{Ambisonics\-Restitution}!AmbisonicsRestitution@{Ambisonics\-Restitution}}
+\subsubsection[{Ambisonics\-Restitution}]{\setlength{\rightskip}{0pt plus 5cm}Ambisonics\-Restitution\-::\-Ambisonics\-Restitution (
+\begin{DoxyParamCaption}
+\item[{long}]{an\-Order = {\ttfamily 1}, }
+\item[{long}]{a\-Number\-Of\-Loudspeakers = {\ttfamily 5}, }
+\item[{long}]{a\-Resitution\-Mode = {\ttfamily Hoa\-\_\-Amplitude\-\_\-Panning}, }
+\item[{long}]{a\-Vector\-Size = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonics_restitution_a287ce5a5b5d247af6c11e7bd0e50a4ab}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/hoalibrary/}{\tt http\-://www.\-mshparisnord.\-fr/hoalibrary/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met\-:
+
+
+\begin{DoxyItemize}
+\item Redistributions may not be sold, nor may they be used in a commercial product or activity.
+\item Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+\item Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+\item Neither the name of the C\-I\-C\-M nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+\end{DoxyItemize}
+
+T\-H\-I\-S S\-O\-F\-T\-W\-A\-R\-E I\-S P\-R\-O\-V\-I\-D\-E\-D B\-Y T\-H\-E C\-O\-P\-Y\-R\-I\-G\-H\-T H\-O\-L\-D\-E\-R\-S A\-N\-D C\-O\-N\-T\-R\-I\-B\-U\-T\-O\-R\-S \char`\"{}\-A\-S I\-S\char`\"{} A\-N\-D A\-N\-Y E\-X\-P\-R\-E\-S\-S O\-R I\-M\-P\-L\-I\-E\-D W\-A\-R\-R\-A\-N\-T\-I\-E\-S, I\-N\-C\-L\-U\-D\-I\-N\-G, B\-U\-T N\-O\-T L\-I\-M\-I\-T\-E\-D T\-O, T\-H\-E I\-M\-P\-L\-I\-E\-D W\-A\-R\-R\-A\-N\-T\-I\-E\-S O\-F M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y A\-N\-D F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E A\-R\-E D\-I\-S\-C\-L\-A\-I\-M\-E\-D. I\-N N\-O E\-V\-E\-N\-T S\-H\-A\-L\-L T\-H\-E C\-O\-P\-Y\-R\-I\-G\-H\-T H\-O\-L\-D\-E\-R O\-R C\-O\-N\-T\-R\-I\-B\-U\-T\-O\-R\-S B\-E L\-I\-A\-B\-L\-E F\-O\-R A\-N\-Y D\-I\-R\-E\-C\-T, I\-N\-D\-I\-R\-E\-C\-T, I\-N\-C\-I\-D\-E\-N\-T\-A\-L, S\-P\-E\-C\-I\-A\-L, E\-X\-E\-M\-P\-L\-A\-R\-Y, O\-R C\-O\-N\-S\-E\-Q\-U\-E\-N\-T\-I\-A\-L D\-A\-M\-A\-G\-E\-S (I\-N\-C\-L\-U\-D\-I\-N\-G, B\-U\-T N\-O\-T L\-I\-M\-I\-T\-E\-D T\-O, P\-R\-O\-C\-U\-R\-E\-M\-E\-N\-T O\-F S\-U\-B\-S\-T\-I\-T\-U\-T\-E G\-O\-O\-D\-S O\-R S\-E\-R\-V\-I\-C\-E\-S; L\-O\-S\-S O\-F U\-S\-E, D\-A\-T\-A, O\-R P\-R\-O\-F\-I\-T\-S; O\-R B\-U\-S\-I\-N\-E\-S\-S I\-N\-T\-E\-R\-R\-U\-P\-T\-I\-O\-N) H\-O\-W\-E\-V\-E\-R C\-A\-U\-S\-E\-D A\-N\-D O\-N A\-N\-Y T\-H\-E\-O\-R\-Y O\-F L\-I\-A\-B\-I\-L\-I\-T\-Y, W\-H\-E\-T\-H\-E\-R I\-N C\-O\-N\-T\-R\-A\-C\-T, S\-T\-R\-I\-C\-T L\-I\-A\-B\-I\-L\-I\-T\-Y, O\-R T\-O\-R\-T (I\-N\-C\-L\-U\-D\-I\-N\-G N\-E\-G\-L\-I\-G\-E\-N\-C\-E O\-R O\-T\-H\-E\-R\-W\-I\-S\-E) A\-R\-I\-S\-I\-N\-G I\-N A\-N\-Y W\-A\-Y O\-U\-T O\-F T\-H\-E U\-S\-E O\-F T\-H\-I\-S S\-O\-F\-T\-W\-A\-R\-E, E\-V\-E\-N I\-F A\-D\-V\-I\-S\-E\-D O\-F T\-H\-E P\-O\-S\-S\-I\-B\-I\-L\-I\-T\-Y O\-F S\-U\-C\-H D\-A\-M\-A\-G\-E. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Restitution/Ambisonics\-Restitution.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Restitution/Ambisonics\-Restitution.\-cpp\end{DoxyCompactItemize}

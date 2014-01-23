@@ -55,7 +55,7 @@ extern "C" void setup_hoa0x2ewider_tilde(void)
     
 	eclass_addmethod(c, (method)hoa_wider_dsp,       "dsp",      A_CANT, 0);
     
-    eclass_register(CLASS_BOX, c);
+    eclass_register(CLASS_OBJ, c);
     hoa_wider_class = c;
 }
 

@@ -66,14 +66,14 @@
 
 /******************************* Matrix *********************************************/
 
-#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_float)calloc(number_of_rows * columns_size, sizeof(float) );
-#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_double)calloc(number_of_rows * columns_size, sizeof(double));
+#define	cicm_malloc_mat_f(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_float)calloc(number_of_rows * columns_size, sizeof(float) )
+#define	cicm_malloc_mat_d(matrix, number_of_rows, columns_size) matrix = (cicm_matrix_double)calloc(number_of_rows * columns_size, sizeof(double))
 
 /************************************************************************************/
 /************************************* FREE *****************************************/
 /************************************************************************************/
 
-#define cicm_free(pointor) free(pointor); pointor = NULL;
+#define cicm_free(pointor) free(pointor); pointor = NULL
 
 /************************************************************************************/
 /************************************* SET ******************************************/

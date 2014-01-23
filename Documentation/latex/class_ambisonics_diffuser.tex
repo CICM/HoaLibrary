@@ -1,0 +1,82 @@
+\hypertarget{class_ambisonics_diffuser}{\section{Ambisonics\-Diffuser Class Reference}
+\label{class_ambisonics_diffuser}\index{Ambisonics\-Diffuser@{Ambisonics\-Diffuser}}
+}
+Inheritance diagram for Ambisonics\-Diffuser\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_ambisonics_diffuser}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_ambisonics_diffuser_a3cb3d33fc7fc15d85b337860c2a0fc34}{Ambisonics\-Diffuser} (long an\-Order=1, bool a\-Mode=Hoa\-\_\-\-Post\-\_\-\-Encoding, long a\-Vector\-Size=0, long a\-Sampling\-Rate=44100.)
+\item 
+\hypertarget{class_ambisonics_diffuser_afdd0d434a6cb43eb3e47f972e493f2c4}{void {\bfseries set\-Diffuse\-Factor} (double a\-Diffuse\-Value)}\label{class_ambisonics_diffuser_afdd0d434a6cb43eb3e47f972e493f2c4}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_ab05839b199ddb9f92b8f1948e5970b06}{void {\bfseries set\-Encoding\-Compensation} (bool On\-Off)}\label{class_ambisonics_diffuser_ab05839b199ddb9f92b8f1948e5970b06}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_a2c850e27e326b129603d40efb12357ee}{bool {\bfseries get\-Mode} ()}\label{class_ambisonics_diffuser_a2c850e27e326b129603d40efb12357ee}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_a2ac77f3c5d9639f956069dc1ae5bc0e5}{double {\bfseries get\-Diffuse\-Factor} ()}\label{class_ambisonics_diffuser_a2ac77f3c5d9639f956069dc1ae5bc0e5}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_ad43d03bf998b4d8a2995a25f2ff63d46}{bool {\bfseries get\-Encoding\-Compensation} ()}\label{class_ambisonics_diffuser_ad43d03bf998b4d8a2995a25f2ff63d46}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_a2c02b3301030cede803a7509c5d6a08e}{void {\bfseries process} (float $\ast$inputs, float $\ast$outputs)}\label{class_ambisonics_diffuser_a2c02b3301030cede803a7509c5d6a08e}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_a628e553a0e671905c1d2f5e1616a7301}{void {\bfseries process} (double $\ast$inputs, double $\ast$outputs)}\label{class_ambisonics_diffuser_a628e553a0e671905c1d2f5e1616a7301}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_ae88b27ffc2b084b7ad65e3710e9f7b8a}{void {\bfseries process} (float $\ast$$\ast$inputs, float $\ast$$\ast$outputs)}\label{class_ambisonics_diffuser_ae88b27ffc2b084b7ad65e3710e9f7b8a}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_a6362f16732794b5298eead6c94b26cb2}{void {\bfseries process} (double $\ast$$\ast$inputs, double $\ast$$\ast$outputs)}\label{class_ambisonics_diffuser_a6362f16732794b5298eead6c94b26cb2}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ambisonics_diffuser_a122e5c796dbd98833e3cbdb9e58b91c1}{double {\bfseries m\-\_\-diffuse\-\_\-factor}}\label{class_ambisonics_diffuser_a122e5c796dbd98833e3cbdb9e58b91c1}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_ad1557d027718de4225aab08059d5a924}{bool {\bfseries m\-\_\-mode}}\label{class_ambisonics_diffuser_ad1557d027718de4225aab08059d5a924}
+
+\item 
+\hypertarget{class_ambisonics_diffuser_a4c5adcade0353f05b035784851f1ee6b}{bool {\bfseries m\-\_\-encoding\-\_\-compensation}}\label{class_ambisonics_diffuser_a4c5adcade0353f05b035784851f1ee6b}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_ambisonics_diffuser_a3cb3d33fc7fc15d85b337860c2a0fc34}{\index{Ambisonics\-Diffuser@{Ambisonics\-Diffuser}!Ambisonics\-Diffuser@{Ambisonics\-Diffuser}}
+\index{Ambisonics\-Diffuser@{Ambisonics\-Diffuser}!AmbisonicsDiffuser@{Ambisonics\-Diffuser}}
+\subsubsection[{Ambisonics\-Diffuser}]{\setlength{\rightskip}{0pt plus 5cm}Ambisonics\-Diffuser\-::\-Ambisonics\-Diffuser (
+\begin{DoxyParamCaption}
+\item[{long}]{an\-Order = {\ttfamily 1}, }
+\item[{bool}]{a\-Mode = {\ttfamily Hoa\-\_\-Post\-\_\-Encoding}, }
+\item[{long}]{a\-Vector\-Size = {\ttfamily 0}, }
+\item[{long}]{a\-Sampling\-Rate = {\ttfamily 44100.}}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonics_diffuser_a3cb3d33fc7fc15d85b337860c2a0fc34}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.\-re Guillot, C\-I\-C\-M -\/ Université Paris 8 All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/HoaLibrary/}{\tt http\-://www.\-mshparisnord.\-fr/\-Hoa\-Library/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+This file is part of H\-O\-A L\-I\-B\-R\-A\-R\-Y.
+
+H\-O\-A L\-I\-B\-R\-A\-R\-Y is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Ambisonics/Ambisonics\-Diffuser.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Ambisonics/Ambisonics\-Diffuser.\-cpp\end{DoxyCompactItemize}
