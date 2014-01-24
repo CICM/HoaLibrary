@@ -185,8 +185,8 @@ extern "C" void setup_hoa0x2emap(void)
     CLASS_ATTR_SAVE                 (c,"zoom", 0);
     CLASS_ATTR_PAINT                (c,"zoom", 0);
     
-    eclass_register(CLASS_NOBOX, c);
-    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    eclass_register(CLASS_BOX, c);
+    hoa_post();
 	hoamap_class = c;
 }
 
@@ -839,9 +839,9 @@ void hoamap_slot_save(t_hoamap *x, t_binbuf *d)
                             atom_setfloat(av+i+7, temporySourceManager->sourceGetColor(k).blue);
                             atom_setfloat(av+i+8, temporySourceManager->sourceGetColor(k).alpha);
                             if(x->f_source_manager->sourceGetDescription(i).c_str())
-                                atom_setsym(av+j+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+                                atom_setsym(av+i+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
                             else
-                                atom_setsym(av+j+9, gensym("(null)"));
+                                atom_setsym(av+i+9, gensym("(null)"));
                             
                             i += 10;
                         }
@@ -864,9 +864,9 @@ void hoamap_slot_save(t_hoamap *x, t_binbuf *d)
                             atom_setfloat(av+i+numberOfsource+6, temporySourceManager->groupGetColor(k).blue);
                             atom_setfloat(av+i+numberOfsource+7, temporySourceManager->groupGetColor(k).alpha);
                             if(x->f_source_manager->groupGetDescription(i).c_str())
-                                atom_setsym(av+j+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
+                                atom_setsym(av+i+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
                             else
-                                atom_setsym(av+j+numberOfsource+8, gensym("(null)"));
+                                atom_setsym(av+i+numberOfsource+8, gensym("(null)"));
                             
                             i += numberOfsource + 9;
                         }
@@ -931,7 +931,10 @@ void hoamap_trajectory_save(t_hoamap *x, t_binbuf *d)
                             atom_setfloat(av+i+6, temporySourceManager->sourceGetColor(k).green);
                             atom_setfloat(av+i+7, temporySourceManager->sourceGetColor(k).blue);
                             atom_setfloat(av+i+8, temporySourceManager->sourceGetColor(k).alpha);
-                            atom_setsym(av+i+9, gensym(temporySourceManager->sourceGetDescription(k).c_str()));
+                            if(x->f_source_manager->sourceGetDescription(i).c_str())
+                                atom_setsym(av+i+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
+                            else
+                                atom_setsym(av+i+9, gensym("(null)"));
                             
                             i += 10;
                         }
@@ -953,7 +956,10 @@ void hoamap_trajectory_save(t_hoamap *x, t_binbuf *d)
                             atom_setfloat(av+i+numberOfsource+5, temporySourceManager->groupGetColor(k).green);
                             atom_setfloat(av+i+numberOfsource+6, temporySourceManager->groupGetColor(k).blue);
                             atom_setfloat(av+i+numberOfsource+7, temporySourceManager->groupGetColor(k).alpha);
-                            atom_setsym(av+i+numberOfsource+8, gensym(temporySourceManager->groupGetDescription(k).c_str()));
+                            if(x->f_source_manager->groupGetDescription(i).c_str())
+                                atom_setsym(av+i+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
+                            else
+                                atom_setsym(av+i+numberOfsource+8, gensym("(null)"));
                             
                             i += numberOfsource + 9;
                         }
@@ -979,7 +985,10 @@ void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av)
                 x->f_source_manager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
                 x->f_source_manager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
                 x->f_source_manager->sourceSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
-                x->f_source_manager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
+                if(atom_getsym(av+i+9) != gensym("(null)") && atom_getsym(av+i+9) != gensym("s_nosymbol") && atom_getsym(av+i+9) != gensym(" "))
+                {
+                    x->f_source_manager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
+                }
                 i += 8;
             }
         }
@@ -1002,7 +1011,11 @@ void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
                 if(atom_getlong(av+i+3+numberOfsource) == 1)
                     x->f_source_manager->groupSetMute(atom_getlong(av+i+1), 1);
                 x->f_source_manager->groupSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
-                x->f_source_manager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
+                if(atom_getsym(av+i+7+numberOfsource) != gensym("(null)") && atom_getsym(av+i+8+numberOfsource) != gensym("s_nosymbol") && atom_getsym(av+i+7+numberOfsource) != gensym(" "))
+                {
+                    x->f_source_manager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+7+numberOfsource)->s_name);
+                }
+                
                 i += numberOfsource + 7;
             }
         }
@@ -1604,7 +1617,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     egraphics_set_color_rgba(g, &sourceColor);
                     egraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.,  0., EPD_2PI);
                     egraphics_stroke(g);
-                    etext_layout_set(jtl, text, &x->j_box.b_font, sourcePositionX, sourcePositionY, fontSize * 10., fontSize * 2., ETEXT_LEFT, ETEXT_JLEFT, ETEXT_NOWRAP);
+                    etext_layout_set(jtl, text, &x->j_box.b_font, sourcePositionX, sourcePositionY, fontSize * 10., fontSize * 2., ETEXT_CENTER, ETEXT_JLEFT, ETEXT_NOWRAP);
                     etext_layout_draw(jtl, g);
                 
                 }

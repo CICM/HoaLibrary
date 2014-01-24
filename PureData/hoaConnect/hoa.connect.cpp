@@ -48,9 +48,9 @@ extern "C" void setup_hoa0x2econnect(void)
     c = eclass_new("hoa.connect", (method)hoa_connect_new, (method)hoa_connect_free, (short)sizeof(t_hoa_connect), 0, A_GIMME, 0);
     eclass_addmethod(c, (method)hoa_connect_bang,          "bang",             A_CANT, 0);
     
-    eclass_register(CLASS_BOX, c);
+    eclass_register(CLASS_OBJ, c);
     hoa_connect_class = c;
-    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    hoa_post();
 }
 
 void *hoa_connect_new(t_symbol *s, long argc, t_atom *argv)

@@ -156,8 +156,8 @@ extern "C" void setup_hoa0x2escope_tilde(void)
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "nhcolor", 0, "0. 0. 1. 1.");
 	CLASS_ATTR_STYLE                (c, "nhcolor", 1, "color");
     
-    eclass_register(CLASS_NOBOX, c);
-    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    eclass_register(CLASS_BOX, c);
+    hoa_post();
 	scope_class = c;
 	
 }

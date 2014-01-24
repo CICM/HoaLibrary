@@ -1,0 +1,145 @@
+\hypertarget{class_ambisonic_wider}{\section{Ambisonic\-Wider Class Reference}
+\label{class_ambisonic_wider}\index{Ambisonic\-Wider@{Ambisonic\-Wider}}
+}
+
+
+An ambisonic wider.  
+
+
+
+
+{\ttfamily \#include $<$Ambisonic\-Wider.\-h$>$}
+
+Inheritance diagram for Ambisonic\-Wider\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_ambisonic_wider}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_ambisonic_wider_a8e46f8e6bc4eda1c6c17f632d2e1a12f}{Ambisonic\-Wider} (long an\-Order=1, long a\-Vector\-Size=2)
+\begin{DoxyCompactList}\small\item\em The wider constructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_ambisonic_wider_a26597b62bcb8d892591ad5362702edca}{set\-Widen\-Value} (double a\-Widening\-Value)
+\begin{DoxyCompactList}\small\item\em Set the widening value. \end{DoxyCompactList}\item 
+void \hyperlink{class_ambisonic_wider_af970c4c71f96afa96649d9c1a1387043}{set\-Vector\-Size} (long a\-Vector\-Size)
+\begin{DoxyCompactList}\small\item\em Set the size of the samples block. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_ambisonic_wider_a405f99a0427aa56d945acbe7f1a09582}{get\-Input\-Name} (long an\-Index)
+\begin{DoxyCompactList}\small\item\em Retreive the name of an input. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_ambisonic_wider_a5c5c88a09477812991122b290117faf9}{get\-Output\-Name} (long an\-Index)
+\begin{DoxyCompactList}\small\item\em Retreive the name of an output. \end{DoxyCompactList}\item 
+\hypertarget{class_ambisonic_wider_a98b370684ad2cc2d1bdf75add135f1c7}{\hyperlink{class_ambisonic_wider_a98b370684ad2cc2d1bdf75add135f1c7}{$\sim$\-Ambisonic\-Wider} ()}\label{class_ambisonic_wider_a98b370684ad2cc2d1bdf75add135f1c7}
+
+\begin{DoxyCompactList}\small\item\em The wider destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An ambisonic wider. 
+
+The wider class can be used to wide the diffusion of a localised sound. The order depending signals are weighted and appear in a logarithmic way to have linear changes. The class processing functions \-:sample by sample -\/ in place. sample by sample -\/ in place -\/ widening value setter. sample by sample -\/ not in place. sample by sample -\/ not in place -\/ widening value setter. samples block -\/ in place. samples block -\/ in place -\/ widening value setter. samples block -\/ not in place. samples block -\/ not in place -\/ widening value setter. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_ambisonic_wider_a8e46f8e6bc4eda1c6c17f632d2e1a12f}{\index{Ambisonic\-Wider@{Ambisonic\-Wider}!Ambisonic\-Wider@{Ambisonic\-Wider}}
+\index{Ambisonic\-Wider@{Ambisonic\-Wider}!AmbisonicWider@{Ambisonic\-Wider}}
+\subsubsection[{Ambisonic\-Wider}]{\setlength{\rightskip}{0pt plus 5cm}Ambisonic\-Wider\-::\-Ambisonic\-Wider (
+\begin{DoxyParamCaption}
+\item[{long}]{an\-Order = {\ttfamily 1}, }
+\item[{long}]{a\-Vector\-Size = {\ttfamily 2}}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonic_wider_a8e46f8e6bc4eda1c6c17f632d2e1a12f}
+
+
+The wider constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an\-Order} & The ambisonic decomposition order. \\
+\hline
+{\em a\-Vector\-Size} & The size of the samples block.\\
+\hline
+\end{DoxyParams}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.\-re Guillot, C\-I\-C\-M -\/ Université Paris 8 All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/HoaLibrary/}{\tt http\-://www.\-mshparisnord.\-fr/\-Hoa\-Library/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+This file is part of H\-O\-A L\-I\-B\-R\-A\-R\-Y.
+
+H\-O\-A L\-I\-B\-R\-A\-R\-Y is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_ambisonic_wider_a405f99a0427aa56d945acbe7f1a09582}{\index{Ambisonic\-Wider@{Ambisonic\-Wider}!get\-Input\-Name@{get\-Input\-Name}}
+\index{get\-Input\-Name@{get\-Input\-Name}!AmbisonicWider@{Ambisonic\-Wider}}
+\subsubsection[{get\-Input\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Ambisonic\-Wider\-::get\-Input\-Name (
+\begin{DoxyParamCaption}
+\item[{long}]{an\-Index}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonic_wider_a405f99a0427aa56d945acbe7f1a09582}
+
+
+Retreive the name of an input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an\-Index} & The input index. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ambisonic_wider_a5c5c88a09477812991122b290117faf9}{\index{Ambisonic\-Wider@{Ambisonic\-Wider}!get\-Output\-Name@{get\-Output\-Name}}
+\index{get\-Output\-Name@{get\-Output\-Name}!AmbisonicWider@{Ambisonic\-Wider}}
+\subsubsection[{get\-Output\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Ambisonic\-Wider\-::get\-Output\-Name (
+\begin{DoxyParamCaption}
+\item[{long}]{an\-Index}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonic_wider_a5c5c88a09477812991122b290117faf9}
+
+
+Retreive the name of an output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em an\-Index} & The outpout index. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ambisonic_wider_af970c4c71f96afa96649d9c1a1387043}{\index{Ambisonic\-Wider@{Ambisonic\-Wider}!set\-Vector\-Size@{set\-Vector\-Size}}
+\index{set\-Vector\-Size@{set\-Vector\-Size}!AmbisonicWider@{Ambisonic\-Wider}}
+\subsubsection[{set\-Vector\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void Ambisonic\-Wider\-::set\-Vector\-Size (
+\begin{DoxyParamCaption}
+\item[{long}]{a\-Vector\-Size}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonic_wider_af970c4c71f96afa96649d9c1a1387043}
+
+
+Set the size of the samples block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\-Vector\-Size} & The size of the samples block (must be a power of 2). \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ambisonic_wider_a26597b62bcb8d892591ad5362702edca}{\index{Ambisonic\-Wider@{Ambisonic\-Wider}!set\-Widen\-Value@{set\-Widen\-Value}}
+\index{set\-Widen\-Value@{set\-Widen\-Value}!AmbisonicWider@{Ambisonic\-Wider}}
+\subsubsection[{set\-Widen\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Ambisonic\-Wider\-::set\-Widen\-Value (
+\begin{DoxyParamCaption}
+\item[{double}]{a\-Widening\-Value}
+\end{DoxyParamCaption}
+)}}\label{class_ambisonic_wider_a26597b62bcb8d892591ad5362702edca}
+
+
+Set the widening value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\-Widening\-Value} & The widening value (between 0 and 1). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Wider/Ambisonic\-Wider.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Wider/Ambisonic\-Wider.\-cpp\end{DoxyCompactItemize}

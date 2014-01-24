@@ -1,0 +1,91 @@
+\hypertarget{class_filter_convolution_zero}{\section{Filter\-Convolution\-Zero Class Reference}
+\label{class_filter_convolution_zero}\index{Filter\-Convolution\-Zero@{Filter\-Convolution\-Zero}}
+}
+
+
+{\ttfamily \#include $<$Cicm\-Filter\-Convolution\-Zero.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_filter_convolution_zero_ad8b99b17449c1f06f63679ff0f0f9daf}{Filter\-Convolution\-Zero} (long a\-Minimum\-Size=128, long a\-Maximum\-Size=32768)
+\item 
+\hypertarget{class_filter_convolution_zero_a8beb3fe66957237230d49bf0c29c7a6a}{void {\bfseries set\-Impulse\-Response} (float $\ast$an\-Impul\-Response, long a\-Size)}\label{class_filter_convolution_zero_a8beb3fe66957237230d49bf0c29c7a6a}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a99587aba1900a8321fc8dce7bc9f1c61}{void {\bfseries clear} ()}\label{class_filter_convolution_zero_a99587aba1900a8321fc8dce7bc9f1c61}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a5ac3b6f34c2abf7d74547f5a49b349d8}{long {\bfseries get\-Number\-Of\-F\-F\-Ts} ()}\label{class_filter_convolution_zero_a5ac3b6f34c2abf7d74547f5a49b349d8}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a17f92e18bd1f8bd10a5efc7bc6c1510c}{long {\bfseries get\-Number\-Of\-Instance} ()}\label{class_filter_convolution_zero_a17f92e18bd1f8bd10a5efc7bc6c1510c}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a96938a69a33f3a9c85f3c2ce21e7e40f}{double {\bfseries process} (const double input)}\label{class_filter_convolution_zero_a96938a69a33f3a9c85f3c2ce21e7e40f}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a8a6f23806e836d06ef8aaa4aebaded38}{float {\bfseries process} (const float input)}\label{class_filter_convolution_zero_a8a6f23806e836d06ef8aaa4aebaded38}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_filter_convolution_zero_a8db018405cb92c917d02f20d45b2dd65}{int {\bfseries m\-\_\-minimum\-\_\-size}}\label{class_filter_convolution_zero_a8db018405cb92c917d02f20d45b2dd65}
+
+\item 
+\hypertarget{class_filter_convolution_zero_add9e349da32a20fd6186edb0e28b92fc}{int {\bfseries m\-\_\-maximum\-\_\-size}}\label{class_filter_convolution_zero_add9e349da32a20fd6186edb0e28b92fc}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a9069f23a84d1c2f46f2c640e5be61897}{int {\bfseries m\-\_\-number\-\_\-of\-\_\-ffts}}\label{class_filter_convolution_zero_a9069f23a84d1c2f46f2c640e5be61897}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a4e6d5c985380124f57b86ab70bbe509c}{int {\bfseries m\-\_\-ffts\-\_\-useds}}\label{class_filter_convolution_zero_a4e6d5c985380124f57b86ab70bbe509c}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a201baa7ff84ae7b09df236627de03448}{\hyperlink{class_filter_fir}{Filter\-Fir} $\ast$ {\bfseries m\-\_\-fir}}\label{class_filter_convolution_zero_a201baa7ff84ae7b09df236627de03448}
+
+\item 
+\hypertarget{class_filter_convolution_zero_a03a3c81b87a781da55a97dd40aacdd68}{vector$<$ \hyperlink{class_filter_convolution}{Filter\-Convolution} $\ast$ $>$ {\bfseries m\-\_\-fft}}\label{class_filter_convolution_zero_a03a3c81b87a781da55a97dd40aacdd68}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.\-re Guillot, C\-I\-C\-M -\/ Université Paris 8 All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/HoaLibrary/}{\tt http\-://www.\-mshparisnord.\-fr/\-Hoa\-Library/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+This file is part of H\-O\-A L\-I\-B\-R\-A\-R\-Y.
+
+H\-O\-A L\-I\-B\-R\-A\-R\-Y is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_filter_convolution_zero_ad8b99b17449c1f06f63679ff0f0f9daf}{\index{Filter\-Convolution\-Zero@{Filter\-Convolution\-Zero}!Filter\-Convolution\-Zero@{Filter\-Convolution\-Zero}}
+\index{Filter\-Convolution\-Zero@{Filter\-Convolution\-Zero}!FilterConvolutionZero@{Filter\-Convolution\-Zero}}
+\subsubsection[{Filter\-Convolution\-Zero}]{\setlength{\rightskip}{0pt plus 5cm}Filter\-Convolution\-Zero\-::\-Filter\-Convolution\-Zero (
+\begin{DoxyParamCaption}
+\item[{long}]{a\-Minimum\-Size = {\ttfamily 128}, }
+\item[{long}]{a\-Maximum\-Size = {\ttfamily 32768}}
+\end{DoxyParamCaption}
+)}}\label{class_filter_convolution_zero_ad8b99b17449c1f06f63679ff0f0f9daf}
+Hoa\-Library \-: A High Order Ambisonics Library Copyright (c) 2012-\/2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, C\-I\-C\-M, Universite Paris-\/8. All rights reserved.\-re Guillot, C\-I\-C\-M -\/ Université Paris 8 All rights reserved.
+
+Website \-: \href{http://www.mshparisnord.fr/HoaLibrary/}{\tt http\-://www.\-mshparisnord.\-fr/\-Hoa\-Library/} Contacts \-: \href{mailto:cicm.mshparisnord@gmail.com}{\tt cicm.\-mshparisnord@gmail.\-com}
+
+This file is part of H\-O\-A L\-I\-B\-R\-A\-R\-Y.
+
+H\-O\-A L\-I\-B\-R\-A\-R\-Y is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Cicm\-Library/\-Cicm\-Filters/Cicm\-Filter\-Convolution\-Zero.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Cicm\-Library/\-Cicm\-Filters/Cicm\-Filter\-Convolution\-Zero.\-cpp\end{DoxyCompactItemize}

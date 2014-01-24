@@ -66,8 +66,8 @@ extern "C" void setup_hoa0x2edelay_tilde(void)
     eclass_addmethod(c, (method)hoa_delay_time_sample,   "sample",       A_GIMME, 0);
     eclass_addmethod(c, (method)hoa_delay_diff,          "diff",         A_GIMME, 0);
     
-    eclass_register(CLASS_BOX, c);
-    erouter_add_libary(gensym("hoa"), "hoa.library by Julien Colafrancesco, Pierre Guillot & Eliott Paris", "© 2012 - 2014  CICM | Paris 8 University", "Version 1.1");
+    eclass_register(CLASS_OBJ, c);
+    hoa_post();
     hoa_delay_class = c;
 }
 

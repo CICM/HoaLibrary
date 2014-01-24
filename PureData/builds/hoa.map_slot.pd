@@ -4,19 +4,19 @@
  regular  @fontsize  11  @bgcolor  0.9 0.9 0.9 1  @bgcolor2 
 0.75 0.75 0.75 1  @bdcolor  0 0 0 1  @selcolor  0.36 0.36 0.37
 0.5  @outputmode  0  @zoom  0.46  sources_parameters  source
-0 0.571659 0.101449 0 0.2 0.2 0.2 1 "" source 1 1.52818 -0.855073
-0 0.2 0.2 0.2 1 "" source 2 0.117552 -1.37681 0 0.2 0.2 0.2
-1 ""  groups_parameters  group 0 3 0 1 2 0 0.2 0.2 0.2 1
-""  slots_parameters  slot 0 source 0 0.449275 1.04348 0
-0.2 0.2 0.2 1 "" source 1 1.4058 0.0869566 0 0.2 0.2 0.2 1
-"" source 2 -1.08696 -1.26087 0 0.2 0.2 0.2 1 "" group
-0 3 0 1 2 0 0.2 0.2 0.2 1 "" slot 1 source 0 -0.487923 1.47826
-0 0.2 0.2 0.2 1 "" source 1 0.468599 0.521739 0 0.2 0.2 0.2
-1 "" source 2 -0.942029 1.15365e-16 0 0.2 0.2 0.2 1 ""
-group 0 3 0 1 2 0 0.2 0.2 0.2 1 "" slot 2 source 0 0.571659
-0.101449 0 0.2 0.2 0.2 1 "" source 1 1.52818 -0.855073 0 0.2
-0.2 0.2 1 "" source 2 0.117552 -1.37681 0 0.2 0.2 0.2 1 ""
-group 0 3 0 1 2 0 0.2 0.2 0.2 1 "" ;
+0 0.571659 0.101449 0 0.2 0.2 0.2 1 (null) source 1 1.52818 -0.855073
+0 0.2 0.2 0.2 1 (null) source 2 0.117552 -1.37681 0 0.2 0.2 0.2
+1 (null)  groups_parameters  group 0 3 0 1 2 0 0.2 0.2 0.2 1
+(null)  slots_parameters  slot 0 source 0 0.449275 1.04348 0
+0.2 0.2 0.2 1 (null) source 1 1.4058 0.0869566 0 0.2 0.2 0.2 1
+(null) source 2 -1.08696 -1.26087 0 0.2 0.2 0.2 1 (null) group
+0 3 0 1 2 0 0.2 0.2 0.2 1 (null) slot 1 source 0 -0.487923 1.47826
+0 0.2 0.2 0.2 1 (null) source 1 0.468599 0.521739 0 0.2 0.2 0.2
+1 (null) source 2 -0.942029 1.15365e-16 0 0.2 0.2 0.2 1 (null)
+group 0 3 0 1 2 0 0.2 0.2 0.2 1 (null) slot 2 source 0 0.571659
+0.101449 0 0.2 0.2 0.2 1 (null) source 1 1.52818 -0.855073 0 0.2
+0.2 0.2 1 (null) source 2 0.117552 -1.37681 0 0.2 0.2 0.2 1 (null)
+group 0 3 0 1 2 0 0.2 0.2 0.2 1 (null) ;
 #X obj -429 -374 receive map_slot;
 #X text -190 -363 Store a preset at a defined slot;
 #X msg -188 -316 slot store \$1;

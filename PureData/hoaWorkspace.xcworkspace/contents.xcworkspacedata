@@ -55,4 +55,10 @@
    <FileRef
       location = "group:hoaWider/hoa.wider~.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:hoaConnect/hoa.connect.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hoaDac/hoa.dac~.xcodeproj">
+   </FileRef>
 </Workspace>
