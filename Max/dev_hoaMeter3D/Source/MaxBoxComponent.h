@@ -19,22 +19,21 @@ public:
 		setSize(200, 200);
         openGLContext.setRenderer (this);
         openGLContext.attachTo (*this);
-        openGLContext.setContinuousRepainting (true);
+		openGLContext.setComponentPaintingEnabled(false);
+        openGLContext.setContinuousRepainting (false);
 		angleZ = angleX = 0;
 		speed = 1;
+		
+		params = gluNewQuadric();
 		
 		setInterceptsMouseClicks(false, false);
 	}
     
 	~EditorComponent()
 	{
+		gluDeleteQuadric(params);
         openGLContext.detach();
 		deleteAllChildren();
-	}
-    
-	void paint (Graphics& g)
-	{
-        //g.fillAll (findColour(EditorComponent::backgroundColourId));
 	}
 
 	// openGL component mouseDown function
@@ -43,32 +42,58 @@ public:
 		speed += 1;
 	}
     
-    void colourChanged	()
+    void colourChanged()
     {
         //repaint();
     }
     
     void newOpenGLContextCreated()
     {
-		params = gluNewQuadric();
+		
     }
 
     void openGLContextClosing()
     {
-        gluDeleteQuadric(params);
+        
     }
+	
+	// return the openGL drawings as an image.
+	Image makeScreenshot()
+	{
+		const float desktopScale = (float) openGLContext.getRenderingScale();
+		Image snapshotImage = Image (OpenGLImageType().create (Image::SingleChannel, roundToInt (desktopScale * getWidth()), roundToInt (desktopScale * getHeight()), false));
+		OpenGLFrameBuffer* buffer = OpenGLImageType::getFrameBufferFrom(snapshotImage);
+		
+		buffer->clear( findColour(EditorComponent::backgroundColourId) );
+		buffer->makeCurrentRenderingTarget();
+		
+		customRender();
+		
+		buffer->releaseAsRenderingTarget();
+		
+		return snapshotImage;
+	}
+	
+	float getScale()
+	{
+		return (float) openGLContext.getRenderingScale();
+	}
 
-    // This is a virtual method in OpenGLRenderer, and is called when it's time
-    // to do your GL rendering.
-    void renderOpenGL()
+	void customRender()
     {
         jassert (OpenGLHelpers::isContextActive());
-
-        const float desktopScale = (float) openGLContext.getRenderingScale();
-		//OpenGLHelpers::clear ( Colour ((uint8) 100, (uint8) 100, (uint8) 100, (uint8) 100) );
+		
+        const float desktopScale = getScale();
 		OpenGLHelpers::clear ( findColour(EditorComponent::backgroundColourId) );
 		
+		glMatrixMode( GL_PROJECTION );
+		glPushMatrix();
+		glLoadIdentity();
+		OpenGLHelpers::setPerspective(70,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()), 1,1000);
+		//gluPerspective(70,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()),1,1000);
+		
 		glEnable (GL_DEPTH_TEST); // active le z-buffer
+		glClearDepth(1.0f);
 		glDepthFunc (GL_LESS);
 		glEnable (GL_BLEND);
 		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -79,10 +104,9 @@ public:
 		// enable color with lighting
 		glEnable(GL_COLOR_MATERIAL);
 		
-		glMatrixMode( GL_PROJECTION );
-		glLoadIdentity();
-		OpenGLHelpers::setPerspective(70,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()),1,1000);
-		//gluPerspective(70,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()),1,1000);
+		// smooth
+		glShadeModel(GL_SMOOTH);
+		
 		
 		glMatrixMode( GL_MODELVIEW );
 		glLoadIdentity( );
@@ -92,19 +116,28 @@ public:
 		glRotated(angleZ,0,0,1);
 		glRotated(angleX,1,0,0);
 		
-		glColor3ub(255,255,255); // white
-		gluQuadricDrawStyle( params, GLU_LINE);
+		drawCartVectors();
+		
+		glColor3ub(100,100,100); // white
+		gluQuadricDrawStyle( params, GLU_SILHOUETTE);
 		// gluSphere(GLUquadric*, nbHoriz, nbVertic)
 		gluSphere(params,2, 20, 20);
 		
-		drawCartVectors();
+
 		
-		glFlush();
+//		glFlush();
 		
 		angleZ += speed;
 		angleX += speed;
+		
+        //glViewport (0, 0, roundToInt (desktopScale * getWidth()), roundToInt (desktopScale * getHeight()));
+    }
 
-        glViewport (0, 0, roundToInt (desktopScale * getWidth()), roundToInt (desktopScale * getHeight()));
+    // This is a virtual method in OpenGLRenderer, and is called when it's time
+    // to do your GL rendering.
+    void renderOpenGL()
+    {
+		customRender();
     }
 	
 	void drawCartVectors()
@@ -139,49 +172,6 @@ public:
 		// center shere (cosmetic)
 		glColor3ub(150, 150, 150);
 		gluSphere(params, 0.2, 10, 10);
-	}
-	
-	void drawCube()
-	{
-		glBegin(GL_QUADS);
-		
-		glColor3ub(255,0,0); //face rouge
-		glVertex3d(1,1,1);
-		glVertex3d(1,1,-1);
-		glVertex3d(-1,1,-1);
-		glVertex3d(-1,1,1);
-		
-		glColor3ub(0,255,0); //face verte
-		glVertex3d(1,-1,1);
-		glVertex3d(1,-1,-1);
-		glVertex3d(1,1,-1);
-		glVertex3d(1,1,1);
-		
-		glColor3ub(0,0,255); //face bleue
-		glVertex3d(-1,-1,1);
-		glVertex3d(-1,-1,-1);
-		glVertex3d(1,-1,-1);
-		glVertex3d(1,-1,1);
-		
-		glColor3ub(255,255,0); //face jaune
-		glVertex3d(-1,1,1);
-		glVertex3d(-1,1,-1);
-		glVertex3d(-1,-1,-1);
-		glVertex3d(-1,-1,1);
-		
-		glColor3ub(0,255,255); //face cyan
-		glVertex3d(1,1,-1);
-		glVertex3d(1,-1,-1);
-		glVertex3d(-1,-1,-1);
-		glVertex3d(-1,1,-1);
-		
-		glColor3ub(255,0,255); //face magenta
-		glVertex3d(1,-1,1);
-		glVertex3d(1,1,1);
-		glVertex3d(-1,1,1);
-		glVertex3d(-1,-1,1);
-		
-		glEnd();
 	}
 
 private:

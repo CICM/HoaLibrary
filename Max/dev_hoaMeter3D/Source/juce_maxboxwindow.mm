@@ -35,6 +35,8 @@ typedef struct _jucebox
     t_rect      cachePvRect;
     t_rect      rect;
     t_jrgba     bgcolor;
+	t_jrgba		bdcolor;
+	t_atom_long		drawVectors;
     
 	juce::Component* juceEditorComp;
     EditorComponentHolder* juceWindowComp;
@@ -63,24 +65,20 @@ void jucebox_anything        (t_jucebox *x, t_symbol *s, long argc, t_atom *argv
 
 void jucebox_patcherview_vis(t_jucebox *x, t_object *patcherview);
 void jucebox_patcherview_invis(t_jucebox *x, t_object *patcherview);
-void jucebox_boxscreenrectchanged(t_jucebox *box, t_object *patcherview);
-
-long jucebox_hittest(t_jucebox *x, t_object *patcherview, t_pt pt);
 
 static t_class *s_jucebox_class;
 
 /* ---------------------------------- EditorComponentHolder class */
 
 class EditorComponentHolder  :	public juce::Component,
-public ComponentListener,
-public Timer
+public ComponentListener
 {
 public:
     EditorComponentHolder (juce::Component* const editorComp_, t_jucebox* x)
     :	ref(x)
 	{
 		addAndMakeVisible (editorComp_);
-        setOpaque (false);
+        setOpaque (true);
         setVisible (true);
         setWantsKeyboardFocus (false);
         
@@ -90,49 +88,18 @@ public:
         editorComp->setBounds(0,0,DEFWIDTH,DEFHEIGHT);
         setBounds(50,50,DEFWIDTH,DEFHEIGHT);
         
-		//startTimer(20);
         setInterceptsMouseClicks(false, false);
-		setAlwaysOnTop(true);
+		setAlwaysOnTop(false);
 	}
     
 	~EditorComponentHolder()
 	{
 		editorComp->removeComponentListener(this);
-		//stopTimer();
 	}
 	
 	void componentMovedOrResized (Component &component, bool wasMoved, bool wasResized)
 	{
         post("movedorresized");
-        //post("moved %i", (int)wasMoved);
-        //t_size newSize = {(double)editorComp->getWidth(), (double)editorComp->getHeight()};
-        //jbox_set_size((t_object*)ref, &newSize);
-	}
-	
-	void timerCallback()
-    {
-        //char locked = jpatcher_get_locked(jbox_get_patcher((t_object*)ref));
-        
-        if (ref->isInitialised) {
-            int locked = ((patcherview_get_locked(ref->mPatcherview)) != 0);
-            int presentation = ((patcherview_get_presentation(ref->mPatcherview)) != 0);
-            //int box_presentation = ((jbox_get_presentation((t_object*)ref)) != 0); // dont seems to work ! why ??
-            int box_presentation = (ref->j_box.b_presentation != 0);
-			post( "box_presentation %i", box_presentation);
-            
-            //int pv_visible = (patcherview_get_visible(ref->mPatcherview) != 0);
-            //post("visible %i", pv_visible);
-            
-            if( (locked && !presentation) || (box_presentation && presentation && locked)) {
-                setVisible(true);
-                calcAndSetBounds();
-                //getPeer()->toFront(false);
-            }
-            else {
-                setVisible(false);
-            }
-        }
-        //post("islock = %i", locked);
 	}
 	
 	void calcAndSetBounds()
@@ -155,7 +122,6 @@ public:
 			//int offsetY = ref->rect.y >= 0 ? 0 : ref->rect.y;
 			
 			editorComp->setBounds( 0, 0, boxRect.getWidth(), boxRect.getHeight());
-			
 			setBounds(ref->rect.x - rpvRect.x, ref->rect.y - rpvRect.y, boxRect.getWidth(), boxRect.getHeight() );
 		}
 	}
@@ -221,9 +187,9 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)jucebox_notify,      "notify",       A_CANT, 0);
 	class_addmethod(c, (method)jucebox_patcherview_vis, "patcherview_vis",		A_CANT, 0);
     class_addmethod(c, (method)jucebox_patcherview_invis, "patcherview_invis",	A_CANT, 0);
-	class_addmethod(c, (method)jucebox_boxscreenrectchanged, "boxscreenrectchanged",	A_CANT, 0);
 	class_addmethod(c, (method)jucebox_bang,		"bang", 0);
-	class_addmethod(c, (method)jucebox_hittest,		"hittest", 0);
+	class_addmethod(c, (method)jucebox_getdrawparams,		"getdrawparams", 0);
+	
 			
     CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 200 200");
     CLASS_ATTR_INVISIBLE		(c, "color", 0);
@@ -234,6 +200,18 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 1.");
+	
+	CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_jucebox, bdcolor);
+	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
+	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
+	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "1");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.1 0.1 0.1 1.");
+	
+	CLASS_ATTR_LONG				(c, "vectors", 0, t_jucebox, drawVectors);
+	CLASS_ATTR_CATEGORY			(c, "vectors", 0, "3D");
+	CLASS_ATTR_STYLE_LABEL		(c, "vectors", 0, "onoff", "Draw 3D Vectors");
+	CLASS_ATTR_DEFAULT_SAVE		(c, "vectors", 0, "1");
     
     initialiseJuce_GUI();
     
@@ -243,14 +221,11 @@ int C74_EXPORT main(void)
 	return 0;
 }
 
-long jucebox_hittest(t_jucebox *x, t_object *patcherview, t_pt pt)
+void jucebox_getdrawparams(t_jucebox *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-    return 0;
-}
-
-void jucebox_boxscreenrectchanged(t_jucebox *box, t_object *patcherview)
-{
-	//post("boxscreenrectchanged");
+	params->d_bordercolor = x->bdcolor;
+	params->d_borderthickness = 1;
+	params->d_cornersize = 4;
 }
 
 void jucebox_patcherview_vis(t_jucebox *x, t_object *patcherview)
@@ -263,18 +238,11 @@ void jucebox_patcherview_vis(t_jucebox *x, t_object *patcherview)
 		
     if (!x->isInitialised)
     {
-		
-        //zaza = object_class(x->mPatcherview);
-		//for(int i =0; i <zaza->c_messcount -1; i++)
-		//{
-			//post("method % i : %s", i, zaza->c_messlist[i].m_sym->s_name);
-		//}
-		
 		NSView      *cocoa_view = NULL;
 		object_method(x->mPatcherview, gensym("nativewindow"), (void**)&cocoa_view);
         //x->juceWindowComp->addToDesktop(0, cocoa_view);
-		//x->juceWindowComp->addToDesktop(ComponentPeer::StyleFlags::windowIgnoresMouseClicks, 0);
-		x->juceWindowComp->addToDesktop(ComponentPeer::StyleFlags::windowIgnoresMouseClicks, cocoa_view);
+		x->juceWindowComp->addToDesktop(0);
+		//x->juceWindowComp->addToDesktop(ComponentPeer::StyleFlags::windowIgnoresMouseClicks, cocoa_view);
         x->isInitialised = 1;		
     }
 }
@@ -321,7 +289,7 @@ void jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *
 void jucebox_assist(t_jucebox *x, void *b, long m, long a, char *s)
 {
 	if (m == 1)		//inlet
-		sprintf(s, "(signal) Audio Input");
+		sprintf(s, "(signal) Audio Inputs");
 }
 
 void jucebox_paint(t_jucebox *x, t_object *patcherview)
@@ -334,36 +302,29 @@ void jucebox_paint(t_jucebox *x, t_object *patcherview)
     x->rect = rect;
     
     int locked = ((patcherview_get_locked(x->mPatcherview)) != 0);
-        
+	   
     if( locked )
     {
         if(!x->juceWindowComp) jucebox_addjucecomponents(x);
         x->juceWindowComp->calcAndSetBounds();
 	}
-	else
-    {
-        jgraphics_set_source_jrgba(g, &x->bgcolor);
-        jgraphics_set_line_width(g, 1.);
-        
-        jgraphics_rectangle(g, 1., 1., rect.width - 2, rect.height - 2);
-        jgraphics_fill(g);
-        
-        long pad = 5;
-        t_jrgba crossColor = x->bgcolor;
-        crossColor.red -= 0.1;
-        crossColor.green -= 0.1;
-        crossColor.blue -= 0.1;
-        jgraphics_set_source_jrgba(g, &crossColor);
-        jgraphics_set_line_width(g, pad);
-        
-        jgraphics_move_to(g, pad, pad);
-        jgraphics_line_to(g, x->rect.width-pad, x->rect.height-pad);
-        jgraphics_stroke(g);
-        
-        jgraphics_move_to(g, x->rect.width-pad, pad);
-        jgraphics_line_to(g, pad, x->rect.height-pad);
-        jgraphics_stroke(g);
-	}
+	
+	EditorComponent* comp = dynamic_cast <EditorComponent*> (x->juceEditorComp);
+	Image openGLSnap = comp->makeScreenshot();
+	Image::BitmapData* snapBitmap = new Image::BitmapData(openGLSnap, Image::BitmapData::ReadWriteMode::readOnly);
+	
+	unsigned char* data = snapBitmap->data;
+	//unsigned char* data = snapBitmap->getPixelPointer(0, 0);
+	int width, height, imgStride;
+	width = openGLSnap.getWidth();
+	height = openGLSnap.getHeight();
+	imgStride = snapBitmap->lineStride;
+	t_rect srcRect = {0,0, (double)openGLSnap.getWidth(), (double)openGLSnap.getHeight()};
+	t_rect destRect = {0,0, x->rect.width, x->rect.height};
+	
+	t_jsurface* surface = jgraphics_image_surface_create_for_data (data, JGRAPHICS_FORMAT_ARGB32, width, height, imgStride, NULL, NULL);
+	jgraphics_image_surface_draw(g, surface, srcRect, destRect);
+	jgraphics_surface_destroy (surface);
 }
 
 // mouse interaction
@@ -377,34 +338,27 @@ void jucebox_mousedown(t_jucebox *x, t_object *patcherview, t_pt pt, long modifi
 void jucebox_bang(t_jucebox *x)
 {
     x->juceWindowComp->calcAndSetBounds();
-	//object_method(x->mPatcherview, gensym("selectall"), TRUE);
+//	EditorComponent* comp = dynamic_cast <EditorComponent*> (x->juceEditorComp);
+//	
+//	Image openGLSnap = comp->makeScreenshot();
+//	Colour imgPxColor = openGLSnap.getPixelAt(50, 50);
+//	post("image color = %s", imgPxColor.toString().toStdString().c_str());
+//	post("image width = %i", openGLSnap.getWidth());
+//	
+//	Image::BitmapData* snapBitmap = new Image::BitmapData(openGLSnap, Image::BitmapData::ReadWriteMode::readOnly);
+//	
+//	unsigned char* data = snapBitmap->data;
+//	int width, height, imgStride;
+//	width = openGLSnap.getWidth();
+//	height = openGLSnap.getHeight();
+//	imgStride = snapBitmap->pixelStride;
+//	
+//	t_jsurface* surface = jgraphics_image_surface_create_for_data (data, JGRAPHICS_FORMAT_ARGB32, width, height, imgStride, NULL, NULL);
+//	t_jrgba col;
+//	jgraphics_image_surface_get_pixel(surface, 50, 50, &col);
+//	post("color : r: %d, g: %d, b: %d, a: %d", col.red, col.green, col.blue, col.alpha);
+//	jgraphics_surface_destroy (surface);
 
-	static char* const flopArguments[ ] =
-	{
-		"A_NOTHING",
-		"A_LONG",
-		"A_FLOAT",
-		"A_SYM",
-		"A_OBJ",
-		"A_DEFLONG",
-		"A_DEFFLOAT",
-		"A_DEFSYM",
-		"A_GIMME",
-		"A_CANT",
-		"A_"
-	};
-	
-	t_object *obj = x->mPatcher;
-	
-    long i, count = ob_class(obj)->c_messcount;
-    t_messlist *p = ob_messlist(obj);
-	
-    for (i = 1; i < count; i++) {
-        if ((p + i)->m_sym) {
-            char *a = (p + i)->m_type;
-            post("%ld / %s / %s", i, (p + i)->m_sym->s_name, flopArguments[FLOP_CLAMP(a[0], 0, 10)]);
-        }
-    }
 }
 
 void jucebox_int(t_jucebox *x, long n)
@@ -412,13 +366,6 @@ void jucebox_int(t_jucebox *x, long n)
 	jucebox_bang(x);
 	jbox_redraw((t_jbox *)x);
 }
-
-void jucebox_getdrawparams(t_jucebox *x, t_object *patcherview, t_jboxdrawparams *params)
-{
-	params->d_bordercolor.alpha = 0;
-	params->d_boxfillcolor.alpha = 0;
-}
-
 
 void jucebox_addjucecomponents(t_jucebox* x)
 {
@@ -429,7 +376,7 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	x->juceEditorComp = createMaxBoxComponent(); // new EditorComponent();
 	x->juceEditorComp->setBounds(0, 0, width, height);
 	
-	x->juceEditorComp->setOpaque (false);
+	x->juceEditorComp->setOpaque (true);
 	x->juceEditorComp->setVisible (true);
 	
 	x->juceWindowComp = new EditorComponentHolder(x->juceEditorComp, x);
@@ -458,7 +405,7 @@ void *jucebox_new(t_symbol *s, long argc, t_atom *argv)
     | JBOX_NODRAWBOX
     | JBOX_DRAWINLAST
     | JBOX_TRANSPARENT
-    | JBOX_GROWBOTH
+    | JBOX_GROWY
     | JBOX_DRAWBACKGROUND
     ;
     
