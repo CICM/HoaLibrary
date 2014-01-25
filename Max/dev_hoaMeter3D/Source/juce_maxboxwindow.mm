@@ -60,7 +60,7 @@ void jucebox_addjucecomponents(t_jucebox* x);
 void jucebox_deleteui(t_jucebox *x);
 void jucebox_mousedown(t_jucebox *x, t_object *patcherview, t_pt pt, long modifiers);
 
-void jucebox_notify          (t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *data);
+t_max_err jucebox_notify          (t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *data);
 void jucebox_anything        (t_jucebox *x, t_symbol *s, long argc, t_atom *argv);
 
 void jucebox_patcherview_vis(t_jucebox *x, t_object *patcherview);
@@ -86,8 +86,9 @@ public:
 		editorComp->addComponentListener(this);
         
         editorComp->setBounds(0,0,DEFWIDTH,DEFHEIGHT);
-        setBounds(50,50,DEFWIDTH,DEFHEIGHT);
-        
+        //setBounds(0,0,DEFWIDTH,DEFHEIGHT);
+		setBounds(0,0, 0, 0);
+		
         setInterceptsMouseClicks(false, false);
 		setAlwaysOnTop(false);
 	}
@@ -122,7 +123,9 @@ public:
 			//int offsetY = ref->rect.y >= 0 ? 0 : ref->rect.y;
 			
 			editorComp->setBounds( 0, 0, boxRect.getWidth(), boxRect.getHeight());
-			setBounds(ref->rect.x - rpvRect.x, ref->rect.y - rpvRect.y, boxRect.getWidth(), boxRect.getHeight() );
+			//setBounds(ref->rect.x - rpvRect.x, ref->rect.y - rpvRect.y, boxRect.getWidth(), boxRect.getHeight() );
+			//setBounds(100000, 100000, boxRect.getWidth(), boxRect.getHeight() );
+			//setBounds(0,0, 0, 0);
 		}
 	}
     
@@ -254,7 +257,7 @@ void jucebox_patcherview_invis(t_jucebox *x, t_object *patcherview)
     x->mPatcherview = NULL;
 }
 
-void jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *data)
+t_max_err jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *data)
 {
 	//post("notify");
     if (sender && (m == gensym("attr_modified") )) {
@@ -267,11 +270,18 @@ void jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *
                 x->juceWindowComp->setBgColour();
                 jbox_redraw((t_jbox*)x);
             }
-            if (name == gensym("patching_rect"))
+            else if (name == gensym("patching_rect"))
             {
 				x->juceWindowComp->calcAndSetBounds();
             }
-        }
+			else if( name == gensym("vectors") )
+			{
+				//jbox_invalidate_layer((t_object *)x, NULL, gensym("vectors"));
+				EditorComponent* comp = dynamic_cast <EditorComponent*> (x->juceEditorComp);
+				comp->shouldDrawVectors(x->drawVectors);
+				jbox_redraw((t_jbox *)x);
+			}
+		}
         else if (sender == x->mPatcher) {
             //if (name == gensym("name")) { qelem_set(x->mTitle); }
         }
@@ -284,6 +294,7 @@ void jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *
             }
         }
     }
+	return jbox_notify((t_jbox *)x, s, m, sender, data);
 }
 
 void jucebox_assist(t_jucebox *x, void *b, long m, long a, char *s)

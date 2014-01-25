@@ -21,6 +21,7 @@ public:
         openGLContext.attachTo (*this);
 		openGLContext.setComponentPaintingEnabled(false);
         openGLContext.setContinuousRepainting (false);
+		m_shouldDrawVectors = true;
 		angleZ = angleX = 0;
 		speed = 1;
 		
@@ -34,6 +35,11 @@ public:
 		gluDeleteQuadric(params);
         openGLContext.detach();
 		deleteAllChildren();
+	}
+	
+	void shouldDrawVectors(bool draw)
+	{
+		m_shouldDrawVectors = draw;
 	}
 
 	// openGL component mouseDown function
@@ -116,7 +122,8 @@ public:
 		glRotated(angleZ,0,0,1);
 		glRotated(angleX,1,0,0);
 		
-		drawCartVectors();
+		if (m_shouldDrawVectors)
+			drawCartVectors();
 		
 		glColor3ub(100,100,100); // white
 		gluQuadricDrawStyle( params, GLU_SILHOUETTE);
@@ -148,7 +155,7 @@ public:
 		glColor3ub(0,0,255);
 		gluCylinder(params, 0.05, 0.05, 2.5, 5, 5);
 		glTranslated(0,0,2.5);
-		gluCylinder(params, 0.1, 0., 0.3, 5, 5);
+		gluCylinder(params, 0.1, 0., 0.3, 10, 10);
 		glTranslated(0,0,-2.5);
 
 		// verctor X
@@ -156,7 +163,7 @@ public:
 		glRotated(90,0,1,0);
 		gluCylinder(params, 0.05, 0.05, 2.5, 5, 5);
 		glTranslated(0,0,2.5);
-		gluCylinder(params, 0.1, 0., 0.3, 5, 5);
+		gluCylinder(params, 0.1, 0., 0.3, 10, 10);
 		glTranslated(0,0,-2.5);
 		glRotated(-90,0,-1,0);
 		
@@ -165,7 +172,7 @@ public:
 		glRotated(-90,1,0,0);
 		gluCylinder(params, 0.05, 0.05, 2.5, 5, 5);
 		glTranslated(0,0,2.5);
-		gluCylinder(params, 0.1, 0., 0.3, 5, 5);
+		gluCylinder(params, 0.1, 0., 0.3, 10, 10);
 		glTranslated(0,0,-2.5);
 		glRotated(90,-1,0,0);
 		
@@ -178,6 +185,7 @@ private:
     OpenGLContext openGLContext;
 	double angleZ, angleX, speed;
 	GLUquadric* params;
+	bool m_shouldDrawVectors;
 };
 
 juce::Component* createMaxBoxComponent()
