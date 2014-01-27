@@ -17,9 +17,9 @@ public:
 	EditorComponent()
 	{
 		setSize(200, 200);
+		openGLContext.setComponentPaintingEnabled(false);
         openGLContext.setRenderer (this);
         openGLContext.attachTo (*this);
-		openGLContext.setComponentPaintingEnabled(false);
         openGLContext.setContinuousRepainting (false);
 		m_shouldDrawVectors = true;
 		angleZ = angleX = 0;
@@ -67,7 +67,7 @@ public:
 	Image makeScreenshot()
 	{
 		const float desktopScale = (float) openGLContext.getRenderingScale();
-		Image snapshotImage = Image (OpenGLImageType().create (Image::SingleChannel, roundToInt (desktopScale * getWidth()), roundToInt (desktopScale * getHeight()), false));
+		Image snapshotImage = Image (OpenGLImageType().create (Image::ARGB, roundToInt (desktopScale * getWidth()), roundToInt (desktopScale * getHeight()), true));
 		OpenGLFrameBuffer* buffer = OpenGLImageType::getFrameBufferFrom(snapshotImage);
 		
 		buffer->clear( findColour(EditorComponent::backgroundColourId) );
@@ -104,6 +104,7 @@ public:
 		glEnable (GL_BLEND);
 		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
+		
 		// Enable lighting
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
@@ -112,7 +113,6 @@ public:
 		
 		// smooth
 		glShadeModel(GL_SMOOTH);
-		
 		
 		glMatrixMode( GL_MODELVIEW );
 		glLoadIdentity( );
@@ -125,8 +125,8 @@ public:
 		if (m_shouldDrawVectors)
 			drawCartVectors();
 		
-		glColor3ub(100,100,100); // white
-		gluQuadricDrawStyle( params, GLU_SILHOUETTE);
+		glColor3ub(255,255,255); // white
+		gluQuadricDrawStyle( params, GLU_LINE);
 		// gluSphere(GLUquadric*, nbHoriz, nbVertic)
 		gluSphere(params,2, 20, 20);
 		
