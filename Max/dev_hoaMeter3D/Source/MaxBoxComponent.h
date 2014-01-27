@@ -5,13 +5,14 @@
 #include <OpenGL/glu.h>
 
 class EditorComponent : public juce::Component,
-                        private OpenGLRenderer
+private OpenGLRenderer
 {
 public:
     
     enum ColourIds
     {
-        backgroundColourId          = 0x1001300  /**< A colour to use to fill the slider's background. */
+        backgroundColourId          = 0x1001300,  /**< A colour to use to fill the slider's background. */
+		sphereColourId              = 0x1001300
     };
     
 	EditorComponent()
@@ -23,7 +24,7 @@ public:
         openGLContext.setContinuousRepainting (false);
 		m_shouldDrawVectors = true;
 		angleZ = angleX = 0;
-		speed = 1;
+		speed = 0;
 		
 		params = gluNewQuadric();
 		
@@ -41,12 +42,9 @@ public:
 	{
 		m_shouldDrawVectors = draw;
 	}
-
+	
 	// openGL component mouseDown function
-	void mouseDown(const MouseEvent& e)
-	{
-		speed += 1;
-	}
+
     
     void colourChanged()
     {
@@ -57,7 +55,7 @@ public:
     {
 		
     }
-
+	
     void openGLContextClosing()
     {
         
@@ -85,31 +83,33 @@ public:
 		return (float) openGLContext.getRenderingScale();
 	}
 
-	void customRender()
+	void renderInit()
     {
-        jassert (OpenGLHelpers::isContextActive());
+		jassert (OpenGLHelpers::isContextActive());
 		
         const float desktopScale = getScale();
 		OpenGLHelpers::clear ( findColour(EditorComponent::backgroundColourId) );
 		
 		glMatrixMode( GL_PROJECTION );
-		glPushMatrix();
 		glLoadIdentity();
 		OpenGLHelpers::setPerspective(70,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()), 1,1000);
-		//gluPerspective(70,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()),1,1000);
 		
-		glEnable (GL_DEPTH_TEST); // active le z-buffer
-		glClearDepth(1.0f);
+		// active z-buffer
+		glEnable (GL_DEPTH_TEST);
 		glDepthFunc (GL_LESS);
 		glEnable (GL_BLEND);
 		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
-		
-		// Enable lighting
+		// Enable lightings
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
-		// enable color with lighting
 		glEnable(GL_COLOR_MATERIAL);
+		
+		glEnable( GL_LINE_SMOOTH );
+		glEnable( GL_POLYGON_SMOOTH );
+		glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
+		glHint( GL_POLYGON_SMOOTH_HINT, GL_NICEST );
+		
 		
 		// smooth
 		glShadeModel(GL_SMOOTH);
@@ -121,25 +121,28 @@ public:
 		
 		glRotated(angleZ,0,0,1);
 		glRotated(angleX,1,0,0);
+	}
+	
+	void customRender()
+    {
+		renderInit();
 		
+		// vectors if enabled :
 		if (m_shouldDrawVectors)
 			drawCartVectors();
 		
-		glColor3ub(255,255,255); // white
-		gluQuadricDrawStyle( params, GLU_LINE);
-		// gluSphere(GLUquadric*, nbHoriz, nbVertic)
+		// outside sphere :
+		OpenGLHelpers::setColour (  findColour(EditorComponent::sphereColourId) );
+		glLineWidth(8);
+		gluQuadricDrawStyle( params, GL_LINE_STRIP);
 		gluSphere(params,2, 20, 20);
 		
-
-		
-//		glFlush();
+		glFlush();
 		
 		angleZ += speed;
 		angleX += speed;
-		
-        //glViewport (0, 0, roundToInt (desktopScale * getWidth()), roundToInt (desktopScale * getHeight()));
     }
-
+	
     // This is a virtual method in OpenGLRenderer, and is called when it's time
     // to do your GL rendering.
     void renderOpenGL()
@@ -157,7 +160,7 @@ public:
 		glTranslated(0,0,2.5);
 		gluCylinder(params, 0.1, 0., 0.3, 10, 10);
 		glTranslated(0,0,-2.5);
-
+		
 		// verctor X
 		glColor3ub(255,0,0);
 		glRotated(90,0,1,0);
@@ -167,7 +170,7 @@ public:
 		glTranslated(0,0,-2.5);
 		glRotated(-90,0,-1,0);
 		
-
+		
 		glColor3ub(0, 255, 0);
 		glRotated(-90,1,0,0);
 		gluCylinder(params, 0.05, 0.05, 2.5, 5, 5);
@@ -180,7 +183,7 @@ public:
 		glColor3ub(150, 150, 150);
 		gluSphere(params, 0.2, 10, 10);
 	}
-
+	
 private:
     OpenGLContext openGLContext;
 	double angleZ, angleX, speed;

@@ -71,6 +71,20 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"attr" : "spherecolor",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-6",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 541.0, 151.0, 150.0, 19.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"attr" : "vectors",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -95,7 +109,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 541.0, 148.0, 150.0, 19.0 ]
+									"patching_rect" : [ 541.0, 90.0, 150.0, 19.0 ]
 								}
 
 							}
@@ -196,14 +210,15 @@
 , 							{
 								"box" : 								{
 									"bdcolor" : [ 0.097428, 0.097428, 0.097428, 1.0 ],
-									"bgcolor" : [ 0.807111, 0.807111, 0.807111, 1.0 ],
+									"bgcolor" : [ 0.604514, 0.697528, 0.807111, 1.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
 									"maxclass" : "hoa.meter3D~",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 230.0, 298.0, 298.0 ]
+									"patching_rect" : [ 31.0, 230.0, 405.0, 405.0 ],
+									"spherecolor" : [ 0.451243, 0.603017, 0.9, 1.0 ]
 								}
 
 							}
@@ -253,6 +268,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-6", 0 ]
 								}
 
 							}
