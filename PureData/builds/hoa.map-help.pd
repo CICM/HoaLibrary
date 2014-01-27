@@ -1,51 +1,48 @@
-#N canvas 350 22 1037 753 10;
-#X obj -514 -317 hoa.map @size 300 300 @fontname Helvetica @fontweight
+#N canvas 513 22 764 762 10;
+#X obj -545 -348 hoa.map @size 307 307 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode 0 @zoom 0.78 sources_parameters
-source 0 0.098934 0.835567 0 0.2 0.2 0.2 1  source 1 0.722435 0.139809
-0 0.2 0.2 0.2 1  groups_parameters group 0 2 0 1 0 0.2 0.2 0.2 1 ;
-#X obj -545 -444 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map 3
+source 0 -1.00855 -0.136752 0 0.2 0.2 0.2 1 (null) source 1 1.1453
+0.153846 0 0.2 0.2 0.2 1 (null) groups_parameters group 0 2 0 1 0 0.2
+0.2 0.2 1 (null);
+#X obj -576 -435 cnv 15 552 40 empty \$0-pddp.cnv.header hoa.map 3
 12 0 18 -204280 -1 0;
-#X text -540 -423 A graphic user interface to spatialize sources on
-a map.;
-#X text -540 -402 hoa.map allows you to spatialize several sources
+#X text -571 -393 hoa.map allows you to spatialize several sources
 on a plane. You can add and remove sources \, change coordinates \,
 add description and create groups.;
-#X text -159 -363 To move source or group \, click on it and drag it.
+#X text -220 -344 To move source or group \, click on it and drag it.
 Click and drag with shift to change the radius. Click and drag with
-shift and alt to change the angle.;
-#X text -158 -311 To create source \, click with cmd or alt on a "free"
+shift and alt to change the angle., f 60;
+#X text -219 -292 To create source \, click with cmd or alt on a "free"
 zone then select "Add source" in the popup menu. To remove source \,
-idem and select "Remove source".;
-#X text -157 -257 To create group \, drag select a set of sources \,
+idem and select "Remove source"., f 60;
+#X text -218 -238 To create group \, drag select a set of sources \,
 when mouse up the group will be created. To remove group \, click with
 cmd or alt on group then select "Remove group".;
-#X text -159 -206 To mute source or group \, click with cmd or alt
-on it and select "Mute" or "Unmute".;
-#X obj -434 67 hoa.map~ 3 2 -------;
-#X msg -275 69 \; pd dsp 1;
-#X msg -274 106 \; pd dsp 0;
-#X text -466 197 Eliott Paris © 2012-2013 CICM / Universite Paris
+#X text -220 -187 To mute source or group \, click with cmd or alt
+on it and select "Mute" or "Unmute"., f 60;
+#X text -388 211 Eliott Paris © 2012-2013 CICM / Universite Paris
 8;
-#X text -466 181 hoalibrary | Julien Colafrancesco \, Pierre Guillot
+#X text -388 195 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 ;
-#X text -112 -115 Look here for source and group messages;
-#X text -113 -63 Look here for presets;
-#X obj -108 -37 hoa.map_slot;
-#X text -114 -12 Look here for trajectories;
-#X obj -109 14 hoa.map_traj;
-#X obj -107 -89 hoa.map_mess;
-#X text -115 38 Look here for outputs;
-#X obj -110 64 hoa.map_outs;
-#X obj -514 -350 receive maphelp;
-#X obj -317 27 osc~ 220;
-#X text -157 -168 Mousewheel and alt to change the zoom.;
-#N canvas 264 101 640 390 hoa.binaural_sp 0;
+#X text -125 -59 Look here for source and group messages;
+#X text -126 -7 Look here for presets;
+#X obj -121 19 hoa.map_slot;
+#X text -127 44 Look here for trajectories;
+#X obj -122 70 hoa.map_traj;
+#X obj -120 -33 hoa.map_mess;
+#X text -128 94 Look here for outputs;
+#X obj -123 120 hoa.map_outs;
+#X text -218 -149 Mousewheel and alt to change the zoom.;
+#X obj -508 142 EzDacStereo;
+#X obj -545 -33 EzSound;
+#X obj -380 -33 EzSound;
+#X text -571 -414 A GUI to spatialize sources on a map.;
+#N canvas 194 201 640 390 hoa.binaural_sp 0;
 #X obj -237 17 outlet~;
 #X obj -18 20 outlet~;
 #X obj -437 -129 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1
 1 1;
-#X obj -439 33 switch~ 512 1 1;
 #X obj -237 -68 inlet~;
 #X obj -201 -100 inlet~;
 #X obj -164 -126 inlet~;
@@ -53,7 +50,6 @@ on it and select "Mute" or "Unmute".;
 #X obj -91 -70 inlet~;
 #X obj -55 -102 inlet~;
 #X obj -18 -128 inlet~;
-#X msg -413 -106 set 512 1 1;
 #X obj -369 -139 loadbang;
 #X msg -438 -159 1;
 #X obj -313 -75 r binaural;
@@ -61,38 +57,38 @@ on it and select "Mute" or "Unmute".;
 #X obj -18 -6 *~ 0.5;
 #X obj -355 -38 c.prepend pinnae;
 #X obj -237 -34 hoa.decoder~ 3 binaural @pinnae small;
-#X connect 2 0 3 0;
-#X connect 4 0 18 0;
-#X connect 5 0 18 1;
-#X connect 6 0 18 2;
-#X connect 7 0 18 3;
-#X connect 8 0 18 4;
-#X connect 9 0 18 5;
-#X connect 10 0 18 6;
-#X connect 11 0 3 0;
-#X connect 12 0 13 0;
-#X connect 12 0 11 0;
-#X connect 13 0 2 0;
-#X connect 14 0 17 0;
-#X connect 15 0 0 0;
-#X connect 16 0 1 0;
+#X msg -413 -106 set 512 1 1;
+#X obj -439 33 switch~ 512 1 1;
+#X connect 2 0 18 0;
+#X connect 3 0 16 0;
+#X connect 4 0 16 1;
+#X connect 5 0 16 2;
+#X connect 6 0 16 3;
+#X connect 7 0 16 4;
+#X connect 8 0 16 5;
+#X connect 9 0 16 6;
+#X connect 10 0 11 0;
+#X connect 10 0 17 0;
+#X connect 11 0 2 0;
+#X connect 12 0 15 0;
+#X connect 13 0 0 0;
+#X connect 14 0 1 0;
+#X connect 15 0 16 0;
+#X connect 16 0 13 0;
+#X connect 16 1 14 0;
 #X connect 17 0 18 0;
-#X connect 18 0 15 0;
-#X connect 18 1 16 0;
-#X restore -434 103 pd hoa.binaural_sp -;
-#X obj -434 130 hoa.dac~ 1 2 -------;
-#X obj -434 27 osc~ 280;
-#X connect 0 0 8 0;
-#X connect 8 0 24 0;
-#X connect 8 1 24 1;
-#X connect 8 2 24 2;
-#X connect 8 3 24 3;
-#X connect 8 4 24 4;
-#X connect 8 5 24 5;
-#X connect 8 6 24 6;
-#X connect 21 0 0 0;
-#X connect 22 0 8 1;
-#X connect 24 0 25 0;
-#X connect 24 1 25 1;
-#X connect 26 0 8 0;
-#X coords 0 753 1 752 85 60 0;
+#X restore -545 109 pd hoa.binaural_sp ---------;
+#X obj -545 73 hoa.map~ 3 2 ---------------;
+#X connect 0 0 23 0;
+#X connect 19 0 23 0;
+#X connect 20 0 23 1;
+#X connect 22 0 18 0;
+#X connect 22 1 18 1;
+#X connect 23 0 22 0;
+#X connect 23 1 22 1;
+#X connect 23 2 22 2;
+#X connect 23 3 22 3;
+#X connect 23 4 22 4;
+#X connect 23 5 22 5;
+#X connect 23 6 22 6;
+#X coords 0 762 1 761 85 60 0;

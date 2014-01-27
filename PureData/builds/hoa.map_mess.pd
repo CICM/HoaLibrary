@@ -1,23 +1,17 @@
-#N canvas 88 151 1205 608 10;
-#X obj -494 -198 hoa.map @size 300 300 @fontname Helvetica @fontweight
-normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
-0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode 0 @zoom 0.312488 sources_parameters
-source 0 1.85607 0.672026 0 0.2 0.2 0.2 1 source source 1 0.106671
-1.63206 0 0.7 0 0.6 1 'Jimi Hendrix' groups_parameters group 0 2 0
-1 0 0.2 0.9 0 1 'Band of Gypsys' slots_parameters slot 0 slot 1 slot
-2;
-#X obj -508 -264 nbx 10 14 -1e+37 1e+37 0 0 empty empty empty 0 -8
-0 10 -262144 -1 -1 0 256;
-#X msg -494 -232 zoom \$1;
-#X text -507 -283 Set the zoom;
-#X obj -399 -254 receive map_mes;
-#X obj -142 -37 send map_mes;
-#X text -156 -309 hoa.map allows you to define the sources and groups
-coordinates \, colors and descriptions with messages. Here \, we show
-you how to use the syntax.;
-#X msg -142 -123 source 0 pol 1 3.14;
-#X msg -130 -99 group 0 car 0.5 0.5;
-#X text -147 -256 Display source or group and set coordinates with
+#N canvas 410 49 1174 700 10;
+#X obj -494 -148 hoa.map @size 300 300 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive map_mes @send (null)
+@bgcolor 0.9 0.9 0.9 1 @bdcolor 0 0 0 1 @outputmode 0 @zoom 0.312488
+sources_parameters source 0 1.06671 -2.15475 1 0.2 0.2 0.2 1 (null)
+source 1 1.66406 1.6214 0 0.7 0 0.6 1 Jimi_Hendrix_ source 3 -2.17685
+0.682693 0 0.2 0.2 0.2 1 (null) groups_parameters group 1 3 0 1 3 0
+0.2 0.9 0 1 Band_of_Gypsys_;
+#X msg -494 -202 zoom \$1;
+#X text -507 -253 Set the zoom;
+#X obj -62 -27 send map_mes;
+#X msg -162 -123 source 0 pol 1 3.14;
+#X msg -116 -99 group 0 car 0.5 0.5;
+#X text -157 -256 Display source or group and set coordinates with
 "source" or "group" message followed by an integer for the index \,
 the type of coordinates and one or two floating values for coordinates.
 The coordinates types accepted are "polar" (or "pol") \, "cartesian"
@@ -25,78 +19,88 @@ The coordinates types accepted are "polar" (or "pol") \, "cartesian"
 polar type is followed by the radius then the angle and the cartesian
 type is followed by the abscissa then the ordinate. Exemple : "source
 0 car 1 0.".;
-#X text 230 -278 Set descriptions with "source" or "group" message
+#X text 230 -228 Set descriptions with "source" or "group" message
 followed by an integer for the index \, the "description" message and
 everything you want for the description. Set "remove" instead of the
 description to remove the description. Exemple : "source 0 description
 Jimi Hendrix".;
-#X msg 229 -190 source 1 description Jimi Hendrix;
-#X msg 251 -167 group 0 description Band of Gypsys;
-#X obj 229 -139 send map_mes;
-#X msg 4 -122 source 1 abscissa 2.5;
+#X obj 229 -89 send map_mes;
+#X msg -16 -123 source 1 abscissa 2.5;
 #X msg 16 -98 group 0 angle 1.14;
-#X text 171 -98 Set colors with "source" or "group" message followed
+#X text 171 -48 Set colors with "source" or "group" message followed
 by an integer for the index \, the "color" message and four floating
 values for red \, green \, blue and alpha (ok... there's no alpha).
 Exemple : "source 0 color 1 0.2 0.6 1;
-#X obj 179 34 send map_mes;
-#X msg 179 -17 source 1 color 0.7 0 0.6 1;
-#X msg 201 6 group 0 color 0.2 0.9 0 1;
-#X obj -34 106 send map_mes;
-#X text -122 -11 Mute with the "mute" message".;
-#X msg -85 61 source 1 mute \$1;
-#X msg -107 38 source 0 mute \$1;
-#X obj -106 11 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj -63 13 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 29 15 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
-;
-#X msg 36 53 group 0 mute \$1;
-#X text 177 57 Remove a source or group with the "remove" message".
+#X obj 179 84 send map_mes;
+#X msg 179 33 source 1 color 0.7 0 0.6 1;
+#X obj -34 156 send map_mes;
+#X text -122 19 Mute with the "mute" message".;
+#X msg -40 124 source 1 mute \$1;
+#X msg -117 68 source 0 mute \$1;
+#X msg 36 103 group 0 mute \$1;
+#X text 177 147 Remove a source or group with the "remove" message".
 Note that remove will also remove coordinates \, descriptions \, color
 and send a message to hoa.map~ to mute the source (exept for groups).
 ;
-#X obj 190 170 send map_mes;
-#X msg 190 119 group 1 remove;
-#X msg 212 142 source 3 remove;
-#X obj -493 207 send map_mes;
-#X msg -492 173 clear;
-#X text -493 148 Clear all !;
-#X msg -26 -60 source 3 car 0.2 -0.7;
-#X text -360 125 Create a group with the "group" message followed by
+#X obj 190 260 send map_mes;
+#X msg 190 209 group 1 remove;
+#X msg 212 232 source 3 remove;
+#X msg -307 -201 clear;
+#X text -308 -226 Clear all !;
+#X msg -16 -70 source 3 car 0.2 -0.7;
+#X text -360 175 Create a group with the "group" message followed by
 an integer for the group index \, "set" message and a list of intergers
 \, the indexs of source to put in the group. Exemple : "group 0 set
 1 2 3 4".;
-#X msg -347 192 group 1 set 0 1 3;
-#X obj -347 232 send map_mes;
-#X text -237 190 (create the source 3 before);
-#X text 285 119 (create the group 1 before);
-#X text 308 141 (create the source 3 before);
-#X obj -283 -252 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X text -308 -286 Bang to output;
-#X text -323 -271 (see hoa.map_outs.pd);
-#X connect 1 0 2 0;
-#X connect 2 0 0 0;
-#X connect 4 0 0 0;
-#X connect 7 0 5 0;
-#X connect 8 0 5 0;
-#X connect 11 0 13 0;
-#X connect 12 0 13 0;
-#X connect 14 0 5 0;
-#X connect 15 0 5 0;
-#X connect 18 0 17 0;
-#X connect 19 0 17 0;
+#X msg -347 242 group 1 set 0 1 3;
+#X obj -347 282 send map_mes;
+#X text -237 240 (create the source 3 before);
+#X text 285 209 (create the group 1 before);
+#X text 308 231 (create the source 3 before);
+#X text -417 -229 Bang to output;
+#X obj -494 -232 c.number @size 53 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @min 0.2 @max 1 @minmax 0.2 1 @decimal 6 @bgcolor 0.75 0.75
+0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X obj -412 -202 c.bang @size 17 17 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @bacolor 0 0 0 1;
+#X text -500 -297 hoa.map allows you to define the sources and groups
+coordinates \, colors and descriptions with messages.;
+#X obj 36 76 c.toggle @size 15 15 @fontname Helvetica @fontweight normal
+@fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -117 46 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X obj -40 96 c.toggle @size 15 15 @fontname Helvetica @fontweight
+normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
+(null) @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @crcolor 0.5
+0.5 0.5 1;
+#X msg 229 -140 source 1 description Jimi Hendrix;
+#X msg 251 -117 group 1 description Band of Gypsys;
+#X msg 201 56 group 1 color 0.2 0.9 0 1;
+#X connect 1 0 0 0;
+#X connect 4 0 3 0;
+#X connect 5 0 3 0;
+#X connect 9 0 3 0;
+#X connect 10 0 3 0;
+#X connect 13 0 12 0;
+#X connect 16 0 14 0;
+#X connect 17 0 14 0;
+#X connect 18 0 14 0;
+#X connect 21 0 20 0;
 #X connect 22 0 20 0;
-#X connect 23 0 20 0;
-#X connect 24 0 23 0;
-#X connect 25 0 22 0;
-#X connect 26 0 27 0;
-#X connect 27 0 20 0;
-#X connect 30 0 29 0;
-#X connect 31 0 29 0;
-#X connect 33 0 32 0;
-#X connect 35 0 5 0;
-#X connect 37 0 38 0;
-#X connect 42 0 0 0;
+#X connect 23 0 0 0;
+#X connect 25 0 3 0;
+#X connect 27 0 28 0;
+#X connect 33 0 1 0;
+#X connect 34 0 0 0;
+#X connect 36 0 18 0;
+#X connect 37 0 17 0;
+#X connect 38 0 16 0;
+#X connect 39 0 8 0;
+#X connect 40 0 8 0;
+#X connect 41 0 12 0;
