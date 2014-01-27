@@ -3,8 +3,6 @@
 12 0 18 -204280 -1 0;
 #X text -324 -231 hoalibrary | Julien Colafrancesco \, Pierre Guillot
 & Eliott Paris © 2012-2013 CICM / Universite Paris 8;
-#X msg 117 -485 \; pd dsp 1;
-#X msg 117 -447 \; pd dsp 0;
 #X text -322 -534 A custom dac~ with matlab syntax;
 #X text -324 -513 hoa.dac~ facilitates the routing of large array of
 loudspeakers.;

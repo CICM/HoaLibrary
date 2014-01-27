@@ -92,7 +92,7 @@ void hoamap_source_save(t_hoamap *x, t_binbuf *d);
 void hoamap_group_save(t_hoamap *x, t_binbuf *d);
 void hoamap_slot_save(t_hoamap *x, t_binbuf *d);
 void hoamap_trajectory_save(t_hoamap *x, t_binbuf *d);
-void hoamap_jsave(t_hoamap *x, t_binbuf *d);
+void hoamap_save(t_hoamap *x, t_binbuf *d);
 
 void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv);
 void hoamap_dowrite(t_hoamap *x, t_symbol *s, long argc, t_atom *argv);
@@ -150,10 +150,10 @@ extern "C" void setup_hoa0x2emap(void)
     eclass_addmethod(c, (method) hoamap_mouseenter,       "mouseenter",      A_CANT,     0);
     eclass_addmethod(c, (method) hoamap_mousemove,        "mousemove",       A_CANT,     0);
     eclass_addmethod(c, (method) hoamap_mouseleave,       "mouseleave",      A_CANT,     0);
-    eclass_addmethod(c, (method) hoamap_mousewheel,		 "mousewheel",      A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_mousewheel,		  "mousewheel",      A_CANT,     0);
     eclass_addmethod(c, (method) hoamap_key,              "key",             A_CANT,     0);
 	eclass_addmethod(c, (method) hoamap_popup,            "popup",           A_CANT,     0);
-    eclass_addmethod(c, (method) hoamap_jsave,            "jsave",           A_CANT,     0);
+    eclass_addmethod(c, (method) hoamap_save,             "save",            A_CANT,     0);
     
 	CLASS_ATTR_DEFAULT              (c, "size", 0, "225 225");
     
@@ -170,11 +170,12 @@ extern "C" void setup_hoa0x2emap(void)
 	CLASS_ATTR_DEFAULT_SAVE_PAINT	(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
 	
 	CLASS_ATTR_LONG                 (c,"outputmode", 0, t_hoamap, f_output_mode);
-	CLASS_ATTR_LABEL                (c,"outputmode", 0, "Output Mode");
+	CLASS_ATTR_LABEL                (c,"outputmode", 0, "Polar Output Mode");
 	CLASS_ATTR_CATEGORY             (c,"outputmode", 0, "Behavior");
 	CLASS_ATTR_DEFAULT              (c,"outputmode", 0,  "0");
     CLASS_ATTR_SAVE                 (c,"outputmode", 1);
     CLASS_ATTR_ORDER                (c,"outputmode", 0, "1");
+    CLASS_ATTR_STYLE                (c,"outputmode", 0, "onoff");
     
 	CLASS_ATTR_DOUBLE               (c,"zoom", 0, t_hoamap, f_zoom_factor);
     CLASS_ATTR_ACCESSORS            (c,"zoom", NULL, hoamap_zoom);
@@ -184,6 +185,7 @@ extern "C" void setup_hoa0x2emap(void)
     CLASS_ATTR_ORDER                (c,"zoom", 0,   "2");
     CLASS_ATTR_SAVE                 (c,"zoom", 0);
     CLASS_ATTR_PAINT                (c,"zoom", 0);
+    CLASS_ATTR_STYLE                (c,"zoom", 0, "number");
     
     eclass_register(CLASS_BOX, c);
     hoa_post();
@@ -449,7 +451,7 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             atom_setlong(av, atom_getlong(av));
             atom_setsym(av+1, gensym("mute"));
             atom_setlong(av+2, 1);
-            outlet_list(x->f_out_sources, 0L, 3, av);
+            outlet_list(x->f_out_sources, &s_list, 3, av);
         }
         else if(atom_getsym(av+1) == gensym("mute"))
             x->f_source_manager->sourceSetMute(atom_getlong(av), atom_getlong(av+2));
@@ -702,7 +704,7 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 /*                  Preset et Pattr                       */
 /**********************************************************/
 
-void hoamap_jsave(t_hoamap *x, t_binbuf *d)
+void hoamap_save(t_hoamap *x, t_binbuf *d)
 {
     hoamap_source_save(x, d);
     hoamap_group_save(x, d);
@@ -712,79 +714,101 @@ void hoamap_jsave(t_hoamap *x, t_binbuf *d)
 
 void hoamap_source_save(t_hoamap *x, t_binbuf *d)
 {
-    t_atom *av;
-    long ac = x->f_source_manager->getNumberOfSources()*10;
-    av = new t_atom[ac];
-    if(av && ac)
+    long i;
+    t_atom av[10];
+    char desc[MAXPDSTRING];
+    char str[MAXPDSTRING];
+    char *pch;
+    binbuf_addv(d, "s", gensym("sources_parameters"));
+    for(i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        for(long i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
+        if(x->f_source_manager->sourceGetExistence(i))
         {
-            if(x->f_source_manager->sourceGetExistence(i))
+            atom_setsym(av, gensym("source"));
+            atom_setfloat(av+1, i);
+            atom_setfloat(av+2, x->f_source_manager->sourceGetAbscissa(i));
+            atom_setfloat(av+3, x->f_source_manager->sourceGetOrdinate(i));
+            atom_setfloat(av+4, x->f_source_manager->groupGetMute(i));
+            atom_setfloat(av+5, x->f_source_manager->sourceGetColor(i).red);
+            atom_setfloat(av+6, x->f_source_manager->sourceGetColor(i).green);
+            atom_setfloat(av+7, x->f_source_manager->sourceGetColor(i).blue);
+            atom_setfloat(av+8, x->f_source_manager->sourceGetColor(i).alpha);
+            if(x->f_source_manager->sourceGetDescription(i).size())
             {
-                atom_setsym(av+j, gensym("source"));
-                atom_setlong(av+j+1, i);
-                atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
-                atom_setfloat(av+j+3, x->f_source_manager->sourceGetOrdinate(i));
-                atom_setlong(av+j+4, x->f_source_manager->groupGetMute(i));
-                atom_setfloat(av+j+5, x->f_source_manager->sourceGetColor(i).red);
-                atom_setfloat(av+j+6, x->f_source_manager->sourceGetColor(i).green);
-                atom_setfloat(av+j+7, x->f_source_manager->sourceGetColor(i).blue);
-                atom_setfloat(av+j+8, x->f_source_manager->sourceGetColor(i).alpha);
-                if(x->f_source_manager->sourceGetDescription(i).c_str())
-                    atom_setsym(av+j+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
-                else
-                    atom_setsym(av+j+9, gensym("(null)"));
-                
-                j += 10;
+                sprintf(str, "%s",x->f_source_manager->sourceGetDescription(i).c_str());
+                pch = strtok(str, " ,.-");
+                if(pch != NULL)
+                {
+                    sprintf(desc, "%s", pch);
+                    strcat(desc, "_");
+                    pch = strtok(NULL, " ,.-");
+                }
+                while(pch != NULL)
+                {
+                    strcat(desc, pch);
+                    strcat(desc, "_");
+                    pch = strtok(NULL, " ,.-");
+                }
             }
+            else
+            {
+                sprintf(desc, "(null)");
+            }
+            atom_setsym(av+9, gensym(desc));
+            binbuf_add(d, 10, av);
         }
-        binbuf_append_attribute(d, gensym("sources_parameters"), ac, av);
-        free(av);
     }
 }
 
 void hoamap_group_save(t_hoamap *x, t_binbuf *d)
 {
-    t_atom *av;
-    long ac = 0;
-    for(long i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
+    long i, j;
+    t_atom av[255];
+    char desc[MAXPDSTRING];
+    char str[MAXPDSTRING];
+    char *pch;
+    binbuf_addv(d, "s", gensym("groups_parameters"));
+    for(i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
         {
-            ac += x->f_source_manager->groupGetNumberOfSources(i) + 9;
-        }
-    }
-    av = new t_atom[ac];
-    if(av && ac)
-    {
-        for(long i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
-        {
-            if(x->f_source_manager->groupGetExistence(i))
+            long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
+            atom_setsym(av, gensym("group"));
+            atom_setlong(av+1, i);
+            atom_setlong(av+2, numberOfsource);
+            for(j = 0; j < numberOfsource; j++)
             {
-                long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
-                atom_setsym(av+j, gensym("group"));
-                atom_setlong(av+j+1, i);
-                atom_setlong(av+j+2, numberOfsource);
-                for (long k = 0; k < numberOfsource; k++)
-                {
-                    atom_setlong(av+j+k+3, x->f_source_manager->groupGetSourceIndex(i, k));
-                }
-                atom_setlong(av+j+numberOfsource+3, x->f_source_manager->groupGetMute(i));
-                atom_setfloat(av+j+numberOfsource+4, x->f_source_manager->groupGetColor(i).red);
-                atom_setfloat(av+j+numberOfsource+5, x->f_source_manager->groupGetColor(i).green);
-                atom_setfloat(av+j+numberOfsource+6, x->f_source_manager->groupGetColor(i).blue);
-                atom_setfloat(av+j+numberOfsource+7, x->f_source_manager->groupGetColor(i).alpha);
-                if(x->f_source_manager->groupGetDescription(i).c_str())
-                    atom_setsym(av+j+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
-                else
-                    atom_setsym(av+j+numberOfsource+8, gensym("(null)"));
-                
-                
-                j += x->f_source_manager->groupGetNumberOfSources(i) + 9;
+                atom_setlong(av+j+3, x->f_source_manager->groupGetSourceIndex(i, j));
             }
+            atom_setlong(av+numberOfsource+3, x->f_source_manager->groupGetMute(i));
+            atom_setfloat(av+numberOfsource+4, x->f_source_manager->groupGetColor(i).red);
+            atom_setfloat(av+numberOfsource+5, x->f_source_manager->groupGetColor(i).green);
+            atom_setfloat(av+numberOfsource+6, x->f_source_manager->groupGetColor(i).blue);
+            atom_setfloat(av+numberOfsource+7, x->f_source_manager->groupGetColor(i).alpha);
+            if(x->f_source_manager->groupGetDescription(i).size())
+            {
+                sprintf(str, "%s", x->f_source_manager->groupGetDescription(i).c_str());
+                pch = strtok(str, " ,.-");
+                if(pch != NULL)
+                {
+                    sprintf(desc, "%s", pch);
+                    strcat(desc, "_");
+                    pch = strtok(NULL, " ,.-");
+                }
+                while(pch != NULL)
+                {
+                    strcat(desc, pch);
+                    strcat(desc, "_");
+                    pch = strtok(NULL, " ,.-");
+                }
+            }
+            else
+            {
+                sprintf(desc, "(null)");
+            }
+            atom_setsym(av+numberOfsource+8, gensym(desc));
+            binbuf_add(d, 9+numberOfsource, av);
         }
-        binbuf_append_attribute(d, gensym("groups_parameters"), ac, av);
-        free(av);
     }
 }
 
@@ -976,6 +1000,9 @@ void hoamap_trajectory_save(t_hoamap *x, t_binbuf *d)
 
 void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av)
 {
+    char desc[MAXPDSTRING];
+    char str[MAXPDSTRING];
+    char *pch;
     if(ac && av)
     {
         for(long i = 0; i < ac; i++)
@@ -985,9 +1012,23 @@ void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av)
                 x->f_source_manager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
                 x->f_source_manager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
                 x->f_source_manager->sourceSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
-                if(atom_getsym(av+i+9) != gensym("(null)") && atom_getsym(av+i+9) != gensym("s_nosymbol") && atom_getsym(av+i+9) != gensym(" "))
+                if(atom_getsym(av+i+9) != gensym("(null)"))
                 {
-                    x->f_source_manager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
+                    sprintf(str, "%s",atom_getsym(av+i+9)->s_name);
+                    pch = strtok(str, " ,._");
+                    if(pch != NULL)
+                    {
+                        sprintf(desc, "%s", pch);
+                        strcat(desc, " ");
+                        pch = strtok(NULL, " ,._");
+                    }
+                    while(pch != NULL)
+                    {
+                        strcat(desc, pch);
+                        strcat(desc, " ");
+                        pch = strtok(NULL, " ,._");
+                    }
+                    x->f_source_manager->sourceSetDescription(atom_getlong(av+i+1), desc);
                 }
                 i += 8;
             }
@@ -997,23 +1038,41 @@ void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av)
 
 void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
 {
+    char desc[MAXPDSTRING];
+    char str[MAXPDSTRING];
+    char *pch;
     if(ac && av)
     {
         for(long i = 0; i < ac; i++)
         {
             if(atom_getsym(av+i) == gensym("group"))
             {
+                long groupIndex = atom_getlong(av+i+1);
                 long numberOfsource = atom_getlong(av+i+2);
-                for (int j = 0; j < numberOfsource; j++)
+                for(long j = 0; j < numberOfsource; j++)
                 {
-                    x->f_source_manager->groupSetSource(atom_getlong(av+i+1), atom_getlong(av+i+3+j));
+                    x->f_source_manager->groupSetSource(groupIndex, atom_getlong(av+i+3+j));
                 }
                 if(atom_getlong(av+i+3+numberOfsource) == 1)
-                    x->f_source_manager->groupSetMute(atom_getlong(av+i+1), 1);
-                x->f_source_manager->groupSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
-                if(atom_getsym(av+i+7+numberOfsource) != gensym("(null)") && atom_getsym(av+i+8+numberOfsource) != gensym("s_nosymbol") && atom_getsym(av+i+7+numberOfsource) != gensym(" "))
+                    x->f_source_manager->groupSetMute(groupIndex, 1);
+                x->f_source_manager->groupSetColor(groupIndex, atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
+                if(atom_getsym(av+i+8+numberOfsource) != gensym("(null)"))
                 {
-                    x->f_source_manager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+7+numberOfsource)->s_name);
+                    sprintf(str, "%s",atom_getsym(av+i+8+numberOfsource)->s_name);
+                    pch = strtok(str, " ,._");
+                    if(pch != NULL)
+                    {
+                        sprintf(desc, "%s", pch);
+                        strcat(desc, " ");
+                        pch = strtok(NULL, " ,._");
+                    }
+                    while(pch != NULL)
+                    {
+                        strcat(desc, pch);
+                        strcat(desc, " ");
+                        pch = strtok(NULL, " ,._");
+                    }
+                    x->f_source_manager->groupSetDescription(groupIndex, desc);
                 }
                 
                 i += numberOfsource + 7;

@@ -22,9 +22,9 @@ normal @fontslant roman @fontsize 11 @receive (null) @send Ð* @order
 #X obj 609 -613 hoa.map @size 184 184 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @bgcolor
 0.7 0.7 0.7 1 @bdcolor 0.5 0.5 0.5 1 @outputmode 0 @zoom 0.35 sources_parameters
-source 0 -0.993789 0.714286 1 0 0.2 0.2 0.2 float source 1 1.27329
--1.02484 0 0.2 0.2 0.2 1 groups_parameters groups_parameters group
-0 2 0 1 1 0.2 0.2 0.2 1 float;
+source 0 1.77019 0.559006 0 0.2 0.2 0.2 1 (null) source 1 -1.14907
+0.434783 0 0.2 0.2 0.2 1 (null) groups_parameters group 0 2 0 1 0 0.2
+0.2 0.2 1 (null);
 #X obj -336 -487 hoa.space @size 184 184 @fontname Helvetica @fontweight
 normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 (null) @channels 8 @coeffs 1 1 1 0.906065 1 0.640123 0.772294 0.587037
@@ -91,7 +91,6 @@ normal @fontslant roman @fontsize 11 @receive (null) @send (null) @presetname
 -1 -1;
 #X obj 823 -586 key;
 #X obj 823 -567 sel 32;
-#X text 685 -9 Simon Richir;
 #X connect 4 0 22 1;
 #X connect 5 0 22 0;
 #X connect 7 0 9 0;
