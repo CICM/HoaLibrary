@@ -1,6 +1,6 @@
 /**
  * HoaLibrary : A High Order Ambisonics Library
- * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+ * Copyright (c) 2012-2014 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
  * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
@@ -35,7 +35,7 @@
 extern juce::Component* createMaxBoxComponent();
 class EditorComponentHolder;
 
-typedef struct _jucebox
+typedef struct _meter3d
 {
 	t_jbox j_box;						// header for UI objects
     int         isInitialised;
@@ -48,33 +48,38 @@ typedef struct _jucebox
 	t_jrgba		bdcolor;
 	t_jrgba		spherecolor;
 	t_atom_long		drawVectors;
+	double		cam[3];
     
 	juce::Component* juceEditorComp;
     EditorComponentHolder* juceWindowComp;
 	
 	void*       leftOutlet;
-} t_jucebox;
+} t_meter3d;
 
 /* ---------------------------------- */
 
+EditorComponent* getOGLComponent(t_meter3d *x);
+
 void *jucebox_new(t_symbol *s, long argc, t_atom *argv);
-void jucebox_free(t_jucebox *x);
-void jucebox_assist(t_jucebox *x, void *b, long m, long a, char *s);
-void jucebox_paint(t_jucebox *x, t_object *patcherview);
-void jucebox_getdrawparams(t_jucebox *x, t_object *patcherview, t_jboxdrawparams *params);
-void jucebox_bang(t_jucebox *x);
-void jucebox_int(t_jucebox *x, long n);
-void jucebox_assist(t_jucebox *x, void *b, long m, long a, char *s);
+void jucebox_free(t_meter3d *x);
+void jucebox_assist(t_meter3d *x, void *b, long m, long a, char *s);
+void jucebox_paint(t_meter3d *x, t_object *patcherview);
+void jucebox_getdrawparams(t_meter3d *x, t_object *patcherview, t_jboxdrawparams *params);
+void jucebox_bang(t_meter3d *x);
+void jucebox_int(t_meter3d *x, long n);
+void jucebox_assist(t_meter3d *x, void *b, long m, long a, char *s);
 
-void jucebox_addjucecomponents(t_jucebox* x);
-void jucebox_deleteui(t_jucebox *x);
-void jucebox_mousedown(t_jucebox *x, t_object *patcherview, t_pt pt, long modifiers);
+void jucebox_addjucecomponents(t_meter3d* x);
+void jucebox_deleteui(t_meter3d *x);
+void jucebox_mousedown(t_meter3d *x, t_object *patcherview, t_pt pt, long modifiers);
 
-t_max_err jucebox_notify          (t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *data);
-void jucebox_anything        (t_jucebox *x, t_symbol *s, long argc, t_atom *argv);
+t_max_err jucebox_notify          (t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, void *data);
+void jucebox_anything        (t_meter3d *x, t_symbol *s, long argc, t_atom *argv);
 
-void jucebox_patcherview_vis(t_jucebox *x, t_object *patcherview);
-void jucebox_patcherview_invis(t_jucebox *x, t_object *patcherview);
+void jucebox_patcherview_vis(t_meter3d *x, t_object *patcherview);
+void jucebox_patcherview_invis(t_meter3d *x, t_object *patcherview);
+
+t_max_err attrset_cam(t_meter3d *x, t_object *attr, long argc, t_atom *argv);
 
 static t_class *s_jucebox_class;
 
@@ -84,7 +89,7 @@ class EditorComponentHolder  :	public juce::Component,
 public ComponentListener
 {
 public:
-    EditorComponentHolder (juce::Component* const editorComp_, t_jucebox* x)
+    EditorComponentHolder (juce::Component* const editorComp_, t_meter3d* x)
     :	ref(x)
 	{
 		addAndMakeVisible (editorComp_);
@@ -133,11 +138,11 @@ public:
 		return Colour(uint8(255 * jrgbaColor->red),
 					  uint8(255 * jrgbaColor->green),
 					  uint8(255 * jrgbaColor->blue),
-					  uint8(255 * jrgbaColor->alpha));
+					  float(jrgbaColor->alpha));
 	}
     
 private:
-	t_jucebox* ref;
+	t_meter3d* ref;
 	Component* editorComp;
 };
 
@@ -146,7 +151,7 @@ int C74_EXPORT main(void)
 {
 	t_class *c;
     
-	c = class_new("hoa.meter3D~", (method)jucebox_new, (method)jucebox_free, sizeof(t_jucebox), 0L, A_GIMME, 0);
+	c = class_new("hoa.meter3D~", (method)jucebox_new, (method)jucebox_free, sizeof(t_meter3d), 0L, A_GIMME, 0);
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR);
@@ -164,31 +169,37 @@ int C74_EXPORT main(void)
     CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 200 200");
     CLASS_ATTR_INVISIBLE		(c, "color", 0);
     
-    CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_jucebox, bgcolor);
+    CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_meter3d, bgcolor);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 1.");
 	
-	CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_jucebox, bdcolor);
+	CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_meter3d, bdcolor);
 	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.1 0.1 0.1 1.");
 	
-	CLASS_ATTR_RGBA				(c, "spherecolor", 0, t_jucebox, spherecolor);
+	CLASS_ATTR_RGBA				(c, "spherecolor", 0, t_meter3d, spherecolor);
 	CLASS_ATTR_CATEGORY			(c, "spherecolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "spherecolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "spherecolor", 0, "Sphere Color");
 	CLASS_ATTR_ORDER			(c, "spherecolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "spherecolor", 0, "0.9 0.9 0.9 1.");
 	
-	CLASS_ATTR_LONG				(c, "vectors", 0, t_jucebox, drawVectors);
+	CLASS_ATTR_LONG				(c, "vectors", 0, t_meter3d, drawVectors);
 	CLASS_ATTR_CATEGORY			(c, "vectors", 0, "3D");
 	CLASS_ATTR_STYLE_LABEL		(c, "vectors", 0, "onoff", "Draw 3D Vectors");
 	CLASS_ATTR_DEFAULT_SAVE		(c, "vectors", 0, "1");
+	
+	CLASS_ATTR_DOUBLE_ARRAY     (c, "cam", 0, t_meter3d, cam, 3);
+	CLASS_ATTR_CATEGORY			(c, "cam", 0, "3D");
+	CLASS_ATTR_LABEL			(c, "cam", 0, "Camera XYZ");
+	CLASS_ATTR_DEFAULT_SAVE		(c, "cam", 0, "0. 0. 0.");
+	CLASS_ATTR_ACCESSORS (c, "cam", NULL, attrset_cam);
     
     initialiseJuce_GUI();
     
@@ -198,14 +209,34 @@ int C74_EXPORT main(void)
 	return 0;
 }
 
-void jucebox_getdrawparams(t_jucebox *x, t_object *patcherview, t_jboxdrawparams *params)
+EditorComponent* getOGLComponent(t_meter3d *x)
+{
+	return dynamic_cast <EditorComponent*> (x->juceEditorComp);
+}
+
+t_max_err attrset_cam(t_meter3d *x, t_object *attr, long argc, t_atom *argv)
+{
+	if(argc && argv)
+    {
+		for (int i=0; i<3; i++)
+		{
+			x->cam[i] = atom_getfloat(argv+i);
+		}
+		
+		getOGLComponent(x)->setCamera(x->cam);
+		jbox_redraw((t_jbox*)x);
+    }
+    return MAX_ERR_NONE;
+}
+
+void jucebox_getdrawparams(t_meter3d *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_bordercolor = x->bdcolor;
 	params->d_borderthickness = 1;
 	params->d_cornersize = 4;
 }
 
-void jucebox_patcherview_vis(t_jucebox *x, t_object *patcherview)
+void jucebox_patcherview_vis(t_meter3d *x, t_object *patcherview)
 {
     x->mPatcherview = patcherview;
 	x->mPatcher = patcherview_get_patcher(x->mPatcherview);
@@ -218,13 +249,13 @@ void jucebox_patcherview_vis(t_jucebox *x, t_object *patcherview)
     }
 }
 
-void jucebox_patcherview_invis(t_jucebox *x, t_object *patcherview)
+void jucebox_patcherview_invis(t_meter3d *x, t_object *patcherview)
 {
     object_detach_byptr(x, x->mPatcherview);
     x->mPatcherview = NULL;
 }
 
-t_max_err jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, void *data)
+t_max_err jucebox_notify(t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, void *data)
 {
     if (sender && (m == gensym("attr_modified") )) {
         
@@ -247,9 +278,7 @@ t_max_err jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, v
             }
 			else if( name == gensym("vectors") )
 			{
-				//jbox_invalidate_layer((t_object *)x, NULL, gensym("vectors"));
-				EditorComponent* comp = dynamic_cast <EditorComponent*> (x->juceEditorComp);
-				comp->shouldDrawVectors(x->drawVectors);
+				getOGLComponent(x)->shouldDrawVectors(x->drawVectors);
 				jbox_redraw((t_jbox *)x);
 			}
 		}
@@ -268,13 +297,13 @@ t_max_err jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, v
 	return jbox_notify((t_jbox *)x, s, m, sender, data);
 }
 
-void jucebox_assist(t_jucebox *x, void *b, long m, long a, char *s)
+void jucebox_assist(t_meter3d *x, void *b, long m, long a, char *s)
 {
 	if (m == 1)		//inlet
 		sprintf(s, "(signal) Audio Inputs");
 }
 
-void jucebox_paint(t_jucebox *x, t_object *patcherview)
+void jucebox_paint(t_meter3d *x, t_object *patcherview)
 {
 	t_rect rect;
 	t_jgraphics *g = (t_jgraphics*) patcherview_get_jgraphics(patcherview);		// obtain graphics context
@@ -308,19 +337,19 @@ void jucebox_paint(t_jucebox *x, t_object *patcherview)
 	jgraphics_surface_destroy (surface);
 }
 
-void jucebox_mousedown(t_jucebox *x, t_object *patcherview, t_pt pt, long modifiers)
+void jucebox_mousedown(t_meter3d *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 }
 
-void jucebox_bang(t_jucebox *x)
+void jucebox_bang(t_meter3d *x)
 {
 }
 
-void jucebox_int(t_jucebox *x, long n)
+void jucebox_int(t_meter3d *x, long n)
 {
 }
 
-void jucebox_addjucecomponents(t_jucebox* x)
+void jucebox_addjucecomponents(t_meter3d* x)
 {
     long width, height;
 	width   = x->rect.width;
@@ -336,7 +365,7 @@ void jucebox_addjucecomponents(t_jucebox* x)
 	x->juceWindowComp->calcAndSetBounds();
 }
 
-void jucebox_free(t_jucebox *x)
+void jucebox_free(t_meter3d *x)
 {
 	x->juceWindowComp->removeFromDesktop();
 	delete x->juceWindowComp;
@@ -345,14 +374,14 @@ void jucebox_free(t_jucebox *x)
 
 void *jucebox_new(t_symbol *s, long argc, t_atom *argv)
 {
-	t_jucebox *x = NULL;
+	t_meter3d *x = NULL;
  	t_dictionary *d = NULL;
 	long boxflags;
 	
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
     
-	x = (t_jucebox *)object_alloc(s_jucebox_class);
+	x = (t_meter3d *)object_alloc(s_jucebox_class);
 	boxflags = 0
     | JBOX_DRAWFIRSTIN
     | JBOX_NODRAWBOX
