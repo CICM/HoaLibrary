@@ -49,12 +49,16 @@ private:
     cicm_matrix_double  m_outputs_vector_double;
     cicm_vector_float   m_outputs_vector_float;
     
+    cicm_matrix_double  m_loudspeakers_azimuth;
+    cicm_matrix_double  m_loudspeakers_elevation;
     void computeMatrices();
 public:
-	AmbisonicDecoder3D(long anOrder = 1, long aNumberOfLoudspeakers = 4, bool aShape = Hoa_Full_Sphere, long aVectorSize = 2, long aSamlingRate = 44100);
+	AmbisonicDecoder3D(long anOrder = 1, long aNumberOfLoudspeakers = 8, bool aShape = Hoa_Full_Sphere, long aVectorSize = 2, long aSamlingRate = 44100);
     
     void setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool aShape = Hoa_Full_Sphere);
     void setLoudspeakerPosition(long anIndex, double anAzimuth, double anElevation);
+    double getLoudspeakerAzimuth(long anIndex);
+    double getLoudspeakerElevation(long anIndex);
     
 	~AmbisonicDecoder3D();
     

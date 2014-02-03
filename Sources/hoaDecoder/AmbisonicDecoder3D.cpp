@@ -31,6 +31,8 @@ AmbisonicDecoder3D::AmbisonicDecoder3D(long anOrder, long aNumberOfLoudspeakers,
     m_decoder_matrix_float = NULL;
     m_outputs_vector_double = NULL;
     m_outputs_vector_float = NULL;
+    m_loudspeakers_azimuth = NULL;
+    m_loudspeakers_elevation = NULL;
     
     cicm_malloc_vec_d(m_harmonics_vector_double, m_number_of_harmonics);
     cicm_malloc_vec_f(m_harmonics_vector_float, m_number_of_harmonics);
@@ -53,9 +55,9 @@ void AmbisonicDecoder3D::computeMatrices()
     
     for(int i = 0; i < m_number_of_outputs; i++)
     {
-        double azimuth  = (double)i / (double)m_number_of_outputs * CICM_2PI;
-        double elevation = (double)i / (double)m_number_of_outputs * CICM_2PI;
-        encoder->processAzimtuhElevation(0.5, harmonics_vector, azimuth, elevation);
+        encoder->setAzimuth(m_loudspeakers_azimuth[i]);
+        encoder->setElevation(m_loudspeakers_elevation[i]);
+        encoder->process(0.5, harmonics_vector);
         for(int j = 0; j < m_number_of_harmonics; j++)
         {
             if(getHarmonicIndex(i) == 0)
@@ -75,7 +77,7 @@ void AmbisonicDecoder3D::computeMatrices()
 void AmbisonicDecoder3D::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool aShape)
 {
     m_shape = Tools::clip(aShape, Hoa_Half_Sphere, Hoa_Full_Sphere);
-    aNumberOfLoudspeakers = Tools::clip_min(aNumberOfLoudspeakers, 4);
+    m_number_of_outputs = Tools::clip_min(aNumberOfLoudspeakers, 4);
     if(m_shape == Hoa_Full_Sphere)
     {
         if(aNumberOfLoudspeakers < m_number_of_harmonics)
@@ -86,12 +88,19 @@ void AmbisonicDecoder3D::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, boo
         if(aNumberOfLoudspeakers < m_number_of_harmonics / 2)
             aNumberOfLoudspeakers = m_number_of_harmonics / 2;
     }
-    m_number_of_outputs = m_number_of_harmonics;
+    
     if(m_outputs_vector_double)
         cicm_free(m_outputs_vector_double);
     if(m_outputs_vector_float)
         cicm_free(m_outputs_vector_float);
+    if(m_loudspeakers_azimuth)
+        cicm_free(m_loudspeakers_azimuth);
+    if(m_loudspeakers_elevation)
+        cicm_free(m_loudspeakers_elevation);
     
+    cicm_malloc_vec_d(m_loudspeakers_azimuth, m_number_of_outputs);
+    cicm_malloc_vec_d(m_loudspeakers_elevation, m_number_of_outputs);
+    cicm_malloc_vec_d(m_outputs_vector_double, m_number_of_outputs);
     cicm_malloc_vec_d(m_outputs_vector_double, m_number_of_outputs);
     cicm_malloc_vec_f(m_outputs_vector_float, m_number_of_outputs);
     computeMatrices();
@@ -99,7 +108,19 @@ void AmbisonicDecoder3D::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, boo
 
 void AmbisonicDecoder3D::setLoudspeakerPosition(long anIndex, double anAzimuth, double anElevation)
 {
-    ;
+    m_loudspeakers_azimuth[(int)Tools::clip(anIndex, 0, m_number_of_outputs-1)] = anAzimuth;
+    m_loudspeakers_elevation[(int)Tools::clip(anIndex, 0, m_number_of_outputs-1)] = anElevation;
+    computeMatrices();
+}
+
+double AmbisonicDecoder3D::getLoudspeakerAzimuth(long anIndex)
+{
+    return m_loudspeakers_azimuth[(int)Tools::clip(anIndex, 0, m_number_of_outputs-1)];
+}
+
+double AmbisonicDecoder3D::getLoudspeakerElevation(long anIndex)
+{
+    return m_loudspeakers_elevation[(int)Tools::clip(anIndex, 0, m_number_of_outputs-1)];
 }
 
 AmbisonicDecoder3D::~AmbisonicDecoder3D()
@@ -110,6 +131,11 @@ AmbisonicDecoder3D::~AmbisonicDecoder3D()
     cicm_free(m_harmonics_vector_float);
     cicm_free(m_outputs_vector_double);
     cicm_free(m_outputs_vector_float);
+    
+    if(m_loudspeakers_azimuth)
+        cicm_free(m_loudspeakers_azimuth);
+    if(m_loudspeakers_elevation)
+        cicm_free(m_loudspeakers_elevation);
     
 }
 
