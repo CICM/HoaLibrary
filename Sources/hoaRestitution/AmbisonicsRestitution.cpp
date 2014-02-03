@@ -328,7 +328,7 @@ void AmbisonicsRestitution::computeMicrophoneSimulation()
 AmbisonicsRestitution::~AmbisonicsRestitution()
 {
 	if(m_vector_float_input)
-		cicm_free(m_vector_float_input)
+		cicm_free(m_vector_float_input);
 	if(m_vector_double_input)
 		cicm_free(m_vector_double_input);
 	if(m_loudspeakers_vector_float)

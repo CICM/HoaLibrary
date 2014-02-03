@@ -30,6 +30,45 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include <OpenGL/glu.h>
 
+//==============================================================================
+/**
+ A three-coordinate vector.
+ */
+template <typename Type>
+class Triangle3D
+{
+public:
+    Triangle3D() noexcept  : p1(), p2(), p3() {}
+    Triangle3D (const Vector3D<Type>& vec1, const Vector3D<Type>& vec2, const Vector3D<Type>& vec3) noexcept  : p1 (vec1), p2 (vec2), p3 (vec3) {}
+    Triangle3D (const Triangle3D& other) noexcept  : p1 (other.p1), p2 (other.p2), p3 (other.p3) {}
+    Triangle3D& operator= (const Triangle3D& other) noexcept     { p1 = other.p1;  p2 = other.p2;  p3 = other.p3;  return *this; }
+	
+    Triangle3D& operator+= (const Triangle3D& other) noexcept        { p1 += other.p1;  p2 += other.p2;  p3 += other.p3;  return *this; }
+    Triangle3D& operator-= (const Triangle3D& other) noexcept        { p1 -= other.p1;  p2 -= other.p2;  p3 -= other.p3;  return *this; }
+    Triangle3D& operator*= (const Type& scaleFactor) noexcept      { p1 *= scaleFactor;  p2 *= scaleFactor;  p3 *= scaleFactor;  return *this; }
+    Triangle3D& operator/= (const Type& scaleFactor) noexcept      { p1 /= scaleFactor;  p2 /= scaleFactor;  p3 /= scaleFactor;  return *this; }
+	
+    Vector3D<Type> p1, p2, p3;
+};
+
+//typedef struct {
+//	double x,y,z;
+//} XYZ;
+//typedef struct {
+//	XYZ p1,p2,p3;
+//} FACET3;
+typedef struct {
+	double x,y,z;
+} XYZ;
+typedef struct {
+	Vector3D<double> p1,p2,p3;
+} t_facet3;
+#define DTOR 0.0174532925
+
+XYZ MidPoint(XYZ,XYZ);
+void Normalise(XYZ *);
+
+
 class EditorComponent : public juce::Component,
 private OpenGLRenderer
 {
@@ -49,8 +88,6 @@ public:
         openGLContext.attachTo (*this);
         openGLContext.setContinuousRepainting (false);
 		m_shouldDrawVectors = true;
-		angleZ = angleX = 0;
-		speed = 0;
 		camX = camY = camZ = 0.0f;
 		
 		params = gluNewQuadric();
@@ -136,6 +173,7 @@ public:
 		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
 		// Enable lightings
+		glAlphaFunc(GL_LESS, 1);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
 		glEnable(GL_COLOR_MATERIAL);
@@ -148,9 +186,6 @@ public:
 		
 		//gluLookAt(3,4,2,0,0,0,0,0,1);
 		gluLookAt(3,3,2,0,0,0,0,0,1);
-		
-		//glRotated(angleZ,0,0,1);
-		//glRotated(angleX,1,0,0);
 		
 		glRotated(camX,1,0,0);
 		glRotated(camY,0,1,0);
@@ -165,6 +200,8 @@ public:
 		if (m_shouldDrawVectors)
 			drawCartVectors();
 		
+		drawMeters();
+		
 		// outside sphere :
 		OpenGLHelpers::setColour (  findColour(EditorComponent::sphereColourId) );
 		glLineWidth(1);
@@ -173,9 +210,6 @@ public:
 		gluSphere(params,2, 40, 40);
 		
 		glFlush();
-		
-		angleZ += speed;
-		angleX += speed;
     }
 	
     // This is a virtual method in OpenGLRenderer, and is called when it's time
@@ -189,14 +223,7 @@ public:
 	{
 		gluQuadricDrawStyle( params, GLU_FILL);
 		
-		// verctor Z
-		glColor3ub(0,0,255);
-		gluCylinder(params, 0.02, 0.02, 2.5, 5, 5);
-		glTranslated(0,0,2.5);
-		gluCylinder(params, 0.05, 0., 0.2, 10, 10);
-		glTranslated(0,0,-2.5);
-		
-		// verctor X
+		// vector Z
 		glColor3ub(255,0,0);
 		glRotated(90,0,1,0);
 		gluCylinder(params, 0.02, 0.02, 2.5, 5, 5);
@@ -205,8 +232,8 @@ public:
 		glTranslated(0,0,-2.5);
 		glRotated(-90,0,-1,0);
 		
-		// verctor Y
-		glColor3ub(0, 255, 0);
+		// vector X
+		glColor3ub(0, 0, 255);
 		glRotated(-90,1,0,0);
 		gluCylinder(params, 0.02, 0.02, 2.5, 5, 5);
 		glTranslated(0,0,2.5);
@@ -214,14 +241,151 @@ public:
 		glTranslated(0,0,-2.5);
 		glRotated(90,-1,0,0);
 		
+		// vector Y
+		glColor3ub(0, 255, 0);
+		gluCylinder(params, 0.02, 0.02, 2.5, 5, 5);
+		glTranslated(0,0,2.5);
+		gluCylinder(params, 0.05, 0., 0.2, 10, 10);
+		glTranslated(0,0,-2.5);
+		
 		// center shere (cosmetic)
 		OpenGLHelpers::setColour (  findColour(EditorComponent::sphereColourId) );
 		gluSphere(params, 0.1, 10, 10);
 	}
+
+	void drawMeters()
+	{
+//		OpenGLHelpers::setColour ( Colours::chocolate );
+//		gluQuadricDrawStyle( params, GLU_FILL);
+//		gluDisk(params, 0., 0.5, 20, 20);
+		
+		int i,j;
+		int n = 0, nstart;
+		int iterations = 2;
+		//FACET3 *f = NULL;
+		//double theta[3] = {0.0,35.0,80.0}, phi[3] = {10.0,15.0,80.0}; // corner in polar coordinates
+		//XYZ p1, p2, p3;
+		double theta[3] = {0.0,0.35,0.8}, phi[3] = {0.1,0.15,0.8}; // corner in polar coordinates
+		
+		Array<Triangle3D<double>> f;
+		Vector3D<double> p1, p2, p3;
+				
+		// Start with the vertices of the triangle
+		f.resize(1);
+		p1.x = cos(phi[0]*DTOR) * cos(theta[0]*DTOR);
+		p1.y = cos(phi[0]*DTOR) * sin(theta[0]*DTOR);
+		p1.z = sin(phi[0]*DTOR);
+		p2.x = cos(phi[1]*DTOR) * cos(theta[1]*DTOR);
+		p2.y = cos(phi[1]*DTOR) * sin(theta[1]*DTOR);
+		p2.z = sin(phi[1]*DTOR);
+		p3.x = cos(phi[2]*DTOR) * cos(theta[2]*DTOR);
+		p3.y = cos(phi[2]*DTOR) * sin(theta[2]*DTOR);
+		p3.z = sin(phi[2]*DTOR);
+		f[0].p1 = p1;
+		f[0].p2 = p2;
+		f[0].p3 = p3;
+		
+		n = 1;
+		
+		for (i=1;i<iterations;i++) {
+			nstart = n;
+			
+			for (j=0;j<nstart;j++) {
+				//f = realloc(f,(n+3)*sizeof(FACET3));
+				f.resize(n+3);
+				
+				// Create initially copies for the new facets
+				f[n  ] = f[j];
+				f[n+1] = f[j];
+				f[n+2] = f[j];
+				
+				p1 = (f[j].p1 + f[j].p2) * 0.5;
+				p1 = p1.normalised();
+				p2 = (f[j].p2 + f[j].p3) * 0.5;
+				p2 = p2.normalised();
+				p3 = (f[j].p3 + f[j].p1) * 0.5;
+				p3 = p3.normalised();
+				
+				// Replace the current facet
+				f[j].p2 = p1;
+				f[j].p3 = p3;
+				
+				// Create the changed vertices in the new facets
+				f[n  ].p1 = p1;
+				f[n  ].p3 = p2;
+				f[n+1].p1 = p3;
+				f[n+1].p2 = p2;
+				f[n+2].p1 = p1;
+				f[n+2].p2 = p2;
+				f[n+2].p3 = p3;
+				n += 3;
+			}
+		}
+		
+		glBegin(GL_TRIANGLE_STRIP);
+		glColor3f(0.0f, 1.0f, 0.0f);
+		for (i=0;i<n;i++) {
+			glVertex3f(f[i].p1.x,f[i].p1.y,f[i].p1.z);
+			glVertex3f(f[i].p2.x,f[i].p2.y,f[i].p2.z);
+			glVertex3f(f[i].p3.x,f[i].p3.y,f[i].p3.z);
+		}
+		glEnd();
+		
+		
+		
+		fprintf(stderr,"%d facets generated\n",n);
+		
+		// Save as STL, for simplicity only
+		printf("solid\n");
+		for (i=0;i<n;i++) {
+			printf("facet normal 0 0 1\n");
+			printf("outer loop\n");
+			printf("vertex %g %g %g\n",f[i].p1.x,f[i].p1.y,f[i].p1.z);
+			printf("vertex %g %g %g\n",f[i].p2.x,f[i].p2.y,f[i].p2.z);
+			printf("vertex %g %g %g\n",f[i].p3.x,f[i].p3.y,f[i].p3.z);
+			printf("endloop\n");
+			printf("endfacet\n");
+		}
+		printf("endsolid");
+	}
+	
+	/*
+	 Return the midpoint between two vectors
+	 */
+	XYZ MidPoint(XYZ p1,XYZ p2)
+	{
+		XYZ p;
+		
+		p.x = (p1.x + p2.x) / 2;
+		p.y = (p1.y + p2.y) / 2;
+		p.z = (p1.z + p2.z) / 2;
+		
+		return(p);
+	}
+	
+	/*
+	 Normalise a vector
+	 */
+	void Normalise(XYZ *p)
+	{
+		double length;
+		
+		length = sqrt(p->x * p->x + p->y * p->y + p->z * p->z);
+		if (length != 0) {
+			p->x /= length;
+			p->y /= length;
+			p->z /= length;
+		} else {
+			p->x = 0;
+			p->y = 0;
+			p->z = 0;
+		}
+	}
+	
+	
 	
 private:
     OpenGLContext openGLContext;
-	double angleZ, angleX, speed;
 	double camX, camY, camZ;
 	GLUquadric* params;
 	bool m_shouldDrawVectors;
