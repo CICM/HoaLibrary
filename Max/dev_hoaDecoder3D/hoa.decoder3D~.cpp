@@ -54,6 +54,8 @@ void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s);
 
 void HoaDecode_dsp64(t_HoaDecode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void HoaDecode_perform64(t_HoaDecode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void HoaDecode_setLoudspeakers(t_HoaDecode *x, t_symbol* s, long argc, t_atom* argv);
+void HoaDecode_infos(t_HoaDecode *x);
 
 void *HoaDecode_class;
 
@@ -63,8 +65,10 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.decoder3D~", (method)HoaDecode_new, (method)HoaDecode_free, (long)sizeof(t_HoaDecode), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)HoaDecode_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)HoaDecode_assist,	"assist",	A_CANT, 0);
+	class_addmethod(c, (method)HoaDecode_dsp64,             "dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)HoaDecode_assist,            "assist",	A_CANT, 0);
+    class_addmethod(c, (method)HoaDecode_setLoudspeakers,	"lscoord",	A_GIMME, 0);
+    class_addmethod(c, (method)HoaDecode_infos,	"infos",	A_GIMME, 0);
     
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
@@ -124,4 +128,22 @@ void HoaDecode_free(t_HoaDecode *x)
 	dsp_free((t_pxobject *)x);
 	delete x->f_AmbisonicsDecoder;
 }
+
+void HoaDecode_setLoudspeakers(t_HoaDecode *x, t_symbol* s, long argc, t_atom* argv)
+{
+    if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_FLOAT && atom_gettype(argv+2) == A_FLOAT)
+    {
+        x->f_AmbisonicsDecoder->setLoudspeakerPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+    }
+}
+
+
+void HoaDecode_infos(t_HoaDecode *x)
+{
+    object_post((t_object *)x, "Number Of Ls : %ld", x->f_AmbisonicsDecoder->getNumberOfOutputs());
+    for (int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfOutputs(); i++)
+        object_post((t_object *)x, "Ls  %i : %f %f", i, x->f_AmbisonicsDecoder->getLoudspeakerAzimuth(i), x->f_AmbisonicsDecoder->getLoudspeakerElevation(i));
+}
+
+
 

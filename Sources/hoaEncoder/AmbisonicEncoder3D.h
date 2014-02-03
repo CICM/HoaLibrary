@@ -102,14 +102,33 @@ public:
     
     inline void process(float anInput, float* anOutput)
     {
+        double factor;
+        anOutput[0] = anInput;
+        for(long i = 1; i < m_number_of_harmonics; i++)
+        {
+            factor = m_azimuth_double[i] * m_elevation_double[i];
+            anOutput[i] = anInput * factor;
+        }
+        /*
         cicm_product_vec_sca_vec_f(m_azimuth_float, anInput, anOutput, m_number_of_harmonics);
         cicm_product_vec_f(m_elevation_float, anOutput, m_number_of_harmonics);
+         */
     }
     
     inline void process(double anInput, double* anOutput)
     {
+        double factor;
+        anOutput[0] = anInput;
+        for(long i = 1; i < m_number_of_harmonics; i++)
+        {
+            factor = m_azimuth_double[i] * m_elevation_double[i];
+            anOutput[i] = anInput * factor;
+        }
+        /*
+         
         cicm_product_vec_sca_vec_d(m_azimuth_double, anInput, anOutput, m_number_of_harmonics);
         cicm_product_vec_d(m_elevation_double, anOutput, m_number_of_harmonics);
+         */
     }
     
     /************************************* In Place *************************************/

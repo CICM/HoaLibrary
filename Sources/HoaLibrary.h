@@ -51,6 +51,9 @@
 
 #ifdef __APPLE__
 
+#include "hoaAmbisonics/Ambisonic3D.h"
+#include "hoaDecoder/AmbisonicDecoder3D.h"
+#include "hoaEncoder/AmbisonicEncoder3D.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaGalaxy/AmbisonicsGalaxy.h"
 #include "hoaSpectrum/AmbisonicSpectrum.h"
@@ -59,9 +62,8 @@
 
 #ifdef _HOA3D_
 
-#include "hoaAmbisonics/Ambisonic3D.h"
-#include "hoaDecoder/AmbisonicDecoder3D.h"
-#include "hoaEncoder/AmbisonicEncoder3D.h"
+
+
  
 #endif
 

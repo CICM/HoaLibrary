@@ -106,7 +106,7 @@ void AmbisonicEncoder3D::computeMatrices()
                     }
                     m_elevation_matrix[i][j] = pll;
                 }
-                
+            
             }
         }
 	}
