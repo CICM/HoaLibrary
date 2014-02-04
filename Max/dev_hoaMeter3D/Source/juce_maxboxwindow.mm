@@ -146,7 +146,6 @@ private:
 	Component* editorComp;
 };
 
-
 int C74_EXPORT main(void)
 {
 	t_class *c;
@@ -272,27 +271,12 @@ t_max_err jucebox_notify(t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, v
                 x->juceWindowComp->setPaintColour(EditorComponent::ColourIds::sphereColourId, &x->spherecolor);
                 jbox_redraw((t_jbox*)x);
             }
-            else if (name == gensym("patching_rect"))
-            {
-				x->juceWindowComp->calcAndSetBounds();
-            }
 			else if( name == gensym("vectors") )
 			{
 				getOGLComponent(x)->shouldDrawVectors(x->drawVectors);
 				jbox_redraw((t_jbox *)x);
 			}
 		}
-        else if (sender == x->mPatcher) {
-            //if (name == gensym("name")) { qelem_set(x->mTitle); }
-        }
-        else if (sender == x->mPatcherview)
-        {
-            if (name == gensym("visiblecanvasrect"))
-            {
-                //post("visiblecanvasrect");
-                x->juceWindowComp->calcAndSetBounds();
-            }
-        }
     }
 	return jbox_notify((t_jbox *)x, s, m, sender, data);
 }
@@ -305,12 +289,8 @@ void jucebox_assist(t_meter3d *x, void *b, long m, long a, char *s)
 
 void jucebox_paint(t_meter3d *x, t_object *patcherview)
 {
-	t_rect rect;
-	t_jgraphics *g = (t_jgraphics*) patcherview_get_jgraphics(patcherview);		// obtain graphics context
-    
-	jbox_get_rect_for_view((t_object *)x, patcherview, &rect);
-    
-    x->rect = rect;
+	t_jgraphics *g = (t_jgraphics*) patcherview_get_jgraphics(patcherview);
+	jbox_get_rect_for_view((t_object *)x, patcherview, &x->rect);
     
     int locked = ((patcherview_get_locked(x->mPatcherview)) != 0);
 	
@@ -319,9 +299,8 @@ void jucebox_paint(t_meter3d *x, t_object *patcherview)
         if(!x->juceWindowComp) jucebox_addjucecomponents(x);
         x->juceWindowComp->calcAndSetBounds();
 	}
-	
-	EditorComponent* comp = dynamic_cast <EditorComponent*> (x->juceEditorComp);
-	Image openGLSnap = comp->makeScreenshot();
+
+	Image openGLSnap = getOGLComponent(x)->makeScreenshot();
 	Image::BitmapData* snapBitmap = new Image::BitmapData(openGLSnap, Image::BitmapData::ReadWriteMode::readOnly);
 	
 	unsigned char* data = snapBitmap->data;
@@ -343,6 +322,98 @@ void jucebox_mousedown(t_meter3d *x, t_object *patcherview, t_pt pt, long modifi
 
 void jucebox_bang(t_meter3d *x)
 {
+	int i,j;
+	int n = 0, nstart;
+	int iterations = 3;
+	//FACET3 *f = NULL;
+	double theta[3] = {0.0,35.0,80.0}, phi[3] = {10.0,15.0,80.0}; // corner in polar coordinates
+	//XYZ p1, p2, p3;
+	//double theta[3] = {0.0,0.35,0.8}, phi[3] = {0.1,0.15,0.8}; // corner in polar coordinates
+	
+	//Array<t_facet3> f;
+	Array<Triangle3D<double>> f;
+	Vector3D<double> p1, p2, p3;
+	
+	// Start with the vertices of the triangle
+	f.resize(1);
+	p1.x = cos(phi[0]*DTOR) * cos(theta[0]*DTOR);
+	p1.y = cos(phi[0]*DTOR) * sin(theta[0]*DTOR);
+	p1.z = sin(phi[0]*DTOR);
+	p2.x = cos(phi[1]*DTOR) * cos(theta[1]*DTOR);
+	p2.y = cos(phi[1]*DTOR) * sin(theta[1]*DTOR);
+	p2.z = sin(phi[1]*DTOR);
+	p3.x = cos(phi[2]*DTOR) * cos(theta[2]*DTOR);
+	p3.y = cos(phi[2]*DTOR) * sin(theta[2]*DTOR);
+	p3.z = sin(phi[2]*DTOR);
+	post("----- %f %f %f\n",p1.x,p1.y,p1.z);
+	f[0].p1 = p1;
+	post("vertex %f %f %f\n",f[0].p1.x,f[0].p1.y,f[0].p1.z);
+	f[0].p2 = p2;
+	f[0].p3 = p3;
+	
+	n = 1;
+	
+	post("-------------");
+	for (i=0;i<n;i++) {
+		post("facet normal 0 0 1\n");
+		post("outer loop\n");
+		post("vertex %f %f %f\n",f[i].p1.x,f[i].p1.y,f[i].p1.z);
+		post("vertex %f %f %f\n",f[i].p2.x,f[i].p2.y,f[i].p2.z);
+		post("vertex %f %f %f\n",f[i].p3.x,f[i].p3.y,f[i].p3.z);
+		post("endloop\n");
+		post("endfacet\n");
+	}
+	post("-------");
+	
+	for (i=1;i<iterations;i++) {
+		nstart = n;
+		
+		for (j=0;j<nstart;j++) {
+			//f = realloc(f,(n+3)*sizeof(FACET3));
+			f.resize(n+3);
+			
+			// Create initially copies for the new facets
+			f[n  ] = f[j];
+			f[n+1] = f[j];
+			f[n+2] = f[j];
+			
+			p1 = (f[j].p1 + f[j].p2) * 0.5;
+			p1 = p1.normalised();
+			p2 = (f[j].p2 + f[j].p3) * 0.5;
+			p2 = p2.normalised();
+			p3 = (f[j].p3 + f[j].p1) * 0.5;
+			p3 = p3.normalised();
+			
+			// Replace the current facet
+			f[j].p2 = p1;
+			f[j].p3 = p3;
+			
+			// Create the changed vertices in the new facets
+			f[n  ].p1 = p1;
+			f[n  ].p3 = p2;
+			f[n+1].p1 = p3;
+			f[n+1].p2 = p2;
+			f[n+2].p1 = p1;
+			f[n+2].p2 = p2;
+			f[n+2].p3 = p3;
+			n += 3;
+		}
+	}
+	
+	post("%d facets generated\n",n);
+	
+	// Save as STL, for simplicity only
+	post("solid\n");
+	for (i=0;i<n;i++) {
+		post("facet normal 0 0 1\n");
+		post("outer loop\n");
+		post("vertex %f %f %f\n",f[i].p1.x,f[i].p1.y,f[i].p1.z);
+		post("vertex %f %f %f\n",f[i].p2.x,f[i].p2.y,f[i].p2.z);
+		post("vertex %f %f %f\n",f[i].p3.x,f[i].p3.y,f[i].p3.z);
+		post("endloop\n");
+		post("endfacet\n");
+	}
+	post("endsolid");
 }
 
 void jucebox_int(t_meter3d *x, long n)
@@ -350,13 +421,9 @@ void jucebox_int(t_meter3d *x, long n)
 }
 
 void jucebox_addjucecomponents(t_meter3d* x)
-{
-    long width, height;
-	width   = x->rect.width;
-	height  = x->rect.height;
-	
+{	
 	x->juceEditorComp = createMaxBoxComponent();
-	x->juceEditorComp->setBounds(0, 0, width, height);
+	x->juceEditorComp->setBounds(0, 0, x->rect.width, x->rect.height);
 	
 	x->juceEditorComp->setOpaque (true);
 	x->juceEditorComp->setVisible (true);
