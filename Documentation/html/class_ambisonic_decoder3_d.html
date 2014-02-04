@@ -100,41 +100,30 @@ Inheritance diagram for AmbisonicDecoder3D:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab6f7d1512947f685d4ec43b80f45d16e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ambisonic_decoder3_d.html#ab6f7d1512947f685d4ec43b80f45d16e">AmbisonicDecoder3D</a> (long anOrder=1, long aNumberOfLoudspeakers=4, bool aShape=Hoa_Full_Sphere, long aVectorSize=2, long aSamlingRate=44100)</td></tr>
-<tr class="separator:ab6f7d1512947f685d4ec43b80f45d16e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a500aa4620487dc857bd1c2c89acfe874"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ambisonic_decoder3_d.html#a500aa4620487dc857bd1c2c89acfe874">AmbisonicDecoder3D</a> (long anOrder=1, long aNumberOfLoudspeakers=8, bool aShape=Hoa_Full_Sphere, long aVectorSize=2, long aSamlingRate=44100)</td></tr>
+<tr class="separator:a500aa4620487dc857bd1c2c89acfe874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a910db37deb4ad6fd574a43d692888842"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a910db37deb4ad6fd574a43d692888842"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setNumberOfLoudspeakers</b> (long aNumberOfLoudspeakers, bool aShape=Hoa_Full_Sphere)</td></tr>
 <tr class="separator:a910db37deb4ad6fd574a43d692888842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a646c9ad31367db67b001964be4692145"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a646c9ad31367db67b001964be4692145"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerPosition</b> (long anIndex, double anAzimuth, double anElevation)</td></tr>
 <tr class="separator:a646c9ad31367db67b001964be4692145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5942ef0cad58db519d4bc28d7422b3fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5942ef0cad58db519d4bc28d7422b3fc"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerAzimuth</b> (long anIndex)</td></tr>
+<tr class="separator:a5942ef0cad58db519d4bc28d7422b3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90aff96227bfdbde571bb26998af9750"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a90aff96227bfdbde571bb26998af9750"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerElevation</b> (long anIndex)</td></tr>
+<tr class="separator:a90aff96227bfdbde571bb26998af9750"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb378983f0ac5c5dbb27f69f02fd2993"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb378983f0ac5c5dbb27f69f02fd2993"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (const float *anInput, float *anOutput)</td></tr>
 <tr class="separator:adb378983f0ac5c5dbb27f69f02fd2993"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacbe0f5139bc59edd8b12693d84388b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aacbe0f5139bc59edd8b12693d84388b6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (const double *anInput, double *anOutput)</td></tr>
 <tr class="separator:aacbe0f5139bc59edd8b12693d84388b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad240e005c51cd3a84fe8c636328fa531"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad240e005c51cd3a84fe8c636328fa531"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *anInputOutput)</td></tr>
-<tr class="separator:ad240e005c51cd3a84fe8c636328fa531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03b5845692d6110b5c568bbd649dc088"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03b5845692d6110b5c568bbd649dc088"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *anInputOutput)</td></tr>
-<tr class="separator:a03b5845692d6110b5c568bbd649dc088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedeacd2f05d352ac0a22a448b649b3f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aedeacd2f05d352ac0a22a448b649b3f3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float **anInput, float **anOutput)</td></tr>
-<tr class="separator:aedeacd2f05d352ac0a22a448b649b3f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a057486573400b6bf6baa3f6be25cfe7c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a057486573400b6bf6baa3f6be25cfe7c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double **anInput, double **anOutput)</td></tr>
-<tr class="separator:a057486573400b6bf6baa3f6be25cfe7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ea5064bb69f5cc8680af92071f3a1c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ea5064bb69f5cc8680af92071f3a1c3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float **anInputOutput)</td></tr>
-<tr class="separator:a6ea5064bb69f5cc8680af92071f3a1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f3965a4c3f531417df96f16bfbfeb5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f3965a4c3f531417df96f16bfbfeb5d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double **anInputOutput)</td></tr>
-<tr class="separator:a1f3965a4c3f531417df96f16bfbfeb5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_ambisonic3_d"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_ambisonic3_d')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_ambisonic3_d.html">Ambisonic3D</a></td></tr>
-<tr class="memitem:aa0948430277ba494551bb712f7a548ea inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ambisonic3_d.html#aa0948430277ba494551bb712f7a548ea">Ambisonic3D</a> (long anOrder=1, long aVectorSize=2, long aSamplingRate=44100.)</td></tr>
-<tr class="separator:aa0948430277ba494551bb712f7a548ea inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e5c102c4198fe620e5a08e612714488 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e5c102c4198fe620e5a08e612714488"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Ambisonic3D</b> (unsigned int order=1)</td></tr>
+<tr class="separator:a9e5c102c4198fe620e5a08e612714488 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a122f538beab6cecd937494795d9fea68 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a122f538beab6cecd937494795d9fea68"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><b>getOrder</b> ()</td></tr>
 <tr class="separator:a122f538beab6cecd937494795d9fea68 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,39 +136,15 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfInputs</b>
 <tr class="memitem:a7c94c05cb033a8f84ae5a92b20896c25 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c94c05cb033a8f84ae5a92b20896c25"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfOutputs</b> ()</td></tr>
 <tr class="separator:a7c94c05cb033a8f84ae5a92b20896c25 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3dfa779bd5934d617fc2cc087421928 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3dfa779bd5934d617fc2cc087421928"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorSize</b> ()</td></tr>
-<tr class="separator:aa3dfa779bd5934d617fc2cc087421928 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd6071ee65babdcf2ba6f10b5b5fefe0 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd6071ee65babdcf2ba6f10b5b5fefe0"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplingRate</b> ()</td></tr>
-<tr class="separator:afd6071ee65babdcf2ba6f10b5b5fefe0 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acff0f5e46b5a7c6de7856956bda1e1a0 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acff0f5e46b5a7c6de7856956bda1e1a0"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicIndex</b> (long anIndex)</td></tr>
-<tr class="separator:acff0f5e46b5a7c6de7856956bda1e1a0 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcd251db6df904e4cab3e464e19c3a08 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcd251db6df904e4cab3e464e19c3a08"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicOrder</b> (long anIndex)</td></tr>
-<tr class="separator:adcd251db6df904e4cab3e464e19c3a08 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77d9738670b3a3224dd622f01eb65689 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77d9738670b3a3224dd622f01eb65689"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicsName</b> (long anIndex)</td></tr>
-<tr class="separator:a77d9738670b3a3224dd622f01eb65689 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0da0abc4a0036f369bd84a926ac3734c inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0da0abc4a0036f369bd84a926ac3734c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:a0da0abc4a0036f369bd84a926ac3734c inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e7467dbba7233317954b4ed8607174c inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e7467dbba7233317954b4ed8607174c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:a5e7467dbba7233317954b4ed8607174c inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5e2e2ed735b2746c5f4a27867bb2459 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af5e2e2ed735b2746c5f4a27867bb2459"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs)</td></tr>
-<tr class="separator:af5e2e2ed735b2746c5f4a27867bb2459 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7280e883920d813914e5acdd40139c3 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7280e883920d813914e5acdd40139c3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *inputs, double *outputs)</td></tr>
-<tr class="separator:ae7280e883920d813914e5acdd40139c3 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e0bf1a4a9c40c7b8f576976532a94d3 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e0bf1a4a9c40c7b8f576976532a94d3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float **inputs, float **outputs)</td></tr>
-<tr class="separator:a1e0bf1a4a9c40c7b8f576976532a94d3 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af678e023c64b3865ef27fe29bcc4a0ca inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af678e023c64b3865ef27fe29bcc4a0ca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double **inputs, double **outputs)</td></tr>
-<tr class="separator:af678e023c64b3865ef27fe29bcc4a0ca inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09484904bb8284cd64985ad341485e34 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09484904bb8284cd64985ad341485e34"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicIndex</b> (unsigned int index)</td></tr>
+<tr class="separator:a09484904bb8284cd64985ad341485e34 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7bf8e739e5af928ddd905aaf3c179d9 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab7bf8e739e5af928ddd905aaf3c179d9"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicOrder</b> (unsigned int index)</td></tr>
+<tr class="separator:ab7bf8e739e5af928ddd905aaf3c179d9 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a311859b42feeaa04111382fe499eadb2 inherit pub_methods_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a311859b42feeaa04111382fe499eadb2"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicsName</b> (unsigned int index)</td></tr>
+<tr class="separator:a311859b42feeaa04111382fe499eadb2 inherit pub_methods_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -196,12 +161,6 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_inputs</b
 <tr class="memitem:ad650b4479aa106e0914b5aa3634249a0 inherit pro_attribs_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad650b4479aa106e0914b5aa3634249a0"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_outputs</b></td></tr>
 <tr class="separator:ad650b4479aa106e0914b5aa3634249a0 inherit pro_attribs_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07817497c3dad9c59077fb41ec7e7078 inherit pro_attribs_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07817497c3dad9c59077fb41ec7e7078"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_size</b></td></tr>
-<tr class="separator:a07817497c3dad9c59077fb41ec7e7078 inherit pro_attribs_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9aa7a4977de5f201ab2ee7e4cd9aec7 inherit pro_attribs_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9aa7a4977de5f201ab2ee7e4cd9aec7"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></td></tr>
-<tr class="separator:ac9aa7a4977de5f201ab2ee7e4cd9aec7 inherit pro_attribs_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6956fcba4f28ef36e487ab84a003ab27 inherit pro_attribs_class_ambisonic3_d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6956fcba4f28ef36e487ab84a003ab27"></a>
 long *&#160;</td><td class="memItemRight" valign="bottom"><b>m_harmonics_indices</b></td></tr>
 <tr class="separator:a6956fcba4f28ef36e487ab84a003ab27 inherit pro_attribs_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,7 +169,7 @@ long *&#160;</td><td class="memItemRight" valign="bottom"><b>m_harmonics_orders<
 <tr class="separator:a5da35d2fac8aee501c51fd57ec66b565 inherit pro_attribs_class_ambisonic3_d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ab6f7d1512947f685d4ec43b80f45d16e"></a>
+<a class="anchor" id="a500aa4620487dc857bd1c2c89acfe874"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -224,7 +183,7 @@ long *&#160;</td><td class="memItemRight" valign="bottom"><b>m_harmonics_orders<
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>aNumberOfLoudspeakers</em> = <code>4</code>, </td>
+          <td class="paramname"><em>aNumberOfLoudspeakers</em> = <code>8</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -251,7 +210,7 @@ long *&#160;</td><td class="memItemRight" valign="bottom"><b>m_harmonics_orders<
         </tr>
       </table>
 </div><div class="memdoc">
-<p>HoaLibrary : A High Order Ambisonics Library Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8. All rights reserved.</p>
+<p><a class="el" href="interface_hoa_library.html">HoaLibrary</a> : A High Order Ambisonics Library Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8. All rights reserved.</p>
 <p>Website : <a href="http://www.mshparisnord.fr/hoalibrary/">http://www.mshparisnord.fr/hoalibrary/</a> Contacts : <a href="#" onclick="location.href='mai'+'lto:'+'cic'+'m.'+'msh'+'pa'+'ris'+'no'+'rd@'+'gm'+'ail'+'.c'+'om'; return false;">cicm.<span style="display: none;">.nosp@m.</span>mshp<span style="display: none;">.nosp@m.</span>arisn<span style="display: none;">.nosp@m.</span>ord@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a></p>
 <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
 <ul>
@@ -271,7 +230,7 @@ long *&#160;</td><td class="memItemRight" valign="bottom"><b>m_harmonics_orders<
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 17 2014 12:44:50 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 4 2014 19:09:23 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

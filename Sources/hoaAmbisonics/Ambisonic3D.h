@@ -1,7 +1,6 @@
-/**
+/* 
  * HoaLibrary : A High Order Ambisonics Library
  * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- * All rights reserved.re Guillot, CICM - Université Paris 8
  * All rights reserved.
  *
  * Website  : http://www.mshparisnord.fr/HoaLibrary/
@@ -20,7 +19,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -50,7 +49,6 @@ public:
     long getHarmonicIndex(unsigned int index);
     long getHarmonicOrder(unsigned int index);
     std::string getHarmonicsName(unsigned int index);
-
 
 	~Ambisonic3D();
 };

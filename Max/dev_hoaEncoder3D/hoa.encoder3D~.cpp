@@ -38,6 +38,8 @@ typedef struct _hoa_encoder
 {
 	t_pxobject              f_ob;
     AmbisonicEncoder3D*     f_encoder;
+    float*                  f_signals;
+    
 } t_hoa_encoder;
 
 
@@ -99,8 +101,7 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_encoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_encoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
-        
-        x->f_ob.z_misc = Z_NO_INPLACE;
+        x->f_signals =  new float[x->f_encoder->getNumberOfOutputs()];
 	}
 
 	return (x);
@@ -132,8 +133,6 @@ void hoa_encoder_int(t_hoa_encoder *x, long n)
 
 void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_encoder->setVectorSize(maxvectorsize);
-	x->f_encoder->setSamplingRate(samplerate);
     
     if(count[x->f_encoder->getNumberOfInputs() - 1] && count[x->f_encoder->getNumberOfInputs() - 2])
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_azimuth_elevation, 0, NULL);
@@ -149,25 +148,45 @@ void hoa_encoder_perform64_azimuth_elevation(t_hoa_encoder *x, t_object *dsp64, 
 {
     while(--sampleframes)
     {
-        x->f_encoder->setCoordinates(ins[1][sampleframes], ins[2][sampleframes]);
-        x->f_encoder->process(ins[0][sampleframes], NULL);
+        x->f_encoder->setAzimuth(ins[1][sampleframes]);
+        x->f_encoder->setElevation(ins[1][sampleframes]);
+        x->f_encoder->process((const float)ins[0][sampleframes], x->f_signals);
+        for(int i = 0; i < numouts; i++)
+            outs[i][sampleframes] = x->f_signals[i];
     }
 	
 }
 
 void hoa_encoder_perform64_azimuth(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_encoder->processAzimtuh(ins[0], outs, ins[1]);
+    while(--sampleframes)
+    {
+        x->f_encoder->setAzimuth(ins[1][sampleframes]);
+        x->f_encoder->process((const float)ins[0][sampleframes], x->f_signals);
+        for(int i = 0; i < numouts; i++)
+            outs[i][sampleframes] = x->f_signals[i];
+    }
 }
 
 void hoa_encoder_perform64_elevation(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_encoder->processElevation(ins[0], outs, ins[2]);
+	while(--sampleframes)
+    {
+        x->f_encoder->setElevation(ins[1][sampleframes]);
+        x->f_encoder->process((const float)ins[0][sampleframes], x->f_signals);
+        for(int i = 0; i < numouts; i++)
+            outs[i][sampleframes] = x->f_signals[i];
+    }
 }
 
 void hoa_encoder_perform64(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_encoder->process(ins[0], outs);
+	while(--sampleframes)
+    {
+        x->f_encoder->process((const float)ins[0][sampleframes], x->f_signals);
+        for(int i = 0; i < numouts; i++)
+            outs[i][sampleframes] = x->f_signals[i];
+    }
 }
 
 void hoa_encoder_assist(t_hoa_encoder *x, void *b, long m, long a, char *s)
@@ -176,11 +195,11 @@ void hoa_encoder_assist(t_hoa_encoder *x, void *b, long m, long a, char *s)
 	{
         if(a == 0)
         {
-            sprintf(s,"(Signal) %s", x->f_encoder->getInputName(a).c_str());
+            sprintf(s,"(Signal) %s", "");
         }
         else
         {
-            sprintf(s,"(Signal or float) %s", x->f_encoder->getInputName(a).c_str());
+            sprintf(s,"(Signal or float) %s", "");
         }
 	}
 	else 
@@ -194,5 +213,6 @@ void hoa_encoder_free(t_hoa_encoder *x)
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_encoder;
+    delete [] x->f_signals;
 }
 

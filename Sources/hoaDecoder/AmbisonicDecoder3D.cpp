@@ -55,6 +55,7 @@ void AmbisonicDecoder3D::computeMatrices()
     
     for(int i = 0; i < m_number_of_outputs; i++)
     {
+        /*
         encoder->setAzimuth(m_loudspeakers_azimuth[i]);
         encoder->setElevation(m_loudspeakers_elevation[i]);
         encoder->process(0.5, harmonics_vector);
@@ -71,7 +72,7 @@ void AmbisonicDecoder3D::computeMatrices()
                 cicm_set_mat_f(m_decoder_matrix_float, i, j, m_number_of_harmonics, harmonics_vector[j]);
             }
         }
-    }
+    }*/
 }
 
 void AmbisonicDecoder3D::setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool aShape)

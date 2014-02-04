@@ -62,12 +62,6 @@ public:
     
 	~AmbisonicDecoder3D();
     
-    /************************************************************************************/
-    /***************************** Perform sample by sample *****************************/
-    /************************************************************************************/
-
-    /*********************************** Out Of Place ***********************************/
-    
     inline void process(const float* anInput, float* anOutput)
     {
        cicm_product_mat_vec_f(m_decoder_matrix_float, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
@@ -76,94 +70,6 @@ public:
     inline void process(const double* anInput, double* anOutput)
     {
         cicm_product_mat_vec_d(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
-    }
-    
-    /************************************* In Place *************************************/
-
-    
-    inline void process(float* anInputOutput)
-    {
-        cicm_copy_vec_vec_f(anInputOutput, m_harmonics_vector_float, m_number_of_harmonics);
-        cicm_product_mat_vec_f(m_decoder_matrix_float, m_harmonics_vector_float, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
-    }
-    
-    inline void process(double* anInputOutput)
-    {
-        cicm_copy_vec_vec_d(anInputOutput, m_harmonics_vector_double, m_number_of_harmonics);
-        cicm_product_mat_vec_d(m_decoder_matrix_double, m_harmonics_vector_double, anInputOutput, m_number_of_outputs, m_number_of_harmonics);
-    }
-    
-    /************************************************************************************/
-    /******************************* Perform sample block *******************************/
-    /************************************************************************************/
-    
-    /*********************************** Out Of Place ***********************************/
-    
-    inline void process(float** anInput, float** anOutput)
-    {
-        for(int i = 0; i < m_vector_size; i++)
-		{
-            for(int j = 0; j < m_number_of_harmonics; j++)
-            {
-                m_harmonics_vector_float[j] = anInput[j][i];
-            }
-            process(m_harmonics_vector_float, m_outputs_vector_float);
-            for(int j = 0; j < m_number_of_outputs; j++)
-            {
-                anOutput[j][i] = m_outputs_vector_float[j];
-            }
-		}
-    }
-    
-    inline void process(double** anInput, double** anOutput)
-    {
-        for(int i = 0; i < m_vector_size; i++)
-		{
-            for(int j = 0; j < m_number_of_harmonics; j++)
-            {
-                m_harmonics_vector_double[j] = anInput[j][i];
-            }
-            process(m_harmonics_vector_double, m_outputs_vector_double);
-            for(int j = 0; j < m_number_of_outputs; j++)
-            {
-                anOutput[j][i] = m_outputs_vector_double[j];
-            }
-		}
-    }
-    
-    /************************************* In Place *************************************/
-    
-       
-    inline void process(float** anInputOutput)
-    {
-        for(int i = 0; i < m_vector_size; i++)
-		{
-            for(int j = 0; j < m_number_of_harmonics; j++)
-            {
-                m_harmonics_vector_float[j] = anInputOutput[j][i];
-            }
-            process(m_harmonics_vector_float, m_outputs_vector_float);
-            for(int j = 0; j < m_number_of_outputs; j++)
-            {
-                anInputOutput[j][i] = m_outputs_vector_float[j];
-            }
-		}
-    }
-    
-    inline void process(double** anInputOutput)
-    {
-        for(int i = 0; i < m_vector_size; i++)
-		{
-            for(int j = 0; j < m_number_of_harmonics; j++)
-            {
-                m_harmonics_vector_double[j] = anInputOutput[j][i];
-            }
-            process(m_harmonics_vector_double, m_outputs_vector_double);
-            for(int j = 0; j < m_number_of_outputs; j++)
-            {
-                anInputOutput[j][i] = m_outputs_vector_double[j];
-            }
-		}
     }
 };
 #endif

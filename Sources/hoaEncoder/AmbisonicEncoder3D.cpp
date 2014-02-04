@@ -29,8 +29,8 @@ AmbisonicEncoder3D::AmbisonicEncoder3D(unsigned int order) : Ambisonic3D(order)
 {
     m_number_of_inputs = 3;
     
-    m_azimuth_matrix = new cicm_vector_float[m_number_of_harmonics];
-    m_elevation_matrix = new cicm_vector_float[m_number_of_harmonics];
+    m_azimuth_matrix = new float*[m_number_of_harmonics];
+    m_elevation_matrix = new float*[m_number_of_harmonics];
     for(int i = 0; i < m_number_of_harmonics; i++)
     {
         cicm_malloc_vec_f(m_azimuth_matrix[i], NUMBEROFCIRCLEPOINTS);
@@ -40,7 +40,8 @@ AmbisonicEncoder3D::AmbisonicEncoder3D(unsigned int order) : Ambisonic3D(order)
     cicm_malloc_vec_f(m_elevation, m_number_of_harmonics);
     
     computeMatrices();
-    setCoordinates(0., 0.);
+    setAzimuth(0.);
+    setElevation(0.);
 }
 
 void AmbisonicEncoder3D::computeMatrices()
@@ -119,28 +120,8 @@ void AmbisonicEncoder3D::computeMatrices()
         }
     }*/
 }
-/*
-void AmbisonicEncoder3D::computeNormalization()
-{
-    for(long i = 0; i < m_number_of_harmonics; i++)
-    {
-        double factor = (2 * getHarmonicOrder(i) + 1) / (CICM_2PI * 2);
-        m_normalization_double[i] = factor * Tools::factoriel(getHarmonicOrder(i) - getHarmonicIndex(i)) / Tools::factoriel(getHarmonicOrder(i) + getHarmonicIndex(i));
-        if (getHarmonicIndex(i) != 0)
-        {
-            m_normalization_double[i] *= sqrt(2.);
-        }
-        m_normalization_float[i] = m_normalization_double[i];
-    }
-}
-*/
-void AmbisonicEncoder3D::setCoordinates(float azimuth, float elevation)
-{
-    setAzimuth(azimuth);
-    setElevation(elevation);
-}
 
-void AmbisonicEncoder3D::setAzimuth(float azimuth)
+void AmbisonicEncoder3D::setAzimuth(const float azimuth)
 {
     int index = (int)((Tools::radian_wrap(azimuth) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
@@ -149,7 +130,7 @@ void AmbisonicEncoder3D::setAzimuth(float azimuth)
     }
 }
 
-void AmbisonicEncoder3D::setElevation(float elevation)
+void AmbisonicEncoder3D::setElevation(const float elevation)
 {
 	int index = (int)((Tools::radian_wrap(elevation) / CICM_2PI) * NUMBEROFCIRCLEPOINTS);
     for(int i = 0; i < m_number_of_harmonics; i++)
@@ -158,7 +139,7 @@ void AmbisonicEncoder3D::setElevation(float elevation)
     }
 }
 
-void AmbisonicEncoder3D::process(const float inputs, float* outputs)
+void AmbisonicEncoder3D::process(const float input, float* outputs)
 {
     ;
 }
