@@ -26,9 +26,9 @@
 
 #include "Ambisonic3D.h"
 
-Ambisonic3D::Ambisonic3D(long anOrder, long aVectorSize, long aSamplingRate)
+Ambisonic3D::Ambisonic3D(unsigned int order)
 {
-	m_order					= Tools::clip_min(anOrder, (long)1);
+	m_order					= Tools::clip_min(order, (long)1);
 	m_number_of_harmonics	= (m_order + 1) * (m_order + 1);
 	m_number_of_inputs		= m_number_of_harmonics;
 	m_number_of_outputs		= m_number_of_harmonics;
@@ -45,9 +45,6 @@ Ambisonic3D::Ambisonic3D(long anOrder, long aVectorSize, long aSamplingRate)
             index2 = -index2;
         m_harmonics_indices[i] = index2;
     }
-    
-	setVectorSize(aVectorSize);
-    setSamplingRate(aSamplingRate);
 }
 
 long Ambisonic3D::getOrder()
@@ -70,50 +67,30 @@ long Ambisonic3D::getNumberOfOutputs()
 	return m_number_of_outputs;
 }
 
-long Ambisonic3D::getVectorSize()
+long Ambisonic3D::getHarmonicIndex(unsigned int index)
 {
-	return m_vector_size;
-}
-
-long Ambisonic3D::getSamplingRate()
-{
-	return m_sampling_rate;
-}
-
-long Ambisonic3D::getHarmonicIndex(long anIndex)
-{
-    if(anIndex >= 0 && anIndex < m_number_of_harmonics)
+    if(index < m_number_of_harmonics)
     {
-        return m_harmonics_indices[anIndex];
+        return m_harmonics_indices[index];
     }
     else
         return 0;
 }
 
-long Ambisonic3D::getHarmonicOrder(long anIndex)
+long Ambisonic3D::getHarmonicOrder(unsigned int index)
 {
-    if(anIndex >= 0 && anIndex < m_number_of_harmonics)
+    if(index < m_number_of_harmonics)
     {
-        return m_harmonics_orders[anIndex];
+        return m_harmonics_orders[index];
     }
     else
         return 0;
 }
 
-void Ambisonic3D::setVectorSize(long aVectorSize)
+std::string Ambisonic3D::getHarmonicsName(unsigned int index)
 {
-	m_vector_size = Tools::clip_power_of_two(aVectorSize);
-}
-
-void Ambisonic3D::setSamplingRate(long aSamplingRate)
-{
-	m_sampling_rate = Tools::clip_min(aSamplingRate, long(0));
-}
-
-std::string Ambisonic3D::getHarmonicsName(long anIndex)
-{
-    if(anIndex >= 0 && anIndex < m_number_of_harmonics)
-        return "Harmonic " + Tools::intToString(getHarmonicOrder(anIndex)) + " " + Tools::intToString(getHarmonicIndex(anIndex));
+    if(index < m_number_of_harmonics)
+        return "Harmonic " + Tools::intToString(getHarmonicOrder(index)) + " " + Tools::intToString(getHarmonicIndex(index));
     else
         return "No harmonic";
 }

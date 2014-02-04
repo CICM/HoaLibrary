@@ -36,74 +36,23 @@ protected:
 	long	m_number_of_harmonics;
 	long	m_number_of_inputs;
 	long	m_number_of_outputs;
-	long	m_vector_size;
-    long	m_sampling_rate;
     
     long*    m_harmonics_indices;
     long*    m_harmonics_orders;
     
 public:
-	Ambisonic3D(long anOrder = 1, long aVectorSize = 2, long aSamplingRate = 44100.);
+	Ambisonic3D(unsigned int order = 1);
 	long getOrder();
 	long getNumberOfHarmonics();
 	long getNumberOfInputs();
 	long getNumberOfOutputs();
-	long getVectorSize();
-	long getSamplingRate();
-    long getHarmonicIndex(long anIndex);
-    long getHarmonicOrder(long anIndex);
-    std::string  getHarmonicsName(long anIndex);
-    
-	void setVectorSize(long aVectorSize);
-    void setSamplingRate(long aSamplingRate);
+
+    long getHarmonicIndex(unsigned int index);
+    long getHarmonicOrder(unsigned int index);
+    std::string getHarmonicsName(unsigned int index);
+
 
 	~Ambisonic3D();
-	
-	/* Perform sample by sample */
-	inline void process(float* inputs, float* outputs)
-	{	
-		for(int i = 0; i < m_number_of_harmonics; i++)
-			outputs[i] = inputs[i];
-	}
-    
-    /* Perform sample by sample */
-	inline void process(double* inputs, double* outputs)
-	{
-		for(int i = 0; i < m_number_of_harmonics; i++)
-			outputs[i] = inputs[i];
-	}
-	
-	/* Perform block sample */
-	inline void process(float** inputs, float** outputs)
-	{
-        float* input_pointor;
-        float* output_pointor;
-        for(int i = 0; i < m_number_of_harmonics; i++)
-        {
-            input_pointor = inputs[i];
-            output_pointor = outputs[i];
-			for(int j = 0; j < m_vector_size; j++)
-            {
-				output_pointor[j] = input_pointor[j];
-			}
-		}
-	}
-    
-    /* Perform block sample */
-	inline void process(double** inputs, double** outputs)
-	{
-        double* input_pointor;
-        double* output_pointor;
-        for(int i = 0; i < m_number_of_harmonics; i++)
-        {
-            input_pointor = inputs[i];
-            output_pointor = outputs[i];
-			for(int j = 0; j < m_vector_size; j++)
-            {
-				output_pointor[j] = input_pointor[j];
-			}
-		}
-	}
 };
 
 

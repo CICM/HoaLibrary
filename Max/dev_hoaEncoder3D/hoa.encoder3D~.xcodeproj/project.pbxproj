@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */; };
 		8F84E2E9189FD6F8007BD109 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F84E2E8189FD6F8007BD109 /* Accelerate.framework */; };
 		8F84E2EB189FD714007BD109 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F84E2EA189FD714007BD109 /* MaxAudioAPI.framework */; };
 		8F84E2ED189FD780007BD109 /* HoaLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F84E2EC189FD780007BD109 /* HoaLibrary.h */; };
+		8F8C0B9A18A04403005F9BDC /* CicmVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F8C0B9818A04403005F9BDC /* CicmVector.cpp */; };
+		8F8C0B9B18A04403005F9BDC /* CicmVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8C0B9918A04403005F9BDC /* CicmVector.h */; };
+		8F8C0B9D18A045FD005F9BDC /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8C0B9C18A045FD005F9BDC /* CicmDefine.h */; };
 		8FF4AFA017A2A3E800C2B435 /* hoa.encoder3D~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AF9F17A2A3E800C2B435 /* hoa.encoder3D~.cpp */; };
 		8FF4B04917A2A3FA00C2B435 /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AFA417A2A3F900C2B435 /* CicmRingModulation.cpp */; };
 		8FF4B04A17A2A3FA00C2B435 /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFA517A2A3F900C2B435 /* CicmRingModulation.h */; };
@@ -70,6 +72,9 @@
 		8F84E2E8189FD6F8007BD109 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		8F84E2EA189FD714007BD109 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8F84E2EC189FD780007BD109 /* HoaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoaLibrary.h; sourceTree = "<group>"; };
+		8F8C0B9818A04403005F9BDC /* CicmVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmVector.cpp; sourceTree = "<group>"; };
+		8F8C0B9918A04403005F9BDC /* CicmVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmVector.h; sourceTree = "<group>"; };
+		8F8C0B9C18A045FD005F9BDC /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
 		8FF4AF9F17A2A3E800C2B435 /* hoa.encoder3D~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.encoder3D~.cpp"; sourceTree = "<group>"; };
 		8FF4AFA417A2A3F900C2B435 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
 		8FF4AFA517A2A3F900C2B435 /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
@@ -176,6 +181,7 @@
 				8FF4AFA617A2A3F900C2B435 /* CicmDefine_BLAS_FFTW.h */,
 				8FF4AFA717A2A3F900C2B435 /* CicmDefine_INTEL.h */,
 				8FF4AFA817A2A3F900C2B435 /* CicmDefine_VDSP.h */,
+				8F8C0B9C18A045FD005F9BDC /* CicmDefine.h */,
 				8FF4AFA917A2A3F900C2B435 /* CicmDelay */,
 				8FF4AFAC17A2A3F900C2B435 /* CicmEnvelope */,
 				8FF4AFAF17A2A3F900C2B435 /* CicmFft */,
@@ -186,6 +192,8 @@
 				8FF4AFD317A2A3FA00C2B435 /* CicmReverb */,
 				8FF4AFD717A2A3FA00C2B435 /* CicmSignal.h */,
 				8FF4AFD817A2A3FA00C2B435 /* CicmTools.h */,
+				8F8C0B9818A04403005F9BDC /* CicmVector.cpp */,
+				8F8C0B9918A04403005F9BDC /* CicmVector.h */,
 			);
 			path = CicmLibrary;
 			sourceTree = "<group>";
@@ -316,9 +324,11 @@
 				8FF4B04C17A2A3FA00C2B435 /* CicmDefine_INTEL.h in Headers */,
 				8FF4B04D17A2A3FA00C2B435 /* CicmDefine_VDSP.h in Headers */,
 				8FF4B04F17A2A3FA00C2B435 /* CicmDecorrelation.h in Headers */,
+				8F8C0B9B18A04403005F9BDC /* CicmVector.h in Headers */,
 				8FF4B05117A2A3FA00C2B435 /* CicmEnvelope.h in Headers */,
 				8FF4B05317A2A3FA00C2B435 /* CicmFft.h in Headers */,
 				8F84E2ED189FD780007BD109 /* HoaLibrary.h in Headers */,
+				8F8C0B9D18A045FD005F9BDC /* CicmDefine.h in Headers */,
 				8FF4B05517A2A3FA00C2B435 /* CicmFilter.h in Headers */,
 				8FF4B05717A2A3FA00C2B435 /* CicmFilterAllpass.h in Headers */,
 				8FF4B05917A2A3FA00C2B435 /* CicmFilterBiquad.h in Headers */,
@@ -372,7 +382,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "hoa.encoder3D~" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -398,7 +408,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6E3330171046CE00BA3BDC /* maxmspsdk.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +435,7 @@
 				8FF4B05217A2A3FA00C2B435 /* CicmFft.cpp in Sources */,
 				8FF4B05417A2A3FA00C2B435 /* CicmFilter.cpp in Sources */,
 				8FF4B05617A2A3FA00C2B435 /* CicmFilterAllpass.cpp in Sources */,
+				8F8C0B9A18A04403005F9BDC /* CicmVector.cpp in Sources */,
 				8FF4B05817A2A3FA00C2B435 /* CicmFilterBiquad.cpp in Sources */,
 				8FF4B05A17A2A3FA00C2B435 /* CicmFilterComb.cpp in Sources */,
 				8FF4B05C17A2A3FA00C2B435 /* CicmFilterConvolution.cpp in Sources */,
@@ -450,16 +460,14 @@
 		2FBBEAD008F335010078DB84 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Development;
 		};
 		2FBBEAD108F335010078DB84 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Deployment;
 		};
@@ -467,7 +475,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -501,7 +508,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C6E332F171046CE00BA3BDC /* maxmspsdk.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.2;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;

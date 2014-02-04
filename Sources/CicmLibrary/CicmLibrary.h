@@ -28,6 +28,7 @@
 #define DEF_CICM_LIBRARY
 
 #include "CicmDefine.h"
+#include "CicmVector.h"
 
 #ifdef _WINDOWS
 
