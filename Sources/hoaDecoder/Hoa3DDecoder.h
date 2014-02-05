@@ -26,53 +26,50 @@
 #ifndef DEF_AMBISONICDECODER3D
 #define DEF_AMBISONICDECODER3D
 
-/*
-#include "../hoaEncoder/AmbisonicEncoder3D.h"
+#include "../hoaAmbisonics/Hoa3DAmbisonic.h"
+#include "../hoaEncoder/Hoa3DEncoder.h"
 
-#include "../HoaAmbisonics/Ambisonic3D.h"
-
-enum
+namespace Hoa3D
 {
-    Hoa_Half_Sphere = 0,
-    Hoa_Full_Sphere,
-};
-
-class AmbisonicDecoder3D : public Ambisonic3D
-{
+	enum
+	{
+		Hoa_Full_Sphere = 0,
+		Hoa_Half_Sphere
+	};
 	
-private:
-    bool                m_shape;
-    cicm_matrix_double  m_decoder_matrix_double;
-    cicm_matrix_float   m_decoder_matrix_float;
-    
-    cicm_matrix_double  m_harmonics_vector_double;
-    cicm_vector_float   m_harmonics_vector_float;
-    
-    cicm_matrix_double  m_outputs_vector_double;
-    cicm_vector_float   m_outputs_vector_float;
-    
-    cicm_matrix_double  m_loudspeakers_azimuth;
-    cicm_matrix_double  m_loudspeakers_elevation;
-    void computeMatrices();
-public:
-	AmbisonicDecoder3D(long anOrder = 1, long aNumberOfLoudspeakers = 8, bool aShape = Hoa_Full_Sphere, long aVectorSize = 2, long aSamlingRate = 44100);
-    
-    void setNumberOfLoudspeakers(long aNumberOfLoudspeakers, bool aShape = Hoa_Full_Sphere);
-    void setLoudspeakerPosition(long anIndex, double anAzimuth, double anElevation);
-    double getLoudspeakerAzimuth(long anIndex);
-    double getLoudspeakerElevation(long anIndex);
-    
-	~AmbisonicDecoder3D();
-    
-    inline void process(const float* anInput, float* anOutput)
-    {
-       cicm_product_mat_vec_f(m_decoder_matrix_float, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
-    }
-    
-    inline void process(const double* anInput, double* anOutput)
-    {
-        cicm_product_mat_vec_d(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
-    }
-};
- */
+	class Decoder : public Ambisonic
+	{
+		
+	private:
+		bool                m_shape;
+		double**			m_decoder_matrix;
+		double*				m_loudspeakers_azimuth;
+		double*				m_loudspeakers_elevation;
+		void computeMatrices();
+		
+	public:
+		Decoder(long order = 1, long numberOfLoudspeakers = 8, bool shape = Hoa_Full_Sphere);
+		
+		void setNumberOfLoudspeakers(long numberOfLoudspeakers, bool shape = Hoa_Full_Sphere);
+		void setLoudspeakerPosition(long anIndex, double anAzimuth, double anElevation);
+		double getLoudspeakerAzimuth(long anIndex);
+		double getLoudspeakerElevation(long anIndex);
+		
+		~Decoder();
+		
+		/**	This method performs the decoding with single precision.
+         @param     input	The input sample.
+         @param     outputs The output array that contains samples destinated to loudspeakers.
+         */
+		void process(const float input, float* output);
+		
+		/**	This method performs the decoding with double precision.
+         @param     input	The input sample.
+         @param     outputs The output array that contains samples destinated to loudspeakers.
+         */
+		void process(const double input, double* output);
+	};
+	
+} // end of namespace Hoa3D
+
 #endif

@@ -44,8 +44,9 @@ extern "C"
 
 typedef struct _HoaDecode 
 {
-	t_pxobject				f_ob;			
-	AmbisonicDecoder3D  *f_AmbisonicsDecoder;    
+	t_pxobject		f_ob;
+	double*			f_signals;
+	Hoa3D::Decoder* f_decoder;
 } t_HoaDecode;
 
 void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv);
@@ -89,12 +90,14 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
 			order	= atom_getfloat(argv);
 		
-        x->f_AmbisonicsDecoder	= new AmbisonicDecoder3D(order);
+        x->f_decoder	= new Hoa3D::Decoder(order);
         
         /* DSP Setup */
-		dsp_setup((t_pxobject *)x, x->f_AmbisonicsDecoder->getNumberOfInputs());
-		for (int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfOutputs(); i++) 
+		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfInputs());
+		for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
+		
+		x->f_signals =  new double[x->f_decoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
 		
         attr_args_process(x, argc, argv);
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -105,45 +108,48 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 
 void HoaDecode_dsp64(t_HoaDecode *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	x->f_AmbisonicsDecoder->setVectorSize(maxvectorsize);
-    x->f_AmbisonicsDecoder->setSamplingRate(samplerate);
 	object_method(dsp64, gensym("dsp_add64"), x, HoaDecode_perform64, 0, NULL);
 }
 
 void HoaDecode_perform64(t_HoaDecode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	x->f_AmbisonicsDecoder->process(ins, outs);
+	for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_decoder->process(ins[0][i], x->f_signals);
+        for(int j = 0; j < numouts; j++)
+            outs[j][i] = x->f_signals[j];
+    }
 }
 
 void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
-		sprintf(s,"(Signal) %s",x->f_AmbisonicsDecoder->getHarmonicsName(a).c_str());
-	//else
-        //sprintf(s,"(Signal) %s",x->f_AmbisonicsDecoder->getLoudspeakerName(a).c_str());
+		sprintf(s,"(Signal) %s",x->f_decoder->getHarmonicsName(a).c_str());
+	else
+	{
+		sprintf(s,"(Signal) channel %ld", a);
+	}
 }
 
 void HoaDecode_free(t_HoaDecode *x)
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_AmbisonicsDecoder;
+	delete x->f_decoder;
 }
 
 void HoaDecode_setLoudspeakers(t_HoaDecode *x, t_symbol* s, long argc, t_atom* argv)
 {
     if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_FLOAT && atom_gettype(argv+2) == A_FLOAT)
     {
-        x->f_AmbisonicsDecoder->setLoudspeakerPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+        x->f_decoder->setLoudspeakerPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
     }
 }
 
 
 void HoaDecode_infos(t_HoaDecode *x)
 {
-    object_post((t_object *)x, "Number Of Ls : %ld", x->f_AmbisonicsDecoder->getNumberOfOutputs());
-    for (int i = 0; i < x->f_AmbisonicsDecoder->getNumberOfOutputs(); i++)
-        object_post((t_object *)x, "Ls  %i : %f %f", i, x->f_AmbisonicsDecoder->getLoudspeakerAzimuth(i), x->f_AmbisonicsDecoder->getLoudspeakerElevation(i));
+    object_post((t_object *)x, "Number Of Ls : %ld", x->f_decoder->getNumberOfOutputs());
+    for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
+        object_post((t_object *)x, "Ls  %i : %f %f", i, x->f_decoder->getLoudspeakerAzimuth(i), x->f_decoder->getLoudspeakerElevation(i));
 }
-
-
 

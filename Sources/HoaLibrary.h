@@ -50,7 +50,7 @@
 #ifdef __APPLE__
 
 #include "hoaAmbisonics/Hoa3DAmbisonic.h"
-#include "hoaDecoder/AmbisonicDecoder3D.h"
+#include "hoaDecoder/Hoa3DDecoder.h"
 #include "hoaEncoder/Hoa3DEncoder.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
 #include "hoaGalaxy/AmbisonicsGalaxy.h"
