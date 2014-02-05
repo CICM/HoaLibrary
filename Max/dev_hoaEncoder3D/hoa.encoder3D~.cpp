@@ -181,11 +181,11 @@ void hoa_encoder_perform64_elevation(t_hoa_encoder *x, t_object *dsp64, double *
 
 void hoa_encoder_perform64(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	while(--sampleframes)
+	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_encoder->process(ins[0][sampleframes], x->f_signals);
-        for(int i = 0; i < numouts; i++)
-            outs[i][sampleframes] = x->f_signals[i];
+        x->f_encoder->process(ins[0][i], x->f_signals);
+        for(int j = 0; j < numouts; j++)
+            outs[j][i] = x->f_signals[j];
     }
 }
 

@@ -13,6 +13,8 @@
 		8F8C0B9A18A04403005F9BDC /* CicmVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F8C0B9818A04403005F9BDC /* CicmVector.cpp */; };
 		8F8C0B9B18A04403005F9BDC /* CicmVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8C0B9918A04403005F9BDC /* CicmVector.h */; };
 		8F8C0B9D18A045FD005F9BDC /* CicmDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8C0B9C18A045FD005F9BDC /* CicmDefine.h */; };
+		8F8FEFFC18A24A34000AD610 /* Hoa3DLegendre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F8FEFFA18A24A34000AD610 /* Hoa3DLegendre.cpp */; };
+		8F8FEFFD18A24A34000AD610 /* Hoa3DLegendre.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F8FEFFB18A24A34000AD610 /* Hoa3DLegendre.h */; };
 		8FF4AFA017A2A3E800C2B435 /* hoa.encoder3D~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AF9F17A2A3E800C2B435 /* hoa.encoder3D~.cpp */; };
 		8FF4B04917A2A3FA00C2B435 /* CicmRingModulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AFA417A2A3F900C2B435 /* CicmRingModulation.cpp */; };
 		8FF4B04A17A2A3FA00C2B435 /* CicmRingModulation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFA517A2A3F900C2B435 /* CicmRingModulation.h */; };
@@ -75,6 +77,8 @@
 		8F8C0B9818A04403005F9BDC /* CicmVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmVector.cpp; sourceTree = "<group>"; };
 		8F8C0B9918A04403005F9BDC /* CicmVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmVector.h; sourceTree = "<group>"; };
 		8F8C0B9C18A045FD005F9BDC /* CicmDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmDefine.h; sourceTree = "<group>"; };
+		8F8FEFFA18A24A34000AD610 /* Hoa3DLegendre.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hoa3DLegendre.cpp; sourceTree = "<group>"; };
+		8F8FEFFB18A24A34000AD610 /* Hoa3DLegendre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3DLegendre.h; sourceTree = "<group>"; };
 		8FF4AF9F17A2A3E800C2B435 /* hoa.encoder3D~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.encoder3D~.cpp"; sourceTree = "<group>"; };
 		8FF4AFA417A2A3F900C2B435 /* CicmRingModulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmRingModulation.cpp; sourceTree = "<group>"; };
 		8FF4AFA517A2A3F900C2B435 /* CicmRingModulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmRingModulation.h; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 			children = (
 				8FF4AFDA17A2A3FA00C2B435 /* Hoa3DAmbisonic.cpp */,
 				8FF4AFDB17A2A3FA00C2B435 /* Hoa3DAmbisonic.h */,
+				8F8FEFFA18A24A34000AD610 /* Hoa3DLegendre.cpp */,
+				8F8FEFFB18A24A34000AD610 /* Hoa3DLegendre.h */,
 			);
 			path = hoaAmbisonics;
 			sourceTree = "<group>";
@@ -342,6 +348,7 @@
 				8FF4B06817A2A3FA00C2B435 /* CicmFilterFixedDelay.h in Headers */,
 				8FF4B06A17A2A3FA00C2B435 /* CicmFilterOnePole.h in Headers */,
 				8FF4B06C17A2A3FA00C2B435 /* CicmOnePole.h in Headers */,
+				8F8FEFFD18A24A34000AD610 /* Hoa3DLegendre.h in Headers */,
 				8FF4B06E17A2A3FA00C2B435 /* CicmQSGS.h in Headers */,
 				8FF4B06F17A2A3FA00C2B435 /* CicmLibrary.h in Headers */,
 				8FF4B07117A2A3FA00C2B435 /* CicmLine.h in Headers */,
@@ -451,6 +458,7 @@
 				8FF4B07217A2A3FA00C2B435 /* CicmFreeverb.cpp in Sources */,
 				8FF4B07717A2A3FA00C2B435 /* Hoa3DAmbisonic.cpp in Sources */,
 				8FF4B08D17A2A3FA00C2B435 /* Hoa3DEncoder.cpp in Sources */,
+				8F8FEFFC18A24A34000AD610 /* Hoa3DLegendre.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
