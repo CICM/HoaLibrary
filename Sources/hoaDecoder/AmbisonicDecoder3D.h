@@ -26,7 +26,9 @@
 #ifndef DEF_AMBISONICDECODER3D
 #define DEF_AMBISONICDECODER3D
 
+/*
 #include "../hoaEncoder/AmbisonicEncoder3D.h"
+
 #include "../HoaAmbisonics/Ambisonic3D.h"
 
 enum
@@ -72,4 +74,5 @@ public:
         cicm_product_mat_vec_d(m_decoder_matrix_double, anInput, anOutput, m_number_of_outputs, m_number_of_harmonics);
     }
 };
+ */
 #endif

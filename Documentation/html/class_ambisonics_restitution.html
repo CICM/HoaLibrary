@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,118 +103,9 @@ Inheritance diagram for AmbisonicsRestitution:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a287ce5a5b5d247af6c11e7bd0e50a4ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ambisonics_restitution.html#a287ce5a5b5d247af6c11e7bd0e50a4ab">AmbisonicsRestitution</a> (long anOrder=1, long aNumberOfLoudspeakers=5, long aResitutionMode=Hoa_Amplitude_Panning, long aVectorSize=0)</td></tr>
 <tr class="separator:a287ce5a5b5d247af6c11e7bd0e50a4ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b720484714bfd5d838799a8bd14b15"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26b720484714bfd5d838799a8bd14b15"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRestitutionMode</b> (long aResitutionMode)</td></tr>
-<tr class="separator:a26b720484714bfd5d838799a8bd14b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa596940fef66d9e7094977533c981c7d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa596940fef66d9e7094977533c981c7d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setNumberOfLoudspeakers</b> (long aNumberOfLoudspeakers, bool standardOnOff=1)</td></tr>
-<tr class="separator:aa596940fef66d9e7094977533c981c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aafaf436e115524fc51eb5033bdf623"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6aafaf436e115524fc51eb5033bdf623"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerAngle</b> (long anIndex, double anAngle)</td></tr>
-<tr class="separator:a6aafaf436e115524fc51eb5033bdf623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a936acf7cb829cbbad814f85e1c8d3150"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a936acf7cb829cbbad814f85e1c8d3150"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakersAngles</b> (double *angles, long aNumberOfLoudspeakers)</td></tr>
-<tr class="separator:a936acf7cb829cbbad814f85e1c8d3150"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b15c63c310b10efc79628acc6e3e214"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b15c63c310b10efc79628acc6e3e214"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getRestitutionMode</b> ()</td></tr>
-<tr class="separator:a1b15c63c310b10efc79628acc6e3e214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95681bf8b8f7751ef6b2a09a9b204969"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95681bf8b8f7751ef6b2a09a9b204969"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getConfiguration</b> ()</td></tr>
-<tr class="separator:a95681bf8b8f7751ef6b2a09a9b204969"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa951a434f4daa911e5b54c0893bf608f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa951a434f4daa911e5b54c0893bf608f"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerAngle</b> (long anIndex)</td></tr>
-<tr class="separator:aa951a434f4daa911e5b54c0893bf608f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bf0a676a9d45d40e1677ddd382b3d6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3bf0a676a9d45d40e1677ddd382b3d6d"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerName</b> (long anIndex)</td></tr>
-<tr class="separator:a3bf0a676a9d45d40e1677ddd382b3d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae73551b98fc20ee4b162a2e4af70d83f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae73551b98fc20ee4b162a2e4af70d83f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *aInputs, double *aOutputs)</td></tr>
-<tr class="separator:ae73551b98fc20ee4b162a2e4af70d83f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28ab9d40c20c9a93a5dc1a695ae733ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28ab9d40c20c9a93a5dc1a695ae733ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *aInputs, float *aOutputs)</td></tr>
-<tr class="separator:a28ab9d40c20c9a93a5dc1a695ae733ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebd4cc20eac6b8e6337fffaaba59466"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acebd4cc20eac6b8e6337fffaaba59466"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double **aInputs, double **aOutputs)</td></tr>
-<tr class="separator:acebd4cc20eac6b8e6337fffaaba59466"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07a0aab6e3a35be52d562413d8f7856c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07a0aab6e3a35be52d562413d8f7856c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float **aInputs, float **aOutputs)</td></tr>
-<tr class="separator:a07a0aab6e3a35be52d562413d8f7856c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_ambisonic"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_ambisonic')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_ambisonic.html">Ambisonic</a></td></tr>
 <tr class="memitem:ae704cc4472fd1efa22e39f7d501ca7e2 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ambisonic.html#ae704cc4472fd1efa22e39f7d501ca7e2">Ambisonic</a> (long anOrder=1, long aVectorSize=2, long aSamplingRate=44100.)</td></tr>
 <tr class="separator:ae704cc4472fd1efa22e39f7d501ca7e2 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a677405a1c3aa359753bd675d4614e7da inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a677405a1c3aa359753bd675d4614e7da"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getOrder</b> ()</td></tr>
-<tr class="separator:a677405a1c3aa359753bd675d4614e7da inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9d613f38e6876326201995a5a415410 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9d613f38e6876326201995a5a415410"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfHarmonics</b> ()</td></tr>
-<tr class="separator:aa9d613f38e6876326201995a5a415410 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af03625afb9f21ef3574eafa8501129b4 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af03625afb9f21ef3574eafa8501129b4"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfInputs</b> ()</td></tr>
-<tr class="separator:af03625afb9f21ef3574eafa8501129b4 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a126ed3be1aa3d155f56ca75ca3d69de5 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a126ed3be1aa3d155f56ca75ca3d69de5"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfOutputs</b> ()</td></tr>
-<tr class="separator:a126ed3be1aa3d155f56ca75ca3d69de5 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeff6773fb00c302cc58ab1c4b513cfe1 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeff6773fb00c302cc58ab1c4b513cfe1"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorSize</b> ()</td></tr>
-<tr class="separator:aeff6773fb00c302cc58ab1c4b513cfe1 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26d8f829f516d8067c4b2da99512ea12 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26d8f829f516d8067c4b2da99512ea12"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplingRate</b> ()</td></tr>
-<tr class="separator:a26d8f829f516d8067c4b2da99512ea12 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ed4424a003cc2982ccb9a3a8008560e inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ed4424a003cc2982ccb9a3a8008560e"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicIndex</b> (long anIndex)</td></tr>
-<tr class="separator:a5ed4424a003cc2982ccb9a3a8008560e inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76ca75ba74acfdcfe705d0a803d870fc inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76ca75ba74acfdcfe705d0a803d870fc"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicOrder</b> (long anIndex)</td></tr>
-<tr class="separator:a76ca75ba74acfdcfe705d0a803d870fc inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac799f870b063cef36fdf831ddc9d58aa inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac799f870b063cef36fdf831ddc9d58aa"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getInputName</b> (long anIndex)</td></tr>
-<tr class="separator:ac799f870b063cef36fdf831ddc9d58aa inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45d8dc7cb9332f3d2bc1aff307580e32 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45d8dc7cb9332f3d2bc1aff307580e32"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputName</b> (long anIndex)</td></tr>
-<tr class="separator:a45d8dc7cb9332f3d2bc1aff307580e32 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7384a42564963ec832f2ad95c456b9f6 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7384a42564963ec832f2ad95c456b9f6"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getHarmonicsName</b> (long anIndex)</td></tr>
-<tr class="separator:a7384a42564963ec832f2ad95c456b9f6 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2ca7f258a53954432591c2e2ef6cf01 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2ca7f258a53954432591c2e2ef6cf01"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:ac2ca7f258a53954432591c2e2ef6cf01 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29b3a285174a2134c097a1a7aac0bc5c inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29b3a285174a2134c097a1a7aac0bc5c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:a29b3a285174a2134c097a1a7aac0bc5c inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73a15de8bf82502dc69fa792c2f7c473 inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73a15de8bf82502dc69fa792c2f7c473"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs)</td></tr>
-<tr class="separator:a73a15de8bf82502dc69fa792c2f7c473 inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa22119ffe9f4077e5b08a6439f9c148d inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa22119ffe9f4077e5b08a6439f9c148d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *inputs, double *outputs)</td></tr>
-<tr class="separator:aa22119ffe9f4077e5b08a6439f9c148d inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada04f55e2d9dd23389b3a4fa94ff055d inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada04f55e2d9dd23389b3a4fa94ff055d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float **inputs, float **outputs)</td></tr>
-<tr class="separator:ada04f55e2d9dd23389b3a4fa94ff055d inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a015cc897c79c324bfae4bf08cd05bc9a inherit pub_methods_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a015cc897c79c324bfae4bf08cd05bc9a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double **inputs, double **outputs)</td></tr>
-<tr class="separator:a015cc897c79c324bfae4bf08cd05bc9a inherit pub_methods_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_attribs_class_ambisonic"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_ambisonic')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_ambisonic.html">Ambisonic</a></td></tr>
-<tr class="memitem:a312690f0d1ba3191c0925a9d5f34cd17 inherit pro_attribs_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a312690f0d1ba3191c0925a9d5f34cd17"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_order</b></td></tr>
-<tr class="separator:a312690f0d1ba3191c0925a9d5f34cd17 inherit pro_attribs_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ff538ee47b2f6216f509d7756ea97e inherit pro_attribs_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91ff538ee47b2f6216f509d7756ea97e"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_harmonics</b></td></tr>
-<tr class="separator:a91ff538ee47b2f6216f509d7756ea97e inherit pro_attribs_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6104162c4457f2d581a44b2e7007d188 inherit pro_attribs_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6104162c4457f2d581a44b2e7007d188"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_inputs</b></td></tr>
-<tr class="separator:a6104162c4457f2d581a44b2e7007d188 inherit pro_attribs_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6875cb4a3b5e2b80982726df6c769106 inherit pro_attribs_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6875cb4a3b5e2b80982726df6c769106"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_outputs</b></td></tr>
-<tr class="separator:a6875cb4a3b5e2b80982726df6c769106 inherit pro_attribs_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b10ff076a735555a373e9a83a2e4915 inherit pro_attribs_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b10ff076a735555a373e9a83a2e4915"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_size</b></td></tr>
-<tr class="separator:a6b10ff076a735555a373e9a83a2e4915 inherit pro_attribs_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3fb43ea3eb344de999500fbfc570af7 inherit pro_attribs_class_ambisonic"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3fb43ea3eb344de999500fbfc570af7"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></td></tr>
-<tr class="separator:ad3fb43ea3eb344de999500fbfc570af7 inherit pro_attribs_class_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a287ce5a5b5d247af6c11e7bd0e50a4ab"></a>
@@ -271,7 +163,7 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

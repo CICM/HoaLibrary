@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,175 +83,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_ambisonic_virtual_mic_u_i_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">AmbisonicVirtualMicUIManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a8664c9311905b4c058717d428306065b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8664c9311905b4c058717d428306065b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AmbisonicVirtualMicUIManager</b> (long _numberOfMics=0)</td></tr>
-<tr class="separator:a8664c9311905b4c058717d428306065b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7579bfaab5f198670850f96bb50d8a19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7579bfaab5f198670850f96bb50d8a19"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFisheyeDestAngle</b> (double _angleInRadian)</td></tr>
-<tr class="separator:a7579bfaab5f198670850f96bb50d8a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a061d76de579d06868925e468084c10cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a061d76de579d06868925e468084c10cb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resetAngles</b> (const int _index=-1)</td></tr>
-<tr class="separator:a061d76de579d06868925e468084c10cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a149326d8ee5897c403b4d3936b46503c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a149326d8ee5897c403b4d3936b46503c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resetWides</b> (const int _index=-1)</td></tr>
-<tr class="separator:a149326d8ee5897c403b4d3936b46503c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35ff374bff689483b9784f8128ee4051"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35ff374bff689483b9784f8128ee4051"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setNumberOfMics</b> (long _numberOfMics)</td></tr>
-<tr class="separator:a35ff374bff689483b9784f8128ee4051"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8c1d188097393569f65df5e3445911e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8c1d188097393569f65df5e3445911e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAnglesInRadian</b> (double *_radians, long _len)</td></tr>
-<tr class="separator:aa8c1d188097393569f65df5e3445911e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fc82893a69092e5938fc7309c52fa84"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fc82893a69092e5938fc7309c52fa84"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAnglesInDegree</b> (double *_degrees, long _len)</td></tr>
-<tr class="separator:a9fc82893a69092e5938fc7309c52fa84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6a880e84ed9b70f4569c3f3723c713a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6a880e84ed9b70f4569c3f3723c713a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAngleInRadian</b> (const int _index, double _radian)</td></tr>
-<tr class="separator:ac6a880e84ed9b70f4569c3f3723c713a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad898afa1293d260e361a45f609d6956f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad898afa1293d260e361a45f609d6956f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAngleInDegree</b> (const int _index, double _degree)</td></tr>
-<tr class="separator:ad898afa1293d260e361a45f609d6956f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45c963e49787c9dd21591fdbc0a557a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45c963e49787c9dd21591fdbc0a557a1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWiderValues</b> (double *_widerValues, long _len)</td></tr>
-<tr class="separator:a45c963e49787c9dd21591fdbc0a557a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3177657e68c8113813f6810e5850361e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3177657e68c8113813f6810e5850361e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWiderValue</b> (const int _index, double _widerValue)</td></tr>
-<tr class="separator:a3177657e68c8113813f6810e5850361e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa96f5397c623a4d106ae551a0207db8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa96f5397c623a4d106ae551a0207db8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDistance</b> (const int _index, double _distance)</td></tr>
-<tr class="separator:afa96f5397c623a4d106ae551a0207db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a134038b71c64b92e33ffba1924464d6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a134038b71c64b92e33ffba1924464d6a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSelected</b> (const int _index, int _selectedState)</td></tr>
-<tr class="separator:a134038b71c64b92e33ffba1924464d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07735e678c161488f38368ea32fc32f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07735e678c161488f38368ea32fc32f5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>selectMicsBetweenMics</b> (int _micIndex1, int _micIndex2)</td></tr>
-<tr class="separator:a07735e678c161488f38368ea32fc32f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a4867eb6a592f7608eaa75898009a24"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4a4867eb6a592f7608eaa75898009a24"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>rotateSelectedMicsWithRadian</b> (double _newRadian, int _sourceBeingDragged, int magnet=0)</td></tr>
-<tr class="separator:a4a4867eb6a592f7608eaa75898009a24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a702f8d52ed9804bc389f214e33d76612"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a702f8d52ed9804bc389f214e33d76612"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSelectedMicsWiderValueWithRadiusDelta</b> (double _deltaRadius)</td></tr>
-<tr class="separator:a702f8d52ed9804bc389f214e33d76612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cbaaf90e0bab59a7148e64e7bcbe14c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2cbaaf90e0bab59a7148e64e7bcbe14c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFisheyeStartAngle</b> (const int _micIndex)</td></tr>
-<tr class="separator:a2cbaaf90e0bab59a7148e64e7bcbe14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad849edb54f33ff92a1a916ea53ce96c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad849edb54f33ff92a1a916ea53ce96c5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFisheyeStartAngle</b> (const int _micIndex, double _radian)</td></tr>
-<tr class="separator:ad849edb54f33ff92a1a916ea53ce96c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31441cc38913a5818797ce56dfa1df85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a31441cc38913a5818797ce56dfa1df85"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAngleCartesianCoordinate</b> (const int _micIndex, double _abscissa, double _ordinate)</td></tr>
-<tr class="separator:a31441cc38913a5818797ce56dfa1df85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0232ddc6152f241d0d4d9a4ff38ce583"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0232ddc6152f241d0d4d9a4ff38ce583"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSelectedMicsFisheyeStepWithDelta</b> (const int _micIndex, double _delta)</td></tr>
-<tr class="separator:a0232ddc6152f241d0d4d9a4ff38ce583"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfebe205ba0bf83eb438beef8fcdd219"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abfebe205ba0bf83eb438beef8fcdd219"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFisheyeStepDirect</b> (const int _micIndex, double _fisheyeStep)</td></tr>
-<tr class="separator:abfebe205ba0bf83eb438beef8fcdd219"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51e54d90f3369ed9234e79fa18317c37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51e54d90f3369ed9234e79fa18317c37"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAngleToClosestDefMicAngle</b> (const int _micIndex)</td></tr>
-<tr class="separator:a51e54d90f3369ed9234e79fa18317c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64e85160831ca523b83556e468a50649"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64e85160831ca523b83556e468a50649"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfSelectedMics</b> ()</td></tr>
-<tr class="separator:a64e85160831ca523b83556e468a50649"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40e3c8170fb672b43ae71be0e838440a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40e3c8170fb672b43ae71be0e838440a"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getClosestDefMicAngle</b> (const int _micIndex)</td></tr>
-<tr class="separator:a40e3c8170fb672b43ae71be0e838440a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a909202e803917251c31af6ad083e0a7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a909202e803917251c31af6ad083e0a7b"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getClosestDefMicAngle</b> (double _angleInRadian)</td></tr>
-<tr class="separator:a909202e803917251c31af6ad083e0a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab220b50f20b50dd94c37484933d1561f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab220b50f20b50dd94c37484933d1561f"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getClosestDefMicDistance</b> (const int _micIndex)</td></tr>
-<tr class="separator:ab220b50f20b50dd94c37484933d1561f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e8380871bac9996c458106a05e11400"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e8380871bac9996c458106a05e11400"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getClosestDefMicDistance</b> (double _angleInRadian)</td></tr>
-<tr class="separator:a5e8380871bac9996c458106a05e11400"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64da3a3aa8741ea53e350a35dcb3b613"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64da3a3aa8741ea53e350a35dcb3b613"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getClosestMicIndex</b> (double _angleInRadian)</td></tr>
-<tr class="separator:a64da3a3aa8741ea53e350a35dcb3b613"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c9e1e018c48ee1b594c4f33661270ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c9e1e018c48ee1b594c4f33661270ad"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getFarthestMicIndex</b> (double _angleInRadian)</td></tr>
-<tr class="separator:a3c9e1e018c48ee1b594c4f33661270ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8842ca0ebc70396a34992f840f7d315c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8842ca0ebc70396a34992f840f7d315c"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getDistanceBetweenTwoDefMics</b> ()</td></tr>
-<tr class="separator:a8842ca0ebc70396a34992f840f7d315c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0744a36f07ab37c5fd40bfe72fe1711"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0744a36f07ab37c5fd40bfe72fe1711"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getFisheyeDestAngle</b> ()</td></tr>
-<tr class="separator:ac0744a36f07ab37c5fd40bfe72fe1711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10499cd34929689cdf7d177b87318150"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10499cd34929689cdf7d177b87318150"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfMics</b> ()</td></tr>
-<tr class="separator:a10499cd34929689cdf7d177b87318150"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af79d215d704077173b6ad240569452bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af79d215d704077173b6ad240569452bc"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getFisheyeStep</b> ()</td></tr>
-<tr class="separator:af79d215d704077173b6ad240569452bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add966264aad7e3c5914ec61d51ea7062"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add966264aad7e3c5914ec61d51ea7062"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isSelected</b> (const int _micIndex)</td></tr>
-<tr class="separator:add966264aad7e3c5914ec61d51ea7062"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d28f62f8f3f632302333dd764c79a7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d28f62f8f3f632302333dd764c79a7b"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getDistance</b> (const int _micIndex)</td></tr>
-<tr class="separator:a6d28f62f8f3f632302333dd764c79a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac63b69fecea71f315c9f2cc9278eeded"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac63b69fecea71f315c9f2cc9278eeded"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getAngleInRadian</b> (const int _micIndex)</td></tr>
-<tr class="separator:ac63b69fecea71f315c9f2cc9278eeded"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adee73c3ca0dd76c2632f9a6aa46c05cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adee73c3ca0dd76c2632f9a6aa46c05cb"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getAngleInDegree</b> (const int _micIndex)</td></tr>
-<tr class="separator:adee73c3ca0dd76c2632f9a6aa46c05cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac84aaecaf97324966a4458a208d7a45e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac84aaecaf97324966a4458a208d7a45e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getWiderValue</b> (const int _micIndex)</td></tr>
-<tr class="separator:ac84aaecaf97324966a4458a208d7a45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f66a575b5704b2f1696ff2521e80285"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f66a575b5704b2f1696ff2521e80285"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getFisheyeStartAngle</b> (const int _micIndex)</td></tr>
-<tr class="separator:a2f66a575b5704b2f1696ff2521e80285"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6864d196d04531d70e15f1974fe6feab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6864d196d04531d70e15f1974fe6feab"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getAbscissa</b> (const int _micIndex)</td></tr>
-<tr class="separator:a6864d196d04531d70e15f1974fe6feab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b31fc1d5dea34eff580568fbb79cf64"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b31fc1d5dea34eff580568fbb79cf64"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getOrdinate</b> (const int _micIndex)</td></tr>
-<tr class="separator:a7b31fc1d5dea34eff580568fbb79cf64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53878af3132fd496f5ed47bf76723c19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53878af3132fd496f5ed47bf76723c19"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestContribution</b> (const int _micIndex)</td></tr>
-<tr class="separator:a53878af3132fd496f5ed47bf76723c19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af14d2a345e8a6470ba1e8ad235ccef4b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af14d2a345e8a6470ba1e8ad235ccef4b"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestContributionIndex</b> (const int _micIndex)</td></tr>
-<tr class="separator:af14d2a345e8a6470ba1e8ad235ccef4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab963d5e0747ffdc3cea9a974eeee0650"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab963d5e0747ffdc3cea9a974eeee0650"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getContributions</b> (const int _micIndex, long anIndex)</td></tr>
-<tr class="separator:ab963d5e0747ffdc3cea9a974eeee0650"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a299ad41aae90dc679569a8b5ba3404"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a299ad41aae90dc679569a8b5ba3404"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getAbscisseValue</b> (const int _micIndex, long anIndex)</td></tr>
-<tr class="separator:a1a299ad41aae90dc679569a8b5ba3404"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac933c6844c2620a561953fb9eee34bba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac933c6844c2620a561953fb9eee34bba"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getOrdinateValue</b> (const int _micIndex, long anIndex)</td></tr>
-<tr class="separator:ac933c6844c2620a561953fb9eee34bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ea8a1f8f8969dd9ee0026446577ff3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55ea8a1f8f8969dd9ee0026446577ff3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getColor</b> (const int _micIndex, long anIndex)</td></tr>
-<tr class="separator:a55ea8a1f8f8969dd9ee0026446577ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7856cdd940fe530019a74c2dbda2b756"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7856cdd940fe530019a74c2dbda2b756"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestDistance</b> (const int _micIndex)</td></tr>
-<tr class="separator:a7856cdd940fe530019a74c2dbda2b756"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a812fb44d360067072455ab8c98ac814c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a812fb44d360067072455ab8c98ac814c"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestDistanceIndex1</b> (const int _micIndex)</td></tr>
-<tr class="separator:a812fb44d360067072455ab8c98ac814c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa462e67459e308e223477db5b6637da3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa462e67459e308e223477db5b6637da3"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestDistanceIndex2</b> (const int _micIndex)</td></tr>
-<tr class="separator:aa462e67459e308e223477db5b6637da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e4fe83c9b8abd12d058e2b37efd814c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e4fe83c9b8abd12d058e2b37efd814c"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestLobeNbPoint</b> (const int _micIndex)</td></tr>
-<tr class="separator:a2e4fe83c9b8abd12d058e2b37efd814c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade545b479351d887bee8570843b05947"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade545b479351d887bee8570843b05947"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestLobe_x</b> (const int _micIndex, long anIndex)</td></tr>
-<tr class="separator:ade545b479351d887bee8570843b05947"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3e8b88c6d9d3c87f704c13a74e19a52"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3e8b88c6d9d3c87f704c13a74e19a52"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestLobe_y</b> (const int _micIndex, long anIndex)</td></tr>
-<tr class="separator:ae3e8b88c6d9d3c87f704c13a74e19a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/hoaRecomposer/<a class="el" href="_ambisonic_virtual_mic_u_i_manager_8h_source.html">AmbisonicVirtualMicUIManager.h</a></li>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/hoaRecomposer/AmbisonicVirtualMicUIManager.cpp</li>
@@ -258,7 +95,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>getBiggestLobe_y</b
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

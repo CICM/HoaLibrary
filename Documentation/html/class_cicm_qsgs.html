@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,128 +83,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_cicm_qsgs-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CicmQsgs Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a91938da8f569f5f09c833c98ba25587a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91938da8f569f5f09c833c98ba25587a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CicmQsgs</b> (double aMaximumDelay=5000., long aVectorSize=1, long aSamplingRate=44100)</td></tr>
-<tr class="separator:a91938da8f569f5f09c833c98ba25587a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1061794e8dda2b3697948ccfdc0995c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1061794e8dda2b3697948ccfdc0995c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:a1061794e8dda2b3697948ccfdc0995c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefd4f65a487f0db8d4986e76edd8faf3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefd4f65a487f0db8d4986e76edd8faf3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:aefd4f65a487f0db8d4986e76edd8faf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22b7d66f92661c9d1060f3bd272173c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22b7d66f92661c9d1060f3bd272173c2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setGrainSize</b> (double aGrainSize)</td></tr>
-<tr class="separator:a22b7d66f92661c9d1060f3bd272173c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cdcf9b54fac5f4c8bdc12a9b28f2472"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0cdcf9b54fac5f4c8bdc12a9b28f2472"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDelayTime</b> (double aDelayTime)</td></tr>
-<tr class="separator:a0cdcf9b54fac5f4c8bdc12a9b28f2472"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76a57db026d6306e15afb5e61e8f3de2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76a57db026d6306e15afb5e61e8f3de2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFeedback</b> (double aFeedback)</td></tr>
-<tr class="separator:a76a57db026d6306e15afb5e61e8f3de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28f0edebe5a5c05f0a8d1720de8ad45e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28f0edebe5a5c05f0a8d1720de8ad45e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRarefaction</b> (double aRarefaction)</td></tr>
-<tr class="separator:a28f0edebe5a5c05f0a8d1720de8ad45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f8af4826e5ea0b1b763870000479655"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f8af4826e5ea0b1b763870000479655"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWindowFunction</b> (long aEnvelopeType)</td></tr>
-<tr class="separator:a7f8af4826e5ea0b1b763870000479655"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78ff51fa1042a949610a4860f42acbac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78ff51fa1042a949610a4860f42acbac"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeWidowFunction</b> (double *aBuffer, long aSize)</td></tr>
-<tr class="separator:a78ff51fa1042a949610a4860f42acbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a359e762f72f7e3e51e8dd0d2f5dd9055"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a359e762f72f7e3e51e8dd0d2f5dd9055"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>writeWidowFunction</b> (float *aBuffer, long aSize)</td></tr>
-<tr class="separator:a359e762f72f7e3e51e8dd0d2f5dd9055"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f463be45de44f6d9e88e4ce65bdf730"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f463be45de44f6d9e88e4ce65bdf730"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorSize</b> ()</td></tr>
-<tr class="separator:a4f463be45de44f6d9e88e4ce65bdf730"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4556ba39fb411bcf4e08283b0def211"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4556ba39fb411bcf4e08283b0def211"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplingRate</b> ()</td></tr>
-<tr class="separator:ad4556ba39fb411bcf4e08283b0def211"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02e6dcfad34ac520081aaea664750848"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02e6dcfad34ac520081aaea664750848"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getGrainSize</b> ()</td></tr>
-<tr class="separator:a02e6dcfad34ac520081aaea664750848"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2627238381097d861eb5bc6b5cc7088a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2627238381097d861eb5bc6b5cc7088a"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getDelayTime</b> ()</td></tr>
-<tr class="separator:a2627238381097d861eb5bc6b5cc7088a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe8b134865a49ff203d593e96be9a660"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe8b134865a49ff203d593e96be9a660"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getFeedback</b> ()</td></tr>
-<tr class="separator:abe8b134865a49ff203d593e96be9a660"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef651c548592cd63f7ab337b5c5474f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef651c548592cd63f7ab337b5c5474f6"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getRarefaction</b> ()</td></tr>
-<tr class="separator:aef651c548592cd63f7ab337b5c5474f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ec7944d12510911b8f13cea1721853f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ec7944d12510911b8f13cea1721853f"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getMaximumSizeInMs</b> ()</td></tr>
-<tr class="separator:a8ec7944d12510911b8f13cea1721853f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8060af39d00813955122830a9e134266"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8060af39d00813955122830a9e134266"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getMaximumSizeInSample</b> ()</td></tr>
-<tr class="separator:a8060af39d00813955122830a9e134266"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56096e348fb11b89aea7b16511d761ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56096e348fb11b89aea7b16511d761ba"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getWidowFunction</b> ()</td></tr>
-<tr class="separator:a56096e348fb11b89aea7b16511d761ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80a0504cf19c8bced93bfb5d161c086f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80a0504cf19c8bced93bfb5d161c086f"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float input)</td></tr>
-<tr class="separator:a80a0504cf19c8bced93bfb5d161c086f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f02e64b8778d29333f6e462d590a12c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f02e64b8778d29333f6e462d590a12c"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double input)</td></tr>
-<tr class="separator:a2f02e64b8778d29333f6e462d590a12c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1101863b1362fc60144b42ae3700795"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1101863b1362fc60144b42ae3700795"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs)</td></tr>
-<tr class="separator:af1101863b1362fc60144b42ae3700795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1a328c9a694c070baf1351e3af5b9a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1a328c9a694c070baf1351e3af5b9a8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *inputs, double *outputs)</td></tr>
-<tr class="separator:ae1a328c9a694c070baf1351e3af5b9a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a5b567b99c91b95712ce0fe7900f66160"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b567b99c91b95712ce0fe7900f66160"></a>
-<a class="el" href="class_cicm_filter_delay.html">CicmFilterDelay</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_delay</b></td></tr>
-<tr class="separator:a5b567b99c91b95712ce0fe7900f66160"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a409b89233b3f57e6b916561f44e186ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a409b89233b3f57e6b916561f44e186ae"></a>
-<a class="el" href="class_cicm_line.html">CicmLine</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_line</b></td></tr>
-<tr class="separator:a409b89233b3f57e6b916561f44e186ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99883132ce396c3f0acdf4ffaa945d54"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99883132ce396c3f0acdf4ffaa945d54"></a>
-<a class="el" href="class_cicm_envelope.html">CicmEnvelope</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_envelope</b></td></tr>
-<tr class="separator:a99883132ce396c3f0acdf4ffaa945d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5f969399ec40d48bca02017433a3f95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af5f969399ec40d48bca02017433a3f95"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_grain_size</b></td></tr>
-<tr class="separator:af5f969399ec40d48bca02017433a3f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b22a167673118548c251d69e85a8247"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b22a167673118548c251d69e85a8247"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_delay_time</b></td></tr>
-<tr class="separator:a6b22a167673118548c251d69e85a8247"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4a94ec4deb360f142cc8ded464c87b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4a94ec4deb360f142cc8ded464c87b5"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_feedback</b></td></tr>
-<tr class="separator:af4a94ec4deb360f142cc8ded464c87b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8fdde8cb4848f494e625487a5f6e8fa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8fdde8cb4848f494e625487a5f6e8fa"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_rarefaction</b></td></tr>
-<tr class="separator:ad8fdde8cb4848f494e625487a5f6e8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac585748fefd48279a465c23462d95178"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac585748fefd48279a465c23462d95178"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_delay_rand</b></td></tr>
-<tr class="separator:ac585748fefd48279a465c23462d95178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52b4a171c4b2dbb34257405cf753e364"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a52b4a171c4b2dbb34257405cf753e364"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_bypass</b></td></tr>
-<tr class="separator:a52b4a171c4b2dbb34257405cf753e364"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cd47eeb8033a5050b2889a52ccb0992"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cd47eeb8033a5050b2889a52ccb0992"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_feedback_real</b></td></tr>
-<tr class="separator:a8cd47eeb8033a5050b2889a52ccb0992"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ca54d3e735b021bf2ba21d2cbce6acf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ca54d3e735b021bf2ba21d2cbce6acf"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_buffer</b></td></tr>
-<tr class="separator:a8ca54d3e735b021bf2ba21d2cbce6acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a2632cfcd38e0339650a54b4760f247"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a2632cfcd38e0339650a54b4760f247"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_size</b></td></tr>
-<tr class="separator:a9a2632cfcd38e0339650a54b4760f247"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb1658bf6e8b1e32e98144829d2362d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb1658bf6e8b1e32e98144829d2362d0"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></td></tr>
-<tr class="separator:adb1658bf6e8b1e32e98144829d2362d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmGranular/<a class="el" href="_cicm_q_s_g_s_8h_source.html">CicmQSGS.h</a></li>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmGranular/CicmQSGS.cpp</li>
@@ -211,7 +95,7 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

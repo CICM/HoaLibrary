@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,9 +83,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_filter_biquad-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">FilterBiquad Class Reference</div>  </div>
@@ -99,150 +97,6 @@ Inheritance diagram for FilterBiquad:</div>
 <area href="class_filter.html" alt="Filter" shape="rect" coords="0,0,79,24"/>
 </map>
  </div></div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a9a504b833a433b8577a41b521b717b21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a504b833a433b8577a41b521b717b21"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>FilterBiquad</b> (long aType, long aVectorSize=0, double aSamplingRate=44100.)</td></tr>
-<tr class="separator:a9a504b833a433b8577a41b521b717b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a321faeeacbe9896e47b377b23d74637d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a321faeeacbe9896e47b377b23d74637d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:a321faeeacbe9896e47b377b23d74637d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0ba3ef15154149523b071a4a314112d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0ba3ef15154149523b071a4a314112d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (long aType)</td></tr>
-<tr class="separator:ac0ba3ef15154149523b071a4a314112d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af91ac10594525c676cb47a159239e466"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af91ac10594525c676cb47a159239e466"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAll</b> (double aCutoffFrequency, double aQValue, double aGain)</td></tr>
-<tr class="separator:af91ac10594525c676cb47a159239e466"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3c1fdf80fd3621cefb7362082add267"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3c1fdf80fd3621cefb7362082add267"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCutoffFrequency</b> (double aCutoffFrequency)</td></tr>
-<tr class="separator:ae3c1fdf80fd3621cefb7362082add267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35f3317cdef03dd351a4a9401dff74c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35f3317cdef03dd351a4a9401dff74c0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setQValue</b> (double aQValue)</td></tr>
-<tr class="separator:a35f3317cdef03dd351a4a9401dff74c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d43410d2a3f408d20167ab930bbf5d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d43410d2a3f408d20167ab930bbf5d8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setGain</b> (double aGain)</td></tr>
-<tr class="separator:a4d43410d2a3f408d20167ab930bbf5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f0de4d82960ede2e3c90ce09ffa40d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f0de4d82960ede2e3c90ce09ffa40d1"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
-<tr class="separator:a2f0de4d82960ede2e3c90ce09ffa40d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abafde4e1288c78428a670301dd04358c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abafde4e1288c78428a670301dd04358c"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getQValue</b> ()</td></tr>
-<tr class="separator:abafde4e1288c78428a670301dd04358c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a810b01c088f4ac11d607693b9efcfe38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a810b01c088f4ac11d607693b9efcfe38"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getCutoffFrequency</b> ()</td></tr>
-<tr class="separator:a810b01c088f4ac11d607693b9efcfe38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f7bb6380e6fd4eed650d606d7f9bdd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f7bb6380e6fd4eed650d606d7f9bdd9"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getGain</b> ()</td></tr>
-<tr class="separator:a4f7bb6380e6fd4eed650d606d7f9bdd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc471d3980c676047f6e89595031da5e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc471d3980c676047f6e89595031da5e"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float input)</td></tr>
-<tr class="separator:acc471d3980c676047f6e89595031da5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbda4a151851c4f42e977ddc1023199d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adbda4a151851c4f42e977ddc1023199d"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double input)</td></tr>
-<tr class="separator:adbda4a151851c4f42e977ddc1023199d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52ca7291f7f3dbc2891f77c88f156ab9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a52ca7291f7f3dbc2891f77c88f156ab9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs)</td></tr>
-<tr class="separator:a52ca7291f7f3dbc2891f77c88f156ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afed40c17c80f547c5d65a5892f51caa0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afed40c17c80f547c5d65a5892f51caa0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs, float *aCutoffFrequency, float *aQValue, float *aGain)</td></tr>
-<tr class="separator:afed40c17c80f547c5d65a5892f51caa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a655f86254676245ae6054ffe14be7524"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a655f86254676245ae6054ffe14be7524"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processCurOffFrequency</b> (float *inputs, float *outputs, float *aCutoffFrequency)</td></tr>
-<tr class="separator:a655f86254676245ae6054ffe14be7524"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a462164fcd458d8e6120206e2f3a0fea4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a462164fcd458d8e6120206e2f3a0fea4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (const double *inputs, double *outputs)</td></tr>
-<tr class="separator:a462164fcd458d8e6120206e2f3a0fea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3ad9a20917ed94624279c8ac05ead5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3ad9a20917ed94624279c8ac05ead5f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *inputs, double *outputs, double *aQValue, double *aGain, double *aCutoffFrequency)</td></tr>
-<tr class="separator:aa3ad9a20917ed94624279c8ac05ead5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a09d8734484568663521d2a1a37a6da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a09d8734484568663521d2a1a37a6da"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processCurOffFrequency</b> (double *inputs, double *outputs, double *aCutoffFrequency)</td></tr>
-<tr class="separator:a0a09d8734484568663521d2a1a37a6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_filter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_filter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_filter.html">Filter</a></td></tr>
-<tr class="memitem:a5c6deec2210aaa2664d512ec35a5dfc0 inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c6deec2210aaa2664d512ec35a5dfc0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Filter</b> (long aVectorSize=0, long aSamplingRate=44100)</td></tr>
-<tr class="separator:a5c6deec2210aaa2664d512ec35a5dfc0 inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8f928748937e51095a22ce29c9c08c4 inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8f928748937e51095a22ce29c9c08c4"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorSize</b> ()</td></tr>
-<tr class="separator:aa8f928748937e51095a22ce29c9c08c4 inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aceb44fa5badb70e5f35fd7388288650b inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aceb44fa5badb70e5f35fd7388288650b"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplingRate</b> ()</td></tr>
-<tr class="separator:aceb44fa5badb70e5f35fd7388288650b inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ee16a822086b1a96ac6b625c77d923d inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ee16a822086b1a96ac6b625c77d923d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:a8ee16a822086b1a96ac6b625c77d923d inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02c21fa49f5a8837a1ece9db10722493 inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02c21fa49f5a8837a1ece9db10722493"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:a02c21fa49f5a8837a1ece9db10722493 inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7f8d9d379dcc40e98d4204eac023f22 inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7f8d9d379dcc40e98d4204eac023f22"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float input)</td></tr>
-<tr class="separator:ac7f8d9d379dcc40e98d4204eac023f22 inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2379f87a7f71d76069abfcc090aaa24c inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2379f87a7f71d76069abfcc090aaa24c"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double input)</td></tr>
-<tr class="separator:a2379f87a7f71d76069abfcc090aaa24c inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a250100634bd88b32db92b248cc49d2d7 inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a250100634bd88b32db92b248cc49d2d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs)</td></tr>
-<tr class="separator:a250100634bd88b32db92b248cc49d2d7 inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5c77fb6f129588d6b1fedb51de1b12e inherit pub_methods_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5c77fb6f129588d6b1fedb51de1b12e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *inputs, double *outputs)</td></tr>
-<tr class="separator:ab5c77fb6f129588d6b1fedb51de1b12e inherit pub_methods_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a7a49066ab883f97d60e296d00a9962a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a49066ab883f97d60e296d00a9962a6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>computeCoefficients</b> ()</td></tr>
-<tr class="separator:a7a49066ab883f97d60e296d00a9962a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:aa6791ad0efb77096df22d29974632fc1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6791ad0efb77096df22d29974632fc1"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_type</b></td></tr>
-<tr class="separator:aa6791ad0efb77096df22d29974632fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9a7e97b119850e882e2ea2594be3703"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9a7e97b119850e882e2ea2594be3703"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_coeff_a0</b></td></tr>
-<tr class="separator:af9a7e97b119850e882e2ea2594be3703"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cfdfe885b474412a15aa491233626cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cfdfe885b474412a15aa491233626cd"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_coeff_a1</b></td></tr>
-<tr class="separator:a4cfdfe885b474412a15aa491233626cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13acea509e092cbfde73f4d889e83287"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13acea509e092cbfde73f4d889e83287"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_coeff_a2</b></td></tr>
-<tr class="separator:a13acea509e092cbfde73f4d889e83287"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8eae9e9c411c7346b6baa081d0f9dda"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8eae9e9c411c7346b6baa081d0f9dda"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_coeff_b1</b></td></tr>
-<tr class="separator:ae8eae9e9c411c7346b6baa081d0f9dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22780741118959d2e682e98aa4f6f131"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22780741118959d2e682e98aa4f6f131"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_coeff_b2</b></td></tr>
-<tr class="separator:a22780741118959d2e682e98aa4f6f131"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75bb61b7d4f646bf9f2af05fff82d65c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75bb61b7d4f646bf9f2af05fff82d65c"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_cutoff_frequency</b></td></tr>
-<tr class="separator:a75bb61b7d4f646bf9f2af05fff82d65c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5eff2823d20f29a31ae45cc5067da89e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5eff2823d20f29a31ae45cc5067da89e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_q_value</b></td></tr>
-<tr class="separator:a5eff2823d20f29a31ae45cc5067da89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5935bdad525e5042b5b00276e8489389"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5935bdad525e5042b5b00276e8489389"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_gain</b></td></tr>
-<tr class="separator:a5935bdad525e5042b5b00276e8489389"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91b11330329bdd044579408083fbe43b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91b11330329bdd044579408083fbe43b"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_frequency_factor</b></td></tr>
-<tr class="separator:a91b11330329bdd044579408083fbe43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac187ca5d40829293822495cc8d3f8c0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac187ca5d40829293822495cc8d3f8c0a"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_delay_one</b></td></tr>
-<tr class="separator:ac187ca5d40829293822495cc8d3f8c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdfc9eb2ae66b50700ae6ed74534fa18"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afdfc9eb2ae66b50700ae6ed74534fa18"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_delay_two</b></td></tr>
-<tr class="separator:afdfc9eb2ae66b50700ae6ed74534fa18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5b9977a216c858bd8e369349d830881"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5b9977a216c858bd8e369349d830881"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_weight</b></td></tr>
-<tr class="separator:ac5b9977a216c858bd8e369349d830881"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_class_filter"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_filter')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_filter.html">Filter</a></td></tr>
-<tr class="memitem:af9ca666c9fe182e676238dac04429954 inherit pro_attribs_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9ca666c9fe182e676238dac04429954"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_size</b></td></tr>
-<tr class="separator:af9ca666c9fe182e676238dac04429954 inherit pro_attribs_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a320edddf1bc2586ac19c9f5cd833bd82 inherit pro_attribs_class_filter"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a320edddf1bc2586ac19c9f5cd833bd82"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></td></tr>
-<tr class="separator:a320edddf1bc2586ac19c9f5cd833bd82 inherit pro_attribs_class_filter"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmFilters/<a class="el" href="_cicm_filter_biquad_8h_source.html">CicmFilterBiquad.h</a></li>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmFilters/CicmFilterBiquad.cpp</li>
@@ -250,7 +104,7 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,37 +83,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_cicm___fft-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Cicm_Fft Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:afe777a718830ab1f22119dcf6bfd1d58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe777a718830ab1f22119dcf6bfd1d58"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Cicm_Fft</b> (long aWindowSize=1024)</td></tr>
-<tr class="separator:afe777a718830ab1f22119dcf6bfd1d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78a6d1be775360a93ee63b99f7ee56cf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78a6d1be775360a93ee63b99f7ee56cf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>forward</b> (cicm_vector_float aRealVector, Cicm_Complex_Packed_Float *anPackedVector)</td></tr>
-<tr class="separator:a78a6d1be775360a93ee63b99f7ee56cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3791358b85f2e7a591f7ea87a2882aa0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3791358b85f2e7a591f7ea87a2882aa0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>inverse</b> (Cicm_Complex_Packed_Float *anPackedVector, cicm_vector_float aRealVector)</td></tr>
-<tr class="separator:a3791358b85f2e7a591f7ea87a2882aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae86da3b4c424610d26c2cf36df9a6220"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae86da3b4c424610d26c2cf36df9a6220"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getWindowSize</b> ()</td></tr>
-<tr class="separator:ae86da3b4c424610d26c2cf36df9a6220"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14bbb8e19dc6167254517a78e9baf377"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14bbb8e19dc6167254517a78e9baf377"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getArraySize</b> ()</td></tr>
-<tr class="separator:a14bbb8e19dc6167254517a78e9baf377"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3567e8d6ec10f2e02e1bc7763bf4b8bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3567e8d6ec10f2e02e1bc7763bf4b8bb"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getOrder</b> ()</td></tr>
-<tr class="separator:a3567e8d6ec10f2e02e1bc7763bf4b8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f102798396e36cacd47b37795c3b07b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f102798396e36cacd47b37795c3b07b"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getScale</b> ()</td></tr>
-<tr class="separator:a4f102798396e36cacd47b37795c3b07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmFft/<a class="el" href="_cicm_fft_8h_source.html">CicmFft.h</a></li>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmFft/CicmFft.cpp</li>
@@ -120,7 +95,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>getScale</b> ()</td
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

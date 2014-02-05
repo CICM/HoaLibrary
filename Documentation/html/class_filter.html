@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,8 +83,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_filter-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Filter Class Reference</div>  </div>
@@ -106,46 +105,6 @@ Inheritance diagram for Filter:</div>
 <area href="class_filter_one_pole.html" alt="FilterOnePole" shape="rect" coords="115,504,220,528"/>
 </map>
  </div></div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a5c6deec2210aaa2664d512ec35a5dfc0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c6deec2210aaa2664d512ec35a5dfc0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Filter</b> (long aVectorSize=0, long aSamplingRate=44100)</td></tr>
-<tr class="separator:a5c6deec2210aaa2664d512ec35a5dfc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8f928748937e51095a22ce29c9c08c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8f928748937e51095a22ce29c9c08c4"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorSize</b> ()</td></tr>
-<tr class="separator:aa8f928748937e51095a22ce29c9c08c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aceb44fa5badb70e5f35fd7388288650b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aceb44fa5badb70e5f35fd7388288650b"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplingRate</b> ()</td></tr>
-<tr class="separator:aceb44fa5badb70e5f35fd7388288650b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ee16a822086b1a96ac6b625c77d923d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ee16a822086b1a96ac6b625c77d923d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:a8ee16a822086b1a96ac6b625c77d923d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02c21fa49f5a8837a1ece9db10722493"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02c21fa49f5a8837a1ece9db10722493"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:a02c21fa49f5a8837a1ece9db10722493"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7f8d9d379dcc40e98d4204eac023f22"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7f8d9d379dcc40e98d4204eac023f22"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float input)</td></tr>
-<tr class="separator:ac7f8d9d379dcc40e98d4204eac023f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2379f87a7f71d76069abfcc090aaa24c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2379f87a7f71d76069abfcc090aaa24c"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double input)</td></tr>
-<tr class="separator:a2379f87a7f71d76069abfcc090aaa24c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a250100634bd88b32db92b248cc49d2d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a250100634bd88b32db92b248cc49d2d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs)</td></tr>
-<tr class="separator:a250100634bd88b32db92b248cc49d2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5c77fb6f129588d6b1fedb51de1b12e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5c77fb6f129588d6b1fedb51de1b12e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *inputs, double *outputs)</td></tr>
-<tr class="separator:ab5c77fb6f129588d6b1fedb51de1b12e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:af9ca666c9fe182e676238dac04429954"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9ca666c9fe182e676238dac04429954"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_size</b></td></tr>
-<tr class="separator:af9ca666c9fe182e676238dac04429954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a320edddf1bc2586ac19c9f5cd833bd82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a320edddf1bc2586ac19c9f5cd833bd82"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></td></tr>
-<tr class="separator:a320edddf1bc2586ac19c9f5cd833bd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmFilters/<a class="el" href="_cicm_filter_8h_source.html">CicmFilter.h</a></li>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmFilters/CicmFilter.cpp</li>
@@ -153,7 +112,7 @@ long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

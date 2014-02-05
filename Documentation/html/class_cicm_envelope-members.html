@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -88,34 +89,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>applyEnvelope</b>(double *inputs) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>applyEnvelope</b>(float *inputs) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>bartlett</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>bartlettHann</b>(double a0=0.62, double a1=0.48, double a2=0.38) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>blackman</b>(double a0=0.16) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>CicmEnvelope</b>(long aSize=1024, long aType=Cicm_Envelope_Hanning, bool fft_normalization=0) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>gaussian</b>(double a0=0.5) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getType</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getValue</b>(long anIndex) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getValueRelative</b>(double aPosition) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>halfsinus</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>hamming</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>hanning</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>kaiser</b>(double a0=3.) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>lanczos</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>setSize</b>(long aWindowSize) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setType</b>(long aType, double a0=-1., double a1=-1., double a2=-1., bool fft_normalization=0) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>sinus</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>square</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>triangular</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>tukey</b>(double a0=0.5) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>write</b>(double *aBuffer, long aSize) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>write</b>(float *aBuffer, long aSize) (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~CicmEnvelope</b>() (defined in <a class="el" href="class_cicm_envelope.html">CicmEnvelope</a>)</td><td class="entry"><a class="el" href="class_cicm_envelope.html">CicmEnvelope</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

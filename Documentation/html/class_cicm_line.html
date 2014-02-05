@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,70 +83,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_cicm_line-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CicmLine Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a1e4c4c8a02a5b964af98e8034ca722ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e4c4c8a02a5b964af98e8034ca722ec"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CicmLine</b> (long aTimeInSample=4410, long aVectorSize=0, long aSamplingRate=44100)</td></tr>
-<tr class="separator:a1e4c4c8a02a5b964af98e8034ca722ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf8fafba2b436da502ffd90c11803043"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf8fafba2b436da502ffd90c11803043"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CicmLine</b> (double aTimeInMs=100., long aVectorSize=0, long aSamplingRate=44100)</td></tr>
-<tr class="separator:aaf8fafba2b436da502ffd90c11803043"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae930ff600e396194535344b404bde04d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae930ff600e396194535344b404bde04d"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorSize</b> ()</td></tr>
-<tr class="separator:ae930ff600e396194535344b404bde04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1333edda51022435eb0b766c4fa683ed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1333edda51022435eb0b766c4fa683ed"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplingRate</b> ()</td></tr>
-<tr class="separator:a1333edda51022435eb0b766c4fa683ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80906ed66c29493501e3c9f263109430"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80906ed66c29493501e3c9f263109430"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getRampInSample</b> ()</td></tr>
-<tr class="separator:a80906ed66c29493501e3c9f263109430"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5debf1f919532f78fc8f08376b4ae06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5debf1f919532f78fc8f08376b4ae06"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getRampInMs</b> ()</td></tr>
-<tr class="separator:ab5debf1f919532f78fc8f08376b4ae06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f489a8a7f208ea08d029eece29eea4d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f489a8a7f208ea08d029eece29eea4d"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getCoefficient</b> ()</td></tr>
-<tr class="separator:a4f489a8a7f208ea08d029eece29eea4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04ac8461b3a011bfa3cfb15343677566"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04ac8461b3a011bfa3cfb15343677566"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:a04ac8461b3a011bfa3cfb15343677566"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9419a101fdf049f9e855d8bbdae8f29e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9419a101fdf049f9e855d8bbdae8f29e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:a9419a101fdf049f9e855d8bbdae8f29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89d140e24cd85fdb204a6cbec78d4ccb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89d140e24cd85fdb204a6cbec78d4ccb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRampInSample</b> (long aTimeInSample)</td></tr>
-<tr class="separator:a89d140e24cd85fdb204a6cbec78d4ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54f0738d51e79440f8774ebd3db6a531"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54f0738d51e79440f8774ebd3db6a531"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRampInMs</b> (double aTimeInMs)</td></tr>
-<tr class="separator:a54f0738d51e79440f8774ebd3db6a531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabed1bbf0cef11ed2b0c2bc8450c8b65"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabed1bbf0cef11ed2b0c2bc8450c8b65"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCoefficientDirect</b> (double aCoefficient)</td></tr>
-<tr class="separator:aabed1bbf0cef11ed2b0c2bc8450c8b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a962efdd6afc99305b8663a01bc4b949c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a962efdd6afc99305b8663a01bc4b949c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCoefficient</b> (double aCoefficient)</td></tr>
-<tr class="separator:a962efdd6afc99305b8663a01bc4b949c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e1752f201920a7af75e6e7d6e9d08f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e1752f201920a7af75e6e7d6e9d08f0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCoefficientAngleDirect</b> (double anAngle)</td></tr>
-<tr class="separator:a1e1752f201920a7af75e6e7d6e9d08f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27ed029ebf97d8aaf71cfce8f434e665"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27ed029ebf97d8aaf71cfce8f434e665"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCoefficientAngle</b> (double anAngle)</td></tr>
-<tr class="separator:a27ed029ebf97d8aaf71cfce8f434e665"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58922c3dbc60ff5a17bfcb06100976c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58922c3dbc60ff5a17bfcb06100976c8"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> ()</td></tr>
-<tr class="separator:a58922c3dbc60ff5a17bfcb06100976c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9079de8b316a3d4dd69eb7a59e9ac2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9079de8b316a3d4dd69eb7a59e9ac2d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *anOutputVector)</td></tr>
-<tr class="separator:ac9079de8b316a3d4dd69eb7a59e9ac2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca247cb4434cd2b171d5865a12e83be4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca247cb4434cd2b171d5865a12e83be4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *anOutputVector)</td></tr>
-<tr class="separator:aca247cb4434cd2b171d5865a12e83be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmLines/<a class="el" href="_cicm_line_8h_source.html">CicmLine.h</a></li>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmLines/CicmLine.cpp</li>
@@ -153,7 +95,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *a
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

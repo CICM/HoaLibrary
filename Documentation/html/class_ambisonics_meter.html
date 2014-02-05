@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -83,7 +84,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_ambisonics_meter-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">AmbisonicsMeter Class Reference</div>  </div>
@@ -105,209 +105,9 @@ Inheritance diagram for AmbisonicsMeter:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab6652775a732fc5d190101e5673c6758"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ambisonics_meter.html#ab6652775a732fc5d190101e5673c6758">AmbisonicsMeter</a> (long aNumberOfChannel=1, long aVectorSize=0, double aSamplingRate=44100.)</td></tr>
 <tr class="separator:ab6652775a732fc5d190101e5673c6758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67dcdc08682898d4460cf8e04f53a201"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67dcdc08682898d4460cf8e04f53a201"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setNumberOfLoudspeakers</b> (long aNumberOfChannels)</td></tr>
-<tr class="separator:a67dcdc08682898d4460cf8e04f53a201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14720821cf28453bc1609a234121c040"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14720821cf28453bc1609a234121c040"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:a14720821cf28453bc1609a234121c040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a991f4c9b08bf47e0eb10fda9e907f511"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a991f4c9b08bf47e0eb10fda9e907f511"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerAngleDegrees</b> (long anIndex, double anAngle)</td></tr>
-<tr class="separator:a991f4c9b08bf47e0eb10fda9e907f511"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58425860d8afb4eb62328833e68baf12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58425860d8afb4eb62328833e68baf12"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerAnglesDegrees</b> (long aSize, double *angles)</td></tr>
-<tr class="separator:a58425860d8afb4eb62328833e68baf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15bbfeebc227c01a4041316905e051c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15bbfeebc227c01a4041316905e051c7"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerPeaks</b> (long anIndex)</td></tr>
-<tr class="separator:a15bbfeebc227c01a4041316905e051c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a1f8138c0b030eeb3f83a536c72e6e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a1f8138c0b030eeb3f83a536c72e6e4"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerEnergy</b> (long anIndex)</td></tr>
-<tr class="separator:a2a1f8138c0b030eeb3f83a536c72e6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73f0f5db0e7e5e15080d907cddc48e98"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73f0f5db0e7e5e15080d907cddc48e98"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getEnergyVectorAbscissa</b> ()</td></tr>
-<tr class="separator:a73f0f5db0e7e5e15080d907cddc48e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a737f7cf7c2392a3caa50fc79daad1500"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a737f7cf7c2392a3caa50fc79daad1500"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getEnergyVectorOrdinate</b> ()</td></tr>
-<tr class="separator:a737f7cf7c2392a3caa50fc79daad1500"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a597186413fff3df7e5ee2f82fd0c497a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a597186413fff3df7e5ee2f82fd0c497a"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getEnergyVectorAngle</b> ()</td></tr>
-<tr class="separator:a597186413fff3df7e5ee2f82fd0c497a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ed4c04a207ef485252c9075f691be35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ed4c04a207ef485252c9075f691be35"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getEnergyVectorRadius</b> ()</td></tr>
-<tr class="separator:a0ed4c04a207ef485252c9075f691be35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f4ec2a7672144bbeebfedc398e77439"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f4ec2a7672144bbeebfedc398e77439"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getVelocityVectorAbscissa</b> ()</td></tr>
-<tr class="separator:a1f4ec2a7672144bbeebfedc398e77439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab34bc7eff55c357550f05b2852eb6840"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab34bc7eff55c357550f05b2852eb6840"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getVelocityVectorOrdinate</b> ()</td></tr>
-<tr class="separator:ab34bc7eff55c357550f05b2852eb6840"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a937efec3de37d9702acf18b2b1b00109"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a937efec3de37d9702acf18b2b1b00109"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getVelocityVectorAngle</b> ()</td></tr>
-<tr class="separator:a937efec3de37d9702acf18b2b1b00109"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48578aa4790dc7063e9ecb2d37dc66ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48578aa4790dc7063e9ecb2d37dc66ba"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getVelocityVectorRadius</b> ()</td></tr>
-<tr class="separator:a48578aa4790dc7063e9ecb2d37dc66ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1b0981516635b7773383b498f2a9b39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1b0981516635b7773383b498f2a9b39"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerAngleMapped</b> (long anIndex)</td></tr>
-<tr class="separator:ad1b0981516635b7773383b498f2a9b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d01a9986aa9ac1cea65d97c84da49c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d01a9986aa9ac1cea65d97c84da49c1"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerWidth</b> (long anIndex)</td></tr>
-<tr class="separator:a5d01a9986aa9ac1cea65d97c84da49c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72032e205495ad09add249ad65363957"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72032e205495ad09add249ad65363957"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerAngleRadian</b> (long anIndex)</td></tr>
-<tr class="separator:a72032e205495ad09add249ad65363957"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac10c0e4c4c2b3188d084253116edc1b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac10c0e4c4c2b3188d084253116edc1b0"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerAngleMappedRadian</b> (long anIndex)</td></tr>
-<tr class="separator:ac10c0e4c4c2b3188d084253116edc1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1147487c544561c5865e93603c72f2a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1147487c544561c5865e93603c72f2a3"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerWidthRadian</b> (long anIndex)</td></tr>
-<tr class="separator:a1147487c544561c5865e93603c72f2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf6d66a0e5ab0043c7780ee298f7d927"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf6d66a0e5ab0043c7780ee298f7d927"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getChannelName</b> (long anIndex)</td></tr>
-<tr class="separator:aaf6d66a0e5ab0043c7780ee298f7d927"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec2469b7c4257c8cf14b7fca0638b49b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec2469b7c4257c8cf14b7fca0638b49b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float **inputs)</td></tr>
-<tr class="separator:aec2469b7c4257c8cf14b7fca0638b49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b25ca0c6429a4ba0462852433b9fd62"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b25ca0c6429a4ba0462852433b9fd62"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double **inputs)</td></tr>
-<tr class="separator:a6b25ca0c6429a4ba0462852433b9fd62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95b73d96270c11538421b02d9143a567"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95b73d96270c11538421b02d9143a567"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processEnergy</b> ()</td></tr>
-<tr class="separator:a95b73d96270c11538421b02d9143a567"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a837f99343b8d0dbf2c01000d419d48ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a837f99343b8d0dbf2c01000d419d48ee"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processVectors</b> ()</td></tr>
-<tr class="separator:a837f99343b8d0dbf2c01000d419d48ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_planewaves"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_planewaves')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_planewaves.html">Planewaves</a></td></tr>
 <tr class="memitem:ae42541fd2c6919293813f378ccb6e785 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_planewaves.html#ae42541fd2c6919293813f378ccb6e785">Planewaves</a> (long aNumberOfLoudspeakers=1, long aVectorSize=0, double aSamplingRate=44100.)</td></tr>
 <tr class="separator:ae42541fd2c6919293813f378ccb6e785 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f3820b35933ce1ab38b330bb2746095 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f3820b35933ce1ab38b330bb2746095"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfInputs</b> ()</td></tr>
-<tr class="separator:a3f3820b35933ce1ab38b330bb2746095 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad939ca3ae96ae047ad256c558c3a3bd3 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad939ca3ae96ae047ad256c558c3a3bd3"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfOutputs</b> ()</td></tr>
-<tr class="separator:ad939ca3ae96ae047ad256c558c3a3bd3 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c086f9619574cb8978d9e646b53e9f1 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c086f9619574cb8978d9e646b53e9f1"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfLoudspeakers</b> ()</td></tr>
-<tr class="separator:a3c086f9619574cb8978d9e646b53e9f1 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e66e9164ed7367f3124b9861670154f inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e66e9164ed7367f3124b9861670154f"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerAngle</b> (long anIndex)</td></tr>
-<tr class="separator:a2e66e9164ed7367f3124b9861670154f inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95945712ac223fb2a8063ba0f2f4bd2f inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95945712ac223fb2a8063ba0f2f4bd2f"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerAbscissa</b> (long anIndex)</td></tr>
-<tr class="separator:a95945712ac223fb2a8063ba0f2f4bd2f inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba832591da65aa8079659b13139bcf26 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba832591da65aa8079659b13139bcf26"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerOrdinate</b> (long anIndex)</td></tr>
-<tr class="separator:aba832591da65aa8079659b13139bcf26 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a2801c80087f97ce16e883c8e9a665d inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a2801c80087f97ce16e883c8e9a665d"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getLoudspeakerName</b> (long anIndex)</td></tr>
-<tr class="separator:a8a2801c80087f97ce16e883c8e9a665d inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a054f1f5e7c92ecbf2216f67285a1637f inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a054f1f5e7c92ecbf2216f67285a1637f"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorSize</b> ()</td></tr>
-<tr class="separator:a054f1f5e7c92ecbf2216f67285a1637f inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f8b89eed4f2666735e331b2e1c97851 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f8b89eed4f2666735e331b2e1c97851"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSamplingRate</b> ()</td></tr>
-<tr class="separator:a8f8b89eed4f2666735e331b2e1c97851 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78c8ed28bb96d5847f01922da56317ca inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78c8ed28bb96d5847f01922da56317ca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setNumberOfLoudspeakers</b> (long aNumberOfLoudspeakers, bool standardOnOff=0)</td></tr>
-<tr class="separator:a78c8ed28bb96d5847f01922da56317ca inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05a5ba2dd520d3e7492b73f482a2c580 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05a5ba2dd520d3e7492b73f482a2c580"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerAngleDegrees</b> (long anIndex, double anAngle)</td></tr>
-<tr class="separator:a05a5ba2dd520d3e7492b73f482a2c580 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a365f3bbfb54a46fab37e9fa882405ca8 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a365f3bbfb54a46fab37e9fa882405ca8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerAngleRadians</b> (long anIndex, double anAngle)</td></tr>
-<tr class="separator:a365f3bbfb54a46fab37e9fa882405ca8 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6a30b01e2fb507dd127ab2e1a6fc097 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6a30b01e2fb507dd127ab2e1a6fc097"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerAnglesDegrees</b> (long aSize, double *angles)</td></tr>
-<tr class="separator:aa6a30b01e2fb507dd127ab2e1a6fc097 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d8c18b07d2f02a4249df54b447fb8ab inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d8c18b07d2f02a4249df54b447fb8ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLoudspeakerAnglesRadians</b> (long asize, double *angles)</td></tr>
-<tr class="separator:a7d8c18b07d2f02a4249df54b447fb8ab inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d2a07cd72c21e3b2e722f26a662f34d inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d2a07cd72c21e3b2e722f26a662f34d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVectorSize</b> (long aVectorSize)</td></tr>
-<tr class="separator:a8d2a07cd72c21e3b2e722f26a662f34d inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6f440d73aa29dea36dcfea289be4201 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad6f440d73aa29dea36dcfea289be4201"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSamplingRate</b> (long aSamplingRate)</td></tr>
-<tr class="separator:ad6f440d73aa29dea36dcfea289be4201 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5f48e1a69cbc44d23133bb6bc0bef75 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5f48e1a69cbc44d23133bb6bc0bef75"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float *inputs, float *outputs)</td></tr>
-<tr class="separator:ac5f48e1a69cbc44d23133bb6bc0bef75 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e4c760142418f0e6741f728a074e9e8 inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e4c760142418f0e6741f728a074e9e8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double *inputs, double *outputs)</td></tr>
-<tr class="separator:a4e4c760142418f0e6741f728a074e9e8 inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad650c5c26df2c792e17bcd8a36d6ec2b inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad650c5c26df2c792e17bcd8a36d6ec2b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (float **inputs, float **outputs)</td></tr>
-<tr class="separator:ad650c5c26df2c792e17bcd8a36d6ec2b inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad506efc46b74de7b94e6aa82d8d0248e inherit pub_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad506efc46b74de7b94e6aa82d8d0248e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> (double **inputs, double **outputs)</td></tr>
-<tr class="separator:ad506efc46b74de7b94e6aa82d8d0248e inherit pub_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a851eee4cd189d850b028f75f44aa0fa5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a851eee4cd189d850b028f75f44aa0fa5"></a>
-<a class="el" href="class_ambisonic_vector.html">AmbisonicVector</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_vectors</b></td></tr>
-<tr class="separator:a851eee4cd189d850b028f75f44aa0fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea287908ab29c57db2dd04c4b7e307d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea287908ab29c57db2dd04c4b7e307d5"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_loudspeakers_amplitudes</b></td></tr>
-<tr class="separator:aea287908ab29c57db2dd04c4b7e307d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27343caf2b62d5e87fa99c4c1a40cd02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27343caf2b62d5e87fa99c4c1a40cd02"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_loudspeakers_peaks</b></td></tr>
-<tr class="separator:a27343caf2b62d5e87fa99c4c1a40cd02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e5c805ec6f9329b316d32a03969c67"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30e5c805ec6f9329b316d32a03969c67"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_loudspeakers_energies</b></td></tr>
-<tr class="separator:a30e5c805ec6f9329b316d32a03969c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a703b0c4ca60b8ca98a45c15750c5229f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a703b0c4ca60b8ca98a45c15750c5229f"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_coordinates_double</b> [4]</td></tr>
-<tr class="separator:a703b0c4ca60b8ca98a45c15750c5229f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac01da8c9577b0fd777a1821946f8b776"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac01da8c9577b0fd777a1821946f8b776"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_coordinates_float</b> [4]</td></tr>
-<tr class="separator:ac01da8c9577b0fd777a1821946f8b776"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82aaf6d19c3a8d7c7f1a52f65b175351"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82aaf6d19c3a8d7c7f1a52f65b175351"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_loudspeakers_angles_mapped</b></td></tr>
-<tr class="separator:a82aaf6d19c3a8d7c7f1a52f65b175351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fa69f3a2d8bccfb6001bcf6c060b6c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fa69f3a2d8bccfb6001bcf6c060b6c1"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_loudspeakers_angles_width</b></td></tr>
-<tr class="separator:a9fa69f3a2d8bccfb6001bcf6c060b6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_class_planewaves"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_planewaves')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_planewaves.html">Planewaves</a></td></tr>
-<tr class="memitem:a6dd0098ff1d4b81527c6167466297058 inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6dd0098ff1d4b81527c6167466297058"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_outputs</b></td></tr>
-<tr class="separator:a6dd0098ff1d4b81527c6167466297058 inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acda1374f626a0bc8195168dd1fe19b70 inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acda1374f626a0bc8195168dd1fe19b70"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_inputs</b></td></tr>
-<tr class="separator:acda1374f626a0bc8195168dd1fe19b70 inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7abe82cc58b3565ed1a28a2474eb32d inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7abe82cc58b3565ed1a28a2474eb32d"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_number_of_loudspeakers</b></td></tr>
-<tr class="separator:aa7abe82cc58b3565ed1a28a2474eb32d inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe5fc340f74dda877171778d9f6a3679 inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe5fc340f74dda877171778d9f6a3679"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_angles_of_loudspeakers_double</b></td></tr>
-<tr class="separator:afe5fc340f74dda877171778d9f6a3679 inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade92d829ba7007329da4bcbaab89dadc inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade92d829ba7007329da4bcbaab89dadc"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_abscissa_of_loudspeakers_double</b></td></tr>
-<tr class="separator:ade92d829ba7007329da4bcbaab89dadc inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9ad4e534d97062c547bd9f95fe169e6 inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9ad4e534d97062c547bd9f95fe169e6"></a>
-cicm_vector_double&#160;</td><td class="memItemRight" valign="bottom"><b>m_ordinate_of_loudspeakers_double</b></td></tr>
-<tr class="separator:ab9ad4e534d97062c547bd9f95fe169e6 inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a696e0b2346571f07c820236b99070d inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a696e0b2346571f07c820236b99070d"></a>
-cicm_vector_float&#160;</td><td class="memItemRight" valign="bottom"><b>m_angles_of_loudspeakers_float</b></td></tr>
-<tr class="separator:a0a696e0b2346571f07c820236b99070d inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09dcfc8c5af875db858a37530e270e0d inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09dcfc8c5af875db858a37530e270e0d"></a>
-cicm_vector_float&#160;</td><td class="memItemRight" valign="bottom"><b>m_abscissa_of_loudspeakers_float</b></td></tr>
-<tr class="separator:a09dcfc8c5af875db858a37530e270e0d inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a921b48fb8846a90112ca7d1799a12186 inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a921b48fb8846a90112ca7d1799a12186"></a>
-cicm_vector_float&#160;</td><td class="memItemRight" valign="bottom"><b>m_ordinate_of_loudspeakers_float</b></td></tr>
-<tr class="separator:a921b48fb8846a90112ca7d1799a12186 inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0980687d11060fab5714954390e71588 inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0980687d11060fab5714954390e71588"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_vector_size</b></td></tr>
-<tr class="separator:a0980687d11060fab5714954390e71588 inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54f363a918f24543a4584263ff6b4eba inherit pro_attribs_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54f363a918f24543a4584263ff6b4eba"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_sampling_rate</b></td></tr>
-<tr class="separator:a54f363a918f24543a4584263ff6b4eba inherit pro_attribs_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_methods_class_planewaves"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_planewaves')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_planewaves.html">Planewaves</a></td></tr>
-<tr class="memitem:aaf5fc3b55a549b2b1b68c710aafbae68 inherit pro_methods_class_planewaves"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf5fc3b55a549b2b1b68c710aafbae68"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>computeConfiguration</b> (bool standardOnOff=0)</td></tr>
-<tr class="separator:aaf5fc3b55a549b2b1b68c710aafbae68 inherit pro_methods_class_planewaves"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="interface_hoa_library.html">HoaLibrary</a> : A High Order Ambisonics Library Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8. All rights reserved.re Guillot, CICM - Université Paris 8 All rights reserved.</p>
@@ -362,7 +162,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>computeConfiguration<
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

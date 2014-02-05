@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,119 +105,9 @@ Inheritance diagram for SourcesTrajectory:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6e0838cc0ab29b5462cc624958498c4d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sources_trajectory.html#a6e0838cc0ab29b5462cc624958498c4d">SourcesTrajectory</a> ()</td></tr>
 <tr class="separator:a6e0838cc0ab29b5462cc624958498c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a144f079aa6f6b50c83a271d322b424c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a144f079aa6f6b50c83a271d322b424c1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRecording</b> (long aOnOffValue)</td></tr>
-<tr class="separator:a144f079aa6f6b50c83a271d322b424c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82dc71af00f97dc5e13d70830fed706a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82dc71af00f97dc5e13d70830fed706a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLimited</b> (long aOnOffValue)</td></tr>
-<tr class="separator:a82dc71af00f97dc5e13d70830fed706a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c393bd7a54561f9d25496ffa628e985"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c393bd7a54561f9d25496ffa628e985"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>recordSourceInTrajectory</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long aSourceIndex)</td></tr>
-<tr class="separator:a0c393bd7a54561f9d25496ffa628e985"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3804e310f5b9249edba48eb6a2e06f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3804e310f5b9249edba48eb6a2e06f2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>recordGroupInTrajectory</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long aGroupIndex)</td></tr>
-<tr class="separator:ad3804e310f5b9249edba48eb6a2e06f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c8cc57b0459bf7a304b248412ff9bf9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c8cc57b0459bf7a304b248412ff9bf9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>playTrajectory</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, double aFractionnalValue)</td></tr>
-<tr class="separator:a2c8cc57b0459bf7a304b248412ff9bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ae4eb86ca3cb99d529757eb10799866"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ae4eb86ca3cb99d529757eb10799866"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>erase</b> ()</td></tr>
-<tr class="separator:a7ae4eb86ca3cb99d529757eb10799866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d71cb5d183e546d217d9a444a05502d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d71cb5d183e546d217d9a444a05502d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>erase</b> (double aFractionnalValueBegin, double aFractionnalValueEnd)</td></tr>
-<tr class="separator:a5d71cb5d183e546d217d9a444a05502d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3afc21198b76091ec22a2785e305f9a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3afc21198b76091ec22a2785e305f9a"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getLimited</b> ()</td></tr>
-<tr class="separator:ad3afc21198b76091ec22a2785e305f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5afc0c313e3ad76f3c39c2f4c5546ea4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5afc0c313e3ad76f3c39c2f4c5546ea4"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getRecording</b> ()</td></tr>
-<tr class="separator:a5afc0c313e3ad76f3c39c2f4c5546ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_sources_preset"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_sources_preset')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_sources_preset.html">SourcesPreset</a></td></tr>
 <tr class="memitem:a0a4203349327d10bb6afe35156126d8a inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sources_preset.html#a0a4203349327d10bb6afe35156126d8a">SourcesPreset</a> ()</td></tr>
 <tr class="separator:a0a4203349327d10bb6afe35156126d8a inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0a656cc68f279b5fbb51b220e1363a5 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa0a656cc68f279b5fbb51b220e1363a5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeSouceManagerAtSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long anIndex)</td></tr>
-<tr class="separator:aa0a656cc68f279b5fbb51b220e1363a5 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3fee4d3cf26ae5fbf5ac50a04f00e61 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3fee4d3cf26ae5fbf5ac50a04f00e61"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeSouceManagerAtFirstEmptySlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager)</td></tr>
-<tr class="separator:aa3fee4d3cf26ae5fbf5ac50a04f00e61 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2cc88ed95f1715358c8f9330ccaf5ab inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2cc88ed95f1715358c8f9330ccaf5ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeSouceManagerAtLastUsedSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager)</td></tr>
-<tr class="separator:ad2cc88ed95f1715358c8f9330ccaf5ab inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ded7bfe5242346d5f6f08e4a77a6e94 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ded7bfe5242346d5f6f08e4a77a6e94"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeSouceManagerAtNewEndSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager)</td></tr>
-<tr class="separator:a9ded7bfe5242346d5f6f08e4a77a6e94 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad527bdc87aaa365ef36c70d0027d658d inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad527bdc87aaa365ef36c70d0027d658d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeSouceManagerAtNextSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager)</td></tr>
-<tr class="separator:ad527bdc87aaa365ef36c70d0027d658d inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96671f9d3423ce9642ffd7bf5667973e inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96671f9d3423ce9642ffd7bf5667973e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>insertSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long anIndex)</td></tr>
-<tr class="separator:a96671f9d3423ce9642ffd7bf5667973e inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab032da223bf26c364cda0313a3a2f3dd inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab032da223bf26c364cda0313a3a2f3dd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeSlot</b> (long anIndex)</td></tr>
-<tr class="separator:ab032da223bf26c364cda0313a3a2f3dd inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fb3965fe3d7ae3fe3d20d7fd789888f inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2fb3965fe3d7ae3fe3d20d7fd789888f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteSlot</b> (long anIndex)</td></tr>
-<tr class="separator:a2fb3965fe3d7ae3fe3d20d7fd789888f inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80a62c575519b01e97183d869f52ff20 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80a62c575519b01e97183d869f52ff20"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>copySlot</b> (long anIndexSouce, long anIndexDestination)</td></tr>
-<tr class="separator:a80a62c575519b01e97183d869f52ff20 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8259bcfaa2335eaef6ee273cac13fc05 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8259bcfaa2335eaef6ee273cac13fc05"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>renumber</b> ()</td></tr>
-<tr class="separator:a8259bcfaa2335eaef6ee273cac13fc05 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2687dc610e8a02d470d7e2e33516c010 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2687dc610e8a02d470d7e2e33516c010"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
-<tr class="separator:a2687dc610e8a02d470d7e2e33516c010 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8fde193ed4c08e1f479305eda3cbc3a inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab8fde193ed4c08e1f479305eda3cbc3a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeSourceAtSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long aSlotIndex, long aSourceIndex)</td></tr>
-<tr class="separator:ab8fde193ed4c08e1f479305eda3cbc3a inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83cc05d8d40b3f46d228dbca92b858da inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a83cc05d8d40b3f46d228dbca92b858da"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeSourceAtNextSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long aSourceIndex)</td></tr>
-<tr class="separator:a83cc05d8d40b3f46d228dbca92b858da inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff296426704730c4a166223ed3e1b0b0 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff296426704730c4a166223ed3e1b0b0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeGroupAtSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long aSlotIndex, long aGroupIndex)</td></tr>
-<tr class="separator:aff296426704730c4a166223ed3e1b0b0 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41911df7af802088a3d9c8889dd4d722 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41911df7af802088a3d9c8889dd4d722"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>storeGroupAtNextSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long aGroupIndex)</td></tr>
-<tr class="separator:a41911df7af802088a3d9c8889dd4d722 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7448d5812c15aed92039077ef47b4845 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7448d5812c15aed92039077ef47b4845"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>recallSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long anIndex)</td></tr>
-<tr class="separator:a7448d5812c15aed92039077ef47b4845 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fba984996f1db1aff480cfa37e81c51 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fba984996f1db1aff480cfa37e81c51"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>recallFractionalSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, long anIndexSource, long anIndexDestination, double aFractionnalIndex)</td></tr>
-<tr class="separator:a9fba984996f1db1aff480cfa37e81c51 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae71bda191fbbeb78b3782084f630dd0a inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae71bda191fbbeb78b3782084f630dd0a"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>recallFractionalSlot</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManager, double aFractionnalIndex)</td></tr>
-<tr class="separator:ae71bda191fbbeb78b3782084f630dd0a inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed8d2ab6ab9a0a3aa56f559b1fd01c44 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed8d2ab6ab9a0a3aa56f559b1fd01c44"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getMaximumIndexOfSlot</b> ()</td></tr>
-<tr class="separator:aed8d2ab6ab9a0a3aa56f559b1fd01c44 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb55020be21bb40e6fcfa561608048b6 inherit pub_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb55020be21bb40e6fcfa561608048b6"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getSlotExistence</b> (long anIndex)</td></tr>
-<tr class="separator:abb55020be21bb40e6fcfa561608048b6 inherit pub_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pro_methods_class_sources_preset"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_sources_preset')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_sources_preset.html">SourcesPreset</a></td></tr>
-<tr class="memitem:a1b8192b4128b175ca6515e4561dd831c inherit pro_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b8192b4128b175ca6515e4561dd831c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>copySourceManager</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerSource, <a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerDestination)</td></tr>
-<tr class="separator:a1b8192b4128b175ca6515e4561dd831c inherit pro_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61b009a86b6b664df852e480b2fce602 inherit pro_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61b009a86b6b664df852e480b2fce602"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>copySource</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerSource, <a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerDestination, long aSourceIndex)</td></tr>
-<tr class="separator:a61b009a86b6b664df852e480b2fce602 inherit pro_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebfe0eb7bef464436b475ab3caff83ef inherit pro_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebfe0eb7bef464436b475ab3caff83ef"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>copyGroup</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerSource, <a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerDestination, long aGroupIndex)</td></tr>
-<tr class="separator:aebfe0eb7bef464436b475ab3caff83ef inherit pro_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5b262c5cbd7bf28e02fca4f107d6e2f inherit pro_methods_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5b262c5cbd7bf28e02fca4f107d6e2f"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>interpolationSourceManager</b> (<a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerSourceOne, <a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerSourceTwo, <a class="el" href="class_sources_manager.html">SourcesManager</a> *aSouceManagerDestination, double aFrac)</td></tr>
-<tr class="separator:ad5b262c5cbd7bf28e02fca4f107d6e2f inherit pro_methods_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_class_sources_preset"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_sources_preset')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_sources_preset.html">SourcesPreset</a></td></tr>
-<tr class="memitem:acff67a9d23aa4d9d818f791719a190ea inherit pro_attribs_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acff67a9d23aa4d9d818f791719a190ea"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>m_last_slot_stored</b></td></tr>
-<tr class="separator:acff67a9d23aa4d9d818f791719a190ea inherit pro_attribs_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65def0661bcd9c262bcc3643de782200 inherit pro_attribs_class_sources_preset"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65def0661bcd9c262bcc3643de782200"></a>
-std::vector&lt; <a class="el" href="class_sources_manager.html">SourcesManager</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_source_managers</b></td></tr>
-<tr class="separator:a65def0661bcd9c262bcc3643de782200 inherit pro_attribs_class_sources_preset"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="interface_hoa_library.html">HoaLibrary</a> : A High Order Ambisonics Library Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8. All rights reserved.</p>
@@ -262,7 +153,7 @@ std::vector&lt; <a class="el" href="class_sources_manager.html">SourcesManager</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

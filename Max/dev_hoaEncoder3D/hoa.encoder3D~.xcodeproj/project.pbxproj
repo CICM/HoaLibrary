@@ -60,10 +60,10 @@
 		8FF4B07417A2A3FA00C2B435 /* CicmTuning.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFD617A2A3FA00C2B435 /* CicmTuning.h */; };
 		8FF4B07517A2A3FA00C2B435 /* CicmSignal.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFD717A2A3FA00C2B435 /* CicmSignal.h */; };
 		8FF4B07617A2A3FA00C2B435 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFD817A2A3FA00C2B435 /* CicmTools.h */; };
-		8FF4B07717A2A3FA00C2B435 /* Ambisonic3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AFDA17A2A3FA00C2B435 /* Ambisonic3D.cpp */; };
-		8FF4B07817A2A3FA00C2B435 /* Ambisonic3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFDB17A2A3FA00C2B435 /* Ambisonic3D.h */; };
-		8FF4B08D17A2A3FA00C2B435 /* AmbisonicEncoder3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AFF617A2A3FA00C2B435 /* AmbisonicEncoder3D.cpp */; };
-		8FF4B08E17A2A3FA00C2B435 /* AmbisonicEncoder3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFF717A2A3FA00C2B435 /* AmbisonicEncoder3D.h */; };
+		8FF4B07717A2A3FA00C2B435 /* Hoa3DAmbisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AFDA17A2A3FA00C2B435 /* Hoa3DAmbisonic.cpp */; };
+		8FF4B07817A2A3FA00C2B435 /* Hoa3DAmbisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFDB17A2A3FA00C2B435 /* Hoa3DAmbisonic.h */; };
+		8FF4B08D17A2A3FA00C2B435 /* Hoa3DEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF4AFF617A2A3FA00C2B435 /* Hoa3DEncoder.cpp */; };
+		8FF4B08E17A2A3FA00C2B435 /* Hoa3DEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF4AFF717A2A3FA00C2B435 /* Hoa3DEncoder.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,10 +122,10 @@
 		8FF4AFD617A2A3FA00C2B435 /* CicmTuning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTuning.h; sourceTree = "<group>"; };
 		8FF4AFD717A2A3FA00C2B435 /* CicmSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmSignal.h; sourceTree = "<group>"; };
 		8FF4AFD817A2A3FA00C2B435 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
-		8FF4AFDA17A2A3FA00C2B435 /* Ambisonic3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic3D.cpp; sourceTree = "<group>"; };
-		8FF4AFDB17A2A3FA00C2B435 /* Ambisonic3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic3D.h; sourceTree = "<group>"; };
-		8FF4AFF617A2A3FA00C2B435 /* AmbisonicEncoder3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicEncoder3D.cpp; sourceTree = "<group>"; };
-		8FF4AFF717A2A3FA00C2B435 /* AmbisonicEncoder3D.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = AmbisonicEncoder3D.h; sourceTree = "<group>"; };
+		8FF4AFDA17A2A3FA00C2B435 /* Hoa3DAmbisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hoa3DAmbisonic.cpp; sourceTree = "<group>"; };
+		8FF4AFDB17A2A3FA00C2B435 /* Hoa3DAmbisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3DAmbisonic.h; sourceTree = "<group>"; };
+		8FF4AFF617A2A3FA00C2B435 /* Hoa3DEncoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hoa3DEncoder.cpp; sourceTree = "<group>"; };
+		8FF4AFF717A2A3FA00C2B435 /* Hoa3DEncoder.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = Hoa3DEncoder.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,8 +297,8 @@
 		8FF4AFD917A2A3FA00C2B435 /* hoaAmbisonics */ = {
 			isa = PBXGroup;
 			children = (
-				8FF4AFDA17A2A3FA00C2B435 /* Ambisonic3D.cpp */,
-				8FF4AFDB17A2A3FA00C2B435 /* Ambisonic3D.h */,
+				8FF4AFDA17A2A3FA00C2B435 /* Hoa3DAmbisonic.cpp */,
+				8FF4AFDB17A2A3FA00C2B435 /* Hoa3DAmbisonic.h */,
 			);
 			path = hoaAmbisonics;
 			sourceTree = "<group>";
@@ -306,8 +306,8 @@
 		8FF4AFF317A2A3FA00C2B435 /* hoaEncoder */ = {
 			isa = PBXGroup;
 			children = (
-				8FF4AFF617A2A3FA00C2B435 /* AmbisonicEncoder3D.cpp */,
-				8FF4AFF717A2A3FA00C2B435 /* AmbisonicEncoder3D.h */,
+				8FF4AFF617A2A3FA00C2B435 /* Hoa3DEncoder.cpp */,
+				8FF4AFF717A2A3FA00C2B435 /* Hoa3DEncoder.h */,
 			);
 			path = hoaEncoder;
 			sourceTree = "<group>";
@@ -349,8 +349,8 @@
 				8FF4B07417A2A3FA00C2B435 /* CicmTuning.h in Headers */,
 				8FF4B07517A2A3FA00C2B435 /* CicmSignal.h in Headers */,
 				8FF4B07617A2A3FA00C2B435 /* CicmTools.h in Headers */,
-				8FF4B07817A2A3FA00C2B435 /* Ambisonic3D.h in Headers */,
-				8FF4B08E17A2A3FA00C2B435 /* AmbisonicEncoder3D.h in Headers */,
+				8FF4B07817A2A3FA00C2B435 /* Hoa3DAmbisonic.h in Headers */,
+				8FF4B08E17A2A3FA00C2B435 /* Hoa3DEncoder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,8 +449,8 @@
 				8FF4B06D17A2A3FA00C2B435 /* CicmQSGS.cpp in Sources */,
 				8FF4B07017A2A3FA00C2B435 /* CicmLine.cpp in Sources */,
 				8FF4B07217A2A3FA00C2B435 /* CicmFreeverb.cpp in Sources */,
-				8FF4B07717A2A3FA00C2B435 /* Ambisonic3D.cpp in Sources */,
-				8FF4B08D17A2A3FA00C2B435 /* AmbisonicEncoder3D.cpp in Sources */,
+				8FF4B07717A2A3FA00C2B435 /* Hoa3DAmbisonic.cpp in Sources */,
+				8FF4B08D17A2A3FA00C2B435 /* Hoa3DEncoder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

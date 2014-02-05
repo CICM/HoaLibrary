@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['ambisonic',['Ambisonic',['../class_ambisonic.html',1,'Ambisonic'],['../class_ambisonic.html#ae704cc4472fd1efa22e39f7d501ca7e2',1,'Ambisonic::Ambisonic()']]],
-  ['ambisonic3d',['Ambisonic3D',['../class_ambisonic3_d.html',1,'']]],
+  ['ambisonic',['Ambisonic',['../class_ambisonic.html',1,'Ambisonic'],['../class_ambisonic.html#ae704cc4472fd1efa22e39f7d501ca7e2',1,'Ambisonic::Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#aedbcac4a5b11cec6738e1047ecee7e7b',1,'Hoa3D::Ambisonic::Ambisonic()']]],
+  ['ambisonic',['Ambisonic',['../class_hoa3_d_1_1_ambisonic.html',1,'Hoa3D']]],
   ['ambisonicconvolver',['AmbisonicConvolver',['../class_ambisonic_convolver.html',1,'AmbisonicConvolver'],['../class_ambisonic_convolver.html#a738ca279b391cf1adba9e2004ac74c52',1,'AmbisonicConvolver::AmbisonicConvolver()']]],
-  ['ambisonicdecoder3d',['AmbisonicDecoder3D',['../class_ambisonic_decoder3_d.html',1,'AmbisonicDecoder3D'],['../class_ambisonic_decoder3_d.html#a500aa4620487dc857bd1c2c89acfe874',1,'AmbisonicDecoder3D::AmbisonicDecoder3D()']]],
   ['ambisonicencoder',['AmbisonicEncoder',['../class_ambisonic_encoder.html',1,'AmbisonicEncoder'],['../class_ambisonic_encoder.html#acf62830cd4a81423886be0f298fc0705',1,'AmbisonicEncoder::AmbisonicEncoder()']]],
-  ['ambisonicencoder3d',['AmbisonicEncoder3D',['../class_ambisonic_encoder3_d.html',1,'AmbisonicEncoder3D'],['../class_ambisonic_encoder3_d.html#a34d06da180ce0e7c557dcfb59f921460',1,'AmbisonicEncoder3D::AmbisonicEncoder3D()']]],
   ['ambisonicfreeverb',['AmbisonicFreeverb',['../class_ambisonic_freeverb.html',1,'AmbisonicFreeverb'],['../class_ambisonic_freeverb.html#a802c9cbbd9eb3a1d8dbf70205f26807f',1,'AmbisonicFreeverb::AmbisonicFreeverb()']]],
   ['ambisonicmap',['AmbisonicMap',['../class_ambisonic_map.html',1,'AmbisonicMap'],['../class_ambisonic_map.html#a44db87a2d97aa5851b5fc81be2a33d08',1,'AmbisonicMap::AmbisonicMap()']]],
   ['ambisoniconepole',['AmbisonicOnePole',['../class_ambisonic_one_pole.html',1,'']]],

@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,158 +83,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_tools-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Tools Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa96141a453a43b8c0a76a72f178299f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa96141a453a43b8c0a76a72f178299f9"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>clip</b> (double aValue, const double aMinimum, const double aMaximum)</td></tr>
-<tr class="separator:aa96141a453a43b8c0a76a72f178299f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cbc1147b5209fef2c47a1f4217cacec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cbc1147b5209fef2c47a1f4217cacec"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>clip_min</b> (double aValue, double aMinimum=0)</td></tr>
-<tr class="separator:a8cbc1147b5209fef2c47a1f4217cacec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f53acfe389e4d904d9b2418a59d57a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f53acfe389e4d904d9b2418a59d57a3"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>clip_max</b> (double aValue, double aMaximum=0)</td></tr>
-<tr class="separator:a0f53acfe389e4d904d9b2418a59d57a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb6319ed3e5d1ef320cfba1504ed11c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb6319ed3e5d1ef320cfba1504ed11c0"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>clip</b> (double *vector, long aSize, double aMinimum=0., double aMaximum=1.)</td></tr>
-<tr class="separator:acb6319ed3e5d1ef320cfba1504ed11c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1fa0a340b448bd5ffc5dac15ae66d8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1fa0a340b448bd5ffc5dac15ae66d8d"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>clip</b> (float *vector, long aSize, float aMinimum=0.f, double aMaximum=1.f)</td></tr>
-<tr class="separator:ae1fa0a340b448bd5ffc5dac15ae66d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e4fe1a9a75ce8e570d9b3939a524ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57e4fe1a9a75ce8e570d9b3939a524ac"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>clip</b> (int *vector, long aSize, int aMinimum=0, int aMaximum=1)</td></tr>
-<tr class="separator:a57e4fe1a9a75ce8e570d9b3939a524ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a186ed50207e0868914ebcf1be204da0c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a186ed50207e0868914ebcf1be204da0c"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>clip</b> (long *vector, long aSize, long aMinimum=0, long aMaximum=1)</td></tr>
-<tr class="separator:a186ed50207e0868914ebcf1be204da0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54311478fe37d7763d0dd6b276ffe264"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54311478fe37d7763d0dd6b276ffe264"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>clip_power_of_two</b> (int aValue)</td></tr>
-<tr class="separator:a54311478fe37d7763d0dd6b276ffe264"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7491862b32867182ff02a7284f2b64b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7491862b32867182ff02a7284f2b64b"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>sum</b> (double *input, long size)</td></tr>
-<tr class="separator:ac7491862b32867182ff02a7284f2b64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262d35badff712a32e3d05b2a5d76b15"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a262d35badff712a32e3d05b2a5d76b15"></a>
-static float&#160;</td><td class="memItemRight" valign="bottom"><b>sum</b> (float *input, long size)</td></tr>
-<tr class="separator:a262d35badff712a32e3d05b2a5d76b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20603042aa09ec3c70bfc60535d742c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20603042aa09ec3c70bfc60535d742c5"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>log2</b> (double n)</td></tr>
-<tr class="separator:a20603042aa09ec3c70bfc60535d742c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab69175d8bad23e1cc752cde6eb728168"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab69175d8bad23e1cc752cde6eb728168"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b> (double x, double y)</td></tr>
-<tr class="separator:ab69175d8bad23e1cc752cde6eb728168"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc03167734c0dfcd4e7f9d934e9084a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc03167734c0dfcd4e7f9d934e9084a8"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>angle</b> (double x, double y)</td></tr>
-<tr class="separator:acc03167734c0dfcd4e7f9d934e9084a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9280334f677d92da2eacbe03f6abc7b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9280334f677d92da2eacbe03f6abc7b0"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>ordinate</b> (const double radius, const double angle)</td></tr>
-<tr class="separator:a9280334f677d92da2eacbe03f6abc7b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43c04420afbb92ef1d71051a2aa240c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43c04420afbb92ef1d71051a2aa240c1"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>abscissa</b> (const double radius, const double angle)</td></tr>
-<tr class="separator:a43c04420afbb92ef1d71051a2aa240c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33ab4d00a57f69a9e63ca64782f88a6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33ab4d00a57f69a9e63ca64782f88a6d"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>distance_euclidean</b> (double x1, double y1, double x2, double y2)</td></tr>
-<tr class="separator:a33ab4d00a57f69a9e63ca64782f88a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d62e9d276681816acb5c810479afbd8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d62e9d276681816acb5c810479afbd8"></a>
-static long double&#160;</td><td class="memItemRight" valign="bottom"><b>factoriel</b> (long double n)</td></tr>
-<tr class="separator:a9d62e9d276681816acb5c810479afbd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0150d5802d736aef8ba68fdf5f1d9cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af0150d5802d736aef8ba68fdf5f1d9cc"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>intToString</b> (int aValue)</td></tr>
-<tr class="separator:af0150d5802d736aef8ba68fdf5f1d9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecf6ed12f25991d66430b7ce187407f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecf6ed12f25991d66430b7ce187407f4"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>floatToString</b> (float aValue, int numberOfDecimals=2)</td></tr>
-<tr class="separator:aecf6ed12f25991d66430b7ce187407f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd728a130524d341ea40c464ca2c3d38"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd728a130524d341ea40c464ca2c3d38"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>floatToStringOneDecimal</b> (float aValue)</td></tr>
-<tr class="separator:acd728a130524d341ea40c464ca2c3d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14566babe75a08391f478a5ca2b90cdd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14566babe75a08391f478a5ca2b90cdd"></a>
-static double *&#160;</td><td class="memItemRight" valign="bottom"><b>Read_Wav</b> (char *wave_file)</td></tr>
-<tr class="separator:a14566babe75a08391f478a5ca2b90cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a970f64e0e36e05341c5b3bbd9a4a6f9b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a970f64e0e36e05341c5b3bbd9a4a6f9b"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>isInside</b> (double val, double v1, double v2)</td></tr>
-<tr class="separator:a970f64e0e36e05341c5b3bbd9a4a6f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b1187c89c4c85337493dfff72b21c40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b1187c89c4c85337493dfff72b21c40"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>isInsideRad</b> (double radian, double loRad, double hiRad)</td></tr>
-<tr class="separator:a8b1187c89c4c85337493dfff72b21c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cbc8f8149968a530d8493dc892fb305"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0cbc8f8149968a530d8493dc892fb305"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>isInsideDeg</b> (double degree, double loDeg, double hiDeg)</td></tr>
-<tr class="separator:a0cbc8f8149968a530d8493dc892fb305"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59cbf53b3ebcba49f0af3325767a2df4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59cbf53b3ebcba49f0af3325767a2df4"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>cicm_max</b> (double v1, double v2)</td></tr>
-<tr class="separator:a59cbf53b3ebcba49f0af3325767a2df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bcbe2f02c09559027552ffac0986768"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6bcbe2f02c09559027552ffac0986768"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>cicm_min</b> (double v1, double v2)</td></tr>
-<tr class="separator:a6bcbe2f02c09559027552ffac0986768"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e1e8e08b54127bfc706d865dd8a1d00"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e1e8e08b54127bfc706d865dd8a1d00"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>radianInterp</b> (double _step, double _startRad, double _endRad)</td></tr>
-<tr class="separator:a1e1e8e08b54127bfc706d865dd8a1d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a269b79b2eb6b5580c6e80868556d8e85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a269b79b2eb6b5580c6e80868556d8e85"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>radToDeg</b> (double radian)</td></tr>
-<tr class="separator:a269b79b2eb6b5580c6e80868556d8e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa54c52f0497e0197d086d463f7a87ef5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa54c52f0497e0197d086d463f7a87ef5"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>degToRad</b> (double degree)</td></tr>
-<tr class="separator:aa54c52f0497e0197d086d463f7a87ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21cbc1a838db932072ec93ebfd3879a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21cbc1a838db932072ec93ebfd3879a2"></a>
-static long&#160;</td><td class="memItemRight" valign="bottom"><b>mstosamps</b> (double ms, double samplerate=44100.)</td></tr>
-<tr class="separator:a21cbc1a838db932072ec93ebfd3879a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aede1af9b4db6b5c4b12eec63df370786"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aede1af9b4db6b5c4b12eec63df370786"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>sampstoms</b> (double s, double samplerate=44100.)</td></tr>
-<tr class="separator:aede1af9b4db6b5c4b12eec63df370786"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec543fe7c05d9f8c350ad0bc58e77fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abec543fe7c05d9f8c350ad0bc58e77fe"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>atodb</b> (double amp)</td></tr>
-<tr class="separator:abec543fe7c05d9f8c350ad0bc58e77fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4c15bcee52921e36788e5f37d9b4465"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4c15bcee52921e36788e5f37d9b4465"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>dbtoa</b> (double dB)</td></tr>
-<tr class="separator:aa4c15bcee52921e36788e5f37d9b4465"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4e2685f6a47384a65d88d8f2e1471c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4e2685f6a47384a65d88d8f2e1471c3"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>safediv</b> (double num, double denom)</td></tr>
-<tr class="separator:ac4e2685f6a47384a65d88d8f2e1471c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56ce4d215b8249fd71638a11ea514244"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56ce4d215b8249fd71638a11ea514244"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>sortVector</b> (double *array, int size)</td></tr>
-<tr class="separator:a56ce4d215b8249fd71638a11ea514244"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c6a0c3bd67422b1914028da16bd4537"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c6a0c3bd67422b1914028da16bd4537"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> (double in, double inlow, double inhigh, double outlow, double outhigh, double power)</td></tr>
-<tr class="separator:a3c6a0c3bd67422b1914028da16bd4537"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6dbdcc5f6113002f0a74857f93d7cea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6dbdcc5f6113002f0a74857f93d7cea"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> (double in, double inlow, double inhigh, double outlow, double outhigh)</td></tr>
-<tr class="separator:aa6dbdcc5f6113002f0a74857f93d7cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d98b24e13dbfd1e9ce7c98d3df7d5f3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d98b24e13dbfd1e9ce7c98d3df7d5f3"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>radian_wrap</b> (const double anAngle)</td></tr>
-<tr class="separator:a6d98b24e13dbfd1e9ce7c98d3df7d5f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa698b9d5ff416a3eb1a94ccc549b86c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa698b9d5ff416a3eb1a94ccc549b86c1"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>radianDistance</b> (double anAngle1, double anAngle2)</td></tr>
-<tr class="separator:aa698b9d5ff416a3eb1a94ccc549b86c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a983dfec741d6bbf8acea2ba57b80c2d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a983dfec741d6bbf8acea2ba57b80c2d7"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>radianClosestDistance</b> (double anAngle1, double anAngle2)</td></tr>
-<tr class="separator:a983dfec741d6bbf8acea2ba57b80c2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1bd848045eb791be59d7736fcb8ee92"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1bd848045eb791be59d7736fcb8ee92"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>degreeWrap</b> (double anAngle)</td></tr>
-<tr class="separator:ab1bd848045eb791be59d7736fcb8ee92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab480a7e5898049a68dd16474fd1744d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab480a7e5898049a68dd16474fd1744d5"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>wrap</b> (double _val, double _lo, double _hi)</td></tr>
-<tr class="separator:ab480a7e5898049a68dd16474fd1744d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2330eb5e6bbda3c85674c6de0561385f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2330eb5e6bbda3c85674c6de0561385f"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>getRand</b> (int min, int max)</td></tr>
-<tr class="separator:a2330eb5e6bbda3c85674c6de0561385f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ef0d4f226042f9f3505da3057f19a8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ef0d4f226042f9f3505da3057f19a8a"></a>
-static float&#160;</td><td class="memItemRight" valign="bottom"><b>getRandf</b> (float fMin, float fMax)</td></tr>
-<tr class="separator:a4ef0d4f226042f9f3505da3057f19a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3783b2bfed4d48cb3496c49172b1efbc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3783b2bfed4d48cb3496c49172b1efbc"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>getRandd</b> (double dMin, double dMax)</td></tr>
-<tr class="separator:a3783b2bfed4d48cb3496c49172b1efbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/<a class="el" href="_cicm_tools_8h_source.html">CicmTools.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

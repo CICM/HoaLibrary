@@ -37,6 +37,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,85 +83,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_cicm_envelope-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CicmEnvelope Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a698e532bf93683e1a4653a2d8aa4cfe4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a698e532bf93683e1a4653a2d8aa4cfe4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CicmEnvelope</b> (long aSize=1024, long aType=Cicm_Envelope_Hanning, bool fft_normalization=0)</td></tr>
-<tr class="separator:a698e532bf93683e1a4653a2d8aa4cfe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab212f2d0f392431ccb023a8077b3af3a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab212f2d0f392431ccb023a8077b3af3a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSize</b> (long aWindowSize)</td></tr>
-<tr class="separator:ab212f2d0f392431ccb023a8077b3af3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6027a0eac74b76c32dbeb8b69f0bdae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6027a0eac74b76c32dbeb8b69f0bdae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (long aType, double a0=-1., double a1=-1., double a2=-1., bool fft_normalization=0)</td></tr>
-<tr class="separator:af6027a0eac74b76c32dbeb8b69f0bdae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67d241fe75bfd7ac689fa47b49557ffb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67d241fe75bfd7ac689fa47b49557ffb"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
-<tr class="separator:a67d241fe75bfd7ac689fa47b49557ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a347d3d10bdb2fd123c8cabfa3d0fcf42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a347d3d10bdb2fd123c8cabfa3d0fcf42"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>square</b> ()</td></tr>
-<tr class="separator:a347d3d10bdb2fd123c8cabfa3d0fcf42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f8d334281f7434b3d122d57c9f8ee8f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f8d334281f7434b3d122d57c9f8ee8f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>hanning</b> ()</td></tr>
-<tr class="separator:a5f8d334281f7434b3d122d57c9f8ee8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67b606aa7ee9cb2d47ca9de213d22d81"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67b606aa7ee9cb2d47ca9de213d22d81"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>hamming</b> ()</td></tr>
-<tr class="separator:a67b606aa7ee9cb2d47ca9de213d22d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a9849e8c3a6f32bcb05d89d992dd393"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a9849e8c3a6f32bcb05d89d992dd393"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>tukey</b> (double a0=0.5)</td></tr>
-<tr class="separator:a9a9849e8c3a6f32bcb05d89d992dd393"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb2ac098933c26e0c857fd335b839140"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb2ac098933c26e0c857fd335b839140"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>halfsinus</b> ()</td></tr>
-<tr class="separator:aeb2ac098933c26e0c857fd335b839140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85f21a9f0012e4ae27ef0ccef794dc04"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a85f21a9f0012e4ae27ef0ccef794dc04"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>sinus</b> ()</td></tr>
-<tr class="separator:a85f21a9f0012e4ae27ef0ccef794dc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4f9f4b1c3683430aa710ca7abfa55c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4f9f4b1c3683430aa710ca7abfa55c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>lanczos</b> ()</td></tr>
-<tr class="separator:aa4f9f4b1c3683430aa710ca7abfa55c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99ca6a92cef6c78ced4b732a7151a2da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99ca6a92cef6c78ced4b732a7151a2da"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>triangular</b> ()</td></tr>
-<tr class="separator:a99ca6a92cef6c78ced4b732a7151a2da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2fc9d932a0cea72e4e85263f43b99d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2fc9d932a0cea72e4e85263f43b99d3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>bartlett</b> ()</td></tr>
-<tr class="separator:aa2fc9d932a0cea72e4e85263f43b99d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a879c5134fbabebc6335f558863b86c48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a879c5134fbabebc6335f558863b86c48"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gaussian</b> (double a0=0.5)</td></tr>
-<tr class="separator:a879c5134fbabebc6335f558863b86c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4059330ce46df825c732543c12e7b86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4059330ce46df825c732543c12e7b86"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>bartlettHann</b> (double a0=0.62, double a1=0.48, double a2=0.38)</td></tr>
-<tr class="separator:af4059330ce46df825c732543c12e7b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a1aa883e6af18352d0f86235a9d3292"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a1aa883e6af18352d0f86235a9d3292"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>blackman</b> (double a0=0.16)</td></tr>
-<tr class="separator:a1a1aa883e6af18352d0f86235a9d3292"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75af0b3bce78dffacb17bdae5e218ed0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75af0b3bce78dffacb17bdae5e218ed0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>kaiser</b> (double a0=3.)</td></tr>
-<tr class="separator:a75af0b3bce78dffacb17bdae5e218ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc60dbaa093da94b265654851ab5c3ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc60dbaa093da94b265654851ab5c3ff"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (double *aBuffer, long aSize)</td></tr>
-<tr class="separator:acc60dbaa093da94b265654851ab5c3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3eb165d5b296ecd2c532993c97a5d17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3eb165d5b296ecd2c532993c97a5d17"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (float *aBuffer, long aSize)</td></tr>
-<tr class="separator:ad3eb165d5b296ecd2c532993c97a5d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35c269e2eba9d65b13dbcab6c62890a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35c269e2eba9d65b13dbcab6c62890a8"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getValue</b> (long anIndex)</td></tr>
-<tr class="separator:a35c269e2eba9d65b13dbcab6c62890a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c9d3139c915d5b324c4d4a24e3931c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c9d3139c915d5b324c4d4a24e3931c7"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getValueRelative</b> (double aPosition)</td></tr>
-<tr class="separator:a0c9d3139c915d5b324c4d4a24e3931c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a786d4ea6d6ecd1e8614a8eb1cba8ae68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a786d4ea6d6ecd1e8614a8eb1cba8ae68"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>applyEnvelope</b> (double *inputs)</td></tr>
-<tr class="separator:a786d4ea6d6ecd1e8614a8eb1cba8ae68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa080ff61cd42344591bb82de187b1a06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa080ff61cd42344591bb82de187b1a06"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>applyEnvelope</b> (float *inputs)</td></tr>
-<tr class="separator:aa080ff61cd42344591bb82de187b1a06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmEnvelope/<a class="el" href="_cicm_envelope_8h_source.html">CicmEnvelope.h</a></li>
 <li>/Users/Pierre/SourceTree/HoaLibrary/Sources/CicmLibrary/CicmEnvelope/CicmEnvelope.cpp</li>
@@ -168,7 +95,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>applyEnvelope</b> (fl
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 4 2014 19:09:24 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2014 11:18:00 for HOA LIBRARY by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

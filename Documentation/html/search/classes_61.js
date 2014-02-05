@@ -1,11 +1,9 @@
 var searchData=
 [
   ['ambisonic',['Ambisonic',['../class_ambisonic.html',1,'']]],
-  ['ambisonic3d',['Ambisonic3D',['../class_ambisonic3_d.html',1,'']]],
+  ['ambisonic',['Ambisonic',['../class_hoa3_d_1_1_ambisonic.html',1,'Hoa3D']]],
   ['ambisonicconvolver',['AmbisonicConvolver',['../class_ambisonic_convolver.html',1,'']]],
-  ['ambisonicdecoder3d',['AmbisonicDecoder3D',['../class_ambisonic_decoder3_d.html',1,'']]],
   ['ambisonicencoder',['AmbisonicEncoder',['../class_ambisonic_encoder.html',1,'']]],
-  ['ambisonicencoder3d',['AmbisonicEncoder3D',['../class_ambisonic_encoder3_d.html',1,'']]],
   ['ambisonicfreeverb',['AmbisonicFreeverb',['../class_ambisonic_freeverb.html',1,'']]],
   ['ambisonicmap',['AmbisonicMap',['../class_ambisonic_map.html',1,'']]],
   ['ambisoniconepole',['AmbisonicOnePole',['../class_ambisonic_one_pole.html',1,'']]],
