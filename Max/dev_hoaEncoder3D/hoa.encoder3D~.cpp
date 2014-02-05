@@ -37,8 +37,8 @@ int postons = 0;
 typedef struct _hoa_encoder 
 {
 	t_pxobject              f_ob;
-    Hoa3D::Encoder*         f_encoder;
     double*                 f_signals;
+    Hoa3D::Encoder*         f_encoder;
     
 } t_hoa_encoder;
 
@@ -101,7 +101,8 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_encoder->getNumberOfInputs());
 		for (int i = 0; i < x->f_encoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
-        x->f_signals =  new double[x->f_encoder->getNumberOfOutputs() * sys_getmaxblksize()];
+        
+        x->f_signals =  new double[x->f_encoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
 	}
 
 	return (x);
@@ -146,36 +147,37 @@ void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double s
 
 void hoa_encoder_perform64_azimuth_elevation(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    int i = sampleframes;
-    while(--i)
+    for(int i = 0; i < sampleframes; i++)
     {
-        x->f_encoder->setAzimuth(ins[1][sampleframes]);
-        x->f_encoder->setElevation(ins[1][sampleframes]);
-        x->f_encoder->process(ins[0][sampleframes], x->f_signals + sampleframes * i);
+        x->f_encoder->setAzimuth(ins[1][i]);
+        x->f_encoder->setElevation(ins[2][i]);
+        x->f_encoder->process(ins[0][i], x->f_signals);
+        for(int j = 0; j < numouts; j++)
+            outs[j][i] = x->f_signals[j];
     }
-    for(int i = 0; i < numouts; i++)
-        cblas_daxpy(sampleframes, 1., x->f_signals+i, numouts, outs[i], 1);
+    //for(int i = 0; i < numouts; i++)
+      //  cblas_daxpy(sampleframes, 1., x->f_signals+i, numouts, outs[i], 1);
 }
 
 void hoa_encoder_perform64_azimuth(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    while(--sampleframes)
+    for(int i = 0; i < sampleframes; i++)
     {
-        x->f_encoder->setAzimuth(ins[1][sampleframes]);
-        x->f_encoder->process(ins[0][sampleframes], x->f_signals);
-        for(int i = 0; i < numouts; i++)
-            outs[i][sampleframes] = x->f_signals[i];
+        x->f_encoder->setAzimuth(ins[1][i]);
+        x->f_encoder->process(ins[0][i], x->f_signals);
+        for(int j = 0; j < numouts; j++)
+            outs[j][i] = x->f_signals[j];
     }
 }
 
 void hoa_encoder_perform64_elevation(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-	while(--sampleframes)
+	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_encoder->setElevation(ins[1][sampleframes]);
-        x->f_encoder->process(ins[0][sampleframes], x->f_signals);
-        for(int i = 0; i < numouts; i++)
-            outs[i][sampleframes] = x->f_signals[i];
+        x->f_encoder->setElevation(ins[2][i]);
+        x->f_encoder->process(ins[0][i], x->f_signals);
+        for(int j = 0; j < numouts; j++)
+            outs[j][i] = x->f_signals[j];
     }
 }
 

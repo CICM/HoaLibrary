@@ -28,8 +28,8 @@ namespace Hoa3D
         long	m_number_of_inputs;
         long	m_number_of_outputs;
         
-        long*    m_harmonics_indices;
-        long*    m_harmonics_orders;
+        long*    m_harmonics_arguments;
+        long*    m_harmonics_bands;
         
     public:
         

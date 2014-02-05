@@ -40,10 +40,10 @@ namespace Hoa3D
         
     private:
         
-        unsigned int    m_elevation;
-        unsigned int    m_azimuth;
-        double*         m_azimuth_matrix;
-        double*         m_elevation_matrix;
+        long            m_elevation;
+        long            m_azimuth;
+        double**        m_azimuth_matrix;
+        double**        m_elevation_matrix;
         double          m_increment;
         
     public:

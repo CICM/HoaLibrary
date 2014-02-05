@@ -34,17 +34,17 @@ namespace Hoa3D
         m_number_of_inputs		= m_number_of_harmonics;
         m_number_of_outputs		= m_number_of_harmonics;
         
-        m_harmonics_indices     = new long[m_number_of_harmonics];
-        m_harmonics_orders      = new long[m_number_of_harmonics];
+        m_harmonics_arguments   = new long[m_number_of_harmonics];
+        m_harmonics_bands      = new long[m_number_of_harmonics];
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
-            m_harmonics_orders[i] = sqrtf((float)i);
-            int index = i - (m_harmonics_orders[i]) * (m_harmonics_orders[i]);
+            m_harmonics_bands[i] = sqrtf((float)i);
+            int index = i - (m_harmonics_bands[i]) * (m_harmonics_bands[i]);
             
             int index2 = (index - 1) / 2. + 1.;
             if (index % 2 == 1)
                 index2 = -index2;
-            m_harmonics_indices[i] = index2;
+            m_harmonics_arguments[i] = index2;
         }
     }
     
@@ -72,7 +72,7 @@ namespace Hoa3D
     {
         if(index < m_number_of_harmonics)
         {
-            return m_harmonics_indices[index];
+            return m_harmonics_arguments[index];
         }
         else
             return 0;
@@ -82,7 +82,7 @@ namespace Hoa3D
     {
         if(index < m_number_of_harmonics)
         {
-            return m_harmonics_orders[index];
+            return m_harmonics_bands[index];
         }
         else
             return 0;
@@ -96,11 +96,10 @@ namespace Hoa3D
             return "No harmonic";
     }
     
-    
     Ambisonic::~Ambisonic()
     {
-        cicm_free(m_harmonics_indices);
-        cicm_free(m_harmonics_orders);
+        cicm_free(m_harmonics_arguments);
+        cicm_free(m_harmonics_bands);
     }
 }
 

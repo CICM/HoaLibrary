@@ -33,14 +33,20 @@ namespace Hoa3D
         m_azimuth           = 0;
         m_number_of_inputs  = 3;
         m_increment         = (double)(NUMBEROFCIRCLEPOINTS * m_number_of_harmonics) / CICM_2PI;
-        m_azimuth_matrix    = new double[m_number_of_harmonics * NUMBEROFCIRCLEPOINTS];
-        m_elevation_matrix  = new double[m_number_of_harmonics * NUMBEROFCIRCLEPOINTS];
+        m_azimuth_matrix    = new double*[NUMBEROFCIRCLEPOINTS];
+        m_elevation_matrix  = new double*[NUMBEROFCIRCLEPOINTS];
+        
+        for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
+        {
+            m_azimuth_matrix[j]    = new double[m_number_of_harmonics];
+            m_elevation_matrix[j]  = new double[m_number_of_harmonics];
+        }
         
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
             double theta;
             double phi;
-            int band = getHarmonicBand(i);
+            int band     = getHarmonicBand(i);
             int argument = getHarmonicArgument(i);
             if(argument == 0)
             {
@@ -50,8 +56,8 @@ namespace Hoa3D
                     if(theta > CICM_PI)
                         theta = CICM_2PI - theta;
                    
-                    m_azimuth_matrix[j*m_number_of_harmonics+i] = sqrt((2. * (double)band + 1.) / (4. * CICM_PI));
-                    m_elevation_matrix[j*m_number_of_harmonics+i] = legendrePolynomial(band, 0, cosf(theta));
+                    m_azimuth_matrix[j][i] = 1.;
+                    m_elevation_matrix[j][i] = legendrePolynomial(band, 0, cos(theta));
                 }
             }
             else if(argument > 0 )
@@ -63,8 +69,8 @@ namespace Hoa3D
                     if(theta > CICM_PI)
                         theta = CICM_2PI - theta;
               
-                    m_azimuth_matrix[j*m_number_of_harmonics+i] = sqrt(2.) * cos((double)argument * phi); // Normalization ???
-                    m_elevation_matrix[j*m_number_of_harmonics+i] = legendrePolynomial(band, argument, cosf(theta));
+                    m_azimuth_matrix[j][i] = cos((double)argument * phi);
+                    m_elevation_matrix[j][i] = legendrePolynomial(band, argument, cos(theta));
                 }
             }
             else
@@ -76,8 +82,8 @@ namespace Hoa3D
                     if(theta > CICM_PI)
                         theta = CICM_2PI - theta;
                   
-                    m_azimuth_matrix[j*m_number_of_harmonics+i] = sqrt(2.) * sin((double)-argument * phi); // Normalization ???
-                    m_elevation_matrix[j*m_number_of_harmonics+i] = legendrePolynomial(band, -argument, cosf(theta));
+                    m_azimuth_matrix[j][i] = sin((double)-argument * phi);
+                    m_elevation_matrix[j][i] = legendrePolynomial(band, -argument, cos(theta));
                 }
             }
         }
@@ -85,26 +91,24 @@ namespace Hoa3D
     
     void Encoder::setAzimuth(const double azimuth)
     {
-        double angle = azimuth;
-        m_azimuth = Tools::radian_wrap(angle) * m_increment;
+        m_azimuth = Tools::radian_wrap(azimuth) / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
     }
     
     void Encoder::setElevation(const double elevation)
     {
-        double angle = elevation;
-        m_elevation = Tools::radian_wrap(angle) * m_increment;
+        m_elevation = Tools::radian_wrap(elevation)  / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
     }
     
     void Encoder::process(const float input, float* outputs)
     {
         for(int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = input * m_azimuth_matrix[m_azimuth+i] * m_elevation_matrix[m_elevation+i];
+            outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
     }
     
     void Encoder::process(const double input, double* outputs)
     {
         for(int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = input * m_azimuth_matrix[m_azimuth+i] * m_elevation_matrix[m_elevation+i];
+            outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
     }
     
     Encoder::~Encoder()
