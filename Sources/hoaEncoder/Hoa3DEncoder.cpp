@@ -13,7 +13,6 @@ namespace Hoa3D
         m_elevation         = 0;
         m_azimuth           = 0;
         m_number_of_inputs  = 3;
-        m_increment         = (double)(NUMBEROFCIRCLEPOINTS * m_number_of_harmonics) / CICM_2PI;
         m_azimuth_matrix    = new double*[NUMBEROFCIRCLEPOINTS];
         m_elevation_matrix  = new double*[NUMBEROFCIRCLEPOINTS];
         
