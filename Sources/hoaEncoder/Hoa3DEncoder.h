@@ -23,7 +23,6 @@ namespace Hoa3D
         long            m_azimuth;
         double**        m_azimuth_matrix;
         double**        m_elevation_matrix;
-        double          m_increment;
         
     public:
         

@@ -6,6 +6,7 @@ var searchData=
   ['setelevation',['setElevation',['../class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d',1,'Hoa3D::Encoder']]],
   ['setsuncoordinatespolar',['setSunCoordinatesPolar',['../class_planetary_system.html#ac46b592ee753adf63d50d2b96057a1f5',1,'PlanetarySystem']]],
   ['setvectorsize',['setVectorSize',['../class_ambisonic_encoder.html#a7219775383a3bead41ec7f1a609a76fe',1,'AmbisonicEncoder::setVectorSize()'],['../class_ambisonic_wider.html#af970c4c71f96afa96649d9c1a1387043',1,'AmbisonicWider::setVectorSize()']]],
+  ['setwideningvalue',['setWideningValue',['../class_hoa3_d_1_1_wider.html#a5981d4dafbb0d2ce4ea20ec7cd1fb114',1,'Hoa3D::Wider']]],
   ['setwidenvalue',['setWidenValue',['../class_ambisonic_wider.html#a26597b62bcb8d892591ad5362702edca',1,'AmbisonicWider']]],
   ['sourcesmanager',['SourcesManager',['../class_sources_manager.html#a333ef82bab70b995bf0f658c894bee1b',1,'SourcesManager']]],
   ['sourcespreset',['SourcesPreset',['../class_sources_preset.html#a0a4203349327d10bb6afe35156126d8a',1,'SourcesPreset']]],
