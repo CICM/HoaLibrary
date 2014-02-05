@@ -1,27 +1,8 @@
-/* 
- * HoaLibrary : A High Order Ambisonics Library
- * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- * All rights reserved.
- *
- * Website  : http://www.mshparisnord.fr/HoaLibrary/
- * Contacts : cicm.mshparisnord@gmail.com
- *
- * This file is part of HOA LIBRARY.
- *
- * HOA LIBRARY is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
- */
+/*
+// Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
 #ifndef DEF_HOA_3D_ENCODER
 #define DEF_HOA_3D_ENCODER
@@ -30,10 +11,8 @@
 
 namespace Hoa3D
 {
-    /**
-     The ambisonic 3D encoder.
-     
-     The encoder should be used to encode a signal in the spherical harmonics domain depending of an order of decomposition. It allows to control the azimuth and the elevation of the encoding.
+    //! The ambisonic encoder.
+    /** The encoder should be used to encode a signal in the spherical harmonics domain depending of an order of decomposition. It allows to control the azimuth and the elevation of the encoding.
      */
     class Encoder : public Ambisonic
     {
@@ -47,34 +26,48 @@ namespace Hoa3D
         double          m_increment;
         
     public:
-        /**	The decoder constructor.
-         @param     order	The order, must be at least 1.
-         */
-        Encoder(unsigned int order = 1);
         
-        /**	The decoder destructor.
+        //! The encoder constructor.
+        /**	The encoder constructor allocates and initialize the member values to computes spherical harmonics coefficients depending of a decomposition order. The order must be at least 1.
+         
+            @param     order	The order.
+         */
+        Encoder(unsigned int order);
+        
+        //! The encoder destructor.
+        /**	The encoder destructor free the memory.
          */
         ~Encoder();
         
-        /**	This method set the angle of azimuth.
-         @param     azimuth	The azimuth in radian, you should prefer to use it between 0 and 2 Pi.
+        //! This method set the angle of azimuth.
+        /**	The angle of azimuth in radian and you should prefer to use it between 0 and 2 Pi to avoid recursive wrapping of the value. The direction of rotation is counterclockwise. The 0 radian is Pi/2 phase shifted relative to a mathematical representation of a circle, then the 0 radian is at the "front" of the soundfield.
+         
+            @param     azimuth	The azimuth.
+            @see       setElevation()
          */
         void setAzimuth(const double azimuth);
         
-        /**	This method set the angle of elevation.
-         @param     elevation The elevation in radian, you should prefer to use it between 0 and 2 Pi.
+        //! This method set the angle of elevation.
+        /**	The angle of elevation in radian and you should prefer to use it between 0 and 2 Pi to avoid recursive wrapping of the value. The direction of rotation is from bottom to the top. The 0 radian is centered at the "front" of the soundfield, then Pi/2 is at the top, -Pi/2 is at the bottom and Pi is behind. Note that if the angle of elevation is between Pi/2 and 3*Pi/2, the azimuth is reversed.
+         
+            @param     elevation The elevation.
+            @see       setElevation()
          */
         void setElevation(const double elevation);
         
-        /**	This method to compute the encoding with single precision.
-         @param     input	The input sample.
-         @param     outputs The output array that contains the spherical harmonics samples.
+        //! This method performs the encoding with single precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+         
+            @param     input	The input sample.
+            @param     outputs The output array.
          */
         void process(const float input, float* outputs);
         
-        /**	This method to compute the encoding with double precision.
-         @param     input	The input sample.
-         @param     outputs The output array that contains the spherical harmonics samples.
+        //! This method performs the encoding with double precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+         
+            @param     input	The input sample.
+            @param     outputs The output array.
          */
         void process(const double input, double* outputs);
     };

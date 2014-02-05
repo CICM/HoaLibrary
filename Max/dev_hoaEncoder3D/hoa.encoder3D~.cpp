@@ -151,12 +151,12 @@ void hoa_encoder_perform64_azimuth_elevation(t_hoa_encoder *x, t_object *dsp64, 
     {
         x->f_encoder->setAzimuth(ins[1][i]);
         x->f_encoder->setElevation(ins[2][i]);
-        x->f_encoder->process(ins[0][i], x->f_signals);
-        for(int j = 0; j < numouts; j++)
-            outs[j][i] = x->f_signals[j];
+        x->f_encoder->process(ins[0][i], x->f_signals + numouts * i);
     }
-    //for(int i = 0; i < numouts; i++)
-      //  cblas_daxpy(sampleframes, 1., x->f_signals+i, numouts, outs[i], 1);
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+    }
 }
 
 void hoa_encoder_perform64_azimuth(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -164,9 +164,11 @@ void hoa_encoder_perform64_azimuth(t_hoa_encoder *x, t_object *dsp64, double **i
     for(int i = 0; i < sampleframes; i++)
     {
         x->f_encoder->setAzimuth(ins[1][i]);
-        x->f_encoder->process(ins[0][i], x->f_signals);
-        for(int j = 0; j < numouts; j++)
-            outs[j][i] = x->f_signals[j];
+        x->f_encoder->process(ins[0][i], x->f_signals + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
     }
 }
 
@@ -175,9 +177,11 @@ void hoa_encoder_perform64_elevation(t_hoa_encoder *x, t_object *dsp64, double *
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_encoder->setElevation(ins[2][i]);
-        x->f_encoder->process(ins[0][i], x->f_signals);
-        for(int j = 0; j < numouts; j++)
-            outs[j][i] = x->f_signals[j];
+        x->f_encoder->process(ins[0][i], x->f_signals + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
     }
 }
 
@@ -185,9 +189,11 @@ void hoa_encoder_perform64(t_hoa_encoder *x, t_object *dsp64, double **ins, long
 {
 	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_encoder->process(ins[0][i], x->f_signals);
-        for(int j = 0; j < numouts; j++)
-            outs[j][i] = x->f_signals[j];
+        x->f_encoder->process(ins[0][i], x->f_signals + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
     }
 }
 
@@ -196,13 +202,11 @@ void hoa_encoder_assist(t_hoa_encoder *x, void *b, long m, long a, char *s)
     if (m == ASSIST_INLET)
 	{
         if(a == 0)
-        {
-            sprintf(s,"(Signal) %s", "");
-        }
-        else
-        {
-            sprintf(s,"(Signal or float) %s", "");
-        }
+            sprintf(s,"(Signal) Input");
+        else if(a == 1)
+            sprintf(s,"(Signal or float) Azimuth");
+        else if(a == 2)
+            sprintf(s,"(Signal or float) Elevation");
 	}
 	else 
 	{

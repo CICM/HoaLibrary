@@ -1,5 +1,5 @@
 /* 
-// Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
+// Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -37,7 +37,7 @@ namespace Hoa3D
         /** The ambisonic constructor allocates and initializes the generale member values depending of a decomposition order.
          @param     order	The order, must be at least 1.
          */
-        Ambisonic(unsigned int order = 1);
+        Ambisonic(unsigned int order);
         
         /** The ambisonic destructor.
          */

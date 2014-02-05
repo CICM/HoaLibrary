@@ -1,27 +1,8 @@
-/**
- * HoaLibrary : A High Order Ambisonics Library
- * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- * All rights reserved.
- *
- * Website  : http://www.mshparisnord.fr/HoaLibrary/
- * Contacts : cicm.mshparisnord@gmail.com
- *
- * This file is part of HOA LIBRARY.
- *
- * HOA LIBRARY is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
+/*
+// Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
 #include "Hoa3DEncoder.h"
 
@@ -52,38 +33,52 @@ namespace Hoa3D
             {
                 for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
                 {
-                    theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI;
-                    if(theta > CICM_PI)
+                    m_azimuth_matrix[j][i] = 1. / (double)Hoa3D::DoubleFactorial(2 * band - 1);
+                    
+                    theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
+                    theta = Tools::radian_wrap(theta);
+                    if(theta >= CICM_PI)
                         theta = CICM_2PI - theta;
-                   
-                    m_azimuth_matrix[j][i] = 1.;
-                    m_elevation_matrix[j][i] = legendrePolynomial(band, 0, cos(theta));
+                    
+                    m_elevation_matrix[j][i] = LegendrePolynomial(band, 0, cos(theta));
                 }
             }
             else if(argument > 0 )
             {
                 for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
                 {
-                    phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI;
-                    theta = phi;
-                    if(theta > CICM_PI)
+                    phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
+                    phi = Tools::radian_wrap(phi);
+                    m_azimuth_matrix[j][i] = cos((double)argument * phi) / (double)Hoa3D::DoubleFactorial(2 * band - 1);
+                    
+                    theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
+                    theta = Tools::radian_wrap(theta);
+                    if(theta >= CICM_PI)
+                    {
                         theta = CICM_2PI - theta;
-              
-                    m_azimuth_matrix[j][i] = cos((double)argument * phi);
-                    m_elevation_matrix[j][i] = legendrePolynomial(band, argument, cos(theta));
+                        m_elevation_matrix[j][i] = LegendrePolynomial(band, argument, cos(theta));
+                    }
+                    else
+                        m_elevation_matrix[j][i] = LegendrePolynomial(band, argument, cos(theta));
                 }
             }
             else
             {
                 for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
                 {
-                    phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI;
-                    theta = phi;
-                    if(theta > CICM_PI)
+                    phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
+                    phi = Tools::radian_wrap(phi);
+                    m_azimuth_matrix[j][i] = sin((double)-argument * phi) / (double)Hoa3D::DoubleFactorial(2 * band - 1);
+                    
+                    theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
+                    theta = Tools::radian_wrap(theta);
+                    if(theta >= CICM_PI)
+                    {
                         theta = CICM_2PI - theta;
-                  
-                    m_azimuth_matrix[j][i] = sin((double)-argument * phi);
-                    m_elevation_matrix[j][i] = legendrePolynomial(band, -argument, cos(theta));
+                        m_elevation_matrix[j][i] = LegendrePolynomial(band, -argument, cos(theta));
+                    }
+                    else
+                        m_elevation_matrix[j][i] = LegendrePolynomial(band, -argument, cos(theta));
                 }
             }
         }
@@ -101,14 +96,46 @@ namespace Hoa3D
     
     void Encoder::process(const float input, float* outputs)
     {
-        for(int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
+        if(m_elevation >= 9000 && m_elevation <= 27000)
+        {
+            if(m_azimuth >= 18000)
+            {
+                for(int i = 0; i < m_number_of_harmonics; i++)
+                    outputs[i] = input * m_azimuth_matrix[m_azimuth-18000][i] * m_elevation_matrix[m_elevation][i];
+            }
+            else
+            {
+                for(int i = 0; i < m_number_of_harmonics; i++)
+                    outputs[i] = input * m_azimuth_matrix[m_azimuth+18000][i] * m_elevation_matrix[m_elevation][i];
+            }
+        }
+        else
+        {
+            for(int i = 0; i < m_number_of_harmonics; i++)
+                outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
+        }
     }
     
     void Encoder::process(const double input, double* outputs)
     {
-        for(int i = 0; i < m_number_of_harmonics; i++)
-            outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
+        if(m_elevation >= 9000 && m_elevation <= 27000)
+        {
+            if(m_azimuth >= 18000)
+            {
+                for(int i = 0; i < m_number_of_harmonics; i++)
+                    outputs[i] = input * m_azimuth_matrix[m_azimuth-18000][i] * m_elevation_matrix[m_elevation][i];
+            }
+            else
+            {
+                for(int i = 0; i < m_number_of_harmonics; i++)
+                    outputs[i] = input * m_azimuth_matrix[m_azimuth+18000][i] * m_elevation_matrix[m_elevation][i];
+            }
+        }
+        else
+        {
+            for(int i = 0; i < m_number_of_harmonics; i++)
+                outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
+        }
     }
     
     Encoder::~Encoder()

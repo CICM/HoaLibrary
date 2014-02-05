@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ambisonic',['Ambisonic',['../class_ambisonic.html',1,'Ambisonic'],['../class_ambisonic.html#ae704cc4472fd1efa22e39f7d501ca7e2',1,'Ambisonic::Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#aedbcac4a5b11cec6738e1047ecee7e7b',1,'Hoa3D::Ambisonic::Ambisonic()']]],
+  ['ambisonic',['Ambisonic',['../class_ambisonic.html',1,'Ambisonic'],['../class_ambisonic.html#ae704cc4472fd1efa22e39f7d501ca7e2',1,'Ambisonic::Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541',1,'Hoa3D::Ambisonic::Ambisonic()']]],
   ['ambisonic',['Ambisonic',['../class_hoa3_d_1_1_ambisonic.html',1,'Hoa3D']]],
   ['ambisonicconvolver',['AmbisonicConvolver',['../class_ambisonic_convolver.html',1,'AmbisonicConvolver'],['../class_ambisonic_convolver.html#a738ca279b391cf1adba9e2004ac74c52',1,'AmbisonicConvolver::AmbisonicConvolver()']]],
   ['ambisonicencoder',['AmbisonicEncoder',['../class_ambisonic_encoder.html',1,'AmbisonicEncoder'],['../class_ambisonic_encoder.html#acf62830cd4a81423886be0f298fc0705',1,'AmbisonicEncoder::AmbisonicEncoder()']]],
