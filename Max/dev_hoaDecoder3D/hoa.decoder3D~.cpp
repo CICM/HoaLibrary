@@ -115,7 +115,7 @@ void HoaDecode_perform64(t_HoaDecode *x, t_object *dsp64, double **ins, long num
 {
 	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_decoder->process(ins[0][i], x->f_signals);
+        x->f_decoder->process(ins[0], x->f_signals);
         for(int j = 0; j < numouts; j++)
             outs[j][i] = x->f_signals[j];
     }
@@ -148,8 +148,11 @@ void HoaDecode_setLoudspeakers(t_HoaDecode *x, t_symbol* s, long argc, t_atom* a
 
 void HoaDecode_infos(t_HoaDecode *x)
 {
+	object_post((t_object *)x, "assert !!!", x->f_decoder->getLoudspeakerAzimuth(200));
+	/*
     object_post((t_object *)x, "Number Of Ls : %ld", x->f_decoder->getNumberOfOutputs());
     for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
         object_post((t_object *)x, "Ls  %i : %f %f", i, x->f_decoder->getLoudspeakerAzimuth(i), x->f_decoder->getLoudspeakerElevation(i));
+	*/
 }
 
