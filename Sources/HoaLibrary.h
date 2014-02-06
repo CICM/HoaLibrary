@@ -51,6 +51,7 @@
 
 #include "hoaAmbisonics/Hoa3DAmbisonic.h"
 #include "hoaDecoder/Hoa3DDecoder.h"
+#include "hoaDecoder/Hoa3DDecoderB.h"
 #include "hoaEncoder/Hoa3DEncoder.h"
 #include "hoaWider/Hoa3DWider.h"
 #include "hoaConvolve/AmbisonicConvolver.h"
