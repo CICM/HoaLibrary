@@ -17,8 +17,12 @@ namespace Hoa3D
     class Rotate : public Ambisonic
     {
     private:
-        
+		
 		double			m_roll, m_pitch, m_yaw;
+		double*			m_cosLookUp;
+		double*			m_sinLookUp;
+		double*			m_harmonicSin;
+		double*			m_harmonicCos;
         long            m_rotation;
         double**        m_rotation_matrix;
         
@@ -89,7 +93,8 @@ namespace Hoa3D
         inline double getYaw() const {return m_yaw;};
         
         //! This method performs the rotation with single precision.
-        /**	You may use this method for in-place or not-in-place processing and performs the rotation sample by sample. 
+        /**	You should use this method for not-in-place processing and performs the rotation sample by sample.
+			(warning : doesn't work with in-place vectors);
 			The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs   The input array.
@@ -98,7 +103,8 @@ namespace Hoa3D
         void process(const float* inputs, float* outputs);
         
         //! This method performs the rotation with double precision.
-        /**	You may use this method for in-place or not-in-place processing and performs the rotation sample by sample. 
+        /**	You should use this method for not-in-place processing and performs the rotation sample by sample. 
+			(warning : doesn't work with in-place vectors);
 			The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs   The input array.

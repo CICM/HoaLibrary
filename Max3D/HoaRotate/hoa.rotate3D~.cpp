@@ -16,7 +16,8 @@ extern "C"
 typedef struct _hoa_rotate 
 {
 	t_pxobject              f_ob;
-    double*                 f_signals;
+	double*                 f_ins;
+    double*                 f_outs;
     Hoa3D::Rotate*          f_rotate;
     
 } t_hoa_rotate;
@@ -79,8 +80,11 @@ void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
 		dsp_setup((t_pxobject *)x, x->f_rotate->getNumberOfInputs());
 		for (int i = 0; i < x->f_rotate->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
+		
+		x->f_ob.z_misc = Z_NO_INPLACE;
         
-        x->f_signals =  new double[x->f_rotate->getNumberOfOutputs() * SYS_MAXBLKSIZE];
+		x->f_ins = new double[x->f_rotate->getNumberOfOutputs() * SYS_MAXBLKSIZE]; // (don't need rotation controllers signal)
+        x->f_outs = new double[x->f_rotate->getNumberOfOutputs() * SYS_MAXBLKSIZE];
 	}
 
 	return (x);
@@ -149,16 +153,16 @@ void hoa_rotate_perform64_roll_pitch_yaw(t_hoa_rotate *x, t_object *dsp64, doubl
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_rotate->setRotations(ins[numins-3][i], ins[numins-2][i], ins[numins-1][i]);
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -166,16 +170,16 @@ void hoa_rotate_perform64_roll(t_hoa_rotate *x, t_object *dsp64, double **ins, l
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_rotate->setRoll(ins[numins-3][i]);
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -183,16 +187,16 @@ void hoa_rotate_perform64_pitch(t_hoa_rotate *x, t_object *dsp64, double **ins, 
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_rotate->setPitch(ins[numins-2][i]);
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -200,16 +204,16 @@ void hoa_rotate_perform64_yaw(t_hoa_rotate *x, t_object *dsp64, double **ins, lo
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_rotate->setYaw(ins[numins-1][i]);
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -217,17 +221,17 @@ void hoa_rotate_perform64_roll_pitch(t_hoa_rotate *x, t_object *dsp64, double **
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_rotate->setRoll(ins[numins-3][i]);
 		x->f_rotate->setPitch(ins[numins-2][i]);
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -235,17 +239,17 @@ void hoa_rotate_perform64_roll_yaw(t_hoa_rotate *x, t_object *dsp64, double **in
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_rotate->setRoll(ins[numins-3][i]);
 		x->f_rotate->setYaw(ins[numins-1][i]);
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -253,17 +257,17 @@ void hoa_rotate_perform64_pitch_yaw(t_hoa_rotate *x, t_object *dsp64, double **i
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
         x->f_rotate->setPitch(ins[numins-2][i]);
 		x->f_rotate->setYaw(ins[numins-1][i]);
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -271,15 +275,15 @@ void hoa_rotate_perform64(t_hoa_rotate *x, t_object *dsp64, double **ins, long n
 {
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_rotate->process(x->f_signals + numouts * i, x->f_signals + numouts * i);
+        x->f_rotate->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {
-        cblas_dcopy(sampleframes, x->f_signals+i, numouts, outs[i], 1);
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
     }
 }
 
@@ -314,6 +318,7 @@ void hoa_rotate_free(t_hoa_rotate *x)
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_rotate;
-    delete [] x->f_signals;
+    delete [] x->f_ins;
+	delete [] x->f_outs;
 }
 
