@@ -30,9 +30,9 @@ namespace Hoa3D
 		{
 			encoder->setAzimuth(m_loudspeakers_azimuth[i]);
 			encoder->setElevation(m_loudspeakers_elevation[i]);
-			encoder->process(1, harmonics_vector);
+			encoder->process(0.5, harmonics_vector);
 			
-			for(int j = 0; j < m_number_of_harmonics; j++)
+			for(int j = 1; j < m_number_of_harmonics; j++)
 			{
 				if(getHarmonicArgument(j) == 0)
 				{
@@ -71,11 +71,11 @@ namespace Hoa3D
 		computeMatrices();
 	}
 	
-	void Decoder::setLoudspeakerPosition(unsigned int index, double anAzimuth, double anElevation)
+	void Decoder::setLoudspeakerPosition(unsigned int index, double azimuth, double elevation)
 	{
 		assert( index < m_number_of_outputs );
-		m_loudspeakers_azimuth[index] = anAzimuth;
-		m_loudspeakers_elevation[index] = anElevation;
+		m_loudspeakers_azimuth[index] = azimuth;
+		m_loudspeakers_elevation[index] = elevation;
 		computeMatrices();
 	}
 	
