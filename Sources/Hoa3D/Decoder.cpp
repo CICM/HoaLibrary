@@ -4,11 +4,11 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "Hoa3DDecoderB.h"
+#include "Decoder.h"
 
 namespace Hoa3D
 {
-	DecoderB::DecoderB(unsigned int order, unsigned int numberOfLoudspeakers) : Ambisonic(order)
+	Decoder::Decoder(unsigned int order, unsigned int numberOfLoudspeakers) : Ambisonic(order)
 	{
         m_number_of_outputs         = Tools::clip_min(numberOfLoudspeakers, 4);
 		m_loudspeakers_azimuth      = new double[m_number_of_outputs];
@@ -19,7 +19,7 @@ namespace Hoa3D
         m_encoder                   = new Encoder(m_order);
 	}
 	
-	void DecoderB::setLoudspeakerPosition(unsigned int index, double anAzimuth, double anElevation)
+	void Decoder::setLoudspeakerPosition(unsigned int index, double anAzimuth, double anElevation)
 	{
 		assert( index < m_number_of_outputs );
 		m_loudspeakers_azimuth[index] = anAzimuth;
@@ -36,29 +36,29 @@ namespace Hoa3D
         }
 	}
 	
-	double DecoderB::getLoudspeakerAzimuth(unsigned int index) const
+	double Decoder::getLoudspeakerAzimuth(unsigned int index) const
 	{
 		assert( index < m_number_of_outputs );
 		return m_loudspeakers_azimuth[index];
 	}
 	
-	double DecoderB::getLoudspeakerElevation(unsigned int index) const
+	double Decoder::getLoudspeakerElevation(unsigned int index) const
 	{
 		assert( index < m_number_of_outputs );
 		return m_loudspeakers_elevation[index];
 	}
 	
-	void DecoderB::process(const float* input, float* output)
+	void Decoder::process(const float* input, float* output)
 	{
 		cblas_sgemv(CblasRowMajor, CblasNoTrans, m_number_of_outputs, m_number_of_harmonics, 1.f, m_decoder_matrix_float, m_number_of_harmonics, input, 1, 0.f, output, 1);
 	}
 	
-	void DecoderB::process(const double* input, double* output)
+	void Decoder::process(const double* input, double* output)
 	{
 		cblas_dgemv(CblasRowMajor, CblasNoTrans, m_number_of_outputs, m_number_of_harmonics, 1.f, m_decoder_matrix, m_number_of_harmonics, input, 1, 0.f, output, 1);
 	}
 	
-	DecoderB::~DecoderB()
+	Decoder::~Decoder()
 	{
 		delete [] m_decoder_matrix;
         delete [] m_decoder_matrix_float;

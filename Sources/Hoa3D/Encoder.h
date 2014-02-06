@@ -7,7 +7,7 @@
 #ifndef DEF_HOA_3D_ENCODER
 #define DEF_HOA_3D_ENCODER
 
-#include "../HoaAmbisonics/Hoa3DAmbisonic.h"
+#include "Ambisonic.h"
 
 namespace Hoa3D
 {

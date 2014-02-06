@@ -4,7 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "Hoa3DEncoder.h"
+#include "Encoder.h"
 
 namespace Hoa3D
 {

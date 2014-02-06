@@ -7,15 +7,15 @@
 #ifndef DEF_HOA_3D_DECODER
 #define DEF_HOA_3D_DECODER
 
-#include "../hoaAmbisonics/Hoa3DAmbisonic.h"
-#include "../hoaEncoder/Hoa3DEncoder.h"
+#include "Ambisonic.h"
+#include "Encoder.h"
 
 namespace Hoa3D
 {
 	//! The ambisonic decoder.
     /** The decoder should be used to decode a signal encoded in the spherical harmonics domain depending on a decomposition order and a number of loudspeakers.
      */
-	class DecoderB : public Ambisonic
+	class Decoder : public Ambisonic
 	{
 		
 	private:
@@ -32,11 +32,11 @@ namespace Hoa3D
 		 @param     numberOfLoudspeakers	The number of loudspeakers, must be at least (order + 1)^2.
 		 @param     shape					Is a sphere or a half sphere.
          */
-		DecoderB(unsigned int order, unsigned int numberOfLoudspeakers);
+		Decoder(unsigned int order, unsigned int numberOfLoudspeakers);
 		
         /**	The decoder destructor.
          */
-		~DecoderB();
+		~Decoder();
         
 		/**	Set loudspeaker position.
 		 @param     index		The index of the loudspeaker.
