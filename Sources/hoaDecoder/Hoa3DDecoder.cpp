@@ -30,7 +30,7 @@ namespace Hoa3D
 		{
 			encoder->setAzimuth(m_loudspeakers_azimuth[i]);
 			encoder->setElevation(m_loudspeakers_elevation[i]);
-			encoder->process(0.5, harmonics_vector);
+			encoder->process(1, harmonics_vector);
 			
 			for(int j = 0; j < m_number_of_harmonics; j++)
 			{

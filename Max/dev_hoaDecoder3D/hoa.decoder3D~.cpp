@@ -45,7 +45,8 @@ extern "C"
 typedef struct _HoaDecode 
 {
 	t_pxobject		f_ob;
-	double*			f_signals;
+	double*			f_signalIns;
+	double*			f_signalOuts;
 	Hoa3D::Decoder* f_decoder;
 } t_HoaDecode;
 
@@ -97,7 +98,8 @@ void *HoaDecode_new(t_symbol *s, long argc, t_atom *argv)
 		for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
 		
-		x->f_signals =  new double[x->f_decoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
+		x->f_signalIns =  new double[x->f_decoder->getNumberOfInputs() * SYS_MAXBLKSIZE];
+		x->f_signalOuts =  new double[x->f_decoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
 		
         attr_args_process(x, argc, argv);
 		x->f_ob.z_misc = Z_NO_INPLACE;
@@ -113,11 +115,17 @@ void HoaDecode_dsp64(t_HoaDecode *x, t_object *dsp64, short *count, double sampl
 
 void HoaDecode_perform64(t_HoaDecode *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+	for(int i = 0; i < numins; i++)
+    {
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_signalIns+i, numins);
+    }
 	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_decoder->process(ins[0], x->f_signals);
-        for(int j = 0; j < numouts; j++)
-            outs[j][i] = x->f_signals[j];
+        x->f_decoder->process(x->f_signalIns + (numins * i), x->f_signalOuts + (numouts * i) );
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_signalOuts+i, numouts, outs[i], 1);
     }
 }
 
@@ -134,6 +142,8 @@ void HoaDecode_assist(t_HoaDecode *x, void *b, long m, long a, char *s)
 void HoaDecode_free(t_HoaDecode *x)
 {
 	dsp_free((t_pxobject *)x);
+	delete [] x->f_signalIns;
+	delete [] x->f_signalOuts;
 	delete x->f_decoder;
 }
 
@@ -148,11 +158,8 @@ void HoaDecode_setLoudspeakers(t_HoaDecode *x, t_symbol* s, long argc, t_atom* a
 
 void HoaDecode_infos(t_HoaDecode *x)
 {
-	object_post((t_object *)x, "assert !!!", x->f_decoder->getLoudspeakerAzimuth(200));
-	/*
     object_post((t_object *)x, "Number Of Ls : %ld", x->f_decoder->getNumberOfOutputs());
     for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
         object_post((t_object *)x, "Ls  %i : %f %f", i, x->f_decoder->getLoudspeakerAzimuth(i), x->f_decoder->getLoudspeakerElevation(i));
-	*/
 }
 
