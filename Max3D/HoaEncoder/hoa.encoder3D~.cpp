@@ -58,7 +58,7 @@ int C74_EXPORT main(void)
     
     if (!postons)
     {
-        post("hoa.library (version 1.4) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+        post("hoa.library (version 2.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
         post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
         postons = 1;
     }

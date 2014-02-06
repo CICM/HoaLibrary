@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2013 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -27,6 +27,7 @@ namespace Hoa3D
         Encoder*    m_encoder;
         
 	public:
+        
 		/**	The decoder constructor.
          @param     order					The order, must be at least 1.
 		 @param     numberOfLoudspeakers	The number of loudspeakers, must be at least (order + 1)^2.
