@@ -12,6 +12,7 @@
 #include "Decoder.h"
 #include "Wider.h"
 #include "Optim.h"
+#include "Rotate.h"
 
 #endif
 
