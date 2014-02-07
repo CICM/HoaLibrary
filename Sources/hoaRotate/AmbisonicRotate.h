@@ -38,7 +38,7 @@ private:
 	double*		m_sinLookUp;
 	double*		m_harmonicSin;
 	double*		m_harmonicCos;
-	
+
 public:
 	AmbisonicRotate(long anOrder = 1, long aVectorSize = 0);
 	
@@ -55,7 +55,7 @@ public:
     void process(float* anInput, float *anOutput)
 	{
 		anOutput[0] = anInput[0];
-		for (int i = 1; i < m_order; i++)
+		for (int i = 1; i <= m_order; i++)
 		{
 			anOutput[2*i]	= m_harmonicCos[i-1] * anInput[2*i] - m_harmonicSin[i-1] * anInput[2*i-1];
 			anOutput[2*i-1]	= m_harmonicSin[i-1] * anInput[2*i] + m_harmonicCos[i-1] * anInput[2*i-1];
@@ -65,7 +65,7 @@ public:
     void process(double* anInput, double *anOutput)
 	{
 		anOutput[0] = anInput[0];
-		for (int i = 1; i < m_order; i++)
+		for (int i = 1; i <= m_order; i++)
 		{
 			anOutput[2*i]	= m_harmonicCos[i-1] * anInput[2*i] - m_harmonicSin[i-1] * anInput[2*i-1];
 			anOutput[2*i-1]	= m_harmonicSin[i-1] * anInput[2*i] + m_harmonicCos[i-1] * anInput[2*i-1];
@@ -83,8 +83,6 @@ public:
 		setAzimuth(aTheta);
 		process(anInput, anOutput);
 	}
-	
-	
 	
 	/* Perform sample block */
 	void process(double** anInput, double** anOutput, double *aTheta)
