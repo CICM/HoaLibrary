@@ -8,6 +8,7 @@
 #define DEF_HOA_3D_ROTATE
 
 #include "Ambisonic.h"
+#include "Rotate_MatrixRy90.h"
 
 namespace Hoa3D
 {

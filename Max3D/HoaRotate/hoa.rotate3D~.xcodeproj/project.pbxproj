@@ -10,6 +10,9 @@
 		2C319B6818A39E700024A661 /* hoa.rotate3D~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C319B6718A39E700024A661 /* hoa.rotate3D~.cpp */; };
 		2C319B6F18A39FA30024A661 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C319B6B18A39FA30024A661 /* Rotate.cpp */; };
 		2C319B7018A39FA30024A661 /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C319B6C18A39FA30024A661 /* Rotate.h */; };
+		2C319B7218A43C1F0024A661 /* Rotate_MatrixRy90.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */; };
+		2C319B7418A446AB0024A661 /* Rotate_MatrixRy90.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C319B7318A446AB0024A661 /* Rotate_MatrixRy90.h */; };
+		2C319B7518A44D500024A661 /* Rotate_MatrixRy90.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
@@ -31,6 +34,8 @@
 		2C319B6718A39E700024A661 /* hoa.rotate3D~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.rotate3D~.cpp"; sourceTree = "<group>"; };
 		2C319B6B18A39FA30024A661 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
 		2C319B6C18A39FA30024A661 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate_MatrixRy90.cpp; sourceTree = "<group>"; };
+		2C319B7318A446AB0024A661 /* Rotate_MatrixRy90.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate_MatrixRy90.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.rotate3D~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.rotate3D~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
@@ -109,6 +114,8 @@
 				8FF606AE18A378DE0022F248 /* Wider.h */,
 				2C319B6B18A39FA30024A661 /* Rotate.cpp */,
 				2C319B6C18A39FA30024A661 /* Rotate.h */,
+				2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */,
+				2C319B7318A446AB0024A661 /* Rotate_MatrixRy90.h */,
 			);
 			path = Hoa3D;
 			sourceTree = "<group>";
@@ -124,7 +131,9 @@
 				8FF606B718A378DE0022F248 /* Legendre.h in Headers */,
 				8FF606B518A378DE0022F248 /* Hoa3D.h in Headers */,
 				8FF606B418A378DE0022F248 /* Encoder.h in Headers */,
+				2C319B7418A446AB0024A661 /* Rotate_MatrixRy90.h in Headers */,
 				8FF606B018A378DE0022F248 /* Ambisonic.h in Headers */,
+				2C319B7218A43C1F0024A661 /* Rotate_MatrixRy90.cpp in Headers */,
 				2C319B7018A39FA30024A661 /* Rotate.h in Headers */,
 				8FF606B218A378DE0022F248 /* Decoder.h in Headers */,
 			);
@@ -205,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C319B7518A44D500024A661 /* Rotate_MatrixRy90.cpp in Sources */,
 				2C319B6818A39E700024A661 /* hoa.rotate3D~.cpp in Sources */,
 				8FF606B318A378DE0022F248 /* Encoder.cpp in Sources */,
 				2C319B6F18A39FA30024A661 /* Rotate.cpp in Sources */,
