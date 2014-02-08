@@ -26,11 +26,13 @@ namespace Hoa2D
 		float cos_x = m_cosx;
         float sin_x = m_sinx;
         float tcos_x = cos_x;
+        float sig;
         outputs[0] = inputs[0];
         for(int i = 2; i < m_number_of_harmonics; i += 2)
         {
-            outputs[i] = cos_x * inputs[i] - sin_x * inputs[i-1];
-            outputs[i-1] = sin_x * inputs[i] + cos_x * inputs[i-1];
+            sig = inputs[i-1];
+            outputs[i-1] = sin_x * inputs[i] + cos_x * sig;
+            outputs[i] = cos_x * inputs[i] - sin_x * sig;
             cos_x = tcos_x * m_cosx - sin_x * m_sinx; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
             sin_x = tcos_x * m_sinx + sin_x * m_cosx; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
             tcos_x = cos_x;
@@ -42,11 +44,13 @@ namespace Hoa2D
         double cos_x = m_cosx;
         double sin_x = m_sinx;
         double tcos_x = cos_x;
+        double sig;
         outputs[0] = inputs[0];
         for(int i = 2; i < m_number_of_harmonics; i += 2)
         {
-            outputs[i] = cos_x * inputs[i] - sin_x * inputs[i-1];
-            outputs[i-1] = sin_x * inputs[i] + cos_x * inputs[i-1];
+            sig = inputs[i-1];
+            outputs[i-1] = sin_x * inputs[i] + cos_x * sig;
+            outputs[i] = cos_x * inputs[i] - sin_x * sig;
             cos_x = tcos_x * m_cosx - sin_x * m_sinx; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
             sin_x = tcos_x * m_sinx + sin_x * m_cosx; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
             tcos_x = cos_x;

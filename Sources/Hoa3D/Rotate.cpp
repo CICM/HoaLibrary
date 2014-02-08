@@ -37,7 +37,9 @@ namespace Hoa3D
 	void Rotate::setYaw(const double value)
     {
 		m_yaw = Tools::radian_wrap(value);
-		
+		m_cosx = cos(m_yaw);
+        m_sinx = sin(m_yaw);
+        /*
 		long matrixSize = (m_number_of_harmonics-1)*(m_number_of_harmonics-1);
 		
 		// clear matrix
@@ -70,7 +72,7 @@ namespace Hoa3D
 				m_rZ_matrix[i * matrixRow + i+1] = dsin;
 				m_rZ_matrix[(i+1) * matrixRow + i+1] = dcos;
 			}
-		}
+		}*/
     }
     
 	// not implemented
@@ -82,6 +84,30 @@ namespace Hoa3D
     
     void Rotate::process(const double* inputs, double* outputs)
     {
+        double cos_x = m_cosx;
+        double sin_x = m_sinx;
+        double tcos_x = cos_x;
+        double sig;
+        // Copy Harmonics Args(0)
+        for(int i = 0, j = 0; i < m_number_of_harmonics; i += i * 2 + 1, j++)
+        {
+            outputs[i] = inputs[i];
+        }
+        
+        // Perform Yaw Rotation
+        for(int i = 1; i <= m_order; i++)
+		{
+            for(int j = (i + 1) * (i + 1) - 1, k = i; j < m_number_of_harmonics; k++, j += k * 2 + 1)
+            {
+                sig = inputs[j-1];
+                outputs[j-1] = sin_x * inputs[j] + cos_x * sig;
+                outputs[j] = cos_x * inputs[j] - sin_x * sig;
+            }
+            cos_x = tcos_x * m_cosx - sin_x * m_sinx; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+            sin_x = tcos_x * m_sinx + sin_x * m_cosx; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+            tcos_x = cos_x;
+        }
+        /*
 		// R(roll, pitch, yaw) = Rz(roll + CICM_PI4) Ry90 Rz(pitch + CICM_PI) Ry90 Rz(yaw + CICM_PI4)
 		
 		// copy inputs in outputs
@@ -92,6 +118,7 @@ namespace Hoa3D
 		
 		//const double* rY = MatrixRy90::getMatrix();
 		//cicm_product_mat_vec_d(rY, inputs+1, outputs+1, 3, 3);
+         */
     }
     
     Rotate::~Rotate()
