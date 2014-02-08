@@ -10,6 +10,8 @@
 
 #include "Encoder.h"
 #include "Rotate.h"
+#include "Optim.h"
+#include "Decoder.h"
 
 #endif
 
