@@ -19,7 +19,15 @@ namespace Hoa3D
     {
     private:
 		
-		double			m_roll, m_pitch, m_yaw;
+		double		m_roll, m_pitch, m_yaw;
+        double      m_cosx;
+        double      m_sinx;
+        /*
+		double*			m_cosLookUp;
+		double*			m_sinLookUp;
+		double*			m_harmonicSin;
+		double*			m_harmonicCos;
+         */
 		double*			m_rZ_matrix;
         
     public:
@@ -72,21 +80,21 @@ namespace Hoa3D
 		 
 		 @return     value The roll value between 0 and 2π.
          */
-        inline double getRoll() const {return m_roll;}
+        inline double getRoll() const {return m_roll;};
 		
 		//! Get the pitch value (rotation on the y-axis).
         /** The pitch is equivalent to a rotation on the y-axis (also named tumble).
 		 
 		 @return     value The pitch value between 0 and 2π.
          */
-        inline double getPitch() const {return m_pitch;}
+        inline double getPitch() const {return m_pitch;};
 		
 		//! Get the yaw value (rotation on the z-axis).
         /** The yaw is equivalent to a rotation on the z-axis (also named rotation).
 		 
 		 @return     value The yaw value between 0 and 2π.
          */
-        inline double getYaw() const {return m_yaw;}
+        inline double getYaw() const {return m_yaw;};
         
         //! This method performs the rotation with single precision.
         /**	You should use this method for not-in-place processing and performs the rotation sample by sample.

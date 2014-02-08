@@ -23,10 +23,10 @@ namespace Hoa2D
     
     void Encoder::process(const float input, float* outputs)
     {
-        outputs[0] = input;
         float cos_x = m_cosx;
         float sin_x = m_sinx;
         float tcos_x = cos_x;
+        outputs[0] = input;
         for(int i = 1; i < m_number_of_harmonics; i += 2)
         {
             outputs[i] = input * sin_x;
@@ -39,10 +39,10 @@ namespace Hoa2D
     
     void Encoder::process(const double input, double* outputs)
     {
-        outputs[0] = input;
         double cos_x = m_cosx;
         double sin_x = m_sinx;
         double tcos_x = cos_x;
+        outputs[0] = input;
         for(int i = 1; i < m_number_of_harmonics; i += 2)
         {
             outputs[i] = input * sin_x;
