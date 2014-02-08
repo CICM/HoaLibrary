@@ -11,7 +11,6 @@ namespace Hoa3D
 {
 	namespace MatrixRy90
 	{
-		extern const double*  rotationY90_order21_matrix;
 		const double* getMatrix ();
 	}
 }
