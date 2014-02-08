@@ -24,8 +24,7 @@ namespace Hoa3D
 		double*			m_sinLookUp;
 		double*			m_harmonicSin;
 		double*			m_harmonicCos;
-        long            m_rotation;
-        double**        m_rotation_matrix;
+		double*			m_rZ_matrix;
         
     public:
         
