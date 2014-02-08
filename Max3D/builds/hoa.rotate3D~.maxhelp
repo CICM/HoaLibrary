@@ -513,7 +513,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 27.0, 40.0, 513.0, 32.0 ],
-									"text" : "It is possible to rotate an Ambisonic soundfield around all three axes of an xyz coordinate system. Rotation (or yaw) refers to the z-axis, tilt (or roll) to the x-, and tumble (or pitch) to the y-axis."
+									"text" : "It is possible to rotate an Ambisonic soundfield around all three axes of an xyz coordinate system. Rotation (or yaw) refers to the z-axis, tilt (or roll) to the x-axis, and tumble (or pitch) to the y-axis."
 								}
 
 							}

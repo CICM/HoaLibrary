@@ -87,11 +87,8 @@ namespace Hoa3D
 		// copy inputs in outputs
 		cblas_dcopy(m_number_of_harmonics, inputs, 1, outputs, 1);
 		
-		// compute yaw rotation : 
+		// compute yaw rotation :
 		cicm_product_mat_vec_d(m_rZ_matrix, inputs+1, outputs+1, m_number_of_harmonics-1, m_number_of_harmonics-1);
-		
-		//const double* rY = MatrixRy90::getMatrix();
-		//cicm_product_mat_vec_d(rY, inputs+1, outputs+1, 3, 3);
     }
     
     Rotate::~Rotate()
