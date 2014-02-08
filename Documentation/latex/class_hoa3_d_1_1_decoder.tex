@@ -8,7 +8,7 @@ The ambisonic decoder.
 
 
 
-{\ttfamily \#include $<$Hoa3\-D\-Decoder.\-h$>$}
+{\ttfamily \#include $<$Decoder.\-h$>$}
 
 Inheritance diagram for Hoa3\-D\-:\-:Decoder\-:\begin{figure}[H]
 \begin{center}
@@ -18,6 +18,20 @@ Inheritance diagram for Hoa3\-D\-:\-:Decoder\-:\begin{figure}[H]
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa3_d_1_1_decoder_aefb3c6a2fd27592480d8198c06ea0968}{Decoder} (unsigned int order, unsigned int number\-Of\-Loudspeakers)
+\item 
+\hyperlink{class_hoa3_d_1_1_decoder_acc197bebb310a82756ee2061fe371e2d}{$\sim$\-Decoder} ()
+\item 
+void \hyperlink{class_hoa3_d_1_1_decoder_ade9c4f54765c1de0f27fadf0b25e88f9}{set\-Loudspeaker\-Position} (unsigned int index, double azimuth, double elevation)
+\item 
+double \hyperlink{class_hoa3_d_1_1_decoder_a23df7388f6d6b2915566f5aa6d294056}{get\-Loudspeaker\-Azimuth} (unsigned int index) const 
+\item 
+double \hyperlink{class_hoa3_d_1_1_decoder_aa5102482919297cee85af49991c5984f}{get\-Loudspeaker\-Elevation} (unsigned int index) const 
+\item 
+void \hyperlink{class_hoa3_d_1_1_decoder_a146f985ebda8e825db2a2ed2cafd5ba6}{process} (const float $\ast$input, float $\ast$output)
+\item 
+void \hyperlink{class_hoa3_d_1_1_decoder_a2a1931b2fe5c5def0baa9c4d637379a9}{process} (const double $\ast$input, double $\ast$output)
 \item 
 \hyperlink{class_hoa3_d_1_1_decoder_a0900afc94e0ae855feaf009b97ec9e75}{Decoder} (long order=1, long number\-Of\-Loudspeakers=8, bool shape=\hyperlink{namespace_hoa3_d_a96e1558dd670aa7cddab38a58aa10c49aeb2d6c7f779a838421f9999a46a2ca22}{Hoa\-\_\-\-Full\-\_\-\-Sphere})
 \item 
@@ -42,11 +56,45 @@ The ambisonic decoder.
 
 The decoder should be used to decode a signal encoded in the spherical harmonics domain depending on a decomposition order and a number of loudspeakers. 
 
-Definition at line 25 of file Hoa3\-D\-Decoder.\-h.
+Definition at line 18 of file Decoder.\-h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa3_d_1_1_decoder_aefb3c6a2fd27592480d8198c06ea0968}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!Decoder@{Decoder}}
+\index{Decoder@{Decoder}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
+\subsubsection[{Decoder}]{\setlength{\rightskip}{0pt plus 5cm}Hoa3\-D\-::\-Decoder\-::\-Decoder (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{order, }
+\item[{unsigned int}]{number\-Of\-Loudspeakers}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_decoder_aefb3c6a2fd27592480d8198c06ea0968}
+\begin{DoxyVerb}The decoder constructor.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em order} & The order, must be at least 1. \\
+\hline
+{\em number\-Of\-Loudspeakers} & The number of loudspeakers, must be at least (order + 1)$^\wedge$2. \\
+\hline
+{\em shape} & Is a sphere or a half sphere. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_decoder_acc197bebb310a82756ee2061fe371e2d}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!$\sim$\-Decoder@{$\sim$\-Decoder}}
+\index{$\sim$\-Decoder@{$\sim$\-Decoder}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
+\subsubsection[{$\sim$\-Decoder}]{\setlength{\rightskip}{0pt plus 5cm}Hoa3\-D\-::\-Decoder\-::$\sim$\-Decoder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_decoder_acc197bebb310a82756ee2061fe371e2d}
+The decoder destructor. 
+
+Definition at line 61 of file Decoder.\-cpp.
+
 \hypertarget{class_hoa3_d_1_1_decoder_a0900afc94e0ae855feaf009b97ec9e75}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!Decoder@{Decoder}}
 \index{Decoder@{Decoder}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
 \subsubsection[{Decoder}]{\setlength{\rightskip}{0pt plus 5cm}Hoa3\-D\-::\-Decoder\-::\-Decoder (
@@ -80,11 +128,31 @@ Definition at line 11 of file Hoa3\-D\-Decoder.\-cpp.
 )}}\label{class_hoa3_d_1_1_decoder_acc197bebb310a82756ee2061fe371e2d}
 The decoder destructor. 
 
-Definition at line 105 of file Hoa3\-D\-Decoder.\-cpp.
-
-
-
 \subsection{Member Function Documentation}
+\hypertarget{class_hoa3_d_1_1_decoder_a23df7388f6d6b2915566f5aa6d294056}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}}
+\index{get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
+\subsubsection[{get\-Loudspeaker\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Decoder\-::get\-Loudspeaker\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa3_d_1_1_decoder_a23df7388f6d6b2915566f5aa6d294056}
+\begin{DoxyVerb}Get loudspeaker azimuth value.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the azimuth value in radians. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_decoder_aa5102482919297cee85af49991c5984f}{get\-Loudspeaker\-Elevation} 
+\end{DoxySeeAlso}
+
+
+Definition at line 39 of file Decoder.\-cpp.
+
 \hypertarget{class_hoa3_d_1_1_decoder_aa30367ecd70695bd0d5bc60a730785a2}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}}
 \index{get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
 \subsubsection[{get\-Loudspeaker\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Decoder\-::get\-Loudspeaker\-Azimuth (
@@ -103,11 +171,31 @@ Definition at line 105 of file Hoa3\-D\-Decoder.\-cpp.
 the azimuth value in radians. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa3_d_1_1_decoder_aa8afd37b12fca98cb9bda753be49effb}{get\-Loudspeaker\-Elevation} 
+\hyperlink{class_hoa3_d_1_1_decoder_aa5102482919297cee85af49991c5984f}{get\-Loudspeaker\-Elevation} 
+\end{DoxySeeAlso}
+\hypertarget{class_hoa3_d_1_1_decoder_aa5102482919297cee85af49991c5984f}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!get\-Loudspeaker\-Elevation@{get\-Loudspeaker\-Elevation}}
+\index{get\-Loudspeaker\-Elevation@{get\-Loudspeaker\-Elevation}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
+\subsubsection[{get\-Loudspeaker\-Elevation}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Decoder\-::get\-Loudspeaker\-Elevation (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa3_d_1_1_decoder_aa5102482919297cee85af49991c5984f}
+\begin{DoxyVerb}Get loudspeakers elevation value.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the elevation value in radians. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_decoder_a23df7388f6d6b2915566f5aa6d294056}{get\-Loudspeaker\-Azimuth} 
 \end{DoxySeeAlso}
 
 
-Definition at line 82 of file Hoa3\-D\-Decoder.\-cpp.
+Definition at line 45 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_decoder_aa8afd37b12fca98cb9bda753be49effb}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!get\-Loudspeaker\-Elevation@{get\-Loudspeaker\-Elevation}}
 \index{get\-Loudspeaker\-Elevation@{get\-Loudspeaker\-Elevation}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
@@ -127,12 +215,8 @@ Definition at line 82 of file Hoa3\-D\-Decoder.\-cpp.
 the elevation value in radians. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa3_d_1_1_decoder_aa30367ecd70695bd0d5bc60a730785a2}{get\-Loudspeaker\-Azimuth} 
+\hyperlink{class_hoa3_d_1_1_decoder_a23df7388f6d6b2915566f5aa6d294056}{get\-Loudspeaker\-Azimuth} 
 \end{DoxySeeAlso}
-
-
-Definition at line 88 of file Hoa3\-D\-Decoder.\-cpp.
-
 \hypertarget{class_hoa3_d_1_1_decoder_a146f985ebda8e825db2a2ed2cafd5ba6}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!process@{process}}
 \index{process@{process}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
 \subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Decoder\-::process (
@@ -152,7 +236,7 @@ Definition at line 88 of file Hoa3\-D\-Decoder.\-cpp.
 \end{DoxyParams}
 
 
-Definition at line 94 of file Hoa3\-D\-Decoder.\-cpp.
+Definition at line 51 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_decoder_a2a1931b2fe5c5def0baa9c4d637379a9}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!process@{process}}
 \index{process@{process}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
@@ -173,7 +257,65 @@ Definition at line 94 of file Hoa3\-D\-Decoder.\-cpp.
 \end{DoxyParams}
 
 
-Definition at line 99 of file Hoa3\-D\-Decoder.\-cpp.
+Definition at line 56 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_decoder_a146f985ebda8e825db2a2ed2cafd5ba6}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!process@{process}}
+\index{process@{process}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Decoder\-::process (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{input, }
+\item[{float $\ast$}]{output}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_decoder_a146f985ebda8e825db2a2ed2cafd5ba6}
+\begin{DoxyVerb}This method performs the decoding with single precision.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em input} & The input sample. \\
+\hline
+{\em outputs} & The output array that contains samples destinated to loudspeakers. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hoa3_d_1_1_decoder_a2a1931b2fe5c5def0baa9c4d637379a9}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!process@{process}}
+\index{process@{process}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Decoder\-::process (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{input, }
+\item[{double $\ast$}]{output}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_decoder_a2a1931b2fe5c5def0baa9c4d637379a9}
+\begin{DoxyVerb}This method performs the decoding with double precision.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em input} & The input sample. \\
+\hline
+{\em outputs} & The output array that contains samples destinated to loudspeakers. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hoa3_d_1_1_decoder_ade9c4f54765c1de0f27fadf0b25e88f9}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}}
+\index{set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
+\subsubsection[{set\-Loudspeaker\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Decoder\-::set\-Loudspeaker\-Position (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index, }
+\item[{double}]{azimuth, }
+\item[{double}]{elevation}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_decoder_ade9c4f54765c1de0f27fadf0b25e88f9}
+\begin{DoxyVerb}Set loudspeaker position.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+{\em azimuth} & An azimuth value. In radian, between 0 and 2π. \\
+\hline
+{\em elevation} & An azimuth value. In radian, between 0 and 2π. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file Decoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_decoder_a18cc28c0db47350ece9ad51473ef62a0}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}}
 \index{set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
@@ -195,10 +337,6 @@ Definition at line 99 of file Hoa3\-D\-Decoder.\-cpp.
 {\em elevation} & An azimuth value. In radian, between 0 and 2π. \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 74 of file Hoa3\-D\-Decoder.\-cpp.
-
 \hypertarget{class_hoa3_d_1_1_decoder_a4a5e94dc4bb0f1d9989659be522a0e8b}{\index{Hoa3\-D\-::\-Decoder@{Hoa3\-D\-::\-Decoder}!set\-Number\-Of\-Loudspeakers@{set\-Number\-Of\-Loudspeakers}}
 \index{set\-Number\-Of\-Loudspeakers@{set\-Number\-Of\-Loudspeakers}!Hoa3D::Decoder@{Hoa3\-D\-::\-Decoder}}
 \subsubsection[{set\-Number\-Of\-Loudspeakers}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Decoder\-::set\-Number\-Of\-Loudspeakers (
@@ -224,5 +362,7 @@ Definition at line 49 of file Hoa3\-D\-Decoder.\-cpp.
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Decoder/Hoa3\-D\-Decoder.\-h\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Decoder/Hoa3\-D\-Decoder.\-cpp\end{DoxyCompactItemize}
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Decoder.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Decoder/Hoa3\-D\-Decoder.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Decoder.\-cpp\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Decoder/Hoa3\-D\-Decoder.\-cpp\end{DoxyCompactItemize}

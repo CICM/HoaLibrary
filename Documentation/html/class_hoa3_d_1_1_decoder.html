@@ -21,10 +21,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="hoa.icon_02_transp.jpg"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">HoaLibrary
-   &#160;<span id="projectnumber">1.3.2</span>
+   &#160;<span id="projectnumber">2.0</span>
    </div>
    <div id="projectbrief">High Order Ambisonics Library</div>
   </td>
@@ -100,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The ambisonic decoder.  
  <a href="class_hoa3_d_1_1_decoder.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_hoa3_d_decoder_8h_source.html">Hoa3DDecoder.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_decoder_8h_source.html">Decoder.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Hoa3D::Decoder:</div>
 <div class="dyncontent">
@@ -108,11 +107,26 @@ Inheritance diagram for Hoa3D::Decoder:</div>
   <img src="class_hoa3_d_1_1_decoder.png" usemap="#Hoa3D::Decoder_map" alt=""/>
   <map id="Hoa3D::Decoder_map" name="Hoa3D::Decoder_map">
 <area href="class_hoa3_d_1_1_ambisonic.html" title="The ambisonic class. " alt="Hoa3D::Ambisonic" shape="rect" coords="0,0,115,24"/>
+<area href="class_hoa3_d_1_1_ambisonic.html" title="The ambisonic class. " alt="Hoa3D::Ambisonic" shape="rect" coords="125,0,240,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aefb3c6a2fd27592480d8198c06ea0968"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#aefb3c6a2fd27592480d8198c06ea0968">Decoder</a> (unsigned int order, unsigned int numberOfLoudspeakers)</td></tr>
+<tr class="separator:aefb3c6a2fd27592480d8198c06ea0968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc197bebb310a82756ee2061fe371e2d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#acc197bebb310a82756ee2061fe371e2d">~Decoder</a> ()</td></tr>
+<tr class="separator:acc197bebb310a82756ee2061fe371e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9c4f54765c1de0f27fadf0b25e88f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#ade9c4f54765c1de0f27fadf0b25e88f9">setLoudspeakerPosition</a> (unsigned int index, double azimuth, double elevation)</td></tr>
+<tr class="separator:ade9c4f54765c1de0f27fadf0b25e88f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23df7388f6d6b2915566f5aa6d294056"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#a23df7388f6d6b2915566f5aa6d294056">getLoudspeakerAzimuth</a> (unsigned int index) const </td></tr>
+<tr class="separator:a23df7388f6d6b2915566f5aa6d294056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5102482919297cee85af49991c5984f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#aa5102482919297cee85af49991c5984f">getLoudspeakerElevation</a> (unsigned int index) const </td></tr>
+<tr class="separator:aa5102482919297cee85af49991c5984f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a146f985ebda8e825db2a2ed2cafd5ba6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#a146f985ebda8e825db2a2ed2cafd5ba6">process</a> (const float *input, float *output)</td></tr>
+<tr class="separator:a146f985ebda8e825db2a2ed2cafd5ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a1931b2fe5c5def0baa9c4d637379a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#a2a1931b2fe5c5def0baa9c4d637379a9">process</a> (const double *input, double *output)</td></tr>
+<tr class="separator:a2a1931b2fe5c5def0baa9c4d637379a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0900afc94e0ae855feaf009b97ec9e75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#a0900afc94e0ae855feaf009b97ec9e75">Decoder</a> (long order=1, long numberOfLoudspeakers=8, bool shape=<a class="el" href="namespace_hoa3_d.html#a96e1558dd670aa7cddab38a58aa10c49aeb2d6c7f779a838421f9999a46a2ca22">Hoa_Full_Sphere</a>)</td></tr>
 <tr class="separator:a0900afc94e0ae855feaf009b97ec9e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a5e94dc4bb0f1d9989659be522a0e8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_decoder.html#a4a5e94dc4bb0f1d9989659be522a0e8b">setNumberOfLoudspeakers</a> (long numberOfLoudspeakers, bool shape=<a class="el" href="namespace_hoa3_d.html#a96e1558dd670aa7cddab38a58aa10c49aeb2d6c7f779a838421f9999a46a2ca22">Hoa_Full_Sphere</a>)</td></tr>
@@ -152,13 +166,90 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1b4578538f4fd0d311102b2f3ec4dac6 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a1b4578538f4fd0d311102b2f3ec4dac6">getHarmonicsName</a> (unsigned int index)</td></tr>
 <tr class="memdesc:a1b4578538f4fd0d311102b2f3ec4dac6 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a good name for an harmonic.  <a href="#a1b4578538f4fd0d311102b2f3ec4dac6">More...</a><br/></td></tr>
 <tr class="separator:a1b4578538f4fd0d311102b2f3ec4dac6 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34736bb8f9bb34ad4a3844258bbac2fd inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a34736bb8f9bb34ad4a3844258bbac2fd">Ambisonic</a> (unsigned int order)</td></tr>
+<tr class="memdesc:a34736bb8f9bb34ad4a3844258bbac2fd inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ambisonic constructor.  <a href="#a34736bb8f9bb34ad4a3844258bbac2fd">More...</a><br/></td></tr>
+<tr class="separator:a34736bb8f9bb34ad4a3844258bbac2fd inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef717915cc52d318b5b40af88c38c722 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#aef717915cc52d318b5b40af88c38c722">~Ambisonic</a> ()</td></tr>
+<tr class="separator:aef717915cc52d318b5b40af88c38c722 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe3b53fb4a6e7b63eee582a026987458 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#abe3b53fb4a6e7b63eee582a026987458">getOrder</a> ()</td></tr>
+<tr class="separator:abe3b53fb4a6e7b63eee582a026987458 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0688ea4e2401eda492a813da8b800568 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a0688ea4e2401eda492a813da8b800568">getNumberOfHarmonics</a> ()</td></tr>
+<tr class="separator:a0688ea4e2401eda492a813da8b800568 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe5de38dd1df17edf369732b46b8e1ad inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#abe5de38dd1df17edf369732b46b8e1ad">getNumberOfInputs</a> ()</td></tr>
+<tr class="separator:abe5de38dd1df17edf369732b46b8e1ad inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a13c6e5ac82f4279d78d4d9f2a31560 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a7a13c6e5ac82f4279d78d4d9f2a31560">getNumberOfOutputs</a> ()</td></tr>
+<tr class="separator:a7a13c6e5ac82f4279d78d4d9f2a31560 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01a38c7f5f505d7fd5e6ef4af513628a inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a01a38c7f5f505d7fd5e6ef4af513628a">getHarmonicArgument</a> (unsigned int index)</td></tr>
+<tr class="memdesc:a01a38c7f5f505d7fd5e6ef4af513628a inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the argument of an harmonic.  <a href="#a01a38c7f5f505d7fd5e6ef4af513628a">More...</a><br/></td></tr>
+<tr class="separator:a01a38c7f5f505d7fd5e6ef4af513628a inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5dd2285bbfdfdfe45b11d39379a0974 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#ac5dd2285bbfdfdfe45b11d39379a0974">getHarmonicBand</a> (unsigned int index)</td></tr>
+<tr class="memdesc:ac5dd2285bbfdfdfe45b11d39379a0974 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the band of an harmonic.  <a href="#ac5dd2285bbfdfdfe45b11d39379a0974">More...</a><br/></td></tr>
+<tr class="separator:ac5dd2285bbfdfdfe45b11d39379a0974 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33ce838226f9c12ffc49ed5d78a244b1 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a33ce838226f9c12ffc49ed5d78a244b1">getHarmonicsName</a> (unsigned int index)</td></tr>
+<tr class="memdesc:a33ce838226f9c12ffc49ed5d78a244b1 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a good name for an harmonic.  <a href="#a33ce838226f9c12ffc49ed5d78a244b1">More...</a><br/></td></tr>
+<tr class="separator:a33ce838226f9c12ffc49ed5d78a244b1 inherit pub_methods_class_hoa3_d_1_1_ambisonic"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The ambisonic decoder. </p>
 <p>The decoder should be used to decode a signal encoded in the spherical harmonics domain depending on a decomposition order and a number of loudspeakers. </p>
 
-<p>Definition at line <a class="el" href="_hoa3_d_decoder_8h_source.html#l00025">25</a> of file <a class="el" href="_hoa3_d_decoder_8h_source.html">Hoa3DDecoder.h</a>.</p>
+<p>Definition at line <a class="el" href="_decoder_8h_source.html#l00018">18</a> of file <a class="el" href="_decoder_8h_source.html">Decoder.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aefb3c6a2fd27592480d8198c06ea0968"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Hoa3D::Decoder::Decoder </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>order</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>numberOfLoudspeakers</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">The decoder constructor.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">order</td><td>The order, must be at least 1. </td></tr>
+    <tr><td class="paramname">numberOfLoudspeakers</td><td>The number of loudspeakers, must be at least (order + 1)^2. </td></tr>
+    <tr><td class="paramname">shape</td><td>Is a sphere or a half sphere. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_decoder_8cpp_source.html#l00011">11</a> of file <a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acc197bebb310a82756ee2061fe371e2d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Hoa3D::Decoder::~Decoder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The decoder destructor. </p>
+
+<p>Definition at line <a class="el" href="_decoder_8cpp_source.html#l00061">61</a> of file <a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a0900afc94e0ae855feaf009b97ec9e75"></a>
 <div class="memitem">
 <div class="memproto">
@@ -216,11 +307,36 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>The decoder destructor. </p>
 
-<p>Definition at line <a class="el" href="_hoa3_d_decoder_8cpp_source.html#l00105">105</a> of file <a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a23df7388f6d6b2915566f5aa6d294056"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::Decoder::getLoudspeakerAzimuth </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Get loudspeaker azimuth value.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the loudspeaker. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the azimuth value in radians. </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_decoder.html#aa5102482919297cee85af49991c5984f">getLoudspeakerElevation</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_decoder_8cpp_source.html#l00039">39</a> of file <a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aa30367ecd70695bd0d5bc60a730785a2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -242,9 +358,34 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the azimuth value in radians. </dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_decoder.html#aa8afd37b12fca98cb9bda753be49effb">getLoudspeakerElevation</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_decoder.html#aa5102482919297cee85af49991c5984f">getLoudspeakerElevation</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_decoder_8cpp_source.html#l00082">82</a> of file <a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a>.</p>
+</div>
+</div>
+<a class="anchor" id="aa5102482919297cee85af49991c5984f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::Decoder::getLoudspeakerElevation </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Get loudspeakers elevation value.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the loudspeaker. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the elevation value in radians. </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_decoder.html#a23df7388f6d6b2915566f5aa6d294056">getLoudspeakerAzimuth</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_decoder_8cpp_source.html#l00045">45</a> of file <a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -269,9 +410,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the elevation value in radians. </dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_decoder.html#aa30367ecd70695bd0d5bc60a730785a2">getLoudspeakerAzimuth</a> </dd></dl>
-
-<p>Definition at line <a class="el" href="_hoa3_d_decoder_8cpp_source.html#l00088">88</a> of file <a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a>.</p>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_decoder.html#a23df7388f6d6b2915566f5aa6d294056">getLoudspeakerAzimuth</a> </dd></dl>
 
 </div>
 </div>
@@ -307,7 +446,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_decoder_8cpp_source.html#l00094">94</a> of file <a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_decoder_8cpp_source.html#l00051">51</a> of file <a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -343,7 +482,118 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_decoder_8cpp_source.html#l00099">99</a> of file <a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_decoder_8cpp_source.html#l00056">56</a> of file <a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a146f985ebda8e825db2a2ed2cafd5ba6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hoa3D::Decoder::process </td>
+          <td>(</td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>output</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">This method performs the decoding with single precision.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The input sample. </td></tr>
+    <tr><td class="paramname">outputs</td><td>The output array that contains samples destinated to loudspeakers. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2a1931b2fe5c5def0baa9c4d637379a9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hoa3D::Decoder::process </td>
+          <td>(</td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>output</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">This method performs the decoding with double precision.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The input sample. </td></tr>
+    <tr><td class="paramname">outputs</td><td>The output array that contains samples destinated to loudspeakers. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ade9c4f54765c1de0f27fadf0b25e88f9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hoa3D::Decoder::setLoudspeakerPosition </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>azimuth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>elevation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Set loudspeaker position.
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the loudspeaker. </td></tr>
+    <tr><td class="paramname">azimuth</td><td>An azimuth value. In radian, between 0 and 2π. </td></tr>
+    <tr><td class="paramname">elevation</td><td>An azimuth value. In radian, between 0 and 2π. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_decoder_8cpp_source.html#l00022">22</a> of file <a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -386,8 +636,6 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_decoder_8cpp_source.html#l00074">74</a> of file <a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a4a5e94dc4bb0f1d9989659be522a0e8b"></a>
@@ -427,13 +675,15 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/hoaDecoder/<a class="el" href="_hoa3_d_decoder_8h_source.html">Hoa3DDecoder.h</a></li>
-<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/hoaDecoder/<a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_decoder_8h_source.html">Decoder.h</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/hoaDecoder/<a class="el" href="_hoa3_d_decoder_8h_source.html">Hoa3DDecoder.h</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_decoder_8cpp_source.html">Decoder.cpp</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/hoaDecoder/<a class="el" href="_hoa3_d_decoder_8cpp_source.html">Hoa3DDecoder.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Feb 5 2014 22:23:50 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Feb 8 2014 16:39:23 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -85,22 +85,32 @@ namespace Hoa3D
     
     void Rotate::process(const double* inputs, double* outputs)
     {
-		// copy inputs in outputs
-		cblas_dcopy(m_number_of_harmonics, inputs, 1, outputs, 1);
-		
-		// compute only z-axis rotation
-		int h;
-		double _cos, _sin, harmoNeg, harmoPos;
-		for (int i = 1; i <= m_order; i++)
+        double cos_x = cos(m_yaw); // A calculer dans setYaw !
+        double sin_x = sin(m_yaw); // A calculer dans setYaw !
+        double tcos_x = cos_x;
+        double tsin_x = sin_x;
+        double fcos_x = cos_x;
+        double fsin_x = sin_x;
+        
+        // Copy Harmonics Args(0)
+        for(int i = 0; i < m_number_of_harmonics; i += i * 2 + 1)
+        {
+            outputs[i] = inputs[i];
+        }
+        
+        // Perform Yaw Rotation
+        for(int i = 1; i <= m_order; i++)
 		{
-			h = (i+1)*(i+1);
-			_cos = m_harmonicCos[i-1];
-			_sin = m_harmonicSin[i-1];
-			harmoNeg = inputs[h-2];
-			harmoPos = inputs[h-1];
-			outputs[h-1] = _cos * harmoPos - _sin * harmoNeg;
-			outputs[h-2] = _sin * harmoPos + _cos * harmoNeg;
-		}
+            for(int j = (i + 1) * (i + 1) - 1, k = i; j < m_number_of_harmonics; k++, j += k * 2 + 1)
+            {
+                outputs[j] = cos_x * inputs[j] - sin_x * inputs[j-1];
+                outputs[j-1] = sin_x * inputs[j] + cos_x * inputs[j-1];
+            }
+            cos_x = tcos_x * fcos_x - tsin_x * fsin_x; // cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)
+            sin_x = tcos_x * fsin_x + tsin_x * fcos_x; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
+            tsin_x = sin_x;
+            tcos_x = cos_x;
+        }
     }
     
     Rotate::~Rotate()

@@ -8,7 +8,7 @@ The ambisonic encoder.
 
 
 
-{\ttfamily \#include $<$Hoa3\-D\-Encoder.\-h$>$}
+{\ttfamily \#include $<$Encoder.\-h$>$}
 
 Inheritance diagram for Hoa3\-D\-:\-:Encoder\-:\begin{figure}[H]
 \begin{center}
@@ -30,6 +30,18 @@ void \hyperlink{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{set\
 void \hyperlink{class_hoa3_d_1_1_encoder_aedcd6cc5a50c85f373c61137e452a9b4}{process} (const float input, float $\ast$outputs)
 \begin{DoxyCompactList}\small\item\em This method performs the encoding with single precision. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa3_d_1_1_encoder_a6a8a7c7219424dd74bb5180a5b2c25e3}{process} (const double input, double $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method performs the encoding with double precision. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa3_d_1_1_encoder_a71052bcb0cbcf600852423c8cbbf29ce}{Encoder} (unsigned int order)
+\begin{DoxyCompactList}\small\item\em The encoder constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa3_d_1_1_encoder_a9842ee9f5abcba58a05a98dbfdff1b15}{$\sim$\-Encoder} ()
+\begin{DoxyCompactList}\small\item\em The encoder destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa3_d_1_1_encoder_a7dbf4d5791003ed486fc0b5462409e0a}{set\-Azimuth} (const double azimuth)
+\begin{DoxyCompactList}\small\item\em This method set the angle of azimuth. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{set\-Elevation} (const double elevation)
+\begin{DoxyCompactList}\small\item\em This method set the angle of elevation. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa3_d_1_1_encoder_aedcd6cc5a50c85f373c61137e452a9b4}{process} (const float input, float $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method performs the encoding with single precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa3_d_1_1_encoder_a6a8a7c7219424dd74bb5180a5b2c25e3}{process} (const double input, double $\ast$outputs)
 \begin{DoxyCompactList}\small\item\em This method performs the encoding with double precision. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -38,7 +50,7 @@ The ambisonic encoder.
 
 The encoder should be used to encode a signal in the spherical harmonics domain depending of an order of decomposition. It allows to control the azimuth and the elevation of the encoding. 
 
-Definition at line 17 of file Hoa3\-D\-Encoder.\-h.
+Definition at line 17 of file Encoder.\-h.
 
 
 
@@ -63,7 +75,7 @@ The encoder constructor allocates and initialize the member values to computes s
 \end{DoxyParams}
 
 
-Definition at line 11 of file Hoa3\-D\-Encoder.\-cpp.
+Definition at line 11 of file Encoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_encoder_a9842ee9f5abcba58a05a98dbfdff1b15}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!$\sim$\-Encoder@{$\sim$\-Encoder}}
 \index{$\sim$\-Encoder@{$\sim$\-Encoder}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
@@ -78,9 +90,38 @@ The encoder destructor.
 
 The encoder destructor free the memory. 
 
-Definition at line 141 of file Hoa3\-D\-Encoder.\-cpp.
+Definition at line 140 of file Encoder.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_encoder_a71052bcb0cbcf600852423c8cbbf29ce}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!Encoder@{Encoder}}
+\index{Encoder@{Encoder}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
+\subsubsection[{Encoder}]{\setlength{\rightskip}{0pt plus 5cm}Hoa3\-D\-::\-Encoder\-::\-Encoder (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{order}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_encoder_a71052bcb0cbcf600852423c8cbbf29ce}
 
 
+The encoder constructor. 
+
+The encoder constructor allocates and initialize the member values to computes spherical harmonics coefficients depending of a decomposition order. The order must be at least 1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em order} & The order. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hoa3_d_1_1_encoder_a9842ee9f5abcba58a05a98dbfdff1b15}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!$\sim$\-Encoder@{$\sim$\-Encoder}}
+\index{$\sim$\-Encoder@{$\sim$\-Encoder}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
+\subsubsection[{$\sim$\-Encoder}]{\setlength{\rightskip}{0pt plus 5cm}Hoa3\-D\-::\-Encoder\-::$\sim$\-Encoder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_encoder_a9842ee9f5abcba58a05a98dbfdff1b15}
+
+
+The encoder destructor. 
+
+The encoder destructor free the memory. 
 
 \subsection{Member Function Documentation}
 \hypertarget{class_hoa3_d_1_1_encoder_aedcd6cc5a50c85f373c61137e452a9b4}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!process@{process}}
@@ -106,8 +147,29 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 97 of file Hoa3\-D\-Encoder.\-cpp.
+Definition at line 96 of file Encoder.\-cpp.
 
+\hypertarget{class_hoa3_d_1_1_encoder_aedcd6cc5a50c85f373c61137e452a9b4}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!process@{process}}
+\index{process@{process}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Encoder\-::process (
+\begin{DoxyParamCaption}
+\item[{const float}]{input, }
+\item[{float $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_encoder_aedcd6cc5a50c85f373c61137e452a9b4}
+
+
+This method performs the encoding with single precision. 
+
+You should use this method for in-\/place or not-\/in-\/place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input sample. \\
+\hline
+{\em outputs} & The output array. \\
+\hline
+\end{DoxyParams}
 \hypertarget{class_hoa3_d_1_1_encoder_a6a8a7c7219424dd74bb5180a5b2c25e3}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!process@{process}}
 \index{process@{process}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
 \subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Encoder\-::process (
@@ -131,8 +193,50 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 119 of file Hoa3\-D\-Encoder.\-cpp.
+Definition at line 118 of file Encoder.\-cpp.
 
+\hypertarget{class_hoa3_d_1_1_encoder_a6a8a7c7219424dd74bb5180a5b2c25e3}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!process@{process}}
+\index{process@{process}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Encoder\-::process (
+\begin{DoxyParamCaption}
+\item[{const double}]{input, }
+\item[{double $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_encoder_a6a8a7c7219424dd74bb5180a5b2c25e3}
+
+
+This method performs the encoding with double precision. 
+
+You should use this method for in-\/place or not-\/in-\/place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input sample. \\
+\hline
+{\em outputs} & The output array. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_hoa3_d_1_1_encoder_a7dbf4d5791003ed486fc0b5462409e0a}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!set\-Azimuth@{set\-Azimuth}}
+\index{set\-Azimuth@{set\-Azimuth}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
+\subsubsection[{set\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Encoder\-::set\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_encoder_a7dbf4d5791003ed486fc0b5462409e0a}
+
+
+This method set the angle of azimuth. 
+
+The angle of azimuth in radian and you should prefer to use it between 0 and 2 Pi to avoid recursive wrapping of the value. The direction of rotation is counterclockwise. The 0 radian is Pi/2 phase shifted relative to a mathematical representation of a circle, then the 0 radian is at the \char`\"{}front\char`\"{} of the soundfield.
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The azimuth. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{set\-Elevation()} 
+\end{DoxySeeAlso}
 \hypertarget{class_hoa3_d_1_1_encoder_a7dbf4d5791003ed486fc0b5462409e0a}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!set\-Azimuth@{set\-Azimuth}}
 \index{set\-Azimuth@{set\-Azimuth}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
 \subsubsection[{set\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Encoder\-::set\-Azimuth (
@@ -156,7 +260,7 @@ The angle of azimuth in radian and you should prefer to use it between 0 and 2 P
 \end{DoxySeeAlso}
 
 
-Definition at line 87 of file Hoa3\-D\-Encoder.\-cpp.
+Definition at line 86 of file Encoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!set\-Elevation@{set\-Elevation}}
 \index{set\-Elevation@{set\-Elevation}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
@@ -181,11 +285,34 @@ The angle of elevation in radian and you should prefer to use it between 0 and 2
 \end{DoxySeeAlso}
 
 
-Definition at line 92 of file Hoa3\-D\-Encoder.\-cpp.
+Definition at line 91 of file Encoder.\-cpp.
 
+\hypertarget{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!set\-Elevation@{set\-Elevation}}
+\index{set\-Elevation@{set\-Elevation}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
+\subsubsection[{set\-Elevation}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Encoder\-::set\-Elevation (
+\begin{DoxyParamCaption}
+\item[{const double}]{elevation}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}
+
+
+This method set the angle of elevation. 
+
+The angle of elevation in radian and you should prefer to use it between 0 and 2 Pi to avoid recursive wrapping of the value. The direction of rotation is from bottom to the top. The 0 radian is centered at the \char`\"{}front\char`\"{} of the soundfield, then Pi/2 is at the top, -\/\-Pi/2 is at the bottom and Pi is behind. Note that if the angle of elevation is between Pi/2 and 3$\ast$\-Pi/2, the azimuth is reversed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em elevation} & The elevation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{set\-Elevation()} 
+\end{DoxySeeAlso}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Encoder/Hoa3\-D\-Encoder.\-h\item 
-/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Encoder/Hoa3\-D\-Encoder.\-cpp\end{DoxyCompactItemize}
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Encoder.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Encoder/Hoa3\-D\-Encoder.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Encoder.\-cpp\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/hoa\-Encoder/Hoa3\-D\-Encoder.\-cpp\end{DoxyCompactItemize}
