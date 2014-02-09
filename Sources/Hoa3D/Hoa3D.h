@@ -13,6 +13,7 @@
 #include "Wider.h"
 #include "Optim.h"
 #include "Rotate.h"
+#include "Meter.h"
 
 #endif
 

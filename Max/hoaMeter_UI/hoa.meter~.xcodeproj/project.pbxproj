@@ -59,8 +59,6 @@
 		8F68C9421823C90E00CAA829 /* CicmTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C89F1823C90D00CAA829 /* CicmTools.h */; };
 		8F68C9431823C90E00CAA829 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8A11823C90D00CAA829 /* Ambisonic.cpp */; };
 		8F68C9441823C90E00CAA829 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C8A21823C90D00CAA829 /* Ambisonic.h */; };
-		8F68C9451823C90E00CAA829 /* Ambisonic3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8A31823C90D00CAA829 /* Ambisonic3D.cpp */; };
-		8F68C9461823C90E00CAA829 /* Ambisonic3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C8A41823C90D00CAA829 /* Ambisonic3D.h */; };
 		8F68C9471823C90E00CAA829 /* AmbisonicsDiffuser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8A51823C90D00CAA829 /* AmbisonicsDiffuser.cpp */; };
 		8F68C9481823C90E00CAA829 /* AmbisonicsDiffuser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C8A61823C90D00CAA829 /* AmbisonicsDiffuser.h */; };
 		8F68C9491823C90E00CAA829 /* AmbisonicViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8A71823C90D00CAA829 /* AmbisonicViewer.cpp */; };
@@ -73,8 +71,6 @@
 		8F68C9501823C90E00CAA829 /* BoidsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C8B01823C90D00CAA829 /* BoidsManager.h */; };
 		8F68C9511823C90E00CAA829 /* AmbisonicConvolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8B21823C90D00CAA829 /* AmbisonicConvolver.cpp */; };
 		8F68C9521823C90E00CAA829 /* AmbisonicConvolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C8B31823C90D00CAA829 /* AmbisonicConvolver.h */; };
-		8F68C9531823C90E00CAA829 /* AmbisonicDecoder3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8B51823C90D00CAA829 /* AmbisonicDecoder3D.cpp */; };
-		8F68C9541823C90E00CAA829 /* AmbisonicDecoder3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C8B61823C90D00CAA829 /* AmbisonicDecoder3D.h */; };
 		8F68C9551823C90E00CAA829 /* AmbisonicsDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8B71823C90D00CAA829 /* AmbisonicsDecoder.cpp */; };
 		8F68C9561823C90E00CAA829 /* AmbisonicsDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F68C8B81823C90D00CAA829 /* AmbisonicsDecoder.h */; };
 		8F68C9571823C90E00CAA829 /* AmbisonicsDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F68C8BA1823C90D00CAA829 /* AmbisonicsDelay.cpp */; };
@@ -207,8 +203,6 @@
 		8F68C89F1823C90D00CAA829 /* CicmTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmTools.h; sourceTree = "<group>"; };
 		8F68C8A11823C90D00CAA829 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		8F68C8A21823C90D00CAA829 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
-		8F68C8A31823C90D00CAA829 /* Ambisonic3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic3D.cpp; sourceTree = "<group>"; };
-		8F68C8A41823C90D00CAA829 /* Ambisonic3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic3D.h; sourceTree = "<group>"; };
 		8F68C8A51823C90D00CAA829 /* AmbisonicsDiffuser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDiffuser.cpp; sourceTree = "<group>"; };
 		8F68C8A61823C90D00CAA829 /* AmbisonicsDiffuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDiffuser.h; sourceTree = "<group>"; };
 		8F68C8A71823C90D00CAA829 /* AmbisonicViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicViewer.cpp; sourceTree = "<group>"; };
@@ -221,8 +215,6 @@
 		8F68C8B01823C90D00CAA829 /* BoidsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoidsManager.h; sourceTree = "<group>"; };
 		8F68C8B21823C90D00CAA829 /* AmbisonicConvolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicConvolver.cpp; sourceTree = "<group>"; };
 		8F68C8B31823C90D00CAA829 /* AmbisonicConvolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicConvolver.h; sourceTree = "<group>"; };
-		8F68C8B51823C90D00CAA829 /* AmbisonicDecoder3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicDecoder3D.cpp; sourceTree = "<group>"; };
-		8F68C8B61823C90D00CAA829 /* AmbisonicDecoder3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicDecoder3D.h; sourceTree = "<group>"; };
 		8F68C8B71823C90D00CAA829 /* AmbisonicsDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDecoder.cpp; sourceTree = "<group>"; };
 		8F68C8B81823C90D00CAA829 /* AmbisonicsDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbisonicsDecoder.h; sourceTree = "<group>"; };
 		8F68C8BA1823C90D00CAA829 /* AmbisonicsDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmbisonicsDelay.cpp; sourceTree = "<group>"; };
@@ -495,8 +487,6 @@
 			children = (
 				8F68C8A11823C90D00CAA829 /* Ambisonic.cpp */,
 				8F68C8A21823C90D00CAA829 /* Ambisonic.h */,
-				8F68C8A31823C90D00CAA829 /* Ambisonic3D.cpp */,
-				8F68C8A41823C90D00CAA829 /* Ambisonic3D.h */,
 				8F68C8A51823C90D00CAA829 /* AmbisonicsDiffuser.cpp */,
 				8F68C8A61823C90D00CAA829 /* AmbisonicsDiffuser.h */,
 				8F68C8A71823C90D00CAA829 /* AmbisonicViewer.cpp */,
@@ -537,8 +527,6 @@
 		8F68C8B41823C90D00CAA829 /* hoaDecoder */ = {
 			isa = PBXGroup;
 			children = (
-				8F68C8B51823C90D00CAA829 /* AmbisonicDecoder3D.cpp */,
-				8F68C8B61823C90D00CAA829 /* AmbisonicDecoder3D.h */,
 				8F68C8B71823C90D00CAA829 /* AmbisonicsDecoder.cpp */,
 				8F68C8B81823C90D00CAA829 /* AmbisonicsDecoder.h */,
 			);
@@ -771,7 +759,6 @@
 				8F68C97F1823C90E00CAA829 /* AmbisonicSourcesTrajectory.h in Headers */,
 				8F68C9271823C90E00CAA829 /* CicmFilterComb.h in Headers */,
 				8F68C9231823C90E00CAA829 /* CicmFilterAllpass.h in Headers */,
-				8F68C9461823C90E00CAA829 /* Ambisonic3D.h in Headers */,
 				8F68C93B1823C90E00CAA829 /* CicmLibrary.h in Headers */,
 				8F68C9421823C90E00CAA829 /* CicmTools.h in Headers */,
 				8F68C96A1823C90E00CAA829 /* AmbisonicsSatellite.h in Headers */,
@@ -791,7 +778,6 @@
 				8F68C96C1823C90E00CAA829 /* AmbisonicsStar.h in Headers */,
 				8F68C93F1823C90E00CAA829 /* CicmFreeverb.h in Headers */,
 				8F68C9651823C90E00CAA829 /* AmbisonicsPlanetarySystem.h in Headers */,
-				8F68C9541823C90E00CAA829 /* AmbisonicDecoder3D.h in Headers */,
 				8F68C9751823C90E00CAA829 /* AmbisonicMultiMaps.h in Headers */,
 				8F68C9521823C90E00CAA829 /* AmbisonicConvolver.h in Headers */,
 				8F68C95E1823C90E00CAA829 /* AmbisonicsFilter.h in Headers */,
@@ -942,7 +928,6 @@
 				8F68C9571823C90E00CAA829 /* AmbisonicsDelay.cpp in Sources */,
 				8F68C9261823C90E00CAA829 /* CicmFilterComb.cpp in Sources */,
 				8F68C9351823C90E00CAA829 /* CicmFilterOnePole.cpp in Sources */,
-				8F68C9451823C90E00CAA829 /* Ambisonic3D.cpp in Sources */,
 				8F68C9511823C90E00CAA829 /* AmbisonicConvolver.cpp in Sources */,
 				8F68C9371823C90E00CAA829 /* CicmOnePole.cpp in Sources */,
 				8F68C9141823C90E00CAA829 /* CicmRingModulation.cpp in Sources */,
@@ -961,7 +946,6 @@
 				8F68C9981823C90E00CAA829 /* AmbisonicSpectrum.cpp in Sources */,
 				8F68C99A1823C90E00CAA829 /* AmbisonicVector.cpp in Sources */,
 				8F68C92A1823C90E00CAA829 /* CicmFilterConvolutionZero.cpp in Sources */,
-				8F68C9531823C90E00CAA829 /* AmbisonicDecoder3D.cpp in Sources */,
 				8F68C96B1823C90E00CAA829 /* AmbisonicsStar.cpp in Sources */,
 				8F7F1B7B1823FE1E00EBE11F /* hoa.meter~.cpp in Sources */,
 				8F68C9821823C90E00CAA829 /* AmbisonicsMultiDecoder.cpp in Sources */,

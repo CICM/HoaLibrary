@@ -23,10 +23,10 @@ namespace Hoa3D
     class Ambisonic
     {
     protected:
-        long	m_order;
-        long	m_number_of_harmonics;
-        long	m_number_of_inputs;
-        long	m_number_of_outputs;
+        unsigned int	m_order;
+        unsigned int	m_number_of_harmonics;
+        unsigned int	m_number_of_inputs;
+        unsigned int	m_number_of_outputs;
         
         long*    m_harmonics_arguments;
         long*    m_harmonics_bands;

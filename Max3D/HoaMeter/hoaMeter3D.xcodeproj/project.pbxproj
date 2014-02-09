@@ -12,6 +12,17 @@
 		1CB68738A28F93D79B4F364B /* juce_gui_basics.mm in Sources */ = {isa = PBXBuildFile; fileRef = C942861086934601FCE1362D /* juce_gui_basics.mm */; };
 		2792CDA6BEA127DA493F244A /* juce_events.mm in Sources */ = {isa = PBXBuildFile; fileRef = B01A92D23DAFABD63842F24B /* juce_events.mm */; };
 		2C63E5A918A7BEAE00B75E00 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C63E5A818A7BEAE00B75E00 /* MaxAudioAPI.framework */; };
+		2C63E5C018A7DCB300B75E00 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5AB18A7DCB300B75E00 /* Ambisonic.cpp */; };
+		2C63E5C118A7DCB300B75E00 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5AD18A7DCB300B75E00 /* Decoder.cpp */; };
+		2C63E5C218A7DCB300B75E00 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5AF18A7DCB300B75E00 /* Encoder.cpp */; };
+		2C63E5C318A7DCB300B75E00 /* Legendre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5B218A7DCB300B75E00 /* Legendre.cpp */; };
+		2C63E5C418A7DCB300B75E00 /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5B418A7DCB300B75E00 /* Meter.cpp */; };
+		2C63E5C518A7DCB300B75E00 /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5B618A7DCB300B75E00 /* Optim.cpp */; };
+		2C63E5C618A7DCB300B75E00 /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5B818A7DCB300B75E00 /* Planewaves.cpp */; };
+		2C63E5C718A7DCB300B75E00 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5BA18A7DCB300B75E00 /* Rotate.cpp */; };
+		2C63E5C818A7DCB300B75E00 /* Rotate_MatrixRy90.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5BC18A7DCB300B75E00 /* Rotate_MatrixRy90.cpp */; };
+		2C63E5C918A7DCB300B75E00 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5BE18A7DCB300B75E00 /* Wider.cpp */; };
+		2C63E5CB18A7E11100B75E00 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C63E5CA18A7E11100B75E00 /* Accelerate.framework */; };
 		324578EC4FC5A3907B0191A1 /* juce_data_structures.mm in Sources */ = {isa = PBXBuildFile; fileRef = B161E40887BABD509088251F /* juce_data_structures.mm */; };
 		62D7B061686CD422E5C63B14 /* juce_gui_extra.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DA268974F18CCD9DD3DB090 /* juce_gui_extra.mm */; };
 		645829C9526D6601D2858BF3 /* juce_graphics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B4552EA243FD8D52C657286 /* juce_graphics.mm */; };
@@ -142,6 +153,29 @@
 		2C5229B30BC4EA3670CFC308 /* juce_FileSearchPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_FileSearchPath.h; path = ../../ThirdParty/JuceModules/juce_core/files/juce_FileSearchPath.h; sourceTree = SOURCE_ROOT; };
 		2C63E5A618A7B6E200B75E00 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2C63E5A818A7BEAE00B75E00 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
+		2C63E5AB18A7DCB300B75E00 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		2C63E5AC18A7DCB300B75E00 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		2C63E5AD18A7DCB300B75E00 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
+		2C63E5AE18A7DCB300B75E00 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		2C63E5AF18A7DCB300B75E00 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
+		2C63E5B018A7DCB300B75E00 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
+		2C63E5B118A7DCB300B75E00 /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
+		2C63E5B218A7DCB300B75E00 /* Legendre.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Legendre.cpp; sourceTree = "<group>"; };
+		2C63E5B318A7DCB300B75E00 /* Legendre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Legendre.h; sourceTree = "<group>"; };
+		2C63E5B418A7DCB300B75E00 /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		2C63E5B518A7DCB300B75E00 /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		2C63E5B618A7DCB300B75E00 /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		2C63E5B718A7DCB300B75E00 /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		2C63E5B818A7DCB300B75E00 /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		2C63E5B918A7DCB300B75E00 /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		2C63E5BA18A7DCB300B75E00 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		2C63E5BB18A7DCB300B75E00 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		2C63E5BC18A7DCB300B75E00 /* Rotate_MatrixRy90.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate_MatrixRy90.cpp; sourceTree = "<group>"; };
+		2C63E5BD18A7DCB300B75E00 /* Rotate_MatrixRy90.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate_MatrixRy90.h; sourceTree = "<group>"; };
+		2C63E5BE18A7DCB300B75E00 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
+		2C63E5BF18A7DCB300B75E00 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
+		2C63E5CA18A7E11100B75E00 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		2C63E5CC18A7F54E00B75E00 /* Speaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
 		2DEE934C8C26A2958EA0BD12 /* juce_TextLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_TextLayout.cpp; path = ../../ThirdParty/JuceModules/juce_graphics/fonts/juce_TextLayout.cpp; sourceTree = SOURCE_ROOT; };
 		2ED260B2B767947B0FDE5456 /* juce_MouseEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_MouseEvent.cpp; path = ../../ThirdParty/JuceModules/juce_gui_basics/mouse/juce_MouseEvent.cpp; sourceTree = SOURCE_ROOT; };
 		2EFAB58620F7F8D9E65BEEC3 /* juce_FileTreeComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_FileTreeComponent.h; path = ../../ThirdParty/JuceModules/juce_gui_basics/filebrowser/juce_FileTreeComponent.h; sourceTree = SOURCE_ROOT; };
@@ -707,6 +741,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C63E5CB18A7E11100B75E00 /* Accelerate.framework in Frameworks */,
 				8EED802133DF777E485B0B5D /* Carbon.framework in Frameworks */,
 				103599AAB6F35B4EF237AC21 /* Cocoa.framework in Frameworks */,
 				C9F4B1EEAE5FA4C3BF642D60 /* IOKit.framework in Frameworks */,
@@ -767,6 +802,7 @@
 			children = (
 				2C63E5A618A7B6E200B75E00 /* maxmspsdk.xcconfig */,
 				ADCB2EF9FB58F5A3F9E0DFFF /* hoaMeter3D */,
+				2C63E5AA18A7DCB300B75E00 /* Hoa3D */,
 				9280F1C95A8D150F0936AAD3 /* Juce Modules */,
 				319F1A3B9A3A30E8D21AC4A9 /* Juce Library Code */,
 				1F55EFEC721F6FF3CAC4178F /* Resources */,
@@ -954,6 +990,36 @@
 				D77E5813E0E207F2C192E1C5 /* juce_data_structures.h */,
 			);
 			name = juce_data_structures;
+			sourceTree = "<group>";
+		};
+		2C63E5AA18A7DCB300B75E00 /* Hoa3D */ = {
+			isa = PBXGroup;
+			children = (
+				2C63E5AB18A7DCB300B75E00 /* Ambisonic.cpp */,
+				2C63E5AC18A7DCB300B75E00 /* Ambisonic.h */,
+				2C63E5AD18A7DCB300B75E00 /* Decoder.cpp */,
+				2C63E5AE18A7DCB300B75E00 /* Decoder.h */,
+				2C63E5AF18A7DCB300B75E00 /* Encoder.cpp */,
+				2C63E5B018A7DCB300B75E00 /* Encoder.h */,
+				2C63E5B118A7DCB300B75E00 /* Hoa3D.h */,
+				2C63E5B218A7DCB300B75E00 /* Legendre.cpp */,
+				2C63E5B318A7DCB300B75E00 /* Legendre.h */,
+				2C63E5B418A7DCB300B75E00 /* Meter.cpp */,
+				2C63E5B518A7DCB300B75E00 /* Meter.h */,
+				2C63E5B618A7DCB300B75E00 /* Optim.cpp */,
+				2C63E5B718A7DCB300B75E00 /* Optim.h */,
+				2C63E5CC18A7F54E00B75E00 /* Speaker.h */,
+				2C63E5B818A7DCB300B75E00 /* Planewaves.cpp */,
+				2C63E5B918A7DCB300B75E00 /* Planewaves.h */,
+				2C63E5BA18A7DCB300B75E00 /* Rotate.cpp */,
+				2C63E5BB18A7DCB300B75E00 /* Rotate.h */,
+				2C63E5BC18A7DCB300B75E00 /* Rotate_MatrixRy90.cpp */,
+				2C63E5BD18A7DCB300B75E00 /* Rotate_MatrixRy90.h */,
+				2C63E5BE18A7DCB300B75E00 /* Wider.cpp */,
+				2C63E5BF18A7DCB300B75E00 /* Wider.h */,
+			);
+			name = Hoa3D;
+			path = ../../Sources/Hoa3D;
 			sourceTree = "<group>";
 		};
 		2FB79A6B9BCA8F8551C22DD1 /* juce_gui_basics */ = {
@@ -1521,6 +1587,7 @@
 		ADACEC42A9A4BD557C7BAAC5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C63E5CA18A7E11100B75E00 /* Accelerate.framework */,
 				2C63E5A818A7BEAE00B75E00 /* MaxAudioAPI.framework */,
 				54B0C90E3E826AB1E6DD8E5D /* Carbon.framework */,
 				1A3DBCCF7C115F812BFB9AEE /* Cocoa.framework */,
@@ -2039,13 +2106,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFFA9589F8783347A5FBBEDF /* hoa.meter3D~.cpp in Sources */,
+				2C63E5C818A7DCB300B75E00 /* Rotate_MatrixRy90.cpp in Sources */,
 				0C0E42491C8D3B43E9440563 /* juce_core.mm in Sources */,
+				2C63E5C418A7DCB300B75E00 /* Meter.cpp in Sources */,
 				324578EC4FC5A3907B0191A1 /* juce_data_structures.mm in Sources */,
 				2792CDA6BEA127DA493F244A /* juce_events.mm in Sources */,
+				2C63E5C118A7DCB300B75E00 /* Decoder.cpp in Sources */,
 				645829C9526D6601D2858BF3 /* juce_graphics.mm in Sources */,
+				2C63E5C018A7DCB300B75E00 /* Ambisonic.cpp in Sources */,
+				2C63E5C918A7DCB300B75E00 /* Wider.cpp in Sources */,
 				1CB68738A28F93D79B4F364B /* juce_gui_basics.mm in Sources */,
+				2C63E5C218A7DCB300B75E00 /* Encoder.cpp in Sources */,
+				2C63E5C718A7DCB300B75E00 /* Rotate.cpp in Sources */,
 				62D7B061686CD422E5C63B14 /* juce_gui_extra.mm in Sources */,
+				2C63E5C618A7DCB300B75E00 /* Planewaves.cpp in Sources */,
 				6B147434B82CB80755F02475 /* juce_opengl.mm in Sources */,
+				2C63E5C318A7DCB300B75E00 /* Legendre.cpp in Sources */,
+				2C63E5C518A7DCB300B75E00 /* Optim.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
