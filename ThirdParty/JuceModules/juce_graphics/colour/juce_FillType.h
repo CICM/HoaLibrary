@@ -59,14 +59,14 @@ public:
     FillType (const Image& image, const AffineTransform& transform) noexcept;
 
     /** Creates a copy of another FillType. */
-    FillType (const FillType&);
+    FillType (const FillType& other);
 
     /** Makes a copy of another FillType. */
-    FillType& operator= (const FillType&);
+    FillType& operator= (const FillType& other);
 
    #if JUCE_COMPILER_SUPPORTS_MOVE_SEMANTICS
-    FillType (FillType&&) noexcept;
-    FillType& operator= (FillType&&) noexcept;
+    FillType (FillType&& other) noexcept;
+    FillType& operator= (FillType&& other) noexcept;
    #endif
 
     /** Destructor. */
@@ -138,8 +138,8 @@ public:
     AffineTransform transform;
 
     //==============================================================================
-    bool operator== (const FillType&) const;
-    bool operator!= (const FillType&) const;
+    bool operator== (const FillType& other) const;
+    bool operator!= (const FillType& other) const;
 
 private:
     JUCE_LEAK_DETECTOR (FillType)

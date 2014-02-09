@@ -82,17 +82,16 @@ public:
         When you create one of these, you can call setCurrentMappings() to make it
         the set of mappings that the system's using.
     */
-    LocalisedStrings (const String& fileContents, bool ignoreCaseOfKeys);
+    LocalisedStrings (const String& fileContents,
+                      bool ignoreCaseOfKeys);
 
     /** Creates a set of translations from a file.
 
         When you create one of these, you can call setCurrentMappings() to make it
         the set of mappings that the system's using.
     */
-    LocalisedStrings (const File& fileToLoad, bool ignoreCaseOfKeys);
-
-    LocalisedStrings (const LocalisedStrings&);
-    LocalisedStrings& operator= (const LocalisedStrings&);
+    LocalisedStrings (const File& fileToLoad,
+                      bool ignoreCaseOfKeys);
 
     /** Destructor. */
     ~LocalisedStrings();
@@ -101,7 +100,7 @@ public:
     /** Selects the current set of mappings to be used by the system.
 
         The object you pass in will be automatically deleted when no longer needed, so
-        don't keep a pointer to it. You can also pass in nullptr to remove the current
+        don't keep a pointer to it. You can also pass in zero to remove the current
         mappings.
 
         See also the TRANS() macro, which uses the current set to do its translation.
@@ -196,7 +195,6 @@ private:
     StringArray countryCodes;
     StringPairArray translations;
     ScopedPointer<LocalisedStrings> fallback;
-    friend struct ContainerDeletePolicy<LocalisedStrings>;
 
     void loadFromText (const String&, bool ignoreCase);
 

@@ -93,15 +93,15 @@ public:
             This will copy the position, but the new object will not be set to maintain its position,
             even if the source object was set to do so.
         */
-        Position (const Position&) noexcept;
+        Position (const Position& other) noexcept;
 
         /** Destructor. */
         ~Position();
 
-        Position& operator= (const Position&);
+        Position& operator= (const Position& other);
 
-        bool operator== (const Position&) const noexcept;
-        bool operator!= (const Position&) const noexcept;
+        bool operator== (const Position& other) const noexcept;
+        bool operator!= (const Position& other) const noexcept;
 
         /** Points this object at a new position within the document.
 
@@ -355,8 +355,8 @@ public:
     {
     public:
         Iterator (const CodeDocument& document) noexcept;
-        Iterator (const Iterator&) noexcept;
-        Iterator& operator= (const Iterator&) noexcept;
+        Iterator (const Iterator& other) noexcept;
+        Iterator& operator= (const Iterator& other) noexcept;
         ~Iterator() noexcept;
 
         /** Reads the next character and returns it.

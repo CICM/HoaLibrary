@@ -63,9 +63,6 @@ public:
     };
 
     //==============================================================================
-    /** Creates a stroke type with a given line-width, and default joint/end styles. */
-    explicit PathStrokeType (float strokeThickness) noexcept;
-
     /** Creates a stroke type.
 
         @param strokeThickness      the width of the line to use
@@ -73,14 +70,14 @@ public:
         @param endStyle             the type of end-caps to use for the ends of open paths.
     */
     PathStrokeType (float strokeThickness,
-                    JointStyle jointStyle,
+                    JointStyle jointStyle = mitered,
                     EndCapStyle endStyle = butt) noexcept;
 
-    /** Creates a copy of another stroke type. */
-    PathStrokeType (const PathStrokeType&) noexcept;
+    /** Createes a copy of another stroke type. */
+    PathStrokeType (const PathStrokeType& other) noexcept;
 
     /** Copies another stroke onto this one. */
-    PathStrokeType& operator= (const PathStrokeType&) noexcept;
+    PathStrokeType& operator= (const PathStrokeType& other) noexcept;
 
     /** Destructor. */
     ~PathStrokeType() noexcept;
@@ -187,10 +184,10 @@ public:
 
     //==============================================================================
     /** Compares the stroke thickness, joint and end styles of two stroke types. */
-    bool operator== (const PathStrokeType&) const noexcept;
+    bool operator== (const PathStrokeType& other) const noexcept;
 
     /** Compares the stroke thickness, joint and end styles of two stroke types. */
-    bool operator!= (const PathStrokeType&) const noexcept;
+    bool operator!= (const PathStrokeType& other) const noexcept;
 
 private:
     //==============================================================================

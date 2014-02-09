@@ -45,13 +45,13 @@ public:
     inline RectanglePlacement() noexcept                     : flags (centred) {}
 
     /** Creates a copy of another RectanglePlacement object. */
-    RectanglePlacement (const RectanglePlacement&) noexcept;
+    RectanglePlacement (const RectanglePlacement& other) noexcept;
 
     /** Copies another RectanglePlacement object. */
-    RectanglePlacement& operator= (const RectanglePlacement&) noexcept;
+    RectanglePlacement& operator= (const RectanglePlacement& other) noexcept;
 
-    bool operator== (const RectanglePlacement&) const noexcept;
-    bool operator!= (const RectanglePlacement&) const noexcept;
+    bool operator== (const RectanglePlacement& other) const noexcept;
+    bool operator!= (const RectanglePlacement& other) const noexcept;
 
     //==============================================================================
     /** Flag values that can be combined and used in the constructor. */

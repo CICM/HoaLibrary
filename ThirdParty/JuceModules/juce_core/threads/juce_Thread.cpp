@@ -221,7 +221,7 @@ bool Thread::setPriority (const int newPriority)
 
     const ScopedLock sl (startStopLock);
 
-    if ((! isThreadRunning()) || setThreadPriority (threadHandle, newPriority))
+    if (setThreadPriority (threadHandle, newPriority))
     {
         threadPriority = newPriority;
         return true;

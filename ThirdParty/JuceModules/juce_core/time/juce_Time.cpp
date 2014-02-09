@@ -110,7 +110,7 @@ namespace TimeHelpers
             const size_t numChars = wcsftime (buffer, bufferSize - 1, format.toUTF32(), tm);
            #endif
 
-            if (numChars > 0 || format.isEmpty())
+            if (numChars > 0)
                 return String (StringType (buffer),
                                StringType (buffer) + (int) numChars);
         }

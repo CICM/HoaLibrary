@@ -572,7 +572,7 @@ void Button::clearShortcuts()
 
 bool Button::isShortcutPressed() const
 {
-    if (isShowing() && ! isCurrentlyBlockedByAnotherModalComponent())
+    if (! isCurrentlyBlockedByAnotherModalComponent())
         for (int i = shortcuts.size(); --i >= 0;)
             if (shortcuts.getReference(i).isCurrentlyDown())
                 return true;

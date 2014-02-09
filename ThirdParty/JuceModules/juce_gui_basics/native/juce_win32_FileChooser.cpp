@@ -198,7 +198,7 @@ void FileChooser::showPlatformDialog (Array<File>& results, const String& title_
     }
     else
     {
-        DWORD flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR | OFN_HIDEREADONLY | OFN_ENABLESIZING;
+        DWORD flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR | OFN_HIDEREADONLY;
 
         if (warnAboutOverwritingExistingFiles)
             flags |= OFN_OVERWRITEPROMPT;

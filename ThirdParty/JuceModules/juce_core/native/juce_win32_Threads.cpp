@@ -482,12 +482,12 @@ public:
             CloseHandle (writePipe);
     }
 
-    bool isRunning() const noexcept
+    bool isRunning() const
     {
         return WaitForSingleObject (processInfo.hProcess, 0) != WAIT_OBJECT_0;
     }
 
-    int read (void* dest, int numNeeded) const noexcept
+    int read (void* dest, int numNeeded) const
     {
         int total = 0;
 
@@ -522,16 +522,9 @@ public:
         return total;
     }
 
-    bool killProcess() const noexcept
+    bool killProcess() const
     {
         return TerminateProcess (processInfo.hProcess, 0) != FALSE;
-    }
-
-    uint32 getExitCode() const noexcept
-    {
-        DWORD exitCode = 0;
-        GetExitCodeProcess (processInfo.hProcess, &exitCode);
-        return (uint32) exitCode;
     }
 
     bool ok;
@@ -556,6 +549,21 @@ bool ChildProcess::start (const String& command, int streamFlags)
 bool ChildProcess::start (const StringArray& args, int streamFlags)
 {
     return start (args.joinIntoString (" "), streamFlags);
+}
+
+bool ChildProcess::isRunning() const
+{
+    return activeProcess != nullptr && activeProcess->isRunning();
+}
+
+int ChildProcess::readProcessOutput (void* dest, int numBytes)
+{
+    return activeProcess != nullptr ? activeProcess->read (dest, numBytes) : 0;
+}
+
+bool ChildProcess::kill()
+{
+    return activeProcess == nullptr || activeProcess->killProcess();
 }
 
 //==============================================================================

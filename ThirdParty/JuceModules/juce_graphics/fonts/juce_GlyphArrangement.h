@@ -44,8 +44,8 @@ public:
     PositionedGlyph (const Font& font, juce_wchar character, int glyphNumber,
                      float anchorX, float baselineY, float width, bool isWhitespace);
 
-    PositionedGlyph (const PositionedGlyph&);
-    PositionedGlyph& operator= (const PositionedGlyph&);
+    PositionedGlyph (const PositionedGlyph& other);
+    PositionedGlyph& operator= (const PositionedGlyph& other);
     ~PositionedGlyph();
 
     /** Returns the character the glyph represents. */
@@ -209,10 +209,10 @@ public:
                         float minimumHorizontalScale = 0.7f);
 
     /** Appends another glyph arrangement to this one. */
-    void addGlyphArrangement (const GlyphArrangement&);
+    void addGlyphArrangement (const GlyphArrangement& other);
 
     /** Appends a custom glyph to the arrangement. */
-    void addGlyph (const PositionedGlyph&);
+    void addGlyph (const PositionedGlyph& glyph);
 
     //==============================================================================
     /** Draws this glyph arrangement to a graphics context.

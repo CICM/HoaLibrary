@@ -67,21 +67,21 @@ public:
     Path();
 
     /** Creates a copy of another path. */
-    Path (const Path&);
+    Path (const Path& other);
 
     /** Destructor. */
     ~Path();
 
     /** Copies this path from another one. */
-    Path& operator= (const Path&);
+    Path& operator= (const Path& other);
 
    #if JUCE_COMPILER_SUPPORTS_MOVE_SEMANTICS
-    Path (Path&&) noexcept;
-    Path& operator= (Path&&) noexcept;
+    Path (Path&& other) noexcept;
+    Path& operator= (Path&& other) noexcept;
    #endif
 
-    bool operator== (const Path&) const noexcept;
-    bool operator!= (const Path&) const noexcept;
+    bool operator== (const Path& other) const noexcept;
+    bool operator!= (const Path& other) const noexcept;
 
     //==============================================================================
     /** Returns true if the path doesn't contain any lines or curves. */
@@ -558,7 +558,7 @@ public:
         The internal data of the two paths is swapped over, so this is much faster than
         copying it to a temp variable and back.
     */
-    void swapWithPath (Path&) noexcept;
+    void swapWithPath (Path& other) noexcept;
 
     //==============================================================================
     /** Applies a 2D transform to all the vertices in the path.
