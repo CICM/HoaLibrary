@@ -88,6 +88,7 @@ namespace Hoa3D
         double sin_x = m_sinx;
         double tcos_x = cos_x;
         double sig;
+		
         // Copy Harmonics Args(0)
         for(int i = 0, j = 0; i < m_number_of_harmonics; i += i * 2 + 1, j++)
         {
@@ -107,6 +108,7 @@ namespace Hoa3D
             sin_x = tcos_x * m_sinx + sin_x * m_cosx; // sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)
             tcos_x = cos_x;
         }
+		
         /*
 		// R(roll, pitch, yaw) = Rz(roll + CICM_PI4) Ry90 Rz(pitch + CICM_PI) Ry90 Rz(yaw + CICM_PI4)
 		
