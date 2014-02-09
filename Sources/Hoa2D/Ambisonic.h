@@ -66,7 +66,7 @@ public:
         long getHarmonicArgument(unsigned int index);
 
         //! Retrieve the band of an harmonic.
-        /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3]etc. with h[argument].
+        /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3], etc. with h[argument].
          
          @param     index	The global index of an harmonic.
          @return    The method returns the band of an harmonic or 0 if the harmonic does not exist.
