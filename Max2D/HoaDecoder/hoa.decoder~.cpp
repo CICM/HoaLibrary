@@ -22,8 +22,6 @@ typedef struct _hoa_decoder
     
 } t_hoa_decoder;
 
-t_object hoaLibrary;
-
 void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_decoder_free(t_hoa_decoder *x);
 void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s);
@@ -36,7 +34,6 @@ t_class *hoa_decoder_class;
 
 int C74_EXPORT main(void)
 {
-
 	t_class *c;
 	
 	c = class_new("hoa.decoder~", (method)hoa_decoder_new, (method)hoa_decoder_free, (long)sizeof(t_hoa_decoder), 0L, A_GIMME, 0);
@@ -47,13 +44,6 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_decoder_class = c;
-    
-    if(!gensym("hoa.library")->s_thing)
-    {
-        gensym("hoa.library")->s_thing = &hoaLibrary;
-        post("hoa.library (version 2.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-        post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
-    }
     
 	return 0;
 }
@@ -78,7 +68,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 		for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
 			outlet_new(x, "signal");
         
-		x->f_ins = new double[x->f_decoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
+		x->f_ins = new double[x->f_decoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_outs = new double[x->f_decoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
 	}
 
@@ -92,13 +82,13 @@ void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double s
 
 void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
-    for(int i = 0; i < numouts; i++)
+    for(int i = 0; i < numins; i++)
     {
-        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numouts);
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
     }
 	for(int i = 0; i < sampleframes; i++)
     {
-        x->f_decoder->process(x->f_ins + numouts * i, x->f_outs + numouts * i);
+        x->f_decoder->process(x->f_ins + numins * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
     {

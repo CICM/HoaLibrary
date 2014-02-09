@@ -16,6 +16,11 @@ namespace Hoa2D
         m_decoder_matrix            = new double[m_number_of_outputs * m_number_of_harmonics];
         m_decoder_matrix_float      = new float[m_number_of_outputs * m_number_of_harmonics];
         m_encoder                   = new Encoder(m_order);
+        
+        for(int i = 0; i < m_number_of_outputs; i++)
+        {
+            setLoudspeakerPosition(i, (double)i / (double)m_number_of_outputs * CICM_2PI);
+        }
     }
     
     void Decoder::setLoudspeakerPosition(unsigned int index, double anAzimuth)
@@ -24,12 +29,12 @@ namespace Hoa2D
 		m_loudspeakers_azimuth[index] = Tools::radian_wrap(anAzimuth);
         
         m_encoder->setAzimuth(m_loudspeakers_azimuth[index]);
-        m_encoder->process(0.5, m_harmonics_vector);
+        m_encoder->process(1., m_harmonics_vector);
         
         m_decoder_matrix[index * m_number_of_harmonics] = 0.5 / (double)(m_order+1.);
         for(int j = 1; j < m_number_of_harmonics; j++)
         {
-            m_decoder_matrix_float[index * m_number_of_harmonics + j] = m_decoder_matrix[index * m_number_of_harmonics + j] = m_harmonics_vector[j];
+            m_decoder_matrix_float[index * m_number_of_harmonics + j] = m_decoder_matrix[index * m_number_of_harmonics + j] = m_harmonics_vector[j] / (double)(m_order+1.);
         }
 	}
     
