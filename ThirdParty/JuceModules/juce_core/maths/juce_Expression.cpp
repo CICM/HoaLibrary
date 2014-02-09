@@ -188,10 +188,12 @@ struct Expression::Helpers
             if (input != left && input != right)
                 return TermPtr();
 
-            if (const Term* const dest = findDestinationFor (topLevelTerm, this))
-                return dest->createTermToEvaluateInput (scope, this, overallTarget, topLevelTerm);
+            const Term* const dest = findDestinationFor (topLevelTerm, this);
 
-            return new Constant (overallTarget, false);
+            if (dest == nullptr)
+                return new Constant (overallTarget, false);
+
+            return dest->createTermToEvaluateInput (scope, this, overallTarget, topLevelTerm);
         }
     };
 

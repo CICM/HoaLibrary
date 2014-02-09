@@ -3169,9 +3169,6 @@ String SystemClipboard::getTextFromClipboard()
 //==============================================================================
 void Desktop::setKioskComponent (Component* kioskModeComponent, bool enableOrDisable, bool /*allowMenusAndBars*/)
 {
-    if (TopLevelWindow* tlw = dynamic_cast<TopLevelWindow*> (kioskModeComponent))
-        tlw->setUsingNativeTitleBar (! enableOrDisable);
-
     if (enableOrDisable)
         kioskModeComponent->setBounds (getDisplays().getMainDisplay().totalArea);
 }

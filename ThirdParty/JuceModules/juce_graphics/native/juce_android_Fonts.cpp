@@ -170,11 +170,11 @@ public:
         heightToPointsFactor = referenceFontSize / totalHeight;
     }
 
-    float getAscent() const override                 { return ascent; }
-    float getDescent() const override                { return descent; }
-    float getHeightToPointsFactor() const override   { return heightToPointsFactor; }
+    float getAscent() const                 { return ascent; }
+    float getDescent() const                { return descent; }
+    float getHeightToPointsFactor() const   { return heightToPointsFactor; }
 
-    float getStringWidth (const String& text) override
+    float getStringWidth (const String& text)
     {
         JNIEnv* env = getEnv();
         const int numChars = text.length();
@@ -193,7 +193,7 @@ public:
         return x * referenceFontToUnits;
     }
 
-    void getGlyphPositions (const String& text, Array<int>& glyphs, Array<float>& xOffsets) override
+    void getGlyphPositions (const String& text, Array<int>& glyphs, Array<float>& xOffsets)
     {
         JNIEnv* env = getEnv();
         const int numChars = text.length();
@@ -218,12 +218,12 @@ public:
         }
     }
 
-    bool getOutlineForGlyph (int /*glyphNumber*/, Path& /*destPath*/) override
+    bool getOutlineForGlyph (int /*glyphNumber*/, Path& /*destPath*/)
     {
         return false;
     }
 
-    EdgeTable* getEdgeTableForGlyph (int glyphNumber, const AffineTransform& t, float /*fontHeight*/) override
+    EdgeTable* getEdgeTableForGlyph (int glyphNumber, const AffineTransform& t)
     {
         JNIEnv* env = getEnv();
 

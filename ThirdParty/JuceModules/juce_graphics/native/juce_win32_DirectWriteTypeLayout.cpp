@@ -63,9 +63,6 @@ namespace DirectWriteTypeLayout
         {
             TextLayout* const layout = static_cast<TextLayout*> (clientDrawingContext);
 
-            if (! (baselineOriginY >= -1.0e10f && baselineOriginY <= 1.0e10f))
-                baselineOriginY = 0; // DirectWrite sometimes sends NaNs in this parameter
-
             if (baselineOriginY != lastOriginY)
             {
                 lastOriginY = baselineOriginY;
@@ -76,7 +73,6 @@ namespace DirectWriteTypeLayout
                     jassert (currentLine == layout->getNumLines());
                     TextLayout::Line* const newLine = new TextLayout::Line();
                     layout->addLine (newLine);
-
                     newLine->lineOrigin = Point<float> (baselineOriginX, baselineOriginY);
                 }
             }
@@ -168,9 +164,6 @@ namespace DirectWriteTypeLayout
     {
         ComSmartPtr<IDWriteFontFace> dwFontFace;
         dwFont->CreateFontFace (dwFontFace.resetAndGetPointerAddress());
-
-        if (dwFontFace == nullptr)
-            return 1.0f;
 
         DWRITE_FONT_METRICS dwFontMetrics;
         dwFontFace->GetMetrics (&dwFontMetrics);

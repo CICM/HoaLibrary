@@ -488,7 +488,6 @@ public:
           ctFontRef (nullptr),
           fontHeightToPointsFactor (1.0f),
           renderingTransform (CGAffineTransformIdentity),
-          isMemoryFont (false),
           attributedStringAtts (nullptr),
           ascent (0.0f),
           unitsToHeightScaleFactor (0.0f)
@@ -508,7 +507,6 @@ public:
           ctFontRef (nullptr),
           fontHeightToPointsFactor (1.0f),
           renderingTransform (CGAffineTransformIdentity),
-          isMemoryFont (true),
           attributedStringAtts (nullptr),
           ascent (0.0f),
           unitsToHeightScaleFactor (0.0f)
@@ -577,11 +575,11 @@ public:
             CFRelease (ctFontRef);
     }
 
-    float getAscent() const override                 { return ascent; }
-    float getDescent() const override                { return 1.0f - ascent; }
-    float getHeightToPointsFactor() const override   { return fontHeightToPointsFactor; }
+    float getAscent() const                 { return ascent; }
+    float getDescent() const                { return 1.0f - ascent; }
+    float getHeightToPointsFactor() const   { return fontHeightToPointsFactor; }
 
-    float getStringWidth (const String& text) override
+    float getStringWidth (const String& text)
     {
         float x = 0;
 
@@ -614,7 +612,7 @@ public:
         return x;
     }
 
-    void getGlyphPositions (const String& text, Array <int>& resultGlyphs, Array <float>& xOffsets) override
+    void getGlyphPositions (const String& text, Array <int>& resultGlyphs, Array <float>& xOffsets)
     {
         xOffsets.add (0);
 
@@ -650,7 +648,18 @@ public:
         }
     }
 
-    bool getOutlineForGlyph (int glyphNumber, Path& path) override
+    EdgeTable* getEdgeTableForGlyph (int glyphNumber, const AffineTransform& transform)
+    {
+        Path path;
+
+        if (getOutlineForGlyph (glyphNumber, path) && ! path.isEmpty())
+            return new EdgeTable (path.getBoundsTransformed (transform).getSmallestIntegerContainer().expanded (1, 0),
+                                  path, transform);
+
+        return nullptr;
+    }
+
+    bool getOutlineForGlyph (int glyphNumber, Path& path)
     {
         jassert (path.isEmpty());  // we might need to apply a transform to the path, so this must be empty
 
@@ -673,8 +682,6 @@ public:
 
     float fontHeightToPointsFactor;
     CGAffineTransform renderingTransform;
-
-    bool isMemoryFont;
 
 private:
     CFDictionaryRef attributedStringAtts;
@@ -705,11 +712,12 @@ private:
 
 CTFontRef getCTFontFromTypeface (const Font& f)
 {
-    if (OSXTypeface* tf = dynamic_cast<OSXTypeface*> (f.getTypeface()))
+    if (OSXTypeface* tf = dynamic_cast <OSXTypeface*> (f.getTypeface()))
         return tf->ctFontRef;
 
     return 0;
 }
+
 
 StringArray Font::findAllTypefaceNames()
 {
@@ -898,11 +906,11 @@ public:
    #endif
 
 
-    float getAscent() const override                 { return ascent; }
-    float getDescent() const override                { return 1.0f - ascent; }
-    float getHeightToPointsFactor() const override   { return fontHeightToPointsFactor; }
+    float getAscent() const                 { return ascent; }
+    float getDescent() const                { return 1.0f - ascent; }
+    float getHeightToPointsFactor() const   { return fontHeightToPointsFactor; }
 
-    float getStringWidth (const String& text) override
+    float getStringWidth (const String& text)
     {
         if (fontRef == 0 || text.isEmpty())
             return 0;
@@ -915,7 +923,7 @@ public:
 
 #if SUPPORT_ONLY_10_4_FONTS
         HeapBlock <NSSize> advances (length);
-        [nsFont getAdvancements: advances forGlyphs: reinterpret_cast<NSGlyph*> (glyphs.getData()) count: length];
+        [nsFont getAdvancements: advances forGlyphs: reinterpret_cast <NSGlyph*> (glyphs.getData()) count: length];
 
         for (int i = 0; i < length; ++i)
             x += advances[i].width;
@@ -943,7 +951,7 @@ public:
         return x * unitsToHeightScaleFactor;
     }
 
-    void getGlyphPositions (const String& text, Array<int>& resultGlyphs, Array<float>& xOffsets) override
+    void getGlyphPositions (const String& text, Array <int>& resultGlyphs, Array <float>& xOffsets)
     {
         xOffsets.add (0);
 
@@ -1001,7 +1009,18 @@ public:
 #endif
     }
 
-    bool getOutlineForGlyph (int glyphNumber, Path& path) override
+    EdgeTable* getEdgeTableForGlyph (int glyphNumber, const AffineTransform& transform)
+    {
+        Path path;
+
+        if (getOutlineForGlyph (glyphNumber, path) && ! path.isEmpty())
+            return new EdgeTable (path.getBoundsTransformed (transform).getSmallestIntegerContainer().expanded (1, 0),
+                                  path, transform);
+
+        return nullptr;
+    }
+
+    bool getOutlineForGlyph (int glyphNumber, Path& path)
     {
        #if JUCE_IOS
         return false;
@@ -1155,8 +1174,8 @@ private:
 
                     if (rangeOffset == 0)
                         return delta + c;
-
-                    return getValue16 (glyphIndexes, 2 * ((rangeOffset / 2) + (c - start) - (segCount - i)));
+                    else
+                        return getValue16 (glyphIndexes, 2 * ((rangeOffset / 2) + (c - start) - (segCount - i)));
                 }
             }
 
@@ -1274,33 +1293,13 @@ Typeface::Ptr Font::getDefaultTypefaceForFont (const Font& font)
     return Typeface::createSystemTypefaceFor (newFont);
 }
 
-#if JUCE_CORETEXT_AVAILABLE
-static bool containsNoMemoryTypefaces (const AttributedString& text)
-{
-    const int numCharacterAttributes = text.getNumAttributes();
-
-    for (int i = 0; i < numCharacterAttributes; ++i)
-        if (const Font* const f = text.getAttribute (i)->getFont())
-            if (OSXTypeface* tf = dynamic_cast<OSXTypeface*> (f->getTypeface()))
-                if (tf->isMemoryFont)
-                    return false;
-
-    return true;
-}
-#endif
-
 bool TextLayout::createNativeLayout (const AttributedString& text)
 {
    #if JUCE_CORETEXT_AVAILABLE
-    // Seems to be an unfathomable bug in CoreText which prevents the layout working with
-    // typefaces that were loaded from memory, so have to fallback if we hit any of those..
-    if (containsNoMemoryTypefaces (text))
-    {
-        CoreTextTypeLayout::createLayout (*this, text);
-        return true;
-    }
-   #endif
-
+    CoreTextTypeLayout::createLayout (*this, text);
+    return true;
+   #else
     (void) text;
     return false;
+   #endif
 }

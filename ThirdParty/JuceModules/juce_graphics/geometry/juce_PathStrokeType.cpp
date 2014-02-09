@@ -22,13 +22,12 @@
   ==============================================================================
 */
 
-PathStrokeType::PathStrokeType (float strokeThickness) noexcept
-    : thickness (strokeThickness), jointStyle (mitered), endStyle (butt)
-{
-}
-
-PathStrokeType::PathStrokeType (float strokeThickness, JointStyle joint, EndCapStyle end) noexcept
-    : thickness (strokeThickness), jointStyle (joint), endStyle (end)
+PathStrokeType::PathStrokeType (const float strokeThickness,
+                                const JointStyle jointStyle_,
+                                const EndCapStyle endStyle_) noexcept
+    : thickness (strokeThickness),
+      jointStyle (jointStyle_),
+      endStyle (endStyle_)
 {
 }
 

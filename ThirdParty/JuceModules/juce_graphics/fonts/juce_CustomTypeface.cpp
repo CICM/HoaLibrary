@@ -385,7 +385,7 @@ bool CustomTypeface::getOutlineForGlyph (int glyphNumber, Path& path)
     return false;
 }
 
-EdgeTable* CustomTypeface::getEdgeTableForGlyph (int glyphNumber, const AffineTransform& transform, float fontHeight)
+EdgeTable* CustomTypeface::getEdgeTableForGlyph (int glyphNumber, const AffineTransform& transform)
 {
     if (const GlyphInfo* const glyph = findGlyph ((juce_wchar) glyphNumber, true))
     {
@@ -399,7 +399,7 @@ EdgeTable* CustomTypeface::getEdgeTableForGlyph (int glyphNumber, const AffineTr
         const Typeface::Ptr fallbackTypeface (getFallbackTypeface());
 
         if (fallbackTypeface != nullptr && fallbackTypeface != this)
-            return fallbackTypeface->getEdgeTableForGlyph (glyphNumber, transform, fontHeight);
+            return fallbackTypeface->getEdgeTableForGlyph (glyphNumber, transform);
     }
 
     return nullptr;

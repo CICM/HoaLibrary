@@ -79,7 +79,7 @@ bool FileChooser::browseForDirectory()
 
 bool FileChooser::showDialog (const int flags, FilePreviewComponent* const previewComp)
 {
-    FocusRestorer focusRestorer;
+    WeakReference<Component> previouslyFocused (Component::getCurrentlyFocusedComponent());
 
     results.clear();
 
@@ -126,6 +126,9 @@ bool FileChooser::showDialog (const int flags, FilePreviewComponent* const previ
                 results.add (browserComponent.getSelectedFile (i));
         }
     }
+
+    if (previouslyFocused != nullptr)
+        previouslyFocused->grabKeyboardFocus();
 
     return results.size() > 0;
 }

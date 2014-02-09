@@ -37,7 +37,7 @@ class JUCE_API  DrawableImage  : public Drawable
 public:
     //==============================================================================
     DrawableImage();
-    DrawableImage (const DrawableImage&);
+    DrawableImage (const DrawableImage& other);
 
     /** Destructor. */
     ~DrawableImage();

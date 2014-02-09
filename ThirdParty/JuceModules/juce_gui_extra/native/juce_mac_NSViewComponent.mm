@@ -28,30 +28,18 @@ class NSViewAttachment  : public ReferenceCountedObject,
 public:
     NSViewAttachment (NSView* const v, Component& comp)
         : ComponentMovementWatcher (&comp),
-          view (v), owner (comp),
-          currentPeer (nullptr), frameChangeCallback (nullptr)
+          view (v),
+          owner (comp),
+          currentPeer (nullptr)
     {
         [view retain];
-        [view setPostsFrameChangedNotifications: YES];
 
         if (owner.isShowing())
             componentPeerChanged();
-
-        static ViewFrameChangeCallbackClass cls;
-        frameChangeCallback = [cls.createInstance() init];
-        ViewFrameChangeCallbackClass::setTarget (frameChangeCallback, &owner);
-
-        [[NSNotificationCenter defaultCenter]  addObserver: frameChangeCallback
-                                                  selector: @selector (frameChanged:)
-                                                      name: NSViewFrameDidChangeNotification
-                                                    object: view];
     }
 
     ~NSViewAttachment()
     {
-        [[NSNotificationCenter defaultCenter] removeObserver: frameChangeCallback];
-        [frameChangeCallback release];
-
         removeFromParent();
         [view release];
     }
@@ -108,7 +96,6 @@ public:
 private:
     Component& owner;
     ComponentPeer* currentPeer;
-    id frameChangeCallback;
 
     void removeFromParent()
     {
@@ -116,31 +103,6 @@ private:
             [view removeFromSuperview]; // Must be careful not to call this unless it's required - e.g. some Apple AU views
                                         // override the call and use it as a sign that they're being deleted, which breaks everything..
     }
-
-    //==============================================================================
-    struct ViewFrameChangeCallbackClass   : public ObjCClass<NSObject>
-    {
-        ViewFrameChangeCallbackClass()  : ObjCClass<NSObject> ("JUCE_NSViewCallback_")
-        {
-            addIvar<Component*> ("target");
-            addMethod (@selector (frameChanged:),  frameChanged, "v@:@");
-            registerClass();
-        }
-
-        static void setTarget (id self, Component* c)
-        {
-            object_setInstanceVariable (self, "target", c);
-        }
-
-    private:
-        static void frameChanged (id self, SEL, NSNotification*)
-        {
-            if (Component* const target = getIvar<Component*> (self, "target"))
-                target->childBoundsChanged (nullptr);
-        }
-
-        JUCE_DECLARE_NON_COPYABLE (ViewFrameChangeCallbackClass);
-    };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NSViewAttachment)
 };
@@ -162,7 +124,7 @@ void NSViewComponent::setView (void* const view)
 
 void* NSViewComponent::getView() const
 {
-    return attachment != nullptr ? static_cast<NSViewAttachment*> (attachment.get())->view
+    return attachment != nullptr ? static_cast <NSViewAttachment*> (attachment.get())->view
                                  : nullptr;
 }
 
@@ -170,7 +132,7 @@ void NSViewComponent::resizeToFitView()
 {
     if (attachment != nullptr)
     {
-        NSRect r = [static_cast<NSViewAttachment*> (attachment.get())->view frame];
+        NSRect r = [static_cast <NSViewAttachment*> (attachment.get())->view frame];
         setBounds (Rectangle<int> ((int) r.size.width, (int) r.size.height));
     }
 }

@@ -40,7 +40,7 @@ public:
     //==============================================================================
     /** Creates a DrawablePath. */
     DrawablePath();
-    DrawablePath (const DrawablePath&);
+    DrawablePath (const DrawablePath& other);
 
     /** Destructor. */
     ~DrawablePath();

@@ -43,21 +43,21 @@ public:
     NamedValueSet() noexcept;
 
     /** Creates a copy of another set. */
-    NamedValueSet (const NamedValueSet&);
+    NamedValueSet (const NamedValueSet& other);
 
     /** Replaces this set with a copy of another set. */
-    NamedValueSet& operator= (const NamedValueSet&);
+    NamedValueSet& operator= (const NamedValueSet& other);
 
    #if JUCE_COMPILER_SUPPORTS_MOVE_SEMANTICS
-    NamedValueSet (NamedValueSet&&) noexcept;
-    NamedValueSet& operator= (NamedValueSet&&) noexcept;
+    NamedValueSet (NamedValueSet&& other) noexcept;
+    NamedValueSet& operator= (NamedValueSet&& other) noexcept;
    #endif
 
     /** Destructor. */
     ~NamedValueSet();
 
-    bool operator== (const NamedValueSet&) const;
-    bool operator!= (const NamedValueSet&) const;
+    bool operator== (const NamedValueSet& other) const;
+    bool operator!= (const NamedValueSet& other) const;
 
     //==============================================================================
     /** Returns the total number of values that the set contains. */
@@ -135,14 +135,14 @@ private:
     public:
         NamedValue() noexcept;
         NamedValue (const NamedValue&);
-        NamedValue (Identifier, const var&);
+        NamedValue (const Identifier name, const var& value);
         NamedValue& operator= (const NamedValue&);
        #if JUCE_COMPILER_SUPPORTS_MOVE_SEMANTICS
         NamedValue (NamedValue&&) noexcept;
-        NamedValue (Identifier, var&&);
+        NamedValue (const Identifier name, var&& value);
         NamedValue& operator= (NamedValue&&) noexcept;
        #endif
-        bool operator== (const NamedValue&) const noexcept;
+        bool operator== (const NamedValue& other) const noexcept;
 
         LinkedListPointer<NamedValue> nextListItem;
         Identifier name;

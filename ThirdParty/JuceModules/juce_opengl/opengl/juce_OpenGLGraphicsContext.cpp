@@ -1023,7 +1023,11 @@ struct StateHelpers
             GLuint colour;
         };
 
+       #if JUCE_MAC || JUCE_ANDROID || JUCE_IOS
         enum { numQuads = 256 };
+       #else
+        enum { numQuads = 64 }; // (had problems with my drivers segfaulting when these buffers are any larger)
+       #endif
 
         GLuint buffers[2];
         VertexInfo vertexData [numQuads * 4];
@@ -1051,7 +1055,7 @@ struct StateHelpers
             : context (c), activeShader (nullptr)
         {
             const char programValueID[] = "GraphicsContextPrograms";
-            programs = static_cast<ShaderPrograms*> (context.getAssociatedObject (programValueID));
+            programs = static_cast <ShaderPrograms*> (context.getAssociatedObject (programValueID));
 
             if (programs == nullptr)
             {
@@ -1060,17 +1064,11 @@ struct StateHelpers
             }
         }
 
-        ~CurrentShader()
-        {
-            jassert (activeShader == nullptr);
-        }
-
         void setShader (const Rectangle<int>& bounds, ShaderQuadQueue& quadQueue, ShaderPrograms::ShaderBase& shader)
         {
             if (activeShader != &shader)
             {
-                clearShader (quadQueue);
-
+                quadQueue.flush();
                 activeShader = &shader;
                 shader.program.use();
                 shader.bindAttributes (context);
@@ -1412,7 +1410,7 @@ public:
                 AffineTransform t (transform.getTransformWith (AffineTransform::scale (fontHeight * font.getHorizontalScale(), fontHeight)
                                                                                .followedBy (trans)));
 
-                const ScopedPointer<EdgeTable> et (font.getTypeface()->getEdgeTableForGlyph (glyphNumber, t, fontHeight));
+                const ScopedPointer<EdgeTable> et (font.getTypeface()->getEdgeTableForGlyph (glyphNumber, t));
 
                 if (et != nullptr)
                     fillShape (new EdgeTableRegionType (*et), false);

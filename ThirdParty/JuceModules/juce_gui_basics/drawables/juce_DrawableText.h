@@ -38,7 +38,7 @@ public:
     //==============================================================================
     /** Creates a DrawableText object. */
     DrawableText();
-    DrawableText (const DrawableText&);
+    DrawableText (const DrawableText& other);
 
     /** Destructor. */
     ~DrawableText();

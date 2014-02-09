@@ -1053,7 +1053,7 @@ public:
             close (pipeHandle);
     }
 
-    bool isRunning() const noexcept
+    bool isRunning() const
     {
         if (childPID != 0)
         {
@@ -1065,7 +1065,7 @@ public:
         return false;
     }
 
-    int read (void* const dest, const int numBytes) noexcept
+    int read (void* const dest, const int numBytes)
     {
         jassert (dest != nullptr);
 
@@ -1082,23 +1082,9 @@ public:
         return 0;
     }
 
-    bool killProcess() const noexcept
+    bool killProcess() const
     {
         return ::kill (childPID, SIGKILL) == 0;
-    }
-
-    uint32 getExitCode() const noexcept
-    {
-        if (childPID != 0)
-        {
-            int childState = 0;
-            const int pid = waitpid (childPID, &childState, WNOHANG);
-
-            if (pid >= 0 && WIFEXITED (childState))
-                return WEXITSTATUS (childState);
-        }
-
-        return 0;
     }
 
     int childPID;
@@ -1126,6 +1112,21 @@ bool ChildProcess::start (const StringArray& args, int streamFlags)
         activeProcess = nullptr;
 
     return activeProcess != nullptr;
+}
+
+bool ChildProcess::isRunning() const
+{
+    return activeProcess != nullptr && activeProcess->isRunning();
+}
+
+int ChildProcess::readProcessOutput (void* dest, int numBytes)
+{
+    return activeProcess != nullptr ? activeProcess->read (dest, numBytes) : 0;
+}
+
+bool ChildProcess::kill()
+{
+    return activeProcess == nullptr || activeProcess->killProcess();
 }
 
 //==============================================================================

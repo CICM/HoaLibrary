@@ -63,9 +63,7 @@ public:
         if (isActive)
         {
             isActive = false;
-
-            if (ModalComponentManager* mcm = ModalComponentManager::getInstanceWithoutCreating())
-                mcm->triggerAsyncUpdate();
+            ModalComponentManager::getInstance()->triggerAsyncUpdate();
         }
     }
 
@@ -85,7 +83,6 @@ ModalComponentManager::ModalComponentManager()
 
 ModalComponentManager::~ModalComponentManager()
 {
-    stack.clear();
     clearSingletonInstance();
 }
 
@@ -262,7 +259,7 @@ int ModalComponentManager::runEventLoopForCurrentComponent()
 
     if (Component* currentlyModal = getModalComponent (0))
     {
-        FocusRestorer focusRestorer;
+        WeakReference<Component> prevFocused (Component::getCurrentlyFocusedComponent());
 
         bool finished = false;
         attachCallback (currentlyModal, new ReturnValueRetriever (returnValue, finished));
@@ -276,6 +273,9 @@ int ModalComponentManager::runEventLoopForCurrentComponent()
             }
         }
         JUCE_CATCH_EXCEPTION
+
+        if (prevFocused != nullptr && ! prevFocused->isCurrentlyBlockedByAnotherModalComponent())
+            prevFocused->grabKeyboardFocus();
     }
 
     return returnValue;
