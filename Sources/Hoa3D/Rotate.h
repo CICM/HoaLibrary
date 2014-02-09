@@ -19,9 +19,13 @@ namespace Hoa3D
     {
     private:
 		
-		double		m_roll, m_pitch, m_yaw;
-        double      m_cosx;
-        double      m_sinx;
+		double		m_roll;
+        double      m_cos_roll;
+        double      m_sin_roll;
+        double      m_pitch;
+        double      m_yaw;
+        double      m_cos_yaw;
+        double      m_sin_yaw;
         /*
 		double*			m_cosLookUp;
 		double*			m_sinLookUp;

@@ -28,57 +28,23 @@ namespace Hoa3D
             double phi;
             int band     = getHarmonicBand(i);
             int argument = getHarmonicArgument(i);
-            if(argument == 0)
+            
+            for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
             {
-                for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
-                {
-                    m_azimuth_matrix[j][i] = 1. / (double)Hoa3D::DoubleFactorial(2 * band - 1);
-                    
-                    theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
-                    theta = Tools::radian_wrap(theta);
-                    if(theta >= CICM_PI)
-                        theta = CICM_2PI - theta;
-                    
-                    m_elevation_matrix[j][i] = LegendrePolynomial(band, 0, cos(theta));
-                }
-            }
-            else if(argument > 0 )
-            {
-                for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
-                {
-                    phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
-                    phi = Tools::radian_wrap(phi);
-                    m_azimuth_matrix[j][i] = cos((double)argument * phi) / (double)Hoa3D::DoubleFactorial(2 * band - 1);
-                    
-                    theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
-                    theta = Tools::radian_wrap(theta);
-                    if(theta >= CICM_PI)
-                    {
-                        theta = CICM_2PI - theta;
-                        m_elevation_matrix[j][i] = LegendrePolynomial(band, argument, cos(theta));
-                    }
-                    else
-                        m_elevation_matrix[j][i] = LegendrePolynomial(band, argument, cos(theta));
-                }
-            }
-            else
-            {
-                for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
-                {
-                    phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
-                    phi = Tools::radian_wrap(phi);
-                    m_azimuth_matrix[j][i] = sin((double)-argument * phi) / (double)Hoa3D::DoubleFactorial(2 * band - 1);
-                    
-                    theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
-                    theta = Tools::radian_wrap(theta);
-                    if(theta >= CICM_PI)
-                    {
-                        theta = CICM_2PI - theta;
-                        m_elevation_matrix[j][i] = LegendrePolynomial(band, -argument, cos(theta));
-                    }
-                    else
-                        m_elevation_matrix[j][i] = LegendrePolynomial(band, -argument, cos(theta));
-                }
+                phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
+                phi = Tools::radian_wrap(phi);
+                
+                if(argument >= 0)
+                    m_azimuth_matrix[j][i] = cos((double)argument * phi);
+                else
+                    m_azimuth_matrix[j][i] = sin((double)-argument * phi);
+                
+                theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
+                theta = Tools::radian_wrap(theta);
+                if(theta >= CICM_PI)
+                    theta = CICM_2PI - theta;
+                
+                m_elevation_matrix[j][i] = Legendre(band, argument, cos(theta));
             }
         }
     }

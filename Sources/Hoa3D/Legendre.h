@@ -12,8 +12,7 @@ namespace Hoa3D
 {
 	int Factorial(int x);
 	int DoubleFactorial(int x);
-    template <int l, int m> float Legendre(float x);
-    float LegendrePolynomial(int l, int m, float x);    
+    double Legendre(int band, int argument, double angle);
 }
 
 
