@@ -10,29 +10,12 @@ namespace Hoa3D
 {
 	int Factorial( int v )
 	{
-		if (v == 0) {
+        int result = v;
+		if(v == 0)
 			return 1;
-		}
         
-		int result = v;
-		while (--v > 0) {
+		while(--v > 0)
 			result *= v;
-		}
-		return result;
-	}
-	
-	int DoubleFactorial(int x)
-	{
-		if(x == 0 || x == -1)
-        {
-			return 1;
-		}
-        
-		int result = x;
-		while((x -= 2) > 0)
-        {
-			result *= x;
-		}
         
 		return result;
 	}

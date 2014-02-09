@@ -11,7 +11,6 @@
 namespace Hoa3D
 {
 	int Factorial(int x);
-	int DoubleFactorial(int x);
     double Legendre(int band, int argument, double angle);
 }
 
