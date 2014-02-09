@@ -80,6 +80,19 @@ public:
          @param     index	The global index of an harmonic.
          */
         std::string getHarmonicsName(unsigned int index);
+        
+        int Factorial(int v)
+        {
+            if (v == 0) {
+                return 1;
+            }
+            
+            int result = v;
+            while (--v > 0) {
+                result *= v;
+            }
+            return result;
+        }
     };
 }
 
