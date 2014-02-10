@@ -1,0 +1,159 @@
+\hypertarget{class_hoa2_d_1_1_decoder}{\section{Hoa2\-D\-:\-:Decoder Class Reference}
+\label{class_hoa2_d_1_1_decoder}\index{Hoa2\-D\-::\-Decoder@{Hoa2\-D\-::\-Decoder}}
+}
+Inheritance diagram for Hoa2\-D\-:\-:Decoder\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_hoa2_d_1_1_decoder}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_decoder_a5d7f3ea76e2f50dbfff0e58b48b7cb1b}{Decoder} (unsigned int order, unsigned int number\-Of\-Loudspeakers)
+\item 
+\hyperlink{class_hoa2_d_1_1_decoder_a2ad3a9bafe6f452bcb378eabd53e0876}{$\sim$\-Decoder} ()
+\item 
+void \hyperlink{class_hoa2_d_1_1_decoder_a8a4711cff0311450892d268eb60c3a9e}{set\-Loudspeaker\-Position} (unsigned int index, double azimuth)
+\item 
+double \hyperlink{class_hoa2_d_1_1_decoder_aa07fa3b88a911fb2308fd593397f4bb9}{get\-Loudspeaker\-Azimuth} (unsigned int index) const 
+\item 
+void \hyperlink{class_hoa2_d_1_1_decoder_a68f00b02c0f8697ecd5364f772bcc9c0}{process} (const float $\ast$input, float $\ast$output)
+\item 
+void \hyperlink{class_hoa2_d_1_1_decoder_ab3ed928a777ea379b4fa02f65be7e996}{process} (const double $\ast$input, double $\ast$output)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file Decoder.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_decoder_a5d7f3ea76e2f50dbfff0e58b48b7cb1b}{\index{Hoa2\-D\-::\-Decoder@{Hoa2\-D\-::\-Decoder}!Decoder@{Decoder}}
+\index{Decoder@{Decoder}!Hoa2D::Decoder@{Hoa2\-D\-::\-Decoder}}
+\subsubsection[{Decoder}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Decoder\-::\-Decoder (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{order, }
+\item[{unsigned int}]{number\-Of\-Loudspeakers}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_a5d7f3ea76e2f50dbfff0e58b48b7cb1b}
+\begin{DoxyVerb}The decoder constructor.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em order} & The order, must be at least 1. \\
+\hline
+{\em number\-Of\-Loudspeakers} & The number of loudspeakers, must be at least (order + 1)$^\wedge$2. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_a2ad3a9bafe6f452bcb378eabd53e0876}{\index{Hoa2\-D\-::\-Decoder@{Hoa2\-D\-::\-Decoder}!$\sim$\-Decoder@{$\sim$\-Decoder}}
+\index{$\sim$\-Decoder@{$\sim$\-Decoder}!Hoa2D::Decoder@{Hoa2\-D\-::\-Decoder}}
+\subsubsection[{$\sim$\-Decoder}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Decoder\-::$\sim$\-Decoder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_a2ad3a9bafe6f452bcb378eabd53e0876}
+The decoder destructor. 
+
+Definition at line 58 of file Decoder.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_decoder_aa07fa3b88a911fb2308fd593397f4bb9}{\index{Hoa2\-D\-::\-Decoder@{Hoa2\-D\-::\-Decoder}!get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}}
+\index{get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}!Hoa2D::Decoder@{Hoa2\-D\-::\-Decoder}}
+\subsubsection[{get\-Loudspeaker\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Decoder\-::get\-Loudspeaker\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa2_d_1_1_decoder_aa07fa3b88a911fb2308fd593397f4bb9}
+\begin{DoxyVerb}Get loudspeaker azimuth value.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the azimuth value in radians. 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_a68f00b02c0f8697ecd5364f772bcc9c0}{\index{Hoa2\-D\-::\-Decoder@{Hoa2\-D\-::\-Decoder}!process@{process}}
+\index{process@{process}!Hoa2D::Decoder@{Hoa2\-D\-::\-Decoder}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-::process (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{input, }
+\item[{float $\ast$}]{output}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_a68f00b02c0f8697ecd5364f772bcc9c0}
+\begin{DoxyVerb}This method performs the decoding with single precision.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em input} & The input sample. \\
+\hline
+{\em outputs} & The output array that contains samples destinated to loudspeakers. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_ab3ed928a777ea379b4fa02f65be7e996}{\index{Hoa2\-D\-::\-Decoder@{Hoa2\-D\-::\-Decoder}!process@{process}}
+\index{process@{process}!Hoa2D::Decoder@{Hoa2\-D\-::\-Decoder}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-::process (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{input, }
+\item[{double $\ast$}]{output}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_ab3ed928a777ea379b4fa02f65be7e996}
+\begin{DoxyVerb}This method performs the decoding with double precision.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em input} & The input sample. \\
+\hline
+{\em outputs} & The output array that contains samples destinated to loudspeakers. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 53 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_a8a4711cff0311450892d268eb60c3a9e}{\index{Hoa2\-D\-::\-Decoder@{Hoa2\-D\-::\-Decoder}!set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}}
+\index{set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}!Hoa2D::Decoder@{Hoa2\-D\-::\-Decoder}}
+\subsubsection[{set\-Loudspeaker\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-::set\-Loudspeaker\-Position (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index, }
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_decoder_a8a4711cff0311450892d268eb60c3a9e}
+\begin{DoxyVerb}Set loudspeaker position.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+{\em azimuth} & An azimuth value. In radian, between 0 and 2π. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file Decoder.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-cpp\end{DoxyCompactItemize}

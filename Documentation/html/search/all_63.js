@@ -9,6 +9,5 @@ var searchData=
   ['cicmringmodulation',['CicmRingModulation',['../class_cicm_ring_modulation.html',1,'']]],
   ['color',['color',['../structcolor.html',1,'']]],
   ['coordinatescartesian',['coordinatesCartesian',['../structcoordinates_cartesian.html',1,'']]],
-  ['coordinatespolar',['coordinatesPolar',['../structcoordinates_polar.html',1,'']]],
-  ['createsatellitecoordinateselliptic',['createSatelliteCoordinatesElliptic',['../class_planetary_system.html#a34cd29ee0fe9d66c6e76a345a8d3f29b',1,'PlanetarySystem']]]
+  ['coordinatespolar',['coordinatesPolar',['../structcoordinates_polar.html',1,'']]]
 ];
