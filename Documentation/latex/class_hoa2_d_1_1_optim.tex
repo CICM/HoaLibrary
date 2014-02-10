@@ -1,0 +1,199 @@
+\hypertarget{class_hoa2_d_1_1_optim}{\section{Hoa2\-D\-:\-:Optim Class Reference}
+\label{class_hoa2_d_1_1_optim}\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}}
+}
+
+
+The ambisonic optimization.  
+
+
+
+
+{\ttfamily \#include $<$Optim.\-h$>$}
+
+Inheritance diagram for Hoa2\-D\-:\-:Optim\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_hoa2_d_1_1_optim}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3}{Mode} \{ \hyperlink{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3af5bbb98a42968855f2f43d9a708ae8d2}{Basic} = 0, 
+\hyperlink{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3a6b8b2446e2cffae18f5f4625b68e0f21}{Max\-Re} = 1, 
+\hyperlink{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3a7cbed6ffe52c3bd78de0fafc03a6bbb7}{in\-Phase} = 2
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_optim_a5e11da74b3e87ad15db6538d31eb3628}{Optim} (unsigned int order, \hyperlink{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3}{Mode} mode)
+\begin{DoxyCompactList}\small\item\em The optimization constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_optim_a71b6d88873b054944db6efd2713bf8d3}{$\sim$\-Optim} ()
+\begin{DoxyCompactList}\small\item\em The optimization destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_optim_a2ea2227817c133aeaf2732880d8214ce}{set\-Mode} (\hyperlink{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3}{Mode} mode)
+\begin{DoxyCompactList}\small\item\em This method set the widening value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_optim_afca15242cbca4fefe08c6f17d2b42241}{process} (const float $\ast$inputs, float $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method performs the widening with single precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_optim_ac0c905a79204c921568952c787376120}{process} (const double $\ast$inputs, double $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method performs the widening with double precision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The ambisonic optimization. 
+
+The optimization should be used to widen the sound propagation. 
+
+Definition at line 17 of file Optim.\-h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3}{\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!Mode@{Mode}}
+\index{Mode@{Mode}!Hoa2D::Optim@{Hoa2\-D\-::\-Optim}}
+\subsubsection[{Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Hoa2\-D\-::\-Optim\-::\-Mode}}}\label{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Basic@{Basic}!Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}}\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!Basic@{Basic}}\item[{\em 
+\hypertarget{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3af5bbb98a42968855f2f43d9a708ae8d2}{Basic}\label{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3af5bbb98a42968855f2f43d9a708ae8d2}
+}]Basic Optimization \index{Max\-Re@{Max\-Re}!Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}}\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!Max\-Re@{Max\-Re}}\item[{\em 
+\hypertarget{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3a6b8b2446e2cffae18f5f4625b68e0f21}{Max\-Re}\label{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3a6b8b2446e2cffae18f5f4625b68e0f21}
+}]Max Re Optimization \index{in\-Phase@{in\-Phase}!Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}}\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!in\-Phase@{in\-Phase}}\item[{\em 
+\hypertarget{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3a7cbed6ffe52c3bd78de0fafc03a6bbb7}{in\-Phase}\label{class_hoa2_d_1_1_optim_ae40f22368cb55699cf19729e37c0aff3a7cbed6ffe52c3bd78de0fafc03a6bbb7}
+}]In Phase Optimization \end{description}
+\end{Desc}
+
+
+Definition at line 20 of file Optim.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_optim_a5e11da74b3e87ad15db6538d31eb3628}{\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!Optim@{Optim}}
+\index{Optim@{Optim}!Hoa2D::Optim@{Hoa2\-D\-::\-Optim}}
+\subsubsection[{Optim}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Optim\-::\-Optim (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{order, }
+\item[{{\bf Mode}}]{mode}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_optim_a5e11da74b3e87ad15db6538d31eb3628}
+
+
+The optimization constructor. 
+
+\begin{DoxyVerb}The optimization constructor allocates and initialize the member values to computes spherical harmonics weighted coefficients depending of a decomposition order. The order must be at least 1.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em order} & The order. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Optim.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_optim_a71b6d88873b054944db6efd2713bf8d3}{\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!$\sim$\-Optim@{$\sim$\-Optim}}
+\index{$\sim$\-Optim@{$\sim$\-Optim}!Hoa2D::Optim@{Hoa2\-D\-::\-Optim}}
+\subsubsection[{$\sim$\-Optim}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Optim\-::$\sim$\-Optim (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_optim_a71b6d88873b054944db6efd2713bf8d3}
+
+
+The optimization destructor. 
+
+The optimization destructor free the memory. 
+
+Definition at line 60 of file Optim.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_optim_afca15242cbca4fefe08c6f17d2b42241}{\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!process@{process}}
+\index{process@{process}!Hoa2D::Optim@{Hoa2\-D\-::\-Optim}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Optim\-::process (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{inputs, }
+\item[{float $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_optim_afca15242cbca4fefe08c6f17d2b42241}
+
+
+This method performs the widening with single precision. 
+
+\begin{DoxyVerb}You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input array. \\
+\hline
+{\em outputs} & The output array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file Optim.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_optim_ac0c905a79204c921568952c787376120}{\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!process@{process}}
+\index{process@{process}!Hoa2D::Optim@{Hoa2\-D\-::\-Optim}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Optim\-::process (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{inputs, }
+\item[{double $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_optim_ac0c905a79204c921568952c787376120}
+
+
+This method performs the widening with double precision. 
+
+\begin{DoxyVerb}You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input array. \\
+\hline
+{\em outputs} & The output array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 54 of file Optim.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_optim_a2ea2227817c133aeaf2732880d8214ce}{\index{Hoa2\-D\-::\-Optim@{Hoa2\-D\-::\-Optim}!set\-Mode@{set\-Mode}}
+\index{set\-Mode@{set\-Mode}!Hoa2D::Optim@{Hoa2\-D\-::\-Optim}}
+\subsubsection[{set\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Optim\-::set\-Mode (
+\begin{DoxyParamCaption}
+\item[{{\bf Mode}}]{mode}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_optim_a2ea2227817c133aeaf2732880d8214ce}
+
+
+This method set the widening value. 
+
+\begin{DoxyVerb}The widening value is clipped between 0 and 1. At 1, the sound field has no changes. At 0, all the sound field is omni directionnal.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The widening value. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 17 of file Optim.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Optim.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Optim.\-cpp\end{DoxyCompactItemize}

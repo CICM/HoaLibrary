@@ -1,0 +1,352 @@
+\hypertarget{class_hoa3_d_1_1_planewaves}{\section{Hoa3\-D\-:\-:Planewaves Class Reference}
+\label{class_hoa3_d_1_1_planewaves}\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}}
+}
+
+
+The \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves} class.  
+
+
+
+
+{\ttfamily \#include $<$Planewaves.\-h$>$}
+
+Inheritance diagram for Hoa3\-D\-:\-:Planewaves\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_hoa3_d_1_1_planewaves}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa3_d_1_1_planewaves_a9168fb9b670cacf19c4eedff39e49f84}{Planewaves} (unsigned int number\-Of\-Loudspeakers=1, bool auto\-Name=true)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa3_d_1_1_planewaves_a7d13cc39051ae75f2af522651a1305bf}{$\sim$\-Planewaves} ()
+\item 
+unsigned int \hyperlink{class_hoa3_d_1_1_planewaves_a7ecc6c4b38446a1cc6556a2790358453}{get\-Number\-Of\-Inputs} () const 
+\item 
+unsigned int \hyperlink{class_hoa3_d_1_1_planewaves_ad3585c6e0b727d350e5a4ff56c8d16c3}{get\-Number\-Of\-Outputs} () const 
+\item 
+unsigned int \hyperlink{class_hoa3_d_1_1_planewaves_a467cdb1f079bb299225a9fac56a500e4}{get\-Number\-Of\-Loudspeakers} () const 
+\item 
+void \hyperlink{class_hoa3_d_1_1_planewaves_a48700551e0f2a713a2503ea2c7a359b5}{set\-Loudspeaker\-Name} (unsigned int index, std\-::string name)
+\item 
+\hyperlink{class_hoa3_d_1_1_speaker}{Speaker} \& \hyperlink{class_hoa3_d_1_1_planewaves_acb9782d1e02534d0edcfd7f79ede6af2}{get\-Speaker} (unsigned int index) const 
+\item 
+std\-::string \hyperlink{class_hoa3_d_1_1_planewaves_ad23b6fd97d6d4d174e4f8ed713755e7e}{get\-Loudspeaker\-Name} (unsigned int index)
+\item 
+double \hyperlink{class_hoa3_d_1_1_planewaves_a729fa7173f28496f576e98affb5efb28}{get\-Loudspeaker\-Abscissa} (unsigned int index) const 
+\item 
+double \hyperlink{class_hoa3_d_1_1_planewaves_aa9cb3ab762f8fa753914c954eabb63b4}{get\-Loudspeaker\-Ordinate} (unsigned int index) const 
+\item 
+double \hyperlink{class_hoa3_d_1_1_planewaves_a811166a0c5a217c201a73dfd10fdfe4a}{get\-Loudspeaker\-Azimuth} (unsigned int index) const 
+\item 
+double \hyperlink{class_hoa3_d_1_1_planewaves_af4b7a2d06c7dab514c72ac64adab3a0f}{get\-Loudspeaker\-Elevation} (unsigned int index) const 
+\item 
+double \hyperlink{class_hoa3_d_1_1_planewaves_a87cd3fb6eda17c181aa9261f40276a08}{get\-Loudspeaker\-Distance} (unsigned int index) const 
+\item 
+void \hyperlink{class_hoa3_d_1_1_planewaves_a0e98bb0921bf5ba3130002f11548358f}{set\-Number\-Of\-Loudspeakers} (unsigned int number\-Of\-Loudspeakers)
+\item 
+void \hyperlink{class_hoa3_d_1_1_planewaves_afb91431ec200af76ac61ef17add33ede}{set\-Loudspeaker\-Position} (unsigned int index, double azimuth, double elevation)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves} class. 
+
+The \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves} class is a base class destinated to be inherited by classes who dont care about spherical harmonics but a number of loudpeakers (real or virtual). It store basics information like the umber of channels, number of inputs, outputs... \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_ambisonic}{Ambisonic} 
+\end{DoxySeeAlso}
+
+
+Definition at line 20 of file Planewaves.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa3_d_1_1_planewaves_a9168fb9b670cacf19c4eedff39e49f84}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!Planewaves@{Planewaves}}
+\index{Planewaves@{Planewaves}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{Planewaves}]{\setlength{\rightskip}{0pt plus 5cm}Planewaves\-::\-Planewaves (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number\-Of\-Loudspeakers = {\ttfamily 1}, }
+\item[{bool}]{auto\-Name = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_planewaves_a9168fb9b670cacf19c4eedff39e49f84}
+
+
+The \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves} constructor. 
+
+The \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves} constructor allocates and initializes the general member values depending on a number of loudspeaker. 
+\begin{DoxyParams}{Parameters}
+{\em number\-Of\-Loudspeakers} & The number of loudspeakers (more than one could be a good start for an ambisonic setup !). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_a7d13cc39051ae75f2af522651a1305bf}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!$\sim$\-Planewaves@{$\sim$\-Planewaves}}
+\index{$\sim$\-Planewaves@{$\sim$\-Planewaves}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{$\sim$\-Planewaves}]{\setlength{\rightskip}{0pt plus 5cm}Planewaves\-::$\sim$\-Planewaves (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_planewaves_a7d13cc39051ae75f2af522651a1305bf}
+The \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves} destructor. 
+
+Definition at line 83 of file Planewaves.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa3_d_1_1_planewaves_a729fa7173f28496f576e98affb5efb28}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Loudspeaker\-Abscissa@{get\-Loudspeaker\-Abscissa}}
+\index{get\-Loudspeaker\-Abscissa@{get\-Loudspeaker\-Abscissa}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Loudspeaker\-Abscissa}]{\setlength{\rightskip}{0pt plus 5cm}double Planewaves\-::get\-Loudspeaker\-Abscissa (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa3_d_1_1_planewaves_a729fa7173f28496f576e98affb5efb28}
+Get the loudspeaker abscissa. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The azimuth value in radians (between 0 and 2π). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_planewaves_aa9cb3ab762f8fa753914c954eabb63b4}{get\-Loudspeaker\-Ordinate} 
+\end{DoxySeeAlso}
+
+
+Definition at line 46 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_a811166a0c5a217c201a73dfd10fdfe4a}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}}
+\index{get\-Loudspeaker\-Azimuth@{get\-Loudspeaker\-Azimuth}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Loudspeaker\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Planewaves\-::get\-Loudspeaker\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa3_d_1_1_planewaves_a811166a0c5a217c201a73dfd10fdfe4a}
+Get the loudspeaker azimuth. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The azimuth value in radians (between 0 and 2π). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_planewaves_af4b7a2d06c7dab514c72ac64adab3a0f}{get\-Loudspeaker\-Elevation}, \hyperlink{class_hoa3_d_1_1_planewaves_a87cd3fb6eda17c181aa9261f40276a08}{get\-Loudspeaker\-Distance} 
+\end{DoxySeeAlso}
+
+
+Definition at line 58 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_a87cd3fb6eda17c181aa9261f40276a08}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Loudspeaker\-Distance@{get\-Loudspeaker\-Distance}}
+\index{get\-Loudspeaker\-Distance@{get\-Loudspeaker\-Distance}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Loudspeaker\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Planewaves\-::get\-Loudspeaker\-Distance (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa3_d_1_1_planewaves_a87cd3fb6eda17c181aa9261f40276a08}
+Get the loudspeaker distance. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance value (default 1.\-0f). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_planewaves_a811166a0c5a217c201a73dfd10fdfe4a}{get\-Loudspeaker\-Azimuth}, \hyperlink{class_hoa3_d_1_1_planewaves_af4b7a2d06c7dab514c72ac64adab3a0f}{get\-Loudspeaker\-Elevation} 
+\end{DoxySeeAlso}
+
+
+Definition at line 70 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_af4b7a2d06c7dab514c72ac64adab3a0f}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Loudspeaker\-Elevation@{get\-Loudspeaker\-Elevation}}
+\index{get\-Loudspeaker\-Elevation@{get\-Loudspeaker\-Elevation}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Loudspeaker\-Elevation}]{\setlength{\rightskip}{0pt plus 5cm}double Planewaves\-::get\-Loudspeaker\-Elevation (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa3_d_1_1_planewaves_af4b7a2d06c7dab514c72ac64adab3a0f}
+Get the loudspeaker elevation. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The elevation value in radians (between 0 and 2π). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_planewaves_a811166a0c5a217c201a73dfd10fdfe4a}{get\-Loudspeaker\-Azimuth}, \hyperlink{class_hoa3_d_1_1_planewaves_a87cd3fb6eda17c181aa9261f40276a08}{get\-Loudspeaker\-Distance} 
+\end{DoxySeeAlso}
+
+
+Definition at line 64 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_ad23b6fd97d6d4d174e4f8ed713755e7e}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Loudspeaker\-Name@{get\-Loudspeaker\-Name}}
+\index{get\-Loudspeaker\-Name@{get\-Loudspeaker\-Name}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Loudspeaker\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Planewaves\-::get\-Loudspeaker\-Name (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_planewaves_ad23b6fd97d6d4d174e4f8ed713755e7e}
+Retrieve the name of a loudspeaker. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The global index of a loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The name of the loudspeaker 
+\end{DoxyReturn}
+
+
+Definition at line 76 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_aa9cb3ab762f8fa753914c954eabb63b4}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Loudspeaker\-Ordinate@{get\-Loudspeaker\-Ordinate}}
+\index{get\-Loudspeaker\-Ordinate@{get\-Loudspeaker\-Ordinate}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Loudspeaker\-Ordinate}]{\setlength{\rightskip}{0pt plus 5cm}double Planewaves\-::get\-Loudspeaker\-Ordinate (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_hoa3_d_1_1_planewaves_aa9cb3ab762f8fa753914c954eabb63b4}
+Get the loudspeaker elevation. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The elevation value in radians (between 0 and 2π). 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_a7ecc6c4b38446a1cc6556a2790358453}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Number\-Of\-Inputs@{get\-Number\-Of\-Inputs}}
+\index{get\-Number\-Of\-Inputs@{get\-Number\-Of\-Inputs}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Number\-Of\-Inputs}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa3\-D\-::\-Planewaves\-::get\-Number\-Of\-Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_planewaves_a7ecc6c4b38446a1cc6556a2790358453}
+Retrieve the number of inputs. \begin{DoxyReturn}{Returns}
+The number of inputs. 
+\end{DoxyReturn}
+
+
+Definition at line 46 of file Planewaves.\-h.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_a467cdb1f079bb299225a9fac56a500e4}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Number\-Of\-Loudspeakers@{get\-Number\-Of\-Loudspeakers}}
+\index{get\-Number\-Of\-Loudspeakers@{get\-Number\-Of\-Loudspeakers}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Number\-Of\-Loudspeakers}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa3\-D\-::\-Planewaves\-::get\-Number\-Of\-Loudspeakers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_planewaves_a467cdb1f079bb299225a9fac56a500e4}
+Retrieve the number of loudspeakers. \begin{DoxyReturn}{Returns}
+The number of loudspeakers. 
+\end{DoxyReturn}
+
+
+Definition at line 56 of file Planewaves.\-h.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_ad3585c6e0b727d350e5a4ff56c8d16c3}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Number\-Of\-Outputs@{get\-Number\-Of\-Outputs}}
+\index{get\-Number\-Of\-Outputs@{get\-Number\-Of\-Outputs}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Number\-Of\-Outputs}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa3\-D\-::\-Planewaves\-::get\-Number\-Of\-Outputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_planewaves_ad3585c6e0b727d350e5a4ff56c8d16c3}
+Retrieve the number of outputs. \begin{DoxyReturn}{Returns}
+The number of outputs. 
+\end{DoxyReturn}
+
+
+Definition at line 51 of file Planewaves.\-h.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_acb9782d1e02534d0edcfd7f79ede6af2}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!get\-Speaker@{get\-Speaker}}
+\index{get\-Speaker@{get\-Speaker}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{get\-Speaker}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Speaker}\& Hoa3\-D\-::\-Planewaves\-::get\-Speaker (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_planewaves_acb9782d1e02534d0edcfd7f79ede6af2}
+Get a loudspeaker object. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of a loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \hyperlink{class_hoa3_d_1_1_speaker}{Speaker} object ref. 
+\end{DoxyReturn}
+
+
+Definition at line 68 of file Planewaves.\-h.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_a48700551e0f2a713a2503ea2c7a359b5}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!set\-Loudspeaker\-Name@{set\-Loudspeaker\-Name}}
+\index{set\-Loudspeaker\-Name@{set\-Loudspeaker\-Name}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{set\-Loudspeaker\-Name}]{\setlength{\rightskip}{0pt plus 5cm}void Planewaves\-::set\-Loudspeaker\-Name (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index, }
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_planewaves_a48700551e0f2a713a2503ea2c7a359b5}
+Set the name of a loudspeaker. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+name The name of the loudspeaker. 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_afb91431ec200af76ac61ef17add33ede}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}}
+\index{set\-Loudspeaker\-Position@{set\-Loudspeaker\-Position}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{set\-Loudspeaker\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Planewaves\-::set\-Loudspeaker\-Position (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index, }
+\item[{double}]{azimuth, }
+\item[{double}]{elevation}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_planewaves_afb91431ec200af76ac61ef17add33ede}
+Set the position of a loudspeaker. 
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the loudspeaker. \\
+\hline
+{\em azimuth} & The azimuth value in radians (between 0 and 2π). \\
+\hline
+{\em elevation} & The elevation value in radians (between 0 and 2π). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 33 of file Planewaves.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_planewaves_a0e98bb0921bf5ba3130002f11548358f}{\index{Hoa3\-D\-::\-Planewaves@{Hoa3\-D\-::\-Planewaves}!set\-Number\-Of\-Loudspeakers@{set\-Number\-Of\-Loudspeakers}}
+\index{set\-Number\-Of\-Loudspeakers@{set\-Number\-Of\-Loudspeakers}!Hoa3D::Planewaves@{Hoa3\-D\-::\-Planewaves}}
+\subsubsection[{set\-Number\-Of\-Loudspeakers}]{\setlength{\rightskip}{0pt plus 5cm}void Planewaves\-::set\-Number\-Of\-Loudspeakers (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number\-Of\-Loudspeakers}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_planewaves_a0e98bb0921bf5ba3130002f11548358f}
+Set the number of loudspeaker. 
+\begin{DoxyParams}{Parameters}
+{\em number\-Of\-Loudspeakers} & The total number of loudspeakers. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file Planewaves.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Planewaves.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Planewaves.\-cpp\end{DoxyCompactItemize}
