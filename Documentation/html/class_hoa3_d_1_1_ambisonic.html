@@ -21,7 +21,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="hoa.icon_02_transp.jpg"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">HoaLibrary
    &#160;<span id="projectnumber">2.0</span>
@@ -107,15 +106,12 @@ Inheritance diagram for Hoa3D::Ambisonic:</div>
  <div class="center">
   <img src="class_hoa3_d_1_1_ambisonic.png" usemap="#Hoa3D::Ambisonic_map" alt=""/>
   <map id="Hoa3D::Ambisonic_map" name="Hoa3D::Ambisonic_map">
-<area href="class_hoa3_d_1_1_decoder.html" title="The ambisonic decoder. " alt="Hoa3D::Decoder" shape="rect" coords="125,56,240,80"/>
-<area href="class_hoa3_d_1_1_decoder.html" title="The ambisonic decoder. " alt="Hoa3D::Decoder" shape="rect" coords="125,112,240,136"/>
-<area href="class_hoa3_d_1_1_decoder_b.html" title="The ambisonic decoder. " alt="Hoa3D::DecoderB" shape="rect" coords="125,168,240,192"/>
-<area href="class_hoa3_d_1_1_encoder.html" title="The ambisonic encoder. " alt="Hoa3D::Encoder" shape="rect" coords="125,224,240,248"/>
-<area href="class_hoa3_d_1_1_encoder.html" title="The ambisonic encoder. " alt="Hoa3D::Encoder" shape="rect" coords="125,280,240,304"/>
-<area href="class_hoa3_d_1_1_optim.html" title="The ambisonic optimization. " alt="Hoa3D::Optim" shape="rect" coords="125,336,240,360"/>
-<area href="class_hoa3_d_1_1_rotate.html" title="The ambisonic Rotate. " alt="Hoa3D::Rotate" shape="rect" coords="125,392,240,416"/>
-<area href="class_hoa3_d_1_1_wider.html" title="The ambisonic wider. " alt="Hoa3D::Wider" shape="rect" coords="125,448,240,472"/>
-<area href="class_hoa3_d_1_1_wider.html" title="The ambisonic wider. " alt="Hoa3D::Wider" shape="rect" coords="125,504,240,528"/>
+<area href="class_hoa3_d_1_1_decoder.html" title="The ambisonic decoder. " alt="Hoa3D::Decoder" shape="rect" coords="0,56,115,80"/>
+<area href="class_hoa3_d_1_1_encoder.html" title="The ambisonic encoder. " alt="Hoa3D::Encoder" shape="rect" coords="125,56,240,80"/>
+<area href="class_hoa3_d_1_1_map.html" title="The ambisonic map. " alt="Hoa3D::Map" shape="rect" coords="250,56,365,80"/>
+<area href="class_hoa3_d_1_1_optim.html" title="The ambisonic optimization. " alt="Hoa3D::Optim" shape="rect" coords="375,56,490,80"/>
+<area href="class_hoa3_d_1_1_rotate.html" title="The ambisonic Rotate. " alt="Hoa3D::Rotate" shape="rect" coords="500,56,615,80"/>
+<area href="class_hoa3_d_1_1_wider.html" title="The ambisonic wider. " alt="Hoa3D::Wider" shape="rect" coords="625,56,740,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -130,10 +126,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a677405a1c3aa359753bd675d4614e7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9d613f38e6876326201995a5a415410"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#aa9d613f38e6876326201995a5a415410">getNumberOfHarmonics</a> ()</td></tr>
 <tr class="separator:aa9d613f38e6876326201995a5a415410"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af03625afb9f21ef3574eafa8501129b4"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#af03625afb9f21ef3574eafa8501129b4">getNumberOfInputs</a> ()</td></tr>
-<tr class="separator:af03625afb9f21ef3574eafa8501129b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a126ed3be1aa3d155f56ca75ca3d69de5"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a126ed3be1aa3d155f56ca75ca3d69de5">getNumberOfOutputs</a> ()</td></tr>
-<tr class="separator:a126ed3be1aa3d155f56ca75ca3d69de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3acaabfd013671c94e057e23eea1d068"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a3acaabfd013671c94e057e23eea1d068">getHarmonicArgument</a> (unsigned int index)</td></tr>
 <tr class="memdesc:a3acaabfd013671c94e057e23eea1d068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the argument of an harmonic.  <a href="#a3acaabfd013671c94e057e23eea1d068">More...</a><br/></td></tr>
 <tr class="separator:a3acaabfd013671c94e057e23eea1d068"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,28 +135,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1b4578538f4fd0d311102b2f3ec4dac6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a1b4578538f4fd0d311102b2f3ec4dac6">getHarmonicsName</a> (unsigned int index)</td></tr>
 <tr class="memdesc:a1b4578538f4fd0d311102b2f3ec4dac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a good name for an harmonic.  <a href="#a1b4578538f4fd0d311102b2f3ec4dac6">More...</a><br/></td></tr>
 <tr class="separator:a1b4578538f4fd0d311102b2f3ec4dac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34736bb8f9bb34ad4a3844258bbac2fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a34736bb8f9bb34ad4a3844258bbac2fd">Ambisonic</a> (unsigned int order)</td></tr>
-<tr class="memdesc:a34736bb8f9bb34ad4a3844258bbac2fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ambisonic constructor.  <a href="#a34736bb8f9bb34ad4a3844258bbac2fd">More...</a><br/></td></tr>
-<tr class="separator:a34736bb8f9bb34ad4a3844258bbac2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef717915cc52d318b5b40af88c38c722"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#aef717915cc52d318b5b40af88c38c722">~Ambisonic</a> ()</td></tr>
-<tr class="separator:aef717915cc52d318b5b40af88c38c722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe3b53fb4a6e7b63eee582a026987458"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#abe3b53fb4a6e7b63eee582a026987458">getOrder</a> ()</td></tr>
-<tr class="separator:abe3b53fb4a6e7b63eee582a026987458"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0688ea4e2401eda492a813da8b800568"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a0688ea4e2401eda492a813da8b800568">getNumberOfHarmonics</a> ()</td></tr>
-<tr class="separator:a0688ea4e2401eda492a813da8b800568"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe5de38dd1df17edf369732b46b8e1ad"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#abe5de38dd1df17edf369732b46b8e1ad">getNumberOfInputs</a> ()</td></tr>
-<tr class="separator:abe5de38dd1df17edf369732b46b8e1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a13c6e5ac82f4279d78d4d9f2a31560"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a7a13c6e5ac82f4279d78d4d9f2a31560">getNumberOfOutputs</a> ()</td></tr>
-<tr class="separator:a7a13c6e5ac82f4279d78d4d9f2a31560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01a38c7f5f505d7fd5e6ef4af513628a"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a01a38c7f5f505d7fd5e6ef4af513628a">getHarmonicArgument</a> (unsigned int index)</td></tr>
-<tr class="memdesc:a01a38c7f5f505d7fd5e6ef4af513628a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the argument of an harmonic.  <a href="#a01a38c7f5f505d7fd5e6ef4af513628a">More...</a><br/></td></tr>
-<tr class="separator:a01a38c7f5f505d7fd5e6ef4af513628a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5dd2285bbfdfdfe45b11d39379a0974"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#ac5dd2285bbfdfdfe45b11d39379a0974">getHarmonicBand</a> (unsigned int index)</td></tr>
-<tr class="memdesc:ac5dd2285bbfdfdfe45b11d39379a0974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the band of an harmonic.  <a href="#ac5dd2285bbfdfdfe45b11d39379a0974">More...</a><br/></td></tr>
-<tr class="separator:ac5dd2285bbfdfdfe45b11d39379a0974"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33ce838226f9c12ffc49ed5d78a244b1"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a33ce838226f9c12ffc49ed5d78a244b1">getHarmonicsName</a> (unsigned int index)</td></tr>
-<tr class="memdesc:a33ce838226f9c12ffc49ed5d78a244b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a good name for an harmonic.  <a href="#a33ce838226f9c12ffc49ed5d78a244b1">More...</a><br/></td></tr>
-<tr class="separator:a33ce838226f9c12ffc49ed5d78a244b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The ambisonic class. </p>
@@ -213,48 +183,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>The ambisonic destructor. </p>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00071">71</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a34736bb8f9bb34ad4a3844258bbac2fd"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Hoa3D::Ambisonic::Ambisonic </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>order</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The ambisonic constructor. </p>
-<p>The ambisonic constructor allocates and initializes the generale member values depending of a decomposition order. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">order</td><td>The order, must be at least 1. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="aef717915cc52d318b5b40af88c38c722"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Hoa3D::Ambisonic::~Ambisonic </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>The ambisonic destructor. </p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00059">59</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
 
 </div>
 </div>
@@ -284,34 +213,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The method returns the argument of an harmonic or 0 if the harmonic does not exist. </dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a06ecceb7aef44cd7008fd8beaf8cf33e" title="Retrieve the band of an harmonic. ">getHarmonicBand()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00053">53</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a01a38c7f5f505d7fd5e6ef4af513628a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Hoa3D::Ambisonic::getHarmonicArgument </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieve the argument of an harmonic. </p>
-<p>The argument of an harmonic is in the range -band to band. The harmonics are sorted by their bands, from 0 to the decomposition order and, in each band, they are sorted by their arguments in the range -band to band. For the first bands, the harmonics arrangement is h[0, 0] h[1, -1] h[1, 0] h[1, 1] h[2, -2] h[2, -1] h[2, 0] h[2, 1] h[2, 2] etc. with h[band, argument].</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">index</td><td>The global index of an harmonic. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The method returns the argument of an harmonic or 0 if the harmonic does not exist. </dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a06ecceb7aef44cd7008fd8beaf8cf33e" title="Retrieve the band of an harmonic. ">getHarmonicBand()</a> </dd></dl>
+<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00041">41</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
 
 </div>
 </div>
@@ -340,59 +242,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The method returns the band of an harmonic or 0 if the harmonic does not exist. </dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a3acaabfd013671c94e057e23eea1d068" title="Retrieve the argument of an harmonic. ">getHarmonicArgument()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00059">59</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac5dd2285bbfdfdfe45b11d39379a0974"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Hoa3D::Ambisonic::getHarmonicBand </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieve the band of an harmonic. </p>
-<p>The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 * band + 1 harmonics in the range -band to band. For the first bands, the harmonics arrangement is h[0, 0] h[1, -1] h[1, 0] h[1, 1] h[2, -2] h[2, -1] h[2, 0] h[2, 1] h[2, 2] etc. with h[band, argument].</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">index</td><td>The global index of an harmonic. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The method returns the band of an harmonic or 0 if the harmonic does not exist. </dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_ambisonic.html#a3acaabfd013671c94e057e23eea1d068" title="Retrieve the argument of an harmonic. ">getHarmonicArgument()</a> </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a33ce838226f9c12ffc49ed5d78a244b1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string Hoa3D::Ambisonic::getHarmonicsName </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieve a good name for an harmonic. </p>
-<p>Retrieve a good name for an harmonic.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">index</td><td>The global index of an harmonic. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00047">47</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
 
 </div>
 </div>
@@ -419,7 +269,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00065">65</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00053">53</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
 
 </div>
 </div>
@@ -437,91 +287,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Retrieve the number of harmonics. </p>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00038">38</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0688ea4e2401eda492a813da8b800568"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Hoa3D::Ambisonic::getNumberOfHarmonics </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Retrieve the number of harmonics. </p>
-
-</div>
-</div>
-<a class="anchor" id="abe5de38dd1df17edf369732b46b8e1ad"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Hoa3D::Ambisonic::getNumberOfInputs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Retrieve the number of inputs. </p>
-
-</div>
-</div>
-<a class="anchor" id="af03625afb9f21ef3574eafa8501129b4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Ambisonic::getNumberOfInputs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Retrieve the number of inputs. </p>
-
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00043">43</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7a13c6e5ac82f4279d78d4d9f2a31560"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Hoa3D::Ambisonic::getNumberOfOutputs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Retrieve the number of outputs. </p>
-
-</div>
-</div>
-<a class="anchor" id="a126ed3be1aa3d155f56ca75ca3d69de5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Ambisonic::getNumberOfOutputs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Retrieve the number of outputs. </p>
-
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00048">48</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00036">36</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
 
 </div>
 </div>
@@ -539,36 +305,18 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Retrieve the decomposition order. </p>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00033">33</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="abe3b53fb4a6e7b63eee582a026987458"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long Hoa3D::Ambisonic::getOrder </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Retrieve the decomposition order. </p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html#l00031">31</a> of file <a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_hoa3_d_2_ambisonic_8h_source.html">Ambisonic.h</a></li>
-<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/hoaAmbisonics/<a class="el" href="_hoa3_d_ambisonic_8h_source.html">Hoa3DAmbisonic.h</a></li>
-<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a></li>
-<li>/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Sources/hoaAmbisonics/<a class="el" href="_hoa3_d_ambisonic_8cpp_source.html">Hoa3DAmbisonic.cpp</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_hoa3_d_2_ambisonic_8h_source.html">Ambisonic.h</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_hoa3_d_2_ambisonic_8cpp_source.html">Ambisonic.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 10 2014 10:56:43 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 11 2014 22:14:15 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

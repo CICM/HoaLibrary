@@ -14,7 +14,7 @@
 namespace Hoa3D
 {
     //! The ambisonic map.
-    /** The map is a multi Encoder with distance compensation. It uses intances of the Wider class to decrease the directionnality of sources by simulating fractionnal orders when they're inside the ambisonic sphere and a simple diminution of the gain when the sources get away the ambisonic sphere.
+    /** The map is a multi Encoder with distance compensation. It uses intances of the Wider class to decrease the directionnality of sources by simulating fractionnal orders when the sources are inside the ambisonic sphere and a simple diminution of the gain when the sources get away from the ambisonic sphere.
      */
     class Map : public Ambisonic
     {
