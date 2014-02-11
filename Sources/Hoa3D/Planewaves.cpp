@@ -17,10 +17,9 @@ namespace Hoa3D
 	void Planewaves::updateSpeakerName(unsigned int index)
 	{
 		if (!m_autoName) return;
-		std::string name;
-		name = "Channel " + Tools::intToString(index) + " : " +
-		Tools::floatToStringOneDecimal(Tools::radToDeg(m_speakerList[index].getAzimuth())) + "° " +
-		Tools::floatToStringOneDecimal(Tools::radToDeg(m_speakerList[index].getElevation())) + "°";
+		std::string name = "Channel " + Tools::intToString(index) + " : " +
+		Tools::floatToStringOneDecimal( Tools::radToDeg(m_speakerList[index].getAzimuth())) + "° " +
+		Tools::floatToStringOneDecimal( Tools::radToDeg(m_speakerList[index].getElevation())) + "°";
 		setLoudspeakerName(index, name);
 	}
 	

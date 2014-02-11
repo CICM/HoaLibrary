@@ -143,7 +143,6 @@ public:
 		
 		glMatrixMode( GL_PROJECTION );
 		glLoadIdentity();
-		//OpenGLHelpers::setPerspective(70,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()), 1,1000);
 		OpenGLHelpers::setPerspective(60,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()), 1,1000);
 		
 		// active z-buffer
