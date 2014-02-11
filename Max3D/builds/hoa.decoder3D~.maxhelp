@@ -4,8 +4,8 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 5,
-			"architecture" : "x64"
+			"revision" : 6,
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 0.0, 44.0, 1162.0, 806.0 ],
@@ -45,8 +45,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 5,
-							"architecture" : "x64"
+							"revision" : 6,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 70.0, 1162.0, 780.0 ],
@@ -107,7 +107,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 446.0, 76.0, 58.0, 19.0 ],
+									"patching_rect" : [ 447.0, 69.0, 58.0, 19.0 ],
 									"text" : "loadbang"
 								}
 
@@ -395,7 +395,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 385.0, 114.0, 558.0, 17.0 ],
+									"patching_rect" : [ 447.0, 96.0, 558.0, 17.0 ],
 									"text" : "lscoord 0 0. -0.785398, lscoord 1 2.094395 -0.785398, lscoord 2 4.18879 -0.785398, lscoord 3 0. 1.570796"
 								}
 
@@ -438,7 +438,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 236.0, 138.0, 50.0, 19.0 ]
+									"patching_rect" : [ 181.0, 153.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -452,7 +452,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 153.0, 121.0, 50.0, 19.0 ]
+									"patching_rect" : [ 121.0, 153.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -465,7 +465,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 65.0, 175.0, 42.0, 19.0 ],
+									"patching_rect" : [ 44.0, 182.0, 42.0, 19.0 ],
 									"text" : "sig~ 1"
 								}
 
@@ -975,8 +975,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 5,
-							"architecture" : "x64"
+							"revision" : 6,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 0.0, 26.0, 1162.0, 780.0 ],
