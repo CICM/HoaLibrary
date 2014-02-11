@@ -13,11 +13,9 @@ namespace Hoa3D
         assert(order > 0);
         m_order					= order;
         m_number_of_harmonics	= (m_order + 1) * (m_order + 1);
-        m_number_of_inputs		= m_number_of_harmonics;
-        m_number_of_outputs		= m_number_of_harmonics;
         
-        m_harmonics_arguments   = new long[m_number_of_harmonics];
-        m_harmonics_bands      = new long[m_number_of_harmonics];
+        m_harmonics_arguments   = new unsigned int[m_number_of_harmonics];
+        m_harmonics_bands      = new unsigned int[m_number_of_harmonics];
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
             m_harmonics_bands[i] = sqrtf((float)i);
@@ -38,16 +36,6 @@ namespace Hoa3D
     long Ambisonic::getNumberOfHarmonics()
     {
         return m_number_of_harmonics;
-    }
-    
-    long Ambisonic::getNumberOfInputs()
-    {
-        return m_number_of_inputs;
-    }
-    
-    long Ambisonic::getNumberOfOutputs()
-    {
-        return m_number_of_outputs;
     }
     
     long Ambisonic::getHarmonicArgument(unsigned int index)

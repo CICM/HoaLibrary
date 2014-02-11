@@ -14,6 +14,7 @@
 #include "Optim.h"
 #include "Rotate.h"
 #include "Meter.h"
+#include "Map.h"
 
 #endif
 

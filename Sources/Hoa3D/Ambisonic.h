@@ -23,13 +23,10 @@ namespace Hoa3D
     class Ambisonic
     {
     protected:
-        unsigned int	m_order;
+        unsigned int    m_order;
         unsigned int	m_number_of_harmonics;
-        unsigned int	m_number_of_inputs;
-        unsigned int	m_number_of_outputs;
-        
-        long*    m_harmonics_arguments;
-        long*    m_harmonics_bands;
+        unsigned int*   m_harmonics_arguments;
+        unsigned int*   m_harmonics_bands;
         
     public:
         
@@ -50,14 +47,6 @@ namespace Hoa3D
         /** Retrieve the number of harmonics.
          */
         long getNumberOfHarmonics();
-        
-        /** Retrieve the number of inputs.
-         */
-        long getNumberOfInputs();
-        
-        /** Retrieve the number of outputs.
-         */
-        long getNumberOfOutputs();
         
         //! Retrieve the argument of an harmonic.
         /** The argument of an harmonic is in the range -band to band. The harmonics are sorted by their bands, from 0 to the decomposition order and, in each band, they are sorted by their arguments in the range -band to band. For the first bands, the harmonics arrangement is h[0, 0] h[1, -1] h[1, 0] h[1, 1] h[2, -2] h[2, -1] h[2, 0] h[2, 1] h[2, 2] etc. with h[band, argument].

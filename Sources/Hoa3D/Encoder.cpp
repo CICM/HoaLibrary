@@ -12,7 +12,6 @@ namespace Hoa3D
     {
         m_elevation         = 0;
         m_azimuth           = 0;
-        m_number_of_inputs  = 3;
         m_azimuth_matrix    = new double*[NUMBEROFCIRCLEPOINTS];
         m_elevation_matrix  = new double*[NUMBEROFCIRCLEPOINTS];
         

@@ -10,7 +10,6 @@ namespace Hoa3D
 {
     Wider::Wider(unsigned int order) : Ambisonic(order)
     {
-        m_number_of_inputs  = m_number_of_harmonics + 1;
         m_wide              = NUMBEROFLINEARPOINTS - 1;
         m_wide_matrix       = new double*[NUMBEROFLINEARPOINTS];
         

@@ -19,12 +19,13 @@ namespace Hoa3D
 	{
 		
 	private:
-		double*		m_decoder_matrix;
-        float*		m_decoder_matrix_float;
-		double*		m_loudspeakers_azimuth;
-		double*		m_loudspeakers_elevation;
-		double*		m_harmonics_vector;
-        Encoder*    m_encoder;
+        unsigned int    m_number_of_loudspeakers;
+		double*         m_decoder_matrix;
+        float*          m_decoder_matrix_float;
+		double*         m_loudspeakers_azimuth;
+		double*         m_loudspeakers_elevation;
+		double*         m_harmonics_vector;
+        Encoder*        m_encoder;
         
 	public:
         
