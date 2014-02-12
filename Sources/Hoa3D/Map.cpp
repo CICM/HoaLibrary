@@ -46,7 +46,7 @@ namespace Hoa3D
         else
         {
             m_gains[index] = 1.;
-            m_widers[index]->setWideningValue(Tools::clip_min(distance, 0.));
+            m_widers[index]->setWideningValue(clip_min(distance, 0.));
         }
     }
     

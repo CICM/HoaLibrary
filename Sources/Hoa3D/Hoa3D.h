@@ -15,6 +15,7 @@
 #include "Rotate.h"
 #include "Meter.h"
 #include "Map.h"
+#include "Scope.h"
 
 #endif
 

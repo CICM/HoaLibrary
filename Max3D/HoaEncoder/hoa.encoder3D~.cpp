@@ -30,8 +30,7 @@ void hoa_encoder_perform64_azimuth_elevation(t_hoa_encoder *x, t_object *dsp64, 
 t_class *hoa_encoder_class;
 
 int C74_EXPORT main(void)
-{	
-
+{
 	t_class *c;
 	
 	c = class_new("hoa.encoder3D~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
@@ -55,10 +54,12 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 	int	order = 1;
     x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
 	if (x)
-	{		
+	{
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
-		
+		if(order < 1)
+            order = 1;
+        
 		x->f_encoder = new Hoa3D::Encoder(order);
 		
 		dsp_setup((t_pxobject *)x, 3);

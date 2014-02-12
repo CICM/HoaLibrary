@@ -29,8 +29,8 @@ namespace Hoa3D
 
     Ambisonic::~Ambisonic()
     {
-        cicm_free(m_harmonics_arguments);
-        cicm_free(m_harmonics_bands);
+        delete [] m_harmonics_arguments;
+        delete [] m_harmonics_bands;
     }
 }
 

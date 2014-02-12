@@ -27,8 +27,8 @@ namespace Hoa3D
         float*              m_harmonics_float;
         double*             m_harmonics_double;
         double*             m_gains;
-        vector<Encoder*>    m_encoders;
-        vector<Wider*>      m_widers;
+        std::vector<Encoder*>    m_encoders;
+        std::vector<Wider*>      m_widers;
         
     public:
         

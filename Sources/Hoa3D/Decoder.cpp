@@ -10,7 +10,7 @@ namespace Hoa3D
 {
 	Decoder::Decoder(unsigned int order, unsigned int numberOfLoudspeakers) : Ambisonic(order)
 	{
-        m_number_of_loudspeakers    = Tools::clip_min(numberOfLoudspeakers, 4);
+        m_number_of_loudspeakers    = clip_min(numberOfLoudspeakers, 4);
 		m_loudspeakers_azimuth      = new double[m_number_of_loudspeakers];
 		m_loudspeakers_elevation    = new double[m_number_of_loudspeakers];
         m_harmonics_vector          = new double[m_number_of_harmonics];

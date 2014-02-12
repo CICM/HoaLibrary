@@ -18,8 +18,6 @@
 		8FF6068518A376510022F248 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6067A18A376510022F248 /* Encoder.cpp */; };
 		8FF6068618A376510022F248 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6067B18A376510022F248 /* Encoder.h */; };
 		8FF6068718A376510022F248 /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6067C18A376510022F248 /* Hoa3D.h */; };
-		8FF6068818A376510022F248 /* Legendre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6067D18A376510022F248 /* Legendre.cpp */; };
-		8FF6068918A376510022F248 /* Legendre.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6067E18A376510022F248 /* Legendre.h */; };
 		8FF6068A18A376510022F248 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6067F18A376510022F248 /* Wider.cpp */; };
 		8FF6068B18A376510022F248 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6068018A376510022F248 /* Wider.h */; };
 		8FF9A73618AB8202002721ED /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF9A73518AB8202002721ED /* hoa.max.h */; };
@@ -39,8 +37,6 @@
 		8FF6067A18A376510022F248 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
 		8FF6067B18A376510022F248 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
 		8FF6067C18A376510022F248 /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
-		8FF6067D18A376510022F248 /* Legendre.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Legendre.cpp; sourceTree = "<group>"; };
-		8FF6067E18A376510022F248 /* Legendre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Legendre.h; sourceTree = "<group>"; };
 		8FF6067F18A376510022F248 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
 		8FF6068018A376510022F248 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		8FF9A73518AB8202002721ED /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
@@ -102,8 +98,6 @@
 				8FF6067A18A376510022F248 /* Encoder.cpp */,
 				8FF6067B18A376510022F248 /* Encoder.h */,
 				8FF6067C18A376510022F248 /* Hoa3D.h */,
-				8FF6067D18A376510022F248 /* Legendre.cpp */,
-				8FF6067E18A376510022F248 /* Legendre.h */,
 				8FF6067F18A376510022F248 /* Wider.cpp */,
 				8FF6068018A376510022F248 /* Wider.h */,
 			);
@@ -119,7 +113,6 @@
 			files = (
 				8FF9A73618AB8202002721ED /* hoa.max.h in Headers */,
 				8FF6068B18A376510022F248 /* Wider.h in Headers */,
-				8FF6068918A376510022F248 /* Legendre.h in Headers */,
 				8FF6068718A376510022F248 /* Hoa3D.h in Headers */,
 				8FF6068618A376510022F248 /* Encoder.h in Headers */,
 				8FF6068218A376510022F248 /* Ambisonic.h in Headers */,
@@ -204,7 +197,6 @@
 			files = (
 				8FF6068518A376510022F248 /* Encoder.cpp in Sources */,
 				8F8FF15D18A26929000AD610 /* hoa.encoder3D~.cpp in Sources */,
-				8FF6068818A376510022F248 /* Legendre.cpp in Sources */,
 				8FF6068A18A376510022F248 /* Wider.cpp in Sources */,
 				8FF6068118A376510022F248 /* Ambisonic.cpp in Sources */,
 				8FF6068318A376510022F248 /* Decoder.cpp in Sources */,

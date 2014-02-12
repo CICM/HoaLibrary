@@ -7,8 +7,22 @@
 #ifndef DEF_HOA_3D_AMBISONIC
 #define DEF_HOA_3D_AMBISONIC
 
-#include "../CicmLibrary/CicmLibrary.h"
-#include "Legendre.h"
+#ifdef __APPLE__
+
+#include <Accelerate/Accelerate.h>
+
+#endif
+
+#ifdef _WINDOWS
+
+#include <ipps.h>
+#include <ippm.h>
+#include <mkl.h>
+#include <mkl_cblas.h>
+
+#endif
+
+#include "Tools.h"
 
 //! The 3D ambisonic classes.
 /**
@@ -90,7 +104,7 @@ namespace Hoa3D
         inline std::string getHarmonicsName(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return "Harmonic " + Tools::intToString(getHarmonicBand(index)) + " " + Tools::intToString(getHarmonicArgument(index));
+            return "Harmonic " + intToString(getHarmonicBand(index)) + " " + intToString(getHarmonicArgument(index));
         };
     };
 }
