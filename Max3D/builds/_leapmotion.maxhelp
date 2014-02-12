@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 5,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 353.0, 98.0, 1890.0, 904.0 ],
+		"rect" : [ 239.0, 86.0, 1083.0, 697.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 353.0, 124.0, 1890.0, 878.0 ],
+						"rect" : [ 239.0, 112.0, 1083.0, 671.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -108,7 +108,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -1752,7 +1752,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -3431,7 +3431,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -3476,13 +3476,13 @@
 													"maxclass" : "newobj",
 													"numinlets" : 1,
 													"numoutlets" : 6,
-													"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "list" ],
+													"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal" ],
 													"patcher" : 													{
 														"fileversion" : 1,
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 5,
 															"architecture" : "x64"
 														}
 ,
@@ -3547,7 +3547,7 @@
 																		"appversion" : 																		{
 																			"major" : 6,
 																			"minor" : 1,
-																			"revision" : 6,
+																			"revision" : 5,
 																			"architecture" : "x64"
 																		}
 ,
@@ -4928,7 +4928,8 @@
 													"outlettype" : [ "signal", "signal", "signal" ],
 													"patching_rect" : [ 156.0, 331.0, 235.0, 19.0 ],
 													"saved_object_attributes" : 													{
-														"buffer" : "hoaIr1"
+														"buffer" : "hoaIr1",
+														"wet" : 0.0
 													}
 ,
 													"text" : "hoa.convolve~ 1 @buffer hoaIr @channel 1"
@@ -5197,7 +5198,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -5263,7 +5264,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 6,
+															"revision" : 5,
 															"architecture" : "x64"
 														}
 ,
@@ -5827,7 +5828,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -6058,7 +6059,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -6780,11 +6781,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 1890.0, 878.0 ],
+						"rect" : [ 0.0, 26.0, 1083.0, 671.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -6833,7 +6834,7 @@
 		"dependency_cache" : [ 			{
 				"name" : "littlefilter~.maxpat",
 				"bootpath" : "/Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
-				"patcherrelativepath" : "../../../../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/patches/docs/tutorial-patchers/msp-tut",
 				"type" : "JSON",
 				"implicit" : 1
 			}
