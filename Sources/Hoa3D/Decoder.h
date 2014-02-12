@@ -40,6 +40,13 @@ namespace Hoa3D
          */
 		~Decoder();
         
+        //! This method retrieve the number of loudspeakers.
+        /** Retrieve the number of loudspeakers.
+         
+         @return The number of loudspeakers.
+         */
+        unsigned int getNumberOfLoudspeakers() const {return m_number_of_loudspeakers;};
+        
 		/**	Set loudspeaker position.
 		 @param     index		The index of the loudspeaker.
 		 @param     azimuth		An azimuth value. In radian, between 0 and 2π.

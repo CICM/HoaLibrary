@@ -4,16 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../../Sources/Hoa3D/Hoa3D.h"
-
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-}
-
-int postons = 0;
+#include "../hoa.max.h"
 
 typedef struct _hoa_encoder 
 {
@@ -22,7 +13,6 @@ typedef struct _hoa_encoder
     Hoa3D::Encoder*         f_encoder;
     
 } t_hoa_encoder;
-
 
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_encoder_free(t_hoa_encoder *x);
@@ -38,7 +28,6 @@ void hoa_encoder_perform64_elevation(t_hoa_encoder *x, t_object *dsp64, double *
 void hoa_encoder_perform64_azimuth_elevation(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_class *hoa_encoder_class;
-    
 
 int C74_EXPORT main(void)
 {	
@@ -55,13 +44,7 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_encoder_class = c;
-    
-    if (!postons)
-    {
-        post("hoa.library (version 2.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
-        post("Copyright (C) 2012 - 2013, CICM | Universite Paris 8");
-        postons = 1;
-    }
+    hoa_credit();
 
 	return 0;
 }
@@ -69,8 +52,7 @@ int C74_EXPORT main(void)
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_encoder *x = NULL;
-	int	order = 4;
-
+	int	order = 1;
     x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
 	if (x)
 	{		
@@ -79,13 +61,13 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->f_encoder = new Hoa3D::Encoder(order);
 		
-		dsp_setup((t_pxobject *)x, x->f_encoder->getNumberOfInputs());
-		for (int i = 0; i < x->f_encoder->getNumberOfOutputs(); i++)
+		dsp_setup((t_pxobject *)x, 3);
+		for (int i = 0; i < x->f_encoder->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
         
-        x->f_signals =  new double[x->f_encoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
+        x->f_signals =  new double[x->f_encoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
 	}
-    
+
 	return (x);
 }
 
@@ -116,11 +98,11 @@ void hoa_encoder_int(t_hoa_encoder *x, long n)
 void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
     
-    if(count[x->f_encoder->getNumberOfInputs() - 1] && count[x->f_encoder->getNumberOfInputs() - 2])
+    if(count[1] && count[2])
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_azimuth_elevation, 0, NULL);
-    else if(!count[x->f_encoder->getNumberOfInputs() - 1] && count[x->f_encoder->getNumberOfInputs() - 2])
+    else if(count[1] && !count[2])
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_azimuth, 0, NULL);
-    else if(count[x->f_encoder->getNumberOfInputs() - 1] && !count[x->f_encoder->getNumberOfInputs() - 2])
+    else if(!count[1] && count[2])
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_elevation, 0, NULL);
     else
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64, 0, NULL);

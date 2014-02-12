@@ -4,14 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../../Sources/Hoa3D/Hoa3D.h"
-
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-}
+#include "../hoa.max.h"
 
 typedef struct _hoa_decoder 
 {
@@ -41,13 +34,12 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_decoder_dsp64,             "dsp64",      A_CANT, 0);
 	class_addmethod(c, (method)hoa_decoder_assist,            "assist",     A_CANT, 0);
     class_addmethod(c, (method)hoa_decoder_setLoudspeakers,   "lscoord",    A_GIMME, 0);
-    class_addmethod(c, (method)hoa_decoder_infos,             "infos",      A_GIMME, 0);
     
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	hoa_decoder_class = c;
-	
-	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
+	hoa_credit();
+    
 	return 0;
 }
 
@@ -67,12 +59,12 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 		
         x->f_decoder	= new Hoa3D::Decoder(order, number_of_loudspeakers);
         
-		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfInputs());
-		for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
+		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfHarmonics());
+		for (int i = 0; i < x->f_decoder->getNumberOfLoudspeakers(); i++)
 			outlet_new(x, "signal");
 		
-		x->f_ins    =  new double[x->f_decoder->getNumberOfInputs() * SYS_MAXBLKSIZE];
-        x->f_outs   =  new double[x->f_decoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
+		x->f_ins    =  new double[x->f_decoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+        x->f_outs   =  new double[x->f_decoder->getNumberOfLoudspeakers() * SYS_MAXBLKSIZE];
 	}
     
 	return (x);
@@ -105,7 +97,7 @@ void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s)
 		sprintf(s,"(Signal) %s",x->f_decoder->getHarmonicsName(a).c_str());
 	else
 	{
-		sprintf(s,"(Signal) channel %ld", a);
+		sprintf(s,"(Signal) Channel %ld", a);
 	}
 }
 
@@ -124,12 +116,3 @@ void hoa_decoder_setLoudspeakers(t_hoa_decoder *x, t_symbol* s, long argc, t_ato
         x->f_decoder->setLoudspeakerPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
     }
 }
-
-
-void hoa_decoder_infos(t_hoa_decoder *x)
-{
-    object_post((t_object *)x, "Number Of Ls : %ld", x->f_decoder->getNumberOfOutputs());
-    for (int i = 0; i < x->f_decoder->getNumberOfOutputs(); i++)
-        object_post((t_object *)x, "Ls  %i : %f %f", i, x->f_decoder->getLoudspeakerAzimuth(i), x->f_decoder->getLoudspeakerElevation(i));
-}
-

@@ -22,6 +22,7 @@
 		8FF6068918A376510022F248 /* Legendre.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6067E18A376510022F248 /* Legendre.h */; };
 		8FF6068A18A376510022F248 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6067F18A376510022F248 /* Wider.cpp */; };
 		8FF6068B18A376510022F248 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6068018A376510022F248 /* Wider.h */; };
+		8FF9A73618AB8202002721ED /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF9A73518AB8202002721ED /* hoa.max.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		8FF6067E18A376510022F248 /* Legendre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Legendre.h; sourceTree = "<group>"; };
 		8FF6067F18A376510022F248 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
 		8FF6068018A376510022F248 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
+		8FF9A73518AB8202002721ED /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				8F8FF15C18A26928000AD610 /* hoa.encoder3D~.cpp */,
+				8FF9A73518AB8202002721ED /* hoa.max.h */,
 				8F8FEFFE18A26906000AD610 /* Sources */,
 				8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */,
 				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
@@ -114,6 +117,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FF9A73618AB8202002721ED /* hoa.max.h in Headers */,
 				8FF6068B18A376510022F248 /* Wider.h in Headers */,
 				8FF6068918A376510022F248 /* Legendre.h in Headers */,
 				8FF6068718A376510022F248 /* Hoa3D.h in Headers */,

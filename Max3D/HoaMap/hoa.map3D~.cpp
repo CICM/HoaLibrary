@@ -4,14 +4,9 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../../Sources/Hoa3D/Hoa3D.h"
+// TODO : LINE DE AZIMUT ELEVATION ET DISTANCE
 
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-}
+#include "../hoa.max.h"
 
 int postons = 0;
 
@@ -68,6 +63,7 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_map_class = c;
+    hoa_credit();
     
 	return 0;
 }
@@ -75,7 +71,7 @@ int C74_EXPORT main(void)
 void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_map *x = NULL;
-	int	order = 4;
+	int	order = 1;
     int numberOfSources = 1;
     x = (t_hoa_map *)object_alloc(hoa_map_class);
 	if (x)
@@ -85,7 +81,6 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
         if(atom_gettype(argv+1) == A_LONG)
             numberOfSources = atom_getlong(argv+1);
 
-		
 		x->f_map = new Hoa3D::Map(order, numberOfSources);
 		if(x->f_map->getNumberOfSources() == 1)
             dsp_setup((t_pxobject *)x, 4);
