@@ -90,10 +90,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> // Copyright (c) 2012-2014 Eliott Paris &amp; Pierre Guillot, CICM, Universite Paris 8.</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> // For information on usage and redistribution, and for a DISCLAIMER OF ALL</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> // WARRANTIES, see the file, &quot;LICENSE.txt,&quot; in this distribution.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Copyright (c) 2012-2014 Eliott Paris &amp; Pierre Guillot, CICM, Universite Paris 8.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// For information on usage and redistribution, and for a DISCLAIMER OF ALL</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// WARRANTIES, see the file, &quot;LICENSE.txt,&quot; in this distribution.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef DEF_HOA_3D_OPTIM</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DEF_HOA_3D_OPTIM</span></div>
@@ -110,7 +110,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        {</div>
 <div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a89acb58975922396713cc88cafc55b45">   22</a></span>&#160;            <a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a89acb58975922396713cc88cafc55b45">Basic</a>   = 0,    </div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a491a405ba48de3977668d54a8d9ff44a">   23</a></span>&#160;            <a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a491a405ba48de3977668d54a8d9ff44a">MaxRe</a>   = 1,    </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147aa0c4f4688d5dbfa59b1774d7b2082105">   24</a></span>&#160;            <a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147aa0c4f4688d5dbfa59b1774d7b2082105">inPhase</a> = 2     </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a55da4ad4519ee8860e9ea45cc475241c">   24</a></span>&#160;            <a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a55da4ad4519ee8860e9ea45cc475241c">InPhase</a> = 2     </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        };</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">private</span>:</div>
@@ -121,42 +121,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="class_hoa3_d_1_1_optim.html#ab53ffe61910a75637afafb7f4f3ba788">Optim</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order, <a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147">Mode</a> mode);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20">~Optim</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">long</span> getMode();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_optim.html#abb49c9e6a327bc62ac6491cd3046a10a">setMode</a>(<a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147">Mode</a> mode);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_optim.html#a13f8cb746e5bcc3c096bd0c0bf1a6435">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs, <span class="keywordtype">float</span>* outputs);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_optim.html#a13f8cb746e5bcc3c096bd0c0bf1a6435">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs, <span class="keywordtype">double</span>* outputs);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    };</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="ttc" id="class_hoa3_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa3_d_1_1_ambisonic.html">Hoa3D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_ambisonic_8h_source.html#l00023">Ambisonic.h:23</a></div></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="class_hoa3_d_1_1_optim.html#ab53ffe61910a75637afafb7f4f3ba788">Optim</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order, <a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147">Mode</a> mode);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20">~Optim</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_optim.html#abb49c9e6a327bc62ac6491cd3046a10a">setMode</a>(<a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147">Mode</a> mode);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_optim.html#a0446c68d06a5fd112f3e608c82d69b7f">   59</a></span>&#160;        <a class="code" href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147">Mode</a> <a class="code" href="class_hoa3_d_1_1_optim.html#a0446c68d06a5fd112f3e608c82d69b7f">getMode</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> m_mode;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_optim.html#a13f8cb746e5bcc3c096bd0c0bf1a6435">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs, <span class="keywordtype">float</span>* outputs);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_optim.html#a13f8cb746e5bcc3c096bd0c0bf1a6435">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs, <span class="keywordtype">double</span>* outputs);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="ttc" id="class_hoa3_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa3_d_1_1_ambisonic.html">Hoa3D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_ambisonic_8h_source.html#l00022">Ambisonic.h:22</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_optim_html_ab53ffe61910a75637afafb7f4f3ba788"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#ab53ffe61910a75637afafb7f4f3ba788">Hoa3D::Optim::Optim</a></div><div class="ttdeci">Optim(unsigned int order, Mode mode)</div><div class="ttdoc">The optimization constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8cpp_source.html#l00011">Optim.cpp:11</a></div></div>
+<div class="ttc" id="class_hoa3_d_1_1_optim_html_a0446c68d06a5fd112f3e608c82d69b7f"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a0446c68d06a5fd112f3e608c82d69b7f">Hoa3D::Optim::getMode</a></div><div class="ttdeci">Mode getMode() const </div><div class="ttdoc">Retrieve the optimization mode. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8h_source.html#l00059">Optim.h:59</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_optim_html"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html">Hoa3D::Optim</a></div><div class="ttdoc">The ambisonic optimization. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8h_source.html#l00017">Optim.h:17</a></div></div>
-<div class="ttc" id="class_hoa3_d_1_1_optim_html_a1a153ac21e7a112279824f17981cf147aa0c4f4688d5dbfa59b1774d7b2082105"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147aa0c4f4688d5dbfa59b1774d7b2082105">Hoa3D::Optim::inPhase</a></div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8h_source.html#l00024">Optim.h:24</a></div></div>
+<div class="ttc" id="class_hoa3_d_1_1_optim_html_a1a153ac21e7a112279824f17981cf147a55da4ad4519ee8860e9ea45cc475241c"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a55da4ad4519ee8860e9ea45cc475241c">Hoa3D::Optim::InPhase</a></div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8h_source.html#l00024">Optim.h:24</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_optim_html_a1a153ac21e7a112279824f17981cf147a491a405ba48de3977668d54a8d9ff44a"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a491a405ba48de3977668d54a8d9ff44a">Hoa3D::Optim::MaxRe</a></div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8h_source.html#l00023">Optim.h:23</a></div></div>
-<div class="ttc" id="class_hoa3_d_1_1_optim_html_a13f8cb746e5bcc3c096bd0c0bf1a6435"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a13f8cb746e5bcc3c096bd0c0bf1a6435">Hoa3D::Optim::process</a></div><div class="ttdeci">void process(const float *inputs, float *outputs)</div><div class="ttdoc">This method performs the widening with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8cpp_source.html#l00050">Optim.cpp:50</a></div></div>
+<div class="ttc" id="class_hoa3_d_1_1_optim_html_a13f8cb746e5bcc3c096bd0c0bf1a6435"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a13f8cb746e5bcc3c096bd0c0bf1a6435">Hoa3D::Optim::process</a></div><div class="ttdeci">void process(const float *inputs, float *outputs)</div><div class="ttdoc">This method performs the optimization with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8cpp_source.html#l00045">Optim.cpp:45</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_optim_html_a1a153ac21e7a112279824f17981cf147"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147">Hoa3D::Optim::Mode</a></div><div class="ttdeci">Mode</div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8h_source.html#l00020">Optim.h:20</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_optim_html_a1a153ac21e7a112279824f17981cf147a89acb58975922396713cc88cafc55b45"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a1a153ac21e7a112279824f17981cf147a89acb58975922396713cc88cafc55b45">Hoa3D::Optim::Basic</a></div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8h_source.html#l00022">Optim.h:22</a></div></div>
-<div class="ttc" id="class_hoa3_d_1_1_optim_html_a11c05a8b458f79ba09f4eefad63e0b20"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20">Hoa3D::Optim::~Optim</a></div><div class="ttdeci">~Optim()</div><div class="ttdoc">The optimization destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8cpp_source.html#l00062">Optim.cpp:62</a></div></div>
-<div class="ttc" id="class_hoa3_d_1_1_optim_html_abb49c9e6a327bc62ac6491cd3046a10a"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#abb49c9e6a327bc62ac6491cd3046a10a">Hoa3D::Optim::setMode</a></div><div class="ttdeci">void setMode(Mode mode)</div><div class="ttdoc">This method set the widening value. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8cpp_source.html#l00017">Optim.cpp:17</a></div></div>
+<div class="ttc" id="class_hoa3_d_1_1_optim_html_a11c05a8b458f79ba09f4eefad63e0b20"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20">Hoa3D::Optim::~Optim</a></div><div class="ttdeci">~Optim()</div><div class="ttdoc">The optimization destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8cpp_source.html#l00057">Optim.cpp:57</a></div></div>
+<div class="ttc" id="class_hoa3_d_1_1_optim_html_abb49c9e6a327bc62ac6491cd3046a10a"><div class="ttname"><a href="class_hoa3_d_1_1_optim.html#abb49c9e6a327bc62ac6491cd3046a10a">Hoa3D::Optim::setMode</a></div><div class="ttdeci">void setMode(Mode mode)</div><div class="ttdoc">This method set the optimization mode. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_optim_8cpp_source.html#l00017">Optim.cpp:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 11 2014 22:14:14 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 12 2014 09:21:21 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

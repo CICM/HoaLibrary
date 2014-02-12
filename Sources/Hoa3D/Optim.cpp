@@ -42,11 +42,6 @@ namespace Hoa3D
         }
     }
     
-    long Optim::getMode()
-    {
-        return m_mode;
-    }
-    
     void Optim::process(const float* inputs, float* outputs)
     {
         for(int i = 0; i < m_number_of_harmonics; i++)

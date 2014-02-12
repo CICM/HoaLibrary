@@ -12,7 +12,7 @@
 namespace Hoa3D
 {
     //! The ambisonic wider.
-    /** The wider should be used to widen the sound propagation.
+    /** The wider should be used to widen the sound propagation with fractional order simulution. The sound field precision depends to the decomposition order. The zero decomposition order has 1 omnidirectionnal harmonic and all the sounds seem to come from all the directions. While the order increases, the number of harmonics increases, the lobes of an encoded sounds narrow and the origin of the sounds is more accurate. Then fractional order can be used to decrease the sound field precision and to wide the sound field propagation. 
      */
     class Wider : public Ambisonic
     {
@@ -36,7 +36,7 @@ namespace Hoa3D
         ~Wider();
         
         //! This method set the widening value.
-        /**	The widening value is clipped between 0 and 1. At 1, the sound field has no changes. At 0, all the sound field is omni directionnal.
+        /**	The widening value is clipped between 0 and 1. At 1, the sound field has no changes. At 0, all the sound field is omnidirectionnal, only the harmonic [0 0] remains. From 0 to 1, the spherical hamronics appears in logarithmic way to linearly increase the sound field precision.
          
             @param     value The widening value.
          */

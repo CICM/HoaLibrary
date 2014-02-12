@@ -10,11 +10,10 @@ namespace Hoa3D
 {
     Ambisonic::Ambisonic(unsigned int order)
     {
-        assert(order > 0);
         m_order					= order;
         m_number_of_harmonics	= (m_order + 1) * (m_order + 1);
         
-        m_harmonics_arguments   = new unsigned int[m_number_of_harmonics];
+        m_harmonics_arguments   = new int[m_number_of_harmonics];
         m_harmonics_bands      = new unsigned int[m_number_of_harmonics];
         for(int i = 0; i < m_number_of_harmonics; i++)
         {
@@ -27,35 +26,7 @@ namespace Hoa3D
             m_harmonics_arguments[i] = index2;
         }
     }
-    
-    long Ambisonic::getOrder()
-    {
-        return m_order;
-    }
-    
-    long Ambisonic::getNumberOfHarmonics()
-    {
-        return m_number_of_harmonics;
-    }
-    
-    long Ambisonic::getHarmonicArgument(unsigned int index)
-    {
-        assert(index < m_number_of_harmonics);
-        return m_harmonics_arguments[index];
-    }
-    
-    long Ambisonic::getHarmonicBand(unsigned int index)
-    {
-        assert(index < m_number_of_harmonics);
-        return m_harmonics_bands[index];
-    }
-    
-    std::string Ambisonic::getHarmonicsName(unsigned int index)
-    {
-        assert(index < m_number_of_harmonics);
-        return "Harmonic " + Tools::intToString(getHarmonicBand(index)) + " " + Tools::intToString(getHarmonicArgument(index));
-    }
-    
+
     Ambisonic::~Ambisonic()
     {
         cicm_free(m_harmonics_arguments);

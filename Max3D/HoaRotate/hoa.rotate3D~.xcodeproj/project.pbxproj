@@ -10,9 +10,6 @@
 		2C319B6818A39E700024A661 /* hoa.rotate3D~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C319B6718A39E700024A661 /* hoa.rotate3D~.cpp */; };
 		2C319B6F18A39FA30024A661 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C319B6B18A39FA30024A661 /* Rotate.cpp */; };
 		2C319B7018A39FA30024A661 /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C319B6C18A39FA30024A661 /* Rotate.h */; };
-		2C319B7218A43C1F0024A661 /* Rotate_MatrixRy90.cpp in Headers */ = {isa = PBXBuildFile; fileRef = 2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */; };
-		2C319B7418A446AB0024A661 /* Rotate_MatrixRy90.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C319B7318A446AB0024A661 /* Rotate_MatrixRy90.h */; };
-		2C319B7518A44D500024A661 /* Rotate_MatrixRy90.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
@@ -27,6 +24,12 @@
 		8FF606B718A378DE0022F248 /* Legendre.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AC18A378DE0022F248 /* Legendre.h */; };
 		8FF606B818A378DE0022F248 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606AD18A378DE0022F248 /* Wider.cpp */; };
 		8FF606B918A378DE0022F248 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AE18A378DE0022F248 /* Wider.h */; };
+		8FF9A72B18AB5D74002721ED /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF9A72918AB5D74002721ED /* Map.cpp */; };
+		8FF9A72C18AB5D74002721ED /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF9A72A18AB5D74002721ED /* Map.h */; };
+		8FF9A72F18AB5D80002721ED /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF9A72D18AB5D80002721ED /* Optim.cpp */; };
+		8FF9A73018AB5D80002721ED /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF9A72E18AB5D80002721ED /* Optim.h */; };
+		8FF9A73318AB66F6002721ED /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF9A73118AB66F6002721ED /* Planewaves.cpp */; };
+		8FF9A73418AB66F6002721ED /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF9A73218AB66F6002721ED /* Planewaves.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +37,6 @@
 		2C319B6718A39E700024A661 /* hoa.rotate3D~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.rotate3D~.cpp"; sourceTree = "<group>"; };
 		2C319B6B18A39FA30024A661 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
 		2C319B6C18A39FA30024A661 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
-		2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate_MatrixRy90.cpp; sourceTree = "<group>"; };
-		2C319B7318A446AB0024A661 /* Rotate_MatrixRy90.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate_MatrixRy90.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.rotate3D~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.rotate3D~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
@@ -51,6 +52,12 @@
 		8FF606AC18A378DE0022F248 /* Legendre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Legendre.h; sourceTree = "<group>"; };
 		8FF606AD18A378DE0022F248 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
 		8FF606AE18A378DE0022F248 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
+		8FF9A72918AB5D74002721ED /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8FF9A72A18AB5D74002721ED /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8FF9A72D18AB5D80002721ED /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		8FF9A72E18AB5D80002721ED /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		8FF9A73118AB66F6002721ED /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		8FF9A73218AB66F6002721ED /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,12 +117,16 @@
 				8FF606AA18A378DE0022F248 /* Hoa3D.h */,
 				8FF606AB18A378DE0022F248 /* Legendre.cpp */,
 				8FF606AC18A378DE0022F248 /* Legendre.h */,
+				8FF9A72918AB5D74002721ED /* Map.cpp */,
+				8FF9A72A18AB5D74002721ED /* Map.h */,
+				8FF9A72D18AB5D80002721ED /* Optim.cpp */,
+				8FF9A72E18AB5D80002721ED /* Optim.h */,
+				8FF9A73118AB66F6002721ED /* Planewaves.cpp */,
+				8FF9A73218AB66F6002721ED /* Planewaves.h */,
 				8FF606AD18A378DE0022F248 /* Wider.cpp */,
 				8FF606AE18A378DE0022F248 /* Wider.h */,
 				2C319B6B18A39FA30024A661 /* Rotate.cpp */,
 				2C319B6C18A39FA30024A661 /* Rotate.h */,
-				2C319B7118A43C1F0024A661 /* Rotate_MatrixRy90.cpp */,
-				2C319B7318A446AB0024A661 /* Rotate_MatrixRy90.h */,
 			);
 			path = Hoa3D;
 			sourceTree = "<group>";
@@ -128,13 +139,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF606B918A378DE0022F248 /* Wider.h in Headers */,
+				8FF9A72C18AB5D74002721ED /* Map.h in Headers */,
 				8FF606B718A378DE0022F248 /* Legendre.h in Headers */,
 				8FF606B518A378DE0022F248 /* Hoa3D.h in Headers */,
 				8FF606B418A378DE0022F248 /* Encoder.h in Headers */,
-				2C319B7418A446AB0024A661 /* Rotate_MatrixRy90.h in Headers */,
 				8FF606B018A378DE0022F248 /* Ambisonic.h in Headers */,
-				2C319B7218A43C1F0024A661 /* Rotate_MatrixRy90.cpp in Headers */,
+				8FF9A73018AB5D80002721ED /* Optim.h in Headers */,
 				2C319B7018A39FA30024A661 /* Rotate.h in Headers */,
+				8FF9A73418AB66F6002721ED /* Planewaves.h in Headers */,
 				8FF606B218A378DE0022F248 /* Decoder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,14 +226,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C319B7518A44D500024A661 /* Rotate_MatrixRy90.cpp in Sources */,
 				2C319B6818A39E700024A661 /* hoa.rotate3D~.cpp in Sources */,
+				8FF9A73318AB66F6002721ED /* Planewaves.cpp in Sources */,
 				8FF606B318A378DE0022F248 /* Encoder.cpp in Sources */,
 				2C319B6F18A39FA30024A661 /* Rotate.cpp in Sources */,
 				8FF606B618A378DE0022F248 /* Legendre.cpp in Sources */,
 				8FF606B818A378DE0022F248 /* Wider.cpp in Sources */,
+				8FF9A72B18AB5D74002721ED /* Map.cpp in Sources */,
 				8FF606AF18A378DE0022F248 /* Ambisonic.cpp in Sources */,
 				8FF606B118A378DE0022F248 /* Decoder.cpp in Sources */,
+				8FF9A72F18AB5D80002721ED /* Optim.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

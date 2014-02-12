@@ -40,9 +40,14 @@ void \hyperlink{class_hoa3_d_1_1_map_a53a82b55c1ec5e52c2ab788984c5c2d0}{process}
 \subsection{Detailed Description}
 The ambisonic map. 
 
-The map is a multi \hyperlink{class_hoa3_d_1_1_encoder}{Encoder} with distance compensation. It uses intances of the \hyperlink{class_hoa3_d_1_1_wider}{Wider} class to decrease the directionnality of sources by simulating fractionnal orders when the sources are inside the ambisonic sphere and a simple diminution of the gain when the sources get away from the ambisonic sphere. 
+The map is a multi \hyperlink{class_hoa3_d_1_1_encoder}{Encoder} with distance compensation. It uses intances of the \hyperlink{class_hoa3_d_1_1_wider}{Wider} class to decrease the directionnality of sources by simulating fractionnal orders when the sources are inside the ambisonic sphere and a simple diminution of the gain when the sources get away from the ambisonic sphere.
 
-Definition at line 19 of file Map.\-h.
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_encoder}{Encoder} 
+\end{DoxySeeAlso}
+
+
+Definition at line 21 of file Map.\-h.
 
 
 
@@ -108,7 +113,7 @@ The number of sources.
 \end{DoxyReturn}
 
 
-Definition at line 81 of file Map.\-h.
+Definition at line 83 of file Map.\-h.
 
 \hypertarget{class_hoa3_d_1_1_map_af332c122731c3df55c3dcf56d39c7941}{\index{Hoa3\-D\-::\-Map@{Hoa3\-D\-::\-Map}!process@{process}}
 \index{process@{process}!Hoa3D::Map@{Hoa3\-D\-::\-Map}}
@@ -122,9 +127,7 @@ Definition at line 81 of file Map.\-h.
 
 This method performs the encoding with distance compensation with single precision. 
 
-\begin{DoxyVerb}You should use this method for in-place or not-in-place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
-\end{DoxyVerb}
-
+You should use this method for in-\/place or not-\/in-\/place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
 
 
 \begin{DoxyParams}{Parameters}

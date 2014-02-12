@@ -12,8 +12,8 @@
 
 namespace Hoa3D
 {
-    //! The ambisonic Rotate.
-    /** The Rotate should be used to rotate an entire soundfield.
+    //! The ambisonic rotate.
+    /** The rotation.
      */
     class Rotate : public Ambisonic
     {
@@ -26,13 +26,6 @@ namespace Hoa3D
         double      m_yaw;
         double      m_cos_yaw;
         double      m_sin_yaw;
-        /*
-		double*			m_cosLookUp;
-		double*			m_sinLookUp;
-		double*			m_harmonicSin;
-		double*			m_harmonicCos;
-         */
-		double*			m_rZ_matrix;
         
     public:
         
@@ -51,31 +44,37 @@ namespace Hoa3D
 		//! This method sets the three rotation values at the same time (xyz axis).
         /** This method sets the three rotation values at the same time (xyz axis).
 		 
-		 @param     roll	The roll value is equivalent to a rotation on the x-axis (also named tilt), between 0 and 2π.
-		 @param     pitch	The pitch value is equivalent to a rotation on the y-axis (also named tumble), between 0 and 2π.
-		 @param     yaw		The yaw value is equivalent to a rotation on the z-axis (also named rotation), between 0 and 2π.
-		 @see setRoll, setPitch, setYaw
+            @param     roll	The roll value is equivalent to a rotation on the x-axis (also named tilt), between 0 and 2π.
+            @param     pitch	The pitch value is equivalent to a rotation on the y-axis (also named tumble), between 0 and 2π.
+            @param     yaw		The yaw value is equivalent to a rotation on the z-axis (also named rotation), between 0 and 2π.
+            @see setRoll, setPitch, setYaw
          */
         void setRotations(const double roll, const double pitch, const double yaw);
         
         //! This method sets the roll value (rotation on the x-axis).
         /** The roll is equivalent to a rotation on the x-axis (also named tilt).
 		 
-            @param     value The roll value between 0 and 2π.
+            @param  value       The roll value between 0 and 2π.
+            @see    setPitch
+            @see    setYaw
          */
         void setRoll(const double value);
 		
 		//! This method sets the pitch value (rotation on the y-axis).
         /** The pitch is equivalent to a rotation on the y-axis (also named tumble).
 		 
-		 @param     value The pitch value between 0 and 2π.
+            @param  value       The pitch value between 0 and 2π.
+            @see    setRoll
+            @see    setYaw
          */
         void setPitch(const double value);
 		
 		//! This method sets the yaw value (rotation on the z-axis).
         /** The yaw is equivalent to a rotation on the z-axis (also named rotation).
 		 
-		 @param     value The yaw value between 0 and 2π.
+            @param  value       The yaw value between 0 and 2π.
+            @see    setRoll
+            @see    setPitch
          */
         void setYaw(const double value);
 		

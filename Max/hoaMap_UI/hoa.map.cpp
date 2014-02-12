@@ -441,6 +441,7 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *sym, long argc, t_atom *argv)
 {
 	short outvol,error;
 	char ps[MAX_PATH_CHARS];
+
     t_fourcc outtype;
     t_fourcc filetypelist = 'pSto';
 

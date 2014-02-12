@@ -14,7 +14,7 @@ namespace Hoa3D
 {
     //! The Planewaves class.
     /**
-     The Planewaves class is a base class destinated to be inherited by classes who dont care about spherical harmonics but a number of loudpeakers (real or virtual). It store basics information like the umber of channels, number of inputs, outputs...
+     The Planewaves class is a base class destinated to be inherited by classes who dont care about spherical harmonics but a number of loudpeakers (real or virtual). It store basic informations like the umber of channels, number of inputs, outputs...
 	 @see Ambisonic
      */
     class Planewaves

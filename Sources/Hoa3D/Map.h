@@ -15,6 +15,8 @@ namespace Hoa3D
 {
     //! The ambisonic map.
     /** The map is a multi Encoder with distance compensation. It uses intances of the Wider class to decrease the directionnality of sources by simulating fractionnal orders when the sources are inside the ambisonic sphere and a simple diminution of the gain when the sources get away from the ambisonic sphere.
+     
+        @see Encoder
      */
     class Map : public Ambisonic
     {
@@ -78,13 +80,13 @@ namespace Hoa3D
          
             @return The number of sources.
          */
-        unsigned int	getNumberOfSources() const {return m_number_of_sources;}
+        unsigned int getNumberOfSources() const {return m_number_of_sources;};
         
         //! This method performs the encoding with distance compensation with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-         @param     inputs  The input array.
-         @param     outputs The output array.
+            @param     inputs  The input array.
+            @param     outputs The output array.
          */
         void process(const float* inputs, float* outputs);
         

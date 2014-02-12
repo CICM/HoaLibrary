@@ -12,13 +12,14 @@
 namespace Hoa3D
 {
     //! The ambisonic encoder.
-    /** The encoder should be used to encode a signal in the spherical harmonics domain depending of an order of decomposition. It allows to control the azimuth and the elevation of the encoding.
+    /** The encoder should be used to encode a signal in the spherical harmonics domain depending of an order of decomposition. It allows to control the azimuth and the elevation of the encoding. If you want to spatialize with distance compensation, you should use the Map class.
+        
+        @see Map
      */
     class Encoder : public Ambisonic
     {
         
     private:
-        
         long            m_elevation;
         long            m_azimuth;
         double**        m_azimuth_matrix;
@@ -57,8 +58,8 @@ namespace Hoa3D
         //! This method performs the encoding with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     input	The input sample.
-            @param     outputs The output array.
+            @param     input    The input sample.
+            @param     outputs  The output array.
          */
         void process(const float input, float* outputs);
         
@@ -66,7 +67,7 @@ namespace Hoa3D
         /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     input	The input sample.
-            @param     outputs The output array.
+            @param     outputs  The output array.
          */
         void process(const double input, double* outputs);
     };
