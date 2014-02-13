@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 183.0, 55.0, 837.0, 710.0 ],
+		"rect" : [ 183.0, 55.0, 895.0, 686.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 183.0, 81.0, 837.0, 684.0 ],
+						"rect" : [ 183.0, 81.0, 895.0, 660.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -70,6 +70,23 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
+									"bgcolor" : [ 0.740078, 0.740078, 0.740078, 1.0 ],
+									"cam" : [ 183.0, 285.0, 93.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"id" : "obj-9",
+									"maxclass" : "hoa.meter3D~",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 330.0, 303.0, 262.0, 262.0 ],
+									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ],
+									"vectors" : 0
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"attr" : "cam",
 									"fontname" : "Arial",
@@ -226,16 +243,17 @@
 , 							{
 								"box" : 								{
 									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.75, 0.75, 0.75, 1.0 ],
-									"cam" : [ 327.0, 66.0, 338.0 ],
+									"bgcolor" : [ 0.740078, 0.740078, 0.740078, 1.0 ],
+									"cam" : [ 183.0, 285.0, 93.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
 									"maxclass" : "hoa.meter3D~",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 303.0, 268.0, 268.0 ],
-									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ]
+									"patching_rect" : [ 31.0, 303.0, 262.0, 262.0 ],
+									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ],
+									"vectors" : 0
 								}
 
 							}
@@ -347,7 +365,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 837.0, 684.0 ],
+						"rect" : [ 0.0, 26.0, 895.0, 660.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
