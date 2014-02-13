@@ -1,0 +1,211 @@
+\hypertarget{class_hoa3_d_1_1_scope}{\section{Hoa3\-D\-:\-:Scope Class Reference}
+\label{class_hoa3_d_1_1_scope}\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}}
+}
+
+
+The ambisonic scope.  
+
+
+
+
+{\ttfamily \#include $<$Scope.\-h$>$}
+
+Inheritance diagram for Hoa3\-D\-:\-:Scope\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_hoa3_d_1_1_scope}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa3_d_1_1_scope_ab4f5ff6674c4df165a1455e4648e1c35}{Scope} (unsigned int order, unsigned int number\-Of\-Rows, unsigned int number\-Of\-Columns)
+\begin{DoxyCompactList}\small\item\em The \hyperlink{class_hoa3_d_1_1_scope}{Scope} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa3_d_1_1_scope_a84990cf90c7b3be0963f4cacbdab1df8}{$\sim$\-Scope} ()
+\begin{DoxyCompactList}\small\item\em The \hyperlink{class_hoa3_d_1_1_scope}{Scope} destructor. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_hoa3_d_1_1_scope_aab635359344e855d855972752e6766c9}{get\-Number\-Of\-Rows} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the number of rows. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_hoa3_d_1_1_scope_abdee40de6953ec537bbc72154ac93e6e}{get\-Number\-Of\-Columns} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the number of column. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}{get\-Value} (unsigned int row\-Index, unsigned int column\-Index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the value of a point of the spherical harmonics projection. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa3_d_1_1_scope_a4e9866933d1b863860ffd64b0514a6e6}{process} (const float $\ast$inputs)
+\begin{DoxyCompactList}\small\item\em This method performs the spherical harmonics projection with single precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa3_d_1_1_scope_ae9a788e0352011e3ad7ad5f88b5b12ed}{process} (const double $\ast$inputs)
+\begin{DoxyCompactList}\small\item\em This method performs the spherical harmonics projection with double precision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The ambisonic scope. 
+
+The scope discretize a sphere by a set of point and uses a decoder to project the spherical harmonics on it. This class should be used for graphical interfaces outside the digital signal processing if the number of points to discretize the sphere is very large. Then you should prefer to record snapshot of the spherical harmonics and to call the process method at an interval adapted to a graphical rendering. 
+
+Definition at line 18 of file Scope.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa3_d_1_1_scope_ab4f5ff6674c4df165a1455e4648e1c35}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!Scope@{Scope}}
+\index{Scope@{Scope}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{Scope}]{\setlength{\rightskip}{0pt plus 5cm}Hoa3\-D\-::\-Scope\-::\-Scope (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{order, }
+\item[{unsigned int}]{number\-Of\-Rows, }
+\item[{unsigned int}]{number\-Of\-Columns}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_scope_ab4f5ff6674c4df165a1455e4648e1c35}
+
+
+The \hyperlink{class_hoa3_d_1_1_scope}{Scope} constructor. 
+
+The \hyperlink{class_hoa3_d_1_1_scope}{Scope} constructor allocates and initialize the member values to computes spherical harmonics projection on a sphere depending on a decomposition order and a sphere discretization. The sphere discretization is done by a set of points defined by rows and columns then the precision will be lower at the elevation center (0 radian) than at the top (1/2 Pi) or the bottom (-\/1/2 Pi) of the sphere. The number of row discretize the elevation then it set how many points are used between the bottom and the top. The number of column discretize the azimuth circle then it set how many points are used to make the turn from the front (O radian). Then the sphere is discretized by number of rows $\ast$ number of columns points. The order must be at least 1. The number of rows and column should be at least 3 (but it's very low).
+
+
+\begin{DoxyParams}{Parameters}
+{\em order} & The order. \\
+\hline
+{\em number\-Of\-Row} & The number of rows. \\
+\hline
+{\em number\-Of\-Column} & The number of columns. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Scope.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_scope_a84990cf90c7b3be0963f4cacbdab1df8}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!$\sim$\-Scope@{$\sim$\-Scope}}
+\index{$\sim$\-Scope@{$\sim$\-Scope}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{$\sim$\-Scope}]{\setlength{\rightskip}{0pt plus 5cm}Hoa3\-D\-::\-Scope\-::$\sim$\-Scope (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_scope_a84990cf90c7b3be0963f4cacbdab1df8}
+
+
+The \hyperlink{class_hoa3_d_1_1_scope}{Scope} destructor. 
+
+The \hyperlink{class_hoa3_d_1_1_scope}{Scope} destructor free the memory. 
+
+Definition at line 50 of file Scope.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa3_d_1_1_scope_abdee40de6953ec537bbc72154ac93e6e}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Number\-Of\-Columns@{get\-Number\-Of\-Columns}}
+\index{get\-Number\-Of\-Columns@{get\-Number\-Of\-Columns}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{get\-Number\-Of\-Columns}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa3\-D\-::\-Scope\-::get\-Number\-Of\-Columns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_scope_abdee40de6953ec537bbc72154ac93e6e}
+
+
+Retrieve the number of column. 
+
+Retrieve the number of column used to discretize the ambisonic sphere.
+
+\begin{DoxyReturn}{Returns}
+This method returns the number of column used to discretize the sphere. 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file Scope.\-h.
+
+\hypertarget{class_hoa3_d_1_1_scope_aab635359344e855d855972752e6766c9}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Number\-Of\-Rows@{get\-Number\-Of\-Rows}}
+\index{get\-Number\-Of\-Rows@{get\-Number\-Of\-Rows}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{get\-Number\-Of\-Rows}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa3\-D\-::\-Scope\-::get\-Number\-Of\-Rows (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_scope_aab635359344e855d855972752e6766c9}
+
+
+Retrieve the number of rows. 
+
+Retrieve the number of rows used to discretize the ambisonic sphere.
+
+\begin{DoxyReturn}{Returns}
+This method returns the number of rows used to discretize the sphere. 
+\end{DoxyReturn}
+
+
+Definition at line 47 of file Scope.\-h.
+
+\hypertarget{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Value@{get\-Value}}
+\index{get\-Value@{get\-Value}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Scope\-::get\-Value (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{row\-Index, }
+\item[{unsigned int}]{column\-Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}
+
+
+Retrieve the value of a point of the spherical harmonics projection. 
+
+Retrieve the result value of the spherical harmonics projection for a given point defined by a row index and a column index. For the row index, 0 is the bottom of the sphere, number of rows / 2 is at the center of the elevation and number of rows -\/ 1 is at the top of the sphere. For the column index, 0 is the front (0 radian) and number of columns / 2 is the rear of the sphere. The maximum row index must be the number of row -\/ 1 and the maximum column index must be the number of columns -\/ 1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\-Index} & The row index of the point. \\
+\hline
+{\em column\-Index} & The column index of the point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This method returns the value of a point of the ambisonic sphere. 
+\end{DoxyReturn}
+
+
+Definition at line 69 of file Scope.\-h.
+
+\hypertarget{class_hoa3_d_1_1_scope_a4e9866933d1b863860ffd64b0514a6e6}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!process@{process}}
+\index{process@{process}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Scope\-::process (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{inputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_scope_a4e9866933d1b863860ffd64b0514a6e6}
+
+
+This method performs the spherical harmonics projection with single precision. 
+
+You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 28 of file Scope.\-cpp.
+
+\hypertarget{class_hoa3_d_1_1_scope_ae9a788e0352011e3ad7ad5f88b5b12ed}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!process@{process}}
+\index{process@{process}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Scope\-::process (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{inputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa3_d_1_1_scope_ae9a788e0352011e3ad7ad5f88b5b12ed}
+
+
+This method performs the spherical harmonics projection with double precision. 
+
+You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file Scope.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Scope.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa3\-D/Scope.\-cpp\end{DoxyCompactItemize}

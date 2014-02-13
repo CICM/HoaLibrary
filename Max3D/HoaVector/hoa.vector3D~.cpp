@@ -162,4 +162,9 @@ void hoa_vector_setLoudspeakers(t_hoa_vector *x, t_symbol* s, long argc, t_atom*
     {
         x->f_vector->setLoudspeakerPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
     }
+    for(int i = 0; i < x->f_vector->getNumberOfLoudspeakers(); i++)
+    {
+        post("ls %i %f %f", i, x->f_vector->getLoudspeakerAzimuth(i), x->f_vector->getLoudspeakerElevation(i));
+        post("ls %i %f %f %f", i, x->f_vector->getLoudspeakerAbscissa(i), x->f_vector->getLoudspeakerOrdinate(i), x->f_vector->getLoudspeakerHeight(i));
+    }
 }
