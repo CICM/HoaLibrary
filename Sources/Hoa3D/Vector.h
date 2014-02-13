@@ -4,75 +4,99 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_HOA_3D_OPTIM
-#define DEF_HOA_3D_OPTIM
+#ifndef DEF_HOA_3D_VECTOR
+#define DEF_HOA_3D_VECTOR
 
-#include "Ambisonic.h"
+#include "Planewaves.h"
 
 namespace Hoa3D
 {
-    //! The ambisonic optimization.
-    /** The optimization should be used to optimize the ambisonic sound field. There are 3 optimization modes, Basic (no optimizations), MaxRe (energy vector optimization) and InPhase (energy and velocity vector optimization). Basic has no effect, it should be used with a perfect ambisonic loudspeakers (arrengement where all the loudspeakers are to equal distance on a sphere) and for a listener placed at the perfect center of the sphere. MaxRe should be used for auditory confined to the center of the sphere. InPhase should be used when the auditory covers the entire loudspeaker area and when the loudspeakers arragement is not a perfect sphere or when the loudspeakers are not to equal distance. Note that the optimizations decrease the precision sound field restitution thus it can be compared to particular cases of the fractional orders.
+    //! The ambisonic vector.
+    /** The vector class compute the energy and the velocity vector of a soudfield with signal of a spjerical set of loudspeakers. It is an useful tool to characterize the quality of the sound field resitution. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992. This class retreive the cartesian coordinates of the vectors, the abscissa, the ordinate and the height.
      */
-    class Optim : public Ambisonic
+    class Vector : public Planewaves
     {
-    public:
-        enum Mode
-        {
-            Basic   = 0,	/**< basic Optimization     */
-            MaxRe   = 1,	/**< max-re Optimization    */
-            InPhase = 2     /**< in-phase Optimization  */
-        };
         
     private:
+        double* m_loudspeakers_abscissa_double;
+        double* m_loudspeakers_ordinate_double;
+        double* m_loudspeakers_height_double;
+        double* m_loudspeakers_double;
         
-        Mode            m_mode;
-        double*         m_harmonics;
-        
+        float* m_loudspeakers_abscissa_float;
+        float* m_loudspeakers_ordinate_float;
+        float* m_loudspeakers_height_float;
+        float* m_loudspeakers_float;
     public:
         
-        //! The optimization constructor.
-        /**	The optimization constructor allocates and initialize the member values to computes spherical harmonics weighted coefficients depending of a decomposition order. The order must be at least 1.
+        //! The vector constructor.
+        /**	The optimization constructor allocates and initialize the member values to computes vectors. The numberOfLoudspeakers must be at least 1.
          
-            @param     order	The order.
-            @param     mode     The optimization mode.
+            @param     numberOfLoudspeakers	The number of loudspeakers.
          */
-        Optim(unsigned int order, Mode mode);
+        Vector(unsigned int numberOfLoudspeakers);
         
         //! The optimization destructor.
         /**	The optimization destructor free the memory.
          */
-        ~Optim();
+        ~Vector();
         
-        //! This method set the optimization mode.
-        /**	The mode should be one of the 3 optimization modes, Basic, MaxRe or InPhase.
+        //! Set the position of a loudspeaker.
+        /** Set the position of a loudspeaker with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of loudspeakers - 1.
          
-            @param     mode The optimization mode.
+         @param     index		The index of the loudspeaker.
+         @param     azimuth		The azimuth.
+         @param     elevation	The elevation.
          */
-        void setMode(Mode mode);
+		void setLoudspeakerPosition(unsigned int index, double azimuth, double elevation);
         
-        //! Retrieve the optimization mode.
-        /** Retrieve the optimization mode : Basic, MaxRe or InPhase.
+        //! This method compute the energy and velocity vectors with single precision.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 6. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, velocity height, energy abscissa, energy ordinate, energy height.
          
-            @return The method returns the optimization mode.
-         */
-        Mode getMode() const {return m_mode;};
-        
-        //! This method performs the optimization with single precision.
-        /**	You should use this method for in-place or not-in-place processing and performs the optimization sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
-         
-            @param     inputs   The input array.
-            @param     outputs  The output array.
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
         void process(const float* inputs, float* outputs);
         
-        //! This method performs the optimization with double precision.
-        /**	You should use this method for in-place or not-in-place processing and performs the optimization sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+        //! This method compute the energy and velocity vectors with double precision.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 6. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, velocity height, energy abscissa, energy ordinate, energy height.
          
-            @param     inputs   The input array.
-            @param     outputs  The output array.
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
         void process(const double* inputs, double* outputs);
+        
+        //! This method compute the velocity vector with single precision.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 3. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, velocity height.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+        void processVelocity(const float* inputs, float* outputs);
+        
+        //! This method compute the velocity vector with double precision.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 3. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, velocity height.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+        void processVelocity(const double* inputs, double* outputs);
+        
+        //! This method compute the energy vector with single precision.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 3. The coordinates arrengement in the outputs array is energy abscissa, energy ordinate, energy height.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+        void processEnergy(const float* inputs, float* outputs);
+        
+        //! This method compute the energy vector with double precision.
+        /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 3. The coordinates arrengement in the outputs array is energy abscissa, energy ordinate, energy height.
+         
+         @param     inputs   The inputs array.
+         @param     outputs  The outputs array.
+         */
+        void processEnergy(const double* inputs, double* outputs);
     };
 }
 
