@@ -85,16 +85,16 @@ namespace Hoa3D
         //! This method performs the encoding with distance compensation with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs  The input array.
-            @param     outputs The output array.
+            @param     inputs  The inputs array.
+            @param     outputs The outputs array.
          */
         void process(const float* inputs, float* outputs);
         
         //! This method performs the encoding with distance compensation with double precision.
         /**	You should use this method for in-place or not-in-place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs  The input array.
-            @param     outputs The output array.
+            @param     inputs  The inputs array.
+            @param     outputs The outputs array.
          */
         void process(const double* inputs, double* outputs);
     };

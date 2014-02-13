@@ -7,21 +7,6 @@
 #ifndef DEF_HOA_3D_AMBISONIC
 #define DEF_HOA_3D_AMBISONIC
 
-#ifdef __APPLE__
-
-#include <Accelerate/Accelerate.h>
-
-#endif
-
-#ifdef _WINDOWS
-
-#include <ipps.h>
-#include <ippm.h>
-#include <mkl.h>
-#include <mkl_cblas.h>
-
-#endif
-
 #include "Tools.h"
 
 //! The 3D ambisonic classes.
@@ -31,7 +16,7 @@
 namespace Hoa3D
 {
     //! The ambisonic class.
-    /** Most of the HOA classes inherit from this classe. It computes the number of harmonics depending of the decomposition order and sorts the arguments and the bands of the harmonics in arrays.
+    /** The ambisonics classes inherit from this classe. It computes the number of harmonics depending of the decomposition order and sorts the arguments and the bands of the harmonics in arrays.
      */
     class Ambisonic
     {

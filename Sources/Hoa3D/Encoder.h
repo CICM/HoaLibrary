@@ -59,7 +59,7 @@ namespace Hoa3D
         /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     input    The input sample.
-            @param     outputs  The output array.
+            @param     outputs  The outputs array.
          */
         void process(const float input, float* outputs);
         
@@ -67,7 +67,7 @@ namespace Hoa3D
         /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     input	The input sample.
-            @param     outputs  The output array.
+            @param     outputs  The outputs array.
          */
         void process(const double input, double* outputs);
     };

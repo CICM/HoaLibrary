@@ -54,7 +54,7 @@ void *hoa_scope_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		
-		x->f_scope = new Hoa3D::Scope(order, 20, 50);
+		x->f_scope = new Hoa3D::Scope(order, 25, 50);
 		
 		dsp_setup((t_pxobject *)x, x->f_scope->getNumberOfHarmonics());
         x->f_signals =  new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];

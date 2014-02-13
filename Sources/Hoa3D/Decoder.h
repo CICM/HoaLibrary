@@ -69,13 +69,13 @@ namespace Hoa3D
 		double	getLoudspeakerElevation(unsigned int index) const;
 		
 		/**	This method performs the decoding with single precision.
-         @param     input	The input sample.
+         @param     input	The inputs array.
          @param     outputs The output array that contains samples destinated to loudspeakers.
          */
 		void process(const float* input, float* output);
 		
 		/**	This method performs the decoding with double precision.
-         @param     input	The input sample.
+         @param     input	The inputs array.
          @param     outputs The output array that contains samples destinated to loudspeakers.
          */
 		void process(const double* input, double* output);

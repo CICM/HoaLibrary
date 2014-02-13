@@ -17,6 +17,21 @@
 #include <math.h>
 #include <string>
 
+#ifdef __APPLE__
+
+#include <Accelerate/Accelerate.h>
+
+#endif
+
+#ifdef _WINDOWS
+
+#include <ipps.h>
+#include <ippm.h>
+#include <mkl.h>
+#include <mkl_cblas.h>
+
+#endif
+
 #define CICM_PI  (3.141592653589793238462643383279502884)
 #define CICM_2PI (6.283185307179586476925286766559005)
 #define CICM_PI2 (1.57079632679489661923132169163975144)
@@ -122,6 +137,26 @@ namespace Hoa3D
         sprintf(number, "%i", aValue);
         return number;
     }
+    
+    inline double radius(const double x, const double y)
+	{
+		return sqrt(x*x + y*y);
+	}
+    
+	inline double angle(const double x, const double y)
+	{
+		return atan2(y, x) + CICM_PI2;
+	}
+    
+	inline double ordinate(const double radius, const double angle)
+	{
+		return radius * sin(angle - CICM_PI2);
+	}
+    
+    inline double abscissa(const double radius, const double angle)
+	{
+		return radius * cos(angle - CICM_PI2);
+	}
 }
 
 

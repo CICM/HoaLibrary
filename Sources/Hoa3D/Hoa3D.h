@@ -16,6 +16,7 @@
 #include "Meter.h"
 #include "Map.h"
 #include "Scope.h"
+#include "Vector.h"
 
 #endif
 

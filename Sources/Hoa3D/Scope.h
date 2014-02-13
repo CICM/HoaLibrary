@@ -76,14 +76,14 @@ namespace Hoa3D
         //! This method performs the spherical harmonics projection with single precision.
         /**	You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs   The input array.
+            @param     inputs   The inputs array.
          */
         void process(const float* inputs);
         
         //! This method performs the spherical harmonics projection with double precision.
         /**	You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs   The input array.
+            @param     inputs   The inputs array.
          */
         void process(const double* inputs);
     };

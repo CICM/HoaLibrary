@@ -8,7 +8,6 @@
 #define DEF_HOA_3D_ROTATE
 
 #include "Ambisonic.h"
-#include "Rotate_MatrixRy90.h"
 
 namespace Hoa3D
 {
@@ -104,8 +103,8 @@ namespace Hoa3D
 			(warning : doesn't work with in-place vectors);
 			The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs   The input array.
-            @param     outputs  The output array.
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
         void process(const float* inputs, float* outputs);
         
@@ -114,8 +113,8 @@ namespace Hoa3D
 			(warning : doesn't work with in-place vectors);
 			The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs   The input array.
-            @param     outputs  The output array.
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
         void process(const double* inputs, double* outputs);
     };

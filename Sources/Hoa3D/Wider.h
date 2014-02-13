@@ -45,16 +45,16 @@ namespace Hoa3D
         //! This method performs the widening with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs   The input array.
-            @param     outputs  The output array.
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
         void process(const float* inputs, float* outputs);
         
         //! This method performs the widening with double precision.
         /**	You should use this method for in-place or not-in-place processing and performs the widening sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
-            @param     inputs   The input array.
-            @param     outputs  The output array.
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
         void process(const double* inputs, double* outputs);
     };
