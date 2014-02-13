@@ -11,35 +11,21 @@
 #include "z_dsp.h"
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "MaxBoxComponent.h"
-
-extern juce::Component* createMaxBoxComponent();
-class EditorComponentHolder;
+#include "../../MaxJuceBox/jucebox_wrapper.h"
 
 typedef struct _meter3d
 {
-	t_pxjbox	j_box;
-    int         isInitialised;
-    
-    t_object    *mPatcher;
-    t_object    *mPatcherview;
-    t_rect      cachePvRect;
+	t_oglpx_jucebox j_box; // custom t_pxjbox
     t_rect      rect;
     t_jrgba     bgcolor;
 	t_jrgba		bdcolor;
 	t_jrgba		spherecolor;
 	t_atom_long	drawVectors;
 	double		cam[3];
-    
-	juce::Component* juceEditorComp;
-    EditorComponentHolder* juceWindowComp;
-	
 	void*       leftOutlet;
 } t_meter3d;
 
 /* ---------------------------------- */
-
-EditorComponent* getOGLComponent(t_meter3d *x);
 
 void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv);
 void hoaMeter_free(t_meter3d *x);
@@ -71,139 +57,71 @@ void hoaMeter_patcherview_invis(t_meter3d *x, t_object *patcherview);
 
 t_max_err hoaMeter_setAttr_cam(t_meter3d *x, t_object *attr, long argc, t_atom *argv);
 
-static t_class *s_hoaMeter_class;
-
-/* ---------------------------------- EditorComponentHolder class */
-
-class EditorComponentHolder  :	public juce::Component,
-public ComponentListener
-{
-public:
-    EditorComponentHolder (juce::Component* const editorComp_, t_meter3d* x)
-    :	ref(x)
-	{
-		addAndMakeVisible (editorComp_);
-        setOpaque (true);
-        setVisible (true);
-        setWantsKeyboardFocus (false);
-        
-		editorComp = editorComp_;
-		editorComp->addComponentListener(this);
-        
-        editorComp->setBounds(0,0, 200, 200);
-		setBounds(0,0, 0, 0);
-		
-        setInterceptsMouseClicks(false, false);
-		setAlwaysOnTop(false);
-	}
-    
-	~EditorComponentHolder()
-	{
-		editorComp->removeComponentListener(this);
-	}
-	
-	void calcAndSetBounds()
-	{
-		if(ref->isInitialised)
-        {
-            jbox_get_rect_for_view((t_object *)ref, ref->mPatcherview, &ref->rect);
-			Rectangle<int> boxRect(ref->rect.x, ref->rect.y, ref->rect.width, ref->rect.height);
-			editorComp->setBounds( 0, 0, boxRect.getWidth(), boxRect.getHeight());
-		}
-	}
-    
-    void setBgColour()
-	{
-        editorComp->setColour(EditorComponent::ColourIds::backgroundColourId, jrgbaToColour(&ref->bgcolor));
-	}
-	
-	void setPaintColour(EditorComponent::ColourIds colorID, t_jrgba* color)
-	{
-        editorComp->setColour(colorID, jrgbaToColour(color));
-	}
-    
-	// convert t_jrgba to juce::Colour
-	
-    Colour jrgbaToColour(t_jrgba* jrgbaColor)
-	{
-		return Colour(uint8(255 * jrgbaColor->red),
-					  uint8(255 * jrgbaColor->green),
-					  uint8(255 * jrgbaColor->blue),
-					  float(jrgbaColor->alpha));
-	}
-    
-private:
-	t_meter3d* ref;
-	Component* editorComp;
-};
+static t_jbclass *s_hoaMeter_class;
 
 int C74_EXPORT main(void)
 {
-	t_class *c;
+	t_jbclass *c;
     
-	c = class_new("hoa.meter3D~", (method)hoaMeter_new, (method)hoaMeter_free, sizeof(t_meter3d), 0L, A_GIMME, 0);
+	c = (t_jbclass*) class_new("hoa.meter3D~", (method)hoaMeter_new, (method)hoaMeter_free, sizeof(t_meter3d), 0L, A_GIMME, 0);
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
-	class_dspinitjbox(c);
-	jbox_initclass(c, JBOX_COLOR);
+	class_dspinitjbox((t_class*)c);
+	
+	jbox_initclass((t_class*)c, JBOX_COLOR);
+
+	eclass_addmethod(c, (method)hoaMeter_dsp64,				"dsp64",		A_CANT, 0);
+	eclass_addmethod(c, (method)hoaMeter_paint,				"paint",		A_CANT, 0);
+	eclass_addmethod(c, (method)hoaMeter_mousedown,			"mousedown",	A_CANT, 0);
+	eclass_addmethod(c, (method)hoaMeter_assist,			"assist",		A_CANT, 0);
+    eclass_addmethod(c, (method)hoaMeter_notify,			"notify",       A_CANT, 0);
+	eclass_addmethod(c, (method)hoaMeter_patcherview_vis,	"patcherview_vis",		A_CANT, 0);
+    eclass_addmethod(c, (method)hoaMeter_patcherview_invis,	"patcherview_invis",	A_CANT, 0);
+	eclass_addmethod(c, (method)hoaMeter_bang,				"bang", A_CANT, 0);
+	eclass_addmethod(c, (method)hoaMeter_getdrawparams,		"getdrawparams", A_CANT, 0);
+	
+	
+    CLASS_ATTR_DEFAULT			((t_class*)c, "patching_rect", 0, "0 0 200 200");
+    CLASS_ATTR_INVISIBLE		((t_class*)c, "color", 0);
     
-	class_addmethod(c, (method)hoaMeter_dsp64,					"dsp64",		A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_paint,					"paint",		A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_mousedown,				"mousedown",	A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_assist,					"assist",		A_CANT, 0);
-    class_addmethod(c, (method)hoaMeter_notify,					"notify",       A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_patcherview_vis,		"patcherview_vis",		A_CANT, 0);
-    class_addmethod(c, (method)hoaMeter_patcherview_invis,		"patcherview_invis",	A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_bang,					"bang", 0);
-	class_addmethod(c, (method)hoaMeter_getdrawparams,			"getdrawparams", 0);
+    CLASS_ATTR_RGBA				((t_class*)c, "bgcolor", 0, t_meter3d, bgcolor);
+	CLASS_ATTR_CATEGORY			((t_class*)c, "bgcolor", 0, "Color");
+	CLASS_ATTR_STYLE			((t_class*)c, "bgcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			((t_class*)c, "bgcolor", 0, "Background Color");
+	CLASS_ATTR_ORDER			((t_class*)c, "bgcolor", 0, "1");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT((t_class*)c, "bgcolor", 0, "0.9 0.9 0.9 1.");
 	
+	CLASS_ATTR_RGBA				((t_class*)c, "bdcolor", 0, t_meter3d, bdcolor);
+	CLASS_ATTR_CATEGORY			((t_class*)c, "bdcolor", 0, "Color");
+	CLASS_ATTR_STYLE			((t_class*)c, "bdcolor", 0, "rgba");
+	CLASS_ATTR_LABEL			((t_class*)c, "bdcolor", 0, "Border Color");
+	CLASS_ATTR_ORDER			((t_class*)c, "bdcolor", 0, "1");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT((t_class*)c, "bdcolor", 0, "0.1 0.1 0.1 1.");
 	
-    CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 200 200");
-    CLASS_ATTR_INVISIBLE		(c, "color", 0);
-    
-    CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_meter3d, bgcolor);
-	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
-	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 1.");
+	CLASS_ATTR_RGBA				((t_class*)c, "spherecolor", 0, t_meter3d, spherecolor);
+	CLASS_ATTR_CATEGORY			((t_class*)c, "spherecolor", 0, "Color");
+	CLASS_ATTR_STYLE			((t_class*)c, "spherecolor", 0, "rgba");
+	CLASS_ATTR_LABEL			((t_class*)c, "spherecolor", 0, "Sphere Color");
+	CLASS_ATTR_ORDER			((t_class*)c, "spherecolor", 0, "1");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT((t_class*)c, "spherecolor", 0, "0.9 0.9 0.9 1.");
 	
-	CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_meter3d, bdcolor);
-	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
-	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.1 0.1 0.1 1.");
+	CLASS_ATTR_LONG				((t_class*)c, "vectors", 0, t_meter3d, drawVectors);
+	CLASS_ATTR_CATEGORY			((t_class*)c, "vectors", 0, "3D");
+	CLASS_ATTR_STYLE_LABEL		((t_class*)c, "vectors", 0, "onoff", "Draw 3D Vectors");
+	CLASS_ATTR_DEFAULT_SAVE		((t_class*)c, "vectors", 0, "1");
 	
-	CLASS_ATTR_RGBA				(c, "spherecolor", 0, t_meter3d, spherecolor);
-	CLASS_ATTR_CATEGORY			(c, "spherecolor", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "spherecolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "spherecolor", 0, "Sphere Color");
-	CLASS_ATTR_ORDER			(c, "spherecolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "spherecolor", 0, "0.9 0.9 0.9 1.");
-	
-	CLASS_ATTR_LONG				(c, "vectors", 0, t_meter3d, drawVectors);
-	CLASS_ATTR_CATEGORY			(c, "vectors", 0, "3D");
-	CLASS_ATTR_STYLE_LABEL		(c, "vectors", 0, "onoff", "Draw 3D Vectors");
-	CLASS_ATTR_DEFAULT_SAVE		(c, "vectors", 0, "1");
-	
-	CLASS_ATTR_DOUBLE_ARRAY     (c, "cam", 0, t_meter3d, cam, 3);
-	CLASS_ATTR_CATEGORY			(c, "cam", 0, "3D");
-	CLASS_ATTR_LABEL			(c, "cam", 0, "Camera XYZ");
-	CLASS_ATTR_DEFAULT_SAVE		(c, "cam", 0, "0. 0. 0.");
-	CLASS_ATTR_ACCESSORS (c, "cam", NULL, hoaMeter_setAttr_cam);
+	CLASS_ATTR_DOUBLE_ARRAY     ((t_class*)c, "cam", 0, t_meter3d, cam, 3);
+	CLASS_ATTR_CATEGORY			((t_class*)c, "cam", 0, "3D");
+	CLASS_ATTR_LABEL			((t_class*)c, "cam", 0, "Camera XYZ");
+	CLASS_ATTR_DEFAULT_SAVE		((t_class*)c, "cam", 0, "0. 0. 0.");
+	CLASS_ATTR_ACCESSORS ((t_class*)c, "cam", NULL, hoaMeter_setAttr_cam);
     
     initialiseJuce_GUI();
     
-	class_register(CLASS_BOX, c);
+	class_register(CLASS_BOX, (t_class*)c);
 	s_hoaMeter_class = c;
     
 	return 0;
-}
-
-EditorComponent* getOGLComponent(t_meter3d *x)
-{
-	return dynamic_cast <EditorComponent*> (x->juceEditorComp);
 }
 
 void hoaMeter_dsp64(t_meter3d *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -375,9 +293,6 @@ void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
     x->isInitialised = 0;
     
     jbox_get_patching_rect((t_object *)x, &x->rect);
-    
-    x->juceWindowComp = 0L;
-    x->juceEditorComp = 0L;
     
     hoaMeter_addjucecomponents(x);
     

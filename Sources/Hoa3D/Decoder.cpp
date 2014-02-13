@@ -30,7 +30,7 @@ namespace Hoa3D
         m_encoder->process(0.5, m_harmonics_vector);
         
         m_decoder_matrix[index * m_number_of_harmonics] = 0.5 / (double)(m_order+1.);
-        for(int j = 1; j < m_number_of_harmonics; j++)
+        for(unsigned int j = 1; j < m_number_of_harmonics; j++)
         {
             m_decoder_matrix_float[index * m_number_of_harmonics + j] = m_decoder_matrix[index * m_number_of_harmonics + j] = m_harmonics_vector[j];
         }

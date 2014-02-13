@@ -125,7 +125,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 541.0, 90.0, 150.0, 19.0 ]
+									"patching_rect" : [ 541.0, 118.0, 150.0, 19.0 ]
 								}
 
 							}
@@ -150,7 +150,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 541.0, 118.0, 150.0, 19.0 ]
+									"patching_rect" : [ 363.0, 118.0, 150.0, 19.0 ]
 								}
 
 							}
@@ -226,15 +226,16 @@
 , 							{
 								"box" : 								{
 									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.398181, 0.398181, 0.398181, 1.0 ],
+									"bgcolor" : [ 0.75, 0.75, 0.75, 1.0 ],
+									"cam" : [ 327.0, 66.0, 338.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-1",
 									"maxclass" : "hoa.meter3D~",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 217.0, 420.0, 420.0 ],
-									"spherecolor" : [ 0.5, 0.5, 0.5, 1.0 ]
+									"patching_rect" : [ 31.0, 303.0, 268.0, 268.0 ],
+									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ]
 								}
 
 							}

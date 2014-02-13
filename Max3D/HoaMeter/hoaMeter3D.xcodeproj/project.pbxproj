@@ -11,6 +11,7 @@
 		103599AAB6F35B4EF237AC21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3DBCCF7C115F812BFB9AEE /* Cocoa.framework */; };
 		1CB68738A28F93D79B4F364B /* juce_gui_basics.mm in Sources */ = {isa = PBXBuildFile; fileRef = C942861086934601FCE1362D /* juce_gui_basics.mm */; };
 		2792CDA6BEA127DA493F244A /* juce_events.mm in Sources */ = {isa = PBXBuildFile; fileRef = B01A92D23DAFABD63842F24B /* juce_events.mm */; };
+		2C32216518AC4EB800806176 /* jucebox_struct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C32216418AC4EB800806176 /* jucebox_struct.cpp */; };
 		2C63E5A918A7BEAE00B75E00 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C63E5A818A7BEAE00B75E00 /* MaxAudioAPI.framework */; };
 		2C63E5C018A7DCB300B75E00 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5AB18A7DCB300B75E00 /* Ambisonic.cpp */; };
 		2C63E5C118A7DCB300B75E00 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C63E5AD18A7DCB300B75E00 /* Decoder.cpp */; };
@@ -150,6 +151,11 @@
 		2B4552EA243FD8D52C657286 /* juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_graphics.mm; path = ../../ThirdParty/JuceModules/juce_graphics/juce_graphics.mm; sourceTree = SOURCE_ROOT; };
 		2B70C68837058AF2194469B4 /* juce_Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_Font.cpp; path = ../../ThirdParty/JuceModules/juce_graphics/fonts/juce_Font.cpp; sourceTree = SOURCE_ROOT; };
 		2B8983992441A63D583B4679 /* juce_ValueTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_ValueTree.cpp; path = ../../ThirdParty/JuceModules/juce_data_structures/values/juce_ValueTree.cpp; sourceTree = SOURCE_ROOT; };
+		2C32216018AC243800806176 /* jucebox_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jucebox_wrapper.h; sourceTree = "<group>"; };
+		2C32216118AC243800806176 /* jucebox_struct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jucebox_struct.h; sourceTree = "<group>"; };
+		2C32216218AC37FB00806176 /* EditorComponentHolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorComponentHolder.h; sourceTree = "<group>"; };
+		2C32216318AC37FB00806176 /* MaxBoxComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxBoxComponent.h; sourceTree = "<group>"; };
+		2C32216418AC4EB800806176 /* jucebox_struct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jucebox_struct.cpp; sourceTree = "<group>"; };
 		2C5229B30BC4EA3670CFC308 /* juce_FileSearchPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_FileSearchPath.h; path = ../../ThirdParty/JuceModules/juce_core/files/juce_FileSearchPath.h; sourceTree = SOURCE_ROOT; };
 		2C63E5A618A7B6E200B75E00 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2C63E5A818A7BEAE00B75E00 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
@@ -176,6 +182,7 @@
 		2C63E5BF18A7DCB300B75E00 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		2C63E5CA18A7E11100B75E00 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2C63E5CC18A7F54E00B75E00 /* Speaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Speaker.h; sourceTree = "<group>"; };
+		2CA89AF918ABBADE0001B9EC /* OpenGLTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLTools.h; sourceTree = "<group>"; };
 		2DEE934C8C26A2958EA0BD12 /* juce_TextLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_TextLayout.cpp; path = ../../ThirdParty/JuceModules/juce_graphics/fonts/juce_TextLayout.cpp; sourceTree = SOURCE_ROOT; };
 		2ED260B2B767947B0FDE5456 /* juce_MouseEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_MouseEvent.cpp; path = ../../ThirdParty/JuceModules/juce_gui_basics/mouse/juce_MouseEvent.cpp; sourceTree = SOURCE_ROOT; };
 		2EFAB58620F7F8D9E65BEEC3 /* juce_FileTreeComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_FileTreeComponent.h; path = ../../ThirdParty/JuceModules/juce_gui_basics/filebrowser/juce_FileTreeComponent.h; sourceTree = SOURCE_ROOT; };
@@ -694,7 +701,6 @@
 		F1378F07847A312A05EBC3FD /* juce_ContainerDeletePolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ContainerDeletePolicy.h; path = ../../ThirdParty/JuceModules/juce_core/memory/juce_ContainerDeletePolicy.h; sourceTree = SOURCE_ROOT; };
 		F13864A4B2E9381FDEEA1B99 /* juce_Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Logger.h; path = ../../ThirdParty/JuceModules/juce_core/logging/juce_Logger.h; sourceTree = SOURCE_ROOT; };
 		F162E93F9BB6CD35A6AA9A93 /* juce_win32_SystemStats.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_win32_SystemStats.cpp; path = ../../ThirdParty/JuceModules/juce_core/native/juce_win32_SystemStats.cpp; sourceTree = SOURCE_ROOT; };
-		F1AF26444BD39895C4BC7597 /* MaxBoxComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MaxBoxComponent.h; path = Source/MaxBoxComponent.h; sourceTree = SOURCE_ROOT; };
 		F258305A47C5A440B79F61A8 /* juce_MessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_MessageManager.h; path = ../../ThirdParty/JuceModules/juce_events/messages/juce_MessageManager.h; sourceTree = SOURCE_ROOT; };
 		F2F58136513C2D68006921C1 /* juce_opengl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_opengl.h; path = ../../ThirdParty/JuceModules/juce_opengl/juce_opengl.h; sourceTree = SOURCE_ROOT; };
 		F3BCB1447935F52FCF5217EE /* juce_module_info */ = {isa = PBXFileReference; lastKnownFileType = text; name = juce_module_info; path = ../../ThirdParty/JuceModules/juce_events/juce_module_info; sourceTree = SOURCE_ROOT; };
@@ -802,6 +808,8 @@
 			children = (
 				2C63E5A618A7B6E200B75E00 /* maxmspsdk.xcconfig */,
 				ADCB2EF9FB58F5A3F9E0DFFF /* hoaMeter3D */,
+				2C32215F18AC243800806176 /* MaxJuceBox */,
+				2CA89AF818ABBADE0001B9EC /* HoaOpenGL */,
 				2C63E5AA18A7DCB300B75E00 /* Hoa3D */,
 				9280F1C95A8D150F0936AAD3 /* Juce Modules */,
 				319F1A3B9A3A30E8D21AC4A9 /* Juce Library Code */,
@@ -992,6 +1000,19 @@
 			name = juce_data_structures;
 			sourceTree = "<group>";
 		};
+		2C32215F18AC243800806176 /* MaxJuceBox */ = {
+			isa = PBXGroup;
+			children = (
+				2C32216218AC37FB00806176 /* EditorComponentHolder.h */,
+				2C32216318AC37FB00806176 /* MaxBoxComponent.h */,
+				2C32216018AC243800806176 /* jucebox_wrapper.h */,
+				2C32216418AC4EB800806176 /* jucebox_struct.cpp */,
+				2C32216118AC243800806176 /* jucebox_struct.h */,
+			);
+			name = MaxJuceBox;
+			path = ../../MaxJuceBox;
+			sourceTree = "<group>";
+		};
 		2C63E5AA18A7DCB300B75E00 /* Hoa3D */ = {
 			isa = PBXGroup;
 			children = (
@@ -1020,6 +1041,15 @@
 			);
 			name = Hoa3D;
 			path = ../../Sources/Hoa3D;
+			sourceTree = "<group>";
+		};
+		2CA89AF818ABBADE0001B9EC /* HoaOpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				2CA89AF918ABBADE0001B9EC /* OpenGLTools.h */,
+			);
+			name = HoaOpenGL;
+			path = ../../Sources/HoaOpenGL;
 			sourceTree = "<group>";
 		};
 		2FB79A6B9BCA8F8551C22DD1 /* juce_gui_basics */ = {
@@ -1358,7 +1388,6 @@
 			isa = PBXGroup;
 			children = (
 				E616DDCE5F1925032DC7264D /* hoa.meter3D~.cpp */,
-				F1AF26444BD39895C4BC7597 /* MaxBoxComponent.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -2117,6 +2146,7 @@
 				2C63E5C918A7DCB300B75E00 /* Wider.cpp in Sources */,
 				1CB68738A28F93D79B4F364B /* juce_gui_basics.mm in Sources */,
 				2C63E5C218A7DCB300B75E00 /* Encoder.cpp in Sources */,
+				2C32216518AC4EB800806176 /* jucebox_struct.cpp in Sources */,
 				2C63E5C718A7DCB300B75E00 /* Rotate.cpp in Sources */,
 				62D7B061686CD422E5C63B14 /* juce_gui_extra.mm in Sources */,
 				2C63E5C618A7DCB300B75E00 /* Planewaves.cpp in Sources */,
