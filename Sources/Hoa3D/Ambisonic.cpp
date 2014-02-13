@@ -15,7 +15,7 @@ namespace Hoa3D
         
         m_harmonics_arguments   = new int[m_number_of_harmonics];
         m_harmonics_bands      = new unsigned int[m_number_of_harmonics];
-        for(int i = 0; i < m_number_of_harmonics; i++)
+        for(unsigned int i = 0; i < m_number_of_harmonics; i++)
         {
             m_harmonics_bands[i] = sqrtf((float)i);
             int index = i - (m_harmonics_bands[i]) * (m_harmonics_bands[i]);
