@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>5C75CD36-1FEF-415D-B169-4DD8FF76719C</string>
+	<string>8C79D94C-DE42-4FF2-9EC7-BB8623D57090</string>
 	<key>IDESourceControlProjectName</key>
 	<string>hoa.map3D~</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D020CD5E-4A2F-4BDA-8251-337E91ACD77F</key>
+		<key>ACFA71D6-7C18-4958-B8F6-179AB86EADEE</key>
 		<string>https://github.com/CICM/HoaLibrary.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Max3D/HoaMap/hoa.map3D~.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D020CD5E-4A2F-4BDA-8251-337E91ACD77F</key>
+		<key>ACFA71D6-7C18-4958-B8F6-179AB86EADEE</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D020CD5E-4A2F-4BDA-8251-337E91ACD77F</string>
+	<string>ACFA71D6-7C18-4958-B8F6-179AB86EADEE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D020CD5E-4A2F-4BDA-8251-337E91ACD77F</string>
+			<string>ACFA71D6-7C18-4958-B8F6-179AB86EADEE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HoaLibrary</string>
 		</dict>

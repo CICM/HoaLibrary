@@ -7,8 +7,7 @@
 #ifndef DEF_HOA_3D_AMBISONIC
 #define DEF_HOA_3D_AMBISONIC
 
-#include "../CicmLibrary/CicmLibrary.h"
-#include "Legendre.h"
+#include "Tools.h"
 
 //! The 3D ambisonic classes.
 /**
@@ -17,7 +16,7 @@
 namespace Hoa3D
 {
     //! The ambisonic class.
-    /** Most of the HOA classes inherit from this classe. It computes the number of harmonics depending of the decomposition order and sorts the arguments and the bands of the harmonics in arrays.
+    /** The ambisonics classes inherit from this classe. It computes the number of harmonics depending of the decomposition order and sorts the arguments and the bands of the harmonics in arrays.
      */
     class Ambisonic
     {
@@ -90,7 +89,7 @@ namespace Hoa3D
         inline std::string getHarmonicsName(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return "Harmonic " + Tools::intToString(getHarmonicBand(index)) + " " + Tools::intToString(getHarmonicArgument(index));
+            return "Harmonic " + intToString(getHarmonicBand(index)) + " " + intToString(getHarmonicArgument(index));
         };
     };
 }

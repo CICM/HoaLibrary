@@ -22,19 +22,19 @@ namespace Hoa3D
 	
 	void Rotate::setRoll(const double value)
     {
-		m_roll  = Tools::radian_wrap(value);
+		m_roll  = wrap_twopi(value);
         m_cos_roll = cos(m_roll);
         m_sin_roll = sin(m_roll);
     }
 
 	void Rotate::setPitch(const double value)
     {
-		m_pitch = Tools::radian_wrap(value);
+		m_pitch = wrap_twopi(value);
     }
 	
 	void Rotate::setYaw(const double value)
     {
-		m_yaw = Tools::radian_wrap(value);
+		m_yaw = wrap_twopi(value);
 		m_cos_yaw = cos(m_yaw);
         m_sin_yaw = sin(m_yaw);
     }

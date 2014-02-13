@@ -10,7 +10,7 @@ namespace Hoa3D
 {
     Meter::Meter(unsigned int numberOfChannels) : Planewaves(numberOfChannels)
     {
-		m_numberOfChannels = numberOfChannels;
+        ;
     }
     
     void Meter::process(const float* inputs)

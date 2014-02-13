@@ -40,6 +40,13 @@ namespace Hoa3D
          */
 		~Decoder();
         
+        //! This method retrieve the number of loudspeakers.
+        /** Retrieve the number of loudspeakers.
+         
+         @return The number of loudspeakers.
+         */
+        unsigned int getNumberOfLoudspeakers() const {return m_number_of_loudspeakers;};
+        
 		/**	Set loudspeaker position.
 		 @param     index		The index of the loudspeaker.
 		 @param     azimuth		An azimuth value. In radian, between 0 and 2π.
@@ -62,13 +69,13 @@ namespace Hoa3D
 		double	getLoudspeakerElevation(unsigned int index) const;
 		
 		/**	This method performs the decoding with single precision.
-         @param     input	The input sample.
+         @param     input	The inputs array.
          @param     outputs The output array that contains samples destinated to loudspeakers.
          */
 		void process(const float* input, float* output);
 		
 		/**	This method performs the decoding with double precision.
-         @param     input	The input sample.
+         @param     input	The inputs array.
          @param     outputs The output array that contains samples destinated to loudspeakers.
          */
 		void process(const double* input, double* output);

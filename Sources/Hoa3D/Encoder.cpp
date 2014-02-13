@@ -31,7 +31,7 @@ namespace Hoa3D
             for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
             {
                 phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
-                phi = Tools::radian_wrap(phi);
+                phi = wrap_twopi(phi);
                 
                 if(argument >= 0)
                     m_azimuth_matrix[j][i] = cos((double)argument * phi);
@@ -39,7 +39,7 @@ namespace Hoa3D
                     m_azimuth_matrix[j][i] = sin((double)-argument * phi);
                 
                 theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
-                theta = Tools::radian_wrap(theta);
+                theta = wrap_twopi(theta);
                 if(theta >= CICM_PI)
                     theta = CICM_2PI - theta;
                 
@@ -50,12 +50,12 @@ namespace Hoa3D
     
     void Encoder::setAzimuth(const double azimuth)
     {
-        m_azimuth = Tools::radian_wrap(azimuth) / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
+        m_azimuth = wrap_twopi(azimuth) / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
     }
     
     void Encoder::setElevation(const double elevation)
     {
-        m_elevation = Tools::radian_wrap(elevation)  / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
+        m_elevation = wrap_twopi(elevation)  / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
     }
     
     void Encoder::process(const float input, float* outputs)

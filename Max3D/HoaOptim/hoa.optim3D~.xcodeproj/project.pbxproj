@@ -18,8 +18,6 @@
 		8FF606B318A378DE0022F248 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606A818A378DE0022F248 /* Encoder.cpp */; };
 		8FF606B418A378DE0022F248 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606A918A378DE0022F248 /* Encoder.h */; };
 		8FF606B518A378DE0022F248 /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AA18A378DE0022F248 /* Hoa3D.h */; };
-		8FF606B618A378DE0022F248 /* Legendre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606AB18A378DE0022F248 /* Legendre.cpp */; };
-		8FF606B718A378DE0022F248 /* Legendre.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AC18A378DE0022F248 /* Legendre.h */; };
 		8FF606B818A378DE0022F248 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606AD18A378DE0022F248 /* Wider.cpp */; };
 		8FF606B918A378DE0022F248 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AE18A378DE0022F248 /* Wider.h */; };
 		8FF606BC18A3849D0022F248 /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606BA18A3849D0022F248 /* Optim.cpp */; };
@@ -40,8 +38,6 @@
 		8FF606A818A378DE0022F248 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
 		8FF606A918A378DE0022F248 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
 		8FF606AA18A378DE0022F248 /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
-		8FF606AB18A378DE0022F248 /* Legendre.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Legendre.cpp; sourceTree = "<group>"; };
-		8FF606AC18A378DE0022F248 /* Legendre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Legendre.h; sourceTree = "<group>"; };
 		8FF606AD18A378DE0022F248 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
 		8FF606AE18A378DE0022F248 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		8FF606BA18A3849D0022F248 /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
@@ -103,8 +99,6 @@
 				8FF606A818A378DE0022F248 /* Encoder.cpp */,
 				8FF606A918A378DE0022F248 /* Encoder.h */,
 				8FF606AA18A378DE0022F248 /* Hoa3D.h */,
-				8FF606AB18A378DE0022F248 /* Legendre.cpp */,
-				8FF606AC18A378DE0022F248 /* Legendre.h */,
 				8FF606AD18A378DE0022F248 /* Wider.cpp */,
 				8FF606AE18A378DE0022F248 /* Wider.h */,
 				8FF606BA18A3849D0022F248 /* Optim.cpp */,
@@ -121,7 +115,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF606B918A378DE0022F248 /* Wider.h in Headers */,
-				8FF606B718A378DE0022F248 /* Legendre.h in Headers */,
 				8FF606BD18A3849D0022F248 /* Optim.h in Headers */,
 				8FF606B518A378DE0022F248 /* Hoa3D.h in Headers */,
 				8FF606B418A378DE0022F248 /* Encoder.h in Headers */,
@@ -207,7 +200,6 @@
 			files = (
 				8FF606B318A378DE0022F248 /* Encoder.cpp in Sources */,
 				8F8FF15D18A26929000AD610 /* hoa.optim3D~.cpp in Sources */,
-				8FF606B618A378DE0022F248 /* Legendre.cpp in Sources */,
 				8FF606B818A378DE0022F248 /* Wider.cpp in Sources */,
 				8FF606AF18A378DE0022F248 /* Ambisonic.cpp in Sources */,
 				8FF606B118A378DE0022F248 /* Decoder.cpp in Sources */,

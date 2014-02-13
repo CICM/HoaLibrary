@@ -7,117 +7,132 @@
 #ifndef DEF_HOA_3D_PLANEWAVES
 #define DEF_HOA_3D_PLANEWAVES
 
-#include "../CicmLibrary/CicmLibrary.h"
-#include "Speaker.h"
+#include "Tools.h"
 
 namespace Hoa3D
 {
-    //! The Planewaves class.
+    //! The planewaves class.
     /**
-     The Planewaves class is a base class destinated to be inherited by classes who dont care about spherical harmonics but a number of loudpeakers (real or virtual). It store basic informations like the umber of channels, number of inputs, outputs...
-	 @see Ambisonic
+     The planewaves classes, that process on a set of loudspeakers, inherit from this class. It store basic informations like the number, the coordinates and the names of loudspeakers.
+	
      */
     class Planewaves
     {
 	protected:
-		unsigned int	m_number_of_inputs;
-		unsigned int	m_number_of_outputs;
+        
 		unsigned int    m_number_of_loudspeakers;
-		Speaker*		m_speakerList;
-		bool			m_autoName;
-		
-		void updateSpeakerName(unsigned int index = -1);
+        double*         m_loudspeakers_azimuth;
+		double*         m_loudspeakers_elevation;
 		
     public:
         
-		//! The Planewaves constructor.
-        /** The Planewaves constructor allocates and initializes the general member values depending on a number of loudspeaker.
-         @param     numberOfLoudspeakers	The number of loudspeakers (more than one could be a good start for an ambisonic setup !).
+		//! The planewaves constructor.
+        /** The lanewaves constructor allocates and initializes the general member values depending on a number of loudspeakers. The number of loudspkeakers must a least 1.
+         
+            @param     numberOfLoudspeakers	The number of loudspeakers.
          */
-		Planewaves(unsigned int numberOfLoudspeakers = 1, bool autoName = true);
+		Planewaves(unsigned int numberOfLoudspeakers);
         
-        /** The Planewaves destructor.
+        //! The planewaves destructor.
+        /** The Planewaves destructor free the memorie allocated.
          */
         ~Planewaves();
-        
-        /** Retrieve the number of inputs.
-		 @return The number of inputs.
-         */
-        unsigned int	getNumberOfInputs() const {return m_number_of_inputs;}
-        
-        /** Retrieve the number of outputs.
-		 @return The number of outputs.
-         */
-        unsigned int	getNumberOfOutputs() const {return m_number_of_outputs;}
 		
-		/** Retrieve the number of loudspeakers.
-		 @return The number of loudspeakers.
-         */
-		unsigned int	getNumberOfLoudspeakers() const {return m_number_of_loudspeakers;}
-		
-		/** Set the name of a loudspeaker.
-         @param     index	The index of the loudspeaker.
-		 @return    name	The name of the loudspeaker.
-         */
-		void			setLoudspeakerName(unsigned int index, std::string name);
-		
-		/** Get a loudspeaker object.
-         @param     index	The index of a loudspeaker.
-		 @return    a Speaker object ref.
-         */
-		Speaker&		getSpeaker(unsigned int index) const { assert(index < m_number_of_loudspeakers); return m_speakerList[index];}
-		
-		/** Retrieve the name of a loudspeaker.
-         @param     index	The global index of a loudspeaker.
-		 @return    The name of the loudspeaker
-         */
-		std::string		getLoudspeakerName(unsigned int index);
-		
-		/** Get the loudspeaker abscissa.
-         @param     index		The index of the loudspeaker.
-		 @return				The azimuth value in radians (between 0 and 2π).
-		 @see getLoudspeakerOrdinate
-         */
-		double          getLoudspeakerAbscissa(unsigned int index) const;
-		
-		/** Get the loudspeaker elevation.
-         @param     index		The index of the loudspeaker.
-		 @return				The elevation value in radians (between 0 and 2π).
-         */
-		double          getLoudspeakerOrdinate(unsigned int index) const;
-		
-		/** Get the loudspeaker azimuth.
-         @param     index		The index of the loudspeaker.
-		 @return				The azimuth value in radians (between 0 and 2π).
-		 @see getLoudspeakerElevation, getLoudspeakerDistance
-         */
-		double          getLoudspeakerAzimuth(unsigned int index) const;
-		
-		/** Get the loudspeaker elevation.
-         @param     index		The index of the loudspeaker.
-		 @return				The elevation value in radians (between 0 and 2π).
-		 @see getLoudspeakerAzimuth, getLoudspeakerDistance
-         */
-		double          getLoudspeakerElevation(unsigned int index) const;
-		
-		/** Get the loudspeaker distance.
-         @param     index		The index of the loudspeaker.
-		 @return				The distance value (default 1.0f).
-		 @see getLoudspeakerAzimuth, getLoudspeakerElevation
-         */
-		double          getLoudspeakerDistance(unsigned int index) const;
-		
-		/** Set the number of loudspeaker.
-         @param     numberOfLoudspeakers	The total number of loudspeakers.
-         */
-		void setNumberOfLoudspeakers(unsigned int numberOfLoudspeakers);
-		
-		/** Set the position of a loudspeaker.
-         @param     index		The index of the loudspeaker.
-		 @param     azimuth		The azimuth value in radians (between 0 and 2π).
-		 @param     elevation	The elevation value in radians (between 0 and 2π).
+        //! Set the position of a loudspeaker.
+        /** Set the position of a loudspeaker with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of loudspeakers - 1.
+         
+            @param     index		The index of the loudspeaker.
+            @param     azimuth		The azimuth.
+            @param     elevation	The elevation.
          */
 		void setLoudspeakerPosition(unsigned int index, double azimuth, double elevation);
+        
+        //! Retrieve the number of loudspeakers.
+		/** Retrieve the number of loudspeakers of the planewave class.
+            
+            @return The number of loudspeakers.
+         */
+		inline unsigned int getNumberOfLoudspeakers() const {return m_number_of_loudspeakers;}
+        
+        //! Retrieve the azimuth of a loudspeaker.
+        /** Retrieve the azimuth of a loudspeaker. The azimuth of the loudspeaker is in radian, 0 radian is at the front of the soundfield and Pi is at the back of the sound field. The maximum index must be the number of loudspeakers - 1.
+         
+            @param      index   The index of the loudspeaker.
+            @return     The azimuth of the loudspeaker.
+            @see getLoudspeakerElevation
+         */
+		inline double getLoudspeakerAzimuth(unsigned int index) const
+        {
+            assert(index < m_number_of_loudspeakers);
+            return m_loudspeakers_azimuth[index];
+        }
+		
+        //! Retrieve the elevation of a loudspeaker.
+		/** Retrieve the elevation of a loudspeaker. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of loudspeakers - 1.
+         
+            @param      index   The index of the loudspeaker.
+            @return     The elevation of the loudspeaker.
+            @see getLoudspeakerAzimuth
+         */
+		inline double getLoudspeakerElevation(unsigned int index) const
+        {
+            assert(index < m_number_of_loudspeakers);
+            return m_loudspeakers_elevation[index];
+        }
+		
+        //! Retrieve the abscissa of a loudspeaker.
+		/** Retrieve the abscissa of a loudspeaker. The abscissa is between -1 and 1, -1 is the left of the soundfield, 0 is the center of the soundfield and 1 is the right of the soundfield. The maximum index must be the number of loudspeakers - 1.
+         
+            @param     index    The index of the loudspeaker.
+            @return    The abscissa of the loudspeaker.
+            @see getLoudspeakerOrdinate
+            @see getLoudspeakerHeight
+         */
+		inline double getLoudspeakerAbscissa(unsigned int index) const
+        {
+            assert(index < m_number_of_loudspeakers);
+            return abscissa(1., m_loudspeakers_azimuth[index]);
+        }
+		
+        //! Retrieve the ordinate of a loudspeaker.
+		/** Retrieve the ordinate of a loudspeaker. The ordinate is between -1 and 1, -1 is the back of the soundfield, 0 is the center of the soundfield and 1 is the front of the soundfield. The maximum index must be the number of loudspeakers - 1.
+         
+            @param     index	The index of the loudspeaker.
+            @return    The ordinate of the loudspeaker.
+            @see getLoudspeakerAbscissa
+            @see getLoudspeakerHeight
+         */
+		inline double getLoudspeakerOrdinate(unsigned int index) const
+        {
+            assert(index < m_number_of_loudspeakers);
+            return ordinate(1., m_loudspeakers_azimuth[index]);
+        }
+        
+        //! Retrieve the height of a loudspeaker.
+        /** Retrieve the height of a loudspeaker. The height is between -1 and 1, -1 is the bottom of the soundfield, 0 is the center of the soundfield and 1 is the top of the soundfield. The maximum index must be the number of loudspeakers - 1.
+         
+            @param      index	The index of the loudspeaker.
+            @return     The height of the loudspeaker.
+            @see getLoudspeakerAbscissa
+            @see getLoudspeakerOrdinate
+         */
+		inline double getLoudspeakerHeight(unsigned int index) const
+        {
+            assert(index < m_number_of_loudspeakers);
+            return abscissa(1., m_loudspeakers_elevation[index]);
+        }
+        
+        //! Retrieve the number of loudspeaker.
+        /** Retrieve a name for an loudspeaker in a std::string format that will be "Loudspeaker index azimuth elevation".
+         
+         @param     index	The global index of a loudspeaker.
+         @return    The name of the loudspeaker
+         */
+		inline std::string getLoudspeakerName(unsigned int index)
+        {
+            assert(index < m_number_of_loudspeakers);
+            return "Loudspeaker " + intToString(index + 1) + " " + intToString((int)getLoudspeakerAzimuth(index)) + " " + intToString((int)getLoudspeakerElevation(index));
+        };
     };
 	
 } // end of namespace Hoa3D

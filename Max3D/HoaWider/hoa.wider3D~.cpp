@@ -4,16 +4,7 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../../Sources/Hoa3D/Hoa3D.h"
-
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-}
-
-int postons = 0;
+#include "../hoa.max.h"
 
 typedef struct _hoa_wider 
 {
@@ -22,7 +13,6 @@ typedef struct _hoa_wider
     Hoa3D::Wider*           f_wider;
     
 } t_hoa_wider;
-
 
 void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_wider_free(t_hoa_wider *x);
@@ -53,8 +43,7 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_wider_class = c;
-    
-    class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
+    hoa_credit();
     
 	return 0;
 }
@@ -62,8 +51,7 @@ int C74_EXPORT main(void)
 void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_wider *x = NULL;
-	int	order = 4;
-
+	int	order = 1;
     x = (t_hoa_wider *)object_alloc(hoa_wider_class);
 	if (x)
 	{		
@@ -72,11 +60,11 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->f_wider = new Hoa3D::Wider(order);
 		
-		dsp_setup((t_pxobject *)x, x->f_wider->getNumberOfInputs());
-		for (int i = 0; i < x->f_wider->getNumberOfOutputs(); i++)
+		dsp_setup((t_pxobject *)x, x->f_wider->getNumberOfHarmonics() + 1);
+		for (int i = 0; i < x->f_wider->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
         
-        x->f_signals =  new double[x->f_wider->getNumberOfOutputs() * SYS_MAXBLKSIZE];
+        x->f_signals =  new double[x->f_wider->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
 	}
 
 	return (x);
@@ -94,7 +82,7 @@ void hoa_wider_int(t_hoa_wider *x, long n)
 
 void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    if(count[x->f_wider->getNumberOfInputs() - 1])
+    if(count[x->f_wider->getNumberOfHarmonics()])
         object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64_wide, 0, NULL);
     else
         object_method(dsp64, gensym("dsp_add64"), x, hoa_wider_perform64, 0, NULL);
@@ -135,7 +123,7 @@ void hoa_wider_perform64(t_hoa_wider *x, t_object *dsp64, double **ins, long num
 
 void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s)
 {
-    if (a == x->f_wider->getNumberOfInputs() - 1)
+    if (a == x->f_wider->getNumberOfHarmonics())
 	{
         sprintf(s,"(Signal or float) Widening value");
 	}
@@ -144,7 +132,6 @@ void hoa_wider_assist(t_hoa_wider *x, void *b, long m, long a, char *s)
 		sprintf(s,"(Signal) %s", x->f_wider->getHarmonicsName(a).c_str());
 	}
 }
-
 
 void hoa_wider_free(t_hoa_wider *x) 
 {
