@@ -4,10 +4,11 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#ifndef DEF_OGLJUCEBOX
-#define DEF_OGLJUCEBOX
+#ifndef DEF_JUCEBOX_WRAPPER
+#define DEF_JUCEBOX_WRAPPER
 
+#include "../JuceLibraryCode/JuceHeader.h"
+#include "../../Sources/HoaOpenGL/OpenGLTools.h"
 #include "jucebox_struct.h"
-#include "EditorComponentHolder.h"
 
 #endif

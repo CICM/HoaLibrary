@@ -7,6 +7,7 @@
 #ifndef DEF_EDITORCOMPONENTHELPER
 #define DEF_EDITORCOMPONENTHELPER
 
+#include "jucebox_struct.h"
 #include "MaxBoxComponent.h"
 
 /* ---------------------------------- EditorComponentHolder class */
@@ -15,7 +16,7 @@ class EditorComponentHolder  :	public juce::Component,
 public ComponentListener
 {
 public:
-    EditorComponentHolder (juce::Component* const editorComp_, t_object* x) : ref(x)
+    EditorComponentHolder (juce::Component* const editorComp_, t_jucebox* x) : jucebox(x)
 	{
 		addAndMakeVisible (editorComp_);
         setOpaque (true);
@@ -26,7 +27,7 @@ public:
 		editorComp->addComponentListener(this);
         
         editorComp->setBounds(0,0, 200, 200);
-		setBounds(0,0, 0, 0);
+		setBounds(0, 0, 200, 200);
 		
         setInterceptsMouseClicks(false, false);
 		setAlwaysOnTop(false);
@@ -39,43 +40,19 @@ public:
 	
 	void calcAndSetBounds()
 	{
-		if(ref->isInitialised)
+		if(jucebox->isInitialised)
         {
-            jbox_get_rect_for_view((t_object *)ref, ref->mPatcherview, &ref->rect);
-			Rectangle<int> boxRect(ref->rect.x, ref->rect.y, ref->rect.width, ref->rect.height);
+            //jbox_get_rect_for_view((t_object *)jucebox, jucebox->mPatcherview, &jucebox->box_rect);
+			jbox_get_patching_rect((t_object *)jucebox, &jucebox->box_rect);
+			Rectangle<int> boxRect(jucebox->box_rect.x, jucebox->box_rect.y, jucebox->box_rect.width, jucebox->box_rect.height);
+			const MessageManagerLock mmLock;
 			editorComp->setBounds( 0, 0, boxRect.getWidth(), boxRect.getHeight());
 		}
 	}
     
-    void setBgColour()
-	{
-        editorComp->setColour(EditorComponent::ColourIds::backgroundColourId, jrgbaToColour(&ref->bgcolor));
-	}
-	
-	void setPaintColour(EditorComponent::ColourIds colorID, t_jrgba* color)
-	{
-        editorComp->setColour(colorID, jrgbaToColour(color));
-	}
-    
-	// convert t_jrgba to juce::Colour
-	
-    Colour jrgbaToColour(t_jrgba* jrgbaColor)
-	{
-		return Colour(uint8(255 * jrgbaColor->red),
-					  uint8(255 * jrgbaColor->green),
-					  uint8(255 * jrgbaColor->blue),
-					  float(jrgbaColor->alpha));
-	}
-    
 private:
-	t_object* ref;
+	t_jucebox* jucebox;
 	Component* editorComp;
 };
-
-EditorComponent* getOGLComponent(t_object *x);
-EditorComponent* getOGLComponent(t_object *x)
-{
-	return dynamic_cast <EditorComponent*> (x->juceEditorComp);
-}
 
 #endif

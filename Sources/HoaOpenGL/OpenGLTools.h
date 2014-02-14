@@ -7,7 +7,18 @@
 #ifndef DEF_HOA_OPENGLTOOLS
 #define DEF_HOA_OPENGLTOOLS
 
-// to perform cross product between 2 vectors in myGluLookAt
+#include "../JuceLibraryCode/JuceHeader.h"
+
+// convert t_jrgba to juce::Colour
+Colour jrgbaToColour(t_jrgba* jrgbaColor)
+{
+	return Colour(uint8(255 * jrgbaColor->red),
+				  uint8(255 * jrgbaColor->green),
+				  uint8(255 * jrgbaColor->blue),
+				  float(jrgbaColor->alpha));
+}
+
+// to perform cross product between 2 vectors in CicmLookAt
 void CrossProd(float x1, float y1, float z1, float x2, float y2, float z2, float res[3])
 {
 	res[0] = y1*z2 - y2*z1;
