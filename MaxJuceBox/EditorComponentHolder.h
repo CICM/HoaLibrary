@@ -27,7 +27,7 @@ public:
 		editorComp->addComponentListener(this);
         
         editorComp->setBounds(0,0, 200, 200);
-		setBounds(0,0, 0, 0);
+		setBounds(0, 0, 200, 200);
 		
         setInterceptsMouseClicks(false, false);
 		setAlwaysOnTop(false);
@@ -42,8 +42,10 @@ public:
 	{
 		if(jucebox->isInitialised)
         {
-            jbox_get_rect_for_view((t_object *)jucebox, jucebox->mPatcherview, &jucebox->box_rect);
+            //jbox_get_rect_for_view((t_object *)jucebox, jucebox->mPatcherview, &jucebox->box_rect);
+			jbox_get_patching_rect((t_object *)jucebox, &jucebox->box_rect);
 			Rectangle<int> boxRect(jucebox->box_rect.x, jucebox->box_rect.y, jucebox->box_rect.width, jucebox->box_rect.height);
+			const MessageManagerLock mmLock;
 			editorComp->setBounds( 0, 0, boxRect.getWidth(), boxRect.getHeight());
 		}
 	}

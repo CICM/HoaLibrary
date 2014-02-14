@@ -35,16 +35,18 @@ public:
 	// return the openGL drawings as an image.
 	Image makeScreenshot()
 	{
-		const float desktopScale = (float) openGLContext.getRenderingScale();
+		//const float desktopScale = (float) openGLContext.getRenderingScale();
+		const float desktopScale = 1;
 		Image snapshotImage = Image (OpenGLImageType().create (Image::ARGB, roundToInt (desktopScale * getWidth()), roundToInt (desktopScale * getHeight()), true));
 		OpenGLFrameBuffer* buffer = OpenGLImageType::getFrameBufferFrom(snapshotImage);
 		
-		//buffer->clear( findColour(EditorComponent::backgroundColourId) );
-		buffer->makeCurrentRenderingTarget();
+		buffer->makeCurrentAndClear();
 		
 		// openGL draw method to implement
-		//customRender();
-		object_method((t_object*)jucebox, gensym("jucebox_paint"));
+		if (jucebox->isInitialised) {
+			//object_method((t_object*)jucebox, gensym("jucebox_paint"), &openGLContext);
+			object_method((t_object*)jucebox, gensym("jucebox_paint"));
+		}
 		
 		buffer->releaseAsRenderingTarget();
 		
@@ -55,50 +57,10 @@ public:
 	{
 		return (float) openGLContext.getRenderingScale();
 	}
-	
-	void renderInit()
-    {
-		jassert (OpenGLHelpers::isContextActive());
-		
-        const float desktopScale = getScale();
-		//OpenGLHelpers::clear ( findColour(EditorComponent::backgroundColourId) );
-		
-		glMatrixMode( GL_PROJECTION );
-		glLoadIdentity();
-		OpenGLHelpers::setPerspective(60,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()), 1,1000);
-		
-		// active z-buffer
-		glEnable (GL_DEPTH_TEST);
-		glDepthFunc (GL_LESS);
-		glEnable (GL_BLEND);
-		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
-		// Enable lightings
-		glAlphaFunc(GL_LESS, 1);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT0);
-		glEnable(GL_COLOR_MATERIAL);
-		
-		// smooth
-		glShadeModel(GL_SMOOTH);
-		
-		glMatrixMode( GL_MODELVIEW );
-		glLoadIdentity( );
-		
-		//CicmLookAt(3,3,2,0,0,0,0,0,1);
-	}
-	
-	void customRender()
-    {
-		renderInit();
-    }
-	
+
     // This is a virtual method in OpenGLRenderer, and is called when it's time
     // to do your GL rendering.
-    void renderOpenGL()
-    {
-		customRender();
-    }
+    void renderOpenGL() {}
 	
 private:
     OpenGLContext openGLContext;

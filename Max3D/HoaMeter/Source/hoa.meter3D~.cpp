@@ -29,6 +29,7 @@ typedef struct _meter3d
 void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv);
 void hoaMeter_free(t_meter3d *x);
 void hoaMeter_assist(t_meter3d *x, void *b, long m, long a, char *s);
+//void hoaMeter_paint(t_meter3d *x, OpenGLContext* openGLContext);
 void hoaMeter_paint(t_meter3d *x);
 //void hoaMeter_paint(t_meter3d *x, t_object *patcherview);
 void hoaMeter_getdrawparams(t_meter3d *x, t_object *patcherview, t_jboxdrawparams *params);
@@ -60,6 +61,8 @@ int C74_EXPORT main(void)
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_COLOR);
+	
+	initialiseJuce_GUI();
 	
 	jucebox_class_new(c, (method)hoaMeter_paint, (method)hoaMeter_notify);
 
@@ -104,8 +107,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_LABEL			(c, "cam", 0, "Camera XYZ");
 	CLASS_ATTR_DEFAULT_SAVE		(c, "cam", 0, "0. 0. 0.");
 	CLASS_ATTR_ACCESSORS (c, "cam", NULL, hoaMeter_setAttr_cam);
-    
-    initialiseJuce_GUI();
     
 	class_register(CLASS_BOX, c);
 	s_hoaMeter_class = c;
@@ -173,13 +174,18 @@ void hoaMeter_assist(t_meter3d *x, void *b, long m, long a, char *s)
 		sprintf(s, "(signal) Audio Inputs");
 }
 
+//void hoaMeter_paint(t_meter3d *x, OpenGLContext* openGLContext)
 void hoaMeter_paint(t_meter3d *x)
 {
+	//openGLContext = dynamic_cast<OpenGLContext*>(openGLContext);
+	//.getRenderingScale();
 	jassert (OpenGLHelpers::isContextActive());
 	
 	const float desktopScale = 1;
-	
-	//OpenGLHelpers::clear ( findColour(EditorComponent::backgroundColourId) );
+
+	//const float desktopScale = openGLContext->getRenderingScale();
+	//post("desktopScale = %ld", desktopScale);
+
 	OpenGLHelpers::clear ( jrgbaToColour(&x->bgcolor) );
 	
 	glMatrixMode( GL_PROJECTION );
@@ -205,7 +211,7 @@ void hoaMeter_paint(t_meter3d *x)
 	CicmLookAt(3,3,2,0,0,0,0,0,1);
 	
 	glBegin(GL_TRIANGLE_STRIP);
-	glColor3f(0.0f, 1.0f, 0.0f);
+	OpenGLHelpers::setColour(jrgbaToColour(&x->spherecolor));
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 1, 1);
 	glVertex3f(1, 1, 0);
@@ -255,7 +261,6 @@ void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
     jbox_get_patching_rect((t_object *)x, &x->rect);
     
 	jucebox_new((t_jucebox*) x);
-    //hoaMeter_addjucecomponents(x);
     
     x->leftOutlet = outlet_new((t_object*)x, NULL);
     

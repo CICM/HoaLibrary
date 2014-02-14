@@ -25,11 +25,18 @@ void jucebox_class_new(t_class* c, method paint, method notify)
 
 void jucebox_new(t_jucebox* x)
 {
+	jbox_get_patching_rect((t_object *)x, &x->box_rect);
+    
+    x->juceWindowComp = 0L;
+    x->juceEditorComp = 0L;
+	
 	jucebox_addjucecomponents(x);
 }
 
 void jucebox_free(t_jucebox* x)
 {
+	object_detach_byptr(x, x->mPatcherview);
+	x->mPatcherview = NULL;
 	x->juceWindowComp->removeFromDesktop();
 	delete x->juceWindowComp;
 }
@@ -40,9 +47,7 @@ EditorComponent* getOGLComponent(t_jucebox *x)
 }
 
 void jucebox_paint(t_jucebox* x, t_object *patcherview)
-{
-	post("jucebox Paint method called");
-	
+{	
 	t_jgraphics *g = (t_jgraphics*) patcherview_get_jgraphics(patcherview);
 	jbox_get_rect_for_view((t_object *)x, patcherview, &x->box_rect);
     
@@ -50,24 +55,24 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
 	
     if( locked )
     {
-        if(!x->juceWindowComp) jucebox_addjucecomponents(x);
+        //if(!x->juceWindowComp) jucebox_addjucecomponents(x);
         x->juceWindowComp->calcAndSetBounds();
+		
+		juce::Image openGLSnap = getOGLComponent(x)->makeScreenshot();
+		juce::Image::BitmapData* snapBitmap = new juce::Image::BitmapData(openGLSnap, juce::Image::BitmapData::ReadWriteMode::readOnly);
+		
+		unsigned char* data = snapBitmap->data;
+		int width, height, imgStride;
+		width = openGLSnap.getWidth();
+		height = openGLSnap.getHeight();
+		imgStride = snapBitmap->lineStride;
+		t_rect srcRect = {0,0, (double)openGLSnap.getWidth(), (double)openGLSnap.getHeight()};
+		t_rect destRect = {0,0, x->box_rect.width, x->box_rect.height};
+		
+		t_jsurface* surface = jgraphics_image_surface_create_for_data (data, JGRAPHICS_FORMAT_ARGB32, width, height, imgStride, NULL, NULL);
+		jgraphics_image_surface_draw(g, surface, srcRect, destRect);
+		jgraphics_surface_destroy (surface);
 	}
-	
-	juce::Image openGLSnap = getOGLComponent(x)->makeScreenshot();
-	juce::Image::BitmapData* snapBitmap = new juce::Image::BitmapData(openGLSnap, juce::Image::BitmapData::ReadWriteMode::readOnly);
-	
-	unsigned char* data = snapBitmap->data;
-	int width, height, imgStride;
-	width = openGLSnap.getWidth();
-	height = openGLSnap.getHeight();
-	imgStride = snapBitmap->lineStride;
-	t_rect srcRect = {0,0, (double)openGLSnap.getWidth(), (double)openGLSnap.getHeight()};
-	t_rect destRect = {0,0, x->box_rect.width, x->box_rect.height};
-	
-	t_jsurface* surface = jgraphics_image_surface_create_for_data (data, JGRAPHICS_FORMAT_ARGB32, width, height, imgStride, NULL, NULL);
-	jgraphics_image_surface_draw(g, surface, srcRect, destRect);
-	jgraphics_surface_destroy (surface);
 }
 
 void jucebox_addjucecomponents(t_jucebox* x)
@@ -90,6 +95,7 @@ t_max_err jucebox_notify(t_jucebox *x, t_symbol *s, t_symbol *m, void *sender, v
 
 void jucebox_patcherview_vis(t_jucebox* x, t_object *patcherview)
 {
+	post("vis");
     x->mPatcherview = patcherview;
     object_attach_byptr_register(x, x->mPatcherview, CLASS_NOBOX);
 	
