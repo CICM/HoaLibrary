@@ -99,92 +99,104 @@ void hoa_scope_tick(t_hoa_scope *x)
     float value;
     float one, two;
     t_atom av[3];
+    t_atom red[3];
+    t_atom blue[3];
     x->f_scope->process(x->f_signals + x->f_index * x->f_scope->getNumberOfHarmonics());
 	if (sys_getdspstate())
 		clock_fdelay(x->f_clock, 500.);
     
     outlet_anything(x->f_out, gensym("reset"), 0, NULL);
-    atom_setfloat(av, 1);
-    atom_setfloat(av+1, 0);
-    atom_setfloat(av+2, 0);
-    outlet_anything(x->f_out, gensym("glcolor"), 3, av);
-    
+    atom_setfloat(red, 1);
+    atom_setfloat(red+1, 0);
+    atom_setfloat(red+2, 0);
+    atom_setfloat(blue, 0);
+    atom_setfloat(blue+1, 0);
+    atom_setfloat(blue+2, 1);
+
     for(int i = 0; i < x->f_scope->getNumberOfRows(); i++)
     {
         one  =   0;
-        two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI - CICM_PI2;
-        value = fabs(x->f_scope->getValue(i, 0));
-        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-        atom_setfloat(av+1, Hoa3D::abscissa(value, two));
-        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
-        outlet_anything(x->f_out, gensym("moveto"), 3, av);
-        for(int j = 1; j < x->f_scope->getNumberOfColumns() * 0.5; j++)
+        two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI;
+        value = x->f_scope->getValue(i, 0);
+        if(value < 0)
         {
-            one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
-            value = fabs(x->f_scope->getValue(i, j));
-            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-            atom_setfloat(av+1, Hoa3D::abscissa(value, two));
-            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
-            outlet_anything(x->f_out, gensym("lineto"), 3, av);
+            outlet_anything(x->f_out, gensym("glcolor"), 3, blue);
+            value= -value;
         }
-        for(int j = x->f_scope->getNumberOfColumns() * 0.5 - 1; j < x->f_scope->getNumberOfColumns(); j++)
+        else
+            outlet_anything(x->f_out, gensym("glcolor"), 3, red);
+        
+        atom_setfloat(av, value * sin(two) * cos(one));
+        atom_setfloat(av+1, value * cos(two));
+        atom_setfloat(av+2, value * sin(two) * sin(one));
+        outlet_anything(x->f_out, gensym("moveto"), 3, av);
+        for(int j = 1; j < x->f_scope->getNumberOfColumns(); j++)
         {
             one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
-            value = fabs(x->f_scope->getValue(i, j));
-            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-            atom_setfloat(av+1, -Hoa3D::abscissa(value, two));
-            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+            value = x->f_scope->getValue(i, j);
+            if(value < 0)
+            {
+                outlet_anything(x->f_out, gensym("glcolor"), 3, blue);
+                value= -value;
+            }
+            else
+                outlet_anything(x->f_out, gensym("glcolor"), 3, red);
+            atom_setfloat(av, value * sin(two) * cos(one));
+            atom_setfloat(av+1, value * cos(two));
+            atom_setfloat(av+2, value * sin(two) * sin(one));
             outlet_anything(x->f_out, gensym("lineto"), 3, av);
         }
         
         one  =   0;
-        value = fabs(x->f_scope->getValue(i, 0));
-        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-        atom_setfloat(av+1, Hoa3D::abscissa(value, two));
-        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+        value = x->f_scope->getValue(i, 0);
+        if(value < 0)
+        {
+            outlet_anything(x->f_out, gensym("glcolor"), 3, blue);
+            value= -value;
+        }
+        else
+            outlet_anything(x->f_out, gensym("glcolor"), 3, red);
+        
+        atom_setfloat(av, value * sin(two) * cos(one));
+        atom_setfloat(av+1, value * cos(two));
+        atom_setfloat(av+2, value * sin(two) * sin(one));
         outlet_anything(x->f_out, gensym("lineto"), 3, av);
 
     }
     
-    for(int j = 0; j < x->f_scope->getNumberOfColumns() * 0.5; j++)
+    for(int j = 0; j < x->f_scope->getNumberOfColumns(); j++)
     {
         one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
-        two  = - CICM_PI2;
-        value = fabs(x->f_scope->getValue(0, j));
-        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-        atom_setfloat(av+1, Hoa3D::abscissa(value, two));
-        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
-        outlet_anything(x->f_out, gensym("lineto"), 3, av);
+        two  = 0.;
+        value = x->f_scope->getValue(0, j);
+        if(value < 0)
+        {
+            outlet_anything(x->f_out, gensym("glcolor"), 3, blue);
+            value= -value;
+        }
+        else
+            outlet_anything(x->f_out, gensym("glcolor"), 3, red);
+        atom_setfloat(av, value * sin(two) * cos(one));
+        atom_setfloat(av+1, value * cos(two));
+        atom_setfloat(av+2, value * sin(two) * sin(one));
+        outlet_anything(x->f_out, gensym("moveto"), 3, av);
         for(int i = 1; i < x->f_scope->getNumberOfRows(); i++)
         {
-            two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI - CICM_PI2;
-            value = fabs(x->f_scope->getValue(i, j));
-            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-            atom_setfloat(av+1, Hoa3D::abscissa(value, two));
-            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+            two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI;
+            value = x->f_scope->getValue(i, j);
+            if(value < 0)
+            {
+                outlet_anything(x->f_out, gensym("glcolor"), 3, blue);
+                value= -value;
+            }
+            else
+                outlet_anything(x->f_out, gensym("glcolor"), 3, red);
+            atom_setfloat(av, value * sin(two) * cos(one));
+            atom_setfloat(av+1, value * cos(two));
+            atom_setfloat(av+2, value * sin(two) * sin(one));
             outlet_anything(x->f_out, gensym("lineto"), 3, av);
         }
     }
-    for(int j = x->f_scope->getNumberOfColumns() * 0.5 - 1; j < x->f_scope->getNumberOfColumns(); j++)
-    {
-        one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
-        two  = - CICM_PI2;
-        value = fabs(x->f_scope->getValue(0, j));
-        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-        atom_setfloat(av+1, -Hoa3D::abscissa(value, two));
-        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
-        outlet_anything(x->f_out, gensym("lineto"), 3, av);
-        for(int i = 1; i < x->f_scope->getNumberOfRows(); i++)
-        {
-            two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI - CICM_PI2;
-            value = fabs(x->f_scope->getValue(i, j));
-            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
-            atom_setfloat(av+1, -Hoa3D::abscissa(value, two));
-            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
-            outlet_anything(x->f_out, gensym("lineto"), 3, av);
-        }
-    }
-    
 }
 
 void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)

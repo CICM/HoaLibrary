@@ -20,7 +20,7 @@ namespace Hoa3D
         {
             for(int j = 0; j < m_number_of_columns; j++)
             {
-                m_decoder->setLoudspeakerPosition(i * m_number_of_columns + j, (double)j * CICM_PI / (double)(m_number_of_rows - 1) - CICM_PI2, (double)i * CICM_2PI / (double)m_number_of_columns);
+                m_decoder->setLoudspeakerPosition(i * m_number_of_columns + j, (double)j * CICM_2PI / (double)m_number_of_columns, (double)i * CICM_PI / (double)(m_number_of_rows - 1) - CICM_PI2);
             }
         }
     }
