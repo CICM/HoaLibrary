@@ -48,14 +48,6 @@ public:
          */
         long getNumberOfHarmonics();
         
-        /** Retrieve the number of inputs.
-         */
-        long getNumberOfInputs();
-        
-        /** Retrieve the number of outputs.
-         */
-        long getNumberOfOutputs();
-        
         //! Retrieve the argument of an harmonic.
         /** The argument of an harmonic is in the range -order to order. The harmonics are sorted by their bands, from 0 to the decomposition order and, in each band, there are the 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3]etc. with h[argument].
          

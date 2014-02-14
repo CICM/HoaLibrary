@@ -12,13 +12,16 @@ typedef struct _hoa_scope
     double*                 f_signals;
     Hoa3D::Scope*           f_scope;
     int                     f_index;
+    void*                   f_clock;
+	int                     f_startclock;
+    void*                   f_out;
 } t_hoa_scope;
 
 void *hoa_scope_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_scope_free(t_hoa_scope *x);
 void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s);
 
-void hoa_scope_bang(t_hoa_scope *x);
+void hoa_scope_tick(t_hoa_scope *x);
 
 void hoa_scope_dsp64(t_hoa_scope *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
@@ -32,7 +35,6 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.scope3D~", (method)hoa_scope_new, (method)hoa_scope_free, (long)sizeof(t_hoa_scope), 0L, A_GIMME, 0);
 	
-    class_addmethod(c, (method)hoa_scope_bang,		"bang",     A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_assist,    "assist",	A_CANT, 0);
 	
@@ -54,10 +56,13 @@ void *hoa_scope_new(t_symbol *s, long argc, t_atom *argv)
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
 		
-		x->f_scope = new Hoa3D::Scope(order, 25, 50);
+		x->f_scope = new Hoa3D::Scope(order, 15, 29);
 		
 		dsp_setup((t_pxobject *)x, x->f_scope->getNumberOfHarmonics());
-        x->f_signals =  new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+        x->f_out = listout((t_object *)x);
+        x->f_signals    =  new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+        x->f_clock      = clock_new((void *)x, (method)hoa_scope_tick);
+        x->f_startclock = 0;
         x->f_index = 0;
 	}
 
@@ -68,6 +73,7 @@ void hoa_scope_dsp64(t_hoa_scope *x, t_object *dsp64, short *count, double sampl
 {
     x->f_index = 0;
     object_method(dsp64, gensym("dsp_add64"), x, hoa_scope_perform64, 0, NULL);
+    x->f_startclock = 1;
 }
 
 void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -81,16 +87,104 @@ void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long num
     {
         x->f_index++;
     }
+    if (x->f_startclock)
+	{
+		x->f_startclock = 0;
+		clock_delay(x->f_clock,0);
+	}
 }
 
-void hoa_scope_bang(t_hoa_scope *x)
+void hoa_scope_tick(t_hoa_scope *x)
 {
+    float value;
+    float one, two;
+    t_atom av[3];
     x->f_scope->process(x->f_signals + x->f_index * x->f_scope->getNumberOfHarmonics());
+	if (sys_getdspstate())
+		clock_fdelay(x->f_clock, 500.);
+    
+    outlet_anything(x->f_out, gensym("reset"), 0, NULL);
+    atom_setfloat(av, 1);
+    atom_setfloat(av+1, 0);
+    atom_setfloat(av+2, 0);
+    outlet_anything(x->f_out, gensym("glcolor"), 3, av);
+    
     for(int i = 0; i < x->f_scope->getNumberOfRows(); i++)
     {
-        for(int j = 0; j < x->f_scope->getNumberOfColumns(); j++)
-            post("scope : %i %i %f", i, j, (float)x->f_scope->getValue(i, j));
+        one  =   0;
+        two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI - CICM_PI2;
+        value = fabs(x->f_scope->getValue(i, 0));
+        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+        atom_setfloat(av+1, Hoa3D::abscissa(value, two));
+        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+        outlet_anything(x->f_out, gensym("moveto"), 3, av);
+        for(int j = 1; j < x->f_scope->getNumberOfColumns() * 0.5; j++)
+        {
+            one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
+            value = fabs(x->f_scope->getValue(i, j));
+            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+            atom_setfloat(av+1, Hoa3D::abscissa(value, two));
+            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+            outlet_anything(x->f_out, gensym("lineto"), 3, av);
+        }
+        for(int j = x->f_scope->getNumberOfColumns() * 0.5 - 1; j < x->f_scope->getNumberOfColumns(); j++)
+        {
+            one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
+            value = fabs(x->f_scope->getValue(i, j));
+            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+            atom_setfloat(av+1, -Hoa3D::abscissa(value, two));
+            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+            outlet_anything(x->f_out, gensym("lineto"), 3, av);
+        }
+        
+        one  =   0;
+        value = fabs(x->f_scope->getValue(i, 0));
+        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+        atom_setfloat(av+1, Hoa3D::abscissa(value, two));
+        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+        outlet_anything(x->f_out, gensym("lineto"), 3, av);
+
     }
+    
+    for(int j = 0; j < x->f_scope->getNumberOfColumns() * 0.5; j++)
+    {
+        one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
+        two  = - CICM_PI2;
+        value = fabs(x->f_scope->getValue(0, j));
+        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+        atom_setfloat(av+1, Hoa3D::abscissa(value, two));
+        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+        outlet_anything(x->f_out, gensym("lineto"), 3, av);
+        for(int i = 1; i < x->f_scope->getNumberOfRows(); i++)
+        {
+            two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI - CICM_PI2;
+            value = fabs(x->f_scope->getValue(i, j));
+            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+            atom_setfloat(av+1, Hoa3D::abscissa(value, two));
+            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+            outlet_anything(x->f_out, gensym("lineto"), 3, av);
+        }
+    }
+    for(int j = x->f_scope->getNumberOfColumns() * 0.5 - 1; j < x->f_scope->getNumberOfColumns(); j++)
+    {
+        one  =   (double)j / (double)x->f_scope->getNumberOfColumns() * CICM_2PI;
+        two  = - CICM_PI2;
+        value = fabs(x->f_scope->getValue(0, j));
+        atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+        atom_setfloat(av+1, -Hoa3D::abscissa(value, two));
+        atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+        outlet_anything(x->f_out, gensym("lineto"), 3, av);
+        for(int i = 1; i < x->f_scope->getNumberOfRows(); i++)
+        {
+            two = (double)i / (double)(x->f_scope->getNumberOfRows() - 1) * CICM_PI - CICM_PI2;
+            value = fabs(x->f_scope->getValue(i, j));
+            atom_setfloat(av, Hoa3D::abscissa(value, one) * cos(two));
+            atom_setfloat(av+1, -Hoa3D::abscissa(value, two));
+            atom_setfloat(av+2, Hoa3D::ordinate(value, one) * cos(two));
+            outlet_anything(x->f_out, gensym("lineto"), 3, av);
+        }
+    }
+    
 }
 
 void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
@@ -100,6 +194,7 @@ void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
 
 void hoa_scope_free(t_hoa_scope *x) 
 {
+    clock_free((t_object *)x->f_clock);
 	dsp_free((t_pxobject *)x);
 	delete x->f_scope;
     delete [] x->f_signals;
