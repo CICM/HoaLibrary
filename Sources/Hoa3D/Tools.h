@@ -55,10 +55,26 @@ namespace Hoa3D
 		return result;
 	}
     
+    inline int DoubleFactorial( int x )
+	{
+		if (x == 0 || x == -1) {
+			return 1;
+		}
+        
+		int result = x;
+		while ((x -= 2) > 0) {
+			result *= x;
+		}
+        
+		return result;
+	}
+    
+    
 	inline double Legendre(int band, int argument, double angle)
 	{
         band = abs(band);
         argument = abs(argument);
+        
 		if(band == argument)
         {
 			return pow(-1.0f, float(argument)) * pow(1. - angle * angle, 0.5 * argument);
@@ -69,7 +85,7 @@ namespace Hoa3D
 		}
         else
         {
-            return (angle * (2 * band - 1) * Legendre(band - 1, argument, angle) - (band + argument - 1) * Legendre(band - 2, argument, angle)) / (band - argument);
+            return (angle * (double)(2 * band - 1) * Legendre(band - 1, argument, angle) - (double)(band + argument - 1.) * Legendre(band - 2, argument, angle)) / (double)(band - argument);
         }
 	}
     

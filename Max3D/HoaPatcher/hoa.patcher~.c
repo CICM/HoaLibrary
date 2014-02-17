@@ -1,8 +1,8 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
-// For information on usage and redistribution, and for a DISCLAIMER OF ALL
-// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
-*/
+ // Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+ // For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+ */
 
 #include "../hoa.max.h"
 
@@ -11,7 +11,7 @@ typedef struct  _hoa_patcher
 	t_pxobject          f_ob;
     t_object*           f_patcher;
 	t_object**          f_subpatchers;
-
+    
     long                f_ninlets;
     t_object**          f_inlets;
     long                f_noutlets;
@@ -38,8 +38,8 @@ void hoa_patcher_dsp64(t_hoa_patcher *x, t_object *dsp64, short *count, double s
 int C74_EXPORT main(void)
 {
 	t_class *c;
-
-	c = class_new("hoa.patcher~", (method)hoa_patcher_new, (method)NULL, (short)sizeof(t_hoa_patcher), 0L, A_GIMME, 0);
+    
+	c = class_new("hoa.patcher~", (method)hoa_patcher_new, (method)hoa_patcher_free, (short)sizeof(t_hoa_patcher), 0L, A_GIMME, 0);
 	
     class_addmethod(c, (method)hoa_patcher_anything,    "anything", A_GIMME, 0);
     class_addmethod(c, (method)hoa_patcher_list,        "list",		A_GIMME, 0);
@@ -56,7 +56,7 @@ int C74_EXPORT main(void)
 	class_register(CLASS_BOX, c);
 	hoa_patcher_class = c;
     hoa_credit();
-
+    
 }
 
 void *hoa_patcher_new(t_symbol *s, int argc, t_atom *argv)
@@ -90,7 +90,7 @@ void *hoa_patcher_new(t_symbol *s, int argc, t_atom *argv)
             for(int i = 0; i < x->f_ambisonic->getNumberOfHarmonics(); i++)
             {
                 x->f_subpatchers[i] = newobject_sprintf(x->f_patcher, "@maxclass newobj @text \"%s %i %i\" @patching_rect %i 100 20 20", atom_getsym(argv+1)->s_name, (int)x->f_ambisonic->getHarmonicBand(i), (int)x->f_ambisonic->getHarmonicArgument(i), i * 100 + 10);
-        
+                
                 x->f_inlets[i] = (t_object *)jbox_getinlet((t_jbox *)x->f_subpatchers[i], 0);
             }
             x->f_ninlets = inlet_count(x->f_subpatchers[0]) - 1;
@@ -104,7 +104,7 @@ void *hoa_patcher_new(t_symbol *s, int argc, t_atom *argv)
         object_method(x->f_patcher, gensym("loadbang"));
 	}
     
-	return x;	
+	return x;
 }
 
 void hoa_patcher_anything(t_hoa_patcher *x, t_symbol* s, long argc, t_atom* argv)
@@ -134,33 +134,27 @@ void hoa_patcher_bang(t_hoa_patcher *x)
 
 void hoa_patcher_dblclick(t_hoa_patcher *x)
 {
-    post(object_classname(x->f_subpatchers[0])->s_name);
-    /*
-    t_class *c = object_class(x->f_subpatchers[0]);
-    for(int i = 0; i < c->c_messcount - 1; i++)
-    {
-        post(c->c_messlist[i].m_sym->s_name);
-    }*/
-    t_class *c = object_class(jbox_getinlet((t_jbox *)x->f_subpatchers[0], 0));
-    post(c->c_sym->s_name);
-    post(object_classname(jbox_getinlet((t_jbox *)x->f_subpatchers[0], 0))->s_name);
-    for(int i = 0; i < c->c_messcount - 1; i++)
-    {
-        post(c->c_messlist[i].m_sym->s_name);
-    }
-    /*
-    post(object_classname(jbox_get_object(x->f_subpatchers[0]))->s_name);
-    t_class *c = object_class(jbox_get_object(x->f_subpatchers[0]));
-    for(int i = 0; i < c->c_messcount - 1; i++)
-    {
-        post(c->c_messlist[i].m_sym->s_name);
-    }*/
     object_method(x->f_subpatchers[0], gensym("mousedoubleclick"));
 }
 
 void hoa_patcher_dsp64(t_hoa_patcher *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    post("dsp");
+    t_dspchain* dspchain = NULL;
+    /*
+    post(object_classname(dsp64)->s_name);
+    t_class *c = object_class(dsp64);
+    for(int i = 0; i < c->c_messcount - 1; i++)
+        post(c->c_messlist[i].m_sym->s_name);
+    */
+    //post("chain : %ld", (long)dspchain);
+    
+    //dspchain_compile(x->f_subpatchers[0], maxvectorsize, samplerate);
+    //object_method(, gensym("getdspchain"), &dspchain);
+    post("objchain : %ld", (long)dsp64);
+    dspchain = dspchain_fromobject(x->f_subpatchers[0]);
+    post("dspchain :%ld count : %ld", (long)dspchain, dspchain->c_usedcount);
+    dspchain = dspchain_fromobject(x->f_subpatchers[1]);
+    post("dspchain :%ld count : %ld", (long)dspchain, dspchain->c_usedcount);
 }
 
 void hoa_patcher_assist(t_hoa_patcher *x, void *b, long m, long a, char *s)
