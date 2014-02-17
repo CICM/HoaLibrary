@@ -62,6 +62,8 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
         
 		x->f_encoder = new Hoa3D::Encoder(order);
 		
+		x->f_ob.z_misc = Z_NO_INPLACE;
+		
 		dsp_setup((t_pxobject *)x, 3);
 		for (int i = 0; i < x->f_encoder->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
@@ -98,11 +100,13 @@ void hoa_encoder_int(t_hoa_encoder *x, long n)
 
 void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    if(count[1] && count[2])
+	int azimuth = count[1];
+	int elevation = count[2];
+    if(azimuth && elevation)
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_azimuth_elevation, 0, NULL);
-    else if(count[1] && !count[2])
+    else if(azimuth && !elevation)
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_azimuth, 0, NULL);
-    else if(!count[1] && count[2])
+    else if(!azimuth && elevation)
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_elevation, 0, NULL);
     else
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64, 0, NULL);

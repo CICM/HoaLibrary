@@ -5,8 +5,8 @@
  */
 
 
-#ifndef hoa_gl_scope3D__hoa_gl_scope3D__h
-#define hoa_gl_scope3D__hoa_gl_scope3D__h
+#ifndef DEF_HOA_GLSCOPE
+#define DEF_HOA_GLSCOPE
 
 #include "../hoa.max.h"
 #include "../hoa.maxgl.h"

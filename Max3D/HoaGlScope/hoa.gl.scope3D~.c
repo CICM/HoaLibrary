@@ -24,7 +24,7 @@ void hoa_gl_scope_set_index(t_hoa_gl_scope *x, long i);
 
 t_jit_err hoa_gl_scope_init(void) 
 {
-	long ob3d_flags = JIT_OB3D_NO_MATRIXOUTPUT; // no matrix output
+	long ob3d_flags = JIT_OB3D_NO_MATRIXOUTPUT | JIT_OB3D_NO_FOG; // no matrix output
 	void *ob3d;
 	
 	_hoa_gl_scope_class = jit_class_new("hoa_gl_scope", 

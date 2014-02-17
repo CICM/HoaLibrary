@@ -48,7 +48,7 @@ int C74_EXPORT main(void)
 	class_register(CLASS_BOX, maxclass);
 	max_hoa_gl_scope_class = maxclass;
 	
-	//hoa_credit();
+	hoa_credit();
 	
 	return 0;
 }
