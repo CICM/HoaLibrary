@@ -98,7 +98,6 @@ void hoa_encoder_int(t_hoa_encoder *x, long n)
 
 void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    
     if(count[1] && count[2])
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_azimuth_elevation, 0, NULL);
     else if(count[1] && !count[2])

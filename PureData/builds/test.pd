@@ -1,0 +1,10 @@
+#N canvas 227 392 686 323 10;
+#X obj -140 -738 loadbang;
+#X msg -113 -668 salut;
+#X obj -119 -618 print;
+#X obj -52 -717 inlet;
+#X obj -107 -714 inlet~;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 3 0 2 0;
+#X coords 0 323 1 322 100 60 0;
