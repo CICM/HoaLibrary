@@ -98,7 +98,9 @@ namespace Hoa3D
         else
         {
             for(int i = 0; i < m_number_of_harmonics; i++)
+            {
                 outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
+            }
         }
     }
     
