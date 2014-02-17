@@ -11,6 +11,9 @@
 		2C5E4E3818AFDD2D0090D687 /* max.hoa.gl.scope3D~.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E4E3618AFDD2D0090D687 /* max.hoa.gl.scope3D~.c */; };
 		2C5E4E3A18AFDFCA0090D687 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5E4E3918AFDFCA0090D687 /* OpenGL.framework */; };
 		2C68A21D18B1081B0087E404 /* JitterAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C68A21C18B1081B0087E404 /* JitterAPI.framework */; };
+		2CA14E6518B2324F004265DC /* hoa.maxgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA14E6418B2324F004265DC /* hoa.maxgl.h */; };
+		2CA14E6718B27414004265DC /* hoa.max.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CA14E6618B27414004265DC /* hoa.max.c */; };
+		2CA14E6918B2741B004265DC /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA14E6818B2741B004265DC /* hoa.max.h */; };
 		8F14A95A18ABBC340080DC7D /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F14A95818ABBC340080DC7D /* Scope.cpp */; };
 		8F14A95B18ABBC340080DC7D /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F14A95918ABBC340080DC7D /* Scope.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
@@ -33,6 +36,10 @@
 		2C5E4E3618AFDD2D0090D687 /* max.hoa.gl.scope3D~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "max.hoa.gl.scope3D~.c"; sourceTree = "<group>"; };
 		2C5E4E3918AFDFCA0090D687 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		2C68A21C18B1081B0087E404 /* JitterAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JitterAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/jit-includes/JitterAPI.framework"; sourceTree = "<group>"; };
+		2CA14E6018B229D5004265DC /* hoa.gl.scope3D~.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hoa.gl.scope3D~.h"; sourceTree = "<group>"; };
+		2CA14E6418B2324F004265DC /* hoa.maxgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.maxgl.h; path = ../hoa.maxgl.h; sourceTree = "<group>"; };
+		2CA14E6618B27414004265DC /* hoa.max.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hoa.max.c; path = ../hoa.max.c; sourceTree = "<group>"; };
+		2CA14E6818B2741B004265DC /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.gl.scope3D~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.gl.scope3D~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F14A95818ABBC340080DC7D /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
 		8F14A95918ABBC340080DC7D /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
@@ -71,6 +78,10 @@
 			children = (
 				2C5E4E3518AFDD2D0090D687 /* hoa.gl.scope3D~.c */,
 				2C5E4E3618AFDD2D0090D687 /* max.hoa.gl.scope3D~.c */,
+				2CA14E6018B229D5004265DC /* hoa.gl.scope3D~.h */,
+				2CA14E6818B2741B004265DC /* hoa.max.h */,
+				2CA14E6618B27414004265DC /* hoa.max.c */,
+				2CA14E6418B2324F004265DC /* hoa.maxgl.h */,
 				8F8FEFFE18A26906000AD610 /* Sources */,
 				2C5E4E3918AFDFCA0090D687 /* OpenGL.framework */,
 				2C68A21C18B1081B0087E404 /* JitterAPI.framework */,
@@ -125,8 +136,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA14E6518B2324F004265DC /* hoa.maxgl.h in Headers */,
 				8FF606B918A378DE0022F248 /* Wider.h in Headers */,
 				8FF606B518A378DE0022F248 /* Hoa3D.h in Headers */,
+				2CA14E6918B2741B004265DC /* hoa.max.h in Headers */,
 				8FF606B418A378DE0022F248 /* Encoder.h in Headers */,
 				8F14A95B18ABBC340080DC7D /* Scope.h in Headers */,
 				8FF606B018A378DE0022F248 /* Ambisonic.h in Headers */,
@@ -215,6 +228,7 @@
 				8FF606B318A378DE0022F248 /* Encoder.cpp in Sources */,
 				8FF606B818A378DE0022F248 /* Wider.cpp in Sources */,
 				8FF606AF18A378DE0022F248 /* Ambisonic.cpp in Sources */,
+				2CA14E6718B27414004265DC /* hoa.max.c in Sources */,
 				8FF606B118A378DE0022F248 /* Decoder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
