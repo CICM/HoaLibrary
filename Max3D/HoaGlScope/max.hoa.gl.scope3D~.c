@@ -4,19 +4,7 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#include "../hoa.max.h"
-#include "jit.common.h"
-#include "jit.gl.h"
-
-
-typedef struct _max_hoa_gl_scope 
-{
-	t_pxobject		ob;
-	void*			obex;
-	double*         f_signals;
-    Hoa3D::Scope*   f_scope;
-    int             f_index;
-} t_max_hoa_gl_scope;
+#include "hoa.gl.scope3D~.h"
 
 t_jit_err hoa_gl_scope_init(void);
 
@@ -55,12 +43,12 @@ int C74_EXPORT main(void)
 
 	// add methods for 3d drawing
     max_jit_class_ob3d_wrap(maxclass);
-	
+		
 	class_dspinit(maxclass);
 	class_register(CLASS_BOX, maxclass);
 	max_hoa_gl_scope_class = maxclass;
 	
-	hoa_credit();
+	//hoa_credit();
 	
 	return 0;
 }
@@ -85,6 +73,7 @@ void hoa_gl_scope_perform64(t_max_hoa_gl_scope *x, t_object *dsp64, double **ins
     while(--sampleframes)
     {
         x->f_index++;
+		//object_method_long(x->jitObject, gensym("set_index"), x->f_index, NULL);
     }
 }
 
@@ -126,14 +115,17 @@ void *max_hoa_gl_scope_new(t_symbol *s, long argc, t_atom *argv)
 				jit_atom_arg_getsym(&dest_name_sym, 1, attrstart, argv);
 			}
 		}
+		
+		jit_ob = (t_jit_object*)jit_object_new(gensym("hoa_gl_scope"), dest_name_sym, x);
 
 		// instantiate Jitter object with dest_name arg
-		if ((jit_ob = (t_jit_object*)jit_object_new(gensym("hoa_gl_scope"), dest_name_sym)))
+		//if ((jit_ob = (t_jit_object*)jit_object_new(gensym("hoa_gl_scope"), dest_name_sym)))
+		if (jit_ob)
 		{
 			// set internal jitter object instance
 			max_jit_obex_jitob_set(x, jit_ob);
 			
-			x->f_scope = new Hoa3D::Scope(order, 15, 29);
+			x->f_scope = new Hoa3D::Scope(order, 100, 199);
 			dsp_setup((t_pxobject *)x, x->f_scope->getNumberOfHarmonics());
 			
 			x->f_signals = new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];

@@ -16,6 +16,7 @@ extern "C"
 #include "z_dsp.h"
 }
 
+/*
 void hoa_credit()
 {
     static t_object hoa_cred;
@@ -26,7 +27,7 @@ void hoa_credit()
         gensym("hoa.credit")->s_thing = &hoa_cred;
     }
 }
-
+*/
 #endif
 
 
