@@ -24,7 +24,7 @@ void hoa_gl_scope_set_index(t_hoa_gl_scope *x, long i);
 
 t_jit_err hoa_gl_scope_init(void) 
 {
-	long ob3d_flags = JIT_OB3D_NO_MATRIXOUTPUT | JIT_OB3D_NO_FOG; // no matrix output
+	long ob3d_flags = JIT_OB3D_NO_MATRIXOUTPUT | JIT_OB3D_NO_FOG | JIT_OB3D_NO_DEPTH; // no matrix output
 	void *ob3d;
 	
 	_hoa_gl_scope_class = jit_class_new("hoa_gl_scope", 
@@ -41,8 +41,6 @@ t_jit_err hoa_gl_scope_init(void)
 	// method is A_CANT because our draw setup needs to happen 
 	// in the ob3d beforehand to initialize OpenGL state 
 	jit_class_addmethod(_hoa_gl_scope_class, (method)hoa_gl_scope_draw, "ob3d_draw", A_CANT, 0L);
-	
-	jit_class_addmethod(_hoa_gl_scope_class, (method)hoa_gl_scope_set_index, "set_index", A_LONG, 0L);
 	
 	// define our dest_closing and dest_changed methods. 
 	// these methods are called by jit.gl.render when the 
@@ -66,12 +64,6 @@ t_jit_err hoa_gl_scope_init(void)
 
 	return JIT_ERR_NONE;
 }
-
-void hoa_gl_scope_set_index(t_hoa_gl_scope *x, long i)
-{
-	post("method index");
-}
-
 
 //t_hoa_gl_scope *hoa_gl_scope_new(t_symbol * dest_name)
 t_hoa_gl_scope *hoa_gl_scope_new(t_symbol * dest_name, t_max_hoa_gl_scope* _maxobj)
@@ -107,16 +99,21 @@ t_jit_err hoa_gl_scope_draw(t_hoa_gl_scope *x)
 	int nbRows, nbColumns;
 	float value;
     float one, two;
-	t_jrgb red  = {1.,0.,0.};
-	t_jrgb blue = {0.,0.,1.};
+	t_jrgb red  = {0.8,0.,0.};
+	t_jrgb blue = {0.,0.,0.8};
 	nbRows = x->mx->f_scope->getNumberOfRows();
 	nbColumns = x->mx->f_scope->getNumberOfColumns();
 	
 	x->mx->f_scope->process(x->mx->f_signals + x->mx->f_index * x->mx->f_scope->getNumberOfHarmonics());
 	
+	glEnable(GL_DEPTH_TEST);	// Active le test de profondeur
+	glShadeModel(GL_SMOOTH);
+
+	
 	glPointSize(1.0f);
-	//glBegin(GL_TRIANGLE_FAN);
-	glBegin(GL_LINE_LOOP);
+	glBegin(GL_TRIANGLE_FAN);
+	//glBegin(GL_LINE_LOOP);
+	//glBegin(GL_POINTS);
 	
 	for(int i = 0; i < nbRows; i++)
     {
@@ -192,6 +189,22 @@ t_jit_err hoa_gl_scope_draw(t_hoa_gl_scope *x)
         }
     }
 	glEnd();
+	
+	
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	
+	// Create light components
+	GLfloat ambientLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	GLfloat diffuseLight[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	GLfloat position[] = { -1.5f, 1.5f, 1.5f, 1.0f };
+	
+	// Assign created components to GL_LIGHT0
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	
 	return result;
 }

@@ -73,7 +73,6 @@ void hoa_gl_scope_perform64(t_max_hoa_gl_scope *x, t_object *dsp64, double **ins
     while(--sampleframes)
     {
         x->f_index++;
-		//object_method_long(x->jitObject, gensym("set_index"), x->f_index, NULL);
     }
 }
 

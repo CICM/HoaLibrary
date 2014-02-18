@@ -18,6 +18,8 @@ typedef struct _max_hoa_gl_scope
 	double*         f_signals;
     Hoa3D::Scope*   f_scope;
     int             f_index;
+	t_jrgb*			posColor;
+	t_jrgb*			negColor;
 } t_max_hoa_gl_scope;
 
 typedef struct _hoa_gl_scope
