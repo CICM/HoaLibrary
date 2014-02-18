@@ -39,7 +39,15 @@ t_class *hoa_dac_class;
 
 void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv);
 void hoa_dac_dsp64(t_hoa_dac *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_dac_int(t_hoa_dac *x, long l);
+
+void hoa_dac_list(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv);
+void hoa_dac_set(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv);
+
 void hoa_dac_anything(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv);
+void hoa_dac_keywords(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv);
+void hoa_dac_assist(t_hoa_dac *x, void *b, long m, long a, char *s);
+void hoa_dac_dblclick(t_hoa_dac *x);
 
 int C74_EXPORT main(void)
 {
@@ -51,6 +59,11 @@ int C74_EXPORT main(void)
     
     class_addmethod(c, (method)hoa_dac_anything,    "anything",	A_GIMME, 0);
 	class_addmethod(c, (method)hoa_dac_dsp64,		"dsp64",	A_CANT,  0);
+	class_addmethod(c, (method)hoa_dac_assist,		"assist",	A_CANT,	 0);
+	class_addmethod(c, (method)hoa_dac_dblclick,	"dblclick",	A_CANT,  0);
+	class_addmethod(c, (method)hoa_dac_int,			"int",		A_LONG,  0);
+	class_addmethod(c, (method)hoa_dac_list,		"list",		A_GIMME, 0);
+	class_addmethod(c, (method)hoa_dac_set,			"set",		A_GIMME, 0);
     
 	hoa_dac_class = c;
 	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
@@ -124,6 +137,31 @@ void hoa_dac_dsp64(t_hoa_dac *x, t_object *dsp64, short *count, double samplerat
 void hoa_dac_anything(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
 {
     object_method(x->f_dac, s, argc, argv);
+}
+
+void hoa_dac_int(t_hoa_dac *x, long l)
+{
+	object_method(x->f_dac, l == 1 ? gensym("start") : gensym("stop"), NULL, NULL);
+}
+
+void hoa_dac_list(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
+{
+	object_method(x->f_dac, gensym("list"), gensym("list"), argc, argv);
+}
+
+void hoa_dac_set(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
+{
+	object_method(x->f_dac, gensym("set"), gensym("set"), argc, argv);
+}
+
+void hoa_dac_assist(t_hoa_dac *x, void *b, long m, long a, char *s)
+{
+	object_method(x->f_dac, gensym("assist"), b, m, a, s);
+}
+
+void hoa_dac_dblclick(t_hoa_dac *x)
+{
+    object_method(x->f_dac, gensym("dblclick"), 0, NULL);
 }
 
 

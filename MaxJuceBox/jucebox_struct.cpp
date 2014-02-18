@@ -35,10 +35,12 @@ void jucebox_new(t_jucebox* x)
 
 void jucebox_free(t_jucebox* x)
 {
-	object_detach_byptr(x, x->mPatcherview);
-	x->mPatcherview = NULL;
+	//object_detach_byptr(x, x->mPatcherview);
+	//x->mPatcherview = NULL;
+	
 	x->juceWindowComp->removeFromDesktop();
 	delete x->juceWindowComp;
+	delete x->juceEditorComp;
 }
 
 EditorComponent* getOGLComponent(t_jucebox *x)

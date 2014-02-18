@@ -232,8 +232,8 @@ void hoaMeter_int(t_meter3d *x, long n)
 
 void hoaMeter_free(t_meter3d *x)
 {
-	jucebox_free((t_jucebox*)x);
 	dsp_freejbox((t_pxjbox *)x);
+	jucebox_free((t_jucebox*)x);
 }
 
 void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
