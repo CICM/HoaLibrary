@@ -111,8 +111,8 @@ t_jit_err hoa_gl_scope_draw(t_hoa_gl_scope *x)
 
 	
 	glPointSize(1.0f);
-	glBegin(GL_TRIANGLE_FAN);
-	//glBegin(GL_LINE_LOOP);
+	//glBegin(GL_TRIANGLE_FAN);
+	glBegin(GL_LINE_LOOP);
 	//glBegin(GL_POINTS);
 	
 	for(int i = 0; i < nbRows; i++)
