@@ -130,12 +130,14 @@ namespace Hoa3D
         // Yel(l, m)(x, y) = sqrt(((2l + 1) / 4Pi) * (l - m)! / (l + m)!) P(l, m)(cos(elevation))
         
         double normalize;
-        if(abs(argument) >= 1)
-            normalize = sqrt(2. * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+        if(abs(argument) == 0)
+			normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)));
+            //normalize = sqrt((2. * band + 1) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
        else
-            normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+			normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument))) * sqrt(2.);
+			//normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
         
-        //normalize = sqrt(2. * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+		
         return  normalize * associated_legendre(band, argument, cos(elevation));
 	}
     
