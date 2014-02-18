@@ -11,6 +11,6 @@ var searchData=
   ['_7eplanewaves',['~Planewaves',['../class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf',1,'Hoa3D::Planewaves']]],
   ['_7erotate',['~Rotate',['../class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2',1,'Hoa2D::Rotate::~Rotate()'],['../class_hoa3_d_1_1_rotate.html#a13a37adfe31314b7d5844333a4e587ab',1,'Hoa3D::Rotate::~Rotate()']]],
   ['_7escope',['~Scope',['../class_hoa3_d_1_1_scope.html#a84990cf90c7b3be0963f4cacbdab1df8',1,'Hoa3D::Scope']]],
-  ['_7evector',['~Vector',['../class_hoa3_d_1_1_vector.html#a0f7403e0ae42fe40f54fcb35977bf95c',1,'Hoa3D::Vector']]],
-  ['_7ewider',['~Wider',['../class_hoa3_d_1_1_wider.html#a4a2770414c2753a9c92740f02641db38',1,'Hoa3D::Wider']]]
+  ['_7evector',['~Vector',['../class_hoa3_d_1_1_vector.html#a0f7403e0ae42fe40f54fcb35977bf95c',1,'Hoa3D::Vector::~Vector()'],['../class_hoa3_d_1_1_vector.html#a0f7403e0ae42fe40f54fcb35977bf95c',1,'Hoa3D::Vector::~Vector()']]],
+  ['_7ewider',['~Wider',['../class_hoa3_d_1_1_wider.html#a4a2770414c2753a9c92740f02641db38',1,'Hoa3D::Wider::~Wider()'],['../class_hoa3_d_1_1_wider.html#a4a2770414c2753a9c92740f02641db38',1,'Hoa3D::Wider::~Wider()']]]
 ];

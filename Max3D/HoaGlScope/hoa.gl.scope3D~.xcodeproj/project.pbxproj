@@ -19,6 +19,7 @@
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
+		8FEFF2E718B38CD200EFD3EC /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FEFF2E618B38CD200EFD3EC /* Tools.h */; };
 		8FF606AF18A378DE0022F248 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606A418A378DE0022F248 /* Ambisonic.cpp */; };
 		8FF606B018A378DE0022F248 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606A518A378DE0022F248 /* Ambisonic.h */; };
 		8FF606B118A378DE0022F248 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606A618A378DE0022F248 /* Decoder.cpp */; };
@@ -46,6 +47,7 @@
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8FEFF2E618B38CD200EFD3EC /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		8FF606A418A378DE0022F248 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		8FF606A518A378DE0022F248 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
 		8FF606A618A378DE0022F248 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				8FF606A718A378DE0022F248 /* Decoder.h */,
 				8FF606A818A378DE0022F248 /* Encoder.cpp */,
 				8FF606A918A378DE0022F248 /* Encoder.h */,
+				8FEFF2E618B38CD200EFD3EC /* Tools.h */,
 				8FF606AA18A378DE0022F248 /* Hoa3D.h */,
 				8FF606AD18A378DE0022F248 /* Wider.cpp */,
 				8FF606AE18A378DE0022F248 /* Wider.h */,
@@ -142,6 +145,7 @@
 				2CA14E6918B2741B004265DC /* hoa.max.h in Headers */,
 				8FF606B418A378DE0022F248 /* Encoder.h in Headers */,
 				8F14A95B18ABBC340080DC7D /* Scope.h in Headers */,
+				8FEFF2E718B38CD200EFD3EC /* Tools.h in Headers */,
 				8FF606B018A378DE0022F248 /* Ambisonic.h in Headers */,
 				8FF606B218A378DE0022F248 /* Decoder.h in Headers */,
 			);
