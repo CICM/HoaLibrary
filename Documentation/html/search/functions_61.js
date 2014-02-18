@@ -25,5 +25,6 @@ var searchData=
   ['ambisonicsscope',['AmbisonicsScope',['../class_ambisonics_scope.html#a0b7854d037fb52d23898f390abc3a50c',1,'AmbisonicsScope']]],
   ['ambisonicvector',['AmbisonicVector',['../class_ambisonic_vector.html#ae4c02b111015ca551b50676e9989e5e1',1,'AmbisonicVector']]],
   ['ambisonicviewer',['AmbisonicViewer',['../class_ambisonic_viewer.html#aed38fd89c057c2b707a2bc5e91b17861',1,'AmbisonicViewer']]],
-  ['ambisonicwider',['AmbisonicWider',['../class_ambisonic_wider.html#a8e46f8e6bc4eda1c6c17f632d2e1a12f',1,'AmbisonicWider']]]
+  ['ambisonicwider',['AmbisonicWider',['../class_ambisonic_wider.html#a8e46f8e6bc4eda1c6c17f632d2e1a12f',1,'AmbisonicWider']]],
+  ['associated_5flegendre',['associated_legendre',['../namespace_hoa3_d.html#af1a17fb5f135864f61a4dcf84ec65879',1,'Hoa3D']]]
 ];

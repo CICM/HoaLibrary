@@ -43,7 +43,7 @@
 
 namespace Hoa3D
 {
-    inline int Factorial( int v )
+    inline int factorial( int v )
 	{
         int result = v;
 		if(v == 0)
@@ -55,7 +55,7 @@ namespace Hoa3D
 		return result;
 	}
     
-    inline int DoubleFactorial( int x )
+    inline int double_factorial( int x )
 	{
 		if (x == 0 || x == -1) {
 			return 1;
@@ -69,24 +69,85 @@ namespace Hoa3D
 		return result;
 	}
     
-    
-	inline double Legendre(int band, int argument, double angle)
+    //! The associated Legendre polynomials
+    /**	The function computes the associated Legendre polynomial \f$P(l, m)\f$ P(l, m) that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas : \n
+        P(l, l)(x) = (-1)^l * (2l - 1)!! * (1 - x * x )^(l * 0.5), \n
+        P(l + 1, l)(x) = x * (2l + 1) * P(l, l) and \n
+        P(l + 1, m)(x) = ((2l + 1) * x * P(m, l) - (l + m) * P(m, l - 1)) / (l - m + 1).
+     
+        @param     band     The band of the spherical harmonic.
+        @param     argument	The argument of the spherical harmonic.
+        @param     x        The cosinus of the elevation.
+        @return    The function return the associated Legendre polynomial P(l, m)(x).
+     
+        @see    spherical_harmonic_elevation
+        @see    spherical_harmonic_azimuth
+        @see    spherical_harmonic
+     */
+	inline double associated_legendre(int band, int argument, double x)
 	{
         band = abs(band);
         argument = abs(argument);
         
 		if(band == argument)
         {
-			return pow(-1.0f, float(argument)) * pow(1. - angle * angle, 0.5 * argument);
+			return pow(-1.0f, (double)argument) * double_factorial(2. * argument - 1) * pow(1. - x * x, 0.5 * argument);
 		}
 		else if(band == argument + 1)
         {
-			return angle * (2 * argument + 1) * Legendre(argument, argument, angle);
+			return x * (2 * argument + 1) * associated_legendre(argument, argument, x);
 		}
         else
         {
-            return (angle * (double)(2 * band - 1) * Legendre(band - 1, argument, angle) - (double)(band + argument - 1.) * Legendre(band - 2, argument, angle)) / (double)(band - argument);
+            return ((double)(2 * band - 1) * x *  associated_legendre(band - 1, argument, x) - (double)(band + argument - 1.) * associated_legendre(band - 2, argument, x)) / (double)(band - argument);
         }
+	}
+    
+    inline double K(int l, int m)
+	{
+        l = abs(l);
+        m = abs(m);
+        if(m == 0)
+            return sqrt((double)factorial(l - m) / (double)factorial(l + m));
+        else
+            return sqrt(2. * (double)factorial(l - m) / (double)factorial(l + m));
+	}
+    
+    //! The spherical harmonic elevation coefficient
+    /**	The funtion computes the elevation coefficients of spherical harmonics. It use the associated Legendre polynomials and normalize the result
+     
+     @param     band     The band of the spherical harmonic.
+     @param     argument	The argument of the spherical harmonic.
+     @param     x        The cosinus of the elevation.
+     @return    The function return the associated Legendre polynomial P(l, m)(x).
+     
+     @see    spherical_harmonic_elevation
+     @see    spherical_harmonic_azimuth
+     @see    spherical_harmonic
+     */
+    inline double spherical_harmonic_elevation(int band, int argument, double elevation) // With l = band and m the argument
+	{
+        // Yel(l, m)(x, y) = sqrt(((2l + 1) / 4Pi) * (l - m)! / (l + m)!) P(l, m)(cos(elevation))
+        
+        double normalize;
+        if(abs(argument) >= 1)
+            normalize = sqrt(2. * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+       else
+            normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+        
+        //normalize = sqrt(2. * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+        return  normalize * associated_legendre(band, argument, cos(elevation));
+	}
+    
+    inline double spherical_harmonic_azimuth(int band, int argument, double azimuth) // With l = band and m the argument
+	{
+        return 0;
+	}
+    
+    inline double spherical_harmonic(int band, int argument, double azimuth, double elevation) // With l = band and m the argument
+	{
+        // Y(l, m)(x, y) = Yel(l, m)(y) * Yaz(l, m)(x)
+        return spherical_harmonic_elevation(band, argument, elevation) * spherical_harmonic_azimuth(band, argument, azimuth);
 	}
     
     inline double wrap(const double value, const double low, const double high)

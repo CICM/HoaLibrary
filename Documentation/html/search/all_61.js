@@ -1,8 +1,8 @@
 var searchData=
 [
   ['ambisonic',['Ambisonic',['../class_hoa2_d_1_1_ambisonic.html',1,'Hoa2D']]],
-  ['ambisonic',['Ambisonic',['../class_ambisonic.html',1,'Ambisonic'],['../class_hoa2_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541',1,'Hoa2D::Ambisonic::Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541',1,'Hoa3D::Ambisonic::Ambisonic()'],['../class_ambisonic.html#ae704cc4472fd1efa22e39f7d501ca7e2',1,'Ambisonic::Ambisonic()']]],
   ['ambisonic',['Ambisonic',['../class_hoa3_d_1_1_ambisonic.html',1,'Hoa3D']]],
+  ['ambisonic',['Ambisonic',['../class_ambisonic.html',1,'Ambisonic'],['../class_hoa2_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541',1,'Hoa2D::Ambisonic::Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541',1,'Hoa3D::Ambisonic::Ambisonic()'],['../class_ambisonic.html#ae704cc4472fd1efa22e39f7d501ca7e2',1,'Ambisonic::Ambisonic()']]],
   ['ambisonicconvolver',['AmbisonicConvolver',['../class_ambisonic_convolver.html',1,'AmbisonicConvolver'],['../class_ambisonic_convolver.html#a738ca279b391cf1adba9e2004ac74c52',1,'AmbisonicConvolver::AmbisonicConvolver()']]],
   ['ambisonicencoder',['AmbisonicEncoder',['../class_ambisonic_encoder.html',1,'AmbisonicEncoder'],['../class_ambisonic_encoder.html#acf62830cd4a81423886be0f298fc0705',1,'AmbisonicEncoder::AmbisonicEncoder()']]],
   ['ambisonicfreeverb',['AmbisonicFreeverb',['../class_ambisonic_freeverb.html',1,'AmbisonicFreeverb'],['../class_ambisonic_freeverb.html#a802c9cbbd9eb3a1d8dbf70205f26807f',1,'AmbisonicFreeverb::AmbisonicFreeverb()']]],
@@ -31,5 +31,6 @@ var searchData=
   ['ambisonicviewer',['AmbisonicViewer',['../class_ambisonic_viewer.html',1,'AmbisonicViewer'],['../class_ambisonic_viewer.html#aed38fd89c057c2b707a2bc5e91b17861',1,'AmbisonicViewer::AmbisonicViewer()']]],
   ['ambisonicvirtualmicui',['AmbisonicVirtualMicUI',['../class_ambisonic_virtual_mic_u_i.html',1,'']]],
   ['ambisonicvirtualmicuimanager',['AmbisonicVirtualMicUIManager',['../class_ambisonic_virtual_mic_u_i_manager.html',1,'']]],
-  ['ambisonicwider',['AmbisonicWider',['../class_ambisonic_wider.html',1,'AmbisonicWider'],['../class_ambisonic_wider.html#a8e46f8e6bc4eda1c6c17f632d2e1a12f',1,'AmbisonicWider::AmbisonicWider()']]]
+  ['ambisonicwider',['AmbisonicWider',['../class_ambisonic_wider.html',1,'AmbisonicWider'],['../class_ambisonic_wider.html#a8e46f8e6bc4eda1c6c17f632d2e1a12f',1,'AmbisonicWider::AmbisonicWider()']]],
+  ['associated_5flegendre',['associated_legendre',['../namespace_hoa3_d.html#af1a17fb5f135864f61a4dcf84ec65879',1,'Hoa3D']]]
 ];

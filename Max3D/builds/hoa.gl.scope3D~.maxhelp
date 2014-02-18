@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 5,
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 104.0, 149.0, 951.0, 644.0 ],
+		"rect" : [ 104.0, 149.0, 1159.0, 680.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -45,11 +45,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 104.0, 175.0, 951.0, 618.0 ],
+						"rect" : [ 104.0, 175.0, 1159.0, 654.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +71,75 @@
 						"tags" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-37",
+									"maxclass" : "flonum",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "float", "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 390.0, 322.0, 50.0, 19.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-26",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "float" ],
+									"patching_rect" : [ 411.0, 399.0, 32.5, 19.0 ],
+									"text" : "/ 2."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-20",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "float" ],
+									"patching_rect" : [ 400.0, 361.0, 30.0, 19.0 ],
+									"text" : "sqrt"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-17",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
+									"patching_rect" : [ 427.0, 460.0, 32.5, 19.0 ],
+									"text" : "*~"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-19",
+									"maxclass" : "hoa.scope~",
+									"numinlets" : 7,
+									"numoutlets" : 0,
+									"patching_rect" : [ 601.25, 389.0, 225.0, 225.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -262,7 +331,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 46.25, 348.0, 320.0, 240.0 ]
+									"patching_rect" : [ 37.0, 361.0, 320.0, 240.0 ]
 								}
 
 							}
@@ -327,10 +396,10 @@
 									"fontsize" : 11.595187,
 									"id" : "obj-7",
 									"maxclass" : "newobj",
-									"numinlets" : 9,
+									"numinlets" : 64,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.125, 525.5, 150.0, 19.0 ],
-									"text" : "hoa.gl.scope3D~ 2 sketchy"
+									"patching_rect" : [ 441.125, 525.5, 869.5, 19.0 ],
+									"text" : "hoa.gl.scope3D~ 7 sketchy"
 								}
 
 							}
@@ -479,10 +548,10 @@
 									"id" : "obj-25",
 									"maxclass" : "newobj",
 									"numinlets" : 3,
-									"numoutlets" : 9,
-									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 444.0, 415.0, 127.0, 19.0 ],
-									"text" : "hoa.encoder3D~ 2"
+									"numoutlets" : 64,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 444.0, 415.0, 869.5, 19.0 ],
+									"text" : "hoa.encoder3D~ 7"
 								}
 
 							}
@@ -500,7 +569,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 6,
+											"revision" : 5,
 											"architecture" : "x64"
 										}
 ,
@@ -785,6 +854,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-21", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-11", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-6", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -848,6 +926,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-17", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-33", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -866,10 +953,10 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-25", 2 ],
+									"destination" : [ "obj-26", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-21", 0 ]
+									"source" : [ "obj-20", 0 ]
 								}
 
 							}
@@ -902,46 +989,37 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 8 ],
+									"destination" : [ "obj-17", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-25", 8 ]
+									"source" : [ "obj-25", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 7 ],
+									"destination" : [ "obj-19", 2 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-25", 7 ]
+									"source" : [ "obj-25", 3 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 6 ],
+									"destination" : [ "obj-19", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-25", 6 ]
+									"source" : [ "obj-25", 2 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 5 ],
+									"destination" : [ "obj-19", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-25", 5 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-7", 4 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-25", 4 ]
+									"source" : [ "obj-25", 0 ]
 								}
 
 							}
@@ -974,10 +1052,10 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
+									"destination" : [ "obj-17", 1 ],
 									"disabled" : 0,
 									"hidden" : 0,
-									"source" : [ "obj-25", 0 ]
+									"source" : [ "obj-26", 0 ]
 								}
 
 							}
@@ -1089,6 +1167,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-20", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-37", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-30", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1188,11 +1275,11 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 6,
+							"revision" : 5,
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 951.0, 618.0 ],
+						"rect" : [ 0.0, 26.0, 1159.0, 654.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -1256,6 +1343,10 @@
 			}
 , 			{
 				"name" : "hoa.pi.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.scope~.mxo",
 				"type" : "iLaX"
 			}
  ]

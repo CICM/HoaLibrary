@@ -97,7 +97,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Ambisonic.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html">    9</a></span>&#160;<span class="keyword">namespace </span>Hoa3D</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>Hoa3D</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541">   11</a></span>&#160;    <a class="code" href="class_hoa3_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541">Ambisonic::Ambisonic</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
@@ -106,7 +106,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        m_harmonics_arguments   = <span class="keyword">new</span> <span class="keywordtype">int</span>[m_number_of_harmonics];</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        m_harmonics_bands      = <span class="keyword">new</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>[m_number_of_harmonics];</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        {</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            m_harmonics_bands[i] = sqrtf((<span class="keywordtype">float</span>)i);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keywordtype">int</span> index = i - (m_harmonics_bands[i]) * (m_harmonics_bands[i]);</div>
@@ -130,7 +130,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 13 2014 10:43:19 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Feb 18 2014 08:26:35 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

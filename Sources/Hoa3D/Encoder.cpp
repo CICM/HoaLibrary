@@ -43,7 +43,7 @@ namespace Hoa3D
                 if(theta >= CICM_PI)
                     theta = CICM_2PI - theta;
                 
-                m_elevation_matrix[j][i] = Legendre(band, argument, cos(theta));
+                m_elevation_matrix[j][i] = spherical_harmonic_elevation(band, argument, theta);
             }
         }
     }

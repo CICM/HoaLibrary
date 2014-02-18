@@ -9,6 +9,10 @@ The 3\-D ambisonic classes.
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \hyperlink{class_hoa3_d_1_1_vector}{Vector}
+\begin{DoxyCompactList}\small\item\em The ambisonic vector. \end{DoxyCompactList}\item 
+class \hyperlink{class_hoa3_d_1_1_wider}{Wider}
+\begin{DoxyCompactList}\small\item\em The ambisonic wider. \end{DoxyCompactList}\item 
 class \hyperlink{class_hoa3_d_1_1_ambisonic}{Ambisonic}
 \begin{DoxyCompactList}\small\item\em The ambisonic class. \end{DoxyCompactList}\item 
 class \hyperlink{class_hoa3_d_1_1_decoder}{Decoder}
@@ -26,12 +30,98 @@ class \hyperlink{class_hoa3_d_1_1_planewaves}{Planewaves}
 class \hyperlink{class_hoa3_d_1_1_rotate}{Rotate}
 \begin{DoxyCompactList}\small\item\em The ambisonic rotate. \end{DoxyCompactList}\item 
 class \hyperlink{class_hoa3_d_1_1_scope}{Scope}
-\begin{DoxyCompactList}\small\item\em The ambisonic scope. \end{DoxyCompactList}\item 
-class \hyperlink{class_hoa3_d_1_1_vector}{Vector}
-\begin{DoxyCompactList}\small\item\em The ambisonic vector. \end{DoxyCompactList}\item 
-class \hyperlink{class_hoa3_d_1_1_wider}{Wider}
-\begin{DoxyCompactList}\small\item\em The ambisonic wider. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The ambisonic scope. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{namespace_hoa3_d_af1a17fb5f135864f61a4dcf84ec65879}{associated\-\_\-legendre} (int band, int argument, double x)
+\begin{DoxyCompactList}\small\item\em The associated Legendre polynomials. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{spherical\-\_\-harmonic\-\_\-elevation} (int band, int argument, double elevation)
+\begin{DoxyCompactList}\small\item\em The spherical harmonic elevation coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 The 3\-D ambisonic classes. All the 3\-D ambisonic and planewaves classes will be part of this namespace 
+
+\subsection{Function Documentation}
+\hypertarget{namespace_hoa3_d_af1a17fb5f135864f61a4dcf84ec65879}{\index{Hoa3\-D@{Hoa3\-D}!associated\-\_\-legendre@{associated\-\_\-legendre}}
+\index{associated\-\_\-legendre@{associated\-\_\-legendre}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{associated\-\_\-legendre}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::associated\-\_\-legendre (
+\begin{DoxyParamCaption}
+\item[{int}]{band, }
+\item[{int}]{argument, }
+\item[{double}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_af1a17fb5f135864f61a4dcf84ec65879}
+
+
+The associated Legendre polynomials. 
+
+The associated Legendre polynomial $\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$. $P(l, m)$ are used to compute the spherical harmonic coefficients where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. You should prefer to use the spherical harmonic elevation function that uses a normalization. It uses three recurrence formulas \-: \par
+P(l, l)(x) = (-\/1)$^\wedge$l $\ast$ (2l -\/ 1)!! $\ast$ (1 -\/ x $\ast$ x )$^\wedge$0.5, \par
+P(l + 1, l)(x) = x $\ast$ (2l + 1) $\ast$ P(l, l) and \par
+P(l + 1, m)(x) = ((2l + 1) $\ast$ x $\ast$ P(m, l) -\/ (l + m) $\ast$ P(m, l -\/ 1)) / (l -\/ m + 1).
+
+
+\begin{DoxyParams}{Parameters}
+{\em band} & The band of the spherical harmonic. \\
+\hline
+{\em argument} & The argument of the spherical harmonic. \\
+\hline
+{\em x} & The cosinus of the elevation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the associated Legendre polynomial P(l, m)(x).
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{spherical\-\_\-harmonic\-\_\-elevation} 
+
+spherical\-\_\-harmonic\-\_\-azimuth 
+
+spherical\-\_\-harmonic 
+\end{DoxySeeAlso}
+
+
+Definition at line 87 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{\index{Hoa3\-D@{Hoa3\-D}!spherical\-\_\-harmonic\-\_\-elevation@{spherical\-\_\-harmonic\-\_\-elevation}}
+\index{spherical\-\_\-harmonic\-\_\-elevation@{spherical\-\_\-harmonic\-\_\-elevation}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{spherical\-\_\-harmonic\-\_\-elevation}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::spherical\-\_\-harmonic\-\_\-elevation (
+\begin{DoxyParamCaption}
+\item[{int}]{band, }
+\item[{int}]{argument, }
+\item[{double}]{elevation}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}
+
+
+The spherical harmonic elevation coefficient. 
+
+\begin{DoxyVerb}The associated Legendre polynomial P(l, m)(x) are used to compute the spherical harmonic coefficients where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. You should prefer to use the spherical harmonic elevation function that uses a normalization. It uses three recurrence formulas :
+\end{DoxyVerb}
+ P(l, l)(x) = (-\/1)$^\wedge$l $\ast$ (2l -\/ 1)!! $\ast$ (1 -\/ x $\ast$ x )$^\wedge$0.5, P(l + 1, l)(x) = x $\ast$ (2l + 1) $\ast$ P(l, l) and P(l + 1, m)(x) = ((2l + 1) $\ast$ x $\ast$ P(m, l) -\/ (l + m) $\ast$ P(m, l -\/ 1)) / (l -\/ m + 1).
+
+
+\begin{DoxyParams}{Parameters}
+{\em band} & The band of the spherical harmonic. \\
+\hline
+{\em argument} & The argument of the spherical harmonic. \\
+\hline
+{\em x} & The cosinus of the elevation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the associated Legendre polynomial P(l, m)(x).
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{spherical\-\_\-harmonic\-\_\-elevation} 
+
+spherical\-\_\-harmonic\-\_\-azimuth 
+
+spherical\-\_\-harmonic 
+\end{DoxySeeAlso}
+
+
+Definition at line 121 of file Tools.\-h.
+
