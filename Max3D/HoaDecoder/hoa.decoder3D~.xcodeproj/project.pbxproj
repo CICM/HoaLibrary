@@ -10,6 +10,8 @@
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
+		8FEFF2EA18B3C46A00EFD3EC /* hoa.max.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FEFF2E818B3C46900EFD3EC /* hoa.max.c */; };
+		8FEFF2EB18B3C46A00EFD3EC /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FEFF2E918B3C46900EFD3EC /* hoa.max.h */; };
 		8FF6066718A361AC0022F248 /* hoa.decoder3D~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6066618A361AC0022F248 /* hoa.decoder3D~.cpp */; };
 		8FF6069818A378940022F248 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6068D18A378940022F248 /* Ambisonic.cpp */; };
 		8FF6069918A378940022F248 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6068E18A378940022F248 /* Ambisonic.h */; };
@@ -28,6 +30,8 @@
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8FEFF2E818B3C46900EFD3EC /* hoa.max.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hoa.max.c; path = ../hoa.max.c; sourceTree = "<group>"; };
+		8FEFF2E918B3C46900EFD3EC /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 		8FF6066618A361AC0022F248 /* hoa.decoder3D~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.decoder3D~.cpp"; sourceTree = SOURCE_ROOT; };
 		8FF6068D18A378940022F248 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		8FF6068E18A378940022F248 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				8FF6066618A361AC0022F248 /* hoa.decoder3D~.cpp */,
+				8FEFF2E818B3C46900EFD3EC /* hoa.max.c */,
+				8FEFF2E918B3C46900EFD3EC /* hoa.max.h */,
 				8F8FEFFE18A26906000AD610 /* Sources */,
 				8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */,
 				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
@@ -109,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FF6069918A378940022F248 /* Ambisonic.h in Headers */,
+				8FEFF2EB18B3C46A00EFD3EC /* hoa.max.h in Headers */,
 				8FF606A218A378940022F248 /* Wider.h in Headers */,
 				8FF6069E18A378940022F248 /* Hoa3D.h in Headers */,
 				8FF6069B18A378940022F248 /* Decoder.h in Headers */,
@@ -195,6 +202,7 @@
 				8FF6066718A361AC0022F248 /* hoa.decoder3D~.cpp in Sources */,
 				8FF606A118A378940022F248 /* Wider.cpp in Sources */,
 				8FF6069818A378940022F248 /* Ambisonic.cpp in Sources */,
+				8FEFF2EA18B3C46A00EFD3EC /* hoa.max.c in Sources */,
 				8FF6069A18A378940022F248 /* Decoder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
