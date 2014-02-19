@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 183.0, 55.0, 895.0, 686.0 ],
+		"rect" : [ 45.0, 48.0, 772.0, 657.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -48,7 +48,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 895.0, 660.0 ],
+						"rect" : [ 45.0, 74.0, 772.0, 631.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -71,6 +71,17 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"id" : "obj-18",
+									"maxclass" : "hoa.meter3D~",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 305.0, 267.0, 200.0, 200.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
 									"bgcolor" : [ 0.265339, 0.318288, 0.205757, 1.0 ],
 									"cam" : [ 183.0, 285.0, 93.0 ],
@@ -80,7 +91,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 160.0, 345.0, 262.0, 262.0 ],
-									"presentation_rect" : [ 155.0, 342.0, 0.0, 0.0 ],
 									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
 								}
 
@@ -360,7 +370,23 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 303.0, 262.0, 262.0 ],
+									"patching_rect" : [ 31.0, 303.0, 304.0, 304.0 ],
+									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
+									"bgcolor" : [ 0.265339, 0.318288, 0.205757, 1.0 ],
+									"cam" : [ 183.0, 285.0, 93.0 ],
+									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"id" : "obj-13",
+									"maxclass" : "hoa.meter3D~",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 31.0, 303.0, 304.0, 304.0 ],
 									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
 								}
 
@@ -378,61 +404,7 @@
 
 							}
  ],
-						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-13", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-11", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-13", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-4", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-13", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-5", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-13", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-6", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-13", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-7", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-13", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-8", 0 ]
-								}
-
-							}
- ]
+						"lines" : [  ]
 					}
 ,
 					"patching_rect" : [ 22.0, 27.0, 51.0, 20.0 ],
@@ -473,7 +445,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 895.0, 660.0 ],
+						"rect" : [ 0.0, 26.0, 772.0, 631.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
