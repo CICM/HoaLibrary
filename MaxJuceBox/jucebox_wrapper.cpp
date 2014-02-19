@@ -6,20 +6,45 @@
 
 #include "jucebox_wrapper.h"
 
-void jucebox_classinit(t_class* c, method paint)
+MaxOpenGlComponent::MaxOpenGlComponent()
 {
-	class_addmethod(c, (method)jucebox_paint, "paint", A_CANT, 0);
+    setBounds(-10, -10, 1, 1);
+    m_context = new OpenGLContext();
+    m_context->setComponentPaintingEnabled(false);
 
-	if(paint)
-		class_addmethod(c, paint, "jucebox_paint", A_CANT, 0);
+    m_context->attachTo(*this);
+    m_context->setContinuousRepainting(false);
+    setInterceptsMouseClicks(false, false);
+}
+
+Image MaxOpenGlComponent::makeScreenshot(t_object* x, double width, double height)
+{
+    Image img;
+    float scale = m_context->getRenderingScale();
+
+    if(!m_context->isActive())
+        return img;
+    setBounds(-width, -height, width, height);
+    img = Image(OpenGLImageType().create(Image::ARGB, roundToInt(width * scale), roundToInt(height * scale), true));
+    OpenGLFrameBuffer* buffer = OpenGLImageType::getFrameBufferFrom(img);
+   
+    buffer->makeCurrentAndClear();
+    
+    (object_getmethod(x, gensym("jucebox_paint")))(x, width * scale, height * scale);
+    buffer->releaseAsRenderingTarget();
+    return img;
+}
+
+void jucebox_initclass(t_class* c, method paint)
+{
+    assert(paint != NULL);
+	class_addmethod(c, (method)jucebox_paint, "paint", A_CANT, 0);
+    class_addmethod(c, (method)paint, "jucebox_paint", A_CANT, 0);
 }
 
 void jucebox_new(t_jucebox* x)
 {
-    t_rect rect;
-	jbox_get_patching_rect((t_object *)x, &rect);
     x->z_component = new MaxOpenGlComponent();
-	x->z_component->setBounds(0, 0, rect.width, rect.height);
 	x->z_component->setOpaque(false);
 	x->z_component->setVisible(true);
     x->z_component->addToDesktop(0);
@@ -38,6 +63,7 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
     int width, height, imgStride;
     unsigned char* data;
     
+    //x->z_component->setVisible(true);
     if(x->z_component->isOnDesktop())
     {
         x->z_component->setActive();
@@ -47,8 +73,7 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
             t_jgraphics *g = (t_jgraphics *)patcherview_get_jgraphics(patcherview);
             if(g)
             {
-                x->z_component->setBounds(-rect.width - 10, -rect.height - 10, rect.width, rect.height);
-                juce::Image openGLSnap = x->z_component->makeScreenshot((t_object *)x);
+                juce::Image openGLSnap = x->z_component->makeScreenshot((t_object *)x, rect.width, rect.height);
                 
                 juce::Image::BitmapData* snapBitmap = new juce::Image::BitmapData(openGLSnap, juce::Image::BitmapData::ReadWriteMode::readOnly);
                 data = snapBitmap->data;
@@ -66,6 +91,7 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
         }
         
     }
+    //x->z_component->setVisible(false);
 }
 
 

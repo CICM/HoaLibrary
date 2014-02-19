@@ -9,7 +9,7 @@
 
 typedef struct _meter3d
 {
-	t_jucebox	j_box; // custom t_pxjbox
+	t_jucebox	j_box;
 
     t_jrgba     bgcolor;
 	t_jrgba		bdcolor;
@@ -19,53 +19,48 @@ typedef struct _meter3d
 	void*       leftOutlet;
 } t_meter3d;
 
-/* ---------------------------------- */
 
-void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv);
-void hoaMeter_free(t_meter3d *x);
-void hoaMeter_assist(t_meter3d *x, void *b, long m, long a, char *s);
-//void hoaMeter_paint(t_meter3d *x, OpenGLContext* openGLContext);
-void hoaMeter_paint(t_meter3d *x);
-//void hoaMeter_paint(t_meter3d *x, t_object *patcherview);
-void hoaMeter_getdrawparams(t_meter3d *x, t_object *patcherview, t_jboxdrawparams *params);
-t_max_err hoaMeter_notify(t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, void *data);
+void *hoa_meter_new(t_symbol *s, long argc, t_atom *argv);
+void hoa_meter_free(t_meter3d *x);
+void hoa_meter_assist(t_meter3d *x, void *b, long m, long a, char *s);
+void hoa_meter_paint(t_meter3d *x, double w, double h);
 
-void hoaMeter_bang(t_meter3d *x);
-void hoaMeter_int(t_meter3d *x, long n);
-void hoaMeter_anything(t_meter3d *x, t_symbol *s, long argc, t_atom *argv);
+void hoa_meter_getdrawparams(t_meter3d *x, t_object *patcherview, t_jboxdrawparams *params);
+t_max_err hoa_meter_notify(t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, void *data);
 
-/* DSP ------------------------------------- */
-void hoaMeter_dsp64(t_meter3d *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoaMeter_perform64(t_meter3d *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_meter_bang(t_meter3d *x);
+void hoa_meter_int(t_meter3d *x, long n);
+void hoa_meter_anything(t_meter3d *x, t_symbol *s, long argc, t_atom *argv);
 
-void hoaMeter_mousedown(t_meter3d *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_meter_dsp64(t_meter3d *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_meter_perform64(t_meter3d *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-/* Attributs setters ------------------------------------- */
-t_max_err hoaMeter_setAttr_cam(t_meter3d *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaMeter_number_of_loudspeakers_set(t_meter3d *x, t_object *attr, long argc, t_atom *argv);
-t_max_err hoaMeter_angles_of_loudspeakers_set(t_meter3d *x, void *attr, long ac, t_atom *av);
+void hoa_meter_mousedown(t_meter3d *x, t_object *patcherview, t_pt pt, long modifiers);
 
-static t_class *s_hoaMeter_class;
+t_max_err hoa_meter_setAttr_cam(t_meter3d *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoa_meter_number_of_loudspeakers_set(t_meter3d *x, t_object *attr, long argc, t_atom *argv);
+t_max_err hoa_meter_angles_of_loudspeakers_set(t_meter3d *x, void *attr, long ac, t_atom *av);
+
+static t_class *s_hoa_meter_class;
 
 int C74_EXPORT main(void)
 {
 	t_class *c;
     
-	c = class_new("hoa.meter3D~", (method)hoaMeter_new, (method)hoaMeter_free, sizeof(t_meter3d), 0L, A_GIMME, 0);
+	c = class_new("hoa.meter3D~", (method)hoa_meter_new, (method)hoa_meter_free, sizeof(t_meter3d), 0L, A_GIMME, 0);
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	
+    jbox_initclass(c, JBOX_COLOR);
     class_dspinitjbox(c);
-	jbox_initclass(c, JBOX_COLOR);
-	
+	jucebox_initclass(c, (method)hoa_meter_paint);
     
-	jucebox_classinit(c, (method)hoaMeter_paint);
-	class_addmethod(c, (method)hoaMeter_dsp64,				"dsp64",		A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_mousedown,			"mousedown",	A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_assist,				"assist",		A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_bang,				"bang",         A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_getdrawparams,		"getdrawparams", A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_notify,				"notify",       A_CANT, 0);
+	class_addmethod(c, (method)hoa_meter_dsp64,				"dsp64",            A_CANT, 0);
+	class_addmethod(c, (method)hoa_meter_mousedown,			"mousedown",        A_CANT, 0);
+	class_addmethod(c, (method)hoa_meter_assist,			"assist",           A_CANT, 0);
+	class_addmethod(c, (method)hoa_meter_bang,				"bang",             A_CANT, 0);
+	class_addmethod(c, (method)hoa_meter_getdrawparams,		"getdrawparams",    A_CANT, 0);
+	class_addmethod(c, (method)hoa_meter_notify,			"notify",           A_CANT, 0);
 	
     CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 200 200");
     CLASS_ATTR_INVISIBLE		(c, "color", 0);
@@ -100,15 +95,15 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c, "cam", 0, "3D");
 	CLASS_ATTR_LABEL			(c, "cam", 0, "Camera XYZ");
 	CLASS_ATTR_DEFAULT_SAVE		(c, "cam", 0, "0. 0. 0.");
-	CLASS_ATTR_ACCESSORS        (c, "cam", NULL, hoaMeter_setAttr_cam);
+	CLASS_ATTR_ACCESSORS        (c, "cam", NULL, hoa_meter_setAttr_cam);
     
 	class_register(CLASS_BOX, c);
-	s_hoaMeter_class = c;
+	s_hoa_meter_class = c;
     
 	return 0;
 }
 
-void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
+void *hoa_meter_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_meter3d *x = NULL;
  	t_dictionary *d = NULL;
@@ -117,7 +112,7 @@ void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
     
-	x = (t_meter3d *)object_alloc(s_hoaMeter_class);
+	x = (t_meter3d *)object_alloc(s_hoa_meter_class);
 	boxflags = 0
     | JBOX_DRAWFIRSTIN
     | JBOX_NODRAWBOX
@@ -128,11 +123,10 @@ void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
     ;
     
 	jbox_new((t_jbox *)x, boxflags, argc, argv);
-	x->j_box.z_box.z_box.b_firstin = (t_object *)x;
-    dsp_setupjbox((t_pxjbox *)x, 1);
     
 	jucebox_new((t_jucebox*) x);
-    
+    x->j_box.z_box.z_box.b_firstin = (t_object *)x;
+    dsp_setupjbox((t_pxjbox *)x, 1);
     x->leftOutlet = outlet_new((t_object*)x, NULL);
     
 	attr_dictionary_process(x,d);
@@ -140,17 +134,17 @@ void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
 	return x;
 }
 
-void hoaMeter_dsp64(t_meter3d *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_meter_dsp64(t_meter3d *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	object_method(dsp64, gensym("dsp_add64"), x, hoaMeter_perform64, 0, NULL);
+	object_method(dsp64, gensym("dsp_add64"), x, hoa_meter_perform64, 0, NULL);
 }
 
-void hoaMeter_perform64(t_meter3d *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_meter_perform64(t_meter3d *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
 	;
 }
 
-t_max_err hoaMeter_setAttr_cam(t_meter3d *x, t_object *attr, long argc, t_atom *argv)
+t_max_err hoa_meter_setAttr_cam(t_meter3d *x, t_object *attr, long argc, t_atom *argv)
 {
 	if(argc && argv)
     {
@@ -163,14 +157,14 @@ t_max_err hoaMeter_setAttr_cam(t_meter3d *x, t_object *attr, long argc, t_atom *
     return MAX_ERR_NONE;
 }
 
-void hoaMeter_getdrawparams(t_meter3d *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoa_meter_getdrawparams(t_meter3d *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_bordercolor = x->bdcolor;
 	params->d_borderthickness = 1;
 	params->d_cornersize = 4;
 }
 
-t_max_err hoaMeter_notify(t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, void *data)
+t_max_err hoa_meter_notify(t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, void *data)
 {	
     if (sender && (m == gensym("attr_modified") )) {
         
@@ -194,31 +188,20 @@ t_max_err hoaMeter_notify(t_meter3d *x, t_symbol *s, t_symbol *m, void *sender, 
 	return jbox_notify((t_jbox *)x, s, m, sender, data);
 }
 
-void hoaMeter_assist(t_meter3d *x, void *b, long m, long a, char *s)
+void hoa_meter_assist(t_meter3d *x, void *b, long m, long a, char *s)
 {
 	if (m == 1)		//inlet
 		sprintf(s, "(signal) Audio Inputs");
 }
 
-//void hoaMeter_paint(t_meter3d *x, OpenGLContext* openGLContext)
-void hoaMeter_paint(t_meter3d *x)
+void hoa_meter_paint(t_meter3d *x, double w, double h)
 {
-	//openGLContext = dynamic_cast<OpenGLContext*>(openGLContext);
-	//.getRenderingScale();
-	//jassert (OpenGLHelpers::isContextActive());
-	
-	const float desktopScale = 1;
-
-	//const float desktopScale = openGLContext->getRenderingScale();
-	//post("desktopScale = %ld", desktopScale);
-
 	OpenGLHelpers::clear(jrgbaToColour(&x->bgcolor) );
-	
+
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
-	//OpenGLHelpers::setPerspective(60,(double) roundToInt (desktopScale * getWidth()) / roundToInt (desktopScale * getHeight()), 1,1000);
-	OpenGLHelpers::setPerspective(60,(double) roundToInt (desktopScale * 200) / roundToInt (desktopScale * 200), 1,1000);
-	
+
+	OpenGLHelpers::setPerspective(60, (double) roundToInt(w) / roundToInt(h), 1, 1000);
 	// active z-buffer
 	glEnable (GL_DEPTH_TEST);
 	glDepthFunc (GL_LESS);
@@ -244,22 +227,21 @@ void hoaMeter_paint(t_meter3d *x)
 	glEnd();
 }
 
-void hoaMeter_mousedown(t_meter3d *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_meter_mousedown(t_meter3d *x, t_object *patcherview, t_pt pt, long modifiers)
 {
 }
 
-void hoaMeter_bang(t_meter3d *x)
+void hoa_meter_bang(t_meter3d *x)
 {
 }
 
-void hoaMeter_int(t_meter3d *x, long n)
+void hoa_meter_int(t_meter3d *x, long n)
 {
 }
 
-void hoaMeter_free(t_meter3d *x)
+void hoa_meter_free(t_meter3d *x)
 {
     dsp_freejbox((t_pxjbox *)x);
-    jbox_free((t_jbox *)x);
     jucebox_free((t_jucebox*)x);
 }
 
