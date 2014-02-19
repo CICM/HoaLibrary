@@ -1,13 +1,11 @@
 /*
- // Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
- // For information on usage and redistribution, and for a DISCLAIMER OF ALL
- // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
- */
+// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-#ifndef DEF_JUCEBOX_STRUCT
-#define DEF_JUCEBOX_STRUCT
-
-#include "../JuceLibraryCode/JuceHeader.h"
+#ifndef DEF_JUCEBOX_WRAPPER
+#define DEF_JUCEBOX_WRAPPER
 
 extern "C"
 {
@@ -31,13 +29,13 @@ public:
     void setActive(){ m_context->makeActive();}
     inline char isActive() const { return (char)m_context->isActive(); }
     inline char isContextOk() const { return (char)(m_context == m_context->getCurrentContext()); }
-    ~MaxOpenGlComponent(){ m_context->detach(); }
+    ~MaxOpenGlComponent();
 };
 
 typedef struct _jucebox
 {
-	t_pxjbox                z_box;
-	MaxOpenGlComponent*     z_component;
+	t_pxjbox                j_box;
+	MaxOpenGlComponent*     j_component;
 } t_jucebox;
 
 void jucebox_initclass(t_class* c, method paint);

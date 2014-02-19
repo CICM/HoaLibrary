@@ -35,26 +35,31 @@ Image MaxOpenGlComponent::makeScreenshot(t_object* x, double width, double heigh
     return img;
 }
 
+MaxOpenGlComponent::~MaxOpenGlComponent()
+{
+    m_context->detach();
+    delete m_context;
+}
+
 void jucebox_initclass(t_class* c, method paint)
 {
-    assert(paint != NULL);
 	class_addmethod(c, (method)jucebox_paint, "paint", A_CANT, 0);
     class_addmethod(c, (method)paint, "jucebox_paint", A_CANT, 0);
 }
 
 void jucebox_new(t_jucebox* x)
 {
-    x->z_component = new MaxOpenGlComponent();
-	x->z_component->setOpaque(false);
-	x->z_component->setVisible(true);
-    x->z_component->addToDesktop(0);
-    x->z_component->setActive();
+    x->j_component = new MaxOpenGlComponent();
+	x->j_component->setOpaque(false);
+	x->j_component->setVisible(true);
+    x->j_component->addToDesktop(0);
+    x->j_component->setActive();
 }
 
 void jucebox_free(t_jucebox* x)
 {
-	x->z_component->removeFromDesktop();
-    delete x->z_component;
+	x->j_component->removeFromDesktop();
+    delete x->j_component;
 }
 
 void jucebox_paint(t_jucebox* x, t_object *patcherview)
@@ -63,17 +68,17 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
     int width, height, imgStride;
     unsigned char* data;
     
-    //x->z_component->setVisible(true);
-    if(x->z_component->isOnDesktop())
+    //x->j_component->setVisible(true);
+    if(x->j_component->isOnDesktop())
     {
-        x->z_component->setActive();
-        if(x->z_component->isContextOk())
+        x->j_component->setActive();
+        if(x->j_component->isContextOk())
         {
             jbox_get_rect_for_view((t_object *)x, patcherview, &rect);
             t_jgraphics *g = (t_jgraphics *)patcherview_get_jgraphics(patcherview);
             if(g)
             {
-                juce::Image openGLSnap = x->z_component->makeScreenshot((t_object *)x, rect.width, rect.height);
+                juce::Image openGLSnap = x->j_component->makeScreenshot((t_object *)x, rect.width, rect.height);
                 
                 juce::Image::BitmapData* snapBitmap = new juce::Image::BitmapData(openGLSnap, juce::Image::BitmapData::ReadWriteMode::readOnly);
                 data = snapBitmap->data;
@@ -91,7 +96,7 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
         }
         
     }
-    //x->z_component->setVisible(false);
+    //x->j_component->setVisible(false);
 }
 
 
