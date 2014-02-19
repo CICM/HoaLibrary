@@ -150,11 +150,14 @@ void hoa_patcher_dsp64(t_hoa_patcher *x, t_object *dsp64, short *count, double s
     
     //dspchain_compile(x->f_subpatchers[0], maxvectorsize, samplerate);
     //object_method(, gensym("getdspchain"), &dspchain);
+	/*
     post("objchain : %ld", (long)dsp64);
     dspchain = dspchain_fromobject(x->f_subpatchers[0]);
     post("dspchain :%ld count : %ld", (long)dspchain, dspchain->c_usedcount);
     dspchain = dspchain_fromobject(x->f_subpatchers[1]);
     post("dspchain :%ld count : %ld", (long)dspchain, dspchain->c_usedcount);
+	*/
+	// object_method((t_object *)x->f_patcher, gensym("dsp64"), dsp64, count, samplerate, maxvectorsize, flags);
 }
 
 void hoa_patcher_assist(t_hoa_patcher *x, void *b, long m, long a, char *s)
