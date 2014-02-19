@@ -38,7 +38,7 @@ typedef struct _jucebox
 	MaxOpenGlComponent*     j_component;
 } t_jucebox;
 
-void jucebox_initclass(t_class* c, method paint);
+void jucebox_initclass(t_class* c, method paint, long flags);
 void jucebox_new(t_jucebox* x);
 void jucebox_free(t_jucebox* x);
 void jucebox_paint(t_jucebox* x, t_object *patcherview);

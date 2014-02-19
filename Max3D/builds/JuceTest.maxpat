@@ -34,7 +34,9 @@
 					"maxclass" : "hoa.meter3D~",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 152.0, 211.0, 200.0, 200.0 ],
+					"patching_rect" : [ 152.0, 211.0, 375.0, 375.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 152.0, 211.0, 147.0, 147.0 ],
 					"spherecolor" : [ 0.0, 0.9, 0.9, 1.0 ]
 				}
 

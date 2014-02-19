@@ -41,8 +41,9 @@ MaxOpenGlComponent::~MaxOpenGlComponent()
     delete m_context;
 }
 
-void jucebox_initclass(t_class* c, method paint)
+void jucebox_initclass(t_class* c, method paint, long flags)
 {
+    jbox_initclass(c, flags);
 	class_addmethod(c, (method)jucebox_paint, "paint", A_CANT, 0);
     class_addmethod(c, (method)paint, "jucebox_paint", A_CANT, 0);
 }
@@ -58,6 +59,7 @@ void jucebox_new(t_jucebox* x)
 
 void jucebox_free(t_jucebox* x)
 {
+    jbox_free((t_jbox *)x);
 	x->j_component->removeFromDesktop();
     delete x->j_component;
 }

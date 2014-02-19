@@ -45,9 +45,8 @@ int C74_EXPORT main(void)
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	
     class_dspinitjbox(c);
-    jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
+    jucebox_initclass(c, (method)hoa_meter_paint,  JBOX_COLOR | JBOX_FIXWIDTH);
     
-    jucebox_initclass(c, (method)hoa_meter_paint);
 	class_addmethod(c, (method)hoa_meter_dsp64,				"dsp64",            A_CANT, 0);
 	class_addmethod(c, (method)hoa_meter_mousedown,			"mousedown",        A_CANT, 0);
 	class_addmethod(c, (method)hoa_meter_assist,			"assist",           A_CANT, 0);
@@ -225,7 +224,6 @@ void hoa_meter_mousedown(t_hoa_meter *x, t_object *patcherview, t_pt pt, long mo
 void hoa_meter_free(t_hoa_meter *x)
 {
     dsp_freejbox((t_pxjbox *)x);
-    jbox_free((t_jbox *)x);
     jucebox_free((t_jucebox*)x);
 }
 
