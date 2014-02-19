@@ -4,18 +4,13 @@
  // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#include "ext.h"
-#include "ext_obex.h"
-#include "jpatcher_api.h"
-#include "jgraphics.h"
-#include "z_dsp.h"
-
 #include "../../MaxJuceBox/jucebox_wrapper.h"
+#include "../../Sources/HoaOpenGL/OpenGLTools.h"
 
 typedef struct _meter3d
 {
 	t_jucebox	j_box; // custom t_pxjbox
-    t_rect      rect;
+
     t_jrgba     bgcolor;
 	t_jrgba		bdcolor;
 	t_jrgba		spherecolor;
@@ -59,19 +54,18 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.meter3D~", (method)hoaMeter_new, (method)hoaMeter_free, sizeof(t_meter3d), 0L, A_GIMME, 0);
     
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
-	class_dspinitjbox(c);
+	
+    class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_COLOR);
 	
-	initialiseJuce_GUI();
-	
-	jucebox_class_new(c, (method)hoaMeter_paint, (method)hoaMeter_notify);
-
+    
+	jucebox_classinit(c, (method)hoaMeter_paint);
 	class_addmethod(c, (method)hoaMeter_dsp64,				"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)hoaMeter_mousedown,			"mousedown",	A_CANT, 0);
 	class_addmethod(c, (method)hoaMeter_assist,				"assist",		A_CANT, 0);
-	class_addmethod(c, (method)hoaMeter_bang,				"bang", A_CANT, 0);
+	class_addmethod(c, (method)hoaMeter_bang,				"bang",         A_CANT, 0);
 	class_addmethod(c, (method)hoaMeter_getdrawparams,		"getdrawparams", A_CANT, 0);
-	
+	class_addmethod(c, (method)hoaMeter_notify,				"notify",       A_CANT, 0);
 	
     CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 200 200");
     CLASS_ATTR_INVISIBLE		(c, "color", 0);
@@ -106,12 +100,44 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_CATEGORY			(c, "cam", 0, "3D");
 	CLASS_ATTR_LABEL			(c, "cam", 0, "Camera XYZ");
 	CLASS_ATTR_DEFAULT_SAVE		(c, "cam", 0, "0. 0. 0.");
-	CLASS_ATTR_ACCESSORS (c, "cam", NULL, hoaMeter_setAttr_cam);
+	CLASS_ATTR_ACCESSORS        (c, "cam", NULL, hoaMeter_setAttr_cam);
     
 	class_register(CLASS_BOX, c);
 	s_hoaMeter_class = c;
     
 	return 0;
+}
+
+void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
+{
+	t_meter3d *x = NULL;
+ 	t_dictionary *d = NULL;
+	long boxflags;
+	
+	if (!(d = object_dictionaryarg(argc,argv)))
+		return NULL;
+    
+	x = (t_meter3d *)object_alloc(s_hoaMeter_class);
+	boxflags = 0
+    | JBOX_DRAWFIRSTIN
+    | JBOX_NODRAWBOX
+    | JBOX_DRAWINLAST
+    | JBOX_TRANSPARENT
+    | JBOX_GROWY
+    | JBOX_DRAWBACKGROUND
+    ;
+    
+	jbox_new((t_jbox *)x, boxflags, argc, argv);
+	x->j_box.z_box.z_box.b_firstin = (t_object *)x;
+    dsp_setupjbox((t_pxjbox *)x, 1);
+    
+	jucebox_new((t_jucebox*) x);
+    
+    x->leftOutlet = outlet_new((t_object*)x, NULL);
+    
+	attr_dictionary_process(x,d);
+	jbox_ready((t_jbox *)x);
+	return x;
 }
 
 void hoaMeter_dsp64(t_meter3d *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
@@ -179,14 +205,14 @@ void hoaMeter_paint(t_meter3d *x)
 {
 	//openGLContext = dynamic_cast<OpenGLContext*>(openGLContext);
 	//.getRenderingScale();
-	jassert (OpenGLHelpers::isContextActive());
+	//jassert (OpenGLHelpers::isContextActive());
 	
 	const float desktopScale = 1;
 
 	//const float desktopScale = openGLContext->getRenderingScale();
 	//post("desktopScale = %ld", desktopScale);
 
-	OpenGLHelpers::clear ( jrgbaToColour(&x->bgcolor) );
+	OpenGLHelpers::clear(jrgbaToColour(&x->bgcolor) );
 	
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
@@ -232,39 +258,8 @@ void hoaMeter_int(t_meter3d *x, long n)
 
 void hoaMeter_free(t_meter3d *x)
 {
-	jucebox_free((t_jucebox*)x);
-	dsp_freejbox((t_pxjbox *)x);
+    dsp_freejbox((t_pxjbox *)x);
+    jbox_free((t_jbox *)x);
+    jucebox_free((t_jucebox*)x);
 }
 
-void *hoaMeter_new(t_symbol *s, long argc, t_atom *argv)
-{
-	t_meter3d *x = NULL;
- 	t_dictionary *d = NULL;
-	long boxflags;
-	
-	if (!(d = object_dictionaryarg(argc,argv)))
-		return NULL;
-    
-	x = (t_meter3d *)object_alloc(s_hoaMeter_class);
-	boxflags = 0
-    | JBOX_DRAWFIRSTIN
-    | JBOX_NODRAWBOX
-    | JBOX_DRAWINLAST
-    | JBOX_TRANSPARENT
-    | JBOX_GROWY
-    | JBOX_DRAWBACKGROUND
-    ;
-    
-	jbox_new((t_jbox *)x, boxflags, argc, argv);
-	x->j_box.z_box.b_firstin = (t_object *)x;
-    
-    jbox_get_patching_rect((t_object *)x, &x->rect);
-    
-	jucebox_new((t_jucebox*) x);
-    
-    x->leftOutlet = outlet_new((t_object*)x, NULL);
-    
-	attr_dictionary_process(x,d);
-	jbox_ready((t_jbox *)x);
-	return x;
-}
