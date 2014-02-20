@@ -17,6 +17,7 @@ extern "C"
 }
 
 void hoa_credit();
+void hoa_print_credit();
 #endif
 
 

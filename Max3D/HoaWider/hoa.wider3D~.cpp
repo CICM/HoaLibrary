@@ -43,7 +43,7 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_wider_class = c;
-    hoa_credit();
+    hoa_print_credit();
     
 	return 0;
 }

@@ -1,61 +1,91 @@
-/**
- * HoaLibrary : A High Order Ambisonics Library
- * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- * All rights reserved.re Guillot, CICM - Université Paris 8
- * All rights reserved.
- *
- * Website  : http://www.mshparisnord.fr/HoaLibrary/
- * Contacts : cicm.mshparisnord@gmail.com
- *
- * This file is part of HOA LIBRARY.
- *
- * HOA LIBRARY is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
+/*
+ // Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+ // For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
  */
 
-#include "hoa.connect.h"
+#include "ext.h"
+#include "ext_obex.h"
+#include "jgraphics.h"
+#include "../hoa.max.h"
+
+#define CONNECT_MAX_TAB 100
+
+typedef struct  _connect
+{
+	t_object	f_ob;
+	
+	t_object*	f_patcher;
+	t_object*	f_patcherview;
+	
+	t_object*	f_object[CONNECT_MAX_TAB];
+	int			f_index[CONNECT_MAX_TAB];
+	int			f_mode[CONNECT_MAX_TAB];
+	int			f_order[CONNECT_MAX_TAB];
+	int			f_inlet[CONNECT_MAX_TAB];
+	int			f_outlet[CONNECT_MAX_TAB];
+	int			f_connected[CONNECT_MAX_TAB];
+	
+	t_jrgba		f_colorPositiv;
+	t_jrgba		f_colorNegativ;
+	t_jrgba		f_colorPlane;
+	
+	int			f_nbSelected;
+	int			f_inc;
+	int			f_harmonics;
+	int			f_output;
+} t_connect;
+
+void *connect_class;
+
+void *connect_new(t_symbol *s, long argc, t_atom *argv);
+
+void connect_free(t_connect *x);
+void connect_bang(t_connect *x);
+void connect_assist(t_connect *x, void *b, long m, long a, char *s);
+void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive, int inlet);
+void connect_attach(t_connect *x);
+void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void connect_list(t_connect *x, t_symbol *s, long argc, t_atom *argv);
+
+t_max_err connect_setattr_poscolor(t_connect *x, void *attr, long argc, t_atom *argv);
+t_max_err connect_setattr_negcolor(t_connect *x, void *attr, long argc, t_atom *argv);
+t_max_err connect_setattr_planecolor(t_connect *x, void *attr, long argc, t_atom *argv);
+
+int validName(t_object *box);
+
+void color_patchline(t_connect *x);
+int validConditionColor(t_object *obj);
 
 int C74_EXPORT main(void)
 {
 	t_class *c;
 
-	c = class_new("hoa.connect", (method)connect_new, (method)connect_free, sizeof(t_connect), 0L, A_GIMME, 0);
+	c = class_new("hoa.connect3D", (method)connect_new, (method)connect_free, sizeof(t_connect), 0L, A_GIMME, 0);
 	
-	class_addmethod(c, (method)connect_notify,				"notify",		A_CANT, 0);
-	class_addmethod(c, (method)connect_bang,				"bang",			A_CANT,	0);
-    class_addmethod(c, (method)connect_assist,				"assist",			A_CANT,	0);
+	class_addmethod(c, (method)connect_notify,	"notify",	A_CANT, 0);
+	class_addmethod(c, (method)connect_bang,	"bang",		A_CANT,	0);
+    class_addmethod(c, (method)connect_assist,	"assist",	A_CANT,	0);
 	
-	// defaults don't work with non-UI objects (an optimization)
-	CLASS_ATTR_CATEGORY(c, "poscolor", 0, "Behavior");
-	CLASS_ATTR_RGBA(c, "poscolor", 0, t_connect, f_colorPositiv);
-	CLASS_ATTR_ACCESSORS(c, "poscolor", NULL, connect_setattr_poscolor);
-	CLASS_ATTR_SAVE(c, "poscolor", 1);
+	CLASS_STICKY_ATTR		(c, "category", 0, "Behavior");
+	CLASS_ATTR_RGBA			(c, "poscolor", 0, t_connect, f_colorPositiv);
+	CLASS_ATTR_ACCESSORS	(c, "poscolor", NULL, connect_setattr_poscolor);
+	CLASS_ATTR_SAVE			(c, "poscolor", 1);
+
+	CLASS_ATTR_RGBA			(c, "negcolor", 0, t_connect, f_colorNegativ);
+	CLASS_ATTR_ACCESSORS	(c, "negcolor", NULL, connect_setattr_negcolor);
+	CLASS_ATTR_SAVE			(c, "negcolor", 1);
 	
-	CLASS_ATTR_CATEGORY(c, "negcolor", 0, "Behavior");
-	CLASS_ATTR_RGBA(c, "negcolor", 0, t_connect, f_colorNegativ);
-	CLASS_ATTR_ACCESSORS(c, "negcolor", NULL, connect_setattr_negcolor);
-	CLASS_ATTR_SAVE(c, "poscolor", 1);
-	
-	CLASS_ATTR_CATEGORY(c, "planecolor", 0, "Behavior");
-	CLASS_ATTR_RGBA(c, "planecolor", 0, t_connect, f_colorPlane);
-	CLASS_ATTR_ACCESSORS(c, "planecolor", NULL, connect_setattr_planecolor);
-	CLASS_ATTR_SAVE(c, "poscolor", 1);
+	CLASS_ATTR_RGBA			(c, "planecolor", 0, t_connect, f_colorPlane);
+	CLASS_ATTR_ACCESSORS	(c, "planecolor", NULL, connect_setattr_planecolor);
+	CLASS_ATTR_SAVE			(c, "planecolor", 1);
+	CLASS_STICKY_ATTR_CLEAR	(c, "category");
 	
 	class_register(CLASS_BOX, c);
 	connect_class = c;
-	
-	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
+	//hoa_credit();
+	hoa_print_credit();
+	return 0;
 }
 
 void *connect_new(t_symbol *s, long argc, t_atom *argv)
@@ -81,10 +111,8 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_colorNegativ.green = x->f_colorNegativ.red = 0.;
 		x->f_colorPlane.red = x->f_colorPlane.green = x->f_colorPlane.blue = x->f_colorPlane.alpha = 1.;
 		
-		defer_low(x, (method)connect_attach, NULL, 0, NULL);
-		
-		//attr_args_process(x, argc, argv);
 		x->f_nbSelected = 0;
+		defer_low(x, (method)connect_attach, NULL, 0, NULL);
 	}
 	
 	return x;
@@ -94,6 +122,13 @@ void connect_free(t_connect *x)
 {
 	if(x->f_patcherview)
 		object_detach_byptr(x, x->f_patcherview);
+}
+
+void connect_attach(t_connect *x)
+{
+	object_obex_lookup(x, gensym("#P"), &x->f_patcher);
+	x->f_patcherview = object_attr_getobj(x->f_patcher, gensym("firstview"));
+	object_attach_byptr_register(x, x->f_patcherview, CLASS_NOBOX);
 }
 
 void connect_assist(t_connect *x, void *b, long m, long a, char *s)
@@ -191,23 +226,23 @@ void connect_bang(t_connect *x)
 
 void color_patchline(t_connect *x)
 {
-	t_object *line, *obj, *patcher;
-	object_obex_lookup(x, gensym("#P"), &patcher);
-	for (line = jpatcher_get_firstline(patcher); line; line = jpatchline_get_nextline(line)) 
+	int validate;
+	t_object *line = jpatcher_get_firstline(x->f_patcher);
+	t_jrgba* linecolor;
+	while (line)
 	{
-		obj = jbox_get_object(jpatchline_get_box1(line));
-						   
-		if (validConditionColor(obj) == 1)
-		{ 
-			if (jpatchline_get_inletnum(line) % 2 == 1) 
-				jpatchline_set_color(line, &x->f_colorNegativ);
-			else
-				jpatchline_set_color(line, &x->f_colorPositiv);
+		validate = validConditionColor(jbox_get_object(jpatchline_get_box1(line)));
+		if (validate != 0)
+		{
+			switch (validate)
+			{
+				case 1: { linecolor = (jpatchline_get_inletnum(line) % 2 == 1) ? &x->f_colorNegativ : &x->f_colorPositiv; break; }
+				case 2: { linecolor = &x->f_colorPlane; break; }
+				default: break;
+			}
+			jpatchline_set_color(line, linecolor);
 		}
-		else if (validConditionColor(obj) == 2)
-		{ 
-			jpatchline_set_color(line, &x->f_colorPlane);		
-		}
+		line = jpatchline_get_nextline(line);
 	}
 }
 
@@ -222,13 +257,6 @@ void connect_connect(t_object *x, t_object *send, int outlet, t_object *receive,
 	atom_setlong(msg + 3, inlet);
 
 	object_method_typed(x , gensym("connect"), 4, msg, &rv);
-}
-
-void connect_attach(t_connect *x)
-{	
-	object_obex_lookup(x, gensym("#P"), &x->f_patcher);
-	x->f_patcherview = object_attr_getobj(x->f_patcher, gensym("firstview"));
-	object_attach_byptr_register(x, x->f_patcherview, CLASS_NOBOX);
 }
 
 void connect_notify(t_connect *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
@@ -391,8 +419,7 @@ int validConditionColor(t_object *obj)
 	   obclass == gensym("hoa.convolve~") ||
 	   obclass == gensym("hoa.wider~") ||
 	   obclass == gensym("hoa.map~") ||
-	   obclass == gensym("hoa.freeverb~") ||
-	   obclass == gensym("hoa.gigaverb~")
+	   obclass == gensym("hoa.freeverb~")
 	   )
 		return 1;
 	else if(obclass == gensym("hoa.projector~") ||
