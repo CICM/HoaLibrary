@@ -114,7 +114,8 @@ Definition at line 105 of file Tools.\-h.
 
 The maximum clipping function. 
 
-The function clips a number at a maximum value.
+The function clips a number at a maximum value. \par
+If $x > max$, $f(x) = max$ else $f(x) = x$.
 
 
 \begin{DoxyParams}{Parameters}
@@ -133,7 +134,7 @@ The function return the clipped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 308 of file Tools.\-h.
+Definition at line 311 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}{\index{Hoa3\-D@{Hoa3\-D}!clip\-\_\-min@{clip\-\_\-min}}
 \index{clip\-\_\-min@{clip\-\_\-min}!Hoa3D@{Hoa3\-D}}
@@ -147,7 +148,8 @@ Definition at line 308 of file Tools.\-h.
 
 The minimum clipping function. 
 
-The function clips a number at a minimum value.
+The function clips a number at a minimum value. \par
+If $x < min$, $f(x) = min$ else $f(x) = x$.
 
 
 \begin{DoxyParams}{Parameters}
@@ -166,7 +168,7 @@ The function return the clipped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 290 of file Tools.\-h.
+Definition at line 292 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_af7d43c71e1aba23d9bff6ffa2db6b95b}{\index{Hoa3\-D@{Hoa3\-D}!clip\-\_\-minmax@{clip\-\_\-minmax}}
 \index{clip\-\_\-minmax@{clip\-\_\-minmax}!Hoa3D@{Hoa3\-D}}
@@ -181,7 +183,8 @@ Definition at line 290 of file Tools.\-h.
 
 The clipping function. 
 
-The function clips a number between boundaries.
+The function clips a number between boundaries. \par
+If $x < min$, $f(x) = min$ else if $x > max$, $f(x) = max$ else $f(x) = x$.
 
 
 \begin{DoxyParams}{Parameters}
@@ -202,7 +205,7 @@ The function return the clipped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 270 of file Tools.\-h.
+Definition at line 271 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}{\index{Hoa3\-D@{Hoa3\-D}!double\-\_\-factorial@{double\-\_\-factorial}}
 \index{double\-\_\-factorial@{double\-\_\-factorial}!Hoa3D@{Hoa3\-D}}
@@ -215,7 +218,8 @@ Definition at line 270 of file Tools.\-h.
 
 The double factorial. 
 
-The function computes the double factorial $n!!$, the product of all the odd integers up to some odd positive integer $n$ \-: \[n!= n \times (n - 2) \times (n - 4) \times {...} \]
+The function computes the double factorial, the product of all the odd integers up to some odd positive integer \-:\par
+ $n!! = n \times (n - 2) \times (n - 4) \times {...} $
 
 
 \begin{DoxyParams}{Parameters}
@@ -243,7 +247,8 @@ Definition at line 76 of file Tools.\-h.
 
 The factorial. 
 
-The function computes the factorial $n!$, the product of all positive integers less than or equal to $n$ \-: \[n! = \prod_{k=1}^n k\]
+The function computes the factorial, the product of all positive integers less than or equal to an integer \-:\par
+ $ n! = n \times (n - 1) \times (n - 2) \times {...} $
 
 
 \begin{DoxyParams}{Parameters}
@@ -283,7 +288,7 @@ The function return value in a string format.
 \end{DoxyReturn}
 
 
-Definition at line 342 of file Tools.\-h.
+Definition at line 345 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a771a662a201e9922fd8084dafb507a20}{\index{Hoa3\-D@{Hoa3\-D}!legendre\-\_\-normalization@{legendre\-\_\-normalization}}
 \index{legendre\-\_\-normalization@{legendre\-\_\-normalization}!Hoa3D@{Hoa3\-D}}

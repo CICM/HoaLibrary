@@ -281,7 +281,8 @@ spherical_harmonic_azimuth </dd></dl>
 </div><div class="memdoc">
 
 <p>The maximum clipping function. </p>
-<p>The function clips a number at a maximum value.</p>
+<p>The function clips a number at a maximum value. <br/>
+If \(x &gt; max\), \(f(x) = max\) else \(f(x) = x\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to clip. </td></tr>
@@ -294,7 +295,7 @@ spherical_harmonic_azimuth </dd></dl>
 <dd>
 <a class="el" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e" title="The minimum clipping function. ">clip_min</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_tools_8h_source.html#l00308">308</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00311">311</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
 
 </div>
 </div>
@@ -331,7 +332,8 @@ spherical_harmonic_azimuth </dd></dl>
 </div><div class="memdoc">
 
 <p>The minimum clipping function. </p>
-<p>The function clips a number at a minimum value.</p>
+<p>The function clips a number at a minimum value. <br/>
+If \(x &lt; min\), \(f(x) = min\) else \(f(x) = x\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to clip. </td></tr>
@@ -344,7 +346,7 @@ spherical_harmonic_azimuth </dd></dl>
 <dd>
 <a class="el" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317" title="The maximum clipping function. ">clip_max</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_tools_8h_source.html#l00290">290</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00292">292</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
 
 </div>
 </div>
@@ -387,7 +389,8 @@ spherical_harmonic_azimuth </dd></dl>
 </div><div class="memdoc">
 
 <p>The clipping function. </p>
-<p>The function clips a number between boundaries.</p>
+<p>The function clips a number between boundaries. <br/>
+If \(x &lt; min\), \(f(x) = min\) else if \(x &gt; max\), \(f(x) = max\) else \(f(x) = x\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to clip. </td></tr>
@@ -401,7 +404,7 @@ spherical_harmonic_azimuth </dd></dl>
 <dd>
 <a class="el" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317" title="The maximum clipping function. ">clip_max</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_tools_8h_source.html#l00270">270</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00271">271</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
 
 </div>
 </div>
@@ -428,10 +431,8 @@ spherical_harmonic_azimuth </dd></dl>
 </div><div class="memdoc">
 
 <p>The double factorial. </p>
-<p>The function computes the double factorial \(n!!\), the product of all the odd integers up to some odd positive integer \(n\) : </p>
-<p class="formulaDsp">
-\[n!= n \times (n - 2) \times (n - 4) \times {...} \]
-</p>
+<p>The function computes the double factorial, the product of all the odd integers up to some odd positive integer :<br/>
+ \(n!! = n \times (n - 2) \times (n - 4) \times {...} \)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>The interger. </td></tr>
@@ -468,10 +469,8 @@ spherical_harmonic_azimuth </dd></dl>
 </div><div class="memdoc">
 
 <p>The factorial. </p>
-<p>The function computes the factorial \(n!\), the product of all positive integers less than or equal to \(n\) : </p>
-<p class="formulaDsp">
-\[n! = \prod_{k=1}^n k\]
-</p>
+<p>The function computes the factorial, the product of all positive integers less than or equal to an integer :<br/>
+ \( n! = n \times (n - 1) \times (n - 2) \times {...} \)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>The interger. </td></tr>
@@ -517,7 +516,7 @@ spherical_harmonic_azimuth </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The function return value in a string format. </dd></dl>
 
-<p>Definition at line <a class="el" href="_tools_8h_source.html#l00342">342</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00345">345</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
 
 </div>
 </div>
@@ -871,7 +870,7 @@ if \( m \geq 0\) </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 12:46:01 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2014 13:07:21 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

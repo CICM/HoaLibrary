@@ -44,8 +44,8 @@
 namespace Hoa3D
 {
     //! The factorial
-    /**	The function computes the factorial \f$n!\f$, the product of all positive integers less than or equal to \f$n\f$ :
-        \f[n! = \prod_{k=1}^n k\f]
+    /**	The function computes the factorial, the product of all positive integers less than or equal to an integer.
+        \f[n! = n \times (n - 1) \times (n - 2) \times {...} \f]
      
         @param     n     The interger.
         @return    The function return the factorial of n.
@@ -65,8 +65,8 @@ namespace Hoa3D
 	}
     
     //! The double factorial
-    /**	The function computes the double factorial \f$n!!\f$, the product of all the odd integers up to some odd positive integer \f$n\f$ :
-        \f[n!= n \times (n - 2) \times (n - 4) \times {...} \f]
+    /**	The function computes the double factorial, the product of all the odd integers up to some odd positive integer :\n
+        \f[n!! = n \times (n - 2) \times (n - 4) \times {...} \f]
      
         @param     n     The interger.
         @return    The function return the double factorial of n.
@@ -257,7 +257,8 @@ namespace Hoa3D
     }
     
     //! The clipping function
-    /** The function clips a number between boundaries.
+    /** The function clips a number between boundaries. \n
+        If \f$x < min\f$, \f$f(x) = min\f$ else if \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
      
         @param     value   The value to clip.
         @param     low     The low boundarie.
@@ -278,7 +279,8 @@ namespace Hoa3D
     }
     
     //! The minimum clipping function
-    /** The function clips a number at a minimum value.
+    /** The function clips a number at a minimum value. \n
+        If \f$x < min\f$, \f$f(x) = min\f$ else \f$f(x) = x\f$.
      
         @param     value   The value to clip.
         @param     low     The low boundarie.
@@ -296,7 +298,8 @@ namespace Hoa3D
     }
     
     //! The maximum clipping function
-    /** The function clips a number at a maximum value.
+    /** The function clips a number at a maximum value. \n
+        If \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
      
         @param     value   The value to clip.
         @param     high    The high boundarie.

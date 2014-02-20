@@ -254,87 +254,87 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    }</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    </div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div>
-<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b">  270</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b">clip_minmax</a>(<span class="keywordtype">double</span> value, <span class="keywordtype">double</span> low, <span class="keywordtype">double</span> high)</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keywordflow">if</span>(value &lt; low)</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">return</span> low;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(value &gt; high)</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="keywordflow">return</span> high;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
-<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">  290</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">clip_min</a>(<span class="keywordtype">double</span> value, <span class="keywordtype">double</span> low)</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    {</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">if</span>(value &lt; low)</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="keywordflow">return</span> low;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    }</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317">  308</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317">clip_max</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> value, <span class="keyword">const</span> <span class="keywordtype">double</span> high)</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    {</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keywordflow">if</span>(value &gt; high)</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            <span class="keywordflow">return</span> high;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    }</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> radius(<span class="keyword">const</span> <span class="keywordtype">double</span> x, <span class="keyword">const</span> <span class="keywordtype">double</span> y)</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    {</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keywordflow">return</span> sqrt(x*x + y*y);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> angle(<span class="keyword">const</span> <span class="keywordtype">double</span> x, <span class="keyword">const</span> <span class="keywordtype">double</span> y)</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    {</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">return</span> atan2(y, x) + CICM_PI2;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> ordinate(<span class="keyword">const</span> <span class="keywordtype">double</span> radius, <span class="keyword">const</span> <span class="keywordtype">double</span> angle)</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    {</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="keywordflow">return</span> radius * sin(angle - CICM_PI2);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    }</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    </div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> abscissa(<span class="keyword">const</span> <span class="keywordtype">double</span> radius, <span class="keyword">const</span> <span class="keywordtype">double</span> angle)</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    {</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keywordflow">return</span> radius * cos(angle - CICM_PI2);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    }</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;</div>
-<div class="line"><a name="l00342"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#ab0c58f51b2b09f1bff39463392da64f7">  342</a></span>&#160;    <span class="keyword">inline</span> std::string <a class="code" href="namespace_hoa3_d.html#ab0c58f51b2b09f1bff39463392da64f7">intToString</a>(<span class="keywordtype">int</span> aValue)</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    {</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keywordtype">char</span> number[256];</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        sprintf(number, <span class="stringliteral">&quot;%i&quot;</span>, aValue);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">return</span> number;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    }</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;}</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment"> inline double spherical_harmonic_elevation(int band, int argument, double elevation) // With l = band and m the argument</span></div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment"> {</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment"> // Yel(l, m)(x, y) = sqrt(((2l + 1) / 4Pi) * (l - m)! / (l + m)!) P(l, m)(cos(elevation))</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment"> double normalize;</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment"> if(abs(argument) == 0)</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment"> normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)));</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment"> //normalize = sqrt((2. * band + 1) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"> else</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"> normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument))) * sqrt(2.);</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment"> //if (band == 0)</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment"> // normalize /= sqrt(2)*0.5;</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment"> //normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));</span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b">  271</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b">clip_minmax</a>(<span class="keywordtype">double</span> value, <span class="keywordtype">double</span> low, <span class="keywordtype">double</span> high)</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <span class="keywordflow">if</span>(value &lt; low)</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="keywordflow">return</span> low;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(value &gt; high)</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">return</span> high;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">  292</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">clip_min</a>(<span class="keywordtype">double</span> value, <span class="keywordtype">double</span> low)</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    {</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="keywordflow">if</span>(value &lt; low)</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="keywordflow">return</span> low;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
+<div class="line"><a name="l00311"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317">  311</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317">clip_max</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> value, <span class="keyword">const</span> <span class="keywordtype">double</span> high)</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    {</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">if</span>(value &gt; high)</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <span class="keywordflow">return</span> high;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    }</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> radius(<span class="keyword">const</span> <span class="keywordtype">double</span> x, <span class="keyword">const</span> <span class="keywordtype">double</span> y)</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    {</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">return</span> sqrt(x*x + y*y);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    }</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> angle(<span class="keyword">const</span> <span class="keywordtype">double</span> x, <span class="keyword">const</span> <span class="keywordtype">double</span> y)</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    {</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keywordflow">return</span> atan2(y, x) + CICM_PI2;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    }</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> ordinate(<span class="keyword">const</span> <span class="keywordtype">double</span> radius, <span class="keyword">const</span> <span class="keywordtype">double</span> angle)</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keywordflow">return</span> radius * sin(angle - CICM_PI2);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    }</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">double</span> abscissa(<span class="keyword">const</span> <span class="keywordtype">double</span> radius, <span class="keyword">const</span> <span class="keywordtype">double</span> angle)</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    {</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordflow">return</span> radius * cos(angle - CICM_PI2);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;</div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="namespace_hoa3_d.html#ab0c58f51b2b09f1bff39463392da64f7">  345</a></span>&#160;    <span class="keyword">inline</span> std::string <a class="code" href="namespace_hoa3_d.html#ab0c58f51b2b09f1bff39463392da64f7">intToString</a>(<span class="keywordtype">int</span> aValue)</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordtype">char</span> number[256];</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        sprintf(number, <span class="stringliteral">&quot;%i&quot;</span>, aValue);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">return</span> number;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    }</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;}</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment"> inline double spherical_harmonic_elevation(int band, int argument, double elevation) // With l = band and m the argument</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment"> {</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="comment"> // Yel(l, m)(x, y) = sqrt(((2l + 1) / 4Pi) * (l - m)! / (l + m)!) P(l, m)(cos(elevation))</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment"> double normalize;</span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment"> if(abs(argument) == 0)</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"> normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)));</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment"> //normalize = sqrt((2. * band + 1) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment"> else</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment"> normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument))) * sqrt(2.);</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="comment"> //if (band == 0)</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment"> // normalize /= sqrt(2)*0.5;</span></div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="comment"> </span></div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment"> return  normalize * associated_legendre(band, argument, cos(elevation));</span></div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment"> }*/</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="namespace_hoa3_d_html_ab0c58f51b2b09f1bff39463392da64f7"><div class="ttname"><a href="namespace_hoa3_d.html#ab0c58f51b2b09f1bff39463392da64f7">Hoa3D::intToString</a></div><div class="ttdeci">std::string intToString(int aValue)</div><div class="ttdoc">The int to string conversion. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00342">Tools.h:342</a></div></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="comment"> //normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="comment"> </span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="comment"> return  normalize * associated_legendre(band, argument, cos(elevation));</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="comment"> }*/</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="namespace_hoa3_d_html_ab0c58f51b2b09f1bff39463392da64f7"><div class="ttname"><a href="namespace_hoa3_d.html#ab0c58f51b2b09f1bff39463392da64f7">Hoa3D::intToString</a></div><div class="ttdeci">std::string intToString(int aValue)</div><div class="ttdoc">The int to string conversion. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00345">Tools.h:345</a></div></div>
 <div class="ttc" id="namespace_hoa3_d_html_af20cfa7da792b7bb0b6f98eccb371ca8"><div class="ttname"><a href="namespace_hoa3_d.html#af20cfa7da792b7bb0b6f98eccb371ca8">Hoa3D::associated_legendre</a></div><div class="ttdeci">double associated_legendre(int l, int m, double x)</div><div class="ttdoc">The associated Legendre polynomials. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00105">Tools.h:105</a></div></div>
 <div class="ttc" id="namespace_hoa3_d_html_a1414c728d02e9d3d60035e385d2150ec"><div class="ttname"><a href="namespace_hoa3_d.html#a1414c728d02e9d3d60035e385d2150ec">Hoa3D::double_factorial</a></div><div class="ttdeci">long double_factorial(long n)</div><div class="ttdoc">The double factorial. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00076">Tools.h:76</a></div></div>
 <div class="ttc" id="namespace_hoa3_d_html_a0396e69cca8a7112c6bd1a817fc3ca80"><div class="ttname"><a href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">Hoa3D::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00244">Tools.h:244</a></div></div>
@@ -342,15 +342,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="namespace_hoa3_d_html_a36da69477764cc43e96106d7436d0797"><div class="ttname"><a href="namespace_hoa3_d.html#a36da69477764cc43e96106d7436d0797">Hoa3D::spherical_harmonics_elevation</a></div><div class="ttdeci">double spherical_harmonics_elevation(int l, int m, double theta)</div><div class="ttdoc">The elevation part of the spherical harmonics function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00187">Tools.h:187</a></div></div>
 <div class="ttc" id="namespace_hoa3_d_html_a1ed1e9803ad96127f1054b1a473b425d"><div class="ttname"><a href="namespace_hoa3_d.html#a1ed1e9803ad96127f1054b1a473b425d">Hoa3D::factorial</a></div><div class="ttdeci">long factorial(long n)</div><div class="ttdoc">The factorial. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00055">Tools.h:55</a></div></div>
 <div class="ttc" id="namespace_hoa3_d_html_a5c89b100a0887912882451b15d3c69b9"><div class="ttname"><a href="namespace_hoa3_d.html#a5c89b100a0887912882451b15d3c69b9">Hoa3D::spherical_harmonics</a></div><div class="ttdeci">double spherical_harmonics(int l, int m, double phi, double theta)</div><div class="ttdoc">The spherical harmonics function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00205">Tools.h:205</a></div></div>
-<div class="ttc" id="namespace_hoa3_d_html_af7d43c71e1aba23d9bff6ffa2db6b95b"><div class="ttname"><a href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b">Hoa3D::clip_minmax</a></div><div class="ttdeci">double clip_minmax(double value, double low, double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00270">Tools.h:270</a></div></div>
+<div class="ttc" id="namespace_hoa3_d_html_af7d43c71e1aba23d9bff6ffa2db6b95b"><div class="ttname"><a href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b">Hoa3D::clip_minmax</a></div><div class="ttdeci">double clip_minmax(double value, double low, double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00271">Tools.h:271</a></div></div>
 <div class="ttc" id="namespace_hoa3_d_html_a797e7afd706be7e4c1b5961214991f35"><div class="ttname"><a href="namespace_hoa3_d.html#a797e7afd706be7e4c1b5961214991f35">Hoa3D::wrap</a></div><div class="ttdeci">double wrap(double value, double low, double high)</div><div class="ttdoc">The wrapping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00220">Tools.h:220</a></div></div>
-<div class="ttc" id="namespace_hoa3_d_html_a7db8378887542d24d61bed71b482848e"><div class="ttname"><a href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">Hoa3D::clip_min</a></div><div class="ttdeci">double clip_min(double value, double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00290">Tools.h:290</a></div></div>
+<div class="ttc" id="namespace_hoa3_d_html_a7db8378887542d24d61bed71b482848e"><div class="ttname"><a href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">Hoa3D::clip_min</a></div><div class="ttdeci">double clip_min(double value, double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00292">Tools.h:292</a></div></div>
 <div class="ttc" id="namespace_hoa3_d_html_a771a662a201e9922fd8084dafb507a20"><div class="ttname"><a href="namespace_hoa3_d.html#a771a662a201e9922fd8084dafb507a20">Hoa3D::legendre_normalization</a></div><div class="ttdeci">double legendre_normalization(int l, int m)</div><div class="ttdoc">The legendre normalization. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00138">Tools.h:138</a></div></div>
-<div class="ttc" id="namespace_hoa3_d_html_a6cf3a35e887d29d4b84f0fa38e259317"><div class="ttname"><a href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317">Hoa3D::clip_max</a></div><div class="ttdeci">double clip_max(const double value, const double high)</div><div class="ttdoc">The maximum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00308">Tools.h:308</a></div></div>
+<div class="ttc" id="namespace_hoa3_d_html_a6cf3a35e887d29d4b84f0fa38e259317"><div class="ttname"><a href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317">Hoa3D::clip_max</a></div><div class="ttdeci">double clip_max(const double value, const double high)</div><div class="ttdoc">The maximum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00311">Tools.h:311</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2014 13:07:20 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
