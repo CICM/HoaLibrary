@@ -117,10 +117,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ambisonic encoder.  <a href="class_hoa3_d_1_1_encoder.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_map.html">Map</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ambisonic map.  <a href="class_hoa3_d_1_1_map.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ambisonic multiencoder with distance compensation.  <a href="class_hoa3_d_1_1_map.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html">Meter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ambisonic <a class="el" href="class_hoa3_d_1_1_meter.html" title="The ambisonic Meter. ">Meter</a>.  <a href="class_hoa3_d_1_1_meter.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The planewaves peak level meter.  <a href="class_hoa3_d_1_1_meter.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_optim.html">Optim</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ambisonic optimization.  <a href="class_hoa3_d_1_1_optim.html#details">More...</a><br/></td></tr>
@@ -432,7 +432,10 @@ If \(x &lt; min\), \(f(x) = min\) else if \(x &gt; max\), \(f(x) = max\) else \(
 
 <p>The double factorial. </p>
 <p>The function computes the double factorial, the product of all the odd integers up to some odd positive integer :<br/>
- \(n!! = n \times (n - 2) \times (n - 4) \times {...} \)</p>
+ </p>
+<p class="formulaDsp">
+\[n!! = n \times (n - 2) \times (n - 4) \times {...} \]
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>The interger. </td></tr>
@@ -469,8 +472,10 @@ If \(x &lt; min\), \(f(x) = min\) else if \(x &gt; max\), \(f(x) = max\) else \(
 </div><div class="memdoc">
 
 <p>The factorial. </p>
-<p>The function computes the factorial, the product of all positive integers less than or equal to an integer :<br/>
- \( n! = n \times (n - 1) \times (n - 2) \times {...} \)</p>
+<p>The function computes the factorial, the product of all positive integers less than or equal to an integer. </p>
+<p class="formulaDsp">
+\[n! = n \times (n - 1) \times (n - 2) \times {...} \]
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>The interger. </td></tr>
@@ -870,7 +875,7 @@ if \( m \geq 0\) </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 13:07:21 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2014 16:15:27 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

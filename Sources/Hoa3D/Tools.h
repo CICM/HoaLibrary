@@ -52,7 +52,7 @@ namespace Hoa3D
      
         @see    double_factorial
      */
-    inline long factorial(long n)
+    inline unsigned long factorial(long n)
 	{
         long result = n;
 		if(n == 0)
@@ -73,7 +73,7 @@ namespace Hoa3D
      
         @see    factorial
      */
-    inline long double_factorial(long n)
+    inline unsigned long double_factorial(long n)
 	{
 		if (n == 0 || n == -1) {
 			return 1;
@@ -137,12 +137,10 @@ namespace Hoa3D
      */
     inline double legendre_normalization(int l, int m)
 	{
-        l = abs(l);
-        m = abs(m);
         if(m == 0)
             return sqrt((2. * l + 1.) / (4. * CICM_PI));
         else
-            return sqrt((2. * l + 1.) / (4. * CICM_PI) * (double)factorial(l - m) / (double)factorial(l + m)) * sqrt(2.);
+            return sqrt((2. * l + 1.) / (4. * CICM_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
 	}
     
     //! The azimuth part of the spherical harmonics function
@@ -336,13 +334,43 @@ namespace Hoa3D
 		return radius * cos(angle - CICM_PI2);
 	}
     
+    inline double radius(double x, double y, double z)
+	{
+		return sqrt(x*x + y*y + z*z);
+	}
+    
+	inline double aimuth(double x, double y, double z)
+	{
+		return acos(z / radius(x, y, z)); // AFAIRE
+	}
+    
+    inline double elevation(double x, double y, double z)
+	{
+		return acos(z / radius(x, y, z)); // A FAIRE
+	}
+    
+	inline double ordinate(double radius, double phi, double theta)
+	{
+		return radius * sin(phi - CICM_PI2) * cos(theta);
+	}
+    
+    inline double abscissa(double radius, double phi, double theta)
+	{
+		return radius * cos(phi - CICM_PI2) * cos(theta);
+	}
+    
+    inline double height(double radius, double phi, double theta)
+	{
+		return radius * sin(theta);
+	}
+    
     //! The int to string conversion
     /** The function converts a interger to a string.
      
         @param     value   The value to convert.
         @return    The function return value in a string format.
      */
-    inline std::string intToString(int aValue)
+    inline std::string int_to_string(int aValue)
     {
         char number[256];
         sprintf(number, "%i", aValue);

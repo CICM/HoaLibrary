@@ -131,7 +131,7 @@ namespace Hoa3D
 		inline std::string getLoudspeakerName(unsigned int index)
         {
             assert(index < m_number_of_loudspeakers);
-            return "Loudspeaker " + intToString(index + 1) + " " + intToString((int)getLoudspeakerAzimuth(index)) + " " + intToString((int)getLoudspeakerElevation(index));
+            return "Loudspeaker " + int_to_string(index + 1) + " " + int_to_string((int)getLoudspeakerAzimuth(index)) + " " + int_to_string((int)getLoudspeakerElevation(index));
         };
     };
 	

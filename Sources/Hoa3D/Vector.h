@@ -11,7 +11,7 @@
 
 namespace Hoa3D
 {
-    //! The ambisonic vector.
+    //! The planewaves vector.
     /** The vector class compute the energy and the velocity vector of a soudfield with signal of a spjerical set of loudspeakers. It is an useful tool to characterize the quality of the sound field resitution. For futher information : Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992. This class retreive the cartesian coordinates of the vectors, the abscissa, the ordinate and the height.
      */
     class Vector : public Planewaves

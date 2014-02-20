@@ -40,7 +40,7 @@ namespace Hoa3D
                 if(theta >= CICM_PI)
                     theta = CICM_2PI - theta;
                 
-                m_elevation_matrix[j][i] = spherical_harmonics_azimuth(band, argument, theta);
+                m_elevation_matrix[j][i] = spherical_harmonics_elevation(band, argument, theta);
             }
         }
     }
