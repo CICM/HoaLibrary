@@ -13,6 +13,12 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -137,7 +143,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            m_gains[index] = 1.;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            m_widers[index]-&gt;setWideningValue(clip_min(distance, 0.));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            m_widers[index]-&gt;setWideningValue(<a class="code" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">clip_min</a>(distance, 0.));</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
@@ -184,10 +190,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="class_hoa3_d_1_1_map_html_a751e3f421578c43bf42eca7888a34839"><div class="ttname"><a href="class_hoa3_d_1_1_map.html#a751e3f421578c43bf42eca7888a34839">Hoa3D::Map::setAzimuth</a></div><div class="ttdeci">void setAzimuth(const unsigned int index, const double azimuth)</div><div class="ttdoc">This method set the angle of azimuth of a source. </div><div class="ttdef"><b>Definition:</b> <a href="_map_8cpp_source.html#l00026">Map.cpp:26</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_wider_html"><div class="ttname"><a href="class_hoa3_d_1_1_wider.html">Hoa3D::Wider</a></div><div class="ttdoc">The ambisonic wider. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_wider_8h_source.html#l00017">Wider.h:17</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_encoder_html"><div class="ttname"><a href="class_hoa3_d_1_1_encoder.html">Hoa3D::Encoder</a></div><div class="ttdoc">The ambisonic encoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_encoder_8h_source.html#l00019">Encoder.h:19</a></div></div>
+<div class="ttc" id="namespace_hoa3_d_html_a7db8378887542d24d61bed71b482848e"><div class="ttname"><a href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">Hoa3D::clip_min</a></div><div class="ttdeci">double clip_min(double value, double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00290">Tools.h:290</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 18 2014 08:26:35 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

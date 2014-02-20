@@ -13,6 +13,12 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -110,8 +116,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_planewaves.html#afb91431ec200af76ac61ef17add33ede">   19</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_planewaves.html#afb91431ec200af76ac61ef17add33ede">Planewaves::setLoudspeakerPosition</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> azimuth, <span class="keywordtype">double</span> elevation)</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        assert(index &lt; m_number_of_loudspeakers);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        m_loudspeakers_azimuth[index] = wrap_twopi(azimuth);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        m_loudspeakers_elevation[index] = wrap_twopi(elevation);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        m_loudspeakers_azimuth[index] = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(azimuth);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        m_loudspeakers_elevation[index] = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(elevation);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">   26</a></span>&#160;    <a class="code" href="class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">Planewaves::~Planewaves</a>()</div>
@@ -122,12 +128,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="ttc" id="class_hoa3_d_1_1_planewaves_html_a7d13cc39051ae75f2af522651a1305bf"><div class="ttname"><a href="class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">Hoa3D::Planewaves::~Planewaves</a></div><div class="ttdeci">~Planewaves()</div><div class="ttdoc">The planewaves destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_planewaves_8cpp_source.html#l00026">Planewaves.cpp:26</a></div></div>
+<div class="ttc" id="namespace_hoa3_d_html_a0396e69cca8a7112c6bd1a817fc3ca80"><div class="ttname"><a href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">Hoa3D::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_tools_8h_source.html#l00244">Tools.h:244</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_planewaves_html_ad8e35af93d879852edad6b5823b2047d"><div class="ttname"><a href="class_hoa3_d_1_1_planewaves.html#ad8e35af93d879852edad6b5823b2047d">Hoa3D::Planewaves::Planewaves</a></div><div class="ttdeci">Planewaves(unsigned int numberOfLoudspeakers)</div><div class="ttdoc">The planewaves constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_planewaves_8cpp_source.html#l00011">Planewaves.cpp:11</a></div></div>
 <div class="ttc" id="class_hoa3_d_1_1_planewaves_html_afb91431ec200af76ac61ef17add33ede"><div class="ttname"><a href="class_hoa3_d_1_1_planewaves.html#afb91431ec200af76ac61ef17add33ede">Hoa3D::Planewaves::setLoudspeakerPosition</a></div><div class="ttdeci">void setLoudspeakerPosition(unsigned int index, double azimuth, double elevation)</div><div class="ttdoc">Set the position of a loudspeaker. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa3_d_2_planewaves_8cpp_source.html#l00019">Planewaves.cpp:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 18 2014 08:26:35 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

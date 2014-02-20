@@ -43,136 +43,205 @@
 
 namespace Hoa3D
 {
-    inline int factorial( int v )
+    //! The factorial
+    /**	The function computes the factorial \f$n!\f$, the product of all positive integers less than or equal to \f$n\f$ :
+        \f[n! = \prod_{k=1}^n k\f]
+     
+        @param     n     The interger.
+        @return    The function return the factorial of n.
+     
+        @see    double_factorial
+     */
+    inline long factorial(long n)
 	{
-        int result = v;
-		if(v == 0)
+        long result = n;
+		if(n == 0)
 			return 1;
         
-		while(--v > 0)
-			result *= v;
+		while(--n > 0)
+			result *= n;
         
 		return result;
 	}
     
-    inline int double_factorial( int x )
+    //! The double factorial
+    /**	The function computes the double factorial \f$n!!\f$, the product of all the odd integers up to some odd positive integer \f$n\f$ :
+        \f[n!= n \times (n - 2) \times (n - 4) \times {...} \f]
+     
+        @param     n     The interger.
+        @return    The function return the double factorial of n.
+     
+        @see    factorial
+     */
+    inline long double_factorial(long n)
 	{
-		if (x == 0 || x == -1) {
+		if (n == 0 || n == -1) {
 			return 1;
 		}
         
-		int result = x;
-		while ((x -= 2) > 0) {
-			result *= x;
+		long result = n;
+		while ((n -= 2) > 0) {
+			result *= n;
 		}
         
 		return result;
 	}
     
     //! The associated Legendre polynomials
-    /**	The function computes the associated Legendre polynomial \f$P(l, m)\f$ P(l, m) that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas : \n
-        P(l, l)(x) = (-1)^l * (2l - 1)!! * (1 - x * x )^(l * 0.5), \n
-        P(l + 1, l)(x) = x * (2l + 1) * P(l, l) and \n
-        P(l + 1, m)(x) = ((2l + 1) * x * P(m, l) - (l + m) * P(m, l - 1)) / (l - m + 1).
+    /**	The function computes the associated Legendre polynomial \f$P(l, m)\f$ that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas :
+        \f[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\f]
+        \f[P(l + 1, l)(x) = x \times (2l + 1) \times P(l, l)\f]
+        \f[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\f]
+        with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
      
-        @param     band     The band of the spherical harmonic.
-        @param     argument	The argument of the spherical harmonic.
-        @param     x        The cosinus of the elevation.
-        @return    The function return the associated Legendre polynomial P(l, m)(x).
+        @param     l    The band of the spherical harmonic.
+        @param     m	The argument of the spherical harmonic.
+        @param     x    The cosinus of the elevation.
+        @return    The function return the associated Legendre polynomial of x for l and m.
      
-        @see    spherical_harmonic_elevation
+        @see    legendre_normalization
         @see    spherical_harmonic_azimuth
-        @see    spherical_harmonic
      */
-	inline double associated_legendre(int band, int argument, double x)
+	inline double associated_legendre(int l, int m, double x)
 	{
-        band = abs(band);
-        argument = abs(argument);
+        l = abs(l);
+        m = abs(m);
         
-		if(band == argument)
+		if(l == m)
         {
-			return pow(-1.0f, (double)argument) * double_factorial(2. * argument - 1) * pow(1. - x * x, 0.5 * argument);
+			return pow(-1.0f, (double)m) * double_factorial(2. * m - 1) * pow(1. - x * x, 0.5 * m);
 		}
-		else if(band == argument + 1)
+		else if(l == m + 1)
         {
-			return x * (2 * argument + 1) * associated_legendre(argument, argument, x);
+			return x * (2 * m + 1) * associated_legendre(m, m, x);
 		}
         else
         {
-            return ((double)(2 * band - 1) * x *  associated_legendre(band - 1, argument, x) - (double)(band + argument - 1.) * associated_legendre(band - 2, argument, x)) / (double)(band - argument);
+            return ((double)(2 * l - 1) * x *  associated_legendre(l - 1, m, x) - (double)(l + m - 1.) * associated_legendre(l - 2, m, x)) / (double)(l - m);
         }
 	}
     
-    inline double K(int l, int m)
+    //! The legendre normalization
+    /**	The function normalizes the associated Legendre polynomial over \f$2\pi\f$ : \n
+        if \f$ m = 0\f$
+        \f[K(l) = \sqrt{\frac{2 \times l + 1}{4\pi}}\f]
+        else
+        \f[K(l, m) = \sqrt{2 \times \frac{2 \times l + 1}{4\pi} \times \frac{(l - |m|)!}{(l + |m|)!}}\f]
+        with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
+     
+        @param     l    The band of the spherical harmonic.
+        @param     m    The argument of the spherical harmonic.
+        @return    The function return the normalization of the associated Legendre polynomial for l and m.
+     
+        @see    associated_legendre
+     */
+    inline double legendre_normalization(int l, int m)
 	{
         l = abs(l);
         m = abs(m);
         if(m == 0)
-            return sqrt((double)factorial(l - m) / (double)factorial(l + m));
+            return sqrt((2. * l + 1.) / (4. * CICM_PI));
         else
-            return sqrt(2. * (double)factorial(l - m) / (double)factorial(l + m));
+            return sqrt((2. * l + 1.) / (4. * CICM_PI) * (double)factorial(l - m) / (double)factorial(l + m)) * sqrt(2.);
 	}
     
-    //! The spherical harmonic elevation coefficient
-    /**	The funtion computes the elevation coefficients of spherical harmonics. It use the associated Legendre polynomials and normalize the result
+    //! The azimuth part of the spherical harmonics function
+    /**	The function computes the azimuth coefficient of the spherical harmonic \f$[l, m]\f$ for an angle \f$\phi\f$ in radian :\n
+        if \f$ m \geq 0\f$
+        \f[Y_{azimuth}(l, m, \phi) = cos(m \times \phi)\f]
+        else
+        \f[Y_{azimuth}(l, m, \phi) = sin(-m \times \phi)\f]
+        with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
      
-     @param     band     The band of the spherical harmonic.
-     @param     argument	The argument of the spherical harmonic.
-     @param     x        The cosinus of the elevation.
-     @return    The function return the associated Legendre polynomial P(l, m)(x).
+        @param     l    The band of the spherical harmonic.
+        @param     m    The argument of the spherical harmonic.
+        @param     phi  The azimuth.
+        @return    The function return the azimuth coefficient for phi of the spherical harmonic band l and argument m.
      
-     @see    spherical_harmonic_elevation
-     @see    spherical_harmonic_azimuth
-     @see    spherical_harmonic
+        @see    spherical_harmonics_elevation
+        @see    spherical_harmonics
      */
-    inline double spherical_harmonic_elevation(int band, int argument, double elevation) // With l = band and m the argument
+    inline double spherical_harmonics_azimuth(int l, int m, double phi)
 	{
-        // Yel(l, m)(x, y) = sqrt(((2l + 1) / 4Pi) * (l - m)! / (l + m)!) P(l, m)(cos(elevation))
-
-        double normalize;
-        if(abs(argument) == 0)
-			normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)));
-            //normalize = sqrt((2. * band + 1) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
-       else
-			normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument))) * sqrt(2.);
-		//if (band == 0)
-		//	normalize /= sqrt(2)*0.5;
-		
-			//normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
-        
-		
-        return  normalize * associated_legendre(band, argument, cos(elevation));
-	}
-    
-    inline double spherical_harmonic_azimuth(int band, int argument, double azimuth) // With l = band and m the argument
-	{
-        return 0;
-	}
-    
-    inline double spherical_harmonic(int band, int argument, double azimuth, double elevation) // With l = band and m the argument
-	{
-        // Y(l, m)(x, y) = Yel(l, m)(y) * Yaz(l, m)(x)
-        return spherical_harmonic_elevation(band, argument, elevation) * spherical_harmonic_azimuth(band, argument, azimuth);
-	}
-    
-    inline double wrap(const double value, const double low, const double high)
-    {
-        double new_value = value;
-        double increment = high - low;
-        while(new_value < low)
-        {
-            new_value += increment;
-        }
-        
-        while(new_value > high)
-        {
-            new_value -= increment;
-        }
-        
-        return new_value;
+        if(m >= 0)
+            return cos((double)m * phi);
+        else
+            return sin((double)-m * phi);
     }
     
-    inline double wrap_twopi(const double value)
+    //! The elevation part of the spherical harmonics function
+    /**	The function computes the elevation coefficient of the the spherical harmonic \f$[l, m]\f$  for an angle \f$\theta\f$ in radian. It uses the associated Legendre polynomial and applies the Legendre normalization :
+        \f[Y_{elevation}(l, m, \theta) = N(l, m) \times P(l, m, cos(/theta)\f]
+        with \f$0 \leq l\f$, \f$-l \leq m \leq +l\f$ and \f$N\f$ the normalization and \f$P\f$ the associated Legendre polynomial.
+     
+        @param     l        The band of the spherical harmonic.
+        @param     m        The argument of the spherical harmonic.
+        @param     theta    The elevation.
+        @return    The function return the elevation coefficient for theta of the spherical harmonic of band l and argument m.
+     
+        @see    legendre_normalization
+        @see    associated_legendre
+        @see    spherical_harmonics_azimuth
+        @see    spherical_harmonics
+     */
+    inline double spherical_harmonics_elevation(int l, int m, double theta)
+	{
+        return legendre_normalization(l, m) * associated_legendre(l, m, cos(theta));
+    }
+    
+    //! The spherical harmonics function
+    /** The function computes the spherical harmonics coefficient for the angles \f$\phi\f$ and \f$\theta\f$ in radian.
+        \f[Y(l, m, \phi, \theta) = Y_{azimuth}(l, m, \phi) \times Y_{elevation}(l, m, \theta)\f]
+     
+        @param     l        The band of the spherical harmonic.
+        @param     m        The argument of the spherical harmonic.
+        @param     phi      The azimuth.
+        @param     theta    The elevation.
+        @return    The function return the coefficient for phi and theta for the spherical harmonics band l and argument m.
+     
+        @see    spherical_harmonics_azimuth
+        @see    spherical_harmonics_elevation
+     */
+    inline double spherical_harmonics(int l, int m, double phi, double theta)
+	{
+        return spherical_harmonics_elevation(l, m, theta) * spherical_harmonics_azimuth(l, m, phi);
+    }
+    
+    //! The wrapping function
+    /** The function wraps a number between boundaries.
+     
+        @param     value   The value to wrap.
+        @param     low     The low boundarie.
+        @param     high    The high boundarie.
+        @return    The function return the wrapped value.
+     
+        @see    wrap_twopi
+     */
+    inline double wrap(double value, double low, double high)
+    {
+        double increment = high - low;
+        while(value < low)
+        {
+            value += increment;
+        }
+        
+        while(value > high)
+        {
+            value -= increment;
+        }
+        
+        return value;
+    }
+    
+    //! The wrapping function over \f$2\pi\f$
+    /** The function wraps a number between 0 and \f$2\pi\f$.
+     
+        @param     value   The value to wrap.
+        @return    The function return the wrapped value.
+     
+        @see    wrap
+     */
+    inline double wrap_twopi(double value)
     {
         double new_value = value;
         while(new_value < 0.)
@@ -187,7 +256,18 @@ namespace Hoa3D
         return new_value;
     }
     
-    inline double clip_minmax(const double value, const double low, const double high)
+    //! The clipping function
+    /** The function clips a number between boundaries.
+     
+        @param     value   The value to clip.
+        @param     low     The low boundarie.
+        @param     high    The high boundarie.
+        @return    The function return the clipped value.
+     
+        @see    clip_min
+        @see    clip_max
+     */
+    inline double clip_minmax(double value, double low, double high)
     {
         if(value < low)
             return low;
@@ -197,7 +277,17 @@ namespace Hoa3D
             return value;
     }
     
-    inline double clip_min(const double value, const double low)
+    //! The minimum clipping function
+    /** The function clips a number at a minimum value.
+     
+        @param     value   The value to clip.
+        @param     low     The low boundarie.
+        @return    The function return the clipped value.
+     
+        @see    clip_minmax
+        @see    clip_max
+     */
+    inline double clip_min(double value, double low)
     {
         if(value < low)
             return low;
@@ -205,19 +295,22 @@ namespace Hoa3D
             return value;
     }
     
+    //! The maximum clipping function
+    /** The function clips a number at a maximum value.
+     
+        @param     value   The value to clip.
+        @param     high    The high boundarie.
+        @return    The function return the clipped value.
+     
+        @see    clip_minmax
+        @see    clip_min
+     */
     inline double clip_max(const double value, const double high)
     {
         if(value > high)
             return high;
         else
             return value;
-    }
-    
-    inline std::string intToString(int aValue)
-    {
-        char number[256];
-        sprintf(number, "%i", aValue);
-        return number;
     }
     
     inline double radius(const double x, const double y)
@@ -239,7 +332,40 @@ namespace Hoa3D
 	{
 		return radius * cos(angle - CICM_PI2);
 	}
+    
+    //! The int to string conversion
+    /** The function converts a interger to a string.
+     
+        @param     value   The value to convert.
+        @return    The function return value in a string format.
+     */
+    inline std::string intToString(int aValue)
+    {
+        char number[256];
+        sprintf(number, "%i", aValue);
+        return number;
+    }
 }
+
+/*
+ inline double spherical_harmonic_elevation(int band, int argument, double elevation) // With l = band and m the argument
+ {
+ // Yel(l, m)(x, y) = sqrt(((2l + 1) / 4Pi) * (l - m)! / (l + m)!) P(l, m)(cos(elevation))
+ 
+ double normalize;
+ if(abs(argument) == 0)
+ normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)));
+ //normalize = sqrt((2. * band + 1) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+ else
+ normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument))) * sqrt(2.);
+ //if (band == 0)
+ //	normalize /= sqrt(2)*0.5;
+ 
+ //normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
+ 
+ 
+ return  normalize * associated_legendre(band, argument, cos(elevation));
+ }*/
 
 
 

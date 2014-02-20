@@ -33,17 +33,14 @@ namespace Hoa3D
                 phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
                 phi = wrap_twopi(phi);
                 
-                if(argument >= 0)
-                    m_azimuth_matrix[j][i] = cos((double)argument * phi);
-                else
-                    m_azimuth_matrix[j][i] = sin((double)-argument * phi);
+                m_azimuth_matrix[j][i] = spherical_harmonics_azimuth(band, argument, phi);
                 
                 theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
                 theta = wrap_twopi(theta);
                 if(theta >= CICM_PI)
                     theta = CICM_2PI - theta;
                 
-                m_elevation_matrix[j][i] = spherical_harmonic_elevation(band, argument, theta);
+                m_elevation_matrix[j][i] = spherical_harmonics_azimuth(band, argument, theta);
             }
         }
     }

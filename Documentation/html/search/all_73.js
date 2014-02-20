@@ -19,5 +19,7 @@ var searchData=
   ['sourcesmanager',['SourcesManager',['../class_sources_manager.html',1,'SourcesManager'],['../class_sources_manager.html#a333ef82bab70b995bf0f658c894bee1b',1,'SourcesManager::SourcesManager()']]],
   ['sourcespreset',['SourcesPreset',['../class_sources_preset.html',1,'SourcesPreset'],['../class_sources_preset.html#a0a4203349327d10bb6afe35156126d8a',1,'SourcesPreset::SourcesPreset()']]],
   ['sourcestrajectory',['SourcesTrajectory',['../class_sources_trajectory.html',1,'SourcesTrajectory'],['../class_sources_trajectory.html#a6e0838cc0ab29b5462cc624958498c4d',1,'SourcesTrajectory::SourcesTrajectory()']]],
-  ['spherical_5fharmonic_5felevation',['spherical_harmonic_elevation',['../namespace_hoa3_d.html#adc1733ec44ddce995b7cb1f8d99251b5',1,'Hoa3D']]]
+  ['spherical_5fharmonics',['spherical_harmonics',['../namespace_hoa3_d.html#a5c89b100a0887912882451b15d3c69b9',1,'Hoa3D']]],
+  ['spherical_5fharmonics_5fazimuth',['spherical_harmonics_azimuth',['../namespace_hoa3_d.html#a03f884a043a03a2a70cd3cdf46eaa7a5',1,'Hoa3D']]],
+  ['spherical_5fharmonics_5felevation',['spherical_harmonics_elevation',['../namespace_hoa3_d.html#a36da69477764cc43e96106d7436d0797',1,'Hoa3D']]]
 ];

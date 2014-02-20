@@ -34,94 +34,464 @@ class \hyperlink{class_hoa3_d_1_1_scope}{Scope}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \hyperlink{namespace_hoa3_d_af1a17fb5f135864f61a4dcf84ec65879}{associated\-\_\-legendre} (int band, int argument, double x)
+long \hyperlink{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}{factorial} (long n)
+\begin{DoxyCompactList}\small\item\em The factorial. \end{DoxyCompactList}\item 
+long \hyperlink{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}{double\-\_\-factorial} (long n)
+\begin{DoxyCompactList}\small\item\em The double factorial. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_af20cfa7da792b7bb0b6f98eccb371ca8}{associated\-\_\-legendre} (int l, int m, double x)
 \begin{DoxyCompactList}\small\item\em The associated Legendre polynomials. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{spherical\-\_\-harmonic\-\_\-elevation} (int band, int argument, double elevation)
-\begin{DoxyCompactList}\small\item\em The spherical harmonic elevation coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double \hyperlink{namespace_hoa3_d_a771a662a201e9922fd8084dafb507a20}{legendre\-\_\-normalization} (int l, int m)
+\begin{DoxyCompactList}\small\item\em The legendre normalization. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_a03f884a043a03a2a70cd3cdf46eaa7a5}{spherical\-\_\-harmonics\-\_\-azimuth} (int l, int m, double phi)
+\begin{DoxyCompactList}\small\item\em The azimuth part of the spherical harmonics function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_a36da69477764cc43e96106d7436d0797}{spherical\-\_\-harmonics\-\_\-elevation} (int l, int m, double theta)
+\begin{DoxyCompactList}\small\item\em The elevation part of the spherical harmonics function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_a5c89b100a0887912882451b15d3c69b9}{spherical\-\_\-harmonics} (int l, int m, double phi, double theta)
+\begin{DoxyCompactList}\small\item\em The spherical harmonics function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_a797e7afd706be7e4c1b5961214991f35}{wrap} (double value, double low, double high)
+\begin{DoxyCompactList}\small\item\em The wrapping function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_a0396e69cca8a7112c6bd1a817fc3ca80}{wrap\-\_\-twopi} (double value)
+\begin{DoxyCompactList}\small\item\em The wrapping function over $2\pi$. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_af7d43c71e1aba23d9bff6ffa2db6b95b}{clip\-\_\-minmax} (double value, double low, double high)
+\begin{DoxyCompactList}\small\item\em The clipping function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}{clip\-\_\-min} (double value, double low)
+\begin{DoxyCompactList}\small\item\em The minimum clipping function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa3_d_a6cf3a35e887d29d4b84f0fa38e259317}{clip\-\_\-max} (const double value, const double high)
+\begin{DoxyCompactList}\small\item\em The maximum clipping function. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{namespace_hoa3_d_ab0c58f51b2b09f1bff39463392da64f7}{int\-To\-String} (int a\-Value)
+\begin{DoxyCompactList}\small\item\em The int to string conversion. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 The 3\-D ambisonic classes. All the 3\-D ambisonic and planewaves classes will be part of this namespace 
 
 \subsection{Function Documentation}
-\hypertarget{namespace_hoa3_d_af1a17fb5f135864f61a4dcf84ec65879}{\index{Hoa3\-D@{Hoa3\-D}!associated\-\_\-legendre@{associated\-\_\-legendre}}
+\hypertarget{namespace_hoa3_d_af20cfa7da792b7bb0b6f98eccb371ca8}{\index{Hoa3\-D@{Hoa3\-D}!associated\-\_\-legendre@{associated\-\_\-legendre}}
 \index{associated\-\_\-legendre@{associated\-\_\-legendre}!Hoa3D@{Hoa3\-D}}
 \subsubsection[{associated\-\_\-legendre}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::associated\-\_\-legendre (
 \begin{DoxyParamCaption}
-\item[{int}]{band, }
-\item[{int}]{argument, }
+\item[{int}]{l, }
+\item[{int}]{m, }
 \item[{double}]{x}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_af1a17fb5f135864f61a4dcf84ec65879}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_af20cfa7da792b7bb0b6f98eccb371ca8}
 
 
 The associated Legendre polynomials. 
 
-The associated Legendre polynomial $\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$. $P(l, m)$ are used to compute the spherical harmonic coefficients where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. You should prefer to use the spherical harmonic elevation function that uses a normalization. It uses three recurrence formulas \-: \par
-P(l, l)(x) = (-\/1)$^\wedge$l $\ast$ (2l -\/ 1)!! $\ast$ (1 -\/ x $\ast$ x )$^\wedge$0.5, \par
-P(l + 1, l)(x) = x $\ast$ (2l + 1) $\ast$ P(l, l) and \par
-P(l + 1, m)(x) = ((2l + 1) $\ast$ x $\ast$ P(m, l) -\/ (l + m) $\ast$ P(m, l -\/ 1)) / (l -\/ m + 1).
+The function computes the associated Legendre polynomial $P(l, m)$ that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas \-: \[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\] \[P(l + 1, l)(x) = x \times (2l + 1) \times P(l, l)\] \[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\] with $0 \leq l$ and $-l \leq m \leq +l$
 
 
 \begin{DoxyParams}{Parameters}
-{\em band} & The band of the spherical harmonic. \\
+{\em l} & The band of the spherical harmonic. \\
 \hline
-{\em argument} & The argument of the spherical harmonic. \\
+{\em m} & The argument of the spherical harmonic. \\
 \hline
 {\em x} & The cosinus of the elevation. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The function return the associated Legendre polynomial P(l, m)(x).
+The function return the associated Legendre polynomial of x for l and m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{spherical\-\_\-harmonic\-\_\-elevation} 
+\hyperlink{namespace_hoa3_d_a771a662a201e9922fd8084dafb507a20}{legendre\-\_\-normalization} 
 
 spherical\-\_\-harmonic\-\_\-azimuth 
-
-spherical\-\_\-harmonic 
 \end{DoxySeeAlso}
 
 
-Definition at line 87 of file Tools.\-h.
+Definition at line 105 of file Tools.\-h.
 
-\hypertarget{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{\index{Hoa3\-D@{Hoa3\-D}!spherical\-\_\-harmonic\-\_\-elevation@{spherical\-\_\-harmonic\-\_\-elevation}}
-\index{spherical\-\_\-harmonic\-\_\-elevation@{spherical\-\_\-harmonic\-\_\-elevation}!Hoa3D@{Hoa3\-D}}
-\subsubsection[{spherical\-\_\-harmonic\-\_\-elevation}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::spherical\-\_\-harmonic\-\_\-elevation (
+\hypertarget{namespace_hoa3_d_a6cf3a35e887d29d4b84f0fa38e259317}{\index{Hoa3\-D@{Hoa3\-D}!clip\-\_\-max@{clip\-\_\-max}}
+\index{clip\-\_\-max@{clip\-\_\-max}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{clip\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::clip\-\_\-max (
 \begin{DoxyParamCaption}
-\item[{int}]{band, }
-\item[{int}]{argument, }
-\item[{double}]{elevation}
+\item[{const double}]{value, }
+\item[{const double}]{high}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a6cf3a35e887d29d4b84f0fa38e259317}
 
 
-The spherical harmonic elevation coefficient. 
+The maximum clipping function. 
 
-\begin{DoxyVerb}The associated Legendre polynomial P(l, m)(x) are used to compute the spherical harmonic coefficients where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. You should prefer to use the spherical harmonic elevation function that uses a normalization. It uses three recurrence formulas :
-\end{DoxyVerb}
- P(l, l)(x) = (-\/1)$^\wedge$l $\ast$ (2l -\/ 1)!! $\ast$ (1 -\/ x $\ast$ x )$^\wedge$0.5, P(l + 1, l)(x) = x $\ast$ (2l + 1) $\ast$ P(l, l) and P(l + 1, m)(x) = ((2l + 1) $\ast$ x $\ast$ P(m, l) -\/ (l + m) $\ast$ P(m, l -\/ 1)) / (l -\/ m + 1).
+The function clips a number at a maximum value.
 
 
 \begin{DoxyParams}{Parameters}
-{\em band} & The band of the spherical harmonic. \\
+{\em value} & The value to clip. \\
 \hline
-{\em argument} & The argument of the spherical harmonic. \\
-\hline
-{\em x} & The cosinus of the elevation. \\
+{\em high} & The high boundarie. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The function return the associated Legendre polynomial P(l, m)(x).
+The function return the clipped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa3_d_adc1733ec44ddce995b7cb1f8d99251b5}{spherical\-\_\-harmonic\-\_\-elevation} 
+\hyperlink{namespace_hoa3_d_af7d43c71e1aba23d9bff6ffa2db6b95b}{clip\-\_\-minmax} 
 
-spherical\-\_\-harmonic\-\_\-azimuth 
-
-spherical\-\_\-harmonic 
+\hyperlink{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}{clip\-\_\-min} 
 \end{DoxySeeAlso}
 
 
-Definition at line 121 of file Tools.\-h.
+Definition at line 308 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}{\index{Hoa3\-D@{Hoa3\-D}!clip\-\_\-min@{clip\-\_\-min}}
+\index{clip\-\_\-min@{clip\-\_\-min}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{clip\-\_\-min}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::clip\-\_\-min (
+\begin{DoxyParamCaption}
+\item[{double}]{value, }
+\item[{double}]{low}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}
+
+
+The minimum clipping function. 
+
+The function clips a number at a minimum value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to clip. \\
+\hline
+{\em low} & The low boundarie. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the clipped value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_af7d43c71e1aba23d9bff6ffa2db6b95b}{clip\-\_\-minmax} 
+
+\hyperlink{namespace_hoa3_d_a6cf3a35e887d29d4b84f0fa38e259317}{clip\-\_\-max} 
+\end{DoxySeeAlso}
+
+
+Definition at line 290 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_af7d43c71e1aba23d9bff6ffa2db6b95b}{\index{Hoa3\-D@{Hoa3\-D}!clip\-\_\-minmax@{clip\-\_\-minmax}}
+\index{clip\-\_\-minmax@{clip\-\_\-minmax}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{clip\-\_\-minmax}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::clip\-\_\-minmax (
+\begin{DoxyParamCaption}
+\item[{double}]{value, }
+\item[{double}]{low, }
+\item[{double}]{high}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_af7d43c71e1aba23d9bff6ffa2db6b95b}
+
+
+The clipping function. 
+
+The function clips a number between boundaries.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to clip. \\
+\hline
+{\em low} & The low boundarie. \\
+\hline
+{\em high} & The high boundarie. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the clipped value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}{clip\-\_\-min} 
+
+\hyperlink{namespace_hoa3_d_a6cf3a35e887d29d4b84f0fa38e259317}{clip\-\_\-max} 
+\end{DoxySeeAlso}
+
+
+Definition at line 270 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}{\index{Hoa3\-D@{Hoa3\-D}!double\-\_\-factorial@{double\-\_\-factorial}}
+\index{double\-\_\-factorial@{double\-\_\-factorial}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{double\-\_\-factorial}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa3\-D\-::double\-\_\-factorial (
+\begin{DoxyParamCaption}
+\item[{long}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}
+
+
+The double factorial. 
+
+The function computes the double factorial $n!!$, the product of all the odd integers up to some odd positive integer $n$ \-: \[n!= n \times (n - 2) \times (n - 4) \times {...} \]
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The interger. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the double factorial of n.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}{factorial} 
+\end{DoxySeeAlso}
+
+
+Definition at line 76 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}{\index{Hoa3\-D@{Hoa3\-D}!factorial@{factorial}}
+\index{factorial@{factorial}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{factorial}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa3\-D\-::factorial (
+\begin{DoxyParamCaption}
+\item[{long}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}
+
+
+The factorial. 
+
+The function computes the factorial $n!$, the product of all positive integers less than or equal to $n$ \-: \[n! = \prod_{k=1}^n k\]
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The interger. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the factorial of n.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}{double\-\_\-factorial} 
+\end{DoxySeeAlso}
+
+
+Definition at line 55 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_ab0c58f51b2b09f1bff39463392da64f7}{\index{Hoa3\-D@{Hoa3\-D}!int\-To\-String@{int\-To\-String}}
+\index{int\-To\-String@{int\-To\-String}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{int\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Hoa3\-D\-::int\-To\-String (
+\begin{DoxyParamCaption}
+\item[{int}]{a\-Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_ab0c58f51b2b09f1bff39463392da64f7}
+
+
+The int to string conversion. 
+
+The function converts a interger to a string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return value in a string format. 
+\end{DoxyReturn}
+
+
+Definition at line 342 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a771a662a201e9922fd8084dafb507a20}{\index{Hoa3\-D@{Hoa3\-D}!legendre\-\_\-normalization@{legendre\-\_\-normalization}}
+\index{legendre\-\_\-normalization@{legendre\-\_\-normalization}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{legendre\-\_\-normalization}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::legendre\-\_\-normalization (
+\begin{DoxyParamCaption}
+\item[{int}]{l, }
+\item[{int}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a771a662a201e9922fd8084dafb507a20}
+
+
+The legendre normalization. 
+
+The function normalizes the associated Legendre polynomial over $2\pi$ \-: \par
+if $ m = 0$ \[K(l) = \sqrt{\frac{2 \times l + 1}{4\pi}}\] else \[K(l, m) = \sqrt{2 \times \frac{2 \times l + 1}{4\pi} \times \frac{(l - |m|)!}{(l + |m|)!}}\] with $0 \leq l$ and $-l \leq m \leq +l$
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & The band of the spherical harmonic. \\
+\hline
+{\em m} & The argument of the spherical harmonic. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the normalization of the associated Legendre polynomial for l and m.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_af20cfa7da792b7bb0b6f98eccb371ca8}{associated\-\_\-legendre} 
+\end{DoxySeeAlso}
+
+
+Definition at line 138 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a5c89b100a0887912882451b15d3c69b9}{\index{Hoa3\-D@{Hoa3\-D}!spherical\-\_\-harmonics@{spherical\-\_\-harmonics}}
+\index{spherical\-\_\-harmonics@{spherical\-\_\-harmonics}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{spherical\-\_\-harmonics}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::spherical\-\_\-harmonics (
+\begin{DoxyParamCaption}
+\item[{int}]{l, }
+\item[{int}]{m, }
+\item[{double}]{phi, }
+\item[{double}]{theta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a5c89b100a0887912882451b15d3c69b9}
+
+
+The spherical harmonics function. 
+
+The function computes the spherical harmonics coefficient for the angles $\phi$ and $\theta$ in radian. \[Y(l, m, \phi, \theta) = Y_{azimuth}(l, m, \phi) \times Y_{elevation}(l, m, \theta)\]
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & The band of the spherical harmonic. \\
+\hline
+{\em m} & The argument of the spherical harmonic. \\
+\hline
+{\em phi} & The azimuth. \\
+\hline
+{\em theta} & The elevation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the coefficient for phi and theta for the spherical harmonics band l and argument m.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a03f884a043a03a2a70cd3cdf46eaa7a5}{spherical\-\_\-harmonics\-\_\-azimuth} 
+
+\hyperlink{namespace_hoa3_d_a36da69477764cc43e96106d7436d0797}{spherical\-\_\-harmonics\-\_\-elevation} 
+\end{DoxySeeAlso}
+
+
+Definition at line 205 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a03f884a043a03a2a70cd3cdf46eaa7a5}{\index{Hoa3\-D@{Hoa3\-D}!spherical\-\_\-harmonics\-\_\-azimuth@{spherical\-\_\-harmonics\-\_\-azimuth}}
+\index{spherical\-\_\-harmonics\-\_\-azimuth@{spherical\-\_\-harmonics\-\_\-azimuth}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{spherical\-\_\-harmonics\-\_\-azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::spherical\-\_\-harmonics\-\_\-azimuth (
+\begin{DoxyParamCaption}
+\item[{int}]{l, }
+\item[{int}]{m, }
+\item[{double}]{phi}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a03f884a043a03a2a70cd3cdf46eaa7a5}
+
+
+The azimuth part of the spherical harmonics function. 
+
+The function computes the azimuth coefficient of the spherical harmonic $[l, m]$ for an angle $\phi$ in radian \-:\par
+if $ m \geq 0$ \[Y_{azimuth}(l, m, \phi) = cos(m \times \phi)\] else \[Y_{azimuth}(l, m, \phi) = sin(-m \times \phi)\] with $0 \leq l$ and $-l \leq m \leq +l$
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & The band of the spherical harmonic. \\
+\hline
+{\em m} & The argument of the spherical harmonic. \\
+\hline
+{\em phi} & The azimuth. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the azimuth coefficient for phi of the spherical harmonic band l and argument m.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a36da69477764cc43e96106d7436d0797}{spherical\-\_\-harmonics\-\_\-elevation} 
+
+\hyperlink{namespace_hoa3_d_a5c89b100a0887912882451b15d3c69b9}{spherical\-\_\-harmonics} 
+\end{DoxySeeAlso}
+
+
+Definition at line 164 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a36da69477764cc43e96106d7436d0797}{\index{Hoa3\-D@{Hoa3\-D}!spherical\-\_\-harmonics\-\_\-elevation@{spherical\-\_\-harmonics\-\_\-elevation}}
+\index{spherical\-\_\-harmonics\-\_\-elevation@{spherical\-\_\-harmonics\-\_\-elevation}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{spherical\-\_\-harmonics\-\_\-elevation}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::spherical\-\_\-harmonics\-\_\-elevation (
+\begin{DoxyParamCaption}
+\item[{int}]{l, }
+\item[{int}]{m, }
+\item[{double}]{theta}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a36da69477764cc43e96106d7436d0797}
+
+
+The elevation part of the spherical harmonics function. 
+
+The function computes the elevation coefficient of the the spherical harmonic $[l, m]$ for an angle $\theta$ in radian. It uses the associated Legendre polynomial and applies the Legendre normalization \-: \[Y_{elevation}(l, m, \theta) = N(l, m) \times P(l, m, cos(/theta)\] with $0 \leq l$, $-l \leq m \leq +l$ and $N$ the normalization and $P$ the associated Legendre polynomial.
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & The band of the spherical harmonic. \\
+\hline
+{\em m} & The argument of the spherical harmonic. \\
+\hline
+{\em theta} & The elevation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the elevation coefficient for theta of the spherical harmonic of band l and argument m.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a771a662a201e9922fd8084dafb507a20}{legendre\-\_\-normalization} 
+
+\hyperlink{namespace_hoa3_d_af20cfa7da792b7bb0b6f98eccb371ca8}{associated\-\_\-legendre} 
+
+\hyperlink{namespace_hoa3_d_a03f884a043a03a2a70cd3cdf46eaa7a5}{spherical\-\_\-harmonics\-\_\-azimuth} 
+
+\hyperlink{namespace_hoa3_d_a5c89b100a0887912882451b15d3c69b9}{spherical\-\_\-harmonics} 
+\end{DoxySeeAlso}
+
+
+Definition at line 187 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a797e7afd706be7e4c1b5961214991f35}{\index{Hoa3\-D@{Hoa3\-D}!wrap@{wrap}}
+\index{wrap@{wrap}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{wrap}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::wrap (
+\begin{DoxyParamCaption}
+\item[{double}]{value, }
+\item[{double}]{low, }
+\item[{double}]{high}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a797e7afd706be7e4c1b5961214991f35}
+
+
+The wrapping function. 
+
+The function wraps a number between boundaries.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to wrap. \\
+\hline
+{\em low} & The low boundarie. \\
+\hline
+{\em high} & The high boundarie. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the wrapped value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a0396e69cca8a7112c6bd1a817fc3ca80}{wrap\-\_\-twopi} 
+\end{DoxySeeAlso}
+
+
+Definition at line 220 of file Tools.\-h.
+
+\hypertarget{namespace_hoa3_d_a0396e69cca8a7112c6bd1a817fc3ca80}{\index{Hoa3\-D@{Hoa3\-D}!wrap\-\_\-twopi@{wrap\-\_\-twopi}}
+\index{wrap\-\_\-twopi@{wrap\-\_\-twopi}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{wrap\-\_\-twopi}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::wrap\-\_\-twopi (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a0396e69cca8a7112c6bd1a817fc3ca80}
+
+
+The wrapping function over $2\pi$. 
+
+The function wraps a number between 0 and $2\pi$.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to wrap. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function return the wrapped value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa3_d_a797e7afd706be7e4c1b5961214991f35}{wrap} 
+\end{DoxySeeAlso}
+
+
+Definition at line 244 of file Tools.\-h.
 

@@ -32,5 +32,5 @@ var searchData=
   ['ambisonicvirtualmicui',['AmbisonicVirtualMicUI',['../class_ambisonic_virtual_mic_u_i.html',1,'']]],
   ['ambisonicvirtualmicuimanager',['AmbisonicVirtualMicUIManager',['../class_ambisonic_virtual_mic_u_i_manager.html',1,'']]],
   ['ambisonicwider',['AmbisonicWider',['../class_ambisonic_wider.html',1,'AmbisonicWider'],['../class_ambisonic_wider.html#a8e46f8e6bc4eda1c6c17f632d2e1a12f',1,'AmbisonicWider::AmbisonicWider()']]],
-  ['associated_5flegendre',['associated_legendre',['../namespace_hoa3_d.html#af1a17fb5f135864f61a4dcf84ec65879',1,'Hoa3D']]]
+  ['associated_5flegendre',['associated_legendre',['../namespace_hoa3_d.html#af20cfa7da792b7bb0b6f98eccb371ca8',1,'Hoa3D']]]
 ];

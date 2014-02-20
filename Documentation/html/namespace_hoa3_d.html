@@ -13,6 +13,12 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -131,18 +137,51 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af1a17fb5f135864f61a4dcf84ec65879"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#af1a17fb5f135864f61a4dcf84ec65879">associated_legendre</a> (int band, int argument, double x)</td></tr>
-<tr class="memdesc:af1a17fb5f135864f61a4dcf84ec65879"><td class="mdescLeft">&#160;</td><td class="mdescRight">The associated Legendre polynomials.  <a href="#af1a17fb5f135864f61a4dcf84ec65879">More...</a><br/></td></tr>
-<tr class="separator:af1a17fb5f135864f61a4dcf84ec65879"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc1733ec44ddce995b7cb1f8d99251b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#adc1733ec44ddce995b7cb1f8d99251b5">spherical_harmonic_elevation</a> (int band, int argument, double elevation)</td></tr>
-<tr class="memdesc:adc1733ec44ddce995b7cb1f8d99251b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spherical harmonic elevation coefficient.  <a href="#adc1733ec44ddce995b7cb1f8d99251b5">More...</a><br/></td></tr>
-<tr class="separator:adc1733ec44ddce995b7cb1f8d99251b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ed1e9803ad96127f1054b1a473b425d"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a1ed1e9803ad96127f1054b1a473b425d">factorial</a> (long n)</td></tr>
+<tr class="memdesc:a1ed1e9803ad96127f1054b1a473b425d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The factorial.  <a href="#a1ed1e9803ad96127f1054b1a473b425d">More...</a><br/></td></tr>
+<tr class="separator:a1ed1e9803ad96127f1054b1a473b425d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1414c728d02e9d3d60035e385d2150ec"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a1414c728d02e9d3d60035e385d2150ec">double_factorial</a> (long n)</td></tr>
+<tr class="memdesc:a1414c728d02e9d3d60035e385d2150ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">The double factorial.  <a href="#a1414c728d02e9d3d60035e385d2150ec">More...</a><br/></td></tr>
+<tr class="separator:a1414c728d02e9d3d60035e385d2150ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20cfa7da792b7bb0b6f98eccb371ca8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#af20cfa7da792b7bb0b6f98eccb371ca8">associated_legendre</a> (int l, int m, double x)</td></tr>
+<tr class="memdesc:af20cfa7da792b7bb0b6f98eccb371ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The associated Legendre polynomials.  <a href="#af20cfa7da792b7bb0b6f98eccb371ca8">More...</a><br/></td></tr>
+<tr class="separator:af20cfa7da792b7bb0b6f98eccb371ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a771a662a201e9922fd8084dafb507a20"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a771a662a201e9922fd8084dafb507a20">legendre_normalization</a> (int l, int m)</td></tr>
+<tr class="memdesc:a771a662a201e9922fd8084dafb507a20"><td class="mdescLeft">&#160;</td><td class="mdescRight">The legendre normalization.  <a href="#a771a662a201e9922fd8084dafb507a20">More...</a><br/></td></tr>
+<tr class="separator:a771a662a201e9922fd8084dafb507a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03f884a043a03a2a70cd3cdf46eaa7a5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a03f884a043a03a2a70cd3cdf46eaa7a5">spherical_harmonics_azimuth</a> (int l, int m, double phi)</td></tr>
+<tr class="memdesc:a03f884a043a03a2a70cd3cdf46eaa7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The azimuth part of the spherical harmonics function.  <a href="#a03f884a043a03a2a70cd3cdf46eaa7a5">More...</a><br/></td></tr>
+<tr class="separator:a03f884a043a03a2a70cd3cdf46eaa7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36da69477764cc43e96106d7436d0797"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a36da69477764cc43e96106d7436d0797">spherical_harmonics_elevation</a> (int l, int m, double theta)</td></tr>
+<tr class="memdesc:a36da69477764cc43e96106d7436d0797"><td class="mdescLeft">&#160;</td><td class="mdescRight">The elevation part of the spherical harmonics function.  <a href="#a36da69477764cc43e96106d7436d0797">More...</a><br/></td></tr>
+<tr class="separator:a36da69477764cc43e96106d7436d0797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c89b100a0887912882451b15d3c69b9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a5c89b100a0887912882451b15d3c69b9">spherical_harmonics</a> (int l, int m, double phi, double theta)</td></tr>
+<tr class="memdesc:a5c89b100a0887912882451b15d3c69b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spherical harmonics function.  <a href="#a5c89b100a0887912882451b15d3c69b9">More...</a><br/></td></tr>
+<tr class="separator:a5c89b100a0887912882451b15d3c69b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797e7afd706be7e4c1b5961214991f35"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a797e7afd706be7e4c1b5961214991f35">wrap</a> (double value, double low, double high)</td></tr>
+<tr class="memdesc:a797e7afd706be7e4c1b5961214991f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">The wrapping function.  <a href="#a797e7afd706be7e4c1b5961214991f35">More...</a><br/></td></tr>
+<tr class="separator:a797e7afd706be7e4c1b5961214991f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0396e69cca8a7112c6bd1a817fc3ca80"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a> (double value)</td></tr>
+<tr class="memdesc:a0396e69cca8a7112c6bd1a817fc3ca80"><td class="mdescLeft">&#160;</td><td class="mdescRight">The wrapping function over \(2\pi\).  <a href="#a0396e69cca8a7112c6bd1a817fc3ca80">More...</a><br/></td></tr>
+<tr class="separator:a0396e69cca8a7112c6bd1a817fc3ca80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7d43c71e1aba23d9bff6ffa2db6b95b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b">clip_minmax</a> (double value, double low, double high)</td></tr>
+<tr class="memdesc:af7d43c71e1aba23d9bff6ffa2db6b95b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The clipping function.  <a href="#af7d43c71e1aba23d9bff6ffa2db6b95b">More...</a><br/></td></tr>
+<tr class="separator:af7d43c71e1aba23d9bff6ffa2db6b95b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7db8378887542d24d61bed71b482848e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e">clip_min</a> (double value, double low)</td></tr>
+<tr class="memdesc:a7db8378887542d24d61bed71b482848e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The minimum clipping function.  <a href="#a7db8378887542d24d61bed71b482848e">More...</a><br/></td></tr>
+<tr class="separator:a7db8378887542d24d61bed71b482848e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf3a35e887d29d4b84f0fa38e259317"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317">clip_max</a> (const double value, const double high)</td></tr>
+<tr class="memdesc:a6cf3a35e887d29d4b84f0fa38e259317"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum clipping function.  <a href="#a6cf3a35e887d29d4b84f0fa38e259317">More...</a><br/></td></tr>
+<tr class="separator:a6cf3a35e887d29d4b84f0fa38e259317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c58f51b2b09f1bff39463392da64f7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_hoa3_d.html#ab0c58f51b2b09f1bff39463392da64f7">intToString</a> (int aValue)</td></tr>
+<tr class="memdesc:ab0c58f51b2b09f1bff39463392da64f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The int to string conversion.  <a href="#ab0c58f51b2b09f1bff39463392da64f7">More...</a><br/></td></tr>
+<tr class="separator:ab0c58f51b2b09f1bff39463392da64f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The 3D ambisonic classes. </p>
 <p>All the 3D ambisonic and planewaves classes will be part of this namespace </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="af1a17fb5f135864f61a4dcf84ec65879"></a>
+<a class="anchor" id="af20cfa7da792b7bb0b6f98eccb371ca8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -153,13 +192,13 @@ Functions</h2></td></tr>
           <td class="memname">double Hoa3D::associated_legendre </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>band</em>, </td>
+          <td class="paramname"><em>l</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argument</em>, </td>
+          <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -181,30 +220,35 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The associated Legendre polynomials. </p>
-<p>The associated Legendre polynomial <img class="formulaInl" alt="$\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$" src="form_0.png"/>. <img class="formulaInl" alt="$P(l, m)$" src="form_1.png"/> are used to compute the spherical harmonic coefficients where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. You should prefer to use the spherical harmonic elevation function that uses a normalization. It uses three recurrence formulas : <br/>
-P(l, l)(x) = (-1)^l * (2l - 1)!! * (1 - x * x )^0.5, <br/>
-P(l + 1, l)(x) = x * (2l + 1) * P(l, l) and <br/>
-P(l + 1, m)(x) = ((2l + 1) * x * P(m, l) - (l + m) * P(m, l - 1)) / (l - m + 1).</p>
+<p>The function computes the associated Legendre polynomial \(P(l, m)\) that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas : </p>
+<p class="formulaDsp">
+\[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\]
+</p>
+ <p class="formulaDsp">
+\[P(l + 1, l)(x) = x \times (2l + 1) \times P(l, l)\]
+</p>
+ <p class="formulaDsp">
+\[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\]
+</p>
+<p> with \(0 \leq l\) and \(-l \leq m \leq +l\)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">band</td><td>The band of the spherical harmonic. </td></tr>
-    <tr><td class="paramname">argument</td><td>The argument of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">l</td><td>The band of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">m</td><td>The argument of the spherical harmonic. </td></tr>
     <tr><td class="paramname">x</td><td>The cosinus of the elevation. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The function return the associated Legendre polynomial P(l, m)(x).</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#adc1733ec44ddce995b7cb1f8d99251b5" title="The spherical harmonic elevation coefficient. ">spherical_harmonic_elevation</a> </dd>
+<dl class="section return"><dt>Returns</dt><dd>The function return the associated Legendre polynomial of x for l and m.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a771a662a201e9922fd8084dafb507a20" title="The legendre normalization. ">legendre_normalization</a> </dd>
 <dd>
-spherical_harmonic_azimuth </dd>
-<dd>
-spherical_harmonic </dd></dl>
+spherical_harmonic_azimuth </dd></dl>
 
-<p>Definition at line <a class="el" href="_tools_8h_source.html#l00087">87</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00105">105</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="adc1733ec44ddce995b7cb1f8d99251b5"></a>
+<a class="anchor" id="a6cf3a35e887d29d4b84f0fa38e259317"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -212,22 +256,16 @@ spherical_harmonic </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Hoa3D::spherical_harmonic_elevation </td>
+          <td class="memname">double Hoa3D::clip_max </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>band</em>, </td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argument</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>elevation</em>&#160;</td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>high</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -242,32 +280,598 @@ spherical_harmonic </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>The spherical harmonic elevation coefficient. </p>
-<pre class="fragment">The associated Legendre polynomial P(l, m)(x) are used to compute the spherical harmonic coefficients where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. You should prefer to use the spherical harmonic elevation function that uses a normalization. It uses three recurrence formulas :
-</pre><p> P(l, l)(x) = (-1)^l * (2l - 1)!! * (1 - x * x )^0.5, P(l + 1, l)(x) = x * (2l + 1) * P(l, l) and P(l + 1, m)(x) = ((2l + 1) * x * P(m, l) - (l + m) * P(m, l - 1)) / (l - m + 1).</p>
+<p>The maximum clipping function. </p>
+<p>The function clips a number at a maximum value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">band</td><td>The band of the spherical harmonic. </td></tr>
-    <tr><td class="paramname">argument</td><td>The argument of the spherical harmonic. </td></tr>
-    <tr><td class="paramname">x</td><td>The cosinus of the elevation. </td></tr>
+    <tr><td class="paramname">value</td><td>The value to clip. </td></tr>
+    <tr><td class="paramname">high</td><td>The high boundarie. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The function return the associated Legendre polynomial P(l, m)(x).</dd></dl>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#adc1733ec44ddce995b7cb1f8d99251b5" title="The spherical harmonic elevation coefficient. ">spherical_harmonic_elevation</a> </dd>
+<dl class="section return"><dt>Returns</dt><dd>The function return the clipped value.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b" title="The clipping function. ">clip_minmax</a> </dd>
 <dd>
-spherical_harmonic_azimuth </dd>
-<dd>
-spherical_harmonic </dd></dl>
+<a class="el" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e" title="The minimum clipping function. ">clip_min</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_tools_8h_source.html#l00121">121</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00308">308</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7db8378887542d24d61bed71b482848e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::clip_min </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>low</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The minimum clipping function. </p>
+<p>The function clips a number at a minimum value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to clip. </td></tr>
+    <tr><td class="paramname">low</td><td>The low boundarie. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the clipped value.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#af7d43c71e1aba23d9bff6ffa2db6b95b" title="The clipping function. ">clip_minmax</a> </dd>
+<dd>
+<a class="el" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317" title="The maximum clipping function. ">clip_max</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00290">290</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af7d43c71e1aba23d9bff6ffa2db6b95b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::clip_minmax </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>low</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>high</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The clipping function. </p>
+<p>The function clips a number between boundaries.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to clip. </td></tr>
+    <tr><td class="paramname">low</td><td>The low boundarie. </td></tr>
+    <tr><td class="paramname">high</td><td>The high boundarie. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the clipped value.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a7db8378887542d24d61bed71b482848e" title="The minimum clipping function. ">clip_min</a> </dd>
+<dd>
+<a class="el" href="namespace_hoa3_d.html#a6cf3a35e887d29d4b84f0fa38e259317" title="The maximum clipping function. ">clip_max</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00270">270</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1414c728d02e9d3d60035e385d2150ec"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long Hoa3D::double_factorial </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The double factorial. </p>
+<p>The function computes the double factorial \(n!!\), the product of all the odd integers up to some odd positive integer \(n\) : </p>
+<p class="formulaDsp">
+\[n!= n \times (n - 2) \times (n - 4) \times {...} \]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>The interger. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the double factorial of n.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a1ed1e9803ad96127f1054b1a473b425d" title="The factorial. ">factorial</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00076">76</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1ed1e9803ad96127f1054b1a473b425d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long Hoa3D::factorial </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The factorial. </p>
+<p>The function computes the factorial \(n!\), the product of all positive integers less than or equal to \(n\) : </p>
+<p class="formulaDsp">
+\[n! = \prod_{k=1}^n k\]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>The interger. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the factorial of n.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a1414c728d02e9d3d60035e385d2150ec" title="The double factorial. ">double_factorial</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00055">55</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab0c58f51b2b09f1bff39463392da64f7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Hoa3D::intToString </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>aValue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The int to string conversion. </p>
+<p>The function converts a interger to a string.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to convert. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return value in a string format. </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00342">342</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a771a662a201e9922fd8084dafb507a20"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::legendre_normalization </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The legendre normalization. </p>
+<p>The function normalizes the associated Legendre polynomial over \(2\pi\) : <br/>
+if \( m = 0\) </p>
+<p class="formulaDsp">
+\[K(l) = \sqrt{\frac{2 \times l + 1}{4\pi}}\]
+</p>
+<p> else </p>
+<p class="formulaDsp">
+\[K(l, m) = \sqrt{2 \times \frac{2 \times l + 1}{4\pi} \times \frac{(l - |m|)!}{(l + |m|)!}}\]
+</p>
+<p> with \(0 \leq l\) and \(-l \leq m \leq +l\)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The band of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">m</td><td>The argument of the spherical harmonic. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the normalization of the associated Legendre polynomial for l and m.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#af20cfa7da792b7bb0b6f98eccb371ca8" title="The associated Legendre polynomials. ">associated_legendre</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00138">138</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5c89b100a0887912882451b15d3c69b9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::spherical_harmonics </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>phi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>theta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The spherical harmonics function. </p>
+<p>The function computes the spherical harmonics coefficient for the angles \(\phi\) and \(\theta\) in radian. </p>
+<p class="formulaDsp">
+\[Y(l, m, \phi, \theta) = Y_{azimuth}(l, m, \phi) \times Y_{elevation}(l, m, \theta)\]
+</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The band of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">m</td><td>The argument of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">phi</td><td>The azimuth. </td></tr>
+    <tr><td class="paramname">theta</td><td>The elevation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the coefficient for phi and theta for the spherical harmonics band l and argument m.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a03f884a043a03a2a70cd3cdf46eaa7a5" title="The azimuth part of the spherical harmonics function. ">spherical_harmonics_azimuth</a> </dd>
+<dd>
+<a class="el" href="namespace_hoa3_d.html#a36da69477764cc43e96106d7436d0797" title="The elevation part of the spherical harmonics function. ">spherical_harmonics_elevation</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00205">205</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a03f884a043a03a2a70cd3cdf46eaa7a5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::spherical_harmonics_azimuth </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>phi</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The azimuth part of the spherical harmonics function. </p>
+<p>The function computes the azimuth coefficient of the spherical harmonic \([l, m]\) for an angle \(\phi\) in radian :<br/>
+if \( m \geq 0\) </p>
+<p class="formulaDsp">
+\[Y_{azimuth}(l, m, \phi) = cos(m \times \phi)\]
+</p>
+<p> else </p>
+<p class="formulaDsp">
+\[Y_{azimuth}(l, m, \phi) = sin(-m \times \phi)\]
+</p>
+<p> with \(0 \leq l\) and \(-l \leq m \leq +l\)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The band of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">m</td><td>The argument of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">phi</td><td>The azimuth. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the azimuth coefficient for phi of the spherical harmonic band l and argument m.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a36da69477764cc43e96106d7436d0797" title="The elevation part of the spherical harmonics function. ">spherical_harmonics_elevation</a> </dd>
+<dd>
+<a class="el" href="namespace_hoa3_d.html#a5c89b100a0887912882451b15d3c69b9" title="The spherical harmonics function. ">spherical_harmonics</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00164">164</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a36da69477764cc43e96106d7436d0797"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::spherical_harmonics_elevation </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>theta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The elevation part of the spherical harmonics function. </p>
+<p>The function computes the elevation coefficient of the the spherical harmonic \([l, m]\) for an angle \(\theta\) in radian. It uses the associated Legendre polynomial and applies the Legendre normalization : </p>
+<p class="formulaDsp">
+\[Y_{elevation}(l, m, \theta) = N(l, m) \times P(l, m, cos(/theta)\]
+</p>
+<p> with \(0 \leq l\), \(-l \leq m \leq +l\) and \(N\) the normalization and \(P\) the associated Legendre polynomial.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>The band of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">m</td><td>The argument of the spherical harmonic. </td></tr>
+    <tr><td class="paramname">theta</td><td>The elevation. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the elevation coefficient for theta of the spherical harmonic of band l and argument m.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a771a662a201e9922fd8084dafb507a20" title="The legendre normalization. ">legendre_normalization</a> </dd>
+<dd>
+<a class="el" href="namespace_hoa3_d.html#af20cfa7da792b7bb0b6f98eccb371ca8" title="The associated Legendre polynomials. ">associated_legendre</a> </dd>
+<dd>
+<a class="el" href="namespace_hoa3_d.html#a03f884a043a03a2a70cd3cdf46eaa7a5" title="The azimuth part of the spherical harmonics function. ">spherical_harmonics_azimuth</a> </dd>
+<dd>
+<a class="el" href="namespace_hoa3_d.html#a5c89b100a0887912882451b15d3c69b9" title="The spherical harmonics function. ">spherical_harmonics</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00187">187</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a797e7afd706be7e4c1b5961214991f35"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::wrap </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>low</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>high</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The wrapping function. </p>
+<p>The function wraps a number between boundaries.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to wrap. </td></tr>
+    <tr><td class="paramname">low</td><td>The low boundarie. </td></tr>
+    <tr><td class="paramname">high</td><td>The high boundarie. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the wrapped value.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80" title="The wrapping function over . ">wrap_twopi</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00220">220</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0396e69cca8a7112c6bd1a817fc3ca80"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::wrap_twopi </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The wrapping function over \(2\pi\). </p>
+<p>The function wraps a number between 0 and \(2\pi\).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The value to wrap. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function return the wrapped value.</dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="namespace_hoa3_d.html#a797e7afd706be7e4c1b5961214991f35" title="The wrapping function. ">wrap</a> </dd></dl>
+
+<p>Definition at line <a class="el" href="_tools_8h_source.html#l00244">244</a> of file <a class="el" href="_tools_8h_source.html">Tools.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 18 2014 08:26:36 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 20 2014 12:46:01 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
