@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 0.0, 44.0, 790.0, 806.0 ],
+		"rect" : [ 0.0, 44.0, 1186.0, 806.0 ],
 		"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -49,7 +49,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 70.0, 790.0, 780.0 ],
+						"rect" : [ 0.0, 70.0, 1186.0, 780.0 ],
 						"bgcolor" : [ 0.93, 0.93, 0.92, 1.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
@@ -74,6 +74,20 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"id" : "obj-14",
+									"maxclass" : "newobj",
+									"numinlets" : 50,
+									"numoutlets" : 49,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 348.0, 542.0, 680.5, 19.0 ],
+									"text" : "hoa.wider3D~ 6"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
 									"id" : "obj-13",
 									"maxclass" : "newobj",
 									"numinlets" : 4,
@@ -93,8 +107,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 341.0, 573.0, 221.5, 19.0 ],
-									"presentation_rect" : [ 341.0, 573.0, 0.0, 0.0 ],
+									"patching_rect" : [ 348.0, 601.0, 221.5, 19.0 ],
 									"text" : "hoa.optim3D~ 3"
 								}
 
@@ -251,7 +264,7 @@
 									"numoutlets" : 2,
 									"offset" : 45.0,
 									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 994.0, 300.0, 225.0, 225.0 ],
+									"patching_rect" : [ 655.0, 601.0, 225.0, 225.0 ],
 									"yls" : 4,
 									"zls" : [ 0.0, 90.0, 180.0, 270.0 ]
 								}
@@ -282,7 +295,7 @@
 									"numinlets" : 4,
 									"numoutlets" : 8,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 363.75, 522.0, 116.0, 19.0 ],
+									"patching_rect" : [ 348.0, 721.0, 116.0, 19.0 ],
 									"text" : "hoa.decoder3D~ 1 8"
 								}
 
@@ -295,7 +308,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 8,
 									"numoutlets" : 0,
-									"patching_rect" : [ 530.25, 635.0, 113.5, 19.0 ],
+									"patching_rect" : [ 348.0, 657.0, 113.5, 19.0 ],
 									"text" : "hoa.dac~ 1:8"
 								}
 
@@ -559,34 +572,6 @@
 								}
 
 							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-145",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 546.5, -83.0, 32.5, 17.0 ],
-									"text" : "0.5"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-140",
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 780.75, -99.0, 32.5, 17.0 ],
-									"text" : "0.5"
-								}
-
-							}
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
@@ -638,7 +623,7 @@
 							"architecture" : "x64"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 790.0, 780.0 ],
+						"rect" : [ 0.0, 26.0, 1186.0, 780.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 13.0,
@@ -740,6 +725,10 @@
 			}
 , 			{
 				"name" : "hoa.map3D~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.wider3D~.mxo",
 				"type" : "iLaX"
 			}
  ]
