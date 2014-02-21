@@ -103,7 +103,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    m_number_of_inputs      = 1;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    m_encoder   = <span class="keyword">new</span> <a class="code" href="class_ambisonic_encoder.html">AmbisonicEncoder</a>(m_order);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    m_wider     = <span class="keyword">new</span> <a class="code" href="class_ambisonic_wider.html">AmbisonicWider</a>(m_order);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    m_wider     = <span class="keyword">new</span> AmbisonicWider(m_order);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    m_line_one  = <span class="keyword">new</span> <a class="code" href="class_cicm_line.html">CicmLine</a>(aRampSample);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    m_line_two  = <span class="keyword">new</span> <a class="code" href="class_cicm_line.html">CicmLine</a>(aRampSample);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    m_line_thr  = <span class="keyword">new</span> <a class="code" href="class_cicm_line.html">CicmLine</a>(aRampSample);</div>
@@ -149,7 +149,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    m_vector_size = Tools::clip_power_of_two(aVectorSize);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    m_encoder-&gt;<a class="code" href="class_ambisonic_encoder.html#a7219775383a3bead41ec7f1a609a76fe">setVectorSize</a>(m_vector_size);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    m_wider-&gt;<a class="code" href="class_ambisonic_wider.html#af970c4c71f96afa96649d9c1a1387043">setVectorSize</a>(m_vector_size);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    m_wider-&gt;setVectorSize(m_vector_size);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    m_line_one-&gt;setVectorSize(m_vector_size);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    m_line_two-&gt;setVectorSize(m_vector_size);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    m_line_thr-&gt;setVectorSize(m_vector_size);</div>
@@ -327,16 +327,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;}</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
 <div class="ttc" id="class_ambisonic_encoder_html_a7219775383a3bead41ec7f1a609a76fe"><div class="ttname"><a href="class_ambisonic_encoder.html#a7219775383a3bead41ec7f1a609a76fe">AmbisonicEncoder::setVectorSize</a></div><div class="ttdeci">void setVectorSize(long aVectorSize)</div><div class="ttdoc">The vector size setter. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_encoder_8cpp_source.html#l00068">AmbisonicEncoder.cpp:68</a></div></div>
-<div class="ttc" id="class_ambisonic_wider_html"><div class="ttname"><a href="class_ambisonic_wider.html">AmbisonicWider</a></div><div class="ttdoc">An ambisonic wider. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_wider_8h_source.html#l00020">AmbisonicWider.h:20</a></div></div>
 <div class="ttc" id="class_ambisonic_encoder_html"><div class="ttname"><a href="class_ambisonic_encoder.html">AmbisonicEncoder</a></div><div class="ttdoc">An ambisonic encoder. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_encoder_8h_source.html#l00036">AmbisonicEncoder.h:36</a></div></div>
 <div class="ttc" id="class_cicm_line_html"><div class="ttname"><a href="class_cicm_line.html">CicmLine</a></div><div class="ttdef"><b>Definition:</b> <a href="_cicm_line_8h_source.html#l00031">CicmLine.h:31</a></div></div>
 <div class="ttc" id="class_ambisonic_map_html_a44db87a2d97aa5851b5fc81be2a33d08"><div class="ttname"><a href="class_ambisonic_map.html#a44db87a2d97aa5851b5fc81be2a33d08">AmbisonicMap::AmbisonicMap</a></div><div class="ttdeci">AmbisonicMap(long anOrder=1, long aRampSample=4410, long aVectorSize=0, long aSamplingRate=44100)</div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_map_8cpp_source.html#l00028">AmbisonicMap.cpp:28</a></div></div>
 <div class="ttc" id="class_ambisonic_html"><div class="ttname"><a href="class_ambisonic.html">Ambisonic</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_ambisonic_8h_source.html#l00032">Ambisonic.h:32</a></div></div>
-<div class="ttc" id="class_ambisonic_wider_html_af970c4c71f96afa96649d9c1a1387043"><div class="ttname"><a href="class_ambisonic_wider.html#af970c4c71f96afa96649d9c1a1387043">AmbisonicWider::setVectorSize</a></div><div class="ttdeci">void setVectorSize(long aVectorSize)</div><div class="ttdoc">Set the size of the samples block. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_wider_8cpp_source.html#l00098">AmbisonicWider.cpp:98</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 00:57:38 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

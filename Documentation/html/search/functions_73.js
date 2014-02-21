@@ -1,7 +1,6 @@
 var searchData=
 [
   ['scope',['Scope',['../class_hoa3_d_1_1_scope.html#ab4f5ff6674c4df165a1455e4648e1c35',1,'Hoa3D::Scope']]],
-  ['setangle',['setAngle',['../class_ambisonic_encoder.html#a1939dfd1305bd3b9387c7bf91b230e35',1,'AmbisonicEncoder']]],
   ['setazimuth',['setAzimuth',['../class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8',1,'Hoa2D::Encoder::setAzimuth()'],['../class_hoa3_d_1_1_encoder.html#a7dbf4d5791003ed486fc0b5462409e0a',1,'Hoa3D::Encoder::setAzimuth()'],['../class_hoa3_d_1_1_map.html#a751e3f421578c43bf42eca7888a34839',1,'Hoa3D::Map::setAzimuth()']]],
   ['setdistance',['setDistance',['../class_hoa3_d_1_1_map.html#a23a9cb2b7256d46e6cdc8c40d4bab177',1,'Hoa3D::Map']]],
   ['setelevation',['setElevation',['../class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d',1,'Hoa3D::Encoder::setElevation()'],['../class_hoa3_d_1_1_map.html#ac3f8b037de1d3926206b46884c6c2004',1,'Hoa3D::Map::setElevation()']]],
@@ -10,9 +9,7 @@ var searchData=
   ['setpitch',['setPitch',['../class_hoa3_d_1_1_rotate.html#aeb7e844c29c2f9bb9cc7de3ef89385f6',1,'Hoa3D::Rotate']]],
   ['setroll',['setRoll',['../class_hoa3_d_1_1_rotate.html#a89599a9cd8c10240ce71b8fd7bdbb3b7',1,'Hoa3D::Rotate']]],
   ['setrotations',['setRotations',['../class_hoa3_d_1_1_rotate.html#a190ffb26419c5ab6c7935d48e9a7e23b',1,'Hoa3D::Rotate']]],
-  ['setvectorsize',['setVectorSize',['../class_ambisonic_encoder.html#a7219775383a3bead41ec7f1a609a76fe',1,'AmbisonicEncoder::setVectorSize()'],['../class_ambisonic_wider.html#af970c4c71f96afa96649d9c1a1387043',1,'AmbisonicWider::setVectorSize()']]],
   ['setwideningvalue',['setWideningValue',['../class_hoa3_d_1_1_wider.html#a5981d4dafbb0d2ce4ea20ec7cd1fb114',1,'Hoa3D::Wider::setWideningValue(const double value)'],['../class_hoa3_d_1_1_wider.html#a5981d4dafbb0d2ce4ea20ec7cd1fb114',1,'Hoa3D::Wider::setWideningValue(const double value)']]],
-  ['setwidenvalue',['setWidenValue',['../class_ambisonic_wider.html#a26597b62bcb8d892591ad5362702edca',1,'AmbisonicWider']]],
   ['setyaw',['setYaw',['../class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5',1,'Hoa2D::Rotate::setYaw()'],['../class_hoa3_d_1_1_rotate.html#a18df4eaec4e8c7c60f8234632af06d6f',1,'Hoa3D::Rotate::setYaw()']]],
   ['sourcesmanager',['SourcesManager',['../class_sources_manager.html#a333ef82bab70b995bf0f658c894bee1b',1,'SourcesManager']]],
   ['sourcespreset',['SourcesPreset',['../class_sources_preset.html#a0a4203349327d10bb6afe35156126d8a',1,'SourcesPreset']]],

@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;AmbisonicSpectrum.h&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_ambisonic_spectrum.html#a657f2c97aaab215e95c41f4d07dc8f45">   29</a></span>&#160;<a class="code" href="class_ambisonic_spectrum.html#a657f2c97aaab215e95c41f4d07dc8f45">AmbisonicSpectrum::AmbisonicSpectrum</a>(<span class="keywordtype">long</span> aNumberOfLoudspeakers, <span class="keywordtype">long</span> aNumberOfBands, <span class="keywordtype">long</span> aVectorSize, <span class="keywordtype">long</span> aSamplingRate)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;: <a class="code" href="class_planewaves.html">Planewaves</a>(aNumberOfLoudspeakers, aVectorSize, aSamplingRate)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;: Planewaves(aNumberOfLoudspeakers, aVectorSize, aSamplingRate)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    m_filtered_signal_double = NULL;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    m_filtered_signal_float = NULL;</div>
@@ -109,7 +109,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    m_ordinate = NULL;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    m_temp_amplitude_value = NULL;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    m_loudspeakers_values = NULL;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    m_vector = <span class="keyword">new</span> <a class="code" href="class_ambisonic_vector.html">AmbisonicVector</a>(m_number_of_loudspeakers, m_vector_size);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    m_vector = <span class="keyword">new</span> AmbisonicVector(m_number_of_loudspeakers, m_vector_size);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    setNumberOfBands(aNumberOfBands);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
@@ -174,7 +174,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        m_filtered_signal_float[i]  = <span class="keyword">new</span> cicm_vector_float[m_number_of_loudspeakers];</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; m_number_of_loudspeakers; j++)</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            m_filter[i].push_back(<span class="keyword">new</span> <a class="code" href="class_filter_biquad.html">FilterBiquad</a>(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            m_filter[i].push_back(<span class="keyword">new</span> FilterBiquad(Cicm_Biquad_Bandpass, m_vector_size, m_sampling_rate));</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            m_filter[i][j]-&gt;setGain(1.);</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            m_filter[i][j]-&gt;setQValue(1.);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            m_filtered_signal_double[i][j]  = NULL;</div>
@@ -409,14 +409,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        cicm_free(m_temp_amplitude_value);    </div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;}</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;</div>
-<div class="ttc" id="class_planewaves_html"><div class="ttname"><a href="class_planewaves.html">Planewaves</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_planewaves_8h_source.html#l00032">Planewaves.h:32</a></div></div>
 <div class="ttc" id="class_ambisonic_spectrum_html_a657f2c97aaab215e95c41f4d07dc8f45"><div class="ttname"><a href="class_ambisonic_spectrum.html#a657f2c97aaab215e95c41f4d07dc8f45">AmbisonicSpectrum::AmbisonicSpectrum</a></div><div class="ttdeci">AmbisonicSpectrum(long aNumberOfLoudspeakers=1, long aNumberOfBands=3, long aVectorSize=0, long aSamplingRate=44100)</div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_spectrum_8cpp_source.html#l00029">AmbisonicSpectrum.cpp:29</a></div></div>
-<div class="ttc" id="class_filter_biquad_html"><div class="ttname"><a href="class_filter_biquad.html">FilterBiquad</a></div><div class="ttdef"><b>Definition:</b> <a href="_cicm_filter_biquad_8h_source.html#l00042">CicmFilterBiquad.h:42</a></div></div>
-<div class="ttc" id="class_ambisonic_vector_html"><div class="ttname"><a href="class_ambisonic_vector.html">AmbisonicVector</a></div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_vector_8h_source.html#l00032">AmbisonicVector.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:03:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

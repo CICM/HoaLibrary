@@ -103,11 +103,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;../hoaVector/AmbisonicVector.h&quot;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;../CicmLibrary/CicmFilters/CicmFilterBiquad.h&quot;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_ambisonic_spectrum.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_ambisonic_spectrum.html">AmbisonicSpectrum</a> : <span class="keyword">public</span> <a class="code" href="class_planewaves.html">Planewaves</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_ambisonic_spectrum.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_ambisonic_spectrum.html">AmbisonicSpectrum</a> : <span class="keyword">public</span> Planewaves</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_ambisonic_vector.html">AmbisonicVector</a>*                   m_vector;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    AmbisonicVector*                   m_vector;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    vector &lt;vector &lt;FilterBiquad*&gt; &gt;    m_filter;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    cicm_vector_float**                 m_filtered_signal_float;</div>
@@ -205,14 +205,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;};</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_planewaves_html"><div class="ttname"><a href="class_planewaves.html">Planewaves</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_planewaves_8h_source.html#l00032">Planewaves.h:32</a></div></div>
 <div class="ttc" id="class_ambisonic_spectrum_html_a657f2c97aaab215e95c41f4d07dc8f45"><div class="ttname"><a href="class_ambisonic_spectrum.html#a657f2c97aaab215e95c41f4d07dc8f45">AmbisonicSpectrum::AmbisonicSpectrum</a></div><div class="ttdeci">AmbisonicSpectrum(long aNumberOfLoudspeakers=1, long aNumberOfBands=3, long aVectorSize=0, long aSamplingRate=44100)</div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_spectrum_8cpp_source.html#l00029">AmbisonicSpectrum.cpp:29</a></div></div>
 <div class="ttc" id="class_ambisonic_spectrum_html"><div class="ttname"><a href="class_ambisonic_spectrum.html">AmbisonicSpectrum</a></div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_spectrum_8h_source.html#l00034">AmbisonicSpectrum.h:34</a></div></div>
-<div class="ttc" id="class_ambisonic_vector_html"><div class="ttname"><a href="class_ambisonic_vector.html">AmbisonicVector</a></div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_vector_8h_source.html#l00032">AmbisonicVector.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:03:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -64,11 +64,11 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 		
 		x->f_encoder = new Hoa2D::Encoder(order);
 		
-		dsp_setup((t_pxobject *)x, x->f_encoder->getNumberOfInputs());
-		for (int i = 0; i < x->f_encoder->getNumberOfOutputs(); i++)
+		dsp_setup((t_pxobject *)x, 2);
+		for (int i = 0; i < x->f_encoder->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
 		
-        x->f_signals =  new double[x->f_encoder->getNumberOfOutputs() * SYS_MAXBLKSIZE];
+        x->f_signals =  new double[x->f_encoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
 	}
 
 	return (x);

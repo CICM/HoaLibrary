@@ -44,15 +44,15 @@
 namespace Hoa3D
 {
     //! The factorial
-    /**	The function computes the factorial \f$n!\f$, the product of all positive integers less than or equal to \f$n\f$ :
-        \f[n! = \prod_{k=1}^n k\f]
+    /**	The function computes the factorial, the product of all positive integers less than or equal to an integer.
+        \f[n! = n \times (n - 1) \times (n - 2) \times {...} \f]
      
         @param     n     The interger.
         @return    The function return the factorial of n.
      
         @see    double_factorial
      */
-    inline long factorial(long n)
+    inline unsigned long factorial(long n)
 	{
         long result = n;
 		if(n == 0)
@@ -65,15 +65,15 @@ namespace Hoa3D
 	}
     
     //! The double factorial
-    /**	The function computes the double factorial \f$n!!\f$, the product of all the odd integers up to some odd positive integer \f$n\f$ :
-        \f[n!= n \times (n - 2) \times (n - 4) \times {...} \f]
+    /**	The function computes the double factorial, the product of all the odd integers up to some odd positive integer :\n
+        \f[n!! = n \times (n - 2) \times (n - 4) \times {...} \f]
      
         @param     n     The interger.
         @return    The function return the double factorial of n.
      
         @see    factorial
      */
-    inline long double_factorial(long n)
+    inline unsigned long double_factorial(long n)
 	{
 		if (n == 0 || n == -1) {
 			return 1;
@@ -137,12 +137,10 @@ namespace Hoa3D
      */
     inline double legendre_normalization(int l, int m)
 	{
-        l = abs(l);
-        m = abs(m);
         if(m == 0)
             return sqrt((2. * l + 1.) / (4. * CICM_PI));
         else
-            return sqrt((2. * l + 1.) / (4. * CICM_PI) * (double)factorial(l - m) / (double)factorial(l + m)) * sqrt(2.);
+            return sqrt((2. * l + 1.) / (4. * CICM_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
 	}
     
     //! The azimuth part of the spherical harmonics function
@@ -156,7 +154,7 @@ namespace Hoa3D
         @param     l    The band of the spherical harmonic.
         @param     m    The argument of the spherical harmonic.
         @param     phi  The azimuth.
-        @return    The function return the azimuth coefficient for phi of the spherical harmonic band l and argument m.
+        @return    The function return the azimuth coefficient for phi of the spherical harmonic of band l and argument m.
      
         @see    spherical_harmonics_elevation
         @see    spherical_harmonics
@@ -197,7 +195,7 @@ namespace Hoa3D
         @param     m        The argument of the spherical harmonic.
         @param     phi      The azimuth.
         @param     theta    The elevation.
-        @return    The function return the coefficient for phi and theta for the spherical harmonics band l and argument m.
+        @return    The function return the coefficient for phi and theta for the spherical harmonics of band l and argument m.
      
         @see    spherical_harmonics_azimuth
         @see    spherical_harmonics_elevation
@@ -257,7 +255,8 @@ namespace Hoa3D
     }
     
     //! The clipping function
-    /** The function clips a number between boundaries.
+    /** The function clips a number between boundaries. \n
+        If \f$x < min\f$, \f$f(x) = min\f$ else if \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
      
         @param     value   The value to clip.
         @param     low     The low boundarie.
@@ -278,7 +277,8 @@ namespace Hoa3D
     }
     
     //! The minimum clipping function
-    /** The function clips a number at a minimum value.
+    /** The function clips a number at a minimum value. \n
+        If \f$x < min\f$, \f$f(x) = min\f$ else \f$f(x) = x\f$.
      
         @param     value   The value to clip.
         @param     low     The low boundarie.
@@ -296,7 +296,8 @@ namespace Hoa3D
     }
     
     //! The maximum clipping function
-    /** The function clips a number at a maximum value.
+    /** The function clips a number at a maximum value. \n
+        If \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
      
         @param     value   The value to clip.
         @param     high    The high boundarie.
@@ -333,13 +334,43 @@ namespace Hoa3D
 		return radius * cos(angle - CICM_PI2);
 	}
     
+    inline double radius(double x, double y, double z)
+	{
+		return sqrt(x*x + y*y + z*z);
+	}
+    
+	inline double aimuth(double x, double y, double z)
+	{
+		return acos(z / radius(x, y, z)); // AFAIRE
+	}
+    
+    inline double elevation(double x, double y, double z)
+	{
+		return acos(z / radius(x, y, z)); // A FAIRE
+	}
+    
+	inline double ordinate(double radius, double phi, double theta)
+	{
+		return radius * sin(phi - CICM_PI2) * cos(theta);
+	}
+    
+    inline double abscissa(double radius, double phi, double theta)
+	{
+		return radius * cos(phi - CICM_PI2) * cos(theta);
+	}
+    
+    inline double height(double radius, double phi, double theta)
+	{
+		return radius * sin(theta);
+	}
+    
     //! The int to string conversion
     /** The function converts a interger to a string.
      
         @param     value   The value to convert.
         @return    The function return value in a string format.
      */
-    inline std::string intToString(int aValue)
+    inline std::string int_to_string(int aValue)
     {
         char number[256];
         sprintf(number, "%i", aValue);

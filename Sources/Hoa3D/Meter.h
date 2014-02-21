@@ -11,7 +11,7 @@
 
 namespace Hoa3D
 {
-    //! The ambisonic Meter.
+    //! The planewaves peak level meter.
     /** The Meter should be used to widen the sound propagation.
      */
     class Meter : public Planewaves
@@ -20,15 +20,15 @@ namespace Hoa3D
         
     public:
         
-        //! The Meter constructor.
-        /**	The Meter constructor allocates and initialize the member values to computes spherical harmonics weighted coefficients depending of a decomposition order. The order must be at least 1.
+        //! The meter constructor.
+        /**	The meter constructor allocates and initialize the member values to computes spherical harmonics weighted coefficients depending of a decomposition order. The order must be at least 1.
          
             @param     order	The order.
          */
         Meter(unsigned int numberOfChannels);
         
-        //! The Meter destructor.
-        /**	The Meter destructor free the memory.
+        //! The meter destructor.
+        /**	The meter destructor free the memory.
          */
         ~Meter();
         

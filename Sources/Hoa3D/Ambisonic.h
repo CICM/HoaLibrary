@@ -93,7 +93,7 @@ namespace Hoa3D
         inline std::string getHarmonicsName(const unsigned int index) const
         {
             assert(index < m_number_of_harmonics);
-            return "Harmonic " + intToString(getHarmonicBand(index)) + " " + intToString(getHarmonicArgument(index));
+            return "Harmonic " + int_to_string(getHarmonicBand(index)) + " " + int_to_string(getHarmonicArgument(index));
         };
     };
 }

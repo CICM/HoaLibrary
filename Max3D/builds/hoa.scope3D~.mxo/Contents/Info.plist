@@ -9,19 +9,21 @@
 	<key>CFBundleExecutable</key>
 	<string>hoa.scope3D~</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cicm.hoa-scope3D-</string>
+	<string>com.cicm.hoa.scope3D~</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
-	<string>hoa.scope3D~ HoaLibrary 2.0, Copyright 2010 Cycling '74</string>
+	<string>hoa.scope3D~ 6.1, Copyright 2008 Cycling '74</string>
+	<key>CFBundleName</key>
+	<string>hoaScope3D</string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
 	<key>CFBundleShortVersionString</key>
-	<string>HoaLibrary 2.0</string>
+	<string>6.1</string>
 	<key>CFBundleSignature</key>
 	<string>max2</string>
 	<key>CFBundleVersion</key>
-	<string>HoaLibrary 2.0</string>
+	<string>6.1</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>DTCompiler</key>
@@ -38,5 +40,9 @@
 	<string>0502</string>
 	<key>DTXcodeBuild</key>
 	<string>5A3005</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>cicm</string>
 </dict>
 </plist>

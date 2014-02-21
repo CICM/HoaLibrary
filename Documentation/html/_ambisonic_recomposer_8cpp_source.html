@@ -123,17 +123,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;AmbisonicRecomposer.h&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;AmbisonicRecomposer::AmbisonicRecomposer(<span class="keywordtype">long</span> anOrder, <span class="keywordtype">long</span> aNumberOfMicrophones, <span class="keywordtype">long</span> aMode, <span class="keywordtype">long</span> aVectorSize, <span class="keywordtype">long</span> aSamplingRate) : <a class="code" href="class_ambisonic.html">Ambisonic</a>(anOrder, aVectorSize, aSamplingRate)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;AmbisonicRecomposer::AmbisonicRecomposer(<span class="keywordtype">long</span> anOrder, <span class="keywordtype">long</span> aNumberOfMicrophones, <span class="keywordtype">long</span> aMode, <span class="keywordtype">long</span> aVectorSize, <span class="keywordtype">long</span> aSamplingRate) : Ambisonic(anOrder, aVectorSize, aSamplingRate)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    m_number_of_microphones = Tools::clip_min(aNumberOfMicrophones, m_number_of_harmonics);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    m_number_of_outputs = m_number_of_harmonics;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; m_number_of_microphones; i++)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        m_encoders.push_back(<span class="keyword">new</span> <a class="code" href="class_ambisonic_encoder.html">AmbisonicEncoder</a>(m_order, m_vector_size));</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        m_widers.push_back(<span class="keyword">new</span> <a class="code" href="class_ambisonic_wider.html">AmbisonicWider</a>(m_order, m_vector_size));</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        m_lines.push_back(<span class="keyword">new</span> <a class="code" href="class_cicm_line.html">CicmLine</a>((<span class="keywordtype">long</span>)4410, m_vector_size, m_sampling_rate));</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        m_wider_lines.push_back(<span class="keyword">new</span> <a class="code" href="class_cicm_line.html">CicmLine</a>((<span class="keywordtype">long</span>)4410, m_vector_size, m_sampling_rate));</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        m_encoders.push_back(<span class="keyword">new</span> AmbisonicEncoder(m_order, m_vector_size));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        m_widers.push_back(<span class="keyword">new</span> AmbisonicWider(m_order, m_vector_size));</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        m_lines.push_back(<span class="keyword">new</span> CicmLine((<span class="keywordtype">long</span>)4410, m_vector_size, m_sampling_rate));</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        m_wider_lines.push_back(<span class="keyword">new</span> CicmLine((<span class="keywordtype">long</span>)4410, m_vector_size, m_sampling_rate));</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">double</span> angle = ((double)i / (<span class="keywordtype">double</span>)(m_number_of_microphones)) * CICM_2PI;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        m_encoders[i]-&gt;setAngle(angle);</div>
@@ -357,14 +357,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordflow">return</span> m_mode;</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;}</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
-<div class="ttc" id="class_ambisonic_wider_html"><div class="ttname"><a href="class_ambisonic_wider.html">AmbisonicWider</a></div><div class="ttdoc">An ambisonic wider. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_wider_8h_source.html#l00020">AmbisonicWider.h:20</a></div></div>
-<div class="ttc" id="class_ambisonic_encoder_html"><div class="ttname"><a href="class_ambisonic_encoder.html">AmbisonicEncoder</a></div><div class="ttdoc">An ambisonic encoder. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_encoder_8h_source.html#l00036">AmbisonicEncoder.h:36</a></div></div>
-<div class="ttc" id="class_cicm_line_html"><div class="ttname"><a href="class_cicm_line.html">CicmLine</a></div><div class="ttdef"><b>Definition:</b> <a href="_cicm_line_8h_source.html#l00031">CicmLine.h:31</a></div></div>
-<div class="ttc" id="class_ambisonic_html"><div class="ttname"><a href="class_ambisonic.html">Ambisonic</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_ambisonic_8h_source.html#l00032">Ambisonic.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:03:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

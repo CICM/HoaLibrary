@@ -132,9 +132,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    m_isSelected = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    m_order = 7;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    m_encoder           = <span class="keyword">new</span> <a class="code" href="class_ambisonic_encoder.html">AmbisonicEncoder</a>(m_order);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    m_viewer            = <span class="keyword">new</span> <a class="code" href="class_ambisonic_viewer.html">AmbisonicViewer</a>(m_order, -CICM_PI2);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    m_wider             = <span class="keyword">new</span> <a class="code" href="class_ambisonic_wider.html">AmbisonicWider</a>(m_order);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    m_encoder           = <span class="keyword">new</span> AmbisonicEncoder(m_order);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    m_viewer            = <span class="keyword">new</span> AmbisonicViewer(m_order, -CICM_PI2);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    m_wider             = <span class="keyword">new</span> AmbisonicWider(m_order);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    m_harmonicsValues   = <span class="keyword">new</span> <span class="keywordtype">double</span>[m_order * 2 + 1];</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    compute();</div>
@@ -150,7 +150,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> AmbisonicVirtualMicUI::compute()</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    m_encoder-&gt;<a class="code" href="class_ambisonic_encoder.html#a62b6e35d4e281d2f405a03c20a64ca90">process</a>(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    m_encoder-&gt;process(1., m_harmonicsValues, m_angleInRadian - CICM_PI2);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    m_wider-&gt;process(m_harmonicsValues, Tools::clip(m_widerValue, <span class="keywordtype">double</span>(0.0000001), <span class="keywordtype">double</span>(1)));</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    m_viewer-&gt;processBigLob(m_harmonicsValues);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
@@ -165,9 +165,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">delete</span> m_wider;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    m_order = Tools::clip_min(_order, <span class="keywordtype">long</span>(1));</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    m_encoder           = <span class="keyword">new</span> <a class="code" href="class_ambisonic_encoder.html">AmbisonicEncoder</a>(m_order);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    m_viewer            = <span class="keyword">new</span> <a class="code" href="class_ambisonic_viewer.html">AmbisonicViewer</a>(m_order, -CICM_PI2);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    m_wider             = <span class="keyword">new</span> <a class="code" href="class_ambisonic_wider.html">AmbisonicWider</a>(m_order);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    m_encoder           = <span class="keyword">new</span> AmbisonicEncoder(m_order);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    m_viewer            = <span class="keyword">new</span> AmbisonicViewer(m_order, -CICM_PI2);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    m_wider             = <span class="keyword">new</span> AmbisonicWider(m_order);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    m_harmonicsValues   = <span class="keyword">new</span> <span class="keywordtype">double</span>[m_order * 2 + 1];</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    compute();</div>
@@ -231,14 +231,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        m_isSelected = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
-<div class="ttc" id="class_ambisonic_viewer_html"><div class="ttname"><a href="class_ambisonic_viewer.html">AmbisonicViewer</a></div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_viewer_8h_source.html#l00032">AmbisonicViewer.h:32</a></div></div>
-<div class="ttc" id="class_ambisonic_wider_html"><div class="ttname"><a href="class_ambisonic_wider.html">AmbisonicWider</a></div><div class="ttdoc">An ambisonic wider. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_wider_8h_source.html#l00020">AmbisonicWider.h:20</a></div></div>
-<div class="ttc" id="class_ambisonic_encoder_html_a62b6e35d4e281d2f405a03c20a64ca90"><div class="ttname"><a href="class_ambisonic_encoder.html#a62b6e35d4e281d2f405a03c20a64ca90">AmbisonicEncoder::process</a></div><div class="ttdeci">void process(const double input, double *outputs)</div><div class="ttdoc">The sample by sample perform method - double precision - not in place. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_encoder_8h_source.html#l00081">AmbisonicEncoder.h:81</a></div></div>
-<div class="ttc" id="class_ambisonic_encoder_html"><div class="ttname"><a href="class_ambisonic_encoder.html">AmbisonicEncoder</a></div><div class="ttdoc">An ambisonic encoder. </div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_encoder_8h_source.html#l00036">AmbisonicEncoder.h:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 12:46:00 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:03:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
