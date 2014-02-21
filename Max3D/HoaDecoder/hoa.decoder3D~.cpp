@@ -21,7 +21,7 @@ void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s);
 void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_decoder_setLoudspeakers(t_hoa_decoder *x, t_symbol* s, long argc, t_atom* argv);
-void hoa_decoder_infos(t_hoa_decoder *x);
+t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos);
 
 void *hoa_decoder_class;
 
@@ -31,6 +31,8 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.decoder3D~", (method)hoa_decoder_new, (method)hoa_decoder_free, (long)sizeof(t_hoa_decoder), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, (method)hoa_getinfos);
+	
 	class_addmethod(c, (method)hoa_decoder_dsp64,             "dsp64",      A_CANT, 0);
 	class_addmethod(c, (method)hoa_decoder_assist,            "assist",     A_CANT, 0);
     class_addmethod(c, (method)hoa_decoder_setLoudspeakers,   "lscoord",    A_GIMME, 0);
@@ -38,8 +40,6 @@ int C74_EXPORT main(void)
 	class_dspinit(c);				
 	class_register(CLASS_BOX, c);	
 	hoa_decoder_class = c;
-	hoa_print_credit();
-    
 	return 0;
 }
 
@@ -68,6 +68,16 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 	}
     
 	return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = x->f_decoder->getNumberOfHarmonics();
+	boxinfos->autoconnect_outputs = x->f_decoder->getNumberOfLoudspeakers();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	return HOA_ERR_NONE;
 }
 
 void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)

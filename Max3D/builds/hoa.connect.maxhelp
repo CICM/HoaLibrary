@@ -74,6 +74,35 @@
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
+									"id" : "obj-13",
+									"maxclass" : "newobj",
+									"numinlets" : 4,
+									"numoutlets" : 36,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 253.5, 390.0, 491.5, 19.0 ],
+									"text" : "hoa.map3D~ 5 4"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-12",
+									"maxclass" : "newobj",
+									"numinlets" : 16,
+									"numoutlets" : 16,
+									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+									"patching_rect" : [ 341.0, 573.0, 221.5, 19.0 ],
+									"presentation_rect" : [ 341.0, 573.0, 0.0, 0.0 ],
+									"text" : "hoa.optim3D~ 3"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
 									"id" : "obj-11",
 									"maxclass" : "newobj",
 									"numinlets" : 1,
@@ -99,7 +128,7 @@
 									"numinlets" : 16,
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 311.0, 397.0, 221.5, 19.0 ],
+									"patching_rect" : [ 510.0, 422.0, 221.5, 19.0 ],
 									"text" : "hoa.optim3D~ 3"
 								}
 
@@ -253,7 +282,7 @@
 									"numinlets" : 4,
 									"numoutlets" : 8,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 445.5, 548.0, 116.0, 19.0 ],
+									"patching_rect" : [ 363.75, 522.0, 116.0, 19.0 ],
 									"text" : "hoa.decoder3D~ 1 8"
 								}
 
@@ -266,7 +295,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 8,
 									"numoutlets" : 0,
-									"patching_rect" : [ 640.5, 597.0, 113.5, 19.0 ],
+									"patching_rect" : [ 530.25, 635.0, 113.5, 19.0 ],
 									"text" : "hoa.dac~ 1:8"
 								}
 
@@ -511,7 +540,7 @@
 									"numinlets" : 25,
 									"numoutlets" : 25,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 289.0, 453.0, 343.0, 19.0 ],
+									"patching_rect" : [ 348.0, 466.0, 343.0, 19.0 ],
 									"text" : "hoa.optim3D~ 4"
 								}
 
@@ -707,6 +736,10 @@
 			}
 , 			{
 				"name" : "hoa.connect3D.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.map3D~.mxo",
 				"type" : "iLaX"
 			}
  ]
