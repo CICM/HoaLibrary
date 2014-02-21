@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C67094918B62FD0008F283E /* hoa.max.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C67094718B62FD0008F283E /* hoa.max.c */; };
-		2C67094A18B62FD0008F283E /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C67094818B62FD0008F283E /* hoa.max.h */; };
-		8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */; };
-		8FF995441823DA04000A29AA /* hoa.connect.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FF995421823DA04000A29AA /* hoa.connect.c */; };
+		2C16C8F118B69E9E0049224E /* hoa.connect.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C16C8F018B69E9E0049224E /* hoa.connect.c */; };
+		2C16C90B18B6E74C0049224E /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C16C8F318B6E74C0049224E /* Ambisonic.cpp */; };
+		2C16C90C18B6E74C0049224E /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C16C8F418B6E74C0049224E /* Ambisonic.h */; };
+		2C16C91E18B6E74C0049224E /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C16C90618B6E74C0049224E /* Tools.h */; };
+		8FEFF2EA18B3C46A00EFD3EC /* hoa.max.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FEFF2E818B3C46900EFD3EC /* hoa.max.c */; };
+		8FEFF2EB18B3C46A00EFD3EC /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FEFF2E918B3C46900EFD3EC /* hoa.max.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
-		2C67094718B62FD0008F283E /* hoa.max.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hoa.max.c; path = ../hoa.max.c; sourceTree = "<group>"; };
-		2C67094818B62FD0008F283E /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
+		2C16C8F018B69E9E0049224E /* hoa.connect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hoa.connect.c; sourceTree = "<group>"; };
+		2C16C8F318B6E74C0049224E /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		2C16C8F418B6E74C0049224E /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		2C16C90618B6E74C0049224E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.connect3D.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hoa.connect3D.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
-		8FF995421823DA04000A29AA /* hoa.connect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hoa.connect.c; sourceTree = "<group>"; };
+		8FEFF2E818B3C46900EFD3EC /* hoa.max.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hoa.max.c; path = ../hoa.max.c; sourceTree = "<group>"; };
+		8FEFF2E918B3C46900EFD3EC /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,7 +31,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,11 +40,11 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
-				8FF995421823DA04000A29AA /* hoa.connect.c */,
-				2C67094718B62FD0008F283E /* hoa.max.c */,
-				2C67094818B62FD0008F283E /* hoa.max.h */,
-				8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */,
+				2C16C8F018B69E9E0049224E /* hoa.connect.c */,
+				8FEFF2E818B3C46900EFD3EC /* hoa.max.c */,
+				8FEFF2E918B3C46900EFD3EC /* hoa.max.h */,
 				22CF10220EE984600054F513 /* maxmspsdk.xcconfig */,
+				2C16C8F218B6E74C0049224E /* Hoa3D */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
@@ -55,6 +58,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2C16C8F218B6E74C0049224E /* Hoa3D */ = {
+			isa = PBXGroup;
+			children = (
+				2C16C8F318B6E74C0049224E /* Ambisonic.cpp */,
+				2C16C8F418B6E74C0049224E /* Ambisonic.h */,
+				2C16C90618B6E74C0049224E /* Tools.h */,
+			);
+			name = Hoa3D;
+			path = ../../Sources/Hoa3D;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -62,7 +76,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C67094A18B62FD0008F283E /* hoa.max.h in Headers */,
+				2C16C90C18B6E74C0049224E /* Ambisonic.h in Headers */,
+				8FEFF2EB18B3C46A00EFD3EC /* hoa.max.h in Headers */,
+				2C16C91E18B6E74C0049224E /* Tools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +121,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
 			projectDirPath = "";
@@ -140,8 +157,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C67094918B62FD0008F283E /* hoa.max.c in Sources */,
-				8FF995441823DA04000A29AA /* hoa.connect.c in Sources */,
+				2C16C8F118B69E9E0049224E /* hoa.connect.c in Sources */,
+				8FEFF2EA18B3C46A00EFD3EC /* hoa.max.c in Sources */,
+				2C16C90B18B6E74C0049224E /* Ambisonic.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +286,7 @@
 				GCC_INPUT_FILETYPE = sourcecode.cpp.cpp;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_UNROLL_LOOPS = YES;
 				GCC_USE_INDIRECT_FUNCTION_CALLS = YES;
 				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
