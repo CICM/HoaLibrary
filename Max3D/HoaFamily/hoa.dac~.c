@@ -33,8 +33,9 @@
 
 typedef struct _hoa_dac
 {
-	t_pxobject        f_ob;
-    t_object          *f_dac;
+	t_pxobject			f_ob;
+    t_object*			f_dac;
+	int					f_number_of_channels;
 } t_hoa_dac;
 
 t_class *hoa_dac_class;
@@ -61,6 +62,8 @@ int C74_EXPORT main(void)
 	t_class *c;
 
 	c = class_new("hoa.dac~", (method)hoa_dac_new, (method)NULL, (short)sizeof(t_hoa_dac), 0L, A_GIMME, 0);
+	
+	hoa_initclass(c, (method)hoa_getinfos);
 	
 	class_addmethod(c, (method)hoa_dac_dsp64,		"dsp64",		A_CANT,  0);
 	class_addmethod(c, (method)hoa_dac_assist,		"assist",		A_CANT,	 0);
@@ -135,7 +138,8 @@ void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv)
             atom_setlong(channels + symPrepend + count++, atom_getlong(argv + symPrepend + i));
 		}
 	}
-    dsp_setup((t_pxobject *)x, count);
+	x->f_number_of_channels = count;
+    dsp_setup((t_pxobject *)x, x->f_number_of_channels);
 	x->f_dac = (t_object *)object_new_typed(CLASS_BOX, gensym("dac~"), count + symPrepend, channels);
 	
 	return x;
@@ -144,7 +148,7 @@ void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv)
 t_hoa_err hoa_getinfos(t_hoa_dac* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_STANDARD;
-	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_inputs = x->f_number_of_channels;
 	boxinfos->autoconnect_outputs = 0;
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
