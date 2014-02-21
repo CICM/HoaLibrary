@@ -88,8 +88,10 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
                 height = openGLSnap.getHeight();
                 imgStride = snapBitmap->lineStride;
                 
-                destRect.x = srcRect.x = 0;
-                destRect.x = srcRect.y = 0;
+                srcRect.x = 0;
+                destRect.x = 0;
+                srcRect.y = 0;
+                destRect.y = 0;
                 srcRect.width = openGLSnap.getWidth();
                 srcRect.height = openGLSnap.getHeight();
                 destRect.width = rect.width;

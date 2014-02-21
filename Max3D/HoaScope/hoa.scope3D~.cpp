@@ -32,8 +32,9 @@ typedef struct _hoa_scope
 	t_jrgba         f_color_sp;
     t_jrgba         f_color_cu;
 
-	double          f_camera[3];
-
+	double          f_camera[2];
+    double          f_camera_ref[2];
+    t_pt            f_mouse;
 } t_hoa_scope;
 
 t_class *hoa_scope_class;
@@ -51,6 +52,7 @@ void hoa_scope_dsp64(t_hoa_scope *x, t_object *dsp64, short *count, double sampl
 void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_scope_mousedrag(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers);
 
 t_max_err hoa_scope_attr_set_order(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoa_scope_attr_set_camera(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
@@ -70,6 +72,7 @@ int C74_EXPORT main(void)
     
 	class_addmethod(c, (method)hoa_scope_dsp64,				"dsp64",            A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_mousedown,			"mousedown",        A_CANT, 0);
+    class_addmethod(c, (method)hoa_scope_mousedrag,			"mousedrag",        A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_assist,			"assist",           A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_getdrawparams,		"getdrawparams",    A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_notify,			"notify",           A_CANT, 0);
@@ -145,12 +148,12 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER                (c, "cucolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "cucolor", 0, "0. 0. 0. 1.");
 	
-	CLASS_ATTR_DOUBLE_ARRAY         (c, "camera", 0, t_hoa_scope, f_camera, 3);
+	CLASS_ATTR_DOUBLE_ARRAY         (c, "camera", 0, t_hoa_scope, f_camera, 2);
 	CLASS_ATTR_CATEGORY             (c, "camera", 0, "Rendering Context");
     CLASS_ATTR_ORDER                (c, "camera", 0, "1");
 	CLASS_ATTR_LABEL                (c, "camera", 0, "Camera");
 	CLASS_ATTR_DEFAULT_SAVE         (c, "camera", 0, "0. 0. 0.");
-	CLASS_ATTR_ACCESSORS            (c, "camera", NULL, hoa_scope_attr_set_camera);
+	//CLASS_ATTR_ACCESSORS            (c, "camera", NULL, hoa_scope_attr_set_camera);
     CLASS_ATTR_PAINT                (c, "camera", 1);
     
     CLASS_ATTR_ATOM_LONG            (c, "drawvectors", 0, t_hoa_scope, f_draw_ve);
@@ -294,7 +297,7 @@ t_max_err hoa_scope_attr_set_camera(t_hoa_scope *x, t_object *attr, long argc, t
 {
 	if(argc && argv)
     {
-		for(int i = 0; i < 3 && i < argc; i++)
+		for(int i = 0; i < 2 && i < argc; i++)
 		{
             if(atom_gettype(argv+i) == A_FLOAT)
                 x->f_camera[i] = atom_getfloat(argv+i);
@@ -351,15 +354,15 @@ void hoa_draw_cube(t_jucebox *x, t_jrgba color)
 void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
 {
     double one, cos_one, sin_one, two ,cos_two, sin_two;
-    glBegin(GL_LINE_STRIP);
-    glColor4d(color.red, color.green, color.blue, color.alpha);
     
-    for(int i = 0; i < 11; i++)
+    glColor4d(color.red, color.green, color.blue, color.alpha);
+    for(int i = 1; i < 10; i++)
     {
         one  =   0;
         two = (double)i / 10. * CICM_PI;
         cos_two = cos(two);
         sin_two = sin(two);
+        glBegin(GL_LINE_LOOP);
         for(int j = 0; j < 20; j++)
         {
             one  =   (double)j / 20. * CICM_2PI;
@@ -367,6 +370,7 @@ void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
             sin_one = sin(one);
             glVertex3d(sin_two * cos_one, cos_two, sin_two * sin_one);
         }
+        glEnd();
     }
     
     for(int j = 0; j < 20; j++)
@@ -375,6 +379,7 @@ void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
         two  = 0.;
         cos_one = cos(one);
         sin_one = sin(one);
+        glBegin(GL_LINE_LOOP);
         for(int i = 0; i < 11; i++)
         {
             two = (double)i / 10. * CICM_PI;
@@ -382,9 +387,9 @@ void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
             sin_two = sin(two);
             glVertex3d(sin_two * cos_one, cos_two, sin_two * sin_one);
         }
+        glEnd();
     }
     
-    glEnd();
 }
 
 void hoa_scope_paint(t_hoa_scope *x, double w, double h)
@@ -400,7 +405,8 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
     glLoadIdentity();
-    glRotated(-45, 0.2, 0.3, 0.5);
+    glRotated(-x->f_camera[0] / CICM_2PI * 360., 0., 1., 0.);
+    glRotated(x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
 	glPointSize(1.0f);
     
     if(x->f_draw_sp)
@@ -489,7 +495,21 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 
 void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    ;
+    t_rect rect;
+    jbox_get_rect_for_view((t_object *)x, patcherview, &rect);
+    x->f_mouse = pt;
+    x->f_camera_ref[0] = x->f_camera[0];
+    x->f_camera_ref[1] = x->f_camera[1];
+}
+
+void hoa_scope_mousedrag(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers)
+{
+    t_atom av[2];
+    t_rect rect;
+    jbox_get_rect_for_view((t_object *)x, patcherview, &rect);
+    atom_setfloat(av, x->f_camera_ref[0] + (pt.x - x->f_mouse.x) / (rect.width * 0.5) * CICM_PI2);
+    atom_setfloat(av+1, x->f_camera_ref[1] + (pt.y - x->f_mouse.y) / (-rect.height * 0.5) * CICM_PI2);
+    object_method(x, gensym("camera"), 2, av);
 }
 
 void hoa_scope_free(t_hoa_scope *x)
