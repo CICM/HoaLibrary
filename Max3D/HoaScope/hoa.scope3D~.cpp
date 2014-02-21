@@ -4,9 +4,9 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+#include "../../hoa.max.h"
 #include "../../Sources/HoaOpenGL/OpenGLTools.h"
 #include "../../MaxJuceBox/jucebox_wrapper.h"
-#include "../../hoa.max.h"
 
 typedef struct _hoa_scope
 {
@@ -54,6 +54,7 @@ void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long mo
 
 t_max_err hoa_scope_attr_set_order(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoa_scope_attr_set_camera(t_hoa_scope *x, t_object *attr, long argc, t_atom *argv);
+t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos);
 
 int C74_EXPORT main(void)
 {
@@ -65,6 +66,7 @@ int C74_EXPORT main(void)
 	
     class_dspinitjbox(c);
     jucebox_initclass(c, (method)hoa_scope_paint,  JBOX_COLOR | JBOX_FIXWIDTH);
+    hoa_initclass(c, (method)hoa_getinfos);
     
 	class_addmethod(c, (method)hoa_scope_dsp64,				"dsp64",            A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_mousedown,			"mousedown",        A_CANT, 0);
@@ -250,6 +252,7 @@ t_max_err hoa_scope_attr_set_order(t_hoa_scope *x, t_object *attr, long ac, t_at
             }
         }
 	}
+    
 	return MAX_ERR_NONE;
 }
 
@@ -311,6 +314,16 @@ void hoa_scope_getdrawparams(t_hoa_scope *x, t_object *patcherview, t_jboxdrawpa
 t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *m, void *sender, void *data)
 {
 	return jbox_notify((t_jbox *)x, s, m, sender, data);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = x->f_scope->getNumberOfHarmonics();
+	boxinfos->autoconnect_outputs = 0;
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	return HOA_ERR_NONE;
 }
 
 void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
@@ -386,7 +399,8 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 	
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
-    
+    glLoadIdentity();
+    glRotated(-45, 0.2, 0.3, 0.5);
 	glPointSize(1.0f);
     
     if(x->f_draw_sp)

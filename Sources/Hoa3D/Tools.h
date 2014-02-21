@@ -378,26 +378,5 @@ namespace Hoa3D
     }
 }
 
-/*
- inline double spherical_harmonic_elevation(int band, int argument, double elevation) // With l = band and m the argument
- {
- // Yel(l, m)(x, y) = sqrt(((2l + 1) / 4Pi) * (l - m)! / (l + m)!) P(l, m)(cos(elevation))
- 
- double normalize;
- if(abs(argument) == 0)
- normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)));
- //normalize = sqrt((2. * band + 1) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
- else
- normalize = sqrt( ((2. * band + 1) / (4*CICM_PI)) * (double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument))) * sqrt(2.);
- //if (band == 0)
- //	normalize /= sqrt(2)*0.5;
- 
- //normalize = sqrt((double)factorial(band - abs(argument)) / (double)factorial(band + abs(argument)));
- 
- 
- return  normalize * associated_legendre(band, argument, cos(elevation));
- }*/
-
-
 
 #endif

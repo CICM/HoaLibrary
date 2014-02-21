@@ -81,15 +81,19 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
             if(g)
             {
                 juce::Image openGLSnap = x->j_component->makeScreenshot((t_object *)x, rect.width, rect.height);
-                
-                juce::Image::BitmapData* snapBitmap = new juce::Image::BitmapData(openGLSnap, juce::Image::BitmapData::ReadWriteMode::readOnly);
+               
+                juce::Image::BitmapData* snapBitmap = new juce::Image::BitmapData(openGLSnap, juce::Image::BitmapData::readOnly);
                 data = snapBitmap->data;
                 width = openGLSnap.getWidth();
                 height = openGLSnap.getHeight();
                 imgStride = snapBitmap->lineStride;
                 
-                srcRect     = {0, 0, (double)openGLSnap.getWidth(), (double)openGLSnap.getHeight()};
-                destRect    = {0, 0, rect.width, rect.height};
+                destRect.x = srcRect.x = 0;
+                destRect.x = srcRect.y = 0;
+                srcRect.width = openGLSnap.getWidth();
+                srcRect.height = openGLSnap.getHeight();
+                destRect.width = rect.width;
+                destRect.height = rect.height;
                 
                 t_jsurface* surface = jgraphics_image_surface_create_for_data(data, JGRAPHICS_FORMAT_ARGB32, width, height, imgStride, NULL, NULL);
                 jgraphics_image_surface_draw(g, surface, srcRect, destRect);

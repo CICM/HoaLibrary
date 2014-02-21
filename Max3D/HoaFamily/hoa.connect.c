@@ -68,7 +68,8 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_RGBA			(c, "poscolor", 0, t_connect, f_colorPositiv);
 	CLASS_ATTR_ACCESSORS	(c, "poscolor", NULL, connect_setattr_poscolor);
 	CLASS_ATTR_SAVE			(c, "poscolor", 1);
-
+    CLASS_ATTR_ATTR_PARSE   (c, "poscolor","style",    USESYM(symbol), 0,"rgba");
+    
 	CLASS_ATTR_RGBA			(c, "negcolor", 0, t_connect, f_colorNegativ);
 	CLASS_ATTR_ACCESSORS	(c, "negcolor", NULL, connect_setattr_negcolor);
 	CLASS_ATTR_SAVE			(c, "negcolor", 1);
@@ -76,6 +77,7 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_RGBA			(c, "planecolor", 0, t_connect, f_colorPlane);
 	CLASS_ATTR_ACCESSORS	(c, "planecolor", NULL, connect_setattr_planecolor);
 	CLASS_ATTR_SAVE			(c, "planecolor", 1);
+    
 	CLASS_STICKY_ATTR_CLEAR	(c, "category");
 	
 	class_register(CLASS_BOX, c);
