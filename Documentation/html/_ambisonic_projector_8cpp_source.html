@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;AmbisonicProjector.h&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_ambisonic_projector.html#a611af47413099ddc30e7075953c9a038">   28</a></span>&#160;<a class="code" href="class_ambisonic_projector.html#a611af47413099ddc30e7075953c9a038">AmbisonicProjector::AmbisonicProjector</a>(<span class="keywordtype">long</span> anOrder, <span class="keywordtype">long</span> aNumberOfLoudspeakers, <span class="keywordtype">long</span> aVectorSize) : <a class="code" href="class_ambisonic.html">Ambisonic</a>(anOrder, aVectorSize), <a class="code" href="class_planewaves.html">Planewaves</a>(aNumberOfLoudspeakers, aVectorSize)</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_ambisonic_projector.html#a611af47413099ddc30e7075953c9a038">   28</a></span>&#160;<a class="code" href="class_ambisonic_projector.html#a611af47413099ddc30e7075953c9a038">AmbisonicProjector::AmbisonicProjector</a>(<span class="keywordtype">long</span> anOrder, <span class="keywordtype">long</span> aNumberOfLoudspeakers, <span class="keywordtype">long</span> aVectorSize) : Ambisonic(anOrder, aVectorSize), Planewaves(aNumberOfLoudspeakers, aVectorSize)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{        </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    m_decoder_matrix_float = NULL;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    m_decoder_matrix_double = NULL;</div>
@@ -209,13 +209,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        cicm_free(m_output_matrix_double);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;}</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="ttc" id="class_planewaves_html"><div class="ttname"><a href="class_planewaves.html">Planewaves</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_planewaves_8h_source.html#l00032">Planewaves.h:32</a></div></div>
 <div class="ttc" id="class_ambisonic_projector_html_a611af47413099ddc30e7075953c9a038"><div class="ttname"><a href="class_ambisonic_projector.html#a611af47413099ddc30e7075953c9a038">AmbisonicProjector::AmbisonicProjector</a></div><div class="ttdeci">AmbisonicProjector(long anOrder=1, long aNumberOfLoudspeakers=3, long aVectorSize=0)</div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_projector_8cpp_source.html#l00028">AmbisonicProjector.cpp:28</a></div></div>
-<div class="ttc" id="class_ambisonic_html"><div class="ttname"><a href="class_ambisonic.html">Ambisonic</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_ambisonic_8h_source.html#l00032">Ambisonic.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 16:15:27 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:03:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -154,7 +154,7 @@ namespace Hoa3D
         @param     l    The band of the spherical harmonic.
         @param     m    The argument of the spherical harmonic.
         @param     phi  The azimuth.
-        @return    The function return the azimuth coefficient for phi of the spherical harmonic band l and argument m.
+        @return    The function return the azimuth coefficient for phi of the spherical harmonic of band l and argument m.
      
         @see    spherical_harmonics_elevation
         @see    spherical_harmonics
@@ -195,7 +195,7 @@ namespace Hoa3D
         @param     m        The argument of the spherical harmonic.
         @param     phi      The azimuth.
         @param     theta    The elevation.
-        @return    The function return the coefficient for phi and theta for the spherical harmonics band l and argument m.
+        @return    The function return the coefficient for phi and theta for the spherical harmonics of band l and argument m.
      
         @see    spherical_harmonics_azimuth
         @see    spherical_harmonics_elevation

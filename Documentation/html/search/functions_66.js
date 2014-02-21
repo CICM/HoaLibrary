@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['factorial',['factorial',['../namespace_hoa3_d.html#a1ed1e9803ad96127f1054b1a473b425d',1,'Hoa3D']]]
+  ['factorial',['factorial',['../namespace_hoa3_d.html#a96c1f78af4f18be9ccf629c60c9e5093',1,'Hoa3D']]]
 ];

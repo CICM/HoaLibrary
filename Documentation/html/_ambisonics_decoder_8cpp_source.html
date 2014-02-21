@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;AmbisonicsDecoder.h&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_ambisonics_decoder.html#a45533c94777497b3a01d278f4e04518e">   28</a></span>&#160;<a class="code" href="class_ambisonics_decoder.html#a45533c94777497b3a01d278f4e04518e">AmbisonicsDecoder::AmbisonicsDecoder</a>(<span class="keywordtype">long</span> anOrder, <span class="keywordtype">long</span> aNumberOfLoudspeakers, <span class="keywordtype">long</span> aVectorSize) : <a class="code" href="class_ambisonic.html">Ambisonic</a>(anOrder, aVectorSize)</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_ambisonics_decoder.html#a45533c94777497b3a01d278f4e04518e">   28</a></span>&#160;<a class="code" href="class_ambisonics_decoder.html#a45533c94777497b3a01d278f4e04518e">AmbisonicsDecoder::AmbisonicsDecoder</a>(<span class="keywordtype">long</span> anOrder, <span class="keywordtype">long</span> aNumberOfLoudspeakers, <span class="keywordtype">long</span> aVectorSize) : Ambisonic(anOrder, aVectorSize)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    cicm_malloc_vec_f(m_vector_float_input, m_number_of_harmonics);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    cicm_malloc_vec_d(m_vector_double_input, m_number_of_harmonics);</div>
@@ -206,11 +206,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
 <div class="ttc" id="class_ambisonics_decoder_html_a45533c94777497b3a01d278f4e04518e"><div class="ttname"><a href="class_ambisonics_decoder.html#a45533c94777497b3a01d278f4e04518e">AmbisonicsDecoder::AmbisonicsDecoder</a></div><div class="ttdeci">AmbisonicsDecoder(long anOrder=1, long aNumberOfLoudspeakers=0, long aVectorSize=0)</div><div class="ttdef"><b>Definition:</b> <a href="_ambisonics_decoder_8cpp_source.html#l00028">AmbisonicsDecoder.cpp:28</a></div></div>
-<div class="ttc" id="class_ambisonic_html"><div class="ttname"><a href="class_ambisonic.html">Ambisonic</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_ambisonic_8h_source.html#l00032">Ambisonic.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 16:15:27 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:02:47 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

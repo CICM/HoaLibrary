@@ -65,32 +65,6 @@ using namespace std;
 #define MAXVERSION_600 (MAXVERSION >= 1536 && MAXVERSION < 1552)
 #define MAXVERSION_GREATHERTHAN_610 (MAXVERSION >= 1552)
 
-enum
-{
-    Hoa_Polar  = 0,
-    Hoa_Cartesian
-};
-
-typedef struct  coordinatesPolar
-{
-	double		radius;
-	double		angle;
-} coordinatesPolar;
-
-typedef struct  coordinatesCartesian
-{
-	double		x;
-	double		y;
-} coordinatesCartesian;
-
-typedef struct  color
-{
-	double      red;
-	double      green;
-    double      blue;
-	double      alpha;
-} color;
-
 class Tools
 {
 public:

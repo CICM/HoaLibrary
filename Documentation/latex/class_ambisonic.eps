@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 1187.500000
+%%BoundingBox: 0 0 500 750.000000
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 0.421053 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 0.666667 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 19 def
+/rows 12 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -174,24 +174,17 @@
 boxfont setfont
 1 boundaspect scale
 (Ambisonic) cw
-(AmbisonicConvolver) cw
 (AmbisonicEncoder) cw
-(AmbisonicFreeverb) cw
 (AmbisonicMap) cw
-(AmbisonicOptim) cw
 (AmbisonicProjector) cw
 (AmbisonicRecomposer) cw
-(AmbisonicRotate) cw
 (AmbisonicsBinaural) cw
 (AmbisonicsDecoder) cw
 (AmbisonicsDiffuser) cw
-(AmbisonicsFilter) cw
-(AmbisonicsFreeverb) cw
 (AmbisonicsMultiDecoder) cw
 (AmbisonicsMultiMaps) cw
 (AmbisonicsRestitution) cw
 (AmbisonicViewer) cw
-(AmbisonicWider) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -203,46 +196,24 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (Ambisonic) 0.000000 18.000000 box
- (AmbisonicConvolver) 1.000000 17.000000 box
- (AmbisonicEncoder) 1.000000 16.000000 box
- (AmbisonicFreeverb) 1.000000 15.000000 box
- (AmbisonicMap) 1.000000 14.000000 box
- (AmbisonicOptim) 1.000000 13.000000 box
- (AmbisonicProjector) 1.000000 12.000000 box
- (AmbisonicRecomposer) 1.000000 11.000000 box
- (AmbisonicRotate) 1.000000 10.000000 box
- (AmbisonicsBinaural) 1.000000 9.000000 box
- (AmbisonicsDecoder) 1.000000 8.000000 box
- (AmbisonicsDiffuser) 1.000000 7.000000 box
-1.000000 7.000000 mark
- (AmbisonicsFilter) 1.000000 6.000000 box
- (AmbisonicsFreeverb) 1.000000 5.000000 box
- (AmbisonicsMultiDecoder) 1.000000 4.000000 box
- (AmbisonicsMultiMaps) 1.000000 3.000000 box
- (AmbisonicsRestitution) 1.000000 2.000000 box
- (AmbisonicViewer) 1.000000 1.000000 box
-1.000000 1.000000 mark
- (AmbisonicWider) 1.000000 0.000000 box
+ (Ambisonic) 0.000000 11.000000 box
+ (AmbisonicEncoder) 1.000000 10.000000 box
+ (AmbisonicMap) 1.000000 9.000000 box
+ (AmbisonicProjector) 1.000000 8.000000 box
+ (AmbisonicRecomposer) 1.000000 7.000000 box
+ (AmbisonicsBinaural) 1.000000 6.000000 box
+ (AmbisonicsDecoder) 1.000000 5.000000 box
+ (AmbisonicsDiffuser) 1.000000 4.000000 box
+ (AmbisonicsMultiDecoder) 1.000000 3.000000 box
+ (AmbisonicsMultiMaps) 1.000000 2.000000 box
+ (AmbisonicsRestitution) 1.000000 1.000000 box
+ (AmbisonicViewer) 1.000000 0.000000 box
+1.000000 0.000000 mark
 
 % ----- relations -----
 
 solid
-1 0.000000 17.250000 out
-solid
-0 0.000000 17.500000 hedge
-solid
-0 0.000000 16.500000 hedge
-solid
-0 0.000000 15.500000 hedge
-solid
-0 0.000000 14.500000 hedge
-solid
-0 0.000000 13.500000 hedge
-solid
-0 0.000000 12.500000 hedge
-solid
-0 0.000000 11.500000 hedge
+1 0.000000 10.250000 out
 solid
 0 0.000000 10.500000 hedge
 solid
@@ -266,4 +237,4 @@ solid
 solid
 0 0.000000 0.500000 hedge
 solid
-0.000000 18.000000 0.500000 vedge
+0.000000 11.000000 0.500000 vedge

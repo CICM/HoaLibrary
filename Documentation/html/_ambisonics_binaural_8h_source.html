@@ -107,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    Hoa_Large</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_ambisonics_binaural.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_ambisonics_binaural.html">AmbisonicsBinaural</a> : <span class="keyword">public</span> <a class="code" href="class_ambisonic.html">Ambisonic</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_ambisonics_binaural.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_ambisonics_binaural.html">AmbisonicsBinaural</a> : <span class="keyword">public</span> Ambisonic</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">private</span>:</div>
@@ -123,7 +123,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    cicm_vector_double* m_impulse_left;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    cicm_vector_double* m_impulse_right;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">long</span>                m_impulse_size;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_ambisonics_decoder.html">AmbisonicsDecoder</a>* m_decoder;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    AmbisonicsDecoder* m_decoder;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    cicm_matrix_float   m_input_matrix;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    cicm_matrix_float   m_impluse_matrix;</div>
@@ -249,14 +249,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;};</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_ambisonics_decoder_html"><div class="ttname"><a href="class_ambisonics_decoder.html">AmbisonicsDecoder</a></div><div class="ttdef"><b>Definition:</b> <a href="_ambisonics_decoder_8h_source.html#l00031">AmbisonicsDecoder.h:31</a></div></div>
 <div class="ttc" id="class_ambisonics_binaural_html"><div class="ttname"><a href="class_ambisonics_binaural.html">AmbisonicsBinaural</a></div><div class="ttdef"><b>Definition:</b> <a href="_ambisonics_binaural_8h_source.html#l00037">AmbisonicsBinaural.h:37</a></div></div>
-<div class="ttc" id="class_ambisonic_html"><div class="ttname"><a href="class_ambisonic.html">Ambisonic</a></div><div class="ttdef"><b>Definition:</b> <a href="hoa_ambisonics_2_ambisonic_8h_source.html#l00032">Ambisonic.h:32</a></div></div>
 <div class="ttc" id="class_ambisonics_binaural_html_aa3154f11cb7a385b09a743c5e46ee2e9"><div class="ttname"><a href="class_ambisonics_binaural.html#aa3154f11cb7a385b09a743c5e46ee2e9">AmbisonicsBinaural::AmbisonicsBinaural</a></div><div class="ttdeci">AmbisonicsBinaural(long anOrder=1, std::string aRootPath=&quot;&quot;, long aPinnaeSize=Hoa_Small, double aSamplingRate=44100, long aVectorSize=0)</div><div class="ttdef"><b>Definition:</b> <a href="_ambisonics_binaural_8cpp_source.html#l00029">AmbisonicsBinaural.cpp:29</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 16:15:27 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:03:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

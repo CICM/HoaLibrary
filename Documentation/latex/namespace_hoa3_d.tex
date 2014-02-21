@@ -20,7 +20,7 @@ class \hyperlink{class_hoa3_d_1_1_decoder}{Decoder}
 class \hyperlink{class_hoa3_d_1_1_encoder}{Encoder}
 \begin{DoxyCompactList}\small\item\em The ambisonic encoder. \end{DoxyCompactList}\item 
 class \hyperlink{class_hoa3_d_1_1_map}{Map}
-\begin{DoxyCompactList}\small\item\em The ambisonic multiencoder with distance compensation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The ambisonic multi-\/encoder with distance compensation. \end{DoxyCompactList}\item 
 class \hyperlink{class_hoa3_d_1_1_meter}{Meter}
 \begin{DoxyCompactList}\small\item\em The planewaves peak level meter. \end{DoxyCompactList}\item 
 class \hyperlink{class_hoa3_d_1_1_optim}{Optim}
@@ -34,9 +34,9 @@ class \hyperlink{class_hoa3_d_1_1_scope}{Scope}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-long \hyperlink{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}{factorial} (long n)
+unsigned long \hyperlink{namespace_hoa3_d_a96c1f78af4f18be9ccf629c60c9e5093}{factorial} (long n)
 \begin{DoxyCompactList}\small\item\em The factorial. \end{DoxyCompactList}\item 
-long \hyperlink{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}{double\-\_\-factorial} (long n)
+unsigned long \hyperlink{namespace_hoa3_d_a9fe0188eb2c8ec6bb9de34054449b497}{double\-\_\-factorial} (long n)
 \begin{DoxyCompactList}\small\item\em The double factorial. \end{DoxyCompactList}\item 
 double \hyperlink{namespace_hoa3_d_af20cfa7da792b7bb0b6f98eccb371ca8}{associated\-\_\-legendre} (int l, int m, double x)
 \begin{DoxyCompactList}\small\item\em The associated Legendre polynomials. \end{DoxyCompactList}\item 
@@ -58,7 +58,7 @@ double \hyperlink{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}{clip\-\_\-
 \begin{DoxyCompactList}\small\item\em The minimum clipping function. \end{DoxyCompactList}\item 
 double \hyperlink{namespace_hoa3_d_a6cf3a35e887d29d4b84f0fa38e259317}{clip\-\_\-max} (const double value, const double high)
 \begin{DoxyCompactList}\small\item\em The maximum clipping function. \end{DoxyCompactList}\item 
-std\-::string \hyperlink{namespace_hoa3_d_ab0c58f51b2b09f1bff39463392da64f7}{int\-To\-String} (int a\-Value)
+std\-::string \hyperlink{namespace_hoa3_d_ab024831d11dc580dd88a739d93a9cb5c}{int\-\_\-to\-\_\-string} (int a\-Value)
 \begin{DoxyCompactList}\small\item\em The int to string conversion. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -134,7 +134,7 @@ The function return the clipped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 311 of file Tools.\-h.
+Definition at line 309 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a7db8378887542d24d61bed71b482848e}{\index{Hoa3\-D@{Hoa3\-D}!clip\-\_\-min@{clip\-\_\-min}}
 \index{clip\-\_\-min@{clip\-\_\-min}!Hoa3D@{Hoa3\-D}}
@@ -168,7 +168,7 @@ The function return the clipped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 292 of file Tools.\-h.
+Definition at line 290 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_af7d43c71e1aba23d9bff6ffa2db6b95b}{\index{Hoa3\-D@{Hoa3\-D}!clip\-\_\-minmax@{clip\-\_\-minmax}}
 \index{clip\-\_\-minmax@{clip\-\_\-minmax}!Hoa3D@{Hoa3\-D}}
@@ -205,15 +205,15 @@ The function return the clipped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 271 of file Tools.\-h.
+Definition at line 269 of file Tools.\-h.
 
-\hypertarget{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}{\index{Hoa3\-D@{Hoa3\-D}!double\-\_\-factorial@{double\-\_\-factorial}}
+\hypertarget{namespace_hoa3_d_a9fe0188eb2c8ec6bb9de34054449b497}{\index{Hoa3\-D@{Hoa3\-D}!double\-\_\-factorial@{double\-\_\-factorial}}
 \index{double\-\_\-factorial@{double\-\_\-factorial}!Hoa3D@{Hoa3\-D}}
-\subsubsection[{double\-\_\-factorial}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa3\-D\-::double\-\_\-factorial (
+\subsubsection[{double\-\_\-factorial}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Hoa3\-D\-::double\-\_\-factorial (
 \begin{DoxyParamCaption}
 \item[{long}]{n}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a9fe0188eb2c8ec6bb9de34054449b497}
 
 
 The double factorial. 
@@ -230,19 +230,19 @@ The function computes the double factorial, the product of all the odd integers 
 The function return the double factorial of n.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}{factorial} 
+\hyperlink{namespace_hoa3_d_a96c1f78af4f18be9ccf629c60c9e5093}{factorial} 
 \end{DoxySeeAlso}
 
 
 Definition at line 76 of file Tools.\-h.
 
-\hypertarget{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}{\index{Hoa3\-D@{Hoa3\-D}!factorial@{factorial}}
+\hypertarget{namespace_hoa3_d_a96c1f78af4f18be9ccf629c60c9e5093}{\index{Hoa3\-D@{Hoa3\-D}!factorial@{factorial}}
 \index{factorial@{factorial}!Hoa3D@{Hoa3\-D}}
-\subsubsection[{factorial}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa3\-D\-::factorial (
+\subsubsection[{factorial}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Hoa3\-D\-::factorial (
 \begin{DoxyParamCaption}
 \item[{long}]{n}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a1ed1e9803ad96127f1054b1a473b425d}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_a96c1f78af4f18be9ccf629c60c9e5093}
 
 
 The factorial. 
@@ -258,19 +258,19 @@ The function computes the factorial, the product of all positive integers less t
 The function return the factorial of n.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa3_d_a1414c728d02e9d3d60035e385d2150ec}{double\-\_\-factorial} 
+\hyperlink{namespace_hoa3_d_a9fe0188eb2c8ec6bb9de34054449b497}{double\-\_\-factorial} 
 \end{DoxySeeAlso}
 
 
 Definition at line 55 of file Tools.\-h.
 
-\hypertarget{namespace_hoa3_d_ab0c58f51b2b09f1bff39463392da64f7}{\index{Hoa3\-D@{Hoa3\-D}!int\-To\-String@{int\-To\-String}}
-\index{int\-To\-String@{int\-To\-String}!Hoa3D@{Hoa3\-D}}
-\subsubsection[{int\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Hoa3\-D\-::int\-To\-String (
+\hypertarget{namespace_hoa3_d_ab024831d11dc580dd88a739d93a9cb5c}{\index{Hoa3\-D@{Hoa3\-D}!int\-\_\-to\-\_\-string@{int\-\_\-to\-\_\-string}}
+\index{int\-\_\-to\-\_\-string@{int\-\_\-to\-\_\-string}!Hoa3D@{Hoa3\-D}}
+\subsubsection[{int\-\_\-to\-\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Hoa3\-D\-::int\-\_\-to\-\_\-string (
 \begin{DoxyParamCaption}
 \item[{int}]{a\-Value}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_ab0c58f51b2b09f1bff39463392da64f7}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa3_d_ab024831d11dc580dd88a739d93a9cb5c}
 
 
 The int to string conversion. 
@@ -287,7 +287,7 @@ The function return value in a string format.
 \end{DoxyReturn}
 
 
-Definition at line 345 of file Tools.\-h.
+Definition at line 373 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a771a662a201e9922fd8084dafb507a20}{\index{Hoa3\-D@{Hoa3\-D}!legendre\-\_\-normalization@{legendre\-\_\-normalization}}
 \index{legendre\-\_\-normalization@{legendre\-\_\-normalization}!Hoa3D@{Hoa3\-D}}
@@ -349,7 +349,7 @@ The function computes the spherical harmonics coefficient for the angles $\phi$ 
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The function return the coefficient for phi and theta for the spherical harmonics band l and argument m.
+The function return the coefficient for phi and theta for the spherical harmonics of band l and argument m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
 \hyperlink{namespace_hoa3_d_a03f884a043a03a2a70cd3cdf46eaa7a5}{spherical\-\_\-harmonics\-\_\-azimuth} 
@@ -358,7 +358,7 @@ The function return the coefficient for phi and theta for the spherical harmonic
 \end{DoxySeeAlso}
 
 
-Definition at line 205 of file Tools.\-h.
+Definition at line 203 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a03f884a043a03a2a70cd3cdf46eaa7a5}{\index{Hoa3\-D@{Hoa3\-D}!spherical\-\_\-harmonics\-\_\-azimuth@{spherical\-\_\-harmonics\-\_\-azimuth}}
 \index{spherical\-\_\-harmonics\-\_\-azimuth@{spherical\-\_\-harmonics\-\_\-azimuth}!Hoa3D@{Hoa3\-D}}
@@ -386,7 +386,7 @@ if $ m \geq 0$ \[Y_{azimuth}(l, m, \phi) = cos(m \times \phi)\] else \[Y_{azimut
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The function return the azimuth coefficient for phi of the spherical harmonic band l and argument m.
+The function return the azimuth coefficient for phi of the spherical harmonic of band l and argument m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
 \hyperlink{namespace_hoa3_d_a36da69477764cc43e96106d7436d0797}{spherical\-\_\-harmonics\-\_\-elevation} 
@@ -395,7 +395,7 @@ The function return the azimuth coefficient for phi of the spherical harmonic ba
 \end{DoxySeeAlso}
 
 
-Definition at line 164 of file Tools.\-h.
+Definition at line 162 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a36da69477764cc43e96106d7436d0797}{\index{Hoa3\-D@{Hoa3\-D}!spherical\-\_\-harmonics\-\_\-elevation@{spherical\-\_\-harmonics\-\_\-elevation}}
 \index{spherical\-\_\-harmonics\-\_\-elevation@{spherical\-\_\-harmonics\-\_\-elevation}!Hoa3D@{Hoa3\-D}}
@@ -435,7 +435,7 @@ The function return the elevation coefficient for theta of the spherical harmoni
 \end{DoxySeeAlso}
 
 
-Definition at line 187 of file Tools.\-h.
+Definition at line 185 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a797e7afd706be7e4c1b5961214991f35}{\index{Hoa3\-D@{Hoa3\-D}!wrap@{wrap}}
 \index{wrap@{wrap}!Hoa3D@{Hoa3\-D}}
@@ -469,7 +469,7 @@ The function return the wrapped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 220 of file Tools.\-h.
+Definition at line 218 of file Tools.\-h.
 
 \hypertarget{namespace_hoa3_d_a0396e69cca8a7112c6bd1a817fc3ca80}{\index{Hoa3\-D@{Hoa3\-D}!wrap\-\_\-twopi@{wrap\-\_\-twopi}}
 \index{wrap\-\_\-twopi@{wrap\-\_\-twopi}!Hoa3D@{Hoa3\-D}}
@@ -497,5 +497,5 @@ The function return the wrapped value.
 \end{DoxySeeAlso}
 
 
-Definition at line 244 of file Tools.\-h.
+Definition at line 242 of file Tools.\-h.
 

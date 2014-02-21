@@ -110,8 +110,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">class </span>Source</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="structcoordinates_polar.html">coordinatesPolar</a>        m_coordinate_polar;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="structcolor.html">color</a>                   m_color;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        coordinatesPolar        m_coordinate_polar;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        color                   m_color;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::string             m_description;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">long</span>                    m_exist;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        std::vector &lt;long&gt;      m_groups;</div>
@@ -139,7 +139,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordtype">double</span> getAngle();</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">double</span> getAbscissa();</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordtype">double</span> getOrdinate();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="structcolor.html">color</a>  getColor();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        color  getColor();</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::string getDescription();</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">long</span>   getNumberOfGroups();</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">long</span>   getGroupIndex(<span class="keywordtype">long</span> anIndex);</div>
@@ -158,8 +158,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        std::vector &lt;long&gt;      m_sources;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        std::string             m_description;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">long</span>                    m_exist;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="structcolor.html">color</a>                   m_color;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="structcoordinates_cartesian.html">coordinatesCartesian</a>    m_centroid;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        color                   m_color;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        coordinatesCartesian    m_centroid;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="class_sources_manager.html">SourcesManager</a>*         m_source_manager;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordtype">double</span>                  m_maximum_radius;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">long</span>                    m_mute;</div>
@@ -202,7 +202,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordtype">long</span>   getNumberOfSources();</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordtype">long</span>   getSourceIndex(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        std::string getDescription();</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <a class="code" href="structcolor.html">color</a>  getColor();</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        color  getColor();</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordtype">long</span>   getMute();</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordtype">int</span> compare(<span class="keyword">const</span> SourcesGroup* a, <span class="keyword">const</span> SourcesGroup *b);</div>
@@ -252,13 +252,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordtype">void</span> sourceSetMute(<span class="keywordtype">long</span> anIndex, <span class="keywordtype">long</span> aValue);</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    </div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordtype">long</span> sourceGetExistence(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <a class="code" href="structcoordinates_polar.html">coordinatesPolar</a> sourceGetCoordinatesPolar(<span class="keywordtype">long</span> anIndex);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    coordinatesPolar sourceGetCoordinatesPolar(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">double</span> sourceGetRadius(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordtype">double</span> sourceGetAngle(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <a class="code" href="structcoordinates_cartesian.html">coordinatesCartesian</a> sourceGetCoordinatesCartesian(<span class="keywordtype">long</span> anIndex);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    coordinatesCartesian sourceGetCoordinatesCartesian(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordtype">double</span> sourceGetAbscissa(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordtype">double</span> sourceGetOrdinate(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <a class="code" href="structcolor.html">color</a> sourceGetColor(<span class="keywordtype">long</span> anIndex);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    color sourceGetColor(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    std::string sourceGetDescription(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordtype">long</span> sourceGetNumberOfGroups(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordtype">long</span> sourceGetGroupIndex(<span class="keywordtype">long</span> aSourceIndex, <span class="keywordtype">long</span> aGroupIndex);</div>
@@ -291,7 +291,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">double</span> groupGetAngle(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordtype">double</span> groupGetAbscissa(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordtype">double</span> groupGetOrdinate(<span class="keywordtype">long</span> anIndex);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <a class="code" href="structcolor.html">color</a> groupGetColor(<span class="keywordtype">long</span> anIndex);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    color groupGetColor(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    std::string groupGetDescription(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordtype">long</span> groupGetMute(<span class="keywordtype">long</span> anIndex);</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordtype">long</span> groupGetIfSourceMuted(<span class="keywordtype">long</span> anIndex);</div>
@@ -306,14 +306,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_sources_manager_html_a333ef82bab70b995bf0f658c894bee1b"><div class="ttname"><a href="class_sources_manager.html#a333ef82bab70b995bf0f658c894bee1b">SourcesManager::SourcesManager</a></div><div class="ttdeci">SourcesManager(double aMaximumLimitValue=-1., long deadOrAlive=1)</div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_sources_manager_8cpp_source.html#l00028">AmbisonicSourcesManager.cpp:28</a></div></div>
-<div class="ttc" id="structcoordinates_polar_html"><div class="ttname"><a href="structcoordinates_polar.html">coordinatesPolar</a></div><div class="ttdef"><b>Definition:</b> <a href="_cicm_tools_8h_source.html#l00074">CicmTools.h:74</a></div></div>
-<div class="ttc" id="structcolor_html"><div class="ttname"><a href="structcolor.html">color</a></div><div class="ttdef"><b>Definition:</b> <a href="_cicm_tools_8h_source.html#l00086">CicmTools.h:86</a></div></div>
 <div class="ttc" id="class_sources_manager_html"><div class="ttname"><a href="class_sources_manager.html">SourcesManager</a></div><div class="ttdef"><b>Definition:</b> <a href="_ambisonic_sources_manager_8h_source.html#l00032">AmbisonicSourcesManager.h:32</a></div></div>
-<div class="ttc" id="structcoordinates_cartesian_html"><div class="ttname"><a href="structcoordinates_cartesian.html">coordinatesCartesian</a></div><div class="ttdef"><b>Definition:</b> <a href="_cicm_tools_8h_source.html#l00080">CicmTools.h:80</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 20 2014 16:15:27 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 21 2014 01:03:24 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
