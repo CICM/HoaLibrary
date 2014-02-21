@@ -12,6 +12,7 @@ MaxOpenGlComponent::MaxOpenGlComponent()
     m_context = new OpenGLContext();
     m_context->setComponentPaintingEnabled(false);
 
+	m_context->setRenderer(this); // need this to set m_scale
     m_context->attachTo(*this);
     m_context->setContinuousRepainting(false);
     setInterceptsMouseClicks(false, false);
@@ -20,17 +21,18 @@ MaxOpenGlComponent::MaxOpenGlComponent()
 Image MaxOpenGlComponent::makeScreenshot(t_object* x, double width, double height)
 {
     Image img;
-    float scale = m_context->getRenderingScale();
 
     if(!m_context->isActive())
         return img;
+	
     setBounds(-width, -height, width, height);
-    img = Image(OpenGLImageType().create(Image::ARGB, roundToInt(width * scale), roundToInt(height * scale), true));
+    img = Image(OpenGLImageType().create(Image::ARGB, roundToInt(width * m_scale), roundToInt(height * m_scale), true));
     OpenGLFrameBuffer* buffer = OpenGLImageType::getFrameBufferFrom(img);
    
     buffer->makeCurrentAndClear();
-    
-    (object_getmethod(x, gensym("jucebox_paint")))(x, width * scale, height * scale);
+
+    (object_getmethod(x, gensym("jucebox_paint")))(x, width * m_scale, height * m_scale);
+	
     buffer->releaseAsRenderingTarget();
     return img;
 }
