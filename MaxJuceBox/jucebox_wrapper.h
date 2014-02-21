@@ -18,17 +18,22 @@ extern "C"
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-class MaxOpenGlComponent : public juce::Component
+class MaxOpenGlComponent : public juce::Component, public OpenGLRenderer
 {
 private:
     OpenGLContext*      m_context;
+	float m_scale;
 public:
 	MaxOpenGlComponent();    
 	Image makeScreenshot(t_object* x, double width, double height);
-    
+	
     void setActive(){ m_context->makeActive();}
     inline char isActive() const { return (char)m_context->isActive(); }
     inline char isContextOk() const { return (char)(m_context == m_context->getCurrentContext()); }
+	
+	void newOpenGLContextCreated(){};
+    void renderOpenGL(){m_scale = m_context->getRenderingScale();};
+	void openGLContextClosing(){};
     ~MaxOpenGlComponent();
 };
 
