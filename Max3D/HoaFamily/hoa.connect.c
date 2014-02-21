@@ -61,21 +61,24 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)connect_assist,	"assist",	A_CANT,	0);
 	
 	CLASS_STICKY_ATTR		(c, "category", 0, "Behavior");
-	CLASS_ATTR_RGBA			(c, "zerocolor", 0, t_connect, f_colorZero);
-	CLASS_ATTR_ACCESSORS	(c, "zerocolor", NULL, connect_setattr_zerocolor);
-	CLASS_ATTR_SAVE			(c, "zerocolor", 1);
+	CLASS_ATTR_RGBA			(c, "zhcolor", 0, t_connect, f_colorZero);
+	CLASS_ATTR_ACCESSORS	(c, "zhcolor", NULL, connect_setattr_zerocolor);
+	CLASS_ATTR_SAVE			(c, "zhcolor", 1);
+	CLASS_ATTR_STYLE_LABEL	(c, "zhcolor", 0, "rgba", "zero harmonics color");
 	
-	CLASS_ATTR_RGBA			(c, "poscolor", 0, t_connect, f_colorPositiv);
-	CLASS_ATTR_ACCESSORS	(c, "poscolor", NULL, connect_setattr_poscolor);
-	CLASS_ATTR_SAVE			(c, "poscolor", 1);
-    CLASS_ATTR_ATTR_PARSE   (c, "poscolor","style",    USESYM(symbol), 0,"rgba");
+	CLASS_ATTR_RGBA			(c, "phcolor", 0, t_connect, f_colorPositiv);
+	CLASS_ATTR_ACCESSORS	(c, "phcolor", NULL, connect_setattr_poscolor);
+	CLASS_ATTR_SAVE			(c, "phcolor", 1);
+	CLASS_ATTR_STYLE_LABEL	(c, "phcolor", 0, "rgba", "positive harmonics color");
     
-	CLASS_ATTR_RGBA			(c, "negcolor", 0, t_connect, f_colorNegativ);
-	CLASS_ATTR_ACCESSORS	(c, "negcolor", NULL, connect_setattr_negcolor);
-	CLASS_ATTR_SAVE			(c, "negcolor", 1);
+	CLASS_ATTR_RGBA			(c, "nhcolor", 0, t_connect, f_colorNegativ);
+	CLASS_ATTR_ACCESSORS	(c, "nhcolor", NULL, connect_setattr_negcolor);
+	CLASS_ATTR_SAVE			(c, "nhcolor", 1);
+	CLASS_ATTR_STYLE_LABEL	(c, "nhcolor", 0, "rgba", "negative harmonics color");
 	
 	CLASS_ATTR_RGBA			(c, "planecolor", 0, t_connect, f_colorPlane);
 	CLASS_ATTR_ACCESSORS	(c, "planecolor", NULL, connect_setattr_planecolor);
+	CLASS_ATTR_STYLE_LABEL	(c, "planecolor", 0, "rgba", "planewaves signals color");
 	CLASS_ATTR_SAVE			(c, "planecolor", 1);
     
 	CLASS_STICKY_ATTR_CLEAR	(c, "category");
@@ -209,13 +212,18 @@ void make_patchline(t_connect *x)
 				// if objects are connectables :
 				if (err[0] == HOA_ERR_NONE && err[1] == HOA_ERR_NONE)
 				{
-					// if we try to connect two 2D or 3D object type together :
-					if (startobj_infos->object_type == endobj_infos->object_type)
+					connexions = MIN(startobj_infos->autoconnect_outputs, endobj_infos->autoconnect_inputs);
+					for(j = 0; j < connexions; j++)
+						connect_connect(x->f_patcher, x->f_object[i-1], j, x->f_object[i], j);
+					/*
+					// if we try to connect two same type in/out together :
+					if (startobj_infos->autoconnect_outputs_type == endobj_infos->autoconnect_inputs_type)
 					{
 						connexions = MIN(startobj_infos->autoconnect_outputs, endobj_infos->autoconnect_inputs);
 						for(j = 0; j < connexions; j++)
 							connect_connect(x->f_patcher, x->f_object[i-1], j, x->f_object[i], j);
 					}
+					*/
 				}
 			}
 			
@@ -261,8 +269,7 @@ void color_patchline(t_connect *x)
 					;
 				}
 				// ambonics colors (zero | neg | pos) (ex: hoa.encoder~ => hoa.optim~)
-				else if (startobj_infos->autoconnect_outputs_type == HOA_CONNECT_TYPE_AMBISONICS &&
-						 endobj_infos->autoconnect_inputs_type == HOA_CONNECT_TYPE_AMBISONICS)
+				else if (startobj_infos->autoconnect_outputs_type == HOA_CONNECT_TYPE_AMBISONICS)
 				{
 					int num = jpatchline_get_inletnum(line);
 					if (startobj_infos->object_type == HOA_OBJECT_2D)
@@ -273,7 +280,7 @@ void color_patchline(t_connect *x)
 					else if (startobj_infos->object_type == HOA_OBJECT_3D)
 					{
 						int sign = x->ambi3D->getHarmonicArgument(num);
-						if (num == 0 || sign > 0)
+						if (sign > 0)
 							linecolor = &x->f_colorPositiv;
 						else if (sign < 0)
 							linecolor = &x->f_colorNegativ;
@@ -284,8 +291,7 @@ void color_patchline(t_connect *x)
 					}
 				}
 				// planewave color (ex: hoa.projector~ => hoa.recomposer~)
-				else if (startobj_infos->autoconnect_outputs_type == HOA_CONNECT_TYPE_PLANEWAVES &&
-						 endobj_infos->autoconnect_inputs_type == HOA_CONNECT_TYPE_PLANEWAVES)
+				else if (startobj_infos->autoconnect_outputs_type == HOA_CONNECT_TYPE_PLANEWAVES)
 				{
 					jpatchline_set_color(line, &x->f_colorPlane);
 				}
