@@ -26,6 +26,8 @@ void hoa_optim_basic(t_hoa_optim *x);
 void hoa_optim_maxre(t_hoa_optim *x);
 void hoa_optim_inphase(t_hoa_optim *x);
 
+t_hoa_err hoa_getinfos(t_hoa_optim* x, t_hoa_boxinfos* boxinfos);
+
 t_class *hoa_optim_class;
 
 int C74_EXPORT main(void)
@@ -35,17 +37,19 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.optim3D~", (method)hoa_optim_new, (method)hoa_optim_free, (long)sizeof(t_hoa_optim), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, (method)hoa_getinfos);
+	
 	class_addmethod(c, (method)hoa_optim_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_optim_assist,    "assist",	A_CANT, 0);
-    class_addmethod(c, (method)hoa_optim_basic,     "basic",	A_CANT, 0);
-    class_addmethod(c, (method)hoa_optim_maxre,     "maxRe",	A_CANT, 0);
-    class_addmethod(c, (method)hoa_optim_inphase,   "inPhase",	A_CANT, 0);
+    class_addmethod(c, (method)hoa_optim_basic,     "basic",	A_NOTHING, 0);
+    class_addmethod(c, (method)hoa_optim_maxre,     "maxRe",	A_NOTHING, 0);
+    class_addmethod(c, (method)hoa_optim_inphase,   "inPhase",	A_NOTHING, 0);
 	
 	class_dspinit(c);
-	class_register(CLASS_BOX, c);	
+	class_register(CLASS_BOX, c);
+	
 	hoa_optim_class = c;
     hoa_print_credit();
-    
 	return 0;
 }
 
@@ -75,8 +79,16 @@ void *hoa_optim_new(t_symbol *s, long argc, t_atom *argv)
         
         x->f_signals =  new double[x->f_optim->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
 	}
-
 	return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_optim* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = boxinfos->autoconnect_outputs = x->f_optim->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void hoa_optim_dsp64(t_hoa_optim *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)

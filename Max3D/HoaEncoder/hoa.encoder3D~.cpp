@@ -27,6 +27,8 @@ void hoa_encoder_perform64_azimuth(t_hoa_encoder *x, t_object *dsp64, double **i
 void hoa_encoder_perform64_elevation(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_encoder_perform64_azimuth_elevation(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
+t_hoa_err hoa_getinfos(t_hoa_encoder* x, t_hoa_boxinfos* boxinfos);
+
 t_class *hoa_encoder_class;
 
 int C74_EXPORT main(void)
@@ -35,13 +37,15 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.encoder3D~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, (method)hoa_getinfos);
+	
 	class_addmethod(c, (method)hoa_encoder_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_encoder_int,         "int",		A_LONG, 0);
 	class_addmethod(c, (method)hoa_encoder_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_encoder_assist,      "assist",	A_CANT, 0);
 	
 	class_dspinit(c);
-	class_register(CLASS_BOX, c);	
+	class_register(CLASS_BOX, c);
 	hoa_encoder_class = c;
     hoa_print_credit();
 	
@@ -72,6 +76,16 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 	}
 
 	return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_encoder* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = x->f_encoder->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void hoa_encoder_float(t_hoa_encoder *x, double f)

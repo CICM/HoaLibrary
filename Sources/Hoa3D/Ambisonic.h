@@ -51,10 +51,12 @@ namespace Hoa3D
         inline unsigned int getNumberOfHarmonics() const {return m_number_of_harmonics;};
         
         //! Retrieve the argument of an harmonic.
-        /** The argument of an harmonic is in the range -band to band. The harmonics are sorted by their bands, from 0 to the decomposition order. In each band contains 2 * band + 1 harmonics, sorted by their arguments in the range -band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. For the first bands, the harmonics arrangement is h[0, 0] h[1, -1] h[1, 0] h[1, 1] h[2, -2] h[2, -1] h[2, 0] h[2, 1] h[2, 2] etc. with h[band, argument].
+        /** The argument of an harmonic is in the range -band to band. The harmonics are sorted by their bands, from 0 to the decomposition order. In each band contains 2 * band + 1 harmonics, sorted by their arguments in the range -band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. 
+			For the first bands, the harmonics arrangement is h[0, 0] h[1, 0] h[1, -1] h[1, 1] h[2, 0] h[2, -1] h[2, 1] h[2, -2] h[2, 2] etc.
+			with h[band, argument].
          
             @param     index	The global index of an harmonic.
-            @return    The method returns the argument of an harmonic or 0 if the harmonic does not exist.
+            @return    The method returns the argument of an harmonic if it exists, generate an error otherwise.
             @see       getHarmonicBand()
             @see       getHarmonicsName()
          */
@@ -65,10 +67,12 @@ namespace Hoa3D
         };
         
         //! Retrieve the band of an harmonic.
-        /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 * band + 1 harmonics in the range -band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. For the first bands, the harmonics arrangement is h[0, 0] h[1, -1] h[1, 0] h[1, 1] h[2, -2] h[2, -1] h[2, 0] h[2, 1] h[2, 2] etc. with h[band, argument].
+        /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 * band + 1 harmonics in the range -band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration.
+			For the first bands, the harmonics arrangement is h[0, 0] h[1, 0] h[1, -1] h[1, 1] h[2, 0] h[2, -1] h[2, 1] h[2, -2] h[2, 2] etc.
+			with h[band, argument].
          
             @param     index	The global index of an harmonic.
-            @return    The method returns the band of an harmonic or 0 if the harmonic does not exist.
+            @return    The method returns the band of an harmonic if it exists, generate an error otherwise.
             @see       getHarmonicArgument()
             @see       getHarmonicsName()
          */
