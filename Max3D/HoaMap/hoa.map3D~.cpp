@@ -43,6 +43,7 @@ void hoa_map_perform64_azimuth_distance(t_hoa_map *x, t_object *dsp64, double **
 void hoa_map_perform64_elevation_distance(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 void hoa_map_perform64_azimuth_elevation_distance(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_map_class;
     
@@ -54,6 +55,8 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.map3D~", (method)hoa_map_new, (method)hoa_map_free, (long)sizeof(t_hoa_map), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, (method)hoa_getinfos);
+	
 	class_addmethod(c, (method)hoa_map_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_map_int,         "int",		A_LONG, 0);
     class_addmethod(c, (method)hoa_map_list,        "list",		A_GIMME, 0);
@@ -63,9 +66,17 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_map_class = c;
-    hoa_print_credit();
-    
 	return 0;
+}
+
+t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = x->f_map->getNumberOfSources();
+	boxinfos->autoconnect_outputs = x->f_map->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)

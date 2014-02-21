@@ -25,6 +25,8 @@ void hoa_wider_dsp64(t_hoa_wider *x, t_object *dsp64, short *count, double sampl
 void hoa_wider_perform64(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_wider_perform64_wide(t_hoa_wider *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
+t_hoa_err hoa_getinfos(t_hoa_wider* x, t_hoa_boxinfos* boxinfos);
+
 t_class *hoa_wider_class;
     
 
@@ -35,6 +37,8 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.wider3D~", (method)hoa_wider_new, (method)hoa_wider_free, (long)sizeof(t_hoa_wider), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, (method)hoa_getinfos);
+	
 	class_addmethod(c, (method)hoa_wider_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_wider_int,       "int",		A_LONG, 0);
 	class_addmethod(c, (method)hoa_wider_dsp64,		"dsp64",	A_CANT, 0);
@@ -43,8 +47,6 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_wider_class = c;
-    hoa_print_credit();
-    
 	return 0;
 }
 
@@ -68,6 +70,16 @@ void *hoa_wider_new(t_symbol *s, long argc, t_atom *argv)
 	}
 
 	return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_wider* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = x->f_wider->getNumberOfHarmonics();
+	boxinfos->autoconnect_outputs = x->f_wider->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void hoa_wider_float(t_hoa_wider *x, double f)

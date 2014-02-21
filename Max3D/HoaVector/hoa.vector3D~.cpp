@@ -26,6 +26,7 @@ void hoa_vector_perform64_energy(t_hoa_vector *x, t_object *dsp64, double **ins,
 void hoa_vector_perform64_velocity(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 void hoa_vector_setLoudspeakers(t_hoa_vector *x, t_symbol* s, long argc, t_atom* argv);
+t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_vector_class;
 
@@ -36,6 +37,8 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.vector3D~", (method)hoa_vector_new, (method)hoa_vector_free, (long)sizeof(t_hoa_vector), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, (method)hoa_getinfos);
+	
 	class_addmethod(c, (method)hoa_vector_dsp64,	"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_vector_assist,   "assist",	A_CANT, 0);
     class_addmethod(c, (method)hoa_vector_setLoudspeakers,   "lscoord",    A_GIMME, 0);
@@ -43,7 +46,6 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_vector_class = c;
-    hoa_credit();
     
 	return 0;
 }
@@ -76,6 +78,16 @@ void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
 	}
 
 	return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = x->f_vector->getNumberOfLoudspeakers();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	return HOA_ERR_NONE;
 }
 
 void hoa_vector_dsp64(t_hoa_vector *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
