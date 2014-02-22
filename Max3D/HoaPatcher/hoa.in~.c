@@ -7,7 +7,7 @@
 // based on dynamic.in~ Copyright 2010 Alex Harker. All rights reserved.
 
 #include "../hoa.max.h"
-#include <hoa.patcher~.h>
+#include "hoa.patcher~.h"
 
 typedef struct _hoa_in
 {
@@ -33,15 +33,17 @@ void hoa_in_perform64(t_hoa_in *x, t_object *dsp64, double **ins, long numins, d
 
 int C74_EXPORT main(void)
 {
-	hoa_in_class = class_new("hoa.in~", (method)hoa_in_new, (method)hoa_in_free, sizeof(t_hoa_in), NULL, A_DEFLONG, 0);
+	t_class* c;
+	c = class_new("hoa.in~", (method)hoa_in_new, (method)hoa_in_free, sizeof(t_hoa_in), NULL, A_DEFLONG, 0);
     
-	hoa_initclass(hoa_in_class, (method)NULL);
-	class_addmethod(hoa_in_class, (method)hoa_in_dsp64, "dsp64", A_CANT, 0);
-    class_addmethod(hoa_in_class, (method)hoa_in_assist, "assist", A_CANT, 0);
-	class_addmethod(hoa_in_class, (method)hoa_in_int, "int", A_LONG, 0);
+	hoa_initclass(c, (method)NULL);
+	class_addmethod(c, (method)hoa_in_dsp64, "dsp64", A_CANT, 0);
+    class_addmethod(c, (method)hoa_in_assist, "assist", A_CANT, 0);
+	class_addmethod(c, (method)hoa_in_int, "int", A_LONG, 0);
     
-	class_dspinit(hoa_in_class);
-	class_register(CLASS_BOX, hoa_in_class);
+	class_dspinit(c);
+	class_register(CLASS_BOX, c);
+	hoa_in_class = c;
 	return 0;
 }
 
