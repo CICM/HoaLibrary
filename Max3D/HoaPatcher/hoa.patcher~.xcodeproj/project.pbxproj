@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CF4225818B7FA3D00A880EE /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4225618B7FA3D00A880EE /* hoa.max.cpp */; };
+		2CF4225918B7FA3D00A880EE /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CF4225718B7FA3D00A880EE /* hoa.max.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F23072D18AF5A71002707E7 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F23071518AF5A71002707E7 /* Ambisonic.cpp */; };
 		8F23072E18AF5A71002707E7 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F23071618AF5A71002707E7 /* Ambisonic.h */; };
@@ -39,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
+		2CF4225618B7FA3D00A880EE /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../hoa.max.cpp; sourceTree = "<group>"; };
+		2CF4225718B7FA3D00A880EE /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.patcher~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.patcher~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F23071518AF5A71002707E7 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				8F7F1B8B182401E400EBE11F /* hoa.patcher~.c */,
+				2CF4225618B7FA3D00A880EE /* hoa.max.cpp */,
+				2CF4225718B7FA3D00A880EE /* hoa.max.h */,
 				8F23071418AF5A71002707E7 /* Hoa3D */,
 				8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */,
 				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
@@ -152,6 +158,7 @@
 				8F23073D18AF5A71002707E7 /* Rotate.h in Headers */,
 				8F23073718AF5A71002707E7 /* Meter.h in Headers */,
 				8F23073F18AF5A71002707E7 /* Scope.h in Headers */,
+				2CF4225918B7FA3D00A880EE /* hoa.max.h in Headers */,
 				8F23073318AF5A71002707E7 /* Hoa3D.h in Headers */,
 				8F23073918AF5A71002707E7 /* Optim.h in Headers */,
 				8F23073518AF5A71002707E7 /* Map.h in Headers */,
@@ -241,6 +248,7 @@
 				8F7F1B8D182401E400EBE11F /* hoa.patcher~.c in Sources */,
 				8F23072D18AF5A71002707E7 /* Ambisonic.cpp in Sources */,
 				8F23074118AF5A71002707E7 /* Vector.cpp in Sources */,
+				2CF4225818B7FA3D00A880EE /* hoa.max.cpp in Sources */,
 				8F23073A18AF5A71002707E7 /* Planewaves.cpp in Sources */,
 				8F23073C18AF5A71002707E7 /* Rotate.cpp in Sources */,
 				8F23072F18AF5A71002707E7 /* Decoder.cpp in Sources */,

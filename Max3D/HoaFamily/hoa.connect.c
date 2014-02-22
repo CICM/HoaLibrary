@@ -96,7 +96,8 @@ void *connect_new(t_symbol *s, long argc, t_atom *argv)
 	x = (t_connect *)object_alloc((t_class *)connect_class);
 	if (x)
 	{
-		x->ambi3D = new Hoa3D::Ambisonic(100);
+		// load an Ambisonic instance to query harmonics band or argument
+		x->ambi3D = new Hoa3D::Ambisonic(16); // more than sqrt(SYS_MAXSIGS)
 		
 		// colors setup
 		x->f_colorZero.green = x->f_colorPositiv.red = x->f_colorNegativ.blue = 1.;
