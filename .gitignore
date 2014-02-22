@@ -36,6 +36,7 @@ sysbuild/
 ## XCode
 #################
 xcuserdata/
+xcshareddata/
 
 *.build/
 *.gcda
