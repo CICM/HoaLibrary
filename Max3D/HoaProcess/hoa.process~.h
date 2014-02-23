@@ -91,27 +91,10 @@ __inline long HoaProcessor_Get_Patch_On (void *HoaProcessor_Object, long index)
 	return 0;
 }
 
-
-__inline void HoaProcessor_Set_Patch_Busy (void *HoaProcessor_Object, long index, long state)
-{
-	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
-		mess2((t_object *)HoaProcessor_Object, gensym("set_patch_busy"), (void *)index, (void *)state);
-}
-
-
 __inline void HoaProcessor_Set_Patch_On (void *HoaProcessor_Object, long index, long state)
 {
 	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
 		mess2((t_object *)HoaProcessor_Object, gensym("set_patch_on"), (void *)index, (void *)state);
-}
-
-
-__inline long HoaProcessor_Get_Patch_Busy (void *HoaProcessor_Object, long index)
-{
-	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
-		return (long) mess1((t_object *)HoaProcessor_Object, gensym("get_patch_busy"), (void *)index);
-	
-	return 0;
 }
 
 //////////////////////////////////////////////// Temporary Memory Queries ////////////////////////////////////////////////

@@ -93,7 +93,6 @@ typedef struct _patchspace
 	
 	char patch_valid;
 	char patch_on;
-	char patch_busy;
 	
 	t_int32_atomic processed_flag;	
 	
@@ -292,9 +291,7 @@ void *hoa_processor_query_declared_sigouts(t_hoa_processor *x);
 void *hoa_processor_query_sigins(t_hoa_processor *x);
 void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index);
 void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index);
-void *hoa_processor_client_get_patch_busy (t_hoa_processor *x, long index);
 void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long state);
-void hoa_processor_client_set_patch_busy (t_hoa_processor *x, long index, long state);
 void *hoa_processor_query_temp_mem (t_hoa_processor *x, long index);
 void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long size);
 
@@ -381,9 +378,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_query_sigins, "get_sigins", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_outptrs_ptr, "get_outptrs_ptr", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_get_patch_on, "get_patch_on", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_client_get_patch_busy, "get_patch_busy", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_set_patch_on, "set_patch_on", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_client_set_patch_busy, "set_patch_busy", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_temp_mem, "get_temp_mem", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_temp_mem_resize, "temp_mem_resize", A_CANT, 0);
 	
@@ -1132,7 +1127,7 @@ void hoa_processor_user_target_free(t_hoa_processor *x, t_symbol *msg, short arg
 	
 	for (i = from - 1; i < to; i++)
 	{
-		if (patch_space_ptrs[i]->patch_valid && !patch_space_ptrs[i]->patch_busy)
+		if (patch_space_ptrs[i]->patch_valid)
 		{
 			target = i + 1;
 			break;
@@ -1843,7 +1838,6 @@ void hoa_processor_init_patch_space (t_patchspace *patch_space_ptr)
 	patch_space_ptr->patch_path = 0;
 	patch_space_ptr->patch_valid = 0;
 	patch_space_ptr->patch_on = 0;
-	patch_space_ptr->patch_busy = 0;
 	patch_space_ptr->the_dspchain = 0;
 	patch_space_ptr->x_argc = 0;
 	patch_space_ptr->out_ptrs = 0;
@@ -1908,19 +1902,11 @@ void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index)
 
 //////////////////////////////////////////////////// State Queries ////////////////////////////////////////////////////
 
-
 void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long state)
 {
 	if (state) state = 1;
 	if (index <= x->patch_spaces_allocated)
 		x->patch_space_ptrs[index - 1]->patch_on = state;
-}
-
-void hoa_processor_client_set_patch_busy (t_hoa_processor *x, long index, long state)
-{
-	if (state) state = 1;
-	if (index <= x->patch_spaces_allocated)
-		x->patch_space_ptrs[index - 1]->patch_busy = state;
 }
 
 void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
@@ -1930,15 +1916,6 @@ void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
 	
 	return 0;
 }
-
-void *hoa_processor_client_get_patch_busy (t_hoa_processor *x, long index)
-{
-	if (index <= x->patch_spaces_allocated)
-		return (void *) (long) x->patch_space_ptrs[index - 1]->patch_busy;
-	
-	return 0;
-}
-
 
 //////////////////////////////////////////////// Tempory Memory Queries ///////////////////////////////////////////////
 

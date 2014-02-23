@@ -28,10 +28,8 @@ t_class *hoa_thisprocess_class;
 t_symbol *ps_deletepatch; 
 
 
-void *hoa_thisprocess_new(long on, long busy);
+void *hoa_thisprocess_new(long on);
 void hoa_thisprocess_free(t_hoa_thisprocess *x);
-void hoa_thisprocess_busy_internal(t_hoa_thisprocess *x, long arg_val);
-void hoa_thisprocess_busy(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_thisprocess_flags(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv);
 void hoa_thisprocess_loadbang(t_hoa_thisprocess *x);
@@ -44,15 +42,13 @@ void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char 
 int C74_EXPORT main(void)
 {
 	t_class* c;
-    c = class_new("hoa.thisprocess~", (method)hoa_thisprocess_new, (method)hoa_thisprocess_free, sizeof(t_hoa_thisprocess), NULL, A_DEFLONG, A_DEFLONG, 0);
+    c = class_new("hoa.thisprocess~", (method)hoa_thisprocess_new, (method)hoa_thisprocess_free, sizeof(t_hoa_thisprocess), NULL, A_DEFLONG, 0);
 	
 	hoa_initclass(c, (method)NULL);
 	
 	class_addmethod(c, (method)hoa_thisprocess_assist,			"assist",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_thisprocess_loadbang,		"loadbang", A_CANT, 0);
 	class_addmethod(c, (method)hoa_thisprocess_delete,			"delete",			0);
-	class_addmethod(c, (method)hoa_thisprocess_busy_internal,	"int",		A_LONG, 0);
-	class_addmethod(c, (method)hoa_thisprocess_busy,			"busy",		A_GIMME, 0);
 	class_addmethod(c, (method)hoa_thisprocess_mute,			"mute",		A_GIMME, 0);
 	class_addmethod(c, (method)hoa_thisprocess_flags,			"flags",	A_GIMME, 0);
 	class_addmethod(c, (method)hoa_thisprocess_bang,			"bang",		0);
@@ -67,44 +63,26 @@ int C74_EXPORT main(void)
 }
 
 
-void *hoa_thisprocess_new(long on, long busy)
+void *hoa_thisprocess_new(long on)
 {
     t_hoa_thisprocess *x = (t_hoa_thisprocess *) object_alloc(hoa_thisprocess_class);
     
-	x->c_outlet = intout(x);
 	x->b_outlet = intout(x);
     x->a_outlet = intout(x);
 	x->m_clock = clock_new(x, (method)*clock_delete);
 	
 	x->hoaProcessor_parent = Get_HoaProcessor_Object();
 	x->index = Get_HoaProcessor_Patch_Index(x->hoaProcessor_parent);
-	
-	HoaProcessor_Set_Patch_Busy (x->hoaProcessor_parent, x->index, busy);
+
 	HoaProcessor_Set_Patch_On (x->hoaProcessor_parent, x->index, on);
 	
 	return (x);
 }
 
-
 void hoa_thisprocess_free(t_hoa_thisprocess *x)
 {
 	freeobject((t_object *)x->m_clock);
 }
-
-
-void hoa_thisprocess_busy(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv)
-{	
-	if (argc)
-		hoa_thisprocess_busy_internal(x, atom_getlong(argv));
-}
-
-
-void hoa_thisprocess_busy_internal(t_hoa_thisprocess *x, long arg_val)
-{	
-	HoaProcessor_Set_Patch_Busy (x->hoaProcessor_parent, x->index, arg_val);
-	outlet_int(x->c_outlet, HoaProcessor_Get_Patch_Busy (x->hoaProcessor_parent, x->index));
-}
-
 
 void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv)
 {	
@@ -119,7 +97,6 @@ void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_ato
 	outlet_int(x->b_outlet, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
 }
 
-
 void hoa_thisprocess_flags(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv)
 {	
 	long arg_val;
@@ -129,33 +106,26 @@ void hoa_thisprocess_flags(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_at
 	
 	arg_val = atom_getlong(argv);
 	
-	HoaProcessor_Set_Patch_Busy (x->hoaProcessor_parent, x->index, arg_val);
 	HoaProcessor_Set_Patch_On (x->hoaProcessor_parent, x->index, arg_val);
-	outlet_int(x->c_outlet, HoaProcessor_Get_Patch_Busy (x->hoaProcessor_parent, x->index));
 	outlet_int(x->b_outlet, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
 }
-
 
 void hoa_thisprocess_loadbang(t_hoa_thisprocess *x)
 {
 	hoa_thisprocess_bang(x);
 }
 
-
 void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 {
-	outlet_int(x->c_outlet, HoaProcessor_Get_Patch_Busy (x->hoaProcessor_parent, x->index));
 	outlet_int(x->b_outlet, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
 	if (x->index)
 		outlet_int (x->a_outlet, x->index);
 }
 
-
 void hoa_thisprocess_delete(t_hoa_thisprocess *x)
 {
 	clock_set(x->m_clock, 0L);
 }
-
 
 void clock_delete(t_hoa_thisprocess *x)
 {
@@ -166,7 +136,6 @@ void clock_delete(t_hoa_thisprocess *x)
 	if (x->hoaProcessor_parent)
 		typedmess(((t_object *)x->hoaProcessor_parent), ps_deletepatch, 1, &arg);
 }
-
 
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s)
 {

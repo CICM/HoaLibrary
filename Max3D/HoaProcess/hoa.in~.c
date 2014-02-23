@@ -37,9 +37,9 @@ int C74_EXPORT main(void)
     
 	hoa_initclass(c, (method)NULL);
 	
-	class_addmethod(c, (method)hoa_in_dsp64, "dsp64", A_CANT, 0);
-    class_addmethod(c, (method)hoa_in_assist, "assist", A_CANT, 0);
-	class_addmethod(c, (method)hoa_in_int, "int", A_LONG, 0);
+	class_addmethod(c, (method)hoa_in_dsp64,	"dsp64",	A_CANT, 0);
+    class_addmethod(c, (method)hoa_in_assist,	"assist",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_in_int,		"int",		A_LONG, 0);
     
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
