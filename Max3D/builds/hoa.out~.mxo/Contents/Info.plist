@@ -7,13 +7,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>hoa.patcher~</string>
+	<string>hoa.out~</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cicm.hoa-patcher-</string>
+	<string>com.cicm.hoa-out-</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
-	<string>hoa.patcher~ HoaLibrary 2.0, Copyright 2010 Cycling '74</string>
+	<string>hoa.out~ HoaLibrary 2.0, Copyright 2010 Cycling '74</string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
 	<key>CFBundleShortVersionString</key>

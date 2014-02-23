@@ -9,15 +9,17 @@
 typedef struct  _hoa_patcher
 {
 	t_pxobject          f_ob;
-    t_object*           f_patcher;
-	t_object**          f_subpatchers;
+	t_patcher*			parent_patcher;
+    t_patcher*          f_patcher;
+	t_patcher**         f_subpatchers;
+	long				f_nInstances;
     
     long                f_ninlets;
     t_object**          f_inlets;
     long                f_noutlets;
     t_object**          f_outlets;
     Hoa3D::Ambisonic*   f_ambisonic;
-    
+	
 } t_hoa_patcher;
 
 t_class *hoa_patcher_class;
@@ -35,28 +37,31 @@ void hoa_patcher_bang(t_hoa_patcher *x);
 void hoa_patcher_dblclick(t_hoa_patcher *x);
 void hoa_patcher_dsp64(t_hoa_patcher *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 
+void hoa_patcher_open(t_hoa_patcher *x, long n);
+
+t_hoa_err hoa_getinfos(t_hoa_patcher* x, t_hoa_boxinfos* boxinfos);
+
 int C74_EXPORT main(void)
 {
 	t_class *c;
     
 	c = class_new("hoa.patcher~", (method)hoa_patcher_new, (method)hoa_patcher_free, (short)sizeof(t_hoa_patcher), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, (method)hoa_getinfos);
+	
+	class_addmethod(c, (method)hoa_patcher_dsp64,		"dsp64",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_patcher_assist,      "assist",	A_CANT, 0);
+    class_addmethod(c, (method)hoa_patcher_dblclick,    "dblclick", A_CANT, 0);
     class_addmethod(c, (method)hoa_patcher_anything,    "anything", A_GIMME, 0);
     class_addmethod(c, (method)hoa_patcher_list,        "list",		A_GIMME, 0);
     class_addmethod(c, (method)hoa_patcher_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_patcher_int,         "int",		A_LONG, 0);
     class_addmethod(c, (method)hoa_patcher_bang,        "bang",		A_CANT, 0);
-    
-    
-	class_addmethod(c, (method)hoa_patcher_dsp64,		"dsp64",	A_CANT, 0);
-	class_addmethod(c, (method)hoa_patcher_assist,      "assist",	A_CANT, 0);
-    class_addmethod(c, (method)hoa_patcher_dblclick,    "dblclick", A_CANT, 0);
+    class_addmethod(c, (method)hoa_patcher_open,		"open",		A_LONG, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
 	hoa_patcher_class = c;
-    hoa_credit();
-    
 }
 
 void *hoa_patcher_new(t_symbol *s, int argc, t_atom *argv)
@@ -76,18 +81,19 @@ void *hoa_patcher_new(t_symbol *s, int argc, t_atom *argv)
         
         x->f_ambisonic      = new Hoa3D::Ambisonic(order); // Ambisonic class to easely compute the ambisonic infos
         x->f_patcher        = (t_object *)object_new(CLASS_NOBOX, gensym("jpatcher"), 0, NULL); // Global patcher
-        x->f_subpatchers    = new t_object*[x->f_ambisonic->getNumberOfHarmonics()]; // The subpatchers
+		x->f_nInstances		= x->f_ambisonic->getNumberOfHarmonics();
+        x->f_subpatchers    = new t_object*[x->f_nInstances]; // The subpatchers
         x->f_ninlets        = 0;
         x->f_noutlets       = 0;
-        x->f_inlets         = new t_object*[x->f_ambisonic->getNumberOfHarmonics()]; // The subpatchers inlets
-        x->f_outlets        = new t_object*[x->f_ambisonic->getNumberOfHarmonics()]; // The subpatchers inlets
+        x->f_inlets         = new t_object*[x->f_nInstances]; // The subpatchers inlets
+        x->f_outlets        = new t_object*[x->f_nInstances]; // The subpatchers inlets
         
         strncpy_zero(name, atom_getsym(argv+1)->s_name, MAX_FILENAME_CHARS);
         strncat(name, ".maxpat", MAX_FILENAME_CHARS);
         
         if(!locatefiletype(name, path, 0L, 0L))
         {
-            for(int i = 0; i < x->f_ambisonic->getNumberOfHarmonics(); i++)
+            for(int i = 0; i < x->f_nInstances; i++)
             {
                 x->f_subpatchers[i] = newobject_sprintf(x->f_patcher, "@maxclass newobj @text \"%s %i %i\" @patching_rect %i 100 20 20", atom_getsym(argv+1)->s_name, (int)x->f_ambisonic->getHarmonicBand(i), (int)x->f_ambisonic->getHarmonicArgument(i), i * 100 + 10);
                 
@@ -102,9 +108,21 @@ void *hoa_patcher_new(t_symbol *s, int argc, t_atom *argv)
             outlet_new(x, "signal");
         
         object_method(x->f_patcher, gensym("loadbang"));
+		
+		x->parent_patcher = (t_patcher *)gensym("#P")->s_thing;	// store reference to parent patcher
 	}
-    
+	
 	return x;
+}
+
+t_hoa_err hoa_getinfos(t_hoa_patcher* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = x->f_ambisonic->getNumberOfHarmonics() * x->f_noutlets;
+	boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics() * x->f_noutlets;
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void hoa_patcher_anything(t_hoa_patcher *x, t_symbol* s, long argc, t_atom* argv)
@@ -135,6 +153,14 @@ void hoa_patcher_bang(t_hoa_patcher *x)
 void hoa_patcher_dblclick(t_hoa_patcher *x)
 {
     object_method(x->f_subpatchers[0], gensym("mousedoubleclick"));
+}
+
+// todo : open by harmonic (open [band][arg])
+void hoa_patcher_open(t_hoa_patcher *x, long n)
+{
+	if ((n < 0) || (n > x->f_nInstances-1)) return;
+	mess0((t_object *)x->f_subpatchers[n], gensym("front"));
+	//object_method(x->f_subpatchers[n], gensym("mousedoubleclick"));
 }
 
 void hoa_patcher_dsp64(t_hoa_patcher *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)

@@ -71,142 +71,6 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-18",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 305.0, 267.0, 200.0, 200.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.265339, 0.318288, 0.205757, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-10",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 160.0, 345.0, 262.0, 262.0 ],
-									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.265339, 0.318288, 0.205757, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-17",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 641.0, 226.0, 262.0, 262.0 ],
-									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.752367, 0.308787, 0.719999, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-16",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 545.0, 339.0, 104.0, 104.0 ],
-									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ],
-									"vectors" : 0
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.752367, 0.308787, 0.719999, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-15",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 397.0, 408.0, 104.0, 104.0 ],
-									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ],
-									"vectors" : 0
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.752367, 0.308787, 0.719999, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-1",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 397.0, 408.0, 104.0, 104.0 ],
-									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ],
-									"vectors" : 0
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.752367, 0.308787, 0.719999, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-2",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 545.0, 339.0, 104.0, 104.0 ],
-									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ],
-									"vectors" : 0
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.265339, 0.318288, 0.205757, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-3",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 403.0, 345.0, 262.0, 262.0 ],
-									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.752367, 0.308787, 0.719999, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-9",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 449.0, 323.0, 104.0, 104.0 ],
-									"spherecolor" : [ 0.73868, 0.73868, 0.73868, 1.0 ],
-									"vectors" : 0
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"attr" : "cam",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
@@ -365,28 +229,11 @@
 									"bgcolor" : [ 0.265339, 0.318288, 0.205757, 1.0 ],
 									"cam" : [ 183.0, 285.0, 93.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-13",
+									"id" : "obj-19",
 									"maxclass" : "hoa.meter3D~",
 									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 303.0, 304.0, 304.0 ],
-									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bdcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-									"bgcolor" : [ 0.265339, 0.318288, 0.205757, 1.0 ],
-									"cam" : [ 183.0, 285.0, 93.0 ],
-									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-									"id" : "obj-13",
-									"maxclass" : "hoa.meter3D~",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.0, 303.0, 304.0, 304.0 ],
+									"numoutlets" : 0,
+									"patching_rect" : [ 31.0, 223.0, 304.0, 304.0 ],
 									"spherecolor" : [ 0.679944, 0.679944, 0.679944, 1.0 ]
 								}
 
@@ -404,7 +251,61 @@
 
 							}
  ],
-						"lines" : [  ]
+						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-11", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-4", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-6", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-7", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-8", 0 ]
+								}
+
+							}
+ ]
 					}
 ,
 					"patching_rect" : [ 22.0, 27.0, 51.0, 20.0 ],
@@ -504,10 +405,6 @@
 				"patcherrelativepath" : "../../_prerelease/max-package/misc/others",
 				"type" : "JSON",
 				"implicit" : 1
-			}
-, 			{
-				"name" : "hoa.meter3D~.mxo",
-				"type" : "iLaX"
 			}
  ]
 	}
