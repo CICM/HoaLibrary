@@ -16,11 +16,11 @@ typedef struct _hoa_thisprocess
 	void *a_outlet;
 	void *b_outlet;
 	void *c_outlet;
-	void *m_clock;
 	
 	long index;
 	
 	void *hoaProcessor_parent;
+	Hoa3D::Ambisonic* f_ambisonic;
 	
 } t_hoa_thisprocess;
 
@@ -48,7 +48,6 @@ int C74_EXPORT main(void)
 	
 	class_addmethod(c, (method)hoa_thisprocess_assist,			"assist",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_thisprocess_loadbang,		"loadbang", A_CANT, 0);
-	class_addmethod(c, (method)hoa_thisprocess_delete,			"delete",			0);
 	class_addmethod(c, (method)hoa_thisprocess_mute,			"mute",		A_GIMME, 0);
 	class_addmethod(c, (method)hoa_thisprocess_flags,			"flags",	A_GIMME, 0);
 	class_addmethod(c, (method)hoa_thisprocess_bang,			"bang",		0);
@@ -69,7 +68,6 @@ void *hoa_thisprocess_new(long on)
     
 	x->b_outlet = intout(x);
     x->a_outlet = intout(x);
-	x->m_clock = clock_new(x, (method)*clock_delete);
 	
 	x->hoaProcessor_parent = Get_HoaProcessor_Object();
 	x->index = Get_HoaProcessor_Patch_Index(x->hoaProcessor_parent);
@@ -81,7 +79,7 @@ void *hoa_thisprocess_new(long on)
 
 void hoa_thisprocess_free(t_hoa_thisprocess *x)
 {
-	freeobject((t_object *)x->m_clock);
+	;
 }
 
 void hoa_thisprocess_mute(t_hoa_thisprocess *x, t_symbol *msg, short argc, t_atom *argv)
@@ -120,21 +118,6 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 	outlet_int(x->b_outlet, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
 	if (x->index)
 		outlet_int (x->a_outlet, x->index);
-}
-
-void hoa_thisprocess_delete(t_hoa_thisprocess *x)
-{
-	clock_set(x->m_clock, 0L);
-}
-
-void clock_delete(t_hoa_thisprocess *x)
-{
-	t_atom arg;
-	
-	atom_setlong(&arg, x->index);
-	
-	if (x->hoaProcessor_parent)
-		typedmess(((t_object *)x->hoaProcessor_parent), ps_deletepatch, 1, &arg);
 }
 
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s)

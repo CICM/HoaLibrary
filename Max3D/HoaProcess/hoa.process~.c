@@ -373,6 +373,9 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_user_target, "target", A_GIMME, 0);							// MUST FIX TO GIMME FOR NOW
 	class_addmethod(c, (method)hoa_processor_user_target_free, "targetfree", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
 	
+	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
+	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
+	//class_addmethod(c, (method)hoa_processor_query_ambisonic_order, "get_ambisonic_order", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigins, "get_declared_sigins", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigouts, "get_declared_sigouts", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_sigins, "get_sigins", A_CANT, 0);

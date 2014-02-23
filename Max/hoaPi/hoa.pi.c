@@ -38,6 +38,7 @@ typedef struct _pi
 } t_pi;
 
 void pi_bang(t_pi *x);
+void pi_loadbang(t_pi *x);
 void pi_int(t_pi *x, long n);
 void pi_float(t_pi *x, double n) ;
 void pi_assist(t_pi *x, void *b, long m, long a, char *s);
@@ -56,13 +57,14 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)pi_float,	"float",	A_FLOAT, 0);
     class_addmethod(c, (method)pi_assist,	"assist",	A_CANT, 0);
 	class_addmethod(c, (method)pi_bang,		"dblclick",	A_CANT, 0);
+	class_addmethod(c, (method)pi_loadbang,	"loadbang",	A_CANT, 0);
     
-    CLASS_ATTR_LONG             (c, "loadout",  0, t_pi, f_loadbang);
-	CLASS_ATTR_CATEGORY			(c, "loadout",  0, "Behavior");
-    CLASS_ATTR_STYLE_LABEL      (c, "loadout",  0, "onoff", "Load output");
-	CLASS_ATTR_ORDER			(c, "loadout",  0, "1");
-	CLASS_ATTR_DEFAULT			(c, "loadout",  0, "0");
-	CLASS_ATTR_SAVE				(c, "loadout",  1);
+    CLASS_ATTR_LONG             (c, "outonload",  0, t_pi, f_loadbang);
+	CLASS_ATTR_CATEGORY			(c, "outonload",  0, "Behavior");
+    CLASS_ATTR_STYLE_LABEL      (c, "outonload",  0, "onoff", "Output value on load");
+	CLASS_ATTR_ORDER			(c, "outonload",  0, "1");
+	CLASS_ATTR_DEFAULT			(c, "outonload",  0, "0");
+	CLASS_ATTR_SAVE				(c, "outonload",  1);
 	
 	class_register(CLASS_BOX, c);
 	pi_class = c;
@@ -98,14 +100,15 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
             dictionary_getlong(attr, gensym("loadout"), &x->f_loadbang);
         
         attr_args_process(x, argc, argv);
-        if(x->f_loadbang)
-        {
-            defer_low(x, (method)pi_bang, NULL, 0, NULL);
-        }
-        
     }
 	
 	return(x);
+}
+
+void pi_loadbang(t_pi *x)
+{
+	if (x->f_loadbang)
+		pi_bang(x);
 }
 
 void pi_assist(t_pi *x, void *b, long m, long a, char *s)
