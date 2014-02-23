@@ -36,6 +36,7 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.in~", (method)hoa_in_new, (method)hoa_in_free, sizeof(t_hoa_in), NULL, A_DEFLONG, 0);
     
 	hoa_initclass(c, (method)NULL);
+	
 	class_addmethod(c, (method)hoa_in_dsp64, "dsp64", A_CANT, 0);
     class_addmethod(c, (method)hoa_in_assist, "assist", A_CANT, 0);
 	class_addmethod(c, (method)hoa_in_int, "int", A_LONG, 0);
@@ -46,12 +47,10 @@ int C74_EXPORT main(void)
 	return 0;
 }
 
-
 void hoa_in_free(t_hoa_in *x)
 {
 	dsp_free(&x->x_obj);
 }
-
 
 void *hoa_in_new(long inlet_num)
 {

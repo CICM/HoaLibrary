@@ -671,7 +671,6 @@ void hoa_processor_free(t_hoa_processor *x)
 	// Free other resources
 	
 	free_mem_swap(&x->temp_mem);
-	//ALIGNED_FREE(x->temp_mem_ptr);
 	ALIGNED_FREE(x->thread_space_ptr);
 	
 	if (x->declared_sig_ins)

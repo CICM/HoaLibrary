@@ -646,6 +646,10 @@
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "hoa.thisprocess~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
 				"name" : "hoa.connect3D.mxo",
 				"type" : "iLaX"
 			}
