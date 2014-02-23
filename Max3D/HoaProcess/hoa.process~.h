@@ -1,43 +1,41 @@
 
 /*
- *  dynamicdsp header
+ *  hoa.process~ header
  *
- *	This header file provides an interface for querying and seting the state of a parent dynamicdsp object.
- *	All communication with a host object should be done using this interface - the dynamicdsp.c file has some more information.
- *	For examples of use see the dynamicdsp set of objects (dynamicdsp.in~ / dynamicdsp.out~ / dynamicdsp.this~ etc.).
+ *	This header file provides an interface for querying and seting the state of a parent hoa.process~ object.
+ *	All communication with a host object should be done using this interface - the hoa.process~.c file has some more information.
  *
- *  Copyright 2010 Alex Harker. All rights reserved.
+ *  based on dynamicdsp suite. Copyright 2010 Alex Harker. All rights reserved.
  *
  */
 
 
-#ifndef HOA_PATCHER_DEF
-#define HOA_PATCHER_DEF
+#ifndef HOA_PROCESSOR_DEF
+#define HOA_PROCESSOR_DEF
 
 #include "ext.h"
 
-#define HoaPatcherIsValid(x) \
-(x && ((((t_symbol *) ob_sym (x)) == gensym("dynamicdsp~")) || (ob_sym (x)) == gensym("dynamicserial~") || (ob_sym (x)) == gensym("dyndsp~")))
+#define HoaProcessorIsValid(x) (x && ((((t_symbol *) ob_sym (x)) == gensym("hoa.process~"))))
 
 //////////////////////////////////////////////// Object Queries ////////////////////////////////////////////////
 
 // These routines *must* be called these routines at loadbang - they are bogus at any other time
 
-__inline void *Get_Dynamic_Object() 
+__inline void *Get_HoaProcessor_Object() 
 {
-	void *Dynamic_Object = (void *) gensym("___DynamicDSP~___")->s_thing;
+	void *HoaProcessor_Object = (void *) gensym("___HoaProcessor~___")->s_thing;
 
-	if (HoaPatcherIsValid(Dynamic_Object))
-		return Dynamic_Object;
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return HoaProcessor_Object;
 	else
 		return 0;
 }
 
 
-__inline long Get_Dynamic_Patch_Index(void *Dynamic_Object) 
+__inline long Get_HoaProcessor_Patch_Index(void *HoaProcessor_Object) 
 {
-	if (HoaPatcherIsValid(Dynamic_Object))
-		return (long) gensym("___DynamicPatchIndex___")->s_thing;
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (long) gensym("___HoaProcessorPatchIndex___")->s_thing;
 	else
 		return 0;
 }
@@ -46,37 +44,37 @@ __inline long Get_Dynamic_Patch_Index(void *Dynamic_Object)
 //////////////////////////////////////////////// Signal IO Queries ////////////////////////////////////////////////
 
 
-__inline long Dynamic_Get_Declared_Sigins(void *Dynamic_Object)
+__inline long HoaProcessor_Get_Declared_Sigins(void *HoaProcessor_Object)
 {
-	if (HoaPatcherIsValid(Dynamic_Object))
-		return (long) mess0((t_object *)Dynamic_Object, gensym("get_declared_sigins"));
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (long) mess0((t_object *)HoaProcessor_Object, gensym("get_declared_sigins"));
 	else
 		return 0;
 }
 
 
-__inline long Dynamic_Get_Declared_Sigouts(void *Dynamic_Object)
+__inline long HoaProcessor_Get_Declared_Sigouts(void *HoaProcessor_Object)
 {
-	if (HoaPatcherIsValid(Dynamic_Object))
-		return (long) mess0((t_object *)Dynamic_Object, gensym ("get_declared_sigouts"));
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (long) mess0((t_object *)HoaProcessor_Object, gensym ("get_declared_sigouts"));
 	else
 		return 0;
 }
 
 
-__inline void **Dynamic_Get_Sigins(void *Dynamic_Object)
+__inline void **HoaProcessor_Get_Sigins(void *HoaProcessor_Object)
 {
-	if (HoaPatcherIsValid(Dynamic_Object))
-		return (void**)mess0((t_object *)Dynamic_Object, gensym ("get_sigins"));
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (void**)mess0((t_object *)HoaProcessor_Object, gensym ("get_sigins"));
 	else	
 		return 0;
 }
 
 
-__inline void ***Dynamic_Get_Outptrs_Ptr(void *Dynamic_Object, long index)
+__inline void ***HoaProcessor_Get_Outptrs_Ptr(void *HoaProcessor_Object, long index)
 {
-	if (HoaPatcherIsValid(Dynamic_Object) && index > 0)
-		return (void***)mess1((t_object *)Dynamic_Object, gensym("get_outptrs_ptr"), (void *)index);
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		return (void***)mess1((t_object *)HoaProcessor_Object, gensym("get_outptrs_ptr"), (void *)index);
 	else
 		return 0;
 }
@@ -85,33 +83,33 @@ __inline void ***Dynamic_Get_Outptrs_Ptr(void *Dynamic_Object, long index)
 //////////////////////////////////////////////// State Queries ////////////////////////////////////////////////
 
 
-__inline long Dynamic_Get_Patch_On (void *Dynamic_Object, long index)
+__inline long HoaProcessor_Get_Patch_On (void *HoaProcessor_Object, long index)
 {
-	if (HoaPatcherIsValid(Dynamic_Object) && index > 0)
-		return (long) mess1((t_object *)Dynamic_Object, gensym("get_patch_on"), (void *)index);
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		return (long) mess1((t_object *)HoaProcessor_Object, gensym("get_patch_on"), (void *)index);
 	
 	return 0;
 }
 
 
-__inline void Dynamic_Set_Patch_Busy (void *Dynamic_Object, long index, long state)
+__inline void HoaProcessor_Set_Patch_Busy (void *HoaProcessor_Object, long index, long state)
 {
-	if (HoaPatcherIsValid(Dynamic_Object) && index > 0)
-		mess2((t_object *)Dynamic_Object, gensym("set_patch_busy"), (void *)index, (void *)state);
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		mess2((t_object *)HoaProcessor_Object, gensym("set_patch_busy"), (void *)index, (void *)state);
 }
 
 
-__inline void Dynamic_Set_Patch_On (void *Dynamic_Object, long index, long state)
+__inline void HoaProcessor_Set_Patch_On (void *HoaProcessor_Object, long index, long state)
 {
-	if (HoaPatcherIsValid(Dynamic_Object) && index > 0)
-		mess2((t_object *)Dynamic_Object, gensym("set_patch_on"), (void *)index, (void *)state);
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		mess2((t_object *)HoaProcessor_Object, gensym("set_patch_on"), (void *)index, (void *)state);
 }
 
 
-__inline long Dynamic_Get_Patch_Busy (void *Dynamic_Object, long index)
+__inline long HoaProcessor_Get_Patch_Busy (void *HoaProcessor_Object, long index)
 {
-	if (HoaPatcherIsValid(Dynamic_Object) && index > 0)
-		return (long) mess1((t_object *)Dynamic_Object, gensym("get_patch_busy"), (void *)index);
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		return (long) mess1((t_object *)HoaProcessor_Object, gensym("get_patch_busy"), (void *)index);
 	
 	return 0;
 }
@@ -119,19 +117,19 @@ __inline long Dynamic_Get_Patch_Busy (void *Dynamic_Object, long index)
 //////////////////////////////////////////////// Temporary Memory Queries ////////////////////////////////////////////////
 
 
-__inline long Dynamic_Temp_Mem_Resize (void *Dynamic_Object, long index, long size)
+__inline long HoaProcessor_Temp_Mem_Resize (void *HoaProcessor_Object, long index, long size)
 {
-	if (HoaPatcherIsValid(Dynamic_Object))
-		return (long) mess2((t_object *)Dynamic_Object, gensym("temp_mem_resize"), (void *) index, (void *) size);
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (long) mess2((t_object *)HoaProcessor_Object, gensym("temp_mem_resize"), (void *) index, (void *) size);
 	else
 		return 0;
 }
 
 
-__inline void **Dynamic_Get_TempMem (void *Dynamic_Object, long index, void **DefMem)
+__inline void **HoaProcessor_Get_TempMem (void *HoaProcessor_Object, long index, void **DefMem)
 {
-	if (HoaPatcherIsValid(Dynamic_Object) && index > 0)
-		return (void**)mess1((t_object *)Dynamic_Object, gensym("get_temp_mem"), (void *) index);
+	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
+		return (void**)mess1((t_object *)HoaProcessor_Object, gensym("get_temp_mem"), (void *) index);
 	else
 		return DefMem;
 }

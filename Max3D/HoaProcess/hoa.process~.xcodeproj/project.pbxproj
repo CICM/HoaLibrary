@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2CA52A3218B9731900A4561E /* hoa.process~.c in Sources */ = {isa = PBXBuildFile; fileRef = 2CA52A3118B9731900A4561E /* hoa.process~.c */; };
+		2CBF46E818BA2FD0008A25FF /* hoa.process~.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBF46E718BA2FD0008A25FF /* hoa.process~.h */; };
+		2CBF46EA18BA2FDF008A25FF /* AH_Headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CBF46E918BA2FDF008A25FF /* AH_Headers.h */; };
 		2CF4225818B7FA3D00A880EE /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4225618B7FA3D00A880EE /* hoa.max.cpp */; };
 		2CF4225918B7FA3D00A880EE /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CF4225718B7FA3D00A880EE /* hoa.max.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		22CF10220EE984600054F513 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = SOURCE_ROOT; };
 		2CA52A3118B9731900A4561E /* hoa.process~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "hoa.process~.c"; sourceTree = "<group>"; };
+		2CBF46E718BA2FD0008A25FF /* hoa.process~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "hoa.process~.h"; sourceTree = "<group>"; };
+		2CBF46E918BA2FDF008A25FF /* AH_Headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AH_Headers.h; sourceTree = "<group>"; };
 		2CF4225618B7FA3D00A880EE /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../hoa.max.cpp; sourceTree = "<group>"; };
 		2CF4225718B7FA3D00A880EE /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.process~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.process~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				2CA52A3118B9731900A4561E /* hoa.process~.c */,
+				2CBF46E718BA2FD0008A25FF /* hoa.process~.h */,
+				2CBF46E918BA2FDF008A25FF /* AH_Headers.h */,
 				2CF4225618B7FA3D00A880EE /* hoa.max.cpp */,
 				2CF4225718B7FA3D00A880EE /* hoa.max.h */,
 				8F23071418AF5A71002707E7 /* Hoa3D */,
@@ -152,10 +158,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F23074018AF5A71002707E7 /* Tools.h in Headers */,
+				2CBF46E818BA2FD0008A25FF /* hoa.process~.h in Headers */,
 				8F23074218AF5A71002707E7 /* Vector.h in Headers */,
 				8F23074418AF5A71002707E7 /* Wider.h in Headers */,
 				8F23073B18AF5A71002707E7 /* Planewaves.h in Headers */,
 				8F23073D18AF5A71002707E7 /* Rotate.h in Headers */,
+				2CBF46EA18BA2FDF008A25FF /* AH_Headers.h in Headers */,
 				8F23073718AF5A71002707E7 /* Meter.h in Headers */,
 				8F23073F18AF5A71002707E7 /* Scope.h in Headers */,
 				2CF4225918B7FA3D00A880EE /* hoa.max.h in Headers */,

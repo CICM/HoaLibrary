@@ -24,7 +24,7 @@
 // Global Varibles
 // ========================================================================================================================================== //
 
-t_class *dynamicdsp_class;
+t_class *hoa_processor_class;
 
 static long processor_num_actual_threads;
 static long sig_size;
@@ -138,7 +138,7 @@ typedef struct thread_space {
 	
 	// Variables
 	
-	void *dynamicdsp_parent;
+	void *hoa_processor_parent;
 	
 	long thread_num;
 	long vec_size;
@@ -148,7 +148,7 @@ typedef struct thread_space {
 
 ////////////////////////////////////// The object structure //////////////////////////////////////
 
-typedef struct _dynamicdsp
+typedef struct _hoa_processor
 {
     t_pxobject x_obj;
     
@@ -210,100 +210,100 @@ typedef struct _dynamicdsp
 	
 	t_safe_mem_swap temp_mem;
 	
-} t_dynamicdsp;
+} t_hoa_processor;
 
 // ========================================================================================================================================== //
 // Function Prototypes
 // ========================================================================================================================================== //
 
 
-void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv);
-void dynamicdsp_free(t_dynamicdsp *x);
-void dynamicdsp_assist(t_dynamicdsp *x, void *b, long m, long a, char *s);
+void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_free(t_hoa_processor *x);
+void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s);
 
-void dynamicdsp_deletepatch (t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv);
-void dynamicdsp_deletepatch_internal (t_dynamicdsp *x, long index);
-void dynamicdsp_cleanpatch(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv);
-void dynamicdsp_loadexit(t_dynamicdsp *x, long replace_symbol_pointers, void *previous, void *previousindex);
-void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request,  t_symbol *patch_name_in, short argc, t_atom *argv);
-void dynamicdsp_user_clear (t_dynamicdsp *x);
-void dynamicdsp_user_loadpatch (t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_deletepatch (t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_deletepatch_internal (t_hoa_processor *x, long index);
+void hoa_processor_cleanpatch(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, void *previous, void *previousindex);
+void hoa_processor_loadpatch (t_hoa_processor *x, long index, long thread_request,  t_symbol *patch_name_in, short argc, t_atom *argv);
+void hoa_processor_user_clear (t_hoa_processor *x);
+void hoa_processor_user_loadpatch (t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
 
-void dynamicdsp_bang(t_dynamicdsp *x);
-void dynamicdsp_int(t_dynamicdsp *x, long n);
-void dynamicdsp_float(t_dynamicdsp *x, double f);
-void dynamicdsp_list(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv);
-void dynamicdsp_anything(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv);
-void dynamicdsp_target(t_dynamicdsp *x, long target_index, long index, t_symbol *msg, short argc, t_atom *argv);
-short dynamicdsp_targetinlets(t_patcher *p, t_args_struct *args);
-void dynamicdsp_user_target(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv);
-void dynamicdsp_user_target_free(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_bang(t_hoa_processor *x);
+void hoa_processor_int(t_hoa_processor *x, long n);
+void hoa_processor_float(t_hoa_processor *x, double f);
+void hoa_processor_list(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_anything(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_target(t_hoa_processor *x, long target_index, long index, t_symbol *msg, short argc, t_atom *argv);
+short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args);
+void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_user_target_free(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 
-void dynamicdsp_autoloadbalance(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv);
-void dynamicdsp_multithread(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv);
-void dynamicdsp_activethreads(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv);
-void dynamicdsp_threadmap(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_autoloadbalance(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_multithread(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_activethreads(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
+void hoa_processor_threadmap(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 
-void dynamicdsp_free_temp_memory(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv);
-void dynamicdsp_perform_common(t_dynamicdsp *x, void **sig_outs, long vec_size);
-t_int *dynamicdsp_perform(t_int *w);
-void dynamicdsp_perform64 (t_dynamicdsp *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
-void dynamicdsp_sum_float(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
-void dynamicdsp_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
-__inline void dynamicdsp_multithread_perform(t_dynamicdsp *x, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
+void hoa_processor_free_temp_memory(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_size);
+t_int *hoa_processor_perform(t_int *w);
+void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
+void hoa_processor_sum_float(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
+void hoa_processor_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
+__inline void hoa_processor_multithread_perform(t_hoa_processor *x, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
 #ifdef __APPLE__
-void *dynamicdsp_threadwait(void *arg);
+void *hoa_processor_threadwait(void *arg);
 #else
-DWORD WINAPI dynamicdsp_threadwait (LPVOID arg);
+DWORD WINAPI hoa_processor_threadwait (LPVOID arg);
 #endif
-__inline void dynamicdsp_threadprocess(t_dynamicdsp *x, void **sig_outs, void *temp_mem_ptr, long temp_mem_size, long vec_size, long thread_num, long threads_running);
+__inline void hoa_processor_threadprocess(t_hoa_processor *x, void **sig_outs, void *temp_mem_ptr, long temp_mem_size, long vec_size, long thread_num, long threads_running);
 
-long dynamicdsp_dsp_common(t_dynamicdsp *x, long vec_size, long samp_rate);
-void dynamicdsp_dsp64 (t_dynamicdsp *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void dynamicdsp_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
+long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate);
+void hoa_processor_dsp64 (t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_processor_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
 
-short dynamicdsp_linkinlets(t_patcher *p, t_dynamicdsp *x);
-short dynamicdsp_linkoutlets(t_patcher *p, t_dynamicdsp *x);
-short dynamicdsp_unlinkinlets(t_patcher *p, t_dynamicdsp *x);
-short dynamicdsp_unlinkoutlets(t_patcher *p, t_dynamicdsp *x);
+short hoa_processor_linkinlets(t_patcher *p, t_hoa_processor *x);
+short hoa_processor_linkoutlets(t_patcher *p, t_hoa_processor *x);
+short hoa_processor_unlinkinlets(t_patcher *p, t_hoa_processor *x);
+short hoa_processor_unlinkoutlets(t_patcher *p, t_hoa_processor *x);
 
-void dynamicdsp_dblclick(t_dynamicdsp *x);
-void dynamicdsp_open(t_dynamicdsp *x, long index);
-void dynamicdsp_doopen(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv);
-void dynamicdsp_pclose(t_dynamicdsp *x);
-void dynamicdsp_wclose(t_dynamicdsp *x, long index);
-void dynamicdsp_dowclose(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_dblclick(t_hoa_processor *x);
+void hoa_processor_open(t_hoa_processor *x, long index);
+void hoa_processor_doopen(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
+void hoa_processor_pclose(t_hoa_processor *x);
+void hoa_processor_wclose(t_hoa_processor *x, long index);
+void hoa_processor_dowclose(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
 
-short dynamicdsp_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_dynamicdsp *x);
-short dynamicdsp_setsubassoc(t_patcher *p, t_dynamicdsp *x);
-void dynamicdsp_pupdate(t_dynamicdsp *x, void *b, t_patcher *p);
-void *dynamicdsp_subpatcher(t_dynamicdsp *x, long index, void *arg);
-void dynamicdsp_parentpatcher(t_dynamicdsp *x, t_patcher **parent);
+short hoa_processor_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_hoa_processor *x);
+short hoa_processor_setsubassoc(t_patcher *p, t_hoa_processor *x);
+void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p);
+void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg);
+void hoa_processor_parentpatcher(t_hoa_processor *x, t_patcher **parent);
 
-void dynamicdsp_init_patch_space (t_patchspace *patch_space_ptrs);
-t_patchspace *dynamicdsp_new_patch_space(t_dynamicdsp *x,long index);
-void dynamicdsp_free_patch_and_dsp (t_dynamicdsp *x, t_patchspace *patch_space_ptrs);
+void hoa_processor_init_patch_space (t_patchspace *patch_space_ptrs);
+t_patchspace *hoa_processor_new_patch_space(t_hoa_processor *x,long index);
+void hoa_processor_free_patch_and_dsp (t_hoa_processor *x, t_patchspace *patch_space_ptrs);
 
-void *dynamicdsp_query_declared_sigins(t_dynamicdsp *x);
-void *dynamicdsp_query_declared_sigouts(t_dynamicdsp *x);
-void *dynamicdsp_query_sigins(t_dynamicdsp *x);
-void *dynamicdsp_query_outptrs_ptr(t_dynamicdsp *x, long index);
-void *dynamicdsp_client_get_patch_on (t_dynamicdsp *x, long index);
-void *dynamicdsp_client_get_patch_busy (t_dynamicdsp *x, long index);
-void dynamicdsp_client_set_patch_on (t_dynamicdsp *x, long index, long state);
-void dynamicdsp_client_set_patch_busy (t_dynamicdsp *x, long index, long state);
-void *dynamicdsp_query_temp_mem (t_dynamicdsp *x, long index);
-void *dynamicdsp_client_temp_mem_resize (t_dynamicdsp *x, long index, long size);
+void *hoa_processor_query_declared_sigins(t_hoa_processor *x);
+void *hoa_processor_query_declared_sigouts(t_hoa_processor *x);
+void *hoa_processor_query_sigins(t_hoa_processor *x);
+void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index);
+void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index);
+void *hoa_processor_client_get_patch_busy (t_hoa_processor *x, long index);
+void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long state);
+void hoa_processor_client_set_patch_busy (t_hoa_processor *x, long index, long state);
+void *hoa_processor_query_temp_mem (t_hoa_processor *x, long index);
+void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long size);
 
-t_hoa_err hoa_getinfos(t_dynamicdsp* x, t_hoa_boxinfos* boxinfos);
+t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 
 // ========================================================================================================================================== //
 // Symbols
 // ========================================================================================================================================== //
 
 
-t_symbol *ps_dynamicdsp;
-t_symbol *ps_DynamicPatchIndex;
+t_symbol *ps_HoaProcessor;
+t_symbol *ps_HoaProcessorPatchIndex;
 t_symbol *ps_dspchain;
 t_symbol *ps_sigin;
 t_symbol *ps_sigout;
@@ -343,57 +343,57 @@ int C74_EXPORT main(void)
 	
 	t_class* c;
 
-	c = class_new("hoa.process~", (method)dynamicdsp_new,  (method)dynamicdsp_free, sizeof(t_dynamicdsp), NULL, A_GIMME, 0);
+	c = class_new("hoa.process~", (method)hoa_processor_new,  (method)hoa_processor_free, sizeof(t_hoa_processor), NULL, A_GIMME, 0);
 	hoa_initclass(c, (method)hoa_getinfos);
 	
-	class_addmethod(c, (method)dynamicdsp_dsp64, "dsp64", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_assist, "assist", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_open, "open", A_DEFLONG, 0);
-	class_addmethod(c, (method)dynamicdsp_dblclick, "dblclick", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_wclose, "wclose", A_DEFLONG, 0);
+	class_addmethod(c, (method)hoa_processor_dsp64, "dsp64", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_assist, "assist", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_open, "open", A_DEFLONG, 0);
+	class_addmethod(c, (method)hoa_processor_dblclick, "dblclick", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_wclose, "wclose", A_DEFLONG, 0);
 	
-	class_addmethod(c, (method)dynamicdsp_pupdate, "pupdate", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_subpatcher, "subpatcher", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_parentpatcher, "parentpatcher", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_pupdate, "pupdate", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_subpatcher, "subpatcher", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_parentpatcher, "parentpatcher", A_CANT, 0);
 	
-	class_addmethod(c, (method)dynamicdsp_bang, "bang", 0);
-	class_addmethod(c, (method)dynamicdsp_int, "int", A_LONG, 0);
-	class_addmethod(c, (method)dynamicdsp_float, "float", A_FLOAT, 0);
-	class_addmethod(c, (method)dynamicdsp_list, "list", A_GIMME, 0);
-	class_addmethod(c, (method)dynamicdsp_anything, "anything", A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_bang, "bang", 0);
+	class_addmethod(c, (method)hoa_processor_int, "int", A_LONG, 0);
+	class_addmethod(c, (method)hoa_processor_float, "float", A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_processor_list, "list", A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_anything, "anything", A_GIMME, 0);
 	
-	class_addmethod(c, (method)dynamicdsp_autoloadbalance, "autoloadbalance", A_GIMME, 0);				// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)dynamicdsp_multithread, "multithread", A_GIMME, 0);						// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)dynamicdsp_activethreads, "activethreads", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)dynamicdsp_threadmap, "threadmap", A_GIMME, 0);							// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_autoloadbalance, "autoloadbalance", A_GIMME, 0);				// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_multithread, "multithread", A_GIMME, 0);						// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_activethreads, "activethreads", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_threadmap, "threadmap", A_GIMME, 0);							// MUST FIX TO GIMME FOR NOW
 	
-	class_addmethod(c, (method)dynamicdsp_user_clear, "clear", 0);
-	class_addmethod(c, (method)dynamicdsp_user_loadpatch, "loadpatch", A_GIMME, 0);
-	class_addmethod(c, (method)dynamicdsp_deletepatch, "deletepatch", A_GIMME, 0);						// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)dynamicdsp_user_target, "target", A_GIMME, 0);							// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)dynamicdsp_user_target_free, "targetfree", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_user_clear, "clear", 0);
+	class_addmethod(c, (method)hoa_processor_user_loadpatch, "loadpatch", A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_deletepatch, "deletepatch", A_GIMME, 0);						// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_user_target, "target", A_GIMME, 0);							// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_user_target_free, "targetfree", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
 	
-	class_addmethod(c, (method)dynamicdsp_query_declared_sigins, "get_declared_sigins", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_query_declared_sigouts, "get_declared_sigouts", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_query_sigins, "get_sigins", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_query_outptrs_ptr, "get_outptrs_ptr", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_client_get_patch_on, "get_patch_on", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_client_get_patch_busy, "get_patch_busy", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_client_set_patch_on, "set_patch_on", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_client_set_patch_busy, "set_patch_busy", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_query_temp_mem, "get_temp_mem", A_CANT, 0);
-	class_addmethod(c, (method)dynamicdsp_client_temp_mem_resize, "temp_mem_resize", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_declared_sigins, "get_declared_sigins", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_declared_sigouts, "get_declared_sigouts", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_sigins, "get_sigins", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_outptrs_ptr, "get_outptrs_ptr", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_get_patch_on, "get_patch_on", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_get_patch_busy, "get_patch_busy", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_set_patch_on, "set_patch_on", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_set_patch_busy, "set_patch_busy", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_temp_mem, "get_temp_mem", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_temp_mem_resize, "temp_mem_resize", A_CANT, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
-	dynamicdsp_class = c;
+	hoa_processor_class = c;
 	
 	ps_getassoc = gensym("getassoc");
 	ps_setassoc = gensym("setassoc");
 	ps_noedit = gensym("noedit");
 	
-	ps_dynamicdsp = gensym("___DynamicDSP~___");					// Capitals must stay here
-	ps_DynamicPatchIndex = gensym("___DynamicPatchIndex___");		// Capitals must stay here
+	ps_HoaProcessor = gensym("___HoaProcessor~___");						// Capitals must stay here
+	ps_HoaProcessorPatchIndex = gensym("___HoaProcessorPatchIndex___");		// Capitals must stay here
 	ps_dspchain = gensym("dspchain");	
 	ps_sigin = gensym("in~");
 	ps_sigout = gensym("out~");
@@ -419,12 +419,13 @@ int C74_EXPORT main(void)
 // ========================================================================================================================================== //
 
 
-void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
+void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 {	
-	t_dynamicdsp *x = (t_dynamicdsp*)object_alloc (dynamicdsp_class);
+	t_hoa_processor *x = (t_hoa_processor*)object_alloc (hoa_processor_class);
 	
 	t_symbol *patch_name_entered = 0;
 	t_symbol *tempsym;
+	int ambisonicOrder = 1;
 	
 	short ac = 0;
 	t_atom av[MAX_ARGS];						
@@ -444,7 +445,13 @@ void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
 	long i, j;
 	
 	// Check if there is a patch name given to load
+	if (argc && atom_gettype(argv) == A_LONG)
+	{
+		ambisonicOrder = atom_getlong(argv);
+		argc--; argv++;
+	}
 	
+	// Check if there is a patch name given to load
 	if (argc && atom_gettype(argv) == A_SYM)
 	{
 		patch_name_entered = atom_getsym(argv);
@@ -452,7 +459,6 @@ void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
 	}
 	
 	// Check if there is a declaration of the number of inputs and outs (message and signal)
-
 	if (argc && atom_gettype(argv) == A_LONG)
 	{
 		if (atom_getlong(argv) >= 0 && atom_getlong(argv) < 256)
@@ -508,7 +514,7 @@ void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// Multithreading Setup - defaults to multi-threading off for nested objects, on for non-nested
 	
-	if (Get_Dynamic_Object()) 
+	if (Get_HoaProcessor_Object()) 
 		x->multithread_flag = 0;									
 	else 
 		x->multithread_flag = 1;
@@ -536,7 +542,7 @@ void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
 		x->thread_space_ptr[i].pth = 0;
 		x->thread_space_ptr[i].thread_temp_buffer = (void**)ALIGNED_MALLOC (declared_sig_outs * sizeof(void *));
 		x->thread_space_ptr[i].temp_mem_ptr = 0;
-		x->thread_space_ptr[i].dynamicdsp_parent = x;
+		x->thread_space_ptr[i].hoa_processor_parent = x;
 		x->thread_space_ptr[i].thread_num = i;
 		x->thread_space_ptr[i].first_thread_space = x->thread_space_ptr;
 		
@@ -562,9 +568,9 @@ void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
 		pthread_attr_getschedparam (&tattr, &param);											// safe to get existing scheduling param 
 		param.sched_priority = newprio;															// set the priority; others are unchanged 
 		pthread_attr_setschedparam (&tattr, &param);											// setting the new scheduling param 
-		pthread_create(&(x->thread_space_ptr[i].pth), &tattr, dynamicdsp_threadwait, x->thread_space_ptr + i);
+		pthread_create(&(x->thread_space_ptr[i].pth), &tattr, hoa_processor_threadwait, x->thread_space_ptr + i);
 #else
-		x->thread_space_ptr[i].pth = CreateThread (NULL, 0, dynamicdsp_threadwait, x->thread_space_ptr + i, 0, NULL);
+		x->thread_space_ptr[i].pth = CreateThread (NULL, 0, hoa_processor_threadwait, x->thread_space_ptr + i, 0, NULL);
 		SetThreadPriority(x->thread_space_ptr[i].pth, THREAD_PRIORITY_TIME_CRITICAL);
 		x->thread_space_ptr[i].exiting = 0;
 #endif
@@ -614,7 +620,7 @@ void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
 	{
 		x->in_table = (t_outvoid *)t_getbytes(declared_ins * sizeof(t_outvoid));
 		for (i = 0; i < declared_ins; i++)
-			x->in_table[i] = outlet_new(0L, 0L);												// make generic unowned inlets
+			x->in_table[i] = outlet_new(0L, 0L);											// make generic unowned inlets
 	}
 	
 	// Make signal ins
@@ -631,17 +637,25 @@ void *dynamicdsp_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// Initialise patcher symbol
 	
-	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;										// store reference to parent patcher
+	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
 	
 	// Load patch and initialise
 	
-	if (patch_name_entered) 
-		dynamicdsp_loadpatch(x, 0, -1, patch_name_entered, ac, av);
+	/*
+	if (patch_name_entered)
+		hoa_processor_loadpatch(x, 0, -1, patch_name_entered, ac, av);
+	*/
+	
+	if (patch_name_entered)
+	{
+		for (i=0; i<ambisonicOrder*3; i++)
+			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
+	}
 	
 	return (x);
 }
 
-t_hoa_err hoa_getinfos(t_dynamicdsp* x, t_hoa_boxinfos* boxinfos)
+t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
 	boxinfos->autoconnect_inputs = x->num_proxies;
@@ -651,7 +665,7 @@ t_hoa_err hoa_getinfos(t_dynamicdsp* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
-void dynamicdsp_free(t_dynamicdsp *x)
+void hoa_processor_free(t_hoa_processor *x)
 {
 	t_patchspace *patch_space_ptr;
 	long thread_temp_buffer_size = x->thread_temp_buffer_size;
@@ -693,7 +707,7 @@ void dynamicdsp_free(t_dynamicdsp *x)
 	for (i = 0; i < x->patch_spaces_allocated; i++)
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
-		dynamicdsp_free_patch_and_dsp (x, patch_space_ptr);
+		hoa_processor_free_patch_and_dsp (x, patch_space_ptr);
 		
 		if (patch_space_ptr)
 			freebytes((char *) patch_space_ptr, sizeof(t_patchspace));
@@ -721,7 +735,7 @@ void dynamicdsp_free(t_dynamicdsp *x)
 		freebytes(x->out_table, x->declared_outs * sizeof(t_outvoid));
 }
 
-void dynamicdsp_assist(t_dynamicdsp *x, void *b, long m, long a, char *s)
+void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_OUTLET)
 	{
@@ -740,13 +754,13 @@ void dynamicdsp_assist(t_dynamicdsp *x, void *b, long m, long a, char *s)
 // ========================================================================================================================================== //
 
 
-void dynamicdsp_deletepatch (t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_deletepatch (t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
-	dynamicdsp_deletepatch_internal(x, argc ? atom_getlong(argv) - 1 : -1); 
+	hoa_processor_deletepatch_internal(x, argc ? atom_getlong(argv) - 1 : -1); 
 }
 
 
-void dynamicdsp_deletepatch_internal (t_dynamicdsp *x, long index)
+void hoa_processor_deletepatch_internal (t_hoa_processor *x, long index)
 {	
 	t_patchspace *patch_space_ptr;
 	t_atom a;
@@ -761,43 +775,43 @@ void dynamicdsp_deletepatch_internal (t_dynamicdsp *x, long index)
 	patch_space_ptr = x->patch_space_ptrs[index];
 	patch_space_ptr->patch_valid = 0;
 	
-	defer(x,(method)dynamicdsp_cleanpatch, 0L, 1, &a);
+	defer(x,(method)hoa_processor_cleanpatch, 0L, 1, &a);
 }
 
-void dynamicdsp_cleanpatch (t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
+void hoa_processor_cleanpatch (t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
 	t_patchspace *patch_space_ptr;
 	long index = atom_getlong(argv);
 	
 	// First close the window
 	
-	dynamicdsp_dowclose(x, 0L, 1, argv);
+	hoa_processor_dowclose(x, 0L, 1, argv);
 	
 	// Now free
 	
 	patch_space_ptr = x->patch_space_ptrs[index];
-	dynamicdsp_free_patch_and_dsp (x, patch_space_ptr);
-	dynamicdsp_init_patch_space(patch_space_ptr);
+	hoa_processor_free_patch_and_dsp (x, patch_space_ptr);
+	hoa_processor_init_patch_space(patch_space_ptr);
 }
 
-void dynamicdsp_loadexit(t_dynamicdsp *x, long replace_symbol_pointers, void *previous, void *previousindex)
+void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, void *previous, void *previousindex)
 {
 	if (replace_symbol_pointers)
 	{
-		ps_dynamicdsp->s_thing = (struct object*)previous;
-		ps_DynamicPatchIndex->s_thing = (struct object*)previousindex;
+		ps_HoaProcessor->s_thing = (struct object*)previous;
+		ps_HoaProcessorPatchIndex->s_thing = (struct object*)previousindex;
 	}
 	ATOMIC_DECREMENT_BARRIER(&x->patch_is_loading);
 }
 
-void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request, t_symbol *patch_name_in, short argc, t_atom *argv)
+void hoa_processor_loadpatch (t_hoa_processor *x, long index, long thread_request, t_symbol *patch_name_in, short argc, t_atom *argv)
 {
 	t_patchspace *patch_space_ptr = 0;
 	t_object *previous;
 	t_object *previousindex;
+	t_fourcc type;
 	t_fourcc filetypelist = 'JSON';
 	long patch_spaces_allocated = x->patch_spaces_allocated;
-	t_fourcc type;
 	long i;
 	
 	short patch_path;
@@ -811,7 +825,7 @@ void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request, t_s
 	if (ATOMIC_INCREMENT_BARRIER(&x->patch_is_loading) > 1)
 	{
 		object_error((t_object*)x, "patch is loading in another thread");
-		dynamicdsp_loadexit(x, 0, 0, 0);
+		hoa_processor_loadexit(x, 0, 0, 0);
 		return;
 	}
 	
@@ -829,40 +843,41 @@ void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request, t_s
 	if (index >= MAX_NUM_PATCHES) 
 	{
 		object_error((t_object*)x, "slot out of range");
-		dynamicdsp_loadexit(x, 0, 0, 0);
+		hoa_processor_loadexit(x, 0, 0, 0);
 		return;
 	}
 		
 	// Create patchspaces up until the last allocated index (if necessary) and store the pointer
 	
 	for (i = patch_spaces_allocated; i < index + 1; i++)
-		dynamicdsp_new_patch_space (x, i);
+		hoa_processor_new_patch_space (x, i);
 	
 	patch_space_ptr = x->patch_space_ptrs[index];
 	
 	// Free the old patch - the new patch is not yet valid, but we switch it on so it can be switched off at loadbang time
 	
 	patch_space_ptr->patch_valid = 0;
-	dynamicdsp_free_patch_and_dsp (x, patch_space_ptr);
-	dynamicdsp_init_patch_space(patch_space_ptr);
+	hoa_processor_free_patch_and_dsp (x, patch_space_ptr);
+	hoa_processor_init_patch_space(patch_space_ptr);
 	patch_space_ptr->patch_on = 1;
 	
 	// Bind to the loading symbols and store the old symbols
 	
-	previous = ps_dynamicdsp->s_thing;
-	previousindex = ps_DynamicPatchIndex->s_thing;
+	previous = ps_HoaProcessor->s_thing;
+	previousindex = ps_HoaProcessorPatchIndex->s_thing;
 	
-	ps_dynamicdsp->s_thing = (t_object *) x;										
-	ps_DynamicPatchIndex->s_thing = (t_object *) (index + 1);						
+	ps_HoaProcessor->s_thing = (t_object *) x;										
+	ps_HoaProcessorPatchIndex->s_thing = (t_object *) (index + 1);						
 	
 	// Try to locate a file of the given name that is of the correct type
+	
 	strncpy_zero(filename, patch_name_in->s_name, MAX_FILENAME_CHARS);
 	
 	// if filetype does not exists
 	if (locatefile_extended(filename, &patch_path, &type, &filetypelist, 1))
 	{
 		object_error((t_object*)x, "no patcher %s", filename);
-		dynamicdsp_loadexit(x, 1, previous, previousindex);
+		hoa_processor_loadexit(x, 1, previous, previousindex);
 		return;
 	}
 	
@@ -882,7 +897,7 @@ void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request, t_s
 	if (!p) 
 	{
 		object_error((t_object*)x, "error loading %s", filename);
-		dynamicdsp_loadexit(x, 1, previous, previousindex);
+		hoa_processor_loadexit(x, 1, previous, previousindex);
 		return;
 	}
 	
@@ -890,26 +905,26 @@ void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request, t_s
 	
 	if (!ispatcher((t_object*)p))
 	{
-		object_error((t_object*)x, "%s is not a patcher", filename);
+		object_error((t_object*)x, "%s is not a patcher file", filename);
 		freeobject((t_object *)p);
-		dynamicdsp_loadexit(x, 1, previous, previousindex);
+		hoa_processor_loadexit(x, 1, previous, previousindex);
 		return;
 	}
 	
 	// Change the window name
 	
-	snprintf(windowname, 256, "%s %s%ld%s", filename, "[", index + 1, "]");
+	snprintf(windowname, 256, "%s %s%ld%s", patch_name_in->s_name, "[", index + 1, "]");
 	jpatcher_set_title((t_object*)p, gensym(windowname));
 	
-	// Set the relevant associations (for Max 5 the dynamicdsp_setsubassoc call covers all of this)
-	dynamicdsp_patcher_descend((t_patcher *)p, (t_intmethod) dynamicdsp_setsubassoc, x, x);	// associate subpatches with this instance
+	// Set the relevant associations
+	hoa_processor_patcher_descend((t_patcher *)p, (t_intmethod) hoa_processor_setsubassoc, x, x);	// associate subpatches with this instance
 	
 	// Link inlets and outlets
 	
 	if (x->declared_ins) 
-		dynamicdsp_patcher_descend((t_patcher *)p, (t_intmethod) dynamicdsp_linkinlets, x, x);
+		hoa_processor_patcher_descend((t_patcher *)p, (t_intmethod) hoa_processor_linkinlets, x, x);
 	if (x->declared_outs) 
-		dynamicdsp_patcher_descend((t_patcher *)p, (t_intmethod) dynamicdsp_linkoutlets, x, x);
+		hoa_processor_patcher_descend((t_patcher *)p, (t_intmethod) hoa_processor_linkoutlets, x, x);
 	
 	// Copy all the relevant data into the patch space
 	
@@ -936,7 +951,7 @@ void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request, t_s
 	
 	// Compile the dspchain in case dsp is on
 	
-	dynamicdsp_dsp_internal (patch_space_ptr, x->last_vec_size, x->last_samp_rate);
+	hoa_processor_dsp_internal (patch_space_ptr, x->last_vec_size, x->last_samp_rate);
 	
 	// The patch is valid and ready to go
 	
@@ -944,18 +959,18 @@ void dynamicdsp_loadpatch (t_dynamicdsp *x, long index, long thread_request, t_s
 	
 	// Return to previous state
 		
-	dynamicdsp_loadexit(x, 1, previous, previousindex);
+	hoa_processor_loadexit(x, 1, previous, previousindex);
 }
 
-void dynamicdsp_user_clear (t_dynamicdsp *x)
+void hoa_processor_user_clear (t_hoa_processor *x)
 {
 	long i;
 	
 	for (i = 0; i < x->patch_spaces_allocated; i++)
-		dynamicdsp_deletepatch_internal (x, i);
+		hoa_processor_deletepatch_internal (x, i);
 }
 
-void dynamicdsp_user_loadpatch (t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
+void hoa_processor_user_loadpatch (t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
 	t_symbol *patch_name_entered = 0;
 	
@@ -990,7 +1005,7 @@ void dynamicdsp_user_loadpatch (t_dynamicdsp *x, t_symbol *s, short argc, t_atom
 		patch_name_entered = argv->a_w.w_sym;
 		argc--; argv++;
 		
-		dynamicdsp_loadpatch (x, index, thread_request, patch_name_entered, argc, argv);
+		hoa_processor_loadpatch (x, index, thread_request, patch_name_entered, argc, argv);
 	} 
 	else 
 		object_error((t_object*)x, "no patch specified");
@@ -1001,7 +1016,7 @@ void dynamicdsp_user_loadpatch (t_dynamicdsp *x, t_symbol *s, short argc, t_atom
 // ========================================================================================================================================== //
 
 
-void dynamicdsp_bang(t_dynamicdsp *x)
+void hoa_processor_bang(t_hoa_processor *x)
 {	
 	long index = proxy_getinlet((t_object *)x);	
 	long target_index = x->target_index;
@@ -1010,12 +1025,12 @@ void dynamicdsp_bang(t_dynamicdsp *x)
 		return;
 
 	if (target_index)
-		dynamicdsp_target(x, target_index, index, ps_bang, 0, 0);
+		hoa_processor_target(x, target_index, index, ps_bang, 0, 0);
 	else
 		outlet_bang(x->in_table[index]);
 }
 
-void dynamicdsp_int(t_dynamicdsp *x, long n)
+void hoa_processor_int(t_hoa_processor *x, long n)
 {
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
@@ -1027,13 +1042,13 @@ void dynamicdsp_int(t_dynamicdsp *x, long n)
 	{
 		t_atom n_atom; 
 		atom_setlong (&n_atom, n);
-		dynamicdsp_target(x, target_index, index, ps_int, 1, &n_atom);
+		hoa_processor_target(x, target_index, index, ps_int, 1, &n_atom);
 	}
 	else
 		outlet_int(x->in_table[index], n);
 }
 
-void dynamicdsp_float(t_dynamicdsp *x, double f)
+void hoa_processor_float(t_hoa_processor *x, double f)
 {
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
@@ -1045,13 +1060,13 @@ void dynamicdsp_float(t_dynamicdsp *x, double f)
 	{
 		t_atom f_atom;
 		atom_setfloat(&f_atom, f);
-		dynamicdsp_target(x, target_index, index, ps_float, 1, &f_atom);
+		hoa_processor_target(x, target_index, index, ps_float, 1, &f_atom);
 	}
 	else
 		outlet_float(x->in_table[index], f);
 }
 
-void dynamicdsp_list(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
+void hoa_processor_list(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
@@ -1060,12 +1075,12 @@ void dynamicdsp_list(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
 		return;
 	
 	if (target_index)
-		dynamicdsp_target(x, target_index, index, ps_list, argc, argv);
+		hoa_processor_target(x, target_index, index, ps_list, argc, argv);
 	else
 		outlet_list(x->in_table[index], ps_list, argc, argv);
 }
 
-void dynamicdsp_anything(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
+void hoa_processor_anything(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
 	long index = proxy_getinlet((t_object *)x);	// proxy index
 	long target_index = x->target_index;
@@ -1074,12 +1089,12 @@ void dynamicdsp_anything(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
 		return;		
 	
 	if (target_index)
-		dynamicdsp_target(x, target_index, index, s, argc, argv);
+		hoa_processor_target(x, target_index, index, s, argc, argv);
 	else
 		outlet_anything(x->in_table[index], s, argc, argv);
 }
 
-void dynamicdsp_target(t_dynamicdsp *x, long target_index, long index, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_target(t_hoa_processor *x, long target_index, long index, t_symbol *msg, short argc, t_atom *argv)
 {	
 	t_args_struct pass_args;
 	
@@ -1093,12 +1108,12 @@ void dynamicdsp_target(t_dynamicdsp *x, long target_index, long index, t_symbol 
 		t_patcher *p = x->patch_space_ptrs[target_index - 1]->the_patch;
 		
 		if (x->patch_space_ptrs[target_index - 1]->patch_valid)
-			dynamicdsp_patcher_descend(p, (t_intmethod) dynamicdsp_targetinlets, &pass_args, x);
+			hoa_processor_patcher_descend(p, (t_intmethod) hoa_processor_targetinlets, &pass_args, x);
 	}
 }
 
 // - inlet and outlet linking using the in and out objects
-short dynamicdsp_targetinlets(t_patcher *p, t_args_struct *args)
+short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args)
 {
 	t_box *b;
 	t_inout *io;
@@ -1119,14 +1134,14 @@ short dynamicdsp_targetinlets(t_patcher *p, t_args_struct *args)
 	return (0);
 }
 
-void dynamicdsp_user_target(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
 	long target_index = argc ? atom_getlong(argv) : 0;
 	
 	x->target_index = target_index;
 }
 
-void dynamicdsp_user_target_free(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_user_target_free(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
 	t_patchspace **patch_space_ptrs;
 	
@@ -1186,7 +1201,7 @@ void dynamicdsp_user_target_free(t_dynamicdsp *x, t_symbol *msg, short argc, t_a
 // ========================================================================================================================================== //
 
 
-void dynamicdsp_autoloadbalance(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_autoloadbalance(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
 	long n = 1;
 	
@@ -1199,7 +1214,7 @@ void dynamicdsp_autoloadbalance(t_dynamicdsp *x, t_symbol *msg, short argc, t_at
 		x->request_manual_threading = 0;
 }
 
-void dynamicdsp_multithread(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_multithread(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
 	
 	long n = 1;
@@ -1210,7 +1225,7 @@ void dynamicdsp_multithread(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *
 	x->multithread_flag = n;
 }
 
-void dynamicdsp_activethreads(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_activethreads(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
 	long n = x->max_obj_threads;
 	
@@ -1225,7 +1240,7 @@ void dynamicdsp_activethreads(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom
 	x->request_num_active_threads = n;
 }
 
-void dynamicdsp_threadmap(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *argv)
+void hoa_processor_threadmap(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
 	long index = -1;
 	long thread_request = 0;
@@ -1254,13 +1269,13 @@ void dynamicdsp_threadmap(t_dynamicdsp *x, t_symbol *msg, short argc, t_atom *ar
 // ========================================================================================================================================== //
 
 
-void dynamicdsp_free_temp_memory(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
+void hoa_processor_free_temp_memory(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
 	ALIGNED_FREE((void *)s);
 }
 
 
-void dynamicdsp_perform_common(t_dynamicdsp *x, void **sig_outs, long vec_size)
+void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_size)
 {
 	t_threadspace *thread_space_ptr = x->thread_space_ptr;
 
@@ -1330,54 +1345,54 @@ void dynamicdsp_perform_common(t_dynamicdsp *x, void **sig_outs, long vec_size)
 		switch (num_active_threads)
 		{				
 			case 2:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 2);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 2);
 				break;
 				
 			case 3:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 3);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 3);
 				break;
 				
 			case 4:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 4);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 4);
 				break;
 				
 			case 5:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 5);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 5);
 				break;
 				
 			case 6:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 6);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 6);
 				break;
 				
 			case 7:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 7);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 7);
 				break;
 				
 			case 8:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 8);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 8);
 				break;
 				
 			default:
-				dynamicdsp_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, num_active_threads);
+				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, num_active_threads);
 				break;
 		}
 	}
 	else
-		dynamicdsp_threadprocess(x, (void **) sig_outs, x->thread_space_ptr[0].temp_mem_ptr, x->thread_space_ptr[0].temp_mem_size, vec_size, 0, 1);	
+		hoa_processor_threadprocess(x, (void **) sig_outs, x->thread_space_ptr[0].temp_mem_ptr, x->thread_space_ptr[0].temp_mem_size, vec_size, 0, 1);	
 }
 
-void dynamicdsp_perform64 (t_dynamicdsp *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam)
+void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam)
 {		
 	long i;
 	
 	for (i = 0; i < x->declared_sig_ins; i++)
 		x->sig_ins[i] = ins[i];
 		
-	dynamicdsp_perform_common(x, (void **) outs, vec_size);
+	hoa_processor_perform_common(x, (void **) outs, vec_size);
 }
 
 
-void dynamicdsp_sum_float(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
+void hoa_processor_sum_float(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
 {
 	t_threadspace *next_thread_ptr = 0;
 	float *next_sig_pointer;
@@ -1401,7 +1416,7 @@ void dynamicdsp_sum_float(t_threadspace *thread_space_ptr, void **sig_outs, long
 }
 
 
-void dynamicdsp_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
+void hoa_processor_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
 {
 	t_threadspace *next_thread_ptr = 0;
 	double *next_sig_pointer;
@@ -1425,7 +1440,7 @@ void dynamicdsp_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, lon
 }
 
 
-__inline void dynamicdsp_multithread_perform(t_dynamicdsp *x, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
+__inline void hoa_processor_multithread_perform(t_hoa_processor *x, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
 {
 	t_threadspace *thread_space_ptr = x->thread_space_ptr;	
 	long i;
@@ -1449,7 +1464,7 @@ __inline void dynamicdsp_multithread_perform(t_dynamicdsp *x, void **sig_outs, l
 #endif		
 	
 	// Process thread
-	dynamicdsp_threadprocess(x, thread_space_ptr->thread_temp_buffer, thread_space_ptr->temp_mem_ptr, thread_space_ptr->temp_mem_size, vec_size, 0, num_active_threads);		
+	hoa_processor_threadprocess(x, thread_space_ptr->thread_temp_buffer, thread_space_ptr->temp_mem_ptr, thread_space_ptr->temp_mem_size, vec_size, 0, num_active_threads);		
 	
 	// Wait for all the other threads to return
 	for (i = 1; i < num_active_threads; i++)
@@ -1457,19 +1472,19 @@ __inline void dynamicdsp_multithread_perform(t_dynamicdsp *x, void **sig_outs, l
 			
 	// Sum outputs
 	if (sig_size == sizeof(float))
-		dynamicdsp_sum_float(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
+		hoa_processor_sum_float(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
 	else
-		dynamicdsp_sum_double(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
+		hoa_processor_sum_double(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
 }
 
 
 #ifdef __APPLE__
-void *dynamicdsp_threadwait(void *arg)
+void *hoa_processor_threadwait(void *arg)
 #else
-DWORD WINAPI dynamicdsp_threadwait(LPVOID arg)
+DWORD WINAPI hoa_processor_threadwait(LPVOID arg)
 #endif
 {
-	t_dynamicdsp *x = (t_dynamicdsp *) ((t_threadspace *) arg)->dynamicdsp_parent;
+	t_hoa_processor *x = (t_hoa_processor *) ((t_threadspace *) arg)->hoa_processor_parent;
 	t_threadspace *thread_ptrs = (t_threadspace *)((t_threadspace *) arg)->first_thread_space;
 	t_threadspace *this_thread;
 	t_threadspace *constant_thread;
@@ -1503,7 +1518,7 @@ DWORD WINAPI dynamicdsp_threadwait(LPVOID arg)
 			
 			if (Atomic_Compare_And_Swap(0, 2, (t_int32_atomic *) &this_thread->processed))
 			{
-				dynamicdsp_threadprocess(x, this_thread->thread_temp_buffer, this_thread->temp_mem_ptr, this_thread->temp_mem_size, this_thread->vec_size, current_thread_num, num_active_threads);
+				hoa_processor_threadprocess(x, this_thread->thread_temp_buffer, this_thread->temp_mem_ptr, this_thread->temp_mem_size, this_thread->vec_size, current_thread_num, num_active_threads);
 				this_thread->processed = 1;
 			}
 		}
@@ -1516,7 +1531,7 @@ DWORD WINAPI dynamicdsp_threadwait(LPVOID arg)
 #endif
 }
 
-__inline void dynamicdsp_threadprocess(t_dynamicdsp *x, void **sig_outs, void *temp_mem_ptr, long temp_mem_size, long vec_size, long thread_num, long threads_running)
+__inline void hoa_processor_threadprocess(t_hoa_processor *x, void **sig_outs, void *temp_mem_ptr, long temp_mem_size, long vec_size, long thread_num, long threads_running)
 {
 	t_patchspace **patch_space_ptrs = x->patch_space_ptrs;
 	t_patchspace *next_patch_space_ptr = 0;
@@ -1596,7 +1611,7 @@ __inline void dynamicdsp_threadprocess(t_dynamicdsp *x, void **sig_outs, void *t
 }
 
 
-long dynamicdsp_dsp_common(t_dynamicdsp *x, long vec_size, long samp_rate)
+long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate)
 {	
 	t_patchspace *patch_space_ptr;
 	long thread_temp_buffer_size;
@@ -1634,7 +1649,7 @@ long dynamicdsp_dsp_common(t_dynamicdsp *x, long vec_size, long samp_rate)
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
 		if (patch_space_ptr->patch_valid)
-			dynamicdsp_dsp_internal (patch_space_ptr, vec_size, samp_rate);
+			hoa_processor_dsp_internal (patch_space_ptr, vec_size, samp_rate);
 	}
 	
 	x->last_vec_size = vec_size;
@@ -1646,16 +1661,16 @@ long dynamicdsp_dsp_common(t_dynamicdsp *x, long vec_size, long samp_rate)
 	return mem_fail;
 }
 
-void dynamicdsp_dsp64 (t_dynamicdsp *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+void hoa_processor_dsp64 (t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
 	// Add to dsp if common routine successful
 	
-	if (!dynamicdsp_dsp_common(x, maxvectorsize, samplerate))
-		object_method(dsp64, gensym("dsp_add64"), x, dynamicdsp_perform64, 0, NULL);
+	if (!hoa_processor_dsp_common(x, maxvectorsize, samplerate))
+		object_method(dsp64, gensym("dsp_add64"), x, hoa_processor_perform64, 0, NULL);
 }
 
 
-void dynamicdsp_dsp_internal (t_patchspace *patch_space_ptr, long vec_size, long samp_rate)
+void hoa_processor_dsp_internal (t_patchspace *patch_space_ptr, long vec_size, long samp_rate)
 {
 	// Free the old dspchain
 		
@@ -1674,7 +1689,7 @@ void dynamicdsp_dsp_internal (t_patchspace *patch_space_ptr, long vec_size, long
 
 // - inlet and outlet linking using the in and out objects
 
-short dynamicdsp_linkinlets(t_patcher *p, t_dynamicdsp *x)
+short hoa_processor_linkinlets(t_patcher *p, t_hoa_processor *x)
 {
 	t_box *b;
 	t_inout *io;
@@ -1690,7 +1705,7 @@ short dynamicdsp_linkinlets(t_patcher *p, t_dynamicdsp *x)
 	return (0);
 }
 
-short dynamicdsp_linkoutlets(t_patcher *p, t_dynamicdsp *x)
+short hoa_processor_linkoutlets(t_patcher *p, t_hoa_processor *x)
 {
 	t_box *b;
 	t_inout *io;
@@ -1708,7 +1723,7 @@ short dynamicdsp_linkoutlets(t_patcher *p, t_dynamicdsp *x)
 
 // - inlet and outlet removal using the in and out objects
 
-short dynamicdsp_unlinkinlets(t_patcher *p, t_dynamicdsp *x)
+short hoa_processor_unlinkinlets(t_patcher *p, t_hoa_processor *x)
 {
 	t_box *b;
 	t_inout *io;
@@ -1724,7 +1739,7 @@ short dynamicdsp_unlinkinlets(t_patcher *p, t_dynamicdsp *x)
 	return (0);
 }
 
-short dynamicdsp_unlinkoutlets(t_patcher *p, t_dynamicdsp *x)
+short hoa_processor_unlinkoutlets(t_patcher *p, t_hoa_processor *x)
 {
 	t_box *b;
 	t_inout *io;
@@ -1745,7 +1760,7 @@ short dynamicdsp_unlinkoutlets(t_patcher *p, t_dynamicdsp *x)
 // ========================================================================================================================================== //
 
 
-void dynamicdsp_dblclick(t_dynamicdsp *x)
+void hoa_processor_dblclick(t_hoa_processor *x)
 {
 	long i;
 	
@@ -1753,13 +1768,13 @@ void dynamicdsp_dblclick(t_dynamicdsp *x)
 	{
 		if (x->patch_space_ptrs[i]->the_patch)
 		{
-			dynamicdsp_open(x, i + 1);
+			hoa_processor_open(x, i + 1);
 			break;
 		}
 	}
 }
 
-void dynamicdsp_open(t_dynamicdsp *x, long index)
+void hoa_processor_open(t_hoa_processor *x, long index)
 {
 	t_atom a;
 	atom_setlong (&a, index - 1);
@@ -1768,10 +1783,10 @@ void dynamicdsp_open(t_dynamicdsp *x, long index)
 	if (index > x->patch_spaces_allocated) return;
 	if (!x->patch_space_ptrs[index - 1]->patch_valid) return;
 	
-	defer(x,(method)dynamicdsp_doopen, 0L, 1, &a);
+	defer(x,(method)hoa_processor_doopen, 0L, 1, &a);
 }
 
-void dynamicdsp_doopen(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
+void hoa_processor_doopen(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
 	long index = atom_getlong(argv);
 	
@@ -1779,15 +1794,15 @@ void dynamicdsp_doopen(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
 		mess0((t_object *)x->patch_space_ptrs[index]->the_patch, ps_front);		// this will always do the right thing
 }
 
-void dynamicdsp_wclose(t_dynamicdsp *x, long index)
+void hoa_processor_wclose(t_hoa_processor *x, long index)
 {
 	t_atom a;
 	atom_setlong (&a, index - 1);
 	
-	defer(x,(method)dynamicdsp_dowclose, 0L, 1, &a);
+	defer(x,(method)hoa_processor_dowclose, 0L, 1, &a);
 }
 
-void dynamicdsp_dowclose(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
+void hoa_processor_dowclose(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
 {
 	long index = atom_getlong(argv);
 	
@@ -1805,14 +1820,14 @@ void dynamicdsp_dowclose(t_dynamicdsp *x, t_symbol *s, short argc, t_atom *argv)
 // ========================================================================================================================================== //
 
 
-short dynamicdsp_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_dynamicdsp *x)
+short hoa_processor_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_hoa_processor *x)
 {
 	t_box *b;
 	t_patcher *p2;
 	long index;
 	t_object *assoc = 0;
-	object_method(p, ps_getassoc, &assoc);				// Avoid recursion into a poly / pfft / dynamicdsp~
-	if (assoc && (t_dynamicdsp *) assoc != x) 
+	object_method(p, ps_getassoc, &assoc);				// Avoid recursion into a poly / pfft / hoa.process~
+	if (assoc && (t_hoa_processor *) assoc != x) 
 		return 0;
 
 	// CHANGED - DO NOT PASS x AS ARG
@@ -1825,7 +1840,7 @@ short dynamicdsp_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_dyna
 		{
 			index = 0;
 			while ((p2 = (t_patcher*)object_subpatcher(jbox_get_object(b), &index, arg)))
-				if (dynamicdsp_patcher_descend(p2, fn, arg, x))
+				if (hoa_processor_patcher_descend(p2, fn, arg, x))
 					return 1;
 		}
 	}
@@ -1833,7 +1848,7 @@ short dynamicdsp_patcher_descend(t_patcher *p, t_intmethod fn, void *arg, t_dyna
 	return (0);
 }
 
-short dynamicdsp_setsubassoc(t_patcher *p, t_dynamicdsp *x)
+short hoa_processor_setsubassoc(t_patcher *p, t_hoa_processor *x)
 {
 	t_object *assoc;
 	object_method(p, ps_getassoc, &assoc);
@@ -1843,7 +1858,7 @@ short dynamicdsp_setsubassoc(t_patcher *p, t_dynamicdsp *x)
 	return 0;
 }
 
-void dynamicdsp_pupdate(t_dynamicdsp *x, void *b, t_patcher *p)				// broken in Max 4 due to renaming......
+void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p)				// broken in Max 4 due to renaming......
 {
 	t_patchspace *patch_space_ptr;
 	long i;
@@ -1854,11 +1869,11 @@ void dynamicdsp_pupdate(t_dynamicdsp *x, void *b, t_patcher *p)				// broken in 
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
 		if (patch_space_ptr->the_patch == p) 
-			dynamicdsp_loadpatch (x, i, 0, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
+			hoa_processor_loadpatch (x, i, 0, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
 	}
 }
 
-void *dynamicdsp_subpatcher(t_dynamicdsp *x, long index, void *arg)
+void *hoa_processor_subpatcher(t_hoa_processor *x, long index, void *arg)
 {		
 	 if (arg && (long) arg != 1) 
 		if (!NOGOOD(arg))								// arg might be good but not a valid object pointer
@@ -1872,7 +1887,7 @@ void *dynamicdsp_subpatcher(t_dynamicdsp *x, long index, void *arg)
 }
 
 
-void dynamicdsp_parentpatcher(t_dynamicdsp *x, t_patcher **parent)
+void hoa_processor_parentpatcher(t_hoa_processor *x, t_patcher **parent)
 {
 	*parent = x->parent_patch;
 }
@@ -1884,13 +1899,13 @@ void dynamicdsp_parentpatcher(t_dynamicdsp *x, t_patcher **parent)
 
 // Make a new patchspace
 
-t_patchspace *dynamicdsp_new_patch_space (t_dynamicdsp *x,long index)
+t_patchspace *hoa_processor_new_patch_space (t_hoa_processor *x,long index)
 {
 	t_patchspace *patch_space_ptr;
 	
 	x->patch_space_ptrs[index] = patch_space_ptr = (t_patchspace *)t_getbytes(sizeof(t_patchspace));
 	
-	dynamicdsp_init_patch_space (patch_space_ptr);
+	hoa_processor_init_patch_space (patch_space_ptr);
 	x->patch_spaces_allocated++;
 	
 	return patch_space_ptr;
@@ -1899,7 +1914,7 @@ t_patchspace *dynamicdsp_new_patch_space (t_dynamicdsp *x,long index)
 
 // Initialise a patchspace 
 
-void dynamicdsp_init_patch_space (t_patchspace *patch_space_ptr)
+void hoa_processor_init_patch_space (t_patchspace *patch_space_ptr)
 {		
 	patch_space_ptr->the_patch = 0;
 	patch_space_ptr->patch_name_in = 0;
@@ -1917,7 +1932,7 @@ void dynamicdsp_init_patch_space (t_patchspace *patch_space_ptr)
 
 // Free the patch and dspchain
 
-void dynamicdsp_free_patch_and_dsp (t_dynamicdsp *x, t_patchspace *patch_space_ptr)
+void hoa_processor_free_patch_and_dsp (t_hoa_processor *x, t_patchspace *patch_space_ptr)
 {
 	// free old patch and dspchain
 	
@@ -1926,8 +1941,8 @@ void dynamicdsp_free_patch_and_dsp (t_dynamicdsp *x, t_patchspace *patch_space_p
 	
 	if (patch_space_ptr->the_patch)
 	{
-		if (x->declared_ins) dynamicdsp_patcher_descend(patch_space_ptr->the_patch, (t_intmethod) dynamicdsp_unlinkinlets, x, x);
-		if (x->declared_outs) dynamicdsp_patcher_descend(patch_space_ptr->the_patch, (t_intmethod) dynamicdsp_unlinkoutlets, x, x);
+		if (x->declared_ins) hoa_processor_patcher_descend(patch_space_ptr->the_patch, (t_intmethod) hoa_processor_unlinkinlets, x, x);
+		if (x->declared_outs) hoa_processor_patcher_descend(patch_space_ptr->the_patch, (t_intmethod) hoa_processor_unlinkoutlets, x, x);
 		freeobject((t_object *)patch_space_ptr->the_patch);
 	}
 }
@@ -1938,29 +1953,29 @@ void dynamicdsp_free_patch_and_dsp (t_dynamicdsp *x, t_patchspace *patch_space_p
 // ========================================================================================================================================== //
 
 
-// Note that objects wishing to query the parent dynamicdsp~ object should call the functions in dynamicdsp.h.
+// Note that objects wishing to query the parent hoa.process~ object should call the functions in hoa.process.h.
 // These act as suitable wrappers to send the appropriate message to the parent object and returns values as appropriate
 
 
 ////////////////////////////////////////////////// Signal IO Queries //////////////////////////////////////////////////
 
 
-void *dynamicdsp_query_declared_sigins(t_dynamicdsp *x)
+void *hoa_processor_query_declared_sigins(t_hoa_processor *x)
 {
 	return (void *) x->declared_sig_ins;
 }
 
-void *dynamicdsp_query_declared_sigouts(t_dynamicdsp *x)
+void *hoa_processor_query_declared_sigouts(t_hoa_processor *x)
 {
 	return (void *) x->declared_sig_outs;
 }
 
-void *dynamicdsp_query_sigins(t_dynamicdsp *x)
+void *hoa_processor_query_sigins(t_hoa_processor *x)
 {
 	return (void *) x->sig_ins;
 }
 
-void *dynamicdsp_query_outptrs_ptr(t_dynamicdsp *x, long index)
+void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index)
 {
 	if (index <= x->patch_spaces_allocated)
 		return &x->patch_space_ptrs[index - 1]->out_ptrs;
@@ -1972,21 +1987,21 @@ void *dynamicdsp_query_outptrs_ptr(t_dynamicdsp *x, long index)
 //////////////////////////////////////////////////// State Queries ////////////////////////////////////////////////////
 
 
-void dynamicdsp_client_set_patch_on (t_dynamicdsp *x, long index, long state)
+void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long state)
 {
 	if (state) state = 1;
 	if (index <= x->patch_spaces_allocated)
 		x->patch_space_ptrs[index - 1]->patch_on = state;
 }
 
-void dynamicdsp_client_set_patch_busy (t_dynamicdsp *x, long index, long state)
+void hoa_processor_client_set_patch_busy (t_hoa_processor *x, long index, long state)
 {
 	if (state) state = 1;
 	if (index <= x->patch_spaces_allocated)
 		x->patch_space_ptrs[index - 1]->patch_busy = state;
 }
 
-void *dynamicdsp_client_get_patch_on (t_dynamicdsp *x, long index)
+void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
 {
 	if (index <= x->patch_spaces_allocated)
 		return (void *) (long) x->patch_space_ptrs[index - 1]->patch_on;
@@ -1994,7 +2009,7 @@ void *dynamicdsp_client_get_patch_on (t_dynamicdsp *x, long index)
 	return 0;
 }
 
-void *dynamicdsp_client_get_patch_busy (t_dynamicdsp *x, long index)
+void *hoa_processor_client_get_patch_busy (t_hoa_processor *x, long index)
 {
 	if (index <= x->patch_spaces_allocated)
 		return (void *) (long) x->patch_space_ptrs[index - 1]->patch_busy;
@@ -2006,13 +2021,13 @@ void *dynamicdsp_client_get_patch_busy (t_dynamicdsp *x, long index)
 //////////////////////////////////////////////// Tempory Memory Queries ///////////////////////////////////////////////
 
 
-// dynamicdsp~ provides memory per audio thread for temporary calculations. 
+// hoa.process~ provides memory per audio thread for temporary calculations. 
 // Objects requiring temporary memory during their perform method request a minimum size during their dsp routine
 // The pointer should be requested during the perform routine, and should not be stored
 // This reduces memory alloaction, and potentially increases speed by keeping temporary memory in the cache
 
 
-void *dynamicdsp_query_temp_mem (t_dynamicdsp *x, long index)
+void *hoa_processor_query_temp_mem (t_hoa_processor *x, long index)
 {
 	if (index <= x->patch_spaces_allocated)
 		return &x->patch_space_ptrs[index - 1]->temp_mem_ptr;
@@ -2020,7 +2035,7 @@ void *dynamicdsp_query_temp_mem (t_dynamicdsp *x, long index)
 		return 0;
 }
 
-void *dynamicdsp_client_temp_mem_resize (t_dynamicdsp *x, long index, long size)
+void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long size)
 {	
 	schedule_grow_mem_swap(&x->temp_mem, x->max_obj_threads * size, size);
 	
