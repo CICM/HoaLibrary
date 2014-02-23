@@ -692,15 +692,7 @@ void hoa_processor_free(t_hoa_processor *x)
 
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
-	if (m == ASSIST_OUTLET)
-	{
-		if (a <	x->declared_sig_outs)
-			sprintf(s,"Signal Out %ld", a + 1); 
-		else
-			sprintf(s,"Message Out %ld", a - x->declared_sig_outs + 1); 
-	}
-	else 
-		sprintf(s,"Signal / Message In %ld", a + 1);
+	sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
 }
 
 
@@ -1405,10 +1397,7 @@ __inline void hoa_processor_multithread_perform(t_hoa_processor *x, void **sig_o
 		while (thread_space_ptr[i].processed != 1);
 			
 	// Sum outputs
-	if (SIG_SIZE == sizeof(float))
-		hoa_processor_sum_float(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
-	else
-		hoa_processor_sum_double(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
+	hoa_processor_sum_double(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
 }
 
 
@@ -1792,7 +1781,7 @@ short hoa_processor_setsubassoc(t_patcher *p, t_hoa_processor *x)
 	return 0;
 }
 
-void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p)				// broken in Max 4 due to renaming......
+void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p)
 {
 	t_patchspace *patch_space_ptr;
 	long i;
