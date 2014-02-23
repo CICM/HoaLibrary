@@ -80,8 +80,7 @@
 									"numoutlets" : 2,
 									"outlettype" : [ "float", "bang" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 425.0, 293.0, 50.0, 19.0 ],
-									"presentation_rect" : [ 428.0, 293.0, 0.0, 0.0 ]
+									"patching_rect" : [ 425.0, 293.0, 50.0, 19.0 ]
 								}
 
 							}
@@ -187,6 +186,7 @@
 							}
 , 							{
 								"box" : 								{
+									"camera" : [ 0.0, 0.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-10",
 									"maxclass" : "hoa.scope3D~",

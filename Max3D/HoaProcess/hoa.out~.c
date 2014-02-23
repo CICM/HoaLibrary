@@ -8,7 +8,7 @@
 
 #include "../hoa.max.h"
 #include "AH_VectorOps.h"
-#include "hoa.patcher~.h"
+#include "hoa.process~.h"
 
 typedef struct _hoa_out
 {
@@ -29,8 +29,6 @@ void hoa_out_assist(t_hoa_out *x, void *b, long m, long a, char *s);
 void hoa_out_int(t_hoa_out *x, long intin);
 
 void hoa_out_dsp64 (t_hoa_out *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-t_int *hoa_out_perform_scalar(t_int *w);
-t_int *hoa_out_perform(t_int *w);
 void hoa_out_perform_scalar64 (t_hoa_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
 #ifdef VECTOR_F64_128BIT
 void hoa_out_perform64 (t_hoa_out *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
@@ -56,14 +54,14 @@ int C74_EXPORT main(void)
 void *hoa_out_new(long outlet_num)
 {
     t_hoa_out *x = (t_hoa_out *)object_alloc(hoa_out_class);
-	void *dynamicdsp_parent;
+	void *hoaprocessor_parent;
 
     dsp_setup((t_pxobject *)x, 1);
 	
-	dynamicdsp_parent = Get_Dynamic_Object();
+	hoaprocessor_parent = Get_HoaProcessor_Object();
 	
-	x->outptrs_ptr = Dynamic_Get_Outptrs_Ptr(dynamicdsp_parent, Get_Dynamic_Patch_Index(dynamicdsp_parent));
-	x->declared_sig_outs = Dynamic_Get_Declared_Sigouts(dynamicdsp_parent);
+	x->outptrs_ptr = HoaProcessor_Get_Outptrs_Ptr(hoaprocessor_parent, Get_HoaProcessor_Patch_Index(hoaprocessor_parent));
+	x->declared_sig_outs = HoaProcessor_Get_Declared_Sigouts(hoaprocessor_parent);
 	
 	x->outlet_num = outlet_num;
 		
