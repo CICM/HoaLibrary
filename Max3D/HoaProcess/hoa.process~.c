@@ -21,14 +21,14 @@
 #include "hoa.process~.h"
 
 // ========================================================================================================================================== //
-// Global Varibles
+// Global Varibles and defines
 // ========================================================================================================================================== //
 
 t_class *hoa_processor_class;
 
 static long processor_num_actual_threads;
-static long sig_size;
 
+#define SIG_SIZE sizeof(double)
 #define MAX_NUM_PATCHES 4096
 #define MAX_ARGS 16
 
@@ -209,6 +209,9 @@ typedef struct _hoa_processor
 	// Temporary Memory Variables
 	
 	t_safe_mem_swap temp_mem;
+	
+	// Hoa stuff
+	Hoa3D::Ambisonic*   f_ambisonic;
 	
 } t_hoa_processor;
 
@@ -408,8 +411,6 @@ int C74_EXPORT main(void)
 	ps_list = gensym("list");
 	ps_args = gensym("args");
 	
-	sig_size = ((maxversion() & 0x3FFF) >= 0x600) ? sizeof(double) : sizeof(float);
-	
 	return 0;
 }
 
@@ -430,11 +431,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	short ac = 0;
 	t_atom av[MAX_ARGS];						
 	
-	long declared_sig_ins = 2;
-	long declared_sig_outs = 2;
-	long declared_ins = 2;
-	long declared_outs = 2;	
-	long max_obj_threads = processor_num_actual_threads;
+	x->max_obj_threads = processor_num_actual_threads;
 	
 #ifdef __APPLE__
 	pthread_attr_t tattr;
@@ -458,48 +455,10 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 		argc--; argv++;
 	}
 	
-	// Check if there is a declaration of the number of inputs and outs (message and signal)
-	if (argc && atom_gettype(argv) == A_LONG)
-	{
-		if (atom_getlong(argv) >= 0 && atom_getlong(argv) < 256)
-			declared_sig_ins = atom_getlong(argv);
-		argc--; argv++;
-	}
-	if (argc && atom_gettype(argv) == A_LONG)
-	{
-		if (atom_getlong(argv) >= 0 && atom_getlong(argv) < 256)
-			declared_sig_outs = atom_getlong(argv);
-		argc--; argv++;
-	}
-	if (argc && atom_gettype(argv) == A_LONG)
-	{
-		if (atom_getlong(argv) >= 0 && atom_getlong(argv) < 256)
-			declared_ins = atom_getlong(argv);
-		argc--; argv++;
-	}
-	if (argc && atom_gettype(argv) == A_LONG)
-	{
-		if (atom_getlong(argv) >= 0 && atom_getlong(argv) < 256)
-			declared_outs = atom_getlong(argv);
-		argc--; argv++;
-	}
-	if (argc && atom_gettype(argv) == A_LONG)
-	{
-		max_obj_threads = atom_getlong(argv);
-		if (max_obj_threads < 1)
-			max_obj_threads = 1;
-		if (max_obj_threads > processor_num_actual_threads)
-			max_obj_threads = processor_num_actual_threads;
-		argc--; argv++;
-	}
-	
-	x->max_obj_threads = max_obj_threads;
-	
 	// Get arguments to patch that is being loaded if there are any
-	
 	if (argc && atom_gettype(argv) == A_SYM) 
 	{
-		tempsym = argv->a_w.w_sym;
+		tempsym = atom_getsym(argv);
 		argc--; argv++;
 		if (tempsym == ps_args) 
 		{				
@@ -512,7 +471,80 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 		}
 	}
 	
+	// Set other variables to defaults
+	
+	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
+	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
+	x->declared_ins = 0;
+	x->declared_outs = 0;
+	
+	x->patch_spaces_allocated = 0;
+	x->update_thread_map = 0;
+	x->target_index = 0;
+	
+	x->last_vec_size = 64;
+	x->last_samp_rate = 44100;
+	
+	x->in_table = 0;
+	x->out_table = 0;
+	
+	x->patch_is_loading = 0;
+	
+	// Create signal in/out buffers and zero
+	
+	x->sig_ins = (void **) ALIGNED_MALLOC (x->declared_sig_ins * sizeof(void *));
+	x->sig_outs = (void **) ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
+	
+	for (i = 0; i < x->declared_sig_ins; i++)
+		x->sig_ins[i] = 0;
+	for (i = 0; i < x->declared_sig_outs; i++)
+		x->sig_outs[i] = 0;
+	
+	// Make non-signal outlets first
+	
+	if (x->declared_outs)
+	{
+		x->out_table = (t_outvoid *) t_getbytes(x->declared_outs * sizeof(t_outvoid));
+		for (i = x->declared_outs - 1; i >= 0; i--)
+			x->out_table[i] = outlet_new((t_object *)x, 0);
+	}
+	
+	// Make non-signal inlets
+	
+	if (x->declared_ins)
+	{
+		x->in_table = (t_outvoid *)t_getbytes(x->declared_ins * sizeof(t_outvoid));
+		for (i = 0; i < x->declared_ins; i++)
+			x->in_table[i] = outlet_new(0L, 0L);											// make generic unowned inlets
+	}
+	
+	// Make signal ins
+	
+	x->num_proxies = (x->declared_sig_ins > x->declared_ins) ? x->declared_sig_ins : x->declared_ins;
+	
+	dsp_setup((t_pxobject *) x, x->num_proxies);
+	x->x_obj.z_misc = Z_NO_INPLACE;															// due to output zeroing!!
+	
+	// Make signal outs
+	
+	for (i = 0; i < x->declared_sig_outs; i++)
+		outlet_new((t_object *)x, "signal");
+	
+	// Initialise patcher symbol
+	
+	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
+	
+	// Load patches and initialise it for all harmonics
+		
+	if (patch_name_entered)
+	{
+		for (i=0; i<x->f_ambisonic->getNumberOfHarmonics(); i++)
+			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
+	}
+	
+	// --------------------
 	// Multithreading Setup - defaults to multi-threading off for nested objects, on for non-nested
+	// --------------------
 	
 	if (Get_HoaProcessor_Object()) 
 		x->multithread_flag = 0;									
@@ -525,10 +557,10 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 
 	// Multithreading variables
 	
-	x->thread_space_ptr = (t_threadspace *) ALIGNED_MALLOC (max_obj_threads * sizeof(t_threadspace));
+	x->thread_space_ptr = (t_threadspace *) ALIGNED_MALLOC (x->max_obj_threads * sizeof(t_threadspace));
 	x->manual_threading = 1;
 	x->request_manual_threading = 1;
-	x->request_num_active_threads = max_obj_threads;
+	x->request_num_active_threads = x->max_obj_threads;
 	x->thread_temp_buffer_size = 0;
 	
 	// Setup temporary memory 
@@ -537,16 +569,16 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 				
 	// Create and eetup each threads variables
 	
-	for (i = 0; i < max_obj_threads; i++)
+	for (i = 0; i < x->max_obj_threads; i++)
 	{
 		x->thread_space_ptr[i].pth = 0;
-		x->thread_space_ptr[i].thread_temp_buffer = (void**)ALIGNED_MALLOC (declared_sig_outs * sizeof(void *));
+		x->thread_space_ptr[i].thread_temp_buffer = (void**)ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
 		x->thread_space_ptr[i].temp_mem_ptr = 0;
 		x->thread_space_ptr[i].hoa_processor_parent = x;
 		x->thread_space_ptr[i].thread_num = i;
 		x->thread_space_ptr[i].first_thread_space = x->thread_space_ptr;
 		
-		for (j = 0; j < declared_sig_outs; j++)
+		for (j = 0; j < x->declared_sig_outs; j++)
 			x->thread_space_ptr[i].thread_temp_buffer[j] = 0;
 	}
 	
@@ -559,10 +591,9 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	x->tick_semaphore  = CreateSemaphore(NULL, 0, max_obj_threads - 1, NULL);
 #endif 
 
-	for (i = 1; i < max_obj_threads; i++)
+	for (i = 1; i < x->max_obj_threads; i++)
 	{
 		x->thread_space_ptr[i].processed = 1;
-		//x->thread_space_ptr[i].tick_semaphore = x->tick_semaphore;
 #ifdef __APPLE__
 		pthread_attr_init (&tattr);																// initialized with default attributes 
 		pthread_attr_getschedparam (&tattr, &param);											// safe to get existing scheduling param 
@@ -576,90 +607,14 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 #endif
 	}
 	
-	// Set other variables to defaults
-	
-	x->declared_sig_ins = declared_sig_ins;
-	x->declared_sig_outs = declared_sig_outs;
-	x->declared_ins = declared_ins;
-	x->declared_outs = declared_outs;
-	
-	x->patch_spaces_allocated = 0;
-	x->update_thread_map = 0;
-	x->target_index = 0;	
-	
-	x->last_vec_size = 64;
-	x->last_samp_rate = 44100;
-	
-	x->in_table = 0;
-	x->out_table = 0;
-	
-	x->patch_is_loading = 0;
-	
-	// Create signal in/out buffers and zero
-	
-	x->sig_ins = (void **) ALIGNED_MALLOC (declared_sig_ins * sizeof(void *));
-	x->sig_outs = (void **) ALIGNED_MALLOC (declared_sig_outs * sizeof(void *));
-	
-	for (i = 0; i < declared_sig_ins; i++) 
-		x->sig_ins[i] = 0;
-	for (i = 0; i < declared_sig_outs; i++) 
-		x->sig_outs[i] = 0;
-	
-	// Make non-signal outlets first
-	
-	if (declared_outs) 
-	{
-		x->out_table = (t_outvoid *) t_getbytes(declared_outs * sizeof(t_outvoid));
-		for (i = declared_outs - 1; i >= 0; i--)
-			x->out_table[i] = outlet_new((t_object *)x, 0);	
-	}
-	
-	// Make non-signal inlets 
-	
-	if (declared_ins) 
-	{
-		x->in_table = (t_outvoid *)t_getbytes(declared_ins * sizeof(t_outvoid));
-		for (i = 0; i < declared_ins; i++)
-			x->in_table[i] = outlet_new(0L, 0L);											// make generic unowned inlets
-	}
-	
-	// Make signal ins
-	
-	x->num_proxies = (declared_sig_ins > declared_ins) ? declared_sig_ins : declared_ins;
-	
-	dsp_setup((t_pxobject *) x, x->num_proxies);
-	x->x_obj.z_misc = Z_NO_INPLACE;															// due to output zeroing!!
-	
-	// Make signal outs
-	
-	for (i = 0; i < declared_sig_outs; i++)
-		outlet_new((t_object *)x, "signal");
-	
-	// Initialise patcher symbol
-	
-	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
-	
-	// Load patch and initialise
-	
-	/*
-	if (patch_name_entered)
-		hoa_processor_loadpatch(x, 0, -1, patch_name_entered, ac, av);
-	*/
-	
-	if (patch_name_entered)
-	{
-		for (i=0; i<ambisonicOrder*3; i++)
-			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
-	}
-	
 	return (x);
 }
 
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
-	boxinfos->autoconnect_inputs = x->num_proxies;
-	boxinfos->autoconnect_outputs = x->declared_outs;
+	boxinfos->autoconnect_inputs = x->f_ambisonic->getNumberOfHarmonics();//x->num_proxies;
+	boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();//x->declared_outs;
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
 	return HOA_ERR_NONE;
@@ -812,6 +767,7 @@ void hoa_processor_loadpatch (t_hoa_processor *x, long index, long thread_reques
 	t_fourcc type;
 	t_fourcc filetypelist = 'JSON';
 	long patch_spaces_allocated = x->patch_spaces_allocated;
+	long harmonic_band, harmonic_argument;
 	long i;
 	
 	short patch_path;
@@ -911,9 +867,12 @@ void hoa_processor_loadpatch (t_hoa_processor *x, long index, long thread_reques
 		return;
 	}
 	
-	// Change the window name
+	// Change the window name to : "patchname (index) [band arg]"
 	
-	snprintf(windowname, 256, "%s %s%ld%s", patch_name_in->s_name, "[", index + 1, "]");
+	harmonic_band = x->f_ambisonic->getHarmonicBand(index);
+	harmonic_argument = x->f_ambisonic->getHarmonicArgument(index);
+	
+	snprintf(windowname, 256, "%s (%ld) [%ld %ld]", patch_name_in->s_name, index, harmonic_band, harmonic_argument);
 	jpatcher_set_title((t_object*)p, gensym(windowname));
 	
 	// Set the relevant associations
@@ -1295,7 +1254,7 @@ void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_
 	// Zero Outputs
 	
 	for (i = 0; i < declared_sig_outs; i++) 
-		memset(sig_outs[i], 0, sig_size * vec_size);
+		memset(sig_outs[i], 0, SIG_SIZE * vec_size);
 	
 	if (x->x_obj.z_disabled)
 		return;
@@ -1391,31 +1350,6 @@ void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins,
 	hoa_processor_perform_common(x, (void **) outs, vec_size);
 }
 
-
-void hoa_processor_sum_float(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
-{
-	t_threadspace *next_thread_ptr = 0;
-	float *next_sig_pointer;
-	float *io_pointer;
-	long i, j, k;
-
-	// Sum output of threads for each signal outlet
-	
-	for (i = 0; i < declared_sig_outs; i++) 
-	{	
-		for (j = 0; j < num_active_threads; j++)
-		{
-			next_thread_ptr = thread_space_ptr + j;
-			next_sig_pointer = (float*)next_thread_ptr->thread_temp_buffer[i];
-			io_pointer = (float*)sig_outs[i];
-			
-			for (k = 0; k < vec_size; k++)
-				*(io_pointer++) += *(next_sig_pointer++);
-		}	
-	} 
-}
-
-
 void hoa_processor_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
 {
 	t_threadspace *next_thread_ptr = 0;
@@ -1471,7 +1405,7 @@ __inline void hoa_processor_multithread_perform(t_hoa_processor *x, void **sig_o
 		while (thread_space_ptr[i].processed != 1);
 			
 	// Sum outputs
-	if (sig_size == sizeof(float))
+	if (SIG_SIZE == sizeof(float))
 		hoa_processor_sum_float(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
 	else
 		hoa_processor_sum_double(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
@@ -1554,7 +1488,7 @@ __inline void hoa_processor_threadprocess(t_hoa_processor *x, void **sig_outs, v
 	// Zero outputs
 	
 	for (i = 0; i < declared_sig_outs; i++) 
-		memset(sig_outs[i], 0, sig_size * vec_size);
+		memset(sig_outs[i], 0, SIG_SIZE * vec_size);
 	
 	if (x->manual_threading)
 	{
@@ -1623,7 +1557,7 @@ long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate)
 	
 	// Memory allocation for temporary thread buffers 
 	
-	thread_temp_buffer_size = vec_size * sig_size;
+	thread_temp_buffer_size = vec_size * SIG_SIZE;
 	
 	if (thread_temp_buffer_size != x->thread_temp_buffer_size)
 	{

@@ -29,13 +29,26 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-13",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 301.0, 23.0, 105.0, 20.0 ],
+					"text" : "loadmess args #1"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"comment" : "",
 					"id" : "obj-15",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 6.0, 140.5, 25.0, 25.0 ],
-					"presentation_rect" : [ 115.0, 140.5, 0.0, 0.0 ]
+					"patching_rect" : [ 6.0, 140.5, 25.0, 25.0 ]
 				}
 
 			}
@@ -58,8 +71,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 160.0, 16.0, 25.0, 25.0 ],
-					"presentation_rect" : [ 155.0, 11.5, 0.0, 0.0 ]
+					"patching_rect" : [ 160.0, 16.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -212,17 +224,6 @@
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 374.0, 101.0, 60.0, 20.0 ],
 					"text" : "hoa.in~ 1"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-13",
-					"local" : 1,
-					"maxclass" : "ezdac~",
-					"numinlets" : 2,
-					"numoutlets" : 0,
-					"patching_rect" : [ 545.5, 16.0, 45.0, 45.0 ]
 				}
 
 			}
