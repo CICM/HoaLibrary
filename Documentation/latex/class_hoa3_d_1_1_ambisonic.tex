@@ -96,7 +96,7 @@ Definition at line 30 of file Ambisonic.\-cpp.
 
 Retrieve the argument of an harmonic. 
 
-The argument of an harmonic is in the range -\/band to band. The harmonics are sorted by their bands, from 0 to the decomposition order. In each band contains 2 $\ast$ band + 1 harmonics, sorted by their arguments in the range -\/band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. For the first bands, the harmonics arrangement is h\mbox{[}0, 0\mbox{]} h\mbox{[}1, -\/1\mbox{]} h\mbox{[}1, 0\mbox{]} h\mbox{[}1, 1\mbox{]} h\mbox{[}2, -\/2\mbox{]} h\mbox{[}2, -\/1\mbox{]} h\mbox{[}2, 0\mbox{]} h\mbox{[}2, 1\mbox{]} h\mbox{[}2, 2\mbox{]} etc. with h\mbox{[}band, argument\mbox{]}.
+The argument of an harmonic is in the range -\/band to band. The harmonics are sorted by their bands, from 0 to the decomposition order. In each band contains 2 $\ast$ band + 1 harmonics, sorted by their arguments in the range -\/band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. For the first bands, the harmonics arrangement is h\mbox{[}0, 0\mbox{]} h\mbox{[}1, 0\mbox{]} h\mbox{[}1, -\/1\mbox{]} h\mbox{[}1, 1\mbox{]} h\mbox{[}2, 0\mbox{]} h\mbox{[}2, -\/1\mbox{]} h\mbox{[}2, 1\mbox{]} h\mbox{[}2, -\/2\mbox{]} h\mbox{[}2, 2\mbox{]} etc. with h\mbox{[}band, argument\mbox{]}.
 
 
 \begin{DoxyParams}{Parameters}
@@ -104,7 +104,7 @@ The argument of an harmonic is in the range -\/band to band. The harmonics are s
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The method returns the argument of an harmonic or 0 if the harmonic does not exist. 
+The method returns the argument of an harmonic if it exists, generate an error otherwise. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
 \hyperlink{class_hoa3_d_1_1_ambisonic_aa7db0765bbc3957771de1771f8617631}{get\-Harmonic\-Band()} 
@@ -113,7 +113,7 @@ The method returns the argument of an harmonic or 0 if the harmonic does not exi
 \end{DoxySeeAlso}
 
 
-Definition at line 61 of file Ambisonic.\-h.
+Definition at line 63 of file Ambisonic.\-h.
 
 \hypertarget{class_hoa3_d_1_1_ambisonic_aa7db0765bbc3957771de1771f8617631}{\index{Hoa3\-D\-::\-Ambisonic@{Hoa3\-D\-::\-Ambisonic}!get\-Harmonic\-Band@{get\-Harmonic\-Band}}
 \index{get\-Harmonic\-Band@{get\-Harmonic\-Band}!Hoa3D::Ambisonic@{Hoa3\-D\-::\-Ambisonic}}
@@ -126,7 +126,7 @@ Definition at line 61 of file Ambisonic.\-h.
 
 Retrieve the band of an harmonic. 
 
-The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 $\ast$ band + 1 harmonics in the range -\/band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. For the first bands, the harmonics arrangement is h\mbox{[}0, 0\mbox{]} h\mbox{[}1, -\/1\mbox{]} h\mbox{[}1, 0\mbox{]} h\mbox{[}1, 1\mbox{]} h\mbox{[}2, -\/2\mbox{]} h\mbox{[}2, -\/1\mbox{]} h\mbox{[}2, 0\mbox{]} h\mbox{[}2, 1\mbox{]} h\mbox{[}2, 2\mbox{]} etc. with h\mbox{[}band, argument\mbox{]}.
+The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 $\ast$ band + 1 harmonics in the range -\/band to band. The harmonic input and output arrays in process method of ambisonic classes must have this configuration. For the first bands, the harmonics arrangement is h\mbox{[}0, 0\mbox{]} h\mbox{[}1, 0\mbox{]} h\mbox{[}1, -\/1\mbox{]} h\mbox{[}1, 1\mbox{]} h\mbox{[}2, 0\mbox{]} h\mbox{[}2, -\/1\mbox{]} h\mbox{[}2, 1\mbox{]} h\mbox{[}2, -\/2\mbox{]} h\mbox{[}2, 2\mbox{]} etc. with h\mbox{[}band, argument\mbox{]}.
 
 
 \begin{DoxyParams}{Parameters}
@@ -134,7 +134,7 @@ The bands of the harmonics are in the range 0 to the decomposition order. Each b
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The method returns the band of an harmonic or 0 if the harmonic does not exist. 
+The method returns the band of an harmonic if it exists, generate an error otherwise. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
 \hyperlink{class_hoa3_d_1_1_ambisonic_a41f5fab14484b42a97175c2ea279c0ab}{get\-Harmonic\-Argument()} 
@@ -143,7 +143,7 @@ The method returns the band of an harmonic or 0 if the harmonic does not exist.
 \end{DoxySeeAlso}
 
 
-Definition at line 75 of file Ambisonic.\-h.
+Definition at line 79 of file Ambisonic.\-h.
 
 \hypertarget{class_hoa3_d_1_1_ambisonic_a9922a21205409c6de04497d03a317ada}{\index{Hoa3\-D\-::\-Ambisonic@{Hoa3\-D\-::\-Ambisonic}!get\-Harmonics\-Name@{get\-Harmonics\-Name}}
 \index{get\-Harmonics\-Name@{get\-Harmonics\-Name}!Hoa3D::Ambisonic@{Hoa3\-D\-::\-Ambisonic}}
@@ -173,7 +173,7 @@ The method returns a name of an harmonic that contains its band and the argument
 \end{DoxySeeAlso}
 
 
-Definition at line 89 of file Ambisonic.\-h.
+Definition at line 93 of file Ambisonic.\-h.
 
 \hypertarget{class_hoa3_d_1_1_ambisonic_a837c44e3fc4504e6745b78c9cdf632bc}{\index{Hoa3\-D\-::\-Ambisonic@{Hoa3\-D\-::\-Ambisonic}!get\-Number\-Of\-Harmonics@{get\-Number\-Of\-Harmonics}}
 \index{get\-Number\-Of\-Harmonics@{get\-Number\-Of\-Harmonics}!Hoa3D::Ambisonic@{Hoa3\-D\-::\-Ambisonic}}

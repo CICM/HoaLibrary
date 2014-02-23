@@ -45,7 +45,7 @@ namespace Hoa3D
 		float cos_x, sin_x, tcos_x, sig;
 		
         // Copy Harmonics Args(0)
-        for(int i = 0, j = 0; i < m_number_of_harmonics; i += i * 2 + 1, j++)
+        for(unsigned int i = 0, j = 0; i < m_number_of_harmonics; i += i * 2 + 1, j++)
         {
             outputs[i] = inputs[i];
         }
@@ -53,9 +53,9 @@ namespace Hoa3D
         tcos_x = cos_x = m_cos_yaw;
         sin_x = m_sin_yaw;
         // Perform Yaw Rotation
-        for(int i = 1; i <= m_order; i++)
+        for(unsigned int i = 1; i <= m_order; i++)
 		{
-            for(int j = (i + 1) * (i + 1) - 1, k = i; j < m_number_of_harmonics; k++, j += k * 2 + 1)
+            for(unsigned int j = (i + 1) * (i + 1) - 1, k = i; j < m_number_of_harmonics; k++, j += k * 2 + 1)
             {
                 sig = inputs[j-1];
                 outputs[j-1] = sin_x * inputs[j] + cos_x * sig;
@@ -72,7 +72,7 @@ namespace Hoa3D
         double cos_x, sin_x, tcos_x, sig;
 		
         // Copy Harmonics Args(0)
-        for(int i = 0, j = 0; i < m_number_of_harmonics; i += i * 2 + 1, j++)
+        for(unsigned int i = 0, j = 0; i < m_number_of_harmonics; i += i * 2 + 1, j++)
         {
             outputs[i] = inputs[i];
         }
@@ -80,9 +80,9 @@ namespace Hoa3D
         tcos_x = cos_x = m_cos_yaw;
         sin_x = m_sin_yaw;
         // Perform Yaw Rotation
-        for(int i = 1; i <= m_order; i++)
+        for(unsigned int i = 1; i <= m_order; i++)
 		{
-            for(int j = (i + 1) * (i + 1) - 1, k = i; j < m_number_of_harmonics; k++, j += k * 2 + 1)
+            for(unsigned int j = (i + 1) * (i + 1) - 1, k = i; j < m_number_of_harmonics; k++, j += k * 2 + 1)
             {
                 sig = inputs[j-1];
                 outputs[j-1] = sin_x * inputs[j] + cos_x * sig;

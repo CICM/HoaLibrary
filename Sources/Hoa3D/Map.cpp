@@ -16,26 +16,26 @@ namespace Hoa3D
         m_harmonics_float   = new float[m_number_of_harmonics];
         m_harmonics_double  = new double[m_number_of_harmonics];
         m_gains             = new double[m_number_of_harmonics];
-        for(int i = 0; i < m_number_of_sources; i++)
+        for(unsigned int i = 0; i < m_number_of_sources; i++)
         {
             m_encoders.push_back(new Encoder(order));
             m_widers.push_back(new Wider(order));
         }
     }
     
-    void Map::setAzimuth(const unsigned int index, const double azimuth)
+    void Map::setAzimuth(unsigned int index, const double azimuth)
     {
         assert(index < m_number_of_sources);
         m_encoders[index]->setAzimuth(azimuth);
     }
     
-    void Map::setElevation(const unsigned int index, const double elevation)
+    void Map::setElevation(unsigned int index, const double elevation)
     {
         assert(index < m_number_of_sources);
         m_encoders[index]->setElevation(elevation);
     }
     
-    void Map::setDistance(const unsigned int index, const double distance)
+    void Map::setDistance(unsigned int index, const double distance)
     {
         assert(index < m_number_of_sources);
         if(distance >= 1.)
@@ -54,7 +54,7 @@ namespace Hoa3D
     {
         m_encoders[0]->process(inputs[0] * m_gains[0], outputs);
         m_widers[0]->process(outputs, outputs);
-        for(int i = 1; i < m_number_of_sources; i++)
+        for(unsigned int i = 1; i < m_number_of_sources; i++)
         {
             m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_float);
             m_widers[i]->process(m_harmonics_float, m_harmonics_float);
@@ -66,7 +66,7 @@ namespace Hoa3D
     {
         m_encoders[0]->process(inputs[0] * m_gains[0], outputs);
         m_widers[0]->process(outputs, outputs);
-        for(int i = 1; i < m_number_of_sources; i++)
+        for(unsigned int i = 1; i < m_number_of_sources; i++)
         {
             m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_double);
             m_widers[i]->process(m_harmonics_double, m_harmonics_double);

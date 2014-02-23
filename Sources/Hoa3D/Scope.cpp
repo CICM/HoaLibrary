@@ -16,9 +16,9 @@ namespace Hoa3D
         m_matrix    = new double[m_number_of_rows * m_number_of_columns];
         m_harmonics = new double[m_number_of_harmonics];
         
-        for(int i = 0; i < m_number_of_rows; i++)
+        for(unsigned int i = 0; i < m_number_of_rows; i++)
         {
-            for(int j = 0; j < m_number_of_columns; j++)
+            for(unsigned int j = 0; j < m_number_of_columns; j++)
             {
                 m_decoder->setLoudspeakerPosition(i * m_number_of_columns + j, (double)j * CICM_2PI / (double)m_number_of_columns, (double)i * CICM_PI / (double)(m_number_of_rows - 1) - CICM_PI2);
             }
@@ -28,7 +28,7 @@ namespace Hoa3D
     void Scope::process(const float* inputs)
     {
         double max;
-        for(int i = 0; i < m_number_of_harmonics; i++)
+        for(unsigned int i = 0; i < m_number_of_harmonics; i++)
         {
             m_harmonics[i] = inputs[i];
         }

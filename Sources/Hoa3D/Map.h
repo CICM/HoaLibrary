@@ -23,7 +23,7 @@ namespace Hoa3D
         
     private:
         
-        int                 m_number_of_sources;
+        unsigned int        m_number_of_sources;
         float*              m_harmonics_float;
         double*             m_harmonics_double;
         double*             m_gains;
@@ -53,7 +53,7 @@ namespace Hoa3D
             @see       setElevation()
             @see       setDistance()
          */
-        void setAzimuth(const unsigned int index, const double azimuth);
+        void setAzimuth(unsigned int index, const double azimuth);
         
         //! This method set the angle of elevation of a source.
         /**	The angle of elevation in radian, look at the Encoder for further informations. The index must be between 0 and the number of sources.
@@ -63,7 +63,7 @@ namespace Hoa3D
             @see       setAzimuth()
             @see       setDistance()
          */
-        void setElevation(const unsigned int index, const double elevation);
+        void setElevation(unsigned int index, const double elevation);
         
         //! This method set the diatnce of a source.
         /**	The distance is between 0 and infinity. At 0, the source is in the center of the ambisonic sphere and at 1, the source is at the surface of the ambisonic sphere. Over 1, the source get away the ambisonic sphere. The index must be between 0 and the number of sources.
@@ -73,7 +73,7 @@ namespace Hoa3D
             @see       setAzimuth()
             @see       setElevation()
          */
-        void setDistance(const unsigned int index, const double distance);
+        void setDistance(unsigned int index, const double distance);
         
         //! This method retrieve the number of sources.
         /** Retrieve the number of sources.
