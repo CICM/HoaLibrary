@@ -317,6 +317,18 @@ void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
     sprintf(s,"(Signal) %s", x->f_scope->getHarmonicsName(a).c_str());
 }
 
+void hoa_draw_vectors(t_jucebox *x)
+{
+    glColor4d(1., 0., 0., 1.);
+    glBegin(GL_LINE_STRIP);
+    glVertex3d(0, 0, 1);
+    glVertex3d(0, 0, 0);
+    glVertex3d(0, 1, 0);
+    glVertex3d(0, 0, 0);
+    glVertex3d(1, 0, 0);
+    glEnd();
+}
+
 void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
 {
     double one, cos_one, sin_one, two ,cos_two, sin_two;
@@ -355,7 +367,6 @@ void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
         }
         glEnd();
     }
-    
 }
 
 void hoa_scope_paint(t_hoa_scope *x, double w, double h)
@@ -371,12 +382,15 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
     glLoadIdentity();
+    glRotated(180., 0., 1., 0.);
     glRotated(-x->f_camera[0] / CICM_2PI * 360., 0., 1., 0.);
     glRotated(x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
 	glPointSize(1.0f);
     
     if(x->f_sphere)
         hoa_draw_sphere((t_jucebox *)x, x->f_color_sp);
+    if(x->f_vectors)
+        hoa_draw_vectors((t_jucebox *) x);
     
 	glBegin(GL_LINE_LOOP);
     

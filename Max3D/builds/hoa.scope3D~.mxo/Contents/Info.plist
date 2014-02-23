@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>13B3116</string>
+	<string>12F45</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>hoa.scope3D~</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cicm.hoa.scope3D~</string>
+	<string>com.cicm.hoa-scope3D-</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
