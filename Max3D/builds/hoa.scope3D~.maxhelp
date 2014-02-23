@@ -122,7 +122,7 @@
 									"numoutlets" : 16,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 545.0, 425.0, 221.5, 19.0 ],
-									"text" : "hoa.optim3D~ 3 inPhase"
+									"text" : "hoa.optim3D~ 3 basic"
 								}
 
 							}
@@ -143,8 +143,9 @@
 , 							{
 								"box" : 								{
 									"bgcolor" : [ 0.901961, 0.901961, 0.901961, 1.0 ],
-									"camera" : [ -5.134341, -3.801114 ],
+									"camera" : [ 0.0851, -1.222231 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+									"gain" : 1.1,
 									"id" : "obj-1",
 									"maxclass" : "hoa.scope3D~",
 									"numinlets" : 16,
@@ -156,21 +157,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "drawcube",
-									"fontname" : "Arial",
-									"fontsize" : 11.595187,
-									"id" : "obj-12",
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 284.0, 547.25, 150.0, 19.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"attr" : "drawsphere",
+									"attr" : "sphere",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-4",
@@ -184,7 +171,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "bgcolor",
+									"attr" : "spcolor",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-2",
@@ -226,7 +213,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "phcolor",
+									"attr" : "nhcolor",
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-3",
@@ -631,10 +618,10 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 416.0, 288.0, 89.0, 19.0 ],
 									"saved_object_attributes" : 									{
-										"negcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
+										"nhcolor" : [ 0.0, 0.0, 1.0, 1.0 ],
+										"phcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
 										"planecolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-										"poscolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-										"zerocolor" : [ 0.2, 0.2, 0.2, 1.0 ]
+										"zhcolor" : [ 0.2, 0.2, 0.2, 1.0 ]
 									}
 ,
 									"text" : "hoa.connect3D"
@@ -713,6 +700,24 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-16", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-18", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-2", 0 ]
 								}
 
 							}
@@ -904,7 +909,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-26", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1064,7 +1069,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
+									"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 									"destination" : [ "obj-1", 0 ],
 									"disabled" : 0,
 									"hidden" : 0,
@@ -1078,6 +1083,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-28", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-1", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 0 ]
 								}
 
 							}

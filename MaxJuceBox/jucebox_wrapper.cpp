@@ -72,7 +72,6 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
     int width, height, imgStride;
     unsigned char* data;
     
-    //x->j_component->setVisible(true);
     if(x->j_component->isOnDesktop())
     {
         x->j_component->setActive();
@@ -106,7 +105,6 @@ void jucebox_paint(t_jucebox* x, t_object *patcherview)
         }
         
     }
-    //x->j_component->setVisible(false);
 }
 
 
