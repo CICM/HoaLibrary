@@ -21,7 +21,7 @@ namespace Hoa3D
             m_elevation_matrix[j]  = new double[m_number_of_harmonics];
         }
         
-        for(int i = 0; i < m_number_of_harmonics; i++)
+        for(unsigned int i = 0; i < m_number_of_harmonics; i++)
         {
             double theta;
             double phi;
@@ -61,18 +61,18 @@ namespace Hoa3D
         {
             if(m_azimuth >= 18000)
             {
-                for(int i = 0; i < m_number_of_harmonics; i++)
+                for(unsigned int i = 0; i < m_number_of_harmonics; i++)
                     outputs[i] = input * m_azimuth_matrix[m_azimuth-18000][i] * m_elevation_matrix[m_elevation][i];
             }
             else
             {
-                for(int i = 0; i < m_number_of_harmonics; i++)
+                for(unsigned int i = 0; i < m_number_of_harmonics; i++)
                     outputs[i] = input * m_azimuth_matrix[m_azimuth+18000][i] * m_elevation_matrix[m_elevation][i];
             }
         }
         else
         {
-            for(int i = 0; i < m_number_of_harmonics; i++)
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
                 outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
         }
     }
@@ -83,18 +83,18 @@ namespace Hoa3D
         {
             if(m_azimuth >= 18000)
             {
-                for(int i = 0; i < m_number_of_harmonics; i++)
+                for(unsigned int i = 0; i < m_number_of_harmonics; i++)
                     outputs[i] = input * m_azimuth_matrix[m_azimuth-18000][i] * m_elevation_matrix[m_elevation][i];
             }
             else
             {
-                for(int i = 0; i < m_number_of_harmonics; i++)
+                for(unsigned int i = 0; i < m_number_of_harmonics; i++)
                     outputs[i] = input * m_azimuth_matrix[m_azimuth+18000][i] * m_elevation_matrix[m_elevation][i];
             }
         }
         else
         {
-            for(int i = 0; i < m_number_of_harmonics; i++)
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
                 outputs[i] = input * m_azimuth_matrix[m_azimuth][i] * m_elevation_matrix[m_elevation][i];
             }

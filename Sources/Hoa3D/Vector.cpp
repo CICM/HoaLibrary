@@ -19,7 +19,7 @@ namespace Hoa3D
         m_loudspeakers_height_float = new float[m_number_of_loudspeakers];
         m_loudspeakers_height_double = new double[m_number_of_loudspeakers];
         
-        for(int i = 0; i < m_number_of_loudspeakers; i++)
+        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
         {
             m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getLoudspeakerAbscissa(i);
             m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getLoudspeakerOrdinate(i);
@@ -30,7 +30,7 @@ namespace Hoa3D
     void Vector::setLoudspeakerPosition(unsigned int index, double azimuth, double elevation)
     {
         Planewaves::setLoudspeakerPosition(index, azimuth, elevation);
-        for(int i = 0; i < m_number_of_loudspeakers; i++)
+        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
         {
             m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getLoudspeakerAbscissa(i);
             m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getLoudspeakerOrdinate(i);
@@ -87,7 +87,7 @@ namespace Hoa3D
     {
         float energySum = 0.f, energyAbscissa = 0.f, energyOrdinate = 0.f, energyElevation = 0.f;
         cblas_scopy(m_number_of_loudspeakers, inputs, 1, m_loudspeakers_float, 1);
-        for(int i = 0; i < m_number_of_loudspeakers; i++)
+        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
             m_loudspeakers_float[i] *= m_loudspeakers_float[i];
         
         energySum = cblas_sasum(m_number_of_loudspeakers, m_loudspeakers_float, 1);
@@ -114,7 +114,7 @@ namespace Hoa3D
         double energySum = 0., energyAbscissa = 0., energyOrdinate = 0., energyElevation = 0.;
         
         cblas_dcopy(m_number_of_loudspeakers, inputs, 1, m_loudspeakers_double, 1);
-        for(int i = 0; i < m_number_of_loudspeakers; i++)
+        for(unsigned int i = 0; i < m_number_of_loudspeakers; i++)
             m_loudspeakers_double[i] *= m_loudspeakers_double[i];
         
         energySum = cblas_dasum(m_number_of_loudspeakers, m_loudspeakers_double, 1);

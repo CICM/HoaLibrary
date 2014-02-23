@@ -69,16 +69,6 @@ int C74_EXPORT main(void)
 	return 0;
 }
 
-t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
-{
-	boxinfos->object_type = HOA_OBJECT_3D;
-	boxinfos->autoconnect_inputs = x->f_map->getNumberOfSources();
-	boxinfos->autoconnect_outputs = x->f_map->getNumberOfHarmonics();
-	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
-	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
-	return HOA_ERR_NONE;
-}
-
 void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_map *x = NULL;
@@ -101,8 +91,11 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 		for (int i = 0; i < x->f_map->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
         
-        x->f_sig_ins =  new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
-        x->f_sig_outs =  new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
+        if(x->f_map->getNumberOfSources() == 1)
+            x->f_sig_ins    =  new double[4 * SYS_MAXBLKSIZE];
+        else
+            x->f_sig_ins    =  new double[x->f_map->getNumberOfSources() * SYS_MAXBLKSIZE];
+        x->f_sig_outs   =  new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
 	}
     
 	return (x);
@@ -314,6 +307,17 @@ void hoa_map_perform64_azimuth_elevation_distance(t_hoa_map *x, t_object *dsp64,
     {
         cblas_dcopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
     }
+}
+
+
+t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = x->f_map->getNumberOfSources();
+	boxinfos->autoconnect_outputs = x->f_map->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)

@@ -100,7 +100,7 @@ namespace Hoa3D
         @return    The function return the associated Legendre polynomial of x for l and m.
      
         @see    legendre_normalization
-        @see    spherical_harmonic_azimuth
+        @see    spherical_harmonics
      */
 	inline double associated_legendre(int l, int m, double x)
 	{
@@ -134,6 +134,7 @@ namespace Hoa3D
         @return    The function return the normalization of the associated Legendre polynomial for l and m.
      
         @see    associated_legendre
+        @see    spherical_harmonics
      */
     inline double legendre_normalization(int l, int m)
 	{
