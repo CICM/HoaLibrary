@@ -81,7 +81,6 @@ typedef struct _patchspace
 	short patch_path;
 	
 	// Arguments (stored in case of reload / update)
-	
 	short x_argc;
 	t_atom x_argv[MAX_ARGS];
 	
@@ -250,7 +249,6 @@ void hoa_processor_free_temp_memory(t_hoa_processor *x, t_symbol *s, short argc,
 void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_size);
 t_int *hoa_processor_perform(t_int *w);
 void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
-void hoa_processor_sum_float(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
 void hoa_processor_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
 __inline void hoa_processor_multithread_perform(t_hoa_processor *x, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
 #ifdef __APPLE__
@@ -295,9 +293,9 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 void *hoa_processor_query_temp_mem (t_hoa_processor *x, long index);
 void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long size);
 
-void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
-
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
+void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
+t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
 
 // ========================================================================================================================================== //
 // Symbols
@@ -332,11 +330,12 @@ t_symbol *ps_noedit;
 int C74_EXPORT main(void)
 {
 #ifdef __APPLE__
-	processor_num_actual_threads = 1;
+	//int mib[4];
+	//size_t len = sizeof(sysconf(_SC_NPROCESSORS_ONLN));
+	processor_num_actual_threads = sysconf(_SC_NPROCESSORS_ONLN);
+	//post("processor_num_actual_threads : %ld", processor_num_actual_threads);
+	//processor_num_actual_threads = sysconf(_SC_THREAD_THREADS_MAX);
 	//processor_num_actual_threads = MPProcessors(); // harker version
-	//Gestalt(gestaltCountOfCPUs, &processor_num_actual_threads);
-	//#include "omx.h"
-	//omp_get_max_threads
 #else
 	SYSTEM_INFO sysinfo;
 	GetSystemInfo( &sysinfo );
@@ -376,7 +375,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_user_target_free,			"targetfree",		A_GIMME, 0);
 	
 	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
-	//class_addmethod(c, (method)hoa_processor_query_patcherargs, "get_patcherargs", A_CANT, 0);			// query args passed to the object
+	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs", A_CANT, 0);			// query args passed to the object
 	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);	// query the ambisonic order
 	class_addmethod(c, (method)hoa_processor_query_declared_sigins,		"get_declared_sigins",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigouts,	"get_declared_sigouts", A_CANT, 0);
@@ -540,8 +539,6 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	{
 		for (i=0; i<x->f_ambisonic->getNumberOfHarmonics(); i++)
 			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
-		
-		postatom(av);
 	}
 	
 	// --------------------
@@ -1930,6 +1927,22 @@ void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
 		return (void *) (long) x->patch_space_ptrs[index - 1]->patch_on;
 	
 	return 0;
+}
+
+t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv)
+{
+	if (index > 0 && index <= x->patch_spaces_allocated)
+	{
+		long ac = x->patch_space_ptrs[index - 1]->x_argc;
+		argc[0] = ac;
+		argv[0] = (t_atom *) malloc(ac * sizeof(t_atom) );
+		for (int i=0; i<ac; i++)
+			argv[0][i] = x->patch_space_ptrs[index - 1]->x_argv[i];
+		
+		return HOA_ERR_NONE;
+	}
+	
+	return HOA_ERR_OUT_OF_MEMORY;
 }
 
 //////////////////////////////////////////////// Tempory Memory Queries ///////////////////////////////////////////////

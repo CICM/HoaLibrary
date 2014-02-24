@@ -105,6 +105,14 @@ __inline long HoaProcessor_Get_Ambisonic_Order (void *HoaProcessor_Object)
 	return 0;
 }
 
+__inline long HoaProcessor_Get_PatcherArgs (void *HoaProcessor_Object, long index, long *argc, t_atom **argv)
+{
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (long) mess3((t_object *)HoaProcessor_Object, gensym("get_patcherargs"), (void *) index, argc, argv);
+	
+	return 0;
+}
+
 //////////////////////////////////////////////// Temporary Memory Queries ////////////////////////////////////////////////
 
 

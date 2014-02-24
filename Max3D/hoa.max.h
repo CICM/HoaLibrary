@@ -29,7 +29,8 @@ typedef long t_hoa_err;		///< an integer value suitable to be returned as an hoa
 typedef enum {
 	HOA_ERR_ZERO			=					 0,
 	HOA_ERR_NONE			=					-1,
-	HOA_ERR_NOT_IMPLEMENTED =					-2,
+	HOA_ERR_OUT_OF_MEMORY	=					-2,
+	HOA_ERR_NOT_IMPLEMENTED =					-3,
 } e_hoa_err_type;
 
 /**
