@@ -31,6 +31,19 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-14",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 546.0, 412.0, 40.0, 20.0 ],
+					"text" : "poly~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-61",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -769,8 +782,8 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 220.0, 408.0, 199.0, 20.0 ],
-					"text" : "hoa.process~ 1 hoa.pdev args 44.7"
+					"patching_rect" : [ 220.0, 408.0, 237.0, 20.0 ],
+					"text" : "hoa.process~ 1 hoa.pdev args @blabla 32"
 				}
 
 			}
@@ -1081,9 +1094,9 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
+			"obj-36::obj-32" : [ "[8]", "[2]", 0 ],
 			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
-			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
+			"obj-36::obj-35" : [ "[5]", "Level", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
