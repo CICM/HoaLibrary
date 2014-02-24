@@ -30,6 +30,20 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 352.0, 39.0, 60.0, 20.0 ],
+					"text" : "hoa.pdev"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
 					"fontsize" : 11.595187,
 					"id" : "obj-21",
 					"maxclass" : "newobj",
@@ -374,7 +388,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 271.0, 200.0, 56.0, 20.0 ],
-					"sig" : 0.0
+					"sig" : -1.11
 				}
 
 			}
@@ -389,7 +403,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 203.0, 200.0, 56.0, 20.0 ],
-					"sig" : 0.0
+					"sig" : 1.45
 				}
 
 			}
@@ -438,9 +452,8 @@
 					"fontsize" : 12.0,
 					"id" : "obj-8",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
+					"numinlets" : 0,
+					"numoutlets" : 0,
 					"patching_rect" : [ 352.0, 110.0, 60.0, 20.0 ],
 					"text" : "hoa.ptest"
 				}
@@ -497,7 +510,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 203.0, 247.0, 223.0, 20.0 ],
+					"patching_rect" : [ 203.0, 247.0, 146.0, 20.0 ],
 					"text" : "hoa.process~ 1 hoa.ptest"
 				}
 
@@ -630,6 +643,13 @@
 				"name" : "hoa.delay~.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
 				"patcherrelativepath" : "../../_prerelease/max-package/patchers/effects",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.pdev.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max3D/builds",
+				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
