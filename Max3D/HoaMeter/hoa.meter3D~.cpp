@@ -20,6 +20,8 @@ typedef struct _hoa_meter
 	int             f_startclock;
     long            f_interval;
     
+    long            f_number_of_leds;
+    double****      f_leds_coordinates;
     t_jrgba         f_color_bg;
 	t_jrgba         f_color_bd;
     t_jrgba         f_color_cold;
@@ -180,6 +182,20 @@ void *hoa_meter_new(t_symbol *s, long argc, t_atom *argv)
     x->f_signals    = new double[x->f_meter->getNumberOfLoudspeakers() * SYS_MAXBLKSIZE];
     x->f_clock      = clock_new((void *)x, (method)hoa_meter_tick);
     x->f_startclock = 0;
+    x->f_number_of_leds = 13;
+    x->f_leds_coordinates = new double***[100];
+    for(int i = 0; i < 100; i++)
+    {
+        x->f_leds_coordinates[i] = new double**[199];
+        for(int j = 0; j < 199; j++)
+        {
+            x->f_leds_coordinates[i][j] = new double*[x->f_number_of_leds];
+            for(int k = 0; k < x->f_number_of_leds; k++)
+            {
+                x->f_leds_coordinates[i][j][k] = new double[3];
+            }
+        }
+    }
     
     dsp_setupjbox((t_pxjbox *)x, x->f_meter->getNumberOfLoudspeakers());
 	jucebox_new((t_jucebox *) x);
