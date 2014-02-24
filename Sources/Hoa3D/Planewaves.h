@@ -91,7 +91,7 @@ namespace Hoa3D
 		inline double getLoudspeakerAbscissa(unsigned int index) const
         {
             assert(index < m_number_of_loudspeakers);
-            return abscissa(1., m_loudspeakers_azimuth[index]);
+            return abscissa(1., m_loudspeakers_azimuth[index], m_loudspeakers_elevation[index]);
         }
 		
         //! Retrieve the ordinate of a loudspeaker.
@@ -105,7 +105,7 @@ namespace Hoa3D
 		inline double getLoudspeakerOrdinate(unsigned int index) const
         {
             assert(index < m_number_of_loudspeakers);
-            return ordinate(1., m_loudspeakers_azimuth[index]);
+            return ordinate(1., m_loudspeakers_azimuth[index], m_loudspeakers_elevation[index]);
         }
         
         //! Retrieve the height of a loudspeaker.
@@ -119,7 +119,7 @@ namespace Hoa3D
 		inline double getLoudspeakerHeight(unsigned int index) const
         {
             assert(index < m_number_of_loudspeakers);
-            return abscissa(1., m_loudspeakers_elevation[index]);
+            return height(1., m_loudspeakers_azimuth[index], m_loudspeakers_elevation[index]);
         }
         
         //! Retrieve the number of loudspeaker.

@@ -365,6 +365,16 @@ namespace Hoa3D
 		return radius * sin(theta);
 	}
     
+    inline double distance(double x1, double y1, double x2, double y2)
+	{
+		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2));
+	}
+    
+    inline double distance(double x1, double y1, double z1, double x2, double y2, double z2)
+	{
+		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2) + (z1-z2) * (z1-z2));
+	}
+    
     //! The int to string conversion
     /** The function converts a interger to a string.
      

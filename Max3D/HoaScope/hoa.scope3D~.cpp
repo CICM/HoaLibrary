@@ -382,9 +382,10 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
     glLoadIdentity();
-    glRotated(180., 0., 1., 0.);
-    glRotated(-x->f_camera[0] / CICM_2PI * 360., 0., 1., 0.);
-    glRotated(x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
+ 
+    glRotated(-x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
+    glRotated(x->f_camera[0] / CICM_2PI * 360., 0., 1., 0.);
+
 	glPointSize(1.0f);
     
     if(x->f_sphere)
