@@ -52,6 +52,8 @@ void hoa_meter_perform64(t_hoa_meter *x, t_object *dsp64, double **ins, long num
 void hoa_meter_mousedown(t_hoa_meter *x, t_object *patcherview, t_pt pt, long modifiers);
 void hoa_meter_mousedrag(t_hoa_meter *x, t_object *patcherview, t_pt pt, long modifiers);
 
+void hoa_meter_setLoudspeakers(t_hoa_meter *x, t_symbol* s, long argc, t_atom* argv);
+
 t_max_err hoa_meter_attr_set_loudspeakers(t_hoa_meter *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoa_meter_attr_set_camera(t_hoa_meter *x, t_object *attr, long argc, t_atom *argv);
 t_hoa_err hoa_getinfos(t_hoa_meter* x, t_hoa_boxinfos* boxinfos);
@@ -74,7 +76,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_meter_assist,			"assist",           A_CANT, 0);
 	class_addmethod(c, (method)hoa_meter_getdrawparams,		"getdrawparams",    A_CANT, 0);
 	class_addmethod(c, (method)hoa_meter_notify,			"notify",           A_CANT, 0);
-	
+	class_addmethod(c, (method)hoa_meter_setLoudspeakers,   "lscoord",    A_GIMME, 0);
+    
     CLASS_ATTR_DEFAULT              (c, "patching_rect", 0, "0 0 200 200");
     CLASS_ATTR_INVISIBLE            (c, "color", 0);
     
@@ -112,30 +115,35 @@ int C74_EXPORT main(void)
 	
     CLASS_ATTR_RGBA                 (c, "coldcolor", 0, t_hoa_meter, f_color_cold);
     CLASS_ATTR_CATEGORY             (c, "coldcolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "coldcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "coldcolor", 0, "Cold Signal Color");
 	CLASS_ATTR_ORDER                (c, "coldcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "coldcolor", 0, "0. 0.6 0. 0.8");
 	
 	CLASS_ATTR_RGBA                 (c, "tepidcolor", 0, t_hoa_meter, f_color_tepid);
     CLASS_ATTR_CATEGORY             (c, "tepidcolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "tepidcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "tepidcolor", 0, "Tepid Signal Color");
 	CLASS_ATTR_ORDER                (c, "tepidcolor", 0, "5");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "tepidcolor", 0, "0.6 0.73 0. 0.8");
 	
 	CLASS_ATTR_RGBA                 (c, "warmcolor", 0, t_hoa_meter, f_color_warm);
     CLASS_ATTR_CATEGORY             (c, "warmcolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "warmcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "warmcolor", 0, "Warm Signal Color");
 	CLASS_ATTR_ORDER                (c, "warmcolor", 0, "6");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "warmcolor", 0, ".85 .85 0. 0.8");
 	
 	CLASS_ATTR_RGBA                 (c, "hotcolor", 0, t_hoa_meter, f_color_hot);
     CLASS_ATTR_CATEGORY             (c, "hotcolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "hotcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "hotcolor", 0, "Hot Signal Color");
 	CLASS_ATTR_ORDER                (c, "hotcolor", 0, "7");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "hotcolor", 0, "1. 0.6 0. 0.8");
 	
 	CLASS_ATTR_RGBA                 (c, "overcolor", 0, t_hoa_meter, f_color_over);
     CLASS_ATTR_CATEGORY             (c, "overcolor", 0, "Color");
+    CLASS_ATTR_STYLE                (c, "overcolor", 0, "rgba");
 	CLASS_ATTR_LABEL                (c, "overcolor", 0, "Overload Signal Color");
 	CLASS_ATTR_ORDER                (c, "overcolor", 0, "8");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "overcolor", 0, "1. 0. 0. 0.8");
@@ -184,15 +192,23 @@ void *hoa_meter_new(t_symbol *s, long argc, t_atom *argv)
     x->f_startclock = 0;
     x->f_number_of_leds = 13;
     x->f_leds_coordinates = new double***[100];
+
+    double azimuth, elevation, radius;
     for(int i = 0; i < 100; i++)
     {
+        elevation = (double)i / 100. * CICM_PI - CICM_PI2;
         x->f_leds_coordinates[i] = new double**[199];
         for(int j = 0; j < 199; j++)
         {
+            azimuth = (double)j / 199. * CICM_2PI;
             x->f_leds_coordinates[i][j] = new double*[x->f_number_of_leds];
             for(int k = 0; k < x->f_number_of_leds; k++)
             {
+                radius = (k + 1) / (double)x->f_number_of_leds;
                 x->f_leds_coordinates[i][j][k] = new double[3];
+                x->f_leds_coordinates[i][j][k][0] = Hoa3D::abscissa(radius, azimuth, elevation);
+                x->f_leds_coordinates[i][j][k][1] = Hoa3D::ordinate(radius, azimuth, elevation);
+                x->f_leds_coordinates[i][j][k][2] = Hoa3D::height(radius, azimuth, elevation);
             }
         }
     }
@@ -322,7 +338,49 @@ void hoa_meter_paint(t_hoa_meter *x, double w, double h)
     glRotated(x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
 	glPointSize(1.0f);
     
+    int led_index;
     
+    glBegin(GL_TRIANGLE_FAN);
+    for(int i = 0; i < 100; i++)
+    {
+        for(int j = 0; j < 199; j++)
+        {
+            led_index = (1. + Hoa3D::clip_minmax(x->f_meter->getSphereEnergy(i, j), -90., 0.) / 90.) * (x->f_number_of_leds - 1);
+            if(led_index < 3)
+                glColor4d(x->f_color_cold.red, x->f_color_cold.green, x->f_color_cold.blue, x->f_color_cold.alpha);
+            else if(led_index < 6)
+                glColor4d(x->f_color_tepid.red, x->f_color_tepid.green, x->f_color_tepid.blue, x->f_color_tepid.alpha);
+            else if(led_index < 9)
+                glColor4d(x->f_color_warm.red, x->f_color_warm.green, x->f_color_warm.blue, x->f_color_warm.alpha);
+            else if(led_index < 12)
+                glColor4d(x->f_color_hot.red, x->f_color_hot.green, x->f_color_hot.blue, x->f_color_hot.alpha);
+            else
+                glColor4d(x->f_color_over.red, x->f_color_over.green, x->f_color_over.blue, x->f_color_over.alpha);
+            glVertex3d(x->f_leds_coordinates[i][j][led_index][0], x->f_leds_coordinates[i][j][led_index][1], x->f_leds_coordinates[i][j][led_index][2]);
+        }
+    }
+    glEnd();
+    
+    glBegin(GL_TRIANGLE_FAN);
+    for(int j = 0; j < 199; j++)
+    {
+        for(int i = 0; i < 100; i++)
+        {
+            led_index = (1. + Hoa3D::clip_minmax(x->f_meter->getSphereEnergy(i, j), -90., 0.) / 90.) * (x->f_number_of_leds - 1);
+            if(led_index < 3)
+                glColor4d(x->f_color_cold.red, x->f_color_cold.green, x->f_color_cold.blue, x->f_color_cold.alpha);
+            else if(led_index < 6)
+                glColor4d(x->f_color_tepid.red, x->f_color_tepid.green, x->f_color_tepid.blue, x->f_color_tepid.alpha);
+            else if(led_index < 9)
+                glColor4d(x->f_color_warm.red, x->f_color_warm.green, x->f_color_warm.blue, x->f_color_warm.alpha);
+            else if(led_index < 12)
+                glColor4d(x->f_color_hot.red, x->f_color_hot.green, x->f_color_hot.blue, x->f_color_hot.alpha);
+            else
+                glColor4d(x->f_color_over.red, x->f_color_over.green, x->f_color_over.blue, x->f_color_over.alpha);
+            glVertex3d(x->f_leds_coordinates[i][j][led_index][0], x->f_leds_coordinates[i][j][led_index][1], x->f_leds_coordinates[i][j][led_index][2]);
+        }
+    }
+    glEnd();
 }
 
 void hoa_meter_mousedown(t_hoa_meter *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -351,5 +409,14 @@ void hoa_meter_free(t_hoa_meter *x)
     jucebox_free((t_jucebox*)x);
 	delete x->f_meter;
     delete [] x->f_signals;
+}
+
+
+void hoa_meter_setLoudspeakers(t_hoa_meter *x, t_symbol* s, long argc, t_atom* argv)
+{
+    if(argc > 2 && argv && atom_gettype(argv) == A_LONG && atom_gettype(argv+1) == A_FLOAT && atom_gettype(argv+2) == A_FLOAT)
+    {
+        x->f_meter->setLoudspeakerPosition(atom_getlong(argv), atom_getfloat(argv+1), atom_getfloat(argv+2));
+    }
 }
 
