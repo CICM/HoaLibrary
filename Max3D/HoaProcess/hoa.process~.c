@@ -348,68 +348,68 @@ int C74_EXPORT main(void)
 	c = class_new("hoa.process~", (method)hoa_processor_new,  (method)hoa_processor_free, sizeof(t_hoa_processor), NULL, A_GIMME, 0);
 	hoa_initclass(c, (method)hoa_getinfos);
 	
-	class_addmethod(c, (method)hoa_processor_dsp64, "dsp64", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_assist, "assist", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_open, "open", A_DEFLONG, 0);
-	class_addmethod(c, (method)hoa_processor_dblclick, "dblclick", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_wclose, "wclose", A_DEFLONG, 0);
+	class_addmethod(c, (method)hoa_processor_dsp64,						"dsp64",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_assist,					"assist",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_open,						"open",				A_DEFLONG, 0);
+	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",			A_DEFLONG, 0);
 	
-	class_addmethod(c, (method)hoa_processor_pupdate, "pupdate", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_subpatcher, "subpatcher", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_parentpatcher, "parentpatcher", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_parentpatcher,				"parentpatcher",	A_CANT, 0);
 	
-	class_addmethod(c, (method)hoa_processor_bang, "bang", 0);
-	class_addmethod(c, (method)hoa_processor_int, "int", A_LONG, 0);
-	class_addmethod(c, (method)hoa_processor_float, "float", A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_processor_list, "list", A_GIMME, 0);
-	class_addmethod(c, (method)hoa_processor_anything, "anything", A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_bang,						"bang", 0);
+	class_addmethod(c, (method)hoa_processor_int,						"int",				A_LONG, 0);
+	class_addmethod(c, (method)hoa_processor_float,						"float",			A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_processor_list,						"list",				A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_anything,					"anything",			A_GIMME, 0);
 	
-	class_addmethod(c, (method)hoa_processor_autoloadbalance, "autoloadbalance", A_GIMME, 0);				// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)hoa_processor_multithread, "multithread", A_GIMME, 0);						// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)hoa_processor_activethreads, "activethreads", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)hoa_processor_threadmap, "threadmap", A_GIMME, 0);							// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_autoloadbalance,			"autoloadbalance",	A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_multithread,				"multithread",		A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_activethreads,				"activethreads",	A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_threadmap,					"threadmap",		A_GIMME, 0);
 	
-	class_addmethod(c, (method)hoa_processor_user_clear, "clear", 0);
-	class_addmethod(c, (method)hoa_processor_user_loadpatch, "loadpatch", A_GIMME, 0);
-	class_addmethod(c, (method)hoa_processor_deletepatch, "deletepatch", A_GIMME, 0);						// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)hoa_processor_user_target, "target", A_GIMME, 0);							// MUST FIX TO GIMME FOR NOW
-	class_addmethod(c, (method)hoa_processor_user_target_free, "targetfree", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
+	class_addmethod(c, (method)hoa_processor_user_clear,				"clear", 0);
+	class_addmethod(c, (method)hoa_processor_user_loadpatch,			"loadpatch",		A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_deletepatch,				"deletepatch",		A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_user_target,				"target",			A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_user_target_free,			"targetfree",		A_GIMME, 0);
 	
 	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
 	//class_addmethod(c, (method)hoa_processor_query_patcherargs, "get_patcherargs", A_CANT, 0);			// query args passed to the object
-	class_addmethod(c, (method)hoa_processor_query_ambisonic_order, "get_ambisonic_order", A_CANT, 0);	// query the ambisonic order
-	class_addmethod(c, (method)hoa_processor_query_declared_sigins, "get_declared_sigins", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_query_declared_sigouts, "get_declared_sigouts", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_query_sigins, "get_sigins", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_query_outptrs_ptr, "get_outptrs_ptr", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_client_get_patch_on, "get_patch_on", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_client_set_patch_on, "set_patch_on", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_query_temp_mem, "get_temp_mem", A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_client_temp_mem_resize, "temp_mem_resize", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);	// query the ambisonic order
+	class_addmethod(c, (method)hoa_processor_query_declared_sigins,		"get_declared_sigins",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_declared_sigouts,	"get_declared_sigouts", A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_sigins,				"get_sigins",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_outptrs_ptr,			"get_outptrs_ptr",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_get_patch_on,		"get_patch_on",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_set_patch_on,		"set_patch_on",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_temp_mem,			"get_temp_mem",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_client_temp_mem_resize,	"temp_mem_resize",		A_CANT, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
 	hoa_processor_class = c;
 	
-	ps_getassoc = gensym("getassoc");
-	ps_setassoc = gensym("setassoc");
-	ps_noedit = gensym("noedit");
+	ps_getassoc =				gensym("getassoc");
+	ps_setassoc =				gensym("setassoc");
+	ps_noedit =					gensym("noedit");
 	
-	ps_HoaProcessor = gensym("___HoaProcessor~___");						// Capitals must stay here
+	ps_HoaProcessor =			gensym("___HoaProcessor~___");						// Capitals must stay here
 	ps_HoaProcessorPatchIndex = gensym("___HoaProcessorPatchIndex___");		// Capitals must stay here
-	ps_dspchain = gensym("dspchain");	
-	ps_sigin = gensym("in~");
-	ps_sigout = gensym("out~");
-	ps_bpatcher = gensym("bpatcher");
-	ps_patcher = gensym("patcher");
-	ps_front = gensym("front");
-	ps_in = gensym("in");
-	ps_out = gensym("out");
-	ps_bang = gensym("bang");
-	ps_int = gensym("int");
-	ps_float = gensym("float");
-	ps_list = gensym("list");
-	ps_args = gensym("args");
+	ps_dspchain =				gensym("dspchain");
+	ps_sigin =					gensym("in~");
+	ps_sigout =					gensym("out~");
+	ps_bpatcher =				gensym("bpatcher");
+	ps_patcher =				gensym("patcher");
+	ps_front =					gensym("front");
+	ps_in =						gensym("in");
+	ps_out =					gensym("out");
+	ps_bang =					gensym("bang");
+	ps_int =					gensym("int");
+	ps_float =					gensym("float");
+	ps_list =					gensym("list");
+	ps_args =					gensym("args");
 	
 	return 0;
 }

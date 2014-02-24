@@ -18,6 +18,7 @@ typedef struct _hoa_out
 	long declared_sig_outs;
 	
 	long outlet_num;
+	long parent_patcher_index;
 	
 } t_hoa_out;
 
@@ -54,16 +55,15 @@ int C74_EXPORT main(void)
 void *hoa_out_new(long outlet_num)
 {
     t_hoa_out *x = (t_hoa_out *)object_alloc(hoa_out_class);
-	void *hoaprocessor_parent;
+	void *hoaprocessor_parent = Get_HoaProcessor_Object();
 
     dsp_setup((t_pxobject *)x, 1);
 	
-	hoaprocessor_parent = Get_HoaProcessor_Object();
+	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
+	x->outlet_num = (outlet_num > 0) ? outlet_num : x->parent_patcher_index;
 	
 	x->outptrs_ptr = HoaProcessor_Get_Outptrs_Ptr(hoaprocessor_parent, Get_HoaProcessor_Patch_Index(hoaprocessor_parent));
 	x->declared_sig_outs = HoaProcessor_Get_Declared_Sigouts(hoaprocessor_parent);
-	
-	x->outlet_num = outlet_num;
 		
     return (x);
 }

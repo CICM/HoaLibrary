@@ -104,7 +104,7 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 			outlet_int(x->out_order, HoaProcessor_Get_Ambisonic_Order (x->hoaProcessor_parent));
 			outlet_int(x->out_harmonicArgument, x->f_ambisonic->getHarmonicArgument(x->index-1));
 			outlet_int(x->out_harmonicBand, x->f_ambisonic->getHarmonicBand(x->index-1));
-			outlet_int (x->out_index, x->index);
+			outlet_int(x->out_index, x->index);
 		}
 	}
 }
