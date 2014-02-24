@@ -295,6 +295,8 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 void *hoa_processor_query_temp_mem (t_hoa_processor *x, long index);
 void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long size);
 
+void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
+
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 
 // ========================================================================================================================================== //
@@ -374,8 +376,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_user_target_free, "targetfree", A_GIMME, 0);					// MUST FIX TO GIMME FOR NOW
 	
 	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
-	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
-	//class_addmethod(c, (method)hoa_processor_query_ambisonic_order, "get_ambisonic_order", A_CANT, 0);
+	//class_addmethod(c, (method)hoa_processor_query_patcherargs, "get_patcherargs", A_CANT, 0);			// query args passed to the object
+	class_addmethod(c, (method)hoa_processor_query_ambisonic_order, "get_ambisonic_order", A_CANT, 0);	// query the ambisonic order
 	class_addmethod(c, (method)hoa_processor_query_declared_sigins, "get_declared_sigins", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigouts, "get_declared_sigouts", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_sigins, "get_sigins", A_CANT, 0);
@@ -1910,6 +1912,14 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 	if (state) state = 1;
 	if (index <= x->patch_spaces_allocated)
 		x->patch_space_ptrs[index - 1]->patch_on = state;
+}
+
+void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
+{
+	if (x->f_ambisonic->getOrder())
+		return (void *) x->f_ambisonic->getOrder();
+	
+	return 0;
 }
 
 void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)

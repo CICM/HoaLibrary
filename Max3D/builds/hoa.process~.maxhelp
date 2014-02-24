@@ -494,11 +494,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 4,
-					"numoutlets" : 4,
-					"outlettype" : [ "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 203.0, 247.0, 223.0, 20.0 ],
-					"text" : "hoa.process~ 1 hoa.ptest"
+					"numinlets" : 16,
+					"numoutlets" : 16,
+					"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
+					"patching_rect" : [ 203.0, 247.0, 221.5, 20.0 ],
+					"text" : "hoa.process~ 3 hoa.ptest"
 				}
 
 			}

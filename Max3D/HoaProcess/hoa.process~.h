@@ -97,6 +97,14 @@ __inline void HoaProcessor_Set_Patch_On (void *HoaProcessor_Object, long index, 
 		mess2((t_object *)HoaProcessor_Object, gensym("set_patch_on"), (void *)index, (void *)state);
 }
 
+__inline long HoaProcessor_Get_Ambisonic_Order (void *HoaProcessor_Object)
+{
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (long) mess0((t_object *)HoaProcessor_Object, gensym("get_ambisonic_order"));
+	
+	return 0;
+}
+
 //////////////////////////////////////////////// Temporary Memory Queries ////////////////////////////////////////////////
 
 
