@@ -31,12 +31,39 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"frgb" : 0.0,
 					"id" : "obj-29",
-					"maxclass" : "newobj",
+					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 455.0, 249.0, 55.0, 20.0 ],
-					"text" : "print attr"
+					"patching_rect" : [ 323.0, 288.0, 39.0, 20.0 ],
+					"presentation_rect" : [ 322.0, 292.0, 0.0, 0.0 ],
+					"text" : "Args"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-37",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 304.75, 261.0, 50.0, 18.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-31",
+					"maxclass" : "toggle",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 462.0, 288.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -47,23 +74,10 @@
 					"id" : "obj-27",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 381.0, 249.0, 61.0, 20.0 ],
-					"text" : "print args"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
-					"id" : "obj-26",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 381.0, 189.0, 93.0, 20.0 ],
-					"text" : "patcherargs"
+					"numoutlets" : 4,
+					"outlettype" : [ "int", "float", "int", "int" ],
+					"patching_rect" : [ 462.0, 258.0, 63.0, 20.0 ],
+					"text" : "dspstate~"
 				}
 
 			}
@@ -235,9 +249,9 @@
 					"id" : "obj-24",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 5,
-					"outlettype" : [ "int", "int", "int", "int", "int" ],
-					"patching_rect" : [ 47.0, 224.0, 250.0, 20.0 ],
+					"numoutlets" : 6,
+					"outlettype" : [ "int", "int", "int", "int", "int", "" ],
+					"patching_rect" : [ 47.0, 224.0, 307.75, 20.0 ],
 					"text" : "hoa.thisprocess~"
 				}
 
@@ -723,6 +737,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-37", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-24", 5 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-24", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -732,19 +755,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-27", 0 ],
+					"destination" : [ "obj-31", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-26", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-29", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-26", 1 ]
+					"source" : [ "obj-27", 0 ]
 				}
 
 			}

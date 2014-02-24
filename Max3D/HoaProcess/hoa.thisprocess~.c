@@ -14,7 +14,7 @@ typedef struct _hoa_thisprocess
     t_object x_obj;
 	
 	// outlets
-	void *out_index, *out_harmonicBand, *out_harmonicArgument, *out_order, *out_mute;
+	void *out_index, *out_harmonicBand, *out_harmonicArgument, *out_order, *out_patcherArgs, *out_mute;
 	
 	long index;
 	
@@ -56,6 +56,7 @@ void *hoa_thisprocess_new(t_symbol *s, short argc, t_atom *argv)
 	int order;
     t_hoa_thisprocess *x = (t_hoa_thisprocess *) object_alloc(hoa_thisprocess_class);
     
+	x->out_patcherArgs		= outlet_new(x, NULL);
 	x->out_mute				= intout(x);
 	x->out_order			= intout(x);
 	x->out_harmonicArgument = intout(x);
@@ -100,6 +101,12 @@ void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 	{
 		if (x->index > 0)
 		{
+			long ac;
+			t_atom *av;
+			t_hoa_err err = HoaProcessor_Get_PatcherArgs(x->hoaProcessor_parent, x->index, &ac, &av);
+			if (err == HOA_ERR_NONE)
+				outlet_list(x->out_patcherArgs, gensym("list"), ac, av);
+			
 			outlet_int(x->out_mute, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
 			outlet_int(x->out_order, HoaProcessor_Get_Ambisonic_Order (x->hoaProcessor_parent));
 			outlet_int(x->out_harmonicArgument, x->f_ambisonic->getHarmonicArgument(x->index-1));
@@ -129,6 +136,9 @@ void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char 
 				break;
 			case 4:
 				sprintf(s,"Mute Status");
+				break;
+			case 5:
+				sprintf(s,"Patcher Arguments");
 				break;
 		}
 	}
