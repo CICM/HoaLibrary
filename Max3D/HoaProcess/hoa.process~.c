@@ -475,7 +475,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
 	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
-	x->declared_ins = 0;
+	x->declared_ins = x->declared_sig_ins;
 	x->declared_outs = 0;
 	
 	x->patch_spaces_allocated = 0;
@@ -540,6 +540,8 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	{
 		for (i=0; i<x->f_ambisonic->getNumberOfHarmonics(); i++)
 			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
+		
+		postatom(av);
 	}
 	
 	// --------------------
@@ -750,7 +752,7 @@ void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, vo
 	ATOMIC_DECREMENT_BARRIER(&x->patch_is_loading);
 }
 
-void hoa_processor_loadpatch (t_hoa_processor *x, long index, long thread_request, t_symbol *patch_name_in, short argc, t_atom *argv)
+void hoa_processor_loadpatch(t_hoa_processor *x, long index, long thread_request, t_symbol *patch_name_in, short argc, t_atom *argv)
 {
 	t_patchspace *patch_space_ptr = 0;
 	t_object *previous;
