@@ -387,21 +387,16 @@ namespace Hoa3D
         sprintf(number, "%i", aValue);
         return number;
     }
+    
     /*
-    double** sphere_compute_facets(unsigned int numberOfIterations)
+    unsigned int sphere_discretize(double** facets, unsigned int numberOfIterations)
     {
-        double** facets;
-        facets = new double*[numberOffacets];
-        for(int i = 0; i < numberOffacets; i++)
-        {
-            facets[i] = new double[9];
-        }
-        int i,it;
+        int i;
         double a;
-        XYZ p[6] = {0,0,1,  0,0,-1,  -1,-1,0,  1,-1,0,  1,1,0, -1,1,0};
-        XYZ pa, pb, pc;
+        //XYZ p[6] = {0,0,1,  0,0,-1,  -1,-1,0,  1,-1,0,  1,1,0, -1,1,0};
+        double pa[3], pb[3], pc[3];
         int nt = 0,ntold;
-      
+        /*
         // Create the level 0 object
         a = 1 / sqrt(2.0);
         for(i = 0; i < 6; i++)
@@ -420,44 +415,43 @@ namespace Hoa3D
         nt = 8;
         
         // Bisect each edge and move to the surface of a unit sphere
-        for (it = 0; it < iterations; it++)
+        for(unsigned int it = 0; it < numberOfIterations; it++)
         {
             ntold = nt;
             for(i = 0; i < ntold; i++)
             {
-                pa.x = (f[i].p1.x + f[i].p2.x) / 2;
-                pa.y = (f[i].p1.y + f[i].p2.y) / 2;
-                pa.z = (f[i].p1.z + f[i].p2.z) / 2;
-                pb.x = (f[i].p2.x + f[i].p3.x) / 2;
-                pb.y = (f[i].p2.y + f[i].p3.y) / 2;
-                pb.z = (f[i].p2.z + f[i].p3.z) / 2;
-                pc.x = (f[i].p3.x + f[i].p1.x) / 2;
-                pc.y = (f[i].p3.y + f[i].p1.y) / 2;
-                pc.z = (f[i].p3.z + f[i].p1.z) / 2;
-                Normalise(&pa);
-                Normalise(&pb);
-                Normalise(&pc);
-                f[nt].p1 = f[i].p1;
-                f[nt].p2 = pa;
-                f[nt].p3 = pc;
+                pa[0] = (facets[i][0] + facets[i][3]) / 2;
+                pa[1] = (facets[i][1] + facets[i][4]) / 2;
+                pa[2] = (facets[i][2] + facets[i][5]) / 2;
+                pb[0] = (facets[i][3] + facets[i][6]) / 2;
+                pb[1] = (facets[i][4] + facets[i][7]) / 2;
+                pb[2] = (facets[i][5] + facets[i][8]) / 2;
+                pc[0] = (facets[i][6] + facets[i][0]) / 2;
+                pc[1] = (facets[i][7] + facets[i][1]) / 2;
+                pc[2] = (facets[i][8] + facets[i][2]) / 2;
+                //Normalise(&pa);
+                //Normalise(&pb);
+                //Normalise(&pc);
+                memcpy(&facets[nt][0], &facets[i][0], sizeof(double) * 3);
+                memcpy(&facets[nt][3], pa, sizeof(double) * 3);
+                memcpy(&facets[nt][6], pc, sizeof(double) * 3);
                 nt++;
-                f[nt].p1 = pa;
-                f[nt].p2 = f[i].p2;
-                f[nt].p3 = pb;
+                memcpy(&facets[nt][0], pa, sizeof(double) * 3);
+                memcpy(&facets[nt][3], &facets[i][3], sizeof(double) * 3);
+                memcpy(&facets[nt][6], pb, sizeof(double) * 3);
                 nt++;
-                f[nt].p1 = pb;
-                f[nt].p2 = f[i].p3;
-                f[nt].p3 = pc;
+                memcpy(&facets[nt][0], pb, sizeof(double) * 3);
+                memcpy(&facets[nt][3], &facets[i][6], sizeof(double) * 3);
+                memcpy(&facets[nt][6], pc, sizeof(double) * 3);
                 nt++;
-                f[i].p1 = pa;
-                f[i].p2 = pb;
-                f[i].p3 = pc;
+                memcpy(&facets[i][0], pa, sizeof(double) * 3);
+                memcpy(&facets[i][3], pb, sizeof(double) * 3);
+                memcpy(&facets[i][6], pc, sizeof(double) * 3);
             }
         }
         
-        return facets;
-    }
+        return nt;
+    }*/
 }
 
-*/
 #endif
