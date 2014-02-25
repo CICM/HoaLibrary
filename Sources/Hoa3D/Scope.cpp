@@ -33,7 +33,7 @@ namespace Hoa3D
             m_harmonics[i] = inputs[i];
         }
 		m_decoder->process(m_harmonics, m_matrix);
-        max = m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)];
+        max = abs(m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)]);
         if(max > 1.)
             cblas_dscal(m_number_of_rows * m_number_of_columns, 1. / max, m_matrix, 1.);
     }
@@ -42,7 +42,7 @@ namespace Hoa3D
     {
         double max;
         m_decoder->process(inputs, m_matrix);
-        max = m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)];
+        max = abs(m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)]);
         if(max > 1.)
             cblas_dscal(m_number_of_rows * m_number_of_columns, 1. / max, m_matrix, 1.);
     }
@@ -55,4 +55,3 @@ namespace Hoa3D
     }
 	
 }
-

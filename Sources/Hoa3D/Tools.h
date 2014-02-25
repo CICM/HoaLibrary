@@ -340,14 +340,14 @@ namespace Hoa3D
 		return sqrt(x*x + y*y + z*z);
 	}
     
-	inline double aimuth(double x, double y, double z)
+	inline double azimuth(double x, double y, double z)
 	{
-		return acos(z / radius(x, y, z)); // AFAIRE
+		return angle(x, y);
 	}
     
     inline double elevation(double x, double y, double z)
 	{
-		return acos(z / radius(x, y, z)); // A FAIRE
+		return acos(z / radius(x, y, z));
 	}
     
 	inline double ordinate(double radius, double phi, double theta)
@@ -388,37 +388,79 @@ namespace Hoa3D
         return number;
     }
     
-    /*
-    unsigned int sphere_discretize(double** facets, unsigned int numberOfIterations)
+    inline void sphere_normalize_point(double* point)
     {
-        int i;
-        double a;
-        //XYZ p[6] = {0,0,1,  0,0,-1,  -1,-1,0,  1,-1,0,  1,1,0, -1,1,0};
-        double pa[3], pb[3], pc[3];
-        int nt = 0,ntold;
-        /*
-        // Create the level 0 object
-        a = 1 / sqrt(2.0);
-        for(i = 0; i < 6; i++)
+        double length = sqrt(point[0] * point[0] + point[1] * point[1] + point[2] * point[2]);
+        if (length != 0)
         {
-            p[i].x *= a;
-            p[i].y *= a;
+            point[0] /= length;
+            point[1] /= length;
+            point[2] /= length;
         }
-        f[0].p1 = p[0]; f[0].p2 = p[3]; f[0].p3 = p[4];
-        f[1].p1 = p[0]; f[1].p2 = p[4]; f[1].p3 = p[5];
-        f[2].p1 = p[0]; f[2].p2 = p[5]; f[2].p3 = p[2];
-        f[3].p1 = p[0]; f[3].p2 = p[2]; f[3].p3 = p[3];
-        f[4].p1 = p[1]; f[4].p2 = p[4]; f[4].p3 = p[3];
-        f[5].p1 = p[1]; f[5].p2 = p[5]; f[5].p3 = p[4];
-        f[6].p1 = p[1]; f[6].p2 = p[2]; f[6].p3 = p[5];
-        f[7].p1 = p[1]; f[7].p2 = p[3]; f[7].p3 = p[2];
+        else
+        {
+            point[0] = 0;
+            point[1] = 0;
+            point[2] = 0;
+        }
+    }
+    
+    inline unsigned int sphere_discretize(double** facets, unsigned int numberOfIterations)
+    {
+        double p[6][3];
+        double pa[3], pb[3], pc[3];
+        unsigned int nt = 0, ntold;
+    
+        p[5][2] = p[4][2] = p[3][2] = p[2][2] = p[1][0] = p[0][0] = p[1][1] = p[0][1] = 0;
+        p[5][1] = p[4][1] = p[4][0] = p[3][0] = p[0][2] = 1;
+        p[5][0] = p[3][1] = p[2][1] = p[2][0] = p[1][2] = -1;
+        
+        // Create the level 0 object
+        double a = 1 / sqrt(2.0);
+        for(unsigned int i = 0; i < 6; i++)
+        {
+            p[i][0] *= a;
+            p[i][1] *= a;
+        }
+        
+        memcpy(&facets[0][0], p[0], sizeof(double) * 3);
+        memcpy(&facets[0][3], p[3], sizeof(double) * 3);
+        memcpy(&facets[0][6], p[4], sizeof(double) * 3);
+        
+        memcpy(&facets[1][0], p[0], sizeof(double) * 3);
+        memcpy(&facets[1][3], p[4], sizeof(double) * 3);
+        memcpy(&facets[1][6], p[5], sizeof(double) * 3);
+        
+        memcpy(&facets[2][0], p[0], sizeof(double) * 3);
+        memcpy(&facets[2][3], p[5], sizeof(double) * 3);
+        memcpy(&facets[2][6], p[2], sizeof(double) * 3);
+        
+        memcpy(&facets[3][0], p[0], sizeof(double) * 3);
+        memcpy(&facets[3][3], p[2], sizeof(double) * 3);
+        memcpy(&facets[3][6], p[3], sizeof(double) * 3);
+        
+        memcpy(&facets[4][0], p[1], sizeof(double) * 3);
+        memcpy(&facets[4][3], p[4], sizeof(double) * 3);
+        memcpy(&facets[4][6], p[3], sizeof(double) * 3);
+    
+        memcpy(&facets[5][0], p[1], sizeof(double) * 3);
+        memcpy(&facets[5][3], p[5], sizeof(double) * 3);
+        memcpy(&facets[5][6], p[4], sizeof(double) * 3);
+    
+        memcpy(&facets[6][0], p[1], sizeof(double) * 3);
+        memcpy(&facets[6][3], p[2], sizeof(double) * 3);
+        memcpy(&facets[6][6], p[5], sizeof(double) * 3);
+        
+        memcpy(&facets[7][0], p[1], sizeof(double) * 3);
+        memcpy(&facets[7][3], p[3], sizeof(double) * 3);
+        memcpy(&facets[7][6], p[2], sizeof(double) * 3);
         nt = 8;
         
         // Bisect each edge and move to the surface of a unit sphere
         for(unsigned int it = 0; it < numberOfIterations; it++)
         {
             ntold = nt;
-            for(i = 0; i < ntold; i++)
+            for(unsigned int i = 0; i < ntold; i++)
             {
                 pa[0] = (facets[i][0] + facets[i][3]) / 2;
                 pa[1] = (facets[i][1] + facets[i][4]) / 2;
@@ -429,9 +471,9 @@ namespace Hoa3D
                 pc[0] = (facets[i][6] + facets[i][0]) / 2;
                 pc[1] = (facets[i][7] + facets[i][1]) / 2;
                 pc[2] = (facets[i][8] + facets[i][2]) / 2;
-                //Normalise(&pa);
-                //Normalise(&pb);
-                //Normalise(&pc);
+                sphere_normalize_point(pa);
+                sphere_normalize_point(pb);
+                sphere_normalize_point(pc);
                 memcpy(&facets[nt][0], &facets[i][0], sizeof(double) * 3);
                 memcpy(&facets[nt][3], pa, sizeof(double) * 3);
                 memcpy(&facets[nt][6], pc, sizeof(double) * 3);
@@ -451,7 +493,35 @@ namespace Hoa3D
         }
         
         return nt;
-    }*/
+    }
+    
+    inline void facet_cartopol(double *facets)
+    {
+        double x, y, z;
+        for(int i = 0; i < 9; i += 3)
+        {
+            x = facets[i];
+            y = facets[i+1];
+            z = facets[i+2];
+            facets[i] = 1.;
+            facets[i+1] = azimuth(x, y, z);
+            facets[i+1] = elevation(x, y, z);
+        }
+    }
+    
+    inline void facet_poltocar(double *facets)
+    {
+        double r, a, e;
+        for(int i = 0; i < 9; i += 3)
+        {
+            r = facets[i];
+            a = facets[i+1];
+            e = facets[i+2];
+            facets[i] = abscissa(r, a, e);
+            facets[i+1] = elevation(r, a, e);
+            facets[i+1] = height(r, a, e);
+        }
+    }
 }
 
 #endif

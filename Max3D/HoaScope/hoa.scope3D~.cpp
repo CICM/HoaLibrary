@@ -11,7 +11,7 @@
 typedef struct _hoa_scope
 {
 	t_jucebox	j_box;
-
+    
     Hoa3D::Scope*   f_scope;
     long            f_order;
     double*         f_signals;
@@ -29,7 +29,7 @@ typedef struct _hoa_scope
     t_jrgba         f_color_ph;
     t_jrgba         f_color_nh;
 	t_jrgba         f_color_sp;
-
+    
 	double          f_camera[2];
     double          f_camera_ref[2];
     t_pt            f_mouse;
@@ -371,21 +371,23 @@ void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
 
 void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 {
+    int LightPos[4] = {0,0,3,1};
     int number_of_rows = x->f_scope->getNumberOfRows();
 	int number_of_columns = x->f_scope->getNumberOfColumns();
-
+    
 	float value;
-    float one, two;
+    float azimuth, elevation;
 	t_jrgba color_positive = x->f_color_ph;
 	t_jrgba color_negative = x->f_color_nh;
 	
-	glEnable(GL_DEPTH_TEST);
-	glShadeModel(GL_SMOOTH);
+	
+    
+	//glShadeModel(GL_SMOOTH);
     glLoadIdentity();
- 
+    
     glRotated(-x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
     glRotated(x->f_camera[0] / CICM_2PI * 360., 0., 1., 0.);
-
+    glEnable(GL_DEPTH_TEST);
 	glPointSize(1.0f);
     
     if(x->f_sphere)
@@ -393,28 +395,15 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
     if(x->f_vectors)
         hoa_draw_vectors((t_jucebox *) x);
     
-	glBegin(GL_LINE_LOOP);
+	glBegin(GL_TRIANGLE_STRIP);
     
-	for(int i = 0; i < number_of_rows; i++)
+	for(int i = 1; i < number_of_rows; i++)
     {
-        one  =   0;
-        two = (double)i / (double)(number_of_rows - 1) * CICM_PI;
-        value = x->f_scope->getValue(i, 0);
-        if(value < 0)
+        for(int j = 0; j < number_of_columns; j++)
         {
-            glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
-            value= -value;
-        }
-        else
-            glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-            
-    
-        glVertex3d(value * sin(two) * cos(one), value * cos(two), value * sin(two) * sin(one));
-		
-        for(int j = 1; j < number_of_columns; j++)
-        {
-            one  =   (double)j / (double)number_of_columns * CICM_2PI;
-            value = x->f_scope->getValue(i, j);
+            azimuth     =  x->f_scope->getAzimuth(j);
+            elevation   = x->f_scope->getElevation(i-1);
+            value       = x->f_scope->getValue(i-1, j);
             if(value < 0)
             {
                 glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
@@ -422,54 +411,30 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
             }
             else
                 glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-			
-            glVertex3d(value * sin(two) * cos(one), value * cos(two), value * sin(two) * sin(one));
-        }
-        
-        one  =   0;
-        value = x->f_scope->getValue(i, 0);
-        if(value < 0)
-        {
-            glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
-            value = -value;
-        }
-        else
-           glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-        
-        glVertex3d(value * sin(two) * cos(one), value * cos(two), value * sin(two) * sin(one));
-    }
-	
-	for(int j = 0; j < number_of_columns; j++)
-    {
-        one  =   (double)j / (double)number_of_columns * CICM_2PI;
-        two  = 0.;
-        value = x->f_scope->getValue(0, j);
-        if(value < 0)
-        {
-            glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
-            value= -value;
-        }
-        else
-           glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-		
-		glVertex3d(value * sin(two) * cos(one), value * cos(two), value * sin(two) * sin(one));
-		
-        for(int i = 1; i < number_of_rows; i++)
-        {
-            two = (double)i / (double)(number_of_rows - 1) * CICM_PI;
-            value = x->f_scope->getValue(i, j);
+            
+            glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
+            
+            elevation   = x->f_scope->getElevation(i);
+            value       = x->f_scope->getValue(i, j);
             if(value < 0)
             {
                 glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
                 value= -value;
             }
             else
-               glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-			
-            glVertex3d(value * sin(two) * cos(one), value * cos(two), value * sin(two) * sin(one));
+                glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
+            
+            glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
+           
         }
     }
+	
 	glEnd();
+    /*
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glLightiv(GL_LIGHT0,GL_POSITION, LightPos);
+     */
 }
 
 void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers)
@@ -499,4 +464,3 @@ void hoa_scope_free(t_hoa_scope *x)
 	delete x->f_scope;
     delete [] x->f_signals;
 }
-
