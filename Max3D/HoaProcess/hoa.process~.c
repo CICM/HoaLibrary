@@ -40,7 +40,7 @@ static long processor_num_actual_threads;
 
 typedef void *t_outvoid;
 
-///////////////////////////// Generic stureture for an in/out object /////////////////////////////
+///////////////////////////// Generic structure for an in/out object /////////////////////////////
 
 typedef struct _inout
 {
@@ -50,18 +50,6 @@ typedef struct _inout
 	void *s_outlet;
 	
 } t_inout;
-
-////////// Structure for passing arguments to patchers when targeting particular patches /////////
-
-typedef struct _args_struct
-{
-	t_symbol *msg;
-	short argc; 
-	t_atom *argv;
-	
-	long index;
-	
-} t_args_struct;
 
 ////////////////////////////// Structure for patch and related data //////////////////////////////
 
@@ -210,6 +198,7 @@ typedef struct _hoa_processor
 	
 	// Hoa stuff
 	Hoa3D::Ambisonic*   f_ambisonic;
+	t_symbol*			f_mode;
 	
 } t_hoa_processor;
 
@@ -295,6 +284,7 @@ void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long
 
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
+void *hoa_processor_query_mode(t_hoa_processor *x);
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
 
 // ========================================================================================================================================== //
@@ -330,10 +320,7 @@ t_symbol *ps_noedit;
 int C74_EXPORT main(void)
 {
 #ifdef __APPLE__
-	//int mib[4];
-	//size_t len = sizeof(sysconf(_SC_NPROCESSORS_ONLN));
 	processor_num_actual_threads = sysconf(_SC_NPROCESSORS_ONLN);
-	//post("processor_num_actual_threads : %ld", processor_num_actual_threads);
 	//processor_num_actual_threads = sysconf(_SC_THREAD_THREADS_MAX);
 	//processor_num_actual_threads = MPProcessors(); // harker version
 #else
@@ -374,9 +361,9 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_user_target,				"target",			A_GIMME, 0);
 	class_addmethod(c, (method)hoa_processor_user_target_free,			"targetfree",		A_GIMME, 0);
 	
-	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
-	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs", A_CANT, 0);			// query args passed to the object
-	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);	// query the ambisonic order
+	class_addmethod(c, (method)hoa_processor_query_mode,				"get_mode",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigins,		"get_declared_sigins",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigouts,	"get_declared_sigouts", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_sigins,				"get_sigins",			A_CANT, 0);
@@ -426,19 +413,18 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	t_symbol *patch_name_entered = 0;
 	t_symbol *tempsym;
 	int ambisonicOrder = 1;
-	
+	x->f_mode = gensym("post");
+	long i, j;
 	short ac = 0;
 	t_atom av[MAX_ARGS];						
 	
 	x->max_obj_threads = processor_num_actual_threads;
-	
+		
 #ifdef __APPLE__
 	pthread_attr_t tattr;
 	struct sched_param param;
 	int newprio = 63;		
 #endif
-
-	long i, j;
 	
 	// Check if there is a patch name given to load
 	if (argc && atom_gettype(argv) == A_LONG)
@@ -451,6 +437,15 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	if (argc && atom_gettype(argv) == A_SYM)
 	{
 		patch_name_entered = atom_getsym(argv);
+		argc--; argv++;
+	}
+	
+	// Check if there is a patch name given to load
+	if (argc && atom_gettype(argv) == A_SYM)
+	{
+		tempsym = atom_getsym(argv);
+		if (tempsym == gensym("no") || tempsym == gensym("post") || tempsym == gensym("out"))
+			x->f_mode = tempsym;
 		argc--; argv++;
 	}
 	
@@ -468,77 +463,6 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 				av[i] = *argv;
 			ac = i;
 		}
-	}
-	
-	// Set other variables to defaults
-	
-	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
-	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
-	x->declared_ins = x->declared_sig_ins;
-	x->declared_outs = 0;
-	
-	x->patch_spaces_allocated = 0;
-	x->update_thread_map = 0;
-	x->target_index = 0;
-	
-	x->last_vec_size = 64;
-	x->last_samp_rate = 44100;
-	
-	x->in_table = 0;
-	x->out_table = 0;
-	
-	x->patch_is_loading = 0;
-	
-	// Create signal in/out buffers and zero
-	
-	x->sig_ins = (void **) ALIGNED_MALLOC (x->declared_sig_ins * sizeof(void *));
-	x->sig_outs = (void **) ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
-	
-	for (i = 0; i < x->declared_sig_ins; i++)
-		x->sig_ins[i] = 0;
-	for (i = 0; i < x->declared_sig_outs; i++)
-		x->sig_outs[i] = 0;
-	
-	// Make non-signal outlets first
-	
-	if (x->declared_outs)
-	{
-		x->out_table = (t_outvoid *) t_getbytes(x->declared_outs * sizeof(t_outvoid));
-		for (i = x->declared_outs - 1; i >= 0; i--)
-			x->out_table[i] = outlet_new((t_object *)x, 0);
-	}
-	
-	// Make non-signal inlets
-	
-	if (x->declared_ins)
-	{
-		x->in_table = (t_outvoid *)t_getbytes(x->declared_ins * sizeof(t_outvoid));
-		for (i = 0; i < x->declared_ins; i++)
-			x->in_table[i] = outlet_new(0L, 0L);											// make generic unowned inlets
-	}
-	
-	// Make signal ins
-	
-	x->num_proxies = (x->declared_sig_ins > x->declared_ins) ? x->declared_sig_ins : x->declared_ins;
-	
-	dsp_setup((t_pxobject *) x, x->num_proxies);
-	x->x_obj.z_misc = Z_NO_INPLACE;															// due to output zeroing!!
-	
-	// Make signal outs
-	
-	for (i = 0; i < x->declared_sig_outs; i++)
-		outlet_new((t_object *)x, "signal");
-	
-	// Initialise patcher symbol
-	
-	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
-	
-	// Load patches and initialise it for all harmonics
-		
-	if (patch_name_entered)
-	{
-		for (i=0; i<x->f_ambisonic->getNumberOfHarmonics(); i++)
-			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
 	}
 	
 	// --------------------
@@ -604,6 +528,78 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 		SetThreadPriority(x->thread_space_ptr[i].pth, THREAD_PRIORITY_TIME_CRITICAL);
 		x->thread_space_ptr[i].exiting = 0;
 #endif
+	}
+	
+	
+	// Set other variables to defaults
+	
+	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
+	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
+	x->declared_ins = x->declared_sig_ins;
+	x->declared_outs = 0;
+	
+	x->patch_spaces_allocated = 0;
+	x->update_thread_map = 0;
+	x->target_index = 0;
+	
+	x->last_vec_size = 64;
+	x->last_samp_rate = 44100;
+	
+	x->in_table = 0;
+	x->out_table = 0;
+	
+	x->patch_is_loading = 0;
+	
+	// Create signal in/out buffers and zero
+	
+	x->sig_ins = (void **) ALIGNED_MALLOC (x->declared_sig_ins * sizeof(void *));
+	x->sig_outs = (void **) ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
+	
+	for (i = 0; i < x->declared_sig_ins; i++)
+		x->sig_ins[i] = 0;
+	for (i = 0; i < x->declared_sig_outs; i++)
+		x->sig_outs[i] = 0;
+	
+	// Make non-signal outlets first
+	
+	if (x->declared_outs)
+	{
+		x->out_table = (t_outvoid *) t_getbytes(x->declared_outs * sizeof(t_outvoid));
+		for (i = x->declared_outs - 1; i >= 0; i--)
+			x->out_table[i] = outlet_new((t_object *)x, 0);
+	}
+	
+	// Make non-signal inlets
+	
+	if (x->declared_ins)
+	{
+		x->in_table = (t_outvoid *)t_getbytes(x->declared_ins * sizeof(t_outvoid));
+		for (i = 0; i < x->declared_ins; i++)
+			x->in_table[i] = outlet_new(0L, 0L);											// make generic unowned inlets
+	}
+	
+	// Make signal ins
+	
+	x->num_proxies = (x->declared_sig_ins > x->declared_ins) ? x->declared_sig_ins : x->declared_ins;
+	
+	dsp_setup((t_pxobject *) x, x->num_proxies);
+	x->x_obj.z_misc = Z_NO_INPLACE;															// due to output zeroing!!
+	
+	// Make signal outs
+	
+	for (i = 0; i < x->declared_sig_outs; i++)
+		outlet_new((t_object *)x, "signal");
+	
+	// Initialise patcher symbol
+	
+	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
+	
+	// Load patches and initialise it for all harmonics
+	
+	if (patch_name_entered)
+	{
+		for (i=0; i<x->f_ambisonic->getNumberOfHarmonics(); i++)
+			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
 	}
 	
 	return (x);
@@ -1921,10 +1917,10 @@ void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
 	return 0;
 }
 
-void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
+void *hoa_processor_query_mode(t_hoa_processor *x)
 {
-	if (index <= x->patch_spaces_allocated)
-		return (void *) (long) x->patch_space_ptrs[index - 1]->patch_on;
+	if (x->f_ambisonic->getOrder())
+		return (void *) x->f_mode;
 	
 	return 0;
 }
@@ -1943,6 +1939,14 @@ t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *
 	}
 	
 	return HOA_ERR_OUT_OF_MEMORY;
+}
+
+void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
+{
+	if (index <= x->patch_spaces_allocated)
+		return (void *) (long) x->patch_space_ptrs[index - 1]->patch_on;
+	
+	return 0;
 }
 
 //////////////////////////////////////////////// Tempory Memory Queries ///////////////////////////////////////////////

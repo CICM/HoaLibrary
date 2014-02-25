@@ -17,6 +17,28 @@
 
 #define HoaProcessorIsValid(x) (x && ((((t_symbol *) ob_sym (x)) == gensym("hoa.process~"))))
 
+////////// Structure for passing arguments to patchers when targeting particular patches /////////
+
+typedef struct _args_struct
+{
+	t_symbol *msg;
+	short argc;
+	t_atom *argv;
+	
+	long index;
+	
+} t_args_struct;
+
+typedef struct _attr_struct
+{
+	t_symbol *msg;
+	short argc;
+	t_atom *argv;
+	
+	long index;
+	
+} t_attr_struct;
+
 //////////////////////////////////////////////// Object Queries ////////////////////////////////////////////////
 
 // These routines *must* be called these routines at loadbang - they are bogus at any other time
@@ -101,6 +123,14 @@ __inline long HoaProcessor_Get_Ambisonic_Order (void *HoaProcessor_Object)
 {
 	if (HoaProcessorIsValid(HoaProcessor_Object))
 		return (long) mess0((t_object *)HoaProcessor_Object, gensym("get_ambisonic_order"));
+	
+	return 0;
+}
+
+__inline t_symbol *HoaProcessor_Get_Mode (void *HoaProcessor_Object)
+{
+	if (HoaProcessorIsValid(HoaProcessor_Object))
+		return (t_symbol *) mess0((t_object *)HoaProcessor_Object, gensym("get_mode"));
 	
 	return 0;
 }

@@ -34,9 +34,10 @@
 					"id" : "obj-14",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 546.0, 412.0, 40.0, 20.0 ],
-					"text" : "poly~"
+					"numoutlets" : 8,
+					"outlettype" : [ "int", "int", "int", "int", "", "int", "", "" ],
+					"patching_rect" : [ 310.0, 311.0, 357.0, 20.0 ],
+					"text" : "hoa.thisprocess~ 23 fred 0.4 @buffer foo 43 grzegr 54 @pos 1. 2"
 				}
 
 			}
@@ -337,8 +338,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 352.0, 39.0, 60.0, 20.0 ],
-					"text" : "hoa.pdev"
+					"patching_rect" : [ 343.0, 198.5, 147.0, 20.0 ],
+					"text" : "hoa.pdev 1 44. @choz 32"
 				}
 
 			}
@@ -778,12 +779,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 220.0, 408.0, 237.0, 20.0 ],
-					"text" : "hoa.process~ 1 hoa.pdev args @blabla 32"
+					"patching_rect" : [ 220.0, 408.0, 247.0, 33.0 ],
+					"text" : "hoa.process~ 1 hoa.pdev post args dzd 3.4 @bob 345 fredo @vava 0.44 @vv baba 32"
 				}
 
 			}
@@ -799,6 +801,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-32", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -808,6 +811,7 @@
 			}
 , 			{
 				"patchline" : 				{
+					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-32", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1094,9 +1098,9 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-36::obj-32" : [ "[8]", "[2]", 0 ],
 			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
-			"obj-36::obj-35" : [ "[5]", "Level", 0 ]
+			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
+			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
