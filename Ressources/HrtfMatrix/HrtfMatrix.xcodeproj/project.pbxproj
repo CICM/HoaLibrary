@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8F39FF7B18BE3A31009C4AF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F39FF7A18BE3A31009C4AF7 /* main.cpp */; };
-		8F39FF7D18BE3A31009C4AF7 /* HrtfMatrix.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8F39FF7C18BE3A31009C4AF7 /* HrtfMatrix.1 */; };
+		8F39FF8518BE3BA6009C4AF7 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F39FF8318BE3BA6009C4AF7 /* File.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -18,7 +17,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				8F39FF7D18BE3A31009C4AF7 /* HrtfMatrix.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -26,8 +24,8 @@
 
 /* Begin PBXFileReference section */
 		8F39FF7718BE3A31009C4AF7 /* HrtfMatrix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HrtfMatrix; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F39FF7A18BE3A31009C4AF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		8F39FF7C18BE3A31009C4AF7 /* HrtfMatrix.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = HrtfMatrix.1; sourceTree = "<group>"; };
+		8F39FF8318BE3BA6009C4AF7 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
+		8F39FF8418BE3BA6009C4AF7 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +42,8 @@
 		8F39FF6E18BE3A31009C4AF7 = {
 			isa = PBXGroup;
 			children = (
+				8F39FF8318BE3BA6009C4AF7 /* File.cpp */,
+				8F39FF8418BE3BA6009C4AF7 /* File.h */,
 				8F39FF7918BE3A31009C4AF7 /* HrtfMatrix */,
 				8F39FF7818BE3A31009C4AF7 /* Products */,
 			);
@@ -60,8 +60,6 @@
 		8F39FF7918BE3A31009C4AF7 /* HrtfMatrix */ = {
 			isa = PBXGroup;
 			children = (
-				8F39FF7A18BE3A31009C4AF7 /* main.cpp */,
-				8F39FF7C18BE3A31009C4AF7 /* HrtfMatrix.1 */,
 			);
 			path = HrtfMatrix;
 			sourceTree = "<group>";
@@ -117,7 +115,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F39FF7B18BE3A31009C4AF7 /* main.cpp in Sources */,
+				8F39FF8518BE3BA6009C4AF7 /* File.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,14 +193,18 @@
 		8F39FF8118BE3A31009C4AF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/$(CONFIGURATION/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = "$(SRCROOT)";
 			};
 			name = Debug;
 		};
 		8F39FF8218BE3A31009C4AF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/$(CONFIGURATION/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = "$(SRCROOT)";
 			};
 			name = Release;
 		};
