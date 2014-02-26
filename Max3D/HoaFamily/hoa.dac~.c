@@ -111,7 +111,6 @@ void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv)
 					atom_setlong(channels + symPrepend + count++, j);
 				}
 			}
-
 		}	
 		else if(atom_gettype(argv + symPrepend + i) == A_LONG)
 		{
