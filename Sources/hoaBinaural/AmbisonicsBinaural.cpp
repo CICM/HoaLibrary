@@ -156,7 +156,7 @@ long AmbisonicsBinaural::loadImpulses()
 		if(harmonicIndex != 0)
 		{
 			HarmonicVector[harmonicIndex-1] = 0;
-			HarmonicVector[harmonicIndex]= 1;
+			HarmonicVector[harmonicIndex]   = 1;
 		}
 		m_decoder->process(HarmonicVector, LoudspeakersVector);
 		

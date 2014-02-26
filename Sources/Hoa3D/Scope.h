@@ -90,7 +90,7 @@ namespace Hoa3D
         {
             assert(rowIndex < m_number_of_rows);
             assert(columnIndex < m_number_of_columns);
-            return abs(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
+            return fabs(m_matrix[rowIndex * m_number_of_columns + columnIndex]);
         }
 		
         //! Retrieve the azimuth of a point of the spherical harmonics projection.
