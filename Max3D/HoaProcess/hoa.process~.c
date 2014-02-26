@@ -40,7 +40,7 @@ static long processor_num_actual_threads;
 
 typedef void *t_outvoid;
 
-///////////////////////////// Generic stureture for an in/out object /////////////////////////////
+///////////////////////////// Generic structure for an in/out object /////////////////////////////
 
 typedef struct _inout
 {
@@ -50,18 +50,6 @@ typedef struct _inout
 	void *s_outlet;
 	
 } t_inout;
-
-////////// Structure for passing arguments to patchers when targeting particular patches /////////
-
-typedef struct _args_struct
-{
-	t_symbol *msg;
-	short argc; 
-	t_atom *argv;
-	
-	long index;
-	
-} t_args_struct;
 
 ////////////////////////////// Structure for patch and related data //////////////////////////////
 
@@ -210,6 +198,8 @@ typedef struct _hoa_processor
 	
 	// Hoa stuff
 	Hoa3D::Ambisonic*   f_ambisonic;
+	long				f_order;
+	t_symbol*			f_mode;
 	
 } t_hoa_processor;
 
@@ -295,6 +285,7 @@ void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long
 
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
+void *hoa_processor_query_mode(t_hoa_processor *x);
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
 
 // ========================================================================================================================================== //
@@ -330,10 +321,7 @@ t_symbol *ps_noedit;
 int C74_EXPORT main(void)
 {
 #ifdef __APPLE__
-	//int mib[4];
-	//size_t len = sizeof(sysconf(_SC_NPROCESSORS_ONLN));
 	processor_num_actual_threads = sysconf(_SC_NPROCESSORS_ONLN);
-	//post("processor_num_actual_threads : %ld", processor_num_actual_threads);
 	//processor_num_actual_threads = sysconf(_SC_THREAD_THREADS_MAX);
 	//processor_num_actual_threads = MPProcessors(); // harker version
 #else
@@ -374,9 +362,9 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_user_target,				"target",			A_GIMME, 0);
 	class_addmethod(c, (method)hoa_processor_user_target_free,			"targetfree",		A_GIMME, 0);
 	
-	//class_addmethod(c, (method)hoa_processor_query_mode, "get_mode", A_CANT, 0);							// returns : sym no/pre/post/out
-	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs", A_CANT, 0);			// query args passed to the object
-	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);	// query the ambisonic order
+	class_addmethod(c, (method)hoa_processor_query_mode,				"get_mode",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_ambisonic_order,		"get_ambisonic_order",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigins,		"get_declared_sigins",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_declared_sigouts,	"get_declared_sigouts", A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_sigins,				"get_sigins",			A_CANT, 0);
@@ -426,19 +414,18 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	t_symbol *patch_name_entered = 0;
 	t_symbol *tempsym;
 	int ambisonicOrder = 1;
-	
+	x->f_mode = gensym("post");
+	long i, j;
 	short ac = 0;
 	t_atom av[MAX_ARGS];						
 	
 	x->max_obj_threads = processor_num_actual_threads;
-	
+		
 #ifdef __APPLE__
 	pthread_attr_t tattr;
 	struct sched_param param;
 	int newprio = 63;		
 #endif
-
-	long i, j;
 	
 	// Check if there is a patch name given to load
 	if (argc && atom_gettype(argv) == A_LONG)
@@ -451,6 +438,15 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	if (argc && atom_gettype(argv) == A_SYM)
 	{
 		patch_name_entered = atom_getsym(argv);
+		argc--; argv++;
+	}
+	
+	// Check if there is a patch name given to load
+	if (argc && atom_gettype(argv) == A_SYM)
+	{
+		tempsym = atom_getsym(argv);
+		if (tempsym == gensym("no") || tempsym == gensym("out"))
+			x->f_mode = tempsym;
 		argc--; argv++;
 	}
 	
@@ -472,8 +468,18 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// Set other variables to defaults
 	
+	x->f_order = ambisonicOrder;
 	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
 	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
+	if (x->f_mode == gensym("no"))
+	{
+		x->declared_sig_ins = 1;
+	}
+	else if (x->f_mode == gensym("out"))
+	{
+		x->declared_sig_ins = x->declared_sig_outs = ambisonicOrder;
+	}
+	
 	x->declared_ins = x->declared_sig_ins;
 	x->declared_outs = 0;
 	
@@ -529,21 +535,11 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	for (i = 0; i < x->declared_sig_outs; i++)
 		outlet_new((t_object *)x, "signal");
 	
-	// Initialise patcher symbol
-	
-	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
-	
-	// Load patches and initialise it for all harmonics
-		
-	if (patch_name_entered)
-	{
-		for (i=0; i<x->f_ambisonic->getNumberOfHarmonics(); i++)
-			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
-	}
 	
 	// --------------------
 	// Multithreading Setup - defaults to multi-threading off for nested objects, on for non-nested
 	// --------------------
+	
 	
 	if (Get_HoaProcessor_Object()) 
 		x->multithread_flag = 0;									
@@ -606,16 +602,45 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 #endif
 	}
 	
+	
+	// Initialise patcher symbol
+	
+	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
+	
+	// Load patches and initialise it for all harmonics
+	
+	if (patch_name_entered)
+	{
+		for (i=0; i<x->f_ambisonic->getNumberOfHarmonics(); i++)
+			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
+	}
+	
 	return (x);
 }
 
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
-	boxinfos->autoconnect_inputs = x->f_ambisonic->getNumberOfHarmonics();//x->num_proxies;
-	boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();//x->declared_outs;
-	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
-	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	
+	if (x->f_mode == gensym("post"))
+	{
+		boxinfos->autoconnect_inputs = boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();
+		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	}
+	else if (x->f_mode == gensym("no"))
+	{
+		boxinfos->autoconnect_inputs = 1;
+		boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();
+		boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+		boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	}
+	else if (x->f_mode == gensym("out"))
+	{
+		boxinfos->autoconnect_inputs = x->f_order;
+		boxinfos->autoconnect_outputs = x->f_order;
+		boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+		boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	}
 	return HOA_ERR_NONE;
 }
 
@@ -690,7 +715,22 @@ void hoa_processor_free(t_hoa_processor *x)
 
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
-	sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
+	if (x->f_mode == gensym("post"))
+	{
+		sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
+	}
+	else if (x->f_mode == gensym("no"))
+	{
+		if (m == ASSIST_INLET)
+			sprintf(s,"(Signal) For all instances");
+		else
+			sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
+	}
+	else if (x->f_mode == gensym("out"))
+	{
+		sprintf(s,"(Signal) Channel %ld", a+1);
+	}
+	
 }
 
 
@@ -1916,9 +1956,35 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
 {
 	if (x->f_ambisonic->getOrder())
-		return (void *) x->f_ambisonic->getOrder();
+		return (void *)(long) x->f_ambisonic->getOrder();
 	
 	return 0;
+}
+
+void *hoa_processor_query_mode(t_hoa_processor *x)
+{
+	if (x->f_ambisonic->getOrder())
+		return (void *) x->f_mode;
+	
+	return 0;
+}
+
+t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv)
+{
+	argc[0] = 0;
+	argv[0] = NULL;
+	if (index > 0 && index <= x->patch_spaces_allocated)
+	{
+		long ac = x->patch_space_ptrs[index - 1]->x_argc;
+		argc[0] = ac;
+		argv[0] = (t_atom *) malloc(ac * sizeof(t_atom) );
+		for (int i = 0; i < ac; i++)
+			argv[0][i] = x->patch_space_ptrs[index - 1]->x_argv[i];
+		
+		return HOA_ERR_NONE;
+	}
+	
+	return HOA_ERR_OUT_OF_MEMORY;
 }
 
 void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
@@ -1927,22 +1993,6 @@ void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
 		return (void *) (long) x->patch_space_ptrs[index - 1]->patch_on;
 	
 	return 0;
-}
-
-t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv)
-{
-	if (index > 0 && index <= x->patch_spaces_allocated)
-	{
-		long ac = x->patch_space_ptrs[index - 1]->x_argc;
-		argc[0] = ac;
-		argv[0] = (t_atom *) malloc(ac * sizeof(t_atom) );
-		for (int i=0; i<ac; i++)
-			argv[0][i] = x->patch_space_ptrs[index - 1]->x_argv[i];
-		
-		return HOA_ERR_NONE;
-	}
-	
-	return HOA_ERR_OUT_OF_MEMORY;
 }
 
 //////////////////////////////////////////////// Tempory Memory Queries ///////////////////////////////////////////////
