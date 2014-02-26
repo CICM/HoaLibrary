@@ -93,9 +93,11 @@ void hoa_args_setup(short ac, t_atom *av, long *nAttr, t_args_struct *args, t_at
 	
 	nAttr[0] = hoa_get_number_of_attributes(ac, av);
 	
-	args[0].argc = attrOffset;
-	
 	// init arguments
+	
+	args[0].argc = attrOffset;
+	args[0].argv = NULL;
+	
 	if (attrOffset > 0)
 	{
 		args[0].argv = (t_atom *) malloc( attrOffset * sizeof(t_atom));
@@ -104,6 +106,9 @@ void hoa_args_setup(short ac, t_atom *av, long *nAttr, t_args_struct *args, t_at
 	}
 	
 	// init attributes
+	
+	attrs[0] = NULL;
+	
 	if (nAttr[0] > 0)
 	{
 		attrs[0] = (t_attr_struct*) malloc(nAttr[0] * sizeof(t_attr_struct));
@@ -113,7 +118,6 @@ void hoa_args_setup(short ac, t_atom *av, long *nAttr, t_args_struct *args, t_at
 		
 		for (int i = 0; i < nAttr[0]; i++)
 		{
-			//postatom(av);
 			attrName = atom_string(av);
 			
 			if (attrName[0] == '@')
@@ -129,10 +133,8 @@ void hoa_args_setup(short ac, t_atom *av, long *nAttr, t_args_struct *args, t_at
 			attrs[0][i].argc = attrNumberOfArg-1;
 			attrs[0][i].argv = (t_atom*) malloc( attrNumberOfArg * sizeof(t_atom));
 			
-			for (int j = 1; j < attrNumberOfArg; j++) {
+			for (int j = 1; j < attrNumberOfArg; j++)
 				attrs[0][i].argv[j-1] = av[j];
-				//postatom(attrs[0][i].argv+j);
-			}
 			
 			av += attrNumberOfArg;
 			ac -= attrNumberOfArg;
@@ -193,7 +195,7 @@ long hoa_get_number_of_attributes(long ac, t_atom *av)
 
 void hoa_process_attrs(t_hoa_thisprocess *x, long patcher_nAttrs, t_attr_struct *attrs_patcher, long *nAttr, t_attr_struct **attrs_processed)
 {
-	int i, j;
+	int i, j, k;
 	long number_of_attrs = x->object_nAttrs + patcher_nAttrs;
 	
 	// check the real number of attr (! does not check duplicate symbol in object or patcher)
@@ -207,94 +209,171 @@ void hoa_process_attrs(t_hoa_thisprocess *x, long patcher_nAttrs, t_attr_struct 
 	attrs_processed[0] = (t_attr_struct*) malloc( number_of_attrs * sizeof(t_attr_struct));
 	
 	
+	long temp_ac;
+	t_symbol *attrSym;
+	int common = 0;
+	int attr_index = 0, o_attr_index = 0, p_attr_index = 0;
 	
+	// begin with object attr :
+	for (i = 0; i < x->object_nAttrs; i++)
+	{
+		attrSym = x->object_attrs[i].msg;
+		common = 0;
+		
+		// check if attr is common to object and patcher
+		for (j = 0; j < patcher_nAttrs; j++)
+		{
+			if ( attrSym == attrs_patcher[j].msg )
+			{
+				common = 1;
+				o_attr_index = i;
+				p_attr_index = j;
+			}
+		}
+		
+		// if attr only exists in object
+		if (!common)
+		{
+			attrs_processed[0][attr_index].msg = attrSym;
+			temp_ac = x->object_attrs[i].argc;
+			attrs_processed[0][attr_index].argc = temp_ac;
+			attrs_processed[0][attr_index].argv = (t_atom *) malloc(temp_ac * sizeof(t_atom));
+			for (k = 0; k < temp_ac; k++)
+				attrs_processed[0][attr_index].argv[k] = x->object_attrs[i].argv[k];
+		}
+		
+		// attr exists in object and patch (we need to do some overriding)
+		else
+		{
+			attrs_processed[0][attr_index].msg = attrSym;
+			temp_ac = MAX(x->object_attrs[i].argc, attrs_patcher[p_attr_index].argc);
+			attrs_processed[0][attr_index].argc = temp_ac;
+			attrs_processed[0][attr_index].argv = (t_atom *) malloc(temp_ac * sizeof(t_atom));
+			for (k = 0; k < temp_ac; k++)
+				attrs_processed[0][attr_index].argv[k] = ( k < attrs_patcher[p_attr_index].argc) ? attrs_patcher[p_attr_index].argv[k] : x->object_attrs[i].argv[k];
+		}
+		
+		attr_index++;
+	}
+	
+	// The same with patcher attrs :
 	for (i = 0; i < patcher_nAttrs; i++)
 	{
+		attrSym = attrs_patcher[i].msg;
+		common = 0;
+		
+		// check if attr is common to object and patcher
 		for (j = 0; j < x->object_nAttrs; j++)
 		{
-			if ( attrs_patcher[i].msg == x->object_attrs[j].msg )
+			if ( attrSym == x->object_attrs[j].msg )
 			{
-				number_of_attrs--;
+				common = 1;
+				o_attr_index = j;
+				p_attr_index = i;
 			}
+		}
+		
+		// if attr only exists in object
+		if (!common)
+		{
+			attrs_processed[0][attr_index].msg = attrSym;
+			temp_ac = attrs_patcher[i].argc;
+			attrs_processed[0][attr_index].argc = temp_ac;
+			attrs_processed[0][attr_index].argv = (t_atom *) malloc(temp_ac * sizeof(t_atom));
+			for (k = 0; k < temp_ac; k++)
+				attrs_processed[0][attr_index].argv[k] = attrs_patcher[i].argv[k];
+			
+			attr_index++;
 		}
 	}
 }
 
 void hoa_thisprocess_bang(t_hoa_thisprocess *x)
 {
-	if (x->hoaProcessor_parent)
+	// object must be in a hoa.process~ object
+	if (!x->hoaProcessor_parent || x->index <= 0)
+		return;
+	
+	long ac = 0;
+	t_atom *av = NULL;
+	t_hoa_err err = HoaProcessor_Get_PatcherArgs(x->hoaProcessor_parent, x->index, &ac, &av);
+	
+	if (err == HOA_ERR_NONE)
 	{
-		if (x->index > 0)
+		int i;
+		long patcher_nAttrs = 0;
+		t_args_struct patcher_args;
+		t_attr_struct *patcher_attrs = NULL;
+		
+		hoa_args_setup(ac, av, &patcher_nAttrs, &patcher_args, &patcher_attrs);
+		
+		// output attributes
+		
+		if (patcher_nAttrs > 0 || x->object_nAttrs > 0)
 		{
-			long ac = 0;
-			t_atom *av = NULL;
-			t_hoa_err err = HoaProcessor_Get_PatcherArgs(x->hoaProcessor_parent, x->index, &ac, &av);
-			if (ac && av && err == HOA_ERR_NONE)
+			long nAttrs_processed = 0;
+			t_attr_struct *attrs_processed = NULL;
+			hoa_process_attrs(x, patcher_nAttrs, patcher_attrs, &nAttrs_processed, &attrs_processed);
+			
+			if (nAttrs_processed > 0)
+				for (i = 0; i < nAttrs_processed; i++)
+					outlet_anything(x->out_patcherAttr, attrs_processed[i].msg, attrs_processed[i].argc, attrs_processed[i].argv);
+			
+			// output done message to indicate that the attributes have been processed
+			
+			outlet_anything(x->out_patcherAttr, gensym("done"), 0, NULL);
+			
+			// free patcher_attrs
+			
+			for (int i = 0; i < patcher_nAttrs; i++)
+				if(patcher_attrs[i].argv)
+					free(patcher_attrs[i].argv);
+			if(patcher_attrs)
+				free(patcher_attrs);
+			
+			// free attrs_processed
+			if (nAttrs_processed)
 			{
-				int i;
-				long patcher_nAttrs = 0;
-				t_args_struct patcher_args;
-				t_attr_struct *patcher_attrs;
-				
-				hoa_args_setup(ac, av, &patcher_nAttrs, &patcher_args, &patcher_attrs);
-				
-				if (patcher_nAttrs > 0)
-				{
-					long nAttrs_processed = 0;
-					t_attr_struct *attrs_processed;
-					//hoa_process_attrs(x, patcher_nAttrs, patcher_attrs, &nAttrs_processed, &attrs_processed);
-					
-					if (nAttrs_processed > 0)
-					{
-						for (i = 0; i < nAttrs_processed; i++)
-							outlet_anything(x->out_patcherAttr, attrs_processed[i].msg, attrs_processed[i].argc, attrs_processed[i].argv);
-					}
-					
-					// output done message to indicate that the attributes have been processed
-					
-					outlet_anything(x->out_patcherAttr, gensym("done"), 0, NULL);
-					
-					// free patcher_attrs
-					for (int i = 0; i < patcher_nAttrs; i++)
-						free(patcher_attrs[i].argv);
-					free(patcher_attrs);
-					
-					// free attrs_processed
-					for (int i = 0; i < nAttrs_processed; i++)
+				for (int i = 0; i < nAttrs_processed; i++)
+					if(attrs_processed[i].argv)
 						free(attrs_processed[i].argv);
+				if(attrs_processed)
 					free(attrs_processed);
-				}
-								
-				// output arguments
-				if (patcher_args.argc > 0 || x->object_args.argc > 0)
-				{
-					t_args_struct args_processed;
-					args_processed.argc = MAX(patcher_args.argc, x->object_args.argc);
-					args_processed.argv = (t_atom*) malloc(args_processed.argc * sizeof(t_atom));
-					
-					for (i = 0; i < args_processed.argc; i++)
-						args_processed.argv[i] = ( i < patcher_args.argc) ? patcher_args.argv[i] : x->object_args.argv[i];
-					
-					outlet_list(x->out_patcherArgs, gensym("list"), args_processed.argc, args_processed.argv);
-					
-					// free patcher_args
-					free(patcher_args.argv);
-					
-					// free args_processed
-					free(args_processed.argv);
-				}
-
-				free(av);
 			}
 			
-			outlet_int(x->out_mute, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
-			outlet_anything(x->out_mode, HoaProcessor_Get_Mode(x->hoaProcessor_parent), 0, NULL);
-			outlet_int(x->out_order, HoaProcessor_Get_Ambisonic_Order (x->hoaProcessor_parent));
-			outlet_int(x->out_harmonicArgument, x->f_ambisonic->getHarmonicArgument(x->index-1));
-			outlet_int(x->out_harmonicBand, x->f_ambisonic->getHarmonicBand(x->index-1));
-			outlet_int(x->out_index, x->index);
 		}
+		
+		// output arguments
+		
+		if (patcher_args.argc > 0 || x->object_args.argc > 0)
+		{
+			t_args_struct args_processed;
+			args_processed.argc = MAX(patcher_args.argc, x->object_args.argc);
+			args_processed.argv = (t_atom*) malloc(args_processed.argc * sizeof(t_atom));
+			
+			for (i = 0; i < args_processed.argc; i++)
+				args_processed.argv[i] = ( i < patcher_args.argc) ? patcher_args.argv[i] : x->object_args.argv[i];
+			
+			outlet_list(x->out_patcherArgs, gensym("list"), args_processed.argc, args_processed.argv);
+			
+			// free patcher_args
+			if(patcher_args.argv)
+				free(patcher_args.argv);
+			
+			// free args_processed
+			if(args_processed.argv)
+				free(args_processed.argv);
+		}
+		
+		if (av) free(av);
 	}
+	
+	outlet_int(x->out_mute, !HoaProcessor_Get_Patch_On (x->hoaProcessor_parent, x->index));
+	outlet_anything(x->out_mode, HoaProcessor_Get_Mode(x->hoaProcessor_parent), 0, NULL);
+	outlet_int(x->out_order, HoaProcessor_Get_Ambisonic_Order (x->hoaProcessor_parent));
+	outlet_int(x->out_harmonicArgument, x->f_ambisonic->getHarmonicArgument(x->index-1));
+	outlet_int(x->out_harmonicBand, x->f_ambisonic->getHarmonicBand(x->index-1));
+	outlet_int(x->out_index, x->index);
 }
 
 void hoa_thisprocess_assist(t_hoa_thisprocess *x, void *b, long m, long a, char *s)

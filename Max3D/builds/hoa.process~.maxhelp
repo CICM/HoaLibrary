@@ -779,13 +779,12 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
-					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 220.0, 408.0, 247.0, 33.0 ],
-					"text" : "hoa.process~ 1 hoa.pdev post args dzd 3.4 @bob 345 fredo @vava 0.44 @vv baba 32"
+					"patching_rect" : [ 220.0, 408.0, 373.0, 20.0 ],
+					"text" : "hoa.process~ 1 hoa.pdev post args 23 fred 0.4 @buffer foo @pos 1."
 				}
 
 			}

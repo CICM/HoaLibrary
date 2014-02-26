@@ -1927,12 +1927,14 @@ void *hoa_processor_query_mode(t_hoa_processor *x)
 
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv)
 {
+	argc[0] = 0;
+	argv[0] = NULL;
 	if (index > 0 && index <= x->patch_spaces_allocated)
 	{
 		long ac = x->patch_space_ptrs[index - 1]->x_argc;
 		argc[0] = ac;
 		argv[0] = (t_atom *) malloc(ac * sizeof(t_atom) );
-		for (int i=0; i<ac; i++)
+		for (int i = 0; i < ac; i++)
 			argv[0][i] = x->patch_space_ptrs[index - 1]->x_argv[i];
 		
 		return HOA_ERR_NONE;
