@@ -181,10 +181,10 @@
 					"fontsize" : 12.0,
 					"id" : "obj-32",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 4,
 					"numoutlets" : 0,
-					"patching_rect" : [ 160.0, 545.0, 80.0, 20.0 ],
-					"text" : "hoa.dac~ 1 2"
+					"patching_rect" : [ 160.0, 545.0, 454.0, 20.0 ],
+					"text" : "hoa.dac~ 1:4"
 				}
 
 			}
@@ -349,11 +349,11 @@
 					"fontsize" : 11.595187,
 					"id" : "obj-21",
 					"maxclass" : "newobj",
-					"numinlets" : 5,
-					"numoutlets" : 5,
-					"outlettype" : [ "signal", "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 468.0, 237.0, 157.0, 19.0 ],
-					"text" : "hoa.plug~ 2 hoa.delay~ post"
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "signal" ],
+					"patching_rect" : [ 468.0, 237.0, 151.0, 19.0 ],
+					"text" : "hoa.plug~ 2 hoa.delay~ out"
 				}
 
 			}
@@ -783,24 +783,32 @@
 					"numinlets" : 4,
 					"numoutlets" : 4,
 					"outlettype" : [ "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 220.0, 408.0, 373.0, 20.0 ],
-					"text" : "hoa.process~ 1 hoa.pdev post args 23 fred 0.4 @buffer foo @pos 1."
+					"patching_rect" : [ 220.0, 408.0, 367.0, 20.0 ],
+					"text" : "hoa.process~ 4 hoa.ptest out args 23 fred 0.4 @buffer foo @pos 1."
 				}
 
 			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-16", 0 ],
+					"destination" : [ "obj-32", 3 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-1", 1 ]
+					"source" : [ "obj-1", 3 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
+					"destination" : [ "obj-32", 2 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-1", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-32", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -810,7 +818,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"color" : [ 0.2, 0.2, 0.2, 1.0 ],
 					"destination" : [ "obj-32", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -948,33 +955,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-1", 3 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-36", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-1", 2 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-36", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-1", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-36", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1097,19 +1077,12 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
 			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
-			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
+			"obj-36::obj-32" : [ "[8]", "[2]", 0 ],
+			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ]
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "hoa.pdev.maxpat",
-				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max3D/builds",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "hoa.ptest.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max3D/builds",
 				"patcherrelativepath" : ".",
@@ -1127,6 +1100,13 @@
 				"name" : "hoa.delay~.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/patchers/effects",
 				"patcherrelativepath" : "../../_prerelease/max-package/patchers/effects",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hoa.pdev.maxpat",
+				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/Max3D/builds",
+				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -1178,15 +1158,15 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.thisprocess~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
 				"name" : "hoa.connect3D.mxo",
 				"type" : "iLaX"
 			}
 , 			{
 				"name" : "hoa.plug~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.thisprocess~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

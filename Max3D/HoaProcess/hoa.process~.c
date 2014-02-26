@@ -198,6 +198,7 @@ typedef struct _hoa_processor
 	
 	// Hoa stuff
 	Hoa3D::Ambisonic*   f_ambisonic;
+	long				f_order;
 	t_symbol*			f_mode;
 	
 } t_hoa_processor;
@@ -444,7 +445,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	if (argc && atom_gettype(argv) == A_SYM)
 	{
 		tempsym = atom_getsym(argv);
-		if (tempsym == gensym("no") || tempsym == gensym("post") || tempsym == gensym("out"))
+		if (tempsym == gensym("no") || tempsym == gensym("out"))
 			x->f_mode = tempsym;
 		argc--; argv++;
 	}
@@ -465,9 +466,80 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 		}
 	}
 	
+	// Set other variables to defaults
+	
+	x->f_order = ambisonicOrder;
+	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
+	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
+	if (x->f_mode == gensym("no"))
+	{
+		x->declared_sig_ins = 1;
+	}
+	else if (x->f_mode == gensym("out"))
+	{
+		x->declared_sig_ins = x->declared_sig_outs = ambisonicOrder;
+	}
+	
+	x->declared_ins = x->declared_sig_ins;
+	x->declared_outs = 0;
+	
+	x->patch_spaces_allocated = 0;
+	x->update_thread_map = 0;
+	x->target_index = 0;
+	
+	x->last_vec_size = 64;
+	x->last_samp_rate = 44100;
+	
+	x->in_table = 0;
+	x->out_table = 0;
+	
+	x->patch_is_loading = 0;
+	
+	// Create signal in/out buffers and zero
+	
+	x->sig_ins = (void **) ALIGNED_MALLOC (x->declared_sig_ins * sizeof(void *));
+	x->sig_outs = (void **) ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
+	
+	for (i = 0; i < x->declared_sig_ins; i++)
+		x->sig_ins[i] = 0;
+	for (i = 0; i < x->declared_sig_outs; i++)
+		x->sig_outs[i] = 0;
+	
+	// Make non-signal outlets first
+	
+	if (x->declared_outs)
+	{
+		x->out_table = (t_outvoid *) t_getbytes(x->declared_outs * sizeof(t_outvoid));
+		for (i = x->declared_outs - 1; i >= 0; i--)
+			x->out_table[i] = outlet_new((t_object *)x, 0);
+	}
+	
+	// Make non-signal inlets
+	
+	if (x->declared_ins)
+	{
+		x->in_table = (t_outvoid *)t_getbytes(x->declared_ins * sizeof(t_outvoid));
+		for (i = 0; i < x->declared_ins; i++)
+			x->in_table[i] = outlet_new(0L, 0L);											// make generic unowned inlets
+	}
+	
+	// Make signal ins
+	
+	x->num_proxies = (x->declared_sig_ins > x->declared_ins) ? x->declared_sig_ins : x->declared_ins;
+	
+	dsp_setup((t_pxobject *) x, x->num_proxies);
+	x->x_obj.z_misc = Z_NO_INPLACE;															// due to output zeroing!!
+	
+	// Make signal outs
+	
+	for (i = 0; i < x->declared_sig_outs; i++)
+		outlet_new((t_object *)x, "signal");
+	
+	
 	// --------------------
 	// Multithreading Setup - defaults to multi-threading off for nested objects, on for non-nested
 	// --------------------
+	
 	
 	if (Get_HoaProcessor_Object()) 
 		x->multithread_flag = 0;									
@@ -531,65 +603,6 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	}
 	
 	
-	// Set other variables to defaults
-	
-	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
-	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
-	x->declared_ins = x->declared_sig_ins;
-	x->declared_outs = 0;
-	
-	x->patch_spaces_allocated = 0;
-	x->update_thread_map = 0;
-	x->target_index = 0;
-	
-	x->last_vec_size = 64;
-	x->last_samp_rate = 44100;
-	
-	x->in_table = 0;
-	x->out_table = 0;
-	
-	x->patch_is_loading = 0;
-	
-	// Create signal in/out buffers and zero
-	
-	x->sig_ins = (void **) ALIGNED_MALLOC (x->declared_sig_ins * sizeof(void *));
-	x->sig_outs = (void **) ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
-	
-	for (i = 0; i < x->declared_sig_ins; i++)
-		x->sig_ins[i] = 0;
-	for (i = 0; i < x->declared_sig_outs; i++)
-		x->sig_outs[i] = 0;
-	
-	// Make non-signal outlets first
-	
-	if (x->declared_outs)
-	{
-		x->out_table = (t_outvoid *) t_getbytes(x->declared_outs * sizeof(t_outvoid));
-		for (i = x->declared_outs - 1; i >= 0; i--)
-			x->out_table[i] = outlet_new((t_object *)x, 0);
-	}
-	
-	// Make non-signal inlets
-	
-	if (x->declared_ins)
-	{
-		x->in_table = (t_outvoid *)t_getbytes(x->declared_ins * sizeof(t_outvoid));
-		for (i = 0; i < x->declared_ins; i++)
-			x->in_table[i] = outlet_new(0L, 0L);											// make generic unowned inlets
-	}
-	
-	// Make signal ins
-	
-	x->num_proxies = (x->declared_sig_ins > x->declared_ins) ? x->declared_sig_ins : x->declared_ins;
-	
-	dsp_setup((t_pxobject *) x, x->num_proxies);
-	x->x_obj.z_misc = Z_NO_INPLACE;															// due to output zeroing!!
-	
-	// Make signal outs
-	
-	for (i = 0; i < x->declared_sig_outs; i++)
-		outlet_new((t_object *)x, "signal");
-	
 	// Initialise patcher symbol
 	
 	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
@@ -608,10 +621,26 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
-	boxinfos->autoconnect_inputs = x->f_ambisonic->getNumberOfHarmonics();//x->num_proxies;
-	boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();//x->declared_outs;
-	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
-	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	
+	if (x->f_mode == gensym("post"))
+	{
+		boxinfos->autoconnect_inputs = boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();
+		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	}
+	else if (x->f_mode == gensym("no"))
+	{
+		boxinfos->autoconnect_inputs = 1;
+		boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();
+		boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+		boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	}
+	else if (x->f_mode == gensym("out"))
+	{
+		boxinfos->autoconnect_inputs = x->f_order;
+		boxinfos->autoconnect_outputs = x->f_order;
+		boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+		boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	}
 	return HOA_ERR_NONE;
 }
 
@@ -686,7 +715,22 @@ void hoa_processor_free(t_hoa_processor *x)
 
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
-	sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
+	if (x->f_mode == gensym("post"))
+	{
+		sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
+	}
+	else if (x->f_mode == gensym("no"))
+	{
+		if (m == ASSIST_INLET)
+			sprintf(s,"(Signal) For all instances");
+		else
+			sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
+	}
+	else if (x->f_mode == gensym("out"))
+	{
+		sprintf(s,"(Signal) Channel %ld", a+1);
+	}
+	
 }
 
 
@@ -1912,7 +1956,7 @@ void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long sta
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x)
 {
 	if (x->f_ambisonic->getOrder())
-		return (void *) x->f_ambisonic->getOrder();
+		return (void *)(long) x->f_ambisonic->getOrder();
 	
 	return 0;
 }

@@ -11,14 +11,15 @@
 
 typedef struct _hoa_in
 {
-    t_pxobject x_obj;
+    t_pxobject	x_obj;
 	
-	long declared_sig_ins;
-	double **sig_ins;
+	long		declared_sig_ins;
+	double		**sig_ins;
 	
-	long valid;
-	long inlet_num;
-	long parent_patcher_index;
+	long		valid;
+	long		inlet_num;
+	t_symbol*	parent_mode;
+	long		parent_patcher_index;
 	
 } t_hoa_in;
 
@@ -63,7 +64,17 @@ void *hoa_in_new(long inlet_num)
     outlet_new((t_object *)x,"signal");
 	
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
-	x->inlet_num = (inlet_num > 0) ? inlet_num : x->parent_patcher_index;
+	x->parent_mode = HoaProcessor_Get_Mode(hoaprocessor_parent);
+	
+	if (x->parent_mode == gensym("post") || x->parent_mode == gensym("out"))
+	{
+		x->inlet_num = (inlet_num > 0) ? inlet_num : x->parent_patcher_index;
+	}
+	else if (x->parent_mode == gensym("no"))
+	{
+		x->inlet_num = (inlet_num > 0) ? inlet_num : 1;
+	}
+	
 	x->valid = 0;
 	
 	declared_sig_ins = HoaProcessor_Get_Declared_Sigins(hoaprocessor_parent);
