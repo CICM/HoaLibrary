@@ -30,19 +30,15 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
-					"angles" : [ 0.0, 90.0, 180.0, 270.0 ],
-					"channels" : 4,
-					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"drawvector" : 0,
+					"attr" : "gain",
+					"fontname" : "Arial",
+					"fontsize" : 11.595187,
 					"id" : "obj-16",
-					"loudspeakers" : 4,
-					"maxclass" : "hoa.meter~",
-					"numinlets" : 4,
-					"numoutlets" : 2,
-					"outlettype" : [ "list", "list" ],
-					"patching_rect" : [ 638.0, 541.0, 225.0, 225.0 ],
-					"yls" : 4,
-					"zls" : [ 0.0, 90.0, 180.0, 270.0 ]
+					"maxclass" : "attrui",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 330.0, 294.0, 150.0, 19.0 ]
 				}
 
 			}
@@ -100,18 +96,6 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 11.595187,
-					"id" : "obj-3",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 593.0, 573.0, 100.0, 19.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595187,
 					"id" : "obj-7",
 					"maxclass" : "flonum",
 					"numinlets" : 1,
@@ -140,6 +124,7 @@
 				"box" : 				{
 					"camera" : [ -0.361283, -0.424115 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"gain" : 338.0,
 					"id" : "obj-2",
 					"maxclass" : "hoa.scope3D~",
 					"numinlets" : 16,
@@ -885,19 +870,28 @@
 , 			{
 				"box" : 				{
 					"bgcolor" : [ 0.0, 0.0, 0.0, 1.0 ],
-					"camera" : [ -2.304974, 1.507582 ],
+					"camera" : [ -3.068887, 0.084794 ],
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"id" : "obj-1",
 					"maxclass" : "hoa.meter3D~",
 					"numinlets" : 8,
 					"numoutlets" : 0,
 					"overcolor" : [ 1.0, 0.0, 0.0, 1.0 ],
-					"patching_rect" : [ 127.5, 441.0, 329.0, 329.0 ]
+					"patching_rect" : [ 58.0, 513.0, 329.0, 329.0 ]
 				}
 
 			}
  ],
 		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-34", 2 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-11", 0 ]
+				}
+
+			}
+, 			{
 				"patchline" : 				{
 					"destination" : [ "obj-15", 0 ],
 					"disabled" : 0,
@@ -917,15 +911,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-34", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-13", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -939,6 +924,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-14", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-16", 0 ]
 				}
 
 			}
@@ -1328,6 +1322,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-34", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-34", 2 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1382,7 +1385,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-16", 3 ],
+					"destination" : [ "obj-1", 3 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-9", 3 ]
@@ -1391,7 +1394,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-16", 2 ],
+					"destination" : [ "obj-1", 2 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-9", 2 ]
@@ -1400,7 +1403,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-16", 1 ],
+					"destination" : [ "obj-1", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-9", 1 ]
@@ -1409,7 +1412,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-16", 0 ],
+					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-9", 0 ]
@@ -1450,10 +1453,6 @@
 			}
 , 			{
 				"name" : "hoa.scope3D~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "hoa.meter~.mxo",
 				"type" : "iLaX"
 			}
  ]

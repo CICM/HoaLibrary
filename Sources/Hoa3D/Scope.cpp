@@ -15,7 +15,7 @@ namespace Hoa3D
 		m_decoder   = new Decoder(order, m_number_of_rows * m_number_of_columns);
         m_matrix    = new double[m_number_of_rows * m_number_of_columns];
         m_harmonics = new double[m_number_of_harmonics];
-        
+ 
         for(unsigned int i = 0; i < m_number_of_rows; i++)
         {
             for(unsigned int j = 0; j < m_number_of_columns; j++)
@@ -27,24 +27,28 @@ namespace Hoa3D
 	
     void Scope::process(const float* inputs)
     {
-        double max;
+        double max = 1.;
         for(unsigned int i = 0; i < m_number_of_harmonics; i++)
         {
             m_harmonics[i] = inputs[i];
         }
 		m_decoder->process(m_harmonics, m_matrix);
-        max = abs(m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)]);
+        max = fabs(m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)]);
         if(max > 1.)
-            cblas_dscal(m_number_of_rows * m_number_of_columns, 1. / max, m_matrix, 1.);
+        {
+            cblas_dscal(m_number_of_rows * m_number_of_columns, (1. / max), m_matrix, 1.);
+        }
     }
     
     void Scope::process(const double* inputs)
     {
-        double max;
+        double max = 1.;
         m_decoder->process(inputs, m_matrix);
-        max = abs(m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)]);
+        max = fabs(m_matrix[cblas_idamax(m_number_of_rows * m_number_of_columns, m_matrix, 1)]);
         if(max > 1.)
-            cblas_dscal(m_number_of_rows * m_number_of_columns, 1. / max, m_matrix, 1.);
+        {
+            cblas_dscal(m_number_of_rows * m_number_of_columns, (1. / max), m_matrix, 1.);
+        }
     }
     
     Scope::~Scope()

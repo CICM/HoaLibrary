@@ -22,6 +22,7 @@ typedef struct _hoa_scope
 	int             f_startclock;
     long            f_interval;
     
+    long            f_mode;
     long            f_vectors;
     long            f_sphere;
     t_jrgba         f_color_bg;
@@ -88,22 +89,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_SAVE                 (c, "order", 1);
     CLASS_ATTR_PAINT                (c, "order", 1);
     
-    CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_scope, f_interval);
-	CLASS_ATTR_CATEGORY             (c, "interval", 0, "Behavior");
-	CLASS_ATTR_ORDER                (c, "interval", 0, "1");
-	CLASS_ATTR_LABEL                (c, "interval", 0, "Refresh Interval in Milliseconds");
-	CLASS_ATTR_FILTER_MIN           (c, "interval", 20);
-	CLASS_ATTR_DEFAULT              (c, "interval", 0, "100");
-	CLASS_ATTR_SAVE                 (c, "interval", 1);
-    
-    CLASS_ATTR_DOUBLE               (c, "gain", 0, t_hoa_scope, f_gain);
-	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Behavior");
-	CLASS_ATTR_ORDER                (c, "gain", 0, "2");
-	CLASS_ATTR_LABEL                (c, "gain", 0, "Gain factor");
-	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
-	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
-	CLASS_ATTR_SAVE                 (c, "gain", 1);
-    
     CLASS_ATTR_RGBA                 (c, "bgcolor", 0, t_hoa_scope, f_color_bg);
 	CLASS_ATTR_CATEGORY             (c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE                (c, "bgcolor", 0, "rgba");
@@ -139,29 +124,55 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER                (c, "spcolor", 0, "4");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT   (c, "spcolor", 0, "0. 0. 0. 1.");
 	
+    CLASS_ATTR_LONG                 (c, "interval", 0, t_hoa_scope, f_interval);
+	CLASS_ATTR_CATEGORY             (c, "interval", 0, "Rendering");
+	CLASS_ATTR_ORDER                (c, "interval", 0, "1");
+	CLASS_ATTR_LABEL                (c, "interval", 0, "Refresh Interval in Milliseconds");
+	CLASS_ATTR_FILTER_MIN           (c, "interval", 20);
+	CLASS_ATTR_DEFAULT              (c, "interval", 0, "100");
+	CLASS_ATTR_SAVE                 (c, "interval", 1);
+    
 	CLASS_ATTR_DOUBLE_ARRAY         (c, "camera", 0, t_hoa_scope, f_camera, 2);
-	CLASS_ATTR_CATEGORY             (c, "camera", 0, "Rendering Context");
-    CLASS_ATTR_ORDER                (c, "camera", 0, "1");
+	CLASS_ATTR_CATEGORY             (c, "camera", 0, "Rendering");
+    CLASS_ATTR_ORDER                (c, "camera", 0, "2");
 	CLASS_ATTR_LABEL                (c, "camera", 0, "Camera");
 	CLASS_ATTR_DEFAULT_SAVE         (c, "camera", 0, "0. 0.");
 	CLASS_ATTR_ACCESSORS            (c, "camera", NULL, hoa_scope_attr_set_camera);
     CLASS_ATTR_PAINT                (c, "camera", 1);
     
     CLASS_ATTR_ATOM_LONG            (c, "vectors", 0, t_hoa_scope, f_vectors);
-	CLASS_ATTR_CATEGORY             (c, "vectors", 0, "Rendering Context");
-	CLASS_ATTR_ORDER                (c, "vectors", 0, "2");
+	CLASS_ATTR_CATEGORY             (c, "vectors", 0, "Rendering");
+	CLASS_ATTR_ORDER                (c, "vectors", 0, "3");
 	CLASS_ATTR_STYLE_LABEL          (c, "vectors", 0, "onoff", "Draw Vectors");
 	CLASS_ATTR_DEFAULT              (c, "vectors", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "vectors", 1);
     CLASS_ATTR_PAINT                (c, "vectors", 1);
     
     CLASS_ATTR_ATOM_LONG            (c, "sphere", 0, t_hoa_scope, f_sphere);
-	CLASS_ATTR_CATEGORY             (c, "sphere", 0, "Rendering Context");
-	CLASS_ATTR_ORDER                (c, "sphere", 0, "3");
+	CLASS_ATTR_CATEGORY             (c, "sphere", 0, "Rendering");
+	CLASS_ATTR_ORDER                (c, "sphere", 0, "4");
     CLASS_ATTR_STYLE_LABEL          (c, "sphere", 0, "onoff", "Draw Sphere");
 	CLASS_ATTR_DEFAULT              (c, "sphere", 0, "1");
 	CLASS_ATTR_SAVE                 (c, "sphere", 1);
     CLASS_ATTR_PAINT                (c, "sphere", 1);
+    
+    CLASS_ATTR_ATOM_LONG            (c, "style", 0, t_hoa_scope, f_mode);
+	CLASS_ATTR_CATEGORY             (c, "style", 0, "Rendering");
+	CLASS_ATTR_ORDER                (c, "style", 0, "5");
+    CLASS_ATTR_ENUMINDEX2           (c, "style", 0, "Shape", "Mapping");
+    CLASS_ATTR_LABEL                (c, "style", 0, "Style");
+	CLASS_ATTR_DEFAULT              (c, "style", 0, "0");
+    CLASS_ATTR_FILTER_CLIP          (c, "style", 0, 1);
+	CLASS_ATTR_SAVE                 (c, "style", 1);
+    CLASS_ATTR_PAINT                (c, "style", 1);
+    
+    CLASS_ATTR_DOUBLE               (c, "gain", 0, t_hoa_scope, f_gain);
+	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Rendering");
+	CLASS_ATTR_ORDER                (c, "gain", 0, "6");
+	CLASS_ATTR_LABEL                (c, "gain", 0, "Gain factor");
+	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
+	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
+	CLASS_ATTR_SAVE                 (c, "gain", 1);
     
 	class_register(CLASS_BOX, c);
 	hoa_scope_class = c;
@@ -254,8 +265,8 @@ void hoa_scope_perform64(t_hoa_scope *x, t_object *dsp64, double **ins, long num
 	for(int i = 0; i < numins; i++)
     {
         cblas_dcopy(sampleframes, ins[i], 1, x->f_signals+i, numins);
-        cblas_dscal(numins, x->f_gain, x->f_signals+i, 1);
     }
+    cblas_dscal(numins * sampleframes, x->f_gain, x->f_signals, 1);
     x->f_index = 0;
     while(--sampleframes)
     {
@@ -371,7 +382,6 @@ void hoa_draw_sphere(t_jucebox *x, t_jrgba color)
 
 void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 {
-    int LightPos[4] = {0,0,3,1};
     int number_of_rows = x->f_scope->getNumberOfRows();
 	int number_of_columns = x->f_scope->getNumberOfColumns();
     
@@ -381,13 +391,14 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
 	t_jrgba color_negative = x->f_color_nh;
 	
 	
-    
-	//glShadeModel(GL_SMOOTH);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
     glRotated(-x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
     glRotated(x->f_camera[0] / CICM_2PI * 360., 0., 1., 0.);
     glEnable(GL_DEPTH_TEST);
+
 	glPointSize(1.0f);
     
     if(x->f_sphere)
@@ -396,45 +407,64 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
         hoa_draw_vectors((t_jucebox *) x);
     
 	glBegin(GL_TRIANGLE_STRIP);
-    
-	for(int i = 1; i < number_of_rows; i++)
+    if(x->f_mode == 0)
     {
-        for(int j = 0; j < number_of_columns; j++)
+        for(int i = 1; i < number_of_rows; i++)
         {
-            azimuth     =  x->f_scope->getAzimuth(j);
-            elevation   = x->f_scope->getElevation(i-1);
-            value       = x->f_scope->getValue(i-1, j);
-            if(value < 0)
+            for(int j = 0; j < number_of_columns; j++)
             {
-                glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
-                value= -value;
+                azimuth     =  x->f_scope->getAzimuth(j);
+                elevation   = x->f_scope->getElevation(i-1);
+                value       = x->f_scope->getValue(i-1, j);
+                if(value < 0)
+                {
+                    glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
+                    value= -value;
+                }
+                else
+                    glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
+                
+                glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
+                
+                elevation   = x->f_scope->getElevation(i);
+                value       = x->f_scope->getValue(i, j);
+                if(value < 0)
+                {
+                    glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
+                    value= -value;
+                }
+                else
+                    glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
+                
+                glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
+                
             }
-            else
-                glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-            
-            glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
-            
-            elevation   = x->f_scope->getElevation(i);
-            value       = x->f_scope->getValue(i, j);
-            if(value < 0)
-            {
-                glColor4d(color_negative.red, color_negative.green, color_negative.blue, color_negative.alpha);
-                value= -value;
-            }
-            else
-                glColor4d(color_positive.red, color_positive.green, color_positive.blue, color_positive.alpha);
-            
-            glVertex3d(Hoa3D::abscissa(value, azimuth, elevation), Hoa3D::height(value, azimuth, elevation), Hoa3D::ordinate(value, azimuth, elevation));
-           
         }
     }
-	
+    else
+    {
+        for(int i = 1; i < number_of_rows; i++)
+        {
+            for(int j = 0; j < number_of_columns; j++)
+            {
+                azimuth     =  x->f_scope->getAzimuth(j);
+                elevation   = x->f_scope->getElevation(i-1);
+                value       = (x->f_scope->getValue(i-1, j) + 1.) * 0.5;
+                glColor4d(color_positive.red * value + color_negative.red * (1. - value), color_positive.green * value + color_negative.green * (1. - value), color_positive.blue * value + color_negative.blue * (1. - value), color_positive.alpha * value + color_negative.alpha * (1. - value));
+                
+                glVertex3d(Hoa3D::abscissa(1., azimuth, elevation), Hoa3D::height(1., azimuth, elevation), Hoa3D::ordinate(1., azimuth, elevation));
+                
+                elevation   = x->f_scope->getElevation(i);
+                value       = (x->f_scope->getValue(i, j) + 1.) * 0.5;
+                glColor4d(color_positive.red * value + color_negative.red * (1. - value), color_positive.green * value + color_negative.green * (1. - value), color_positive.blue * value + color_negative.blue * (1. - value), color_positive.alpha * value + color_negative.alpha * (1. - value));
+                
+                glVertex3d(Hoa3D::abscissa(1., azimuth, elevation), Hoa3D::height(1., azimuth, elevation), Hoa3D::ordinate(1., azimuth, elevation));
+            }
+        }
+    }
+    
+    
 	glEnd();
-    /*
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glLightiv(GL_LIGHT0,GL_POSITION, LightPos);
-     */
 }
 
 void hoa_scope_mousedown(t_hoa_scope *x, t_object *patcherview, t_pt pt, long modifiers)

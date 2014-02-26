@@ -27,10 +27,8 @@ namespace Hoa3D
         
         m_encoder->setAzimuth(m_loudspeakers_azimuth[index]);
         m_encoder->setElevation(m_loudspeakers_elevation[index]);
-        m_encoder->process(1., m_harmonics_vector);
+        m_encoder->process(12.5 / (double)((m_order+1.)*(m_order+1.)), m_harmonics_vector);
         
-        //m_decoder_matrix[index * m_number_of_harmonics] = 1. / (double)(m_order+1.);
-		//m_decoder_matrix[index * m_number_of_harmonics] = 1. / (double)((m_order+1.)*(m_order+1.));
         for(unsigned int j = 0; j < m_number_of_harmonics; j++)
         {
             m_decoder_matrix_float[index * m_number_of_harmonics + j] = m_decoder_matrix[index * m_number_of_harmonics + j] = m_harmonics_vector[j];
