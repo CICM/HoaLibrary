@@ -79,7 +79,7 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 	{		
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
-        if(atom_gettype(argv+1) == A_LONG)
+        if(argc > 1 && atom_gettype(argv+1) == A_LONG)
             numberOfSources = atom_getlong(argv+1);
 
 		x->f_map = new Hoa3D::Map(order, numberOfSources);
