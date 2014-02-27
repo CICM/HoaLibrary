@@ -109,11 +109,11 @@ namespace Hoa3D
         
 		if(l == m)
         {
-			return pow(-1.0f, (double)m) * double_factorial(2. * m - 1) * pow(1. - x * x, 0.5 * m);
+			return pow(-1.0f, (double)m) * pow(1. - x * x, 0.5 * m) * double_factorial(2. * m - 1);
 		}
 		else if(l == m + 1)
         {
-			return x * (2 * m + 1) * associated_legendre(m, m, x);
+			return x * associated_legendre(m, m, x) * (2 * m + 1);
 		}
         else
         {
@@ -143,6 +143,20 @@ namespace Hoa3D
         else
             return sqrt((2. * l + 1.) / (4. * CICM_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
 	}
+    
+    inline double hoa_normalization(int l, int m)
+	{
+        l = abs(l);
+        m = abs(m);
+        if(m == l || m == 0)
+            return 1. / double_factorial(2. * m - 1);
+        else if(l == m + 1)
+            return 1. / associated_legendre(l, m , cos(CICM_PI / 4.));
+        else if(l == m + 2)
+            return 1. / associated_legendre(l, m , cos(CICM_PI / 2.));
+        else
+            return 1.;
+    }
     
     //! The azimuth part of the spherical harmonics function
     /**	The function computes the azimuth coefficient of the spherical harmonic \f$[l, m]\f$ for an angle \f$\phi\f$ in radian :\n
@@ -185,7 +199,7 @@ namespace Hoa3D
      */
     inline double spherical_harmonics_elevation(int l, int m, double theta)
 	{
-        return legendre_normalization(l, m) * associated_legendre(l, m, cos(theta));
+        return associated_legendre(l, m, cos(theta)) * legendre_normalization(l, m);
     }
     
     //! The spherical harmonics function

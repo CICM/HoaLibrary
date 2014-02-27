@@ -14,6 +14,7 @@ namespace Hoa3D
         m_azimuth           = 0;
         m_azimuth_matrix    = new double*[NUMBEROFCIRCLEPOINTS];
         m_elevation_matrix  = new double*[NUMBEROFCIRCLEPOINTS];
+        m_normalization     = new double[m_number_of_harmonics];
         
         for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
         {
@@ -23,11 +24,13 @@ namespace Hoa3D
         
         for(unsigned int i = 0; i < m_number_of_harmonics; i++)
         {
+            double max;
             double theta;
             double phi;
             int band     = getHarmonicBand(i);
             int argument = getHarmonicArgument(i);
             
+            max = 0.;
             for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
             {
                 phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
@@ -39,20 +42,29 @@ namespace Hoa3D
                 theta = wrap_twopi(theta);
                 if(theta >= CICM_PI)
                     theta = CICM_2PI - theta;
-                
+    
                 m_elevation_matrix[j][i] = spherical_harmonics_elevation(band, argument, theta);
+                if(max < fabs(m_elevation_matrix[j][i]))
+                {
+                    max = fabs(m_elevation_matrix[j][i]);
+                }
+            }
+            m_normalization[i] = max;
+            for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
+            {
+                m_elevation_matrix[j][i] /= max;
             }
         }
     }
     
     void Encoder::setAzimuth(const double azimuth)
     {
-        m_azimuth = wrap_twopi(azimuth) / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
+        m_azimuth = wrap_twopi(azimuth) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);
     }
     
     void Encoder::setElevation(const double elevation)
     {
-        m_elevation = wrap_twopi(elevation)  / CICM_2PI * (double)NUMBEROFCIRCLEPOINTS;
+        m_elevation = wrap_twopi(elevation)  / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);
     }
     
     void Encoder::process(const float input, float* outputs)
@@ -105,6 +117,7 @@ namespace Hoa3D
     {
         delete [] m_azimuth_matrix;
         delete [] m_elevation_matrix;
+        delete [] m_normalization;
     }
 }
 

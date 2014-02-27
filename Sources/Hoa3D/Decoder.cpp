@@ -31,7 +31,7 @@ namespace Hoa3D
         
         for(unsigned int j = 0; j < m_number_of_harmonics; j++)
         {
-            m_decoder_matrix_float[index * m_number_of_harmonics + j] = m_decoder_matrix[index * m_number_of_harmonics + j] = m_harmonics_vector[j];
+            m_decoder_matrix_float[index * m_number_of_harmonics + j] = m_decoder_matrix[index * m_number_of_harmonics + j] = m_harmonics_vector[j] * m_encoder->getNormalization(j) * m_encoder->getNormalization(j);
         }
 	}
 	
