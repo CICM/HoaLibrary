@@ -24,6 +24,7 @@ namespace Hoa3D
         long            m_azimuth;
         double**        m_azimuth_matrix;
         double**        m_elevation_matrix;
+        double*         m_normalization;
         
     public:
         
@@ -54,6 +55,16 @@ namespace Hoa3D
             @see       setElevation()
          */
         void setElevation(const double elevation);
+        
+        /**	Retreive the normalization of an harmonics
+         
+            @param     index The index of the harmonics.
+         */
+        double getNormalization(const unsigned int index) const
+        {
+            assert(index < m_number_of_harmonics);
+            return m_normalization[index];
+        };
         
         //! This method performs the encoding with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the encoding sample by sample. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.

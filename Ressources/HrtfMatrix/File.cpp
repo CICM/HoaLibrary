@@ -12,7 +12,7 @@ static float* Read_Wav(char *wave_file, int* size)
     
     if (file == NULL)
     {
-        printf("nerreur: fichier  %s  introuvablen", wave_file);
+        //printf("nerreur: fichier  %s  introuvablen", wave_file);
         return NULL;
     }
     
@@ -61,18 +61,84 @@ static float* Read_Wav(char *wave_file, int* size)
 
 int main()
 {
-    float* wavfile;
+    float* wavfile = NULL;
     int size;
-    char name[] = "L0e000a.wav";
-    ofstream fichier("hrtfmatrix.cpp", ios::out | ios::trunc);  // ouverture en écriture avec effacement du fichier ouvert
-    wavfile = Read_Wav(name, &size);
+    char repertoire[] = "../MIT_HrtfDatabase/";
+    char frequence[4][512];
+    char elevation[14][512];
+    char path[2048];
+    char path_temp1[2048];
+    char path_temp2[2048];
+    char temp[2048];
+    
+    sprintf(frequence[0], "44100/");
+    sprintf(frequence[1], "48000/");
+    sprintf(frequence[2], "88200/");
+    sprintf(frequence[3], "96000/");
+    
+    sprintf(elevation[0], "elev-40");
+    sprintf(elevation[1], "elev-30/");
+    sprintf(elevation[2], "elev-20/");
+    sprintf(elevation[3], "elev-10/");
+    sprintf(elevation[4], "elev0");
+    sprintf(elevation[5], "elev10/");
+    sprintf(elevation[6], "elev20/");
+    sprintf(elevation[7], "elev30/");
+    sprintf(elevation[8], "elev40");
+    sprintf(elevation[9], "elev50/");
+    sprintf(elevation[10], "elev60/");
+    sprintf(elevation[11], "elev70/");
+    sprintf(elevation[12], "elev80/");
+    sprintf(elevation[13], "elev90/");
+    
+    ofstream fichier("hrtfmatrix.cpp", ios::out | ios::trunc);
     if(fichier)
     {
-        fichier << "size  : " << size << "\n";
-        for(int i = 0; i < size; i++)
+        for(int i = 0; i < 1; i++)
         {
-            fichier << i << " : " << wavfile[i] << "\n";
+            sprintf(path_temp1, "%s%s",repertoire, frequence[i]);
+            int inc = -40;
+            for(int j = 0; j < 14; j ++)
+            {
+                sprintf(path_temp2, "%s",path_temp1);
+                strcat(path_temp2, elevation[j]);
+                
+                for(int k = 0; k < 360; k++)
+                {
+                    sprintf(path, "%s/",path_temp2);
+                    if(k < 10)
+                        sprintf(temp, "L%ie00%ia.wav", inc, (int)k);
+                    else if(k < 100)
+                        sprintf(temp, "L%ie0%ia.wav", inc, (int)k);
+                    else
+                        sprintf(temp, "L%ie%ia.wav", inc, (int)k);
+                    
+                    strcat(path, temp);
+                    wavfile = Read_Wav(path, &size);
+                    if(wavfile)
+                    {
+                        fichier << "\n";
+                        fichier << "static const float  zaza[] = {";
+                        for(int l = 0; l < size - l; l++)
+                        {
+                            if(l % 10 == 0)
+                            {
+                                fichier << "\n";
+                            }
+                            fichier << wavfile[l] << ",";
+                        }
+                        fichier << wavfile[size - 1] << "};";
+                        free(wavfile);
+                        wavfile = NULL;
+                    }
+                    else
+                        wavfile = NULL;
+                }
+                inc += 10;
+            }
         }
+        
+        
         fichier.close();
     }
     else
