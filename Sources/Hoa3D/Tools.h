@@ -144,6 +144,7 @@ namespace Hoa3D
             return sqrt((2. * l + 1.) / (4. * CICM_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
 	}
     
+    /*
     inline double hoa_normalization(int l, int m)
 	{
         l = abs(l);
@@ -156,7 +157,7 @@ namespace Hoa3D
             return 1. / associated_legendre(l, m , cos(CICM_PI / 2.));
         else
             return 1.;
-    }
+    }*/
     
     //! The azimuth part of the spherical harmonics function
     /**	The function computes the azimuth coefficient of the spherical harmonic \f$[l, m]\f$ for an angle \f$\phi\f$ in radian :\n
@@ -535,6 +536,72 @@ namespace Hoa3D
             facets[i+1] = elevation(r, a, e);
             facets[i+1] = height(r, a, e);
         }
+    }
+    
+    static const float  MIT_HRTF_44100[] = {0};
+    static const float  MIT_HRTF_48000[] = {0};
+    static const float  MIT_HRTF_88200[] = {0};
+    static const float  MIT_HRTF_96000[] = {0};
+    
+    inline const float* get_mit_hrtf(long samplerate, long elevation, long azimuth)
+    {
+        int elevation_index;
+        int number_of_samples;
+        int elevation_offset;
+        
+        if(samplerate == 44100)
+            number_of_samples = 512;
+        else if(samplerate == 48000)
+            number_of_samples = 557;
+        else if(samplerate == 48000)
+            number_of_samples = 1024;
+        else if(samplerate == 48000)
+            number_of_samples = 1114;
+        else
+            return NULL;
+        
+        if(elevation == -40)
+            elevation_offset = 0;
+        else if(elevation == -30)
+            elevation_offset = 56 * number_of_samples;
+        else if(elevation == -20)
+            elevation_offset = (56 + 60) * number_of_samples;
+        else if(elevation == -10)
+             elevation_offset = (56 + 60 + 72) * number_of_samples;
+        else if(elevation == 0)
+            elevation_offset = (56 + 60 + 72 + 72) * number_of_samples;
+        else if(elevation == 10)
+            elevation_offset = (56 + 60 + 72 + 72 + 72) * number_of_samples;
+        else if(elevation == 20)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72) * number_of_samples;
+        else if(elevation == 30)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72) * number_of_samples;
+        else if(elevation == 40)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60) * number_of_samples;
+        else if(elevation == 50)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56) * number_of_samples;
+        else if(elevation == 60)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45) * number_of_samples;
+        else if(elevation == 70)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45 + 36) * number_of_samples;
+        else if(elevation == 80)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45 + 36 + 24) * number_of_samples;
+        else if(elevation == 90)
+            elevation_offset = (56 + 60 + 72 + 72 + 72 + 72 + 72 + 60 + 56 + 45 + 36 + 24 + 12) * number_of_samples;
+        else
+            return NULL;
+        
+        elevation_index = (elevation + 40) / 130;
+        
+        if(samplerate == 44100)
+            return MIT_HRTF_44100+elevation_offset;
+        else if(samplerate == 48000)
+            return MIT_HRTF_44100+elevation_offset;
+        else if(samplerate == 88200)
+            return MIT_HRTF_88200+elevation_offset;
+        else if(samplerate == 96000)
+            return MIT_HRTF_96000+elevation_offset;
+        return NULL;
     }
 }
 

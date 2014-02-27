@@ -11,17 +11,33 @@
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
+		8FA123FA18BF457500F6275E /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123E118BF457500F6275E /* Ambisonic.cpp */; };
+		8FA123FB18BF457500F6275E /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123E218BF457500F6275E /* Ambisonic.h */; };
+		8FA123FC18BF457500F6275E /* BinauralMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123E318BF457500F6275E /* BinauralMatrix.cpp */; };
+		8FA123FD18BF457500F6275E /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123E418BF457500F6275E /* Decoder.cpp */; };
+		8FA123FE18BF457500F6275E /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123E518BF457500F6275E /* Decoder.h */; };
+		8FA123FF18BF457500F6275E /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123E618BF457500F6275E /* Encoder.cpp */; };
+		8FA1240018BF457500F6275E /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123E718BF457500F6275E /* Encoder.h */; };
+		8FA1240118BF457500F6275E /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123E818BF457500F6275E /* Hoa3D.h */; };
+		8FA1240218BF457500F6275E /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123E918BF457500F6275E /* Map.cpp */; };
+		8FA1240318BF457500F6275E /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123EA18BF457500F6275E /* Map.h */; };
+		8FA1240418BF457500F6275E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123EB18BF457500F6275E /* Meter.cpp */; };
+		8FA1240518BF457500F6275E /* Meter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123EC18BF457500F6275E /* Meter.h */; };
+		8FA1240618BF457500F6275E /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123ED18BF457500F6275E /* Optim.cpp */; };
+		8FA1240718BF457500F6275E /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123EE18BF457500F6275E /* Optim.h */; };
+		8FA1240818BF457500F6275E /* Planewaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123EF18BF457500F6275E /* Planewaves.cpp */; };
+		8FA1240918BF457500F6275E /* Planewaves.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123F018BF457500F6275E /* Planewaves.h */; };
+		8FA1240A18BF457500F6275E /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123F118BF457500F6275E /* Rotate.cpp */; };
+		8FA1240B18BF457500F6275E /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123F218BF457500F6275E /* Rotate.h */; };
+		8FA1240C18BF457500F6275E /* Scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123F318BF457500F6275E /* Scope.cpp */; };
+		8FA1240D18BF457500F6275E /* Scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123F418BF457500F6275E /* Scope.h */; };
+		8FA1240E18BF457500F6275E /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123F518BF457500F6275E /* Tools.h */; };
+		8FA1240F18BF457500F6275E /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123F618BF457500F6275E /* Vector.cpp */; };
+		8FA1241018BF457500F6275E /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123F718BF457500F6275E /* Vector.h */; };
+		8FA1241118BF457500F6275E /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FA123F818BF457500F6275E /* Wider.cpp */; };
+		8FA1241218BF457500F6275E /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FA123F918BF457500F6275E /* Wider.h */; };
 		8FEFF2EB18B3C46A00EFD3EC /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FEFF2E918B3C46900EFD3EC /* hoa.max.h */; };
 		8FF6066718A361AC0022F248 /* hoa.decoder3D~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6066618A361AC0022F248 /* hoa.decoder3D~.cpp */; };
-		8FF6069818A378940022F248 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6068D18A378940022F248 /* Ambisonic.cpp */; };
-		8FF6069918A378940022F248 /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6068E18A378940022F248 /* Ambisonic.h */; };
-		8FF6069A18A378940022F248 /* Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6068F18A378940022F248 /* Decoder.cpp */; };
-		8FF6069B18A378940022F248 /* Decoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6069018A378940022F248 /* Decoder.h */; };
-		8FF6069C18A378940022F248 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6069118A378940022F248 /* Encoder.cpp */; };
-		8FF6069D18A378940022F248 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6069218A378940022F248 /* Encoder.h */; };
-		8FF6069E18A378940022F248 /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6069318A378940022F248 /* Hoa3D.h */; };
-		8FF606A118A378940022F248 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF6069618A378940022F248 /* Wider.cpp */; };
-		8FF606A218A378940022F248 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF6069718A378940022F248 /* Wider.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,17 +47,33 @@
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8FA123E118BF457500F6275E /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
+		8FA123E218BF457500F6275E /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
+		8FA123E318BF457500F6275E /* BinauralMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinauralMatrix.cpp; sourceTree = "<group>"; };
+		8FA123E418BF457500F6275E /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
+		8FA123E518BF457500F6275E /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		8FA123E618BF457500F6275E /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
+		8FA123E718BF457500F6275E /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
+		8FA123E818BF457500F6275E /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
+		8FA123E918BF457500F6275E /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		8FA123EA18BF457500F6275E /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8FA123EB18BF457500F6275E /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Meter.cpp; sourceTree = "<group>"; };
+		8FA123EC18BF457500F6275E /* Meter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Meter.h; sourceTree = "<group>"; };
+		8FA123ED18BF457500F6275E /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
+		8FA123EE18BF457500F6275E /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
+		8FA123EF18BF457500F6275E /* Planewaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planewaves.cpp; sourceTree = "<group>"; };
+		8FA123F018BF457500F6275E /* Planewaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planewaves.h; sourceTree = "<group>"; };
+		8FA123F118BF457500F6275E /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		8FA123F218BF457500F6275E /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		8FA123F318BF457500F6275E /* Scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scope.cpp; sourceTree = "<group>"; };
+		8FA123F418BF457500F6275E /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
+		8FA123F518BF457500F6275E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		8FA123F618BF457500F6275E /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
+		8FA123F718BF457500F6275E /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		8FA123F818BF457500F6275E /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
+		8FA123F918BF457500F6275E /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		8FEFF2E918B3C46900EFD3EC /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 		8FF6066618A361AC0022F248 /* hoa.decoder3D~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.decoder3D~.cpp"; sourceTree = SOURCE_ROOT; };
-		8FF6068D18A378940022F248 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
-		8FF6068E18A378940022F248 /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
-		8FF6068F18A378940022F248 /* Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Decoder.cpp; sourceTree = "<group>"; };
-		8FF6069018A378940022F248 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
-		8FF6069118A378940022F248 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
-		8FF6069218A378940022F248 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
-		8FF6069318A378940022F248 /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
-		8FF6069618A378940022F248 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
-		8FF6069718A378940022F248 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,24 +117,40 @@
 		8F8FEFFE18A26906000AD610 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8FF6068C18A378940022F248 /* Hoa3D */,
+				8FA123E018BF457500F6275E /* Hoa3D */,
 			);
 			name = Sources;
 			path = ../../Sources;
 			sourceTree = "<group>";
 		};
-		8FF6068C18A378940022F248 /* Hoa3D */ = {
+		8FA123E018BF457500F6275E /* Hoa3D */ = {
 			isa = PBXGroup;
 			children = (
-				8FF6068D18A378940022F248 /* Ambisonic.cpp */,
-				8FF6068E18A378940022F248 /* Ambisonic.h */,
-				8FF6068F18A378940022F248 /* Decoder.cpp */,
-				8FF6069018A378940022F248 /* Decoder.h */,
-				8FF6069118A378940022F248 /* Encoder.cpp */,
-				8FF6069218A378940022F248 /* Encoder.h */,
-				8FF6069318A378940022F248 /* Hoa3D.h */,
-				8FF6069618A378940022F248 /* Wider.cpp */,
-				8FF6069718A378940022F248 /* Wider.h */,
+				8FA123E118BF457500F6275E /* Ambisonic.cpp */,
+				8FA123E218BF457500F6275E /* Ambisonic.h */,
+				8FA123E318BF457500F6275E /* BinauralMatrix.cpp */,
+				8FA123E418BF457500F6275E /* Decoder.cpp */,
+				8FA123E518BF457500F6275E /* Decoder.h */,
+				8FA123E618BF457500F6275E /* Encoder.cpp */,
+				8FA123E718BF457500F6275E /* Encoder.h */,
+				8FA123E818BF457500F6275E /* Hoa3D.h */,
+				8FA123E918BF457500F6275E /* Map.cpp */,
+				8FA123EA18BF457500F6275E /* Map.h */,
+				8FA123EB18BF457500F6275E /* Meter.cpp */,
+				8FA123EC18BF457500F6275E /* Meter.h */,
+				8FA123ED18BF457500F6275E /* Optim.cpp */,
+				8FA123EE18BF457500F6275E /* Optim.h */,
+				8FA123EF18BF457500F6275E /* Planewaves.cpp */,
+				8FA123F018BF457500F6275E /* Planewaves.h */,
+				8FA123F118BF457500F6275E /* Rotate.cpp */,
+				8FA123F218BF457500F6275E /* Rotate.h */,
+				8FA123F318BF457500F6275E /* Scope.cpp */,
+				8FA123F418BF457500F6275E /* Scope.h */,
+				8FA123F518BF457500F6275E /* Tools.h */,
+				8FA123F618BF457500F6275E /* Vector.cpp */,
+				8FA123F718BF457500F6275E /* Vector.h */,
+				8FA123F818BF457500F6275E /* Wider.cpp */,
+				8FA123F918BF457500F6275E /* Wider.h */,
 			);
 			path = Hoa3D;
 			sourceTree = "<group>";
@@ -114,12 +162,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FF6069918A378940022F248 /* Ambisonic.h in Headers */,
+				8FA1240918BF457500F6275E /* Planewaves.h in Headers */,
+				8FA123FB18BF457500F6275E /* Ambisonic.h in Headers */,
+				8FA1241218BF457500F6275E /* Wider.h in Headers */,
 				8FEFF2EB18B3C46A00EFD3EC /* hoa.max.h in Headers */,
-				8FF606A218A378940022F248 /* Wider.h in Headers */,
-				8FF6069E18A378940022F248 /* Hoa3D.h in Headers */,
-				8FF6069B18A378940022F248 /* Decoder.h in Headers */,
-				8FF6069D18A378940022F248 /* Encoder.h in Headers */,
+				8FA1240118BF457500F6275E /* Hoa3D.h in Headers */,
+				8FA1240318BF457500F6275E /* Map.h in Headers */,
+				8FA1240B18BF457500F6275E /* Rotate.h in Headers */,
+				8FA1240E18BF457500F6275E /* Tools.h in Headers */,
+				8FA1240518BF457500F6275E /* Meter.h in Headers */,
+				8FA1240D18BF457500F6275E /* Scope.h in Headers */,
+				8FA123FE18BF457500F6275E /* Decoder.h in Headers */,
+				8FA1240718BF457500F6275E /* Optim.h in Headers */,
+				8FA1240018BF457500F6275E /* Encoder.h in Headers */,
+				8FA1241018BF457500F6275E /* Vector.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,12 +254,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FF6069C18A378940022F248 /* Encoder.cpp in Sources */,
+				8FA1240C18BF457500F6275E /* Scope.cpp in Sources */,
 				8FF6066718A361AC0022F248 /* hoa.decoder3D~.cpp in Sources */,
+				8FA1240818BF457500F6275E /* Planewaves.cpp in Sources */,
 				2CF4221618B7882F00A880EE /* hoa.max.cpp in Sources */,
-				8FF606A118A378940022F248 /* Wider.cpp in Sources */,
-				8FF6069818A378940022F248 /* Ambisonic.cpp in Sources */,
-				8FF6069A18A378940022F248 /* Decoder.cpp in Sources */,
+				8FA123FF18BF457500F6275E /* Encoder.cpp in Sources */,
+				8FA1240A18BF457500F6275E /* Rotate.cpp in Sources */,
+				8FA123FC18BF457500F6275E /* BinauralMatrix.cpp in Sources */,
+				8FA1241118BF457500F6275E /* Wider.cpp in Sources */,
+				8FA123FA18BF457500F6275E /* Ambisonic.cpp in Sources */,
+				8FA1240F18BF457500F6275E /* Vector.cpp in Sources */,
+				8FA1240618BF457500F6275E /* Optim.cpp in Sources */,
+				8FA1240218BF457500F6275E /* Map.cpp in Sources */,
+				8FA123FD18BF457500F6275E /* Decoder.cpp in Sources */,
+				8FA1240418BF457500F6275E /* Meter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
