@@ -24,6 +24,7 @@ typedef struct _hoa_scope
     
     long            f_mode;
     long            f_vectors;
+	long            f_light;
     long            f_sphere;
     t_jrgba         f_color_bg;
 	t_jrgba         f_color_bd;
@@ -173,6 +174,14 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
 	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
 	CLASS_ATTR_SAVE                 (c, "gain", 1);
+	
+	CLASS_ATTR_ATOM_LONG            (c, "light", 0, t_hoa_scope, f_light);
+	CLASS_ATTR_CATEGORY             (c, "light", 0, "Rendering");
+	CLASS_ATTR_ORDER                (c, "light", 0, "3");
+	CLASS_ATTR_STYLE_LABEL          (c, "light", 0, "onoff", "Enable light");
+	CLASS_ATTR_DEFAULT              (c, "light", 0, "1");
+	CLASS_ATTR_SAVE                 (c, "light", 1);
+    CLASS_ATTR_PAINT                (c, "light", 1);
     
 	class_register(CLASS_BOX, c);
 	hoa_scope_class = c;
@@ -394,11 +403,43 @@ void hoa_scope_paint(t_hoa_scope *x, double w, double h)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
-    glRotated(-x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
+	
+    glEnable(GL_DEPTH_TEST); // enable depth buffer
+	
+	if (x->f_light)
+	{
+		// lighting
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		
+		glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT ) ;
+		//glColorMaterial ( GL_FRONT_AND_BACK, GL_DIFFUSE ) ;
+		//glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE ) ;
+		//glColorMaterial ( GL_FRONT_AND_BACK, GL_SHININESS ) ;
+		//glColorMaterial ( GL_FRONT_AND_BACK, GL_EMISSION ) ;
+		
+		glEnable(GL_COLOR_MATERIAL);
+		glShadeModel (GL_SMOOTH); // enable smooth transition from the dark colour to the light
+		
+		//Add ambient light
+		GLfloat ambientColor[] = {0.5f, 0.5f, 0.5f, 1.0f};
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+		
+		//Add positioned light
+		GLfloat lightColor0[] = {0.4f, 0.4f, 0.4f, 1.0f};
+		GLfloat lightPos0[] = {0.0f, 0.0f, 0.0f, 1.0f};
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+		glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+		//glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, 1000);
+	}
+	else
+	{
+		glDisable(GL_LIGHTING);
+	}
+	
+	glRotated(-x->f_camera[1] / CICM_2PI * 360., 1., 0., 0.);
     glRotated(x->f_camera[0] / CICM_2PI * 360., 0., 1., 0.);
-    glEnable(GL_DEPTH_TEST);
-
+	
 	glPointSize(1.0f);
     
     if(x->f_sphere)
