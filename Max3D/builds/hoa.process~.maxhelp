@@ -31,6 +31,68 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-34",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 523.0, 488.0, 51.0, 20.0 ],
+					"text" : "hoa.out"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-33",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 512.0, 451.0, 43.0, 20.0 ],
+					"text" : "hoa.in"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-30",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 463.0, 454.0, 30.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"attr_comment" : ""
+					}
+,
+					"text" : "in 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-28",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 455.0, 483.0, 37.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"attr_comment" : ""
+					}
+,
+					"text" : "out 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-15",
 					"maxclass" : "number~",
 					"mode" : 1,
@@ -38,8 +100,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
 					"patching_rect" : [ 220.0, 332.0, 56.0, 20.0 ],
-					"presentation_rect" : [ 223.0, 335.0, 0.0, 0.0 ],
-					"sig" : 2.14
+					"sig" : 0.0
 				}
 
 			}
@@ -187,7 +248,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 94.0, 198.5, 230.0, 96.0 ]
+					"patching_rect" : [ 94.0, 198.5, 224.0, 93.0 ]
 				}
 
 			}
@@ -796,11 +857,11 @@
 					"fontsize" : 12.0,
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 4,
+					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "signal", "signal", "signal", "signal" ],
-					"patching_rect" : [ 220.0, 408.0, 387.0, 20.0 ],
-					"text" : "hoa.process~ 4 hoa.ptest out args 23 fred 0.4 @buffer foo @pos 1. 5 3"
+					"patching_rect" : [ 220.0, 408.0, 384.0, 20.0 ],
+					"text" : "hoa.process~ 1 hoa.ptest no args 23 fred 0.4 @buffer foo @pos 1. 5 3"
 				}
 
 			}
@@ -848,15 +909,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-12", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-1", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-15", 0 ]
 				}
 
 			}
@@ -1075,8 +1127,8 @@
 			}
  ],
 		"parameters" : 		{
-			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
 			"obj-36::obj-21::obj-6" : [ "live.tab[3]", "live.tab[1]", 0 ],
+			"obj-36::obj-35" : [ "[5]", "Level", 0 ],
 			"obj-36::obj-32" : [ "[8]", "[2]", 0 ]
 		}
 ,
@@ -1153,6 +1205,14 @@
 			}
 , 			{
 				"name" : "hoa.out~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.out.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.in.mxo",
 				"type" : "iLaX"
 			}
 , 			{
