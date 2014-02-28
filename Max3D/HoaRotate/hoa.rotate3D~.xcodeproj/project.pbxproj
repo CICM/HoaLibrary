@@ -11,6 +11,8 @@
 		2C319B6F18A39FA30024A661 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C319B6B18A39FA30024A661 /* Rotate.cpp */; };
 		2C319B7018A39FA30024A661 /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C319B6C18A39FA30024A661 /* Rotate.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
+		8F57FC8518C0BA4300CE780D /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F57FC8318C0BA4200CE780D /* hoa.max.cpp */; };
+		8F57FC8618C0BA4300CE780D /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F57FC8418C0BA4300CE780D /* hoa.max.h */; };
 		8F68C8661823C88A00CAA829 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
 		8FF606AF18A378DE0022F248 /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606A418A378DE0022F248 /* Ambisonic.cpp */; };
@@ -20,8 +22,6 @@
 		8FF606B318A378DE0022F248 /* Encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606A818A378DE0022F248 /* Encoder.cpp */; };
 		8FF606B418A378DE0022F248 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606A918A378DE0022F248 /* Encoder.h */; };
 		8FF606B518A378DE0022F248 /* Hoa3D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AA18A378DE0022F248 /* Hoa3D.h */; };
-		8FF606B618A378DE0022F248 /* Legendre.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606AB18A378DE0022F248 /* Legendre.cpp */; };
-		8FF606B718A378DE0022F248 /* Legendre.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AC18A378DE0022F248 /* Legendre.h */; };
 		8FF606B818A378DE0022F248 /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF606AD18A378DE0022F248 /* Wider.cpp */; };
 		8FF606B918A378DE0022F248 /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FF606AE18A378DE0022F248 /* Wider.h */; };
 		8FF9A72B18AB5D74002721ED /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8FF9A72918AB5D74002721ED /* Map.cpp */; };
@@ -39,6 +39,8 @@
 		2C319B6C18A39FA30024A661 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.rotate3D~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.rotate3D~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F57FC8318C0BA4200CE780D /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../hoa.max.cpp; sourceTree = "<group>"; };
+		8F57FC8418C0BA4300CE780D /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../hoa.max.h; sourceTree = "<group>"; };
 		8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		8FF606A418A378DE0022F248 /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
@@ -48,8 +50,6 @@
 		8FF606A818A378DE0022F248 /* Encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Encoder.cpp; sourceTree = "<group>"; };
 		8FF606A918A378DE0022F248 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
 		8FF606AA18A378DE0022F248 /* Hoa3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa3D.h; sourceTree = "<group>"; };
-		8FF606AB18A378DE0022F248 /* Legendre.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Legendre.cpp; sourceTree = "<group>"; };
-		8FF606AC18A378DE0022F248 /* Legendre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Legendre.h; sourceTree = "<group>"; };
 		8FF606AD18A378DE0022F248 /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
 		8FF606AE18A378DE0022F248 /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		8FF9A72918AB5D74002721ED /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
@@ -78,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				2C319B6718A39E700024A661 /* hoa.rotate3D~.cpp */,
+				8F57FC8318C0BA4200CE780D /* hoa.max.cpp */,
+				8F57FC8418C0BA4300CE780D /* hoa.max.h */,
 				8F8FEFFE18A26906000AD610 /* Sources */,
 				8F68C8651823C88A00CAA829 /* MaxAudioAPI.framework */,
 				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
@@ -115,8 +117,6 @@
 				8FF606A818A378DE0022F248 /* Encoder.cpp */,
 				8FF606A918A378DE0022F248 /* Encoder.h */,
 				8FF606AA18A378DE0022F248 /* Hoa3D.h */,
-				8FF606AB18A378DE0022F248 /* Legendre.cpp */,
-				8FF606AC18A378DE0022F248 /* Legendre.h */,
 				8FF9A72918AB5D74002721ED /* Map.cpp */,
 				8FF9A72A18AB5D74002721ED /* Map.h */,
 				8FF9A72D18AB5D80002721ED /* Optim.cpp */,
@@ -140,10 +140,10 @@
 			files = (
 				8FF606B918A378DE0022F248 /* Wider.h in Headers */,
 				8FF9A72C18AB5D74002721ED /* Map.h in Headers */,
-				8FF606B718A378DE0022F248 /* Legendre.h in Headers */,
 				8FF606B518A378DE0022F248 /* Hoa3D.h in Headers */,
 				8FF606B418A378DE0022F248 /* Encoder.h in Headers */,
 				8FF606B018A378DE0022F248 /* Ambisonic.h in Headers */,
+				8F57FC8618C0BA4300CE780D /* hoa.max.h in Headers */,
 				8FF9A73018AB5D80002721ED /* Optim.h in Headers */,
 				2C319B7018A39FA30024A661 /* Rotate.h in Headers */,
 				8FF9A73418AB66F6002721ED /* Planewaves.h in Headers */,
@@ -230,7 +230,7 @@
 				8FF9A73318AB66F6002721ED /* Planewaves.cpp in Sources */,
 				8FF606B318A378DE0022F248 /* Encoder.cpp in Sources */,
 				2C319B6F18A39FA30024A661 /* Rotate.cpp in Sources */,
-				8FF606B618A378DE0022F248 /* Legendre.cpp in Sources */,
+				8F57FC8518C0BA4300CE780D /* hoa.max.cpp in Sources */,
 				8FF606B818A378DE0022F248 /* Wider.cpp in Sources */,
 				8FF9A72B18AB5D74002721ED /* Map.cpp in Sources */,
 				8FF606AF18A378DE0022F248 /* Ambisonic.cpp in Sources */,
