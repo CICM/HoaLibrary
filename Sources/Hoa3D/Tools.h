@@ -403,111 +403,97 @@ namespace Hoa3D
         return number;
     }
     
-    inline void sphere_normalize_point(double* point)
+    inline void sphere_discretize(unsigned int numberOfPoints, double* azimuths, double* elevations)
     {
-        double length = sqrt(point[0] * point[0] + point[1] * point[1] + point[2] * point[2]);
-        if (length != 0)
+        if(numberOfPoints == 4) // Tethrahedron
         {
-            point[0] /= length;
-            point[1] /= length;
-            point[2] /= length;
+            azimuths[0] = 0.;
+            elevations[0] = CICM_PI2;
+            azimuths[1] = 0.;
+            azimuths[2] = CICM_2PI / 3.;
+            azimuths[3] = 2. * CICM_2PI / 3.;
+            elevations[1] = elevations[2] = elevations[3] = CICM_PI2 - CICM_2PI / 3.;
         }
-        else
+        else if(numberOfPoints == 5) // Not regular : Octahedron with only 3 points at 0 azymuth
         {
-            point[0] = 0;
-            point[1] = 0;
-            point[2] = 0;
+            azimuths[0] = 0.;
+            elevations[0] = CICM_PI2;
+            azimuths[1] = 0.;
+            azimuths[2] = CICM_2PI / 3.;
+            azimuths[3] = 2. * CICM_2PI / 3.;
+            elevations[1] = elevations[2] = elevations[3] = 0;
+            azimuths[4] = 0.;
+            elevations[4] = -CICM_PI2;
         }
-    }
-    
-    inline unsigned int sphere_discretize(double** facets, unsigned int numberOfIterations)
-    {
-        double p[6][3];
-        double pa[3], pb[3], pc[3];
-        unsigned int nt = 0, ntold;
-    
-        p[5][2] = p[4][2] = p[3][2] = p[2][2] = p[1][0] = p[0][0] = p[1][1] = p[0][1] = 0;
-        p[5][1] = p[4][1] = p[4][0] = p[3][0] = p[0][2] = 1;
-        p[5][0] = p[3][1] = p[2][1] = p[2][0] = p[1][2] = -1;
-        
-        // Create the level 0 object
-        double a = 1 / sqrt(2.0);
-        for(unsigned int i = 0; i < 6; i++)
+        else if(numberOfPoints == 6) // Octahedron
         {
-            p[i][0] *= a;
-            p[i][1] *= a;
+            azimuths[0] = 0.;
+            elevations[0] = CICM_PI2;
+            azimuths[1] = 0.;
+            azimuths[2] = CICM_PI2;
+            azimuths[3] = 2. * CICM_PI2;
+            azimuths[4] = 3. * CICM_PI2;
+            elevations[1] = elevations[2] = elevations[3] = elevations[4] = 0;
+            azimuths[5] = 0.;
+            elevations[5] = -CICM_PI2;
         }
-        
-        memcpy(&facets[0][0], p[0], sizeof(double) * 3);
-        memcpy(&facets[0][3], p[3], sizeof(double) * 3);
-        memcpy(&facets[0][6], p[4], sizeof(double) * 3);
-        
-        memcpy(&facets[1][0], p[0], sizeof(double) * 3);
-        memcpy(&facets[1][3], p[4], sizeof(double) * 3);
-        memcpy(&facets[1][6], p[5], sizeof(double) * 3);
-        
-        memcpy(&facets[2][0], p[0], sizeof(double) * 3);
-        memcpy(&facets[2][3], p[5], sizeof(double) * 3);
-        memcpy(&facets[2][6], p[2], sizeof(double) * 3);
-        
-        memcpy(&facets[3][0], p[0], sizeof(double) * 3);
-        memcpy(&facets[3][3], p[2], sizeof(double) * 3);
-        memcpy(&facets[3][6], p[3], sizeof(double) * 3);
-        
-        memcpy(&facets[4][0], p[1], sizeof(double) * 3);
-        memcpy(&facets[4][3], p[4], sizeof(double) * 3);
-        memcpy(&facets[4][6], p[3], sizeof(double) * 3);
-    
-        memcpy(&facets[5][0], p[1], sizeof(double) * 3);
-        memcpy(&facets[5][3], p[5], sizeof(double) * 3);
-        memcpy(&facets[5][6], p[4], sizeof(double) * 3);
-    
-        memcpy(&facets[6][0], p[1], sizeof(double) * 3);
-        memcpy(&facets[6][3], p[2], sizeof(double) * 3);
-        memcpy(&facets[6][6], p[5], sizeof(double) * 3);
-        
-        memcpy(&facets[7][0], p[1], sizeof(double) * 3);
-        memcpy(&facets[7][3], p[3], sizeof(double) * 3);
-        memcpy(&facets[7][6], p[2], sizeof(double) * 3);
-        nt = 8;
-        
-        // Bisect each edge and move to the surface of a unit sphere
-        for(unsigned int it = 0; it < numberOfIterations; it++)
+        else if(numberOfPoints == 7) // Not regular : Octahedron with only 5 points at 0 azymuth
         {
-            ntold = nt;
-            for(unsigned int i = 0; i < ntold; i++)
-            {
-                pa[0] = (facets[i][0] + facets[i][3]) / 2;
-                pa[1] = (facets[i][1] + facets[i][4]) / 2;
-                pa[2] = (facets[i][2] + facets[i][5]) / 2;
-                pb[0] = (facets[i][3] + facets[i][6]) / 2;
-                pb[1] = (facets[i][4] + facets[i][7]) / 2;
-                pb[2] = (facets[i][5] + facets[i][8]) / 2;
-                pc[0] = (facets[i][6] + facets[i][0]) / 2;
-                pc[1] = (facets[i][7] + facets[i][1]) / 2;
-                pc[2] = (facets[i][8] + facets[i][2]) / 2;
-                sphere_normalize_point(pa);
-                sphere_normalize_point(pb);
-                sphere_normalize_point(pc);
-                memcpy(&facets[nt][0], &facets[i][0], sizeof(double) * 3);
-                memcpy(&facets[nt][3], pa, sizeof(double) * 3);
-                memcpy(&facets[nt][6], pc, sizeof(double) * 3);
-                nt++;
-                memcpy(&facets[nt][0], pa, sizeof(double) * 3);
-                memcpy(&facets[nt][3], &facets[i][3], sizeof(double) * 3);
-                memcpy(&facets[nt][6], pb, sizeof(double) * 3);
-                nt++;
-                memcpy(&facets[nt][0], pb, sizeof(double) * 3);
-                memcpy(&facets[nt][3], &facets[i][6], sizeof(double) * 3);
-                memcpy(&facets[nt][6], pc, sizeof(double) * 3);
-                nt++;
-                memcpy(&facets[i][0], pa, sizeof(double) * 3);
-                memcpy(&facets[i][3], pb, sizeof(double) * 3);
-                memcpy(&facets[i][6], pc, sizeof(double) * 3);
-            }
+            azimuths[0] = 0.;
+            elevations[0] = CICM_PI2;
+            azimuths[1] = 0.;
+            azimuths[2] = CICM_2PI / 5.;
+            azimuths[3] = 2. * CICM_2PI / 5.;
+            azimuths[4] = 3. * CICM_2PI / 5.;
+            azimuths[5] = 4. * CICM_2PI / 5.;
+            elevations[1] = elevations[2] = elevations[3] = elevations[4] = elevations[5] = 0;
+            azimuths[6] = 0.;
+            elevations[6] = -CICM_PI2;
         }
-        
-        return nt;
+        else if(numberOfPoints == 8) // Hexahedron or cube
+        {
+            azimuths[0] = azimuths[4] = CICM_PI4;
+            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
+            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
+            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
+        }
+        else if(numberOfPoints == 9) // Not regular : Hexahedron or cube with 1 at PI/2 elevation
+        {
+            azimuths[0] = azimuths[4] = CICM_PI4;
+            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
+            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
+            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
+            elevations[8] = CICM_PI2;
+            azimuths[8] = 0;
+        }
+        else if(numberOfPoints == 10) // Not regular : Hexahedron or cube with 1 at PI/2 elevation and 1 at -Pi/2 elevation
+        {
+            azimuths[0] = azimuths[4] = CICM_PI4;
+            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
+            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
+            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
+            elevations[8] = CICM_PI2;
+            elevations[9] = -CICM_PI2;
+            azimuths[9] = azimuths[8] = 0;
+        }
+        else if(numberOfPoints == 11) // Not regular : Hexahedron or cube with 1 at PI/2 elevation and 1 at -Pi/2 elevation
+        {
+            azimuths[0] = azimuths[4] = CICM_PI4;
+            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
+            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
+            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
+            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
+            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
+            elevations[8] = CICM_PI2;
+            elevations[9] = elevations[9] = -CICM_PI2;
+            azimuths[9] = azimuths[8] = 0;
+        }
     }
     
     inline void facet_cartopol(double *facets)

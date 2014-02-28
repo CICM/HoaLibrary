@@ -33,8 +33,9 @@ void hoa_rotate_perform64_roll_yaw(t_hoa_rotate *x, t_object *dsp64, double **in
 void hoa_rotate_perform64_pitch_yaw(t_hoa_rotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_rotate_perform64(t_hoa_rotate *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-t_class *hoa_rotate_class;
+t_hoa_err hoa_getinfos(t_hoa_rotate* x, t_hoa_boxinfos* boxinfos);
 
+t_class *hoa_rotate_class;
 
 int C74_EXPORT main(void)
 {
@@ -43,6 +44,7 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.rotate3D~", (method)hoa_rotate_new, (method)hoa_rotate_free, (long)sizeof(t_hoa_rotate), 0L, A_GIMME, 0);
 	
+    hoa_initclass(c, (method)hoa_getinfos);
 	class_addmethod(c, (method)hoa_rotate_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_rotate_int,			"int",		A_LONG, 0);
 	class_addmethod(c, (method)hoa_rotate_dsp64,		"dsp64",	A_CANT, 0);
@@ -51,7 +53,6 @@ int C74_EXPORT main(void)
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	
 	hoa_rotate_class = c;
-    hoa_credit();
     
 	return 0;
 }
@@ -79,6 +80,16 @@ void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
 	}
 
 	return (x);
+}
+
+t_hoa_err hoa_getinfos(t_hoa_rotate* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_3D;
+	boxinfos->autoconnect_inputs = x->f_rotate->getNumberOfHarmonics();
+	boxinfos->autoconnect_outputs = x->f_rotate->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
 }
 
 void hoa_rotate_float(t_hoa_rotate *x, double f)
