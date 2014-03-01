@@ -13,11 +13,10 @@ typedef struct _hoa_out
 {
     t_object x_obj;
 	
-	long declared_sig_outs;
-	
+	t_object *parent_processor;
 	long outlet_num;
 	long parent_patcher_index;
-	
+	long s_index;
 } t_hoa_out;
 
 t_class *hoa_out_class;
@@ -55,9 +54,10 @@ void *hoa_out_new(t_symbol *s, short argc, t_atom *argv)
     t_hoa_out *x = (t_hoa_out *)object_alloc(hoa_out_class);
 	void *hoaprocessor_parent = Get_HoaProcessor_Object();
 	
+	x->parent_processor = (t_object*)hoaprocessor_parent;
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
 	x->outlet_num = x->parent_patcher_index;
-			
+	x->s_index = 1;
     return (x);
 }
 
@@ -68,27 +68,54 @@ void hoa_out_assist(t_hoa_out *x, void *b, long m, long a, char *s)
 
 void hoa_out_bang(t_hoa_out *x)
 {
-	;
+	t_args_struct args;
+	args.msg = gensym("bang");
+	args.index = x->parent_patcher_index;
+	args.argc = 0;
+	args.argv = NULL;
+	object_method(x->parent_processor, gensym("out_message"), &args);
 }
 
 void hoa_out_int(t_hoa_out *x, long n)
 {
-	;
+	t_args_struct args;
+	args.msg = gensym("int");
+	args.index = x->parent_patcher_index;
+	args.argc = 1;
+	args.argv = (t_atom*) malloc(sizeof(t_atom));
+	atom_setfloat(args.argv, n);
+	object_method(x->parent_processor, gensym("out_message"), &args);
 }
 
 void hoa_out_float(t_hoa_out *x, double f)
 {
-	;
+	t_args_struct args;
+	args.msg = gensym("float");
+	args.index = x->parent_patcher_index;
+	args.argc = 1;
+	args.argv = (t_atom*) malloc(sizeof(t_atom));
+	atom_setfloat(args.argv, f);
+	object_method(x->parent_processor, gensym("out_message"), &args);
 }
 
 void hoa_out_list(t_hoa_out *x, t_symbol *s, short argc, t_atom *argv)
 {
-	;
+	t_args_struct args;
+	args.msg = gensym("list");
+	args.index = x->parent_patcher_index;
+	args.argc = argc;
+	args.argv = argv;
+	object_method(x->parent_processor, gensym("out_message"), &args);
 }
 
 void hoa_out_anything(t_hoa_out *x, t_symbol *s, short argc, t_atom *argv)
 {
-	;
+	t_args_struct args;
+	args.msg = s;
+	args.index = x->parent_patcher_index;
+	args.argc = argc;
+	args.argv = argv;
+	object_method(x->parent_processor, gensym("out_message"), &args);
 }
 
 void hoa_out_free(t_hoa_out *x)

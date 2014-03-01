@@ -285,6 +285,9 @@ void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
 void *hoa_processor_query_mode(t_hoa_processor *x);
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
 
+
+void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args);
+
 // ========================================================================================================================================== //
 // Symbols
 // ========================================================================================================================================== //
@@ -309,6 +312,10 @@ t_symbol *ps_args;
 t_symbol *ps_getassoc;
 t_symbol *ps_setassoc;
 t_symbol *ps_noedit;
+
+t_symbol *ps_mode_no;
+t_symbol *ps_mode_post;
+t_symbol *ps_mode_out;
 
 
 // ========================================================================================================================================== //
@@ -335,15 +342,15 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_dsp64,						"dsp64",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_assist,					"assist",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_open,						"open",				A_DEFLONG, 0);
-	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",			A_CANT,	   0);
 	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",			A_DEFLONG, 0);
 	
 	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",		A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_parentpatcher,				"parentpatcher",	A_CANT, 0);
 	
-	class_addmethod(c, (method)hoa_processor_bang,						"bang", 0);
-	class_addmethod(c, (method)hoa_processor_int,						"int",				A_LONG, 0);
+	class_addmethod(c, (method)hoa_processor_bang,						"bang",						 0);
+	class_addmethod(c, (method)hoa_processor_int,						"int",				A_LONG,  0);
 	class_addmethod(c, (method)hoa_processor_float,						"float",			A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_processor_list,						"list",				A_GIMME, 0);
 	class_addmethod(c, (method)hoa_processor_anything,					"anything",			A_GIMME, 0);
@@ -367,6 +374,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_query_temp_mem,			"get_temp_mem",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_temp_mem_resize,	"temp_mem_resize",		A_CANT, 0);
 	
+	class_addmethod(c, (method)hoa_processor_out_message,				"out_message",			A_CANT, 0); // used to receive a message from a hoa.out object
+	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
 	hoa_processor_class = c;
@@ -375,21 +384,25 @@ int C74_EXPORT main(void)
 	ps_setassoc =				gensym("setassoc");
 	ps_noedit =					gensym("noedit");
 	
-	ps_HoaProcessor =			gensym("___HoaProcessor~___");						// Capitals must stay here
+	ps_HoaProcessor =			gensym("___HoaProcessor~___");				// Capitals must stay here
 	ps_HoaProcessorPatchIndex = gensym("___HoaProcessorPatchIndex___");		// Capitals must stay here
 	ps_dspchain =				gensym("dspchain");
-	ps_sigin =					gensym("in~");
-	ps_sigout =					gensym("out~");
+	ps_sigin =					gensym("hoa.in~");
+	ps_sigout =					gensym("hoa.out~");
 	ps_bpatcher =				gensym("bpatcher");
 	ps_patcher =				gensym("patcher");
 	ps_front =					gensym("front");
-	ps_in =						gensym("in");
-	ps_out =					gensym("out");
+	ps_in =						gensym("hoa.in");
+	ps_out =					gensym("hoa.out");
 	ps_bang =					gensym("bang");
 	ps_int =					gensym("int");
 	ps_float =					gensym("float");
 	ps_list =					gensym("list");
 	ps_args =					gensym("args");
+	
+	ps_mode_no =				gensym("no");
+	ps_mode_post =				gensym("post");
+	ps_mode_out =				gensym("out");
 	
 	return 0;
 }
@@ -402,12 +415,12 @@ int C74_EXPORT main(void)
 
 void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 {	
-	t_hoa_processor *x = (t_hoa_processor*)object_alloc (hoa_processor_class);
+	t_hoa_processor *x = (t_hoa_processor*)object_alloc(hoa_processor_class);
 	
 	t_symbol *patch_name_entered = 0;
 	t_symbol *tempsym;
 	int ambisonicOrder = 1;
-	x->f_mode = gensym("post");
+	x->f_mode = ps_mode_post;
 	long i, j;
 	short ac = 0;
 	t_atom av[MAX_ARGS];
@@ -439,7 +452,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	if (argc && atom_gettype(argv) == A_SYM)
 	{
 		tempsym = atom_getsym(argv);
-		if (tempsym == gensym("no") || tempsym == gensym("out"))
+		if (tempsym == ps_mode_no || tempsym == ps_mode_out)
 			x->f_mode = tempsym;
 		argc--; argv++;
 	}
@@ -465,17 +478,23 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	x->f_order = ambisonicOrder;
 	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
 	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
-	if (x->f_mode == gensym("no"))
+	if (x->f_mode == ps_mode_no)
 	{
 		x->declared_sig_ins = 1;
 	}
-	else if (x->f_mode == gensym("out"))
+	else if (x->f_mode == ps_mode_out)
 	{
 		x->declared_sig_ins = x->declared_sig_outs = ambisonicOrder;
 	}
 	
 	x->declared_ins = x->declared_sig_ins;
 	x->declared_outs = 0;
+	
+	// test
+	/*
+	x->declared_sig_ins = x->declared_sig_outs = 0;
+	x->declared_outs = x->declared_ins = x->f_ambisonic->getNumberOfHarmonics();
+	*/
 	
 	x->patch_spaces_allocated = 0;
 	x->update_thread_map = 0;
@@ -605,16 +624,25 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	if (patch_name_entered)
 	{
-		if (x->f_mode == gensym("no") || x->f_mode == gensym("post"))
+		if (x->f_mode == ps_mode_no || x->f_mode == ps_mode_post)
 		{
 			number_of_instances_to_load = x->f_ambisonic->getNumberOfHarmonics();
 		}
-		else if (x->f_mode == gensym("out"))
+		else if (x->f_mode == ps_mode_out)
 		{
 			number_of_instances_to_load = ambisonicOrder;
 		}
+		
 		for (i = 0; i < number_of_instances_to_load; i++)
+		{
 			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
+		}
+		
+		long ins, global_ins, sig_ins, global_sig_ins;
+		hoa_processor_get_number_of_hoa_inlets(x->patch_space_ptrs[0]->the_patch, x, &ins, &global_ins, &sig_ins, &global_sig_ins);
+		post("ins = %ld, global_ins = %ld, sig_ins = %ld, global_sig_ins = %ld", ins, global_ins, sig_ins, global_sig_ins);
+		hoa_processor_get_number_of_hoa_outlets(x->patch_space_ptrs[0]->the_patch, x, &ins, &global_ins, &sig_ins, &global_sig_ins);
+		post("outs = %ld, global_outs = %ld, sig_outs = %ld, global_sig_outs = %ld", ins, global_ins, sig_ins, global_sig_ins);
 	}
 	
 	return (x);
@@ -624,19 +652,19 @@ t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_3D;
 	
-	if (x->f_mode == gensym("post"))
+	if (x->f_mode == ps_mode_post)
 	{
 		boxinfos->autoconnect_inputs = boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();
 		boxinfos->autoconnect_inputs_type = boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
 	}
-	else if (x->f_mode == gensym("no"))
+	else if (x->f_mode == ps_mode_no)
 	{
 		boxinfos->autoconnect_inputs = 1;
 		boxinfos->autoconnect_outputs = x->f_ambisonic->getNumberOfHarmonics();
 		boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 		boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
 	}
-	else if (x->f_mode == gensym("out"))
+	else if (x->f_mode == ps_mode_out)
 	{
 		boxinfos->autoconnect_inputs = x->f_order;
 		boxinfos->autoconnect_outputs = x->f_order;
@@ -717,18 +745,18 @@ void hoa_processor_free(t_hoa_processor *x)
 
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
-	if (x->f_mode == gensym("post"))
+	if (x->f_mode == ps_mode_post)
 	{
 		sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
 	}
-	else if (x->f_mode == gensym("no"))
+	else if (x->f_mode == ps_mode_no)
 	{
 		if (m == ASSIST_INLET)
 			sprintf(s,"(Signal) For all instances");
 		else
 			sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
 	}
-	else if (x->f_mode == gensym("out"))
+	else if (x->f_mode == ps_mode_out)
 	{
 		sprintf(s,"(Signal) Channel %ld", a+1);
 	}
@@ -804,7 +832,7 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, long thread_request
 	// Free the old patch - the new patch is not yet valid, but we switch it on so it can be switched off at loadbang time
 	
 	patch_space_ptr->patch_valid = 0;
-	hoa_processor_free_patch_and_dsp (x, patch_space_ptr);
+	hoa_processor_free_patch_and_dsp(x, patch_space_ptr);
 	hoa_processor_init_patch_space(patch_space_ptr);
 	patch_space_ptr->patch_on = 1;
 	
@@ -860,7 +888,7 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, long thread_request
 	
 	// Change the window name to : "patchname (index) [band arg]" (if mode no or post)
 	
-	if (x->f_mode == gensym("post") || x->f_mode == gensym("no"))
+	if (x->f_mode == ps_mode_post || x->f_mode == ps_mode_no)
 	{
 		harmonic_band = x->f_ambisonic->getHarmonicBand(index);
 		harmonic_argument = x->f_ambisonic->getHarmonicArgument(index);
@@ -1048,6 +1076,17 @@ void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_
 	long target_index = argc ? atom_getlong(argv) : 0;
 	
 	x->target_index = target_index;
+}
+
+
+void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args)
+{
+	long index = args->index;
+	if (index > 0 && index <= x->declared_outs)
+	{
+		void *outletptr = x->out_table[index-1];
+		outlet_anything (outletptr, args->msg, args->argc, args->argv);
+	}
 }
 
 // ========================================================================================================================================== //
@@ -1521,12 +1560,12 @@ short hoa_processor_get_number_of_hoa_inlets(t_patcher *p, t_hoa_processor *x, l
 	
 	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
 	{
-		if (jbox_get_maxclass(b) == gensym("hoa.in~"))
+		if (jbox_get_maxclass(b) == ps_sigin)
 		{
 			sig_ins[0]++;
 			io = (t_inout *) jbox_get_object(b);
 		}
-		if (jbox_get_maxclass(b) == gensym("hoa.in"))
+		else if (jbox_get_maxclass(b) == ps_in)
 		{
 			ins[0]++;
 			io = (t_inout *) jbox_get_object(b);
@@ -1536,6 +1575,24 @@ short hoa_processor_get_number_of_hoa_inlets(t_patcher *p, t_hoa_processor *x, l
 }
 short hoa_processor_get_number_of_hoa_outlets(t_patcher *p, t_hoa_processor *x, long *outs, long *global_outs, long *sig_outs, long *global_sig_outs)
 {
+	t_box *b;
+	t_inout *io;
+	outs[0] = global_outs[0] = sig_outs[0] = global_sig_outs[0] = 0;
+	
+	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
+	{
+		if (jbox_get_maxclass(b) == ps_sigout)
+		{
+			sig_outs[0]++;
+			io = (t_inout *) jbox_get_object(b);
+		}
+		else if (jbox_get_maxclass(b) == ps_out)
+		{
+			outs[0]++;
+			io = (t_inout *) jbox_get_object(b);
+		}
+    }
+	return (0);
 	return 0;
 }
 
@@ -1571,7 +1628,12 @@ short hoa_processor_linkoutlets(t_patcher *p, t_hoa_processor *x)
 		{
 			io = (t_inout *) jbox_get_object(b);
 			if (io->s_index <= x->declared_outs)
-				outlet_add(io->s_outlet, x->out_table[io->s_index - 1]);
+			{
+				//outlet_add(io->s_outlet, x->out_table[io->s_index - 1]);
+				//outlet_add(io->s_outlet, x->out_table[io->s_index - 1]);
+				//outlet_add((struct outlet *)io->s_obj.o_inlet, x->out_table[io->s_index - 1]);
+				post("linkoutlet");
+			}
 		}
     }
 	return (0);
@@ -1605,9 +1667,18 @@ short hoa_processor_unlinkoutlets(t_patcher *p, t_hoa_processor *x)
 	{
 		if (jbox_get_maxclass(b)  == ps_out) 
 		{
+			/*
 			io = (t_inout *) jbox_get_object(b);
 			if (io->s_index <= x->declared_outs)
 				outlet_rm(io->s_outlet, x->out_table[io->s_index - 1]);
+			*/
+			io = (t_inout *) jbox_get_object(b);
+			if (io->s_index <= x->declared_outs)
+			{
+				//outlet_rm(io->s_outlet, x->out_table[io->s_index - 1]);
+				//outlet_rm((struct outlet *)io->s_obj.o_inlet, x->out_table[io->s_index - 1]);
+				post("unlinkoutlet");
+			}
 		}
     }
 	return (0);
@@ -1728,7 +1799,7 @@ void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p)
 	for (i = 0; i < x->patch_spaces_allocated; i++)
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
-		if (patch_space_ptr->the_patch == p) 
+		if (patch_space_ptr->the_patch == p)
 			hoa_processor_loadpatch (x, i, 0, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
 	}
 }
