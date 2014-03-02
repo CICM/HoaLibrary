@@ -21,27 +21,34 @@ typedef struct _hoa_sig_in
 	t_symbol*	parent_mode;
 	long		parent_patcher_index;
 	
+	long		param;
+	
 } t_hoa_sig_in;
 
 t_class *hoa_sig_in_class;
 
+void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av);
 void hoa_sig_in_free(t_hoa_sig_in *x);
-void *hoa_sig_in_new(long inlet_num);
 void hoa_sig_in_assist(t_hoa_sig_in *x, void *b, long m, long a, char *s);
 void hoa_sig_in_int(t_hoa_sig_in *x, long inlet_num);
 void hoa_sig_in_dsp64(t_hoa_sig_in *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_sig_in_perform64(t_hoa_sig_in *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
 
+t_max_err hoa_sig_in_setattr_param(t_hoa_sig_in *x, void *attr, long ac, t_atom *av);
+
 int C74_EXPORT main(void)
 {
 	t_class* c;
-	c = class_new("hoa.in~", (method)hoa_sig_in_new, (method)hoa_sig_in_free, sizeof(t_hoa_sig_in), NULL, A_DEFLONG, 0);
+	c = class_new("hoa.in~", (method)hoa_sig_in_new, (method)hoa_sig_in_free, sizeof(t_hoa_sig_in), NULL, A_GIMME, 0);
     
-	hoa_initclass(c, (method)NULL);
+	hoa_initclass(c, NULL);
 	
 	class_addmethod(c, (method)hoa_sig_in_dsp64,	"dsp64",	A_CANT, 0);
     class_addmethod(c, (method)hoa_sig_in_assist,	"assist",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_sig_in_int,		"int",		A_LONG, 0);
+	
+	CLASS_ATTR_LONG (c, "param", 0, t_hoa_sig_in, param);
+	CLASS_ATTR_ACCESSORS(c, "param", NULL, hoa_sig_in_setattr_param);
     
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
@@ -54,14 +61,20 @@ void hoa_sig_in_free(t_hoa_sig_in *x)
 	dsp_free(&x->x_obj);
 }
 
-void *hoa_sig_in_new(long inlet_num)
+void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
 {
     t_hoa_sig_in *x = (t_hoa_sig_in *)object_alloc(hoa_sig_in_class);
 	void *hoaprocessor_parent = Get_HoaProcessor_Object();
 	long declared_sig_ins;
+	long inlet_num = 0;
 
     dsp_setup((t_pxobject *)x, 1);
     outlet_new((t_object *)x,"signal");
+	
+	if (ac && av && atom_gettype(av) == A_LONG)
+		inlet_num = atom_getlong(av);
+	
+	attr_args_process(x, ac, av);
 	
 	x->parent_patcher_index = Get_HoaProcessor_Patch_Index(hoaprocessor_parent);
 	x->parent_mode = HoaProcessor_Get_Mode(hoaprocessor_parent);
@@ -86,6 +99,16 @@ void *hoa_sig_in_new(long inlet_num)
 	x->declared_sig_ins = declared_sig_ins;
 	
     return (x);
+}
+
+t_max_err hoa_sig_in_setattr_param(t_hoa_sig_in *x, void *attr, long ac, t_atom *av)
+{
+	if (ac && av && atom_gettype(av) == A_LONG)
+	{
+		x->param = atom_getlong(av);
+		if (x->param < 0) x->param = 0;
+	}
+	return MAX_ERR_NONE;
 }
 
 void hoa_sig_in_int(t_hoa_sig_in *x, long inlet_num)

@@ -808,7 +808,7 @@ static __inline void schedule_swap_mem_swap (t_safe_mem_swap *mem_struct, void *
 	
 	// This should never fail as this thread has the lock
 	
-	Atomic_Compare_And_Swap_Barrier(1, 0, &mem_struct-> lock);
+	Atomic_Compare_And_Swap_Barrier(1, 0, &mem_struct->lock);
 }
 
 
@@ -823,7 +823,7 @@ static __inline void *schedule_grow_mem_swap (t_safe_mem_swap *mem_struct,  AH_U
 	
 	// Spin on the lock
 	
-	while (!Atomic_Compare_And_Swap_Barrier(0, 1, &mem_struct-> lock));
+	while (!Atomic_Compare_And_Swap_Barrier(0, 1, &mem_struct->lock));
 	
 	if ((mem_struct->current_size < nom_size) && (mem_struct->new_size < nom_size))
 	{

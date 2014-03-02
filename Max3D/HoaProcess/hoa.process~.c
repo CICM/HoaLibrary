@@ -7,17 +7,6 @@
 // based on dynamicdsp~ Copyright 2010 Alex Harker. All rights reserved.
 
 #include "../hoa.max.h"
-
-#ifdef __APPLE__
-#include <pthread.h>
-#include <mach/semaphore.h>
-#include <mach/task.h>
-#else
-#include <Windows.h>
-#define snprintf _snprintf
-#endif 
-
-#include "AH_Headers.h" // concatenated AH headers
 #include "hoa.process~.h"
 
 // ========================================================================================================================================== //
@@ -25,8 +14,6 @@
 // ========================================================================================================================================== //
 
 t_class *hoa_processor_class;
-
-static long processor_num_actual_threads;
 
 #define SIG_SIZE sizeof(double)
 #define MAX_NUM_PATCHES 4096
@@ -72,7 +59,7 @@ typedef struct _patchspace
 	short x_argc;
 	t_atom x_argv[MAX_ARGS];
 	
-	// Pointer to Audio Out Buffers (which are thread dependent)
+	// Pointer to Audio Out Buffers
 	
 	void **out_ptrs;
 	
@@ -81,56 +68,9 @@ typedef struct _patchspace
 	char patch_valid;
 	char patch_on;
 	
-	t_int32_atomic processed_flag;	
-	
-	// Threading Variables
-	
-	long thread_current;
-	long thread_request;
-	
-	// Temporary Memory Variables
-	
-	long required_temp_mem_size;
-	void *temp_mem_ptr;
+	t_int32_atomic processed_flag;
 		
 } t_patchspace;
-
-
-////////////////////////////// Structure for thread and related data /////////////////////////////
-
-typedef struct thread_space {
-	
-	// Thread and Semaphores
-	
-#ifdef __APPLE__
-	pthread_t pth;
-#else
-	HANDLE pth;
-	long exiting;
-#endif
-
-	t_int32_atomic processed;
-	
-	// Internal Buffer Pointer
-	
-	void **thread_temp_buffer;
-	
-	// Temporary Memory For Objects Within Patch
-	
-	long temp_mem_size;
-	void *temp_mem_ptr;
-	
-	void *first_thread_space;
-	
-	// Variables
-	
-	void *hoa_processor_parent;
-	
-	long thread_num;
-	long vec_size;
-	
-} t_threadspace;
-
 
 ////////////////////////////////////// The object structure //////////////////////////////////////
 
@@ -166,36 +106,6 @@ typedef struct _hoa_processor
 	t_outvoid *out_table;			// table of non-signal outlets
 	long num_proxies;				// number of proxies = MAX(declared_sig_ins, declared_ins)
 	
-	// Multithreading Variables
-	
-	long multithread_flag;
-	
-	long request_num_active_threads;
-	long num_active_threads;
-	
-	long request_manual_threading;
-	long manual_threading;
-	long update_thread_map;
-	
-	long max_obj_threads;
-	
-#ifdef __APPLE__
-	task_t the_task;
-	semaphore_t tick_semaphore;	
-#else
-	HANDLE tick_semaphore;
-#endif
-	
-	// Thread Data
-	
-	t_threadspace *thread_space_ptr; 
-	
-	long thread_temp_buffer_size;
-
-	// Temporary Memory Variables
-	
-	t_safe_mem_swap temp_mem;
-	
 	// Hoa stuff
 	Hoa3D::Ambisonic*   f_ambisonic;
 	long				f_order;
@@ -213,7 +123,7 @@ void hoa_processor_free(t_hoa_processor *x);
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s);
 
 void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, void *previous, void *previousindex);
-void hoa_processor_loadpatch (t_hoa_processor *x, long index, long thread_request,  t_symbol *patch_name_in, short argc, t_atom *argv);
+void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_name_in, short argc, t_atom *argv);
 
 void hoa_processor_bang(t_hoa_processor *x);
 void hoa_processor_int(t_hoa_processor *x, long n);
@@ -224,23 +134,10 @@ void hoa_processor_target(t_hoa_processor *x, long target_index, long index, t_s
 short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args);
 void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 
-void hoa_processor_autoloadbalance(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
-void hoa_processor_multithread(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
-void hoa_processor_activethreads(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
-void hoa_processor_threadmap(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
-
-void hoa_processor_free_temp_memory(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv);
 void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_size);
 t_int *hoa_processor_perform(t_int *w);
-void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
-void hoa_processor_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
-__inline void hoa_processor_multithread_perform(t_hoa_processor *x, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads);
-#ifdef __APPLE__
-void *hoa_processor_threadwait(void *arg);
-#else
-DWORD WINAPI hoa_processor_threadwait (LPVOID arg);
-#endif
-__inline void hoa_processor_threadprocess(t_hoa_processor *x, void **sig_outs, void *temp_mem_ptr, long temp_mem_size, long vec_size, long thread_num, long threads_running);
+void hoa_processor_perform64(t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
+__inline void hoa_processor_process(t_hoa_processor *x, void **sig_outs, long vec_size);
 
 long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate);
 void hoa_processor_dsp64 (t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
@@ -277,8 +174,6 @@ void *hoa_processor_query_sigins(t_hoa_processor *x);
 void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index);
 void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index);
 void hoa_processor_client_set_patch_on (t_hoa_processor *x, long index, long state);
-void *hoa_processor_query_temp_mem (t_hoa_processor *x, long index);
-void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long size);
 
 t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos);
 void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
@@ -324,43 +219,28 @@ t_symbol *ps_mode_out;
 
 int C74_EXPORT main(void)
 {
-#ifdef __APPLE__
-	processor_num_actual_threads = sysconf(_SC_NPROCESSORS_ONLN);
-	//processor_num_actual_threads = sysconf(_SC_THREAD_THREADS_MAX);
-	//processor_num_actual_threads = MPProcessors(); // harker version
-#else
-	SYSTEM_INFO sysinfo;
-	GetSystemInfo( &sysinfo );
-	processor_num_actual_threads = sysinfo.dwNumberOfProcessors;
-#endif
-	
 	t_class* c;
 
 	c = class_new("hoa.process~", (method)hoa_processor_new,  (method)hoa_processor_free, sizeof(t_hoa_processor), NULL, A_GIMME, 0);
 	hoa_initclass(c, (method)hoa_getinfos);
 	
-	class_addmethod(c, (method)hoa_processor_dsp64,						"dsp64",			A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_assist,					"assist",			A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_open,						"open",				A_DEFLONG, 0);
-	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",			A_CANT,	   0);
-	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",			A_DEFLONG, 0);
+	class_addmethod(c, (method)hoa_processor_dsp64,						"dsp64",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_assist,					"assist",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_open,						"open",					A_DEFLONG, 0);
+	class_addmethod(c, (method)hoa_processor_dblclick,					"dblclick",				A_CANT,	   0);
+	class_addmethod(c, (method)hoa_processor_wclose,					"wclose",				A_DEFLONG, 0);
 	
-	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",			A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",		A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_parentpatcher,				"parentpatcher",	A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_pupdate,					"pupdate",				A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_subpatcher,				"subpatcher",			A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_parentpatcher,				"parentpatcher",		A_CANT, 0);
 	
-	class_addmethod(c, (method)hoa_processor_bang,						"bang",						 0);
-	class_addmethod(c, (method)hoa_processor_int,						"int",				A_LONG,  0);
-	class_addmethod(c, (method)hoa_processor_float,						"float",			A_FLOAT, 0);
-	class_addmethod(c, (method)hoa_processor_list,						"list",				A_GIMME, 0);
-	class_addmethod(c, (method)hoa_processor_anything,					"anything",			A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_bang,						"bang",							 0);
+	class_addmethod(c, (method)hoa_processor_int,						"int",					A_LONG,  0);
+	class_addmethod(c, (method)hoa_processor_float,						"float",				A_FLOAT, 0);
+	class_addmethod(c, (method)hoa_processor_list,						"list",					A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_anything,					"anything",				A_GIMME, 0);
 	
-	class_addmethod(c, (method)hoa_processor_autoloadbalance,			"autoloadbalance",	A_GIMME, 0);
-	class_addmethod(c, (method)hoa_processor_multithread,				"multithread",		A_GIMME, 0);
-	class_addmethod(c, (method)hoa_processor_activethreads,				"activethreads",	A_GIMME, 0);
-	class_addmethod(c, (method)hoa_processor_threadmap,					"threadmap",		A_GIMME, 0);
-	
-	class_addmethod(c, (method)hoa_processor_user_target,				"target",			A_GIMME, 0);
+	class_addmethod(c, (method)hoa_processor_user_target,				"target",				A_GIMME, 0);
 	
 	class_addmethod(c, (method)hoa_processor_query_mode,				"get_mode",				A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_query_patcherargs,			"get_patcherargs",		A_CANT, 0);
@@ -371,8 +251,6 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_query_outptrs_ptr,			"get_outptrs_ptr",		A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_get_patch_on,		"get_patch_on",			A_CANT, 0);
 	class_addmethod(c, (method)hoa_processor_client_set_patch_on,		"set_patch_on",			A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_query_temp_mem,			"get_temp_mem",			A_CANT, 0);
-	class_addmethod(c, (method)hoa_processor_client_temp_mem_resize,	"temp_mem_resize",		A_CANT, 0);
 	
 	class_addmethod(c, (method)hoa_processor_out_message,				"out_message",			A_CANT, 0); // used to receive a message from a hoa.out object
 	
@@ -421,19 +299,11 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	t_symbol *tempsym;
 	int ambisonicOrder = 1;
 	x->f_mode = ps_mode_post;
-	long i, j;
+	long i;
 	short ac = 0;
 	t_atom av[MAX_ARGS];
 	long number_of_instances_to_load = 0;
-	
-	x->max_obj_threads = processor_num_actual_threads;
-		
-#ifdef __APPLE__
-	pthread_attr_t tattr;
-	struct sched_param param;
-	int newprio = 63;		
-#endif
-	
+
 	// Check if there is a patch name given to load
 	if (argc && atom_gettype(argv) == A_LONG)
 	{
@@ -497,7 +367,6 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	*/
 	
 	x->patch_spaces_allocated = 0;
-	x->update_thread_map = 0;
 	x->target_index = 0;
 	
 	x->last_vec_size = 64;
@@ -510,8 +379,8 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	// Create signal in/out buffers and zero
 	
-	x->sig_ins = (void **) ALIGNED_MALLOC (x->declared_sig_ins * sizeof(void *));
-	x->sig_outs = (void **) ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
+	x->sig_ins = (void **) malloc(x->declared_sig_ins * sizeof(void *));
+	x->sig_outs = (void **) malloc(x->declared_sig_outs * sizeof(void *));
 	
 	for (i = 0; i < x->declared_sig_ins; i++)
 		x->sig_ins[i] = 0;
@@ -548,74 +417,6 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	for (i = 0; i < x->declared_sig_outs; i++)
 		outlet_new((t_object *)x, "signal");
 	
-	
-	// --------------------
-	// Multithreading Setup - defaults to multi-threading off for nested objects, on for non-nested
-	// --------------------
-	
-	
-	if (Get_HoaProcessor_Object()) 
-		x->multithread_flag = 0;									
-	else 
-		x->multithread_flag = 1;
-	
-#ifdef __APPLE__
-	x->the_task = mach_task_self();
-#endif
-
-	// Multithreading variables
-	
-	x->thread_space_ptr = (t_threadspace *) ALIGNED_MALLOC (x->max_obj_threads * sizeof(t_threadspace));
-	x->manual_threading = 1;
-	x->request_manual_threading = 1;
-	x->request_num_active_threads = x->max_obj_threads;
-	x->thread_temp_buffer_size = 0;
-	
-	// Setup temporary memory 
-	
-	alloc_mem_swap(&x->temp_mem, 0, 0);
-				
-	// Create and eetup each threads variables
-	
-	for (i = 0; i < x->max_obj_threads; i++)
-	{
-		x->thread_space_ptr[i].pth = 0;
-		x->thread_space_ptr[i].thread_temp_buffer = (void**)ALIGNED_MALLOC (x->declared_sig_outs * sizeof(void *));
-		x->thread_space_ptr[i].temp_mem_ptr = 0;
-		x->thread_space_ptr[i].hoa_processor_parent = x;
-		x->thread_space_ptr[i].thread_num = i;
-		x->thread_space_ptr[i].first_thread_space = x->thread_space_ptr;
-		
-		for (j = 0; j < x->declared_sig_outs; j++)
-			x->thread_space_ptr[i].thread_temp_buffer[j] = 0;
-	}
-	
-	// Create the extra threads and associated semaphores (thread zero is the main audio thread)
-
-#ifdef __APPLE__	
-	semaphore_create (x->the_task, &x->tick_semaphore, 0, 0);
-#else
-	//x->tick_semaphore  = CreateEvent(NULL, TRUE, FALSE, NULL);
-	x->tick_semaphore  = CreateSemaphore(NULL, 0, max_obj_threads - 1, NULL);
-#endif 
-
-	for (i = 1; i < x->max_obj_threads; i++)
-	{
-		x->thread_space_ptr[i].processed = 1;
-#ifdef __APPLE__
-		pthread_attr_init (&tattr);																// initialized with default attributes 
-		pthread_attr_getschedparam (&tattr, &param);											// safe to get existing scheduling param 
-		param.sched_priority = newprio;															// set the priority; others are unchanged 
-		pthread_attr_setschedparam (&tattr, &param);											// setting the new scheduling param 
-		pthread_create(&(x->thread_space_ptr[i].pth), &tattr, hoa_processor_threadwait, x->thread_space_ptr + i);
-#else
-		x->thread_space_ptr[i].pth = CreateThread (NULL, 0, hoa_processor_threadwait, x->thread_space_ptr + i, 0, NULL);
-		SetThreadPriority(x->thread_space_ptr[i].pth, THREAD_PRIORITY_TIME_CRITICAL);
-		x->thread_space_ptr[i].exiting = 0;
-#endif
-	}
-	
-	
 	// Initialise patcher symbol
 	
 	x->parent_patch = (t_patcher *)gensym("#P")->s_thing;									// store reference to parent patcher
@@ -635,7 +436,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 		
 		for (i = 0; i < number_of_instances_to_load; i++)
 		{
-			hoa_processor_loadpatch(x, i, -1, patch_name_entered, ac, av);
+			hoa_processor_loadpatch(x, i, patch_name_entered, ac, av);
 		}
 		
 		long ins, global_ins, sig_ins, global_sig_ins;
@@ -677,39 +478,9 @@ t_hoa_err hoa_getinfos(t_hoa_processor* x, t_hoa_boxinfos* boxinfos)
 void hoa_processor_free(t_hoa_processor *x)
 {
 	t_patchspace *patch_space_ptr;
-	long thread_temp_buffer_size = x->thread_temp_buffer_size;
-	long i, j;
+	long i;
 	
 	dsp_free((t_pxobject *)x);
-	
-	// Free semaphores
-
-#ifdef __APPLE__
-	semaphore_destroy (x->the_task, x->tick_semaphore);
-#else
-	for (i = 1; i < x->max_obj_threads; i++)
-	{
-		x->thread_space_ptr[i].exiting = 1;
-		//SetEvent(x->thread_space_ptr[i].tick_semaphore);
-	}
-	ReleaseSemaphore(x->tick_semaphore, x->max_obj_threads - 1, NULL);
-	CloseHandle(x->tick_semaphore);
-#endif
-	
-	// Free thread temporary buffers
-	
-	if (thread_temp_buffer_size)
-	{
-		for (i = 0; i < x->max_obj_threads; i++)
-		{
-			for (j = 0; j < x->declared_sig_outs; j ++)
-			{
-				if (x->thread_space_ptr[i].thread_temp_buffer[j])
-					ALIGNED_FREE (x->thread_space_ptr[i].thread_temp_buffer[j]);
-			}
-			ALIGNED_FREE (x->thread_space_ptr[i].thread_temp_buffer);
-		}
-	}	
 	
 	// Free patches
 	
@@ -722,16 +493,11 @@ void hoa_processor_free(t_hoa_processor *x)
 			freebytes((char *) patch_space_ptr, sizeof(t_patchspace));
 	}
 	
-	// Free other resources
-	
-	free_mem_swap(&x->temp_mem);
-	ALIGNED_FREE(x->thread_space_ptr);
-	
 	if (x->declared_sig_ins)
-		ALIGNED_FREE(x->sig_ins);
+		free(x->sig_ins);
 	
 	if (x->declared_sig_outs)
-		ALIGNED_FREE(x->sig_outs);
+		free(x->sig_outs);
 	
 	for (i = 0; i < x->declared_ins; i++)
 		freeobject((t_object*)x->in_table[i]);
@@ -752,7 +518,7 @@ void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 	else if (x->f_mode == ps_mode_no)
 	{
 		if (m == ASSIST_INLET)
-			sprintf(s,"(Signal) For all instances");
+			sprintf(s,"(Signal) Send to all instances");
 		else
 			sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
 	}
@@ -778,7 +544,7 @@ void hoa_processor_loadexit(t_hoa_processor *x, long replace_symbol_pointers, vo
 	ATOMIC_DECREMENT_BARRIER(&x->patch_is_loading);
 }
 
-void hoa_processor_loadpatch(t_hoa_processor *x, long index, long thread_request, t_symbol *patch_name_in, short argc, t_atom *argv)
+void hoa_processor_loadpatch(t_hoa_processor *x, long index, t_symbol *patch_name_in, short argc, t_atom *argv)
 {
 	t_patchspace *patch_space_ptr = 0;
 	t_object *previous;
@@ -924,17 +690,6 @@ void hoa_processor_loadpatch(t_hoa_processor *x, long index, long thread_request
 	for (i = 0; i < argc; i++)
 		patch_space_ptr->x_argv[i] = argv[i];
 	
-	// Set a request for a particular thread
-	
-	if (thread_request)
-	{
-		if (thread_request > 0) 
-			patch_space_ptr->thread_request = thread_request - 1;
-		else 
-			patch_space_ptr->thread_request = index;
-		x->update_thread_map = 1;
-	}
-	
 	// Compile the dspchain in case dsp is on
 	
 	hoa_processor_dsp_internal (patch_space_ptr, x->last_vec_size, x->last_samp_rate);
@@ -1074,116 +829,30 @@ short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args)
 void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
 {
 	long target_index = argc ? atom_getlong(argv) : 0;
-	
 	x->target_index = target_index;
 }
-
 
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args)
 {
 	long index = args->index;
+	void *outletptr;
 	if (index > 0 && index <= x->declared_outs)
 	{
-		void *outletptr = x->out_table[index-1];
+		outletptr = x->out_table[index-1];
 		outlet_anything (outletptr, args->msg, args->argc, args->argv);
 	}
 }
 
 // ========================================================================================================================================== //
-// Multithreading Messages
-// ========================================================================================================================================== //
-
-
-void hoa_processor_autoloadbalance(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
-{
-	long n = 1;
-	
-	if (argc)
-		n = atom_getlong(argv);
-	
-	if (!n)
-		x->request_manual_threading = 1;
-	else
-		x->request_manual_threading = 0;
-}
-
-void hoa_processor_multithread(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
-{
-	
-	long n = 1;
-	
-	if (argc)
-		n = atom_getlong(argv);
-	
-	x->multithread_flag = n;
-}
-
-void hoa_processor_activethreads(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
-{
-	long n = x->max_obj_threads;
-	
-	if (argc)
-		n = atom_getlong(argv);
-	
-	if (n < 1) 
-		n = 1;
-	if (n > x->max_obj_threads) 
-		n = x->max_obj_threads;
-	
-	x->request_num_active_threads = n;
-}
-
-void hoa_processor_threadmap(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv)
-{
-	long index = -1;
-	long thread_request = 0;
-	
-	// Load arguments (and alter index by one to change counting point)
-	
-	if (argc > 0)
-		index = atom_getlong(argv + 0) - 1;
-		
-	if (argc > 1)
-		thread_request = atom_getlong(argv + 1);
-		
-	if (thread_request && index >= 0 && index < x->patch_spaces_allocated)
-	{
-		if (thread_request > 0) 
-			x->patch_space_ptrs[index]->thread_request = thread_request - 1;
-		else 
-			x->patch_space_ptrs[index]->thread_request = index;
-		x->update_thread_map = 1;
-	}
-}
-
-
-// ========================================================================================================================================== //
 // Perform and DSP Routines
 // ========================================================================================================================================== //
 
-
-void hoa_processor_free_temp_memory(t_hoa_processor *x, t_symbol *s, short argc, t_atom *argv)
-{
-	ALIGNED_FREE((void *)s);
-}
-
-
 void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_size)
 {
-	t_threadspace *thread_space_ptr = x->thread_space_ptr;
-
 	t_patchspace **patch_space_ptrs = x->patch_space_ptrs;
-	t_patchspace *next_patch_space_ptr;
-	
-	void *new_temp_mem_ptr;
-	long new_temp_mem_size;
 	
 	long declared_sig_outs = x->declared_sig_outs;
-	long num_active_threads = x->request_num_active_threads;	
-	long multithread_flag;
 	long i;
-	
-	x->num_active_threads = num_active_threads;
 
 	// Zero Outputs
 	
@@ -1192,86 +861,11 @@ void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_
 	
 	if (x->x_obj.z_disabled)
 		return;
+	
+	for (i = 0; i < x->patch_spaces_allocated; i++)
+		patch_space_ptrs[i]->processed_flag = 0;
 
-	// Update multithreading parameters (this is done in one thread and before all threads process to ensure uninterrupted audio processing
-	
-	multithread_flag = (x->patch_spaces_allocated > 1) && x->multithread_flag && (num_active_threads > 1);
-	x->manual_threading = x->request_manual_threading;		
-	
-	if (!x->manual_threading)
-	{
-		for (i = 0; i < x->patch_spaces_allocated; i++)
-			patch_space_ptrs[i]->processed_flag = 0;
-	}
-	
-	if (x->update_thread_map)
-	{
-		x->update_thread_map = 0;											
-		
-		for (i = 0; i < x->patch_spaces_allocated; i++)
-		{
-			next_patch_space_ptr = patch_space_ptrs[i]; 
-			next_patch_space_ptr->thread_current = next_patch_space_ptr->thread_request;
-		}
-	}
-	
-	// Update the temporary memory if relevant
-	
-	if (attempt_mem_swap(&x->temp_mem) == SWAP_DONE)
-	{
-		// Store the new pointers and size
-		
-		new_temp_mem_ptr = x->temp_mem.current_ptr;
-		new_temp_mem_size = x->temp_mem.current_size;
-		
-		for (i = 0; i < x->max_obj_threads; i++)
-		{
-			thread_space_ptr[i].temp_mem_ptr = (char *) new_temp_mem_ptr + (new_temp_mem_size * i);
-			thread_space_ptr[i].temp_mem_size = new_temp_mem_size;
-		}
-	}
-	
-	// Do multithreaded or non-multithread processing - the former case is switched to try to get more speed out of inlining with a fixed loop size
-	
-	if (multithread_flag)
-	{		 
-		switch (num_active_threads)
-		{				
-			case 2:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 2);
-				break;
-				
-			case 3:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 3);
-				break;
-				
-			case 4:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 4);
-				break;
-				
-			case 5:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 5);
-				break;
-				
-			case 6:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 6);
-				break;
-				
-			case 7:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 7);
-				break;
-				
-			case 8:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, 8);
-				break;
-				
-			default:
-				hoa_processor_multithread_perform(x, sig_outs, declared_sig_outs, vec_size, num_active_threads);
-				break;
-		}
-	}
-	else
-		hoa_processor_threadprocess(x, (void **) sig_outs, x->thread_space_ptr[0].temp_mem_ptr, x->thread_space_ptr[0].temp_mem_size, vec_size, 0, 1);	
+	hoa_processor_process(x, (void **) sig_outs, vec_size);
 }
 
 void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam)
@@ -1284,119 +878,7 @@ void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins,
 	hoa_processor_perform_common(x, (void **) outs, vec_size);
 }
 
-void hoa_processor_sum_double(t_threadspace *thread_space_ptr, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
-{
-	t_threadspace *next_thread_ptr = 0;
-	double *next_sig_pointer;
-	double *io_pointer;
-	long i, j, k;
-	
-	// Sum output of threads for each signal outlet
-	
-	for (i = 0; i < declared_sig_outs; i++) 
-	{	
-		for (j = 0; j < num_active_threads; j++)
-		{
-			next_thread_ptr = thread_space_ptr + j;
-			next_sig_pointer = (double*)next_thread_ptr->thread_temp_buffer[i];
-			io_pointer = (double*)sig_outs[i];
-			
-			for (k = 0; k < vec_size; k++)
-				*(io_pointer++) += *(next_sig_pointer++);
-		}	
-	} 
-}
-
-
-__inline void hoa_processor_multithread_perform(t_hoa_processor *x, void **sig_outs, long declared_sig_outs, long vec_size, long num_active_threads)
-{
-	t_threadspace *thread_space_ptr = x->thread_space_ptr;	
-	long i;
-	
-	for (i = 1; i < num_active_threads; i++)
-		thread_space_ptr[i].processed = 0;	
-	
-	// Tick the worker threads and process in this thread (the main audio thread)
-	
-#ifdef __APPLE__
-
-	OSMemoryBarrier();
-
-	for (i = 1; i < num_active_threads; i++)
-		semaphore_signal (x->tick_semaphore);		
-#else
-
-	MemoryBarrier();
-	ReleaseSemaphore(x->tick_semaphore, num_active_threads - 1, NULL);
-	
-#endif		
-	
-	// Process thread
-	hoa_processor_threadprocess(x, thread_space_ptr->thread_temp_buffer, thread_space_ptr->temp_mem_ptr, thread_space_ptr->temp_mem_size, vec_size, 0, num_active_threads);		
-	
-	// Wait for all the other threads to return
-	for (i = 1; i < num_active_threads; i++)
-		while (thread_space_ptr[i].processed != 1);
-			
-	// Sum outputs
-	hoa_processor_sum_double(thread_space_ptr, sig_outs, declared_sig_outs, vec_size, num_active_threads);
-}
-
-
-#ifdef __APPLE__
-void *hoa_processor_threadwait(void *arg)
-#else
-DWORD WINAPI hoa_processor_threadwait(LPVOID arg)
-#endif
-{
-	t_hoa_processor *x = (t_hoa_processor *) ((t_threadspace *) arg)->hoa_processor_parent;
-	t_threadspace *thread_ptrs = (t_threadspace *)((t_threadspace *) arg)->first_thread_space;
-	t_threadspace *this_thread;
-	t_threadspace *constant_thread;
-	long thread_num = ((t_threadspace *) arg)->thread_num;
-	long current_thread_num;
-	long num_active_threads;
-	long i;
-	
-	constant_thread = thread_ptrs + thread_num;
-
-	while(1)
-	{
-#ifdef __APPLE__
-		kern_return_t tick_return = semaphore_wait(x->tick_semaphore);						
-		if (tick_return == KERN_TERMINATED)
-			break;
-#else
-		WaitForSingleObject(x->tick_semaphore, INFINITE);
-		if (constant_thread->exiting)
-			break;
-#endif
-		
-		num_active_threads = x->num_active_threads;
-		
-		for (i = thread_num; i < thread_num + num_active_threads - 1; i++)
-		{
-			// N.B. Get values from thread each time in case they have been changed
-			
-			current_thread_num = (i % (num_active_threads - 1)) + 1;
-			this_thread = thread_ptrs + current_thread_num;
-			
-			if (Atomic_Compare_And_Swap(0, 2, (t_int32_atomic *) &this_thread->processed))
-			{
-				hoa_processor_threadprocess(x, this_thread->thread_temp_buffer, this_thread->temp_mem_ptr, this_thread->temp_mem_size, this_thread->vec_size, current_thread_num, num_active_threads);
-				this_thread->processed = 1;
-			}
-		}
-	}
-	
-#ifdef __APPLE__
-	return NULL;
-#else
-	return 0;
-#endif
-}
-
-__inline void hoa_processor_threadprocess(t_hoa_processor *x, void **sig_outs, void *temp_mem_ptr, long temp_mem_size, long vec_size, long thread_num, long threads_running)
+__inline void hoa_processor_process(t_hoa_processor *x, void **sig_outs, long vec_size)
 {
 	t_patchspace **patch_space_ptrs = x->patch_space_ptrs;
 	t_patchspace *next_patch_space_ptr = 0;
@@ -1405,7 +887,7 @@ __inline void hoa_processor_threadprocess(t_hoa_processor *x, void **sig_outs, v
 	
 	long declared_sig_outs = x->declared_sig_outs;
 	long patch_spaces_allocated = x->patch_spaces_allocated; 
-	long index;
+	long index = 0;
 	long i;
 	
 	// Turn off denormals
@@ -1419,98 +901,40 @@ __inline void hoa_processor_threadprocess(t_hoa_processor *x, void **sig_outs, v
 	// Zero outputs
 	
 	for (i = 0; i < declared_sig_outs; i++) 
-		memset(sig_outs[i], 0, SIG_SIZE * vec_size);
+		memset(sig_outs[i], 0, vec_size * SIG_SIZE);
 	
-	if (x->manual_threading)
+	// Here we start each thread at a different point in the cycle and whichever one reaches a patch first will process it
+
+	for (i = 0; i < patch_spaces_allocated; i++)
 	{
-		// Here we run each patch in the requested thread
+		if (++index >= patch_spaces_allocated)
+			index -= patch_spaces_allocated;
 		
-		for (i = 0; i < patch_spaces_allocated; i++)
+		next_patch_space_ptr = patch_space_ptrs[index];
+		next_dspchain = next_patch_space_ptr->the_dspchain;
+
+		if (next_patch_space_ptr->patch_valid && next_patch_space_ptr->patch_on && next_dspchain)
 		{
-			next_patch_space_ptr = patch_space_ptrs[i];
-			next_dspchain = next_patch_space_ptr->the_dspchain;
-			
-			if (next_patch_space_ptr->patch_valid && next_patch_space_ptr->patch_on && next_dspchain && next_patch_space_ptr->required_temp_mem_size <= temp_mem_size && 
-				(next_patch_space_ptr->thread_current % threads_running) == thread_num)
-			{							
-				// Point to thread buffers and run DSP
-				
-				next_patch_space_ptr->out_ptrs = sig_outs;
-				next_patch_space_ptr->temp_mem_ptr = temp_mem_ptr;
-				
-				dspchain_tick(next_dspchain);
-			}
-		}
-	}
-	else
-	{
-		// Here we start each thread at a different point in the cycle and whichever one reaches a patch first will process it
-		
-		index = (thread_num * (patch_spaces_allocated / threads_running)) - 1;
-		for (i = 0; i < patch_spaces_allocated; i++)
-		{
-			if (++index >= patch_spaces_allocated)
-				index -= patch_spaces_allocated;
-			
-			next_patch_space_ptr = patch_space_ptrs[index];
-			next_dspchain = next_patch_space_ptr->the_dspchain;
-			
-			if (next_patch_space_ptr->patch_valid && next_patch_space_ptr->patch_on && next_dspchain && next_patch_space_ptr->required_temp_mem_size  <= temp_mem_size && 
-				Atomic_Compare_And_Swap(0, 1, &next_patch_space_ptr->processed_flag))
-			{							
-				// Point to thread buffers and run DSP
-				
-				next_patch_space_ptr->out_ptrs = sig_outs;
-				next_patch_space_ptr->temp_mem_ptr = temp_mem_ptr;
-				
-				dspchain_tick(next_dspchain);
-			}
+			next_patch_space_ptr->processed_flag = 1;
+			next_patch_space_ptr->out_ptrs = sig_outs;
+			dspchain_tick(next_dspchain);
 		}
 	}
 	
-	// return denormals to previous state 
+	// return denormals to previous state
 	
 #if defined( __i386__ ) || defined( __x86_64__ )	
 	_mm_setcsr(oldMXCSR);	
 #endif
 }
 
-
 long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate)
 {	
 	t_patchspace *patch_space_ptr;
-	long thread_temp_buffer_size;
-	long mem_fail = 0;
-	long i, j;
-	
-	for (i = 0; i < x->max_obj_threads; i++)
-		x->thread_space_ptr[i].vec_size = vec_size;
-	
-	// Memory allocation for temporary thread buffers 
-	
-	thread_temp_buffer_size = vec_size * SIG_SIZE;
-	
-	if (thread_temp_buffer_size != x->thread_temp_buffer_size)
-	{
-		for (i = 0; i < x->max_obj_threads; i++)
-		{
-			for (j = 0; j < x->declared_sig_outs; j++)
-			{
-				ALIGNED_FREE (x->thread_space_ptr[i].thread_temp_buffer[j]);
-				x->thread_space_ptr[i].thread_temp_buffer[j] = ALIGNED_MALLOC (thread_temp_buffer_size);
-				if (!x->thread_space_ptr[i].thread_temp_buffer[j])
-				{		
-					object_error((t_object*)x, "not enough memory");
-					mem_fail = 1;
-					x->x_obj.z_disabled = TRUE;	
-				}
-			}
-		}
-	}
 	
 	// Do internal dsp compile (for each valid patch)
 	
-	for (i = 0; i < x->patch_spaces_allocated; i++)
+	for (int i = 0; i < x->patch_spaces_allocated; i++)
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
 		if (patch_space_ptr->patch_valid)
@@ -1520,20 +944,14 @@ long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate)
 	x->last_vec_size = vec_size;
 	x->last_samp_rate = samp_rate;
 	
-	if (!mem_fail)
-		x->thread_temp_buffer_size = thread_temp_buffer_size;
-	
-	return mem_fail;
+	return 0;
 }
 
 void hoa_processor_dsp64 (t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	// Add to dsp if common routine successful
-	
-	if (!hoa_processor_dsp_common(x, maxvectorsize, samplerate))
-		object_method(dsp64, gensym("dsp_add64"), x, hoa_processor_perform64, 0, NULL);
+	hoa_processor_dsp_common(x, maxvectorsize, samplerate);
+	object_method(dsp64, gensym("dsp_add64"), x, hoa_processor_perform64, 0, NULL);
 }
-
 
 void hoa_processor_dsp_internal (t_patchspace *patch_space_ptr, long vec_size, long samp_rate)
 {
@@ -1800,7 +1218,7 @@ void hoa_processor_pupdate(t_hoa_processor *x, void *b, t_patcher *p)
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
 		if (patch_space_ptr->the_patch == p)
-			hoa_processor_loadpatch (x, i, 0, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
+			hoa_processor_loadpatch (x, i, patch_space_ptr->patch_name_in, patch_space_ptr->x_argc, patch_space_ptr->x_argv);
 	}
 }
 
@@ -1826,7 +1244,6 @@ void hoa_processor_parentpatcher(t_hoa_processor *x, t_patcher **parent)
 // ========================================================================================================================================== //
 // Patchspace Utilities
 // ========================================================================================================================================== //
-
 
 // Make a new patchspace
 
@@ -1857,7 +1274,6 @@ void hoa_processor_init_patch_space (t_patchspace *patch_space_ptr)
 	patch_space_ptr->out_ptrs = 0;
 		
 	patch_space_ptr->processed_flag = 0;
-	patch_space_ptr->required_temp_mem_size = 0;
 }
 
 // Free the patch and dspchain
@@ -1964,32 +1380,3 @@ void *hoa_processor_client_get_patch_on (t_hoa_processor *x, long index)
 	
 	return 0;
 }
-
-//////////////////////////////////////////////// Tempory Memory Queries ///////////////////////////////////////////////
-
-
-// hoa.process~ provides memory per audio thread for temporary calculations. 
-// Objects requiring temporary memory during their perform method request a minimum size during their dsp routine
-// The pointer should be requested during the perform routine, and should not be stored
-// This reduces memory alloaction, and potentially increases speed by keeping temporary memory in the cache
-
-
-void *hoa_processor_query_temp_mem (t_hoa_processor *x, long index)
-{
-	if (index <= x->patch_spaces_allocated)
-		return &x->patch_space_ptrs[index - 1]->temp_mem_ptr;
-	else
-		return 0;
-}
-
-void *hoa_processor_client_temp_mem_resize (t_hoa_processor *x, long index, long size)
-{	
-	schedule_grow_mem_swap(&x->temp_mem, x->max_obj_threads * size, size);
-	
-	if (index > 0 && index <= x->patch_spaces_allocated)
-		x->patch_space_ptrs[index - 1]->required_temp_mem_size = size;
-	
-	return (void *) 1;
-	
-}
-

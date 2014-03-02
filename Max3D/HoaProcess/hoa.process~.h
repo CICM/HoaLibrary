@@ -143,25 +143,4 @@ __inline long HoaProcessor_Get_PatcherArgs (void *HoaProcessor_Object, long inde
 	return 0;
 }
 
-//////////////////////////////////////////////// Temporary Memory Queries ////////////////////////////////////////////////
-
-
-__inline long HoaProcessor_Temp_Mem_Resize (void *HoaProcessor_Object, long index, long size)
-{
-	if (HoaProcessorIsValid(HoaProcessor_Object))
-		return (long) mess2((t_object *)HoaProcessor_Object, gensym("temp_mem_resize"), (void *) index, (void *) size);
-	else
-		return 0;
-}
-
-
-__inline void **HoaProcessor_Get_TempMem (void *HoaProcessor_Object, long index, void **DefMem)
-{
-	if (HoaProcessorIsValid(HoaProcessor_Object) && index > 0)
-		return (void**)mess1((t_object *)HoaProcessor_Object, gensym("get_temp_mem"), (void *) index);
-	else
-		return DefMem;
-}
-
-
 #endif
