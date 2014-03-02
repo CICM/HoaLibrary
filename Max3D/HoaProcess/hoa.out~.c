@@ -7,7 +7,6 @@
 // based on dynamic.out~ Copyright 2010 Alex Harker. All rights reserved.
 
 #include "../hoa.max.h"
-#include "AH_VectorOps.h"
 #include "hoa.process~.h"
 
 typedef struct _hoa_sig_out
