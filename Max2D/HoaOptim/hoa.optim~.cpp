@@ -13,8 +13,6 @@ extern "C"
 #include "z_dsp.h"
 }
 
-int postons = 0;
-
 typedef struct _hoa_optim 
 {
 	t_pxobject              f_ob;

@@ -1,17 +1,10 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#include "../../Sources/Hoa2D/Hoa2D.h"
-
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
-}
+#include "../hoa.max.h"
 
 typedef struct _hoa_encoder 
 {
@@ -32,6 +25,8 @@ void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double s
 void hoa_encoder_perform64(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_encoder_perform64_azimuth(t_hoa_encoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
+t_hoa_err hoa_getinfos(t_hoa_encoder* x, t_hoa_boxinfos* boxinfos);
+
 t_class *hoa_encoder_class;
 
 int C74_EXPORT main(void)
@@ -40,6 +35,7 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.encoder~", (method)hoa_encoder_new, (method)hoa_encoder_free, (long)sizeof(t_hoa_encoder), 0L, A_GIMME, 0);
 	
+    hoa_initclass(c, (method)hoa_getinfos);
 	class_addmethod(c, (method)hoa_encoder_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_encoder_int,         "int",		A_LONG, 0);
 	class_addmethod(c, (method)hoa_encoder_dsp64,		"dsp64",	A_CANT, 0);
@@ -74,6 +70,16 @@ void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 	return (x);
 }
 
+t_hoa_err hoa_getinfos(t_hoa_encoder* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_2D;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = x->f_encoder->getNumberOfHarmonics();
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
+	return HOA_ERR_NONE;
+}
+
 void hoa_encoder_float(t_hoa_encoder *x, double f)
 {
 	x->f_encoder->setAzimuth(f);
@@ -86,7 +92,7 @@ void hoa_encoder_int(t_hoa_encoder *x, long n)
 
 void hoa_encoder_dsp64(t_hoa_encoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    if(count[x->f_encoder->getNumberOfInputs() - 1])
+    if(count[1])
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64_azimuth, 0, NULL);
     else
         object_method(dsp64, gensym("dsp_add64"), x, hoa_encoder_perform64, 0, NULL);
@@ -124,7 +130,7 @@ void hoa_encoder_assist(t_hoa_encoder *x, void *b, long m, long a, char *s)
         if(a == 0)
             sprintf(s,"(Signal) Input");
         else
-            sprintf(s,"(Signal or float) Azymuth");
+            sprintf(s,"(Signal or float) Azimuth");
 	} 
 	else 
 	{
