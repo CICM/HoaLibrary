@@ -80,7 +80,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 457.5, 211.5, 48.0, 22.0 ],
-									"presentation_rect" : [ 457.5, 214.0, 0.0, 0.0 ],
 									"text" : "sig~ 1"
 								}
 
