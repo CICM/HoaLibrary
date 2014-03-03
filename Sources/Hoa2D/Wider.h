@@ -9,7 +9,7 @@
 
 #include "Ambisonic.h"
 
-namespace Hoa3D
+namespace Hoa2D
 {
     //! The ambisonic wider.
     /** The wider should be used to widen the sound propagation with fractional order simulution. The sound field precision depends to the decomposition order. The zero decomposition order has 1 omnidirectionnal harmonic and all the sounds seem to come from all the directions. While the order increases, the number of harmonics increases, the lobes of an encoded sounds narrow and the origin of the sounds is more accurate. Then fractional order can be used to decrease the sound field precision and to wide the sound field propagation. 
