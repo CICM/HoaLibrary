@@ -8,54 +8,57 @@
 #define DEF_HOA_2D_DECODER
 
 #include "Ambisonic.h"
+#include "Planewaves.h"
 #include "Encoder.h"
 
 namespace Hoa2D
 {
-    class Decoder : public Ambisonic
+    class Decoder : public Ambisonic, public Planewaves
     {
         
     private:
-        double*		m_decoder_matrix;
-        float*		m_decoder_matrix_float;
-        
-		double*		m_loudspeakers_azimuth;
-		double*		m_harmonics_vector;
-        Encoder*    m_encoder;
+        double          m_offset;
+        double*         m_decoder_matrix;
+        float*          m_decoder_matrix_float;
+		double*         m_harmonics_vector;
+        Encoder*        m_encoder;
         
     public:
         
         /**	The decoder constructor.
          @param     order					The order, must be at least 1.
-		 @param     numberOfLoudspeakers	The number of loudspeakers, must be at least (order + 1)^2.
+		 @param     numberOfChannels	The number of channels, must be at least (order + 1)^2.
          */
-		Decoder(unsigned int order, unsigned int numberOfLoudspeakers);
+		Decoder(unsigned int order, unsigned int numberOfChannels);
 		
         /**	The decoder destructor.
          */
 		~Decoder();
         
-		/**	Set loudspeaker position.
-		 @param     index		The index of the loudspeaker.
+		/**	Set channel position.
+		 @param     index		The index of the channel.
 		 @param     azimuth		An azimuth value. In radian, between 0 and 2π.
          */
-		void	setLoudspeakerPosition(unsigned int index, double azimuth);
-		
-		/**	Get loudspeaker azimuth value.
-		 @param     index		The index of the loudspeaker.
-		 @return	the azimuth value in radians.
+		void setChannelsOffset(double offset);
+        
+        /**	Set channel position.
+		 @param     index		The index of the channel.
+		 @param     azimuth		An azimuth value. In radian, between 0 and 2π.
          */
-		double	getLoudspeakerAzimuth(unsigned int index) const;
-		
+		double getChannelsOffset() const
+        {
+            return m_offset;
+        }
+				
 		/**	This method performs the decoding with single precision.
          @param     input	The input sample.
-         @param     outputs The output array that contains samples destinated to loudspeakers.
+         @param     outputs The output array that contains samples destinated to channels.
          */
 		void process(const float* input, float* output);
 		
 		/**	This method performs the decoding with double precision.
          @param     input	The input sample.
-         @param     outputs The output array that contains samples destinated to loudspeakers.
+         @param     outputs The output array that contains samples destinated to channels.
          */
 		void process(const double* input, double* output);
     };
