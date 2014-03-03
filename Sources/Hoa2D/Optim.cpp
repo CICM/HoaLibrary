@@ -35,7 +35,7 @@ namespace Hoa2D
         {
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                m_harmonics[i] = (long double)(factorial(m_order) * (double)factorial(m_order)) / (long double)(factorial(m_order + getHarmonicBand(i)) * factorial(m_order - getHarmonicBand(i)));
+                m_harmonics[i] = (long double)((long double)factorial(m_order) * (long double)factorial(m_order + 1.)) / (long double)((long double)factorial(m_order + getHarmonicBand(i) + 1.) * (long double)factorial(m_order - fabs(getHarmonicBand(i))));
             }
         }
     }

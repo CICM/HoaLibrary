@@ -26,7 +26,7 @@ namespace Hoa2D
         float sin_x = m_sinx;
         float tcos_x = cos_x;
         outputs[0] = input;
-        for(int i = 1; i < m_number_of_harmonics; i += 2)
+        for(unsigned int i = 1; i < m_number_of_harmonics; i += 2)
         {
             outputs[i] = input * sin_x;
             outputs[i+1] = input * cos_x;
@@ -42,7 +42,7 @@ namespace Hoa2D
         double sin_x = m_sinx;
         double tcos_x = cos_x;
         outputs[0] = input;
-        for(int i = 1; i < m_number_of_harmonics; i += 2)
+        for(unsigned int i = 1; i < m_number_of_harmonics; i += 2)
         {
             outputs[i] = input * sin_x;
             outputs[i+1] = input * cos_x;
