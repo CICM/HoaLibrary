@@ -16,8 +16,9 @@ extern "C"
 #include <z_dsp.h>
 }
 
-static t_symbol* _sym_is_hoa = gensym("is_hoa");
-static t_symbol* _sym_credit_line1 = gensym("(v2.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
+static t_symbol* _sym_is_hoa =		 gensym("is_hoa");
+static t_symbol* _sym_hoa_version =	 gensym("(v2.0)");
+static t_symbol* _sym_credit_line1 = gensym("by Julien Colafrancesco, Pierre Guillot & Eliott Paris");
 static t_symbol* _sym_credit_line2 = gensym("Copyright \u00a9 2012 - 2014, CICM | Universite Paris 8");
 
 typedef long t_hoa_err;		///< an integer value suitable to be returned as an hoa error code  @ingroup misc

@@ -13,6 +13,7 @@
 #include "Optim.h"
 #include "Decoder.h"
 #include "Wider.h"
+#include "Map.h"
 
 #endif
 

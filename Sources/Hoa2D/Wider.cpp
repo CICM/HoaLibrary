@@ -6,7 +6,7 @@
 
 #include "Wider.h"
 
-namespace Hoa3D
+namespace Hoa2D
 {
     Wider::Wider(unsigned int order) : Ambisonic(order)
     {

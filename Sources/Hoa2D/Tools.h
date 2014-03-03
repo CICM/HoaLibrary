@@ -330,11 +330,6 @@ namespace Hoa2D
             return value;
     }
     
-    inline double radius(const double x, const double y)
-	{
-		return sqrt(x*x + y*y);
-	}
-    
 	inline double angle(const double x, const double y)
 	{
 		return atan2(y, x) + CICM_PI2;
@@ -350,44 +345,19 @@ namespace Hoa2D
 		return radius * cos(angle - CICM_PI2);
 	}
     
-    inline double radius(double x, double y, double z)
+    inline double radius(double x, double y)
 	{
-		return sqrt(x*x + y*y + z*z);
+		return sqrt(x*x + y*y);
 	}
     
-	inline double azimuth(double x, double y, double z)
+	inline double azimuth(double x, double y)
 	{
 		return angle(x, y);
-	}
-    
-    inline double elevation(double x, double y, double z)
-	{
-		return acos(z / radius(x, y, z));
-	}
-    
-	inline double ordinate(double radius, double phi, double theta)
-	{
-		return radius * sin(phi - CICM_PI2) * cos(theta);
-	}
-    
-    inline double abscissa(double radius, double phi, double theta)
-	{
-		return radius * cos(phi - CICM_PI2) * cos(theta);
-	}
-    
-    inline double height(double radius, double phi, double theta)
-	{
-		return radius * sin(theta);
 	}
     
     inline double distance(double x1, double y1, double x2, double y2)
 	{
 		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2));
-	}
-    
-    inline double distance(double x1, double y1, double z1, double x2, double y2, double z2)
-	{
-		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2) + (z1-z2) * (z1-z2));
 	}
     
     //! The int to string conversion
@@ -401,127 +371,6 @@ namespace Hoa2D
         char number[256];
         sprintf(number, "%i", aValue);
         return number;
-    }
-    
-    inline void sphere_discretize(unsigned int numberOfPoints, double* azimuths, double* elevations)
-    {
-        if(numberOfPoints == 4) // Tethrahedron
-        {
-            azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
-            azimuths[1] = 0.;
-            azimuths[2] = CICM_2PI / 3.;
-            azimuths[3] = 2. * CICM_2PI / 3.;
-            elevations[1] = elevations[2] = elevations[3] = CICM_PI2 - CICM_2PI / 3.;
-        }
-        else if(numberOfPoints == 5) // Not regular : Octahedron with only 3 points at 0 azymuth
-        {
-            azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
-            azimuths[1] = 0.;
-            azimuths[2] = CICM_2PI / 3.;
-            azimuths[3] = 2. * CICM_2PI / 3.;
-            elevations[1] = elevations[2] = elevations[3] = 0;
-            azimuths[4] = 0.;
-            elevations[4] = -CICM_PI2;
-        }
-        else if(numberOfPoints == 6) // Octahedron
-        {
-            azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
-            azimuths[1] = 0.;
-            azimuths[2] = CICM_PI2;
-            azimuths[3] = 2. * CICM_PI2;
-            azimuths[4] = 3. * CICM_PI2;
-            elevations[1] = elevations[2] = elevations[3] = elevations[4] = 0;
-            azimuths[5] = 0.;
-            elevations[5] = -CICM_PI2;
-        }
-        else if(numberOfPoints == 7) // Not regular : Octahedron with only 5 points at 0 azymuth
-        {
-            azimuths[0] = 0.;
-            elevations[0] = CICM_PI2;
-            azimuths[1] = 0.;
-            azimuths[2] = CICM_2PI / 5.;
-            azimuths[3] = 2. * CICM_2PI / 5.;
-            azimuths[4] = 3. * CICM_2PI / 5.;
-            azimuths[5] = 4. * CICM_2PI / 5.;
-            elevations[1] = elevations[2] = elevations[3] = elevations[4] = elevations[5] = 0;
-            azimuths[6] = 0.;
-            elevations[6] = -CICM_PI2;
-        }
-        else if(numberOfPoints == 8) // Hexahedron or cube
-        {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
-        }
-        else if(numberOfPoints == 9) // Not regular : Hexahedron or cube with 1 at PI/2 elevation
-        {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
-            elevations[8] = CICM_PI2;
-            azimuths[8] = 0;
-        }
-        else if(numberOfPoints == 10) // Not regular : Hexahedron or cube with 1 at PI/2 elevation and 1 at -Pi/2 elevation
-        {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
-            elevations[8] = CICM_PI2;
-            elevations[9] = -CICM_PI2;
-            azimuths[9] = azimuths[8] = 0;
-        }
-        else if(numberOfPoints == 11) // Not regular : Hexahedron or cube with 1 at PI/2 elevation and 1 at -Pi/2 elevation
-        {
-            azimuths[0] = azimuths[4] = CICM_PI4;
-            azimuths[1] = azimuths[5] = CICM_PI4 + CICM_PI2;
-            azimuths[2] = azimuths[6] = CICM_PI4 + CICM_PI;
-            azimuths[3] = azimuths[7] = CICM_PI4 + CICM_PI + CICM_PI2;
-            elevations[0] = elevations[1] = elevations[2] = elevations[3] = CICM_PI4;
-            elevations[4] = elevations[5] = elevations[6] = elevations[7] = -CICM_PI4;
-            elevations[8] = CICM_PI2;
-            elevations[9] = elevations[9] = -CICM_PI2;
-            azimuths[9] = azimuths[8] = 0;
-        }
-    }
-    
-    inline void facet_cartopol(double *facets)
-    {
-        double x, y, z;
-        for(int i = 0; i < 9; i += 3)
-        {
-            x = facets[i];
-            y = facets[i+1];
-            z = facets[i+2];
-            facets[i] = 1.;
-            facets[i+1] = azimuth(x, y, z);
-            facets[i+1] = elevation(x, y, z);
-        }
-    }
-    
-    inline void facet_poltocar(double *facets)
-    {
-        double r, a, e;
-        for(int i = 0; i < 9; i += 3)
-        {
-            r = facets[i];
-            a = facets[i+1];
-            e = facets[i+2];
-            facets[i] = abscissa(r, a, e);
-            facets[i+1] = elevation(r, a, e);
-            facets[i+1] = height(r, a, e);
-        }
     }
     
     static const float  MIT_HRTF_44100[] = {0};

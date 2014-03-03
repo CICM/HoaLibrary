@@ -73,6 +73,8 @@ void *hoa_rotate_new(t_symbol *s, long argc, t_atom *argv)
 	{		
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
+		if (order < 1)
+			order = 1;
 		
 		x->f_rotate = new Hoa2D::Rotate(order);
 		
