@@ -10,13 +10,12 @@ namespace Hoa2D
 {
     Rotate::Rotate(unsigned int order) : Ambisonic(order)
     {
-        m_number_of_inputs		= m_number_of_harmonics + 1;
         setYaw(0.);
     }
 	
 	void Rotate::setYaw(const double value)
     {
-		m_yaw = Tools::radian_wrap(value);
+		m_yaw =	wrap_twopi(value);
 		m_cosx    = cos(m_yaw);
         m_sinx    = sin(m_yaw);
     }

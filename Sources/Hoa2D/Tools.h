@@ -42,7 +42,7 @@
 #define NUMBEROFCIRCLEPOINTS_UI 360
 
 namespace Hoa2D
-{
+{	
     //! The factorial
     /**	The function computes the factorial, the product of all positive integers less than or equal to an integer.
         \f[n! = n \times (n - 1) \times (n - 2) \times {...} \f]
