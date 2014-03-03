@@ -52,13 +52,15 @@ int C74_EXPORT main(void)
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_encoder *x = NULL;
-	int	order = 4;
+	int	order = 1;
     x = (t_hoa_encoder *)object_alloc(hoa_encoder_class);
 	if (x)
 	{		
 		if(atom_gettype(argv) == A_LONG)
 			order = atom_getlong(argv);
-		
+		if(order < 1)
+            order = 1;
+        
 		x->f_encoder = new Hoa2D::Encoder(order);
 		
 		dsp_setup((t_pxobject *)x, 2);

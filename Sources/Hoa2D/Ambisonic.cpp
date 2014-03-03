@@ -15,7 +15,7 @@ namespace Hoa2D
         
         m_harmonics_arguments   = new long[m_number_of_harmonics];
         m_harmonics_arguments[0] = 0;
-        for(unsigned int i = 1, j = 1; i < m_order; i++, j += 2)
+        for(unsigned int i = 1, j = 1; i <= m_order; i++, j += 2)
         {
             m_harmonics_arguments[j] = -i;
             m_harmonics_arguments[j+1] = i;
