@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -20,21 +20,19 @@ namespace Hoa2D
     private:
         double* m_loudspeakers_abscissa_double;
         double* m_loudspeakers_ordinate_double;
-        double* m_loudspeakers_height_double;
         double* m_loudspeakers_double;
         
         float* m_loudspeakers_abscissa_float;
         float* m_loudspeakers_ordinate_float;
-        float* m_loudspeakers_height_float;
         float* m_loudspeakers_float;
     public:
         
         //! The vector constructor.
-        /**	The optimization constructor allocates and initialize the member values to computes vectors. The numberOfLoudspeakers must be at least 1.
+        /**	The optimization constructor allocates and initialize the member values to computes vectors. The number of channels must be at least 1.
          
-            @param     numberOfLoudspeakers	The number of loudspeakers.
+            @param     numberOfChannels	The number of loudspeakers.
          */
-        Vector(unsigned int numberOfLoudspeakers);
+        Vector(unsigned int numberOfChannels);
         
         //! The optimization destructor.
         /**	The optimization destructor free the memory.
@@ -48,7 +46,7 @@ namespace Hoa2D
          @param     azimuth		The azimuth.
          @param     elevation	The elevation.
          */
-		void setLoudspeakerPosition(unsigned int index, double azimuth, double elevation);
+		void setChannelPosition(unsigned int index, double azimuth);
         
         //! This method compute the energy and velocity vectors with single precision.
         /**	You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the spherical harmonics samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 6. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, velocity height, energy abscissa, energy ordinate, energy height.

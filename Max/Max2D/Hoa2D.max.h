@@ -14,7 +14,14 @@ extern "C"
 #include <ext.h>
 #include <ext_obex.h>
 #include <z_dsp.h>
+#include <jpatcher_api.h>
+#include <jgraphics.h>
+#include <jpatcher_syms.h>
+#include <ext_dictionary.h>
+#include <ext_globalsymbol.h>
 }
+
+#define MAX_CHANNELS 256
 
 static t_symbol* _sym_is_hoa =		 gensym("is_hoa");
 static t_symbol* _sym_hoa_version =	 gensym("(v2.0)");
