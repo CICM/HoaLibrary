@@ -21,7 +21,8 @@ typedef struct _hoa_sig_in
 	t_symbol*	parent_mode;
 	long		parent_patcher_index;
 	
-	long		param;
+	t_symbol*	comment;
+	long		extra;
 	
 } t_hoa_sig_in;
 
@@ -34,7 +35,8 @@ void hoa_sig_in_int(t_hoa_sig_in *x, long inlet_num);
 void hoa_sig_in_dsp64(t_hoa_sig_in *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_sig_in_perform64(t_hoa_sig_in *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
 
-t_max_err hoa_sig_in_setattr_param(t_hoa_sig_in *x, void *attr, long ac, t_atom *av);
+t_max_err hoa_sig_in_setattr_extra(t_hoa_sig_in *x, void *attr, long ac, t_atom *av);
+t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_in *x, void *attr, long ac, t_atom *av);
 
 int C74_EXPORT main(void)
 {
@@ -47,8 +49,14 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)hoa_sig_in_assist,	"assist",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_sig_in_int,		"int",		A_LONG, 0);
 	
-	CLASS_ATTR_LONG (c, "param", 0, t_hoa_sig_in, param);
-	CLASS_ATTR_ACCESSORS(c, "param", NULL, hoa_sig_in_setattr_param);
+	CLASS_ATTR_LONG		(c, "extra", 0, t_hoa_sig_in, extra);
+	CLASS_ATTR_ACCESSORS(c, "extra", 0, hoa_sig_in_setattr_extra);
+	CLASS_ATTR_LABEL	(c, "extra", 0, "param index");
+	
+	CLASS_ATTR_SYM		(c, "comment", 0, t_hoa_sig_in, comment);
+	CLASS_ATTR_ACCESSORS(c, "comment", 0, hoa_sig_in_setattr_comment);
+	CLASS_ATTR_LABEL	(c, "comment", 0, "Description");
+	CLASS_ATTR_SAVE		(c, "comment", 1);
     
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
@@ -73,6 +81,9 @@ void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
 	
 	if (ac && av && atom_gettype(av) == A_LONG)
 		inlet_num = atom_getlong(av);
+	
+	x->extra = 0;
+	x->comment = gensym("");
 	
 	attr_args_process(x, ac, av);
 	
@@ -101,12 +112,21 @@ void *hoa_sig_in_new(t_symbol *s, long ac, t_atom *av)
     return (x);
 }
 
-t_max_err hoa_sig_in_setattr_param(t_hoa_sig_in *x, void *attr, long ac, t_atom *av)
+t_max_err hoa_sig_in_setattr_extra(t_hoa_sig_in *x, void *attr, long ac, t_atom *av)
 {
 	if (ac && av && atom_gettype(av) == A_LONG)
 	{
-		x->param = atom_getlong(av);
-		if (x->param < 0) x->param = 0;
+		x->extra = atom_getlong(av);
+		if (x->extra < 0) x->extra = 0;
+	}
+	return MAX_ERR_NONE;
+}
+
+t_max_err hoa_sig_in_setattr_comment(t_hoa_sig_in *x, void *attr, long ac, t_atom *av)
+{
+	if (ac && av && atom_gettype(av) == A_SYM)
+	{
+		x->comment = atom_getsym(av);
 	}
 	return MAX_ERR_NONE;
 }
@@ -125,7 +145,7 @@ void hoa_sig_in_int(t_hoa_sig_in *x, long inlet_num)
 void hoa_sig_in_assist(t_hoa_sig_in *x, void *b, long m, long a, char *s)
 {
     if (m == ASSIST_OUTLET)
-		sprintf(s,"(signal) Signal Input %ld of Patcher", x->inlet_num);
+		sprintf(s,"(signal) Input %ld, %s", x->inlet_num, x->comment->s_name);
     else 
 		sprintf(s,"(int) Inlet Number");
 }
