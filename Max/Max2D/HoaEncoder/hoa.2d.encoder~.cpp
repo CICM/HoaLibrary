@@ -13,7 +13,6 @@ typedef struct _hoa_encoder
     Hoa2D::Encoder* f_encoder;
 } t_hoa_encoder;
 
-
 void *hoa_encoder_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_encoder_free(t_hoa_encoder *x);
 void hoa_encoder_assist(t_hoa_encoder *x, void *b, long m, long a, char *s);
