@@ -61,14 +61,12 @@ typedef struct _patchspace
 	
 	// Pointer to Audio Out Buffers
 	
-	void **out_ptrs;
+	double **out_ptrs;
 	
 	// Flags
 	
 	char patch_valid;
 	char patch_on;
-	
-	t_int32_atomic processed_flag;
 		
 } t_patchspace;
 
@@ -96,8 +94,12 @@ typedef struct _hoa_processor
 	
 	long declared_sig_ins;
 	long declared_sig_outs;
+	long extra_sig_ins;
+	long extra_sig_outs;
 	long declared_ins;
 	long declared_outs;
+	long extra_outs;
+	long extra_ins;
 	
 	void **sig_ins;
 	void **sig_outs;
@@ -134,22 +136,17 @@ void hoa_processor_target(t_hoa_processor *x, long target_index, long index, t_s
 short hoa_processor_targetinlets(t_patcher *p, t_args_struct *args);
 void hoa_processor_user_target(t_hoa_processor *x, t_symbol *msg, short argc, t_atom *argv);
 
-void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_size);
-t_int *hoa_processor_perform(t_int *w);
-void hoa_processor_perform64(t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
-__inline void hoa_processor_process(t_hoa_processor *x, void **sig_outs, long vec_size);
-
-long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate);
-void hoa_processor_dsp64 (t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
+void hoa_processor_dsp64(t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_processor_dsp_internal (t_patchspace *patch_space_ptrs, long vec_size, long samp_rate);
+void hoa_processor_perform64(t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam);
 
 short hoa_processor_linkinlets(t_patcher *p, t_hoa_processor *x);
 short hoa_processor_linkoutlets(t_patcher *p, t_hoa_processor *x);
 short hoa_processor_unlinkinlets(t_patcher *p, t_hoa_processor *x);
 short hoa_processor_unlinkoutlets(t_patcher *p, t_hoa_processor *x);
 
-short hoa_processor_get_number_of_hoa_inlets(t_patcher *p, t_hoa_processor *x, long *ins, long *global_ins, long *sig_ins, long *global_sig_ins);
-short hoa_processor_get_number_of_hoa_outlets(t_patcher *p, t_hoa_processor *x, long *outs, long *global_outs, long *sig_outs, long *global_sig_outs);
+short hoa_processor_get_number_of_hoa_inlets(t_patcher *p, t_hoa_processor *x, long *ins, long *max_extra_ins, long *sig_ins, long *max_extra_sig_ins);
+short hoa_processor_get_number_of_hoa_outlets(t_patcher *p, t_hoa_processor *x, long *outs, long *max_extra_outs, long *sig_outs, long *max_extra_sig_outs);
 
 void hoa_processor_dblclick(t_hoa_processor *x);
 void hoa_processor_open(t_hoa_processor *x, long index);
@@ -180,8 +177,10 @@ void *hoa_processor_query_ambisonic_order(t_hoa_processor *x);
 void *hoa_processor_query_mode(t_hoa_processor *x);
 t_hoa_err hoa_processor_query_patcherargs(t_hoa_processor *x, long index, long *argc, t_atom **argv);
 
-
 void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args);
+
+long hoa_processor_query_sigin_index(t_hoa_processor *x, long patchIndex, long inIndexRequest, long extraInIndexRequest);
+long hoa_processor_query_sigout_index(t_hoa_processor *x, long patchIndex, long outIndexRequest, long extraOutIndexRequest);
 
 // ========================================================================================================================================== //
 // Symbols
@@ -211,6 +210,7 @@ t_symbol *ps_noedit;
 t_symbol *ps_mode_no;
 t_symbol *ps_mode_post;
 t_symbol *ps_mode_out;
+t_symbol *ps_attr_extra;
 
 
 // ========================================================================================================================================== //
@@ -253,6 +253,8 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_processor_client_set_patch_on,		"set_patch_on",			A_CANT, 0);
 	
 	class_addmethod(c, (method)hoa_processor_out_message,				"out_message",			A_CANT, 0); // used to receive a message from a hoa.out object
+	class_addmethod(c, (method)hoa_processor_query_sigin_index,			"get_sigout_index",		A_CANT, 0);
+	class_addmethod(c, (method)hoa_processor_query_sigout_index,		"get_sigin_index",		A_CANT, 0);
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);
@@ -281,6 +283,7 @@ int C74_EXPORT main(void)
 	ps_mode_no =				gensym("no");
 	ps_mode_post =				gensym("post");
 	ps_mode_out =				gensym("out");
+	ps_attr_extra =				gensym("extra");
 	
 	return 0;
 }
@@ -304,7 +307,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	t_atom av[MAX_ARGS];
 	long number_of_instances_to_load = 0;
 
-	// Check if there is a patch name given to load
+	// Check the order
 	if (argc && atom_gettype(argv) == A_LONG)
 	{
 		ambisonicOrder = atom_getlong(argv);
@@ -318,7 +321,7 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 		argc--; argv++;
 	}
 	
-	// Check if there is a patch name given to load
+	// Check the mode
 	if (argc && atom_gettype(argv) == A_SYM)
 	{
 		tempsym = atom_getsym(argv);
@@ -347,7 +350,19 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 	
 	x->f_order = ambisonicOrder;
 	x->f_ambisonic = new Hoa3D::Ambisonic(ambisonicOrder);
-	x->declared_sig_ins = x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics();
+	
+	hoa_processor_loadpatch(x, 0, patch_name_entered, ac, av);
+	
+	long ins, sig_ins;
+	hoa_processor_get_number_of_hoa_inlets(x->patch_space_ptrs[0]->the_patch, x, &ins, &x->extra_ins, &sig_ins, &x->extra_sig_ins);
+	post("ins = %ld, global_ins = %ld, sig_ins = %ld, global_sig_ins = %ld", ins, x->extra_ins, sig_ins, x->extra_sig_ins);
+	hoa_processor_get_number_of_hoa_outlets(x->patch_space_ptrs[0]->the_patch, x, &ins, &x->extra_outs, &sig_ins, &x->extra_sig_outs);
+	post("outs = %ld, global_outs = %ld, sig_outs = %ld, global_sig_outs = %ld", ins, x->extra_outs, sig_ins, x->extra_sig_outs);
+	
+	
+	x->declared_sig_ins = x->f_ambisonic->getNumberOfHarmonics() + x->extra_sig_ins;
+	x->declared_sig_outs = x->f_ambisonic->getNumberOfHarmonics() + x->extra_sig_outs;
+	
 	if (x->f_mode == ps_mode_no)
 	{
 		x->declared_sig_ins = 1;
@@ -438,12 +453,6 @@ void *hoa_processor_new(t_symbol *s, short argc, t_atom *argv)
 		{
 			hoa_processor_loadpatch(x, i, patch_name_entered, ac, av);
 		}
-		
-		long ins, global_ins, sig_ins, global_sig_ins;
-		hoa_processor_get_number_of_hoa_inlets(x->patch_space_ptrs[0]->the_patch, x, &ins, &global_ins, &sig_ins, &global_sig_ins);
-		post("ins = %ld, global_ins = %ld, sig_ins = %ld, global_sig_ins = %ld", ins, global_ins, sig_ins, global_sig_ins);
-		hoa_processor_get_number_of_hoa_outlets(x->patch_space_ptrs[0]->the_patch, x, &ins, &global_ins, &sig_ins, &global_sig_ins);
-		post("outs = %ld, global_outs = %ld, sig_outs = %ld, global_sig_outs = %ld", ins, global_ins, sig_ins, global_sig_ins);
 	}
 	
 	return (x);
@@ -511,7 +520,15 @@ void hoa_processor_free(t_hoa_processor *x)
 
 void hoa_processor_assist(t_hoa_processor *x, void *b, long m, long a, char *s)
 {
-	if (x->f_mode == ps_mode_post)
+	if (m == ASSIST_INLET && a >= (x->declared_sig_ins - x->extra_sig_ins) )
+	{
+		sprintf(s,"(Signal) Parameter %ld", a - (x->declared_sig_ins - x->extra_sig_ins) + 1);
+	}
+	else if (m == ASSIST_OUTLET && a >= (x->declared_sig_outs - x->extra_sig_outs) )
+	{
+		sprintf(s,"(Signal) Extra Out %ld", a - (x->declared_sig_outs - x->extra_sig_outs) + 1);
+	}
+	else if (x->f_mode == ps_mode_post)
 	{
 		sprintf(s,"(Signal) %s", x->f_ambisonic->getHarmonicsName(a).c_str());
 	}
@@ -847,64 +864,37 @@ void hoa_processor_out_message(t_hoa_processor *x, t_args_struct *args)
 // Perform and DSP Routines
 // ========================================================================================================================================== //
 
-void hoa_processor_perform_common(t_hoa_processor *x, void **sig_outs, long vec_size)
+void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam)
 {
-	t_patchspace **patch_space_ptrs = x->patch_space_ptrs;
+	for (int i = 0; i < x->declared_sig_ins; i++)
+		x->sig_ins[i] = ins[i];
 	
-	long declared_sig_outs = x->declared_sig_outs;
-	long i;
-
 	// Zero Outputs
-	
-	for (i = 0; i < declared_sig_outs; i++) 
-		memset(sig_outs[i], 0, SIG_SIZE * vec_size);
+	for (int i = 0; i < x->declared_sig_outs; i++)
+		memset(outs[i], 0, SIG_SIZE * vec_size);
 	
 	if (x->x_obj.z_disabled)
 		return;
-	
-	for (i = 0; i < x->patch_spaces_allocated; i++)
-		patch_space_ptrs[i]->processed_flag = 0;
-
-	hoa_processor_process(x, (void **) sig_outs, vec_size);
-}
-
-void hoa_processor_perform64 (t_hoa_processor *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long vec_size, long flags, void *userparam)
-{		
-	long i;
-	
-	for (i = 0; i < x->declared_sig_ins; i++)
-		x->sig_ins[i] = ins[i];
 		
-	hoa_processor_perform_common(x, (void **) outs, vec_size);
-}
-
-__inline void hoa_processor_process(t_hoa_processor *x, void **sig_outs, long vec_size)
-{
 	t_patchspace **patch_space_ptrs = x->patch_space_ptrs;
 	t_patchspace *next_patch_space_ptr = 0;
 	
 	t_dspchain *next_dspchain = 0;
 	
-	long declared_sig_outs = x->declared_sig_outs;
-	long patch_spaces_allocated = x->patch_spaces_allocated; 
+	long patch_spaces_allocated = x->patch_spaces_allocated;
 	long index = 0;
 	long i;
 	
 	// Turn off denormals
 	
 #if defined( __i386__ ) || defined( __x86_64__ )
-	int oldMXCSR = _mm_getcsr();						// read the old MXCSR setting 
-	int newMXCSR = oldMXCSR | 0x8040;					// set DAZ and FZ bits 
-	_mm_setcsr( newMXCSR );								// write the new MXCSR setting to the MXCSR 
+	int oldMXCSR = _mm_getcsr();						// read the old MXCSR setting
+	int newMXCSR = oldMXCSR | 0x8040;					// set DAZ and FZ bits
+	_mm_setcsr( newMXCSR );								// write the new MXCSR setting to the MXCSR
 #endif
-		
-	// Zero outputs
-	
-	for (i = 0; i < declared_sig_outs; i++) 
-		memset(sig_outs[i], 0, vec_size * SIG_SIZE);
 	
 	// Here we start each thread at a different point in the cycle and whichever one reaches a patch first will process it
-
+	
 	for (i = 0; i < patch_spaces_allocated; i++)
 	{
 		if (++index >= patch_spaces_allocated)
@@ -912,24 +902,23 @@ __inline void hoa_processor_process(t_hoa_processor *x, void **sig_outs, long ve
 		
 		next_patch_space_ptr = patch_space_ptrs[index];
 		next_dspchain = next_patch_space_ptr->the_dspchain;
-
+		
 		if (next_patch_space_ptr->patch_valid && next_patch_space_ptr->patch_on && next_dspchain)
 		{
-			next_patch_space_ptr->processed_flag = 1;
-			next_patch_space_ptr->out_ptrs = sig_outs;
+			next_patch_space_ptr->out_ptrs = outs;
 			dspchain_tick(next_dspchain);
 		}
 	}
 	
 	// return denormals to previous state
 	
-#if defined( __i386__ ) || defined( __x86_64__ )	
-	_mm_setcsr(oldMXCSR);	
+#if defined( __i386__ ) || defined( __x86_64__ )
+	_mm_setcsr(oldMXCSR);
 #endif
 }
 
-long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate)
-{	
+void hoa_processor_dsp64 (t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
+{
 	t_patchspace *patch_space_ptr;
 	
 	// Do internal dsp compile (for each valid patch)
@@ -938,18 +927,13 @@ long hoa_processor_dsp_common(t_hoa_processor *x, long vec_size, long samp_rate)
 	{
 		patch_space_ptr = x->patch_space_ptrs[i];
 		if (patch_space_ptr->patch_valid)
-			hoa_processor_dsp_internal (patch_space_ptr, vec_size, samp_rate);
+			hoa_processor_dsp_internal (patch_space_ptr, maxvectorsize, samplerate);
 	}
 	
-	x->last_vec_size = vec_size;
-	x->last_samp_rate = samp_rate;
+	x->last_vec_size = maxvectorsize;
+	x->last_samp_rate = samplerate;
 	
-	return 0;
-}
-
-void hoa_processor_dsp64 (t_hoa_processor *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
-{
-	hoa_processor_dsp_common(x, maxvectorsize, samplerate);
+	//hoa_processor_dsp_common(x, maxvectorsize, samplerate);
 	object_method(dsp64, gensym("dsp_add64"), x, hoa_processor_perform64, 0, NULL);
 }
 
@@ -970,47 +954,79 @@ void hoa_processor_dsp_internal (t_patchspace *patch_space_ptr, long vec_size, l
 // Patcher Link Inlets / Outlets
 // ========================================================================================================================================== //
 
-short hoa_processor_get_number_of_hoa_inlets(t_patcher *p, t_hoa_processor *x, long *ins, long *global_ins, long *sig_ins, long *global_sig_ins)
+short hoa_processor_get_number_of_hoa_inlets(t_patcher *p, t_hoa_processor *x, long *ins, long *max_extra_ins, long *sig_ins, long *max_extra_sig_ins)
 {
 	t_box *b;
-	t_inout *io;
-	ins[0] = global_ins[0] = sig_ins[0] = global_sig_ins[0] = 0;
+	t_object *io;
+	long ac = 0;
+	t_atom* av = NULL;
+	long param = 0;
+	long maxparam = 0;
+	ins[0] = max_extra_ins[0] = sig_ins[0] = max_extra_sig_ins[0] = 0;
 	
 	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
 	{
 		if (jbox_get_maxclass(b) == ps_sigin)
 		{
 			sig_ins[0]++;
-			io = (t_inout *) jbox_get_object(b);
+			io = jbox_get_object(b);
+			
+			ac = param = 0;
+			av = NULL;
+			
+			object_attr_getvalueof(io, ps_attr_extra, &ac, &av);
+			
+			if (ac && av)
+				param = atom_getlong(av);
+			
+			maxparam = MAX(param, maxparam);
 		}
 		else if (jbox_get_maxclass(b) == ps_in)
 		{
 			ins[0]++;
-			io = (t_inout *) jbox_get_object(b);
+			io = jbox_get_object(b);
 		}
     }
+	
+	max_extra_sig_ins[0] = maxparam;
+	
 	return (0);
 }
-short hoa_processor_get_number_of_hoa_outlets(t_patcher *p, t_hoa_processor *x, long *outs, long *global_outs, long *sig_outs, long *global_sig_outs)
+short hoa_processor_get_number_of_hoa_outlets(t_patcher *p, t_hoa_processor *x, long *outs, long *max_extra_outs, long *sig_outs, long *max_extra_sig_outs)
 {
 	t_box *b;
-	t_inout *io;
-	outs[0] = global_outs[0] = sig_outs[0] = global_sig_outs[0] = 0;
+	t_object *io;
+	long ac = 0;
+	t_atom* av = NULL;
+	long param = 0;
+	long maxparam = 0;
+	outs[0] = max_extra_outs[0] = sig_outs[0] = max_extra_sig_outs[0] = 0;
 	
 	for (b = jpatcher_get_firstobject(p); b; b = jbox_get_nextobject(b))
 	{
 		if (jbox_get_maxclass(b) == ps_sigout)
 		{
 			sig_outs[0]++;
-			io = (t_inout *) jbox_get_object(b);
+			io = jbox_get_object(b);
+			
+			ac = param = 0;
+			av = NULL;
+			
+			object_attr_getvalueof(io, ps_attr_extra, &ac, &av);
+			
+			if (ac && av)
+				param = atom_getlong(av);
+			
+			maxparam = MAX(param, maxparam);
 		}
 		else if (jbox_get_maxclass(b) == ps_out)
 		{
 			outs[0]++;
-			io = (t_inout *) jbox_get_object(b);
+			io = jbox_get_object(b);
 		}
     }
-	return (0);
+	
+	max_extra_sig_outs[0] = maxparam;
 	return 0;
 }
 
@@ -1032,7 +1048,7 @@ short hoa_processor_linkinlets(t_patcher *p, t_hoa_processor *x)
 			}
 		}
     }
-	return (0);
+	return 0;
 }
 
 short hoa_processor_linkoutlets(t_patcher *p, t_hoa_processor *x)
@@ -1272,8 +1288,6 @@ void hoa_processor_init_patch_space (t_patchspace *patch_space_ptr)
 	patch_space_ptr->the_dspchain = 0;
 	patch_space_ptr->x_argc = 0;
 	patch_space_ptr->out_ptrs = 0;
-		
-	patch_space_ptr->processed_flag = 0;
 }
 
 // Free the patch and dspchain
@@ -1329,6 +1343,15 @@ void *hoa_processor_query_outptrs_ptr(t_hoa_processor *x, long index)
 		return 0;
 }
 
+long hoa_processor_query_sigin_index(t_hoa_processor *x, long patchIndex, long inIndexRequest, long extraInIndexRequest)
+{
+	return 0;
+}
+
+long hoa_processor_query_sigout_index(t_hoa_processor *x, long patchIndex, long outIndexRequest, long extraOutIndexRequest)
+{
+	return 0;
+}
 
 //////////////////////////////////////////////////// State Queries ////////////////////////////////////////////////////
 
