@@ -29,7 +29,7 @@ namespace Hoa2D
         m_encoders[index]->setAzimuth(azimuth);
     }
 	
-    void Map::setDistance(unsigned int index, const double distance)
+    void Map::setRadius(unsigned int index, const double distance)
     {
         assert(index < m_number_of_sources);
         if(distance >= 1.)

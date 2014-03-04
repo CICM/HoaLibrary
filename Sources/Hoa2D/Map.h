@@ -55,15 +55,15 @@ namespace Hoa2D
          */
         void setAzimuth(unsigned int index, const double azimuth);
         
-        //! This method set the diatnce of a source.
-        /**	The distance is between 0 and infinity. At 0, the source is in the center of the ambisonic sphere and at 1, the source is at the surface of the ambisonic sphere. Over 1, the source get away the ambisonic sphere. The index must be between 0 and the number of sources.
+        //! This method set the radius of a source.
+        /**	The radius is between 0 and infinity. At 0, the source is in the center of the ambisonic circle and at 1, the source is at the surface of the ambisonic circle. Over 1, the source get away the ambisonic circle. The index must be between 0 and the number of sources.
          
             @param     index	The index of the source.
             @param     elevation The elevation.
             @see       setAzimuth()
             @see       setElevation()
          */
-        void setDistance(unsigned int index, const double distance);
+        void setRadius(unsigned int index, const double distance);
         
         //! This method retrieve the number of sources.
         /** Retrieve the number of sources.
