@@ -12,60 +12,120 @@ nchnls = 16
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
 /** UDO HoaEnc7 - ordre 7 **/
 
-opcode HoaEnc7, aaaaaaaaaaaaaaa, ak
+	opcode HoaEnc7, aaaaaaaaaaaaaaa, ak
+	
+setksmps 1
+
 ain, kangle xin
 
-ah0 init 0
 ah0 = ain * cos(0*kangle)
-
-ahn1 init 0
-ahn1 = ain * sin(1*kangle)
-
-ah1 init 0
+ah_1 = ain * sin(1*kangle)
 ah1 = ain * cos(1*kangle)
-
-ahn2 init 0
-ahn2 = ain * sin(2*kangle)
-
-ah2 init 0
+ah_2 = ain * sin(2*kangle)
 ah2 = ain * cos(2*kangle)
-
-ahn3 init 0
-ahn3 = ain * sin(3*kangle)
-
-ah3 init 0
+ah_3 = ain * sin(3*kangle)
 ah3 = ain * cos(3*kangle)
-
-ahn4 init 0
-ahn4 = ain * sin(4*kangle)
-
-ah4 init 0
+ah_4 = ain * sin(4*kangle)
 ah4 = ain * cos(4*kangle)
-
-ahn5 init 0
-ahn5 = ain * sin(5*kangle)
-
-ah5 init 0
+ah_5 = ain * sin(5*kangle)
 ah5 = ain * cos(5*kangle)
-
-ahn6 init 0
-ahn6 = ain * sin(6*kangle)
-
-ah6 init 0
+ah_6 = ain * sin(6*kangle)
 ah6 = ain * cos(6*kangle)
-
-ahn7 init 0
-ahn7 = ain * sin(7*kangle)
-
-ah7 init 0
+ah_7 = ain * sin(7*kangle)
 ah7 = ain * cos(7*kangle)
 
 
-xout ah0, ahn1, ah1, ahn2, ah2, ahn3, ah3, ahn4, ah4, ahn5, ah5, ahn6, ah6, ahn7, ah7
+xout ah0, ah_1, ah1, ah_2, ah2, ah_3, ah3, ah_4, ah4, ah_5, ah5, ah_6, ah6, ah_7, ah7
 
-endop
+	endop
 
 /** UDO HoaEnc3 - ordre 7 **/
+/** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
+/** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
+/** UDO HoaWide7 - ordre 7 **/
+
+	opcode HoaWide7, aaaaaaaaaaaaaaa, aaaaaaaaaaaaaaak
+
+aA, aB, aC, aD, aE, aF, aG, aH, aI, aJ, aK, aL, aM, aN, aO, kWide xin
+	
+kWide limit kWide, 0, 1
+
+aWB = (kWide * log(7 + 1) - log(1)) / (log(1 + 1) - log(1))
+aWB limit aWB, 0, 1
+aWC = (kWide * log(7 + 1) - log(1)) / (log(1 + 1) - log(1))
+aWC limit aWC, 0, 1
+aWD = (kWide * log(7 + 1) - log(2)) / (log(2 + 1) - log(2))
+aWD limit aWD, 0, 1
+aWE = (kWide * log(7 + 1) - log(2)) / (log(2 + 1) - log(2))
+aWE limit aWE, 0, 1
+aWF = (kWide * log(7 + 1) - log(3)) / (log(3 + 1) - log(3))
+aWF limit aWF, 0, 1
+aWG = (kWide * log(7 + 1) - log(3)) / (log(3 + 1) - log(3))
+aWG limit aWG, 0, 1
+aWH = (kWide * log(7 + 1) - log(4)) / (log(4 + 1) - log(4))
+aWH limit aWF, 0, 1
+aWI = (kWide * log(7 + 1) - log(4)) / (log(4 + 1) - log(4))
+aWI limit aWG, 0, 1
+aWJ = (kWide * log(7 + 1) - log(5)) / (log(5 + 1) - log(5))
+aWJ limit aWF, 0, 1
+aWK = (kWide * log(7 + 1) - log(5)) / (log(5 + 1) - log(5))
+aWK limit aWG, 0, 1
+aWL = (kWide * log(7 + 1) - log(6)) / (log(6 + 1) - log(6))
+aWL limit aWF, 0, 1
+aWM = (kWide * log(7 + 1) - log(6)) / (log(6 + 1) - log(6))
+aWM limit aWG, 0, 1
+aWN = (kWide * log(7 + 1) - log(7)) / (log(7 + 1) - log(7))
+aWN limit aWF, 0, 1
+aWO = (kWide * log(7 + 1) - log(7)) / (log(7 + 1) - log(7))
+aWO limit aWG, 0, 1
+
+aWeight = log(7 + 1) * (1 - kWide) + 1
+
+a1  = aA * aWeight
+a2  = aB * aWeight * aWB
+a3  = aC * aWeight * aWC
+a4  = aD * aWeight * aWD
+a5  = aE * aWeight * aWE
+a6  = aF * aWeight * aWF
+a7  = aG * aWeight * aWG
+a8  = aH * aWeight * aWH
+a9  = aI * aWeight * aWI
+a10 = aJ * aWeight * aWJ
+a11 = aK * aWeight * aWK
+a12 = aL * aWeight * aWL
+a13 = aM * aWeight * aWM
+a14 = aN * aWeight * aWN
+a15 = aO * aWeight * aWO
+
+
+xout a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15
+
+
+	endop
+
+/** UDO HoaWide7 - ordre 7 **/
+/** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
+/** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
+/** UDO HoaMap7 - ordre 7 **/
+
+	opcode HoaMap7, aaaaaaaaaaaaaaa, akk
+	
+aSig, kradius, kangle xin
+
+kwide limit kradius, 0, 1
+kdist max kradius, 1
+kdist = kdist*kdist
+aSignal = aSig / kdist
+
+a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15 HoaEnc7 aSignal, kangle
+
+a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15 HoaWide7 a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, kwide
+
+xout a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15
+
+	endop
+
+/** UDO HoaMap7 - ordre 7 **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
 /** UDO HoaDec7 - ordre 7 **/
@@ -115,49 +175,14 @@ xout a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16
 
 	endop
 
-/** UDO HoaDec3 - ordre 3 **/
+/** UDO HoaDec7 - ordre 7 **/
+/** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
 /** XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  **/
 
-instr 1
-
-
-ain inch 1
-kangle chnget "angle"
-
-aL, aM, aN, aO, aP, aQ, aR, aS, aT, aU, aV, aW, aX, aY, aZ HoaEnc7 ain, kangle
-
-a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16 HoaDec7 aL, aM, aN, aO, aP, aQ, aR, aS, aT, aU, aV, aW, aX, aY, aZ
-
-outch 1, a1, 2, a2, 3, a3, 4, a4, 5, a5, 6, a6, 7, a7, 8, a8, 9, a9, 10, a10, 11, a11, 12, a12, 13, a13, 14, a14, 15, a15, 16, a16 
-
-endin
 
 </CsInstruments>
 <CsScore>
-f1 0 16384 10 1
-
-
-i1 0 60
-
-e
 
 </CsScore>
 </CsoundSynthesizer>
-
-<bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>100</x>
- <y>100</y>
- <width>320</width>
- <height>240</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="nobackground">
-  <r>255</r>
-  <g>255</g>
-  <b>255</b>
- </bgcolor>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>
+xs
