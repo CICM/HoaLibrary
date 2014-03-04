@@ -15,7 +15,19 @@ extern "C"
 #include "ext.h"
 #include "ext_obex.h"
 #include "z_dsp.h"
+#include "ext_common.h"
+#include "jpatcher_api.h"
+#include "jgraphics.h"
+#include "jpatcher_syms.h"
+#include "ext_dictionary.h"
+#include "buffer.h"
+#include "ext_globalsymbol.h"
+#include "commonsyms.h"
+#include "ext_parameter.h"
+#include "jpatcher_syms.h"
 }
+
+#define MAX_CHANNELS 256
 
 static t_symbol* _sym_is_hoa = gensym("is_hoa");
 static t_symbol* _sym_credit_line1 = gensym("(v2.0) by Julien Colafrancesco, Pierre Guillot & Eliott Paris");

@@ -389,13 +389,13 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
 		jgraphics_set_line_width(g, 1);
         
         // positiv harmonics
-        for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+        for(int i = 0; i < x->f_scope->getNumberOfPoints(); i++)
         {
             precIndex = i-1;
             if(precIndex < 0)
-                precIndex += NUMBEROFCIRCLEPOINTS_UI;
+                precIndex += x->f_scope->getNumberOfPoints();
             
-            if(i == NUMBEROFCIRCLEPOINTS_UI-1)
+            if(i == x->f_scope->getNumberOfPoints()-1)
             {
                 jgraphics_line_to(g, beginCoord.x, beginCoord.y );
             }
@@ -427,12 +427,12 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
         
         pathLength = 0;
         jgraphics_new_path(g);
-        for(int i = 0; i < NUMBEROFCIRCLEPOINTS_UI; i++)
+        for(int i = 0; i < x->f_scope->getNumberOfPoints(); i++)
         {
             precIndex = i-1;
-            if (precIndex < 0) precIndex += NUMBEROFCIRCLEPOINTS_UI;
+            if (precIndex < 0) precIndex += x->f_scope->getNumberOfPoints();
             
-            if (i == NUMBEROFCIRCLEPOINTS_UI-1)
+            if (i == x->f_scope->getNumberOfPoints()-1)
             {
                 jgraphics_line_to(g, beginCoord.x, beginCoord.y );
             }
