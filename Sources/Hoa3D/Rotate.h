@@ -8,6 +8,7 @@
 #define DEF_HOA_3D_ROTATE
 
 #include "Ambisonic.h"
+#include "Encoder.h"
 
 namespace Hoa3D
 {
@@ -25,6 +26,8 @@ namespace Hoa3D
         double      m_yaw;
         double      m_cos_yaw;
         double      m_sin_yaw;
+        Encoder*    m_encoder;
+        double*     m_harmonics_matrix;
         
     public:
         

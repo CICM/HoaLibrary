@@ -1,11 +1,11 @@
 /*
- // Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
- // For information on usage and redistribution, and for a DISCLAIMER OF ALL
- // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
- */
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-#ifndef DEF_HOA_3D_OPTIM
-#define DEF_HOA_3D_OPTIM
+#ifndef DEF_HOA_2D_OPTIM
+#define DEF_HOA_2D_OPTIM
 
 #include "Ambisonic.h"
 
@@ -21,7 +21,7 @@ namespace Hoa2D
         {
             Basic   = 0,	/**< Basic Optimization     */
             MaxRe   = 1,	/**< Max Re Optimization    */
-            inPhase = 2     /**< In Phase Optimization  */
+            InPhase = 2     /**< In Phase Optimization  */
         };
         
     private:
@@ -43,7 +43,10 @@ namespace Hoa2D
          */
         ~Optim();
         
-        long getMode();
+        Mode getMode() const
+        {
+            return m_mode;
+        }
         
         //! This method set the widening value.
         /**	The widening value is clipped between 0 and 1. At 1, the sound field has no changes. At 0, all the sound field is omni directionnal.

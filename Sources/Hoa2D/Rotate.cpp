@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -10,13 +10,12 @@ namespace Hoa2D
 {
     Rotate::Rotate(unsigned int order) : Ambisonic(order)
     {
-        m_number_of_inputs		= m_number_of_harmonics + 1;
         setYaw(0.);
     }
 	
 	void Rotate::setYaw(const double value)
     {
-		m_yaw = Tools::radian_wrap(value);
+		m_yaw =	wrap_twopi(value);
 		m_cosx    = cos(m_yaw);
         m_sinx    = sin(m_yaw);
     }

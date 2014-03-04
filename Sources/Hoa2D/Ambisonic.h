@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -7,7 +7,7 @@
 #ifndef DEF_HOA_2D_AMBISONIC
 #define DEF_HOA_2D_AMBISONIC
 
-#include "../CicmLibrary/CicmLibrary.h"
+#include "Tools.h"
 
 //! The 2D ambisonic classes.
 /**
@@ -22,12 +22,9 @@ namespace Hoa2D
     class Ambisonic
     {
     protected:
-        long	m_order;
-        long	m_number_of_harmonics;
-        long	m_number_of_inputs;
-        long	m_number_of_outputs;
-        
-        long*    m_harmonics_arguments;
+        unsigned int	m_order;
+        unsigned int	m_number_of_harmonics;
+        long*           m_harmonics_arguments;
     
 public:
         //! The ambisonic constructor.
@@ -42,11 +39,17 @@ public:
         
         /** Retrieve the decomposition order.
          */
-        long getOrder();
+        unsigned int getOrder() const
+        {
+            return m_order;
+        }
         
         /** Retrieve the number of harmonics.
          */
-        long getNumberOfHarmonics();
+        unsigned int getNumberOfHarmonics() const
+        {
+            return m_number_of_harmonics;
+        }
         
         //! Retrieve the argument of an harmonic.
         /** The argument of an harmonic is in the range -order to order. The harmonics are sorted by their bands, from 0 to the decomposition order and, in each band, there are the 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3]etc. with h[argument].
@@ -55,8 +58,12 @@ public:
          @return    The method returns the argument of an harmonic or 0 if the harmonic does not exist.
          @see       getHarmonicBand()
          */
-        long getHarmonicArgument(unsigned int index);
-
+        long getHarmonicArgument(unsigned int index) const
+        {
+            assert(index < m_number_of_harmonics);
+            return m_harmonics_arguments[index];
+        }
+        
         //! Retrieve the band of an harmonic.
         /** The bands of the harmonics are in the range 0 to the decomposition order. Each band contains 2 harmonics with the arguments -band and band. For the first bands, the harmonics arrangement is h[0] h[-1] h[1] h[-2] h[2] h[-3] h[3], etc. with h[argument].
          
@@ -64,26 +71,21 @@ public:
          @return    The method returns the band of an harmonic or 0 if the harmonic does not exist.
          @see       getHarmonicArgument()
          */
-        long getHarmonicBand(unsigned int index);
+        long getHarmonicBand(unsigned int index) const
+        {
+            assert(index < m_number_of_harmonics);
+            return abs(m_harmonics_arguments[index]);
+        }
         
         //! Retrieve a good name for an harmonic.
         /** Retrieve a good name for an harmonic.
          
          @param     index	The global index of an harmonic.
          */
-        std::string getHarmonicsName(unsigned int index);
-        
-        int Factorial(int v)
+        std::string getHarmonicsName(unsigned int index) const
         {
-            if (v == 0) {
-                return 1;
-            }
-            
-            int result = v;
-            while (--v > 0) {
-                result *= v;
-            }
-            return result;
+            assert(index < m_number_of_harmonics);
+            return "Harmonic " + int_to_string(getHarmonicArgument(index));
         }
     };
 }

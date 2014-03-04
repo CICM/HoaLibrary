@@ -8,7 +8,7 @@
 			"architecture" : "x64"
 		}
 ,
-		"rect" : [ 263.0, 384.0, 741.0, 345.0 ],
+		"rect" : [ 526.0, 276.0, 741.0, 345.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -27,8 +27,39 @@
 		"description" : "",
 		"digest" : "",
 		"tags" : "",
-		"title" : "hoa.ptest (1) [1 0]",
+		"title" : "hoa.ptest (0) [0 0]",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-13",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 310.0, 247.0, 110.0, 20.0 ],
+					"text" : "hoa.out~ @extra 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-12",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 369.0, 34.0, 102.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : ""
+					}
+,
+					"text" : "hoa.in~ @extra 1"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -37,8 +68,12 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 488.75, 68.0, 110.0, 20.0 ],
-					"text" : "hoa.in~ @param 1"
+					"patching_rect" : [ 488.75, 68.0, 102.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : "wider value"
+					}
+,
+					"text" : "hoa.in~ @extra 2"
 				}
 
 			}
@@ -122,7 +157,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 112.75, 140.0, 43.0, 20.0 ],
-					"text" : "sig~ 1"
+					"text" : "sig~ 2"
 				}
 
 			}
@@ -176,6 +211,10 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 56.75, 246.0, 58.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : ""
+					}
+,
 					"text" : "hoa.out~"
 				}
 
@@ -190,6 +229,10 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 39.75, 100.0, 50.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"comment" : ""
+					}
+,
 					"text" : "hoa.in~"
 				}
 

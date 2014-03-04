@@ -1,5 +1,5 @@
 /*
-// Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
 // For information on usage and redistribution, and for a DISCLAIMER OF ALL
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
@@ -13,6 +13,10 @@
 #include "Optim.h"
 #include "Decoder.h"
 #include "Wider.h"
+#include "Map.h"
+#include "Projector.h"
+#include "Vector.h"
+#include "Scope.h"
 
 #endif
 
