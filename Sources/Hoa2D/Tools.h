@@ -359,6 +359,28 @@ namespace Hoa2D
 	{
 		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2));
 	}
+	
+	static double radianDistance(double anAngle1, double anAngle2)
+    {
+        anAngle1 = wrap_twopi(anAngle1);
+        anAngle2 = wrap_twopi(anAngle2);
+        if(anAngle1 > anAngle2)
+            return (anAngle1 - anAngle2);
+        else
+            return (anAngle2 - anAngle1);
+    }
+	
+	static int clip_power_of_two(int aValue)
+	{
+		if(aValue < 2)
+            aValue = 2;
+		else if(aValue&((aValue-1) != 0))
+		{
+			while (aValue&((aValue-1) != 0))
+				aValue--;
+		}
+		return aValue;
+	}
     
     //! The int to string conversion
     /** The function converts a interger to a string.

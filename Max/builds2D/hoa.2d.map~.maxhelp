@@ -248,6 +248,11 @@
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 32.733307, 196.0, 329.0, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : "cartesian",
+										"ramp" : 0.0
+									}
+,
 									"text" : "hoa.2d.map~ 3 1"
 								}
 
@@ -3949,6 +3954,11 @@
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 424.733307, 183.0, 329.0, 19.0 ],
+									"saved_object_attributes" : 									{
+										"mode" : "polar",
+										"ramp" : 0.0
+									}
+,
 									"text" : "hoa.2d.map~ 3 4"
 								}
 
