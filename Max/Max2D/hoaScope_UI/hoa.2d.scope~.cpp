@@ -22,7 +22,7 @@ typedef struct  _hoa_scope
 	t_jrgba         f_color_nh;
 	t_jrgba         f_color_ph;
 	
-	t_pt            f_center;
+	double          f_center;
 	double          f_radius;
     double*         f_signals;
     
@@ -84,7 +84,7 @@ int C74_EXPORT main()
     CLASS_ATTR_FLOAT                (c, "gain", 0, t_hoa_scope, f_gain);
 	CLASS_ATTR_CATEGORY             (c, "gain", 0, "Behavior");
 	CLASS_ATTR_ORDER                (c, "gain", 0, "1");
-	CLASS_ATTR_LABEL                (c, "gain", 0, "Gain x->f_radius");
+	CLASS_ATTR_LABEL                (c, "gain", 0, "Gain");
 	CLASS_ATTR_FILTER_MIN           (c, "gain", 1.);
 	CLASS_ATTR_DEFAULT              (c, "gain", 0, "1.");
 	CLASS_ATTR_SAVE                 (c, "gain", 1);
@@ -273,9 +273,8 @@ void hoa_scope_paint(t_hoa_scope *x, t_object *view)
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	
-	x->f_center.x = rect.width * .5;
-	x->f_center.y = rect.height * .5;
-	x->f_radius = x->f_center.x * 0.95;
+	x->f_center = rect.width * .5;
+	x->f_radius = x->f_center * 0.95;
 	
     draw_background(x, view, &rect);
     draw_harmonics(x, view, &rect);
@@ -305,7 +304,7 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
 	if (g) 
 	{
 		/* Axes */
-		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
 
         for(i = 0; i < (x->f_order * 2 + 2) ; i++)
@@ -340,7 +339,7 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
 			jgraphics_rotate(g, -rotateAngle);
 		}
         
-        jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center.x, x->f_center.y);
+        jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
         
         /* Circles */
@@ -467,7 +466,7 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
         if(posPathLen || negPathLen)
         {
             jgraphics_new_path(g);
-            jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center.x, x->f_center.y);
+            jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
             jgraphics_set_matrix(g, &transform);
             
             // shadows

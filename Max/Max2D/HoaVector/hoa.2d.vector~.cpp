@@ -27,7 +27,7 @@ void hoa_vector_dsp64(t_hoa_vector *x, t_object *dsp64, short *count, double sam
 void hoa_vector_perform64(t_hoa_vector *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_hoa_err hoa_getinfos(t_hoa_vector* x, t_hoa_boxinfos* boxinfos);
-t_max_err loudspeakers_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
+t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
 t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv);
 
 t_class *hoa_vector_class;
@@ -46,7 +46,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_LONG                 (c, "channels", 0, t_hoa_vector, f_number_of_channels);
 	CLASS_ATTR_CATEGORY             (c, "channels", 0, "Planewaves");
     CLASS_ATTR_LABEL                (c, "channels", 0, "Number of Channels");
-	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, loudspeakers_set);
+	CLASS_ATTR_ACCESSORS            (c, "channels", NULL, channels_set);
     CLASS_ATTR_ORDER                (c, "channels", 0, "1");
     CLASS_ATTR_DEFAULT              (c, "channels", 0, "4");
     CLASS_ATTR_SAVE                 (c, "channels", 1);
@@ -144,7 +144,7 @@ void hoa_vector_free(t_hoa_vector *x)
     delete [] x->f_angles_of_channels;
 }
 
-t_max_err loudspeakers_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
+t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
 {
     t_object *b = NULL;
     if(argc && argv && atom_gettype(argv) == A_LONG)
