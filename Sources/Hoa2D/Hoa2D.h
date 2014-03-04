@@ -14,6 +14,9 @@
 #include "Decoder.h"
 #include "Wider.h"
 #include "Map.h"
+#include "Projector.h"
+#include "Vector.h"
+#include "Scope.h"
 
 #endif
 
