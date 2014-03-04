@@ -7,7 +7,7 @@
 // TODO : LINE DE AZIMUT ELEVATION ET DISTANCE
 
 #include "../Hoa2D.max.h"
-#include "../../../Sources/CicmLibrary/CicmLine/CicmLine.h"
+#include "Line.h"
 
 typedef enum {
 	HOA_MODE_POL	=	0,
@@ -23,7 +23,10 @@ typedef struct _hoa_map
 	t_symbol		*f_mode_sym;
     e_hoa_mode		f_mode;
     float           f_ramp;
-	bool			*f_muteTable;
+	Line			**f_lines_x;
+	Line			**f_lines_y;
+	double			f_first_radius;
+	double			f_first_azimuth;
 } t_hoa_map;
 
 
@@ -41,9 +44,9 @@ void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins,
 
 void hoa_map_perform64(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
-void hoa_map_perform64_azimuth(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform64_distance(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
-void hoa_map_perform64_azimuth_distance(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_map_perform64_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_max_err hoa_map_mode(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
 t_max_err hoa_map_ramp(t_hoa_map *x, t_object *attr, long argc, t_atom *argv);
@@ -86,7 +89,7 @@ int C74_EXPORT main(void)
     
     CLASS_ATTR_FLOAT            (c, "ramp", 0, t_hoa_map, f_ramp);
 	CLASS_ATTR_CATEGORY			(c, "ramp", 0, "Behavior");
-	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp Time");
+	CLASS_ATTR_LABEL			(c, "ramp", 0, "Ramp Time (ms)");
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
 	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, hoa_map_ramp);
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
@@ -132,7 +135,16 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 		
         x->f_sig_outs   =  new double[x->f_map->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
 		
-		x->f_muteTable = new bool[x->f_map->getNumberOfSources()];
+		x->f_lines_x = new Line*[x->f_map->getNumberOfSources()];
+		x->f_lines_y = new Line*[x->f_map->getNumberOfSources()];
+		
+		for (int i=0; i < x->f_map->getNumberOfSources(); i++)
+		{
+			x->f_lines_x[i] = new Line(100., sys_getmaxblksize(), sys_getsr());
+			x->f_lines_y[i] = new Line(100., sys_getmaxblksize(), sys_getsr());
+		}
+		
+		x->f_first_radius = x->f_first_azimuth = 0;
 		
 		t_atom av;
         atom_setlong(&av, 1);
@@ -159,18 +171,28 @@ void hoa_map_float(t_hoa_map *x, double f)
 		if(x->f_mode == HOA_MODE_POL)
 		{
 			if(inlet == 1)
-				x->f_map->setAzimuth(0, f);
+			{
+				x->f_lines_x[0]->setValue(Hoa2D::abscissa(f, x->f_first_azimuth));
+				x->f_lines_y[0]->setValue(Hoa2D::ordinate(f, x->f_first_azimuth));
+				x->f_first_radius = Hoa2D::clip_min(f, 0.);
+			}
 			else if(inlet == 2)
-				x->f_map->setRadius(0, f);
+			{
+				x->f_lines_x[0]->setValue(Hoa2D::abscissa(x->f_first_radius, f));
+				x->f_lines_y[0]->setValue(Hoa2D::ordinate(x->f_first_radius, f));
+				x->f_first_azimuth = Hoa2D::wrap_twopi(f);
+			}
 		}
 		else if(x->f_mode == HOA_MODE_CAR)
 		{
-			/*
 			if(inlet == 1)
-				x->f_map->setAzimuth(0, Hoa2D::azimuth(f, <#double y#>) f);
+			{
+				x->f_lines_x[0]->setValue(f);
+			}
 			else if(inlet == 2)
-				x->f_map->setRadius(0, f);
-			*/
+			{
+				x->f_lines_y[0]->setValue(f);
+			}
 		}
     }
     
@@ -183,11 +205,11 @@ void hoa_map_int(t_hoa_map *x, long n)
 
 void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
 {
-	double abscissa, ordinate;
+	double azimuth, radius;
 	int mode = 0;
 	int index = atom_getlong(argv);
 	
-	if( (index < 0) || (index > x->f_map->getNumberOfSources() - 1)  || atom_gettype(argv+1) != A_SYM)
+	if( (index < 0) || (index > x->f_map->getNumberOfSources() - 1) || atom_gettype(argv+1) != A_SYM)
 		return;
 	
 	if(atom_getsym(argv+1) == hoa_sym_car || atom_getsym(argv+1) == hoa_sym_cartesian)
@@ -195,17 +217,17 @@ void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
 	
 	if(argc > 3)
 	{
-		if (mode == 0)
+		if (mode == HOA_MODE_POL)
 		{
-			x->f_map->setAzimuth(index, atom_getfloat(argv+2));
-			x->f_map->setRadius(index, atom_getfloat(argv+3));
+			radius = atom_getfloat(argv+2);
+			azimuth = atom_getfloat(argv+3);
+			x->f_lines_x[index]->setValue(Hoa2D::abscissa(radius, azimuth));
+			x->f_lines_y[index]->setValue(Hoa2D::ordinate(radius, azimuth));
 		}
-		else if (mode == 1)
+		else if (mode == HOA_MODE_CAR)
 		{
-			abscissa = atom_getfloat(argv+2);
-			ordinate = atom_getfloat(argv+3);
-			x->f_map->setAzimuth(index, Hoa2D::azimuth(abscissa, ordinate));
-			x->f_map->setRadius(index, Hoa2D::radius(abscissa, ordinate));
+			x->f_lines_x[index]->setValue(atom_getfloat(argv+2));
+			x->f_lines_y[index]->setValue(atom_getfloat(argv+3));
 		}
 	}
 	
@@ -213,7 +235,7 @@ void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
 	{
 		if (argc > 2)
 		{
-			x->f_muteTable[index] = atom_getlong(argv+2) != 0;
+			x->f_map->setMute(index, atom_getlong(argv+2));
 		}
 	}
 }
@@ -228,36 +250,50 @@ t_max_err hoa_map_mode(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
 	
 	x->f_mode_sym = x->f_mode ? hoa_sym_cartesian : hoa_sym_polar;
 	
-    return NULL;
+    return MAX_ERR_NONE;
 }
 
 t_max_err hoa_map_ramp(t_hoa_map *x, t_object *attr, long argc, t_atom *argv)
 {
-	/*
-    if(atom_gettype(argv) == A_LONG)
-        x->f_map->setRamp(atom_getlong(argv) * sys_getsr() / 1000.);
-    else if(atom_gettype(argv) == A_FLOAT)
-        x->f_map->setRamp(atom_getfloat(argv) * sys_getsr() / 1000.);
-    
-    x->f_ramp = x->f_maps->getRamp() / sys_getsr() * 1000.;
-	*/
-    return NULL;
+	double ramp;
+	if(atom_gettype(argv) == A_LONG || atom_gettype(argv) == A_FLOAT)
+	{
+		ramp = atom_getfloat(argv);
+		for (int i = 0; i < x->f_map->getNumberOfSources(); i++)
+		{
+			x->f_lines_x[i]->setRampInMs(ramp);
+			x->f_lines_y[i]->setRampInMs(ramp);
+		}
+	}
+	
+	x->f_ramp = x->f_lines_x[0]->getRampInMs();
+	
+    return MAX_ERR_NONE;
 }
 
 void hoa_map_dsp64(t_hoa_map *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-	long azimuth, distance;
-	azimuth = count[1];
-	distance = count[2];
+	long in1, in2;
+	in1 = count[1];
+	in2 = count[2];
+	
+	for (int i = 0; i < x->f_map->getNumberOfSources(); i++)
+	{
+		x->f_lines_x[i]->setVectorSize(maxvectorsize);
+		x->f_lines_y[i]->setVectorSize(maxvectorsize);
+		x->f_lines_x[i]->setSamplingRate(samplerate);
+		x->f_lines_y[i]->setSamplingRate(samplerate);
+	}
+	
     if(x->f_map->getNumberOfSources() == 1)
     {
-		if(azimuth && distance)
-            object_method(dsp64, gensym("dsp_add64"), x, hoa_map_perform64_azimuth_distance, 0, NULL);
-        else if(azimuth && !distance)
-            object_method(dsp64, gensym("dsp_add64"), x, hoa_map_perform64_azimuth, 0, NULL);
-        else if(!azimuth && distance)
-            object_method(dsp64, gensym("dsp_add64"), x, hoa_map_perform64_distance, 0, NULL);
-		else if(!azimuth && !distance)
+		if(in1 && in2)
+            object_method(dsp64, gensym("dsp_add64"), x, hoa_map_perform64_in1_in2, 0, NULL);
+        else if(in1 && !in2)
+            object_method(dsp64, gensym("dsp_add64"), x, hoa_map_perform64_in1, 0, NULL);
+        else if(!in1 && in2)
+            object_method(dsp64, gensym("dsp_add64"), x, hoa_map_perform64_in2, 0, NULL);
+		else if(!in1 && !in2)
             object_method(dsp64, gensym("dsp_add64"), x, hoa_map_perform64, 0, NULL);
     }
     else
@@ -268,12 +304,20 @@ void hoa_map_dsp64(t_hoa_map *x, t_object *dsp64, short *count, double samplerat
 
 void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+	double abscissa, ordinate;
     for(int i = 0; i < numins; i++)
     {
         cblas_dcopy(sampleframes, ins[i], 1, x->f_sig_ins+i, numins);
     }
     for(int i = 0; i < sampleframes; i++)
     {
+		for (int j = 0; j < x->f_map->getNumberOfSources(); j++)
+		{
+			abscissa = x->f_lines_x[j]->process();
+			ordinate = x->f_lines_y[j]->process();
+			x->f_map->setRadius(j, Hoa2D::radius(abscissa, ordinate));
+			x->f_map->setAzimuth(j, Hoa2D::azimuth(abscissa, ordinate));
+		}
         x->f_map->process(x->f_sig_ins + numins * i, x->f_sig_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
@@ -284,8 +328,13 @@ void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins,
 
 void hoa_map_perform64(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
+	double abscissa, ordinate;
 	for(int i = 0; i < sampleframes; i++)
     {
+		abscissa = x->f_lines_x[0]->process();
+		ordinate = x->f_lines_y[0]->process();
+		x->f_map->setRadius(0, Hoa2D::radius(abscissa, ordinate));
+		x->f_map->setAzimuth(0, Hoa2D::azimuth(abscissa, ordinate));
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
@@ -294,38 +343,74 @@ void hoa_map_perform64(t_hoa_map *x, t_object *dsp64, double **ins, long numins,
     }
 }
 
-void hoa_map_perform64_azimuth(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	double abscissa, ordinate;
+    for(int i = 0; i < sampleframes; i++)
+    {
+		abscissa = x->f_lines_x[0]->process();
+		ordinate = x->f_lines_y[0]->process();
+		
+		if (x->f_mode == HOA_MODE_POL)
+		{
+			x->f_map->setRadius(0, ins[1][i]);
+			x->f_map->setAzimuth(0, Hoa2D::azimuth(abscissa, ordinate));
+		}
+		else if (x->f_mode == HOA_MODE_CAR)
+		{
+			x->f_map->setAzimuth(0, Hoa2D::azimuth(ins[1][i], ordinate));
+			x->f_map->setRadius(0, Hoa2D::radius(ins[1][i], ordinate));
+		}
+		
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+	double abscissa, ordinate;
+	for(int i = 0; i < sampleframes; i++)
+    {
+		abscissa = x->f_lines_x[0]->process();
+		ordinate = x->f_lines_y[0]->process();
+		
+		if (x->f_mode == HOA_MODE_POL)
+		{
+			x->f_map->setAzimuth(0, ins[2][i]);
+			x->f_map->setRadius(0, Hoa2D::radius(abscissa, ordinate));
+		}
+		else if (x->f_mode == HOA_MODE_CAR)
+		{
+			x->f_map->setAzimuth(0, Hoa2D::azimuth(abscissa, ins[2][i]));
+			x->f_map->setRadius(0, Hoa2D::radius(abscissa, ins[2][i]));
+		}
+		
+        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_map_perform64_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < sampleframes; i++)
     {
-        x->f_map->setAzimuth(0, ins[1][i]);
-        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_dcopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_map_perform64_distance(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-	for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_map->setRadius(0, ins[2][i]);
-        x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
-    }
-    for(int i = 0; i < numouts; i++)
-    {
-        cblas_dcopy(sampleframes, x->f_sig_outs+i, numouts, outs[i], 1);
-    }
-}
-
-void hoa_map_perform64_azimuth_distance(t_hoa_map *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
-{
-    for(int i = 0; i < sampleframes; i++)
-    {
-        x->f_map->setAzimuth(0, ins[1][i]);
-        x->f_map->setRadius(0, ins[2][i]);
+		if (x->f_mode == HOA_MODE_POL)
+		{
+			x->f_map->setRadius(0, ins[1][i]);
+			x->f_map->setAzimuth(0, ins[2][i]);
+		}
+		else if (x->f_mode == HOA_MODE_CAR)
+		{
+			x->f_map->setAzimuth(0, Hoa2D::azimuth(ins[1][i], ins[2][i]));
+			x->f_map->setRadius(0, Hoa2D::radius(ins[1][i], ins[2][i]));
+		}
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
@@ -337,7 +422,12 @@ void hoa_map_perform64_azimuth_distance(t_hoa_map *x, t_object *dsp64, double **
 t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos)
 {
 	boxinfos->object_type = HOA_OBJECT_2D;
-	boxinfos->autoconnect_inputs = x->f_map->getNumberOfSources();
+	
+	if(x->f_map->getNumberOfSources() == 1)
+		boxinfos->autoconnect_inputs = 1;
+	else
+		boxinfos->autoconnect_inputs = x->f_map->getNumberOfSources();
+	
 	boxinfos->autoconnect_outputs = x->f_map->getNumberOfHarmonics();
 	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
 	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_AMBISONICS;
@@ -351,24 +441,24 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
         if(x->f_map->getNumberOfSources() == 1)
         {
             if(a == 0)
-                sprintf(s,"(Signal) Input");
+                sprintf(s,"(signal) Source 0");
             else if(a == 1)
-                sprintf(s,"(Signal or float) Azimuth");
+                sprintf(s,"(signal/float) Radius or Abscissa");
 			else if(a == 2)
-                sprintf(s,"(Signal or float) Distance");
+                sprintf(s,"(signal/float) Azimuth or Ordinate");
         }
         else
         {
             if(a == 0)
-                sprintf(s,"(Signal and messages) Input 0 and sources coordinates");
+                sprintf(s,"(signal/messages) Input 0 and sources messages");
             else
-                sprintf(s,"(Signal or float) Input %ld", a);
+                sprintf(s,"(signal/float) Input %ld", a);
         }
         
 	}
 	else 
 	{
-		sprintf(s,"(Signal) %s", x->f_map->getHarmonicsName(a).c_str());
+		sprintf(s,"(signal) %s", x->f_map->getHarmonicsName(a).c_str());
 	}
 }
 
@@ -379,5 +469,13 @@ void hoa_map_free(t_hoa_map *x)
 	delete x->f_map;
     delete [] x->f_sig_ins;
     delete [] x->f_sig_outs;
+	
+	for (int i=0; i < x->f_map->getNumberOfSources(); i++)
+	{
+		delete x->f_lines_x[i];
+		delete x->f_lines_y[i];
+	}
+	delete [] x->f_lines_x;
+	delete [] x->f_lines_y;
 }
 

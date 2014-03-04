@@ -7,9 +7,6 @@
 #ifndef DEF_HOA_MAX
 #define DEF_HOA_MAX
 
-#include "../Sources/Hoa2D/Hoa2D.h"
-#include "../Sources/Hoa3D/Hoa3D.h"
-
 extern "C"
 {
 #include "ext.h"

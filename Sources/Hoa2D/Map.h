@@ -27,6 +27,9 @@ namespace Hoa2D
         float*					m_harmonics_float;
         double*					m_harmonics_double;
         double*					m_gains;
+		double*					m_radius;
+		double*					m_azimuth;
+		bool*					m_muted;
         std::vector<Encoder*>   m_encoders;
         std::vector<Wider*>     m_widers;
         
@@ -46,7 +49,7 @@ namespace Hoa2D
         ~Map();
         
         //! This method set the angle of azimuth of a source.
-        /**	The angle of azimuth in radian, look at the Encoder for further informations. The index must be between 0 and the number of sources.
+        /**	The angle of azimuth is in radian, look at the Encoder for further informations. The index must be between 0 and the number of sources.
          
             @param     index	The index of the source.
             @param     azimuth	The azimuth.
@@ -64,6 +67,24 @@ namespace Hoa2D
             @see       setElevation()
          */
         void setRadius(unsigned int index, const double distance);
+		
+		//! This method mute or unmute a source.
+        /**	Mute or unmute a source.
+         
+		 @param     index	The index of the source.
+		 @param     muted	The mute state.
+		 @see       getMute()
+         */
+        void setMute(unsigned int index, const bool muted) {assert(index < m_number_of_sources); m_muted[index] = muted;}
+		
+		//! This method retrieve the mute or unmute state of a source.
+        /**	Get the Mute state of a source.
+         
+		 @param     index	The index of the source.
+		 @return    The mute state.
+		 @see       setMute()
+         */
+        bool getMute(unsigned int index, const bool muted) const {assert(index < m_number_of_sources); return m_muted[index];}
         
         //! This method retrieve the number of sources.
         /** Retrieve the number of sources.
@@ -71,6 +92,20 @@ namespace Hoa2D
             @return The number of sources.
          */
         unsigned int getNumberOfSources() const {return m_number_of_sources;};
+		
+		//! This method retrieve the radius of a source.
+        /** Retrieve the radius of a source.
+         
+		 @return The radius of the source.
+         */
+        double getRadius(unsigned int index) const {assert(index < m_number_of_sources); return m_radius[index];}
+		
+		//! This method retrieve the azimuth of a source.
+        /** Retrieve the azimuth of a source.
+         
+		 @return The azimuth of the source.
+         */
+        double getAzimuth(unsigned int index) const {assert(index < m_number_of_sources); return m_azimuth[index];}
         
         //! This method performs the encoding with distance compensation with single precision.
         /**	You should use this method for in-place or not-in-place processing and performs the encoding with distance compensation sample by sample. The inputs array contains the samples of the sources and the minimum size sould be the number of sources. The outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
@@ -91,6 +126,3 @@ namespace Hoa2D
 }
 
 #endif
-
-
-
