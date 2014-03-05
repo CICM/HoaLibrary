@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C12417A18C534F100E5E9A1 /* CicmLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C12417818C534F100E5E9A1 /* CicmLine.cpp */; };
-		2C12417B18C534F100E5E9A1 /* CicmLine.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C12417918C534F100E5E9A1 /* CicmLine.h */; };
 		2C30011318C5D66D00D3C686 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C30011218C5D66D00D3C686 /* hoa.max.cpp */; };
+		2C30011618C5E25100D3C686 /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C30011418C5E25100D3C686 /* Line.cpp */; };
+		2C30011718C5E25100D3C686 /* Line.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C30011518C5E25100D3C686 /* Line.h */; };
+		2C30011918C5E51B00D3C686 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C30011818C5E51B00D3C686 /* CoreFoundation.framework */; };
+		2C30011B18C5E52A00D3C686 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C30011A18C5E52A00D3C686 /* Accelerate.framework */; };
 		2C8F651F18C4DD1C007B67FF /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F650F18C4DD1C007B67FF /* Ambisonic.cpp */; };
 		2C8F652018C4DD1C007B67FF /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651018C4DD1C007B67FF /* Ambisonic.h */; };
 		2C8F652518C4DD1C007B67FF /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651518C4DD1C007B67FF /* Hoa2D.h */; };
@@ -21,17 +23,16 @@
 		2CC1BBE918C4E5BB00FB815B /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC1BBE518C4E5BB00FB815B /* Encoder.h */; };
 		2CC1BBEA18C4E5BB00FB815B /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1BBE618C4E5BB00FB815B /* Wider.cpp */; };
 		2CC1BBEB18C4E5BB00FB815B /* Wider.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC1BBE718C4E5BB00FB815B /* Wider.h */; };
-		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
-		8F7ADEA418C4D5EB00CBCA70 /* MaxHoa2D.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */; };
 		8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */; };
 		8F7AE5F718C4D88300CBCA70 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */; };
-		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C12417818C534F100E5E9A1 /* CicmLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CicmLine.cpp; sourceTree = "<group>"; };
-		2C12417918C534F100E5E9A1 /* CicmLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CicmLine.h; sourceTree = "<group>"; };
 		2C30011218C5D66D00D3C686 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
+		2C30011418C5E25100D3C686 /* Line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Line.cpp; sourceTree = "<group>"; };
+		2C30011518C5E25100D3C686 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		2C30011818C5E51B00D3C686 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2C30011A18C5E52A00D3C686 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2C8F650F18C4DD1C007B67FF /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		2C8F651018C4DD1C007B67FF /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
 		2C8F651518C4DD1C007B67FF /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
@@ -44,11 +45,9 @@
 		2CC1BBE618C4E5BB00FB815B /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
 		2CC1BBE718C4E5BB00FB815B /* Wider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wider.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.2d.map~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.2d.map~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoa2D.xcconfig; path = ../MaxHoa2D.xcconfig; sourceTree = "<group>"; };
 		8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa2D.max.h; path = ../Hoa2D.max.h; sourceTree = "<group>"; };
 		8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
-		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C30011B18C5E52A00D3C686 /* Accelerate.framework in Frameworks */,
+				2C30011918C5E51B00D3C686 /* CoreFoundation.framework in Frameworks */,
 				8F7AE5F718C4D88300CBCA70 /* MaxAudioAPI.framework in Frameworks */,
-				8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */,
-				8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,14 +68,15 @@
 			isa = PBXGroup;
 			children = (
 				2CC1BBDE18C4E4F700FB815B /* hoa.2d.map~.cpp */,
+				2C30011418C5E25100D3C686 /* Line.cpp */,
+				2C30011518C5E25100D3C686 /* Line.h */,
 				2C30011218C5D66D00D3C686 /* hoa.max.cpp */,
 				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
 				2C8F650E18C4DD1C007B67FF /* Hoa2D */,
-				2C12417718C534F100E5E9A1 /* CicmLine */,
 				8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */,
 				8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */,
-				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
-				8F18A8BD17287341005FD621 /* Accelerate.framework */,
+				2C30011A18C5E52A00D3C686 /* Accelerate.framework */,
+				2C30011818C5E51B00D3C686 /* CoreFoundation.framework */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
 			name = iterator;
@@ -88,16 +88,6 @@
 				2FBBEAE508F335360078DB84 /* hoa.2d.map~.mxo */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		2C12417718C534F100E5E9A1 /* CicmLine */ = {
-			isa = PBXGroup;
-			children = (
-				2C12417818C534F100E5E9A1 /* CicmLine.cpp */,
-				2C12417918C534F100E5E9A1 /* CicmLine.h */,
-			);
-			name = CicmLine;
-			path = ../../../Sources/CicmLibrary/CicmLine;
 			sourceTree = "<group>";
 		};
 		2C8F650E18C4DD1C007B67FF /* Hoa2D */ = {
@@ -129,7 +119,7 @@
 				2CC1BBE318C4E57200FB815B /* Map.h in Headers */,
 				2CC1BBEB18C4E5BB00FB815B /* Wider.h in Headers */,
 				2C8F652018C4DD1C007B67FF /* Ambisonic.h in Headers */,
-				2C12417B18C534F100E5E9A1 /* CicmLine.h in Headers */,
+				2C30011718C5E25100D3C686 /* Line.h in Headers */,
 				2CC1BBE918C4E5BB00FB815B /* Encoder.h in Headers */,
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
 				2C8F652A18C4DD1C007B67FF /* Tools.h in Headers */,
@@ -190,7 +180,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F7ADEA418C4D5EB00CBCA70 /* MaxHoa2D.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,12 +201,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC1BBDF18C4E4F700FB815B /* hoa.2d.map~.cpp in Sources */,
+				2C30011618C5E25100D3C686 /* Line.cpp in Sources */,
 				2CC1BBE218C4E57200FB815B /* Map.cpp in Sources */,
 				2CC1BBEA18C4E5BB00FB815B /* Wider.cpp in Sources */,
 				2C8F651F18C4DD1C007B67FF /* Ambisonic.cpp in Sources */,
 				2CC1BBE818C4E5BB00FB815B /* Encoder.cpp in Sources */,
 				2C30011318C5D66D00D3C686 /* hoa.max.cpp in Sources */,
-				2C12417A18C534F100E5E9A1 /* CicmLine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
