@@ -55,13 +55,6 @@ t_hoa_err hoa_getinfos(t_hoa_map* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_map_class;
 
-t_symbol *hoa_sym_pol;
-t_symbol *hoa_sym_polar;
-t_symbol *hoa_sym_car;
-t_symbol *hoa_sym_cartesian;
-t_symbol *hoa_sym_mute;
-    
-
 int C74_EXPORT main(void)
 {	
 
@@ -93,12 +86,6 @@ int C74_EXPORT main(void)
 	CLASS_ATTR_ORDER			(c, "ramp", 0, "2");
 	CLASS_ATTR_ACCESSORS		(c, "ramp", NULL, hoa_map_ramp);
 	CLASS_ATTR_SAVE				(c, "ramp", 1);
-	
-	hoa_sym_pol			= gensym("pol");
-	hoa_sym_polar		= gensym("polar");
-	hoa_sym_car			= gensym("car");
-	hoa_sym_cartesian	= gensym("cartesian");
-	hoa_sym_mute		= gensym("mute");
 	
 	class_dspinit(c);
 	class_register(CLASS_BOX, c);	

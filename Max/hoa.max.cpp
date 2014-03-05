@@ -16,7 +16,7 @@ void hoa_print_credit()
 		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
 		atom_setsym(sym, _sym_credit_line1);
 		object_method_typed(print, gensym("list"), 1, sym, NULL);
-		atom_setsym(sym, gensym(" "));
+		atom_setsym(sym, _sym_hoa_version);
 		print = (t_object*)object_new_typed(CLASS_BOX, gensym("print"), 1, sym);
 		atom_setsym(sym, _sym_credit_line2);
 		object_method_typed(print, gensym("list"), 1, sym, NULL);
