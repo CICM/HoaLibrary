@@ -8,6 +8,7 @@ var searchData=
   ['_7eoptim',['~Optim',['../class_hoa2_d_1_1_optim.html#a71b6d88873b054944db6efd2713bf8d3',1,'Hoa2D::Optim::~Optim()'],['../class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20',1,'Hoa3D::Optim::~Optim()']]],
   ['_7eplanewaves',['~Planewaves',['../class_hoa2_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf',1,'Hoa2D::Planewaves::~Planewaves()'],['../class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf',1,'Hoa3D::Planewaves::~Planewaves()']]],
   ['_7eprojector',['~Projector',['../class_hoa2_d_1_1_projector.html#a7a93c4c33578b5f09636790a048c1351',1,'Hoa2D::Projector']]],
+  ['_7erecomposer',['~Recomposer',['../class_hoa2_d_1_1_recomposer.html#a6e26043adf8b785d746084dfed82f183',1,'Hoa2D::Recomposer']]],
   ['_7erotate',['~Rotate',['../class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2',1,'Hoa2D::Rotate::~Rotate()'],['../class_hoa3_d_1_1_rotate.html#a13a37adfe31314b7d5844333a4e587ab',1,'Hoa3D::Rotate::~Rotate()']]],
   ['_7escope',['~Scope',['../class_hoa2_d_1_1_scope.html#a29c9191706ff1377efab0720cacbc448',1,'Hoa2D::Scope::~Scope()'],['../class_hoa3_d_1_1_scope.html#a84990cf90c7b3be0963f4cacbdab1df8',1,'Hoa3D::Scope::~Scope()']]],
   ['_7evector',['~Vector',['../class_hoa2_d_1_1_vector.html#aa260b1636ddc02ac37279f1b3c6160da',1,'Hoa2D::Vector::~Vector()'],['../class_hoa3_d_1_1_vector.html#a0f7403e0ae42fe40f54fcb35977bf95c',1,'Hoa3D::Vector::~Vector()']]],

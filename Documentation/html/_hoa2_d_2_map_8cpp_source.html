@@ -114,7 +114,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        m_harmonics_double  = <span class="keyword">new</span> <span class="keywordtype">double</span>[m_number_of_harmonics];</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        m_gains             = <span class="keyword">new</span> <span class="keywordtype">double</span>[m_number_of_harmonics];</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        m_muted             = <span class="keyword">new</span> <span class="keywordtype">bool</span>[numberOfSources];</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_first_source      = 0;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_sources; i++)</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            m_muted[i] = <span class="keyword">false</span>;</div>
@@ -140,7 +140,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            m_gains[index] = 1.;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            m_widers[index]-&gt;setWideningValue(<a class="code" href="namespace_hoa2_d.html#aea812f1670707ecf3f186a0b56dce8e4">clip_min</a>(radius, 0.));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            m_widers[index]-&gt;setWideningValue(0.);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
@@ -148,69 +148,87 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        assert(index &lt; m_number_of_sources);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        m_muted[index] = muted;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">   56</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">Map::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs, <span class="keywordtype">float</span>* outputs)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">for</span>(i = 0; i &lt; m_number_of_harmonics; i++)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            outputs[i] = m_harmonics_float[i] = 0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 1; i &lt; m_number_of_sources; i++)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">if</span> (!m_muted[i])</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                m_encoders[i]-&gt;process(inputs[i] * m_gains[i], m_harmonics_float);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                m_widers[i]-&gt;process(m_harmonics_float, m_harmonics_float);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_map.html#aa71ff518d419b54b409043ded7b8abd4">   74</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">Map::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs, <span class="keywordtype">double</span>* outputs)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">for</span>(i = 0; i &lt; m_number_of_harmonics; i++)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            outputs[i] = m_harmonics_double[i] = 0;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">for</span>(i = 0; i &lt; m_number_of_sources; i++)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        m_first_source = -1;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_sources; i++)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">if</span>(!m_muted[i])</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                m_first_source = i;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">   65</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">Map::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs, <span class="keywordtype">float</span>* outputs)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">if</span>(m_first_source &gt; -1)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            m_encoders[m_first_source]-&gt;process(inputs[m_first_source] * m_gains[m_first_source], m_harmonics_float);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            m_widers[m_first_source]-&gt;process(m_harmonics_float, outputs);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = m_first_source+1; i &lt; m_number_of_sources; i++)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keywordflow">if</span> (!m_muted[i])</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    m_encoders[i]-&gt;process(inputs[i] * m_gains[i], m_harmonics_float);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    m_widers[i]-&gt;process(m_harmonics_float, m_harmonics_float);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">if</span> (!m_muted[i])</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                m_encoders[i]-&gt;process(inputs[i] * m_gains[i], m_harmonics_double);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                m_widers[i]-&gt;process(m_harmonics_double, m_harmonics_double);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                cblas_daxpy(m_number_of_harmonics, 1.f, m_harmonics_double, 1, outputs, 1);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3">   92</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3">Map::~Map</a>()</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        m_encoders.clear();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        m_widers.clear();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">delete</span> [] m_harmonics_double;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">delete</span> [] m_harmonics_float;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">delete</span> [] m_gains;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">delete</span> [] m_muted;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                outputs[i] = 0.f;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_map.html#aa71ff518d419b54b409043ded7b8abd4">   88</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">Map::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs, <span class="keywordtype">double</span>* outputs)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">if</span>(m_first_source &gt; -1)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            m_encoders[m_first_source]-&gt;process(inputs[m_first_source] * m_gains[m_first_source], m_harmonics_double);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            m_widers[m_first_source]-&gt;process(m_harmonics_double, outputs);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = m_first_source+1; i &lt; m_number_of_sources; i++)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordflow">if</span> (!m_muted[i])</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    m_encoders[i]-&gt;process(inputs[i] * m_gains[i], m_harmonics_double);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    m_widers[i]-&gt;process(m_harmonics_double, m_harmonics_double);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                    cblas_daxpy(m_number_of_harmonics, 1.f, m_harmonics_double, 1, outputs, 1);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                outputs[i] = 0.;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3">  111</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3">Map::~Map</a>()</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        m_encoders.clear();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        m_widers.clear();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keyword">delete</span> [] m_harmonics_double;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">delete</span> [] m_harmonics_float;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keyword">delete</span> [] m_gains;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keyword">delete</span> [] m_muted;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
 <div class="ttc" id="class_hoa2_d_1_1_map_html_a0b98a9ad8d1fda90fe5559fd7736050b"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#a0b98a9ad8d1fda90fe5559fd7736050b">Hoa2D::Map::setAzimuth</a></div><div class="ttdeci">void setAzimuth(unsigned int index, const double azimuth)</div><div class="ttdoc">This method set the angle of azimuth of a source. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00029">Map.cpp:29</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_map_html_a22720e5b9ab041bb970d4dc43086558c"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#a22720e5b9ab041bb970d4dc43086558c">Hoa2D::Map::Map</a></div><div class="ttdeci">Map(unsigned int order, unsigned int numberOfSources)</div><div class="ttdoc">The map constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00011">Map.cpp:11</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00022">Ambisonic.h:22</a></div></div>
-<div class="ttc" id="namespace_hoa2_d_html_aea812f1670707ecf3f186a0b56dce8e4"><div class="ttname"><a href="namespace_hoa2_d.html#aea812f1670707ecf3f186a0b56dce8e4">Hoa2D::clip_min</a></div><div class="ttdeci">double clip_min(double value, double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_tools_8h_source.html#l00306">Tools.h:306</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_map_html_a47d01e332e6c19015e9fd94e8898f4f3"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3">Hoa2D::Map::~Map</a></div><div class="ttdeci">~Map()</div><div class="ttdoc">The map destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00092">Map.cpp:92</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_map_html_a47d01e332e6c19015e9fd94e8898f4f3"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3">Hoa2D::Map::~Map</a></div><div class="ttdeci">~Map()</div><div class="ttdoc">The map destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00111">Map.cpp:111</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_map_html_a66b18d42476bb3d92c816173c9fc41a4"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#a66b18d42476bb3d92c816173c9fc41a4">Hoa2D::Map::setRadius</a></div><div class="ttdeci">void setRadius(unsigned int index, const double radius)</div><div class="ttdoc">This method set the radius of a source. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00035">Map.cpp:35</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_map_html_ae1ff77cc8681ee9870dc2d27ebaaaecd"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#ae1ff77cc8681ee9870dc2d27ebaaaecd">Hoa2D::Map::setMute</a></div><div class="ttdeci">void setMute(unsigned int index, const bool muted)</div><div class="ttdoc">This method mute or unmute a source. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00050">Map.cpp:50</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_map_html_a933daf1cc1c8ad4df486d436f6d91450"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">Hoa2D::Map::process</a></div><div class="ttdeci">void process(const float *inputs, float *outputs)</div><div class="ttdoc">This method performs the encoding with distance compensation with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00056">Map.cpp:56</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_map_html_a933daf1cc1c8ad4df486d436f6d91450"><div class="ttname"><a href="class_hoa2_d_1_1_map.html#a933daf1cc1c8ad4df486d436f6d91450">Hoa2D::Map::process</a></div><div class="ttdeci">void process(const float *inputs, float *outputs)</div><div class="ttdoc">This method performs the encoding with distance compensation with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_map_8cpp_source.html#l00065">Map.cpp:65</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html">Hoa2D::Encoder</a></div><div class="ttdoc">The ambisonic encoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8h_source.html#l00017">Encoder.h:17</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_wider_html"><div class="ttname"><a href="class_hoa2_d_1_1_wider.html">Hoa2D::Wider</a></div><div class="ttdoc">The ambisonic wider. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_wider_8h_source.html#l00017">Wider.h:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 5 2014 11:37:13 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 5 2014 12:43:42 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

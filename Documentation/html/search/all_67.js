@@ -1,7 +1,7 @@
 var searchData=
 [
   ['getabscissa',['getAbscissa',['../class_hoa2_d_1_1_scope.html#a80ed96d8739e5ceed58b5b696cd74a24',1,'Hoa2D::Scope']]],
-  ['getazimuth',['getAzimuth',['../class_hoa2_d_1_1_encoder.html#a2ed07d913b444c58b3b1cf75dd1df117',1,'Hoa2D::Encoder::getAzimuth()'],['../class_hoa2_d_1_1_map.html#a79310ad84032e8dfd918d927dcd76a01',1,'Hoa2D::Map::getAzimuth()'],['../class_hoa2_d_1_1_scope.html#aa7fff00ef13e8be9c9cd0774301ed258',1,'Hoa2D::Scope::getAzimuth()'],['../class_hoa3_d_1_1_scope.html#a9a0c8cf80dc5686b746fc3d5b742de45',1,'Hoa3D::Scope::getAzimuth()']]],
+  ['getazimuth',['getAzimuth',['../class_hoa2_d_1_1_encoder.html#a2ed07d913b444c58b3b1cf75dd1df117',1,'Hoa2D::Encoder::getAzimuth()'],['../class_hoa2_d_1_1_map.html#a79310ad84032e8dfd918d927dcd76a01',1,'Hoa2D::Map::getAzimuth()'],['../class_hoa2_d_1_1_recomposer.html#a81bc1f97e61543558a0595f4fd8a4e46',1,'Hoa2D::Recomposer::getAzimuth()'],['../class_hoa2_d_1_1_scope.html#aa7fff00ef13e8be9c9cd0774301ed258',1,'Hoa2D::Scope::getAzimuth()'],['../class_hoa3_d_1_1_scope.html#a9a0c8cf80dc5686b746fc3d5b742de45',1,'Hoa3D::Scope::getAzimuth()']]],
   ['getchannelabscissa',['getChannelAbscissa',['../class_hoa2_d_1_1_planewaves.html#aab20597fa76482d7a907b2e39cc5be25',1,'Hoa2D::Planewaves']]],
   ['getchannelazimuth',['getChannelAzimuth',['../class_hoa2_d_1_1_planewaves.html#a52c4f8b05137ab56e82b0e076d7f5d3a',1,'Hoa2D::Planewaves']]],
   ['getchannelname',['getChannelName',['../class_hoa2_d_1_1_planewaves.html#a66b40a511ac3dd9f3ab1102e98370dbd',1,'Hoa2D::Planewaves']]],
@@ -33,6 +33,6 @@ var searchData=
   ['getradius',['getRadius',['../class_hoa2_d_1_1_map.html#aa9587dc91fd2ebcd083136188d0d8b39',1,'Hoa2D::Map::getRadius()'],['../class_hoa2_d_1_1_scope.html#a552af7083cc302db946910f68f928f62',1,'Hoa2D::Scope::getRadius()'],['../class_hoa3_d_1_1_scope.html#a2452963dd7f2ee7d61af6186d049db24',1,'Hoa3D::Scope::getRadius()']]],
   ['getroll',['getRoll',['../class_hoa3_d_1_1_rotate.html#a4da29df01f2c7311490df11d4322b5f8',1,'Hoa3D::Rotate']]],
   ['getvalue',['getValue',['../class_hoa2_d_1_1_scope.html#a69f278dc5e8b40c0f58f6e684078d6eb',1,'Hoa2D::Scope::getValue()'],['../class_hoa3_d_1_1_scope.html#a5dd62de174f903097d992da4f108037e',1,'Hoa3D::Scope::getValue()']]],
-  ['getwideningvalue',['getWideningValue',['../class_hoa2_d_1_1_wider.html#a6de242ad21bc1197433b23b746e73c8b',1,'Hoa2D::Wider']]],
+  ['getwideningvalue',['getWideningValue',['../class_hoa2_d_1_1_recomposer.html#a31d6045c32e191a7c5212e4e34d6d3ab',1,'Hoa2D::Recomposer::getWideningValue()'],['../class_hoa2_d_1_1_wider.html#a6de242ad21bc1197433b23b746e73c8b',1,'Hoa2D::Wider::getWideningValue()']]],
   ['getyaw',['getYaw',['../class_hoa2_d_1_1_rotate.html#a5f40eff256bd5b845d6b4cfc046cd84e',1,'Hoa2D::Rotate::getYaw()'],['../class_hoa3_d_1_1_rotate.html#a386f1fba4ceab4c2e243b7a222124d7e',1,'Hoa3D::Rotate::getYaw()']]]
 ];

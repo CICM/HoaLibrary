@@ -17,7 +17,7 @@ namespace Hoa2D
         m_harmonics_double  = new double[m_number_of_harmonics];
         m_gains             = new double[m_number_of_harmonics];
 		m_muted				= new bool[numberOfSources];
-		
+		m_first_source      = 0;
         for(unsigned int i = 0; i < m_number_of_sources; i++)
         {
 			m_muted[i] = false;
@@ -43,7 +43,7 @@ namespace Hoa2D
         else
         {
             m_gains[index] = 1.;
-            m_widers[index]->setWideningValue(clip_min(radius, 0.));
+            m_widers[index]->setWideningValue(0.);
         }
     }
     
@@ -51,41 +51,60 @@ namespace Hoa2D
     {
         assert(index < m_number_of_sources);
         m_muted[index] = muted;
+        m_first_source = -1;
+        for(unsigned int i = 0; i < m_number_of_sources; i++)
+        {
+            if(!m_muted[i])
+            {
+                m_first_source = i;
+                return;
+            }
+        }
     }
     
     void Map::process(const float* inputs, float* outputs)
     {
-		unsigned int i;
-		
-		for(i = 0; i < m_number_of_harmonics; i++)
-			outputs[i] = m_harmonics_float[i] = 0;
-
-        for(unsigned int i = 1; i < m_number_of_sources; i++)
+        if(m_first_source > -1)
         {
-			if (!m_muted[i])
-			{
-				m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_float);
-				m_widers[i]->process(m_harmonics_float, m_harmonics_float);
-				cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);
-			}
+            m_encoders[m_first_source]->process(inputs[m_first_source] * m_gains[m_first_source], m_harmonics_float);
+            m_widers[m_first_source]->process(m_harmonics_float, outputs);
+            for(unsigned int i = m_first_source+1; i < m_number_of_sources; i++)
+            {
+                if (!m_muted[i])
+                {
+                    m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_float);
+                    m_widers[i]->process(m_harmonics_float, m_harmonics_float);
+                    cblas_saxpy(m_number_of_harmonics, 1.f, m_harmonics_float, 1, outputs, 1);
+                }
+            }
+        }
+        else
+        {
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+                outputs[i] = 0.f;
         }
     }
     
     void Map::process(const double* inputs, double* outputs)
     {
-		unsigned int i;
-		
-		for(i = 0; i < m_number_of_harmonics; i++)
-			outputs[i] = m_harmonics_double[i] = 0;
-		
-        for(i = 0; i < m_number_of_sources; i++)
+		if(m_first_source > -1)
         {
-			if (!m_muted[i])
-			{
-				m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_double);
-				m_widers[i]->process(m_harmonics_double, m_harmonics_double);
-				cblas_daxpy(m_number_of_harmonics, 1.f, m_harmonics_double, 1, outputs, 1);
-			}
+            m_encoders[m_first_source]->process(inputs[m_first_source] * m_gains[m_first_source], m_harmonics_double);
+            m_widers[m_first_source]->process(m_harmonics_double, outputs);
+            for(unsigned int i = m_first_source+1; i < m_number_of_sources; i++)
+            {
+                if (!m_muted[i])
+                {
+                    m_encoders[i]->process(inputs[i] * m_gains[i], m_harmonics_double);
+                    m_widers[i]->process(m_harmonics_double, m_harmonics_double);
+                    cblas_daxpy(m_number_of_harmonics, 1.f, m_harmonics_double, 1, outputs, 1);
+                }
+            }
+        }
+        else
+        {
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+                outputs[i] = 0.;
         }
     }
     

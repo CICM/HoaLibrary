@@ -3,7 +3,6 @@ var searchData=
   ['ambisonic',['Ambisonic',['../class_hoa2_d_1_1_ambisonic.html',1,'Hoa2D']]],
   ['ambisonic',['Ambisonic',['../class_hoa3_d_1_1_ambisonic.html',1,'Hoa3D']]],
   ['ambisonic',['Ambisonic',['../class_hoa2_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541',1,'Hoa2D::Ambisonic::Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#a43f91832422c0b59f92f02978dc1e541',1,'Hoa3D::Ambisonic::Ambisonic()']]],
-  ['ambisonicrecomposer',['AmbisonicRecomposer',['../class_ambisonic_recomposer.html',1,'']]],
   ['ambisonicsbinaural',['AmbisonicsBinaural',['../class_ambisonics_binaural.html',1,'AmbisonicsBinaural'],['../class_ambisonics_binaural.html#aa3154f11cb7a385b09a743c5e46ee2e9',1,'AmbisonicsBinaural::AmbisonicsBinaural()']]],
   ['ambisonicsmeter',['AmbisonicsMeter',['../class_ambisonics_meter.html',1,'AmbisonicsMeter'],['../class_ambisonics_meter.html#ab6652775a732fc5d190101e5673c6758',1,'AmbisonicsMeter::AmbisonicsMeter()']]],
   ['ambisonicsmultidecoder',['AmbisonicsMultiDecoder',['../class_ambisonics_multi_decoder.html',1,'AmbisonicsMultiDecoder'],['../class_ambisonics_multi_decoder.html#aa1f1f419fc8b8d032e562009ccb2e6bc',1,'AmbisonicsMultiDecoder::AmbisonicsMultiDecoder()']]],

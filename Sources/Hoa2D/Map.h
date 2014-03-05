@@ -28,6 +28,7 @@ namespace Hoa2D
         double*					m_harmonics_double;
         double*					m_gains;
 		bool*					m_muted;
+        unsigned int            m_first_source;
         std::vector<Encoder*>   m_encoders;
         std::vector<Wider*>     m_widers;
         
@@ -59,6 +60,7 @@ namespace Hoa2D
         //! This method set the angle of azimuth of a source.
         /**	The angle of azimuth in radian and you should prefer to use it between 0 and 2 Pi to avoid recursive wrapping of the value. The direction of rotation is counterclockwise. The 0 radian is Pi/2 phase shifted relative to a mathematical representation of a circle, then the 0 radian is at the "front" of the soundfield. The index must be between 0 and the number of sources - 1.
          
+            @param     index	The index of the source.
             @param     azimuth	The azimuth.
             @see       setRadius()
          */
@@ -84,6 +86,7 @@ namespace Hoa2D
         //! This method retrieve the azimuth of a source.
         /** Retrieve the azimuth of a source.
          
+            @param     index	The index of the source.
             @return The azimuth of the source if the source exists, otherwise the function generates an error.
          */
         double getAzimuth(unsigned int index) const
@@ -95,6 +98,7 @@ namespace Hoa2D
         //! This method retrieve the radius of a source.
         /** Retrieve the radius of a source.
          
+            @param     index	The index of the source.
             @return The radius of the source if the source exists, otherwise the function generates an error.
          */
         double getRadius(unsigned int index) const
