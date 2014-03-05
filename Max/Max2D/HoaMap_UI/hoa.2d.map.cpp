@@ -10,21 +10,7 @@
 #define CORNERSIZE 8
 #define BORDERTHICK 2
 
-extern "C"
-{
-#include "ext.h"
-#include "ext_obex.h"
-#include "ext_path.h"
-#include "ext_common.h"
-#include "jpatcher_api.h"
-#include "jgraphics.h"
-#include "jpatcher_syms.h"
-#include "ext_dictionary.h"
-#include "ext_globalsymbol.h"
-#include "ext_parameter.h"
-}
-
-#include "../../Sources/HoaLibrary.h"
+#include "../Hoa2D.max.h"
 
 typedef struct _textfield {
 	t_jbox			j_box;
@@ -89,8 +75,6 @@ typedef struct  _hoamap
     
     // options :
     t_atom_long f_output_mode;
-    //t_atom_long f_autogroup;
-    
 } t_hoamap;
 
 t_class *hoamap_class;
@@ -145,15 +129,17 @@ void hoamap_mouseleave(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers, double x_inc, double y_inc);
 long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
 
+t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos);
+
 int C74_EXPORT main()
 {
     hoa_textfield_init();
 	t_class *c;
     
-	c = class_new("hoa.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
+	c = class_new("hoa.2d.map", (method)hoamap_new, (method)hoamap_free, (short)sizeof(t_hoamap), 0L, A_GIMME, 0);
+	class_alias(c, gensym("hoa.map"));
 	
-	common_symbols_gettable()
-	common_symbols_init();
+	hoa_initclass(c, NULL);
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
@@ -318,6 +304,16 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
+t_hoa_err hoa_getinfos(t_hoamap* x, t_hoa_boxinfos* boxinfos)
+{
+	boxinfos->object_type = HOA_OBJECT_2D;
+	boxinfos->autoconnect_inputs = 0;
+	boxinfos->autoconnect_outputs = 0;
+	boxinfos->autoconnect_inputs_type = HOA_CONNECT_TYPE_STANDARD;
+	boxinfos->autoconnect_outputs_type = HOA_CONNECT_TYPE_STANDARD;
+	return HOA_ERR_NONE;
+}
+
 void hoamap_free(t_hoamap *x)
 {
 	jbox_free(&x->j_box);
@@ -337,15 +333,15 @@ void hoamap_free(t_hoamap *x)
 void hoamap_assist(t_hoamap *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
-		sprintf(s,"(Anything) Behavior and appearance");
+		sprintf(s,"(messages) Behavior and appearance");
 	else
     {
         if(a == 0)
-            sprintf(s,"(List) Sources coordinates");
+            sprintf(s,"(list) Sources coordinates");
         if(a == 1)
-            sprintf(s,"(List) Groups coordinates");
+            sprintf(s,"(list) Groups coordinates");
         if(a == 2)
-            sprintf(s,"(List) Infos");
+            sprintf(s,"(list) Infos");
     }
 }
 
@@ -1151,7 +1147,7 @@ void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
 t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
-            x->f_zoom_factor = Tools::clip(float(atom_getfloat(argv)), float(MIN_ZOOM), float(MAX_ZOOM));
+            x->f_zoom_factor = clip_minmax(atom_getfloat(argv), MIN_ZOOM, MAX_ZOOM);
     
     jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
     jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
@@ -1493,17 +1489,17 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
     double w = rect->width;
     double h = rect->height;
     t_pt ctr = {w*0.5, h*0.5};
-    double maxctr = Tools::cicm_max(w, h)*0.5;
+    double maxctr = max(w, h)*0.5;
     
     double contrastBlack = 0.12;
     double contrastWhite = 0.08;
     black = white = x->f_colorBackgroundInside;
-    black.red = Tools::clip_min(black.red -= contrastBlack);
-    black.green = Tools::clip_min(black.green -= contrastBlack);
-    black.blue = Tools::clip_min(black.blue -= contrastBlack);
-    white.red = Tools::clip_max(white.red += contrastWhite, 1.);
-    white.green = Tools::clip_max(white.green += contrastWhite, 1.);
-    white.blue = Tools::clip_max(white.blue += contrastWhite, 1.);
+    black.red = clip_min(black.red -= contrastBlack, 0);
+    black.green = clip_min(black.green -= contrastBlack, 0);
+    black.blue = clip_min(black.blue -= contrastBlack, 0);
+    white.red = clip_max(white.red += contrastWhite, 1.);
+    white.green = clip_max(white.green += contrastWhite, 1.);
+    white.blue = clip_max(white.blue += contrastWhite, 1.);
     
 	g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), w, h);
 	
@@ -1682,8 +1678,8 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_set_source_jrgba(g, &red); 
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
                     jgraphics_stroke(g);
-                    jgraphics_move_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI2 / 2.));
-                    jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_PI2 * 5. / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_PI * 5. / 4.));
+                    jgraphics_move_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_PI2 / 2.));
+                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_PI2 * 5. / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_PI * 5. / 4.));
                     jgraphics_stroke(g);
                 }
                 
@@ -1767,7 +1763,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 for(int j = 1; j < 4; j += 2)
                 {
                     jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                    jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.));
+                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.));
                 }
                 jgraphics_stroke(g);
                 if(!x->f_source_manager->groupGetMute(i))
@@ -1779,7 +1775,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     for(int j = 0; j < 2; j++)
                     {
                         jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
+                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
                     }
                 }
                 jgraphics_stroke(g);
@@ -1792,7 +1788,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     for(int j = 0; j < 2; j++)
                     {
                         jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + Tools::abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + Tools::ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
+                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
                     }
                     jgraphics_stroke(g);
                 }
@@ -1848,7 +1844,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     coordinatesCartesian cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
-    double maxwh = Tools::cicm_max(x->rect.width, x->rect.height);
+    double maxwh = max(x->rect.width, x->rect.height);
     double ditanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
@@ -1861,9 +1857,9 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        if(x->f_source_manager->sourceGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
+        if(x->f_source_manager->sourceGetExistence(i) && distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
         {
-            ditanceSelected = Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y);
+            ditanceSelected = distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y);
             x->f_index_of_selected_source = i;
         }
     }
@@ -1872,9 +1868,9 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
-            if(x->f_source_manager->groupGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
+            if(x->f_source_manager->groupGetExistence(i) && distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
             {
-                ditanceSelected = Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
+                ditanceSelected = distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
                 x->f_index_of_selected_group = i;
             }
         }
@@ -2077,7 +2073,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		if(modifiers == 148 || modifiers == 404)
 #endif
-			x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, Tools::angle(cursor.x, cursor.y) - CICM_PI2);
+			x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y) - CICM_PI2);
 
 		 // Radius
 #ifdef _WINDOWS
@@ -2085,7 +2081,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		else if(modifiers == 18 || modifiers == 274)
 #endif
-            x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, Tools::radius(cursor.x, cursor.y));
+            x->f_source_manager->sourceSetRadius(x->f_index_of_selected_source, radius(cursor.x, cursor.y));
 		 // Angle + radius
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift
@@ -2113,21 +2109,21 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		if(modifiers == 148 || modifiers == 404)
 #endif
-            x->f_source_manager->groupSetRelativeAngle(x->f_index_of_selected_group, Tools::angle(cursor.x, cursor.y));
+            x->f_source_manager->groupSetRelativeAngle(x->f_index_of_selected_group, azimuth(cursor.x, cursor.y));
 		 // Radius
 #ifdef _WINDOWS
 		else if(modifiers == 18) // Shift
 #else
 		else if(modifiers == 18 || modifiers == 274)
 #endif
-            x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y));
+            x->f_source_manager->groupSetRelativeRadius(x->f_index_of_selected_group, radius(cursor.x, cursor.y));
 		 // Angle + radius
 #ifdef _WINDOWS
 		else if(modifiers == 26) // Shift
 #else
 		else if (modifiers == 17)
 #endif
-            x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, Tools::radius(cursor.x, cursor.y), Tools::angle(cursor.x, cursor.y));
+            x->f_source_manager->groupSetRelativePolar(x->f_index_of_selected_group, radius(cursor.x, cursor.y), azimuth(cursor.x, cursor.y));
         else
             x->f_source_manager->groupSetCartesian(x->f_index_of_selected_group, cursor.x, cursor.y);            
     }
@@ -2202,7 +2198,7 @@ void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 	if (modifiers == eAltKey)
     {
 		double newZoom = x->f_zoom_factor + y_inc / 100.;
-        x->f_zoom_factor = Tools::clip(newZoom, MIN_ZOOM, MAX_ZOOM);
+        x->f_zoom_factor = clip_minmax(newZoom, MIN_ZOOM, MAX_ZOOM);
         object_notify(x, gensym("modified"), NULL);
         jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
         jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
@@ -2221,7 +2217,7 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     coordinatesCartesian cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
-    double maxwh = Tools::cicm_max(x->rect.width, x->rect.height);
+    double maxwh = max(x->rect.width, x->rect.height);
     double ditanceSelected = (x->f_size_source / maxwh * 2.) / x->f_zoom_factor;
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
@@ -2230,9 +2226,9 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     x->f_index_of_selected_group = -1;
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
-        if(x->f_source_manager->sourceGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
+        if(x->f_source_manager->sourceGetExistence(i) && distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
         {
-            ditanceSelected = Tools::distance_euclidean(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y);
+            ditanceSelected = distance(x->f_source_manager->sourceGetAbscissa(i), x->f_source_manager->sourceGetOrdinate(i), cursor.x, cursor.y);
             x->f_index_of_selected_source = i;
         }
     }
@@ -2240,9 +2236,9 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
         {
-            if(x->f_source_manager->groupGetExistence(i) && Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
+            if(x->f_source_manager->groupGetExistence(i) && distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y) <= ditanceSelected)
             {
-                ditanceSelected = Tools::distance_euclidean(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
+                ditanceSelected = distance(x->f_source_manager->groupGetAbscissa(i), x->f_source_manager->groupGetOrdinate(i), cursor.x, cursor.y);
                 x->f_index_of_selected_group = i;
             }
         }

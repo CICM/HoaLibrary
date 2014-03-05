@@ -7,7 +7,7 @@
 #ifndef DEF_HOA_2D_PLANEWAVES
 #define DEF_HOA_2D_PLANEWAVES
 
-#include "Tools.h"
+#include "../Hoa/Hoa.h"
 
 namespace Hoa2D
 {
