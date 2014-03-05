@@ -12,7 +12,7 @@
 namespace Hoa2D
 {
     //! The ambisonic rotation.
-    /** The Rotate should be used to rotate an entire soundfield.
+    /** The rotate should be used to rotate the ambisonic soundfield.
      */
     class Rotate : public Ambisonic
     {
@@ -24,8 +24,8 @@ namespace Hoa2D
         
     public:
         
-        //! The Rotate constructor.
-        /**	The Rotate constructor allocates and initialize the member values to computes spherical harmonics rotation depending on a decomposition order. The order must be at least 1.
+        //! The rotate constructor.
+        /**	The rotate constructor allocates and initialize the member values to computes spherical harmonics rotation depending on a decomposition order. The order must be at least 1.
          
             @param     order	The order.
          */
@@ -36,24 +36,22 @@ namespace Hoa2D
          */
         ~Rotate();
 		
-		//! This method sets the yaw value (rotation on the z-axis).
-        /** The yaw is equivalent to a rotation on the z-axis (also named rotation).
+		//! This method sets the angle of the rotation around the z axis, the yaw value,
+        /** The yaw is equivalent to a rotation around the z axis, the value is in radian and should be between 0 and 2π.
 		 
-		 @param     value The yaw value between 0 and 2π.
+            @param     value The yaw value.
          */
         void setYaw(const double value);
 		
-		//! Get the yaw value (rotation on the z-axis).
-        /** The yaw is equivalent to a rotation on the z-axis (also named rotation).
+		//! Get the angle of the rotation around the z axis, the yaw value.
+        /** The method returns the angle of the rotation around the z axis, the yaw value, in radian between 0 and 2π.
 		 
-		 @return     value The yaw value between 0 and 2π.
+            @return     The yaw value.
          */
         inline double getYaw() const {return m_yaw;};
         
         //! This method performs the rotation with single precision.
-        /**	You should use this method for not-in-place processing and performs the rotation sample by sample.
-			(warning : doesn't work with in-place vectors);
-			The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+        /**	You should use this method for in-place or not-in-place processing and performs the rotation sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs   The input array.
             @param     outputs  The output array.
@@ -61,9 +59,7 @@ namespace Hoa2D
         void process(const float* inputs, float* outputs);
         
         //! This method performs the rotation with double precision.
-        /**	You should use this method for not-in-place processing and performs the rotation sample by sample. 
-			(warning : doesn't work with in-place vectors);
-			The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+        /**	You should use this method for in-place or not-in-place processing and performs the rotation sample by sample. The inputs array and outputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
          
             @param     inputs   The input array.
             @param     outputs  The output array.
@@ -71,7 +67,7 @@ namespace Hoa2D
         void process(const double* inputs, double* outputs);
     };
 	
-} // end of namespace Hoa3D
+}
 
 #endif
 

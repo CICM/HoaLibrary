@@ -56,7 +56,7 @@ namespace Hoa3D
 			with h[band, argument].
          
             @param     index	The global index of an harmonic.
-            @return    The method returns the argument of an harmonic if it exists, generate an error otherwise.
+            @return    The method returns the argument of the harmonic if the harmonic exists, otherwise the function generates an error.
             @see       getHarmonicBand()
             @see       getHarmonicsName()
          */
@@ -72,7 +72,7 @@ namespace Hoa3D
 			with h[band, argument].
          
             @param     index	The global index of an harmonic.
-            @return    The method returns the band of an harmonic if it exists, generate an error otherwise.
+            @return    The method returns the band of the harmonic if the harmonic exists, otherwise the function generates an error.
             @see       getHarmonicArgument()
             @see       getHarmonicsName()
          */
@@ -86,7 +86,7 @@ namespace Hoa3D
         /** Retrieve a name for an harmonic in a std::string format that will be "harmonic band argument".
          
             @param     index	The global index of an harmonic.
-            @return    The method returns a name of an harmonic that contains its band and the argument.
+            @return    The method returns a name for the harmonic that contains its band and its argument if the harmonic exists, otherwise the function generates an error.
             @see       getHarmonicBand()
             @see       getHarmonicArgument()
          */

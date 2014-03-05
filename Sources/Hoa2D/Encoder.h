@@ -51,10 +51,10 @@ namespace Hoa2D
             @param     outputs The output array.
          */
         
-        //! Get the yaw value (rotation on the z-axis).
-        /** The yaw is equivalent to a rotation on the z-axis (also named rotation).
+        //! Get the azimuth angle
+        /** The method returns the last angle of encoding between 0 and 2π.
 		 
-		 @return     value The yaw value between 0 and 2π.
+            @return     The azimuth.
          */
         inline double getAzimuth() const {return m_azimuth;};
         

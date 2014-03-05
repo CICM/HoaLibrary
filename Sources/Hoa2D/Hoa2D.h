@@ -17,6 +17,7 @@
 #include "Projector.h"
 #include "Vector.h"
 #include "Scope.h"
+#include "Meter.h"
 
 #endif
 
