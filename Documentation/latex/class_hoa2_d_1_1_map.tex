@@ -96,7 +96,7 @@ The map destructor.
 
 The map destructor free the memory and deallocate the member classes. 
 
-Definition at line 92 of file Map.\-cpp.
+Definition at line 111 of file Map.\-cpp.
 
 
 
@@ -114,12 +114,17 @@ This method retrieve the azimuth of a source.
 
 Retrieve the azimuth of a source.
 
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the source. \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The azimuth of the source if the source exists, otherwise the function generates an error. 
 \end{DoxyReturn}
 
 
-Definition at line 89 of file Map.\-h.
+Definition at line 92 of file Map.\-h.
 
 \hypertarget{class_hoa2_d_1_1_map_ad93830d230d88312f07ccb73964ce7db}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Mute@{get\-Mute}}
 \index{get\-Mute@{get\-Mute}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
@@ -148,7 +153,7 @@ The mute state of the source if the source exists, otherwise the function genera
 \end{DoxySeeAlso}
 
 
-Definition at line 116 of file Map.\-h.
+Definition at line 120 of file Map.\-h.
 
 \hypertarget{class_hoa2_d_1_1_map_aef1bab3391d2292182a9b8205200e9af}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Number\-Of\-Sources@{get\-Number\-Of\-Sources}}
 \index{get\-Number\-Of\-Sources@{get\-Number\-Of\-Sources}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
@@ -168,7 +173,7 @@ The number of sources.
 \end{DoxyReturn}
 
 
-Definition at line 54 of file Map.\-h.
+Definition at line 55 of file Map.\-h.
 
 \hypertarget{class_hoa2_d_1_1_map_aa9587dc91fd2ebcd083136188d0d8b39}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Radius@{get\-Radius}}
 \index{get\-Radius@{get\-Radius}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
@@ -183,12 +188,17 @@ This method retrieve the radius of a source.
 
 Retrieve the radius of a source.
 
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the source. \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The radius of the source if the source exists, otherwise the function generates an error. 
 \end{DoxyReturn}
 
 
-Definition at line 100 of file Map.\-h.
+Definition at line 104 of file Map.\-h.
 
 \hypertarget{class_hoa2_d_1_1_map_a933daf1cc1c8ad4df486d436f6d91450}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!process@{process}}
 \index{process@{process}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
@@ -215,7 +225,7 @@ This method performs the encoding with distance compensation with single precisi
 \end{DoxyParams}
 
 
-Definition at line 56 of file Map.\-cpp.
+Definition at line 65 of file Map.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_map_aa71ff518d419b54b409043ded7b8abd4}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!process@{process}}
 \index{process@{process}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
@@ -240,7 +250,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 74 of file Map.\-cpp.
+Definition at line 88 of file Map.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_map_a0b98a9ad8d1fda90fe5559fd7736050b}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!set\-Azimuth@{set\-Azimuth}}
 \index{set\-Azimuth@{set\-Azimuth}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
@@ -258,6 +268,8 @@ The angle of azimuth in radian and you should prefer to use it between 0 and 2 P
 
 
 \begin{DoxyParams}{Parameters}
+{\em index} & The index of the source. \\
+\hline
 {\em azimuth} & The azimuth. \\
 \hline
 \end{DoxyParams}

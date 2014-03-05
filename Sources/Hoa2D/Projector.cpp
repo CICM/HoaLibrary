@@ -28,14 +28,14 @@ namespace Hoa2D
         }
     }
 
-    void Projector::process(const float* input, float* output)
+    void Projector::process(const float* inputs, float* outputs)
 	{
-		cblas_sgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1.f, m_projector_matrix_float, m_number_of_harmonics, input, 1, 0.f, output, 1);
+		cblas_sgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1.f, m_projector_matrix_float, m_number_of_harmonics, inputs, 1, 0.f, outputs, 1);
 	}
 	
-	void Projector::process(const double* input, double* output)
+	void Projector::process(const double* inputs, double* outputs)
 	{
-		cblas_dgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1.f, m_projector_matrix, m_number_of_harmonics, input, 1, 0.f, output, 1);
+		cblas_dgemv(CblasRowMajor, CblasNoTrans, m_number_of_channels, m_number_of_harmonics, 1.f, m_projector_matrix, m_number_of_harmonics, inputs, 1, 0.f, outputs, 1);
 	}
 	
 	Projector::~Projector()

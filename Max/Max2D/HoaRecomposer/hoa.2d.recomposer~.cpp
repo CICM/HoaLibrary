@@ -20,7 +20,7 @@ typedef struct _hoa_recomposer
 void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv);
 void hoa_recomposer_free(t_hoa_recomposer *x);
 void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s);
-void goa_recomposer_float(t_hoa_recomposer *x, double d);
+void hoa_recomposer_float(t_hoa_recomposer *x, double d);
 void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 
@@ -48,7 +48,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_recomposer_assist,   "assist",           A_CANT, 0);
     class_addmethod(c, (method)hoa_recomposer_angle,    "angles",           A_GIMME,0);
     class_addmethod(c, (method)hoa_recomposer_wide,     "directivities",    A_GIMME,0);
-    class_addmethod(c, (method)goa_recomposer_float,    "float",            A_FLOAT,0);
+    class_addmethod(c, (method)hoa_recomposer_float,    "float",            A_FLOAT,0);
     
     CLASS_ATTR_SYM              (c,"mode", 0, t_hoa_recomposer, f_mode);
 	CLASS_ATTR_LABEL			(c,"mode", 0, "Mode");
@@ -112,9 +112,42 @@ t_hoa_err hoa_getinfos(t_hoa_recomposer* x, t_hoa_boxinfos* boxinfos)
 	return HOA_ERR_NONE;
 }
 
+void hoa_recomposer_float(t_hoa_recomposer *x, double d)
+{
+    if(x->f_mode == gensym("fisheye"))
+    {
+        
+    }
+}
+
+void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
+{
+    if(x->f_mode == gensym("free"))
+    {
+        
+    }
+}
+
+void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
+{
+    if(x->f_mode == gensym("free"))
+    {
+        
+    }
+}
+
 void hoa_recomposer_dsp64(t_hoa_recomposer *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    object_method(dsp64, gensym("dsp_add64"), x, hoa_recomposer_perform64, 0, NULL);
+    if(x->f_mode == gensym("fisheye"))
+    {
+        
+    }
+    else if(x->f_mode == gensym("fisheye"))
+    {
+        
+    }
+    else
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_recomposer_perform64, 0, NULL);
 }
 
 void hoa_recomposer_perform64(t_hoa_recomposer *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -148,5 +181,15 @@ void hoa_recomposer_free(t_hoa_recomposer *x)
 	delete x->f_recomposer;
     delete [] x->f_ins;
 	delete [] x->f_outs;
+}
+
+t_max_err mode_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
+{
+    return 0;
+}
+
+t_max_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
+{
+    return 0;
 }
 

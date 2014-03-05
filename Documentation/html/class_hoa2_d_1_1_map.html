@@ -232,7 +232,7 @@ Public Member Functions</h2></td></tr>
 <p>The map destructor. </p>
 <p>The map destructor free the memory and deallocate the member classes. </p>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_map_8cpp_source.html#l00092">92</a> of file <a class="el" href="_hoa2_d_2_map_8cpp_source.html">Map.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_map_8cpp_source.html#l00111">111</a> of file <a class="el" href="_hoa2_d_2_map_8cpp_source.html">Map.cpp</a>.</p>
 
 </div>
 </div>
@@ -261,9 +261,15 @@ Public Member Functions</h2></td></tr>
 
 <p>This method retrieve the azimuth of a source. </p>
 <p>Retrieve the azimuth of a source.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the source. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>The azimuth of the source if the source exists, otherwise the function generates an error. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00089">89</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00092">92</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +316,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The mute state of the source if the source exists, otherwise the function generates an error. </dd></dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa2_d_1_1_map.html#ae1ff77cc8681ee9870dc2d27ebaaaecd" title="This method mute or unmute a source. ">setMute()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00116">116</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00120">120</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
 
 </div>
 </div>
@@ -339,7 +345,7 @@ Public Member Functions</h2></td></tr>
 <p>Retrieve the number of sources.</p>
 <dl class="section return"><dt>Returns</dt><dd>The number of sources. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00054">54</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00055">55</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
 
 </div>
 </div>
@@ -367,9 +373,15 @@ Public Member Functions</h2></td></tr>
 
 <p>This method retrieve the radius of a source. </p>
 <p>Retrieve the radius of a source.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the source. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>The radius of the source if the source exists, otherwise the function generates an error. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00100">100</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_map_8h_source.html#l00104">104</a> of file <a class="el" href="_hoa2_d_2_map_8h_source.html">Map.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +419,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_map_8cpp_source.html#l00056">56</a> of file <a class="el" href="_hoa2_d_2_map_8cpp_source.html">Map.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_map_8cpp_source.html#l00065">65</a> of file <a class="el" href="_hoa2_d_2_map_8cpp_source.html">Map.cpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +457,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_map_8cpp_source.html#l00074">74</a> of file <a class="el" href="_hoa2_d_2_map_8cpp_source.html">Map.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_map_8cpp_source.html#l00088">88</a> of file <a class="el" href="_hoa2_d_2_map_8cpp_source.html">Map.cpp</a>.</p>
 
 </div>
 </div>
@@ -477,6 +489,7 @@ Public Member Functions</h2></td></tr>
 <p>The angle of azimuth in radian and you should prefer to use it between 0 and 2 Pi to avoid recursive wrapping of the value. The direction of rotation is counterclockwise. The 0 radian is Pi/2 phase shifted relative to a mathematical representation of a circle, then the 0 radian is at the "front" of the soundfield. The index must be between 0 and the number of sources - 1.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the source. </td></tr>
     <tr><td class="paramname">azimuth</td><td>The azimuth. </td></tr>
   </table>
   </dd>
@@ -571,7 +584,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 5 2014 11:37:14 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 5 2014 12:43:44 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
