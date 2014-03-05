@@ -130,6 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3bf01c6ecd90108c66c19ce7e5bde97d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d">setElevation</a> (const double elevation)</td></tr>
 <tr class="memdesc:a3bf01c6ecd90108c66c19ce7e5bde97d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method set the angle of elevation.  <a href="#a3bf01c6ecd90108c66c19ce7e5bde97d">More...</a><br/></td></tr>
 <tr class="separator:a3bf01c6ecd90108c66c19ce7e5bde97d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9887680a1cd725b96db8d83297922ae2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_encoder.html#a9887680a1cd725b96db8d83297922ae2">getNormalization</a> (const unsigned int index) const </td></tr>
+<tr class="separator:a9887680a1cd725b96db8d83297922ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedcd6cc5a50c85f373c61137e452a9b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_encoder.html#aedcd6cc5a50c85f373c61137e452a9b4">process</a> (const float input, float *outputs)</td></tr>
 <tr class="memdesc:aedcd6cc5a50c85f373c61137e452a9b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method performs the encoding with single precision.  <a href="#aedcd6cc5a50c85f373c61137e452a9b4">More...</a><br/></td></tr>
 <tr class="separator:aedcd6cc5a50c85f373c61137e452a9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,11 +211,44 @@ Public Member Functions</h2></td></tr>
 <p>The encoder destructor. </p>
 <p>The encoder destructor free the memory. </p>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00104">104</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00116">116</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9887680a1cd725b96db8d83297922ae2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Hoa3D::Encoder::getNormalization </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Retreive the normalization of an harmonics</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the harmonics. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8h_source.html#l00063">63</a> of file <a class="el" href="_hoa3_d_2_encoder_8h_source.html">Encoder.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aedcd6cc5a50c85f373c61137e452a9b4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +283,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00058">58</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00070">70</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +321,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00080">80</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00092">92</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -314,7 +349,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d" title="This method set the angle of elevation. ">setElevation()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00048">48</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00060">60</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +377,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See Also</dt><dd><a class="el" href="class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d" title="This method set the angle of elevation. ">setElevation()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00053">53</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html#l00065">65</a> of file <a class="el" href="_hoa3_d_2_encoder_8cpp_source.html">Encoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -353,7 +388,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 23 2014 12:08:48 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 5 2014 11:37:15 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

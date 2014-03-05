@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Copyright (c) 2012-2014 Eliott Paris &amp; Pierre Guillot, CICM, Universite Paris 8.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco &amp; Pierre Guillot, CICM, Universite Paris 8.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// For information on usage and redistribution, and for a DISCLAIMER OF ALL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// WARRANTIES, see the file, &quot;LICENSE.txt,&quot; in this distribution.</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">*/</span></div>
@@ -107,69 +107,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#a2aa145bb455c0538ce2ca2bd058d8800">   11</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_rotate.html#a2aa145bb455c0538ce2ca2bd058d8800">Rotate::Rotate</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order) : <a class="code" href="class_hoa2_d_1_1_ambisonic.html">Ambisonic</a>(order)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        m_number_of_inputs      = m_number_of_harmonics + 1;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">setYaw</a>(0.);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    }</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">   17</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">Rotate::setYaw</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> value)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        m_yaw = Tools::radian_wrap(value);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_cosx    = cos(m_yaw);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        m_sinx    = sin(m_yaw);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">   24</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">Rotate::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs, <span class="keywordtype">float</span>* outputs)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">float</span> cos_x = m_cosx;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">float</span> sin_x = m_sinx;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">float</span> tcos_x = cos_x;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">float</span> sig;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        outputs[0] = inputs[0];</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 2; i &lt; m_number_of_harmonics; i += 2)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            sig = inputs[i-1];</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            outputs[i-1] = sin_x * inputs[i] + cos_x * sig;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            outputs[i] = cos_x * inputs[i] - sin_x * sig;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            tcos_x = cos_x;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#a8d5ecedca52ad2216efe218b5dcbf834">   42</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">Rotate::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs, <span class="keywordtype">double</span>* outputs)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">double</span> cos_x = m_cosx;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">double</span> sin_x = m_sinx;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">double</span> tcos_x = cos_x;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">double</span> sig;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        outputs[0] = inputs[0];</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 2; i &lt; m_number_of_harmonics; i += 2)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            sig = inputs[i-1];</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            outputs[i-1] = sin_x * inputs[i] + cos_x * sig;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            outputs[i] = cos_x * inputs[i] - sin_x * sig;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            tcos_x = cos_x;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2">   60</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2">Rotate::~Rotate</a>()</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        ;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">setYaw</a>(0.);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">Rotate::setYaw</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> value)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        m_yaw = <a class="code" href="namespace_hoa2_d.html#ae6e7b10b18969cb19586af7e6e63736c">wrap_twopi</a>(value);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        m_cosx    = cos(m_yaw);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_sinx    = sin(m_yaw);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">   23</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">Rotate::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs, <span class="keywordtype">float</span>* outputs)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">float</span> cos_x = m_cosx;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">float</span> sin_x = m_sinx;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">float</span> tcos_x = cos_x;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">float</span> sig;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        outputs[0] = inputs[0];</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 2; i &lt; m_number_of_harmonics; i += 2)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            sig = inputs[i-1];</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            outputs[i-1] = sin_x * inputs[i] + cos_x * sig;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            outputs[i] = cos_x * inputs[i] - sin_x * sig;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            tcos_x = cos_x;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#a8d5ecedca52ad2216efe218b5dcbf834">   41</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">Rotate::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs, <span class="keywordtype">double</span>* outputs)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">double</span> cos_x = m_cosx;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">double</span> sin_x = m_sinx;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">double</span> tcos_x = cos_x;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">double</span> sig;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        outputs[0] = inputs[0];</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 2; i &lt; m_number_of_harmonics; i += 2)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            sig = inputs[i-1];</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            outputs[i-1] = sin_x * inputs[i] + cos_x * sig;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            outputs[i] = cos_x * inputs[i] - sin_x * sig;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            tcos_x = cos_x;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2">   59</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2">Rotate::~Rotate</a>()</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        ;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00022">Ambisonic.h:22</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_rotate_html_a2aa145bb455c0538ce2ca2bd058d8800"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a2aa145bb455c0538ce2ca2bd058d8800">Hoa2D::Rotate::Rotate</a></div><div class="ttdeci">Rotate(unsigned int order)</div><div class="ttdoc">The Rotate constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00011">Rotate.cpp:11</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_rotate_html_abc51eceaf32e9844d829a816094f6ac5"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">Hoa2D::Rotate::setYaw</a></div><div class="ttdeci">void setYaw(const double value)</div><div class="ttdoc">This method sets the yaw value (rotation on the z-axis). </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00017">Rotate.cpp:17</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_rotate_html_a7e70e8d9099c1b8a2a42313e464130b2"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2">Hoa2D::Rotate::~Rotate</a></div><div class="ttdeci">~Rotate()</div><div class="ttdoc">The Rotate destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00060">Rotate.cpp:60</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_rotate_html_a88bfa68435d940b0c4c1ae0c97baeffd"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">Hoa2D::Rotate::process</a></div><div class="ttdeci">void process(const float *inputs, float *outputs)</div><div class="ttdoc">This method performs the rotation with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00024">Rotate.cpp:24</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_rotate_html_a2aa145bb455c0538ce2ca2bd058d8800"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a2aa145bb455c0538ce2ca2bd058d8800">Hoa2D::Rotate::Rotate</a></div><div class="ttdeci">Rotate(unsigned int order)</div><div class="ttdoc">The rotate constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00011">Rotate.cpp:11</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_rotate_html_abc51eceaf32e9844d829a816094f6ac5"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">Hoa2D::Rotate::setYaw</a></div><div class="ttdeci">void setYaw(const double value)</div><div class="ttdoc">This method sets the angle of the rotation around the z axis, the yaw value,. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00016">Rotate.cpp:16</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_rotate_html_a7e70e8d9099c1b8a2a42313e464130b2"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2">Hoa2D::Rotate::~Rotate</a></div><div class="ttdeci">~Rotate()</div><div class="ttdoc">The Rotate destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00059">Rotate.cpp:59</a></div></div>
+<div class="ttc" id="namespace_hoa2_d_html_ae6e7b10b18969cb19586af7e6e63736c"><div class="ttname"><a href="namespace_hoa2_d.html#ae6e7b10b18969cb19586af7e6e63736c">Hoa2D::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_tools_8h_source.html#l00258">Tools.h:258</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_rotate_html_a88bfa68435d940b0c4c1ae0c97baeffd"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">Hoa2D::Rotate::process</a></div><div class="ttdeci">void process(const float *inputs, float *outputs)</div><div class="ttdoc">This method performs the rotation with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00023">Rotate.cpp:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 23 2014 12:08:48 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 5 2014 11:37:13 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

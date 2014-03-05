@@ -13,7 +13,7 @@ The ambisonic class.
 Inheritance diagram for Hoa2\-D\-:\-:Ambisonic\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{class_hoa2_d_1_1_ambisonic}
+\includegraphics[height=9.000000cm]{class_hoa2_d_1_1_ambisonic}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -23,16 +23,16 @@ Inheritance diagram for Hoa2\-D\-:\-:Ambisonic\-:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em The ambisonic constructor. \end{DoxyCompactList}\item 
 \hyperlink{class_hoa2_d_1_1_ambisonic_a082fc2e3f9910703ddb49b9a478329bf}{$\sim$\-Ambisonic} ()
 \item 
-long \hyperlink{class_hoa2_d_1_1_ambisonic_a677405a1c3aa359753bd675d4614e7da}{get\-Order} ()
+unsigned int \hyperlink{class_hoa2_d_1_1_ambisonic_a00797f96b864e2913567e08239ed9593}{get\-Order} () const 
 \item 
-long \hyperlink{class_hoa2_d_1_1_ambisonic_aa9d613f38e6876326201995a5a415410}{get\-Number\-Of\-Harmonics} ()
+unsigned int \hyperlink{class_hoa2_d_1_1_ambisonic_ae7cee18218c9bf00091d83e661d487ee}{get\-Number\-Of\-Harmonics} () const 
 \item 
-long \hyperlink{class_hoa2_d_1_1_ambisonic_a3acaabfd013671c94e057e23eea1d068}{get\-Harmonic\-Argument} (unsigned int index)
+long \hyperlink{class_hoa2_d_1_1_ambisonic_a68c389087fb999101a499f6849b635f9}{get\-Harmonic\-Argument} (unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em Retrieve the argument of an harmonic. \end{DoxyCompactList}\item 
-long \hyperlink{class_hoa2_d_1_1_ambisonic_a06ecceb7aef44cd7008fd8beaf8cf33e}{get\-Harmonic\-Band} (unsigned int index)
+long \hyperlink{class_hoa2_d_1_1_ambisonic_a9485abf2b4f1b1aec8d0da9b12cf42ed}{get\-Harmonic\-Band} (unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em Retrieve the band of an harmonic. \end{DoxyCompactList}\item 
-std\-::string \hyperlink{class_hoa2_d_1_1_ambisonic_a1b4578538f4fd0d311102b2f3ec4dac6}{get\-Harmonics\-Name} (unsigned int index)
-\begin{DoxyCompactList}\small\item\em Retrieve a good name for an harmonic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\-::string \hyperlink{class_hoa2_d_1_1_ambisonic_a6b6f6ff74792f00bf5095dc9cfec28a4}{get\-Harmonics\-Name} (unsigned int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve a name for an harmonic. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -74,18 +74,18 @@ Definition at line 11 of file Ambisonic.\-cpp.
 )}}\label{class_hoa2_d_1_1_ambisonic_a082fc2e3f9910703ddb49b9a478329bf}
 The ambisonic destructor. 
 
-Definition at line 66 of file Ambisonic.\-cpp.
+Definition at line 25 of file Ambisonic.\-cpp.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_hoa2_d_1_1_ambisonic_a3acaabfd013671c94e057e23eea1d068}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonic\-Argument@{get\-Harmonic\-Argument}}
+\hypertarget{class_hoa2_d_1_1_ambisonic_a68c389087fb999101a499f6849b635f9}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonic\-Argument@{get\-Harmonic\-Argument}}
 \index{get\-Harmonic\-Argument@{get\-Harmonic\-Argument}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
-\subsubsection[{get\-Harmonic\-Argument}]{\setlength{\rightskip}{0pt plus 5cm}long Ambisonic\-::get\-Harmonic\-Argument (
+\subsubsection[{get\-Harmonic\-Argument}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Ambisonic\-::get\-Harmonic\-Argument (
 \begin{DoxyParamCaption}
 \item[{unsigned int}]{index}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_ambisonic_a3acaabfd013671c94e057e23eea1d068}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_ambisonic_a68c389087fb999101a499f6849b635f9}
 
 
 Retrieve the argument of an harmonic. 
@@ -94,26 +94,28 @@ The argument of an harmonic is in the range -\/order to order. The harmonics are
 
 
 \begin{DoxyParams}{Parameters}
-{\em index} & The global index of an harmonic. \\
+{\em index} & The index of an harmonic. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The method returns the argument of an harmonic or 0 if the harmonic does not exist. 
+The method returns the argument of the harmonic if the harmonic exists, otherwise the function generates an error. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_ambisonic_a06ecceb7aef44cd7008fd8beaf8cf33e}{get\-Harmonic\-Band()} 
+\hyperlink{class_hoa2_d_1_1_ambisonic_a9485abf2b4f1b1aec8d0da9b12cf42ed}{get\-Harmonic\-Band()} 
+
+\hyperlink{class_hoa2_d_1_1_ambisonic_a6b6f6ff74792f00bf5095dc9cfec28a4}{get\-Harmonics\-Name()} 
 \end{DoxySeeAlso}
 
 
-Definition at line 48 of file Ambisonic.\-cpp.
+Definition at line 62 of file Ambisonic.\-h.
 
-\hypertarget{class_hoa2_d_1_1_ambisonic_a06ecceb7aef44cd7008fd8beaf8cf33e}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonic\-Band@{get\-Harmonic\-Band}}
+\hypertarget{class_hoa2_d_1_1_ambisonic_a9485abf2b4f1b1aec8d0da9b12cf42ed}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonic\-Band@{get\-Harmonic\-Band}}
 \index{get\-Harmonic\-Band@{get\-Harmonic\-Band}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
-\subsubsection[{get\-Harmonic\-Band}]{\setlength{\rightskip}{0pt plus 5cm}long Ambisonic\-::get\-Harmonic\-Band (
+\subsubsection[{get\-Harmonic\-Band}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Ambisonic\-::get\-Harmonic\-Band (
 \begin{DoxyParamCaption}
 \item[{unsigned int}]{index}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_ambisonic_a06ecceb7aef44cd7008fd8beaf8cf33e}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_ambisonic_a9485abf2b4f1b1aec8d0da9b12cf42ed}
 
 
 Retrieve the band of an harmonic. 
@@ -122,62 +124,72 @@ The bands of the harmonics are in the range 0 to the decomposition order. Each b
 
 
 \begin{DoxyParams}{Parameters}
-{\em index} & The global index of an harmonic. \\
+{\em index} & The index of an harmonic. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The method returns the band of an harmonic or 0 if the harmonic does not exist. 
+The method returns the band of the harmonic if the harmonic exists, otherwise the function generates an error. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_ambisonic_a3acaabfd013671c94e057e23eea1d068}{get\-Harmonic\-Argument()} 
+\hyperlink{class_hoa2_d_1_1_ambisonic_a68c389087fb999101a499f6849b635f9}{get\-Harmonic\-Argument()} 
+
+\hyperlink{class_hoa2_d_1_1_ambisonic_a6b6f6ff74792f00bf5095dc9cfec28a4}{get\-Harmonics\-Name()} 
 \end{DoxySeeAlso}
 
 
-Definition at line 54 of file Ambisonic.\-cpp.
+Definition at line 76 of file Ambisonic.\-h.
 
-\hypertarget{class_hoa2_d_1_1_ambisonic_a1b4578538f4fd0d311102b2f3ec4dac6}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonics\-Name@{get\-Harmonics\-Name}}
+\hypertarget{class_hoa2_d_1_1_ambisonic_a6b6f6ff74792f00bf5095dc9cfec28a4}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Harmonics\-Name@{get\-Harmonics\-Name}}
 \index{get\-Harmonics\-Name@{get\-Harmonics\-Name}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
-\subsubsection[{get\-Harmonics\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Ambisonic\-::get\-Harmonics\-Name (
+\subsubsection[{get\-Harmonics\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Hoa2\-D\-::\-Ambisonic\-::get\-Harmonics\-Name (
 \begin{DoxyParamCaption}
 \item[{unsigned int}]{index}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_ambisonic_a1b4578538f4fd0d311102b2f3ec4dac6}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_ambisonic_a6b6f6ff74792f00bf5095dc9cfec28a4}
 
 
-Retrieve a good name for an harmonic. 
+Retrieve a name for an harmonic. 
 
-Retrieve a good name for an harmonic.
+Retrieve a name for an harmonic in a std\-::string format that will be \char`\"{}harmonic argument\char`\"{}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em index} & The global index of an harmonic. \\
+{\em index} & The index of an harmonic. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The method returns a name for the harmonic that contains its argument if the harmonic exists, otherwise the function generates an error.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_ambisonic_a9485abf2b4f1b1aec8d0da9b12cf42ed}{get\-Harmonic\-Band()} 
+
+\hyperlink{class_hoa2_d_1_1_ambisonic_a68c389087fb999101a499f6849b635f9}{get\-Harmonic\-Argument()} 
+\end{DoxySeeAlso}
 
 
-Definition at line 60 of file Ambisonic.\-cpp.
+Definition at line 91 of file Ambisonic.\-h.
 
-\hypertarget{class_hoa2_d_1_1_ambisonic_aa9d613f38e6876326201995a5a415410}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Number\-Of\-Harmonics@{get\-Number\-Of\-Harmonics}}
+\hypertarget{class_hoa2_d_1_1_ambisonic_ae7cee18218c9bf00091d83e661d487ee}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Number\-Of\-Harmonics@{get\-Number\-Of\-Harmonics}}
 \index{get\-Number\-Of\-Harmonics@{get\-Number\-Of\-Harmonics}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
-\subsubsection[{get\-Number\-Of\-Harmonics}]{\setlength{\rightskip}{0pt plus 5cm}long Ambisonic\-::get\-Number\-Of\-Harmonics (
+\subsubsection[{get\-Number\-Of\-Harmonics}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa2\-D\-::\-Ambisonic\-::get\-Number\-Of\-Harmonics (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_ambisonic_aa9d613f38e6876326201995a5a415410}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_ambisonic_ae7cee18218c9bf00091d83e661d487ee}
 Retrieve the number of harmonics. 
 
-Definition at line 33 of file Ambisonic.\-cpp.
+Definition at line 49 of file Ambisonic.\-h.
 
-\hypertarget{class_hoa2_d_1_1_ambisonic_a677405a1c3aa359753bd675d4614e7da}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Order@{get\-Order}}
+\hypertarget{class_hoa2_d_1_1_ambisonic_a00797f96b864e2913567e08239ed9593}{\index{Hoa2\-D\-::\-Ambisonic@{Hoa2\-D\-::\-Ambisonic}!get\-Order@{get\-Order}}
 \index{get\-Order@{get\-Order}!Hoa2D::Ambisonic@{Hoa2\-D\-::\-Ambisonic}}
-\subsubsection[{get\-Order}]{\setlength{\rightskip}{0pt plus 5cm}long Ambisonic\-::get\-Order (
+\subsubsection[{get\-Order}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa2\-D\-::\-Ambisonic\-::get\-Order (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_ambisonic_a677405a1c3aa359753bd675d4614e7da}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_ambisonic_a00797f96b864e2913567e08239ed9593}
 Retrieve the decomposition order. 
 
-Definition at line 28 of file Ambisonic.\-cpp.
+Definition at line 42 of file Ambisonic.\-h.
 
 
 

@@ -78,7 +78,7 @@ The encoder destructor.
 
 The encoder destructor free the memory. 
 
-Definition at line 56 of file Encoder.\-cpp.
+Definition at line 55 of file Encoder.\-cpp.
 
 
 
@@ -100,11 +100,11 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \begin{DoxyParams}{Parameters}
 {\em input} & The input sample. \\
 \hline
-{\em outputs} & The output array.\-Get the yaw value (rotation on the z-\/axis). The yaw is equivalent to a rotation on the z-\/axis (also named rotation).\\
+{\em outputs} & The output array.\-Get the azimuth angle The method returns the last angle of encoding between 0 and 2π.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-value The yaw value between 0 and 2π. 
+The azimuth. 
 \end{DoxyReturn}
 
 
@@ -135,7 +135,7 @@ This method performs the encoding with single precision.
 \end{DoxyParams}
 
 
-Definition at line 24 of file Encoder.\-cpp.
+Definition at line 23 of file Encoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_encoder_a235cc53dbf4fcbe71b3ea72a721eea81}{\index{Hoa2\-D\-::\-Encoder@{Hoa2\-D\-::\-Encoder}!process@{process}}
 \index{process@{process}!Hoa2D::Encoder@{Hoa2\-D\-::\-Encoder}}
@@ -160,7 +160,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 40 of file Encoder.\-cpp.
+Definition at line 39 of file Encoder.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_encoder_acc60cfd737fe1f0866e7d464ef1ec1f8}{\index{Hoa2\-D\-::\-Encoder@{Hoa2\-D\-::\-Encoder}!set\-Azimuth@{set\-Azimuth}}
 \index{set\-Azimuth@{set\-Azimuth}!Hoa2D::Encoder@{Hoa2\-D\-::\-Encoder}}
@@ -182,7 +182,7 @@ The angle of azimuth in radian and you should prefer to use it between 0 and 2 P
 \end{DoxyParams}
 
 
-Definition at line 17 of file Encoder.\-cpp.
+Definition at line 16 of file Encoder.\-cpp.
 
 
 

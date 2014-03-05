@@ -16,15 +16,11 @@ namespace Hoa2D
         m_harmonics_float   = new float[m_number_of_harmonics];
         m_harmonics_double  = new double[m_number_of_harmonics];
         m_gains             = new double[m_number_of_harmonics];
-		m_radius            = new double[numberOfSources];
-		m_azimuth           = new double[numberOfSources];
 		m_muted				= new bool[numberOfSources];
 		
         for(unsigned int i = 0; i < m_number_of_sources; i++)
         {
 			m_muted[i] = false;
-			m_radius[i] = 1.;
-			m_azimuth[i] = 0.;
             m_encoders.push_back(new Encoder(order));
             m_widers.push_back(new Wider(order));
         }
@@ -34,7 +30,6 @@ namespace Hoa2D
     {
         assert(index < m_number_of_sources);
         m_encoders[index]->setAzimuth(azimuth);
-		m_azimuth[index] = azimuth;
     }
 	
     void Map::setRadius(unsigned int index, const double radius)
@@ -50,7 +45,12 @@ namespace Hoa2D
             m_gains[index] = 1.;
             m_widers[index]->setWideningValue(clip_min(radius, 0.));
         }
-		m_radius[index] = radius;
+    }
+    
+    void Map::setMute(unsigned int index, const bool muted)
+    {
+        assert(index < m_number_of_sources);
+        m_muted[index] = muted;
     }
     
     void Map::process(const float* inputs, float* outputs)
@@ -96,6 +96,7 @@ namespace Hoa2D
         delete [] m_harmonics_double;
         delete [] m_harmonics_float;
         delete [] m_gains;
+        delete [] m_muted;
     }
 }
 
