@@ -29,6 +29,12 @@ unsigned int \hyperlink{class_hoa3_d_1_1_scope_abdee40de6953ec537bbc72154ac93e6e
 \begin{DoxyCompactList}\small\item\em Retrieve the number of column. \end{DoxyCompactList}\item 
 double \hyperlink{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}{get\-Value} (unsigned int row\-Index, unsigned int column\-Index) const 
 \begin{DoxyCompactList}\small\item\em Retrieve the value of a point of the spherical harmonics projection. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa3_d_1_1_scope_a2452963dd7f2ee7d61af6186d049db24}{get\-Radius} (unsigned int row\-Index, unsigned int column\-Index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the radius of a point of the spherical harmonics projection. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa3_d_1_1_scope_a9a0c8cf80dc5686b746fc3d5b742de45}{get\-Azimuth} (unsigned int column\-Index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the azimuth of a point of the spherical harmonics projection. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa3_d_1_1_scope_ab878f89077b6d2829bf00436aadd309b}{get\-Elevation} (unsigned int row\-Index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the elevation of a point of the spherical harmonics projection. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa3_d_1_1_scope_a4e9866933d1b863860ffd64b0514a6e6}{process} (const float $\ast$inputs)
 \begin{DoxyCompactList}\small\item\em This method performs the spherical harmonics projection with single precision. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa3_d_1_1_scope_ae9a788e0352011e3ad7ad5f88b5b12ed}{process} (const double $\ast$inputs)
@@ -58,7 +64,9 @@ Definition at line 18 of file Scope.\-h.
 
 The \hyperlink{class_hoa3_d_1_1_scope}{Scope} constructor. 
 
-The \hyperlink{class_hoa3_d_1_1_scope}{Scope} constructor allocates and initialize the member values to computes spherical harmonics projection on a sphere depending on a decomposition order and a sphere discretization. The sphere discretization is done by a set of points defined by rows and columns then the precision will be lower at the elevation center (0 radian) than at the top (1/2 Pi) or the bottom (-\/1/2 Pi) of the sphere. The number of row discretize the elevation then it set how many points are used between the bottom and the top. The number of column discretize the azimuth circle then it set how many points are used to make the turn from the front (O radian). Then the sphere is discretized by number of rows $\ast$ number of columns points. The order must be at least 1. The number of rows and column should be at least 3 (but it's very low).
+\begin{DoxyVerb}The Scope constructor allocates and initialize the member values to computes spherical harmonics projection on a sphere depending on a decomposition order and a sphere discretization. The sphere discretization is done by a set of points defined by rows and columns then the precision will be lower at the elevation center (0 radian) than at the top (1/2 Pi) or the bottom (-1/2 Pi) of the sphere. The number of row discretize the elevation then it set how many points are used between the bottom and the top. The number of column discretize the azimuth circle then it set how many points are used to make the turn from the front (O radian). Then the sphere is discretized by number of rows * number of columns points. The order must be at least 1. The number of rows and column should be at least 3 (but it's very low).
+\end{DoxyVerb}
+
 
 
 \begin{DoxyParams}{Parameters}
@@ -86,11 +94,83 @@ The \hyperlink{class_hoa3_d_1_1_scope}{Scope} destructor.
 
 The \hyperlink{class_hoa3_d_1_1_scope}{Scope} destructor free the memory. 
 
-Definition at line 50 of file Scope.\-cpp.
+Definition at line 54 of file Scope.\-cpp.
 
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_hoa3_d_1_1_scope_a9a0c8cf80dc5686b746fc3d5b742de45}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Azimuth@{get\-Azimuth}}
+\index{get\-Azimuth@{get\-Azimuth}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{get\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Scope\-::get\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{column\-Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_scope_a9a0c8cf80dc5686b746fc3d5b742de45}
+
+
+Retrieve the azimuth of a point of the spherical harmonics projection. 
+
+\begin{DoxyVerb}Retrieve the azimuth of the spherical harmonics projection for a given point defined by a row index and a column index. For the column index, 0 is the front (0 radian) and number of columns / 2 is the rear of the sphere. The maximum column index must be the number of columns - 1.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\-Index} & The row index of the point. \\
+\hline
+{\em column\-Index} & The column index of the point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This method returns the azimuth of a point of the ambisonic sphere. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}{get\-Value} 
+
+\hyperlink{class_hoa3_d_1_1_scope_a2452963dd7f2ee7d61af6186d049db24}{get\-Radius} 
+
+\hyperlink{class_hoa3_d_1_1_scope_ab878f89077b6d2829bf00436aadd309b}{get\-Elevation} 
+\end{DoxySeeAlso}
+
+
+Definition at line 106 of file Scope.\-h.
+
+\hypertarget{class_hoa3_d_1_1_scope_ab878f89077b6d2829bf00436aadd309b}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Elevation@{get\-Elevation}}
+\index{get\-Elevation@{get\-Elevation}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{get\-Elevation}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Scope\-::get\-Elevation (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{row\-Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_scope_ab878f89077b6d2829bf00436aadd309b}
+
+
+Retrieve the elevation of a point of the spherical harmonics projection. 
+
+\begin{DoxyVerb}Retrieve the elevation of the spherical harmonics projection for a given point defined by a row index. For the row index, 0 is the bottom of the sphere, number of rows / 2 is at the center of the elevation and number of rows - 1 is at the top of the sphere. The maximum row index must be the number of row - 1.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\-Index} & The row index of the point. \\
+\hline
+{\em column\-Index} & The column index of the point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This method returns the elevation of a point of the ambisonic sphere. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}{get\-Value} 
+
+\hyperlink{class_hoa3_d_1_1_scope_a2452963dd7f2ee7d61af6186d049db24}{get\-Radius} 
+
+\hyperlink{class_hoa3_d_1_1_scope_a9a0c8cf80dc5686b746fc3d5b742de45}{get\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 122 of file Scope.\-h.
+
 \hypertarget{class_hoa3_d_1_1_scope_abdee40de6953ec537bbc72154ac93e6e}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Number\-Of\-Columns@{get\-Number\-Of\-Columns}}
 \index{get\-Number\-Of\-Columns@{get\-Number\-Of\-Columns}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
 \subsubsection[{get\-Number\-Of\-Columns}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Hoa3\-D\-::\-Scope\-::get\-Number\-Of\-Columns (
@@ -102,7 +182,9 @@ Definition at line 50 of file Scope.\-cpp.
 
 Retrieve the number of column. 
 
-Retrieve the number of column used to discretize the ambisonic sphere.
+\begin{DoxyVerb}Retrieve the number of column used to discretize the ambisonic sphere.
+\end{DoxyVerb}
+
 
 \begin{DoxyReturn}{Returns}
 This method returns the number of column used to discretize the sphere. 
@@ -122,7 +204,9 @@ Definition at line 57 of file Scope.\-h.
 
 Retrieve the number of rows. 
 
-Retrieve the number of rows used to discretize the ambisonic sphere.
+\begin{DoxyVerb}Retrieve the number of rows used to discretize the ambisonic sphere.
+\end{DoxyVerb}
+
 
 \begin{DoxyReturn}{Returns}
 This method returns the number of rows used to discretize the sphere. 
@@ -130,6 +214,43 @@ This method returns the number of rows used to discretize the sphere.
 
 
 Definition at line 47 of file Scope.\-h.
+
+\hypertarget{class_hoa3_d_1_1_scope_a2452963dd7f2ee7d61af6186d049db24}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Radius@{get\-Radius}}
+\index{get\-Radius@{get\-Radius}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
+\subsubsection[{get\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Scope\-::get\-Radius (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{row\-Index, }
+\item[{unsigned int}]{column\-Index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_scope_a2452963dd7f2ee7d61af6186d049db24}
+
+
+Retrieve the radius of a point of the spherical harmonics projection. 
+
+\begin{DoxyVerb}Retrieve the radius of the spherical harmonics projection for a given point defined by a row index and a column index. This the absolute of the result of the projection. For the row index, 0 is the bottom of the sphere, number of rows / 2 is at the center of the elevation and number of rows - 1 is at the top of the sphere. For the column index, 0 is the front (0 radian) and number of columns / 2 is the rear of the sphere. The maximum row index must be the number of row - 1 and the maximum column index must be the number of columns - 1.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\-Index} & The row index of the point. \\
+\hline
+{\em column\-Index} & The column index of the point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+This method returns the radius of a point of the ambisonic sphere. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa3_d_1_1_scope_a9a0c8cf80dc5686b746fc3d5b742de45}{get\-Azimuth} 
+
+\hyperlink{class_hoa3_d_1_1_scope_ab878f89077b6d2829bf00436aadd309b}{get\-Elevation} 
+
+\hyperlink{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}{get\-Value} 
+\end{DoxySeeAlso}
+
+
+Definition at line 89 of file Scope.\-h.
 
 \hypertarget{class_hoa3_d_1_1_scope_a5dd62de174f903097d992da4f108037e}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!get\-Value@{get\-Value}}
 \index{get\-Value@{get\-Value}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
@@ -143,7 +264,9 @@ Definition at line 47 of file Scope.\-h.
 
 Retrieve the value of a point of the spherical harmonics projection. 
 
-Retrieve the result value of the spherical harmonics projection for a given point defined by a row index and a column index. For the row index, 0 is the bottom of the sphere, number of rows / 2 is at the center of the elevation and number of rows -\/ 1 is at the top of the sphere. For the column index, 0 is the front (0 radian) and number of columns / 2 is the rear of the sphere. The maximum row index must be the number of row -\/ 1 and the maximum column index must be the number of columns -\/ 1.
+\begin{DoxyVerb}Retrieve the result value of the spherical harmonics projection for a given point defined by a row index and a column index. The absolute of the value can be used as the radius of the point for a 3 dimentionnal representation. For the row index, 0 is the bottom of the sphere, number of rows / 2 is at the center of the elevation and number of rows - 1 is at the top of the sphere. For the column index, 0 is the front (0 radian) and number of columns / 2 is the rear of the sphere. The maximum row index must be the number of row - 1 and the maximum column index must be the number of columns - 1.
+\end{DoxyVerb}
+
 
 
 \begin{DoxyParams}{Parameters}
@@ -155,9 +278,16 @@ Retrieve the result value of the spherical harmonics projection for a given poin
 \begin{DoxyReturn}{Returns}
 This method returns the value of a point of the ambisonic sphere. 
 \end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+getradius 
+
+\hyperlink{class_hoa3_d_1_1_scope_a9a0c8cf80dc5686b746fc3d5b742de45}{get\-Azimuth} 
+
+\hyperlink{class_hoa3_d_1_1_scope_ab878f89077b6d2829bf00436aadd309b}{get\-Elevation} 
+\end{DoxySeeAlso}
 
 
-Definition at line 69 of file Scope.\-h.
+Definition at line 72 of file Scope.\-h.
 
 \hypertarget{class_hoa3_d_1_1_scope_a4e9866933d1b863860ffd64b0514a6e6}{\index{Hoa3\-D\-::\-Scope@{Hoa3\-D\-::\-Scope}!process@{process}}
 \index{process@{process}!Hoa3D::Scope@{Hoa3\-D\-::\-Scope}}
@@ -170,7 +300,9 @@ Definition at line 69 of file Scope.\-h.
 
 This method performs the spherical harmonics projection with single precision. 
 
-You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+\begin{DoxyVerb}You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+\end{DoxyVerb}
+
 
 
 \begin{DoxyParams}{Parameters}
@@ -192,7 +324,9 @@ Definition at line 28 of file Scope.\-cpp.
 
 This method performs the spherical harmonics projection with double precision. 
 
-You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+\begin{DoxyVerb}You should use this method to compute the projection of the spherical harmonics over an ambisonics sphere. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics.
+\end{DoxyVerb}
+
 
 
 \begin{DoxyParams}{Parameters}
@@ -201,7 +335,7 @@ You should use this method to compute the projection of the spherical harmonics 
 \end{DoxyParams}
 
 
-Definition at line 41 of file Scope.\-cpp.
+Definition at line 43 of file Scope.\-cpp.
 
 
 

@@ -27,6 +27,8 @@ void \hyperlink{class_hoa3_d_1_1_encoder_a7dbf4d5791003ed486fc0b5462409e0a}{set\
 \begin{DoxyCompactList}\small\item\em This method set the angle of azimuth. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{set\-Elevation} (const double elevation)
 \begin{DoxyCompactList}\small\item\em This method set the angle of elevation. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa3_d_1_1_encoder_a9887680a1cd725b96db8d83297922ae2}{get\-Normalization} (const unsigned int index) const 
+\item 
 void \hyperlink{class_hoa3_d_1_1_encoder_aedcd6cc5a50c85f373c61137e452a9b4}{process} (const float input, float $\ast$outputs)
 \begin{DoxyCompactList}\small\item\em This method performs the encoding with single precision. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa3_d_1_1_encoder_a6a8a7c7219424dd74bb5180a5b2c25e3}{process} (const double input, double $\ast$outputs)
@@ -83,11 +85,29 @@ The encoder destructor.
 
 The encoder destructor free the memory. 
 
-Definition at line 104 of file Encoder.\-cpp.
+Definition at line 116 of file Encoder.\-cpp.
 
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_hoa3_d_1_1_encoder_a9887680a1cd725b96db8d83297922ae2}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!get\-Normalization@{get\-Normalization}}
+\index{get\-Normalization@{get\-Normalization}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
+\subsubsection[{get\-Normalization}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa3\-D\-::\-Encoder\-::get\-Normalization (
+\begin{DoxyParamCaption}
+\item[{const unsigned int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa3_d_1_1_encoder_a9887680a1cd725b96db8d83297922ae2}
+Retreive the normalization of an harmonics
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the harmonics. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file Encoder.\-h.
+
 \hypertarget{class_hoa3_d_1_1_encoder_aedcd6cc5a50c85f373c61137e452a9b4}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!process@{process}}
 \index{process@{process}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
 \subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa3\-D\-::\-Encoder\-::process (
@@ -111,7 +131,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 58 of file Encoder.\-cpp.
+Definition at line 70 of file Encoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_encoder_a6a8a7c7219424dd74bb5180a5b2c25e3}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!process@{process}}
 \index{process@{process}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
@@ -136,7 +156,7 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 80 of file Encoder.\-cpp.
+Definition at line 92 of file Encoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_encoder_a7dbf4d5791003ed486fc0b5462409e0a}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!set\-Azimuth@{set\-Azimuth}}
 \index{set\-Azimuth@{set\-Azimuth}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
@@ -161,7 +181,7 @@ The angle of azimuth in radian and you should prefer to use it between 0 and 2 P
 \end{DoxySeeAlso}
 
 
-Definition at line 48 of file Encoder.\-cpp.
+Definition at line 60 of file Encoder.\-cpp.
 
 \hypertarget{class_hoa3_d_1_1_encoder_a3bf01c6ecd90108c66c19ce7e5bde97d}{\index{Hoa3\-D\-::\-Encoder@{Hoa3\-D\-::\-Encoder}!set\-Elevation@{set\-Elevation}}
 \index{set\-Elevation@{set\-Elevation}!Hoa3D::Encoder@{Hoa3\-D\-::\-Encoder}}
@@ -186,7 +206,7 @@ The angle of elevation in radian and you should prefer to use it between 0 and 2
 \end{DoxySeeAlso}
 
 
-Definition at line 53 of file Encoder.\-cpp.
+Definition at line 65 of file Encoder.\-cpp.
 
 
 

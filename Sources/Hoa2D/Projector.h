@@ -13,6 +13,9 @@
 
 namespace Hoa2D
 {
+    //! The ambisonic projector.
+    /** The projector should be used to projects the spherical harmonics on a circle and to give access to the planewaves domain. The projection is similar to the decoding exept that the circle discretization cannot be defined be the user. Then the number of channels (or planewaves) must be a least the number of harmonics, the first angle is 0 radian and the angular distances between the channels are equals.
+     */
     class Projector : public Ambisonic, public Planewaves
     {
         
@@ -24,25 +27,32 @@ namespace Hoa2D
         
     public:
         
-        /**	The projector constructor.
-         @param     order					The order, must be at least 1.
-		 @param     numberOfChannels	The number of channels, must be at least (order + 1)^2.
+        //! The projector constructor.
+        /**	The projector constructor allocates and initialize the member values to project the spherical harmonics on a sphere. The order must be at least 1 and the number of channels must be a least the number of harmonics.
+         
+            @param     order				The order.
+            @param     numberOfChannels     The number of channels.
          */
 		Projector(unsigned int order, unsigned int numberOfChannels);
 		
-        /**	The projector destructor.
+        //! The projector destructor.
+        /**	The projector destructor free the memory.
          */
 		~Projector();
         
-		/**	This method performs the decoding with single precision.
-         @param     input	The input sample.
-         @param     outputs The output array that contains samples destinated to channels.
+		//! This method performs the projection with single precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the projection sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels (or planewaves) samples and the minimum size must be a least the number of channels.
+         
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
 		void process(const float* input, float* output);
 		
-		/**	This method performs the decoding with double precision.
-         @param     input	The input sample.
-         @param     outputs The output array that contains samples destinated to channels.
+		//! This method performs the projection with double precision.
+        /**	You should use this method for in-place or not-in-place processing and performs the projection sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels (or planewaves) samples and the minimum size must be a least the number of channels.
+         
+            @param     inputs   The inputs array.
+            @param     outputs  The outputs array.
          */
 		void process(const double* input, double* output);
     };

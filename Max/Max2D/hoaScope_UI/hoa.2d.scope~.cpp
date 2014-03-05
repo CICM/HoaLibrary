@@ -45,10 +45,16 @@ void draw_background(t_hoa_scope *x, t_object *view, t_rect *rect);
 void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect);
 
 t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av);
-
 t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_scope_class;
+
+t_symbol *s_background_layer;
+t_symbol *s_harmonics_layer;
+t_symbol *s_attr_modified;
+
+#define  contrast_white 0.06
+#define  contrast_black 0.14
 
 int C74_EXPORT main()
 {
@@ -60,6 +66,7 @@ int C74_EXPORT main()
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	class_dspinitjbox(c);
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH);
+    
     hoa_initclass(c, (method)hoa_getinfos);
 	class_addmethod(c, (method)hoa_scope_dsp64,			"dsp64",		A_CANT, 0);
 	class_addmethod(c, (method)hoa_scope_assist,		"assist",		A_CANT,	0);
@@ -127,6 +134,10 @@ int C74_EXPORT main()
 	
 	class_register(CLASS_BOX, c);
 	hoa_scope_class = c;
+    
+    s_background_layer  = gensym("background_layer");
+    s_harmonics_layer   = gensym("harmonics_layer");
+    s_attr_modified     = gensym("attr_modified");
 	
 	return 0;
 }
@@ -213,7 +224,7 @@ void hoa_scope_tick(t_hoa_scope *x)
 {
     x->f_scope->process(x->f_signals + x->f_index * x->f_scope->getNumberOfHarmonics());
 
-	jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+	jbox_invalidate_layer((t_object *)x, NULL, s_harmonics_layer);
 	jbox_redraw((t_jbox *)x);
 	if (sys_getdspstate())
 		clock_fdelay(x->f_clock, x->f_interval);
@@ -237,16 +248,16 @@ void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
 t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
-	if (msg == gensym("attr_modified"))
+	if (msg == s_attr_modified)
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		if( name == gensym("bgcolor") || name == gensym("order"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, s_background_layer);
 		}
 		else if(name == gensym("phcolor") || name == gensym("nhcolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("harmonics_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, s_harmonics_layer);
 		}
 		jbox_redraw((t_jbox *)x);
 	}
@@ -255,10 +266,10 @@ t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *msg, void *sen
 
 void hoa_scope_getdrawparams(t_hoa_scope *x, t_object *patcherview, t_jboxdrawparams *params)
 {
+	params->d_boxfillcolor = x->f_color_bg;
+    params->d_bordercolor = x->f_color_bd;
 	params->d_borderthickness = 1;
 	params->d_cornersize = 8;
-    params->d_bordercolor = x->f_color_bd;
-    params->d_boxfillcolor = x->f_color_bg;
 }
 
 long hoa_scope_oksize(t_hoa_scope *x, t_rect *newrect)
@@ -287,23 +298,19 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
     t_jmatrix transform;
     t_jrgba black, white;
     
-    double contrastBlack = 0.14;
-    double contrastWhite = 0.06;
-    
     black = white = x->f_color_bg;
-    black.red = Hoa2D::clip_min(black.red -= contrastBlack, 0.);
-    black.green = Hoa2D::clip_min(black.green -= contrastBlack, 0.);
-    black.blue = Hoa2D::clip_min(black.blue -= contrastBlack, 0.);
+    black.red = Hoa2D::clip_min(black.red - contrast_black, 0.);
+    black.green = Hoa2D::clip_min(black.green - contrast_black, 0.);
+    black.blue = Hoa2D::clip_min(black.blue - contrast_black, 0.);
     
-    white.red = Hoa2D::clip_max(white.red += contrastWhite, 1.);
-    white.green = Hoa2D::clip_max(white.green += contrastWhite, 1.);
-    white.blue = Hoa2D::clip_max(white.blue += contrastWhite, 1.);
+    white.red = Hoa2D::clip_max(white.red + contrast_white, 1.);
+    white.green = Hoa2D::clip_max(white.green + contrast_white, 1.);
+    white.blue = Hoa2D::clip_max(white.blue + contrast_white, 1.);
     
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_background_layer, rect->width, rect->height);
 
 	if (g) 
 	{
-		/* Axes */
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
 
@@ -314,8 +321,7 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
 			
 			y1 = x->f_radius / 5.;
 			y2 = x->f_radius;
-            			
-            /* Inner shadow */
+            
             if(rotateAngle > CICM_PI2 && rotateAngle < CICM_PI + CICM_PI2)
             {
                 jgraphics_move_to(g, -1, long(y1));
@@ -342,10 +348,8 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
         jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
         
-        /* Circles */
         for(i = 5; i > 0; i--)
 		{
-            //inner shadow
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
             jgraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., CICM_2PI);
@@ -356,9 +360,9 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
             jgraphics_stroke(g);
 		}
         
-		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
+		jbox_end_layer((t_object*)x, view, s_background_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, s_background_layer, 0., 0.);
 }
 
 void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
@@ -371,7 +375,7 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
     t_jrgba shadcolor = {0.4, 0.4, 0.4, 1.};
     long posPathLen = 0, negPathLen = 0, precIndex = 0;
 
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("harmonics_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_harmonics_layer, rect->width, rect->height);
     
     if(shadcolor.alpha > x->f_color_nh.alpha)
         shadcolor.alpha = x->f_color_ph.alpha;
@@ -492,9 +496,9 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
             }
         }
 
-		jbox_end_layer((t_object*)x, view, gensym("harmonics_layer"));
+		jbox_end_layer((t_object*)x, view, s_harmonics_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("harmonics_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, s_harmonics_layer, 0., 0.);
 }
 
 

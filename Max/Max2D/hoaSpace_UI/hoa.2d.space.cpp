@@ -57,6 +57,15 @@ t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv);
 
 t_class *hoa_space_class;
 
+t_symbol *s_background_layer;
+t_symbol *s_space_layer;
+t_symbol *s_spoints_layer;
+t_symbol *s_modified;
+t_symbol *s_attr_modified;
+
+#define  contrast_white 0.06
+#define  contrast_black 0.14
+
 int C74_EXPORT main()
 {
 	t_class *c;
@@ -133,6 +142,12 @@ int C74_EXPORT main()
 	class_register(CLASS_BOX, c);
 	hoa_space_class = c;
 	
+    s_background_layer  = gensym("background_layer");
+    s_space_layer       = gensym("space_layer");
+    s_spoints_layer     = gensym("points_layer");
+    s_modified          = gensym("modified");
+    s_attr_modified     = gensym("attr_modified");
+    
 	return 0;
 }
 
@@ -192,10 +207,10 @@ void hoa_space_list(t_hoa_space *x, t_symbol *s, long ac, t_atom *av)
         }
         
         hoa_space_output(x);
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("space_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("points_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, s_space_layer);
+        jbox_invalidate_layer((t_object *)x, NULL, s_spoints_layer);
         jbox_redraw((t_jbox *)x);
-        object_notify(x, gensym("modified"), NULL);
+        object_notify(x, s_modified, NULL);
     }
 }
 
@@ -223,21 +238,21 @@ void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s)
 t_max_err hoa_space_notify(t_hoa_space *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
-	if (msg == gensym("attr_modified"))
+	if (msg == s_attr_modified)
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
 		if(name == gensym("bgcolor") || name == gensym("bdcolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, s_background_layer);
 		}
 		else if(name == gensym("spcolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("space_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, s_space_layer);
 		}
 		else if(name == gensym("ptcolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, gensym("points_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, s_spoints_layer);
 		}
 		jbox_redraw((t_jbox *)x);
 	}
@@ -249,7 +264,7 @@ void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawpa
     params->d_boxfillcolor = x->f_color_bg;
     params->d_bordercolor = x->f_color_bd;
 	params->d_borderthickness = 1;
-	params->d_cornersize = 6;
+	params->d_cornersize = 8;
 }
 
 void hoa_space_preset(t_hoa_space *x)
@@ -317,23 +332,19 @@ void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
     t_jmatrix transform;
     t_jrgba black, white;
     
-    double contrastBlack = 0.14;
-    double contrastWhite = 0.06;
-    
     black = white = x->f_color_bg;
-    black.red = Hoa2D::clip_min(black.red -= contrastBlack, 0.);
-    black.green = Hoa2D::clip_min(black.green -= contrastBlack, 0.);
-    black.blue = Hoa2D::clip_min(black.blue -= contrastBlack, 0.);
+    black.red = Hoa2D::clip_min(black.red - contrast_black, 0.);
+    black.green = Hoa2D::clip_min(black.green - contrast_black, 0.);
+    black.blue = Hoa2D::clip_min(black.blue - contrast_black, 0.);
     
-    white.red = Hoa2D::clip_max(white.red += contrastWhite, 1.);
-    white.green = Hoa2D::clip_max(white.green += contrastWhite, 1.);
-    white.blue = Hoa2D::clip_max(white.blue += contrastWhite, 1.);
+    white.red = Hoa2D::clip_max(white.red + contrast_white, 1.);
+    white.green = Hoa2D::clip_max(white.green + contrast_white, 1.);
+    white.blue = Hoa2D::clip_max(white.blue + contrast_white, 1.);
     
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_background_layer, rect->width, rect->height);
     
 	if (g)
 	{
-		/* Axes */
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
         
@@ -345,7 +356,6 @@ void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
 			y1 = x->f_radius / 5.;
 			y2 = x->f_radius;
             
-            /* Inner shadow */
             if(rotateAngle > CICM_PI2 && rotateAngle < CICM_PI + CICM_PI2)
             {
                 jgraphics_move_to(g, -1, long(y1));
@@ -372,10 +382,8 @@ void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
         jgraphics_matrix_init(&transform, 1, 0, 0, 1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
         
-        /* Circles */
         for(i = 5; i > 0; i--)
 		{
-            //inner shadow
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
             jgraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., CICM_2PI);
@@ -386,9 +394,9 @@ void draw_background(t_hoa_space *x,  t_object *view, t_rect *rect)
             jgraphics_stroke(g);
 		}
         
-		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
+		jbox_end_layer((t_object*)x, view, s_background_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, s_background_layer, 0., 0.);
 }
 
 double cosine_interpolation(double y1, double y2, float mu)
@@ -402,7 +410,7 @@ void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
 {
     int i, index1, index2;
     double angle, radius, abscissa, ordinate, mu;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("space_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_space_layer, rect->width, rect->height);
 
 	if (g)
 	{
@@ -441,16 +449,16 @@ void draw_space(t_hoa_space *x,  t_object *view, t_rect *rect)
         jgraphics_close_path(g);
         jgraphics_fill_preserve(g);
         jgraphics_stroke(g);
-		jbox_end_layer((t_object*)x, view, gensym("space_layer"));
+		jbox_end_layer((t_object*)x, view, s_space_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("space_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, s_space_layer, 0., 0.);
 }
 
 void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
 {
     int i;
     double angle, radius, abscissa, ordinate;
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("points_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_spoints_layer, rect->width, rect->height);
 
 	if (g) 
 	{
@@ -470,9 +478,9 @@ void draw_points(t_hoa_space *x,  t_object *view, t_rect *rect)
             jgraphics_fill(g);
         }
         
-        jbox_end_layer((t_object*)x, view, gensym("points_layer"));
+        jbox_end_layer((t_object*)x, view, s_spoints_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("points_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, s_spoints_layer, 0., 0.);
 }
 
 /**********************************************************/
@@ -569,11 +577,11 @@ void hoa_space_mouse_drag(t_hoa_space *x, t_object *patcherview, t_pt pt, long m
         x->f_channel_values[index] = value;
     }
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("space_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("points_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, s_space_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, s_spoints_layer);
     jbox_redraw((t_jbox *)x);
     hoa_space_output(x);
-    object_notify(x, gensym("modified"), NULL);
+    object_notify(x, s_modified, NULL);
 }
 
 void hoa_space_output(t_hoa_space *x)
@@ -597,9 +605,9 @@ t_max_err channels_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
             for(int i = 0; i < x->f_number_of_channels; i++)
                 x->f_channel_values[i] = 0.;
             
-            jbox_invalidate_layer((t_object*)x, NULL, gensym("background_layer"));
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("space_layer"));
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("points_layer"));
+            jbox_invalidate_layer((t_object*)x, NULL, s_background_layer);
+            jbox_invalidate_layer((t_object *)x, NULL, s_space_layer);
+            jbox_invalidate_layer((t_object *)x, NULL, s_spoints_layer);
             jbox_redraw((t_jbox *)x);
         }
     }
@@ -633,8 +641,8 @@ t_max_err minmax_set(t_hoa_space *x, t_object *attr, long argc, t_atom *argv)
         for(int i = 0; i < x->f_number_of_channels; i++)
             x->f_channel_values[i] = Hoa2D::clip_minmax(x->f_channel_values[i], x->f_minmax[0], x->f_minmax[1]);
         
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("space_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("points_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, s_space_layer);
+        jbox_invalidate_layer((t_object *)x, NULL, s_spoints_layer);
         jbox_redraw((t_jbox *)x);
     }
 	return 0;

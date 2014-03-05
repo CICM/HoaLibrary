@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['map',['Map',['../class_hoa3_d_1_1_map.html#a442cdcc3ac651b716ae2617fa64c44b4',1,'Hoa3D::Map']]],
-  ['meter',['Meter',['../class_hoa3_d_1_1_meter.html#a8dbe4a3655161c329540557cfed8c52a',1,'Hoa3D::Meter']]]
+  ['map',['Map',['../class_hoa2_d_1_1_map.html#a22720e5b9ab041bb970d4dc43086558c',1,'Hoa2D::Map::Map()'],['../class_hoa3_d_1_1_map.html#a442cdcc3ac651b716ae2617fa64c44b4',1,'Hoa3D::Map::Map()']]],
+  ['meter',['Meter',['../class_hoa2_d_1_1_meter.html#a14d0584c4d3cd7fbfcbe73b7f9b072ce',1,'Hoa2D::Meter::Meter()'],['../class_hoa3_d_1_1_meter.html#abc40fd0b8da1e85a6a4867efeae1fcf0',1,'Hoa3D::Meter::Meter()']]]
 ];

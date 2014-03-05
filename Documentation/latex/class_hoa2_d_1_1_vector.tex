@@ -1,0 +1,280 @@
+\hypertarget{class_hoa2_d_1_1_vector}{\section{Hoa2\-D\-:\-:Vector Class Reference}
+\label{class_hoa2_d_1_1_vector}\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}}
+}
+
+
+The ambisonic vector.  
+
+
+
+
+{\ttfamily \#include $<$Vector.\-h$>$}
+
+Inheritance diagram for Hoa2\-D\-:\-:Vector\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_hoa2_d_1_1_vector}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_vector_aee9bdb6355b741ca4ae90286745de397}{Vector} (unsigned int number\-Of\-Channels)
+\begin{DoxyCompactList}\small\item\em The vector constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_vector_aa260b1636ddc02ac37279f1b3c6160da}{$\sim$\-Vector} ()
+\begin{DoxyCompactList}\small\item\em The optimization destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_vector_a4bc03e92cd2bd7a2ffb4f8c3358631f6}{set\-Channel\-Position} (unsigned int index, double azimuth)
+\begin{DoxyCompactList}\small\item\em Set the azimtuh of a channel. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_vector_aba460ca0df1e870dcb958771b9687d9b}{process} (const float $\ast$inputs, float $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method compute the energy and velocity vectors with single precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_vector_a3715759c77efd66a05f19a0b62387700}{process} (const double $\ast$inputs, double $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method compute the energy and velocity vectors with double precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_vector_a439e3c413c03c40abd0b3c836ccd92dc}{process\-Velocity} (const float $\ast$inputs, float $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method compute the velocity vector with single precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_vector_ab7804e8ec5322fe018141015a8683bd4}{process\-Velocity} (const double $\ast$inputs, double $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method compute the velocity vector with double precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_vector_aa24ad96a21db0f508282a8c94a848e1d}{process\-Energy} (const float $\ast$inputs, float $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method compute the energy vector with single precision. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_vector_a6d91bf205b88b88acdc53177e833da59}{process\-Energy} (const double $\ast$inputs, double $\ast$outputs)
+\begin{DoxyCompactList}\small\item\em This method compute the energy vector with double precision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The ambisonic vector. 
+
+The vector class compute the energy and the velocity vector of a soudfield for a set of loudspeakers. It is an useful tool to characterize the quality of the sound field resitution. For futher information \-: Michael A. Gerzon, General metatheorie of auditory localisation. Audio Engineering Society Preprint, 3306, 1992. This class retreive the cartesian coordinates of the vectors, the abscissa and the ordinate. 
+
+Definition at line 17 of file Vector.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_vector_aee9bdb6355b741ca4ae90286745de397}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!Vector@{Vector}}
+\index{Vector@{Vector}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{Vector}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Vector\-::\-Vector (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number\-Of\-Channels}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_aee9bdb6355b741ca4ae90286745de397}
+
+
+The vector constructor. 
+
+The optimization constructor allocates and initialize the member values to computes vectors. The number of channels must be at least 1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\-Of\-Channels} & The number of loudspeakers. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Vector.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_vector_aa260b1636ddc02ac37279f1b3c6160da}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!$\sim$\-Vector@{$\sim$\-Vector}}
+\index{$\sim$\-Vector@{$\sim$\-Vector}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{$\sim$\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Vector\-::$\sim$\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_aa260b1636ddc02ac37279f1b3c6160da}
+
+
+The optimization destructor. 
+
+The optimization destructor free the memory. 
+
+Definition at line 134 of file Vector.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_vector_aba460ca0df1e870dcb958771b9687d9b}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!process@{process}}
+\index{process@{process}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Vector\-::process (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{inputs, }
+\item[{float $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_aba460ca0df1e870dcb958771b9687d9b}
+
+
+This method compute the energy and velocity vectors with single precision. 
+
+You should use this method for in-\/place or not-\/in-\/place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 4. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, energy abscissa, energy ordinate.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+{\em outputs} & The outputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 122 of file Vector.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_vector_a3715759c77efd66a05f19a0b62387700}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!process@{process}}
+\index{process@{process}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Vector\-::process (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{inputs, }
+\item[{double $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_a3715759c77efd66a05f19a0b62387700}
+
+
+This method compute the energy and velocity vectors with double precision. 
+
+You should use this method for in-\/place or not-\/in-\/place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 4. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate, energy abscissa, energy ordinate.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+{\em outputs} & The outputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 128 of file Vector.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_vector_aa24ad96a21db0f508282a8c94a848e1d}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!process\-Energy@{process\-Energy}}
+\index{process\-Energy@{process\-Energy}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{process\-Energy}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Vector\-::process\-Energy (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{inputs, }
+\item[{float $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_aa24ad96a21db0f508282a8c94a848e1d}
+
+
+This method compute the energy vector with single precision. 
+
+\begin{DoxyVerb}You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is energy abscissa, energy ordinate.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+{\em outputs} & The outputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 75 of file Vector.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_vector_a6d91bf205b88b88acdc53177e833da59}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!process\-Energy@{process\-Energy}}
+\index{process\-Energy@{process\-Energy}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{process\-Energy}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Vector\-::process\-Energy (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{inputs, }
+\item[{double $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_a6d91bf205b88b88acdc53177e833da59}
+
+
+This method compute the energy vector with double precision. 
+
+\begin{DoxyVerb}You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is energy abscissa, energy ordinate.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+{\em outputs} & The outputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 98 of file Vector.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_vector_a439e3c413c03c40abd0b3c836ccd92dc}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!process\-Velocity@{process\-Velocity}}
+\index{process\-Velocity@{process\-Velocity}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{process\-Velocity}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Vector\-::process\-Velocity (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{inputs, }
+\item[{float $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_a439e3c413c03c40abd0b3c836ccd92dc}
+
+
+This method compute the velocity vector with single precision. 
+
+\begin{DoxyVerb}You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+{\em outputs} & The outputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file Vector.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_vector_ab7804e8ec5322fe018141015a8683bd4}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!process\-Velocity@{process\-Velocity}}
+\index{process\-Velocity@{process\-Velocity}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{process\-Velocity}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Vector\-::process\-Velocity (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{inputs, }
+\item[{double $\ast$}]{outputs}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_ab7804e8ec5322fe018141015a8683bd4}
+
+
+This method compute the velocity vector with double precision. 
+
+\begin{DoxyVerb}You should use this method for in-place or not-in-place processing and compute the vectors sample by sample. The inputs array and contains the channels samples and the minimum size must be the number of harmonics. The outputs array contains the vectors cartesian coordinates and the minimum size must be 2. The coordinates arrengement in the outputs array is velocity abscissa, velocity ordinate.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array. \\
+\hline
+{\em outputs} & The outputs array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 56 of file Vector.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_vector_a4bc03e92cd2bd7a2ffb4f8c3358631f6}{\index{Hoa2\-D\-::\-Vector@{Hoa2\-D\-::\-Vector}!set\-Channel\-Position@{set\-Channel\-Position}}
+\index{set\-Channel\-Position@{set\-Channel\-Position}!Hoa2D::Vector@{Hoa2\-D\-::\-Vector}}
+\subsubsection[{set\-Channel\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Vector\-::set\-Channel\-Position (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index, }
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_vector_a4bc03e92cd2bd7a2ffb4f8c3358631f6}
+
+
+Set the azimtuh of a channel. 
+
+Set the azimtuh of a channel. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel -\/ 1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+{\em azimuth} & The azimuth. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file Vector.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Vector.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Vector.\-cpp\end{DoxyCompactItemize}

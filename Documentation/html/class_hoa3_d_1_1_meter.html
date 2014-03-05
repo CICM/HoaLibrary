@@ -105,7 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The planewaves peak level meter.  
  <a href="class_hoa3_d_1_1_meter.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_meter_8h_source.html">Meter.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_hoa3_d_2_meter_8h_source.html">Meter.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Hoa3D::Meter:</div>
 <div class="dyncontent">
@@ -118,12 +118,21 @@ Inheritance diagram for Hoa3D::Meter:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8dbe4a3655161c329540557cfed8c52a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html#a8dbe4a3655161c329540557cfed8c52a">Meter</a> (unsigned int numberOfChannels)</td></tr>
-<tr class="memdesc:a8dbe4a3655161c329540557cfed8c52a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The meter constructor.  <a href="#a8dbe4a3655161c329540557cfed8c52a">More...</a><br/></td></tr>
-<tr class="separator:a8dbe4a3655161c329540557cfed8c52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc40fd0b8da1e85a6a4867efeae1fcf0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html#abc40fd0b8da1e85a6a4867efeae1fcf0">Meter</a> (unsigned int numberOfLoudspeakers, unsigned int numberOfRows, unsigned int numberOfColumns)</td></tr>
+<tr class="memdesc:abc40fd0b8da1e85a6a4867efeae1fcf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The meter constructor.  <a href="#abc40fd0b8da1e85a6a4867efeae1fcf0">More...</a><br/></td></tr>
+<tr class="separator:abc40fd0b8da1e85a6a4867efeae1fcf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f4d18e0007e96c1cd60e2f17d9575cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html#a2f4d18e0007e96c1cd60e2f17d9575cc">~Meter</a> ()</td></tr>
 <tr class="memdesc:a2f4d18e0007e96c1cd60e2f17d9575cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The meter destructor.  <a href="#a2f4d18e0007e96c1cd60e2f17d9575cc">More...</a><br/></td></tr>
 <tr class="separator:a2f4d18e0007e96c1cd60e2f17d9575cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a150dba25119e1a6f3b59845bbb03daa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html#a150dba25119e1a6f3b59845bbb03daa7">setLoudspeakerPosition</a> (unsigned int index, double azimuth, double elevation)</td></tr>
+<tr class="memdesc:a150dba25119e1a6f3b59845bbb03daa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of a loudspeaker.  <a href="#a150dba25119e1a6f3b59845bbb03daa7">More...</a><br/></td></tr>
+<tr class="separator:a150dba25119e1a6f3b59845bbb03daa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ec5c6d11a62c130c4b550e32e9a5ceb"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html#a3ec5c6d11a62c130c4b550e32e9a5ceb">getNumberOfRows</a> () const </td></tr>
+<tr class="memdesc:a3ec5c6d11a62c130c4b550e32e9a5ceb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of rows.  <a href="#a3ec5c6d11a62c130c4b550e32e9a5ceb">More...</a><br/></td></tr>
+<tr class="separator:a3ec5c6d11a62c130c4b550e32e9a5ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9967138628278c306894ac8d5c3375c1"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html#a9967138628278c306894ac8d5c3375c1">getNumberOfColumns</a> () const </td></tr>
+<tr class="memdesc:a9967138628278c306894ac8d5c3375c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of column.  <a href="#a9967138628278c306894ac8d5c3375c1">More...</a><br/></td></tr>
+<tr class="separator:a9967138628278c306894ac8d5c3375c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85c538e8cf9791674a9ac6e602463dd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa3_d_1_1_meter.html#a85c538e8cf9791674a9ac6e602463dd0">process</a> (const float *inputs)</td></tr>
 <tr class="memdesc:a85c538e8cf9791674a9ac6e602463dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method performs the widening with single precision.  <a href="#a85c538e8cf9791674a9ac6e602463dd0">More...</a><br/></td></tr>
 <tr class="separator:a85c538e8cf9791674a9ac6e602463dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,11 +173,11 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The planewaves peak level meter. </p>
-<p>The <a class="el" href="class_hoa3_d_1_1_meter.html" title="The planewaves peak level meter. ">Meter</a> should be used to widen the sound propagation. </p>
+<p>The meter should be used to widen the sound propagation. </p>
 
-<p>Definition at line <a class="el" href="_meter_8h_source.html#l00017">17</a> of file <a class="el" href="_meter_8h_source.html">Meter.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8h_source.html#l00017">17</a> of file <a class="el" href="_hoa3_d_2_meter_8h_source.html">Meter.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a8dbe4a3655161c329540557cfed8c52a"></a>
+<a class="anchor" id="abc40fd0b8da1e85a6a4867efeae1fcf0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -176,8 +185,24 @@ Public Member Functions</h2></td></tr>
           <td class="memname">Hoa3D::Meter::Meter </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>numberOfChannels</em></td><td>)</td>
+          <td class="paramname"><em>numberOfLoudspeakers</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>numberOfRows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>numberOfColumns</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -191,7 +216,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_meter_8cpp_source.html#l00011">11</a> of file <a class="el" href="_meter_8cpp_source.html">Meter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8cpp_source.html#l00011">11</a> of file <a class="el" href="_hoa3_d_2_meter_8cpp_source.html">Meter.cpp</a>.</p>
 
 </div>
 </div>
@@ -211,11 +236,69 @@ Public Member Functions</h2></td></tr>
 <p>The meter destructor. </p>
 <p>The meter destructor free the memory. </p>
 
-<p>Definition at line <a class="el" href="_meter_8cpp_source.html#l00024">24</a> of file <a class="el" href="_meter_8cpp_source.html">Meter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8cpp_source.html#l00109">109</a> of file <a class="el" href="_hoa3_d_2_meter_8cpp_source.html">Meter.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9967138628278c306894ac8d5c3375c1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Hoa3D::Meter::getNumberOfColumns </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieve the number of column. </p>
+<pre class="fragment">Retrieve the number of column used to discretize the ambisonic sphere.
+</pre><dl class="section return"><dt>Returns</dt><dd>This method returns the number of column used to discretize the sphere. </dd></dl>
+
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8h_source.html#l00092">92</a> of file <a class="el" href="_hoa3_d_2_meter_8h_source.html">Meter.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3ec5c6d11a62c130c4b550e32e9a5ceb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Hoa3D::Meter::getNumberOfRows </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieve the number of rows. </p>
+<pre class="fragment">Retrieve the number of rows used to discretize the ambisonic sphere.
+</pre><dl class="section return"><dt>Returns</dt><dd>This method returns the number of rows used to discretize the sphere. </dd></dl>
+
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8h_source.html#l00082">82</a> of file <a class="el" href="_hoa3_d_2_meter_8h_source.html">Meter.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a85c538e8cf9791674a9ac6e602463dd0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -239,7 +322,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_meter_8cpp_source.html#l00016">16</a> of file <a class="el" href="_meter_8cpp_source.html">Meter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8cpp_source.html#l00069">69</a> of file <a class="el" href="_hoa3_d_2_meter_8cpp_source.html">Meter.cpp</a>.</p>
 
 </div>
 </div>
@@ -266,18 +349,63 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_meter_8cpp_source.html#l00020">20</a> of file <a class="el" href="_meter_8cpp_source.html">Meter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8cpp_source.html#l00089">89</a> of file <a class="el" href="_hoa3_d_2_meter_8cpp_source.html">Meter.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a150dba25119e1a6f3b59845bbb03daa7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hoa3D::Meter::setLoudspeakerPosition </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>azimuth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>elevation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the position of a loudspeaker. </p>
+<p>Set the position of a loudspeaker with polar coordinates. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The elevation is in radian between -1/2 Pi and 1/2 Pi, -1/2 Pi the the bottom of the sound field, 0 is the center of the sound field and 1/2 Pi is the top of the sound field. The maximum index must be the number of loudspeakers - 1.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the loudspeaker. </td></tr>
+    <tr><td class="paramname">azimuth</td><td>The azimuth. </td></tr>
+    <tr><td class="paramname">elevation</td><td>The elevation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_hoa3_d_2_meter_8cpp_source.html#l00038">38</a> of file <a class="el" href="_hoa3_d_2_meter_8cpp_source.html">Meter.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_meter_8h_source.html">Meter.h</a></li>
-<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_meter_8cpp_source.html">Meter.cpp</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_hoa3_d_2_meter_8h_source.html">Meter.h</a></li>
+<li>/Users/Pierre/SourceTree/HoaLibrary/Sources/Hoa3D/<a class="el" href="_hoa3_d_2_meter_8cpp_source.html">Meter.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 23 2014 12:08:48 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 5 2014 11:37:15 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

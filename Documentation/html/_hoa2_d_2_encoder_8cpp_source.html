@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Copyright (c) 2012-2014 Eliott Paris &amp; Pierre Guillot, CICM, Universite Paris 8.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco &amp; Pierre Guillot, CICM, Universite Paris 8.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// For information on usage and redistribution, and for a DISCLAIMER OF ALL</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// WARRANTIES, see the file, &quot;LICENSE.txt,&quot; in this distribution.</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">*/</span></div>
@@ -107,64 +107,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#a3387c0cd62d3af13ef851d5372c55a6f">   11</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_encoder.html#a3387c0cd62d3af13ef851d5372c55a6f">Encoder::Encoder</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order) : <a class="code" href="class_hoa2_d_1_1_ambisonic.html">Ambisonic</a>(order)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        m_number_of_inputs  = 2;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">setAzimuth</a>(0.);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    }</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">   17</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Encoder::setAzimuth</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> azimuth)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        m_azimuth = Tools::radian_wrap(azimuth);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_cosx    = cos(m_azimuth);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        m_sinx    = sin(m_azimuth);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">   24</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Encoder::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> input, <span class="keywordtype">float</span>* outputs)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">float</span> cos_x = m_cosx;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">float</span> sin_x = m_sinx;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">float</span> tcos_x = cos_x;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        outputs[0] = input;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; m_number_of_harmonics; i += 2)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            outputs[i] = input * sin_x;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            outputs[i+1] = input * cos_x;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            tcos_x = cos_x;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#a235cc53dbf4fcbe71b3ea72a721eea81">   40</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Encoder::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> input, <span class="keywordtype">double</span>* outputs)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">double</span> cos_x = m_cosx;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">double</span> sin_x = m_sinx;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">double</span> tcos_x = cos_x;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        outputs[0] = input;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; m_number_of_harmonics; i += 2)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            outputs[i] = input * sin_x;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            outputs[i+1] = input * cos_x;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            tcos_x = cos_x;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">   56</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">Encoder::~Encoder</a>()</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        ;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">setAzimuth</a>(0.);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Encoder::setAzimuth</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> azimuth)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        m_azimuth = <a class="code" href="namespace_hoa2_d.html#ae6e7b10b18969cb19586af7e6e63736c">wrap_twopi</a>(azimuth);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        m_cosx    = cos(m_azimuth);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_sinx    = sin(m_azimuth);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">   23</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Encoder::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> input, <span class="keywordtype">float</span>* outputs)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">float</span> cos_x = m_cosx;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">float</span> sin_x = m_sinx;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">float</span> tcos_x = cos_x;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        outputs[0] = input;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 1; i &lt; m_number_of_harmonics; i += 2)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            outputs[i] = input * sin_x;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            outputs[i+1] = input * cos_x;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            tcos_x = cos_x;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#a235cc53dbf4fcbe71b3ea72a721eea81">   39</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Encoder::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> input, <span class="keywordtype">double</span>* outputs)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">double</span> cos_x = m_cosx;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">double</span> sin_x = m_sinx;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">double</span> tcos_x = cos_x;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        outputs[0] = input;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 1; i &lt; m_number_of_harmonics; i += 2)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            outputs[i] = input * sin_x;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            outputs[i+1] = input * cos_x;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            cos_x = tcos_x * m_cosx - sin_x * m_sinx; <span class="comment">// cos(x + b) = cos(x) * cos(b) - sin(x) * sin(b)</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            sin_x = tcos_x * m_sinx + sin_x * m_cosx; <span class="comment">// sin(x + b) = cos(x) * sin(b) + sin(x) * cos(b)</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            tcos_x = cos_x;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">   55</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">Encoder::~Encoder</a>()</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        ;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_a3387c0cd62d3af13ef851d5372c55a6f"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a3387c0cd62d3af13ef851d5372c55a6f">Hoa2D::Encoder::Encoder</a></div><div class="ttdeci">Encoder(unsigned int order)</div><div class="ttdoc">The encoder constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00011">Encoder.cpp:11</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00022">Ambisonic.h:22</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_encoder_html_acc60cfd737fe1f0866e7d464ef1ec1f8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Hoa2D::Encoder::setAzimuth</a></div><div class="ttdeci">void setAzimuth(const double azimuth)</div><div class="ttdoc">This method set the angle of azimuth. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00017">Encoder.cpp:17</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_encoder_html_a2d12e80e9a7a59970972dca6b444b6bc"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Hoa2D::Encoder::process</a></div><div class="ttdeci">void process(const float input, float *outputs)</div><div class="ttdoc">This method performs the encoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00024">Encoder.cpp:24</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_encoder_html_a1faf86f0a74e68d91cd92608b5fd37c8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">Hoa2D::Encoder::~Encoder</a></div><div class="ttdeci">~Encoder()</div><div class="ttdoc">The encoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00056">Encoder.cpp:56</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_encoder_html_acc60cfd737fe1f0866e7d464ef1ec1f8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Hoa2D::Encoder::setAzimuth</a></div><div class="ttdeci">void setAzimuth(const double azimuth)</div><div class="ttdoc">This method set the angle of azimuth. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00016">Encoder.cpp:16</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_encoder_html_a2d12e80e9a7a59970972dca6b444b6bc"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Hoa2D::Encoder::process</a></div><div class="ttdeci">void process(const float input, float *outputs)</div><div class="ttdoc">This method performs the encoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00023">Encoder.cpp:23</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_encoder_html_a1faf86f0a74e68d91cd92608b5fd37c8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">Hoa2D::Encoder::~Encoder</a></div><div class="ttdeci">~Encoder()</div><div class="ttdoc">The encoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00055">Encoder.cpp:55</a></div></div>
+<div class="ttc" id="namespace_hoa2_d_html_ae6e7b10b18969cb19586af7e6e63736c"><div class="ttname"><a href="namespace_hoa2_d.html#ae6e7b10b18969cb19586af7e6e63736c">Hoa2D::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_tools_8h_source.html#l00258">Tools.h:258</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 23 2014 12:08:48 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 5 2014 11:37:13 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
