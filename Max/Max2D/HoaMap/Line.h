@@ -9,7 +9,8 @@
 
 #include "../Hoa2D.max.h"
 
-class Line{
+class Line
+{
 	
 private:
 	long        m_vector_size;

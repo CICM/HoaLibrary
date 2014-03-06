@@ -48,9 +48,9 @@ typedef struct  _hoamap
     t_object*   f_colorpicker;
     t_object*   f_textfield;
     
-    SourcesManager*     f_source_manager;
-    SourcesPreset*      f_source_preset;
-    SourcesTrajectory*  f_source_trajectory;
+	Hoa2D::SourcesManager*     f_source_manager;
+    Hoa2D::SourcesPreset*      f_source_preset;
+    Hoa2D::SourcesTrajectory*  f_source_trajectory;
     
     t_pt        f_cursor_position;
     long        f_index_of_selected_source;
@@ -245,9 +245,9 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
 	;
     
 	jbox_new(&x->j_box, flags, argc, argv);
-	x->f_source_manager = new SourcesManager(1./MIN_ZOOM - 5.);
-    x->f_source_preset = new SourcesPreset();
-    x->f_source_trajectory = new SourcesTrajectory();
+	x->f_source_manager = new Hoa2D::SourcesManager(1./MIN_ZOOM - 5.);
+    x->f_source_preset = new Hoa2D::SourcesPreset();
+    x->f_source_trajectory = new Hoa2D::SourcesTrajectory();
     
     x->f_rect_selection_exist = 0;
     x->f_index_of_selected_source = -1;

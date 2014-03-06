@@ -15,7 +15,7 @@ typedef enum {
 typedef struct _hoa_map 
 {
 	t_pxobject      f_ob;
-	Map		*f_map;
+	Hoa2D::Map		*f_map;
     double			*f_sig_ins;
     double			*f_sig_outs;
 	t_symbol		*f_mode_sym;
@@ -104,7 +104,8 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
         if(argc > 1 && atom_gettype(argv+1) == A_LONG)
             numberOfSources = clip_minmax(atom_getlong(argv+1), 1, 254);
 
-		x->f_map = new Map(order, numberOfSources);
+		x->f_map = new Hoa2D::Map(order, numberOfSources);
+		
 		if(x->f_map->getNumberOfSources() == 1)
             dsp_setup((t_pxobject *)x, 3);
         else
@@ -451,7 +452,7 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
 void hoa_map_free(t_hoa_map *x) 
 {
 	dsp_free((t_pxobject *)x);
-	delete x->f_map;
+	
     delete [] x->f_sig_ins;
     delete [] x->f_sig_outs;
 	
@@ -462,5 +463,7 @@ void hoa_map_free(t_hoa_map *x)
 	}
 	delete [] x->f_lines_x;
 	delete [] x->f_lines_y;
+	
+	delete x->f_map;
 }
 
