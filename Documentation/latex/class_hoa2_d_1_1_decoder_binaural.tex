@@ -23,9 +23,13 @@ Inheritance diagram for Hoa2\-D\-:\-:Decoder\-Binaural\-:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em The binaural decoder constructor. \end{DoxyCompactList}\item 
 \hyperlink{class_hoa2_d_1_1_decoder_binaural_a3aa8b84a571c2c031dcae2b94b8737e4}{$\sim$\-Decoder\-Binaural} ()
 \begin{DoxyCompactList}\small\item\em The binaural decoder destructor. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_decoder_binaural_ac121f14d7896f2e7ec0ea98b3e6c5018}{process} (const float $\ast$input, float $\ast$output)
+bool \hyperlink{class_hoa2_d_1_1_decoder_binaural_a8cb958da4f7f5f5888cd894a52f69aa5}{get\-State} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve if the impulses has been loaded. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_hoa2_d_1_1_decoder_binaural_a045e4d443418211eca3074e10719ecd5}{get\-Channel\-Name} (unsigned int index)
+\begin{DoxyCompactList}\small\item\em Retrieve a name for a channel. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_decoder_binaural_accbfe84ed3e43f1e9ca93e58edb7020f}{process} (const float $\ast$const $\ast$inputs, float $\ast$$\ast$outputs)
 \begin{DoxyCompactList}\small\item\em This method performs the binaural decoding with single precision. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_decoder_binaural_a18c84a171a30f5e860846090a8bf1fa2}{process} (const double $\ast$input, double $\ast$output)
+void \hyperlink{class_hoa2_d_1_1_decoder_binaural_a8a604b4a80352a29d1c77ebd112cb344}{process} (const double $\ast$$\ast$inputs, double $\ast$$\ast$outputs)
 \begin{DoxyCompactList}\small\item\em This method performs the binaural decoding with double precision. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -51,7 +55,7 @@ Definition at line 155 of file Decoder.\-h.
 
 The binaural decoder constructor. 
 
-\begin{DoxyVerb}The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1.
+\begin{DoxyVerb}The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1 and the maximum order is 35.
 \end{DoxyVerb}
 
 
@@ -62,6 +66,10 @@ The binaural decoder constructor.
 {\em number\-Of\-Channels} & The number of channels. \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line 208 of file Decoder.\-cpp.
+
 \hypertarget{class_hoa2_d_1_1_decoder_binaural_a3aa8b84a571c2c031dcae2b94b8737e4}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!$\sim$\-Decoder\-Binaural@{$\sim$\-Decoder\-Binaural}}
 \index{$\sim$\-Decoder\-Binaural@{$\sim$\-Decoder\-Binaural}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
 \subsubsection[{$\sim$\-Decoder\-Binaural}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Decoder\-Binaural\-::$\sim$\-Decoder\-Binaural (
@@ -75,15 +83,64 @@ The binaural decoder destructor.
 
 The binaural decoder destructor free the memory. 
 
+Definition at line 393 of file Decoder.\-cpp.
+
+
+
 \subsection{Member Function Documentation}
-\hypertarget{class_hoa2_d_1_1_decoder_binaural_ac121f14d7896f2e7ec0ea98b3e6c5018}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!process@{process}}
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_a045e4d443418211eca3074e10719ecd5}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!get\-Channel\-Name@{get\-Channel\-Name}}
+\index{get\-Channel\-Name@{get\-Channel\-Name}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
+\subsubsection[{get\-Channel\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Hoa2\-D\-::\-Decoder\-Binaural\-::get\-Channel\-Name (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_decoder_binaural_a045e4d443418211eca3074e10719ecd5}
+
+
+Retrieve a name for a channel. 
+
+Retrieve a name for a channel in a std\-::string format that will be \char`\"{}\-Headphone Left\char`\"{} or \char`\"{}\-Headphone Right\char`\"{}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of a channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The method returns a name for the channel that contains its index and its azimuth if the channel exists, otherwise the function generates an error. 
+\end{DoxyReturn}
+
+
+Definition at line 219 of file Decoder.\-h.
+
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_a8cb958da4f7f5f5888cd894a52f69aa5}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!get\-State@{get\-State}}
+\index{get\-State@{get\-State}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
+\subsubsection[{get\-State}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Decoder\-Binaural\-::get\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_decoder_binaural_a8cb958da4f7f5f5888cd894a52f69aa5}
+
+
+Retrieve if the impulses has been loaded. 
+
+Retrieve if the impulses has been loaded.
+
+\begin{DoxyReturn}{Returns}
+The true if the impulses has been loaded and false if not. 
+\end{DoxyReturn}
+
+
+Definition at line 203 of file Decoder.\-h.
+
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_accbfe84ed3e43f1e9ca93e58edb7020f}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!process@{process}}
 \index{process@{process}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
 \subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Binaural\-::process (
 \begin{DoxyParamCaption}
-\item[{const float $\ast$}]{input, }
-\item[{float $\ast$}]{output}
+\item[{const float $\ast$const $\ast$}]{inputs, }
+\item[{float $\ast$$\ast$}]{outputs}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_decoder_binaural_ac121f14d7896f2e7ec0ea98b3e6c5018}
+)}}\label{class_hoa2_d_1_1_decoder_binaural_accbfe84ed3e43f1e9ca93e58edb7020f}
 
 
 This method performs the binaural decoding with single precision. 
@@ -94,19 +151,23 @@ This method performs the binaural decoding with single precision.
 
 
 \begin{DoxyParams}{Parameters}
-{\em input} & The input sample. \\
+{\em inputs} & The input sample. \\
 \hline
 {\em outputs} & The output array that contains samples destinated to channels. \\
 \hline
 \end{DoxyParams}
-\hypertarget{class_hoa2_d_1_1_decoder_binaural_a18c84a171a30f5e860846090a8bf1fa2}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!process@{process}}
+
+
+Definition at line 331 of file Decoder.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_decoder_binaural_a8a604b4a80352a29d1c77ebd112cb344}{\index{Hoa2\-D\-::\-Decoder\-Binaural@{Hoa2\-D\-::\-Decoder\-Binaural}!process@{process}}
 \index{process@{process}!Hoa2D::DecoderBinaural@{Hoa2\-D\-::\-Decoder\-Binaural}}
 \subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Decoder\-Binaural\-::process (
 \begin{DoxyParamCaption}
-\item[{const double $\ast$}]{input, }
-\item[{double $\ast$}]{output}
+\item[{const double $\ast$$\ast$}]{inputs, }
+\item[{double $\ast$$\ast$}]{outputs}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_decoder_binaural_a18c84a171a30f5e860846090a8bf1fa2}
+)}}\label{class_hoa2_d_1_1_decoder_binaural_a8a604b4a80352a29d1c77ebd112cb344}
 
 
 This method performs the binaural decoding with double precision. 
@@ -124,6 +185,11 @@ This method performs the binaural decoding with double precision.
 \end{DoxyParams}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+Definition at line 362 of file Decoder.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-h\end{DoxyCompactItemize}
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-h\item 
+/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Decoder.\-cpp\end{DoxyCompactItemize}

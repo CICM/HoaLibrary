@@ -288,28 +288,246 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    </div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">// Decoder Binaural //</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment"></span>}</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment"></span>    </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> hoa_number_binaural_configs    = 8;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> hoa_binaural_configs[]         = {4, 6, 8, 12, 18, 24, 36, 72};</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> hoa_number_binaural_samplerate = 4;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> hoa_binaural_impulse_sizes[]   = {512, 557, 1024, 1114};</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    </div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_binaural.html#a614b402069c035eb1bb03d3ec79c4098">  208</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#a614b402069c035eb1bb03d3ec79c4098">DecoderBinaural::DecoderBinaural</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order) : <a class="code" href="class_hoa2_d_1_1_ambisonic.html">Ambisonic</a>(order), <a class="code" href="class_hoa2_d_1_1_planewaves.html">Planewaves</a>(2)</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">if</span>(order &gt; 35)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            order  = 35;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        m_vector_size               = 0;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        m_sample_rate               = 0;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        m_impulses_loaded           = 0;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        m_matrix_allocated          = 0;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        m_impulses_matrix           = NULL;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; hoa_number_binaural_configs; i++)</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            <span class="keywordflow">if</span>(hoa_binaural_configs[i] &gt; m_order * 2 + 2)</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                m_number_of_virtual_channels = hoa_binaural_configs[i];</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        }</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        m_impulses_vector   = <span class="keyword">new</span> <span class="keyword">const</span> <span class="keywordtype">float</span>*[m_number_of_virtual_channels];</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        m_harmonics_vector  = <span class="keyword">new</span> <span class="keywordtype">float</span>[m_number_of_harmonics];</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        m_channels_vector   = <span class="keyword">new</span> <span class="keywordtype">float</span>[m_number_of_virtual_channels];</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        m_decoder           = <span class="keyword">new</span> <a class="code" href="class_hoa2_d_1_1_decoder_regular.html">DecoderRegular</a>(m_order, m_number_of_virtual_channels);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordtype">void</span> DecoderBinaural::setSampleRate(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleRate)</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="keywordtype">float</span> value_left;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordtype">float</span> value_right;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">if</span>(sampleRate != m_sample_rate)</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        {</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            m_impulses_loaded   = 0;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            m_sample_rate       = 0;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; hoa_number_binaural_samplerate; i++)</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            {</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                <span class="keywordflow">if</span>(sampleRate == hoa_binaural_samplerate[i])</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                {</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                    m_sample_rate   = hoa_binaural_samplerate[i];</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                    m_impulses_size = hoa_binaural_impulse_sizes[i];</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">if</span>(!m_sample_rate)</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                m_sample_rate       = hoa_binaural_samplerate[0];</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                m_impulses_size     = hoa_binaural_impulse_sizes[0];</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            }</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; m_number_of_virtual_channels; i++)</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            {</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, (<span class="keywordtype">double</span>)i / (<span class="keywordtype">double</span>)m_number_of_virtual_channels * 360);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            }</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            </div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="keywordflow">if</span>(m_impulses_matrix)</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                <span class="keyword">delete</span> [] m_impulses_matrix;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            m_impulses_matrix = <span class="keyword">new</span> <span class="keywordtype">float</span>[m_impulses_size * 2 * m_number_of_harmonics];</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                m_harmonics_vector[i] = 0.;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_virtual_channels; i++)</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                m_channels_vector[i] = 0.;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            m_harmonics_vector[0] = 1.;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 1; i &lt; m_number_of_harmonics; i++)</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                m_harmonics_vector[i-1] = 0.;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                m_harmonics_vector[i]   = 1.;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                m_decoder-&gt;<a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a0df7ff818531d375909a2914d159b711">process</a>(m_harmonics_vector, m_channels_vector);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_impulses_size; j++)</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                {</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                    value_left = 0;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                    value_right = 0;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                    </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; m_number_of_virtual_channels; k++)</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                    {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                        value_left += m_channels_vector[k] * m_impulses_vector[k][j];</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                        <span class="keywordflow">if</span>(k == 0)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                            value_right += m_channels_vector[k] * m_impulses_vector[k][j];</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                            value_right += m_channels_vector[k] * m_impulses_vector[m_number_of_virtual_channels - k][j];</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                    }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                    m_impulses_matrix[j * m_number_of_harmonics + i] = value_left;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                    m_impulses_matrix[j * m_number_of_harmonics + i] *= (1. / 1.125) * (44100. / (double)m_sample_rate);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                    m_impulses_matrix[(j + m_impulses_size) * m_number_of_harmonics + i] = value_right;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                    m_impulses_matrix[(j + m_impulses_size) * m_number_of_harmonics + i] *= (1. / 1.125) * (44100. / (double)m_sample_rate);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                }</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            m_impulses_loaded = 1;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    }</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keywordtype">void</span> DecoderBinaural::setVectorSize(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vectorSize)</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keywordflow">if</span>(m_vector_size != vectorSize)</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            m_matrix_allocated = 0;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            m_vector_size = vectorSize;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="keywordflow">if</span>(m_input_matrix)</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                <span class="keyword">delete</span> [] m_input_matrix;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            m_input_matrix = NULL;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="keywordflow">if</span>(m_result_matrix)</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                <span class="keyword">delete</span> [] m_result_matrix;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            m_result_matrix = NULL;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;            <span class="keywordflow">if</span>(m_linear_vector_left)</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                <span class="keyword">delete</span> [] m_linear_vector_left;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            m_linear_vector_left = NULL;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            <span class="keywordflow">if</span>(m_linear_vector_right)</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                <span class="keyword">delete</span> [] m_linear_vector_right;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            m_linear_vector_right = NULL;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            m_input_matrix  = <span class="keyword">new</span> <span class="keywordtype">float</span>[m_number_of_harmonics * m_vector_size];</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            m_result_matrix = <span class="keyword">new</span> <span class="keywordtype">float</span>[m_impulses_size * 2 * m_vector_size];</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            m_linear_vector_left    = <span class="keyword">new</span> <span class="keywordtype">float</span>[m_vector_size + m_impulses_size - 1];</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            m_linear_vector_right   = <span class="keyword">new</span> <span class="keywordtype">float</span>[m_vector_size + m_impulses_size - 1];</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;            m_result_matrix_left    = m_result_matrix;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            m_result_matrix_right   = m_result_matrix + m_vector_size  * m_impulses_size;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            m_matrix_allocated = 1;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    }</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    </div>
+<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_binaural.html#accbfe84ed3e43f1e9ca93e58edb7020f">  331</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#accbfe84ed3e43f1e9ca93e58edb7020f">DecoderBinaural::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* <span class="keyword">const</span>* inputs, <span class="keywordtype">float</span>** outputs)</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span>* input;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        {</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            input = inputs[i];</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_vector_size; j++)</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            {</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                m_input_matrix[i*m_vector_size+j] = input[j];</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            }</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        }</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (m_impulses_size * 2), m_vector_size, m_number_of_harmonics, 1.,</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                    m_impulses_matrix, m_number_of_harmonics,</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                    m_input_matrix,  m_vector_size,</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                    0., m_result_matrix,  m_vector_size);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_vector_size; j++)</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j+m_vector_size*m_impulses_size, m_vector_size, m_linear_vector_left  + j, 1);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j, m_vector_size, m_linear_vector_right + j, 1);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            outputs[0][j] = m_linear_vector_left[j];</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            outputs[1][j] = m_linear_vector_right[j];</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        cblas_scopy(m_impulses_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        cblas_scopy(m_impulses_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        memset(m_linear_vector_left + m_impulses_size - 1, 0, m_vector_size * <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>));</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        memset(m_linear_vector_right + m_impulses_size - 1, 0, m_vector_size * <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>));</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    </div>
+<div class="line"><a name="l00362"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_binaural.html#a8a604b4a80352a29d1c77ebd112cb344">  362</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#accbfe84ed3e43f1e9ca93e58edb7020f">DecoderBinaural::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>** inputs, <span class="keywordtype">double</span>** outputs)</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    {</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span>* input;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        {</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            input = inputs[i];</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_vector_size; j++)</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                m_input_matrix[i*m_vector_size+j] = input[j];</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            }</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        }</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (m_impulses_size * 2), m_vector_size, m_number_of_harmonics, 1.,</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                    m_impulses_matrix, m_number_of_harmonics,</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                    m_input_matrix,  m_vector_size,</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                    0., m_result_matrix,  m_vector_size);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_vector_size; j++)</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        {</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j+m_vector_size*m_impulses_size, m_vector_size, m_linear_vector_left  + j, 1);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j, m_vector_size, m_linear_vector_right + j, 1);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;            </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            outputs[0][j] = m_linear_vector_left[j];</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            outputs[1][j] = m_linear_vector_right[j];</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        }</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        cblas_scopy(m_impulses_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        cblas_scopy(m_impulses_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        </div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        memset(m_linear_vector_left + m_impulses_size - 1, 0, m_vector_size * <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>));</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        memset(m_linear_vector_right + m_impulses_size - 1, 0, m_vector_size * <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>));</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    </div>
+<div class="line"><a name="l00393"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4">  393</a></span>&#160;    <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4">DecoderBinaural::~DecoderBinaural</a>()</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    {</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keyword">delete</span> m_decoder;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keyword">delete</span> [] m_impulses_vector;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="keyword">delete</span> [] m_harmonics_vector;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        <span class="keyword">delete</span> [] m_channels_vector;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keywordflow">if</span>(m_impulses_matrix)</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            <span class="keyword">delete</span> [] m_impulses_matrix;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keywordflow">if</span>(m_input_matrix)</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            <span class="keyword">delete</span> [] m_input_matrix;</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        m_input_matrix = NULL;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        <span class="keywordflow">if</span>(m_result_matrix)</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            <span class="keyword">delete</span> [] m_result_matrix;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        m_result_matrix = NULL;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        <span class="keywordflow">if</span>(m_linear_vector_left)</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            <span class="keyword">delete</span> [] m_linear_vector_left;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        m_linear_vector_left = NULL;</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="keywordflow">if</span>(m_linear_vector_right)</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            <span class="keyword">delete</span> [] m_linear_vector_right;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        m_linear_vector_right = NULL;</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    }</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;}</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;</div>
 <div class="ttc" id="namespace_hoa_html_a8e369981026a7cedf7b832d639c15b90"><div class="ttname"><a href="namespace_hoa.html#a8e369981026a7cedf7b832d639c15b90">Hoa::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00322">HoaMath.h:322</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00022">Ambisonic.h:22</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00018">Ambisonic.h:18</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a0666daa8b343e44ef7d90a31922cbecc"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a0666daa8b343e44ef7d90a31922cbecc">Hoa2D::DecoderRegular::DecoderRegular</a></div><div class="ttdeci">DecoderRegular(unsigned int order, unsigned int numberOfChannels)</div><div class="ttdoc">The regular decoder constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00014">Decoder.cpp:14</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_binaural_html_a3aa8b84a571c2c031dcae2b94b8737e4"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4">Hoa2D::DecoderBinaural::~DecoderBinaural</a></div><div class="ttdeci">~DecoderBinaural()</div><div class="ttdoc">The binaural decoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00393">Decoder.cpp:393</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_acc60cfd737fe1f0866e7d464ef1ec1f8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Hoa2D::Encoder::setAzimuth</a></div><div class="ttdeci">void setAzimuth(const double azimuth)</div><div class="ttdoc">This method set the angle of azimuth. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00016">Encoder.cpp:16</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_a2d12e80e9a7a59970972dca6b444b6bc"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Hoa2D::Encoder::process</a></div><div class="ttdeci">void process(const float input, float *outputs)</div><div class="ttdoc">This method performs the encoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00023">Encoder.cpp:23</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_af8a618d1d04c00f33c360fde6d09e03f"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f">Hoa2D::DecoderIrregular::~DecoderIrregular</a></div><div class="ttdeci">~DecoderIrregular()</div><div class="ttdoc">The irregular decoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00187">Decoder.cpp:187</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_planewaves_html"><div class="ttname"><a href="class_hoa2_d_1_1_planewaves.html">Hoa2D::Planewaves</a></div><div class="ttdoc">The planewaves class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_planewaves_8h_source.html#l00018">Planewaves.h:18</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a0df7ff818531d375909a2914d159b711"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a0df7ff818531d375909a2914d159b711">Hoa2D::DecoderRegular::process</a></div><div class="ttdeci">void process(const float *input, float *output)</div><div class="ttdoc">This method performs the regular decoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00041">Decoder.cpp:41</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_binaural_html_accbfe84ed3e43f1e9ca93e58edb7020f"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_binaural.html#accbfe84ed3e43f1e9ca93e58edb7020f">Hoa2D::DecoderBinaural::process</a></div><div class="ttdeci">void process(const float *const *inputs, float **outputs)</div><div class="ttdoc">This method performs the binaural decoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00331">Decoder.cpp:331</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_a6c4b42a6c7f9030b4db0d53186a9d6e0"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#a6c4b42a6c7f9030b4db0d53186a9d6e0">Hoa2D::DecoderIrregular::setChannelsPosition</a></div><div class="ttdeci">void setChannelsPosition(double *azimuths)</div><div class="ttdoc">Set the azimtuh of all the channels. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00073">Decoder.cpp:73</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a8ea45b4fafc13f941b597a7e829fc0d8"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a8ea45b4fafc13f941b597a7e829fc0d8">Hoa2D::DecoderRegular::setChannelsOffset</a></div><div class="ttdeci">void setChannelsOffset(double offset)</div><div class="ttdoc">Set the offset of the channels. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00025">Decoder.cpp:25</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_planewaves_html_a6f6dfb5355b12915c658ac8967303ef4"><div class="ttname"><a href="class_hoa2_d_1_1_planewaves.html#a6f6dfb5355b12915c658ac8967303ef4">Hoa2D::Planewaves::setChannelPosition</a></div><div class="ttdeci">void setChannelPosition(unsigned int index, double azimuth)</div><div class="ttdoc">Set the azimuth of a channel. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_planewaves_8cpp_source.html#l00022">Planewaves.cpp:22</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html">Hoa2D::Encoder</a></div><div class="ttdoc">The ambisonic encoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8h_source.html#l00017">Encoder.h:17</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_a6847d61194817c336f323f21b757a67a"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#a6847d61194817c336f323f21b757a67a">Hoa2D::DecoderIrregular::DecoderIrregular</a></div><div class="ttdeci">DecoderIrregular(unsigned int order, unsigned int numberOfChannels)</div><div class="ttdoc">The irregular decoder constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00062">Decoder.cpp:62</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_binaural_html_a614b402069c035eb1bb03d3ec79c4098"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_binaural.html#a614b402069c035eb1bb03d3ec79c4098">Hoa2D::DecoderBinaural::DecoderBinaural</a></div><div class="ttdeci">DecoderBinaural(unsigned int order)</div><div class="ttdoc">The binaural decoder constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00208">Decoder.cpp:208</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_aacb9c2de89e276d0ede87e2ecfd2bde4"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#aacb9c2de89e276d0ede87e2ecfd2bde4">Hoa2D::DecoderIrregular::process</a></div><div class="ttdeci">void process(const float *input, float *output)</div><div class="ttdoc">This method performs the irregular decoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00177">Decoder.cpp:177</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a04fe68432d2de773e8773cde9f0a2cad"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a04fe68432d2de773e8773cde9f0a2cad">Hoa2D::DecoderRegular::~DecoderRegular</a></div><div class="ttdeci">~DecoderRegular()</div><div class="ttdoc">The regular decoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00051">Decoder.cpp:51</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html">Hoa2D::DecoderRegular</a></div><div class="ttdoc">The ambisonic regular decoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00019">Decoder.h:19</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_ab74543528e37f6455de5452f00ac7c1c"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#ab74543528e37f6455de5452f00ac7c1c">Hoa2D::DecoderIrregular::setChannelPosition</a></div><div class="ttdeci">void setChannelPosition(unsigned int index, double azimuth)</div><div class="ttdoc">Set the azimuth of a channel. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00082">Decoder.cpp:82</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 6 2014 09:48:01 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 6 2014 14:00:57 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
