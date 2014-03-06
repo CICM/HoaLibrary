@@ -21,6 +21,14 @@ namespace Hoa2D
         
 		unsigned int    m_number_of_channels;
         double*         m_channels_azimuth;
+        
+        //! Set the azimuth of a channel.
+        /** Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.
+         
+         @param     index		The index of the loudspeaker.
+         @param     azimuth		The azimuth.
+         */
+		void setChannelPosition(unsigned int index, double azimuth);
 		
     public:
         
@@ -35,15 +43,6 @@ namespace Hoa2D
         /** The Planewaves destructor free the memorie allocated.
          */
         ~Planewaves();
-		
-        //! Set the azimtuh of a channel.
-        /** Set the azimtuh of a channel. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.
-         
-            @param     index		The index of the loudspeaker.
-            @param     azimuth		The azimuth.
-            @param     elevation	The elevation.
-         */
-		void setChannelPosition(unsigned int index, double azimuth);
         
         //! Retrieve the number of channels.
 		/** Retrieve the number of channels of the planewave class.
