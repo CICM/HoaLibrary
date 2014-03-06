@@ -11,7 +11,7 @@ typedef struct _hoa_decoder
 	t_pxobject              f_ob;
 	double*                 f_ins;
     double*                 f_outs;
-    Hoa2D::Decoder*         f_decoder;
+    Hoa2D::DecoderRegular*  f_decoder;
     
 } t_hoa_decoder;
 
@@ -61,7 +61,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         if(numberOfLoudspeakers < 1)
             numberOfLoudspeakers = 1;
 		
-		x->f_decoder = new Hoa2D::Decoder(order, numberOfLoudspeakers);
+		x->f_decoder = new Hoa2D::DecoderRegular(order, numberOfLoudspeakers);
 		
 		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfHarmonics());
 		for (int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
@@ -69,6 +69,15 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         
 		x->f_ins = new double[x->f_decoder->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_outs = new double[x->f_decoder->getNumberOfChannels() * SYS_MAXBLKSIZE];
+        
+        Hoa2D::DecoderBinaural*  binaural = new Hoa2D::DecoderBinaural(order);
+        binaural->setSampleRate(sys_getsr());
+        binaural->setVectorSize(sys_getblksize());
+        
+        post(binaural->getChannelName(0).c_str());
+        post(binaural->getChannelName(1).c_str());
+        post("%i , %i", sys_getblksize(), (int)binaural->getState());
+        delete binaural;
 	}
 
 	return (x);

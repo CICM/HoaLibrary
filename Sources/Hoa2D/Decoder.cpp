@@ -197,5 +197,219 @@ namespace Hoa2D
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Decoder Binaural //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    unsigned int hoa_number_binaural_configs    = 8;
+    unsigned int hoa_binaural_configs[]         = {4, 6, 8, 12, 18, 24, 36, 72};
+    
+    unsigned int hoa_number_binaural_samplerate = 4;
+    unsigned int hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};
+    unsigned int hoa_binaural_impulse_sizes[]   = {512, 557, 1024, 1114};
+    
+    DecoderBinaural::DecoderBinaural(unsigned int order) : Ambisonic(order), Planewaves(2)
+    {
+        if(order > 35)
+            order  = 35;
+        
+        m_vector_size               = 0;
+        m_sample_rate               = 0;
+        m_impulses_loaded           = 0;
+        m_matrix_allocated          = 0;
+        m_impulses_matrix           = NULL;
+        
+        for(unsigned int i = 0; i < hoa_number_binaural_configs; i++)
+        {
+            if(hoa_binaural_configs[i] > m_order * 2 + 2)
+            {
+                m_number_of_virtual_channels = hoa_binaural_configs[i];
+                break;
+            }
+        }
+        m_impulses_vector   = new const float*[m_number_of_virtual_channels];
+        m_harmonics_vector  = new float[m_number_of_harmonics];
+        m_channels_vector   = new float[m_number_of_virtual_channels];
+        m_decoder           = new DecoderRegular(m_order, m_number_of_virtual_channels);
+    }
+    
+    void DecoderBinaural::setSampleRate(unsigned int sampleRate)
+    {
+        float value_left;
+        float value_right;
+        if(sampleRate != m_sample_rate)
+        {
+            m_impulses_loaded   = 0;
+            m_sample_rate       = 0;
+            for(unsigned int i = 0; i < hoa_number_binaural_samplerate; i++)
+            {
+                if(sampleRate == hoa_binaural_samplerate[i])
+                {
+                    m_sample_rate   = hoa_binaural_samplerate[i];
+                    m_impulses_size = hoa_binaural_impulse_sizes[i];
+                }
+            }
+            if(!m_sample_rate)
+            {
+                m_sample_rate       = hoa_binaural_samplerate[0];
+                m_impulses_size     = hoa_binaural_impulse_sizes[0];
+            }
+            for(int i = 0; i < m_number_of_virtual_channels; i++)
+            {
+                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, (double)i / (double)m_number_of_virtual_channels * 360);
+            }
+            
+            
+            if(m_impulses_matrix)
+                delete [] m_impulses_matrix;
+            
+            m_impulses_matrix = new float[m_impulses_size * 2 * m_number_of_harmonics];
+            
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+                m_harmonics_vector[i] = 0.;
+            for(unsigned int i = 0; i < m_number_of_virtual_channels; i++)
+                m_channels_vector[i] = 0.;
+            
+            m_harmonics_vector[0] = 1.;
+            for(unsigned int i = 1; i < m_number_of_harmonics; i++)
+            {
+                m_harmonics_vector[i-1] = 0.;
+                m_harmonics_vector[i]   = 1.;
+                m_decoder->process(m_harmonics_vector, m_channels_vector);
+                
+                for(unsigned int j = 0; j < m_impulses_size; j++)
+                {
+                    value_left = 0;
+                    value_right = 0;
+                    
+                    for(unsigned int k = 0; k < m_number_of_virtual_channels; k++)
+                    {
+                        value_left += m_channels_vector[k] * m_impulses_vector[k][j];
+                        if(k == 0)
+                            value_right += m_channels_vector[k] * m_impulses_vector[k][j];
+                        else
+                            value_right += m_channels_vector[k] * m_impulses_vector[m_number_of_virtual_channels - k][j];
+                    }
+                    m_impulses_matrix[j * m_number_of_harmonics + i] = value_left;
+                    m_impulses_matrix[j * m_number_of_harmonics + i] *= (1. / 1.125) * (44100. / (double)m_sample_rate);
+                    m_impulses_matrix[(j + m_impulses_size) * m_number_of_harmonics + i] = value_right;
+                    m_impulses_matrix[(j + m_impulses_size) * m_number_of_harmonics + i] *= (1. / 1.125) * (44100. / (double)m_sample_rate);
+                }
+            }
+            
+            m_impulses_loaded = 1;
+        }
+    }
+    
+    void DecoderBinaural::setVectorSize(unsigned int vectorSize)
+    {
+        if(m_vector_size != vectorSize)
+        {
+            m_matrix_allocated = 0;
+            m_vector_size = vectorSize;
+            if(m_input_matrix)
+                delete [] m_input_matrix;
+            m_input_matrix = NULL;
+            if(m_result_matrix)
+                delete [] m_result_matrix;
+            m_result_matrix = NULL;
+            if(m_linear_vector_left)
+                delete [] m_linear_vector_left;
+            m_linear_vector_left = NULL;
+            if(m_linear_vector_right)
+                delete [] m_linear_vector_right;
+            m_linear_vector_right = NULL;
+            
+            m_input_matrix  = new float[m_number_of_harmonics * m_vector_size];
+            m_result_matrix = new float[m_impulses_size * 2 * m_vector_size];
+            m_linear_vector_left    = new float[m_vector_size + m_impulses_size - 1];
+            m_linear_vector_right   = new float[m_vector_size + m_impulses_size - 1];
+            
+            m_result_matrix_left    = m_result_matrix;
+            m_result_matrix_right   = m_result_matrix + m_vector_size  * m_impulses_size;
+            m_matrix_allocated = 1;
+        }
+    }
+    
+    void DecoderBinaural::process(const float* const* inputs, float** outputs)
+	{
+		const float* input;
+        for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+        {
+            input = inputs[i];
+            for(unsigned int j = 0; j < m_vector_size; j++)
+            {
+                m_input_matrix[i*m_vector_size+j] = input[j];
+            }
+        }
+        cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (m_impulses_size * 2), m_vector_size, m_number_of_harmonics, 1.,
+                    m_impulses_matrix, m_number_of_harmonics,
+                    m_input_matrix,  m_vector_size,
+                    0., m_result_matrix,  m_vector_size);
+        
+        for(unsigned int j = 0; j < m_vector_size; j++)
+        {
+            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j+m_vector_size*m_impulses_size, m_vector_size, m_linear_vector_left  + j, 1);
+            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j, m_vector_size, m_linear_vector_right + j, 1);
+            
+            outputs[0][j] = m_linear_vector_left[j];
+            outputs[1][j] = m_linear_vector_right[j];
+        }
+        cblas_scopy(m_impulses_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
+        cblas_scopy(m_impulses_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
+        
+        memset(m_linear_vector_left + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
+        memset(m_linear_vector_right + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
+	}
+	
+	void DecoderBinaural::process(const double** inputs, double** outputs)
+	{
+        const double* input;
+        for(unsigned int i = 0; i < m_number_of_harmonics; i++)
+        {
+            input = inputs[i];
+            for(unsigned int j = 0; j < m_vector_size; j++)
+            {
+                m_input_matrix[i*m_vector_size+j] = input[j];
+            }
+        }
+        cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, (m_impulses_size * 2), m_vector_size, m_number_of_harmonics, 1.,
+                    m_impulses_matrix, m_number_of_harmonics,
+                    m_input_matrix,  m_vector_size,
+                    0., m_result_matrix,  m_vector_size);
+        
+        for(unsigned int j = 0; j < m_vector_size; j++)
+        {
+            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j+m_vector_size*m_impulses_size, m_vector_size, m_linear_vector_left  + j, 1);
+            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j, m_vector_size, m_linear_vector_right + j, 1);
+            
+            outputs[0][j] = m_linear_vector_left[j];
+            outputs[1][j] = m_linear_vector_right[j];
+        }
+        cblas_scopy(m_impulses_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
+        cblas_scopy(m_impulses_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
+        
+        memset(m_linear_vector_left + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
+        memset(m_linear_vector_right + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
+	}
+	
+	DecoderBinaural::~DecoderBinaural()
+	{
+        delete m_decoder;
+        delete [] m_impulses_vector;
+        delete [] m_harmonics_vector;
+        delete [] m_channels_vector;
+        if(m_impulses_matrix)
+            delete [] m_impulses_matrix;
+        if(m_input_matrix)
+            delete [] m_input_matrix;
+        m_input_matrix = NULL;
+        if(m_result_matrix)
+            delete [] m_result_matrix;
+        m_result_matrix = NULL;
+        if(m_linear_vector_left)
+            delete [] m_linear_vector_left;
+        m_linear_vector_left = NULL;
+        if(m_linear_vector_right)
+            delete [] m_linear_vector_right;
+        m_linear_vector_right = NULL;
+	}
 }
 

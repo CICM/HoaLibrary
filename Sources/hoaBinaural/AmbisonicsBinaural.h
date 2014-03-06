@@ -129,7 +129,6 @@ public:
     
 	inline void process(float** aInputs, float** aOutputs)
 	{
-
         if(m_hrtf_loaded == 1)
         {
             float* input;
