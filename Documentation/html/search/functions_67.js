@@ -6,7 +6,7 @@ var searchData=
   ['getchannelazimuth',['getChannelAzimuth',['../class_hoa2_d_1_1_planewaves.html#a52c4f8b05137ab56e82b0e076d7f5d3a',1,'Hoa2D::Planewaves']]],
   ['getchannelname',['getChannelName',['../class_hoa2_d_1_1_planewaves.html#a66b40a511ac3dd9f3ab1102e98370dbd',1,'Hoa2D::Planewaves']]],
   ['getchannelordinate',['getChannelOrdinate',['../class_hoa2_d_1_1_planewaves.html#ade9d19725af0826e02b43bcf10a4bc73',1,'Hoa2D::Planewaves']]],
-  ['getchannelsoffset',['getChannelsOffset',['../class_hoa2_d_1_1_decoder.html#a9e25d2f72129bb9cae477f74d761a438',1,'Hoa2D::Decoder']]],
+  ['getchannelsoffset',['getChannelsOffset',['../class_hoa2_d_1_1_decoder_regular.html#aa4dd9f25eac9fb517279cc310d9fe36f',1,'Hoa2D::DecoderRegular']]],
   ['getelevation',['getElevation',['../class_hoa3_d_1_1_scope.html#ab878f89077b6d2829bf00436aadd309b',1,'Hoa3D::Scope']]],
   ['getharmonicargument',['getHarmonicArgument',['../class_hoa2_d_1_1_ambisonic.html#a68c389087fb999101a499f6849b635f9',1,'Hoa2D::Ambisonic::getHarmonicArgument()'],['../class_hoa3_d_1_1_ambisonic.html#a41f5fab14484b42a97175c2ea279c0ab',1,'Hoa3D::Ambisonic::getHarmonicArgument()']]],
   ['getharmonicband',['getHarmonicBand',['../class_hoa2_d_1_1_ambisonic.html#a9485abf2b4f1b1aec8d0da9b12cf42ed',1,'Hoa2D::Ambisonic::getHarmonicBand()'],['../class_hoa3_d_1_1_ambisonic.html#aa7db0765bbc3957771de1771f8617631',1,'Hoa3D::Ambisonic::getHarmonicBand()']]],

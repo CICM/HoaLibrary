@@ -178,6 +178,10 @@ namespace Hoa2D
          */
 		~DecoderBinaural();
         
+        void setSampleRate(unsigned int sampleRate);
+        void setVectorSize(unsigned int vectorSize);
+        
+        
         //! This method performs the binaural decoding with single precision.
 		/**	You should use this method for in-place or not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the headphones samples and the minimum size must be 2.
          

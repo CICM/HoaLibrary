@@ -13,6 +13,12 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -89,6 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_0x70.html#index_p"><span>p</span></a></li>
       <li><a href="functions_0x72.html#index_r"><span>r</span></a></li>
       <li class="current"><a href="functions_0x73.html#index_s"><span>s</span></a></li>
+      <li><a href="functions_0x76.html#index_v"><span>v</span></a></li>
       <li><a href="functions_0x77.html#index_w"><span>w</span></a></li>
       <li><a href="functions_0x7e.html#index_0x7e"><span>~</span></a></li>
     </ul>
@@ -112,48 +119,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
-<li>setAngle()
-: <a class="el" href="class_ambisonic_encoder.html#a1939dfd1305bd3b9387c7bf91b230e35">AmbisonicEncoder</a>
+<li>Scope()
+: <a class="el" href="class_hoa2_d_1_1_scope.html#aaa6b3e208eb06bef06b59264c84a5364">Hoa2D::Scope</a>
+, <a class="el" href="class_hoa3_d_1_1_scope.html#ab4f5ff6674c4df165a1455e4648e1c35">Hoa3D::Scope</a>
 </li>
 <li>setAzimuth()
-: <a class="el" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Hoa2D::Encoder</a>
-, <a class="el" href="class_hoa3_d_1_1_map.html#a751e3f421578c43bf42eca7888a34839">Hoa3D::Map</a>
-, <a class="el" href="class_hoa3_d_1_1_speaker.html#a7d4ee6aba3f11c2cfc72dfd735d1369c">Hoa3D::Speaker</a>
+: <a class="el" href="class_hoa2_d_1_1_map.html#a0b98a9ad8d1fda90fe5559fd7736050b">Hoa2D::Map</a>
+, <a class="el" href="class_hoa2_d_1_1_recomposer.html#a2c1827fa0b25648b787077469e52a820">Hoa2D::Recomposer</a>
+, <a class="el" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Hoa2D::Encoder</a>
 , <a class="el" href="class_hoa3_d_1_1_encoder.html#a7dbf4d5791003ed486fc0b5462409e0a">Hoa3D::Encoder</a>
+, <a class="el" href="class_hoa3_d_1_1_map.html#a251f215d1e137e652d12fc8e811bd8c8">Hoa3D::Map</a>
+</li>
+<li>setChannelPosition()
+: <a class="el" href="class_hoa2_d_1_1_decoder_irregular.html#ab74543528e37f6455de5452f00ac7c1c">Hoa2D::DecoderIrregular</a>
+, <a class="el" href="class_hoa2_d_1_1_meter.html#a6d6b2cbadbd05f9e731e22cd747f3008">Hoa2D::Meter</a>
+, <a class="el" href="class_hoa2_d_1_1_planewaves.html#a6f6dfb5355b12915c658ac8967303ef4">Hoa2D::Planewaves</a>
+, <a class="el" href="class_hoa2_d_1_1_vector.html#a4bc03e92cd2bd7a2ffb4f8c3358631f6">Hoa2D::Vector</a>
+</li>
+<li>setChannelsOffset()
+: <a class="el" href="class_hoa2_d_1_1_decoder_regular.html#a8ea45b4fafc13f941b597a7e829fc0d8">Hoa2D::DecoderRegular</a>
+</li>
+<li>setChannelsPosition()
+: <a class="el" href="class_hoa2_d_1_1_decoder_irregular.html#a6c4b42a6c7f9030b4db0d53186a9d6e0">Hoa2D::DecoderIrregular</a>
 </li>
 <li>setDistance()
-: <a class="el" href="class_hoa3_d_1_1_speaker.html#a4698a8b00f20a1dad05e18b8ec6d402c">Hoa3D::Speaker</a>
-, <a class="el" href="class_hoa3_d_1_1_map.html#a23a9cb2b7256d46e6cdc8c40d4bab177">Hoa3D::Map</a>
+: <a class="el" href="class_hoa3_d_1_1_map.html#a61b55ea17301701fc02dffca46957330">Hoa3D::Map</a>
 </li>
 <li>setElevation()
-: <a class="el" href="class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d">Hoa3D::Encoder</a>
-, <a class="el" href="class_hoa3_d_1_1_map.html#ac3f8b037de1d3926206b46884c6c2004">Hoa3D::Map</a>
-, <a class="el" href="class_hoa3_d_1_1_speaker.html#ab70343c3bee6345efa8f072710231dca">Hoa3D::Speaker</a>
+: <a class="el" href="class_hoa3_d_1_1_map.html#a03262a011f73ed57ba40bb6fe6d50814">Hoa3D::Map</a>
 , <a class="el" href="class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d">Hoa3D::Encoder</a>
 </li>
-<li>setLoudspeakerName()
-: <a class="el" href="class_hoa3_d_1_1_planewaves.html#a48700551e0f2a713a2503ea2c7a359b5">Hoa3D::Planewaves</a>
-</li>
 <li>setLoudspeakerPosition()
-: <a class="el" href="class_hoa3_d_1_1_planewaves.html#afb91431ec200af76ac61ef17add33ede">Hoa3D::Planewaves</a>
-, <a class="el" href="class_hoa3_d_1_1_decoder.html#a18cc28c0db47350ece9ad51473ef62a0">Hoa3D::Decoder</a>
-, <a class="el" href="class_hoa3_d_1_1_decoder_b.html#a3c04d817809357966c8457798e9c7faa">Hoa3D::DecoderB</a>
-, <a class="el" href="class_hoa2_d_1_1_decoder.html#a8a4711cff0311450892d268eb60c3a9e">Hoa2D::Decoder</a>
-, <a class="el" href="class_hoa3_d_1_1_decoder.html#ade9c4f54765c1de0f27fadf0b25e88f9">Hoa3D::Decoder</a>
+: <a class="el" href="class_hoa3_d_1_1_decoder.html#ade9c4f54765c1de0f27fadf0b25e88f9">Hoa3D::Decoder</a>
+, <a class="el" href="class_hoa3_d_1_1_meter.html#a150dba25119e1a6f3b59845bbb03daa7">Hoa3D::Meter</a>
+, <a class="el" href="class_hoa3_d_1_1_planewaves.html#afb91431ec200af76ac61ef17add33ede">Hoa3D::Planewaves</a>
+, <a class="el" href="class_hoa3_d_1_1_vector.html#afab0f404886f74f5a139210d1a497936">Hoa3D::Vector</a>
 </li>
 <li>setMode()
 : <a class="el" href="class_hoa2_d_1_1_optim.html#a2ea2227817c133aeaf2732880d8214ce">Hoa2D::Optim</a>
 , <a class="el" href="class_hoa3_d_1_1_optim.html#abb49c9e6a327bc62ac6491cd3046a10a">Hoa3D::Optim</a>
 </li>
-<li>setName()
-: <a class="el" href="class_hoa3_d_1_1_speaker.html#a1ec753918cc6859f81da50ba650518eb">Hoa3D::Speaker</a>
-</li>
-<li>setNumberOfLoudspeakers()
-: <a class="el" href="class_hoa3_d_1_1_decoder.html#a4a5e94dc4bb0f1d9989659be522a0e8b">Hoa3D::Decoder</a>
-, <a class="el" href="class_hoa3_d_1_1_planewaves.html#a0e98bb0921bf5ba3130002f11548358f">Hoa3D::Planewaves</a>
+<li>setMute()
+: <a class="el" href="class_hoa2_d_1_1_map.html#ae1ff77cc8681ee9870dc2d27ebaaaecd">Hoa2D::Map</a>
 </li>
 <li>setPitch()
 : <a class="el" href="class_hoa3_d_1_1_rotate.html#aeb7e844c29c2f9bb9cc7de3ef89385f6">Hoa3D::Rotate</a>
+</li>
+<li>setRadius()
+: <a class="el" href="class_hoa2_d_1_1_map.html#a66b18d42476bb3d92c816173c9fc41a4">Hoa2D::Map</a>
 </li>
 <li>setRoll()
 : <a class="el" href="class_hoa3_d_1_1_rotate.html#a89599a9cd8c10240ce71b8fd7bdbb3b7">Hoa3D::Rotate</a>
@@ -161,15 +174,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setRotations()
 : <a class="el" href="class_hoa3_d_1_1_rotate.html#a190ffb26419c5ab6c7935d48e9a7e23b">Hoa3D::Rotate</a>
 </li>
-<li>setVectorSize()
-: <a class="el" href="class_ambisonic_encoder.html#a7219775383a3bead41ec7f1a609a76fe">AmbisonicEncoder</a>
-, <a class="el" href="class_ambisonic_wider.html#af970c4c71f96afa96649d9c1a1387043">AmbisonicWider</a>
-</li>
 <li>setWideningValue()
 : <a class="el" href="class_hoa3_d_1_1_wider.html#a5981d4dafbb0d2ce4ea20ec7cd1fb114">Hoa3D::Wider</a>
-</li>
-<li>setWidenValue()
-: <a class="el" href="class_ambisonic_wider.html#a26597b62bcb8d892591ad5362702edca">AmbisonicWider</a>
+, <a class="el" href="class_hoa2_d_1_1_wider.html#af43a64e22d453bd5bf6f2d46013fe758">Hoa2D::Wider</a>
+, <a class="el" href="class_hoa2_d_1_1_recomposer.html#aea7c383166c6c40c5605175b18a19ad1">Hoa2D::Recomposer</a>
 </li>
 <li>setYaw()
 : <a class="el" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">Hoa2D::Rotate</a>
@@ -184,14 +192,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>SourcesTrajectory()
 : <a class="el" href="class_sources_trajectory.html#a6e0838cc0ab29b5462cc624958498c4d">SourcesTrajectory</a>
 </li>
-<li>Speaker()
-: <a class="el" href="class_hoa3_d_1_1_speaker.html#a28d1a9ddf4cc7885c5dcf844187de075">Hoa3D::Speaker</a>
-</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 11 2014 22:08:30 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 6 2014 09:48:02 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

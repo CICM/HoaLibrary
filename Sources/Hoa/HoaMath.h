@@ -7,6 +7,10 @@
 #ifndef __DEF_HOA_MATHS__
 #define __DEF_HOA_MATHS__
 
+//! The high order ambisonic namespace.
+/**
+ This namespace have all the standard methods and functions necessary for ambisonic processing.
+ */
 namespace Hoa
 {
 	//! The maximum function

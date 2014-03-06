@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">Rotate::setYaw</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> value)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        m_yaw = <a class="code" href="namespace_hoa2_d.html#ae6e7b10b18969cb19586af7e6e63736c">wrap_twopi</a>(value);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        m_yaw = <a class="code" href="namespace_hoa.html#a8e369981026a7cedf7b832d639c15b90">wrap_twopi</a>(value);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        m_cosx    = cos(m_yaw);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_sinx    = sin(m_yaw);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
@@ -160,16 +160,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="ttc" id="namespace_hoa_html_a8e369981026a7cedf7b832d639c15b90"><div class="ttname"><a href="namespace_hoa.html#a8e369981026a7cedf7b832d639c15b90">Hoa::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00322">HoaMath.h:322</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00022">Ambisonic.h:22</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_rotate_html_a2aa145bb455c0538ce2ca2bd058d8800"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a2aa145bb455c0538ce2ca2bd058d8800">Hoa2D::Rotate::Rotate</a></div><div class="ttdeci">Rotate(unsigned int order)</div><div class="ttdoc">The rotate constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00011">Rotate.cpp:11</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_rotate_html_abc51eceaf32e9844d829a816094f6ac5"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#abc51eceaf32e9844d829a816094f6ac5">Hoa2D::Rotate::setYaw</a></div><div class="ttdeci">void setYaw(const double value)</div><div class="ttdoc">This method sets the angle of the rotation around the z axis, the yaw value,. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00016">Rotate.cpp:16</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_rotate_html_a7e70e8d9099c1b8a2a42313e464130b2"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2">Hoa2D::Rotate::~Rotate</a></div><div class="ttdeci">~Rotate()</div><div class="ttdoc">The Rotate destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00059">Rotate.cpp:59</a></div></div>
-<div class="ttc" id="namespace_hoa2_d_html_ae6e7b10b18969cb19586af7e6e63736c"><div class="ttname"><a href="namespace_hoa2_d.html#ae6e7b10b18969cb19586af7e6e63736c">Hoa2D::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_tools_8h_source.html#l00258">Tools.h:258</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_rotate_html_a88bfa68435d940b0c4c1ae0c97baeffd"><div class="ttname"><a href="class_hoa2_d_1_1_rotate.html#a88bfa68435d940b0c4c1ae0c97baeffd">Hoa2D::Rotate::process</a></div><div class="ttdeci">void process(const float *inputs, float *outputs)</div><div class="ttdoc">This method performs the rotation with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_rotate_8cpp_source.html#l00023">Rotate.cpp:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 5 2014 12:43:42 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 6 2014 09:48:01 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

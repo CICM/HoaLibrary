@@ -1,7 +1,10 @@
 var searchData=
 [
   ['_7eambisonic',['~Ambisonic',['../class_hoa2_d_1_1_ambisonic.html#a082fc2e3f9910703ddb49b9a478329bf',1,'Hoa2D::Ambisonic::~Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#a082fc2e3f9910703ddb49b9a478329bf',1,'Hoa3D::Ambisonic::~Ambisonic()']]],
-  ['_7edecoder',['~Decoder',['../class_hoa2_d_1_1_decoder.html#a2ad3a9bafe6f452bcb378eabd53e0876',1,'Hoa2D::Decoder::~Decoder()'],['../class_hoa3_d_1_1_decoder.html#acc197bebb310a82756ee2061fe371e2d',1,'Hoa3D::Decoder::~Decoder()']]],
+  ['_7edecoder',['~Decoder',['../class_hoa3_d_1_1_decoder.html#acc197bebb310a82756ee2061fe371e2d',1,'Hoa3D::Decoder']]],
+  ['_7edecoderbinaural',['~DecoderBinaural',['../class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4',1,'Hoa2D::DecoderBinaural']]],
+  ['_7edecoderirregular',['~DecoderIrregular',['../class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f',1,'Hoa2D::DecoderIrregular']]],
+  ['_7edecoderregular',['~DecoderRegular',['../class_hoa2_d_1_1_decoder_regular.html#a04fe68432d2de773e8773cde9f0a2cad',1,'Hoa2D::DecoderRegular']]],
   ['_7eencoder',['~Encoder',['../class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8',1,'Hoa2D::Encoder::~Encoder()'],['../class_hoa3_d_1_1_encoder.html#a9842ee9f5abcba58a05a98dbfdff1b15',1,'Hoa3D::Encoder::~Encoder()']]],
   ['_7emap',['~Map',['../class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3',1,'Hoa2D::Map::~Map()'],['../class_hoa3_d_1_1_map.html#a89f5772a7f26cda206637dd1fca1c16e',1,'Hoa3D::Map::~Map()']]],
   ['_7emeter',['~Meter',['../class_hoa2_d_1_1_meter.html#a48276da266f600f4d24db748ff4ca046',1,'Hoa2D::Meter::~Meter()'],['../class_hoa3_d_1_1_meter.html#a2f4d18e0007e96c1cd60e2f17d9575cc',1,'Hoa3D::Meter::~Meter()']]],
