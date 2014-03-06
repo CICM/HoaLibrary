@@ -222,8 +222,6 @@ int C74_EXPORT main()
 
 	class_register(CLASS_BOX, c);
 	hoamap_class = c;
-	
-	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
@@ -270,14 +268,14 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
     t_atom *av = NULL;
     long ac = 0;
         
-    dictionary_copyatoms(d, gensym("trajectory_parameters"), &ac, &av);
+    dictionary_copyatoms(d, hoa_sym_trajectory_parameters, &ac, &av);
     hoamap_parameters_trajectory(x, ac, av);
     if (av && ac)
     {
         ac = 0;
         sysmem_freeptr(av);
     }
-    dictionary_copyatoms(d, gensym("slots_parameters"), &ac, &av);
+    dictionary_copyatoms(d, hoa_sym_slots_parameters, &ac, &av);
     hoamap_parameters_slots(x, ac, av);
     if (av && ac)
     {
@@ -285,14 +283,14 @@ void *hoamap_new(t_symbol *s, int argc, t_atom *argv)
         sysmem_freeptr(av);
     }
     
-    dictionary_copyatoms(d, gensym("sources_parameters"), &ac, &av);
+    dictionary_copyatoms(d, hoa_sym_sources_parameters, &ac, &av);
     hoamap_parameters_sources(x, ac, av);
     if (av && ac)
     {
         ac = 0;
         sysmem_freeptr(av);
     }
-    dictionary_copyatoms(d, gensym("groups_parameters"), &ac, &av);
+    dictionary_copyatoms(d, hoa_sym_groups_parameters, &ac, &av);
     hoamap_parameters_groups(x, ac, av);
     if (av && ac)
     {
@@ -356,7 +354,7 @@ void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
     t_fourcc filetypelist = 'pSto';
 	t_dictionary *d;
     
-	if (s==gensym(""))
+	if (s == hoa_sym_nothing)
     {
 		if (open_dialog(ps, &outvol, &outtype, &filetypelist, 1))
 			return;
@@ -393,7 +391,7 @@ void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
         t_atom *av = NULL;
         long ac = 0;
         
-        dictionary_copyatoms(d, gensym("slots_parameters"), &ac, &av);
+        dictionary_copyatoms(d, hoa_sym_slots_parameters, &ac, &av);
         hoamap_parameters_slots(x, ac, av);
         if (av && ac)
         {
@@ -401,7 +399,7 @@ void hoamap_doread(t_hoamap *x, t_symbol *s, long argc, t_atom *argv)
             sysmem_freeptr(av);
         }
         
-        dictionary_copyatoms(d, gensym("trajectory_parameters"), &ac, &av);
+        dictionary_copyatoms(d, hoa_sym_trajectory_parameters, &ac, &av);
         hoamap_parameters_trajectory(x, ac, av);
         if (av && ac)
         {
@@ -427,9 +425,9 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *sym, long argc, t_atom *argv)
     t_filehandle ref;
 	t_dictionary *d = dictionary_new();
     
-    if(atom_getsym(argv+1) == gensym("slot"))
+    if(atom_getsym(argv+1) == hoa_sym_slot)
         hoamap_slot_save(x, d);
-    else if(atom_getsym(argv+1) == gensym("trajectory"))
+    else if(atom_getsym(argv+1) == hoa_sym_trajectory)
         hoamap_trajectory_save(x, d);
     else
     {
@@ -437,7 +435,7 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *sym, long argc, t_atom *argv)
         hoamap_trajectory_save(x, d);
     }
     
-	if (atom_getsym(argv)==gensym(""))
+	if (atom_getsym(argv) == hoa_sym_nothing)
     {
 		if (saveasdialog_extended(ps,&outvol, &outtype, &filetypelist, 1))
 			return;
@@ -486,9 +484,9 @@ void hoamap_clear_all(t_hoamap *x)
 {
     x->f_source_manager->clearAll();
     
-    object_notify(x, gensym("modified"), NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);
 }
@@ -497,30 +495,30 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
     if(ac && av && atom_gettype(av)==A_LONG && atom_getlong(av)>=0 && atom_gettype(av+1) == A_SYM)
     {
-        if(atom_getsym(av+1) == gensym("polar") || atom_getsym(av+1) == gensym("pol"))
+        if(atom_getsym(av+1) == hoa_sym_polar || atom_getsym(av+1) == hoa_sym_pol)
             x->f_source_manager->sourceSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
-        else if(atom_getsym(av+1) == gensym("radius"))
+        else if(atom_getsym(av+1) == hoa_sym_radius)
             x->f_source_manager->sourceSetRadius(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("angle"))
+        else if(atom_getsym(av+1) == hoa_sym_angle)
             x->f_source_manager->sourceSetAngle(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("cartesian") || atom_getsym(av+1) == gensym("car"))
+        else if(atom_getsym(av+1) == hoa_sym_cartesian || atom_getsym(av+1) == hoa_sym_car)
             x->f_source_manager->sourceSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
-        else if(atom_getsym(av+1) == gensym("abscissa"))
+        else if(atom_getsym(av+1) == hoa_sym_abscissa)
             x->f_source_manager->sourceSetAbscissa(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("ordinate"))
+        else if(atom_getsym(av+1) == hoa_sym_ordinate)
             x->f_source_manager->sourceSetOrdinate(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("remove"))
+        else if(atom_getsym(av+1) == hoa_sym_remove)
         {
             x->f_source_manager->sourceRemove(atom_getlong(av));
             t_atom av[3];
             atom_setlong(av, atom_getlong(av));
-            atom_setsym(av+1, gensym("mute"));
+            atom_setsym(av+1, hoa_sym_mute);
             atom_setlong(av+2, 1);
             outlet_list(x->f_out_sources, 0L, 3, av);
         }
-        else if(atom_getsym(av+1) == gensym("mute"))
+        else if(atom_getsym(av+1) == hoa_sym_mute)
             x->f_source_manager->sourceSetMute(atom_getlong(av), atom_getlong(av+2));
-        else if(atom_getsym(av+1) == gensym("description"))
+        else if(atom_getsym(av+1) == hoa_sym_description)
         {
             char description[250];
             char number[250];
@@ -528,11 +526,11 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             {
                 strcpy(description, atom_getsym(av+2)->s_name);
                 strcat(description, " ");
-                if(atom_getsym(av+2) == gensym("remove"))
+                if(atom_getsym(av+2) == hoa_sym_remove)
                 {
                     x->f_source_manager->sourceSetDescription(atom_getlong(av), "");
-                    object_notify(x, gensym("modified"), NULL);
-                    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
+                    object_notify(x, hoa_sym_modified, NULL);
+                    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
                     jbox_redraw((t_jbox *)x);
                     return;
                 }
@@ -557,15 +555,15 @@ void hoamap_source(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             }
             x->f_source_manager->sourceSetDescription(atom_getlong(av), description);
         }
-        else if(atom_getsym(av+1) == gensym("color"))
+        else if(atom_getsym(av+1) == hoa_sym_color)
         {
             x->f_source_manager->sourceSetColor(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4), atom_getfloat(av+5));
         }
         
     }
-    object_notify(x, gensym("modified"), NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);
 }
@@ -574,7 +572,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
 {
     if(ac && av && atom_gettype(av) == A_LONG && atom_getlong(av) >= 0 && atom_gettype(av+1) == A_SYM)
     {
-        if(atom_getsym(av+1) == gensym("set"))
+        if(atom_getsym(av+1) == hoa_sym_set)
         {
             x->f_source_manager->groupRemove(atom_getlong(av));
             for(int i = 2; i < ac; i++)
@@ -582,36 +580,36 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
                 x->f_source_manager->groupSetSource(atom_getlong(av), atom_getlong(av+i));
             }
         }        
-        else if(atom_getsym(av+1) == gensym("polar") || atom_getsym(av+1) == gensym("pol"))
+        else if(atom_getsym(av+1) == hoa_sym_polar || atom_getsym(av+1) == hoa_sym_pol)
             x->f_source_manager->groupSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3) + CICM_PI2);
-        else if(atom_getsym(av+1) == gensym("radius"))
+        else if(atom_getsym(av+1) == hoa_sym_radius)
             x->f_source_manager->groupSetRadius(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("angle"))
+        else if(atom_getsym(av+1) == hoa_sym_angle)
             x->f_source_manager->groupSetAngle(atom_getlong(av), atom_getfloat(av+2) + CICM_PI2);
-        else if(atom_getsym(av+1) == gensym("cartesian") || atom_getsym(av+1) == gensym("car"))
+        else if(atom_getsym(av+1) == hoa_sym_cartesian || atom_getsym(av+1) == hoa_sym_car)
             x->f_source_manager->groupSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
-        else if(atom_getsym(av+1) == gensym("abscissa"))
+        else if(atom_getsym(av+1) == hoa_sym_abscissa)
             x->f_source_manager->groupSetAbscissa(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("ordinate"))
+        else if(atom_getsym(av+1) == hoa_sym_ordinate)
             x->f_source_manager->groupSetOrdinate(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("relpolar") || atom_getsym(av+1) == gensym("relativepolar"))
+        else if(atom_getsym(av+1) == hoa_sym_relpolar || atom_getsym(av+1) == hoa_sym_relativepolar)
             x->f_source_manager->groupSetRelativePolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
-        else if(atom_getsym(av+1) == gensym("relradius") || atom_getsym(av+1) == gensym("relativeradius"))
+        else if(atom_getsym(av+1) == hoa_sym_relradius || atom_getsym(av+1) == hoa_sym_relativeradius)
             x->f_source_manager->groupSetRelativeRadius(atom_getlong(av), atom_getfloat(av+2));
-        else if(atom_getsym(av+1) == gensym("relangle") || atom_getsym(av+1) == gensym("relativeangle"))
+        else if(atom_getsym(av+1) == hoa_sym_relangle || atom_getsym(av+1) == hoa_sym_relativeangle)
             x->f_source_manager->groupSetRelativeAngle(atom_getlong(av), atom_getfloat(av+2) + CICM_PI2);
-        else if(atom_getsym(av+1) == gensym("mute"))
+        else if(atom_getsym(av+1) == hoa_sym_mute)
             x->f_source_manager->groupSetMute(atom_getlong(av), atom_getlong(av+2));
-        else if(atom_getsym(av+1) == gensym("remove"))
+        else if(atom_getsym(av+1) == hoa_sym_remove)
         {
             x->f_source_manager->groupRemove(atom_getlong(av));
             t_atom av[3];
             atom_setlong(av, atom_getlong(av));
-            atom_setsym(av+1, gensym("mute"));
+            atom_setsym(av+1, hoa_sym_mute);
             atom_setlong(av+2, 1);
             outlet_list(x->f_out_groups, 0L, 3, av);
         }
-        else if(atom_getsym(av+1) == gensym("description"))
+        else if(atom_getsym(av+1) == hoa_sym_description)
         {
             char description[250];
             char number[250];
@@ -619,11 +617,11 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             {
                 strcpy(description, atom_getsym(av+2)->s_name);
                 strcat(description, " ");
-                if(atom_getsym(av+2) == gensym("remove"))
+                if(atom_getsym(av+2) == hoa_sym_remove)
                 {
                     x->f_source_manager->groupSetDescription(atom_getlong(av), "");
-                    object_notify(x, gensym("modified"), NULL);
-                    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+                    object_notify(x, hoa_sym_modified, NULL);
+                    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
                     jbox_redraw((t_jbox *)x);
                     return;
                 }
@@ -648,15 +646,15 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             }
             x->f_source_manager->groupSetDescription(atom_getlong(av), description);
         }
-        else if(atom_getsym(av+1) == gensym("color"))
+        else if(atom_getsym(av+1) == hoa_sym_color)
         {
             x->f_source_manager->groupSetColor(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3), atom_getfloat(av+4), atom_getfloat(av+5));
         }
     }
     
-    object_notify(x, gensym("modified"), NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);    
 }
@@ -668,47 +666,47 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         if(atom_gettype(av) == A_SYM)
         {
             t_symbol *sym = atom_getsym(av);
-            if(sym == gensym("store"))
+            if(sym == hoa_sym_store)
                 x->f_source_preset->storeSouceManagerAtSlot(x->f_source_manager, atom_getlong(av+1));
-            else if(sym == gensym("storeagain"))
+            else if(sym == hoa_sym_storeagain)
                 x->f_source_preset->storeSouceManagerAtLastUsedSlot(x->f_source_manager);
-            else if(sym == gensym("storeempty"))
+            else if(sym == hoa_sym_storeempty)
                 x->f_source_preset->storeSouceManagerAtFirstEmptySlot(x->f_source_manager);
-            else if(sym == gensym("storeend"))
+            else if(sym == hoa_sym_storeend)
                 x->f_source_preset->storeSouceManagerAtNewEndSlot(x->f_source_manager);
-            else if(sym == gensym("storenext"))
+            else if(sym == hoa_sym_storenext)
                 x->f_source_preset->storeSouceManagerAtNextSlot(x->f_source_manager);
-            else if(sym == gensym("insert"))
+            else if(sym == hoa_sym_insert)
                 x->f_source_preset->insertSlot(x->f_source_manager, atom_getlong(av+1));
-            else if(sym == gensym("remove"))
+            else if(sym == hoa_sym_remove)
                 x->f_source_preset->removeSlot(atom_getlong(av+1));
-            else if(sym == gensym("delete"))
+            else if(sym == hoa_sym_delete)
                 x->f_source_preset->deleteSlot(atom_getlong(av+1));
-            else if(sym == gensym("copy"))
+            else if(sym == hoa_sym_copy)
                 x->f_source_preset->copySlot(atom_getlong(av+1), atom_getlong(av+2));
-            else if(sym == gensym("renumber"))
+            else if(sym == hoa_sym_renumber)
                 x->f_source_preset->renumber();
-            else if(sym == gensym("clear"))
+            else if(sym == hoa_sym_clear)
                 x->f_source_preset->clear();
-            else if(sym == gensym("recall"))
+            else if(sym == hoa_sym_recall)
                 x->f_source_preset->recallFractionalSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2), (double)atom_getfloat(av+3));
-            else if(sym == gensym("read"))
+            else if(sym == hoa_sym_read)
             {
-                t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
+                t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : hoa_sym_nothing;
                 defer( (t_object *)x,(method)hoamap_doread, sym, 0, NULL);
                 //defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
             }
-            else if(sym == gensym("write"))
+            else if(sym == hoa_sym_write)
             {
                 t_atom parameter[2];
-                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
-                atom_setsym(parameter+1, gensym("slot"));
-                defer(x,(method)hoamap_dowrite, gensym(""), 2, parameter);
+                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : hoa_sym_nothing);
+                atom_setsym(parameter+1, hoa_sym_slot);
+                defer(x,(method)hoamap_dowrite, hoa_sym_nothing, 2, parameter);
                 //defer_low(x,(method)hoamap_dowrite, NULL, 2, parameter);
             }
-            else if(sym == gensym("storesource"))
+            else if(sym == hoa_sym_storesource)
                 x->f_source_preset->storeSourceAtSlot(x->f_source_manager, atom_getlong(av+1),atom_getlong(av+2));
-            else if(sym == gensym("storegroup"))
+            else if(sym == hoa_sym_storegroup)
                 x->f_source_preset->storeGroupAtSlot(x->f_source_manager, atom_getlong(av+1), atom_getlong(av+2));
         }
         else if(atom_gettype(av) == A_LONG)
@@ -717,9 +715,9 @@ void hoamap_slot(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             x->f_source_preset->recallFractionalSlot(x->f_source_manager, (double)atom_getfloat(av));
     }
     
-    object_notify(x, gensym("modified"), NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);
 }
@@ -731,35 +729,35 @@ void hoamap_trajectory(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         if(atom_gettype(av) == A_SYM)
         {
             t_symbol *sym = atom_getsym(av);
-            if(sym == gensym("record"))
+            if(sym == hoa_sym_record)
                 x->f_source_trajectory->setRecording(atom_getlong(av+1));
-            else if(sym == gensym("limit"))
+            else if(sym == hoa_sym_limit)
                 x->f_source_trajectory->setLimited(atom_getlong(av+1));
-            else if(sym == gensym("erase"))
+            else if(sym == hoa_sym_erase)
                 x->f_source_trajectory->erase();
-            else if(sym == gensym("erasepart"))
+            else if(sym == hoa_sym_erasepart)
                 x->f_source_trajectory->erase(atom_getfloat(av+1), atom_getfloat(av+2));
-            else if(sym == gensym("read"))
+            else if(sym == hoa_sym_read)
             {
-                t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym("");
+                t_symbol *sym = ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : hoa_sym_nothing;
                 defer( (t_object *)x,(method)hoamap_doread, sym,0, NULL);
                 //defer_low(x,(method)hoamap_doread,atom_getsym(av+1),0,0L);
             }
-            else if(sym == gensym("write"))
+            else if(sym == hoa_sym_write)
             {
                 t_atom parameter[2];
-                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : gensym(""));
-                atom_setsym(parameter+1, gensym("trajectory"));
-                defer(x,(method)hoamap_dowrite, gensym(""), 2, parameter);
+                atom_setsym(parameter, ( ac >= 1 && atom_gettype(av+1) == A_SYM) ? atom_getsym(av+1) : hoa_sym_nothing);
+                atom_setsym(parameter+1, hoa_sym_trajectory);
+                defer(x,(method)hoamap_dowrite, hoa_sym_nothing, 2, parameter);
             }
         }
         else if(atom_gettype(av) == A_FLOAT)
             x->f_source_trajectory->playTrajectory(x->f_source_manager, (double)atom_getfloat(av));
     }
     
-    object_notify(x, gensym("modified"), NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);
 }
@@ -788,7 +786,7 @@ void hoamap_source_save(t_hoamap *x, t_dictionary *d)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
-                atom_setsym(av+j, gensym("source"));
+                atom_setsym(av+j, hoa_sym_source);
                 atom_setlong(av+j+1, i);
                 atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
                 atom_setfloat(av+j+3, x->f_source_manager->sourceGetOrdinate(i));
@@ -801,7 +799,7 @@ void hoamap_source_save(t_hoamap *x, t_dictionary *d)
                 j += 10;
             }
         }
-        dictionary_appendatoms(d, gensym("sources_parameters"), ac, av);
+        dictionary_appendatoms(d, hoa_sym_sources_parameters, ac, av);
         free(av);
     }
 }
@@ -825,7 +823,7 @@ void hoamap_group_save(t_hoamap *x, t_dictionary *d)
             if(x->f_source_manager->groupGetExistence(i))
             {
                 long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
-                atom_setsym(av+j, gensym("group"));
+                atom_setsym(av+j, hoa_sym_group);
                 atom_setlong(av+j+1, i);
                 atom_setlong(av+j+2, numberOfsource);
                 for (long k = 0; k < numberOfsource; k++)
@@ -842,7 +840,7 @@ void hoamap_group_save(t_hoamap *x, t_dictionary *d)
                 j += x->f_source_manager->groupGetNumberOfSources(i) + 9;
             }
         }
-        dictionary_appendatoms(d, gensym("groups_parameters"), ac, av);
+        dictionary_appendatoms(d, hoa_sym_groups_parameters, ac, av);
         free(av);
     }
 }
@@ -880,7 +878,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
             {
                 if(x->f_source_preset->getSlotExistence(j))
                 {
-                    atom_setsym(av+i, gensym("slot"));
+                    atom_setsym(av+i, hoa_sym_slot);
                     atom_setlong(av+i+1, j);
                     x->f_source_preset->recallSlot(temporySourceManager, j);
                     i += 2;
@@ -888,7 +886,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                     {
                         if(temporySourceManager->sourceGetExistence(k))
                         {
-                            atom_setsym(av+i, gensym("source"));
+                            atom_setsym(av+i, hoa_sym_source);
                             atom_setlong(av+i+1, k);
                             atom_setfloat(av+i+2, temporySourceManager->sourceGetAbscissa(k));
                             atom_setfloat(av+i+3, temporySourceManager->sourceGetOrdinate(k));
@@ -907,7 +905,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                         if(temporySourceManager->groupGetExistence(k))
                         {
                             long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
-                            atom_setsym(av+i, gensym("group"));
+                            atom_setsym(av+i, hoa_sym_group);
                             atom_setlong(av+i+1, k);
                             atom_setlong(av+i+2, numberOfsource);
                             for (long l = 0; l < numberOfsource; l++)
@@ -927,7 +925,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                 }
             }
             
-            dictionary_appendatoms(d, gensym("slots_parameters"), ac, av);
+            dictionary_appendatoms(d, hoa_sym_slots_parameters, ac, av);
             free(av);
         }
         delete temporySourceManager;
@@ -967,7 +965,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
             {
                 if(x->f_source_trajectory->getSlotExistence(j))
                 {
-                    atom_setsym(av+i, gensym("slot"));
+                    atom_setsym(av+i, hoa_sym_slot);
                     atom_setlong(av+i+1, j);
                     x->f_source_trajectory->recallSlot(temporySourceManager, j);
                     i += 2;
@@ -975,7 +973,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                     {
                         if(temporySourceManager->sourceGetExistence(k))
                         {
-                            atom_setsym(av+i, gensym("source"));
+                            atom_setsym(av+i, hoa_sym_source);
                             atom_setlong(av+i+1, k);
                             atom_setfloat(av+i+2, temporySourceManager->sourceGetAbscissa(k));
                             atom_setfloat(av+i+3, temporySourceManager->sourceGetOrdinate(k));
@@ -994,7 +992,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                         if(temporySourceManager->groupGetExistence(k))
                         {
                             long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
-                            atom_setsym(av+i, gensym("group"));
+                            atom_setsym(av+i, hoa_sym_group);
                             atom_setlong(av+i+1, k);
                             atom_setlong(av+i+2, numberOfsource);
                             for (long l = 0; l < numberOfsource; l++)
@@ -1014,7 +1012,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                 }
             }
             
-            dictionary_appendatoms(d, gensym("trajectory_parameters"), ac, av);
+            dictionary_appendatoms(d, hoa_sym_trajectory_parameters, ac, av);
             free(av);
         }
         delete temporySourceManager;
@@ -1027,7 +1025,7 @@ void hoamap_parameters_sources(t_hoamap *x, short ac, t_atom *av)
     {
         for(long i = 0; i < ac; i++)
         {
-            if(atom_getsym(av+i) == gensym("source")) 
+            if(atom_getsym(av+i) == hoa_sym_source) 
             {
                 x->f_source_manager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
                 x->f_source_manager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
@@ -1045,7 +1043,7 @@ void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
     {
         for(long i = 0; i < ac; i++)
         {
-            if(atom_getsym(av+i) == gensym("group"))
+            if(atom_getsym(av+i) == hoa_sym_group)
             {
                 long numberOfsource = atom_getlong(av+i+2);
                 for (int j = 0; j < numberOfsource; j++)
@@ -1071,21 +1069,21 @@ void hoamap_parameters_slots(t_hoamap *x, short ac, t_atom *av)
         long slotIndex = -1;
         for(long i = 0; i < ac; i++)
         {
-            if(atom_getsym(av+i) == gensym("slot"))
+            if(atom_getsym(av+i) == hoa_sym_slot)
             {
                 x->f_source_preset->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
                 temporySourceManager->setExistence(0);
                 temporySourceManager->setExistence(1);
                 slotIndex = atom_getlong(av+i+1);
             }
-            else if(atom_getsym(av+i) == gensym("source"))
+            else if(atom_getsym(av+i) == hoa_sym_source)
             {
                 temporySourceManager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
                 temporySourceManager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
                 temporySourceManager->sourceSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
                 temporySourceManager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
             }
-            if(atom_getsym(av+i) == gensym("group"))
+            if(atom_getsym(av+i) == hoa_sym_group)
             {
                 long numberOfsource = atom_getlong(av+i+2);
                 for (int j = 0; j < numberOfsource; j++)
@@ -1112,21 +1110,21 @@ void hoamap_parameters_trajectory(t_hoamap *x, short ac, t_atom *av)
         long slotIndex = -1;
         for(long i = 0; i < ac; i++)
         {
-            if(atom_getsym(av+i) == gensym("slot"))
+            if(atom_getsym(av+i) == hoa_sym_slot)
             {
                 x->f_source_trajectory->storeSouceManagerAtSlot(temporySourceManager, slotIndex);
                 temporySourceManager->setExistence(0);
                 temporySourceManager->setExistence(1);
                 slotIndex = atom_getlong(av+i+1);
             }
-            else if(atom_getsym(av+i) == gensym("source"))
+            else if(atom_getsym(av+i) == hoa_sym_source)
             {
                 temporySourceManager->sourceSetCartesian(atom_getlong(av+i+1), atom_getfloat(av+i+2), atom_getfloat(av+i+3));
                 temporySourceManager->sourceSetMute(atom_getlong(av+i+1), atom_getlong(av+i+4));
                 temporySourceManager->sourceSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+5), atom_getfloat(av+i+6), atom_getfloat(av+i+7), atom_getfloat(av+i+8));
                 temporySourceManager->sourceSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+9)->s_name);
             }
-            if(atom_getsym(av+i) == gensym("group"))
+            if(atom_getsym(av+i) == hoa_sym_group)
             {
                 long numberOfsource = atom_getlong(av+i+2);
                 for (int j = 0; j < numberOfsource; j++)
@@ -1149,16 +1147,16 @@ t_max_err hoamap_zoom(t_hoamap *x, t_object *attr, long argc, t_atom *argv)
     if(argc >= 1 && argv && atom_gettype(argv) == A_FLOAT)
             x->f_zoom_factor = clip_minmax(atom_getfloat(argv), MIN_ZOOM, MAX_ZOOM);
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     return MAX_ERR_NONE;
 }
 
 t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
-    if (msg == gensym("free"))
+    if (msg == hoa_sym_free)
     {
 		if (sender == x->f_patcher)
         {
@@ -1167,40 +1165,40 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
             x->f_colorpicker = NULL;
         }
 	}
-    else if (msg == gensym("endeditbox"))
+    else if (msg == hoa_sym_endeditbox)
     {
         if(x->f_textfield)
             object_free(x->f_textfield);
         if(x->f_patcher)
             object_free(x->f_patcher);
     }
-    else if(msg == gensym("text"))
+    else if(msg == hoa_sym_text)
     {
         if (sender == x->f_textfield)
         {
             if(x->f_index_of_source_to_color > -1)
             {
                 x->f_source_manager->sourceSetDescription(x->f_index_of_source_to_color, (char *)data);
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-                object_notify(x, gensym("modified"), NULL);
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+                object_notify(x, hoa_sym_modified, NULL);
             }
             else if(x->f_index_of_group_to_color > -1)
             {
                 x->f_source_manager->groupSetDescription(x->f_index_of_group_to_color, (char *)data);
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
-                object_notify(x, gensym("modified"), NULL);
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+                object_notify(x, hoa_sym_modified, NULL);
             }
         }
         jbox_redraw((t_jbox *)x);
     }
-	if (msg == gensym("attr_modified"))
+	if (msg == hoa_sym_attr_modified)
     {
         if (sender == x->f_colorpicker)
         {
             t_atom *av = NULL;
             long    ac = 0;
 
-            name = (t_symbol *)object_method(data, gensym("getname"));
+            name = (t_symbol *)object_method(data, hoa_sym_getname);
             if(name == gensym("currentcolor"))
             {
                 object_attr_getvalueof(sender, name, &ac, &av);
@@ -1209,14 +1207,14 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                     if(x->f_index_of_source_to_color > -1)
                     {
                         x->f_source_manager->sourceSetColor(x->f_index_of_source_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
-                        jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-                        object_notify(x, gensym("modified"), NULL);
+                        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+                        object_notify(x, hoa_sym_modified, NULL);
                     }
                     else if(x->f_index_of_group_to_color > -1)
                     {
                         x->f_source_manager->groupSetColor(x->f_index_of_group_to_color, atom_getfloat(av), atom_getfloat(av+1), atom_getfloat(av+2), atom_getfloat(av+3));
-                        jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
-                        object_notify(x, gensym("modified"), NULL);
+                        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+                        object_notify(x, hoa_sym_modified, NULL);
                     }
                     else if(x->f_index_of_source_to_color == -2)
                     {
@@ -1224,8 +1222,8 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                         x->f_colorBackground.green = atom_getfloat(av+1);
                         x->f_colorBackground.blue = atom_getfloat(av+2);
                         x->f_colorBackground.alpha = atom_getfloat(av+3);
-                        jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-                        object_notify(x, gensym("modified"), NULL);
+                        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
+                        object_notify(x, hoa_sym_modified, NULL);
                     }
                     
                 }
@@ -1233,21 +1231,21 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
         }
         else
         {
-            name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
-            if(name == gensym("bgcolor") || name == gensym("bgcolor2") )
+            name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
+            if(name == hoa_sym_bgcolor || name == gensym("bgcolor2") )
             {
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
             }
             else if(name == gensym("fontname") || name == gensym("fontface") || name == gensym("fontsize"))
             {
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             }
             else if(name == gensym("zoom"))
             {
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-                jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+                jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             }
         }
         jbox_redraw((t_jbox *)x);
@@ -1264,7 +1262,7 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
 void hoamap_bang(t_hoamap *x)
 {
     t_atom av[4];
-    atom_setsym(av+1, gensym("mute"));
+    atom_setsym(av+1, hoa_sym_mute);
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
@@ -1285,7 +1283,7 @@ void hoamap_bang(t_hoamap *x)
     }
     if(x->f_output_mode == 0)
     {
-        atom_setsym(av+1, gensym("polar"));
+        atom_setsym(av+1, hoa_sym_polar);
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
@@ -1310,7 +1308,7 @@ void hoamap_bang(t_hoamap *x)
     }
     else
     {
-        atom_setsym(av+1, gensym("cartesian"));
+        atom_setsym(av+1, hoa_sym_cartesian);
         for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
         {
             if(x->f_source_manager->sourceGetExistence(i))
@@ -1351,14 +1349,14 @@ void hoamap_infos(t_hoamap *x)
             numberOfSource++;
         }
     }
-    atom_setsym(avNumber, gensym("source"));
-    atom_setsym(avNumber+1, gensym("number"));
+    atom_setsym(avNumber, hoa_sym_source);
+    atom_setsym(avNumber+1, hoa_sym_number);
     atom_setlong(avNumber+2, numberOfSource);
     outlet_list(x->f_out_infos, 0L, 3, avNumber);
     
     avIndex = new t_atom[numberOfSource+2];
-    atom_setsym(avIndex, gensym("source"));
-    atom_setsym(avIndex+1, gensym("index"));
+    atom_setsym(avIndex, hoa_sym_source);
+    atom_setsym(avIndex+1, hoa_sym_index);
     for(int i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
@@ -1370,8 +1368,8 @@ void hoamap_infos(t_hoamap *x)
     outlet_list(x->f_out_infos, 0L, numberOfSource+2, avIndex);
     free(avIndex);
     
-    atom_setsym(avMute, gensym("source"));
-    atom_setsym(avMute+1, gensym("mute"));
+    atom_setsym(avMute, hoa_sym_source);
+    atom_setsym(avMute+1, hoa_sym_mute);
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfSource(); i++)
     {
         if(x->f_source_manager->sourceGetExistence(i))
@@ -1391,14 +1389,14 @@ void hoamap_infos(t_hoamap *x)
             numberOfGroups++;
         }
     }
-    atom_setsym(avNumber, gensym("group"));
-    atom_setsym(avNumber+1, gensym("number"));
+    atom_setsym(avNumber, hoa_sym_group);
+    atom_setsym(avNumber+1, hoa_sym_number);
     atom_setlong(avNumber+2, numberOfGroups);
     outlet_list(x->f_out_infos, 0L, 3, avNumber);
     
     avIndex = new t_atom[numberOfGroups+2];
-    atom_setsym(avIndex, gensym("group"));
-    atom_setsym(avIndex+1, gensym("index"));
+    atom_setsym(avIndex, hoa_sym_group);
+    atom_setsym(avIndex+1, hoa_sym_index);
     for(int i = 0, j = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
@@ -1406,8 +1404,8 @@ void hoamap_infos(t_hoamap *x)
             atom_setlong(avIndex+j+2, i);
             j++;
             avSource = new t_atom[x->f_source_manager->groupGetNumberOfSources(i)+3];
-            atom_setsym(avSource, gensym("group"));
-            atom_setsym(avSource+1, gensym("source"));
+            atom_setsym(avSource, hoa_sym_group);
+            atom_setsym(avSource+1, hoa_sym_source);
             atom_setlong(avSource+2, i);
             for(int k = 0; k < x->f_source_manager->groupGetNumberOfSources(i); k++)
             {
@@ -1420,8 +1418,8 @@ void hoamap_infos(t_hoamap *x)
     outlet_list(x->f_out_infos, 0L, numberOfGroups+2, avIndex);
     free(avIndex);
     
-    atom_setsym(avMute, gensym("group"));
-    atom_setsym(avMute+1, gensym("mute"));
+    atom_setsym(avMute, hoa_sym_group);
+    atom_setsym(avMute+1, hoa_sym_mute);
     for(int i = 0; i <= x->f_source_manager->getMaximumIndexOfGroup(); i++)
     {
         if(x->f_source_manager->groupGetExistence(i))
@@ -1441,14 +1439,14 @@ void hoamap_infos(t_hoamap *x)
             numberOfSlots++;
         }
     }
-    atom_setsym(avNumber, gensym("slot"));
-    atom_setsym(avNumber+1, gensym("number"));
+    atom_setsym(avNumber, hoa_sym_slot);
+    atom_setsym(avNumber+1, hoa_sym_number);
     atom_setlong(avNumber+2, numberOfSlots);
     outlet_list(x->f_out_infos, 0L, 3, avNumber);
 
     avIndex = new t_atom[numberOfSlots+2];
-    atom_setsym(avIndex, gensym("slot"));
-    atom_setsym(avIndex+1, gensym("index"));
+    atom_setsym(avIndex, hoa_sym_slot);
+    atom_setsym(avIndex+1, hoa_sym_index);
     for(int i = 0, j = 0; i <= x->f_source_preset->getMaximumIndexOfSlot(); i++)
     {
         if(x->f_source_preset->getSlotExistence(i))
@@ -1501,7 +1499,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
     white.green = clip_max(white.green += contrastWhite, 1.);
     white.blue = clip_max(white.blue += contrastWhite, 1.);
     
-	g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), w, h);
+	g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, w, h);
 	
 	if (g)
     {
@@ -1588,9 +1586,9 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
         jgraphics_rectangle_rounded(g, 0, 0, w, h, CORNERSIZE, CORNERSIZE);
         jgraphics_fill(g);
         
-		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
+		jbox_end_layer((t_object*)x, view, hoa_sym_background_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("background_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, hoa_sym_background_layer, 0., 0.);
 }
 
 void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
@@ -1609,7 +1607,7 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
     double h = rect->height;
     t_pt ctr = {w*0.5, h*0.5};
 	
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("sources_layer"), rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_sources_layer, rect->width, rect->height);
 	
     x->jfont = jfont_create(jbox_get_fontname((t_object *)x)->s_name, (t_jgraphics_font_slant)jbox_get_font_slant((t_object *)x), (t_jgraphics_font_weight)jbox_get_font_weight((t_object *)x), jbox_get_fontsize((t_object *)x));
     x->f_size_source = jbox_get_fontsize((t_object *)x) / 2.;
@@ -1687,9 +1685,9 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
         }
 		jtextlayout_destroy(jtl);
 
-		jbox_end_layer((t_object*)x, view, gensym("sources_layer"));
+		jbox_end_layer((t_object*)x, view, hoa_sym_sources_layer);
     }
-	jbox_paint_layer((t_object *)x, view, gensym("sources_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, hoa_sym_sources_layer, 0., 0.);
 }
 
 
@@ -1709,7 +1707,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
     double h = rect->height;
     t_pt ctr = {w*0.5, h*0.5};
 	
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("groups_layer"), w, h);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_groups_layer, w, h);
 	x->jfont = jfont_create(jbox_get_fontname((t_object *)x)->s_name, (t_jgraphics_font_slant)jbox_get_font_slant((t_object *)x), (t_jgraphics_font_weight)jbox_get_font_weight((t_object *)x), jbox_get_fontsize((t_object *)x));
     x->f_size_source = jbox_get_fontsize((t_object *)x) / 2.;
     fontSize = jbox_get_fontsize((t_object *)x);
@@ -1797,9 +1795,9 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
         }
 		jtextlayout_destroy(jtl);
         
-		jbox_end_layer((t_object*)x, view, gensym("groups_layer"));
+		jbox_end_layer((t_object*)x, view, hoa_sym_groups_layer);
     }
-	jbox_paint_layer((t_object *)x, view, gensym("groups_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, hoa_sym_groups_layer, 0., 0.);
 }
 
 
@@ -1810,7 +1808,7 @@ void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
     strokecolor.alpha = 0.8;
 	t_rect sel;
     
-    g = jbox_start_layer((t_object *)x, view, gensym("rect_selection_layer"), rect->width, rect->height);
+    g = jbox_start_layer((t_object *)x, view, hoa_sym_rect_selection_layer, rect->width, rect->height);
     
 	if (g)
     {
@@ -1830,9 +1828,9 @@ void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 			jgraphics_rectangle(g, sel.x, sel.y, sel.width, sel.height);
 			jgraphics_stroke(g);
 		}
-		jbox_end_layer((t_object*)x, view, gensym("rect_selection_layer"));
+		jbox_end_layer((t_object*)x, view, hoa_sym_rect_selection_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, gensym("rect_selection_layer"), 0., 0.);
+	jbox_paint_layer((t_object *)x, view, hoa_sym_rect_selection_layer, 0., 0.);
 }
 
 /**********************************************************/
@@ -1909,7 +1907,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 {
                     t_atom av[3];
                     atom_setlong(av, x->f_index_of_group_to_remove);
-                    atom_setsym(av+1, gensym("mute"));
+                    atom_setsym(av+1, hoa_sym_mute);
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
                     x->f_source_manager->groupRemove(x->f_index_of_group_to_remove);
@@ -1920,7 +1918,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 {
                     t_atom av[3];
                     atom_setlong(av, x->f_index_of_group_to_remove);
-                    atom_setsym(av+1, gensym("mute"));
+                    atom_setsym(av+1, hoa_sym_mute);
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_groups, 0L, 3, av);
                     x->f_source_manager->groupRemoveWithSources(x->f_index_of_group_to_remove);
@@ -1950,8 +1948,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 default:
                     break;
             }
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             jbox_redraw((t_jbox *)x);
             hoamap_bang(x);
         }
@@ -1974,7 +1972,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 {
                     t_atom av[3];
                     atom_setlong(av, x->f_index_of_source_to_remove);
-                    atom_setsym(av+1, gensym("mute"));
+                    atom_setsym(av+1, hoa_sym_mute);
                     atom_setlong(av+2, 1);
                     outlet_list(x->f_out_sources, 0L, 3, av);
                     x->f_source_manager->sourceRemove(x->f_index_of_source_to_remove);
@@ -2001,8 +1999,8 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
                 default:
                     break;
             }
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-            jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+            jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
             jbox_redraw((t_jbox *)x);
             hoamap_bang(x);
         }
@@ -2131,16 +2129,16 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
     {
 		x->f_rect_selection.width = pt.x - x->f_rect_selection.x;
 		x->f_rect_selection.height = pt.y - x->f_rect_selection.y;
-		jbox_invalidate_layer((t_object *)x, NULL, gensym("rect_selection_layer"));
+		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_rect_selection_layer);
 		jbox_redraw((t_jbox *)x);
     }
     
     x->f_cursor_position.x = cursor.x;
     x->f_cursor_position.y = cursor.y;
     
-    object_notify(x, gensym("modified"), NULL);
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    object_notify(x, hoa_sym_modified, NULL);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
     hoamap_bang(x);
 }
@@ -2187,9 +2185,9 @@ void hoamap_mouseup(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
     
     x->f_rect_selection_exist = x->f_rect_selection.width = x->f_rect_selection.height = 0;
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("rect_selection_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_rect_selection_layer);
     jbox_redraw((t_jbox *)x);
 }
 
@@ -2199,10 +2197,10 @@ void hoamap_mousewheel(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
     {
 		double newZoom = x->f_zoom_factor + y_inc / 100.;
         x->f_zoom_factor = clip_minmax(newZoom, MIN_ZOOM, MAX_ZOOM);
-        object_notify(x, gensym("modified"), NULL);
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+        object_notify(x, hoa_sym_modified, NULL);
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
         jbox_redraw((t_jbox *)x);
 	}
 }
@@ -2248,8 +2246,8 @@ void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
         jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_POINTINGHAND);
     else jmouse_setcursor(patcherview, (t_object *)x, JMOUSE_CURSOR_ARROW);
     
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-    jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+    jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
     jbox_redraw((t_jbox *)x);
 }
 
@@ -2286,8 +2284,8 @@ long hoamap_key(t_hoamap *x, t_object *patcherview, long keycode, long modifiers
             }
         }
         
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("sources_layer"));
-        jbox_invalidate_layer((t_object *)x, NULL, gensym("groups_layer"));
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_sources_layer);
+        jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_groups_layer);
         jbox_redraw((t_jbox *)x);
         
         filter = 1;
@@ -2316,14 +2314,14 @@ void hoamap_color_picker(t_hoamap *x)
     attr_args_dictionary(dico,ac,av);
     atom_setobj(&a,dico);
     sysmem_freeptr(av);
-    x->f_patcher = (t_object *)object_new_typed(CLASS_NOBOX,gensym("jpatcher"),1, &a);
+    x->f_patcher = (t_object *)object_new_typed(CLASS_NOBOX,hoa_sym_jpatcher,1, &a);
     freeobject((t_object *)dico);
     
     x->f_colorpicker = newobject_sprintf(x->f_patcher, "@maxclass colorpicker @patching_rect 0 0 128 32");
     object_attach_byptr_register(x, x->f_patcher, CLASS_NOBOX);
     object_attach_byptr_register(x, x->f_colorpicker, CLASS_BOX);
     
-    object_method(x->f_colorpicker, gensym("bang"));
+    object_method(x->f_colorpicker, hoa_sym_bang);
 }
 
 void hoamap_text_field(t_hoamap *x)
@@ -2350,7 +2348,7 @@ void hoamap_text_field(t_hoamap *x)
     attr_args_dictionary(dico,ac,av);
     atom_setobj(&a,dico);
     sysmem_freeptr(av);
-    x->f_patcher = (t_object *)object_new_typed(CLASS_NOBOX,gensym("jpatcher"),1, &a);
+    x->f_patcher = (t_object *)object_new_typed(CLASS_NOBOX,hoa_sym_jpatcher,1, &a);
     freeobject((t_object *)dico);
     
     x->f_textfield = newobject_sprintf(x->f_patcher, "@maxclass hoa.textfield @patching_rect 0 0 256 32");
@@ -2358,8 +2356,8 @@ void hoamap_text_field(t_hoamap *x)
     object_attach_byptr_register(x, x->f_patcher, CLASS_NOBOX);
     object_attach_byptr_register(x, x->f_textfield, CLASS_NOBOX);
     
-    object_method(x->f_patcher,gensym("noedit"), 1);
-    object_method(x->f_patcher,gensym("vis"));
+    object_method(x->f_patcher,hoa_sym_noedit, 1);
+    object_method(x->f_patcher,hoa_sym_vis);
 }
 
 /**************************************************************************************************************************/
@@ -2452,7 +2450,7 @@ void textfield_select(t_textfield *x)
 void textfield_doselect(t_textfield *x)
 {
 	t_object *p = NULL;
-	object_obex_lookup(x,gensym("#P"), &p);
+	object_obex_lookup(x,hoa_sym_P, &p);
 	if (p) {
 		t_atom rv;
 		long ac = 1;
@@ -2468,12 +2466,12 @@ long textfield_key(t_textfield *x, t_object *patcherview, long keycode, long mod
 	char buff[256];
 	buff[0] = textcharacter;
 	buff[1] = 0;
-	object_method(patcherview, gensym("insertboxtext"), x, buff);
+	object_method(patcherview, hoa_sym_insertboxtext, x, buff);
     long size	= 0;
 	char *text	= NULL;
 	t_object *textfield = jbox_get_textfield((t_object *)x);
-	object_method(textfield, gensym("gettextptr"), &text, &size);
-    object_notify(x, gensym("text"), text);
+	object_method(textfield, hoa_sym_gettextptr, &text, &size);
+    object_notify(x, hoa_sym_text, text);
 	jbox_redraw((t_jbox *)x);
 	return 1;
 }
@@ -2485,15 +2483,15 @@ long textfield_keyfilter(t_textfield *x, t_object *patcherview, long *keycode, l
 	long k = *keycode;
 	
 	if (k == JKEY_TAB || k == JKEY_ENTER || k == JKEY_RETURN || k == JKEY_ESC) {
-		object_method_typed(patcherview, gensym("endeditbox"), 0, NULL, &arv);
+		object_method_typed(patcherview, hoa_sym_endeditbox, 0, NULL, &arv);
 		rv = 0;
 	}
     long size	= 0;
     char *text	= NULL;
     t_object *textfield = jbox_get_textfield((t_object *)x);
-    object_method(textfield, gensym("gettextptr"), &text, &size);
-    object_notify(x, gensym("text"), text);
-    if (!rv) object_notify(x, gensym("endeditbox"), NULL);
+    object_method(textfield, hoa_sym_gettextptr, &text, &size);
+    object_notify(x, hoa_sym_text, text);
+    if (!rv) object_notify(x, hoa_sym_endeditbox, NULL);
 	return rv;
 }
 
@@ -2502,8 +2500,8 @@ void textfield_enter(t_textfield *x)
 	long size	= 0;
 	char *text	= NULL;
 	t_object *textfield = jbox_get_textfield((t_object *)x);
-	object_method(textfield, gensym("gettextptr"), &text, &size);
-    object_notify(x, gensym("text"), text);
+	object_method(textfield, hoa_sym_gettextptr, &text, &size);
+    object_notify(x, hoa_sym_text, text);
 }
 
 void textfield_paint(t_textfield *x, t_object *view)
@@ -2513,12 +2511,12 @@ void textfield_paint(t_textfield *x, t_object *view)
     jbox_get_rect_for_view((t_object*) x, view, &rect);
     if(x->j_patcher == NULL)
     {
-        object_obex_lookup(x,gensym("#P"), &x->j_patcher);
+        object_obex_lookup(x,hoa_sym_P, &x->j_patcher);
         object_attach_byptr_register(x, x->j_patcher, CLASS_NOBOX);
     }
     if(x->j_patcherview == NULL)
     {
-        x->j_patcherview = object_attr_getobj(x->j_patcher, gensym("firstview"));
+        x->j_patcherview = object_attr_getobj(x->j_patcher, hoa_sym_firstview);
         object_attach_byptr_register(x, x->j_patcherview, CLASS_NOBOX);
     }
 	
@@ -2540,7 +2538,7 @@ t_max_err textfield_notify(t_textfield *x, t_symbol *s, t_symbol *msg, void *sen
 {
     if (sender == x->j_patcher)
     {
-		if (msg == gensym("free"))
+		if (msg == hoa_sym_free)
         {
 			x->j_patcher = NULL;
             x->j_patcherview = NULL;
@@ -2548,19 +2546,19 @@ t_max_err textfield_notify(t_textfield *x, t_symbol *s, t_symbol *msg, void *sen
     }
     if(sender == x->j_patcherview)
     {
-        if (msg == gensym("attr_modified"))
+        if (msg == hoa_sym_attr_modified)
         {
-            t_symbol* attrname = (t_symbol *)object_method(data, gensym("getname"));
-            if (attrname == gensym("rect"))
+            t_symbol* attrname = (t_symbol *)object_method(data, hoa_sym_getname);
+            if (attrname == hoa_sym_rect)
             {
                 t_atom *av = NULL;
                 long    ac = 0;
-                object_attr_getvalueof(x->j_patcherview, gensym("rect"), &ac, &av);
+                object_attr_getvalueof(x->j_patcherview, hoa_sym_rect, &ac, &av);
                 if (ac && av)
                 {
                     atom_setlong(av, 0);
                     atom_setlong(av+1, 0);
-                    object_method(x, gensym("rect"), ac, av);
+                    object_method(x, hoa_sym_rect, ac, av);
                     freebytes(av, sizeof(t_atom) * ac);
                 }
                 jbox_redraw((t_jbox *)x);
