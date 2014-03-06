@@ -203,9 +203,9 @@ namespace Hoa
     inline double legendre_normalization(int l, int m)
 	{
         if(m == 0)
-            return sqrt((2. * l + 1.) / (4. * CICM_PI));
+            return sqrt((2. * l + 1.) / (4. * HOA_PI));
         else
-            return sqrt((2. * l + 1.) / (4. * CICM_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
+            return sqrt((2. * l + 1.) / (4. * HOA_PI) * (long double)factorial(l - abs(m)) / (long double)factorial(l + abs(m))) * sqrt(2.);
 	}
     
     /*
@@ -216,9 +216,9 @@ namespace Hoa
 	 if(m == l || m == 0)
 	 return 1. / double_factorial(2. * m - 1);
 	 else if(l == m + 1)
-	 return 1. / associated_legendre(l, m , cos(CICM_PI / 4.));
+	 return 1. / associated_legendre(l, m , cos(HOA_PI / 4.));
 	 else if(l == m + 2)
-	 return 1. / associated_legendre(l, m , cos(CICM_PI / 2.));
+	 return 1. / associated_legendre(l, m , cos(HOA_PI / 2.));
 	 else
 	 return 1.;
 	 }*/
@@ -324,24 +324,24 @@ namespace Hoa
         double new_value = value;
         while(new_value < 0.)
         {
-            new_value += CICM_2PI;
+            new_value += HOA_2PI;
         }
         
-        while(new_value > CICM_2PI)
+        while(new_value > HOA_2PI)
         {
-            new_value -= CICM_2PI;
+            new_value -= HOA_2PI;
         }
         return new_value;
     }
     
 	inline double ordinate(const double radius, const double angle)
 	{
-		return radius * sin(angle + CICM_PI2);
+		return radius * sin(angle + HOA_PI2);
 	}
     
     inline double abscissa(const double radius, const double angle)
 	{
-		return radius * cos(angle + CICM_PI2);
+		return radius * cos(angle + HOA_PI2);
 	}
     
     inline double radius(double x, double y)
@@ -351,7 +351,7 @@ namespace Hoa
     
 	inline double azimuth(double x, double y)
 	{
-		return atan2(y, x) - CICM_PI2;
+		return atan2(y, x) - HOA_PI2;
 	}
     
     inline double distance(double x1, double y1, double x2, double y2)

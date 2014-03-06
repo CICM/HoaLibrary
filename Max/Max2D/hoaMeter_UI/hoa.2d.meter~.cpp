@@ -614,7 +614,7 @@ void draw_skeleton(t_meter *x,  t_object *view, t_rect *rect)
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_skeleton_layer, rect->width, rect->height);
 	
-	deg1 = CICM_PI2;
+	deg1 = HOA_PI2;
 	ledContainerSize = x->f_rayonExt - x->f_rayonInt - (1*4);
 	ledOffset = ledContainerSize / (x->f_numleds+1);
 	ledStroke = ledOffset * 0.75;
@@ -894,7 +894,7 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
 	t_jmatrix transform;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_leds_layer, rect->width, rect->height);
 	
-	deg1 = CICM_PI2;
+	deg1 = HOA_PI2;
 	nbLed = x->f_numleds+1;
 	ledContainerSize = x->f_rayonExt - x->f_rayonInt - (1*4);
 	ledOffset = ledContainerSize / nbLed;
@@ -959,7 +959,7 @@ void draw_leds(t_meter *x, t_object *view, t_rect *rect)
                                 else
                                 {
                                     jgraphics_arc(g, 0, 0, tmprad, tmpdeg2, tmpdeg1);
-                                    //jgraphics_arc(g, 0, tmprad, 1*2, 0, CICM_2PI);
+                                    //jgraphics_arc(g, 0, tmprad, 1*2, 0, HOA_2PI);
                                     //jgraphics_fill(g);
                                     //jgraphics_arc_negative(g, 0, 0, tmprad, tmpdeg1, tmpdeg2);
                                 }

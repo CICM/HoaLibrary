@@ -46,8 +46,8 @@ namespace Hoa3D
         {
             for(unsigned int j = 0; j < m_number_of_columns; j++)
             {
-                azi = (double)j / (double)m_number_of_columns * CICM_2PI;
-                ele = (double)i * CICM_PI / (double)(m_number_of_rows - 1) - CICM_PI2;
+                azi = (double)j / (double)m_number_of_columns * HOA_2PI;
+                ele = (double)i * HOA_PI / (double)(m_number_of_rows - 1) - HOA_PI2;
                 x = abscissa(1., azi, ele);
                 y = ordinate(1., azi, ele);
                 z = height(1., azi, ele);

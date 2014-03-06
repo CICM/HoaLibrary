@@ -49,10 +49,6 @@ t_hoa_err hoa_getinfos(t_hoa_scope* x, t_hoa_boxinfos* boxinfos);
 
 t_class *hoa_scope_class;
 
-t_symbol *s_background_layer;
-t_symbol *s_harmonics_layer;
-t_symbol *s_attr_modified;
-
 #define  contrast_white 0.06
 #define  contrast_black 0.14
 
@@ -134,10 +130,6 @@ int C74_EXPORT main()
 	
 	class_register(CLASS_BOX, c);
 	hoa_scope_class = c;
-    
-    s_background_layer  = gensym("background_layer");
-    s_harmonics_layer   = gensym("harmonics_layer");
-    s_attr_modified     = gensym("attr_modified");
 	
 	return 0;
 }
@@ -224,7 +216,7 @@ void hoa_scope_tick(t_hoa_scope *x)
 {
     x->f_scope->process(x->f_signals + x->f_index * x->f_scope->getNumberOfHarmonics());
 
-	jbox_invalidate_layer((t_object *)x, NULL, s_harmonics_layer);
+	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
 	jbox_redraw((t_jbox *)x);
 	if (sys_getdspstate())
 		clock_fdelay(x->f_clock, x->f_interval);
@@ -248,16 +240,16 @@ void hoa_scope_assist(t_hoa_scope *x, void *b, long m, long a, char *s)
 t_max_err hoa_scope_notify(t_hoa_scope *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
-	if (msg == s_attr_modified)
+	if (msg == hoa_sym_attr_modified)
 	{
-		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
-		if( name == gensym("bgcolor") || name == gensym("order"))
+		name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
+		if( name == hoa_sym_bgcolor || name == gensym("order"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, s_background_layer);
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
 		}
 		else if(name == gensym("phcolor") || name == gensym("nhcolor"))
 		{
-			jbox_invalidate_layer((t_object *)x, NULL, s_harmonics_layer);
+			jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
 		}
 		jbox_redraw((t_jbox *)x);
 	}
@@ -307,7 +299,7 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
     white.green = clip_max(white.green + contrast_white, 1.);
     white.blue = clip_max(white.blue + contrast_white, 1.);
     
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_background_layer, rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, rect->width, rect->height);
 
 	if (g) 
 	{
@@ -316,13 +308,13 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
 
         for(i = 0; i < (x->f_order * 2 + 2) ; i++)
 		{
-            rotateAngle = ((double)i / (x->f_order * 2 + 2) * CICM_2PI ) - (0.5 / (x->f_order * 2 + 2) * CICM_2PI);
+            rotateAngle = ((double)i / (x->f_order * 2 + 2) * HOA_2PI ) - (0.5 / (x->f_order * 2 + 2) * HOA_2PI);
 			jgraphics_rotate(g, rotateAngle);
 			
 			y1 = x->f_radius / 5.;
 			y2 = x->f_radius;
             
-            if(rotateAngle > CICM_PI2 && rotateAngle < CICM_PI + CICM_PI2)
+            if(rotateAngle > HOA_PI2 && rotateAngle < HOA_PI + HOA_PI2)
             {
                 jgraphics_move_to(g, -1, long(y1));
                 jgraphics_line_to(g, -1, long(y2));
@@ -352,17 +344,17 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
 		{
             jgraphics_set_line_width(g, 2);
             jgraphics_set_source_jrgba(g, &white);
-            jgraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., CICM_2PI);
+            jgraphics_arc(g, 1, 1, (double)i / 5. * x->f_radius,  0., HOA_2PI);
             jgraphics_stroke(g);
             jgraphics_set_line_width(g, 1);
             jgraphics_set_source_jrgba(g, &black);
-            jgraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., CICM_2PI);
+            jgraphics_arc(g, 0, 0, (double)i / 5.* x->f_radius,  0., HOA_2PI);
             jgraphics_stroke(g);
 		}
         
-		jbox_end_layer((t_object*)x, view, s_background_layer);
+		jbox_end_layer((t_object*)x, view, hoa_sym_background_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, s_background_layer, 0., 0.);
+	jbox_paint_layer((t_object *)x, view, hoa_sym_background_layer, 0., 0.);
 }
 
 void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
@@ -375,7 +367,7 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
     t_jrgba shadcolor = {0.4, 0.4, 0.4, 1.};
     long posPathLen = 0, negPathLen = 0, precIndex = 0;
 
-	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_harmonics_layer, rect->width, rect->height);
+	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_harmonics_layer, rect->width, rect->height);
     
     if(shadcolor.alpha > x->f_color_nh.alpha)
         shadcolor.alpha = x->f_color_ph.alpha;
@@ -387,7 +379,7 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
     
 	if (g)
 	{
-        jgraphics_rotate(g, CICM_PI);
+        jgraphics_rotate(g, HOA_PI);
 		jgraphics_set_line_join(g, JGRAPHICS_LINE_JOIN_ROUND);
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
 		jgraphics_set_line_width(g, 1);
@@ -496,9 +488,9 @@ void draw_harmonics(t_hoa_scope *x,  t_object *view, t_rect *rect)
             }
         }
 
-		jbox_end_layer((t_object*)x, view, s_harmonics_layer);
+		jbox_end_layer((t_object*)x, view, hoa_sym_harmonics_layer);
 	}
-	jbox_paint_layer((t_object *)x, view, s_harmonics_layer, 0., 0.);
+	jbox_paint_layer((t_object *)x, view, hoa_sym_harmonics_layer, 0., 0.);
 }
 
 
@@ -513,7 +505,7 @@ t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av)
         {
             int dspState = sys_getdspobjdspstate((t_object*)x);
             if(dspState)
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
+                object_method(gensym("dsp")->s_thing, hoa_sym_start);
             
             delete x->f_scope;
             delete [] x->f_signals;
@@ -522,12 +514,12 @@ t_max_err set_order(t_hoa_scope *x, t_object *attr, long ac, t_atom *av)
             x->f_signals    = new double[x->f_scope->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
             
             object_obex_lookup(x, gensym("#B"), (t_object **)&b);
-            object_method(b, gensym("dynlet_begin"));
+            object_method(b, hoa_sym_dynlet_begin);
             dsp_resize((t_pxobject*)x, x->f_scope->getNumberOfHarmonics());
-            object_method(b, gensym("dynlet_end"));
+            object_method(b, hoa_sym_dynlet_end);
             
             if(dspState)
-                object_method(gensym("dsp")->s_thing, gensym("start"));
+                object_method(gensym("dsp")->s_thing, hoa_sym_stop);
         }
 	}
     

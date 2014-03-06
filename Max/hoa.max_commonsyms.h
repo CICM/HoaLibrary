@@ -24,6 +24,10 @@ static t_symbol* hoa_sym_float 						= gensym("float");
 static t_symbol* hoa_sym_int 						= gensym("int");
 static t_symbol* hoa_sym_list 						= gensym("list");
 static t_symbol* hoa_sym_anything					= gensym("anything");
+static t_symbol* hoa_sym_dynlet_begin 				= gensym("dynlet_begin");
+static t_symbol* hoa_sym_dynlet_end 				= gensym("dynlet_end");
+static t_symbol* hoa_sym_start						= gensym("start");
+static t_symbol* hoa_sym_stop 						= gensym("stop");
 
 // Trigo
 static t_symbol* hoa_sym_cartesian 					= gensym("cartesian");
@@ -35,6 +39,7 @@ static t_symbol* hoa_sym_abscissa 					= gensym("abscissa");
 static t_symbol* hoa_sym_ordinate 					= gensym("ordinate");
 static t_symbol* hoa_sym_radius 					= gensym("radius");
 static t_symbol* hoa_sym_angle 						= gensym("angle");
+static t_symbol* hoa_sym_angles						= gensym("angles");
 
 // Paint
 static t_symbol* hoa_sym_rect 						= gensym("rect");
@@ -61,13 +66,20 @@ static t_symbol* hoa_sym_sources_parameters 		= gensym("sources_parameters");
 static t_symbol* hoa_sym_groups_parameters 			= gensym("groups_parameters");
 static t_symbol* hoa_sym_slot 						= gensym("slot");
 static t_symbol* hoa_sym_trajectory 				= gensym("trajectory");
-static t_symbol* hoa_sym_sources_layer 				= gensym("sources_layer");
-static t_symbol* hoa_sym_groups_layer 				= gensym("groups_layer");
-static t_symbol* hoa_sym_background_layer 			= gensym("background_layer");
-static t_symbol* hoa_sym_rect_selection_layer 		= gensym("rect_selection_layer");
 static t_symbol* hoa_sym_remove 					= gensym("remove");
 static t_symbol* hoa_sym_description 				= gensym("description");
 static t_symbol* hoa_sym_color 						= gensym("color");
+
+// Layers
+static t_symbol* hoa_sym_background_layer 			= gensym("background_layer");
+static t_symbol* hoa_sym_sources_layer 				= gensym("sources_layer");
+static t_symbol* hoa_sym_groups_layer 				= gensym("groups_layer");
+static t_symbol* hoa_sym_rect_selection_layer 		= gensym("rect_selection_layer");
+static t_symbol* hoa_sym_harmonics_layer	 		= gensym("harmonics_layer");
+static t_symbol* hoa_sym_space_layer		 		= gensym("space_layer");
+static t_symbol* hoa_sym_points_layer		 		= gensym("points_layer");
+
+
 
 static t_symbol* hoa_sym_relpolar 					= gensym("relpolar");
 static t_symbol* hoa_sym_relativepolar 				= gensym("relativepolar");

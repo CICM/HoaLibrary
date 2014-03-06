@@ -42,9 +42,9 @@ namespace Hoa2D
             nextPortion = (nextAngle - curAngle);
             
             if (nextPortion < 0.)
-                nextPortion += CICM_2PI;
+                nextPortion += HOA_2PI;
             if (prevPortion < 0.)
-                prevPortion += CICM_2PI;
+                prevPortion += HOA_2PI;
             
             m_loudspeakers_angles_width[i] = (prevPortion + nextPortion)*0.5;
             m_loudspeakers_angles_mapped[i] = (curAngle - prevPortion*0.5) + m_loudspeakers_angles_width[i]*0.5;

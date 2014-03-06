@@ -78,8 +78,8 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
-				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
 				8F16BFD618C6283700B408F9 /* hoa.2d.meter~.cpp */,
+				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
 				8F16BFD218C6282E00B408F9 /* hoa.max.cpp */,
 				8F16BFD318C6282E00B408F9 /* hoa.max.h */,
 				8F7ADEA518C4D60900CBCA70 /* Hoa2D */,

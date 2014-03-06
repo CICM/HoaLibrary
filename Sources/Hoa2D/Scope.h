@@ -89,7 +89,7 @@ namespace Hoa2D
         inline double getAzimuth(unsigned int pointIndex) const
         {
             assert(pointIndex < m_number_of_points);
-            return (double)pointIndex * CICM_2PI / (double)m_number_of_points;
+            return (double)pointIndex * HOA_2PI / (double)m_number_of_points;
         }
         
         //! Retrieve the abscissa of a point of the circular harmonics projection.

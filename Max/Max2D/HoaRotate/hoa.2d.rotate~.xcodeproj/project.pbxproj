@@ -13,7 +13,6 @@
 		2C8F652518C4DD1C007B67FF /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651518C4DD1C007B67FF /* Hoa2D.h */; };
 		2C8F652818C4DD1C007B67FF /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F651818C4DD1C007B67FF /* Rotate.cpp */; };
 		2C8F652918C4DD1C007B67FF /* Rotate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651918C4DD1C007B67FF /* Rotate.h */; };
-		2C8F652A18C4DD1C007B67FF /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651A18C4DD1C007B67FF /* Tools.h */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F7ADEA418C4D5EB00CBCA70 /* MaxHoa2D.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */; };
 		8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */; };
@@ -30,7 +29,6 @@
 		2C8F651518C4DD1C007B67FF /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
 		2C8F651818C4DD1C007B67FF /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
 		2C8F651918C4DD1C007B67FF /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
-		2C8F651A18C4DD1C007B67FF /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* hoa.2d.rotate~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hoa.2d.rotate~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = MaxHoa2D.xcconfig; path = ../MaxHoa2D.xcconfig; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				2C8F651518C4DD1C007B67FF /* Hoa2D.h */,
 				2C8F651818C4DD1C007B67FF /* Rotate.cpp */,
 				2C8F651918C4DD1C007B67FF /* Rotate.h */,
-				2C8F651A18C4DD1C007B67FF /* Tools.h */,
 			);
 			name = Hoa2D;
 			path = ../../../Sources/Hoa2D;
@@ -106,7 +103,6 @@
 				2C8F652018C4DD1C007B67FF /* Ambisonic.h in Headers */,
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
 				2C8F652918C4DD1C007B67FF /* Rotate.h in Headers */,
-				2C8F652A18C4DD1C007B67FF /* Tools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

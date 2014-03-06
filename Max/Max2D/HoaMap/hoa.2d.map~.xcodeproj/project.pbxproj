@@ -15,7 +15,6 @@
 		2C8F651F18C4DD1C007B67FF /* Ambisonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F650F18C4DD1C007B67FF /* Ambisonic.cpp */; };
 		2C8F652018C4DD1C007B67FF /* Ambisonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651018C4DD1C007B67FF /* Ambisonic.h */; };
 		2C8F652518C4DD1C007B67FF /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651518C4DD1C007B67FF /* Hoa2D.h */; };
-		2C8F652A18C4DD1C007B67FF /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8F651A18C4DD1C007B67FF /* Tools.h */; };
 		2CC1BBDF18C4E4F700FB815B /* hoa.2d.map~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1BBDE18C4E4F700FB815B /* hoa.2d.map~.cpp */; };
 		2CC1BBE218C4E57200FB815B /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1BBE018C4E57200FB815B /* Map.cpp */; };
 		2CC1BBE318C4E57200FB815B /* Map.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CC1BBE118C4E57200FB815B /* Map.h */; };
@@ -36,7 +35,6 @@
 		2C8F650F18C4DD1C007B67FF /* Ambisonic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ambisonic.cpp; sourceTree = "<group>"; };
 		2C8F651018C4DD1C007B67FF /* Ambisonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ambisonic.h; sourceTree = "<group>"; };
 		2C8F651518C4DD1C007B67FF /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
-		2C8F651A18C4DD1C007B67FF /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		2CC1BBDE18C4E4F700FB815B /* hoa.2d.map~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "hoa.2d.map~.cpp"; sourceTree = "<group>"; };
 		2CC1BBE018C4E57200FB815B /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		2CC1BBE118C4E57200FB815B /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 				2C8F651518C4DD1C007B67FF /* Hoa2D.h */,
 				2C8F650F18C4DD1C007B67FF /* Ambisonic.cpp */,
 				2C8F651018C4DD1C007B67FF /* Ambisonic.h */,
-				2C8F651A18C4DD1C007B67FF /* Tools.h */,
 				2CC1BBE018C4E57200FB815B /* Map.cpp */,
 				2CC1BBE118C4E57200FB815B /* Map.h */,
 				2CC1BBE418C4E5BB00FB815B /* Encoder.cpp */,
@@ -122,7 +119,6 @@
 				2C30011718C5E25100D3C686 /* Line.h in Headers */,
 				2CC1BBE918C4E5BB00FB815B /* Encoder.h in Headers */,
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
-				2C8F652A18C4DD1C007B67FF /* Tools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,66 +4,74 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+#ifndef DEF_SOURCESGROUP
+#define DEF_SOURCESGROUP
 
-#ifndef DEF_AMBISONICSOURCESGROUP
-#define DEF_AMBISONICSOURCESGROUP
+#include "Source.h"
+#include "SourcesManager.h"
 
-/*
-class SourcesGroup
+namespace Hoa2D
 {
+	class SourcesManager;
 	
-private:
-    std::vector <Source*>   m_sources;
-    std::string             m_description;
-    long                    m_exist;
-    color                   m_color;
-    coordinatesCartesian    m_centroid;
-    
-    void computeCentroid();
-    void shiftPolar(coordinatesPolar polarCoordinates);
-	void shiftPolar(double aRadius, double anAngle);
-    void shiftRadius(double aRadius);
-    void shiftAngle(double anAngle);
-    void shiftCartesian(coordinatesCartesian cartesianCoordinates);
-    void shiftCartesian(double anAbscissa, double anOrdinate);
-    void shiftAbscissa(double anAbscissa);
-    void shiftOrdinate(double anOrdinate);
-public:
-	SourcesGroup(long deadOrAlive, std::string aDescription = "");
-    
-    void setExistence(long deadOrAlive);
-    void setDescription(std::string aDescription);
-    void setColor(color aColor);
-    void addSource(Source* aSource);
-    void sourceHasMoved(Source* aSource);
-    void removeSource(Source* aSource);
-    
-    void setCoordinatesPolar(coordinatesPolar polarCoordinates);
-	void setCoordinatesPolar(double aRadius, double anAngle);
-	void setRadius(double aRadius);
-    void setAngle(double anAngle);
-    void setCoordinatesCartesian(coordinatesCartesian cartesianCoordinates);
-    void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
-	void setAbscissa(double anAbscissa);
-	void setOrdinate(double anOrdinate);
-    
-    void setRelativeCoordinatesPolar(coordinatesPolar polarCoordinates);
-	void setRelativeCoordinatesPolar(double aRadius, double anAngle);
-	void setRelativeRadius(double aRadius);
-    void setRelativeAngle(double anAngle);
-
-    long   getExistence();
-    coordinatesPolar        getCoordinatesPolar();
-	double getRadius();
-	double getAngle();
-    coordinatesCartesian    getCoordinatesCartesian();
-	double getAbscissa();
-	double getOrdinate();
-    long getNumberOfSources();
-    std::string getDescription();
-    color  getColor();
-    
-	~SourcesGroup();
-};
-*/
+	class SourcesGroup
+	{
+		
+	private:
+		std::vector <long>      m_sources;
+		std::string             m_description;
+		long                    m_exist;
+		t_hoa_rgba              m_color;
+		coordinatesCartesian    m_centroid;
+		SourcesManager*         m_source_manager;
+		double                  m_maximum_radius;
+		long                    m_mute;
+		
+		void computeCentroid();
+		void shiftPolar(double aRadius, double anAngle);
+		void shiftRadius(double aRadius);
+		void shiftAngle(double anAngle);
+		void shiftCartesian(double anAbscissa, double anOrdinate);
+		void shiftAbscissa(double anAbscissa);
+		void shiftOrdinate(double anOrdinate);
+	public:
+		SourcesGroup(SourcesManager* aSourceManager, long deadOrAlive);
+		
+		void setExistence(long deadOrAlive);
+		void setDescription(std::string aDescription);
+		void setMaximumRadius(double aLimitValue);
+		void setColor(double red, double green, double blue, double alpha);
+		void addSource(long aSourceIndex);
+		void removeSource(long aSourceIndex);
+		void sourceHasMoved();
+		void setMute(long aValue);
+		
+		void setCoordinatesPolar(double aRadius, double anAngle);
+		void setRadius(double aRadius);
+		void setAngle(double anAngle);
+		void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
+		void setAbscissa(double anAbscissa);
+		void setOrdinate(double anOrdinate);
+		
+		void setRelativeCoordinatesPolar(double aRadius, double anAngle);
+		void setRelativeRadius(double aRadius);
+		void setRelativeAngle(double anAngle);
+		
+		long   getExistence();
+		double getRadius();
+		double getAngle();
+		double getAbscissa();
+		double getOrdinate();
+		long   getNumberOfSources();
+		long   getSourceIndex(long anIndex);
+		std::string getDescription();
+		t_hoa_rgba  getColor();
+		long   getMute();
+		
+		int compare(const SourcesGroup* a, const SourcesGroup *b);
+		
+		
+		~SourcesGroup();
+	};
+}
 #endif
