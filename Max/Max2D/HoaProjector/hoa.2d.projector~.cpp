@@ -11,7 +11,7 @@ typedef struct _hoa_projector
 	t_pxobject              f_ob;
 	double*                 f_ins;
     double*                 f_outs;
-    Hoa2D::Projector*         f_projector;
+    Hoa2D::Projector*       f_projector;
     
 } t_hoa_projector;
 

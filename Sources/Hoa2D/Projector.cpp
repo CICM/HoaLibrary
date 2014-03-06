@@ -16,7 +16,7 @@ namespace Hoa2D
         m_encoder                   = new Encoder(m_order);
         for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
-            m_channels_azimuth[i] = (double)i / (double)m_number_of_channels * CICM_2PI;
+            m_channels_azimuth[i] = (double)i / (double)m_number_of_channels * HOA_2PI;
             m_encoder->setAzimuth(m_channels_azimuth[i]);
             m_encoder->process(1., m_harmonics_vector);
             

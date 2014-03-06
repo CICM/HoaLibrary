@@ -45,31 +45,31 @@ void SourcesManager::Source::setRadius(double aRadius)
 
 void SourcesManager::Source::setAngle(double anAngle)
 {
-    while (anAngle > CICM_2PI)
-        anAngle -= CICM_2PI;
+    while (anAngle > HOA_2PI)
+        anAngle -= HOA_2PI;
     while (anAngle < 0.)
-        anAngle += CICM_2PI;
+        anAngle += HOA_2PI;
     m_coordinate_polar.angle = anAngle;
 }
 
 void SourcesManager::Source::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
 {
     setRadius(radius(anAbscissa, anOrdinate));
-    setAngle(azimuth(anAbscissa, anOrdinate) - CICM_PI2);
+    setAngle(azimuth(anAbscissa, anOrdinate) - HOA_PI2);
 }
 
 void SourcesManager::Source::setAbscissa(double anAbscissa)
 {
     double ordinate = getOrdinate();
     setRadius(radius(anAbscissa, ordinate));
-    setAngle(azimuth(anAbscissa, ordinate) - CICM_PI2);
+    setAngle(azimuth(anAbscissa, ordinate) - HOA_PI2);
 }
 
 void SourcesManager::Source::setOrdinate(double anOrdinate)
 {
     double abscissa = getAbscissa();
     setRadius(radius(abscissa, anOrdinate));
-    setAngle(azimuth(abscissa, anOrdinate) - CICM_PI2);
+    setAngle(azimuth(abscissa, anOrdinate) - HOA_PI2);
 }
 
 void SourcesManager::Source::setColor(double red, double green, double blue, double alpha)
@@ -127,12 +127,12 @@ double SourcesManager::Source::getAngle()
 
 double SourcesManager::Source::getAbscissa()
 {
-    return abscissa(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
+    return abscissa(m_coordinate_polar.radius, m_coordinate_polar.angle + HOA_PI2);
 }
 
 double SourcesManager::Source::getOrdinate()
 {
-    return ordinate(m_coordinate_polar.radius, m_coordinate_polar.angle + CICM_PI2);
+    return ordinate(m_coordinate_polar.radius, m_coordinate_polar.angle + HOA_PI2);
 }
 
 t_hoa_rgba SourcesManager::Source::getColor()

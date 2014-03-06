@@ -18,6 +18,7 @@
 #include "Vector.h"
 #include "Scope.h"
 #include "Meter.h"
+#include "Recomposer.h"
 #include "SourcesManager.h"
 #include "SourcesPreset.h"
 #include "SourcesTrajectory.h"

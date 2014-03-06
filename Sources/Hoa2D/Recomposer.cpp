@@ -16,7 +16,7 @@ namespace Hoa2D
         {
             m_encoders.push_back(new Encoder(order));
             m_widers.push_back(new Wider(order));
-            m_encoders[i]->setAzimuth((double)i / (double)m_number_of_channels * CICM_2PI);
+            m_encoders[i]->setAzimuth((double)i / (double)m_number_of_channels * HOA_2PI);
             m_widers[i]->setWideningValue(1.);
         }
     }

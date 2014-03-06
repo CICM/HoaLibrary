@@ -156,19 +156,19 @@ t_max_err channels_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
         {
             int dspState = sys_getdspobjdspstate((t_object*)x);
             if(dspState)
-                object_method(gensym("dsp")->s_thing, gensym("stop"));
+                object_method(gensym("dsp")->s_thing, hoa_sym_stop);
             
             delete x->f_vector;
             x->f_vector = new Hoa2D::Vector(number_of_loudspeakers);
         
             object_obex_lookup(x, gensym("#B"), (t_object **)&b);
-            object_method(b, gensym("dynlet_begin"));
+            object_method(b, hoa_sym_dynlet_begin);
         
             dsp_resize((t_pxobject*)x, x->f_vector->getNumberOfChannels());
-            object_method(b, gensym("dynlet_end"));
+            object_method(b, hoa_sym_dynlet_end);
         
             x->f_number_of_channels = x->f_vector->getNumberOfChannels();
-            object_attr_setvalueof(x, gensym("angles"), 0, NULL);
+            object_attr_setvalueof(x, hoa_sym_angles, 0, NULL);
         }
     }
     return NULL;
@@ -181,13 +181,13 @@ t_max_err angles_set(t_hoa_vector *x, t_object *attr, long argc, t_atom *argv)
         for(int i = 0; i < argc && i < x->f_number_of_channels; i++)
         {
             if(atom_gettype(argv+i) == A_LONG || atom_gettype(argv+i) == A_FLOAT)
-                x->f_vector->setChannelPosition(i, atom_getfloat(argv+i) / 360. * CICM_2PI);
+                x->f_vector->setChannelPosition(i, atom_getfloat(argv+i) / 360. * HOA_2PI);
         }
     }
     
     for(int i = 0; i < x->f_number_of_channels; i++)
     {
-        x->f_angles_of_channels[i] = x->f_vector->getChannelAzimuth(i) / CICM_2PI * 360.;
+        x->f_angles_of_channels[i] = x->f_vector->getChannelAzimuth(i) / HOA_2PI * 360.;
     }
     
     return NULL;

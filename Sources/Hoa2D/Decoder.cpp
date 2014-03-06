@@ -91,7 +91,7 @@ namespace Hoa2D
         std::sort(m_channels_azimuth_sorted, m_channels_azimuth_sorted+m_number_of_channels);
         
         // Get the minimum distance between the channels
-        minimum_distance    = CICM_2PI + 1;
+        minimum_distance    = HOA_2PI + 1;
         current_distance    = distance_radian(m_channels_azimuth_sorted[0], m_channels_azimuth_sorted[m_number_of_channels-1]);
         if(current_distance < minimum_distance)
             minimum_distance    = current_distance;
@@ -104,7 +104,7 @@ namespace Hoa2D
         
         // Get the optimal number of virtual channels
         // Always prefer the minimum number of channels + 1
-        number_of_virutal_channels = (CICM_2PI / minimum_distance) + 1;
+        number_of_virutal_channels = (HOA_2PI / minimum_distance) + 1;
         if(number_of_virutal_channels < m_number_of_harmonics + 1)
         {
             number_of_virutal_channels = m_number_of_harmonics + 1;
@@ -114,15 +114,15 @@ namespace Hoa2D
         for(unsigned int i = 0; i < number_of_virutal_channels; i++)
         {
             // Get the pair of real channels corresponding to the virtual channel
-            angle = (double)i / (double)number_of_virutal_channels * CICM_2PI;
-            minimum_distance    = CICM_2PI + 1;
+            angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
+            minimum_distance    = HOA_2PI + 1;
             for(unsigned int j = 0; j < m_number_of_channels; j++)
             {
                 current_distance  = distance_radian(m_channels_azimuth_sorted[j], angle);
                 if(current_distance < minimum_distance)
                 {
                     minimum_distance = current_distance;
-                    if(angle < m_channels_azimuth_sorted[j] && current_distance < CICM_2PI)
+                    if(angle < m_channels_azimuth_sorted[j] && current_distance < HOA_2PI)
                     {
                         channel_index1 = j;
                         channel_index2 = j+1;
@@ -142,8 +142,8 @@ namespace Hoa2D
             // Get the factor for the pair of real channels
             distance_index1 = distance_radian(m_channels_azimuth_sorted[channel_index1], angle);
             distance_index2 = distance_radian(m_channels_azimuth_sorted[channel_index2], angle);
-            factor_index1   = cos(distance_index1 / (distance_index1 + distance_index2) * CICM_PI);
-            factor_index2   = cos(distance_index2 / (distance_index1 + distance_index2) * CICM_PI);
+            factor_index1   = cos(distance_index1 / (distance_index1 + distance_index2) * HOA_PI);
+            factor_index2   = cos(distance_index2 / (distance_index1 + distance_index2) * HOA_PI);
             
             // Get the harmonics coefficients for virtual channel
             m_encoder->setAzimuth(angle);

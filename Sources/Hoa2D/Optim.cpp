@@ -28,7 +28,7 @@ namespace Hoa2D
         {
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                m_harmonics[i] = cos(fabs(getHarmonicBand(i)) * CICM_PI / (2 * m_order + 2));
+                m_harmonics[i] = cos(fabs(getHarmonicBand(i)) * HOA_PI / (2 * m_order + 2));
             }
         }
         else

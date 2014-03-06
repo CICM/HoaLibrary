@@ -349,11 +349,11 @@ void SourcesManager::SourcesGroup::setRelativeRadius(double aRadius)
 
 void SourcesManager::SourcesGroup::setRelativeAngle(double anAngle)
 {
-    anAngle +=  CICM_PI2;
-    while (anAngle > CICM_2PI)
-        anAngle -= CICM_2PI;
+    anAngle +=  HOA_PI2;
+    while (anAngle > HOA_2PI)
+        anAngle -= HOA_2PI;
     while (anAngle < 0.)
-        anAngle += CICM_2PI;
+        anAngle += HOA_2PI;
     
     double aAngleOffset = anAngle  - getAngle();
     shiftAngle(aAngleOffset);
@@ -372,7 +372,7 @@ double SourcesManager::SourcesGroup::getRadius()
 
 double SourcesManager::SourcesGroup::getAngle()
 {
-    return azimuth(m_centroid.x, m_centroid.y) + CICM_PI2;
+    return azimuth(m_centroid.x, m_centroid.y) + HOA_PI2;
 }
 
 double SourcesManager::SourcesGroup::getAbscissa()

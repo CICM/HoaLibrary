@@ -4,8 +4,6 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-// TODO : LINE DE AZIMUT ELEVATION ET DISTANCE
-
 #include "../Hoa2D.max.h"
 #include "Line.h"
 
@@ -17,7 +15,7 @@ typedef enum {
 typedef struct _hoa_map 
 {
 	t_pxobject      f_ob;
-	Hoa2D::Map		*f_map;
+	Map		*f_map;
     double			*f_sig_ins;
     double			*f_sig_outs;
 	t_symbol		*f_mode_sym;
@@ -102,11 +100,11 @@ void *hoa_map_new(t_symbol *s, long argc, t_atom *argv)
 	if (x)
 	{		
 		if(atom_gettype(argv) == A_LONG)
-			order = Hoa2D::clip_min(atom_getlong(argv), 0);
+			order = clip_min(atom_getlong(argv), 0);
         if(argc > 1 && atom_gettype(argv+1) == A_LONG)
-            numberOfSources = Hoa2D::clip_minmax(atom_getlong(argv+1), 1, 254);
+            numberOfSources = clip_minmax(atom_getlong(argv+1), 1, 254);
 
-		x->f_map = new Hoa2D::Map(order, numberOfSources);
+		x->f_map = new Map(order, numberOfSources);
 		if(x->f_map->getNumberOfSources() == 1)
             dsp_setup((t_pxobject *)x, 3);
         else
@@ -159,15 +157,15 @@ void hoa_map_float(t_hoa_map *x, double f)
 		{
 			if(inlet == 1)
 			{
-				x->f_lines_x[0]->setValue(Hoa2D::abscissa(f, x->f_first_azimuth));
-				x->f_lines_y[0]->setValue(Hoa2D::ordinate(f, x->f_first_azimuth));
-				x->f_first_radius = Hoa2D::clip_min(f, 0.);
+				x->f_lines_x[0]->setValue(abscissa(f, x->f_first_azimuth));
+				x->f_lines_y[0]->setValue(ordinate(f, x->f_first_azimuth));
+				x->f_first_radius = clip_min(f, 0.);
 			}
 			else if(inlet == 2)
 			{
-				x->f_lines_x[0]->setValue(Hoa2D::abscissa(x->f_first_radius, f));
-				x->f_lines_y[0]->setValue(Hoa2D::ordinate(x->f_first_radius, f));
-				x->f_first_azimuth = Hoa2D::wrap_twopi(f);
+				x->f_lines_x[0]->setValue(abscissa(x->f_first_radius, f));
+				x->f_lines_y[0]->setValue(ordinate(x->f_first_radius, f));
+				x->f_first_azimuth = wrap_twopi(f);
 			}
 		}
 		else if(x->f_mode == HOA_MODE_CAR)
@@ -208,8 +206,8 @@ void hoa_map_list(t_hoa_map *x, t_symbol* s, long argc, t_atom* argv)
 		{
 			radius = atom_getfloat(argv+2);
 			azimuth = atom_getfloat(argv+3);
-			x->f_lines_x[index]->setValue(Hoa2D::abscissa(radius, azimuth));
-			x->f_lines_y[index]->setValue(Hoa2D::ordinate(radius, azimuth));
+			x->f_lines_x[index]->setValue(abscissa(radius, azimuth));
+			x->f_lines_y[index]->setValue(ordinate(radius, azimuth));
 		}
 		else if (mode == HOA_MODE_CAR)
 		{
@@ -302,8 +300,8 @@ void hoa_map_perform64_multisources(t_hoa_map *x, t_object *dsp64, double **ins,
 		{
 			abscissa = x->f_lines_x[j]->process();
 			ordinate = x->f_lines_y[j]->process();
-			x->f_map->setRadius(j, Hoa2D::radius(abscissa, ordinate));
-			x->f_map->setAzimuth(j, Hoa2D::azimuth(abscissa, ordinate));
+			x->f_map->setRadius(j, radius(abscissa, ordinate));
+			x->f_map->setAzimuth(j, azimuth(abscissa, ordinate));
 		}
         x->f_map->process(x->f_sig_ins + numins * i, x->f_sig_outs + numouts * i);
     }
@@ -320,8 +318,8 @@ void hoa_map_perform64(t_hoa_map *x, t_object *dsp64, double **ins, long numins,
     {
 		abscissa = x->f_lines_x[0]->process();
 		ordinate = x->f_lines_y[0]->process();
-		x->f_map->setRadius(0, Hoa2D::radius(abscissa, ordinate));
-		x->f_map->setAzimuth(0, Hoa2D::azimuth(abscissa, ordinate));
+		x->f_map->setRadius(0, radius(abscissa, ordinate));
+		x->f_map->setAzimuth(0, azimuth(abscissa, ordinate));
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
@@ -341,12 +339,12 @@ void hoa_map_perform64_in1(t_hoa_map *x, t_object *dsp64, double **ins, long num
 		if (x->f_mode == HOA_MODE_POL)
 		{
 			x->f_map->setRadius(0, ins[1][i]);
-			x->f_map->setAzimuth(0, Hoa2D::azimuth(abscissa, ordinate));
+			x->f_map->setAzimuth(0, azimuth(abscissa, ordinate));
 		}
 		else if (x->f_mode == HOA_MODE_CAR)
 		{
-			x->f_map->setAzimuth(0, Hoa2D::azimuth(ins[1][i], ordinate));
-			x->f_map->setRadius(0, Hoa2D::radius(ins[1][i], ordinate));
+			x->f_map->setAzimuth(0, azimuth(ins[1][i], ordinate));
+			x->f_map->setRadius(0, radius(ins[1][i], ordinate));
 		}
 		
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
@@ -368,12 +366,12 @@ void hoa_map_perform64_in2(t_hoa_map *x, t_object *dsp64, double **ins, long num
 		if (x->f_mode == HOA_MODE_POL)
 		{
 			x->f_map->setAzimuth(0, ins[2][i]);
-			x->f_map->setRadius(0, Hoa2D::radius(abscissa, ordinate));
+			x->f_map->setRadius(0, radius(abscissa, ordinate));
 		}
 		else if (x->f_mode == HOA_MODE_CAR)
 		{
-			x->f_map->setAzimuth(0, Hoa2D::azimuth(abscissa, ins[2][i]));
-			x->f_map->setRadius(0, Hoa2D::radius(abscissa, ins[2][i]));
+			x->f_map->setAzimuth(0, azimuth(abscissa, ins[2][i]));
+			x->f_map->setRadius(0, radius(abscissa, ins[2][i]));
 		}
 		
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
@@ -395,8 +393,8 @@ void hoa_map_perform64_in1_in2(t_hoa_map *x, t_object *dsp64, double **ins, long
 		}
 		else if (x->f_mode == HOA_MODE_CAR)
 		{
-			x->f_map->setAzimuth(0, Hoa2D::azimuth(ins[1][i], ins[2][i]));
-			x->f_map->setRadius(0, Hoa2D::radius(ins[1][i], ins[2][i]));
+			x->f_map->setAzimuth(0, azimuth(ins[1][i], ins[2][i]));
+			x->f_map->setRadius(0, radius(ins[1][i], ins[2][i]));
 		}
         x->f_map->process(&ins[0][i], x->f_sig_outs + numouts * i);
     }

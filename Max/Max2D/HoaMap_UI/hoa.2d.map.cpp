@@ -581,11 +581,11 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
             }
         }        
         else if(atom_getsym(av+1) == hoa_sym_polar || atom_getsym(av+1) == hoa_sym_pol)
-            x->f_source_manager->groupSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3) + CICM_PI2);
+            x->f_source_manager->groupSetPolar(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3) + HOA_PI2);
         else if(atom_getsym(av+1) == hoa_sym_radius)
             x->f_source_manager->groupSetRadius(atom_getlong(av), atom_getfloat(av+2));
         else if(atom_getsym(av+1) == hoa_sym_angle)
-            x->f_source_manager->groupSetAngle(atom_getlong(av), atom_getfloat(av+2) + CICM_PI2);
+            x->f_source_manager->groupSetAngle(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
         else if(atom_getsym(av+1) == hoa_sym_cartesian || atom_getsym(av+1) == hoa_sym_car)
             x->f_source_manager->groupSetCartesian(atom_getlong(av), atom_getfloat(av+2), atom_getfloat(av+3));
         else if(atom_getsym(av+1) == hoa_sym_abscissa)
@@ -597,7 +597,7 @@ void hoamap_group(t_hoamap *x, t_symbol *s, short ac, t_atom *av)
         else if(atom_getsym(av+1) == hoa_sym_relradius || atom_getsym(av+1) == hoa_sym_relativeradius)
             x->f_source_manager->groupSetRelativeRadius(atom_getlong(av), atom_getfloat(av+2));
         else if(atom_getsym(av+1) == hoa_sym_relangle || atom_getsym(av+1) == hoa_sym_relativeangle)
-            x->f_source_manager->groupSetRelativeAngle(atom_getlong(av), atom_getfloat(av+2) + CICM_PI2);
+            x->f_source_manager->groupSetRelativeAngle(atom_getlong(av), atom_getfloat(av+2) + HOA_PI2);
         else if(atom_getsym(av+1) == hoa_sym_mute)
             x->f_source_manager->groupSetMute(atom_getlong(av), atom_getlong(av+2));
         else if(atom_getsym(av+1) == hoa_sym_remove)
@@ -1576,7 +1576,7 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
         jgraphics_destroy(g3);
         jgraphics_set_source_surface(g2, s2, 0, 0);
         jgraphics_surface_destroy(s2);
-        jgraphics_arc(g2, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor) - (BORDERTHICK*2),  0., CICM_2PI);
+        jgraphics_arc(g2, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor) - (BORDERTHICK*2),  0., HOA_2PI);
         jgraphics_fill(g2);
         
         /* clip jgraphics_2 to rounded rect */
@@ -1676,8 +1676,8 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                     jgraphics_set_source_jrgba(g, &red); 
                     jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
                     jgraphics_stroke(g);
-                    jgraphics_move_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_PI2 / 2.));
-                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_PI2 * 5. / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_PI * 5. / 4.));
+                    jgraphics_move_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_PI2 / 2.));
+                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_PI2 * 5. / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_PI * 5. / 4.));
                     jgraphics_stroke(g);
                 }
                 
@@ -1761,7 +1761,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 for(int j = 1; j < 4; j += 2)
                 {
                     jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_2PI * j / 4. + CICM_PI2 / 2.));
+                    jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_2PI * j / 4. + HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_2PI * j / 4. + HOA_PI2 / 2.));
                 }
                 jgraphics_stroke(g);
                 if(!x->f_source_manager->groupGetMute(i))
@@ -1773,7 +1773,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     for(int j = 0; j < 2; j++)
                     {
                         jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
+                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.));
                     }
                 }
                 jgraphics_stroke(g);
@@ -1786,7 +1786,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                     for(int j = 0; j < 2; j++)
                     {
                         jgraphics_move_to(g, sourcePositionX, sourcePositionY);
-                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., CICM_2PI * j / 2. + CICM_PI2 / 2.));
+                        jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_2PI * j / 2. + HOA_PI2 / 2.));
                     }
                     jgraphics_stroke(g);
                 }
@@ -2071,7 +2071,7 @@ void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 #else
 		if(modifiers == 148 || modifiers == 404)
 #endif
-			x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y) - CICM_PI2);
+			x->f_source_manager->sourceSetAngle(x->f_index_of_selected_source, azimuth(cursor.x, cursor.y) - HOA_PI2);
 
 		 // Radius
 #ifdef _WINDOWS

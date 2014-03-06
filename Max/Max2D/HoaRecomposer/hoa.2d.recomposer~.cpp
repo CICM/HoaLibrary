@@ -106,7 +106,7 @@ void hoa_recomposer_float(t_hoa_recomposer *x, double d)
 {
     if(proxy_getinlet((t_object *)x) == x->f_recomposer->getNumberOfChannels())
     {
-        <#statements#>
+        ;
     }
 }
 

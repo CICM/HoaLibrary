@@ -33,7 +33,7 @@ public:
 	inline double	getRampInMs()		const {return ((double)m_ramp / (double)m_sampling_rate) * 1000.;}
 	inline double	getValue()			const {return m_value_new;}
 	
-	inline void setSamplingRate(long aSamplingRate) {m_sampling_rate = Hoa2D::clip_min(aSamplingRate, 1);}
+	inline void setSamplingRate(long aSamplingRate) {m_sampling_rate = clip_min(aSamplingRate, 1);}
 	inline void setVectorSize(long aVectorSize)		{m_vector_size = aVectorSize;}
 	
 	void setRampInSample(long aTimeInSample);

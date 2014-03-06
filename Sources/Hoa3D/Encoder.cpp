@@ -33,15 +33,15 @@ namespace Hoa3D
             max = 0.;
             for(int j = 0; j < NUMBEROFCIRCLEPOINTS; j++)
             {
-                phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;
+                phi = (double)j / (double)NUMBEROFCIRCLEPOINTS * HOA_2PI + HOA_PI;
                 phi = wrap_twopi(phi);
                 
                 m_azimuth_matrix[j][i] = spherical_harmonics_azimuth(band, argument, phi);
                 
-                theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;
+                theta = (double)j / (double)NUMBEROFCIRCLEPOINTS * HOA_2PI + HOA_PI2;
                 theta = wrap_twopi(theta);
-                if(theta >= CICM_PI)
-                    theta = CICM_2PI - theta;
+                if(theta >= HOA_PI)
+                    theta = HOA_2PI - theta;
     
                 m_elevation_matrix[j][i] = spherical_harmonics_elevation(band, argument, theta);
                 if(max < fabs(m_elevation_matrix[j][i]))
@@ -59,12 +59,12 @@ namespace Hoa3D
     
     void Encoder::setAzimuth(const double azimuth)
     {
-        m_azimuth = wrap_twopi(azimuth) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);
+        m_azimuth = wrap_twopi(azimuth) / HOA_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);
     }
     
     void Encoder::setElevation(const double elevation)
     {
-        m_elevation = wrap_twopi(elevation)  / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);
+        m_elevation = wrap_twopi(elevation)  / HOA_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);
     }
     
     void Encoder::process(const float input, float* outputs)

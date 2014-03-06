@@ -43,7 +43,7 @@ double Line::process()
 
 void Line::setRampInSample(long aTimeInSample)
 {
-	m_ramp = Hoa2D::clip_min(aTimeInSample, (long)1);
+	m_ramp = clip_min(aTimeInSample, (long)1);
 }
 
 void Line::setRampInMs(double aTimeInMs)
@@ -67,21 +67,21 @@ void Line::setValue(double aCoefficient)
 
 void Line::setValueAngleDirect(double anAngle)
 {
-	m_value_old = m_value_new = Hoa2D::wrap_twopi(anAngle);
+	m_value_old = m_value_new = wrap_twopi(anAngle);
 	m_value_step = 0.;
 	m_counter = 0;
 }
 
 void Line::setValueAngle(double anAngle)
 {
-	m_value_new = Hoa2D::wrap_twopi(anAngle);
-	m_value_old = Hoa2D::wrap_twopi(m_value_old);
+	m_value_new = wrap_twopi(anAngle);
+	m_value_old = wrap_twopi(m_value_old);
     double distance;
     if(m_value_old > m_value_new)
         distance = (m_value_old - m_value_new);
     else
         distance = (m_value_new - m_value_old);
-	if(distance <= CICM_PI)
+	if(distance <= HOA_PI)
 	{
 		m_value_step = (m_value_new - m_value_old) / (double)m_ramp;
 	}
@@ -89,11 +89,11 @@ void Line::setValueAngle(double anAngle)
 	{
 		if(m_value_new > m_value_old)
 		{
-			m_value_step = ((m_value_new - CICM_2PI) - m_value_old) / (double)m_ramp;
+			m_value_step = ((m_value_new - HOA_2PI) - m_value_old) / (double)m_ramp;
 		}
 		else
 		{
-			m_value_step = ((m_value_new + CICM_2PI) - m_value_old) / (double)m_ramp;
+			m_value_step = ((m_value_new + HOA_2PI) - m_value_old) / (double)m_ramp;
 		}
 	}
 	m_counter = 0;
