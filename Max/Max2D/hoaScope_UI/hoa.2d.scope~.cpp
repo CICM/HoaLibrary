@@ -299,13 +299,13 @@ void draw_background(t_hoa_scope *x,  t_object *view, t_rect *rect)
     t_jrgba black, white;
     
     black = white = x->f_color_bg;
-    black.red = Hoa2D::clip_min(black.red - contrast_black, 0.);
-    black.green = Hoa2D::clip_min(black.green - contrast_black, 0.);
-    black.blue = Hoa2D::clip_min(black.blue - contrast_black, 0.);
+    black.red = clip_min(black.red - contrast_black, 0.);
+    black.green = clip_min(black.green - contrast_black, 0.);
+    black.blue = clip_min(black.blue - contrast_black, 0.);
     
-    white.red = Hoa2D::clip_max(white.red + contrast_white, 1.);
-    white.green = Hoa2D::clip_max(white.green + contrast_white, 1.);
-    white.blue = Hoa2D::clip_max(white.blue + contrast_white, 1.);
+    white.red = clip_max(white.red + contrast_white, 1.);
+    white.green = clip_max(white.green + contrast_white, 1.);
+    white.blue = clip_max(white.blue + contrast_white, 1.);
     
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, s_background_layer, rect->width, rect->height);
 

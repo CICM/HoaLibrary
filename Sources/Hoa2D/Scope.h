@@ -21,7 +21,7 @@ namespace Hoa2D
         unsigned int    m_number_of_points;
         double*         m_harmonics;
         double*         m_matrix;
-        Decoder*        m_decoder;
+        DecoderRegular* m_decoder;
     public:
         
         //! The scope constructor.

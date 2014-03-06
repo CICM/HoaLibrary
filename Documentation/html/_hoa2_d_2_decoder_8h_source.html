@@ -110,52 +110,144 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>Hoa2D</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder.html">   16</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_hoa2_d_1_1_decoder.html">Decoder</a> : <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_ambisonic.html">Ambisonic</a>, <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_planewaves.html">Planewaves</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">double</span>          m_offset;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">double</span>*         m_decoder_matrix;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">float</span>*          m_decoder_matrix_float;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">double</span>*         m_harmonics_vector;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="class_hoa2_d_1_1_encoder.html">Encoder</a>*        m_encoder;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder.html#a90db2fd2ed005b15bb38b3cda88b3417">Decoder</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numberOfChannels);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder.html#a2ad3a9bafe6f452bcb378eabd53e0876">~Decoder</a>();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder.html#ac7365c9cb3e3e60d6051aa6a7dba3eea">setChannelsOffset</a>(<span class="keywordtype">double</span> offset);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_regular.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_hoa2_d_1_1_decoder_regular.html">DecoderRegular</a> : <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_ambisonic.html">Ambisonic</a>, <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_planewaves.html">Planewaves</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">double</span>          m_offset;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">double</span>*         m_decoder_matrix;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">float</span>*          m_decoder_matrix_float;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">double</span>*         m_harmonics_vector;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="class_hoa2_d_1_1_encoder.html">Encoder</a>*        m_encoder;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a0666daa8b343e44ef7d90a31922cbecc">DecoderRegular</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numberOfChannels);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a04fe68432d2de773e8773cde9f0a2cad">~DecoderRegular</a>();</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder.html#a9e25d2f72129bb9cae477f74d761a438">   48</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_hoa2_d_1_1_decoder.html#a9e25d2f72129bb9cae477f74d761a438">getChannelsOffset</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> m_offset;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder.html#a68f00b02c0f8697ecd5364f772bcc9c0">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* input, <span class="keywordtype">float</span>* output);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder.html#a68f00b02c0f8697ecd5364f772bcc9c0">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* input, <span class="keywordtype">double</span>* output);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    };</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a8ea45b4fafc13f941b597a7e829fc0d8">setChannelsOffset</a>(<span class="keywordtype">double</span> offset);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_regular.html#aa4dd9f25eac9fb517279cc310d9fe36f">   56</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="class_hoa2_d_1_1_decoder_regular.html#aa4dd9f25eac9fb517279cc310d9fe36f">getChannelsOffset</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">return</span> m_offset;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a0df7ff818531d375909a2914d159b711">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* input, <span class="keywordtype">float</span>* output);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="ttc" id="class_hoa2_d_1_1_decoder_html_ac7365c9cb3e3e60d6051aa6a7dba3eea"><div class="ttname"><a href="class_hoa2_d_1_1_decoder.html#ac7365c9cb3e3e60d6051aa6a7dba3eea">Hoa2D::Decoder::setChannelsOffset</a></div><div class="ttdeci">void setChannelsOffset(double offset)</div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00020">Decoder.cpp:20</a></div></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a0df7ff818531d375909a2914d159b711">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* input, <span class="keywordtype">double</span>* output);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_irregular.html">   85</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_hoa2_d_1_1_decoder_irregular.html">DecoderIrregular</a> : <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_ambisonic.html">Ambisonic</a>, <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_planewaves.html">Planewaves</a></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">double</span>*         m_decoder_matrix;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordtype">float</span>*          m_decoder_matrix_float;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordtype">double</span>*         m_harmonics_vector;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordtype">double</span>*         m_channels_azimuth_sorted;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">double</span>*         m_decoder_matrix_sorted;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="class_hoa2_d_1_1_encoder.html">Encoder</a>*        m_encoder;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#a6847d61194817c336f323f21b757a67a">DecoderIrregular</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numberOfChannels);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f">~DecoderIrregular</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#ab74543528e37f6455de5452f00ac7c1c">setChannelPosition</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> azimuth);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#a6c4b42a6c7f9030b4db0d53186a9d6e0">setChannelsPosition</a>(<span class="keywordtype">double</span>* azimuths);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#aacb9c2de89e276d0ede87e2ecfd2bde4">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* input, <span class="keywordtype">float</span>* output);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_irregular.html#aacb9c2de89e276d0ede87e2ecfd2bde4">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* input, <span class="keywordtype">double</span>* output);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    };</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_decoder_binaural.html">  155</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_hoa2_d_1_1_decoder_binaural.html">DecoderBinaural</a> : <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_ambisonic.html">Ambisonic</a>, <span class="keyword">public</span> <a class="code" href="class_hoa2_d_1_1_planewaves.html">Planewaves</a></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keywordtype">double</span>*         m_decoder_matrix;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordtype">float</span>*          m_decoder_matrix_float;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordtype">double</span>*         m_harmonics_vector;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordtype">double</span>*         m_channels_azimuth_sorted;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordtype">double</span>*         m_decoder_matrix_sorted;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <a class="code" href="class_hoa2_d_1_1_encoder.html">Encoder</a>*        m_encoder;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#a614b402069c035eb1bb03d3ec79c4098">DecoderBinaural</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> order);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4">~DecoderBinaural</a>();</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordtype">void</span> setSampleRate(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sampleRate);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordtype">void</span> setVectorSize(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> vectorSize);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#ac121f14d7896f2e7ec0ea98b3e6c5018">process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* input, <span class="keywordtype">float</span>* output);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_decoder_binaural.html#ac121f14d7896f2e7ec0ea98b3e6c5018">process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* input, <span class="keywordtype">double</span>* output);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    };</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;}</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_binaural_html"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_binaural.html">Hoa2D::DecoderBinaural</a></div><div class="ttdoc">The ambisonic binaural decoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00155">Decoder.h:155</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00022">Ambisonic.h:22</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_decoder_html_a90db2fd2ed005b15bb38b3cda88b3417"><div class="ttname"><a href="class_hoa2_d_1_1_decoder.html#a90db2fd2ed005b15bb38b3cda88b3417">Hoa2D::Decoder::Decoder</a></div><div class="ttdeci">Decoder(unsigned int order, unsigned int numberOfChannels)</div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00011">Decoder.cpp:11</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_decoder_html"><div class="ttname"><a href="class_hoa2_d_1_1_decoder.html">Hoa2D::Decoder</a></div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00016">Decoder.h:16</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a0666daa8b343e44ef7d90a31922cbecc"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a0666daa8b343e44ef7d90a31922cbecc">Hoa2D::DecoderRegular::DecoderRegular</a></div><div class="ttdeci">DecoderRegular(unsigned int order, unsigned int numberOfChannels)</div><div class="ttdoc">The regular decoder constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00014">Decoder.cpp:14</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_binaural_html_a3aa8b84a571c2c031dcae2b94b8737e4"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4">Hoa2D::DecoderBinaural::~DecoderBinaural</a></div><div class="ttdeci">~DecoderBinaural()</div><div class="ttdoc">The binaural decoder destructor. </div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_aa4dd9f25eac9fb517279cc310d9fe36f"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#aa4dd9f25eac9fb517279cc310d9fe36f">Hoa2D::DecoderRegular::getChannelsOffset</a></div><div class="ttdeci">double getChannelsOffset() const </div><div class="ttdoc">Get the offset of the channels. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00056">Decoder.h:56</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_af8a618d1d04c00f33c360fde6d09e03f"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f">Hoa2D::DecoderIrregular::~DecoderIrregular</a></div><div class="ttdeci">~DecoderIrregular()</div><div class="ttdoc">The irregular decoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00187">Decoder.cpp:187</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html">Hoa2D::DecoderIrregular</a></div><div class="ttdoc">The ambisonic irregular decoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00085">Decoder.h:85</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_planewaves_html"><div class="ttname"><a href="class_hoa2_d_1_1_planewaves.html">Hoa2D::Planewaves</a></div><div class="ttdoc">The planewaves class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_planewaves_8h_source.html#l00018">Planewaves.h:18</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_decoder_html_a2ad3a9bafe6f452bcb378eabd53e0876"><div class="ttname"><a href="class_hoa2_d_1_1_decoder.html#a2ad3a9bafe6f452bcb378eabd53e0876">Hoa2D::Decoder::~Decoder</a></div><div class="ttdeci">~Decoder()</div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00047">Decoder.cpp:47</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_decoder_html_a68f00b02c0f8697ecd5364f772bcc9c0"><div class="ttname"><a href="class_hoa2_d_1_1_decoder.html#a68f00b02c0f8697ecd5364f772bcc9c0">Hoa2D::Decoder::process</a></div><div class="ttdeci">void process(const float *input, float *output)</div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00037">Decoder.cpp:37</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a0df7ff818531d375909a2914d159b711"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a0df7ff818531d375909a2914d159b711">Hoa2D::DecoderRegular::process</a></div><div class="ttdeci">void process(const float *input, float *output)</div><div class="ttdoc">This method performs the regular decoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00041">Decoder.cpp:41</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_a6c4b42a6c7f9030b4db0d53186a9d6e0"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#a6c4b42a6c7f9030b4db0d53186a9d6e0">Hoa2D::DecoderIrregular::setChannelsPosition</a></div><div class="ttdeci">void setChannelsPosition(double *azimuths)</div><div class="ttdoc">Set the azimtuh of all the channels. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00073">Decoder.cpp:73</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_binaural_html_ac121f14d7896f2e7ec0ea98b3e6c5018"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_binaural.html#ac121f14d7896f2e7ec0ea98b3e6c5018">Hoa2D::DecoderBinaural::process</a></div><div class="ttdeci">void process(const float *input, float *output)</div><div class="ttdoc">This method performs the binaural decoding with single precision. </div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a8ea45b4fafc13f941b597a7e829fc0d8"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a8ea45b4fafc13f941b597a7e829fc0d8">Hoa2D::DecoderRegular::setChannelsOffset</a></div><div class="ttdeci">void setChannelsOffset(double offset)</div><div class="ttdoc">Set the offset of the channels. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00025">Decoder.cpp:25</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html">Hoa2D::Encoder</a></div><div class="ttdoc">The ambisonic encoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8h_source.html#l00017">Encoder.h:17</a></div></div>
-<div class="ttc" id="class_hoa2_d_1_1_decoder_html_a9e25d2f72129bb9cae477f74d761a438"><div class="ttname"><a href="class_hoa2_d_1_1_decoder.html#a9e25d2f72129bb9cae477f74d761a438">Hoa2D::Decoder::getChannelsOffset</a></div><div class="ttdeci">double getChannelsOffset() const </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00048">Decoder.h:48</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_a6847d61194817c336f323f21b757a67a"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#a6847d61194817c336f323f21b757a67a">Hoa2D::DecoderIrregular::DecoderIrregular</a></div><div class="ttdeci">DecoderIrregular(unsigned int order, unsigned int numberOfChannels)</div><div class="ttdoc">The irregular decoder constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00062">Decoder.cpp:62</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_binaural_html_a614b402069c035eb1bb03d3ec79c4098"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_binaural.html#a614b402069c035eb1bb03d3ec79c4098">Hoa2D::DecoderBinaural::DecoderBinaural</a></div><div class="ttdeci">DecoderBinaural(unsigned int order)</div><div class="ttdoc">The binaural decoder constructor. </div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_aacb9c2de89e276d0ede87e2ecfd2bde4"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#aacb9c2de89e276d0ede87e2ecfd2bde4">Hoa2D::DecoderIrregular::process</a></div><div class="ttdeci">void process(const float *input, float *output)</div><div class="ttdoc">This method performs the irregular decoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00177">Decoder.cpp:177</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a04fe68432d2de773e8773cde9f0a2cad"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a04fe68432d2de773e8773cde9f0a2cad">Hoa2D::DecoderRegular::~DecoderRegular</a></div><div class="ttdeci">~DecoderRegular()</div><div class="ttdoc">The regular decoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00051">Decoder.cpp:51</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html">Hoa2D::DecoderRegular</a></div><div class="ttdoc">The ambisonic regular decoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00019">Decoder.h:19</a></div></div>
+<div class="ttc" id="class_hoa2_d_1_1_decoder_irregular_html_ab74543528e37f6455de5452f00ac7c1c"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_irregular.html#ab74543528e37f6455de5452f00ac7c1c">Hoa2D::DecoderIrregular::setChannelPosition</a></div><div class="ttdeci">void setChannelPosition(unsigned int index, double azimuth)</div><div class="ttdoc">Set the azimuth of a channel. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00082">Decoder.cpp:82</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 5 2014 12:43:42 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 6 2014 09:48:01 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

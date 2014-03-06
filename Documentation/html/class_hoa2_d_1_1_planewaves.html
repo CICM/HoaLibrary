@@ -96,6 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_hoa2_d_1_1_planewaves-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Hoa2D::Planewaves Class Reference</div>  </div>
@@ -112,11 +113,13 @@ Inheritance diagram for Hoa2D::Planewaves:</div>
  <div class="center">
   <img src="class_hoa2_d_1_1_planewaves.png" usemap="#Hoa2D::Planewaves_map" alt=""/>
   <map id="Hoa2D::Planewaves_map" name="Hoa2D::Planewaves_map">
-<area href="class_hoa2_d_1_1_decoder.html" alt="Hoa2D::Decoder" shape="rect" coords="0,56,127,80"/>
-<area href="class_hoa2_d_1_1_meter.html" title="The planewaves peak level meter. " alt="Hoa2D::Meter" shape="rect" coords="137,56,264,80"/>
-<area href="class_hoa2_d_1_1_projector.html" title="The ambisonic projector. " alt="Hoa2D::Projector" shape="rect" coords="274,56,401,80"/>
-<area href="class_hoa2_d_1_1_recomposer.html" title="The ambisonic recomposer. " alt="Hoa2D::Recomposer" shape="rect" coords="411,56,538,80"/>
-<area href="class_hoa2_d_1_1_vector.html" title="The ambisonic vector. " alt="Hoa2D::Vector" shape="rect" coords="548,56,675,80"/>
+<area href="class_hoa2_d_1_1_decoder_binaural.html" title="The ambisonic binaural decoder. " alt="Hoa2D::DecoderBinaural" shape="rect" coords="0,56,155,80"/>
+<area href="class_hoa2_d_1_1_decoder_irregular.html" title="The ambisonic irregular decoder. " alt="Hoa2D::DecoderIrregular" shape="rect" coords="165,56,320,80"/>
+<area href="class_hoa2_d_1_1_decoder_regular.html" title="The ambisonic regular decoder. " alt="Hoa2D::DecoderRegular" shape="rect" coords="330,56,485,80"/>
+<area href="class_hoa2_d_1_1_meter.html" title="The planewaves peak level meter. " alt="Hoa2D::Meter" shape="rect" coords="495,56,650,80"/>
+<area href="class_hoa2_d_1_1_projector.html" title="The ambisonic projector. " alt="Hoa2D::Projector" shape="rect" coords="660,56,815,80"/>
+<area href="class_hoa2_d_1_1_recomposer.html" title="The ambisonic recomposer. " alt="Hoa2D::Recomposer" shape="rect" coords="825,56,980,80"/>
+<area href="class_hoa2_d_1_1_vector.html" title="The ambisonic vector. " alt="Hoa2D::Vector" shape="rect" coords="990,56,1145,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -128,9 +131,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7d13cc39051ae75f2af522651a1305bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">~Planewaves</a> ()</td></tr>
 <tr class="memdesc:a7d13cc39051ae75f2af522651a1305bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The planewaves destructor.  <a href="#a7d13cc39051ae75f2af522651a1305bf">More...</a><br/></td></tr>
 <tr class="separator:a7d13cc39051ae75f2af522651a1305bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f6dfb5355b12915c658ac8967303ef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a6f6dfb5355b12915c658ac8967303ef4">setChannelPosition</a> (unsigned int index, double azimuth)</td></tr>
-<tr class="memdesc:a6f6dfb5355b12915c658ac8967303ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimtuh of a channel.  <a href="#a6f6dfb5355b12915c658ac8967303ef4">More...</a><br/></td></tr>
-<tr class="separator:a6f6dfb5355b12915c658ac8967303ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bf0de6ae4ac7ac03fc552d477237a85"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a4bf0de6ae4ac7ac03fc552d477237a85">getNumberOfChannels</a> () const </td></tr>
 <tr class="memdesc:a4bf0de6ae4ac7ac03fc552d477237a85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of channels.  <a href="#a4bf0de6ae4ac7ac03fc552d477237a85">More...</a><br/></td></tr>
 <tr class="separator:a4bf0de6ae4ac7ac03fc552d477237a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,6 +146,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a66b40a511ac3dd9f3ab1102e98370dbd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a66b40a511ac3dd9f3ab1102e98370dbd">getChannelName</a> (unsigned int index)</td></tr>
 <tr class="memdesc:a66b40a511ac3dd9f3ab1102e98370dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of channel.  <a href="#a66b40a511ac3dd9f3ab1102e98370dbd">More...</a><br/></td></tr>
 <tr class="separator:a66b40a511ac3dd9f3ab1102e98370dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6f6dfb5355b12915c658ac8967303ef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hoa2_d_1_1_planewaves.html#a6f6dfb5355b12915c658ac8967303ef4">setChannelPosition</a> (unsigned int index, double azimuth)</td></tr>
+<tr class="memdesc:a6f6dfb5355b12915c658ac8967303ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the azimuth of a channel.  <a href="#a6f6dfb5355b12915c658ac8967303ef4">More...</a><br/></td></tr>
+<tr class="separator:a6f6dfb5355b12915c658ac8967303ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The planewaves class. </p>
@@ -238,7 +244,7 @@ Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="class_hoa2_d_1_1_planewaves.html#a66b40a511ac3dd9f3ab1102e98370dbd" title="Retrieve the number of channel. ">getChannelName</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00085">85</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00084">84</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
 
 </div>
 </div>
@@ -279,7 +285,7 @@ Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="class_hoa2_d_1_1_planewaves.html#a66b40a511ac3dd9f3ab1102e98370dbd" title="Retrieve the number of channel. ">getChannelName</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00068">68</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00067">67</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
 
 </div>
 </div>
@@ -320,7 +326,7 @@ Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="class_hoa2_d_1_1_planewaves.html#ade9d19725af0826e02b43bcf10a4bc73" title="Retrieve the ordinate of a channel. ">getChannelOrdinate</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00117">117</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00116">116</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
 
 </div>
 </div>
@@ -361,7 +367,7 @@ Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="class_hoa2_d_1_1_planewaves.html#a66b40a511ac3dd9f3ab1102e98370dbd" title="Retrieve the number of channel. ">getChannelName</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00101">101</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00100">100</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
 
 </div>
 </div>
@@ -390,13 +396,16 @@ Public Member Functions</h2></td></tr>
 <p>Retrieve the number of channels of the planewave class.</p>
 <dl class="section return"><dt>Returns</dt><dd>The number of channels. </dd></dl>
 
-<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00053">53</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
+<p>Definition at line <a class="el" href="_hoa2_d_2_planewaves_8h_source.html#l00052">52</a> of file <a class="el" href="_hoa2_d_2_planewaves_8h_source.html">Planewaves.h</a>.</p>
 
 </div>
 </div>
 <a class="anchor" id="a6f6dfb5355b12915c658ac8967303ef4"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Planewaves::setChannelPosition </td>
@@ -416,15 +425,19 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Set the azimtuh of a channel. </p>
-<p>Set the azimtuh of a channel. The azimtuh is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.</p>
+<p>Set the azimuth of a channel. </p>
+<p>Set the azimuth of a channel. The azimuth is in radian between 0 and 2 Pi, O is the front of the soundfield and Pi is the back of the sound field. The maximum index must be the number of channel - 1.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>The index of the loudspeaker. </td></tr>
     <tr><td class="paramname">azimuth</td><td>The azimuth. </td></tr>
-    <tr><td class="paramname">elevation</td><td>The elevation. </td></tr>
   </table>
   </dd>
 </dl>
@@ -440,7 +453,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 5 2014 12:43:44 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 6 2014 09:48:02 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
