@@ -428,24 +428,24 @@ void hoa_map_assist(t_hoa_map *x, void *b, long m, long a, char *s)
         if(x->f_map->getNumberOfSources() == 1)
         {
             if(a == 0)
-                sprintf(s,"(signal) Source 0");
+                sprintf(s,"(Signal) Source 0");
             else if(a == 1)
-                sprintf(s,"(signal/float) Radius or Abscissa");
+                sprintf(s,"(Signal or float) Radius or Abscissa");
 			else if(a == 2)
-                sprintf(s,"(signal/float) Azimuth or Ordinate");
+                sprintf(s,"(Signal or float) Azimuth or Ordinate");
         }
         else
         {
             if(a == 0)
-                sprintf(s,"(signal/messages) Input 0 and sources messages");
+                sprintf(s,"(Signal or messages) Input 0 and sources messages");
             else
-                sprintf(s,"(signal/float) Input %ld", a);
+                sprintf(s,"(Signal or float) Input %ld", a);
         }
         
 	}
 	else 
 	{
-		sprintf(s,"(signal) %s", x->f_map->getHarmonicsName(a).c_str());
+		sprintf(s,"(Signal) %s", x->f_map->getHarmonicsName(a).c_str());
 	}
 }
 

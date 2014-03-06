@@ -20,10 +20,12 @@
 		8F7ADEBB18C4D60900CBCA70 /* Encoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADEAB18C4D60900CBCA70 /* Encoder.h */; };
 		8F7ADEBC18C4D60900CBCA70 /* Hoa2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADEAC18C4D60900CBCA70 /* Hoa2D.h */; };
 		8F7ADEC118C4D60900CBCA70 /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADEB118C4D60900CBCA70 /* Tools.h */; };
-		8F7ADECC18C4D72B00CBCA70 /* Hoa2D.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F7ADECA18C4D72B00CBCA70 /* Hoa2D.max.cpp */; };
 		8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */; };
 		8F7AE5F718C4D88300CBCA70 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
+		8F85B66418C8457E00C50407 /* hoa.max_commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F85B66118C8457E00C50407 /* hoa.max_commonsyms.h */; };
+		8F85B66518C8457E00C50407 /* hoa.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F85B66218C8457E00C50407 /* hoa.max.cpp */; };
+		8F85B66618C8457E00C50407 /* hoa.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F85B66318C8457E00C50407 /* hoa.max.h */; };
 		8F919DE918C4DBD800D40BCD /* Optim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F919DE718C4DBD800D40BCD /* Optim.cpp */; };
 		8F919DEA18C4DBD800D40BCD /* Optim.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F919DE818C4DBD800D40BCD /* Optim.h */; };
 		8F919DEF18C4E5C000D40BCD /* Wider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F919DED18C4E5C000D40BCD /* Wider.cpp */; };
@@ -45,10 +47,12 @@
 		8F7ADEAB18C4D60900CBCA70 /* Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Encoder.h; sourceTree = "<group>"; };
 		8F7ADEAC18C4D60900CBCA70 /* Hoa2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoa2D.h; sourceTree = "<group>"; };
 		8F7ADEB118C4D60900CBCA70 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
-		8F7ADECA18C4D72B00CBCA70 /* Hoa2D.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hoa2D.max.cpp; path = ../Hoa2D.max.cpp; sourceTree = "<group>"; };
 		8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoa2D.max.h; path = ../Hoa2D.max.h; sourceTree = "<group>"; };
 		8F7AE5F618C4D88300CBCA70 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../../../../SDKs/MaxSDK-6.1.4/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		8F85B66118C8457E00C50407 /* hoa.max_commonsyms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max_commonsyms.h; path = ../../hoa.max_commonsyms.h; sourceTree = "<group>"; };
+		8F85B66218C8457E00C50407 /* hoa.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hoa.max.cpp; path = ../../hoa.max.cpp; sourceTree = "<group>"; };
+		8F85B66318C8457E00C50407 /* hoa.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hoa.max.h; path = ../../hoa.max.h; sourceTree = "<group>"; };
 		8F919DE718C4DBD800D40BCD /* Optim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Optim.cpp; sourceTree = "<group>"; };
 		8F919DE818C4DBD800D40BCD /* Optim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Optim.h; sourceTree = "<group>"; };
 		8F919DED18C4E5C000D40BCD /* Wider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wider.cpp; sourceTree = "<group>"; };
@@ -73,7 +77,9 @@
 			isa = PBXGroup;
 			children = (
 				8F2A50C418C4EAFA00F9A068 /* hoa.2d.decoder~.cpp */,
-				8F7ADECA18C4D72B00CBCA70 /* Hoa2D.max.cpp */,
+				8F85B66118C8457E00C50407 /* hoa.max_commonsyms.h */,
+				8F85B66218C8457E00C50407 /* hoa.max.cpp */,
+				8F85B66318C8457E00C50407 /* hoa.max.h */,
 				8F7ADECB18C4D72B00CBCA70 /* Hoa2D.max.h */,
 				8F7ADEA518C4D60900CBCA70 /* Hoa2D */,
 				8F7ADEA318C4D5EB00CBCA70 /* MaxHoa2D.xcconfig */,
@@ -126,10 +132,12 @@
 				8F919DEA18C4DBD800D40BCD /* Optim.h in Headers */,
 				8F7ADECD18C4D72B00CBCA70 /* Hoa2D.max.h in Headers */,
 				8F919DF018C4E5C000D40BCD /* Wider.h in Headers */,
+				8F85B66418C8457E00C50407 /* hoa.max_commonsyms.h in Headers */,
 				8F7ADEBB18C4D60900CBCA70 /* Encoder.h in Headers */,
 				8F7ADEB718C4D60900CBCA70 /* Ambisonic.h in Headers */,
 				8F2A50C918C4EB8C00F9A068 /* Decoder.h in Headers */,
 				8F7ADEBC18C4D60900CBCA70 /* Hoa2D.h in Headers */,
+				8F85B66618C8457E00C50407 /* hoa.max.h in Headers */,
 				8F7ADEC118C4D60900CBCA70 /* Tools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,7 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F7ADECC18C4D72B00CBCA70 /* Hoa2D.max.cpp in Sources */,
+				8F85B66518C8457E00C50407 /* hoa.max.cpp in Sources */,
 				8F7ADEBA18C4D60900CBCA70 /* Encoder.cpp in Sources */,
 				8F2A50C818C4EB8C00F9A068 /* Decoder.cpp in Sources */,
 				8F919DEF18C4E5C000D40BCD /* Wider.cpp in Sources */,

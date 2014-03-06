@@ -76,13 +76,18 @@ void Line::setValueAngle(double anAngle)
 {
 	m_value_new = Hoa2D::wrap_twopi(anAngle);
 	m_value_old = Hoa2D::wrap_twopi(m_value_old);
-	if(Hoa2D::distance_radian(m_value_old, m_value_new) <= CICM_PI)
+    double distance;
+    if(m_value_old > m_value_new)
+        distance = (m_value_old - m_value_new);
+    else
+        distance = (m_value_new - m_value_old);
+	if(distance <= CICM_PI)
 	{
 		m_value_step = (m_value_new - m_value_old) / (double)m_ramp;
 	}
 	else
 	{
-		if(m_value_new > Hoa2D::wrap_twopi(m_value_old))
+		if(m_value_new > m_value_old)
 		{
 			m_value_step = ((m_value_new - CICM_2PI) - m_value_old) / (double)m_ramp;
 		}

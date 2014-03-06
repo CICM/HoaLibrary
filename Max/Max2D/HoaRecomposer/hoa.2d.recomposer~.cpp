@@ -11,8 +11,7 @@ typedef struct _hoa_recomposer
 	t_pxobject              f_ob;
 	double*                 f_ins;
     double*                 f_outs;
-    Hoa2D::Projector*       f_recomposer;
-    t_symbol*               f_mode;
+    Hoa2D::Recomposer*      f_recomposer;
     double                  f_ramp;
     
 } t_hoa_recomposer;
@@ -24,7 +23,6 @@ void hoa_recomposer_float(t_hoa_recomposer *x, double d);
 void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 
-t_max_err mode_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv);
 t_max_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv);
 
 t_max_err HoaRecomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
@@ -50,14 +48,6 @@ int C74_EXPORT main(void)
     class_addmethod(c, (method)hoa_recomposer_wide,     "directivities",    A_GIMME,0);
     class_addmethod(c, (method)hoa_recomposer_float,    "float",            A_FLOAT,0);
     
-    CLASS_ATTR_SYM              (c,"mode", 0, t_hoa_recomposer, f_mode);
-	CLASS_ATTR_LABEL			(c,"mode", 0, "Mode");
-    CLASS_ATTR_ENUM             (c,"mode", 0, "fixe fisheye free");
-	CLASS_ATTR_CATEGORY			(c,"mode", 0, "Behavior");
-    CLASS_ATTR_ACCESSORS		(c,"mode", NULL, mode_set);
-    CLASS_ATTR_ORDER			(c,"mode", 0,  "1");
-    CLASS_ATTR_SAVE             (c,"mode", 1);
-    
     CLASS_ATTR_DOUBLE			(c,"ramp", 0, t_hoa_recomposer, f_ramp);
 	CLASS_ATTR_LABEL			(c,"ramp", 0, "Ramp Time in milliseconds");
 	CLASS_ATTR_CATEGORY			(c,"ramp", 0, "Behavior");
@@ -76,7 +66,7 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_recomposer *x = NULL;
 	int	order = 1;
-    int numberOfLoudspeakers = 10;
+    int numberOfLoudspeakers = 4;
     x = (t_hoa_recomposer *)object_alloc(hoa_recomposer_class);
 	if (x)
 	{		
@@ -89,10 +79,10 @@ void *hoa_recomposer_new(t_symbol *s, long argc, t_atom *argv)
         if(numberOfLoudspeakers < order * 2 + 1)
             numberOfLoudspeakers = order * 2 + 1;
 		
-		x->f_recomposer = new Hoa2D::Projector(order, numberOfLoudspeakers);
+		x->f_recomposer = new Hoa2D::Recomposer(order, numberOfLoudspeakers);
 		
-		dsp_setup((t_pxobject *)x, x->f_recomposer->getNumberOfHarmonics());
-		for (int i = 0; i < x->f_recomposer->getNumberOfChannels(); i++)
+		dsp_setup((t_pxobject *)x, x->f_recomposer->getNumberOfChannels() + 1);
+		for (int i = 0; i < x->f_recomposer->getNumberOfHarmonics(); i++)
 			outlet_new(x, "signal");
         
 		x->f_ins = new double[x->f_recomposer->getNumberOfChannels() * SYS_MAXBLKSIZE];
@@ -114,40 +104,25 @@ t_hoa_err hoa_getinfos(t_hoa_recomposer* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_recomposer_float(t_hoa_recomposer *x, double d)
 {
-    if(x->f_mode == gensym("fisheye"))
+    if(proxy_getinlet((t_object *)x) == x->f_recomposer->getNumberOfChannels())
     {
-        
+        <#statements#>
     }
 }
 
 void hoa_recomposer_angle(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(x->f_mode == gensym("free"))
-    {
-        
-    }
+    ;
 }
 
 void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
-    if(x->f_mode == gensym("free"))
-    {
-        
-    }
+    ;
 }
 
 void hoa_recomposer_dsp64(t_hoa_recomposer *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    if(x->f_mode == gensym("fisheye"))
-    {
-        
-    }
-    else if(x->f_mode == gensym("fisheye"))
-    {
-        
-    }
-    else
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_recomposer_perform64, 0, NULL);
+    object_method(dsp64, gensym("dsp_add64"), x, hoa_recomposer_perform64, 0, NULL);
 }
 
 void hoa_recomposer_perform64(t_hoa_recomposer *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
@@ -158,6 +133,11 @@ void hoa_recomposer_perform64(t_hoa_recomposer *x, t_object *dsp64, double **ins
     }
 	for(int i = 0; i < sampleframes; i++)
     {
+        for(int j = 0; j < numins; j++)
+        {
+            x->f_recomposer->setAzimuth(j, 0.);
+            x->f_recomposer->setWideningValue(j, 1.);
+        }
         x->f_recomposer->process(x->f_ins + numins * i, x->f_outs + numouts * i);
     }
     for(int i = 0; i < numouts; i++)
@@ -170,6 +150,8 @@ void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s
 {
     if(m == ASSIST_OUTLET)
         sprintf(s,"(Signal) %s", x->f_recomposer->getHarmonicsName(a).c_str());
+    else if(a == x->f_recomposer->getNumberOfChannels())
+        sprintf(s,"(Signal or float) Fisheye factor");
     else
         sprintf(s,"(Signal) %s", x->f_recomposer->getChannelName(a).c_str());
 }
@@ -181,11 +163,6 @@ void hoa_recomposer_free(t_hoa_recomposer *x)
 	delete x->f_recomposer;
     delete [] x->f_ins;
 	delete [] x->f_outs;
-}
-
-t_max_err mode_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
-{
-    return 0;
 }
 
 t_max_err ramp_set(t_hoa_recomposer *x, t_object *attr, long argc, t_atom *argv)
