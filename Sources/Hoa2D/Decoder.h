@@ -147,7 +147,7 @@ namespace Hoa2D
     
     
     
-    
+    const float* get_mit_hrtf_2D(unsigned long samplerate, unsigned long azimuth);
     
     //! The ambisonic binaural decoder.
     /** The binaural decoder should be used to decode an ambisonic sound field for headphones.
@@ -156,17 +156,31 @@ namespace Hoa2D
     {
         
     private:
-        double*         m_decoder_matrix;
-        float*          m_decoder_matrix_float;
-		double*         m_harmonics_vector;
-        double*         m_channels_azimuth_sorted;
-        double*         m_decoder_matrix_sorted;
-        Encoder*        m_encoder;
+        float*          m_impulses_matrix;
+        float*          m_harmonics_vector;
+        float*          m_channels_vector;
+        unsigned int    m_number_of_virtual_channels;
+        unsigned int    m_sample_rate;
+        unsigned int    m_vector_size;
+        unsigned int    m_impulses_size;
         
+        bool            m_impulses_loaded;
+        bool            m_matrix_allocated;
+        
+        float*          m_input_matrix;
+        float*          m_result_matrix;
+        float*          m_result_matrix_left;
+        float*          m_result_matrix_right;
+        float*          m_linear_vector_left;
+        float*          m_linear_vector_right;
+        
+        const float**   m_impulses_vector;
+        
+        DecoderRegular* m_decoder;
     public:
         
         //! The binaural decoder constructor.
-        /**	The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1.
+        /**	The binaural decoder constructor allocates and initialize the member values to the decoding matrix depending of a decomposition order and a number of channels. The order and the number of channels must be at least 1 and the maximum order is 35.
          
          @param     order				The order
          @param     numberOfChannels     The number of channels.
@@ -181,14 +195,43 @@ namespace Hoa2D
         void setSampleRate(unsigned int sampleRate);
         void setVectorSize(unsigned int vectorSize);
         
+        //! Retrieve if the impulses has been loaded
+        /** Retrieve if the impulses has been loaded.
+         
+            @return    The true if the impulses has been loaded and false if not.
+         */
+		inline bool getState() const
+        {
+            if(m_impulses_loaded && m_matrix_allocated)
+                return true;
+            else
+                return false;
+        };
+        
+        
+        //! Retrieve a name for a channel.
+        /** Retrieve a name for a channel in a std::string format that will be "Headphone Left" or "Headphone Right".
+         
+         @param     index	The index of a channel.
+         @return    The method returns a name for the channel that contains its index and its azimuth if the channel exists, otherwise the function generates an error.
+         
+         */
+		inline std::string getChannelName(unsigned int index)
+        {
+            assert(index < 2);
+            if(index == 0)
+                return "Headphone Left";
+            else
+                return "Headphone Right";
+        };
         
         //! This method performs the binaural decoding with single precision.
 		/**	You should use this method for in-place or not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the headphones samples and the minimum size must be 2.
          
-         @param     input	The input sample.
+         @param     inputs	The input sample.
          @param     outputs The output array that contains samples destinated to channels.
          */
-		void process(const float* input, float* output);
+		void process(const float* const* inputs, float** outputs);
 		
         //! This method performs the binaural decoding with double precision.
 		/**	You should use this method for in-place or not-in-place processing and performs the binaural decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the headphones samples and the minimum size must be 2.
@@ -196,7 +239,7 @@ namespace Hoa2D
          @param     input	The input sample.
          @param     outputs The output array that contains samples destinated to channels.
          */
-		void process(const double* input, double* output);
+		void process(const double** inputs, double** outputs);
     };
 }
 

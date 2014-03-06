@@ -103,8 +103,8 @@ namespace Hoa2D
             return ordinate(1., m_channels_azimuth[index]);
         }
         
-        //! Retrieve the number of channel.
-        /** Retrieve a name for an channel in a std::string format that will be "Channel index azimuth (in degrees)".
+        //! Retrieve a name for a channel.
+        /** Retrieve a name for a channel in a std::string format that will be "Channel index azimuth (in degrees)".
          
             @param     index	The index of a channel.
             @return    The method returns a name for the channel that contains its index and its azimuth if the channel exists, otherwise the function generates an error.
