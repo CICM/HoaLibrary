@@ -4,10 +4,10 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-
 #ifndef DEF_HOA_LIBRARY_2D
 #define DEF_HOA_LIBRARY_2D
 
+#include "../Hoa/Hoa.h"
 #include "Encoder.h"
 #include "Rotate.h"
 #include "Optim.h"
@@ -18,7 +18,9 @@
 #include "Vector.h"
 #include "Scope.h"
 #include "Meter.h"
-#include "Recomposer.h"
+#include "SourcesManager.h"
+#include "SourcesPreset.h"
+#include "SourcesTrajectory.h"
 
 #endif
 

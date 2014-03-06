@@ -4,12 +4,15 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_HOA_2D_MAX
-#define DEF_HOA_2D_MAX
+#ifndef __DEF_HOA_LIBRARY__
+#define __DEF_HOA_LIBRARY__
 
-#include "../hoa.max.h"
-#include "../../Sources/Hoa2D/Hoa2D.h"
+#include "HoaDefs.h"
+#include "HoaMath.h"
+#include "HoaUtils.h"
 
-using namespace Hoa2D;
+using namespace Hoa;
 
 #endif
+
+

@@ -7,7 +7,7 @@
 #ifndef DEF_HOA_2D_AMBISONIC
 #define DEF_HOA_2D_AMBISONIC
 
-#include "Tools.h"
+#include "../Hoa/Hoa.h"
 
 //! The 2D ambisonic classes.
 /**
