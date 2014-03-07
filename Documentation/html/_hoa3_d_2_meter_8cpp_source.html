@@ -143,8 +143,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; m_number_of_columns; j++)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                azi = (double)j / (<span class="keywordtype">double</span>)m_number_of_columns * CICM_2PI;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                ele = (double)i * CICM_PI / (<span class="keywordtype">double</span>)(m_number_of_rows - 1) - CICM_PI2;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                azi = (double)j / (<span class="keywordtype">double</span>)m_number_of_columns * HOA_2PI;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                ele = (double)i * HOA_PI / (<span class="keywordtype">double</span>)(m_number_of_rows - 1) - HOA_PI2;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                x = abscissa(1., azi, ele);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                y = ordinate(1., azi, ele);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                z = height(1., azi, ele);</div>
@@ -222,7 +222,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 6 2014 14:00:57 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -11810,9 +11810,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l11777"></a><span class="lineno">11777</span>&#160;            number_of_samples = 512;</div>
 <div class="line"><a name="l11778"></a><span class="lineno">11778</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 48000)</div>
 <div class="line"><a name="l11779"></a><span class="lineno">11779</span>&#160;            number_of_samples = 557;</div>
-<div class="line"><a name="l11780"></a><span class="lineno">11780</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 48000)</div>
+<div class="line"><a name="l11780"></a><span class="lineno">11780</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 88200)</div>
 <div class="line"><a name="l11781"></a><span class="lineno">11781</span>&#160;            number_of_samples = 1024;</div>
-<div class="line"><a name="l11782"></a><span class="lineno">11782</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 48000)</div>
+<div class="line"><a name="l11782"></a><span class="lineno">11782</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 96000)</div>
 <div class="line"><a name="l11783"></a><span class="lineno">11783</span>&#160;            number_of_samples = 1114;</div>
 <div class="line"><a name="l11784"></a><span class="lineno">11784</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l11785"></a><span class="lineno">11785</span>&#160;            <span class="keywordflow">return</span> NULL;</div>
@@ -11831,7 +11831,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l11798"></a><span class="lineno">11798</span>&#160;        <span class="keywordflow">if</span>(samplerate == 44100)</div>
 <div class="line"><a name="l11799"></a><span class="lineno">11799</span>&#160;            <span class="keywordflow">return</span> MIT_HRTF_44100+azimuth_offset;</div>
 <div class="line"><a name="l11800"></a><span class="lineno">11800</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 48000)</div>
-<div class="line"><a name="l11801"></a><span class="lineno">11801</span>&#160;            <span class="keywordflow">return</span> MIT_HRTF_44100+azimuth_offset;</div>
+<div class="line"><a name="l11801"></a><span class="lineno">11801</span>&#160;            <span class="keywordflow">return</span> MIT_HRTF_48000+azimuth_offset;</div>
 <div class="line"><a name="l11802"></a><span class="lineno">11802</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 88200)</div>
 <div class="line"><a name="l11803"></a><span class="lineno">11803</span>&#160;            <span class="keywordflow">return</span> MIT_HRTF_88200+azimuth_offset;</div>
 <div class="line"><a name="l11804"></a><span class="lineno">11804</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(samplerate == 96000)</div>
@@ -11843,7 +11843,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 6 2014 14:00:57 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

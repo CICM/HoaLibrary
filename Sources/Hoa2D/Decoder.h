@@ -239,7 +239,7 @@ namespace Hoa2D
          @param     input	The input sample.
          @param     outputs The output array that contains samples destinated to channels.
          */
-		void process(const double** inputs, double** outputs);
+		void process(const double* const* inputs, double** outputs);
     };
 }
 

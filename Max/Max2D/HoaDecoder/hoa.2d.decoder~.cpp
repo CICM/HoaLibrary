@@ -28,7 +28,9 @@ void hoa_decoder_free(t_hoa_decoder *x);
 void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s);
 
 void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
-void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
+void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
 t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos);
 
@@ -87,8 +89,9 @@ int C74_EXPORT main(void)
 void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 {
 	t_hoa_decoder *x = NULL;
+    t_dictionary *d = NULL;
+    
 	int	order = 1;
-    int numberOfLoudspeakers = 10;
     x = (t_hoa_decoder *)object_alloc(hoa_decoder_class);
 	if (x)
 	{		
@@ -96,12 +99,38 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 			order = atom_getlong(argv);
 		if(order < 1)
             order = 1;
-        if(atom_gettype(argv+1) == A_LONG)
-			numberOfLoudspeakers = atom_getlong(argv+1);
-        if(numberOfLoudspeakers < 1)
-            numberOfLoudspeakers = 1;
-		
-		x->f_decoder_regular = new Hoa2D::DecoderRegular(order, numberOfLoudspeakers);
+        
+        d = object_dictionaryarg(argc,argv);
+		if(d)
+        {
+            if(dictionary_hasentry(d, gensym("mode")))
+                dictionary_getsym(d, gensym("mode"), &x->f_mode);
+            else
+                x->f_mode = gensym("ambisonic");
+            
+            if(dictionary_hasentry(d, gensym("channels")))
+                dictionary_getlong(d, gensym("channels"), &x->f_number_of_channels);
+            else
+                x->f_number_of_channels = order * 2 + 2;
+            
+            if(x->f_number_of_channels < 1)
+                x->f_number_of_channels = 1;
+        }
+        else
+        {
+            x->f_mode = gensym("ambisonic");
+            x->f_number_of_channels = order * 2 + 2;
+        }
+        
+        if(x->f_number_of_channels < order * 2 + 1)
+            x->f_decoder_regular    = new Hoa2D::DecoderRegular(order, order * 2 + 1);
+        else
+            x->f_decoder_regular    = new Hoa2D::DecoderRegular(order, x->f_number_of_channels);
+        
+        x->f_decoder_irregular  = new Hoa2D::DecoderIrregular(order, x->f_number_of_channels);
+        x->f_decoder_binaural   = new Hoa2D::DecoderBinaural(order);
+        x->f_decoder_binaural->setSampleRate(sys_getsr());
+        x->f_decoder_binaural->setVectorSize(sys_getblksize());
 		
 		dsp_setup((t_pxobject *)x, x->f_decoder_regular->getNumberOfHarmonics());
 		for (int i = 0; i < x->f_decoder_regular->getNumberOfChannels(); i++)
@@ -110,6 +139,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
 		x->f_ins = new double[x->f_decoder_regular->getNumberOfHarmonics() * SYS_MAXBLKSIZE];
         x->f_outs = new double[x->f_decoder_regular->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_angles_of_channels = new double[MAX_CHANNELS];
+        attr_args_process(x, argc, argv);
 	}
 
 	return (x);
@@ -127,10 +157,19 @@ t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos)
 
 void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags)
 {
-    object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64, 0, NULL);
+    if(x->f_mode == gensym("ambisonic"))
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64_regular, 0, NULL);
+    else if(x->f_mode == gensym("irregular"))
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64_irregular, 0, NULL);
+    else
+    {
+        x->f_decoder_binaural->setSampleRate(samplerate);
+        x->f_decoder_binaural->setVectorSize(maxvectorsize);
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64_binaural, 0, NULL);
+    }
 }
 
-void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
 {
     for(int i = 0; i < numins; i++)
     {
@@ -146,6 +185,27 @@ void hoa_decoder_perform64(t_hoa_decoder *x, t_object *dsp64, double **ins, long
     }
 }
 
+void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    for(int i = 0; i < numins; i++)
+    {
+        cblas_dcopy(sampleframes, ins[i], 1, x->f_ins+i, numins);
+    }
+	for(int i = 0; i < sampleframes; i++)
+    {
+        x->f_decoder_irregular->process(x->f_ins + numins * i, x->f_outs + numouts * i);
+    }
+    for(int i = 0; i < numouts; i++)
+    {
+        cblas_dcopy(sampleframes, x->f_outs+i, numouts, outs[i], 1);
+    }
+}
+
+void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
+{
+    x->f_decoder_binaural->process((const double**)ins, outs);
+}
+
 void hoa_decoder_assist(t_hoa_decoder *x, void *b, long m, long a, char *s)
 {
     if(m == ASSIST_INLET)
@@ -159,6 +219,9 @@ void hoa_decoder_free(t_hoa_decoder *x)
 {
 	dsp_free((t_pxobject *)x);
 	delete x->f_decoder_regular;
+    delete x->f_decoder_irregular;
+    delete x->f_decoder_binaural;
+    
     delete [] x->f_ins;
 	delete [] x->f_outs;
     delete [] x->f_angles_of_channels;
@@ -166,16 +229,72 @@ void hoa_decoder_free(t_hoa_decoder *x)
 
 t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
+    if(argc && argv && atom_gettype(argv) == A_SYM && atom_getsym(argv) != x->f_mode)
+	{
+        if(atom_getsym(argv) == gensym("binaural"))
+        {
+            x->f_mode = atom_getsym(argv);
+            object_attr_setdisabled((t_object *)x, gensym("angles"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("channels"), 1);
+            object_attr_setlong(x, gensym("channels"), x->f_decoder_binaural->getNumberOfChannels());
+        }
+        else if(atom_getsym(argv) == gensym("irregular"))
+        {
+            x->f_mode = atom_getsym(argv);
+            object_attr_setdisabled((t_object *)x, gensym("angles"), 0);
+            object_attr_setdisabled((t_object *)x, gensym("channels"), 0);
+            object_attr_setlong(x, gensym("channels"), x->f_decoder_irregular->getNumberOfChannels());
+        }
+        else if(atom_getsym(argv) == gensym("ambisonic"))
+        {
+            x->f_mode = atom_getsym(argv);
+            object_attr_setdisabled((t_object *)x, gensym("angles"), 1);
+            object_attr_setdisabled((t_object *)x, gensym("loudspeakers"), 0);
+            object_attr_setlong(x, gensym("channels"), x->f_decoder_regular->getNumberOfChannels());
+		}
+    }
     return 0;
 }
 
 t_max_err channel_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
+    t_object *b = NULL;
+    int dspState = sys_getdspobjdspstate((t_object*)x);
+    if(argc && argv && atom_gettype(argv) == A_LONG && atom_getlong(argv) != x->f_number_of_channels)
+    {
+        if(dspState)
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+        
+        object_obex_lookup(x, gensym("#B"), (t_object **)&b);
+        object_method(b, gensym("dynlet_begin"));
+        /*
+        if(x->f_number_of_channels > x->f_AmbisonicsDecoder->getNumberOfOutputs())
+        {
+            for(int i = lastNumberOfOutlet; i > x->f_AmbisonicsDecoder->getNumberOfOutputs(); i--)
+            {
+                outlet_delete(outlet_nth((t_object*)x, i-1));
+            }
+        }
+        else if(x->f_number_of_channels < x->f_AmbisonicsDecoder->getNumberOfOutputs())
+        {
+            for(int i = lastNumberOfOutlet; i < x->f_AmbisonicsDecoder->getNumberOfOutputs(); i++)
+            {
+                outlet_append((t_object*)x, NULL, gensym("signal"));
+            }
+        }
+        */
+        object_method(b, gensym("dynlet_end"));
+    }
+
     return 0;
 }
 
 t_max_err angles_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
+    if(argc && argv)
+    {
+        
+    }
     return 0;
 }
 

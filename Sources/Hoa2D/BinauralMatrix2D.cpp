@@ -11777,9 +11777,9 @@ static const float  MIT_HRTF_96000[] = {
             number_of_samples = 512;
         else if(samplerate == 48000)
             number_of_samples = 557;
-        else if(samplerate == 48000)
+        else if(samplerate == 88200)
             number_of_samples = 1024;
-        else if(samplerate == 48000)
+        else if(samplerate == 96000)
             number_of_samples = 1114;
         else
             return NULL;
@@ -11798,7 +11798,7 @@ static const float  MIT_HRTF_96000[] = {
         if(samplerate == 44100)
             return MIT_HRTF_44100+azimuth_offset;
         else if(samplerate == 48000)
-            return MIT_HRTF_44100+azimuth_offset;
+            return MIT_HRTF_48000+azimuth_offset;
         else if(samplerate == 88200)
             return MIT_HRTF_88200+azimuth_offset;
         else if(samplerate == 96000)

@@ -116,29 +116,26 @@ namespace Hoa2D
             // Get the pair of real channels corresponding to the virtual channel
             angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
             minimum_distance    = HOA_2PI + 1;
+            
             for(unsigned int j = 0; j < m_number_of_channels; j++)
             {
                 current_distance  = distance_radian(m_channels_azimuth_sorted[j], angle);
                 if(current_distance < minimum_distance)
                 {
                     minimum_distance = current_distance;
-                    if(angle < m_channels_azimuth_sorted[j] && current_distance < HOA_2PI)
+                    if(angle < m_channels_azimuth_sorted[j] && current_distance < HOA_PI)
                     {
                         channel_index1 = j;
                         channel_index2 = j+1;
-                        if(channel_index2 >= m_number_of_channels)
-                            channel_index2 = 0;
                     }
                     else
                     {
                         channel_index1 = j;
                         channel_index2 = j-1;
-                        if(channel_index2 < 0)
-                            channel_index2 = m_number_of_channels - 1;
                     }
                 }
             }
-            
+            channel_index2 = wrap(channel_index2, 0, m_number_of_channels - 1);
             // Get the factor for the pair of real channels
             distance_index1 = distance_radian(m_channels_azimuth_sorted[channel_index1], angle);
             distance_index2 = distance_radian(m_channels_azimuth_sorted[channel_index2], angle);
@@ -203,7 +200,8 @@ namespace Hoa2D
     
     unsigned int hoa_number_binaural_samplerate = 4;
     unsigned int hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};
-    unsigned int hoa_binaural_impulse_sizes[]   = {512, 557, 1024, 1114};
+    unsigned int hoa_binaural_impulse_sizes[]   = {128, 218, 400, 436};
+    unsigned int hoa_binaural_crop[]            = {37, 64, 112, 128};
     
     DecoderBinaural::DecoderBinaural(unsigned int order) : Ambisonic(order), Planewaves(2)
     {
@@ -215,7 +213,11 @@ namespace Hoa2D
         m_impulses_loaded           = 0;
         m_matrix_allocated          = 0;
         m_impulses_matrix           = NULL;
-        
+        m_input_matrix              = NULL;
+        m_result_matrix             = NULL;
+        m_linear_vector_left        = NULL;
+        m_linear_vector_right        = NULL;
+   
         for(unsigned int i = 0; i < hoa_number_binaural_configs; i++)
         {
             if(hoa_binaural_configs[i] > m_order * 2 + 2)
@@ -232,6 +234,7 @@ namespace Hoa2D
     
     void DecoderBinaural::setSampleRate(unsigned int sampleRate)
     {
+        int index;
         float value_left;
         float value_right;
         if(sampleRate != m_sample_rate)
@@ -242,18 +245,20 @@ namespace Hoa2D
             {
                 if(sampleRate == hoa_binaural_samplerate[i])
                 {
+                    index = i;
                     m_sample_rate   = hoa_binaural_samplerate[i];
                     m_impulses_size = hoa_binaural_impulse_sizes[i];
                 }
             }
             if(!m_sample_rate)
             {
+                index = 0;
                 m_sample_rate       = hoa_binaural_samplerate[0];
                 m_impulses_size     = hoa_binaural_impulse_sizes[0];
             }
             for(int i = 0; i < m_number_of_virtual_channels; i++)
             {
-                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, (double)i / (double)m_number_of_virtual_channels * 360);
+                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, i * 360 / m_number_of_virtual_channels)+hoa_binaural_crop[index];
             }
             
             
@@ -268,10 +273,13 @@ namespace Hoa2D
                 m_channels_vector[i] = 0.;
             
             m_harmonics_vector[0] = 1.;
-            for(unsigned int i = 1; i < m_number_of_harmonics; i++)
+            for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
-                m_harmonics_vector[i-1] = 0.;
-                m_harmonics_vector[i]   = 1.;
+                if(i != 0)
+                {
+                    m_harmonics_vector[i-1] = 0.;
+                    m_harmonics_vector[i]   = 1.;
+                }
                 m_decoder->process(m_harmonics_vector, m_channels_vector);
                 
                 for(unsigned int j = 0; j < m_impulses_size; j++)
@@ -304,6 +312,7 @@ namespace Hoa2D
         {
             m_matrix_allocated = 0;
             m_vector_size = vectorSize;
+            
             if(m_input_matrix)
                 delete [] m_input_matrix;
             m_input_matrix = NULL;
@@ -359,7 +368,7 @@ namespace Hoa2D
         memset(m_linear_vector_right + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
 	}
 	
-	void DecoderBinaural::process(const double** inputs, double** outputs)
+	void DecoderBinaural::process(const double* const* inputs, double** outputs)
 	{
         const double* input;
         for(unsigned int i = 0; i < m_number_of_harmonics; i++)
@@ -383,11 +392,18 @@ namespace Hoa2D
             outputs[0][j] = m_linear_vector_left[j];
             outputs[1][j] = m_linear_vector_right[j];
         }
+
+
         cblas_scopy(m_impulses_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
         cblas_scopy(m_impulses_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
         
+#ifdef __APPLE__
+        vDSP_vclr(m_linear_vector_left + m_impulses_size - 1, 1, m_vector_size);
+        vDSP_vclr(m_linear_vector_right + m_impulses_size - 1, 1, m_vector_size);
+#else
         memset(m_linear_vector_left + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
         memset(m_linear_vector_right + m_impulses_size - 1, 0, m_vector_size * sizeof(float));
+#endif
 	}
 	
 	DecoderBinaural::~DecoderBinaural()
