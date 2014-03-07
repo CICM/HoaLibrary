@@ -113,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        m_encoder                   = <span class="keyword">new</span> <a class="code" href="class_hoa2_d_1_1_encoder.html">Encoder</a>(m_order);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_channels; i++)</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            m_channels_azimuth[i] = (double)i / (<span class="keywordtype">double</span>)m_number_of_channels * CICM_2PI;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            m_channels_azimuth[i] = (double)i / (<span class="keywordtype">double</span>)m_number_of_channels * HOA_2PI;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            m_encoder-&gt;<a class="code" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">setAzimuth</a>(m_channels_azimuth[i]);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            m_encoder-&gt;<a class="code" href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">process</a>(1., m_harmonics_vector);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            </div>
@@ -155,7 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 6 2014 14:00:57 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

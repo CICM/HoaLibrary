@@ -81,7 +81,7 @@ void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
         
         if(x->f_number_of_channels < 1)
             x->f_number_of_channels = 1;
-		x->f_vector = new Hoa2D::Vector(4);
+		x->f_vector = new Hoa2D::Vector(x->f_number_of_channels);
 		
 		dsp_setup((t_pxobject *)x, x->f_vector->getNumberOfChannels());
 		for (int i = 0; i < 4; i++)
@@ -90,6 +90,7 @@ void *hoa_vector_new(t_symbol *s, long argc, t_atom *argv)
         x->f_angles_of_channels = new t_atom_float[MAX_CHANNELS];
 		x->f_ins = new double[x->f_vector->getNumberOfChannels() * SYS_MAXBLKSIZE];
         x->f_outs = new double[4 * SYS_MAXBLKSIZE];
+        attr_args_process(x, argc, argv);
 	}
 
 	return (x);

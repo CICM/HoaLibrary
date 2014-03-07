@@ -130,15 +130,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            max = 0.;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; NUMBEROFCIRCLEPOINTS; j++)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                phi = (double)j / (<span class="keywordtype">double</span>)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                phi = (double)j / (<span class="keywordtype">double</span>)NUMBEROFCIRCLEPOINTS * HOA_2PI + HOA_PI;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                phi = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(phi);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                m_azimuth_matrix[j][i] = <a class="code" href="namespace_hoa3_d.html#a03f884a043a03a2a70cd3cdf46eaa7a5">spherical_harmonics_azimuth</a>(band, argument, phi);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                theta = (double)j / (<span class="keywordtype">double</span>)NUMBEROFCIRCLEPOINTS * CICM_2PI + CICM_PI2;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                theta = (double)j / (<span class="keywordtype">double</span>)NUMBEROFCIRCLEPOINTS * HOA_2PI + HOA_PI2;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                theta = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(theta);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordflow">if</span>(theta &gt;= CICM_PI)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    theta = CICM_2PI - theta;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordflow">if</span>(theta &gt;= HOA_PI)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    theta = HOA_2PI - theta;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                m_elevation_matrix[j][i] = <a class="code" href="namespace_hoa3_d.html#a36da69477764cc43e96106d7436d0797">spherical_harmonics_elevation</a>(band, argument, theta);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="keywordflow">if</span>(max &lt; fabs(m_elevation_matrix[j][i]))</div>
@@ -156,12 +156,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_encoder.html#a7dbf4d5791003ed486fc0b5462409e0a">   60</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_encoder.html#a7dbf4d5791003ed486fc0b5462409e0a">Encoder::setAzimuth</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> azimuth)</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        m_azimuth = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(azimuth) / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        m_azimuth = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(azimuth) / HOA_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
 <div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d">   65</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_encoder.html#a3bf01c6ecd90108c66c19ce7e5bde97d">Encoder::setElevation</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> elevation)</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        m_elevation = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(elevation)  / CICM_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        m_elevation = <a class="code" href="namespace_hoa3_d.html#a0396e69cca8a7112c6bd1a817fc3ca80">wrap_twopi</a>(elevation)  / HOA_2PI * (double)(NUMBEROFCIRCLEPOINTS - 1);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
 <div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_hoa3_d_1_1_encoder.html#aedcd6cc5a50c85f373c61137e452a9b4">   70</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa3_d_1_1_encoder.html#aedcd6cc5a50c85f373c61137e452a9b4">Encoder::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> input, <span class="keywordtype">float</span>* outputs)</div>
@@ -232,7 +232,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 6 2014 14:00:57 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
