@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['_7eambisonic',['~Ambisonic',['../class_hoa2_d_1_1_ambisonic.html#a082fc2e3f9910703ddb49b9a478329bf',1,'Hoa2D::Ambisonic::~Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#a082fc2e3f9910703ddb49b9a478329bf',1,'Hoa3D::Ambisonic::~Ambisonic()']]],
+  ['_7eambisonic',['~Ambisonic',['../class_hoa2_d_1_1_ambisonic.html#a27be996cfb2bad88e13a32c0d7dba517',1,'Hoa2D::Ambisonic::~Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#aef717915cc52d318b5b40af88c38c722',1,'Hoa3D::Ambisonic::~Ambisonic()']]],
   ['_7edecoder',['~Decoder',['../class_hoa3_d_1_1_decoder.html#acc197bebb310a82756ee2061fe371e2d',1,'Hoa3D::Decoder']]],
   ['_7edecoderbinaural',['~DecoderBinaural',['../class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4',1,'Hoa2D::DecoderBinaural']]],
   ['_7edecoderirregular',['~DecoderIrregular',['../class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f',1,'Hoa2D::DecoderIrregular']]],
