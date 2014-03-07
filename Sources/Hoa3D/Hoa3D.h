@@ -8,6 +8,14 @@
 #ifndef DEF_HOA_LIBRARY_3D
 #define DEF_HOA_LIBRARY_3D
 
+#include "../Hoa/Hoa.h"
+
+//! The 3D high order ambisonic namespace.
+/**
+ All the 3D ambisonic classes will be part of this namespace
+ */
+namespace Hoa3D{};
+
 #include "Encoder.h"
 #include "Decoder.h"
 #include "Wider.h"

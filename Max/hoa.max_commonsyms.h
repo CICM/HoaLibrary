@@ -12,6 +12,10 @@ extern "C"
 #include <ext.h>
 }
 
+// Hoa
+static t_symbol* hoa_sym_hoa_getinfos				= gensym("hoa_getinfos");
+
+// notify
 static t_symbol* hoa_sym_nothing 					= gensym("");
 static t_symbol* hoa_sym_notify 					= gensym("notify");
 static t_symbol* hoa_sym_modified 					= gensym("modified");
@@ -56,6 +60,9 @@ static t_symbol* hoa_sym_selectbox 					= gensym("selectbox");
 static t_symbol* hoa_sym_insertboxtext 				= gensym("insertboxtext");
 static t_symbol* hoa_sym_gettextptr 				= gensym("gettextptr");
 static t_symbol* hoa_sym_firstview 					= gensym("firstview");
+static t_symbol* hoa_sym_connect 					= gensym("connect");
+static t_symbol* hoa_sym_selectedboxes				= gensym("selectedboxes");
+static t_symbol* hoa_sym_startdrag					= gensym("startdrag");
 
 // Map
 static t_symbol* hoa_sym_source 					= gensym("source");
