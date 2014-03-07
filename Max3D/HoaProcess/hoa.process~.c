@@ -1066,7 +1066,7 @@ short hoa_processor_linkoutlets(t_patcher *p, t_hoa_processor *x)
 				//outlet_add(io->s_outlet, x->out_table[io->s_index - 1]);
 				//outlet_add(io->s_outlet, x->out_table[io->s_index - 1]);
 				//outlet_add((struct outlet *)io->s_obj.o_inlet, x->out_table[io->s_index - 1]);
-				post("linkoutlet");
+				//post("linkoutlet");
 			}
 		}
     }
