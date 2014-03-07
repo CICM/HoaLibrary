@@ -87,6 +87,57 @@ namespace Hoa
             return MIT_HRTF_96000+elevation_offset;
         return NULL;
     }
+	
+	inline long mstosamps(double ms, double samplerate = 44100.)
+    {
+        return (long)(samplerate * ms * 0.001);
+    }
+    
+    inline double sampstoms(double s, double samplerate=44100.)
+    {
+        return 1000. * s / samplerate;
+    }
+    
+    inline double atodb(double amp)
+    {
+        return (amp <=0.) ? -999. : (20. * log10(amp));
+    }
+    
+    inline double dbtoa(double dB)
+    {
+        return pow(10., dB * 0.05);
+    }
+	
+	inline double safediv(double num, double denom)
+    {
+        return denom == 0. ? 0. : num/denom;
+    }
+	
+	inline double scale(double in, double inlow, double inhigh, double outlow, double outhigh, double power)
+    {
+        double value;
+        double inscale = safediv(1., inhigh - inlow);
+        double outdiff = outhigh - outlow;
+        
+        value = (in - inlow) * inscale;
+        if (value > 0.0)
+            value = pow(value, power);
+        else if (value < 0.0)
+            value = -pow(-value, power);
+        value = (value * outdiff) + outlow;
+        
+        return value;
+    }
+    
+    inline double scale(double in, double inlow, double inhigh, double outlow, double outhigh)
+    {
+        return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
+    }
+	
+	inline bool isInside(double val, double v1, double v2)
+	{
+        return (v1 <= v2) ? (val >= v1 && val <= v2) : (val >= v2 && val <= v1);
+	}
 }
 
 #endif
