@@ -40,7 +40,6 @@ namespace Hoa2D
 			
 			bool   isSelected()			const {return m_isSelected;}
 			double getDistance()		const {return m_distance;}
-			double getAngleInRadian()	const {return m_angleInRadian;}
 			double getAngleInDegree()	const {return radToDeg(m_angleInRadian);}
 			double getWiderValue()		const {return m_widerValue;}
 			double getFisheyeStartAngle() const { return m_fisheyeStartAngleInRadian; }
@@ -83,7 +82,6 @@ namespace Hoa2D
 		VirtualMicManager(long number_of_mics = 0);
 		~VirtualMicManager();
 		
-		void setFisheyeDestAngle(double angle_radian);
 		void resetAngles(const int index = -1);
 		void resetWides(const int index = -1);
 		void setNumberOfMics(long number_of_mics);
@@ -98,6 +96,7 @@ namespace Hoa2D
 		void selectMicsBetweenMics(int index1, int index2);
 		void rotateSelectedMicsWithRadian(double newRadian, int sourceBeingDragged, int magnet = 0);
 		void setSelectedMicsWiderValueWithRadiusDelta(double deltaRadius);
+		void setFisheyeDestAngle(double angle_radian);
 		void setFisheyeStartAngle(const int index);					// take current angle
 		void setFisheyeStartAngle(const int index, double radian);	// take an angle
 		void setAngleCartesianCoordinate(const int index, double abscissa, double ordinate);
@@ -117,7 +116,6 @@ namespace Hoa2D
 		inline double getFisheyeStep()					const { return m_fisheyeStep; }
 		inline bool   isSelected(const int index)		const {return m_mics[safeIndex(index)]->isSelected(); }
 		inline double getDistance(const int index)		const {return m_mics[safeIndex(index)]->getDistance(); }
-		inline double getAngleInRadian(const int index) const {return m_mics[safeIndex(index)]->getAngleInRadian(); }
 		inline double getAngleInDegree(const int index) const {return m_mics[safeIndex(index)]->getAngleInDegree(); }
 		inline double getWiderValue(const int index)	const {return m_mics[safeIndex(index)]->getWiderValue(); }
 		inline double getFisheyeStartAngle(const int index) const { return m_mics[safeIndex(index)]->getFisheyeStartAngle(); }

@@ -158,11 +158,11 @@ namespace Hoa2D
 	
 	void VirtualMicManager::selectMicsBetweenMics(int indexOne, int indexTwo)
 	{
-		double angle1 = getAngleInRadian(indexOne);
-		double angle2 = getAngleInRadian(indexTwo);
+		double angle1 = getAzimuth(indexOne);
+		double angle2 = getAzimuth(indexTwo);
 		
 		for (int i=0; i<m_mics.size(); i++)
-			if (isInsideRad(getAngleInRadian(i), angle1, angle2))
+			if (isInsideRad(getAzimuth(i), angle1, angle2))
 				setSelected(i, 1);
 	}
 	
@@ -172,8 +172,8 @@ namespace Hoa2D
 			return;
 		
 		double deltaAngle;
-		double oldAngle = m_mics[sourceBeingDragged]->getAngleInRadian();
-		deltaAngle = newRadian - m_mics[sourceBeingDragged]->getAngleInRadian();
+		double oldAngle = m_mics[sourceBeingDragged]->getAzimuth();
+		deltaAngle = newRadian - m_mics[sourceBeingDragged]->getAzimuth();
 		m_mics[sourceBeingDragged]->setAngleInRadian(newRadian);
 		
 		if (magnet == 1)
@@ -181,7 +181,7 @@ namespace Hoa2D
 			if ( getClosestDefMicDistance(sourceBeingDragged) < HOA_2PI / (double) m_mics.size() *0.1 )
 			{
 				m_mics[sourceBeingDragged]->setAngleInRadian(getClosestDefMicAngle(sourceBeingDragged));
-				deltaAngle =  m_mics[sourceBeingDragged]->getAngleInRadian() - oldAngle;
+				deltaAngle =  m_mics[sourceBeingDragged]->getAzimuth() - oldAngle;
 			}
 		}
 		
@@ -307,7 +307,7 @@ namespace Hoa2D
 	
 	double VirtualMicManager::getClosestDefMicAngle(const int micIndex)
 	{
-		return getClosestDefMicAngle(getAngleInRadian(micIndex));
+		return getClosestDefMicAngle(getAzimuth(micIndex));
 	}
 	
 	double VirtualMicManager::getClosestDefMicAngle(double angle_radian)
@@ -331,7 +331,7 @@ namespace Hoa2D
 	
 	double VirtualMicManager::getClosestDefMicDistance(const int micIndex)
 	{
-		return getClosestDefMicDistance(getAngleInRadian(micIndex));
+		return getClosestDefMicDistance(getAzimuth(micIndex));
 	}
 	
 	double VirtualMicManager::getClosestDefMicDistance(double angle_radian)

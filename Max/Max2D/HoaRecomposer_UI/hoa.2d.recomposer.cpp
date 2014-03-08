@@ -55,6 +55,7 @@ typedef struct  _hoa_recomposer
     
     // draw utility
     double      f_micRadius;
+	double		f_micSize;
     
     // outlets
 	void*		f_out;
@@ -62,47 +63,47 @@ typedef struct  _hoa_recomposer
 
 } t_hoa_recomposer;
 
-t_class *HoaRecomposerUI_class;
+t_class *hoa_recomposer_class;
 
 // general methods
-void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv);
-void HoaRecomposerUI_free(t_hoa_recomposer *x);
-void HoaRecomposerUI_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t_jboxdrawparams *params);
-void HoaRecomposerUI_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s);
-t_max_err HoaRecomposerUI_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
-void HoaRecomposerUI_preset(t_hoa_recomposer *x);
-t_max_err HoaRecomposerUI_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av);
-t_max_err HoaRecomposerUI_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av);
+void *hoa_recomposer_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_recomposer_free(t_hoa_recomposer *x);
+void hoa_recomposer_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t_jboxdrawparams *params);
+void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s);
+t_max_err hoa_recomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
+void hoa_recomposer_preset(t_hoa_recomposer *x);
+t_max_err hoa_recomposer_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av);
+t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av);
 void notifyChange(t_hoa_recomposer *x);
-void HoaRecomposerUI_outputAndNotifyChange(t_hoa_recomposer *x);
+void hoa_recomposer_outputAndNotifyChange(t_hoa_recomposer *x);
 
 // mouse/key methods
 
-void HoaRecomposerUI_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-long HoaRecomposerUI_key(t_hoa_recomposer *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
-void HoaRecomposerUI_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
-void HoaRecomposerUI_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_recomposer_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_recomposer_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
+long hoa_recomposer_key(t_hoa_recomposer *x, t_object *patcherview, long keycode, long modifiers, long textcharacter);
+void hoa_recomposer_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
+void hoa_recomposer_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers);
 
 // msg-in methods
 t_max_err set_numberOfMics(t_hoa_recomposer *x, void *attr, long ac, t_atom *av);
-void HoaRecomposerUI_bang(t_hoa_recomposer *x);
-void HoaRecomposerUI_list(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
-void HoaRecomposerUI_anything(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
-void HoaRecomposerUI_float(t_hoa_recomposer *x, double f);
-void HoaRecomposerUI_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
+void hoa_recomposer_bang(t_hoa_recomposer *x);
+void hoa_recomposer_list(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
+void hoa_recomposer_anything(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
+void hoa_recomposer_float(t_hoa_recomposer *x, double f);
+void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av);
 
-void HoaRecomposerUI_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
-void HoaRecomposerUI_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
-void HoaRecomposerUI_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
-void HoaRecomposerUI_nb_hp(t_hoa_recomposer *x, int v);
+void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
+void hoa_recomposer_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
+void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av);
+void hoa_recomposer_nb_hp(t_hoa_recomposer *x, int v);
 
 // msg-out methods
-void HoaRecomposerUI_output(t_hoa_recomposer *x);
+void hoa_recomposer_output(t_hoa_recomposer *x);
 
 // paint methods
-void HoaRecomposerUI_paint(t_hoa_recomposer *x, t_object *view);
+void hoa_recomposer_paint(t_hoa_recomposer *x, t_object *view);
 void draw_background(t_hoa_recomposer *x, t_object *view, t_rect *rect);
 void draw_microphones(t_hoa_recomposer *x, t_object *view, t_rect *rect);
 void draw_textMics(t_hoa_recomposer *x, t_object *view, t_rect *rect);
@@ -124,31 +125,31 @@ int C74_EXPORT main()
 {
 	t_class *c;
 	
-	c = class_new("hoa.2d.recomposer", (method)HoaRecomposerUI_new, (method)HoaRecomposerUI_free, (short)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
+	c = class_new("hoa.2d.recomposer", (method)hoa_recomposer_new, (method)hoa_recomposer_free, (short)sizeof(t_hoa_recomposer), 0L, A_GIMME, 0);
 	class_alias(c, gensym("hoa.recomposer"));
 	
 	c->c_flags |= CLASS_FLAG_NEWDICTIONARY;
 	jbox_initclass(c, JBOX_COLOR | JBOX_FIXWIDTH | JBOX_FONTATTR);
 	
-	class_addmethod(c, (method) HoaRecomposerUI_assist,          "assist",        A_CANT,	0);
-    class_addmethod(c, (method) HoaRecomposerUI_preset,          "preset",                  0);
-    class_addmethod(c, (method) HoaRecomposerUI_getvalueof,      "getvalueof",    A_CANT,   0);
-	class_addmethod(c, (method) HoaRecomposerUI_setvalueof,      "setvalueof",    A_CANT,   0);
-	class_addmethod(c, (method) HoaRecomposerUI_paint,           "paint",         A_CANT,	0);
-	class_addmethod(c, (method) HoaRecomposerUI_getdrawparams,   "getdrawparams", A_CANT,   0);
-	class_addmethod(c, (method) HoaRecomposerUI_notify,          "notify",        A_CANT,   0);
-	class_addmethod(c, (method) HoaRecomposerUI_bang,            "bang",                 0L,0);
-    class_addmethod(c, (method) HoaRecomposerUI_set,             "set",           A_GIMME,  0);
-    class_addmethod(c, (method) HoaRecomposerUI_angles,          "angles",         A_GIMME,  0);
-    class_addmethod(c, (method) HoaRecomposerUI_wide,            "directivities",          A_GIMME,  0);
-    class_addmethod(c, (method) HoaRecomposerUI_reset,           "reset",         A_GIMME,  0);
-	class_addmethod(c, (method) HoaRecomposerUI_anything,        "anything",      A_GIMME,  0);
-	class_addmethod(c, (method) HoaRecomposerUI_mousedown,       "mousedown",     A_CANT,   0);
-	class_addmethod(c, (method) HoaRecomposerUI_mousedrag,       "mousedrag",     A_CANT,   0);
-	class_addmethod(c, (method) HoaRecomposerUI_mouseup,         "mouseup",       A_CANT,   0);
-	class_addmethod(c, (method) HoaRecomposerUI_mousemove,       "mousemove",     A_CANT,   0);
-    class_addmethod(c, (method) HoaRecomposerUI_mousedoubleclick,"mousedoubleclick", A_CANT,0);
-	class_addmethod(c, (method) HoaRecomposerUI_key,             "key",           A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_assist,          "assist",        A_CANT,	0);
+    class_addmethod(c, (method) hoa_recomposer_preset,          "preset",                  0);
+    class_addmethod(c, (method) hoa_recomposer_getvalueof,      "getvalueof",    A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_setvalueof,      "setvalueof",    A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_paint,           "paint",         A_CANT,	0);
+	class_addmethod(c, (method) hoa_recomposer_getdrawparams,   "getdrawparams", A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_notify,          "notify",        A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_bang,            "bang",                 0L,0);
+    class_addmethod(c, (method) hoa_recomposer_set,             "set",           A_GIMME,  0);
+    class_addmethod(c, (method) hoa_recomposer_angles,          "angles",         A_GIMME,  0);
+    class_addmethod(c, (method) hoa_recomposer_wide,            "directivities",          A_GIMME,  0);
+    class_addmethod(c, (method) hoa_recomposer_reset,           "reset",         A_GIMME,  0);
+	class_addmethod(c, (method) hoa_recomposer_anything,        "anything",      A_GIMME,  0);
+	class_addmethod(c, (method) hoa_recomposer_mousedown,       "mousedown",     A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_mousedrag,       "mousedrag",     A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_mouseup,         "mouseup",       A_CANT,   0);
+	class_addmethod(c, (method) hoa_recomposer_mousemove,       "mousemove",     A_CANT,   0);
+    class_addmethod(c, (method) hoa_recomposer_mousedoubleclick,"mousedoubleclick", A_CANT,0);
+	class_addmethod(c, (method) hoa_recomposer_key,             "key",           A_CANT,   0);
     	
 	CLASS_ATTR_DEFAULT			(c, "patching_rect", 0, "0 0 300 300");
 	
@@ -226,13 +227,13 @@ int C74_EXPORT main()
     CLASS_ATTR_ALIAS            (c, "channels", "loudspeakers");
 	
 	class_register(CLASS_BOX, c);
-	HoaRecomposerUI_class = c;
+	hoa_recomposer_class = c;
 	
 	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
-void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
+void *hoa_recomposer_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_hoa_recomposer *x =  NULL; 
 	t_dictionary *d;
@@ -241,7 +242,7 @@ void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
 	if (!(d = object_dictionaryarg(argc,argv)))
 		return NULL;
 	
-	x = (t_hoa_recomposer *)object_alloc(HoaRecomposerUI_class);
+	x = (t_hoa_recomposer *)object_alloc(hoa_recomposer_class);
 	flags = 0 
 	| JBOX_DRAWFIRSTIN 
 	| JBOX_DRAWINLAST
@@ -278,7 +279,7 @@ void *HoaRecomposerUI_new(t_symbol *s, int argc, t_atom *argv)
 	return (x);
 }
 
-void HoaRecomposerUI_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t_jboxdrawparams *params)
+void hoa_recomposer_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t_jboxdrawparams *params)
 {
 	params->d_borderthickness = 1;
 	params->d_cornersize = 8;
@@ -286,7 +287,7 @@ void HoaRecomposerUI_getdrawparams(t_hoa_recomposer *x, t_object *patcherview, t
     params->d_boxfillcolor = x->f_colorBackground;
 }
 
-void HoaRecomposerUI_free(t_hoa_recomposer *x)
+void hoa_recomposer_free(t_hoa_recomposer *x)
 {
 	jbox_free(&x->j_box);
 	delete x->f_mics;
@@ -296,7 +297,7 @@ void HoaRecomposerUI_free(t_hoa_recomposer *x)
 	delete [] x->f_harmonicsValues;
 }
 
-void HoaRecomposerUI_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s)
+void hoa_recomposer_assist(t_hoa_recomposer *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET) {
 		sprintf(s,"(list) Set Microphones Directivities and Angles Values");
@@ -310,7 +311,7 @@ void HoaRecomposerUI_assist(t_hoa_recomposer *x, void *b, long m, long a, char *
 	}
 }
 
-void HoaRecomposerUI_preset(t_hoa_recomposer *x)
+void hoa_recomposer_preset(t_hoa_recomposer *x)
 {
     
     void* z;
@@ -321,12 +322,12 @@ void HoaRecomposerUI_preset(t_hoa_recomposer *x)
     
     for(int i = 0; i < x->f_numberOfMic; i++)
     {
-        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_angles, i, (float)x->f_mics->getAngleInRadian(i));
+        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_angles, i, (float)x->f_mics->getAzimuth(i));
         binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_directivities, i, (float)x->f_mics->getWiderValue(i));
     }
 }
 
-t_max_err HoaRecomposerUI_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av)
+t_max_err hoa_recomposer_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av)
 {
     if (ac && av) {
         
@@ -342,13 +343,13 @@ t_max_err HoaRecomposerUI_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av)
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_redraw((t_jbox *)x);
         
-        HoaRecomposerUI_output(x);
+        hoa_recomposer_output(x);
 	}
 	return MAX_ERR_NONE;
 }
 
 // get a list of mic value : (x, y, wider)*numberOfMicrophone
-t_max_err HoaRecomposerUI_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
+t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
 {
     if (ac && av)
     {
@@ -380,7 +381,7 @@ t_max_err HoaRecomposerUI_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
 
 /* --------- */
 
-void HoaRecomposerUI_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
+void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
     // "reset" | "reset angle" | "reset angle 1" | "reset wide" | "reset wide 1"
     if (ac == 0)
@@ -422,14 +423,14 @@ void HoaRecomposerUI_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *a
         }
     }
     
-    HoaRecomposerUI_outputAndNotifyChange(x);
+    hoa_recomposer_outputAndNotifyChange(x);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
 	jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_mic_layer);
     jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
 	jbox_redraw((t_jbox *)x);
 }
 
-void HoaRecomposerUI_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
+void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 {
     int isSet = (s == gensym("set")) ? 1 : 0;
     t_symbol *name = atom_getsym(av);
@@ -493,16 +494,16 @@ void HoaRecomposerUI_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 	jbox_redraw((t_jbox *)x);
 }
 
-void HoaRecomposerUI_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
+void hoa_recomposer_angles(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 {
-    HoaRecomposerUI_set(x, s, ac, av); // notifying in set method
-    HoaRecomposerUI_output(x);
+    hoa_recomposer_set(x, s, ac, av); // notifying in set method
+    hoa_recomposer_output(x);
 }
 
-void HoaRecomposerUI_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
+void hoa_recomposer_wide(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
 {
-    HoaRecomposerUI_set(x, s, ac, av); // notifying in set method
-    HoaRecomposerUI_output(x);
+    hoa_recomposer_set(x, s, ac, av); // notifying in set method
+    hoa_recomposer_output(x);
 }
 
 t_max_err set_numberOfMics(t_hoa_recomposer *x, void *attr, long ac, t_atom *av)
@@ -535,30 +536,30 @@ t_max_err set_numberOfMics(t_hoa_recomposer *x, void *attr, long ac, t_atom *av)
 		x->f_harmonicsValues	= new double[order * 2 + 1];
 		
 		jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
-		HoaRecomposerUI_reset(x, gensym("reset"), 0, NULL);
+		hoa_recomposer_reset(x, gensym("reset"), 0, NULL);
     }
     return MAX_ERR_NONE;
 }
 
-void HoaRecomposerUI_anything(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
+void hoa_recomposer_anything(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av)
 {
 	;
 }
 
 //========================= Output Methods :
 
-void HoaRecomposerUI_bang(t_hoa_recomposer *x)
+void hoa_recomposer_bang(t_hoa_recomposer *x)
 {
-    HoaRecomposerUI_output(x);
+    hoa_recomposer_output(x);
 }
 
-void HoaRecomposerUI_outputAndNotifyChange(t_hoa_recomposer *x)
+void hoa_recomposer_outputAndNotifyChange(t_hoa_recomposer *x)
 {
     object_notify(x, hoa_sym_modified, NULL);
-    HoaRecomposerUI_output(x);
+    hoa_recomposer_output(x);
 }
 
-void HoaRecomposerUI_output(t_hoa_recomposer *x)
+void hoa_recomposer_output(t_hoa_recomposer *x)
 {
     int nmics = x->f_mics->getNumberOfMics();
 	t_atom*	av_left = new t_atom[nmics];
@@ -571,7 +572,7 @@ void HoaRecomposerUI_output(t_hoa_recomposer *x)
     
     // angles of microphones
     for (int i=0; i<nmics; i++) {
-        atom_setfloat(av_left+i, x->f_mics->getAngleInRadian(i));
+        atom_setfloat(av_left+i, x->f_mics->getAzimuth(i));
     }
     outlet_anything(x->f_out, hoa_sym_angles, nmics, av_left);
     
@@ -585,7 +586,7 @@ void HoaRecomposerUI_output(t_hoa_recomposer *x)
 
 //========================= Notify Methods :
 
-t_max_err HoaRecomposerUI_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
+t_max_err hoa_recomposer_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
 	t_symbol *name;
 
@@ -625,13 +626,13 @@ t_max_err HoaRecomposerUI_notify(t_hoa_recomposer *x, t_symbol *s, t_symbol *msg
 
 //========================= Paint Methods :
 
-void HoaRecomposerUI_paint(t_hoa_recomposer *x, t_object *view)
+void hoa_recomposer_paint(t_hoa_recomposer *x, t_object *view)
 {
 	t_rect rect;
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	x->rect = rect;
-    //x->f_micRadius = rect.width * 0.45;
     x->f_micRadius = rect.width * 0.46;
+	x->f_micSize = (rect.width / 20.) * 0.4;
 	draw_background(x, view, &rect);
     draw_harmonics(x, view, &rect);
     draw_microphones(x, view, &rect);
@@ -646,8 +647,6 @@ void draw_microphones(t_hoa_recomposer *x, t_object *view, t_rect *rect)
     double w = rect->width;
 	int numMics = x->f_numberOfMic;
     double mic_angle;
-    double hpSize;
-	hpSize = (w / 20.) * 0.4;
     
     t_jrgba overMicColor = x->f_colorMicSelected;
     overMicColor.red -= 0.1;
@@ -656,7 +655,6 @@ void draw_microphones(t_hoa_recomposer *x, t_object *view, t_rect *rect)
     
     t_jmatrix transform;
 
-	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_mic_layer, rect->width, rect->height);
 	
 	if (g) {
@@ -666,14 +664,14 @@ void draw_microphones(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 		for(int i=numMics-1; i>=0; i--)
 		{
             jgraphics_set_source_jrgba(g, x->f_mics->isSelected(i) ? &x->f_colorMicSelected : ( (x->f_last_mouseMoveOverMic == i) ? &overMicColor : &x->f_colorMic) );
-            mic_angle = x->f_mics->getAngleInRadian(i);
+            mic_angle = x->f_mics->getAzimuth(i);
             
             jgraphics_rotate(g, mic_angle);
             jgraphics_translate(g, 0, x->f_micRadius);
             //-- rotated and translated
             
             // head of the mic :
-            jgraphics_arc(g, 0, 0, hpSize, 0, HOA_2PI);
+            jgraphics_arc(g, 0, 0, x->f_micSize, 0, HOA_2PI);
             jgraphics_fill_preserve(g);
             
             jgraphics_set_line_width(g, 1);
@@ -704,17 +702,19 @@ void draw_textMics(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 	
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_text_layer, rect->width, rect->height);
     	
-	if (g) {
-        
+	if (g)
+	{
         jf = jfont_create(jbox_get_fontname((t_object *)x)->s_name, JGRAPHICS_FONT_SLANT_ITALIC, JGRAPHICS_FONT_WEIGHT_BOLD, fontsize);
         jtl = jtextlayout_withbgcolor(g, &x->f_colorMic);
         
         for(int i=numMics-1; i>=0; i--)
         {
             jtextlayout_settextcolor(jtl, (x->f_mics->isSelected(i) || x->f_last_mouseMoveOverMic == i) ? &x->f_colorTextMicSelected : &x->f_colorTextMic);
-            mic_angle = HOA_2PI - (x->f_mics->getAngleInRadian(i) + HOA_PI2);
+			
+			mic_angle = HOA_2PI - x->f_mics->getAzimuth(i) + HOA_PI;
             x1 = long(abscissa(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
             y1 = long(ordinate(x->f_micRadius, mic_angle) + (w*0.5))+0.5;
+			
             sprintf(text,"%i", i);
 			jtextlayout_set(jtl, text, jf, x1 - fontsize * 1.5, y1 - 10, fontsize * 3., 20, JGRAPHICS_TEXT_JUSTIFICATION_CENTERED, JGRAPHICS_TEXTLAYOUT_NOWRAP);
             jtextlayout_draw(jtl, g);
@@ -727,8 +727,7 @@ void draw_textMics(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 
 void computeRepresentation(t_hoa_recomposer *x, int index)
 {
-	x->f_encoder->setAzimuth(x->f_mics->getAzimuth(index));
-	//x->f_encoder->setAzimuth(0);
+	x->f_encoder->setAzimuth(0);
 	x->f_encoder->process(10., x->f_harmonicsValues);
 	x->f_wider->setWideningValue(x->f_mics->getWiderValue(index));
 	x->f_wider->process(x->f_harmonicsValues, x->f_harmonicsValues);
@@ -740,6 +739,10 @@ void draw_harmonics(t_hoa_recomposer *x, t_object *view, t_rect *rect)
     double w = rect->width;
     t_jrgba harmonicsFillColor = x->f_colorHarmonics;
 	double factor = (x->f_micRadius*0.92);
+	int breakIndex = 0;
+	double rotation = 0;
+	
+	int nPoints = x->f_scope->getNumberOfPoints();
     
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, hoa_sym_harmonics_layer, rect->width, rect->height);
     
@@ -751,21 +754,29 @@ void draw_harmonics(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, (w*0.5), (w*0.5));
 		jgraphics_set_matrix(g, &transform);
 		jgraphics_set_line_width(g, 2);
-		
-        jgraphics_rotate(g, HOA_PI2);
         
         for (int i = 0; i < x->f_numberOfMic; i++)
-		//for (int i = 0; i < 1; i++)
 		{
 			computeRepresentation(x, i);
 			
+			rotation = x->f_mics->getAzimuth(i);
+			jgraphics_rotate(g, rotation);
+			
 			jgraphics_move_to(g, x->f_scope->getAbscissa(0) * factor, x->f_scope->getOrdinate(0) * factor);
 			
-			for(int j = 1; j < x->f_scope->getNumberOfPoints(); j++)
-			//for(int j = 1; j < 100; j++)
+			for(int j = 1; j < nPoints; j++)
 			{
+				if (x->f_scope->getValue(j) <= 0)
+				{
+					breakIndex = j;
+					break;
+				}
 				jgraphics_line_to(g, x->f_scope->getAbscissa(j) * factor, x->f_scope->getOrdinate(j) * factor );
 			}
+			
+			if (breakIndex)
+				for(int j = nPoints - breakIndex; j < nPoints; j++)
+					jgraphics_line_to(g, x->f_scope->getAbscissa(j) * factor, x->f_scope->getOrdinate(j) * factor );
 			
 			jgraphics_close_path(g);
 			jgraphics_set_source_jrgba(g, &harmonicsFillColor);
@@ -773,28 +784,8 @@ void draw_harmonics(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 			jgraphics_set_source_jrgba(g, &x->f_colorHarmonics);
 			jgraphics_stroke(g);
 			
-			/*
-            if(x->f_mics->getBiggestContribution(i) != 0.)
-            {
-                double factor = (x->f_micRadius*0.92);
-                
-                jgraphics_set_source_jrgba(g, &harmonicsFillColor);
-                jgraphics_move_to(g, x->f_mics->getBiggestLobe_x(i, 0) * factor, x->f_mics->getBiggestLobe_y(i, 0) * factor);
-                for(int j = 1; j < x->f_mics->getBiggestLobeNbPoint(i); j++)
-                {
-                    jgraphics_line_to(g, x->f_mics->getBiggestLobe_x(i, j) * factor, x->f_mics->getBiggestLobe_y(i, j) * factor );
-                }
-                jgraphics_line_to(g, x->f_mics->getBiggestLobe_x(i, 0) * factor, x->f_mics->getBiggestLobe_y(i, 0) * factor);
-                
-                jgraphics_close_path(g);
-                jgraphics_fill_preserve(g);
-                jgraphics_set_source_jrgba(g, &x->f_colorHarmonics);
-                jgraphics_stroke(g);
-            }
-			*/
+			jgraphics_rotate(g, -rotation);
         }
-        
-        jgraphics_rotate(g, -HOA_PI2);
         
 		jbox_end_layer((t_object*)x, view, hoa_sym_harmonics_layer);
 	}
@@ -809,8 +800,6 @@ int isPointOverAMic(t_hoa_recomposer *x, t_pt *pt)
     int result = -1;
     double w = x->rect.width;
     double mic_angle;
-    double hpSize;
-	hpSize = (w / 20.) * 0.4;
     t_pt ptTranformed = {pt->x-(w*0.5), (w - pt->y)-(w*0.5)};
     
     surface = jgraphics_image_surface_create(JGRAPHICS_FORMAT_A8, 1, 1);
@@ -821,13 +810,13 @@ int isPointOverAMic(t_hoa_recomposer *x, t_pt *pt)
     
     for(int i=x->f_numberOfMic-1; i >= 0; i--)
     {
-        mic_angle = x->f_mics->getAngleInRadian(i);        
+        mic_angle = x->f_mics->getAzimuth(i);        
         
         //-- test head :
         jgraphics_rotate(context, mic_angle);
         jgraphics_translate(context, 0, x->f_micRadius);
         jgraphics_new_path(context);
-        jgraphics_arc(context, 0, 0, hpSize, 0, HOA_2PI);
+        jgraphics_arc(context, 0, 0, x->f_micSize, 0, HOA_2PI);
         jgraphics_close_path(context);
         jgraphics_translate(context, 0, -x->f_micRadius);
         jgraphics_rotate(context, -mic_angle);
@@ -875,7 +864,7 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
 	{
         jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
 		jgraphics_set_source_jrgba(g, &x->f_colorInnerCircle);
-		jgraphics_arc(g, w*0.5, w*0.5, x->f_micRadius,  0., JGRAPHICS_2PI);
+		jgraphics_arc(g, w*0.5, w*0.5, x->f_micRadius,  0., HOA_2PI);
 		jgraphics_fill(g);
         
         jgraphics_matrix_init(&transform, 1, 0, 0, -1, w*0.5, w*0.5);
@@ -883,7 +872,8 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
         jgraphics_set_source_jrgba(g, &HpMarkerColor);
         jgraphics_set_line_width(g, 1.);
         
-        for (int i=0; i < x->f_mics->getNumberOfMics(); i++) {
+        for (int i=0; i < x->f_mics->getNumberOfMics(); i++)
+		{
             jgraphics_rotate(g, mic_angle*i);
             jgraphics_translate(g, 0, x->f_micRadius);
             jgraphics_arc(g, 0, 0, hpSize*1.4, 0, HOA_2PI);
@@ -903,7 +893,9 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
         }
         
         // center crosshair
-        for (int i=0; i<2; i++) {
+		/*
+        for (int i=0; i<2; i++)
+		{
             jgraphics_set_source_jrgba(g, i == 0 ? &shadLight : &shadDark);
             jgraphics_move_to(g, 5.5, 5.5+i);
             jgraphics_line_to(g, -5.5, -5.5+i);
@@ -911,7 +903,7 @@ void draw_background(t_hoa_recomposer *x,  t_object *view, t_rect *rect)
             jgraphics_line_to(g, 5.5, -5.5+i);
             jgraphics_stroke(g);
         }
-		
+		*/
 		jbox_end_layer((t_object*)x, view, hoa_sym_background_layer);
 	}
 	jbox_paint_layer((t_object *)x, view, hoa_sym_background_layer, 0., 0.);
@@ -941,9 +933,9 @@ void draw_fishEye(t_hoa_recomposer *x, t_object *view, t_rect *rect)
         {
             if (x->f_mics->isSelected(i))
             {
-                micAngle = x->f_mics->getAngleInRadian(i);
-                cart.x = abscissa(x->f_micRadius, micAngle + HOA_PI2);
-                cart.y = ordinate(x->f_micRadius, micAngle + HOA_PI2);
+                micAngle = x->f_mics->getAzimuth(i);
+				cart.x = abscissa(x->f_micRadius, micAngle);
+                cart.y = ordinate(x->f_micRadius, micAngle);
                 cart.x = (cart.x + (w*0.5));
                 cart.y = ( (w - cart.y) - (w*0.5) );
                 jgraphics_move_to(g, cartFisheyeDest.x, cartFisheyeDest.y);
@@ -984,16 +976,8 @@ void draw_rect_selection(t_hoa_recomposer *x, t_object *view, t_rect *rect)
 }
 //========================= Mouse Methods :
 
-void HoaRecomposerUI_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
-{    
-    //-- modifiers :
-    //post("modifiers : %ld", modifiers);
-    // 16 : rien
-    // 17 : cmd
-    // 18 : shift
-    // 148: ctrl
-    // 19 : cmd+shift
-    
+void hoa_recomposer_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+{
     double w = x->rect.width;
     x->f_last_mouseDown = pt;
 
@@ -1016,7 +1000,7 @@ void HoaRecomposerUI_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt 
         t_pt ptCart = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
         x->f_last_mouseDragRadius = radius(ptCart.x, ptCart.y);
         x->f_mics->setFisheyeStartAngle(-2);
-        x->f_mics->setFisheyeDestAngle(x->f_fisheyeAngle - HOA_PI2);
+		x->f_mics->setFisheyeDestAngle(x->f_fisheyeAngle);
     }
     else if (isMouseDownOverAMic == -1 )
     {
@@ -1059,11 +1043,12 @@ void HoaRecomposerUI_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt 
     jbox_redraw((t_jbox *)x);
 }
 
-void HoaRecomposerUI_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     double w = x->rect.width;
     t_pt ptCart = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
-    double angleDrag = azimuth(ptCart.x, ptCart.y) - HOA_PI2;
+    //double angleDrag = azimuth(ptCart.x, ptCart.y) - HOA_PI2;
+	double angleDrag = azimuth(ptCart.x, ptCart.y);
     double radiusDrag = radius(ptCart.x, ptCart.y);
 
     if (x->f_rectSelectionExist)
@@ -1081,7 +1066,7 @@ void HoaRecomposerUI_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt 
         double factor = isInsideRad(angleDrag, fisheyeAngle - HOA_PI2, fisheyeAngle + HOA_PI2) ? 1 : -1;
         double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor;
         x->f_mics->setSelectedMicsFisheyeStepWithDelta(-2, radiusDelta / x->f_micRadius);
-        HoaRecomposerUI_outputAndNotifyChange(x);
+        hoa_recomposer_outputAndNotifyChange(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_fisheye_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_mic_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
@@ -1092,7 +1077,7 @@ void HoaRecomposerUI_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt 
     {
         if (modifiers == 18) // shift => set wider
         {
-            double micAngle = x->f_mics->getAngleInRadian(x->f_last_mouseDownOverMic);
+            double micAngle = x->f_mics->getAzimuth(x->f_last_mouseDownOverMic);
             double factor = isInsideRad(angleDrag, micAngle-HOA_PI2, micAngle+HOA_PI2) ? 1 : -1;
             double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor;
             x->f_mics->setSelectedMicsWiderValueWithRadiusDelta(radiusDelta / x->f_micRadius);
@@ -1103,7 +1088,7 @@ void HoaRecomposerUI_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt 
             x->f_mics->rotateSelectedMicsWithRadian(angleDrag, x->f_last_mouseDownOverMic, magnet);
         }
         
-        HoaRecomposerUI_outputAndNotifyChange(x);
+        hoa_recomposer_outputAndNotifyChange(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_mic_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
@@ -1115,7 +1100,7 @@ void HoaRecomposerUI_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt 
     x->f_last_mouseDragRadius = radiusDrag;
 }
 
-void HoaRecomposerUI_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_recomposer_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     x->f_last_mouseDragRadius = x->f_micRadius;
     x->f_last_mouseUp = pt;
@@ -1140,7 +1125,7 @@ void HoaRecomposerUI_mouseup(t_hoa_recomposer *x, t_object *patcherview, t_pt pt
     jbox_redraw((t_jbox *)x);    
 }
 
-void HoaRecomposerUI_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_recomposer_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     double w = x->rect.width;
     if ( (x->f_last_mouseMove.x != pt.x) || (x->f_last_mouseMove.y != pt.y) ) 
@@ -1196,7 +1181,7 @@ void HoaRecomposerUI_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt 
     }
 }
 
-void HoaRecomposerUI_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
+void hoa_recomposer_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
 {
     if (x->f_last_mouseDownOverMic != -1) {
         x->f_mics->setAngleToClosestDefMicAngle(x->f_last_mouseDownOverMic);
@@ -1204,11 +1189,11 @@ void HoaRecomposerUI_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_mic_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
         jbox_redraw((t_jbox *)x);
-        HoaRecomposerUI_outputAndNotifyChange(x);
+        hoa_recomposer_outputAndNotifyChange(x);
     }
 }
 
-long HoaRecomposerUI_key(t_hoa_recomposer *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
+long hoa_recomposer_key(t_hoa_recomposer *x, t_object *patcherview, long keycode, long modifiers, long textcharacter)
 {	
 	//post("keycode : %ld , modifiers : %ld , textcharacter : %ld ", keycode, modifiers, textcharacter);
     int filter = 0;
@@ -1286,8 +1271,8 @@ bool isMicInsideRect(t_hoa_recomposer *x, int micIndex, t_rect rectSelection)
 {
     double w = x->rect.width;
     t_pt micPoint;
-    micPoint.x = abscissa(x->f_micRadius, x->f_mics->getAngleInRadian(micIndex) + HOA_PI2);
-    micPoint.y = ordinate(x->f_micRadius, x->f_mics->getAngleInRadian(micIndex) + HOA_PI2);
+    micPoint.x = abscissa(x->f_micRadius, x->f_mics->getAzimuth(micIndex) + HOA_PI2);
+    micPoint.y = ordinate(x->f_micRadius, x->f_mics->getAzimuth(micIndex) + HOA_PI2);
     micPoint.x = (micPoint.x + (w*0.5));
     micPoint.y = ( (w - micPoint.y) - (w*0.5) );
     return jgraphics_ptinrect(micPoint, rectSelection);
