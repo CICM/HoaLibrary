@@ -18,21 +18,22 @@ namespace Hoa2D
         m_gains             = new double[m_number_of_harmonics];
 		m_muted				= new bool[numberOfSources];
 		m_first_source      = 0;
+		
         for(unsigned int i = 0; i < m_number_of_sources; i++)
         {
-			m_muted[i] = false;
+			setMute(i, 0);
             m_encoders.push_back(new Encoder(order));
             m_widers.push_back(new Wider(order));
         }
     }
     
-    void Map::setAzimuth(unsigned int index, const double azimuth)
+    void Map::setAzimuth(const unsigned int index, const double azimuth)
     {
         assert(index < m_number_of_sources);
         m_encoders[index]->setAzimuth(azimuth);
     }
 	
-    void Map::setRadius(unsigned int index, const double radius)
+    void Map::setRadius(const unsigned int index, const double radius)
     {
         assert(index < m_number_of_sources);
         if(radius >= 1.)
@@ -43,11 +44,11 @@ namespace Hoa2D
         else
         {
             m_gains[index] = 1.;
-            m_widers[index]->setWideningValue(0.);
+			m_widers[index]->setWideningValue(radius);
         }
     }
     
-    void Map::setMute(unsigned int index, const bool muted)
+    void Map::setMute(const unsigned int index, const bool muted)
     {
         assert(index < m_number_of_sources);
         m_muted[index] = muted;
@@ -57,7 +58,7 @@ namespace Hoa2D
             if(!m_muted[i])
             {
                 m_first_source = i;
-                return;
+                break;
             }
         }
     }
@@ -91,6 +92,7 @@ namespace Hoa2D
         {
             m_encoders[m_first_source]->process(inputs[m_first_source] * m_gains[m_first_source], m_harmonics_double);
             m_widers[m_first_source]->process(m_harmonics_double, outputs);
+			
             for(unsigned int i = m_first_source+1; i < m_number_of_sources; i++)
             {
                 if (!m_muted[i])

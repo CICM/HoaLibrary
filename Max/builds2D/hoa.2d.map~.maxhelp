@@ -953,7 +953,7 @@
 									"outlettype" : [ "list", "list", "list" ],
 									"outputmode" : 1,
 									"patching_rect" : [ 15.0, 121.625, 300.0, 300.0 ],
-									"sources_parameters" : [ "source", 0, -0.822475, -0.846385, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.867106, -0.757124, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.701336, 0.645548, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.879857, 0.836821, 0, 0.2, 0.2, 0.2, 1.0, "" ],
+									"sources_parameters" : [ "source", 0, -0.783424, -0.553099, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.517235, -0.553099, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -0.663081, 0.454274, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.765093, 0.658299, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.map",
 									"zoom" : 0.522812
 								}
@@ -4247,6 +4247,69 @@
 									"hidden" : 0,
 									"midpoints" : [ 795.5, 221.0, 744.233307, 221.0 ],
 									"source" : [ "obj-19", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 6 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 6 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 5 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 5 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 4 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 4 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 3 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 3 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 2 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 2 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 1 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-3", 0 ]
 								}
 
 							}

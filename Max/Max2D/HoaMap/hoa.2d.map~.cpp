@@ -64,10 +64,10 @@ int C74_EXPORT main(void)
 	
 	hoa_initclass(c, (method)hoa_getinfos);
 	
+	class_addmethod(c, (method)hoa_map_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_map_float,		"float",	A_FLOAT, 0);
 	class_addmethod(c, (method)hoa_map_int,         "int",		A_LONG, 0);
     class_addmethod(c, (method)hoa_map_list,        "list",		A_GIMME, 0);
-	class_addmethod(c, (method)hoa_map_dsp64,		"dsp64",	A_CANT, 0);
 	class_addmethod(c, (method)hoa_map_assist,      "assist",	A_CANT, 0);
 	
 	CLASS_ATTR_SYM              (c, "mode", 0, t_hoa_map, f_mode_sym);

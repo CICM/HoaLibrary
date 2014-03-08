@@ -4,10 +4,10 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
-#ifndef DEF_LINE
-#define DEF_LINE
+#ifndef DEF_CICMLINE
+#define DEF_CICMLINE
 
-#include "HoaCommon.max.h"
+#include "../HoaCommon.max.h"
 
 class Line
 {
@@ -22,11 +22,11 @@ private:
 	long        m_counter;
 	long        m_ramp;
 	
-	void init(long aVectorSize = 0, long aSamplingRate = 44100);
+	void init(long vector_size = 0, long sampling_rate = 44100);
 	
 public:
-	Line(long aTimeInSample = 4410, long aVectorSize = 0, long aSamplingRate = 44100);
-	Line(double aTimeInMs = 100., long aVectorSize = 0, long aSamplingRate = 44100);
+	Line(long samps = 4410, long vector_size = 0, long sampling_rate = 44100);
+	Line(double ms = 100., long vector_size = 0, long sampling_rate = 44100);
 	
 	inline long		getVectorSize()		const {return m_vector_size;}
 	inline long		getSamplingRate()	const {return m_sampling_rate;}
@@ -34,15 +34,15 @@ public:
 	inline double	getRampInMs()		const {return ((double)m_ramp / (double)m_sampling_rate) * 1000.;}
 	inline double	getValue()			const {return m_value_new;}
 	
-	inline void setSamplingRate(long aSamplingRate) {m_sampling_rate = clip_min(aSamplingRate, 1);}
-	inline void setVectorSize(long aVectorSize)		{m_vector_size = aVectorSize;}
+	inline void setSamplingRate(const long sampling_rate) {m_sampling_rate = clip_min(sampling_rate, 1);}
+	inline void setVectorSize(const long vector_size)		{m_vector_size = vector_size;}
 	
-	void setRampInSample(long aTimeInSample);
-	void setRampInMs(double aTimeInMs);
-	void setValueDirect(double aCoefficient);
-	void setValue(double aCoefficient);
-	void setValueAngleDirect(double anAngle);
-	void setValueAngle(double anAngle);
+	void setRampInSample(const long samps);
+	void setRampInMs(const double ms);
+	void setValueDirect(const double value);
+	void setValue(const double value);
+	void setValueAngleDirect(const double angle);
+	void setValueAngle(const double angle);
 	
 	~Line() {};
 	

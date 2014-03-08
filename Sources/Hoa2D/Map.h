@@ -28,7 +28,7 @@ namespace Hoa2D
         double*					m_harmonics_double;
         double*					m_gains;
 		bool*					m_muted;
-        unsigned int            m_first_source;
+        int						m_first_source;
         std::vector<Encoder*>   m_encoders;
         std::vector<Wider*>     m_widers;
         
@@ -64,7 +64,7 @@ namespace Hoa2D
             @param     azimuth	The azimuth.
             @see       setRadius()
          */
-        void setAzimuth(unsigned int index, const double azimuth);
+        void setAzimuth(const unsigned int index, const double azimuth);
         
         //! This method set the radius of a source.
         /**	The radius is between 0 and infinity. At 0, the source is in the center of the ambisonic circle and at 1, the source is at the limit of the ambisonic circle. Over 1, the source get away the ambisonic circle. The index must be between 0 and the number of sources - 1.
@@ -73,7 +73,7 @@ namespace Hoa2D
             @param     radius   The radius.
             @see       setAzimuth()
          */
-        void setRadius(unsigned int index, const double radius);
+        void setRadius(const unsigned int index, const double radius);
 		
 		//! This method mute or unmute a source.
         /**	Mute or unmute a source with a boolean value. The index must be between 0 and the number of sources - 1.
@@ -81,7 +81,7 @@ namespace Hoa2D
             @param     index	The index of the source.
             @param     muted	The mute state.
          */
-        void setMute(unsigned int index, const bool muted);
+        void setMute(const unsigned int index, const bool muted);
         
         //! This method retrieve the azimuth of a source.
         /** Retrieve the azimuth of a source.
@@ -89,7 +89,7 @@ namespace Hoa2D
             @param     index	The index of the source.
             @return The azimuth of the source if the source exists, otherwise the function generates an error.
          */
-        double getAzimuth(unsigned int index) const
+        double getAzimuth(const unsigned int index) const
         {
             assert(index < m_number_of_sources);
             return m_encoders[index]->getAzimuth();
@@ -101,7 +101,7 @@ namespace Hoa2D
             @param     index	The index of the source.
             @return The radius of the source if the source exists, otherwise the function generates an error.
          */
-        double getRadius(unsigned int index) const
+        double getRadius(const unsigned int index) const
         {
             assert(index < m_number_of_sources);
             if(m_widers[index]->getWideningValue() < 1)
@@ -117,7 +117,7 @@ namespace Hoa2D
             @return    The mute state of the source if the source exists, otherwise the function generates an error.
             @see       setMute()
          */
-        bool getMute(unsigned int index, const bool muted) const
+        bool getMute(const unsigned int index, const bool muted) const
         {
             assert(index < m_number_of_sources);
             return m_muted[index];

@@ -29,6 +29,7 @@ namespace Hoa2D{};
 #include "SourcesManager.h"
 #include "SourcesPreset.h"
 #include "SourcesTrajectory.h"
+#include "VirtualMicManager.h"
 
 #endif
 
