@@ -22,7 +22,7 @@ namespace Hoa
      
 	 @see    min
      */
-	inline double max(double v1, double v2)
+	inline double max(const double v1, const double v2)
 	{
 		if (v1 >= v2)
 			return v1;
@@ -39,7 +39,7 @@ namespace Hoa
      
 	 @see    min
      */
-	inline double min(double v1, double v2)
+	inline double min(const double v1, const double v2)
 	{
 		if (v1 <= v2)
 			return v1;
@@ -59,7 +59,7 @@ namespace Hoa
 	 @see    clip_min
 	 @see    clip_max
      */
-    inline double clip_minmax(double value, double low, double high)
+    inline double clip_minmax(const double value, const double low, const double high)
     {
         if(value < low)
             return low;
@@ -80,7 +80,7 @@ namespace Hoa
 	 @see    clip_minmax
 	 @see    clip_max
      */
-    inline double clip_min(double value, double low)
+    inline double clip_min(const double value, const double low)
     {
         if(value < low)
             return low;
@@ -166,7 +166,7 @@ namespace Hoa
 	 @see    legendre_normalization
 	 @see    spherical_harmonics
      */
-	inline double associated_legendre(int l, int m, double x)
+	inline double associated_legendre(int l, int m, const double x)
 	{
         l = abs(l);
         m = abs(m);
@@ -200,7 +200,7 @@ namespace Hoa
 	 @see    associated_legendre
 	 @see    spherical_harmonics
      */
-    inline double legendre_normalization(int l, int m)
+    inline double legendre_normalization(const int l, const int m)
 	{
         if(m == 0)
             return sqrt((2. * l + 1.) / (4. * HOA_PI));
@@ -239,7 +239,7 @@ namespace Hoa
 	 @see    spherical_harmonics_elevation
 	 @see    spherical_harmonics
      */
-    inline double spherical_harmonics_azimuth(int l, int m, double phi)
+    inline double spherical_harmonics_azimuth(const int l, const int m, const double phi)
 	{
         if(m >= 0)
             return cos((double)m * phi);
@@ -262,7 +262,7 @@ namespace Hoa
 	 @see    spherical_harmonics_azimuth
 	 @see    spherical_harmonics
      */
-    inline double spherical_harmonics_elevation(int l, int m, double theta)
+    inline double spherical_harmonics_elevation(const int l, const int m, const double theta)
 	{
         return associated_legendre(l, m, cos(theta)) * legendre_normalization(l, m);
     }
@@ -280,7 +280,7 @@ namespace Hoa
 	 @see    spherical_harmonics_azimuth
 	 @see    spherical_harmonics_elevation
      */
-    inline double spherical_harmonics(int l, int m, double phi, double theta)
+    inline double spherical_harmonics(const int l, const int m, const double phi, const double theta)
 	{
         return spherical_harmonics_elevation(l, m, theta) * spherical_harmonics_azimuth(l, m, phi);
     }
@@ -295,7 +295,7 @@ namespace Hoa
      
 	 @see    wrap_twopi
      */
-    inline double wrap(double value, double low, double high)
+    inline double wrap(double value, const double low, const double high)
     {
         double increment = high - low;
         while(value < low)
@@ -319,7 +319,7 @@ namespace Hoa
      
 	 @see    wrap
      */
-    inline double wrap_twopi(double value)
+    inline double wrap_twopi(const double value)
     {
         double new_value = value;
         while(new_value < 0.)
@@ -333,6 +333,17 @@ namespace Hoa
         }
         return new_value;
     }
+	
+	inline double wrap_360(const double value)
+    {
+		double new_value = value;
+        while(new_value < 0.)
+            new_value += 360.;
+        while(new_value > 360.)
+            new_value -= 360.;
+        
+        return new_value;
+    }
     
 	inline double ordinate(const double radius, const double angle)
 	{
@@ -344,30 +355,115 @@ namespace Hoa
 		return radius * cos(angle + HOA_PI2);
 	}
     
-    inline double radius(double x, double y)
+    inline double radius(const double x, const double y)
 	{
 		return sqrt(x*x + y*y);
 	}
     
-	inline double azimuth(double x, double y)
+	inline double azimuth(const double x, const double y)
 	{
 		return atan2(y, x) - HOA_PI2;
 	}
     
-    inline double distance(double x1, double y1, double x2, double y2)
+    inline double distance(const double x1, const double y1, const double x2, const double y2)
 	{
 		return sqrt((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2));
 	}
 	
-	inline double distance_radian(double anAngle1, double anAngle2)
+	inline double distance_radian(double angle1, double angle2)
     {
-        anAngle1 = wrap_twopi(anAngle1);
-        anAngle2 = wrap_twopi(anAngle2);
-        if(anAngle1 > anAngle2)
-            return (anAngle1 - anAngle2);
+        angle1 = wrap_twopi(angle1);
+        angle2 = wrap_twopi(angle2);
+        if(angle1 > angle2)
+            return (angle1 - angle2);
         else
-            return (anAngle2 - anAngle1);
+            return (angle2 - angle1);
     }
+	
+	inline double radianClosestDistance(double angle1, double angle2)
+    {
+        double minRad, maxRad;
+        angle1 = wrap_twopi(angle1);
+        angle2 = wrap_twopi(angle2);
+        minRad = min(angle1, angle2);
+        maxRad = max(angle1, angle2);
+        
+        if (maxRad - minRad <= HOA_PI)
+            return maxRad - minRad;
+        else
+            return HOA_2PI - (maxRad - minRad);
+    }
+	
+	inline double radToDeg(const double radian)
+    {
+        return radian * 360. / HOA_2PI;
+    }
+    
+    inline double degToRad(const double degree)
+    {
+        return degree / 360. * HOA_2PI;
+    }
+	
+	inline long mstosamps(const double ms, const double samplerate = 44100.)
+    {
+        return (long)(samplerate * ms * 0.001);
+    }
+    
+    inline double sampstoms(const double s, const double samplerate=44100.)
+    {
+        return 1000. * s / samplerate;
+    }
+    
+    inline double atodb(const double amp)
+    {
+        return (amp <= 0.) ? -999.f : (20. * log10(amp));
+    }
+    
+    inline double dbtoa(const double dB)
+    {
+        return pow(10., dB * 0.05);
+    }
+	
+	inline double safediv(const double num, const double denom)
+    {
+        return denom == 0. ? 0. : num/denom;
+    }
+	
+	inline double scale(const double in, const double inlow, const double inhigh, const double outlow, const double outhigh, const double power)
+    {
+        double value;
+        double inscale = safediv(1., inhigh - inlow);
+        double outdiff = outhigh - outlow;
+        
+        value = (in - inlow) * inscale;
+        if (value > 0.0)
+            value = pow(value, power);
+        else if (value < 0.0)
+            value = -pow(-value, power);
+        value = (value * outdiff) + outlow;
+        
+        return value;
+    }
+    
+    inline double scale(const double in, const double inlow, const double inhigh, const double outlow, const double outhigh)
+    {
+        return ( (in - inlow) * safediv(1., inhigh - inlow) * (outhigh - outlow) ) + outlow;
+    }
+	
+	inline bool isInside(const double val, const double v1, const double v2)
+	{
+        return (v1 <= v2) ? (val >= v1 && val <= v2) : (val >= v2 && val <= v1);
+	}
+	
+	inline bool isInsideRad(const double radian, const double loRad, const double hiRad)
+	{
+        return isInside(wrap_twopi(radian-loRad), double(0), wrap_twopi(hiRad-loRad));
+	}
+    
+    inline bool isInsideDeg(const double degree, const double loDeg, const double hiDeg)
+	{
+        return isInside(wrap_360(degree-loDeg), double(0), wrap_360(hiDeg-loDeg));
+	}
 }
 
 #endif
