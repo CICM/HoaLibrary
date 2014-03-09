@@ -1,4 +1,4 @@
-## Hoa Library (documentation)
+## Hoa Library (doc)
 
 #### A high order ambisonics library.
 
