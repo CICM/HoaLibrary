@@ -1,32 +1,10 @@
-/**
- * HoaLibrary : A High Order Ambisonics Library
- * Copyright (c) 2012-2013 Julien Colafrancesco, Pierre Guillot, Eliott Paris, CICM, Universite Paris-8.
- * All rights reserved.re Guillot, CICM - Université Paris 8
- * All rights reserved.
- *
- * Website  : http://www.mshparisnord.fr/HoaLibrary/
- * Contacts : cicm.mshparisnord@gmail.com
- *
- * This file is part of HOA LIBRARY.
- *
- * HOA LIBRARY is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
+/*
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-#include "ext.h"
-#include "ext_obex.h"
-#include "z_dsp.h"
+#include "HoaCommon.max.h"
 
 typedef struct _pi 
 {	
@@ -52,6 +30,8 @@ int C74_EXPORT main(void)
 	
 	c = class_new("hoa.pi", (method)pi_new, (method)NULL, sizeof(t_pi), 0L, A_GIMME, 0);
 	
+	hoa_initclass(c, NULL);
+	
     class_addmethod(c, (method)pi_bang,		"bang",		0);	
     class_addmethod(c, (method)pi_int,		"int",		A_LONG, 0);
 	class_addmethod(c, (method)pi_float,	"float",	A_FLOAT, 0);
@@ -68,17 +48,12 @@ int C74_EXPORT main(void)
 	
 	class_register(CLASS_BOX, c);
 	pi_class = c;
-	
-	class_findbyname(CLASS_BOX, gensym("hoa.encoder~"));
 	return 0;
 }
 
 void *pi_new(t_symbol *s, int argc, t_atom *argv)
 {
 	t_pi *x = NULL;
-    t_dictionary *d = NULL;
-    t_dictionary* attr = NULL;
-    
     x = (t_pi *)object_alloc(pi_class);
     if (x)
 	{
@@ -90,15 +65,7 @@ void *pi_new(t_symbol *s, int argc, t_atom *argv)
             x->f_value = atom_getfloat(argv);
         
         x->f_outlet = floatout(x);
-        
-        d = (t_dictionary *)gensym("#D")->s_thing;
-        if (d) attr_dictionary_process(x, d);
-        
-        
-        dictionary_getdictionary(d, gensym("saved_object_attributes"), (t_object **)&attr);
-        if(attr)
-            dictionary_getlong(attr, gensym("loadout"), &x->f_loadbang);
-        
+
         attr_args_process(x, argc, argv);
     }
 	
@@ -114,9 +81,9 @@ void pi_loadbang(t_pi *x)
 void pi_assist(t_pi *x, void *b, long m, long a, char *s)
 {
 	if (m != ASSIST_OUTLET)
-		sprintf(s,"(Int, Float or Bang) Compute");
+		sprintf(s,"(int/float/bang) Compute");
 	else
-		sprintf(s,"(Float) PI * %.f", x->f_value);
+		sprintf(s,"(float) \u03C0 * %.2f", x->f_value);
 }
 
 void pi_bang(t_pi *x) 

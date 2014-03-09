@@ -44,6 +44,7 @@ static t_symbol* hoa_sym_ordinate 					= gensym("ordinate");
 static t_symbol* hoa_sym_radius 					= gensym("radius");
 static t_symbol* hoa_sym_angle 						= gensym("angle");
 static t_symbol* hoa_sym_angles						= gensym("angles");
+static t_symbol* hoa_sym_directivities				= gensym("directivities");
 
 // Paint
 static t_symbol* hoa_sym_rect 						= gensym("rect");
@@ -85,7 +86,10 @@ static t_symbol* hoa_sym_rect_selection_layer 		= gensym("rect_selection_layer")
 static t_symbol* hoa_sym_harmonics_layer	 		= gensym("harmonics_layer");
 static t_symbol* hoa_sym_space_layer		 		= gensym("space_layer");
 static t_symbol* hoa_sym_points_layer		 		= gensym("points_layer");
-
+static t_symbol* hoa_sym_mic_layer					= gensym("mic_layer");
+static t_symbol* hoa_sym_text_layer					= gensym("text_layer");
+static t_symbol* hoa_sym_fisheye_layer				= gensym("fisheye_layer");
+static t_symbol* hoa_sym_rectselection_layer		= gensym("rectselection_layer");
 
 
 static t_symbol* hoa_sym_relpolar 					= gensym("relpolar");

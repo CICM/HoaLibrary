@@ -1,15 +1,10 @@
 /*
- // Copyright (c) 2012-2014 Eliott Paris & Pierre Guillot, CICM, Universite Paris 8.
- // For information on usage and redistribution, and for a DISCLAIMER OF ALL
- // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
- */
+// Copyright (c) 2012-2014 Eliott Paris, Julien Colafrancesco & Pierre Guillot, CICM, Universite Paris 8.
+// For information on usage and redistribution, and for a DISCLAIMER OF ALL
+// WARRANTIES, see the file, "LICENSE.txt," in this distribution.
+*/
 
-#include "ext.h"
-#include "ext_obex.h"
-#include "ext_common.h"
-#include "z_dsp.h"
-
-#include "../hoa.max.h"
+#include "HoaCommon.max.h"
 
 typedef struct _hoa_dac
 {
@@ -21,6 +16,7 @@ typedef struct _hoa_dac
 t_class *hoa_dac_class;
 
 void *hoa_dac_new(t_symbol *s, int argc, t_atom *argv);
+void hoa_dac_free(t_hoa_dac *x);
 void hoa_dac_assist(t_hoa_dac *x, void *b, long m, long a, char *s);
 void hoa_dac_dsp64(t_hoa_dac *x, t_object *dsp64, short *count, double samplerate, long maxvectorsize, long flags);
 void hoa_dac_int(t_hoa_dac *x, long l);
@@ -41,7 +37,7 @@ int C74_EXPORT main(void)
 {
 	t_class *c;
 
-	c = class_new("hoa.dac~", (method)hoa_dac_new, (method)NULL, (short)sizeof(t_hoa_dac), 0L, A_GIMME, 0);
+	c = class_new("hoa.dac~", (method)hoa_dac_new, (method)hoa_dac_free, (short)sizeof(t_hoa_dac), 0L, A_GIMME, 0);
 	
 	hoa_initclass(c, (method)hoa_getinfos);
 	
@@ -50,7 +46,7 @@ int C74_EXPORT main(void)
 	class_addmethod(c, (method)hoa_dac_dblclick,	"dblclick",		A_CANT,  0);
 	class_addmethod(c, (method)hoa_dac_int,			"int",			A_LONG,  0);
 	class_addmethod(c, (method)hoa_dac_list,		"list",			A_GIMME, 0);
-	class_addmethod(c, (method)hoa_dac_set,			"set",			A_GIMME, 0);
+	//class_addmethod(c, (method)hoa_dac_set,			"set",			A_GIMME, 0); // Todo : proxy_setinlet() ??
     
 	class_addmethod(c, (method)hoa_dac_start,		"start",		A_NOTHING,  0);
 	class_addmethod(c, (method)hoa_dac_stop,		"stop",			A_NOTHING,  0);
@@ -172,6 +168,17 @@ void hoa_dac_list(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
 
 void hoa_dac_set(t_hoa_dac *x, t_symbol *s, long argc, t_atom *argv)
 {
+	/*
+	long inletnum = proxy_getinlet((t_object*)x);
+	post("set message in inlet %ld", inletnum);
+	long inletnum2 = proxy_getinlet((t_object*)x->f_dac);
+	post("inletnum2 %ld", inletnum2);
+	void* inptr = proxy_getinletptr((t_object*)x);
+	//proxy_setinletptr(x->f_dac, inptr);
+	proxy_setinletptr(x->f_ob.z_proxy, x->f_dac->o_inlet);
+	inletnum2 = proxy_getinlet((t_object*)x->f_dac);
+	post("inletnum2 %ld", inletnum2);
+	*/
 	object_method_typed(x->f_dac, gensym("set"), argc, argv, NULL);
 }
 
@@ -185,4 +192,7 @@ void hoa_dac_dblclick(t_hoa_dac *x)
     object_method(x->f_dac, gensym("dblclick"), 0, NULL);
 }
 
-
+void hoa_dac_free(t_hoa_dac *x)
+{
+	dsp_free((t_pxobject*)x);
+}
