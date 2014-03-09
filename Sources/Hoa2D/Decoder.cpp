@@ -427,5 +427,218 @@ namespace Hoa2D
             delete [] m_linear_vector_right;
         m_linear_vector_right = NULL;
 	}
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Decoder Multi //
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    DecoderMulti::DecoderMulti(unsigned int order) : Ambisonic(order), Planewaves(order * 2 + 2)
+    {
+        m_mode = Regular;
+        m_decoder_regular = new DecoderRegular(m_order, m_order * 2 + 2);
+        m_inputs_double   = new double[m_number_of_harmonics * 8192];
+        m_inputs_float    = new float[m_number_of_harmonics * 8192];
+        m_outputs_double  = new double[m_decoder_regular->getNumberOfChannels() * 8192];
+        m_outputs_float   = new float[m_decoder_regular->getNumberOfChannels() * 8192];
+    }
+    
+    void DecoderMulti::setDecodingMode(Mode mode)
+    {
+        if(mode != m_mode)
+        {
+            if(mode == Regular)
+            {
+                delete [] m_outputs_double;
+                delete [] m_outputs_float;
+                m_decoder_regular = new DecoderRegular(m_order, m_order * 2 + 2);
+                m_outputs_double = new double[m_decoder_regular->getNumberOfChannels() * 8192];
+                m_outputs_float   = new float[m_decoder_regular->getNumberOfChannels() * 8192];
+            }
+            else if(mode == Irregular)
+            {
+                delete [] m_outputs_double;
+                delete [] m_outputs_float;
+                m_decoder_irregular = new DecoderIrregular(m_order, m_order * 2 + 2);
+                m_outputs_double = new double[m_decoder_irregular->getNumberOfChannels() * 8192];
+                m_outputs_float   = new float[m_decoder_irregular->getNumberOfChannels() * 8192];
+            }
+            else
+                m_decoder_binaural = new DecoderBinaural(m_order);
+            
+            if(m_mode == Regular)
+                delete m_decoder_regular;
+            else if(m_mode == Irregular)
+                delete m_decoder_irregular;
+            else
+                delete m_decoder_binaural;
+            m_mode = mode;
+        }
+    }
+    
+    void DecoderMulti::setNumberOfChannels(unsigned int numberOfChannels)
+    {
+        if(numberOfChannels != getNumberOfChannels())
+        {
+            if(m_mode == Regular && numberOfChannels >= m_decoder_regular->getNumberOfHarmonics())
+            {
+                delete [] m_outputs_double;
+                delete [] m_outputs_float;
+                delete m_decoder_regular;
+                m_decoder_regular = new DecoderRegular(m_order, numberOfChannels);
+                m_outputs_double = new double[m_decoder_regular->getNumberOfChannels() * 8192];
+                m_outputs_float   = new float[m_decoder_regular->getNumberOfChannels() * 8192];
+            }
+            else if(m_mode == Irregular)
+            {
+                delete [] m_outputs_double;
+                delete [] m_outputs_float;
+                delete m_decoder_irregular;
+                m_decoder_irregular = new DecoderIrregular(m_order, numberOfChannels);
+                m_outputs_double = new double[m_decoder_irregular->getNumberOfChannels() * 8192];
+                m_outputs_float   = new float[m_decoder_irregular->getNumberOfChannels() * 8192];
+            }
+        }
+    }
+    
+    void DecoderMulti::setChannelsOffset(double offset)
+	{
+        if(m_mode == Regular)
+        {
+            m_decoder_regular->setChannelsOffset(offset);
+        }
+	}
+    
+    void DecoderMulti::setChannelPosition(unsigned int index, double azimuth)
+    {
+        if(m_mode == Irregular)
+        {
+            m_decoder_irregular->setChannelPosition(index, azimuth);
+        }
+    }
+    
+    void DecoderMulti::setChannelsPosition(double* azimuths)
+    {
+        if(m_mode == Irregular)
+        {
+            m_decoder_irregular->setChannelsPosition(azimuths);
+        }
+    }
+    
+    void DecoderMulti::setSampleRate(unsigned int sampleRate)
+    {
+        if(m_mode == Binaural)
+        {
+            m_decoder_binaural->setSampleRate(sampleRate);
+        }
+        m_sample_rate = sampleRate;
+    }
+    
+    void DecoderMulti::setVectorSize(unsigned int vectorSize)
+    {
+        if(m_mode == Binaural)
+        {
+            m_decoder_binaural->setVectorSize(vectorSize);
+        }
+        m_vector_size = vectorSize;
+    }
+    
+    void DecoderMulti::process(const float* const* inputs, float** outputs)
+	{
+		if(m_mode == Regular)
+        {
+            unsigned int nins = m_number_of_harmonics;
+            unsigned int nouts = m_decoder_regular->getNumberOfChannels();
+            for(int i = 0; i < nins; i++)
+            {
+                cblas_scopy(m_vector_size, inputs[i], 1, m_inputs_float+i, nins);
+            }
+            for(int i = 0; i < m_vector_size; i++)
+            {
+                m_decoder_regular->process(m_inputs_float + nins * i, m_outputs_float + nouts * i);
+            }
+            for(int i = 0; i < nouts; i++)
+            {
+                cblas_scopy(m_vector_size, m_outputs_float+i, 1, outputs[i], nouts);
+            }
+        }
+        else if(m_mode == Irregular)
+        {
+            unsigned int nins = m_number_of_harmonics;
+            unsigned int nouts = m_decoder_irregular->getNumberOfChannels();
+            for(int i = 0; i < nins; i++)
+            {
+                cblas_scopy(m_vector_size, inputs[i], 1, m_inputs_float+i, nins);
+            }
+            for(int i = 0; i < m_vector_size; i++)
+            {
+                m_decoder_irregular->process(m_inputs_float + nins * i, m_outputs_float + nouts * i);
+            }
+            for(int i = 0; i < nouts; i++)
+            {
+                cblas_scopy(m_vector_size, m_outputs_float+i, 1, outputs[i], nouts);
+            }
+        }
+        else
+        {
+            m_decoder_binaural->process(inputs, outputs);
+        }
+	}
+	
+	void DecoderMulti::process(const double* const* inputs, double** outputs)
+	{
+		if(m_mode == Regular)
+        {
+            unsigned int nins = m_number_of_harmonics;
+            unsigned int nouts = m_decoder_regular->getNumberOfChannels();
+            for(unsigned int i = 0; i < nins; i++)
+            {
+                cblas_dcopy(m_vector_size, inputs[i], 1, m_inputs_double+i, nins);
+            }
+            for(unsigned int i = 0; i < m_vector_size; i++)
+            {
+               m_decoder_regular->process(m_inputs_double + nins * i, m_outputs_double + nouts * i);
+            }
+            for(unsigned int i = 0; i < nouts; i++)
+            {
+                //cblas_dcopy(m_vector_size, m_outputs_double+i, 1, outputs[i], nouts);
+            }
+        }
+        else if(m_mode == Irregular)
+        {
+            unsigned int nins = m_number_of_harmonics;
+            unsigned int nouts = m_decoder_irregular->getNumberOfChannels();
+            for(unsigned int i = 0; i < nins; i++)
+            {
+                cblas_dcopy(m_vector_size, inputs[i], 1, m_inputs_double+i, nins);
+            }
+            for(unsigned int i = 0; i < m_vector_size; i++)
+            {
+                m_decoder_irregular->process(m_inputs_double + nins * i, m_outputs_double + nouts * i);
+            }
+            for(unsigned int i = 0; i < nouts; i++)
+            {
+                //cblas_dcopy(m_vector_size, m_outputs_double+i, 1, outputs[i], nouts);
+            }
+        }
+        else
+        {
+            m_decoder_binaural->process(inputs, outputs);
+        }
+	}
+	
+	DecoderMulti::~DecoderMulti()
+	{
+		if(m_mode == Regular)
+            delete m_decoder_regular;
+        else if(m_mode == Irregular)
+            delete m_decoder_irregular;
+        else
+            delete m_decoder_binaural;
+        
+        delete [] m_inputs_double;
+        delete [] m_outputs_double;
+        delete [] m_inputs_float;
+        delete [] m_outputs_float;
+	}
 }
 
