@@ -15,6 +15,7 @@ namespace Hoa2D
 	
 	void SourcesPreset::copySourceManager(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination)
 	{
+		double* color;
 		aSouceManagerDestination->setExistence(0);
 		if(aSouceManagerSource->getExistence() == 1)
 		{
@@ -25,9 +26,10 @@ namespace Hoa2D
 			{
 				if(aSouceManagerSource->sourceGetExistence(i) == 1)
 				{
+					color = aSouceManagerSource->sourceGetColor(i);
 					aSouceManagerDestination->sourceSetRadius(i, aSouceManagerSource->sourceGetRadius(i));
 					aSouceManagerDestination->sourceSetAngle(i, aSouceManagerSource->sourceGetAngle(i));
-					aSouceManagerDestination->sourceSetColor(i, aSouceManagerSource->sourceGetColor(i).red, aSouceManagerSource->sourceGetColor(i).green, aSouceManagerSource->sourceGetColor(i).blue, aSouceManagerSource->sourceGetColor(i).alpha);
+					aSouceManagerDestination->sourceSetColor(i, color[0], color[1], color[2], color[3]);
 					aSouceManagerDestination->sourceSetDescription(i, aSouceManagerSource->sourceGetDescription(i));
 					aSouceManagerDestination->sourceSetMute(i, aSouceManagerSource->sourceGetMute(i));
 				}
@@ -40,7 +42,8 @@ namespace Hoa2D
 					{
 						aSouceManagerDestination->groupSetSource(i, aSouceManagerSource->groupGetSourceIndex(i, j));
 					}
-					aSouceManagerDestination->groupSetColor(i, aSouceManagerSource->groupGetColor(i).red, aSouceManagerSource->groupGetColor(i).green, aSouceManagerSource->groupGetColor(i).blue, aSouceManagerSource->groupGetColor(i).alpha);
+					color = aSouceManagerSource->groupGetColor(i);
+					aSouceManagerDestination->groupSetColor(i, color[0], color[1], color[2], color[3]);
 					aSouceManagerDestination->groupSetDescription(i, aSouceManagerSource->groupGetDescription(i));
 				}
 			}
@@ -49,6 +52,7 @@ namespace Hoa2D
 	
 	void SourcesPreset::copySource(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination, long aSourceIndex)
 	{
+		double* color;
 		if(aSouceManagerSource->getExistence() == 1)
 		{
 			if(aSouceManagerDestination->getExistence() == 0)
@@ -56,13 +60,10 @@ namespace Hoa2D
 			
 			if(aSouceManagerSource->getMaximumIndexOfSource() >= aSourceIndex && aSourceIndex >= 0 && aSouceManagerSource->sourceGetExistence(aSourceIndex) == 1)
 			{
+				color = aSouceManagerSource->sourceGetColor(aSourceIndex);
 				aSouceManagerDestination->sourceSetRadius(aSourceIndex, aSouceManagerSource->sourceGetRadius(aSourceIndex));
 				aSouceManagerDestination->sourceSetAngle(aSourceIndex, aSouceManagerSource->sourceGetAngle(aSourceIndex));
-				aSouceManagerDestination->sourceSetColor(aSourceIndex,
-														 aSouceManagerSource->sourceGetColor(aSourceIndex).red,
-														 aSouceManagerSource->sourceGetColor(aSourceIndex).green,
-														 aSouceManagerSource->sourceGetColor(aSourceIndex).blue,
-														 aSouceManagerSource->sourceGetColor(aSourceIndex).alpha);
+				aSouceManagerDestination->sourceSetColor(aSourceIndex, color[0], color[1], color[2], color[3]);
 				aSouceManagerDestination->sourceSetDescription(aSourceIndex, aSouceManagerSource->sourceGetDescription(aSourceIndex));
 				aSouceManagerDestination->sourceSetMute(aSourceIndex, aSouceManagerSource->sourceGetMute(aSourceIndex));
 				for(int i = 0; i < aSouceManagerSource->sourceGetNumberOfGroups(aSourceIndex); i++)
@@ -75,6 +76,7 @@ namespace Hoa2D
 	
 	void SourcesPreset::copyGroup(SourcesManager* aSouceManagerSource, SourcesManager* aSouceManagerDestination, long aGroupIndex)
 	{
+		double* color;
 		if(aSouceManagerSource->getExistence() == 1)
 		{
 			if(aSouceManagerDestination->getExistence() == 0)
@@ -86,11 +88,8 @@ namespace Hoa2D
 					copySource(aSouceManagerSource, aSouceManagerDestination, aSouceManagerSource->groupGetSourceIndex(aGroupIndex, j));
 					aSouceManagerDestination->groupSetSource(aGroupIndex, aSouceManagerSource->groupGetSourceIndex(aGroupIndex, j));
 				}
-				aSouceManagerDestination->groupSetColor(aGroupIndex,
-														aSouceManagerSource->groupGetColor(aGroupIndex).red,
-														aSouceManagerSource->groupGetColor(aGroupIndex).green,
-														aSouceManagerSource->groupGetColor(aGroupIndex).blue,
-														aSouceManagerSource->groupGetColor(aGroupIndex).alpha);
+				color = aSouceManagerSource->groupGetColor(aGroupIndex);
+				aSouceManagerDestination->groupSetColor(aGroupIndex, color[0], color[1], color[2], color[3]);
 				aSouceManagerDestination->groupSetDescription(aGroupIndex, aSouceManagerSource->groupGetDescription(aGroupIndex));
 			}
 		}
@@ -98,6 +97,7 @@ namespace Hoa2D
 	
 	long SourcesPreset::interpolationSourceManager(SourcesManager* aSouceManagerSourceOne, SourcesManager* aSouceManagerSourceTwo, SourcesManager* aSouceManagerDestination, double aFrac)
 	{
+		double *color1, *color2;
 		aSouceManagerDestination->setExistence(0);
 		if(aSouceManagerSourceOne->getExistence() == 1 && aSouceManagerSourceTwo->getExistence() == 1)
 		{
@@ -108,22 +108,25 @@ namespace Hoa2D
 			{
 				if(aSouceManagerSourceOne->sourceGetExistence(i) == 1 && aSouceManagerSourceTwo->sourceGetExistence(i) == 1)
 				{
+					color1 = aSouceManagerSourceOne->sourceGetColor(i);
+					color2 = aSouceManagerSourceTwo->sourceGetColor(i);
 					aSouceManagerDestination->sourceSetAbscissa(i, aSouceManagerSourceOne->sourceGetAbscissa(i) * (1 - aFrac)
 																+ aSouceManagerSourceTwo->sourceGetAbscissa(i) * aFrac);
 					aSouceManagerDestination->sourceSetOrdinate(i,  aSouceManagerSourceOne->sourceGetOrdinate(i) * (1 - aFrac)
 																+ aSouceManagerSourceTwo->sourceGetOrdinate(i) * aFrac);
-					aSouceManagerDestination->sourceSetColor(i,
-															 aSouceManagerSourceOne->sourceGetColor(i).red * (1. - aFrac) + aSouceManagerSourceTwo->sourceGetColor(i).red * aFrac,
-															 aSouceManagerSourceOne->sourceGetColor(i).green * (1. - aFrac) + aSouceManagerSourceTwo->sourceGetColor(i).green * aFrac,
-															 aSouceManagerSourceOne->sourceGetColor(i).blue * (1. - aFrac) + aSouceManagerSourceTwo->sourceGetColor(i).blue * aFrac,
-															 aSouceManagerSourceOne->sourceGetColor(i).alpha * (1. - aFrac) + aSouceManagerSourceTwo->sourceGetColor(i).alpha * aFrac);
+					aSouceManagerDestination->sourceSetColor(i, color1[0] * (1. - aFrac) + color2[0] * aFrac,
+																color1[1] * (1. - aFrac) + color2[1] * aFrac,
+																color1[2] * (1. - aFrac) + color2[2] * aFrac,
+																color1[3] * (1. - aFrac) + color2[3] * aFrac);
 					
 				}
 				else if(aSouceManagerSourceOne->sourceGetExistence(i) == 1 && aSouceManagerSourceTwo->sourceGetExistence(i) == 0)
 				{
+					color1 = aSouceManagerSourceOne->sourceGetColor(i);
+					
 					aSouceManagerDestination->sourceSetRadius(i, aSouceManagerSourceOne->sourceGetRadius(i));
 					aSouceManagerDestination->sourceSetAngle(i, aSouceManagerSourceOne->sourceGetAngle(i));
-					aSouceManagerDestination->sourceSetColor(i, aSouceManagerSourceOne->sourceGetColor(i).red, aSouceManagerSourceOne->sourceGetColor(i).green, aSouceManagerSourceOne->sourceGetColor(i).blue, aSouceManagerSourceOne->sourceGetColor(i).alpha);
+					aSouceManagerDestination->sourceSetColor(i, color1[0], color1[1], color1[2], color1[3]);
 				}
 				aSouceManagerDestination->sourceSetDescription(i, aSouceManagerSourceOne->sourceGetDescription(i));
 				aSouceManagerDestination->sourceSetMute(i, aSouceManagerSourceOne->sourceGetMute(i));
@@ -136,16 +139,18 @@ namespace Hoa2D
 					{
 						aSouceManagerDestination->groupSetSource(i, aSouceManagerSourceOne->groupGetSourceIndex(i, j));
 					}
-					aSouceManagerDestination->groupSetColor(i, aSouceManagerSourceOne->groupGetColor(i).red, aSouceManagerSourceOne->groupGetColor(i).green, aSouceManagerSourceOne->groupGetColor(i).blue, aSouceManagerSourceOne->groupGetColor(i).alpha);
+					color1 = aSouceManagerSourceOne->groupGetColor(i);
+					aSouceManagerDestination->groupSetColor(i, color1[0], color1[1], color1[2], color1[3]);
 					aSouceManagerDestination->groupSetDescription(i, aSouceManagerSourceOne->groupGetDescription(i));
 				}
 				if(aSouceManagerSourceOne->groupGetExistence(i) == 1 && aSouceManagerSourceTwo->groupGetExistence(i) == 1 )
 				{
-					aSouceManagerDestination->groupSetColor(i,
-															aSouceManagerSourceOne->groupGetColor(i).red * (1. - aFrac) + aSouceManagerSourceTwo->groupGetColor(i).red * aFrac,
-															aSouceManagerSourceOne->groupGetColor(i).green * (1. - aFrac) + aSouceManagerSourceTwo->groupGetColor(i).green * aFrac,
-															aSouceManagerSourceOne->groupGetColor(i).blue * (1. - aFrac) + aSouceManagerSourceTwo->groupGetColor(i).blue * aFrac,
-															aSouceManagerSourceOne->groupGetColor(i).alpha * (1. - aFrac) + aSouceManagerSourceTwo->groupGetColor(i).alpha * aFrac);
+					color1 = aSouceManagerSourceOne->groupGetColor(i);
+					color2 = aSouceManagerSourceTwo->groupGetColor(i);
+					aSouceManagerDestination->groupSetColor(i, color1[0] * (1. - aFrac) + color2[0] * aFrac,
+															color1[1] * (1. - aFrac) + color2[1] * aFrac,
+															color1[2] * (1. - aFrac) + color2[2] * aFrac,
+															color1[3] * (1. - aFrac) + color2[3] * aFrac);
 				}
 			}
 			return 1;

@@ -12,6 +12,7 @@ namespace Hoa2D
 	{
 		m_source_manager = aSourceManager;
 		setExistence(deadOrAlive);
+		m_color = new double[4];
 		setColor(0.2, 0.2, 0.2, 1.);
 		setDescription("");
 		computeCentroid();
@@ -54,10 +55,10 @@ namespace Hoa2D
 	
 	void SourcesGroup::setColor(double red, double green, double blue, double alpha)
 	{
-		m_color.red		=  clip_minmax(red, 0., 1.);
-		m_color.green	=  clip_minmax(green, 0., 1.);
-		m_color.blue	=  clip_minmax(blue, 0., 1.);
-		m_color.alpha	=  clip_minmax(alpha, 0., 1.);
+		m_color[0]		=  clip_minmax(red, 0., 1.);
+		m_color[1]	=  clip_minmax(green, 0., 1.);
+		m_color[2]	=  clip_minmax(blue, 0., 1.);
+		m_color[3]	=  clip_minmax(alpha, 0., 1.);
 	}
 	
 	void SourcesGroup::setMaximumRadius(double aLimitValue)
@@ -67,20 +68,20 @@ namespace Hoa2D
 	
 	void SourcesGroup::computeCentroid()
 	{
-		m_centroid.x = 0.;
-		m_centroid.y = 0.;
+		m_centroid_x = 0.;
+		m_centroid_y = 0.;
 		if(m_sources.size())
 		{
 			for(int i = 0; i < m_sources.size(); i++)
 			{
 				if(m_source_manager->sourceGetExistence(m_sources[i]))
 				{
-					m_centroid.x += m_source_manager->sourceGetAbscissa(m_sources[i]);
-					m_centroid.y += m_source_manager->sourceGetOrdinate(m_sources[i]);
+					m_centroid_x += m_source_manager->sourceGetAbscissa(m_sources[i]);
+					m_centroid_y += m_source_manager->sourceGetOrdinate(m_sources[i]);
 				}
 			}
-			m_centroid.x /= m_sources.size();
-			m_centroid.y /= m_sources.size();
+			m_centroid_x /= m_sources.size();
+			m_centroid_y /= m_sources.size();
 		}
 	}
 	
@@ -327,7 +328,7 @@ namespace Hoa2D
 	
 	void SourcesGroup::setRadius(double aRadius)
 	{
-		setCoordinatesCartesian(abscissa(aRadius, getAngle()), ordinate(aRadius, getAngle()));
+		setCoordinatesCartesian(abscissa(aRadius, getAzimuth()), ordinate(aRadius, getAzimuth()));
 	}
 	
 	void SourcesGroup::setAngle(double anAngle)
@@ -379,7 +380,7 @@ namespace Hoa2D
 		while (anAngle < 0.)
 			anAngle += HOA_2PI;
 		
-		double aAngleOffset = anAngle  - getAngle();
+		double aAngleOffset = anAngle  - getAzimuth();
 		shiftAngle(aAngleOffset);
 		computeCentroid();
 	}
@@ -391,22 +392,22 @@ namespace Hoa2D
 	
 	double SourcesGroup::getRadius()
 	{
-		return radius(m_centroid.x, m_centroid.y);
+		return radius(m_centroid_x, m_centroid_y);
 	}
 	
-	double SourcesGroup::getAngle()
+	double SourcesGroup::getAzimuth()
 	{
-		return azimuth(m_centroid.x, m_centroid.y) + HOA_PI2;
+		return azimuth(m_centroid_x, m_centroid_y) + HOA_PI2;
 	}
 	
 	double SourcesGroup::getAbscissa()
 	{
-		return m_centroid.x;
+		return m_centroid_x;
 	}
 	
 	double SourcesGroup::getOrdinate()
 	{
-		return m_centroid.y;
+		return m_centroid_y;
 	}
 	
 	long SourcesGroup::getNumberOfSources()
@@ -424,7 +425,7 @@ namespace Hoa2D
 	}
 	
 	
-	t_hoa_rgba SourcesGroup::getColor()
+	double* SourcesGroup::getColor()
 	{
 		return m_color;
 	}
@@ -447,6 +448,7 @@ namespace Hoa2D
 	
 	SourcesGroup::~SourcesGroup()
 	{
+		delete m_color;
 		m_sources.clear();
 	}
 }

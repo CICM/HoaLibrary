@@ -13,6 +13,7 @@ namespace Hoa2D
 		m_exist = clip_minmax(deadOrAlive, (long)0, (long)1);
 		setRadius(aRadius);
 		setAngle(anAngle);
+		m_color = new double[4];
 		setColor(0.2, 0.2, 0.2, 1.);
 		setDescription("");
 		m_maximum_radius = -1;
@@ -42,16 +43,12 @@ namespace Hoa2D
 			if(aRadius < -m_maximum_radius || aRadius > m_maximum_radius)
 				return;
 		}
-		m_coordinate_polar.radius = clip_min(aRadius, 0.);
+		m_radius = clip_min(aRadius, 0.);
 	}
 	
-	void Source::setAngle(double anAngle)
+	void Source::setAngle(double azimuth)
 	{
-		while (anAngle > HOA_2PI)
-			anAngle -= HOA_2PI;
-		while (anAngle < 0.)
-			anAngle += HOA_2PI;
-		m_coordinate_polar.angle = anAngle;
+		m_azimuth = wrap_twopi(azimuth);
 	}
 	
 	void Source::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
@@ -76,10 +73,10 @@ namespace Hoa2D
 	
 	void Source::setColor(double red, double green, double blue, double alpha)
 	{
-		m_color.red		=  clip_minmax(red, 0., 1.);
-		m_color.green	=  clip_minmax(green, 0., 1.);
-		m_color.blue	=  clip_minmax(blue, 0., 1.);
-		m_color.alpha	=  clip_minmax(alpha, 0., 1.);
+		m_color[0]	=  clip_minmax(red, 0., 1.);
+		m_color[1]	=  clip_minmax(green, 0., 1.);
+		m_color[2]	=  clip_minmax(blue, 0., 1.);
+		m_color[3]	=  clip_minmax(alpha, 0., 1.);
 	}
 	
 	void Source::setDescription(std::string aDescription)
@@ -117,46 +114,6 @@ namespace Hoa2D
 		}
 	}
 	
-	double Source::getRadius()
-	{
-		return m_coordinate_polar.radius;
-	}
-	
-	double Source::getAngle()
-	{
-		return m_coordinate_polar.angle;
-	}
-	
-	double Source::getAbscissa()
-	{
-		return abscissa(m_coordinate_polar.radius, m_coordinate_polar.angle + HOA_PI2);
-	}
-	
-	double Source::getOrdinate()
-	{
-		return ordinate(m_coordinate_polar.radius, m_coordinate_polar.angle + HOA_PI2);
-	}
-	
-	t_hoa_rgba Source::getColor()
-	{
-		return m_color;
-	}
-	
-	long Source::getExistence()
-	{
-		return m_exist;
-	}
-	
-	std::string Source::getDescription()
-	{
-		return m_description;
-	}
-	
-	long Source::getNumberOfGroups()
-	{
-		return m_groups.size();
-	}
-	
 	long Source::getGroupIndex(long anIndex)
 	{
 		if(anIndex < m_groups.size() && anIndex >= 0)
@@ -172,13 +129,9 @@ namespace Hoa2D
 		return 0;
 	}
 	
-	long Source::getMute()
-	{
-		return m_mute;
-	}
-	
 	Source::~Source()
 	{
+		delete m_color;
 		m_groups.clear();
 	}
 }

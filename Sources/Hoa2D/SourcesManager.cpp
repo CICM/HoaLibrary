@@ -386,7 +386,7 @@ namespace Hoa2D
 	double SourcesManager::sourceGetAngle(long anIndex)
 	{
 		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex]->getAngle();
+			return m_sources[anIndex]->getAzimuth();
 		
 		return NULL;
 	}
@@ -407,13 +407,12 @@ namespace Hoa2D
 		return NULL;
 	}
 	
-	t_hoa_rgba SourcesManager::sourceGetColor(long anIndex)
+	double* SourcesManager::sourceGetColor(long anIndex)
 	{
 		if(anIndex < m_sources.size() && anIndex >= 0)
 			return m_sources[anIndex]->getColor();
 		
-		t_hoa_rgba sourceColor = {-1, -1, -1, -1};
-		return sourceColor;
+		return NULL;
 	}
 	
 	std::string SourcesManager::sourceGetDescription(long anIndex)
@@ -656,7 +655,7 @@ namespace Hoa2D
 	double SourcesManager::groupGetAngle(long anIndex)
 	{
 		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex]->getAngle();
+			return m_groups[anIndex]->getAzimuth();
 		
 		return NULL;
 	}
@@ -677,13 +676,12 @@ namespace Hoa2D
 		return NULL;
 	}
 	
-	t_hoa_rgba SourcesManager::groupGetColor(long anIndex)
+	double* SourcesManager::groupGetColor(long anIndex)
 	{
 		if(anIndex < m_groups.size() && anIndex >= 0)
 			return m_groups[anIndex]->getColor();
 		
-		t_hoa_rgba groupColor = {-1, -1, -1 -1};
-		return groupColor;
+		return NULL;
 	}
 	
 	std::string SourcesManager::groupGetDescription(long anIndex)

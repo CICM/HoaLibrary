@@ -4,13 +4,10 @@
 // WARRANTIES, see the file, "LICENSE.txt," in this distribution.
 */
 
+#include "../Hoa2D.max.h"
+
 #define MAX_ZOOM 1.
 #define MIN_ZOOM 0.01
-
-#define CORNERSIZE 8
-#define BORDERTHICK 2
-
-#include "../Hoa2D.max.h"
 
 typedef struct _textfield {
 	t_jbox			j_box;
@@ -60,10 +57,9 @@ typedef struct  _hoamap
     long        f_index_of_source_to_color;
     long        f_index_of_group_to_color;
     
-    t_jrgba		f_colorBackground;
-    t_jrgba		f_colorBackgroundInside;
-    t_jrgba     f_colorBorder;
-    t_jrgba     f_colorSelection;
+    t_jrgba		f_color_bg;
+    t_jrgba     f_color_bd;
+    t_jrgba     f_color_selection;
     
     int         f_cartConstrain;
     
@@ -175,28 +171,21 @@ int C74_EXPORT main()
 	CLASS_ATTR_INVISIBLE		(c, "textcolor", 0);
     
     /* Colors */
-	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_colorBackground);
+	CLASS_ATTR_RGBA				(c, "bgcolor", 0, t_hoamap, f_color_bg);
 	CLASS_ATTR_CATEGORY			(c, "bgcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Outside Color");
+	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 1.");
     
-    CLASS_ATTR_RGBA				(c, "bgcolor2", 0, t_hoamap, f_colorBackgroundInside);
-	CLASS_ATTR_CATEGORY			(c, "bgcolor2", 0, "Color");
-	CLASS_ATTR_STYLE			(c, "bgcolor2", 0, "rgba");
-	CLASS_ATTR_LABEL			(c, "bgcolor2", 0, "Background Inside Color");
-	CLASS_ATTR_ORDER			(c, "bgcolor2", 0, "2");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor2", 0, "0.75 0.75 0.75 1.");
-    
-    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoamap, f_colorBorder);
+    CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoamap, f_color_bd);
 	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "bdcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bdcolor", 0, "Border Color");
 	CLASS_ATTR_ORDER			(c, "bdcolor", 0, "3");
 	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bdcolor", 0, "0.5 0.5 0.5 1.");
     
-    CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoamap, f_colorSelection);
+    CLASS_ATTR_RGBA				(c, "selcolor", 0, t_hoamap, f_color_selection);
 	CLASS_ATTR_CATEGORY			(c, "selcolor", 0, "Color");
 	CLASS_ATTR_STYLE			(c, "selcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "selcolor", 0, "Selection Color");
@@ -461,10 +450,15 @@ void hoamap_dowrite(t_hoamap *x, t_symbol *sym, long argc, t_atom *argv)
 
 void hoamap_getdrawparams(t_hoamap *x, t_object *patcherview, t_jboxdrawparams *params)
 {
-    params->d_boxfillcolor = x->f_colorBackground;
-    params->d_bordercolor =  x->f_colorBorder;
-	params->d_borderthickness = 1;
-	params->d_cornersize = CORNERSIZE;
+	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
+	params->d_cornersize = HOA_UI_CORNERSIZE;
+	
+	t_jrgba bgcolor = x->f_color_bg;
+	vector_add(3, (double*)&bgcolor, -0.1);
+	vector_clip_minmax(3, (double*)&bgcolor, 0., 1.);
+	
+	params->d_boxfillcolor = bgcolor;
+    params->d_bordercolor =  x->f_color_bd;
 }
 
 void hoamap_tick(t_hoamap *x)
@@ -786,15 +780,16 @@ void hoamap_source_save(t_hoamap *x, t_dictionary *d)
         {
             if(x->f_source_manager->sourceGetExistence(i))
             {
+				double *color = x->f_source_manager->sourceGetColor(i);
                 atom_setsym(av+j, hoa_sym_source);
                 atom_setlong(av+j+1, i);
                 atom_setfloat(av+j+2, x->f_source_manager->sourceGetAbscissa(i));
                 atom_setfloat(av+j+3, x->f_source_manager->sourceGetOrdinate(i));
                 atom_setlong(av+j+4, x->f_source_manager->sourceGetMute(i));
-                atom_setfloat(av+j+5, x->f_source_manager->sourceGetColor(i).red);
-                atom_setfloat(av+j+6, x->f_source_manager->sourceGetColor(i).green);
-                atom_setfloat(av+j+7, x->f_source_manager->sourceGetColor(i).blue);
-                atom_setfloat(av+j+8, x->f_source_manager->sourceGetColor(i).alpha);
+                atom_setfloat(av+j+5, color[0]);
+                atom_setfloat(av+j+6, color[1]);
+                atom_setfloat(av+j+7, color[2]);
+                atom_setfloat(av+j+8, color[3]);
                 atom_setsym(av+j+9, gensym(x->f_source_manager->sourceGetDescription(i).c_str()));
                 j += 10;
             }
@@ -823,6 +818,7 @@ void hoamap_group_save(t_hoamap *x, t_dictionary *d)
             if(x->f_source_manager->groupGetExistence(i))
             {
                 long numberOfsource = x->f_source_manager->groupGetNumberOfSources(i);
+				double *color = x->f_source_manager->groupGetColor(i);
                 atom_setsym(av+j, hoa_sym_group);
                 atom_setlong(av+j+1, i);
                 atom_setlong(av+j+2, numberOfsource);
@@ -831,10 +827,10 @@ void hoamap_group_save(t_hoamap *x, t_dictionary *d)
                     atom_setlong(av+j+k+3, x->f_source_manager->groupGetSourceIndex(i, k));
                 }
                 atom_setlong(av+j+numberOfsource+3, x->f_source_manager->groupGetMute(i));
-                atom_setfloat(av+j+numberOfsource+4, x->f_source_manager->groupGetColor(i).red);
-                atom_setfloat(av+j+numberOfsource+5, x->f_source_manager->groupGetColor(i).green);
-                atom_setfloat(av+j+numberOfsource+6, x->f_source_manager->groupGetColor(i).blue);
-                atom_setfloat(av+j+numberOfsource+7, x->f_source_manager->groupGetColor(i).alpha);
+                atom_setfloat(av+j+numberOfsource+4, color[0]);
+                atom_setfloat(av+j+numberOfsource+5, color[1]);
+                atom_setfloat(av+j+numberOfsource+6, color[2]);
+                atom_setfloat(av+j+numberOfsource+7, color[3]);
                 atom_setsym(av+j+numberOfsource+8, gensym(x->f_source_manager->groupGetDescription(i).c_str()));
                 
                 j += x->f_source_manager->groupGetNumberOfSources(i) + 9;
@@ -849,6 +845,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
 {
     t_atom *av;
     long ac = 0;
+	double* color;
     
     SourcesManager* temporySourceManager = NULL;
     temporySourceManager = new SourcesManager();
@@ -886,15 +883,16 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                     {
                         if(temporySourceManager->sourceGetExistence(k))
                         {
+							color = temporySourceManager->sourceGetColor(k);
                             atom_setsym(av+i, hoa_sym_source);
                             atom_setlong(av+i+1, k);
                             atom_setfloat(av+i+2, temporySourceManager->sourceGetAbscissa(k));
                             atom_setfloat(av+i+3, temporySourceManager->sourceGetOrdinate(k));
                             atom_setlong(av+i+4, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+5, temporySourceManager->sourceGetColor(k).red);
-                            atom_setfloat(av+i+6, temporySourceManager->sourceGetColor(k).green);
-                            atom_setfloat(av+i+7, temporySourceManager->sourceGetColor(k).blue);
-                            atom_setfloat(av+i+8, temporySourceManager->sourceGetColor(k).alpha);
+                            atom_setfloat(av+i+5, color[0]);
+                            atom_setfloat(av+i+6, color[1]);
+                            atom_setfloat(av+i+7, color[2]);
+                            atom_setfloat(av+i+8, color[3]);
                             atom_setsym(av+i+9, gensym(temporySourceManager->sourceGetDescription(k).c_str()));
                             
                             i += 10;
@@ -904,6 +902,7 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                     {
                         if(temporySourceManager->groupGetExistence(k))
                         {
+							color = temporySourceManager->groupGetColor(k);
                             long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
                             atom_setsym(av+i, hoa_sym_group);
                             atom_setlong(av+i+1, k);
@@ -913,10 +912,10 @@ void hoamap_slot_save(t_hoamap *x, t_dictionary *d)
                                 atom_setlong(av+i+l+3, temporySourceManager->groupGetSourceIndex(k, l));
                             }
                             atom_setlong(av+i+numberOfsource+3, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+numberOfsource+4, temporySourceManager->groupGetColor(k).red);
-                            atom_setfloat(av+i+numberOfsource+5, temporySourceManager->groupGetColor(k).green);
-                            atom_setfloat(av+i+numberOfsource+6, temporySourceManager->groupGetColor(k).blue);
-                            atom_setfloat(av+i+numberOfsource+7, temporySourceManager->groupGetColor(k).alpha);
+                            atom_setfloat(av+i+numberOfsource+4, color[0]);
+                            atom_setfloat(av+i+numberOfsource+5, color[1]);
+                            atom_setfloat(av+i+numberOfsource+6, color[2]);
+                            atom_setfloat(av+i+numberOfsource+7, color[3]);
                             atom_setsym(av+i+numberOfsource+8, gensym(temporySourceManager->groupGetDescription(k).c_str()));
                             
                             i += numberOfsource + 9;
@@ -936,6 +935,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
 {
     t_atom *av;
     long ac = 0;
+	double* color;
 
     SourcesManager* temporySourceManager = NULL;
     temporySourceManager = new SourcesManager();
@@ -973,15 +973,16 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                     {
                         if(temporySourceManager->sourceGetExistence(k))
                         {
+							color = temporySourceManager->sourceGetColor(k);
                             atom_setsym(av+i, hoa_sym_source);
                             atom_setlong(av+i+1, k);
                             atom_setfloat(av+i+2, temporySourceManager->sourceGetAbscissa(k));
                             atom_setfloat(av+i+3, temporySourceManager->sourceGetOrdinate(k));
                             atom_setlong(av+i+4, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+5, temporySourceManager->sourceGetColor(k).red);
-                            atom_setfloat(av+i+6, temporySourceManager->sourceGetColor(k).green);
-                            atom_setfloat(av+i+7, temporySourceManager->sourceGetColor(k).blue);
-                            atom_setfloat(av+i+8, temporySourceManager->sourceGetColor(k).alpha);
+                            atom_setfloat(av+i+5, color[0]);
+                            atom_setfloat(av+i+6, color[1]);
+                            atom_setfloat(av+i+7, color[2]);
+                            atom_setfloat(av+i+8, color[3]);
                             atom_setsym(av+i+9, gensym(temporySourceManager->sourceGetDescription(k).c_str()));
                             
                             i += 10;
@@ -992,6 +993,7 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                         if(temporySourceManager->groupGetExistence(k))
                         {
                             long numberOfsource = temporySourceManager->groupGetNumberOfSources(k);
+							color = temporySourceManager->groupGetColor(k);
                             atom_setsym(av+i, hoa_sym_group);
                             atom_setlong(av+i+1, k);
                             atom_setlong(av+i+2, numberOfsource);
@@ -1000,10 +1002,10 @@ void hoamap_trajectory_save(t_hoamap *x, t_dictionary *d)
                                 atom_setlong(av+i+l+3, temporySourceManager->groupGetSourceIndex(k, l));
                             }
                             atom_setlong(av+i+numberOfsource+3, temporySourceManager->groupGetMute(k));
-                            atom_setfloat(av+i+numberOfsource+4, temporySourceManager->groupGetColor(k).red);
-                            atom_setfloat(av+i+numberOfsource+5, temporySourceManager->groupGetColor(k).green);
-                            atom_setfloat(av+i+numberOfsource+6, temporySourceManager->groupGetColor(k).blue);
-                            atom_setfloat(av+i+numberOfsource+7, temporySourceManager->groupGetColor(k).alpha);
+                            atom_setfloat(av+i+numberOfsource+4, color[0]);
+                            atom_setfloat(av+i+numberOfsource+5, color[1]);
+                            atom_setfloat(av+i+numberOfsource+6, color[2]);
+                            atom_setfloat(av+i+numberOfsource+7, color[3]);
                             atom_setsym(av+i+numberOfsource+8, gensym(temporySourceManager->groupGetDescription(k).c_str()));
                             
                             i += numberOfsource + 9;
@@ -1050,8 +1052,6 @@ void hoamap_parameters_groups(t_hoamap *x, short ac, t_atom *av)
                 {
                     x->f_source_manager->groupSetSource(atom_getlong(av+i+1), atom_getlong(av+i+3+j));
                 }
-                //if(atom_getlong(av+i+3+numberOfsource) == 1)
-                    //x->f_source_manager->groupSetMute(atom_getlong(av+i+1), 1);
                 x->f_source_manager->groupSetColor(atom_getlong(av+i+1), atom_getfloat(av+i+4+numberOfsource), atom_getfloat(av+i+5+numberOfsource), atom_getfloat(av+i+6+numberOfsource), atom_getfloat(av+i+7+numberOfsource));
                 x->f_source_manager->groupSetDescription(atom_getlong(av+i+1), atom_getsym(av+i+8+numberOfsource)->s_name);
                 i += numberOfsource + 7;
@@ -1218,10 +1218,10 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
                     }
                     else if(x->f_index_of_source_to_color == -2)
                     {
-                        x->f_colorBackground.red = atom_getfloat(av);
-                        x->f_colorBackground.green = atom_getfloat(av+1);
-                        x->f_colorBackground.blue = atom_getfloat(av+2);
-                        x->f_colorBackground.alpha = atom_getfloat(av+3);
+                        x->f_color_bg.red = atom_getfloat(av);
+                        x->f_color_bg.green = atom_getfloat(av+1);
+                        x->f_color_bg.blue = atom_getfloat(av+2);
+                        x->f_color_bg.alpha = atom_getfloat(av+3);
                         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
                         object_notify(x, hoa_sym_modified, NULL);
                     }
@@ -1232,7 +1232,7 @@ t_max_err hoamap_notify(t_hoamap *x, t_symbol *s, t_symbol *msg, void *sender, v
         else
         {
             name = (t_symbol *)object_method((t_object *)data, hoa_sym_getname);
-            if(name == hoa_sym_bgcolor || name == gensym("bgcolor2") )
+            if(name == hoa_sym_bgcolor)
             {
                 jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_background_layer);
             }
@@ -1481,8 +1481,7 @@ void hoamap_paint(t_hoamap *x, t_object *view)
 
 void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
 {
-    t_jgraphics *g, *g2, *g3;
-    t_jsurface *s1, *s2;
+    t_jgraphics *g;
     t_jrgba black, white;
     double w = rect->width;
     double h = rect->height;
@@ -1491,28 +1490,22 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
     
     double contrastBlack = 0.12;
     double contrastWhite = 0.08;
-    black = white = x->f_colorBackgroundInside;
-    black.red = clip_min(black.red -= contrastBlack, 0);
-    black.green = clip_min(black.green -= contrastBlack, 0);
-    black.blue = clip_min(black.blue -= contrastBlack, 0);
-    white.red = clip_max(white.red += contrastWhite, 1.);
-    white.green = clip_max(white.green += contrastWhite, 1.);
-    white.blue = clip_max(white.blue += contrastWhite, 1.);
-    
+    black = white = x->f_color_bg;
+	
+	vector_add(3, (double*)&black, -contrastBlack);
+	vector_clip_minmax(3, (double*)&black, 0., 1.);
+	
+	vector_add(3, (double*)&white, contrastWhite);
+	vector_clip_minmax(3, (double*)&white, 0., 1.);
+	
 	g = jbox_start_layer((t_object *)x, view, hoa_sym_background_layer, w, h);
 	
 	if (g)
     {
-        s1 = jgraphics_image_surface_create(JGRAPHICS_FORMAT_ARGB32, int(w), int(h));
-        g2 = jgraphics_create(s1);
-        
-        s2 = jgraphics_image_surface_create(JGRAPHICS_FORMAT_ARGB32, int(w), int(h));
-        g3 = jgraphics_create(s2);
-        
-        jgraphics_set_source_jrgba(g3, &x->f_colorBackgroundInside);
-        jgraphics_set_line_width(g3, 1);
-        jgraphics_arc(g3, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor),  0., JGRAPHICS_2PI);
-        jgraphics_fill(g3);
+        jgraphics_set_source_jrgba(g, &x->f_color_bg);
+        jgraphics_set_line_width(g, 1);
+        jgraphics_arc(g, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor),  0., HOA_2PI);
+        jgraphics_fill(g);
         
         double ecart = x->f_zoom_factor * maxctr;
         if(ecart < 10 && ecart >= 5) ecart *= 4;
@@ -1522,69 +1515,55 @@ void draw_background(t_hoamap *x,  t_object *view, t_rect *rect)
         
 		for(double i = 0; i < maxctr; i += ecart)
         {
-            jgraphics_set_line_width(g3, 1);
-            jgraphics_set_source_jrgba(g3, &white);
-            jgraphics_move_to(g3, 0., long(ctr.y - i) + 0.5);
-            jgraphics_line_to(g3, w,  long(ctr.y - i) + 0.5);
-            jgraphics_move_to(g3, 0., long(ctr.y + i) + 0.5);
-            jgraphics_line_to(g3, w,  long(ctr.y + i) + 0.5);
-            jgraphics_move_to(g3, long(ctr.x - i) + 0.5, 0.);
-            jgraphics_line_to(g3, long(ctr.x - i) + 0.5, w);
-            jgraphics_move_to(g3, long(ctr.x + i) + 0.5, 0.);
-            jgraphics_line_to(g3, long(ctr.x + i) + 0.5, w);
-            jgraphics_set_line_width(g3, 1);
-            jgraphics_scale(g3, 0.5, 0.5);
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 2, 2);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_move_to(g, 0., long(ctr.y - i) + 0.5);
+            jgraphics_line_to(g, w,  long(ctr.y - i) + 0.5);
+            jgraphics_move_to(g, 0., long(ctr.y + i) + 0.5);
+            jgraphics_line_to(g, w,  long(ctr.y + i) + 0.5);
+            jgraphics_move_to(g, long(ctr.x - i) + 0.5, 0.);
+            jgraphics_line_to(g, long(ctr.x - i) + 0.5, w);
+            jgraphics_move_to(g, long(ctr.x + i) + 0.5, 0.);
+            jgraphics_line_to(g, long(ctr.x + i) + 0.5, w);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_scale(g, 0.5, 0.5);
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 2, 2);
             
-            jgraphics_set_line_width(g3, 1);
-            jgraphics_set_source_jrgba(g3, &black);
-            jgraphics_move_to(g3, 0. - 0.5, long(ctr.y - i) - 0.5);
-            jgraphics_line_to(g3, w - 0.5, long(ctr.y - i) - 0.5);
-            jgraphics_move_to(g3, 0. - 0.5, long(ctr.y + i) - 0.5);
-            jgraphics_line_to(g3, w - 0.5, long(ctr.y + i) - 0.5);
-            jgraphics_move_to(g3, long(ctr.x - i) - 0.5, 0. - 0.5);
-            jgraphics_line_to(g3, long(ctr.x - i) - 0.5, w - 0.5);
-            jgraphics_move_to(g3, long(ctr.x + i) - 0.5, 0. - 0.5);
-            jgraphics_line_to(g3, long(ctr.x + i) - 0.5, w - 0.5);
-            jgraphics_set_line_width(g3, 2);
-            jgraphics_scale(g3, 0.25, 0.25);
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 4, 4);
+            jgraphics_set_line_width(g, 1);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_move_to(g, 0. - 0.5, long(ctr.y - i) - 0.5);
+            jgraphics_line_to(g, w - 0.5, long(ctr.y - i) - 0.5);
+            jgraphics_move_to(g, 0. - 0.5, long(ctr.y + i) - 0.5);
+            jgraphics_line_to(g, w - 0.5, long(ctr.y + i) - 0.5);
+            jgraphics_move_to(g, long(ctr.x - i) - 0.5, 0. - 0.5);
+            jgraphics_line_to(g, long(ctr.x - i) - 0.5, w - 0.5);
+            jgraphics_move_to(g, long(ctr.x + i) - 0.5, 0. - 0.5);
+            jgraphics_line_to(g, long(ctr.x + i) - 0.5, w - 0.5);
+            jgraphics_set_line_width(g, 2);
+            jgraphics_scale(g, 0.25, 0.25);
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 4, 4);
         }
         
         /* Circles */
         double radius = x->f_zoom_factor * (maxctr*2) / 10.;
         for(int i = 5; i > 0; i--)
         {
-            jgraphics_set_line_width(g3, 2);
-            jgraphics_set_source_jrgba(g3, &white);
-            jgraphics_arc(g3, long(ctr.x)+0.5, long(ctr.y)+0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
-            jgraphics_scale(g3, 0.5, 0.5);
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 2, 2);
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &white);
+            jgraphics_arc(g, long(ctr.x)+0.5, long(ctr.y)+0.5, (double)i * radius - 1,  0., HOA_2PI);
+            jgraphics_scale(g, 0.5, 0.5);
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 2, 2);
             
-            jgraphics_set_line_width(g3, 2);
-            jgraphics_set_source_jrgba(g3, &black);
-            jgraphics_arc(g3, long(ctr.x) - 0.5, long(ctr.y) - 0.5, (double)i * radius - 1,  0., JGRAPHICS_2PI);
-            jgraphics_scale(g3, 0.5, 0.5);
-            jgraphics_stroke(g3);
-            jgraphics_scale(g3, 2, 2);
+            jgraphics_set_line_width(g, 2);
+            jgraphics_set_source_jrgba(g, &black);
+            jgraphics_arc(g, long(ctr.x) - 0.5, long(ctr.y) - 0.5, (double)i * radius - 1,  0., HOA_2PI);
+            jgraphics_scale(g, 0.5, 0.5);
+            jgraphics_stroke(g);
+            jgraphics_scale(g, 2, 2);
         }
-        
-        /* clip jgraphics_3 to circle */
-        jgraphics_destroy(g3);
-        jgraphics_set_source_surface(g2, s2, 0, 0);
-        jgraphics_surface_destroy(s2);
-        jgraphics_arc(g2, ctr.x, ctr.y, maxctr * (1./MIN_ZOOM * x->f_zoom_factor) - (BORDERTHICK*2),  0., HOA_2PI);
-        jgraphics_fill(g2);
-        
-        /* clip jgraphics_2 to rounded rect */
-        jgraphics_destroy(g2);
-        jgraphics_set_source_surface(g, s1, 0, 0);
-        jgraphics_surface_destroy(s1);
-        jgraphics_rectangle_rounded(g, 0, 0, w, h, CORNERSIZE, CORNERSIZE);
-        jgraphics_fill(g);
         
 		jbox_end_layer((t_object*)x, view, hoa_sym_background_layer);
 	}
@@ -1602,6 +1581,8 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
     double descriptionPositionY;
 	double sourcePositionX;
     double sourcePositionY;
+	
+	double* color;
     
     double w = rect->width;
     double h = rect->height;
@@ -1623,12 +1604,9 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
             {
                 sourcePositionX = (x->f_source_manager->sourceGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
                 sourcePositionY = (-x->f_source_manager->sourceGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
-			
-                sourceColor.red = x->f_source_manager->sourceGetColor(i).red;
-                sourceColor.green = x->f_source_manager->sourceGetColor(i).green;
-                sourceColor.blue = x->f_source_manager->sourceGetColor(i).blue;
-                sourceColor.alpha = x->f_source_manager->sourceGetColor(i).alpha;
-
+				
+				color = x->f_source_manager->sourceGetColor(i);
+				jrgba_set(&sourceColor, color[0], color[1], color[2], color[3]);
                 
                 if(x->f_source_manager->sourceGetDescription(i).c_str()[0])
                     sprintf(description,"%i : %s", i, x->f_source_manager->sourceGetDescription(i).c_str());
@@ -1644,8 +1622,8 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
 			
                 if (x->f_index_of_selected_source == i)
                 {
-                    jgraphics_set_source_jrgba(g, &x->f_colorSelection);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., JGRAPHICS_2PI);
+                    jgraphics_set_source_jrgba(g, &x->f_color_selection);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., HOA_2PI);
                     jgraphics_fill(g);
                     
                     for(int index = 0; index < x->f_source_manager->sourceGetNumberOfGroups(i); index++)
@@ -1662,19 +1640,19 @@ void draw_sources(t_hoamap *x,  t_object *view, t_rect *rect)
                 if(!x->f_source_manager->sourceGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor); 
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 0.6,  0., JGRAPHICS_2PI);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 0.6,  0., HOA_2PI);
                     jgraphics_fill(g);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., HOA_2PI);
                     jgraphics_stroke(g);
                 }
                 if(x->f_source_manager->sourceGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 0.6,  0., JGRAPHICS_2PI);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 0.6,  0., HOA_2PI);
                     jgraphics_fill(g);
                     t_jrgba red = {1., 0., 0., 1.};
                     jgraphics_set_source_jrgba(g, &red); 
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., HOA_2PI);
                     jgraphics_stroke(g);
                     jgraphics_move_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_PI2 / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_PI2 / 2.));
                     jgraphics_line_to(g, sourcePositionX + abscissa(x->f_size_source * 1., HOA_PI2 * 5. / 2.), sourcePositionY + ordinate(x->f_size_source * 1., HOA_PI * 5. / 4.));
@@ -1702,6 +1680,8 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
     double descriptionPositionY;
 	double sourcePositionX;
     double sourcePositionY;
+	
+	double* color;
     
     double w = rect->width;
     double h = rect->height;
@@ -1723,10 +1703,8 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 sourcePositionX = (x->f_source_manager->groupGetAbscissa(i) * x->f_zoom_factor + 1.) * ctr.x;
                 sourcePositionY = (-x->f_source_manager->groupGetOrdinate(i) * x->f_zoom_factor + 1.) * ctr.y;
                 
-                sourceColor.red = x->f_source_manager->groupGetColor(i).red;
-                sourceColor.green = x->f_source_manager->groupGetColor(i).green;
-                sourceColor.blue = x->f_source_manager->groupGetColor(i).blue;
-                sourceColor.alpha = x->f_source_manager->groupGetColor(i).alpha;
+				color = x->f_source_manager->groupGetColor(i);
+				jrgba_set(&sourceColor, color[0], color[1], color[2], color[3]);
                 
                 if(x->f_source_manager->groupGetDescription(i).c_str()[0])
                     sprintf(description,"%i : %s", i, x->f_source_manager->groupGetDescription(i).c_str());
@@ -1742,9 +1720,9 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 
                 if (x->f_index_of_selected_group == i)
                 {
-                    //x->f_colorSelection
-                    jgraphics_set_source_jrgba(g, &x->f_colorSelection);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., JGRAPHICS_2PI);
+                    //x->f_color_selection
+                    jgraphics_set_source_jrgba(g, &x->f_color_selection);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.5,  0., HOA_2PI);
                     jgraphics_fill(g);
                     
                     for(int index = 0; index < x->f_source_manager->groupGetNumberOfSources(i); index++)
@@ -1767,7 +1745,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 if(!x->f_source_manager->groupGetMute(i))
                 {
                     jgraphics_set_source_jrgba(g, &sourceColor);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.,  0., JGRAPHICS_2PI);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source * 1.,  0., HOA_2PI);
                     jgraphics_stroke(g);
                 
                     for(int j = 0; j < 2; j++)
@@ -1781,7 +1759,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
                 {
                     t_jrgba red = {1., 0., 0., 1.};
                     jgraphics_set_source_jrgba(g, &red);
-                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., JGRAPHICS_2PI);
+                    jgraphics_arc(g, sourcePositionX, sourcePositionY, x->f_size_source,  0., HOA_2PI);
                     jgraphics_stroke(g);
                     for(int j = 0; j < 2; j++)
                     {
@@ -1804,7 +1782,7 @@ void draw_groups(t_hoamap *x,  t_object *view, t_rect *rect)
 void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g;
-    t_jrgba strokecolor = x->f_colorSelection;
+    t_jrgba strokecolor = x->f_color_selection;
     strokecolor.alpha = 0.8;
 	t_rect sel;
     
@@ -1819,7 +1797,7 @@ void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 			sel.width = x->f_rect_selection.width;
 			sel.height = x->f_rect_selection.height;
 			
-			jgraphics_set_source_jrgba(g, &x->f_colorSelection);
+			jgraphics_set_source_jrgba(g, &x->f_color_selection);
 			jgraphics_rectangle(g, sel.x, sel.y, sel.width, sel.height);
 			jgraphics_fill(g);
 			
@@ -1839,7 +1817,7 @@ void draw_rect_selection(t_hoamap *x,  t_object *view, t_rect *rect)
 
 void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    coordinatesCartesian cursor;
+    t_pt cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
     double maxwh = max(x->rect.width, x->rect.height);
@@ -2057,7 +2035,7 @@ void hoamap_mousedown(t_hoamap *x, t_object *patcherview, t_pt pt, long modifier
 
 void hoamap_mousedrag(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    coordinatesCartesian cursor;
+    t_pt cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
     
@@ -2212,7 +2190,7 @@ void hoamap_mouseenter(t_hoamap *x, t_object *patcherview, t_pt pt, long modifie
 
 void hoamap_mousemove(t_hoamap *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    coordinatesCartesian cursor;
+    t_pt cursor;
     cursor.x = ((pt.x / x->rect.width * 2.) - 1.) / x->f_zoom_factor;
     cursor.y = ((-pt.y / x->rect.height * 2.) + 1.) / x->f_zoom_factor;
     double maxwh = max(x->rect.width, x->rect.height);

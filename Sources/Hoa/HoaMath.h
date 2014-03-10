@@ -13,23 +13,6 @@
 */
 namespace Hoa
 {
-	//! The maximum function
-    /** This function returns the maximum value between two values
-	 
-	 @param     v1   The first value.
-	 @param     v2   The low boundary.
-	 @return    The maximum value.
-     
-	 @see    min
-     */
-	inline double max(const double v1, const double v2)
-	{
-		if (v1 >= v2)
-			return v1;
-		else
-			return v2;
-	}
-	
 	//! The minimum function
     /** This function returns the minimum value between two values
 	 
@@ -47,24 +30,41 @@ namespace Hoa
 			return v2;
 	}
 	
+	//! The maximum function
+    /** This function returns the maximum value between two values
+	 
+	 @param     v1   The first value.
+	 @param     v2   The low boundary.
+	 @return    The maximum value.
+     
+	 @see    min
+     */
+	inline double max(const double v1, const double v2)
+	{
+		if (v1 >= v2)
+			return v1;
+		else
+			return v2;
+	}
+	
 	//! The clipping function
     /** The function clips a number between boundaries. \n
 	 If \f$x < min\f$, \f$f(x) = min\f$ else if \f$x > max\f$, \f$f(x) = max\f$ else \f$f(x) = x\f$.
      
 	 @param     value   The value to clip.
-	 @param     low     The low boundary.
-	 @param     high    The high boundary.
+	 @param     min     The low boundary.
+	 @param     max     The high boundary.
 	 @return    The function return the clipped value.
      
 	 @see    clip_min
 	 @see    clip_max
      */
-    inline double clip_minmax(const double value, const double low, const double high)
+    inline double clip_minmax(const double value, const double min, const double max)
     {
-        if(value < low)
-            return low;
-        else if(value > high)
-            return high;
+        if(value < min)
+            return min;
+        else if(value > max)
+            return max;
         else
             return value;
     }
@@ -312,12 +312,12 @@ namespace Hoa
     }
     
     //! The wrapping function over \f$2\pi\f$
-    /** The function wraps a number between 0 and \f$2\pi\f$.
+    /** The function wraps a number between \f$0\f$ and \f$2\pi\f$.
      
 	 @param     value   The value to wrap.
 	 @return    The function return the wrapped value.
      
-	 @see    wrap
+	 @see    wrap, wrap_360
      */
     inline double wrap_twopi(const double value)
     {
@@ -334,6 +334,14 @@ namespace Hoa
         return new_value;
     }
 	
+	//! The wrapping function in degrees.
+    /** The function wraps a number between \f$0\f$ and \f$360°\f$.
+     
+	 @param     value   The value to wrap.
+	 @return    The wrapped value.
+     
+	 @see    wrap, wrap_twopi
+     */
 	inline double wrap_360(const double value)
     {
 		double new_value = value;
@@ -345,21 +353,57 @@ namespace Hoa
         return new_value;
     }
     
+	//! The ordinate converter function.
+    /** This function takes a radius and an azimuth value and convert them to an ordinate value.
+     
+	 @param     radius		The radius value (greather than 0).
+	 @param     azimuth		The azimuth value (between \f$0\f$ and \f$2\pi\f$).
+	 @return    The ordinate value.
+     
+	 @see    abscissa
+     */
 	inline double ordinate(const double radius, const double azimuth)
 	{
 		return radius * sin(azimuth + HOA_PI2);
 	}
     
+	//! The abscissa converter function.
+    /** This function takes a radius and an azimuth value and convert them to an abscissa value.
+     
+	 @param     radius		The radius value (greather than 0).
+	 @param     azimuth		The azimuth value (between \f$0\f$ and \f$2\pi\f$).
+	 @return    The abscissa value.
+     
+	 @see    ordinate
+     */
     inline double abscissa(const double radius, const double azimuth)
 	{
 		return radius * cos(azimuth + HOA_PI2);
 	}
     
+	//! The radius converter function.
+    /** This function takes an abscissa and an ordinate value and convert them to a radius value.
+     
+	 @param     x		The abscissa value.
+	 @param     y		The ordinate value.
+	 @return    The radius value.
+     
+	 @see    azimuth
+     */
     inline double radius(const double x, const double y)
 	{
 		return sqrt(x*x + y*y);
 	}
     
+	//! The azimuth converter function.
+    /** This function takes an abscissa and an ordinate value and convert them to an azimuth value.
+     
+	 @param     x		The abscissa value.
+	 @param     y		The ordinate value.
+	 @return    The azimuth value.
+     
+	 @see    radius
+     */
 	inline double azimuth(const double x, const double y)
 	{
 		return atan2(y, x) - HOA_PI2;
@@ -463,6 +507,18 @@ namespace Hoa
     inline bool isInsideDeg(const double degree, const double loDeg, const double hiDeg)
 	{
         return isInside(wrap_360(degree-loDeg), 0, wrap_360(hiDeg-loDeg));
+	}
+	
+	inline void vector_add(unsigned int size, double *vec, double inc)
+	{
+		for (int i=0; i < size; i++)
+			vec[i] += inc;
+	}
+	
+	inline void vector_clip_minmax(unsigned int size, double *vec, double min, double max)
+	{
+		for (int i=0; i < size; i++)
+			vec[i] = clip_minmax(vec[i], min, max);
 	}
 }
 

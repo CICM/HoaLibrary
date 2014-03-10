@@ -42,38 +42,6 @@
 
 namespace Hoa
 {
-	enum
-	{
-		Hoa_Polar  = 0,
-		Hoa_Cartesian
-	};
-	
-	typedef struct  coordinatesPolar
-	{
-		double		radius;
-		double		angle;
-	} coordinatesPolar;
-	
-	typedef struct  coordinatesCartesian
-	{
-		double		x;
-		double		y;
-	} coordinatesCartesian;
-	
-	typedef struct  _hoa_rgba
-	{
-		double      red;
-		double      green;
-		double      blue;
-		double      alpha;
-	} t_hoa_rgba;
-	
-	typedef struct  _hoa_rgb
-	{
-		double      red;
-		double      green;
-		double      blue;
-	} t_hoa_rgb;
 }
 
 #endif

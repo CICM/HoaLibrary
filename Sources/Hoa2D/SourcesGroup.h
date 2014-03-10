@@ -21,8 +21,9 @@ namespace Hoa2D
 		std::vector <long>      m_sources;
 		std::string             m_description;
 		long                    m_exist;
-		t_hoa_rgba              m_color;
-		coordinatesCartesian    m_centroid;
+		double*					m_color;
+		double					m_centroid_x;
+		double					m_centroid_y;
 		SourcesManager*         m_source_manager;
 		double                  m_maximum_radius;
 		long                    m_mute;
@@ -59,13 +60,13 @@ namespace Hoa2D
 		
 		long   getExistence();
 		double getRadius();
-		double getAngle();
+		double getAzimuth();
 		double getAbscissa();
 		double getOrdinate();
 		long   getNumberOfSources();
 		long   getSourceIndex(long anIndex);
 		std::string getDescription();
-		t_hoa_rgba  getColor();
+		double*  getColor();
 		long   getMute();
 		
 		int compare(const SourcesGroup* a, const SourcesGroup *b);

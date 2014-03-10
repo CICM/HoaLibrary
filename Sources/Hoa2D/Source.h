@@ -10,12 +10,13 @@
 #include "../Hoa/Hoa.h"
 
 namespace Hoa2D
-{
+{	
 	class Source
 	{
 	private:
-		coordinatesPolar        m_coordinate_polar;
-		t_hoa_rgba              m_color;
+		double					m_radius;
+		double					m_azimuth;
+		double*					m_color;
 		std::string             m_description;
 		long                    m_exist;
 		std::vector <long>      m_groups;
@@ -38,17 +39,17 @@ namespace Hoa2D
 		void setMaximumRadius(double aLimitValue);
 		void setMute(long aValue);
 		
-		long		getExistence();
-		double		getRadius();
-		double		getAngle();
-		double		getAbscissa();
-		double		getOrdinate();
-		t_hoa_rgba  getColor();
-		std::string getDescription();
-		long		getNumberOfGroups();
-		long		getGroupIndex(long anIndex);
-		long		isOwnedByGroup(long aGroupIndex);
-		long		getMute();
+		long			getExistence()		const {return m_exist;}
+		double			getRadius()			const {return m_radius;}
+		double			getAzimuth()		const {return m_azimuth;}
+		double			getAbscissa()		const {return abscissa(m_radius, m_azimuth + HOA_PI2);}
+		double			getOrdinate()		const {return ordinate(m_radius, m_azimuth + HOA_PI2);}
+		double*			getColor()			const {return m_color;}
+		std::string		getDescription()	const {return m_description;}
+		long			getNumberOfGroups() const {return m_groups.size();}
+		long			getGroupIndex(long anIndex);
+		long			isOwnedByGroup(long aGroupIndex);
+		long			getMute()			const {return m_mute;}
 		
 		~Source();
 	};

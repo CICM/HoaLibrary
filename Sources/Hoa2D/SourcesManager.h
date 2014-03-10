@@ -63,13 +63,11 @@ namespace Hoa2D
 		void sourceSetMute(long anIndex, long aValue);
 		
 		long sourceGetExistence(long anIndex);
-		coordinatesPolar sourceGetCoordinatesPolar(long anIndex);
 		double sourceGetRadius(long anIndex);
 		double sourceGetAngle(long anIndex);
-		coordinatesCartesian sourceGetCoordinatesCartesian(long anIndex);
 		double sourceGetAbscissa(long anIndex);
 		double sourceGetOrdinate(long anIndex);
-		t_hoa_rgba sourceGetColor(long anIndex);
+		double* sourceGetColor(long anIndex);
 		std::string sourceGetDescription(long anIndex);
 		long sourceGetNumberOfGroups(long anIndex);
 		long sourceGetGroupIndex(long aSourceIndex, long aGroupIndex);
@@ -102,7 +100,7 @@ namespace Hoa2D
 		double groupGetAngle(long anIndex);
 		double groupGetAbscissa(long anIndex);
 		double groupGetOrdinate(long anIndex);
-		t_hoa_rgba groupGetColor(long anIndex);
+		double* groupGetColor(long anIndex);
 		std::string groupGetDescription(long anIndex);
 		long groupGetMute(long anIndex);
 		long groupGetIfSourceMuted(long anIndex);
