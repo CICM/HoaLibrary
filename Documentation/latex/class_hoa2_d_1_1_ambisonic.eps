@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 736.196319
+%%BoundingBox: 0 0 500 797.546012
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 0.679167 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 0.626923 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 12 def
+/rows 13 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -176,6 +176,7 @@ boxfont setfont
 (Hoa2D::Ambisonic) cw
 (Hoa2D::DecoderBinaural) cw
 (Hoa2D::DecoderIrregular) cw
+(Hoa2D::DecoderMulti) cw
 (Hoa2D::DecoderRegular) cw
 (Hoa2D::Encoder) cw
 (Hoa2D::Map) cw
@@ -196,9 +197,10 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (Hoa2D::Ambisonic) 0.000000 11.000000 box
- (Hoa2D::DecoderBinaural) 1.000000 10.000000 box
- (Hoa2D::DecoderIrregular) 1.000000 9.000000 box
+ (Hoa2D::Ambisonic) 0.000000 12.000000 box
+ (Hoa2D::DecoderBinaural) 1.000000 11.000000 box
+ (Hoa2D::DecoderIrregular) 1.000000 10.000000 box
+ (Hoa2D::DecoderMulti) 1.000000 9.000000 box
  (Hoa2D::DecoderRegular) 1.000000 8.000000 box
  (Hoa2D::Encoder) 1.000000 7.000000 box
  (Hoa2D::Map) 1.000000 6.000000 box
@@ -212,7 +214,9 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- relations -----
 
 solid
-1 0.000000 10.250000 out
+1 0.000000 11.250000 out
+solid
+0 0.000000 11.500000 hedge
 solid
 0 0.000000 10.500000 hedge
 solid
@@ -236,4 +240,4 @@ solid
 solid
 0 0.000000 0.500000 hedge
 solid
-0.000000 11.000000 0.500000 vedge
+0.000000 12.000000 0.500000 vedge
