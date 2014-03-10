@@ -3526,13 +3526,13 @@
 									"fontname" : "Arial",
 									"fontsize" : 12.0,
 									"id" : "obj-4",
-									"loudspeakers" : 16,
 									"maxclass" : "hoa.2d.recomposer",
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "list" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 375.0, 238.0, 300.0, 300.0 ]
+									"patching_rect" : [ 375.0, 238.0, 300.0, 300.0 ],
+									"varname" : "hoa.2d.recomposer"
 								}
 
 							}
@@ -4445,6 +4445,10 @@
 			}
  ],
 		"lines" : [  ],
+		"parameters" : 		{
+
+		}
+,
 		"dependency_cache" : [ 			{
 				"name" : "hoa.helpheader.maxpat",
 				"bootpath" : "/Users/elioton/Documents/programmation/CICM/sourceTree/HoaLibrary/_prerelease/max-package/misc/others",

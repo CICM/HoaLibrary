@@ -78,6 +78,9 @@ static t_symbol* hoa_sym_remove 					= gensym("remove");
 static t_symbol* hoa_sym_description 				= gensym("description");
 static t_symbol* hoa_sym_color 						= gensym("color");
 
+// recomposer
+static t_symbol* hoa_sym_channels					= gensym("channels");
+
 // Layers
 static t_symbol* hoa_sym_background_layer 			= gensym("background_layer");
 static t_symbol* hoa_sym_sources_layer 				= gensym("sources_layer");
@@ -86,7 +89,7 @@ static t_symbol* hoa_sym_rect_selection_layer 		= gensym("rect_selection_layer")
 static t_symbol* hoa_sym_harmonics_layer	 		= gensym("harmonics_layer");
 static t_symbol* hoa_sym_space_layer		 		= gensym("space_layer");
 static t_symbol* hoa_sym_points_layer		 		= gensym("points_layer");
-static t_symbol* hoa_sym_mic_layer					= gensym("mic_layer");
+static t_symbol* hoa_sym_channels_layer				= gensym("channels_layer");
 static t_symbol* hoa_sym_text_layer					= gensym("text_layer");
 static t_symbol* hoa_sym_fisheye_layer				= gensym("fisheye_layer");
 static t_symbol* hoa_sym_rectselection_layer		= gensym("rectselection_layer");

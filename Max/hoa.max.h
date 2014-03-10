@@ -28,6 +28,9 @@ extern "C"
 
 #define MAX_CHANNELS 256
 
+#define HOA_UI_BORDERTHICKNESS 1
+#define HOA_UI_CORNERSIZE 8
+
 static t_symbol* _sym_is_hoa	   = gensym("is_hoa");
 static t_symbol* _sym_hoa_version  = gensym("(v2.0)");
 static t_symbol* _sym_credit_line1 = gensym("by Julien Colafrancesco, Pierre Guillot & Eliott Paris");

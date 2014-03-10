@@ -457,12 +457,12 @@ namespace Hoa
 	
 	inline bool isInsideRad(const double radian, const double loRad, const double hiRad)
 	{
-        return isInside(wrap_twopi(radian-loRad), double(0), wrap_twopi(hiRad-loRad));
+        return isInside(wrap_twopi(radian-loRad), 0, wrap_twopi(hiRad-loRad));
 	}
     
     inline bool isInsideDeg(const double degree, const double loDeg, const double hiDeg)
 	{
-        return isInside(wrap_360(degree-loDeg), double(0), wrap_360(hiDeg-loDeg));
+        return isInside(wrap_360(degree-loDeg), 0, wrap_360(hiDeg-loDeg));
 	}
 }
 

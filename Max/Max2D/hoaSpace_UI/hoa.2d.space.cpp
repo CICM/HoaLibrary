@@ -215,11 +215,11 @@ void hoa_space_assist(t_hoa_space *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 	{
-		sprintf(s,"(Anything) Behavior and appearance");
+		sprintf(s,"(anything) Behavior and appearance");
 	}
 	else
 	{
-        sprintf(s,"(List) Channels coefficients");
+        sprintf(s,"(list) Channels coefficients");
 	}
 }
 
@@ -251,8 +251,8 @@ void hoa_space_getdrawparams(t_hoa_space *x, t_object *patcherview, t_jboxdrawpa
 {
     params->d_boxfillcolor = x->f_color_bg;
     params->d_bordercolor = x->f_color_bd;
-	params->d_borderthickness = 1;
-	params->d_cornersize = 8;
+	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
+	params->d_cornersize = HOA_UI_CORNERSIZE;
 }
 
 void hoa_space_preset(t_hoa_space *x)
