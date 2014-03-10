@@ -120,7 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_scope.html#a038059aad5409d02fb511d3443a5cbce">   24</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_scope.html#a038059aad5409d02fb511d3443a5cbce">Scope::process</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* inputs)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="namespace_hoa.html#a8ae91ded773030b88833f458d2bb1ea7">max</a> = 1.;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="namespace_hoa.html#a18a09e9aa0bc178190832f0b625f8630">max</a> = 1.;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_number_of_harmonics; i++)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            m_harmonics[i] = inputs[i];</div>
@@ -135,7 +135,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_scope.html#aa3e07e453b32b6a6334a0945bf102f53">   39</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_scope.html#a038059aad5409d02fb511d3443a5cbce">Scope::process</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* inputs)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="namespace_hoa.html#a8ae91ded773030b88833f458d2bb1ea7">max</a> = 1.;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="namespace_hoa.html#a18a09e9aa0bc178190832f0b625f8630">max</a> = 1.;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        m_decoder-&gt;<a class="code" href="class_hoa2_d_1_1_decoder_regular.html#a0df7ff818531d375909a2914d159b711">process</a>(inputs, m_matrix);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        max = fabs(m_matrix[cblas_idamax(m_number_of_points, m_matrix, 1)]);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">if</span>(max &gt; 1.)</div>
@@ -152,17 +152,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="ttc" id="namespace_hoa_html_a8ae91ded773030b88833f458d2bb1ea7"><div class="ttname"><a href="namespace_hoa.html#a8ae91ded773030b88833f458d2bb1ea7">Hoa::max</a></div><div class="ttdeci">double max(double v1, double v2)</div><div class="ttdoc">The maximum function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00025">HoaMath.h:25</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00018">Ambisonic.h:18</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_scope_html_a29c9191706ff1377efab0720cacbc448"><div class="ttname"><a href="class_hoa2_d_1_1_scope.html#a29c9191706ff1377efab0720cacbc448">Hoa2D::Scope::~Scope</a></div><div class="ttdeci">~Scope()</div><div class="ttdoc">The Scope destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_scope_8cpp_source.html#l00050">Scope.cpp:50</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html_a0df7ff818531d375909a2914d159b711"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html#a0df7ff818531d375909a2914d159b711">Hoa2D::DecoderRegular::process</a></div><div class="ttdeci">void process(const float *input, float *output)</div><div class="ttdoc">This method performs the regular decoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8cpp_source.html#l00041">Decoder.cpp:41</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_scope_html_a038059aad5409d02fb511d3443a5cbce"><div class="ttname"><a href="class_hoa2_d_1_1_scope.html#a038059aad5409d02fb511d3443a5cbce">Hoa2D::Scope::process</a></div><div class="ttdeci">void process(const float *inputs)</div><div class="ttdoc">This method performs the circular harmonics projection with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_scope_8cpp_source.html#l00024">Scope.cpp:24</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_scope_html_aaa6b3e208eb06bef06b59264c84a5364"><div class="ttname"><a href="class_hoa2_d_1_1_scope.html#aaa6b3e208eb06bef06b59264c84a5364">Hoa2D::Scope::Scope</a></div><div class="ttdeci">Scope(unsigned int order, unsigned int numberOfPoints)</div><div class="ttdoc">The scope constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_scope_8cpp_source.html#l00011">Scope.cpp:11</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a18a09e9aa0bc178190832f0b625f8630"><div class="ttname"><a href="namespace_hoa.html#a18a09e9aa0bc178190832f0b625f8630">Hoa::max</a></div><div class="ttdeci">double max(const double v1, const double v2)</div><div class="ttdoc">The maximum function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00025">HoaMath.h:25</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_decoder_regular_html"><div class="ttname"><a href="class_hoa2_d_1_1_decoder_regular.html">Hoa2D::DecoderRegular</a></div><div class="ttdoc">The ambisonic regular decoder. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_decoder_8h_source.html#l00019">Decoder.h:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 9 2014 10:15:14 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

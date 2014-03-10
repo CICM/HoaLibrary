@@ -20,13 +20,13 @@ struct \hyperlink{struct_hoa_1_1__hoa__rgb}{\-\_\-hoa\-\_\-rgb}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \hyperlink{namespace_hoa_a8ae91ded773030b88833f458d2bb1ea7}{max} (double v1, double v2)
+double \hyperlink{namespace_hoa_a18a09e9aa0bc178190832f0b625f8630}{max} (const double v1, const double v2)
 \begin{DoxyCompactList}\small\item\em The maximum function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a487f41e24986445b8fdd699e48a53e6a}{min} (double v1, double v2)
+double \hyperlink{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}{min} (const double v1, const double v2)
 \begin{DoxyCompactList}\small\item\em The minimum function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a39c13d16e0e94fcb80d8780c20d07151}{clip\-\_\-minmax} (double value, double low, double high)
+double \hyperlink{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{clip\-\_\-minmax} (const double value, const double low, const double high)
 \begin{DoxyCompactList}\small\item\em The clipping function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_af11d8810d2d4eadcc5a06239bc12ab1b}{clip\-\_\-min} (double value, double low)
+double \hyperlink{namespace_hoa_a035f72d813d623708fc679234167652c}{clip\-\_\-min} (const double value, const double low)
 \begin{DoxyCompactList}\small\item\em The minimum clipping function. \end{DoxyCompactList}\item 
 double \hyperlink{namespace_hoa_a70a614a6370140a970f5e94afd244100}{clip\-\_\-max} (const double value, const double high)
 \begin{DoxyCompactList}\small\item\em The maximum clipping function. \end{DoxyCompactList}\item 
@@ -34,19 +34,19 @@ unsigned long \hyperlink{namespace_hoa_af38450480ab6d8c9cbeee21d0384d59a}{factor
 \begin{DoxyCompactList}\small\item\em The factorial. \end{DoxyCompactList}\item 
 unsigned long \hyperlink{namespace_hoa_a8a19fc23057ab1e829bcb83b8e9bf236}{double\-\_\-factorial} (long n)
 \begin{DoxyCompactList}\small\item\em The double factorial. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_ad044777140feb80ca758bb11ad1173d1}{associated\-\_\-legendre} (int l, int m, double x)
+double \hyperlink{namespace_hoa_adb762b8ea445347c41725a66bff424ec}{associated\-\_\-legendre} (int l, int m, const double x)
 \begin{DoxyCompactList}\small\item\em The associated Legendre polynomials. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a2e493b30326b3dab0ea704ed7317b002}{legendre\-\_\-normalization} (int l, int m)
+double \hyperlink{namespace_hoa_af22a7c314138f53fd15901567045c65d}{legendre\-\_\-normalization} (const int l, const int m)
 \begin{DoxyCompactList}\small\item\em The legendre normalization. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a6bbe532639fcafb344a9f20f07291402}{spherical\-\_\-harmonics\-\_\-azimuth} (int l, int m, double phi)
+double \hyperlink{namespace_hoa_a746287cf728e5445e744ab01784175e6}{spherical\-\_\-harmonics\-\_\-azimuth} (const int l, const int m, const double phi)
 \begin{DoxyCompactList}\small\item\em The azimuth part of the spherical harmonics function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a4268534c4173f0d28ca791cca1c233e6}{spherical\-\_\-harmonics\-\_\-elevation} (int l, int m, double theta)
+double \hyperlink{namespace_hoa_a6515939c558d1e535c4561aee6febde6}{spherical\-\_\-harmonics\-\_\-elevation} (const int l, const int m, const double theta)
 \begin{DoxyCompactList}\small\item\em The elevation part of the spherical harmonics function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a3bd99f2110f1b0c424b9cfaf0938c04d}{spherical\-\_\-harmonics} (int l, int m, double phi, double theta)
+double \hyperlink{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}{spherical\-\_\-harmonics} (const int l, const int m, const double phi, const double theta)
 \begin{DoxyCompactList}\small\item\em The spherical harmonics function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a5461cb6a0740423261895e0453a32ce3}{wrap} (double value, double low, double high)
+double \hyperlink{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}{wrap} (double value, const double low, const double high)
 \begin{DoxyCompactList}\small\item\em The wrapping function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a8e369981026a7cedf7b832d639c15b90}{wrap\-\_\-twopi} (double value)
+double \hyperlink{namespace_hoa_a951a6800c87c7cb7428ccb05ed778e84}{wrap\-\_\-twopi} (const double value)
 \begin{DoxyCompactList}\small\item\em The wrapping function over $2\pi$. \end{DoxyCompactList}\item 
 std\-::string \hyperlink{namespace_hoa_a383e28307f0bbd7c0e4af194ebabe66f}{int\-\_\-to\-\_\-string} (int a\-Value)
 \begin{DoxyCompactList}\small\item\em The int to string conversion. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -56,15 +56,15 @@ std\-::string \hyperlink{namespace_hoa_a383e28307f0bbd7c0e4af194ebabe66f}{int\-\
 The high order ambisonic namespace. This namespace have all the standard methods and functions necessary for ambisonic processing. 
 
 \subsection{Function Documentation}
-\hypertarget{namespace_hoa_ad044777140feb80ca758bb11ad1173d1}{\index{Hoa@{Hoa}!associated\-\_\-legendre@{associated\-\_\-legendre}}
+\hypertarget{namespace_hoa_adb762b8ea445347c41725a66bff424ec}{\index{Hoa@{Hoa}!associated\-\_\-legendre@{associated\-\_\-legendre}}
 \index{associated\-\_\-legendre@{associated\-\_\-legendre}!Hoa@{Hoa}}
 \subsubsection[{associated\-\_\-legendre}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::associated\-\_\-legendre (
 \begin{DoxyParamCaption}
 \item[{int}]{l, }
 \item[{int}]{m, }
-\item[{double}]{x}
+\item[{const double}]{x}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_ad044777140feb80ca758bb11ad1173d1}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_adb762b8ea445347c41725a66bff424ec}
 
 
 The associated Legendre polynomials. 
@@ -86,9 +86,9 @@ The associated Legendre polynomials.
 The function return the associated Legendre polynomial of x for l and m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a2e493b30326b3dab0ea704ed7317b002}{legendre\-\_\-normalization} 
+\hyperlink{namespace_hoa_af22a7c314138f53fd15901567045c65d}{legendre\-\_\-normalization} 
 
-\hyperlink{namespace_hoa_a3bd99f2110f1b0c424b9cfaf0938c04d}{spherical\-\_\-harmonics} 
+\hyperlink{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}{spherical\-\_\-harmonics} 
 \end{DoxySeeAlso}
 
 
@@ -120,22 +120,22 @@ If $x > max$, $f(x) = max$ else $f(x) = x$.
 The function return the clipped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a39c13d16e0e94fcb80d8780c20d07151}{clip\-\_\-minmax} 
+\hyperlink{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{clip\-\_\-minmax} 
 
-\hyperlink{namespace_hoa_af11d8810d2d4eadcc5a06239bc12ab1b}{clip\-\_\-min} 
+\hyperlink{namespace_hoa_a035f72d813d623708fc679234167652c}{clip\-\_\-min} 
 \end{DoxySeeAlso}
 
 
 Definition at line 102 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_af11d8810d2d4eadcc5a06239bc12ab1b}{\index{Hoa@{Hoa}!clip\-\_\-min@{clip\-\_\-min}}
+\hypertarget{namespace_hoa_a035f72d813d623708fc679234167652c}{\index{Hoa@{Hoa}!clip\-\_\-min@{clip\-\_\-min}}
 \index{clip\-\_\-min@{clip\-\_\-min}!Hoa@{Hoa}}
 \subsubsection[{clip\-\_\-min}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::clip\-\_\-min (
 \begin{DoxyParamCaption}
-\item[{double}]{value, }
-\item[{double}]{low}
+\item[{const double}]{value, }
+\item[{const double}]{low}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_af11d8810d2d4eadcc5a06239bc12ab1b}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a035f72d813d623708fc679234167652c}
 
 
 The minimum clipping function. 
@@ -154,7 +154,7 @@ If $x < min$, $f(x) = min$ else $f(x) = x$.
 The function return the clipped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a39c13d16e0e94fcb80d8780c20d07151}{clip\-\_\-minmax} 
+\hyperlink{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{clip\-\_\-minmax} 
 
 \hyperlink{namespace_hoa_a70a614a6370140a970f5e94afd244100}{clip\-\_\-max} 
 \end{DoxySeeAlso}
@@ -162,15 +162,15 @@ The function return the clipped value.
 
 Definition at line 83 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a39c13d16e0e94fcb80d8780c20d07151}{\index{Hoa@{Hoa}!clip\-\_\-minmax@{clip\-\_\-minmax}}
+\hypertarget{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{\index{Hoa@{Hoa}!clip\-\_\-minmax@{clip\-\_\-minmax}}
 \index{clip\-\_\-minmax@{clip\-\_\-minmax}!Hoa@{Hoa}}
 \subsubsection[{clip\-\_\-minmax}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::clip\-\_\-minmax (
 \begin{DoxyParamCaption}
-\item[{double}]{value, }
-\item[{double}]{low, }
-\item[{double}]{high}
+\item[{const double}]{value, }
+\item[{const double}]{low, }
+\item[{const double}]{high}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a39c13d16e0e94fcb80d8780c20d07151}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}
 
 
 The clipping function. 
@@ -191,7 +191,7 @@ If $x < min$, $f(x) = min$ else if $x > max$, $f(x) = max$ else $f(x) = x$.
 The function return the clipped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_af11d8810d2d4eadcc5a06239bc12ab1b}{clip\-\_\-min} 
+\hyperlink{namespace_hoa_a035f72d813d623708fc679234167652c}{clip\-\_\-min} 
 
 \hyperlink{namespace_hoa_a70a614a6370140a970f5e94afd244100}{clip\-\_\-max} 
 \end{DoxySeeAlso}
@@ -240,9 +240,7 @@ Definition at line 140 of file Hoa\-Math.\-h.
 
 The factorial. 
 
-\begin{DoxyVerb}The function computes the factorial, the product of all positive integers less than or equal to an integer.
-\end{DoxyVerb}
- \[n! = n \times (n - 1) \times (n - 2) \times {...} \]
+The function computes the factorial, the product of all positive integers less than or equal to an integer. \[n! = n \times (n - 1) \times (n - 2) \times {...} \]
 
 
 \begin{DoxyParams}{Parameters}
@@ -284,14 +282,14 @@ The function return value in a string format.
 
 Definition at line 18 of file Hoa\-Utils.\-h.
 
-\hypertarget{namespace_hoa_a2e493b30326b3dab0ea704ed7317b002}{\index{Hoa@{Hoa}!legendre\-\_\-normalization@{legendre\-\_\-normalization}}
+\hypertarget{namespace_hoa_af22a7c314138f53fd15901567045c65d}{\index{Hoa@{Hoa}!legendre\-\_\-normalization@{legendre\-\_\-normalization}}
 \index{legendre\-\_\-normalization@{legendre\-\_\-normalization}!Hoa@{Hoa}}
 \subsubsection[{legendre\-\_\-normalization}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::legendre\-\_\-normalization (
 \begin{DoxyParamCaption}
-\item[{int}]{l, }
-\item[{int}]{m}
+\item[{const int}]{l, }
+\item[{const int}]{m}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a2e493b30326b3dab0ea704ed7317b002}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_af22a7c314138f53fd15901567045c65d}
 
 
 The legendre normalization. 
@@ -311,22 +309,22 @@ The legendre normalization.
 The function return the normalization of the associated Legendre polynomial for l and m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_ad044777140feb80ca758bb11ad1173d1}{associated\-\_\-legendre} 
+\hyperlink{namespace_hoa_adb762b8ea445347c41725a66bff424ec}{associated\-\_\-legendre} 
 
-\hyperlink{namespace_hoa_a3bd99f2110f1b0c424b9cfaf0938c04d}{spherical\-\_\-harmonics} 
+\hyperlink{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}{spherical\-\_\-harmonics} 
 \end{DoxySeeAlso}
 
 
 Definition at line 203 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a8ae91ded773030b88833f458d2bb1ea7}{\index{Hoa@{Hoa}!max@{max}}
+\hypertarget{namespace_hoa_a18a09e9aa0bc178190832f0b625f8630}{\index{Hoa@{Hoa}!max@{max}}
 \index{max@{max}!Hoa@{Hoa}}
 \subsubsection[{max}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::max (
 \begin{DoxyParamCaption}
-\item[{double}]{v1, }
-\item[{double}]{v2}
+\item[{const double}]{v1, }
+\item[{const double}]{v2}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a8ae91ded773030b88833f458d2bb1ea7}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a18a09e9aa0bc178190832f0b625f8630}
 
 
 The maximum function. 
@@ -344,20 +342,20 @@ This function returns the maximum value between two values
 The maximum value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a487f41e24986445b8fdd699e48a53e6a}{min} 
+\hyperlink{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}{min} 
 \end{DoxySeeAlso}
 
 
 Definition at line 25 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a487f41e24986445b8fdd699e48a53e6a}{\index{Hoa@{Hoa}!min@{min}}
+\hypertarget{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}{\index{Hoa@{Hoa}!min@{min}}
 \index{min@{min}!Hoa@{Hoa}}
 \subsubsection[{min}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::min (
 \begin{DoxyParamCaption}
-\item[{double}]{v1, }
-\item[{double}]{v2}
+\item[{const double}]{v1, }
+\item[{const double}]{v2}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a487f41e24986445b8fdd699e48a53e6a}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}
 
 
 The minimum function. 
@@ -375,22 +373,22 @@ This function returns the minimum value between two values
 The maximum value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a487f41e24986445b8fdd699e48a53e6a}{min} 
+\hyperlink{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}{min} 
 \end{DoxySeeAlso}
 
 
 Definition at line 42 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a3bd99f2110f1b0c424b9cfaf0938c04d}{\index{Hoa@{Hoa}!spherical\-\_\-harmonics@{spherical\-\_\-harmonics}}
+\hypertarget{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}{\index{Hoa@{Hoa}!spherical\-\_\-harmonics@{spherical\-\_\-harmonics}}
 \index{spherical\-\_\-harmonics@{spherical\-\_\-harmonics}!Hoa@{Hoa}}
 \subsubsection[{spherical\-\_\-harmonics}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::spherical\-\_\-harmonics (
 \begin{DoxyParamCaption}
-\item[{int}]{l, }
-\item[{int}]{m, }
-\item[{double}]{phi, }
-\item[{double}]{theta}
+\item[{const int}]{l, }
+\item[{const int}]{m, }
+\item[{const double}]{phi, }
+\item[{const double}]{theta}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a3bd99f2110f1b0c424b9cfaf0938c04d}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}
 
 
 The spherical harmonics function. 
@@ -412,23 +410,23 @@ The function computes the spherical harmonics coefficient for the angles $\phi$ 
 The function return the coefficient for phi and theta for the spherical harmonics of band l and argument m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a6bbe532639fcafb344a9f20f07291402}{spherical\-\_\-harmonics\-\_\-azimuth} 
+\hyperlink{namespace_hoa_a746287cf728e5445e744ab01784175e6}{spherical\-\_\-harmonics\-\_\-azimuth} 
 
-\hyperlink{namespace_hoa_a4268534c4173f0d28ca791cca1c233e6}{spherical\-\_\-harmonics\-\_\-elevation} 
+\hyperlink{namespace_hoa_a6515939c558d1e535c4561aee6febde6}{spherical\-\_\-harmonics\-\_\-elevation} 
 \end{DoxySeeAlso}
 
 
 Definition at line 283 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a6bbe532639fcafb344a9f20f07291402}{\index{Hoa@{Hoa}!spherical\-\_\-harmonics\-\_\-azimuth@{spherical\-\_\-harmonics\-\_\-azimuth}}
+\hypertarget{namespace_hoa_a746287cf728e5445e744ab01784175e6}{\index{Hoa@{Hoa}!spherical\-\_\-harmonics\-\_\-azimuth@{spherical\-\_\-harmonics\-\_\-azimuth}}
 \index{spherical\-\_\-harmonics\-\_\-azimuth@{spherical\-\_\-harmonics\-\_\-azimuth}!Hoa@{Hoa}}
 \subsubsection[{spherical\-\_\-harmonics\-\_\-azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::spherical\-\_\-harmonics\-\_\-azimuth (
 \begin{DoxyParamCaption}
-\item[{int}]{l, }
-\item[{int}]{m, }
-\item[{double}]{phi}
+\item[{const int}]{l, }
+\item[{const int}]{m, }
+\item[{const double}]{phi}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a6bbe532639fcafb344a9f20f07291402}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a746287cf728e5445e744ab01784175e6}
 
 
 The azimuth part of the spherical harmonics function. 
@@ -450,23 +448,23 @@ The azimuth part of the spherical harmonics function.
 The function return the azimuth coefficient for phi of the spherical harmonic of band l and argument m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a4268534c4173f0d28ca791cca1c233e6}{spherical\-\_\-harmonics\-\_\-elevation} 
+\hyperlink{namespace_hoa_a6515939c558d1e535c4561aee6febde6}{spherical\-\_\-harmonics\-\_\-elevation} 
 
-\hyperlink{namespace_hoa_a3bd99f2110f1b0c424b9cfaf0938c04d}{spherical\-\_\-harmonics} 
+\hyperlink{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}{spherical\-\_\-harmonics} 
 \end{DoxySeeAlso}
 
 
 Definition at line 242 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a4268534c4173f0d28ca791cca1c233e6}{\index{Hoa@{Hoa}!spherical\-\_\-harmonics\-\_\-elevation@{spherical\-\_\-harmonics\-\_\-elevation}}
+\hypertarget{namespace_hoa_a6515939c558d1e535c4561aee6febde6}{\index{Hoa@{Hoa}!spherical\-\_\-harmonics\-\_\-elevation@{spherical\-\_\-harmonics\-\_\-elevation}}
 \index{spherical\-\_\-harmonics\-\_\-elevation@{spherical\-\_\-harmonics\-\_\-elevation}!Hoa@{Hoa}}
 \subsubsection[{spherical\-\_\-harmonics\-\_\-elevation}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::spherical\-\_\-harmonics\-\_\-elevation (
 \begin{DoxyParamCaption}
-\item[{int}]{l, }
-\item[{int}]{m, }
-\item[{double}]{theta}
+\item[{const int}]{l, }
+\item[{const int}]{m, }
+\item[{const double}]{theta}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a4268534c4173f0d28ca791cca1c233e6}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a6515939c558d1e535c4561aee6febde6}
 
 
 The elevation part of the spherical harmonics function. 
@@ -488,27 +486,27 @@ The elevation part of the spherical harmonics function.
 The function return the elevation coefficient for theta of the spherical harmonic of band l and argument m.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a2e493b30326b3dab0ea704ed7317b002}{legendre\-\_\-normalization} 
+\hyperlink{namespace_hoa_af22a7c314138f53fd15901567045c65d}{legendre\-\_\-normalization} 
 
-\hyperlink{namespace_hoa_ad044777140feb80ca758bb11ad1173d1}{associated\-\_\-legendre} 
+\hyperlink{namespace_hoa_adb762b8ea445347c41725a66bff424ec}{associated\-\_\-legendre} 
 
-\hyperlink{namespace_hoa_a6bbe532639fcafb344a9f20f07291402}{spherical\-\_\-harmonics\-\_\-azimuth} 
+\hyperlink{namespace_hoa_a746287cf728e5445e744ab01784175e6}{spherical\-\_\-harmonics\-\_\-azimuth} 
 
-\hyperlink{namespace_hoa_a3bd99f2110f1b0c424b9cfaf0938c04d}{spherical\-\_\-harmonics} 
+\hyperlink{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}{spherical\-\_\-harmonics} 
 \end{DoxySeeAlso}
 
 
 Definition at line 265 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a5461cb6a0740423261895e0453a32ce3}{\index{Hoa@{Hoa}!wrap@{wrap}}
+\hypertarget{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}{\index{Hoa@{Hoa}!wrap@{wrap}}
 \index{wrap@{wrap}!Hoa@{Hoa}}
 \subsubsection[{wrap}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::wrap (
 \begin{DoxyParamCaption}
 \item[{double}]{value, }
-\item[{double}]{low, }
-\item[{double}]{high}
+\item[{const double}]{low, }
+\item[{const double}]{high}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a5461cb6a0740423261895e0453a32ce3}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}
 
 
 The wrapping function. 
@@ -528,19 +526,19 @@ The function wraps a number between boundarys.
 The function return the wrapped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a8e369981026a7cedf7b832d639c15b90}{wrap\-\_\-twopi} 
+\hyperlink{namespace_hoa_a951a6800c87c7cb7428ccb05ed778e84}{wrap\-\_\-twopi} 
 \end{DoxySeeAlso}
 
 
 Definition at line 298 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a8e369981026a7cedf7b832d639c15b90}{\index{Hoa@{Hoa}!wrap\-\_\-twopi@{wrap\-\_\-twopi}}
+\hypertarget{namespace_hoa_a951a6800c87c7cb7428ccb05ed778e84}{\index{Hoa@{Hoa}!wrap\-\_\-twopi@{wrap\-\_\-twopi}}
 \index{wrap\-\_\-twopi@{wrap\-\_\-twopi}!Hoa@{Hoa}}
 \subsubsection[{wrap\-\_\-twopi}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::wrap\-\_\-twopi (
 \begin{DoxyParamCaption}
-\item[{double}]{value}
+\item[{const double}]{value}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a8e369981026a7cedf7b832d639c15b90}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a951a6800c87c7cb7428ccb05ed778e84}
 
 
 The wrapping function over $2\pi$. 
@@ -556,7 +554,7 @@ The function wraps a number between 0 and $2\pi$.
 The function return the wrapped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a5461cb6a0740423261895e0453a32ce3}{wrap} 
+\hyperlink{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}{wrap} 
 \end{DoxySeeAlso}
 
 

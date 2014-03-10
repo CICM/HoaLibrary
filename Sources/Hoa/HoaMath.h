@@ -10,7 +10,7 @@
 //! The high order ambisonic namespace.
 /**
  This namespace have all the standard methods and functions necessary for ambisonic processing.
- */
+*/
 namespace Hoa
 {
 	//! The maximum function
@@ -96,8 +96,8 @@ namespace Hoa
 	 @param     high    The high boundary.
 	 @return    The function return the clipped value.
      
-	 @see    clip_minmax
-	 @see    clip_min
+        @see    clip_minmax
+        @see    clip_min
      */
     inline double clip_max(const double value, const double high)
     {
@@ -106,15 +106,15 @@ namespace Hoa
         else
             return value;
     }
-	
+    
 	//! The factorial
-    /**	The function computes the factorial, the product of all positive integers less than or equal to an integer.
-	 \f[n! = n \times (n - 1) \times (n - 2) \times {...} \f]
+    /** The function computes the factorial, the product of all positive integers less than or equal to an integer.
+        \f[n! = n \times (n - 1) \times (n - 2) \times {...} \f]
      
-	 @param     n     The interger.
-	 @return    The function return the factorial of n.
+        @param     n     The interger.
+        @return    The function return the factorial of n.
      
-	 @see    double_factorial
+        @see    double_factorial
      */
     inline unsigned long factorial(long n)
 	{
@@ -153,10 +153,10 @@ namespace Hoa
     
     //! The associated Legendre polynomials
     /**	The function computes the associated Legendre polynomial \f$P(l, m)\f$ that is a part of the formula that compute the spherical harmonic coefficient where l is the band and the m is the argument of a spherical harmonic and x is the cosinus of the elevation. It uses three recurrence formulas :
-	 \f[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\f]
-	 \f[P(l + 1, l)(x) = x \times (2l + 1) \times P(l, l)\f]
-	 \f[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\f]
-	 with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
+        \f[P(l, l)(x) = (-1)^l \times (2l - 1)!! \times (1 - x^2)^{0.5l}\f]
+        \f[P(l + 1, l)(x) = x \times (2l + 1) \times P(l, l)\f]
+        \f[P(l + 1, m)(x) = \frac{(2l + 1) \times x \times P(m, l) - (l + m) \times P(m, l - 1)}{(l - m + 1)}\f]
+        with \f$0 \leq l\f$ and \f$-l \leq m \leq +l\f$
      
 	 @param     l    The band of the spherical harmonic.
 	 @param     m	The argument of the spherical harmonic.

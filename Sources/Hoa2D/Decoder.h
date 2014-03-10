@@ -278,15 +278,12 @@ namespace Hoa2D
         Mode                m_mode;
         unsigned int        m_sample_rate;
         unsigned int        m_vector_size;
-        double*             m_inputs_double;
-        double*             m_outputs_double;
-        float*              m_inputs_float;
-        float*              m_outputs_float;
+
         
     public:
         
         //! The multi-decoder constructor.
-        /**	The multi-decoder constructor allocates and initialize the three decoder. The default decoder will be the regular one with 2 * order + 2 number of channels. As the binaural decoding process function performs on blocks of samples, all the other decoder will also perform on blocks of samples.
+        /**	The multi-decoder constructor allocates and initialize the three decoder. The default decoder will be the regular one with 2 * order + 2 number of channels.
          
             @param     order				The order
          */
@@ -485,21 +482,71 @@ namespace Hoa2D
                 return m_decoder_binaural->getChannelName(index);
         };
         
+        //! This method performs the binaural decoding with single precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
+         
+            @param     inputs	The input samples.
+            @param     outputs  The output array that contains samples destinated to channels.
+         */
+		inline void processBinaural(const float* const* inputs, float** outputs)
+        {
+            m_decoder_binaural->process(inputs, outputs);
+        }
+		
+        //! This method performs the binaural decoding with double precision.
+		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
+         
+            @param     inputs	The input samples.
+            @param     outputs  The output array that contains samples destinated to channels.
+         */
+		inline void processBinaural(const double* const* inputs, double** outputs)
+        {
+            m_decoder_binaural->process(inputs, outputs);
+        }
+        
         //! This method performs the decoding depending of the mode with single precision.
 		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
          
-         @param     inputs	The input samples.
-         @param     outputs  The output array that contains samples destinated to channels.
+            @param     inputs	The input samples.
+            @param     outputs  The output array that contains samples destinated to channels.
          */
-		void process(const float* const* inputs, float** outputs);
+		inline void processRegular(const float* inputs, float* outputs)
+        {
+            m_decoder_regular->process(inputs, outputs);
+        }
 		
-        //! This method performs the decoding depending of the mode with double precision.
-		/**	You should use this method for not-in-place processing and performs the binaural decoding on block of samples. The inputs matrix contains the spherical harmonics samples : inputs[number of harmonics][vector size] and the outputs array contains the headphones samples : outputs[2][vector size].
+        //! This method performs the regular decoding with single precision.
+		/**	You should use this method for in-place or not-in-place processing and performs the regular decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels samples and the minimym size must be the number of channels.
          
-         @param     input    The input samples.
-         @param     outputs  The output array that contains samples destinated to channels.
+            @param     input	The input sample.
+            @param     outputs The output array that contains samples destinated to channels.
          */
-		void process(const double* const* inputs, double** outputs);
+		inline void processRegular(const double* inputs, double* outputs)
+        {
+            m_decoder_regular->process(inputs, outputs);
+        }
+        
+        //! This method performs the irregular decoding with single precision.
+		/**	You should use this method for in-place or not-in-place processing and performs the irregular decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels samples and the minimum size must be the number of channels.
+         
+            @param     input	The input sample.
+            @param     outputs The output array that contains samples destinated to channels.
+         */
+		inline void processIrregular(const float* inputs, float* outputs)
+        {
+            m_decoder_irregular->process(inputs, outputs);
+        }
+		
+        //! This method performs the irregular decoding with single precision.
+		/**	You should use this method for in-place or not-in-place processing and performs the irregular decoding sample by sample. The inputs array contains the spherical harmonics samples and the minimum size must be the number of harmonics and the outputs array contains the channels samples and the minimum size must be the number of channels.
+         
+            @param     input	The input sample.
+            @param     outputs The output array that contains samples destinated to channels.
+         */
+		inline void processIrregular(const double* inputs, double* outputs)
+        {
+            m_decoder_irregular->process(inputs, outputs);
+        }
     };
     
 }

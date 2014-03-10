@@ -437,7 +437,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        {</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            <span class="keywordflow">if</span>(m_source_managers[anIndexSource]-&gt;getExistence() &amp;&amp; m_source_managers[anIndexDestination]-&gt;getExistence())</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            {</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                aFractionnalIndex = <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(aFractionnalIndex, 0., 1.);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                aFractionnalIndex = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(aFractionnalIndex, 0., 1.);</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                interpolationSourceManager(m_source_managers[anIndexSource], m_source_managers[anIndexDestination], aSouceManager, aFractionnalIndex);</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            }</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        }</div>
@@ -516,7 +516,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                }</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                {</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                    <span class="keywordtype">double</span> fracPart = <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>((<span class="keywordtype">double</span>)(aFractionnalIndex - (<span class="keywordtype">long</span>)indexOne) / (<span class="keywordtype">double</span>)(indexTwo - indexOne), 0., 1.);</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                    <span class="keywordtype">double</span> fracPart = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>((<span class="keywordtype">double</span>)(aFractionnalIndex - (<span class="keywordtype">long</span>)indexOne) / (<span class="keywordtype">double</span>)(indexTwo - indexOne), 0., 1.);</div>
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                    <span class="keywordflow">return</span> interpolationSourceManager(m_source_managers[indexOne], m_source_managers[indexTwo], aSouceManager, fracPart);</div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                }</div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            }</div>
@@ -542,11 +542,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        clear();</div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    }</div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;}</div>
-<div class="ttc" id="namespace_hoa_html_a39c13d16e0e94fcb80d8780c20d07151"><div class="ttname"><a href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(double value, double low, double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a4b041c0e7c61bb6d819ce4e544ff3f90"><div class="ttname"><a href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(const double value, const double low, const double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 9 2014 10:15:14 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

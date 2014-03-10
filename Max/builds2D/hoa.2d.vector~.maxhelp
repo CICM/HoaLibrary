@@ -3676,6 +3676,20 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"attr" : "angles",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-5",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 263.75, 272.0, 553.0, 19.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"args" : [ "@size", 1 ],
 									"id" : "obj-25",
 									"maxclass" : "bpatcher",
@@ -4033,7 +4047,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 175.258362, 377.5, 239.182892, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 0.0, 0.0, 0.0, 881563795456.0, 0.0, 0.0, 0.0, 7810440792225231184855040.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+										"angles" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 881563795456.0, 0.0, 0.0, 0.0, 7810440792225231184855040.0, 0.0 ],
 										"channels" : 16
 									}
 ,
@@ -4814,6 +4828,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-49", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 15 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-5", 0 ]
 								}
 
 							}

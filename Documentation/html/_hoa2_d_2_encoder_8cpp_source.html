@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Encoder::setAzimuth</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> azimuth)</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        m_azimuth = <a class="code" href="namespace_hoa.html#a8e369981026a7cedf7b832d639c15b90">wrap_twopi</a>(azimuth);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        m_azimuth = <a class="code" href="namespace_hoa.html#a951a6800c87c7cb7428ccb05ed778e84">wrap_twopi</a>(azimuth);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        m_cosx    = cos(m_azimuth);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        m_sinx    = sin(m_azimuth);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
@@ -155,16 +155,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="ttc" id="namespace_hoa_html_a8e369981026a7cedf7b832d639c15b90"><div class="ttname"><a href="namespace_hoa.html#a8e369981026a7cedf7b832d639c15b90">Hoa::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00322">HoaMath.h:322</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_a3387c0cd62d3af13ef851d5372c55a6f"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a3387c0cd62d3af13ef851d5372c55a6f">Hoa2D::Encoder::Encoder</a></div><div class="ttdeci">Encoder(unsigned int order)</div><div class="ttdoc">The encoder constructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00011">Encoder.cpp:11</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_ambisonic_html"><div class="ttname"><a href="class_hoa2_d_1_1_ambisonic.html">Hoa2D::Ambisonic</a></div><div class="ttdoc">The ambisonic class. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_ambisonic_8h_source.html#l00018">Ambisonic.h:18</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_acc60cfd737fe1f0866e7d464ef1ec1f8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#acc60cfd737fe1f0866e7d464ef1ec1f8">Hoa2D::Encoder::setAzimuth</a></div><div class="ttdeci">void setAzimuth(const double azimuth)</div><div class="ttdoc">This method set the angle of azimuth. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00016">Encoder.cpp:16</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a951a6800c87c7cb7428ccb05ed778e84"><div class="ttname"><a href="namespace_hoa.html#a951a6800c87c7cb7428ccb05ed778e84">Hoa::wrap_twopi</a></div><div class="ttdeci">double wrap_twopi(const double value)</div><div class="ttdoc">The wrapping function over . </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00322">HoaMath.h:322</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_a2d12e80e9a7a59970972dca6b444b6bc"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a2d12e80e9a7a59970972dca6b444b6bc">Hoa2D::Encoder::process</a></div><div class="ttdeci">void process(const float input, float *outputs)</div><div class="ttdoc">This method performs the encoding with single precision. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00023">Encoder.cpp:23</a></div></div>
 <div class="ttc" id="class_hoa2_d_1_1_encoder_html_a1faf86f0a74e68d91cd92608b5fd37c8"><div class="ttname"><a href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">Hoa2D::Encoder::~Encoder</a></div><div class="ttdeci">~Encoder()</div><div class="ttdoc">The encoder destructor. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa2_d_2_encoder_8cpp_source.html#l00055">Encoder.cpp:55</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 9 2014 10:15:14 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

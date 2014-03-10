@@ -17,7 +17,7 @@ namespace Hoa2D
         m_loudspeakers_ordinate_float = new float[m_number_of_channels];
         m_loudspeakers_ordinate_double = new double[m_number_of_channels];
         
-        for(int i = 0; i < m_number_of_channels; i++)
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
             m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getChannelAbscissa(i);
             m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getChannelOrdinate(i);
@@ -27,7 +27,7 @@ namespace Hoa2D
     void Vector::setChannelPosition(unsigned int index, double azimuth)
     {
         Planewaves::setChannelPosition(index, azimuth);
-        for(int i = 0; i < m_number_of_channels; i++)
+        for(unsigned int i = 0; i < m_number_of_channels; i++)
         {
             m_loudspeakers_abscissa_float[i] = m_loudspeakers_abscissa_double[i] = getChannelAbscissa(i);
             m_loudspeakers_ordinate_float[i] = m_loudspeakers_ordinate_double[i] = getChannelOrdinate(i);

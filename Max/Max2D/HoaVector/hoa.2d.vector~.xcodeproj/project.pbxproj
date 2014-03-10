@@ -301,7 +301,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(C74SUPPORT)/msp-includes\\\"",
-					"/Users/Pierre/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;
@@ -345,7 +344,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(C74SUPPORT)/msp-includes\\\"",
-					"/Users/Pierre/SDKs/MaxSDK-6.1.4/c74support/msp-includes",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = YES;

@@ -107,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Source::Source(<span class="keywordtype">long</span> deadOrAlive, <span class="keywordtype">double</span> aRadius, <span class="keywordtype">double</span> anAngle)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        m_exist = <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(deadOrAlive, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        m_exist = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(deadOrAlive, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        setRadius(aRadius);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        setAngle(anAngle);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        setColor(0.2, 0.2, 0.2, 1.);</div>
@@ -123,7 +123,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> Source::setExistence(<span class="keywordtype">long</span> deadOrAlive)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        m_exist = <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(deadOrAlive, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        m_exist = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(deadOrAlive, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> Source::setCoordinatesPolar(<span class="keywordtype">double</span> aRadius, <span class="keywordtype">double</span> anAngle)</div>
@@ -139,7 +139,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keywordflow">if</span>(aRadius &lt; -m_maximum_radius || aRadius &gt; m_maximum_radius)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        m_coordinate_polar.radius = <a class="code" href="namespace_hoa.html#af11d8810d2d4eadcc5a06239bc12ab1b">clip_min</a>(aRadius, 0.);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        m_coordinate_polar.radius = <a class="code" href="namespace_hoa.html#a035f72d813d623708fc679234167652c">clip_min</a>(aRadius, 0.);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> Source::setAngle(<span class="keywordtype">double</span> anAngle)</div>
@@ -173,10 +173,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> Source::setColor(<span class="keywordtype">double</span> red, <span class="keywordtype">double</span> green, <span class="keywordtype">double</span> blue, <span class="keywordtype">double</span> alpha)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        m_color.red     =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(red, 0., 1.);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        m_color.green   =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(green, 0., 1.);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        m_color.blue    =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(blue, 0., 1.);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        m_color.alpha   =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(alpha, 0., 1.);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        m_color.red     =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(red, 0., 1.);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        m_color.green   =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(green, 0., 1.);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        m_color.blue    =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(blue, 0., 1.);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        m_color.alpha   =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(alpha, 0., 1.);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> Source::setDescription(std::string aDescription)</div>
@@ -280,12 +280,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
 <div class="ttc" id="struct_hoa_1_1__hoa__rgba_html"><div class="ttname"><a href="struct_hoa_1_1__hoa__rgba.html">Hoa::_hoa_rgba</a></div><div class="ttdef"><b>Definition:</b> <a href="_hoa_defs_8h_source.html#l00063">HoaDefs.h:63</a></div></div>
-<div class="ttc" id="namespace_hoa_html_af11d8810d2d4eadcc5a06239bc12ab1b"><div class="ttname"><a href="namespace_hoa.html#af11d8810d2d4eadcc5a06239bc12ab1b">Hoa::clip_min</a></div><div class="ttdeci">double clip_min(double value, double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00083">HoaMath.h:83</a></div></div>
-<div class="ttc" id="namespace_hoa_html_a39c13d16e0e94fcb80d8780c20d07151"><div class="ttname"><a href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(double value, double low, double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a035f72d813d623708fc679234167652c"><div class="ttname"><a href="namespace_hoa.html#a035f72d813d623708fc679234167652c">Hoa::clip_min</a></div><div class="ttdeci">double clip_min(const double value, const double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00083">HoaMath.h:83</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a4b041c0e7c61bb6d819ce4e544ff3f90"><div class="ttname"><a href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(const double value, const double low, const double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 9 2014 10:15:14 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

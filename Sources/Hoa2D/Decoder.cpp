@@ -81,15 +81,15 @@ namespace Hoa2D
     
     void DecoderIrregular::setChannelPosition(unsigned int index, double azimuth)
     {
-        long    number_of_virutal_channels, channel_index1, channel_index2;
-        double  current_distance, minimum_distance, angle, factor_index1, factor_index2, distance_index1, distance_index2;
+        long    number_of_virutal_channels;
+        double  current_distance, minimum_distance;
         
         Planewaves::setChannelPosition(index, azimuth);
         
         // Sort the channels azimuth
         memcpy(m_channels_azimuth_sorted, m_channels_azimuth, m_number_of_channels * sizeof(double));
         std::sort(m_channels_azimuth_sorted, m_channels_azimuth_sorted+m_number_of_channels);
-        
+
         // Get the minimum distance between the channels
         minimum_distance    = HOA_2PI + 1;
         current_distance    = distance_radian(m_channels_azimuth_sorted[0], m_channels_azimuth_sorted[m_number_of_channels-1]);
@@ -103,55 +103,67 @@ namespace Hoa2D
         }
         
         // Get the optimal number of virtual channels
-        // Always prefer the minimum number of channels + 1
-        number_of_virutal_channels = (HOA_2PI / minimum_distance) + 1;
-        if(number_of_virutal_channels < m_number_of_harmonics + 1)
+        // Always prefer the number of harmonics + 2
+        number_of_virutal_channels = (HOA_2PI / minimum_distance);
+        if(number_of_virutal_channels < m_number_of_harmonics + 2)
         {
-            number_of_virutal_channels = m_number_of_harmonics + 1;
+            number_of_virutal_channels = m_number_of_harmonics + 2;
+        }
+        
+        for(unsigned int i = 0; i < m_number_of_channels * m_number_of_harmonics; i++)
+        {
+            m_decoder_matrix_sorted[i]  = 0;
+            m_decoder_matrix[i] = 0;
         }
         
         // Compute the decoding matrix for sorted channels
         for(unsigned int i = 0; i < number_of_virutal_channels; i++)
         {
+            long   channel_index1 = 0, channel_index2 = 0;
+            double factor_index1 = 0, factor_index2 = 0;
             // Get the pair of real channels corresponding to the virtual channel
-            angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
-            minimum_distance    = HOA_2PI + 1;
+            double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
             
             for(unsigned int j = 0; j < m_number_of_channels; j++)
             {
-                current_distance  = distance_radian(m_channels_azimuth_sorted[j], angle);
-                if(current_distance < minimum_distance)
+                if(j < m_number_of_channels-1 && angle >= m_channels_azimuth_sorted[j] && angle <= m_channels_azimuth_sorted[j+1])
                 {
-                    minimum_distance = current_distance;
-                    if(angle < m_channels_azimuth_sorted[j] && current_distance < HOA_PI)
-                    {
-                        channel_index1 = j;
-                        channel_index2 = j+1;
-                    }
-                    else
-                    {
-                        channel_index1 = j;
-                        channel_index2 = j-1;
-                    }
+                    channel_index1 = j;
+                    channel_index2 = j+1;
+                    
+                    // Get the factor for the pair of real channels
+                    double distance_index1 = angle - m_channels_azimuth_sorted[j];
+                    double distance_index2 = m_channels_azimuth_sorted[j+1] - angle;
+                    double distance_ratio = distance_index1 + distance_index2;
+                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI);
+                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI);
+                    break;
+                }
+                else
+                {
+                    channel_index1 = j;
+                    channel_index2 = 0;
+                        
+                    // Get the factor for the pair of real channels
+                    double distance_index1 = angle - m_channels_azimuth_sorted[j];
+                    double distance_index2 = (m_channels_azimuth_sorted[0] + HOA_2PI) - angle;
+                    double distance_ratio = distance_index1 + distance_index2;
+                    factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI);
+                    factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI);
+                    break;
                 }
             }
-            channel_index2 = wrap(channel_index2, 0, m_number_of_channels - 1);
-            // Get the factor for the pair of real channels
-            distance_index1 = distance_radian(m_channels_azimuth_sorted[channel_index1], angle);
-            distance_index2 = distance_radian(m_channels_azimuth_sorted[channel_index2], angle);
-            factor_index1   = cos(distance_index1 / (distance_index1 + distance_index2) * HOA_PI);
-            factor_index2   = cos(distance_index2 / (distance_index1 + distance_index2) * HOA_PI);
             
             // Get the harmonics coefficients for virtual channel
             m_encoder->setAzimuth(angle);
             m_encoder->process(1., m_harmonics_vector);
             
-            m_decoder_matrix_sorted[channel_index1 * m_number_of_harmonics] = (0.5 / (double)(m_order + 1.)) * factor_index1;
-            m_decoder_matrix_sorted[channel_index2 * m_number_of_harmonics] = (0.5 / (double)(m_order + 1.)) * factor_index2;
+            m_decoder_matrix_sorted[channel_index1 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index1;
+            m_decoder_matrix_sorted[channel_index2 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index2;
             for(unsigned int j = 1; j < m_number_of_harmonics; j++)
             {
-                m_decoder_matrix_sorted[channel_index1 * m_number_of_harmonics + j] = (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
-                m_decoder_matrix_sorted[channel_index2 * m_number_of_harmonics + j] = (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
+                m_decoder_matrix_sorted[channel_index1 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
+                m_decoder_matrix_sorted[channel_index2 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
             }
         }
         
@@ -331,6 +343,11 @@ namespace Hoa2D
             m_linear_vector_left    = new float[m_vector_size + m_impulses_size - 1];
             m_linear_vector_right   = new float[m_vector_size + m_impulses_size - 1];
             
+            memset(m_input_matrix, 0, m_number_of_harmonics * m_vector_size * sizeof(float));
+            memset(m_result_matrix, 0, m_impulses_size * 2 * m_vector_size * sizeof(float));
+            memset(m_linear_vector_left, 0, (m_vector_size + m_impulses_size - 1) * sizeof(float));
+            memset(m_linear_vector_right, 0, (m_vector_size + m_impulses_size - 1) * sizeof(float));
+            
             m_result_matrix_left    = m_result_matrix;
             m_result_matrix_right   = m_result_matrix + m_vector_size  * m_impulses_size;
             m_matrix_allocated = 1;
@@ -436,10 +453,6 @@ namespace Hoa2D
     {
         m_mode = Regular;
         m_decoder_regular = new DecoderRegular(m_order, m_order * 2 + 2);
-        m_inputs_double   = new double[m_number_of_harmonics * 8192];
-        m_inputs_float    = new float[m_number_of_harmonics * 8192];
-        m_outputs_double  = new double[m_decoder_regular->getNumberOfChannels() * 8192];
-        m_outputs_float   = new float[m_decoder_regular->getNumberOfChannels() * 8192];
     }
     
     void DecoderMulti::setDecodingMode(Mode mode)
@@ -448,19 +461,11 @@ namespace Hoa2D
         {
             if(mode == Regular)
             {
-                delete [] m_outputs_double;
-                delete [] m_outputs_float;
                 m_decoder_regular = new DecoderRegular(m_order, m_order * 2 + 2);
-                m_outputs_double = new double[m_decoder_regular->getNumberOfChannels() * 8192];
-                m_outputs_float   = new float[m_decoder_regular->getNumberOfChannels() * 8192];
             }
             else if(mode == Irregular)
             {
-                delete [] m_outputs_double;
-                delete [] m_outputs_float;
                 m_decoder_irregular = new DecoderIrregular(m_order, m_order * 2 + 2);
-                m_outputs_double = new double[m_decoder_irregular->getNumberOfChannels() * 8192];
-                m_outputs_float   = new float[m_decoder_irregular->getNumberOfChannels() * 8192];
             }
             else
                 m_decoder_binaural = new DecoderBinaural(m_order);
@@ -481,21 +486,13 @@ namespace Hoa2D
         {
             if(m_mode == Regular && numberOfChannels >= m_decoder_regular->getNumberOfHarmonics())
             {
-                delete [] m_outputs_double;
-                delete [] m_outputs_float;
                 delete m_decoder_regular;
                 m_decoder_regular = new DecoderRegular(m_order, numberOfChannels);
-                m_outputs_double = new double[m_decoder_regular->getNumberOfChannels() * 8192];
-                m_outputs_float   = new float[m_decoder_regular->getNumberOfChannels() * 8192];
             }
             else if(m_mode == Irregular)
             {
-                delete [] m_outputs_double;
-                delete [] m_outputs_float;
                 delete m_decoder_irregular;
                 m_decoder_irregular = new DecoderIrregular(m_order, numberOfChannels);
-                m_outputs_double = new double[m_decoder_irregular->getNumberOfChannels() * 8192];
-                m_outputs_float   = new float[m_decoder_irregular->getNumberOfChannels() * 8192];
             }
         }
     }
@@ -541,90 +538,6 @@ namespace Hoa2D
         }
         m_vector_size = vectorSize;
     }
-    
-    void DecoderMulti::process(const float* const* inputs, float** outputs)
-	{
-		if(m_mode == Regular)
-        {
-            unsigned int nins = m_number_of_harmonics;
-            unsigned int nouts = m_decoder_regular->getNumberOfChannels();
-            for(int i = 0; i < nins; i++)
-            {
-                cblas_scopy(m_vector_size, inputs[i], 1, m_inputs_float+i, nins);
-            }
-            for(int i = 0; i < m_vector_size; i++)
-            {
-                m_decoder_regular->process(m_inputs_float + nins * i, m_outputs_float + nouts * i);
-            }
-            for(int i = 0; i < nouts; i++)
-            {
-                cblas_scopy(m_vector_size, m_outputs_float+i, 1, outputs[i], nouts);
-            }
-        }
-        else if(m_mode == Irregular)
-        {
-            unsigned int nins = m_number_of_harmonics;
-            unsigned int nouts = m_decoder_irregular->getNumberOfChannels();
-            for(int i = 0; i < nins; i++)
-            {
-                cblas_scopy(m_vector_size, inputs[i], 1, m_inputs_float+i, nins);
-            }
-            for(int i = 0; i < m_vector_size; i++)
-            {
-                m_decoder_irregular->process(m_inputs_float + nins * i, m_outputs_float + nouts * i);
-            }
-            for(int i = 0; i < nouts; i++)
-            {
-                cblas_scopy(m_vector_size, m_outputs_float+i, 1, outputs[i], nouts);
-            }
-        }
-        else
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
-	}
-	
-	void DecoderMulti::process(const double* const* inputs, double** outputs)
-	{
-		if(m_mode == Regular)
-        {
-            unsigned int nins = m_number_of_harmonics;
-            unsigned int nouts = m_decoder_regular->getNumberOfChannels();
-            for(unsigned int i = 0; i < nins; i++)
-            {
-                cblas_dcopy(m_vector_size, inputs[i], 1, m_inputs_double+i, nins);
-            }
-            for(unsigned int i = 0; i < m_vector_size; i++)
-            {
-               m_decoder_regular->process(m_inputs_double + nins * i, m_outputs_double + nouts * i);
-            }
-            for(unsigned int i = 0; i < nouts; i++)
-            {
-                //cblas_dcopy(m_vector_size, m_outputs_double+i, 1, outputs[i], nouts);
-            }
-        }
-        else if(m_mode == Irregular)
-        {
-            unsigned int nins = m_number_of_harmonics;
-            unsigned int nouts = m_decoder_irregular->getNumberOfChannels();
-            for(unsigned int i = 0; i < nins; i++)
-            {
-                cblas_dcopy(m_vector_size, inputs[i], 1, m_inputs_double+i, nins);
-            }
-            for(unsigned int i = 0; i < m_vector_size; i++)
-            {
-                m_decoder_irregular->process(m_inputs_double + nins * i, m_outputs_double + nouts * i);
-            }
-            for(unsigned int i = 0; i < nouts; i++)
-            {
-                //cblas_dcopy(m_vector_size, m_outputs_double+i, 1, outputs[i], nouts);
-            }
-        }
-        else
-        {
-            m_decoder_binaural->process(inputs, outputs);
-        }
-	}
 	
 	DecoderMulti::~DecoderMulti()
 	{
@@ -634,11 +547,6 @@ namespace Hoa2D
             delete m_decoder_irregular;
         else
             delete m_decoder_binaural;
-        
-        delete [] m_inputs_double;
-        delete [] m_outputs_double;
-        delete [] m_inputs_float;
-        delete [] m_outputs_float;
 	}
 }
 

@@ -141,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> SourcesGroup::setExistence(<span class="keywordtype">long</span> deadOrAlive)</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        m_exist = <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(deadOrAlive, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        m_exist = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(deadOrAlive, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> SourcesGroup::setDescription(std::string aDescription)</div>
@@ -151,10 +151,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> SourcesGroup::setColor(<span class="keywordtype">double</span> red, <span class="keywordtype">double</span> green, <span class="keywordtype">double</span> blue, <span class="keywordtype">double</span> alpha)</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        m_color.red     =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(red, 0., 1.);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        m_color.green   =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(green, 0., 1.);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        m_color.blue    =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(blue, 0., 1.);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        m_color.alpha   =  <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(alpha, 0., 1.);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        m_color.red     =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(red, 0., 1.);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        m_color.green   =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(green, 0., 1.);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        m_color.blue    =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(blue, 0., 1.);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        m_color.alpha   =  <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(alpha, 0., 1.);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> SourcesGroup::setMaximumRadius(<span class="keywordtype">double</span> aLimitValue)</div>
@@ -463,7 +463,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    </div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordtype">void</span> SourcesGroup::setRelativeRadius(<span class="keywordtype">double</span> aRadius)</div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    {</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordtype">double</span> aRadiusOffset = <a class="code" href="namespace_hoa.html#af11d8810d2d4eadcc5a06239bc12ab1b">clip_min</a>(aRadius, 0.) - getRadius();</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordtype">double</span> aRadiusOffset = <a class="code" href="namespace_hoa.html#a035f72d813d623708fc679234167652c">clip_min</a>(aRadius, 0.) - getRadius();</div>
 <div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        shiftRadius(aRadiusOffset);</div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        computeCentroid();</div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    }</div>
@@ -483,7 +483,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    </div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordtype">void</span> SourcesGroup::setMute(<span class="keywordtype">long</span> aValue)</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    {</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        m_mute = <a class="code" href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">clip_minmax</a>(aValue, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        m_mute = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(aValue, (<span class="keywordtype">long</span>)0, (<span class="keywordtype">long</span>)1);</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    }</div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    </div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordtype">double</span> SourcesGroup::getRadius()</div>
@@ -548,12 +548,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    }</div>
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;}</div>
 <div class="ttc" id="struct_hoa_1_1__hoa__rgba_html"><div class="ttname"><a href="struct_hoa_1_1__hoa__rgba.html">Hoa::_hoa_rgba</a></div><div class="ttdef"><b>Definition:</b> <a href="_hoa_defs_8h_source.html#l00063">HoaDefs.h:63</a></div></div>
-<div class="ttc" id="namespace_hoa_html_af11d8810d2d4eadcc5a06239bc12ab1b"><div class="ttname"><a href="namespace_hoa.html#af11d8810d2d4eadcc5a06239bc12ab1b">Hoa::clip_min</a></div><div class="ttdeci">double clip_min(double value, double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00083">HoaMath.h:83</a></div></div>
-<div class="ttc" id="namespace_hoa_html_a39c13d16e0e94fcb80d8780c20d07151"><div class="ttname"><a href="namespace_hoa.html#a39c13d16e0e94fcb80d8780c20d07151">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(double value, double low, double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a035f72d813d623708fc679234167652c"><div class="ttname"><a href="namespace_hoa.html#a035f72d813d623708fc679234167652c">Hoa::clip_min</a></div><div class="ttdeci">double clip_min(const double value, const double low)</div><div class="ttdoc">The minimum clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00083">HoaMath.h:83</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a4b041c0e7c61bb6d819ce4e544ff3f90"><div class="ttname"><a href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(const double value, const double low, const double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 7 2014 10:26:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 9 2014 10:15:14 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
