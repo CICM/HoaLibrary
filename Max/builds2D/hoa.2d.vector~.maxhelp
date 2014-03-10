@@ -3684,7 +3684,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 263.75, 272.0, 553.0, 19.0 ]
+									"patching_rect" : [ 441.75, 282.0, 553.0, 19.0 ]
 								}
 
 							}
@@ -3939,12 +3939,8 @@
 									"numinlets" : 15,
 									"numoutlets" : 15,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
-									"patching_rect" : [ 174.75, 303.0, 240.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"optim" : "inPhase"
-									}
-,
-									"text" : "hoa.optim~ 7"
+									"patching_rect" : [ 174.75, 303.0, 240.000015, 19.0 ],
+									"text" : "hoa.2d.optim~ 7"
 								}
 
 							}
@@ -4047,7 +4043,7 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 175.258362, 377.5, 239.182892, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 881563795456.0, 0.0, 0.0, 0.0, 7810440792225231184855040.0, 0.0 ],
+										"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
 										"channels" : 16
 									}
 ,
@@ -4833,15 +4829,6 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-2", 15 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-5", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"color" : [ 1.0, 0.0, 0.0, 1.0 ],
 									"destination" : [ "obj-12", 14 ],
 									"disabled" : 0,
@@ -5108,7 +5095,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.optim~.mxo",
+				"name" : "hoa.2d.optim~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
@@ -5125,6 +5112,10 @@
 			}
 , 			{
 				"name" : "hoa.meter~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "hoa.optim~.mxo",
 				"type" : "iLaX"
 			}
 , 			{
