@@ -25,17 +25,17 @@ Inheritance diagram for Hoa2\-D\-:\-:Map\-:\begin{figure}[H]
 \begin{DoxyCompactList}\small\item\em The map destructor. \end{DoxyCompactList}\item 
 unsigned int \hyperlink{class_hoa2_d_1_1_map_aef1bab3391d2292182a9b8205200e9af}{get\-Number\-Of\-Sources} () const 
 \begin{DoxyCompactList}\small\item\em This method retrieve the number of sources. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_map_a0b98a9ad8d1fda90fe5559fd7736050b}{set\-Azimuth} (unsigned int index, const double azimuth)
+void \hyperlink{class_hoa2_d_1_1_map_aa5e77ccf4d3e2aaf75162180c18e202d}{set\-Azimuth} (const unsigned int index, const double azimuth)
 \begin{DoxyCompactList}\small\item\em This method set the angle of azimuth of a source. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_map_a66b18d42476bb3d92c816173c9fc41a4}{set\-Radius} (unsigned int index, const double radius)
+void \hyperlink{class_hoa2_d_1_1_map_a48b9f89f5fcdab909f1fd50a7256a9f0}{set\-Radius} (const unsigned int index, const double radius)
 \begin{DoxyCompactList}\small\item\em This method set the radius of a source. \end{DoxyCompactList}\item 
-void \hyperlink{class_hoa2_d_1_1_map_ae1ff77cc8681ee9870dc2d27ebaaaecd}{set\-Mute} (unsigned int index, const bool muted)
+void \hyperlink{class_hoa2_d_1_1_map_a318a974ce6e0d5607a2fe4973093c9b9}{set\-Mute} (const unsigned int index, const bool muted)
 \begin{DoxyCompactList}\small\item\em This method mute or unmute a source. \end{DoxyCompactList}\item 
-double \hyperlink{class_hoa2_d_1_1_map_a79310ad84032e8dfd918d927dcd76a01}{get\-Azimuth} (unsigned int index) const 
+double \hyperlink{class_hoa2_d_1_1_map_ae53d58090226e3139fccb8a75249bc3b}{get\-Azimuth} (const unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em This method retrieve the azimuth of a source. \end{DoxyCompactList}\item 
-double \hyperlink{class_hoa2_d_1_1_map_aa9587dc91fd2ebcd083136188d0d8b39}{get\-Radius} (unsigned int index) const 
+double \hyperlink{class_hoa2_d_1_1_map_a10d0058386c2738f6e11584c9e751c83}{get\-Radius} (const unsigned int index) const 
 \begin{DoxyCompactList}\small\item\em This method retrieve the radius of a source. \end{DoxyCompactList}\item 
-bool \hyperlink{class_hoa2_d_1_1_map_ad93830d230d88312f07ccb73964ce7db}{get\-Mute} (unsigned int index, const bool muted) const 
+bool \hyperlink{class_hoa2_d_1_1_map_af3d625389cbce9e5e46a4532e39e2c5e}{get\-Mute} (const unsigned int index, const bool muted) const 
 \begin{DoxyCompactList}\small\item\em This method retrieve the mute or unmute state of a source. \end{DoxyCompactList}\item 
 void \hyperlink{class_hoa2_d_1_1_map_a933daf1cc1c8ad4df486d436f6d91450}{process} (const float $\ast$inputs, float $\ast$outputs)
 \begin{DoxyCompactList}\small\item\em This method performs the encoding with distance compensation with single precision. \end{DoxyCompactList}\item 
@@ -96,18 +96,18 @@ The map destructor.
 
 The map destructor free the memory and deallocate the member classes. 
 
-Definition at line 111 of file Map.\-cpp.
+Definition at line 113 of file Map.\-cpp.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_hoa2_d_1_1_map_a79310ad84032e8dfd918d927dcd76a01}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Azimuth@{get\-Azimuth}}
+\hypertarget{class_hoa2_d_1_1_map_ae53d58090226e3139fccb8a75249bc3b}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Azimuth@{get\-Azimuth}}
 \index{get\-Azimuth@{get\-Azimuth}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
 \subsubsection[{get\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Map\-::get\-Azimuth (
 \begin{DoxyParamCaption}
-\item[{unsigned int}]{index}
+\item[{const unsigned int}]{index}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_map_a79310ad84032e8dfd918d927dcd76a01}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_map_ae53d58090226e3139fccb8a75249bc3b}
 
 
 This method retrieve the azimuth of a source. 
@@ -126,14 +126,14 @@ The azimuth of the source if the source exists, otherwise the function generates
 
 Definition at line 92 of file Map.\-h.
 
-\hypertarget{class_hoa2_d_1_1_map_ad93830d230d88312f07ccb73964ce7db}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Mute@{get\-Mute}}
+\hypertarget{class_hoa2_d_1_1_map_af3d625389cbce9e5e46a4532e39e2c5e}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Mute@{get\-Mute}}
 \index{get\-Mute@{get\-Mute}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
 \subsubsection[{get\-Mute}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Map\-::get\-Mute (
 \begin{DoxyParamCaption}
-\item[{unsigned int}]{index, }
+\item[{const unsigned int}]{index, }
 \item[{const bool}]{muted}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_map_ad93830d230d88312f07ccb73964ce7db}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_map_af3d625389cbce9e5e46a4532e39e2c5e}
 
 
 This method retrieve the mute or unmute state of a source. 
@@ -149,7 +149,7 @@ Get the Mute state of a source.
 The mute state of the source if the source exists, otherwise the function generates an error. 
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_map_ae1ff77cc8681ee9870dc2d27ebaaaecd}{set\-Mute()} 
+\hyperlink{class_hoa2_d_1_1_map_a318a974ce6e0d5607a2fe4973093c9b9}{set\-Mute()} 
 \end{DoxySeeAlso}
 
 
@@ -175,13 +175,13 @@ The number of sources.
 
 Definition at line 55 of file Map.\-h.
 
-\hypertarget{class_hoa2_d_1_1_map_aa9587dc91fd2ebcd083136188d0d8b39}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Radius@{get\-Radius}}
+\hypertarget{class_hoa2_d_1_1_map_a10d0058386c2738f6e11584c9e751c83}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!get\-Radius@{get\-Radius}}
 \index{get\-Radius@{get\-Radius}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
 \subsubsection[{get\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Map\-::get\-Radius (
 \begin{DoxyParamCaption}
-\item[{unsigned int}]{index}
+\item[{const unsigned int}]{index}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_map_aa9587dc91fd2ebcd083136188d0d8b39}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_map_a10d0058386c2738f6e11584c9e751c83}
 
 
 This method retrieve the radius of a source. 
@@ -225,7 +225,7 @@ This method performs the encoding with distance compensation with single precisi
 \end{DoxyParams}
 
 
-Definition at line 65 of file Map.\-cpp.
+Definition at line 66 of file Map.\-cpp.
 
 \hypertarget{class_hoa2_d_1_1_map_aa71ff518d419b54b409043ded7b8abd4}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!process@{process}}
 \index{process@{process}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
@@ -250,16 +250,16 @@ You should use this method for in-\/place or not-\/in-\/place processing and per
 \end{DoxyParams}
 
 
-Definition at line 88 of file Map.\-cpp.
+Definition at line 89 of file Map.\-cpp.
 
-\hypertarget{class_hoa2_d_1_1_map_a0b98a9ad8d1fda90fe5559fd7736050b}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!set\-Azimuth@{set\-Azimuth}}
+\hypertarget{class_hoa2_d_1_1_map_aa5e77ccf4d3e2aaf75162180c18e202d}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!set\-Azimuth@{set\-Azimuth}}
 \index{set\-Azimuth@{set\-Azimuth}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
 \subsubsection[{set\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Map\-::set\-Azimuth (
 \begin{DoxyParamCaption}
-\item[{unsigned int}]{index, }
+\item[{const unsigned int}]{index, }
 \item[{const double}]{azimuth}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_map_a0b98a9ad8d1fda90fe5559fd7736050b}
+)}}\label{class_hoa2_d_1_1_map_aa5e77ccf4d3e2aaf75162180c18e202d}
 
 
 This method set the angle of azimuth of a source. 
@@ -274,20 +274,20 @@ The angle of azimuth in radian and you should prefer to use it between 0 and 2 P
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_map_a66b18d42476bb3d92c816173c9fc41a4}{set\-Radius()} 
+\hyperlink{class_hoa2_d_1_1_map_a48b9f89f5fcdab909f1fd50a7256a9f0}{set\-Radius()} 
 \end{DoxySeeAlso}
 
 
-Definition at line 29 of file Map.\-cpp.
+Definition at line 30 of file Map.\-cpp.
 
-\hypertarget{class_hoa2_d_1_1_map_ae1ff77cc8681ee9870dc2d27ebaaaecd}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!set\-Mute@{set\-Mute}}
+\hypertarget{class_hoa2_d_1_1_map_a318a974ce6e0d5607a2fe4973093c9b9}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!set\-Mute@{set\-Mute}}
 \index{set\-Mute@{set\-Mute}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
 \subsubsection[{set\-Mute}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Map\-::set\-Mute (
 \begin{DoxyParamCaption}
-\item[{unsigned int}]{index, }
+\item[{const unsigned int}]{index, }
 \item[{const bool}]{muted}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_map_ae1ff77cc8681ee9870dc2d27ebaaaecd}
+)}}\label{class_hoa2_d_1_1_map_a318a974ce6e0d5607a2fe4973093c9b9}
 
 
 This method mute or unmute a source. 
@@ -303,16 +303,16 @@ Mute or unmute a source with a boolean value. The index must be between 0 and th
 \end{DoxyParams}
 
 
-Definition at line 50 of file Map.\-cpp.
+Definition at line 51 of file Map.\-cpp.
 
-\hypertarget{class_hoa2_d_1_1_map_a66b18d42476bb3d92c816173c9fc41a4}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!set\-Radius@{set\-Radius}}
+\hypertarget{class_hoa2_d_1_1_map_a48b9f89f5fcdab909f1fd50a7256a9f0}{\index{Hoa2\-D\-::\-Map@{Hoa2\-D\-::\-Map}!set\-Radius@{set\-Radius}}
 \index{set\-Radius@{set\-Radius}!Hoa2D::Map@{Hoa2\-D\-::\-Map}}
 \subsubsection[{set\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Map\-::set\-Radius (
 \begin{DoxyParamCaption}
-\item[{unsigned int}]{index, }
+\item[{const unsigned int}]{index, }
 \item[{const double}]{radius}
 \end{DoxyParamCaption}
-)}}\label{class_hoa2_d_1_1_map_a66b18d42476bb3d92c816173c9fc41a4}
+)}}\label{class_hoa2_d_1_1_map_a48b9f89f5fcdab909f1fd50a7256a9f0}
 
 
 This method set the radius of a source. 
@@ -327,15 +327,15 @@ The radius is between 0 and infinity. At 0, the source is in the center of the a
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{class_hoa2_d_1_1_map_a0b98a9ad8d1fda90fe5559fd7736050b}{set\-Azimuth()} 
+\hyperlink{class_hoa2_d_1_1_map_aa5e77ccf4d3e2aaf75162180c18e202d}{set\-Azimuth()} 
 \end{DoxySeeAlso}
 
 
-Definition at line 35 of file Map.\-cpp.
+Definition at line 36 of file Map.\-cpp.
 
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Map.\-h\item 
-/\-Users/\-Pierre/\-Source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Map.\-cpp\end{DoxyCompactItemize}
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Map.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Map.\-cpp\end{DoxyCompactItemize}

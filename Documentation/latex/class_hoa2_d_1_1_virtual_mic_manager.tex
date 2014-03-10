@@ -1,0 +1,849 @@
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager}{\section{Hoa2\-D\-:\-:Virtual\-Mic\-Manager Class Reference}
+\label{class_hoa2_d_1_1_virtual_mic_manager}\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+}
+
+
+The virtual microphone manager.  
+
+
+
+
+{\ttfamily \#include $<$Virtual\-Mic\-Manager.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a967f0bf89c87a6c94bee641bffece3fa}{Virtual\-Mic\-Manager} (unsigned int number\-\_\-of\-\_\-mics=1)
+\begin{DoxyCompactList}\small\item\em The virtual microphone manager constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a52898fb542bcdcf394e05348d27b8398}{$\sim$\-Virtual\-Mic\-Manager} ()
+\begin{DoxyCompactList}\small\item\em The virtual microphone manager destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a9bbd49d515f2dce8e515ef8341321a99}{set\-Number\-Of\-Mics} (unsigned int number\-\_\-of\-\_\-mics)
+\begin{DoxyCompactList}\small\item\em Set the number of virtuals microphones you want to manage. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a087380cb38819e091cb76277b7cfaebb}{set\-Azimuth} (const int index, double azimuth)
+\begin{DoxyCompactList}\small\item\em Set one or each virtual microphone azimuth value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_aeb7b3651b830d41628c0d48f94502a04}{set\-Azimuth\-List} (double $\ast$azimuths, long size)
+\begin{DoxyCompactList}\small\item\em Set several virtual microphone azimuth with a list. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a1f0b6a97a6aebd1c0f93c0b2cd7d8653}{reset\-Azimuth} (const int index=-\/1)
+\begin{DoxyCompactList}\small\item\em Reset one or each virtual microphone azimuth value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ac0ebd1b76afc490cf767aa49bb7b27ba}{set\-Directivity} (const int index, const double directivity)
+\begin{DoxyCompactList}\small\item\em Set one or each virtual microphone directivity value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a3bc882e5ddddab304626a66078c6c8fe}{set\-Directivity\-List} (double $\ast$directivities, long size)
+\begin{DoxyCompactList}\small\item\em Set several virtual microphone directivity value with a list. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ab37b1e4b1105a6246af9c67d1f7f3004}{reset\-Directivity} (const int index=-\/1)
+\begin{DoxyCompactList}\small\item\em Reset one or each virtual microphone directivity to 1. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a06c95bbe7df88f3b21e7a82593a1a6aa}{set\-Selected} (const int index, int selected\-State)
+\begin{DoxyCompactList}\small\item\em Set the selected state of one or each virtual microphone. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a7d03540e436756e59a26dd8747c47f8d}{rotate\-Selected\-Mics} (double new\-Radian, int source\-Being\-Dragged, int magnet=0)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_hoa2_d_1_1_rotate}{Rotate} all of the currently selected microphones relative to one microphone azimuth rotation. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a1031b56d2f7bfc4a40ff5d5f478ae9a6}{set\-Fisheye\-Dest\-Azimuth} (double azimuth)
+\begin{DoxyCompactList}\small\item\em Set fisheye destination azimuth. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ad41d6ca6482278a16e7121fc37b8f005}{set\-Fisheye\-Start\-Azimuth} (const int index)
+\begin{DoxyCompactList}\small\item\em Set the fisheye start azimuth of one or several microphone with current azimuth. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a6351bacf0f305122062df4f69b7be6ee}{set\-Fisheye\-Start\-Azimuth} (const int index, double radian)
+\begin{DoxyCompactList}\small\item\em Set the fisheye start azimuth of one or several microphone. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a8a470cb0bed6a99d97ed535717de3432}{set\-Fisheye\-Step\-With\-Delta} (const int index, double delta)
+\begin{DoxyCompactList}\small\item\em Increment or decrement the fisheye step by a value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a53cc4adb53136e44bed715e13ba5b834}{set\-Fisheye\-Step\-Direct} (const int index, double fisheye\-Step)
+\begin{DoxyCompactList}\small\item\em Set the fisheye step directly. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_af6543c15a67dffd32b66cfb5ba9d7d12}{set\-Azimuth\-To\-Closest\-Def\-Mic\-Azimuth} (const int index)
+\begin{DoxyCompactList}\small\item\em Set virtual microphone azimuth value to the closest default azimuth position value. \end{DoxyCompactList}\item 
+long \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ad410ea735c2d90d55d7e438d3527ef57}{get\-Number\-Of\-Selected\-Mics} ()
+\begin{DoxyCompactList}\small\item\em Retrieve the number of selected microphones. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_aab43c873ac5968e3c2023ee2b0ce2e24}{get\-Closest\-Def\-Mic\-Azimuth} (const int index)
+\begin{DoxyCompactList}\small\item\em Retrieve the closest default azimuth position of a virtual microphone. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a5e055290edf0b236927a057836463bfe}{get\-Closest\-Def\-Mic\-Azimuth} (double azimuth)
+\begin{DoxyCompactList}\small\item\em Retrieve the closest default azimuth position relative to an azimuth value. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a6e6ad752d94fad0fb1c6ad014bdf29fb}{get\-Closest\-Def\-Mic\-Distance} (const int index)
+\begin{DoxyCompactList}\small\item\em Retrieve the distance to the closest default azimuth position relative to the azimuth of a virtual microphone. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_af7eacde3002e30fc45eda1a2133a1e6e}{get\-Closest\-Def\-Mic\-Distance} (double azimuth)
+\begin{DoxyCompactList}\small\item\em Retrieve the distance to the closest default azimuth position relative to an azimuth value. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ae811a1625b2698dc3229281fe0dd361e}{get\-Fisheye\-Dest\-Azimuth} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the fisheye destination azimuth value. \end{DoxyCompactList}\item 
+long \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_accfd94e543f908e703cabd4829c42ae0}{get\-Number\-Of\-Mics} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the number of virtual microphones currently managed. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a8d211940759074053682e1ca119f05fd}{get\-Fisheye\-Step} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the current fisheye step. \end{DoxyCompactList}\item 
+bool \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a81228c748207a601761eee6c2c999c31}{is\-Selected} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the selection state of a virtual microphone. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_add79d3cfea68de215e2be864d302a19c}{get\-Directivity} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the directivity value of a virtual microphone. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ae01486ff891cd4e6e3951beed0680d81}{get\-Fisheye\-Start\-Azimuth} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the fisheye start azimuth value of a virtual microphone. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a641578b9c0a40bde63de09228dd03f84}{get\-Abscissa} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the abscissa of a virtual microphone. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a5ef17b2bbb91282caeb002818de38e6e}{get\-Ordinate} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the ordinate of a virtual microphone. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a4b279c16b6c2f49710153f2f5345d926}{get\-Azimuth} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the azimuth of a virtual microphone. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The virtual microphone manager. 
+
+The virtual microphone manager should be used to manage a group of virtual microphones. 
+
+Definition at line 17 of file Virtual\-Mic\-Manager.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a967f0bf89c87a6c94bee641bffece3fa}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!Virtual\-Mic\-Manager@{Virtual\-Mic\-Manager}}
+\index{Virtual\-Mic\-Manager@{Virtual\-Mic\-Manager}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{Virtual\-Mic\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::\-Virtual\-Mic\-Manager (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number\-\_\-of\-\_\-mics = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a967f0bf89c87a6c94bee641bffece3fa}
+
+
+The virtual microphone manager constructor. 
+
+\begin{DoxyVerb}The virtual microphone manager constructor allocates and initialize the member values for each virtual microphone.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\-\_\-of\-\_\-mics} & The number of virtual microphones you need to manage, default is 1. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a52898fb542bcdcf394e05348d27b8398}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!$\sim$\-Virtual\-Mic\-Manager@{$\sim$\-Virtual\-Mic\-Manager}}
+\index{$\sim$\-Virtual\-Mic\-Manager@{$\sim$\-Virtual\-Mic\-Manager}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{$\sim$\-Virtual\-Mic\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::$\sim$\-Virtual\-Mic\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a52898fb542bcdcf394e05348d27b8398}
+
+
+The virtual microphone manager destructor. 
+
+The virtual microphone manager destructor free the memory. 
+
+Definition at line 17 of file Virtual\-Mic\-Manager.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a641578b9c0a40bde63de09228dd03f84}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Abscissa@{get\-Abscissa}}
+\index{get\-Abscissa@{get\-Abscissa}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Abscissa}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Abscissa (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_a641578b9c0a40bde63de09228dd03f84}
+
+
+Retrieve the abscissa of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The abscissa of the virtual microphone. 
+\end{DoxyReturn}
+
+
+Definition at line 291 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a4b279c16b6c2f49710153f2f5345d926}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Azimuth@{get\-Azimuth}}
+\index{get\-Azimuth@{get\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_a4b279c16b6c2f49710153f2f5345d926}
+
+
+Retrieve the azimuth of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The azimuth of the virtual microphone. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a087380cb38819e091cb76277b7cfaebb}{set\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 306 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_aab43c873ac5968e3c2023ee2b0ce2e24}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Closest\-Def\-Mic\-Azimuth@{get\-Closest\-Def\-Mic\-Azimuth}}
+\index{get\-Closest\-Def\-Mic\-Azimuth@{get\-Closest\-Def\-Mic\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Mic\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Closest\-Def\-Mic\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_aab43c873ac5968e3c2023ee2b0ce2e24}
+
+
+Retrieve the closest default azimuth position of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+closest default azimuth position of the virtual microphone. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a6e6ad752d94fad0fb1c6ad014bdf29fb}{get\-Closest\-Def\-Mic\-Distance} 
+\end{DoxySeeAlso}
+
+
+Definition at line 243 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a5e055290edf0b236927a057836463bfe}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Closest\-Def\-Mic\-Azimuth@{get\-Closest\-Def\-Mic\-Azimuth}}
+\index{get\-Closest\-Def\-Mic\-Azimuth@{get\-Closest\-Def\-Mic\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Mic\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Closest\-Def\-Mic\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a5e055290edf0b236927a057836463bfe}
+
+
+Retrieve the closest default azimuth position relative to an azimuth value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The relative azimuth. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The closest default azimuth position of the virtual microphone relative to the azimuth value you passed in. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a6e6ad752d94fad0fb1c6ad014bdf29fb}{get\-Closest\-Def\-Mic\-Distance} 
+\end{DoxySeeAlso}
+
+
+Definition at line 248 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a6e6ad752d94fad0fb1c6ad014bdf29fb}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Closest\-Def\-Mic\-Distance@{get\-Closest\-Def\-Mic\-Distance}}
+\index{get\-Closest\-Def\-Mic\-Distance@{get\-Closest\-Def\-Mic\-Distance}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Mic\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Closest\-Def\-Mic\-Distance (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a6e6ad752d94fad0fb1c6ad014bdf29fb}
+
+
+Retrieve the distance to the closest default azimuth position relative to the azimuth of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance to the closest default azimuth position. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_aab43c873ac5968e3c2023ee2b0ce2e24}{get\-Closest\-Def\-Mic\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 267 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_af7eacde3002e30fc45eda1a2133a1e6e}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Closest\-Def\-Mic\-Distance@{get\-Closest\-Def\-Mic\-Distance}}
+\index{get\-Closest\-Def\-Mic\-Distance@{get\-Closest\-Def\-Mic\-Distance}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Mic\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Closest\-Def\-Mic\-Distance (
+\begin{DoxyParamCaption}
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_af7eacde3002e30fc45eda1a2133a1e6e}
+
+
+Retrieve the distance to the closest default azimuth position relative to an azimuth value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The relative azimuth. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance to the closest default azimuth position of the virtual microphone relative to the azimuth value you passed in. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_aab43c873ac5968e3c2023ee2b0ce2e24}{get\-Closest\-Def\-Mic\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 272 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_add79d3cfea68de215e2be864d302a19c}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Directivity@{get\-Directivity}}
+\index{get\-Directivity@{get\-Directivity}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Directivity}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Directivity (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_add79d3cfea68de215e2be864d302a19c}
+
+
+Retrieve the directivity value of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The directivity value of the virtual microphone. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ac0ebd1b76afc490cf767aa49bb7b27ba}{set\-Directivity} 
+\end{DoxySeeAlso}
+
+
+Definition at line 276 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_ae811a1625b2698dc3229281fe0dd361e}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Fisheye\-Dest\-Azimuth@{get\-Fisheye\-Dest\-Azimuth}}
+\index{get\-Fisheye\-Dest\-Azimuth@{get\-Fisheye\-Dest\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Fisheye\-Dest\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Fisheye\-Dest\-Azimuth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_ae811a1625b2698dc3229281fe0dd361e}
+
+
+Retrieve the fisheye destination azimuth value. 
+
+\begin{DoxyReturn}{Returns}
+The fisheye destination azimuth value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a1031b56d2f7bfc4a40ff5d5f478ae9a6}{set\-Fisheye\-Dest\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 246 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_ae01486ff891cd4e6e3951beed0680d81}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Fisheye\-Start\-Azimuth@{get\-Fisheye\-Start\-Azimuth}}
+\index{get\-Fisheye\-Start\-Azimuth@{get\-Fisheye\-Start\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Fisheye\-Start\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Fisheye\-Start\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_ae01486ff891cd4e6e3951beed0680d81}
+
+
+Retrieve the fisheye start azimuth value of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The fisheye start azimuth value of the virtual microphone. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ad41d6ca6482278a16e7121fc37b8f005}{set\-Fisheye\-Start\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 284 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a8d211940759074053682e1ca119f05fd}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Fisheye\-Step@{get\-Fisheye\-Step}}
+\index{get\-Fisheye\-Step@{get\-Fisheye\-Step}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Fisheye\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Fisheye\-Step (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_a8d211940759074053682e1ca119f05fd}
+
+
+Retrieve the current fisheye step. 
+
+\begin{DoxyReturn}{Returns}
+The current fisheye step. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a53cc4adb53136e44bed715e13ba5b834}{set\-Fisheye\-Step\-Direct}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a8a470cb0bed6a99d97ed535717de3432}{set\-Fisheye\-Step\-With\-Delta} 
+\end{DoxySeeAlso}
+
+
+Definition at line 260 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_accfd94e543f908e703cabd4829c42ae0}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Number\-Of\-Mics@{get\-Number\-Of\-Mics}}
+\index{get\-Number\-Of\-Mics@{get\-Number\-Of\-Mics}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Number\-Of\-Mics}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Number\-Of\-Mics (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_accfd94e543f908e703cabd4829c42ae0}
+
+
+Retrieve the number of virtual microphones currently managed. 
+
+\begin{DoxyReturn}{Returns}
+The number of virtual microphones currently managed. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a9bbd49d515f2dce8e515ef8341321a99}{set\-Number\-Of\-Mics} 
+\end{DoxySeeAlso}
+
+
+Definition at line 253 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_ad410ea735c2d90d55d7e438d3527ef57}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Number\-Of\-Selected\-Mics@{get\-Number\-Of\-Selected\-Mics}}
+\index{get\-Number\-Of\-Selected\-Mics@{get\-Number\-Of\-Selected\-Mics}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Number\-Of\-Selected\-Mics}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Number\-Of\-Selected\-Mics (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_ad410ea735c2d90d55d7e438d3527ef57}
+
+
+Retrieve the number of selected microphones. 
+
+\begin{DoxyReturn}{Returns}
+The number of selected microphones. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a06c95bbe7df88f3b21e7a82593a1a6aa}{set\-Selected} 
+\end{DoxySeeAlso}
+
+
+Definition at line 289 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a5ef17b2bbb91282caeb002818de38e6e}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!get\-Ordinate@{get\-Ordinate}}
+\index{get\-Ordinate@{get\-Ordinate}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{get\-Ordinate}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::get\-Ordinate (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_a5ef17b2bbb91282caeb002818de38e6e}
+
+
+Retrieve the ordinate of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ordinate of the virtual microphone. 
+\end{DoxyReturn}
+
+
+Definition at line 298 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a81228c748207a601761eee6c2c999c31}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!is\-Selected@{is\-Selected}}
+\index{is\-Selected@{is\-Selected}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{is\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::is\-Selected (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_virtual_mic_manager_a81228c748207a601761eee6c2c999c31}
+
+
+Retrieve the selection state of a virtual microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The selection state of the virtual microphone. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a06c95bbe7df88f3b21e7a82593a1a6aa}{set\-Selected} 
+\end{DoxySeeAlso}
+
+
+Definition at line 268 of file Virtual\-Mic\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a1f0b6a97a6aebd1c0f93c0b2cd7d8653}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!reset\-Azimuth@{reset\-Azimuth}}
+\index{reset\-Azimuth@{reset\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{reset\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::reset\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a1f0b6a97a6aebd1c0f93c0b2cd7d8653}
+
+
+Reset one or each virtual microphone azimuth value. 
+
+\begin{DoxyVerb}Reset one or each virtual microphone to the default azimuth value.
+\end{DoxyVerb}
+ If you want to reset all of the microphones azimuth value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone (pass -\/1 to reset all of them). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a087380cb38819e091cb76277b7cfaebb}{set\-Azimuth}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_aeb7b3651b830d41628c0d48f94502a04}{set\-Azimuth\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 56 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_ab37b1e4b1105a6246af9c67d1f7f3004}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!reset\-Directivity@{reset\-Directivity}}
+\index{reset\-Directivity@{reset\-Directivity}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{reset\-Directivity}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::reset\-Directivity (
+\begin{DoxyParamCaption}
+\item[{const int}]{index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_ab37b1e4b1105a6246af9c67d1f7f3004}
+
+
+Reset one or each virtual microphone directivity to 1. 
+
+If you want to reset all of the microphones directivity value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone (pass -\/1 to reset all of them). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ac0ebd1b76afc490cf767aa49bb7b27ba}{set\-Directivity}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a3bc882e5ddddab304626a66078c6c8fe}{set\-Directivity\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 67 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a7d03540e436756e59a26dd8747c47f8d}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!rotate\-Selected\-Mics@{rotate\-Selected\-Mics}}
+\index{rotate\-Selected\-Mics@{rotate\-Selected\-Mics}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{rotate\-Selected\-Mics}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::rotate\-Selected\-Mics (
+\begin{DoxyParamCaption}
+\item[{double}]{new\-Radian, }
+\item[{int}]{source\-Being\-Dragged, }
+\item[{int}]{magnet = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a7d03540e436756e59a26dd8747c47f8d}
+
+
+\hyperlink{class_hoa2_d_1_1_rotate}{Rotate} all of the currently selected microphones relative to one microphone azimuth rotation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Radian} & The new azimuth of the source which is being dragged \\
+\hline
+{\em source\-Being\-Dragged} & The index of the microphone which is being dragged. \\
+\hline
+{\em magnet} & Pass 1 to magnetize the microphone to one of the default azimuth positions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 123 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a087380cb38819e091cb76277b7cfaebb}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Azimuth@{set\-Azimuth}}
+\index{set\-Azimuth@{set\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a087380cb38819e091cb76277b7cfaebb}
+
+
+Set one or each virtual microphone azimuth value. 
+
+If you want to reset all of the microphones azimuth value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone (pass -\/1 to reset all of them). \\
+\hline
+{\em azimuth} & The new azimuth value in radians. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a1f0b6a97a6aebd1c0f93c0b2cd7d8653}{reset\-Azimuth}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_aeb7b3651b830d41628c0d48f94502a04}{set\-Azimuth\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 84 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_aeb7b3651b830d41628c0d48f94502a04}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Azimuth\-List@{set\-Azimuth\-List}}
+\index{set\-Azimuth\-List@{set\-Azimuth\-List}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Azimuth\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Azimuth\-List (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{azimuths, }
+\item[{long}]{size}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_aeb7b3651b830d41628c0d48f94502a04}
+
+
+Set several virtual microphone azimuth with a list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuths} & An array of azimuth values in radians. \\
+\hline
+{\em size} & The size of the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a087380cb38819e091cb76277b7cfaebb}{set\-Azimuth}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ac0ebd1b76afc490cf767aa49bb7b27ba}{set\-Directivity} 
+\end{DoxySeeAlso}
+
+
+Definition at line 78 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_af6543c15a67dffd32b66cfb5ba9d7d12}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Azimuth\-To\-Closest\-Def\-Mic\-Azimuth@{set\-Azimuth\-To\-Closest\-Def\-Mic\-Azimuth}}
+\index{set\-Azimuth\-To\-Closest\-Def\-Mic\-Azimuth@{set\-Azimuth\-To\-Closest\-Def\-Mic\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Azimuth\-To\-Closest\-Def\-Mic\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Azimuth\-To\-Closest\-Def\-Mic\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_af6543c15a67dffd32b66cfb5ba9d7d12}
+
+
+Set virtual microphone azimuth value to the closest default azimuth position value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a1f0b6a97a6aebd1c0f93c0b2cd7d8653}{reset\-Azimuth}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a087380cb38819e091cb76277b7cfaebb}{set\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 283 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_ac0ebd1b76afc490cf767aa49bb7b27ba}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Directivity@{set\-Directivity}}
+\index{set\-Directivity@{set\-Directivity}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Directivity}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Directivity (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{const double}]{directivity}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_ac0ebd1b76afc490cf767aa49bb7b27ba}
+
+
+Set one or each virtual microphone directivity value. 
+
+If you want to reset all of the microphones azimuth value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone (pass -\/1 to reset all of them). \\
+\hline
+{\em directivity} & The new directivity value (between 0 and 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ab37b1e4b1105a6246af9c67d1f7f3004}{reset\-Directivity}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a3bc882e5ddddab304626a66078c6c8fe}{set\-Directivity\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 101 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a3bc882e5ddddab304626a66078c6c8fe}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Directivity\-List@{set\-Directivity\-List}}
+\index{set\-Directivity\-List@{set\-Directivity\-List}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Directivity\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Directivity\-List (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{directivities, }
+\item[{long}]{size}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a3bc882e5ddddab304626a66078c6c8fe}
+
+
+Set several virtual microphone directivity value with a list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em directivities} & An array of directivity (between 0 and 1). \\
+\hline
+{\em size} & The size of the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ac0ebd1b76afc490cf767aa49bb7b27ba}{set\-Directivity}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ab37b1e4b1105a6246af9c67d1f7f3004}{reset\-Directivity} 
+\end{DoxySeeAlso}
+
+
+Definition at line 95 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a1031b56d2f7bfc4a40ff5d5f478ae9a6}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Fisheye\-Dest\-Azimuth@{set\-Fisheye\-Dest\-Azimuth}}
+\index{set\-Fisheye\-Dest\-Azimuth@{set\-Fisheye\-Dest\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Fisheye\-Dest\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Fisheye\-Dest\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a1031b56d2f7bfc4a40ff5d5f478ae9a6}
+
+
+Set fisheye destination azimuth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The azimuth value of the fisheye destination in radians. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ae811a1625b2698dc3229281fe0dd361e}{get\-Fisheye\-Dest\-Azimuth}, \hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ad41d6ca6482278a16e7121fc37b8f005}{set\-Fisheye\-Start\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 153 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_ad41d6ca6482278a16e7121fc37b8f005}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}}
+\index{set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Fisheye\-Start\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Fisheye\-Start\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_ad41d6ca6482278a16e7121fc37b8f005}
+
+
+Set the fisheye start azimuth of one or several microphone with current azimuth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone if greather than -\/1, pass -\/2 to affect all selected microphones, pass -\/1 to affect all microphones \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+
+\end{DoxySeeAlso}
+
+
+Definition at line 184 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a6351bacf0f305122062df4f69b7be6ee}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}}
+\index{set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Fisheye\-Start\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Fisheye\-Start\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{radian}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a6351bacf0f305122062df4f69b7be6ee}
+
+
+Set the fisheye start azimuth of one or several microphone. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone if greather than -\/1, pass -\/2 to affect all selected microphones, pass -\/1 to affect all microphones \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 201 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a53cc4adb53136e44bed715e13ba5b834}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Fisheye\-Step\-Direct@{set\-Fisheye\-Step\-Direct}}
+\index{set\-Fisheye\-Step\-Direct@{set\-Fisheye\-Step\-Direct}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Fisheye\-Step\-Direct}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Fisheye\-Step\-Direct (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{fisheye\-Step}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a53cc4adb53136e44bed715e13ba5b834}
+
+
+Set the fisheye step directly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone if greather than -\/1, pass -\/2 to affect all selected microphones, pass -\/1 to affect all microphones \\
+\hline
+{\em fisheye\-Step} & The fisheye step (between 0 and 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a8a470cb0bed6a99d97ed535717de3432}{set\-Fisheye\-Step\-With\-Delta} 
+\end{DoxySeeAlso}
+
+
+Definition at line 165 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a8a470cb0bed6a99d97ed535717de3432}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Fisheye\-Step\-With\-Delta@{set\-Fisheye\-Step\-With\-Delta}}
+\index{set\-Fisheye\-Step\-With\-Delta@{set\-Fisheye\-Step\-With\-Delta}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Fisheye\-Step\-With\-Delta}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Fisheye\-Step\-With\-Delta (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{delta}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a8a470cb0bed6a99d97ed535717de3432}
+
+
+Increment or decrement the fisheye step by a value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone if greather than -\/1, pass -\/2 to affect all selected microphones, pass -\/1 to affect all microphones \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_a53cc4adb53136e44bed715e13ba5b834}{set\-Fisheye\-Step\-Direct} 
+\end{DoxySeeAlso}
+
+
+Definition at line 159 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a9bbd49d515f2dce8e515ef8341321a99}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Number\-Of\-Mics@{set\-Number\-Of\-Mics}}
+\index{set\-Number\-Of\-Mics@{set\-Number\-Of\-Mics}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Number\-Of\-Mics}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Number\-Of\-Mics (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number\-\_\-of\-\_\-mics}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a9bbd49d515f2dce8e515ef8341321a99}
+
+
+Set the number of virtuals microphones you want to manage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\-\_\-of\-\_\-mics} & The number of virtual microphones you need to manage, default is 1. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 24 of file Virtual\-Mic\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_virtual_mic_manager_a06c95bbe7df88f3b21e7a82593a1a6aa}{\index{Hoa2\-D\-::\-Virtual\-Mic\-Manager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}!set\-Selected@{set\-Selected}}
+\index{set\-Selected@{set\-Selected}!Hoa2D::VirtualMicManager@{Hoa2\-D\-::\-Virtual\-Mic\-Manager}}
+\subsubsection[{set\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Virtual\-Mic\-Manager\-::set\-Selected (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{int}]{selected\-State}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_virtual_mic_manager_a06c95bbe7df88f3b21e7a82593a1a6aa}
+
+
+Set the selected state of one or each virtual microphone. 
+
+If you want to reset all of the microphones selected state, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the microphone (pass -\/1 to reset all of them). \\
+\hline
+{\em selected\-State} & The selected state, pass 0 to unselect, 1 to select and -\/1 to toggle the state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_virtual_mic_manager_ad410ea735c2d90d55d7e438d3527ef57}{get\-Number\-Of\-Selected\-Mics} 
+\end{DoxySeeAlso}
+
+
+Definition at line 112 of file Virtual\-Mic\-Manager.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Virtual\-Mic\-Manager.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Virtual\-Mic\-Manager.\-cpp\end{DoxyCompactItemize}

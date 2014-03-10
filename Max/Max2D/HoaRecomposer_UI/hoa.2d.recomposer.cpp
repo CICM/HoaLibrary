@@ -323,19 +323,19 @@ void hoa_recomposer_preset(t_hoa_recomposer *x)
     for(int i = 0; i < x->f_numberOfMic; i++)
     {
         binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_angles, i, (float)x->f_mics->getAzimuth(i));
-        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_directivities, i, (float)x->f_mics->getWiderValue(i));
+        binbuf_vinsert(z, gensym("osslf")->s_name, x, object_classname(x), hoa_sym_directivities, i, (float)x->f_mics->getDirectivity(i));
     }
 }
 
 t_max_err hoa_recomposer_setvalueof(t_hoa_recomposer *x, long ac, t_atom *av)
 {
-    if (ac && av) {
-        
+    if (ac && av)
+	{
         long index, i;
         for (i = index = 0; (index < x->f_numberOfMic) && (i <= ac); index++, i+=3)
         {
-            x->f_mics->setAngleCartesianCoordinate(index, atom_getfloat(av+i), atom_getfloat(av+i+1));
-            x->f_mics->setWiderValue(index, atom_getfloat(av+i+2));
+			x->f_mics->setAzimuth(index, azimuth(atom_getfloat(av+i), atom_getfloat(av+i+1)));
+            x->f_mics->setDirectivity(index, atom_getfloat(av+i+2));
         }
         
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
@@ -360,7 +360,7 @@ t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
             {
                 atom_setfloat(*av+i, x->f_mics->getAbscissa(index) );
                 atom_setfloat(*av+i+1, x->f_mics->getOrdinate(index) );
-                atom_setfloat(*av+i+2, x->f_mics->getWiderValue(index) );
+                atom_setfloat(*av+i+2, x->f_mics->getDirectivity(index) );
             }
 		}
         else
@@ -372,7 +372,7 @@ t_max_err hoa_recomposer_getvalueof(t_hoa_recomposer *x, long *ac, t_atom **av)
             {
                 atom_setfloat(*av+i, x->f_mics->getAbscissa(index) );
                 atom_setfloat(*av+i+1, x->f_mics->getOrdinate(index) );
-                atom_setfloat(*av+i+2, x->f_mics->getWiderValue(index) );
+                atom_setfloat(*av+i+2, x->f_mics->getDirectivity(index) );
             }
         }
     }
@@ -386,8 +386,8 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
     // "reset" | "reset angle" | "reset angle 1" | "reset wide" | "reset wide 1"
     if (ac == 0)
     {
-        x->f_mics->resetAngles();
-        x->f_mics->resetWides();
+        x->f_mics->resetAzimuth();
+        x->f_mics->resetDirectivity();
     }
     else if (ac >= 1 && atom_gettype(av) == A_SYM)
     {
@@ -398,12 +398,12 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
                 for(int i = 1; i < ac ; i++)
                 {
                     if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG))
-                        x->f_mics->resetAngles(atom_getlong(av + i));
+                        x->f_mics->resetAzimuth(atom_getlong(av + i));
                 }
             }
             else
             {
-                x->f_mics->resetAngles();
+                x->f_mics->resetAzimuth();
             }
         }
         else if (atom_getsym(av) == hoa_sym_directivities)
@@ -413,12 +413,12 @@ void hoa_recomposer_reset(t_hoa_recomposer *x, t_symbol *s, short ac, t_atom *av
                 for(int i = 1; i < ac ; i++)
                 {
                     if ( (atom_gettype(av+i) == A_FLOAT || atom_gettype(av+i) == A_LONG))
-                        x->f_mics->resetWides(atom_getlong(av + i));
+                        x->f_mics->resetDirectivity(atom_getlong(av + i));
                 }
             }
             else
             {
-                x->f_mics->resetWides();
+                x->f_mics->resetDirectivity();
             }
         }
     }
@@ -445,7 +445,7 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
                 long index;
                 if (!isInside(index = atom_getlong(av+isSet), 0, x->f_mics->getNumberOfMics())) return;
                 if ( ac >= 2+isSet )
-                    x->f_mics->setAngleInRadian(index, atom_getfloat(av+1+isSet));
+                    x->f_mics->setAzimuth(index, atom_getfloat(av+1+isSet));
             }
             else
             {
@@ -457,8 +457,8 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
                         list[i] = atom_getfloat(av + i + isSet);
                     } else list[i] = 0;
                 }
-                x->f_mics->setAnglesInRadian(list, ac);
-				free(list);
+                x->f_mics->setAzimuthList(list, ac);
+				delete [] list;
             }
         }
         else if ( name == hoa_sym_directivities )
@@ -468,7 +468,7 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
                 long index;
                 index = atom_getlong(av+isSet);
                 if ( ac >= 2+isSet )
-                    x->f_mics->setWiderValue(index, atom_getfloat(av+1+isSet));                
+                    x->f_mics->setDirectivity(index, atom_getfloat(av+1+isSet));                
             }
             else
             {
@@ -480,8 +480,8 @@ void hoa_recomposer_set(t_hoa_recomposer *x, t_symbol *s, long ac, t_atom *av)
                         list[i] = atom_getfloat(av + i + isSet);
                     } else list[i] = 0;
                 }
-                x->f_mics->setWiderValues(list, ac);
-				free(list);
+                x->f_mics->setDirectivityList(list, ac);
+				delete [] list;
             }
         }
     }
@@ -578,10 +578,10 @@ void hoa_recomposer_output(t_hoa_recomposer *x)
     
     // wider values of microphones
     for (int i=0; i<nmics; i++) {
-        atom_setfloat(av_left+i, x->f_mics->getWiderValue(i));
+        atom_setfloat(av_left+i, x->f_mics->getDirectivity(i));
     }
     outlet_anything(x->f_out, hoa_sym_directivities, nmics, av_left);
-	free(av_left);
+	delete [] av_left;
 }
 
 //========================= Notify Methods :
@@ -729,7 +729,7 @@ void computeRepresentation(t_hoa_recomposer *x, int index)
 {
 	x->f_encoder->setAzimuth(0);
 	x->f_encoder->process(10., x->f_harmonicsValues);
-	x->f_wider->setWideningValue(x->f_mics->getWiderValue(index));
+	x->f_wider->setWideningValue(x->f_mics->getDirectivity(index));
 	x->f_wider->process(x->f_harmonicsValues, x->f_harmonicsValues);
 	x->f_scope->process(x->f_harmonicsValues);
 }
@@ -999,8 +999,8 @@ void hoa_recomposer_mousedown(t_hoa_recomposer *x, t_object *patcherview, t_pt p
     {
         t_pt ptCart = {pt.x-(w*0.5), (w - pt.y)-(w*0.5)};
         x->f_last_mouseDragRadius = radius(ptCart.x, ptCart.y);
-        x->f_mics->setFisheyeStartAngle(-2);
-		x->f_mics->setFisheyeDestAngle(x->f_fisheyeAngle);
+        x->f_mics->setFisheyeStartAzimuth(-2);
+		x->f_mics->setFisheyeDestAzimuth(x->f_fisheyeAngle);
     }
     else if (isMouseDownOverAMic == -1 )
     {
@@ -1062,10 +1062,10 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
 	else if (modifiers == 148 || x->f_showFishEye)  // ctrl
 #endif
     {
-        double fisheyeAngle = x->f_mics->getFisheyeDestAngle();
+        double fisheyeAngle = x->f_mics->getFisheyeDestAzimuth();
         double factor = isInsideRad(angleDrag, fisheyeAngle - HOA_PI2, fisheyeAngle + HOA_PI2) ? 1 : -1;
-        double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor;
-        x->f_mics->setSelectedMicsFisheyeStepWithDelta(-2, radiusDelta / x->f_micRadius);
+        double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor / x->f_micRadius;
+        x->f_mics->setFisheyeStepWithDelta(-2, radiusDelta);
         hoa_recomposer_outputAndNotifyChange(x);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_fisheye_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_mic_layer);
@@ -1079,13 +1079,18 @@ void hoa_recomposer_mousedrag(t_hoa_recomposer *x, t_object *patcherview, t_pt p
         {
             double micAngle = x->f_mics->getAzimuth(x->f_last_mouseDownOverMic);
             double factor = isInsideRad(angleDrag, micAngle-HOA_PI2, micAngle+HOA_PI2) ? 1 : -1;
-            double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor;
-            x->f_mics->setSelectedMicsWiderValueWithRadiusDelta(radiusDelta / x->f_micRadius);
+            double radiusDelta = (x->f_last_mouseDragRadius - radiusDrag) * factor / x->f_micRadius;
+			
+			for (int i=0; i < x->f_numberOfMic; i++)
+			{
+				if (x->f_mics->isSelected(i))
+					x->f_mics->setDirectivity( i, x->f_mics->getDirectivity(i) + radiusDelta);
+			}
         }
         else // => simply rotate
         {
             int magnet = (modifiers == 17) ? 1 : 0;
-            x->f_mics->rotateSelectedMicsWithRadian(angleDrag, x->f_last_mouseDownOverMic, magnet);
+            x->f_mics->rotateSelectedMics(angleDrag, x->f_last_mouseDownOverMic, magnet);
         }
         
         hoa_recomposer_outputAndNotifyChange(x);
@@ -1183,8 +1188,9 @@ void hoa_recomposer_mousemove(t_hoa_recomposer *x, t_object *patcherview, t_pt p
 
 void hoa_recomposer_mousedoubleclick(t_hoa_recomposer *x, t_object *patcherview, t_pt pt, long modifiers)
 {
-    if (x->f_last_mouseDownOverMic != -1) {
-        x->f_mics->setAngleToClosestDefMicAngle(x->f_last_mouseDownOverMic);
+    if (x->f_last_mouseDownOverMic != -1)
+	{
+        x->f_mics->setAzimuthToClosestDefMicAzimuth(x->f_last_mouseDownOverMic);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_harmonics_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_mic_layer);
         jbox_invalidate_layer((t_object *)x, NULL, hoa_sym_text_layer);
