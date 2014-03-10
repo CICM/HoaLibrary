@@ -345,14 +345,14 @@ namespace Hoa
         return new_value;
     }
     
-	inline double ordinate(const double radius, const double angle)
+	inline double ordinate(const double radius, const double azimuth)
 	{
-		return radius * sin(angle + HOA_PI2);
+		return radius * sin(azimuth + HOA_PI2);
 	}
     
-    inline double abscissa(const double radius, const double angle)
+    inline double abscissa(const double radius, const double azimuth)
 	{
-		return radius * cos(angle + HOA_PI2);
+		return radius * cos(azimuth + HOA_PI2);
 	}
     
     inline double radius(const double x, const double y)

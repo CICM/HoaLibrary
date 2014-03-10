@@ -8,11 +8,11 @@
 
 namespace Hoa2D
 {
-	VirtualMicManager::VirtualMicManager(long number_of_mics)
+	VirtualMicManager::VirtualMicManager(unsigned int number_of_mics)
 	{
 		m_defaultAngles = NULL;
 		setNumberOfMics(number_of_mics);
-		resetAngles(-1);
+		resetAzimuth(-1);
 	}
 	VirtualMicManager::~VirtualMicManager()
 	{
@@ -21,15 +21,9 @@ namespace Hoa2D
 			free(m_defaultAngles);
 	}
 	
-	void VirtualMicManager::setNumberOfMics(long number_of_mics)
+	void VirtualMicManager::setNumberOfMics(unsigned int number_of_mics)
 	{
-		long order = 0;
 		number_of_mics = clip_min(number_of_mics, 3);
-		
-		if (number_of_mics % 2 == 0)
-			order = number_of_mics / 2 - 1;
-		else
-			order = number_of_mics / 2;
 		
 		if(m_mics.size() > number_of_mics)
 		{
@@ -43,14 +37,12 @@ namespace Hoa2D
 		}
 		
 		for (int i = 0; i < m_mics.size(); i++)
-		{
 			m_mics[i]->setSelected(0);
-		}
 		
-		setDefaultAngles();
+		setDefaultAzimuth();
 	}
 	
-	void VirtualMicManager::setDefaultAngles()
+	void VirtualMicManager::setDefaultAzimuth()
 	{
 		if(m_defaultAngles)
 			delete m_defaultAngles;
@@ -61,88 +53,60 @@ namespace Hoa2D
 			m_defaultAngles[i] = HOA_2PI / (double)m_mics.size() * (double)i;
 	}
 	
-	void VirtualMicManager::resetAngles(const int index)
+	void VirtualMicManager::resetAzimuth(const int index)
 	{
 		if(index == -1)
 		{
 			for(int i = 0; i < m_mics.size(); i++)
-				m_mics[i]->setAngleInRadian(m_defaultAngles[i]);
+				m_mics[i]->setAzimuth(m_defaultAngles[i]);
 		}
 		else if(isInside(long(index), long(0), long(m_mics.size())))
-			m_mics[index]->setAngleInRadian(m_defaultAngles[index]);
+			m_mics[index]->setAzimuth(m_defaultAngles[index]);
 	}
 	
-	void VirtualMicManager::resetWides(const int index)
+	void VirtualMicManager::resetDirectivity(const int index)
 	{
 		if(index == -1) // tous les angles
 		{
 			for (int i = 0; i < m_mics.size(); i++)
-				m_mics[i]->setWiderValue(1);
+				m_mics[i]->setDirectivity(1);
 		}
 		else if(isInside(long(index), long(0), long(m_mics.size())))
-			m_mics[index]->setWiderValue(1);
+			m_mics[index]->setDirectivity(1);
 	}
 	
-	void VirtualMicManager::setAnglesInRadian(double* angles, long size)
+	void VirtualMicManager::setAzimuthList(double* angles, long size)
 	{
 		for(int i = 0; i < size && i < m_mics.size(); i++)
-			m_mics[i]->setAngleInRadian(angles[i]);
+			m_mics[i]->setAzimuth(angles[i]);
 	}
 	
-	void VirtualMicManager::setAnglesInDegree(double* angles, long size)
-	{
-		for(int i = 0; i < size && i < m_mics.size(); i++)
-			m_mics[i]->setAngleInDegree(angles[i]);
-	}
-	
-	void VirtualMicManager::setAngleInRadian(const int index, double angle)
+	void VirtualMicManager::setAzimuth(const int index, double angle)
 	{
 		if(index == -1)
 		{
 			for(int i = 0; i< m_mics.size(); i++)
-				m_mics[i]->setAngleInRadian(angle);
+				m_mics[i]->setAzimuth(angle);
 		}
 		else
-			m_mics[(int)clip_minmax(index, 0, m_mics.size())]->setAngleInRadian(angle);
+			m_mics[(int)clip_minmax(index, 0, m_mics.size())]->setAzimuth(angle);
 	}
 	
-	void VirtualMicManager::setAngleInDegree(const int index, double angle)
-	{
-		if (index == -1)
-		{
-			for(int i = 0; i<m_mics.size(); i++)
-				m_mics[i]->setAngleInDegree(angle);
-		}
-		else
-			m_mics[(int)clip_minmax(index, 0, m_mics.size())]->setAngleInDegree(angle);
-	}
-	
-	void VirtualMicManager::setDistance(const int index, double _distance)
-	{
-		if(index == -1)
-		{
-			for(int i = 0; i<m_mics.size(); i++)
-				m_mics[i]->setDistance(_distance);
-		}
-		else
-			m_mics[(int)clip_minmax(index, 0, m_mics.size())]->setDistance(_distance);
-	}
-	
-	void VirtualMicManager::setWiderValues(double* widerValues, long size)
+	void VirtualMicManager::setDirectivityList(double* directivities, long size)
 	{
 		for (int i=0; i < size && i < m_mics.size(); i++)
-			m_mics[i]->setWiderValue(widerValues[i]);
+			m_mics[i]->setDirectivity(directivities[i]);
 	}
 	
-	void VirtualMicManager::setWiderValue(const int index, double widerValue)
+	void VirtualMicManager::setDirectivity(const int index, double widerValue)
 	{
 		if (index == -1)
 		{
 			for (int i=0; i < m_mics.size(); i++)
-				m_mics[i]->setWiderValue(widerValue);
+				m_mics[i]->setDirectivity(widerValue);
 		}
 		else
-			m_mics[(int)clip_minmax(index, 0, m_mics.size())]->setWiderValue(widerValue);
+			m_mics[(int)clip_minmax(index, 0, m_mics.size())]->setDirectivity(widerValue);
 	}
 	
 	void VirtualMicManager::setSelected(const int index, int _selectedState)
@@ -156,17 +120,7 @@ namespace Hoa2D
 			m_mics[(int)clip_minmax(index, 0, m_mics.size())]->setSelected(_selectedState);
 	}
 	
-	void VirtualMicManager::selectMicsBetweenMics(int indexOne, int indexTwo)
-	{
-		double angle1 = getAzimuth(indexOne);
-		double angle2 = getAzimuth(indexTwo);
-		
-		for (int i=0; i<m_mics.size(); i++)
-			if (isInsideRad(getAzimuth(i), angle1, angle2))
-				setSelected(i, 1);
-	}
-	
-	void VirtualMicManager::rotateSelectedMicsWithRadian(double newRadian, int sourceBeingDragged, int magnet)
+	void VirtualMicManager::rotateSelectedMics(double newRadian, int sourceBeingDragged, int magnet)
 	{
 		if (!isInside(sourceBeingDragged, int(0), int(m_mics.size())))
 			return;
@@ -174,13 +128,13 @@ namespace Hoa2D
 		double deltaAngle;
 		double oldAngle = m_mics[sourceBeingDragged]->getAzimuth();
 		deltaAngle = newRadian - m_mics[sourceBeingDragged]->getAzimuth();
-		m_mics[sourceBeingDragged]->setAngleInRadian(newRadian);
+		m_mics[sourceBeingDragged]->setAzimuth(newRadian);
 		
 		if (magnet == 1)
 		{
 			if ( getClosestDefMicDistance(sourceBeingDragged) < HOA_2PI / (double) m_mics.size() *0.1 )
 			{
-				m_mics[sourceBeingDragged]->setAngleInRadian(getClosestDefMicAngle(sourceBeingDragged));
+				m_mics[sourceBeingDragged]->setAzimuth(getClosestDefMicAzimuth(sourceBeingDragged));
 				deltaAngle =  m_mics[sourceBeingDragged]->getAzimuth() - oldAngle;
 			}
 		}
@@ -189,32 +143,23 @@ namespace Hoa2D
 		{
 			if (isSelected(i) && i != sourceBeingDragged)
 			{
-				m_mics[i]->rotateAngleInRadian(deltaAngle);
-			}
-		}
-	}
-	
-	void VirtualMicManager::setSelectedMicsWiderValueWithRadiusDelta(double deltaRadius)
-	{
-		for (int i=0; i < m_mics.size(); i++) {
-			if (isSelected(i)) {
-				m_mics[i]->setWiderValue( m_mics[i]->getWiderValue() + deltaRadius);
+				m_mics[i]->rotateAzimuth(deltaAngle);
 			}
 		}
 	}
 	
 	/* ---- Fisheye ---- */
 	
-	void VirtualMicManager::setFisheyeDestAngle(double angle_radian)
+	void VirtualMicManager::setFisheyeDestAzimuth(double angle_radian)
 	{
-		m_fisheyeDestAngleInRadian = wrap_twopi(angle_radian);
+		m_fisheyeDestAzimuth = wrap_twopi(angle_radian);
 		m_fisheyeStep = 0;
 	}
 	
-	void VirtualMicManager::setSelectedMicsFisheyeStepWithDelta(const int micIndex, double _delta)
+	void VirtualMicManager::setFisheyeStepWithDelta(const int index, double delta)
 	{
-		m_fisheyeStep = clip_minmax(m_fisheyeStep + _delta, double(0), double(1));
-		setFisheyeStepDirect(micIndex, m_fisheyeStep);
+		m_fisheyeStep = clip_minmax(m_fisheyeStep + delta, 0, 1);
+		setFisheyeStepDirect(index, m_fisheyeStep);
 	}
 	
 	void VirtualMicManager::setFisheyeStepDirect(const int micIndex, double fisheyeStep)
@@ -225,57 +170,47 @@ namespace Hoa2D
 		{
 			for (int i=0; i < m_mics.size(); i++)
 				if (isSelected(i))
-					m_mics[i]->setAngleInRadian(radianInterp(m_fisheyeStep, m_mics[i]->getFisheyeStartAngle(), m_fisheyeDestAngleInRadian));
+					m_mics[i]->setAzimuth(radianInterp(m_fisheyeStep, m_mics[i]->getFisheyeStartAzimuth(), m_fisheyeDestAzimuth));
 		}
 		else if (micIndex == -1)
 		{
 			for (int i=0; i < m_mics.size(); i++)
-				m_mics[i]->setAngleInRadian(radianInterp(m_fisheyeStep, m_mics[i]->getFisheyeStartAngle(), m_fisheyeDestAngleInRadian));
+				m_mics[i]->setAzimuth(radianInterp(m_fisheyeStep, m_mics[i]->getFisheyeStartAzimuth(), m_fisheyeDestAzimuth));
 		}
 		else
-			m_mics[index]->setAngleInRadian(radianInterp(m_fisheyeStep, m_mics[index]->getFisheyeStartAngle(), m_fisheyeDestAngleInRadian));
+			m_mics[index]->setAzimuth(radianInterp(m_fisheyeStep, m_mics[index]->getFisheyeStartAzimuth(), m_fisheyeDestAzimuth));
 	}
 	
-	void VirtualMicManager::setFisheyeStartAngle(const int micIndex)
+	void VirtualMicManager::setFisheyeStartAzimuth(const int micIndex)
 	{
 		if (micIndex == -2)
 		{
 			for (int i=0; i < m_mics.size(); i++)
 				if (isSelected(i))
-					m_mics[i]->setFisheyeStartAngle();
+					m_mics[i]->setFisheyeStartAzimuth();
 		}
 		else if (micIndex == -1)
 		{
 			for (int i=0; i<m_mics.size(); i++)
-				m_mics[i]->setFisheyeStartAngle();
+				m_mics[i]->setFisheyeStartAzimuth();
 		}
 		else
-			m_mics[(int)clip_minmax(micIndex, 0, m_mics.size())]->setFisheyeStartAngle();
+			m_mics[(int)clip_minmax(micIndex, 0, m_mics.size())]->setFisheyeStartAzimuth();
 	}
 	
-	void VirtualMicManager::setFisheyeStartAngle(const int micIndex, double angle_radian)
+	void VirtualMicManager::setFisheyeStartAzimuth(const int micIndex, double angle_radian)
 	{
 		if (micIndex == -2) {
 			for (int i=0; i < m_mics.size(); i++)
 				if (isSelected(i))
-					m_mics[i]->setFisheyeStartAngle(angle_radian);
+					m_mics[i]->setFisheyeStartAzimuth(angle_radian);
 		}
 		else if (micIndex == -1)
 			for (int i=0; i<m_mics.size(); i++)
-				m_mics[i]->setFisheyeStartAngle(angle_radian);
+				m_mics[i]->setFisheyeStartAzimuth(angle_radian);
 		else
-			m_mics[(int)clip_minmax(micIndex, 0, m_mics.size())]->setFisheyeStartAngle(angle_radian);
+			m_mics[(int)clip_minmax(micIndex, 0, m_mics.size())]->setFisheyeStartAzimuth(angle_radian);
 	}
-	
-	void VirtualMicManager::setAngleCartesianCoordinate(const int micIndex, double abscissa, double ordinate)
-	{
-		if (micIndex == -1)
-			for (int i=0; i<m_mics.size(); i++)
-				m_mics[i]->setAngleCartesianCoordinate(abscissa, ordinate);
-		else
-			m_mics[(int)clip_minmax(micIndex, 0, m_mics.size())]->setAngleCartesianCoordinate(abscissa, ordinate);
-	}
-	
 	
 	/* --- Utility --- */
 	
@@ -305,12 +240,12 @@ namespace Hoa2D
 		}
 	}
 	
-	double VirtualMicManager::getClosestDefMicAngle(const int micIndex)
+	double VirtualMicManager::getClosestDefMicAzimuth(const int micIndex)
 	{
-		return getClosestDefMicAngle(getAzimuth(micIndex));
+		return getClosestDefMicAzimuth(getAzimuth(micIndex));
 	}
 	
-	double VirtualMicManager::getClosestDefMicAngle(double angle_radian)
+	double VirtualMicManager::getClosestDefMicAzimuth(double angle_radian)
 	{
 		double angle = wrap_twopi(angle_radian);
 		double distance = HOA_2PI;
@@ -345,10 +280,10 @@ namespace Hoa2D
 		return distance;
 	}
 	
-	void VirtualMicManager::setAngleToClosestDefMicAngle(const int micIndex)
+	void VirtualMicManager::setAzimuthToClosestDefMicAzimuth(const int micIndex)
 	{
-		if (!isInside(micIndex, int(0), int(m_mics.size()))) return;
-		m_mics[micIndex]->setAngleInRadian(getClosestDefMicAngle(micIndex));
+		if (!isInside(micIndex, 0, m_mics.size())) return;
+		m_mics[micIndex]->setAzimuth(getClosestDefMicAzimuth(micIndex));
 	}
 	
 	long VirtualMicManager::getNumberOfSelectedMics()
