@@ -26,6 +26,8 @@ void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, double **i
 void hoa_decoder_perform64_irregular(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 void hoa_decoder_perform64_binaural(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam);
 
+void send_configuration(t_hoa_decoder *x);
+
 t_hoa_err hoa_getinfos(t_hoa_decoder* x, t_hoa_boxinfos* boxinfos);
 
 t_max_err mode_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv);
@@ -128,6 +130,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
             }
             if(dictionary_getlong(attr, gensym("channels"), &channels) == MAX_ERR_NONE)
                 x->f_decoder->setNumberOfChannels(channels);
+            dictionary_getlong(attr, gensym("autoconnect"), &x->f_send_config);
         }
        
 		dsp_setup((t_pxobject *)x, x->f_decoder->getNumberOfHarmonics());
@@ -226,13 +229,21 @@ void hoa_decoder_free(t_hoa_decoder *x)
 t_max_err mode_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv)
 {
     argc[0] = 1;
-    argv[0] = new t_atom[argc[0]];
-    if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Regular)
-        atom_setsym(argv[0], gensym("ambisonic"));
-    else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Irregular)
-        atom_setsym(argv[0], gensym("irregular"));
+    argv[0] = (t_atom *)sysmem_newptr(argc[0] * sizeof(t_atom));
+    if(argv[0])
+    {
+        if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Regular)
+            atom_setsym(argv[0], gensym("ambisonic"));
+        else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Irregular)
+            atom_setsym(argv[0], gensym("irregular"));
+        else
+            atom_setsym(argv[0], gensym("binaural"));
+    }
     else
-        atom_setsym(argv[0], gensym("binaural"));
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
     
     return MAX_ERR_NONE;
 }
@@ -269,15 +280,25 @@ t_max_err mode_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
         }
         object_attr_setlong(x, gensym("channels"), x->f_decoder->getNumberOfChannels());
     }
-
+    send_configuration(x);
     return MAX_ERR_NONE;
 }
 
 t_max_err offset_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv)
 {
     argc[0] = 1;
-    argv[0] = new t_atom[argc[0]];
-    atom_setfloat(argv[0], x->f_decoder->getChannelsOffset() / HOA_2PI * 360.f);
+    argv[0] = (t_atom *)sysmem_newptr(argc[0] * sizeof(t_atom));
+    
+    if(argv[0])
+    {
+        atom_setfloat(argv[0], x->f_decoder->getChannelsOffset() / HOA_2PI * 360.f);
+        
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
     return MAX_ERR_NONE;
 }
 
@@ -292,15 +313,24 @@ t_max_err offset_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
             x->f_decoder->setChannelsOffset(offset);
         }
     }
-
+    send_configuration(x);
     return MAX_ERR_NONE;
 }
 
 t_max_err channel_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv)
 {
     argc[0] = 1;
-    argv[0] = new t_atom[argc[0]];
-    atom_setlong(argv[0], x->f_decoder->getNumberOfChannels());
+    argv[0] = (t_atom *)sysmem_newptr(argc[0] * sizeof(t_atom));
+    if(argv[0])
+    {
+        atom_setlong(argv[0], x->f_decoder->getNumberOfChannels());
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
+    }
+    
     return MAX_ERR_NONE;
 }
 
@@ -337,18 +367,25 @@ t_max_err channel_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
             object_attr_touch((t_object *)x, gensym("angles"));
         }
     }
-
+    send_configuration(x);
     return 0;
 }
 
 t_max_err angles_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv)
 {
     argc[0] = x->f_decoder->getNumberOfChannels();
-    argv[0] = new t_atom[argc[0]];
-    
-    for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
+    argv[0] = (t_atom *)sysmem_newptr(argc[0] * sizeof(t_atom));
+    if(argv[0])
     {
-        atom_setfloat(argv[0]+i, x->f_decoder->getChannelAzimuth(i) / HOA_2PI * 360.);
+        for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
+        {
+            atom_setfloat(argv[0]+i, x->f_decoder->getChannelAzimuth(i) / HOA_2PI * 360.);
+        }
+    }
+    else
+    {
+        argc[0] = 0;
+        argv[0] = NULL;
     }
     
     return MAX_ERR_NONE;
@@ -364,8 +401,8 @@ t_max_err angles_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
             if(atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
                 x->f_decoder->setChannelPosition(i, atom_getfloat(argv+i) / 360. * HOA_2PI);
         }
-        
     }
+    send_configuration(x);
     return 0;
 }
 
@@ -377,6 +414,9 @@ void send_configuration(t_hoa_decoder *x)
     t_object *line;
 	t_max_err err;
     
+    if(!x->f_send_config)
+        return;
+    
 	err = object_obex_lookup(x, gensym("#P"), (t_object **)&patcher);
 	if (err != MAX_ERR_NONE)
 		return;
@@ -386,8 +426,10 @@ void send_configuration(t_hoa_decoder *x)
 		return;
 	
     t_atom nchannels;
+    t_atom offset;
     t_atom *argv = new t_atom[x->f_decoder->getNumberOfChannels()];
     atom_setlong(&nchannels, x->f_decoder->getNumberOfChannels());
+    atom_setfloat(&offset, x->f_decoder->getChannelsOffset() / HOA_2PI * 360.);
     for(int i = 0; i < x->f_decoder->getNumberOfChannels(); i++)
         atom_setfloat(argv+i, x->f_decoder->getChannelAzimuth(i) / HOA_2PI * 360.);
     
@@ -397,10 +439,11 @@ void send_configuration(t_hoa_decoder *x)
         {
             object = jpatchline_get_box2(line);
             t_symbol* classname = object_classname(jbox_get_object(object));
-            if(classname == gensym("hoa.meter~") || classname == gensym("hoa.vector~"))
+            if(classname == gensym("hoa.2d.meter~") || classname == gensym("hoa.meter~") ||  classname == gensym("hoa.2d.vector~"))
             {
                 object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);
                 object_method_typed(jbox_get_object(object), gensym("angles"), x->f_decoder->getNumberOfChannels(), argv, NULL);
+                object_method_typed(jbox_get_object(object), gensym("offset"), 1, &offset, NULL);
             }
             else if(classname == gensym("hoa.gain~"))
                 object_method_typed(jbox_get_object(object), gensym("channels"), 1, &nchannels, NULL);

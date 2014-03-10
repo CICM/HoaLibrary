@@ -72,7 +72,36 @@
 						"showontab" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
+									"attr" : "offset",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-9",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 488.0, 505.0, 184.0, 19.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"attr" : "autoconnect",
+									"fontname" : "Arial",
+									"fontsize" : 11.595187,
+									"id" : "obj-4",
+									"maxclass" : "attrui",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 521.0, 392.0, 184.0, 19.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"attr" : "angles",
+									"displaymode" : 4,
 									"fontname" : "Arial",
 									"fontsize" : 11.595187,
 									"id" : "obj-6",
@@ -364,18 +393,15 @@
 							}
 , 							{
 								"box" : 								{
-									"angles" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ],
-									"channels" : 16,
+									"angles" : [ 45.0, 90.0, 135.0, 180.0, 225.0, 244.0, 270.0, 315.0 ],
 									"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 									"id" : "obj-19",
-									"loudspeakers" : 16,
 									"maxclass" : "hoa.meter~",
-									"numinlets" : 16,
+									"numinlets" : 8,
 									"numoutlets" : 2,
 									"outlettype" : [ "list", "list" ],
 									"patching_rect" : [ 164.967712, 359.967712, 227.064575, 227.064575 ],
-									"yls" : 16,
-									"zls" : [ 0.0, 22.5, 45.0, 67.5, 90.0, 112.5, 135.0, 157.5, 180.0, 202.5, 225.0, 247.5, 270.0, 292.5, 315.0, 337.5 ]
+									"zls" : [ 45.0, 90.0, 135.0, 180.0, 225.0, 244.0, 270.0, 315.0 ]
 								}
 
 							}
@@ -588,8 +614,8 @@
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 164.967712, 294.0, 221.5, 19.0 ],
 									"saved_object_attributes" : 									{
-										"angles" : [ 0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
-										"autoconnect" : 0,
+										"angles" : [ 244.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0 ],
+										"autoconnect" : 1,
 										"channels" : 8,
 										"mode" : "irregular"
 									}
@@ -1082,6 +1108,15 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-12", 14 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-4", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-31", 0 ],
 									"disabled" : 0,
 									"hidden" : 1,
@@ -1123,6 +1158,15 @@
 									"hidden" : 0,
 									"midpoints" : [ 48.5, 584.5, 174.209869, 584.5 ],
 									"source" : [ "obj-8", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-19", 7 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-9", 0 ]
 								}
 
 							}
