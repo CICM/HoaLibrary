@@ -48,9 +48,9 @@ namespace Hoa2D
 		m_exist = clip_minmax(deadOrAlive, (long)0, (long)1);
 	}
 	
-	void SourcesGroup::setDescription(std::string aDescription)
+	void SourcesGroup::setDescription(std::string description)
 	{
-		m_description = aDescription;
+		m_description = description;
 	}
 	
 	void SourcesGroup::setColor(double red, double green, double blue, double alpha)
@@ -61,9 +61,9 @@ namespace Hoa2D
 		m_color[3]	=  clip_minmax(alpha, 0., 1.);
 	}
 	
-	void SourcesGroup::setMaximumRadius(double aLimitValue)
+	void SourcesGroup::setMaximumRadius(double limitValue)
 	{
-		m_maximum_radius = aLimitValue;
+		m_maximum_radius = limitValue;
 	}
 	
 	void SourcesGroup::computeCentroid()
@@ -85,14 +85,14 @@ namespace Hoa2D
 		}
 	}
 	
-	void SourcesGroup::addSource(long aSourceIndex)
+	void SourcesGroup::addSource(long sourceIndex)
 	{
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			if(m_sources[i] == aSourceIndex)
+			if(m_sources[i] == sourceIndex)
 				return;
 		}
-		m_sources.push_back(aSourceIndex);
+		m_sources.push_back(sourceIndex);
 		
 		computeCentroid();
 	}
@@ -102,7 +102,7 @@ namespace Hoa2D
 		computeCentroid();
 	}
 	
-	void SourcesGroup::removeSource(long aSourceIndex)
+	void SourcesGroup::removeSource(long sourceIndex)
 	{
 		if(m_sources.size() > 0)
 		{
@@ -110,7 +110,7 @@ namespace Hoa2D
 			
 			for(int i = 0; i < size; i++)
 			{
-				if(m_sources[i] == aSourceIndex)
+				if(m_sources[i] == sourceIndex)
 				{
 					for(int j = i; j < size - 1; j++)
 					{
@@ -123,17 +123,17 @@ namespace Hoa2D
 		computeCentroid();
 	}
 	
-	void SourcesGroup::shiftPolar(double aRadius, double anAngle)
+	void SourcesGroup::shiftPolar(double radius, double azimuth)
 	{
-		shiftRadius(aRadius);
-		shiftAngle(anAngle);
+		shiftRadius(radius);
+		shiftAngle(azimuth);
 	}
 	
-	void SourcesGroup::shiftRadius(double aRadius)
+	void SourcesGroup::shiftRadius(double radius)
 	{
 		if(m_maximum_radius >= 0)
 		{
-			if(aRadius < 0.)
+			if(radius < 0.)
 			{
 				double refRadius = m_maximum_radius;
 				for(int i = 0; i < m_sources.size(); i++)
@@ -143,12 +143,12 @@ namespace Hoa2D
 						refRadius = m_source_manager->sourceGetRadius(m_sources[i]);
 					}
 				}
-				if(aRadius + refRadius < 0.)
+				if(radius + refRadius < 0.)
 				{
-					aRadius = - refRadius;
+					radius = - refRadius;
 				}
 			}
-			else if(aRadius >= 0.)
+			else if(radius >= 0.)
 			{
 				double refRadius = -m_maximum_radius;
 				for(int i = 0; i < m_sources.size(); i++)
@@ -158,31 +158,31 @@ namespace Hoa2D
 						refRadius = m_source_manager->sourceGetRadius(m_sources[i]);
 					}
 				}
-				if(aRadius + refRadius > m_maximum_radius)
+				if(radius + refRadius > m_maximum_radius)
 				{
-					aRadius = m_maximum_radius - refRadius;
+					radius = m_maximum_radius - refRadius;
 				}
 			}
 		}
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			m_source_manager->sourceSetRadius(m_sources[i], aRadius + m_source_manager->sourceGetRadius(m_sources[i]));
+			m_source_manager->sourceSetRadius(m_sources[i], radius + m_source_manager->sourceGetRadius(m_sources[i]));
 		}
 	}
 	
-	void SourcesGroup::shiftAngle(double anAngle)
+	void SourcesGroup::shiftAngle(double azimuth)
 	{
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			m_source_manager->sourceSetAngle(m_sources[i], anAngle + m_source_manager->sourceGetAngle(m_sources[i]));
+			m_source_manager->sourceSetAngle(m_sources[i], azimuth + m_source_manager->sourceGetAzimuth(m_sources[i]));
 		}
 	}
 	
-	void SourcesGroup::shiftAbscissa(double anAbscissa)
+	void SourcesGroup::shiftAbscissa(double abscissa)
 	{
 		if(m_maximum_radius >= 0)
 		{
-			if(anAbscissa < 0.)
+			if(abscissa < 0.)
 			{
 				double refAbcsissa = -m_maximum_radius * 2.;
 				for(int i = 0; i < m_sources.size(); i++)
@@ -193,12 +193,12 @@ namespace Hoa2D
 						refAbcsissa = circleAbscissa - m_source_manager->sourceGetAbscissa(m_sources[i]);
 					}
 				}
-				if(anAbscissa < refAbcsissa)
+				if(abscissa < refAbcsissa)
 				{
-					anAbscissa = refAbcsissa;
+					abscissa = refAbcsissa;
 				}
 			}
-			else if(anAbscissa >= 0.)
+			else if(abscissa >= 0.)
 			{
 				double refAbcsissa = m_maximum_radius * 2.;
 				for(int i = 0; i < m_sources.size(); i++)
@@ -209,24 +209,24 @@ namespace Hoa2D
 						refAbcsissa = circleAbscissa - m_source_manager->sourceGetAbscissa(m_sources[i]);
 					}
 				}
-				if(anAbscissa > refAbcsissa)
+				if(abscissa > refAbcsissa)
 				{
-					anAbscissa = refAbcsissa;
+					abscissa = refAbcsissa;
 				}
 			}
 		}
 		
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			m_source_manager->sourceSetAbscissa(m_sources[i], anAbscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
+			m_source_manager->sourceSetAbscissa(m_sources[i], abscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
 		}
 	}
 	
-	void SourcesGroup::shiftOrdinate(double anOrdinate)
+	void SourcesGroup::shiftOrdinate(double ordinate)
 	{
 		if(m_maximum_radius >= 0)
 		{
-			if(anOrdinate < 0.)
+			if(ordinate < 0.)
 			{
 				double refOrdinate = -m_maximum_radius * 2.;
 				for(int i = 0; i < m_sources.size(); i++)
@@ -237,12 +237,12 @@ namespace Hoa2D
 						refOrdinate = circleOrdinate - m_source_manager->sourceGetOrdinate(m_sources[i]);
 					}
 				}
-				if(anOrdinate < refOrdinate)
+				if(ordinate < refOrdinate)
 				{
-					anOrdinate = refOrdinate;
+					ordinate = refOrdinate;
 				}
 			}
-			else if(anOrdinate >= 0.)
+			else if(ordinate >= 0.)
 			{
 				double refOrdinate = m_maximum_radius * 2.;
 				for(int i = 0; i < m_sources.size(); i++)
@@ -253,24 +253,24 @@ namespace Hoa2D
 						refOrdinate = circleOrdinate - m_source_manager->sourceGetOrdinate(m_sources[i]);
 					}
 				}
-				if(anOrdinate > refOrdinate)
+				if(ordinate > refOrdinate)
 				{
-					anOrdinate = refOrdinate;
+					ordinate = refOrdinate;
 				}
 			}
 		}
 		
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			m_source_manager->sourceSetOrdinate(m_sources[i], anOrdinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
+			m_source_manager->sourceSetOrdinate(m_sources[i], ordinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
 		}
 	}
 	
-	void SourcesGroup::shiftCartesian(double anAbscissa, double anOrdinate)
+	void SourcesGroup::shiftCartesian(double abscissa, double ordinate)
 	{
 		if(m_maximum_radius >= 0)
 		{
-			if(anAbscissa < 0. &&  anOrdinate < 0.)
+			if(abscissa < 0. &&  ordinate < 0.)
 			{
 				double refAbcsissa = -m_maximum_radius * 2.;
 				double refOrdinate = -m_maximum_radius * 2.;
@@ -287,16 +287,16 @@ namespace Hoa2D
 						refOrdinate = circleOrdinate - m_source_manager->sourceGetOrdinate(m_sources[i]);
 					}
 				}
-				if(anAbscissa < refAbcsissa)
+				if(abscissa < refAbcsissa)
 				{
-					anAbscissa = refAbcsissa;
+					abscissa = refAbcsissa;
 				}
-				if(anOrdinate < refOrdinate)
+				if(ordinate < refOrdinate)
 				{
-					anOrdinate = refOrdinate;
+					ordinate = refOrdinate;
 				}
 			}
-			else if(anAbscissa >= 0.)
+			else if(abscissa >= 0.)
 			{
 				double refAbcsissa = m_maximum_radius * 2.;
 				for(int i = 0; i < m_sources.size(); i++)
@@ -307,80 +307,80 @@ namespace Hoa2D
 						refAbcsissa = circleAbscissa - m_source_manager->sourceGetAbscissa(m_sources[i]);
 					}
 				}
-				if(anAbscissa > refAbcsissa)
+				if(abscissa > refAbcsissa)
 				{
-					anAbscissa = refAbcsissa;
+					abscissa = refAbcsissa;
 				}
 			}
 		}
 		
 		for(int i = 0; i < m_sources.size(); i++)
 		{
-			m_source_manager->sourceSetAbscissa(m_sources[i], anAbscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
-			m_source_manager->sourceSetOrdinate(m_sources[i], anOrdinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
+			m_source_manager->sourceSetAbscissa(m_sources[i], abscissa + m_source_manager->sourceGetAbscissa(m_sources[i]));
+			m_source_manager->sourceSetOrdinate(m_sources[i], ordinate + m_source_manager->sourceGetOrdinate(m_sources[i]));
 		}
 	}
 	
-	void SourcesGroup::setCoordinatesPolar(double aRadius, double anAngle)
+	void SourcesGroup::setCoordinatesPolar(double radius, double azimuth)
 	{
-		setCoordinatesCartesian(abscissa(aRadius, anAngle), ordinate(aRadius, anAngle));
+		setCoordinatesCartesian(abscissa(radius, azimuth), ordinate(radius, azimuth));
 	}
 	
-	void SourcesGroup::setRadius(double aRadius)
+	void SourcesGroup::setRadius(double radius)
 	{
-		setCoordinatesCartesian(abscissa(aRadius, getAzimuth()), ordinate(aRadius, getAzimuth()));
+		setCoordinatesCartesian(abscissa(radius, getAzimuth()), ordinate(radius, getAzimuth()));
 	}
 	
-	void SourcesGroup::setAngle(double anAngle)
+	void SourcesGroup::seAzimuth(double azimuth)
 	{
-		setCoordinatesCartesian(abscissa(getRadius(), anAngle), ordinate(getRadius(), anAngle));
+		setCoordinatesCartesian(abscissa(getRadius(), azimuth), ordinate(getRadius(), azimuth));
 	}
 	
-	void SourcesGroup::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
+	void SourcesGroup::setCoordinatesCartesian(double abscissa, double ordinate)
 	{
-		anAbscissa = anAbscissa - getAbscissa();
-		anOrdinate = anOrdinate - getOrdinate();
-		shiftAbscissa(anAbscissa);
-		shiftOrdinate(anOrdinate);
+		abscissa = abscissa - getAbscissa();
+		ordinate = ordinate - getOrdinate();
+		shiftAbscissa(abscissa);
+		shiftOrdinate(ordinate);
 		computeCentroid();
 	}
 	
-	void SourcesGroup::setAbscissa(double anAbscissa)
+	void SourcesGroup::setAbscissa(double abscissa)
 	{
-		double aAbscissaOffset = anAbscissa - getAbscissa();
+		double aAbscissaOffset = abscissa - getAbscissa();
 		shiftAbscissa(aAbscissaOffset);
 		computeCentroid();
 	}
 	
-	void SourcesGroup::setOrdinate(double anOrdinate)
+	void SourcesGroup::setOrdinate(double ordinate)
 	{
-		double aOrdinateOffset = anOrdinate - getOrdinate();
+		double aOrdinateOffset = ordinate - getOrdinate();
 		shiftOrdinate(aOrdinateOffset);
 		computeCentroid();
 	}
 	
-	void SourcesGroup::setRelativeCoordinatesPolar(double aRadius, double anAngle)
+	void SourcesGroup::setRelativeCoordinatesPolar(double radius, double azimuth)
 	{
-		setRelativeRadius(aRadius);
-		setRelativeAngle(anAngle);
+		setRelativeRadius(radius);
+		setRelativeAngle(azimuth);
 	}
 	
-	void SourcesGroup::setRelativeRadius(double aRadius)
+	void SourcesGroup::setRelativeRadius(double radius)
 	{
-		double aRadiusOffset = clip_min(aRadius, 0.) - getRadius();
+		double aRadiusOffset = clip_min(radius, 0.) - getRadius();
 		shiftRadius(aRadiusOffset);
 		computeCentroid();
 	}
 	
-	void SourcesGroup::setRelativeAngle(double anAngle)
+	void SourcesGroup::setRelativeAngle(double azimuth)
 	{
-		anAngle +=  HOA_PI2;
-		while (anAngle > HOA_2PI)
-			anAngle -= HOA_2PI;
-		while (anAngle < 0.)
-			anAngle += HOA_2PI;
+		azimuth +=  HOA_PI2;
+		while (azimuth > HOA_2PI)
+			azimuth -= HOA_2PI;
+		while (azimuth < 0.)
+			azimuth += HOA_2PI;
 		
-		double aAngleOffset = anAngle  - getAzimuth();
+		double aAngleOffset = azimuth  - getAzimuth();
 		shiftAngle(aAngleOffset);
 		computeCentroid();
 	}
@@ -416,10 +416,10 @@ namespace Hoa2D
 	}
 	
 	
-	long SourcesGroup::getSourceIndex(long anIndex)
+	long SourcesGroup::getSourceIndex(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex];
+		if(index < m_sources.size() && index >= 0)
+			return m_sources[index];
 		else
 			return -1;
 	}

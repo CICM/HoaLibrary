@@ -130,7 +130,7 @@
 							}
 , 							{
 								"box" : 								{
-									"args" : [ "@obj-name", "hoa.encoder~", "@obj-desc", "An", "ambisonic", "encoder." ],
+									"args" : [ "@obj-name", "hoa.2d.encoder~", "@obj-desc", "An", "ambisonic", "encoder." ],
 									"id" : "obj-56",
 									"maxclass" : "bpatcher",
 									"name" : "hoa.helpheader.maxpat",
@@ -270,7 +270,7 @@
 										"autoconnect" : 1,
 										"channels" : 16,
 										"loudspeakers" : 16,
-										"mode" : "ambisonics",
+										"mode" : "ambisonic",
 										"pinnaesize" : "small",
 										"restitution" : "panning",
 										"ychannels" : 16,

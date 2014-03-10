@@ -8,10 +8,10 @@
 
 namespace Hoa2D
 {
-	SourcesManager::SourcesManager(double aMaximumLimitValue, long deadOrAlive)
+	SourcesManager::SourcesManager(double maximumLimitValue, long deadOrAlive)
 	{
 		setExistence(deadOrAlive);
-		setMaximumRadius(aMaximumLimitValue);
+		setMaximumRadius(maximumLimitValue);
 		m_zoom = 1.;
 	}
 	
@@ -39,9 +39,9 @@ namespace Hoa2D
 		return m_existence;
 	}
 	
-	void SourcesManager::setMaximumRadius(double aLimitValue)
+	void SourcesManager::setMaximumRadius(double limitValue)
 	{
-		m_maximum_radius = aLimitValue;
+		m_maximum_radius = limitValue;
 		for(int i = 0; i < m_groups.size(); i++)
 			m_groups[i]->setMaximumRadius(m_maximum_radius);
 	}
@@ -103,236 +103,188 @@ namespace Hoa2D
 	/*********************************  SOURCES ************************************/
 	/*******************************************************************************/
 	
-	void SourcesManager::sourceRemove(long anIndex)
+	void SourcesManager::sourceRemove(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
+		if(index < m_sources.size() && index >= 0)
 		{
-			int numberOfGroups = m_sources[anIndex]->getNumberOfGroups();
+			int numberOfGroups = m_sources[index]->getNumberOfGroups();
 			int indexOfGroup = -1;
 			for(int i = 0; i < numberOfGroups; i++)
 			{
-				indexOfGroup = m_sources[anIndex]->getGroupIndex(i);
+				indexOfGroup = m_sources[index]->getGroupIndex(i);
 				
 				if(indexOfGroup >= 0 && indexOfGroup <= getMaximumIndexOfGroup())
 				{
 					if(groupGetExistence(indexOfGroup))
-						m_groups[indexOfGroup]->removeSource(anIndex);
+						m_groups[indexOfGroup]->removeSource(index);
 				}
 			}
-			m_sources[anIndex]->setExistence(0);
-			m_sources[anIndex]->setDescription("");
-			m_sources[anIndex]->setColor(0.2, 0.2, 0.2, 1.);
-			m_sources[anIndex]->setCoordinatesCartesian(0., 1.);
-			m_sources[anIndex]->setMute(0);
+			m_sources[index]->setExistence(0);
+			m_sources[index]->setDescription("");
+			m_sources[index]->setColor(0.2, 0.2, 0.2, 1.);
+			m_sources[index]->setCoordinatesCartesian(0., 1.);
+			m_sources[index]->setMute(0);
 		}
 	}
 	
-	void SourcesManager::sourceNewPolar(double aRadius, double anAngle)
+	void SourcesManager::sourceNewPolar(double radius, double azimuth)
 	{
 		for (int i = 0; i < getMaximumIndexOfSource()+2; i++)
 		{
 			if(!sourceGetExistence(i))
 			{
-				sourceSetPolar(i, aRadius, anAngle);
+				sourceSetPolar(i, radius, azimuth);
 				return;
 			}
 		}
 	}
 	
-	void SourcesManager::sourceNewRadius(double aRadius)
+	void SourcesManager::sourceNewCartesian(double abscissa, double ordinate)
 	{
 		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
 		{
 			if(!sourceGetExistence(i))
 			{
-				sourceSetRadius(i, aRadius);
+				sourceSetCartesian(i, abscissa, ordinate);
 				return;
 			}
 		}
 	}
 	
-	void SourcesManager::sourceNewAngle(double anAngle)
+	void SourcesManager::sourceSetPolar(long index, double radius, double azimuth)
 	{
-		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
-		{
-			if(!sourceGetExistence(i))
-			{
-				sourceSetAngle(i, anAngle);
-				return;
-			}
-		}
+		sourceSetRadius(index, radius);
+		sourceSetAngle(index, azimuth);
 	}
 	
-	void SourcesManager::sourceNewCartesian(double anAbscissa, double anOrdinate)
+	void SourcesManager::sourceSetRadius(long index, double radius)
 	{
-		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
+		if(index >= m_sources.size())
 		{
-			if(!sourceGetExistence(i))
-			{
-				sourceSetCartesian(i, anAbscissa, anOrdinate);
-				return;
-			}
-		}
-	}
-	
-	void SourcesManager::sourceNewAbscissa(double anAbscissa)
-	{
-		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
-		{
-			if(!sourceGetExistence(i))
-			{
-				sourceSetAbscissa(i, anAbscissa);
-				return;
-			}
-		}
-	}
-	
-	void SourcesManager::sourceNewOrdinate(double anOrdinate)
-	{
-		for(int i = 0; i < getMaximumIndexOfSource()+2; i++)
-		{
-			if(!sourceGetExistence(i))
-			{
-				sourceSetOrdinate(i, anOrdinate);
-				return;
-			}
-		}
-	}
-	
-	void SourcesManager::sourceSetPolar(long anIndex, double aRadius, double anAngle)
-	{
-		sourceSetRadius(anIndex, aRadius);
-		sourceSetAngle(anIndex, anAngle);
-	}
-	
-	void SourcesManager::sourceSetRadius(long anIndex, double aRadius)
-	{
-		if(anIndex >= m_sources.size())
-		{
-			for(int i = m_sources.size(); i < anIndex; i++)
+			for(int i = m_sources.size(); i < index; i++)
 			{
 				m_sources.push_back(new Source(0));
 				m_sources[i]->setMaximumRadius(m_maximum_radius);
 				
 			}
 			m_sources.push_back(new Source(1));
-			m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
-			m_sources[anIndex]->setRadius(aRadius);
+			m_sources[index]->setMaximumRadius(m_maximum_radius);
+			m_sources[index]->setRadius(radius);
 		}
-		else if(anIndex >= 0)
+		else if(index >= 0)
 		{
-			m_sources[anIndex]->setRadius(aRadius);
-			if(!m_sources[anIndex]->getExistence())
-				m_sources[anIndex]->setExistence(1);
+			m_sources[index]->setRadius(radius);
+			if(!m_sources[index]->getExistence())
+				m_sources[index]->setExistence(1);
 		}
-		for(int i = 0; i < m_sources[anIndex]->getNumberOfGroups(); i++)
+		for(int i = 0; i < m_sources[index]->getNumberOfGroups(); i++)
 		{
-			int groupIndex = m_sources[anIndex]->getGroupIndex(i);
+			int groupIndex = m_sources[index]->getGroupIndex(i);
 			if(groupIndex >= 0 && groupIndex < m_groups.size())
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
 	
-	void SourcesManager::sourceSetAngle(long anIndex, double anAngle)
+	void SourcesManager::sourceSetAngle(long index, double azimuth)
 	{
-		if(anIndex >= m_sources.size())
+		if(index >= m_sources.size())
 		{
-			for(int i = m_sources.size(); i < anIndex; i++)
+			for(int i = m_sources.size(); i < index; i++)
 			{
 				m_sources.push_back(new Source(0));
 				m_sources[i]->setMaximumRadius(m_maximum_radius);
 			}
 			m_sources.push_back(new Source(1));
-			m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
-			m_sources[anIndex]->setAngle(anAngle);
+			m_sources[index]->setMaximumRadius(m_maximum_radius);
+			m_sources[index]->seAzimuth(azimuth);
 		}
-		else if(anIndex >= 0)
+		else if(index >= 0)
 		{
-			m_sources[anIndex]->setAngle(anAngle);
-			if(!m_sources[anIndex]->getExistence())
-				m_sources[anIndex]->setExistence(1);
+			m_sources[index]->seAzimuth(azimuth);
+			if(!m_sources[index]->getExistence())
+				m_sources[index]->setExistence(1);
 		}
-		for(int i = 0; i < m_sources[anIndex]->getNumberOfGroups(); i++)
+		for(int i = 0; i < m_sources[index]->getNumberOfGroups(); i++)
 		{
-			int groupIndex = m_sources[anIndex]->getGroupIndex(i);
+			int groupIndex = m_sources[index]->getGroupIndex(i);
 			if(groupIndex >= 0 && groupIndex < m_groups.size())
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
 	
-	void SourcesManager::sourceSetCartesian(long anIndex, double anAbscissa, double anOrdinate)
+	void SourcesManager::sourceSetCartesian(long index, double abscissa, double ordinate)
 	{
-		sourceSetAbscissa(anIndex, anAbscissa);
-		sourceSetOrdinate(anIndex, anOrdinate);
+		sourceSetAbscissa(index, abscissa);
+		sourceSetOrdinate(index, ordinate);
 	}
 	
-	void SourcesManager::sourceSetAbscissa(long anIndex, double anAbscissa)
+	void SourcesManager::sourceSetAbscissa(long index, double abscissa)
 	{
-		if(anIndex >= m_sources.size())
+		if(index >= m_sources.size())
 		{
-			for(int i = m_sources.size(); i < anIndex; i++)
+			for(int i = m_sources.size(); i < index; i++)
 			{
 				m_sources.push_back(new Source(0));
 				m_sources[i]->setMaximumRadius(m_maximum_radius);
 			}
 			m_sources.push_back(new Source(1));
-			m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
-			m_sources[anIndex]->setAbscissa(anAbscissa);
+			m_sources[index]->setMaximumRadius(m_maximum_radius);
+			m_sources[index]->setAbscissa(abscissa);
 		}
-		else if(anIndex >= 0)
+		else if(index >= 0)
 		{
-			m_sources[anIndex]->setAbscissa(anAbscissa);
-			if(!m_sources[anIndex]->getExistence())
-				m_sources[anIndex]->setExistence(1);
+			m_sources[index]->setAbscissa(abscissa);
+			if(!m_sources[index]->getExistence())
+				m_sources[index]->setExistence(1);
 		}
-		for(int i = 0; i < m_sources[anIndex]->getNumberOfGroups(); i++)
+		for(int i = 0; i < m_sources[index]->getNumberOfGroups(); i++)
 		{
-			int groupIndex = m_sources[anIndex]->getGroupIndex(i);
+			int groupIndex = m_sources[index]->getGroupIndex(i);
 			if(groupIndex >= 0 && groupIndex < m_groups.size())
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
 	
-	void SourcesManager::sourceSetOrdinate(long anIndex, double anOrdinate)
+	void SourcesManager::sourceSetOrdinate(long index, double ordinate)
 	{
-		if(anIndex >= m_sources.size())
+		if(index >= m_sources.size())
 		{
-			for(int i = m_sources.size(); i < anIndex; i++)
+			for(int i = m_sources.size(); i < index; i++)
 			{
 				m_sources.push_back(new Source(0));
 				m_sources[i]->setMaximumRadius(m_maximum_radius);
 			}
 			m_sources.push_back(new Source(1));
-			m_sources[anIndex]->setMaximumRadius(m_maximum_radius);
-			m_sources[anIndex]->setOrdinate(anOrdinate);
+			m_sources[index]->setMaximumRadius(m_maximum_radius);
+			m_sources[index]->setOrdinate(ordinate);
 		}
-		else if(anIndex >= 0)
+		else if(index >= 0)
 		{
-			m_sources[anIndex]->setOrdinate(anOrdinate);
-			if(!m_sources[anIndex]->getExistence())
-				m_sources[anIndex]->setExistence(1);
+			m_sources[index]->setOrdinate(ordinate);
+			if(!m_sources[index]->getExistence())
+				m_sources[index]->setExistence(1);
 		}
-		for(int i = 0; i < m_sources[anIndex]->getNumberOfGroups(); i++)
+		for(int i = 0; i < m_sources[index]->getNumberOfGroups(); i++)
 		{
-			int groupIndex = m_sources[anIndex]->getGroupIndex(i);
+			int groupIndex = m_sources[index]->getGroupIndex(i);
 			if(groupIndex >= 0 && groupIndex < m_groups.size())
 				m_groups[groupIndex]->sourceHasMoved();
 		}
 	}
 	
-	void SourcesManager::sourceSetColor(long anIndex, double red, double green, double blue, double alpha)
+	void SourcesManager::sourceSetColor(long index, double red, double green, double blue, double alpha)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
+		if(index < m_sources.size() && index >= 0)
 		{
-			m_sources[anIndex]->setColor(red, green, blue, alpha);
+			m_sources[index]->setColor(red, green, blue, alpha);
 		}
 	}
 	
-	void SourcesManager::sourceSetDescription(long anIndex, std::string aDescription)
+	void SourcesManager::sourceSetDescription(long index, std::string description)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
+		if(index < m_sources.size() && index >= 0)
 		{
-			m_sources[anIndex]->setDescription(aDescription);
+			m_sources[index]->setDescription(description);
 		}
 	}
 	void SourcesManager::checkMute()
@@ -354,16 +306,16 @@ namespace Hoa2D
 		}
 	}
 	
-	void SourcesManager::sourceSetMute(long anIndex, long aValue)
+	void SourcesManager::sourceSetMute(long index, long aValue)
 	{
 		aValue = clip_minmax(aValue, (long)0, (long)1);
 		
-		if(anIndex < m_sources.size() && anIndex >= 0)
+		if(index < m_sources.size() && index >= 0)
 		{
-			m_sources[anIndex]->setMute(aValue);
-			for(int i = 0; i < m_sources[anIndex]->getNumberOfGroups(); i++)
+			m_sources[index]->setMute(aValue);
+			for(int i = 0; i < m_sources[index]->getNumberOfGroups(); i++)
 			{
-				int groupIndex = m_sources[anIndex]->getGroupIndex(i);
+				int groupIndex = m_sources[index]->getGroupIndex(i);
 				if(groupIndex >= 0 && groupIndex < m_groups.size())
 				{
 					m_groups[groupIndex]->setMute(0);
@@ -375,86 +327,86 @@ namespace Hoa2D
 	
 	/******************************************************************************/
 	
-	double SourcesManager::sourceGetRadius(long anIndex)
+	double SourcesManager::sourceGetRadius(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex]->getRadius();
+		if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getRadius();
 		
 		return NULL;
 	}
 	
-	double SourcesManager::sourceGetAngle(long anIndex)
+	double SourcesManager::sourceGetAzimuth(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex]->getAzimuth();
+		if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getAzimuth();
 		
 		return NULL;
 	}
 	
-	double SourcesManager::sourceGetAbscissa(long anIndex)
+	double SourcesManager::sourceGetAbscissa(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex]->getAbscissa();
+		if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getAbscissa();
 		
 		return NULL;
 	}
 	
-	double SourcesManager::sourceGetOrdinate(long anIndex)
+	double SourcesManager::sourceGetOrdinate(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex]->getOrdinate();
+		if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getOrdinate();
 		
 		return NULL;
 	}
 	
-	double* SourcesManager::sourceGetColor(long anIndex)
+	double* SourcesManager::sourceGetColor(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex]->getColor();
+		if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getColor();
 		
 		return NULL;
 	}
 	
-	std::string SourcesManager::sourceGetDescription(long anIndex)
+	std::string SourcesManager::sourceGetDescription(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
-			return m_sources[anIndex]->getDescription();
+		if(index < m_sources.size() && index >= 0)
+			return m_sources[index]->getDescription();
 		
 		return NULL;
 	}
 	
-	long SourcesManager::sourceGetExistence(long anIndex)
+	long SourcesManager::sourceGetExistence(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
+		if(index < m_sources.size() && index >= 0)
 		{
-			return m_sources[anIndex]->getExistence();
+			return m_sources[index]->getExistence();
 		}
 		return 0;
 	}
 	
-	long SourcesManager::sourceGetNumberOfGroups(long anIndex)
+	long SourcesManager::sourceGetNumberOfGroups(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
+		if(index < m_sources.size() && index >= 0)
 		{
-			return m_sources[anIndex]->getNumberOfGroups();
+			return m_sources[index]->getNumberOfGroups();
 		}
 		return 0;
 	}
 	
-	long SourcesManager::sourceGetGroupIndex(long aSourceIndex, long aGroupIndex)
+	long SourcesManager::sourceGetGroupIndex(long sourceIndex, long groupeIndex)
 	{
-		if(aSourceIndex < m_sources.size() && aSourceIndex >= 0)
+		if(sourceIndex < m_sources.size() && sourceIndex >= 0)
 		{
-			return m_sources[aSourceIndex]->getGroupIndex(aGroupIndex);
+			return m_sources[sourceIndex]->getGroupIndex(groupeIndex);
 		}
 		return 0;
 	}
 	
-	long SourcesManager::sourceGetMute(long anIndex)
+	long SourcesManager::sourceGetMute(long index)
 	{
-		if(anIndex < m_sources.size() && anIndex >= 0)
+		if(index < m_sources.size() && index >= 0)
 		{
-			return m_sources[anIndex]->getMute();
+			return m_sources[index]->getMute();
 		}
 		return 0;
 	}
@@ -463,177 +415,177 @@ namespace Hoa2D
 	/**********************************  GROUP  ************************************/
 	/*******************************************************************************/
 	
-	void SourcesManager::groupSetSource(long aGroupIndex, long aSourceIndex)
+	void SourcesManager::groupSetSource(long groupeIndex, long sourceIndex)
 	{
-		if(aGroupIndex >= m_groups.size())
+		if(groupeIndex >= m_groups.size())
 		{
-			for(int i = m_groups.size(); i < aGroupIndex; i++)
+			for(int i = m_groups.size(); i < groupeIndex; i++)
 			{
 				m_groups.push_back(new SourcesGroup(this, 0));
 				m_groups[i]->setMaximumRadius(m_maximum_radius);
 				
 			}
 			m_groups.push_back(new SourcesGroup(this, 0));
-			m_groups[aGroupIndex]->setMaximumRadius(m_maximum_radius);
-			if(m_sources.size() > aSourceIndex && m_sources[aSourceIndex]->getExistence())
+			m_groups[groupeIndex]->setMaximumRadius(m_maximum_radius);
+			if(m_sources.size() > sourceIndex && m_sources[sourceIndex]->getExistence())
 			{
-				m_groups[aGroupIndex]->setExistence(1);
-				m_groups[aGroupIndex]->addSource(aSourceIndex);
-				m_sources[aSourceIndex]->setGroup(aGroupIndex);
+				m_groups[groupeIndex]->setExistence(1);
+				m_groups[groupeIndex]->addSource(sourceIndex);
+				m_sources[sourceIndex]->setGroup(groupeIndex);
 				checkMute();
 			}
 		}
-		else if(aGroupIndex >= 0)
+		else if(groupeIndex >= 0)
 		{
-			if(m_sources.size() > aSourceIndex && m_sources[aSourceIndex]->getExistence())
+			if(m_sources.size() > sourceIndex && m_sources[sourceIndex]->getExistence())
 			{
-				m_groups[aGroupIndex]->addSource(aSourceIndex);
-				m_sources[aSourceIndex]->setGroup(aGroupIndex);
-				m_groups[aGroupIndex]->setExistence(1);
+				m_groups[groupeIndex]->addSource(sourceIndex);
+				m_sources[sourceIndex]->setGroup(groupeIndex);
+				m_groups[groupeIndex]->setExistence(1);
 				checkMute();
 			}
 		}
 	}
 	
-	void SourcesManager::groupRemoveSource(long aGroupIndex, long aSourceIndex)
+	void SourcesManager::groupRemoveSource(long groupeIndex, long sourceIndex)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			if(m_sources.size() > aSourceIndex)
+			if(m_sources.size() > sourceIndex)
 			{
-				m_groups[aGroupIndex]->removeSource(aSourceIndex);
-				m_sources[aSourceIndex]->removeGroup(aGroupIndex);
+				m_groups[groupeIndex]->removeSource(sourceIndex);
+				m_sources[sourceIndex]->removeGroup(groupeIndex);
 			}
 		}
 	}
 	
-	void SourcesManager::groupSetPolar(long aGroupIndex, double aRadius, double anAngle)
+	void SourcesManager::groupSetPolar(long groupeIndex, double radius, double azimuth)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setCoordinatesPolar(aRadius, anAngle);
+			m_groups[groupeIndex]->setCoordinatesPolar(radius, azimuth);
 		}
 	}
 	
-	void SourcesManager::groupSetRadius(long aGroupIndex, double aRadius)
+	void SourcesManager::groupSetRadius(long groupeIndex, double radius)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setRadius(aRadius);
+			m_groups[groupeIndex]->setRadius(radius);
 		}
 	}
 	
-	void SourcesManager::groupSetAngle(long aGroupIndex, double anAngle)
+	void SourcesManager::groupSetAngle(long groupeIndex, double azimuth)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setAngle(anAngle);
+			m_groups[groupeIndex]->seAzimuth(azimuth);
 		}
 	}
 	
-	void SourcesManager::groupSetCartesian(long aGroupIndex, double anAbscissa, double anOrdinate)
+	void SourcesManager::groupSetCartesian(long groupeIndex, double abscissa, double ordinate)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setCoordinatesCartesian(anAbscissa, anOrdinate);
+			m_groups[groupeIndex]->setCoordinatesCartesian(abscissa, ordinate);
 		}
 	}
 	
-	void SourcesManager::groupSetAbscissa(long aGroupIndex, double anAbscissa)
+	void SourcesManager::groupSetAbscissa(long groupeIndex, double abscissa)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setAbscissa(anAbscissa);
+			m_groups[groupeIndex]->setAbscissa(abscissa);
 		}
 	}
 	
-	void SourcesManager::groupSetOrdinate(long aGroupIndex, double anOrdinate)
+	void SourcesManager::groupSetOrdinate(long groupeIndex, double ordinate)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setOrdinate(anOrdinate);
+			m_groups[groupeIndex]->setOrdinate(ordinate);
 		}
 	}
 	
-	void SourcesManager::groupSetRelativePolar(long aGroupIndex, double aRadius, double anAngle)
+	void SourcesManager::groupSetRelativePolar(long groupeIndex, double radius, double azimuth)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setRelativeCoordinatesPolar(aRadius, anAngle);
+			m_groups[groupeIndex]->setRelativeCoordinatesPolar(radius, azimuth);
 		}
 	}
 	
-	void SourcesManager::groupSetRelativeRadius(long aGroupIndex, double aRadius)
+	void SourcesManager::groupSetRelativeRadius(long groupeIndex, double radius)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setRelativeRadius(aRadius);
+			m_groups[groupeIndex]->setRelativeRadius(radius);
 		}
 	}
 	
-	void SourcesManager::groupSetRelativeAngle(long aGroupIndex, double anAngle)
+	void SourcesManager::groupSetRelativeAngle(long groupeIndex, double azimuth)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setRelativeAngle(anAngle);
+			m_groups[groupeIndex]->setRelativeAngle(azimuth);
 		}
 	}
 	
-	void SourcesManager::groupSetColor(long aGroupIndex, double red, double green, double blue, double alpha)
+	void SourcesManager::groupSetColor(long groupeIndex, double red, double green, double blue, double alpha)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setColor(red, green, blue, alpha);
+			m_groups[groupeIndex]->setColor(red, green, blue, alpha);
 		}
 	}
 	
-	void SourcesManager::groupSetDescription(long aGroupIndex, std::string aDescription)
+	void SourcesManager::groupSetDescription(long groupeIndex, std::string description)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setDescription(aDescription);
+			m_groups[groupeIndex]->setDescription(description);
 		}
 	}
 	
-	void SourcesManager::groupRemove(long aGroupIndex)
+	void SourcesManager::groupRemove(long groupeIndex)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
 			for(int i = 0; i < m_sources.size(); i++)
 			{
-				m_sources[i]->removeGroup(aGroupIndex);
+				m_sources[i]->removeGroup(groupeIndex);
 				
 			}
 			for(int i = 0; i < m_sources.size(); i++)
 			{
-				m_groups[aGroupIndex]->removeSource(i);
+				m_groups[groupeIndex]->removeSource(i);
 			}
-			m_groups[aGroupIndex]->setColor(0.2, 0.2, 0.2, 1.);
-			m_groups[aGroupIndex]->setDescription("");
-			m_groups[aGroupIndex]->setExistence(0);
-			m_groups[aGroupIndex]->setMute(0);
+			m_groups[groupeIndex]->setColor(0.2, 0.2, 0.2, 1.);
+			m_groups[groupeIndex]->setDescription("");
+			m_groups[groupeIndex]->setExistence(0);
+			m_groups[groupeIndex]->setMute(0);
 		}
 	}
 	
-	void SourcesManager::groupRemoveWithSources(long aGroupIndex)
+	void SourcesManager::groupRemoveWithSources(long groupeIndex)
 	{
 		for(int i = 0; i < getMaximumIndexOfSource(); i++)
 		{
-			if (m_sources[i]->isOwnedByGroup(aGroupIndex)) {
+			if (m_sources[i]->isOwnedByGroup(groupeIndex)) {
 				sourceRemove(i);
 			}
 		}
-		groupRemove(aGroupIndex);
+		groupRemove(groupeIndex);
 	}
 	
-	void SourcesManager::groupSetMute(long aGroupIndex, long aValue)
+	void SourcesManager::groupSetMute(long groupeIndex, long aValue)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			m_groups[aGroupIndex]->setMute(aValue);
-			for(int i = 0; i < m_groups[aGroupIndex]->getNumberOfSources(); i++)
+			m_groups[groupeIndex]->setMute(aValue);
+			for(int i = 0; i < m_groups[groupeIndex]->getNumberOfSources(); i++)
 			{
-				int sourceIndex = m_groups[aGroupIndex]->getSourceIndex(i);
+				int sourceIndex = m_groups[groupeIndex]->getSourceIndex(i);
 				if(sourceIndex >= 0 && sourceIndex < m_sources.size())
 					m_sources[sourceIndex]->setMute(aValue);
 			}
@@ -644,97 +596,97 @@ namespace Hoa2D
 	
 	/******************************************************************************/
 	
-	double SourcesManager::groupGetRadius(long anIndex)
+	double SourcesManager::groupGetRadius(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex]->getRadius();
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getRadius();
 		
 		return NULL;
 	}
 	
-	double SourcesManager::groupGetAngle(long anIndex)
+	double SourcesManager::groupGetAngle(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex]->getAzimuth();
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getAzimuth();
 		
 		return NULL;
 	}
 	
-	double SourcesManager::groupGetAbscissa(long anIndex)
+	double SourcesManager::groupGetAbscissa(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex]->getAbscissa();
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getAbscissa();
 		
 		return NULL;
 	}
 	
-	double SourcesManager::groupGetOrdinate(long anIndex)
+	double SourcesManager::groupGetOrdinate(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex]->getOrdinate();
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getOrdinate();
 		
 		return NULL;
 	}
 	
-	double* SourcesManager::groupGetColor(long anIndex)
+	double* SourcesManager::groupGetColor(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex]->getColor();
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getColor();
 		
 		return NULL;
 	}
 	
-	std::string SourcesManager::groupGetDescription(long anIndex)
+	std::string SourcesManager::groupGetDescription(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex]->getDescription();
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index]->getDescription();
 		
 		return NULL;
 	}
 	
-	long SourcesManager::groupGetExistence(long anIndex)
+	long SourcesManager::groupGetExistence(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
+		if(index < m_groups.size() && index >= 0)
 		{
-			return m_groups[anIndex]->getExistence();
+			return m_groups[index]->getExistence();
 		}
 		return 0;
 	}
 	
-	long SourcesManager::groupGetNumberOfSources(long anIndex)
+	long SourcesManager::groupGetNumberOfSources(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
+		if(index < m_groups.size() && index >= 0)
 		{
-			return m_groups[anIndex]->getNumberOfSources();
+			return m_groups[index]->getNumberOfSources();
 		}
 		return 0;
 	}
 	
-	long SourcesManager::groupGetSourceIndex(long aGroupIndex, long aSourceIndex)
+	long SourcesManager::groupGetSourceIndex(long groupeIndex, long sourceIndex)
 	{
-		if(aGroupIndex < m_groups.size() && aGroupIndex >= 0)
+		if(groupeIndex < m_groups.size() && groupeIndex >= 0)
 		{
-			return m_groups[aGroupIndex]->getSourceIndex(aSourceIndex);
+			return m_groups[groupeIndex]->getSourceIndex(sourceIndex);
 		}
 		return 0;
 	}
 	
-	long SourcesManager::groupGetMute(long anIndex)
+	long SourcesManager::groupGetMute(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
+		if(index < m_groups.size() && index >= 0)
 		{
-			return m_groups[anIndex]->getMute();
+			return m_groups[index]->getMute();
 		}
 		return 0;
 	}
 	
-	long SourcesManager::groupGetIfSourceMuted(long anIndex)
+	long SourcesManager::groupGetIfSourceMuted(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
+		if(index < m_groups.size() && index >= 0)
 		{
-			for(long i = 0; i < groupGetNumberOfSources(anIndex); i++)
+			for(long i = 0; i < groupGetNumberOfSources(index); i++)
 			{
-				if(sourceGetMute(groupGetSourceIndex(anIndex, i)))
+				if(sourceGetMute(groupGetSourceIndex(index, i)))
 				{
 					return 1;
 				}

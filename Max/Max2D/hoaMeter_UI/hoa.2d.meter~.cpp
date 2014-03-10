@@ -380,10 +380,10 @@ void meter_free(t_meter *x)
 
 void meter_getdrawparams(t_meter *x, t_object *patcherview, t_jboxdrawparams *params)
 {
+	params->d_cornersize = HOA_UI_CORNERSIZE;
+	params->d_borderthickness = HOA_UI_BORDERTHICKNESS;
 	params->d_boxfillcolor = x->f_color_bg;
     params->d_bordercolor = x->f_color_bd;
-	params->d_borderthickness = 1;
-	params->d_cornersize = 8;
 }
 
 t_max_err number_of_channels_set(t_meter *x, t_object *attr, long argc, t_atom *argv)

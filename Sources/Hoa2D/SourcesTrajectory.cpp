@@ -24,7 +24,7 @@ namespace Hoa2D
 		m_limited = isLimited != 0;
 	}
 	
-	void SourcesTrajectory::recordSourceInTrajectory(SourcesManager* aSouceManager, long aSourceIndex)
+	void SourcesTrajectory::recordSourceInTrajectory(SourcesManager* aSouceManager, long sourceIndex)
 	{
 		if(m_recording)
 		{
@@ -32,16 +32,16 @@ namespace Hoa2D
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeSourceAtNextSlot(aSouceManager, aSourceIndex);
+					storeSourceAtNextSlot(aSouceManager, sourceIndex);
 					recallSlot(aSouceManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(aSouceManager, aSourceIndex);
+					storeSourceAtNextSlot(aSouceManager, sourceIndex);
 			}
 		}
 	}
 	
-	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* aSouceManager, long aGroupIndex)
+	void SourcesTrajectory::recordGroupInTrajectory(SourcesManager* aSouceManager, long groupeIndex)
 	{
 		if(m_recording && (m_limited == 0 || m_last_slot_stored+1 <= getMaximumIndexOfSlot()))
 		{
@@ -49,11 +49,11 @@ namespace Hoa2D
 			{
 				if(m_last_slot_stored <= getMaximumIndexOfSlot() && getMaximumIndexOfSlot() > 0)
 				{
-					storeGroupAtNextSlot(aSouceManager, aGroupIndex);
+					storeGroupAtNextSlot(aSouceManager, groupeIndex);
 					recallSlot(aSouceManager, m_last_slot_stored);
 				}
 				else
-					storeSourceAtNextSlot(aSouceManager, aGroupIndex);
+					storeSourceAtNextSlot(aSouceManager, groupeIndex);
 			}
 		}
 	}

@@ -11,6 +11,9 @@
 
 namespace Hoa2D
 {
+	//! The sources trajectory
+    /** The SourcesTrajectory should be used to manage sources trajectory
+     */
 	class SourcesTrajectory : public SourcesPreset
 	{
 		
@@ -24,8 +27,8 @@ namespace Hoa2D
 		void setRecording(long aOnOffValue);
 		void setLimited(long aOnOffValue);
 		
-		void recordSourceInTrajectory(SourcesManager* aSouceManager, long aSourceIndex);
-		void recordGroupInTrajectory(SourcesManager* aSouceManager,  long aGroupIndex);
+		void recordSourceInTrajectory(SourcesManager* aSouceManager, long sourceIndex);
+		void recordGroupInTrajectory(SourcesManager* aSouceManager,  long groupeIndex);
 		void playTrajectory(SourcesManager* aSouceManager, double aFractionnalValue);
 		void erase();
 		void erase(double aFractionnalValueBegin, double aFractionnalValueEnd);

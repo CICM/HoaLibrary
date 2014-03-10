@@ -1754,7 +1754,7 @@
 									"patching_rect" : [ 22.0, 313.5, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, -1.145576, 1.104612, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.26048, 1.080639, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -1.184675, -0.271335, 1, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 0.256437, -0.340581, 1, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.2d.map",
-									"zoom" : 0.5
+									"zoom" : 0.448933
 								}
 
 							}
@@ -6981,11 +6981,7 @@
 									"numoutlets" : 7,
 									"outlettype" : [ "signal", "signal", "signal", "signal", "signal", "signal", "signal" ],
 									"patching_rect" : [ 424.733307, 376.0, 329.0, 19.0 ],
-									"saved_object_attributes" : 									{
-										"optim" : "inPhase"
-									}
-,
-									"text" : "hoa.optim~ 3"
+									"text" : "hoa.2d.optim~ 3"
 								}
 
 							}
@@ -7178,7 +7174,7 @@
 									"patching_rect" : [ 15.0, 256.625, 300.0, 300.0 ],
 									"sources_parameters" : [ "source", 0, 0.135929, 1.750088, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 1, 0.407788, -1.013805, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 2, -1.026893, 0.453856, 0, 0.2, 0.2, 0.2, 1.0, "", "source", 3, 1.194964, 0.152718, 0, 0.2, 0.2, 0.2, 1.0, "" ],
 									"varname" : "hoa.2d.map",
-									"zoom" : 0.01
+									"zoom" : 0.44
 								}
 
 							}
@@ -11026,7 +11022,7 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "hoa.optim~.mxo",
+				"name" : "hoa.2d.optim~.mxo",
 				"type" : "iLaX"
 			}
 , 			{

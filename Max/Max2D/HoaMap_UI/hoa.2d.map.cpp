@@ -176,7 +176,7 @@ int C74_EXPORT main()
 	CLASS_ATTR_STYLE			(c, "bgcolor", 0, "rgba");
 	CLASS_ATTR_LABEL			(c, "bgcolor", 0, "Background Color");
 	CLASS_ATTR_ORDER			(c, "bgcolor", 0, "1");
-	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.9 0.9 0.9 1.");
+	CLASS_ATTR_DEFAULT_SAVE_PAINT(c, "bgcolor", 0, "0.75 0.75 0.75 1.");
     
     CLASS_ATTR_RGBA				(c, "bdcolor", 0, t_hoamap, f_color_bd);
 	CLASS_ATTR_CATEGORY			(c, "bdcolor", 0, "Color");
@@ -1290,7 +1290,7 @@ void hoamap_bang(t_hoamap *x)
             {
                 atom_setlong(av, i);
                 atom_setfloat(av+2, x->f_source_manager->sourceGetRadius(i));
-                atom_setfloat(av+3, x->f_source_manager->sourceGetAngle(i));
+                atom_setfloat(av+3, x->f_source_manager->sourceGetAzimuth(i));
                 outlet_list(x->f_out_sources, 0L, 4, av);
             }
         }

@@ -3,10 +3,649 @@
 }
 
 
+The source.  
+
+
+
+
+{\ttfamily \#include $<$Source.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_source_a211e040a4377e5163bc23fbf4bcf374d}{Source} (bool existance=true, double radius=0., double azimuth=0.)
+\begin{DoxyCompactList}\small\item\em The source constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_source_ae5d9130e101151dbceb0a23f9df62807}{$\sim$\-Source} ()
+\begin{DoxyCompactList}\small\item\em The source destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a1ccb8d392b049df8308bd9c0b3639764}{set\-Existence} (bool state)
+\begin{DoxyCompactList}\small\item\em Set the existance state of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a663a68879c3fb11941048b3584fa4189}{set\-Coordinates\-Polar} (double radius, double azimuth)
+\begin{DoxyCompactList}\small\item\em Set the position of the source with polar coordinates. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a78bdd84f1836063ffd9982b40bff20ba}{set\-Radius} (double radius)
+\begin{DoxyCompactList}\small\item\em Set the radius of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a255adb726b06ce0a4f639e538dd0d35e}{se\-Azimuth} (double azimuth)
+\begin{DoxyCompactList}\small\item\em Set the azimuth of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a6b618e9a6be2cdc899c89c4b877f9445}{set\-Coordinates\-Cartesian} (double abscissa, double ordinate)
+\begin{DoxyCompactList}\small\item\em Set the position of the source with cartesians coordinates. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a5df6e0311e53adf82395883f30b84540}{set\-Abscissa} (double abscissa)
+\begin{DoxyCompactList}\small\item\em Set the abscissa of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a2674f583f6d857672449b1509efb453f}{set\-Ordinate} (double ordinate)
+\begin{DoxyCompactList}\small\item\em Set the ordinate of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_ab88a3aed83fc470d7411f008ae6fd7b6}{set\-Color} (double red, double green, double blue, double alpha)
+\begin{DoxyCompactList}\small\item\em Set the color of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a104f8e689d537bd1063e6dd870261be6}{set\-Description} (std\-::string description)
+\begin{DoxyCompactList}\small\item\em Set the description of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_aa98097a6c37727cb77303e079879c711}{set\-Group} (long groupe\-Index)
+\begin{DoxyCompactList}\small\item\em Add source to an indexed group. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a9b1ae2dd03c552efc5df9554a4bbb75d}{remove\-Group} (long groupe\-Index)
+\begin{DoxyCompactList}\small\item\em Remove source from an indexed group. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_ac6e71e18e48a887d08f60f2ae3c63195}{set\-Maximum\-Radius} (double limit\-Value)
+\begin{DoxyCompactList}\small\item\em Set the maximum radius of the source. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_source_a343f4cef2eaf81e118d43883f05170d3}{set\-Mute} (bool state)
+\begin{DoxyCompactList}\small\item\em Set the mute state of the source. \end{DoxyCompactList}\item 
+bool \hyperlink{class_hoa2_d_1_1_source_aec13c7ac13d276b1635a7d8e8d3fa418}{get\-Existence} () const 
+\begin{DoxyCompactList}\small\item\em Get the existance state of the source. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_source_aa1ca86804bc72602d4e3d332df912452}{get\-Radius} () const 
+\begin{DoxyCompactList}\small\item\em Get the radius of the source. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_source_aec1cb1c94d9e0eda417fff2f4baf9567}{get\-Azimuth} () const 
+\begin{DoxyCompactList}\small\item\em Get the azimuth of the source. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_source_a31246db09e0e569d7c3e9d49283ccfad}{get\-Abscissa} () const 
+\begin{DoxyCompactList}\small\item\em Get the abscissa of the source. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_source_a4ecf39dab7526d842e894662c439b188}{get\-Ordinate} () const 
+\begin{DoxyCompactList}\small\item\em Get the ordinate of the source. \end{DoxyCompactList}\item 
+double $\ast$ \hyperlink{class_hoa2_d_1_1_source_a4544d0ab2a4bc7c26e6b4597469321bf}{get\-Color} () const 
+\begin{DoxyCompactList}\small\item\em Get the color of the source. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_hoa2_d_1_1_source_a96021e2cf9fc4077f822bb68fb4d9283}{get\-Description} () const 
+\begin{DoxyCompactList}\small\item\em Get the description of the source. \end{DoxyCompactList}\item 
+long \hyperlink{class_hoa2_d_1_1_source_a24ebd335837005f381291d30b55e7a93}{get\-Number\-Of\-Groups} () const 
+\begin{DoxyCompactList}\small\item\em Get the number of group the source is owned by. \end{DoxyCompactList}\item 
+long \hyperlink{class_hoa2_d_1_1_source_a3aaa2f340a459a69500a1909ae23f3b5}{get\-Group\-Index} (long index)
+\begin{DoxyCompactList}\small\item\em Get the the group index the source is owned by at a particular index. \end{DoxyCompactList}\item 
+bool \hyperlink{class_hoa2_d_1_1_source_a19484de84a7b4d9a2178fc0894dd5249}{is\-Owned\-By\-Group} (long groupe\-Index)
+\begin{DoxyCompactList}\small\item\em Determine if the source is owned by a particular group. \end{DoxyCompactList}\item 
+bool \hyperlink{class_hoa2_d_1_1_source_addb6bdf4acf1f30fc50b255bdf0d73c4}{get\-Mute} () const 
+\begin{DoxyCompactList}\small\item\em Get the mute state of the source. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
 \subsection{Detailed Description}
+The source. 
+
+The source store and manage source informations like the position, color, mute... 
+
+Definition at line 17 of file Source.\-h.
 
 
-Definition at line 14 of file Source.\-h.
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_source_a211e040a4377e5163bc23fbf4bcf374d}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!Source@{Source}}
+\index{Source@{Source}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{Source}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Source\-::\-Source (
+\begin{DoxyParamCaption}
+\item[{bool}]{existance = {\ttfamily true}, }
+\item[{double}]{radius = {\ttfamily 0.}, }
+\item[{double}]{azimuth = {\ttfamily 0.}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a211e040a4377e5163bc23fbf4bcf374d}
+
+
+The source constructor. 
+
+\begin{DoxyVerb}The source constructor allocates and initialize the member values for a source.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em existance} & The existance state of the source. \\
+\hline
+{\em radius} & The radius of the source. \\
+\hline
+{\em azimuth} & The azimuth of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_ae5d9130e101151dbceb0a23f9df62807}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!$\sim$\-Source@{$\sim$\-Source}}
+\index{$\sim$\-Source@{$\sim$\-Source}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{$\sim$\-Source}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Source\-::$\sim$\-Source (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_ae5d9130e101151dbceb0a23f9df62807}
+
+
+The source destructor. 
+
+The source destructor free the memory. 
+
+Definition at line 132 of file Source.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_source_a31246db09e0e569d7c3e9d49283ccfad}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Abscissa@{get\-Abscissa}}
+\index{get\-Abscissa@{get\-Abscissa}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Abscissa}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Source\-::get\-Abscissa (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_a31246db09e0e569d7c3e9d49283ccfad}
+
+
+Get the abscissa of the source. 
+
+\begin{DoxyReturn}{Returns}
+The abscissa of the source. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a5df6e0311e53adf82395883f30b84540}{set\-Abscissa}, \hyperlink{class_hoa2_d_1_1_source_a6b618e9a6be2cdc899c89c4b877f9445}{set\-Coordinates\-Cartesian} 
+\end{DoxySeeAlso}
+
+
+Definition at line 159 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_aec1cb1c94d9e0eda417fff2f4baf9567}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Azimuth@{get\-Azimuth}}
+\index{get\-Azimuth@{get\-Azimuth}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Source\-::get\-Azimuth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_aec1cb1c94d9e0eda417fff2f4baf9567}
+
+
+Get the azimuth of the source. 
+
+\begin{DoxyReturn}{Returns}
+The azimuth of the source. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+set\-Azimuth, \hyperlink{class_hoa2_d_1_1_source_a663a68879c3fb11941048b3584fa4189}{set\-Coordinates\-Polar} 
+\end{DoxySeeAlso}
+
+
+Definition at line 152 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_a4544d0ab2a4bc7c26e6b4597469321bf}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Color@{get\-Color}}
+\index{get\-Color@{get\-Color}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Color}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ Hoa2\-D\-::\-Source\-::get\-Color (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_a4544d0ab2a4bc7c26e6b4597469321bf}
+
+
+Get the color of the source. 
+
+\begin{DoxyReturn}{Returns}
+The rgba color of the source as an array of 4 double. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_ab88a3aed83fc470d7411f008ae6fd7b6}{set\-Color} 
+\end{DoxySeeAlso}
+
+
+Definition at line 173 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_a96021e2cf9fc4077f822bb68fb4d9283}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Description@{get\-Description}}
+\index{get\-Description@{get\-Description}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Description}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Hoa2\-D\-::\-Source\-::get\-Description (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_a96021e2cf9fc4077f822bb68fb4d9283}
+
+
+Get the description of the source. 
+
+\begin{DoxyReturn}{Returns}
+The description of the source. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a104f8e689d537bd1063e6dd870261be6}{set\-Description} 
+\end{DoxySeeAlso}
+
+
+Definition at line 180 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_aec13c7ac13d276b1635a7d8e8d3fa418}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Existence@{get\-Existence}}
+\index{get\-Existence@{get\-Existence}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Existence}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Source\-::get\-Existence (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_aec13c7ac13d276b1635a7d8e8d3fa418}
+
+
+Get the existance state of the source. 
+
+\begin{DoxyReturn}{Returns}
+The existance state of the source. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a1ccb8d392b049df8308bd9c0b3639764}{set\-Existence} 
+\end{DoxySeeAlso}
+
+
+Definition at line 138 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_a3aaa2f340a459a69500a1909ae23f3b5}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Group\-Index@{get\-Group\-Index}}
+\index{get\-Group\-Index@{get\-Group\-Index}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Group\-Index}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Source\-::get\-Group\-Index (
+\begin{DoxyParamCaption}
+\item[{long}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a3aaa2f340a459a69500a1909ae23f3b5}
+
+
+Get the the group index the source is owned by at a particular index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the group \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The group index. 
+\end{DoxyReturn}
+
+
+Definition at line 117 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_addb6bdf4acf1f30fc50b255bdf0d73c4}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Mute@{get\-Mute}}
+\index{get\-Mute@{get\-Mute}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Mute}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Source\-::get\-Mute (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_addb6bdf4acf1f30fc50b255bdf0d73c4}
+
+
+Get the mute state of the source. 
+
+\begin{DoxyReturn}{Returns}
+The mute state of the source. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a343f4cef2eaf81e118d43883f05170d3}{set\-Mute} 
+\end{DoxySeeAlso}
+
+
+Definition at line 208 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_a24ebd335837005f381291d30b55e7a93}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Number\-Of\-Groups@{get\-Number\-Of\-Groups}}
+\index{get\-Number\-Of\-Groups@{get\-Number\-Of\-Groups}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Number\-Of\-Groups}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Source\-::get\-Number\-Of\-Groups (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_a24ebd335837005f381291d30b55e7a93}
+
+
+Get the number of group the source is owned by. 
+
+\begin{DoxyReturn}{Returns}
+The number of group. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a104f8e689d537bd1063e6dd870261be6}{set\-Description} 
+\end{DoxySeeAlso}
+
+
+Definition at line 187 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_a4ecf39dab7526d842e894662c439b188}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Ordinate@{get\-Ordinate}}
+\index{get\-Ordinate@{get\-Ordinate}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Ordinate}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Source\-::get\-Ordinate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_a4ecf39dab7526d842e894662c439b188}
+
+
+Get the ordinate of the source. 
+
+\begin{DoxyReturn}{Returns}
+The ordinate of the source. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a2674f583f6d857672449b1509efb453f}{set\-Ordinate}, \hyperlink{class_hoa2_d_1_1_source_a6b618e9a6be2cdc899c89c4b877f9445}{set\-Coordinates\-Cartesian} 
+\end{DoxySeeAlso}
+
+
+Definition at line 166 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_aa1ca86804bc72602d4e3d332df912452}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!get\-Radius@{get\-Radius}}
+\index{get\-Radius@{get\-Radius}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{get\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Source\-::get\-Radius (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_source_aa1ca86804bc72602d4e3d332df912452}
+
+
+Get the radius of the source. 
+
+\begin{DoxyReturn}{Returns}
+The radius of the source. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a78bdd84f1836063ffd9982b40bff20ba}{set\-Radius}, \hyperlink{class_hoa2_d_1_1_source_a663a68879c3fb11941048b3584fa4189}{set\-Coordinates\-Polar} 
+\end{DoxySeeAlso}
+
+
+Definition at line 145 of file Source.\-h.
+
+\hypertarget{class_hoa2_d_1_1_source_a19484de84a7b4d9a2178fc0894dd5249}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!is\-Owned\-By\-Group@{is\-Owned\-By\-Group}}
+\index{is\-Owned\-By\-Group@{is\-Owned\-By\-Group}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{is\-Owned\-By\-Group}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Source\-::is\-Owned\-By\-Group (
+\begin{DoxyParamCaption}
+\item[{long}]{groupe\-Index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a19484de84a7b4d9a2178fc0894dd5249}
+
+
+Determine if the source is owned by a particular group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em groupe\-Index} & The index of the group \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the source is in the group, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 125 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a9b1ae2dd03c552efc5df9554a4bbb75d}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!remove\-Group@{remove\-Group}}
+\index{remove\-Group@{remove\-Group}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{remove\-Group}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::remove\-Group (
+\begin{DoxyParamCaption}
+\item[{long}]{groupe\-Index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a9b1ae2dd03c552efc5df9554a4bbb75d}
+
+
+Remove source from an indexed group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em groupe\-Index} & The index of the group. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 102 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a255adb726b06ce0a4f639e538dd0d35e}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!se\-Azimuth@{se\-Azimuth}}
+\index{se\-Azimuth@{se\-Azimuth}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{se\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::se\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a255adb726b06ce0a4f639e538dd0d35e}
+
+
+Set the azimuth of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The azimuth of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a5df6e0311e53adf82395883f30b84540}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Abscissa@{set\-Abscissa}}
+\index{set\-Abscissa@{set\-Abscissa}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Abscissa}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Abscissa (
+\begin{DoxyParamCaption}
+\item[{double}]{abscissa}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a5df6e0311e53adf82395883f30b84540}
+
+
+Set the abscissa of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em abscissa} & The abscissa of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_ab88a3aed83fc470d7411f008ae6fd7b6}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Color@{set\-Color}}
+\index{set\-Color@{set\-Color}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Color (
+\begin{DoxyParamCaption}
+\item[{double}]{red, }
+\item[{double}]{green, }
+\item[{double}]{blue, }
+\item[{double}]{alpha}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_ab88a3aed83fc470d7411f008ae6fd7b6}
+
+
+Set the color of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em red} & The red component of the color. \\
+\hline
+{\em green} & The green component of the color \\
+\hline
+{\em blue} & The blue component of the color \\
+\hline
+{\em alpha} & The alpha component of the color \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 74 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a6b618e9a6be2cdc899c89c4b877f9445}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Coordinates\-Cartesian@{set\-Coordinates\-Cartesian}}
+\index{set\-Coordinates\-Cartesian@{set\-Coordinates\-Cartesian}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Coordinates\-Cartesian}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Coordinates\-Cartesian (
+\begin{DoxyParamCaption}
+\item[{double}]{abscissa, }
+\item[{double}]{ordinate}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a6b618e9a6be2cdc899c89c4b877f9445}
+
+
+Set the position of the source with cartesians coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em abscissa} & The abscissa of the source. \\
+\hline
+{\em ordinate} & The ordinate of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 54 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a663a68879c3fb11941048b3584fa4189}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Coordinates\-Polar@{set\-Coordinates\-Polar}}
+\index{set\-Coordinates\-Polar@{set\-Coordinates\-Polar}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Coordinates\-Polar}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Coordinates\-Polar (
+\begin{DoxyParamCaption}
+\item[{double}]{radius, }
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a663a68879c3fb11941048b3584fa4189}
+
+
+Set the position of the source with polar coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The radius of the source. \\
+\hline
+{\em azimuth} & The azimuth of the source. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_a6b618e9a6be2cdc899c89c4b877f9445}{set\-Coordinates\-Cartesian} 
+\end{DoxySeeAlso}
+
+
+Definition at line 33 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a104f8e689d537bd1063e6dd870261be6}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Description@{set\-Description}}
+\index{set\-Description@{set\-Description}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Description}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Description (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{description}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a104f8e689d537bd1063e6dd870261be6}
+
+
+Set the description of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em description} & The text description of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 82 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a1ccb8d392b049df8308bd9c0b3639764}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Existence@{set\-Existence}}
+\index{set\-Existence@{set\-Existence}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Existence}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Existence (
+\begin{DoxyParamCaption}
+\item[{bool}]{state}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a1ccb8d392b049df8308bd9c0b3639764}
+
+
+Set the existance state of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The existance state of the source. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_aec13c7ac13d276b1635a7d8e8d3fa418}{get\-Existence} 
+\end{DoxySeeAlso}
+
+
+Definition at line 28 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_aa98097a6c37727cb77303e079879c711}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Group@{set\-Group}}
+\index{set\-Group@{set\-Group}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Group}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Group (
+\begin{DoxyParamCaption}
+\item[{long}]{groupe\-Index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_aa98097a6c37727cb77303e079879c711}
+
+
+Add source to an indexed group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em groupe\-Index} & The index of the group. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 87 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_ac6e71e18e48a887d08f60f2ae3c63195}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Maximum\-Radius@{set\-Maximum\-Radius}}
+\index{set\-Maximum\-Radius@{set\-Maximum\-Radius}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Maximum\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Maximum\-Radius (
+\begin{DoxyParamCaption}
+\item[{double}]{limit\-Value}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_ac6e71e18e48a887d08f60f2ae3c63195}
+
+
+Set the maximum radius of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em limit\-Value} & The radius limit value. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 23 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a343f4cef2eaf81e118d43883f05170d3}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Mute@{set\-Mute}}
+\index{set\-Mute@{set\-Mute}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Mute}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Mute (
+\begin{DoxyParamCaption}
+\item[{bool}]{state}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a343f4cef2eaf81e118d43883f05170d3}
+
+
+Set the mute state of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The mute state of the source. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_addb6bdf4acf1f30fc50b255bdf0d73c4}{get\-Mute} 
+\end{DoxySeeAlso}
+
+
+Definition at line 97 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a2674f583f6d857672449b1509efb453f}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Ordinate@{set\-Ordinate}}
+\index{set\-Ordinate@{set\-Ordinate}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Ordinate}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Ordinate (
+\begin{DoxyParamCaption}
+\item[{double}]{ordinate}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a2674f583f6d857672449b1509efb453f}
+
+
+Set the ordinate of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ordinate} & The ordinate of the source. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file Source.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_source_a78bdd84f1836063ffd9982b40bff20ba}{\index{Hoa2\-D\-::\-Source@{Hoa2\-D\-::\-Source}!set\-Radius@{set\-Radius}}
+\index{set\-Radius@{set\-Radius}!Hoa2D::Source@{Hoa2\-D\-::\-Source}}
+\subsubsection[{set\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Source\-::set\-Radius (
+\begin{DoxyParamCaption}
+\item[{double}]{radius}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_source_a78bdd84f1836063ffd9982b40bff20ba}
+
+
+Set the radius of the source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The radius of the source. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_source_aa1ca86804bc72602d4e3d332df912452}{get\-Radius} 
+\end{DoxySeeAlso}
+
+
+Definition at line 39 of file Source.\-cpp.
 
 
 

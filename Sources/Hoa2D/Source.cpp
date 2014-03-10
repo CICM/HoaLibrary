@@ -8,11 +8,11 @@
 
 namespace Hoa2D
 {
-	Source::Source(long deadOrAlive, double aRadius, double anAngle)
+	Source::Source(bool existance, double radius, double azimuth)
 	{
-		m_exist = clip_minmax(deadOrAlive, (long)0, (long)1);
-		setRadius(aRadius);
-		setAngle(anAngle);
+		m_exist = existance;
+		setRadius(radius);
+		seAzimuth(azimuth);
 		m_color = new double[4];
 		setColor(0.2, 0.2, 0.2, 1.);
 		setDescription("");
@@ -20,55 +20,55 @@ namespace Hoa2D
 		m_mute = 0;
 	}
 	
-	void Source::setMaximumRadius(double aLimitValue)
+	void Source::setMaximumRadius(double limitValue)
 	{
-		m_maximum_radius = aLimitValue;
+		m_maximum_radius = limitValue;
 	}
 	
-	void Source::setExistence(long deadOrAlive)
+	void Source::setExistence(bool state)
 	{
-		m_exist = clip_minmax(deadOrAlive, (long)0, (long)1);
+		m_exist = state;
 	}
 	
-	void Source::setCoordinatesPolar(double aRadius, double anAngle)
+	void Source::setCoordinatesPolar(double radius, double azimuth)
 	{
-		setRadius(aRadius);
-		setAngle(anAngle);
+		setRadius(radius);
+		seAzimuth(azimuth);
 	}
 	
-	void Source::setRadius(double aRadius)
+	void Source::setRadius(double radius)
 	{
 		if(m_maximum_radius >= 0)
 		{
-			if(aRadius < -m_maximum_radius || aRadius > m_maximum_radius)
+			if(radius < -m_maximum_radius || radius > m_maximum_radius)
 				return;
 		}
-		m_radius = clip_min(aRadius, 0.);
+		m_radius = clip_min(radius, 0.);
 	}
 	
-	void Source::setAngle(double azimuth)
+	void Source::seAzimuth(double azimuth)
 	{
 		m_azimuth = wrap_twopi(azimuth);
 	}
 	
-	void Source::setCoordinatesCartesian(double anAbscissa, double anOrdinate)
+	void Source::setCoordinatesCartesian(double abscissa, double ordinate)
 	{
-		setRadius(radius(anAbscissa, anOrdinate));
-		setAngle(azimuth(anAbscissa, anOrdinate) - HOA_PI2);
+		setRadius(radius(abscissa, ordinate));
+		seAzimuth(azimuth(abscissa, ordinate) - HOA_PI2);
 	}
 	
-	void Source::setAbscissa(double anAbscissa)
+	void Source::setAbscissa(double abscissa)
 	{
 		double ordinate = getOrdinate();
-		setRadius(radius(anAbscissa, ordinate));
-		setAngle(azimuth(anAbscissa, ordinate) - HOA_PI2);
+		setRadius(radius(abscissa, ordinate));
+		seAzimuth(azimuth(abscissa, ordinate) - HOA_PI2);
 	}
 	
-	void Source::setOrdinate(double anOrdinate)
+	void Source::setOrdinate(double ordinate)
 	{
 		double abscissa = getAbscissa();
-		setRadius(radius(abscissa, anOrdinate));
-		setAngle(azimuth(abscissa, anOrdinate) - HOA_PI2);
+		setRadius(radius(abscissa, ordinate));
+		seAzimuth(azimuth(abscissa, ordinate) - HOA_PI2);
 	}
 	
 	void Source::setColor(double red, double green, double blue, double alpha)
@@ -79,31 +79,31 @@ namespace Hoa2D
 		m_color[3]	=  clip_minmax(alpha, 0., 1.);
 	}
 	
-	void Source::setDescription(std::string aDescription)
+	void Source::setDescription(std::string description)
 	{
-		m_description = aDescription;
+		m_description = description;
 	}
 	
-	void Source::setGroup(long aGroupIndex)
+	void Source::setGroup(long groupeIndex)
 	{
 		for(int i = 0; i < m_groups.size(); i++)
 		{
-			if(m_groups[i] == aGroupIndex)
+			if(m_groups[i] == groupeIndex)
 				return;
 		}
-		m_groups.push_back(aGroupIndex);
+		m_groups.push_back(groupeIndex);
 	}
 	
-	void Source::setMute(long aValue)
+	void Source::setMute(bool state)
 	{
-		m_mute = aValue != 0;
+		m_mute = state;
 	}
 	
-	void Source::removeGroup(long aGroupIndex)
+	void Source::removeGroup(long groupeIndex)
 	{
 		for(int i = 0; i < m_groups.size(); i++)
 		{
-			if(m_groups[i] == aGroupIndex)
+			if(m_groups[i] == groupeIndex)
 			{
 				for(int j = i; j < m_groups.size() - 1; j++)
 				{
@@ -114,19 +114,19 @@ namespace Hoa2D
 		}
 	}
 	
-	long Source::getGroupIndex(long anIndex)
+	long Source::getGroupIndex(long index)
 	{
-		if(anIndex < m_groups.size() && anIndex >= 0)
-			return m_groups[anIndex];
+		if(index < m_groups.size() && index >= 0)
+			return m_groups[index];
 		else
 			return -1;
 	}
 	
-	long Source::isOwnedByGroup(long aGroupIndex)
+	bool Source::isOwnedByGroup(long groupeIndex)
 	{
 		for (int i = 0; i < m_groups.size(); i++)
-			if (m_groups[i] == aGroupIndex) return 1;
-		return 0;
+			if (m_groups[i] == groupeIndex) return true;
+		return false;
 	}
 	
 	Source::~Source()

@@ -14,6 +14,9 @@ namespace Hoa2D
 {
 	class SourcesManager;
 	
+	//! The sources group
+    /** The SourcesGroup should be used to store and manage multiple Source
+     */
 	class SourcesGroup
 	{
 		
@@ -29,34 +32,34 @@ namespace Hoa2D
 		long                    m_mute;
 		
 		void computeCentroid();
-		void shiftPolar(double aRadius, double anAngle);
-		void shiftRadius(double aRadius);
-		void shiftAngle(double anAngle);
-		void shiftCartesian(double anAbscissa, double anOrdinate);
-		void shiftAbscissa(double anAbscissa);
-		void shiftOrdinate(double anOrdinate);
+		void shiftPolar(double radius, double azimuth);
+		void shiftRadius(double radius);
+		void shiftAngle(double azimuth);
+		void shiftCartesian(double abscissa, double ordinate);
+		void shiftAbscissa(double abscissa);
+		void shiftOrdinate(double ordinate);
 	public:
 		SourcesGroup(SourcesManager* aSourceManager, long deadOrAlive);
 		
 		void setExistence(long deadOrAlive);
-		void setDescription(std::string aDescription);
-		void setMaximumRadius(double aLimitValue);
+		void setDescription(std::string description);
+		void setMaximumRadius(double limitValue);
 		void setColor(double red, double green, double blue, double alpha);
-		void addSource(long aSourceIndex);
-		void removeSource(long aSourceIndex);
+		void addSource(long sourceIndex);
+		void removeSource(long sourceIndex);
 		void sourceHasMoved();
 		void setMute(long aValue);
 		
-		void setCoordinatesPolar(double aRadius, double anAngle);
-		void setRadius(double aRadius);
-		void setAngle(double anAngle);
-		void setCoordinatesCartesian(double anAbscissa, double anOrdinate);
-		void setAbscissa(double anAbscissa);
-		void setOrdinate(double anOrdinate);
+		void setCoordinatesPolar(double radius, double azimuth);
+		void setRadius(double radius);
+		void seAzimuth(double azimuth);
+		void setCoordinatesCartesian(double abscissa, double ordinate);
+		void setAbscissa(double abscissa);
+		void setOrdinate(double ordinate);
 		
-		void setRelativeCoordinatesPolar(double aRadius, double anAngle);
-		void setRelativeRadius(double aRadius);
-		void setRelativeAngle(double anAngle);
+		void setRelativeCoordinatesPolar(double radius, double azimuth);
+		void setRelativeRadius(double radius);
+		void setRelativeAngle(double azimuth);
 		
 		long   getExistence();
 		double getRadius();
@@ -64,13 +67,12 @@ namespace Hoa2D
 		double getAbscissa();
 		double getOrdinate();
 		long   getNumberOfSources();
-		long   getSourceIndex(long anIndex);
+		long   getSourceIndex(long index);
 		std::string getDescription();
 		double*  getColor();
 		long   getMute();
 		
 		int compare(const SourcesGroup* a, const SourcesGroup *b);
-		
 		
 		~SourcesGroup();
 	};

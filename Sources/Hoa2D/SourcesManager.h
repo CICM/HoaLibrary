@@ -15,6 +15,9 @@ namespace Hoa2D
 {
 	class SourcesGroup;
 	
+	//! The sources manager
+    /** The SourcesManager should be used to store and manage multiple Source and SourcesGroup
+     */
 	class SourcesManager
 	{
 		
@@ -29,10 +32,10 @@ namespace Hoa2D
 		void checkMute();
 		
 	public:
-		SourcesManager(double aMaximumLimitValue = -1., long deadOrAlive = 1);
+		SourcesManager(double maximumLimitValue = -1., long deadOrAlive = 1);
 		
 		void clearAll();
-		void setMaximumRadius(double aLimitValue);
+		void setMaximumRadius(double limitValue);
 		void setExistence(long deadOrAlive);
 		void setZoom(double aZoom);
 		long getMaximumIndexOfSource();
@@ -44,66 +47,62 @@ namespace Hoa2D
 		double getZoom();
 		
 		/* Source */
-		void sourceNewPolar(double aRadius, double anAngle);
-		void sourceNewRadius(double aRadius);
-		void sourceNewAngle(double anAngle);
-		void sourceNewCartesian(double anAbscissa, double anOrdinate);
-		void sourceNewAbscissa(double anAbscissa);
-		void sourceNewOrdinate(double anOrdinate);
+		void sourceNewPolar(double radius, double azimuth);
+		void sourceNewCartesian(double abscissa, double ordinate);
 		
-		void sourceSetPolar(long anIndex, double aRadius, double anAngle);
-		void sourceSetRadius(long anIndex, double aRadius);
-		void sourceSetAngle(long anIndex, double anAngle);
-		void sourceSetCartesian(long anIndex, double anAbscissa, double anOrdinate);
-		void sourceSetAbscissa(long anIndex, double anAbscissa);
-		void sourceSetOrdinate(long anIndex, double anOrdinate);
-		void sourceSetColor(long anIndex, double red, double green, double blue, double alpha);
-		void sourceSetDescription(long anIndex, std::string aDescription);
-		void sourceRemove(long anIndex);
-		void sourceSetMute(long anIndex, long aValue);
+		void sourceSetPolar(long index, double radius, double azimuth);
+		void sourceSetRadius(long index, double radius);
+		void sourceSetAngle(long index, double azimuth);
+		void sourceSetCartesian(long index, double abscissa, double ordinate);
+		void sourceSetAbscissa(long index, double abscissa);
+		void sourceSetOrdinate(long index, double ordinate);
+		void sourceSetColor(long index, double red, double green, double blue, double alpha);
+		void sourceSetDescription(long index, std::string description);
+		void sourceRemove(long index);
+		void sourceSetMute(long index, long aValue);
 		
-		long sourceGetExistence(long anIndex);
-		double sourceGetRadius(long anIndex);
-		double sourceGetAngle(long anIndex);
-		double sourceGetAbscissa(long anIndex);
-		double sourceGetOrdinate(long anIndex);
-		double* sourceGetColor(long anIndex);
-		std::string sourceGetDescription(long anIndex);
-		long sourceGetNumberOfGroups(long anIndex);
-		long sourceGetGroupIndex(long aSourceIndex, long aGroupIndex);
-		long sourceGetMute(long anIndex);
+		long sourceGetExistence(long index);
+		double sourceGetRadius(long index);
+		double sourceGetAzimuth(long index);
+		double sourceGetAbscissa(long index);
+		double sourceGetOrdinate(long index);
+		double* sourceGetColor(long index);
+		std::string sourceGetDescription(long index);
+		long sourceGetNumberOfGroups(long index);
+		long sourceGetGroupIndex(long sourceIndex, long groupeIndex);
+		long sourceGetMute(long index);
 		
 		/* Groups */
-		void groupSetSource(long aGroupIndex, long aSourceIndex);
-		void groupRemoveSource(long aGroupIndex, long aSourceIndex);
-		void groupSetPolar(long aGroupIndex, double aRadius, double anAngle);
-		void groupSetRadius(long aGroupIndex, double aRadius);
-		void groupSetAngle(long aGroupIndex, double anAngle);
-		void groupSetCartesian(long aGroupIndex, double anAbscissa, double anOrdinate);
-		void groupSetAbscissa(long aGroupIndex, double anAbscissa);
-		void groupSetOrdinate(long aGroupIndex, double anOrdinate);
-		void groupSetColor(long aGroupIndex, double red, double green, double blue, double alpha);
-		void groupSetDescription(long aGroupIndex, std::string aDescription);
-		void groupRemove(long aGroupIndex);
-		void groupRemoveWithSources(long aGroupIndex);
-		long groupGetNumberOfSources(long aGroupIndex);
-		long groupGetSourceIndex(long aGroupIndex, long aSourceIndex);
-		void groupSetMute(long anIndex, long aValue);
+		void groupSetSource(long groupeIndex, long sourceIndex);
+		void groupRemoveSource(long groupeIndex, long sourceIndex);
+		void groupSetPolar(long groupeIndex, double radius, double azimuth);
+		void groupSetRadius(long groupeIndex, double radius);
+		void groupSetAngle(long groupeIndex, double azimuth);
+		void groupSetCartesian(long groupeIndex, double abscissa, double ordinate);
+		void groupSetAbscissa(long groupeIndex, double abscissa);
+		void groupSetOrdinate(long groupeIndex, double ordinate);
+		void groupSetColor(long groupeIndex, double red, double green, double blue, double alpha);
+		void groupSetDescription(long groupeIndex, std::string description);
+		void groupRemove(long groupeIndex);
+		void groupRemoveWithSources(long groupeIndex);
+		long groupGetNumberOfSources(long groupeIndex);
+		long groupGetSourceIndex(long groupeIndex, long sourceIndex);
+		void groupSetMute(long index, long state);
 		void groupClean();
-		void groupSetRelativePolar(long aGroupIndex, double aRadius, double anAngle);
-		void groupSetRelativeRadius(long aGroupIndex, double aRadius);
-		void groupSetRelativeAngle(long aGroupIndex, double anAngle);
+		void groupSetRelativePolar(long groupeIndex, double radius, double azimuth);
+		void groupSetRelativeRadius(long groupeIndex, double radius);
+		void groupSetRelativeAngle(long groupeIndex, double azimuth);
 		
 		
-		long groupGetExistence(long anIndex);
-		double groupGetRadius(long anIndex);
-		double groupGetAngle(long anIndex);
-		double groupGetAbscissa(long anIndex);
-		double groupGetOrdinate(long anIndex);
-		double* groupGetColor(long anIndex);
-		std::string groupGetDescription(long anIndex);
-		long groupGetMute(long anIndex);
-		long groupGetIfSourceMuted(long anIndex);
+		long groupGetExistence(long index);
+		double groupGetRadius(long index);
+		double groupGetAngle(long index);
+		double groupGetAbscissa(long index);
+		double groupGetOrdinate(long index);
+		double* groupGetColor(long index);
+		std::string groupGetDescription(long index);
+		long groupGetMute(long index);
+		long groupGetIfSourceMuted(long index);
 		long groupGetNextIndex();
 		
 		int groupCompare(long groupIndexA, const long groupIndexB);
