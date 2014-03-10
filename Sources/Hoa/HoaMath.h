@@ -116,9 +116,9 @@ namespace Hoa
      
         @see    double_factorial
      */
-    inline unsigned long factorial(long n)
+    inline long double factorial(long n)
 	{
-        long result = n;
+        long double result = n;
 		if(n == 0)
 			return 1;
         
