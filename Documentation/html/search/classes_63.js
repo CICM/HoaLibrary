@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['coordinatescartesian',['coordinatesCartesian',['../struct_hoa_1_1coordinates_cartesian.html',1,'Hoa']]],
-  ['coordinatespolar',['coordinatesPolar',['../struct_hoa_1_1coordinates_polar.html',1,'Hoa']]]
+  ['channelmanager',['ChannelManager',['../class_hoa2_d_1_1_channel_manager.html',1,'Hoa2D']]]
 ];

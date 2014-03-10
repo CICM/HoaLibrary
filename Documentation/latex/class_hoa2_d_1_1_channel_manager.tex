@@ -1,0 +1,849 @@
+\hypertarget{class_hoa2_d_1_1_channel_manager}{\section{Hoa2\-D\-:\-:Channel\-Manager Class Reference}
+\label{class_hoa2_d_1_1_channel_manager}\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}}
+}
+
+
+The channel manager.  
+
+
+
+
+{\ttfamily \#include $<$Channel\-Manager.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_hoa2_d_1_1_channel_manager_a3bd9f0fe607a6382e0f6db55c944949e}{Channel\-Manager} (unsigned int number\-\_\-of\-\_\-channels=1)
+\begin{DoxyCompactList}\small\item\em The channel manager constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_hoa2_d_1_1_channel_manager_a1c39655db4a8238e79d688ed7453460d}{$\sim$\-Channel\-Manager} ()
+\begin{DoxyCompactList}\small\item\em The channel manager destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_adb068e6cf5cd8e4213faad34a8b257b7}{set\-Number\-Of\-Channels} (unsigned int number\-\_\-of\-\_\-channels)
+\begin{DoxyCompactList}\small\item\em Set the number of channels you want to manage. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a84b733f3204cc4f28368d7091fc1d6a2}{set\-Azimuth} (const int index, double azimuth)
+\begin{DoxyCompactList}\small\item\em Set one or each channel azimuth value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_ae65af4a5c994967d7111c99e1bba637f}{set\-Azimuth\-List} (double $\ast$azimuths, long size)
+\begin{DoxyCompactList}\small\item\em Set several channel azimuth with a list. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_ad1c309e1aa908bb9e74ff585baede311}{reset\-Azimuth} (const int index=-\/1)
+\begin{DoxyCompactList}\small\item\em Reset one or each channel azimuth value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a8b3ee410134a6968da701333c5706ae2}{set\-Directivity} (const int index, const double directivity)
+\begin{DoxyCompactList}\small\item\em Set one or each channel directivity value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a7056e91301e2ff1134aeaaabd49c1175}{set\-Directivity\-List} (double $\ast$directivities, long size)
+\begin{DoxyCompactList}\small\item\em Set several channel directivity value with a list. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_aaaaf03b0a4ea963f307f4a2db6e6ea9b}{reset\-Directivity} (const int index=-\/1)
+\begin{DoxyCompactList}\small\item\em Reset one or each channel directivity to 1. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a98cb3ded60590e0bee7e348b569fa951}{set\-Selected} (const int index, int selected\-State)
+\begin{DoxyCompactList}\small\item\em Set the selected state of one or each channel. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a5fd94710fde98d24c1476979bfb394c0}{rotate\-Selected\-Channels} (double new\-Radian, int channel\-Being\-Dragged, int magnet=0)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_hoa2_d_1_1_rotate}{Rotate} all of the currently selected channels relative to one channel azimuth rotation. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a414509401238271014fc94f2104b18e9}{set\-Fisheye\-Dest\-Azimuth} (double azimuth)
+\begin{DoxyCompactList}\small\item\em Set fisheye destination azimuth. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_aef32accb90db567196964011052d9a66}{set\-Fisheye\-Start\-Azimuth} (const int index)
+\begin{DoxyCompactList}\small\item\em Set the fisheye start azimuth of one or several channel with current azimuth. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a51de934826a79149023432ee173338c1}{set\-Fisheye\-Start\-Azimuth} (const int index, double radian)
+\begin{DoxyCompactList}\small\item\em Set the fisheye start azimuth of one or several channel. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a8915189ac60c4a5c36c8684984572bb4}{set\-Fisheye\-Step\-With\-Delta} (const int index, double delta)
+\begin{DoxyCompactList}\small\item\em Increment or decrement the fisheye step by a value. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a8fbac19eb1cd9889dfc9c6e83479e708}{set\-Fisheye\-Step\-Direct} (const int index, double fisheye\-Step)
+\begin{DoxyCompactList}\small\item\em Set the fisheye step directly. \end{DoxyCompactList}\item 
+void \hyperlink{class_hoa2_d_1_1_channel_manager_a00a8b1738ddf7b222209b6ff0b2b34f5}{set\-Azimuth\-To\-Closest\-Def\-Channel\-Azimuth} (const int index)
+\begin{DoxyCompactList}\small\item\em Set channel azimuth value to the closest default azimuth position value. \end{DoxyCompactList}\item 
+long \hyperlink{class_hoa2_d_1_1_channel_manager_a0f33fda180a50a3b2a144d62801b0f56}{get\-Number\-Of\-Selected\-Channels} ()
+\begin{DoxyCompactList}\small\item\em Retrieve the number of selected channels. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_a8d86568ba79cb7419fd9fd1ab3c384b4}{get\-Closest\-Def\-Channel\-Azimuth} (const int index)
+\begin{DoxyCompactList}\small\item\em Retrieve the closest default azimuth position of a channel. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_a658e587f189ace4c078fbb0543356164}{get\-Closest\-Def\-Channel\-Azimuth} (double azimuth)
+\begin{DoxyCompactList}\small\item\em Retrieve the closest default azimuth position relative to an azimuth value. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_ab446c15bed633155b71524e334d36453}{get\-Closest\-Def\-Channel\-Distance} (const int index)
+\begin{DoxyCompactList}\small\item\em Retrieve the distance to the closest default azimuth position relative to the azimuth of a channel. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_aa24f7c2eeb991c5070d87e2e844a75c2}{get\-Closest\-Def\-Channel\-Distance} (double azimuth)
+\begin{DoxyCompactList}\small\item\em Retrieve the distance to the closest default azimuth position relative to an azimuth value. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_a1b18dfa77d811da0d3a3d743d093554b}{get\-Fisheye\-Dest\-Azimuth} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the fisheye destination azimuth value. \end{DoxyCompactList}\item 
+long \hyperlink{class_hoa2_d_1_1_channel_manager_a94ae989e2460f1e09fd817e2f44425d4}{get\-Number\-Of\-Channels} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the number of channels currently managed. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_a1acfbabba0b33364370e54910caa4434}{get\-Fisheye\-Step} () const 
+\begin{DoxyCompactList}\small\item\em Retrieve the current fisheye step. \end{DoxyCompactList}\item 
+bool \hyperlink{class_hoa2_d_1_1_channel_manager_a2f3845ef03c4970491c2433f67e321fa}{is\-Selected} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the selection state of a channel. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_a216685534ec1e330dfdc09e9cbdb67d3}{get\-Directivity} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the directivity value of a channel. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_a38eba3f777b1e59025d92f5e8d18e06d}{get\-Fisheye\-Start\-Azimuth} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the fisheye start azimuth value of a channel. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_ad6e15177984616659ed54c79e75e54d0}{get\-Abscissa} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the abscissa of a channel. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_ac821f6df0cf96630d6f6aefc2b4bb7ce}{get\-Ordinate} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the ordinate of a channel. \end{DoxyCompactList}\item 
+double \hyperlink{class_hoa2_d_1_1_channel_manager_a149968ad122a07263e8750d3f4f00b6c}{get\-Azimuth} (const int index) const 
+\begin{DoxyCompactList}\small\item\em Retrieve the azimuth of a channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The channel manager. 
+
+The channel manager should be used to manage a group of channel. 
+
+Definition at line 17 of file Channel\-Manager.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hoa2_d_1_1_channel_manager_a3bd9f0fe607a6382e0f6db55c944949e}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!Channel\-Manager@{Channel\-Manager}}
+\index{Channel\-Manager@{Channel\-Manager}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{Channel\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Channel\-Manager\-::\-Channel\-Manager (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number\-\_\-of\-\_\-channels = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a3bd9f0fe607a6382e0f6db55c944949e}
+
+
+The channel manager constructor. 
+
+\begin{DoxyVerb}The channel manager constructor allocates and initialize the member values for each channel.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\-\_\-of\-\_\-channels} & The number of channels you need to manage, default is 1. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a1c39655db4a8238e79d688ed7453460d}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!$\sim$\-Channel\-Manager@{$\sim$\-Channel\-Manager}}
+\index{$\sim$\-Channel\-Manager@{$\sim$\-Channel\-Manager}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{$\sim$\-Channel\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Hoa2\-D\-::\-Channel\-Manager\-::$\sim$\-Channel\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a1c39655db4a8238e79d688ed7453460d}
+
+
+The channel manager destructor. 
+
+The channel manager destructor free the memory. 
+
+Definition at line 17 of file Channel\-Manager.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hoa2_d_1_1_channel_manager_ad6e15177984616659ed54c79e75e54d0}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Abscissa@{get\-Abscissa}}
+\index{get\-Abscissa@{get\-Abscissa}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Abscissa}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Abscissa (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_ad6e15177984616659ed54c79e75e54d0}
+
+
+Retrieve the abscissa of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The abscissa of the channel. 
+\end{DoxyReturn}
+
+
+Definition at line 305 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a149968ad122a07263e8750d3f4f00b6c}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Azimuth@{get\-Azimuth}}
+\index{get\-Azimuth@{get\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_a149968ad122a07263e8750d3f4f00b6c}
+
+
+Retrieve the azimuth of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The azimuth of the channel. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a84b733f3204cc4f28368d7091fc1d6a2}{set\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 330 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a8d86568ba79cb7419fd9fd1ab3c384b4}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Closest\-Def\-Channel\-Azimuth@{get\-Closest\-Def\-Channel\-Azimuth}}
+\index{get\-Closest\-Def\-Channel\-Azimuth@{get\-Closest\-Def\-Channel\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Channel\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Closest\-Def\-Channel\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a8d86568ba79cb7419fd9fd1ab3c384b4}
+
+
+Retrieve the closest default azimuth position of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+closest default azimuth position of the channel. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_ab446c15bed633155b71524e334d36453}{get\-Closest\-Def\-Channel\-Distance} 
+\end{DoxySeeAlso}
+
+
+Definition at line 267 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a658e587f189ace4c078fbb0543356164}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Closest\-Def\-Channel\-Azimuth@{get\-Closest\-Def\-Channel\-Azimuth}}
+\index{get\-Closest\-Def\-Channel\-Azimuth@{get\-Closest\-Def\-Channel\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Channel\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Closest\-Def\-Channel\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a658e587f189ace4c078fbb0543356164}
+
+
+Retrieve the closest default azimuth position relative to an azimuth value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The relative azimuth. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The closest default azimuth position of the channel relative to the azimuth value you passed in. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_ab446c15bed633155b71524e334d36453}{get\-Closest\-Def\-Channel\-Distance} 
+\end{DoxySeeAlso}
+
+
+Definition at line 272 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_ab446c15bed633155b71524e334d36453}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Closest\-Def\-Channel\-Distance@{get\-Closest\-Def\-Channel\-Distance}}
+\index{get\-Closest\-Def\-Channel\-Distance@{get\-Closest\-Def\-Channel\-Distance}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Channel\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Closest\-Def\-Channel\-Distance (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_ab446c15bed633155b71524e334d36453}
+
+
+Retrieve the distance to the closest default azimuth position relative to the azimuth of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance to the closest default azimuth position. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8d86568ba79cb7419fd9fd1ab3c384b4}{get\-Closest\-Def\-Channel\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 291 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_aa24f7c2eeb991c5070d87e2e844a75c2}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Closest\-Def\-Channel\-Distance@{get\-Closest\-Def\-Channel\-Distance}}
+\index{get\-Closest\-Def\-Channel\-Distance@{get\-Closest\-Def\-Channel\-Distance}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Closest\-Def\-Channel\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Closest\-Def\-Channel\-Distance (
+\begin{DoxyParamCaption}
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_aa24f7c2eeb991c5070d87e2e844a75c2}
+
+
+Retrieve the distance to the closest default azimuth position relative to an azimuth value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The relative azimuth. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance to the closest default azimuth position of the channel relative to the azimuth value you passed in. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8d86568ba79cb7419fd9fd1ab3c384b4}{get\-Closest\-Def\-Channel\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 296 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a216685534ec1e330dfdc09e9cbdb67d3}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Directivity@{get\-Directivity}}
+\index{get\-Directivity@{get\-Directivity}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Directivity}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Directivity (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_a216685534ec1e330dfdc09e9cbdb67d3}
+
+
+Retrieve the directivity value of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The directivity value of the channel. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8b3ee410134a6968da701333c5706ae2}{set\-Directivity} 
+\end{DoxySeeAlso}
+
+
+Definition at line 280 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a1b18dfa77d811da0d3a3d743d093554b}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Fisheye\-Dest\-Azimuth@{get\-Fisheye\-Dest\-Azimuth}}
+\index{get\-Fisheye\-Dest\-Azimuth@{get\-Fisheye\-Dest\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Fisheye\-Dest\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Fisheye\-Dest\-Azimuth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_a1b18dfa77d811da0d3a3d743d093554b}
+
+
+Retrieve the fisheye destination azimuth value. 
+
+\begin{DoxyReturn}{Returns}
+The fisheye destination azimuth value. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a414509401238271014fc94f2104b18e9}{set\-Fisheye\-Dest\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 245 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a38eba3f777b1e59025d92f5e8d18e06d}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Fisheye\-Start\-Azimuth@{get\-Fisheye\-Start\-Azimuth}}
+\index{get\-Fisheye\-Start\-Azimuth@{get\-Fisheye\-Start\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Fisheye\-Start\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Fisheye\-Start\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_a38eba3f777b1e59025d92f5e8d18e06d}
+
+
+Retrieve the fisheye start azimuth value of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The fisheye start azimuth value of the channel. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_aef32accb90db567196964011052d9a66}{set\-Fisheye\-Start\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 293 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a1acfbabba0b33364370e54910caa4434}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Fisheye\-Step@{get\-Fisheye\-Step}}
+\index{get\-Fisheye\-Step@{get\-Fisheye\-Step}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Fisheye\-Step}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Fisheye\-Step (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_a1acfbabba0b33364370e54910caa4434}
+
+
+Retrieve the current fisheye step. 
+
+\begin{DoxyReturn}{Returns}
+The current fisheye step. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8fbac19eb1cd9889dfc9c6e83479e708}{set\-Fisheye\-Step\-Direct}, \hyperlink{class_hoa2_d_1_1_channel_manager_a8915189ac60c4a5c36c8684984572bb4}{set\-Fisheye\-Step\-With\-Delta} 
+\end{DoxySeeAlso}
+
+
+Definition at line 259 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a94ae989e2460f1e09fd817e2f44425d4}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Number\-Of\-Channels@{get\-Number\-Of\-Channels}}
+\index{get\-Number\-Of\-Channels@{get\-Number\-Of\-Channels}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Number\-Of\-Channels}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Channel\-Manager\-::get\-Number\-Of\-Channels (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_a94ae989e2460f1e09fd817e2f44425d4}
+
+
+Retrieve the number of channels currently managed. 
+
+\begin{DoxyReturn}{Returns}
+The number of channels currently managed. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_adb068e6cf5cd8e4213faad34a8b257b7}{set\-Number\-Of\-Channels} 
+\end{DoxySeeAlso}
+
+
+Definition at line 252 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a0f33fda180a50a3b2a144d62801b0f56}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Number\-Of\-Selected\-Channels@{get\-Number\-Of\-Selected\-Channels}}
+\index{get\-Number\-Of\-Selected\-Channels@{get\-Number\-Of\-Selected\-Channels}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Number\-Of\-Selected\-Channels}]{\setlength{\rightskip}{0pt plus 5cm}long Hoa2\-D\-::\-Channel\-Manager\-::get\-Number\-Of\-Selected\-Channels (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a0f33fda180a50a3b2a144d62801b0f56}
+
+
+Retrieve the number of selected channels. 
+
+\begin{DoxyReturn}{Returns}
+The number of selected channels. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a98cb3ded60590e0bee7e348b569fa951}{set\-Selected} 
+\end{DoxySeeAlso}
+
+
+Definition at line 313 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_ac821f6df0cf96630d6f6aefc2b4bb7ce}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!get\-Ordinate@{get\-Ordinate}}
+\index{get\-Ordinate@{get\-Ordinate}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{get\-Ordinate}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa2\-D\-::\-Channel\-Manager\-::get\-Ordinate (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_ac821f6df0cf96630d6f6aefc2b4bb7ce}
+
+
+Retrieve the ordinate of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ordinate of the channel. 
+\end{DoxyReturn}
+
+
+Definition at line 317 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a2f3845ef03c4970491c2433f67e321fa}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!is\-Selected@{is\-Selected}}
+\index{is\-Selected@{is\-Selected}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{is\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool Hoa2\-D\-::\-Channel\-Manager\-::is\-Selected (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hoa2_d_1_1_channel_manager_a2f3845ef03c4970491c2433f67e321fa}
+
+
+Retrieve the selection state of a channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The selection state of the channel. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a98cb3ded60590e0bee7e348b569fa951}{set\-Selected} 
+\end{DoxySeeAlso}
+
+
+Definition at line 267 of file Channel\-Manager.\-h.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_ad1c309e1aa908bb9e74ff585baede311}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!reset\-Azimuth@{reset\-Azimuth}}
+\index{reset\-Azimuth@{reset\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{reset\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::reset\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_ad1c309e1aa908bb9e74ff585baede311}
+
+
+Reset one or each channel azimuth value. 
+
+\begin{DoxyVerb}Reset one or each channel to the default azimuth value.
+\end{DoxyVerb}
+ If you want to reset all of the channels azimuth value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel (pass -\/1 to reset all of them). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a84b733f3204cc4f28368d7091fc1d6a2}{set\-Azimuth}, \hyperlink{class_hoa2_d_1_1_channel_manager_ae65af4a5c994967d7111c99e1bba637f}{set\-Azimuth\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 56 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_aaaaf03b0a4ea963f307f4a2db6e6ea9b}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!reset\-Directivity@{reset\-Directivity}}
+\index{reset\-Directivity@{reset\-Directivity}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{reset\-Directivity}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::reset\-Directivity (
+\begin{DoxyParamCaption}
+\item[{const int}]{index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_aaaaf03b0a4ea963f307f4a2db6e6ea9b}
+
+
+Reset one or each channel directivity to 1. 
+
+If you want to reset all of the channels directivity value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel (pass -\/1 to reset all of them). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8b3ee410134a6968da701333c5706ae2}{set\-Directivity}, \hyperlink{class_hoa2_d_1_1_channel_manager_a7056e91301e2ff1134aeaaabd49c1175}{set\-Directivity\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 70 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a5fd94710fde98d24c1476979bfb394c0}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!rotate\-Selected\-Channels@{rotate\-Selected\-Channels}}
+\index{rotate\-Selected\-Channels@{rotate\-Selected\-Channels}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{rotate\-Selected\-Channels}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::rotate\-Selected\-Channels (
+\begin{DoxyParamCaption}
+\item[{double}]{new\-Radian, }
+\item[{int}]{channel\-Being\-Dragged, }
+\item[{int}]{magnet = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a5fd94710fde98d24c1476979bfb394c0}
+
+
+\hyperlink{class_hoa2_d_1_1_rotate}{Rotate} all of the currently selected channels relative to one channel azimuth rotation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Radian} & The new azimuth of the channel which is being dragged \\
+\hline
+{\em channel\-Being\-Dragged} & The index of the channel which is being dragged. \\
+\hline
+{\em magnet} & Pass 1 to magnetize the channel to one of the default azimuth positions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 138 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a84b733f3204cc4f28368d7091fc1d6a2}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Azimuth@{set\-Azimuth}}
+\index{set\-Azimuth@{set\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a84b733f3204cc4f28368d7091fc1d6a2}
+
+
+Set one or each channel azimuth value. 
+
+If you want to reset all of the channels azimuth value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel (pass -\/1 to reset all of them). \\
+\hline
+{\em azimuth} & The new azimuth value in radians. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_ad1c309e1aa908bb9e74ff585baede311}{reset\-Azimuth}, \hyperlink{class_hoa2_d_1_1_channel_manager_ae65af4a5c994967d7111c99e1bba637f}{set\-Azimuth\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 90 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_ae65af4a5c994967d7111c99e1bba637f}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Azimuth\-List@{set\-Azimuth\-List}}
+\index{set\-Azimuth\-List@{set\-Azimuth\-List}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Azimuth\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Azimuth\-List (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{azimuths, }
+\item[{long}]{size}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_ae65af4a5c994967d7111c99e1bba637f}
+
+
+Set several channel azimuth with a list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuths} & An array of azimuth values in radians. \\
+\hline
+{\em size} & The size of the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a84b733f3204cc4f28368d7091fc1d6a2}{set\-Azimuth}, \hyperlink{class_hoa2_d_1_1_channel_manager_a8b3ee410134a6968da701333c5706ae2}{set\-Directivity} 
+\end{DoxySeeAlso}
+
+
+Definition at line 84 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a00a8b1738ddf7b222209b6ff0b2b34f5}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Azimuth\-To\-Closest\-Def\-Channel\-Azimuth@{set\-Azimuth\-To\-Closest\-Def\-Channel\-Azimuth}}
+\index{set\-Azimuth\-To\-Closest\-Def\-Channel\-Azimuth@{set\-Azimuth\-To\-Closest\-Def\-Channel\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Azimuth\-To\-Closest\-Def\-Channel\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Azimuth\-To\-Closest\-Def\-Channel\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a00a8b1738ddf7b222209b6ff0b2b34f5}
+
+
+Set channel azimuth value to the closest default azimuth position value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_ad1c309e1aa908bb9e74ff585baede311}{reset\-Azimuth}, \hyperlink{class_hoa2_d_1_1_channel_manager_a84b733f3204cc4f28368d7091fc1d6a2}{set\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 307 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a8b3ee410134a6968da701333c5706ae2}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Directivity@{set\-Directivity}}
+\index{set\-Directivity@{set\-Directivity}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Directivity}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Directivity (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{const double}]{directivity}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a8b3ee410134a6968da701333c5706ae2}
+
+
+Set one or each channel directivity value. 
+
+If you want to reset all of the channels azimuth value, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel (pass -\/1 to reset all of them). \\
+\hline
+{\em directivity} & The new directivity value (between 0 and 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_aaaaf03b0a4ea963f307f4a2db6e6ea9b}{reset\-Directivity}, \hyperlink{class_hoa2_d_1_1_channel_manager_a7056e91301e2ff1134aeaaabd49c1175}{set\-Directivity\-List} 
+\end{DoxySeeAlso}
+
+
+Definition at line 110 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a7056e91301e2ff1134aeaaabd49c1175}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Directivity\-List@{set\-Directivity\-List}}
+\index{set\-Directivity\-List@{set\-Directivity\-List}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Directivity\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Directivity\-List (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{directivities, }
+\item[{long}]{size}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a7056e91301e2ff1134aeaaabd49c1175}
+
+
+Set several channel directivity value with a list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em directivities} & An array of directivity (between 0 and 1). \\
+\hline
+{\em size} & The size of the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8b3ee410134a6968da701333c5706ae2}{set\-Directivity}, \hyperlink{class_hoa2_d_1_1_channel_manager_aaaaf03b0a4ea963f307f4a2db6e6ea9b}{reset\-Directivity} 
+\end{DoxySeeAlso}
+
+
+Definition at line 104 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a414509401238271014fc94f2104b18e9}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Fisheye\-Dest\-Azimuth@{set\-Fisheye\-Dest\-Azimuth}}
+\index{set\-Fisheye\-Dest\-Azimuth@{set\-Fisheye\-Dest\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Fisheye\-Dest\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Fisheye\-Dest\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{double}]{azimuth}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a414509401238271014fc94f2104b18e9}
+
+
+Set fisheye destination azimuth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em azimuth} & The azimuth value of the fisheye destination in radians. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a1b18dfa77d811da0d3a3d743d093554b}{get\-Fisheye\-Dest\-Azimuth}, \hyperlink{class_hoa2_d_1_1_channel_manager_aef32accb90db567196964011052d9a66}{set\-Fisheye\-Start\-Azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 168 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_aef32accb90db567196964011052d9a66}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}}
+\index{set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Fisheye\-Start\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Fisheye\-Start\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_aef32accb90db567196964011052d9a66}
+
+
+Set the fisheye start azimuth of one or several channel with current azimuth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel if greather than -\/1, pass -\/2 to affect all selected channels, pass -\/1 to affect all channels \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+
+\end{DoxySeeAlso}
+
+
+Definition at line 202 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a51de934826a79149023432ee173338c1}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}}
+\index{set\-Fisheye\-Start\-Azimuth@{set\-Fisheye\-Start\-Azimuth}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Fisheye\-Start\-Azimuth}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Fisheye\-Start\-Azimuth (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{radian}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a51de934826a79149023432ee173338c1}
+
+
+Set the fisheye start azimuth of one or several channel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel if greather than -\/1, pass -\/2 to affect all selected channels, pass -\/1 to affect all channels \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 222 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a8fbac19eb1cd9889dfc9c6e83479e708}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Fisheye\-Step\-Direct@{set\-Fisheye\-Step\-Direct}}
+\index{set\-Fisheye\-Step\-Direct@{set\-Fisheye\-Step\-Direct}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Fisheye\-Step\-Direct}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Fisheye\-Step\-Direct (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{fisheye\-Step}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a8fbac19eb1cd9889dfc9c6e83479e708}
+
+
+Set the fisheye step directly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel if greather than -\/1, pass -\/2 to affect all selected channels, pass -\/1 to affect all channels \\
+\hline
+{\em fisheye\-Step} & The fisheye step (between 0 and 1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8915189ac60c4a5c36c8684984572bb4}{set\-Fisheye\-Step\-With\-Delta} 
+\end{DoxySeeAlso}
+
+
+Definition at line 180 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a8915189ac60c4a5c36c8684984572bb4}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Fisheye\-Step\-With\-Delta@{set\-Fisheye\-Step\-With\-Delta}}
+\index{set\-Fisheye\-Step\-With\-Delta@{set\-Fisheye\-Step\-With\-Delta}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Fisheye\-Step\-With\-Delta}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Fisheye\-Step\-With\-Delta (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{double}]{delta}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a8915189ac60c4a5c36c8684984572bb4}
+
+
+Increment or decrement the fisheye step by a value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel if greather than -\/1, pass -\/2 to affect all selected channels, pass -\/1 to affect all channels \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a8fbac19eb1cd9889dfc9c6e83479e708}{set\-Fisheye\-Step\-Direct} 
+\end{DoxySeeAlso}
+
+
+Definition at line 174 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_adb068e6cf5cd8e4213faad34a8b257b7}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Number\-Of\-Channels@{set\-Number\-Of\-Channels}}
+\index{set\-Number\-Of\-Channels@{set\-Number\-Of\-Channels}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Number\-Of\-Channels}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Number\-Of\-Channels (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{number\-\_\-of\-\_\-channels}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_adb068e6cf5cd8e4213faad34a8b257b7}
+
+
+Set the number of channels you want to manage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\-\_\-of\-\_\-channels} & The number of channels you need to manage. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 24 of file Channel\-Manager.\-cpp.
+
+\hypertarget{class_hoa2_d_1_1_channel_manager_a98cb3ded60590e0bee7e348b569fa951}{\index{Hoa2\-D\-::\-Channel\-Manager@{Hoa2\-D\-::\-Channel\-Manager}!set\-Selected@{set\-Selected}}
+\index{set\-Selected@{set\-Selected}!Hoa2D::ChannelManager@{Hoa2\-D\-::\-Channel\-Manager}}
+\subsubsection[{set\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}void Hoa2\-D\-::\-Channel\-Manager\-::set\-Selected (
+\begin{DoxyParamCaption}
+\item[{const int}]{index, }
+\item[{int}]{selected\-State}
+\end{DoxyParamCaption}
+)}}\label{class_hoa2_d_1_1_channel_manager_a98cb3ded60590e0bee7e348b569fa951}
+
+
+Set the selected state of one or each channel. 
+
+If you want to reset all of the channels selected state, pass -\/1 in the index parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the channel (pass -\/1 to reset all of them). \\
+\hline
+{\em selected\-State} & The selected state, pass 0 to unselect, 1 to select and -\/1 to toggle the state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_hoa2_d_1_1_channel_manager_a0f33fda180a50a3b2a144d62801b0f56}{get\-Number\-Of\-Selected\-Channels} 
+\end{DoxySeeAlso}
+
+
+Definition at line 124 of file Channel\-Manager.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Channel\-Manager.\-h\item 
+/\-Users/elioton/\-Documents/programmation/\-C\-I\-C\-M/source\-Tree/\-Hoa\-Library/\-Sources/\-Hoa2\-D/Channel\-Manager.\-cpp\end{DoxyCompactItemize}

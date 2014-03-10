@@ -158,7 +158,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> SourcesTrajectory::playTrajectory(SourcesManager* aSouceManager, <span class="keywordtype">double</span> aFractionnalValue)</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        aFractionnalValue = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(aFractionnalValue, 0., 1.);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        aFractionnalValue = <a class="code" href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">clip_minmax</a>(aFractionnalValue, 0., 1.);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">double</span> aFractionalIndex = aFractionnalValue * (double)getMaximumIndexOfSlot();</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        recallFractionalSlot(aSouceManager, aFractionalIndex);</div>
@@ -173,8 +173,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> SourcesTrajectory::erase(<span class="keywordtype">double</span> aFractionnalValueBegin, <span class="keywordtype">double</span> aFractionnalValueEnd)</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">long</span> anIndexBegin = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(aFractionnalValueBegin, 0., 1.) * (double)getMaximumIndexOfSlot();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">long</span> anIndexEnd = <a class="code" href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">clip_minmax</a>(aFractionnalValueEnd, 0., 1.) * (double)getMaximumIndexOfSlot();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">long</span> anIndexBegin = <a class="code" href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">clip_minmax</a>(aFractionnalValueBegin, 0., 1.) * (double)getMaximumIndexOfSlot();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordtype">long</span> anIndexEnd = <a class="code" href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">clip_minmax</a>(aFractionnalValueEnd, 0., 1.) * (double)getMaximumIndexOfSlot();</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">long</span> i = anIndexBegin; i &lt; anIndexEnd; i++)</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        {</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            deleteSlot(i);</div>
@@ -196,11 +196,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        clear();</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
-<div class="ttc" id="namespace_hoa_html_a4b041c0e7c61bb6d819ce4e544ff3f90"><div class="ttname"><a href="namespace_hoa.html#a4b041c0e7c61bb6d819ce4e544ff3f90">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(const double value, const double low, const double high)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
+<div class="ttc" id="namespace_hoa_html_a03b9d89f84b73d4bbe335ac186d0c222"><div class="ttname"><a href="namespace_hoa.html#a03b9d89f84b73d4bbe335ac186d0c222">Hoa::clip_minmax</a></div><div class="ttdeci">double clip_minmax(const double value, const double min, const double max)</div><div class="ttdoc">The clipping function. </div><div class="ttdef"><b>Definition:</b> <a href="_hoa_math_8h_source.html#l00062">HoaMath.h:62</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Mar 10 2014 12:14:23 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 10 2014 22:56:53 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

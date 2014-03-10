@@ -1,11 +1,13 @@
 var searchData=
 [
+  ['radius',['radius',['../namespace_hoa.html#ac6d88761b7f0648bf17ecc606e7db797',1,'Hoa']]],
   ['recomposer',['Recomposer',['../class_hoa2_d_1_1_recomposer.html',1,'Hoa2D']]],
   ['recomposer',['Recomposer',['../class_hoa2_d_1_1_recomposer.html#aa5feded7afd2329099583b245d276140',1,'Hoa2D::Recomposer']]],
-  ['resetazimuth',['resetAzimuth',['../class_hoa2_d_1_1_virtual_mic_manager.html#a1f0b6a97a6aebd1c0f93c0b2cd7d8653',1,'Hoa2D::VirtualMicManager']]],
-  ['resetdirectivity',['resetDirectivity',['../class_hoa2_d_1_1_virtual_mic_manager.html#ab37b1e4b1105a6246af9c67d1f7f3004',1,'Hoa2D::VirtualMicManager']]],
+  ['regular',['Regular',['../class_hoa2_d_1_1_decoder_multi.html#a0ac23d6bd77378d9cd5ddf6e71029300abaf1a2b64008b0199ced6e486911aed2',1,'Hoa2D::DecoderMulti']]],
+  ['resetazimuth',['resetAzimuth',['../class_hoa2_d_1_1_channel_manager.html#ad1c309e1aa908bb9e74ff585baede311',1,'Hoa2D::ChannelManager']]],
+  ['resetdirectivity',['resetDirectivity',['../class_hoa2_d_1_1_channel_manager.html#aaaaf03b0a4ea963f307f4a2db6e6ea9b',1,'Hoa2D::ChannelManager']]],
   ['rotate',['Rotate',['../class_hoa2_d_1_1_rotate.html#a2aa145bb455c0538ce2ca2bd058d8800',1,'Hoa2D::Rotate::Rotate()'],['../class_hoa3_d_1_1_rotate.html#a9a5750cbff8e0449b3de62e7de338a8b',1,'Hoa3D::Rotate::Rotate()']]],
   ['rotate',['Rotate',['../class_hoa2_d_1_1_rotate.html',1,'Hoa2D']]],
   ['rotate',['Rotate',['../class_hoa3_d_1_1_rotate.html',1,'Hoa3D']]],
-  ['rotateselectedmics',['rotateSelectedMics',['../class_hoa2_d_1_1_virtual_mic_manager.html#a7d03540e436756e59a26dd8747c47f8d',1,'Hoa2D::VirtualMicManager']]]
+  ['rotateselectedchannels',['rotateSelectedChannels',['../class_hoa2_d_1_1_channel_manager.html#a5fd94710fde98d24c1476979bfb394c0',1,'Hoa2D::ChannelManager']]]
 ];

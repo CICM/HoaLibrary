@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html#index_a"><span>a</span></a></li>
       <li><a href="functions_0x62.html#index_b"><span>b</span></a></li>
+      <li><a href="functions_0x63.html#index_c"><span>c</span></a></li>
       <li><a href="functions_0x64.html#index_d"><span>d</span></a></li>
       <li><a href="functions_0x65.html#index_e"><span>e</span></a></li>
       <li><a href="functions_0x67.html#index_g"><span>g</span></a></li>
@@ -124,6 +125,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_hoa2_d_1_1_ambisonic.html#a27be996cfb2bad88e13a32c0d7dba517">Hoa2D::Ambisonic</a>
 , <a class="el" href="class_hoa3_d_1_1_ambisonic.html#aef717915cc52d318b5b40af88c38c722">Hoa3D::Ambisonic</a>
 </li>
+<li>~ChannelManager()
+: <a class="el" href="class_hoa2_d_1_1_channel_manager.html#a1c39655db4a8238e79d688ed7453460d">Hoa2D::ChannelManager</a>
+</li>
 <li>~Decoder()
 : <a class="el" href="class_hoa3_d_1_1_decoder.html#acc197bebb310a82756ee2061fe371e2d">Hoa3D::Decoder</a>
 </li>
@@ -133,12 +137,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>~DecoderIrregular()
 : <a class="el" href="class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f">Hoa2D::DecoderIrregular</a>
 </li>
+<li>~DecoderMulti()
+: <a class="el" href="class_hoa2_d_1_1_decoder_multi.html#a2a0aeff9157db4a486fa331b3dcd04cc">Hoa2D::DecoderMulti</a>
+</li>
 <li>~DecoderRegular()
 : <a class="el" href="class_hoa2_d_1_1_decoder_regular.html#a04fe68432d2de773e8773cde9f0a2cad">Hoa2D::DecoderRegular</a>
 </li>
 <li>~Encoder()
-: <a class="el" href="class_hoa3_d_1_1_encoder.html#a9842ee9f5abcba58a05a98dbfdff1b15">Hoa3D::Encoder</a>
-, <a class="el" href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">Hoa2D::Encoder</a>
+: <a class="el" href="class_hoa2_d_1_1_encoder.html#a1faf86f0a74e68d91cd92608b5fd37c8">Hoa2D::Encoder</a>
+, <a class="el" href="class_hoa3_d_1_1_encoder.html#a9842ee9f5abcba58a05a98dbfdff1b15">Hoa3D::Encoder</a>
 </li>
 <li>~Map()
 : <a class="el" href="class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3">Hoa2D::Map</a>
@@ -149,12 +156,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_hoa3_d_1_1_meter.html#a2f4d18e0007e96c1cd60e2f17d9575cc">Hoa3D::Meter</a>
 </li>
 <li>~Optim()
-: <a class="el" href="class_hoa2_d_1_1_optim.html#a71b6d88873b054944db6efd2713bf8d3">Hoa2D::Optim</a>
-, <a class="el" href="class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20">Hoa3D::Optim</a>
+: <a class="el" href="class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20">Hoa3D::Optim</a>
+, <a class="el" href="class_hoa2_d_1_1_optim.html#a71b6d88873b054944db6efd2713bf8d3">Hoa2D::Optim</a>
 </li>
 <li>~Planewaves()
-: <a class="el" href="class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">Hoa3D::Planewaves</a>
-, <a class="el" href="class_hoa2_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">Hoa2D::Planewaves</a>
+: <a class="el" href="class_hoa2_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">Hoa2D::Planewaves</a>
+, <a class="el" href="class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf">Hoa3D::Planewaves</a>
 </li>
 <li>~Projector()
 : <a class="el" href="class_hoa2_d_1_1_projector.html#a7a93c4c33578b5f09636790a048c1351">Hoa2D::Projector</a>
@@ -167,25 +174,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_hoa3_d_1_1_rotate.html#a13a37adfe31314b7d5844333a4e587ab">Hoa3D::Rotate</a>
 </li>
 <li>~Scope()
-: <a class="el" href="class_hoa3_d_1_1_scope.html#a84990cf90c7b3be0963f4cacbdab1df8">Hoa3D::Scope</a>
-, <a class="el" href="class_hoa2_d_1_1_scope.html#a29c9191706ff1377efab0720cacbc448">Hoa2D::Scope</a>
+: <a class="el" href="class_hoa2_d_1_1_scope.html#a29c9191706ff1377efab0720cacbc448">Hoa2D::Scope</a>
+, <a class="el" href="class_hoa3_d_1_1_scope.html#a84990cf90c7b3be0963f4cacbdab1df8">Hoa3D::Scope</a>
 </li>
 <li>~Vector()
 : <a class="el" href="class_hoa3_d_1_1_vector.html#a0f7403e0ae42fe40f54fcb35977bf95c">Hoa3D::Vector</a>
 , <a class="el" href="class_hoa2_d_1_1_vector.html#aa260b1636ddc02ac37279f1b3c6160da">Hoa2D::Vector</a>
 </li>
-<li>~VirtualMicManager()
-: <a class="el" href="class_hoa2_d_1_1_virtual_mic_manager.html#a52898fb542bcdcf394e05348d27b8398">Hoa2D::VirtualMicManager</a>
-</li>
 <li>~Wider()
-: <a class="el" href="class_hoa2_d_1_1_wider.html#a350dd3e9918f7fdaa977fe5c56db98d1">Hoa2D::Wider</a>
-, <a class="el" href="class_hoa3_d_1_1_wider.html#a4a2770414c2753a9c92740f02641db38">Hoa3D::Wider</a>
+: <a class="el" href="class_hoa3_d_1_1_wider.html#a4a2770414c2753a9c92740f02641db38">Hoa3D::Wider</a>
+, <a class="el" href="class_hoa2_d_1_1_wider.html#a350dd3e9918f7fdaa977fe5c56db98d1">Hoa2D::Wider</a>
 </li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Mar 10 2014 12:14:25 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 10 2014 22:56:55 for HoaLibrary by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

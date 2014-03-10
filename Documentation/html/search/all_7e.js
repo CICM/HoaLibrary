@@ -1,6 +1,7 @@
 var searchData=
 [
   ['_7eambisonic',['~Ambisonic',['../class_hoa2_d_1_1_ambisonic.html#a27be996cfb2bad88e13a32c0d7dba517',1,'Hoa2D::Ambisonic::~Ambisonic()'],['../class_hoa3_d_1_1_ambisonic.html#aef717915cc52d318b5b40af88c38c722',1,'Hoa3D::Ambisonic::~Ambisonic()']]],
+  ['_7echannelmanager',['~ChannelManager',['../class_hoa2_d_1_1_channel_manager.html#a1c39655db4a8238e79d688ed7453460d',1,'Hoa2D::ChannelManager']]],
   ['_7edecoder',['~Decoder',['../class_hoa3_d_1_1_decoder.html#acc197bebb310a82756ee2061fe371e2d',1,'Hoa3D::Decoder']]],
   ['_7edecoderbinaural',['~DecoderBinaural',['../class_hoa2_d_1_1_decoder_binaural.html#a3aa8b84a571c2c031dcae2b94b8737e4',1,'Hoa2D::DecoderBinaural']]],
   ['_7edecoderirregular',['~DecoderIrregular',['../class_hoa2_d_1_1_decoder_irregular.html#af8a618d1d04c00f33c360fde6d09e03f',1,'Hoa2D::DecoderIrregular']]],
@@ -16,6 +17,5 @@ var searchData=
   ['_7erotate',['~Rotate',['../class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2',1,'Hoa2D::Rotate::~Rotate()'],['../class_hoa3_d_1_1_rotate.html#a13a37adfe31314b7d5844333a4e587ab',1,'Hoa3D::Rotate::~Rotate()']]],
   ['_7escope',['~Scope',['../class_hoa2_d_1_1_scope.html#a29c9191706ff1377efab0720cacbc448',1,'Hoa2D::Scope::~Scope()'],['../class_hoa3_d_1_1_scope.html#a84990cf90c7b3be0963f4cacbdab1df8',1,'Hoa3D::Scope::~Scope()']]],
   ['_7evector',['~Vector',['../class_hoa2_d_1_1_vector.html#aa260b1636ddc02ac37279f1b3c6160da',1,'Hoa2D::Vector::~Vector()'],['../class_hoa3_d_1_1_vector.html#a0f7403e0ae42fe40f54fcb35977bf95c',1,'Hoa3D::Vector::~Vector()']]],
-  ['_7evirtualmicmanager',['~VirtualMicManager',['../class_hoa2_d_1_1_virtual_mic_manager.html#a52898fb542bcdcf394e05348d27b8398',1,'Hoa2D::VirtualMicManager']]],
   ['_7ewider',['~Wider',['../class_hoa2_d_1_1_wider.html#a350dd3e9918f7fdaa977fe5c56db98d1',1,'Hoa2D::Wider::~Wider()'],['../class_hoa3_d_1_1_wider.html#a4a2770414c2753a9c92740f02641db38',1,'Hoa3D::Wider::~Wider()']]]
 ];

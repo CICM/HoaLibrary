@@ -6,31 +6,20 @@
 The high order ambisonic namespace.  
 
 
-\subsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \hyperlink{struct_hoa_1_1coordinates_polar}{coordinates\-Polar}
-\item 
-struct \hyperlink{struct_hoa_1_1coordinates_cartesian}{coordinates\-Cartesian}
-\item 
-struct \hyperlink{struct_hoa_1_1__hoa__rgba}{\-\_\-hoa\-\_\-rgba}
-\item 
-struct \hyperlink{struct_hoa_1_1__hoa__rgb}{\-\_\-hoa\-\_\-rgb}
-\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \hyperlink{namespace_hoa_a18a09e9aa0bc178190832f0b625f8630}{max} (const double v1, const double v2)
-\begin{DoxyCompactList}\small\item\em The maximum function. \end{DoxyCompactList}\item 
 double \hyperlink{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}{min} (const double v1, const double v2)
 \begin{DoxyCompactList}\small\item\em The minimum function. \end{DoxyCompactList}\item 
-double \hyperlink{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{clip\-\_\-minmax} (const double value, const double low, const double high)
+double \hyperlink{namespace_hoa_a18a09e9aa0bc178190832f0b625f8630}{max} (const double v1, const double v2)
+\begin{DoxyCompactList}\small\item\em The maximum function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa_a03b9d89f84b73d4bbe335ac186d0c222}{clip\-\_\-minmax} (const double value, const double \hyperlink{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}{min}, const double \hyperlink{namespace_hoa_a18a09e9aa0bc178190832f0b625f8630}{max})
 \begin{DoxyCompactList}\small\item\em The clipping function. \end{DoxyCompactList}\item 
 double \hyperlink{namespace_hoa_a035f72d813d623708fc679234167652c}{clip\-\_\-min} (const double value, const double low)
 \begin{DoxyCompactList}\small\item\em The minimum clipping function. \end{DoxyCompactList}\item 
 double \hyperlink{namespace_hoa_a70a614a6370140a970f5e94afd244100}{clip\-\_\-max} (const double value, const double high)
 \begin{DoxyCompactList}\small\item\em The maximum clipping function. \end{DoxyCompactList}\item 
-unsigned long \hyperlink{namespace_hoa_af38450480ab6d8c9cbeee21d0384d59a}{factorial} (long n)
+long double \hyperlink{namespace_hoa_a0a42d201c216cf76c4cdcebab728227d}{factorial} (long n)
 \begin{DoxyCompactList}\small\item\em The factorial. \end{DoxyCompactList}\item 
 unsigned long \hyperlink{namespace_hoa_a8a19fc23057ab1e829bcb83b8e9bf236}{double\-\_\-factorial} (long n)
 \begin{DoxyCompactList}\small\item\em The double factorial. \end{DoxyCompactList}\item 
@@ -48,6 +37,16 @@ double \hyperlink{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}{wrap} (double
 \begin{DoxyCompactList}\small\item\em The wrapping function. \end{DoxyCompactList}\item 
 double \hyperlink{namespace_hoa_a951a6800c87c7cb7428ccb05ed778e84}{wrap\-\_\-twopi} (const double value)
 \begin{DoxyCompactList}\small\item\em The wrapping function over $2\pi$. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa_a479e2d2c9b1797486c6e93fe82334392}{wrap\-\_\-360} (const double value)
+\begin{DoxyCompactList}\small\item\em The wrapping function in degrees. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa_a2f9336c48f973edc26ba376443f5184b}{ordinate} (const double \hyperlink{namespace_hoa_ac6d88761b7f0648bf17ecc606e7db797}{radius}, const double \hyperlink{namespace_hoa_a29fdd6f7a1826039c063ce42221fcd0d}{azimuth})
+\begin{DoxyCompactList}\small\item\em The ordinate converter function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa_ac05a6ef1c0f14abead46a331b2f81ad8}{abscissa} (const double \hyperlink{namespace_hoa_ac6d88761b7f0648bf17ecc606e7db797}{radius}, const double \hyperlink{namespace_hoa_a29fdd6f7a1826039c063ce42221fcd0d}{azimuth})
+\begin{DoxyCompactList}\small\item\em The abscissa converter function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa_ac6d88761b7f0648bf17ecc606e7db797}{radius} (const double x, const double y)
+\begin{DoxyCompactList}\small\item\em The radius converter function. \end{DoxyCompactList}\item 
+double \hyperlink{namespace_hoa_a29fdd6f7a1826039c063ce42221fcd0d}{azimuth} (const double x, const double y)
+\begin{DoxyCompactList}\small\item\em The azimuth converter function. \end{DoxyCompactList}\item 
 std\-::string \hyperlink{namespace_hoa_a383e28307f0bbd7c0e4af194ebabe66f}{int\-\_\-to\-\_\-string} (int a\-Value)
 \begin{DoxyCompactList}\small\item\em The int to string conversion. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -56,6 +55,37 @@ std\-::string \hyperlink{namespace_hoa_a383e28307f0bbd7c0e4af194ebabe66f}{int\-\
 The high order ambisonic namespace. This namespace have all the standard methods and functions necessary for ambisonic processing. 
 
 \subsection{Function Documentation}
+\hypertarget{namespace_hoa_ac05a6ef1c0f14abead46a331b2f81ad8}{\index{Hoa@{Hoa}!abscissa@{abscissa}}
+\index{abscissa@{abscissa}!Hoa@{Hoa}}
+\subsubsection[{abscissa}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::abscissa (
+\begin{DoxyParamCaption}
+\item[{const double}]{radius, }
+\item[{const double}]{azimuth}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_ac05a6ef1c0f14abead46a331b2f81ad8}
+
+
+The abscissa converter function. 
+
+This function takes a radius and an azimuth value and convert them to an abscissa value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The radius value (greather than 0). \\
+\hline
+{\em azimuth} & The azimuth value (between $0$ and $2\pi$). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The abscissa value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa_a2f9336c48f973edc26ba376443f5184b}{ordinate} 
+\end{DoxySeeAlso}
+
+
+Definition at line 379 of file Hoa\-Math.\-h.
+
 \hypertarget{namespace_hoa_adb762b8ea445347c41725a66bff424ec}{\index{Hoa@{Hoa}!associated\-\_\-legendre@{associated\-\_\-legendre}}
 \index{associated\-\_\-legendre@{associated\-\_\-legendre}!Hoa@{Hoa}}
 \subsubsection[{associated\-\_\-legendre}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::associated\-\_\-legendre (
@@ -94,6 +124,37 @@ The function return the associated Legendre polynomial of x for l and m.
 
 Definition at line 169 of file Hoa\-Math.\-h.
 
+\hypertarget{namespace_hoa_a29fdd6f7a1826039c063ce42221fcd0d}{\index{Hoa@{Hoa}!azimuth@{azimuth}}
+\index{azimuth@{azimuth}!Hoa@{Hoa}}
+\subsubsection[{azimuth}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::azimuth (
+\begin{DoxyParamCaption}
+\item[{const double}]{x, }
+\item[{const double}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a29fdd6f7a1826039c063ce42221fcd0d}
+
+
+The azimuth converter function. 
+
+This function takes an abscissa and an ordinate value and convert them to an azimuth value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The abscissa value. \\
+\hline
+{\em y} & The ordinate value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The azimuth value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa_ac6d88761b7f0648bf17ecc606e7db797}{radius} 
+\end{DoxySeeAlso}
+
+
+Definition at line 407 of file Hoa\-Math.\-h.
+
 \hypertarget{namespace_hoa_a70a614a6370140a970f5e94afd244100}{\index{Hoa@{Hoa}!clip\-\_\-max@{clip\-\_\-max}}
 \index{clip\-\_\-max@{clip\-\_\-max}!Hoa@{Hoa}}
 \subsubsection[{clip\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::clip\-\_\-max (
@@ -120,7 +181,7 @@ If $x > max$, $f(x) = max$ else $f(x) = x$.
 The function return the clipped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{clip\-\_\-minmax} 
+\hyperlink{namespace_hoa_a03b9d89f84b73d4bbe335ac186d0c222}{clip\-\_\-minmax} 
 
 \hyperlink{namespace_hoa_a035f72d813d623708fc679234167652c}{clip\-\_\-min} 
 \end{DoxySeeAlso}
@@ -154,7 +215,7 @@ If $x < min$, $f(x) = min$ else $f(x) = x$.
 The function return the clipped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{clip\-\_\-minmax} 
+\hyperlink{namespace_hoa_a03b9d89f84b73d4bbe335ac186d0c222}{clip\-\_\-minmax} 
 
 \hyperlink{namespace_hoa_a70a614a6370140a970f5e94afd244100}{clip\-\_\-max} 
 \end{DoxySeeAlso}
@@ -162,15 +223,15 @@ The function return the clipped value.
 
 Definition at line 83 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}{\index{Hoa@{Hoa}!clip\-\_\-minmax@{clip\-\_\-minmax}}
+\hypertarget{namespace_hoa_a03b9d89f84b73d4bbe335ac186d0c222}{\index{Hoa@{Hoa}!clip\-\_\-minmax@{clip\-\_\-minmax}}
 \index{clip\-\_\-minmax@{clip\-\_\-minmax}!Hoa@{Hoa}}
 \subsubsection[{clip\-\_\-minmax}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::clip\-\_\-minmax (
 \begin{DoxyParamCaption}
 \item[{const double}]{value, }
-\item[{const double}]{low, }
-\item[{const double}]{high}
+\item[{const double}]{min, }
+\item[{const double}]{max}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a4b041c0e7c61bb6d819ce4e544ff3f90}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a03b9d89f84b73d4bbe335ac186d0c222}
 
 
 The clipping function. 
@@ -182,9 +243,9 @@ If $x < min$, $f(x) = min$ else if $x > max$, $f(x) = max$ else $f(x) = x$.
 \begin{DoxyParams}{Parameters}
 {\em value} & The value to clip. \\
 \hline
-{\em low} & The low boundary. \\
+{\em min} & The low boundary. \\
 \hline
-{\em high} & The high boundary. \\
+{\em max} & The high boundary. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -223,19 +284,19 @@ The double factorial.
 The function return the double factorial of n.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_af38450480ab6d8c9cbeee21d0384d59a}{factorial} 
+\hyperlink{namespace_hoa_a0a42d201c216cf76c4cdcebab728227d}{factorial} 
 \end{DoxySeeAlso}
 
 
 Definition at line 140 of file Hoa\-Math.\-h.
 
-\hypertarget{namespace_hoa_af38450480ab6d8c9cbeee21d0384d59a}{\index{Hoa@{Hoa}!factorial@{factorial}}
+\hypertarget{namespace_hoa_a0a42d201c216cf76c4cdcebab728227d}{\index{Hoa@{Hoa}!factorial@{factorial}}
 \index{factorial@{factorial}!Hoa@{Hoa}}
-\subsubsection[{factorial}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Hoa\-::factorial (
+\subsubsection[{factorial}]{\setlength{\rightskip}{0pt plus 5cm}long double Hoa\-::factorial (
 \begin{DoxyParamCaption}
 \item[{long}]{n}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_af38450480ab6d8c9cbeee21d0384d59a}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a0a42d201c216cf76c4cdcebab728227d}
 
 
 The factorial. 
@@ -346,7 +407,7 @@ The maximum value.
 \end{DoxySeeAlso}
 
 
-Definition at line 25 of file Hoa\-Math.\-h.
+Definition at line 42 of file Hoa\-Math.\-h.
 
 \hypertarget{namespace_hoa_af938bba055dcde56bb2cd02e8eb1c4dc}{\index{Hoa@{Hoa}!min@{min}}
 \index{min@{min}!Hoa@{Hoa}}
@@ -377,7 +438,69 @@ The maximum value.
 \end{DoxySeeAlso}
 
 
-Definition at line 42 of file Hoa\-Math.\-h.
+Definition at line 25 of file Hoa\-Math.\-h.
+
+\hypertarget{namespace_hoa_a2f9336c48f973edc26ba376443f5184b}{\index{Hoa@{Hoa}!ordinate@{ordinate}}
+\index{ordinate@{ordinate}!Hoa@{Hoa}}
+\subsubsection[{ordinate}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::ordinate (
+\begin{DoxyParamCaption}
+\item[{const double}]{radius, }
+\item[{const double}]{azimuth}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a2f9336c48f973edc26ba376443f5184b}
+
+
+The ordinate converter function. 
+
+This function takes a radius and an azimuth value and convert them to an ordinate value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The radius value (greather than 0). \\
+\hline
+{\em azimuth} & The azimuth value (between $0$ and $2\pi$). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ordinate value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa_ac05a6ef1c0f14abead46a331b2f81ad8}{abscissa} 
+\end{DoxySeeAlso}
+
+
+Definition at line 365 of file Hoa\-Math.\-h.
+
+\hypertarget{namespace_hoa_ac6d88761b7f0648bf17ecc606e7db797}{\index{Hoa@{Hoa}!radius@{radius}}
+\index{radius@{radius}!Hoa@{Hoa}}
+\subsubsection[{radius}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::radius (
+\begin{DoxyParamCaption}
+\item[{const double}]{x, }
+\item[{const double}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_ac6d88761b7f0648bf17ecc606e7db797}
+
+
+The radius converter function. 
+
+This function takes an abscissa and an ordinate value and convert them to a radius value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The abscissa value. \\
+\hline
+{\em y} & The ordinate value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The radius value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa_a29fdd6f7a1826039c063ce42221fcd0d}{azimuth} 
+\end{DoxySeeAlso}
+
+
+Definition at line 393 of file Hoa\-Math.\-h.
 
 \hypertarget{namespace_hoa_aee959ace8e8c9f2c5a2bb01bfe33719d}{\index{Hoa@{Hoa}!spherical\-\_\-harmonics@{spherical\-\_\-harmonics}}
 \index{spherical\-\_\-harmonics@{spherical\-\_\-harmonics}!Hoa@{Hoa}}
@@ -532,6 +655,34 @@ The function return the wrapped value.
 
 Definition at line 298 of file Hoa\-Math.\-h.
 
+\hypertarget{namespace_hoa_a479e2d2c9b1797486c6e93fe82334392}{\index{Hoa@{Hoa}!wrap\-\_\-360@{wrap\-\_\-360}}
+\index{wrap\-\_\-360@{wrap\-\_\-360}!Hoa@{Hoa}}
+\subsubsection[{wrap\-\_\-360}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::wrap\-\_\-360 (
+\begin{DoxyParamCaption}
+\item[{const double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_hoa_a479e2d2c9b1797486c6e93fe82334392}
+
+
+The wrapping function in degrees. 
+
+The function wraps a number between $0$ and $360°$.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to wrap. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The wrapped value.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}{wrap}, \hyperlink{namespace_hoa_a951a6800c87c7cb7428ccb05ed778e84}{wrap\-\_\-twopi} 
+\end{DoxySeeAlso}
+
+
+Definition at line 345 of file Hoa\-Math.\-h.
+
 \hypertarget{namespace_hoa_a951a6800c87c7cb7428ccb05ed778e84}{\index{Hoa@{Hoa}!wrap\-\_\-twopi@{wrap\-\_\-twopi}}
 \index{wrap\-\_\-twopi@{wrap\-\_\-twopi}!Hoa@{Hoa}}
 \subsubsection[{wrap\-\_\-twopi}]{\setlength{\rightskip}{0pt plus 5cm}double Hoa\-::wrap\-\_\-twopi (
@@ -543,7 +694,7 @@ Definition at line 298 of file Hoa\-Math.\-h.
 
 The wrapping function over $2\pi$. 
 
-The function wraps a number between 0 and $2\pi$.
+The function wraps a number between $0$ and $2\pi$.
 
 
 \begin{DoxyParams}{Parameters}
@@ -554,7 +705,7 @@ The function wraps a number between 0 and $2\pi$.
 The function return the wrapped value.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See Also}
-\hyperlink{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}{wrap} 
+\hyperlink{namespace_hoa_a313552058c836fb832ead703eb1c8ca1}{wrap}, \hyperlink{namespace_hoa_a479e2d2c9b1797486c6e93fe82334392}{wrap\-\_\-360} 
 \end{DoxySeeAlso}
 
 
