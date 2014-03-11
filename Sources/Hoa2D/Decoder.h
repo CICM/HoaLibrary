@@ -89,8 +89,6 @@ namespace Hoa2D
         double*         m_decoder_matrix;
         float*          m_decoder_matrix_float;
 		double*         m_harmonics_vector;
-        double*         m_channels_azimuth_sorted;
-        double*         m_decoder_matrix_sorted;
         Encoder*        m_encoder;
         double          m_offset;
         

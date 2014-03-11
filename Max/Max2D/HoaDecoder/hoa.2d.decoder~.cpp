@@ -58,7 +58,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "autoconnect", 0, "1");
     CLASS_ATTR_SAVE             (c, "autoconnect", 1);
     
-    CLASS_ATTR_SYM              (c, "mode", 0, t_hoa_decoder, f_attr);
+    CLASS_ATTR_SYM              (c, "mode", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "mode", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "mode", 0, "Mode");
     CLASS_ATTR_ENUM             (c, "mode", 0, "ambisonic binaural irregular");
@@ -66,7 +66,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "mode", 0, "1");
     CLASS_ATTR_SAVE             (c, "mode", 1);
     
-    CLASS_ATTR_LONG             (c, "channels", 0, t_hoa_decoder, f_attr);
+    CLASS_ATTR_LONG             (c, "channels", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "channels", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "channels", 0, "Number of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "channels", channel_get, channel_set);
@@ -74,7 +74,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "channels", 0, "2");
     CLASS_ATTR_SAVE             (c, "channels", 0);
     
-    CLASS_ATTR_DOUBLE           (c, "offset", 0, t_hoa_decoder, f_attr);
+    CLASS_ATTR_DOUBLE           (c, "offset", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr);
 	CLASS_ATTR_CATEGORY			(c, "offset", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "offset", 0, "Offset of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "offset", offset_get, offset_set);
@@ -82,7 +82,7 @@ int C74_EXPORT main(void)
     CLASS_ATTR_ORDER            (c, "offset", 0, "3");
     CLASS_ATTR_SAVE             (c, "offset", 0);
     
-    CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", 0, t_hoa_decoder, f_attr, f_attr, MAX_CHANNELS);
+    CLASS_ATTR_DOUBLE_VARSIZE   (c, "angles", ATTR_SET_DEFER_LOW, t_hoa_decoder, f_attr, f_attr, MAX_CHANNELS);
 	CLASS_ATTR_CATEGORY			(c, "angles", 0, "Planewaves");
     CLASS_ATTR_LABEL            (c, "angles", 0, "Angles of Channels");
 	CLASS_ATTR_ACCESSORS		(c, "angles", angles_get, angles_set);
@@ -393,13 +393,23 @@ t_max_err angles_get(t_hoa_decoder *x, t_object *attr, long *argc, t_atom **argv
 
 t_max_err angles_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
+    double *angles;
     if(argc && argv && x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Irregular)
     {
-        object_method(gensym("dsp")->s_thing, gensym("stop"));
-        for(int i = 0; i < argc && i < x->f_decoder->getNumberOfChannels(); i++)
+        angles = new double[x->f_decoder->getNumberOfChannels()];
+        if(angles)
         {
-            if(atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
-                x->f_decoder->setChannelAzimuth(i, atom_getfloat(argv+i) / 360. * HOA_2PI);
+            object_method(gensym("dsp")->s_thing, gensym("stop"));
+            for(int i = 0; i < argc && i < x->f_decoder->getNumberOfChannels(); i++)
+            {
+                if(atom_gettype(argv+i) == A_FLOAT || atom_gettype(argv+i) == A_LONG)
+                    angles[i] = atom_getfloat(argv+i) / 360. * HOA_2PI;
+                else
+                    angles[i] = x->f_decoder->getChannelAzimuth(i);
+            }
+            
+            x->f_decoder->setChannelsAzimtuh(angles);
+            free(angles);
         }
     }
     send_configuration(x);

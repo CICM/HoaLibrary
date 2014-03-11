@@ -63,9 +63,7 @@ namespace Hoa2D
     {
         m_harmonics_vector          = new double[m_number_of_harmonics];
         m_decoder_matrix            = new double[m_number_of_channels * m_number_of_harmonics];
-        m_decoder_matrix_sorted     = new double[m_number_of_channels * m_number_of_harmonics];
         m_decoder_matrix_float      = new float[m_number_of_channels * m_number_of_harmonics];
-        m_channels_azimuth_sorted   = new double[m_number_of_channels];
         m_encoder                   = new Encoder(m_order);
         m_offset = 0;
         setChannelAzimuth(0, 0.);
@@ -79,11 +77,8 @@ namespace Hoa2D
     
     void DecoderIrregular::setChannelsAzimtuh(double* azimuths)
     {
-        for(unsigned int i = 0; i < m_number_of_channels; i++)
-        {
-            Planewaves::setChannelAzimuth(i, azimuths[i]);
-        }
-        setChannelAzimuth(0, azimuths[0]);
+        Planewaves::setChannelsAzimuth(azimuths);
+        setChannelAzimuth(0, m_channels_azimuth[0]);
     }
     
     void DecoderIrregular::setChannelAzimuth(unsigned int index, double azimuth)
@@ -92,19 +87,15 @@ namespace Hoa2D
         double  current_distance, minimum_distance;
         
         Planewaves::setChannelAzimuth(index, azimuth);
-        
-        // Sort the channels azimuth
-        memcpy(m_channels_azimuth_sorted, m_channels_azimuth, m_number_of_channels * sizeof(double));
-        std::sort(m_channels_azimuth_sorted, m_channels_azimuth_sorted+m_number_of_channels);
 
         // Get the minimum distance between the channels
         minimum_distance    = HOA_2PI + 1;
-        current_distance    = distance_radian(m_channels_azimuth_sorted[0], m_channels_azimuth_sorted[m_number_of_channels-1]);
+        current_distance    = distance_radian(m_channels_azimuth[0], m_channels_azimuth[m_number_of_channels-1]);
         if(current_distance < minimum_distance)
             minimum_distance    = current_distance;
         for(unsigned int i = 1; i < m_number_of_channels; i++)
         {
-            current_distance  = distance_radian(m_channels_azimuth_sorted[i], m_channels_azimuth_sorted[i-1]);
+            current_distance  = distance_radian(m_channels_azimuth[i], m_channels_azimuth[i-1]);
             if(current_distance < minimum_distance)
                 minimum_distance = current_distance;
         }
@@ -119,7 +110,6 @@ namespace Hoa2D
         
         for(unsigned int i = 0; i < m_number_of_channels * m_number_of_harmonics; i++)
         {
-            m_decoder_matrix_sorted[i]  = 0;
             m_decoder_matrix[i] = 0;
         }
         
@@ -133,14 +123,14 @@ namespace Hoa2D
             
             for(unsigned int j = 0; j < m_number_of_channels; j++)
             {
-                if(j < m_number_of_channels-1 && angle >= m_channels_azimuth_sorted[j] && angle <= m_channels_azimuth_sorted[j+1])
+                if(j < m_number_of_channels-1 && angle >= m_channels_azimuth[j] && angle <= m_channels_azimuth[j+1])
                 {
                     channel_index1 = j;
                     channel_index2 = j+1;
                     
                     // Get the factor for the pair of real channels
-                    double distance_index1 = angle - m_channels_azimuth_sorted[j];
-                    double distance_index2 = m_channels_azimuth_sorted[j+1] - angle;
+                    double distance_index1 = angle - m_channels_azimuth[j];
+                    double distance_index2 = m_channels_azimuth[j+1] - angle;
                     double distance_ratio = distance_index1 + distance_index2;
                     factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI);
                     factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI);
@@ -152,8 +142,8 @@ namespace Hoa2D
                     channel_index2 = 0;
                         
                     // Get the factor for the pair of real channels
-                    double distance_index1 = angle - m_channels_azimuth_sorted[j];
-                    double distance_index2 = (m_channels_azimuth_sorted[0] + HOA_2PI) - angle;
+                    double distance_index1 = angle - m_channels_azimuth[j];
+                    double distance_index2 = (m_channels_azimuth[0] + HOA_2PI) - angle;
                     double distance_ratio = distance_index1 + distance_index2;
                     factor_index1   = cos(distance_index1 / (distance_ratio) * HOA_PI);
                     factor_index2   = cos(distance_index2 / (distance_ratio) * HOA_PI);
@@ -165,27 +155,12 @@ namespace Hoa2D
             m_encoder->setAzimuth(angle);
             m_encoder->process(1., m_harmonics_vector);
             
-            m_decoder_matrix_sorted[channel_index1 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index1;
-            m_decoder_matrix_sorted[channel_index2 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index2;
+            m_decoder_matrix[channel_index1 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index1;
+            m_decoder_matrix[channel_index2 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index2;
             for(unsigned int j = 1; j < m_number_of_harmonics; j++)
             {
-                m_decoder_matrix_sorted[channel_index1 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
-                m_decoder_matrix_sorted[channel_index2 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
-            }
-        }
-        
-        // Copy the decoding matrix for sorted channels to the decoding matrix for unsorted channels
-        for(unsigned int i = 0; i < m_number_of_channels; i++)
-        {
-            for(unsigned int j = 0; j < m_number_of_channels; j++)
-            {
-                if(m_channels_azimuth[i] == m_channels_azimuth_sorted[j])
-                {
-                    for(unsigned int k = 0; k < m_number_of_harmonics; k++)
-                    {
-                        m_decoder_matrix_float[i * m_number_of_harmonics + k] = m_decoder_matrix[i * m_number_of_harmonics + k] = m_decoder_matrix_sorted[j * m_number_of_harmonics + k];
-                    }
-                }
+                m_decoder_matrix[channel_index1 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index1;
+                m_decoder_matrix[channel_index2 * m_number_of_harmonics + j] += (m_harmonics_vector[j] / (double)(m_order + 1.)) * factor_index2;
             }
         }
     }
@@ -205,8 +180,6 @@ namespace Hoa2D
 		delete [] m_decoder_matrix;
         delete [] m_decoder_matrix_float;
         delete [] m_harmonics_vector;
-        delete [] m_decoder_matrix_sorted;
-        delete [] m_channels_azimuth_sorted;
         delete m_encoder;
 	}
     
