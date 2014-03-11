@@ -197,8 +197,8 @@ namespace Hoa2D
     
     unsigned int hoa_number_binaural_samplerate = 4;
     unsigned int hoa_binaural_samplerate[]      = {44100, 48000, 88200, 96000};
-    unsigned int hoa_binaural_impulse_sizes[]   = {128, 218, 400, 436};
-    unsigned int hoa_binaural_crop[]            = {37, 64, 112, 128};
+    unsigned int hoa_binaural_impulse_sizes[]   = {200, 218, 400, 436}; // 200 // 37
+    unsigned int hoa_binaural_crop[]            = {26, 40, 64, 80};
     
     DecoderBinaural::DecoderBinaural(unsigned int order) : Ambisonic(order), Planewaves(2)
     {
@@ -258,9 +258,8 @@ namespace Hoa2D
             }
             for(int i = 0; i < m_number_of_virtual_channels; i++)
             {
-                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, i * 360 / m_number_of_virtual_channels)+hoa_binaural_crop[index];
+                m_impulses_vector[i] = get_mit_hrtf_2D(m_sample_rate, wrap_360(-i * 360 / m_number_of_virtual_channels)) +hoa_binaural_crop[index];
             }
-            
             
             if(m_impulses_matrix)
                 delete [] m_impulses_matrix;
@@ -273,6 +272,10 @@ namespace Hoa2D
                 m_channels_vector[i] = 0.;
             
             m_harmonics_vector[0] = 1.;
+            for(unsigned int i = 1; i < m_number_of_harmonics; i++)
+            {
+                m_harmonics_vector[i] = 0.;
+            }
             for(unsigned int i = 0; i < m_number_of_harmonics; i++)
             {
                 if(i != 0)
@@ -289,16 +292,15 @@ namespace Hoa2D
                     
                     for(unsigned int k = 0; k < m_number_of_virtual_channels; k++)
                     {
-                        value_left += m_channels_vector[k] * m_impulses_vector[k][j];
+                        value_right += m_channels_vector[k] * m_impulses_vector[k][j];
                         if(k == 0)
-                            value_right += m_channels_vector[k] * m_impulses_vector[k][j];
+                            value_left += m_channels_vector[k] * m_impulses_vector[k][j];
                         else
-                            value_right += m_channels_vector[k] * m_impulses_vector[m_number_of_virtual_channels - k][j];
+                            value_left += m_channels_vector[k] * m_impulses_vector[m_number_of_virtual_channels - k][j];
                     }
+                    
                     m_impulses_matrix[j * m_number_of_harmonics + i] = value_left;
-                    m_impulses_matrix[j * m_number_of_harmonics + i] *= (1. / 1.125) * (44100. / (double)m_sample_rate);
                     m_impulses_matrix[(j + m_impulses_size) * m_number_of_harmonics + i] = value_right;
-                    m_impulses_matrix[(j + m_impulses_size) * m_number_of_harmonics + i] *= (1. / 1.125) * (44100. / (double)m_sample_rate);
                 }
             }
             
@@ -388,19 +390,21 @@ namespace Hoa2D
                     m_impulses_matrix, m_number_of_harmonics,
                     m_input_matrix,  m_vector_size,
                     0., m_result_matrix,  m_vector_size);
+
+        for(unsigned int j = 0; j < m_vector_size; j++)
+        {
+            cblas_saxpy(m_impulses_size, 1.f, m_result_matrix + j, m_vector_size, m_linear_vector_left + j, 1);
+            outputs[0][j] = m_linear_vector_left[j];
+        }
         
         for(unsigned int j = 0; j < m_vector_size; j++)
         {
-            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j+m_vector_size*m_impulses_size, m_vector_size, m_linear_vector_left  + j, 1);
-            cblas_saxpy(m_impulses_size,1.f, m_result_matrix+j, m_vector_size, m_linear_vector_right + j, 1);
-            
-            outputs[0][j] = m_linear_vector_left[j];
+            cblas_saxpy(m_impulses_size, 1.f, m_result_matrix + m_vector_size * m_impulses_size + j, m_vector_size, m_linear_vector_right  + j, 1);
             outputs[1][j] = m_linear_vector_right[j];
         }
-
-
-        cblas_scopy(m_impulses_size-1, m_linear_vector_left+m_vector_size, 1, m_linear_vector_left, 1);
-        cblas_scopy(m_impulses_size-1, m_linear_vector_right+m_vector_size, 1, m_linear_vector_right, 1);
+        
+        cblas_scopy(m_impulses_size-1, m_linear_vector_left + m_vector_size, 1, m_linear_vector_left, 1);
+        cblas_scopy(m_impulses_size-1, m_linear_vector_right + m_vector_size, 1, m_linear_vector_right, 1);
         
 #ifdef __APPLE__
         vDSP_vclr(m_linear_vector_left + m_impulses_size - 1, 1, m_vector_size);

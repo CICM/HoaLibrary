@@ -77,6 +77,87 @@ int main()
     char path_temp1[2048];
     char path_temp2[2048];
     char temp[2048];
+    int counter = 0;
+    int countersample = 0;
+    ofstream fichier("hrtfmatrix.cpp", ios::out | ios::trunc);
+    if(fichier)
+    {
+        fichier << header << "\nnamespace Hoa3D\n{";
+        
+        for(int i = 0; i < 1; i++)
+        {
+            sprintf(path_temp1, "../MIT_HrtfDatabase/%i/elev0/L0e000a.wav", frequence[i]);
+            wavfile = Read_Wav(path_temp1, &size);
+            if(wavfile)
+                free(wavfile);
+            
+            fichier << "\n" << large_sep << "// HRTF ARRAY " << frequence[i] << " SIZE " << size << large_sep << "\n";
+            fichier << "static const float  MIT_HRTF_" << frequence[i] << "_2D[]"<< " = {\n";
+            sprintf(path_temp1, "../MIT_HrtfDatabase/%i/", frequence[i]);
+            
+            sprintf(path_temp2, "%s",path_temp1);
+            strcat(path_temp2, "elev0/");
+            
+            fichier << small_sep << "// HRTF ARRAY " << frequence[i] << " ELEVATION " << 0 << small_sep;
+            
+            for(int k = 0; k < 360; k += 5)
+            {
+                sprintf(path, "%s/",path_temp2);
+                if(k < 10)
+                    sprintf(temp, "L0e00%ia.wav", (int)k);
+                else if(k < 100)
+                    sprintf(temp, "L0e0%ia.wav", (int)k);
+                else
+                    sprintf(temp, "L0e%ia.wav", (int)k);
+                
+                strcat(path, temp);
+                wavfile = Read_Wav(path, &size);
+                if(wavfile && size == 512)
+                {
+                    for(int l = 0; l < size -1; l++)
+                    {
+                        if(l % 10 == 0)
+                            fichier << "\n";
+                        fichier << wavfile[l] << ",";
+                        countersample++;
+                    }
+                    fichier << wavfile[size - 1] << ",";
+                    countersample++;
+                    counter++;
+                    free(wavfile);
+                    wavfile = NULL;
+                }
+                else
+                {
+                    wavfile = NULL;
+                    fichier << "\n" << large_sep;
+                }
+            }
+            fichier << "\n";
+            
+            fichier << "0";
+            fichier << "};";
+        }
+        fichier << "\n\n}\n\n";
+        //fichier << counter;
+        //fichier << countersample;
+        fichier.close();
+    }
+    else
+        cerr << "Impossible d'ouvrir le fichier !" << endl;
+    
+    return 0;
+}
+
+/*
+int main()
+{
+    float* wavfile = NULL;
+    int size;
+    char path[2048];
+    char path_temp1[2048];
+    char path_temp2[2048];
+    char temp[2048];
     
     ofstream fichier("hrtfmatrix.cpp", ios::out | ios::trunc);
     if(fichier)
@@ -142,4 +223,6 @@ int main()
         cerr << "Impossible d'ouvrir le fichier !" << endl;
     
     return 0;
-}
+}*/
+
+

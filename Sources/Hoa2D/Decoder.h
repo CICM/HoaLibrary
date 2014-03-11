@@ -272,6 +272,11 @@ namespace Hoa2D
             @param     outputs  The output array that contains samples destinated to channels.
          */
 		void process(const double* const* inputs, double** outputs);
+        
+        const float* getImpulseResponse(int index)
+        {
+            return m_impulses_vector[index];
+        }
     };
     
     //! The ambisonic multi-decoder.
@@ -298,6 +303,11 @@ namespace Hoa2D
 
         
     public:
+        
+        const float* getImpulseResponse(int index)
+        {
+            return m_decoder_binaural->getImpulseResponse(index);
+        }
         
         //! The multi-decoder constructor.
         /**	The multi-decoder constructor allocates and initialize the three decoder. The default decoder will be the regular one with 2 * order + 2 number of channels.

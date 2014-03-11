@@ -327,7 +327,7 @@ namespace Hoa
             new_value += HOA_2PI;
         }
         
-        while(new_value > HOA_2PI)
+        while(new_value >= HOA_2PI)
         {
             new_value -= HOA_2PI;
         }
@@ -347,7 +347,7 @@ namespace Hoa
 		double new_value = value;
         while(new_value < 0.)
             new_value += 360.;
-        while(new_value > 360.)
+        while(new_value >= 360.)
             new_value -= 360.;
         
         return new_value;

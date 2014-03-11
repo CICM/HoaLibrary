@@ -144,6 +144,7 @@ void *hoa_decoder_new(t_symbol *s, long argc, t_atom *argv)
         if(d)
             attr_dictionary_process(x, d);
         defer_low(x, (method)send_configuration, NULL, 0, NULL);
+        
 	}
 
 	return (x);
@@ -169,7 +170,7 @@ void hoa_decoder_dsp64(t_hoa_decoder *x, t_object *dsp64, short *count, double s
     else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Irregular)
         object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64_irregular, 0, NULL);
     else if(x->f_decoder->getDecodingMode() == Hoa2D::DecoderMulti::Binaural && x->f_decoder->getBinauralState())
-        object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64_regular, 0, NULL);
+        object_method(dsp64, gensym("dsp_add64"), x, hoa_decoder_perform64_binaural, 0, NULL);
 }
 
 void hoa_decoder_perform64_regular(t_hoa_decoder *x, t_object *dsp64, double **ins, long numins, double **outs, long numouts, long sampleframes, long flags, void *userparam)
