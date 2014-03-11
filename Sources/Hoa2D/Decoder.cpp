@@ -85,9 +85,9 @@ namespace Hoa2D
     {
         long    number_of_virutal_channels;
         double  current_distance, minimum_distance;
-        
+     
         Planewaves::setChannelAzimuth(index, azimuth);
-
+        
         // Get the minimum distance between the channels
         minimum_distance    = HOA_2PI + 1;
         current_distance    = distance_radian(m_channels_azimuth[0], m_channels_azimuth[m_number_of_channels-1]);
@@ -119,6 +119,7 @@ namespace Hoa2D
         {
             long   channel_index1 = 0, channel_index2 = 0;
             double factor_index1 = 0, factor_index2 = 0;
+            
             // Get the pair of real channels corresponding to the virtual channel
             double angle = (double)i / (double)number_of_virutal_channels * HOA_2PI;
             
@@ -151,7 +152,7 @@ namespace Hoa2D
             }
             
             // Get the harmonics coefficients for virtual channel
-            m_encoder->setAzimuth(angle);
+            m_encoder->setAzimuth(angle + m_offset);
             m_encoder->process(1., m_harmonics_vector);
             
             m_decoder_matrix[channel_index1 * m_number_of_harmonics] += (0.5 / (double)(m_order + 1.)) * factor_index1;

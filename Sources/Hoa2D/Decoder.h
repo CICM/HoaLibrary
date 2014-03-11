@@ -10,6 +10,7 @@
 #include "Ambisonic.h"
 #include "Planewaves.h"
 #include "Encoder.h"
+#include "Rotate.h"
 
 namespace Hoa2D
 {

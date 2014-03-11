@@ -306,7 +306,7 @@ t_max_err offset_set(t_hoa_decoder *x, t_object *attr, long argc, t_atom *argv)
 {
     if(argc && argv && (atom_gettype(argv) == A_FLOAT || atom_gettype(argv) == A_LONG))
     {
-        double offset = atom_getfloat(argv) / 360.f * HOA_2PI;
+        double offset = wrap_twopi(atom_getfloat(argv) / 360. * HOA_2PI);
         if(offset != x->f_decoder->getChannelsOffset())
         {
             object_method(gensym("dsp")->s_thing, gensym("stop"));
