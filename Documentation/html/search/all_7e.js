@@ -11,7 +11,7 @@ var searchData=
   ['_7emap',['~Map',['../class_hoa2_d_1_1_map.html#a47d01e332e6c19015e9fd94e8898f4f3',1,'Hoa2D::Map::~Map()'],['../class_hoa3_d_1_1_map.html#a89f5772a7f26cda206637dd1fca1c16e',1,'Hoa3D::Map::~Map()']]],
   ['_7emeter',['~Meter',['../class_hoa2_d_1_1_meter.html#a48276da266f600f4d24db748ff4ca046',1,'Hoa2D::Meter::~Meter()'],['../class_hoa3_d_1_1_meter.html#a2f4d18e0007e96c1cd60e2f17d9575cc',1,'Hoa3D::Meter::~Meter()']]],
   ['_7eoptim',['~Optim',['../class_hoa2_d_1_1_optim.html#a71b6d88873b054944db6efd2713bf8d3',1,'Hoa2D::Optim::~Optim()'],['../class_hoa3_d_1_1_optim.html#a11c05a8b458f79ba09f4eefad63e0b20',1,'Hoa3D::Optim::~Optim()']]],
-  ['_7eplanewaves',['~Planewaves',['../class_hoa2_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf',1,'Hoa2D::Planewaves::~Planewaves()'],['../class_hoa3_d_1_1_planewaves.html#a7d13cc39051ae75f2af522651a1305bf',1,'Hoa3D::Planewaves::~Planewaves()']]],
+  ['_7eplanewaves',['~Planewaves',['../class_hoa2_d_1_1_planewaves.html#ac629a03db1de48ab96be4485f6553d37',1,'Hoa2D::Planewaves::~Planewaves()'],['../class_hoa3_d_1_1_planewaves.html#a51d3ba8bcdb8ad2e0c41e780f3c35d51',1,'Hoa3D::Planewaves::~Planewaves()']]],
   ['_7eprojector',['~Projector',['../class_hoa2_d_1_1_projector.html#a7a93c4c33578b5f09636790a048c1351',1,'Hoa2D::Projector']]],
   ['_7erecomposer',['~Recomposer',['../class_hoa2_d_1_1_recomposer.html#a6e26043adf8b785d746084dfed82f183',1,'Hoa2D::Recomposer']]],
   ['_7erotate',['~Rotate',['../class_hoa2_d_1_1_rotate.html#a7e70e8d9099c1b8a2a42313e464130b2',1,'Hoa2D::Rotate::~Rotate()'],['../class_hoa3_d_1_1_rotate.html#a13a37adfe31314b7d5844333a4e587ab',1,'Hoa3D::Rotate::~Rotate()']]],
